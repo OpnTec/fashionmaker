@@ -840,27 +840,22 @@ void TMainWindow::ShowMData()
         {
             MFields(true);
 
+            if (mType == MeasurementsType::Individual)
+            {
+                ui->plainTextEditFormula->setReadOnly(false);
+            }
+
             if (meash->IsCustom())
             {
                 ui->plainTextEditDescription->setReadOnly(false);
                 ui->lineEditName->setReadOnly(false);
                 ui->lineEditFullName->setReadOnly(false);
-
-                if (mType == MeasurementsType::Individual)
-                {
-                    ui->plainTextEditFormula->setReadOnly(false);
-                }
             }
             else
             {
                 ui->plainTextEditDescription->setReadOnly(true);
                 ui->lineEditName->setReadOnly(true);
                 ui->lineEditFullName->setReadOnly(true);
-
-                if (mType == MeasurementsType::Individual)
-                {
-                    ui->plainTextEditFormula->setReadOnly(true);
-                }
             }
         }
     }
