@@ -1383,10 +1383,10 @@ bool TMainWindow::MaybeSave()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::AddCell(const QString &text, int row, int column, bool ok)
+void TMainWindow::AddCell(const QString &text, int row, int column, int aligment, bool ok)
 {
     QTableWidgetItem *item = new QTableWidgetItem(text);
-    item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    item->setTextAlignment(aligment);
 
     // set the item non-editable (view only), and non-selectable
     Qt::ItemFlags flags = item->flags();
@@ -1477,8 +1477,9 @@ void TMainWindow::RefreshTable()
 
         if (mType == MeasurementsType::Individual)
         {
-            AddCell(meash->GetName(), currentRow, 0); // name
-            AddCell(QString().setNum(*meash->GetValue()), currentRow, 1, meash->IsFormulaOk()); // calculated value
+            AddCell(meash->GetName(), currentRow, 0, Qt::AlignVCenter); // name
+            AddCell(QString().setNum(*meash->GetValue()), currentRow, 1, Qt::AlignHCenter | Qt::AlignVCenter,
+                    meash->IsFormulaOk()); // calculated value
 
             QString formula;
             try
@@ -1491,16 +1492,23 @@ void TMainWindow::RefreshTable()
                 formula = meash->GetFormula();
             }
 
-            AddCell(formula, currentRow, 2); // formula
+            AddCell(formula, currentRow, 2, Qt::AlignVCenter); // formula
         }
         else
         {
-            AddCell(meash->GetName(), currentRow, 0); // name
+            AddCell(meash->GetName(), currentRow, 0, Qt::AlignVCenter); // name
+
             AddCell(QString().setNum(data->GetTableValue(meash->GetName(), mType)), currentRow, 1,
-                    meash->IsFormulaOk()); // calculated value
-            AddCell(QString().setNum(meash->GetBase()), currentRow, 3); // base value
-            AddCell(QString().setNum(meash->GetKsize()), currentRow, 4); // in sizes
-            AddCell(QString().setNum(meash->GetKheight()), currentRow, 5); // in heights
+                    Qt::AlignHCenter | Qt::AlignVCenter, meash->IsFormulaOk()); // calculated value
+
+            AddCell(QString().setNum(meash->GetBase()), currentRow, 3,
+                    Qt::AlignHCenter | Qt::AlignVCenter); // base value
+
+            AddCell(QString().setNum(meash->GetKsize()), currentRow, 4,
+                    Qt::AlignHCenter | Qt::AlignVCenter); // in sizes
+
+            AddCell(QString().setNum(meash->GetKheight()), currentRow, 5,
+                    Qt::AlignHCenter | Qt::AlignVCenter); // in heights
         }
     }
 
