@@ -667,36 +667,11 @@ void TMainWindow::AddCustom()
     else
     {
         currentRow  = ui->tableWidget->currentRow()+1;
-        ui->tableWidget->insertRow( currentRow );
         QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
         m->AddEmptyAfter(nameField->text(), name);
     }
 
-    VMeasurement *meash;
-    if (mType == MeasurementsType::Standard)
-    {
-        meash = new VMeasurement(currentRow, name, m->BaseSize(), m->BaseHeight(), 0, 0, 0);
-    }
-    else
-    {
-        meash = new VMeasurement(data, currentRow, name, 0, "0", true);
-    }
-    data->AddVariable(name, meash);
-
-    if (mType == MeasurementsType::Individual)
-    {
-        AddCell(name, currentRow, 0); // name
-        AddCell("0", currentRow, 1); // calculated value
-        AddCell("0", currentRow, 2); // formula
-    }
-    else
-    {
-        AddCell(name, currentRow, 0); // name
-        AddCell("0", currentRow, 1); // calculated value
-        AddCell("0", currentRow, 3); // base value
-        AddCell("0", currentRow, 4); // in sizes
-        AddCell("0", currentRow, 5); // in heights
-    }
+    RefreshData();
 
     ui->tableWidget->blockSignals(false);
     ui->tableWidget->selectRow(currentRow);
