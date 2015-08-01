@@ -377,6 +377,9 @@ void TMainWindow::FileSaveAs()
 void TMainWindow::AboutToShowWindowMenu()
 {
     ui->menuWindow->clear();
+    ui->menuWindow->addAction(tr("&New Window"), this, SLOT(NewWindow()));
+    ui->menuWindow->addSeparator();
+
     QList<TMainWindow*> windows = qApp->MainWindows();
     for (int i = 0; i < windows.count(); ++i)
     {
@@ -1098,6 +1101,13 @@ void TMainWindow::SaveMFullName()
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::NewWindow()
+{
+    qApp->NewMainWindow();
+    qApp->MainWindow()->activateWindow();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

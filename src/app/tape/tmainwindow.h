@@ -102,6 +102,8 @@ private slots:
     void SaveMDescription();
     void SaveMFullName();
 
+    void NewWindow();
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
