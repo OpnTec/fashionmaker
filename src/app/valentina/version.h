@@ -29,39 +29,10 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-class QString;
+#include "../../libs/vmisc/projectversion.h"
 
-extern const int MAJOR_VERSION;
-extern const int MINOR_VERSION;
-extern const int DEBUG_VERSION;
-
-extern const QString APP_VERSION_STR;
-
-/*
-   APP_VERSION is (major << 16) + (minor << 8) + patch.
-*/
-#define APP_VERSION 0x000300
-
-// Change version number in version.cpp too.
-
-#define VER_FILEVERSION             0,3,3,0
-#define VER_FILEVERSION_STR         "0.3.3.0\0"
-
-#define VER_PRODUCTVERSION          VER_FILEVERSION
-#define VER_PRODUCTVERSION_STR      VER_FILEVERSION_STR
-
-#define VER_COMPANYNAME_STR         "ValentinaTeam"
-#define VER_FILEDESCRIPTION_STR     "Patternmaking program."
 #define VER_INTERNALNAME_STR        "Valentina"
-#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2014-2015 Valentina Team"
-#define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
-#define VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR
 #define VER_ORIGINALFILENAME_STR    "valentina.exe"
 #define VER_PRODUCTNAME_STR         "Valentina"
-
-#define VER_COMPANYDOMAIN_STR       "www.valentina-project.org"
-
-QString compilerString();
-QString buildCompatibilityString();
 
 #endif // VERSION_H
