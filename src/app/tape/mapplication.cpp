@@ -36,13 +36,15 @@
 #include <QLocalSocket>
 #include <QResource>
 #include <QTranslator>
+#include <QPointer>
 
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::MApplication(int &argc, char **argv)
     :VAbstractApplication(argc, argv),
       mainWindows(),
       localServer(nullptr),
-      trVars(nullptr)
+      trVars(nullptr),
+      dataBase(QPointer<DialogMDataBase>())
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
     setApplicationName(VER_INTERNALNAME_STR);
@@ -290,6 +292,22 @@ QString MApplication::diagramsPath() const
         }
     #endif
 #endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ShowDataBase()
+{
+    if (dataBase.isNull())
+    {
+        dataBase = new DialogMDataBase();
+        dataBase->setAttribute(Qt::WA_DeleteOnClose, true);
+        dataBase->setModal(false);
+        dataBase->show();
+    }
+    else
+    {
+        dataBase->activateWindow();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

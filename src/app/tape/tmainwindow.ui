@@ -615,6 +615,7 @@
     </property>
     <addaction name="actionAddKnown"/>
     <addaction name="actionAddCustom"/>
+    <addaction name="actionDatabase"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMeasurements"/>
@@ -782,6 +783,14 @@
   <action name="actionOpenTemplate">
    <property name="text">
     <string>Open template</string>
+   </property>
+  </action>
+  <action name="actionDatabase">
+   <property name="text">
+    <string>Database</string>
+   </property>
+   <property name="toolTip">
+    <string>Show information about all known measurement</string>
    </property>
   </action>
  </widget>

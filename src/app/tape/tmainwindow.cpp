@@ -1135,6 +1135,7 @@ void TMainWindow::SetupMenu()
     // Measurements
     connect(ui->actionAddCustom, &QAction::triggered, this, &TMainWindow::AddCustom);
     connect(ui->actionAddKnown, &QAction::triggered, this, &TMainWindow::AddKnown);
+    connect(ui->actionDatabase, &QAction::triggered, qApp, &MApplication::ShowDataBase);
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowWindowMenu);

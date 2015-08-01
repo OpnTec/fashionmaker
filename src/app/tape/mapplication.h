@@ -33,6 +33,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vtapesettings.h"
 #include "../vmisc/vabstractapplication.h"
+#include "dialogs/dialogmdatabase.h"
 
 class MApplication;// use in define
 class TMainWindow;
@@ -70,6 +71,8 @@ public:
     QString translationsPath() const;
     QString diagramsPath() const;
 
+    void ShowDataBase();
+
 public slots:
     TMainWindow *NewMainWindow();
 
@@ -82,6 +85,7 @@ private:
     QList<QPointer<TMainWindow> > mainWindows;
     QLocalServer *localServer;
     VTranslateVars *trVars;
+    QPointer<DialogMDataBase> dataBase;
 
     void Clean();
 };

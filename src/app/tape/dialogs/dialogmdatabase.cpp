@@ -52,9 +52,9 @@ DialogMDataBase::DialogMDataBase(QWidget *parent)
       list()
 
 {
+    ui->setupUi(this);
     InitDataBase();
 
-    connect(ui->treeWidget, &QTreeWidget::itemChanged, this, &DialogMDataBase::UpdateChecks);
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
 }
 
@@ -635,9 +635,9 @@ void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name
         {
             m->setCheckState(0, Qt::Unchecked);
         }
-    }
 
-    UpdateChecks(m, 0);
+        UpdateChecks(m, 0);
+    }
 
     const QString text = qApp->TrVars()->MNumber(name) + ". " + qApp->TrVars()->MToUser(name);
     m->setText(0, text);
