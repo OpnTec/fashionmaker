@@ -278,6 +278,7 @@ void TMainWindow::closeEvent(QCloseEvent *event)
     if (MaybeSave())
     {
         event->accept();
+        deleteLater();
     }
     else
     {
