@@ -123,6 +123,12 @@ void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
         return;
     }
 
+    if (item->childCount() != 0)
+    {
+        ui->textEdit->clear();
+        return;
+    }
+
     const QString name = item->data(0, Qt::UserRole).toString();
     const QString number = qApp->TrVars()->MNumber(name);
     const QString iconPath = QString("://diagrams/%1.png").arg(MapDiagrams(number));
