@@ -69,7 +69,7 @@ TMainWindow::TMainWindow(QWidget *parent)
 
     SetupMenu();
 
-    setWindowTitle(tr("untitled"));
+    setWindowTitle(tr("untitled %1").arg(qApp->MainWindows().size()+1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
