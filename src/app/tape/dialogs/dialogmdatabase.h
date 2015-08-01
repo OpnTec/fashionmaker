@@ -47,6 +47,8 @@ public:
     explicit DialogMDataBase(QWidget *parent = 0);
     ~DialogMDataBase();
 
+    QStringList GetNewNames() const;
+
 private slots:
     void UpdateChecks(QTreeWidgetItem *item, int column);
     void ShowDescription(QTreeWidgetItem *item, int column);

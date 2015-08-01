@@ -65,6 +65,31 @@ DialogMDataBase::~DialogMDataBase()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QStringList DialogMDataBase::GetNewNames() const
+{
+    if (selectMode)
+    {
+        QStringList newNames;
+        QTreeWidgetItemIterator it(ui->treeWidget,
+                                   QTreeWidgetItemIterator::NoChildren | QTreeWidgetItemIterator::Checked );
+        while (*it)
+        {
+            const QString name = (*it)->data(0, Qt::UserRole).toString();
+            if (not list.contains(name))
+            {
+                newNames.append(name);
+            }
+            ++it;
+        }
+        return newNames;
+    }
+    else
+    {
+        return QStringList();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::UpdateChecks(QTreeWidgetItem *item, int column)
 {
     bool diff = false;

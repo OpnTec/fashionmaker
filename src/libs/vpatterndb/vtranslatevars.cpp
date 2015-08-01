@@ -400,6 +400,12 @@ QString VTranslateVars::MNumber(const QString &measurement) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::MFormula(const QString &measurement) const
+{
+    return formulas.value(measurement);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::GuiText(const QString &measurement) const
 {
     return guiTexts.value(measurement).translate();

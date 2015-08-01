@@ -645,9 +645,6 @@ void TMainWindow::Fx()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AddCustom()
 {
-    ui->tableWidget->setFocus(Qt::OtherFocusReason);
-    ui->tableWidget->blockSignals(true);
-
     qint32 num = 1;
     QString name;
     do
@@ -661,7 +658,6 @@ void TMainWindow::AddCustom()
     if (ui->tableWidget->currentRow() == -1)
     {
         currentRow  = ui->tableWidget->rowCount();
-        ui->tableWidget->insertRow( currentRow );
         m->AddEmpty(name);
     }
     else
@@ -673,7 +669,6 @@ void TMainWindow::AddCustom()
 
     RefreshData();
 
-    ui->tableWidget->blockSignals(false);
     ui->tableWidget->selectRow(currentRow);
 
     MeasurementsWasSaved(false);
@@ -685,7 +680,48 @@ void TMainWindow::AddKnown()
     DialogMDataBase *dialog = new DialogMDataBase(m->ListKnown(), this);
     if (dialog->exec() == QDialog::Accepted)
     {
+        qint32 currentRow;
 
+        const QStringList list = dialog->GetNewNames();
+        if (ui->tableWidget->currentRow() == -1)
+        {
+            currentRow  = ui->tableWidget->rowCount() + list.size() - 1;
+            for (int i = 0; i < list.size(); ++i)
+            {
+                if (mType == MeasurementsType::Individual)
+                {
+                    m->AddEmpty(list.at(i), qApp->TrVars()->MFormula(list.at(i)));
+                }
+                else
+                {
+                    m->AddEmpty(list.at(i));
+                }
+            }
+        }
+        else
+        {
+            currentRow  = ui->tableWidget->currentRow() + list.size();
+            QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+            QString after = nameField->text();
+            for (int i = 0; i < list.size(); ++i)
+            {
+                if (mType == MeasurementsType::Individual)
+                {
+                    m->AddEmptyAfter(after, list.at(i), qApp->TrVars()->MFormula(list.at(i)));
+                }
+                else
+                {
+                    m->AddEmptyAfter(after, list.at(i));
+                }
+                after = list.at(i);
+            }
+        }
+
+        RefreshData();
+
+        ui->tableWidget->selectRow(currentRow);
+
+        MeasurementsWasSaved(false);
     }
     delete dialog;
 }

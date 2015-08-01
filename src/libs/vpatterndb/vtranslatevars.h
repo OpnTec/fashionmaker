@@ -49,6 +49,7 @@ public:
 
     QString MToUser(const QString &measurement) const;
     QString MNumber(const QString &measurement) const;
+    QString MFormula(const QString &measurement) const;
     QString GuiText(const QString &measurement) const;
     QString Description(const QString &measurement) const;
     QString PostfixOperator(const QString &name) const;

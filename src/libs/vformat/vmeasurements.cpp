@@ -104,18 +104,18 @@ void VMeasurements::setXMLContent(const QString &fileName)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::AddEmpty(const QString &name)
+void VMeasurements::AddEmpty(const QString &name, const QString &formula)
 {
-    const QDomElement element = MakeEmpty(name);
+    const QDomElement element = MakeEmpty(name, formula);
 
     const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
     list.at(0).appendChild(element);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::AddEmptyAfter(const QString &after, const QString &name)
+void VMeasurements::AddEmptyAfter(const QString &after, const QString &name, const QString &formula)
 {
-    const QDomElement element = MakeEmpty(name);
+    const QDomElement element = MakeEmpty(name, formula);
     const QDomElement sibling = FindM(after);
 
     const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
@@ -622,7 +622,7 @@ qreal VMeasurements::UniqueTagAttr(const QString &tag, const QString &attr, qrea
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VMeasurements::MakeEmpty(const QString &name)
+QDomElement VMeasurements::MakeEmpty(const QString &name, const QString &formula)
 {
     QDomElement element = createElement(TagMeasurement);
 
@@ -636,7 +636,14 @@ QDomElement VMeasurements::MakeEmpty(const QString &name)
     }
     else
     {
-        SetAttribute(element, AttrValue, QString("0"));
+        if (formula.isEmpty())
+        {
+            SetAttribute(element, AttrValue, QString("0"));
+        }
+        else
+        {
+            SetAttribute(element, AttrValue, formula);
+        }
         SetAttribute(element, AttrDescription, QString(""));
         SetAttribute(element, AttrFullName, QString(""));
     }
