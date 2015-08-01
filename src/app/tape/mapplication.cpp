@@ -34,6 +34,7 @@
 #include <QFileOpenEvent>
 #include <QLibraryInfo>
 #include <QLocalSocket>
+#include <QResource>
 #include <QTranslator>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -171,6 +172,8 @@ void MApplication::InitOptions()
        //This does not happen under GNOME or KDE
        QIcon::setThemeName("win.icon.theme");
     }
+
+    QResource::registerResource(diagramsPath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -239,6 +242,51 @@ QString MApplication::translationsPath() const
         else
         {
             return QStringLiteral("/usr/share/valentina/translations");
+        }
+    #endif
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString MApplication::diagramsPath() const
+{
+    const QString dPath = QStringLiteral("/diagrams.rcc");
+#ifdef Q_OS_WIN
+    QFileInfo file(QApplication::applicationDirPath()  + dPath);
+    if (file.exists())
+    {
+        return file.absoluteFilePath();
+    }
+    else
+    {
+        return QApplication::applicationDirPath() + "../../app/tape/bin" + dPath;
+    }
+#else
+    #ifdef QT_DEBUG
+        QFileInfo file(QApplication::applicationDirPath() + dPath);
+        if (file.exists())
+        {
+            return file.absoluteFilePath();
+        }
+        else
+        {
+            return QApplication::applicationDirPath() + "../../app/tape/bin" + dPath;
+        }
+    #else
+        QFileInfo file1(QApplication::applicationDirPath() + dPath);
+        if (file1.exists())
+        {
+            return file1.absoluteFilePath();
+        }
+
+        QFileInfo file2(QApplication::applicationDirPath() + "../../app/tape/bin" + dPath);
+        if (file2.exists())
+        {
+            return file2.absoluteFilePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina");
         }
     #endif
 #endif

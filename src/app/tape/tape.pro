@@ -46,10 +46,13 @@ include(tape.pri)
 RESOURCES += \
     share/resources/tapeicon.qrc
 
+DATA_RESOURCE = share/resources/diagrams.qrc # External Binary Resource
+
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \
     share/resources/tape.rc \ # For Windows system.
-    share/resources/icon/64x64/logo.ico # Tape's logo.
+    share/resources/tapeicon/64x64/logo.ico \ # Tape's logo.
+    $$DATA_RESOURCE
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 macx {
@@ -232,6 +235,115 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpro
 
 INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
+
+DIAGRAMS += \
+        $${PWD}/share/resources/diagrams/Ap1.png \
+        $${PWD}/share/resources/diagrams/Ap2.png \
+        $${PWD}/share/resources/diagrams/Bp1.png \
+        $${PWD}/share/resources/diagrams/Bp2.png \
+        $${PWD}/share/resources/diagrams/Cp1.png \
+        $${PWD}/share/resources/diagrams/Cp2.png \
+        $${PWD}/share/resources/diagrams/Dp1.png \
+        $${PWD}/share/resources/diagrams/Dp2.png \
+        $${PWD}/share/resources/diagrams/Dp3.png \
+        $${PWD}/share/resources/diagrams/Dp4.png \
+        $${PWD}/share/resources/diagrams/Dp5.png \
+        $${PWD}/share/resources/diagrams/Dp6.png \
+        $${PWD}/share/resources/diagrams/Dp7.png \
+        $${PWD}/share/resources/diagrams/Dp8.png \
+        $${PWD}/share/resources/diagrams/Ep1.png \
+        $${PWD}/share/resources/diagrams/Ep2.png \
+        $${PWD}/share/resources/diagrams/Ep3.png \
+        $${PWD}/share/resources/diagrams/Ep4.png \
+        $${PWD}/share/resources/diagrams/Ep5.png \
+        $${PWD}/share/resources/diagrams/Ep6.png \
+        $${PWD}/share/resources/diagrams/Ep7.png \
+        $${PWD}/share/resources/diagrams/Ep8.png \
+        $${PWD}/share/resources/diagrams/Ep9.png \
+        $${PWD}/share/resources/diagrams/Ep10.png \
+        $${PWD}/share/resources/diagrams/Ep11.png \
+        $${PWD}/share/resources/diagrams/Ep12.png \
+        $${PWD}/share/resources/diagrams/Ep13.png \
+        $${PWD}/share/resources/diagrams/Ep14.png \
+        $${PWD}/share/resources/diagrams/Fp1.png \
+        $${PWD}/share/resources/diagrams/Fp2.png \
+        $${PWD}/share/resources/diagrams/Fp3.png \
+        $${PWD}/share/resources/diagrams/Fp4.png \
+        $${PWD}/share/resources/diagrams/Fp5.png \
+        $${PWD}/share/resources/diagrams/Fp6.png \
+        $${PWD}/share/resources/diagrams/Fp7.png \
+        $${PWD}/share/resources/diagrams/Gp1.png \
+        $${PWD}/share/resources/diagrams/Gp2.png \
+        $${PWD}/share/resources/diagrams/Gp3.png \
+        $${PWD}/share/resources/diagrams/Gp4.png \
+        $${PWD}/share/resources/diagrams/Hp1.png \
+        $${PWD}/share/resources/diagrams/Hp2.png \
+        $${PWD}/share/resources/diagrams/Hp3.png \
+        $${PWD}/share/resources/diagrams/Hp4.png \
+        $${PWD}/share/resources/diagrams/Hp5.png \
+        $${PWD}/share/resources/diagrams/Hp6.png \
+        $${PWD}/share/resources/diagrams/Hp7.png \
+        $${PWD}/share/resources/diagrams/Hp8.png \
+        $${PWD}/share/resources/diagrams/Hp9.png \
+        $${PWD}/share/resources/diagrams/Hp10.png \
+        $${PWD}/share/resources/diagrams/Ip1.png \
+        $${PWD}/share/resources/diagrams/Ip2.png \
+        $${PWD}/share/resources/diagrams/Ip3.png \
+        $${PWD}/share/resources/diagrams/Ip4.png \
+        $${PWD}/share/resources/diagrams/Ip5.png \
+        $${PWD}/share/resources/diagrams/Ip6.png \
+        $${PWD}/share/resources/diagrams/Ip7.png \
+        $${PWD}/share/resources/diagrams/Ip8.png \
+        $${PWD}/share/resources/diagrams/Ip9.png \
+        $${PWD}/share/resources/diagrams/Jp1.png \
+        $${PWD}/share/resources/diagrams/Jp2.png \
+        $${PWD}/share/resources/diagrams/Kp1.png \
+        $${PWD}/share/resources/diagrams/Kp2.png \
+        $${PWD}/share/resources/diagrams/Kp3.png \
+        $${PWD}/share/resources/diagrams/Kp4.png \
+        $${PWD}/share/resources/diagrams/Lp1.png \
+        $${PWD}/share/resources/diagrams/Lp2.png \
+        $${PWD}/share/resources/diagrams/Lp3.png \
+        $${PWD}/share/resources/diagrams/Mp1.png \
+        $${PWD}/share/resources/diagrams/Mp2.png \
+        $${PWD}/share/resources/diagrams/Np1.png \
+        $${PWD}/share/resources/diagrams/Np2.png \
+        $${PWD}/share/resources/diagrams/Np3.png \
+        $${PWD}/share/resources/diagrams/Op1.png \
+        $${PWD}/share/resources/diagrams/Op2.png \
+        $${PWD}/share/resources/diagrams/Op3.png \
+        $${PWD}/share/resources/diagrams/Op4.png \
+        $${PWD}/share/resources/diagrams/Op5.png \
+        $${PWD}/share/resources/diagrams/Op6.png \
+        $${PWD}/share/resources/diagrams/Op7.png \
+        $${PWD}/share/resources/diagrams/Op8.png \
+        $${PWD}/share/resources/diagrams/Op9.png \
+        $${PWD}/share/resources/diagrams/Op10.png \
+        $${PWD}/share/resources/diagrams/Op11.png \
+        $${PWD}/share/resources/diagrams/Pp1.png \
+        $${PWD}/share/resources/diagrams/Pp2.png \
+        $${PWD}/share/resources/diagrams/Pp3.png \
+        $${PWD}/share/resources/diagrams/Pp4.png \
+        $${PWD}/share/resources/diagrams/Pp5.png \
+        $${PWD}/share/resources/diagrams/Pp6.png \
+        $${PWD}/share/resources/diagrams/Pp7.png \
+        $${PWD}/share/resources/diagrams/Pp8.png \
+        $${PWD}/share/resources/diagrams/Pp9.png \
+        $${PWD}/share/resources/diagrams/Pp10.png \
+        $${PWD}/share/resources/diagrams/Pp11.png \
+        $${PWD}/share/resources/diagrams/Pp12.png \
+        $${PWD}/share/resources/diagrams/Qp1.png \
+        $${PWD}/share/resources/diagrams/Qp2.png \
+        $${PWD}/share/resources/diagrams/Qp3.png
+
+diagrams.name = resource diagrams
+diagrams.CONFIG += no_link target_predeps
+diagrams.depends = $$DIAGRAMS # expects a list of files
+diagrams.input = DATA_RESOURCE # expects the name of a variable
+diagrams.output = ${QMAKE_FILE_BASE}.rcc
+diagrams.commands = $$shell_path($$[QT_INSTALL_BINS]/rcc) --binary --no-compress ${QMAKE_FILE_IN} -o $${OUT_PWD}/$${DESTDIR}/${QMAKE_FILE_OUT}
+
+QMAKE_EXTRA_COMPILERS += diagrams
 
 noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     # do nothing

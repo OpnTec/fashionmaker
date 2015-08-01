@@ -68,6 +68,7 @@ public:
     VTapeSettings *TapeSettings();
 
     QString translationsPath() const;
+    QString diagramsPath() const;
 
 public slots:
     TMainWindow *NewMainWindow();

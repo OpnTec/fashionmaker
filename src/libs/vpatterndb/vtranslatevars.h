@@ -47,6 +47,8 @@ public:
     QString VarToUser(const QString &var) const;
     QString VarFromUser(const QString &var) const;
 
+    QString MToUser(const QString &measurement) const;
+    QString MNumber(const QString &measurement) const;
     QString GuiText(const QString &measurement) const;
     QString Description(const QString &measurement) const;
     QString PostfixOperator(const QString &name) const;
@@ -64,7 +66,27 @@ private:
     QMap<QString, qmu::QmuTranslation> functions;
     QMap<QString, qmu::QmuTranslation> postfixOperators;
     QMap<QString, qmu::QmuTranslation> stDescriptions;
+    QMap<QString, QString> numbers;
+    QMap<QString, QString> formulas;
     bool osSeparator;
+
+    void InitGroupA(); // Direct Height
+    void InitGroupB(); // Direct Width
+    void InitGroupC(); // Indentation
+    void InitGroupD(); // Circumference and Arc
+    void InitGroupE(); // Vertical
+    void InitGroupF(); // Horizontal
+    void InitGroupG(); // Bust
+    void InitGroupH(); // Balance
+    void InitGroupI(); // Arm
+    void InitGroupJ(); // Leg
+    void InitGroupK(); // Crotch and Rise
+    void InitGroupL(); // Hand
+    void InitGroupM(); // Foot
+    void InitGroupN(); // Head
+    void InitGroupO(); // Men & Tailoring
+    void InitGroupP(); // Historical & Specialty
+    void InitGroupQ(); // Patternmaking measurements
 
     void InitMeasurements();
     void InitVariables();
@@ -73,7 +95,7 @@ private:
     void InitSTDescriptions();
 
     void InitMeasurement(const QString &name, const qmu::QmuTranslation &m, const qmu::QmuTranslation &g,
-                         const qmu::QmuTranslation &d);
+                         const qmu::QmuTranslation &d, const QString &number, const QString &formula = QString());
 
     void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
     static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);

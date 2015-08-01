@@ -30,6 +30,7 @@
 #include "ui_tmainwindow.h"
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialognewmeasurements.h"
+#include "dialogs/dialogmdatabase.h"
 #include "../vpatterndb/calculator.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vvitconverter.h"
@@ -706,7 +707,12 @@ void TMainWindow::AddCustom()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AddKnown()
 {
+    DialogMDataBase *dialog = new DialogMDataBase(m->ListKnown(), this);
+    if (dialog->exec() == QDialog::Accepted)
+    {
 
+    }
+    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
