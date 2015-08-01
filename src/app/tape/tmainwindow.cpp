@@ -769,33 +769,42 @@ void TMainWindow::ChangedHeight(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ShowMData()
 {
-    Controls(); // Buttons remove, up, down
-
     if (ui->tableWidget->rowCount() > 0)
     {
         ui->groupBoxDetails->setEnabled(true);
 
-        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-        QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
+        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0); // name
+        QSharedPointer<VMeasurement> meash;
+
+        try
+        {
+            meash = data->GetVariable<VMeasurement>(qApp->TrVars()->MFromUser(nameField->text()));
+        }
+        catch(const VExceptionBadId &e)
+        {
+            Q_UNUSED(e);
+            ui->groupBoxDetails->setEnabled(false);
+            return;
+        }
 
         ui->lineEditName->blockSignals(true);
-        ui->lineEditName->setText(ClearCustomName(meash->GetName()));
-        ui->lineEditName->blockSignals(false);
-
         ui->plainTextEditDescription->blockSignals(true);
+        ui->lineEditFullName->blockSignals(true);
         if (meash->IsCustom())
         {
             ui->plainTextEditDescription->setPlainText(meash->GetDescription());
+            ui->lineEditFullName->setText(meash->GetGuiText());
+            ui->lineEditName->setText(ClearCustomName(meash->GetName()));
         }
         else
         {
-            //Show from known description
-            ui->plainTextEditDescription->setPlainText("");
+            //Show known
+            ui->plainTextEditDescription->setPlainText(qApp->TrVars()->Description(meash->GetName()));
+            ui->lineEditFullName->setText(qApp->TrVars()->GuiText(meash->GetName()));
+            ui->lineEditName->setText(nameField->text());
         }
+        ui->lineEditName->blockSignals(false);
         ui->plainTextEditDescription->blockSignals(false);
-
-        ui->lineEditFullName->blockSignals(true);
-        ui->lineEditFullName->setText(meash->GetGuiText());
         ui->lineEditFullName->blockSignals(false);
 
         if (mType == MeasurementsType::Standard)
@@ -805,7 +814,7 @@ void TMainWindow::ShowMData()
             ui->doubleSpinBoxInSizes->blockSignals(true);
             ui->doubleSpinBoxInHeights->blockSignals(true);
 
-            ui->labelCalculatedValue->setText(QString().setNum(data->GetTableValue(nameField->text(), mType)));
+            ui->labelCalculatedValue->setText(QString().setNum(data->GetTableValue(meash->GetName(), mType)));
             ui->doubleSpinBoxBaseValue->setValue(static_cast<int>(meash->GetBase()));
             ui->doubleSpinBoxInSizes->setValue(static_cast<int>(meash->GetKsize()));
             ui->doubleSpinBoxInHeights->setValue(static_cast<int>(meash->GetKheight()));
@@ -862,6 +871,8 @@ void TMainWindow::ShowMData()
                 ui->lineEditFullName->setReadOnly(true);
             }
         }
+
+        Controls(); // Buttons remove, up, down
     }
 }
 

@@ -394,6 +394,21 @@ QString VTranslateVars::MToUser(const QString &measurement) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::MFromUser(const QString &measurement) const
+{
+    QMap<QString, QmuTranslation>::const_iterator i = measurements.constBegin();
+    while (i != measurements.constEnd())
+    {
+        if (measurement == i.value().translate())
+        {
+            return i.key();
+        }
+        ++i;
+    }
+    return measurement;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::MNumber(const QString &measurement) const
 {
     return numbers.value(measurement);

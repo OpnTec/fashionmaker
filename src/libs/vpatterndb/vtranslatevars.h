@@ -48,6 +48,7 @@ public:
     QString VarFromUser(const QString &var) const;
 
     QString MToUser(const QString &measurement) const;
+    QString MFromUser(const QString &measurement) const;
     QString MNumber(const QString &measurement) const;
     QString MFormula(const QString &measurement) const;
     QString GuiText(const QString &measurement) const;
