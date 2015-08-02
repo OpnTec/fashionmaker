@@ -26,6 +26,7 @@ CONFIG -= debug_and_release debug_and_release_target
 # We need this information also in release builds. For this need define QT_MESSAGELOGCONTEXT.
 DEFINES += QT_MESSAGELOGCONTEXT
 
+include(trmeasurements.pri)
 include(vpatterndb.pri)
 
 # This is static library so no need in "make install"

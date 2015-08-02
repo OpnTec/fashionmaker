@@ -5,28 +5,44 @@
     <name>AddDet</name>
     <message>
         <source>Add detail</source>
-        <translation>Añadir detalle</translation>
+        <translation type="vanished">Añadir detalle</translation>
+    </message>
+    <message>
+        <source>add detail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddPatternPiece</name>
     <message>
         <source>Add pattern piece %1</source>
-        <translation>Añadir pieza de patrón %1</translation>
+        <translation type="vanished">Añadir pieza de patrón %1</translation>
+    </message>
+    <message>
+        <source>add pattern piece %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddToCalc</name>
     <message>
         <source>Add object</source>
-        <translation>Añadir objeto</translation>
+        <translation type="vanished">Añadir objeto</translation>
+    </message>
+    <message>
+        <source>add object</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddUnionDetails</name>
     <message>
         <source>Add union details</source>
-        <translation>Añadir detalle de unión</translation>
+        <translation type="vanished">Añadir detalle de unión</translation>
+    </message>
+    <message>
+        <source>add union details</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -214,21 +230,33 @@
     <name>DelTool</name>
     <message>
         <source>Delete tool</source>
-        <translation>Herramienta borrar</translation>
+        <translation type="vanished">Herramienta borrar</translation>
+    </message>
+    <message>
+        <source>delete tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeleteDetail</name>
     <message>
         <source>Delete tool</source>
-        <translation>Herramienta borrar</translation>
+        <translation type="vanished">Herramienta borrar</translation>
+    </message>
+    <message>
+        <source>delete tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeletePatternPiece</name>
     <message>
         <source>Delete pattern piece %1</source>
-        <translation> Borrar pieza de patrón %1</translation>
+        <translation type="vanished"> Borrar pieza de patrón %1</translation>
+    </message>
+    <message>
+        <source>delete pattern piece %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -264,6 +292,45 @@
     <message>
         <source>Build revision:</source>
         <translation>Crear revisión:</translation>
+    </message>
+</context>
+<context>
+    <name>DialogAboutTape</name>
+    <message>
+        <source>About Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tape version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Build revision:</source>
+        <translation type="unfinished">Crear revisión:</translation>
+    </message>
+    <message>
+        <source>This program is part of Valentina project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Build revision: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built on %3 at %4</source>
+        <translation type="unfinished">Construido sobre %3 y %4</translation>
+    </message>
+    <message>
+        <source>Web site : %1</source>
+        <translation type="unfinished">Sitio web: %1</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Atención</translation>
+    </message>
+    <message>
+        <source>Cannot open your default browser</source>
+        <translation type="unfinished">No se puede abrir su navegador por defecto</translation>
     </message>
 </context>
 <context>
@@ -493,6 +560,81 @@
     </message>
     <message>
         <source>Edit second angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogArcWithLength</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Radios</translation>
+    </message>
+    <message>
+        <source>Value of radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>First angle</source>
+        <translation type="unfinished">Primer ángulo</translation>
+    </message>
+    <message>
+        <source>Value of first angle</source>
+        <translation type="unfinished">Valor del primer ángulo</translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Longitud</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="unfinished">Longitud de arco</translation>
+    </message>
+    <message>
+        <source>Center point</source>
+        <translation type="unfinished">Punto central</translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished">Seleccionar punto del centro del arco</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished">Color</translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the first angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the arc length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished">Radio no puede ser negativo</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be equal 0</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1009,6 +1151,10 @@
         <source>Seam allowance tool</source>
         <translation>Herramienta para las costuras</translation>
     </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1103,6 +1249,30 @@
     <message>
         <source>Line Angle</source>
         <translation type="unfinished">Ángulo de la línea</translation>
+    </message>
+    <message>
+        <source>Radius of arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angles of arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angles of curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1341,6 +1511,30 @@
         <source>%1 - point of intersection curve and axis through point %2</source>
         <translation>%1 - punto de intersección de la curva y el eje a través del punto %2</translation>
     </message>
+    <message>
+        <source>Arc with center in point %1 and length %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point of arcs intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point of circles intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correction the dart %1_%2_%3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -1422,7 +1616,7 @@
     </message>
     <message>
         <source>Curves</source>
-        <translation>Curvas</translation>
+        <translation type="vanished">Curvas</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1430,7 +1624,7 @@
     </message>
     <message>
         <source>Arcs</source>
-        <translation>Arcos</translation>
+        <translation type="vanished">Arcos</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -1511,6 +1705,38 @@
     <message>
         <source>Data successfully saved.</source>
         <translation>Se han guardado los datos.</translation>
+    </message>
+    <message>
+        <source>Lines angles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Ángulo</translation>
+    </message>
+    <message>
+        <source>Lengths curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angles curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lengths arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radiuses arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Radios</translation>
+    </message>
+    <message>
+        <source>Angles arcs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1604,7 +1830,7 @@
     </message>
     <message>
         <source>Wrong paper size</source>
-        <translation>Medida de papel incorrecta</translation>
+        <translation type="vanished">Medida de papel incorrecta</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -1663,7 +1889,7 @@
     </message>
     <message>
         <source>Layout width:</source>
-        <translation>Ancho de diseño:</translation>
+        <translation type="vanished">Ancho de diseño:</translation>
     </message>
     <message>
         <source>Shift length:</source>
@@ -1735,6 +1961,18 @@
     </message>
     <message>
         <source>Roll 44in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unite pages (if possible)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gap width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save length of the sheet</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1920,6 +2158,102 @@
     </message>
 </context>
 <context>
+    <name>DialogMDataBase</name>
+    <message>
+        <source>Measurement data base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="unfinished">Medidas</translation>
+    </message>
+    <message>
+        <source>Direct Height</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Direct Width</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indentation</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circumference and Arc</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bust</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balance</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arm</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leg</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Crotch and Rise</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hand</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Foot</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Men &amp; Tailoring</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Historical &amp; Specialty</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking measurements</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogMeasurements</name>
     <message>
         <source>Measurements</source>
@@ -1944,6 +2278,57 @@
     <message>
         <source>Use for creation pattern individual measurements</source>
         <translation>Usar para la creación de patrón medidas individuales</translation>
+    </message>
+</context>
+<context>
+    <name>DialogNewMeasurements</name>
+    <message>
+        <source>New measurement file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual</source>
+        <translation type="unfinished">Individual</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centímetros</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Milímetros</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2224,6 +2609,88 @@
     </message>
 </context>
 <context>
+    <name>DialogPointFromArcAndTangent</name>
+    <message>
+        <source>Point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tangent point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc</source>
+        <translation type="unfinished">Arco</translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished">Seleccionar punto del centro del arco</translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogPointFromCircleAndTangent</name>
+    <message>
+        <source>Point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Radios</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished">Seleccionar punto del centro del arco</translation>
+    </message>
+    <message>
+        <source>Tangent point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished">Radio no puede ser negativo</translation>
+    </message>
+</context>
+<context>
     <name>DialogPointOfContact</name>
     <message>
         <source>Radius</source>
@@ -2343,6 +2810,142 @@
     <message>
         <source>Select point for Y value (horizontal)</source>
         <translation>Seleccionar punto para el valor Y (horizontal)</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPointOfIntersectionArcs</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected arc</source>
+        <translation type="unfinished">Arco seleccionado</translation>
+    </message>
+    <message>
+        <source>Second arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select second an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogPointOfIntersectionCircles</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius of the first circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Radius of the second circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the first circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished">Seleccionar punto del centro del arco</translation>
+    </message>
+    <message>
+        <source>Center of the second circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select second circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished">Radio no puede ser negativo</translation>
+    </message>
+</context>
+<context>
+    <name>DialogSaveLAyout</name>
+    <message>
+        <source>Save Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation type="unfinished">Ruta:</translation>
+    </message>
+    <message>
+        <source>File format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogSaveLayout</name>
+    <message>
+        <source>Name conflict</source>
+        <translation type="unfinished">Conflicto en nombre</translation>
+    </message>
+    <message>
+        <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2626,6 +3229,14 @@
         <source>Line Angle</source>
         <translation type="vanished">Ángulo de la línea</translation>
     </message>
+    <message>
+        <source>First point</source>
+        <translation type="unfinished">Primer punto</translation>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation type="unfinished">Segundo punto</translation>
+    </message>
 </context>
 <context>
     <name>DialogTriangle</name>
@@ -2680,6 +3291,73 @@
     <message>
         <source>Second point of line</source>
         <translation>Segundo punto de línea</translation>
+    </message>
+</context>
+<context>
+    <name>DialogTrueDarts</name>
+    <message>
+        <source>True darts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First base point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of angle</source>
+        <translation type="unfinished">Primer punto del ángulo</translation>
+    </message>
+    <message>
+        <source>Second base point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of angle</source>
+        <translation type="unfinished">Segundo punto del ángulo </translation>
+    </message>
+    <message>
+        <source>First dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point of angle</source>
+        <translation type="unfinished">Tercer punto del ángulo</translation>
+    </message>
+    <message>
+        <source>Second dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show line from second point to this point</source>
+        <translation type="unfinished">Mostrar línea desde segundo punto hasta este punto</translation>
+    </message>
+    <message>
+        <source>Third dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First new dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second new dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the second base point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the first dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the second dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the third dart point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2882,6 +3560,11 @@
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation>avg</translation>
+    </message>
+    <message>
+        <source>fmod</source>
+        <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3337,7 +4020,7 @@ Para abrir patrón necesita tener abiertos ambos archivos. patrón y medidas.Qui
     </message>
     <message>
         <source>/pattern.val</source>
-        <translation>/pattern.val</translation>
+        <translation type="vanished">/pattern.val</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -3389,7 +4072,7 @@ Para abrir patrón necesita tener abiertos ambos archivos. patrón y medidas.Qui
     </message>
     <message>
         <source>Unsaved change</source>
-        <translation>Cambios sin guardar</translation>
+        <translation type="vanished">Cambios sin guardar</translation>
     </message>
     <message>
         <source>The pattern has been modified.
@@ -3565,2036 +4248,700 @@ Quiere guardar los cambios?</translation>
         <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc with given length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout pages</source>
+        <translation type="unfinished">Páginas de diseño</translation>
+    </message>
+    <message>
+        <source>Save as PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save original layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as tiled PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split and save a layout into smaller pages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print original a layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split and print a layout into smaller pages (for regular printers)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview original layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview tailed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview tailed layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export original layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first circle center </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point on tangent </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point of the center of the arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the first base line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detail mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsaved changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindowsNoGUI</name>
+    <message>
+        <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For previewing multypage document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For printing multypages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Svg files (*.svg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF files (*.pdf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Images (*.png)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PS files (*.ps)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EPS files (*.eps)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical error!</source>
+        <translation type="unfinished">Error crítico!!</translation>
+    </message>
+    <message>
+        <source>Print to pdf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF file (*.pdf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unnamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Measurements</name>
     <message>
         <source>head_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_cabeza</translation>
+        <translation type="vanished">circunferencia_cabeza</translation>
     </message>
     <message>
         <source>mid_neck_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_medio_cuello</translation>
+        <translation type="vanished">circunferencia_medio_cuello</translation>
     </message>
     <message>
         <source>neck_base_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_base_cuello</translation>
+        <translation type="vanished">circunferencia_base_cuello</translation>
     </message>
     <message>
         <source>head_and_neck_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_cabeza_y_cuello</translation>
+        <translation type="vanished">longitud_cabeza_y_cuello</translation>
     </message>
     <message>
         <source>center_front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_cintura_central_delante</translation>
+        <translation type="vanished">longitud_cintura_central_delante</translation>
     </message>
     <message>
         <source>center_back_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_cintura_central_detrás</translation>
+        <translation type="vanished">longitud_cintura_central_detrás</translation>
     </message>
     <message>
         <source>shoulder_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_hombro</translation>
+        <translation type="vanished">longitud_hombro</translation>
     </message>
     <message>
         <source>side_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_cintura_lateral</translation>
+        <translation type="vanished">longitud_cintura_lateral</translation>
     </message>
     <message>
         <source>trunk_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_tronco</translation>
+        <translation type="vanished">longitud_tronco</translation>
     </message>
     <message>
         <source>shoulder_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_hombro</translation>
+        <translation type="vanished">circunferencia_hombro</translation>
     </message>
     <message>
         <source>upper_chest_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_pecho_superior</translation>
+        <translation type="vanished">circunferencia_pecho_superior</translation>
     </message>
     <message>
         <source>bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_busto</translation>
+        <translation type="vanished">circunferencia_busto</translation>
     </message>
     <message>
         <source>under_bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_busto_inferior</translation>
+        <translation type="vanished">circunferencia_busto_inferior</translation>
     </message>
     <message>
         <source>waist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_cintura</translation>
+        <translation type="vanished">circunferencia_cintura</translation>
     </message>
     <message>
         <source>high_hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_cadera_arriba</translation>
+        <translation type="vanished">circunferencia_cadera_arriba</translation>
     </message>
     <message>
         <source>hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_cadera</translation>
+        <translation type="vanished">circunferencia_cadera</translation>
     </message>
     <message>
         <source>upper_front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>anchura_pecho_superior</translation>
+        <translation type="vanished">anchura_pecho_superior</translation>
     </message>
     <message>
         <source>front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>anchura_pecho_delante</translation>
+        <translation type="vanished">anchura_pecho_delante</translation>
     </message>
     <message>
         <source>across_front_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>anchura_traves_hombro_frontal</translation>
+        <translation type="vanished">anchura_traves_hombro_frontal</translation>
     </message>
     <message>
         <source>across_back_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>anchura_traves_hombro_detrás</translation>
+        <translation type="vanished">anchura_traves_hombro_detrás</translation>
     </message>
     <message>
         <source>upper_back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>anchura_espalda_superior</translation>
+        <translation type="vanished">anchura_espalda_superior</translation>
     </message>
     <message>
         <source>back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>anchura_espalda</translation>
-    </message>
-    <message>
-        <source>bustpoint_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>halter_bustpoint_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>neck_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">anchura_espalda</translation>
     </message>
     <message>
         <source>crotch_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_entrepierna</translation>
-    </message>
-    <message>
-        <source>rise_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">longitud_entrepierna</translation>
     </message>
     <message>
         <source>shoulder_drop</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>caída_hombro</translation>
+        <translation type="vanished">caída_hombro</translation>
     </message>
     <message>
         <source>shoulder_slope_degrees</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>grados_pendiente_hombro</translation>
+        <translation type="vanished">grados_pendiente_hombro</translation>
     </message>
     <message>
         <source>front_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_pendiente_hombro_delante</translation>
+        <translation type="vanished">longitud_pendiente_hombro_delante</translation>
     </message>
     <message>
         <source>back_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_pendiente_hombro_detrás</translation>
+        <translation type="vanished">longitud_pendiente_hombro_detrás</translation>
     </message>
     <message>
         <source>front_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_hombro_hasta_cintura_delante</translation>
+        <translation type="vanished">longitud_hombro_hasta_cintura_delante</translation>
     </message>
     <message>
         <source>back_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_hombro_hasta_cintura_detrás</translation>
+        <translation type="vanished">longitud_hombro_hasta_cintura_detrás</translation>
     </message>
     <message>
         <source>front_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_cuello_delante</translation>
+        <translation type="vanished">arco_cuello_delante</translation>
     </message>
     <message>
         <source>back_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_cuello_detrás</translation>
+        <translation type="vanished">arco_cuello_detrás</translation>
     </message>
     <message>
         <source>front_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_superior_cuello_delante</translation>
+        <translation type="vanished">arco_superior_cuello_delante</translation>
     </message>
     <message>
         <source>back_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_superior_cuello_detrás</translation>
+        <translation type="vanished">arco_superior_cuello_detrás</translation>
     </message>
     <message>
         <source>front_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_cintura_delante</translation>
+        <translation type="vanished">arco_cintura_delante</translation>
     </message>
     <message>
         <source>back_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_cintura_detrás</translation>
+        <translation type="vanished">arco_cintura_detrás</translation>
     </message>
     <message>
         <source>front_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_cadera_superior_delante</translation>
+        <translation type="vanished">arco_cadera_superior_delante</translation>
     </message>
     <message>
         <source>back_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_cadera_superior_detrás</translation>
+        <translation type="vanished">arco_cadera_superior_detrás</translation>
     </message>
     <message>
         <source>front_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_cadera_delante</translation>
+        <translation type="vanished">arco_cadera_delante</translation>
     </message>
     <message>
         <source>back_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arco_cadera_detrás</translation>
+        <translation type="vanished">arco_cadera_detrás</translation>
     </message>
     <message>
         <source>chest_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>pendiente_pecho</translation>
+        <translation type="vanished">pendiente_pecho</translation>
     </message>
     <message>
         <source>back_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>pendiente_detrás</translation>
+        <translation type="vanished">pendiente_detrás</translation>
     </message>
     <message>
         <source>front_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>pendiente_cintura_delante</translation>
+        <translation type="vanished">pendiente_cintura_delante</translation>
     </message>
     <message>
         <source>back_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>pendiente_cintura_detrás</translation>
+        <translation type="vanished">pendiente_cintura_detrás</translation>
     </message>
     <message>
         <source>front_neck_to_upper_chest_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_cuello_delante_hasta_pecho_superior</translation>
+        <translation type="vanished">altura_cuello_delante_hasta_pecho_superior</translation>
     </message>
     <message>
         <source>front_neck_to_bust_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>anchura_cuello_delante_hasta_busto</translation>
+        <translation type="vanished">anchura_cuello_delante_hasta_busto</translation>
     </message>
     <message>
         <source>front_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>delante_cintura_hasta_pecho_superior</translation>
+        <translation type="vanished">delante_cintura_hasta_pecho_superior</translation>
     </message>
     <message>
         <source>front_waist_to_lower_breast</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>delante_cintura_hasta_pecho_inferior</translation>
+        <translation type="vanished">delante_cintura_hasta_pecho_inferior</translation>
     </message>
     <message>
         <source>back_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>detrás_cintura_hast_pecho_superior</translation>
+        <translation type="vanished">detrás_cintura_hast_pecho_superior</translation>
     </message>
     <message>
         <source>strap_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_tirante</translation>
+        <translation type="vanished">longitud_tirante</translation>
     </message>
     <message>
         <source>armscye_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_entremangas</translation>
+        <translation type="vanished">circunferencia_entremangas</translation>
     </message>
     <message>
         <source>elbow_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_codo</translation>
+        <translation type="vanished">circunferencia_codo</translation>
     </message>
     <message>
         <source>upper_arm_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_superior_brazo</translation>
+        <translation type="vanished">circunferencia_superior_brazo</translation>
     </message>
     <message>
         <source>wrist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_muñeca</translation>
-    </message>
-    <message>
-        <source>scye_depth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">circunferencia_muñeca</translation>
     </message>
     <message>
         <source>shoulder_and_arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_hombro_y_brazo</translation>
+        <translation type="vanished">longitud_hombro_y_brazo</translation>
     </message>
     <message>
         <source>underarm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_axila</translation>
+        <translation type="vanished">longitud_axila</translation>
     </message>
     <message>
         <source>cervicale_to_wrist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_cuello_hasta_muñeca</translation>
+        <translation type="vanished">longitud_cuello_hasta_muñeca</translation>
     </message>
     <message>
         <source>shoulder_to_elbow_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_hombro_hasta_codo</translation>
+        <translation type="vanished">longitud_hombro_hasta_codo</translation>
     </message>
     <message>
         <source>arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_brazo</translation>
+        <translation type="vanished">longitud_brazo</translation>
     </message>
     <message>
         <source>hand_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ancho_mano</translation>
+        <translation type="vanished">ancho_mano</translation>
     </message>
     <message>
         <source>hand_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_mano</translation>
+        <translation type="vanished">longitud_mano</translation>
     </message>
     <message>
         <source>hand_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_mano</translation>
+        <translation type="vanished">circunferencia_mano</translation>
     </message>
     <message>
         <source>thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_muslo</translation>
+        <translation type="vanished">circunferencia_muslo</translation>
     </message>
     <message>
         <source>mid_thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_muslo_medio</translation>
+        <translation type="vanished">circunferencia_muslo_medio</translation>
     </message>
     <message>
         <source>knee_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_rodilla</translation>
+        <translation type="vanished">circunferencia_rodilla</translation>
     </message>
     <message>
         <source>calf_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_pantorrila</translation>
+        <translation type="vanished">circunferencia_pantorrila</translation>
     </message>
     <message>
         <source>ankle_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>circunferencia_tobillo</translation>
+        <translation type="vanished">circunferencia_tobillo</translation>
     </message>
     <message>
         <source>knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_rodilla</translation>
+        <translation type="vanished">altura_rodilla</translation>
     </message>
     <message>
         <source>ankle_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_tobillo</translation>
+        <translation type="vanished">altura_tobillo</translation>
     </message>
     <message>
         <source>foot_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ancho_pie</translation>
+        <translation type="vanished">ancho_pie</translation>
     </message>
     <message>
         <source>foot_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>longitud_pie</translation>
+        <translation type="vanished">longitud_pie</translation>
     </message>
     <message>
         <source>height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura</translation>
+        <translation type="vanished">altura</translation>
     </message>
     <message>
         <source>cervicale_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_cuello</translation>
+        <translation type="vanished">altura_cuello</translation>
     </message>
     <message>
         <source>cervicale_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_cuello_hasta_rodilla</translation>
+        <translation type="vanished">altura_cuello_hasta_rodilla</translation>
     </message>
     <message>
         <source>waist_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_cintura</translation>
+        <translation type="vanished">altura_cintura</translation>
     </message>
     <message>
         <source>high_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_cadera_alta</translation>
+        <translation type="vanished">altura_cadera_alta</translation>
     </message>
     <message>
         <source>hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_cadera</translation>
+        <translation type="vanished">altura_cadera</translation>
     </message>
     <message>
         <source>waist_to_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_cintura_hasta_cadera</translation>
+        <translation type="vanished">altura_cintura_hasta_cadera</translation>
     </message>
     <message>
         <source>waist_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_cintura_hasta_rodilla</translation>
+        <translation type="vanished">altura_cintura_hasta_rodilla</translation>
     </message>
     <message>
         <source>crotch_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_entrepierna</translation>
+        <translation type="vanished">altura_entrepierna</translation>
     </message>
     <message>
         <source>size</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>tamaño</translation>
+        <translation type="vanished">tamaño</translation>
     </message>
     <message>
         <source>height_front_neck_base_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_delante_cuello_punto_partida</translation>
+        <translation type="vanished">altura_delante_cuello_punto_partida</translation>
     </message>
     <message>
         <source>height_base_neck_side_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_detrás_cuello_punto_partida</translation>
+        <translation type="vanished">altura_detrás_cuello_punto_partida</translation>
     </message>
     <message>
         <source>height_shoulder_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_punto_hombro</translation>
+        <translation type="vanished">altura_punto_hombro</translation>
     </message>
     <message>
         <source>height_nipple_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_punto_pezón</translation>
+        <translation type="vanished">altura_punto_pezón</translation>
     </message>
     <message>
         <source>height_back_angle_axilla</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_ángulo_posterior_axila</translation>
+        <translation type="vanished">altura_ángulo_posterior_axila</translation>
     </message>
     <message>
         <source>height_scapular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_punto_escapulario</translation>
+        <translation type="vanished">altura_punto_escapulario</translation>
     </message>
     <message>
         <source>height_under_buttock_folds</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>altura_sobre_pliegue_nalga</translation>
-    </message>
-    <message>
-        <source>hips_excluding_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>girth_foot_instep</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>side_waist_to_floor</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>front_waist_to_floor</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>arc_through_groin_area</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>waist_to_plane_seat</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>neck_to_radial_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>neck_to_third_finger</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>neck_to_first_line_chest_circumference</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>front_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>arc_through_shoulder_joint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>neck_to_back_line_chest_circumference</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>waist_to_neck_side</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>arc_length_upper_body</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>chest_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>anteroposterior_diameter_hands</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>height_clavicular_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>height_armhole_slash</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>slash_shoulder_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half_girth_neck</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half_girth_neck_for_shirts</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half_girth_chest_first</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half_girth_chest_second</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half_girth_chest_third</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half_girth_waist</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half_girth_hips_considering_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half_girth_hips_excluding_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>girth_knee_flexed_feet</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>neck_transverse_diameter</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>front_slash_shoulder_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>neck_to_front_waist_line</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>hand_vertical_diameter</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>neck_to_knee_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>waist_to_knee</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>shoulder_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>head_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>body_position</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>arc_behind_shoulder_girdle</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>neck_to_neck_base</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>depth_waist_first</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>depth_waist_second</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">altura_sobre_pliegue_nalga</translation>
     </message>
 </context>
 <context>
     <name>MeasurementsDescriptions</name>
     <message>
-        <source>Around fullest part of Head</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around middle part of Neck</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Neck at base</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vertical Distance from Crown to Nape</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Neck Center to Back Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NeckPoint to ShoulderTip</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Armpit to Waist side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around fullest part of Bust, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Chest below the Bust, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around HighHip, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Hip, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Across Front UpperChest, smallest width from armscye to armscye</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Across Front Chest, from armfold to armfold</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>From ShoulderTip to ShoulderTip, across Front</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>From ShoulderTip to ShoulderTip, across Back</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Across Back UpperChest, smallest width from armscye to armscye</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Across Back Chest, from armfold to armfold</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Distance between BustPoints, across Chest</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Distance from Bustpoint, behind neck, down to Bustpoint</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>From NeckPoint to BustPoint</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ShoulderTip to Front Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ShoulderTip to Back Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NeckPoint straight down front chest to Waistline</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back NeckPoint straight down back chest to Waistline</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NeckPoint to NeckPoint through Front Neck Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NeckPoint to NeckPoint across Nape</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front upper-bust arc</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back UpperBust side to side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Waist side to side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Waist side to side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front UpperHip side to side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back UpperHip side to side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Hip side to side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Hip side to side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NeckPoint to Front ArmfoldPoint</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NeckPoint to Back ArmfoldPoint</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NeckPoint across Front Chest to Waist side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NeckPoint across Back Chest to Waist side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Neck Center straight down to UpperChest line</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Neck Center straight down to Bust line</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Upper chest waist</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front waist to lower breast</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back waist to upper chest</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Strap length</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Armscye</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Elbow with elbow bent</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around UpperArm</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Wrist</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nape straight down to UnderBust line (same as Back UpperBust height)</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Armpit to Wrist, with arm straight and hanging at side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nape to Wrist, with elbow bent and hand on hip</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ShoulderTip to Elbow, with elbow bent and hand on hip</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ShoulderTip to Wrist, with elbow bent and hand on hip</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hand side to side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hand Middle Finger tip to wrist</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Hand</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Thigh</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around MidThigh</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Knee</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Calf</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Around Ankle</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Knee to Floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ankle to Floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Widest part of Foot side to side</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tip of Longest Toe straight to back of heel</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top of head to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nape to Floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nape to Knee</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist side to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HighHip side to Floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hip side to Floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist side to Hip</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist side to Knee</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Crotch to Floor along inside leg</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Size</source>
         <comment>Full measurement description</comment>
-        <translation>Tamaño</translation>
-    </message>
-    <message>
-        <source>Height of the point base of the neck in front</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height of the base of the neck side point</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The height of the shoulder point</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height nipple point</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height back angle axilla</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height scapular point</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height under buttock folds</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hips excluding protruding abdomen</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Girth foot instep</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the side waist to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the front waist to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arc through groin area</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the waist to the plane seat</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the base of the neck to the side of the radial point</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Distance from the base of the neck side point to the end of the third finger</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the base of the neck to the side of the first line in front of chest circumference</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arc through the highest point of the shoulder joint</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the base of the neck to the back line of chest circumference of the first and the second based on ledge vanes</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the waist to the back base of the neck side point</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arc length of the upper body through the base of the neck side point</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chest width</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Anteroposterior diameter of the hands</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height clavicular point</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the point to the cervical level of the posterior angle of the front armpit (underarm height oblique)</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Slash shoulder height</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth neck</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth neck for shirts</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth chest first</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth chest second</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth chest third</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth waist</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth hips considering protruding abdomen</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth hips excluding protruding abdomen</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Girth knee flexed feet</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neck transverse diameter</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front slash shoulder height</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the base of the neck to the waist line front</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hand vertical diameter</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Distance from neck to knee point</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The distance from the waist to the knee</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shoulder height</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Head height</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Body position</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arc behind the shoulder girdle</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Distance from neck point to point on the base of the neck side neck girth measurement line</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Depth waist first</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Depth waist second</source>
-        <comment>Full measurement description</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Tamaño</translation>
     </message>
 </context>
 <context>
     <name>MeasurementsFullNames</name>
     <message>
-        <source>Head girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mid-neck girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neck Base girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Head and Neck length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Center length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Center length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shoulder length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Side Waist length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Trunk length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shoulder girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upper Chest girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bust girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Under Bust girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HighHip girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hip girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Upper Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Across Shoulder width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Across Shoulder width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Upper Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>BustPoint to BustPoint</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Halter Bustpoint to Bustpoint</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NeckPoint to BustPoint</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Crotch length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rise height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shoulder Drop</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shoulder Slope degrees</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Shoulder Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Shoulder Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Full Length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Full Length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Neck arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Neck arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front upper-bust arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back UpperBust arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Waist arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Waist arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front UpperHip arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back UpperHip arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Hip arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Hip arc</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chest Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Waist Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back Waist Balance</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front UpperChest height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bust height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front Upper chest waist</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front waist to lower breast</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back waist to upper chest</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Strap length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Armscye Girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Elbow Girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upperarm Girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wrist girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Armscye depth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shoulder and Arm length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Underarm length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nape to wrist length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Elbow length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arm length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hand width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hand length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hand girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thigh girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Midthigh girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Knee girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Calf girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ankle girth</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Knee height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ankle height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Foot width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Foot length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Total Height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nape height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nape to knee height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HighHip height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hip height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist to Hip height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist to Knee height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Crotch height/Inseam</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Size</source>
         <comment>Full measurement name</comment>
-        <translation>Tamaño</translation>
+        <translation type="vanished">Tamaño</translation>
     </message>
+</context>
+<context>
+    <name>MoveDoubleLabel</name>
     <message>
-        <source>Height front neck base point</source>
-        <comment>Full measurement name</comment>
+        <source>move the first dart label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Height base neck side point</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height shoulder point</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height nipple point</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height back angle axilla</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height scapular point</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height under buttock folds</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hips excluding protruding abdomen</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Girth foot instep</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Side waist to floor</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front waist to floor</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arc through groin area</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist to plane seat</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neck to radial point</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neck to third finger</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neck to first line chest circumference</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front waist length</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arc through shoulder joint</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neck to back line chest circumference</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist to neck side</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arc length upper body</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chest width</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Anteroposterior diameter hands</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height clavicular point</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height armhole slash</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Slash shoulder height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth neck</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth neck for shirts</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth chest first</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth chest second</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth chest third</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth waist</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth hips considering protruding abdomen</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half girth hips excluding protruding abdomen</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Girth knee flexed feet</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neck transverse diameter</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Front slash shoulder height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neck to front waist line</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hand vertical diameter</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neck to knee point</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waist to knee</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shoulder height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Head height</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Body position</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arc behind shoulder girdle</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Neck to neck base</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Depth waist first</source>
-        <comment>Full measurement name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Depth waist second</source>
-        <comment>Full measurement name</comment>
+        <source>move the second dart label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveLabel</name>
     <message>
-        <source>Move point label</source>
+        <source>move point label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSPoint</name>
     <message>
-        <source>Move single point</source>
+        <source>move single point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSpline</name>
     <message>
-        <source>Move spline</source>
+        <source>move spline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSplinePath</name>
     <message>
-        <source>Move spline path</source>
+        <source>move spline path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5665,6 +5012,809 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Pattern_making_systems</name>
+    <message>
+        <source>Bunka</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bunka Fashion College</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fundamentals of Garment Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barnfield and Richard</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jo Barnfield and Andrew Richards</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Making Primer</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friendship/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elizabeth Friendship</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morris, K.</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karen Morris</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sewing Lingerie that Fits</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Castro</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lucia Mors de Castro</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking in Practic</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kim &amp; Uh</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Injoo Kim and Mykyung Uh</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apparel Making in Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waugh</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Norah Waugh</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corsets and Crinolines</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grimble</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frances Grimble</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fashions of the Gilded Age</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thornton&apos;s International System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ed. R. L. Shep</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Great War: Styles and Patterns of the 1910s</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hillhouse &amp; Mansfield</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dress Design: Draping and Flat Pattern Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pivnick</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Esther Kaplan Pivnick</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minister &amp; Son</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Complete Guide to Practical Cutting (1853)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strickland</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Strickland</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A Tailoring Manual</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loh &amp; Lewis</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>May Loh and Diehl Lewis</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternless Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morris, F. R.</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F. R. Morris</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ladies Garment Cutting and Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mason</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Mason</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Mason&apos;s Patternmaking Book</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kimata</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>K. Kimata</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Designer</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Master Designer (Chicago, IL)</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kopp</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Draft Basic Patterns</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ekern</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doris Ekern</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slacks Cut-to-Fit for Your Figure</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doyle</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sarah J. Doyle</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sarah&apos;s Key to Pattern Drafting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shelton</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karla J. Shelton</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Design and Sew Jeans</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique magazine (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rohr</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M. Rohr</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Moore</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dorothy Moore</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P25</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P25</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P25</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fukomoto</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sue S. Fukomoto</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International magazine (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erwin</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mabel D. Erwin</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Practical Dress Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gough</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E. L. G. Gough</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Principles of Garment Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allemong</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elizabeth M. Allemong</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>European Cut</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>McCunn</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Donald H. McCunn</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Make Your Own Sewing Patterns</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zarapkar</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zarapkar System of Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kunick</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Philip Kunick</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Handford</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jack Handford</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Davis</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>R. I. Davis</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MacLochlainn</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jason MacLochlainn</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Joseph-Armstrong</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Helen Joseph-Armstrong</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking for Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Supreme System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frederick T. Croonberg</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sugino</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Drafting Vols. I, II, III (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centre Point System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Louis Devere</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Handbook of Practical Cutting on the Centre Point System</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aldrich/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Winifred Aldrich</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric Pattern Cutting for Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aldrich/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric Pattern Cutting for Women&apos;s Wear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kershaw</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gareth Kershaw</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking for Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gilewska</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Teresa Gilewska</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern-Drafting for Fashion: The Basics</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lo</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dennic Chunman Lo</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bray</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Natalie Bray</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Knowles/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lori A. Knowles</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friendship/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Cutting for Men&apos;s Costume</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brown</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P. Clement Brown</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Art in Dress</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mitchell</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jno. J. Mitchell</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P51</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P51</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P51</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eddy</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern and Dress Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Knowles/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>American Garment Cutter</source>
+        <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5744,11 +5894,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Add node</source>
-        <translation>Añadir nodo</translation>
+        <translation type="vanished">Añadir nodo</translation>
     </message>
     <message>
         <source>Move detail</source>
-        <translation>Mover detalle</translation>
+        <translation type="vanished">Mover detalle</translation>
     </message>
     <message>
         <source>mm</source>
@@ -5774,6 +5924,14 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move detail</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5964,7 +6122,11 @@ Quiere guardar los cambios?</translation>
     <name>RenamePP</name>
     <message>
         <source>Rename pattern piece</source>
-        <translation>Renombrar pieza de patrón</translation>
+        <translation type="vanished">Renombrar pieza de patrón</translation>
+    </message>
+    <message>
+        <source>rename pattern piece</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5979,21 +6141,385 @@ Quiere guardar los cambios?</translation>
     <name>SaveDetailOptions</name>
     <message>
         <source>Save detail option</source>
-        <translation>Guardar opción de detalle</translation>
+        <translation type="vanished">Guardar opción de detalle</translation>
+    </message>
+    <message>
+        <source>save detail option</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SaveToolOptions</name>
     <message>
         <source>Save tool option</source>
-        <translation>Herramienta para opción de guardado</translation>
+        <translation type="vanished">Herramienta para opción de guardado</translation>
+    </message>
+    <message>
+        <source>save tool option</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TMainWindow</name>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measuremnts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nombre</translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Fórmula</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <translation type="unfinished">Valor base</translation>
+    </message>
+    <message>
+        <source>In sizes</source>
+        <translation type="unfinished">En tamaños</translation>
+    </message>
+    <message>
+        <source>In heights</source>
+        <translation type="unfinished">En alturas</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished">Detalles</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nombre:</translation>
+    </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Base value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In sizes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In heights:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculated value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation type="unfinished">Ruta:</translation>
+    </message>
+    <message>
+        <source>Path to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show in Explorer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base size value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base height value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Given name:</source>
+        <translation type="unfinished">Nombre:</translation>
+    </message>
+    <message>
+        <source>Family name:</source>
+        <translation type="unfinished">Apellidos:</translation>
+    </message>
+    <message>
+        <source>Birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sex:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window</source>
+        <translation type="unfinished">Ventana</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="unfinished">Medidas</translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gradation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open individual ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Guardar</translation>
+    </message>
+    <message>
+        <source>Save As ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">Sobre &amp;Qt</translation>
+    </message>
+    <message>
+        <source>About Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nuevo</translation>
+    </message>
+    <message>
+        <source>Add known</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open standard ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show information about all known measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Preferencias</translation>
+    </message>
+    <message>
+        <source>untitled %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file already opened in another window.</source>
+        <translation type="unfinished">Este archivo ha sido abierto en otra ventana.</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements (*.vst, *.vit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save file</source>
+        <translation type="unfinished">No se ha guardado archivo</translation>
+    </message>
+    <message>
+        <source>measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit)</source>
+        <translation type="unfinished">Medidas individuales (*.vit)</translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst)</source>
+        <translation type="unfinished">Medidas estándar (*.vst)</translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation type="unfinished">Guardar como</translation>
+    </message>
+    <message>
+        <source>&amp;New Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M_%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Empty field.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished">Error en análisis: %1</translation>
+    </message>
+    <message>
+        <source>Standard measurements</source>
+        <translation type="unfinished">Medidas estándar</translation>
+    </message>
+    <message>
+        <source>Height: </source>
+        <translation type="unfinished">Altura:</translation>
+    </message>
+    <message>
+        <source>Size: </source>
+        <translation type="unfinished">Tamaño:</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Medidas individuales</translation>
+    </message>
+    <message>
+        <source>male</source>
+        <translation type="unfinished">hombre</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <translation type="unfinished">mujer</translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation type="unfinished">Sin título</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsaved changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements have been modified.
+Do you want to save your changes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Empty field</source>
+        <translation type="unfinished">Campo vacío</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valor</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="unfinished">Abrir archivo</translation>
     </message>
 </context>
 <context>
     <name>TableWindow</name>
     <message>
         <source>Create a layout</source>
-        <translation>Crear un diseño</translation>
+        <translation type="vanished">Crear un diseño</translation>
     </message>
     <message>
         <source>toolBar</source>
@@ -6005,7 +6531,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Save layout</source>
-        <translation>Guardar diseño</translation>
+        <translation type="vanished">Guardar diseño</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -6013,122 +6539,131 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Aumentar zoom</translation>
+        <translation type="vanished">Aumentar zoom</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Alejar zoom</translation>
+        <translation type="vanished">Alejar zoom</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation>Sin título</translation>
-    </message>
-    <message>
-        <source>Svg files (*.svg)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PDF files (*.pdf)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Images (*.png)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PS files (*.ps)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>EPS files (*.eps)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Sin título</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Error crítico!!</translation>
-    </message>
-    <message>
-        <source>Wavefront OBJ (*.obj)</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Error crítico!!</translation>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation>Páginas de diseño</translation>
+        <translation type="vanished">Páginas de diseño</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation>Diseño</translation>
+        <translation type="vanished">Diseño</translation>
     </message>
     <message>
-        <source>Main toolbar</source>
+        <source>Edit</source>
+        <translation type="obsolete">Editar</translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="obsolete">Ctrl+S</translation>
+    </message>
+</context>
+<context>
+    <name>TapeConfigDialog</name>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished">Aplicar</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">&amp;Cancelar</translation>
+    </message>
+    <message>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">&amp;Ok</translation>
+    </message>
+    <message>
+        <source>Config Dialog</source>
+        <translation type="unfinished">Preferencias</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Configuración</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Carpetas</translation>
+    </message>
+</context>
+<context>
+    <name>TapeConfigurationPage</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Idioma</translation>
+    </message>
+    <message>
+        <source>GUI language</source>
+        <translation type="unfinished">Idioma de interfaz gráfica de usuario</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File</source>
+        <source>Author:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts</source>
+        <translation type="unfinished">Partes separador decimal</translation>
+    </message>
+    <message>
+        <source>With OS options (%1)</source>
+        <translation type="unfinished">Con las opciones del SO (%1)</translation>
+    </message>
+</context>
+<context>
+    <name>TapePathPage</name>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Abrir Directorio</translation>
+    </message>
+    <message>
+        <source>Path that use Valentina</source>
+        <translation type="unfinished">Directorios que usa Valentina</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Defecto</translation>
     </message>
     <message>
         <source>Edit</source>
         <translation type="unfinished">Editar</translation>
     </message>
     <message>
-        <source>Toolbar print</source>
-        <translation type="unfinished"></translation>
+        <source>Type</source>
+        <translation type="unfinished">Tipo</translation>
     </message>
     <message>
-        <source>&amp;Save As...</source>
-        <translation type="unfinished"></translation>
+        <source>Path</source>
+        <translation type="unfinished">Directorio</translation>
     </message>
     <message>
-        <source>Ctrl+S</source>
-        <translation type="unfinished">Ctrl+S</translation>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Medidas individuales</translation>
     </message>
     <message>
-        <source>Back</source>
-        <translation type="unfinished"></translation>
+        <source>Standard measurements</source>
+        <translation type="unfinished">Medidas estándar</translation>
     </message>
     <message>
-        <source>Back to main window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print pre&amp;view...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Print...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+P</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print to p&amp;df</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print to pdf</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PDF file (*.pdf)</source>
+        <source>Templates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6183,6 +6718,13 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Could not change version.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractPattern</name>
+    <message>
+        <source>Can&apos;t find tool in table.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6401,10 +6943,6 @@ Quiere guardar los cambios?</translation>
 <context>
     <name>VPattern</name>
     <message>
-        <source>Can&apos;t find tool in table.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error no unique id.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6540,6 +7078,26 @@ Quiere guardar los cambios?</translation>
         <source>File error.</source>
         <translation>Error en archivo.</translation>
     </message>
+    <message>
+        <source>Error creating or updating point of intersection arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating point of intersection circles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating true darts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -6571,11 +7129,7 @@ Quiere guardar los cambios?</translation>
     <name>VTableGraphicsView</name>
     <message>
         <source>can&apos;t find detail</source>
-        <translation>No se encuentra detalle</translation>
-    </message>
-    <message>
-        <source>detail found</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">No se encuentra detalle</translation>
     </message>
 </context>
 <context>
@@ -6719,6 +7273,73 @@ Quiere guardar los cambios?</translation>
         <source>Point intersection curve and axis</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>First point</source>
+        <translation type="unfinished">Primer punto</translation>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation type="unfinished">Segundo punto</translation>
+    </message>
+    <message>
+        <source>Arc with given length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>True darts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 1 label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 2 label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from intersection two arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from intersection two circles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VVSTConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Variables</name>
@@ -6744,6 +7365,41 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
         <translation type="unfinished"></translation>
     </message>

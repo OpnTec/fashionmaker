@@ -29,16 +29,14 @@
 #ifndef VTRANSLATEVARS_H
 #define VTRANSLATEVARS_H
 
-#include <QMap>
-#include "../qmuparser/qmutranslation.h"
+#include "vtranslatemeasurements.h"
 
-class VTranslateVars
+class VTranslateVars : public VTranslateMeasurements
 {
 public:
     VTranslateVars(bool osSeparator);
-    ~VTranslateVars();
+    virtual ~VTranslateVars() Q_DECL_OVERRIDE;
 
-    bool MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
@@ -51,12 +49,6 @@ public:
     QString PMSystemAuthor(const QString &code) const;
     QString PMSystemBook(const QString &code) const;
 
-    QString MToUser(const QString &measurement) const;
-    QString MFromUser(const QString &measurement) const;
-    QString MNumber(const QString &measurement) const;
-    QString MFormula(const QString &measurement) const;
-    QString GuiText(const QString &measurement) const;
-    QString Description(const QString &measurement) const;
     QString PostfixOperator(const QString &name) const;
     QString STDescription(const QString &id) const;
 
@@ -65,47 +57,21 @@ public:
 
 private:
     Q_DISABLE_COPY(VTranslateVars)
-    QMap<QString, qmu::QmuTranslation> measurements;
     QMap<QString, qmu::QmuTranslation> PMSystemNames;
     QMap<QString, qmu::QmuTranslation> PMSystemAuthors;
     QMap<QString, qmu::QmuTranslation> PMSystemBooks;
-    QMap<QString, qmu::QmuTranslation> guiTexts;
-    QMap<QString, qmu::QmuTranslation> descriptions;
     QMap<QString, qmu::QmuTranslation> variables;
     QMap<QString, qmu::QmuTranslation> functions;
     QMap<QString, qmu::QmuTranslation> postfixOperators;
     QMap<QString, qmu::QmuTranslation> stDescriptions;
-    QMap<QString, QString> numbers;
-    QMap<QString, QString> formulas;
     bool osSeparator;
 
-    void InitGroupA(); // Direct Height
-    void InitGroupB(); // Direct Width
-    void InitGroupC(); // Indentation
-    void InitGroupD(); // Circumference and Arc
-    void InitGroupE(); // Vertical
-    void InitGroupF(); // Horizontal
-    void InitGroupG(); // Bust
-    void InitGroupH(); // Balance
-    void InitGroupI(); // Arm
-    void InitGroupJ(); // Leg
-    void InitGroupK(); // Crotch and Rise
-    void InitGroupL(); // Hand
-    void InitGroupM(); // Foot
-    void InitGroupN(); // Head
-    void InitGroupO(); // Men & Tailoring
-    void InitGroupP(); // Historical & Specialty
-    void InitGroupQ(); // Patternmaking measurements
-
-    void InitMeasurements();
     void InitPatternMakingSystems();
     void InitVariables();
     void InitFunctions();
     void InitPostfixOperators();
     void InitSTDescriptions();
 
-    void InitMeasurement(const QString &name, const qmu::QmuTranslation &m, const qmu::QmuTranslation &g,
-                         const qmu::QmuTranslation &d, const QString &number, const QString &formula = QString());
     void InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
                     const qmu::QmuTranslation &book);
 

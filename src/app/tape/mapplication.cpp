@@ -184,13 +184,13 @@ void MApplication::LoadTranslation()
     installTranslator(qtxmlTranslator);
 
     QTranslator *appTranslator = new QTranslator(this);
-    appTranslator->load("valentina_" + checkedLocale, translationsPath());
+    bool result = appTranslator->load("valentina_" + checkedLocale, translationsPath());
     installTranslator(appTranslator);
 
     const QString checkedSystem = TapeSettings()->GetPMSystemCode();
 
     QTranslator *pmsTranslator = new QTranslator(this);
-    pmsTranslator->load("measurements_" + checkedSystem + "_" + checkedLocale, translationsPath());
+    result = pmsTranslator->load("measurements_" + checkedSystem + "_" + checkedLocale, translationsPath());
     installTranslator(pmsTranslator);
 
     InitTrVars();//Very important do it after load QM files.
