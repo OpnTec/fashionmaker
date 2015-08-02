@@ -47,6 +47,10 @@ public:
     QString VarToUser(const QString &var) const;
     QString VarFromUser(const QString &var) const;
 
+    QString PMSystemName(const QString &code) const;
+    QString PMSystemAuthor(const QString &code) const;
+    QString PMSystemBook(const QString &code) const;
+
     QString MToUser(const QString &measurement) const;
     QString MFromUser(const QString &measurement) const;
     QString MNumber(const QString &measurement) const;
@@ -62,6 +66,9 @@ public:
 private:
     Q_DISABLE_COPY(VTranslateVars)
     QMap<QString, qmu::QmuTranslation> measurements;
+    QMap<QString, qmu::QmuTranslation> PMSystemNames;
+    QMap<QString, qmu::QmuTranslation> PMSystemAuthors;
+    QMap<QString, qmu::QmuTranslation> PMSystemBooks;
     QMap<QString, qmu::QmuTranslation> guiTexts;
     QMap<QString, qmu::QmuTranslation> descriptions;
     QMap<QString, qmu::QmuTranslation> variables;
@@ -91,6 +98,7 @@ private:
     void InitGroupQ(); // Patternmaking measurements
 
     void InitMeasurements();
+    void InitPatternMakingSystems();
     void InitVariables();
     void InitFunctions();
     void InitPostfixOperators();
@@ -98,6 +106,8 @@ private:
 
     void InitMeasurement(const QString &name, const qmu::QmuTranslation &m, const qmu::QmuTranslation &g,
                          const qmu::QmuTranslation &d, const QString &number, const QString &formula = QString());
+    void InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
+                    const qmu::QmuTranslation &book);
 
     void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
     static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);

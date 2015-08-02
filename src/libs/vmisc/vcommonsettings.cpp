@@ -49,6 +49,7 @@ const QString VCommonSettings::SettingConfigurationAutosaveState       = QString
 const QString VCommonSettings::SettingConfigurationAutosaveTime        = QStringLiteral("configuration/autosave/time");
 const QString VCommonSettings::SettingConfigurationSendReportState  = QStringLiteral("configuration/send_report/state");
 const QString VCommonSettings::SettingConfigurationLocale              = QStringLiteral("configuration/locale");
+const QString VCommonSettings::SettingPMSystemCode                     = QStringLiteral("configuration/pmscode");
 const QString VCommonSettings::SettingConfigurationUnit                = QStringLiteral("configuration/unit");
 const QString VCommonSettings::SettingConfigurationConfirmItemDeletion
                                                                 = QStringLiteral("configuration/confirm_item_deletion");
@@ -159,6 +160,18 @@ QString VCommonSettings::GetLocale() const
 void VCommonSettings::SetLocale(const QString &value)
 {
     setValue(SettingConfigurationLocale, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetPMSystemCode() const
+{
+    return value(SettingPMSystemCode, p0_S).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPMSystemCode(const QString &value)
+{
+    setValue(SettingPMSystemCode, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

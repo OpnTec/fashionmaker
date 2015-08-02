@@ -62,6 +62,9 @@ public:
     QString GetLocale() const;
     void SetLocale(const QString &value);
 
+    QString GetPMSystemCode() const;
+    void SetPMSystemCode(const QString &value);
+
     QString GetUnit() const;
     void SetUnit(const QString &value);
 
@@ -102,6 +105,7 @@ private:
     static const QString SettingConfigurationAutosaveTime;
     static const QString SettingConfigurationSendReportState;
     static const QString SettingConfigurationLocale;
+    static const QString SettingPMSystemCode;
     static const QString SettingConfigurationUnit;
     static const QString SettingConfigurationConfirmItemDeletion;
     static const QString SettingConfigurationToolBarStyle;

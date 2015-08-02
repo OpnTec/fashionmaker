@@ -107,6 +107,8 @@ private slots:
 
     void NewWindow();
 
+    void Preferences();
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;

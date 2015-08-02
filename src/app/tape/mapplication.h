@@ -61,6 +61,7 @@ public:
 #endif
 
     void InitOptions();
+    void LoadTranslation();
 
     virtual const VTranslateVars *TrVars();
     void InitTrVars();

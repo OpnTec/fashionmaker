@@ -8,7 +8,10 @@ SOURCES  += \
     $$PWD/mapplication.cpp \
     $$PWD/dialogs/dialogabouttape.cpp \
     $$PWD/dialogs/dialognewmeasurements.cpp \
-    $$PWD/dialogs/dialogmdatabase.cpp
+    $$PWD/dialogs/dialogmdatabase.cpp \
+    $$PWD/dialogs/tapeconfigdialog.cpp \
+    $$PWD/dialogs/configpages/tapeconfigurationpage.cpp \
+    $$PWD/dialogs/configpages/tapepathpage.cpp
 
 HEADERS  += \
     $$PWD/tmainwindow.h \
@@ -17,7 +20,10 @@ HEADERS  += \
     $$PWD/dialogs/dialogabouttape.h \
     $$PWD/dialogs/dialognewmeasurements.h \
     $$PWD/dialogs/dialogmdatabase.h \
-    $$PWD/version.h
+    $$PWD/version.h \
+    $$PWD/dialogs/tapeconfigdialog.h \
+    $$PWD/dialogs/configpages/tapeconfigurationpage.h \
+    $$PWD/dialogs/configpages/tapepathpage.h
 
 FORMS    += \
     $$PWD/tmainwindow.ui \

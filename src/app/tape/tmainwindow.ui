@@ -595,6 +595,8 @@
     <addaction name="separator"/>
     <addaction name="actionReadOnly"/>
     <addaction name="separator"/>
+    <addaction name="actionPreferences"/>
+    <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
@@ -791,6 +793,11 @@
    </property>
    <property name="toolTip">
     <string>Show information about all known measurement</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
    </property>
   </action>
  </widget>

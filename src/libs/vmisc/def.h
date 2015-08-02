@@ -454,6 +454,66 @@ extern const QString dartWidthShoulder_M; // Q01
 extern const QString dartWidthBust_M;	  // Q02
 extern const QString dartWidthWaist_M;    // Q03
 
+// pattern making systems codes
+extern const QString p0_S;
+extern const QString p1_S;
+extern const QString p2_S;
+extern const QString p3_S;
+extern const QString p4_S;
+extern const QString p5_S;
+extern const QString p6_S;
+extern const QString p7_S;
+extern const QString p8_S;
+extern const QString p9_S;
+extern const QString p10_S;
+extern const QString p11_S;
+extern const QString p12_S;
+extern const QString p13_S;
+extern const QString p14_S;
+extern const QString p15_S;
+extern const QString p16_S;
+extern const QString p17_S;
+extern const QString p18_S;
+extern const QString p19_S;
+extern const QString p20_S;
+extern const QString p21_S;
+extern const QString p22_S;
+extern const QString p23_S;
+extern const QString p24_S;
+extern const QString p25_S;
+extern const QString p26_S;
+extern const QString p27_S;
+extern const QString p28_S;
+extern const QString p29_S;
+extern const QString p30_S;
+extern const QString p31_S;
+extern const QString p32_S;
+extern const QString p33_S;
+extern const QString p34_S;
+extern const QString p35_S;
+extern const QString p36_S;
+extern const QString p37_S;
+extern const QString p38_S;
+extern const QString p39_S;
+extern const QString p40_S;
+extern const QString p41_S;
+extern const QString p42_S;
+extern const QString p43_S;
+extern const QString p44_S;
+extern const QString p45_S;
+extern const QString p46_S;
+extern const QString p47_S;
+extern const QString p48_S;
+extern const QString p49_S;
+extern const QString p50_S;
+extern const QString p51_S;
+extern const QString p52_S;
+extern const QString p53_S;
+extern const QString p54_S;
+
+extern const QString line_;
+extern const QString angleLine_;
+
 // variables name
 extern const QString line_;
 extern const QString angleLine_;

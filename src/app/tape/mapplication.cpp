@@ -97,6 +97,12 @@ MApplication::~MApplication()
         TMainWindow *window = mainWindows.at(i);
         delete window;
     }
+
+    delete trVars;
+    if (not dataBase.isNull())
+    {
+        delete dataBase;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,6 +146,24 @@ void MApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
+    LoadTranslation();
+
+    static const char * GENERIC_ICON_TO_CHECK = "document-open";
+    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
+    {
+       //If there is no default working icon theme then we should
+       //use an icon theme that we provide via a .qrc file
+       //This case happens under Windows and Mac OS X
+       //This does not happen under GNOME or KDE
+       QIcon::setThemeName("win.icon.theme");
+    }
+
+    QResource::registerResource(diagramsPath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::LoadTranslation()
+{
     const QString checkedLocale = TapeSettings()->GetLocale();
     qDebug()<<"Checked locale:"<<checkedLocale;
 
@@ -163,19 +187,13 @@ void MApplication::InitOptions()
     appTranslator->load("valentina_" + checkedLocale, translationsPath());
     installTranslator(appTranslator);
 
+    const QString checkedSystem = TapeSettings()->GetPMSystemCode();
+
+    QTranslator *pmsTranslator = new QTranslator(this);
+    pmsTranslator->load("measurements_" + checkedSystem + "_" + checkedLocale, translationsPath());
+    installTranslator(pmsTranslator);
+
     InitTrVars();//Very important do it after load QM files.
-
-    static const char * GENERIC_ICON_TO_CHECK = "document-open";
-    if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
-    {
-       //If there is no default working icon theme then we should
-       //use an icon theme that we provide via a .qrc file
-       //This case happens under Windows and Mac OS X
-       //This does not happen under GNOME or KDE
-       QIcon::setThemeName("win.icon.theme");
-    }
-
-    QResource::registerResource(diagramsPath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -187,6 +205,11 @@ const VTranslateVars *MApplication::TrVars()
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::InitTrVars()
 {
+    if (trVars != nullptr)
+    {
+        delete trVars;
+        trVars = nullptr;
+    }
     trVars = new VTranslateVars(TapeSettings()->GetOsSeparator());
 }
 
@@ -216,7 +239,7 @@ QString MApplication::translationsPath() const
     }
     else
     {
-        return QApplication::applicationDirPath() + "../../valentina/bin" + trPath;
+        return QApplication::applicationDirPath() + "/../../valentina/bin" + trPath;
     }
 #else
     #ifdef QT_DEBUG
@@ -227,7 +250,7 @@ QString MApplication::translationsPath() const
         }
         else
         {
-            return QApplication::applicationDirPath() + "../../valentina/bin" + trPath;
+            return QApplication::applicationDirPath() + "/../../valentina/bin" + trPath;
         }
     #else
         QDir dir1(QApplication::applicationDirPath() + trPath);
@@ -236,7 +259,7 @@ QString MApplication::translationsPath() const
             return dir1.absolutePath();
         }
 
-        QDir dir2(QApplication::applicationDirPath() + "../../valentina/bin" + trPath);
+        QDir dir2(QApplication::applicationDirPath() + "/../../valentina/bin" + trPath);
         if (dir2.exists())
         {
             return dir2.absolutePath();

@@ -31,6 +31,7 @@
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialognewmeasurements.h"
 #include "dialogs/dialogmdatabase.h"
+#include "dialogs/tapeconfigdialog.h"
 #include "../vpatterndb/calculator.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vvitconverter.h"
@@ -1151,6 +1152,13 @@ void TMainWindow::NewWindow()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::Preferences()
+{
+    TapeConfigDialog dlg(this);
+    dlg.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -1168,6 +1176,7 @@ void TMainWindow::SetupMenu()
     ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
 
     connect(ui->actionReadOnly, &QAction::triggered, this, &TMainWindow::ReadOnly);
+    connect(ui->actionPreferences, &QAction::triggered, this, &TMainWindow::Preferences);
 
     connect(ui->actionQuit, &QAction::triggered, this, &TMainWindow::close);
     ui->actionQuit->setShortcuts(QKeySequence::Quit);

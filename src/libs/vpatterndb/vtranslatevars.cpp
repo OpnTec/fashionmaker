@@ -35,13 +35,22 @@ using namespace qmu;
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateVars::VTranslateVars(bool osSeparator)
-    :measurements(QMap<QString, QmuTranslation>()), guiTexts(QMap<QString, QmuTranslation>()),
-      descriptions(QMap<QString, QmuTranslation>()), variables(QMap<QString, QmuTranslation>()),
-      functions(QMap<QString, QmuTranslation>()), postfixOperators(QMap<QString, QmuTranslation>()),
-      stDescriptions(QMap<QString, QmuTranslation>()), numbers(QMap<QString, QString>()),
-      formulas(QMap<QString, QString>()), osSeparator(osSeparator)
+    :measurements(QMap<QString, QmuTranslation>()),
+      PMSystemNames(QMap<QString, QmuTranslation>()),
+      PMSystemAuthors(QMap<QString, QmuTranslation>()),
+      PMSystemBooks(QMap<QString, QmuTranslation>()),
+      guiTexts(QMap<QString, QmuTranslation>()),
+      descriptions(QMap<QString, QmuTranslation>()),
+      variables(QMap<QString, QmuTranslation>()),
+      functions(QMap<QString, QmuTranslation>()),
+      postfixOperators(QMap<QString, QmuTranslation>()),
+      stDescriptions(QMap<QString, QmuTranslation>()),
+      numbers(QMap<QString, QString>()),
+      formulas(QMap<QString, QString>()),
+      osSeparator(osSeparator)
 {
     InitMeasurements();
+    InitPatternMakingSystems();
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
@@ -72,6 +81,321 @@ void VTranslateVars::InitMeasurements()
     InitGroupO(); // Men & Tailoring
     InitGroupP(); // Historical & Specialty
     InitGroupQ(); // Patternmaking measurements
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTranslateVars::InitPatternMakingSystems()
+{
+    //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
+    //mark such string to translation.
+    QmuTranslation name;
+    QmuTranslation author;
+    QmuTranslation book;
+
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Bunka", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Bunka Fashion College", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Fundamentals of Garment Design", "Book name");
+    InitSystem(p0_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Barnfield and Richard", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Jo Barnfield and Andrew Richards", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern Making Primer", "Book name");
+    InitSystem(p1_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Friendship/Women", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Elizabeth Friendship", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Creating Historical Clothes - Pattern Cutting from "
+                                     "the 16th to the 19th Centuries", "Book name");
+    InitSystem(p2_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Morris, K.", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Karen Morris", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Sewing Lingerie that Fits", "Book name");
+    InitSystem(p3_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Castro", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Lucia Mors de Castro", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Patternmaking in Practic", "Book name");
+    InitSystem(p4_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Kim & Uh", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Injoo Kim and Mykyung Uh", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Apparel Making in Fashion Design", "Book name");
+    InitSystem(p5_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Waugh", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Norah Waugh", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Corsets and Crinolines", "Book name");
+    InitSystem(p6_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Grimble", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Frances Grimble", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Fashions of the Gilded Age", "Book name");
+    InitSystem(p7_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Thornton's International System", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "ed. R. L. Shep", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Great War: Styles and Patterns of the 1910s",
+                                     "Book name");
+    InitSystem(p8_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Hillhouse & Mansfield", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Marion S. Hillhouse and Evelyn A. Mansfield",
+                                       "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Dress Design: Draping and Flat Pattern Making",
+                                     "Book name");
+    InitSystem(p9_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Pivnick", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Esther Kaplan Pivnick", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "How to Design Beautiful Clothes: Designing and "
+                                     "Pattern Making", "Book name");
+    InitSystem(p10_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Minister & Son", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Edward Minister & Son, ed. R. L. Shep",
+                                       "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Complete Guide to Practical Cutting (1853)",
+                                     "Book name");
+    InitSystem(p11_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Strickland", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Gertrude Strickland", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "A Tailoring Manual", "Book name");
+    InitSystem(p12_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Loh & Lewis", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "May Loh and Diehl Lewis", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Patternless Fashion Design", "Book name");
+    InitSystem(p13_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Morris, F. R.", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "F. R. Morris", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Ladies Garment Cutting and Making", "Book name");
+    InitSystem(p14_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Mason", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Gertrude Mason", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Gertrude Mason's Patternmaking Book", "Book name");
+    InitSystem(p15_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Kimata", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "K. Kimata", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "K.Kimata's Simplified Drafting Book for Dressmaking",
+                                     "Book name");
+    InitSystem(p16_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Master Designer", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "The Master Designer (Chicago, IL)", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Master Designer's System of Designing, Cutting and "
+                                     "Grading", "Book name");
+    InitSystem(p17_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Kopp", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, "
+                                       "Lee Gross", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "How to Draft Basic Patterns", "Book name");
+    InitSystem(p18_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Ekern", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Doris Ekern", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Slacks Cut-to-Fit for Your Figure", "Book name");
+    InitSystem(p19_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Doyle", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Sarah J. Doyle", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Sarah's Key to Pattern Drafting", "Book name");
+    InitSystem(p20_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Shelton", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Karla J. Shelton", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Design and Sew Jeans", "Book name");
+    InitSystem(p21_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Lady Boutique", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Lady Boutique", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Lady Boutique magazine (Japan)", "Book name");
+    InitSystem(p22_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Rohr", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "M. Rohr", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern Drafting and Grading: Women's nd Misses' "
+                                     "Garment Design", "Book name");
+    InitSystem(p23_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Moore", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Dorothy Moore", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Dorothy Moore's Pattern Drafting and Dressmaking",
+                                     "Book name");
+    InitSystem(p24_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "system_P25", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "system_P25", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "system_P25", "Book name");
+    InitSystem(p25_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Fukomoto", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Sue S. Fukomoto", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Scientific Pattern Drafting as taught at Style Center "
+                                     "School of Costume Design, Dressmaking and Millinery", "Book name");
+    InitSystem(p26_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Dressmaking International", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Dressmaking International", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Dressmaking International magazine (Japan)",
+                                     "Book name");
+    InitSystem(p27_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Erwin", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Mabel D. Erwin", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Practical Dress Design", "Book name");
+    InitSystem(p28_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Gough", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "E. L. G. Gough", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Principles of Garment Cutting", "Book name");
+    InitSystem(p29_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Allemong", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Elizabeth M. Allemong", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "European Cut", "Book name");
+    InitSystem(p30_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "McCunn", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Donald H. McCunn", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "How to Make Your Own Sewing Patterns", "Book name");
+    InitSystem(p31_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Zarapkar", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Shri K. R. Zarapkar and Shri Arvind K. Zarapkar",
+                                       "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Zarapkar System of Cutting", "Book name");
+    InitSystem(p32_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Kunick", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Philip Kunick", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Sizing, Pattern Construction and Grading for Women's "
+                                     "and Children's Garments", "Book name");
+    InitSystem(p33_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Handford", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Jack Handford", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Professional Patternmaking for Designers: Women's "
+                                     "Wear, Men's Casual Wear", "Book name");
+    InitSystem(p34_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Davis", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "R. I. Davis", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Men's 17th & 18th Century Costume, Cut & Fashion",
+                                     "Book name");
+    InitSystem(p35_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "MacLochlainn", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Jason MacLochlainn", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Victorian Tailor: An Introduction to Period "
+                                     "Tailoring", "Book name");
+    InitSystem(p36_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Joseph-Armstrong", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Helen Joseph-Armstrong", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Patternmaking for Fashion Design", "Book name");
+    InitSystem(p37_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Supreme System", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Frederick T. Croonberg", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Blue Book of Men's Tailoring, Grand Edition of "
+                                     "Supreme System for Producing Mens Garments (1907)", "Book name");
+    InitSystem(p38_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Sugino", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Dressmaking", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern Drafting Vols. I, II, III (Japan)",
+                                     "Book name");
+    InitSystem(p39_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Centre Point System", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Louis Devere", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Handbook of Practical Cutting on the Centre Point "
+                                     "System", "Book name");
+    InitSystem(p40_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Aldrich/Men", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Winifred Aldrich", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Metric Pattern Cutting for Menswear", "Book name");
+    InitSystem(p41_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Aldrich/Women", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Winifred Aldrich", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Metric Pattern Cutting for Women's Wear", "Book name");
+    InitSystem(p42_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Kershaw", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Gareth Kershaw", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Patternmaking for Menswear", "Book name");
+    InitSystem(p43_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Gilewska", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Teresa Gilewska", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern-Drafting for Fashion: The Basics", "Book name");
+    InitSystem(p44_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Lo", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Dennic Chunman Lo", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern Cutting", "Book name");
+    InitSystem(p45_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Bray", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Natalie Bray", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Dress Pattern Designing: The Basic Principles of Cut "
+                                     "and Fit", "Book name");
+    InitSystem(p46_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Knowles/Men", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Lori A. Knowles", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Practical Guide to Patternmaking for Fashion "
+                                     "Designers: Menswear", "Book name");
+    InitSystem(p47_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Friendship/Men", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Elizabeth Friendship", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern Cutting for Men's Costume", "Book name");
+    InitSystem(p48_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Brown", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "P. Clement Brown", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Art in Dress", "Book name");
+    InitSystem(p49_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Mitchell", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Jno. J. Mitchell", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "\"Standard\" Work on Cutting (Men's Garments) 1886: "
+                                     "The Art and Science of Garment Cutting", "Book name");
+    InitSystem(p50_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "system_P51", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "system_P51", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "system_P51", "Book name");
+    InitSystem(p51_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Eddy", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Josephine F. Eddy and Elizabeth C. B. Wiley",
+                                       "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern and Dress Design", "Book name");
+    InitSystem(p52_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Knowles/Women", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Lori A. Knowles", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Practical Guide to Patternmaking for Fashion "
+                                     "Designers: Juniors, Misses, and Women", "Book name");
+    InitSystem(p53_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "American Garment Cutter", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "ed. R. L. Shep", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Great War: Styles and Patterns of the 1910s",
+                                     "Book name");
+    InitSystem(p54_S, name, author, book);
+    //=================================================================================================================
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,6 +475,15 @@ void VTranslateVars::InitMeasurement(const QString &name, const QmuTranslation &
     descriptions.insert(name, d);
     numbers.insert(name, number);
     formulas.insert(name, formula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTranslateVars::InitSystem(const QString &code, const QmuTranslation &name, const QmuTranslation &author,
+                                const QmuTranslation &book)
+{
+    PMSystemNames.insert(code, name);
+    PMSystemAuthors.insert(code, author);
+    PMSystemBooks.insert(code, book);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -385,6 +718,24 @@ QString VTranslateVars::VarFromUser(const QString &var) const
         return newVar;
     }
     return newVar;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PMSystemName(const QString &code) const
+{
+    return PMSystemNames.value(code).translate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PMSystemAuthor(const QString &code) const
+{
+    return PMSystemAuthors.value(code).translate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PMSystemBook(const QString &code) const
+{
+    return PMSystemBooks.value(code).translate();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
