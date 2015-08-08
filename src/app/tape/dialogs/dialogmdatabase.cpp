@@ -35,7 +35,24 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
     :QDialog(parent),
       ui(new Ui::DialogMDataBase),
       selectMode(true),
-      list(list)
+      list(list),
+      groupA(nullptr),
+      groupB(nullptr),
+      groupC(nullptr),
+      groupD(nullptr),
+      groupE(nullptr),
+      groupF(nullptr),
+      groupG(nullptr),
+      groupH(nullptr),
+      groupI(nullptr),
+      groupJ(nullptr),
+      groupK(nullptr),
+      groupL(nullptr),
+      groupM(nullptr),
+      groupN(nullptr),
+      groupO(nullptr),
+      groupP(nullptr),
+      groupQ(nullptr)
 {
     ui->setupUi(this);
     InitDataBase(list);
@@ -51,7 +68,24 @@ DialogMDataBase::DialogMDataBase(QWidget *parent)
     :QDialog(parent),
       ui(new Ui::DialogMDataBase),
       selectMode(false),
-      list()
+      list(),
+      groupA(nullptr),
+      groupB(nullptr),
+      groupC(nullptr),
+      groupD(nullptr),
+      groupE(nullptr),
+      groupF(nullptr),
+      groupG(nullptr),
+      groupH(nullptr),
+      groupI(nullptr),
+      groupJ(nullptr),
+      groupK(nullptr),
+      groupL(nullptr),
+      groupM(nullptr),
+      groupN(nullptr),
+      groupO(nullptr),
+      groupP(nullptr),
+      groupQ(nullptr)
 
 {
     ui->setupUi(this);
@@ -92,6 +126,43 @@ QStringList DialogMDataBase::GetNewNames() const
     {
         return QStringList();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::RetranslateGroups()
+{
+    RetranslateGroup(groupA, "A. " + tr("Direct Height", "Measurement section"),              ListGroupA());
+    RetranslateGroup(groupB, "B. " + tr("Direct Width", "Measurement section"),               ListGroupB());
+    RetranslateGroup(groupC, "C. " + tr("Indentation", "Measurement section"),                ListGroupC());
+    RetranslateGroup(groupD, "D. " + tr("Circumference and Arc", "Measurement section"),      ListGroupD());
+    RetranslateGroup(groupE, "E. " + tr("Vertical", "Measurement section"),                   ListGroupE());
+    RetranslateGroup(groupF, "F. " + tr("Horizontal", "Measurement section"),                 ListGroupF());
+    RetranslateGroup(groupG, "G. " + tr("Bust", "Measurement section"),                       ListGroupG());
+    RetranslateGroup(groupH, "H. " + tr("Balance", "Measurement section"),                    ListGroupH());
+    RetranslateGroup(groupI, "I. " + tr("Arm", "Measurement section"),                        ListGroupI());
+    RetranslateGroup(groupJ, "J. " + tr("Leg", "Measurement section"),                        ListGroupJ());
+    RetranslateGroup(groupK, "K. " + tr("Crotch and Rise", "Measurement section"),            ListGroupK());
+    RetranslateGroup(groupL, "L. " + tr("Hand", "Measurement section"),                       ListGroupL());
+    RetranslateGroup(groupM, "M. " + tr("Foot", "Measurement section"),                       ListGroupM());
+    RetranslateGroup(groupN, "N. " + tr("Head", "Measurement section"),                       ListGroupN());
+    RetranslateGroup(groupO, "O. " + tr("Men & Tailoring", "Measurement section"),            ListGroupO());
+    RetranslateGroup(groupP, "P. " + tr("Historical & Specialty", "Measurement section"),     ListGroupP());
+    RetranslateGroup(groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ());
+
+    ShowDescription(ui->treeWidget->currentIndex(), 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+    }
+
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,6 +231,12 @@ void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
         return;
     }
 
+    if (item == nullptr)
+    {
+        ui->textEdit->clear();
+        return;
+    }
+
     if (item->childCount() != 0)
     {
         ui->textEdit->clear();
@@ -186,426 +263,57 @@ void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitDataBase(const QStringList &list)
 {
-    InitGroupA(list);
-    InitGroupB(list);
-    InitGroupC(list);
-    InitGroupD(list);
-    InitGroupE(list);
-    InitGroupF(list);
-    InitGroupG(list);
-    InitGroupH(list);
-    InitGroupI(list);
-    InitGroupJ(list);
-    InitGroupK(list);
-    InitGroupL(list);
-    InitGroupM(list);
-    InitGroupN(list);
-    InitGroupO(list);
-    InitGroupP(list);
-    InitGroupQ(list);
+    InitGroup(groupA, "A. " + tr("Direct Height", "Measurement section"), ListGroupA(), list);
+    InitGroup(groupB, "B. " + tr("Direct Width", "Measurement section"), ListGroupB(), list);
+    InitGroup(groupC, "C. " + tr("Indentation", "Measurement section"), ListGroupC(), list);
+    InitGroup(groupD, "D. " + tr("Circumference and Arc", "Measurement section"), ListGroupD(), list);
+    InitGroup(groupE, "E. " + tr("Vertical", "Measurement section"), ListGroupE(), list);
+    InitGroup(groupF, "F. " + tr("Horizontal", "Measurement section"), ListGroupF(), list);
+    InitGroup(groupG, "G. " + tr("Bust", "Measurement section"), ListGroupG(), list);
+    InitGroup(groupH, "H. " + tr("Balance", "Measurement section"), ListGroupH(), list);
+    InitGroup(groupI, "I. " + tr("Arm", "Measurement section"), ListGroupI(), list);
+    InitGroup(groupJ, "J. " + tr("Leg", "Measurement section"), ListGroupJ(), list);
+    InitGroup(groupK, "K. " + tr("Crotch and Rise", "Measurement section"), ListGroupK(), list);
+    InitGroup(groupL, "L. " + tr("Hand", "Measurement section"), ListGroupL(), list);
+    InitGroup(groupM, "M. " + tr("Foot", "Measurement section"), ListGroupM(), list);
+    InitGroup(groupN, "N. " + tr("Head", "Measurement section"), ListGroupN(), list);
+    InitGroup(groupO, "O. " + tr("Men & Tailoring", "Measurement section"), ListGroupO(), list);
+    InitGroup(groupP, "P. " + tr("Historical & Specialty", "Measurement section"), ListGroupP(), list);
+    InitGroup(groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ(), list);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitDataBase()
 {
-    InitGroupA();
-    InitGroupB();
-    InitGroupC();
-    InitGroupD();
-    InitGroupE();
-    InitGroupF();
-    InitGroupG();
-    InitGroupH();
-    InitGroupI();
-    InitGroupJ();
-    InitGroupK();
-    InitGroupL();
-    InitGroupM();
-    InitGroupN();
-    InitGroupO();
-    InitGroupP();
-    InitGroupQ();
+    InitGroup(groupA, "A. " + tr("Direct Height", "Measurement section"), ListGroupA());
+    InitGroup(groupB, "B. " + tr("Direct Width", "Measurement section"), ListGroupB());
+    InitGroup(groupC, "C. " + tr("Indentation", "Measurement section"), ListGroupC());
+    InitGroup(groupD, "D. " + tr("Circumference and Arc", "Measurement section"), ListGroupD());
+    InitGroup(groupE, "E. " + tr("Vertical", "Measurement section"), ListGroupE());
+    InitGroup(groupF, "F. " + tr("Horizontal", "Measurement section"), ListGroupF());
+    InitGroup(groupG, "G. " + tr("Bust", "Measurement section"), ListGroupG());
+    InitGroup(groupH, "H. " + tr("Balance", "Measurement section"), ListGroupH());
+    InitGroup(groupI, "I. " + tr("Arm", "Measurement section"), ListGroupI());
+    InitGroup(groupJ, "J. " + tr("Leg", "Measurement section"), ListGroupJ());
+    InitGroup(groupK, "K. " + tr("Crotch and Rise", "Measurement section"), ListGroupK());
+    InitGroup(groupL, "L. " + tr("Hand", "Measurement section"), ListGroupL());
+    InitGroup(groupM, "M. " + tr("Foot", "Measurement section"), ListGroupM());
+    InitGroup(groupN, "N. " + tr("Head", "Measurement section"), ListGroupN());
+    InitGroup(groupO, "O. " + tr("Men & Tailoring", "Measurement section"), ListGroupO());
+    InitGroup(groupP, "P. " + tr("Historical & Specialty", "Measurement section"), ListGroupP());
+    InitGroup(groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupA(const QStringList &list)
+void DialogMDataBase::InitGroup(QTreeWidgetItem *group, const QString &groupName, const QStringList &mList,
+                                const QStringList &list)
 {
-    QTreeWidgetItem *group = AddGroup("A. " + tr("Direct Height", "Measurement section"));
+    group = AddGroup(groupName);
 
-    AddMeasurement(group, height_M, list);                // A01
-    AddMeasurement(group, heightNeckBack_M, list);        // A02
-    AddMeasurement(group, heightScapula_M, list);         // A03
-    AddMeasurement(group, heightArmpit_M, list);          // A04
-    AddMeasurement(group, heightWaistSide_M, list);       // A05
-    AddMeasurement(group, heightHip_M, list);             // A06
-    AddMeasurement(group, heightGlutealFold_M, list);     // A07
-    AddMeasurement(group, heightKnee_M, list);            // A08
-    AddMeasurement(group, heightCalf_M, list);            // A09
-    AddMeasurement(group, heightAnkleHigh_M, list);       // A10
-    AddMeasurement(group, heightAnkle_M, list);           // A11
-    AddMeasurement(group, heightHighhip_M, list);         // A12
-    AddMeasurement(group, heightWaistFront_M, list);      // A13
-    AddMeasurement(group, heightBustpoint_M, list);       // A14
-    AddMeasurement(group, heightShoulderTip_M, list);     // A15
-    AddMeasurement(group, heightNeckFront_M, list);       // A16
-    AddMeasurement(group, heightNeckSide_M, list);        // A17
-    AddMeasurement(group, heightNeckBackToKnee_M, list);  // A18
-    AddMeasurement(group, heightWaistSideToKnee_M, list); // A19
-    AddMeasurement(group, heightWaistSideToHip_M, list);  // A20
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupB(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("B. " + tr("Direct Width", "Measurement section"));
-
-    AddMeasurement(group, widthShoulder_M, list);     // B01
-    AddMeasurement(group, widthBust_M, list);         // B02
-    AddMeasurement(group, widthWaist_M, list);        // B03
-    AddMeasurement(group, widthHip_M, list);          // B04
-    AddMeasurement(group, widthAbdomenToHip_M, list); // B05
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupC(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("C. " + tr("Indentation", "Measurement section"));
-
-    AddMeasurement(group, indentNeckBack_M, list);  // C01
-    AddMeasurement(group, indentWaistBack_M, list); // C02
-    AddMeasurement(group, indentAnkleHigh_M, list); // C03
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupD(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("D. " + tr("Circumference and Arc", "Measurement section"));
-
-    AddMeasurement(group, neckMidCirc_M, list);        // D01
-    AddMeasurement(group, neckCirc_M, list);           // D02
-    AddMeasurement(group, highbustCirc_M, list);       // D03
-    AddMeasurement(group, bustCirc_M, list);           // D04
-    AddMeasurement(group, lowbustCirc_M, list);        // D05
-    AddMeasurement(group, ribCirc_M, list);            // D06
-    AddMeasurement(group, waistCirc_M, list);          // D07
-    AddMeasurement(group, highhipCirc_M, list);        // D08
-    AddMeasurement(group, hipCirc_M, list);            // D09
-    AddMeasurement(group, neckArcF_M, list);           // D10
-    AddMeasurement(group, highbustArcF_M, list);       // D11
-    AddMeasurement(group, bustArcF_M, list);           // D12
-    AddMeasurement(group, lowbustArcF_M, list);        // D13
-    AddMeasurement(group, ribArcF_M, list);            // D14
-    AddMeasurement(group, waistArcF_M, list);          // D15
-    AddMeasurement(group, highhipArcF_M, list);        // D16
-    AddMeasurement(group, hipArcF_M, list);            // D17
-    AddMeasurement(group, neckArcB_M, list);           // D18
-    AddMeasurement(group, highbustArcB_M, list);       // D19
-    AddMeasurement(group, bustArcB_M, list);           // D20
-    AddMeasurement(group, lowbustArcB_M, list);        // D21
-    AddMeasurement(group, ribArcB_M, list);            // D22
-    AddMeasurement(group, waistArcB_M, list);          // D23
-    AddMeasurement(group, highhipArcB_M, list);        // D24
-    AddMeasurement(group, hipArcB_M, list);            // D25
-    AddMeasurement(group, neckArcHalfF_M, list);       // D26
-    AddMeasurement(group, highbustArcHalfF_M, list);   // D27
-    AddMeasurement(group, bustArcHalfF_M, list);       // D28
-    AddMeasurement(group, lowbustArcHalfF_M, list);    // D29
-    AddMeasurement(group, ribArcHalfF_M, list);        // D30
-    AddMeasurement(group, waistArcHalfF_M, list);      // D31
-    AddMeasurement(group, highhipArcHalfF_M, list);    // D32
-    AddMeasurement(group, hipArcHalfF_M, list);        // D33
-    AddMeasurement(group, neckArcHalfB_M, list);       // D34
-    AddMeasurement(group, highbustArcHalfB_M, list);   // D35
-    AddMeasurement(group, bustArcHalfB_M, list);       // D36
-    AddMeasurement(group, lowbustArcHalfB_M, list);    // D37
-    AddMeasurement(group, ribArcHalfB_M, list);        // D38
-    AddMeasurement(group, waistArcHalfB_M, list);      // D39
-    AddMeasurement(group, highhipArcHalfB_M, list);    // D40
-    AddMeasurement(group, hipArcHalfB_M, list);        // D41
-    AddMeasurement(group, hipWithAbdomenArcF_M, list); // D42
-    AddMeasurement(group, bodyArmfoldCirc_M, list);    // D43
-    AddMeasurement(group, bodyBustCirc_M, list);       // D44
-    AddMeasurement(group, bodyTorsoCirc_M, list);      // D45
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupE(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("E. " + tr("Vertical", "Measurement section"));
-
-    AddMeasurement(group, neckFrontToWaistF_M, list);             // E01
-    AddMeasurement(group, neckFrontToWaistFlatF_M, list);         // E02
-    AddMeasurement(group, armpitToWaistSide_M, list);             // E03
-    AddMeasurement(group, shoulderTipToWaistSideF_M, list);       // E04
-    AddMeasurement(group, neckSideToWaistF_M, list);              // E05
-    AddMeasurement(group, neckSideToWaistBustpointF_M, list);     // E06
-    AddMeasurement(group, shoulderTipToWaistSideB_M, list);       // E07
-    AddMeasurement(group, neckSideToWaistB_M, list);              // E08
-    AddMeasurement(group, neckBackToWaistB_M, list);              // E09
-    AddMeasurement(group, neckSideToWaistBladepointB_M, list);    // E10
-    AddMeasurement(group, shoulderTipToArmfoldF_M, list);         // E11
-    AddMeasurement(group, neckSideToBustF_M, list);               // E12
-    AddMeasurement(group, neckSideToHighbustF_M, list);           // E13
-    AddMeasurement(group, shoulderCenterToHighbustF_M, list);     // E14
-    AddMeasurement(group, neckFrontToHighbustF_M, list);          // E15
-    AddMeasurement(group, neckFrontToBustF_M, list);              // E16
-    AddMeasurement(group, lowbustToWaistF_M, list);               // E17
-    AddMeasurement(group, shoulderTipToArmfoldB_M, list);         // E18
-    AddMeasurement(group, neckSideToBustB_M, list);               // E19
-    AddMeasurement(group, neckSideToHighbustB_M, list);           // E20
-    AddMeasurement(group, shoulderCenterToHighbustB_M, list);     // E21
-    AddMeasurement(group, neckBackToHighbustB_M, list);           // E22
-    AddMeasurement(group, neckBackToBustB_M, list);               // E23
-    AddMeasurement(group, lowbustToWaistB_M, list);               // E24
-    AddMeasurement(group, waistToHighhipF_M, list);               // E25
-    AddMeasurement(group, waistToHipF_M, list);                   // E26
-    AddMeasurement(group, waistToHighhipSide_M, list);            // E27
-    AddMeasurement(group, waistToHighhipB_M, list);               // E28
-    AddMeasurement(group, waistToHipB_M, list);                   // E29
-    AddMeasurement(group, waistToHipSide_M, list);                // E30
-    AddMeasurement(group, shoulderSlopeNeckSideLength_M, list);   // E31
-    AddMeasurement(group, shoulderSlopeNeckSideAngle_M, list);    // E32
-    AddMeasurement(group, shoulderSlopeNeckBackHeight_M, list);   // E33
-    AddMeasurement(group, shoulderSlopeNeckBackAngle_M, list);    // E34
-    AddMeasurement(group, shoulderSlopeShoulderTipAngle_M, list); // E35
-    AddMeasurement(group, highbustToWaistF_M, list);              // E36
-    AddMeasurement(group, highbustToWaistB_M, list);              // E37
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupF(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("F." + tr("Horizontal", "Measurement section"));
-
-    AddMeasurement(group, shoulderLength_M, list);                // F01
-    AddMeasurement(group, shoulderWidthF_M, list);                // F02
-    AddMeasurement(group, acrossChestF_M, list);                  // F03
-    AddMeasurement(group, armfoldToArmfoldF_M, list);             // F04
-    AddMeasurement(group, shoulderWidthB_M, list);                // F05
-    AddMeasurement(group, acrossBackB_M, list);                   // F06
-    AddMeasurement(group, armfoldToArmfoldB_M, list);             // F07
-    AddMeasurement(group, shoulderTipToShoulderTipHalfF_M, list); // F08
-    AddMeasurement(group, acrossChestHalfF_M, list);              // F09
-    AddMeasurement(group, shoulderTipToShoulderTipHalfB_M, list); // F10
-    AddMeasurement(group, acrossBackHalfB_M, list);               // F11
-    AddMeasurement(group, neckFrontToShoulderTipF_M, list);       // F12
-    AddMeasurement(group, neckBackToShoulderTipB_M, list);        // F13
-    AddMeasurement(group, neckWidth_M, list);                     // F14
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupG(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("G. " + tr("Bust", "Measurement section"));
-
-    AddMeasurement(group, bustpointToBustpoint_M, list);       // G01
-    AddMeasurement(group, bustpointToNeckSide_M, list);        // G02
-    AddMeasurement(group, bustpointToLowbust_M, list);         // G03
-    AddMeasurement(group, bustpointToWaist_M, list);           // G04
-    AddMeasurement(group, bustpointToBustpointHalf_M, list);   // G05
-    AddMeasurement(group, bustpointToBustpointHalter_M, list); // G06
-    AddMeasurement(group, bustpointToShoulderTip_M, list);     // G07
-    AddMeasurement(group, bustpointToWaistFront_M, list);      // G08
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupH(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("H. " + tr("Balance", "Measurement section"));
-
-    AddMeasurement(group, shoulderTipToWaistFront_M, list); // H01
-    AddMeasurement(group, neckFrontToWaistSide_M, list);    // H02
-    AddMeasurement(group, neckSideToWaistSideF_M, list);    // H03
-    AddMeasurement(group, neckSideToArmfoldF_M, list);      // H04
-    AddMeasurement(group, neckSideToArmpitF_M, list);       // H05
-    AddMeasurement(group, neckSideToBustSideF_M, list);     // H06
-    AddMeasurement(group, shoulderTipToWaistBack_M, list);  // H07
-    AddMeasurement(group, neckBackToWaistSide_M, list);     // H08
-    AddMeasurement(group, neckSideToWaistSideB_M, list);    // H09
-    AddMeasurement(group, neckSideToArmfoldB_M, list);      // H10
-    AddMeasurement(group, neckSideToArmpitB_M, list);       // H11
-    AddMeasurement(group, neckSideToBustSideB_M, list);     // H12
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupI(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("I. " + tr("Arm", "Measurement section"));
-
-    AddMeasurement(group, armShoulderTipToWristBent_M, list);   // I01
-    AddMeasurement(group, armShoulderTipToElbowBent_M, list);   // I02
-    AddMeasurement(group, armElbowToWristBent_M, list);         // I03
-    AddMeasurement(group, armElbowCircBent_M, list);            // I04
-    AddMeasurement(group, armShoulderTipToWrist_M, list);       // I05
-    AddMeasurement(group, armShoulderTipToElbow_M, list);       // I06
-    AddMeasurement(group, armElbowToWrist_M, list);             // I07
-    AddMeasurement(group, armArmpitToWrist_M, list);            // I08
-    AddMeasurement(group, armArmpitToElbow_M, list);            // I09
-    AddMeasurement(group, armElbowToWristInside_M, list);       // I10
-    AddMeasurement(group, armUpperCirc_M, list);                // I11
-    AddMeasurement(group, armAboveElbowCirc_M, list);           // I12
-    AddMeasurement(group, armElbowCirc_M, list);                // I13
-    AddMeasurement(group, armLowerCirc_M, list);                // I14
-    AddMeasurement(group, armWristCirc_M, list);                // I15
-    AddMeasurement(group, armShoulderTipToArmfoldLine_M, list); // I16
-    AddMeasurement(group, armscyeCirc_M, list);                 // I17
-    AddMeasurement(group, armscyeLength_M, list);               // I18
-    AddMeasurement(group, armscyeWidth_M, list);                // I19
-    AddMeasurement(group, armNeckSideToFingerTip_M, list);      // I20
-    AddMeasurement(group, armNeckSideToWrist_M, list);          // I21
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupJ(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("J. " + tr("Leg", "Measurement section"));
-
-    AddMeasurement(group, legCrotchToFloor_M, list);    // J01
-    AddMeasurement(group, legWaistSideToFloor_M, list); // J02
-    AddMeasurement(group, legWaistSideToKnee_M, list);  // J03
-    AddMeasurement(group, legThighUpperCirc_M, list);	// J04
-    AddMeasurement(group, legThighMidCirc_M, list);     // J05
-    AddMeasurement(group, legKneeCirc_M, list);	        // J06
-    AddMeasurement(group, legKneeSmallCirc_M, list);    // J07
-    AddMeasurement(group, legCalfCirc_M, list);	        // J08
-    AddMeasurement(group, legAnkleHighCirc_M, list);    // J09
-    AddMeasurement(group, legAnkleCirc_M, list);        // J10
-    AddMeasurement(group, legKneeCircBent_M, list);	    // J11
-    AddMeasurement(group, legAnkleDiagCirc_M, list);    // J12
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupK(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("K. " + tr("Crotch and Rise", "Measurement section"));
-
-    AddMeasurement(group, crotchLength_M, list);   // K01
-    AddMeasurement(group, crotchLengthB_M, list);  // K02
-    AddMeasurement(group, crotchLengthF_M, list);  // K03
-    AddMeasurement(group, riseLengthSide_M, list); // K04
-    AddMeasurement(group, riseLengthDiag_M, list); // K05
-    AddMeasurement(group, riseLengthB_M, list);    // K06
-    AddMeasurement(group, riseLengthF_M, list);    // K07
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupL(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("L. " + tr("Hand", "Measurement section"));
-
-    AddMeasurement(group, handPalmLength_M, list); // L01
-    AddMeasurement(group, handLength_M, list);     // L02
-    AddMeasurement(group, handPalmWidth_M, list);  // L03
-    AddMeasurement(group, handPalmCirc_M, list);   // L04
-    AddMeasurement(group, handCirc_M, list);	   // L05
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupM(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("M. " + tr("Foot", "Measurement section"));
-
-    AddMeasurement(group, footWidth_M, list);      // M01
-    AddMeasurement(group, footLength_M, list);     // M02
-    AddMeasurement(group, footCirc_M, list);       // M03
-    AddMeasurement(group, footInstepCirc_M, list); // M04
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupN(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("N. " + tr("Head", "Measurement section"));
-
-    AddMeasurement(group, headCirc_M, list);	        // N01
-    AddMeasurement(group, headLength_M, list);          // N02
-    AddMeasurement(group, headDepth_M, list);	        // N03
-    AddMeasurement(group, headWidth_M, list);	        // N04
-    AddMeasurement(group, headCrownToNeckBack_M, list); // N05
-    AddMeasurement(group, headChinToNeckBack_M, list);  // N06
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupO(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("O. " + tr("Men & Tailoring", "Measurement section"));
-
-    AddMeasurement(group, neckBackToWaistFront_M, list);	        // O01
-    AddMeasurement(group, waistToWaistHalter_M, list);	            // O02
-    AddMeasurement(group, waistNaturalCirc_M, list);	            // O03
-    AddMeasurement(group, waistNaturalArcF_M, list);                // O04
-    AddMeasurement(group, waistNaturalArcB_M, list);                // O05
-    AddMeasurement(group, waistToNaturalWaistF_M, list);            // O06
-    AddMeasurement(group, waistToNaturalWaistB_M, list);            // O07
-    AddMeasurement(group, armNeckBackToElbowBent_M, list);          // O08
-    AddMeasurement(group, armNeckBackToWristBent_M, list);          // O09
-    AddMeasurement(group, armNeckSideToElbowBent_M, list);	        // O10
-    AddMeasurement(group, armNeckSideToWristBent_M, list);	        // O11
-    AddMeasurement(group, armAcrossBackCenterToElbowBent_M, list);  // O12
-    AddMeasurement(group, armAcrossBackCenterToWristBent_M, list);  // O13
-    AddMeasurement(group, armArmscyeBackCenterToWristBent_M, list); // O14
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupP(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("P. " + tr("Historical & Specialty", "Measurement section"));
-
-    AddMeasurement(group, armfoldToArmfoldBust_M, list);                             // P01
-    AddMeasurement(group, armfoldToBustFront_M, list);	                             // P02
-    AddMeasurement(group, neckBackToBustFront_M, list);	                             // P03
-    AddMeasurement(group, neckBackToArmfoldFront_M, list);	                         // P04
-    AddMeasurement(group, neckBackToArmfoldFrontToWaistSide_M, list);                // P05
-    AddMeasurement(group, highbustBackOverShoulderToArmfoldFront_M, list);           // P06
-    AddMeasurement(group, highbustBackOverShoulderToWaistFront_M, list);             // P07
-    AddMeasurement(group, neckBackToArmfoldFrontToNeckBack_M, list);                 // P08
-    AddMeasurement(group, acrossBackCenterToArmfoldFrontToAcrossBackCenter_M, list); // P09
-    AddMeasurement(group, neckBackToArmfoldFrontToHighbustBack_M, list);             // P10
-    AddMeasurement(group, highbustBOverShoulderToHighbustF_M, list);	             // P11
-    AddMeasurement(group, armscyeArc_M, list);	                                     // P12
-
-    ui->treeWidget->setItemExpanded(group, true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitGroupQ(const QStringList &list)
-{
-    QTreeWidgetItem *group = AddGroup("Q. " + tr("Patternmaking measurements", "Measurement section"));
-
-    AddMeasurement(group, dartWidthShoulder_M, list); // Q01
-    AddMeasurement(group, dartWidthBust_M, list);	  // Q02
-    AddMeasurement(group, dartWidthWaist_M, list);    // Q03
-
-    ui->treeWidget->setItemExpanded(group, true);
+    for (int i=0; i < mList.size(); ++i)
+    {
+        AddMeasurement(group, mList.at(i), list);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1526,4 +1234,26 @@ void DialogMDataBase::ReadSettings()
 void DialogMDataBase::WriteSettings()
 {
     qApp->TapeSettings()->SetDataBaseGeometry(saveGeometry());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::RetranslateGroup(QTreeWidgetItem *group, const QString &groupText, const QStringList &list)
+{
+    group->setText(0, groupText);
+    group->setToolTip(0, groupText);
+
+    for (int i=0; i<list.size(); ++i)
+    {
+        RetranslateMeasurement(group, i, list.at(i));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name)
+{
+    const QString text = qApp->TrVars()->MNumber(name) + ". " + qApp->TrVars()->MToUser(name);
+
+    QTreeWidgetItem *m = group->child(index);
+    m->setText(0, text);
+    m->setToolTip(0, text);
 }

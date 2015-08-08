@@ -44,7 +44,11 @@ MApplication::MApplication(int &argc, char **argv)
       mainWindows(),
       localServer(nullptr),
       trVars(nullptr),
-      dataBase(QPointer<DialogMDataBase>())
+      dataBase(QPointer<DialogMDataBase>()),
+      qtTranslator(nullptr),
+      qtxmlTranslator(nullptr),
+      appTranslator(nullptr),
+      pmsTranslator(nullptr)
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
     setApplicationName(VER_INTERNALNAME_STR);
@@ -167,7 +171,9 @@ void MApplication::LoadTranslation()
     const QString checkedLocale = TapeSettings()->GetLocale();
     qDebug()<<"Checked locale:"<<checkedLocale;
 
-    QTranslator *qtTranslator = new QTranslator(this);
+    ClearTranslation();
+
+    qtTranslator = new QTranslator(this);
 #if defined(Q_OS_WIN)
     qtTranslator->load("qt_" + checkedLocale, translationsPath());
 #else
@@ -175,7 +181,7 @@ void MApplication::LoadTranslation()
 #endif
     installTranslator(qtTranslator);
 
-    QTranslator *qtxmlTranslator = new QTranslator(this);
+    qtxmlTranslator = new QTranslator(this);
 #if defined(Q_OS_WIN)
     qtxmlTranslator->load("qtxmlpatterns_" + checkedLocale, translationsPath());
 #else
@@ -183,13 +189,13 @@ void MApplication::LoadTranslation()
 #endif
     installTranslator(qtxmlTranslator);
 
-    QTranslator *appTranslator = new QTranslator(this);
+    appTranslator = new QTranslator(this);
     bool result = appTranslator->load("valentina_" + checkedLocale, translationsPath());
     installTranslator(appTranslator);
 
     const QString checkedSystem = TapeSettings()->GetPMSystemCode();
 
-    QTranslator *pmsTranslator = new QTranslator(this);
+    pmsTranslator = new QTranslator(this);
     result = pmsTranslator->load("measurements_" + checkedSystem + "_" + checkedLocale, translationsPath());
     installTranslator(pmsTranslator);
 
@@ -207,10 +213,12 @@ void MApplication::InitTrVars()
 {
     if (trVars != nullptr)
     {
-        delete trVars;
-        trVars = nullptr;
+        trVars->Retranslate();
     }
-    trVars = new VTranslateVars(TapeSettings()->GetOsSeparator());
+    else
+    {
+        trVars = new VTranslateVars(TapeSettings()->GetOsSeparator());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,6 +340,25 @@ void MApplication::ShowDataBase()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MApplication::RetranslateGroups()
+{
+    if (not dataBase.isNull())
+    {
+        dataBase->RetranslateGroups();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::RetranslateTables()
+{
+    QList<TMainWindow*> list = MainWindows();
+    for (int i=0; i < list.size(); ++i)
+    {
+        list.at(i)->RetranslateTable();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_WS_MAC)
 bool MApplication::event(QEvent* event)
 {
@@ -408,5 +435,37 @@ void MApplication::Clean()
         {
             mainWindows.removeAt(i);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ClearTranslation()
+{
+    if (qtTranslator != nullptr)
+    {
+        removeTranslator(qtTranslator);
+        delete qtTranslator;
+        qtTranslator = nullptr;
+    }
+
+    if (qtxmlTranslator != nullptr)
+    {
+        removeTranslator(qtxmlTranslator);
+        delete qtxmlTranslator;
+        qtxmlTranslator = nullptr;
+    }
+
+    if (appTranslator != nullptr)
+    {
+        removeTranslator(appTranslator);
+        delete appTranslator;
+        appTranslator = nullptr;
+    }
+
+    if (pmsTranslator != nullptr)
+    {
+        removeTranslator(pmsTranslator);
+        delete pmsTranslator;
+        pmsTranslator = nullptr;
     }
 }

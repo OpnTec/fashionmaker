@@ -923,4 +923,24 @@ QString VTranslateVars::FormulaToUser(const QString &formula) const
     return newFormula;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VTranslateVars::Retranslate()
+{
+    VTranslateMeasurements::Retranslate();
+
+    PMSystemNames.clear();
+    PMSystemAuthors.clear();
+    PMSystemBooks.clear();
+    variables.clear();
+    functions.clear();
+    postfixOperators.clear();
+    stDescriptions.clear();
+
+    InitPatternMakingSystems();
+    InitVariables();
+    InitFunctions();
+    InitPostfixOperators();
+    InitSTDescriptions();
+}
+
 

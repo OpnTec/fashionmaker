@@ -51,6 +51,9 @@ public:
     int BaseSize() const;
     int BaseHeight() const;
 
+protected:
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+
 private slots:
     void CurrentTypeChanged(int index);
     void CurrentUnitChanged(int index);

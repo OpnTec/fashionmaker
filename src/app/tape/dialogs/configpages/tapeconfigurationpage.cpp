@@ -57,7 +57,13 @@ TapeConfigurationPage::TapeConfigurationPage(QWidget *parent)
       askPointDeletionCheck(nullptr),
       toolBarStyleCheck(nullptr),
       systemAuthorValueLabel(nullptr),
-      systemBookValueLabel(nullptr)
+      systemBookValueLabel(nullptr),
+      langGroup(nullptr),
+      guiLabel(nullptr),
+      systemLabel(nullptr),
+      systemAuthorLabel(nullptr),
+      systemBookLabel(nullptr),
+      separatorLabel(nullptr)
 {
     QGroupBox *langGroup = LangGroup();
 
@@ -83,6 +89,10 @@ void TapeConfigurationPage::Apply()
         systemChanged = false;
 
         qApp->LoadTranslation();
+
+        // Part about measurments will not be updated automatically
+        qApp->RetranslateTables();
+        qApp->RetranslateGroups();
     }
 }
 
@@ -113,10 +123,23 @@ void TapeConfigurationPage::LabelLangChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TapeConfigurationPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        RetranslateUi();
+    }
+
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QGroupBox *TapeConfigurationPage::LangGroup()
 {
-    QGroupBox *langGroup = new QGroupBox(tr("Language"));
-    QLabel *guiLabel = new QLabel(tr("GUI language"));
+    langGroup = new QGroupBox(tr("Language"));
+    guiLabel = new QLabel(tr("GUI language"));
     langCombo = new QComboBox;
 
     QDir dir(qApp->translationsPath());
@@ -158,7 +181,7 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     langLayout->addRow(guiLabel, langCombo);
 
     //-------------------- Pattern making system
-    QLabel *systemLabel = new QLabel(tr("Pattern making system"));
+    systemLabel = new QLabel(tr("Pattern making system"));
     systemCombo = new QComboBox;
 
     InitPMSystems(systemCombo);
@@ -166,17 +189,20 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     langLayout->addRow(systemLabel, systemCombo);
 
     //----
-    QLabel *systemAuthorLabel = new QLabel(tr("Author:"));
-    systemAuthorValueLabel = new QLabel(qApp->TrVars()->PMSystemAuthor(p0_S));
+    systemAuthorLabel = new QLabel(tr("Author:"));
+    systemAuthorValueLabel = new QLabel("");
 
     langLayout->addRow(systemAuthorLabel, systemAuthorValueLabel);
 
     //----
-    QLabel *systemBookLabel = new QLabel(tr("Book:"));
-    systemBookValueLabel = new QLabel(qApp->TrVars()->PMSystemBook(p0_S));
+    systemBookLabel = new QLabel(tr("Book:"));
+    systemBookValueLabel = new QLabel("");
     systemBookValueLabel->setWordWrap(true);
 
     langLayout->addRow(systemBookLabel, systemBookValueLabel);
+
+    connect(systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &TapeConfigurationPage::SystemChanged);
 
     // set default pattern making system
     index = systemCombo->findData(qApp->TapeSettings()->GetPMSystemCode());
@@ -184,11 +210,9 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     {
         systemCombo->setCurrentIndex(index);
     }
-    connect(systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &TapeConfigurationPage::SystemChanged);
 
     //-------------------- Decimal separator setup
-    QLabel *separatorLabel = new QLabel(tr("Decimal separator parts"));
+    separatorLabel = new QLabel(tr("Decimal separator parts"));
 
     osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
     osOptionCheck->setChecked(qApp->TapeSettings()->GetOsSeparator());
@@ -268,4 +292,28 @@ void TapeConfigurationPage::InitPMSystems(QComboBox *systemCombo)
     systemCombo->addItem(qApp->TrVars()->PMSystemName(p52_S), p52_S);
     systemCombo->addItem(qApp->TrVars()->PMSystemName(p53_S), p53_S);
     systemCombo->addItem(qApp->TrVars()->PMSystemName(p54_S), p54_S);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapeConfigurationPage::RetranslateUi()
+{
+    langGroup->setTitle(tr("Language"));
+    guiLabel->setText(tr("GUI language"));
+    systemLabel->setText(tr("Pattern making system"));
+
+    const int index = systemCombo->currentIndex();
+    systemCombo->blockSignals(true);
+    systemCombo->clear();
+    InitPMSystems(systemCombo);
+    systemCombo->setCurrentIndex(index);
+    systemCombo->blockSignals(false);
+
+    systemAuthorLabel->setText(tr("Author:"));
+    systemBookLabel->setText(tr("Book:"));
+
+    systemAuthorValueLabel->setText(qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString()));
+    systemBookValueLabel->setText(qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString()));
+
+    separatorLabel->setText(tr("Decimal separator parts"));
+    osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
 }

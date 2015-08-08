@@ -55,6 +55,8 @@ public:
     QString FormulaFromUser(const QString &formula, bool osSeparator) const;
     QString FormulaToUser(const QString &formula) const;
 
+    virtual void Retranslate() Q_DECL_OVERRIDE;
+
 private:
     Q_DISABLE_COPY(VTranslateVars)
     QMap<QString, qmu::QmuTranslation> PMSystemNames;

@@ -73,6 +73,8 @@ public:
     QString diagramsPath() const;
 
     void ShowDataBase();
+    void RetranslateGroups();
+    void RetranslateTables();
 
 public slots:
     TMainWindow *NewMainWindow();
@@ -87,8 +89,13 @@ private:
     QLocalServer *localServer;
     VTranslateVars *trVars;
     QPointer<DialogMDataBase> dataBase;
+    QTranslator *qtTranslator;
+    QTranslator *qtxmlTranslator;
+    QTranslator *appTranslator;
+    QTranslator *pmsTranslator;
 
     void Clean();
+    void ClearTranslation();
 };
 
 #endif // MAPPLICATION_H

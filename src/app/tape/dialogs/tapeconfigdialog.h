@@ -48,17 +48,23 @@ signals:
     void              UpdateProperties();
 protected:
     virtual void      closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void      changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(TapeConfigDialog)
     QListWidget           *contentsWidget;
     QStackedWidget        *pagesWidget;
     TapeConfigurationPage *configurationPage;
     TapePathPage          *pathPage;
+    QPushButton           *applyButton;
+    QPushButton           *canselButton;
+    QPushButton           *okButton;
 
     void createIcons();
     void createIcon(const QString &icon, const QString &text);
     void Apply();
     void Ok();
+
+    void RetranslateUi();
 };
 
 #endif // CONFIGDIALOG_H

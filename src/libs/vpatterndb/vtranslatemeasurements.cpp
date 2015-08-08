@@ -118,6 +118,17 @@ QString VTranslateMeasurements::Description(const QString &measurement) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTranslateMeasurements::Retranslate()
+{
+    measurements.clear();
+    guiTexts.clear();
+    descriptions.clear();
+    numbers.clear();
+    formulas.clear();
+    InitMeasurements();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VTranslateMeasurements::InitMeasurements()
 {
     InitGroupA(); // Direct Height

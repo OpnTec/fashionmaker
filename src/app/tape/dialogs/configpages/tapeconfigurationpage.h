@@ -49,6 +49,8 @@ public slots:
     void      SystemChanged();
     void      UnitChanged();
     void      LabelLangChanged();
+protected:
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(TapeConfigurationPage)
     QComboBox *langCombo;
@@ -66,9 +68,17 @@ private:
     QLabel    *systemAuthorValueLabel;
     QLabel    *systemBookValueLabel;
 
+    QGroupBox *langGroup;
+    QLabel    *guiLabel;
+    QLabel    *systemLabel;
+    QLabel    *systemAuthorLabel;
+    QLabel    *systemBookLabel;
+    QLabel    *separatorLabel;
+
     QGroupBox *LangGroup();
     void      SetLabelComboBox(const QStringList &list);
     void      InitPMSystems(QComboBox *systemCombo);
+    void      RetranslateUi();
 };
 
 #endif // CONFIGURATIONPAGE_H

@@ -86,6 +86,22 @@ int DialogNewMeasurements::BaseHeight() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogNewMeasurements::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+        InitMTypes();
+        const MeasurementsType type = static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt());
+        InitUnits(type);
+    }
+
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::CurrentTypeChanged(int index)
 {
     const MeasurementsType type = static_cast<MeasurementsType>(ui->comboBoxMType->itemData(index).toInt());
@@ -113,11 +129,23 @@ void DialogNewMeasurements::CurrentUnitChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::InitMTypes()
 {
+    int val;
+    if (ui->comboBoxMType->currentIndex() != -1)
+    {
+        val = ui->comboBoxMType->currentData().toInt();
+    }
+
     ui->comboBoxMType->blockSignals(true);
     ui->comboBoxMType->clear();
     ui->comboBoxMType->addItem(tr("Individual"), static_cast<int>(MeasurementsType::Individual));
     ui->comboBoxMType->addItem(tr("Standard"), static_cast<int>(MeasurementsType::Standard));
     ui->comboBoxMType->blockSignals(false);
+
+    int index = ui->comboBoxMType->findData(val);
+    if (index != -1)
+    {
+        ui->comboBoxMType->setCurrentIndex(index);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,12 +177,12 @@ void DialogNewMeasurements::InitSizesList()
 void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
 {
     int val;
-    if (ui->comboBoxMType->currentIndex() != -1)
+    if (ui->comboBoxUnit->currentIndex() != -1)
     {
-        val = ui->comboBoxMType->currentData().toInt();
+        val = ui->comboBoxUnit->currentData().toInt();
     }
 
-    ui->comboBoxMType->blockSignals(true);
+    ui->comboBoxUnit->blockSignals(true);
     ui->comboBoxUnit->clear();
     ui->comboBoxUnit->addItem(tr("Centimeters"), static_cast<int>(Unit::Cm));
     ui->comboBoxUnit->addItem(tr("Millimiters"), static_cast<int>(Unit::Mm));
@@ -162,7 +190,7 @@ void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
     {
         ui->comboBoxUnit->addItem(tr("Inches"), static_cast<int>(Unit::Inch));
     }
-    ui->comboBoxMType->blockSignals(false);
+    ui->comboBoxUnit->blockSignals(false);
 
     int index = ui->comboBoxUnit->findData(val);
     if (index != -1)

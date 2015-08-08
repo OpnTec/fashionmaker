@@ -56,6 +56,8 @@ public:
 
     QString CurrentFile() const;
 
+    void RetranslateTable();
+
 public slots:
     void LoadFile(const QString &path);
     void FileNew();
@@ -65,6 +67,7 @@ public slots:
 
 protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 
 private slots:
     void FileSave();

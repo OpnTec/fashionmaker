@@ -554,3 +554,351 @@ void CheckFactor(qreal &oldFactor, const qreal &Newfactor)
         oldFactor = Newfactor;
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupA()
+{
+    const QStringList list = QStringList() << height_M                // A01
+                                           << heightNeckBack_M        // A02
+                                           << heightScapula_M         // A03
+                                           << heightArmpit_M          // A04
+                                           << heightWaistSide_M       // A05
+                                           << heightHip_M             // A06
+                                           << heightGlutealFold_M     // A07
+                                           << heightKnee_M            // A08
+                                           << heightCalf_M            // A09
+                                           << heightAnkleHigh_M       // A10
+                                           << heightAnkle_M           // A11
+                                           << heightHighhip_M         // A12
+                                           << heightWaistFront_M      // A13
+                                           << heightBustpoint_M       // A14
+                                           << heightShoulderTip_M     // A15
+                                           << heightNeckFront_M       // A16
+                                           << heightNeckSide_M        // A17
+                                           << heightNeckBackToKnee_M  // A18
+                                           << heightWaistSideToKnee_M // A19
+                                           << heightWaistSideToHip_M; // A20
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupB()
+{
+    const QStringList list = QStringList() << widthShoulder_M      // B01
+                                           << widthBust_M          // B02
+                                           << widthWaist_M         // B03
+                                           << widthHip_M           // B04
+                                           << widthAbdomenToHip_M; // B05
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupC()
+{
+    const QStringList list = QStringList() << indentNeckBack_M   // C01
+                                           << indentWaistBack_M  // C02
+                                           << indentAnkleHigh_M; // C03
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupD()
+{
+    const QStringList list = QStringList() << neckMidCirc_M         // D01
+                                           << neckCirc_M            // D02
+                                           << highbustCirc_M        // D03
+                                           << bustCirc_M            // D04
+                                           << lowbustCirc_M         // D05
+                                           << ribCirc_M             // D06
+                                           << waistCirc_M           // D07
+                                           << highhipCirc_M         // D08
+                                           << hipCirc_M             // D09
+                                           << neckArcF_M            // D10
+                                           << highbustArcF_M        // D11
+                                           << bustArcF_M            // D12
+                                           << lowbustArcF_M         // D13
+                                           << ribArcF_M             // D14
+                                           << waistArcF_M           // D15
+                                           << highhipArcF_M         // D16
+                                           << hipArcF_M             // D17
+                                           << neckArcB_M            // D18
+                                           << highbustArcB_M        // D19
+                                           << bustArcB_M            // D20
+                                           << lowbustArcB_M         // D21
+                                           << ribArcB_M             // D22
+                                           << waistArcB_M           // D23
+                                           << highhipArcB_M         // D24
+                                           << hipArcB_M             // D25
+                                           << neckArcHalfF_M        // D26
+                                           << highbustArcHalfF_M    // D27
+                                           << bustArcHalfF_M        // D28
+                                           << lowbustArcHalfF_M     // D29
+                                           << ribArcHalfF_M         // D30
+                                           << waistArcHalfF_M       // D31
+                                           << highhipArcHalfF_M     // D32
+                                           << hipArcHalfF_M         // D33
+                                           << neckArcHalfB_M        // D34
+                                           << highbustArcHalfB_M    // D35
+                                           << bustArcHalfB_M        // D36
+                                           << lowbustArcHalfB_M     // D37
+                                           << ribArcHalfB_M         // D38
+                                           << waistArcHalfB_M       // D39
+                                           << highhipArcHalfB_M     // D40
+                                           << hipArcHalfB_M         // D41
+                                           << hipWithAbdomenArcF_M  // D42
+                                           << bodyArmfoldCirc_M     // D43
+                                           << bodyBustCirc_M        // D44
+                                           << bodyTorsoCirc_M;      // D45
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupE()
+{
+    const QStringList list = QStringList() << neckFrontToWaistF_M              // E01
+                                           << neckFrontToWaistFlatF_M          // E02
+                                           << armpitToWaistSide_M              // E03
+                                           << shoulderTipToWaistSideF_M        // E04
+                                           << neckSideToWaistF_M               // E05
+                                           << neckSideToWaistBustpointF_M      // E06
+                                           << shoulderTipToWaistSideB_M        // E07
+                                           << neckSideToWaistB_M               // E08
+                                           << neckBackToWaistB_M               // E09
+                                           << neckSideToWaistBladepointB_M     // E10
+                                           << shoulderTipToArmfoldF_M          // E11
+                                           << neckSideToBustF_M                // E12
+                                           << neckSideToHighbustF_M            // E13
+                                           << shoulderCenterToHighbustF_M      // E14
+                                           << neckFrontToHighbustF_M           // E15
+                                           << neckFrontToBustF_M               // E16
+                                           << lowbustToWaistF_M                // E17
+                                           << shoulderTipToArmfoldB_M          // E18
+                                           << neckSideToBustB_M                // E19
+                                           << neckSideToHighbustB_M            // E20
+                                           << shoulderCenterToHighbustB_M      // E21
+                                           << neckBackToHighbustB_M            // E22
+                                           << neckBackToBustB_M                // E23
+                                           << lowbustToWaistB_M                // E24
+                                           << waistToHighhipF_M                // E25
+                                           << waistToHipF_M                    // E26
+                                           << waistToHighhipSide_M             // E27
+                                           << waistToHighhipB_M                // E28
+                                           << waistToHipB_M                    // E29
+                                           << waistToHipSide_M                 // E30
+                                           << shoulderSlopeNeckSideLength_M    // E31
+                                           << shoulderSlopeNeckSideAngle_M     // E32
+                                           << shoulderSlopeNeckBackHeight_M    // E33
+                                           << shoulderSlopeNeckBackAngle_M     // E34
+                                           << shoulderSlopeShoulderTipAngle_M  // E35
+                                           << highbustToWaistF_M               // E36
+                                           << highbustToWaistB_M;              // E37
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupF()
+{
+    const QStringList list = QStringList() << shoulderLength_M                 // F01
+                                           << shoulderWidthF_M                 // F02
+                                           << acrossChestF_M                   // F03
+                                           << armfoldToArmfoldF_M              // F04
+                                           << shoulderWidthB_M                 // F05
+                                           << acrossBackB_M                    // F06
+                                           << armfoldToArmfoldB_M              // F07
+                                           << shoulderTipToShoulderTipHalfF_M  // F08
+                                           << acrossChestHalfF_M               // F09
+                                           << shoulderTipToShoulderTipHalfB_M  // F10
+                                           << acrossBackHalfB_M                // F11
+                                           << neckFrontToShoulderTipF_M        // F12
+                                           << neckBackToShoulderTipB_M         // F13
+                                           << neckWidth_M;	                   // F14
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupG()
+{
+    const QStringList list = QStringList() << bustpointToBustpoint_M        // G01
+                                           << bustpointToNeckSide_M         // G02
+                                           << bustpointToLowbust_M          // G03
+                                           << bustpointToWaist_M            // G04
+                                           << bustpointToBustpointHalf_M    // G05
+                                           << bustpointToBustpointHalter_M  // G06
+                                           << bustpointToShoulderTip_M      // G07
+                                           << bustpointToWaistFront_M;      // G08
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupH()
+{
+    const QStringList list = QStringList() << shoulderTipToWaistFront_M  // H01
+                                           << neckFrontToWaistSide_M     // H02
+                                           << neckSideToWaistSideF_M     // H03
+                                           << neckSideToArmfoldF_M       // H04
+                                           << neckSideToArmpitF_M        // H05
+                                           << neckSideToBustSideF_M      // H06
+                                           << shoulderTipToWaistBack_M   // H07
+                                           << neckBackToWaistSide_M      // H08
+                                           << neckSideToWaistSideB_M     // H09
+                                           << neckSideToArmfoldB_M       // H10
+                                           << neckSideToArmpitB_M        // H11
+                                           << neckSideToBustSideB_M;     // H12
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupI()
+{
+    const QStringList list = QStringList() << armShoulderTipToWristBent_M    // I01
+                                           << armShoulderTipToElbowBent_M    // I02
+                                           << armElbowToWristBent_M          // I03
+                                           << armElbowCircBent_M             // I04
+                                           << armShoulderTipToWrist_M        // I05
+                                           << armShoulderTipToElbow_M        // I06
+                                           << armElbowToWrist_M              // I07
+                                           << armArmpitToWrist_M             // I08
+                                           << armArmpitToElbow_M             // I09
+                                           << armElbowToWristInside_M        // I10
+                                           << armUpperCirc_M                 // I11
+                                           << armAboveElbowCirc_M            // I12
+                                           << armElbowCirc_M                 // I13
+                                           << armLowerCirc_M                 // I14
+                                           << armWristCirc_M                 // I15
+                                           << armShoulderTipToArmfoldLine_M  // I16
+                                           << armscyeCirc_M                  // I17
+                                           << armscyeLength_M                // I18
+                                           << armscyeWidth_M                 // I19
+                                           << armNeckSideToFingerTip_M       // I20
+                                           << armNeckSideToWrist_M;          // I21
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupJ()
+{
+    const QStringList list = QStringList() << legCrotchToFloor_M     // J01
+                                           << legWaistSideToFloor_M  // J02
+                                           << legWaistSideToKnee_M   // J03
+                                           << legThighUpperCirc_M    // J04
+                                           << legThighMidCirc_M      // J05
+                                           << legKneeCirc_M          // J06
+                                           << legKneeSmallCirc_M     // J07
+                                           << legCalfCirc_M          // J08
+                                           << legAnkleHighCirc_M     // J09
+                                           << legAnkleCirc_M         // J10
+                                           << legKneeCircBent_M      // J11
+                                           << legAnkleDiagCirc_M     // J12
+                                           << legCrotchToAnkle_M     // J13
+                                           << legWaistSideToAnkle_M; // J14
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupK()
+{
+    const QStringList list = QStringList() << crotchLength_M    // K01
+                                           << crotchLengthB_M   // K02
+                                           << crotchLengthF_M   // K03
+                                           << riseLengthSide_M  // K04
+                                           << riseLengthDiag_M  // K05
+                                           << riseLengthB_M     // K06
+                                           << riseLengthF_M;    // K07
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupL()
+{
+    const QStringList list = QStringList() << handPalmLength_M  // L01
+                                           << handLength_M      // L02
+                                           << handPalmWidth_M   // L03
+                                           << handPalmCirc_M    // L04
+                                           << handCirc_M;       // L05
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupM()
+{
+    const QStringList list = QStringList() << footWidth_M       // M01
+                                           << footLength_M      // M02
+                                           << footCirc_M        // M03
+                                           << footInstepCirc_M; // M04
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupN()
+{
+    const QStringList list = QStringList() << headCirc_M 	        // N01
+                                           << headLength_M          // N02
+                                           << headDepth_M 	        // N03
+                                           << headWidth_M 	        // N04
+                                           << headCrownToNeckBack_M // N05
+                                           << headChinToNeckBack_M; // N06
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupO()
+{
+    const QStringList list = QStringList() << neckBackToWaistFront_M 	         // O01
+                                           << waistToWaistHalter_M 	             // O02
+                                           << waistNaturalCirc_M 	             // O03
+                                           << waistNaturalArcF_M                 // O04
+                                           << waistNaturalArcB_M                 // O05
+                                           << waistToNaturalWaistF_M             // O06
+                                           << waistToNaturalWaistB_M             // O07
+                                           << armNeckBackToElbowBent_M           // O08
+                                           << armNeckBackToWristBent_M           // O09
+                                           << armNeckSideToElbowBent_M 	         // O10
+                                           << armNeckSideToWristBent_M 	         // O11
+                                           << armAcrossBackCenterToElbowBent_M   // O12
+                                           << armAcrossBackCenterToWristBent_M   // O13
+                                           << armArmscyeBackCenterToWristBent_M; // O14
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupP()
+{
+    const QStringList list = QStringList() << armfoldToArmfoldBust_M                             // P01
+                                           << armfoldToBustFront_M 	                             // P02
+                                           << neckBackToBustFront_M 	                         // P03
+                                           << neckBackToArmfoldFront_M 	                         // P04
+                                           << neckBackToArmfoldFrontToWaistSide_M                // P05
+                                           << highbustBackOverShoulderToArmfoldFront_M           // P06
+                                           << highbustBackOverShoulderToWaistFront_M             // P07
+                                           << neckBackToArmfoldFrontToNeckBack_M                 // P08
+                                           << acrossBackCenterToArmfoldFrontToAcrossBackCenter_M // P09
+                                           << neckBackToArmfoldFrontToHighbustBack_M             // P10
+                                           << highbustBOverShoulderToHighbustF_M 	             // P11
+                                           << armscyeArc_M;	                                     // P12
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ListGroupQ()
+{
+    const QStringList list = QStringList() << dartWidthShoulder_M // Q01
+                                           << dartWidthBust_M 	  // Q02
+                                           << dartWidthWaist_M;   // Q03
+
+    return list;
+}

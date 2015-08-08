@@ -41,7 +41,10 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
       contentsWidget(nullptr),
       pagesWidget(nullptr),
       configurationPage(nullptr),
-      pathPage(nullptr)
+      pathPage(nullptr),
+      applyButton(nullptr),
+      canselButton(nullptr),
+      okButton(nullptr)
 {
     contentsWidget = new QListWidget;
     contentsWidget->setViewMode(QListView::IconMode);
@@ -64,6 +67,7 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
     QPushButton *okButton = new QPushButton(tr("&Ok"));
 
     createIcons();
+    connect(contentsWidget, &QListWidget::currentItemChanged, this, &TapeConfigDialog::changePage);
     contentsWidget->setCurrentRow(0);
 
     connect(canselButton, &QPushButton::clicked, this, &TapeConfigDialog::close);
@@ -113,12 +117,23 @@ void TapeConfigDialog::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TapeConfigDialog::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        RetranslateUi();
+    }
+
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TapeConfigDialog::createIcons()
 {
     createIcon("://icon/config.png", tr("Configuration"));
     createIcon("://icon/path_config.png", tr("Paths"));
-
-    connect(contentsWidget, &QListWidget::currentItemChanged, this, &TapeConfigDialog::changePage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -155,4 +170,15 @@ void TapeConfigDialog::Ok()
 {
     Apply();
     done(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapeConfigDialog::RetranslateUi()
+{
+    applyButton->setText(tr("Apply"));
+    canselButton->setText(tr("&Cancel"));
+    okButton->setText(tr("&Ok"));
+    setWindowTitle(tr("Config Dialog"));
+    contentsWidget->item(0)->setText(tr("Configuration"));
+    contentsWidget->item(1)->setText(tr("Paths"));
 }

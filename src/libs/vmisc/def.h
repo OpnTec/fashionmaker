@@ -454,6 +454,24 @@ extern const QString dartWidthShoulder_M; // Q01
 extern const QString dartWidthBust_M;	  // Q02
 extern const QString dartWidthWaist_M;    // Q03
 
+QStringList ListGroupA();
+QStringList ListGroupB();
+QStringList ListGroupC();
+QStringList ListGroupD();
+QStringList ListGroupE();
+QStringList ListGroupF();
+QStringList ListGroupG();
+QStringList ListGroupH();
+QStringList ListGroupI();
+QStringList ListGroupJ();
+QStringList ListGroupK();
+QStringList ListGroupL();
+QStringList ListGroupM();
+QStringList ListGroupN();
+QStringList ListGroupO();
+QStringList ListGroupP();
+QStringList ListGroupQ();
+
 // pattern making systems codes
 extern const QString p0_S;
 extern const QString p1_S;

@@ -49,6 +49,11 @@ public:
 
     QStringList GetNewNames() const;
 
+    void RetranslateGroups();
+
+protected:
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+
 private slots:
     void UpdateChecks(QTreeWidgetItem *item, int column);
     void ShowDescription(QTreeWidgetItem *item, int column);
@@ -59,26 +64,28 @@ private:
     bool selectMode;
     QStringList list;
 
+    QTreeWidgetItem *groupA;
+    QTreeWidgetItem *groupB;
+    QTreeWidgetItem *groupC;
+    QTreeWidgetItem *groupD;
+    QTreeWidgetItem *groupE;
+    QTreeWidgetItem *groupF;
+    QTreeWidgetItem *groupG;
+    QTreeWidgetItem *groupH;
+    QTreeWidgetItem *groupI;
+    QTreeWidgetItem *groupJ;
+    QTreeWidgetItem *groupK;
+    QTreeWidgetItem *groupL;
+    QTreeWidgetItem *groupM;
+    QTreeWidgetItem *groupN;
+    QTreeWidgetItem *groupO;
+    QTreeWidgetItem *groupP;
+    QTreeWidgetItem *groupQ;
+
     void InitDataBase(const QStringList &list);
     void InitDataBase();
-
-    void InitGroupA(const QStringList &list = QStringList());
-    void InitGroupB(const QStringList &list = QStringList());
-    void InitGroupC(const QStringList &list = QStringList());
-    void InitGroupD(const QStringList &list = QStringList());
-    void InitGroupE(const QStringList &list = QStringList());
-    void InitGroupF(const QStringList &list = QStringList());
-    void InitGroupG(const QStringList &list = QStringList());
-    void InitGroupH(const QStringList &list = QStringList());
-    void InitGroupI(const QStringList &list = QStringList());
-    void InitGroupJ(const QStringList &list = QStringList());
-    void InitGroupK(const QStringList &list = QStringList());
-    void InitGroupL(const QStringList &list = QStringList());
-    void InitGroupM(const QStringList &list = QStringList());
-    void InitGroupN(const QStringList &list = QStringList());
-    void InitGroupO(const QStringList &list = QStringList());
-    void InitGroupP(const QStringList &list = QStringList());
-    void InitGroupQ(const QStringList &list = QStringList());
+    void InitGroup(QTreeWidgetItem *group, const QString &groupName, const QStringList &mList,
+                   const QStringList &list = QStringList());
 
     QTreeWidgetItem *AddGroup(const QString &text);
     void AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list);
@@ -87,6 +94,9 @@ private:
 
     void ReadSettings();
     void WriteSettings();
+
+    void RetranslateGroup(QTreeWidgetItem *group, const QString &groupText, const QStringList &list);
+    void RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name);
 };
 
 #endif // DIALOGMDATABASE_H

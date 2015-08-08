@@ -43,6 +43,9 @@ public:
     explicit DialogAboutTape(QWidget *parent = 0);
     ~DialogAboutTape();
 
+protected:
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+
 private slots:
     void WebButtonClicked();
 
@@ -51,6 +54,8 @@ private:
     Ui::DialogAboutTape *ui;
 
     void FontPointSize(QWidget *w, int pointSize);
+
+    void RetranslateUi();
 };
 
 #endif // DIALOGABOUTTAPE_H

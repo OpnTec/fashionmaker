@@ -109,6 +109,14 @@ QString TMainWindow::CurrentFile() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RetranslateTable()
+{
+    const int row = ui->tableWidget->currentRow();
+    RefreshTable();
+    ui->tableWidget->selectRow(row);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::LoadFile(const QString &path)
 {
     if (m == nullptr)
@@ -314,6 +322,19 @@ void TMainWindow::closeEvent(QCloseEvent *event)
     {
         event->ignore();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+    }
+
+    // remember to call base class implementation
+    QMainWindow::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

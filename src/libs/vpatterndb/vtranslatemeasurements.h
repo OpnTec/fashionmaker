@@ -47,6 +47,8 @@ public:
     QString GuiText(const QString &measurement) const;
     QString Description(const QString &measurement) const;
 
+    virtual void Retranslate();
+
 protected:
     QMap<QString, qmu::QmuTranslation> measurements;
 
