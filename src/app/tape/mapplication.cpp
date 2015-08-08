@@ -241,8 +241,14 @@ QString MApplication::translationsPath() const
     {
         return QApplication::applicationDirPath() + "/../../valentina/bin" + trPath;
     }
-#else
-    #ifdef QT_DEBUG
+#elif defined(Q_OS_MAC)
+    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + trPath);
+    if (dirBundle.exists())
+    {
+        return dirBundle.absolutePath();
+    }
+    else
+    {
         QDir dir(QApplication::applicationDirPath() + trPath);
         if (dir.exists())
         {
@@ -250,25 +256,25 @@ QString MApplication::translationsPath() const
         }
         else
         {
-            return QApplication::applicationDirPath() + "/../../valentina/bin" + trPath;
-        }
-    #else
-        QDir dir1(QApplication::applicationDirPath() + trPath);
-        if (dir1.exists())
-        {
-            return dir1.absolutePath();
-        }
-
-        QDir dir2(QApplication::applicationDirPath() + "/../../valentina/bin" + trPath);
-        if (dir2.exists())
-        {
-            return dir2.absolutePath();
-        }
-        else
-        {
             return QStringLiteral("/usr/share/valentina/translations");
         }
-    #endif
+    }
+#else // Unix
+    QDir dir1(QApplication::applicationDirPath() + trPath);
+    if (dir1.exists())
+    {
+        return dir1.absolutePath();
+    }
+
+    QDir dir2(QApplication::applicationDirPath() + "/../../valentina/bin" + trPath);
+    if (dir2.exists())
+    {
+        return dir2.absolutePath();
+    }
+    else
+    {
+        return QStringLiteral("/usr/share/valentina/translations");
+    }
 #endif
 }
 
@@ -277,17 +283,15 @@ QString MApplication::diagramsPath() const
 {
     const QString dPath = QStringLiteral("/diagrams.rcc");
 #ifdef Q_OS_WIN
-    QFileInfo file(QApplication::applicationDirPath()  + dPath);
-    if (file.exists())
+    return QApplication::applicationDirPath() + dPath;
+#elif defined(Q_OS_MAC)
+    QFileInfo fileBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + dPath);
+    if (fileBundle.exists())
     {
-        return file.absoluteFilePath();
+        return fileBundle.absoluteFilePath();
     }
     else
     {
-        return QApplication::applicationDirPath() + "../../app/tape/bin" + dPath;
-    }
-#else
-    #ifdef QT_DEBUG
         QFileInfo file(QApplication::applicationDirPath() + dPath);
         if (file.exists())
         {
@@ -295,25 +299,19 @@ QString MApplication::diagramsPath() const
         }
         else
         {
-            return QApplication::applicationDirPath() + "../../app/tape/bin" + dPath;
+            return QStringLiteral("/usr/share/valentina") + dPath;
         }
-    #else
-        QFileInfo file1(QApplication::applicationDirPath() + dPath);
-        if (file1.exists())
-        {
-            return file1.absoluteFilePath();
-        }
-
-        QFileInfo file2(QApplication::applicationDirPath() + "../../app/tape/bin" + dPath);
-        if (file2.exists())
-        {
-            return file2.absoluteFilePath();
-        }
-        else
-        {
-            return QStringLiteral("/usr/share/valentina");
-        }
-    #endif
+    }
+#else // Unix
+    QFileInfo file(QApplication::applicationDirPath() + dPath);
+    if (file.exists())
+    {
+        return file.absoluteFilePath();
+    }
+    else
+    {
+        return QStringLiteral("/usr/share/valentina") + dPath;
+    }
 #endif
 }
 

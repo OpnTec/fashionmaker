@@ -988,6 +988,9 @@ unix{
         # Path to bin file after installation
         target.path = $$PREFIX/bin
 
+        tape.path = $$PREFIX/bin
+        tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape
+
         # .desktop file
         desktop.path = $$DATADIR/applications/
         desktop.files += ../../../dist/$${TARGET}.desktop
@@ -1007,6 +1010,7 @@ unix{
 
         INSTALLS += \
             target \
+            tape \
             desktop \
             pixmaps \
             translations \
@@ -1788,6 +1792,9 @@ unix{
     libraries.files += $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
     libraries.files += $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
 
+    tape.path = $$MACOS_DIR
+    tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape
+
     # Utility pdftops need for saving a layout image to PS and EPS formates.
     xpdf.path = $$MACOS_DIR
     xpdf.files += $${PWD}/../../../dist/macx/bin64/pdftops
@@ -1799,10 +1806,16 @@ unix{
     standard.path = $$RESOURCES_DIR/tables/standard/
     standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
 
+    # Copy to bundle standard measurements files
+    diagrams.path = $$RESOURCES_DIR/
+    diagrams.files = $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc
+
     QMAKE_BUNDLE_DATA += \
         standard \
         libraries \
-        xpdf
+        tape \
+        xpdf \
+        diagrams
     }
 }
 
@@ -1813,6 +1826,9 @@ win32{
     package.files += \
         $${OUT_PWD}/$${DESTDIR}/valentina.exe \
         $${OUT_PWD}/$${DESTDIR}/valentina.exe.dbg \
+        $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe \
+        $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe.dbg \
+        $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc \
         $$PWD/../../../dist/win/valentina.ico \
         $$PWD/../../../dist/win/curl.exe \
         $$PWD/../../../dist/win/exchndl.dll \

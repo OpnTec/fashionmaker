@@ -277,10 +277,14 @@ QString VApplication::translationsPath() const
     const QString trPath = QStringLiteral("/translations");
 #ifdef Q_OS_WIN
     return QApplication::applicationDirPath() + trPath;
-#else
-#ifdef QT_DEBUG
-    return QApplication::applicationDirPath() + trPath;
-    #else
+#elif defined(Q_OS_MAC)
+    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + trPath);
+    if (dirBundle.exists())
+    {
+        return dirBundle.absolutePath();
+    }
+    else
+    {
         QDir dir(QApplication::applicationDirPath() + trPath);
         if (dir.exists())
         {
@@ -290,7 +294,17 @@ QString VApplication::translationsPath() const
         {
             return QStringLiteral("/usr/share/valentina/translations");
         }
-    #endif
+    }
+#else // Unix
+    QDir dir(QApplication::applicationDirPath() + trPath);
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+    else
+    {
+        return QStringLiteral("/usr/share/valentina/translations");
+    }
 #endif
 }
 
