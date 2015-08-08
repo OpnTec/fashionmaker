@@ -40,7 +40,6 @@ DialogNewMeasurements::DialogNewMeasurements(QWidget *parent)
 
     InitMTypes();
     InitUnits(MeasurementsType::Individual);
-    InitStandards();
     InitHeightsList();
     InitSizesList();
 
@@ -146,15 +145,6 @@ void DialogNewMeasurements::InitMTypes()
     {
         ui->comboBoxMType->setCurrentIndex(index);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogNewMeasurements::InitStandards()
-{
-    ui->comboBoxStandard->blockSignals(true);
-    ui->comboBoxStandard->clear();
-    ui->comboBoxStandard->addItem(tr("Regular"));
-    ui->comboBoxStandard->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -63,7 +63,6 @@ private:
     Ui::DialogNewMeasurements *ui;
 
     void InitMTypes();
-    void InitStandards();
     void InitHeightsList();
     void InitSizesList();
     void InitUnits(const MeasurementsType &type);
