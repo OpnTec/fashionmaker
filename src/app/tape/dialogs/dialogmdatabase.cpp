@@ -149,7 +149,7 @@ void DialogMDataBase::RetranslateGroups()
     RetranslateGroup(groupP, "P. " + tr("Historical & Specialty", "Measurement section"),     ListGroupP());
     RetranslateGroup(groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ());
 
-    ShowDescription(ui->treeWidget->currentIndex(), 0);
+    ShowDescription(ui->treeWidget->currentItem(), 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -359,290 +359,20 @@ void DialogMDataBase::AddMeasurement(QTreeWidgetItem *group, const QString &name
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QStringList DialogMDataBase::ListNumbers(const QStringList &listMeasurements) const
+{
+    QStringList numbers;
+    for (int i=0; i < listMeasurements.size(); ++i)
+    {
+        numbers.append(qApp->TrVars()->MNumber(listMeasurements.at(i)));
+    }
+    return numbers;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogMDataBase::MapDiagrams(const QString &number) const
 {
-    const QStringList ANumbers = QStringList()
-            // A
-            << qApp->TrVars()->MNumber(height_M)                // A01
-            << qApp->TrVars()->MNumber(heightNeckBack_M)        // A02
-            << qApp->TrVars()->MNumber(heightScapula_M)         // A03
-            << qApp->TrVars()->MNumber(heightArmpit_M)          // A04
-            << qApp->TrVars()->MNumber(heightWaistSide_M)       // A05
-            << qApp->TrVars()->MNumber(heightHip_M)             // A06
-            << qApp->TrVars()->MNumber(heightGlutealFold_M)     // A07
-            << qApp->TrVars()->MNumber(heightKnee_M)            // A08
-            << qApp->TrVars()->MNumber(heightCalf_M)            // A09
-            << qApp->TrVars()->MNumber(heightAnkleHigh_M)       // A10
-            << qApp->TrVars()->MNumber(heightAnkle_M)           // A11
-            << qApp->TrVars()->MNumber(heightHighhip_M)         // A12
-            << qApp->TrVars()->MNumber(heightWaistFront_M)      // A13
-            << qApp->TrVars()->MNumber(heightBustpoint_M)       // A14
-            << qApp->TrVars()->MNumber(heightShoulderTip_M)     // A15
-            << qApp->TrVars()->MNumber(heightNeckFront_M)       // A16
-            << qApp->TrVars()->MNumber(heightNeckSide_M)        // A17
-            << qApp->TrVars()->MNumber(heightNeckBackToKnee_M)  // A18
-            << qApp->TrVars()->MNumber(heightWaistSideToKnee_M) // A19
-            << qApp->TrVars()->MNumber(heightWaistSideToHip_M); // A20
-
-    const QStringList BNumbers = QStringList()
-            // B
-            << qApp->TrVars()->MNumber(widthShoulder_M)      // B01
-            << qApp->TrVars()->MNumber(widthBust_M)          // B02
-            << qApp->TrVars()->MNumber(widthWaist_M)         // B03
-            << qApp->TrVars()->MNumber(widthHip_M)           // B04
-            << qApp->TrVars()->MNumber(widthAbdomenToHip_M); // B05
-
-    const QStringList CNumbers = QStringList()
-            // C
-            << qApp->TrVars()->MNumber(indentNeckBack_M)   // C01
-            << qApp->TrVars()->MNumber(indentWaistBack_M)  // C02
-            << qApp->TrVars()->MNumber(indentAnkleHigh_M); // C03
-
-    const QStringList DNumbers = QStringList()
-            // D
-            << qApp->TrVars()->MNumber(neckMidCirc_M)        // D01
-            << qApp->TrVars()->MNumber(neckCirc_M)           // D02
-            << qApp->TrVars()->MNumber(highbustCirc_M)       // D03
-            << qApp->TrVars()->MNumber(bustCirc_M)           // D04
-            << qApp->TrVars()->MNumber(lowbustCirc_M)        // D05
-            << qApp->TrVars()->MNumber(ribCirc_M)            // D06
-            << qApp->TrVars()->MNumber(waistCirc_M)          // D07
-            << qApp->TrVars()->MNumber(highhipCirc_M)        // D08
-            << qApp->TrVars()->MNumber(hipCirc_M)            // D09
-            << qApp->TrVars()->MNumber(neckArcF_M)           // D10
-            << qApp->TrVars()->MNumber(highbustArcF_M)       // D11
-            << qApp->TrVars()->MNumber(bustArcF_M)           // D12
-            << qApp->TrVars()->MNumber(lowbustArcF_M)        // D13
-            << qApp->TrVars()->MNumber(ribArcF_M)            // D14
-            << qApp->TrVars()->MNumber(waistArcF_M)          // D15
-            << qApp->TrVars()->MNumber(highhipArcF_M)        // D16
-            << qApp->TrVars()->MNumber(hipArcF_M)            // D17
-            << qApp->TrVars()->MNumber(neckArcB_M)           // D18
-            << qApp->TrVars()->MNumber(highbustArcB_M)       // D19
-            << qApp->TrVars()->MNumber(bustArcB_M)           // D20
-            << qApp->TrVars()->MNumber(lowbustArcB_M)        // D21
-            << qApp->TrVars()->MNumber(ribArcB_M)            // D22
-            << qApp->TrVars()->MNumber(waistArcB_M)          // D23
-            << qApp->TrVars()->MNumber(highhipArcB_M)        // D24
-            << qApp->TrVars()->MNumber(hipArcB_M)            // D25
-            << qApp->TrVars()->MNumber(neckArcHalfF_M)       // D26
-            << qApp->TrVars()->MNumber(highbustArcHalfF_M)   // D27
-            << qApp->TrVars()->MNumber(bustArcHalfF_M)       // D28
-            << qApp->TrVars()->MNumber(lowbustArcHalfF_M)    // D29
-            << qApp->TrVars()->MNumber(ribArcHalfF_M)        // D30
-            << qApp->TrVars()->MNumber(waistArcHalfF_M)      // D31
-            << qApp->TrVars()->MNumber(highhipArcHalfF_M)    // D32
-            << qApp->TrVars()->MNumber(hipArcHalfF_M)        // D33
-            << qApp->TrVars()->MNumber(neckArcHalfB_M)       // D34
-            << qApp->TrVars()->MNumber(highbustArcHalfB_M)   // D35
-            << qApp->TrVars()->MNumber(bustArcHalfB_M)       // D36
-            << qApp->TrVars()->MNumber(lowbustArcHalfB_M)    // D37
-            << qApp->TrVars()->MNumber(ribArcHalfB_M)        // D38
-            << qApp->TrVars()->MNumber(waistArcHalfB_M)      // D39
-            << qApp->TrVars()->MNumber(highhipArcHalfB_M)    // D40
-            << qApp->TrVars()->MNumber(hipArcHalfB_M)        // D41
-            << qApp->TrVars()->MNumber(hipWithAbdomenArcF_M) // D42
-            << qApp->TrVars()->MNumber(bodyArmfoldCirc_M)    // D43
-            << qApp->TrVars()->MNumber(bodyBustCirc_M)       // D44
-            << qApp->TrVars()->MNumber(bodyTorsoCirc_M);     // D45
-
-    const QStringList ENumbers = QStringList()
-            // E
-            << qApp->TrVars()->MNumber(neckFrontToWaistF_M)             // E01
-            << qApp->TrVars()->MNumber(neckFrontToWaistFlatF_M)         // E02
-            << qApp->TrVars()->MNumber(armpitToWaistSide_M)             // E03
-            << qApp->TrVars()->MNumber(shoulderTipToWaistSideF_M)       // E04
-            << qApp->TrVars()->MNumber(neckSideToWaistF_M)              // E05
-            << qApp->TrVars()->MNumber(neckSideToWaistBustpointF_M)     // E06
-            << qApp->TrVars()->MNumber(shoulderTipToWaistSideB_M)       // E07
-            << qApp->TrVars()->MNumber(neckSideToWaistB_M)              // E08
-            << qApp->TrVars()->MNumber(neckBackToWaistB_M)              // E09
-            << qApp->TrVars()->MNumber(neckSideToWaistBladepointB_M)    // E10
-            << qApp->TrVars()->MNumber(shoulderTipToArmfoldF_M)         // E11
-            << qApp->TrVars()->MNumber(neckSideToBustF_M)               // E12
-            << qApp->TrVars()->MNumber(neckSideToHighbustF_M)           // E13
-            << qApp->TrVars()->MNumber(shoulderCenterToHighbustF_M)     // E14
-            << qApp->TrVars()->MNumber(neckFrontToHighbustF_M)          // E15
-            << qApp->TrVars()->MNumber(neckFrontToBustF_M)              // E16
-            << qApp->TrVars()->MNumber(lowbustToWaistF_M)               // E17
-            << qApp->TrVars()->MNumber(shoulderTipToArmfoldB_M)         // E18
-            << qApp->TrVars()->MNumber(neckSideToBustB_M)               // E19
-            << qApp->TrVars()->MNumber(neckSideToHighbustB_M)           // E20
-            << qApp->TrVars()->MNumber(shoulderCenterToHighbustB_M)     // E21
-            << qApp->TrVars()->MNumber(neckBackToHighbustB_M)           // E22
-            << qApp->TrVars()->MNumber(neckBackToBustB_M)               // E23
-            << qApp->TrVars()->MNumber(lowbustToWaistB_M)               // E24
-            << qApp->TrVars()->MNumber(waistToHighhipF_M)               // E25
-            << qApp->TrVars()->MNumber(waistToHipF_M)                   // E26
-            << qApp->TrVars()->MNumber(waistToHighhipSide_M)            // E27
-            << qApp->TrVars()->MNumber(waistToHighhipB_M)               // E28
-            << qApp->TrVars()->MNumber(waistToHipB_M)                   // E29
-            << qApp->TrVars()->MNumber(waistToHipSide_M)                // E30
-            << qApp->TrVars()->MNumber(shoulderSlopeNeckSideLength_M)   // E31
-            << qApp->TrVars()->MNumber(shoulderSlopeNeckSideAngle_M)    // E32
-            << qApp->TrVars()->MNumber(shoulderSlopeNeckBackHeight_M)   // E33
-            << qApp->TrVars()->MNumber(shoulderSlopeNeckBackAngle_M)    // E34
-            << qApp->TrVars()->MNumber(shoulderSlopeShoulderTipAngle_M) // E35
-            << qApp->TrVars()->MNumber(highbustToWaistF_M)              // E36
-            << qApp->TrVars()->MNumber(highbustToWaistB_M);             // E37
-
-    const QStringList FNumbers = QStringList()
-            // F
-            << qApp->TrVars()->MNumber(shoulderLength_M)                // F01
-            << qApp->TrVars()->MNumber(shoulderWidthF_M)                // F02
-            << qApp->TrVars()->MNumber(acrossChestF_M)                  // F03
-            << qApp->TrVars()->MNumber(armfoldToArmfoldF_M)             // F04
-            << qApp->TrVars()->MNumber(shoulderWidthB_M)                // F05
-            << qApp->TrVars()->MNumber(acrossBackB_M)                   // F06
-            << qApp->TrVars()->MNumber(armfoldToArmfoldB_M)             // F07
-            << qApp->TrVars()->MNumber(shoulderTipToShoulderTipHalfF_M) // F08
-            << qApp->TrVars()->MNumber(acrossChestHalfF_M)              // F09
-            << qApp->TrVars()->MNumber(shoulderTipToShoulderTipHalfB_M) // F10
-            << qApp->TrVars()->MNumber(acrossBackHalfB_M)               // F11
-            << qApp->TrVars()->MNumber(neckFrontToShoulderTipF_M)       // F12
-            << qApp->TrVars()->MNumber(neckBackToShoulderTipB_M)        // F13
-            << qApp->TrVars()->MNumber(neckWidth_M);                    // F14
-
-    const QStringList GNumbers = QStringList()
-            // G
-            << qApp->TrVars()->MNumber(bustpointToBustpoint_M)       // G01
-            << qApp->TrVars()->MNumber(bustpointToNeckSide_M)        // G02
-            << qApp->TrVars()->MNumber(bustpointToLowbust_M)         // G03
-            << qApp->TrVars()->MNumber(bustpointToWaist_M)           // G04
-            << qApp->TrVars()->MNumber(bustpointToBustpointHalf_M)   // G05
-            << qApp->TrVars()->MNumber(bustpointToBustpointHalter_M) // G06
-            << qApp->TrVars()->MNumber(bustpointToShoulderTip_M)     // G07
-            << qApp->TrVars()->MNumber(bustpointToWaistFront_M);     // G08
-
-    const QStringList HNumbers = QStringList()
-            // H
-            << qApp->TrVars()->MNumber(shoulderTipToWaistFront_M) // H01
-            << qApp->TrVars()->MNumber(neckFrontToWaistSide_M)    // H02
-            << qApp->TrVars()->MNumber(neckSideToWaistSideF_M)    // H03
-            << qApp->TrVars()->MNumber(neckSideToArmfoldF_M)      // H04
-            << qApp->TrVars()->MNumber(neckSideToArmpitF_M)       // H05
-            << qApp->TrVars()->MNumber(neckSideToBustSideF_M)     // H06
-            << qApp->TrVars()->MNumber(shoulderTipToWaistBack_M)  // H07
-            << qApp->TrVars()->MNumber(neckBackToWaistSide_M)     // H08
-            << qApp->TrVars()->MNumber(neckSideToWaistSideB_M)    // H09
-            << qApp->TrVars()->MNumber(neckSideToArmfoldB_M)      // H10
-            << qApp->TrVars()->MNumber(neckSideToArmpitB_M)       // H11
-            << qApp->TrVars()->MNumber(neckSideToBustSideB_M);    // H12
-
-    const QStringList INumbers = QStringList()
-            // I
-            << qApp->TrVars()->MNumber(armShoulderTipToWristBent_M)   // I01
-            << qApp->TrVars()->MNumber(armShoulderTipToElbowBent_M)   // I02
-            << qApp->TrVars()->MNumber(armElbowToWristBent_M)         // I03
-            << qApp->TrVars()->MNumber(armElbowCircBent_M)            // I04
-            << qApp->TrVars()->MNumber(armShoulderTipToWrist_M)       // I05
-            << qApp->TrVars()->MNumber(armShoulderTipToElbow_M)       // I06
-            << qApp->TrVars()->MNumber(armElbowToWrist_M)             // I07
-            << qApp->TrVars()->MNumber(armArmpitToWrist_M)            // I08
-            << qApp->TrVars()->MNumber(armArmpitToElbow_M)            // I09
-            << qApp->TrVars()->MNumber(armElbowToWristInside_M)       // I10
-            << qApp->TrVars()->MNumber(armUpperCirc_M)                // I11
-            << qApp->TrVars()->MNumber(armAboveElbowCirc_M)           // I12
-            << qApp->TrVars()->MNumber(armElbowCirc_M)                // I13
-            << qApp->TrVars()->MNumber(armLowerCirc_M)                // I14
-            << qApp->TrVars()->MNumber(armWristCirc_M)                // I15
-            << qApp->TrVars()->MNumber(armShoulderTipToArmfoldLine_M) // I16
-            << qApp->TrVars()->MNumber(armscyeCirc_M)                 // I17
-            << qApp->TrVars()->MNumber(armscyeLength_M)               // I18
-            << qApp->TrVars()->MNumber(armscyeWidth_M)                // I19
-            << qApp->TrVars()->MNumber(armNeckSideToFingerTip_M)      // I20
-            << qApp->TrVars()->MNumber(armNeckSideToWrist_M);         // I21
-
-    const QStringList JNumbers = QStringList()
-            // J
-            << qApp->TrVars()->MNumber(legCrotchToFloor_M)     // J01
-            << qApp->TrVars()->MNumber(legWaistSideToFloor_M)  // J02
-            << qApp->TrVars()->MNumber(legWaistSideToKnee_M)   // J03
-            << qApp->TrVars()->MNumber(legThighUpperCirc_M)	   // J04
-            << qApp->TrVars()->MNumber(legThighMidCirc_M)      // J05
-            << qApp->TrVars()->MNumber(legKneeCirc_M)          // J06
-            << qApp->TrVars()->MNumber(legKneeSmallCirc_M)     // J07
-            << qApp->TrVars()->MNumber(legCalfCirc_M)          // J08
-            << qApp->TrVars()->MNumber(legAnkleHighCirc_M)     // J09
-            << qApp->TrVars()->MNumber(legAnkleCirc_M)         // J10
-            << qApp->TrVars()->MNumber(legKneeCircBent_M)      // J11
-            << qApp->TrVars()->MNumber(legAnkleDiagCirc_M)     // J12
-            << qApp->TrVars()->MNumber(legCrotchToAnkle_M)     // J13
-            << qApp->TrVars()->MNumber(legWaistSideToAnkle_M); // J14
-
-    const QStringList KNumbers = QStringList()
-            // K
-            << qApp->TrVars()->MNumber(crotchLength_M)   // K01
-            << qApp->TrVars()->MNumber(crotchLengthB_M)  // K02
-            << qApp->TrVars()->MNumber(crotchLengthF_M)  // K03
-            << qApp->TrVars()->MNumber(riseLengthSide_M) // K04
-            << qApp->TrVars()->MNumber(riseLengthDiag_M) // K05
-            << qApp->TrVars()->MNumber(riseLengthB_M)    // K06
-            << qApp->TrVars()->MNumber(riseLengthF_M);   // K07
-
-    const QStringList LNumbers = QStringList()
-            // L
-            << qApp->TrVars()->MNumber(handPalmLength_M) // L01
-            << qApp->TrVars()->MNumber(handLength_M)     // L02
-            << qApp->TrVars()->MNumber(handPalmWidth_M)  // L03
-            << qApp->TrVars()->MNumber(handPalmCirc_M)   // L04
-            << qApp->TrVars()->MNumber(handCirc_M);      // L05
-
-    const QStringList MNumbers = QStringList()
-            // M
-            << qApp->TrVars()->MNumber(footWidth_M)       // M01
-            << qApp->TrVars()->MNumber(footLength_M)      // M02
-            << qApp->TrVars()->MNumber(footCirc_M)        // M03
-            << qApp->TrVars()->MNumber(footInstepCirc_M); // M04
-
-    const QStringList NNumbers = QStringList()
-            // N
-            << qApp->TrVars()->MNumber(headCirc_M)	          // N01
-            << qApp->TrVars()->MNumber(headLength_M)          // N02
-            << qApp->TrVars()->MNumber(headDepth_M)	          // N03
-            << qApp->TrVars()->MNumber(headWidth_M)	          // N04
-            << qApp->TrVars()->MNumber(headCrownToNeckBack_M) // N05
-            << qApp->TrVars()->MNumber(headChinToNeckBack_M); // N06
-
-    const QStringList ONumbers = QStringList()
-            // O
-            << qApp->TrVars()->MNumber(neckBackToWaistFront_M)	           // O01
-            << qApp->TrVars()->MNumber(waistToWaistHalter_M)	           // O02
-            << qApp->TrVars()->MNumber(waistNaturalCirc_M)	               // O03
-            << qApp->TrVars()->MNumber(waistNaturalArcF_M)                 // O04
-            << qApp->TrVars()->MNumber(waistNaturalArcB_M)                 // O05
-            << qApp->TrVars()->MNumber(waistToNaturalWaistF_M)             // O06
-            << qApp->TrVars()->MNumber(waistToNaturalWaistB_M)             // O07
-            << qApp->TrVars()->MNumber(armNeckBackToElbowBent_M)           // O08
-            << qApp->TrVars()->MNumber(armNeckBackToWristBent_M)           // O09
-            << qApp->TrVars()->MNumber(armNeckSideToElbowBent_M)	       // O10
-            << qApp->TrVars()->MNumber(armNeckSideToWristBent_M)	       // O11
-            << qApp->TrVars()->MNumber(armAcrossBackCenterToElbowBent_M)   // O12
-            << qApp->TrVars()->MNumber(armAcrossBackCenterToWristBent_M)   // O13
-            << qApp->TrVars()->MNumber(armArmscyeBackCenterToWristBent_M); // O14
-
-    const QStringList PNumbers = QStringList()
-            // P
-            << qApp->TrVars()->MNumber(armfoldToArmfoldBust_M)                             // P01
-            << qApp->TrVars()->MNumber(armfoldToBustFront_M)	                           // P02
-            << qApp->TrVars()->MNumber(neckBackToBustFront_M)	                           // P03
-            << qApp->TrVars()->MNumber(neckBackToArmfoldFront_M)	                       // P04
-            << qApp->TrVars()->MNumber(neckBackToArmfoldFrontToWaistSide_M)                // P05
-            << qApp->TrVars()->MNumber(highbustBackOverShoulderToArmfoldFront_M)           // P06
-            << qApp->TrVars()->MNumber(highbustBackOverShoulderToWaistFront_M)             // P07
-            << qApp->TrVars()->MNumber(neckBackToArmfoldFrontToNeckBack_M)                 // P08
-            << qApp->TrVars()->MNumber(acrossBackCenterToArmfoldFrontToAcrossBackCenter_M) // P09
-            << qApp->TrVars()->MNumber(neckBackToArmfoldFrontToHighbustBack_M)             // P10
-            << qApp->TrVars()->MNumber(highbustBOverShoulderToHighbustF_M)	               // P11
-            << qApp->TrVars()->MNumber(armscyeArc_M);	                                   // P12
-
-    const QStringList QNumbers = QStringList()
-            // Q
-            << qApp->TrVars()->MNumber(dartWidthShoulder_M) // Q01
-            << qApp->TrVars()->MNumber(dartWidthBust_M)	    // Q02
-            << qApp->TrVars()->MNumber(dartWidthWaist_M);   // Q03
-
-    switch (ANumbers.indexOf(number))
+    switch (ListNumbers(ListGroupA()).indexOf(number))
     {
         // A
         case 0: // A01
@@ -689,7 +419,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (BNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupB()).indexOf(number))
     {
         // B
         case 0: // B01
@@ -706,7 +436,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (CNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupC()).indexOf(number))
     {
         // C
         case 0: // C01
@@ -719,7 +449,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (DNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupD()).indexOf(number))
     {
         // D
         case 0: // D01
@@ -816,7 +546,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (ENumbers.indexOf(number))
+    switch (ListNumbers(ListGroupE()).indexOf(number))
     {
         // E
         case 0: // E01
@@ -897,7 +627,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (FNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupF()).indexOf(number))
     {
         // F
         case 0: // F01
@@ -932,7 +662,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (GNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupG()).indexOf(number))
     {
         // G
         case 0: // G01
@@ -955,7 +685,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (HNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupH()).indexOf(number))
     {
         // H
         case 0: // H01
@@ -986,7 +716,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (INumbers.indexOf(number))
+    switch (ListNumbers(ListGroupI()).indexOf(number))
     {
         // I
         case 0: // I01
@@ -1035,7 +765,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (JNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupJ()).indexOf(number))
     {
         // J
         case 0: // J01
@@ -1070,7 +800,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (KNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupK()).indexOf(number))
     {
         // K
         case 0: // K01
@@ -1091,7 +821,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (LNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupL()).indexOf(number))
     {
         // L
         case 0: // L01
@@ -1108,7 +838,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (MNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupM()).indexOf(number))
     {
         // M
         case 0: // M01
@@ -1123,7 +853,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (NNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupN()).indexOf(number))
     {
         // N
         case 0: // N01
@@ -1142,7 +872,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (ONumbers.indexOf(number))
+    switch (ListNumbers(ListGroupO()).indexOf(number))
     {
         // O
         case 0: // O01
@@ -1177,7 +907,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (PNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupP()).indexOf(number))
     {
         // P
         case 0: // P01
@@ -1208,7 +938,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             break;
     }
 
-    switch (QNumbers.indexOf(number))
+    switch (ListNumbers(ListGroupQ()).indexOf(number))
     {
         // Q
         case 0: // Q01

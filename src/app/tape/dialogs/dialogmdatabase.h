@@ -90,6 +90,7 @@ private:
     QTreeWidgetItem *AddGroup(const QString &text);
     void AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list);
 
+    QStringList ListNumbers(const QStringList & listMeasurements) const;
     QString MapDiagrams(const QString &number) const;
 
     void ReadSettings();
