@@ -30,6 +30,7 @@
 #include "calculator.h"
 #include "../vmisc/def.h"
 #include "../vgeometry/vgeometrydef.h"
+#include "../qmuparser/qmutokenparser.h"
 
 using namespace qmu;
 
@@ -713,7 +714,7 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
     }
     QString newFormula = formula;// Local copy for making changes
 
-    Calculator *cal = new Calculator(formula, osSeparator);// Eval formula
+    QmuTokenParser *cal = new QmuTokenParser(formula, osSeparator);// Eval formula
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     QMap<int, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
     delete cal;
@@ -820,7 +821,7 @@ QString VTranslateVars::FormulaToUser(const QString &formula) const
     QMap<int, QString> numbers;
     try
     {
-        Calculator *cal = new Calculator(formula, false);// Eval formula
+        QmuTokenParser *cal = new QmuTokenParser(formula, false);// Eval formula
         tokens = cal->GetTokens();// Tokens (variables, measurements)
         numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
         delete cal;
