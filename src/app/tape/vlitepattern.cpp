@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   movesplinepath.cpp
+ **  @file   vlitepattern.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   11 6, 2014
+ **  @date   9 8, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,80 +26,49 @@
  **
  *************************************************************************/
 
-#include "movesplinepath.h"
-#include <QDomElement>
-#include "../tools/drawTools/toolcurve/vtoolsplinepath.h"
+#include "vlitepattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
-                               const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldSplinePath(oldSplPath), newSplinePath(newSplPath), scene(scene)
+VLitePattern::VLitePattern(QObject *parent)
+    : VAbstractPattern(parent)
 {
-    setText(tr("move spline path"));
-    nodeId = id;
-
-    SCASSERT(scene != nullptr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveSplinePath::~MoveSplinePath()
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MoveSplinePath::undo()
+void VLitePattern::CreateEmptyFile(const QString &tablePath)
 {
-    qCDebug(vUndo, "Undo.");
-
-    Do(oldSplinePath);
+    Q_UNUSED(tablePath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveSplinePath::redo()
+void VLitePattern::IncrementReferens(quint32 id) const
 {
-    qCDebug(vUndo, "Redo.");
-
-    Do(newSplinePath);
+    Q_UNUSED(id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MoveSplinePath::mergeWith(const QUndoCommand *command)
+void VLitePattern::DecrementReferens(quint32 id) const
 {
-    const MoveSplinePath *moveCommand = static_cast<const MoveSplinePath *>(command);
-    SCASSERT(moveCommand != nullptr);
-    const quint32 id = moveCommand->getSplinePathId();
-
-    if (id != nodeId)
-    {
-        return false;
-    }
-
-    newSplinePath = moveCommand->getNewSplinePath();
-    return true;
+    Q_UNUSED(id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int MoveSplinePath::id() const
+QString VLitePattern::GenerateLabel(const LabelType &type, const QString &reservedName) const
 {
-    return static_cast<int>(UndoCommand::MoveSplinePath);
+    Q_UNUSED(type)
+    Q_UNUSED(reservedName)
+    return QString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveSplinePath::Do(const VSplinePath &splPath)
+void VLitePattern::UpdateToolData(const quint32 &id, VContainer *data)
 {
-    QDomElement domElement = doc->elementById(nodeId);
-    if (domElement.isElement())
-    {
-        doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.GetKCurve()));
-        VToolSplinePath::UpdatePathPoint(doc, domElement, splPath);
+    Q_UNUSED(id)
+    Q_UNUSED(data)
+}
 
-        emit NeedLiteParsing(Document::LiteParse);
-
-        QList<QGraphicsView*> list = scene->views();
-        VMainGraphicsView::NewSceneRect(scene, list[0]);
-    }
-    else
-    {
-        qCDebug(vUndo, "Can't find spline path with id = %u.", nodeId);
-        return;
-    }
+//---------------------------------------------------------------------------------------------------------------------
+void VLitePattern::LiteParseTree(const Document &parse)
+{
+    Q_UNUSED(parse)
 }

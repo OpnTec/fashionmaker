@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vgeometrydef.cpp
+ **  @file   vlitepattern.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 5, 2015
+ **  @date   9 8, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,19 +26,31 @@
  **
  *************************************************************************/
 
-#include "vgeometrydef.h"
+#ifndef VLITEPATTERN_H
+#define VLITEPATTERN_H
 
-//variables
-const QString spl_          = QStringLiteral("Spl_");
-const QString arc_          = QStringLiteral("Arc_");
-const QString splPath       = QStringLiteral("SplPath");
-const QString radius_V      = QStringLiteral("Radius");
-const QString radiusArc_    = radius_V + arc_;
-const QString angle1_V      = QStringLiteral("Angle1");
-const QString angle2_V      = QStringLiteral("Angle2");
-const QString angle1Arc_    = angle1_V + arc_;
-const QString angle2Arc_    = angle2_V + arc_;
-const QString angle1Spl_    = angle1_V + spl_;
-const QString angle2Spl_    = angle2_V + spl_;
-const QString angle1SplPath = angle1_V + splPath;
-const QString angle2SplPath = angle2_V + splPath;
+#include "../ifc/xml/vabstractpattern.h"
+
+class VLitePattern : public VAbstractPattern
+{
+    Q_OBJECT
+public:
+    VLitePattern(QObject *parent = nullptr);
+
+    virtual void    CreateEmptyFile(const QString &tablePath) Q_DECL_OVERRIDE;
+
+    virtual void    IncrementReferens(quint32 id) const Q_DECL_OVERRIDE;
+    virtual void    DecrementReferens(quint32 id) const Q_DECL_OVERRIDE;
+
+    virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
+
+    virtual void    UpdateToolData(const quint32 &id, VContainer *data) Q_DECL_OVERRIDE;
+
+public slots:
+    virtual void    LiteParseTree(const Document &parse) Q_DECL_OVERRIDE;
+
+private:
+    Q_DISABLE_COPY(VLitePattern)
+};
+
+#endif // VLITEPATTERN_H

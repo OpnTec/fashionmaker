@@ -31,6 +31,7 @@
 #include "../vmisc/def.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../ifc/ifcdef.h"
 
 using namespace qmu;
 

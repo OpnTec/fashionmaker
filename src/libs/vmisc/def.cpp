@@ -343,10 +343,6 @@ const QString p52_S = QStringLiteral("p52");
 const QString p53_S = QStringLiteral("p53");
 const QString p54_S = QStringLiteral("p54");
 
-//variables
-const QString line_       = QStringLiteral("Line_");
-const QString angleLine_  = QStringLiteral("AngleLine_");
-
 //functions
 const QString sin_F   = QStringLiteral("sin");
 const QString cos_F   = QStringLiteral("cos");
@@ -385,6 +381,10 @@ const QStringList builInFunctions = QStringList() << sin_F  << cos_F   << tan_F 
 const QString cm_Oprt = QStringLiteral("cm");
 const QString mm_Oprt = QStringLiteral("mm");
 const QString in_Oprt = QStringLiteral("in");
+
+const QStringList builInPostfixOperators = QStringList() << cm_Oprt
+                                                         << mm_Oprt
+                                                         << in_Oprt;
 
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");

@@ -529,13 +529,6 @@ extern const QString p52_S;
 extern const QString p53_S;
 extern const QString p54_S;
 
-extern const QString line_;
-extern const QString angleLine_;
-
-// variables name
-extern const QString line_;
-extern const QString angleLine_;
-
 // functions
 extern const QString sin_F;
 extern const QString cos_F;
@@ -570,6 +563,8 @@ extern const QStringList builInFunctions;
 extern const QString cm_Oprt;
 extern const QString mm_Oprt;
 extern const QString in_Oprt;
+
+extern const QStringList builInPostfixOperators;
 
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;

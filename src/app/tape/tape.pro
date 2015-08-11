@@ -145,7 +145,7 @@ CONFIG(debug, debug|release){
 win32:RC_FILE = share/resources/tape.rc
 
 # When the GNU linker sees a library, it discards all symbols that it doesn't need.
-# Add dependent library the first.
+# Dependent library go first.
 
 #VTools static library (depend on VWidgets, VMisc, VPatternDB)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vtools/$${DESTDIR}/ -lvtools
@@ -202,7 +202,7 @@ DEPENDPATH += $$PWD/../../libs/vgeometry
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
 
-# IFC static library
+# IFC static library (depend on QMuParser)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc
 
 INCLUDEPATH += $$PWD/../../libs/ifc

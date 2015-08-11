@@ -69,13 +69,13 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const d
     {
         if (type == DoublePoint::FirstPoint)
         {
-            oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMx1, "0.0"));
-            oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMy1, "0.0"));
+            oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx1, "0.0"));
+            oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy1, "0.0"));
         }
         else
         {
-            oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMx2, "0.0"));
-            oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMy2, "0.0"));
+            oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx2, "0.0"));
+            oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy2, "0.0"));
         }
 
         if (type == DoublePoint::FirstPoint)
@@ -168,13 +168,13 @@ void MoveDoubleLabel::Do(double mx, double my)
     {
         if (type == DoublePoint::FirstPoint)
         {
-            doc->SetAttribute(domElement, VAbstractTool::AttrMx1, QString().setNum(qApp->fromPixel(mx)));
-            doc->SetAttribute(domElement, VAbstractTool::AttrMy1, QString().setNum(qApp->fromPixel(my)));
+            doc->SetAttribute(domElement, AttrMx1, QString().setNum(qApp->fromPixel(mx)));
+            doc->SetAttribute(domElement, AttrMy1, QString().setNum(qApp->fromPixel(my)));
         }
         else
         {
-            doc->SetAttribute(domElement, VAbstractTool::AttrMx2, QString().setNum(qApp->fromPixel(mx)));
-            doc->SetAttribute(domElement, VAbstractTool::AttrMy2, QString().setNum(qApp->fromPixel(my)));
+            doc->SetAttribute(domElement, AttrMx2, QString().setNum(qApp->fromPixel(mx)));
+            doc->SetAttribute(domElement, AttrMy2, QString().setNum(qApp->fromPixel(my)));
         }
 
         emit NeedLiteParsing(Document::LitePPParse);

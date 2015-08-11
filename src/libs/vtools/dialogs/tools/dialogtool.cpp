@@ -227,7 +227,7 @@ QString DialogTool::GetComboBoxCurrentData(const QComboBox *box) const
 #endif
     if (value.isEmpty())
     {
-        value = VAbstractTool::TypeLineLine;
+        value = TypeLineLine;
     }
     return value;
 }

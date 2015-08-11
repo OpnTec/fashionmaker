@@ -75,7 +75,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
     vis = new VisToolAlongLine(data);
 
     // Call after initialization vis!!!!
-    SetTypeLine(VAbstractTool::TypeLineNone);//By default don't show line
+    SetTypeLine(TypeLineNone);//By default don't show line
 
     FixateSize();
 }

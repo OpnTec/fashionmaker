@@ -48,6 +48,8 @@ public:
     VAbstractPattern(QObject *parent = nullptr);
     virtual ~VAbstractPattern() Q_DECL_OVERRIDE;
 
+    QStringList    ListMeasurements() const;
+
     virtual void   CreateEmptyFile(const QString &tablePath)=0;
 
     void           ChangeActivPP(const QString& name, const Document &parse = Document::FullParse);
@@ -242,6 +244,17 @@ protected:
 
 private:
     Q_DISABLE_COPY(VAbstractPattern)
+
+    QStringList ListIncrements() const;
+    QStringList ListExpressions() const;
+    QStringList ListPointExpressions() const;
+    QStringList ListArcExpressions() const;
+    QStringList ListSplineExpressions() const;
+    QStringList ListPathPointExpressions() const;
+
+    bool IsVariable(const QString& token) const;
+    bool IsPostfixOperator(const QString& token) const;
+    bool IsFunction(const QString& token) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

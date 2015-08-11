@@ -62,4 +62,102 @@ static const quint32 null_id = 0;
 qreal WidthMainLine(Unit patternUnit);
 qreal WidthHairLine(Unit patternUnit);
 
+extern const QString AttrType;
+extern const QString AttrMx;
+extern const QString AttrMy;
+extern const QString AttrName;
+extern const QString AttrMx1;
+extern const QString AttrMy1;
+extern const QString AttrName1;
+extern const QString AttrMx2;
+extern const QString AttrMy2;
+extern const QString AttrName2;
+extern const QString AttrBaseLineP1;
+extern const QString AttrBaseLineP2;
+extern const QString AttrDartP1;
+extern const QString AttrDartP2;
+extern const QString AttrDartP3;
+extern const QString AttrX;
+extern const QString AttrY;
+extern const QString AttrTypeLine;
+extern const QString AttrLength;
+extern const QString AttrBasePoint;
+extern const QString AttrFirstPoint;
+extern const QString AttrSecondPoint;
+extern const QString AttrThirdPoint;
+extern const QString AttrCenter;
+extern const QString AttrRadius;
+extern const QString AttrAngle;
+extern const QString AttrAngle1;
+extern const QString AttrAngle2;
+extern const QString AttrP1Line;
+extern const QString AttrP2Line;
+extern const QString AttrP1Line1;
+extern const QString AttrP2Line1;
+extern const QString AttrP1Line2;
+extern const QString AttrP2Line2;
+extern const QString AttrPShoulder;
+extern const QString AttrPoint1;
+extern const QString AttrPoint2;
+extern const QString AttrPoint4;
+extern const QString AttrKAsm1;
+extern const QString AttrKAsm2;
+extern const QString AttrKCurve;
+extern const QString AttrPathPoint;
+extern const QString AttrPSpline;
+extern const QString AttrAxisP1;
+extern const QString AttrAxisP2;
+extern const QString AttrCurve;
+extern const QString AttrLineColor;
+extern const QString AttrColor;
+extern const QString AttrFirstArc;
+extern const QString AttrSecondArc;
+extern const QString AttrCrossPoint;
+extern const QString AttrC1Center;
+extern const QString AttrC2Center;
+extern const QString AttrC1Radius;
+extern const QString AttrC2Radius;
+extern const QString AttrCCenter;
+extern const QString AttrTangent;
+extern const QString AttrCRadius;
+extern const QString AttrArc;
+
+extern const QString TypeLineNone;
+extern const QString TypeLineLine;
+extern const QString TypeLineDashLine;
+extern const QString TypeLineDotLine;
+extern const QString TypeLineDashDotLine;
+extern const QString TypeLineDashDotDotLine;
+
+extern const QString ColorBlack;
+extern const QString ColorGreen;
+extern const QString ColorBlue;
+extern const QString ColorDarkRed;
+extern const QString ColorDarkGreen;
+extern const QString ColorDarkBlue;
+extern const QString ColorYellow;
+
+// variables name
+// Hacks for avoiding the linker error "undefined reference to"
+#define SPL_ "Spl_"
+#define ARC_ "Arc_"
+
+extern const QString line_;
+extern const QString angleLine_;
+extern const QString arc_;
+extern const QString spl_;
+extern const QString splPath;
+extern const QString radius_V;
+extern const QString radiusArc_;
+extern const QString angle1_V;
+extern const QString angle2_V;
+extern const QString angle1Arc_;
+extern const QString angle2Arc_;
+extern const QString angle1Spl_;
+extern const QString angle2Spl_;
+extern const QString angle1SplPath;
+extern const QString angle2SplPath;
+
+extern const QStringList builInVariables;
+
 #endif // IFCDEF_H

@@ -220,20 +220,20 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::EndLine:
             {
                 return QString(tr("%1_%2 - Line from point %1 to point %2"))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrBasePoint)))
                         .arg(PointName(tool.getId()));
             }
             case Tool::Line:
             {
                 return QString(tr("%1_%2 - Line from point %1 to point %2"))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)));
+                        .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrSecondPoint)));
             }
             case Tool::AlongLine:
             {
                 return QString(tr("%3 - Point along line %1_%2"))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrSecondPoint)))
                         .arg(PointName(tool.getId()));
             }
             case Tool::ShoulderPoint:
@@ -243,25 +243,25 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::Normal:
             {
                 return QString(tr("%3 - normal to line %1_%2"))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrSecondPoint)))
                         .arg(PointName(tool.getId()));
             }
             case Tool::Bisector:
             {
                 return QString(tr("%4 - bisector of angle %1_%2_%3"))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrThirdPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrSecondPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrThirdPoint)))
                         .arg(PointName(tool.getId()));
             }
             case Tool::LineIntersect:
             {
                 return QString(tr("%5 - intersection of lines %1_%2 and %3_%4"))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP1Line1)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP2Line1)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP1Line2)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP2Line2)))
+                        .arg(PointName(AttrUInt(domElem, AttrP1Line1)))
+                        .arg(PointName(AttrUInt(domElem, AttrP2Line1)))
+                        .arg(PointName(AttrUInt(domElem, AttrP1Line2)))
+                        .arg(PointName(AttrUInt(domElem, AttrP2Line2)))
                         .arg(PointName(tool.getId()));
             }
             case Tool::Spline:
@@ -308,36 +308,36 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::PointOfContact:
             {
                 return QString(tr("%4 - point of contact of arc with the center in point %1 and line %2_%3"))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrCenter)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrCenter)))
+                        .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrSecondPoint)))
                         .arg(PointName(tool.getId()));
             }
             case Tool::Height:
             {
                 return QString(tr("Point of perpendicular from point %1 to line %2_%3"))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP1Line)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP2Line)));
+                        .arg(PointName(AttrUInt(domElem, AttrBasePoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrP1Line)))
+                        .arg(PointName(AttrUInt(domElem, AttrP2Line)));
             }
             case Tool::Triangle:
             {
                 return QString(tr("Triangle: axis %1_%2, points %3 and %4"))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrAxisP1)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrAxisP2)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)));
+                        .arg(PointName(AttrUInt(domElem, AttrAxisP1)))
+                        .arg(PointName(AttrUInt(domElem, AttrAxisP2)))
+                        .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrSecondPoint)));
             }
             case Tool::PointOfIntersection:
             {
                 return QString(tr("%1 - point of intersection %2 and %3"))
                         .arg(PointName(tool.getId()))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrFirstPoint)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrSecondPoint)));
+                        .arg(PointName(AttrUInt(domElem, AttrFirstPoint)))
+                        .arg(PointName(AttrUInt(domElem, AttrSecondPoint)));
             }
             case Tool::CutArc:
             {
-                const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(AttrUInt(domElem, VToolCutArc::AttrArc));
+                const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(AttrUInt(domElem, AttrArc));
                 SCASSERT(arc != nullptr);
                 return QString(tr("%1 - cut arc with center %2"))
                         .arg(PointName(tool.getId()))
@@ -381,15 +381,15 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 return QString(tr("%1 - point of intersection line %2_%3 and axis through point %4"))
                         .arg(PointName(tool.getId()))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP1Line)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrP2Line)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)));
+                        .arg(PointName(AttrUInt(domElem, AttrP1Line)))
+                        .arg(PointName(AttrUInt(domElem, AttrP2Line)))
+                        .arg(PointName(AttrUInt(domElem, AttrBasePoint)));
             }
             case Tool::CurveIntersectAxis:
             {
                 return QString(tr("%1 - point of intersection curve and axis through point %2"))
                         .arg(PointName(tool.getId()))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrBasePoint)));
+                        .arg(PointName(AttrUInt(domElem, AttrBasePoint)));
             }
             case Tool::PointOfIntersectionArcs:
             {
@@ -410,9 +410,9 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::TrueDarts:
             {
                 return QString(tr("Correction the dart %1_%2_%3"))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrDartP1)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrDartP2)))
-                        .arg(PointName(AttrUInt(domElem, VAbstractTool::AttrDartP2)));
+                        .arg(PointName(AttrUInt(domElem, AttrDartP1)))
+                        .arg(PointName(AttrUInt(domElem, AttrDartP2)))
+                        .arg(PointName(AttrUInt(domElem, AttrDartP2)));
             }
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
