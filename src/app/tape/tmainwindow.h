@@ -91,6 +91,7 @@ private slots:
 
     void AddCustom();
     void AddKnown();
+    void ImportFromPattern();
 
     void ChangedSize(const QString &text);
     void ChangedHeight(const QString & text);
@@ -163,6 +164,8 @@ private:
 
     void ReadSettings();
     void WriteSettings();
+
+    QStringList FilterMeasurements(const QStringList &mNew, const QStringList &mFilter);
 };
 
 #endif // TMAINWINDOW_H

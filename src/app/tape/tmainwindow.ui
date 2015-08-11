@@ -618,6 +618,7 @@
     <addaction name="actionAddKnown"/>
     <addaction name="actionAddCustom"/>
     <addaction name="actionDatabase"/>
+    <addaction name="actionImportFromPattern"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMeasurements"/>
@@ -798,6 +799,14 @@
   <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionImportFromPattern">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Import from a pattern</string>
    </property>
   </action>
  </widget>

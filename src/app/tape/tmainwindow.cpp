@@ -36,6 +36,8 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
+#include "../ifc/xml/vpatternconverter.h"
+#include "vlitepattern.h"
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 #include "version.h"
@@ -782,6 +784,96 @@ void TMainWindow::AddKnown()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ImportFromPattern()
+{
+    if (m == nullptr)
+    {
+        return;
+    }
+
+    const QString filter(tr("Pattern files (*.val)"));
+    //Use standard path to individual measurements
+    const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
+
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Import from a pattern"), pathTo, filter);
+    if (mPath.isEmpty())
+    {
+        return;
+    }
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+    QLockFile *lock = new QLockFile(QFileInfo(mPath).fileName()+".lock");
+    lock->setStaleLockTime(0);
+    if (not MApplication::TryLock(lock))
+    {
+        if (lock->error() == QLockFile::LockFailedError)
+        {
+            qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
+            return;
+        }
+    }
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+
+#ifdef Q_OS_WIN32
+    qt_ntfs_permission_lookup++; // turn checking on
+#endif /*Q_OS_WIN32*/
+
+    QStringList measurements;
+    try
+    {
+        VPatternConverter converter(mPath);
+        converter.Convert();
+
+        VDomDocument::ValidateXML(VPatternConverter::CurrentSchema, mPath);
+        VLitePattern *doc = new VLitePattern();
+        doc->setXMLContent(mPath);
+        measurements = doc->ListMeasurements();
+        delete doc; // close a pattern
+    }
+    catch (VException &e)
+    {
+        e.CriticalMessageBox(tr("File error."), this);
+        return;
+    }
+
+#ifdef Q_OS_WIN32
+    qt_ntfs_permission_lookup--; // turn it off again
+#endif /*Q_OS_WIN32*/
+
+    delete lock; // release a pattern file
+
+    measurements = FilterMeasurements(measurements, m->ListAll());
+
+    qint32 currentRow;
+
+    if (ui->tableWidget->currentRow() == -1)
+    {
+        currentRow  = ui->tableWidget->rowCount() + measurements.size() - 1;
+        for (int i = 0; i < measurements.size(); ++i)
+        {
+            m->AddEmpty(measurements.at(i));
+        }
+    }
+    else
+    {
+        currentRow  = ui->tableWidget->currentRow() + measurements.size();
+        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+        QString after = nameField->text();
+        for (int i = 0; i < measurements.size(); ++i)
+        {
+            m->AddEmptyAfter(after, measurements.at(i));
+            after = measurements.at(i);
+        }
+    }
+
+    RefreshData();
+
+    ui->tableWidget->selectRow(currentRow);
+
+    MeasurementsWasSaved(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ChangedSize(const QString &text)
 {
     const int row = ui->tableWidget->currentRow();
@@ -1206,6 +1298,7 @@ void TMainWindow::SetupMenu()
     connect(ui->actionAddCustom, &QAction::triggered, this, &TMainWindow::AddCustom);
     connect(ui->actionAddKnown, &QAction::triggered, this, &TMainWindow::AddKnown);
     connect(ui->actionDatabase, &QAction::triggered, qApp, &MApplication::ShowDataBase);
+    connect(ui->actionImportFromPattern, &QAction::triggered, this, &TMainWindow::ImportFromPattern);
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowWindowMenu);
@@ -1333,6 +1426,7 @@ void TMainWindow::InitWindow()
 
     ui->actionAddCustom->setEnabled(true);
     ui->actionAddKnown->setEnabled(true);
+    ui->actionImportFromPattern->setEnabled(true);
     ui->actionReadOnly->setEnabled(true);
     ui->actionSaveAs->setEnabled(true);
 
@@ -1798,6 +1892,13 @@ void TMainWindow::WriteSettings()
     qApp->TapeSettings()->SetGeometry(saveGeometry());
     qApp->TapeSettings()->SetWindowState(saveState());
     qApp->TapeSettings()->SetToolbarsState(saveState(APP_VERSION));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList TMainWindow::FilterMeasurements(const QStringList &mNew, const QStringList &mFilter)
+{
+    const QSet<QString> import = mNew.toSet().subtract(mFilter.toSet());
+    return QStringList(import.toList());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
