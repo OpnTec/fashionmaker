@@ -92,7 +92,6 @@ void MessageHandler::handleMessage(QtMsgType type, const QString &description, c
 Q_LOGGING_CATEGORY(vXML, "v.xml")
 
 const QString VDomDocument::AttrId     = QStringLiteral("id");
-const QString VDomDocument::AttrUnit   = QStringLiteral("unit");
 const QString VDomDocument::UnitMM     = QStringLiteral("mm");
 const QString VDomDocument::UnitCM     = QStringLiteral("cm");
 const QString VDomDocument::UnitINCH   = QStringLiteral("inch");

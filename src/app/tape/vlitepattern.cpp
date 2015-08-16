@@ -35,9 +35,8 @@ VLitePattern::VLitePattern(QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLitePattern::CreateEmptyFile(const QString &tablePath)
+void VLitePattern::CreateEmptyFile()
 {
-    Q_UNUSED(tablePath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -46,7 +46,7 @@ public:
     VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
 
-    virtual void   CreateEmptyFile(const QString &tablePath) Q_DECL_OVERRIDE;
+    virtual void   CreateEmptyFile() Q_DECL_OVERRIDE;
 
     void           Parse(const Document &parse);
 

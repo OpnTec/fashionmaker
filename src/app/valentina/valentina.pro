@@ -2012,6 +2012,15 @@ DEPENDPATH += $$PWD/../../libs/vwidgets
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/vwidgets.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vwidgets/$${DESTDIR}/libvwidgets.a
 
+# VFormat static library (depend on VPatternDB, IFC)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vformat/$${DESTDIR}/ -lvformat
+
+INCLUDEPATH += $$PWD/../../libs/vformat
+DEPENDPATH += $$PWD/../../libs/vformat
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/vformat.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/libvformat.a
+
 #VPatternDB static library (depend on vgeometry, vmisc, VLayout)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb
 

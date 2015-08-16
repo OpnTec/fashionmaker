@@ -51,10 +51,10 @@ const QString VAbstractPattern::TagTools        = QStringLiteral("tools");
 const QString VAbstractPattern::TagGradation    = QStringLiteral("gradation");
 const QString VAbstractPattern::TagHeights      = QStringLiteral("heights");
 const QString VAbstractPattern::TagSizes        = QStringLiteral("sizes");
+const QString VAbstractPattern::TagUnit         = QStringLiteral("unit");
 
 const QString VAbstractPattern::AttrName        = QStringLiteral("name");
 const QString VAbstractPattern::AttrType        = QStringLiteral("type");
-const QString VAbstractPattern::AttrPath        = QStringLiteral("path");
 
 const QString VAbstractPattern::AttrAll         = QStringLiteral("all");
 
@@ -453,16 +453,7 @@ QVector<VToolRecord> VAbstractPattern::getLocalHistory() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::MPath() const
 {
-    QDomNodeList list = elementsByTagName(TagMeasurements);
-    QDomElement element = list.at(0).toElement();
-    if (element.isElement())
-    {
-        return GetParametrString(element, AttrPath);
-    }
-    else
-    {
-        return QString();
-    }
+    return UniqueTagText(TagUnit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -473,11 +464,9 @@ void VAbstractPattern::SetPath(const QString &path)
         qDebug()<<"Path to measurements is empty"<<Q_FUNC_INFO;
         return;
     }
-    QDomNodeList list = elementsByTagName(TagMeasurements);
-    QDomElement element = list.at(0).toElement();
-    if (element.isElement())
+
+    if (setTagText(TagMeasurements, path))
     {
-        SetAttribute(element, AttrPath, path);
         emit patternChanged(false);
     }
     else
@@ -489,59 +478,22 @@ void VAbstractPattern::SetPath(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 Unit VAbstractPattern::MUnit() const
 {
-    QDomNodeList list = elementsByTagName(VAbstractPattern::TagMeasurements);
-    QDomElement element = list.at(0).toElement();
-    if (element.isElement())
+    const QStringList units = QStringList() << "mm" << "cm" << "inch";
+    const QString unit = UniqueTagText(TagUnit);
+    switch (units.indexOf(unit))
     {
-        QStringList units = QStringList() <<"mm" << "cm" << "inch";
-        QString unit = GetParametrString(element, AttrUnit);
-        switch (units.indexOf(unit))
-        {
-            case 0:// mm
-                return Unit::Mm;
-                break;
-            case 1:// cm
-                return Unit::Cm;
-                break;
-            case 2:// in
-                return Unit::Inch;
-                break;
-            default:
-                return Unit::Cm;
-                break;
-        }
-    }
-    else
-    {
-        return Unit::Cm;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-MeasurementsType VAbstractPattern::MType() const
-{
-    QDomNodeList list = elementsByTagName(VAbstractPattern::TagMeasurements);
-    QDomElement element = list.at(0).toElement();
-    if (element.isElement())
-    {
-        QString type = GetParametrString(element, AttrType);
-        QStringList types = QStringList() << "standard" << "individual";
-        switch (types.indexOf(type))
-        {
-            case 0:// standard
-                return MeasurementsType::Standard;
-                break;
-            case 1:// individual
-                return MeasurementsType::Individual;
-                break;
-            default:
-                return MeasurementsType::Individual;
-                break;
-        }
-    }
-    else
-    {
-        return MeasurementsType::Individual;
+        case 0:// mm
+            return Unit::Mm;
+            break;
+        case 1:// cm
+            return Unit::Cm;
+            break;
+        case 2:// in
+            return Unit::Inch;
+            break;
+        default:
+            return Unit::Cm;
+            break;
     }
 }
 

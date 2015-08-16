@@ -259,7 +259,7 @@ private:
     void               CreateActions();
     void               InitAutoSave();
     QString            PatternPieceName(const QString &text);
-    QString            CheckPathToMeasurements(const QString &path, const MeasurementsType &patternType);
+    QString            CheckPathToMeasurements(const QString &path);
     QComboBox          *SetGradationList(const QString &label, const QStringList &list);
     void               ChangePP(int index, bool zoomBestFit = true);
     /**
@@ -279,7 +279,7 @@ private:
     QStringList        GetUnlokedRestoreFileList()const;
     void               ToolBarStyle(QToolBar *bar);
 
-    void               AddPP(const QString &PPName, const QString &path);
+    void               AddPP(const QString &PPName);
 
     void               InitScenes();
 };

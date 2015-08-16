@@ -50,7 +50,7 @@ public:
 
     QStringList    ListMeasurements() const;
 
-    virtual void   CreateEmptyFile(const QString &tablePath)=0;
+    virtual void   CreateEmptyFile()=0;
 
     void           ChangeActivPP(const QString& name, const Document &parse = Document::FullParse);
     QString        GetNameActivPP() const;
@@ -83,7 +83,6 @@ public:
     QString        MPath() const;
     void           SetPath(const QString &path);
     Unit           MUnit() const;
-    MeasurementsType MType() const;
 
     quint32        SiblingNodeId(const quint32 &nodeId) const;
 
@@ -123,10 +122,10 @@ public:
     static const QString TagGradation;
     static const QString TagHeights;
     static const QString TagSizes;
+    static const QString TagUnit;
 
     static const QString AttrName;
     static const QString AttrType;
-    static const QString AttrPath;
 
     static const QString AttrAll;
 

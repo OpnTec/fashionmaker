@@ -62,14 +62,9 @@ VPattern::VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw,
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CreateEmptyFile create minimal empty file.
- * @param tablePath path to measurement file (standard or individual)
  */
-void VPattern::CreateEmptyFile(const QString &tablePath)
+void VPattern::CreateEmptyFile()
 {
-    if (tablePath.isEmpty())
-    {
-        throw VException("Path to measurement table empty.");
-    }
     this->clear();
     QDomElement patternElement = this->createElement(TagPattern);
 
@@ -84,12 +79,12 @@ void VPattern::CreateEmptyFile(const QString &tablePath)
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));
 
-    QDomElement measurements = createElement(TagMeasurements);
-    SetAttribute(measurements, AttrUnit, UnitsToStr(qApp->patternUnit()));
-    SetAttribute(measurements, AttrType, qApp->patternType());
-    SetAttribute(measurements, AttrPath, tablePath);
-    patternElement.appendChild(measurements);
+    QDomElement unit = createElement(TagUnit);
+    newNodeText = createTextNode(UnitsToStr(qApp->patternUnit()));
+    unit.appendChild(newNodeText);
+    patternElement.appendChild(unit);
 
+    patternElement.appendChild(createElement(TagMeasurements));
     patternElement.appendChild(createElement(TagIncrements));
 
     this->appendChild(patternElement);
@@ -907,7 +902,7 @@ void VPattern::ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &
         }
         if (parse == Document::FullParse)
         {
-            spoint = new VToolBasePoint(this, data, id, Source::FromFile, nameActivPP, MPath());
+            spoint = new VToolBasePoint(this, data, id, Source::FromFile, nameActivPP);
             scene->addItem(spoint);
             connect(spoint, &VToolBasePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
             connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolBasePoint::SetFactor);
@@ -2284,30 +2279,30 @@ void VPattern::PrepareForParse(const Document &parse)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::UpdateMeasurements()
 {
-    try
-    {
-        const QString path = MPath();
-        if (MType() == MeasurementsType::Standard)
-        {
-            VStandardMeasurements m(data);
-            ValidateXML("://schema/standard_measurements.xsd", path);
-            m.setXMLContent(path);
-            m.Measurements();
-        }
-        else
-        {
-            VIndividualMeasurements m(data);
-            ValidateXML("://schema/individual_measurements.xsd", path);
-            m.setXMLContent(path);
-            m.Measurements();
-        }
-    }
-    catch (VException &e)
-    {
-        e.CriticalMessageBox(tr("File error."), qApp->getMainWindow());
-        emit ClearMainWindow();
-        return;
-    }
+//    try
+//    {
+//        const QString path = MPath();
+//        if (MType() == MeasurementsType::Standard)
+//        {
+//            VStandardMeasurements m(data);
+//            ValidateXML("://schema/standard_measurements.xsd", path);
+//            m.setXMLContent(path);
+//            m.Measurements();
+//        }
+//        else
+//        {
+//            VIndividualMeasurements m(data);
+//            ValidateXML("://schema/individual_measurements.xsd", path);
+//            m.setXMLContent(path);
+//            m.Measurements();
+//        }
+//    }
+//    catch (VException &e)
+//    {
+//        e.CriticalMessageBox(tr("File error."), qApp->getMainWindow());
+//        emit ClearMainWindow();
+//        return;
+//    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

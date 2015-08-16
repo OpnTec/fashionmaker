@@ -45,6 +45,9 @@
 #include "options.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vmisc/logging.h"
+#include "../vformat/vmeasurements.h"
+#include "../ifc/xml/vvstconverter.h"
+#include "../ifc/xml/vvitconverter.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -157,11 +160,11 @@ void MainWindow::NewPP()
         return;
     }
 
-    AddPP(patternPieceName, doc->MPath());
+    AddPP(patternPieceName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::AddPP(const QString &PPName, const QString &path)
+void MainWindow::AddPP(const QString &PPName)
 {
     if (doc->appendPP(PPName) == false)
     {
@@ -176,7 +179,7 @@ void MainWindow::AddPP(const QString &PPName, const QString &path)
     ui->view->itemClicked(nullptr);//hide options previous tool
     const QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
     const quint32 id = pattern->AddGObject(new VPointF(30+comboBoxDraws->count()*5, 40, label, 5, 10));
-    VToolBasePoint *spoint = new VToolBasePoint(doc, pattern, id, Source::FromGui, PPName, path);
+    VToolBasePoint *spoint = new VToolBasePoint(doc, pattern, id, Source::FromGui, PPName);
     sceneDraw->addItem(spoint);
     ui->view->itemClicked(spoint);
 
@@ -2018,69 +2021,19 @@ void MainWindow::New()
         qCDebug(vMainWindow, "New PP.");
         QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
         qCDebug(vMainWindow, "Generated PP name: %s", patternPieceName.toUtf8().constData());
-        QString path;
 
         qCDebug(vMainWindow, "First PP");
-        DialogMeasurements measurements(this);
-        if (measurements.exec() == QDialog::Rejected)
+        DialogNewPattern newPattern(pattern, patternPieceName, this);
+        if (newPattern.exec() == QDialog::Accepted)
         {
-            qCDebug(vMainWindow, "Creation PP was canceled");
-            return;
-        }
-        if (measurements.type() == MeasurementsType::Standard)
-        {
-            qCDebug(vMainWindow, "PP with standard measurements");
-            qApp->setPatternType(MeasurementsType::Standard);
-            DialogStandardMeasurements stMeasurements(pattern, patternPieceName, this);
-            if (stMeasurements.exec() == QDialog::Accepted)
-            {
-                patternPieceName = stMeasurements.name();
-                qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
-                path = stMeasurements.tablePath();
-                qCDebug(vMainWindow, "Table path: %s", path.toUtf8().constData());
-                VStandardMeasurements m(pattern);
-                m.setXMLContent(path);
-                m.SetSize();
-                m.SetHeight();
-                m.Measurements();
-            }
-            else
-            {
-                qCDebug(vMainWindow, "Selection standard measurements canceled.");
-                return;
-            }
+            patternPieceName = newPattern.name();
+            qApp->setPatternUnit(newPattern.PatternUnit());
+            qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
         }
         else
         {
-            qCDebug(vMainWindow, "PP with individual measurements.");
-            QMessageBox::StandardButton ret;
-            ret = QMessageBox::question(this, tr("Individual measurements is under development"),
-                                        tr("There is no way create individual measurements file independent on the "
-                                           "pattern file.\nFor opening pattern need keep both files: pattern and "
-                                           "measurements. Do you want continue?"),
-                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-            if (ret == QMessageBox::No)
-            {
-                return;
-            }
-
-            qApp->setPatternType(MeasurementsType::Individual);
-            DialogIndividualMeasurements indMeasurements(pattern, patternPieceName, this);
-            if (indMeasurements.exec() == QDialog::Accepted)
-            {
-                patternPieceName = indMeasurements.name();
-                qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
-                path = indMeasurements.tablePath();
-                qCDebug(vMainWindow, "Table path: %s", path.toUtf8().constData());
-                VIndividualMeasurements m(pattern);
-                m.setXMLContent(path);
-                m.Measurements();
-            }
-            else
-            {
-                qCDebug(vMainWindow, "Selection individual measurements canceled.");
-                return;
-            }
+            qCDebug(vMainWindow, "Creation a new pattern was canceled.");
+            return;
         }
 
         //Set scene size to size scene view
@@ -2088,7 +2041,7 @@ void MainWindow::New()
         VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
         ToolBarOption();
 
-        AddPP(patternPieceName, path);
+        AddPP(patternPieceName);
     }
     else
     {
@@ -2853,10 +2806,9 @@ void MainWindow::LoadPattern(const QString &fileName)
         doc->setXMLContent(fileName);
 
         qApp->setPatternUnit(doc->MUnit());
-        qApp->setPatternType(doc->MType());
         QString path = doc->MPath();
 
-        path = CheckPathToMeasurements(path, qApp->patternType());
+        path = CheckPathToMeasurements(path);
         if (path.isEmpty())
         {
             Clear();
@@ -3055,9 +3007,14 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MainWindow::CheckPathToMeasurements(const QString &path, const MeasurementsType &patternType)
+QString MainWindow::CheckPathToMeasurements(const QString &path)
 {
-    QFile table(path);
+    if (path.isEmpty())
+    {
+        return path;
+    }
+
+    QFileInfo table(path);
     if (table.exists() == false)
     {
         QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> %3").arg(path)
@@ -3071,18 +3028,38 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Measureme
         }
         else
         {
-            QString filter;
+            MeasurementsType patternType;
+            if (table.suffix() == QLatin1String("vst"))
+            {
+                patternType = MeasurementsType::Standard;
+            }
+            else if (table.suffix() == QLatin1String("vit"))
+            {
+                patternType = MeasurementsType::Individual;
+            }
+            else
+            {
+                patternType = MeasurementsType::Unknown;
+            }
+
             QString mPath;
             if (patternType == MeasurementsType::Standard)
             {
-                filter = tr("Standard measurements (*.vst)");
+                const QString filter = tr("Standard measurements (*.vst)");
                 //Use standard path to standard measurements
                 const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
                 mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
             }
+            else if (patternType == MeasurementsType::Individual)
+            {
+                const QString filter = tr("Individual measurements (*.vit)");
+                //Use standard path to individual measurements
+                const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+                mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+            }
             else
             {
-                filter = tr("Individual measurements (*.vit)");
+                const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
                 //Use standard path to individual measurements
                 const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
                 mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
@@ -3094,14 +3071,33 @@ QString MainWindow::CheckPathToMeasurements(const QString &path, const Measureme
             }
             else
             {
+                VMeasurements *m = new VMeasurements(pattern);
+                m->setXMLContent(mPath);
+
+                patternType = m->Type();
+
+                if (patternType == MeasurementsType::Unknown)
+                {
+                    VException e("Measurement file has unknown format.");
+                    throw e;
+                }
+
                 if (patternType == MeasurementsType::Standard)
                 {
-                    VDomDocument::ValidateXML("://schema/standard_measurements.xsd", mPath);
+                    VVSTConverter converter(mPath);
+                    converter.Convert();
+
+                    VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, mPath);
                 }
                 else
                 {
-                    VDomDocument::ValidateXML("://schema/individual_measurements.xsd", mPath);
+                    VVITConverter converter(mPath);
+                    converter.Convert();
+
+                    VDomDocument::ValidateXML(VVITConverter::CurrentSchema, mPath);
                 }
+
+                delete m;
                 doc->SetPath(mPath);
                 PatternWasModified(false);
                 return mPath;

@@ -112,13 +112,13 @@ void VIndividualMeasurements::setBirthDate(const QDate &date)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-SexType VIndividualMeasurements::Sex() const
+SexType1 VIndividualMeasurements::Sex() const
 {
     return StrToGender(UniqueTagText(TagSex, ""));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VIndividualMeasurements::setSex(const SexType &sex)
+void VIndividualMeasurements::setSex(const SexType1 &sex)
 {
     setTagText(TagSex, GenderToStr(sex));
 }
@@ -136,13 +136,13 @@ void VIndividualMeasurements::setMail(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VIndividualMeasurements::GenderToStr(const SexType &sex)
+QString VIndividualMeasurements::GenderToStr(const SexType1 &sex)
 {
     switch (sex)
     {
-        case SexType::Male:
+        case SexType1::Male:
             return SexMale;
-        case SexType::Female:
+        case SexType1::Female:
             return SexFemale;
         default:
             return SexMale;
@@ -150,16 +150,16 @@ QString VIndividualMeasurements::GenderToStr(const SexType &sex)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-SexType VIndividualMeasurements::StrToGender(const QString &sex)
+SexType1 VIndividualMeasurements::StrToGender(const QString &sex)
 {
     QStringList genders = QStringList() << SexMale << SexFemale;
     switch (genders.indexOf(sex))
     {
         case 0: // SexMale
-            return SexType::Male;
+            return SexType1::Male;
         case 1: // SexFemale
-            return SexType::Female;
+            return SexType1::Female;
         default:
-            return SexType::Male;
+            return SexType1::Male;
     }
 }

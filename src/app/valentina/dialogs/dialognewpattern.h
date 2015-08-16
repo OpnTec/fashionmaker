@@ -31,46 +31,30 @@
 
 #include <QDialog>
 
+#include "../vmisc/def.h"
+
 class VContainer;
 
 namespace Ui
 {
-    class DialogIndividualMeasurements;
+    class DialogNewPattern;
 }
 
-class DialogIndividualMeasurements : public QDialog
+class DialogNewPattern : public QDialog
 {
     Q_OBJECT
 public:
-    DialogIndividualMeasurements(VContainer *data, const QString &patternPieceName, QWidget *parent = nullptr);
-    ~DialogIndividualMeasurements();
+    DialogNewPattern(VContainer *data, const QString &patternPieceName, QWidget *parent = nullptr);
+    ~DialogNewPattern();
     QString name() const;
-    QString tablePath() const;
+    Unit PatternUnit() const;
 public slots:
-    void OpenTable();
-    void NewTable();
     void CheckState();
-    void DialogAccepted();
-    void DialogRejected();
 private:
-    Q_DISABLE_COPY(DialogIndividualMeasurements)
-    Ui::DialogIndividualMeasurements *ui;
-    QString _name;
-    QString _tablePath;
+    Q_DISABLE_COPY(DialogNewPattern)
+    Ui::DialogNewPattern *ui;
     VContainer *data;
     void InitUnits();
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QString DialogIndividualMeasurements::name() const
-{
-    return _name;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QString DialogIndividualMeasurements::tablePath() const
-{
-    return _tablePath;
-}
 
 #endif // DIALOGINDIVIDUALMEASUREMENTS_H

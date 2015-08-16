@@ -39,7 +39,7 @@
 // max support version of format
 #define VIT_VERSION 0x000200
 
-enum class SexType : char { Male, Female };
+enum class SexType1 : char { Male, Female };
 
 class VIndividualMeasurements:public VAbstractMeasurements
 {
@@ -54,8 +54,8 @@ public:
     void         setGivenName(const QString &text);
     QDate        BirthDate() const;
     void         setBirthDate(const QDate &date);
-    SexType      Sex() const;
-    void         setSex(const SexType &sex);
+    SexType1      Sex() const;
+    void         setSex(const SexType1 &sex);
     QString      Mail() const;
     void         setMail(const QString &text);
 
@@ -67,8 +67,8 @@ public:
     static const QString SexMale;
     static const QString SexFemale;
 
-    static QString GenderToStr(const SexType &sex);
-    static SexType StrToGender(const QString &sex);
+    static QString GenderToStr(const SexType1 &sex);
+    static SexType1 StrToGender(const QString &sex);
 protected:
     virtual void ReadMeasurement(const QDomElement &domElement, const QString &tag) Q_DECL_OVERRIDE;
 private:

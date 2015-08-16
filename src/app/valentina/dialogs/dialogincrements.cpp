@@ -147,8 +147,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         ui->lineEditGivenName->setText(m->GivenName());
         ui->lineEditFamilyName->setText(m->FamilyName());
 
-        ui->comboBoxSex->addItem(tr("male"), QVariant(m->GenderToStr(SexType::Male)));
-        ui->comboBoxSex->addItem(tr("female"), QVariant(m->GenderToStr(SexType::Female)));
+        ui->comboBoxSex->addItem(tr("male"), QVariant(m->GenderToStr(SexType1::Male)));
+        ui->comboBoxSex->addItem(tr("female"), QVariant(m->GenderToStr(SexType1::Female)));
         qint32 index = ui->comboBoxSex->findData(m->GenderToStr(m->Sex()));
         if (index != -1)
         {

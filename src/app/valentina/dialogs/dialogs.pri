@@ -8,9 +8,7 @@ HEADERS += \
     $$PWD/configdialog.h \
     $$PWD/configpages/pages.h \
     $$PWD/dialogpatternproperties.h \
-    $$PWD/dialogmeasurements.h \
-    $$PWD/dialogstandardmeasurements.h \
-    $$PWD/dialogindividualmeasurements.h \
+    $$PWD/dialognewpattern.h \
     $$PWD/dialogaboutapp.h \
     $$PWD/dialogpatternxmledit.h \
     $$PWD/configpages/configurationpage.h \
@@ -26,9 +24,7 @@ SOURCES += \
     $$PWD/dialoghistory.cpp \
     $$PWD/configdialog.cpp \
     $$PWD/dialogpatternproperties.cpp \
-    $$PWD/dialogmeasurements.cpp \
-    $$PWD/dialogstandardmeasurements.cpp \
-    $$PWD/dialogindividualmeasurements.cpp \
+    $$PWD/dialognewpattern.cpp \
     $$PWD/dialogaboutapp.cpp \
     $$PWD/dialogpatternxmledit.cpp \
     $$PWD/configpages/configurationpage.cpp \
@@ -43,9 +39,7 @@ FORMS += \
     $$PWD/dialogincrements.ui \
     $$PWD/dialoghistory.ui \
     $$PWD/dialogpatternproperties.ui \
-    $$PWD/dialogmeasurements.ui \
-    $$PWD/dialogstandardmeasurements.ui \
-    $$PWD/dialogindividualmeasurements.ui \
+    $$PWD/dialognewpattern.ui \
     $$PWD/dialogaboutapp.ui \
     $$PWD/dialogpatternxmledit.ui \
     $$PWD/dialoglayoutsettings.ui \

@@ -37,7 +37,7 @@ class VLitePattern : public VAbstractPattern
 public:
     VLitePattern(QObject *parent = nullptr);
 
-    virtual void    CreateEmptyFile(const QString &tablePath) Q_DECL_OVERRIDE;
+    virtual void    CreateEmptyFile() Q_DECL_OVERRIDE;
 
     virtual void    IncrementReferens(quint32 id) const Q_DECL_OVERRIDE;
     virtual void    DecrementReferens(quint32 id) const Q_DECL_OVERRIDE;

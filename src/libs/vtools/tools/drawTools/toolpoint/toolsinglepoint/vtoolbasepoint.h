@@ -40,7 +40,7 @@ class VToolBasePoint : public VToolSinglePoint
     Q_OBJECT
 public:
     VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                      const QString &namePP, const QString &mPath, QGraphicsItem * parent = nullptr );
+                      const QString &namePP, QGraphicsItem * parent = nullptr );
     virtual ~VToolBasePoint() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
     static const QString ToolType;
@@ -72,7 +72,6 @@ protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE {}
 private:
     QString namePP;
-    QString mPath;
     void         SetColorLabel(const Qt::GlobalColor & color);
 
 };

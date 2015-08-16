@@ -33,9 +33,7 @@
 #include "dialogincrements.h"
 #include "configdialog.h"
 #include "dialogpatternproperties.h"
-#include "dialogmeasurements.h"
-#include "dialogindividualmeasurements.h"
-#include "dialogstandardmeasurements.h"
+#include "dialognewpattern.h"
 #include "dialogaboutapp.h"
 #include "dialogpatternxmledit.h"
 
