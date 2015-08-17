@@ -162,6 +162,7 @@ public:
     static bool        IsUnique(const QString &name);
 
     const Unit *GetPatternUnit() const;
+    const VTranslateVars *GetTrVars() const;
 
 private:
     /**

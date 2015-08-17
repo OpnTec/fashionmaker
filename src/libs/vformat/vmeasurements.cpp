@@ -170,6 +170,12 @@ void VMeasurements::MoveDown(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::ReadMeasurements() const
 {
+    // For conversion values we must first calculate all data in measurement file's unit.
+    // That's why we need two containers: one for converted values, second for real data.
+
+    // Container for values in measurement file's unit
+    VContainer *tempData = new VContainer(data->GetTrVars(), data->GetPatternUnit());
+
     const QDomNodeList list = elementsByTagName(TagMeasurement);
     for (int i=0; i < list.size(); ++i)
     {
@@ -198,23 +204,40 @@ void VMeasurements::ReadMeasurements() const
         }
 
         VMeasurement *meash;
+        VMeasurement *tempMeash;
         if (type == MeasurementsType::Standard)
         {
-            const qreal base = GetParametrDouble(dom, AttrBase, "0");
-            const qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, "0");
-            const qreal kheight = GetParametrDouble(dom, AttrHeightIncrease, "0");
+            qreal base = GetParametrDouble(dom, AttrBase, "0");
+            qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, "0");
+            qreal kheight = GetParametrDouble(dom, AttrHeightIncrease, "0");
 
-            meash = new VMeasurement(i, name, BaseSize(), BaseHeight(), base, ksize, kheight, fullName, description);
+            tempMeash = new VMeasurement(i, name, BaseSize(), BaseHeight(), base, ksize, kheight);
+
+            base = UnitConvertor(base, MUnit(), *data->GetPatternUnit());
+            ksize = UnitConvertor(ksize, MUnit(), *data->GetPatternUnit());
+            kheight = UnitConvertor(kheight, MUnit(), *data->GetPatternUnit());
+
+            const qreal baseSize = UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit());
+            const qreal baseHeight = UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit());
+
+            meash = new VMeasurement(i, name, baseSize, baseHeight, base, ksize, kheight, fullName, description);
         }
         else
         {
-            QString formula = GetParametrString(dom, AttrValue, "0");
+            const QString formula = GetParametrString(dom, AttrValue, "0");
             bool ok = false;
-            const qreal value = EvalFormula(data, formula, &ok);
+            qreal value = EvalFormula(tempData, formula, &ok);
+
+            tempMeash = new VMeasurement(tempData, i, name, value, formula, ok);
+
+            value = UnitConvertor(value, MUnit(), *data->GetPatternUnit());
             meash = new VMeasurement(data, i, name, value, formula, ok, fullName, description);
         }
+        tempData->AddVariable(name, tempMeash);
         data->AddVariable(name, meash);
     }
+
+    delete tempData;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

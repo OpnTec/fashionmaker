@@ -481,6 +481,12 @@ const Unit *VContainer::GetPatternUnit() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+const VTranslateVars *VContainer::GetTrVars() const
+{
+    return d->trVars;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VariableExist check if exist variable this same name.
  * @param name name of row
