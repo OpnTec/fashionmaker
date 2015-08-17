@@ -2818,7 +2818,7 @@ void MainWindow::LoadPattern(const QString &fileName)
         if (qApp->patternType() == MeasurementsType::Standard)
         {
             VStandardMeasurements m(pattern);
-            VDomDocument::ValidateXML("://schema/standard_measurements.xsd", path);
+            VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, path);
             m.setXMLContent(path);
             if (m.MUnit() == Unit::Inch)
             {
@@ -2833,7 +2833,7 @@ void MainWindow::LoadPattern(const QString &fileName)
         }
         else
         {
-            VDomDocument::ValidateXML("://schema/individual_measurements.xsd", path);
+            VDomDocument::ValidateXML(VVITConverter::CurrentSchema, path);
         }
         ToolBarOption();
     }
@@ -3084,20 +3084,27 @@ QString MainWindow::CheckPathToMeasurements(const QString &path)
 
                 if (patternType == MeasurementsType::Standard)
                 {
-                    VVSTConverter converter(mPath);
-                    converter.Convert();
-
                     VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, mPath);
                 }
                 else
                 {
-                    VVITConverter converter(mPath);
-                    converter.Convert();
-
                     VDomDocument::ValidateXML(VVITConverter::CurrentSchema, mPath);
                 }
 
+                const QStringList mList = m->ListAll();
+                const QStringList pList = doc->ListMeasurements();
+
                 delete m;
+
+                const QSet<QString> match = pList.toSet().subtract(mList.toSet());
+                if (not match.isEmpty())
+                {
+                    VException e("Measurement file doesn't include all required measurements.");
+                    e.AddMoreInformation(QString("Please, additionaly provide: %1")
+                                         .arg(QStringList(match.toList()).join(", ")));
+                    throw e;
+                }
+
                 doc->SetPath(mPath);
                 PatternWasModified(false);
                 return mPath;
