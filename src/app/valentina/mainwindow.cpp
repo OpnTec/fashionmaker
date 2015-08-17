@@ -233,6 +233,62 @@ void MainWindow::InitScenes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::LoadMeasurements(const QString &path)
+{
+    if (path.isEmpty())
+    {
+        return;
+    }
+
+    VMeasurements *m = nullptr;
+    try
+    {
+        m = new VMeasurements(pattern);
+        m->setXMLContent(path);
+
+        if (m->Type() == MeasurementsType::Unknown)
+        {
+            VException e("Measurement file has unknown format.");
+            throw e;
+        }
+
+        if (m->Type() == MeasurementsType::Standard)
+        {
+            VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, path);
+        }
+        else
+        {
+            VDomDocument::ValidateXML(VVITConverter::CurrentSchema, path);
+        }
+
+        const QStringList mList = m->ListAll();
+        const QStringList pList = doc->ListMeasurements();
+
+        const QSet<QString> match = pList.toSet().subtract(mList.toSet());
+        if (not match.isEmpty())
+        {
+            VException e("Measurement file doesn't include all required measurements.");
+            e.AddMoreInformation(QString("Please, additionaly provide: %1")
+                                 .arg(QStringList(match.toList()).join(", ")));
+            throw e;
+        }
+
+        pattern->ClearVariables(VarType::Measurement);
+        m->ReadMeasurements();
+        delete m;
+        doc->SetPath(path);
+        PatternWasModified(false);
+        doc->LiteParseTree(Document::LiteParse);
+    }
+    catch (VException &e)
+    {
+        e.CriticalMessageBox(tr("File error."), this);
+        delete m;
+        return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief OptionDraw help change name of pattern piece.
  */
@@ -899,6 +955,34 @@ void MainWindow::PrepareSceneList()
     {
         ui->listWidget->setCurrentRow(0);
         SetLayoutModeActions(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::LoadIndividual()
+{
+    const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
+    //Use standard path to standard measurements
+    const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+
+    if (not mPath.isEmpty())
+    {
+        LoadMeasurements(mPath);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::LoadStandard()
+{
+    const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
+    //Use standard path to individual measurements
+    const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+
+    if (not mPath.isEmpty())
+    {
+        LoadMeasurements(mPath);
     }
 }
 
@@ -1716,6 +1800,8 @@ void MainWindow::Clear()
     ui->actionEdit_pattern_code->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
     ui->actionShowCurveDetails->setEnabled(false);
+    ui->actionLoadIndividual->setEnabled(false);
+    ui->actionLoadStandard->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
     qApp->setPatternType(MeasurementsType::Individual);
@@ -1924,6 +2010,8 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomFitBest->setEnabled(enable);
     ui->actionZoomOriginal->setEnabled(enable);
     ui->actionShowCurveDetails->setEnabled(enable);
+    ui->actionLoadIndividual->setEnabled(enable);
+    ui->actionLoadStandard->setEnabled(enable);
 
     //Now we don't want allow user call context menu
     sceneDraw->SetDisableTools(!enable, doc->GetNameActivPP());
@@ -2661,6 +2749,8 @@ void MainWindow::CreateActions()
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
     connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::ResetWindow);
     connect(ui->actionShowCurveDetails, &QAction::triggered, this, &MainWindow::ActionCurveDetailsMode);
+    connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
+    connect(ui->actionLoadStandard, &QAction::triggered, this, &MainWindow::LoadStandard);
 
     connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
     connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);

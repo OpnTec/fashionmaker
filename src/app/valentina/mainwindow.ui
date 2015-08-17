@@ -1085,6 +1085,8 @@
      <string>Measurements</string>
     </property>
     <addaction name="actionTable"/>
+    <addaction name="actionLoadIndividual"/>
+    <addaction name="actionLoadStandard"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -1854,6 +1856,22 @@
     <string>Export original layout</string>
    </property>
   </action>
+  <action name="actionLoadIndividual">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Load Individual ...</string>
+   </property>
+  </action>
+  <action name="actionLoadStandard">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Load Standard ...</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -1867,8 +1885,8 @@
   <tabstop>toolButtonSplinePath</tabstop>
  </tabstops>
  <resources>
-  <include location="share/resources/toolicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="share/resources/toolicon.qrc"/>
  </resources>
  <connections/>
 </ui>

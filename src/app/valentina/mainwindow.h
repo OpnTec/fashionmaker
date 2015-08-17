@@ -159,6 +159,9 @@ protected:
 
     virtual void       CleanLayout() Q_DECL_OVERRIDE;
     virtual void       PrepareSceneList() Q_DECL_OVERRIDE;
+private slots:
+    void LoadIndividual();
+    void LoadStandard();
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */
@@ -282,6 +285,8 @@ private:
     void               AddPP(const QString &PPName);
 
     void               InitScenes();
+
+    void               LoadMeasurements(const QString &path);
 };
 
 #endif // MAINWINDOW_H
