@@ -301,6 +301,7 @@ void MainWindow::LoadMeasurements(const QString &path)
         delete m;
         return;
     }
+    helpLabel->setText(tr("Measurements loaded"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1002,6 +1003,12 @@ void MainWindow::LoadStandard()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::CreateMeasurements()
+{
+    QProcess::startDetached(qApp->TapeFilePath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolBarOption enable option toolbar.
  */
@@ -1033,9 +1040,9 @@ void MainWindow::ToolBarOption()
 //---------------------------------------------------------------------------------------------------------------------
 QComboBox *MainWindow::SetGradationList(const QString &label, const QStringList &list)
 {
-    ui->toolBarOption->addWidget(new QLabel(label));
+    ui->toolBarOption->addWidget(new QLabel(label, this));
 
-    QComboBox *comboBox = new QComboBox;
+    QComboBox *comboBox = new QComboBox(this);
     comboBox->addItems(list);
     ui->toolBarOption->addWidget(comboBox);
 
@@ -2766,7 +2773,7 @@ void MainWindow::CreateActions()
     connect(ui->actionShowCurveDetails, &QAction::triggered, this, &MainWindow::ActionCurveDetailsMode);
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
     connect(ui->actionLoadStandard, &QAction::triggered, this, &MainWindow::LoadStandard);
-
+    connect(ui->actionCreateNew, &QAction::triggered, this, &MainWindow::CreateMeasurements);
     connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
     connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);
     connect(ui->actionPrintPreviewTailed, &QAction::triggered, this, &MainWindow::PrintPreviewTiled);

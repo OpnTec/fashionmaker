@@ -162,6 +162,7 @@ protected:
 private slots:
     void LoadIndividual();
     void LoadStandard();
+    void CreateMeasurements();
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */

@@ -309,6 +309,59 @@ QString VApplication::translationsPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VApplication::TapeFilePath() const
+{
+    const QString tape = QStringLiteral("tape");
+#ifdef Q_OS_WIN
+    QFileInfo tapeFile(QApplication::applicationDirPath() + "/" + tape + ".exe");
+    if (tapeFile.exists())
+    {
+        return fileBundle.absoluteFilePath();
+    }
+    else
+    {
+        return QApplication::applicationDirPath() + "/../../tape/bin/" + tape + ".exe";
+    }
+#elif defined(Q_OS_MAC)
+    QFileInfo tapeFile(QApplication::applicationDirPath() + "/" + tape);
+    if (tapeFile.exists())
+    {
+        return tapeFile.absoluteFilePath();
+    }
+    else
+    {
+        QFileInfo file(QApplication::applicationDirPath() + "/../../tape/bin/" + tape);
+        if (file.exists())
+        {
+            return file.absoluteFilePath();
+        }
+        else
+        {
+            return tape;
+        }
+    }
+#else // Unix
+    QFileInfo file(QApplication::applicationDirPath() + "/../../tape/bin/" + tape);
+    if (file.exists())
+    {
+        return file.absoluteFilePath();
+    }
+    else
+    {
+        QFileInfo tapeFile(QApplication::applicationDirPath() + "/" + tape);
+        if (tapeFile.exists())
+        {
+            return tapeFile.absoluteFilePath();
+        }
+        else
+        {
+            return tape;
+        }
+    }
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VApplication::LogDirPath() const
 {
 #if defined(Q_OS_WIN) || defined(Q_OS_OSX)

@@ -60,6 +60,7 @@ public:
     void               InitOptions();
 
     QString            translationsPath() const;
+    QString            TapeFilePath() const;
 
     QTimer             *getAutoSaveTimer() const;
     void               setAutoSaveTimer(QTimer *value);

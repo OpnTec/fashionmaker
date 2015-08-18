@@ -1087,6 +1087,7 @@
     <addaction name="actionTable"/>
     <addaction name="actionLoadIndividual"/>
     <addaction name="actionLoadStandard"/>
+    <addaction name="actionCreateNew"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -1870,6 +1871,14 @@
    </property>
    <property name="text">
     <string>Load Standard ...</string>
+   </property>
+  </action>
+  <action name="actionCreateNew">
+   <property name="text">
+    <string>Create new ...</string>
+   </property>
+   <property name="toolTip">
+    <string>Create new measurements</string>
    </property>
   </action>
  </widget>
