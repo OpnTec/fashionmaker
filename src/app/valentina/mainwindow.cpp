@@ -273,6 +273,21 @@ void MainWindow::LoadMeasurements(const QString &path)
             throw e;
         }
 
+        if (m->Type() == MeasurementsType::Standard)
+        {
+            if (m->MUnit() == Unit::Inch)
+            {
+                QMessageBox::critical(this, tr("Wrong units."),
+                                      tr("Application doesn't support standard table with inches."));
+                qCDebug(vMainWindow, "Application doesn't support standard table with inches.");
+                return;
+            }
+            m->SetDataSize();
+            m->SetDataHeight();
+        }
+
+        qApp->setPatternType(m->Type());
+        ToolBarOption();
         pattern->ClearVariables(VarType::Measurement);
         m->ReadMeasurements();
         delete m;
@@ -992,6 +1007,7 @@ void MainWindow::LoadStandard()
  */
 void MainWindow::ToolBarOption()
 {
+    ui->toolBarOption->clear();
     if (qApp->patternType() == MeasurementsType::Standard)
     {
         const QStringList listHeights = VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit());
@@ -2127,7 +2143,6 @@ void MainWindow::New()
         //Set scene size to size scene view
         VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
         VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
-        ToolBarOption();
 
         AddPP(patternPieceName);
     }

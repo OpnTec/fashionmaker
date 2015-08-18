@@ -534,6 +534,20 @@ QStringList VMeasurements::ListKnown() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetDataSize()
+{
+    data->SetSize(UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit()));
+    data->SetSizeName(size_M);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetDataHeight()
+{
+    data->SetHeight(UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit()));
+    data->SetHeightName(height_M);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::CreateEmptyStandardFile(Unit unit, int baseSize, int baseHeight)
 {
     this->clear();

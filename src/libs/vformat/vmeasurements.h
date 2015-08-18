@@ -121,6 +121,9 @@ public:
     QStringList ListAll() const;
     QStringList ListKnown() const;
 
+    void SetDataSize();
+    void SetDataHeight();
+
 private:
     Q_DISABLE_COPY(VMeasurements)
 
