@@ -120,6 +120,43 @@ void TMainWindow::RetranslateTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetBaseMHeight(int height)
+{
+    if (m != nullptr)
+    {
+        if (mType == MeasurementsType::Standard)
+        {
+            const int row = ui->tableWidget->currentRow();
+            data->SetHeight(UnitConvertor(height, Unit::Cm, mUnit));
+            RefreshData();
+            ui->tableWidget->selectRow(row);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetBaseMSize(int size)
+{
+    if (m != nullptr)
+    {
+        if (mType == MeasurementsType::Standard)
+        {
+            const int row = ui->tableWidget->currentRow();
+            data->SetSize(UnitConvertor(size, Unit::Cm, mUnit));
+            RefreshData();
+            ui->tableWidget->selectRow(row);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetPUnit(Unit unit)
+{
+    pUnit = unit;
+    UpdatePatternUnit();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::LoadFile(const QString &path)
 {
     if (m == nullptr)
@@ -880,36 +917,18 @@ void TMainWindow::ImportFromPattern()
 void TMainWindow::ChangedSize(const QString &text)
 {
     const int row = ui->tableWidget->currentRow();
-
-    if (row == -1)
-    {
-        return;
-    }
-
     data->SetSize(text.toInt());
     RefreshData();
-
-    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ChangedHeight(const QString &text)
 {
     const int row = ui->tableWidget->currentRow();
-
-    if (row == -1)
-    {
-        return;
-    }
-
     data->SetHeight(text.toInt());
     RefreshData();
-
-    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1282,17 +1301,7 @@ void TMainWindow::PatternUnitChanged(int index)
 {
     pUnit = static_cast<Unit>(comboBoxUnits->itemData(index).toInt());
 
-    const int row = ui->tableWidget->currentRow();
-
-    if (row == -1)
-    {
-        return;
-    }
-
-    ShowUnits();
-    RefreshTable();
-
-    ui->tableWidget->selectRow(row);
+    UpdatePatternUnit();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1934,6 +1943,22 @@ QStringList TMainWindow::FilterMeasurements(const QStringList &mNew, const QStri
 {
     const QSet<QString> import = mNew.toSet().subtract(mFilter.toSet());
     return QStringList(import.toList());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::UpdatePatternUnit()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    ShowUnits();
+    RefreshTable();
+
+    ui->tableWidget->selectRow(row);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -58,6 +58,10 @@ public:
 
     void RetranslateTable();
 
+    void SetBaseMHeight(int height);
+    void SetBaseMSize(int size);
+    void SetPUnit(Unit unit);
+
 public slots:
     void LoadFile(const QString &path);
     void FileNew();
@@ -171,6 +175,8 @@ private:
     void WriteSettings();
 
     QStringList FilterMeasurements(const QStringList &mNew, const QStringList &mFilter);
+
+    void UpdatePatternUnit();
 };
 
 #endif // TMAINWINDOW_H

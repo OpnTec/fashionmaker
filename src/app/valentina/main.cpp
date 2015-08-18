@@ -32,7 +32,7 @@
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#   include "../libs/vmisc/backport/qcommandlineparser.h"
+#   include "../../libs/vmisc/backport/qcommandlineparser.h"
 #else
 #   include <QCommandLineParser>
 #endif
@@ -68,6 +68,7 @@ int main(int argc, char *argv[])
     parser.addHelpOption();
     parser.addVersionOption();
     parser.addPositionalArgument("filename", QCoreApplication::translate("main", "Pattern file."));
+    // Process the actual command line arguments given by the user
     parser.process(app);
     QStringList args = parser.positionalArguments();
 
