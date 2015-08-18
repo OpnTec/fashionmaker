@@ -63,10 +63,12 @@ TMainWindow::TMainWindow(QWidget *parent)
       m(nullptr),
       data(nullptr),
       mUnit(Unit::Cm),
+      pUnit(Unit::Cm),
       mType(MeasurementsType::Individual),
       curFile(),
       gradationHeights(nullptr),
       gradationSizes(nullptr),
+      comboBoxUnits(nullptr),
       formulaBaseHeight(0),
       lock(nullptr)
 {
@@ -75,7 +77,6 @@ TMainWindow::TMainWindow(QWidget *parent)
 
     ui->mainToolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     ui->toolBarGradation->setContextMenuPolicy(Qt::PreventContextMenu);
-    ui->toolBarGradation->setVisible(false);
 
     SetupMenu();
 
@@ -179,6 +180,7 @@ void TMainWindow::LoadFile(const QString &path)
             }
 
             mUnit = m->MUnit();
+            pUnit = mUnit;
 
             data->SetHeight(m->BaseHeight());
             data->SetSize(m->BaseSize());
@@ -231,6 +233,7 @@ void TMainWindow::FileNew()
         }
 
         mUnit = measurements.MUnit();
+        pUnit = mUnit;
         mType = measurements.Type();
 
         data = new VContainer(qApp->TrVars(), &mUnit);
@@ -957,7 +960,10 @@ void TMainWindow::ShowMData()
             ui->doubleSpinBoxInSizes->blockSignals(true);
             ui->doubleSpinBoxInHeights->blockSignals(true);
 
-            ui->labelCalculatedValue->setText(QString().setNum(data->GetTableValue(meash->GetName(), mType)));
+            const QString postfix = VDomDocument::UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
+            const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
+            ui->labelCalculatedValue->setText(qApp->LocaleToString(value) + " " +postfix);
+
             ui->doubleSpinBoxBaseValue->setValue(static_cast<int>(meash->GetBase()));
             ui->doubleSpinBoxInSizes->setValue(static_cast<int>(meash->GetKsize()));
             ui->doubleSpinBoxInHeights->setValue(static_cast<int>(meash->GetKheight()));
@@ -1272,6 +1278,24 @@ void TMainWindow::Preferences()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::PatternUnitChanged(int index)
+{
+    pUnit = static_cast<Unit>(comboBoxUnits->itemData(index).toInt());
+
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    ShowUnits();
+    RefreshTable();
+
+    ui->tableWidget->selectRow(row);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -1318,6 +1342,7 @@ void TMainWindow::InitWindow()
     ui->tabWidget->setCurrentIndex(0);
 
     ui->plainTextEditNotes->setEnabled(true);
+    ui->toolBarGradation->setVisible(true);
 
     if (mType == MeasurementsType::Standard)
     {
@@ -1346,7 +1371,6 @@ void TMainWindow::InitWindow()
         delete ui->labelEmail;
         delete ui->lineEditEmail;
 
-        ui->toolBarGradation->setVisible(true);
         const QStringList listHeights = VMeasurement::WholeListHeights(mUnit);
         const QStringList listSizes = VMeasurement::WholeListSizes(mUnit);
 
@@ -1442,6 +1466,8 @@ void TMainWindow::InitWindow()
 
     connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, &TMainWindow::ShowInGraphicalShell);
 
+    InitUnits();
+
     InitTable();
 }
 
@@ -1473,7 +1499,8 @@ void TMainWindow::ShowUnits()
 {
     const QString unit = VDomDocument::UnitsToStr(mUnit);
 
-    ShowHeaderUnits(ui->tableWidget, 1, unit);// calculated value
+    ShowHeaderUnits(ui->tableWidget, 1, VDomDocument::UnitsToStr(pUnit));// calculated value
+    ShowHeaderUnits(ui->tableWidget, 2, unit);// formula
     ShowHeaderUnits(ui->tableWidget, 3, unit);// base value
     ShowHeaderUnits(ui->tableWidget, 4, unit);// in sizes
     ShowHeaderUnits(ui->tableWidget, 5, unit);// in heights
@@ -1484,7 +1511,12 @@ void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString
 {
     SCASSERT(table != nullptr);
 
-    const QString header = table->horizontalHeaderItem(column)->text();
+    QString header = table->horizontalHeaderItem(column)->text();
+    const int index = header.indexOf("(");
+    if (index != -1)
+    {
+        header.remove(index-1, 100);
+    }
     const QString unitHeader = QString("%1 (%2)").arg(header).arg(unit);
     table->horizontalHeaderItem(column)->setText(unitHeader);
 }
@@ -1654,7 +1686,9 @@ void TMainWindow::RefreshTable()
         if (mType == MeasurementsType::Individual)
         {
             AddCell(meash->GetName(), currentRow, 0, Qt::AlignVCenter); // name
-            AddCell(QString().setNum(*meash->GetValue()), currentRow, 1, Qt::AlignHCenter | Qt::AlignVCenter,
+
+            const qreal value = UnitConvertor(*meash->GetValue(), mUnit, pUnit);
+            AddCell(QString().setNum(value), currentRow, 1, Qt::AlignHCenter | Qt::AlignVCenter,
                     meash->IsFormulaOk()); // calculated value
 
             QString formula;
@@ -1674,7 +1708,8 @@ void TMainWindow::RefreshTable()
         {
             AddCell(meash->GetName(), currentRow, 0, Qt::AlignVCenter); // name
 
-            AddCell(QString().setNum(data->GetTableValue(meash->GetName(), mType)), currentRow, 1,
+            const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
+            AddCell(QString().setNum(value), currentRow, 1,
                     Qt::AlignHCenter | Qt::AlignVCenter, meash->IsFormulaOk()); // calculated value
 
             AddCell(QString().setNum(meash->GetBase()), currentRow, 3,
@@ -1770,7 +1805,7 @@ QString TMainWindow::ClearCustomName(const QString &name) const
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::EvalFormula(const QString &formula, VContainer *data, QLabel *label)
 {
-    const QString postfix = VDomDocument::UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
+    const QString postfix = VDomDocument::UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
     if (formula.isEmpty())
     {
         label->setText(tr("Error") + " (" + postfix + ")");
@@ -1784,7 +1819,7 @@ void TMainWindow::EvalFormula(const QString &formula, VContainer *data, QLabel *
             QString f = formula;
             f.replace("\n", " ");
             Calculator *cal = new Calculator(data, mType);
-            const qreal result = cal->EvalFormula(f);
+            const qreal result = UnitConvertor(cal->EvalFormula(f), mUnit, pUnit);
             delete cal;
 
             label->setText(qApp->LocaleToString(result) + " " +postfix);
@@ -1924,6 +1959,29 @@ void TMainWindow::SetDecimals()
         default:
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitUnits()
+{
+    ui->toolBarGradation->addWidget(new QLabel(tr("Pattern unit:")));
+
+    comboBoxUnits = new QComboBox(this);
+    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Cm, true), QVariant(static_cast<int>(Unit::Cm)));
+    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Mm, true), QVariant(static_cast<int>(Unit::Mm)));
+    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Inch, true), QVariant(static_cast<int>(Unit::Inch)));
+
+    // set default unit
+    const qint32 indexUnit = comboBoxUnits->findData(static_cast<int>(pUnit));
+    if (indexUnit != -1)
+    {
+        comboBoxUnits->setCurrentIndex(indexUnit);
+    }
+
+    connect(comboBoxUnits, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &TMainWindow::PatternUnitChanged);
+
+    ui->toolBarGradation->addWidget(comboBoxUnits);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

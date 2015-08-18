@@ -113,16 +113,20 @@ private slots:
 
     void Preferences();
 
+    void PatternUnitChanged(int index);
+
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
     VMeasurements   *m;
     VContainer      *data;
     Unit             mUnit;
+    Unit             pUnit;
     MeasurementsType mType;
     QString          curFile;
     QComboBox       *gradationHeights;
     QComboBox       *gradationSizes;
+    QComboBox       *comboBoxUnits;
     int              formulaBaseHeight;
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
@@ -133,6 +137,7 @@ private:
     void InitWindow();
     void InitTable();
     void SetDecimals();
+    void InitUnits();
 
     void ShowUnits();
     void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
