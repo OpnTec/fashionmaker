@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
     }
 
     const QStringList args = parser.positionalArguments();
-    if (args.count() > 1)
+    if (args.count() > 0)
     {
         for (int i = 0; i < args.size(); ++i)
         {

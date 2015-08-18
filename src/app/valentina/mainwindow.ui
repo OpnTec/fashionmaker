@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>117</width>
          <height>58</height>
         </rect>
        </property>
@@ -458,7 +458,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>117</width>
          <height>156</height>
         </rect>
        </property>
@@ -622,7 +622,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>117</width>
          <height>196</height>
         </rect>
        </property>
@@ -864,7 +864,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>117</width>
          <height>58</height>
         </rect>
        </property>
@@ -1088,6 +1088,7 @@
     <addaction name="actionLoadIndividual"/>
     <addaction name="actionLoadStandard"/>
     <addaction name="actionCreateNew"/>
+    <addaction name="actionShowM"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -1879,6 +1880,17 @@
    </property>
    <property name="toolTip">
     <string>Create new measurements</string>
+   </property>
+  </action>
+  <action name="actionShowM">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show ...</string>
+   </property>
+   <property name="toolTip">
+    <string>Show measurements</string>
    </property>
   </action>
  </widget>

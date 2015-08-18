@@ -453,7 +453,7 @@ QVector<VToolRecord> VAbstractPattern::getLocalHistory() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::MPath() const
 {
-    return UniqueTagText(TagUnit);
+    return UniqueTagText(TagMeasurements);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

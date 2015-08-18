@@ -293,7 +293,7 @@ void MainWindow::LoadMeasurements(const QString &path)
         delete m;
         doc->SetPath(path);
         PatternWasModified(false);
-        doc->LiteParseTree(Document::LiteParse);
+        ui->actionShowM->setEnabled(true);
     }
     catch (VException &e)
     {
@@ -985,6 +985,7 @@ void MainWindow::LoadIndividual()
     if (not mPath.isEmpty())
     {
         LoadMeasurements(mPath);
+        doc->LiteParseTree(Document::LiteParse);
     }
 }
 
@@ -999,6 +1000,7 @@ void MainWindow::LoadStandard()
     if (not mPath.isEmpty())
     {
         LoadMeasurements(mPath);
+        doc->LiteParseTree(Document::LiteParse);
     }
 }
 
@@ -1006,6 +1008,32 @@ void MainWindow::LoadStandard()
 void MainWindow::CreateMeasurements()
 {
     QProcess::startDetached(qApp->TapeFilePath());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ShowMeasurements()
+{
+    if (not doc->MPath().isEmpty())
+    {
+        QString run;
+        if (qApp->patternType() == MeasurementsType::Standard)
+        {
+            run = QString("\"%1\" \"%2\" -u %3 -h %4 -s %5").arg(qApp->TapeFilePath()).arg(doc->MPath())
+                    .arg(VDomDocument::UnitsToStr(qApp->patternUnit()))
+                    .arg(static_cast<int>(pattern->height()))
+                    .arg(static_cast<int>(pattern->size()));
+        }
+        else
+        {
+            run = QString("\"%1\" \"%2\" -u %3").arg(qApp->TapeFilePath()).arg(doc->MPath())
+                    .arg(VDomDocument::UnitsToStr(qApp->patternUnit()));
+        }
+        QProcess::startDetached(run);
+    }
+    else
+    {
+        ui->actionShowM->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1825,6 +1853,7 @@ void MainWindow::Clear()
     ui->actionShowCurveDetails->setEnabled(false);
     ui->actionLoadIndividual->setEnabled(false);
     ui->actionLoadStandard->setEnabled(false);
+    ui->actionShowM->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
     qApp->setPatternType(MeasurementsType::Individual);
@@ -2774,6 +2803,7 @@ void MainWindow::CreateActions()
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
     connect(ui->actionLoadStandard, &QAction::triggered, this, &MainWindow::LoadStandard);
     connect(ui->actionCreateNew, &QAction::triggered, this, &MainWindow::CreateMeasurements);
+    connect(ui->actionShowM, &QAction::triggered, this, &MainWindow::ShowMeasurements);
     connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
     connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);
     connect(ui->actionPrintPreviewTailed, &QAction::triggered, this, &MainWindow::PrintPreviewTiled);

@@ -161,6 +161,12 @@ void TMainWindow::LoadFile(const QString &path)
 {
     if (m == nullptr)
     {
+        if (not QFileInfo(path).exists())
+        {
+            qCritical() << "File " << path << " doesn't exist";
+            return;
+        }
+
         // Check if file already opened
         QList<TMainWindow*>list = qApp->MainWindows();
         for (int i = 0; i < list.size(); ++i)
