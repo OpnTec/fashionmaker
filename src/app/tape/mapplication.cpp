@@ -38,6 +38,12 @@
 #include <QTranslator>
 #include <QPointer>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+#   include "../../libs/vmisc/backport/qcommandlineparser.h"
+#else
+#   include <QCommandLineParser>
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::MApplication(int &argc, char **argv)
     :VAbstractApplication(argc, argv),
@@ -64,17 +70,7 @@ MApplication::MApplication(int &argc, char **argv)
     if (socket.waitForConnected(500))
     {
         QTextStream stream(&socket);
-        QStringList args = QCoreApplication::arguments();
-        if (args.count() > 1)
-        {
-            args.removeFirst();
-            const QString arguments = args.join(";;");
-            stream << arguments;
-        }
-        else
-        {
-            stream << QString();
-        }
+        stream << QCoreApplication::arguments().join(";;");
         stream.flush();
         socket.waitForBytesWritten();
         return;
@@ -359,6 +355,134 @@ void MApplication::RetranslateTables()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MApplication::ParseCommandLine(const QStringList &arguments)
+{
+    QCommandLineParser parser;
+    parser.setApplicationDescription(QCoreApplication::translate("main", "Valentina's measurements editor."));
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.addPositionalArgument("filename", QCoreApplication::translate("main", "The measurement file."));
+    //-----
+    QCommandLineOption heightOption(QStringList() << "h" << "height",
+    QCoreApplication::translate("main", "Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, "
+                                "152, 158, 164, 170, 176, 182, 188 (default is measurement file value)."),
+                                QCoreApplication::translate("main", "The base height"));
+    parser.addOption(heightOption);
+    //-----
+    QCommandLineOption sizeOption(QStringList() << "s" << "size",
+    QCoreApplication::translate("main", "Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, "
+                                "48, 50, 52, 54, 56 (default is measurement file value)."),
+                                QCoreApplication::translate("main", "The Base size"));
+    parser.addOption(sizeOption);
+    //-----
+    QCommandLineOption unitOption(QStringList() << "u" << "unit",
+    QCoreApplication::translate("main", "Set pattern file unit: cm, mm, inch (default is measurement file value)."),
+                                QCoreApplication::translate("main", "The pattern unit"));
+    parser.addOption(unitOption);
+    //-----
+    parser.process(arguments);
+
+    bool flagHeight = false;
+    bool flagSize = false;
+    bool flagUnit = false;
+
+    int size = 0;
+    int height = 0;
+    Unit unit = Unit::Cm;
+
+    {
+    const QString heightValue = parser.value(heightOption);
+    if (not heightValue.isEmpty())
+    {
+        const QStringList heights = VMeasurement::WholeListHeights(Unit::Cm);
+        if (heights.contains(heightValue))
+        {
+            flagHeight = true;
+            height = heightValue.toInt();
+        }
+        else
+        {
+            fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+            "Error: Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, "
+            "164, 170, 176, 182 or 188.")));
+            parser.showHelp(1);
+        }
+    }
+    }
+
+    {
+    const QString sizeValue = parser.value(sizeOption);
+    if (not sizeValue.isEmpty())
+    {
+        const QStringList sizes = VMeasurement::WholeListSizes(Unit::Cm);
+        if (sizes.contains(sizeValue))
+        {
+            flagSize = true;
+            size = sizeValue.toInt();
+        }
+        else
+        {
+            fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+            "Error: Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, "
+            "52, 54 or 56.")));
+            parser.showHelp(1);
+        }
+    }
+    }
+
+    {
+    const QString unitValue = parser.value(unitOption);
+    if (not unitValue.isEmpty())
+    {
+
+        const QStringList units = QStringList() << VDomDocument::UnitMM
+                                                << VDomDocument::UnitCM
+                                                << VDomDocument::UnitINCH;
+        if (units.contains(unitValue))
+        {
+            flagUnit = true;
+            unit = VDomDocument::StrToUnits(unitValue);
+        }
+        else
+        {
+            fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+            "Error: Invalid base size argument. Must be cm, mm or inch.")));
+            parser.showHelp(1);
+        }
+    }
+    }
+
+    const QStringList args = parser.positionalArguments();
+    if (args.count() > 0)
+    {
+        for (int i = 0; i < args.size(); ++i)
+        {
+            NewMainWindow();
+            MainWindow()->LoadFile(args.at(i));
+
+            if (flagSize)
+            {
+                MainWindow()->SetBaseMSize(size);
+            }
+
+            if (flagHeight)
+            {
+                MainWindow()->SetBaseMHeight(height);
+            }
+
+            if (flagUnit)
+            {
+                MainWindow()->SetPUnit(unit);
+            }
+        }
+    }
+    else
+    {
+        NewMainWindow();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_WS_MAC)
 bool MApplication::event(QEvent* event)
 {
@@ -409,16 +533,10 @@ void MApplication::NewLocalSocketConnection()
     }
     socket->waitForReadyRead(1000);
     QTextStream stream(socket);
-    QString path;
-    stream >> path;
-    if (not path.isEmpty())
+    const QString arg = stream.readAll();
+    if (not arg.isEmpty())
     {
-        const QStringList args = path.split(";;");
-        for (int i = 0; i < args.size(); ++i)
-        {
-            NewMainWindow();
-            OpenFile(args.at(i));
-        }
+        ParseCommandLine(arg.split(";;"));
     }
     delete socket;
     MainWindow()->raise();

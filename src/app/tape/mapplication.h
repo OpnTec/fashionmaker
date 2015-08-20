@@ -76,6 +76,8 @@ public:
     void RetranslateGroups();
     void RetranslateTables();
 
+    void ParseCommandLine(const QStringList &arguments);
+
 public slots:
     TMainWindow *NewMainWindow();
 
