@@ -37,6 +37,8 @@
 #include "tools/vtooluniondetails.h"
 #include "tools/drawTools/drawtools.h"
 
+#include <QFileSystemWatcher>
+
 namespace Ui
 {
     class MainWindow;
@@ -164,10 +166,13 @@ private slots:
     void LoadStandard();
     void CreateMeasurements();
     void ShowMeasurements();
+    void MeasurementsChanged(const QString &path);
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */
     Ui::MainWindow     *ui;
+
+    QFileSystemWatcher *watcher;
 
     /** @brief tool current tool */
     Tool               currentTool;
@@ -288,7 +293,7 @@ private:
 
     void               InitScenes();
 
-    void               LoadMeasurements(const QString &path);
+    bool               LoadMeasurements(const QString &path);
 };
 
 #endif // MAINWINDOW_H

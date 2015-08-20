@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
         {
             fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
             "Error: Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, "
-                                                                           "164, 170, 176, 182 or 188.")));
+            "164, 170, 176, 182 or 188.")));
             parser.showHelp(1);
         }
     }
@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
         {
             fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
             "Error: Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, "
-                                                                           "52, 54 or 56.")));
+            "52, 54 or 56.")));
             parser.showHelp(1);
         }
     }

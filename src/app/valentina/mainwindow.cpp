@@ -67,6 +67,8 @@
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 #   include <QLockFile>
 #endif
+#include <chrono>
+#include <thread>
 
 Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
 
@@ -76,14 +78,14 @@ Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
  * @param parent parent widget.
  */
 MainWindow::MainWindow(QWidget *parent)
-    :MainWindowsNoGUI(parent), ui(new Ui::MainWindow), currentTool(Tool::Arrow),
+    :MainWindowsNoGUI(parent), ui(new Ui::MainWindow), watcher(new QFileSystemWatcher(this)), currentTool(Tool::Arrow),
       lastUsedTool(Tool::Arrow), sceneDraw(nullptr), sceneDetails(nullptr),
       mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), dialogTable(nullptr), dialogTool(nullptr),
       dialogHistory(nullptr), comboBoxDraws(nullptr), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs(),
       separatorAct(nullptr),
-      leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true), gradationHeights(nullptr),
-      gradationSizes(nullptr),
+      leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true),
+      gradationHeights(nullptr), gradationSizes(nullptr),
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
       toolOptions(nullptr), lock(nullptr)
 #else
@@ -139,6 +141,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &MainWindow::ShowPaper);
     ui->dockWidgetLayoutPages->setVisible(false);
+
+    connect(watcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::MeasurementsChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -233,11 +237,11 @@ void MainWindow::InitScenes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::LoadMeasurements(const QString &path)
+bool MainWindow::LoadMeasurements(const QString &path)
 {
     if (path.isEmpty())
     {
-        return;
+        return false;
     }
 
     VMeasurements *m = nullptr;
@@ -280,7 +284,7 @@ void MainWindow::LoadMeasurements(const QString &path)
                 QMessageBox::critical(this, tr("Wrong units."),
                                       tr("Application doesn't support standard table with inches."));
                 qCDebug(vMainWindow, "Application doesn't support standard table with inches.");
-                return;
+                return false;
             }
             m->SetDataSize();
             m->SetDataHeight();
@@ -291,17 +295,14 @@ void MainWindow::LoadMeasurements(const QString &path)
         pattern->ClearVariables(VarType::Measurement);
         m->ReadMeasurements();
         delete m;
-        doc->SetPath(path);
-        PatternWasModified(false);
-        ui->actionShowM->setEnabled(true);
     }
     catch (VException &e)
     {
         e.CriticalMessageBox(tr("File error."), this);
         delete m;
-        return;
+        return false;
     }
-    helpLabel->setText(tr("Measurements loaded"));
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -984,8 +985,19 @@ void MainWindow::LoadIndividual()
 
     if (not mPath.isEmpty())
     {
-        LoadMeasurements(mPath);
-        doc->LiteParseTree(Document::LiteParse);
+        if (LoadMeasurements(mPath))
+        {
+            if (not doc->MPath().isEmpty())
+            {
+                watcher->removePath(doc->MPath());
+            }
+            doc->SetPath(mPath);
+            watcher->addPath(mPath);
+            PatternWasModified(false);
+            ui->actionShowM->setEnabled(true);
+            helpLabel->setText(tr("Measurements loaded"));
+            doc->LiteParseTree(Document::LiteParse);
+        }
     }
 }
 
@@ -999,8 +1011,19 @@ void MainWindow::LoadStandard()
 
     if (not mPath.isEmpty())
     {
-        LoadMeasurements(mPath);
-        doc->LiteParseTree(Document::LiteParse);
+        if(LoadMeasurements(mPath))
+        {
+            if (not doc->MPath().isEmpty())
+            {
+                watcher->removePath(doc->MPath());
+            }
+            doc->SetPath(mPath);
+            watcher->addPath(mPath);
+            PatternWasModified(false);
+            ui->actionShowM->setEnabled(true);
+            helpLabel->setText(tr("Measurements loaded"));
+            doc->LiteParseTree(Document::LiteParse);
+        }
     }
 }
 
@@ -1033,6 +1056,51 @@ void MainWindow::ShowMeasurements()
     else
     {
         ui->actionShowM->setEnabled(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::MeasurementsChanged(const QString &path)
+{
+    bool mChanges = false;
+    QFileInfo checkFile(path);
+    if (checkFile.exists())
+    {
+        mChanges = true;
+    }
+    else
+    {
+        for(int i=0; i<=1000; i=i+10)
+        {
+            if (checkFile.exists())
+            {
+                mChanges = true;
+                break;
+            }
+            else
+            {
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            }
+        }
+    }
+
+    if (mChanges)
+    {
+        QMessageBox::StandardButton reply = QMessageBox::question(this, tr("Update measurements"),
+                                                             tr("Measurement file was changed. Do you want to update?"),
+                                                                  QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes)
+        {
+            if(LoadMeasurements(path))
+            {
+                if (not watcher->files().contains(path))
+                {
+                    watcher->addPath(path);
+                }
+                helpLabel->setText(tr("Measurements updated"));
+                doc->LiteParseTree(Document::LiteParse);
+            }
+        }
     }
 }
 
