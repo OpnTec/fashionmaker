@@ -54,15 +54,7 @@ public slots:
     void                 clickedToolButtonAdd();
     void                 clickedToolButtonRemove();
     void                 IncrementChanged ( qint32 row, qint32 column );
-    void                 MeasurementChanged ( qint32 row, qint32 column );
     void                 FullUpdateFromFile();
-    void                 SaveGivenName();
-    void                 SaveFamilyName();
-    void                 SaveEmail();
-    void                 SaveSex(int index);
-    void                 SaveBirthDate(const QDate & date);
-    void                 OpenTable();
-    void                 ShowMeasurements();
 signals:
     /**
      * @brief FullUpdateTree signal update data for dom document
@@ -92,12 +84,9 @@ private:
     /** @brief column save number of column current selected cell */
     qint32               column;
 
-    VIndividualMeasurements *m;
-
     template <typename T>
     void                 FillTable(const QMap<QString, T> varTable, QTableWidget *table);
 
-    void                 FillMeasurements();
     void                 FillIncrements();
     void                 FillLengthsLines();
     void                 FillLengthLinesAngles();

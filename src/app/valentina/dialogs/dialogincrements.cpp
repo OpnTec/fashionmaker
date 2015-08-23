@@ -53,32 +53,13 @@
  * @param parent parent widget
  */
 DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
-    :DialogTool(data, NULL_ID, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0),
-      m(nullptr)
+    :DialogTool(data, NULL_ID, parent), ui(new Ui::DialogIncrements), data(data), doc(doc), row(0), column(0)
 {
     ui->setupUi(this);
 
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     qCDebug(vDialog, "Showing variables.");
-    if (qApp->patternType() == MeasurementsType::Individual)
-    {
-        qCDebug(vDialog, "Pattern with individual measurements.");
-        const QString filePath = doc->MPath();
-        try
-        {
-            VDomDocument::ValidateXML("://schema/individual_measurements.xsd", filePath);
-            m = new VIndividualMeasurements(data);
-            m->setXMLContent(filePath);
-        }
-        catch (VException &e)
-        {
-            e.CriticalMessageBox(tr("File error."), this);
-            emit DialogClosed(QDialog::Rejected);
-            return;
-        }
-    }
-
     ShowUnits();
 
     TextDelegate *textDelegate = new TextDelegate(NameRegExp(), data, ui->tableWidgetIncrement);
@@ -88,12 +69,6 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     ui->tableWidgetIncrement->setItemDelegateForColumn(3, doubleDelegate);// in sizes
     ui->tableWidgetIncrement->setItemDelegateForColumn(4, doubleDelegate);// in heights
 
-    if (qApp->patternType() == MeasurementsType::Standard)
-    {
-        ui->checkBoxHideEmpty->setChecked(true);
-    }
-
-    FillMeasurements();
     FillIncrements();
     FillLengthsLines();
     FillLengthLinesAngles();
@@ -102,75 +77,6 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     FillRadiusesArcs();
     FillAnglesArcs();
     FillAnglesCurves();
-
-    if (qApp->patternType() == MeasurementsType::Standard)
-    {
-        ui->toolBoxMeasurements->setItemEnabled(0, false);
-
-        const QString filePath = doc->MPath();
-        VStandardMeasurements *mSt = nullptr;
-        try
-        {
-            VDomDocument::ValidateXML("://schema/standard_measurements.xsd", filePath);
-            mSt = new VStandardMeasurements(data);
-            mSt->setXMLContent(filePath);
-
-            ui->labelBaseValues->setText(tr("Base size: %1 %3; Base height: %2 %3").arg(mSt->Size())
-                                         .arg(mSt->Height()).arg(VDomDocument::UnitsToStr(qApp->patternUnit())));
-            ui->labelDescription->setText(tr("Description: \"%1\"").arg(mSt->TrDescription()));
-            delete mSt;
-        }
-        catch (VException &e)
-        {
-            e.CriticalMessageBox(tr("File error."), this);
-            if (mSt != nullptr)
-            {
-                delete mSt;
-            }
-            emit DialogClosed(QDialog::Rejected);
-            return;
-        }
-    }
-    else
-    {
-        QRegularExpressionValidator *reg =
-             new QRegularExpressionValidator(QRegularExpression("\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"));
-        ui->lineEditMail->setValidator(reg);
-
-        HideColumns(ui->tableWidgetMeasurements);
-        HideColumns(ui->tableWidgetIncrement);
-
-        ui->tableWidgetMeasurements->setItemDelegateForColumn(2, doubleDelegate);// base value
-
-        connect(ui->tableWidgetMeasurements, &QTableWidget::cellChanged, this, &DialogIncrements::MeasurementChanged);
-
-        ui->lineEditGivenName->setText(m->GivenName());
-        ui->lineEditFamilyName->setText(m->FamilyName());
-
-        ui->comboBoxSex->addItem(tr("male"), QVariant(m->GenderToStr(SexType1::Male)));
-        ui->comboBoxSex->addItem(tr("female"), QVariant(m->GenderToStr(SexType1::Female)));
-        qint32 index = ui->comboBoxSex->findData(m->GenderToStr(m->Sex()));
-        if (index != -1)
-        {
-            ui->comboBoxSex->setCurrentIndex(index);
-        }
-
-        ui->dateEditBirthDate->setDate(m->BirthDate());
-        ui->lineEditMail->setText(m->Mail());
-
-        connect(ui->lineEditGivenName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveGivenName);
-        connect(ui->lineEditFamilyName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveFamilyName);
-        connect(ui->lineEditMail, &QLineEdit::editingFinished, this, &DialogIncrements::SaveEmail);
-        connect(ui->comboBoxSex, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                &DialogIncrements::SaveSex);
-        connect(ui->dateEditBirthDate, &QDateEdit::dateChanged, this, &DialogIncrements::SaveBirthDate);
-
-        // hide fileds that don't exist in individual measurements
-        ui->labelBaseValues->setVisible(false);
-        ui->labelDescription->setVisible(false);
-    }
-
-    ui->toolBoxMeasurements->setCurrentIndex(1);
 
     connect(ui->tableWidgetIncrement, &QTableWidget::cellChanged, this, &DialogIncrements::IncrementChanged);
     connect(ui->toolButtonAdd, &QPushButton::clicked, this, &DialogIncrements::clickedToolButtonAdd);
@@ -181,79 +87,6 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
-
-    connect(ui->toolButtonOpenMeasurements, &QToolButton::clicked, this, &DialogIncrements::OpenTable);
-    connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogIncrements::ShowMeasurements);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FillMeasurements load measurements data
- */
-void DialogIncrements::FillMeasurements()
-{
-    const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
-    qint32 currentRow = -1;
-    QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iMap;
-    ui->tableWidgetMeasurements->setRowCount ( table.size() );
-    for (iMap = table.constBegin(); iMap != table.constEnd(); ++iMap)
-    {
-        QSharedPointer<VMeasurement> m = iMap.value();
-        if (ui->checkBoxHideEmpty->isChecked() && m->IsNotUsed())
-        {
-            continue; // skip this measurement
-        }
-        currentRow++;
-
-        QTableWidgetItem *item = new QTableWidgetItem(QString(iMap.key()));
-        item->setTextAlignment(Qt::AlignHCenter);
-        item->setFont(QFont("Times", 12, QFont::Bold));
-        item->setToolTip(m->GetGuiText());
-        SetItemViewOnly(item);
-        item->setTextAlignment(Qt::AlignLeft);
-        ui->tableWidgetMeasurements->setItem(currentRow, 0, item);
-
-        if (qApp->patternType() == MeasurementsType::Standard)
-        {
-            QTableWidgetItem *item = new QTableWidgetItem(qApp->LocaleToString(
-                                                         data->GetTableValue(qApp->TrVars()->VarFromUser(iMap.key()),
-                                                              qApp->patternType())));
-            item->setTextAlignment(Qt::AlignHCenter);
-            SetItemViewOnly(item);
-            ui->tableWidgetMeasurements->setItem(currentRow, 1, item);// calculated value
-        }
-
-        item = new QTableWidgetItem(qApp->LocaleToString(m->GetBase()));
-        item->setTextAlignment(Qt::AlignHCenter);
-        if (qApp->patternType() == MeasurementsType::Standard)
-        {
-            SetItemViewOnly(item);
-        }
-        ui->tableWidgetMeasurements->setItem(currentRow, 2, item);
-
-        if (qApp->patternType() == MeasurementsType::Standard)
-        {
-            QTableWidgetItem *item = new QTableWidgetItem(qApp->LocaleToString(m->GetKsize()));
-            item->setTextAlignment(Qt::AlignHCenter);
-            SetItemViewOnly(item);
-            ui->tableWidgetMeasurements->setItem(currentRow, 3, item);// in sizes
-
-            item = new QTableWidgetItem(qApp->LocaleToString(m->GetKheight()));
-            item->setTextAlignment(Qt::AlignHCenter);
-            SetItemViewOnly(item);
-            ui->tableWidgetMeasurements->setItem(currentRow, 4, item);// in heights
-        }
-
-        item = new QTableWidgetItem(m->GetDescription());
-        item->setToolTip(m->GetDescription());
-        SetItemViewOnly(item);
-        item->setTextAlignment(Qt::AlignLeft);
-        ui->tableWidgetMeasurements->setItem(currentRow, 5, item);
-    }
-    ui->tableWidgetMeasurements->setRowCount(currentRow+1);
-    ui->tableWidgetMeasurements->verticalHeader()->setDefaultSectionSize(20);
-    ui->tableWidgetMeasurements->resizeColumnsToContents();
-    ui->tableWidgetMeasurements->resizeRowsToContents();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -422,10 +255,6 @@ void DialogIncrements::ShowUnits()
     ShowHeaderUnits(ui->tableWidgetIncrement, 3, unit);// in sizes
     ShowHeaderUnits(ui->tableWidgetIncrement, 4, unit);// in heights
 
-    ShowHeaderUnits(ui->tableWidgetMeasurements, 2, unit);// base value
-    ShowHeaderUnits(ui->tableWidgetMeasurements, 3, unit);// in sizes
-    ShowHeaderUnits(ui->tableWidgetMeasurements, 4, unit);// in heights
-
     ShowHeaderUnits(ui->tableWidgetLines, 1, unit);// lengths
     ShowHeaderUnits(ui->tableWidgetSplines, 1, unit);// lengths
     ShowHeaderUnits(ui->tableWidgetArcs, 1, unit);// lengths
@@ -460,29 +289,11 @@ void DialogIncrements::ShowSuccess() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::ShowMeasurements()
-{
-    if (qApp->patternType() == MeasurementsType::Individual)
-    {
-        ui->tableWidgetMeasurements->blockSignals(true);
-    }
-    ui->tableWidgetMeasurements->clearContents();
-    FillMeasurements();
-    ui->tableWidgetMeasurements->horizontalHeader()->setStretchLastSection(true);
-    if (qApp->patternType() == MeasurementsType::Individual)
-    {
-        ui->tableWidgetMeasurements->blockSignals(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FullUpdateFromFile update information in tables form file
  */
 void DialogIncrements::FullUpdateFromFile()
 {
-    ShowMeasurements();
-
     ui->tableWidgetIncrement->blockSignals(true);
     ui->tableWidgetIncrement->clearContents();
     FillIncrements();
@@ -497,206 +308,6 @@ void DialogIncrements::FullUpdateFromFile()
 
     ui->tableWidgetArcs->clearContents();
     FillLengthArcs();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::SaveGivenName()
-{
-    m->setGivenName(ui->lineEditGivenName->text());
-    QString error;
-    if (m->SaveDocument(doc->MPath(), error) == false)
-    {
-        QMessageBox messageBox;
-        messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setInformativeText(tr("Could not save GivenName"));
-        messageBox.setDefaultButton(QMessageBox::Ok);
-        messageBox.setDetailedText(error);
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.exec();
-    }
-    else
-    {
-        ShowSuccess();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::SaveFamilyName()
-{
-
-    m->setFamilyName(ui->lineEditFamilyName->text());
-    QString error;
-    if (m->SaveDocument(doc->MPath(), error) == false)
-    {
-        QMessageBox messageBox;
-        messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setInformativeText(tr("Could not save FamilyName"));
-        messageBox.setDefaultButton(QMessageBox::Ok);
-        messageBox.setDetailedText(error);
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.exec();
-    }
-    else
-    {
-        ShowSuccess();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::SaveEmail()
-{
-    m->setMail(ui->lineEditMail->text());
-    QString error;
-    if (m->SaveDocument(doc->MPath(), error) == false)
-    {
-        QMessageBox messageBox;
-        messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setInformativeText(tr("Could not save Email"));
-        messageBox.setDefaultButton(QMessageBox::Ok);
-        messageBox.setDetailedText(error);
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.exec();
-    }
-    else
-    {
-        ShowSuccess();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::SaveSex(int index)
-{
-    m->setSex(m->StrToGender(ui->comboBoxSex->itemData(index).toString()));
-    QString error;
-    if (m->SaveDocument(doc->MPath(), error) == false)
-    {
-        QMessageBox messageBox;
-        messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setInformativeText(tr("Could not save Sex"));
-        messageBox.setDefaultButton(QMessageBox::Ok);
-        messageBox.setDetailedText(error);
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.exec();
-    }
-    else
-    {
-        ShowSuccess();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::SaveBirthDate(const QDate & date)
-{
-    m->setBirthDate(date);
-    QString error;
-    if (m->SaveDocument(doc->MPath(), error) == false)
-    {
-        QMessageBox messageBox;
-        messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setInformativeText(tr("Could not save BirthDate"));
-        messageBox.setDefaultButton(QMessageBox::Ok);
-        messageBox.setDetailedText(error);
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.exec();
-    }
-    else
-    {
-        ShowSuccess();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::OpenTable()
-{
-    const QString text = tr("Measurements use different units than pattern. This pattern required measurements in %1")
-            .arg(doc->UnitsToStr(qApp->patternUnit()));
-    if (qApp->patternType() == MeasurementsType::Individual)
-    {
-        const QString filter(tr("Individual measurements (*.vit)"));
-
-        //Use standard path to individual measurements
-        const QString path = qApp->Settings()->GetPathIndividualMeasurements();
-
-        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
-        if (filePath.isEmpty())
-        {
-            return;
-        }
-
-        VIndividualMeasurements *m1 = nullptr;
-        try
-        {
-            VDomDocument::ValidateXML("://schema/individual_measurements.xsd", filePath);
-
-            m1 = new VIndividualMeasurements(data);
-            m1->setXMLContent(filePath);
-        }
-        catch (VException &e)
-        {
-            e.CriticalMessageBox(tr("File error."), this);
-            delete m1;
-            emit DialogClosed(QDialog::Rejected);
-            return;
-        }
-        Unit mUnit = m1->MUnit();
-        if (qApp->patternUnit() != mUnit)
-        {
-            QMessageBox::critical(this, tr("Wrong units."), text);
-            delete m1;
-            return;
-        }
-        delete m;
-        m = m1;
-        data->ClearVariables(VarType::Measurement);
-        m->Measurements();
-        emit FullUpdateTree(Document::LiteParse);
-
-        doc->SetPath(filePath);
-        emit haveLiteChange();
-    }
-    else
-    {
-        const QString filter(tr("Standard measurements (*.vst)"));
-        //Use standard path to standard measurements
-        const QString path = qApp->Settings()->GetPathStandardMeasurements();
-        const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
-        if (filePath.isEmpty())
-        {
-            return;
-        }
-
-        VStandardMeasurements *m1 = nullptr;
-        try
-        {
-            VDomDocument::ValidateXML("://schema/standard_measurements.xsd", filePath);
-
-            m1 = new VStandardMeasurements(data);
-            m1->setXMLContent(filePath);
-            Unit mUnit = m1->MUnit();
-            if (qApp->patternUnit() != mUnit)
-            {
-                QMessageBox::critical(this, tr("Wrong units."), text);
-                delete m1;
-                return;
-            }
-            m1->SetSize();
-            m1->SetHeight();
-            data->ClearVariables(VarType::Measurement);
-            m1->Measurements();
-            delete m1;
-            emit FullUpdateTree(Document::LiteParse);
-
-            doc->SetPath(filePath);
-            emit haveLiteChange();
-        }
-        catch (VException &e)
-        {
-            e.CriticalMessageBox(tr("File error."), this);
-            delete m1;
-            emit DialogClosed(QDialog::Rejected);
-            return;
-        }
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -908,72 +519,6 @@ void DialogIncrements::IncrementChanged ( qint32 row, qint32 column )
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::MeasurementChanged(qint32 row, qint32 column)
-{
-    qCDebug(vDialog, "Measurement changed.");
-    switch (column)
-    {
-        case 2:// value column
-        {
-            const QTableWidgetItem *itemName = ui->tableWidgetMeasurements->item(row, 0);// name column
-            QTableWidgetItem *item = ui->tableWidgetMeasurements->item(row, 2);
-
-            QSharedPointer<VMeasurement> measur = data->GetVariable<VMeasurement>(
-                                                                         qApp->TrVars()->VarFromUser(itemName->text()));
-            const QString tag = measur->TagName();
-            QDomNodeList list = m->elementsByTagName(tag);
-            QDomElement domElement = list.at(0).toElement();
-            if (domElement.isElement() == false)
-            {
-                qCDebug(vDialog, "Can't find measurement %s", tag.toUtf8().constData());
-                return;
-            }
-
-            bool ok = false;
-            qreal base = item->text().replace(",", ".").toDouble(&ok);
-            if (ok == false)
-            {
-                measur->SetBase(0);
-                item->setText("0");
-                qCDebug(vDialog, "Can't convert toDouble measurement value");
-            }
-            else
-            {
-                measur->SetBase(base);
-            }
-            qCDebug(vDialog, "Changed value to %f", base);
-
-            // Convert value to measurements table unit
-            base = UnitConvertor(base, qApp->patternUnit(), m->MUnit());
-
-            m->SetAttribute(domElement, VIndividualMeasurements::AttrValue, QString("%1").arg(base));
-            QString error;
-            if (m->SaveDocument(doc->MPath(), error) == false)
-            {
-                QMessageBox messageBox;
-                messageBox.setIcon(QMessageBox::Warning);
-                messageBox.setInformativeText(tr("Can't save measurement"));
-                messageBox.setDefaultButton(QMessageBox::Ok);
-                messageBox.setDetailedText(error);
-                messageBox.setStandardButtons(QMessageBox::Ok);
-                messageBox.exec();
-            }
-            else
-            {
-                ShowSuccess();
-            }
-            data->ClearVariables();
-            m->Measurements();
-
-            emit FullUpdateTree(Document::LiteParse);
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::closeEvent(QCloseEvent *event)
 {
     emit DialogClosed(QDialog::Accepted);
@@ -984,5 +529,4 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
 DialogIncrements::~DialogIncrements()
 {
     delete ui;
-    delete m;
 }
