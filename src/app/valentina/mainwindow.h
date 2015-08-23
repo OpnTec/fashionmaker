@@ -167,6 +167,7 @@ private slots:
     void CreateMeasurements();
     void ShowMeasurements();
     void MeasurementsChanged(const QString &path);
+    void SyncMeasurements();
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */
@@ -194,6 +195,7 @@ private:
 
     /** @brief isInitialized true after first show window. */
     bool               isInitialized;
+    bool               mChanges;
 
     DialogIncrements   *dialogTable;
     DialogTool         *dialogTool;
@@ -294,6 +296,8 @@ private:
     void               InitScenes();
 
     bool               LoadMeasurements(const QString &path);
+
+    void               ToggleMSync(bool toggle);
 };
 
 #endif // MAINWINDOW_H

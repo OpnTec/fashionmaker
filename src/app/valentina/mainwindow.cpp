@@ -80,7 +80,8 @@ Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
 MainWindow::MainWindow(QWidget *parent)
     :MainWindowsNoGUI(parent), ui(new Ui::MainWindow), watcher(new QFileSystemWatcher(this)), currentTool(Tool::Arrow),
       lastUsedTool(Tool::Arrow), sceneDraw(nullptr), sceneDetails(nullptr),
-      mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), dialogTable(nullptr), dialogTool(nullptr),
+      mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), mChanges(false), dialogTable(nullptr),
+      dialogTool(nullptr),
       dialogHistory(nullptr), comboBoxDraws(nullptr), mode(Draw::Calculation), currentDrawIndex(0),
       currentToolBoxIndex(0), drawMode(true), recentFileActs(),
       separatorAct(nullptr),
@@ -303,6 +304,19 @@ bool MainWindow::LoadMeasurements(const QString &path)
         return false;
     }
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToggleMSync(bool toggle)
+{
+    if (mChanges)
+    {
+        ui->actionSyncMeasurements->setEnabled(toggle);
+    }
+    else
+    {
+        ui->actionSyncMeasurements->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1062,7 +1076,7 @@ void MainWindow::ShowMeasurements()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::MeasurementsChanged(const QString &path)
 {
-    bool mChanges = false;
+    mChanges = false;
     QFileInfo checkFile(path);
     if (checkFile.exists())
     {
@@ -1084,24 +1098,27 @@ void MainWindow::MeasurementsChanged(const QString &path)
         }
     }
 
+    ToggleMSync(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SyncMeasurements()
+{
     if (mChanges)
     {
-        QMessageBox::StandardButton reply = QMessageBox::question(this, tr("Update measurements"),
-                                                             tr("Measurement file was changed. Do you want to update?"),
-                                                                  QMessageBox::Yes|QMessageBox::No);
-        if (reply == QMessageBox::Yes)
+        if(LoadMeasurements(doc->MPath()))
         {
-            if(LoadMeasurements(path))
+            if (not watcher->files().contains(doc->MPath()))
             {
-                if (not watcher->files().contains(path))
-                {
-                    watcher->addPath(path);
-                }
-                helpLabel->setText(tr("Measurements updated"));
-                doc->LiteParseTree(Document::LiteParse);
+                watcher->addPath(doc->MPath());
             }
+            helpLabel->setText(tr("Measurements updated"));
+            doc->LiteParseTree(Document::LiteParse);
+            mChanges = false;
         }
     }
+
+    ToggleMSync(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2888,6 +2905,8 @@ void MainWindow::CreateActions()
         recentFileActs[i]->setVisible(false);
         connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::OpenRecentFile);
     }
+
+    connect(ui->actionSyncMeasurements, &QAction::triggered, this, &MainWindow::SyncMeasurements);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

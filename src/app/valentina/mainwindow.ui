@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>130</width>
          <height>58</height>
         </rect>
        </property>
@@ -458,7 +458,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>130</width>
          <height>156</height>
         </rect>
        </property>
@@ -622,7 +622,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>130</width>
          <height>196</height>
         </rect>
        </property>
@@ -864,7 +864,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>117</width>
+         <width>130</width>
          <height>58</height>
         </rect>
        </property>
@@ -1089,6 +1089,7 @@
     <addaction name="actionLoadStandard"/>
     <addaction name="actionCreateNew"/>
     <addaction name="actionShowM"/>
+    <addaction name="actionSyncMeasurements"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -1139,6 +1140,7 @@
    <addaction name="actionNew"/>
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
+   <addaction name="actionSyncMeasurements"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBarStages">
@@ -1891,6 +1893,18 @@
    </property>
    <property name="toolTip">
     <string>Show measurements</string>
+   </property>
+  </action>
+  <action name="actionSyncMeasurements">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+     <normaloff>:/icon/32x32/syncM.png</normaloff>:/icon/32x32/syncM.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sync measurements</string>
    </property>
   </action>
  </widget>
