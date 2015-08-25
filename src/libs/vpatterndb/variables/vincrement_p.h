@@ -32,6 +32,7 @@
 #include <QSharedData>
 
 #include "../ifc/ifcdef.h"
+#include "vcontainer.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -43,21 +44,24 @@ class VIncrementData : public QSharedData
 public:
 
     VIncrementData()
-        :id(NULL_ID)
+        :index(NULL_ID), formula(QString()), formulaOk(false), data(VContainer(nullptr, nullptr))
     {}
 
-    VIncrementData(quint32 id)
-        :id(id)
+    VIncrementData(VContainer *data, quint32 index, const QString &formula, bool ok)
+        :index(index), formula(formula), formulaOk(ok), data(*data)
     {}
 
     VIncrementData(const VIncrementData &incr)
-        :QSharedData(incr), id(incr.id)
+        :QSharedData(incr), index(incr.index), formula(incr.formula), formulaOk(incr.formulaOk), data(incr.data)
     {}
 
     virtual  ~VIncrementData();
 
     /** @brief id each increment have unique identificator */
-    quint32 id;
+    quint32 index;
+    QString formula;
+    bool    formulaOk;
+    VContainer data;
 };
 
 VIncrementData::~VIncrementData()

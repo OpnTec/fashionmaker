@@ -168,9 +168,7 @@ public:
     static const QString AttrS56;
 
     static const QString IncrementName;
-    static const QString IncrementBase;
-    static const QString IncrementKsize;
-    static const QString IncrementKgrowth;
+    static const QString IncrementFormula;
     static const QString IncrementDescription;
 
 signals:

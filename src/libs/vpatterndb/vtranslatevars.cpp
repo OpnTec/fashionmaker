@@ -705,6 +705,7 @@ QString VTranslateVars::STDescription(const QString &id) const
  * @brief FormulaFromUser replace all known tokens in formula to internal look. Also change decimal
  * separator in numbers.
  * @param formula expression that need translate
+ * @throw qmu::QmuParserError in case of a wrong expression
  * @return translated expression
  */
 QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) const

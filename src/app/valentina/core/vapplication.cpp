@@ -35,6 +35,7 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../version.h"
 #include "../vmisc/logging.h"
+#include "../qmuparser/qmuparsererror.h"
 
 #include <QDebug>
 #include <QDir>
@@ -264,9 +265,17 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
         e.CriticalMessageBox(tr("Something's wrong!!"), mainWindow);
         return true;
     }
+    // These last two cases special. I found that we can't show here modal dialog with error message.
+    // Somehow program doesn't waite untile an error dialog will be closed. But if ignore this program will hang.
+    catch (const qmu::QmuParserError &e)
+    {
+        qCDebug(vApp, "Parser error: %s", e.GetMsg().toUtf8().constData());
+        abort();
+    }
     catch (std::exception& e)
     {
-      qCritical() << "Exception thrown:" << e.what();
+        qCDebug(vApp, "Critical error! Exception thrown: %s", e.what());
+        abort();
     }
     return false;
 }

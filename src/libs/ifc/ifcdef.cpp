@@ -28,7 +28,8 @@
 
 #include "ifcdef.h"
 
-const QString CustomSign = QStringLiteral("@");
+const QString CustomMSign    = QStringLiteral("@");
+const QString CustomIncrSign = QStringLiteral("#");
 
 #define DefWidth 1.2//mm
 

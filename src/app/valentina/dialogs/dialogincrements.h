@@ -49,23 +49,30 @@ class DialogIncrements : public DialogTool
     Q_OBJECT
 public:
      DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
-     ~DialogIncrements();
-public slots:
-    void                 clickedToolButtonAdd();
-    void                 clickedToolButtonRemove();
-    void                 IncrementChanged ( qint32 row, qint32 column );
-    void                 FullUpdateFromFile();
+     virtual ~DialogIncrements() Q_DECL_OVERRIDE;
+
 signals:
     /**
      * @brief FullUpdateTree signal update data for dom document
      */
     void                 FullUpdateTree(const Document &parse);
-    /**
-     * @brief haveLiteChange signal show sign of change
-     */
-    void                 haveLiteChange();
+
 protected:
     virtual void         closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
+
+private slots:
+    void ShowIncrementDetails();
+    void AddIncrement();
+    void RemoveIncrement();
+    void MoveUp();
+    void MoveDown();
+    void SaveIncrName();
+    void SaveIncrDescription();
+    void SaveIncrFormula();
+    void DeployFormula();
+    void Fx();
+    void FullUpdateFromFile();
+
 private:
     Q_DISABLE_COPY(DialogIncrements)
 
@@ -78,11 +85,7 @@ private:
     /** @brief doc dom document container */
     VPattern             *doc;
 
-    /** @brief row save number of row current selected cell */
-    qint32               row;
-
-    /** @brief column save number of column current selected cell */
-    qint32               column;
+    int                  formulaBaseHeight;
 
     template <typename T>
     void                 FillTable(const QMap<QString, T> varTable, QTableWidget *table);
@@ -96,13 +99,15 @@ private:
     void                 FillAnglesArcs();
     void                 FillAnglesCurves();
 
-    void                 AddIncrementToFile(const quint32 &id, const QString &name, const qreal &base,
-                                            const qreal &ksize, const qreal &kheight, const QString &description);
-    void                 HideColumns(QTableWidget *table);
-    void                 SetItemViewOnly(QTableWidgetItem *item);
     void                 ShowUnits();
     void                 ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
-    void                 ShowSuccess() const;
+
+    void AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok = true);
+
+    QString ClearIncrementName(const QString &name) const;
+    bool    EvalIncrementFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
+    void    Controls();
+    void    EnableDetails(bool enabled);
 };
 
 #endif // DIALOGINCREMENTS_H

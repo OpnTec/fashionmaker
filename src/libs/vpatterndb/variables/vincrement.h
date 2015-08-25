@@ -32,6 +32,7 @@
 #include "vvariable.h"
 
 class VIncrementData;
+class VContainer;
 
 /**
  * @brief The VIncrement class keep data row of increment table
@@ -40,13 +41,17 @@ class VIncrement :public VVariable
 {
 public:
     VIncrement();
-    VIncrement(const QString &name, quint32 id, qreal base, QString description = QString());
+    VIncrement(VContainer *data, const QString &name, quint32 index, qreal base, const QString &formula, bool ok,
+               const QString description = QString());
     VIncrement(const VIncrement &incr);
     VIncrement &operator=(const VIncrement &incr);
     virtual ~VIncrement() Q_DECL_OVERRIDE;
 
-    quint32 getId() const;
-    void    setId(const quint32 &value);
+    quint32     getIndex() const;
+    QString     GetFormula() const;
+    bool        IsFormulaOk() const;
+    VContainer *GetData();
+
 private:
     QSharedDataPointer<VIncrementData> d;
 };

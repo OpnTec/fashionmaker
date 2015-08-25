@@ -58,7 +58,6 @@ public:
 
     virtual  ~VMeasurementData();
 
-    /** @brief description description measurement */
     VContainer data;
     quint32 index;
     QString formula;

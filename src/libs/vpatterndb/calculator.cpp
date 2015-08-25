@@ -137,8 +137,7 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
         if (vars->contains(i.value()))
         {
             QSharedPointer<VInternalVariable> var = vars->value(i.value());
-            if ((patternType == MeasurementsType::Standard) &&
-                (var->GetType() == VarType::Measurement || var->GetType() == VarType::Increment))
+            if (patternType == MeasurementsType::Standard && var->GetType() == VarType::Measurement)
             {
                 QSharedPointer<VVariable> m = data->GetVariable<VVariable>(i.value());
                 m->SetValue(data->size(), data->height(), *data->GetPatternUnit());

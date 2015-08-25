@@ -166,7 +166,7 @@ private:
 
     QString ClearCustomName(const QString &name) const;
 
-    void EvalFormula(const QString &formula, VContainer *data, QLabel *label);
+    bool EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
 
     void Open(const QString &pathTo, const QString &filter);
     void GUIReadOnly(bool ro);

@@ -671,18 +671,11 @@ void TMainWindow::MoveUp()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
     m->MoveUp(nameField->text());
-
     MeasurementsWasSaved(false);
-
     RefreshData();
-
-    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row-1);
-    ui->tableWidget->blockSignals(false);
-
-    Controls(); // Buttons remove, up, down
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -695,18 +688,11 @@ void TMainWindow::MoveDown()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
     m->MoveDown(nameField->text());
-
     MeasurementsWasSaved(false);
-
     RefreshData();
-
-    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row+1);
-    ui->tableWidget->blockSignals(false);
-
-    Controls(); // Buttons remove, up, down
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -727,7 +713,7 @@ void TMainWindow::Fx()
 
     QString text = ui->plainTextEditFormula->toPlainText();
     text.replace("\n", " ");
-
+    text = qApp->TrVars()->FormulaFromUser(text, true);
     dialog->SetFormula(text);
     const QString postfix = VDomDocument::UnitsToStr(mUnit, true);//Show unit in dialog lable (cm, mm or inch)
     dialog->setPostfix(postfix);
@@ -752,7 +738,7 @@ void TMainWindow::AddCustom()
     QString name;
     do
     {
-        name = QString(CustomSign + tr("M_%1")).arg(num);
+        name = CustomMSign + tr("M_%1").arg(num);
         num++;
     } while (data->IsUnique(name) == false);
 
@@ -1000,7 +986,7 @@ void TMainWindow::ShowMData()
         }
         else
         {
-            EvalFormula(meash->GetFormula(), meash->GetData(), ui->labelCalculatedValue);
+            EvalFormula(meash->GetFormula(), false, meash->GetData(), ui->labelCalculatedValue);
 
             ui->plainTextEditFormula->blockSignals(true);
 
@@ -1093,7 +1079,7 @@ void TMainWindow::SaveMName()
     QString newName = ui->lineEditName->text();
     if (meash->IsCustom())
     {
-        newName = CustomSign + newName;
+        newName = CustomMSign + newName;
     }
 
     if (data->IsUnique(newName))
@@ -1144,23 +1130,26 @@ void TMainWindow::SaveMValue()
         return;
     }
 
-    QString formula;
-    try
+    // Translate to internal look.
+
+    QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
+    const bool ok = EvalFormula(text, true, meash->GetData(), ui->labelCalculatedValue);
+
+    if (not ok)
     {
-        // Translate to internal look.
-        formula = qApp->TrVars()->FormulaFromUser(text, true);
-        QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
-        EvalFormula(formula, meash->GetData(), ui->labelCalculatedValue);
-    }
-    catch (qmu::QmuParserError &e)
-    {
-        const QString postfix = VDomDocument::UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
-        ui->labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " +
-                                          tr("Parser error: %1").arg(e.GetMsg()));
         return;
     }
 
-    m->SetMValue(nameField->text(), formula);
+    try
+    {
+        const QString formula = qApp->TrVars()->FormulaFromUser(text, true);
+        m->SetMValue(nameField->text(), formula);
+    }
+    catch (qmu::QmuParserError &e) // Just in case something bad happens
+    {
+        Q_UNUSED(e)
+        return;
+    }
 
     MeasurementsWasSaved(false);
 
@@ -1809,7 +1798,7 @@ void TMainWindow::MFields(bool enabled)
 QString TMainWindow::ClearCustomName(const QString &name) const
 {
     QString clear = name;
-    const int index = clear.indexOf(CustomSign);
+    const int index = clear.indexOf(CustomMSign);
     if (index == 0)
     {
         clear.remove(0, 1);
@@ -1818,20 +1807,29 @@ QString TMainWindow::ClearCustomName(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::EvalFormula(const QString &formula, VContainer *data, QLabel *label)
+bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label)
 {
     const QString postfix = VDomDocument::UnitsToStr(pUnit);//Show unit in dialog lable (cm, mm or inch)
     if (formula.isEmpty())
     {
-        label->setText(tr("Error") + " (" + postfix + ")");
+        label->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         label->setToolTip(tr("Empty field"));
+        return false;
     }
     else
     {
         try
         {
             // Replace line return character with spaces for calc if exist
-            QString f = formula;
+            QString f;
+            if (not fromUser)
+            {
+                f = qApp->TrVars()->FormulaFromUser(formula, true);
+            }
+            else
+            {
+                f = formula;
+            }
             f.replace("\n", " ");
             Calculator *cal = new Calculator(data, mType);
             const qreal result = UnitConvertor(cal->EvalFormula(f), mUnit, pUnit);
@@ -1839,11 +1837,13 @@ void TMainWindow::EvalFormula(const QString &formula, VContainer *data, QLabel *
 
             label->setText(qApp->LocaleToString(result) + " " +postfix);
             label->setToolTip(tr("Value"));
+            return true;
         }
         catch (qmu::QmuParserError &e)
         {
-            label->setText(tr("Error") + " (" + postfix + ")");
+            label->setText(tr("Error") + " (" + postfix + "). " + tr("Parser error: %1").arg(e.GetMsg()));
             label->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
+            return false;
         }
     }
 }
@@ -1885,7 +1885,7 @@ void TMainWindow::GUIReadOnly(bool ro)
     {
         if (QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0))
         {
-            if (nameField->text().indexOf(CustomSign) == 0) // Check if custom
+            if (nameField->text().indexOf(CustomMSign) == 0) // Check if custom
             {
                 ui->lineEditName->setReadOnly(ro);
             }

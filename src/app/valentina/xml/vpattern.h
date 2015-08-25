@@ -65,6 +65,16 @@ public:
     QString        GetAuthor() const;
     void           SetAuthor(const QString &text);
 
+    void AddEmptyIncrement(const QString &name);
+    void AddEmptyIncrementAfter(const QString &after, const QString &name);
+    void RemoveIncrement(const QString &name);
+    void MoveUpIncrement(const QString &name);
+    void MoveDownIncrement(const QString &name);
+
+    void SetIncrementName(const QString &name, const QString &text);
+    void SetIncrementFormula(const QString &name, const QString &text);
+    void SetIncrementDescription(const QString &name, const QString &text);
+
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
 
 public slots:
@@ -151,6 +161,11 @@ private:
     void ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseNodeArc(const QDomElement &domElement, const Document &parse);
     void ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+
+    qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
+
+    QDomElement MakeEmptyIncrement(const QString &name);
+    QDomElement FindIncrement(const QString &name) const;
 };
 
 #endif // VPATTERN_H

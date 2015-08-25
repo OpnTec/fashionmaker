@@ -47,8 +47,9 @@ VIncrement::VIncrement()
  * @param base value
  * @param description description of increment
  */
-VIncrement::VIncrement(const QString &name, quint32 id, qreal base, QString description)
-    :VVariable(name, base, description), d(new VIncrementData(id))
+VIncrement::VIncrement(VContainer *data, const QString &name, quint32 index, qreal base, const QString &formula,
+                       bool ok, const QString description)
+    :VVariable(name, base, description), d(new VIncrementData(data, index, formula, ok))
 {
     SetType(VarType::Increment);
 }
@@ -76,20 +77,28 @@ VIncrement::~VIncrement()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief getId return id of row
- * @return id
+ * @brief getIndex return index of row
+ * @return index
  */
-quint32 VIncrement::getId() const
+quint32 VIncrement::getIndex() const
 {
-    return d->id;
+    return d->index;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief setId set id of row
- * @param value id
- */
-void VIncrement::setId(const quint32 &value)
+QString VIncrement::GetFormula() const
 {
-    d->id = value;
+    return d->formula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VIncrement::IsFormulaOk() const
+{
+    return d->formulaOk;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VContainer *VIncrement::GetData()
+{
+    return &d->data;
 }

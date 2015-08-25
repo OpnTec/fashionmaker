@@ -97,9 +97,7 @@ const QString VAbstractPattern::AttrS54         = QStringLiteral("s54");
 const QString VAbstractPattern::AttrS56         = QStringLiteral("s56");
 
 const QString VAbstractPattern::IncrementName        = QStringLiteral("name");
-const QString VAbstractPattern::IncrementBase        = QStringLiteral("base");
-const QString VAbstractPattern::IncrementKsize       = QStringLiteral("ksize");
-const QString VAbstractPattern::IncrementKgrowth     = QStringLiteral("kgrowth");
+const QString VAbstractPattern::IncrementFormula     = QStringLiteral("formula");
 const QString VAbstractPattern::IncrementDescription = QStringLiteral("description");
 
 //---------------------------------------------------------------------------------------------------------------------

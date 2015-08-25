@@ -524,7 +524,7 @@ QStringList VMeasurements::ListKnown() const
     const QStringList list = ListAll();
     for (int i=0; i < list.size(); ++i)
     {
-        if (list.at(i).indexOf(CustomSign) != 0)
+        if (list.at(i).indexOf(CustomMSign) != 0)
         {
             listNames.append(list.at(i));
         }
