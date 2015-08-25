@@ -756,12 +756,6 @@ void MainWindow::ToolTrueDarts(bool checked)
                                                 &MainWindow::ClosedDialogWithApply<VToolTrueDarts>,
                                             &MainWindow::ApplyDialog<VToolTrueDarts>);
 }
-//---------------------------------------------------------------------------------------------------------------------
-
-void MainWindow::ToolRotate(bool checked)
-{
-
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -1080,7 +1074,6 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonArcWithLength, &QToolButton::clicked, this, &MainWindow::ToolArcWithLength);
     connect(ui->toolButtonTrueDarts, &QToolButton::clicked, this, &MainWindow::ToolTrueDarts);
 
-    //connect(ui->toolButtonRotate, &QToolButton::clicked, this, &MainWindow::ToolRotate);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -269,6 +269,7 @@ void DialogLayoutSettings::SetUnitePages(bool save)
 {
     ui->checkBoxUnitePages->setChecked(save);
 }
+
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::TemplateSelected()
 {
@@ -304,6 +305,7 @@ bool DialogLayoutSettings::SelectPaperUnit(const QString& units)
     }
     return indexUnit != -1;
 }
+
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogLayoutSettings::SelectLayoutUnit(const QString &units)
 {
@@ -314,16 +316,19 @@ bool DialogLayoutSettings::SelectLayoutUnit(const QString &units)
     }
     return indexUnit != -1;
 }
+
 //---------------------------------------------------------------------------------------------------------------------
 int DialogLayoutSettings::LayoutToPixels(qreal value) const
 {
     return static_cast<quint32>(qFloor(UnitConvertor(value, LayoutUnit(), Unit::Px)));
 }
+
 //---------------------------------------------------------------------------------------------------------------------
 int DialogLayoutSettings::PageToPixels(qreal value) const
 {
     return static_cast<quint32>(qFloor(UnitConvertor(value, PaperUnit(), Unit::Px)));
 }
+
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogLayoutSettings::MakeGroupsHelp()
 {
@@ -366,8 +371,8 @@ void DialogLayoutSettings::PaperSizeChanged()
 
     Label();
 }
-//---------------------------------------------------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogLayoutSettings::SelectTemplate(const PaperSizeTemplate& id)
 {
     int index = ui->comboBoxTemplates->findData(static_cast<VIndexType>(id));
@@ -378,8 +383,8 @@ bool DialogLayoutSettings::SelectTemplate(const PaperSizeTemplate& id)
 
     return (index > -1);
 }
-//---------------------------------------------------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::Swap(bool checked)
 {
     if (checked)
@@ -481,8 +486,8 @@ void DialogLayoutSettings::InitTemplates()
     }
     ui->comboBoxTemplates->setCurrentIndex(-1);
 }
-//---------------------------------------------------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogLayoutSettings::MakeHelpTemplateList()
 {
    QString out = "\n";

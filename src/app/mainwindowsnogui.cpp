@@ -161,7 +161,8 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
         default:
             break;
     }
-    AppAbort(text, FAILED_TO_GEN_LAYOUT_STATUS);
+    //just added different return status in console mode
+    AppAbort(text, FAILED_GEN_BASE_STATUS + static_cast<int>(state));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

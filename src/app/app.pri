@@ -14,6 +14,7 @@ SOURCES += \
         $$PWD/version.cpp \
         $$PWD/mainwindowsnogui.cpp
 
+
 # Some header files
 HEADERS  += \
         $$PWD/mainwindow.h \

@@ -29,7 +29,7 @@ const static auto OPTION_SHIFTUNITS   = QStringLiteral("layounits");
 const static auto OPTION_GAPWIDTH     = QStringLiteral("gapwidth");
 const static auto OPTION_GROUPPING    = QStringLiteral("groups");
 
-#define tr(A) QCoreApplication::translate("VCommandLine",(A))
+#define tr(A) QCoreApplication::translate("VCommandLine", (A))
 //------------------------------------------------------------------------------------------------------
 
 //such a tricky initialization is used, because it uses static functions which relay on static variables and order of initialization is not defined between compiled units.
@@ -37,39 +37,73 @@ const static auto OPTION_GROUPPING    = QStringLiteral("groups");
 //------------------------------------------------------------------------------------------------------
 VCommandLine::VCommandLine() : parser()
   , optionsUsed ({
-                 QCommandLineOption(OPTION_OUTFILE, tr("Path to output exported layout file. Use it to enable console export mode."), OPTION_OUTFILE),
+                 //keep in mind order here - that is how user will see it, so group-up for usability
+                 //===================================================================================
 
-                 QCommandLineOption(OPTION_MEASUREFILE, tr("Path to custom measure file (export mode)."), OPTION_MEASUREFILE),
+                 QCommandLineOption(OPTION_OUTFILE,
+                                    tr("Path to output exported layout file. Use it to enable console export mode."),
+                                    OPTION_OUTFILE),
 
-                 QCommandLineOption(OPTION_EXP2FORMAT, tr("Number corresponding to output format (default = 0, export mode): ") +
+                 QCommandLineOption(OPTION_MEASUREFILE,
+                                    tr("Path to custom measure file (export mode)."),
+                                    OPTION_MEASUREFILE),
+
+                 QCommandLineOption(OPTION_EXP2FORMAT,
+                                    tr("Number corresponding to output format (default = 0, export mode): ") +
                                     DialogSaveLayout::MakeHelpFormatList(), OPTION_EXP2FORMAT, "0"),
 
-                 QCommandLineOption(OPTION_PAGETEMPLATE, tr("Number corresponding to page template (default = 0, export mode): ")+
+                 //===================================================================================
+
+                 QCommandLineOption(OPTION_PAGETEMPLATE,
+                                    tr("Number corresponding to page template (default = 0, export mode): ")+
                                     DialogLayoutSettings::MakeHelpTemplateList(), OPTION_PAGETEMPLATE, "0"),
 
 
-                 QCommandLineOption(OPTION_PAGEW, tr("Page width in current units like 12.0 (cannot be used with \"")+OPTION_PAGETEMPLATE+tr("\", export mode)."), OPTION_PAGEW),
+                 QCommandLineOption(OPTION_PAGEW,
+                                    tr("Page width in current units like 12.0 (cannot be used with \"")
+                                    +OPTION_PAGETEMPLATE+tr("\", export mode)."), OPTION_PAGEW),
 
-                 QCommandLineOption(OPTION_PAGEH, tr("Page height in current units like 12.0 (cannot be used with \"")+OPTION_PAGETEMPLATE+tr("\", export mode)."), OPTION_PAGEH),
+                 QCommandLineOption(OPTION_PAGEH,
+                                    tr("Page height in current units like 12.0 (cannot be used with \"")
+                                    +OPTION_PAGETEMPLATE+tr("\", export mode)."), OPTION_PAGEH),
 
-                 QCommandLineOption(OPTION_PAGEUNITS, tr("Page height/width measure units (cannot be used with \"")+
-                                    OPTION_PAGETEMPLATE+tr("\", export mode): ") + VDomDocument::UnitsHelpString(), OPTION_PAGEUNITS),
+                 QCommandLineOption(OPTION_PAGEUNITS,
+                                    tr("Page height/width measure units (cannot be used with \"")+
+                                    OPTION_PAGETEMPLATE+tr("\", export mode): ") + VDomDocument::UnitsHelpString(),
+                                    OPTION_PAGEUNITS),
 
-                 QCommandLineOption(OPTION_ROTATE, tr("Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode)."), OPTION_ROTATE),
+                 //===================================================================================
 
-                 QCommandLineOption(OPTION_CROP, tr("Auto crop unused length (export mode).")),
+                 QCommandLineOption(OPTION_ROTATE,
+                                    tr("Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode)."),
+                                    OPTION_ROTATE),
 
-                 QCommandLineOption(OPTION_UNITE, tr("Unite pages if possible (export mode).")),
+                 QCommandLineOption(OPTION_CROP,
+                                    tr("Auto crop unused length (export mode).")),
 
-                 QCommandLineOption(OPTION_SAVELENGTH, tr("Save length of the sheet if set. (export mode).")),
+                 QCommandLineOption(OPTION_UNITE,
+                                    tr("Unite pages if possible (export mode).")),
 
-                 QCommandLineOption(OPTION_SHIFTUNITS, tr("Layout units (as paper's one except px, export mode)."), OPTION_SHIFTUNITS),
+                 //===================================================================================
 
-                 QCommandLineOption(OPTION_SHIFTLENGTH, tr("Shift layout length measured in layout units (export mode)."), OPTION_SHIFTLENGTH),
+                 QCommandLineOption(OPTION_SAVELENGTH,
+                                    tr("Save length of the sheet if set. (export mode).")),
 
-                 QCommandLineOption(OPTION_GAPWIDTH, tr("Gap width x2, measured in layout units. (export mode)."), OPTION_GAPWIDTH),
+                 QCommandLineOption(OPTION_SHIFTUNITS,
+                                    tr("Layout units (as paper's one except px, export mode)."),
+                                    OPTION_SHIFTUNITS),
 
-                 QCommandLineOption(OPTION_GROUPPING, tr("Sets layout groupping (export mode): ") + DialogLayoutSettings::MakeGroupsHelp(), OPTION_GROUPPING, "2"),
+                 QCommandLineOption(OPTION_SHIFTLENGTH,
+                                    tr("Shift layout length measured in layout units (export mode)."),
+                                    OPTION_SHIFTLENGTH),
+
+                 QCommandLineOption(OPTION_GAPWIDTH,
+                                    tr("Gap width x2, measured in layout units. (export mode)."),
+                                    OPTION_GAPWIDTH),
+
+                 QCommandLineOption(OPTION_GROUPPING,
+                                    tr("Sets layout groupping (export mode): ")
+                                    + DialogLayoutSettings::MakeGroupsHelp(), OPTION_GROUPPING, "2"),
                  }),
     isGuiEnabled(false)
 {
@@ -83,17 +117,20 @@ VCommandLine::VCommandLine() : parser()
         parser.addOption(o);
     }
 }
+
 //------------------------------------------------------------------------------------------------------
 int VCommandLine::Lo2Px(const QString &src, const DialogLayoutSettings &converter)
 {
     //that is dirty-dirty hack ...eventually number is converted float <--> int 3 or 4 times including inside dialog ... that will loose precision for sure
     return converter.LayoutToPixels(src.toFloat());
 }
+
 //------------------------------------------------------------------------------------------------------
 int VCommandLine::Pg2Px(const QString& src, const DialogLayoutSettings& converter)
 {
     return converter.PageToPixels(src.toFloat());
 }
+
 //------------------------------------------------------------------------------------------------------
 VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 {
@@ -194,8 +231,8 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
     return res;
 }
-//------------------------------------------------------------------------------------------------------
 
+//------------------------------------------------------------------------------------------------------
 VCommandLinePtr VCommandLine::Get(const QCoreApplication& app)
 {
     if (instance == nullptr)
@@ -209,12 +246,14 @@ VCommandLinePtr VCommandLine::Get(const QCoreApplication& app)
 
     return instance;
 }
+
 //------------------------------------------------------------------------------------------------------
 NORET_ATTR void VCommandLine::Error(const QString &text) const
 {
     qStdErr() << text << "\n";
     const_cast<VCommandLine*>(this)->parser.showHelp(FAILED_HELP_SHOWN_STATUS);
 }
+
 //------------------------------------------------------------------------------------------------------
 void VCommandLine::Reset()
 {
@@ -231,6 +270,7 @@ bool VCommandLine::IsExportEnabled() const
     }
     return r;
 }
+
 //------------------------------------------------------------------------------------------------------
 DialogLayoutSettings::PaperSizeTemplate VCommandLine::OptPaperSize() const
 {
@@ -253,6 +293,7 @@ int VCommandLine::OptRotation() const
 
     return rotate;
 }
+
 //------------------------------------------------------------------------------------------------------
 Cases VCommandLine::OptGroup() const
 {
@@ -263,8 +304,8 @@ Cases VCommandLine::OptGroup() const
     }
     return static_cast<Cases>(r);
 }
-//------------------------------------------------------------------------------------------------------
 
+//------------------------------------------------------------------------------------------------------
 QString VCommandLine::OptMeasurePath() const
 {
     QString measure;
@@ -279,7 +320,6 @@ QString VCommandLine::OptMeasurePath() const
 }
 
 //------------------------------------------------------------------------------------------------------
-
 QString VCommandLine::OptExportPath() const
 {
     QString path;
@@ -290,8 +330,8 @@ QString VCommandLine::OptExportPath() const
 
     return path;
 }
-//------------------------------------------------------------------------------------------------------
 
+//------------------------------------------------------------------------------------------------------
 int VCommandLine::OptExportType() const
 {
     int r = 0;
@@ -303,11 +343,11 @@ int VCommandLine::OptExportType() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
 QStringList VCommandLine::OptInputFileNames() const
 {
     return parser.positionalArguments();
 }
+
 //------------------------------------------------------------------------------------------------------
 bool VCommandLine::IsGuiEnabled() const
 {

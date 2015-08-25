@@ -597,11 +597,13 @@ void VApplication::InitTrVars()
 {
     trVars = new VTranslateVars(Settings());
 }
+
 //---------------------------------------------------------------------------------------------------------------------
 bool VApplication::CheckGUI()
 {
     return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsGuiEnabled();
 }
+
 //---------------------------------------------------------------------------------------------------------------------
 const VCommandLinePtr VApplication::CommandLine() const
 {

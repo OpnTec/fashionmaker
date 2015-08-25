@@ -87,7 +87,7 @@ enum class Tool : unsigned char
 
 enum class Vis : unsigned char
 {
-    ControlPointSpline = static_cast<Vis>(Tool::LAST_ONE_DO_NOT_USE), //38,// increase this value if need more positions in Tool enum
+    ControlPointSpline = static_cast<Vis>(Tool::LAST_ONE_DO_NOT_USE),
     GraphicsSimpleTextItem,
     SimpleSplinePath,
     SimplePoint,

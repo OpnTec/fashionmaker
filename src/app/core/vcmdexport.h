@@ -11,11 +11,10 @@ constexpr auto GENERAL_ERROR_STATUS        = 255;
 constexpr auto INVALID_PARAMS_STATUS       = 254;
 constexpr auto FAILED_TO_GEN_LAYOUT_STATUS = 253;
 constexpr auto FAILED_HELP_SHOWN_STATUS    = 250;
+constexpr auto FAILED_GEN_BASE_STATUS      = 240;
 
-//making QtCReator happy....[[noreturn]] is part of C++11 standard
-//http://en.cppreference.com/w/cpp/language/attributes
+#define NORET_ATTR Q_NORETURN
 
-#define NORET_ATTR [[noreturn]]
 
 //---------------------------------------------------------------------------------------------------------------------
 inline QTextStream& qStdErr()
