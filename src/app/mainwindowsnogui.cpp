@@ -30,11 +30,11 @@
 #include "core/vapplication.h"
 #include "../libs/vpatterndb/vcontainer.h"
 #include "../libs/vobj/vobjpaintdevice.h"
-#include "dialogs/dialoglayoutsettings.h"
-#include "../libs/vlayout/vlayoutgenerator.h"
+
 #include "dialogs/dialoglayoutprogress.h"
-#include "dialogs/dialogsavelayout.h"
 #include "../libs/vlayout/vposter.h"
+#include "dialogs/dialoglayoutsettings.h"
+
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -80,8 +80,8 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
 
     if (checked)
     {
-        VLayoutGenerator lGenerator(this);
-        lGenerator.SetDetails(listDetails);
+        VLayoutGenerator lGenerator;
+
 
         DialogLayoutSettings layout(&lGenerator, this);
         if (layout.exec() == QDialog::Rejected)
@@ -89,40 +89,7 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
             tButton->setChecked(false);
             return;
         }
-
-        DialogLayoutProgress progress(listDetails.count(), this);
-
-        connect(&lGenerator, &VLayoutGenerator::Start, &progress, &DialogLayoutProgress::Start);
-        connect(&lGenerator, &VLayoutGenerator::Arranged, &progress, &DialogLayoutProgress::Arranged);
-        connect(&lGenerator, &VLayoutGenerator::Error, &progress, &DialogLayoutProgress::Error);
-        connect(&lGenerator, &VLayoutGenerator::Finished, &progress, &DialogLayoutProgress::Finished);
-        connect(&progress, &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
-
-        lGenerator.Generate();
-
-        switch (lGenerator.State())
-        {
-            case LayoutErrors::NoError:
-                CleanLayout();
-                papers = lGenerator.GetPapersItems();// Blank sheets
-                details = lGenerator.GetAllDetails();// All details
-                if (lGenerator.IsUnitePages())
-                {
-                    UnitePages();
-                }
-                CreateShadows();
-                CreateScenes();
-                PrepareSceneList();
-                isLayoutStale = false;
-                break;
-            case LayoutErrors::ProcessStoped:
-                break;
-            case LayoutErrors::PrepareLayoutError:
-            case LayoutErrors::EmptyPaperError:
-                break;
-            default:
-                break;
-        }
+        LayoutSettings(lGenerator);
         tButton->setChecked(false);
     }
     else
@@ -132,6 +99,73 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
+{
+    lGenerator.SetDetails(listDetails);
+    DialogLayoutProgress progress(listDetails.count(), this);
+    if (VApplication::CheckGUI())
+    {
+        connect(&lGenerator, &VLayoutGenerator::Start, &progress, &DialogLayoutProgress::Start);
+        connect(&lGenerator, &VLayoutGenerator::Arranged, &progress, &DialogLayoutProgress::Arranged);
+        connect(&lGenerator, &VLayoutGenerator::Error, &progress, &DialogLayoutProgress::Error);
+        connect(&lGenerator, &VLayoutGenerator::Finished, &progress, &DialogLayoutProgress::Finished);
+        connect(&progress, &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
+    }
+    else
+    {
+        connect(&lGenerator, &VLayoutGenerator::Error, this, &MainWindowsNoGUI::ErrorConsoleMode);
+    }
+    lGenerator.Generate();
+
+    switch (lGenerator.State())
+    {
+        case LayoutErrors::NoError:
+            CleanLayout();
+            papers = lGenerator.GetPapersItems();// Blank sheets
+            details = lGenerator.GetAllDetails();// All details
+            if (lGenerator.IsUnitePages())
+            {
+                UnitePages();
+            }
+            CreateShadows();
+            CreateScenes();
+            PrepareSceneList();
+            isLayoutStale = false;
+            break;
+        case LayoutErrors::ProcessStoped:
+            break;
+        case LayoutErrors::PrepareLayoutError:
+        case LayoutErrors::EmptyPaperError:
+            break;
+        default:
+            break;
+
+    }
+}
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
+{
+    QString text;
+    switch (state)
+    {
+        case LayoutErrors::NoError:
+            return;
+        case LayoutErrors::PrepareLayoutError:
+            text = tr("Couldn't prepare data for creation layout");
+            break;
+        case LayoutErrors::ProcessStoped:
+            break;
+        case LayoutErrors::EmptyPaperError:
+            text = tr("Several workpieces left not arranged, but none of them match for paper");
+            break;
+        default:
+            break;
+    }
+    AppAbort(text, FAILED_TO_GEN_LAYOUT_STATUS);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
 void MainWindowsNoGUI::ExportLayoutAs()
 {
     if (isLayoutStale)
@@ -141,13 +175,19 @@ void MainWindowsNoGUI::ExportLayoutAs()
             return;
         }
     }
-    QMap<QString, QString> extByMessage = InitFormates();
-    DialogSaveLayout dialog(extByMessage, scenes.size(), FileName(), this);
+    DialogSaveLayout dialog(scenes.size(), FileName(), this);
 
     if (dialog.exec() == QDialog::Rejected)
     {
         return;
     }
+
+    ExportLayout(dialog);
+}
+//---------------------------------------------------------------------------------------------------------------------
+
+void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
+{
 
     QString suf = dialog.Formate();
     suf.replace(".", "");
@@ -353,7 +393,7 @@ void MainWindowsNoGUI::PrintTiled()
 void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *details)
 {
     SCASSERT(details != nullptr)
-    if (details->count() == 0)
+            if (details->count() == 0)
     {
         listDetails.clear();
         return;
@@ -457,33 +497,6 @@ void MainWindowsNoGUI::CreateScenes()
 
         scenes.append(scene);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QMap<QString, QString> MainWindowsNoGUI::InitFormates() const
-{
-    QMap<QString, QString> extByMessage;
-    extByMessage[ tr("Svg files (*.svg)") ] = ".svg";
-    extByMessage[ tr("PDF files (*.pdf)") ] = ".pdf";
-    extByMessage[ tr("Images (*.png)") ] = ".png";
-    extByMessage[ tr("Wavefront OBJ (*.obj)") ] = ".obj";
-
-    QProcess proc;
-#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
-    proc.start(qApp->applicationDirPath()+"/"+PDFTOPS); // Seek pdftops in app bundle or near valentin.exe
-#else
-    proc.start(PDFTOPS); // Seek pdftops in standard path
-#endif
-    if (proc.waitForFinished(15000))
-    {
-        extByMessage[ tr("PS files (*.ps)") ] = ".ps";
-        extByMessage[ tr("EPS files (*.eps)") ] = ".eps";
-    }
-    else
-    {
-        qDebug()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
-    }
-    return extByMessage;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -799,14 +812,14 @@ void MainWindowsNoGUI::LayoutPrint()
 void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
 {
     SCASSERT(printer != nullptr)
-    printer->setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
+            printer->setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
 
     // Set orientation
     if (papers.size() > 0)
     {
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
         SCASSERT(paper != nullptr)
-        if (paper->rect().height()>= paper->rect().width())
+                if (paper->rect().height()>= paper->rect().width())
         {
             printer->setOrientation(QPrinter::Portrait);
         }
@@ -820,8 +833,8 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
     {
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
         SCASSERT(paper != nullptr)
-        printer->setPaperSize ( QSizeF(FromPixel(paper->rect().width(), Unit::Mm),
-                                       FromPixel(paper->rect().height(), Unit::Mm)), QPrinter::Millimeter );
+                printer->setPaperSize ( QSizeF(FromPixel(paper->rect().width(), Unit::Mm),
+                                               FromPixel(paper->rect().height(), Unit::Mm)), QPrinter::Millimeter );
     }
 
     printer->setDocName(FileName());
@@ -838,11 +851,11 @@ bool MainWindowsNoGUI::isPagesUniform() const
     {
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
         SCASSERT(paper != nullptr)
-        for (int i=1; i < papers.size(); ++i)
+                for (int i=1; i < papers.size(); ++i)
         {
             QGraphicsRectItem *p = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
             SCASSERT(p != nullptr)
-            if (paper->rect() != p->rect())
+                    if (paper->rect() != p->rect())
             {
                 return false;
             }
@@ -893,7 +906,7 @@ void MainWindowsNoGUI::UnitePages()
     {
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
         SCASSERT(paper != nullptr)
-        if (length + paper->rect().height() <= QIMAGE_MAX)
+                if (length + paper->rect().height() <= QIMAGE_MAX)
         {
             UniteDetails(j, nDetails, length, i);
             length += paper->rect().height();

@@ -36,6 +36,7 @@
 #include "tools/vtooldetail.h"
 #include "tools/vtooluniondetails.h"
 #include "tools/drawTools/drawtools.h"
+#include "core/vcmdexport.h"
 
 namespace Ui
 {
@@ -53,8 +54,10 @@ class MainWindow : public MainWindowsNoGUI
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow() Q_DECL_OVERRIDE;
-    void               LoadPattern(const QString &curFile);
+    void               LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
     void               ReopenFilesAfterCrash(QStringList &args);
+
+    void DoExport(const VCommandLinePtr& expParams);
 public slots:
     void               mouseMove(const QPointF &scenePos);
     void               ArrowTool();
@@ -122,6 +125,7 @@ public slots:
     void               ToolPointFromArcAndTangent(bool checked);
     void               ToolArcWithLength(bool checked);
     void               ToolTrueDarts(bool checked);
+    void               ToolRotate(bool checked);
 
     void               ClosedDialogDetail(int result);
     void               ClosedDialogUnionDetails(int result);

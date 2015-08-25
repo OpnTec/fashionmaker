@@ -34,9 +34,13 @@
 #include "../libs/vpatterndb/vdetail.h"
 #include "../libs/vlayout/vlayoutdetail.h"
 #include "xml/vpattern.h"
+#include "dialogs/dialogsavelayout.h"
+#include "../libs/vlayout/vlayoutgenerator.h"
+
 
 class QGraphicsScene;
 class QPrinter;
+
 
 class MainWindowsNoGUI : public QMainWindow
 {
@@ -55,7 +59,7 @@ public slots:
     void PrintPreviewTiled();
     void PrintOrigin();
     void PrintTiled();
-
+    void ErrorConsoleMode(const LayoutErrors &state);
 protected:
     QVector<VLayoutDetail> listDetails;
 
@@ -85,12 +89,13 @@ protected:
     bool isLayoutStale;
 
     void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
+    void ExportLayout(const DialogSaveLayout &dialog);
 
     void InitTempLayoutScene();
     virtual void CleanLayout()=0;
     virtual void PrepareSceneList()=0;
     QIcon ScenePreview(int i) const;
-
+    void LayoutSettings(VLayoutGenerator& lGenerator);
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 
@@ -99,7 +104,6 @@ private:
     void CreateShadows();
     void CreateScenes();
 
-    QMap<QString, QString> InitFormates() const;
 
     void SvgFile(const QString &name, int i)const;
     void PngFile(const QString &name, int i)const;

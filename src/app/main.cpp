@@ -28,16 +28,11 @@
 
 #include "mainwindow.h"
 #include "core/vapplication.h"
-
+#include <iostream>
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#   include "../libs/vmisc/backport/qcommandlineparser.h"
-#else
-#   include <QCommandLineParser>
-#endif
-
 //---------------------------------------------------------------------------------------------------------------------
+
 int main(int argc, char *argv[])
 {
     Q_INIT_RESOURCE(cursor);
@@ -51,29 +46,31 @@ int main(int argc, char *argv[])
     QT_REQUIRE_VERSION(argc, argv, "5.0.0");
 
     VApplication app(argc, argv);
+
     app.InitOptions();
 
     MainWindow w;
     app.setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
     app.setMainWindow(&w);
 
-    QCommandLineParser parser;
-    parser.setApplicationDescription(QCoreApplication::translate("main", "Pattern making program."));
-    parser.addHelpOption();
-    parser.addVersionOption();
-    parser.addPositionalArgument("filename", QCoreApplication::translate("main", "Pattern file."));
-    parser.process(app);
-    QStringList args = parser.positionalArguments();
+    auto args = app.CommandLine()->OptInputFileNames();
 
     //Before we load pattern show window.
-    w.show();
-
-    w.ReopenFilesAfterCrash(args);
-
-    for (int i=0;i<args.size();++i)
+    if (VApplication::CheckGUI())
     {
-        w.LoadPattern(args.at(i));
+        w.show();
+        w.ReopenFilesAfterCrash(args);
     }
 
-    return app.exec();
+    for (size_t i=0, sz = args.size(); i < sz;++i)
+    {
+        w.LoadPattern(args.at(static_cast<int>(i)), app.CommandLine()->OptMeasurePath());
+        if (app.CommandLine()->IsExportEnabled())
+        {            
+            w.DoExport(app.CommandLine());
+            break;
+        }
+    }
+
+    return (VApplication::CheckGUI()) ? app.exec() : 0; // single return point is always better than more
 }

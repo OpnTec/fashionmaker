@@ -48,6 +48,8 @@
 #include <QMessageBox>
 #include <QThread>
 #include <QDateTime>
+#include <iostream>
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 #   include <QLockFile>
 #endif
@@ -87,29 +89,32 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     QCoreApplication *instance = QCoreApplication::instance();
     const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
 
+
     if (isGuiThread)
     {
+        //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will lead to crash
+        const bool topWinAllowsPop = (qApp->activeModalWidget() == nullptr) || !qApp->activeModalWidget()->inherits("QFileDialog");
         QString debugdate = "[" + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
         QMessageBox messageBox;
         switch (type)
         {
             case QtDebugMsg:
                 debugdate += QString(":DEBUG:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                        .arg(context.function).arg(context.category).arg(msg);
+                             .arg(context.function).arg(context.category).arg(msg);
                 break;
             case QtWarningMsg:
                 debugdate += QString(":WARNING:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                        .arg(context.function).arg(context.category).arg(msg);
+                             .arg(context.function).arg(context.category).arg(msg);
                 messageBox.setIcon(QMessageBox::Warning);
                 break;
             case QtCriticalMsg:
                 debugdate += QString(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                        .arg(context.function).arg(context.category).arg(msg);
+                             .arg(context.function).arg(context.category).arg(msg);
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
             case QtFatalMsg:
                 debugdate += QString(":FATAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                        .arg(context.function).arg(context.category).arg(msg);
+                             .arg(context.function).arg(context.category).arg(msg);
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
             default:
@@ -120,11 +125,22 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
         if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
         {
-            messageBox.setInformativeText(msg);
-            messageBox.setStandardButtons(QMessageBox::Ok);
-            messageBox.setWindowModality(Qt::ApplicationModal);
-            messageBox.setModal(true);
-            messageBox.exec();
+
+            if (VApplication::CheckGUI())
+            {
+                if (topWinAllowsPop)
+                {
+                    messageBox.setInformativeText(msg);
+                    messageBox.setStandardButtons(QMessageBox::Ok);
+                    messageBox.setWindowModality(Qt::ApplicationModal);
+                    messageBox.setModal(true);
+                    messageBox.exec();
+                }
+            }
+            else
+            {
+                qStdErr() << msg << "\n";
+            }
         }
 
         if (QtFatalMsg == type)
@@ -159,12 +175,14 @@ VApplication::VApplication(int &argc, char **argv)
     : VAbstractApplication(argc, argv),
       trVars(nullptr), autoSaveTimer(nullptr),
       log(nullptr),
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+      #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
       out(nullptr), logLock(nullptr)
-#else
+    #else
       out(nullptr)
-#endif
+    #endif
 {
+    VCommandLine::Reset(); // making sure will create new instance...just in case we will ever do 2 objects of VApplication
+    VCommandLine::Get(*this);
     undoStack = new QUndoStack(this);
 }
 
@@ -183,8 +201,8 @@ VApplication::~VApplication()
         delete logLock;
 #endif
     }
-
     delete trVars;
+    VCommandLine::Reset();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,7 +287,7 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     }
     catch (std::exception& e)
     {
-      qCritical() << "Exception thrown:" << e.what();
+        qCritical() << "Exception thrown:" << e.what();
     }
     return false;
 }
@@ -323,17 +341,17 @@ QString VApplication::translationsPath() const
 #else
 #ifdef QT_DEBUG
     return QApplication::applicationDirPath() + trPath;
-    #else
-        QDir dir(QApplication::applicationDirPath() + trPath);
-        if (dir.exists())
-        {
-            return dir.absolutePath();
-        }
-        else
-        {
-            return QStringLiteral("/usr/share/valentina/translations");
-        }
-    #endif
+#else
+    QDir dir(QApplication::applicationDirPath() + trPath);
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+    else
+    {
+        return QStringLiteral("/usr/share/valentina/translations");
+    }
+#endif
 #endif
 }
 
@@ -374,6 +392,7 @@ void VApplication::BeginLogging()
     {
         out = new QTextStream(log);
         qInstallMessageHandler(noisyFailureMsgHandler);
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         logLock = new QLockFile(LogPath()+".lock");
         logLock->setStaleLockTime(0);
@@ -512,11 +531,11 @@ void VApplication::InitOptions()
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
     {
-       //If there is no default working icon theme then we should
-       //use an icon theme that we provide via a .qrc file
-       //This case happens under Windows and Mac OS X
-       //This does not happen under GNOME or KDE
-       QIcon::setThemeName("win.icon.theme");
+        //If there is no default working icon theme then we should
+        //use an icon theme that we provide via a .qrc file
+        //This case happens under Windows and Mac OS X
+        //This does not happen under GNOME or KDE
+        QIcon::setThemeName("win.icon.theme");
     }
 }
 
@@ -578,6 +597,17 @@ void VApplication::InitTrVars()
 {
     trVars = new VTranslateVars(Settings());
 }
+//---------------------------------------------------------------------------------------------------------------------
+bool VApplication::CheckGUI()
+{
+    return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsGuiEnabled();
+}
+//---------------------------------------------------------------------------------------------------------------------
+const VCommandLinePtr VApplication::CommandLine() const
+{
+    return VCommandLine::instance;
+}
+//---------------------------------------------------------------------------------------------------------------------
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
 //---------------------------------------------------------------------------------------------------------------------
@@ -686,7 +716,7 @@ void VApplication::CollectReports() const
 {
     // Seek file "binary_name.RPT"
     const QString reportName = QString("%1/%2.RPT").arg(applicationDirPath())
-            .arg(QFileInfo(arguments().at(0)).baseName());
+                               .arg(QFileInfo(arguments().at(0)).baseName());
     QFile reportFile(reportName);
     if (reportFile.exists())
     { // Hooray we have found crash
@@ -837,7 +867,7 @@ void VApplication::SendReport(const QString &reportName) const
     {// Trying send report
         // Change token if need
         const QStringList token = QStringList()<<"78"<<"5e"<<"02"<<"bd"<<"41"<<"e9"<<"6a"<<"63"<<"ab"<<"18"<<"09"<<"2f"
-                                               <<"13"<<"cf"<<"48"<<"b4"<<"75"<<"6a"<<"42"<<"39";
+                                              <<"13"<<"cf"<<"48"<<"b4"<<"75"<<"6a"<<"42"<<"39";
 
         const QString arg = QString("curl.exe -k -H \"Authorization: bearer ")+token.join("")+
                             QString("\" -H \"Accept: application/json\" -H \"Content-type: application/json\" -X POST "

@@ -97,6 +97,8 @@ public:
     void           setXMLContent(const QString &fileName);
     static Unit    StrToUnits(const QString &unit);
     static QString UnitsToStr(const Unit &unit, const bool translate = false);
+    static QString UnitsHelpString();
+
     virtual bool   SaveDocument(const QString &fileName, QString &error) const;
     QString        Major() const;
     QString        Minor() const;

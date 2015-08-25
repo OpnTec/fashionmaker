@@ -36,8 +36,23 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
+using namespace nm_DialogSaveLayout;
+
+bool VFrmWithTest::havePdf = false;
+bool VFrmWithTest::tested  = false;
+
+const std::vector<VFrmWithTest> DialogSaveLayout::availFormats = {
+    VFrmWithTest(tr("Svg files (*.svg)"), ".svg"),
+    VFrmWithTest(tr("PDF files (*.pdf)"), ".pdf"),
+    VFrmWithTest(tr("Images (*.png)"), ".png"),
+    VFrmWithTest(tr("Wavefront OBJ (*.obj)"), ".obj"),
+    VFrmWithTest(tr("PS files (*.ps)"), ".ps", 1), //fixme: use 1 to have exe once tested on 1st run, or any other value to test always as original do
+    VFrmWithTest(tr("EPS files (*.eps)"), ".eps", 1),
+};
+
+
 //---------------------------------------------------------------------------------------------------------------------
-DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int count, const QString &fileName,
+DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName,
                                    QWidget *parent)
     :QDialog(parent), ui(new Ui::DialogSaveLAyout), count(count)
 {
@@ -53,13 +68,13 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
     ui->lineEditFileName->setValidator(validator);
     ui->lineEditFileName->setText(fileName+"_");
 
-    QMap<QString, QString>::const_iterator i = formates.constBegin();
-    while (i != formates.constEnd())
+    foreach (auto& v , availFormats)
     {
-        ui->comboBoxFormat->addItem(i.key(), QVariant(i.value()));
-        ++i;
+            if (v.test())
+            {
+                ui->comboBoxFormat->addItem(v.pair.first, QVariant(v.pair.second));
+            }
     }
-
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
     connect(ui->comboBoxFormat, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
@@ -72,6 +87,37 @@ DialogSaveLayout::DialogSaveLayout(const QMap<QString, QString> &formates, int c
 
     setMaximumSize(size());
     setMinimumSize(size());
+}
+//---------------------------------------------------------------------------------------------------------------------
+
+void DialogSaveLayout::SelectFormate(const size_t formate)
+{
+    if (formate >= availFormats.size())
+    {
+        AppAbort(tr("Tried to use out of range format number."), INVALID_PARAMS_STATUS);
+    }
+
+    int i = ui->comboBoxFormat->findData(availFormats[formate].pair.second);
+    if (i < 0)
+    {
+        AppAbort(tr("Selected not present format."), INVALID_PARAMS_STATUS);
+    }
+    ui->comboBoxFormat->setCurrentIndex(i);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSaveLayout::MakeHelpFormatList()
+{
+   QString out = "\n";
+   int cntr = 0;
+   foreach(auto& v, availFormats)
+   {
+       if (v.test())
+       {
+           out += "\t"+v.pair.first+" = "+ QString::number(cntr++)+"\n";
+       }
+   }
+   return out;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -162,4 +208,26 @@ void DialogSaveLayout::PathChanged(const QString &text)
     }
 
     ui->lineEditPath->setPalette(palette);
+}
+//---------------------------------------------------------------------------------------------------------------------
+
+bool VFrmWithTest::TestPdf()
+{
+    bool res = false;
+
+    QProcess proc;
+#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
+    proc.start(qApp->applicationDirPath()+"/"+PDFTOPS); // Seek pdftops in app bundle or near valentin.exe
+#else
+    proc.start(PDFTOPS); // Seek pdftops in standard path
+#endif
+    if (proc.waitForFinished(15000))
+    {
+        res = true;
+    }
+    else
+    {
+        qDebug()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
+    }
+    return res;
 }

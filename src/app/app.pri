@@ -21,7 +21,6 @@ HEADERS  += \
         $$PWD/stable.h \
         $$PWD/version.h \
         $$PWD/mainwindowsnogui.h
-
 # Main forms
 FORMS    += \
         $$PWD/mainwindow.ui

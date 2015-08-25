@@ -34,6 +34,7 @@
 
 #include "vlayoutdef.h"
 #include "vbank.h"
+#include <memory>
 
 class VLayoutPaper;
 class VLayoutDetail;
@@ -106,5 +107,7 @@ private:
     bool saveLength;
     bool unitePages;
 };
+
+typedef std::shared_ptr<VLayoutGenerator> VLayoutGeneratorPtr;
 
 #endif // VLAYOUTGENERATOR_H

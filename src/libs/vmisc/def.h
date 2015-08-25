@@ -39,7 +39,7 @@
 enum class NodeDetail : char { Contour, Modeling };
 enum class SceneObject : char { Point, Line, Spline, Arc, SplinePath, Detail, Unknown };
 enum class MeasurementsType : char { Standard, Individual };
-enum class Unit : char { Mm, Cm, Inch, Px };
+enum class Unit : char { Mm = 0, Cm, Inch, Px, LAST_UNIT_DO_NOT_USE};
 enum class Source : char { FromGui, FromFile, FromTool };
 
 enum class Tool : unsigned char
@@ -81,12 +81,13 @@ enum class Tool : unsigned char
     PointFromCircleAndTangent,
     PointFromArcAndTangent,
     TrueDarts,
-    UnionDetails // 37
+    UnionDetails, // 37
+    LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
 enum class Vis : unsigned char
 {
-    ControlPointSpline = 38, // increase this value if need more positions in Tool enum
+    ControlPointSpline = static_cast<Vis>(Tool::LAST_ONE_DO_NOT_USE), //38,// increase this value if need more positions in Tool enum
     GraphicsSimpleTextItem,
     SimpleSplinePath,
     SimplePoint,

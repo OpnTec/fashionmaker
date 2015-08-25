@@ -31,7 +31,7 @@
 #include "../core/vapplication.h"
 #include "../../libs/ifc/xml/vdomdocument.h"
 #include "../../libs/vmisc/vsettings.h"
-#include "../../libs/vlayout/vlayoutgenerator.h"
+#include <vector>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../../libs/vmisc/vmath.h"
@@ -41,20 +41,48 @@
 
 #include <QPushButton>
 
-
-enum class PaperSizeTemplate : char { A0, A1, A2, A3, A4, Letter, Legal, Roll24in, Roll30in, Roll36in, Roll42in,
-                                      Roll44in};
+//must be the same order as PaperSizeTemplate constants
+const DialogLayoutSettings::FormatsVector DialogLayoutSettings::pageFormatNames={
+    "A0",
+    "A1",
+    "A2",
+    "A3",
+    "A4",
+    tr("Letter"),
+    tr("Legal"),
+    tr("Roll 24in"),
+    tr("Roll 30in"),
+    tr("Roll 36in"),
+    tr("Roll 42in"),
+    tr("Roll 44in"),
+};
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent)
-    : QDialog(parent), ui(new Ui::DialogLayoutSettings), oldPaperUnit(Unit::Mm), oldLayoutUnit(Unit::Mm),
+DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent, bool disableSetting)
+    : QDialog(parent), disableSettings(disableSetting),ui(new Ui::DialogLayoutSettings), oldPaperUnit(Unit::Mm), oldLayoutUnit(Unit::Mm),
       generator(generator)
 {
     ui->setupUi(this);
 
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
-    ReadSettings();
+    //moved from ReadSettings - well...it seems it can be done once only (i.e. constructor) because Init funcs dont even cleanse lists before adding
+    InitPaperUnits();
+    InitLayoutUnits();
+    InitTemplates();
+    MinimumPaperSize();
+    MinimumLayoutSize();
+
+    //in export console mode going to use defaults
+    if (!disableSettings)
+    {
+        ReadSettings();
+    }
+    else
+    {
+        RestoreDefaults();
+    }
+
 
     connect(ui->comboBoxTemplates,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::TemplateSelected);
@@ -193,16 +221,17 @@ int DialogLayoutSettings::GetIncrease() const
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void DialogLayoutSettings::SetIncrease(int increase)
+bool DialogLayoutSettings::SetIncrease(int increase)
 {
     int index = ui->comboBoxIncrease->findText(QString::number(increase));
-
-    if (index == -1)
+    bool failed = (index == -1);
+    if (failed)
     {
         index = 21;//180 degree
     }
 
     ui->comboBoxIncrease->setCurrentIndex(index);
+    return failed;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,7 +269,6 @@ void DialogLayoutSettings::SetUnitePages(bool save)
 {
     ui->checkBoxUnitePages->setChecked(save);
 }
-
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::TemplateSelected()
 {
@@ -264,6 +292,43 @@ void DialogLayoutSettings::ConvertPaperSize()
     oldPaperUnit = paperUnit;
     CorrectPaperDecimals();
     MinimumPaperSize();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::SelectPaperUnit(const QString& units)
+{
+    qint32 indexUnit = ui->comboBoxPaperSizeUnit->findData(units);
+    if (indexUnit != -1)
+    {
+        ui->comboBoxPaperSizeUnit->setCurrentIndex(indexUnit);
+    }
+    return indexUnit != -1;
+}
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::SelectLayoutUnit(const QString &units)
+{
+    qint32 indexUnit = ui->comboBoxLayoutUnit->findData(units);
+    if (indexUnit != -1)
+    {
+        ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
+    }
+    return indexUnit != -1;
+}
+//---------------------------------------------------------------------------------------------------------------------
+int DialogLayoutSettings::LayoutToPixels(qreal value) const
+{
+    return static_cast<quint32>(qFloor(UnitConvertor(value, LayoutUnit(), Unit::Px)));
+}
+//---------------------------------------------------------------------------------------------------------------------
+int DialogLayoutSettings::PageToPixels(qreal value) const
+{
+    return static_cast<quint32>(qFloor(UnitConvertor(value, PaperUnit(), Unit::Px)));
+}
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogLayoutSettings::MakeGroupsHelp()
+{
+    //that is REALLY dummy ... can't figure fast how to automate generation... :/
+    return tr("\n\tThree groups: big, middle, small = 0\n\tTwo groups: big, small = 1\n\tDescending area = 2\n");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,8 +366,20 @@ void DialogLayoutSettings::PaperSizeChanged()
 
     Label();
 }
-
 //---------------------------------------------------------------------------------------------------------------------
+
+bool DialogLayoutSettings::SelectTemplate(const PaperSizeTemplate& id)
+{
+    int index = ui->comboBoxTemplates->findData(static_cast<VIndexType>(id));
+    if (index > -1)
+    {
+        ui->comboBoxTemplates->setCurrentIndex(index);
+    }
+
+    return (index > -1);
+}
+//---------------------------------------------------------------------------------------------------------------------
+
 void DialogLayoutSettings::Swap(bool checked)
 {
     if (checked)
@@ -337,7 +414,11 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetSaveLength(IsSaveLength());
     generator->SetUnitePages(IsUnitePages());
 
-    WriteSettings();
+    //don't want to break visual settings when cmd used
+    if (!disableSettings)
+    {
+        WriteSettings();
+    }
     accepted();
 }
 
@@ -393,25 +474,25 @@ void DialogLayoutSettings::InitTemplates()
     const QIcon icoRoll("://icon/16x16/roll.png");
     const QString pdi = QString("(%1ppi)").arg(PrintDPI);
 
-    ui->comboBoxTemplates->addItem(icoPaper, "A0 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A0)));
-    ui->comboBoxTemplates->addItem(icoPaper, "A1 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A1)));
-    ui->comboBoxTemplates->addItem(icoPaper, "A2 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A2)));
-    ui->comboBoxTemplates->addItem(icoPaper, "A3 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A3)));
-    ui->comboBoxTemplates->addItem(icoPaper, "A4 "+pdi, QVariant(static_cast<char>(PaperSizeTemplate::A4)));
-    ui->comboBoxTemplates->addItem(icoPaper, tr("Letter ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Letter)));
-    ui->comboBoxTemplates->addItem(icoPaper, tr("Legal ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Legal)));
-    ui->comboBoxTemplates->addItem(icoRoll,
-                                   tr("Roll 24in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll24in)));
-    ui->comboBoxTemplates->addItem(icoRoll,
-                                   tr("Roll 30in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll30in)));
-    ui->comboBoxTemplates->addItem(icoRoll,
-                                   tr("Roll 36in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll36in)));
-    ui->comboBoxTemplates->addItem(icoRoll,
-                                   tr("Roll 42in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll42in)));
-    ui->comboBoxTemplates->addItem(icoRoll,
-                                   tr("Roll 44in ")+pdi, QVariant(static_cast<char>(PaperSizeTemplate::Roll44in)));
-
+    auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
+    foreach(const auto& v, pageFormatNames)
+    {
+        ui->comboBoxTemplates->addItem(icoPaper, v+" "+pdi, QVariant(cntr++));
+    }
     ui->comboBoxTemplates->setCurrentIndex(-1);
+}
+//---------------------------------------------------------------------------------------------------------------------
+
+QString DialogLayoutSettings::MakeHelpTemplateList()
+{
+   QString out = "\n";
+
+   auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
+   foreach(const auto& v,  pageFormatNames)
+   {
+        out += "\t"+v+" = "+ QString::number(cntr++)+"\n";
+   }
+   return out;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -604,12 +685,6 @@ void DialogLayoutSettings::MinimumLayoutSize()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::ReadSettings()
 {
-    InitPaperUnits();
-    InitLayoutUnits();
-    InitTemplates();
-    MinimumPaperSize();
-    MinimumLayoutSize();
-
     SetLayoutWidth(qApp->Settings()->GetLayoutWidth());
     SetShift(qApp->Settings()->GetLayoutShift());
 

@@ -34,6 +34,7 @@
 
 #include "../../libs/vlayout/vbank.h"
 #include "../../libs/ifc/ifcdef.h"
+#include "../../libs/vlayout/vlayoutgenerator.h"
 
 namespace Ui
 {
@@ -46,7 +47,8 @@ class DialogLayoutSettings : public QDialog
 {
     Q_OBJECT
 public:
-    DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = 0);
+    enum class PaperSizeTemplate : char { A0 = 0, A1, A2, A3, A4, Letter, Legal, Roll24in, Roll30in, Roll36in, Roll42in, Roll44in};
+    DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = 0, bool disableSetting = false);
     ~DialogLayoutSettings();
 
     int GetPaperHeight() const;
@@ -68,7 +70,7 @@ public:
     void SetRotate(bool state);
 
     int GetIncrease() const;
-    void SetIncrease(int increase);
+    bool SetIncrease(int increase);
 
     bool GetAutoCrop() const;
     void SetAutoCrop(bool crop);
@@ -79,6 +81,14 @@ public:
     bool IsUnitePages() const;
     void SetUnitePages(bool save);
 
+    //support functions for the command line parser which uses invisible dialog to properly build layout generator
+    bool SelectTemplate(const PaperSizeTemplate& id);
+    static QString MakeHelpTemplateList();
+    bool SelectPaperUnit(const QString& units);
+    bool SelectLayoutUnit(const QString& units);
+    int  LayoutToPixels(qreal value) const;
+    int  PageToPixels(qreal value) const;
+    static QString MakeGroupsHelp();
 public slots:
     void ConvertPaperSize();
     void ConvertLayoutSize();
@@ -92,6 +102,12 @@ public slots:
 
 private:
     Q_DISABLE_COPY(DialogLayoutSettings)
+    typedef std::vector<QString> FormatsVector;
+    typedef int VIndexType;
+    const static  FormatsVector pageFormatNames;
+
+    bool disableSettings;
+
     Ui::DialogLayoutSettings *ui;
     Unit oldPaperUnit;
     Unit oldLayoutUnit;
