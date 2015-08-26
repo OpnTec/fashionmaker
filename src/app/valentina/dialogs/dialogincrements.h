@@ -29,7 +29,7 @@
 #ifndef DIALOGINCREMENTS_H
 #define DIALOGINCREMENTS_H
 
-#include "../../libs/vtools/dialogs/tools/dialogtool.h"
+#include "../vtools/dialogs/tools/dialogtool.h"
 #include "../xml/vpattern.h"
 
 class VIndividualMeasurements;

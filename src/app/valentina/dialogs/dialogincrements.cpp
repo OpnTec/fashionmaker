@@ -28,8 +28,6 @@
 
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
-#include "../vwidgets/doubledelegate.h"
-#include "../vwidgets/textdelegate.h"
 #include "../vwidgets/vwidgetpopup.h"
 #include "../xml/vstandardmeasurements.h"
 #include "../xml/vindividualmeasurements.h"
