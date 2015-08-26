@@ -118,50 +118,35 @@ void VPatternConverter::ApplyPatches()
                 ToV0_1_1();
                 const QString schema = XSDSchema(0x000101);
                 ValidateXML(schema, fileName);
-                // continue conversion
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+                V_FALLTHROUGH
             }
             case (0x000101):
             {
                 ToV0_1_2();
                 const QString schema = XSDSchema(0x000102);
                 ValidateXML(schema, fileName);
-                // continue conversion
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+                V_FALLTHROUGH
             }
             case (0x000102):
             {
                 ToV0_1_3();
                 const QString schema = XSDSchema(0x000103);
                 ValidateXML(schema, fileName);
-                // continue conversion
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+                V_FALLTHROUGH
             }
             case (0x000103):
             {
                 ToV0_1_4();
                 const QString schema = XSDSchema(0x000104);
                 ValidateXML(schema, fileName);
-                // continue conversion
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+                V_FALLTHROUGH
             }
             case (0x000104):
             {
                 ToV0_2_0();
                 const QString schema = XSDSchema(0x000200);
                 ValidateXML(schema, fileName);
-                // continue conversion
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+                V_FALLTHROUGH
             }
             case (0x000200):
                 break;

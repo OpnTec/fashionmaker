@@ -110,10 +110,7 @@ void VVSTConverter::ApplyPatches()
                 ToV0_4_0();
                 const QString schema = XSDSchema(0x000400);
                 ValidateXML(schema, fileName);
-                // continue conversion
-            #ifdef Q_CC_CLANG
-                [[clang::fallthrough]];
-            #endif
+                V_FALLTHROUGH
             }
             case (0x000400):
                 break;
