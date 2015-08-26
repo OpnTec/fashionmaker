@@ -2,10 +2,15 @@
 #define VCMDEXPORT_H
 #include <memory>
 #include <vector>
-#include <iostream>
+#include <QTextStream>
 
 #include "dialogs/dialoglayoutsettings.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+#   include "../libs/vmisc/backport/qcommandlineparser.h"
+#else
+#   include <QCommandLineParser>
+#endif
 
 constexpr auto GENERAL_ERROR_STATUS        = 255;
 constexpr auto INVALID_PARAMS_STATUS       = 254;

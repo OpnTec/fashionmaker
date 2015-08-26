@@ -37,6 +37,7 @@
 #include "tools/vtooluniondetails.h"
 #include "tools/drawTools/drawtools.h"
 #include "core/vcmdexport.h"
+#include <QLockFile>
 
 namespace Ui
 {

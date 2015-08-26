@@ -3,11 +3,7 @@
 #include "dialogs/dialogsavelayout.h"
 #include "xml/vdomdocument.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#   include "../libs/vmisc/backport/qcommandlineparser.h"
-#else
-#   include <QCommandLineParser>
-#endif
+
 
 VCommandLinePtr VCommandLine::instance = nullptr;
 

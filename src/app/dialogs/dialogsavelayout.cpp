@@ -35,6 +35,8 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QProcess>
+#include <QDebug>
 
 using namespace nm_DialogSaveLayout;
 
