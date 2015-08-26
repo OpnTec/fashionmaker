@@ -112,7 +112,6 @@ private:
                                      const Document &parse, const QString& type);
     void           ParseIncrementsElement(const QDomNode& node);
     void           PrepareForParse(const Document &parse);
-    void           UpdateMeasurements();
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
     void           PointsCommonAttributes(const QDomElement &domElement, quint32 &id, QString &name, qreal &mx,
                                           qreal &my, QString &typeLine, QString &lineColor);

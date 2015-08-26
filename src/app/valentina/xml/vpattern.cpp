@@ -2430,8 +2430,7 @@ void VPattern::PrepareForParse(const Document &parse)
         TestUniqueId();
         sceneDraw->clear();
         sceneDetail->clear();
-        data->Clear();
-        UpdateMeasurements();
+        data->ClearForFullParse();
         nameActivPP.clear();
         patternPieces.clear();
         tools.clear();
@@ -2450,35 +2449,6 @@ void VPattern::PrepareForParse(const Document &parse)
         data->ClearVariables(VarType::ArcAngle);
         data->ClearVariables(VarType::SplineAngle);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::UpdateMeasurements()
-{
-//    try
-//    {
-//        const QString path = MPath();
-//        if (MType() == MeasurementsType::Standard)
-//        {
-//            VStandardMeasurements m(data);
-//            ValidateXML("://schema/standard_measurements.xsd", path);
-//            m.setXMLContent(path);
-//            m.Measurements();
-//        }
-//        else
-//        {
-//            VIndividualMeasurements m(data);
-//            ValidateXML("://schema/individual_measurements.xsd", path);
-//            m.setXMLContent(path);
-//            m.Measurements();
-//        }
-//    }
-//    catch (VException &e)
-//    {
-//        e.CriticalMessageBox(tr("File error."), qApp->getMainWindow());
-//        emit ClearMainWindow();
-//        return;
-//    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
