@@ -337,6 +337,19 @@ QString MainWindow::RelativeMPath(const QString &patternPath, const QString &abs
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString MainWindow::AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) const
+{
+    if (patternPath.isEmpty())
+    {
+        return relativeMPath;
+    }
+    else
+    {
+        return QFileInfo(QFileInfo(patternPath).absoluteDir(), relativeMPath).absoluteFilePath();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief OptionDraw help change name of pattern piece.
  */
@@ -1020,7 +1033,7 @@ void MainWindow::LoadIndividual()
         {
             if (not doc->MPath().isEmpty())
             {
-                watcher->removePath(QFileInfo(QFileInfo(curFile).absoluteDir(), doc->MPath()).absoluteFilePath());
+                watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
             }
             doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
@@ -1046,7 +1059,7 @@ void MainWindow::LoadStandard()
         {
             if (not doc->MPath().isEmpty())
             {
-                watcher->removePath(QFileInfo(QFileInfo(curFile).absoluteDir(), doc->MPath()).absoluteFilePath());
+                watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
             }
             doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
@@ -1069,17 +1082,19 @@ void MainWindow::ShowMeasurements()
 {
     if (not doc->MPath().isEmpty())
     {
+        const QString absoluteMPath = AbsoluteMPath(curFile, doc->MPath());
+
         QString run;
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            run = QString("\"%1\" \"%2\" -u %3 -h %4 -s %5").arg(qApp->TapeFilePath()).arg(doc->MPath())
+            run = QString("\"%1\" \"%2\" -u %3 -h %4 -s %5").arg(qApp->TapeFilePath()).arg(absoluteMPath)
                     .arg(VDomDocument::UnitsToStr(qApp->patternUnit()))
                     .arg(static_cast<int>(pattern->height()))
                     .arg(static_cast<int>(pattern->size()));
         }
         else
         {
-            run = QString("\"%1\" \"%2\" -u %3").arg(qApp->TapeFilePath()).arg(doc->MPath())
+            run = QString("\"%1\" \"%2\" -u %3").arg(qApp->TapeFilePath()).arg(absoluteMPath)
                     .arg(VDomDocument::UnitsToStr(qApp->patternUnit()));
         }
         QProcess::startDetached(run);
@@ -1933,7 +1948,7 @@ void MainWindow::Clear()
     qCDebug(vMainWindow, "Returned to Draw mode.");
     pattern->Clear();
     qCDebug(vMainWindow, "Clearing pattern.");
-    watcher->removePath(QFileInfo(QFileInfo(curFile).absoluteDir(), doc->MPath()).absoluteFilePath());
+    watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
     doc->clear();
     setCurrentFile(QString());
     qCDebug(vMainWindow, "Clearing scenes.");
@@ -3065,10 +3080,8 @@ void MainWindow::LoadPattern(const QString &fileName)
 
         if (not path.isEmpty())
         {
-            //Search absolute path
-            path = QFileInfo(QFileInfo(fileName).absoluteDir(), path).absoluteFilePath();
             // Check if exist
-            path = CheckPathToMeasurements(fileName, path);
+            path = CheckPathToMeasurements(fileName, AbsoluteMPath(fileName, path));
             if (path.isEmpty())
             {
                 Clear();
