@@ -320,6 +320,23 @@ void MainWindow::ToggleMSync(bool toggle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString MainWindow::RelativeMPath(const QString &patternPath, const QString &absoluteMPath) const
+{
+    if (patternPath.isEmpty())
+    {
+        return absoluteMPath;
+    }
+
+    if (absoluteMPath.isEmpty())
+    {
+        return absoluteMPath;
+    }
+
+    QDir dir(QFileInfo(patternPath).absoluteDir());
+    return dir.relativeFilePath(absoluteMPath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief OptionDraw help change name of pattern piece.
  */
@@ -1003,9 +1020,9 @@ void MainWindow::LoadIndividual()
         {
             if (not doc->MPath().isEmpty())
             {
-                watcher->removePath(doc->MPath());
+                watcher->removePath(QFileInfo(QFileInfo(curFile).absoluteDir(), doc->MPath()).absoluteFilePath());
             }
-            doc->SetPath(mPath);
+            doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
             PatternWasModified(false);
             ui->actionShowM->setEnabled(true);
@@ -1029,9 +1046,9 @@ void MainWindow::LoadStandard()
         {
             if (not doc->MPath().isEmpty())
             {
-                watcher->removePath(doc->MPath());
+                watcher->removePath(QFileInfo(QFileInfo(curFile).absoluteDir(), doc->MPath()).absoluteFilePath());
             }
-            doc->SetPath(mPath);
+            doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
             PatternWasModified(false);
             ui->actionShowM->setEnabled(true);
@@ -1914,10 +1931,11 @@ void MainWindow::Clear()
     ui->actionDraw->setChecked(true);
     ui->actionLayout->setEnabled(true);
     qCDebug(vMainWindow, "Returned to Draw mode.");
-    setCurrentFile(QString());
     pattern->Clear();
     qCDebug(vMainWindow, "Clearing pattern.");
+    watcher->removePath(QFileInfo(QFileInfo(curFile).absoluteDir(), doc->MPath()).absoluteFilePath());
     doc->clear();
+    setCurrentFile(QString());
     qCDebug(vMainWindow, "Clearing scenes.");
     sceneDraw->clear();
     sceneDetails->clear();
@@ -1941,7 +1959,7 @@ void MainWindow::Clear()
     ui->actionShowM->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
-    qApp->setPatternType(MeasurementsType::Individual);
+    qApp->setPatternType(MeasurementsType::Unknown);
     ui->toolBarOption->clear();
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
@@ -2482,6 +2500,13 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
 {
     qCDebug(vMainWindow, "Saving pattern file %s.", fileName.toUtf8().constData());
     QFileInfo tempInfo(fileName);
+
+    const QString mPath = doc->MPath();
+    if (not mPath.isEmpty() && curFile != fileName)
+    {
+        doc->SetPath(RelativeMPath(fileName, mPath));
+    }
+
     const bool result = doc->SaveDocument(fileName, error);
     if (result)
     {
@@ -2495,6 +2520,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
     }
     else
     {
+        doc->SetPath(mPath);
         qCDebug(vMainWindow, "Could not save file %s. %s.", fileName.toUtf8().constData(), error.toUtf8().constData());
     }
     return result;
@@ -3037,33 +3063,30 @@ void MainWindow::LoadPattern(const QString &fileName)
         qApp->setPatternUnit(doc->MUnit());
         QString path = doc->MPath();
 
-        path = CheckPathToMeasurements(path);
-        if (path.isEmpty())
+        if (not path.isEmpty())
         {
-            Clear();
-            return;
-        }
-
-        if (qApp->patternType() == MeasurementsType::Standard)
-        {
-            VStandardMeasurements m(pattern);
-            VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, path);
-            m.setXMLContent(path);
-            if (m.MUnit() == Unit::Inch)
+            //Search absolute path
+            path = QFileInfo(QFileInfo(fileName).absoluteDir(), path).absoluteFilePath();
+            // Check if exist
+            path = CheckPathToMeasurements(fileName, path);
+            if (path.isEmpty())
             {
-                QMessageBox::critical(this, tr("Wrong units."),
-                                      tr("Application doesn't support standard table with inches."));
-                qCDebug(vMainWindow, "Application doesn't support standard table with inches.");
                 Clear();
                 return;
             }
-            m.SetSize();
-            m.SetHeight();
+
+            if (not LoadMeasurements(path))
+            {
+                Clear();
+                return;
+            }
+            else
+            {
+                watcher->addPath(path);
+                ui->actionShowM->setEnabled(true);
+            }
         }
-        else
-        {
-            VDomDocument::ValidateXML(VVITConverter::CurrentSchema, path);
-        }
+
         ToolBarOption();
     }
     catch (VException &e)
@@ -3236,7 +3259,7 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MainWindow::CheckPathToMeasurements(const QString &path)
+QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QString &path)
 {
     if (path.isEmpty())
     {
@@ -3334,8 +3357,9 @@ QString MainWindow::CheckPathToMeasurements(const QString &path)
                     throw e;
                 }
 
-                doc->SetPath(mPath);
+                doc->SetPath(RelativeMPath(patternPath, mPath));
                 PatternWasModified(false);
+                qApp->setPatternType(patternType);
                 return mPath;
             }
         }

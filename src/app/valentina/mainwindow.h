@@ -271,7 +271,7 @@ private:
     void               CreateActions();
     void               InitAutoSave();
     QString            PatternPieceName(const QString &text);
-    QString            CheckPathToMeasurements(const QString &path);
+    QString            CheckPathToMeasurements(const QString &patternPath, const QString &path);
     QComboBox          *SetGradationList(const QString &label, const QStringList &list);
     void               ChangePP(int index, bool zoomBestFit = true);
     /**
@@ -298,6 +298,8 @@ private:
     bool               LoadMeasurements(const QString &path);
 
     void               ToggleMSync(bool toggle);
+
+    QString            RelativeMPath(const QString &patternPath, const QString &absoluteMPath) const;
 };
 
 #endif // MAINWINDOW_H
