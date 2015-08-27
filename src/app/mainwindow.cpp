@@ -3059,27 +3059,6 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::DoExport(const VCommandLinePtr &expParams)
-{
-    auto settings = expParams->DefaultGenerator();
-
-    const QHash<quint32, VDetail> *details = pattern->DataDetails();
-    if(not qApp->getOpeningPattern())
-    {
-        if (details->count() == 0)
-        {
-            AppAbort(tr("You can't export empty scene."));
-            return;
-        }
-    }
-    PrepareDetailsForLayout(details);
-    LayoutSettings(*settings.get());
-    DialogSaveLayout dialog(scenes.size(), expParams->OptExportPath(), this);
-    dialog.SelectFormate(expParams->OptExportType());
-    ExportLayout(dialog);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString MainWindow::CheckPathToMeasurements(const QString &path, const MeasurementsType &patternType)
 {
     QFile table(path);
@@ -3189,4 +3168,25 @@ void MainWindow::ZoomFirstShow()
 
     ActionDraw(true);
     ui->view->ZoomFitBest();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::DoExport(const VCommandLinePtr &expParams)
+{
+    auto settings = expParams->DefaultGenerator();
+
+    const QHash<quint32, VDetail> *details = pattern->DataDetails();
+    if(not qApp->getOpeningPattern())
+    {
+        if (details->count() == 0)
+        {
+            AppAbort(tr("You can't export empty scene."));
+            return;
+        }
+    }
+    PrepareDetailsForLayout(details);
+    LayoutSettings(*settings.get());
+    DialogSaveLayout dialog(scenes.size(), expParams->OptExportPath(), this);
+    dialog.SelectFormate(expParams->OptExportType());
+    ExportLayout(dialog);
 }

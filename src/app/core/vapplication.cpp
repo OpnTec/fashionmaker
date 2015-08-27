@@ -50,11 +50,6 @@
 #include <QDateTime>
 #include <iostream>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-#   include <QLockFile>
-#endif
-#include <QtXmlPatterns>
-
 Q_LOGGING_CATEGORY(vApp, "v.application")
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -287,7 +282,8 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     }
     catch (std::exception& e)
     {
-        qCritical() << "Exception thrown:" << e.what();
+        qCDebug(vApp, "Critical error! Exception thrown: %s", e.what());
+        abort();
     }
     return false;
 }
@@ -338,6 +334,12 @@ QString VApplication::translationsPath() const
     const QString trPath = QStringLiteral("/translations");
 #ifdef Q_OS_WIN
     return QApplication::applicationDirPath() + trPath;
+#elif defined(Q_OS_MAC)
+    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + trPath);
+    if (dirBundle.exists())
+            return tape;
+        }
+    }
 #else
 #ifdef QT_DEBUG
     return QApplication::applicationDirPath() + trPath;

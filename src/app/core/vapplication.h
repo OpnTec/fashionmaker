@@ -88,6 +88,10 @@ public:
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
     bool static CheckGUI();
 
+    virtual void OpenSettings() Q_DECL_OVERRIDE;
+    VSettings *ValentinaSettings();
+
+
 
     const VCommandLinePtr     CommandLine() const;
 private slots:

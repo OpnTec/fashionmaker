@@ -30,9 +30,11 @@
 #include "core/vapplication.h"
 #include "../libs/vpatterndb/vcontainer.h"
 #include "../libs/vobj/vobjpaintdevice.h"
+#include "../libs/vpatterndb/vcontainer.h"
+#include "../libs/vobj/vobjpaintdevice.h"
+#include "../libs/vlayout/vposter.h"
 
 #include "dialogs/dialoglayoutprogress.h"
-#include "../libs/vlayout/vposter.h"
 #include "dialogs/dialoglayoutsettings.h"
 
 
