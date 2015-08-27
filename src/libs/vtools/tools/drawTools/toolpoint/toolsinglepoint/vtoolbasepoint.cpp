@@ -48,8 +48,8 @@ const QString VToolBasePoint::ToolType = QStringLiteral("single");
  * @param parent parent object.
  */
 VToolBasePoint::VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                                const QString &namePP, const QString &mPath, QGraphicsItem * parent )
-    :VToolSinglePoint(doc, data, id, parent), namePP(namePP), mPath(mPath)
+                                const QString &namePP, QGraphicsItem * parent )
+    :VToolSinglePoint(doc, data, id, parent), namePP(namePP)
 {
     baseColor = Qt::red;
     this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
@@ -111,7 +111,7 @@ void VToolBasePoint::AddToFile()
     patternPiece.appendChild(doc->createElement(VAbstractPattern::TagModeling));
     patternPiece.appendChild(doc->createElement(VAbstractPattern::TagDetails));
 
-    AddPatternPiece *addPP = new AddPatternPiece(patternPiece, doc, namePP, mPath);
+    AddPatternPiece *addPP = new AddPatternPiece(patternPiece, doc, namePP);
     connect(addPP, &AddPatternPiece::ClearScene, doc, &VAbstractPattern::ClearScene);
     connect(addPP, &AddPatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addPP);

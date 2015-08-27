@@ -126,6 +126,7 @@ public:
     void               UpdateDetail(quint32 id, const VDetail &detail);
 
     void               Clear();
+    void               ClearForFullParse();
     void               ClearGObjects();
     void               ClearCalculationGObjects();
     void               ClearVariables(const VarType &type = VarType::Unknown);
@@ -162,6 +163,7 @@ public:
     static bool        IsUnique(const QString &name);
 
     const Unit *GetPatternUnit() const;
+    const VTranslateVars *GetTrVars() const;
 
 private:
     /**

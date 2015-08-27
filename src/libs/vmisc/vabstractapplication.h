@@ -39,6 +39,9 @@ class VTranslateVars;
 class VAbstractPattern;
 class VMainGraphicsView;
 class QUndoStack;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+class QLockFile;
+#endif
 
 #if defined(qApp)
 #undef qApp
@@ -60,8 +63,8 @@ public:
     MeasurementsType patternType() const;
     void             setPatternType(const MeasurementsType &patternType);
 
-    void             OpenSettings();
-    VSettings       *Settings();
+    virtual void     OpenSettings()=0;
+    VCommonSettings *Settings();
 
     template <typename T>
     QString          LocaleToString(const T &value);
@@ -86,6 +89,10 @@ public:
 
     QUndoStack      *getUndoStack() const;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+    static bool TryLock(QLockFile *lock);
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+
 protected:
     QUndoStack         *undoStack;
 
@@ -98,7 +105,7 @@ protected:
     /**
      * @brief settings pointer to settings. Help hide constructor creation settings. Make make code more readable.
      */
-    VSettings          *settings;
+    VCommonSettings    *settings;
 
 private:
     Q_DISABLE_COPY(VAbstractApplication)

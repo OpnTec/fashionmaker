@@ -5,28 +5,44 @@
     <name>AddDet</name>
     <message>
         <source>Add detail</source>
-        <translation>Voeg detail toe</translation>
+        <translation type="vanished">Voeg detail toe</translation>
+    </message>
+    <message>
+        <source>add detail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddPatternPiece</name>
     <message>
         <source>Add pattern piece %1</source>
-        <translation>Voeg patroondeel 1 toe</translation>
+        <translation type="vanished">Voeg patroondeel 1 toe</translation>
+    </message>
+    <message>
+        <source>add pattern piece %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddToCalc</name>
     <message>
         <source>Add object</source>
-        <translation>Voeg object toe</translation>
+        <translation type="vanished">Voeg object toe</translation>
+    </message>
+    <message>
+        <source>add object</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddUnionDetails</name>
     <message>
         <source>Add union details</source>
-        <translation>Voeg de gezamenlijke details toe</translation>
+        <translation type="vanished">Voeg de gezamenlijke details toe</translation>
+    </message>
+    <message>
+        <source>add union details</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -214,21 +230,33 @@
     <name>DelTool</name>
     <message>
         <source>Delete tool</source>
-        <translation>Verwijder gereedschap</translation>
+        <translation type="vanished">Verwijder gereedschap</translation>
+    </message>
+    <message>
+        <source>delete tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeleteDetail</name>
     <message>
         <source>Delete tool</source>
-        <translation>Verwijder hulpmiddel</translation>
+        <translation type="vanished">Verwijder hulpmiddel</translation>
+    </message>
+    <message>
+        <source>delete tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeletePatternPiece</name>
     <message>
         <source>Delete pattern piece %1</source>
-        <translation>Verwijder patroondeel %1</translation>
+        <translation type="vanished">Verwijder patroondeel %1</translation>
+    </message>
+    <message>
+        <source>delete pattern piece %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -264,6 +292,45 @@
     <message>
         <source>Build revision:</source>
         <translation>Herziene uitgave gebouwd</translation>
+    </message>
+</context>
+<context>
+    <name>DialogAboutTape</name>
+    <message>
+        <source>About Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tape version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Build revision:</source>
+        <translation type="unfinished">Herziene uitgave gebouwd</translation>
+    </message>
+    <message>
+        <source>This program is part of Valentina project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Build revision: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built on %3 at %4</source>
+        <translation type="unfinished">Gebouwd op %3 op %4</translation>
+    </message>
+    <message>
+        <source>Web site : %1</source>
+        <translation type="unfinished">Website: %1</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Waarschuwing</translation>
+    </message>
+    <message>
+        <source>Cannot open your default browser</source>
+        <translation type="unfinished">Kan uw standaard browser niet openen</translation>
     </message>
 </context>
 <context>
@@ -493,6 +560,81 @@
     </message>
     <message>
         <source>Edit second angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogArcWithLength</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Straal</translation>
+    </message>
+    <message>
+        <source>Value of radius</source>
+        <translation type="unfinished">Waarde van de straal</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>First angle</source>
+        <translation type="unfinished">Eerste hoek</translation>
+    </message>
+    <message>
+        <source>Value of first angle</source>
+        <translation type="unfinished">Waarde van eerste hoek</translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Lengte</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="unfinished">Booglengte</translation>
+    </message>
+    <message>
+        <source>Center point</source>
+        <translation type="unfinished">Middelste punt</translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished">Selecteer middelste punt van boog</translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the first angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the arc length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished">Straal kan niet negatief zijn</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be equal 0</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1009,6 +1151,10 @@
         <source>Seam allowance tool</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1102,6 +1248,30 @@
     </message>
     <message>
         <source>Line Angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius of arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angles of arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angles of curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve angle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1341,6 +1511,30 @@
         <source>%1 - point of intersection curve and axis through point %2</source>
         <translation>%1 - Kruispunt van kromming en as via %2</translation>
     </message>
+    <message>
+        <source>Arc with center in point %1 and length %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point of arcs intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point of circles intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correction the dart %1_%2_%3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -1422,7 +1616,7 @@
     </message>
     <message>
         <source>Curves</source>
-        <translation>Krommingen</translation>
+        <translation type="vanished">Krommingen</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1430,7 +1624,7 @@
     </message>
     <message>
         <source>Arcs</source>
-        <translation>Bogen</translation>
+        <translation type="vanished">Bogen</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -1510,6 +1704,38 @@
     </message>
     <message>
         <source>Data successfully saved.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lines angles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Hoek</translation>
+    </message>
+    <message>
+        <source>Lengths curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angles curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lengths arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radiuses arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Straal</translation>
+    </message>
+    <message>
+        <source>Angles arcs</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1595,10 +1821,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Wrong paper size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1647,10 +1869,6 @@
     </message>
     <message>
         <source>Creation options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Layout width:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1723,6 +1941,18 @@
     </message>
     <message>
         <source>Roll 44in </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unite pages (if possible)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gap width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save length of the sheet</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1908,6 +2138,102 @@
     </message>
 </context>
 <context>
+    <name>DialogMDataBase</name>
+    <message>
+        <source>Measurement data base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="unfinished">Maten</translation>
+    </message>
+    <message>
+        <source>Direct Height</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Direct Width</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indentation</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circumference and Arc</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bust</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balance</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arm</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leg</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Crotch and Rise</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hand</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Foot</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Men &amp; Tailoring</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Historical &amp; Specialty</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking measurements</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogMeasurements</name>
     <message>
         <source>Measurements</source>
@@ -1932,6 +2258,57 @@
     <message>
         <source>Use for creation pattern individual measurements</source>
         <translation>Gebruik dit om een individuele matentabel te maken</translation>
+    </message>
+</context>
+<context>
+    <name>DialogNewMeasurements</name>
+    <message>
+        <source>New measurement file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual</source>
+        <translation type="unfinished">Individueel</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimeters</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Millimiters</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Inches</translation>
     </message>
 </context>
 <context>
@@ -2212,6 +2589,88 @@
     </message>
 </context>
 <context>
+    <name>DialogPointFromArcAndTangent</name>
+    <message>
+        <source>Point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished">Punt label</translation>
+    </message>
+    <message>
+        <source>Tangent point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc</source>
+        <translation type="unfinished">Boog</translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished">Selecteer middelste punt van boog</translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogPointFromCircleAndTangent</name>
+    <message>
+        <source>Point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Straal</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished">Punt label</translation>
+    </message>
+    <message>
+        <source>Center of the circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished">Selecteer middelste punt van boog</translation>
+    </message>
+    <message>
+        <source>Tangent point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished">Straal kan niet negatief zijn</translation>
+    </message>
+</context>
+<context>
     <name>DialogPointOfContact</name>
     <message>
         <source>Radius</source>
@@ -2330,6 +2789,142 @@
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogPointOfIntersectionArcs</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished">Punt label</translation>
+    </message>
+    <message>
+        <source>First arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select second an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogPointOfIntersectionCircles</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius of the first circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Radius of the second circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished">Punt label</translation>
+    </message>
+    <message>
+        <source>Center of the first circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished">Selecteer middelste punt van boog</translation>
+    </message>
+    <message>
+        <source>Center of the second circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select second circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished">Straal kan niet negatief zijn</translation>
+    </message>
+</context>
+<context>
+    <name>DialogSaveLAyout</name>
+    <message>
+        <source>Save Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation type="unfinished">Pad:</translation>
+    </message>
+    <message>
+        <source>File format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogSaveLayout</name>
+    <message>
+        <source>Name conflict</source>
+        <translation type="unfinished">Naam conflict</translation>
+    </message>
+    <message>
+        <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2610,6 +3205,14 @@
         <source>Parser error: %1</source>
         <translation>Fout bij uitpakken: %1</translation>
     </message>
+    <message>
+        <source>First point</source>
+        <translation type="unfinished">Eerste punt</translation>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation type="unfinished">Tweede punt</translation>
+    </message>
 </context>
 <context>
     <name>DialogTriangle</name>
@@ -2664,6 +3267,73 @@
     <message>
         <source>Second point of line</source>
         <translation type="unfinished">Tweede punt van de lijn</translation>
+    </message>
+</context>
+<context>
+    <name>DialogTrueDarts</name>
+    <message>
+        <source>True darts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First base point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of angle</source>
+        <translation type="unfinished">Eerste punt van hoek</translation>
+    </message>
+    <message>
+        <source>Second base point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of angle</source>
+        <translation type="unfinished">Tweede punt van hoek</translation>
+    </message>
+    <message>
+        <source>First dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point of angle</source>
+        <translation type="unfinished">Derde punt van hoek</translation>
+    </message>
+    <message>
+        <source>Second dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show line from second point to this point</source>
+        <translation type="unfinished">Toon lijn vanaf tweede punt naar dit punt</translation>
+    </message>
+    <message>
+        <source>Third dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First new dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second new dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the second base point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the first dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the second dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the third dart point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2866,6 +3536,11 @@
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation>avg</translation>
+    </message>
+    <message>
+        <source>fmod</source>
+        <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3320,7 +3995,7 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
     </message>
     <message>
         <source>/pattern.val</source>
-        <translation>/patroon.val</translation>
+        <translation type="vanished">/patroon.val</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -3372,7 +4047,7 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
     </message>
     <message>
         <source>Unsaved change</source>
-        <translation>Niet opgeslagen verandering.</translation>
+        <translation type="vanished">Niet opgeslagen verandering.</translation>
     </message>
     <message>
         <source>The pattern has been modified.
@@ -3547,673 +4222,876 @@ Do you want to save your changes?</source>
         <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc with given length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout pages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save original layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as tiled PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split and save a layout into smaller pages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print original a layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split and print a layout into smaller pages (for regular printers)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview original layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview tailed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview tailed layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export original layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first circle center </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point on tangent </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point of the center of the arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the first base line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detail mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsaved changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindowsNoGUI</name>
+    <message>
+        <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For previewing multypage document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For printing multypages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Svg files (*.svg)</source>
+        <translation type="unfinished">Svg bestanden (*.svg)</translation>
+    </message>
+    <message>
+        <source>PDF files (*.pdf)</source>
+        <translation type="unfinished">PDF bestanden (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Images (*.png)</source>
+        <translation type="unfinished">Afbeeldingen (*.png)</translation>
+    </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="unfinished">Wavefront OBJ (*.obj)</translation>
+    </message>
+    <message>
+        <source>PS files (*.ps)</source>
+        <translation type="unfinished">PS bestanden (*.ps)</translation>
+    </message>
+    <message>
+        <source>EPS files (*.eps)</source>
+        <translation type="unfinished">EPS bestanden (*.eps)</translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Bestand &apos;%1&apos; gefaald te maken! %2</translation>
+    </message>
+    <message>
+        <source>Critical error!</source>
+        <translation type="unfinished">Cruciale fout!</translation>
+    </message>
+    <message>
+        <source>Print to pdf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF file (*.pdf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unnamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Measurements</name>
     <message>
         <source>head_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoofd_wijdte</translation>
+        <translation type="vanished">hoofd_wijdte</translation>
     </message>
     <message>
         <source>mid_neck_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>midden_hals_wijdte</translation>
+        <translation type="vanished">midden_hals_wijdte</translation>
     </message>
     <message>
         <source>neck_base_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hals_basis_wijdte</translation>
+        <translation type="vanished">hals_basis_wijdte</translation>
     </message>
     <message>
         <source>head_and_neck_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoofd_en_hals_lengte</translation>
+        <translation type="vanished">hoofd_en_hals_lengte</translation>
     </message>
     <message>
         <source>center_front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>midden_voorkant_taille_lengte</translation>
+        <translation type="vanished">midden_voorkant_taille_lengte</translation>
     </message>
     <message>
         <source>center_back_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>midden_achterkant_taille_lengte</translation>
+        <translation type="vanished">midden_achterkant_taille_lengte</translation>
     </message>
     <message>
         <source>shoulder_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>schouder_lengte</translation>
+        <translation type="vanished">schouder_lengte</translation>
     </message>
     <message>
         <source>side_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>zijkant_taille_lengte</translation>
+        <translation type="vanished">zijkant_taille_lengte</translation>
     </message>
     <message>
         <source>trunk_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>romp_lengte</translation>
+        <translation type="vanished">romp_lengte</translation>
     </message>
     <message>
         <source>shoulder_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>schouder_wijdte</translation>
+        <translation type="vanished">schouder_wijdte</translation>
     </message>
     <message>
         <source>upper_chest_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>boven_borst_wijdte</translation>
+        <translation type="vanished">boven_borst_wijdte</translation>
     </message>
     <message>
         <source>bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>borst_wijdte</translation>
+        <translation type="vanished">borst_wijdte</translation>
     </message>
     <message>
         <source>under_bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>onder_borst_wijdte</translation>
+        <translation type="vanished">onder_borst_wijdte</translation>
     </message>
     <message>
         <source>waist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taille_wijdte</translation>
+        <translation type="vanished">taille_wijdte</translation>
     </message>
     <message>
         <source>high_hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoog_heup_wijdte</translation>
+        <translation type="vanished">hoog_heup_wijdte</translation>
     </message>
     <message>
         <source>hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>heup_wijdte</translation>
+        <translation type="vanished">heup_wijdte</translation>
     </message>
     <message>
         <source>upper_front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>boven_voorkant_borst_wijdte</translation>
+        <translation type="vanished">boven_voorkant_borst_wijdte</translation>
     </message>
     <message>
         <source>front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_borst_wijdte</translation>
+        <translation type="vanished">voorkant_borst_wijdte</translation>
     </message>
     <message>
         <source>across_front_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>kruiselings_voorkant_schouder_wijdte</translation>
+        <translation type="vanished">kruiselings_voorkant_schouder_wijdte</translation>
     </message>
     <message>
         <source>across_back_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>kruiselings_rug_schouder_wijdte</translation>
+        <translation type="vanished">kruiselings_rug_schouder_wijdte</translation>
     </message>
     <message>
         <source>upper_back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>boven_rug_breedte</translation>
+        <translation type="vanished">boven_rug_breedte</translation>
     </message>
     <message>
         <source>back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_breedte</translation>
+        <translation type="vanished">rug_breedte</translation>
     </message>
     <message>
         <source>bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>bustepunt_naar_bustepunt</translation>
+        <translation type="vanished">bustepunt_naar_bustepunt</translation>
     </message>
     <message>
         <source>halter_bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>halterlijn_bustepunt_naar_bustepunt</translation>
+        <translation type="vanished">halterlijn_bustepunt_naar_bustepunt</translation>
     </message>
     <message>
         <source>neck_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hals_naar_bustepunt</translation>
+        <translation type="vanished">hals_naar_bustepunt</translation>
     </message>
     <message>
         <source>crotch_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>kruis_lengte</translation>
+        <translation type="vanished">kruis_lengte</translation>
     </message>
     <message>
         <source>rise_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>omhoogkomen_hoogte</translation>
+        <translation type="vanished">omhoogkomen_hoogte</translation>
     </message>
     <message>
         <source>shoulder_drop</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Schouder_val</translation>
+        <translation type="vanished">Schouder_val</translation>
     </message>
     <message>
         <source>shoulder_slope_degrees</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>schouder_kop_graden</translation>
+        <translation type="vanished">schouder_kop_graden</translation>
     </message>
     <message>
         <source>front_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voor_schouder_kop_lengte</translation>
+        <translation type="vanished">voor_schouder_kop_lengte</translation>
     </message>
     <message>
         <source>back_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_schouder_kop_lengte</translation>
+        <translation type="vanished">rug_schouder_kop_lengte</translation>
     </message>
     <message>
         <source>front_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_schouder_naar_taille_lengte</translation>
+        <translation type="vanished">voorkant_schouder_naar_taille_lengte</translation>
     </message>
     <message>
         <source>back_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_schouder_naar_taille_lengte</translation>
+        <translation type="vanished">rug_schouder_naar_taille_lengte</translation>
     </message>
     <message>
         <source>front_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_hals_boog</translation>
+        <translation type="vanished">voorkant_hals_boog</translation>
     </message>
     <message>
         <source>back_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_hals_ronding</translation>
+        <translation type="vanished">rug_hals_ronding</translation>
     </message>
     <message>
         <source>front_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_boven_borst_ronding</translation>
+        <translation type="vanished">voorkant_boven_borst_ronding</translation>
     </message>
     <message>
         <source>back_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_boven-borst-ronding</translation>
+        <translation type="vanished">rug_boven-borst-ronding</translation>
     </message>
     <message>
         <source>front_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_taille_ronding</translation>
+        <translation type="vanished">voorkant_taille_ronding</translation>
     </message>
     <message>
         <source>back_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_taille_ronding</translation>
+        <translation type="vanished">rug_taille_ronding</translation>
     </message>
     <message>
         <source>front_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_boven_heup_boog</translation>
+        <translation type="vanished">voorkant_boven_heup_boog</translation>
     </message>
     <message>
         <source>back_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_boven_heup_ronding</translation>
+        <translation type="vanished">rug_boven_heup_ronding</translation>
     </message>
     <message>
         <source>front_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_heup_ronding</translation>
+        <translation type="vanished">voorkant_heup_ronding</translation>
     </message>
     <message>
         <source>back_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_heup_ronding</translation>
+        <translation type="vanished">rug_heup_ronding</translation>
     </message>
     <message>
         <source>chest_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>borst_schuinte</translation>
+        <translation type="vanished">borst_schuinte</translation>
     </message>
     <message>
         <source>back_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_schuinte</translation>
+        <translation type="vanished">rug_schuinte</translation>
     </message>
     <message>
         <source>front_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_taille_schuinte</translation>
+        <translation type="vanished">voorkant_taille_schuinte</translation>
     </message>
     <message>
         <source>back_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_taille_schuinte</translation>
+        <translation type="vanished">rug_taille_schuinte</translation>
     </message>
     <message>
         <source>front_neck_to_upper_chest_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_hals_naar_boven_borst_hoogte</translation>
+        <translation type="vanished">voorkant_hals_naar_boven_borst_hoogte</translation>
     </message>
     <message>
         <source>front_neck_to_bust_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_hals_naar_buste_hoogte</translation>
+        <translation type="vanished">voorkant_hals_naar_buste_hoogte</translation>
     </message>
     <message>
         <source>front_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_taille_naar_boven_borst</translation>
+        <translation type="vanished">voorkant_taille_naar_boven_borst</translation>
     </message>
     <message>
         <source>front_waist_to_lower_breast</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_taille_naar_lager_bustelijn</translation>
+        <translation type="vanished">voorkant_taille_naar_lager_bustelijn</translation>
     </message>
     <message>
         <source>back_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>rug_taille_naar_boven_borst</translation>
+        <translation type="vanished">rug_taille_naar_boven_borst</translation>
     </message>
     <message>
         <source>strap_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>riem_lengte</translation>
+        <translation type="vanished">riem_lengte</translation>
     </message>
     <message>
         <source>armscye_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>armsgat_wijdte</translation>
+        <translation type="vanished">armsgat_wijdte</translation>
     </message>
     <message>
         <source>elbow_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>elleboog_wijdte</translation>
+        <translation type="vanished">elleboog_wijdte</translation>
     </message>
     <message>
         <source>upper_arm_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>boven_arm_wijdte</translation>
+        <translation type="vanished">boven_arm_wijdte</translation>
     </message>
     <message>
         <source>wrist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>pols_wijdte</translation>
+        <translation type="vanished">pols_wijdte</translation>
     </message>
     <message>
         <source>scye_depth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>armsgat_diepte</translation>
+        <translation type="vanished">armsgat_diepte</translation>
     </message>
     <message>
         <source>shoulder_and_arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>schouder_en_arm_lengte</translation>
+        <translation type="vanished">schouder_en_arm_lengte</translation>
     </message>
     <message>
         <source>underarm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>onderarm_lengte</translation>
+        <translation type="vanished">onderarm_lengte</translation>
     </message>
     <message>
         <source>cervicale_to_wrist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>halswervel_naar_pols_lengte</translation>
+        <translation type="vanished">halswervel_naar_pols_lengte</translation>
     </message>
     <message>
         <source>shoulder_to_elbow_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>schouder_naar_elleboog_wijdte</translation>
+        <translation type="vanished">schouder_naar_elleboog_wijdte</translation>
     </message>
     <message>
         <source>arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>arm_lengte</translation>
+        <translation type="vanished">arm_lengte</translation>
     </message>
     <message>
         <source>hand_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hand_breedte</translation>
+        <translation type="vanished">hand_breedte</translation>
     </message>
     <message>
         <source>hand_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hand_lengte</translation>
+        <translation type="vanished">hand_lengte</translation>
     </message>
     <message>
         <source>hand_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hand_wijdte</translation>
+        <translation type="vanished">hand_wijdte</translation>
     </message>
     <message>
         <source>thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>dij_wijdte</translation>
+        <translation type="vanished">dij_wijdte</translation>
     </message>
     <message>
         <source>mid_thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>midden_dij_wijdte</translation>
+        <translation type="vanished">midden_dij_wijdte</translation>
     </message>
     <message>
         <source>knee_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>knie_wijdte</translation>
+        <translation type="vanished">knie_wijdte</translation>
     </message>
     <message>
         <source>calf_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>kuit_wijdte</translation>
+        <translation type="vanished">kuit_wijdte</translation>
     </message>
     <message>
         <source>ankle_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>enkel_wijdte</translation>
+        <translation type="vanished">enkel_wijdte</translation>
     </message>
     <message>
         <source>knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>knie_hoogte</translation>
+        <translation type="vanished">knie_hoogte</translation>
     </message>
     <message>
         <source>ankle_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>enkel_hoogte</translation>
+        <translation type="vanished">enkel_hoogte</translation>
     </message>
     <message>
         <source>foot_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voet_breedte</translation>
+        <translation type="vanished">voet_breedte</translation>
     </message>
     <message>
         <source>foot_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voet_lengte</translation>
+        <translation type="vanished">voet_lengte</translation>
     </message>
     <message>
         <source>height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoogte</translation>
+        <translation type="vanished">hoogte</translation>
     </message>
     <message>
         <source>cervicale_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>halswervel_hoogte</translation>
+        <translation type="vanished">halswervel_hoogte</translation>
     </message>
     <message>
         <source>cervicale_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>halswervel_naar_knie_hoogte</translation>
+        <translation type="vanished">halswervel_naar_knie_hoogte</translation>
     </message>
     <message>
         <source>waist_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taille_hoogte</translation>
+        <translation type="vanished">taille_hoogte</translation>
     </message>
     <message>
         <source>high_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoog_heup_hoogte</translation>
+        <translation type="vanished">hoog_heup_hoogte</translation>
     </message>
     <message>
         <source>hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>heup_hoogte</translation>
+        <translation type="vanished">heup_hoogte</translation>
     </message>
     <message>
         <source>waist_to_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taille_naar_heup_hoogte</translation>
+        <translation type="vanished">taille_naar_heup_hoogte</translation>
     </message>
     <message>
         <source>waist_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taille_naar_knie_hoogte</translation>
+        <translation type="vanished">taille_naar_knie_hoogte</translation>
     </message>
     <message>
         <source>crotch_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>kruis_hoogte</translation>
+        <translation type="vanished">kruis_hoogte</translation>
     </message>
     <message>
         <source>size</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>maat</translation>
+        <translation type="vanished">maat</translation>
     </message>
     <message>
         <source>height_front_neck_base_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoogte_voorkant_hals_basis_punt</translation>
+        <translation type="vanished">hoogte_voorkant_hals_basis_punt</translation>
     </message>
     <message>
         <source>height_base_neck_side_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoogte_basis_hals_zijkant_punt</translation>
+        <translation type="vanished">hoogte_basis_hals_zijkant_punt</translation>
     </message>
     <message>
         <source>height_shoulder_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoogte_schouder_punt</translation>
+        <translation type="vanished">hoogte_schouder_punt</translation>
     </message>
     <message>
         <source>height_nipple_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoogte_tepel_punt</translation>
+        <translation type="vanished">hoogte_tepel_punt</translation>
     </message>
     <message>
         <source>height_back_angle_axilla</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoogte_rug_hoek_oksel</translation>
+        <translation type="vanished">hoogte_rug_hoek_oksel</translation>
     </message>
     <message>
         <source>height_scapular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoogte_schouderblad_punt</translation>
+        <translation type="vanished">hoogte_schouderblad_punt</translation>
     </message>
     <message>
         <source>height_under_buttock_folds</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoogte_onder_zitvlak_plooien</translation>
+        <translation type="vanished">hoogte_onder_zitvlak_plooien</translation>
     </message>
     <message>
         <source>hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>heupen_uitgezonderd_uitpuilend_onderbuik</translation>
+        <translation type="vanished">heupen_uitgezonderd_uitpuilend_onderbuik</translation>
     </message>
     <message>
         <source>girth_foot_instep</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>wijdte_voet_instap</translation>
+        <translation type="vanished">wijdte_voet_instap</translation>
     </message>
     <message>
         <source>side_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>zijkant_taille_naar_vloer</translation>
+        <translation type="vanished">zijkant_taille_naar_vloer</translation>
     </message>
     <message>
         <source>front_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_taiile_naar_vloer</translation>
+        <translation type="vanished">voorkant_taiile_naar_vloer</translation>
     </message>
     <message>
         <source>arc_through_groin_area</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>boog_door_lies_gebied</translation>
+        <translation type="vanished">boog_door_lies_gebied</translation>
     </message>
     <message>
         <source>waist_to_plane_seat</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taille_naar_vlakke_stoel</translation>
+        <translation type="vanished">taille_naar_vlakke_stoel</translation>
     </message>
     <message>
         <source>neck_to_radial_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hals_naar_draai_punt</translation>
+        <translation type="vanished">hals_naar_draai_punt</translation>
     </message>
     <message>
         <source>neck_to_third_finger</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hals_naar_derde_vinger</translation>
+        <translation type="vanished">hals_naar_derde_vinger</translation>
     </message>
     <message>
         <source>neck_to_first_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hals_naar_eerste_lijn_borst_omtrek</translation>
+        <translation type="vanished">hals_naar_eerste_lijn_borst_omtrek</translation>
     </message>
     <message>
         <source>front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_taille_lengte</translation>
+        <translation type="vanished">voorkant_taille_lengte</translation>
     </message>
     <message>
         <source>arc_through_shoulder_joint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>boog_door_schouder_gewricht</translation>
+        <translation type="vanished">boog_door_schouder_gewricht</translation>
     </message>
     <message>
         <source>neck_to_back_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hals_naar_rug_lijn_borst_omtrek</translation>
+        <translation type="vanished">hals_naar_rug_lijn_borst_omtrek</translation>
     </message>
     <message>
         <source>waist_to_neck_side</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taiile_naar_hals_zijkant</translation>
+        <translation type="vanished">taiile_naar_hals_zijkant</translation>
     </message>
     <message>
         <source>arc_length_upper_body</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>boog_lengte_boven_lichaam</translation>
+        <translation type="vanished">boog_lengte_boven_lichaam</translation>
     </message>
     <message>
         <source>chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>borst_wijdte</translation>
+        <translation type="vanished">borst_wijdte</translation>
     </message>
     <message>
         <source>anteroposterior_diameter_hands</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Omtrek_diameter_handen</translation>
+        <translation type="vanished">Omtrek_diameter_handen</translation>
     </message>
     <message>
         <source>height_clavicular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoogte_sleutelbeen_punt</translation>
+        <translation type="vanished">hoogte_sleutelbeen_punt</translation>
     </message>
     <message>
         <source>height_armhole_slash</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoogte_armholte_verlaagdpunt</translation>
+        <translation type="vanished">hoogte_armholte_verlaagdpunt</translation>
     </message>
     <message>
         <source>slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>verlaagd_schouder_hoogte</translation>
+        <translation type="vanished">verlaagd_schouder_hoogte</translation>
     </message>
     <message>
         <source>half_girth_neck</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>helft_wijdte_hals</translation>
+        <translation type="vanished">helft_wijdte_hals</translation>
     </message>
     <message>
         <source>half_girth_neck_for_shirts</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>helft_wijdte_hals_voor_shirts</translation>
+        <translation type="vanished">helft_wijdte_hals_voor_shirts</translation>
     </message>
     <message>
         <source>half_girth_chest_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>helft_wijdte_borst_eerste</translation>
+        <translation type="vanished">helft_wijdte_borst_eerste</translation>
     </message>
     <message>
         <source>half_girth_chest_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>helft_wijdte_borst_tweede</translation>
+        <translation type="vanished">helft_wijdte_borst_tweede</translation>
     </message>
     <message>
         <source>half_girth_chest_third</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>helft_wijdte_borst_derde</translation>
+        <translation type="vanished">helft_wijdte_borst_derde</translation>
     </message>
     <message>
         <source>half_girth_waist</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>helft_wijdte_taille</translation>
+        <translation type="vanished">helft_wijdte_taille</translation>
     </message>
     <message>
         <source>half_girth_hips_considering_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>helft_wijdte_heupen_overwegend_uitpullend_onderbuik</translation>
+        <translation type="vanished">helft_wijdte_heupen_overwegend_uitpullend_onderbuik</translation>
     </message>
     <message>
         <source>half_girth_hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>helft_wijdte_heupen_uitgezonderd_uitpuilend_onderbuik</translation>
+        <translation type="vanished">helft_wijdte_heupen_uitgezonderd_uitpuilend_onderbuik</translation>
     </message>
     <message>
         <source>girth_knee_flexed_feet</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>wijdte_knie_gebogen_voet</translation>
+        <translation type="vanished">wijdte_knie_gebogen_voet</translation>
     </message>
     <message>
         <source>neck_transverse_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hals_doorsnee_diameter</translation>
+        <translation type="vanished">hals_doorsnee_diameter</translation>
     </message>
     <message>
         <source>front_slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>voorkant_verlaagd_schouder_hoogte</translation>
+        <translation type="vanished">voorkant_verlaagd_schouder_hoogte</translation>
     </message>
     <message>
         <source>neck_to_front_waist_line</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hals_naar_voorkant_taille_lijn</translation>
+        <translation type="vanished">hals_naar_voorkant_taille_lijn</translation>
     </message>
     <message>
         <source>hand_vertical_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hand_vertivaal_diameter</translation>
+        <translation type="vanished">hand_vertivaal_diameter</translation>
     </message>
     <message>
         <source>neck_to_knee_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hals_naar_knie_punt</translation>
+        <translation type="vanished">hals_naar_knie_punt</translation>
     </message>
     <message>
         <source>waist_to_knee</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>taille_naar_knie</translation>
+        <translation type="vanished">taille_naar_knie</translation>
     </message>
     <message>
         <source>shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>schouder_hoogte</translation>
+        <translation type="vanished">schouder_hoogte</translation>
     </message>
     <message>
         <source>head_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hoofd_hoogte</translation>
+        <translation type="vanished">hoofd_hoogte</translation>
     </message>
     <message>
         <source>body_position</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>lichaam_positie</translation>
+        <translation type="vanished">lichaam_positie</translation>
     </message>
     <message>
         <source>arc_behind_shoulder_girdle</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>boog_achter_schouder_gordel</translation>
+        <translation type="vanished">boog_achter_schouder_gordel</translation>
     </message>
     <message>
         <source>neck_to_neck_base</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hlas_naar_hals_basis</translation>
+        <translation type="vanished">hlas_naar_hals_basis</translation>
     </message>
     <message>
         <source>depth_waist_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>diepte_taille_eerste</translation>
+        <translation type="vanished">diepte_taille_eerste</translation>
     </message>
     <message>
         <source>depth_waist_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>diepte_taille_tweede</translation>
+        <translation type="vanished">diepte_taille_tweede</translation>
     </message>
 </context>
 <context>
@@ -4221,667 +5099,667 @@ Do you want to save your changes?</source>
     <message>
         <source>Around fullest part of Head</source>
         <comment>Full measurement description</comment>
-        <translation>Rond dikste deel van het hoofd</translation>
+        <translation type="vanished">Rond dikste deel van het hoofd</translation>
     </message>
     <message>
         <source>Around middle part of Neck</source>
         <comment>Full measurement description</comment>
-        <translation>Rond middelste gedeelte van de Hals</translation>
+        <translation type="vanished">Rond middelste gedeelte van de Hals</translation>
     </message>
     <message>
         <source>Around Neck at base</source>
         <comment>Full measurement description</comment>
-        <translation>Rond Hals aan de basis</translation>
+        <translation type="vanished">Rond Hals aan de basis</translation>
     </message>
     <message>
         <source>Vertical Distance from Crown to Nape</source>
         <comment>Full measurement description</comment>
-        <translation>Verticale Afstand van Kruin tot Nek</translation>
+        <translation type="vanished">Verticale Afstand van Kruin tot Nek</translation>
     </message>
     <message>
         <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Voorkant Midden Hals over meetlint op Bustelijn naar Voorkant Midden Taille</translation>
+        <translation type="vanished">Voorkant Midden Hals over meetlint op Bustelijn naar Voorkant Midden Taille</translation>
     </message>
     <message>
         <source>Back Neck Center to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Rug Hals Midden naar Rug Taiile Midden</translation>
+        <translation type="vanished">Rug Hals Midden naar Rug Taiile Midden</translation>
     </message>
     <message>
         <source>NeckPoint to ShoulderTip</source>
         <comment>Full measurement description</comment>
-        <translation>HalsPunt naar Schouder Tip</translation>
+        <translation type="vanished">HalsPunt naar Schouder Tip</translation>
     </message>
     <message>
         <source>Armpit to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation>Oksel naar Taille zijkant</translation>
+        <translation type="vanished">Oksel naar Taille zijkant</translation>
     </message>
     <message>
         <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
         <comment>Full measurement description</comment>
-        <translation>Rond het Lichaam vanaf midden Schouder lengte naar BustePunt naar Kruis en weer terug naar het beginpunt</translation>
+        <translation type="vanished">Rond het Lichaam vanaf midden Schouder lengte naar BustePunt naar Kruis en weer terug naar het beginpunt</translation>
     </message>
     <message>
         <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
         <comment>Full measurement description</comment>
-        <translation>Rond Armen en Torso, op bicepshoogte naar vloer, met armen langs je lichaam hangend</translation>
+        <translation type="vanished">Rond Armen en Torso, op bicepshoogte naar vloer, met armen langs je lichaam hangend</translation>
     </message>
     <message>
         <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
         <comment>Full measurement description</comment>
-        <translation>Rond Borstkas op Okselhoogte, parallel aan de vloer kruislings over de rug, niet parallel aan de vloer voorlangs kruislings over de borstkas </translation>
+        <translation type="vanished">Rond Borstkas op Okselhoogte, parallel aan de vloer kruislings over de rug, niet parallel aan de vloer voorlangs kruislings over de borstkas </translation>
     </message>
     <message>
         <source>Around fullest part of Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Rond het dikste deel van de buste, parallel aan de vloer</translation>
+        <translation type="vanished">Rond het dikste deel van de buste, parallel aan de vloer</translation>
     </message>
     <message>
         <source>Around Chest below the Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Rond de borstkas onder de Buste, parallel aan de vloer</translation>
+        <translation type="vanished">Rond de borstkas onder de Buste, parallel aan de vloer</translation>
     </message>
     <message>
         <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
         <comment>Full measurement description</comment>
-        <translation>Knoop een elastiek rond het smalste deel van de taille, zorg dat dit elastiek goed op zijn plek blijft zitten terwijl u maten neemt. Voorkant taille of achterkant taille is niet altijd parallel aan de vloer, dat geldt ook voor het elastiek</translation>
+        <translation type="vanished">Knoop een elastiek rond het smalste deel van de taille, zorg dat dit elastiek goed op zijn plek blijft zitten terwijl u maten neemt. Voorkant taille of achterkant taille is niet altijd parallel aan de vloer, dat geldt ook voor het elastiek</translation>
     </message>
     <message>
         <source>Around HighHip, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Rond Hoogheup, parallel aan de vloer</translation>
+        <translation type="vanished">Rond Hoogheup, parallel aan de vloer</translation>
     </message>
     <message>
         <source>Around Hip, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Rond Heup, parallel aan de vleor</translation>
+        <translation type="vanished">Rond Heup, parallel aan de vleor</translation>
     </message>
     <message>
         <source>Across Front UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
-        <translation>Over voorkant BovenBorst, smalste breedte vanaf armsgat naar armsgat</translation>
+        <translation type="vanished">Over voorkant BovenBorst, smalste breedte vanaf armsgat naar armsgat</translation>
     </message>
     <message>
         <source>Across Front Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
-        <translation>Over Voorkant Borstkas, van armvouw naar armvouw</translation>
+        <translation type="vanished">Over Voorkant Borstkas, van armvouw naar armvouw</translation>
     </message>
     <message>
         <source>From ShoulderTip to ShoulderTip, across Front</source>
         <comment>Full measurement description</comment>
-        <translation>Van SchouderTip naar Schouder Tip, via de Voorkant</translation>
+        <translation type="vanished">Van SchouderTip naar Schouder Tip, via de Voorkant</translation>
     </message>
     <message>
         <source>From ShoulderTip to ShoulderTip, across Back</source>
         <comment>Full measurement description</comment>
-        <translation>Van Schouder Tip naar Schouder Tip, via de rug</translation>
+        <translation type="vanished">Van Schouder Tip naar Schouder Tip, via de rug</translation>
     </message>
     <message>
         <source>Across Back UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
-        <translation>Kruislings Rug bovenborst, smalste breedte vanaf armsgat naar armsgat</translation>
+        <translation type="vanished">Kruislings Rug bovenborst, smalste breedte vanaf armsgat naar armsgat</translation>
     </message>
     <message>
         <source>Across Back Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
-        <translation>Over Rug Borstkas, vanaf armvouw naar armvouw</translation>
+        <translation type="vanished">Over Rug Borstkas, vanaf armvouw naar armvouw</translation>
     </message>
     <message>
         <source>Distance between BustPoints, across Chest</source>
         <comment>Full measurement description</comment>
-        <translation>Afstand tussen BustePunten, via borstkas</translation>
+        <translation type="vanished">Afstand tussen BustePunten, via borstkas</translation>
     </message>
     <message>
         <source>Distance from Bustpoint, behind neck, down to Bustpoint</source>
         <comment>Full measurement description</comment>
-        <translation>Afstand van BustePunt, achter de hals naar beneden naar het andere BustePunt</translation>
+        <translation type="vanished">Afstand van BustePunt, achter de hals naar beneden naar het andere BustePunt</translation>
     </message>
     <message>
         <source>From NeckPoint to BustPoint</source>
         <comment>Full measurement description</comment>
-        <translation>Van HalsPunt naar BustePunt</translation>
+        <translation type="vanished">Van HalsPunt naar BustePunt</translation>
     </message>
     <message>
         <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Van Voorkant Taiile Midden, naar beneden via kruis, naar Rug Taille Midden</translation>
+        <translation type="vanished">Van Voorkant Taiile Midden, naar beneden via kruis, naar Rug Taille Midden</translation>
     </message>
     <message>
         <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
         <comment>Full measurement description</comment>
-        <translation>Ga op een vlakke harde stoel zitten, meet aan de zijkant vanaf taille naar beneden  tot op stoelzitting.</translation>
+        <translation type="vanished">Ga op een vlakke harde stoel zitten, meet aan de zijkant vanaf taille naar beneden  tot op stoelzitting.</translation>
     </message>
     <message>
         <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
         <comment>Full measurement description</comment>
-        <translation>Verticale afstand van HalsPunt level tot Schouder Tip level</translation>
+        <translation type="vanished">Verticale afstand van HalsPunt level tot Schouder Tip level</translation>
     </message>
     <message>
         <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
         <comment>Full measurement description</comment>
-        <translation>Graden hoek van HalsPunt tot SchouderTip - vereist een goniometer</translation>
+        <translation type="vanished">Graden hoek van HalsPunt tot SchouderTip - vereist een goniometer</translation>
     </message>
     <message>
         <source>ShoulderTip to Front Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Schouder Tip naar Voorkant Taille Midden</translation>
+        <translation type="vanished">Schouder Tip naar Voorkant Taille Midden</translation>
     </message>
     <message>
         <source>ShoulderTip to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Schouder Tip naar Rug Taille Midden</translation>
+        <translation type="vanished">Schouder Tip naar Rug Taille Midden</translation>
     </message>
     <message>
         <source>NeckPoint straight down front chest to Waistline</source>
         <comment>Full measurement description</comment>
-        <translation>HalsPunt recht naar beneden voorkant borstkas naar Taillelijn</translation>
+        <translation type="vanished">HalsPunt recht naar beneden voorkant borstkas naar Taillelijn</translation>
     </message>
     <message>
         <source>Back NeckPoint straight down back chest to Waistline</source>
         <comment>Full measurement description</comment>
-        <translation>Rug HalsPunt recht naar beneden rug borstkas naar taillelijn</translation>
+        <translation type="vanished">Rug HalsPunt recht naar beneden rug borstkas naar taillelijn</translation>
     </message>
     <message>
         <source>NeckPoint to NeckPoint through Front Neck Center</source>
         <comment>Full measurement description</comment>
-        <translation>HalsPunt naar Halspunt via Voorkant Hals Midden</translation>
+        <translation type="vanished">HalsPunt naar Halspunt via Voorkant Hals Midden</translation>
     </message>
     <message>
         <source>NeckPoint to NeckPoint across Nape</source>
         <comment>Full measurement description</comment>
-        <translation>HalsPunt naar HalsPunt kruiselings onderkant nek</translation>
+        <translation type="vanished">HalsPunt naar HalsPunt kruiselings onderkant nek</translation>
     </message>
     <message>
         <source>Front upper-bust arc</source>
         <comment>Full measurement description</comment>
-        <translation>Voorkant boven-buste boog</translation>
+        <translation type="vanished">Voorkant boven-buste boog</translation>
     </message>
     <message>
         <source>Back UpperBust side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Rug BovenBuste van zijkant naar zijkant</translation>
+        <translation type="vanished">Rug BovenBuste van zijkant naar zijkant</translation>
     </message>
     <message>
         <source>Front Waist side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Voorkant Taille van zijkant naar zijkant</translation>
+        <translation type="vanished">Voorkant Taille van zijkant naar zijkant</translation>
     </message>
     <message>
         <source>Back Waist side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Rug Taille van zijkant naar zijkant</translation>
+        <translation type="vanished">Rug Taille van zijkant naar zijkant</translation>
     </message>
     <message>
         <source>Front UpperHip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Voorkant Bovenheup van zijkant naar zijkant</translation>
+        <translation type="vanished">Voorkant Bovenheup van zijkant naar zijkant</translation>
     </message>
     <message>
         <source>Back UpperHip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Rug BovenHeup van zijkant naar zijkant</translation>
+        <translation type="vanished">Rug BovenHeup van zijkant naar zijkant</translation>
     </message>
     <message>
         <source>Front Hip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Voorkant Heup van zijkant naar zijkant</translation>
+        <translation type="vanished">Voorkant Heup van zijkant naar zijkant</translation>
     </message>
     <message>
         <source>Back Hip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Rug Heup van zijkant naar zijkant</translation>
+        <translation type="vanished">Rug Heup van zijkant naar zijkant</translation>
     </message>
     <message>
         <source>NeckPoint to Front ArmfoldPoint</source>
         <comment>Full measurement description</comment>
-        <translation>HalsPunt naar voorkant ArmvouwPunt</translation>
+        <translation type="vanished">HalsPunt naar voorkant ArmvouwPunt</translation>
     </message>
     <message>
         <source>NeckPoint to Back ArmfoldPoint</source>
         <comment>Full measurement description</comment>
-        <translation>HalsPunt naar Rug ArmvouwPunt</translation>
+        <translation type="vanished">HalsPunt naar Rug ArmvouwPunt</translation>
     </message>
     <message>
         <source>NeckPoint across Front Chest to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation>HalsPunt gekruisd over Voorkant Borstkas naar Zijkant Taille</translation>
+        <translation type="vanished">HalsPunt gekruisd over Voorkant Borstkas naar Zijkant Taille</translation>
     </message>
     <message>
         <source>NeckPoint across Back Chest to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation>HalsPunt gekruisd over Rug Borstkas naar Zijkant Taille</translation>
+        <translation type="vanished">HalsPunt gekruisd over Rug Borstkas naar Zijkant Taille</translation>
     </message>
     <message>
         <source>Front Neck Center straight down to UpperChest line</source>
         <comment>Full measurement description</comment>
-        <translation>Voorkant Midden Hals recht naar beneden tot BovenBorstkas lijn</translation>
+        <translation type="vanished">Voorkant Midden Hals recht naar beneden tot BovenBorstkas lijn</translation>
     </message>
     <message>
         <source>Front Neck Center straight down to Bust line</source>
         <comment>Full measurement description</comment>
-        <translation> Voorkant Midden Hals recht naar beneden tot Buste lijn</translation>
+        <translation type="vanished"> Voorkant Midden Hals recht naar beneden tot Buste lijn</translation>
     </message>
     <message>
         <source>Front Upper chest waist</source>
         <comment>Full measurement description</comment>
-        <translation>Voorkant Boven Borst Taille </translation>
+        <translation type="vanished">Voorkant Boven Borst Taille </translation>
     </message>
     <message>
         <source>Front waist to lower breast</source>
         <comment>Full measurement description</comment>
-        <translation>Voorkant Taille naar onder borst</translation>
+        <translation type="vanished">Voorkant Taille naar onder borst</translation>
     </message>
     <message>
         <source>Back waist to upper chest</source>
         <comment>Full measurement description</comment>
-        <translation>Rug Taille naar Boven Borstkas</translation>
+        <translation type="vanished">Rug Taille naar Boven Borstkas</translation>
     </message>
     <message>
         <source>Strap length</source>
         <comment>Full measurement description</comment>
-        <translation>Riemlengte</translation>
+        <translation type="vanished">Riemlengte</translation>
     </message>
     <message>
         <source>Around Armscye</source>
         <comment>Full measurement description</comment>
-        <translation>Rondom Armsgat</translation>
+        <translation type="vanished">Rondom Armsgat</translation>
     </message>
     <message>
         <source>Around Elbow with elbow bent</source>
         <comment>Full measurement description</comment>
-        <translation>Rondom Elleboog met gebogen elleboog</translation>
+        <translation type="vanished">Rondom Elleboog met gebogen elleboog</translation>
     </message>
     <message>
         <source>Around UpperArm</source>
         <comment>Full measurement description</comment>
-        <translation>Rondom Bovenarm</translation>
+        <translation type="vanished">Rondom Bovenarm</translation>
     </message>
     <message>
         <source>Around Wrist</source>
         <comment>Full measurement description</comment>
-        <translation>Rondom pols</translation>
+        <translation type="vanished">Rondom pols</translation>
     </message>
     <message>
         <source>Nape straight down to UnderBust line (same as Back UpperBust height)</source>
         <comment>Full measurement description</comment>
-        <translation>Onderkant nek recht naar beneden naar OnderBuste lijn ( gelijk aan Rug Bovenborstkas hoogte)</translation>
+        <translation type="vanished">Onderkant nek recht naar beneden naar OnderBuste lijn ( gelijk aan Rug Bovenborstkas hoogte)</translation>
     </message>
     <message>
         <source>NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>HalsPunt naar schouder Tip naar Pols, met gebogen elleboog en hand op heup</translation>
+        <translation type="vanished">HalsPunt naar schouder Tip naar Pols, met gebogen elleboog en hand op heup</translation>
     </message>
     <message>
         <source>Armpit to Wrist, with arm straight and hanging at side</source>
         <comment>Full measurement description</comment>
-        <translation>Oksel naar pols, met arm recht en naast het lichaam hangend</translation>
+        <translation type="vanished">Oksel naar pols, met arm recht en naast het lichaam hangend</translation>
     </message>
     <message>
         <source>Nape to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>Onderkant nek naar Pols, met gebogen elleboog en hand op heup</translation>
+        <translation type="vanished">Onderkant nek naar Pols, met gebogen elleboog en hand op heup</translation>
     </message>
     <message>
         <source>ShoulderTip to Elbow, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>SchouderTip naar Elleboog, met gebogen elleboog en hand op heup</translation>
+        <translation type="vanished">SchouderTip naar Elleboog, met gebogen elleboog en hand op heup</translation>
     </message>
     <message>
         <source>ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>SchouderTip naar pols, met gebogen elleboog en hand op heup</translation>
+        <translation type="vanished">SchouderTip naar pols, met gebogen elleboog en hand op heup</translation>
     </message>
     <message>
         <source>Hand side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Hand van zijkant naar zijkant</translation>
+        <translation type="vanished">Hand van zijkant naar zijkant</translation>
     </message>
     <message>
         <source>Hand Middle Finger tip to wrist</source>
         <comment>Full measurement description</comment>
-        <translation>Hand top van Middelvinger naar pols</translation>
+        <translation type="vanished">Hand top van Middelvinger naar pols</translation>
     </message>
     <message>
         <source>Around Hand</source>
         <comment>Full measurement description</comment>
-        <translation>Rondom Hand</translation>
+        <translation type="vanished">Rondom Hand</translation>
     </message>
     <message>
         <source>Around Thigh</source>
         <comment>Full measurement description</comment>
-        <translation> Rondom dij</translation>
+        <translation type="vanished"> Rondom dij</translation>
     </message>
     <message>
         <source>Around MidThigh</source>
         <comment>Full measurement description</comment>
-        <translation>Rondom MiddenDij</translation>
+        <translation type="vanished">Rondom MiddenDij</translation>
     </message>
     <message>
         <source>Around Knee</source>
         <comment>Full measurement description</comment>
-        <translation>Rondom Knie</translation>
+        <translation type="vanished">Rondom Knie</translation>
     </message>
     <message>
         <source>Around Calf</source>
         <comment>Full measurement description</comment>
-        <translation>Rondom Kuit</translation>
+        <translation type="vanished">Rondom Kuit</translation>
     </message>
     <message>
         <source>Around Ankle</source>
         <comment>Full measurement description</comment>
-        <translation>Rondom Enkel</translation>
+        <translation type="vanished">Rondom Enkel</translation>
     </message>
     <message>
         <source>Knee to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Knie naar vloer</translation>
+        <translation type="vanished">Knie naar vloer</translation>
     </message>
     <message>
         <source>Ankle to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Enkel naar Vloer</translation>
+        <translation type="vanished">Enkel naar Vloer</translation>
     </message>
     <message>
         <source>Widest part of Foot side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Breedste deel van de voet van zijkant naar zijkant</translation>
+        <translation type="vanished">Breedste deel van de voet van zijkant naar zijkant</translation>
     </message>
     <message>
         <source>Tip of Longest Toe straight to back of heel</source>
         <comment>Full measurement description</comment>
-        <translation>Top van de Langste Teen recht naar achterkant van hiel</translation>
+        <translation type="vanished">Top van de Langste Teen recht naar achterkant van hiel</translation>
     </message>
     <message>
         <source>Top of head to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Top van Hoofd naar Vloer</translation>
+        <translation type="vanished">Top van Hoofd naar Vloer</translation>
     </message>
     <message>
         <source>Nape to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Nek naar Vloer</translation>
+        <translation type="vanished">Nek naar Vloer</translation>
     </message>
     <message>
         <source>Nape to Knee</source>
         <comment>Full measurement description</comment>
-        <translation>Nek naar knie</translation>
+        <translation type="vanished">Nek naar knie</translation>
     </message>
     <message>
         <source>Waist side to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Zijkant Taille naar vloer</translation>
+        <translation type="vanished">Zijkant Taille naar vloer</translation>
     </message>
     <message>
         <source>HighHip side to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Zijkant HogeHeup naar Vloer </translation>
+        <translation type="vanished">Zijkant HogeHeup naar Vloer </translation>
     </message>
     <message>
         <source>Hip side to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Zijkant Heup naar Vloer</translation>
+        <translation type="vanished">Zijkant Heup naar Vloer</translation>
     </message>
     <message>
         <source>Waist side to Hip</source>
         <comment>Full measurement description</comment>
-        <translation>Zijkant Taille naar Heup</translation>
+        <translation type="vanished">Zijkant Taille naar Heup</translation>
     </message>
     <message>
         <source>Waist side to Knee</source>
         <comment>Full measurement description</comment>
-        <translation>Zijkant Taille naar knie</translation>
+        <translation type="vanished">Zijkant Taille naar knie</translation>
     </message>
     <message>
         <source>Crotch to Floor along inside leg</source>
         <comment>Full measurement description</comment>
-        <translation>Kruis naar vloer langs binnenkant been</translation>
+        <translation type="vanished">Kruis naar vloer langs binnenkant been</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>Full measurement description</comment>
-        <translation>Maat</translation>
+        <translation type="vanished">Maat</translation>
     </message>
     <message>
         <source>Height of the point base of the neck in front</source>
         <comment>Full measurement description</comment>
-        <translation>Hoogte van de basis van de voorkant van de hals</translation>
+        <translation type="vanished">Hoogte van de basis van de voorkant van de hals</translation>
     </message>
     <message>
         <source>Height of the base of the neck side point</source>
         <comment>Full measurement description</comment>
-        <translation>Hoogte van de basis van de zijkant van de hals</translation>
+        <translation type="vanished">Hoogte van de basis van de zijkant van de hals</translation>
     </message>
     <message>
         <source>The height of the shoulder point</source>
         <comment>Full measurement description</comment>
-        <translation>Hoogte van het schouderpunt</translation>
+        <translation type="vanished">Hoogte van het schouderpunt</translation>
     </message>
     <message>
         <source>Height nipple point</source>
         <comment>Full measurement description</comment>
-        <translation>Hoogte van het tepelpunt</translation>
+        <translation type="vanished">Hoogte van het tepelpunt</translation>
     </message>
     <message>
         <source>Height back angle axilla</source>
         <comment>Full measurement description</comment>
-        <translation>Hoogte van oksel op rugzijde</translation>
+        <translation type="vanished">Hoogte van oksel op rugzijde</translation>
     </message>
     <message>
         <source>Height scapular point</source>
         <comment>Full measurement description</comment>
-        <translation>Hoogte schouderblad punt</translation>
+        <translation type="vanished">Hoogte schouderblad punt</translation>
     </message>
     <message>
         <source>Height under buttock folds</source>
         <comment>Full measurement description</comment>
-        <translation>Hoogte onder bilplooien</translation>
+        <translation type="vanished">Hoogte onder bilplooien</translation>
     </message>
     <message>
         <source>Hips excluding protruding abdomen</source>
         <comment>Full measurement description</comment>
-        <translation>Heupen uitgezonderd uitpuilend onderbuik</translation>
+        <translation type="vanished">Heupen uitgezonderd uitpuilend onderbuik</translation>
     </message>
     <message>
         <source>Girth foot instep</source>
         <comment>Full measurement description</comment>
-        <translation>Wijdte voetstap</translation>
+        <translation type="vanished">Wijdte voetstap</translation>
     </message>
     <message>
         <source>The distance from the side waist to floor</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van zijkant taiile naar vloer</translation>
+        <translation type="vanished">De afstand van zijkant taiile naar vloer</translation>
     </message>
     <message>
         <source>The distance from the front waist to floor</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van de voorkant taille naar vloer</translation>
+        <translation type="vanished">De afstand van de voorkant taille naar vloer</translation>
     </message>
     <message>
         <source>Arc through groin area</source>
         <comment>Full measurement description</comment>
-        <translation>Boog door lies gebied</translation>
+        <translation type="vanished">Boog door lies gebied</translation>
     </message>
     <message>
         <source>The distance from the waist to the plane seat</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van taille naar vlakke zitting van stoel</translation>
+        <translation type="vanished">De afstand van taille naar vlakke zitting van stoel</translation>
     </message>
     <message>
         <source>The distance from the base of the neck to the side of the radial point</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van de basis van de hals naar de zijkant van het radiale punt</translation>
+        <translation type="vanished">De afstand van de basis van de hals naar de zijkant van het radiale punt</translation>
     </message>
     <message>
         <source>Distance from the base of the neck side point to the end of the third finger</source>
         <comment>Full measurement description</comment>
-        <translation>Afstand van de basis van de zijkant van de hals naar het topje van de derde vinger</translation>
+        <translation type="vanished">Afstand van de basis van de zijkant van de hals naar het topje van de derde vinger</translation>
     </message>
     <message>
         <source>The distance from the base of the neck to the side of the first line in front of chest circumference</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van de basis van de hals naar de zijkant van de eerste lijn van de voorkant borstomvang</translation>
+        <translation type="vanished">De afstand van de basis van de hals naar de zijkant van de eerste lijn van de voorkant borstomvang</translation>
     </message>
     <message>
         <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van de basis van de hals naar zijvoorkant van de taille(taille lengte aan de voorkant)</translation>
+        <translation type="vanished">De afstand van de basis van de hals naar zijvoorkant van de taille(taille lengte aan de voorkant)</translation>
     </message>
     <message>
         <source>Arc through the highest point of the shoulder joint</source>
         <comment>Full measurement description</comment>
-        <translation>Boog via het hoogste punt van het schoudergewricht</translation>
+        <translation type="vanished">Boog via het hoogste punt van het schoudergewricht</translation>
     </message>
     <message>
         <source>The distance from the base of the neck to the back line of chest circumference of the first and the second based on ledge vanes</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van de basis van de hals naar de rug lijn van de borstomvang van de eerste en tweede basis op het randje van .......</translation>
+        <translation type="vanished">De afstand van de basis van de hals naar de rug lijn van de borstomvang van de eerste en tweede basis op het randje van .......</translation>
     </message>
     <message>
         <source>The distance from the waist to the back base of the neck side point</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van taille naar de basis van de zijkant van de rughals</translation>
+        <translation type="vanished">De afstand van taille naar de basis van de zijkant van de rughals</translation>
     </message>
     <message>
         <source>Arc length of the upper body through the base of the neck side point</source>
         <comment>Full measurement description</comment>
-        <translation>booglengte van de bovenlichaam via de basis van de zijkant van de hals</translation>
+        <translation type="vanished">booglengte van de bovenlichaam via de basis van de zijkant van de hals</translation>
     </message>
     <message>
         <source>Chest width</source>
         <comment>Full measurement description</comment>
-        <translation>Borstomvang</translation>
+        <translation type="vanished">Borstomvang</translation>
     </message>
     <message>
         <source>Anteroposterior diameter of the hands</source>
         <comment>Full measurement description</comment>
-        <translation>Anteroposterior diameter van de handen</translation>
+        <translation type="vanished">Anteroposterior diameter van de handen</translation>
     </message>
     <message>
         <source>Height clavicular point</source>
         <comment>Full measurement description</comment>
-        <translation>Hoogte van sleutelbeen punt</translation>
+        <translation type="vanished">Hoogte van sleutelbeen punt</translation>
     </message>
     <message>
         <source>The distance from the point to the cervical level of the posterior angle of the front armpit (underarm height oblique)</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van het punt naar de halswervel level van de uitgerekte hoek van voorkant van de oksel(onderarm hoogte schuine spieren)</translation>
+        <translation type="vanished">De afstand van het punt naar de halswervel level van de uitgerekte hoek van voorkant van de oksel(onderarm hoogte schuine spieren)</translation>
     </message>
     <message>
         <source>Slash shoulder height</source>
         <comment>Full measurement description</comment>
-        <translation>Verlaagd schouder hoogte</translation>
+        <translation type="vanished">Verlaagd schouder hoogte</translation>
     </message>
     <message>
         <source>Half girth neck</source>
         <comment>Full measurement description</comment>
-        <translation>Helft hals wijdte</translation>
+        <translation type="vanished">Helft hals wijdte</translation>
     </message>
     <message>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement description</comment>
-        <translation>Helft halswijdte voor shirts</translation>
+        <translation type="vanished">Helft halswijdte voor shirts</translation>
     </message>
     <message>
         <source>Half girth chest first</source>
         <comment>Full measurement description</comment>
-        <translation>Helft eerste borstkas wijdte</translation>
+        <translation type="vanished">Helft eerste borstkas wijdte</translation>
     </message>
     <message>
         <source>Half girth chest second</source>
         <comment>Full measurement description</comment>
-        <translation>Helft tweede borstkas wijdte</translation>
+        <translation type="vanished">Helft tweede borstkas wijdte</translation>
     </message>
     <message>
         <source>Half girth chest third</source>
         <comment>Full measurement description</comment>
-        <translation>Helft derde borstkas wijdte</translation>
+        <translation type="vanished">Helft derde borstkas wijdte</translation>
     </message>
     <message>
         <source>Half girth waist</source>
         <comment>Full measurement description</comment>
-        <translation>Helft taille wijdte</translation>
+        <translation type="vanished">Helft taille wijdte</translation>
     </message>
     <message>
         <source>Half girth hips considering protruding abdomen</source>
         <comment>Full measurement description</comment>
-        <translation>Helft heupwijdte rekening houdend met uitpuilende onderbuik</translation>
+        <translation type="vanished">Helft heupwijdte rekening houdend met uitpuilende onderbuik</translation>
     </message>
     <message>
         <source>Half girth hips excluding protruding abdomen</source>
         <comment>Full measurement description</comment>
-        <translation>Helft heupwijdte uitgezonderd uitpuilende onderbuik</translation>
+        <translation type="vanished">Helft heupwijdte uitgezonderd uitpuilende onderbuik</translation>
     </message>
     <message>
         <source>Girth knee flexed feet</source>
         <comment>Full measurement description</comment>
-        <translation>Wijdte van gebogen voet</translation>
+        <translation type="vanished">Wijdte van gebogen voet</translation>
     </message>
     <message>
         <source>Neck transverse diameter</source>
         <comment>Full measurement description</comment>
-        <translation>Hals doorsnee diameter</translation>
+        <translation type="vanished">Hals doorsnee diameter</translation>
     </message>
     <message>
         <source>Front slash shoulder height</source>
         <comment>Full measurement description</comment>
-        <translation>Voorkant verlaagde schouder hoogte</translation>
+        <translation type="vanished">Voorkant verlaagde schouder hoogte</translation>
     </message>
     <message>
         <source>The distance from the base of the neck to the waist line front</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van de basis van de hals naar voorkant van taillelijn</translation>
+        <translation type="vanished">De afstand van de basis van de hals naar voorkant van taillelijn</translation>
     </message>
     <message>
         <source>Hand vertical diameter</source>
         <comment>Full measurement description</comment>
-        <translation>Hand verticale diameter</translation>
+        <translation type="vanished">Hand verticale diameter</translation>
     </message>
     <message>
         <source>Distance from neck to knee point</source>
         <comment>Full measurement description</comment>
-        <translation>Afstand van hals naar knie punt</translation>
+        <translation type="vanished">Afstand van hals naar knie punt</translation>
     </message>
     <message>
         <source>The distance from the waist to the knee</source>
         <comment>Full measurement description</comment>
-        <translation>De afstand van taille naar de knie</translation>
+        <translation type="vanished">De afstand van taille naar de knie</translation>
     </message>
     <message>
         <source>Shoulder height</source>
         <comment>Full measurement description</comment>
-        <translation>Schouder hoogte</translation>
+        <translation type="vanished">Schouder hoogte</translation>
     </message>
     <message>
         <source>Head height</source>
         <comment>Full measurement description</comment>
-        <translation>Hoofd hoogte</translation>
+        <translation type="vanished">Hoofd hoogte</translation>
     </message>
     <message>
         <source>Body position</source>
         <comment>Full measurement description</comment>
-        <translation>Lichaams positie</translation>
+        <translation type="vanished">Lichaams positie</translation>
     </message>
     <message>
         <source>Arc behind the shoulder girdle</source>
         <comment>Full measurement description</comment>
-        <translation>Boog achter de schoudergordel</translation>
+        <translation type="vanished">Boog achter de schoudergordel</translation>
     </message>
     <message>
         <source>Distance from neck point to point on the base of the neck side neck girth measurement line</source>
         <comment>Full measurement description</comment>
-        <translation>Afstand van hals punt naar basispunt van de hals zijkant halswijdte gemeten lijn</translation>
+        <translation type="vanished">Afstand van hals punt naar basispunt van de hals zijkant halswijdte gemeten lijn</translation>
     </message>
     <message>
         <source>Depth waist first</source>
         <comment>Full measurement description</comment>
-        <translation>Diepte eerste taille</translation>
+        <translation type="vanished">Diepte eerste taille</translation>
     </message>
     <message>
         <source>Depth waist second</source>
         <comment>Full measurement description</comment>
-        <translation>Diepte tweede taille</translation>
+        <translation type="vanished">Diepte tweede taille</translation>
     </message>
 </context>
 <context>
@@ -4889,695 +5767,722 @@ Do you want to save your changes?</source>
     <message>
         <source>Head girth</source>
         <comment>Full measurement name</comment>
-        <translation>Hoofd wijdte</translation>
+        <translation type="vanished">Hoofd wijdte</translation>
     </message>
     <message>
         <source>Mid-neck girth</source>
         <comment>Full measurement name</comment>
-        <translation>Midden-hals wijdte</translation>
+        <translation type="vanished">Midden-hals wijdte</translation>
     </message>
     <message>
         <source>Neck Base girth</source>
         <comment>Full measurement name</comment>
-        <translation>Hals basis wijdte</translation>
+        <translation type="vanished">Hals basis wijdte</translation>
     </message>
     <message>
         <source>Head and Neck length</source>
         <comment>Full measurement name</comment>
-        <translation>Hoofd en hals lengte</translation>
+        <translation type="vanished">Hoofd en hals lengte</translation>
     </message>
     <message>
         <source>Front Center length</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant midden lengte</translation>
+        <translation type="vanished">Voorkant midden lengte</translation>
     </message>
     <message>
         <source>Back Center length</source>
         <comment>Full measurement name</comment>
-        <translation>Rug midden lengte</translation>
+        <translation type="vanished">Rug midden lengte</translation>
     </message>
     <message>
         <source>Shoulder length</source>
         <comment>Full measurement name</comment>
-        <translation>Schouder lengte</translation>
+        <translation type="vanished">Schouder lengte</translation>
     </message>
     <message>
         <source>Side Waist length</source>
         <comment>Full measurement name</comment>
-        <translation>ZIjkant taille lengte</translation>
+        <translation type="vanished">ZIjkant taille lengte</translation>
     </message>
     <message>
         <source>Trunk length</source>
         <comment>Full measurement name</comment>
-        <translation>Romp lengte</translation>
+        <translation type="vanished">Romp lengte</translation>
     </message>
     <message>
         <source>Shoulder girth</source>
         <comment>Full measurement name</comment>
-        <translation>Schouder wijdte</translation>
+        <translation type="vanished">Schouder wijdte</translation>
     </message>
     <message>
         <source>Upper Chest girth</source>
         <comment>Full measurement name</comment>
-        <translation>Boven borstkas wijdte</translation>
+        <translation type="vanished">Boven borstkas wijdte</translation>
     </message>
     <message>
         <source>Bust girth</source>
         <comment>Full measurement name</comment>
-        <translation>Buste wijdte</translation>
+        <translation type="vanished">Buste wijdte</translation>
     </message>
     <message>
         <source>Under Bust girth</source>
         <comment>Full measurement name</comment>
-        <translation>Onder buste wijdte</translation>
+        <translation type="vanished">Onder buste wijdte</translation>
     </message>
     <message>
         <source>Waist girth</source>
         <comment>Full measurement name</comment>
-        <translation>Taille wijdte</translation>
+        <translation type="vanished">Taille wijdte</translation>
     </message>
     <message>
         <source>HighHip girth</source>
         <comment>Full measurement name</comment>
-        <translation> Hoog heup wijdte</translation>
+        <translation type="vanished"> Hoog heup wijdte</translation>
     </message>
     <message>
         <source>Hip girth</source>
         <comment>Full measurement name</comment>
-        <translation>Heup wijdte</translation>
+        <translation type="vanished">Heup wijdte</translation>
     </message>
     <message>
         <source>Front Upper Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant boven borstkas wijdte</translation>
+        <translation type="vanished">Voorkant boven borstkas wijdte</translation>
     </message>
     <message>
         <source>Front Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant borstkas wijdte</translation>
+        <translation type="vanished">Voorkant borstkas wijdte</translation>
     </message>
     <message>
         <source>Front Across Shoulder width</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant via Schouder wijdte</translation>
+        <translation type="vanished">Voorkant via Schouder wijdte</translation>
     </message>
     <message>
         <source>Back Across Shoulder width</source>
         <comment>Full measurement name</comment>
-        <translation>Rug via Schouder wijdte</translation>
+        <translation type="vanished">Rug via Schouder wijdte</translation>
     </message>
     <message>
         <source>Back Upper Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Rug boven borstkas wijdte</translation>
+        <translation type="vanished">Rug boven borstkas wijdte</translation>
     </message>
     <message>
         <source>Back Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Rug borstkas wijdte</translation>
+        <translation type="vanished">Rug borstkas wijdte</translation>
     </message>
     <message>
         <source>BustPoint to BustPoint</source>
         <comment>Full measurement name</comment>
-        <translation>Buste Punt naar Buste Punt</translation>
+        <translation type="vanished">Buste Punt naar Buste Punt</translation>
     </message>
     <message>
         <source>Halter Bustpoint to Bustpoint</source>
         <comment>Full measurement name</comment>
-        <translation>Halter Buste Punt naar Buste Punt</translation>
+        <translation type="vanished">Halter Buste Punt naar Buste Punt</translation>
     </message>
     <message>
         <source>NeckPoint to BustPoint</source>
         <comment>Full measurement name</comment>
-        <translation>Hals Punt naar Buste Punt</translation>
+        <translation type="vanished">Hals Punt naar Buste Punt</translation>
     </message>
     <message>
         <source>Crotch length</source>
         <comment>Full measurement name</comment>
-        <translation>Kruis lengte</translation>
+        <translation type="vanished">Kruis lengte</translation>
     </message>
     <message>
         <source>Rise height</source>
         <comment>Full measurement name</comment>
-        <translation>Gaan staan hoogte</translation>
+        <translation type="vanished">Gaan staan hoogte</translation>
     </message>
     <message>
         <source>Shoulder Drop</source>
         <comment>Full measurement name</comment>
-        <translation> Schouder val</translation>
+        <translation type="vanished"> Schouder val</translation>
     </message>
     <message>
         <source>Shoulder Slope degrees</source>
         <comment>Full measurement name</comment>
-        <translation>Schouder kop graden</translation>
+        <translation type="vanished">Schouder kop graden</translation>
     </message>
     <message>
         <source>Front Shoulder Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant schouder Balans</translation>
+        <translation type="vanished">Voorkant schouder Balans</translation>
     </message>
     <message>
         <source>Back Shoulder Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Rug Schouder Balans</translation>
+        <translation type="vanished">Rug Schouder Balans</translation>
     </message>
     <message>
         <source>Front Full Length</source>
         <comment>Full measurement name</comment>
-        <translation>Volledige lengte voorkant</translation>
+        <translation type="vanished">Volledige lengte voorkant</translation>
     </message>
     <message>
         <source>Back Full Length</source>
         <comment>Full measurement name</comment>
-        <translation>Volledige lengte rugkant</translation>
+        <translation type="vanished">Volledige lengte rugkant</translation>
     </message>
     <message>
         <source>Front Neck arc</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant hals boog</translation>
+        <translation type="vanished">Voorkant hals boog</translation>
     </message>
     <message>
         <source>Back Neck arc</source>
         <comment>Full measurement name</comment>
-        <translation>Rugkant Hals boog</translation>
+        <translation type="vanished">Rugkant Hals boog</translation>
     </message>
     <message>
         <source>Front upper-bust arc</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant boven-buste boog</translation>
+        <translation type="vanished">Voorkant boven-buste boog</translation>
     </message>
     <message>
         <source>Back UpperBust arc</source>
         <comment>Full measurement name</comment>
-        <translation>Rug boven-buste boog</translation>
+        <translation type="vanished">Rug boven-buste boog</translation>
     </message>
     <message>
         <source>Front Waist arc</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant taille boog</translation>
+        <translation type="vanished">Voorkant taille boog</translation>
     </message>
     <message>
         <source>Back Waist arc</source>
         <comment>Full measurement name</comment>
-        <translation>Rug Taille boog</translation>
+        <translation type="vanished">Rug Taille boog</translation>
     </message>
     <message>
         <source>Front UpperHip arc</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant Bovenheup boog</translation>
+        <translation type="vanished">Voorkant Bovenheup boog</translation>
     </message>
     <message>
         <source>Back UpperHip arc</source>
         <comment>Full measurement name</comment>
-        <translation>Rugkant bovenheup boog</translation>
+        <translation type="vanished">Rugkant bovenheup boog</translation>
     </message>
     <message>
         <source>Front Hip arc</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant heup boog</translation>
+        <translation type="vanished">Voorkant heup boog</translation>
     </message>
     <message>
         <source>Back Hip arc</source>
         <comment>Full measurement name</comment>
-        <translation>Rug heup boog</translation>
+        <translation type="vanished">Rug heup boog</translation>
     </message>
     <message>
         <source>Chest Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Borstkas balans</translation>
+        <translation type="vanished">Borstkas balans</translation>
     </message>
     <message>
         <source>Back Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Rugkant balans</translation>
+        <translation type="vanished">Rugkant balans</translation>
     </message>
     <message>
         <source>Front Waist Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant Taille Balans</translation>
+        <translation type="vanished">Voorkant Taille Balans</translation>
     </message>
     <message>
         <source>Back Waist Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Rug Taille Balans</translation>
+        <translation type="vanished">Rug Taille Balans</translation>
     </message>
     <message>
         <source>Front UpperChest height</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant Bovenborstkas hoogte</translation>
+        <translation type="vanished">Voorkant Bovenborstkas hoogte</translation>
     </message>
     <message>
         <source>Bust height</source>
         <comment>Full measurement name</comment>
-        <translation>Buste hoogte</translation>
+        <translation type="vanished">Buste hoogte</translation>
     </message>
     <message>
         <source>Front Upper chest waist</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant boven borstkas hoogte</translation>
+        <translation type="vanished">Voorkant boven borstkas hoogte</translation>
     </message>
     <message>
         <source>Front waist to lower breast</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant Taille naar lager borst</translation>
+        <translation type="vanished">Voorkant Taille naar lager borst</translation>
     </message>
     <message>
         <source>Back waist to upper chest</source>
         <comment>Full measurement name</comment>
-        <translation>Rug taille naar boven borstkas</translation>
+        <translation type="vanished">Rug taille naar boven borstkas</translation>
     </message>
     <message>
         <source>Strap length</source>
         <comment>Full measurement name</comment>
-        <translation>Riemlengte</translation>
+        <translation type="vanished">Riemlengte</translation>
     </message>
     <message>
         <source>Armscye Girth</source>
         <comment>Full measurement name</comment>
-        <translation>Armsgat Wijdte</translation>
+        <translation type="vanished">Armsgat Wijdte</translation>
     </message>
     <message>
         <source>Elbow Girth</source>
         <comment>Full measurement name</comment>
-        <translation>Elleboog wijdte</translation>
+        <translation type="vanished">Elleboog wijdte</translation>
     </message>
     <message>
         <source>Upperarm Girth</source>
         <comment>Full measurement name</comment>
-        <translation>Bovenarm wijdte</translation>
+        <translation type="vanished">Bovenarm wijdte</translation>
     </message>
     <message>
         <source>Wrist girth</source>
         <comment>Full measurement name</comment>
-        <translation>Pols wijdte</translation>
+        <translation type="vanished">Pols wijdte</translation>
     </message>
     <message>
         <source>Armscye depth</source>
         <comment>Full measurement name</comment>
-        <translation>Armsgat Diepte</translation>
+        <translation type="vanished">Armsgat Diepte</translation>
     </message>
     <message>
         <source>Shoulder and Arm length</source>
         <comment>Full measurement name</comment>
-        <translation>Schouder en arm lengte</translation>
+        <translation type="vanished">Schouder en arm lengte</translation>
     </message>
     <message>
         <source>Underarm length</source>
         <comment>Full measurement name</comment>
-        <translation>Onderarm lengte</translation>
+        <translation type="vanished">Onderarm lengte</translation>
     </message>
     <message>
         <source>Nape to wrist length</source>
         <comment>Full measurement name</comment>
-        <translation>Nek naar pols lengte</translation>
+        <translation type="vanished">Nek naar pols lengte</translation>
     </message>
     <message>
         <source>Elbow length</source>
         <comment>Full measurement name</comment>
-        <translation>Elleboog lenge</translation>
+        <translation type="vanished">Elleboog lenge</translation>
     </message>
     <message>
         <source>Arm length</source>
         <comment>Full measurement name</comment>
-        <translation>Arm lengte</translation>
+        <translation type="vanished">Arm lengte</translation>
     </message>
     <message>
         <source>Hand width</source>
         <comment>Full measurement name</comment>
-        <translation>Hand breedte</translation>
+        <translation type="vanished">Hand breedte</translation>
     </message>
     <message>
         <source>Hand length</source>
         <comment>Full measurement name</comment>
-        <translation>Hnad lengte</translation>
+        <translation type="vanished">Hnad lengte</translation>
     </message>
     <message>
         <source>Hand girth</source>
         <comment>Full measurement name</comment>
-        <translation>Hand wijdte</translation>
+        <translation type="vanished">Hand wijdte</translation>
     </message>
     <message>
         <source>Thigh girth</source>
         <comment>Full measurement name</comment>
-        <translation>Dij wijdte</translation>
+        <translation type="vanished">Dij wijdte</translation>
     </message>
     <message>
         <source>Midthigh girth</source>
         <comment>Full measurement name</comment>
-        <translation>Middendij wijdte</translation>
+        <translation type="vanished">Middendij wijdte</translation>
     </message>
     <message>
         <source>Knee girth</source>
         <comment>Full measurement name</comment>
-        <translation>Knie wijdte</translation>
+        <translation type="vanished">Knie wijdte</translation>
     </message>
     <message>
         <source>Calf girth</source>
         <comment>Full measurement name</comment>
-        <translation>Kuit wijdte</translation>
+        <translation type="vanished">Kuit wijdte</translation>
     </message>
     <message>
         <source>Ankle girth</source>
         <comment>Full measurement name</comment>
-        <translation>Enkel wijdte</translation>
+        <translation type="vanished">Enkel wijdte</translation>
     </message>
     <message>
         <source>Knee height</source>
         <comment>Full measurement name</comment>
-        <translation>Knie hoogte</translation>
+        <translation type="vanished">Knie hoogte</translation>
     </message>
     <message>
         <source>Ankle height</source>
         <comment>Full measurement name</comment>
-        <translation>Enkel hoogte</translation>
+        <translation type="vanished">Enkel hoogte</translation>
     </message>
     <message>
         <source>Foot width</source>
         <comment>Full measurement name</comment>
-        <translation>Voet breedte</translation>
+        <translation type="vanished">Voet breedte</translation>
     </message>
     <message>
         <source>Foot length</source>
         <comment>Full measurement name</comment>
-        <translation>Voet lengte</translation>
+        <translation type="vanished">Voet lengte</translation>
     </message>
     <message>
         <source>Total Height</source>
         <comment>Full measurement name</comment>
-        <translation> Totale hoote</translation>
+        <translation type="vanished"> Totale hoote</translation>
     </message>
     <message>
         <source>Nape height</source>
         <comment>Full measurement name</comment>
-        <translation>Nek hoogte</translation>
+        <translation type="vanished">Nek hoogte</translation>
     </message>
     <message>
         <source>Nape to knee height</source>
         <comment>Full measurement name</comment>
-        <translation>Nek naar knie hoogte</translation>
+        <translation type="vanished">Nek naar knie hoogte</translation>
     </message>
     <message>
         <source>Waist height</source>
         <comment>Full measurement name</comment>
-        <translation>Taille hoogte</translation>
+        <translation type="vanished">Taille hoogte</translation>
     </message>
     <message>
         <source>HighHip height</source>
         <comment>Full measurement name</comment>
-        <translation>Hoogheup hoogte</translation>
+        <translation type="vanished">Hoogheup hoogte</translation>
     </message>
     <message>
         <source>Hip height</source>
         <comment>Full measurement name</comment>
-        <translation>Heup hoogte</translation>
+        <translation type="vanished">Heup hoogte</translation>
     </message>
     <message>
         <source>Waist to Hip height</source>
         <comment>Full measurement name</comment>
-        <translation>Taille naar heup hoogte</translation>
+        <translation type="vanished">Taille naar heup hoogte</translation>
     </message>
     <message>
         <source>Waist to Knee height</source>
         <comment>Full measurement name</comment>
-        <translation>Taille naar knie hoogte</translation>
+        <translation type="vanished">Taille naar knie hoogte</translation>
     </message>
     <message>
         <source>Crotch height/Inseam</source>
         <comment>Full measurement name</comment>
-        <translation>Kruis hoogte/binnenbeenlengte</translation>
+        <translation type="vanished">Kruis hoogte/binnenbeenlengte</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>Full measurement name</comment>
-        <translation>Maat</translation>
+        <translation type="vanished">Maat</translation>
     </message>
     <message>
         <source>Height front neck base point</source>
         <comment>Full measurement name</comment>
-        <translation>Hoogte voorkant hals basis punt</translation>
+        <translation type="vanished">Hoogte voorkant hals basis punt</translation>
     </message>
     <message>
         <source>Height base neck side point</source>
         <comment>Full measurement name</comment>
-        <translation>Hoogte basis hals zijkant punt</translation>
+        <translation type="vanished">Hoogte basis hals zijkant punt</translation>
     </message>
     <message>
         <source>Height shoulder point</source>
         <comment>Full measurement name</comment>
-        <translation>Hoogte Schouder punt</translation>
+        <translation type="vanished">Hoogte Schouder punt</translation>
     </message>
     <message>
         <source>Height nipple point</source>
         <comment>Full measurement name</comment>
-        <translation>Hoogte tepelpunt</translation>
+        <translation type="vanished">Hoogte tepelpunt</translation>
     </message>
     <message>
         <source>Height back angle axilla</source>
         <comment>Full measurement name</comment>
-        <translation>Hoogte rug hoek oksel</translation>
+        <translation type="vanished">Hoogte rug hoek oksel</translation>
     </message>
     <message>
         <source>Height scapular point</source>
         <comment>Full measurement name</comment>
-        <translation>Hoogte schouderblad punt</translation>
+        <translation type="vanished">Hoogte schouderblad punt</translation>
     </message>
     <message>
         <source>Height under buttock folds</source>
         <comment>Full measurement name</comment>
-        <translation>Hoogte onder bliplooien</translation>
+        <translation type="vanished">Hoogte onder bliplooien</translation>
     </message>
     <message>
         <source>Hips excluding protruding abdomen</source>
         <comment>Full measurement name</comment>
-        <translation>Heupen zonder uitpuilende onderbuik</translation>
+        <translation type="vanished">Heupen zonder uitpuilende onderbuik</translation>
     </message>
     <message>
         <source>Girth foot instep</source>
         <comment>Full measurement name</comment>
-        <translation>Wijdte voetstap</translation>
+        <translation type="vanished">Wijdte voetstap</translation>
     </message>
     <message>
         <source>Side waist to floor</source>
         <comment>Full measurement name</comment>
-        <translation>Zijkant TAille naar vloer</translation>
+        <translation type="vanished">Zijkant TAille naar vloer</translation>
     </message>
     <message>
         <source>Front waist to floor</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant Taille naar vloer</translation>
+        <translation type="vanished">Voorkant Taille naar vloer</translation>
     </message>
     <message>
         <source>Arc through groin area</source>
         <comment>Full measurement name</comment>
-        <translation>Boog door lies gebied</translation>
+        <translation type="vanished">Boog door lies gebied</translation>
     </message>
     <message>
         <source>Waist to plane seat</source>
         <comment>Full measurement name</comment>
-        <translation>Taille naar  harde zitting stoel</translation>
+        <translation type="vanished">Taille naar  harde zitting stoel</translation>
     </message>
     <message>
         <source>Neck to radial point</source>
         <comment>Full measurement name</comment>
-        <translation>Hals naar radiale punt</translation>
+        <translation type="vanished">Hals naar radiale punt</translation>
     </message>
     <message>
         <source>Neck to third finger</source>
         <comment>Full measurement name</comment>
-        <translation>Hals naar derde vinger</translation>
+        <translation type="vanished">Hals naar derde vinger</translation>
     </message>
     <message>
         <source>Neck to first line chest circumference</source>
         <comment>Full measurement name</comment>
-        <translation>Hals naar eerste lijn borstomvang</translation>
+        <translation type="vanished">Hals naar eerste lijn borstomvang</translation>
     </message>
     <message>
         <source>Front waist length</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant taille lengte</translation>
+        <translation type="vanished">Voorkant taille lengte</translation>
     </message>
     <message>
         <source>Arc through shoulder joint</source>
         <comment>Full measurement name</comment>
-        <translation>Boog via schouder gewricht</translation>
+        <translation type="vanished">Boog via schouder gewricht</translation>
     </message>
     <message>
         <source>Neck to back line chest circumference</source>
         <comment>Full measurement name</comment>
-        <translation>Hals naar rug lijn borstomvang</translation>
+        <translation type="vanished">Hals naar rug lijn borstomvang</translation>
     </message>
     <message>
         <source>Waist to neck side</source>
         <comment>Full measurement name</comment>
-        <translation>Taille naar hals zijkant</translation>
+        <translation type="vanished">Taille naar hals zijkant</translation>
     </message>
     <message>
         <source>Arc length upper body</source>
         <comment>Full measurement name</comment>
-        <translation>Boog lengte boven lichaam</translation>
+        <translation type="vanished">Boog lengte boven lichaam</translation>
     </message>
     <message>
         <source>Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Borstkas wijdte</translation>
+        <translation type="vanished">Borstkas wijdte</translation>
     </message>
     <message>
         <source>Anteroposterior diameter hands</source>
         <comment>Full measurement name</comment>
-        <translation>Diameter uItgestrekte hand van voor naar achter </translation>
+        <translation type="vanished">Diameter uItgestrekte hand van voor naar achter </translation>
     </message>
     <message>
         <source>Height clavicular point</source>
         <comment>Full measurement name</comment>
-        <translation>Hoogte van sleutelbeen punt</translation>
+        <translation type="vanished">Hoogte van sleutelbeen punt</translation>
     </message>
     <message>
         <source>Height armhole slash</source>
         <comment>Full measurement name</comment>
-        <translation>Hooge verlaagd armholte </translation>
+        <translation type="vanished">Hooge verlaagd armholte </translation>
     </message>
     <message>
         <source>Slash shoulder height</source>
         <comment>Full measurement name</comment>
-        <translation>Verlaagd schouder hoogte</translation>
+        <translation type="vanished">Verlaagd schouder hoogte</translation>
     </message>
     <message>
         <source>Half girth neck</source>
         <comment>Full measurement name</comment>
-        <translation>Helft halswijdte</translation>
+        <translation type="vanished">Helft halswijdte</translation>
     </message>
     <message>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement name</comment>
-        <translation>Helft halswijdte voor shirts</translation>
+        <translation type="vanished">Helft halswijdte voor shirts</translation>
     </message>
     <message>
         <source>Half girth chest first</source>
         <comment>Full measurement name</comment>
-        <translation>Helft wijdte eerste borstkas</translation>
+        <translation type="vanished">Helft wijdte eerste borstkas</translation>
     </message>
     <message>
         <source>Half girth chest second</source>
         <comment>Full measurement name</comment>
-        <translation>Helft wijdte tweede borstkas</translation>
+        <translation type="vanished">Helft wijdte tweede borstkas</translation>
     </message>
     <message>
         <source>Half girth chest third</source>
         <comment>Full measurement name</comment>
-        <translation>Helft wijdte derde borstkas</translation>
+        <translation type="vanished">Helft wijdte derde borstkas</translation>
     </message>
     <message>
         <source>Half girth waist</source>
         <comment>Full measurement name</comment>
-        <translation>Helft taille wijdte</translation>
+        <translation type="vanished">Helft taille wijdte</translation>
     </message>
     <message>
         <source>Half girth hips considering protruding abdomen</source>
         <comment>Full measurement name</comment>
-        <translation>Helft wijdte heupen rekening houdend met uitpuilende onderbuik</translation>
+        <translation type="vanished">Helft wijdte heupen rekening houdend met uitpuilende onderbuik</translation>
     </message>
     <message>
         <source>Half girth hips excluding protruding abdomen</source>
         <comment>Full measurement name</comment>
-        <translation>Helft wijdte heupen zonder uitpuilende onderbuik</translation>
+        <translation type="vanished">Helft wijdte heupen zonder uitpuilende onderbuik</translation>
     </message>
     <message>
         <source>Girth knee flexed feet</source>
         <comment>Full measurement name</comment>
-        <translation>Wijdte knie gebogen voet</translation>
+        <translation type="vanished">Wijdte knie gebogen voet</translation>
     </message>
     <message>
         <source>Neck transverse diameter</source>
         <comment>Full measurement name</comment>
-        <translation>Hals doorsnee diameter</translation>
+        <translation type="vanished">Hals doorsnee diameter</translation>
     </message>
     <message>
         <source>Front slash shoulder height</source>
         <comment>Full measurement name</comment>
-        <translation>Voorkant verlaagd schouder hoogte</translation>
+        <translation type="vanished">Voorkant verlaagd schouder hoogte</translation>
     </message>
     <message>
         <source>Neck to front waist line</source>
         <comment>Full measurement name</comment>
-        <translation>Hals naar voorkant taillelijn</translation>
+        <translation type="vanished">Hals naar voorkant taillelijn</translation>
     </message>
     <message>
         <source>Hand vertical diameter</source>
         <comment>Full measurement name</comment>
-        <translation>Hand verticale diameter</translation>
+        <translation type="vanished">Hand verticale diameter</translation>
     </message>
     <message>
         <source>Neck to knee point</source>
         <comment>Full measurement name</comment>
-        <translation>Hals naar knie punt</translation>
+        <translation type="vanished">Hals naar knie punt</translation>
     </message>
     <message>
         <source>Waist to knee</source>
         <comment>Full measurement name</comment>
-        <translation>Taille naar knie</translation>
+        <translation type="vanished">Taille naar knie</translation>
     </message>
     <message>
         <source>Shoulder height</source>
         <comment>Full measurement name</comment>
-        <translation>Schouder hoogte</translation>
+        <translation type="vanished">Schouder hoogte</translation>
     </message>
     <message>
         <source>Head height</source>
         <comment>Full measurement name</comment>
-        <translation>Hoofd hoogte</translation>
+        <translation type="vanished">Hoofd hoogte</translation>
     </message>
     <message>
         <source>Body position</source>
         <comment>Full measurement name</comment>
-        <translation>Lichaams positie</translation>
+        <translation type="vanished">Lichaams positie</translation>
     </message>
     <message>
         <source>Arc behind shoulder girdle</source>
         <comment>Full measurement name</comment>
-        <translation>Boog achter de schoudergordel</translation>
+        <translation type="vanished">Boog achter de schoudergordel</translation>
     </message>
     <message>
         <source>Neck to neck base</source>
         <comment>Full measurement name</comment>
-        <translation>Hals naar hals basis</translation>
+        <translation type="vanished">Hals naar hals basis</translation>
     </message>
     <message>
         <source>Depth waist first</source>
         <comment>Full measurement name</comment>
-        <translation>Diepte eerste taille</translation>
+        <translation type="vanished">Diepte eerste taille</translation>
     </message>
     <message>
         <source>Depth waist second</source>
         <comment>Full measurement name</comment>
-        <translation>Diepte tweede taille</translation>
+        <translation type="vanished">Diepte tweede taille</translation>
+    </message>
+</context>
+<context>
+    <name>MoveDoubleLabel</name>
+    <message>
+        <source>move the first dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move the second dart label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveLabel</name>
     <message>
         <source>Move point label</source>
-        <translation>Verplaats punt merk</translation>
+        <translation type="vanished">Verplaats punt merk</translation>
+    </message>
+    <message>
+        <source>move point label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSPoint</name>
     <message>
         <source>Move single point</source>
-        <translation>Verplaats enige punt</translation>
+        <translation type="vanished">Verplaats enige punt</translation>
+    </message>
+    <message>
+        <source>move single point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSpline</name>
     <message>
         <source>Move spline</source>
-        <translation>Verplaats sleuf</translation>
+        <translation type="vanished">Verplaats sleuf</translation>
+    </message>
+    <message>
+        <source>move spline</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSplinePath</name>
     <message>
         <source>Move spline path</source>
-        <translation>Verplaats sleuf pad</translation>
+        <translation type="vanished">Verplaats sleuf pad</translation>
+    </message>
+    <message>
+        <source>move spline path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5648,6 +6553,809 @@ Do you want to save your changes?</source>
     <message>
         <source>Count steps (0 - no limit)</source>
         <translation>Tel stappen (0- geen limiet)</translation>
+    </message>
+</context>
+<context>
+    <name>Pattern_making_systems</name>
+    <message>
+        <source>Bunka</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bunka Fashion College</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fundamentals of Garment Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barnfield and Richard</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jo Barnfield and Andrew Richards</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Making Primer</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friendship/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elizabeth Friendship</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morris, K.</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karen Morris</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sewing Lingerie that Fits</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Castro</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lucia Mors de Castro</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking in Practic</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kim &amp; Uh</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Injoo Kim and Mykyung Uh</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apparel Making in Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waugh</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Norah Waugh</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corsets and Crinolines</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grimble</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frances Grimble</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fashions of the Gilded Age</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thornton&apos;s International System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ed. R. L. Shep</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Great War: Styles and Patterns of the 1910s</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hillhouse &amp; Mansfield</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dress Design: Draping and Flat Pattern Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pivnick</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Esther Kaplan Pivnick</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minister &amp; Son</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Complete Guide to Practical Cutting (1853)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strickland</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Strickland</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A Tailoring Manual</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loh &amp; Lewis</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>May Loh and Diehl Lewis</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternless Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morris, F. R.</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F. R. Morris</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ladies Garment Cutting and Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mason</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Mason</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Mason&apos;s Patternmaking Book</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kimata</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>K. Kimata</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Designer</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Master Designer (Chicago, IL)</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kopp</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Draft Basic Patterns</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ekern</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doris Ekern</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slacks Cut-to-Fit for Your Figure</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doyle</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sarah J. Doyle</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sarah&apos;s Key to Pattern Drafting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shelton</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karla J. Shelton</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Design and Sew Jeans</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique magazine (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rohr</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M. Rohr</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Moore</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dorothy Moore</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P25</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P25</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P25</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fukomoto</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sue S. Fukomoto</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International magazine (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erwin</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mabel D. Erwin</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Practical Dress Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gough</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E. L. G. Gough</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Principles of Garment Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allemong</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elizabeth M. Allemong</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>European Cut</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>McCunn</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Donald H. McCunn</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Make Your Own Sewing Patterns</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zarapkar</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zarapkar System of Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kunick</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Philip Kunick</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Handford</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jack Handford</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Davis</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>R. I. Davis</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MacLochlainn</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jason MacLochlainn</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Joseph-Armstrong</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Helen Joseph-Armstrong</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking for Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Supreme System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frederick T. Croonberg</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sugino</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Drafting Vols. I, II, III (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centre Point System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Louis Devere</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Handbook of Practical Cutting on the Centre Point System</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aldrich/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Winifred Aldrich</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric Pattern Cutting for Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aldrich/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric Pattern Cutting for Women&apos;s Wear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kershaw</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gareth Kershaw</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking for Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gilewska</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Teresa Gilewska</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern-Drafting for Fashion: The Basics</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lo</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dennic Chunman Lo</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bray</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Natalie Bray</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Knowles/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lori A. Knowles</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friendship/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Cutting for Men&apos;s Costume</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brown</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P. Clement Brown</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Art in Dress</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mitchell</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jno. J. Mitchell</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P51</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P51</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P51</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eddy</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern and Dress Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Knowles/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>American Garment Cutter</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5726,11 +7434,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Add node</source>
-        <translation>Voeg kernpunt toe</translation>
+        <translation type="vanished">Voeg kernpunt toe</translation>
     </message>
     <message>
         <source>Move detail</source>
-        <translation>Verplaats detail</translation>
+        <translation type="vanished">Verplaats detail</translation>
     </message>
     <message>
         <source>mm</source>
@@ -5756,6 +7464,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>add node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move detail</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5946,7 +7662,11 @@ Do you want to save your changes?</source>
     <name>RenamePP</name>
     <message>
         <source>Rename pattern piece</source>
-        <translation>Hernoem patroon deel</translation>
+        <translation type="vanished">Hernoem patroon deel</translation>
+    </message>
+    <message>
+        <source>rename pattern piece</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5961,21 +7681,385 @@ Do you want to save your changes?</source>
     <name>SaveDetailOptions</name>
     <message>
         <source>Save detail option</source>
-        <translation>Detail opslaan optie</translation>
+        <translation type="vanished">Detail opslaan optie</translation>
+    </message>
+    <message>
+        <source>save detail option</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SaveToolOptions</name>
     <message>
         <source>Save tool option</source>
-        <translation>Sla gereedschap optie op</translation>
+        <translation type="vanished">Sla gereedschap optie op</translation>
+    </message>
+    <message>
+        <source>save tool option</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TMainWindow</name>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measuremnts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Formule</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <translation type="unfinished">Basis waarde</translation>
+    </message>
+    <message>
+        <source>In sizes</source>
+        <translation type="unfinished">In maten</translation>
+    </message>
+    <message>
+        <source>In heights</source>
+        <translation type="unfinished">In hoogtes</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished">Details</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Naam:</translation>
+    </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Base value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In sizes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In heights:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculated value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation type="unfinished">Pad:</translation>
+    </message>
+    <message>
+        <source>Path to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show in Explorer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base size value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base height value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Given name:</source>
+        <translation type="unfinished">Voornaam:</translation>
+    </message>
+    <message>
+        <source>Family name:</source>
+        <translation type="unfinished">Achternaam:</translation>
+    </message>
+    <message>
+        <source>Birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sex:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window</source>
+        <translation type="unfinished">Raamwerk</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="unfinished">Maten</translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gradation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open individual ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Opslaan</translation>
+    </message>
+    <message>
+        <source>Save As ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">Over &amp;Qt</translation>
+    </message>
+    <message>
+        <source>About Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nieuw</translation>
+    </message>
+    <message>
+        <source>Add known</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open standard ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show information about all known measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Voorkeuren</translation>
+    </message>
+    <message>
+        <source>untitled %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file already opened in another window.</source>
+        <translation type="unfinished">Dit bestand is al geopend in een ander raamwerk.</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="unfinished">Bestandsfout</translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements (*.vst, *.vit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save file</source>
+        <translation type="unfinished">Kon bestand niet opslaan</translation>
+    </message>
+    <message>
+        <source>measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit)</source>
+        <translation type="unfinished">Individuele maten(*.vit)</translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst)</source>
+        <translation type="unfinished">Standaard maten(*.vst)</translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation type="unfinished">Opslaan als</translation>
+    </message>
+    <message>
+        <source>&amp;New Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M_%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Empty field.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished">Fout bij uitpakken: %1</translation>
+    </message>
+    <message>
+        <source>Standard measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height: </source>
+        <translation type="unfinished">Hoogte:</translation>
+    </message>
+    <message>
+        <source>Size: </source>
+        <translation type="unfinished">Maat:</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Individuele maten</translation>
+    </message>
+    <message>
+        <source>male</source>
+        <translation type="unfinished">Mannelijk</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <translation type="unfinished">Vrouwelijk</translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation type="unfinished">Niet betiteld</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsaved changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements have been modified.
+Do you want to save your changes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Empty field</source>
+        <translation type="unfinished">Leeg veld</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Waarde</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="unfinished">Open bestand</translation>
     </message>
 </context>
 <context>
     <name>TableWindow</name>
     <message>
         <source>Create a layout</source>
-        <translation>Maak een opmaak</translation>
+        <translation type="vanished">Maak een opmaak</translation>
     </message>
     <message>
         <source>toolBar</source>
@@ -5987,7 +8071,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save layout</source>
-        <translation>Sla opmaak op</translation>
+        <translation type="vanished">Sla opmaak op</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -5999,122 +8083,151 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Inzoomen</translation>
+        <translation type="vanished">Inzoomen</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Uitzoomen</translation>
+        <translation type="vanished">Uitzoomen</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation>Niet betiteld</translation>
+        <translation type="vanished">Niet betiteld</translation>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation>Svg bestanden (*.svg)</translation>
+        <translation type="vanished">Svg bestanden (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation>PDF bestanden (*.pdf)</translation>
+        <translation type="vanished">PDF bestanden (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation>Afbeeldingen (*.png)</translation>
+        <translation type="vanished">Afbeeldingen (*.png)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation>PS bestanden (*.ps)</translation>
+        <translation type="vanished">PS bestanden (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation>EPS bestanden (*.eps)</translation>
+        <translation type="vanished">EPS bestanden (*.eps)</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Bestand &apos;%1&apos; gefaald te maken! %2</translation>
+        <translation type="vanished">Bestand &apos;%1&apos; gefaald te maken! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Cruciale fout!</translation>
+        <translation type="vanished">Cruciale fout!</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation>Wavefront OBJ (*.obj)</translation>
+        <translation type="vanished">Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
-        <source>Layout pages</source>
+        <source>Edit</source>
+        <translation type="obsolete">Verander</translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="obsolete">Ctrl+S</translation>
+    </message>
+</context>
+<context>
+    <name>TapeConfigDialog</name>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished">Pas toe</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Layout</source>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">&amp;Ok</translation>
+    </message>
+    <message>
+        <source>Config Dialog</source>
+        <translation type="unfinished">Configureer dialoog</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Configuratie</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Paden</translation>
+    </message>
+</context>
+<context>
+    <name>TapeConfigurationPage</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Taal</translation>
+    </message>
+    <message>
+        <source>GUI language</source>
+        <translation type="unfinished">GUI taal</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Main toolbar</source>
+        <source>Author:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File</source>
+        <source>Book:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts</source>
+        <translation type="unfinished">Decimale gescheiden delen</translation>
+    </message>
+    <message>
+        <source>With OS options (%1)</source>
+        <translation type="unfinished">Met OS opties (%1)</translation>
+    </message>
+</context>
+<context>
+    <name>TapePathPage</name>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Open Directory</translation>
+    </message>
+    <message>
+        <source>Path that use Valentina</source>
+        <translation type="unfinished">Pad welke Valentina gebruikt</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">Standaardwaarde</translation>
     </message>
     <message>
         <source>Edit</source>
         <translation type="unfinished">Verander</translation>
     </message>
     <message>
-        <source>Toolbar print</source>
+        <source>Type</source>
+        <translation type="unfinished">Soort</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Pad</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Individuele maten</translation>
+    </message>
+    <message>
+        <source>Standard measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Save As...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+S</source>
-        <translation type="unfinished">Ctrl+S</translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back to main window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print pre&amp;view...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Print...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ctrl+P</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print to p&amp;df</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print to pdf</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PDF file (*.pdf)</source>
+        <source>Templates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6170,6 +8283,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Could not change version.</source>
         <translation>kon de versie niet veranderen.</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractPattern</name>
+    <message>
+        <source>Can&apos;t find tool in table.</source>
+        <translation type="unfinished">Kan gereedschap niet vinden in tabel</translation>
     </message>
 </context>
 <context>
@@ -6390,7 +8510,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation>Kan gereedschap niet vinden in tabel</translation>
+        <translation type="vanished">Kan gereedschap niet vinden in tabel</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
@@ -6528,6 +8648,26 @@ Do you want to save your changes?</source>
         <source>File error.</source>
         <translation>Bestandsfout</translation>
     </message>
+    <message>
+        <source>Error creating or updating point of intersection arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating point of intersection circles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating true darts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -6559,11 +8699,11 @@ Do you want to save your changes?</source>
     <name>VTableGraphicsView</name>
     <message>
         <source>can&apos;t find detail</source>
-        <translation>Kan detail niet vinden</translation>
+        <translation type="vanished">Kan detail niet vinden</translation>
     </message>
     <message>
         <source>detail found</source>
-        <translation>Detail gevonden</translation>
+        <translation type="vanished">Detail gevonden</translation>
     </message>
 </context>
 <context>
@@ -6707,6 +8847,73 @@ Do you want to save your changes?</source>
         <source>Point intersection curve and axis</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>First point</source>
+        <translation type="unfinished">Eerste punt</translation>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation type="unfinished">Tweede punt</translation>
+    </message>
+    <message>
+        <source>Arc with given length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>True darts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 1 label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 2 label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from intersection two arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from intersection two circles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VVSTConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished">Onverwachte versie &quot;%1&quot;. </translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
+        <translation type="unfinished">Fout met het heropslaan van reserve bestand: %1.</translation>
+    </message>
 </context>
 <context>
     <name>Variables</name>
@@ -6734,6 +8941,41 @@ Do you want to save your changes?</source>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
         <translation>SplPath</translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -49,43 +49,13 @@ using namespace qmu;
  * @param data pointer to a variable container.
  */
 Calculator::Calculator(const VContainer *data, MeasurementsType patternType)
-    :QmuParser(), vVarVal(nullptr), data(data), patternType(patternType)
+    :QmuFormulaBase(), vVarVal(nullptr), data(data), patternType(patternType)
 {
     SCASSERT(data != nullptr)
     InitCharacterSets();
     setAllowSubexpressions(false);//Only one expression per time
 
     SetSepForEval();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Calculator class constructor. Make easy initialization math parser.
- *
- * This constructor hide initialization variables, operators, character sets.
- * Use this constuctor to get tokens from formula. All formulas must be converted to external look.
- * Example:
- *
- * Calculator *cal = new Calculator(formula, osSeparator, false);
- * tokens = cal->GetTokens();
- * numbers = cal->GetNumbers();
- * delete cal;
- *
- * @param formula string with formula.
- * @param fromUser true if we parse formula from user
- */
-Calculator::Calculator(const QString &formula, bool osSeparator, bool fromUser)
-    :QmuParser(), vVarVal(nullptr), data(nullptr), patternType(MeasurementsType::Standard)
-{
-    InitCharacterSets();
-    setAllowSubexpressions(false);//Only one expression per time
-    SetVarFactory(AddVariable, this);
-
-    SetSepForTr(osSeparator, fromUser);
-
-    SetExpr(formula);
-    //Need run for making tokens. Don't catch exception here, because we want know if formula has error.
-    Eval();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -167,8 +137,7 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
         if (vars->contains(i.value()))
         {
             QSharedPointer<VInternalVariable> var = vars->value(i.value());
-            if ((patternType == MeasurementsType::Standard) &&
-                (var->GetType() == VarType::Measurement || var->GetType() == VarType::Increment))
+            if (patternType == MeasurementsType::Standard && var->GetType() == VarType::Measurement)
             {
                 QSharedPointer<VVariable> m = data->GetVariable<VVariable>(i.value());
                 m->SetValue(data->size(), data->height(), *data->GetPatternUnit());
@@ -200,78 +169,6 @@ void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> 
         }
         ++i;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Calculator::InitCharacterSets init character set for parser.
- *
- * QMuParser require setting character set for legal characters. Because we try make our expresion language independent
- * we set all posible unique characters from all alphabets.
- *
- */
-void Calculator::InitCharacterSets()
-{
-    //String with all unique symbols for supported alpabets.
-    // See script alphabets.py for generation and more information.
-    //Note. MSVC doen't support normal string concatenation for long string. Thats why we use QStringList in this place.
-    QStringList symbols = QStringList() << "ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥĦШҫ̆جگĮаҳѕεشԶиһνԾрυلՆӝшËՎҔPÓՖXӛӟŞӣզhëծpóӞնxßվāŁЃֆĉЋ"
-                                        << "CŬđҐГΒęҘЛΚŘġҠУGاհЫدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփїІĈЎ"
-                                        << "ґĐΗЖҙĘȚΟОҡĠآΧЦتЮұİزηжԸغοоÁՀقχцÉՈيюÑՐђӋіәťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċБӸēłΔҖ"
-                                        << "ЙŤěΜӜDСձģΤӰЩīņحҮбưԳصδHйԻŇμӲӴсՃمτƠщՋєLQŹՓŕÖYśÞaգĽæiŽիӓîqճöyջþĂօЄӦĊЌΑĒДҗј"
-                                        << "ΙȘĚМΡéĵĢФūӚΩبĪЬүќαذԲдҷιظԺмρՂфÇωوՊьÏՒTŚĻJբdçժlïӪղtպӫAւąЇčŃЏĕӯЗΖEțŮĝПΞأĥ"
-                                        << "ثĹЧΦÆӳЯIسŲԵзζԽпξكՅÄчφNMՍӌяӢՕÔWÎŝÜџёźեägխoӒյôwĶBžսüЂĄև̈ЊČƏљΓВҕĔӮΛКĜΣТҥĤک"
-                                        << "ЪƯخγвŅԴŪضλкԼĴσтÅՄنъÍՌRӕՔZÝŜbåդﻩjíլļrӵմzýռپêЅքćچЍďӱҒЕůėژșΘØҚНğńءΠFҢХħΨҪ"
-                                        << "ЭųįҶرҲеԷňعθҺнԿفπÂхՇψÊэšՏÒUəÚѝŻşҤӑâeէŐımկòuշÕúտŔ";
-
-    // Defining identifier character sets
-    DefineNameChars(QStringLiteral("0123456789_") + symbols.join(""));
-    DefineOprtChars(symbols.join("") + QStringLiteral("+-*^/?<>=#!$%&|~_"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// Factory function for creating new parser variables
-// This could as well be a function performing database queries.
-qreal* Calculator::AddVariable(const QString &a_szName, void *a_pUserData)
-{
-    Q_UNUSED(a_szName)
-    Q_UNUSED(a_pUserData)
-
-    static qreal value = 0;
-    return &value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Calculator::SetSepForEval set separators for eval. Each expression eval in internal (C) locale.
- */
-void Calculator::SetSepForEval()
-{
-    SetArgSep(';');
-    SetThousandsSep(',');
-    SetDecSep('.');
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief Calculator::SetSepForTr set separators for translation expression.
- * @param fromUser true if expression come from user (from dialog).
- */
-void Calculator::SetSepForTr(bool osSeparator, bool fromUser)
-{
-    if (fromUser)
-    {
-        if (osSeparator)
-        {
-            const QLocale loc = QLocale::system();
-            SetDecSep(loc.decimalPoint().toLatin1());
-            SetThousandsSep(loc.groupSeparator().toLatin1());
-            SetArgSep(';');
-            return;
-        }
-    }
-
-    SetSepForEval();//Same separators (internal) as for eval.
 }
 
 //---------------------------------------------------------------------------------------------------------------------

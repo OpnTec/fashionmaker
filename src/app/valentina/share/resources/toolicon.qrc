@@ -1,0 +1,32 @@
+<RCC>
+    <qresource prefix="/">
+        <file>toolicon/32x32/along_line.png</file>
+        <file>toolicon/32x32/arc.png</file>
+        <file>toolicon/32x32/arc_cut.png</file>
+        <file>toolicon/32x32/arc_intersect_axis.png</file>
+        <file>toolicon/32x32/bisector.png</file>
+        <file>toolicon/32x32/curve_intersect_axis.png</file>
+        <file>toolicon/32x32/height.png</file>
+        <file>toolicon/32x32/intersect.png</file>
+        <file>toolicon/32x32/line.png</file>
+        <file>toolicon/32x32/line_intersect_axis.png</file>
+        <file>toolicon/32x32/normal.png</file>
+        <file>toolicon/32x32/point_from_arc_and_tangent.png</file>
+        <file>toolicon/32x32/point_from_circle_and_tangent.png</file>
+        <file>toolicon/32x32/point_of_contact.png</file>
+        <file>toolicon/32x32/point_of_intersection.png</file>
+        <file>toolicon/32x32/point_of_intersection_arcs.png</file>
+        <file>toolicon/32x32/point_of_intersection_circles.png</file>
+        <file>toolicon/32x32/segment.png</file>
+        <file>toolicon/32x32/shoulder.png</file>
+        <file>toolicon/32x32/spline.png</file>
+        <file>toolicon/32x32/spline_cut_point.png</file>
+        <file>toolicon/32x32/splinePath.png</file>
+        <file>toolicon/32x32/splinePath_cut_point.png</file>
+        <file>toolicon/32x32/triangle.png</file>
+        <file>toolicon/32x32/union.png</file>
+        <file>toolicon/32x32/new_detail.png</file>
+        <file>toolicon/32x32/arc_with_length.png</file>
+        <file>toolicon/32x32/true_darts.png</file>
+    </qresource>
+</RCC>

@@ -29,50 +29,20 @@
 #ifndef VSETTINGS_H
 #define VSETTINGS_H
 
-#include <QSettings>
+#include "vcommonsettings.h"
 #include "../../libs/vlayout/vbank.h"
 
-class VSettings : public QSettings
+class VSettings : public VCommonSettings
 {
     Q_OBJECT
 public:
     VSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = 0);
 
-    static QString StandardTablesPath();
-
-    bool GetOsSeparator() const;
-    void SetOsSeparator(const bool &value);
-
-    bool GetAutosaveState() const;
-    void SetAutosaveState(const bool &value);
-
-    int  GetAutosaveTime() const;
-    void SetAutosaveTime(const int &value);
-
-    bool GetSendReportState() const;
-    void SetSendReportState(const bool &value);
-
-    QString GetLocale() const;
-    void SetLocale(const QString &value);
-
-    QString GetUnit() const;
-    void SetUnit(const QString &value);
+    virtual QString StandardTablesPath() const Q_DECL_OVERRIDE;
 
     QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
-
-    bool GetConfirmItemDelete() const;
-    void SetConfirmItemDelete(const bool &value);
-
-    bool GetToolBarStyle() const;
-    void SetToolBarStyle(const bool &value);
-
-    QString GetPathIndividualMeasurements() const;
-    void SetPathIndividualMeasurements(const QString &value);
-
-    QString GetPathStandardMeasurements() const;
-    void SetPathStandardMeasurements(const QString &value);
 
     QString GetPathPattern() const;
     void SetPathPattern(const QString &value);
@@ -80,29 +50,8 @@ public:
     QString GetPathLayout() const;
     void SetPathLayout(const QString &value);
 
-    QString GetUser() const;
-    void SetUser(const QString &value);
-
     bool GetGraphicalOutput() const;
     void SetGraphicalOutput(const bool &value);
-
-    int  GetUndoCount() const;
-    void SetUndoCount(const int &value);
-
-    QStringList GetRecentFileList() const;
-    void SetRecentFileList(const QStringList &value);
-
-    QStringList GetRestoreFileList() const;
-    void SetRestoreFileList(const QStringList &value);
-
-    QByteArray GetGeometry() const;
-    void SetGeometry(const QByteArray &value);
-
-    QByteArray GetWindowState() const;
-    void SetWindowState(const QByteArray &value);
-
-    QByteArray GetToolbarsState() const;
-    void SetToolbarsState(const QByteArray &value);
 
     QString GetServer() const;
     void SetServer(const QString &value);
@@ -171,30 +120,12 @@ public:
 
 private:
     Q_DISABLE_COPY(VSettings)
-    static const QString SettingConfigurationOsSeparator;
-    static const QString SettingConfigurationAutosaveState;
-    static const QString SettingConfigurationAutosaveTime;
-    static const QString SettingConfigurationSendReportState;
-    static const QString SettingConfigurationLocale;
-    static const QString SettingConfigurationUnit;
     static const QString SettingConfigurationLabelLanguage;
-    static const QString SettingConfigurationConfirmItemDeletion;
-    static const QString SettingConfigurationToolBarStyle;
 
-    static const QString SettingPathsIndividualMeasurements;
-    static const QString SettingPathsStandardMeasurements;
     static const QString SettingPathsPattern;
     static const QString SettingPathsLayout;
 
-    static const QString SettingPatternUser;
     static const QString SettingPatternGraphicalOutput;
-    static const QString SettingPatternUndo;
-
-    static const QString SettingGeneralRecentFileList;
-    static const QString SettingGeneralRestoreFileList;
-    static const QString SettingGeneralGeometry;
-    static const QString SettingGeneralWindowState;
-    static const QString SettingGeneralToolbarsState;
 
     static const QString SettingCommunityServer;
     static const QString SettingCommunityServerSecure;

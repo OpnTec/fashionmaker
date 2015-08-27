@@ -29,6 +29,10 @@
 #include "vabstractapplication.h"
 #include "../vmisc/def.h"
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+#   include <QLockFile>
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     :QApplication(argc, argv),
@@ -67,27 +71,14 @@ void VAbstractApplication::setPatternUnit(const Unit &patternUnit)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief OpenSettings get acsses to application settings.
- *
- * Because we can create object in constructor we open file separately.
- */
-void VAbstractApplication::OpenSettings()
-{
-    settings = new VSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
-                             QApplication::applicationName(), this);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief getSettings hide settings constructor.
  * @return pointer to class for acssesing to settings in ini file.
  */
-VSettings *VAbstractApplication::Settings()
+VCommonSettings *VAbstractApplication::Settings()
 {
     SCASSERT(settings != nullptr);
     return settings;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 QGraphicsScene *VAbstractApplication::getCurrentScene() const
@@ -125,3 +116,43 @@ double VAbstractApplication::fromPixel(double pix) const
 {
     return FromPixel(pix, _patternUnit);
 }
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractApplication::TryLock(QLockFile *lock)
+{
+    if (lock == nullptr)
+    {
+        return false;
+    }
+
+    if (lock->tryLock())
+    {
+        return true;
+    }
+    else
+    {
+        if (lock->error() == QLockFile::LockFailedError)
+        {
+            // This happens if a stale lock file exists and another process uses that PID.
+            // Try removing the stale file, which will fail if a real process is holding a
+            // file-level lock. A false error is more problematic than not locking properly
+            // on corner-case systems.
+            if (lock->removeStaleLockFile() == false || lock->tryLock() == false)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return false;
+    }
+}
+
+#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)

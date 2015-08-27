@@ -35,20 +35,4 @@ enum class Draw : char { Calculation, Modeling, Layout };
 enum class GOType : char { Point, Arc, Spline, SplinePath, Unknown };
 enum class SplinePointPosition : char { FirstPoint, LastPoint };
 
-// variables name
-extern const QString arc_;
-extern const QString spl_;
-extern const QString splPath;
-extern const QString radius_V;
-extern const QString radiusArc_;
-extern const QString angle1_V;
-extern const QString angle2_V;
-extern const QString angle1Arc_;
-extern const QString angle2Arc_;
-extern const QString angle1Spl_;
-extern const QString angle2Spl_;
-extern const QString angle1SplPath;
-extern const QString angle2SplPath;
-
-
 #endif // VGEOMETRYDEF_H

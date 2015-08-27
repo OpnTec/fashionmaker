@@ -59,6 +59,22 @@ private:
     void ToV0_1_2();
     void ToV0_1_3();
     void ToV0_1_4();
+    void ToV0_2_0();
+
+    void          TagUnitToV0_2_0();
+    void          TagIncrementToV0_2_0();
+    void          TagMeasurementsToV0_2_0();
+
+    QSet<QString> FixIncrementsToV0_2_0();
+    QString       FixIncrementInFormulaToV0_2_0(const QString &formula, const QSet<QString> &names);
+    void          FixPointExpressionsToV0_2_0(const QSet<QString> &names);
+    void          FixArcExpressionsToV0_2_0(const QSet<QString> &names);
+    void          FixPathPointExpressionsToV0_2_0(const QSet<QString> &names);
+
+    QString MUnitV0_1_4() const;
+    QDomElement TagMeasurementsV0_1_4() const;
+    QDomElement TagIncrementsV0_1_4() const;
+    QStringList ListPathPointExpressionsV0_1_4() const;
 };
 
 #endif // VPATTERNCONVERTER_H

@@ -14,7 +14,7 @@
    <string>Point at intersection of arc and line</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../../app/share/resources/icon.qrc">
+   <iconset resource="../../../vmisc/share/resources/icon.qrc">
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <property name="locale">
@@ -92,7 +92,7 @@
         <string notr="true">...</string>
        </property>
        <property name="icon">
-        <iconset resource="../../../../app/share/resources/icon.qrc">
+        <iconset resource="../../../vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/24x24/fx.png</normaloff>:/icon/24x24/fx.png</iconset>
        </property>
        <property name="iconSize">
@@ -109,7 +109,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="../../../../app/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
+        <pixmap resource="../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
        </property>
       </widget>
      </item>
@@ -340,7 +340,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../../app/share/resources/icon.qrc"/>
+  <include location="../../../vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -5,28 +5,44 @@
     <name>AddDet</name>
     <message>
         <source>Add detail</source>
-        <translation>Добавить деталь</translation>
+        <translation type="vanished">Добавить деталь</translation>
+    </message>
+    <message>
+        <source>add detail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddPatternPiece</name>
     <message>
         <source>Add pattern piece %1</source>
-        <translation>Добавить лекало %1</translation>
+        <translation type="vanished">Добавить лекало %1</translation>
+    </message>
+    <message>
+        <source>add pattern piece %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddToCalc</name>
     <message>
         <source>Add object</source>
-        <translation>Добавить объект</translation>
+        <translation type="vanished">Добавить объект</translation>
+    </message>
+    <message>
+        <source>add object</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddUnionDetails</name>
     <message>
         <source>Add union details</source>
-        <translation>Добавить объединение деталей</translation>
+        <translation type="vanished">Добавить объединение деталей</translation>
+    </message>
+    <message>
+        <source>add union details</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -222,21 +238,33 @@
     <name>DelTool</name>
     <message>
         <source>Delete tool</source>
-        <translation>Удалить инструмент</translation>
+        <translation type="vanished">Удалить инструмент</translation>
+    </message>
+    <message>
+        <source>delete tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeleteDetail</name>
     <message>
         <source>Delete tool</source>
-        <translation>Удалить инструмент</translation>
+        <translation type="vanished">Удалить инструмент</translation>
+    </message>
+    <message>
+        <source>delete tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeletePatternPiece</name>
     <message>
         <source>Delete pattern piece %1</source>
-        <translation>Удалить лекало %1</translation>
+        <translation type="vanished">Удалить лекало %1</translation>
+    </message>
+    <message>
+        <source>delete pattern piece %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -276,6 +304,45 @@
     <message>
         <source>Build revision:</source>
         <translation>Резвизия:</translation>
+    </message>
+</context>
+<context>
+    <name>DialogAboutTape</name>
+    <message>
+        <source>About Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tape version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Build revision:</source>
+        <translation type="unfinished">Резвизия:</translation>
+    </message>
+    <message>
+        <source>This program is part of Valentina project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Build revision: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built on %3 at %4</source>
+        <translation type="unfinished">Создано %3 в %4</translation>
+    </message>
+    <message>
+        <source>Web site : %1</source>
+        <translation type="unfinished">Веб сайт : %1</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished">Предупреждение</translation>
+    </message>
+    <message>
+        <source>Cannot open your default browser</source>
+        <translation type="unfinished">Не могу открыть браузер по умолчанию</translation>
     </message>
 </context>
 <context>
@@ -574,6 +641,81 @@
     <message>
         <source>Edit second angle</source>
         <translation>Редактировать второй угол</translation>
+    </message>
+</context>
+<context>
+    <name>DialogArcWithLength</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Диалог</translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Радиус</translation>
+    </message>
+    <message>
+        <source>Value of radius</source>
+        <translation type="unfinished">Значение радиуса</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First angle</source>
+        <translation type="unfinished">Первый угол</translation>
+    </message>
+    <message>
+        <source>Value of first angle</source>
+        <translation type="unfinished">Значение первого угла</translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Длина</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="unfinished">Длина дуги</translation>
+    </message>
+    <message>
+        <source>Center point</source>
+        <translation type="unfinished">Центральная точка</translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color</source>
+        <translation type="unfinished">Цвет</translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished">Редактировать радиус</translation>
+    </message>
+    <message>
+        <source>Edit the first angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit the arc length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished">Радиус не может иметь значение меньше нуля</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be equal 0</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1209,6 +1351,10 @@
         <source>Seam allowance tool</source>
         <translation>Деталь</translation>
     </message>
+    <message>
+        <source>All objects in path should follow in clockwise direction.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1315,6 +1461,30 @@
     <message>
         <source>Line Angle</source>
         <translation>Угол линии</translation>
+    </message>
+    <message>
+        <source>Radius of arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angles of arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angles of curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve angle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1609,6 +1779,30 @@
         <source>Triangle: axis %1_%2, points %3 and %4</source>
         <translation>Треугольник: ось %1_%2, точки %3 и %4</translation>
     </message>
+    <message>
+        <source>Arc with center in point %1 and length %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point of arcs intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point of circles intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Correction the dart %1_%2_%3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -1710,7 +1904,7 @@
     </message>
     <message>
         <source>Curves</source>
-        <translation>Кривые</translation>
+        <translation type="vanished">Кривые</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1722,7 +1916,7 @@
     </message>
     <message>
         <source>Arcs</source>
-        <translation>Дуги</translation>
+        <translation type="vanished">Дуги</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -1823,6 +2017,38 @@
     <message>
         <source>Data successfully saved.</source>
         <translation>Данные успешно сохранены.</translation>
+    </message>
+    <message>
+        <source>Lines angles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Угол</translation>
+    </message>
+    <message>
+        <source>Lengths curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angles curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lengths arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radiuses arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Радиус</translation>
+    </message>
+    <message>
+        <source>Angles arcs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1936,7 +2162,7 @@
     </message>
     <message>
         <source>Wrong paper size</source>
-        <translation>Не правильный размер листа</translation>
+        <translation type="vanished">Не правильный размер листа</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -1999,7 +2225,7 @@
     </message>
     <message>
         <source>Layout width:</source>
-        <translation>Ширина раскладки:</translation>
+        <translation type="vanished">Ширина раскладки:</translation>
     </message>
     <message>
         <source>Shift length:</source>
@@ -2072,6 +2298,18 @@
     <message>
         <source>Roll 44in </source>
         <translation>Рулон 44 дюйма</translation>
+    </message>
+    <message>
+        <source>Unite pages (if possible)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gap width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save length of the sheet</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2276,6 +2514,102 @@
     </message>
 </context>
 <context>
+    <name>DialogMDataBase</name>
+    <message>
+        <source>Measurement data base</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="unfinished">Мерки</translation>
+    </message>
+    <message>
+        <source>Direct Height</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Direct Width</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indentation</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circumference and Arc</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bust</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balance</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arm</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leg</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Crotch and Rise</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hand</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Foot</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Head</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Men &amp; Tailoring</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Historical &amp; Specialty</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking measurements</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogMeasurements</name>
     <message>
         <source>Measurements</source>
@@ -2300,6 +2634,57 @@
     <message>
         <source>Use for creation pattern individual measurements</source>
         <translation>Лекало с индивидуальных мерок</translation>
+    </message>
+</context>
+<context>
+    <name>DialogNewMeasurements</name>
+    <message>
+        <source>New measurement file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual</source>
+        <translation type="unfinished">Индивиндуальные</translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="unfinished">Сантиметры</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Миллиметры</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Дюймы</translation>
     </message>
 </context>
 <context>
@@ -2756,6 +3141,88 @@
     </message>
 </context>
 <context>
+    <name>DialogPointFromArcAndTangent</name>
+    <message>
+        <source>Point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished">Имя точки</translation>
+    </message>
+    <message>
+        <source>Tangent point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc</source>
+        <translation type="unfinished">Дуга</translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogPointFromCircleAndTangent</name>
+    <message>
+        <source>Point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius</source>
+        <translation type="unfinished">Радиус</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished">Имя точки</translation>
+    </message>
+    <message>
+        <source>Center of the circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tangent point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit radius</source>
+        <translation type="unfinished">Редактировать радиус</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished">Радиус не может иметь значение меньше нуля</translation>
+    </message>
+</context>
+<context>
     <name>DialogPointOfContact</name>
     <message>
         <source>Point of contact</source>
@@ -2923,6 +3390,142 @@
     <message>
         <source>Select point for Y value (horizontal)</source>
         <translation>Выберите точку по горозинтали</translation>
+    </message>
+</context>
+<context>
+    <name>DialogPointOfIntersectionArcs</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Диалог</translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished">Имя точки</translation>
+    </message>
+    <message>
+        <source>First arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected arc</source>
+        <translation type="unfinished">Выбраная дуга</translation>
+    </message>
+    <message>
+        <source>Second arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select second an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogPointOfIntersectionCircles</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Диалог</translation>
+    </message>
+    <message>
+        <source>Radius of the first circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius of the second circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label</source>
+        <translation type="unfinished">Имя точки</translation>
+    </message>
+    <message>
+        <source>Center of the first circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point of center of arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the second circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select second circle center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
+    </message>
+    <message>
+        <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished">Радиус не может иметь значение меньше нуля</translation>
+    </message>
+</context>
+<context>
+    <name>DialogSaveLAyout</name>
+    <message>
+        <source>Save Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation type="unfinished">Путь:</translation>
+    </message>
+    <message>
+        <source>File format:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogSaveLayout</name>
+    <message>
+        <source>Name conflict</source>
+        <translation type="unfinished">Конфликт имени</translation>
+    </message>
+    <message>
+        <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3286,6 +3889,14 @@
         <source>Line Angle</source>
         <translation type="vanished">Угол линии</translation>
     </message>
+    <message>
+        <source>First point</source>
+        <translation type="unfinished">Первая точка</translation>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation type="unfinished">Вторая точка</translation>
+    </message>
 </context>
 <context>
     <name>DialogTriangle</name>
@@ -3348,6 +3959,73 @@
     <message>
         <source>Second point of line</source>
         <translation>Вторая точка линии</translation>
+    </message>
+</context>
+<context>
+    <name>DialogTrueDarts</name>
+    <message>
+        <source>True darts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First base point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of angle</source>
+        <translation type="unfinished">Первая точка угла</translation>
+    </message>
+    <message>
+        <source>Second base point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of angle</source>
+        <translation type="unfinished">Вторая точка угла</translation>
+    </message>
+    <message>
+        <source>First dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point of angle</source>
+        <translation type="unfinished">Третья точка угла</translation>
+    </message>
+    <message>
+        <source>Second dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show line from second point to this point</source>
+        <translation type="unfinished">Показать линию с первой точки до этой</translation>
+    </message>
+    <message>
+        <source>Third dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First new dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second new dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the second base point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the first dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the second dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the third dart point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3562,6 +4240,11 @@
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation>avg</translation>
+    </message>
+    <message>
+        <source>fmod</source>
+        <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4245,7 +4928,7 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
     </message>
     <message>
         <source>Unsaved change</source>
-        <translation>Не сохраненные изменения</translation>
+        <translation type="vanished">Не сохраненные изменения</translation>
     </message>
     <message>
         <source>The pattern has been modified.
@@ -4381,7 +5064,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>/pattern.val</source>
-        <translation>/лекало.val</translation>
+        <translation type="vanished">/лекало.val</translation>
     </message>
     <message>
         <source>Can&apos;t open pattern file.</source>
@@ -4539,13 +5222,216 @@ Do you want to save your changes?</source>
         <source>F2</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc with given length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout pages</source>
+        <translation type="unfinished">Страницы роскладки</translation>
+    </message>
+    <message>
+        <source>Save as PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save original layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as tiled PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split and save a layout into smaller pages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print original a layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split and print a layout into smaller pages (for regular printers)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview original layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview tailed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview tailed layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export original layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first circle center </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point on tangent </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select point of the center of the arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the first base line point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Detail mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsaved changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindowsNoGUI</name>
+    <message>
+        <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For previewing multypage document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For printing multypages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Svg files (*.svg)</source>
+        <translation type="unfinished">Svg файлы (*.svg)</translation>
+    </message>
+    <message>
+        <source>PDF files (*.pdf)</source>
+        <translation type="unfinished">Pdf файлы (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Images (*.png)</source>
+        <translation type="unfinished">Изображения (*.png)</translation>
+    </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="unfinished">Wavefront OBJ (*.obj)</translation>
+    </message>
+    <message>
+        <source>PS files (*.ps)</source>
+        <translation type="unfinished">Ps файл (*.ps)</translation>
+    </message>
+    <message>
+        <source>EPS files (*.eps)</source>
+        <translation type="unfinished">EPS файл (*.eps)</translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="unfinished">Создание файла &apos;%1&apos; не удалось! %2</translation>
+    </message>
+    <message>
+        <source>Critical error!</source>
+        <translation type="unfinished">Критическая ошибка!</translation>
+    </message>
+    <message>
+        <source>Print to pdf</source>
+        <translation type="unfinished">Печать в pdf</translation>
+    </message>
+    <message>
+        <source>PDF file (*.pdf)</source>
+        <translation type="unfinished">PDF файл (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Print error</source>
+        <translation type="unfinished">Ошибка печати</translation>
+    </message>
+    <message>
+        <source>Cannot proceed because there are no available printers in your system.</source>
+        <translation type="unfinished">Не удается выполнить, на вашей системе нету доступных принтеров.</translation>
+    </message>
+    <message>
+        <source>unnamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout is stale.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Measurements</name>
     <message>
         <source>head_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Огол</translation>
+        <translation type="vanished">Огол</translation>
     </message>
     <message>
         <source>Head girth</source>
@@ -4560,12 +5446,12 @@ Do you want to save your changes?</source>
     <message>
         <source>mid_neck_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>mid_neck_girth</translation>
+        <translation type="vanished">mid_neck_girth</translation>
     </message>
     <message>
         <source>neck_base_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ош</translation>
+        <translation type="vanished">Ош</translation>
     </message>
     <message>
         <source>Neck Base girth</source>
@@ -4580,17 +5466,17 @@ Do you want to save your changes?</source>
     <message>
         <source>head_and_neck_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>head_and_neck_length</translation>
+        <translation type="vanished">head_and_neck_length</translation>
     </message>
     <message>
         <source>center_front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дпт</translation>
+        <translation type="vanished">Дпт</translation>
     </message>
     <message>
         <source>center_back_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дтс</translation>
+        <translation type="vanished">Дтс</translation>
     </message>
     <message>
         <source>Back Center length</source>
@@ -4605,7 +5491,7 @@ Do you want to save your changes?</source>
     <message>
         <source>shoulder_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Шп</translation>
+        <translation type="vanished">Шп</translation>
     </message>
     <message>
         <source>Shoulder length</source>
@@ -4620,7 +5506,7 @@ Do you want to save your changes?</source>
     <message>
         <source>side_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дб</translation>
+        <translation type="vanished">Дб</translation>
     </message>
     <message>
         <source>Side Waist length</source>
@@ -4635,17 +5521,17 @@ Do you want to save your changes?</source>
     <message>
         <source>trunk_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>trunk_length</translation>
+        <translation type="vanished">trunk_length</translation>
     </message>
     <message>
         <source>shoulder_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>shoulder_girth</translation>
+        <translation type="vanished">shoulder_girth</translation>
     </message>
     <message>
         <source>upper_chest_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ОгI</translation>
+        <translation type="vanished">ОгI</translation>
     </message>
     <message>
         <source>Upper Chest girth</source>
@@ -4660,7 +5546,7 @@ Do you want to save your changes?</source>
     <message>
         <source>bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ОгII</translation>
+        <translation type="vanished">ОгII</translation>
     </message>
     <message>
         <source>Bust girth</source>
@@ -4675,7 +5561,7 @@ Do you want to save your changes?</source>
     <message>
         <source>under_bust_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ОгIII</translation>
+        <translation type="vanished">ОгIII</translation>
     </message>
     <message>
         <source>Under Bust girth</source>
@@ -4690,7 +5576,7 @@ Do you want to save your changes?</source>
     <message>
         <source>waist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>От</translation>
+        <translation type="vanished">От</translation>
     </message>
     <message>
         <source>Waist girth</source>
@@ -4705,12 +5591,12 @@ Do you want to save your changes?</source>
     <message>
         <source>high_hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>high_hip_girth</translation>
+        <translation type="vanished">high_hip_girth</translation>
     </message>
     <message>
         <source>hip_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Об</translation>
+        <translation type="vanished">Об</translation>
     </message>
     <message>
         <source>Hip girth</source>
@@ -4725,7 +5611,7 @@ Do you want to save your changes?</source>
     <message>
         <source>upper_front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Шг1</translation>
+        <translation type="vanished">Шг1</translation>
     </message>
     <message>
         <source>Front Upper Chest width</source>
@@ -4740,7 +5626,7 @@ Do you want to save your changes?</source>
     <message>
         <source>front_chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Шг2</translation>
+        <translation type="vanished">Шг2</translation>
     </message>
     <message>
         <source>Front Chest width</source>
@@ -4755,7 +5641,7 @@ Do you want to save your changes?</source>
     <message>
         <source>across_front_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>dпл</translation>
+        <translation type="vanished">dпл</translation>
     </message>
     <message>
         <source>Front Across Shoulder width</source>
@@ -4770,17 +5656,17 @@ Do you want to save your changes?</source>
     <message>
         <source>across_back_shoulder_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>across_back_shoulder_width</translation>
+        <translation type="vanished">across_back_shoulder_width</translation>
     </message>
     <message>
         <source>upper_back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>upper_back_width</translation>
+        <translation type="vanished">upper_back_width</translation>
     </message>
     <message>
         <source>back_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Шс</translation>
+        <translation type="vanished">Шс</translation>
     </message>
     <message>
         <source>Back Chest width</source>
@@ -4795,7 +5681,7 @@ Do you want to save your changes?</source>
     <message>
         <source>bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Цг</translation>
+        <translation type="vanished">Цг</translation>
     </message>
     <message>
         <source>BustPoint to BustPoint</source>
@@ -4810,12 +5696,12 @@ Do you want to save your changes?</source>
     <message>
         <source>halter_bustpoint_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>halter_bustpoint_to_bustpoint</translation>
+        <translation type="vanished">halter_bustpoint_to_bustpoint</translation>
     </message>
     <message>
         <source>neck_to_bustpoint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вг</translation>
+        <translation type="vanished">Вг</translation>
     </message>
     <message>
         <source>NeckPoint to BustPoint</source>
@@ -4830,12 +5716,12 @@ Do you want to save your changes?</source>
     <message>
         <source>crotch_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>crotch_length</translation>
+        <translation type="vanished">crotch_length</translation>
     </message>
     <message>
         <source>rise_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дпс</translation>
+        <translation type="vanished">Дпс</translation>
     </message>
     <message>
         <source>Rise height</source>
@@ -4850,142 +5736,142 @@ Do you want to save your changes?</source>
     <message>
         <source>shoulder_drop</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>shoulder_drop</translation>
+        <translation type="vanished">shoulder_drop</translation>
     </message>
     <message>
         <source>shoulder_slope_degrees</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>shoulder_slope_degrees</translation>
+        <translation type="vanished">shoulder_slope_degrees</translation>
     </message>
     <message>
         <source>front_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>front_shoulder_slope_length</translation>
+        <translation type="vanished">front_shoulder_slope_length</translation>
     </message>
     <message>
         <source>back_shoulder_slope_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>back_shoulder_slope_length</translation>
+        <translation type="vanished">back_shoulder_slope_length</translation>
     </message>
     <message>
         <source>front_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>front_shoulder_to_waist_length</translation>
+        <translation type="vanished">front_shoulder_to_waist_length</translation>
     </message>
     <message>
         <source>back_shoulder_to_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>back_shoulder_to_waist_length</translation>
+        <translation type="vanished">back_shoulder_to_waist_length</translation>
     </message>
     <message>
         <source>front_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>front_neck_arc</translation>
+        <translation type="vanished">front_neck_arc</translation>
     </message>
     <message>
         <source>back_neck_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>back_neck_arc</translation>
+        <translation type="vanished">back_neck_arc</translation>
     </message>
     <message>
         <source>front_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>front_upper_chest_arc</translation>
+        <translation type="vanished">front_upper_chest_arc</translation>
     </message>
     <message>
         <source>back_upper_chest_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>back_upper_chest_arc</translation>
+        <translation type="vanished">back_upper_chest_arc</translation>
     </message>
     <message>
         <source>front_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>front_waist_arc</translation>
+        <translation type="vanished">front_waist_arc</translation>
     </message>
     <message>
         <source>back_waist_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>back_waist_arc</translation>
+        <translation type="vanished">back_waist_arc</translation>
     </message>
     <message>
         <source>front_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>front_upper_hip_arc</translation>
+        <translation type="vanished">front_upper_hip_arc</translation>
     </message>
     <message>
         <source>back_upper_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>back_upper_hip_arc</translation>
+        <translation type="vanished">back_upper_hip_arc</translation>
     </message>
     <message>
         <source>front_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>front_hip_arc</translation>
+        <translation type="vanished">front_hip_arc</translation>
     </message>
     <message>
         <source>back_hip_arc</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>back_hip_arc</translation>
+        <translation type="vanished">back_hip_arc</translation>
     </message>
     <message>
         <source>chest_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>chest_slope</translation>
+        <translation type="vanished">chest_slope</translation>
     </message>
     <message>
         <source>back_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>back_slope</translation>
+        <translation type="vanished">back_slope</translation>
     </message>
     <message>
         <source>front_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>front_waist_slope</translation>
+        <translation type="vanished">front_waist_slope</translation>
     </message>
     <message>
         <source>back_waist_slope</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>back_waist_slope</translation>
+        <translation type="vanished">back_waist_slope</translation>
     </message>
     <message>
         <source>front_neck_to_upper_chest_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>front_neck_to_upper_chest_height</translation>
+        <translation type="vanished">front_neck_to_upper_chest_height</translation>
     </message>
     <message>
         <source>front_neck_to_bust_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>front_neck_to_bust_height</translation>
+        <translation type="vanished">front_neck_to_bust_height</translation>
     </message>
     <message>
         <source>front_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дпер</translation>
+        <translation type="vanished">Дпер</translation>
     </message>
     <message>
         <source>front_waist_to_lower_breast</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дпг</translation>
+        <translation type="vanished">Дпг</translation>
     </message>
     <message>
         <source>back_waist_to_upper_chest</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дст</translation>
+        <translation type="vanished">Дст</translation>
     </message>
     <message>
         <source>strap_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дбр</translation>
+        <translation type="vanished">Дбр</translation>
     </message>
     <message>
         <source>armscye_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>armscye_girth</translation>
+        <translation type="vanished">armscye_girth</translation>
     </message>
     <message>
         <source>elbow_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Олк</translation>
+        <translation type="vanished">Олк</translation>
     </message>
     <message>
         <source>Elbow Girth</source>
@@ -5000,7 +5886,7 @@ Do you want to save your changes?</source>
     <message>
         <source>upper_arm_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Оп</translation>
+        <translation type="vanished">Оп</translation>
     </message>
     <message>
         <source>Upperarm Girth</source>
@@ -5015,7 +5901,7 @@ Do you want to save your changes?</source>
     <message>
         <source>wrist_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Озап</translation>
+        <translation type="vanished">Озап</translation>
     </message>
     <message>
         <source>Wrist girth</source>
@@ -5030,12 +5916,12 @@ Do you want to save your changes?</source>
     <message>
         <source>scye_depth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>scye_depth</translation>
+        <translation type="vanished">scye_depth</translation>
     </message>
     <message>
         <source>shoulder_and_arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дзап</translation>
+        <translation type="vanished">Дзап</translation>
     </message>
     <message>
         <source>Shoulder and Arm length</source>
@@ -5050,17 +5936,17 @@ Do you want to save your changes?</source>
     <message>
         <source>underarm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Втр</translation>
+        <translation type="vanished">Втр</translation>
     </message>
     <message>
         <source>cervicale_to_wrist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>cervicale_to_wrist_length</translation>
+        <translation type="vanished">cervicale_to_wrist_length</translation>
     </message>
     <message>
         <source>shoulder_to_elbow_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дрлок</translation>
+        <translation type="vanished">Дрлок</translation>
     </message>
     <message>
         <source>Elbow length</source>
@@ -5075,7 +5961,7 @@ Do you want to save your changes?</source>
     <message>
         <source>arm_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дрзап</translation>
+        <translation type="vanished">Дрзап</translation>
     </message>
     <message>
         <source>Arm length</source>
@@ -5090,17 +5976,17 @@ Do you want to save your changes?</source>
     <message>
         <source>hand_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hand_width</translation>
+        <translation type="vanished">hand_width</translation>
     </message>
     <message>
         <source>hand_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hand_length</translation>
+        <translation type="vanished">hand_length</translation>
     </message>
     <message>
         <source>hand_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Окис</translation>
+        <translation type="vanished">Окис</translation>
     </message>
     <message>
         <source>Hand girth</source>
@@ -5115,7 +6001,7 @@ Do you want to save your changes?</source>
     <message>
         <source>thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Обед</translation>
+        <translation type="vanished">Обед</translation>
     </message>
     <message>
         <source>Thigh girth</source>
@@ -5130,12 +6016,12 @@ Do you want to save your changes?</source>
     <message>
         <source>mid_thigh_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>mid_thigh_girth</translation>
+        <translation type="vanished">mid_thigh_girth</translation>
     </message>
     <message>
         <source>knee_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ок</translation>
+        <translation type="vanished">Ок</translation>
     </message>
     <message>
         <source>Knee girth</source>
@@ -5150,7 +6036,7 @@ Do you want to save your changes?</source>
     <message>
         <source>calf_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ои</translation>
+        <translation type="vanished">Ои</translation>
     </message>
     <message>
         <source>Calf girth</source>
@@ -5165,7 +6051,7 @@ Do you want to save your changes?</source>
     <message>
         <source>ankle_girth</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ощ</translation>
+        <translation type="vanished">Ощ</translation>
     </message>
     <message>
         <source>Ankle girth</source>
@@ -5180,7 +6066,7 @@ Do you want to save your changes?</source>
     <message>
         <source>knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вк</translation>
+        <translation type="vanished">Вк</translation>
     </message>
     <message>
         <source>Knee height</source>
@@ -5195,27 +6081,27 @@ Do you want to save your changes?</source>
     <message>
         <source>ankle_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ankle_height</translation>
+        <translation type="vanished">ankle_height</translation>
     </message>
     <message>
         <source>foot_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>foot_width</translation>
+        <translation type="vanished">foot_width</translation>
     </message>
     <message>
         <source>foot_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>foot_length</translation>
+        <translation type="vanished">foot_length</translation>
     </message>
     <message>
         <source>height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Р</translation>
+        <translation type="vanished">Р</translation>
     </message>
     <message>
         <source>cervicale_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вшт</translation>
+        <translation type="vanished">Вшт</translation>
     </message>
     <message>
         <source>Nape height</source>
@@ -5230,12 +6116,12 @@ Do you want to save your changes?</source>
     <message>
         <source>cervicale_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>cervicale_to_knee_height</translation>
+        <translation type="vanished">cervicale_to_knee_height</translation>
     </message>
     <message>
         <source>waist_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Влт</translation>
+        <translation type="vanished">Влт</translation>
     </message>
     <message>
         <source>Waist height</source>
@@ -5250,12 +6136,12 @@ Do you want to save your changes?</source>
     <message>
         <source>high_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>high_hip_height</translation>
+        <translation type="vanished">high_hip_height</translation>
     </message>
     <message>
         <source>hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>hip_height</translation>
+        <translation type="vanished">hip_height</translation>
     </message>
     <message>
         <source>Hip side to Floor</source>
@@ -5265,17 +6151,17 @@ Do you want to save your changes?</source>
     <message>
         <source>waist_to_hip_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>waist_to_hip_height</translation>
+        <translation type="vanished">waist_to_hip_height</translation>
     </message>
     <message>
         <source>waist_to_knee_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>waist_to_knee_height</translation>
+        <translation type="vanished">waist_to_knee_height</translation>
     </message>
     <message>
         <source>crotch_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дн</translation>
+        <translation type="vanished">Дн</translation>
     </message>
     <message>
         <source>Crotch height/Inseam</source>
@@ -5290,7 +6176,7 @@ Do you want to save your changes?</source>
     <message>
         <source>size</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Сг</translation>
+        <translation type="vanished">Сг</translation>
     </message>
     <message>
         <source>Size</source>
@@ -5305,7 +6191,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height_front_neck_base_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Втос</translation>
+        <translation type="vanished">Втос</translation>
     </message>
     <message>
         <source>Height front neck base point</source>
@@ -5320,7 +6206,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height_base_neck_side_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Втош</translation>
+        <translation type="vanished">Втош</translation>
     </message>
     <message>
         <source>Height base neck side point</source>
@@ -5335,7 +6221,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height_shoulder_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впт</translation>
+        <translation type="vanished">Впт</translation>
     </message>
     <message>
         <source>Height shoulder point</source>
@@ -5350,7 +6236,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height_nipple_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вст</translation>
+        <translation type="vanished">Вст</translation>
     </message>
     <message>
         <source>Height nipple point</source>
@@ -5365,7 +6251,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height_back_angle_axilla</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Взу</translation>
+        <translation type="vanished">Взу</translation>
     </message>
     <message>
         <source>Height back angle axilla</source>
@@ -5380,7 +6266,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height_scapular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Влоп</translation>
+        <translation type="vanished">Влоп</translation>
     </message>
     <message>
         <source>Height scapular point</source>
@@ -5395,7 +6281,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height_under_buttock_folds</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впс</translation>
+        <translation type="vanished">Впс</translation>
     </message>
     <message>
         <source>Height under buttock folds</source>
@@ -5410,7 +6296,7 @@ Do you want to save your changes?</source>
     <message>
         <source>hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ОбI</translation>
+        <translation type="vanished">ОбI</translation>
     </message>
     <message>
         <source>Hips excluding protruding abdomen</source>
@@ -5425,7 +6311,7 @@ Do you want to save your changes?</source>
     <message>
         <source>girth_foot_instep</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ос</translation>
+        <translation type="vanished">Ос</translation>
     </message>
     <message>
         <source>Girth foot instep</source>
@@ -5440,7 +6326,7 @@ Do you want to save your changes?</source>
     <message>
         <source>side_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дсб</translation>
+        <translation type="vanished">Дсб</translation>
     </message>
     <message>
         <source>Side waist to floor</source>
@@ -5455,7 +6341,7 @@ Do you want to save your changes?</source>
     <message>
         <source>front_waist_to_floor</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дсп</translation>
+        <translation type="vanished">Дсп</translation>
     </message>
     <message>
         <source>Front waist to floor</source>
@@ -5470,7 +6356,7 @@ Do you want to save your changes?</source>
     <message>
         <source>arc_through_groin_area</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дпоб</translation>
+        <translation type="vanished">Дпоб</translation>
     </message>
     <message>
         <source>Arc through groin area</source>
@@ -5485,7 +6371,7 @@ Do you want to save your changes?</source>
     <message>
         <source>waist_to_plane_seat</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вс</translation>
+        <translation type="vanished">Вс</translation>
     </message>
     <message>
         <source>Waist to plane seat</source>
@@ -5500,7 +6386,7 @@ Do you want to save your changes?</source>
     <message>
         <source>neck_to_radial_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Длуч</translation>
+        <translation type="vanished">Длуч</translation>
     </message>
     <message>
         <source>Neck to radial point</source>
@@ -5515,7 +6401,7 @@ Do you want to save your changes?</source>
     <message>
         <source>neck_to_third_finger</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ДIIIп</translation>
+        <translation type="vanished">ДIIIп</translation>
     </message>
     <message>
         <source>Neck to third finger</source>
@@ -5530,7 +6416,7 @@ Do you want to save your changes?</source>
     <message>
         <source>neck_to_first_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впрп</translation>
+        <translation type="vanished">Впрп</translation>
     </message>
     <message>
         <source>Neck to first line chest circumference</source>
@@ -5545,7 +6431,7 @@ Do you want to save your changes?</source>
     <message>
         <source>front_waist_length</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дтп</translation>
+        <translation type="vanished">Дтп</translation>
     </message>
     <message>
         <source>Front waist length</source>
@@ -5560,7 +6446,7 @@ Do you want to save your changes?</source>
     <message>
         <source>arc_through_shoulder_joint</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дп</translation>
+        <translation type="vanished">Дп</translation>
     </message>
     <message>
         <source>Arc through shoulder joint</source>
@@ -5575,7 +6461,7 @@ Do you want to save your changes?</source>
     <message>
         <source>neck_to_back_line_chest_circumference</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впрз</translation>
+        <translation type="vanished">Впрз</translation>
     </message>
     <message>
         <source>Neck to back line chest circumference</source>
@@ -5590,7 +6476,7 @@ Do you want to save your changes?</source>
     <message>
         <source>waist_to_neck_side</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ДтсI</translation>
+        <translation type="vanished">ДтсI</translation>
     </message>
     <message>
         <source>Waist to neck side</source>
@@ -5605,7 +6491,7 @@ Do you want to save your changes?</source>
     <message>
         <source>arc_length_upper_body</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Двчт</translation>
+        <translation type="vanished">Двчт</translation>
     </message>
     <message>
         <source>Arc length upper body</source>
@@ -5620,7 +6506,7 @@ Do you want to save your changes?</source>
     <message>
         <source>chest_width</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Шг</translation>
+        <translation type="vanished">Шг</translation>
     </message>
     <message>
         <source>Chest width</source>
@@ -5635,7 +6521,7 @@ Do you want to save your changes?</source>
     <message>
         <source>anteroposterior_diameter_hands</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>dпзр</translation>
+        <translation type="vanished">dпзр</translation>
     </message>
     <message>
         <source>Anteroposterior diameter hands</source>
@@ -5650,7 +6536,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height_clavicular_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вкт</translation>
+        <translation type="vanished">Вкт</translation>
     </message>
     <message>
         <source>Height clavicular point</source>
@@ -5665,7 +6551,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height_armhole_slash</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впрк</translation>
+        <translation type="vanished">Впрк</translation>
     </message>
     <message>
         <source>Height armhole slash</source>
@@ -5680,7 +6566,7 @@ Do you want to save your changes?</source>
     <message>
         <source>slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впк</translation>
+        <translation type="vanished">Впк</translation>
     </message>
     <message>
         <source>Slash shoulder height</source>
@@ -5695,7 +6581,7 @@ Do you want to save your changes?</source>
     <message>
         <source>half_girth_neck</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Сш</translation>
+        <translation type="vanished">Сш</translation>
     </message>
     <message>
         <source>Half girth neck</source>
@@ -5710,7 +6596,7 @@ Do you want to save your changes?</source>
     <message>
         <source>half_girth_neck_for_shirts</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Сш1</translation>
+        <translation type="vanished">Сш1</translation>
     </message>
     <message>
         <source>Half girth neck for shirts</source>
@@ -5725,7 +6611,7 @@ Do you want to save your changes?</source>
     <message>
         <source>half_girth_chest_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>СгI</translation>
+        <translation type="vanished">СгI</translation>
     </message>
     <message>
         <source>Half girth chest first</source>
@@ -5740,7 +6626,7 @@ Do you want to save your changes?</source>
     <message>
         <source>half_girth_chest_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>СгII</translation>
+        <translation type="vanished">СгII</translation>
     </message>
     <message>
         <source>Half girth chest second</source>
@@ -5755,7 +6641,7 @@ Do you want to save your changes?</source>
     <message>
         <source>half_girth_chest_third</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>СгIII</translation>
+        <translation type="vanished">СгIII</translation>
     </message>
     <message>
         <source>Half girth chest third</source>
@@ -5770,7 +6656,7 @@ Do you want to save your changes?</source>
     <message>
         <source>half_girth_waist</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Ст</translation>
+        <translation type="vanished">Ст</translation>
     </message>
     <message>
         <source>Half girth waist</source>
@@ -5785,7 +6671,7 @@ Do you want to save your changes?</source>
     <message>
         <source>half_girth_hips_considering_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Сб</translation>
+        <translation type="vanished">Сб</translation>
     </message>
     <message>
         <source>Half girth hips considering protruding abdomen</source>
@@ -5800,7 +6686,7 @@ Do you want to save your changes?</source>
     <message>
         <source>half_girth_hips_excluding_protruding_abdomen</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>СбI</translation>
+        <translation type="vanished">СбI</translation>
     </message>
     <message>
         <source>Half girth hips excluding protruding abdomen</source>
@@ -5815,7 +6701,7 @@ Do you want to save your changes?</source>
     <message>
         <source>girth_knee_flexed_feet</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Окс</translation>
+        <translation type="vanished">Окс</translation>
     </message>
     <message>
         <source>Girth knee flexed feet</source>
@@ -5830,7 +6716,7 @@ Do you want to save your changes?</source>
     <message>
         <source>neck_transverse_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>dш</translation>
+        <translation type="vanished">dш</translation>
     </message>
     <message>
         <source>Neck transverse diameter</source>
@@ -5845,7 +6731,7 @@ Do you want to save your changes?</source>
     <message>
         <source>front_slash_shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Впкп</translation>
+        <translation type="vanished">Впкп</translation>
     </message>
     <message>
         <source>Front slash shoulder height</source>
@@ -5860,7 +6746,7 @@ Do you want to save your changes?</source>
     <message>
         <source>neck_to_front_waist_line</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дтн1</translation>
+        <translation type="vanished">Дтн1</translation>
     </message>
     <message>
         <source>Neck to front waist line</source>
@@ -5875,7 +6761,7 @@ Do you want to save your changes?</source>
     <message>
         <source>hand_vertical_diameter</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>dвр</translation>
+        <translation type="vanished">dвр</translation>
     </message>
     <message>
         <source>Hand vertical diameter</source>
@@ -5890,7 +6776,7 @@ Do you want to save your changes?</source>
     <message>
         <source>neck_to_knee_point</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дшк</translation>
+        <translation type="vanished">Дшк</translation>
     </message>
     <message>
         <source>Neck to knee point</source>
@@ -5905,7 +6791,7 @@ Do you want to save your changes?</source>
     <message>
         <source>waist_to_knee</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дтк</translation>
+        <translation type="vanished">Дтк</translation>
     </message>
     <message>
         <source>Waist to knee</source>
@@ -5920,7 +6806,7 @@ Do you want to save your changes?</source>
     <message>
         <source>shoulder_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вп</translation>
+        <translation type="vanished">Вп</translation>
     </message>
     <message>
         <source>Shoulder height</source>
@@ -5935,7 +6821,7 @@ Do you want to save your changes?</source>
     <message>
         <source>head_height</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Вгол</translation>
+        <translation type="vanished">Вгол</translation>
     </message>
     <message>
         <source>Head height</source>
@@ -5950,7 +6836,7 @@ Do you want to save your changes?</source>
     <message>
         <source>body_position</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Пкор</translation>
+        <translation type="vanished">Пкор</translation>
     </message>
     <message>
         <source>Body position</source>
@@ -5965,7 +6851,7 @@ Do you want to save your changes?</source>
     <message>
         <source>arc_behind_shoulder_girdle</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дпз</translation>
+        <translation type="vanished">Дпз</translation>
     </message>
     <message>
         <source>Arc behind shoulder girdle</source>
@@ -5980,7 +6866,7 @@ Do you want to save your changes?</source>
     <message>
         <source>neck_to_neck_base</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Дшош</translation>
+        <translation type="vanished">Дшош</translation>
     </message>
     <message>
         <source>Neck to neck base</source>
@@ -5995,7 +6881,7 @@ Do you want to save your changes?</source>
     <message>
         <source>depth_waist_first</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>Гт1</translation>
+        <translation type="vanished">Гт1</translation>
     </message>
     <message>
         <source>Depth waist first</source>
@@ -6010,7 +6896,7 @@ Do you want to save your changes?</source>
     <message>
         <source>depth_waist_second</source>
         <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation>ГтII</translation>
+        <translation type="vanished">ГтII</translation>
     </message>
     <message>
         <source>Depth waist second</source>
@@ -6028,177 +6914,177 @@ Do you want to save your changes?</source>
     <message>
         <source>Around fullest part of Head</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват головы</translation>
+        <translation type="vanished">Обхват головы</translation>
     </message>
     <message>
         <source>Around middle part of Neck</source>
         <comment>Full measurement description</comment>
-        <translation>Вокруг средней части шеи</translation>
+        <translation type="vanished">Вокруг средней части шеи</translation>
     </message>
     <message>
         <source>Around Neck at base</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват шеи</translation>
+        <translation type="vanished">Обхват шеи</translation>
     </message>
     <message>
         <source>Vertical Distance from Crown to Nape</source>
         <comment>Full measurement description</comment>
-        <translation>Вертикальное расстояние от темени до затылка</translation>
+        <translation type="vanished">Вертикальное расстояние от темени до затылка</translation>
     </message>
     <message>
         <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Длина переда до талии</translation>
+        <translation type="vanished">Длина переда до талии</translation>
     </message>
     <message>
         <source>Back Neck Center to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>Длина спины до талии с учетом выступа лопаток</translation>
+        <translation type="vanished">Длина спины до талии с учетом выступа лопаток</translation>
     </message>
     <message>
         <source>NeckPoint to ShoulderTip</source>
         <comment>Full measurement description</comment>
-        <translation>Длина плечевого ската</translation>
+        <translation type="vanished">Длина плечевого ската</translation>
     </message>
     <message>
         <source>Armpit to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation>Длина боковой части</translation>
+        <translation type="vanished">Длина боковой части</translation>
     </message>
     <message>
         <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
         <comment>Full measurement description</comment>
-        <translation>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</translation>
+        <translation type="vanished">Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</translation>
     </message>
     <message>
         <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
         <comment>Full measurement description</comment>
-        <translation>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</translation>
+        <translation type="vanished">Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</translation>
     </message>
     <message>
         <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват груди первый</translation>
+        <translation type="vanished">Обхват груди первый</translation>
     </message>
     <message>
         <source>Around fullest part of Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват груди второй</translation>
+        <translation type="vanished">Обхват груди второй</translation>
     </message>
     <message>
         <source>Around Chest below the Bust, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват груди третий</translation>
+        <translation type="vanished">Обхват груди третий</translation>
     </message>
     <message>
         <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват талии.</translation>
+        <translation type="vanished">Обхват талии.</translation>
     </message>
     <message>
         <source>Around HighHip, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Around HighHip, parallel to floor</translation>
+        <translation type="vanished">Around HighHip, parallel to floor</translation>
     </message>
     <message>
         <source>Around Hip, parallel to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват бедер с учетом выступания живота</translation>
+        <translation type="vanished">Обхват бедер с учетом выступания живота</translation>
     </message>
     <message>
         <source>Across Front UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
-        <translation>Ширина груди первая</translation>
+        <translation type="vanished">Ширина груди первая</translation>
     </message>
     <message>
         <source>Across Front Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
-        <translation>Ширина груди вторая</translation>
+        <translation type="vanished">Ширина груди вторая</translation>
     </message>
     <message>
         <source>From ShoulderTip to ShoulderTip, across Front</source>
         <comment>Full measurement description</comment>
-        <translation>Плечевой диаметр</translation>
+        <translation type="vanished">Плечевой диаметр</translation>
     </message>
     <message>
         <source>From ShoulderTip to ShoulderTip, across Back</source>
         <comment>Full measurement description</comment>
-        <translation>Around HighHip, parallel to floor</translation>
+        <translation type="vanished">Around HighHip, parallel to floor</translation>
     </message>
     <message>
         <source>Across Back UpperChest, smallest width from armscye to armscye</source>
         <comment>Full measurement description</comment>
-        <translation>Across Back UpperChest, smallest width from armscye to armscye</translation>
+        <translation type="vanished">Across Back UpperChest, smallest width from armscye to armscye</translation>
     </message>
     <message>
         <source>Across Back Chest, from armfold to armfold</source>
         <comment>Full measurement description</comment>
-        <translation>Ширина спины</translation>
+        <translation type="vanished">Ширина спины</translation>
     </message>
     <message>
         <source>Distance between BustPoints, across Chest</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние между сосковыми точками</translation>
+        <translation type="vanished">Расстояние между сосковыми точками</translation>
     </message>
     <message>
         <source>Distance from Bustpoint, behind neck, down to Bustpoint</source>
         <comment>Full measurement description</comment>
-        <translation>Distance from Bustpoint, behind neck, down to Bustpoint</translation>
+        <translation type="vanished">Distance from Bustpoint, behind neck, down to Bustpoint</translation>
     </message>
     <message>
         <source>From NeckPoint to BustPoint</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
     </message>
     <message>
         <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>From Front Waist Center, down to crotch, up to Back Waist Center</translation>
+        <translation type="vanished">From Front Waist Center, down to crotch, up to Back Waist Center</translation>
     </message>
     <message>
         <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии до подъягодичной складки</translation>
+        <translation type="vanished">Расстояние от линии талии до подъягодичной складки</translation>
     </message>
     <message>
         <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
         <comment>Full measurement description</comment>
-        <translation>Vertical Distance from NeckPoint level to ShoulderTip level</translation>
+        <translation type="vanished">Vertical Distance from NeckPoint level to ShoulderTip level</translation>
     </message>
     <message>
         <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
         <comment>Full measurement description</comment>
-        <translation>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</translation>
+        <translation type="vanished">Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</translation>
     </message>
     <message>
         <source>ShoulderTip to Front Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>ShoulderTip to Front Waist Center</translation>
+        <translation type="vanished">ShoulderTip to Front Waist Center</translation>
     </message>
     <message>
         <source>ShoulderTip to Back Waist Center</source>
         <comment>Full measurement description</comment>
-        <translation>ShoulderTip to Back Waist Center</translation>
+        <translation type="vanished">ShoulderTip to Back Waist Center</translation>
     </message>
     <message>
         <source>NeckPoint straight down front chest to Waistline</source>
         <comment>Full measurement description</comment>
-        <translation>NeckPoint straight down front chest to Waistline</translation>
+        <translation type="vanished">NeckPoint straight down front chest to Waistline</translation>
     </message>
     <message>
         <source>Back NeckPoint straight down back chest to Waistline</source>
         <comment>Full measurement description</comment>
-        <translation>Back NeckPoint straight down back chest to Waistline</translation>
+        <translation type="vanished">Back NeckPoint straight down back chest to Waistline</translation>
     </message>
     <message>
         <source>NeckPoint to NeckPoint through Front Neck Center</source>
         <comment>Full measurement description</comment>
-        <translation>NeckPoint to NeckPoint through Front Neck Center</translation>
+        <translation type="vanished">NeckPoint to NeckPoint through Front Neck Center</translation>
     </message>
     <message>
         <source>NeckPoint to NeckPoint across Nape</source>
         <comment>Full measurement description</comment>
-        <translation>NeckPoint to NeckPoint across Nape</translation>
+        <translation type="vanished">NeckPoint to NeckPoint across Nape</translation>
     </message>
     <message>
         <source>front_upper-bust_arc</source>
@@ -6208,492 +7094,492 @@ Do you want to save your changes?</source>
     <message>
         <source>Front upper-bust arc</source>
         <comment>Full measurement description</comment>
-        <translation>Front upper-bust arc</translation>
+        <translation type="vanished">Front upper-bust arc</translation>
     </message>
     <message>
         <source>Back UpperBust side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Back UpperBust side to side</translation>
+        <translation type="vanished">Back UpperBust side to side</translation>
     </message>
     <message>
         <source>Front Waist side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Front Waist side to side</translation>
+        <translation type="vanished">Front Waist side to side</translation>
     </message>
     <message>
         <source>Back Waist side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Back Waist side to side</translation>
+        <translation type="vanished">Back Waist side to side</translation>
     </message>
     <message>
         <source>Front UpperHip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Front UpperHip side to side</translation>
+        <translation type="vanished">Front UpperHip side to side</translation>
     </message>
     <message>
         <source>Back UpperHip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Back UpperHip side to side</translation>
+        <translation type="vanished">Back UpperHip side to side</translation>
     </message>
     <message>
         <source>Front Hip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Front Hip side to side</translation>
+        <translation type="vanished">Front Hip side to side</translation>
     </message>
     <message>
         <source>Back Hip side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Back Hip side to side</translation>
+        <translation type="vanished">Back Hip side to side</translation>
     </message>
     <message>
         <source>NeckPoint to Front ArmfoldPoint</source>
         <comment>Full measurement description</comment>
-        <translation>NeckPoint to Front ArmfoldPoint</translation>
+        <translation type="vanished">NeckPoint to Front ArmfoldPoint</translation>
     </message>
     <message>
         <source>NeckPoint to Back ArmfoldPoint</source>
         <comment>Full measurement description</comment>
-        <translation>NeckPoint to Back ArmfoldPoint</translation>
+        <translation type="vanished">NeckPoint to Back ArmfoldPoint</translation>
     </message>
     <message>
         <source>NeckPoint across Front Chest to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation>NeckPoint across Front Chest to Waist side</translation>
+        <translation type="vanished">NeckPoint across Front Chest to Waist side</translation>
     </message>
     <message>
         <source>NeckPoint across Back Chest to Waist side</source>
         <comment>Full measurement description</comment>
-        <translation>NeckPoint across Back Chest to Waist side</translation>
+        <translation type="vanished">NeckPoint across Back Chest to Waist side</translation>
     </message>
     <message>
         <source>Front Neck Center straight down to UpperChest line</source>
         <comment>Full measurement description</comment>
-        <translation>Front Neck Center straight down to UpperChest line</translation>
+        <translation type="vanished">Front Neck Center straight down to UpperChest line</translation>
     </message>
     <message>
         <source>Front Neck Center straight down to Bust line</source>
         <comment>Full measurement description</comment>
-        <translation>Front Neck Center straight down to Bust line</translation>
+        <translation type="vanished">Front Neck Center straight down to Bust line</translation>
     </message>
     <message>
         <source>Front Upper chest waist</source>
         <comment>Full measurement description</comment>
-        <translation>Длина переда от линии талии вверх по центру до начала ложбины</translation>
+        <translation type="vanished">Длина переда от линии талии вверх по центру до начала ложбины</translation>
     </message>
     <message>
         <source>Front waist to lower breast</source>
         <comment>Full measurement description</comment>
-        <translation>Длина от талии до основания грудных желез</translation>
+        <translation type="vanished">Длина от талии до основания грудных желез</translation>
     </message>
     <message>
         <source>Back waist to upper chest</source>
         <comment>Full measurement description</comment>
-        <translation>Длина спинки по спине от линии талии вверх до выступающего уголка лопатки</translation>
+        <translation type="vanished">Длина спинки по спине от линии талии вверх до выступающего уголка лопатки</translation>
     </message>
     <message>
         <source>Strap length</source>
         <comment>Full measurement description</comment>
-        <translation>Длина бретели от выступающего уголка лопатки вертикально до начала грудной железы</translation>
+        <translation type="vanished">Длина бретели от выступающего уголка лопатки вертикально до начала грудной железы</translation>
     </message>
     <message>
         <source>Around Armscye</source>
         <comment>Full measurement description</comment>
-        <translation>Around Armscye</translation>
+        <translation type="vanished">Around Armscye</translation>
     </message>
     <message>
         <source>Around Elbow with elbow bent</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват локтя</translation>
+        <translation type="vanished">Обхват локтя</translation>
     </message>
     <message>
         <source>Around UpperArm</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват плеча</translation>
+        <translation type="vanished">Обхват плеча</translation>
     </message>
     <message>
         <source>Around Wrist</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват запястья</translation>
+        <translation type="vanished">Обхват запястья</translation>
     </message>
     <message>
         <source>Nape straight down to UnderBust line (same as Back UpperBust height)</source>
         <comment>Full measurement description</comment>
-        <translation>Nape straight down to UnderBust line (same as Back UpperBust height)</translation>
+        <translation type="vanished">Nape straight down to UnderBust line (same as Back UpperBust height)</translation>
     </message>
     <message>
         <source>NeckPoint to ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
     </message>
     <message>
         <source>Armpit to Wrist, with arm straight and hanging at side</source>
         <comment>Full measurement description</comment>
-        <translation>Внутренняя длина рукава (с окатом)</translation>
+        <translation type="vanished">Внутренняя длина рукава (с окатом)</translation>
     </message>
     <message>
         <source>Nape to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>Nape to Wrist, with elbow bent and hand on hip</translation>
+        <translation type="vanished">Nape to Wrist, with elbow bent and hand on hip</translation>
     </message>
     <message>
         <source>ShoulderTip to Elbow, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>Длина руки до локтя</translation>
+        <translation type="vanished">Длина руки до локтя</translation>
     </message>
     <message>
         <source>ShoulderTip to Wrist, with elbow bent and hand on hip</source>
         <comment>Full measurement description</comment>
-        <translation>Длина рукава до линии обхвата запястья</translation>
+        <translation type="vanished">Длина рукава до линии обхвата запястья</translation>
     </message>
     <message>
         <source>Hand side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Рука из стороны в сторону</translation>
+        <translation type="vanished">Рука из стороны в сторону</translation>
     </message>
     <message>
         <source>Hand Middle Finger tip to wrist</source>
         <comment>Full measurement description</comment>
-        <translation>Hand Middle Finger tip to wrist</translation>
+        <translation type="vanished">Hand Middle Finger tip to wrist</translation>
     </message>
     <message>
         <source>Around Hand</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват кисти</translation>
+        <translation type="vanished">Обхват кисти</translation>
     </message>
     <message>
         <source>Around Thigh</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват бедра</translation>
+        <translation type="vanished">Обхват бедра</translation>
     </message>
     <message>
         <source>Around MidThigh</source>
         <comment>Full measurement description</comment>
-        <translation>Around MidThigh</translation>
+        <translation type="vanished">Around MidThigh</translation>
     </message>
     <message>
         <source>Around Knee</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват колена</translation>
+        <translation type="vanished">Обхват колена</translation>
     </message>
     <message>
         <source>Around Calf</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват икры</translation>
+        <translation type="vanished">Обхват икры</translation>
     </message>
     <message>
         <source>Around Ankle</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват щиколотки</translation>
+        <translation type="vanished">Обхват щиколотки</translation>
     </message>
     <message>
         <source>Knee to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Высота коленной точки</translation>
+        <translation type="vanished">Высота коленной точки</translation>
     </message>
     <message>
         <source>Ankle to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Ankle to Floor</translation>
+        <translation type="vanished">Ankle to Floor</translation>
     </message>
     <message>
         <source>Widest part of Foot side to side</source>
         <comment>Full measurement description</comment>
-        <translation>Widest part of Foot side to side</translation>
+        <translation type="vanished">Widest part of Foot side to side</translation>
     </message>
     <message>
         <source>Tip of Longest Toe straight to back of heel</source>
         <comment>Full measurement description</comment>
-        <translation>Кончик длинного пальца прямо к задней части каблука</translation>
+        <translation type="vanished">Кончик длинного пальца прямо к задней части каблука</translation>
     </message>
     <message>
         <source>Top of head to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Верх головы к полу</translation>
+        <translation type="vanished">Верх головы к полу</translation>
     </message>
     <message>
         <source>Nape to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Высота точки основания шеи сзади</translation>
+        <translation type="vanished">Высота точки основания шеи сзади</translation>
     </message>
     <message>
         <source>Nape to Knee</source>
         <comment>Full measurement description</comment>
-        <translation>Длина с затылок до колена</translation>
+        <translation type="vanished">Длина с затылок до колена</translation>
     </message>
     <message>
         <source>Waist side to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Высота линии талии</translation>
+        <translation type="vanished">Высота линии талии</translation>
     </message>
     <message>
         <source>HighHip side to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>HighHip side to Floor</translation>
+        <translation type="vanished">HighHip side to Floor</translation>
     </message>
     <message>
         <source>Hip side to Floor</source>
         <comment>Full measurement description</comment>
-        <translation>Боковая сторона ступни</translation>
+        <translation type="vanished">Боковая сторона ступни</translation>
     </message>
     <message>
         <source>Waist side to Hip</source>
         <comment>Full measurement description</comment>
-        <translation>Waist side to Hip</translation>
+        <translation type="vanished">Waist side to Hip</translation>
     </message>
     <message>
         <source>Waist side to Knee</source>
         <comment>Full measurement description</comment>
-        <translation>Waist side to Knee</translation>
+        <translation type="vanished">Waist side to Knee</translation>
     </message>
     <message>
         <source>Crotch to Floor along inside leg</source>
         <comment>Full measurement description</comment>
-        <translation>Длина ноги по внутренней поверхности</translation>
+        <translation type="vanished">Длина ноги по внутренней поверхности</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>Full measurement description</comment>
-        <translation>Размер</translation>
+        <translation type="vanished">Размер</translation>
     </message>
     <message>
         <source>Height of the point base of the neck in front</source>
         <comment>Full measurement description</comment>
-        <translation>Высота точки основания шеи спереди</translation>
+        <translation type="vanished">Высота точки основания шеи спереди</translation>
     </message>
     <message>
         <source>Height of the base of the neck side point</source>
         <comment>Full measurement description</comment>
-        <translation>Высота точки основания шеи сбоку</translation>
+        <translation type="vanished">Высота точки основания шеи сбоку</translation>
     </message>
     <message>
         <source>The height of the shoulder point</source>
         <comment>Full measurement description</comment>
-        <translation>Высота плечевой точки</translation>
+        <translation type="vanished">Высота плечевой точки</translation>
     </message>
     <message>
         <source>Height nipple point</source>
         <comment>Full measurement description</comment>
-        <translation>Высота сосковой точки</translation>
+        <translation type="vanished">Высота сосковой точки</translation>
     </message>
     <message>
         <source>Height back angle axilla</source>
         <comment>Full measurement description</comment>
-        <translation>Высота заднего угла подмышечной впадины</translation>
+        <translation type="vanished">Высота заднего угла подмышечной впадины</translation>
     </message>
     <message>
         <source>Height scapular point</source>
         <comment>Full measurement description</comment>
-        <translation>Высота лопаточной точки</translation>
+        <translation type="vanished">Высота лопаточной точки</translation>
     </message>
     <message>
         <source>Height under buttock folds</source>
         <comment>Full measurement description</comment>
-        <translation>Высота подъягодичной складки</translation>
+        <translation type="vanished">Высота подъягодичной складки</translation>
     </message>
     <message>
         <source>Hips excluding protruding abdomen</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват бедер без учета выступания живота</translation>
+        <translation type="vanished">Обхват бедер без учета выступания живота</translation>
     </message>
     <message>
         <source>Girth foot instep</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват подъема стопы</translation>
+        <translation type="vanished">Обхват подъема стопы</translation>
     </message>
     <message>
         <source>The distance from the side waist to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии до пола сбоку</translation>
+        <translation type="vanished">Расстояние от линии талии до пола сбоку</translation>
     </message>
     <message>
         <source>The distance from the front waist to floor</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии до пола спереди</translation>
+        <translation type="vanished">Расстояние от линии талии до пола спереди</translation>
     </message>
     <message>
         <source>Arc through groin area</source>
         <comment>Full measurement description</comment>
-        <translation>Дуга через паховую область</translation>
+        <translation type="vanished">Дуга через паховую область</translation>
     </message>
     <message>
         <source>The distance from the waist to the plane seat</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии до плоскости сидения</translation>
+        <translation type="vanished">Расстояние от линии талии до плоскости сидения</translation>
     </message>
     <message>
         <source>The distance from the base of the neck to the side of the radial point</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до лучевой точки</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до лучевой точки</translation>
     </message>
     <message>
         <source>Distance from the base of the neck side point to the end of the third finger</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
     </message>
     <message>
         <source>The distance from the base of the neck to the side of the first line in front of chest circumference</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
     </message>
     <message>
         <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии талии спереди (обхват талии спереди)</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии талии спереди (обхват талии спереди)</translation>
     </message>
     <message>
         <source>Arc through the highest point of the shoulder joint</source>
         <comment>Full measurement description</comment>
-        <translation>Дуга через высшую точку плечевого сустава</translation>
+        <translation type="vanished">Дуга через высшую точку плечевого сустава</translation>
     </message>
     <message>
         <source>The distance from the base of the neck to the back line of chest circumference of the first and the second based on ledge vanes</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
     </message>
     <message>
         <source>The distance from the waist to the back base of the neck side point</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
+        <translation type="vanished">Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
     </message>
     <message>
         <source>Arc length of the upper body through the base of the neck side point</source>
         <comment>Full measurement description</comment>
-        <translation>Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
+        <translation type="vanished">Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
     </message>
     <message>
         <source>Chest width</source>
         <comment>Full measurement description</comment>
-        <translation>Ширина груди</translation>
+        <translation type="vanished">Ширина груди</translation>
     </message>
     <message>
         <source>Anteroposterior diameter of the hands</source>
         <comment>Full measurement description</comment>
-        <translation>Передне-задний диаметр руки</translation>
+        <translation type="vanished">Передне-задний диаметр руки</translation>
     </message>
     <message>
         <source>Height clavicular point</source>
         <comment>Full measurement description</comment>
-        <translation>Высота ключичной точки</translation>
+        <translation type="vanished">Высота ключичной точки</translation>
     </message>
     <message>
         <source>The distance from the point to the cervical level of the posterior angle of the front armpit (underarm height oblique)</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
+        <translation type="vanished">Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
     </message>
     <message>
         <source>Slash shoulder height</source>
         <comment>Full measurement description</comment>
-        <translation>Высота плеча косая</translation>
+        <translation type="vanished">Высота плеча косая</translation>
     </message>
     <message>
         <source>Half girth neck</source>
         <comment>Full measurement description</comment>
-        <translation>Полуобхват шеи</translation>
+        <translation type="vanished">Полуобхват шеи</translation>
     </message>
     <message>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement description</comment>
-        <translation>Полуобхват шеи для сорочек</translation>
+        <translation type="vanished">Полуобхват шеи для сорочек</translation>
     </message>
     <message>
         <source>Half girth chest first</source>
         <comment>Full measurement description</comment>
-        <translation>Полуобхват груди первый</translation>
+        <translation type="vanished">Полуобхват груди первый</translation>
     </message>
     <message>
         <source>Half girth chest second</source>
         <comment>Full measurement description</comment>
-        <translation>Полуобхват груди второй</translation>
+        <translation type="vanished">Полуобхват груди второй</translation>
     </message>
     <message>
         <source>Half girth chest third</source>
         <comment>Full measurement description</comment>
-        <translation>Полуобхват груди третий</translation>
+        <translation type="vanished">Полуобхват груди третий</translation>
     </message>
     <message>
         <source>Half girth waist</source>
         <comment>Full measurement description</comment>
-        <translation>Полуобхват талии</translation>
+        <translation type="vanished">Полуобхват талии</translation>
     </message>
     <message>
         <source>Half girth hips considering protruding abdomen</source>
         <comment>Full measurement description</comment>
-        <translation>Полуобхват бедер с учетом выступания живота</translation>
+        <translation type="vanished">Полуобхват бедер с учетом выступания живота</translation>
     </message>
     <message>
         <source>Half girth hips excluding protruding abdomen</source>
         <comment>Full measurement description</comment>
-        <translation>Полуобхват бедер без учета выступания живота</translation>
+        <translation type="vanished">Полуобхват бедер без учета выступания живота</translation>
     </message>
     <message>
         <source>Girth knee flexed feet</source>
         <comment>Full measurement description</comment>
-        <translation>Обхват колена в согнутом положении ноги</translation>
+        <translation type="vanished">Обхват колена в согнутом положении ноги</translation>
     </message>
     <message>
         <source>Neck transverse diameter</source>
         <comment>Full measurement description</comment>
-        <translation>Поперечный диаметр шеи</translation>
+        <translation type="vanished">Поперечный диаметр шеи</translation>
     </message>
     <message>
         <source>Front slash shoulder height</source>
         <comment>Full measurement description</comment>
-        <translation>Высота плеча косая спереди</translation>
+        <translation type="vanished">Высота плеча косая спереди</translation>
     </message>
     <message>
         <source>The distance from the base of the neck to the waist line front</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от точки основания шеи до линии талии спереди</translation>
+        <translation type="vanished">Расстояние от точки основания шеи до линии талии спереди</translation>
     </message>
     <message>
         <source>Hand vertical diameter</source>
         <comment>Full measurement description</comment>
-        <translation>Вертикальный диаметр руки</translation>
+        <translation type="vanished">Вертикальный диаметр руки</translation>
     </message>
     <message>
         <source>Distance from neck to knee point</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от шейной точки до колена</translation>
+        <translation type="vanished">Расстояние от шейной точки до колена</translation>
     </message>
     <message>
         <source>The distance from the waist to the knee</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от линии талии до колена</translation>
+        <translation type="vanished">Расстояние от линии талии до колена</translation>
     </message>
     <message>
         <source>Shoulder height</source>
         <comment>Full measurement description</comment>
-        <translation>Высота плеча</translation>
+        <translation type="vanished">Высота плеча</translation>
     </message>
     <message>
         <source>Head height</source>
         <comment>Full measurement description</comment>
-        <translation>Высота головы</translation>
+        <translation type="vanished">Высота головы</translation>
     </message>
     <message>
         <source>Body position</source>
         <comment>Full measurement description</comment>
-        <translation>Положение корпуса</translation>
+        <translation type="vanished">Положение корпуса</translation>
     </message>
     <message>
         <source>Arc behind the shoulder girdle</source>
         <comment>Full measurement description</comment>
-        <translation>Дуга плечевого пояса сзади</translation>
+        <translation type="vanished">Дуга плечевого пояса сзади</translation>
     </message>
     <message>
         <source>Distance from neck point to point on the base of the neck side neck girth measurement line</source>
         <comment>Full measurement description</comment>
-        <translation>Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
+        <translation type="vanished">Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
     </message>
     <message>
         <source>Depth waist first</source>
         <comment>Full measurement description</comment>
-        <translation>Глубина талии первая</translation>
+        <translation type="vanished">Глубина талии первая</translation>
     </message>
     <message>
         <source>Depth waist second</source>
         <comment>Full measurement description</comment>
-        <translation>Глубина талии вторая</translation>
+        <translation type="vanished">Глубина талии вторая</translation>
     </message>
 </context>
 <context>
@@ -6701,695 +7587,722 @@ Do you want to save your changes?</source>
     <message>
         <source>Head girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват головы</translation>
+        <translation type="vanished">Обхват головы</translation>
     </message>
     <message>
         <source>Mid-neck girth</source>
         <comment>Full measurement name</comment>
-        <translation>Половина обхвата шеи</translation>
+        <translation type="vanished">Половина обхвата шеи</translation>
     </message>
     <message>
         <source>Neck Base girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват шеи</translation>
+        <translation type="vanished">Обхват шеи</translation>
     </message>
     <message>
         <source>Head and Neck length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина шеи и головы</translation>
+        <translation type="vanished">Длина шеи и головы</translation>
     </message>
     <message>
         <source>Front Center length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина переда до талии</translation>
+        <translation type="vanished">Длина переда до талии</translation>
     </message>
     <message>
         <source>Back Center length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина спины до талии с учетом выступа лопаток</translation>
+        <translation type="vanished">Длина спины до талии с учетом выступа лопаток</translation>
     </message>
     <message>
         <source>Shoulder length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина плечевого ската</translation>
+        <translation type="vanished">Длина плечевого ската</translation>
     </message>
     <message>
         <source>Side Waist length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина боковой части</translation>
+        <translation type="vanished">Длина боковой части</translation>
     </message>
     <message>
         <source>Trunk length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина туловища</translation>
+        <translation type="vanished">Длина туловища</translation>
     </message>
     <message>
         <source>Shoulder girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват плеча</translation>
+        <translation type="vanished">Обхват плеча</translation>
     </message>
     <message>
         <source>Upper Chest girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват груди первый</translation>
+        <translation type="vanished">Обхват груди первый</translation>
     </message>
     <message>
         <source>Bust girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват груди второй</translation>
+        <translation type="vanished">Обхват груди второй</translation>
     </message>
     <message>
         <source>Under Bust girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват груди третий</translation>
+        <translation type="vanished">Обхват груди третий</translation>
     </message>
     <message>
         <source>Waist girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват талии</translation>
+        <translation type="vanished">Обхват талии</translation>
     </message>
     <message>
         <source>HighHip girth</source>
         <comment>Full measurement name</comment>
-        <translation>HighHip girth</translation>
+        <translation type="vanished">HighHip girth</translation>
     </message>
     <message>
         <source>Hip girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват бедер с учетом выступания живота</translation>
+        <translation type="vanished">Обхват бедер с учетом выступания живота</translation>
     </message>
     <message>
         <source>Front Upper Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Ширина груди первая</translation>
+        <translation type="vanished">Ширина груди первая</translation>
     </message>
     <message>
         <source>Front Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Ширина груди вторая</translation>
+        <translation type="vanished">Ширина груди вторая</translation>
     </message>
     <message>
         <source>Front Across Shoulder width</source>
         <comment>Full measurement name</comment>
-        <translation>Плечевой диаметр</translation>
+        <translation type="vanished">Плечевой диаметр</translation>
     </message>
     <message>
         <source>Back Across Shoulder width</source>
         <comment>Full measurement name</comment>
-        <translation>Back Across Shoulder width</translation>
+        <translation type="vanished">Back Across Shoulder width</translation>
     </message>
     <message>
         <source>Back Upper Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Back Upper Chest width</translation>
+        <translation type="vanished">Back Upper Chest width</translation>
     </message>
     <message>
         <source>Back Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Ширина спины</translation>
+        <translation type="vanished">Ширина спины</translation>
     </message>
     <message>
         <source>BustPoint to BustPoint</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние между сосковыми точками</translation>
+        <translation type="vanished">Расстояние между сосковыми точками</translation>
     </message>
     <message>
         <source>Halter Bustpoint to Bustpoint</source>
         <comment>Full measurement name</comment>
-        <translation>Halter Bustpoint to Bustpoint</translation>
+        <translation type="vanished">Halter Bustpoint to Bustpoint</translation>
     </message>
     <message>
         <source>NeckPoint to BustPoint</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до сосковой точки (высота груди)</translation>
     </message>
     <message>
         <source>Crotch length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина промежности</translation>
+        <translation type="vanished">Длина промежности</translation>
     </message>
     <message>
         <source>Rise height</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии до подъягодичной складки</translation>
+        <translation type="vanished">Расстояние от линии талии до подъягодичной складки</translation>
     </message>
     <message>
         <source>Shoulder Drop</source>
         <comment>Full measurement name</comment>
-        <translation>Shoulder Drop</translation>
+        <translation type="vanished">Shoulder Drop</translation>
     </message>
     <message>
         <source>Shoulder Slope degrees</source>
         <comment>Full measurement name</comment>
-        <translation>Склон плеча в градусах</translation>
+        <translation type="vanished">Склон плеча в градусах</translation>
     </message>
     <message>
         <source>Front Shoulder Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Передний баланс плеча</translation>
+        <translation type="vanished">Передний баланс плеча</translation>
     </message>
     <message>
         <source>Back Shoulder Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Задний баланс плеча</translation>
+        <translation type="vanished">Задний баланс плеча</translation>
     </message>
     <message>
         <source>Front Full Length</source>
         <comment>Full measurement name</comment>
-        <translation>Полная передняя длина</translation>
+        <translation type="vanished">Полная передняя длина</translation>
     </message>
     <message>
         <source>Back Full Length</source>
         <comment>Full measurement name</comment>
-        <translation>Полная задняя длина</translation>
+        <translation type="vanished">Полная задняя длина</translation>
     </message>
     <message>
         <source>Front Neck arc</source>
         <comment>Full measurement name</comment>
-        <translation>Передняя дуга шеи</translation>
+        <translation type="vanished">Передняя дуга шеи</translation>
     </message>
     <message>
         <source>Back Neck arc</source>
         <comment>Full measurement name</comment>
-        <translation>Задняя дуга шеи</translation>
+        <translation type="vanished">Задняя дуга шеи</translation>
     </message>
     <message>
         <source>Front upper-bust arc</source>
         <comment>Full measurement name</comment>
-        <translation>Front upper-bust arc</translation>
+        <translation type="vanished">Front upper-bust arc</translation>
     </message>
     <message>
         <source>Back UpperBust arc</source>
         <comment>Full measurement name</comment>
-        <translation>Back UpperBust arc</translation>
+        <translation type="vanished">Back UpperBust arc</translation>
     </message>
     <message>
         <source>Front Waist arc</source>
         <comment>Full measurement name</comment>
-        <translation>Передняя дуга талии</translation>
+        <translation type="vanished">Передняя дуга талии</translation>
     </message>
     <message>
         <source>Back Waist arc</source>
         <comment>Full measurement name</comment>
-        <translation>Задняя дуга талии</translation>
+        <translation type="vanished">Задняя дуга талии</translation>
     </message>
     <message>
         <source>Front UpperHip arc</source>
         <comment>Full measurement name</comment>
-        <translation>Front UpperHip arc</translation>
+        <translation type="vanished">Front UpperHip arc</translation>
     </message>
     <message>
         <source>Back UpperHip arc</source>
         <comment>Full measurement name</comment>
-        <translation>Back UpperHip arc</translation>
+        <translation type="vanished">Back UpperHip arc</translation>
     </message>
     <message>
         <source>Front Hip arc</source>
         <comment>Full measurement name</comment>
-        <translation>Front Hip arc</translation>
+        <translation type="vanished">Front Hip arc</translation>
     </message>
     <message>
         <source>Back Hip arc</source>
         <comment>Full measurement name</comment>
-        <translation>Back Hip arc</translation>
+        <translation type="vanished">Back Hip arc</translation>
     </message>
     <message>
         <source>Chest Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Баланс груди</translation>
+        <translation type="vanished">Баланс груди</translation>
     </message>
     <message>
         <source>Back Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Задний баланс</translation>
+        <translation type="vanished">Задний баланс</translation>
     </message>
     <message>
         <source>Front Waist Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Передний баланс талии</translation>
+        <translation type="vanished">Передний баланс талии</translation>
     </message>
     <message>
         <source>Back Waist Balance</source>
         <comment>Full measurement name</comment>
-        <translation>Задний баланс талии</translation>
+        <translation type="vanished">Задний баланс талии</translation>
     </message>
     <message>
         <source>Front UpperChest height</source>
         <comment>Full measurement name</comment>
-        <translation>Front UpperChest height</translation>
+        <translation type="vanished">Front UpperChest height</translation>
     </message>
     <message>
         <source>Bust height</source>
         <comment>Full measurement name</comment>
-        <translation>Высота бюста</translation>
+        <translation type="vanished">Высота бюста</translation>
     </message>
     <message>
         <source>Front Upper chest waist</source>
         <comment>Full measurement name</comment>
-        <translation>Длина переда от линии талии вверх по центру до начала ложбины</translation>
+        <translation type="vanished">Длина переда от линии талии вверх по центру до начала ложбины</translation>
     </message>
     <message>
         <source>Front waist to lower breast</source>
         <comment>Full measurement name</comment>
-        <translation>Длина от талии до основания грудных желез</translation>
+        <translation type="vanished">Длина от талии до основания грудных желез</translation>
     </message>
     <message>
         <source>Back waist to upper chest</source>
         <comment>Full measurement name</comment>
-        <translation>Длина спинки</translation>
+        <translation type="vanished">Длина спинки</translation>
     </message>
     <message>
         <source>Strap length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина бретели</translation>
+        <translation type="vanished">Длина бретели</translation>
     </message>
     <message>
         <source>Armscye Girth</source>
         <comment>Full measurement name</comment>
-        <translation>Armscye Girth</translation>
+        <translation type="vanished">Armscye Girth</translation>
     </message>
     <message>
         <source>Elbow Girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват локтя</translation>
+        <translation type="vanished">Обхват локтя</translation>
     </message>
     <message>
         <source>Upperarm Girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват плеча</translation>
+        <translation type="vanished">Обхват плеча</translation>
     </message>
     <message>
         <source>Wrist girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват запястья</translation>
+        <translation type="vanished">Обхват запястья</translation>
     </message>
     <message>
         <source>Armscye depth</source>
         <comment>Full measurement name</comment>
-        <translation>Armscye depth</translation>
+        <translation type="vanished">Armscye depth</translation>
     </message>
     <message>
         <source>Shoulder and Arm length</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата запястья</translation>
     </message>
     <message>
         <source>Underarm length</source>
         <comment>Full measurement name</comment>
-        <translation>Внутренняя длина рукава (с окатом)</translation>
+        <translation type="vanished">Внутренняя длина рукава (с окатом)</translation>
     </message>
     <message>
         <source>Nape to wrist length</source>
         <comment>Full measurement name</comment>
-        <translation>Nape to wrist length</translation>
+        <translation type="vanished">Nape to wrist length</translation>
     </message>
     <message>
         <source>Elbow length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина руки до локтя</translation>
+        <translation type="vanished">Длина руки до локтя</translation>
     </message>
     <message>
         <source>Arm length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина рукава до линии обхвата запястья</translation>
+        <translation type="vanished">Длина рукава до линии обхвата запястья</translation>
     </message>
     <message>
         <source>Hand width</source>
         <comment>Full measurement name</comment>
-        <translation>Ширина руки</translation>
+        <translation type="vanished">Ширина руки</translation>
     </message>
     <message>
         <source>Hand length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина руки</translation>
+        <translation type="vanished">Длина руки</translation>
     </message>
     <message>
         <source>Hand girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват кисти</translation>
+        <translation type="vanished">Обхват кисти</translation>
     </message>
     <message>
         <source>Thigh girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват бедра</translation>
+        <translation type="vanished">Обхват бедра</translation>
     </message>
     <message>
         <source>Midthigh girth</source>
         <comment>Full measurement name</comment>
-        <translation>Midthigh girth</translation>
+        <translation type="vanished">Midthigh girth</translation>
     </message>
     <message>
         <source>Knee girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват колена</translation>
+        <translation type="vanished">Обхват колена</translation>
     </message>
     <message>
         <source>Calf girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват икры</translation>
+        <translation type="vanished">Обхват икры</translation>
     </message>
     <message>
         <source>Ankle girth</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват щиколотки</translation>
+        <translation type="vanished">Обхват щиколотки</translation>
     </message>
     <message>
         <source>Knee height</source>
         <comment>Full measurement name</comment>
-        <translation>Высота коленной точки</translation>
+        <translation type="vanished">Высота коленной точки</translation>
     </message>
     <message>
         <source>Ankle height</source>
         <comment>Full measurement name</comment>
-        <translation>Высота лодыжки</translation>
+        <translation type="vanished">Высота лодыжки</translation>
     </message>
     <message>
         <source>Foot width</source>
         <comment>Full measurement name</comment>
-        <translation>Ширина ноги</translation>
+        <translation type="vanished">Ширина ноги</translation>
     </message>
     <message>
         <source>Foot length</source>
         <comment>Full measurement name</comment>
-        <translation>Длина ноги</translation>
+        <translation type="vanished">Длина ноги</translation>
     </message>
     <message>
         <source>Total Height</source>
         <comment>Full measurement name</comment>
-        <translation>Общая высота</translation>
+        <translation type="vanished">Общая высота</translation>
     </message>
     <message>
         <source>Nape height</source>
         <comment>Full measurement name</comment>
-        <translation>Высота точки основания шеи сзади</translation>
+        <translation type="vanished">Высота точки основания шеи сзади</translation>
     </message>
     <message>
         <source>Nape to knee height</source>
         <comment>Full measurement name</comment>
-        <translation>Затылок к высоте колена</translation>
+        <translation type="vanished">Затылок к высоте колена</translation>
     </message>
     <message>
         <source>Waist height</source>
         <comment>Full measurement name</comment>
-        <translation>Высота линии талии</translation>
+        <translation type="vanished">Высота линии талии</translation>
     </message>
     <message>
         <source>HighHip height</source>
         <comment>Full measurement name</comment>
-        <translation>HighHip height</translation>
+        <translation type="vanished">HighHip height</translation>
     </message>
     <message>
         <source>Hip height</source>
         <comment>Full measurement name</comment>
-        <translation>Hip height</translation>
+        <translation type="vanished">Hip height</translation>
     </message>
     <message>
         <source>Waist to Hip height</source>
         <comment>Full measurement name</comment>
-        <translation>Waist to Hip height</translation>
+        <translation type="vanished">Waist to Hip height</translation>
     </message>
     <message>
         <source>Waist to Knee height</source>
         <comment>Full measurement name</comment>
-        <translation>Талия к высоте колена</translation>
+        <translation type="vanished">Талия к высоте колена</translation>
     </message>
     <message>
         <source>Crotch height/Inseam</source>
         <comment>Full measurement name</comment>
-        <translation>Длина ноги по внутренней поверхности</translation>
+        <translation type="vanished">Длина ноги по внутренней поверхности</translation>
     </message>
     <message>
         <source>Size</source>
         <comment>Full measurement name</comment>
-        <translation>Размер</translation>
+        <translation type="vanished">Размер</translation>
     </message>
     <message>
         <source>Height front neck base point</source>
         <comment>Full measurement name</comment>
-        <translation>Высота точки основания шеи спереди</translation>
+        <translation type="vanished">Высота точки основания шеи спереди</translation>
     </message>
     <message>
         <source>Height base neck side point</source>
         <comment>Full measurement name</comment>
-        <translation>Высота точки основания шеи сбоку</translation>
+        <translation type="vanished">Высота точки основания шеи сбоку</translation>
     </message>
     <message>
         <source>Height shoulder point</source>
         <comment>Full measurement name</comment>
-        <translation>Высота плечевой точки</translation>
+        <translation type="vanished">Высота плечевой точки</translation>
     </message>
     <message>
         <source>Height nipple point</source>
         <comment>Full measurement name</comment>
-        <translation>Высота сосковой точки</translation>
+        <translation type="vanished">Высота сосковой точки</translation>
     </message>
     <message>
         <source>Height back angle axilla</source>
         <comment>Full measurement name</comment>
-        <translation>Высота заднего угла подмышечной впадины</translation>
+        <translation type="vanished">Высота заднего угла подмышечной впадины</translation>
     </message>
     <message>
         <source>Height scapular point</source>
         <comment>Full measurement name</comment>
-        <translation>Высота лопаточной точки</translation>
+        <translation type="vanished">Высота лопаточной точки</translation>
     </message>
     <message>
         <source>Height under buttock folds</source>
         <comment>Full measurement name</comment>
-        <translation>Высота подъягодичной складки</translation>
+        <translation type="vanished">Высота подъягодичной складки</translation>
     </message>
     <message>
         <source>Hips excluding protruding abdomen</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват бедер без учета выступания живота</translation>
+        <translation type="vanished">Обхват бедер без учета выступания живота</translation>
     </message>
     <message>
         <source>Girth foot instep</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват подъема стопы</translation>
+        <translation type="vanished">Обхват подъема стопы</translation>
     </message>
     <message>
         <source>Side waist to floor</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии до пола сбоку</translation>
+        <translation type="vanished">Расстояние от линии талии до пола сбоку</translation>
     </message>
     <message>
         <source>Front waist to floor</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии до пола спереди</translation>
+        <translation type="vanished">Расстояние от линии талии до пола спереди</translation>
     </message>
     <message>
         <source>Arc through groin area</source>
         <comment>Full measurement name</comment>
-        <translation>Дуга через паховую область</translation>
+        <translation type="vanished">Дуга через паховую область</translation>
     </message>
     <message>
         <source>Waist to plane seat</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии до плоскости сидения</translation>
+        <translation type="vanished">Расстояние от линии талии до плоскости сидения</translation>
     </message>
     <message>
         <source>Neck to radial point</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до лучевой точки</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до лучевой точки</translation>
     </message>
     <message>
         <source>Neck to third finger</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до конца третьего пальца</translation>
     </message>
     <message>
         <source>Neck to first line chest circumference</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии обхвата груди первого спереди</translation>
     </message>
     <message>
         <source>Front waist length</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сбоку до линии талии спереди (длина талии спереди)</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сбоку до линии талии спереди (длина талии спереди)</translation>
     </message>
     <message>
         <source>Arc through shoulder joint</source>
         <comment>Full measurement name</comment>
-        <translation>Дуга через высшую точку плечевого сустава</translation>
+        <translation type="vanished">Дуга через высшую точку плечевого сустава</translation>
     </message>
     <message>
         <source>Neck to back line chest circumference</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
+        <translation type="vanished">Расстояние от точки основания шеи сзади до линии обхватов груди первого и второго с учетом выступа лопаток</translation>
     </message>
     <message>
         <source>Waist to neck side</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
+        <translation type="vanished">Расстояние от линии талии сзади до точки основания шеи сбоку</translation>
     </message>
     <message>
         <source>Arc length upper body</source>
         <comment>Full measurement name</comment>
-        <translation>Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
+        <translation type="vanished">Длина дуги верхней части туловища через точку основания шеи сбоку</translation>
     </message>
     <message>
         <source>Chest width</source>
         <comment>Full measurement name</comment>
-        <translation>Ширина груди</translation>
+        <translation type="vanished">Ширина груди</translation>
     </message>
     <message>
         <source>Anteroposterior diameter hands</source>
         <comment>Full measurement name</comment>
-        <translation>Передне-задний диаметр руки</translation>
+        <translation type="vanished">Передне-задний диаметр руки</translation>
     </message>
     <message>
         <source>Height clavicular point</source>
         <comment>Full measurement name</comment>
-        <translation>Высота ключичной точки</translation>
+        <translation type="vanished">Высота ключичной точки</translation>
     </message>
     <message>
         <source>Height armhole slash</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
+        <translation type="vanished">Расстояние от шейной точки до уровня заднего угла подмышечной впадины спереди (высота проймы косая)</translation>
     </message>
     <message>
         <source>Slash shoulder height</source>
         <comment>Full measurement name</comment>
-        <translation>Высота плеча косая</translation>
+        <translation type="vanished">Высота плеча косая</translation>
     </message>
     <message>
         <source>Half girth neck</source>
         <comment>Full measurement name</comment>
-        <translation>Полуобхват шеи</translation>
+        <translation type="vanished">Полуобхват шеи</translation>
     </message>
     <message>
         <source>Half girth neck for shirts</source>
         <comment>Full measurement name</comment>
-        <translation>Полуобхват шеи для сорочек</translation>
+        <translation type="vanished">Полуобхват шеи для сорочек</translation>
     </message>
     <message>
         <source>Half girth chest first</source>
         <comment>Full measurement name</comment>
-        <translation>Полуобхват груди первый</translation>
+        <translation type="vanished">Полуобхват груди первый</translation>
     </message>
     <message>
         <source>Half girth chest second</source>
         <comment>Full measurement name</comment>
-        <translation>Полуобхват груди второй</translation>
+        <translation type="vanished">Полуобхват груди второй</translation>
     </message>
     <message>
         <source>Half girth chest third</source>
         <comment>Full measurement name</comment>
-        <translation>Полуобхват груди третий</translation>
+        <translation type="vanished">Полуобхват груди третий</translation>
     </message>
     <message>
         <source>Half girth waist</source>
         <comment>Full measurement name</comment>
-        <translation>Полуобхват талии</translation>
+        <translation type="vanished">Полуобхват талии</translation>
     </message>
     <message>
         <source>Half girth hips considering protruding abdomen</source>
         <comment>Full measurement name</comment>
-        <translation>Полуобхват бедер с учетом выступания живота</translation>
+        <translation type="vanished">Полуобхват бедер с учетом выступания живота</translation>
     </message>
     <message>
         <source>Half girth hips excluding protruding abdomen</source>
         <comment>Full measurement name</comment>
-        <translation>Полуобхват бедер без учета выступания живота</translation>
+        <translation type="vanished">Полуобхват бедер без учета выступания живота</translation>
     </message>
     <message>
         <source>Girth knee flexed feet</source>
         <comment>Full measurement name</comment>
-        <translation>Обхват колена в согнутом положении ноги</translation>
+        <translation type="vanished">Обхват колена в согнутом положении ноги</translation>
     </message>
     <message>
         <source>Neck transverse diameter</source>
         <comment>Full measurement name</comment>
-        <translation>Поперечный диаметр шеи</translation>
+        <translation type="vanished">Поперечный диаметр шеи</translation>
     </message>
     <message>
         <source>Front slash shoulder height</source>
         <comment>Full measurement name</comment>
-        <translation>Высота плеча косая спереди</translation>
+        <translation type="vanished">Высота плеча косая спереди</translation>
     </message>
     <message>
         <source>Neck to front waist line</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от точки основания шеи до линии талии спереди</translation>
+        <translation type="vanished">Расстояние от точки основания шеи до линии талии спереди</translation>
     </message>
     <message>
         <source>Hand vertical diameter</source>
         <comment>Full measurement name</comment>
-        <translation>Вертикальный диаметр руки</translation>
+        <translation type="vanished">Вертикальный диаметр руки</translation>
     </message>
     <message>
         <source>Neck to knee point</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от шейной точки до колена</translation>
+        <translation type="vanished">Расстояние от шейной точки до колена</translation>
     </message>
     <message>
         <source>Waist to knee</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от линии талии до колена</translation>
+        <translation type="vanished">Расстояние от линии талии до колена</translation>
     </message>
     <message>
         <source>Shoulder height</source>
         <comment>Full measurement name</comment>
-        <translation>Высота плеча</translation>
+        <translation type="vanished">Высота плеча</translation>
     </message>
     <message>
         <source>Head height</source>
         <comment>Full measurement name</comment>
-        <translation>Высота головы</translation>
+        <translation type="vanished">Высота головы</translation>
     </message>
     <message>
         <source>Body position</source>
         <comment>Full measurement name</comment>
-        <translation>Положение корпуса</translation>
+        <translation type="vanished">Положение корпуса</translation>
     </message>
     <message>
         <source>Arc behind shoulder girdle</source>
         <comment>Full measurement name</comment>
-        <translation>Дуга плечевого пояса сзади</translation>
+        <translation type="vanished">Дуга плечевого пояса сзади</translation>
     </message>
     <message>
         <source>Neck to neck base</source>
         <comment>Full measurement name</comment>
-        <translation>Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
+        <translation type="vanished">Расстояние от шейной точки до точки основания шеи сбоку по линии измерения обхвата шеи</translation>
     </message>
     <message>
         <source>Depth waist first</source>
         <comment>Full measurement name</comment>
-        <translation>Глубина талии первая</translation>
+        <translation type="vanished">Глубина талии первая</translation>
     </message>
     <message>
         <source>Depth waist second</source>
         <comment>Full measurement name</comment>
-        <translation>Глубина талии вторая</translation>
+        <translation type="vanished">Глубина талии вторая</translation>
+    </message>
+</context>
+<context>
+    <name>MoveDoubleLabel</name>
+    <message>
+        <source>move the first dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move the second dart label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveLabel</name>
     <message>
         <source>Move point label</source>
-        <translation>Переместить метку точки</translation>
+        <translation type="vanished">Переместить метку точки</translation>
+    </message>
+    <message>
+        <source>move point label</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSPoint</name>
     <message>
         <source>Move single point</source>
-        <translation>Переместить базовую точку</translation>
+        <translation type="vanished">Переместить базовую точку</translation>
+    </message>
+    <message>
+        <source>move single point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSpline</name>
     <message>
         <source>Move spline</source>
-        <translation>Переместить сплайн</translation>
+        <translation type="vanished">Переместить сплайн</translation>
+    </message>
+    <message>
+        <source>move spline</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSplinePath</name>
     <message>
         <source>Move spline path</source>
-        <translation>Переместить сложный сплайн</translation>
+        <translation type="vanished">Переместить сложный сплайн</translation>
+    </message>
+    <message>
+        <source>move spline path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7471,6 +8384,809 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>Pattern_making_systems</name>
+    <message>
+        <source>Bunka</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bunka Fashion College</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fundamentals of Garment Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barnfield and Richard</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jo Barnfield and Andrew Richards</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Making Primer</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friendship/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elizabeth Friendship</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morris, K.</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karen Morris</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sewing Lingerie that Fits</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Castro</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lucia Mors de Castro</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking in Practic</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kim &amp; Uh</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Injoo Kim and Mykyung Uh</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apparel Making in Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waugh</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Norah Waugh</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corsets and Crinolines</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grimble</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frances Grimble</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fashions of the Gilded Age</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thornton&apos;s International System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ed. R. L. Shep</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Great War: Styles and Patterns of the 1910s</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hillhouse &amp; Mansfield</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dress Design: Draping and Flat Pattern Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pivnick</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Esther Kaplan Pivnick</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minister &amp; Son</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Complete Guide to Practical Cutting (1853)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strickland</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Strickland</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A Tailoring Manual</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loh &amp; Lewis</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>May Loh and Diehl Lewis</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternless Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morris, F. R.</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F. R. Morris</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ladies Garment Cutting and Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mason</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Mason</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Mason&apos;s Patternmaking Book</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kimata</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>K. Kimata</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Designer</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Master Designer (Chicago, IL)</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kopp</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Draft Basic Patterns</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ekern</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doris Ekern</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slacks Cut-to-Fit for Your Figure</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doyle</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sarah J. Doyle</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sarah&apos;s Key to Pattern Drafting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shelton</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karla J. Shelton</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Design and Sew Jeans</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique magazine (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rohr</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M. Rohr</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Moore</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dorothy Moore</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P25</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P25</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P25</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fukomoto</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sue S. Fukomoto</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International magazine (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erwin</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mabel D. Erwin</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Practical Dress Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gough</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E. L. G. Gough</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Principles of Garment Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allemong</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elizabeth M. Allemong</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>European Cut</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>McCunn</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Donald H. McCunn</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Make Your Own Sewing Patterns</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zarapkar</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zarapkar System of Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kunick</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Philip Kunick</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Handford</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jack Handford</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Davis</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>R. I. Davis</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MacLochlainn</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jason MacLochlainn</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Joseph-Armstrong</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Helen Joseph-Armstrong</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking for Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Supreme System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frederick T. Croonberg</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sugino</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Drafting Vols. I, II, III (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centre Point System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Louis Devere</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Handbook of Practical Cutting on the Centre Point System</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aldrich/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Winifred Aldrich</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric Pattern Cutting for Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aldrich/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric Pattern Cutting for Women&apos;s Wear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kershaw</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gareth Kershaw</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking for Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gilewska</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Teresa Gilewska</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern-Drafting for Fashion: The Basics</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lo</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dennic Chunman Lo</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bray</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Natalie Bray</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Knowles/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lori A. Knowles</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friendship/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Cutting for Men&apos;s Costume</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brown</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P. Clement Brown</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Art in Dress</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mitchell</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jno. J. Mitchell</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P51</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P51</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>system_P51</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eddy</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern and Dress Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Knowles/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>American Garment Cutter</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PostfixOperators</name>
     <message>
         <source>cm</source>
@@ -7546,11 +9262,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Add node</source>
-        <translation>Добавить узел</translation>
+        <translation type="vanished">Добавить узел</translation>
     </message>
     <message>
         <source>Move detail</source>
-        <translation>Переместить деталь</translation>
+        <translation type="vanished">Переместить деталь</translation>
     </message>
     <message>
         <source>mm</source>
@@ -7582,6 +9298,14 @@ Do you want to save your changes?</source>
     <message>
         <source>px</source>
         <translation>px</translation>
+    </message>
+    <message>
+        <source>add node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move detail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7771,7 +9495,11 @@ Do you want to save your changes?</source>
     <name>RenamePP</name>
     <message>
         <source>Rename pattern piece</source>
-        <translation>Переименовать лекало</translation>
+        <translation type="vanished">Переименовать лекало</translation>
+    </message>
+    <message>
+        <source>rename pattern piece</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7786,21 +9514,385 @@ Do you want to save your changes?</source>
     <name>SaveDetailOptions</name>
     <message>
         <source>Save detail option</source>
-        <translation>Сохранить параметры детали</translation>
+        <translation type="vanished">Сохранить параметры детали</translation>
+    </message>
+    <message>
+        <source>save detail option</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SaveToolOptions</name>
     <message>
         <source>Save tool option</source>
-        <translation>Сохранить параметры инструмента</translation>
+        <translation type="vanished">Сохранить параметры инструмента</translation>
+    </message>
+    <message>
+        <source>save tool option</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TMainWindow</name>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measuremnts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Обозначение</translation>
+    </message>
+    <message>
+        <source>Calculated value</source>
+        <translation type="unfinished">Расчитаное значение</translation>
+    </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Формула</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <translation type="unfinished">Базовое значение</translation>
+    </message>
+    <message>
+        <source>In sizes</source>
+        <translation type="unfinished">В размерах</translation>
+    </message>
+    <message>
+        <source>In heights</source>
+        <translation type="unfinished">В ростах</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished">Детали</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Название:</translation>
+    </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In sizes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In heights:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculated value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation type="unfinished">Путь:</translation>
+    </message>
+    <message>
+        <source>Path to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show in Explorer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base size value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base height value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Given name:</source>
+        <translation type="unfinished">Имя:</translation>
+    </message>
+    <message>
+        <source>Family name:</source>
+        <translation type="unfinished">Фамилия:</translation>
+    </message>
+    <message>
+        <source>Birth date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sex:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished">Файл</translation>
+    </message>
+    <message>
+        <source>Window</source>
+        <translation type="unfinished">Окно</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished">Помощь</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="unfinished">Мерки</translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gradation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open individual ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Сохранить</translation>
+    </message>
+    <message>
+        <source>Save As ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">Про &amp;Qt</translation>
+    </message>
+    <message>
+        <source>About Tape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Новое</translation>
+    </message>
+    <message>
+        <source>Add known</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open standard ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show information about all known measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Свойства</translation>
+    </message>
+    <message>
+        <source>untitled %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file already opened in another window.</source>
+        <translation type="unfinished">Этот файл уже открыт в другом окне.</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="unfinished">Ошибка файла.</translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements (*.vst, *.vit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save file</source>
+        <translation type="unfinished">Не удалось сохранить файл</translation>
+    </message>
+    <message>
+        <source>measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit)</source>
+        <translation type="unfinished">Индивидуальные мерки (*.vit)</translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst)</source>
+        <translation type="unfinished">Стандартные мерки (*.vst)</translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation type="unfinished">Сохранить как</translation>
+    </message>
+    <message>
+        <source>&amp;New Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M_%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
+    </message>
+    <message>
+        <source>Empty field.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished">Ошибка синтаксического анализа: %1</translation>
+    </message>
+    <message>
+        <source>Standard measurements</source>
+        <translation type="unfinished">Стандартная таблица мерок</translation>
+    </message>
+    <message>
+        <source>Height: </source>
+        <translation type="unfinished">Рост:</translation>
+    </message>
+    <message>
+        <source>Size: </source>
+        <translation type="unfinished">Размеры: </translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Индивидуальные мерки</translation>
+    </message>
+    <message>
+        <source>male</source>
+        <translation type="unfinished">мужчина</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <translation type="unfinished">женщина</translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation type="unfinished">без имени</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsaved changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements have been modified.
+Do you want to save your changes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Empty field</source>
+        <translation type="unfinished">Пустое поле</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="unfinished">Открыть файл</translation>
     </message>
 </context>
 <context>
     <name>TableWindow</name>
     <message>
         <source>Create a layout</source>
-        <translation>Создать раскладку</translation>
+        <translation type="vanished">Создать раскладку</translation>
     </message>
     <message>
         <source>toolBar</source>
@@ -7812,7 +9904,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save layout</source>
-        <translation>Создать раскладку</translation>
+        <translation type="vanished">Создать раскладку</translation>
     </message>
     <message>
         <source>Next</source>
@@ -7864,11 +9956,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Увеличить</translation>
+        <translation type="vanished">Увеличить</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Уменьшить</translation>
+        <translation type="vanished">Уменьшить</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -7888,27 +9980,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled</source>
-        <translation>без имени</translation>
+        <translation type="vanished">без имени</translation>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation>Svg файлы (*.svg)</translation>
+        <translation type="vanished">Svg файлы (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation>Pdf файлы (*.pdf)</translation>
+        <translation type="vanished">Pdf файлы (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation>Изображения (*.png)</translation>
+        <translation type="vanished">Изображения (*.png)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation>Ps файл (*.ps)</translation>
+        <translation type="vanished">Ps файл (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation>EPS файл (*.eps)</translation>
+        <translation type="vanished">EPS файл (*.eps)</translation>
     </message>
     <message>
         <source>Collisions found.</source>
@@ -7916,11 +10008,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation>Создание файла &apos;%1&apos; не удалось! %2</translation>
+        <translation type="vanished">Создание файла &apos;%1&apos; не удалось! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Критическая ошибка!</translation>
+        <translation type="vanished">Критическая ошибка!</translation>
     </message>
     <message>
         <source>SVG Generator Example Drawing</source>
@@ -7932,59 +10024,59 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation>Wavefront OBJ (*.obj)</translation>
+        <translation type="vanished">Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation>Страницы раскладки</translation>
+        <translation type="vanished">Страницы раскладки</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation>Раскладка</translation>
+        <translation type="vanished">Роскладка</translation>
     </message>
     <message>
         <source>Main toolbar</source>
-        <translation>Главная панель инструментов</translation>
+        <translation type="vanished">Главная панель инструментов</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Файл</translation>
+        <translation type="vanished">Файл</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Редактировать</translation>
+        <translation type="vanished">Редактировать</translation>
     </message>
     <message>
         <source>Toolbar print</source>
-        <translation>Панель инструментов печать</translation>
+        <translation type="vanished">Панель инструментов печать</translation>
     </message>
     <message>
         <source>&amp;Save As...</source>
-        <translation>&amp;Сохранить как...</translation>
+        <translation type="vanished">&amp;Сохранить как...</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
-        <translation>Ctrl+S</translation>
+        <translation type="vanished">Ctrl+S</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation>Назад</translation>
+        <translation type="vanished">Назад</translation>
     </message>
     <message>
         <source>Back to main window</source>
-        <translation>Назад к основному окну</translation>
+        <translation type="vanished">Назад к основному окну</translation>
     </message>
     <message>
         <source>Create Layout</source>
-        <translation>Создать раскладку</translation>
+        <translation type="vanished">Создать раскладку</translation>
     </message>
     <message>
         <source>Print pre&amp;view...</source>
-        <translation>Предварительный &amp;просмотр...</translation>
+        <translation type="vanished">Предварительный &amp;просмотр...</translation>
     </message>
     <message>
         <source>&amp;Print...</source>
-        <translation>&amp;Печать...</translation>
+        <translation type="vanished">&amp;Печать...</translation>
     </message>
     <message>
         <source>Ctrl+P</source>
@@ -7992,23 +10084,120 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print to p&amp;df</source>
-        <translation>Сохранить в p&amp;df</translation>
+        <translation type="vanished">Сохранить в p&amp;df</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Ошибка печати</translation>
+        <translation type="vanished">Ошибка печати</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Не удается выполнить, на вашей системе нету доступных принтеров.</translation>
+        <translation type="vanished">Не удается выполнить, на вашей системе нету доступных принтеров.</translation>
     </message>
     <message>
         <source>Print to pdf</source>
-        <translation>Печать в pdf</translation>
+        <translation type="vanished">Печать в pdf</translation>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
-        <translation>PDF файл (*.pdf)</translation>
+        <translation type="vanished">PDF файл (*.pdf)</translation>
+    </message>
+</context>
+<context>
+    <name>TapeConfigDialog</name>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished">Применить</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">&amp;Отмена</translation>
+    </message>
+    <message>
+        <source>&amp;Ok</source>
+        <translation type="unfinished">&amp;Ок</translation>
+    </message>
+    <message>
+        <source>Config Dialog</source>
+        <translation type="unfinished">Диалог параметров</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished">Настройки</translation>
+    </message>
+    <message>
+        <source>Paths</source>
+        <translation type="unfinished">Пути</translation>
+    </message>
+</context>
+<context>
+    <name>TapeConfigurationPage</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Язык</translation>
+    </message>
+    <message>
+        <source>GUI language</source>
+        <translation type="unfinished">Язык интерфейса</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts</source>
+        <translation type="unfinished">Разделитель дробовой части</translation>
+    </message>
+    <message>
+        <source>With OS options (%1)</source>
+        <translation type="unfinished">С опциями ОС (%1)</translation>
+    </message>
+</context>
+<context>
+    <name>TapePathPage</name>
+    <message>
+        <source>Open Directory</source>
+        <translation type="unfinished">Открыть директорию</translation>
+    </message>
+    <message>
+        <source>Path that use Valentina</source>
+        <translation type="unfinished">Путь, что использует Валентина</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished">По умолчанию</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Редактировать</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Тип</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished">Путь</translation>
+    </message>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Индивидуальные мерки</translation>
+    </message>
+    <message>
+        <source>Standard measurements</source>
+        <translation type="unfinished">Стандартная таблица мерок</translation>
+    </message>
+    <message>
+        <source>Templates</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8070,6 +10259,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t find tag Modeling</source>
         <translation type="vanished">Не могу найти тег Modeling</translation>
+    </message>
+</context>
+<context>
+    <name>VAbstractPattern</name>
+    <message>
+        <source>Can&apos;t find tool in table.</source>
+        <translation type="unfinished">Не могу найти инструмент в таблице.</translation>
     </message>
 </context>
 <context>
@@ -8627,6 +10823,26 @@ Do you want to save your changes?</source>
         <source>File error.</source>
         <translation>Ошибка файла.</translation>
     </message>
+    <message>
+        <source>Error creating or updating point of intersection arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating point of intersection circles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating or updating true darts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -8658,11 +10874,11 @@ Do you want to save your changes?</source>
     <name>VTableGraphicsView</name>
     <message>
         <source>can&apos;t find detail</source>
-        <translation>не могу найти деталь</translation>
+        <translation type="vanished">не могу найти деталь</translation>
     </message>
     <message>
         <source>detail found</source>
-        <translation>деталь найдена</translation>
+        <translation type="vanished">деталь найдена</translation>
     </message>
 </context>
 <context>
@@ -8806,6 +11022,62 @@ Do you want to save your changes?</source>
         <source>Point intersection curve and axis</source>
         <translation>Точка пересечения кривой и оси</translation>
     </message>
+    <message>
+        <source>First point</source>
+        <translation type="unfinished">Первая точка</translation>
+    </message>
+    <message>
+        <source>Second point</source>
+        <translation type="unfinished">Вторая точка</translation>
+    </message>
+    <message>
+        <source>Arc with given length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>True darts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 1 label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point 2 label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from intersection two arcs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from intersection two circles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from circle and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolTriangle</name>
@@ -8819,6 +11091,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t find tag Modeling</source>
         <translation type="vanished">Не могу найти тег Modeling</translation>
+    </message>
+</context>
+<context>
+    <name>VVSTConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished">Неожиданная версия &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
+        <translation type="unfinished">Ошибка востановления с резервного файла: %1.</translation>
     </message>
 </context>
 <context>
@@ -8856,6 +11139,41 @@ Do you want to save your changes?</source>
     <message>
         <source>SplPath</source>
         <translation type="vanished">СлСпл</translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

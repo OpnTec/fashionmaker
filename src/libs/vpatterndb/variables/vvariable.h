@@ -38,8 +38,8 @@ class VVariable :public VInternalVariable
 {
 public:
     VVariable();
-    VVariable(const QString &name, const qreal &base, const qreal &ksize = 0, const qreal &kheight = 0,
-              const QString &description = QString());
+    VVariable(const QString &name, qreal baseSize, qreal baseHeight, const qreal &base, const qreal &ksize = 0,
+              const qreal &kheight = 0, const QString &description = QString());
     VVariable(const QString &name, const qreal &base, const QString &description = QString());
     VVariable(const VVariable &var);
     VVariable &operator=(const VVariable &var);

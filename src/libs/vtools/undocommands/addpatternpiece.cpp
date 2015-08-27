@@ -30,11 +30,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 AddPatternPiece::AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP,
-                                 const QString &mPath, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), namePP(namePP), mPath(mPath)
+                                 QUndoCommand *parent)
+    : VUndoCommand(xml, doc, parent), namePP(namePP)
 {
     SCASSERT(namePP.isEmpty() == false);
-    SCASSERT(mPath.isEmpty() == false);
     setText(tr("add pattern piece %1").arg(namePP));
 }
 
@@ -65,9 +64,9 @@ void AddPatternPiece::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    if (doc->CountPP() == 0 && mPath.isEmpty() == false)
+    if (doc->CountPP() == 0)
     {
-        doc->CreateEmptyFile(mPath);
+        doc->CreateEmptyFile();
     }
 
     QDomElement rootElement = doc->documentElement();
