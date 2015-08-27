@@ -299,7 +299,14 @@ bool MainWindow::LoadMeasurements(const QString &path)
     }
     catch (VException &e)
     {
-        e.CriticalMessageBox(tr("File error."), this);
+        if (qApp->CheckGUI())
+        {
+            e.CriticalMessageBox(tr("File error."), this);
+        }
+        else
+        {
+            vStdErr() << tr("File error: ")<< e.MoreInformation() <<"\n";
+        }
         delete m;
         return false;
     }
