@@ -3112,9 +3112,13 @@ void MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
     catch (VException &e)
     {
         if (qApp->CheckGUI())
+        {
             e.CriticalMessageBox(tr("File error."), this);
+        }
         else
+        {
             vStdErr() << tr("File error.") << e.MoreInformation() << "\n";
+        }
         Clear();
         return;
     }
