@@ -239,11 +239,8 @@ QmuParserError::QmuParserError ( EErrorCodes iErrc, const QString &sTok, const Q
       m_ErrMsg ( QmuParserErrorMsg::Instance() )
 {
     m_sMsg = m_ErrMsg[m_iErrc];
-    qDebug()<<m_sMsg;
     m_sMsg.replace("$POS$", QString().setNum ( m_iPos ));
-    qDebug()<<m_sMsg;
     m_sMsg.replace("$TOK$", m_sTok );
-    qDebug()<<m_sMsg;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

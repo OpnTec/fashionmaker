@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 # File with common stuff for whole project
-include(../../../Valentina.pri)
+include(../../../common.pri)
 
 QT       += widgets xml
 
@@ -45,10 +45,10 @@ OBJECTS_DIR = obj
 # Directory for files created uic
 UI_DIR = uic
 
-# Set using ccache. Function enable_ccache() defined in Valentina.pri.
+# Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
-# Set precompiled headers. Function set_PCH() defined in Valentina.pri.
+# Set precompiled headers. Function set_PCH() defined in common.pri.
 $$set_PCH()
 
 CONFIG(debug, debug|release){
@@ -61,7 +61,7 @@ CONFIG(debug, debug|release){
                 -isystem "$${OUT_PWD}/$${UI_DIR}" \
                 -isystem "$${OUT_PWD}/$${MOC_DIR}" \
 #                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+                $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
             noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
                 # do nothing
@@ -77,11 +77,11 @@ CONFIG(debug, debug|release){
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+            $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
         }
     } else {
         *-g++{
-            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+            QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
         }
     }
 

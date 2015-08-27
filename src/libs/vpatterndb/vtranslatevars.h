@@ -29,16 +29,14 @@
 #ifndef VTRANSLATEVARS_H
 #define VTRANSLATEVARS_H
 
-#include <QMap>
-#include "../qmuparser/qmutranslation.h"
+#include "vtranslatemeasurements.h"
 
-class VTranslateVars
+class VTranslateVars : public VTranslateMeasurements
 {
 public:
     VTranslateVars(bool osSeparator);
-    ~VTranslateVars();
+    virtual ~VTranslateVars() Q_DECL_OVERRIDE;
 
-    bool MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool PostfixOperatorsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
@@ -47,33 +45,37 @@ public:
     QString VarToUser(const QString &var) const;
     QString VarFromUser(const QString &var) const;
 
-    QString GuiText(const QString &measurement) const;
-    QString Description(const QString &measurement) const;
+    QString PMSystemName(const QString &code) const;
+    QString PMSystemAuthor(const QString &code) const;
+    QString PMSystemBook(const QString &code) const;
+
     QString PostfixOperator(const QString &name) const;
     QString STDescription(const QString &id) const;
 
     QString FormulaFromUser(const QString &formula, bool osSeparator) const;
     QString FormulaToUser(const QString &formula) const;
 
+    virtual void Retranslate() Q_DECL_OVERRIDE;
+
 private:
     Q_DISABLE_COPY(VTranslateVars)
-    QMap<QString, qmu::QmuTranslation> measurements;
-    QMap<QString, qmu::QmuTranslation> guiTexts;
-    QMap<QString, qmu::QmuTranslation> descriptions;
+    QMap<QString, qmu::QmuTranslation> PMSystemNames;
+    QMap<QString, qmu::QmuTranslation> PMSystemAuthors;
+    QMap<QString, qmu::QmuTranslation> PMSystemBooks;
     QMap<QString, qmu::QmuTranslation> variables;
     QMap<QString, qmu::QmuTranslation> functions;
     QMap<QString, qmu::QmuTranslation> postfixOperators;
     QMap<QString, qmu::QmuTranslation> stDescriptions;
     bool osSeparator;
 
-    void InitMeasurements();
+    void InitPatternMakingSystems();
     void InitVariables();
     void InitFunctions();
     void InitPostfixOperators();
     void InitSTDescriptions();
 
-    void InitMeasurement(const QString &name, const qmu::QmuTranslation &m, const qmu::QmuTranslation &g,
-                         const qmu::QmuTranslation &d);
+    void InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
+                    const qmu::QmuTranslation &book);
 
     void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens, QMap<int, QString> &numbers) const;
     static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);

@@ -10,7 +10,9 @@ SOURCES += \
     $$PWD/qmuparserbase.cpp \
     $$PWD/qmuparsertest.cpp \
     $$PWD/stable.cpp \
-    $$PWD/qmutranslation.cpp
+    $$PWD/qmutranslation.cpp \
+    $$PWD/qmuformulabase.cpp \
+    $$PWD/qmutokenparser.cpp
 
 HEADERS += \
     $$PWD/qmuparser.h\
@@ -26,4 +28,6 @@ HEADERS += \
     $$PWD/qmuparsertest.h \
     $$PWD/stable.h \
     $$PWD/qmutranslation.h \
-    $$PWD/qmudef.h
+    $$PWD/qmudef.h \
+    $$PWD/qmuformulabase.h \
+    $$PWD/qmutokenparser.h

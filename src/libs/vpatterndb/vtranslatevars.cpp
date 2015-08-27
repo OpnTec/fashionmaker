@@ -30,17 +30,24 @@
 #include "calculator.h"
 #include "../vmisc/def.h"
 #include "../vgeometry/vgeometrydef.h"
+#include "../qmuparser/qmutokenparser.h"
+#include "../ifc/ifcdef.h"
 
 using namespace qmu;
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateVars::VTranslateVars(bool osSeparator)
-    :measurements(QMap<QString, QmuTranslation>()), guiTexts(QMap<QString, QmuTranslation>()),
-      descriptions(QMap<QString, QmuTranslation>()), variables(QMap<QString, QmuTranslation>()),
-      functions(QMap<QString, QmuTranslation>()), postfixOperators(QMap<QString, QmuTranslation>()),
-      stDescriptions(QMap<QString, QmuTranslation>()), osSeparator(osSeparator)
+    :VTranslateMeasurements(),
+      PMSystemNames(QMap<QString, QmuTranslation>()),
+      PMSystemAuthors(QMap<QString, QmuTranslation>()),
+      PMSystemBooks(QMap<QString, QmuTranslation>()),
+      variables(QMap<QString, QmuTranslation>()),
+      functions(QMap<QString, QmuTranslation>()),
+      postfixOperators(QMap<QString, QmuTranslation>()),
+      stDescriptions(QMap<QString, QmuTranslation>()),
+      osSeparator(osSeparator)
 {
-    InitMeasurements();
+    InitPatternMakingSystems();
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
@@ -52,921 +59,318 @@ VTranslateVars::~VTranslateVars()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::InitMeasurements()
+void VTranslateVars::InitPatternMakingSystems()
 {
     //Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
     //mark such string to translation.
-    QmuTranslation m;
-    QmuTranslation g;
-    QmuTranslation d;
+    QmuTranslation name;
+    QmuTranslation author;
+    QmuTranslation book;
 
     //=================================================================================================================
-    // head_and_neck
-    m = QmuTranslation::translate("Measurements", "head_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Head girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around fullest part of Head",
-                                  "Full measurement description");
-    InitMeasurement(headGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "mid_neck_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Mid-neck girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around middle part of Neck",
-                                  "Full measurement description");
-    InitMeasurement(midNeckGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_base_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Neck Base girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Neck at base", "Full measurement description");
-    InitMeasurement(neckBaseGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "head_and_neck_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Head and Neck length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Vertical Distance from Crown to Nape",
-                                  "Full measurement description");
-    InitMeasurement(headAndNeckLength_M, m, g, d);
-    //=================================================================================================================
-    // torso
-    m = QmuTranslation::translate("Measurements", "center_front_waist_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Center length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Front Neck Center over tape at Bustline to Front Waist "
-                                  "Center", "Full measurement description");
-    InitMeasurement(centerFrontWaistLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "center_back_waist_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Center length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Back Neck Center to Back Waist Center",
-                                  "Full measurement description");
-    InitMeasurement(centerBackWaistLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Shoulder length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "NeckPoint to ShoulderTip",
-                                  "Full measurement description");
-    InitMeasurement(shoulderLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "side_waist_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Side Waist length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Armpit to Waist side", "Full measurement description");
-    InitMeasurement(sideWaistLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "trunk_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Trunk length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions",
-                                  "Around Body from middle of Shoulder length to BustPoint to Crotch up back to "
-                                  "beginning point", "Full measurement description");
-    InitMeasurement(trunkLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Shoulder girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Arms and Torso, at bicep level parallel to "
-                                  "floor, with arms hanging at the sides", "Full measurement description");
-    InitMeasurement(shoulderGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "upper_chest_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Upper Chest girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Chest at Armfold level, will be parallel to "
-                                  "floor across back, will not be parallel to floor across front chest",
-                                  "Full measurement description");
-    InitMeasurement(upperChestGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bust_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Bust girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around fullest part of Bust, parallel to floor",
-                                "Full measurement description");
-    InitMeasurement(bustGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "under_bust_girth",
-                                "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Under Bust girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Chest below the Bust, parallel to floor",
-                                "Full measurement description");
-    InitMeasurement(underBustGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Waist girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Tie a string around smallest part of waist, keep string "
-                                "tied while taking meaasurements. Not usually parallel to floor for front waist or "
-                                "back waist.",
-                                  "Full measurement description");
-    InitMeasurement(waistGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "high_hip_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "HighHip girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around HighHip, parallel to floor",
-                                  "Full measurement description");
-    InitMeasurement(highHipGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hip_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Hip girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Hip, parallel to floor",
-                                  "Full measurement description");
-    InitMeasurement(hipGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "upper_front_chest_width",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Upper Chest width", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Across Front UpperChest, smallest width from armscye to "
-                                  "armscye", "Full measurement description");
-    InitMeasurement(upperFrontChestWidth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_chest_width",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Chest width", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Across Front Chest, from armfold to armfold",
-                                  "Full measurement description");
-    InitMeasurement(frontChestWidth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "across_front_shoulder_width",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Across Shoulder width", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "From ShoulderTip to ShoulderTip, across Front",
-                                  "Full measurement description");
-    InitMeasurement(acrossFrontShoulderWidth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "across_back_shoulder_width",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Across Shoulder width", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "From ShoulderTip to ShoulderTip, across Back",
-                                  "Full measurement description");
-    InitMeasurement(acrossBackShoulderWidth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "upper_back_width",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Upper Chest width", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Across Back UpperChest, smallest width from armscye to "
-                                  "armscye", "Full measurement description");
-    InitMeasurement(upperBackWidth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_width",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Chest width", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Across Back Chest, from armfold to armfold",
-                                  "Full measurement description");
-    InitMeasurement(backWidth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bustpoint_to_bustpoint",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "BustPoint to BustPoint", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Distance between BustPoints, across Chest",
-                                  "Full measurement description");
-    InitMeasurement(bustpointToBustpoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "halter_bustpoint_to_bustpoint",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Halter Bustpoint to Bustpoint", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Distance from Bustpoint, behind neck, down to Bustpoint",
-                                  "Full measurement description");
-    InitMeasurement(halterBustpointToBustpoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_to_bustpoint",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "NeckPoint to BustPoint", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "From NeckPoint to BustPoint",
-                                  "Full measurement description");
-    InitMeasurement(neckToBustpoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "crotch_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Crotch length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "From Front Waist Center, down to crotch, up to Back "
-                                  "Waist Center", "Full measurement description");
-    InitMeasurement(crotchLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rise_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Rise height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Sit on hard chair, measure from side waist straight "
-                                  "down to chair bottom", "Full measurement description");
-    InitMeasurement(riseHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_drop",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Shoulder Drop", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Vertical Distance from NeckPoint level to ShoulderTip "
-                                  "level", "Full measurement description");
-    InitMeasurement(shoulderDrop_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_slope_degrees",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Shoulder Slope degrees", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Degrees of angle from NeckPoint to ShoulderTip – "
-                                  "requires goniometer", "Full measurement description");
-    InitMeasurement(shoulderSlopeDegrees_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_shoulder_slope_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Shoulder Balance", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "ShoulderTip to Front Waist Center",
-                                  "Full measurement description");
-    InitMeasurement(frontShoulderSlopeLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_shoulder_slope_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Shoulder Balance", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "ShoulderTip to Back Waist Center",
-                                  "Full measurement description");
-    InitMeasurement(backShoulderSlopeLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_shoulder_to_waist_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Full Length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "NeckPoint straight down front chest to Waistline",
-                                  "Full measurement description");
-    InitMeasurement(frontShoulderToWaistLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_shoulder_to_waist_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Full Length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Back NeckPoint straight down back chest to Waistline",
-                                  "Full measurement description");
-    InitMeasurement(backShoulderToWaistLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_neck_arc",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Neck arc", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "NeckPoint to NeckPoint through Front Neck Center",
-                                  "Full measurement description");
-    InitMeasurement(frontNeckArc_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_neck_arc",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Neck arc", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "NeckPoint to NeckPoint across Nape",
-                                  "Full measurement description");
-    InitMeasurement(backNeckArc_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_upper_chest_arc",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front upper-bust arc", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Front upper-bust arc", "Full measurement description");
-    InitMeasurement(frontUpperChestArc_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_upper_chest_arc",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back UpperBust arc", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Back UpperBust side to side",
-                                  "Full measurement description");
-    InitMeasurement(backUpperChestArc_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_waist_arc",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Waist arc", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Front Waist side to side",
-                                  "Full measurement description");
-    InitMeasurement(frontWaistArc_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_waist_arc",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Waist arc", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Back Waist side to side",
-                                  "Full measurement description");
-    InitMeasurement(backWaistArc_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_upper_hip_arc",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front UpperHip arc", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Front UpperHip side to side",
-                                  "Full measurement description");
-    InitMeasurement(frontUpperHipArc_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_upper_hip_arc",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back UpperHip arc", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Back UpperHip side to side",
-                                  "Full measurement description");
-    InitMeasurement(backUpperHipArc_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_hip_arc",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Hip arc", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Front Hip side to side",
-                                  "Full measurement description");
-    InitMeasurement(frontHipArc_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_hip_arc",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Hip arc", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Back Hip side to side", "Full measurement description");
-    InitMeasurement(backHipArc_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "chest_slope",
-                                "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Chest Balance", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "NeckPoint to Front ArmfoldPoint",
-                                "Full measurement description");
-    InitMeasurement(chestSlope_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_slope",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Balance", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "NeckPoint to Back ArmfoldPoint",
-                                  "Full measurement description");
-    InitMeasurement(backSlope_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_waist_slope",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Waist Balance", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "NeckPoint across Front Chest to Waist side",
-                                  "Full measurement description");
-    InitMeasurement(frontWaistSlope_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_waist_slope",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back Waist Balance", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "NeckPoint across Back Chest to Waist side",
-                                  "Full measurement description");
-    InitMeasurement(backWaistSlope_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_neck_to_upper_chest_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front UpperChest height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Front Neck Center straight down to UpperChest line",
-                                  "Full measurement description");
-    InitMeasurement(frontNeckToUpperChestHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_neck_to_bust_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Bust height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Front Neck Center straight down to Bust line",
-                                  "Full measurement description");
-    InitMeasurement(frontNeckToBustHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_waist_to_upper_chest",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front Upper chest waist", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Front Upper chest waist",
-                                  "Full measurement description");
-    InitMeasurement(frontWaistToUpperChest_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_waist_to_lower_breast",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front waist to lower breast", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Front waist to lower breast",
-                                  "Full measurement description");
-    InitMeasurement(frontWaistToLowerBreast_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "back_waist_to_upper_chest",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Back waist to upper chest", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Back waist to upper chest",
-                                  "Full measurement description");
-    InitMeasurement(backWaistToUpperChest_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "strap_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Strap length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Strap length",
-                                  "Full measurement description");
-    InitMeasurement(strapLength_M, m, g, d);
-    //=================================================================================================================
-    // arm
-    m = QmuTranslation::translate("Measurements", "armscye_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Armscye Girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Armscye", "Full measurement description");
-    InitMeasurement(armscyeGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "elbow_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Elbow Girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Elbow with elbow bent",
-                                  "Full measurement description");
-    InitMeasurement(elbowGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "upper_arm_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Upperarm Girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around UpperArm", "Full measurement description");
-    InitMeasurement(upperArmGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "wrist_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Wrist girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Wrist", "Full measurement description");
-    InitMeasurement(wristGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "scye_depth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Armscye depth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Nape straight down to UnderBust line (same as Back "
-                                  "UpperBust height)", "Full measurement description");
-    InitMeasurement(scyeDepth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_and_arm_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Shoulder and Arm length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "NeckPoint to ShoulderTip to Wrist, with elbow bent and "
-                                  "hand on hip", "Full measurement description");
-    InitMeasurement(shoulderAndArmLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "underarm_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Underarm length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Armpit to Wrist, with arm straight and hanging at side",
-                                  "Full measurement description");
-    InitMeasurement(underarmLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "cervicale_to_wrist_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Nape to wrist length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Nape to Wrist, with elbow bent and hand on hip",
-                                  "Full measurement description");
-    InitMeasurement(cervicaleToWristLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_to_elbow_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Elbow length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "ShoulderTip to Elbow, with elbow bent and hand on hip",
-                                  "Full measurement description");
-    InitMeasurement(shoulderToElbowLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Arm length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "ShoulderTip to Wrist, with elbow bent and hand on hip",
-                                  "Full measurement description");
-    InitMeasurement(armLength_M, m, g, d);
-    //=================================================================================================================
-    // hand
-    m = QmuTranslation::translate("Measurements", "hand_width",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Hand width", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Hand side to side", "Full measurement description");
-    InitMeasurement(handWidth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hand_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Hand length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Hand Middle Finger tip to wrist",
-                                "Full measurement description");
-    InitMeasurement(handLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hand_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Hand girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Hand", "Full measurement description");
-    InitMeasurement(handGirth_M, m, g, d);
-    //=================================================================================================================
-    // leg
-    m = QmuTranslation::translate("Measurements", "thigh_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Thigh girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Thigh", "Full measurement description");
-    InitMeasurement(thighGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "mid_thigh_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Midthigh girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around MidThigh", "Full measurement description");
-    InitMeasurement(midThighGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "knee_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Knee girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Knee", "Full measurement description");
-    InitMeasurement(kneeGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "calf_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Calf girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Calf", "Full measurement description");
-    InitMeasurement(calfGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "ankle_girth",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Ankle girth", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Around Ankle", "Full measurement description");
-    InitMeasurement(ankleGirth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "knee_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Knee height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Knee to Floor", "Full measurement description");
-    InitMeasurement(kneeHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "ankle_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Ankle height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Ankle to Floor", "Full measurement description");
-    InitMeasurement(ankleHeight_M, m, g, d);
-    //=================================================================================================================
-    // foot
-    m = QmuTranslation::translate("Measurements", "foot_width",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Foot width", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Widest part of Foot side to side",
-                                  "Full measurement description");
-    InitMeasurement(footWidth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "foot_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Foot length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Tip of Longest Toe straight to back of heel",
-                                  "Full measurement description");
-    InitMeasurement(footLength_M, m, g, d);
-    //=================================================================================================================
-    // heights
-    m = QmuTranslation::translate("Measurements", "height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Total Height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Top of head to floor", "Full measurement description");
-    InitMeasurement(height_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "cervicale_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Nape height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Nape to Floor", "Full measurement description");
-    InitMeasurement(cervicaleHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "cervicale_to_knee_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Nape to knee height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Nape to Knee", "Full measurement description");
-    InitMeasurement(cervicaleToKneeHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Waist height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Waist side to floor", "Full measurement description");
-    InitMeasurement(waistHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "high_hip_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "HighHip height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "HighHip side to Floor", "Full measurement description");
-    InitMeasurement(highHipHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hip_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Hip height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Hip side to Floor", "Full measurement description");
-    InitMeasurement(hipHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_hip_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Waist to Hip height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Waist side to Hip", "Full measurement description");
-    InitMeasurement(waistToHipHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_knee_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Waist to Knee height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Waist side to Knee", "Full measurement description");
-    InitMeasurement(waistToKneeHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "crotch_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Crotch height/Inseam", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Crotch to Floor along inside leg",
-                                  "Full measurement description");
-    InitMeasurement(crotchHeight_M, m, g, d);
-    //=================================================================================================================
-    //extended
-    m = QmuTranslation::translate("Measurements", "size", "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Size", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Size", "Full measurement description");
-    InitMeasurement(size_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "height_front_neck_base_point",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Height front neck base point", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Height of the point base of the neck in front",
-                                  "Full measurement description");
-    InitMeasurement(heightFrontNeckBasePoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "height_base_neck_side_point",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Height base neck side point", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Height of the base of the neck side point",
-                                  "Full measurement description");
-    InitMeasurement(heightBaseNeckSidePoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "height_shoulder_point",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Height shoulder point", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The height of the shoulder point",
-                                  "Full measurement description");
-    InitMeasurement(heightShoulderPoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "height_nipple_point",
-                                "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Height nipple point", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Height nipple point", "Full measurement description");
-    InitMeasurement(heightNipplePoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "height_back_angle_axilla",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Height back angle axilla", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Height back angle axilla",
-                                  "Full measurement description");
-    InitMeasurement(heightBackAngleAxilla_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "height_scapular_point",
-                                "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Height scapular point", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Height scapular point", "Full measurement description");
-    InitMeasurement(heightScapularPoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "height_under_buttock_folds",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Height under buttock folds", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Height under buttock folds",
-                                  "Full measurement description");
-    InitMeasurement(heightUnderButtockFolds_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hips_excluding_protruding_abdomen",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Hips excluding protruding abdomen",
-                                  "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Hips excluding protruding abdomen",
-                                  "Full measurement description");
-    InitMeasurement(hipsExcludingProtrudingAbdomen_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "girth_foot_instep",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Girth foot instep", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Girth foot instep", "Full measurement description");
-    InitMeasurement(girthFootInstep_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "side_waist_to_floor",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Side waist to floor", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the side waist to floor",
-                                  "Full measurement description");
-    InitMeasurement(sideWaistToFloor_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_waist_to_floor",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front waist to floor", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the front waist to floor",
-                                  "Full measurement description");
-    InitMeasurement(frontWaistToFloor_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arc_through_groin_area",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Arc through groin area", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Arc through groin area", "Full measurement description");
-    InitMeasurement(arcThroughGroinArea_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_plane_seat",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Waist to plane seat", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the waist to the plane seat",
-                                  "Full measurement description");
-    InitMeasurement(waistToPlaneSeat_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_to_radial_point",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Neck to radial point", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the base of the neck to the side of "
-                                  "the radial point", "Full measurement description");
-    InitMeasurement(neckToRadialPoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_to_third_finger",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Neck to third finger", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Distance from the base of the neck side point to the "
-                                  "end of the third finger", "Full measurement description");
-    InitMeasurement(neckToThirdFinger_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_to_first_line_chest_circumference",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Neck to first line chest circumference",
-                                  "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the base of the neck to the side of "
-                                  "the first line in front of chest circumference", "Full measurement description");
-    InitMeasurement(neckToFirstLineChestCircumference_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_waist_length",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front waist length", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the base of the neck to the waist "
-                                  "side front (waist length in the front)", "Full measurement description");
-    InitMeasurement(frontWaistLength_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arc_through_shoulder_joint",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Arc through shoulder joint", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Arc through the highest point of the shoulder joint",
-                                  "Full measurement description");
-    InitMeasurement(arcThroughShoulderJoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_to_back_line_chest_circumference",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Neck to back line chest circumference",
-                                  "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the base of the neck to the back line "
-                                  "of chest circumference of the first and the second based on ledge vanes",
-                                  "Full measurement description");
-    InitMeasurement(neckToBackLineChestCircumference_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_neck_side",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Waist to neck side", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the waist to the back base of the "
-                                  "neck side point", "Full measurement description");
-    InitMeasurement(waistToNeckSide_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arc_length_upper_body",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Arc length upper body", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Arc length of the upper body through the base of the "
-                                  "neck side point", "Full measurement description");
-    InitMeasurement(arcLengthUpperBody_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "chest_width",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Chest width", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Chest width", "Full measurement description");
-    InitMeasurement(chestWidth_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "anteroposterior_diameter_hands",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Anteroposterior diameter hands", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Anteroposterior diameter of the hands",
-                                  "Full measurement description");
-    InitMeasurement(anteroposteriorDiameterHands_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "height_clavicular_point",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Height clavicular point", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Height clavicular point",
-                                  "Full measurement description");
-    InitMeasurement(heightClavicularPoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "height_armhole_slash",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Height armhole slash", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the point to the cervical level of "
-                                  "the posterior angle of the front armpit (underarm height oblique)",
-                                  "Full measurement description");
-    InitMeasurement(heightArmholeSlash_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "slash_shoulder_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Slash shoulder height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Slash shoulder height", "Full measurement description");
-    InitMeasurement(slashShoulderHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "half_girth_neck",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Half girth neck", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Half girth neck", "Full measurement description");
-    InitMeasurement(halfGirthNeck_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "half_girth_neck_for_shirts",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Half girth neck for shirts", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Half girth neck for shirts",
-                                  "Full measurement description");
-    InitMeasurement(halfGirthNeckForShirts_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "half_girth_chest_first",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Half girth chest first", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Half girth chest first", "Full measurement description");
-    InitMeasurement(halfGirthChestFirst_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "half_girth_chest_second",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Half girth chest second", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Half girth chest second",
-                                  "Full measurement description");
-    InitMeasurement(halfGirthChestSecond_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "half_girth_chest_third",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Half girth chest third", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Half girth chest third", "Full measurement description");
-    InitMeasurement(halfGirthChestThird_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "half_girth_waist",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Half girth waist", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Half girth waist", "Full measurement description");
-    InitMeasurement(halfGirthWaist_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "half_girth_hips_considering_protruding_abdomen",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Half girth hips considering protruding abdomen",
-                                  "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Half girth hips considering protruding abdomen",
-                                  "Full measurement description");
-    InitMeasurement(halfGirthHipsConsideringProtrudingAbdomen_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "half_girth_hips_excluding_protruding_abdomen",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Half girth hips excluding protruding abdomen",
-                                  "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Half girth hips excluding protruding abdomen",
-                                  "Full measurement description");
-    InitMeasurement(halfGirthHipsExcludingProtrudingAbdomen_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "girth_knee_flexed_feet",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Girth knee flexed feet", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Girth knee flexed feet", "Full measurement description");
-    InitMeasurement(girthKneeFlexedFeet_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_transverse_diameter",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Neck transverse diameter", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Neck transverse diameter",
-                                  "Full measurement description");
-    InitMeasurement(neckTransverseDiameter_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "front_slash_shoulder_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Front slash shoulder height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Front slash shoulder height",
-                                  "Full measurement description");
-    InitMeasurement(frontSlashShoulderHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_to_front_waist_line",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Neck to front waist line", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the base of the neck to the waist "
-                                  "line front", "Full measurement description");
-    InitMeasurement(neckToFrontWaistLine_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hand_vertical_diameter",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Hand vertical diameter", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Hand vertical diameter", "Full measurement description");
-    InitMeasurement(handVerticalDiameter_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_to_knee_point",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Neck to knee point", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Distance from neck to knee point",
-                                  "Full measurement description");
-    InitMeasurement(neckToKneePoint_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_knee",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Waist to knee", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "The distance from the waist to the knee",
-                                  "Full measurement description");
-    InitMeasurement(waistToKnee_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Shoulder height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Shoulder height", "Full measurement description");
-    InitMeasurement(shoulderHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "head_height",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Head height", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Head height", "Full measurement description");
-    InitMeasurement(headHeight_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "body_position",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Body position", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Body position", "Full measurement description");
-    InitMeasurement(bodyPosition_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arc_behind_shoulder_girdle",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Arc behind shoulder girdle", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Arc behind the shoulder girdle",
-                                  "Full measurement description");
-    InitMeasurement(arcBehindShoulderGirdle_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_to_neck_base",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Neck to neck base", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Distance from neck point to point on the base of the "
-                                  "neck side neck girth measurement line", "Full measurement description");
-    InitMeasurement(neckToNeckBase_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "depth_waist_first",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Depth waist first", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Depth waist first", "Full measurement description");
-    InitMeasurement(depthWaistFirst_M, m, g, d);
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "depth_waist_second",
-                                  "Short measurement name. Don't use math symbols in name!!!!");
-    g = QmuTranslation::translate("MeasurementsFullNames", "Depth waist second", "Full measurement name");
-    d = QmuTranslation::translate("MeasurementsDescriptions", "Depth waist second", "Full measurement description");
-    InitMeasurement(depthWaistSecond_M, m, g, d);
+    name = QmuTranslation::translate("Pattern_making_systems", "Bunka", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Bunka Fashion College", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Fundamentals of Garment Design", "Book name");
+    InitSystem(p0_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Barnfield and Richard", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Jo Barnfield and Andrew Richards", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern Making Primer", "Book name");
+    InitSystem(p1_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Friendship/Women", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Elizabeth Friendship", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Creating Historical Clothes - Pattern Cutting from "
+                                     "the 16th to the 19th Centuries", "Book name");
+    InitSystem(p2_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Morris, K.", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Karen Morris", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Sewing Lingerie that Fits", "Book name");
+    InitSystem(p3_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Castro", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Lucia Mors de Castro", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Patternmaking in Practic", "Book name");
+    InitSystem(p4_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Kim & Uh", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Injoo Kim and Mykyung Uh", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Apparel Making in Fashion Design", "Book name");
+    InitSystem(p5_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Waugh", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Norah Waugh", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Corsets and Crinolines", "Book name");
+    InitSystem(p6_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Grimble", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Frances Grimble", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Fashions of the Gilded Age", "Book name");
+    InitSystem(p7_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Thornton's International System", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "ed. R. L. Shep", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Great War: Styles and Patterns of the 1910s",
+                                     "Book name");
+    InitSystem(p8_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Hillhouse & Mansfield", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Marion S. Hillhouse and Evelyn A. Mansfield",
+                                       "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Dress Design: Draping and Flat Pattern Making",
+                                     "Book name");
+    InitSystem(p9_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Pivnick", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Esther Kaplan Pivnick", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "How to Design Beautiful Clothes: Designing and "
+                                     "Pattern Making", "Book name");
+    InitSystem(p10_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Minister & Son", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Edward Minister & Son, ed. R. L. Shep",
+                                       "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Complete Guide to Practical Cutting (1853)",
+                                     "Book name");
+    InitSystem(p11_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Strickland", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Gertrude Strickland", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "A Tailoring Manual", "Book name");
+    InitSystem(p12_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Loh & Lewis", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "May Loh and Diehl Lewis", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Patternless Fashion Design", "Book name");
+    InitSystem(p13_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Morris, F. R.", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "F. R. Morris", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Ladies Garment Cutting and Making", "Book name");
+    InitSystem(p14_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Mason", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Gertrude Mason", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Gertrude Mason's Patternmaking Book", "Book name");
+    InitSystem(p15_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Kimata", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "K. Kimata", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "K.Kimata's Simplified Drafting Book for Dressmaking",
+                                     "Book name");
+    InitSystem(p16_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Master Designer", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "The Master Designer (Chicago, IL)", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Master Designer's System of Designing, Cutting and "
+                                     "Grading", "Book name");
+    InitSystem(p17_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Kopp", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, "
+                                       "Lee Gross", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "How to Draft Basic Patterns", "Book name");
+    InitSystem(p18_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Ekern", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Doris Ekern", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Slacks Cut-to-Fit for Your Figure", "Book name");
+    InitSystem(p19_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Doyle", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Sarah J. Doyle", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Sarah's Key to Pattern Drafting", "Book name");
+    InitSystem(p20_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Shelton", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Karla J. Shelton", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Design and Sew Jeans", "Book name");
+    InitSystem(p21_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Lady Boutique", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Lady Boutique", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Lady Boutique magazine (Japan)", "Book name");
+    InitSystem(p22_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Rohr", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "M. Rohr", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern Drafting and Grading: Women's nd Misses' "
+                                     "Garment Design", "Book name");
+    InitSystem(p23_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Moore", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Dorothy Moore", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Dorothy Moore's Pattern Drafting and Dressmaking",
+                                     "Book name");
+    InitSystem(p24_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "system_P25", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "system_P25", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "system_P25", "Book name");
+    InitSystem(p25_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Fukomoto", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Sue S. Fukomoto", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Scientific Pattern Drafting as taught at Style Center "
+                                     "School of Costume Design, Dressmaking and Millinery", "Book name");
+    InitSystem(p26_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Dressmaking International", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Dressmaking International", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Dressmaking International magazine (Japan)",
+                                     "Book name");
+    InitSystem(p27_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Erwin", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Mabel D. Erwin", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Practical Dress Design", "Book name");
+    InitSystem(p28_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Gough", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "E. L. G. Gough", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Principles of Garment Cutting", "Book name");
+    InitSystem(p29_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Allemong", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Elizabeth M. Allemong", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "European Cut", "Book name");
+    InitSystem(p30_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "McCunn", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Donald H. McCunn", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "How to Make Your Own Sewing Patterns", "Book name");
+    InitSystem(p31_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Zarapkar", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Shri K. R. Zarapkar and Shri Arvind K. Zarapkar",
+                                       "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Zarapkar System of Cutting", "Book name");
+    InitSystem(p32_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Kunick", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Philip Kunick", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Sizing, Pattern Construction and Grading for Women's "
+                                     "and Children's Garments", "Book name");
+    InitSystem(p33_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Handford", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Jack Handford", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Professional Patternmaking for Designers: Women's "
+                                     "Wear, Men's Casual Wear", "Book name");
+    InitSystem(p34_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Davis", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "R. I. Davis", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Men's 17th & 18th Century Costume, Cut & Fashion",
+                                     "Book name");
+    InitSystem(p35_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "MacLochlainn", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Jason MacLochlainn", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Victorian Tailor: An Introduction to Period "
+                                     "Tailoring", "Book name");
+    InitSystem(p36_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Joseph-Armstrong", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Helen Joseph-Armstrong", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Patternmaking for Fashion Design", "Book name");
+    InitSystem(p37_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Supreme System", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Frederick T. Croonberg", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Blue Book of Men's Tailoring, Grand Edition of "
+                                     "Supreme System for Producing Mens Garments (1907)", "Book name");
+    InitSystem(p38_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Sugino", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Dressmaking", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern Drafting Vols. I, II, III (Japan)",
+                                     "Book name");
+    InitSystem(p39_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Centre Point System", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Louis Devere", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Handbook of Practical Cutting on the Centre Point "
+                                     "System", "Book name");
+    InitSystem(p40_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Aldrich/Men", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Winifred Aldrich", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Metric Pattern Cutting for Menswear", "Book name");
+    InitSystem(p41_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Aldrich/Women", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Winifred Aldrich", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Metric Pattern Cutting for Women's Wear", "Book name");
+    InitSystem(p42_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Kershaw", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Gareth Kershaw", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Patternmaking for Menswear", "Book name");
+    InitSystem(p43_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Gilewska", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Teresa Gilewska", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern-Drafting for Fashion: The Basics", "Book name");
+    InitSystem(p44_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Lo", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Dennic Chunman Lo", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern Cutting", "Book name");
+    InitSystem(p45_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Bray", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Natalie Bray", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Dress Pattern Designing: The Basic Principles of Cut "
+                                     "and Fit", "Book name");
+    InitSystem(p46_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Knowles/Men", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Lori A. Knowles", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Practical Guide to Patternmaking for Fashion "
+                                     "Designers: Menswear", "Book name");
+    InitSystem(p47_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Friendship/Men", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Elizabeth Friendship", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern Cutting for Men's Costume", "Book name");
+    InitSystem(p48_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Brown", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "P. Clement Brown", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Art in Dress", "Book name");
+    InitSystem(p49_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Mitchell", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Jno. J. Mitchell", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "\"Standard\" Work on Cutting (Men's Garments) 1886: "
+                                     "The Art and Science of Garment Cutting", "Book name");
+    InitSystem(p50_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "system_P51", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "system_P51", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "system_P51", "Book name");
+    InitSystem(p51_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Eddy", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Josephine F. Eddy and Elizabeth C. B. Wiley",
+                                       "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Pattern and Dress Design", "Book name");
+    InitSystem(p52_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "Knowles/Women", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Lori A. Knowles", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Practical Guide to Patternmaking for Fashion "
+                                     "Designers: Juniors, Misses, and Women", "Book name");
+    InitSystem(p53_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "American Garment Cutter", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "ed. R. L. Shep", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "The Great War: Styles and Patterns of the 1910s",
+                                     "Book name");
+    InitSystem(p54_S, name, author, book);
+    //=================================================================================================================
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1033,17 +437,17 @@ void VTranslateVars::InitPostfixOperators()
 void VTranslateVars::InitSTDescriptions()
 {
     stDescriptions.insert("0", QmuTranslation::translate("STDescriptions",
-                                                       "Standard figures of men 1st group, chest 100 cm",
-                                                       "Standard table description"));
+                                                         "Standard figures of men 1st group, chest 100 cm",
+                                                         "Standard table description"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::InitMeasurement(const QString &name, const QmuTranslation &m, const QmuTranslation &g,
-                                     const QmuTranslation &d)
+void VTranslateVars::InitSystem(const QString &code, const QmuTranslation &name, const QmuTranslation &author,
+                                const QmuTranslation &book)
 {
-    measurements.insert(name, m);
-    guiTexts.insert(name, g);
-    descriptions.insert(name, d);
+    PMSystemNames.insert(code, name);
+    PMSystemAuthors.insert(code, author);
+    PMSystemBooks.insert(code, book);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1096,30 +500,7 @@ void VTranslateVars::BiasTokens(int position, int bias, QMap<int, QString> &toke
     tokens = newTokens;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief MeasurementsFromUser translate measurement to internal look.
- * @param newFormula [in|out] expression to translate
- * @param position token position
- * @param token token to translate
- * @param bias hold change of length between translated and origin token string
- * @return true if was found measurement with same name.
- */
-bool VTranslateVars::MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const
-{
-    QMap<QString, QmuTranslation>::const_iterator i = measurements.constBegin();
-    while (i != measurements.constEnd())
-    {
-        if (token == i.value().translate())
-        {
-            newFormula.replace(position, token.length(), i.key());
-            bias = token.length() - i.key().length();
-            return true;
-        }
-        ++i;
-    }
-    return false;
-}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -1281,15 +662,21 @@ QString VTranslateVars::VarFromUser(const QString &var) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateVars::GuiText(const QString &measurement) const
+QString VTranslateVars::PMSystemName(const QString &code) const
 {
-    return guiTexts.value(measurement).translate();
+    return PMSystemNames.value(code).translate();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateVars::Description(const QString &measurement) const
+QString VTranslateVars::PMSystemAuthor(const QString &code) const
 {
-    return descriptions.value(measurement).translate();
+    return PMSystemAuthors.value(code).translate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::PMSystemBook(const QString &code) const
+{
+    return PMSystemBooks.value(code).translate();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1318,6 +705,7 @@ QString VTranslateVars::STDescription(const QString &id) const
  * @brief FormulaFromUser replace all known tokens in formula to internal look. Also change decimal
  * separator in numbers.
  * @param formula expression that need translate
+ * @throw qmu::QmuParserError in case of a wrong expression
  * @return translated expression
  */
 QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) const
@@ -1328,7 +716,7 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
     }
     QString newFormula = formula;// Local copy for making changes
 
-    Calculator *cal = new Calculator(formula, osSeparator);// Eval formula
+    QmuTokenParser *cal = new QmuTokenParser(formula, osSeparator);// Eval formula
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     QMap<int, QString> numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
     delete cal;
@@ -1435,7 +823,7 @@ QString VTranslateVars::FormulaToUser(const QString &formula) const
     QMap<int, QString> numbers;
     try
     {
-        Calculator *cal = new Calculator(formula, false);// Eval formula
+        QmuTokenParser *cal = new QmuTokenParser(formula, false);// Eval formula
         tokens = cal->GetTokens();// Tokens (variables, measurements)
         numbers = cal->GetNumbers();// All numbers in expression for changing decimal separator
         delete cal;
@@ -1537,3 +925,25 @@ QString VTranslateVars::FormulaToUser(const QString &formula) const
 
     return newFormula;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTranslateVars::Retranslate()
+{
+    VTranslateMeasurements::Retranslate();
+
+    PMSystemNames.clear();
+    PMSystemAuthors.clear();
+    PMSystemBooks.clear();
+    variables.clear();
+    functions.clear();
+    postfixOperators.clear();
+    stDescriptions.clear();
+
+    InitPatternMakingSystems();
+    InitVariables();
+    InitFunctions();
+    InitPostfixOperators();
+    InitSTDescriptions();
+}
+
+

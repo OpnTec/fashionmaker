@@ -48,7 +48,9 @@ public:
     VAbstractPattern(QObject *parent = nullptr);
     virtual ~VAbstractPattern() Q_DECL_OVERRIDE;
 
-    virtual void   CreateEmptyFile(const QString &tablePath)=0;
+    QStringList    ListMeasurements() const;
+
+    virtual void   CreateEmptyFile()=0;
 
     void           ChangeActivPP(const QString& name, const Document &parse = Document::FullParse);
     QString        GetNameActivPP() const;
@@ -81,7 +83,6 @@ public:
     QString        MPath() const;
     void           SetPath(const QString &path);
     Unit           MUnit() const;
-    MeasurementsType MType() const;
 
     quint32        SiblingNodeId(const quint32 &nodeId) const;
 
@@ -121,10 +122,10 @@ public:
     static const QString TagGradation;
     static const QString TagHeights;
     static const QString TagSizes;
+    static const QString TagUnit;
 
     static const QString AttrName;
     static const QString AttrType;
-    static const QString AttrPath;
 
     static const QString AttrAll;
 
@@ -167,9 +168,7 @@ public:
     static const QString AttrS56;
 
     static const QString IncrementName;
-    static const QString IncrementBase;
-    static const QString IncrementKsize;
-    static const QString IncrementKgrowth;
+    static const QString IncrementFormula;
     static const QString IncrementDescription;
 
 signals:
@@ -242,6 +241,17 @@ protected:
 
 private:
     Q_DISABLE_COPY(VAbstractPattern)
+
+    QStringList ListIncrements() const;
+    QStringList ListExpressions() const;
+    QStringList ListPointExpressions() const;
+    QStringList ListArcExpressions() const;
+    QStringList ListSplineExpressions() const;
+    QStringList ListPathPointExpressions() const;
+
+    bool IsVariable(const QString& token) const;
+    bool IsPostfixOperator(const QString& token) const;
+    bool IsFunction(const QString& token) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

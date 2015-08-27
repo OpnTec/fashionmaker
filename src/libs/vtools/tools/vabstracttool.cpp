@@ -40,81 +40,6 @@
 #include <QMessageBox>
 #include <QtCore/qmath.h>
 
-const QString VAbstractTool::AttrType        = QStringLiteral("type");
-const QString VAbstractTool::AttrMx          = QStringLiteral("mx");
-const QString VAbstractTool::AttrMy          = QStringLiteral("my");
-const QString VAbstractTool::AttrName        = QStringLiteral("name");
-const QString VAbstractTool::AttrMx1         = QStringLiteral("mx1");
-const QString VAbstractTool::AttrMy1         = QStringLiteral("my1");
-const QString VAbstractTool::AttrName1       = QStringLiteral("name1");
-const QString VAbstractTool::AttrMx2         = QStringLiteral("mx2");
-const QString VAbstractTool::AttrMy2         = QStringLiteral("my2");
-const QString VAbstractTool::AttrName2       = QStringLiteral("name2");
-const QString VAbstractTool::AttrBaseLineP1  = QStringLiteral("baseLineP1");
-const QString VAbstractTool::AttrBaseLineP2  = QStringLiteral("baseLineP2");
-const QString VAbstractTool::AttrDartP1      = QStringLiteral("dartP1");
-const QString VAbstractTool::AttrDartP2      = QStringLiteral("dartP2");
-const QString VAbstractTool::AttrDartP3      = QStringLiteral("dartP3");
-const QString VAbstractTool::AttrX           = QStringLiteral("x");
-const QString VAbstractTool::AttrY           = QStringLiteral("y");
-const QString VAbstractTool::AttrTypeLine    = QStringLiteral("typeLine");
-const QString VAbstractTool::AttrLength      = QStringLiteral("length");
-const QString VAbstractTool::AttrBasePoint   = QStringLiteral("basePoint");
-const QString VAbstractTool::AttrFirstPoint  = QStringLiteral("firstPoint");
-const QString VAbstractTool::AttrSecondPoint = QStringLiteral("secondPoint");
-const QString VAbstractTool::AttrThirdPoint  = QStringLiteral("thirdPoint");
-const QString VAbstractTool::AttrCenter      = QStringLiteral("center");
-const QString VAbstractTool::AttrRadius      = QStringLiteral("radius");
-const QString VAbstractTool::AttrAngle       = QStringLiteral("angle");
-const QString VAbstractTool::AttrAngle1      = QStringLiteral("angle1");
-const QString VAbstractTool::AttrAngle2      = QStringLiteral("angle2");
-const QString VAbstractTool::AttrP1Line      = QStringLiteral("p1Line");
-const QString VAbstractTool::AttrP2Line      = QStringLiteral("p2Line");
-const QString VAbstractTool::AttrP1Line1     = QStringLiteral("p1Line1");
-const QString VAbstractTool::AttrP2Line1     = QStringLiteral("p2Line1");
-const QString VAbstractTool::AttrP1Line2     = QStringLiteral("p1Line2");
-const QString VAbstractTool::AttrP2Line2     = QStringLiteral("p2Line2");
-const QString VAbstractTool::AttrPShoulder   = QStringLiteral("pShoulder");
-const QString VAbstractTool::AttrPoint1      = QStringLiteral("point1");
-const QString VAbstractTool::AttrPoint2      = QStringLiteral("point2");
-const QString VAbstractTool::AttrPoint4      = QStringLiteral("point4");
-const QString VAbstractTool::AttrKAsm1       = QStringLiteral("kAsm1");
-const QString VAbstractTool::AttrKAsm2       = QStringLiteral("kAsm2");
-const QString VAbstractTool::AttrKCurve      = QStringLiteral("kCurve");
-const QString VAbstractTool::AttrPathPoint   = QStringLiteral("pathPoint");
-const QString VAbstractTool::AttrPSpline     = QStringLiteral("pSpline");
-const QString VAbstractTool::AttrAxisP1      = QStringLiteral("axisP1");
-const QString VAbstractTool::AttrAxisP2      = QStringLiteral("axisP2");
-const QString VAbstractTool::AttrCurve       = QStringLiteral("curve");
-const QString VAbstractTool::AttrLineColor   = QStringLiteral("lineColor");
-const QString VAbstractTool::AttrColor       = QStringLiteral("color");
-const QString VAbstractTool::AttrFirstArc    = QStringLiteral("firstArc");
-const QString VAbstractTool::AttrSecondArc   = QStringLiteral("secondArc");
-const QString VAbstractTool::AttrCrossPoint  = QStringLiteral("crossPoint");
-const QString VAbstractTool::AttrC1Center    = QStringLiteral("c1Center");
-const QString VAbstractTool::AttrC2Center    = QStringLiteral("c2Center");
-const QString VAbstractTool::AttrC1Radius    = QStringLiteral("c1Radius");
-const QString VAbstractTool::AttrC2Radius    = QStringLiteral("c2Radius");
-const QString VAbstractTool::AttrCCenter     = QStringLiteral("cCenter");
-const QString VAbstractTool::AttrTangent     = QStringLiteral("tangent");
-const QString VAbstractTool::AttrCRadius     = QStringLiteral("cRadius");
-const QString VAbstractTool::AttrArc         = QStringLiteral("arc");
-
-const QString VAbstractTool::TypeLineNone           = QStringLiteral("none");
-const QString VAbstractTool::TypeLineLine           = QStringLiteral("hair");
-const QString VAbstractTool::TypeLineDashLine       = QStringLiteral("dashLine");
-const QString VAbstractTool::TypeLineDotLine        = QStringLiteral("dotLine");
-const QString VAbstractTool::TypeLineDashDotLine    = QStringLiteral("dashDotLine");
-const QString VAbstractTool::TypeLineDashDotDotLine = QStringLiteral("dashDotDotLine");
-
-const QString VAbstractTool::ColorBlack     = QStringLiteral("black");
-const QString VAbstractTool::ColorGreen     = QStringLiteral("green");
-const QString VAbstractTool::ColorBlue      = QStringLiteral("blue");
-const QString VAbstractTool::ColorDarkRed   = QStringLiteral("darkRed");
-const QString VAbstractTool::ColorDarkGreen = QStringLiteral("darkGreen");
-const QString VAbstractTool::ColorDarkBlue  = QStringLiteral("darkBlue");
-const QString VAbstractTool::ColorYellow    = QStringLiteral("yellow");
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VAbstractTool container.
@@ -244,7 +169,8 @@ QMap<QString, QIcon> VAbstractTool::LineStylesPics()
 //---------------------------------------------------------------------------------------------------------------------
 const QStringList VAbstractTool::Colors()
 {
-    const QStringList colors = QStringList() << ColorBlack << ColorGreen << ColorBlue << ColorDarkRed << ColorDarkGreen
+    const QStringList colors = QStringList() << ColorBlack    << ColorGreen << ColorBlue
+                                             << ColorDarkRed  << ColorDarkGreen
                                              << ColorDarkBlue << ColorYellow;
     return colors;
 }
@@ -333,8 +259,9 @@ void VAbstractTool::ToolCreation(const Source &typeCreation)
  */
 const QStringList VAbstractTool::StylesList()
 {
-    const QStringList styles = QStringList() << TypeLineNone << TypeLineLine << TypeLineDashLine << TypeLineDotLine
-                                             << TypeLineDashDotLine << TypeLineDashDotDotLine;
+    const QStringList styles = QStringList() << TypeLineNone    << TypeLineLine << TypeLineDashLine
+                                             << TypeLineDotLine << TypeLineDashDotLine
+                                             << TypeLineDashDotDotLine;
     return styles;
 }
 

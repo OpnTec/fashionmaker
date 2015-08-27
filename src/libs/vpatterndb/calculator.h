@@ -29,7 +29,7 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
-#include "../qmuparser/qmuparser.h"
+#include "../qmuparser/qmuformulabase.h"
 #include "../vmisc/def.h"
 
 class VContainer;
@@ -53,12 +53,11 @@ class VContainer;
  *     delete cal;//Here can be memory leak, but dialog already check this formula and probability very low.
  * }
  */
-class Calculator:public qmu::QmuParser
+class Calculator:public qmu::QmuFormulaBase
 {
 public:
     Calculator(const VContainer *data, MeasurementsType patternType);
-    Calculator(const QString &formula, bool osSeparator, bool fromUser = true);
-    ~Calculator();
+    virtual ~Calculator();
     qreal         EvalFormula(const QString &formula);
 private:
     Q_DISABLE_COPY(Calculator)
@@ -66,10 +65,6 @@ private:
     const VContainer *data;
     MeasurementsType patternType;
     void          InitVariables(const VContainer *data, const QMap<int, QString> &tokens, const QString &formula);
-    void          InitCharacterSets();
-    static qreal* AddVariable(const QString &a_szName, void *a_pUserData);
-    void          SetSepForEval();
-    void          SetSepForTr(bool osSeparator, bool fromUser);
     static void   RemoveAll(QMap<int, QString> &map, const QString &val);
 };
 

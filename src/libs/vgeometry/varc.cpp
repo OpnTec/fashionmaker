@@ -28,6 +28,8 @@
 
 #include "varc.h"
 #include "varc_p.h"
+#include "../ifc/ifcdef.h"
+
 #include <QDebug>
 #include <QLineF>
 #include <QPainterPath>
@@ -273,13 +275,13 @@ QPointF VArc::CutArc(const qreal &length) const
 void VArc::setId(const quint32 &id)
 {
     VAbstractCurve::setId(id);
-    setName(QString (arc_+"%1_%2").arg(d->center.name()).arg(id));
+    setName(ARC_ + QString("%1_%2").arg(d->center.name()).arg(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::ArcName()
 {
-    setName(QString (arc_+"%1").arg(this->GetCenter().name()));
+    setName(ARC_ + QString("%1").arg(this->GetCenter().name()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

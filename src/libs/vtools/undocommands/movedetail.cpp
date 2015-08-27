@@ -45,8 +45,8 @@ MoveDetail::MoveDetail(VAbstractPattern *doc, const double &x, const double &y, 
     QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
-        oldX = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0"));
-        oldY = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMy, "0.0"));
+        oldX = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
+        oldY = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
     }
     else
     {
@@ -134,6 +134,6 @@ int MoveDetail::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void MoveDetail::SaveCoordinates(QDomElement &domElement, double x, double y)
 {
-    doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(x)));
-    doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(y)));
+    doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(x)));
+    doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(y)));
 }

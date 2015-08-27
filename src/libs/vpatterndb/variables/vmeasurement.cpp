@@ -31,16 +31,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief VMeasurement create empty measurement
- */
-VMeasurement::VMeasurement()
-    :VVariable(), d(new VMeasurementData)
-{
-    SetType(VarType::Measurement);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief VMeasurement create measurement for standard table
  * @param name measurement's name
  * @param base value in base size and height
@@ -50,9 +40,11 @@ VMeasurement::VMeasurement()
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
-VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &ksize, const qreal &kheight,
-                           const QString &gui_text, const QString &description, const QString &tagName)
-    :VVariable(name, base, ksize, kheight, description), d(new VMeasurementData(gui_text, tagName))
+VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseSize, qreal baseHeight, const qreal &base,
+                           const qreal &ksize, const qreal &kheight, const QString &gui_text,
+                           const QString &description, const QString &tagName)
+    :VVariable(name, baseSize, baseHeight, base, ksize, kheight, description),
+      d(new VMeasurementData(index, gui_text, tagName))
 {
     SetType(VarType::Measurement);
 }
@@ -66,9 +58,10 @@ VMeasurement::VMeasurement(const QString &name, const qreal &base, const qreal &
  * @param description measurement full description
  * @param tagName measurement's tag name in file
  */
-VMeasurement::VMeasurement(const QString &name, const qreal &base, const QString &gui_text, const QString &description,
+VMeasurement::VMeasurement(VContainer *data, quint32 index, const QString &name, const qreal &base,
+                           const QString &formula, bool ok, const QString &gui_text, const QString &description,
                            const QString &tagName)
-    :VVariable(name, base, description), d(new VMeasurementData(gui_text, tagName))
+    :VVariable(name, base, description), d(new VMeasurementData(data, index, formula, ok, gui_text, tagName))
 {
     SetType(VarType::Measurement);
 }
@@ -117,10 +110,7 @@ QStringList VMeasurement::ListHeights(QMap<GHeights, bool> heights, Unit pattern
     if (list.isEmpty())
     {
         // from 92 cm to 194 cm
-        for (int i = 92; i<= 194; i = i+6)
-        {
-            ListValue(list, i, patternUnit);
-        }
+        list = VMeasurement::WholeListHeights(patternUnit);
     }
     return list;
 }
@@ -148,19 +138,53 @@ QStringList VMeasurement::ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit)
     if (list.isEmpty())
     {
         // from 22 cm to 56 cm
-        for (int i = 22; i<= 56; i = i+2)
-        {
-           ListValue(list, i, patternUnit);
-        }
+        list = VMeasurement::WholeListSizes(patternUnit);
     }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VMeasurement::WholeListHeights(Unit patternUnit)
+{
+    QStringList list;
+    if (patternUnit == Unit::Inch)
+    {
+        qWarning()<<"Standard table doesn't support inches.";
+        return list;
+    }
+    // from 92 cm to 194 cm
+    for (int i = 92; i<= 194; i = i+6)
+    {
+        ListValue(list, i, patternUnit);
+    }
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VMeasurement::WholeListSizes(Unit patternUnit)
+{
+    QStringList list;
+    if (patternUnit == Unit::Inch)
+    {
+        qWarning()<<"Standard table doesn't support inches.";
+        return list;
+    }
+
+    // from 22 cm to 56 cm
+    for (int i = 22; i<= 56; i = i+2)
+    {
+       ListValue(list, i, patternUnit);
+    }
+
     return list;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurement::ListValue(QStringList &list, qreal value, Unit patternUnit)
 {
-    qreal val = UnitConvertor(value, Unit::Cm, patternUnit);
-    QString strVal = QString("%1").arg(val);
+    const qreal val = UnitConvertor(value, Unit::Cm, patternUnit);
+    const QString strVal = QString("%1").arg(val);
     list.append(strVal);
 }
 
@@ -184,4 +208,41 @@ QString VMeasurement::TagName() const
 void VMeasurement::setTagName(const QString &tagName)
 {
     d->_tagName = tagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VMeasurement::GetFormula() const
+{
+    return d->formula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VMeasurement::IsCustom() const
+{
+    if (GetName().indexOf(CustomMSign) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VMeasurement::Index() const
+{
+    return d->index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VMeasurement::IsFormulaOk() const
+{
+    return d->formulaOk;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VContainer *VMeasurement::GetData()
+{
+    return &d->data;
 }

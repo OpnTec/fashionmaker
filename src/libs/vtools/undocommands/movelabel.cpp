@@ -49,8 +49,8 @@ MoveLabel::MoveLabel(VAbstractPattern *doc, const double &x, const double &y, co
     QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())
     {
-        oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMx, "0.0"));
-        oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, VAbstractTool::AttrMy, "0.0"));
+        oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
+        oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
 
         qCDebug(vUndo, "Label old Mx %f", oldMx);
         qCDebug(vUndo, "Label old My %f", oldMy);
@@ -117,8 +117,8 @@ void MoveLabel::Do(double mx, double my)
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, VAbstractTool::AttrMx, QString().setNum(qApp->fromPixel(mx)));
-        doc->SetAttribute(domElement, VAbstractTool::AttrMy, QString().setNum(qApp->fromPixel(my)));
+        doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));
+        doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(my)));
 
         emit NeedLiteParsing(Document::LitePPParse);
 

@@ -236,6 +236,25 @@ void VContainer::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::ClearForFullParse()
+{
+    qCDebug(vCon, "Clearing container data for full parse.");
+    _id = NULL_ID;
+
+    d->details.clear();
+    ClearVariables(VarType::Increment);
+    ClearVariables(VarType::ArcLength);
+    ClearVariables(VarType::LineAngle);
+    ClearVariables(VarType::LineLength);
+    ClearVariables(VarType::SplineLength);
+    ClearVariables(VarType::ArcRadius);
+    ClearVariables(VarType::ArcAngle);
+    ClearVariables(VarType::SplineAngle);
+    ClearGObjects();
+    ClearUniqueNames();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ClearObject points, splines, arcs, spline paths will be cleared.
  */
@@ -478,6 +497,12 @@ bool VContainer::IsUnique(const QString &name)
 const Unit *VContainer::GetPatternUnit() const
 {
     return d->patternUnit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const VTranslateVars *VContainer::GetTrVars() const
+{
+    return d->trVars;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -9,8 +9,7 @@ SOURCES += \
         $$PWD/vpointf.cpp \
         $$PWD/vspline.cpp \
         $$PWD/vsplinepath.cpp \
-        $$PWD/vsplinepoint.cpp \
-        $$PWD/vgeometrydef.cpp
+        $$PWD/vsplinepoint.cpp
 
 HEADERS += \
         $$PWD/stable.h \

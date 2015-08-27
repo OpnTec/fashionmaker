@@ -92,11 +92,11 @@ void MoveSpline::Do(const VSpline &spl)
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, VAbstractTool::AttrAngle1, QString().setNum(spl.GetStartAngle()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrAngle2, QString().setNum(spl.GetEndAngle()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrKAsm1, QString().setNum(spl.GetKasm1()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrKAsm2, QString().setNum(spl.GetKasm2()));
-        doc->SetAttribute(domElement, VAbstractTool::AttrKCurve, QString().setNum(spl.GetKcurve()));
+        doc->SetAttribute(domElement, AttrAngle1, QString().setNum(spl.GetStartAngle()));
+        doc->SetAttribute(domElement, AttrAngle2, QString().setNum(spl.GetEndAngle()));
+        doc->SetAttribute(domElement, AttrKAsm1, QString().setNum(spl.GetKasm1()));
+        doc->SetAttribute(domElement, AttrKAsm2, QString().setNum(spl.GetKasm2()));
+        doc->SetAttribute(domElement, AttrKCurve, QString().setNum(spl.GetKcurve()));
 
         emit NeedLiteParsing(Document::LiteParse);
 

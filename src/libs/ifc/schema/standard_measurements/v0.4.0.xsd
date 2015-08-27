@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="vst">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="version" type="formatVersion"></xs:element>
+				<xs:element name="read-only" type="xs:boolean"></xs:element>
+				<xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+				<xs:element name="unit" type="units"></xs:element>
+				<xs:element name="size">
+					<xs:complexType>
+						<xs:attribute name="base" type="xs:double" use="required"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="height">
+					<xs:complexType>
+						<xs:attribute name="base" type="xs:double" use="required"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="body-measurements">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="m" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="name" type="shortName" use="required"></xs:attribute>
+									<xs:attribute name="base" type="xs:double" use="required"></xs:attribute>
+									<xs:attribute name="height_increase" type="xs:double" use="required"></xs:attribute>
+									<xs:attribute name="size_increase" type="xs:double" use="required"></xs:attribute>
+									<xs:attribute name="full_name" type="xs:string"></xs:attribute>
+									<xs:attribute name="description" type="xs:string"></xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		 </xs:complexType>
+	  </xs:element>
+	<xs:simpleType name="shortName">
+		<xs:restriction base="xs:string">   
+			<xs:pattern value="^([^0-9*/^+\-=\s()?%:;!.,`'\&quot;]){1,1}([^*/^+\-=\s()?%:;!.,`'\&quot;]){0,}$"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="units">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="mm"/>
+			<xs:enumeration value="cm"/>
+			<xs:enumeration value="inch"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="formatVersion">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="^(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))$"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

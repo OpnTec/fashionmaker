@@ -144,7 +144,7 @@ int SaveDetailOptions::id() const
 //---------------------------------------------------------------------------------------------------------------------
 void SaveDetailOptions::SaveDet(QDomElement &domElement, const VDetail &det)
 {
-    doc->SetAttribute(domElement, VAbstractTool::AttrName, det.getName());
+    doc->SetAttribute(domElement, AttrName, det.getName());
     doc->SetAttribute(domElement, VToolDetail::AttrSupplement, QString().setNum(det.getSeamAllowance()));
     doc->SetAttribute(domElement, VToolDetail::AttrClosed, QString().setNum(det.getClosed()));
     doc->SetAttribute(domElement, VToolDetail::AttrWidth, QString().setNum(det.getWidth()));

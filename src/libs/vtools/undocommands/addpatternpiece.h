@@ -35,15 +35,13 @@ class AddPatternPiece : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP, const QString &mPath,
-                    QUndoCommand *parent = 0);
+    AddPatternPiece(const QDomElement &xml, VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent = 0);
     virtual ~AddPatternPiece() Q_DECL_OVERRIDE;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(AddPatternPiece)
     QString    namePP;
-    QString    mPath;
 };
 
 #endif // ADDPATTERNPIECE_H

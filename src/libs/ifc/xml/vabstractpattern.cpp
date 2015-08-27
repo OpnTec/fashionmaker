@@ -27,9 +27,10 @@
  *************************************************************************/
 
 #include "vabstractpattern.h"
-#include "../vmisc/def.h"
 #include "exception/vexceptionbadid.h"
+#include "exception/vexceptionemptyparameter.h"
 #include "vpatternconverter.h"
+#include "../qmuparser/qmutokenparser.h"
 
 const QString VAbstractPattern::TagPattern      = QStringLiteral("pattern");
 const QString VAbstractPattern::TagCalculation  = QStringLiteral("calculation");
@@ -50,10 +51,10 @@ const QString VAbstractPattern::TagTools        = QStringLiteral("tools");
 const QString VAbstractPattern::TagGradation    = QStringLiteral("gradation");
 const QString VAbstractPattern::TagHeights      = QStringLiteral("heights");
 const QString VAbstractPattern::TagSizes        = QStringLiteral("sizes");
+const QString VAbstractPattern::TagUnit         = QStringLiteral("unit");
 
 const QString VAbstractPattern::AttrName        = QStringLiteral("name");
 const QString VAbstractPattern::AttrType        = QStringLiteral("type");
-const QString VAbstractPattern::AttrPath        = QStringLiteral("path");
 
 const QString VAbstractPattern::AttrAll         = QStringLiteral("all");
 
@@ -96,9 +97,7 @@ const QString VAbstractPattern::AttrS54         = QStringLiteral("s54");
 const QString VAbstractPattern::AttrS56         = QStringLiteral("s56");
 
 const QString VAbstractPattern::IncrementName        = QStringLiteral("name");
-const QString VAbstractPattern::IncrementBase        = QStringLiteral("base");
-const QString VAbstractPattern::IncrementKsize       = QStringLiteral("ksize");
-const QString VAbstractPattern::IncrementKgrowth     = QStringLiteral("kgrowth");
+const QString VAbstractPattern::IncrementFormula     = QStringLiteral("formula");
 const QString VAbstractPattern::IncrementDescription = QStringLiteral("description");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,6 +109,53 @@ VAbstractPattern::VAbstractPattern(QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::~VAbstractPattern()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListMeasurements() const
+{
+    QSet<QString> measurements;
+    QSet<QString> others;
+
+    const QStringList increments = ListIncrements();
+    for (int i=0; i < increments.size(); ++i)
+    {
+        others.insert(increments.at(i));
+    }
+
+    const QStringList expressions = ListExpressions();
+    for (int i=0; i < expressions.size(); ++i)
+    {
+        qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(expressions.at(i), false, false);// Eval formula
+        const QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
+        delete cal;
+
+        const QList<QString> tValues = tokens.values();
+        for (int j = 0; j < tValues.size(); ++j)
+        {
+            if (measurements.contains(tValues.at(j)))
+            {
+                continue;
+            }
+
+            if (others.contains(tValues.at(j)))
+            {
+                continue;
+            }
+
+            if (IsVariable(tValues.at(j)) || IsPostfixOperator(tValues.at(j)) || IsFunction(tValues.at(j)))
+            {
+                others.insert(tValues.at(j));
+                continue;
+            }
+            else
+            {
+                measurements.insert(tValues.at(j));
+            }
+        }
+    }
+
+    return QStringList(measurements.toList());
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -405,16 +451,7 @@ QVector<VToolRecord> VAbstractPattern::getLocalHistory() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::MPath() const
 {
-    QDomNodeList list = elementsByTagName(TagMeasurements);
-    QDomElement element = list.at(0).toElement();
-    if (element.isElement())
-    {
-        return GetParametrString(element, AttrPath);
-    }
-    else
-    {
-        return QString();
-    }
+    return UniqueTagText(TagMeasurements);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -425,11 +462,9 @@ void VAbstractPattern::SetPath(const QString &path)
         qDebug()<<"Path to measurements is empty"<<Q_FUNC_INFO;
         return;
     }
-    QDomNodeList list = elementsByTagName(TagMeasurements);
-    QDomElement element = list.at(0).toElement();
-    if (element.isElement())
+
+    if (setTagText(TagMeasurements, path))
     {
-        SetAttribute(element, AttrPath, path);
         emit patternChanged(false);
     }
     else
@@ -441,59 +476,22 @@ void VAbstractPattern::SetPath(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 Unit VAbstractPattern::MUnit() const
 {
-    QDomNodeList list = elementsByTagName(VAbstractPattern::TagMeasurements);
-    QDomElement element = list.at(0).toElement();
-    if (element.isElement())
+    const QStringList units = QStringList() << "mm" << "cm" << "inch";
+    const QString unit = UniqueTagText(TagUnit);
+    switch (units.indexOf(unit))
     {
-        QStringList units = QStringList() <<"mm" << "cm" << "inch";
-        QString unit = GetParametrString(element, AttrUnit);
-        switch (units.indexOf(unit))
-        {
-            case 0:// mm
-                return Unit::Mm;
-                break;
-            case 1:// cm
-                return Unit::Cm;
-                break;
-            case 2:// in
-                return Unit::Inch;
-                break;
-            default:
-                return Unit::Cm;
-                break;
-        }
-    }
-    else
-    {
-        return Unit::Cm;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-MeasurementsType VAbstractPattern::MType() const
-{
-    QDomNodeList list = elementsByTagName(VAbstractPattern::TagMeasurements);
-    QDomElement element = list.at(0).toElement();
-    if (element.isElement())
-    {
-        QString type = GetParametrString(element, AttrType);
-        QStringList types = QStringList() << "standard" << "individual";
-        switch (types.indexOf(type))
-        {
-            case 0:// standard
-                return MeasurementsType::Standard;
-                break;
-            case 1:// individual
-                return MeasurementsType::Individual;
-                break;
-            default:
-                return MeasurementsType::Individual;
-                break;
-        }
-    }
-    else
-    {
-        return MeasurementsType::Individual;
+        case 0:// mm
+            return Unit::Mm;
+            break;
+        case 1:// cm
+            return Unit::Cm;
+            break;
+        case 2:// in
+            return Unit::Inch;
+            break;
+        default:
+            return Unit::Cm;
+            break;
     }
 }
 
@@ -988,4 +986,234 @@ void VAbstractPattern::CheckTagExists(const QString &tag)
                 break;
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListIncrements() const
+{
+    QStringList increments;
+    const QDomNodeList list = elementsByTagName(TagIncrement);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+
+        try
+        {
+            increments.append(GetParametrString(dom, IncrementName));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+    }
+
+    return increments;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListExpressions() const
+{
+    QStringList list;
+
+    list << ListPointExpressions();
+    list << ListArcExpressions();
+    list << ListSplineExpressions();
+
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListPointExpressions() const
+{
+    QStringList expressions;
+    const QDomNodeList list = elementsByTagName(TagPoint);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrLength));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrAngle));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrC1Radius));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrC2Radius));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrCRadius));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListArcExpressions() const
+{
+    QStringList expressions;
+    const QDomNodeList list = elementsByTagName(TagArc);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrAngle1));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrAngle2));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrRadius));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrLength));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListSplineExpressions() const
+{
+    QStringList expressions;
+    expressions << ListPathPointExpressions();
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListPathPointExpressions() const
+{
+    QStringList expressions;
+    const QDomNodeList list = elementsByTagName(AttrPathPoint);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrKAsm1));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrKAsm2));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrAngle));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPattern::IsVariable(const QString &token) const
+{
+    for (int i = 0; i < builInVariables.size(); ++i)
+    {
+        if (token.indexOf( builInVariables.at(i) ) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPattern::IsPostfixOperator(const QString &token) const
+{
+    for (int i = 0; i < builInPostfixOperators.size(); ++i)
+    {
+        if (token.indexOf( builInPostfixOperators.at(i) ) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPattern::IsFunction(const QString &token) const
+{
+    for (int i = 0; i < builInFunctions.size(); ++i)
+    {
+        if (token.indexOf( builInFunctions.at(i) ) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
