@@ -222,7 +222,7 @@ void VPatternConverter::TagUnitToV0_2_0()
     unit.appendChild(newNodeText);
 
     QDomElement patternElement = documentElement();
-    patternElement.insertAfter(unit, patternElement.firstChild());
+    patternElement.insertAfter(unit, patternElement.firstChildElement("version"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -239,8 +239,8 @@ void VPatternConverter::TagIncrementToV0_2_0()
 QSet<QString> VPatternConverter::FixIncrementsToV0_2_0()
 {
     QSet<QString> names;
-    const QDomElement ms = TagMeasurementsV0_1_4();
-    QDomNode domNode = ms.firstChild();
+    const QDomElement incr = TagIncrementsV0_1_4();
+    QDomNode domNode = incr.firstChild();
     while (domNode.isNull() == false)
     {
         if (domNode.isElement())
@@ -493,6 +493,19 @@ QString VPatternConverter::MUnitV0_1_4() const
 QDomElement VPatternConverter::TagMeasurementsV0_1_4() const
 {
     const QDomNodeList list = elementsByTagName("measurements");
+    const QDomElement element = list.at(0).toElement();
+    if (not element.isElement())
+    {
+        VException excep("Can't get tag measurements.");
+        throw excep;
+    }
+    return element;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternConverter::TagIncrementsV0_1_4() const
+{
+    const QDomNodeList list = elementsByTagName("increments");
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
     {

@@ -1948,7 +1948,10 @@ void MainWindow::Clear()
     qCDebug(vMainWindow, "Returned to Draw mode.");
     pattern->Clear();
     qCDebug(vMainWindow, "Clearing pattern.");
-    watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
+    if (not curFile.isEmpty())
+    {
+        watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
+    }
     doc->clear();
     setCurrentFile(QString());
     qCDebug(vMainWindow, "Clearing scenes.");

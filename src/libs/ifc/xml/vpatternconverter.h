@@ -73,6 +73,7 @@ private:
 
     QString MUnitV0_1_4() const;
     QDomElement TagMeasurementsV0_1_4() const;
+    QDomElement TagIncrementsV0_1_4() const;
     QStringList ListPathPointExpressionsV0_1_4() const;
 };
 
