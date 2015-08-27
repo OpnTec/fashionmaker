@@ -123,6 +123,20 @@ QString DialogSaveLayout::MakeHelpFormatList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetFullPath(const QString &cmdFileName)
+{
+    QFileInfo fn(cmdFileName);
+    fn.makeAbsolute();
+    auto p = fn.dir().absolutePath();
+    auto n = fn.fileName()+"_";
+    QTextStream sout(stdout);
+
+    sout << tr("Output full path: ") << fn.filePath() << "\n";
+    ui->lineEditPath->setText(p);
+    ui->lineEditFileName->setText(n);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 DialogSaveLayout::~DialogSaveLayout()
 {
     delete ui;
@@ -154,7 +168,7 @@ QString DialogSaveLayout::Formate() const
 void DialogSaveLayout::Save()
 {
     for (int i=0; i < count; ++i)
-    {
+    {                
         const QString name = Path()+"/"+FileName()+QString::number(i+1)+Formate();
         if (QFile::exists(name))
         {

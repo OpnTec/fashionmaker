@@ -93,7 +93,7 @@ public:
     QString Formate() const;
     void SelectFormate(const size_t formate);
     static QString MakeHelpFormatList();
-
+    void   SetFullPath(const QString& cmdFileName);
 public slots:
     void Save();
     void ShowExample();
