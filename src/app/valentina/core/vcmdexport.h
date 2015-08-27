@@ -29,11 +29,14 @@ inline QTextStream& vStdErr()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-NORET_ATTR inline void AppAbort(const QString& text, int code = GENERAL_ERROR_STATUS)
+NORET_ATTR inline void AppAbort(const QString& text = QString(), int code = GENERAL_ERROR_STATUS)
 {
     //well ..std::runtime_error was leading to zombies in memory and a lot of dumping all the time ...better to do just exit
     //possibly compiler do not have -fexceptions set
-    vStdErr() << text << "\n";
+    if (!text.isEmpty())
+    {
+        vStdErr() << text << "\n";
+    }
     std::exit(code);
 }
 //---------------------------------------------------------------------------------------------------------------------

@@ -31,8 +31,8 @@
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 
 // Lock producing random attribute order in XML
- // https://stackoverflow.com/questions/27378143/qt-5-produce-random-attribute-order-in-xml
- extern Q_CORE_EXPORT QBasicAtomicInt qt_qhash_seed;
+// https://stackoverflow.com/questions/27378143/qt-5-produce-random-attribute-order-in-xml
+extern Q_CORE_EXPORT QBasicAtomicInt qt_qhash_seed;
 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -69,10 +69,13 @@ int main(int argc, char *argv[])
 
     for (size_t i=0, sz = args.size(); i < sz;++i)
     {
-        w.LoadPattern(args.at(static_cast<int>(i)), app.CommandLine()->OptMeasurePath());
+        bool loaded = w.LoadPattern(args.at(static_cast<int>(i)), app.CommandLine()->OptMeasurePath());
         if (app.CommandLine()->IsExportEnabled())
-        {            
-            w.DoExport(app.CommandLine());
+        {
+            if (loaded)
+            {
+                w.DoExport(app.CommandLine());
+            }
             break;
         }
     }

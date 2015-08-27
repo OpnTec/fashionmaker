@@ -60,7 +60,7 @@ class MainWindow : public MainWindowsNoGUI
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow() Q_DECL_OVERRIDE;
-    void               LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
+    bool LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
     void               ReopenFilesAfterCrash(QStringList &args);
 
     void DoExport(const VCommandLinePtr& expParams);

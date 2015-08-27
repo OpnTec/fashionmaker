@@ -3024,21 +3024,21 @@ MainWindow::~MainWindow()
  * @brief LoadPattern open pattern file.
  * @param fileName name of file.
  */
-void MainWindow::LoadPattern(const QString &fileName, const QString& customMeasureFile)
+bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasureFile)
 {
     qCDebug(vMainWindow, "Loading new file %s.", fileName.toUtf8().constData());
 
     //We have unsaved changes or load more then one file per time
     if (OpenNewValentina(fileName))
     {
-        return;
+        return false;
     }
 
     if (fileName.isEmpty())
     {
         qCDebug(vMainWindow, "Got empty file.");
         Clear();
-        return;
+        return false;
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
@@ -3057,7 +3057,7 @@ void MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         {
             qCCritical(vMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
             Clear();
-            return;
+            return false;
         }
     }
 #endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
@@ -3092,13 +3092,13 @@ void MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
             if (path.isEmpty())
             {
                 Clear();
-                return;
+                return false;
             }
 
             if (not LoadMeasurements(path))
             {
                 Clear();
-                return;
+                return false;
             }
             else
             {
@@ -3119,8 +3119,8 @@ void MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         {
             vStdErr() << tr("File error.") << e.MoreInformation() << "\n";
         }
-        Clear();
-        return;
+        Clear();        
+        return false;
     }
 
 #ifdef Q_OS_WIN32
@@ -3148,6 +3148,7 @@ void MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
 
         ui->actionDraw->setChecked(true);
     }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
