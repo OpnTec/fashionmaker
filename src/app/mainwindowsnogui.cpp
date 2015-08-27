@@ -28,6 +28,9 @@
 
 #include "mainwindowsnogui.h"
 #include "core/vapplication.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vobj/vobjpaintdevice.h"
+
 #include "../libs/vpatterndb/vcontainer.h"
 #include "../libs/vobj/vobjpaintdevice.h"
 #include "../libs/vpatterndb/vcontainer.h"

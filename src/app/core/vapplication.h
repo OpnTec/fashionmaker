@@ -88,12 +88,6 @@ public:
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
     bool static CheckGUI();
 
-    virtual void OpenSettings() Q_DECL_OVERRIDE;
-    VSettings *ValentinaSettings();
-
-
-
-    const VCommandLinePtr     CommandLine() const;
 private slots:
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     void               CleanGist() const;
@@ -126,6 +120,10 @@ private:
     void               CreateLogDir()const;
     void               BeginLogging();
     void               ClearOldLogs()const;
+
+private:
+    //moved to the end of class so merge should go
+    const VCommandLinePtr     CommandLine() const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
