@@ -3296,6 +3296,12 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
     QFileInfo table(path);
     if (table.exists() == false)
     {
+        if (!qApp->CheckGUI())
+        {
+            vStdErr() << tr("The measurements file \"") << path << tr("\" could not be found.\n");
+            return QString();
+        }
+
         QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> %3").arg(path)
                 .arg(tr("could not be found. Do you want to update the file location"));
         QMessageBox::StandardButton res = QMessageBox::question(this, "Loading measurements file", text,
