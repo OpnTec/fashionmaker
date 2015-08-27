@@ -76,14 +76,14 @@ void VPattern::CreateEmptyFile()
     version.appendChild(newNodeText);
     patternElement.appendChild(version);
 
-    patternElement.appendChild(createElement(TagAuthor));
-    patternElement.appendChild(createElement(TagDescription));
-    patternElement.appendChild(createElement(TagNotes));
-
     QDomElement unit = createElement(TagUnit);
     newNodeText = createTextNode(UnitsToStr(qApp->patternUnit()));
     unit.appendChild(newNodeText);
     patternElement.appendChild(unit);
+
+    patternElement.appendChild(createElement(TagAuthor));
+    patternElement.appendChild(createElement(TagDescription));
+    patternElement.appendChild(createElement(TagNotes));
 
     patternElement.appendChild(createElement(TagMeasurements));
     patternElement.appendChild(createElement(TagIncrements));

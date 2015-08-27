@@ -145,6 +145,44 @@ void VAbstractConverter::ValidateVersion(const QString &version) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::Replace(QString &formula, const QString &newName, int position, const QString &token,
+                                 int &bias) const
+{
+    formula.replace(position, token.length(), newName);
+    bias = token.length() - newName.length();
+}
+
+void VAbstractConverter::CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const
+{
+    if (bias == 0)
+    {
+        return;// Nothing to correct;
+    }
+
+    BiasTokens(position, bias, tokens);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::BiasTokens(int position, int bias, QMap<int, QString> &tokens)
+{
+    QMap<int, QString> newTokens;
+    QMap<int, QString>::const_iterator i = tokens.constBegin();
+    while (i != tokens.constEnd())
+    {
+        if (i.key()<= position)
+        { // Tokens before position "position" did not change his positions.
+            newTokens.insert(i.key(), i.value());
+        }
+        else
+        {
+            newTokens.insert(i.key()-bias, i.value());
+        }
+        ++i;
+    }
+    tokens = newTokens;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::CheckVersion(int ver) const
 {
     if (ver < MinVer())

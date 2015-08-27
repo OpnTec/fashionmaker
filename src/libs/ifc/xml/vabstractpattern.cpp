@@ -1083,7 +1083,7 @@ QStringList VAbstractPattern::ListPointExpressions() const
 QStringList VAbstractPattern::ListArcExpressions() const
 {
     QStringList expressions;
-    const QDomNodeList list = elementsByTagName(TagPoint);
+    const QDomNodeList list = elementsByTagName(TagArc);
     for (int i=0; i < list.size(); ++i)
     {
         const QDomElement dom = list.at(i).toElement();
@@ -1140,7 +1140,7 @@ QStringList VAbstractPattern::ListSplineExpressions() const
 QStringList VAbstractPattern::ListPathPointExpressions() const
 {
     QStringList expressions;
-    const QDomNodeList list = elementsByTagName(TagPoint);
+    const QDomNodeList list = elementsByTagName(AttrPathPoint);
     for (int i=0; i < list.size(); ++i)
     {
         const QDomElement dom = list.at(i).toElement();
