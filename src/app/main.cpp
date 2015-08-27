@@ -65,10 +65,10 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::translate("main", "Pattern making program."));
     parser.addHelpOption();
+
     // Process the actual command line arguments given by the user
     parser.process(app);
     QStringList args = parser.positionalArguments();
-
 
 #endif
     auto args = app.CommandLine()->OptInputFileNames();

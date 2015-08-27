@@ -690,6 +690,17 @@ void DialogLayoutSettings::MinimumLayoutSize()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::ReadSettings()
 {
+#ifdef STUPID_MARGE
+    InitPaperUnits();
+    InitLayoutUnits();
+    InitTemplates();
+    MinimumPaperSize();
+    MinimumLayoutSize();
+
+    SetLayoutWidth(qApp->ValentinaSettings()->GetLayoutWidth());
+    SetShift(qApp->ValentinaSettings()->GetLayoutShift());
+#endif
+
     SetLayoutWidth(qApp->Settings()->GetLayoutWidth());
     SetShift(qApp->Settings()->GetLayoutShift());
 

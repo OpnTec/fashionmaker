@@ -28,6 +28,7 @@
 
 #include "mainwindowsnogui.h"
 #include "core/vapplication.h"
+
 #include "../vpatterndb/vcontainer.h"
 #include "../vobj/vobjpaintdevice.h"
 
@@ -40,6 +41,10 @@
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialoglayoutsettings.h"
 
+#include "../vlayout/vlayoutgenerator.h"
+#include "dialogs/dialoglayoutprogress.h"
+#include "dialogs/dialogsavelayout.h"
+#include "../vlayout/vposter.h"
 
 #include <QFileDialog>
 #include <QFileInfo>

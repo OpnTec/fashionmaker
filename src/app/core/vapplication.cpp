@@ -48,6 +48,7 @@
 #include <QMessageBox>
 #include <QThread>
 #include <QDateTime>
+#include <QtXmlPatterns>
 
 
 Q_LOGGING_CATEGORY(vApp, "v.application")
