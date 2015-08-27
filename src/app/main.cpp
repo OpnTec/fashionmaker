@@ -30,12 +30,6 @@
 #include "core/vapplication.h"
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 
-//not needed that include, added to allow merge go
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-#   include "../../libs/vmisc/backport/qcommandlineparser.h"
-#else
-#   include <QCommandLineParser>
-#endif
 // Lock producing random attribute order in XML
  // https://stackoverflow.com/questions/27378143/qt-5-produce-random-attribute-order-in-xml
  extern Q_CORE_EXPORT QBasicAtomicInt qt_qhash_seed;
@@ -61,16 +55,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     app.setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
     app.setMainWindow(&w);
-#ifdef STUPID_MERGE
-    QCommandLineParser parser;
-    parser.setApplicationDescription(QCoreApplication::translate("main", "Pattern making program."));
-    parser.addHelpOption();
 
-    // Process the actual command line arguments given by the user
-    parser.process(app);
-    QStringList args = parser.positionalArguments();
-
-#endif
     auto args = app.CommandLine()->OptInputFileNames();
 
     //Before we load pattern show window.
