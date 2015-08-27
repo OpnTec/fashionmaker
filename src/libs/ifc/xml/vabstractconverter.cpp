@@ -31,6 +31,7 @@
 #include "exception/vexceptionwrongid.h"
 
 #include <QFile>
+#include <QFileInfo>
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
@@ -57,9 +58,11 @@ void VAbstractConverter::Convert()
     const QString backupFileName = fileName +".backup";
     if (SafeCopy(fileName, backupFileName, error) == false)
     {
-        const QString errorMsg(tr("Error creation backup file: %1.").arg(error));
+        const QString errorMsg(tr("Error creating a backup file: %1.").arg(error));
         throw VException(errorMsg);
     }
+
+    ReserveFile();
 
     ApplyPatches();
 
@@ -140,6 +143,25 @@ void VAbstractConverter::ValidateVersion(const QString &version) const
     if (version == QLatin1String("0.0.0"))
     {
         const QString errorMsg(tr("Version \"0.0.0\" invalid."));
+        throw VException(errorMsg);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::ReserveFile() const
+{
+    //It's not possible in all cases make conversion without lose data.
+    //For such cases we will store old version in a reserve file.
+    QString error;
+    QFileInfo info(fileName);
+    const QString reserveFileName = QString("%1/%2(v%3).%4")
+            .arg(info.absoluteDir().absolutePath())
+            .arg(info.baseName())
+            .arg(GetVersionStr())
+            .arg(info.completeSuffix());
+    if (SafeCopy(fileName, reserveFileName, error) == false)
+    {
+        const QString errorMsg(tr("Error creating a reserv copy: %1.").arg(error));
         throw VException(errorMsg);
     }
 }

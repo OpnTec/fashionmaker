@@ -69,6 +69,8 @@ private:
     QString GetVersionStr() const;
 
     void ValidateVersion(const QString &version) const;
+
+    void ReserveFile() const;
 };
 
 #endif // VABSTRACTCONVERTER_H
