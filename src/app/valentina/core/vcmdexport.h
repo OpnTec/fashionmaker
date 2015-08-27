@@ -22,7 +22,7 @@ constexpr auto FAILED_GEN_BASE_STATUS      = 240;
 
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QTextStream& qStdErr()
+inline QTextStream& vStdErr()
 {
     static QTextStream ts( stderr );
     return ts;
@@ -33,7 +33,7 @@ NORET_ATTR inline void AppAbort(const QString& text, int code = GENERAL_ERROR_ST
 {
     //well ..std::runtime_error was leading to zombies in memory and a lot of dumping all the time ...better to do just exit
     //possibly compiler do not have -fexceptions set
-    qStdErr() << text << "\n";
+    vStdErr() << text << "\n";
     std::exit(code);
 }
 //---------------------------------------------------------------------------------------------------------------------

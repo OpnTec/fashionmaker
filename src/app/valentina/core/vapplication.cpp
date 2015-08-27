@@ -136,7 +136,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             }
             else
             {
-                qStdErr() << msg << "\n";
+                vStdErr() << msg << "\n";
             }
         }
 
@@ -371,6 +371,18 @@ QString VApplication::TapeFilePath() const
     if (file.exists())
     {
         return file.absoluteFilePath();
+    }
+    else
+    {
+            QFileInfo tapeFile(QApplication::applicationDirPath() + "/" + tape);
+            if (tapeFile.exists())
+            {
+                return tapeFile.absoluteFilePath();
+            }
+            else
+            {
+                return tape;
+            }
     }
 #endif
 }
