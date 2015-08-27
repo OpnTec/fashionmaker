@@ -72,6 +72,8 @@
 
 Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
 
+#define OUT_FILE_ERROR vStdErr() << tr("File error: ") << e.ErrorMessage() << e.DetailedInformation() << "\n"
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief MainWindow constructor.
@@ -305,7 +307,7 @@ bool MainWindow::LoadMeasurements(const QString &path)
         }
         else
         {
-            vStdErr() << tr("File error: ")<< e.MoreInformation() <<"\n";
+            OUT_FILE_ERROR;
         }
         delete m;
         return false;
@@ -3124,7 +3126,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         }
         else
         {
-            vStdErr() << tr("File error.") << e.MoreInformation() << "\n";
+            OUT_FILE_ERROR;
         }
         Clear();        
         return false;
