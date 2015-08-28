@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vapplication.h"
-#include "..//ifc/exception/vexceptionobjecterror.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
@@ -50,7 +50,6 @@
 #include <QThread>
 #include <QDateTime>
 #include <QtXmlPatterns>
-
 
 Q_LOGGING_CATEGORY(vApp, "v.application")
 

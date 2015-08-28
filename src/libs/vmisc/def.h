@@ -42,7 +42,8 @@ enum class MeasurementsType : char { Standard, Individual , Unknown};
 enum class Unit : char { Mm = 0, Cm, Inch, Px, LAST_UNIT_DO_NOT_USE};
 enum class Source : char { FromGui, FromFile, FromTool };
 
-enum class Tool : unsigned char
+typedef unsigned char ToolVisHolderType;
+enum class Tool : ToolVisHolderType
 {
     Arrow,
     SinglePoint,
@@ -85,9 +86,9 @@ enum class Tool : unsigned char
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
-enum class Vis : unsigned char
+enum class Vis : ToolVisHolderType
 {
-    ControlPointSpline = static_cast<Vis>(Tool::LAST_ONE_DO_NOT_USE),
+    ControlPointSpline = static_cast<ToolVisHolderType>(Tool::LAST_ONE_DO_NOT_USE),
     GraphicsSimpleTextItem,
     SimpleSplinePath,
     SimplePoint,
