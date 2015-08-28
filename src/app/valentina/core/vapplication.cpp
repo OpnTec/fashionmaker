@@ -341,7 +341,7 @@ QString VApplication::TapeFilePath() const
     QFileInfo tapeFile(QApplication::applicationDirPath() + "/" + tape + ".exe");
     if (tapeFile.exists())
     {
-        return fileBundle.absoluteFilePath();
+        return tapeFile.absoluteFilePath();
     }
     else
     {
