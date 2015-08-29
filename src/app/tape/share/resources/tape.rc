@@ -1,4 +1,4 @@
-IDI_ICON1               ICON    DISCARDABLE     "icon/64x64/logo.ico"
+IDI_ICON1               ICON    DISCARDABLE     "tapeicon/64x64/logo.ico"
 
 #include <windows.h>
 #include "../../version.h"

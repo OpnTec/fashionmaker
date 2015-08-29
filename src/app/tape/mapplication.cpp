@@ -37,6 +37,7 @@
 #include <QResource>
 #include <QTranslator>
 #include <QPointer>
+#include <QLocalServer>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 #   include "../../libs/vmisc/backport/qcommandlineparser.h"

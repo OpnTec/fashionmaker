@@ -30,6 +30,7 @@
 #define TMAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidget>
 
 #include "../vmisc/def.h"
 #include "../vformat/vmeasurements.h"
