@@ -382,19 +382,22 @@ void VTranslateMeasurements::InitGroupC()
     m = QmuTranslation::translate("Measurements", "indent_neck_back",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Indent Neck Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Indent Neck Back", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance from Scapula (Blade point) to the Neck Back",
+                                  "Full measurement description.");
     InitMeasurement(indentNeckBack_M, m, g, d, "C01");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "indent_waist_back",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Indent Waist Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Indent Waist Back", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance between a flat stick, placed to touch Hip "
+                                  "and Scapula, and Waist Back", "Full measurement description.");
     InitMeasurement(indentWaistBack_M, m, g, d, "C02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "indent_ankle_high",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Indent Ankle High", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Indent Ankle High", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Horizontal Distance betwee a  flat stick, placed perpendicular "
+                                  "to Heel, and the greatest indentation of Ankle", "Full measurement description.");
     InitMeasurement(indentAnkleHigh_M, m, g, d, "C03");
     //=================================================================================================================
 }
