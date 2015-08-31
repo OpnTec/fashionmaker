@@ -228,6 +228,7 @@ extern const QString heightNeckSide_M;        // A17
 extern const QString heightNeckBackToKnee_M;  // A18
 extern const QString heightWaistSideToKnee_M; // A19
 extern const QString heightWaistSideToHip_M;  // A20
+extern const QString heightKneeToAnkle_M;     // A21
 // B
 extern const QString widthShoulder_M;     // B01
 extern const QString widthBust_M;         // B02

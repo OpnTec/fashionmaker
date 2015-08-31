@@ -55,6 +55,7 @@ const QString heightNeckSide_M        = QStringLiteral("height_neck_side");     
 const QString heightNeckBackToKnee_M  = QStringLiteral("height_neck_back_to_knee");  // A18
 const QString heightWaistSideToKnee_M = QStringLiteral("height_waist_side_to_knee"); // A19
 const QString heightWaistSideToHip_M  = QStringLiteral("height_waist_side_to_hip");  // A20
+const QString heightKneeToAnkle_M     = QStringLiteral("height_knee_to_ankle");      // A21
 // B
 const QString widthShoulder_M     = QStringLiteral("width_shoulder");       // B01
 const QString widthBust_M         = QStringLiteral("width_bust");           // B02
