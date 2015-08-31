@@ -335,31 +335,36 @@ void VTranslateMeasurements::InitGroupB()
     m = QmuTranslation::translate("Measurements", "width_shoulder",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Width Shoulder", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Width Shoulder", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance from Shoulder Tip to Shoulder Tip",
+                                  "Full measurement description.");
     InitMeasurement(widthShoulder_M, m, g, d, "B01");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "width_bust",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Width Bust", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Width Bust", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance from Bust Side to Bust Side",
+                                  "Full measurement description.");
     InitMeasurement(widthBust_M, m, g, d, "B02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "width_waist",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Width Waist", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Width Waist", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance from Waist Side to Waist Side",
+                                  "Full measurement description.");
     InitMeasurement(widthWaist_M, m, g, d, "B03");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "width_hip",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Width Hip", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Width Hip", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance from Hip Side to Hip Side",
+                                  "Full measurement description.");
     InitMeasurement(widthHip_M, m, g, d, "B04");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "width_abdomen_to_hip",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Width Abdomen to Hip", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Width Abdomen to Hip", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance from the greatest abdomen prominence to the "
+                                  "greatest hip prominence", "Full measurement description.");
     InitMeasurement(widthAbdomenToHip_M, m, g, d, "B05");
     //=================================================================================================================
 }
