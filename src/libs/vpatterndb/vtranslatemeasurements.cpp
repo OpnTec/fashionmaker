@@ -1773,90 +1773,101 @@ void VTranslateMeasurements::InitGroupO()
     m = QmuTranslation::translate("Measurements", "neck_back_to_waist_front",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Neck Back to Waist Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Neck Back to Waist Front", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "From Neck Back around Neck Side down to Waist Front",
+                                  "Full measurement description.");
     InitMeasurement(neckBackToWaistFront_M, m, g, d, "O01");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "waist_to_waist_halter",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist to Waist Halter, around Neck Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Waist to Waist Halter, around Neck Back",
+    g = QmuTranslation::translate("Measurements", "Waist to Waist Halter", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist level around Neck Back to Waist level",
                                   "Full measurement description.");
     InitMeasurement(waistToWaistHalter_M, m, g, d, "O02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "waist_natural_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Natural Waist circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Natural Waist circumference", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Torso circumference at men's natural side Abdominal Obliques "
+                                  "indentation, if Oblique indentation isn't found then just below the Navel level. ",
+                                  "Full measurement description.");
     InitMeasurement(waistNaturalCirc_M, m, g, d, "O03");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "waist_natural_arc_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Natural Waist arc (front)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Natural Waist arc (front)", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "From Side to Side at the Natural Waist level, across the front",
+                                  "Full measurement description.");
     InitMeasurement(waistNaturalArcF_M, m, g, d, "O04");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "waist_natural_arc_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Natural Waist arc (back)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Natural Waist arc (back)", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "From Side to Side at Natural Waist level, across the back. "
+                                  "Calculate as ( Natural Waist circumference  - Natural Waist arc (front) )",
+                                  "Full measurement description.");
     InitMeasurement(waistNaturalArcB_M, m, g, d, "O05");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "waist_to_natural_waist_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Waist to Natural Waist (front)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Waist to Natural Waist (front)", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Length from Waist Front to Natural Waist Front",
+                                  "Full measurement description.");
     InitMeasurement(waistToNaturalWaistF_M, m, g, d, "O06");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "waist_to_natural_waist_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Waist to Natural Waist (back)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Waist to Natural Waist (back)", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Length from Waist Back to Natural Waist Back",
+                                  "Full measurement description.");
     InitMeasurement(waistToNaturalWaistB_M, m, g, d, "O07");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "arm_neck_back_to_elbow_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm > Neck Back to Elbow (bent)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm > Neck Back to Elbow (bent)", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Arm: Neck Back to Elbow (bent)", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Bend Arm with Elbow out, hand in front. Measure from Neck Back to "
+                                  "Elbow Tip", "Full measurement description.");
     InitMeasurement(armNeckBackToElbowBent_M, m, g, d, "O08");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "arm_neck_back_to_wrist_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm > Neck Back to Wrist (bent)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm > Neck Back to Wrist (bent)", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Arm: Neck Back to Wrist (bent)", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Bend Arm with Elbow out, hand in front. Measure from Neck Back to "
+                                  "Elbow Tip to Wrist bone", "Full measurement description.");
     InitMeasurement(armNeckBackToWristBent_M, m, g, d, "O09");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "arm_neck_side_to_elbow_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm > Neck Side to Elbow (bent)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm > Neck Side to Elbow (bent)", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Arm: Neck Side to Elbow (bent)", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Bend Arm with Elbow out, hand in front. Measure from Neck Side to "
+                                  "Elbow Tip", "Full measurement description.");
     InitMeasurement(armNeckSideToElbowBent_M, m, g, d, "O10");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "arm_neck_side_to_wrist_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm > Neck Side to Wrist (bent)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm > Neck Side to Wrist (bent)", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Arm: Neck Side to Wrist (bent)", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Bend Arm with Elbow out, hand in front. Measure from Neck Side to "
+                                  "Elbow Tip to Wrist bone", "Full measurement description.");
     InitMeasurement(armNeckSideToWristBent_M, m, g, d, "O11");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "arm_across_back_center_to_elbow_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm > Across Back Center to Elbow (bent)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm > Across Back Center to Elbow (bent)",
-                                  "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Arm: Across Back Center to Elbow (bent)", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Bend Arm with Elbow out, hand in front. Measure from Middle of "
+                                  "Back to Elbow Tip ", "Full measurement description.");
     InitMeasurement(armAcrossBackCenterToElbowBent_M, m, g, d, "O12");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "arm_across_back_center_to_wrist_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm > Across Back Center to Wrist (bent)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm > Across Back Center to Wrist (bent)",
-                                  "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Arm: Across Back Center to Wrist (bent)", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Bend Arm with Elbow out, hand in front. Measure from Middle of "
+                                  "Back to Elbow Tip to Wrist bone", "Full measurement description.");
     InitMeasurement(armAcrossBackCenterToWristBent_M, m, g, d, "O13");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "arm_armscye_back_center_to_wrist_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm > Armscye Back Center to Wrist (bent)",
-                                  "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm > Armscye Back Center to Wrist (bent)",
-                                  "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Arm: Armscye Back Center to Wrist (bent)", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Bend Arm with Elbow out, hand in front. Measure from Armscye"
+                                  "Back to Elbow Tip ", "Full measurement description.");
     InitMeasurement(armArmscyeBackCenterToWristBent_M, m, g, d, "O14");
     //=================================================================================================================
 }
