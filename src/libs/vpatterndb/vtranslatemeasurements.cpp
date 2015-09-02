@@ -1716,42 +1716,46 @@ void VTranslateMeasurements::InitGroupN()
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "head_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Head circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Head: circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure circumference at largest level of head",
+                                  "Full measurement description.");
     InitMeasurement(headCirc_M, m, g, d, "N01");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "head_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Head length", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Head: length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance from Head Crown to bottom of jaw ",
+                                  "Full measurement description.");
     InitMeasurement(headLength_M, m, g, d, "N02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "head_depth",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head depth", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Head depth", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Head: depth", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance from front of forehead to back of head",
+                                  "Full measurement description.");
     InitMeasurement(headDepth_M, m, g, d, "N03");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "head_width",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head width", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Head width", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Head: width", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance from Head Side to Head Side, where Head is "
+                                  "widest", "Full measurement description.");
     InitMeasurement(headWidth_M, m, g, d, "N04");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "head_crown_to_neck_back",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head Crown to Neck Back, vertical distance",
+    g = QmuTranslation::translate("Measurements", "Head: Crown to Neck Back, vertical distance",
                                   "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Head Crown to Neck Back, vertical distance",
-                                  "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance from Head Crown to Neck Back. Calculate as "
+                                  "(Height  -  Height: Neck Back)", "Full measurement description.");
     InitMeasurement(headCrownToNeckBack_M, m, g, d, "N05", "(height - height_neck_back)");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "head_chin_to_neck_back",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head > Chin to Neck Back, vertical distance",
+    g = QmuTranslation::translate("Measurements", "Head: Chin to Neck Back, vertical distance",
                                   "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Head > Chin to Neck Back, vertical distance",
-                                  "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance from bottom of jaw to Neck Back, calculate as "
+                                  "( Height  -  Height: Neck Back  -  Head: Length )", "Full measurement description.");
     InitMeasurement(headChinToNeckBack_M, m, g, d, "N06", "(height - height_neck_back - head_length)");
     //=================================================================================================================
 }
