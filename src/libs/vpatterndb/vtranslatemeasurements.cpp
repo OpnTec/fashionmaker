@@ -1677,26 +1677,29 @@ void VTranslateMeasurements::InitGroupM()
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "foot_width",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Foot width", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Foot width", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Foot: width", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure at widest part of foot", "Full measurement description.");
     InitMeasurement(footWidth_M, m, g, d, "M01");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "foot_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Foot length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Foot length", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Foot: length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure from back of heel to end of longest toe",
+                                  "Full measurement description.");
     InitMeasurement(footLength_M, m, g, d, "M02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "foot_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Foot circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Foot circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Foot: circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure circumference around widest part of foot",
+                                  "Full measurement description.");
     InitMeasurement(footCirc_M, m, g, d, "M03");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "foot_instep_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Foot Instep circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Foot Instep circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Foot: Instep circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure circumference at tallest part of instep",
+                                  "Full measurement description.");
     InitMeasurement(footInstepCirc_M, m, g, d, "M04");
     //=================================================================================================================
 }
