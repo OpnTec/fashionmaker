@@ -1458,90 +1458,99 @@ void VTranslateMeasurements::InitGroupJ()
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_crotch_to_floor",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Crotch to floor (Inseam)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Crotch to floor (Inseam)", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Crotch to floor (Inseam)", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Stand feet close together. Measure from Crotch level (close to "
+                                  "body) straight down to floor.", "Full measurement description.");
     InitMeasurement(legCrotchToFloor_M, m, g, d, "J01");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_waist_side_to_floor",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg >  Waist Side to floor (Outseam)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg >  Waist Side to floor (Outseam)",
-                                  "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Waist Side to floor (Outseam)", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure from Waist Side, along hip curve to Hip level, then "
+                                  "straight down to floor.", "Full measurement description.");
     InitMeasurement(legWaistSideToFloor_M, m, g, d, "J02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_waist_side_to_knee",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Waist Side to Knee", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Waist Side to Knee", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Waist Side to Knee", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist side to Knee, calculate as (Leg: Waist Side to Floor - "
+                                  "Height: Knee)", "Full measurement description.");
     InitMeasurement(legWaistSideToKnee_M, m, g, d, "J03");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_thigh_upper_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Thigh Upper circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Thigh Upper circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Thigh Upper circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure thigh circumference at the fullest part of the upper "
+                                  "thigh, near the crotch", "Full measurement description.");
     InitMeasurement(legThighUpperCirc_M, m, g, d, "J04");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_thigh_mid_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Thigh Middle circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Thigh Middle circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Thigh Middle circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Thigh circumference roughly halfway between crotch and knee",
+                                  "Full measurement description.");
     InitMeasurement(legThighMidCirc_M, m, g, d, "J05");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_knee_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Knee circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Knee circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Knee circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Knee circumference, Leg is straight",
+                                  "Full measurement description.");
     InitMeasurement(legKneeCirc_M, m, g, d, "J06");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_knee_small_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Knee Small circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Knee Small circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Knee Small circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Leg circumference just below the knee",
+                                  "Full measurement description.");
     InitMeasurement(legKneeSmallCirc_M, m, g, d, "J07");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_calf_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Calf circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Calf circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Calf circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Leg circumference at the widest part of Calf",
+                                  "Full measurement description.");
     InitMeasurement(legCalfCirc_M, m, g, d, "J08");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_ankle_high_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Ankle High circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Ankle High circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Ankle High circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Ankle circumference where the indentation at the back of the "
+                                  "ankle is the deepest", "Full measurement description.");
     InitMeasurement(legAnkleHighCirc_M, m, g, d, "J09");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_ankle_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Ankle circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Ankle circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Ankle circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Ankle circumference where front of Leg meets the top of the Foot",
+                                  "Full measurement description.");
     InitMeasurement(legAnkleCirc_M, m, g, d, "J10");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_knee_circ_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Knee circumference (bent)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Knee circumference (bent)", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Knee circumference (bent)", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Knee circumference, Leg is bent", "Full measurement description.");
     InitMeasurement(legKneeCircBent_M, m, g, d, "J11");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_ankle_diag_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Ankle diagonal circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Ankle diagonal circumference",
-                                  "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Ankle diagonal circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Ankle circumference taken diagonally from corner of Heel through "
+                                  "point where Leg meets Foot", "Full measurement description.");
     InitMeasurement(legAnkleDiagCirc_M, m, g, d, "J12");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_crotch_to_ankle",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Crotch to ankle", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Crotch to ankle",
-                                  "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Crotch to Ankle", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Crotch to Ankle level, calculate as ( Leg: Crotch to "
+                                  "Floor - Height: Ankle )", "Full measurement description.");
     InitMeasurement(legCrotchToAnkle_M, m, g, d, "J13", "(leg_crotch_to_floor - height_ankle)");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "leg_waist_side_to_ankle",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg > Waist Side to Ankle", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg > Waist Side to Ankle",
-                                  "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Leg: Waist Side to Ankle", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Side to Ankle level, calculate as (Leg: Waist Side "
+                                  "to Floor  -  Height: Ankle)", "Full measurement description.");
     InitMeasurement(legWaistSideToAnkle_M, m, g, d, "J14", "(leg_waist_side_to_floor - height_ankle)");
     //=================================================================================================================
 }
