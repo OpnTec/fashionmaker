@@ -351,18 +351,19 @@ extern const QString bustpointToBustpointHalter_M; // G06
 extern const QString bustpointToShoulderTip_M;     // G07
 extern const QString bustpointToWaistFront_M;      // G08
 // H
-extern const QString shoulderTipToWaistFront_M; // H01
-extern const QString neckFrontToWaistSide_M;    // H02
-extern const QString neckSideToWaistSideF_M;    // H03
-extern const QString neckSideToArmfoldF_M;      // H04
-extern const QString neckSideToArmpitF_M;       // H05
-extern const QString neckSideToBustSideF_M;     // H06
-extern const QString shoulderTipToWaistBack_M;  // H07
-extern const QString neckBackToWaistSide_M;     // H08
-extern const QString neckSideToWaistSideB_M;    // H09
-extern const QString neckSideToArmfoldB_M;      // H10
-extern const QString neckSideToArmpitB_M;       // H11
-extern const QString neckSideToBustSideB_M;     // H12
+extern const QString shoulderTipToWaistFront_M;       // H01
+extern const QString neckFrontToWaistSide_M;          // H02
+extern const QString neckSideToWaistSideF_M;          // H03
+extern const QString neckSideToArmfoldF_M;            // H04
+extern const QString neckSideToArmpitF_M;             // H05
+extern const QString neckSideToBustSideF_M;           // H06
+extern const QString shoulderTipToWaistBack_M;        // H07
+extern const QString neckBackToWaistSide_M;           // H08
+extern const QString neckSideToWaistSideB_M;          // H09
+extern const QString neckSideToArmfoldB_M;            // H10
+extern const QString neckSideToArmpitB_M;             // H11
+extern const QString neckSideToBustSideB_M;           // H12
+extern const QString shoulderTipToWaistB_1inOffset_M; // H13
 // I
 extern const QString armShoulderTipToWristBent_M;   // I01
 extern const QString armShoulderTipToElbowBent_M;   // I02
