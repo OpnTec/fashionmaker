@@ -1631,32 +1631,36 @@ void VTranslateMeasurements::InitGroupL()
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "hand_palm_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hand > Palm length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Hand > Palm length", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Hand: Palm length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Wrist line to base of Middle Finger",
+                                  "Full measurement description.");
     InitMeasurement(handPalmLength_M, m, g, d, "L01");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "hand_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hand length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Hand length", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Hand: length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Wrist line to end of Middle Finger",
+                                  "Full measurement description.");
     InitMeasurement(handLength_M, m, g, d, "L02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "hand_palm_width",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hand > Palm width", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Hand > Palm width", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Hand: Palm width", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Width where Palm is widest", "Full measurement description.");
     InitMeasurement(handPalmWidth_M, m, g, d, "L03");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "hand_palm_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hand > Palm circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Hand > Palm circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Hand: Palm circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Circumference where Palm is widest",
+                                  "Full measurement description.");
     InitMeasurement(handPalmCirc_M, m, g, d, "L04");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "hand_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hand circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Hand circumference", "Full measurement description.");
+    g = QmuTranslation::translate("Measurements", "Hand: circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Tuck thumb toward smallest finger, bring fingers close together. "
+                                  "Measure hand circumference around Thumb joint.", "Full measurement description.");
     InitMeasurement(handCirc_M, m, g, d, "L05");
     //=================================================================================================================
 }
