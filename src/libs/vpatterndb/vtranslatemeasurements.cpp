@@ -1990,19 +1990,25 @@ void VTranslateMeasurements::InitGroupQ()
     m = QmuTranslation::translate("Measurements", "dart_width_shoulder",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Dart Width > Shoulder", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Dart Width > Shoulder", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "This information is pulled from pattern charts in some "
+                                  "patternmaking systems, e.g. Winifred P. Aldrich's \"Metric Pattern Cutting\"",
+                                  "Full measurement description.");
     InitMeasurement(dartWidthShoulder_M, m, g, d, "Q01");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "dart_width_bust",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Dart Width > Bust", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Dart Width > Bust", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "This information is pulled from pattern charts in some "
+                                  "patternmaking systems, e.g. Winifred P. Aldrich's \"Metric Pattern Cutting\"",
+                                  "Full measurement description.");
     InitMeasurement(dartWidthBust_M, m, g, d, "Q02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "dart_width_waist",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Dart Width > Waist", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Dart Width > Waist", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "This information is pulled from pattern charts in some "
+                                  "patternmaking systems, e.g. Winifred P. Aldrich's \"Metric Pattern Cutting\"",
+                                  "Full measurement description.");
     InitMeasurement(dartWidthWaist_M, m, g, d, "Q03");
     //=================================================================================================================
 }
