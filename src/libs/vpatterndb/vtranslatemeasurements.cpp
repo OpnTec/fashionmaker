@@ -1568,43 +1568,53 @@ void VTranslateMeasurements::InitGroupK()
     m = QmuTranslation::translate("Measurements", "crotch_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Crotch length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Crotch length", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "From Waist Front then between Legs then to Waist Back. Apply tape "
+                                  "across gap between buttocks at Hip level. ", "Full measurement description.");
     InitMeasurement(crotchLength_M, m, g, d, "K01");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "crotch_length_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Crotch length (back)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Crotch length (back)", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "From Waist Back to the beginning of vagina or end of testicles. "
+                                  "Apply tape across gap between buttocks at Hip level.",
+                                  "Full measurement description.");
     InitMeasurement(crotchLengthB_M, m, g, d, "K02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "crotch_length_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Crotch length (front)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Crotch length (front)", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "From Waist front to beginning of vagina or end of testicles, "
+                                  "calculate from ( Crotch Length  - Crotch Length (back) )",
+                                  "Full measurement description.");
     InitMeasurement(crotchLengthF_M, m, g, d, "K03", "(crotch_length - crotch_length_b)");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "rise_length_side",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Rise length (side)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Rise length (side)", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "From Waist Side down to hard surface in seated position",
+                                  "Full measurement description.");
     InitMeasurement(riseLengthSide_M, m, g, d, "K04");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "rise_length_diag",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Rise length (diagonal)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Rise length (diagonal)", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Tie a string around Thigh at Crotch level, sit on hard surface, "
+                                  "measure from Waist Side to point where string meets the hard surface.",
+                                  "Full measurement description.");
     InitMeasurement(riseLengthDiag_M, m, g, d, "K05");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "rise_length_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Rise length (back)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Rise length (back)", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance from Waist Back to Crotch level",
+                                  "Full measurement description.");
     InitMeasurement(riseLengthB_M, m, g, d, "K06");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "rise_length_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Rise length (front)", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Rise length (front)", "Full measurement description.");
+    d = QmuTranslation::translate("Measurements", "Vertical Distance from Waist Front to Crotch level",
+                                  "Full measurement description.");
     InitMeasurement(riseLengthF_M, m, g, d, "K07");
     //=================================================================================================================
 }
