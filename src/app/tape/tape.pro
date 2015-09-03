@@ -263,8 +263,6 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Ep10.png \
         $${PWD}/share/resources/diagrams/Ep11.png \
         $${PWD}/share/resources/diagrams/Ep12.png \
-        $${PWD}/share/resources/diagrams/Ep13.png \
-        $${PWD}/share/resources/diagrams/Ep14.png \
         $${PWD}/share/resources/diagrams/Fp1.png \
         $${PWD}/share/resources/diagrams/Fp2.png \
         $${PWD}/share/resources/diagrams/Fp3.png \
@@ -286,6 +284,7 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Hp8.png \
         $${PWD}/share/resources/diagrams/Hp9.png \
         $${PWD}/share/resources/diagrams/Hp10.png \
+        $${PWD}/share/resources/diagrams/Hp11.png \
         $${PWD}/share/resources/diagrams/Ip1.png \
         $${PWD}/share/resources/diagrams/Ip2.png \
         $${PWD}/share/resources/diagrams/Ip3.png \

@@ -414,6 +414,8 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 18: // A19
             V_FALLTHROUGH
         case 19: // A20
+            V_FALLTHROUGH
+        case 20: // A21
             return QString("Ap2");
         default:
             break;
@@ -576,13 +578,13 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 12: // E13
             V_FALLTHROUGH
         case 13: // E14
-            return QString("Ep5");
+            V_FALLTHROUGH
         case 14: // E15
             V_FALLTHROUGH
         case 15: // E16
-            V_FALLTHROUGH
+            return QString("Ep5");
         case 16: // E17
-            return QString("Ep6");
+            V_FALLTHROUGH
         case 17: // E18
             V_FALLTHROUGH
         case 18: // E19
@@ -590,39 +592,45 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 19: // E20
             V_FALLTHROUGH
         case 20: // E21
-            return QString("Ep7");
+            return QString("Ep6");
         case 21: // E22
             V_FALLTHROUGH
         case 22: // E23
             V_FALLTHROUGH
         case 23: // E24
-            return QString("Ep8");
-        case 24: // E25
             V_FALLTHROUGH
+        case 24: // E25
+            return QString("Ep7");
         case 25: // E26
             V_FALLTHROUGH
         case 26: // E27
-            return QString("Ep9");
+            V_FALLTHROUGH
         case 27: // E28
             V_FALLTHROUGH
         case 28: // E29
-            V_FALLTHROUGH
+            return QString("Ep8");
         case 29: // E30
-            return QString("Ep10");
+            V_FALLTHROUGH
         case 30: // E31
             V_FALLTHROUGH
         case 31: // E32
-            V_FALLTHROUGH
+            return QString("Ep9");
         case 32: // E33
             V_FALLTHROUGH
         case 33: // E34
-            return QString("Ep11");
+            V_FALLTHROUGH
         case 34: // E35
-            return QString("Ep12");
+            return QString("Ep10");
         case 35: // E36
-            return QString("Ep13");
+            V_FALLTHROUGH
         case 36: // E37
-            return QString("Ep14");
+            V_FALLTHROUGH
+        case 37: // E38
+            V_FALLTHROUGH
+        case 38: // E39
+            return QString("Ep11");
+        case 39: // E40
+            return QString("Ep12");
         default:
             break;
     }
@@ -712,6 +720,8 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
             return QString("Hp9");
         case 11: // H12
             return QString("Hp10");
+        case 12: // H13
+            return QString("Hp11");
         default:
             break;
     }
