@@ -114,9 +114,12 @@ QString TMainWindow::CurrentFile() const
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RetranslateTable()
 {
-    const int row = ui->tableWidget->currentRow();
-    RefreshTable();
-    ui->tableWidget->selectRow(row);
+    if (m != nullptr)
+    {
+        const int row = ui->tableWidget->currentRow();
+        RefreshTable();
+        ui->tableWidget->selectRow(row);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1356,24 +1359,42 @@ void TMainWindow::InitWindow()
         ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + " " +
                                           VDomDocument::UnitsToStr(m->MUnit(), true));
 
+        // Because Qt Designer doesn't know about our deleting we will create empty objects for correct
+        // working the retranslation UI
         // Tab Measurements
-        delete ui->labelFormula;
         delete ui->horizontalLayoutValue;
         delete ui->plainTextEditFormula;
-        delete ui->pushButtonGrow;
         delete ui->toolButtonExpr;
 
+        delete ui->labelFormula;
+        ui->labelFormula = new QLabel(this);
+
+        delete ui->pushButtonGrow;
+        ui->pushButtonGrow = new QPushButton(this);
+
         // Tab Information
-        delete ui->labelGivenName;
         delete ui->lineEditGivenName;
-        delete ui->labelFamilyName;
         delete ui->lineEditFamilyName;
-        delete ui->labelBirthDate;
-        delete ui->dateEditBirthDate;
-        delete ui->labelSex;
         delete ui->comboBoxSex;
-        delete ui->labelEmail;
         delete ui->lineEditEmail;
+
+        delete ui->labelGivenName;
+        ui->labelGivenName = new QLabel(this);
+
+        delete ui->labelFamilyName;
+        ui->labelFamilyName = new QLabel(this);
+
+        delete ui->labelBirthDate;
+        ui->labelBirthDate = new QLabel(this);
+
+        delete ui->dateEditBirthDate;
+        ui->dateEditBirthDate = new QDateEdit(this);
+
+        delete ui->labelSex;
+        ui->labelSex = new QLabel(this);
+
+        delete ui->labelEmail;
+        ui->labelEmail = new QLabel(this);
 
         const QStringList listHeights = VMeasurement::WholeListHeights(mUnit);
         const QStringList listSizes = VMeasurement::WholeListSizes(mUnit);
@@ -1411,18 +1432,31 @@ void TMainWindow::InitWindow()
         ui->lineEditEmail->setEnabled(true);
 
         // Tab Measurements
-        delete ui->labelBaseValue;
         delete ui->doubleSpinBoxBaseValue;
-        delete ui->labelInSizes;
         delete ui->doubleSpinBoxInSizes;
-        delete ui->labelInHeights;
         delete ui->doubleSpinBoxInHeights;
+
+        delete ui->labelBaseValue;
+        ui->labelBaseValue = new QLabel(this);
+
+        delete ui->labelInSizes;
+        ui->labelInSizes = new QLabel(this);
+
+        delete ui->labelInHeights;
+        ui->labelInHeights = new QLabel(this);
 
         // Tab Information
         delete ui->labelBaseSize;
+        ui->labelBaseSize = new QLabel(this);
+
         delete ui->labelBaseSizeValue;
+        ui->labelBaseSizeValue = new QLabel(this);
+
         delete ui->labelBaseHeight;
+        ui->labelBaseHeight = new QLabel(this);
+
         delete ui->labelBaseHeightValue;
+        ui->labelBaseHeightValue = new QLabel(this);
 
         ui->lineEditGivenName->setText(m->GivenName());
         ui->lineEditFamilyName->setText(m->FamilyName());

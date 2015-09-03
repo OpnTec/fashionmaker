@@ -62,9 +62,9 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
     pathPage = new TapePathPage();
     pagesWidget->addWidget(pathPage);
 
-    QPushButton *applyButton = new QPushButton(tr("Apply"));
-    QPushButton *canselButton = new QPushButton(tr("&Cancel"));
-    QPushButton *okButton = new QPushButton(tr("&Ok"));
+    applyButton = new QPushButton(tr("Apply"));
+    canselButton = new QPushButton(tr("&Cancel"));
+    okButton = new QPushButton(tr("&Ok"));
 
     createIcons();
     connect(contentsWidget, &QListWidget::currentItemChanged, this, &TapeConfigDialog::changePage);
