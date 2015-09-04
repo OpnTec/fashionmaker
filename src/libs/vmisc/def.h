@@ -32,6 +32,9 @@
 #include <csignal>
 #include <QtGlobal>
 #include <QStringList>
+#ifdef Q_OS_WIN
+    #include <windows.h>
+#endif /* Q_OS_WIN */
 
 #define SceneSize 50000
 #define DefPointRadius 1.5//mm
