@@ -1057,7 +1057,7 @@ void MainWindow::LoadIndividual()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::LoadStandard()
 {
-    const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
+    const QString filter = tr("Standard measurements (*.vst);;Individual measurements (*.vit)");
     //Use standard path to standard measurements
     const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
