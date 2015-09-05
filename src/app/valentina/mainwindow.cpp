@@ -1032,8 +1032,8 @@ void MainWindow::PrepareSceneList()
 void MainWindow::LoadIndividual()
 {
     const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
-    //Use standard path to standard measurements
-    const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
+    //Use standard path to individual measurements
+    const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
 
     if (not mPath.isEmpty())
@@ -1058,8 +1058,8 @@ void MainWindow::LoadIndividual()
 void MainWindow::LoadStandard()
 {
     const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
-    //Use standard path to individual measurements
-    const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+    //Use standard path to standard measurements
+    const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
 
     if (not mPath.isEmpty())
