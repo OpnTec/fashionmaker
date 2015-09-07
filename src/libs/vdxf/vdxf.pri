@@ -4,7 +4,9 @@
 SOURCES += \
     $$PWD/stable.cpp \
     $$PWD/dxflib/dl_dxf.cpp \
-    $$PWD/dxflib/dl_writer_ascii.cpp
+    $$PWD/dxflib/dl_writer_ascii.cpp \
+    $$PWD/vdxfengine.cpp \
+    $$PWD/vdxfpaintdevice.cpp
 
 HEADERS += \
     $$PWD/stable.h \
@@ -18,4 +20,7 @@ HEADERS += \
     $$PWD/dxflib/dl_extrusion.h \
     $$PWD/dxflib/dl_global.h \
     $$PWD/dxflib/dl_writer.h \
-    $$PWD/dxflib/dl_writer_ascii.h
+    $$PWD/dxflib/dl_writer_ascii.h \
+    $$PWD/vdxfengine.h \
+    $$PWD/vdxfpaintdevice.h \
+    $$PWD/dxfdef.h

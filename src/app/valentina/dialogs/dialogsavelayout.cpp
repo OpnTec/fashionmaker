@@ -50,6 +50,7 @@ const std::vector<VFrmWithTest> DialogSaveLayout::availFormats = {
     VFrmWithTest(tr("Wavefront OBJ (*.obj)"), ".obj"),
     VFrmWithTest(tr("PS files (*.ps)"), ".ps", 1), //fixme: use 1 to have exe once tested on 1st run, or any other value to test always as original do
     VFrmWithTest(tr("EPS files (*.eps)"), ".eps", 1),
+    VFrmWithTest(tr("DXF files (*.dxf)"), ".dxf"),
 };
 
 

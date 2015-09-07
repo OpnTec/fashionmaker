@@ -30,6 +30,7 @@
 #include "core/vapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vobj/vobjpaintdevice.h"
+#include "../vdxf/vdxfpaintdevice.h"
 #include "dialogs/dialoglayoutsettings.h"
 
 #include "../vlayout/vlayoutgenerator.h"
@@ -209,7 +210,7 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
             scenes[i]->setBackgroundBrush( *brush );
             shadows[i]->setVisible(false);
             paper->setPen(QPen(QBrush(Qt::white, Qt::NoBrush), 0.1, Qt::NoPen));
-            const QStringList suffix = QStringList() << "svg" << "png" << "pdf" << "eps" << "ps" << "obj";
+            const QStringList suffix = QStringList() << "svg" << "png" << "pdf" << "eps" << "ps" << "obj" << "dxf";
             switch (suffix.indexOf(suf))
             {
                 case 0: //svg
@@ -233,6 +234,9 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
                     paper->setVisible(false);
                     ObjFile(name, i);
                     paper->setVisible(true);
+                    break;
+                case 6: //dxf
+                    DxfFile(name, i);
                     break;
                 default:
                     qDebug() << "Can't recognize file suffix." << Q_FUNC_INFO;
@@ -665,6 +669,23 @@ void MainWindowsNoGUI::ObjFile(const QString &name, int i) const
     if (paper)
     {
         VObjPaintDevice generator;
+        generator.setFileName(name);
+        generator.setSize(paper->rect().size().toSize());
+        generator.setResolution(static_cast<int>(PrintDPI));
+        QPainter painter;
+        painter.begin(&generator);
+        scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
+        painter.end();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
+{
+    QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+    if (paper)
+    {
+       VDxfPaintDevice generator;
         generator.setFileName(name);
         generator.setSize(paper->rect().size().toSize());
         generator.setResolution(static_cast<int>(PrintDPI));
