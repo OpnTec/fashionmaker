@@ -112,6 +112,7 @@ private:
     void PsFile(const QString &name, int i)const;
     void PdfToPs(const QStringList &params)const;
     void ObjFile(const QString &name, int i)const;
+    void DxfFile(const QString &name, int i)const;
 
     QVector<QImage> AllSheets();
 
