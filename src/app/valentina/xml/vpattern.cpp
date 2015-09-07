@@ -69,7 +69,8 @@ void VPattern::CreateEmptyFile()
     this->clear();
     QDomElement patternElement = this->createElement(TagPattern);
 
-    patternElement.appendChild(createComment("Pattern created with Valentina (http://www.valentina-project.org/)."));
+    patternElement.appendChild(
+                createComment(QStringLiteral("Pattern created with Valentina (http://www.valentina-project.org/).")));
 
     QDomElement version = createElement(TagVersion);
     QDomText newNodeText = createTextNode(VPatternConverter::PatternMaxVerStr);

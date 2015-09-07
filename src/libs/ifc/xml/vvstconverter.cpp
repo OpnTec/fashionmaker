@@ -45,7 +45,7 @@ const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/st
 
 //---------------------------------------------------------------------------------------------------------------------
 VVSTConverter::VVSTConverter(const QString &fileName)
-    :VAbstractConverter(fileName)
+    :VAbstractMConverter(fileName)
 {
     const QString schema = XSDSchema(ver);
     ValidateXML(schema, fileName);

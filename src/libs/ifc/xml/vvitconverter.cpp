@@ -45,7 +45,7 @@ const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/in
 
 //---------------------------------------------------------------------------------------------------------------------
 VVITConverter::VVITConverter(const QString &fileName)
-    :VAbstractConverter(fileName)
+    :VAbstractMConverter(fileName)
 {
     const QString schema = XSDSchema(ver);
     ValidateXML(schema, fileName);
@@ -138,8 +138,90 @@ void VVITConverter::ApplyPatches()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::AddNewTagsForV0_3_0()
+{
+    QDomElement rootElement = this->documentElement();
+    QDomNode refChild = rootElement.firstChildElement("version");
+
+    QDomElement ro = createElement(QStringLiteral("read-only"));
+    const QDomText roNodeText = createTextNode("false");
+    ro.appendChild(roNodeText);
+    refChild = rootElement.insertAfter(ro, refChild);
+
+    refChild = rootElement.insertAfter(createElement(QStringLiteral("notes")), refChild);
+
+    QDomElement unit = createElement("unit");
+    unit.appendChild(createTextNode(MUnitV0_2_0()));
+    rootElement.insertAfter(unit, refChild);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VVITConverter::MUnitV0_2_0()
+{
+    return UniqueTagText(QStringLiteral("unit"), QStringLiteral("cm"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::ConvertMeasurementsToV0_3_0()
+{
+    const QString tagBM = QStringLiteral("body-measurements");
+
+    QDomElement bm = createElement(tagBM);
+
+    QMultiMap<QString, QString> names = OldNamesToNewNames_InV0_3_0();
+
+    QMutableMapIterator<QString, QString> iter( names );
+    while( iter.hasNext() )
+    {
+        iter.next();
+
+        qreal resValue = 0;
+
+        // This has the same effect as a .values(), just isn't as elegant
+        const QList<QString> list = names.values( iter.key() );
+        foreach(const QString &val, list )
+        {
+            const QDomNodeList nodeList = this->elementsByTagName(val);
+            if (nodeList.isEmpty())
+            {
+                continue;
+            }
+
+            const qreal value = GetParametrDouble(nodeList.at(0).toElement(), QStringLiteral("value"), "0.0");
+
+            if (not qFuzzyIsNull(value))
+            {
+                resValue = value;
+            }
+        }
+
+        bm.appendChild(AddMV0_3_0(iter.key(), resValue));
+    }
+
+    QDomElement rootElement = this->documentElement();
+    const QDomNodeList listBM = elementsByTagName(tagBM);
+    rootElement.replaceChild(bm, listBM.at(0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VVITConverter::AddMV0_3_0(const QString &name, qreal value)
+{
+    QDomElement element = createElement(QStringLiteral("m"));
+
+    SetAttribute(element, QStringLiteral("name"), name);
+    SetAttribute(element, QStringLiteral("value"), QString().setNum(value));
+    SetAttribute(element, QStringLiteral("description"), QString(""));
+    SetAttribute(element, QStringLiteral("full_name"), QString(""));
+
+    return element;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ToV0_3_0()
 {
+    AddRootCommentV0_3_0();
     SetVersion(QStringLiteral("0.3.0"));
+    AddNewTagsForV0_3_0();
+    ConvertMeasurementsToV0_3_0();
     Save();
 }

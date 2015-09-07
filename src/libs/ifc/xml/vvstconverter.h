@@ -29,9 +29,9 @@
 #ifndef VMEASUREMENTCONVERTER_H
 #define VMEASUREMENTCONVERTER_H
 
-#include "vabstractconverter.h"
+#include "vabstractmconverter.h"
 
-class VVSTConverter : public VAbstractConverter
+class VVSTConverter : public VAbstractMConverter
 {
     Q_DECLARE_TR_FUNCTIONS(VVSTConverter)
 public:

@@ -10,8 +10,8 @@
 				<xs:element name="personal">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="given-name" type="xs:string"></xs:element>
 							<xs:element name="family-name" type="xs:string"></xs:element>
+							<xs:element name="given-name" type="xs:string"></xs:element>
 							<xs:element name="birth-date" type="xs:date"></xs:element>
 							<xs:element name="sex" type="sex"></xs:element>
 							<xs:element name="email" type="xs:string"></xs:element>

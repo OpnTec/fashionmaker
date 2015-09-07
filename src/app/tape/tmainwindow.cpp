@@ -225,6 +225,7 @@ void TMainWindow::LoadFile(const QString &path)
                 VDomDocument::ValidateXML(VVITConverter::CurrentSchema, path);
             }
 
+            m->setXMLContent(path);// Read again after conversion
             mUnit = m->MUnit();
             pUnit = mUnit;
 

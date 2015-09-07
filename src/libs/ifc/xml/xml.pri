@@ -8,7 +8,8 @@ HEADERS += \
     $$PWD/vtoolrecord.h \
     $$PWD/vabstractpattern.h \
     $$PWD/vvstconverter.h \
-    xml/vvitconverter.h
+    $$PWD//vvitconverter.h \
+    $$PWD//vabstractmconverter.h
 
 SOURCES += \
     $$PWD/vabstractconverter.cpp \
@@ -17,4 +18,5 @@ SOURCES += \
     $$PWD/vtoolrecord.cpp \
     $$PWD/vabstractpattern.cpp \
     $$PWD/vvstconverter.cpp \
-    xml/vvitconverter.cpp
+    $$PWD//vvitconverter.cpp \
+    $$PWD//vabstractmconverter.cpp

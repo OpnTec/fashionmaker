@@ -611,8 +611,8 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     mElement.appendChild(mUnit);
 
     QDomElement personal = createElement(TagPersonal);
-    personal.appendChild(createElement(TagGivenName));
     personal.appendChild(createElement(TagFamilyName));
+    personal.appendChild(createElement(TagGivenName));
 
     QDomElement date = createElement(TagBirthDate);
     const QDomText newDate = createTextNode(QDate(1990, 02, 15).toString("yyyy-MM-dd"));
