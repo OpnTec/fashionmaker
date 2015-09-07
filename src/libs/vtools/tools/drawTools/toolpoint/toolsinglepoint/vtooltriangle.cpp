@@ -195,12 +195,12 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
     line.setAngle(axis.angle());
     line.setLength(step);
 
-    int c = qFloor(hypotenuse.length());
+    qint64 c = qFloor(hypotenuse.length());
     while (1)
     {
         line.setLength(line.length()+step);
-        int a = qFloor(QLineF(line.p2(), firstPoint).length());
-        int b = qFloor(QLineF(line.p2(), secondPoint).length());
+        qint64 a = qFloor(QLineF(line.p2(), firstPoint).length());
+        qint64 b = qFloor(QLineF(line.p2(), secondPoint).length());
         if (c*c <= (a*a + b*b))
         {
             return line.p2();
