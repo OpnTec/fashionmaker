@@ -55,6 +55,11 @@ private:
     Q_DISABLE_COPY(VVSTConverter)
     static const QString    MeasurementMinVerStr;
 
+    void AddNewTagsForV0_4_0();
+    void RemoveTagsForV0_4_0();
+    void ConvertMeasurementsToV0_4_0();
+    QDomElement AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease);
+
     void ToV0_4_0();
 };
 

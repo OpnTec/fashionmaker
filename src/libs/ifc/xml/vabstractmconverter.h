@@ -38,7 +38,7 @@ public:
     virtual ~VAbstractMConverter() Q_DECL_OVERRIDE;
 
 protected:
-    void AddRootCommentV0_3_0();
+    void AddRootComment();
     static QMultiMap<QString, QString> OldNamesToNewNames_InV0_3_0();
 
 private:

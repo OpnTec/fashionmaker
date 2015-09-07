@@ -219,7 +219,7 @@ QDomElement VVITConverter::AddMV0_3_0(const QString &name, qreal value)
 //---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ToV0_3_0()
 {
-    AddRootCommentV0_3_0();
+    AddRootComment();
     SetVersion(QStringLiteral("0.3.0"));
     AddNewTagsForV0_3_0();
     ConvertMeasurementsToV0_3_0();

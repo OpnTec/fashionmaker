@@ -138,8 +138,119 @@ void VVSTConverter::ApplyPatches()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::AddNewTagsForV0_4_0()
+{
+    QDomElement rootElement = this->documentElement();
+    QDomNode refChild = rootElement.firstChildElement("version");
+
+    {
+        QDomElement ro = createElement(QStringLiteral("read-only"));
+        const QDomText roNodeText = createTextNode("false");
+        ro.appendChild(roNodeText);
+        refChild = rootElement.insertAfter(ro, refChild);
+    }
+
+    {
+        QDomElement notes = createElement(QStringLiteral("notes"));
+        const QDomText nodeText = createTextNode(UniqueTagText(QStringLiteral("description")));
+        notes.appendChild(nodeText);
+        rootElement.insertAfter(notes, refChild);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::RemoveTagsForV0_4_0()
+{
+    QDomElement rootElement = this->documentElement();
+
+    {
+        const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("description"));
+        if (not nodeList.isEmpty())
+        {
+            rootElement.removeChild(nodeList.at(0));
+        }
+    }
+
+    {
+        const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("id"));
+        if (not nodeList.isEmpty())
+        {
+            rootElement.removeChild(nodeList.at(0));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ConvertMeasurementsToV0_4_0()
+{
+    const QString tagBM = QStringLiteral("body-measurements");
+
+    QDomElement bm = createElement(tagBM);
+
+    QMultiMap<QString, QString> names = OldNamesToNewNames_InV0_3_0();
+
+    QMutableMapIterator<QString, QString> iter( names );
+    while( iter.hasNext() )
+    {
+        iter.next();
+
+        qreal resValue = 0;
+        qreal resSizeIncrease = 0;
+        qreal resHeightIncrease = 0;
+
+        // This has the same effect as a .values(), just isn't as elegant
+        const QList<QString> list = names.values( iter.key() );
+        foreach(const QString &val, list )
+        {
+            const QDomNodeList nodeList = this->elementsByTagName(val);
+            if (nodeList.isEmpty())
+            {
+                continue;
+            }
+
+            QDomElement m = nodeList.at(0).toElement();
+            const qreal value = GetParametrDouble(m, QStringLiteral("value"), "0.0");
+            const qreal size_increase = GetParametrDouble(m, QStringLiteral("size_increase"), "0.0");
+            const qreal height_increase = GetParametrDouble(m, QStringLiteral("height_increase"), "0.0");
+
+            if (not qFuzzyIsNull(value))
+            {
+                resValue = value;
+                resSizeIncrease = size_increase;
+                resHeightIncrease = height_increase;
+            }
+        }
+
+        bm.appendChild(AddMV0_4_0(iter.key(), resValue, resSizeIncrease, resHeightIncrease));
+    }
+
+    QDomElement rootElement = this->documentElement();
+    const QDomNodeList listBM = elementsByTagName(tagBM);
+    rootElement.replaceChild(bm, listBM.at(0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VVSTConverter::AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease)
+{
+    QDomElement element = createElement(QStringLiteral("m"));
+
+    SetAttribute(element, QStringLiteral("name"), name);
+    SetAttribute(element, QStringLiteral("base"), QString().setNum(value));
+    SetAttribute(element, QStringLiteral("size_increase"), QString().setNum(sizeIncrease));
+    SetAttribute(element, QStringLiteral("height_increase"), QString().setNum(heightIncrease));
+    SetAttribute(element, QStringLiteral("description"), QString(""));
+    SetAttribute(element, QStringLiteral("full_name"), QString(""));
+
+    return element;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ToV0_4_0()
 {
+    AddRootComment();
     SetVersion(QStringLiteral("0.4.0"));
+    AddNewTagsForV0_4_0();
+    RemoveTagsForV0_4_0();
+    ConvertMeasurementsToV0_4_0();
     Save();
 }

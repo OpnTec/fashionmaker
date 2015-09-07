@@ -40,7 +40,7 @@ VAbstractMConverter::~VAbstractMConverter()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractMConverter::AddRootCommentV0_3_0()
+void VAbstractMConverter::AddRootComment()
 {
     const QString rootComment =
             QStringLiteral("Measurements created with Valentina (http://www.valentina-project.org/).");
