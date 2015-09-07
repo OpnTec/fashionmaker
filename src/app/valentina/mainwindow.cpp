@@ -1091,7 +1091,9 @@ void MainWindow::LoadStandard()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CreateMeasurements()
 {
-    QProcess::startDetached(qApp->TapeFilePath());
+    const QString tape = qApp->TapeFilePath();
+    const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
+    QProcess::startDetached(tape, QStringList(), workingDirectory);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
