@@ -261,12 +261,20 @@ bool MainWindow::LoadMeasurements(const QString &path)
 
         if (m->Type() == MeasurementsType::Standard)
         {
+            VVSTConverter converter(path);
+            converter.Convert();
+
             VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, path);
         }
         else
         {
+            VVITConverter converter(path);
+            converter.Convert();
+
             VDomDocument::ValidateXML(VVITConverter::CurrentSchema, path);
         }
+
+        m->setXMLContent(path);// Read again after conversion
 
         const QStringList mList = m->ListAll();
         const QStringList pList = doc->ListMeasurements();
@@ -3128,7 +3136,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         {
             OUT_FILE_ERROR;
         }
-        Clear();        
+        Clear();
         return false;
     }
 
@@ -3379,12 +3387,20 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
 
                 if (patternType == MeasurementsType::Standard)
                 {
+                    VVSTConverter converter(mPath);
+                    converter.Convert();
+
                     VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, mPath);
                 }
                 else
                 {
+                    VVITConverter converter(mPath);
+                    converter.Convert();
+
                     VDomDocument::ValidateXML(VVITConverter::CurrentSchema, mPath);
                 }
+
+                m->setXMLContent(mPath);// Read again after conversion
 
                 const QStringList mList = m->ListAll();
                 const QStringList pList = doc->ListMeasurements();
