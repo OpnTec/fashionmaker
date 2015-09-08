@@ -364,20 +364,20 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
     parser.addVersionOption();
     parser.addPositionalArgument("filename", QCoreApplication::translate("main", "The measurement file."));
     //-----
-    QCommandLineOption heightOption(QStringList() << "h" << "height",
+    QCommandLineOption heightOption(QStringList() << "e" << "height",
     QCoreApplication::translate("main", "Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, "
-                                "152, 158, 164, 170, 176, 182, 188 (default is measurement file value)."),
+                                "152, 158, 164, 170, 176, 182 or 188 cm."),
                                 QCoreApplication::translate("main", "The base height"));
     parser.addOption(heightOption);
     //-----
     QCommandLineOption sizeOption(QStringList() << "s" << "size",
     QCoreApplication::translate("main", "Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, "
-                                "48, 50, 52, 54, 56 (default is measurement file value)."),
+                                "48, 50, 52, 54 or 56 cm."),
                                 QCoreApplication::translate("main", "The Base size"));
     parser.addOption(sizeOption);
     //-----
     QCommandLineOption unitOption(QStringList() << "u" << "unit",
-    QCoreApplication::translate("main", "Set pattern file unit: cm, mm, inch (default is measurement file value)."),
+    QCoreApplication::translate("main", "Set pattern file unit: cm, mm, inch."),
                                 QCoreApplication::translate("main", "The pattern unit"));
     parser.addOption(unitOption);
     //-----
@@ -405,7 +405,7 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
         {
             fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
             "Error: Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, "
-            "164, 170, 176, 182 or 188.")));
+            "164, 170, 176, 182 or 188 cm.")));
             parser.showHelp(1);
         }
     }
@@ -425,7 +425,7 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
         {
             fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
             "Error: Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, "
-            "52, 54 or 56.")));
+            "52, 54 or 56 cm.")));
             parser.showHelp(1);
         }
     }

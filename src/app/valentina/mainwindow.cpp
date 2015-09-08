@@ -1103,20 +1103,27 @@ void MainWindow::ShowMeasurements()
     {
         const QString absoluteMPath = AbsoluteMPath(curFile, doc->MPath());
 
-        QString run;
+        QStringList arguments;
         if (qApp->patternType() == MeasurementsType::Standard)
         {
-            run = QString("\"%1\" \"%2\" -u %3 -h %4 -s %5").arg(qApp->TapeFilePath()).arg(absoluteMPath)
-                    .arg(VDomDocument::UnitsToStr(qApp->patternUnit()))
-                    .arg(static_cast<int>(pattern->height()))
-                    .arg(static_cast<int>(pattern->size()));
+            arguments = QStringList()
+                    << absoluteMPath
+                    << "-u"
+                    << VDomDocument::UnitsToStr(qApp->patternUnit())
+                    << "-e"
+                    << QString().setNum(static_cast<int>(UnitConvertor(pattern->height(), doc->MUnit(), Unit::Cm)))
+                    << "-s"
+                    << QString().setNum(static_cast<int>(UnitConvertor(pattern->size(), doc->MUnit(), Unit::Cm)));
         }
         else
         {
-            run = QString("\"%1\" \"%2\" -u %3").arg(qApp->TapeFilePath()).arg(absoluteMPath)
-                    .arg(VDomDocument::UnitsToStr(qApp->patternUnit()));
+            arguments = QStringList() << absoluteMPath
+                                      << "-u"
+                                      << VDomDocument::UnitsToStr(qApp->patternUnit());
         }
-        QProcess::startDetached(run);
+        const QString tape = qApp->TapeFilePath();
+        const QString workingDirectory = QFileInfo(tape).absoluteDir().absolutePath();
+        QProcess::startDetached(tape, arguments, workingDirectory);
     }
     else
     {
