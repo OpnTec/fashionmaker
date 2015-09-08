@@ -1469,7 +1469,6 @@ void TMainWindow::InitWindow()
 
         ui->dateEditBirthDate->setDate(m->BirthDate());
         ui->lineEditEmail->setText(m->Email());
-        ui->plainTextEditNotes->setPlainText(m->Notes());
 
         connect(ui->lineEditGivenName, &QLineEdit::editingFinished, this, &TMainWindow::SaveGivenName);
         connect(ui->lineEditFamilyName, &QLineEdit::editingFinished, this, &TMainWindow::SaveFamilyName);
@@ -1477,7 +1476,6 @@ void TMainWindow::InitWindow()
         connect(ui->comboBoxSex, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
                 &TMainWindow::SaveSex);
         connect(ui->dateEditBirthDate, &QDateEdit::dateChanged, this, &TMainWindow::SaveBirthDate);
-        connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
         connect(ui->pushButtonGrow, &QPushButton::clicked, this, &TMainWindow::DeployFormula);
 
         this->formulaBaseHeight = ui->plainTextEditFormula->height();
@@ -1486,6 +1484,9 @@ void TMainWindow::InitWindow()
 
         connect(ui->toolButtonExpr, &QToolButton::clicked, this, &TMainWindow::Fx);
     }
+
+    ui->plainTextEditNotes->setPlainText(m->Notes());
+    connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
 
     ui->actionAddCustom->setEnabled(true);
     ui->actionAddKnown->setEnabled(true);
