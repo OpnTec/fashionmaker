@@ -7,99 +7,128 @@
 
 VCommandLinePtr VCommandLine::instance = nullptr;
 
-const static auto OPTION_OUTFILE      = QStringLiteral("outfile");
-const static auto OPTION_MEASUREFILE  = QStringLiteral("mfile");
-const static auto OPTION_PAGETEMPLATE = QStringLiteral("pageformat");
-const static auto OPTION_EXP2FORMAT   = QStringLiteral("format");
-const static auto OPTION_ROTATE       = QStringLiteral("rotate");
-const static auto OPTION_CROP         = QStringLiteral("crop");
-const static auto OPTION_UNITE        = QStringLiteral("unite");
+const static auto LONG_OPTION_OUTFILE        = QStringLiteral("outfile");
+const static auto SINGLE_OPTION_OUTFILE      = QStringLiteral("o");
 
-const static auto OPTION_PAGEW        = QStringLiteral("pagew");
-const static auto OPTION_PAGEH        = QStringLiteral("pageh");
-const static auto OPTION_PAGEUNITS    = QStringLiteral("pageunits");
+const static auto LONG_OPTION_MEASUREFILE    = QStringLiteral("mfile");
+const static auto SINGLE_OPTION_MEASUREFILE  = QStringLiteral("m");
 
-const static auto OPTION_SAVELENGTH   = QStringLiteral("savelen");
-const static auto OPTION_SHIFTLENGTH  = QStringLiteral("shiftlen");
-const static auto OPTION_SHIFTUNITS   = QStringLiteral("layounits");
-const static auto OPTION_GAPWIDTH     = QStringLiteral("gapwidth");
-const static auto OPTION_GROUPPING    = QStringLiteral("groups");
+const static auto LONG_OPTION_PAGETEMPLATE   = QStringLiteral("pageformat");
+const static auto SINGLE_OPTION_PAGETEMPLATE = QStringLiteral("p");
+
+const static auto LONG_OPTION_EXP2FORMAT     = QStringLiteral("format");
+const static auto SINGLE_OPTION_EXP2FORMAT   = QStringLiteral("f");
+
+const static auto LONG_OPTION_ROTATE         = QStringLiteral("rotate");
+const static auto SINGLE_OPTION_ROTATE       = QStringLiteral("r");
+
+const static auto LONG_OPTION_CROP           = QStringLiteral("crop");
+const static auto SINGLE_OPTION_CROP         = QStringLiteral("c");
+
+const static auto LONG_OPTION_UNITE          = QStringLiteral("unite");
+const static auto SINGLE_OPTION_UNITE        = QStringLiteral("u");
+
+const static auto LONG_OPTION_PAGEW          = QStringLiteral("pagew");
+const static auto SINGLE_OPTION_PAGEW        = QStringLiteral("W");
+
+const static auto LONG_OPTION_PAGEH          = QStringLiteral("pageh");
+const static auto SINGLE_OPTION_PAGEH        = QStringLiteral("H");
+
+const static auto LONG_OPTION_PAGEUNITS      = QStringLiteral("pageunits");
+const static auto SINGLE_OPTION_PAGEUNITS    = QStringLiteral("U");
+
+const static auto LONG_OPTION_SAVELENGTH     = QStringLiteral("savelen");
+const static auto SINGLE_OPTION_SAVELENGTH   = QStringLiteral("S");
+
+const static auto LONG_OPTION_SHIFTLENGTH    = QStringLiteral("shiftlen");
+const static auto SINGLE_OPTION_SHIFTLENGTH  = QStringLiteral("s");
+
+const static auto LONG_OPTION_SHIFTUNITS     = QStringLiteral("layounits");
+const static auto SINGLE_OPTION_SHIFTUNITS   = QStringLiteral("l");
+
+const static auto LONG_OPTION_GAPWIDTH       = QStringLiteral("gapwidth");
+const static auto SINGLE_OPTION_GAPWIDTH     = QStringLiteral("G");
+
+const static auto LONG_OPTION_GROUPPING      = QStringLiteral("groups");
+const static auto SINGLE_OPTION_GROUPPING    = QStringLiteral("g");
 
 #define tr(A) QCoreApplication::translate("VCommandLine", (A))
-//------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 
-//such a tricky initialization is used, because it uses static functions which relay on static variables and order of initialization is not defined between compiled units.
-//i.e. - segv is possible (I hit it when VDomDocument::UnitsHelpString() was crashing because of not inited string vars).
-//------------------------------------------------------------------------------------------------------
+//such a tricky initialization is used, because it uses static functions which relay on static variables and order of
+//initialization is not defined between compiled units. i.e. - segv is possible (I hit it when
+//VDomDocument::UnitsHelpString() was crashing because of not inited string vars).
+//---------------------------------------------------------------------------------------------------------------------
 VCommandLine::VCommandLine() : parser()
   , optionsUsed ({
                  //keep in mind order here - that is how user will see it, so group-up for usability
                  //===================================================================================
 
-                 QCommandLineOption(OPTION_OUTFILE,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_OUTFILE << LONG_OPTION_OUTFILE,
                                     tr("Path to output exported layout file. Use it to enable console export mode."),
-                                    OPTION_OUTFILE),
+                                    tr("The exported layout file")),
 
-                 QCommandLineOption(OPTION_MEASUREFILE,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_MEASUREFILE << LONG_OPTION_MEASUREFILE,
                                     tr("Path to custom measure file (export mode)."),
-                                    OPTION_MEASUREFILE),
+                                    tr("The measure file")),
 
-                 QCommandLineOption(OPTION_EXP2FORMAT,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_EXP2FORMAT << LONG_OPTION_EXP2FORMAT,
                                     tr("Number corresponding to output format (default = 0, export mode): ") +
-                                    DialogSaveLayout::MakeHelpFormatList(), OPTION_EXP2FORMAT, "0"),
+                                    DialogSaveLayout::MakeHelpFormatList(), tr("Format number"), "0"),
 
                  //===================================================================================
 
-                 QCommandLineOption(OPTION_PAGETEMPLATE,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_PAGETEMPLATE << LONG_OPTION_PAGETEMPLATE,
                                     tr("Number corresponding to page template (default = 0, export mode): ")+
-                                    DialogLayoutSettings::MakeHelpTemplateList(), OPTION_PAGETEMPLATE, "0"),
+                                    DialogLayoutSettings::MakeHelpTemplateList(), tr("Template number"), "0"),
 
 
-                 QCommandLineOption(OPTION_PAGEW,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEW << LONG_OPTION_PAGEW,
                                     tr("Page width in current units like 12.0 (cannot be used with \"")
-                                    +OPTION_PAGETEMPLATE+tr("\", export mode)."), OPTION_PAGEW),
+                                    +LONG_OPTION_PAGETEMPLATE+tr("\", export mode)."), tr("The page width")),
 
-                 QCommandLineOption(OPTION_PAGEH,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEH << LONG_OPTION_PAGEH,
                                     tr("Page height in current units like 12.0 (cannot be used with \"")
-                                    +OPTION_PAGETEMPLATE+tr("\", export mode)."), OPTION_PAGEH),
+                                    +LONG_OPTION_PAGETEMPLATE+tr("\", export mode)."), ("The page height")),
 
-                 QCommandLineOption(OPTION_PAGEUNITS,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEUNITS << LONG_OPTION_PAGEUNITS,
                                     tr("Page height/width measure units (cannot be used with \"")+
-                                    OPTION_PAGETEMPLATE+tr("\", export mode): ") + VDomDocument::UnitsHelpString(),
-                                    OPTION_PAGEUNITS),
+                                    LONG_OPTION_PAGETEMPLATE+tr("\", export mode): ") + VDomDocument::UnitsHelpString(),
+                                    tr("The measure unit")),
 
                  //===================================================================================
 
-                 QCommandLineOption(OPTION_ROTATE,
-                                    tr("Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode)."),
-                                    OPTION_ROTATE),
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_ROTATE << LONG_OPTION_ROTATE,
+                                    tr("Rotation in degrees (one of predefined). Default (or 0) is no-rotate "
+                                       "(export mode)."),
+                                    tr("Angle")),
 
-                 QCommandLineOption(OPTION_CROP,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_CROP << LONG_OPTION_CROP,
                                     tr("Auto crop unused length (export mode).")),
 
-                 QCommandLineOption(OPTION_UNITE,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_UNITE << LONG_OPTION_UNITE,
                                     tr("Unite pages if possible (export mode).")),
 
                  //===================================================================================
 
-                 QCommandLineOption(OPTION_SAVELENGTH,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_SAVELENGTH << LONG_OPTION_SAVELENGTH,
                                     tr("Save length of the sheet if set. (export mode).")),
 
-                 QCommandLineOption(OPTION_SHIFTUNITS,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTUNITS << LONG_OPTION_SHIFTUNITS,
                                     tr("Layout units (as paper's one except px, export mode)."),
-                                    OPTION_SHIFTUNITS),
+                                    tr("The unit")),
 
-                 QCommandLineOption(OPTION_SHIFTLENGTH,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTLENGTH << LONG_OPTION_SHIFTLENGTH,
                                     tr("Shift layout length measured in layout units (export mode)."),
-                                    OPTION_SHIFTLENGTH),
+                                    tr("Shift length")),
 
-                 QCommandLineOption(OPTION_GAPWIDTH,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_GAPWIDTH << LONG_OPTION_GAPWIDTH,
                                     tr("Gap width x2, measured in layout units. (export mode)."),
-                                    OPTION_GAPWIDTH),
+                                    tr("The gap width")),
 
-                 QCommandLineOption(OPTION_GROUPPING,
+                 QCommandLineOption(QStringList() << SINGLE_OPTION_GROUPPING << LONG_OPTION_GROUPPING,
                                     tr("Sets layout groupping (export mode): ")
-                                    + DialogLayoutSettings::MakeGroupsHelp(), OPTION_GROUPPING, "2"),
+                                    + DialogLayoutSettings::MakeGroupsHelp(), tr("Grouping type"), "2"),
                  }),
     isGuiEnabled(false)
 {
@@ -137,11 +166,11 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
     {
         //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-        bool x = parser.isSet(OPTION_PAGETEMPLATE);
+        bool x = parser.isSet(LONG_OPTION_PAGETEMPLATE);
 
-        bool a = parser.isSet(OPTION_PAGEH);
-        bool b = parser.isSet(OPTION_PAGEW);
-        bool c = parser.isSet(OPTION_PAGEUNITS);
+        bool a = parser.isSet(LONG_OPTION_PAGEH);
+        bool b = parser.isSet(LONG_OPTION_PAGEW);
+        bool c = parser.isSet(LONG_OPTION_PAGEUNITS);
 
         if ((a || b || c) && x)
         {
@@ -185,40 +214,40 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         Error(tr("Unknown page templated selected."));
     }
 
-    if (parser.isSet(OPTION_PAGEH)) //at this point we already sure 3 are set or none
+    if (parser.isSet(LONG_OPTION_PAGEH)) //at this point we already sure 3 are set or none
     {
 
-        if (!diag.SelectPaperUnit(parser.value(OPTION_PAGEUNITS)))
+        if (!diag.SelectPaperUnit(parser.value(LONG_OPTION_PAGEUNITS)))
         {
             Error(tr("Unsupported paper units."));
         }
 
-        diag.SetPaperHeight (Pg2Px(parser.value(OPTION_PAGEH), diag));
-        diag.SetPaperWidth  (Pg2Px(parser.value(OPTION_PAGEW), diag));
+        diag.SetPaperHeight (Pg2Px(parser.value(LONG_OPTION_PAGEH), diag));
+        diag.SetPaperWidth  (Pg2Px(parser.value(LONG_OPTION_PAGEW), diag));
     }
 
-    if (parser.isSet(OPTION_SHIFTUNITS))
+    if (parser.isSet(LONG_OPTION_SHIFTUNITS))
     {
-        if (!diag.SelectLayoutUnit(parser.value(OPTION_SHIFTUNITS)))
+        if (!diag.SelectLayoutUnit(parser.value(LONG_OPTION_SHIFTUNITS)))
         {
             Error(tr("Unsupported layout units."));
         }
     }
 
-    if (parser.isSet(OPTION_SHIFTLENGTH))
+    if (parser.isSet(LONG_OPTION_SHIFTLENGTH))
     {
 
-        diag.SetShift(Lo2Px(parser.value(OPTION_SHIFTLENGTH), diag));
+        diag.SetShift(Lo2Px(parser.value(LONG_OPTION_SHIFTLENGTH), diag));
     }
 
-    if (parser.isSet(OPTION_GAPWIDTH))
+    if (parser.isSet(LONG_OPTION_GAPWIDTH))
     {
-        diag.SetLayoutWidth(Lo2Px(parser.value(OPTION_GAPWIDTH), diag));
+        diag.SetLayoutWidth(Lo2Px(parser.value(LONG_OPTION_GAPWIDTH), diag));
     }
 
-    diag.SetAutoCrop(parser.isSet(OPTION_CROP));
-    diag.SetUnitePages(parser.isSet(OPTION_UNITE));
-    diag.SetSaveLength(parser.isSet(OPTION_SAVELENGTH));
+    diag.SetAutoCrop(parser.isSet(LONG_OPTION_CROP));
+    diag.SetUnitePages(parser.isSet(LONG_OPTION_UNITE));
+    diag.SetSaveLength(parser.isSet(LONG_OPTION_SAVELENGTH));
     diag.SetGroup(OptGroup());
 
 
@@ -259,7 +288,7 @@ void VCommandLine::Reset()
 //------------------------------------------------------------------------------------------------------
 bool VCommandLine::IsExportEnabled() const
 {
-    bool r = parser.isSet(OPTION_OUTFILE);
+    bool r = parser.isSet(LONG_OPTION_OUTFILE);
     if (r && parser.positionalArguments().size() != 1)
     {
         Error(tr("Export options can be used with single input file only."));
@@ -271,9 +300,9 @@ bool VCommandLine::IsExportEnabled() const
 DialogLayoutSettings::PaperSizeTemplate VCommandLine::OptPaperSize() const
 {
     int ppsize = 0;
-    if (parser.isSet(OPTION_PAGETEMPLATE))
+    if (parser.isSet(LONG_OPTION_PAGETEMPLATE))
     {
-        ppsize = parser.value(OPTION_PAGETEMPLATE).toInt();
+        ppsize = parser.value(LONG_OPTION_PAGETEMPLATE).toInt();
     }
     return static_cast<DialogLayoutSettings::PaperSizeTemplate>(ppsize);
 }
@@ -282,9 +311,9 @@ DialogLayoutSettings::PaperSizeTemplate VCommandLine::OptPaperSize() const
 int VCommandLine::OptRotation() const
 {
     int rotate = 0;
-    if (parser.isSet(OPTION_ROTATE))
+    if (parser.isSet(LONG_OPTION_ROTATE))
     {
-        rotate = parser.value(OPTION_ROTATE).toInt();
+        rotate = parser.value(LONG_OPTION_ROTATE).toInt();
     }
 
     return rotate;
@@ -293,7 +322,7 @@ int VCommandLine::OptRotation() const
 //------------------------------------------------------------------------------------------------------
 Cases VCommandLine::OptGroup() const
 {
-    int r = parser.value(OPTION_GROUPPING).toInt();
+    int r = parser.value(LONG_OPTION_GROUPPING).toInt();
     if ( r < 0 || r >= static_cast<int>(Cases::UnknownCase))
     {
         r = 0;
@@ -305,11 +334,11 @@ Cases VCommandLine::OptGroup() const
 QString VCommandLine::OptMeasurePath() const
 {
     QString measure;
-    if (parser.isSet(OPTION_MEASUREFILE)
+    if (parser.isSet(LONG_OPTION_MEASUREFILE)
             && IsExportEnabled() //todo: don't want yet to allow user set measure file for general loading, because need to fix multiply opened windows as well
             )
     {
-        measure = parser.value(OPTION_MEASUREFILE);
+        measure = parser.value(LONG_OPTION_MEASUREFILE);
     }
 
     return measure;
@@ -321,7 +350,7 @@ QString VCommandLine::OptExportPath() const
     QString path;
     if (IsExportEnabled())
     {
-        path = parser.value(OPTION_OUTFILE);
+        path = parser.value(LONG_OPTION_OUTFILE);
     }
 
     return path;
@@ -331,9 +360,9 @@ QString VCommandLine::OptExportPath() const
 int VCommandLine::OptExportType() const
 {
     int r = 0;
-    if (parser.isSet(OPTION_EXP2FORMAT))
+    if (parser.isSet(LONG_OPTION_EXP2FORMAT))
     {
-        r = parser.value(OPTION_EXP2FORMAT).toInt();
+        r = parser.value(LONG_OPTION_EXP2FORMAT).toInt();
     }
     return r;
 }

@@ -373,7 +373,7 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
     QCommandLineOption sizeOption(QStringList() << "s" << "size",
     QCoreApplication::translate("main", "Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, "
                                 "48, 50, 52, 54 or 56 cm."),
-                                QCoreApplication::translate("main", "The Base size"));
+                                QCoreApplication::translate("main", "The base size"));
     parser.addOption(sizeOption);
     //-----
     QCommandLineOption unitOption(QStringList() << "u" << "unit",
