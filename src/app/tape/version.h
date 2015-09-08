@@ -34,5 +34,6 @@
 #define VER_INTERNALNAME_STR        "Tape"
 #define VER_ORIGINALFILENAME_STR    "tape.exe"
 #define VER_PRODUCTNAME_STR         "Tape"
+#define VER_FILEDESCRIPTION_STR     "Valentina's measurements editor."
 
 #endif // VERSION_H

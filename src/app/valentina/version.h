@@ -34,5 +34,6 @@
 #define VER_INTERNALNAME_STR        "Valentina"
 #define VER_ORIGINALFILENAME_STR    "valentina.exe"
 #define VER_PRODUCTNAME_STR         "Valentina"
+#define VER_FILEDESCRIPTION_STR     "Patternmaking program."
 
 #endif // VERSION_H
