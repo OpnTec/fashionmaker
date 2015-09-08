@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vlinelength.h
+ **  @file   def.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @date   31 8, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,30 +26,12 @@
  **
  *************************************************************************/
 
-#ifndef VLINELENGTH_H
-#define VLINELENGTH_H
+#ifndef DXFDEF_H
+#define DXFDEF_H
 
-#include "../vpatterndb/variables/vinternalvariable.h"
-#include "../ifc/ifcdef.h"
+enum class VarMeasurement : unsigned char { English=0, Metric=1 };
 
-class VPointF;
-class VLengthLineData;
+//Default drawing units for AutoCAD DesignCenter blocks:
+enum class VarInsunits : unsigned char { Inches=1, Millimeters=4, Centimeters=5 };
 
-class VLengthLine :public VInternalVariable
-{
-public:
-    VLengthLine();
-    VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id, Unit patternUnit);
-    VLengthLine(const VLengthLine &var);
-    VLengthLine &operator=(const VLengthLine &var);
-    virtual ~VLengthLine() Q_DECL_OVERRIDE;
-
-    virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;
-    void         SetValue(const VPointF *p1, const VPointF *p2);
-    quint32      GetP1Id() const;
-    quint32      GetP2Id() const;
-private:
-    QSharedDataPointer<VLengthLineData> d;
-};
-
-#endif // VLINELENGTH_H
+#endif // DXFDEF_H

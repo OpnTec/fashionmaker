@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vlinelength.h
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @file   vdxfpaintdevice.h
+ **  @author Valentina Zhuravska <zhuravska19(at)gmail.com>
+ **  @date   12 812, 2015
  **
  **  @brief
  **  @copyright
@@ -26,30 +26,40 @@
  **
  *************************************************************************/
 
-#ifndef VLINELENGTH_H
-#define VLINELENGTH_H
+#ifndef VDXFPAINTDEVICE_H
+#define VDXFPAINTDEVICE_H
 
-#include "../vpatterndb/variables/vinternalvariable.h"
-#include "../ifc/ifcdef.h"
+#include <QPaintDevice>
+#include <QString>
+#include "dxfdef.h"
 
-class VPointF;
-class VLengthLineData;
+class VDxfEngine;
 
-class VLengthLine :public VInternalVariable
+class VDxfPaintDevice : public QPaintDevice
 {
 public:
-    VLengthLine();
-    VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id, Unit patternUnit);
-    VLengthLine(const VLengthLine &var);
-    VLengthLine &operator=(const VLengthLine &var);
-    virtual ~VLengthLine() Q_DECL_OVERRIDE;
+    VDxfPaintDevice();
+    virtual ~VDxfPaintDevice() Q_DECL_OVERRIDE;
+    virtual QPaintEngine *paintEngine() const Q_DECL_OVERRIDE;
 
-    virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;
-    void         SetValue(const VPointF *p1, const VPointF *p2);
-    quint32      GetP1Id() const;
-    quint32      GetP2Id() const;
+    QString getFileName() const;
+    void setFileName(const QString &value);
+
+    QSize getSize();
+    void setSize(const QSize &size);
+
+    int getResolution() const;
+    void setResolution(int dpi);
+
+    void setMeasurement(const VarMeasurement &var);
+    void setInsunits(const VarInsunits &var);
+
+protected:
+    virtual int metric(PaintDeviceMetric metric) const Q_DECL_OVERRIDE;
 private:
-    QSharedDataPointer<VLengthLineData> d;
+    Q_DISABLE_COPY(VDxfPaintDevice)
+    VDxfEngine *engine;
+    QString     fileName;
 };
 
-#endif // VLINELENGTH_H
+#endif // VDXFPAINTDEVICE_H

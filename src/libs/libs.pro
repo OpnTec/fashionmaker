@@ -4,6 +4,7 @@ SUBDIRS = \
     vpropertyexplorer \
     ifc \
     vobj \
+    vdxf \
     vlayout \
     vgeometry \
     vpatterndb \

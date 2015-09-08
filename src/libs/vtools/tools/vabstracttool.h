@@ -30,10 +30,10 @@
 #define VABSTRACTTOOL_H
 
 #include "vdatatool.h"
-#include "../../ifc/xml/vabstractpattern.h"
-#include "../../vmisc/vabstractapplication.h"
-#include "../../vwidgets/vmaingraphicsscene.h"
-#include "../visualization/visualization.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "visualization/visualization.h"
 
 class QDomElement;
 class QLineF;

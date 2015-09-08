@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vlinelength.h
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @file   stable.cpp
+ **  @author Valentina Zhuravska <zhuravska19(at)gmail.com>
+ **  @date   12 8, 2015
  **
  **  @brief
  **  @copyright
@@ -26,30 +26,5 @@
  **
  *************************************************************************/
 
-#ifndef VLINELENGTH_H
-#define VLINELENGTH_H
-
-#include "../vpatterndb/variables/vinternalvariable.h"
-#include "../ifc/ifcdef.h"
-
-class VPointF;
-class VLengthLineData;
-
-class VLengthLine :public VInternalVariable
-{
-public:
-    VLengthLine();
-    VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id, Unit patternUnit);
-    VLengthLine(const VLengthLine &var);
-    VLengthLine &operator=(const VLengthLine &var);
-    virtual ~VLengthLine() Q_DECL_OVERRIDE;
-
-    virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;
-    void         SetValue(const VPointF *p1, const VPointF *p2);
-    quint32      GetP1Id() const;
-    quint32      GetP2Id() const;
-private:
-    QSharedDataPointer<VLengthLineData> d;
-};
-
-#endif // VLINELENGTH_H
+// Build the precompiled headers.
+#include "stable.h"

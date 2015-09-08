@@ -29,7 +29,7 @@
 #ifndef VARCRADIUS_H
 #define VARCRADIUS_H
 
-#include "vcurvevariable.h"
+#include "../vpatterndb/variables/vcurvevariable.h"
 #include "../ifc/ifcdef.h"
 
 class VArc;

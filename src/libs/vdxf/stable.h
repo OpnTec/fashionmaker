@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vlinelength.h
- **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 7, 2014
+ **  @file   stable.h
+ **  @author Valentina Zhuravska <zhuravska19(at)gmail.com>
+ **  @date   12 8, 2015
  **
  **  @brief
  **  @copyright
@@ -26,30 +26,27 @@
  **
  *************************************************************************/
 
-#ifndef VLINELENGTH_H
-#define VLINELENGTH_H
+#ifndef STABLE_H
+#define STABLE_H
 
-#include "../vpatterndb/variables/vinternalvariable.h"
-#include "../ifc/ifcdef.h"
+/* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
+#ifndef __clang__
+#pragma message("Compiling precompiled headers for VDxf library.\n")
+#endif
 
-class VPointF;
-class VLengthLineData;
+/* Add C includes here */
 
-class VLengthLine :public VInternalVariable
-{
-public:
-    VLengthLine();
-    VLengthLine(const VPointF *p1, const quint32 &p1Id, const VPointF *p2, const quint32 &p2Id, Unit patternUnit);
-    VLengthLine(const VLengthLine &var);
-    VLengthLine &operator=(const VLengthLine &var);
-    virtual ~VLengthLine() Q_DECL_OVERRIDE;
+#if defined __cplusplus
+/* Add C++ includes here */
 
-    virtual bool Filter(quint32 id) Q_DECL_OVERRIDE;
-    void         SetValue(const VPointF *p1, const VPointF *p2);
-    quint32      GetP1Id() const;
-    quint32      GetP2Id() const;
-private:
-    QSharedDataPointer<VLengthLineData> d;
-};
+#ifdef QT_CORE_LIB
+#include <QtCore>
+#endif
 
-#endif // VLINELENGTH_H
+#ifdef QT_GUI_LIB
+#   include <QtGui>
+#endif
+
+#endif/*__cplusplus*/
+
+#endif // STABLE_H
