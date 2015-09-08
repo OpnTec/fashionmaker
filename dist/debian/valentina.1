@@ -1,6 +1,6 @@
 .\" Manpage for valentina.
 .\" Contact dismine@gmail.com.in to correct errors.
-.TH man 1 "29 May 2014" "valentina man page"
+.TH man 1 "8 September 2015" "valentina man page"
 .SH NAME
 valentina \- Pattern making program.
 .SH SYNOPSIS
@@ -12,12 +12,70 @@ creation, using either standard sizing tables or an individual’s set of
 measurements. It blends new technologies with traditional methods to create 
 a unique pattern making tool.
 .SH OPTIONS
--help Show summary of options.
+  -h, --help                                Displays this help.
+  -v, --version                             Displays version information.
+  -o, --outfile <The exported layout file>  Path to output exported layout
+                                            file. Use it to enable console
+                                            export mode.
+  -m, --mfile <The measure file>            Path to custom measure file (export
+                                            mode).
+  -f, --format <Format number>              Number corresponding to output
+                                            format (default = 0, export mode): 
+                                            Svg files (*.svg) = 0
+                                            PDF files (*.pdf) = 1
+                                            Images (*.png) = 2
+                                            Wavefront OBJ (*.obj) = 3
+                                            PS files (*.ps) = 4
+                                            EPS files (*.eps) = 5
+                                            DXF files (*.dxf) = 6
 
--version
-      Show version of program.
+  -p, --pageformat <Template number>        Number corresponding to page
+                                            template (default = 0, export mode):
+                                            	A0 = 0
+                                            A1 = 1
+                                            A2 = 2
+                                            A3 = 3
+                                            A4 = 4
+                                            Letter = 5
+                                            Legal = 6
+                                            Roll 24in = 7
+                                            Roll 30in = 8
+                                            Roll 36in = 9
+                                            Roll 42in = 10
+                                            Roll 44in = 11
 
-file
-      Pattern file to load.
+  -W, --pagew <The page width>              Page width in current units like
+                                            12.0 (cannot be used with
+                                            "pageformat", export mode).
+  -H, --pageh <The page height>             Page height in current units like
+                                            12.0 (cannot be used with
+                                            "pageformat", export mode).
+  -U, --pageunits <The measure unit>        Page height/width measure units
+                                            (cannot be used with "pageformat",
+                                            export mode): mm, cm, inch, px
+  -r, --rotate <Angle>                      Rotation in degrees (one of
+                                            predefined). Default (or 0) is
+                                            no-rotate (export mode).
+  -c, --crop                                Auto crop unused length (export
+                                            mode).
+  -u, --unite                               Unite pages if possible (export
+                                            mode).
+  -S, --savelen                             Save length of the sheet if set.
+                                            (export mode).
+  -l, --layounits <The unit>                Layout units (as paper's one except
+                                            px, export mode).
+  -s, --shiftlen <Shift length>             Shift layout length measured in
+                                            layout units (export mode).
+  -G, --gapwidth <The gap width>            Gap width x2, measured in layout
+                                            units. (export mode).
+  -g, --groups <Grouping type>              Sets layout groupping (export
+                                            mode): 
+                                            Three groups: big, middle, small = 0
+                                            Two groups: big, small = 1
+                                            Descending area = 2
+
+
+Arguments:
+  filename                                  Pattern file.
 .SH AUTHOR
 This  manual  page  was  written  by Roman Telezhynskyi <dismine@gmail.com>
