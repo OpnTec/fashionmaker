@@ -1544,39 +1544,39 @@
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Mesures</translation>
+        <translation type="vanished">Mesures</translation>
     </message>
     <message>
         <source>Load another measurements table</source>
-        <translation>Charger une autre table de mesure</translation>
+        <translation type="vanished">Charger une autre table de mesure</translation>
     </message>
     <message>
         <source>Personal information</source>
-        <translation>Données personnelles</translation>
+        <translation type="vanished">Données personnelles</translation>
     </message>
     <message>
         <source>Given name</source>
-        <translation>Nom</translation>
+        <translation type="vanished">Nom</translation>
     </message>
     <message>
         <source>Family name</source>
-        <translation>Nom de famille</translation>
+        <translation type="vanished">Nom de famille</translation>
     </message>
     <message>
         <source>Birth date</source>
-        <translation>Date de naissance</translation>
+        <translation type="vanished">Date de naissance</translation>
     </message>
     <message>
         <source>Sex</source>
-        <translation>Sexe</translation>
+        <translation type="vanished">Sexe</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation>Courriel</translation>
+        <translation type="vanished">Courriel</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Masquer les mesures vides</translation>
+        <translation type="vanished">Masquer les mesures vides</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1588,19 +1588,19 @@
     </message>
     <message>
         <source>Base value</source>
-        <translation>Valeur de départ</translation>
+        <translation type="vanished">Valeur de départ</translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation>En taille</translation>
+        <translation type="vanished">En taille</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation>Taille</translation>
+        <translation type="vanished">Taille</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation type="vanished">Description</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -1632,79 +1632,67 @@
     </message>
     <message>
         <source>File error.</source>
-        <translation>Erreur de fichier.</translation>
+        <translation type="vanished">Erreur de fichier.</translation>
     </message>
     <message>
         <source>male</source>
-        <translation>homme</translation>
+        <translation type="vanished">homme</translation>
     </message>
     <message>
         <source>female</source>
-        <translation>femme</translation>
+        <translation type="vanished">femme</translation>
     </message>
     <message>
         <source>Could not save GivenName</source>
-        <translation>Le nom ne peut être enregistré</translation>
+        <translation type="vanished">Le nom ne peut être enregistré</translation>
     </message>
     <message>
         <source>Could not save FamilyName</source>
-        <translation>Le nom de famille ne peut être enregistré</translation>
+        <translation type="vanished">Le nom de famille ne peut être enregistré</translation>
     </message>
     <message>
         <source>Could not save Email</source>
-        <translation>Le courriel ne peut être enregistré</translation>
+        <translation type="vanished">Le courriel ne peut être enregistré</translation>
     </message>
     <message>
         <source>Could not save Sex</source>
-        <translation>le sexe ne peut etre enregistré</translation>
+        <translation type="vanished">le sexe ne peut etre enregistré</translation>
     </message>
     <message>
         <source>Could not save BirthDate</source>
-        <translation>La date de naissance ne peut etre enregistrée</translation>
+        <translation type="vanished">La date de naissance ne peut etre enregistrée</translation>
     </message>
     <message>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
-        <translation>Les mesures utilisées dans ce patron sont différentes. Ce patron nécessite des mesures en %1</translation>
+        <translation type="vanished">Les mesures utilisées dans ce patron sont différentes. Ce patron nécessite des mesures en %1</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Mesure Individuelles (*.vit)</translation>
+        <translation type="vanished">Mesure Individuelles (*.vit)</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation>Ouvrir</translation>
+        <translation type="vanished">Ouvrir</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation>Mauvaise unité.</translation>
+        <translation type="vanished">Mauvaise unité.</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Mesures standard (*.vst)</translation>
+        <translation type="vanished">Mesures standard (*.vst)</translation>
     </message>
     <message>
         <source>Name_%1</source>
-        <translation>Nom_%1</translation>
+        <translation type="vanished">Nom_%1</translation>
     </message>
     <message>
         <source>Can&apos;t save measurement</source>
-        <translation>Les mesures ne peuvent être enregistrées</translation>
+        <translation type="vanished">Les mesures ne peuvent être enregistrées</translation>
     </message>
     <message>
         <source>Tables of Variables</source>
         <translation>Tableaux des variables</translation>
-    </message>
-    <message>
-        <source>Base size: %1 %3; Base height: %2 %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description: &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Data successfully saved.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lines angles</source>
@@ -1738,76 +1726,140 @@
         <source>Angles arcs</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished">Détails</translation>
+    </message>
+    <message>
+        <source>Move measurement up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nom:</translation>
+    </message>
+    <message>
+        <source>Calculated value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
+    </message>
+    <message>
+        <source>Empty field.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Empty field</source>
+        <translation type="unfinished">Champ vide</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valeur</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increment_%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit increment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIndividualMeasurements</name>
     <message>
         <source>Individual measurements</source>
-        <translation>Mesures individuelles</translation>
+        <translation type="vanished">Mesures individuelles</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation>Nom de la pièce de patron</translation>
+        <translation type="vanished">Nom de la pièce de patron</translation>
     </message>
     <message>
         <source>Exist measurements</source>
-        <translation>Mesures existantes</translation>
+        <translation type="vanished">Mesures existantes</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation>Chemin :</translation>
+        <translation type="vanished">Chemin :</translation>
     </message>
     <message>
         <source>Given name:</source>
-        <translation>Prénom :</translation>
+        <translation type="vanished">Prénom :</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation>Nom de famille :</translation>
+        <translation type="vanished">Nom de famille :</translation>
     </message>
     <message>
         <source>New measurements</source>
-        <translation>Nouvelles mesures</translation>
+        <translation type="vanished">Nouvelles mesures</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation>Unité :</translation>
+        <translation type="vanished">Unité :</translation>
     </message>
     <message>
         <source>Could not create measurements file</source>
-        <translation>Impossible de créer le fichier de mesures</translation>
+        <translation type="vanished">Impossible de créer le fichier de mesures</translation>
     </message>
     <message>
         <source>Please try again or change file</source>
-        <translation>Essayez de nouveau ou changer de fichier</translation>
+        <translation type="vanished">Essayez de nouveau ou changer de fichier</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation>Erreur de fichier.</translation>
+        <translation type="vanished">Erreur de fichier.</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Mesures individuelles (*.vit)</translation>
+        <translation type="vanished">Mesures individuelles (*.vit)</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation>Ouvrir</translation>
+        <translation type="vanished">Ouvrir</translation>
     </message>
     <message>
         <source>Where save measurements?</source>
-        <translation>Où sauvegarder les mesures ? </translation>
+        <translation type="vanished">Où sauvegarder les mesures ? </translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Centimètres</translation>
+        <translation type="vanished">Centimètres</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Millimètres</translation>
+        <translation type="vanished">Millimètres</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Pouces</translation>
+        <translation type="vanished">Pouces</translation>
     </message>
 </context>
 <context>
@@ -1916,34 +1968,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Letter </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Legal </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Roll 24in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Roll 30in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Roll 36in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Roll 42in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Roll 44in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unite pages (if possible)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1953,6 +1977,42 @@
     </message>
     <message>
         <source>Save length of the sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+	Three groups: big, middle, small = 0
+	Two groups: big, small = 1
+	Descending area = 2
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2237,27 +2297,27 @@
     <name>DialogMeasurements</name>
     <message>
         <source>Measurements</source>
-        <translation>Mesures</translation>
+        <translation type="vanished">Mesures</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Please, choose pattern type.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Choisisez un type de patron&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Choisisez un type de patron&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Graduation</source>
-        <translation>Graduation</translation>
+        <translation type="vanished">Graduation</translation>
     </message>
     <message>
         <source>Use for creation pattern standard measurement table</source>
-        <translation>Créer un patron avec des mesures standards</translation>
+        <translation type="vanished">Créer un patron avec des mesures standards</translation>
     </message>
     <message>
         <source>Individual</source>
-        <translation>Individuel</translation>
+        <translation type="vanished">Individuel</translation>
     </message>
     <message>
         <source>Use for creation pattern individual measurements</source>
-        <translation>Créer un patron avec des mesures personnalisées</translation>
+        <translation type="vanished">Créer un patron avec des mesures personnalisées</translation>
     </message>
 </context>
 <context>
@@ -2283,10 +2343,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Standard:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Individual</source>
         <translation type="unfinished">Individuel</translation>
     </message>
@@ -2295,8 +2351,31 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Regular</source>
-        <translation type="unfinished"></translation>
+        <source>Centimeters</source>
+        <translation type="unfinished">Centimètres</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Millimètres</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Pouces</translation>
+    </message>
+</context>
+<context>
+    <name>DialogNewPattern</name>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Mesures individuelles</translation>
+    </message>
+    <message>
+        <source>Pattern piece name</source>
+        <translation type="unfinished">Nom de la pièce de patron</translation>
+    </message>
+    <message>
+        <source>Units:</source>
+        <translation type="unfinished">Unité :</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -2927,6 +3006,46 @@
         <source>Select folder</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Svg files (*.svg)</source>
+        <translation type="unfinished">Fichiers Svg (*.svg)</translation>
+    </message>
+    <message>
+        <source>PDF files (*.pdf)</source>
+        <translation type="unfinished">fichiers PDF (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Images (*.png)</source>
+        <translation type="unfinished">Images (*.png)</translation>
+    </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PS files (*.ps)</source>
+        <translation type="unfinished">Fichiers PS (*.ps)</translation>
+    </message>
+    <message>
+        <source>EPS files (*.eps)</source>
+        <translation type="unfinished">Fichiers EPS (*.eps)</translation>
+    </message>
+    <message>
+        <source>DXF files (*.dxf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tried to use out of range format number.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected not present format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output full path: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
@@ -3148,19 +3267,19 @@
     <name>DialogStandardMeasurements</name>
     <message>
         <source>Standard table</source>
-        <translation>Table standard</translation>
+        <translation type="vanished">Table standard</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation>Nom de la pièce de patron</translation>
+        <translation type="vanished">Nom de la pièce de patron</translation>
     </message>
     <message>
         <source>Standard measurements table</source>
-        <translation> tableau des mesures strandard</translation>
+        <translation type="vanished"> tableau des mesures strandard</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation>Erreur de fichier.</translation>
+        <translation type="vanished">Erreur de fichier.</translation>
     </message>
 </context>
 <context>
@@ -3900,12 +4019,12 @@
     </message>
     <message>
         <source>Individual measurements is under development</source>
-        <translation>Mesures individuelles en cours de developpement</translation>
+        <translation type="vanished">Mesures individuelles en cours de developpement</translation>
     </message>
     <message>
         <source>There is no way create individual measurements file independent on the pattern file.
 For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
-        <translation>Il n&apos;est pas possible de créer des mesures individuelles indépendamment du fichier patron.
+        <translation type="vanished">Il n&apos;est pas possible de créer des mesures individuelles indépendamment du fichier patron.
 Pour ouvrir un patron vous devez garder les deux fichiers : patron et mesures. Voulez-vous continuer?</translation>
     </message>
     <message>
@@ -4354,6 +4473,63 @@ Voulez-vous sauvegarder les changements ? </translation>
         <source>Unsaved changes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Load Individual ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Standard ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements updated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot; could not be found.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t export empty scene.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -4371,27 +4547,23 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation type="unfinished">Fichiers Svg (*.svg)</translation>
+        <translation type="obsolete">Fichiers Svg (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation type="unfinished">fichiers PDF (*.pdf)</translation>
+        <translation type="obsolete">fichiers PDF (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation type="unfinished">Images (*.png)</translation>
-    </message>
-    <message>
-        <source>Wavefront OBJ (*.obj)</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Images (*.png)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation type="unfinished">Fichiers PS (*.ps)</translation>
+        <translation type="obsolete">Fichiers PS (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation type="unfinished">Fichiers EPS (*.eps)</translation>
+        <translation type="obsolete">Fichiers EPS (*.eps)</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
@@ -4427,6 +4599,14 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t prepare data for creation layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Several workpieces left not arranged, but none of them match for paper</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6607,6 +6787,18 @@ Do you want to save your changes?</source>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Import from a pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern files (*.val)</source>
+        <translation type="unfinished">Fichier de patron (*.val)</translation>
+    </message>
+    <message>
+        <source>Pattern unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableWindow</name>
@@ -6798,10 +6990,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractConverter</name>
     <message>
-        <source>Error creation backup file: %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Couldn&apos;t get version information.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6831,6 +7019,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not change version.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating a backup file: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating a reserv copy: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6913,6 +7109,149 @@ Do you want to save your changes?</source>
     <message>
         <source>Something&apos;s wrong!!</source>
         <translation>Quel que chose ne va pas!!</translation>
+    </message>
+</context>
+<context>
+    <name>VCommandLine</name>
+    <message>
+        <source>Path to output exported layout file. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The exported layout file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to custom measure file (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measure file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page width in current units like 12.0 (cannot be used with &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height in current units like 12.0 (cannot be used with &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measure unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <source>Auto crop unused length (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unite pages if possible (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save length of the sheet if set. (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout units (as paper&apos;s one except px, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift layout length measured in layout units (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gap width x2, measured in layout units. (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The gap width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sets layout groupping (export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grouping type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot use pageformat and page explicit size/units together.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height, width, units must be used all 3 at once.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation value. That must be one of predefined values.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown page templated selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported paper units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported layout units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7194,7 +7533,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation>Erreur de fichier.</translation>
+        <translation type="vanished">Erreur de fichier.</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection arcs</source>
@@ -7454,6 +7793,17 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VVITConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VVSTConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
@@ -7568,6 +7918,50 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern file.</source>
         <translation>Fichier Patron.</translation>
+    </message>
+    <message>
+        <source>Valentina&apos;s measurements editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurement file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set pattern file unit: cm, mm, inch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The pattern unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Invalid base size argument. Must be cm, mm or inch.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

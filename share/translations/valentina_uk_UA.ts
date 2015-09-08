@@ -306,7 +306,7 @@
     <name>DialogAboutTape</name>
     <message>
         <source>About Tape</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Про Tape</translation>
     </message>
     <message>
         <source>Tape version</source>
@@ -1788,35 +1788,35 @@
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Мірки</translation>
+        <translation type="vanished">Мірки</translation>
     </message>
     <message>
         <source>Load another measurements table</source>
-        <translation>Завантажити іншу таблицю з мірками</translation>
+        <translation type="vanished">Завантажити іншу таблицю з мірками</translation>
     </message>
     <message>
         <source>Personal information</source>
-        <translation>Персональна інформація</translation>
+        <translation type="vanished">Персональна інформація</translation>
     </message>
     <message>
         <source>Given name</source>
-        <translation>Імя</translation>
+        <translation type="vanished">Імя</translation>
     </message>
     <message>
         <source>Family name</source>
-        <translation>Прізвище</translation>
+        <translation type="vanished">Прізвище</translation>
     </message>
     <message>
         <source>Birth date</source>
-        <translation>Дата народження</translation>
+        <translation type="vanished">Дата народження</translation>
     </message>
     <message>
         <source>Sex</source>
-        <translation>Стать</translation>
+        <translation type="vanished">Стать</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Сховати пусті мірки</translation>
+        <translation type="vanished">Сховати пусті мірки</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1828,11 +1828,11 @@
     </message>
     <message>
         <source>Base value</source>
-        <translation>Базове значення</translation>
+        <translation type="vanished">Базове значення</translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation>В розмірах</translation>
+        <translation type="vanished">В розмірах</translation>
     </message>
     <message>
         <source>In growths</source>
@@ -1840,7 +1840,7 @@
     </message>
     <message>
         <source>Description</source>
-        <translation>Опис</translation>
+        <translation type="vanished">Опис</translation>
     </message>
     <message>
         <source>In size</source>
@@ -1852,11 +1852,11 @@
     </message>
     <message>
         <source>Email</source>
-        <translation>E-mail</translation>
+        <translation type="vanished">E-mail</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation>В ростах</translation>
+        <translation type="vanished">В ростах</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -1900,63 +1900,63 @@
     </message>
     <message>
         <source>File error.</source>
-        <translation>Помилка файла.</translation>
+        <translation type="vanished">Помилка файла.</translation>
     </message>
     <message>
         <source>male</source>
-        <translation>чоловік</translation>
+        <translation type="vanished">чоловік</translation>
     </message>
     <message>
         <source>female</source>
-        <translation>жінка</translation>
+        <translation type="vanished">жінка</translation>
     </message>
     <message>
         <source>Could not save GivenName</source>
-        <translation>Не вдалося зебрегти імя</translation>
+        <translation type="vanished">Не вдалося зебрегти імя</translation>
     </message>
     <message>
         <source>Could not save FamilyName</source>
-        <translation>Не вдалося збергети прізвище</translation>
+        <translation type="vanished">Не вдалося збергети прізвище</translation>
     </message>
     <message>
         <source>Could not save Email</source>
-        <translation>Не вдалося зберегти Email</translation>
+        <translation type="vanished">Не вдалося зберегти Email</translation>
     </message>
     <message>
         <source>Could not save Sex</source>
-        <translation>Не вдалося зберегти стать</translation>
+        <translation type="vanished">Не вдалося зберегти стать</translation>
     </message>
     <message>
         <source>Could not save BirthDate</source>
-        <translation>Не вдалося зберегти Дату народження</translation>
+        <translation type="vanished">Не вдалося зберегти Дату народження</translation>
     </message>
     <message>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
-        <translation>Мірки використовують інші одиниці виміри ніж лекало. Це лекало потребує мірок в %1</translation>
+        <translation type="vanished">Мірки використовують інші одиниці виміри ніж лекало. Це лекало потребує мірок в %1</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Індивідуальні мірки (*.vit)</translation>
+        <translation type="vanished">Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation>Відкрити файл</translation>
+        <translation type="vanished">Відкрити файл</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation>Неправильні одиниці виміру.</translation>
+        <translation type="vanished">Неправильні одиниці виміру.</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Стандартні мірки (*.vst)</translation>
+        <translation type="vanished">Стандартні мірки (*.vst)</translation>
     </message>
     <message>
         <source>Name_%1</source>
-        <translation>Name_%1</translation>
+        <translation type="vanished">Name_%1</translation>
     </message>
     <message>
         <source>Can&apos;t save measurement</source>
-        <translation>Не вдалося зберегти мірки</translation>
+        <translation type="vanished">Не вдалося зберегти мірки</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble value.</source>
@@ -1976,15 +1976,15 @@
     </message>
     <message>
         <source>Base size: %1 %3; Base height: %2 %3</source>
-        <translation>Базовий розмір: %1 %3; Базовий зріст: %2 %3</translation>
+        <translation type="vanished">Базовий розмір: %1 %3; Базовий зріст: %2 %3</translation>
     </message>
     <message>
         <source>Description: &quot;%1&quot;</source>
-        <translation>Опис: &quot;%1&quot;</translation>
+        <translation type="vanished">Опис: &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Data successfully saved.</source>
-        <translation>Данні успішно збережені.</translation>
+        <translation type="vanished">Данні успішно збережені.</translation>
     </message>
     <message>
         <source>Lines angles</source>
@@ -2018,6 +2018,70 @@
         <source>Angles arcs</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Формула</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished">Деталь</translation>
+    </message>
+    <message>
+        <source>Move measurement up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Імя:</translation>
+    </message>
+    <message>
+        <source>Calculated value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Помилка</translation>
+    </message>
+    <message>
+        <source>Empty field.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Empty field</source>
+        <translation type="unfinished">Пусте поле</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значення</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished">Помилка синтаксичного аналізу: %1</translation>
+    </message>
+    <message>
+        <source>Increment_%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit increment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIndividualMeasurements</name>
@@ -2027,19 +2091,19 @@
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation>Індивідуальні мірки</translation>
+        <translation type="vanished">Індивідуальні мірки</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation>Імя лекала</translation>
+        <translation type="vanished">Імя лекала</translation>
     </message>
     <message>
         <source>Exist measurements</source>
-        <translation>Існуючі мірки</translation>
+        <translation type="vanished">Існуючі мірки</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation>Шлях:</translation>
+        <translation type="vanished">Шлях:</translation>
     </message>
     <message>
         <source>...</source>
@@ -2047,55 +2111,55 @@
     </message>
     <message>
         <source>Given name:</source>
-        <translation>Імя:</translation>
+        <translation type="vanished">Імя:</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation>Прізвище:</translation>
+        <translation type="vanished">Прізвище:</translation>
     </message>
     <message>
         <source>New measurements</source>
-        <translation>Нові мірки</translation>
+        <translation type="vanished">Нові мірки</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation>Одинці виміру:</translation>
+        <translation type="vanished">Одинці виміру:</translation>
     </message>
     <message>
         <source>Could not create measurements file</source>
-        <translation>Не можу створити файл мірок</translation>
+        <translation type="vanished">Не можу створити файл мірок</translation>
     </message>
     <message>
         <source>Please try again or change file</source>
-        <translation>Будь ласка спробуйте знову чи змініть файл</translation>
+        <translation type="vanished">Будь ласка спробуйте знову чи змініть файл</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation>Помилка файла.</translation>
+        <translation type="vanished">Помилка файла.</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Індивідуальні мірки (*.vit)</translation>
+        <translation type="vanished">Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation>Відкрити файл</translation>
+        <translation type="vanished">Відкрити файл</translation>
     </message>
     <message>
         <source>Where save measurements?</source>
-        <translation>Де зберегти мірки?</translation>
+        <translation type="vanished">Де зберегти мірки?</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Сантиметри</translation>
+        <translation type="vanished">Сантиметри</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Міліметри</translation>
+        <translation type="vanished">Міліметри</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Дюйми</translation>
+        <translation type="vanished">Дюйми</translation>
     </message>
 </context>
 <context>
@@ -2229,31 +2293,27 @@
     </message>
     <message>
         <source>Letter </source>
-        <translation>Лист</translation>
-    </message>
-    <message>
-        <source>Legal </source>
-        <translation></translation>
+        <translation type="vanished">Лист</translation>
     </message>
     <message>
         <source>Roll 24in </source>
-        <translation>Рулон 24 дюйми</translation>
+        <translation type="vanished">Рулон 24 дюйми</translation>
     </message>
     <message>
         <source>Roll 30in </source>
-        <translation>Рулон 30 дюймів</translation>
+        <translation type="vanished">Рулон 30 дюймів</translation>
     </message>
     <message>
         <source>Roll 36in </source>
-        <translation>Рулон 36 дюймів</translation>
+        <translation type="vanished">Рулон 36 дюймів</translation>
     </message>
     <message>
         <source>Roll 42in </source>
-        <translation>Рулон 42 дюйми</translation>
+        <translation type="vanished">Рулон 42 дюйми</translation>
     </message>
     <message>
         <source>Roll 44in </source>
-        <translation>Рулон 44 дюйми</translation>
+        <translation type="vanished">Рулон 44 дюйми</translation>
     </message>
     <message>
         <source>Unite pages (if possible)</source>
@@ -2265,6 +2325,42 @@
     </message>
     <message>
         <source>Save length of the sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+	Three groups: big, middle, small = 0
+	Two groups: big, small = 1
+	Descending area = 2
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2569,27 +2665,27 @@
     <name>DialogMeasurements</name>
     <message>
         <source>Measurements</source>
-        <translation>Мірки</translation>
+        <translation type="vanished">Мірки</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Please, choose pattern type.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Будь ласка, виберіть тип лекала.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Будь ласка, виберіть тип лекала.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Graduation</source>
-        <translation>Градація</translation>
+        <translation type="vanished">Градація</translation>
     </message>
     <message>
         <source>Use for creation pattern standard measurement table</source>
-        <translation>Лекало зі стандартною таблицею</translation>
+        <translation type="vanished">Лекало зі стандартною таблицею</translation>
     </message>
     <message>
         <source>Individual</source>
-        <translation>Індивідуальні</translation>
+        <translation type="vanished">Індивідуальні</translation>
     </message>
     <message>
         <source>Use for creation pattern individual measurements</source>
-        <translation>Лекало з індивідуальними мірками</translation>
+        <translation type="vanished">Лекало з індивідуальними мірками</translation>
     </message>
 </context>
 <context>
@@ -2615,10 +2711,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Standard:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Individual</source>
         <translation type="unfinished">Індивідуальні</translation>
     </message>
@@ -2627,8 +2719,31 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Regular</source>
+        <source>Centimeters</source>
+        <translation type="unfinished">Сантиметри</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished">Міліметри</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished">Дюйми</translation>
+    </message>
+</context>
+<context>
+    <name>DialogNewPattern</name>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Індивідуальні мірки</translation>
+    </message>
+    <message>
+        <source>Pattern piece name</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Units:</source>
+        <translation type="unfinished">Одинці виміру:</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -3319,6 +3434,46 @@
         <source>Select folder</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Svg files (*.svg)</source>
+        <translation type="unfinished">Svg файли (*.svg)</translation>
+    </message>
+    <message>
+        <source>PDF files (*.pdf)</source>
+        <translation type="unfinished">Pdf файли (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Images (*.png)</source>
+        <translation type="unfinished">Зображення (*.png)</translation>
+    </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="unfinished">Wavefront OBJ (*.obj)</translation>
+    </message>
+    <message>
+        <source>PS files (*.ps)</source>
+        <translation type="unfinished">Ps файл (*.ps)</translation>
+    </message>
+    <message>
+        <source>EPS files (*.eps)</source>
+        <translation type="unfinished">EPS файл (*.eps)</translation>
+    </message>
+    <message>
+        <source>DXF files (*.dxf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tried to use out of range format number.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected not present format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output full path: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
@@ -3572,19 +3727,19 @@
     <name>DialogStandardMeasurements</name>
     <message>
         <source>Standard table</source>
-        <translation>Стандартна таблиця</translation>
+        <translation type="vanished">Стандартна таблиця</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation>Ім&apos;я лекала</translation>
+        <translation type="vanished">Ім&apos;я лекала</translation>
     </message>
     <message>
         <source>Standard measurements table</source>
-        <translation>Стандартна таблиця мірок</translation>
+        <translation type="vanished">Стандартна таблиця мірок</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation>Помилка файла.</translation>
+        <translation type="vanished">Помилка файла.</translation>
     </message>
 </context>
 <context>
@@ -4530,12 +4685,12 @@
     </message>
     <message>
         <source>Individual measurements is under development</source>
-        <translation>Індивідуальні мірки знаходяться в стадії розробки</translation>
+        <translation type="vanished">Індивідуальні мірки знаходяться в стадії розробки</translation>
     </message>
     <message>
         <source>There is no way create individual measurements file independent on the pattern file.
 For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
-        <translation>У вас не буде можливості створити файл індивідуальних мірок незалежно від файлу викройки.
+        <translation type="vanished">У вас не буде можливості створити файл індивідуальних мірок незалежно від файлу викройки.
 Для того щоб відкрити файл викройки зберігайте обидва файли: викройку і індивідуальні мірки. Ви хочете продовжити створення?</translation>
     </message>
     <message>
@@ -5124,6 +5279,63 @@ Do you want to save your changes?</source>
         <source>Unsaved changes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Load Individual ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Standard ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements updated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot; could not be found.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t export empty scene.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -5141,27 +5353,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation type="unfinished">Svg файли (*.svg)</translation>
+        <translation type="obsolete">Svg файли (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation type="unfinished">Pdf файли (*.pdf)</translation>
+        <translation type="obsolete">Pdf файли (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation type="unfinished">Зображення (*.png)</translation>
+        <translation type="obsolete">Зображення (*.png)</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation type="unfinished">Wavefront OBJ (*.obj)</translation>
+        <translation type="obsolete">Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation type="unfinished">Ps файл (*.ps)</translation>
+        <translation type="obsolete">Ps файл (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation type="unfinished">EPS файл (*.eps)</translation>
+        <translation type="obsolete">EPS файл (*.eps)</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
@@ -5198,6 +5410,14 @@ Do you want to save your changes?</source>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t prepare data for creation layout</source>
+        <translation type="unfinished">Не вдалося підготувати данні для створення розкладки</translation>
+    </message>
+    <message>
+        <source>Several workpieces left not arranged, but none of them match for paper</source>
+        <translation type="unfinished">Декілька деталей залишилися укладеними, але жодна з них не підійшла для листа</translation>
     </message>
 </context>
 <context>
@@ -8856,6 +9076,18 @@ Do you want to save your changes?</source>
         <source>Open file</source>
         <translation type="unfinished">Відкрити файл</translation>
     </message>
+    <message>
+        <source>Import from a pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern files (*.val)</source>
+        <translation type="unfinished">Файл лекала (*.val)</translation>
+    </message>
+    <message>
+        <source>Pattern unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableWindow</name>
@@ -9176,7 +9408,7 @@ Do you want to save your changes?</source>
     <name>VAbstractConverter</name>
     <message>
         <source>Error creation backup file: %1.</source>
-        <translation>Помилка створення резервного файлу: %1.</translation>
+        <translation type="vanished">Помилка створення резервного файлу: %1.</translation>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
@@ -9209,6 +9441,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Could not change version.</source>
         <translation>Не давлося змінити версію.</translation>
+    </message>
+    <message>
+        <source>Error creating a backup file: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating a reserv copy: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9324,6 +9564,149 @@ Do you want to save your changes?</source>
     <message>
         <source>Angle of arc can&apos;t be 0 degree.</source>
         <translation type="obsolete">Кут дуги не може бути 0 градусів.</translation>
+    </message>
+</context>
+<context>
+    <name>VCommandLine</name>
+    <message>
+        <source>Path to output exported layout file. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The exported layout file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to custom measure file (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measure file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page width in current units like 12.0 (cannot be used with &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height in current units like 12.0 (cannot be used with &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measure unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Кут</translation>
+    </message>
+    <message>
+        <source>Auto crop unused length (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unite pages if possible (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save length of the sheet if set. (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout units (as paper&apos;s one except px, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift layout length measured in layout units (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gap width x2, measured in layout units. (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The gap width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sets layout groupping (export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grouping type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot use pageformat and page explicit size/units together.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height, width, units must be used all 3 at once.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation value. That must be one of predefined values.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown page templated selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported paper units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported layout units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9770,7 +10153,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation>Помилка файла.</translation>
+        <translation type="vanished">Помилка файла.</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection arcs</source>
@@ -10043,6 +10426,17 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VVITConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished">Неочікувана версія &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
+        <translation type="unfinished">Помилка відновлення резервного файлу: %1.</translation>
+    </message>
+</context>
+<context>
     <name>VVSTConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
@@ -10170,6 +10564,50 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern file.</source>
         <translation>Файл лекала.</translation>
+    </message>
+    <message>
+        <source>Valentina&apos;s measurements editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurement file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set pattern file unit: cm, mm, inch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The pattern unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Invalid base size argument. Must be cm, mm or inch.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

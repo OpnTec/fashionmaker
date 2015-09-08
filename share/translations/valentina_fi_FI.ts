@@ -1544,39 +1544,39 @@
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Mitat</translation>
+        <translation type="vanished">Mitat</translation>
     </message>
     <message>
         <source>Load another measurements table</source>
-        <translation>Lataa toinen mittataulukko</translation>
+        <translation type="vanished">Lataa toinen mittataulukko</translation>
     </message>
     <message>
         <source>Personal information</source>
-        <translation>Henkilötiedot</translation>
+        <translation type="vanished">Henkilötiedot</translation>
     </message>
     <message>
         <source>Given name</source>
-        <translation>Etunimi</translation>
+        <translation type="vanished">Etunimi</translation>
     </message>
     <message>
         <source>Family name</source>
-        <translation>Sukunimi</translation>
+        <translation type="vanished">Sukunimi</translation>
     </message>
     <message>
         <source>Birth date</source>
-        <translation>Syntymäaika</translation>
+        <translation type="vanished">Syntymäaika</translation>
     </message>
     <message>
         <source>Sex</source>
-        <translation>Sukupuoli</translation>
+        <translation type="vanished">Sukupuoli</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation>Sähköposti</translation>
+        <translation type="vanished">Sähköposti</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Piilota tyhjät mittaukset</translation>
+        <translation type="vanished">Piilota tyhjät mittaukset</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1587,20 +1587,16 @@
         <translation>Laskettu arvo</translation>
     </message>
     <message>
-        <source>Base value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>In sizes</source>
-        <translation>Koossa</translation>
+        <translation type="vanished">Koossa</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation>Pituudessa</translation>
+        <translation type="vanished">Pituudessa</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Kuvaus</translation>
+        <translation type="vanished">Kuvaus</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -1632,79 +1628,75 @@
     </message>
     <message>
         <source>File error.</source>
-        <translation>Tiedostovirhe.</translation>
+        <translation type="vanished">Tiedostovirhe.</translation>
     </message>
     <message>
         <source>male</source>
-        <translation>Mies</translation>
+        <translation type="vanished">Mies</translation>
     </message>
     <message>
         <source>female</source>
-        <translation>Nainen</translation>
+        <translation type="vanished">Nainen</translation>
     </message>
     <message>
         <source>Could not save GivenName</source>
-        <translation>GivenName ei voitu tallentaa</translation>
+        <translation type="vanished">GivenName ei voitu tallentaa</translation>
     </message>
     <message>
         <source>Could not save FamilyName</source>
-        <translation>FamilyName ei voitu tallentaa</translation>
+        <translation type="vanished">FamilyName ei voitu tallentaa</translation>
     </message>
     <message>
         <source>Could not save Email</source>
-        <translation>Email  ei voitu tallentaa</translation>
+        <translation type="vanished">Email  ei voitu tallentaa</translation>
     </message>
     <message>
         <source>Could not save Sex</source>
-        <translation>Sex  ei voitu tallentaa</translation>
+        <translation type="vanished">Sex  ei voitu tallentaa</translation>
     </message>
     <message>
         <source>Could not save BirthDate</source>
-        <translation>BirthDate  ei voitu tallentaa</translation>
+        <translation type="vanished">BirthDate  ei voitu tallentaa</translation>
     </message>
     <message>
         <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
-        <translation>Mitat käyttävät eri mittayksikköjä kuin kaava. Tämä kaava vaatii mittayksiköksi %1</translation>
+        <translation type="vanished">Mitat käyttävät eri mittayksikköjä kuin kaava. Tämä kaava vaatii mittayksiköksi %1</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Yksilölliset mitat (*.vit)</translation>
+        <translation type="vanished">Yksilölliset mitat (*.vit)</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation>Avaa tiedosto</translation>
+        <translation type="vanished">Avaa tiedosto</translation>
     </message>
     <message>
         <source>Wrong units.</source>
-        <translation>Väärät yksiköt.</translation>
+        <translation type="vanished">Väärät yksiköt.</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Standardi mitat (*.vst)</translation>
+        <translation type="vanished">Standardi mitat (*.vst)</translation>
     </message>
     <message>
         <source>Name_%1</source>
-        <translation>Nimi_%1</translation>
+        <translation type="vanished">Nimi_%1</translation>
     </message>
     <message>
         <source>Can&apos;t save measurement</source>
-        <translation>Mitoja ei voitu tallentaa</translation>
+        <translation type="vanished">Mitoja ei voitu tallentaa</translation>
     </message>
     <message>
         <source>Tables of Variables</source>
         <translation>Muuttujien taulukko</translation>
     </message>
     <message>
-        <source>Base size: %1 %3; Base height: %2 %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Description: &quot;%1&quot;</source>
-        <translation>Kuvaus: &quot;%1&quot;</translation>
+        <translation type="vanished">Kuvaus: &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Data successfully saved.</source>
-        <translation>Tieto tallennettiin onnistuneesti.</translation>
+        <translation type="vanished">Tieto tallennettiin onnistuneesti.</translation>
     </message>
     <message>
         <source>Lines angles</source>
@@ -1738,76 +1730,140 @@
         <source>Angles arcs</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Formula</source>
+        <translation type="unfinished">Matemaattinen kaava</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished">Yksityiskohdat</translation>
+    </message>
+    <message>
+        <source>Move measurement up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nmi:</translation>
+    </message>
+    <message>
+        <source>Calculated value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Näytä koko laskenta ikkunassa&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Virhe</translation>
+    </message>
+    <message>
+        <source>Empty field.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Empty field</source>
+        <translation type="unfinished">Tyhjä sarake</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Arvo</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished">Jäsentämis virhe: %1</translation>
+    </message>
+    <message>
+        <source>Increment_%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit increment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIndividualMeasurements</name>
     <message>
         <source>Individual measurements</source>
-        <translation>Yksilölliset mitat</translation>
+        <translation type="vanished">Yksilölliset mitat</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation>Kaavan osan nimi</translation>
+        <translation type="vanished">Kaavan osan nimi</translation>
     </message>
     <message>
         <source>Exist measurements</source>
-        <translation>Olemassa olevat mitat</translation>
+        <translation type="vanished">Olemassa olevat mitat</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation>Polku:</translation>
+        <translation type="vanished">Polku:</translation>
     </message>
     <message>
         <source>Given name:</source>
-        <translation>Etunimi:</translation>
+        <translation type="vanished">Etunimi:</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation>Sukunimi:</translation>
+        <translation type="vanished">Sukunimi:</translation>
     </message>
     <message>
         <source>New measurements</source>
-        <translation>Uudet mitat</translation>
+        <translation type="vanished">Uudet mitat</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation>Mittayksiköt:</translation>
+        <translation type="vanished">Mittayksiköt:</translation>
     </message>
     <message>
         <source>Could not create measurements file</source>
-        <translation>Mittatiedoston luominen epäonnistui</translation>
+        <translation type="vanished">Mittatiedoston luominen epäonnistui</translation>
     </message>
     <message>
         <source>Please try again or change file</source>
-        <translation>Kokeile uudestaan tai muuta tiedoston nimeä</translation>
+        <translation type="vanished">Kokeile uudestaan tai muuta tiedoston nimeä</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation>Tiedosto virhe!</translation>
+        <translation type="vanished">Tiedosto virhe!</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Yksilölliset mitat (*.vit)</translation>
+        <translation type="vanished">Yksilölliset mitat (*.vit)</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation>Avaa tiedosto</translation>
+        <translation type="vanished">Avaa tiedosto</translation>
     </message>
     <message>
         <source>Where save measurements?</source>
-        <translation>Minne mitat tallennetaan?</translation>
+        <translation type="vanished">Minne mitat tallennetaan?</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Senttimetriä</translation>
+        <translation type="vanished">Senttimetriä</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Millimetriä</translation>
+        <translation type="vanished">Millimetriä</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Tuumaa</translation>
+        <translation type="vanished">Tuumaa</translation>
     </message>
 </context>
 <context>
@@ -1936,34 +1992,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Letter </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Legal </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Roll 24in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Roll 30in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Roll 36in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Roll 42in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Roll 44in </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unite pages (if possible)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1973,6 +2001,42 @@
     </message>
     <message>
         <source>Save length of the sheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+	Three groups: big, middle, small = 0
+	Two groups: big, small = 1
+	Descending area = 2
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2257,27 +2321,23 @@
     <name>DialogMeasurements</name>
     <message>
         <source>Measurements</source>
-        <translation>Mitat</translation>
+        <translation type="vanished">Mitat</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Please, choose pattern type.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Valitse kaavan tyyppi.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Graduation</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Valitse kaavan tyyppi.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Use for creation pattern standard measurement table</source>
-        <translation>Luo kaava standardi mittoihin perustuen</translation>
+        <translation type="vanished">Luo kaava standardi mittoihin perustuen</translation>
     </message>
     <message>
         <source>Individual</source>
-        <translation>Yksilö</translation>
+        <translation type="vanished">Yksilö</translation>
     </message>
     <message>
         <source>Use for creation pattern individual measurements</source>
-        <translation>Luo kaava yksilön mittoihin perustuen</translation>
+        <translation type="vanished">Luo kaava yksilön mittoihin perustuen</translation>
     </message>
 </context>
 <context>
@@ -2303,10 +2363,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Standard:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Individual</source>
         <translation type="unfinished">Yksilö</translation>
     </message>
@@ -2315,8 +2371,31 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Regular</source>
+        <source>Centimeters</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogNewPattern</name>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="unfinished">Yksilölliset mitat</translation>
+    </message>
+    <message>
+        <source>Pattern piece name</source>
+        <translation type="unfinished">Kaavan osan nimi</translation>
+    </message>
+    <message>
+        <source>Units:</source>
+        <translation type="unfinished">Mittayksiköt:</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -2947,6 +3026,46 @@
         <source>Select folder</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Svg files (*.svg)</source>
+        <translation type="unfinished">Svg tiedostot (*.svg)</translation>
+    </message>
+    <message>
+        <source>PDF files (*.pdf)</source>
+        <translation type="unfinished">PDF tiedostot (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Images (*.png)</source>
+        <translation type="unfinished">Kuvat (*.png)</translation>
+    </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="unfinished">Wavefront OBJ (*.obj)</translation>
+    </message>
+    <message>
+        <source>PS files (*.ps)</source>
+        <translation type="unfinished">PS tiedostot (*.ps)</translation>
+    </message>
+    <message>
+        <source>EPS files (*.eps)</source>
+        <translation type="unfinished">EPS tiedostot (*.eps)</translation>
+    </message>
+    <message>
+        <source>DXF files (*.dxf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tried to use out of range format number.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected not present format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output full path: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
@@ -3168,19 +3287,19 @@
     <name>DialogStandardMeasurements</name>
     <message>
         <source>Standard table</source>
-        <translation>Standardi taulukko</translation>
+        <translation type="vanished">Standardi taulukko</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation>Kaavan osan nimi</translation>
+        <translation type="vanished">Kaavan osan nimi</translation>
     </message>
     <message>
         <source>Standard measurements table</source>
-        <translation>Standardi mittataulukko</translation>
+        <translation type="vanished">Standardi mittataulukko</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation>Tiedostovirhe.</translation>
+        <translation type="vanished">Tiedostovirhe.</translation>
     </message>
 </context>
 <context>
@@ -3922,12 +4041,12 @@
     </message>
     <message>
         <source>Individual measurements is under development</source>
-        <translation>Yksilölliset mitat ovat kehityksen alla</translation>
+        <translation type="vanished">Yksilölliset mitat ovat kehityksen alla</translation>
     </message>
     <message>
         <source>There is no way create individual measurements file independent on the pattern file.
 For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
-        <translation>Ei ole mahdollista luoda mittatiedostoa ilma kaava tiedostoa.
+        <translation type="vanished">Ei ole mahdollista luoda mittatiedostoa ilma kaava tiedostoa.
 Avataksesi kaava tarvitaan kaava ja mittatiedosto. Haluatko jatkaa?</translation>
     </message>
     <message>
@@ -4376,6 +4495,63 @@ Haluatko tallentaa muutokset?</translation>
         <source>Unsaved changes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Load Individual ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Standard ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements loaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements updated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot; could not be found.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can&apos;t export empty scene.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -4393,27 +4569,27 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation type="unfinished">Svg tiedostot (*.svg)</translation>
+        <translation type="obsolete">Svg tiedostot (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation type="unfinished">PDF tiedostot (*.pdf)</translation>
+        <translation type="obsolete">PDF tiedostot (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation type="unfinished">Kuvat (*.png)</translation>
+        <translation type="obsolete">Kuvat (*.png)</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation type="unfinished">Wavefront OBJ (*.obj)</translation>
+        <translation type="obsolete">Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation type="unfinished">PS tiedostot (*.ps)</translation>
+        <translation type="obsolete">PS tiedostot (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation type="unfinished">EPS tiedostot (*.eps)</translation>
+        <translation type="obsolete">EPS tiedostot (*.eps)</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
@@ -4450,6 +4626,14 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t prepare data for creation layout</source>
+        <translation type="unfinished">Ei voitu luoda dataa somittelun luomiseen</translation>
+    </message>
+    <message>
+        <source>Several workpieces left not arranged, but none of them match for paper</source>
+        <translation type="unfinished">Useita osia ei voitu järjestää koska ne ei mahdu paperille</translation>
     </message>
 </context>
 <context>
@@ -6721,6 +6905,18 @@ Do you want to save your changes?</source>
         <source>Open file</source>
         <translation type="unfinished">Avaa tiedosto</translation>
     </message>
+    <message>
+        <source>Import from a pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern files (*.val)</source>
+        <translation type="unfinished">Kaava tiedostot (*.val)</translation>
+    </message>
+    <message>
+        <source>Pattern unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableWindow</name>
@@ -6925,7 +7121,7 @@ Do you want to save your changes?</source>
     <name>VAbstractConverter</name>
     <message>
         <source>Error creation backup file: %1.</source>
-        <translation>Virhe varmuuskopio %1 tiedoston luonnissa.</translation>
+        <translation type="vanished">Virhe varmuuskopio %1 tiedoston luonnissa.</translation>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
@@ -6958,6 +7154,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Could not change version.</source>
         <translation>Versiota ei voitu vaihtaa</translation>
+    </message>
+    <message>
+        <source>Error creating a backup file: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error creating a reserv copy: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7031,6 +7235,149 @@ Do you want to save your changes?</source>
     <message>
         <source>Something&apos;s wrong!!</source>
         <translation>Joku on vialla!!</translation>
+    </message>
+</context>
+<context>
+    <name>VCommandLine</name>
+    <message>
+        <source>Path to output exported layout file. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The exported layout file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to custom measure file (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measure file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page width in current units like 12.0 (cannot be used with &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height in current units like 12.0 (cannot be used with &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measure unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Kulma</translation>
+    </message>
+    <message>
+        <source>Auto crop unused length (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unite pages if possible (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save length of the sheet if set. (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout units (as paper&apos;s one except px, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift layout length measured in layout units (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gap width x2, measured in layout units. (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The gap width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sets layout groupping (export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grouping type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot use pageformat and page explicit size/units together.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height, width, units must be used all 3 at once.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation value. That must be one of predefined values.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown page templated selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported paper units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported layout units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7313,7 +7660,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation>Tiedostovirhe.</translation>
+        <translation type="vanished">Tiedostovirhe.</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection arcs</source>
@@ -7572,6 +7919,17 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VVITConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished">Yllättävä versio &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
+        <translation type="unfinished">Virhe palauttaessa varmuuskopio tiedostoa: %1.</translation>
+    </message>
+</context>
+<context>
     <name>VVSTConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
@@ -7686,6 +8044,50 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern file.</source>
         <translation>Kaava tiedosto.</translation>
+    </message>
+    <message>
+        <source>Valentina&apos;s measurements editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurement file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set pattern file unit: cm, mm, inch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The pattern unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Invalid base size argument. Must be cm, mm or inch.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
