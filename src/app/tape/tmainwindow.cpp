@@ -1593,6 +1593,11 @@ bool TMainWindow::MaybeSave()
 {
     if (this->isWindowModified())
     {
+        if (curFile.isEmpty() && ui->tableWidget->rowCount() == 0)
+        {
+            return true;// Don't ask if file was created without modifications.
+        }
+
         QMessageBox::StandardButton ret;
         ret = QMessageBox::warning(this, tr("Unsaved changes"), tr("Measurements have been modified.\n"
                                                              "Do you want to save your changes?"),
