@@ -621,7 +621,7 @@ void TMainWindow::Remove()
     }
     else
     {
-        ui->groupBoxDetails->setEnabled(false);
+        MFields(false);
 
         ui->lineEditName->blockSignals(true);
         ui->lineEditName->setText("");
@@ -815,6 +815,8 @@ void TMainWindow::AddKnown()
         ui->tableWidget->selectRow(currentRow);
 
         MeasurementsWasSaved(false);
+
+        MFields(ui->tableWidget->rowCount() > 0);
     }
     delete dialog;
 }
@@ -932,7 +934,7 @@ void TMainWindow::ShowMData()
 {
     if (ui->tableWidget->rowCount() > 0)
     {
-        ui->groupBoxDetails->setEnabled(true);
+        MFields(true);
 
         QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0); // name
         QSharedPointer<VMeasurement> meash;
@@ -944,7 +946,7 @@ void TMainWindow::ShowMData()
         catch(const VExceptionBadId &e)
         {
             Q_UNUSED(e);
-            ui->groupBoxDetails->setEnabled(false);
+            MFields(false);
             return;
         }
 
@@ -1009,34 +1011,11 @@ void TMainWindow::ShowMData()
             ui->plainTextEditFormula->blockSignals(false);
         }
 
-        if (m->ReadOnly())
-        {
-            MFields(false);
-        }
-        else
-        {
-            MFields(true);
-
-            if (mType == MeasurementsType::Individual)
-            {
-                ui->plainTextEditFormula->setReadOnly(false);
-            }
-
-            if (meash->IsCustom())
-            {
-                ui->plainTextEditDescription->setReadOnly(false);
-                ui->lineEditName->setReadOnly(false);
-                ui->lineEditFullName->setReadOnly(false);
-            }
-            else
-            {
-                ui->plainTextEditDescription->setReadOnly(true);
-                ui->lineEditName->setReadOnly(true);
-                ui->lineEditFullName->setReadOnly(true);
-            }
-        }
-
-        Controls(); // Buttons remove, up, down
+        MeasurementReadOnly(m->ReadOnly());
+    }
+    else
+    {
+        MFields(false);
     }
 }
 
@@ -1817,6 +1796,10 @@ void TMainWindow::Controls()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::MFields(bool enabled)
 {
+    ui->lineEditName->setEnabled(enabled);
+    ui->plainTextEditDescription->setEnabled(enabled);
+    ui->lineEditFullName->setEnabled(enabled);
+
     if (mType == MeasurementsType::Standard)
     {
         ui->doubleSpinBoxBaseValue->setEnabled(enabled);
@@ -1825,6 +1808,7 @@ void TMainWindow::MFields(bool enabled)
     }
     else
     {
+        ui->plainTextEditFormula->setEnabled(enabled);
         ui->pushButtonGrow->setEnabled(enabled);
         ui->toolButtonExpr->setEnabled(enabled);
     }
@@ -1912,30 +1896,10 @@ void TMainWindow::GUIReadOnly(bool ro)
         ui->actionReadOnly->setIcon(QIcon("://tapeicon/24x24/padlock_opened.png"));
     }
 
-    ui->plainTextEditNotes->setReadOnly(ro);
     ui->actionAddCustom->setDisabled(ro);
     ui->actionAddKnown->setDisabled(ro);
 
-    ui->lineEditName->setDisabled(false);
-    if (not ro)
-    {
-        if (QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0))
-        {
-            if (nameField->text().indexOf(CustomMSign) == 0) // Check if custom
-            {
-                ui->lineEditName->setReadOnly(ro);
-            }
-        }
-    }
-    else
-    {
-        ui->lineEditName->setReadOnly(ro);
-    }
-
-    ui->plainTextEditDescription->setDisabled(false);
-    ui->plainTextEditDescription->setReadOnly(ro);
-    ui->lineEditFullName->setDisabled(false);
-    ui->lineEditFullName->setReadOnly(ro);
+    ui->plainTextEditNotes->setReadOnly(ro);
 
     if (mType == MeasurementsType::Individual)
     {
@@ -1944,18 +1908,52 @@ void TMainWindow::GUIReadOnly(bool ro)
         ui->dateEditBirthDate->setReadOnly(ro);
         ui->comboBoxSex->setDisabled(ro);
         ui->lineEditEmail->setReadOnly(ro);
+    }
 
-        ui->plainTextEditFormula->setDisabled(false);
+    MeasurementReadOnly(ro);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::MeasurementReadOnly(bool ro)
+{
+    if (ro == false)
+    {
+        if (QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0))
+        {
+            if (nameField->text().indexOf(CustomMSign) == 0) // Check if custom
+            {
+                ui->lineEditName->setReadOnly(ro);
+                ui->plainTextEditDescription->setReadOnly(ro);
+                ui->lineEditFullName->setReadOnly(ro);
+            }
+            else
+            { // known measurement
+                ui->lineEditName->setReadOnly(not ro);
+                ui->plainTextEditDescription->setReadOnly(not ro);
+                ui->lineEditFullName->setReadOnly(not ro);
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+    else
+    {
+        ui->lineEditName->setReadOnly(ro);
+        ui->plainTextEditDescription->setReadOnly(ro);
+        ui->lineEditFullName->setReadOnly(ro);
+    }
+
+    if (mType == MeasurementsType::Individual)
+    {
         ui->plainTextEditFormula->setReadOnly(ro);
     }
     else
     {
-        ui->doubleSpinBoxBaseValue->setDisabled(ro);
-        ui->doubleSpinBoxInSizes->setDisabled(ro);
-        ui->doubleSpinBoxInHeights->setDisabled(ro);
-
-        gradationHeights->setDisabled(ro);
-        gradationSizes->setDisabled(ro);
+        ui->doubleSpinBoxBaseValue->setReadOnly(ro);
+        ui->doubleSpinBoxInSizes->setReadOnly(ro);
+        ui->doubleSpinBoxInHeights->setReadOnly(ro);
     }
 
     Controls(); // Buttons remove, up, down

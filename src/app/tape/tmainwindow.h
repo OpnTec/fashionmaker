@@ -162,15 +162,15 @@ private:
     void RefreshData();
     void RefreshTable();
 
-    void Controls();
-    void MFields(bool enabled);
-
     QString ClearCustomName(const QString &name) const;
 
     bool EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
 
     void Open(const QString &pathTo, const QString &filter);
     void GUIReadOnly(bool ro);
+    void MeasurementReadOnly(bool ro);
+    void Controls();
+    void MFields(bool enabled);
 
     void ReadSettings();
     void WriteSettings();
