@@ -35,8 +35,6 @@
 #include "exception/vexceptionwrongid.h"
 #include "exception/vexceptionundo.h"
 #include "version.h"
-#include "xml/vstandardmeasurements.h"
-#include "xml/vindividualmeasurements.h"
 #include "core/vapplication.h"
 #include "../vmisc/undoevent.h"
 #include "../vmisc/vsettings.h"

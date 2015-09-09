@@ -6302,14 +6302,6 @@ Quiere guardar los cambios?</translation>
     </message>
 </context>
 <context>
-    <name>STDescriptions</name>
-    <message>
-        <source>Standard figures of men 1st group, chest 100 cm</source>
-        <comment>Standard table description</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SaveDetailOptions</name>
     <message>
         <source>Save detail option</source>

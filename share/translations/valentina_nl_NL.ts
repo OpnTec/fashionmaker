@@ -7858,7 +7858,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
-        <translation>Standaard figuren van mannen 1e groep, borstkas 100 cm</translation>
+        <translation type="vanished">Standaard figuren van mannen 1e groep, borstkas 100 cm</translation>
     </message>
 </context>
 <context>

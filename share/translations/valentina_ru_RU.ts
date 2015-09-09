@@ -9727,7 +9727,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
-        <translation>Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</translation>
+        <translation type="vanished">Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</translation>
     </message>
 </context>
 <context>

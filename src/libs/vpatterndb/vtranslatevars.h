@@ -50,7 +50,6 @@ public:
     QString PMSystemBook(const QString &code) const;
 
     QString PostfixOperator(const QString &name) const;
-    QString STDescription(const QString &id) const;
 
     QString FormulaFromUser(const QString &formula, bool osSeparator) const;
     QString FormulaToUser(const QString &formula) const;
@@ -72,7 +71,6 @@ private:
     void InitVariables();
     void InitFunctions();
     void InitPostfixOperators();
-    void InitSTDescriptions();
 
     void InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
                     const qmu::QmuTranslation &book);

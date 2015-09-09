@@ -40,8 +40,6 @@
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vmisc/undoevent.h"
 #include "../vmisc/vsettings.h"
-#include "vstandardmeasurements.h"
-#include "vindividualmeasurements.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vgeometry/varc.h"
 #include "../core/vapplication.h"

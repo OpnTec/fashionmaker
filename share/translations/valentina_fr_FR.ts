@@ -6407,7 +6407,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     <message>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
-        <translation>Mesures standard homme du 1er groupe, Tour de poitrine 100cm</translation>
+        <translation type="vanished">Mesures standard homme du 1er groupe, Tour de poitrine 100cm</translation>
     </message>
 </context>
 <context>

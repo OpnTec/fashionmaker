@@ -7880,7 +7880,7 @@ Do you want to save your changes?</translation>
     <message>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
-        <translation>Standard figures of men 1st group, chest 100 cm</translation>
+        <translation type="vanished">Standard figures of men 1st group, chest 100 cm</translation>
     </message>
 </context>
 <context>

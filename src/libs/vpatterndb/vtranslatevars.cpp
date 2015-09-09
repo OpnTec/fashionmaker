@@ -51,7 +51,6 @@ VTranslateVars::VTranslateVars(bool osSeparator)
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
-    InitSTDescriptions();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -434,14 +433,6 @@ void VTranslateVars::InitPostfixOperators()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::InitSTDescriptions()
-{
-    stDescriptions.insert("0", QmuTranslation::translate("STDescriptions",
-                                                         "Standard figures of men 1st group, chest 100 cm",
-                                                         "Standard table description"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitSystem(const QString &code, const QmuTranslation &name, const QmuTranslation &author,
                                 const QmuTranslation &book)
 {
@@ -687,20 +678,6 @@ QString VTranslateVars::PostfixOperator(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VTranslateVars::STDescription(const QString &id) const
-{
-    if (stDescriptions.contains(id))
-    {
-        return stDescriptions.value(id).translate();
-    }
-    else
-    {
-        qDebug()<<"Unknown id number. Got"<<id;
-    }
-    return QString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FormulaFromUser replace all known tokens in formula to internal look. Also change decimal
  * separator in numbers.
@@ -943,7 +920,4 @@ void VTranslateVars::Retranslate()
     InitVariables();
     InitFunctions();
     InitPostfixOperators();
-    InitSTDescriptions();
 }
-
-

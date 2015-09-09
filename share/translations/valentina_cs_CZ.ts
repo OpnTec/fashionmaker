@@ -6661,7 +6661,7 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Standard figures of men 1st group, chest 100 cm</source>
         <comment>Standard table description</comment>
-        <translation>Obvyklá čísla mužů první skupiny, hruď 100 cm</translation>
+        <translation type="vanished">Obvyklá čísla mužů první skupiny, hruď 100 cm</translation>
     </message>
 </context>
 <context>

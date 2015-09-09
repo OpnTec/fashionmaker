@@ -29,8 +29,6 @@
 #include "dialogincrements.h"
 #include "ui_dialogincrements.h"
 #include "../vwidgets/vwidgetpopup.h"
-#include "../xml/vstandardmeasurements.h"
-#include "../xml/vindividualmeasurements.h"
 #include "../vmisc/vsettings.h"
 #include "../qmuparser/qmudef.h"
 #include "../vpatterndb/vtranslatevars.h"
