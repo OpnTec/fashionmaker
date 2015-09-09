@@ -2,13 +2,7 @@
 # This need for corect working file translations.pro
 
 HEADERS += \
-    $$PWD/vpattern.h \
-    $$PWD/vstandardmeasurements.h \
-    $$PWD/vindividualmeasurements.h \
-    $$PWD/vabstractmeasurements.h
+    $$PWD/vpattern.h
 
 SOURCES += \
-    $$PWD/vpattern.cpp \
-    $$PWD/vstandardmeasurements.cpp \
-    $$PWD/vindividualmeasurements.cpp \
-    $$PWD/vabstractmeasurements.cpp
+    $$PWD/vpattern.cpp
