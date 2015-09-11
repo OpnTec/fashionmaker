@@ -315,7 +315,7 @@ void TMainWindow::OpenIndividual()
 {
     if (m == nullptr)
     {
-        const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
+        const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)");
         //Use standard path to individual measurements
         const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
         Open(pathTo, filter);
@@ -332,8 +332,8 @@ void TMainWindow::OpenStandard()
 {
     if (m == nullptr)
     {
-        const QString filter = tr("Standard measurements (*.vst);;Individual measurements (*.vit)");
-        //Use standard path to individual measurements
+        const QString filter = tr("Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)");
+        //Use standard path to standard measurements
         const QString pathTo = qApp->TapeSettings()->GetPathStandardMeasurements();
         Open(pathTo, filter);
     }
@@ -349,8 +349,8 @@ void TMainWindow::OpenTemplate()
 {
     if (m == nullptr)
     {
-        const QString filter = tr("Measurements (*.vst, *.vit)");
-        //Use standard path to individual measurements
+        const QString filter = tr("Measurements (*.vst *.vit);;All files (*.*)");
+        //Use standard path to template files
         const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
         Open(pathTo, filter);
     }

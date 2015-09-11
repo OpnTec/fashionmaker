@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -458,7 +458,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>156</height>
         </rect>
        </property>
@@ -622,7 +622,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>196</height>
         </rect>
        </property>
@@ -864,7 +864,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -950,8 +950,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
-         <height>386</height>
+         <width>98</width>
+         <height>58</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1878,10 +1878,10 @@
   </action>
   <action name="actionCreateNew">
    <property name="text">
-    <string>Create new ...</string>
+    <string>Create/Edit</string>
    </property>
    <property name="toolTip">
-    <string>Create new measurements</string>
+    <string>Create/edit measurements</string>
    </property>
   </action>
   <action name="actionShowM">
@@ -1920,8 +1920,8 @@
   <tabstop>toolButtonSplinePath</tabstop>
  </tabstops>
  <resources>
-  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
   <include location="share/resources/toolicon.qrc"/>
+  <include location="../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

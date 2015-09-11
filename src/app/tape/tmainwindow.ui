@@ -645,6 +645,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionNew"/>
+   <addaction name="actionOpenIndividual"/>
    <addaction name="actionSave"/>
    <addaction name="actionAddKnown"/>
    <addaction name="actionAddCustom"/>
@@ -673,7 +674,7 @@
   </widget>
   <action name="actionOpenIndividual">
    <property name="icon">
-    <iconset>
+    <iconset theme="document-open">
      <normaloff/>
     </iconset>
    </property>
@@ -782,11 +783,17 @@
    </property>
   </action>
   <action name="actionOpenStandard">
+   <property name="icon">
+    <iconset theme="document-open"/>
+   </property>
    <property name="text">
     <string>Open standard ...</string>
    </property>
   </action>
   <action name="actionOpenTemplate">
+   <property name="icon">
+    <iconset theme="document-open"/>
+   </property>
    <property name="text">
     <string>Open template</string>
    </property>
