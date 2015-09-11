@@ -156,6 +156,8 @@ int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
             return engine->getResolution();
         case QPaintDevice::PdmPhysicalDpiY:
             return engine->getResolution();
+        case QPaintDevice::PdmDevicePixelRatio:
+            return 1;
         default:
             qWarning("VObjPaintDevice::metric(), unhandled metric %d\n", metric);
             break;
