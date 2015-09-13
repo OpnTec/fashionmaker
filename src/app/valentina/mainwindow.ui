@@ -973,6 +973,9 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="toolTip">
+           <string>Create new Layout</string>
+          </property>
           <property name="text">
            <string>Settings</string>
           </property>
