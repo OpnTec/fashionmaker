@@ -58,15 +58,16 @@ const DialogLayoutSettings::FormatsVector DialogLayoutSettings::pageFormatNames=
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent, bool disableSetting)
-    : QDialog(parent), disableSettings(disableSettings), ui(new Ui::DialogLayoutSettings), oldPaperUnit(Unit::Mm), oldLayoutUnit(Unit::Mm),
-      generator(generator)
+DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent, bool disableSettings)
+    : QDialog(parent), disableSettings(disableSettings), ui(new Ui::DialogLayoutSettings), oldPaperUnit(Unit::Mm),
+      oldLayoutUnit(Unit::Mm), generator(generator)
 {
     ui->setupUi(this);
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
-    //moved from ReadSettings - well...it seems it can be done once only (i.e. constructor) because Init funcs dont even cleanse lists before adding
+    //moved from ReadSettings - well...it seems it can be done once only (i.e. constructor) because Init funcs dont
+    //even cleanse lists before adding
     InitPaperUnits();
     InitLayoutUnits();
     InitTemplates();
@@ -74,7 +75,7 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
     MinimumLayoutSize();
 
     //in export console mode going to use defaults
-    if (!disableSettings)
+    if (disableSettings == false)
     {
         ReadSettings();
     }
@@ -140,8 +141,7 @@ void DialogLayoutSettings::SetPaperWidth(int value)
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int DialogLayoutSettings::GetShift() const
 {
-    return static_cast<quint32>(qFloor(UnitConvertor(ui->doubleSpinBoxShift->value(),
-                                                                            oldLayoutUnit, Unit::Px)));
+    return static_cast<quint32>(qFloor(UnitConvertor(ui->doubleSpinBoxShift->value(), oldLayoutUnit, Unit::Px)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,8 +153,7 @@ void DialogLayoutSettings::SetShift(unsigned int value)
 //---------------------------------------------------------------------------------------------------------------------
 unsigned int DialogLayoutSettings::GetLayoutWidth() const
 {
-    return static_cast<quint32>(qFloor(UnitConvertor(ui->doubleSpinBoxLayoutWidth->value(),
-                                                                            oldLayoutUnit, Unit::Px)));
+    return static_cast<quint32>(qFloor(UnitConvertor(ui->doubleSpinBoxLayoutWidth->value(), oldLayoutUnit, Unit::Px)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -420,7 +419,7 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetUnitePages(IsUnitePages());
 
     //don't want to break visual settings when cmd used
-    if (!disableSettings)
+    if (disableSettings == false)
     {
         WriteSettings();
     }

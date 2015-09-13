@@ -47,8 +47,9 @@ class DialogLayoutSettings : public QDialog
 {
     Q_OBJECT
 public:
-    enum class PaperSizeTemplate : char { A0 = 0, A1, A2, A3, A4, Letter, Legal, Roll24in, Roll30in, Roll36in, Roll42in, Roll44in};
-    DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = 0, bool disableSetting = false);
+    enum class PaperSizeTemplate : char { A0 = 0, A1, A2, A3, A4, Letter, Legal, Roll24in, Roll30in, Roll36in, Roll42in,
+                                          Roll44in};
+    DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = nullptr, bool disableSettings = false);
     ~DialogLayoutSettings();
 
     int GetPaperHeight() const;
