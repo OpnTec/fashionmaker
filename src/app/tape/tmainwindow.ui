@@ -40,7 +40,7 @@
          <normaloff>:/tapeicon/16x16/measurement.png</normaloff>:/tapeicon/16x16/measurement.png</iconset>
        </attribute>
        <attribute name="title">
-        <string>Measuremnts</string>
+        <string>Measurements</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
@@ -784,7 +784,9 @@
   </action>
   <action name="actionOpenStandard">
    <property name="icon">
-    <iconset theme="document-open"/>
+    <iconset theme="document-open">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>Open standard ...</string>
@@ -792,7 +794,9 @@
   </action>
   <action name="actionOpenTemplate">
    <property name="icon">
-    <iconset theme="document-open"/>
+    <iconset theme="document-open">
+     <normaloff/>
+    </iconset>
    </property>
    <property name="text">
     <string>Open template</string>
