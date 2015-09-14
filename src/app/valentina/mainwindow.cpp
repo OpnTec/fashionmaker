@@ -1783,7 +1783,10 @@ void MainWindow::ActionLayout(bool checked)
         actionDockWidgetToolOptions->setEnabled(false);
         undoAction->setEnabled(false);
         redoAction->setEnabled(false);
-        mouseCoordinate->setText("");
+        if (mouseCoordinate != nullptr)
+        {
+            mouseCoordinate->setText("");
+        }
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
