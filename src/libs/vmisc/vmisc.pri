@@ -26,4 +26,5 @@ HEADERS += \
     $$PWD/projectversion.h \
     $$PWD/vcommonsettings.h \
     $$PWD/vtapesettings.h \
-    debugbreak.h
+    $$PWD/debugbreak.h \
+    $$PWD/vlockguard.h

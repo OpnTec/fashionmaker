@@ -37,6 +37,7 @@
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../vmisc/vlockguard.h"
 #include "vlitepattern.h"
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -48,9 +49,6 @@
 #include <QMessageBox>
 #include <QComboBox>
 #include <QProcess>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-#   include <QLockFile>
-#endif
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
@@ -97,10 +95,6 @@ TMainWindow::~TMainWindow()
     {
         delete m;
     }
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    delete lock; // Unlock pattern file
-#endif
 
     delete ui;
 }
@@ -182,18 +176,13 @@ void TMainWindow::LoadFile(const QString &path)
             }
         }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-        lock = new QLockFile(QFileInfo(path).fileName()+".lock");
-        lock->setStaleLockTime(0);
-        if (not MApplication::TryLock(lock))
+        VlpCreateLock(lock, QFileInfo(path).fileName()+".lock");
+
+        if (lock->GetLockError() == QLockFile::LockFailedError)
         {
-            if (lock->error() == QLockFile::LockFailedError)
-            {
-                qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
-                return;
-            }
+            qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
+            return;
         }
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
         try
         {
@@ -839,18 +828,13 @@ void TMainWindow::ImportFromPattern()
         return;
     }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    QLockFile *lock = new QLockFile(QFileInfo(mPath).fileName()+".lock");
-    lock->setStaleLockTime(0);
-    if (not MApplication::TryLock(lock))
+    VLockGuard<char> tmp(QFileInfo(mPath).fileName()+".lock");
+
+    if (tmp.GetLockError() == QLockFile::LockFailedError)
     {
-        if (lock->error() == QLockFile::LockFailedError)
-        {
-            qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
-            return;
-        }
+        qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
+        return;
     }
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
 #ifdef Q_OS_WIN32
     qt_ntfs_permission_lookup++; // turn checking on
@@ -877,8 +861,6 @@ void TMainWindow::ImportFromPattern()
 #ifdef Q_OS_WIN32
     qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
-
-    delete lock; // release a pattern file
 
     measurements = FilterMeasurements(measurements, m->ListAll());
 

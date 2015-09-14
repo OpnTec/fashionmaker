@@ -37,7 +37,7 @@
 #include "tools/vtooluniondetails.h"
 #include "tools/drawTools/drawtools.h"
 #include "core/vcmdexport.h"
-#include <QLockFile>
+#include "../vmisc/vlockguard.h"
 
 #include <QFileSystemWatcher>
 
@@ -47,9 +47,6 @@ namespace Ui
 }
 
 class VToolOptionsPropertyBrowser;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-class QLockFile;
-#endif
 
 /**
  * @brief The MainWindow class main windows.
@@ -230,9 +227,7 @@ private:
     QComboBox          *gradationHeights;
     QComboBox          *gradationSizes;
     VToolOptionsPropertyBrowser *toolOptions;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    QLockFile          *lock;
-#endif
+    VLockGuardPtr<char> lock;
 
     void               ToolBarOption();
     void               ToolBarStages();

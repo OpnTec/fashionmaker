@@ -36,7 +36,6 @@
 #include "vsettings.h"
 #include "vcmdexport.h"
 
-
 class VApplication;// use in define
 class VMainGraphicsView;
 class VPattern;
@@ -95,11 +94,9 @@ private:
     VTranslateVars     *trVars;
     QTimer             *autoSaveTimer;
 
-    QFile              *log;
-    QTextStream        *out;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    QLockFile          *logLock;
-#endif
+    VLockGuardPtr<QFile>         lockLog;
+    std::shared_ptr<QTextStream> out;
+
     void               InitLineWidth();
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)

@@ -33,6 +33,7 @@
 #include <QTableWidget>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vlockguard.h"
 #include "../vformat/vmeasurements.h"
 
 namespace Ui
@@ -43,9 +44,6 @@ namespace Ui
 class QComboBox;
 class QTableWidgetItem;
 class QLabel;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-class QLockFile;
-#endif
 
 class TMainWindow : public QMainWindow
 {
@@ -133,10 +131,7 @@ private:
     QComboBox       *gradationSizes;
     QComboBox       *comboBoxUnits;
     int              formulaBaseHeight;
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    QLockFile          *lock;
-#endif
+    VLockGuardPtr<char> lock;
 
     void SetupMenu();
     void InitWindow();

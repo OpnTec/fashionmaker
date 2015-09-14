@@ -62,9 +62,6 @@
 #include <QtGlobal>
 #include <QDesktopWidget>
 #include <QDesktopServices>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-#   include <QLockFile>
-#endif
 #include <chrono>
 #include <thread>
 
@@ -1960,13 +1957,8 @@ void MainWindow::OnlineHelp()
 void MainWindow::Clear()
 {
     qCDebug(vMainWindow, "Reseting main window.");
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    delete lock; // Unlock pattern file
-    lock = nullptr;
+    lock.reset();
     qCDebug(vMainWindow, "Unlocked pattern file.");
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-
     ui->actionDetails->setChecked(true);
     ui->actionDraw->setChecked(true);
     ui->actionLayout->setEnabled(true);
@@ -3034,9 +3026,6 @@ MainWindow::~MainWindow()
     CancelTool();
     CleanLayout();
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    delete lock; // Unlock pattern file
-#endif
     delete doc;
     delete sceneDetails;
     delete sceneDraw;
@@ -3065,26 +3054,24 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         return false;
     }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     qCDebug(vMainWindow, "Loking file");
-    lock = new QLockFile(fileName+".lock");
-    lock->setStaleLockTime(0);
-    if (VApplication::TryLock(lock))
+    VlpCreateLock(lock, fileName+".lock");
+
+    if (lock->IsLocked())
     {
         qCDebug(vMainWindow, "Pattern file %s was locked.", fileName.toUtf8().constData());
     }
     else
     {
         qCDebug(vMainWindow, "Failed to lock %s", fileName.toUtf8().constData());
-        qCDebug(vMainWindow, "Error type: %d", lock->error());
-        if (lock->error() == QLockFile::LockFailedError)
+        qCDebug(vMainWindow, "Error type: %d", lock->GetLockError());
+        if (lock->GetLockError() == QLockFile::LockFailedError)
         {
             qCCritical(vMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
             Clear();
             return false;
         }
     }
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
     // On this stage scene empty. Fit scene size to view size
     VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
@@ -3187,14 +3174,11 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
         for (int i = 0; i < files.size(); ++i)
         {
             // Seeking file that realy need reopen
-            QLockFile *lock = new QLockFile(files.at(i)+".lock");
-            lock->setStaleLockTime(0);
-            if (VApplication::TryLock(lock))
+            VLockGuard<char> tmp(files.at(i)+".lock");
+            if (tmp.IsLocked())
             {
                 restoreFiles.append(files.at(i));
             }
-            delete lock;
-            lock = nullptr;
         }
 
         // Clearing list after filtering
@@ -3204,7 +3188,6 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
         }
 
         qApp->ValentinaSettings()->SetRestoreFileList(files);
-
     }
     return restoreFiles;
 #else
