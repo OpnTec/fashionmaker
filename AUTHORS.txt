@@ -26,4 +26,9 @@ Patch contributors:
 		* Mac OS package.
 	Peter Gsellmann
 		* Testing
-
+	Alex Zaharov <alexzkhr@gmail.com>
+		* Developing.
+	Valentina Zhuravska <zhuravska19@gmail.com>
+		* Developing.
+		* Testing.
+		* Translation.
