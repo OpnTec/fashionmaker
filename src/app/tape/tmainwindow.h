@@ -35,6 +35,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vlockguard.h"
 #include "../vformat/vmeasurements.h"
+#include "vtablesearch.h"
 
 namespace Ui
 {
@@ -113,10 +114,11 @@ private slots:
     void SaveMFullName();
 
     void NewWindow();
-
     void Preferences();
-
     void PatternUnitChanged(int index);
+    void Find(const QString &term);
+    void FindPrevious();
+    void FindNext();
 
 private:
     Q_DISABLE_COPY(TMainWindow)
@@ -132,6 +134,7 @@ private:
     QComboBox       *comboBoxUnits;
     int              formulaBaseHeight;
     VLockGuardPtr<char> lock;
+    QSharedPointer<VTableSearch> search;
 
     void SetupMenu();
     void InitWindow();

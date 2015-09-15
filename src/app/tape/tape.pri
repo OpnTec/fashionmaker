@@ -12,7 +12,8 @@ SOURCES  += \
     $$PWD/dialogs/tapeconfigdialog.cpp \
     $$PWD/dialogs/configpages/tapeconfigurationpage.cpp \
     $$PWD/dialogs/configpages/tapepathpage.cpp \
-    $$PWD/vlitepattern.cpp
+    $$PWD/vlitepattern.cpp \
+    $$PWD/vtablesearch.cpp
 
 HEADERS  += \
     $$PWD/tmainwindow.h \
@@ -25,7 +26,8 @@ HEADERS  += \
     $$PWD/dialogs/tapeconfigdialog.h \
     $$PWD/dialogs/configpages/tapeconfigurationpage.h \
     $$PWD/dialogs/configpages/tapepathpage.h \
-    $$PWD/vlitepattern.h
+    $$PWD/vlitepattern.h \
+    $$PWD/vtablesearch.h
 
 FORMS    += \
     $$PWD/tmainwindow.ui \

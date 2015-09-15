@@ -68,9 +68,11 @@ TMainWindow::TMainWindow(QWidget *parent)
       gradationSizes(nullptr),
       comboBoxUnits(nullptr),
       formulaBaseHeight(0),
-      lock(nullptr)
+      lock(nullptr),
+      search()
 {
     ui->setupUi(this);
+    search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
     ui->tabWidget->setVisible(false);
 
     ui->mainToolBar->setContextMenuPolicy(Qt::PreventContextMenu);
@@ -351,6 +353,24 @@ void TMainWindow::OpenTemplate()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::Find(const QString &term)
+{
+    search->Find(term);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::FindPrevious()
+{
+    search->FindPrevious();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::FindNext()
+{
+    search->FindNext();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::closeEvent(QCloseEvent *event)
 {
     if (MaybeSave())
@@ -602,7 +622,9 @@ void TMainWindow::Remove()
 
     MeasurementsWasSaved(false);
 
+    search->RemoveRow(row);
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     if (ui->tableWidget->rowCount() > 0)
     {
@@ -668,6 +690,7 @@ void TMainWindow::MoveUp()
     m->MoveUp(nameField->text());
     MeasurementsWasSaved(false);
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row-1);
 }
 
@@ -685,6 +708,7 @@ void TMainWindow::MoveDown()
     m->MoveDown(nameField->text());
     MeasurementsWasSaved(false);
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row+1);
 }
 
@@ -719,6 +743,8 @@ void TMainWindow::Fx()
 
         RefreshData();
 
+        search->RefreshList(ui->lineEditFind->text());
+
         ui->tableWidget->selectRow(row);
     }
     delete dialog;
@@ -749,7 +775,9 @@ void TMainWindow::AddCustom()
         m->AddEmptyAfter(nameField->text(), name);
     }
 
+    search->AddRow(currentRow);
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(currentRow);
 
@@ -778,6 +806,8 @@ void TMainWindow::AddKnown()
                 {
                     m->AddEmpty(list.at(i));
                 }
+
+                search->AddRow(currentRow);
             }
         }
         else
@@ -795,11 +825,13 @@ void TMainWindow::AddKnown()
                 {
                     m->AddEmptyAfter(after, list.at(i));
                 }
+                search->AddRow(currentRow);
                 after = list.at(i);
             }
         }
 
         RefreshData();
+        search->RefreshList(ui->lineEditFind->text());
 
         ui->tableWidget->selectRow(currentRow);
 
@@ -888,6 +920,8 @@ void TMainWindow::ImportFromPattern()
 
     RefreshData();
 
+    search->RefreshList(ui->lineEditFind->text());
+
     ui->tableWidget->selectRow(currentRow);
 
     MeasurementsWasSaved(false);
@@ -899,6 +933,7 @@ void TMainWindow::ChangedSize(const QString &text)
     const int row = ui->tableWidget->currentRow();
     data->SetSize(text.toInt());
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
 }
 
@@ -908,6 +943,7 @@ void TMainWindow::ChangedHeight(const QString &text)
     const int row = ui->tableWidget->currentRow();
     data->SetHeight(text.toInt());
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
 }
 
@@ -1052,6 +1088,7 @@ void TMainWindow::SaveMName()
         m->SetMName(nameField->text(), newName);
         MeasurementsWasSaved(false);
         RefreshData();
+        search->RefreshList(ui->lineEditFind->text());
 
         ui->tableWidget->blockSignals(true);
         ui->tableWidget->selectRow(row);
@@ -1121,6 +1158,7 @@ void TMainWindow::SaveMValue()
     const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
 
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -1145,6 +1183,7 @@ void TMainWindow::SaveMBaseValue(double value)
     MeasurementsWasSaved(false);
 
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -1167,6 +1206,7 @@ void TMainWindow::SaveMSizeIncrease(double value)
     MeasurementsWasSaved(false);
 
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -1189,6 +1229,7 @@ void TMainWindow::SaveMHeightIncrease(double value)
     MeasurementsWasSaved(false);
 
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(row);
 }
@@ -1446,6 +1487,10 @@ void TMainWindow::InitWindow()
         connect(ui->toolButtonExpr, &QToolButton::clicked, this, &TMainWindow::Fx);
     }
 
+    connect(ui->lineEditFind, &QLineEdit::textEdited, this, &TMainWindow::Find);
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, &TMainWindow::FindPrevious);
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, &TMainWindow::FindNext);
+
     ui->plainTextEditNotes->setPlainText(m->Notes());
     connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
 
@@ -1660,6 +1705,7 @@ void TMainWindow::SetDefaultSize(int value)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshData()
 {
+    data->ClearUniqueNames();
     data->ClearVariables(VarType::Measurement);
     m->ReadMeasurements();
 
@@ -1799,6 +1845,10 @@ void TMainWindow::MFields(bool enabled)
         ui->pushButtonGrow->setEnabled(enabled);
         ui->toolButtonExpr->setEnabled(enabled);
     }
+
+    ui->lineEditFind->setEnabled(enabled);
+    ui->toolButtonFindPrevious->setEnabled(enabled);
+    ui->toolButtonFindNext->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1984,6 +2034,8 @@ void TMainWindow::UpdatePatternUnit()
 
     ShowUnits();
     RefreshTable();
+
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(row);
 }
