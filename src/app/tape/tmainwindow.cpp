@@ -183,6 +183,7 @@ void TMainWindow::LoadFile(const QString &path)
         if (lock->GetLockError() == QLockFile::LockFailedError)
         {
             qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
+            lock.reset();
             return;
         }
 
@@ -248,6 +249,7 @@ void TMainWindow::LoadFile(const QString &path)
             m = nullptr;
             delete data;
             data = nullptr;
+            lock.reset();
             return;
         }
     }
