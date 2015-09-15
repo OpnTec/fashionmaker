@@ -193,7 +193,7 @@ const QString neckSideToBustSideB_M           = QStringLiteral("neck_side_to_bus
 const QString shoulderTipToWaistB_1inOffset_M = QStringLiteral("shoulder_tip_to_waist_b_1in_offset"); // H13
 // I
 const QString armShoulderTipToWristBent_M   = QStringLiteral("arm_shoulder_tip_to_wrist_bent");   // I01
-const QString armShoulderTipToElbowBent_M   = QStringLiteral(" arm_shoulder_tip_to_elbow_bent");  // I02
+const QString armShoulderTipToElbowBent_M   = QStringLiteral("arm_shoulder_tip_to_elbow_bent");   // I02
 const QString armElbowToWristBent_M         = QStringLiteral("arm_elbow_to_wrist_bent");          // I03
 const QString armElbowCircBent_M            = QStringLiteral("arm_elbow_circ_bent");              // I04
 const QString armShoulderTipToWrist_M       = QStringLiteral("arm_shoulder_tip_to_wrist");        // I05
