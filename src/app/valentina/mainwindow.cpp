@@ -1373,9 +1373,10 @@ void MainWindow::currentPPChanged(int index)
  */
 void MainWindow::mouseMove(const QPointF &scenePos)
 {
-    QString string = QString("%1, %2 (%3)").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
+    //: Coords in status line: "X, Y (units)"
+    QString string = QString(tr("%1, %2 (%3)")).arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
                                       .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
-                                      .arg(doc->UnitsToStr(qApp->patternUnit()));
+                                      .arg(doc->UnitsToStr(qApp->patternUnit(), true));
     if (mouseCoordinate != nullptr)
     {
         mouseCoordinate->setText(string);
