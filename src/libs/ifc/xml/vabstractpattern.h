@@ -248,6 +248,7 @@ private:
     QStringList ListArcExpressions() const;
     QStringList ListSplineExpressions() const;
     QStringList ListPathPointExpressions() const;
+    QStringList ListIncrementExpressions() const;
 
     bool IsVariable(const QString& token) const;
     bool IsPostfixOperator(const QString& token) const;
