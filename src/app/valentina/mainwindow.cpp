@@ -1184,6 +1184,22 @@ void MainWindow::SyncMeasurements()
 void MainWindow::ToolBarOption()
 {
     ui->toolBarOption->clear();
+    if (mouseCoordinate != nullptr)
+    {
+        delete mouseCoordinate;
+        mouseCoordinate = nullptr;
+    }
+    if (gradationHeights != nullptr)
+    {
+        delete gradationHeights;
+        gradationHeights = nullptr;
+    }
+    if (gradationSizes != nullptr)
+    {
+        delete gradationSizes;
+        gradationSizes = nullptr;
+    }
+
     if (qApp->patternType() == MeasurementsType::Standard)
     {
         const QStringList listHeights = VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit());
