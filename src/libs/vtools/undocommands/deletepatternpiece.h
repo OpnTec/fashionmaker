@@ -43,7 +43,6 @@ private:
     Q_DISABLE_COPY(DeletePatternPiece)
     QString     namePP;
     QDomElement patternPiece;
-    QString     mPath;
     QString     previousPPName;
 };
 
