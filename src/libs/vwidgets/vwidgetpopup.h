@@ -67,6 +67,8 @@ public:
     int GetLifeTime() const;
     void SetLifeTime(int value);
 
+    static void PopupMessage(QWidget *w, const QString &msg);
+
 public slots:
     /** Pops up the widget at global coordinates \a coord. */
     void Show(QPoint coord);

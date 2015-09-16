@@ -31,6 +31,9 @@
 #include <QVBoxLayout>
 #include <QDesktopWidget>
 #include <QTimer>
+#include <QLabel>
+
+#include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VWidgetPopup::VWidgetPopup(QWidget *parent)
@@ -75,6 +78,22 @@ void VWidgetPopup::SetWidget(QWidget *widget, bool own)
         mWidget->setParent(this);
         layout()->addWidget(mWidget);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetPopup::PopupMessage(QWidget *w, const QString &msg)
+{
+    SCASSERT(w != nullptr);
+
+    VWidgetPopup *popup = new VWidgetPopup();
+    QLabel *label = new QLabel(msg);
+    QFont f = label->font();
+    f.setBold(true);
+    f.setPixelSize(16);
+    label->setFont(f);
+    popup->SetWidget(label);
+    popup->SetLifeTime(2000);
+    popup->Show(w->frameGeometry().center());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

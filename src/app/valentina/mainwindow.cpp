@@ -46,6 +46,7 @@
 #include "../vformat/vmeasurements.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
+#include "../vwidgets/vwidgetpopup.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -1159,13 +1160,16 @@ void MainWindow::SyncMeasurements()
 {
     if (mChanges)
     {
-        if(LoadMeasurements(doc->MPath()))
+        const QString path = AbsoluteMPath(curFile, doc->MPath());
+        if(LoadMeasurements(path))
         {
-            if (not watcher->files().contains(doc->MPath()))
+            if (not watcher->files().contains(path))
             {
-                watcher->addPath(doc->MPath());
+                watcher->addPath(path);
             }
-            helpLabel->setText(tr("Measurements updated"));
+            const QString msg = tr("Measurements was updated");
+            helpLabel->setText(msg);
+            VWidgetPopup::PopupMessage(this, msg);
             doc->LiteParseTree(Document::LiteParse);
             mChanges = false;
         }
