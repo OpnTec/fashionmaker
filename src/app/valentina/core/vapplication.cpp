@@ -889,7 +889,9 @@ void VApplication::SendReport(const QString &reportName) const
         const QString arg = QString("curl.exe -k -H \"Authorization: bearer ")+token.join("")+
                             QString("\" -H \"Accept: application/json\" -H \"Content-type: application/json\" -X POST "
                                     "--data @gist.json https://api.github.com/gists");
-        QProcess::startDetached(arg);
+        QProcess proc;
+        proc.start(arg);
+        proc.waitForFinished(10000); // 10 sec
         reportFile.remove();// Clear after yourself
     }
     else
