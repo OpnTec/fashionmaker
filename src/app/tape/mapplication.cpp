@@ -91,8 +91,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         switch (type)
         {
             case QtDebugMsg:
-                std::cerr << msg.toUtf8().constData();
-                std::cerr.flush();
+                std::cerr << msg.toUtf8().constData() << std::endl;
                 return;
             case QtWarningMsg:
                 messageBox.setIcon(QMessageBox::Warning);
