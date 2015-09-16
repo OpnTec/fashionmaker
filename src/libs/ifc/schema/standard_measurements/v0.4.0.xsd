@@ -35,6 +35,10 @@
 				</xs:element>
 			</xs:sequence>
 		 </xs:complexType>
+		<xs:unique name="measurementName">
+			<xs:selector xpath="body-measurements/m"/>
+			<xs:field xpath="@name"/>
+		</xs:unique>
 	  </xs:element>
 	<xs:simpleType name="shortName">
 		<xs:restriction base="xs:string">   
