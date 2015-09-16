@@ -473,6 +473,22 @@ void TMainWindow::FileSaveAs()
     {
         fileName += "." + suffix;
     }
+
+    if (QFileInfo(fileName).exists())
+    {
+        VLockGuard<char> tmp(fileName + ".lock");
+
+        if (not tmp.IsLocked())
+        {
+            if (lock->GetLockError() == QLockFile::LockFailedError)
+            {
+                qCCritical(tMainWindow, "%s", tr("Failed to lock. This file already opened in another window.")
+                           .toUtf8().constData());
+                return;
+            }
+        }
+    }
+
     QString error;
     bool result = SaveMeasurements(fileName, error);
     if (result == false)
@@ -484,6 +500,20 @@ void TMainWindow::FileSaveAs()
         messageBox.setDetailedText(error);
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
+
+        return;
+    }
+
+    lock.reset();
+
+    VlpCreateLock(lock, fileName + ".lock");
+
+    if (lock->GetLockError() == QLockFile::LockFailedError)
+    {
+        qCCritical(tMainWindow, "%s", tr("Failed to lock. This file already opened in another window. "
+                                         "Expect collissions when run 2 copies of the program.").toUtf8().constData());
+        lock.reset();
+        return;
     }
 }
 

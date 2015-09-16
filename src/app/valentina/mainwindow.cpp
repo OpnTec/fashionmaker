@@ -1837,9 +1837,24 @@ bool MainWindow::SaveAs()
     {
         fileName += ".val";
     }
-    const QString oldFileName = curFile;
+
+    if (QFileInfo(fileName).exists())
+    {
+        VLockGuard<char> tmp(fileName + ".lock");
+
+        if (not tmp.IsLocked())
+        {
+            if (lock->GetLockError() == QLockFile::LockFailedError)
+            {
+                qCCritical(vMainWindow, "%s", tr("Failed to lock. This file already opened in another window.")
+                           .toUtf8().constData());
+                return false;
+            }
+        }
+    }
+
     QString error;
-    bool result = SavePattern(fileName, error);
+    const bool result = SavePattern(fileName, error);
     if (result == false)
     {
         QMessageBox messageBox;
@@ -1849,14 +1864,33 @@ bool MainWindow::SaveAs()
         messageBox.setDetailedText(error);
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
+
+        return result;
     }
-    if (oldFileName != curFile)
-    {// Now we have new file name after save as.
-     // But still have previous name in restore list. We should delete them.
-        QStringList restoreFiles = qApp->ValentinaSettings()->GetRestoreFileList();
-        restoreFiles.removeAll(oldFileName);
-        qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
+
+    qCDebug(vMainWindow, "Unlock old file");
+    lock.reset();
+
+    qCDebug(vMainWindow, "Locking file");
+    VlpCreateLock(lock, fileName+".lock");
+
+    if (lock->IsLocked())
+    {
+        qCDebug(vMainWindow, "Pattern file %s was locked.", fileName.toUtf8().constData());
     }
+    else
+    {
+        qCDebug(vMainWindow, "Failed to lock %s", fileName.toUtf8().constData());
+        qCDebug(vMainWindow, "Error type: %d", lock->GetLockError());
+        if (lock->GetLockError() == QLockFile::LockFailedError)
+        {
+            qCCritical(vMainWindow, "%s", tr("Failed to lock. This file already opened in another window. "
+                                             "Expect collissions when run 2 copies of the program.")
+                       .toUtf8().constData());
+            lock.reset();
+        }
+    }
+
     return result;
 }
 
