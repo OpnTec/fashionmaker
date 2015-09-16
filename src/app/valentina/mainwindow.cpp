@@ -1218,7 +1218,7 @@ void MainWindow::ToolBarOption()
         ui->toolBarOption->addSeparator();
     }
 
-    mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(doc->UnitsToStr(qApp->patternUnit())));
+    mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(doc->UnitsToStr(qApp->patternUnit(), true)));
     ui->toolBarOption->addWidget(mouseCoordinate);
 }
 
