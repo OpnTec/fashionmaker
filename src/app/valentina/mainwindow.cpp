@@ -1184,28 +1184,25 @@ void MainWindow::SyncMeasurements()
 void MainWindow::ToolBarOption()
 {
     ui->toolBarOption->clear();
-    if (mouseCoordinate != nullptr)
+    if (not mouseCoordinate.isNull())
     {
         delete mouseCoordinate;
-        mouseCoordinate = nullptr;
     }
-    if (gradationHeights != nullptr)
+    if (not gradationHeights.isNull())
     {
         delete gradationHeights;
-        gradationHeights = nullptr;
     }
-    if (gradationSizes != nullptr)
+    if (not gradationSizes.isNull())
     {
         delete gradationSizes;
-        gradationSizes = nullptr;
     }
     if (not gradationHeightsLabel.isNull())
     {
-        gradationHeightsLabel.clear();
+        delete gradationHeightsLabel;
     }
     if (not gradationSizesLabel.isNull())
     {
-        gradationSizesLabel.clear();
+        delete gradationSizesLabel;
     }
 
     if (qApp->patternType() == MeasurementsType::Standard)
@@ -1233,9 +1230,9 @@ void MainWindow::ToolBarOption()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QComboBox *MainWindow::SetGradationList(QPointer<QLabel> &label, const QStringList &list)
+QComboBox *MainWindow::SetGradationList(QLabel *label, const QStringList &list)
 {
-    ui->toolBarOption->addWidget(label.data());
+    ui->toolBarOption->addWidget(label);
 
     QComboBox *comboBox = new QComboBox(this);
     comboBox->addItems(list);
@@ -1809,10 +1806,7 @@ void MainWindow::ActionLayout(bool checked)
         actionDockWidgetToolOptions->setEnabled(false);
         undoAction->setEnabled(false);
         redoAction->setEnabled(false);
-        if (mouseCoordinate != nullptr)
-        {
-            mouseCoordinate->setText("");
-        }
+        mouseCoordinate->setText("");
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
@@ -2356,6 +2350,9 @@ void MainWindow::New()
         VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
 
         AddPP(patternPieceName);
+
+        mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(doc->UnitsToStr(qApp->patternUnit(), true)));
+        ui->toolBarOption->addWidget(mouseCoordinate);
     }
     else
     {
