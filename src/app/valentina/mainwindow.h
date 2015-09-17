@@ -38,6 +38,7 @@
 #include "tools/drawTools/drawtools.h"
 #include "core/vcmdexport.h"
 #include <QLockFile>
+#include <QPointer>
 
 #include <QFileSystemWatcher>
 
@@ -229,6 +230,8 @@ private:
     bool               guiEnabled;
     QComboBox          *gradationHeights;
     QComboBox          *gradationSizes;
+    QPointer<QLabel>   gradationHeightsLabel;
+    QPointer<QLabel>   gradationSizesLabel;
     VToolOptionsPropertyBrowser *toolOptions;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QLockFile          *lock;
@@ -276,7 +279,7 @@ private:
     void               InitAutoSave();
     QString            PatternPieceName(const QString &text);
     QString            CheckPathToMeasurements(const QString &patternPath, const QString &path);
-    QComboBox          *SetGradationList(const QString &label, const QStringList &list);
+    QComboBox          *SetGradationList(QPointer<QLabel> &label, const QStringList &list);
     void               ChangePP(int index, bool zoomBestFit = true);
     /**
      * @brief EndVisualization try show dialog after and working with tool visualization.

@@ -1199,18 +1199,28 @@ void MainWindow::ToolBarOption()
         delete gradationSizes;
         gradationSizes = nullptr;
     }
+    if (not gradationHeightsLabel.isNull())
+    {
+        gradationHeightsLabel.clear();
+    }
+    if (not gradationSizesLabel.isNull())
+    {
+        gradationSizesLabel.clear();
+    }
 
     if (qApp->patternType() == MeasurementsType::Standard)
     {
         const QStringList listHeights = VMeasurement::ListHeights(doc->GetGradationHeights(), qApp->patternUnit());
         const QStringList listSizes = VMeasurement::ListSizes(doc->GetGradationSizes(), qApp->patternUnit());
 
-        gradationHeights = SetGradationList(tr("Height: "), listHeights);
+        gradationHeightsLabel = new QLabel(tr("Height: "), this);
+        gradationHeights = SetGradationList(gradationHeightsLabel, listHeights);
         SetDefaultHeight(static_cast<int>(pattern->height()));
         connect(gradationHeights, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedHeight);
 
-        gradationSizes = SetGradationList(tr("Size: "), listSizes);
+        gradationSizesLabel = new QLabel(tr("Size: "), this);
+        gradationSizes = SetGradationList(gradationSizesLabel, listSizes);
         SetDefaultSize(static_cast<int>(pattern->size()));
         connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedSize);
@@ -1223,9 +1233,9 @@ void MainWindow::ToolBarOption()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QComboBox *MainWindow::SetGradationList(const QString &label, const QStringList &list)
+QComboBox *MainWindow::SetGradationList(QPointer<QLabel> &label, const QStringList &list)
 {
-    ui->toolBarOption->addWidget(new QLabel(label, this));
+    ui->toolBarOption->addWidget(label.data());
 
     QComboBox *comboBox = new QComboBox(this);
     comboBox->addItems(list);
