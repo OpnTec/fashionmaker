@@ -344,7 +344,7 @@ INSTALL_TRANSLATIONS += \
     $${TRANSLATIONS_PATH}/measurements_p9_fi_FI.qm \
     $${TRANSLATIONS_PATH}/measurements_p9_en_US.qm
 
-TRANSLATIONS += \
+INSTALL_TRANSLATIONS += \
     $${TRANSLATIONS_PATH}/measurements_p10_ru_RU.qm \
     $${TRANSLATIONS_PATH}/measurements_p10_uk_UA.qm \
     $${TRANSLATIONS_PATH}/measurements_p10_de_DE.qm \
