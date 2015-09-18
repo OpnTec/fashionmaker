@@ -84,12 +84,8 @@ MainWindow::MainWindow(QWidget *parent)
       currentToolBoxIndex(0), drawMode(true), recentFileActs(),
       separatorAct(nullptr),
       leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true),
-      gradationHeights(nullptr), gradationSizes(nullptr),
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
+      gradationHeights(nullptr), gradationSizes(nullptr), gradationHeightsLabel(nullptr), gradationSizesLabel(nullptr),
       toolOptions(nullptr), lock(nullptr)
-#else
-      toolOptions(nullptr)
-#endif
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -1214,13 +1210,15 @@ void MainWindow::ToolBarOption()
         gradationHeightsLabel = new QLabel(tr("Height: "), this);
         gradationHeights = SetGradationList(gradationHeightsLabel, listHeights);
         SetDefaultHeight(static_cast<int>(pattern->height()));
-        connect(gradationHeights, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+        connect(gradationHeights.data(),
+                static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedHeight);
 
         gradationSizesLabel = new QLabel(tr("Size: "), this);
         gradationSizes = SetGradationList(gradationSizesLabel, listSizes);
         SetDefaultSize(static_cast<int>(pattern->size()));
-        connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+        connect(gradationSizes.data(),
+                static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedSize);
 
         ui->toolBarOption->addSeparator();
