@@ -114,9 +114,13 @@ static void __inline__ debug_break(void)
 		  * (gdb) handle SIGILL stop nopass
 		  * */
 		__builtin_trap();
-	} else {
-		raise(SIGTRAP);
-	}
+    } else {
+        #ifdef _WIN32
+            __builtin_trap();
+        #else
+            raise(SIGTRAP);
+        #endif
+    }
 }
 
 #ifdef __cplusplus
