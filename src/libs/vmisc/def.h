@@ -36,6 +36,8 @@
     #include <windows.h>
 #endif /* Q_OS_WIN */
 
+#include "debugbreak.h"
+
 #define SceneSize 50000
 #define DefPointRadius 1.5//mm
 
@@ -160,43 +162,23 @@ enum class GSizes : unsigned char { ALL,
  * https://stackoverflow.com/questions/1721543/continue-to-debug-after-failed-assertion-on-linux-c-c
  */
 #ifndef V_NO_ASSERT
-#ifdef Q_OS_WIN32
+
 #ifdef Q_CC_MSVC
-#define SCASSERT(cond)                                      \
-{                                                           \
-    if (!(cond))                                            \
-    {                                                       \
-        qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, __FUNCSIG__, __FILE__, __LINE__);        \
-        DebugBreak();                                       \
-    }                                                       \
-}                                                           \
-
-#else // GCC (Windows)
-
-#define SCASSERT(cond)                                      \
-{                                                           \
-    if (!(cond))                                            \
-    {                                                       \
-        qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
-        DebugBreak();                                       \
-    }                                                       \
-}                                                           \
-
+#define V_PRETTY_FUNCTION __FUNCSIG__
+#else // GCC/Clang
+#define V_PRETTY_FUNCTION __PRETTY_FUNCTION__
 #endif /*Q_CC_MSVC*/
-#else // UNIX
+
 #define SCASSERT(cond)                                      \
 {                                                           \
     if (!(cond))                                            \
     {                                                       \
         qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
-        std::raise(SIGTRAP);                                \
+            #cond, V_PRETTY_FUNCTION, __FILE__, __LINE__);  \
+        debug_break();                                      \
     }                                                       \
 }                                                           \
 
-#endif /* Q_OS_WIN32 */
 #else // define but disable this function if debugging is not set
 #define SCASSERT(cond) qt_noop();
 #endif /* V_NO_ASSERT */

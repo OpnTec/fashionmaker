@@ -25,4 +25,6 @@ HEADERS += \
     $$PWD/vabstractapplication.h \
     $$PWD/projectversion.h \
     $$PWD/vcommonsettings.h \
-    $$PWD/vtapesettings.h
+    $$PWD/vtapesettings.h \
+    $$PWD/debugbreak.h \
+    $$PWD/vlockguard.h

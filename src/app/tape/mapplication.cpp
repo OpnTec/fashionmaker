@@ -38,12 +38,99 @@
 #include <QTranslator>
 #include <QPointer>
 #include <QLocalServer>
+#include <QMessageBox>
+#include <iostream>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 #   include "../../libs/vmisc/backport/qcommandlineparser.h"
 #else
 #   include <QCommandLineParser>
 #endif
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    Q_UNUSED(context)
+
+    // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
+    if ((type == QtDebugMsg) && msg.contains("::connect"))
+    {
+        type = QtWarningMsg;
+    }
+
+    // this is another one that doesn't make sense as just a debug message.  pretty serious
+    // sign of a problem
+    // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
+    if ((type == QtDebugMsg) && msg.contains("QPainter::begin") && msg.contains("Paint device returned engine"))
+    {
+        type = QtWarningMsg;
+    }
+
+    // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
+    // is something that can easily happen if you are debugging and the application is paused.
+    // As it is so common, not worth popping up a dialog.
+    if ((type == QtWarningMsg) && QString(msg).contains("QClipboard::event")
+            && QString(msg).contains("Cowardly refusing"))
+    {
+        type = QtDebugMsg;
+    }
+
+    // only the GUI thread should display message boxes.  If you are
+    // writing a multithreaded application and the error happens on
+    // a non-GUI thread, you'll have to queue the message to the GUI
+    QCoreApplication *instance = QCoreApplication::instance();
+    const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
+
+    if (isGuiThread)
+    {
+        //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
+        //lead to crash
+        const bool topWinAllowsPop = (qApp->activeModalWidget() == nullptr) ||
+                !qApp->activeModalWidget()->inherits("QFileDialog");
+        QMessageBox messageBox;
+        switch (type)
+        {
+            case QtDebugMsg:
+                std::cerr << msg.toUtf8().constData() << std::endl;
+                return;
+            case QtWarningMsg:
+                messageBox.setIcon(QMessageBox::Warning);
+                break;
+            case QtCriticalMsg:
+                messageBox.setIcon(QMessageBox::Critical);
+                break;
+            case QtFatalMsg:
+                messageBox.setIcon(QMessageBox::Critical);
+                break;
+            default:
+                break;
+        }
+
+        if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
+        {
+            if (topWinAllowsPop)
+            {
+                messageBox.setInformativeText(msg);
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.setWindowModality(Qt::ApplicationModal);
+                messageBox.setModal(true);
+                messageBox.exec();
+            }
+        }
+
+        if (QtFatalMsg == type)
+        {
+            abort();
+        }
+    }
+    else
+    {
+        if (type != QtDebugMsg)
+        {
+            abort(); // be NOISY unless overridden!
+        }
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::MApplication(int &argc, char **argv)
@@ -138,6 +225,8 @@ QList<TMainWindow *> MApplication::MainWindows()
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::InitOptions()
 {
+    qInstallMessageHandler(noisyFailureMsgHandler);
+
     OpenSettings();
 
     qDebug()<<"Version:"<<APP_VERSION_STR;

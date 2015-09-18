@@ -42,7 +42,8 @@ SOURCES += \
     tst_nameregexp.cpp \
     tst_vlayoutdetail.cpp \
     tst_varc.cpp \
-    stable.cpp
+    stable.cpp \
+    tst_measurementregexp.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -52,7 +53,8 @@ HEADERS += \
     tst_nameregexp.h \
     tst_vlayoutdetail.h \
     tst_varc.h \
-    stable.h
+    stable.h \
+    tst_measurementregexp.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
@@ -115,6 +117,42 @@ CONFIG(debug, debug|release){
     }
 }
 
+#VPatternDB static library (depend on vgeometry, vmisc, VLayout)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb
+
+INCLUDEPATH += $$PWD/../../libs/vpatterndb
+DEPENDPATH += $$PWD/../../libs/vpatterndb
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/vpatterndb.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vpatterndb/$${DESTDIR}/libvpatterndb.a
+
+#VMisc static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vmisc/$${DESTDIR}/ -lvmisc
+
+INCLUDEPATH += $$PWD/../../libs/vmisc
+DEPENDPATH += $$PWD/../../libs/vmisc
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/vmisc.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vmisc/$${DESTDIR}/libvmisc.a
+
+# VGeometry static library (depend on ifc)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR} -lvgeometry
+
+INCLUDEPATH += $$PWD/../../libs/vgeometry
+DEPENDPATH += $$PWD/../../libs/vgeometry
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
+
+# IFC static library (depend on QMuParser)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/ifc/$${DESTDIR}/ -lifc
+
+INCLUDEPATH += $$PWD/../../libs/ifc
+DEPENDPATH += $$PWD/../../libs/ifc
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/ifc.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/ifc/$${DESTDIR}/libifc.a
+
 # VLayout static library
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vlayout/$${DESTDIR} -lvlayout
 
@@ -124,11 +162,10 @@ DEPENDPATH += $$PWD/../../libs/vlayout
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/vlayout.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vlayout/$${DESTDIR}/libvlayout.a
 
-# VGeometry static library
-unix|win32: LIBS += -L$$OUT_PWD/../../libs/vgeometry/$${DESTDIR} -lvgeometry
+# QMuParser library
+win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2
+else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2
+else:unix: LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser
 
-INCLUDEPATH += $$PWD/../../libs/vgeometry
-DEPENDPATH += $$PWD/../../libs/vgeometry
-
-win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
-else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
+INCLUDEPATH += $${PWD}/../../libs/qmuparser
+DEPENDPATH += $${PWD}/../../libs/qmuparser

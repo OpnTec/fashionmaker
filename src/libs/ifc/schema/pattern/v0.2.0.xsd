@@ -74,6 +74,10 @@
                                              </xs:element>
                                        </xs:sequence>
                                  </xs:complexType>
+                                 <xs:unique name="incrementName">
+									<xs:selector xpath="increment"/>
+									<xs:field xpath="@name"/>
+							     </xs:unique>
                            </xs:element>
                            <xs:element name="draw" minOccurs="1" maxOccurs="unbounded">
                                  <xs:complexType>

@@ -31,14 +31,13 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &namePP, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), namePP(namePP), patternPiece(QDomElement()), mPath(QString()),
+    : VUndoCommand(QDomElement(), doc, parent), namePP(namePP), patternPiece(QDomElement()),
       previousPPName(QString())
 {
     setText(tr("delete pattern piece %1").arg(namePP));
 
     QDomElement patternP = doc->GetPPElement(namePP);
     patternPiece = patternP.cloneNode().toElement();
-    mPath = doc->MPath();
     QDomNode previousPP = patternP.previousSibling();//find previous pattern piece
     previousPPName = doc->GetParametrString(previousPP.toElement(), VAbstractPattern::AttrName, "");
 }

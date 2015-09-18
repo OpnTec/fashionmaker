@@ -53,6 +53,8 @@
 
 Q_LOGGING_CATEGORY(vApp, "v.application")
 
+constexpr auto DAYS_TO_KEEP_LOGS = 3;
+
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -170,12 +172,8 @@ const QString VApplication::GistFileName = QStringLiteral("gist.json");
 VApplication::VApplication(int &argc, char **argv)
     : VAbstractApplication(argc, argv),
       trVars(nullptr), autoSaveTimer(nullptr),
-      log(nullptr),
-      #if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-      out(nullptr), logLock(nullptr)
-    #else
+      lockLog(),
       out(nullptr)
-    #endif
 {
     VCommandLine::Reset(); // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Get(*this);
@@ -187,16 +185,6 @@ VApplication::~VApplication()
 {
     qCDebug(vApp, "Application closing.");
     qInstallMessageHandler(0); // Resore the message handler
-    delete out;
-
-    if (log != nullptr)
-    {
-        log->close();
-        delete log;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-        delete logLock;
-#endif
-    }
     delete trVars;
     VCommandLine::Reset();
 }
@@ -418,32 +406,25 @@ void VApplication::CreateLogDir() const
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::BeginLogging()
 {
-    log = new QFile(LogPath());
-    if (log->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
-    {
-        out = new QTextStream(log);
-        qInstallMessageHandler(noisyFailureMsgHandler);
+    VlpCreateLock(lockLog, LogPath()+".lock", [this](){return new QFile(LogPath());});
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-        logLock = new QLockFile(LogPath()+".lock");
-        logLock->setStaleLockTime(0);
-        if (TryLock(logLock))
+    if (lockLog->IsLocked())
+    {
+        if (lockLog->GetProtected()->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
         {
+            out.reset(new QTextStream(lockLog->GetProtected().get()));
+            qInstallMessageHandler(noisyFailureMsgHandler);
             qCDebug(vApp, "Log file %s was locked.", LogPath().toUtf8().constData());
         }
         else
         {
-            qCDebug(vApp, "Failed to lock %s", LogPath().toUtf8().constData());
-            qCDebug(vApp, "Error type: %d", logLock->error());
+            qCDebug(vApp, "Error opening log file \'%s\'. All debug output redirected to console.",
+                    LogPath().toUtf8().constData());
         }
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     }
     else
     {
-        delete log;
-        log = nullptr;
-        qCDebug(vApp, "Error opening log file \'%s\'. All debug output redirected to console.",
-                LogPath().toUtf8().constData());
+        qCDebug(vApp, "Failed to lock %s", LogPath().toUtf8().constData());
     }
 }
 
@@ -459,45 +440,29 @@ void VApplication::ClearOldLogs() const
     if (allFiles.isEmpty() == false)
     {
         qCDebug(vApp, "Clearing old logs");
-        for (int i = 0; i < allFiles.size(); ++i)
+        for (int i = 0, sz = allFiles.size(); i < sz; ++i)
         {
-            QFileInfo info(allFiles.at(i));
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-            QLockFile *lock = new QLockFile(info.absoluteFilePath() + ".lock");
-            if (TryLock(lock))
+            auto fn = allFiles.at(i);
+            QFileInfo info(fn);
+            if (info.created().daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
             {
-                qCDebug(vApp, "Locked file %s", info.absoluteFilePath().toUtf8().constData());
-                QFile oldLog(allFiles.at(i));
-                if (oldLog.remove())
+                VLockGuard<QFile> tmp(info.absoluteFilePath() + ".lock", [&fn](){return new QFile(fn);});
+                if (tmp.GetProtected() != nullptr)
                 {
-                    qCDebug(vApp, "Deleted %s", info.absoluteFilePath().toUtf8().constData());
+                    if (tmp.GetProtected()->remove())
+                    {
+                        qCDebug(vApp, "Deleted %s", info.absoluteFilePath().toUtf8().constData());
+                    }
+                    else
+                    {
+                        qCDebug(vApp, "Could not delete %s", info.absoluteFilePath().toUtf8().constData());
+                    }
                 }
                 else
                 {
-                    qCDebug(vApp, "Could not delete %s", info.absoluteFilePath().toUtf8().constData());
+                    qCDebug(vApp, "Failed to lock %s", info.absoluteFilePath().toUtf8().constData());
                 }
             }
-            else
-            {
-                qCDebug(vApp, "Failed to lock %s", info.absoluteFilePath().toUtf8().constData());
-            }
-
-            delete lock;
-            lock = nullptr;
-#else
-            if (info.created().daysTo(QDateTime::currentDateTime()) >= 3)
-            {
-                QFile oldLog(allFiles.at(i));
-                if (oldLog.remove())
-                {
-                    qCDebug(vApp, "Deleted %s", info.absoluteFilePath().toUtf8().constData());
-                }
-                else
-                {
-                    qCDebug(vApp, "Could not delete %s", info.absoluteFilePath().toUtf8().constData());
-                }
-            }
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
         }
     }
     else
@@ -614,7 +579,7 @@ void VApplication::StartLogging()
 //---------------------------------------------------------------------------------------------------------------------
 QTextStream *VApplication::LogFile()
 {
-    return out;
+    return out.get();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -707,27 +672,28 @@ void VApplication::GatherLogs() const
         const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
         if (allFiles.isEmpty() == false)
         {
-            for (int i = 0; i < allFiles.size(); ++i)
+            for (int i = 0, sz = allFiles.size(); i < sz; ++i)
             {
-                QFileInfo info(allFiles.at(i));
+                auto fn = allFiles.at(i);
+                QFileInfo info(fn);
                 if (info.fileName() == "valentina.log")
                 {
                     continue;
                 }
-                QLockFile *logLock = new QLockFile(info.absoluteFilePath()+".lock");
-                logLock->setStaleLockTime(0);
-                if (TryLock(logLock))
+
+                VLockGuard<QFile> tmp(info.absoluteFilePath() + ".lock", [&fn](){return new QFile(fn);});
+
+                if (tmp.IsLocked())
                 {
                     *out <<"--------------------------" << endl;
-                    QFile logFile(info.absoluteFilePath());
-                    if (logFile.open(QIODevice::ReadOnly | QIODevice::Text))
+                    if (tmp.GetProtected()->open(QIODevice::ReadOnly | QIODevice::Text))
                     {
-                        QTextStream in(&logFile);
+                        QTextStream in(&tmp.GetProtected());
                         while (!in.atEnd())
                         {
                             *out << in.readLine() << endl;
                         }
-                        logFile.close();
+                        tmp.GetProtected()->close();
                     }
                     else
                     {
@@ -736,9 +702,8 @@ void VApplication::GatherLogs() const
                 }
                 else
                 {
-                    *out << "Could not lock" << info.absoluteFilePath() << ".";
+                    qCDebug(vApp, "Failed to lock %s", info.absoluteFilePath().toUtf8().constData());
                 }
-                delete logLock;
             }
         }
         else
@@ -924,7 +889,9 @@ void VApplication::SendReport(const QString &reportName) const
         const QString arg = QString("curl.exe -k -H \"Authorization: bearer ")+token.join("")+
                             QString("\" -H \"Accept: application/json\" -H \"Content-type: application/json\" -X POST "
                                     "--data @gist.json https://api.github.com/gists");
-        QProcess::startDetached(arg);
+        QProcess proc;
+        proc.start(arg);
+        proc.waitForFinished(10000); // 10 sec
         reportFile.remove();// Clear after yourself
     }
     else

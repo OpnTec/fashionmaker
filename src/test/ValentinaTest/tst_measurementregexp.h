@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   qttestmainlambda.cpp
+ **  @file   tst_measurementregexp.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 3, 2015
+ **  @date   16 9, 2015
  **
  **  @brief
  **  @copyright
@@ -26,34 +26,36 @@
  **
  *************************************************************************/
 
-#include <QtTest>
+#ifndef TST_MEASUREMENTREGEXP_H
+#define TST_MEASUREMENTREGEXP_H
 
-#include "tst_vposter.h"
-#include "tst_vabstractdetail.h"
-#include "tst_vspline.h"
-#include "tst_nameregexp.h"
-#include "tst_vlayoutdetail.h"
-#include "tst_varc.h"
-#include "tst_measurementregexp.h"
+#include <QObject>
 
-int main(int argc, char** argv)
+class QTranslator;
+class VTranslateMeasurements;
+
+class TST_MeasurementRegExp : public QObject
 {
-    QApplication app( argc, argv );// For QPrinter
+    Q_OBJECT
+public:
+    explicit TST_MeasurementRegExp(QObject *parent = 0);
+    virtual ~TST_MeasurementRegExp() Q_DECL_OVERRIDE;
 
-    int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
-    {
-        status |= QTest::qExec(obj, argc, argv);
-        delete obj;
-    };
+private slots:
+    void TestOriginalMeasurementNamesRegExp();
+    void TestMeasurementRegExp();
 
-    ASSERT_TEST(new TST_VPoster());
-    ASSERT_TEST(new TST_VAbstractDetail());
-    ASSERT_TEST(new TST_VSpline());
-    ASSERT_TEST(new TST_NameRegExp());
-    ASSERT_TEST(new TST_VLayoutDetail());
-    ASSERT_TEST(new TST_VArc());
-    ASSERT_TEST(new TST_MeasurementRegExp());
+private:
+    Q_DISABLE_COPY(TST_MeasurementRegExp)
 
-    return status;
-}
+    QPointer<QTranslator>   pmsTranslator;
+    VTranslateMeasurements *trMs;
+
+    QString TranslationsPath() const;
+    int     LoadTranslation(const QString &checkedSystem, const QString &checkedLocale);
+    void    InitTrMs();
+    void    CheckNames() const;
+    QStringList OriginalNames() const;
+};
+
+#endif // TST_MEASUREMENTREGEXP_H

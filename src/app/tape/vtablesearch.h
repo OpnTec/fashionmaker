@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   qttestmainlambda.cpp
+ **  @file   vtablesearch.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 3, 2015
+ **  @date   15 9, 2015
  **
  **  @brief
  **  @copyright
@@ -26,34 +26,33 @@
  **
  *************************************************************************/
 
-#include <QtTest>
+#ifndef VTABLESEARCH_H
+#define VTABLESEARCH_H
 
-#include "tst_vposter.h"
-#include "tst_vabstractdetail.h"
-#include "tst_vspline.h"
-#include "tst_nameregexp.h"
-#include "tst_vlayoutdetail.h"
-#include "tst_varc.h"
-#include "tst_measurementregexp.h"
+#include <QList>
+#include <QTableWidget>
 
-int main(int argc, char** argv)
+class VTableSearch
 {
-    QApplication app( argc, argv );// For QPrinter
+public:
+    VTableSearch(QTableWidget *table);
 
-    int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
-    {
-        status |= QTest::qExec(obj, argc, argv);
-        delete obj;
-    };
+    void Find(const QString &term);
+    void FindPrevious();
+    void FindNext();
+    void RemoveRow(int row);
+    void AddRow(int row);
+    void RefreshList(const QString &term);
 
-    ASSERT_TEST(new TST_VPoster());
-    ASSERT_TEST(new TST_VAbstractDetail());
-    ASSERT_TEST(new TST_VSpline());
-    ASSERT_TEST(new TST_NameRegExp());
-    ASSERT_TEST(new TST_VLayoutDetail());
-    ASSERT_TEST(new TST_VArc());
-    ASSERT_TEST(new TST_MeasurementRegExp());
+private:
+    Q_DISABLE_COPY(VTableSearch)
 
-    return status;
-}
+    QTableWidget *table;
+    int           searchIndex;
+    QList<QTableWidgetItem *> searchList;
+
+    void Clear();
+    void ShowNext(int newIndex);
+};
+
+#endif // VTABLESEARCH_H

@@ -33,7 +33,9 @@
 #include <QTableWidget>
 
 #include "../vmisc/def.h"
+#include "../vmisc/vlockguard.h"
 #include "../vformat/vmeasurements.h"
+#include "vtablesearch.h"
 
 namespace Ui
 {
@@ -43,9 +45,6 @@ namespace Ui
 class QComboBox;
 class QTableWidgetItem;
 class QLabel;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-class QLockFile;
-#endif
 
 class TMainWindow : public QMainWindow
 {
@@ -115,10 +114,11 @@ private slots:
     void SaveMFullName();
 
     void NewWindow();
-
     void Preferences();
-
     void PatternUnitChanged(int index);
+    void Find(const QString &term);
+    void FindPrevious();
+    void FindNext();
 
 private:
     Q_DISABLE_COPY(TMainWindow)
@@ -133,10 +133,8 @@ private:
     QComboBox       *gradationSizes;
     QComboBox       *comboBoxUnits;
     int              formulaBaseHeight;
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    QLockFile          *lock;
-#endif
+    VLockGuardPtr<char> lock;
+    QSharedPointer<VTableSearch> search;
 
     void SetupMenu();
     void InitWindow();

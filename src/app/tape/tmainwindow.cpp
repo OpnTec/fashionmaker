@@ -37,6 +37,7 @@
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../vmisc/vlockguard.h"
 #include "vlitepattern.h"
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -48,9 +49,6 @@
 #include <QMessageBox>
 #include <QComboBox>
 #include <QProcess>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-#   include <QLockFile>
-#endif
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
@@ -70,9 +68,11 @@ TMainWindow::TMainWindow(QWidget *parent)
       gradationSizes(nullptr),
       comboBoxUnits(nullptr),
       formulaBaseHeight(0),
-      lock(nullptr)
+      lock(nullptr),
+      search()
 {
     ui->setupUi(this);
+    search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
     ui->tabWidget->setVisible(false);
 
     ui->mainToolBar->setContextMenuPolicy(Qt::PreventContextMenu);
@@ -97,10 +97,6 @@ TMainWindow::~TMainWindow()
     {
         delete m;
     }
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    delete lock; // Unlock pattern file
-#endif
 
     delete ui;
 }
@@ -182,18 +178,14 @@ void TMainWindow::LoadFile(const QString &path)
             }
         }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-        lock = new QLockFile(QFileInfo(path).fileName()+".lock");
-        lock->setStaleLockTime(0);
-        if (not MApplication::TryLock(lock))
+        VlpCreateLock(lock, QFileInfo(path).fileName()+".lock");
+
+        if (lock->GetLockError() == QLockFile::LockFailedError)
         {
-            if (lock->error() == QLockFile::LockFailedError)
-            {
-                qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
-                return;
-            }
+            qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
+            lock.reset();
+            return;
         }
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
         try
         {
@@ -257,6 +249,7 @@ void TMainWindow::LoadFile(const QString &path)
             m = nullptr;
             delete data;
             data = nullptr;
+            lock.reset();
             return;
         }
     }
@@ -362,6 +355,24 @@ void TMainWindow::OpenTemplate()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::Find(const QString &term)
+{
+    search->Find(term);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::FindPrevious()
+{
+    search->FindPrevious();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::FindNext()
+{
+    search->FindNext();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::closeEvent(QCloseEvent *event)
 {
     if (MaybeSave())
@@ -462,6 +473,22 @@ void TMainWindow::FileSaveAs()
     {
         fileName += "." + suffix;
     }
+
+    if (QFileInfo(fileName).exists())
+    {
+        VLockGuard<char> tmp(fileName + ".lock");
+
+        if (not tmp.IsLocked())
+        {
+            if (lock->GetLockError() == QLockFile::LockFailedError)
+            {
+                qCCritical(tMainWindow, "%s", tr("Failed to lock. This file already opened in another window.")
+                           .toUtf8().constData());
+                return;
+            }
+        }
+    }
+
     QString error;
     bool result = SaveMeasurements(fileName, error);
     if (result == false)
@@ -473,6 +500,20 @@ void TMainWindow::FileSaveAs()
         messageBox.setDetailedText(error);
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
+
+        return;
+    }
+
+    lock.reset();
+
+    VlpCreateLock(lock, fileName + ".lock");
+
+    if (lock->GetLockError() == QLockFile::LockFailedError)
+    {
+        qCCritical(tMainWindow, "%s", tr("Failed to lock. This file already opened in another window. "
+                                         "Expect collissions when run 2 copies of the program.").toUtf8().constData());
+        lock.reset();
+        return;
     }
 }
 
@@ -613,7 +654,9 @@ void TMainWindow::Remove()
 
     MeasurementsWasSaved(false);
 
+    search->RemoveRow(row);
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     if (ui->tableWidget->rowCount() > 0)
     {
@@ -679,6 +722,7 @@ void TMainWindow::MoveUp()
     m->MoveUp(nameField->text());
     MeasurementsWasSaved(false);
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row-1);
 }
 
@@ -696,6 +740,7 @@ void TMainWindow::MoveDown()
     m->MoveDown(nameField->text());
     MeasurementsWasSaved(false);
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row+1);
 }
 
@@ -730,6 +775,8 @@ void TMainWindow::Fx()
 
         RefreshData();
 
+        search->RefreshList(ui->lineEditFind->text());
+
         ui->tableWidget->selectRow(row);
     }
     delete dialog;
@@ -760,7 +807,9 @@ void TMainWindow::AddCustom()
         m->AddEmptyAfter(nameField->text(), name);
     }
 
+    search->AddRow(currentRow);
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(currentRow);
 
@@ -789,6 +838,8 @@ void TMainWindow::AddKnown()
                 {
                     m->AddEmpty(list.at(i));
                 }
+
+                search->AddRow(currentRow);
             }
         }
         else
@@ -806,11 +857,13 @@ void TMainWindow::AddKnown()
                 {
                     m->AddEmptyAfter(after, list.at(i));
                 }
+                search->AddRow(currentRow);
                 after = list.at(i);
             }
         }
 
         RefreshData();
+        search->RefreshList(ui->lineEditFind->text());
 
         ui->tableWidget->selectRow(currentRow);
 
@@ -839,18 +892,13 @@ void TMainWindow::ImportFromPattern()
         return;
     }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
-    QLockFile *lock = new QLockFile(QFileInfo(mPath).fileName()+".lock");
-    lock->setStaleLockTime(0);
-    if (not MApplication::TryLock(lock))
+    VLockGuard<char> tmp(QFileInfo(mPath).fileName()+".lock");
+
+    if (tmp.GetLockError() == QLockFile::LockFailedError)
     {
-        if (lock->error() == QLockFile::LockFailedError)
-        {
-            qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
-            return;
-        }
+        qCCritical(tMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
+        return;
     }
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 
 #ifdef Q_OS_WIN32
     qt_ntfs_permission_lookup++; // turn checking on
@@ -878,8 +926,6 @@ void TMainWindow::ImportFromPattern()
     qt_ntfs_permission_lookup--; // turn it off again
 #endif /*Q_OS_WIN32*/
 
-    delete lock; // release a pattern file
-
     measurements = FilterMeasurements(measurements, m->ListAll());
 
     qint32 currentRow;
@@ -906,6 +952,8 @@ void TMainWindow::ImportFromPattern()
 
     RefreshData();
 
+    search->RefreshList(ui->lineEditFind->text());
+
     ui->tableWidget->selectRow(currentRow);
 
     MeasurementsWasSaved(false);
@@ -917,6 +965,7 @@ void TMainWindow::ChangedSize(const QString &text)
     const int row = ui->tableWidget->currentRow();
     data->SetSize(text.toInt());
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
 }
 
@@ -926,6 +975,7 @@ void TMainWindow::ChangedHeight(const QString &text)
     const int row = ui->tableWidget->currentRow();
     data->SetHeight(text.toInt());
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row);
 }
 
@@ -1070,6 +1120,7 @@ void TMainWindow::SaveMName()
         m->SetMName(nameField->text(), newName);
         MeasurementsWasSaved(false);
         RefreshData();
+        search->RefreshList(ui->lineEditFind->text());
 
         ui->tableWidget->blockSignals(true);
         ui->tableWidget->selectRow(row);
@@ -1139,6 +1190,7 @@ void TMainWindow::SaveMValue()
     const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
 
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -1163,6 +1215,7 @@ void TMainWindow::SaveMBaseValue(double value)
     MeasurementsWasSaved(false);
 
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -1185,6 +1238,7 @@ void TMainWindow::SaveMSizeIncrease(double value)
     MeasurementsWasSaved(false);
 
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -1207,6 +1261,7 @@ void TMainWindow::SaveMHeightIncrease(double value)
     MeasurementsWasSaved(false);
 
     RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(row);
 }
@@ -1464,6 +1519,10 @@ void TMainWindow::InitWindow()
         connect(ui->toolButtonExpr, &QToolButton::clicked, this, &TMainWindow::Fx);
     }
 
+    connect(ui->lineEditFind, &QLineEdit::textEdited, this, &TMainWindow::Find);
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, &TMainWindow::FindPrevious);
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, &TMainWindow::FindNext);
+
     ui->plainTextEditNotes->setPlainText(m->Notes());
     connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);
 
@@ -1678,6 +1737,7 @@ void TMainWindow::SetDefaultSize(int value)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshData()
 {
+    data->ClearUniqueNames();
     data->ClearVariables(VarType::Measurement);
     m->ReadMeasurements();
 
@@ -1817,6 +1877,10 @@ void TMainWindow::MFields(bool enabled)
         ui->pushButtonGrow->setEnabled(enabled);
         ui->toolButtonExpr->setEnabled(enabled);
     }
+
+    ui->lineEditFind->setEnabled(enabled);
+    ui->toolButtonFindPrevious->setEnabled(enabled);
+    ui->toolButtonFindNext->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2002,6 +2066,8 @@ void TMainWindow::UpdatePatternUnit()
 
     ShowUnits();
     RefreshTable();
+
+    search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(row);
 }
