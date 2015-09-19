@@ -697,7 +697,7 @@ void VApplication::GatherLogs() const
                     }
                     else
                     {
-                        *out << "Log file error:" + log->errorString() << endl;
+                        *out << "Log file error:" + tmp.GetProtected()->errorString() << endl;
                     }
                 }
                 else
