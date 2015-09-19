@@ -88,7 +88,7 @@ void TapeConfigurationPage::Apply()
         qApp->TapeSettings()->SetPMSystemCode(code);
         systemChanged = false;
 
-        qApp->LoadTranslation();
+        qApp->LoadTranslation(locale);
 
         // Part about measurments will not be updated automatically
         qApp->RetranslateTables();

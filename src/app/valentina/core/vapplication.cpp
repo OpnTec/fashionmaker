@@ -499,30 +499,7 @@ void VApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
-    const QString checkedLocale = ValentinaSettings()->GetLocale();
-    qDebug()<<"Checked locale:"<<checkedLocale;
-
-    QTranslator *qtTranslator = new QTranslator(this);
-#if defined(Q_OS_WIN)
-    qtTranslator->load("qt_" + checkedLocale, translationsPath());
-#else
-    qtTranslator->load("qt_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
-    installTranslator(qtTranslator);
-
-    QTranslator *qtxmlTranslator = new QTranslator(this);
-#if defined(Q_OS_WIN)
-    qtxmlTranslator->load("qtxmlpatterns_" + checkedLocale, translationsPath());
-#else
-    qtxmlTranslator->load("qtxmlpatterns_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
-    installTranslator(qtxmlTranslator);
-
-    QTranslator *appTranslator = new QTranslator(this);
-    appTranslator->load("valentina_" + checkedLocale, translationsPath());
-    installTranslator(appTranslator);
-
-    InitTrVars();//Very important do it after load QM files.
+    InitTranslation();
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
@@ -532,6 +509,19 @@ void VApplication::InitOptions()
         //This case happens under Windows and Mac OS X
         //This does not happen under GNOME or KDE
         QIcon::setThemeName("win.icon.theme");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::InitTranslation()
+{
+    if (VApplication::CheckGUI())
+    {
+        LoadTranslation(ValentinaSettings()->GetLocale());
+    }
+    else
+    {
+        LoadTranslation(CommandLine()->OptLocale());
     }
 }
 

@@ -60,8 +60,9 @@ public:
     virtual bool       notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
 
     void               InitOptions();
+    void               InitTranslation();
 
-    QString            translationsPath() const;
+    virtual QString    translationsPath() const Q_DECL_OVERRIDE;
     QString            TapeFilePath() const;
 
     QTimer             *getAutoSaveTimer() const;
@@ -73,7 +74,6 @@ public:
     QTextStream       *LogFile();
 
     virtual const VTranslateVars *TrVars();
-    void               InitTrVars();
 
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     static void        DrMingw();
@@ -83,6 +83,9 @@ public:
 
     virtual void OpenSettings() Q_DECL_OVERRIDE;
     VSettings *ValentinaSettings();
+
+protected:
+    virtual void       InitTrVars() Q_DECL_OVERRIDE;
 
 private slots:
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)

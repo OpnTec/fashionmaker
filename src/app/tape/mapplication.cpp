@@ -32,7 +32,6 @@
 
 #include <QDir>
 #include <QFileOpenEvent>
-#include <QLibraryInfo>
 #include <QLocalSocket>
 #include <QResource>
 #include <QTranslator>
@@ -138,11 +137,7 @@ MApplication::MApplication(int &argc, char **argv)
       mainWindows(),
       localServer(nullptr),
       trVars(nullptr),
-      dataBase(QPointer<DialogMDataBase>()),
-      qtTranslator(nullptr),
-      qtxmlTranslator(nullptr),
-      appTranslator(nullptr),
-      pmsTranslator(nullptr)
+      dataBase(QPointer<DialogMDataBase>())
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
     setApplicationName(VER_INTERNALNAME_STR);
@@ -236,7 +231,7 @@ void MApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
-    LoadTranslation();
+    LoadTranslation(TapeSettings()->GetLocale());
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
@@ -249,43 +244,6 @@ void MApplication::InitOptions()
     }
 
     QResource::registerResource(diagramsPath());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::LoadTranslation()
-{
-    const QString checkedLocale = TapeSettings()->GetLocale();
-    qDebug()<<"Checked locale:"<<checkedLocale;
-
-    ClearTranslation();
-
-    qtTranslator = new QTranslator(this);
-#if defined(Q_OS_WIN)
-    qtTranslator->load("qt_" + checkedLocale, translationsPath());
-#else
-    qtTranslator->load("qt_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
-    installTranslator(qtTranslator);
-
-    qtxmlTranslator = new QTranslator(this);
-#if defined(Q_OS_WIN)
-    qtxmlTranslator->load("qtxmlpatterns_" + checkedLocale, translationsPath());
-#else
-    qtxmlTranslator->load("qtxmlpatterns_" + checkedLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
-    installTranslator(qtxmlTranslator);
-
-    appTranslator = new QTranslator(this);
-    bool result = appTranslator->load("valentina_" + checkedLocale, translationsPath());
-    installTranslator(appTranslator);
-
-    const QString checkedSystem = TapeSettings()->GetPMSystemCode();
-
-    pmsTranslator = new QTranslator(this);
-    result = pmsTranslator->load("measurements_" + checkedSystem + "_" + checkedLocale, translationsPath());
-    installTranslator(pmsTranslator);
-
-    InitTrVars();//Very important do it after load QM files.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -643,37 +601,5 @@ void MApplication::Clean()
         {
             mainWindows.removeAt(i);
         }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::ClearTranslation()
-{
-    if (qtTranslator != nullptr)
-    {
-        removeTranslator(qtTranslator);
-        delete qtTranslator;
-        qtTranslator = nullptr;
-    }
-
-    if (qtxmlTranslator != nullptr)
-    {
-        removeTranslator(qtxmlTranslator);
-        delete qtxmlTranslator;
-        qtxmlTranslator = nullptr;
-    }
-
-    if (appTranslator != nullptr)
-    {
-        removeTranslator(appTranslator);
-        delete appTranslator;
-        appTranslator = nullptr;
-    }
-
-    if (pmsTranslator != nullptr)
-    {
-        removeTranslator(pmsTranslator);
-        delete pmsTranslator;
-        pmsTranslator = nullptr;
     }
 }

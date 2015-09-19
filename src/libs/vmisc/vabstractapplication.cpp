@@ -29,12 +29,18 @@
 #include "vabstractapplication.h"
 #include "../vmisc/def.h"
 
+#include <QLibraryInfo>
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     :QApplication(argc, argv),
       undoStack(nullptr),
       mainWindow(nullptr),
       settings(nullptr),
+      qtTranslator(nullptr),
+      qtxmlTranslator(nullptr),
+      appTranslator(nullptr),
+      pmsTranslator(nullptr),
       _patternUnit(Unit::Cm),
       _patternType(MeasurementsType::Individual),
       currentScene(nullptr),
@@ -111,4 +117,73 @@ double VAbstractApplication::toPixel(double val) const
 double VAbstractApplication::fromPixel(double pix) const
 {
     return FromPixel(pix, _patternUnit);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::LoadTranslation(const QString &locale)
+{
+    if (locale.isEmpty())
+    {
+        qDebug()<<"Locale is empty.";
+        return;
+    }
+    qDebug()<<"Checked locale:"<<locale;
+
+    ClearTranslation();
+
+    qtTranslator = new QTranslator(this);
+#if defined(Q_OS_WIN)
+    qtTranslator->load("qt_" + locale, translationsPath());
+#else
+    qtTranslator->load("qt_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
+    installTranslator(qtTranslator);
+
+    qtxmlTranslator = new QTranslator(this);
+#if defined(Q_OS_WIN)
+    qtxmlTranslator->load("qtxmlpatterns_" + locale, translationsPath());
+#else
+    qtxmlTranslator->load("qtxmlpatterns_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
+    installTranslator(qtxmlTranslator);
+
+    appTranslator = new QTranslator(this);
+    appTranslator->load("valentina_" + locale, translationsPath());
+    installTranslator(appTranslator);
+
+    const QString system = Settings()->GetPMSystemCode();
+
+    pmsTranslator = new QTranslator(this);
+    pmsTranslator->load("measurements_" + system + "_" + locale, translationsPath());
+    installTranslator(pmsTranslator);
+
+    InitTrVars();//Very important do it after load QM files.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::ClearTranslation()
+{
+    if (not qtTranslator.isNull())
+    {
+        removeTranslator(qtTranslator);
+        delete qtTranslator;
+    }
+
+    if (not qtxmlTranslator.isNull())
+    {
+        removeTranslator(qtxmlTranslator);
+        delete qtxmlTranslator;
+    }
+
+    if (not appTranslator.isNull())
+    {
+        removeTranslator(appTranslator);
+        delete appTranslator;
+    }
+
+    if (not pmsTranslator.isNull())
+    {
+        removeTranslator(pmsTranslator);
+        delete pmsTranslator;
+    }
 }

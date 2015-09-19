@@ -69,8 +69,7 @@ void TST_MeasurementRegExp::TestOriginalMeasurementNamesRegExp()
 void TST_MeasurementRegExp::TestMeasurementRegExp()
 {
     const int systemCounts = 55;
-    const QStringList locales {"ru_RU", "uk_UA", "de_DE", "cs_CZ", "he_IL", "fr_FR", "it_IT", "nl_NL", "id_ID",
-                               "es_ES", "fi_FI", "en_US"};
+    const QStringList locales = SupportedLocales();
 
     {
         const int combinations = systemCounts * locales.size(); // 55*12=660

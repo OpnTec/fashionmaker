@@ -912,3 +912,22 @@ QStringList ListGroupQ()
 
     return list;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList SupportedLocales()
+{
+    const QStringList locales = {QStringLiteral("ru_RU"),
+                                 QStringLiteral("uk_UA"),
+                                 QStringLiteral("de_DE"),
+                                 QStringLiteral("cs_CZ"),
+                                 QStringLiteral("he_IL"),
+                                 QStringLiteral("fr_FR"),
+                                 QStringLiteral("it_IT"),
+                                 QStringLiteral("nl_NL"),
+                                 QStringLiteral("id_ID"),
+                                 QStringLiteral("es_ES"),
+                                 QStringLiteral("fi_FI"),
+                                 QStringLiteral("en_US")};
+
+    return locales;
+}

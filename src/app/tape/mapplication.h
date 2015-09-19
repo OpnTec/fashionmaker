@@ -61,15 +61,13 @@ public:
 #endif
 
     void InitOptions();
-    void LoadTranslation();
 
-    virtual const VTranslateVars *TrVars();
-    void InitTrVars();
+    virtual const VTranslateVars *TrVars() Q_DECL_OVERRIDE;
 
     virtual void  OpenSettings() Q_DECL_OVERRIDE;
     VTapeSettings *TapeSettings();
 
-    QString translationsPath() const;
+    virtual QString translationsPath() const Q_DECL_OVERRIDE;
     QString diagramsPath() const;
 
     void ShowDataBase();
@@ -81,6 +79,9 @@ public:
 public slots:
     TMainWindow *NewMainWindow();
 
+protected:
+    virtual void InitTrVars() Q_DECL_OVERRIDE;
+
 private slots:
     void OpenFile(const QString &path);
     void NewLocalSocketConnection();
@@ -91,13 +92,8 @@ private:
     QLocalServer *localServer;
     VTranslateVars *trVars;
     QPointer<DialogMDataBase> dataBase;
-    QTranslator *qtTranslator;
-    QTranslator *qtxmlTranslator;
-    QTranslator *appTranslator;
-    QTranslator *pmsTranslator;
 
     void Clean();
-    void ClearTranslation();
 };
 
 #endif // MAPPLICATION_H

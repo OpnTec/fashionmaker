@@ -3,8 +3,6 @@
 #include "dialogs/dialogsavelayout.h"
 #include "xml/vdomdocument.h"
 
-
-
 VCommandLinePtr VCommandLine::instance = nullptr;
 
 const static auto LONG_OPTION_OUTFILE        = QStringLiteral("outfile");
@@ -52,6 +50,9 @@ const static auto SINGLE_OPTION_GAPWIDTH     = QStringLiteral("G");
 const static auto LONG_OPTION_GROUPPING      = QStringLiteral("groups");
 const static auto SINGLE_OPTION_GROUPPING    = QStringLiteral("g");
 
+const static auto SINGLE_OPTION_LOCALE       = QStringLiteral("L");
+const static auto LONG_OPTION_LOCALE         = QStringLiteral("locale");
+
 #define tr(A) QCoreApplication::translate("VCommandLine", (A))
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -64,71 +65,89 @@ VCommandLine::VCommandLine() : parser()
                  //keep in mind order here - that is how user will see it, so group-up for usability
                  //===================================================================================
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_OUTFILE << LONG_OPTION_OUTFILE,
+                 {LONG_OPTION_OUTFILE,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_OUTFILE << LONG_OPTION_OUTFILE,
                                     tr("Path to output exported layout file. Use it to enable console export mode."),
-                                    tr("The exported layout file")),
+                                    tr("The exported layout file"))},
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_MEASUREFILE << LONG_OPTION_MEASUREFILE,
+                 {LONG_OPTION_MEASUREFILE,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_MEASUREFILE << LONG_OPTION_MEASUREFILE,
                                     tr("Path to custom measure file (export mode)."),
-                                    tr("The measure file")),
+                                    tr("The measure file"))},
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_EXP2FORMAT << LONG_OPTION_EXP2FORMAT,
+                 {LONG_OPTION_EXP2FORMAT,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_EXP2FORMAT << LONG_OPTION_EXP2FORMAT,
                                     tr("Number corresponding to output format (default = 0, export mode): ") +
-                                    DialogSaveLayout::MakeHelpFormatList(), tr("Format number"), "0"),
+                                    DialogSaveLayout::MakeHelpFormatList(), tr("Format number"), "0")},
 
                  //===================================================================================
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_PAGETEMPLATE << LONG_OPTION_PAGETEMPLATE,
+                 {LONG_OPTION_PAGETEMPLATE,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGETEMPLATE << LONG_OPTION_PAGETEMPLATE,
                                     tr("Number corresponding to page template (default = 0, export mode): ")+
-                                    DialogLayoutSettings::MakeHelpTemplateList(), tr("Template number"), "0"),
+                                    DialogLayoutSettings::MakeHelpTemplateList(), tr("Template number"), "0")},
 
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEW << LONG_OPTION_PAGEW,
+                 {LONG_OPTION_PAGEW,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEW << LONG_OPTION_PAGEW,
                                     tr("Page width in current units like 12.0 (cannot be used with \"")
-                                    +LONG_OPTION_PAGETEMPLATE+tr("\", export mode)."), tr("The page width")),
+                                    +LONG_OPTION_PAGETEMPLATE+tr("\", export mode)."), tr("The page width"))},
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEH << LONG_OPTION_PAGEH,
+                 {LONG_OPTION_PAGEH,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEH << LONG_OPTION_PAGEH,
                                     tr("Page height in current units like 12.0 (cannot be used with \"")
-                                    +LONG_OPTION_PAGETEMPLATE+tr("\", export mode)."), ("The page height")),
+                                    +LONG_OPTION_PAGETEMPLATE+tr("\", export mode)."), ("The page height"))},
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEUNITS << LONG_OPTION_PAGEUNITS,
+                 {LONG_OPTION_PAGEUNITS,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEUNITS << LONG_OPTION_PAGEUNITS,
                                     tr("Page height/width measure units (cannot be used with \"")+
                                     LONG_OPTION_PAGETEMPLATE+tr("\", export mode): ") + VDomDocument::UnitsHelpString(),
-                                    tr("The measure unit")),
+                                    tr("The measure unit"))},
 
                  //===================================================================================
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_ROTATE << LONG_OPTION_ROTATE,
+                 {LONG_OPTION_ROTATE,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_ROTATE << LONG_OPTION_ROTATE,
                                     tr("Rotation in degrees (one of predefined). Default (or 0) is no-rotate "
-                                       "(export mode)."),
-                                    tr("Angle")),
+                                       "(export mode)."), tr("Angle"))},
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_CROP << LONG_OPTION_CROP,
-                                    tr("Auto crop unused length (export mode).")),
+                 {LONG_OPTION_CROP,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_CROP << LONG_OPTION_CROP,
+                                    tr("Auto crop unused length (export mode)."))},
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_UNITE << LONG_OPTION_UNITE,
-                                    tr("Unite pages if possible (export mode).")),
+                 {LONG_OPTION_UNITE,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_UNITE << LONG_OPTION_UNITE,
+                                    tr("Unite pages if possible (export mode)."))},
 
                  //===================================================================================
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_SAVELENGTH << LONG_OPTION_SAVELENGTH,
-                                    tr("Save length of the sheet if set. (export mode).")),
+                 {LONG_OPTION_SAVELENGTH,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_SAVELENGTH << LONG_OPTION_SAVELENGTH,
+                                    tr("Save length of the sheet if set. (export mode)."))},
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTUNITS << LONG_OPTION_SHIFTUNITS,
-                                    tr("Layout units (as paper's one except px, export mode)."),
-                                    tr("The unit")),
+                 {LONG_OPTION_SHIFTUNITS,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTUNITS << LONG_OPTION_SHIFTUNITS,
+                                    tr("Layout units (as paper's one except px, export mode)."), tr("The unit"))},
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTLENGTH << LONG_OPTION_SHIFTLENGTH,
+                 {LONG_OPTION_SHIFTLENGTH,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTLENGTH << LONG_OPTION_SHIFTLENGTH,
                                     tr("Shift layout length measured in layout units (export mode)."),
-                                    tr("Shift length")),
+                                    tr("Shift length"))},
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_GAPWIDTH << LONG_OPTION_GAPWIDTH,
+                 {LONG_OPTION_GAPWIDTH,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_GAPWIDTH << LONG_OPTION_GAPWIDTH,
                                     tr("Gap width x2, measured in layout units. (export mode)."),
-                                    tr("The gap width")),
+                                    tr("The gap width"))},
 
-                 QCommandLineOption(QStringList() << SINGLE_OPTION_GROUPPING << LONG_OPTION_GROUPPING,
+                 {LONG_OPTION_GROUPPING,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_GROUPPING << LONG_OPTION_GROUPPING,
                                     tr("Sets layout groupping (export mode): ")
-                                    + DialogLayoutSettings::MakeGroupsHelp(), tr("Grouping type"), "2"),
+                                    + DialogLayoutSettings::MakeGroupsHelp(), tr("Grouping type"), "2")},
+
+                 {LONG_OPTION_LOCALE,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_LOCALE << LONG_OPTION_LOCALE,
+                                    tr("Sets language locale (export mode). Default is system locale. Supported "
+                                       "locales: ") + SupportedLocales().join(", "), tr("Locale"))}
                  }),
     isGuiEnabled(false)
 {
@@ -137,16 +156,19 @@ VCommandLine::VCommandLine() : parser()
     parser.addVersionOption();
     parser.addPositionalArgument("filename", QCoreApplication::translate("main", "Pattern file."));
 
-    foreach(const auto& o, optionsUsed)
+    QMap<QString, QCommandLineOption *>::const_iterator i = optionsUsed.constBegin();
+    while (i != optionsUsed.constEnd())
     {
-        parser.addOption(o);
+        parser.addOption(*i.value());
+        ++i;
     }
 }
 
 //------------------------------------------------------------------------------------------------------
 int VCommandLine::Lo2Px(const QString &src, const DialogLayoutSettings &converter)
 {
-    //that is dirty-dirty hack ...eventually number is converted float <--> int 3 or 4 times including inside dialog ... that will loose precision for sure
+    //that is dirty-dirty hack ...eventually number is converted float <--> int 3 or 4 times including inside dialog ...
+    // that will loose precision for sure
     return converter.LayoutToPixels(src.toFloat());
 }
 
@@ -166,11 +188,11 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
     {
         //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-        bool x = parser.isSet(LONG_OPTION_PAGETEMPLATE);
+        bool x = parser.isSet(*optionsUsed.value(LONG_OPTION_PAGETEMPLATE));
 
-        bool a = parser.isSet(LONG_OPTION_PAGEH);
-        bool b = parser.isSet(LONG_OPTION_PAGEW);
-        bool c = parser.isSet(LONG_OPTION_PAGEUNITS);
+        bool a = parser.isSet(*optionsUsed.value(LONG_OPTION_PAGEH));
+        bool b = parser.isSet(*optionsUsed.value(LONG_OPTION_PAGEW));
+        bool c = parser.isSet(*optionsUsed.value(LONG_OPTION_PAGEUNITS));
 
         if ((a || b || c) && x)
         {
@@ -188,8 +210,8 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
 //    {
 //        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-//        bool a = parser.isSet(OPTION_SHIFTLENGTH);
-//        bool b = parser.isSet(OPTION_SHIFTUNITS);
+//        bool a = parser.isSet(optionsUsed.value(LONG_OPTION_SHIFTLENGTH));
+//        bool b = parser.isSet(optionsUsed.value(LONG_OPTION_SHIFTUNITS));
 
 //        if ((a || b) && !(a && b))
 //        {
@@ -214,40 +236,40 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         Error(tr("Unknown page templated selected."));
     }
 
-    if (parser.isSet(LONG_OPTION_PAGEH)) //at this point we already sure 3 are set or none
+    if (parser.isSet(*optionsUsed.value(LONG_OPTION_PAGEH))) //at this point we already sure 3 are set or none
     {
 
-        if (!diag.SelectPaperUnit(parser.value(LONG_OPTION_PAGEUNITS)))
+        if (!diag.SelectPaperUnit(parser.value(*optionsUsed.value(LONG_OPTION_PAGEUNITS))))
         {
             Error(tr("Unsupported paper units."));
         }
 
-        diag.SetPaperHeight (Pg2Px(parser.value(LONG_OPTION_PAGEH), diag));
-        diag.SetPaperWidth  (Pg2Px(parser.value(LONG_OPTION_PAGEW), diag));
+        diag.SetPaperHeight (Pg2Px(parser.value(*optionsUsed.value(LONG_OPTION_PAGEH)), diag));
+        diag.SetPaperWidth  (Pg2Px(parser.value(*optionsUsed.value(LONG_OPTION_PAGEW)), diag));
     }
 
-    if (parser.isSet(LONG_OPTION_SHIFTUNITS))
+    if (parser.isSet(*optionsUsed.value(LONG_OPTION_SHIFTUNITS)))
     {
-        if (!diag.SelectLayoutUnit(parser.value(LONG_OPTION_SHIFTUNITS)))
+        if (!diag.SelectLayoutUnit(parser.value(*optionsUsed.value(LONG_OPTION_SHIFTUNITS))))
         {
             Error(tr("Unsupported layout units."));
         }
     }
 
-    if (parser.isSet(LONG_OPTION_SHIFTLENGTH))
+    if (parser.isSet(*optionsUsed.value(LONG_OPTION_SHIFTLENGTH)))
     {
 
-        diag.SetShift(Lo2Px(parser.value(LONG_OPTION_SHIFTLENGTH), diag));
+        diag.SetShift(Lo2Px(parser.value(*optionsUsed.value(LONG_OPTION_SHIFTLENGTH)), diag));
     }
 
-    if (parser.isSet(LONG_OPTION_GAPWIDTH))
+    if (parser.isSet(*optionsUsed.value(LONG_OPTION_GAPWIDTH)))
     {
-        diag.SetLayoutWidth(Lo2Px(parser.value(LONG_OPTION_GAPWIDTH), diag));
+        diag.SetLayoutWidth(Lo2Px(parser.value(*optionsUsed.value(LONG_OPTION_GAPWIDTH)), diag));
     }
 
-    diag.SetAutoCrop(parser.isSet(LONG_OPTION_CROP));
-    diag.SetUnitePages(parser.isSet(LONG_OPTION_UNITE));
-    diag.SetSaveLength(parser.isSet(LONG_OPTION_SAVELENGTH));
+    diag.SetAutoCrop(parser.isSet(*optionsUsed.value(LONG_OPTION_CROP)));
+    diag.SetUnitePages(parser.isSet(*optionsUsed.value(LONG_OPTION_UNITE)));
+    diag.SetSaveLength(parser.isSet(*optionsUsed.value(LONG_OPTION_SAVELENGTH)));
     diag.SetGroup(OptGroup());
 
 
@@ -288,7 +310,7 @@ void VCommandLine::Reset()
 //------------------------------------------------------------------------------------------------------
 bool VCommandLine::IsExportEnabled() const
 {
-    bool r = parser.isSet(LONG_OPTION_OUTFILE);
+    bool r = parser.isSet(*optionsUsed.value(LONG_OPTION_OUTFILE));
     if (r && parser.positionalArguments().size() != 1)
     {
         Error(tr("Export options can be used with single input file only."));
@@ -300,9 +322,9 @@ bool VCommandLine::IsExportEnabled() const
 DialogLayoutSettings::PaperSizeTemplate VCommandLine::OptPaperSize() const
 {
     int ppsize = 0;
-    if (parser.isSet(LONG_OPTION_PAGETEMPLATE))
+    if (parser.isSet(*optionsUsed.value(LONG_OPTION_PAGETEMPLATE)))
     {
-        ppsize = parser.value(LONG_OPTION_PAGETEMPLATE).toInt();
+        ppsize = parser.value(*optionsUsed.value(LONG_OPTION_PAGETEMPLATE)).toInt();
     }
     return static_cast<DialogLayoutSettings::PaperSizeTemplate>(ppsize);
 }
@@ -311,9 +333,9 @@ DialogLayoutSettings::PaperSizeTemplate VCommandLine::OptPaperSize() const
 int VCommandLine::OptRotation() const
 {
     int rotate = 0;
-    if (parser.isSet(LONG_OPTION_ROTATE))
+    if (parser.isSet(*optionsUsed.value(LONG_OPTION_ROTATE)))
     {
-        rotate = parser.value(LONG_OPTION_ROTATE).toInt();
+        rotate = parser.value(*optionsUsed.value(LONG_OPTION_ROTATE)).toInt();
     }
 
     return rotate;
@@ -322,7 +344,7 @@ int VCommandLine::OptRotation() const
 //------------------------------------------------------------------------------------------------------
 Cases VCommandLine::OptGroup() const
 {
-    int r = parser.value(LONG_OPTION_GROUPPING).toInt();
+    int r = parser.value(*optionsUsed.value(LONG_OPTION_GROUPPING)).toInt();
     if ( r < 0 || r >= static_cast<int>(Cases::UnknownCase))
     {
         r = 0;
@@ -334,11 +356,11 @@ Cases VCommandLine::OptGroup() const
 QString VCommandLine::OptMeasurePath() const
 {
     QString measure;
-    if (parser.isSet(LONG_OPTION_MEASUREFILE)
+    if (parser.isSet(*optionsUsed.value(LONG_OPTION_MEASUREFILE))
             && IsExportEnabled() //todo: don't want yet to allow user set measure file for general loading, because need to fix multiply opened windows as well
             )
     {
-        measure = parser.value(LONG_OPTION_MEASUREFILE);
+        measure = parser.value(*optionsUsed.value(LONG_OPTION_MEASUREFILE));
     }
 
     return measure;
@@ -350,7 +372,7 @@ QString VCommandLine::OptExportPath() const
     QString path;
     if (IsExportEnabled())
     {
-        path = parser.value(LONG_OPTION_OUTFILE);
+        path = parser.value(*optionsUsed.value(LONG_OPTION_OUTFILE));
     }
 
     return path;
@@ -360,9 +382,9 @@ QString VCommandLine::OptExportPath() const
 int VCommandLine::OptExportType() const
 {
     int r = 0;
-    if (parser.isSet(LONG_OPTION_EXP2FORMAT))
+    if (parser.isSet(*optionsUsed.value(LONG_OPTION_EXP2FORMAT)))
     {
-        r = parser.value(LONG_OPTION_EXP2FORMAT).toInt();
+        r = parser.value(*optionsUsed.value(LONG_OPTION_EXP2FORMAT)).toInt();
     }
     return r;
 }
@@ -373,11 +395,21 @@ QStringList VCommandLine::OptInputFileNames() const
     return parser.positionalArguments();
 }
 
-//------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptLocale() const
+{
+    QString locale = QLocale::system().name();
+    if (parser.isSet(*optionsUsed.value(LONG_OPTION_LOCALE)))
+    {
+        locale = parser.value(*optionsUsed.value(LONG_OPTION_LOCALE));
+    }
+    return locale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VCommandLine::IsGuiEnabled() const
 {
     return isGuiEnabled;
 }
 
-//------------------------------------------------------------------------------------------------------
 #undef tr

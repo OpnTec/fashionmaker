@@ -31,6 +31,8 @@
 
 #include <QApplication>
 #include <QGraphicsScene>
+#include <QPointer>
+
 #include "def.h"
 #include "vsettings.h"
 #include "vlockguard.h"
@@ -53,6 +55,9 @@ public:
     virtual ~VAbstractApplication() Q_DECL_OVERRIDE;
 
     virtual const VTranslateVars *TrVars()=0;
+    virtual QString  translationsPath() const=0;
+
+    void             LoadTranslation(const QString &locale);
 
     Unit             patternUnit() const;
     const Unit      *patternUnitP() const;
@@ -101,6 +106,13 @@ protected:
      */
     VCommonSettings    *settings;
 
+    QPointer<QTranslator> qtTranslator;
+    QPointer<QTranslator> qtxmlTranslator;
+    QPointer<QTranslator> appTranslator;
+    QPointer<QTranslator> pmsTranslator;
+
+    virtual void InitTrVars()=0;
+
 private:
     Q_DISABLE_COPY(VAbstractApplication)
     Unit               _patternUnit;
@@ -117,6 +129,8 @@ private:
      * we can allow user use Undo option.
      */
     bool               openingPattern;
+
+    void ClearTranslation();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

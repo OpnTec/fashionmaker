@@ -52,7 +52,7 @@ class VCommandLine
 private:
     static VCommandLinePtr instance;
     QCommandLineParser parser;
-    const std::vector<QCommandLineOption> optionsUsed;
+    const QMap<QString, QCommandLineOption *> optionsUsed;
     bool isGuiEnabled;
     friend class VApplication;
 
@@ -104,6 +104,9 @@ public:
 
     //@brief gets filenames which should be loaded
     QStringList OptInputFileNames() const;
+
+    //@brief gets locale name
+    QString OptLocale() const;
 
     bool IsGuiEnabled()const;
 };
