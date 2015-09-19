@@ -52,6 +52,8 @@ public:
     MApplication(int &argc, char **argv);
     virtual ~MApplication() Q_DECL_OVERRIDE;
 
+    virtual bool notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
+
     bool IsTheOnly() const;
     TMainWindow *MainWindow();
     QList<TMainWindow*> MainWindows();

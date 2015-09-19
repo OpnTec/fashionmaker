@@ -29,6 +29,13 @@
 #include "mapplication.h"
 #include "version.h"
 #include "tmainwindow.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../ifc/exception/vexceptionconversionerror.h"
+#include "../ifc/exception/vexceptionemptyparameter.h"
+#include "../ifc/exception/vexceptionwrongid.h"
+#include "../vmisc/logging.h"
+#include "../qmuparser/qmuparsererror.h"
 
 #include <QDir>
 #include <QFileOpenEvent>
@@ -39,6 +46,8 @@
 #include <QLocalServer>
 #include <QMessageBox>
 #include <iostream>
+
+Q_LOGGING_CATEGORY(mApp, "m.application")
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 #   include "../../libs/vmisc/backport/qcommandlineparser.h"
@@ -186,6 +195,65 @@ MApplication::~MApplication()
     {
         delete dataBase;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief notify Reimplemented from QApplication::notify().
+ * @param receiver receiver.
+ * @param event event.
+ * @return value that is returned from the receiver's event handler.
+ */
+// reimplemented from QApplication so we can throw exceptions in slots
+bool MApplication::notify(QObject *receiver, QEvent *event)
+{
+    try
+    {
+        return QApplication::notify(receiver, event);
+    }
+    catch (const VExceptionObjectError &e)
+    {
+        e.CriticalMessageBox(tr("Error parsing file. Program will be terminated."), mainWindow);
+        abort();
+    }
+    catch (const VExceptionBadId &e)
+    {
+        e.CriticalMessageBox(tr("Error bad id. Program will be terminated."), mainWindow);
+        abort();
+    }
+    catch (const VExceptionConversionError &e)
+    {
+        e.CriticalMessageBox(tr("Error can't convert value. Program will be terminated."), mainWindow);
+        abort();
+    }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        e.CriticalMessageBox(tr("Error empty parameter. Program will be terminated."), mainWindow);
+        abort();
+    }
+    catch (const VExceptionWrongId &e)
+    {
+        e.CriticalMessageBox(tr("Error wrong id. Program will be terminated."), mainWindow);
+        abort();
+    }
+    catch (const VException &e)
+    {
+        e.CriticalMessageBox(tr("Something's wrong!!"), mainWindow);
+        return true;
+    }
+    // These last two cases special. I found that we can't show here modal dialog with error message.
+    // Somehow program doesn't waite untile an error dialog will be closed. But if ignore this program will hang.
+    catch (const qmu::QmuParserError &e)
+    {
+        qCDebug(mApp, "Parser error: %s", e.GetMsg().toUtf8().constData());
+        abort();
+    }
+    catch (std::exception& e)
+    {
+        qCDebug(mApp, "Critical error! Exception thrown: %s", e.what());
+        abort();
+    }
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
