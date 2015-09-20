@@ -186,8 +186,8 @@ QMultiMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_0()
     names.insert(QStringLiteral("armfold_to_armfold_f"), QStringLiteral("chest_width"));
     names.insert(QStringLiteral("armfold_to_armfold_f"), QStringLiteral("front_chest_width"));
     // F05
-    names.insert(QStringLiteral("shoulder_width_b"), QStringLiteral("arc_behind_shoulder_girdle"));
-    names.insert(QStringLiteral("shoulder_width_b"), QStringLiteral("across_back_shoulder_width"));
+    names.insert(QStringLiteral("shoulder_tip_to_shoulder_tip_b"), QStringLiteral("arc_behind_shoulder_girdle"));
+    names.insert(QStringLiteral("shoulder_tip_to_shoulder_tip_b"), QStringLiteral("across_back_shoulder_width"));
     // F06
     names.insert(QStringLiteral("across_back_b"), QStringLiteral("upper_back_width"));
     // F07

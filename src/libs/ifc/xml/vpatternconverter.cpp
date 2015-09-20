@@ -882,8 +882,8 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("chest_width"), QStringLiteral("armfold_to_armfold_f"));
     names.insert(QStringLiteral("front_chest_width"), QStringLiteral("armfold_to_armfold_f"));
     // F05
-    names.insert(QStringLiteral("arc_behind_shoulder_girdle"), QStringLiteral("shoulder_width_b"));
-    names.insert(QStringLiteral("across_back_shoulder_width"), QStringLiteral("shoulder_width_b"));
+    names.insert(QStringLiteral("arc_behind_shoulder_girdle"), QStringLiteral("shoulder_tip_to_shoulder_tip_b"));
+    names.insert(QStringLiteral("across_back_shoulder_width"), QStringLiteral("shoulder_tip_to_shoulder_tip_b"));
     // F06
     names.insert(QStringLiteral("upper_back_width"), QStringLiteral("across_back_b"));
     // F07

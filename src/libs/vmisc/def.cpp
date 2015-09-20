@@ -158,7 +158,7 @@ const QString shoulderLength_M                = QStringLiteral("shoulder_length"
 const QString shoulderWidthF_M                = QStringLiteral("shoulder_width_f");                    // F02
 const QString acrossChestF_M                  = QStringLiteral("across_chest_f");                      // F03
 const QString armfoldToArmfoldF_M             = QStringLiteral("armfold_to_armfold_f");                // F04
-const QString shoulderWidthB_M                = QStringLiteral("shoulder_width_b");                    // F05
+const QString shoulderTipToShoulderTipB_M     = QStringLiteral("shoulder_tip_to_shoulder_tip_b");      // F05
 const QString acrossBackB_M                   = QStringLiteral("across_back_b");                       // F06
 const QString armfoldToArmfoldB_M             = QStringLiteral("armfold_to_armfold_b");                // F07
 const QString shoulderTipToShoulderTipHalfF_M = QStringLiteral("shoulder_tip_to_shoulder_tip_half_f"); // F08
@@ -715,7 +715,7 @@ QStringList ListGroupF()
                                            << shoulderWidthF_M                 // F02
                                            << acrossChestF_M                   // F03
                                            << armfoldToArmfoldF_M              // F04
-                                           << shoulderWidthB_M                 // F05
+                                           << shoulderTipToShoulderTipB_M      // F05
                                            << acrossBackB_M                    // F06
                                            << armfoldToArmfoldB_M              // F07
                                            << shoulderTipToShoulderTipHalfF_M  // F08

@@ -1046,12 +1046,12 @@ void VTranslateMeasurements::InitGroupF()
                                   "not parallel to floor.", "Full measurement description.");
     InitMeasurement(armfoldToArmfoldF_M, m, g, d, "F04");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_width_b",
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_shoulder_tip_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Shoulder Width (back)", "Full measurement name.");
     d = QmuTranslation::translate("Measurements", "From Shoulder Tip to Shoulder Tip, curved around the back.",
                                   "Full measurement description.");
-    InitMeasurement(shoulderWidthB_M, m, g, d, "F05");
+    InitMeasurement(shoulderTipToShoulderTipB_M, m, g, d, "F05");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "across_back_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");

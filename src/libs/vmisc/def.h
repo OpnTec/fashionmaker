@@ -316,7 +316,7 @@ extern const QString shoulderLength_M;                // F01
 extern const QString shoulderWidthF_M;                // F02
 extern const QString acrossChestF_M;                  // F03
 extern const QString armfoldToArmfoldF_M;             // F04
-extern const QString shoulderWidthB_M;                // F05
+extern const QString shoulderTipToShoulderTipB_M;     // F05
 extern const QString acrossBackB_M;                   // F06
 extern const QString armfoldToArmfoldB_M;             // F07
 extern const QString shoulderTipToShoulderTipHalfF_M; // F08
