@@ -122,7 +122,7 @@ const QString neckSideToWaistBustpointF_M     = QStringLiteral("neck_side_to_wai
 const QString shoulderTipToWaistSideB_M       = QStringLiteral("shoulder_tip_to_waist_side_b");      // E07
 const QString neckSideToWaistB_M              = QStringLiteral("neck_side_to_waist_b");              // E08
 const QString neckBackToWaistB_M              = QStringLiteral("neck_back_to_waist_b");              // E09
-const QString neckSideToWaistBladepointB_M    = QStringLiteral("neck_side_to_waist_bladepoint_b");   // E10
+const QString neckSideToWaistScapulaB_M       = QStringLiteral("neck_side_to_waist_scapula_b");      // E10
 const QString neckFrontToHighbustF_M          = QStringLiteral("neck_front_to_highbust_f");          // E11
 const QString neckFrontToBustF_M              = QStringLiteral("neck_front_to_bust_f");              // E12
 const QString highbustToWaistF_M              = QStringLiteral("highbust_to_waist_f");               // E13
@@ -673,7 +673,7 @@ QStringList ListGroupE()
                                            << shoulderTipToWaistSideB_M        // E07
                                            << neckSideToWaistB_M               // E08
                                            << neckBackToWaistB_M               // E09
-                                           << neckSideToWaistBladepointB_M     // E10
+                                           << neckSideToWaistScapulaB_M        // E10
                                            << neckFrontToHighbustF_M           // E11
                                            << neckFrontToBustF_M               // E12
                                            << highbustToWaistF_M               // E13

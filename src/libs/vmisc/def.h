@@ -280,7 +280,7 @@ extern const QString neckSideToWaistBustpointF_M;     // E06
 extern const QString shoulderTipToWaistSideB_M;       // E07
 extern const QString neckSideToWaistB_M;              // E08
 extern const QString neckBackToWaistB_M;              // E09
-extern const QString neckSideToWaistBladepointB_M;    // E10
+extern const QString neckSideToWaistScapulaB_M;       // E10
 extern const QString neckFrontToHighbustF_M;          // E11
 extern const QString neckFrontToBustF_M;              // E12
 extern const QString highbustToWaistF_M;              // E13

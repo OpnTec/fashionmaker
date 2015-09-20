@@ -803,13 +803,13 @@ void VTranslateMeasurements::InitGroupE()
     d = QmuTranslation::translate("Measurements", "Neck Back to Waist Back.", "Full measurement description.");
     InitMeasurement(neckBackToWaistB_M, m, g, d, "E09");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_bladepoint_b",
+    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_scapula_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Neck Side to Waist through Bladepoint (Back)",
                                   "Full measurement name.");
     d = QmuTranslation::translate("Measurements", "Neck Side to Waist through Bladepoint (Back).",
                                   "Full measurement description.");
-    InitMeasurement(neckSideToWaistBladepointB_M, m, g, d, "E10");
+    InitMeasurement(neckSideToWaistScapulaB_M, m, g, d, "E10");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "neck_front_to_highbust_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
