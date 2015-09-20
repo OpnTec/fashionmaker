@@ -1025,12 +1025,12 @@ void VTranslateMeasurements::InitGroupF()
                                   "Full measurement description.");
     InitMeasurement(shoulderLength_M, m, g, d, "F01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_width_f",
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_shoulder_tip_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Shoulder Width (front)", "Full measurement name.");
     d = QmuTranslation::translate("Measurements", "From Shoulder Tip to Shoulder tip, curved around front.",
                                   "Full measurement description.");
-    InitMeasurement(shoulderWidthF_M, m, g, d, "F02");
+    InitMeasurement(shoulderTipToShoulderTipF_M, m, g, d, "F02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "across_chest_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");

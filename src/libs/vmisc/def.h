@@ -313,7 +313,7 @@ extern const QString shoulderSlopeNeckBackHeight_M;   // E39
 extern const QString shoulderSlopeShoulderTipAngle_M; // E40
 // F
 extern const QString shoulderLength_M;                // F01
-extern const QString shoulderWidthF_M;                // F02
+extern const QString shoulderTipToShoulderTipF_M;     // F02
 extern const QString acrossChestF_M;                  // F03
 extern const QString armfoldToArmfoldF_M;             // F04
 extern const QString shoulderTipToShoulderTipB_M;     // F05
