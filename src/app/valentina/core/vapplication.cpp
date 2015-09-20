@@ -678,7 +678,7 @@ void VApplication::GatherLogs() const
                     *out <<"--------------------------" << endl;
                     if (tmp.GetProtected()->open(QIODevice::ReadOnly | QIODevice::Text))
                     {
-                        QTextStream in(&tmp.GetProtected());
+                        QTextStream in(tmp.GetProtected().get());
                         while (!in.atEnd())
                         {
                             *out << in.readLine() << endl;
@@ -687,7 +687,7 @@ void VApplication::GatherLogs() const
                     }
                     else
                     {
-                        *out << "Log file error:" + logFile.errorString() << endl;
+                        *out << "Log file error:" + tmp.GetProtected()->errorString() << endl;
                     }
                 }
                 else
