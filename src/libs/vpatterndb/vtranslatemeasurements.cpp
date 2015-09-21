@@ -318,7 +318,14 @@ void VTranslateMeasurements::InitGroupA()
     d = QmuTranslation::translate("Measurements", "Vertical distance from the fold at the back of the knee to the "
                                   "point where the front leg meets the top of the foot.",
                                   "Full measurement description.");
-    InitMeasurement(heightKneeToAnkle_M, m, g, d, "A21");
+    InitMeasurement(heightKneeToAnkle_M, m, g, d, "A21", "(height_knee - height_ankle)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "height_neck_back_to_waist_side",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Height: Neck Back to Waist Side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance from Neck Back to Waist Side. ('Height: Neck "
+                                  "Back' - 'Height: Waist Side').", "Full measurement description.");
+    InitMeasurement(heightNeckBackToWaistSide_M, m, g, d, "A22", "(height_neck_back - height_waist_side)");
     //=================================================================================================================
 }
 
@@ -412,324 +419,41 @@ void VTranslateMeasurements::InitGroupD()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_mid_circ",
+    m = QmuTranslation::translate("Measurements", "hand_palm_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck circumference, midsection", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Middle Neck circumference, roughtly halfway between jaw and torso.",
+    g = QmuTranslation::translate("Measurements", "Hand: Palm length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Length from Wrist line to base of middle finger.",
                                   "Full measurement description.");
-    InitMeasurement(neckMidCirc_M, m, g, d, "D01");
+    InitMeasurement(handPalmLength_M, m, g, d, "D01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_circ",
+    m = QmuTranslation::translate("Measurements", "hand_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Neck circumference, at base of neck, from Neck Back through Neck "
-                                  "Sides and Neck Front.", "Full measurement description.");
-    InitMeasurement(neckCirc_M, m, g, d, "D02");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highbust_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highbust circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Circumference at Highbust, following shortest distance between "
-                                  "Armfolds across chest, parallel to floor under arms and across back.",
+    g = QmuTranslation::translate("Measurements", "Hand: Length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Length from Wrist line to end of middle finger.",
                                   "Full measurement description.");
-    InitMeasurement(highbustCirc_M, m, g, d, "D03");
+    InitMeasurement(handLength_M, m, g, d, "D02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bust_circ",
+    m = QmuTranslation::translate("Measurements", "hand_palm_width",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bust circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Circumference around Bust, parallel to floor.",
+    g = QmuTranslation::translate("Measurements", "Hand: Palm width", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure where Palm is widest.",
                                   "Full measurement description.");
-    InitMeasurement(bustCirc_M, m, g, d, "D04");
+    InitMeasurement(handPalmWidth_M, m, g, d, "D03");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "lowbust_circ",
+    m = QmuTranslation::translate("Measurements", "hand_palm_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Lowbust circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Circumference around LowBust, around the ribs just under the "
-                                  "breasts, parallel to floor.", "Full measurement description.");
-    InitMeasurement(lowbustCirc_M, m, g, d, "D05");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rib_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Rib circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Circumference around Ribs at level of the lowest rib at the side, "
-                                  "parallel to floor.", "Full measurement description.");
-    InitMeasurement(ribCirc_M, m, g, d, "D06");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Circumference around Waist, following natural contours. Waists "
-                                  "are typically higher in back than in front, not parallel to floor.",
+    g = QmuTranslation::translate("Measurements", "Hand: Palm circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Circumference where Palm is widest.",
                                   "Full measurement description.");
-    InitMeasurement(waistCirc_M, m, g, d, "D07");
+    InitMeasurement(handPalmCirc_M, m, g, d, "D04");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highhip_circ",
+    m = QmuTranslation::translate("Measurements", "hand_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highhip circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Circumference around Highhip, where Abdomen protrusion is "
-                                  "greatest, parallel to floor.", "Full measurement description.");
-    InitMeasurement(highhipCirc_M, m, g, d, "D08");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hip_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hip circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Circumference around Hip, where Hip protrusion is greatest, "
-                                  "parallel to floor.", "Full measurement description.");
-    InitMeasurement(hipCirc_M, m, g, d, "D09");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_arc_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck arc, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side to Neck Side through Neck Front. Calculate as "
-                                  "(Neck circumference - Neck arc (back)", "Full measurement description.");
-    InitMeasurement(neckArcF_M, m, g, d, "D10", "(neck_circ - neck_arc_b)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highbust_arc_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highbust arc, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highbust Side (Armpit) to HIghbust Side (Armpit) across "
-                                  "chest. Calculate as (Highbust circumference - Highbust arc (back)).",
+    g = QmuTranslation::translate("Measurements", "Hand: Circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Tuck thumb toward smallest finger, bring fingers close together. "
+                                  "Measure circumference around widest part of hand.",
                                   "Full measurement description.");
-    InitMeasurement(highbustArcF_M, m, g, d, "D11", "(highbust_circ - highbust_arc_b)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bust_arc_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bust arc, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bust Side to Bust Side across chest. Calculate as "
-                                  "(Bust circumference - Bust arc (back)).", "Full measurement description.");
-    InitMeasurement(bustArcF_M, m, g, d, "D12", "(bust_circ – bust_arc_b)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "lowbust_arc_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Lowbust arc, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Lowbust Side to Lowbust Side across Front.",
-                                  "Full measurement description.");
-    InitMeasurement(lowbustArcF_M, m, g, d, "D13");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rib_arc_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Rib arc, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Rib Side to Rib Side across front.",
-                                  "Full measurement description.");
-    InitMeasurement(ribArcF_M, m, g, d, "D14");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_arc_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist arc, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Side to Waist Side across front.",
-                                  "Full measurement description.");
-    InitMeasurement(waistArcF_M, m, g, d, "D15");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highhip_arc_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highhip arc, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highhip Side to Highhip Side across front.",
-                                  "Full measurement description.");
-    InitMeasurement(highhipArcF_M, m, g, d, "D16");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hip_arc_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hip arc, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Hip Side to Hip Side across Front.",
-                                  "Full measurement description.");
-    InitMeasurement(hipArcF_M, m, g, d, "D17");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_arc_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck arc, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side to Neck Side across back.",
-                                  "Full measurement description.");
-    InitMeasurement(neckArcB_M, m, g, d, "D18");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highbust_arc_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highbust arc, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highbust Side (Armpit) to Highbust Side (Armpit) across back.",
-                                  "Full measurement description.");
-    InitMeasurement(highbustArcB_M, m, g, d, "D19");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bust_arc_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bust arc, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bust Side to Bust Side across back.",
-                                  "Full measurement description.");
-    InitMeasurement(bustArcB_M, m, g, d, "D20");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "lowbust_arc_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Lowbust arc, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Lowbust Side to Lowbust Side across back. Calculate as "
-                                  "(Lowbust circumference - Lowbust arc (front)).", "Full measurement description.");
-    InitMeasurement(lowbustArcB_M, m, g, d, "D21", "(lowbust_circ - lowbust_arc_f)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rib_arc_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Rib arc, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Rib Side to Rib side across back. Calculate as "
-                                  "(Rib circumference - Rib arc (front)).", "Full measurement description.");
-    InitMeasurement(ribArcB_M, m, g, d, "D22", "(rib_circ - rib_arc_f)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_arc_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist arc, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Side to Waist Side across back. Calculate as "
-                                  "(Waist circumference - Waist arc (front)).", "Full measurement description.");
-    InitMeasurement(waistArcB_M, m, g, d, "D23", "(waist_circ - waist_arc_f)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highhip_arc_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highhip arc, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highhip Side to Highhip Side across back.  Calculate as "
-                                  "(Highhip circumference - Highhip Arc (front)).", "Full measurement description.");
-    InitMeasurement(highhipArcB_M, m, g, d, "D24", "(highhip_circ - highhip_arc_f)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hip_arc_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hip arc, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Hip Side to Hip Side across back.  Calculate as "
-                                  "(Hip circumference - Hip arc (front)).", "Full measurement description.");
-    InitMeasurement(hipArcB_M, m, g, d, "D25", "(hip_circ - hip_arc_f)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_arc_half_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck arc, front, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Front to Neck Side. Calculate as (Neck Arc (front)/2).",
-                                  "Full measurement description.");
-    InitMeasurement(neckArcHalfF_M, m, g, d, "D26", "(neck_arc_f/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highbust_arc_half_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highbust arc, front, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highbust Front to Highbust Side. Calculate as "
-                                  "(Highbust Arc (front)/2).", "Full measurement description.");
-    InitMeasurement(highbustArcHalfF_M, m, g, d, "D27", "(highbust_arc_f/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bust_arc_half_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bust arc, front, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bust Front to Bust Side. Calculate as (Bust Arc (front)/2).",
-                                  "Full measurement description.");
-    InitMeasurement(bustArcHalfF_M, m, g, d, "D28", "(bust_arc_f/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "lowbust_arc_half_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Lowbust arc, front, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Lowbust Front to Lowbust Side. Calculate as "
-                                  "(Lowbust Arc (front)/2).", "Full measurement description.");
-    InitMeasurement(lowbustArcHalfF_M, m, g, d, "D29", "(lowbust_arc_f/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rib_arc_half_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Rib arc, front, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Rib Front to Rib Side. Calculate as (Rib Arc (front) / 2).",
-                                  "Full measurement description.");
-    InitMeasurement(ribArcHalfF_M, m, g, d, "D30", "(rib_arc_f/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_arc_half_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist arc, front, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Front to Waist Side. Calculate as "
-                                  "(Waist Arc (front) / 2).", "Full measurement description.");
-    InitMeasurement(waistArcHalfF_M, m, g, d, "D31", "(waist_arc_f/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highhip_arc_half_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highhip arc, front, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highhip Front to Highhip Side. Calculate as "
-                                  "(Highhip Arc (front ) / 2).", "Full measurement description.");
-    InitMeasurement(highhipArcHalfF_M, m, g, d, "D32", "(highhip_arc_f/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hip_arc_half_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hip arc, front, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Hip Front to Hip Side.  Calculate as (Hip Arc (front) / 2).",
-                                  "Full measurement description.");
-    InitMeasurement(hipArcHalfF_M, m, g, d, "D33", "(hip_arc_f/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_arc_half_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck arc, back, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back to Neck Side. Calculate as (Neck Arc (back) / 2).",
-                                  "Full measurement description.");
-    InitMeasurement(neckArcHalfB_M, m, g, d, "D34", "(neck_arc_b/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highbust_arc_half_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highbust arc, back, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highbust Back to Highbust Side. Calculate as "
-                                  "(Highbust Arc (back) / 2).", "Full measurement description.");
-    InitMeasurement(highbustArcHalfB_M, m, g, d, "D35", "(highbust_arc_b/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bust_arc_half_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bust arc, back, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bust Back to Bust Side. Calculate as (Bust Arc (back) / 2).",
-                                  "Full measurement description.");
-    InitMeasurement(bustArcHalfB_M, m, g, d, "D36", "(bust_arc_b/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "lowbust_arc_half_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Lowbust arc, back, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Lowbust Back to Lowbust Side. Calculate as "
-                                  "(Lowbust Arc (back) / 2).", "Full measurement description.");
-    InitMeasurement(lowbustArcHalfB_M, m, g, d, "D37", "(lowbust_arc_b/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rib_arc_half_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Rib arc, back, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Rib Back to Highbust Side. Calculate as (Rib Arc (back) / 2).",
-                                  "Full measurement description.");
-    InitMeasurement(ribArcHalfB_M, m, g, d, "D38", "(rib_arc_b/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_arc_half_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist arc, back, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist  Back to Waist  Side. Calculate as "
-                                  "(Waist  Arc (back) / 2).", "Full measurement description.");
-    InitMeasurement(waistArcHalfB_M, m, g, d, "D39", "(waist_arc_b/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highhip_arc_half_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highhip arc, back, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highhip Back to Highbust Side. Calculate as "
-                                  "(Highhip Arc (back) / 2).", "Full measurement description.");
-    InitMeasurement(highhipArcHalfB_M, m, g, d, "D40", "(highhip_arc_b/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hip_arc_half_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hip arc, back, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Hip Back to Highbust Side. Calculate as (Hip Arc (back) / 2).",
-                                  "Full measurement description.");
-    InitMeasurement(hipArcHalfB_M, m, g, d, "D41", "(hip_arc_b/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hip_with_abdomen_arc_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hip arc with Abdomen, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Curve stiff paper around front of abdomen, tape at sides. Measure "
-                                  "from Hip Side to Hip Side over paper across front.",
-                                  "Full measurement description.");
-    InitMeasurement(hipWithAbdomenArcF_M, m, g, d, "D42");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "body_armfold_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Body circumference at Armfold level", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure around arms and torso at Armfold level.",
-                                  "Full measurement description.");
-    InitMeasurement(bodyArmfoldCirc_M, m, g, d, "D43");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "body_bust_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Body circumference at Bust level", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure around arms and torso at Bust level.",
-                                  "Full measurement description.");
-    InitMeasurement(bodyBustCirc_M, m, g, d, "D44");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "body_torso_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Body circumference of full torso", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure from mid-shoulder around  crotch.",
-                                  "Full measurement description.");
-    InitMeasurement(bodyTorsoCirc_M, m, g, d, "D45");
+    InitMeasurement(handCirc_M, m, g, d, "D05");
     //=================================================================================================================
 }
 
@@ -743,287 +467,33 @@ void VTranslateMeasurements::InitGroupE()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_front_to_waist_f",
+    m = QmuTranslation::translate("Measurements", "foot_width",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Front to Waist Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Front, over tape between Breastpoints, down to Waist "
-                                  "Front.", "Full measurement description.");
-    InitMeasurement(neckFrontToWaistF_M, m, g, d, "E01");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_front_to_waist_flat_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Front to Waist Front flat", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Front down between breasts to Waist Front.",
+    g = QmuTranslation::translate("Measurements", "Foot: Width", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure at widest part of foot.",
                                   "Full measurement description.");
-    InitMeasurement(neckFrontToWaistFlatF_M, m, g, d, "E02");
+    InitMeasurement(footWidth_M, m, g, d, "E01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "armpit_to_waist_side",
+    m = QmuTranslation::translate("Measurements", "foot_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Armpit to Waist Side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Armpit down to Waist Side.", "Full measurement description.");
-    InitMeasurement(armpitToWaistSide_M, m, g, d, "E03");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_waist_side_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Waist Side, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip, curving around Armscye Front, then down to "
-                                  "Waist Side.", "Full measurement description.");
-    InitMeasurement(shoulderTipToWaistSideF_M, m, g, d, "E04");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Waist level, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side straight down front to Waist level.",
+    g = QmuTranslation::translate("Measurements", "Foot: Length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure from back of heel to end of longest toe.",
                                   "Full measurement description.");
-    InitMeasurement(neckSideToWaistF_M, m, g, d, "E05");
+    InitMeasurement(footLength_M, m, g, d, "E02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_bustpoint_f",
+    m = QmuTranslation::translate("Measurements", "foot_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Waist level, through Bustpoint",
-                                  "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side over Bustpoint to Waist level, forming a straight "
-                                  "line.", "Full measurement description.");
-    InitMeasurement(neckSideToWaistBustpointF_M, m, g, d, "E06");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_waist_side_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Waist Side, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip, curving around Armscye Back, then down to "
-                                  "Waist Side.", "Full measurement description.");
-    InitMeasurement(shoulderTipToWaistSideB_M, m, g, d, "E07");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Waist level, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side straight down back to Waist level.",
+    g = QmuTranslation::translate("Measurements", "Foot: Circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure circumference around widest part of foot.",
                                   "Full measurement description.");
-    InitMeasurement(neckSideToWaistB_M, m, g, d, "E08");
+    InitMeasurement(footCirc_M, m, g, d, "E03");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_back_to_waist_b",
+    m = QmuTranslation::translate("Measurements", "foot_instep_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Back to Waist Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back down to Waist Back.",
+    g = QmuTranslation::translate("Measurements", "Foot: Instep circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure circumference at tallest part of instep.",
                                   "Full measurement description.");
-    InitMeasurement(neckBackToWaistB_M, m, g, d, "E09");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_scapula_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Waist level, through Scapula",
-                                  "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side across Scapula down to Waist level, forming a "
-                                  "straight line.", "Full measurement description.");
-    InitMeasurement(neckSideToWaistScapulaB_M, m, g, d, "E10");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_front_to_highbust_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Front to Highbust Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Neck Front down to Highbust Front.",
-                                  "Full measurement description.");
-    InitMeasurement(neckFrontToHighbustF_M, m, g, d, "E11");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_front_to_bust_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Front to Bust Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Front down to Bust Front. Requires tape to cover gap "
-                                  "between Bustpoints.", "Full measurement description.");
-    InitMeasurement(neckFrontToBustF_M, m, g, d, "E12");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highbust_to_waist_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highbust Front to Waist Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highbust Front to Waist Front. Use tape to bridge gap between "
-                                  "Bustpoints. ('Neck Front to Waist Front' - 'Neck Front to Highbust Front').",
-                                  "Full measurement description.");
-    InitMeasurement(highbustToWaistF_M, m, g, d, "E13", "(neck_front_to_waist - neck_front_to_highbust)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bust_to_waist_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bust Front to Waist Front",
-                                  "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Bust Center down to Waist line.", "Full measurement description.");
-    InitMeasurement(bustToWaistF_M, m, g, d, "E14");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "lowbust_to_waist_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Lowbust Front to Waist Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Lowbust Front down to Waist Front.",
-                                  "Full measurement description.");
-    InitMeasurement(lowbustToWaistF_M, m, g, d, "E15");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rib_to_waist_side",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Rib Side to Waist Side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From lowest rib at side down to waist.",
-                                  "Full measurement description.");
-    InitMeasurement(ribToWaistSide_M, m, g, d, "E16");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_back_to_highbust_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Back to Highbust Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back down to Highbust Back.",
-                                  "Full measurement description.");
-    InitMeasurement(neckBackToHighbustB_M, m, g, d, "E17");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_back_to_bust_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Back to Bust Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back down to Bust Back.", "Full measurement description.");
-    InitMeasurement(neckBackToBustB_M, m, g, d, "E18");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "highbust_to_waist_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Highbust Back to Waist Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highbust Back down to Waist Back. ('Neck Back to Waist Back' "
-                                  "- 'Neck Back to Highbust Back').", "Full measurement description.");
-    InitMeasurement(highbustToWaistB_M, m, g, d, "E19", "(neck_back_to_waist - neck_back_to_highbust)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bust_to_waist_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bust Back to Waist Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bust Back down to Waist level. ('Neck Back to Waist Back' - "
-                                  "'Neck Back to Bust Back').", "Full measurement description.");
-    InitMeasurement(bustToWaistB_M, m, g, d, "E20");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "lowbust_to_waist_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Lowbust Back to Waist Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Lowbust Back down to Waist Back.",
-                                  "Full measurement description.");
-    InitMeasurement(lowbustToWaistB_M, m, g, d, "E21");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_armfold_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Armfold Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip around Armscye down to Armfold Front.",
-                                  "Full measurement description.");
-    InitMeasurement(shoulderTipToArmfoldF_M, m, g, d, "E22");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_bust_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Bust level, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side straight down front to Bust level.",
-                                  "Full measurement description.");
-    InitMeasurement(neckSideToBustF_M, m, g, d, "E23");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_highbust_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Highbust level, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side straight down front to Highbust level.",
-                                  "Full measurement description.");
-    InitMeasurement(neckSideToHighbustF_M, m, g, d, "E24");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_center_to_highbust_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder center to Highbust level, front",
-                                  "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From mid-Shoulder down front to Highbust level, aimed at Bustpoint.",
-                                  "Full measurement description.");
-    InitMeasurement(shoulderCenterToHighbustF_M, m, g, d, "E25");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_armfold_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Armfold Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip around Armscye down to Armfold Back.",
-                                  "Full measurement description.");
-    InitMeasurement(shoulderTipToArmfoldB_M, m, g, d, "E26");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_bust_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Bust level, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side straight down back to Bust level.",
-                                  "Full measurement description.");
-    InitMeasurement(neckSideToBustB_M, m, g, d, "E27");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_highbust_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Highbust level, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side straight down back to Highbust level.",
-                                  "Full measurement description.");
-    InitMeasurement(neckSideToHighbustB_M, m, g, d, "E28");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_center_to_highbust_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder center to Highbust level, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From mid-Shoulder down back to Highbust level, aimed through "
-                                  "Scapula.", "Full measurement description.");
-    InitMeasurement(shoulderCenterToHighbustB_M, m, g, d, "E29");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_highhip_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist Front to Highhip Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Front to Highhip Front.",
-                                  "Full measurement description.");
-    InitMeasurement(waistToHighhipF_M, m, g, d, "E30");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_hip_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist Front to Hip Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Front to Hip Front.", "Full measurement description.");
-    InitMeasurement(waistToHipF_M, m, g, d, "E31");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_highhip_side",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist Side to Highhip Side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Side to Highhip Side.", "Full measurement description.");
-    InitMeasurement(waistToHighhipSide_M, m, g, d, "E32");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_highhip_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist Back to Highhip Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Back down to Highhip Back.",
-                                  "Full measurement description.");
-    InitMeasurement(waistToHighhipB_M, m, g, d, "E33");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_hip_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist Back to Hip Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Back down to Hip Back. Requires tape to cover the gap "
-                                  "between buttocks.", "Full measurement description.");
-    InitMeasurement(waistToHipB_M, m, g, d, "E34");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "waist_to_hip_side",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Waist Side to Hip Side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Side to Hip Side.", "Full measurement description.");
-    InitMeasurement(waistToHipSide_M, m, g, d, "E35");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_slope_neck_side_angle",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Slope Angle from Neck Side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Angle measuredvetween line parallel to floor at Neck Side, and "
-                                  "line from Neck Side to Shoulder Tip. Usually measured with special tools.",
-                                  "Full measurement description.");
-    InitMeasurement(shoulderSlopeNeckSideAngle_M, m, g, d, "E36");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_slope_neck_side_length",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Slope length from Neck Side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Vertical distance between Neck Side and Shoulder Tip.",
-                                  "Full measurement description.");
-    InitMeasurement(shoulderSlopeNeckSideLength_M, m, g, d, "E37");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_slope_neck_back_angle",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Slope Angle from Neck Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Angle between line parallel to floor at Neck Back level and line "
-                                  "from Neck Back to Shoulder Tip. Usually measured with special tool.",
-                                  "Full measurement description.");
-    InitMeasurement(shoulderSlopeNeckBackAngle_M, m, g, d, "E38");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_slope_neck_back_height",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Slope length from Neck Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Vertical distance between Neck Back and Shoulder Tip.",
-                                  "Full measurement description.");
-    InitMeasurement(shoulderSlopeNeckBackHeight_M, m, g, d, "E39");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_slope_shoulder_tip_angle",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Slope Angle from Shoulder Tip", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Angle between vertical line at Shoulder Tip, and line from Neck "
-                                  "Side to Shoulder Tip. Usually measured with special tools.",
-                                  "Full measurement description.");
-    InitMeasurement(shoulderSlopeShoulderTipAngle_M, m, g, d, "E40");
+    InitMeasurement(footInstepCirc_M, m, g, d, "E04");
     //=================================================================================================================
 }
 
@@ -1037,105 +507,48 @@ void VTranslateMeasurements::InitGroupF()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_length",
+    m = QmuTranslation::translate("Measurements", "head_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Length from Neck Side to Shoulder Tip.",
+    g = QmuTranslation::translate("Measurements", "Head: Circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure circumference at largest level of head.",
                                   "Full measurement description.");
-    InitMeasurement(shoulderLength_M, m, g, d, "F01");
+    InitMeasurement(headCirc_M, m, g, d, "F01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_shoulder_tip_f",
+    m = QmuTranslation::translate("Measurements", "head_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Shoulder Tip, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip to Shoulder tip, curved around front.",
+    g = QmuTranslation::translate("Measurements", "Head: Length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance from Head Crown to bottom of jaw.",
                                   "Full measurement description.");
-    InitMeasurement(shoulderTipToShoulderTipF_M, m, g, d, "F02");
+    InitMeasurement(headLength_M, m, g, d, "F02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "across_chest_f",
+    m = QmuTranslation::translate("Measurements", "head_depth",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Across Chest", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Armscye to Armscye, at narrowest width across chest.",
+    g = QmuTranslation::translate("Measurements", "Head: Depth", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance from front of forehead to back of head.",
                                   "Full measurement description.");
-    InitMeasurement(acrossChestF_M, m, g, d, "F03");
+    InitMeasurement(headDepth_M, m, g, d, "F03");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "armfold_to_armfold_f",
+    m = QmuTranslation::translate("Measurements", "head_width",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Armfold to Armfold, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Armfold to Armfold, shortest distance between Armfolds, not "
-                                  "parallel to floor.", "Full measurement description.");
-    InitMeasurement(armfoldToArmfoldF_M, m, g, d, "F04");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_shoulder_tip_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Shoulder Tip, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip to Shoulder Tip, curved around the back.",
+    g = QmuTranslation::translate("Measurements", "Head: Width", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "Horizontal distance from Head Side to Head Side, where Head is widest.",
                                   "Full measurement description.");
-    InitMeasurement(shoulderTipToShoulderTipB_M, m, g, d, "F05");
+    InitMeasurement(headWidth_M, m, g, d, "F04");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "across_back_b",
+    m = QmuTranslation::translate("Measurements", "head_crown_to_neck_back",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Across Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Armscye to Armscye, at the narrowest width of the back.",
-                                  "Full measurement description.");
-    InitMeasurement(acrossBackB_M, m, g, d, "F06");
+    g = QmuTranslation::translate("Measurements", "Head: Crown to Neck Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance from Crown to Neck Back. ('Height: Total' - "
+                                  "'Height: Neck Back').", "Full measurement description.");
+    InitMeasurement(headCrownToNeckBack_M, m, g, d, "F05", "(height - height_neck_back)");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "armfold_to_armfold_b",
+    m = QmuTranslation::translate("Measurements", "head_chin_to_neck_back",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Armfold to Armfold, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Armfold to Armfold, across the back.",
-                                  "Full measurement description.");
-    InitMeasurement(armfoldToArmfoldB_M, m, g, d, "F07");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_shoulder_tip_half_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Shoulder Tip, front, half",
-                                  "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Half of the Shoulder Width (front) measurement. Calculate as "
-                                  "(Shoulder Width (front) / 2).", "Full measurement description.");
-    InitMeasurement(shoulderTipToShoulderTipHalfF_M, m, g, d, "F08", "(shoulder_tip_to_shoulder_tip_f/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "across_chest_half_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Across Chest, half ", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Half of the Across Chest (front) measurement. Calculate as "
-                                  "(Across Chest (front) / 2).", "Full measurement description.");
-    InitMeasurement(acrossChestHalfF_M, m, g, d, "F09", "(across_chest_f/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_shoulder_tip_half_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Shoulder Tip, back, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Half of the Shoulder Width (back) measurement. Calculate as "
-                                  "(Shoulder Width (back) / 2).", "Full measurement description.");
-    InitMeasurement(shoulderTipToShoulderTipHalfB_M, m, g, d, "F10", "(shoulder_tip_to_shoulder_tip_b/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "across_back_half_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Across Back, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Half of the Across Back measurement. Calculate as "
-                                  "(Across Back / 2).", "Full measurement description.");
-    InitMeasurement(acrossBackHalfB_M, m, g, d, "F11", "(across_back_b/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_front_to_shoulder_tip_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Front to Shoulder Tip", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Front to Shoulder Tip, across the front.",
-                                  "Full measurement description.");
-    InitMeasurement(neckFrontToShoulderTipF_M, m, g, d, "F12");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_back_to_shoulder_tip_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Back to Shoulder Tip", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back to Shoulder tip, across the back.",
-                                  "Full measurement description.");
-    InitMeasurement(neckBackToShoulderTipB_M, m, g, d, "F13");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_width",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Width", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Place a necklace or chain around neck so that it has 'legs' that "
-                                  "hang down. Measure the distance between the 'legs'.",
-                                  "Full measurement description.");
-    InitMeasurement(neckWidth_M, m, g, d, "F14");
+    g = QmuTranslation::translate("Measurements", "Head: Chin to Neck Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance from Chin to Neck Back. ('Height' - 'Height: "
+                                  "Neck Back' - 'Head: Length')", "Full measurement description.");
+    InitMeasurement(headChinToNeckBack_M, m, g, d, "F06", "(height - height_neck_back - head_length)");
     //=================================================================================================================
 }
 
@@ -1149,58 +562,326 @@ void VTranslateMeasurements::InitGroupG()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bustpoint_to_bustpoint",
+    m = QmuTranslation::translate("Measurements", "neck_mid_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bustpoint to Bustpoint", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bustpoint to Bustpoint.", "Full measurement description.");
-    InitMeasurement(bustpointToBustpoint_M, m, g, d, "G01");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bustpoint_to_neck_side",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bustpoint to Neck Side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side to Bustpoint.", "Full measurement description.");
-    InitMeasurement(bustpointToNeckSide_M, m, g, d, "G02");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bustpoint_to_lowbust",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bustpoint to Lowbust", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bustpoint straight down to Lowbust level, following curve "
-                                  "of bust or chest.", "Full measurement description.");
-    InitMeasurement(bustpointToLowbust_M, m, g, d, "G03");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bustpoint_to_waist",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bustpoint to Waist level", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bustpoint to Waist level, forming a straight line "
-                                  "(not curving along the body).", "Full measurement description.");
-    InitMeasurement(bustpointToWaist_M, m, g, d, "G04");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bustpoint_to_bustpoint_half",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bustpoint to Bustpoint, half", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Half of Bustpoint to Bustpoint measurement. Calculate as "
-                                  "(Bustpoint to Bustpoint / 2).", "Full measurement description.");
-    InitMeasurement(bustpointToBustpointHalf_M, m, g, d, "G05", "(bustpoint_to_bustpoint/2)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bustpoint_to_bustpoint_halter",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bustpoint to Bustpoint Halter", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bustpoint, around Neck Back, down to Bustpoint.",
+    g = QmuTranslation::translate("Measurements", "Neck circumference, midsection", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "Circumference of Neck midsection, about halfway between jaw and torso.",
                                   "Full measurement description.");
-    InitMeasurement(bustpointToBustpointHalter_M, m, g, d, "G06");
+    InitMeasurement(neckMidCirc_M, m, g, d, "G01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bustpoint_to_shoulder_tip",
+    m = QmuTranslation::translate("Measurements", "neck_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bustpoint to Shoulder Tip", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bustpoint to Shoulder tip.", "Full measurement description.");
-    InitMeasurement(bustpointToShoulderTip_M, m, g, d, "G07");
+    g = QmuTranslation::translate("Measurements", "Neck circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "Neck circumference at base of Neck, touching Neck Back, Neck Sides, and Neck Front.",
+                                  "Full measurement description.");
+    InitMeasurement(neckCirc_M, m, g, d, "G02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "bustpoint_to_waist_front",
+    m = QmuTranslation::translate("Measurements", "highbust_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Bustpoint to Waist Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Bustpoint to Waist Front, in a straight line, not following "
-                                  "the curves of the body.", "Full measurement description.");
-    InitMeasurement(bustpointToWaistFront_M, m, g, d, "G08");
+    g = QmuTranslation::translate("Measurements", "Highbust circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Circumference at Highbust, following shortest distance between "
+                                  "Armfolds across chest, high under armpits.", "Full measurement description.");
+    InitMeasurement(highbustCirc_M, m, g, d, "G03");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "bust_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Bust circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Circumference around Bust, parallel to floor.",
+                                  "Full measurement description.");
+    InitMeasurement(bustCirc_M, m, g, d, "G04");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "lowbust_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Lowbust circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Circumference around LowBust under the breasts, parallel to floor.",
+                                  "Full measurement description.");
+    InitMeasurement(lowbustCirc_M, m, g, d, "G05");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "rib_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Rib circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Circumference around Ribs at level of the lowest rib at the side, "
+                                  "parallel to floor.", "Full measurement description.");
+    InitMeasurement(ribCirc_M, m, g, d, "G06");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Circumference around Waist, following natural contours. Waists are "
+                                  "typically higher in back.", "Full measurement description.");
+    InitMeasurement(waistCirc_M, m, g, d, "G07");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highhip_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highhip circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Circumference around Highhip, where Abdomen protrusion is "
+                                  "greatest, parallel to floor.", "Full measurement description.");
+    InitMeasurement(highhipCirc_M, m, g, d, "G08");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "hip_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Hip circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "Circumference around Hip where Hip protrusion is greatest, parallel to floor.",
+                                  "Full measurement description.");
+    InitMeasurement(hipCirc_M, m, g, d, "G09");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_arc_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck arc, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side to Neck Side through Neck Front.",
+                                  "Full measurement description.");
+    InitMeasurement(neckArcF_M, m, g, d, "G10");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highbust_arc_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highbust arc, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Highbust Side (Armpit) to HIghbust Side (Armpit) across chest.",
+                                  "Full measurement description.");
+    InitMeasurement(highbustArcF_M, m, g, d, "G11");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "bust_arc_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Bust arc, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Bust Side to Bust Side across chest.",
+                                  "Full measurement description.");
+    InitMeasurement(bustArcF_M, m, g, d, "G12");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "lowbust_arc_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Lowbust arc, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Lowbust Side to Lowbust Side across front.",
+                                  "Full measurement description.");
+    InitMeasurement(lowbustArcF_M, m, g, d, "G13");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "rib_arc_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Rib arc, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Rib Side to Rib Side, across front.",
+                                  "Full measurement description.");
+    InitMeasurement(ribArcF_M, m, g, d, "G14");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_arc_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist arc, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Side to Waist Side across front.",
+                                  "Full measurement description.");
+    InitMeasurement(waistArcF_M, m, g, d, "G15");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highhip_arc_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highhip arc, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Highhip Side to Highhip Side across front.",
+                                  "Full measurement description.");
+    InitMeasurement(highhipArcF_M, m, g, d, "G16");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "hip_arc_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Hip arc, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Hip Side to Hip Side across Front.",
+                                  "Full measurement description.");
+    InitMeasurement(hipArcF_M, m, g, d, "G17");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_arc_half_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck arc, front, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Neck arc, front'. ('Neck arc, front' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(neckArcHalfF_M, m, g, d, "G18", "(neck_arc_f/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highbust_arc_half_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highbust arc, front, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Highbust arc, front'. From Highbust Front to Highbust "
+                                  "Side. ('Highbust arc,  front' / 2).", "Full measurement description.");
+    InitMeasurement(highbustArcHalfF_M, m, g, d, "G19", "(highbust_arc_f/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "bust_arc_half_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Bust arc, front, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Bust arc, front'. ('Bust arc, front'/2).",
+                                  "Full measurement description.");
+    InitMeasurement(bustArcHalfF_M, m, g, d, "G20", "(bust_arc_f/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "lowbust_arc_half_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Lowbust arc, front, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Lowbust arc, front'.  ('Lowbust Arc, front' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(lowbustArcHalfF_M, m, g, d, "G21", "(lowbust_arc_f/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "rib_arc_half_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Rib arc, front, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Rib arc, front'.   ('Rib Arc, front' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(ribArcHalfF_M, m, g, d, "G22", "(rib_arc_f/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_arc_half_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist arc, front, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Waist arc, front'. ('Waist arc, front' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(waistArcHalfF_M, m, g, d, "G23", "(waist_arc_f/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highhip_arc_half_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highhip arc, front, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Highhip arc, front'.  ('Highhip arc, front' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(highhipArcHalfF_M, m, g, d, "G24", "(highhip_arc_f/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "hip_arc_half_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Hip arc, front, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Hip arc, front'. ('Hip arc, front' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(hipArcHalfF_M, m, g, d, "G25", "(hip_arc_f/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_arc_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck arc, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side to Neck Side across back. ('Neck circumference' - "
+                                  "'Neck arc, front').", "Full measurement description.");
+    InitMeasurement(neckArcB_M, m, g, d, "G26", "(neck_circ - neck_arc_f)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highbust_arc_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highbust arc, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Highbust Side  to Highbust Side across back. ('Highbust "
+                                  "circumference' - 'Highbust arc, front').", "Full measurement description.");
+    InitMeasurement(highbustArcB_M, m, g, d, "G27", "(highbust_circ - highbust_arc_f)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "bust_arc_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Bust arc, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Bust Side to Bust Side across back. ('Bust circumference' - "
+                                  "'Bust arc, front').", "Full measurement description.");
+    InitMeasurement(bustArcB_M, m, g, d, "G28", "(bust_circ - bust_arc_f)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "lowbust_arc_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Lowbust arc, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Lowbust Side to Lowbust Side across back.  ('Lowbust "
+                                  "circumference' - 'Lowbust arc, front').", "Full measurement description.");
+    InitMeasurement(lowbustArcB_M, m, g, d, "G29", "(lowbust_circ - lowbust_arc_f)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "rib_arc_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Rib arc, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Rib Side to Rib side across back. ('Rib circumference' - 'Rib arc, front').",
+                                  "Full measurement description.");
+    InitMeasurement(ribArcB_M, m, g, d, "G30", "(rib_circ - rib_arc_f)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_arc_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist arc, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Side to Waist Side across back. ('Waist circumference' "
+                                  "- 'Waist arc, front').", "Full measurement description.");
+    InitMeasurement(waistArcB_M, m, g, d, "G31", "(waist_circ - waist_arc_f)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highhip_arc_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highhip arc, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Highhip Side to Highhip Side across back. ('Highhip "
+                                  "circumference' - 'Highhip arc, front').", "Full measurement description.");
+    InitMeasurement(highhipArcB_M, m, g, d, "G32", "(highhip_circ - highhip_arc_f)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "hip_arc_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Hip arc, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Hip Side to Hip Side across back. ('Hip circumference' - 'Hip arc, front').",
+                                  "Full measurement description.");
+    InitMeasurement(hipArcB_M, m, g, d, "G33", "(hip_circ - hip_arc_f)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_arc_half_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck arc, back, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Neck arc, back'. ('Neck arc, back' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(neckArcHalfB_M, m, g, d, "G34", "(neck_arc_b/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highbust_arc_half_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highbust arc, back, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Highbust arc, back'. From Highbust Back to Highbust Side. "
+                                  "('Highbust arc, back' / 2).", "Full measurement description.");
+    InitMeasurement(highbustArcHalfB_M, m, g, d, "G35", "(highbust_arc_b/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "bust_arc_half_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Bust arc, back, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Bust arc, back'. ('Bust arc, back' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(bustArcHalfB_M, m, g, d, "G36", "(bust_arc_b/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "lowbust_arc_half_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Lowbust arc, back, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Lowbust Arc, back'. ('Lowbust arc, back' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(lowbustArcHalfB_M, m, g, d, "G37", "(lowbust_arc_b/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "rib_arc_half_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Rib arc, back, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Rib arc, back'. ('Rib arc, back' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(ribArcHalfB_M, m, g, d, "G38", "(rib_arc_b/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_arc_half_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist arc, back, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Waist arc, back'. ('Waist  arc, back' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(waistArcHalfB_M, m, g, d, "G39", "(waist_arc_b/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highhip_arc_half_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highhip arc, back, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Highhip arc, back'. From Highhip Back to Highbust Side. "
+                                  "('Highhip arc, back'/ 2).", "Full measurement description.");
+    InitMeasurement(highhipArcHalfB_M, m, g, d, "G40", "(highhip_arc_b/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "hip_arc_half_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Hip arc, back, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Hip arc, back'. ('Hip arc, back' / 2).",
+                                  "Full measurement description.");
+    InitMeasurement(hipArcHalfB_M, m, g, d, "G41", "(hip_arc_b/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "hip_with_abdomen_arc_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Hip arc with Abdomen, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Curve stiff paper around front of abdomen, tape at sides. Measure "
+                                  "from Hip Side to Hip Side over paper across front.",
+                                  "Full measurement description.");
+    InitMeasurement(hipWithAbdomenArcF_M, m, g, d, "G42");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "body_armfold_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Body circumference at Armfold level", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure around arms and torso at Armfold level.",
+                                  "Full measurement description.");
+    InitMeasurement(bodyArmfoldCirc_M, m, g, d, "G43");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "body_bust_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Body circumference at Bust level", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure around arms and torso at Bust level.",
+                                  "Full measurement description.");
+    InitMeasurement(bodyBustCirc_M, m, g, d, "G44");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "body_torso_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Body circumference of full torso", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Circumference around torso from mid-shoulder around crotch back up "
+                                  "to mid-shoulder.", "Full measurement description.");
+    InitMeasurement(bodyTorsoCirc_M, m, g, d, "G45");
     //=================================================================================================================
 }
 
@@ -1214,94 +895,295 @@ void VTranslateMeasurements::InitGroupH()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_waist_front",
+    m = QmuTranslation::translate("Measurements", "neck_front_to_waist_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Waist Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip to Waist Front.", "Full measurement description.");
-    InitMeasurement(shoulderTipToWaistFront_M, m, g, d, "H01");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_front_to_waist_side",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Front to Waist Side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Front to Waist Side, across front.",
+    g = QmuTranslation::translate("Measurements", "Neck Front to Waist Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Neck Front, over tape between Breastpoints, down to Waist Front.",
                                   "Full measurement description.");
-    InitMeasurement(neckFrontToWaistSide_M, m, g, d, "H02");
+    InitMeasurement(neckFrontToWaistF_M, m, g, d, "H01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_side_f",
+    m = QmuTranslation::translate("Measurements", "neck_front_to_waist_flat_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Waist Side, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side to Waist Side, across front.",
+    g = QmuTranslation::translate("Measurements", "Neck Front to Waist Front flat", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Front down between breasts to Waist Front.",
                                   "Full measurement description.");
-    InitMeasurement(neckSideToWaistSideF_M, m, g, d, "H03");
+    InitMeasurement(neckFrontToWaistFlatF_M, m, g, d, "H02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_armfold_f",
+    m = QmuTranslation::translate("Measurements", "armpit_to_waist_side",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Armfold Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side to Armfold front.", "Full measurement description.");
-    InitMeasurement(neckSideToArmfoldF_M, m, g, d, "H04");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_armpit_f",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Highbust Side, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side to Highbust Side (Armpit), across front.",
+    g = QmuTranslation::translate("Measurements", "Armpit to Waist Side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Armpit down to Waist Side.",
                                   "Full measurement description.");
-    InitMeasurement(neckSideToArmpitF_M, m, g, d, "H05");
+    InitMeasurement(armpitToWaistSide_M, m, g, d, "H03");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_bust_side_f",
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_waist_side_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Bust Side, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Neck Side to Bust Side, across front.",
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Waist Side, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Shoulder Tip, curving around Armscye Front, then down to Waist Side.",
                                   "Full measurement description.");
-    InitMeasurement(neckSideToBustSideF_M, m, g, d, "H06");
+    InitMeasurement(shoulderTipToWaistSideF_M, m, g, d, "H04");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_waist_back",
+    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Waist Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip to Waist Back, across back.",
+    g = QmuTranslation::translate("Measurements", "Neck Side to Waist level, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side straight down front to Waist level.",
                                   "Full measurement description.");
-    InitMeasurement(shoulderTipToWaistBack_M, m, g, d, "H07");
+    InitMeasurement(neckSideToWaistF_M, m, g, d, "H05");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_back_to_waist_side",
+    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_bustpoint_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Back to Waist Side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back to Waist Side, across back.",
-                                  "Full measurement description.");
-    InitMeasurement(neckBackToWaistSide_M, m, g, d, "H08");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_side_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Waist Side, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side to Waist Side, across back.",
-                                  "Full measurement description.");
-    InitMeasurement(neckSideToWaistSideB_M, m, g, d, "H09");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_armfold_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Armfold Back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side to Armfold back.", "Full measurement description.");
-    InitMeasurement(neckSideToArmfoldB_M, m, g, d, "H10");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_armpit_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Highbust Side, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Neck Side to Highbust Side (Armpit), across back.",
-                                  "Full measurement description.");
-    InitMeasurement(neckSideToArmpitB_M, m, g, d, "H11");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "neck_side_to_bust_side_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Neck Side to Bust Side, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Neck Side to Bust Side, across back.",
-                                  "Full measurement description.");
-    InitMeasurement(neckSideToBustSideB_M, m, g, d, "H12");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_waist_b_1in_offset",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Waist Back, with 1in (2.54cm) offset",
+    g = QmuTranslation::translate("Measurements", "Neck Side to Waist level, through Bustpoint",
                                   "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Mark 1in (2.54cm) from Waist Back along waistline. Measure "
-                                  "from Shoulder Tip to mark.", "Full measurement description.");
-    InitMeasurement(shoulderTipToWaistB_1inOffset_M, m, g, d, "H13");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Neck Side over Bustpoint to Waist level, forming a straight line.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToWaistBustpointF_M, m, g, d, "H06");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_front_to_highbust_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Front to Highbust Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Neck Front down to Highbust Front.",
+                                  "Full measurement description.");
+    InitMeasurement(neckFrontToHighbustF_M, m, g, d, "H07");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highbust_to_waist_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highbust Front to Waist Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Highbust Front to Waist Front. Use tape to bridge gap between "
+                                  "Bustpoints. ('Neck Front to Waist Front' - 'Neck Front to Highbust Front').",
+                                  "Full measurement description.");
+    InitMeasurement(highbustToWaistF_M, m, g, d, "H08", "(neck_front_to_waist_f - neck_front_to_highbust_f)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_front_to_bust_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Front to Bust Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Neck Front down to Bust Front. Requires tape to cover gap between Bustpoints.",
+                                  "Full measurement description.");
+    InitMeasurement(neckFrontToBustF_M, m, g, d, "H09");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "bust_to_waist_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Bust Front to Waist Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Bust Front down to Waist level. ('Neck Front to Waist Front' "
+                                  "- 'Neck Front to Bust Front').", "Full measurement description.");
+    InitMeasurement(bustToWaistF_M, m, g, d, "H10", "(neck_front_to_waist_f - neck_front_to_bust_f)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "lowbust_to_waist_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Lowbust Front to Waist Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Lowbust Front down to Waist Front.",
+                                  "Full measurement description.");
+    InitMeasurement(lowbustToWaistF_M, m, g, d, "H11");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "rib_to_waist_side",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Rib Side to Waist Side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From lowest rib at side down to Waist Side.",
+                                  "Full measurement description.");
+    InitMeasurement(ribToWaistSide_M, m, g, d, "H12");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_armfold_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Armfold Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Shoulder Tip around Armscye down to Armfold Front.",
+                                  "Full measurement description.");
+    InitMeasurement(shoulderTipToArmfoldF_M, m, g, d, "H13");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_bust_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Bust level, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side straight down front to Bust level.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToBustF_M, m, g, d, "H14");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_highbust_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Highbust level, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side straight down front to Highbust level.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToHighbustF_M, m, g, d, "H15");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "shoulder_center_to_highbust_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Shoulder center to Highbust level, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From mid-Shoulder down front to Highbust level, aimed at Bustpoint.",
+                                  "Full measurement description.");
+    InitMeasurement(shoulderCenterToHighbustF_M, m, g, d, "H16");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_waist_side_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Waist Side, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Shoulder Tip, curving around Armscye Back, then down to Waist Side.",
+                                  "Full measurement description.");
+    InitMeasurement(shoulderTipToWaistSideB_M, m, g, d, "H17");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Waist level, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side straight down back to Waist level.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToWaistB_M, m, g, d, "H18");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_back_to_waist_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Back to Waist Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Back down to Waist Back.",
+                                  "Full measurement description.");
+    InitMeasurement(neckBackToWaistB_M, m, g, d, "H19");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_scapula_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Waist level, through Scapula", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Neck Side across Scapula down to Waist level, forming a straight line.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToWaistScapulaB_M, m, g, d, "H20");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_back_to_highbust_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Back to Highbust Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Back down to Highbust Back.",
+                                  "Full measurement description.");
+    InitMeasurement(neckBackToHighbustB_M, m, g, d, "H21");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "highbust_to_waist_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Highbust Back to Waist Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Highbust Back down to Waist Back. ('Neck Back to Waist Back' "
+                                  "- 'Neck Back to Highbust Back').", "Full measurement description.");
+    InitMeasurement(highbustToWaistB_M, m, g, d, "H22", "(neck_back_to_waist_b - neck_back_to_highbust_b)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_back_to_bust_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Back to Bust Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Back down to Bust Back.",
+                                  "Full measurement description.");
+    InitMeasurement(neckBackToBustB_M, m, g, d, "H23");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "bust_to_waist_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Bust Back to Waist Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Bust Back down to Waist level. ('Neck Back to Waist Back' "
+                                  "- 'Neck Back to Bust Back').", "Full measurement description.");
+    InitMeasurement(bustToWaistB_M, m, g, d, "H24", "(neck_back_to_waist_b - neck_back_to_bust_b)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "lowbust_to_waist_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Lowbust Back to Waist Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Lowbust Back down to Waist Back.",
+                                  "Full measurement description.");
+    InitMeasurement(lowbustToWaistB_M, m, g, d, "H25");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_armfold_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Armfold Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Shoulder Tip around Armscye down to Armfold Back.",
+                                  "Full measurement description.");
+    InitMeasurement(shoulderTipToArmfoldB_M, m, g, d, "H26");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_bust_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Bust level, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side straight down back to Bust level.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToBustB_M, m, g, d, "H27");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_highbust_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Highbust level, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side straight down back to Highbust level.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToHighbustB_M, m, g, d, "H28");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "shoulder_center_to_highbust_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Shoulder center to Highbust level, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From mid-Shoulder down back to Highbust level, aimed through Scapula.",
+                                  "Full measurement description.");
+    InitMeasurement(shoulderCenterToHighbustB_M, m, g, d, "H29");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_to_highhip_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist Front to Highhip Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Front to Highhip Front.",
+                                  "Full measurement description.");
+    InitMeasurement(waistToHighhipF_M, m, g, d, "H30");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_to_hip_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist Front to Hip Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Front to Hip Front.",
+                                  "Full measurement description.");
+    InitMeasurement(waistToHipF_M, m, g, d, "H31");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_to_highhip_side",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist Side to Highhip Side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Side to Highhip Side.",
+                                  "Full measurement description.");
+    InitMeasurement(waistToHighhipSide_M, m, g, d, "H32");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_to_highhip_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist Back to Highhip Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Back down to Highhip Back.",
+                                  "Full measurement description.");
+    InitMeasurement(waistToHighhipB_M, m, g, d, "H33");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_to_hip_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist Back to Hip Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Waist Back down to Hip Back. Requires tape to cover the gap between buttocks.",
+                                  "Full measurement description.");
+    InitMeasurement(waistToHipB_M, m, g, d, "H34");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "waist_to_hip_side",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Waist Side to Hip Side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Side to Hip Side.",
+                                  "Full measurement description.");
+    InitMeasurement(waistToHipSide_M, m, g, d, "H35");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "shoulder_slope_neck_side_angle",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Shoulder Slope Angle from Neck Side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Angle formed by line from Neck Side to Shoulder Tip and line from "
+                                  "Neck Side parallel to floor.", "Full measurement description.");
+    InitMeasurement(shoulderSlopeNeckSideAngle_M, m, g, d, "H36");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "shoulder_slope_neck_side_length",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Shoulder Slope length from Neck Side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance between Neck Side and Shoulder Tip.",
+                                  "Full measurement description.");
+    InitMeasurement(shoulderSlopeNeckSideLength_M, m, g, d, "H37");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "shoulder_slope_neck_back_angle",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Shoulder Slope Angle from Neck Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Angle formed by  line from Neck Back to Shoulder Tip and line from "
+                                  "Neck Back parallel to floor.", "Full measurement description.");
+    InitMeasurement(shoulderSlopeNeckBackAngle_M, m, g, d, "H38");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "shoulder_slope_neck_back_height",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Shoulder Slope length from Neck Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance between Neck Back and Shoulder Tip.",
+                                  "Full measurement description.");
+    InitMeasurement(shoulderSlopeNeckBackHeight_M, m, g, d, "H39");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "shoulder_slope_shoulder_tip_angle",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Shoulder Slope Angle from Shoulder Tip", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Angle formed by line from Neck Side to Shoulder Tip and vertical "
+                                  "line at Shoulder Tip.", "Full measurement description.");
+    InitMeasurement(shoulderSlopeShoulderTipAngle_M, m, g, d, "H40");
     //=================================================================================================================
 }
 
@@ -1315,153 +1197,106 @@ void VTranslateMeasurements::InitGroupI()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_shoulder_tip_to_wrist_bent",
+    m = QmuTranslation::translate("Measurements", "shoulder_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Wrist, bent", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip around Elbow to radial Wrist bone, Arm is bent.",
+    g = QmuTranslation::translate("Measurements", "Shoulder length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side to Shoulder Tip.",
                                   "Full measurement description.");
-    InitMeasurement(armShoulderTipToWristBent_M, m, g, d, "I01");
+    InitMeasurement(shoulderLength_M, m, g, d, "I01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_shoulder_tip_to_elbow_bent",
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_shoulder_tip_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Elbow, bent", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip to Elbow Tip, Arm is bent.",
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Shoulder Tip, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Shoulder Tip to Shoulder Tip, across front.",
                                   "Full measurement description.");
-    InitMeasurement(armShoulderTipToElbowBent_M, m, g, d, "I02");
+    InitMeasurement(shoulderTipToShoulderTipF_M, m, g, d, "I02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_elbow_to_wrist_bent",
+    m = QmuTranslation::translate("Measurements", "across_chest_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Elbow to Wrist, bent", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Elbow Tip to Wrist, calculate as ( Arm: Shoulder Tip to "
-                                  "Wrist (bent) -  Arm: Shoulder Tip to Elbow (bent) ).",
+    g = QmuTranslation::translate("Measurements", "Across Chest", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Armscye to Armscye at narrowest width across chest.",
                                   "Full measurement description.");
-    InitMeasurement(armElbowToWristBent_M, m, g, d, "I03");
+    InitMeasurement(acrossChestF_M, m, g, d, "I03");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_elbow_circ_bent",
+    m = QmuTranslation::translate("Measurements", "armfold_to_armfold_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Elbow circumference, bent", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Elbow circumference, Arm is bent.", "Full measurement description.");
-    InitMeasurement(armElbowCircBent_M, m, g, d, "I04");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_shoulder_tip_to_wrist",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Wrist", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder Tip to radial Wrist bone, Arm is straight.",
+    g = QmuTranslation::translate("Measurements", "Armfold to Armfold, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Armfold to Armfold, shortest distance between Armfolds, not parallel to floor.",
                                   "Full measurement description.");
-    InitMeasurement(armShoulderTipToWrist_M, m, g, d, "I05");
+    InitMeasurement(armfoldToArmfoldF_M, m, g, d, "I04");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_shoulder_tip_to_elbow",
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_shoulder_tip_half_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Elbow", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Shoulder tip to Elbow Tip, Arm is straight.",
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Shoulder Tip, front, half",
+                                  "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of' Shoulder Tip to Shoulder tip, front'. ('Shoulder Tip to "
+                                  "Shoulder Tip, front' / 2).", "Full measurement description.");
+    InitMeasurement(shoulderTipToShoulderTipHalfF_M, m, g, d, "I05", "(shoulder_tip_to_shoulder_tip_f/2)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "across_chest_half_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Across Chest, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Across Chest'. ('Across Chest' / 2).",
                                   "Full measurement description.");
-    InitMeasurement(armShoulderTipToElbow_M, m, g, d, "I06");
+    InitMeasurement(acrossChestHalfF_M, m, g, d, "I06", "(across_chest_f/2)");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_elbow_to_wrist",
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_shoulder_tip_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Elbow to Wrist", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Length from Elbow to Wrist, Arm is straight. Measure as "
-                                  "( Arm: Shoulder Tip to Wrist - Arm: Shoulder Tip to Elbow ).",
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Shoulder Tip, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Shoulder Tip to Shoulder Tip, across the back.",
                                   "Full measurement description.");
-    InitMeasurement(armElbowToWrist_M, m, g, d, "I07");
+    InitMeasurement(shoulderTipToShoulderTipB_M, m, g, d, "I07");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_armpit_to_wrist",
+    m = QmuTranslation::translate("Measurements", "across_back_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Armpit to Wrist, inside", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Armpit to ulna Wrist bone, Arm is straight.",
+    g = QmuTranslation::translate("Measurements", "Across Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Armscye to Armscye at the narrowest width of the back.",
                                   "Full measurement description.");
-    InitMeasurement(armArmpitToWrist_M, m, g, d, "I08");
+    InitMeasurement(acrossBackB_M, m, g, d, "I08");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_armpit_to_elbow",
+    m = QmuTranslation::translate("Measurements", "armfold_to_armfold_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Armpit to Elbow, inside", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Armpit to Elbow ulna bone, Arm is straight.",
+    g = QmuTranslation::translate("Measurements", "Armfold to Armfold, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Armfold to Armfold across the back.",
                                   "Full measurement description.");
-    InitMeasurement(armArmpitToElbow_M, m, g, d, "I09");
+    InitMeasurement(armfoldToArmfoldB_M, m, g, d, "I09");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_elbow_to_wrist_inside",
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_shoulder_tip_half_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Elbow to Wrist, inside", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Elbow to Wrist ulna bone, calculate as  "
-                                  "( Arm: Armpit to Wrist - Arm: Armpit to Elbow ).", "Full measurement description.");
-    InitMeasurement(armElbowToWristInside_M, m, g, d, "I10");
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Shoulder Tip, back, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Shoulder Tip to Shoulder Tip, back'. ('Shoulder Tip to "
+                                  "Shoulder Tip,  back' / 2).", "Full measurement description.");
+    InitMeasurement(shoulderTipToShoulderTipHalfB_M, m, g, d, "I10", "(shoulder_tip_to_shoulder_tip_b/2)");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_upper_circ",
+    m = QmuTranslation::translate("Measurements", "across_back_half_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Upper Arm circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm circumference at Armpit level.",
+    g = QmuTranslation::translate("Measurements", "Across Back, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Across Back'. ('Across Back' / 2).",
                                   "Full measurement description.");
-    InitMeasurement(armUpperCirc_M, m, g, d, "I11");
+    InitMeasurement(acrossBackHalfB_M, m, g, d, "I11", "(across_back_b/2)");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_above_elbow_circ",
+    m = QmuTranslation::translate("Measurements", "neck_front_to_shoulder_tip_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Above Elbow circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm circumference at Bicep level.", "Full measurement description.");
-    InitMeasurement(armAboveElbowCirc_M, m, g, d, "I12");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_elbow_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Elbow circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Elbow circumference, Arm is straight.",
+    g = QmuTranslation::translate("Measurements", "Neck Front to Shoulder Tip", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Front to Shoulder Tip.",
                                   "Full measurement description.");
-    InitMeasurement(armElbowCirc_M, m, g, d, "I13");
+    InitMeasurement(neckFrontToShoulderTipF_M, m, g, d, "I12");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_lower_circ",
+    m = QmuTranslation::translate("Measurements", "neck_back_to_shoulder_tip_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Lower Arm circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm circumference where lower arm is widest.",
+    g = QmuTranslation::translate("Measurements", "Neck Back to Shoulder Tip", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Back to Shoulder Tip.",
                                   "Full measurement description.");
-    InitMeasurement(armLowerCirc_M, m, g, d, "I14");
+    InitMeasurement(neckBackToShoulderTipB_M, m, g, d, "I13");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_wrist_circ",
+    m = QmuTranslation::translate("Measurements", "neck_width",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Wrist circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Wrist circumference.", "Full measurement description.");
-    InitMeasurement(armWristCirc_M, m, g, d, "I15");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_shoulder_tip_to_armfold_line",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Armfold line", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Armfold line.",
+    g = QmuTranslation::translate("Measurements", "Neck Width", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "Measure between the 'legs' of an unclosed necklace or chain draped around the neck.",
                                   "Full measurement description.");
-    InitMeasurement(armShoulderTipToArmfoldLine_M, m, g, d, "I16");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "armscye_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Armscye: Circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure Armscye circumference through Shoulder Tip and Armpit, "
-                                  "Arm is hanging straight at side.", "Full measurement description.");
-    InitMeasurement(armscyeCirc_M, m, g, d, "I17");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "armscye_length",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Armscye: Length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Vertical distance from Shoulder Tip to Armpit.",
-                                  "Full measurement description.");
-    InitMeasurement(armscyeLength_M, m, g, d, "I18");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "armscye_width",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Armscye: Width", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Horizontal distance from Armscye front to Armscye back.",
-                                  "Full measurement description.");
-    InitMeasurement(armscyeWidth_M, m, g, d, "I19");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_neck_side_to_finger_tip",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Neck Side to Finger Tip", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side to end of middle finger, calculate as "
-                                  "( Shoulder Length + Arm: Shoulder Tip to Wrist + Hand length ).",
-                                  "Full measurement description.");
-    InitMeasurement(armNeckSideToFingerTip_M, m, g, d, "I20",
-                    "(shoulder_length + arm_shoulder_tip_to_wrist + hand_length)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "arm_neck_side_to_wrist",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Arm: Neck Side to Wrist", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Side to Wrist, calculate as ( Shoulder Length + "
-                                  "Arm: Shoulder Tip to Wrist ).", "Full measurement description.");
-    InitMeasurement(armNeckSideToWrist_M, m, g, d, "I21");
+    InitMeasurement(neckWidth_M, m, g, d, "I14");
     //=================================================================================================================
 }
 
@@ -1475,102 +1310,70 @@ void VTranslateMeasurements::InitGroupJ()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_crotch_to_floor",
+    m = QmuTranslation::translate("Measurements", "bustpoint_to_bustpoint",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Crotch to floor", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Stand feet close together. Measure from Crotch level (close to "
-                                  "body) straight down to floor.", "Full measurement description.");
-    InitMeasurement(legCrotchToFloor_M, m, g, d, "J01");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_waist_side_to_floor",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Waist Side to floor", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure from Waist Side, along hip curve to Hip level, then "
-                                  "straight down to floor.", "Full measurement description.");
-    InitMeasurement(legWaistSideToFloor_M, m, g, d, "J02");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_waist_side_to_knee",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Waist Side to Knee", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist side to Knee, calculate as (Leg: Waist Side to Floor - "
-                                  "Height: Knee).", "Full measurement description.");
-    InitMeasurement(legWaistSideToKnee_M, m, g, d, "J03");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_thigh_upper_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Thigh Upper circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure thigh circumference at the fullest part of the upper "
-                                  "thigh, near the crotch.", "Full measurement description.");
-    InitMeasurement(legThighUpperCirc_M, m, g, d, "J04");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_thigh_mid_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Thigh Middle circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Thigh circumference roughly halfway between crotch and knee.",
+    g = QmuTranslation::translate("Measurements", "Bustpoint to Bustpoint", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Bustpoint to Bustpoint.",
                                   "Full measurement description.");
-    InitMeasurement(legThighMidCirc_M, m, g, d, "J05");
+    InitMeasurement(bustpointToBustpoint_M, m, g, d, "J01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_knee_circ",
+    m = QmuTranslation::translate("Measurements", "bustpoint_to_neck_side",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Knee circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Knee circumference, Leg is straight.",
+    g = QmuTranslation::translate("Measurements", "Bustpoint to Neck Side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side to Bustpoint.",
                                   "Full measurement description.");
-    InitMeasurement(legKneeCirc_M, m, g, d, "J06");
+    InitMeasurement(bustpointToNeckSide_M, m, g, d, "J02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_knee_small_circ",
+    m = QmuTranslation::translate("Measurements", "bustpoint_to_lowbust",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Knee Small circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg circumference just below the knee",
+    g = QmuTranslation::translate("Measurements", "Bustpoint to Lowbust", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Bustpoint down to Lowbust level, following curve of bust or chest.",
                                   "Full measurement description.");
-    InitMeasurement(legKneeSmallCirc_M, m, g, d, "J07");
+    InitMeasurement(bustpointToLowbust_M, m, g, d, "J03");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_calf_circ",
+    m = QmuTranslation::translate("Measurements", "bustpoint_to_waist",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Calf circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Leg circumference at the widest part of Calf.",
+    g = QmuTranslation::translate("Measurements", "Bustpoint to Waist level", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Bustpoint to straight down to Waist level, forming a straight "
+                                  "line (not curving along the body).", "Full measurement description.");
+    InitMeasurement(bustpointToWaist_M, m, g, d, "J04");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "bustpoint_to_bustpoint_half",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Bustpoint to Bustpoint, half", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Half of 'Bustpoint to Bustpoint'. ('Bustpoint to Bustpoint' / 2).",
                                   "Full measurement description.");
-    InitMeasurement(legCalfCirc_M, m, g, d, "J08");
+    InitMeasurement(bustpointToBustpointHalf_M, m, g, d, "J05", "(bustpoint_to_bustpoint/2)");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_ankle_high_circ",
+    m = QmuTranslation::translate("Measurements", "bustpoint_neck_side_to_waist",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Ankle High circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Ankle circumference where the indentation at the back of the ankle "
-                                  "is the deepest.", "Full measurement description.");
-    InitMeasurement(legAnkleHighCirc_M, m, g, d, "J09");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_ankle_circ",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Ankle circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Ankle circumference where front of Leg meets the top of the Foot.",
+    g = QmuTranslation::translate("Measurements", "Bustpoint, Neck Side to Waist level", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side to Bustpoint, then straight down to Waist level. "
+                                  "('Neck Side to Bustpoint' + 'Bustpoint to Waist level').",
                                   "Full measurement description.");
-    InitMeasurement(legAnkleCirc_M, m, g, d, "J10");
+    InitMeasurement(bustpointNeckSideToWaist_M, m, g, d, "J06", "(bustpoint_to_neck_side + bustpoint_to_waist)");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_knee_circ_bent",
+    m = QmuTranslation::translate("Measurements", "bustpoint_to_shoulder_tip",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Knee circumference, bent", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Knee circumference, Leg is bent.", "Full measurement description.");
-    InitMeasurement(legKneeCircBent_M, m, g, d, "J11");
+    g = QmuTranslation::translate("Measurements", "Bustpoint to Shoulder Tip", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Bustpoint to Shoulder tip.",
+                                  "Full measurement description.");
+    InitMeasurement(bustpointToShoulderTip_M, m, g, d, "J07");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_ankle_diag_circ",
+    m = QmuTranslation::translate("Measurements", "bustpoint_to_waist_front",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Ankle diagonal circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Ankle circumference taken diagonally from corner of Heel through "
-                                  "point where Leg meets Foot.", "Full measurement description.");
-    InitMeasurement(legAnkleDiagCirc_M, m, g, d, "J12");
+    g = QmuTranslation::translate("Measurements", "Bustpoint to Waist Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Bustpoint to Waist Front, in a straight line, not following "
+                                  "the curves of the body.", "Full measurement description.");
+    InitMeasurement(bustpointToWaistFront_M, m, g, d, "J08");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_crotch_to_ankle",
+    m = QmuTranslation::translate("Measurements", "bustpoint_to_bustpoint_halter",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Crotch to Ankle", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Crotch to Ankle level, calculate as ( Leg: Crotch to "
-                                  "Floor - Height: Ankle ).", "Full measurement description.");
-    InitMeasurement(legCrotchToAnkle_M, m, g, d, "J13", "(leg_crotch_to_floor - height_ankle)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "leg_waist_side_to_ankle",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Leg: Waist Side to Ankle", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Side to Ankle level, calculate as (Leg: Waist Side "
-                                  "to Floor  -  Height: Ankle).", "Full measurement description.");
-    InitMeasurement(legWaistSideToAnkle_M, m, g, d, "J14", "(leg_waist_side_to_floor - height_ankle)");
+    g = QmuTranslation::translate("Measurements", "Bustpoint to Bustpoint Halter", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Bustpoint around Neck Back down to other Bustpoint.",
+                                  "Full measurement description.");
+    InitMeasurement(bustpointToBustpointHalter_M, m, g, d, "J09");
     //=================================================================================================================
 }
 
@@ -1584,57 +1387,98 @@ void VTranslateMeasurements::InitGroupK()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "crotch_length",
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_waist_front",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Crotch length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Front then between Legs then to Waist Back. Apply tape "
-                                  "across gap between buttocks at Hip level.", "Full measurement description.");
-    InitMeasurement(crotchLength_M, m, g, d, "K01");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "crotch_length_b",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Crotch length, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Back to the beginning of vagina or end of testicles. "
-                                  "Apply tape across gap between buttocks at Hip level.",
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Waist Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Shoulder Tip diagonal to Waist Front.",
                                   "Full measurement description.");
-    InitMeasurement(crotchLengthB_M, m, g, d, "K02");
+    InitMeasurement(shoulderTipToWaistFront_M, m, g, d, "K01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "crotch_length_f",
+    m = QmuTranslation::translate("Measurements", "neck_front_to_waist_side",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Crotch length, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist front to beginning of vagina or end of testicles, "
-                                  "calculate from ( Crotch Length  - Crotch Length (back) ).",
+    g = QmuTranslation::translate("Measurements", "Neck Front to Waist Side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Front diagonal to Waist Side.",
                                   "Full measurement description.");
-    InitMeasurement(crotchLengthF_M, m, g, d, "K03", "(crotch_length - crotch_length_b)");
+    InitMeasurement(neckFrontToWaistSide_M, m, g, d, "K02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rise_length_side",
+    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_side_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Rise length, side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Waist Side down to hard surface in seated position.",
+    g = QmuTranslation::translate("Measurements", "Neck Side to Waist Side, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side diagonal across front to Waist Side.",
                                   "Full measurement description.");
-    InitMeasurement(riseLengthSide_M, m, g, d, "K04");
+    InitMeasurement(neckSideToWaistSideF_M, m, g, d, "K03");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rise_length_diag",
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_waist_back",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Rise length, diagonal", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Tie a string around Thigh at Crotch level, sit on hard surface, "
-                                  "measure from Waist Side to point where string meets the hard surface.",
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Waist Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Shoulder Tip diagonal to Waist Back.",
                                   "Full measurement description.");
-    InitMeasurement(riseLengthDiag_M, m, g, d, "K05");
+    InitMeasurement(shoulderTipToWaistBack_M, m, g, d, "K04");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rise_length_b",
+    m = QmuTranslation::translate("Measurements", "shoulder_tip_to_waist_b_1in_offset",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Rise length, back", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Vertical distance from Waist Back to Crotch level.",
+    g = QmuTranslation::translate("Measurements", "Shoulder Tip to Waist Back, with 1in (2.54cm) offset",
+                                  "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Mark 1in (2.54cm) outward from Waist Back along Waist level. "
+                                  "Measure from Shoulder Tip diagonal to mark.",
                                   "Full measurement description.");
-    InitMeasurement(riseLengthB_M, m, g, d, "K06");
+    InitMeasurement(shoulderTipToWaistB_1inOffset_M, m, g, d, "K05");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "rise_length_f",
+    m = QmuTranslation::translate("Measurements", "neck_back_to_waist_side",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Rise length, front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Vertical Distance from Waist Front to Crotch level.",
+    g = QmuTranslation::translate("Measurements", "Neck Back to Waist Side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Back diagonal across back to Waist Side.",
                                   "Full measurement description.");
-    InitMeasurement(riseLengthF_M, m, g, d, "K07");
+    InitMeasurement(neckBackToWaistSide_M, m, g, d, "K06");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_waist_side_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Waist Side, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side diagonal across back to Waist Side.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToWaistSideB_M, m, g, d, "K07");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_armfold_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Armfold Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side diagonal to Armfold Front.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToArmfoldF_M, m, g, d, "K08");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_armpit_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Highbust Side, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side diagonal across front to Highbust Side (Armpit).",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToArmpitF_M, m, g, d, "K09");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_bust_side_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Bust Side, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Neck Side diagonal across front to Bust Side.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToBustSideF_M, m, g, d, "K10");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_armfold_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Armfold Back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side diagonal to Armfold Back.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToArmfoldB_M, m, g, d, "K11");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_armpit_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Highbust Side, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side diagonal across back to Highbust Side (Armpit).",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToArmpitB_M, m, g, d, "K12");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "neck_side_to_bust_side_b",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Neck Side to Bust Side, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Neck Side diagonal across back to Bust Side.",
+                                  "Full measurement description.");
+    InitMeasurement(neckSideToBustSideB_M, m, g, d, "K13");
     //=================================================================================================================
 }
 
@@ -1648,39 +1492,156 @@ void VTranslateMeasurements::InitGroupL()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hand_palm_length",
+    m = QmuTranslation::translate("Measurements", "arm_shoulder_tip_to_wrist_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hand: Palm length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Wrist line to base of Middle Finger.",
+    g = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Wrist, bent", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "Bend Arm, measure from Shoulder Tip around Elbow to radial Wrist bone.",
                                   "Full measurement description.");
-    InitMeasurement(handPalmLength_M, m, g, d, "L01");
+    InitMeasurement(armShoulderTipToWristBent_M, m, g, d, "L01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hand_length",
+    m = QmuTranslation::translate("Measurements", "arm_shoulder_tip_to_elbow_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hand: Length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Wrist line to end of Middle Finger.",
+    g = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Elbow, bent", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Bend Arm, measure from Shoulder Tip to Elbow Tip.",
                                   "Full measurement description.");
-    InitMeasurement(handLength_M, m, g, d, "L02");
+    InitMeasurement(armShoulderTipToElbowBent_M, m, g, d, "L02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hand_palm_width",
+    m = QmuTranslation::translate("Measurements", "arm_elbow_to_wrist_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hand: Palm width", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Width where Palm is widest.", "Full measurement description.");
-    InitMeasurement(handPalmWidth_M, m, g, d, "L03");
+    g = QmuTranslation::translate("Measurements", "Arm: Elbow to Wrist, bent", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Elbow tip to wrist. ('Arm: Shoulder Tip to Wrist, bent' - 'Arm: "
+                                  "Shoulder Tip to Elbow, bent').", "Full measurement description.");
+    InitMeasurement(armElbowToWristBent_M, m, g, d, "L03",
+                    "(arm_shoulder_tip_to_wrist_bent - arm_shoulder_tip_to_elbow_bent)");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hand_palm_circ",
+    m = QmuTranslation::translate("Measurements", "arm_elbow_circ_bent",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hand: Palm circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Circumference where Palm is widest.",
+    g = QmuTranslation::translate("Measurements", "Arm: Elbow circumference, bent", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Elbow circumference, arm is bent.",
                                   "Full measurement description.");
-    InitMeasurement(handPalmCirc_M, m, g, d, "L04");
+    InitMeasurement(armElbowCircBent_M, m, g, d, "L04");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "hand_circ",
+    m = QmuTranslation::translate("Measurements", "arm_shoulder_tip_to_wrist",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Hand: Circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Tuck thumb toward smallest finger, bring fingers close together. "
-                                  "Measure hand circumference around Thumb joint.", "Full measurement description.");
-    InitMeasurement(handCirc_M, m, g, d, "L05");
+    g = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Wrist", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Shoulder Tip to Wrist bone, arm straight.",
+                                  "Full measurement description.");
+    InitMeasurement(armShoulderTipToWrist_M, m, g, d, "L05");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_shoulder_tip_to_elbow",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Elbow", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Shoulder tip to Elbow Tip, arm straight.",
+                                  "Full measurement description.");
+    InitMeasurement(armShoulderTipToElbow_M, m, g, d, "L06");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_elbow_to_wrist",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Elbow to Wrist", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Elbow to Wrist, arm straight. ('Arm: Shoulder Tip to Wrist' "
+                                  "- 'Arm: Shoulder Tip to Elbow').", "Full measurement description.");
+    InitMeasurement(armElbowToWrist_M, m, g, d, "L07", "(arm_shoulder_tip_to_wrist - arm_shoulder_tip_to_elbow)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_armpit_to_wrist",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Armpit to Wrist, inside", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Armpit to ulna Wrist bone, arm straight.",
+                                  "Full measurement description.");
+    InitMeasurement(armArmpitToWrist_M, m, g, d, "L08");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_armpit_to_elbow",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Armpit to Elbow, inside", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Armpit to inner Elbow, arm straight.",
+                                  "Full measurement description.");
+    InitMeasurement(armArmpitToElbow_M, m, g, d, "L09");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_elbow_to_wrist_inside",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Elbow to Wrist, inside", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From inside Elbow to Wrist. ('Arm: Armpit to Wrist, inside' "
+                                  "- 'Arm: Armpit to Elbow, inside').", "Full measurement description.");
+    InitMeasurement(armElbowToWristInside_M, m, g, d, "L10", "(arm_armpit_to_wrist - arm_armpit_to_elbow)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_upper_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Upper Arm circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Arm circumference at Armpit level.",
+                                  "Full measurement description.");
+    InitMeasurement(armUpperCirc_M, m, g, d, "L11");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_above_elbow_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Above Elbow circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Arm circumference at Bicep level.",
+                                  "Full measurement description.");
+    InitMeasurement(armAboveElbowCirc_M, m, g, d, "L12");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_elbow_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Elbow circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Elbow circumference, arm straight.",
+                                  "Full measurement description.");
+    InitMeasurement(armElbowCirc_M, m, g, d, "L13");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_lower_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Lower Arm circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Arm circumference where lower arm is widest.",
+                                  "Full measurement description.");
+    InitMeasurement(armLowerCirc_M, m, g, d, "L14");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_wrist_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Wrist circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Wrist circumference.", "Full measurement description.");
+    InitMeasurement(armWristCirc_M, m, g, d, "L15");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_shoulder_tip_to_armfold_line",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Shoulder Tip to Armfold line", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Shoulder Tip down to Armpit level.",
+                                  "Full measurement description.");
+    InitMeasurement(armShoulderTipToArmfoldLine_M, m, g, d, "L16");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_neck_side_to_wrist",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Neck Side to Wrist", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Neck Side to Wrist. ('Shoulder Length' + 'Arm: Shoulder Tip to Wrist').",
+                                  "Full measurement description.");
+    InitMeasurement(armNeckSideToWrist_M, m, g, d, "L17", "(shoulder_length + arm_shoulder_tip_to_wrist)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "arm_neck_side_to_finger_tip",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Arm: Neck Side to Finger Tip", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Neck Side down arm to tip of middle finger. ('Shoulder "
+                                  "Length' + 'Arm: Shoulder Tip to Wrist' + 'Hand: Length').",
+                                  "Full measurement description.");
+    InitMeasurement(armNeckSideToFingerTip_M, m, g, d, "L18",
+                    "(shoulder_length + arm_shoulder_tip_to_wrist + hand_length)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "armscye_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Armscye: Circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Let arm hang at side. Measure Armscye circumference through "
+                                  "Shoulder Tip and Armpit.", "Full measurement description.");
+    InitMeasurement(armscyeCirc_M, m, g, d, "L19");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "armscye_length",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Armscye: Length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance from Shoulder Tip to Armpit.",
+                                  "Full measurement description.");
+    InitMeasurement(armscyeLength_M, m, g, d, "L20");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "armscye_width",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Armscye: Width", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Horizontal distance between Armscye Front and Armscye Back.",
+                                  "Full measurement description.");
+    InitMeasurement(armscyeWidth_M, m, g, d, "L21");
     //=================================================================================================================
 }
 
@@ -1694,32 +1655,108 @@ void VTranslateMeasurements::InitGroupM()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "foot_width",
+    m = QmuTranslation::translate("Measurements", "leg_crotch_to_floor",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Foot: Width", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure at widest part of foot.", "Full measurement description.");
-    InitMeasurement(footWidth_M, m, g, d, "M01");
+    g = QmuTranslation::translate("Measurements", "Leg: Crotch to floor", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Stand feet close together. Measure from crotch level (touching  "
+                                  "body, no extra space) down to floor.", "Full measurement description.");
+    InitMeasurement(legCrotchToFloor_M, m, g, d, "M01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "foot_length",
+    m = QmuTranslation::translate("Measurements", "leg_waist_side_to_floor",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Foot: Length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure from back of heel to end of longest toe.",
+    g = QmuTranslation::translate("Measurements", "Leg: Waist Side to floor", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Waist Side along curve to Hip level then straight down to floor.",
                                   "Full measurement description.");
-    InitMeasurement(footLength_M, m, g, d, "M02");
+    InitMeasurement(legWaistSideToFloor_M, m, g, d, "M02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "foot_circ",
+    m = QmuTranslation::translate("Measurements", "leg_thigh_upper_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Foot: Circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure circumference around widest part of foot.",
+    g = QmuTranslation::translate("Measurements", "Leg: Thigh Upper circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "Thigh circumference at the fullest part of the upper Thigh near the Crotch.",
                                   "Full measurement description.");
-    InitMeasurement(footCirc_M, m, g, d, "M03");
+    InitMeasurement(legThighUpperCirc_M, m, g, d, "M03");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "foot_instep_circ",
+    m = QmuTranslation::translate("Measurements", "leg_thigh_mid_circ",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Foot: Instep circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure circumference at tallest part of instep.",
+    g = QmuTranslation::translate("Measurements", "Leg: Thigh Middle circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Thigh circumference about halfway between Crotch and Knee.",
                                   "Full measurement description.");
-    InitMeasurement(footInstepCirc_M, m, g, d, "M04");
+    InitMeasurement(legThighMidCirc_M, m, g, d, "M04");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "leg_knee_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Leg: Knee circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Knee circumference with straight leg.",
+                                  "Full measurement description.");
+    InitMeasurement(legKneeCirc_M, m, g, d, "M05");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "leg_knee_small_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Leg: Knee Small circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Leg circumference just below the knee.",
+                                  "Full measurement description.");
+    InitMeasurement(legKneeSmallCirc_M, m, g, d, "M06");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "leg_calf_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Leg: Calf circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Calf circumference at the largest part of lower leg.",
+                                  "Full measurement description.");
+    InitMeasurement(legCalfCirc_M, m, g, d, "M07");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "leg_ankle_high_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Leg: Ankle High circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "Ankle circumference where the indentation at the back of the ankle is the deepest.",
+                                  "Full measurement description.");
+    InitMeasurement(legAnkleHighCirc_M, m, g, d, "M08");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "leg_ankle_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Leg: Ankle circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Ankle circumference where front of leg meets the top of the foot.",
+                                  "Full measurement description.");
+    InitMeasurement(legAnkleCirc_M, m, g, d, "M09");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "leg_knee_circ_bent",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Leg: Knee circumference, bent", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Knee circumference with leg bent.",
+                                  "Full measurement description.");
+    InitMeasurement(legKneeCircBent_M, m, g, d, "M10");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "leg_ankle_diag_circ",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Leg: Ankle diagonal circumference", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Ankle circumference diagonal from top of foot to bottom of heel.",
+                                  "Full measurement description.");
+    InitMeasurement(legAnkleDiagCirc_M, m, g, d, "M11");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "leg_crotch_to_ankle",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Leg: Crotch to Ankle", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Crotch to Ankle. ('Leg: Crotch to Floor' - 'Height: Ankle').",
+                                  "Full measurement description.");
+    InitMeasurement(legCrotchToAnkle_M, m, g, d, "M12", "(leg_crotch_to_floor - height_ankle)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "leg_waist_side_to_ankle",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Leg: Waist Side to Ankle", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Waist Side to Ankle. ('Leg: Waist Side to Floor' - 'Height: Ankle').",
+                                  "Full measurement description.");
+    InitMeasurement(legWaistSideToAnkle_M, m, g, d, "M13", "(leg_waist_side_to_floor - height_ankle)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "leg_waist_side_to_knee",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Leg: Waist Side to Knee", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Side along curve to Hip level then straight down to "
+                                  "Knee level. ('Leg: Waist Side to Floor' - 'Height Knee').",
+                                  "Full measurement description.");
+    InitMeasurement(legWaistSideToKnee_M, m, g, d, "M14", "(leg_waist_side_to_floor - height_knee)");
     //=================================================================================================================
 }
 
@@ -1733,50 +1770,56 @@ void VTranslateMeasurements::InitGroupN()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "head_circ",
+    m = QmuTranslation::translate("Measurements", "crotch_length",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head: Circumference", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure circumference at largest level of head.",
+    g = QmuTranslation::translate("Measurements", "Crotch length", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Put tape across gap between buttocks at Hip level. Measure from "
+                                  "Waist Front down betwen legs and up to Waist Back.",
                                   "Full measurement description.");
-    InitMeasurement(headCirc_M, m, g, d, "N01");
+    InitMeasurement(crotchLength_M, m, g, d, "N01");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "head_length",
+    m = QmuTranslation::translate("Measurements", "crotch_length_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head: Length", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Vertical distance from Head Crown to bottom of jaw.",
+    g = QmuTranslation::translate("Measurements", "Crotch length, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Put tape across gap between buttocks at Hip level. Measure from "
+                                  "Waist Back to mid-Crotch, either at the vagina or between testicles and anus).",
                                   "Full measurement description.");
-    InitMeasurement(headLength_M, m, g, d, "N02");
+    InitMeasurement(crotchLengthB_M, m, g, d, "N02");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "head_depth",
+    m = QmuTranslation::translate("Measurements", "crotch_length_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head: Depth", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Horizontal distance from front of forehead to back of head.",
+    g = QmuTranslation::translate("Measurements", "Crotch length, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Front to start of vagina or end of testicles. ('Crotch "
+                                  "length' - 'Crotch length, back').", "Full measurement description.");
+    InitMeasurement(crotchLengthF_M, m, g, d, "N03", "(crotch_length - crotch_length_b)");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "rise_length_side",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Rise length, side", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "From Waist Side down to surface, while seated on hard surface.",
                                   "Full measurement description.");
-    InitMeasurement(headDepth_M, m, g, d, "N03");
+    InitMeasurement(riseLengthSide_M, m, g, d, "N04");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "head_width",
+    m = QmuTranslation::translate("Measurements", "rise_length_diag",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head: Width", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Horizontal distance from Head Side to Head Side, where Head is "
-                                  "widest.", "Full measurement description.");
-    InitMeasurement(headWidth_M, m, g, d, "N04");
+    g = QmuTranslation::translate("Measurements", "Rise length, diagonal", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure from Waist Side diagonally to a string tied at the top of "
+                                  "the leg, seated on a hard surface.", "Full measurement description.");
+    InitMeasurement(riseLengthDiag_M, m, g, d, "N05");
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "head_crown_to_neck_back",
+    m = QmuTranslation::translate("Measurements", "rise_length_b",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head: Crown to Neck Back, vertical distance",
-                                  "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Vertical distance from Head Crown to Neck Back. Calculate as "
-                                  "(Height  -  Height: Neck Back).", "Full measurement description.");
-    InitMeasurement(headCrownToNeckBack_M, m, g, d, "N05", "(height - height_neck_back)");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "head_chin_to_neck_back",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Head: Chin to Neck Back, vertical distance",
-                                  "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Vertical distance from bottom of jaw to Neck Back, calculate as "
-                                  "( Height  -  Height: Neck Back  -  Head: Length ).",
+    g = QmuTranslation::translate("Measurements", "Rise length, back", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Vertical distance from Waist Back to Crotch level.",
                                   "Full measurement description.");
-    InitMeasurement(headChinToNeckBack_M, m, g, d, "N06", "(height - height_neck_back - head_length)");
+    InitMeasurement(riseLengthB_M, m, g, d, "N06");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "rise_length_f",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Rise length, front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Vertical Distance from Waist Front to Crotch level.",
+                                  "Full measurement description.");
+    InitMeasurement(riseLengthF_M, m, g, d, "N07");
     //=================================================================================================================
 }
 
@@ -1825,7 +1868,7 @@ void VTranslateMeasurements::InitGroupO()
     d = QmuTranslation::translate("Measurements", "From Side to Side at Natural Waist level, across the back. "
                                   "Calculate as ( Natural Waist circumference  - Natural Waist arc (front) ).",
                                   "Full measurement description.");
-    InitMeasurement(waistNaturalArcB_M, m, g, d, "O05");
+    InitMeasurement(waistNaturalArcB_M, m, g, d, "O05", "(waist_natural_circ - waist_natural_arc_f)");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "waist_to_natural_waist_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
@@ -1905,41 +1948,26 @@ void VTranslateMeasurements::InitGroupP()
     QmuTranslation d;
 
     //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "armfold_to_armfold_bust",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Armfold to Armfold, front, curved through Bust Front",
-                                  "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure in a curve from Armfold Front right to Bust Front to "
-                                  "Armfold Front left.", "Full measurement description.");
-    InitMeasurement(armfoldToArmfoldBust_M, m, g, d, "P01");
-    //=================================================================================================================
-    m = QmuTranslation::translate("Measurements", "armfold_to_bust_front",
-                                  "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = QmuTranslation::translate("Measurements", "Armfold to Bust Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Measure from Armfold Front to Bust Front.",
-                                  "Full measurement description.");
-    InitMeasurement(armfoldToBustFront_M, m, g, d, "P02");
-    //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "neck_back_to_bust_front",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Neck Back to Bust Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back around Neck Side to Bust Front.",
+    d = QmuTranslation::translate("Measurements", "From Neck Back, over Shoulder, to Bust Front.",
                                   "Full measurement description.");
-    InitMeasurement(neckBackToBustFront_M, m, g, d, "P03");
+    InitMeasurement(neckBackToBustFront_M, m, g, d, "P01");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "neck_back_to_armfold_front",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Neck Back to Armfold Front", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back around Neck Side to Armfold Front.",
+    d = QmuTranslation::translate("Measurements", "From Neck Back over Shoulder to Armfold Front.",
                                   "Full measurement description.");
-    InitMeasurement(neckBackToArmfoldFront_M, m, g, d, "P04");
+    InitMeasurement(neckBackToArmfoldFront_M, m, g, d, "P02");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "neck_back_to_armfold_front_to_waist_side",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Neck Back, over Shoulder, to Waist Side", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back around Neck Side down front to Waist Side.",
+    d = QmuTranslation::translate("Measurements", "From Neck Back, over Shoulder, down chest to Waist Side.",
                                   "Full measurement description.");
-    InitMeasurement(neckBackToArmfoldFrontToWaistSide_M, m, g, d, "P05");
+    InitMeasurement(neckBackToArmfoldFrontToWaistSide_M, m, g, d, "P03");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "highbust_back_over_shoulder_to_armfold_front",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
@@ -1947,55 +1975,71 @@ void VTranslateMeasurements::InitGroupP()
                                   "Full measurement name.");
     d = QmuTranslation::translate("Measurements", "From Highbust Back over Shoulder to Armfold Front.",
                                   "Full measurement description.");
-    InitMeasurement(highbustBackOverShoulderToArmfoldFront_M, m, g, d, "P06");
+    InitMeasurement(highbustBackOverShoulderToArmfoldFront_M, m, g, d, "P04");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "highbust_back_over_shoulder_to_waist_front",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Highbust Back, over Shoulder, to Waist Front",
                                   "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Highbust Back over Shoulder to Waist Front.",
+    d = QmuTranslation::translate("Measurements",
+                                  "From Highbust Back, over Shoulder touching  Neck Side, to Waist Front.",
                                   "Full measurement description.");
-    InitMeasurement(highbustBackOverShoulderToWaistFront_M, m, g, d, "P07");
+    InitMeasurement(highbustBackOverShoulderToWaistFront_M, m, g, d, "P05");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "neck_back_to_armfold_front_to_neck_back",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Neck Back, to Armfold Front, to Neck Back",
                                   "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back over Shoulder to Armfold Front, then to Armfold "
-                                  "Back and return to Neck Back.", "Full measurement description.");
-    InitMeasurement(neckBackToArmfoldFrontToNeckBack_M, m, g, d, "P08");
+    d = QmuTranslation::translate("Measurements",
+                                  "From Neck Back, over Shoulder to Armfold Front, under arm and return to start.",
+                                  "Full measurement description.");
+    InitMeasurement(neckBackToArmfoldFrontToNeckBack_M, m, g, d, "P06");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "across_back_center_to_armfold_front_to_across_back_center",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Across Back Center, circled around Shoulder",
                                   "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Middle of Back over Shoulder to Armfold Front, to Armfold "
-                                  "Back and return to Middle of Back.", "Full measurement description.");
-    InitMeasurement(acrossBackCenterToArmfoldFrontToAcrossBackCenter_M, m, g, d, "P09");
+    d = QmuTranslation::translate("Measurements",
+                                  "From center of Across Back, over Shoulder, under Arm, and return to start.",
+                                  "Full measurement description.");
+    InitMeasurement(acrossBackCenterToArmfoldFrontToAcrossBackCenter_M, m, g, d, "P07");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "neck_back_to_armfold_front_to_highbust_back",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Neck Back, to Armfold Front, to Highbust Back",
                                   "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "From Neck Back over shoulder to Armfold Front, to Armfold Back "
-                                  "to Highbust Back.", "Full measurement description.");
-    InitMeasurement(neckBackToArmfoldFrontToHighbustBack_M, m, g, d, "P10");
+    d = QmuTranslation::translate("Measurements", "From Neck Back over Shoulder to Armfold Front, under arm to "
+                                  "Highbust Back.", "Full measurement description.");
+    InitMeasurement(neckBackToArmfoldFrontToHighbustBack_M, m, g, d, "P08");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "armfold_to_armfold_bust",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Armfold to Armfold, front, curved through Bust Front",
+                                  "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure in a curve from Armfold Left Front through Bust Front "
+                                  "curved back up to Armfold Right Front.", "Full measurement description.");
+    InitMeasurement(armfoldToArmfoldBust_M, m, g, d, "P09");
+    //=================================================================================================================
+    m = QmuTranslation::translate("Measurements", "armfold_to_bust_front",
+                                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = QmuTranslation::translate("Measurements", "Armfold to Bust Front", "Full measurement name.");
+    d = QmuTranslation::translate("Measurements", "Measure from Armfold Front to Bust Front, shortest distance "
+                                  "between the two, as straight as possible.", "Full measurement description.");
+    InitMeasurement(armfoldToBustFront_M, m, g, d, "P10");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "highbust_b_over_shoulder_to_highbust_f",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Highbust Back, over Shoulder, to Highbust level",
                                   "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Front aims at Bustpoint and back crosses overBladepoint. "
-                                  "Calculate as (Mid-Shoulder to Highbust (front) + Mid-Shoulder to Highbust (back)).",
-                                  "Full measurement description.");
-    InitMeasurement(highbustBOverShoulderToHighbustF_M, m, g, d, "P11",
-                    "(mid_shoulder_to_highbust_f + mid_shoulder_to_highbust_b)");
+    d = QmuTranslation::translate("Measurements", "From Highbust Back, over Shoulder, then aim at Bustpoint, stopping "
+                                  "measurement at Highbust level.", "Full measurement description.");
+    InitMeasurement(highbustBOverShoulderToHighbustF_M, m, g, d, "P11");
     //=================================================================================================================
     m = QmuTranslation::translate("Measurements", "armscye_arc",
                                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = QmuTranslation::translate("Measurements", "Armscye: Arc", "Full measurement name.");
-    d = QmuTranslation::translate("Measurements", "Front aims at Bustpoint and back crosses overBladepoint. "
-                                  "Calculate as (Mid-Shoulder to Highbust (front) + Mid-Shoulder to Highbust (back)).",
+    d = QmuTranslation::translate("Measurements",
+                                  "From Armscye at Across Chest over ShoulderTip  to Armscye at Across Back.",
                                   "Full measurement description.");
     InitMeasurement(armscyeArc_M, m, g, d, "P12");
     //=================================================================================================================
