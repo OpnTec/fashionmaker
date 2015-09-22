@@ -49,7 +49,7 @@ class VCommandLine
 private:
     static VCommandLinePtr instance;
     QCommandLineParser parser;
-    const QMap<QString, QCommandLineOption *> optionsUsed;
+    QMap<QString, QCommandLineOption *> optionsUsed;
     bool isGuiEnabled;
     friend class VApplication;
 
@@ -77,9 +77,8 @@ protected:
     static VCommandLinePtr Get(const QCoreApplication& app);
 
 public:
-    VCommandLine(const VCommandLine&) = delete;
-    VCommandLine& operator =(const VCommandLine&) = delete;
-    virtual ~VCommandLine(){}
+    Q_DISABLE_COPY(VCommandLine)
+    virtual ~VCommandLine();
 
     //@brief creates object and applies export related options to parser
 

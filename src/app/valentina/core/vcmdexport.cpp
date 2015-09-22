@@ -294,6 +294,13 @@ VCommandLinePtr VCommandLine::Get(const QCoreApplication& app)
     return instance;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+VCommandLine::~VCommandLine()
+{
+    qDeleteAll(optionsUsed.begin(), optionsUsed.end());
+    optionsUsed.clear();
+}
+
 //------------------------------------------------------------------------------------------------------
 Q_NORETURN void VCommandLine::Error(const QString &text) const
 {
