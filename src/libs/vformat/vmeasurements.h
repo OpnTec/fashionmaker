@@ -121,6 +121,8 @@ public:
     QStringList ListAll() const;
     QStringList ListKnown() const;
 
+    bool IsDefinedKnownNamesValid() const;
+
     void SetDataSize();
     void SetDataHeight();
 

@@ -577,5 +577,6 @@ qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
 void CheckFactor(qreal &oldFactor, const qreal &Newfactor);
 
 QStringList SupportedLocales();
+QStringList AllGroupNames();
 
 #endif // DEF_H

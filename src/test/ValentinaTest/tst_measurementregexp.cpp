@@ -55,7 +55,7 @@ TST_MeasurementRegExp::~TST_MeasurementRegExp()
 // cppcheck-suppress unusedFunction
 void TST_MeasurementRegExp::TestOriginalMeasurementNamesRegExp()
 {
-    const QStringList originalNames = OriginalNames();
+    const QStringList originalNames = AllGroupNames();
     const QRegularExpression re(NameRegExp());
 
     foreach(const QString &str, originalNames)
@@ -454,7 +454,7 @@ void TST_MeasurementRegExp::InitTrMs()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_MeasurementRegExp::CheckNames() const
 {
-    const QStringList originalNames = OriginalNames();
+    const QStringList originalNames = AllGroupNames();
     const QRegularExpression re(NameRegExp());
 
     foreach(const QString &str, originalNames)
@@ -462,28 +462,4 @@ void TST_MeasurementRegExp::CheckNames() const
         const QString translated = trMs->MToUser(str);
         QCOMPARE(re.match(translated).hasMatch(), true);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QStringList TST_MeasurementRegExp::OriginalNames() const
-{
-    const QStringList originalNames = QStringList() << ListGroupA()
-                                                    << ListGroupB()
-                                                    << ListGroupC()
-                                                    << ListGroupD()
-                                                    << ListGroupE()
-                                                    << ListGroupF()
-                                                    << ListGroupG()
-                                                    << ListGroupH()
-                                                    << ListGroupI()
-                                                    << ListGroupJ()
-                                                    << ListGroupK()
-                                                    << ListGroupL()
-                                                    << ListGroupM()
-                                                    << ListGroupN()
-                                                    << ListGroupO()
-                                                    << ListGroupP()
-                                                    << ListGroupQ();
-
-    return originalNames;
 }

@@ -245,9 +245,15 @@ bool MainWindow::LoadMeasurements(const QString &path)
         m = new VMeasurements(pattern);
         m->setXMLContent(path);
 
+        if (not m->IsDefinedKnownNamesValid())
+        {
+            VException e(tr("Measurement file contains invalid known measurement(s)."));
+            throw e;
+        }
+
         if (m->Type() == MeasurementsType::Unknown)
         {
-            VException e("Measurement file has unknown format.");
+            VException e(tr("Measurement file has unknown format."));
             throw e;
         }
 
@@ -274,9 +280,8 @@ bool MainWindow::LoadMeasurements(const QString &path)
         const QSet<QString> match = pList.toSet().subtract(mList.toSet());
         if (not match.isEmpty())
         {
-            VException e("Measurement file doesn't include all required measurements.");
-            e.AddMoreInformation(QString("Please, additionaly provide: %1")
-                                 .arg(QStringList(match.toList()).join(", ")));
+            VException e(tr("Measurement file doesn't include all required measurements."));
+            e.AddMoreInformation(tr("Please, additionaly provide: %1").arg(QStringList(match.toList()).join(", ")));
             throw e;
         }
 
@@ -3430,11 +3435,17 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 VMeasurements *m = new VMeasurements(pattern);
                 m->setXMLContent(mPath);
 
+                if (not m->IsDefinedKnownNamesValid())
+                {
+                    VException e(tr("Measurement file contains invalid known measurement(s)."));
+                    throw e;
+                }
+
                 patternType = m->Type();
 
                 if (patternType == MeasurementsType::Unknown)
                 {
-                    VException e("Measurement file has unknown format.");
+                    VException e(tr("Measurement file has unknown format."));
                     throw e;
                 }
 
@@ -3463,8 +3474,8 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 const QSet<QString> match = pList.toSet().subtract(mList.toSet());
                 if (not match.isEmpty())
                 {
-                    VException e("Measurement file doesn't include all required measurements.");
-                    e.AddMoreInformation(QString("Please, additionaly provide: %1")
+                    VException e(tr("Measurement file doesn't include all required measurements."));
+                    e.AddMoreInformation(tr("Please, additionaly provide: %1")
                                          .arg(QStringList(match.toList()).join(", ")));
                     throw e;
                 }

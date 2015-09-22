@@ -534,6 +534,28 @@ QStringList VMeasurements::ListKnown() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VMeasurements::IsDefinedKnownNamesValid() const
+{
+    QStringList names = AllGroupNames();
+    QSet<QString> set;
+    foreach (const QString &var, names)
+    {
+        set.insert(var);
+    }
+
+    names = ListKnown();
+    foreach (const QString &var, names)
+    {
+        if (not set.contains(var))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetDataSize()
 {
     data->SetSize(UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit()));

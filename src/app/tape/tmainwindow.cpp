@@ -194,11 +194,17 @@ void TMainWindow::LoadFile(const QString &path)
             m = new VMeasurements(data);
             m->setXMLContent(path);
 
+            if (not m->IsDefinedKnownNamesValid())
+            {
+                VException e(tr("File contains invalid known measurement(s)."));
+                throw e;
+            }
+
             mType = m->Type();
 
             if (mType == MeasurementsType::Unknown)
             {
-                VException e("File has unknown format.");
+                VException e(tr("File has unknown format."));
                 throw e;
             }
 

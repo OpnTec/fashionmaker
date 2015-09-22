@@ -57,7 +57,6 @@ private:
     int     LoadTranslation(const QString &checkedSystem, const QString &checkedLocale);
     void    InitTrMs();
     void    CheckNames() const;
-    QStringList OriginalNames() const;
 };
 
 #endif // TST_MEASUREMENTREGEXP_H

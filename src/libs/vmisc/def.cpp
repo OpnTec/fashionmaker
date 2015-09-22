@@ -935,3 +935,27 @@ QStringList SupportedLocales()
 
     return locales;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList AllGroupNames()
+{
+    const QStringList originalNames = QStringList() << ListGroupA()
+                                                    << ListGroupB()
+                                                    << ListGroupC()
+                                                    << ListGroupD()
+                                                    << ListGroupE()
+                                                    << ListGroupF()
+                                                    << ListGroupG()
+                                                    << ListGroupH()
+                                                    << ListGroupI()
+                                                    << ListGroupJ()
+                                                    << ListGroupK()
+                                                    << ListGroupL()
+                                                    << ListGroupM()
+                                                    << ListGroupN()
+                                                    << ListGroupO()
+                                                    << ListGroupP()
+                                                    << ListGroupQ();
+
+    return originalNames;
+}
