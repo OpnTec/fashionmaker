@@ -4574,6 +4574,22 @@ Voulez-vous sauvegarder les changements ? </translation>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Measurement file contains invalid known measurement(s).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement file has unknown format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement file doesn&apos;t include all required measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, additionaly provide: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6865,6 +6881,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File contains invalid known measurement(s).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File has unknown format.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
