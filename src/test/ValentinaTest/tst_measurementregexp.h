@@ -44,6 +44,8 @@ public:
 private slots:
     void TestOriginalMeasurementNamesRegExp();
     void TestMeasurementRegExp();
+    void TestCorrectOrderMeasurement_data();
+    void TestCorrectOrderMeasurement();
 
 private:
     Q_DISABLE_COPY(TST_MeasurementRegExp)
