@@ -875,15 +875,15 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     // E37
     names.insert(QStringLiteral("shoulder_drop"), QStringLiteral("shoulder_slope_neck_side_length"));
     // F02
-    names.insert(QStringLiteral("across_front_shoulder_width"), QStringLiteral("shoulder_width_f"));
+    names.insert(QStringLiteral("across_front_shoulder_width"), QStringLiteral("shoulder_tip_to_shoulder_tip_f"));
     // F03
     names.insert(QStringLiteral("upper_front_chest_width"), QStringLiteral("across_chest_f"));
     // F04
     names.insert(QStringLiteral("chest_width"), QStringLiteral("armfold_to_armfold_f"));
     names.insert(QStringLiteral("front_chest_width"), QStringLiteral("armfold_to_armfold_f"));
     // F05
-    names.insert(QStringLiteral("arc_behind_shoulder_girdle"), QStringLiteral("shoulder_width_b"));
-    names.insert(QStringLiteral("across_back_shoulder_width"), QStringLiteral("shoulder_width_b"));
+    names.insert(QStringLiteral("arc_behind_shoulder_girdle"), QStringLiteral("shoulder_tip_to_shoulder_tip_b"));
+    names.insert(QStringLiteral("across_back_shoulder_width"), QStringLiteral("shoulder_tip_to_shoulder_tip_b"));
     // F06
     names.insert(QStringLiteral("upper_back_width"), QStringLiteral("across_back_b"));
     // F07

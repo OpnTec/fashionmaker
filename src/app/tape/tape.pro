@@ -246,34 +246,19 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Dp1.png \
         $${PWD}/share/resources/diagrams/Dp2.png \
         $${PWD}/share/resources/diagrams/Dp3.png \
-        $${PWD}/share/resources/diagrams/Dp4.png \
-        $${PWD}/share/resources/diagrams/Dp5.png \
-        $${PWD}/share/resources/diagrams/Dp6.png \
-        $${PWD}/share/resources/diagrams/Dp7.png \
-        $${PWD}/share/resources/diagrams/Dp8.png \
         $${PWD}/share/resources/diagrams/Ep1.png \
         $${PWD}/share/resources/diagrams/Ep2.png \
-        $${PWD}/share/resources/diagrams/Ep3.png \
-        $${PWD}/share/resources/diagrams/Ep4.png \
-        $${PWD}/share/resources/diagrams/Ep5.png \
-        $${PWD}/share/resources/diagrams/Ep6.png \
-        $${PWD}/share/resources/diagrams/Ep7.png \
-        $${PWD}/share/resources/diagrams/Ep8.png \
-        $${PWD}/share/resources/diagrams/Ep9.png \
-        $${PWD}/share/resources/diagrams/Ep10.png \
-        $${PWD}/share/resources/diagrams/Ep11.png \
-        $${PWD}/share/resources/diagrams/Ep12.png \
         $${PWD}/share/resources/diagrams/Fp1.png \
         $${PWD}/share/resources/diagrams/Fp2.png \
         $${PWD}/share/resources/diagrams/Fp3.png \
-        $${PWD}/share/resources/diagrams/Fp4.png \
-        $${PWD}/share/resources/diagrams/Fp5.png \
-        $${PWD}/share/resources/diagrams/Fp6.png \
-        $${PWD}/share/resources/diagrams/Fp7.png \
         $${PWD}/share/resources/diagrams/Gp1.png \
         $${PWD}/share/resources/diagrams/Gp2.png \
         $${PWD}/share/resources/diagrams/Gp3.png \
         $${PWD}/share/resources/diagrams/Gp4.png \
+        $${PWD}/share/resources/diagrams/Gp5.png \
+        $${PWD}/share/resources/diagrams/Gp6.png \
+        $${PWD}/share/resources/diagrams/Gp7.png \
+        $${PWD}/share/resources/diagrams/Gp8.png \
         $${PWD}/share/resources/diagrams/Hp1.png \
         $${PWD}/share/resources/diagrams/Hp2.png \
         $${PWD}/share/resources/diagrams/Hp3.png \
@@ -285,6 +270,7 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Hp9.png \
         $${PWD}/share/resources/diagrams/Hp10.png \
         $${PWD}/share/resources/diagrams/Hp11.png \
+        $${PWD}/share/resources/diagrams/Hp12.png \
         $${PWD}/share/resources/diagrams/Ip1.png \
         $${PWD}/share/resources/diagrams/Ip2.png \
         $${PWD}/share/resources/diagrams/Ip3.png \
@@ -292,22 +278,38 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Ip5.png \
         $${PWD}/share/resources/diagrams/Ip6.png \
         $${PWD}/share/resources/diagrams/Ip7.png \
-        $${PWD}/share/resources/diagrams/Ip8.png \
-        $${PWD}/share/resources/diagrams/Ip9.png \
         $${PWD}/share/resources/diagrams/Jp1.png \
         $${PWD}/share/resources/diagrams/Jp2.png \
+        $${PWD}/share/resources/diagrams/Jp3.png \
+        $${PWD}/share/resources/diagrams/Jp4.png \
+        $${PWD}/share/resources/diagrams/Jp5.png \
         $${PWD}/share/resources/diagrams/Kp1.png \
         $${PWD}/share/resources/diagrams/Kp2.png \
         $${PWD}/share/resources/diagrams/Kp3.png \
         $${PWD}/share/resources/diagrams/Kp4.png \
+        $${PWD}/share/resources/diagrams/Kp5.png \
+        $${PWD}/share/resources/diagrams/Kp6.png \
+        $${PWD}/share/resources/diagrams/Kp7.png \
+        $${PWD}/share/resources/diagrams/Kp8.png \
+        $${PWD}/share/resources/diagrams/Kp9.png \
+        $${PWD}/share/resources/diagrams/Kp10.png \
+        $${PWD}/share/resources/diagrams/Kp11.png \
         $${PWD}/share/resources/diagrams/Lp1.png \
         $${PWD}/share/resources/diagrams/Lp2.png \
         $${PWD}/share/resources/diagrams/Lp3.png \
+        $${PWD}/share/resources/diagrams/Lp4.png \
+        $${PWD}/share/resources/diagrams/Lp5.png \
+        $${PWD}/share/resources/diagrams/Lp6.png \
+        $${PWD}/share/resources/diagrams/Lp7.png \
+        $${PWD}/share/resources/diagrams/Lp8.png \
+        $${PWD}/share/resources/diagrams/Lp9.png \
         $${PWD}/share/resources/diagrams/Mp1.png \
         $${PWD}/share/resources/diagrams/Mp2.png \
+        $${PWD}/share/resources/diagrams/Mp3.png \
         $${PWD}/share/resources/diagrams/Np1.png \
         $${PWD}/share/resources/diagrams/Np2.png \
         $${PWD}/share/resources/diagrams/Np3.png \
+        $${PWD}/share/resources/diagrams/Np4.png \
         $${PWD}/share/resources/diagrams/Op1.png \
         $${PWD}/share/resources/diagrams/Op2.png \
         $${PWD}/share/resources/diagrams/Op3.png \

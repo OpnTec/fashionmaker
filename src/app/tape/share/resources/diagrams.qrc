@@ -9,34 +9,19 @@
         <file>diagrams/Dp1.png</file>
         <file>diagrams/Dp2.png</file>
         <file>diagrams/Dp3.png</file>
-        <file>diagrams/Dp4.png</file>
-        <file>diagrams/Dp5.png</file>
-        <file>diagrams/Dp6.png</file>
-        <file>diagrams/Dp7.png</file>
-        <file>diagrams/Dp8.png</file>
         <file>diagrams/Ep1.png</file>
         <file>diagrams/Ep2.png</file>
-        <file>diagrams/Ep3.png</file>
-        <file>diagrams/Ep4.png</file>
-        <file>diagrams/Ep5.png</file>
-        <file>diagrams/Ep6.png</file>
-        <file>diagrams/Ep7.png</file>
-        <file>diagrams/Ep8.png</file>
-        <file>diagrams/Ep9.png</file>
-        <file>diagrams/Ep10.png</file>
-        <file>diagrams/Ep11.png</file>
-        <file>diagrams/Ep12.png</file>
         <file>diagrams/Fp1.png</file>
         <file>diagrams/Fp2.png</file>
         <file>diagrams/Fp3.png</file>
-        <file>diagrams/Fp4.png</file>
-        <file>diagrams/Fp5.png</file>
-        <file>diagrams/Fp6.png</file>
-        <file>diagrams/Fp7.png</file>
         <file>diagrams/Gp1.png</file>
         <file>diagrams/Gp2.png</file>
         <file>diagrams/Gp3.png</file>
         <file>diagrams/Gp4.png</file>
+        <file>diagrams/Gp5.png</file>
+        <file>diagrams/Gp6.png</file>
+        <file>diagrams/Gp7.png</file>
+        <file>diagrams/Gp8.png</file>
         <file>diagrams/Hp1.png</file>
         <file>diagrams/Hp2.png</file>
         <file>diagrams/Hp3.png</file>
@@ -48,6 +33,7 @@
         <file>diagrams/Hp9.png</file>
         <file>diagrams/Hp10.png</file>
         <file>diagrams/Hp11.png</file>
+        <file>diagrams/Hp12.png</file>
         <file>diagrams/Ip1.png</file>
         <file>diagrams/Ip2.png</file>
         <file>diagrams/Ip3.png</file>
@@ -55,23 +41,38 @@
         <file>diagrams/Ip5.png</file>
         <file>diagrams/Ip6.png</file>
         <file>diagrams/Ip7.png</file>
-        <file>diagrams/Ip8.png</file>
-        <file>diagrams/Ip9.png</file>
         <file>diagrams/Jp1.png</file>
         <file>diagrams/Jp2.png</file>
         <file>diagrams/Jp3.png</file>
+        <file>diagrams/Jp4.png</file>
+        <file>diagrams/Jp5.png</file>
         <file>diagrams/Kp1.png</file>
         <file>diagrams/Kp2.png</file>
         <file>diagrams/Kp3.png</file>
         <file>diagrams/Kp4.png</file>
+        <file>diagrams/Kp5.png</file>
+        <file>diagrams/Kp6.png</file>
+        <file>diagrams/Kp7.png</file>
+        <file>diagrams/Kp8.png</file>
+        <file>diagrams/Kp9.png</file>
+        <file>diagrams/Kp10.png</file>
+        <file>diagrams/Kp11.png</file>
         <file>diagrams/Lp1.png</file>
         <file>diagrams/Lp2.png</file>
         <file>diagrams/Lp3.png</file>
+        <file>diagrams/Lp4.png</file>
+        <file>diagrams/Lp5.png</file>
+        <file>diagrams/Lp6.png</file>
+        <file>diagrams/Lp7.png</file>
+        <file>diagrams/Lp8.png</file>
+        <file>diagrams/Lp9.png</file>
         <file>diagrams/Mp1.png</file>
         <file>diagrams/Mp2.png</file>
+        <file>diagrams/Mp3.png</file>
         <file>diagrams/Np1.png</file>
         <file>diagrams/Np2.png</file>
         <file>diagrams/Np3.png</file>
+        <file>diagrams/Np4.png</file>
         <file>diagrams/Op1.png</file>
         <file>diagrams/Op2.png</file>
         <file>diagrams/Op3.png</file>
