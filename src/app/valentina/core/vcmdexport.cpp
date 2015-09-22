@@ -295,7 +295,7 @@ VCommandLinePtr VCommandLine::Get(const QCoreApplication& app)
 }
 
 //------------------------------------------------------------------------------------------------------
-NORET_ATTR void VCommandLine::Error(const QString &text) const
+Q_NORETURN void VCommandLine::Error(const QString &text) const
 {
     vStdErr() << text << "\n";
     const_cast<VCommandLine*>(this)->parser.showHelp(FAILED_HELP_SHOWN_STATUS);

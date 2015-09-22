@@ -18,9 +18,6 @@ constexpr auto FAILED_TO_GEN_LAYOUT_STATUS = 253;
 constexpr auto FAILED_HELP_SHOWN_STATUS    = 250;
 constexpr auto FAILED_GEN_BASE_STATUS      = 240;
 
-#define NORET_ATTR Q_NORETURN
-
-
 //---------------------------------------------------------------------------------------------------------------------
 inline QTextStream& vStdErr()
 {
@@ -29,7 +26,7 @@ inline QTextStream& vStdErr()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-NORET_ATTR inline void AppAbort(const QString& text = QString(), int code = GENERAL_ERROR_STATUS)
+Q_NORETURN inline void AppAbort(const QString& text = QString(), int code = GENERAL_ERROR_STATUS)
 {
     //well ..std::runtime_error was leading to zombies in memory and a lot of dumping all the time ...better to do just exit
     //possibly compiler do not have -fexceptions set
@@ -71,7 +68,7 @@ protected:
     Cases OptGroup() const;
 
     //@brief convinient shortcut to show error and help and exit
-    NORET_ATTR void Error(const QString& text) const;
+    Q_NORETURN void Error(const QString& text) const;
 
     //@brief: called in destructor of application, so instance destroyed and new maybe created (never happen scenario though)
     static void Reset();
