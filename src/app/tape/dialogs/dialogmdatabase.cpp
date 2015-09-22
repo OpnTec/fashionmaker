@@ -408,7 +408,7 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 15: // A16
             V_FALLTHROUGH
         case 16: // A17
-            return QString("Ap1");
+            return QStringLiteral("Ap1");
         case 17: // A18
             V_FALLTHROUGH
         case 18: // A19
@@ -416,7 +416,9 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 19: // A20
             V_FALLTHROUGH
         case 20: // A21
-            return QString("Ap2");
+            V_FALLTHROUGH
+        case 21: // A22
+            return QStringLiteral("Ap2");
         default:
             break;
     }
@@ -431,9 +433,9 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 2: // B03
             V_FALLTHROUGH
         case 3: // B04
-            return QString("Bp1");
+            return QStringLiteral("Bp1");
         case 4: // B05
-            return QString("Bp2");
+            return QStringLiteral("Bp2");
         default:
             break;
     }
@@ -442,11 +444,11 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
     {
         // C
         case 0: // C01
-            return QString("Cp1");
+            return QStringLiteral("Cp1");
         case 1: // C02
             V_FALLTHROUGH
         case 2: // C03
-            return QString("Cp2");
+            return QStringLiteral("Cp2");
         default:
             break;
     }
@@ -459,91 +461,11 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 1: // D02
             V_FALLTHROUGH
         case 2: // D03
-            V_FALLTHROUGH
+            return QStringLiteral("Dp1");
         case 3: // D04
-            V_FALLTHROUGH
+            return QStringLiteral("Dp2");
         case 4: // D05
-            V_FALLTHROUGH
-        case 5: // D06
-            V_FALLTHROUGH
-        case 6: // D07
-            V_FALLTHROUGH
-        case 7: // D08
-            V_FALLTHROUGH
-        case 8: // D09
-            return QString("Dp1");
-        case 9: // D10
-            V_FALLTHROUGH
-        case 10: // D11
-            V_FALLTHROUGH
-        case 11: // D12
-            V_FALLTHROUGH
-        case 12: // D13
-            V_FALLTHROUGH
-        case 13: // D14
-            V_FALLTHROUGH
-        case 14: // D15
-            V_FALLTHROUGH
-        case 15: // D16
-            V_FALLTHROUGH
-        case 16: // D17
-            return QString("Dp2");
-        case 17: // D18
-            V_FALLTHROUGH
-        case 18: // D19
-            V_FALLTHROUGH
-        case 19: // D20
-            V_FALLTHROUGH
-        case 20: // D21
-            V_FALLTHROUGH
-        case 21: // D22
-            V_FALLTHROUGH
-        case 22: // D23
-            V_FALLTHROUGH
-        case 23: // D24
-            V_FALLTHROUGH
-        case 24: // D25
-            return QString("Dp3");
-        case 25: // D26
-            V_FALLTHROUGH
-        case 26: // D27
-            V_FALLTHROUGH
-        case 27: // D28
-            V_FALLTHROUGH
-        case 28: // D29
-            V_FALLTHROUGH
-        case 29: // D30
-            V_FALLTHROUGH
-        case 30: // D31
-            V_FALLTHROUGH
-        case 31: // D32
-            V_FALLTHROUGH
-        case 32: // D33
-            return QString("Dp4");
-        case 33: // D34
-            V_FALLTHROUGH
-        case 34: // D35
-            V_FALLTHROUGH
-        case 35: // D36
-            V_FALLTHROUGH
-        case 36: // D37
-            V_FALLTHROUGH
-        case 37: // D38
-            V_FALLTHROUGH
-        case 38: // D39
-            V_FALLTHROUGH
-        case 39: // D40
-            V_FALLTHROUGH
-        case 40: // D41
-            return QString("Dp5");
-        case 41: // D42
-            return QString("Dp6");
-        case 42: // D43
-            V_FALLTHROUGH
-        case 43: // D44
-            return QString("Dp7");
-        case 44: // D45
-            return QString("Dp8");
+            return QStringLiteral("Dp3");
         default:
             break;
     }
@@ -552,85 +474,13 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
     {
         // E
         case 0: // E01
-            return QString("Ep1");
+            return QStringLiteral("Ep1");
         case 1: // E02
-            return QString("Ep2");
+            V_FALLTHROUGH
         case 2: // E03
             V_FALLTHROUGH
         case 3: // E04
-            V_FALLTHROUGH
-        case 4: // E05
-            V_FALLTHROUGH
-        case 5: // E06
-            return QString("Ep3");
-        case 6: // E07
-            V_FALLTHROUGH
-        case 7: // E08
-            V_FALLTHROUGH
-        case 8: // E09
-            V_FALLTHROUGH
-        case 9: // E10
-            return QString("Ep4");
-        case 10: // E11
-            V_FALLTHROUGH
-        case 11: // E12
-            V_FALLTHROUGH
-        case 12: // E13
-            V_FALLTHROUGH
-        case 13: // E14
-            V_FALLTHROUGH
-        case 14: // E15
-            V_FALLTHROUGH
-        case 15: // E16
-            return QString("Ep5");
-        case 16: // E17
-            V_FALLTHROUGH
-        case 17: // E18
-            V_FALLTHROUGH
-        case 18: // E19
-            V_FALLTHROUGH
-        case 19: // E20
-            V_FALLTHROUGH
-        case 20: // E21
-            return QString("Ep6");
-        case 21: // E22
-            V_FALLTHROUGH
-        case 22: // E23
-            V_FALLTHROUGH
-        case 23: // E24
-            V_FALLTHROUGH
-        case 24: // E25
-            return QString("Ep7");
-        case 25: // E26
-            V_FALLTHROUGH
-        case 26: // E27
-            V_FALLTHROUGH
-        case 27: // E28
-            V_FALLTHROUGH
-        case 28: // E29
-            return QString("Ep8");
-        case 29: // E30
-            V_FALLTHROUGH
-        case 30: // E31
-            V_FALLTHROUGH
-        case 31: // E32
-            return QString("Ep9");
-        case 32: // E33
-            V_FALLTHROUGH
-        case 33: // E34
-            V_FALLTHROUGH
-        case 34: // E35
-            return QString("Ep10");
-        case 35: // E36
-            V_FALLTHROUGH
-        case 36: // E37
-            V_FALLTHROUGH
-        case 37: // E38
-            V_FALLTHROUGH
-        case 38: // E39
-            return QString("Ep11");
-        case 39: // E40
-            return QString("Ep12");
+            return QStringLiteral("Ep2");
         default:
             break;
     }
@@ -643,29 +493,13 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 1: // F02
             V_FALLTHROUGH
         case 2: // F03
-            V_FALLTHROUGH
+            return QStringLiteral("Fp1");
         case 3: // F04
-            return QString("Fp1");
+            return QStringLiteral("Fp2");
         case 4: // F05
             V_FALLTHROUGH
         case 5: // F06
-            V_FALLTHROUGH
-        case 6: // F07
-            return QString("Fp2");
-        case 7: // F08
-            V_FALLTHROUGH
-        case 8: // F09
-            return QString("Fp3");
-        case 9: // F10
-            V_FALLTHROUGH
-        case 10: // F11
-            return QString("Fp4");
-        case 11: // F12
-            return QString("Fp5");
-        case 12: // F13
-            return QString("Fp6");
-        case 13: // F14
-            return QString("Fp7");
+            return QStringLiteral("Fp3");
         default:
             break;
     }
@@ -680,15 +514,89 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 2: // G03
             V_FALLTHROUGH
         case 3: // G04
-            return QString("Gp1");
+            V_FALLTHROUGH
         case 4: // G05
-            return QString("Gp2");
+            V_FALLTHROUGH
         case 5: // G06
-            return QString("Gp3");
+            V_FALLTHROUGH
         case 6: // G07
             V_FALLTHROUGH
         case 7: // G08
-            return QString("Gp4");
+            V_FALLTHROUGH
+        case 8: // G09
+            return QStringLiteral("Gp1");
+        case 9: // G10
+            V_FALLTHROUGH
+        case 10: // G11
+            V_FALLTHROUGH
+        case 11: // G12
+            V_FALLTHROUGH
+        case 12: // G13
+            V_FALLTHROUGH
+        case 13: // G14
+            V_FALLTHROUGH
+        case 14: // G15
+            V_FALLTHROUGH
+        case 15: // G16
+            V_FALLTHROUGH
+        case 16: // G17
+            return QStringLiteral("Gp2");
+        case 17: // G18
+            V_FALLTHROUGH
+        case 18: // G19
+            V_FALLTHROUGH
+        case 19: // G20
+            V_FALLTHROUGH
+        case 20: // G21
+            V_FALLTHROUGH
+        case 21: // G22
+            V_FALLTHROUGH
+        case 22: // G23
+            V_FALLTHROUGH
+        case 23: // G24
+            V_FALLTHROUGH
+        case 24: // G25
+            return QStringLiteral("Gp3");
+        case 25: // G26
+            V_FALLTHROUGH
+        case 26: // G27
+            V_FALLTHROUGH
+        case 27: // G28
+            V_FALLTHROUGH
+        case 28: // G29
+            V_FALLTHROUGH
+        case 29: // G30
+            V_FALLTHROUGH
+        case 30: // G31
+            V_FALLTHROUGH
+        case 31: // G32
+            V_FALLTHROUGH
+        case 32: // G33
+            return QStringLiteral("Gp4");
+        case 33: // G34
+            V_FALLTHROUGH
+        case 34: // G35
+            V_FALLTHROUGH
+        case 35: // G36
+            V_FALLTHROUGH
+        case 36: // G37
+            V_FALLTHROUGH
+        case 37: // G38
+            V_FALLTHROUGH
+        case 38: // G39
+            V_FALLTHROUGH
+        case 39: // G40
+            V_FALLTHROUGH
+        case 40: // G41
+            return QStringLiteral("Gp5");
+        case 41: // G42
+            return QStringLiteral("Gp6");
+        case 42: // G43
+            V_FALLTHROUGH
+        case 43: // G44
+            return QStringLiteral("Gp7");
+        case 44: // G45
+            return QStringLiteral("Gp8");
         default:
             break;
     }
@@ -697,31 +605,85 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
     {
         // H
         case 0: // H01
-            return QString("Hp1");
+            return QStringLiteral("Hp1");
         case 1: // H02
-            V_FALLTHROUGH
+            return QStringLiteral("Hp2");
         case 2: // H03
-            return QString("Hp2");
+            V_FALLTHROUGH
         case 3: // H04
-            return QString("Hp3");
+            V_FALLTHROUGH
         case 4: // H05
-            return QString("Hp4");
+            V_FALLTHROUGH
         case 5: // H06
-            return QString("Hp5");
+            return QStringLiteral("Hp3");
         case 6: // H07
-            return QString("Hp6");
+            V_FALLTHROUGH
         case 7: // H08
             V_FALLTHROUGH
         case 8: // H09
-            return QString("Hp7");
+            V_FALLTHROUGH
         case 9: // H10
-            return QString("Hp8");
+            V_FALLTHROUGH
         case 10: // H11
-            return QString("Hp9");
+            V_FALLTHROUGH
         case 11: // H12
-            return QString("Hp10");
+            return QStringLiteral("Hp4");
         case 12: // H13
-            return QString("Hp11");
+            V_FALLTHROUGH
+        case 13: // H14
+            V_FALLTHROUGH
+        case 14: // H15
+            V_FALLTHROUGH
+        case 15: // H16
+            return QStringLiteral("Hp5");
+        case 16: // H17
+            V_FALLTHROUGH
+        case 17: // H18
+            V_FALLTHROUGH
+        case 18: // H19
+            V_FALLTHROUGH
+        case 19: // H20
+            return QStringLiteral("Hp6");
+        case 20: // H21
+            V_FALLTHROUGH
+        case 21: // H22
+            V_FALLTHROUGH
+        case 22: // H23
+            V_FALLTHROUGH
+        case 23: // H24
+            V_FALLTHROUGH
+        case 24: // H25
+            return QStringLiteral("Hp7");
+        case 25: // H26
+            V_FALLTHROUGH
+        case 26: // H27
+            V_FALLTHROUGH
+        case 27: // H28
+            V_FALLTHROUGH
+        case 28: // H29
+            return QStringLiteral("Hp8");
+        case 29: // H30
+            V_FALLTHROUGH
+        case 30: // H31
+            V_FALLTHROUGH
+        case 31: // H32
+            return QStringLiteral("Hp9");
+        case 32: // H33
+            V_FALLTHROUGH
+        case 33: // H34
+            V_FALLTHROUGH
+        case 34: // H35
+            return QStringLiteral("Hp10");
+        case 35: // H36
+            V_FALLTHROUGH
+        case 36: // H37
+            V_FALLTHROUGH
+        case 37: // H38
+            V_FALLTHROUGH
+        case 38: // H39
+            return QStringLiteral("Hp11");
+        case 39: // H40
+            return QStringLiteral("Hp12");
         default:
             break;
     }
@@ -736,41 +698,27 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 2: // I03
             V_FALLTHROUGH
         case 3: // I04
-            return QString("Ip1");
+            return QStringLiteral("Ip1");
         case 4: // I05
             V_FALLTHROUGH
         case 5: // I06
-            V_FALLTHROUGH
+            return QStringLiteral("Ip2");
         case 6: // I07
-            return QString("Ip2");
+            V_FALLTHROUGH
         case 7: // I08
             V_FALLTHROUGH
         case 8: // I09
-            V_FALLTHROUGH
+            return QStringLiteral("Ip3");
         case 9: // I10
-            return QString("Ip3");
+            V_FALLTHROUGH
         case 10: // I11
-            V_FALLTHROUGH
+            return QStringLiteral("Ip4");
         case 11: // I12
-            V_FALLTHROUGH
+            return QStringLiteral("Ip5");
         case 12: // I13
-            V_FALLTHROUGH
+            return QStringLiteral("Ip6");
         case 13: // I14
-            V_FALLTHROUGH
-        case 14: // I15
-            return QString("Ip4");
-        case 15: // I16
-            return QString("Ip5");
-        case 16: // I17
-            V_FALLTHROUGH
-        case 17: // I18
-            return QString("Ip6");
-        case 18: // I19
-            return QString("Ip7");
-        case 19: // I20
-            return QString("Ip8");
-        case 20: // I21
-            return QString("Ip9");
+            return QStringLiteral("Ip7");
         default:
             break;
     }
@@ -783,29 +731,19 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 1: // J02
             V_FALLTHROUGH
         case 2: // J03
-            return QString("Jp1");
+            V_FALLTHROUGH
         case 3: // J04
-            V_FALLTHROUGH
+            return QStringLiteral("Jp1");
         case 4: // J05
-            V_FALLTHROUGH
+            return QStringLiteral("Jp2");
         case 5: // J06
-            V_FALLTHROUGH
+            return QStringLiteral("Jp3");
         case 6: // J07
             V_FALLTHROUGH
         case 7: // J08
-            V_FALLTHROUGH
+            return QStringLiteral("Jp4");
         case 8: // J09
-            V_FALLTHROUGH
-        case 9: // J10
-            V_FALLTHROUGH
-        case 10: // J11
-            V_FALLTHROUGH
-        case 11: // J12
-            return QString("Jp2");
-        case 12: // J13
-            V_FALLTHROUGH
-        case 13: // J14
-            return QString("Jp3");
+            return QStringLiteral("Jp5");
         default:
             break;
     }
@@ -814,19 +752,31 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
     {
         // K
         case 0: // K01
-            return QString("Kp1");
+            return QStringLiteral("Kp1");
         case 1: // K02
             V_FALLTHROUGH
         case 2: // K03
-            return QString("Kp2");
+            return QStringLiteral("Kp2");
         case 3: // K04
-            V_FALLTHROUGH
+            return QStringLiteral("Kp3");
         case 4: // K05
-            return QString("Kp3");
+            return QStringLiteral("Kp4");
         case 5: // K06
             V_FALLTHROUGH
         case 6: // K07
-            return QString("Kp4");
+            return QStringLiteral("Kp5");
+        case 7: // K08
+            return QStringLiteral("Kp6");
+        case 8: // K09
+            return QStringLiteral("Kp7");
+        case 9: // K10
+            return QStringLiteral("Kp8");
+        case 10: // K11
+            return QStringLiteral("Kp9");
+        case 11: // K12
+            return QStringLiteral("Kp10");
+        case 12: // K13
+            return QStringLiteral("Kp11");
         default:
             break;
     }
@@ -839,11 +789,43 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
         case 1: // L02
             V_FALLTHROUGH
         case 2: // L03
-            return QString("Lp1");
+            V_FALLTHROUGH
         case 3: // L04
-            return QString("Lp2");
+            return QStringLiteral("Lp1");
         case 4: // L05
-            return QString("Lp3");
+            V_FALLTHROUGH
+        case 5: // L06
+            V_FALLTHROUGH
+        case 6: // L07
+            return QStringLiteral("Lp2");
+        case 7: // L08
+            V_FALLTHROUGH
+        case 8: // L09
+            V_FALLTHROUGH
+        case 9: // L10
+            return QStringLiteral("Lp3");
+        case 10: // L11
+            V_FALLTHROUGH
+        case 11: // L12
+            V_FALLTHROUGH
+        case 12: // L13
+            V_FALLTHROUGH
+        case 13: // L14
+            V_FALLTHROUGH
+        case 14: // L15
+            return QStringLiteral("Lp4");
+        case 15: // L16
+            return QStringLiteral("Lp5");
+        case 16: // L17
+            return QStringLiteral("Lp6");
+        case 17: // L18
+            return QStringLiteral("Lp7");
+        case 18: // L19
+            V_FALLTHROUGH
+        case 19: // L20
+            return QStringLiteral("Lp8");
+        case 20: // L21
+            return QStringLiteral("Lp9");
         default:
             break;
     }
@@ -852,13 +834,33 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
     {
         // M
         case 0: // M01
-            return QString("Mp1");
-        case 1: // M02
             V_FALLTHROUGH
+        case 1: // M02
+            return QStringLiteral("Mp1");
         case 2: // M03
             V_FALLTHROUGH
         case 3: // M04
-            return QString("Mp2");
+            V_FALLTHROUGH
+        case 4: // M05
+            V_FALLTHROUGH
+        case 5: // M06
+            V_FALLTHROUGH
+        case 6: // M07
+            V_FALLTHROUGH
+        case 7: // M08
+            V_FALLTHROUGH
+        case 8: // M09
+            V_FALLTHROUGH
+        case 9: // M10
+            V_FALLTHROUGH
+        case 10: // M11
+            return QStringLiteral("Mp2");
+        case 11: // M12
+            V_FALLTHROUGH
+        case 12: // M13
+            V_FALLTHROUGH
+        case 13: // M14
+            return QStringLiteral("Mp3");
         default:
             break;
     }
@@ -867,17 +869,19 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
     {
         // N
         case 0: // N01
-            V_FALLTHROUGH
+            return QStringLiteral("Np1");
         case 1: // N02
             V_FALLTHROUGH
         case 2: // N03
-            return QString("Np1");
+            return QStringLiteral("Np2");
         case 3: // N04
-            return QString("Np2");
-        case 4: // N05
             V_FALLTHROUGH
+        case 4: // N05
+            return QStringLiteral("Np3");
         case 5: // N06
-            return QString("Np3");
+            V_FALLTHROUGH
+        case 6: // N07
+            return QStringLiteral("Np4");
         default:
             break;
     }
@@ -886,33 +890,33 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
     {
         // O
         case 0: // O01
-            return QString("Op1");
+            return QStringLiteral("Op1");
         case 1: // O02
-            return QString("Op2");
+            return QStringLiteral("Op2");
         case 2: // O03
-            return QString("Op3");
+            return QStringLiteral("Op3");
         case 3: // O04
-            return QString("Op4");
+            return QStringLiteral("Op4");
         case 4: // O05
-            return QString("Op5");
+            return QStringLiteral("Op5");
         case 5: // O06
-            return QString("Op6");
+            return QStringLiteral("Op6");
         case 6: // O07
-            return QString("Op7");
+            return QStringLiteral("Op7");
         case 7: // O08
             V_FALLTHROUGH
         case 8: // O09
-            return QString("Op8");
+            return QStringLiteral("Op8");
         case 9: // O10
             V_FALLTHROUGH
         case 10: // O11
-            return QString("Op9");
+            return QStringLiteral("Op9");
         case 11: // O12
             V_FALLTHROUGH
         case 12: // O13
-            return QString("Op10");
+            return QStringLiteral("Op10");
         case 13: // O14
-            return QString("Op11");
+            return QStringLiteral("Op11");
         default:
             break;
     }
@@ -921,29 +925,29 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
     {
         // P
         case 0: // P01
-            return QString("Pp1");
+            return QStringLiteral("Pp1");
         case 1: // P02
-            return QString("Pp2");
+            return QStringLiteral("Pp2");
         case 2: // P03
-            return QString("Pp3");
+            return QStringLiteral("Pp3");
         case 3: // P04
-            return QString("Pp4");
+            return QStringLiteral("Pp4");
         case 4: // P05
-            return QString("Pp5");
+            return QStringLiteral("Pp5");
         case 5: // P06
-            return QString("Pp6");
+            return QStringLiteral("Pp6");
         case 6: // P07
-            return QString("Pp7");
+            return QStringLiteral("Pp7");
         case 7: // P08
-            return QString("Pp8");
+            return QStringLiteral("Pp8");
         case 8: // P09
-            return QString("Pp9");
+            return QStringLiteral("Pp9");
         case 9: // P10
-            return QString("Pp10");
+            return QStringLiteral("Pp10");
         case 10: // P11
-            return QString("Pp11");
+            return QStringLiteral("Pp11");
         case 11: // P12
-            return QString("Pp12");
+            return QStringLiteral("Pp12");
         default:
             break;
     }
@@ -952,11 +956,11 @@ QString DialogMDataBase::MapDiagrams(const QString &number) const
     {
         // Q
         case 0: // Q01
-            return QString("Qp1");
+            return QStringLiteral("Qp1");
         case 1: // Q02
-            return QString("Qp2");
+            return QStringLiteral("Qp2");
         case 2: // Q03
-            return QString("Qp3");
+            return QStringLiteral("Qp3");
         default:
             break;
     }

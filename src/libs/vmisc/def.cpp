@@ -148,8 +148,8 @@ const QString shoulderTipToArmfoldF_M         = QStringLiteral("shoulder_tip_to_
 const QString neckSideToBustF_M               = QStringLiteral("neck_side_to_bust_f");               // H14
 const QString neckSideToHighbustF_M           = QStringLiteral("neck_side_to_highbust_f");           // H15
 const QString shoulderCenterToHighbustF_M     = QStringLiteral("shoulder_center_to_highbust_f");     // H16
-const QString neckSideToWaistB_M              = QStringLiteral("neck_side_to_waist_b");              // H17
-const QString shoulderTipToWaistSideB_M       = QStringLiteral("shoulder_tip_to_waist_side_b");      // H18
+const QString shoulderTipToWaistSideB_M       = QStringLiteral("shoulder_tip_to_waist_side_b");      // H17
+const QString neckSideToWaistB_M              = QStringLiteral("neck_side_to_waist_b");              // H18
 const QString neckBackToWaistB_M              = QStringLiteral("neck_back_to_waist_b");              // H19
 const QString neckSideToWaistScapulaB_M       = QStringLiteral("neck_side_to_waist_scapula_b");      // H20
 const QString neckBackToHighbustB_M           = QStringLiteral("neck_back_to_highbust_b");           // H21
@@ -719,8 +719,8 @@ QStringList ListGroupH()
                                            << neckSideToBustF_M                // H14
                                            << neckSideToHighbustF_M            // H15
                                            << shoulderCenterToHighbustF_M      // H16
-                                           << neckSideToWaistB_M               // H17
-                                           << shoulderTipToWaistSideB_M        // H18
+                                           << shoulderTipToWaistSideB_M        // H17
+                                           << neckSideToWaistB_M               // H18
                                            << neckBackToWaistB_M               // H19
                                            << neckSideToWaistScapulaB_M        // H20
                                            << neckBackToHighbustB_M            // H21
