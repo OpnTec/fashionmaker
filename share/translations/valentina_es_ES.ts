@@ -3706,6 +3706,33 @@
     </message>
 </context>
 <context>
+    <name>MApplication</name>
+    <message>
+        <source>Error parsing file. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error bad id. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error can&apos;t convert value. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error empty parameter. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error wrong id. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Something&apos;s wrong!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <source>Valentina</source>
@@ -4516,14 +4543,6 @@ Quiere guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create new ...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create new measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4548,10 +4567,6 @@ Quiere guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Measurements updated</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The measurements file &quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4562,6 +4577,35 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create/Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create/edit measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements was updated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1, %2 (%3)</source>
+        <extracomment>Coords in status line: &quot;X, Y (units)&quot;</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to lock. This file already opened in another window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6330,10 +6374,6 @@ Quiere guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Measuremnts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Name</source>
         <translation type="unfinished">Nombre</translation>
     </message>
@@ -6570,18 +6610,6 @@ Quiere guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements (*.vst, *.vit)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Could not save file</source>
         <translation type="unfinished">No se ha guardado archivo</translation>
     </message>
@@ -6688,6 +6716,46 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find Previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements (*.vst *.vit);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to lock. This file already opened in another window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7126,6 +7194,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sets language locale (export mode). Default is system locale. Supported locales: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locale</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
