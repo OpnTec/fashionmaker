@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 
     for (size_t i=0, sz = args.size(); i < sz;++i)
     {
-        bool loaded = w.LoadPattern(args.at(static_cast<int>(i)), app.CommandLine()->OptMeasurePath());
+        const bool loaded = w.LoadPattern(args.at(static_cast<int>(i)), app.CommandLine()->OptMeasurePath());
         if (app.CommandLine()->IsExportEnabled())
         {
             if (loaded)

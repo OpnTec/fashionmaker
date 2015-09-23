@@ -341,7 +341,7 @@ QString MainWindow::RelativeMPath(const QString &patternPath, const QString &abs
         return absoluteMPath;
     }
 
-    if (absoluteMPath.isEmpty())
+    if (absoluteMPath.isEmpty() || QFileInfo(absoluteMPath).isRelative())
     {
         return absoluteMPath;
     }
@@ -359,6 +359,11 @@ QString MainWindow::AbsoluteMPath(const QString &patternPath, const QString &rel
     }
     else
     {
+        if (QFileInfo(relativeMPath).isAbsolute())
+        {
+            return relativeMPath;
+        }
+
         return QFileInfo(QFileInfo(patternPath).absoluteDir(), relativeMPath).absoluteFilePath();
     }
 }
@@ -3159,15 +3164,15 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         doc->setXMLContent(fileName);
         if (!customMeasureFile.isEmpty())
         {
-            doc->SetPath(customMeasureFile);
+            doc->SetPath(RelativeMPath(fileName, customMeasureFile));
         }
         qApp->setPatternUnit(doc->MUnit());
-        QString path = doc->MPath();
+        QString path = AbsoluteMPath(fileName, doc->MPath());
 
         if (not path.isEmpty())
         {
             // Check if exist
-            path = CheckPathToMeasurements(fileName, AbsoluteMPath(fileName, path));
+            path = CheckPathToMeasurements(fileName, path);
             if (path.isEmpty())
             {
                 Clear();
