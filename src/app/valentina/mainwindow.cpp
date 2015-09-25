@@ -245,12 +245,6 @@ bool MainWindow::LoadMeasurements(const QString &path)
         m = new VMeasurements(pattern);
         m->setXMLContent(path);
 
-        if (not m->IsDefinedKnownNamesValid())
-        {
-            VException e(tr("Measurement file contains invalid known measurement(s)."));
-            throw e;
-        }
-
         if (m->Type() == MeasurementsType::Unknown)
         {
             VException e(tr("Measurement file has unknown format."));
@@ -273,6 +267,12 @@ bool MainWindow::LoadMeasurements(const QString &path)
         }
 
         m->setXMLContent(path);// Read again after conversion
+
+        if (not m->IsDefinedKnownNamesValid())
+        {
+            VException e(tr("Measurement file contains invalid known measurement(s)."));
+            throw e;
+        }
 
         const QStringList mList = m->ListAll();
         const QStringList pList = doc->ListMeasurements();
@@ -3440,12 +3440,6 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 VMeasurements *m = new VMeasurements(pattern);
                 m->setXMLContent(mPath);
 
-                if (not m->IsDefinedKnownNamesValid())
-                {
-                    VException e(tr("Measurement file contains invalid known measurement(s)."));
-                    throw e;
-                }
-
                 patternType = m->Type();
 
                 if (patternType == MeasurementsType::Unknown)
@@ -3470,6 +3464,12 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
                 }
 
                 m->setXMLContent(mPath);// Read again after conversion
+
+                if (not m->IsDefinedKnownNamesValid())
+                {
+                    VException e(tr("Measurement file contains invalid known measurement(s)."));
+                    throw e;
+                }
 
                 const QStringList mList = m->ListAll();
                 const QStringList pList = doc->ListMeasurements();

@@ -194,12 +194,6 @@ void TMainWindow::LoadFile(const QString &path)
             m = new VMeasurements(data);
             m->setXMLContent(path);
 
-            if (not m->IsDefinedKnownNamesValid())
-            {
-                VException e(tr("File contains invalid known measurement(s)."));
-                throw e;
-            }
-
             mType = m->Type();
 
             if (mType == MeasurementsType::Unknown)
@@ -224,6 +218,13 @@ void TMainWindow::LoadFile(const QString &path)
             }
 
             m->setXMLContent(path);// Read again after conversion
+
+            if (not m->IsDefinedKnownNamesValid())
+            {
+                VException e(tr("File contains invalid known measurement(s)."));
+                throw e;
+            }
+
             mUnit = m->MUnit();
             pUnit = mUnit;
 
