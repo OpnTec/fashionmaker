@@ -163,8 +163,9 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
         default:
             break;
     }
-    //just added different return status in console mode
-    AppAbort(text, FAILED_GEN_BASE_STATUS + static_cast<int>(state));
+
+    qCritical() << text;
+    std::exit(V_EX_DATAERR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -97,13 +97,15 @@ void DialogSaveLayout::SelectFormate(const size_t formate)
 {
     if (formate >= availFormats.size())
     {
-        AppAbort(tr("Tried to use out of range format number."), INVALID_PARAMS_STATUS);
+        qCritical() << tr("Tried to use out of range format number.");
+        std::exit(V_EX_USAGE);
     }
 
     int i = ui->comboBoxFormat->findData(availFormats[formate].pair.second);
     if (i < 0)
     {
-        AppAbort(tr("Selected not present format."), INVALID_PARAMS_STATUS);
+        qCritical() << tr("Selected not present format.");
+        std::exit(V_EX_USAGE);
     }
     ui->comboBoxFormat->setCurrentIndex(i);
 }
@@ -169,7 +171,7 @@ QString DialogSaveLayout::Formate() const
 void DialogSaveLayout::Save()
 {
     for (int i=0; i < count; ++i)
-    {                
+    {
         const QString name = Path()+"/"+FileName()+QString::number(i+1)+Formate();
         if (QFile::exists(name))
         {

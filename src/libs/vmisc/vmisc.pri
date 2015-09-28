@@ -27,4 +27,5 @@ HEADERS += \
     $$PWD/vcommonsettings.h \
     $$PWD/vtapesettings.h \
     $$PWD/debugbreak.h \
-    $$PWD/vlockguard.h
+    $$PWD/vlockguard.h \
+    $$PWD/vsysexits.h

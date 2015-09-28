@@ -297,7 +297,7 @@ VCommandLine::~VCommandLine()
 Q_NORETURN void VCommandLine::Error(const QString &text) const
 {
     vStdErr() << text << "\n";
-    const_cast<VCommandLine*>(this)->parser.showHelp(FAILED_HELP_SHOWN_STATUS);
+    const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
 }
 
 //------------------------------------------------------------------------------------------------------

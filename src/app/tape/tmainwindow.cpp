@@ -38,6 +38,7 @@
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vmisc/vlockguard.h"
+#include "../vmisc/vsysexits.h"
 #include "vlitepattern.h"
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -162,7 +163,11 @@ void TMainWindow::LoadFile(const QString &path)
     {
         if (not QFileInfo(path).exists())
         {
-            qCritical() << "File " << path << " doesn't exist";
+            qCritical()<<tr("File '%1' doesn't exist!").arg(path);
+            if (qApp->IsTestMode())
+            {
+                std::exit(V_EX_NOINPUT);
+            }
             return;
         }
 

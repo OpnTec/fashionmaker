@@ -35,6 +35,7 @@
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/vsysexits.h"
 #include "../qmuparser/qmuparsererror.h"
 
 #include <QDir>
@@ -89,6 +90,20 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     QCoreApplication *instance = QCoreApplication::instance();
     const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
 
+    switch (type)
+    {
+        case QtDebugMsg:
+            vStdOut() << msg << "\n";
+            return;
+        case QtWarningMsg:
+        case QtCriticalMsg:
+        case QtFatalMsg:
+            vStdErr() << msg << "\n";
+            break;
+        default:
+            break;
+    }
+
     if (isGuiThread)
     {
         //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
@@ -98,9 +113,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         QMessageBox messageBox;
         switch (type)
         {
-            case QtDebugMsg:
-                std::cout << msg.toUtf8().constData() << std::endl;
-                return;
             case QtWarningMsg:
                 messageBox.setIcon(QMessageBox::Warning);
                 break;
@@ -110,6 +122,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             case QtFatalMsg:
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
+            case QtDebugMsg:
             default:
                 break;
         }
@@ -126,10 +139,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                     messageBox.setModal(true);
                     messageBox.exec();
                 }
-            }
-            else
-            {
-                std::cerr << msg.toUtf8().constData() << std::endl;
             }
         }
 

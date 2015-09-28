@@ -87,13 +87,9 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     QCoreApplication *instance = QCoreApplication::instance();
     const bool isGuiThread = instance && (QThread::currentThread() == instance->thread());
 
-
-    if (isGuiThread)
     {
-        //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will lead to crash
-        const bool topWinAllowsPop = (qApp->activeModalWidget() == nullptr) || !qApp->activeModalWidget()->inherits("QFileDialog");
         QString debugdate = "[" + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss");
-        QMessageBox messageBox;
+
         switch (type)
         {
             case QtDebugMsg:
@@ -103,27 +99,53 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             case QtWarningMsg:
                 debugdate += QString(":WARNING:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function).arg(context.category).arg(msg);
-                messageBox.setIcon(QMessageBox::Warning);
                 break;
             case QtCriticalMsg:
                 debugdate += QString(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function).arg(context.category).arg(msg);
-                messageBox.setIcon(QMessageBox::Critical);
                 break;
             case QtFatalMsg:
                 debugdate += QString(":FATAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function).arg(context.category).arg(msg);
-                messageBox.setIcon(QMessageBox::Critical);
                 break;
             default:
                 break;
         }
 
         (*qApp->LogFile()) << debugdate <<  endl;
+    }
+
+    if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
+    {
+        vStdErr() << msg << "\n";
+    }
+
+    if (isGuiThread)
+    {
+        //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
+        //lead to crash
+        const bool topWinAllowsPop = (qApp->activeModalWidget() == nullptr) ||
+                !qApp->activeModalWidget()->inherits("QFileDialog");
+
+        QMessageBox messageBox;
+        switch (type)
+        {
+            case QtWarningMsg:
+                messageBox.setIcon(QMessageBox::Warning);
+                break;
+            case QtCriticalMsg:
+                messageBox.setIcon(QMessageBox::Critical);
+                break;
+            case QtFatalMsg:
+                messageBox.setIcon(QMessageBox::Critical);
+                break;
+            case QtDebugMsg:
+            default:
+                break;
+        }
 
         if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
         {
-
             if (VApplication::CheckGUI())
             {
                 if (topWinAllowsPop)
@@ -134,10 +156,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                     messageBox.setModal(true);
                     messageBox.exec();
                 }
-            }
-            else
-            {
-                vStdErr() << msg << "\n";
             }
         }
 

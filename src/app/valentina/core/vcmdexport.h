@@ -5,39 +5,13 @@
 #include <QTextStream>
 
 #include "dialogs/dialoglayoutsettings.h"
+#include "../vmisc/vsysexits.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 #   include "../libs/vmisc/backport/qcommandlineparser.h"
 #else
 #   include <QCommandLineParser>
 #endif
-
-constexpr auto GENERAL_ERROR_STATUS        = 255;
-constexpr auto INVALID_PARAMS_STATUS       = 254;
-constexpr auto FAILED_TO_GEN_LAYOUT_STATUS = 253;
-constexpr auto FAILED_HELP_SHOWN_STATUS    = 250;
-constexpr auto FAILED_GEN_BASE_STATUS      = 240;
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QTextStream& vStdErr()
-{
-    static QTextStream ts( stderr );
-    return ts;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Q_NORETURN inline void AppAbort(const QString& text = QString(), int code = GENERAL_ERROR_STATUS)
-{
-    //well ..std::runtime_error was leading to zombies in memory and a lot of dumping all the time ...better to do just exit
-    //possibly compiler do not have -fexceptions set
-    if (!text.isEmpty())
-    {
-        vStdErr() << text << "\n";
-    }
-    std::exit(code);
-}
-//---------------------------------------------------------------------------------------------------------------------
-
 
 class VCommandLine;
 typedef std::shared_ptr<VCommandLine> VCommandLinePtr;

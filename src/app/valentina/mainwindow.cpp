@@ -3560,8 +3560,8 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
     {
         if (details->count() == 0)
         {
-            AppAbort(tr("You can't export empty scene."));
-            return;
+            qCCritical(vMainWindow, "%s", tr("You can't export empty scene.").toUtf8().constData());
+            std::exit(V_EX_DATAERR);
         }
     }
     PrepareDetailsForLayout(details);
