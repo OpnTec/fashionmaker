@@ -313,7 +313,7 @@ void MApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
-    LoadTranslation(TapeSettings()->GetLocale());
+    LoadTranslation(QLocale::system().name());// By default the console version uses system locale
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
@@ -588,6 +588,11 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
     }
 
     testMode = parser.isSet(testOption);
+
+    if (not testMode)
+    {
+        LoadTranslation(TapeSettings()->GetLocale());
+    }
 
     const QStringList args = parser.positionalArguments();
     if (args.count() > 0)

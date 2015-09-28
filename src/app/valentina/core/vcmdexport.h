@@ -101,9 +101,6 @@ public:
     //@brief gets filenames which should be loaded
     QStringList OptInputFileNames() const;
 
-    //@brief gets locale name
-    QString OptLocale() const;
-
     bool IsGuiEnabled()const;
 };
 

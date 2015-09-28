@@ -50,9 +50,6 @@ const static auto SINGLE_OPTION_GAPWIDTH     = QStringLiteral("G");
 const static auto LONG_OPTION_GROUPPING      = QStringLiteral("groups");
 const static auto SINGLE_OPTION_GROUPPING    = QStringLiteral("g");
 
-const static auto SINGLE_OPTION_LOCALE       = QStringLiteral("L");
-const static auto LONG_OPTION_LOCALE         = QStringLiteral("locale");
-
 #define tr(A) QCoreApplication::translate("VCommandLine", (A))
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -142,12 +139,7 @@ VCommandLine::VCommandLine() : parser()
                  {LONG_OPTION_GROUPPING,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_GROUPPING << LONG_OPTION_GROUPPING,
                                     tr("Sets layout groupping (export mode): ")
-                                    + DialogLayoutSettings::MakeGroupsHelp(), tr("Grouping type"), "2")},
-
-                 {LONG_OPTION_LOCALE,
-                 new QCommandLineOption(QStringList() << SINGLE_OPTION_LOCALE << LONG_OPTION_LOCALE,
-                                    tr("Sets language locale (export mode). Default is system locale. Supported "
-                                       "locales: ") + SupportedLocales().join(", "), tr("Locale"))}
+                                    + DialogLayoutSettings::MakeGroupsHelp(), tr("Grouping type"), "2")}
                  }),
     isGuiEnabled(false)
 {
@@ -400,17 +392,6 @@ int VCommandLine::OptExportType() const
 QStringList VCommandLine::OptInputFileNames() const
 {
     return parser.positionalArguments();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptLocale() const
-{
-    QString locale = QLocale::system().name();
-    if (parser.isSet(*optionsUsed.value(LONG_OPTION_LOCALE)))
-    {
-        locale = parser.value(*optionsUsed.value(LONG_OPTION_LOCALE));
-    }
-    return locale;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

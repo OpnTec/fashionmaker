@@ -171,11 +171,14 @@ const QString VApplication::GistFileName = QStringLiteral("gist.json");
  */
 VApplication::VApplication(int &argc, char **argv)
     : VAbstractApplication(argc, argv),
-      trVars(nullptr), autoSaveTimer(nullptr),
+      trVars(nullptr),
+      autoSaveTimer(nullptr),
       lockLog(),
       out(nullptr)
 {
-    VCommandLine::Reset(); // making sure will create new instance...just in case we will ever do 2 objects of VApplication
+    // making sure will create new instance...just in case we will ever do 2 objects of VApplication
+    VCommandLine::Reset();
+    LoadTranslation(QLocale::system().name());// By default the console version uses system locale
     VCommandLine::Get(*this);
     undoStack = new QUndoStack(this);
 }
@@ -499,7 +502,10 @@ void VApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
-    InitTranslation();
+    if (VApplication::CheckGUI())// By default console version uses system locale
+    {
+        LoadTranslation(ValentinaSettings()->GetLocale());
+    }
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
@@ -509,19 +515,6 @@ void VApplication::InitOptions()
         //This case happens under Windows and Mac OS X
         //This does not happen under GNOME or KDE
         QIcon::setThemeName("win.icon.theme");
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VApplication::InitTranslation()
-{
-    if (VApplication::CheckGUI())
-    {
-        LoadTranslation(ValentinaSettings()->GetLocale());
-    }
-    else
-    {
-        LoadTranslation(CommandLine()->OptLocale());
     }
 }
 

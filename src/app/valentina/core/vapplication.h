@@ -60,7 +60,6 @@ public:
     virtual bool       notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
 
     void               InitOptions();
-    void               InitTranslation();
 
     virtual QString    translationsPath() const Q_DECL_OVERRIDE;
     QString            TapeFilePath() const;
