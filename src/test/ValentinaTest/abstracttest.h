@@ -40,6 +40,11 @@ public:
 protected:
     void Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const;
 
+    QString ValentinaPath() const;
+    QString TapePath() const;
+
+    bool Run(const QString &program, const QStringList &arguments);
+    bool CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const;
 };
 
 #endif // ABSTRACTTEST_H

@@ -99,7 +99,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         switch (type)
         {
             case QtDebugMsg:
-                std::cerr << msg.toUtf8().constData() << std::endl;
+                std::cout << msg.toUtf8().constData() << std::endl;
                 return;
             case QtWarningMsg:
                 messageBox.setIcon(QMessageBox::Warning);
@@ -116,13 +116,20 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
         if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
         {
-            if (topWinAllowsPop)
+            if (not qApp->IsTestMode())
             {
-                messageBox.setInformativeText(msg);
-                messageBox.setStandardButtons(QMessageBox::Ok);
-                messageBox.setWindowModality(Qt::ApplicationModal);
-                messageBox.setModal(true);
-                messageBox.exec();
+                if (topWinAllowsPop)
+                {
+                    messageBox.setInformativeText(msg);
+                    messageBox.setStandardButtons(QMessageBox::Ok);
+                    messageBox.setWindowModality(Qt::ApplicationModal);
+                    messageBox.setModal(true);
+                    messageBox.exec();
+                }
+            }
+            else
+            {
+                std::cerr << msg.toUtf8().constData() << std::endl;
             }
         }
 
@@ -146,7 +153,8 @@ MApplication::MApplication(int &argc, char **argv)
       mainWindows(),
       localServer(nullptr),
       trVars(nullptr),
-      dataBase(QPointer<DialogMDataBase>())
+      dataBase(QPointer<DialogMDataBase>()),
+      testMode(false)
 {
     setApplicationDisplayName(VER_PRODUCTNAME_STR);
     setApplicationName(VER_INTERNALNAME_STR);
@@ -254,6 +262,12 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
         abort();
     }
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MApplication::IsTestMode() const
+{
+    return testMode;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -496,6 +510,11 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
                                 QCoreApplication::translate("main", "The pattern unit"));
     parser.addOption(unitOption);
     //-----
+    QCommandLineOption testOption(QStringList() << "test",
+    QCoreApplication::translate("main", "Use for unit testing. Run the program and open a file without showing a "
+                                "window."));
+    parser.addOption(testOption);
+    //-----
     parser.process(arguments);
 
     bool flagHeight = false;
@@ -568,9 +587,18 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
     }
     }
 
+    testMode = parser.isSet(testOption);
+
     const QStringList args = parser.positionalArguments();
     if (args.count() > 0)
     {
+        if (testMode && args.count() > 1)
+        {
+            fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
+            "Error: Test mode doesn't support openning several files.")));
+            parser.showHelp(1);
+        }
+
         for (int i = 0; i < args.size(); ++i)
         {
             NewMainWindow();
@@ -594,7 +622,10 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
     }
     else
     {
-        NewMainWindow();
+        if (not testMode)
+        {
+            NewMainWindow();
+        }
     }
 }
 
@@ -629,7 +660,10 @@ TMainWindow *MApplication::NewMainWindow()
 {
     TMainWindow *tape = new TMainWindow();
     mainWindows.prepend(tape);
-    tape->show();
+    if (not qApp->IsTestMode())
+    {
+        tape->show();
+    }
     return tape;
 }
 

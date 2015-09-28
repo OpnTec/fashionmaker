@@ -54,6 +54,7 @@ public:
 
     virtual bool notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
 
+    bool IsTestMode() const;
     bool IsTheOnly() const;
     TMainWindow *MainWindow();
     QList<TMainWindow*> MainWindows();
@@ -94,6 +95,7 @@ private:
     QLocalServer *localServer;
     VTranslateVars *trVars;
     QPointer<DialogMDataBase> dataBase;
+    bool testMode;
 
     void Clean();
 };

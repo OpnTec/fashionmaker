@@ -54,5 +54,5 @@ int main(int argc, char *argv[])
     }
     app.InitOptions();
     app.ParseCommandLine(app.arguments());
-    return app.exec();
+    return app.IsTestMode() ? 0 : app.exec(); // single return point is always better than more
 }

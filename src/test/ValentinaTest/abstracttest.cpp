@@ -47,3 +47,103 @@ void AbstractTest::Comparison(const QVector<QPointF> &ekv, const QVector<QPointF
         QCOMPARE(ekv.at(i).toPoint(), ekvOrig.at(i).toPoint()); // Don't use comparison float values
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString AbstractTest::ValentinaPath() const
+{
+    const QString path = QStringLiteral("/../../../app/valentina/bin/valentina");
+#ifdef Q_OS_WIN
+    return QApplication::applicationDirPath() + path + QStringList(".exe");
+#else
+    return QApplication::applicationDirPath() + path;
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString AbstractTest::TapePath() const
+{
+    const QString path = QStringLiteral("/../../../app/tape/bin/tape");
+#ifdef Q_OS_WIN
+    return QApplication::applicationDirPath() + path + QStringList(".exe");
+#else
+    return QApplication::applicationDirPath() + path;
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool AbstractTest::Run(const QString &program, const QStringList &arguments)
+{
+    const QString parameters = QString("Program: %1 \nArguments: %2.").arg(program).arg(arguments.join(", "));
+
+    QFileInfo info(program);
+    if (not info.exists())
+    {
+        const QString msg = QString("Can't find binary.\n%1").arg(parameters);
+        QWARN(msg.toUtf8().constData());
+        return false;
+    }
+
+    QProcess *process = new QProcess(this);
+    process->setWorkingDirectory(info.absoluteDir().absolutePath());
+    process->start(program, arguments);
+
+    if (not process->waitForFinished())// 30 sec
+    {
+        const QString msg = QString("The operation timed out or an error occurred.\n%1").arg(parameters);
+        QWARN(msg.toUtf8().constData());
+        return false;
+    }
+
+    if (process->exitStatus() == QProcess::CrashExit)
+    {
+        const QString msg = QString("Program crashed.\n%1\n%2").arg(parameters)
+                .arg(QString(process->readAllStandardError()));
+        QWARN(msg.toUtf8().constData());
+        return false;
+    }
+
+    if (process->exitCode() != 0)
+    {
+        const QString msg = QString("Failed.\n%1\n%2").arg(parameters)
+                .arg(QString(process->readAllStandardError()));
+        QWARN(msg.toUtf8().constData());
+        return false;
+    }
+
+    delete process;
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const
+{
+    QFileInfo srcFileInfo(srcFilePath);
+    if (srcFileInfo.isDir())
+    {
+        QDir targetDir(tgtFilePath);
+        targetDir.cdUp();
+        if (not targetDir.mkdir(QFileInfo(tgtFilePath).fileName()))
+        {
+            return false;
+        }
+        QDir sourceDir(srcFilePath);
+        QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden |
+                                                    QDir::System);
+        foreach (const QString &fileName, fileNames)
+        {
+            const QString newSrcFilePath = srcFilePath + QLatin1Char('/') + fileName;
+            const QString newTgtFilePath = tgtFilePath + QLatin1Char('/') + fileName;
+            if (not CopyRecursively(newSrcFilePath, newTgtFilePath))
+            {
+                return false;
+            }
+        }
+    } else
+    {
+        if (not QFile::copy(srcFilePath, tgtFilePath))
+        {
+            return false;
+        }
+    }
+    return true;
+}

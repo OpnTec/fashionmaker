@@ -43,7 +43,8 @@ SOURCES += \
     tst_vlayoutdetail.cpp \
     tst_varc.cpp \
     stable.cpp \
-    tst_measurementregexp.cpp
+    tst_measurementregexp.cpp \
+    tst_tapecommandline.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -54,7 +55,8 @@ HEADERS += \
     tst_vlayoutdetail.h \
     tst_varc.h \
     stable.h \
-    tst_measurementregexp.h
+    tst_measurementregexp.h \
+    tst_tapecommandline.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
@@ -169,3 +171,23 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser
 
 INCLUDEPATH += $${PWD}/../../libs/qmuparser
 DEPENDPATH += $${PWD}/../../libs/qmuparser
+
+# Only for adding path to LD_LIBRARY_PATH
+# VPropertyExplorer library
+win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+else:win32:CONFIG(debug, debug|release): LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpropertyexplorer
+
+INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
+DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
+
+TAPE_TEST_FILES += \
+    tst_tape/keiko.vit
+
+for(DIR, TAPE_TEST_FILES) {
+     #add these absolute paths to a variable which
+     #ends up as 'mkcommands = path1 path2 path3 ...'
+     tape_path += $${PWD}/$$DIR
+}
+
+copyToDestdir($$tape_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_tape))
