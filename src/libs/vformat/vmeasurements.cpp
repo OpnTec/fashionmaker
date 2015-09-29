@@ -731,8 +731,6 @@ QDomElement VMeasurements::MakeEmpty(const QString &name, const QString &formula
         {
             SetAttribute(element, AttrValue, formula);
         }
-        SetAttribute(element, AttrDescription, QString(""));
-        SetAttribute(element, AttrFullName, QString(""));
     }
 
     return element;
