@@ -194,6 +194,15 @@ VApplication::VApplication(int &argc, char **argv)
       lockLog(),
       out(nullptr)
 {
+    setApplicationDisplayName(VER_PRODUCTNAME_STR);
+    setApplicationName(VER_INTERNALNAME_STR);
+    setOrganizationName(VER_COMPANYNAME_STR);
+    setOrganizationDomain(VER_COMPANYDOMAIN_STR);
+    // Setting the Application version
+    setApplicationVersion(APP_VERSION_STR);
+
+    OpenSettings();
+
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Reset();
     LoadTranslation(QLocale::system().name());// By default the console version uses system locale
@@ -495,15 +504,6 @@ void VApplication::ClearOldLogs() const
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitOptions()
 {
-    setApplicationDisplayName(VER_PRODUCTNAME_STR);
-    setApplicationName(VER_INTERNALNAME_STR);
-    setOrganizationName(VER_COMPANYNAME_STR);
-    setOrganizationDomain(VER_COMPANYDOMAIN_STR);
-    // Setting the Application version
-    setApplicationVersion(APP_VERSION_STR);
-
-    OpenSettings();
-
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     // Catch and send report
     VApplication::DrMingw();
