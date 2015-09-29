@@ -55,6 +55,9 @@
 
 Q_LOGGING_CATEGORY(tMainWindow, "t.mainwindow")
 
+// We need this enum in case we will add or delete a column. And also make code more readable.
+enum {ColumnName = 0, ColumnFullName, ColumnCalcValue, ColumnFormula, ColumnBaseValue, ColumnInSizes, ColumnInHeights};
+
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::TMainWindow(QWidget *parent)
     :QMainWindow(parent),
@@ -730,7 +733,7 @@ void TMainWindow::MoveUp()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
     m->MoveUp(nameField->data(Qt::UserRole).toString());
     MeasurementsWasSaved(false);
     RefreshData();
@@ -748,7 +751,7 @@ void TMainWindow::MoveDown()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
     m->MoveDown(nameField->data(Qt::UserRole).toString());
     MeasurementsWasSaved(false);
     RefreshData();
@@ -766,7 +769,7 @@ void TMainWindow::Fx()
         return;
     }
 
-    const QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
 
     QSharedPointer<VMeasurement> meash;
 
@@ -835,7 +838,7 @@ void TMainWindow::AddCustom()
     else
     {
         currentRow  = ui->tableWidget->currentRow()+1;
-        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
         m->AddEmptyAfter(nameField->data(Qt::UserRole).toString(), name);
     }
 
@@ -877,7 +880,7 @@ void TMainWindow::AddKnown()
         else
         {
             currentRow  = ui->tableWidget->currentRow() + list.size();
-            QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+            QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
             QString after = nameField->data(Qt::UserRole).toString();
             for (int i = 0; i < list.size(); ++i)
             {
@@ -973,7 +976,7 @@ void TMainWindow::ImportFromPattern()
     else
     {
         currentRow  = ui->tableWidget->currentRow() + measurements.size();
-        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
         QString after = nameField->data(Qt::UserRole).toString();
         for (int i = 0; i < measurements.size(); ++i)
         {
@@ -1018,7 +1021,7 @@ void TMainWindow::ShowMData()
     {
         MFields(true);
 
-        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0); // name
+        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
         QSharedPointer<VMeasurement> meash;
 
         try
@@ -1139,7 +1142,7 @@ void TMainWindow::SaveMName()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
 
     QSharedPointer<VMeasurement> meash;
 
@@ -1191,16 +1194,16 @@ void TMainWindow::SaveMValue()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
 
     // Replace line return character with spaces for calc if exist
     QString text = ui->plainTextEditFormula->toPlainText();
     text.replace("\n", " ");
 
-    QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2);
+    QTableWidgetItem *formulaField = ui->tableWidget->item(row, ColumnFormula);
     if (formulaField->text() == text)
     {
-        QTableWidgetItem *result = ui->tableWidget->item(row, 1);
+        QTableWidgetItem *result = ui->tableWidget->item(row, ColumnCalcValue);
         const QString postfix = VDomDocument::UnitsToStr(mUnit);//Show unit in dialog lable (cm, mm or inch)
         ui->labelCalculatedValue->setText(result->text() + " " +postfix);
         return;
@@ -1267,7 +1270,7 @@ void TMainWindow::SaveMBaseValue(double value)
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
     m->SetMBaseValue(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1290,7 +1293,7 @@ void TMainWindow::SaveMSizeIncrease(double value)
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
     m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1313,7 +1316,7 @@ void TMainWindow::SaveMHeightIncrease(double value)
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
     m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1334,7 +1337,7 @@ void TMainWindow::SaveMDescription()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
     m->SetMDescription(nameField->data(Qt::UserRole).toString(), ui->plainTextEditDescription->toPlainText());
 
     MeasurementsWasSaved(false);
@@ -1361,7 +1364,7 @@ void TMainWindow::SaveMFullName()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
     m->SetMFullName(nameField->data(Qt::UserRole).toString(), ui->lineEditFullName->text());
 
     MeasurementsWasSaved(false);
@@ -1612,13 +1615,13 @@ void TMainWindow::InitTable()
 {
     if (mType == MeasurementsType::Standard)
     {
-        ui->tableWidget->setColumnHidden( 2, true );// formula
+        ui->tableWidget->setColumnHidden( ColumnFormula, true );// formula
     }
     else
     {
-        ui->tableWidget->setColumnHidden( 3, true );// base value
-        ui->tableWidget->setColumnHidden( 4, true );// in sizes
-        ui->tableWidget->setColumnHidden( 5, true );// in heights
+        ui->tableWidget->setColumnHidden( ColumnBaseValue, true );// base value
+        ui->tableWidget->setColumnHidden( ColumnInSizes, true );// in sizes
+        ui->tableWidget->setColumnHidden( ColumnInHeights, true );// in heights
     }
 
     connect(ui->tableWidget, &QTableWidget::itemSelectionChanged, this, &TMainWindow::ShowMData);
@@ -1635,11 +1638,11 @@ void TMainWindow::ShowUnits()
 {
     const QString unit = VDomDocument::UnitsToStr(mUnit);
 
-    ShowHeaderUnits(ui->tableWidget, 1, VDomDocument::UnitsToStr(pUnit));// calculated value
-    ShowHeaderUnits(ui->tableWidget, 2, unit);// formula
-    ShowHeaderUnits(ui->tableWidget, 3, unit);// base value
-    ShowHeaderUnits(ui->tableWidget, 4, unit);// in sizes
-    ShowHeaderUnits(ui->tableWidget, 5, unit);// in heights
+    ShowHeaderUnits(ui->tableWidget, ColumnCalcValue, VDomDocument::UnitsToStr(pUnit));// calculated value
+    ShowHeaderUnits(ui->tableWidget, ColumnFormula, unit);// formula
+    ShowHeaderUnits(ui->tableWidget, ColumnBaseValue, unit);// base value
+    ShowHeaderUnits(ui->tableWidget, ColumnInSizes, unit);// in sizes
+    ShowHeaderUnits(ui->tableWidget, ColumnInHeights, unit);// in heights
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1648,7 +1651,7 @@ void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString
     SCASSERT(table != nullptr);
 
     QString header = table->horizontalHeaderItem(column)->text();
-    const int index = header.indexOf("(");
+    const int index = header.indexOf(QLatin1Literal("("));
     if (index != -1)
     {
         header.remove(index-1, 100);
@@ -1829,12 +1832,21 @@ void TMainWindow::RefreshTable()
 
         if (mType == MeasurementsType::Individual)
         {
-            QTableWidgetItem *item = AddCell(qApp->TrVars()->MToUser(meash->GetName()), currentRow, 0,
+            QTableWidgetItem *item = AddCell(qApp->TrVars()->MToUser(meash->GetName()), currentRow, ColumnName,
                                              Qt::AlignVCenter); // name
             item->setData(Qt::UserRole, meash->GetName());
 
+            if (meash->IsCustom())
+            {
+                AddCell(meash->GetGuiText(), currentRow, ColumnFullName, Qt::AlignVCenter);
+            }
+            else
+            {
+                AddCell(qApp->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName, Qt::AlignVCenter);
+            }
+
             const qreal value = UnitConvertor(*meash->GetValue(), mUnit, pUnit);
-            AddCell(QString().setNum(value), currentRow, 1, Qt::AlignHCenter | Qt::AlignVCenter,
+            AddCell(QString().setNum(value), currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
                     meash->IsFormulaOk()); // calculated value
 
             QString formula;
@@ -1848,23 +1860,32 @@ void TMainWindow::RefreshTable()
                 formula = meash->GetFormula();
             }
 
-            AddCell(formula, currentRow, 2, Qt::AlignVCenter); // formula
+            AddCell(formula, currentRow, ColumnFormula, Qt::AlignVCenter); // formula
         }
         else
         {
             AddCell(qApp->TrVars()->MToUser(meash->GetName()), currentRow, 0, Qt::AlignVCenter); // name
 
+            if (meash->IsCustom())
+            {
+                AddCell(meash->GetGuiText(), currentRow, ColumnFullName, Qt::AlignVCenter);
+            }
+            else
+            {
+                AddCell(qApp->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName, Qt::AlignVCenter);
+            }
+
             const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
-            AddCell(QString().setNum(value), currentRow, 1,
+            AddCell(QString().setNum(value), currentRow, ColumnCalcValue,
                     Qt::AlignHCenter | Qt::AlignVCenter, meash->IsFormulaOk()); // calculated value
 
-            AddCell(QString().setNum(meash->GetBase()), currentRow, 3,
+            AddCell(QString().setNum(meash->GetBase()), currentRow, ColumnBaseValue,
                     Qt::AlignHCenter | Qt::AlignVCenter); // base value
 
-            AddCell(QString().setNum(meash->GetKsize()), currentRow, 4,
+            AddCell(QString().setNum(meash->GetKsize()), currentRow, ColumnInSizes,
                     Qt::AlignHCenter | Qt::AlignVCenter); // in sizes
 
-            AddCell(QString().setNum(meash->GetKheight()), currentRow, 5,
+            AddCell(QString().setNum(meash->GetKheight()), currentRow, ColumnInHeights,
                     Qt::AlignHCenter | Qt::AlignVCenter); // in heights
         }
     }

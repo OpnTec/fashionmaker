@@ -130,6 +130,11 @@
           </column>
           <column>
            <property name="text">
+            <string>Full name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>Calculated value</string>
            </property>
           </column>
