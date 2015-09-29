@@ -786,7 +786,15 @@ void TMainWindow::Fx()
 
     QString text = ui->plainTextEditFormula->toPlainText();
     text.replace("\n", " ");
-    text = qApp->TrVars()->FormulaFromUser(text, true);
+    try
+    {
+        text = qApp->TrVars()->FormulaFromUser(text, true);
+    }
+    catch (qmu::QmuParserError &e) // Just in case something bad will happen
+    {
+        Q_UNUSED(e)
+        text = ui->plainTextEditFormula->toPlainText();
+    }
     dialog->SetFormula(text);
     const QString postfix = VDomDocument::UnitsToStr(mUnit, true);//Show unit in dialog lable (cm, mm or inch)
     dialog->setPostfix(postfix);
@@ -1229,7 +1237,7 @@ void TMainWindow::SaveMValue()
         const QString formula = qApp->TrVars()->FormulaFromUser(text, true);
         m->SetMValue(nameField->data(Qt::UserRole).toString(), formula);
     }
-    catch (qmu::QmuParserError &e) // Just in case something bad happens
+    catch (qmu::QmuParserError &e) // Just in case something bad will happen
     {
         Q_UNUSED(e)
         return;
