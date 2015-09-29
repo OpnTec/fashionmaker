@@ -151,7 +151,7 @@ private:
 
     bool MaybeSave();
 
-    void AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
+    QTableWidgetItem *AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
 
     QComboBox *SetGradationList(const QString &label, const QStringList &list);
     void       SetDefaultHeight(int value);

@@ -662,7 +662,7 @@ void TMainWindow::Remove()
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-    m->Remove(nameField->text());
+    m->Remove(nameField->data(Qt::UserRole).toString());
 
     MeasurementsWasSaved(false);
 
@@ -731,7 +731,7 @@ void TMainWindow::MoveUp()
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
-    m->MoveUp(nameField->text());
+    m->MoveUp(nameField->data(Qt::UserRole).toString());
     MeasurementsWasSaved(false);
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
@@ -749,7 +749,7 @@ void TMainWindow::MoveDown()
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
-    m->MoveDown(nameField->text());
+    m->MoveDown(nameField->data(Qt::UserRole).toString());
     MeasurementsWasSaved(false);
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
@@ -766,8 +766,20 @@ void TMainWindow::Fx()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
-    QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
+    const QTableWidgetItem *nameField = ui->tableWidget->item(row, 0);
+
+    QSharedPointer<VMeasurement> meash;
+
+    try
+    {
+       // Translate to internal look.
+       meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch(const VExceptionBadId & e)
+    {
+        e.CriticalMessageBox(tr("Can't find measurement."), this);
+        return;
+    }
 
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(meash->GetData(), NULL_ID, this);
     dialog->setWindowTitle(tr("Edit measurement"));
@@ -781,7 +793,7 @@ void TMainWindow::Fx()
 
     if (dialog->exec() == QDialog::Accepted)
     {
-        m->SetMValue(nameField->text(), dialog->GetFormula());
+        m->SetMValue(nameField->data(Qt::UserRole).toString(), dialog->GetFormula());
 
         MeasurementsWasSaved(false);
 
@@ -816,7 +828,7 @@ void TMainWindow::AddCustom()
     {
         currentRow  = ui->tableWidget->currentRow()+1;
         QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-        m->AddEmptyAfter(nameField->text(), name);
+        m->AddEmptyAfter(nameField->data(Qt::UserRole).toString(), name);
     }
 
     search->AddRow(currentRow);
@@ -858,7 +870,7 @@ void TMainWindow::AddKnown()
         {
             currentRow  = ui->tableWidget->currentRow() + list.size();
             QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-            QString after = nameField->text();
+            QString after = nameField->data(Qt::UserRole).toString();
             for (int i = 0; i < list.size(); ++i)
             {
                 if (mType == MeasurementsType::Individual)
@@ -954,7 +966,7 @@ void TMainWindow::ImportFromPattern()
     {
         currentRow  = ui->tableWidget->currentRow() + measurements.size();
         QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-        QString after = nameField->text();
+        QString after = nameField->data(Qt::UserRole).toString();
         for (int i = 0; i < measurements.size(); ++i)
         {
             m->AddEmptyAfter(after, measurements.at(i));
@@ -1003,7 +1015,8 @@ void TMainWindow::ShowMData()
 
         try
         {
-            meash = data->GetVariable<VMeasurement>(qApp->TrVars()->MFromUser(nameField->text()));
+            // Translate to internal look.
+            meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
         }
         catch(const VExceptionBadId &e)
         {
@@ -1119,28 +1132,44 @@ void TMainWindow::SaveMName()
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-    QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
+
+    QSharedPointer<VMeasurement> meash;
+
+    try
+    {
+        // Translate to internal look.
+        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch(const VExceptionBadId & e)
+    {
+        e.CriticalMessageBox(tr("Can't find measurement."), this);
+        return;
+    }
 
     QString newName = ui->lineEditName->text();
     if (meash->IsCustom())
     {
         newName = CustomMSign + newName;
-    }
 
-    if (data->IsUnique(newName))
-    {
-        m->SetMName(nameField->text(), newName);
-        MeasurementsWasSaved(false);
-        RefreshData();
-        search->RefreshList(ui->lineEditFind->text());
+        if (data->IsUnique(newName))
+        {
+            m->SetMName(nameField->text(), newName);
+            MeasurementsWasSaved(false);
+            RefreshData();
+            search->RefreshList(ui->lineEditFind->text());
 
-        ui->tableWidget->blockSignals(true);
-        ui->tableWidget->selectRow(row);
-        ui->tableWidget->blockSignals(false);
+            ui->tableWidget->blockSignals(true);
+            ui->tableWidget->selectRow(row);
+            ui->tableWidget->blockSignals(false);
+        }
+        else
+        {
+            ui->lineEditName->setText(ClearCustomName(nameField->text()));
+        }
     }
     else
     {
-        ui->lineEditName->setText(ClearCustomName(nameField->text()));
+        qWarning() << tr("The name of known measurement forbidden to change.");
     }
 }
 
@@ -1176,9 +1205,18 @@ void TMainWindow::SaveMValue()
         return;
     }
 
-    // Translate to internal look.
+    QSharedPointer<VMeasurement> meash;
+    try
+    {
+        // Translate to internal look.
+        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch(const VExceptionBadId & e)
+    {
+        e.CriticalMessageBox(tr("Can't find measurement."), this);
+        return;
+    }
 
-    QSharedPointer<VMeasurement> meash = data->GetVariable<VMeasurement>(nameField->text());
     const bool ok = EvalFormula(text, true, meash->GetData(), ui->labelCalculatedValue);
 
     if (not ok)
@@ -1189,7 +1227,7 @@ void TMainWindow::SaveMValue()
     try
     {
         const QString formula = qApp->TrVars()->FormulaFromUser(text, true);
-        m->SetMValue(nameField->text(), formula);
+        m->SetMValue(nameField->data(Qt::UserRole).toString(), formula);
     }
     catch (qmu::QmuParserError &e) // Just in case something bad happens
     {
@@ -1222,7 +1260,7 @@ void TMainWindow::SaveMBaseValue(double value)
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-    m->SetMBaseValue(nameField->text(), value);
+    m->SetMBaseValue(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
 
@@ -1245,7 +1283,7 @@ void TMainWindow::SaveMSizeIncrease(double value)
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-    m->SetMSizeIncrease(nameField->text(), value);
+    m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
 
@@ -1268,7 +1306,7 @@ void TMainWindow::SaveMHeightIncrease(double value)
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-    m->SetMHeightIncrease(nameField->text(), value);
+    m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
 
@@ -1289,7 +1327,7 @@ void TMainWindow::SaveMDescription()
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-    m->SetMDescription(nameField->text(), ui->plainTextEditDescription->toPlainText());
+    m->SetMDescription(nameField->data(Qt::UserRole).toString(), ui->plainTextEditDescription->toPlainText());
 
     MeasurementsWasSaved(false);
 
@@ -1316,7 +1354,7 @@ void TMainWindow::SaveMFullName()
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
-    m->SetMFullName(nameField->text(), ui->lineEditFullName->text());
+    m->SetMFullName(nameField->data(Qt::UserRole).toString(), ui->lineEditFullName->text());
 
     MeasurementsWasSaved(false);
 
@@ -1686,7 +1724,7 @@ bool TMainWindow::MaybeSave()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::AddCell(const QString &text, int row, int column, int aligment, bool ok)
+QTableWidgetItem *TMainWindow::AddCell(const QString &text, int row, int column, int aligment, bool ok)
 {
     QTableWidgetItem *item = new QTableWidgetItem(text);
     item->setTextAlignment(aligment);
@@ -1704,6 +1742,8 @@ void TMainWindow::AddCell(const QString &text, int row, int column, int aligment
     }
 
     ui->tableWidget->setItem(row, column, item);
+
+    return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1781,7 +1821,9 @@ void TMainWindow::RefreshTable()
 
         if (mType == MeasurementsType::Individual)
         {
-            AddCell(meash->GetName(), currentRow, 0, Qt::AlignVCenter); // name
+            QTableWidgetItem *item = AddCell(qApp->TrVars()->MToUser(meash->GetName()), currentRow, 0,
+                                             Qt::AlignVCenter); // name
+            item->setData(Qt::UserRole, meash->GetName());
 
             const qreal value = UnitConvertor(*meash->GetValue(), mUnit, pUnit);
             AddCell(QString().setNum(value), currentRow, 1, Qt::AlignHCenter | Qt::AlignVCenter,
@@ -1802,7 +1844,7 @@ void TMainWindow::RefreshTable()
         }
         else
         {
-            AddCell(meash->GetName(), currentRow, 0, Qt::AlignVCenter); // name
+            AddCell(qApp->TrVars()->MToUser(meash->GetName()), currentRow, 0, Qt::AlignVCenter); // name
 
             const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
             AddCell(QString().setNum(value), currentRow, 1,
@@ -1923,7 +1965,7 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
         {
             // Replace line return character with spaces for calc if exist
             QString f;
-            if (not fromUser)
+            if (fromUser)
             {
                 f = qApp->TrVars()->FormulaFromUser(formula, true);
             }

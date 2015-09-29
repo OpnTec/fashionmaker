@@ -75,22 +75,14 @@ bool VTranslateMeasurements::MeasurementsFromUser(QString &newFormula, int posit
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateMeasurements::MToUser(const QString &measurement) const
 {
-    return measurements.value(measurement).translate();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VTranslateMeasurements::MFromUser(const QString &measurement) const
-{
-    QMap<QString, QmuTranslation>::const_iterator i = measurements.constBegin();
-    while (i != measurements.constEnd())
+    if (measurements.contains(measurement))
     {
-        if (measurement == i.value().translate())
-        {
-            return i.key();
-        }
-        ++i;
+        return measurements.value(measurement).translate();
     }
-    return measurement;
+    else
+    {
+        return measurement;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,13 +100,27 @@ QString VTranslateMeasurements::MFormula(const QString &measurement) const
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateMeasurements::GuiText(const QString &measurement) const
 {
-    return guiTexts.value(measurement).translate();
+    if (guiTexts.contains(measurement))
+    {
+        return guiTexts.value(measurement).translate();
+    }
+    else
+    {
+        return measurement;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateMeasurements::Description(const QString &measurement) const
 {
-    return descriptions.value(measurement).translate();
+    if (descriptions.contains(measurement))
+    {
+        return descriptions.value(measurement).translate();
+    }
+    else
+    {
+        return measurement;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

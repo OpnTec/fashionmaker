@@ -41,7 +41,6 @@ public:
     bool MeasurementsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
 
     QString MToUser(const QString &measurement) const;
-    QString MFromUser(const QString &measurement) const;
     QString MNumber(const QString &measurement) const;
     QString MFormula(const QString &measurement) const;
     QString GuiText(const QString &measurement) const;

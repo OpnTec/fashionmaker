@@ -404,6 +404,10 @@ void VMeasurements::SetMName(const QString &name, const QString &text)
     {
         SetAttribute(node, AttrName, text);
     }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -413,6 +417,10 @@ void VMeasurements::SetMValue(const QString &name, const QString &text)
     if (not node.isNull())
     {
         SetAttribute(node, AttrValue, text);
+    }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
     }
 }
 
@@ -424,6 +432,10 @@ void VMeasurements::SetMBaseValue(const QString &name, double value)
     {
         SetAttribute(node, AttrBase, value);
     }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -433,6 +445,10 @@ void VMeasurements::SetMSizeIncrease(const QString &name, double value)
     if (not node.isNull())
     {
         SetAttribute(node, AttrSizeIncrease, value);
+    }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
     }
 }
 
@@ -444,6 +460,10 @@ void VMeasurements::SetMHeightIncrease(const QString &name, double value)
     {
         SetAttribute(node, AttrHeightIncrease, value);
     }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -454,6 +474,10 @@ void VMeasurements::SetMDescription(const QString &name, const QString &text)
     {
         SetAttribute(node, AttrDescription, text);
     }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -463,6 +487,10 @@ void VMeasurements::SetMFullName(const QString &name, const QString &text)
     if (not node.isNull())
     {
         SetAttribute(node, AttrFullName, text);
+    }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
     }
 }
 
