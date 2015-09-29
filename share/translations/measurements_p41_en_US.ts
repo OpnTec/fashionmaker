@@ -7,19 +7,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="176"/>
         <source>height</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>height</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="177"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Height</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="178"/>
         <source>Vertical distance from crown of head to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="181"/>
@@ -835,19 +835,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="492"/>
         <source>neck_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>neck_size</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="493"/>
         <source>Neck circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neck Size</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="494"/>
         <source>Neck circumference at base of Neck, touching Neck Back, Neck Sides, and Neck Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="498"/>
@@ -871,19 +871,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="504"/>
         <source>bust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>chest</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="505"/>
         <source>Bust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Chest</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="506"/>
         <source>Circumference around Bust, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="509"/>
@@ -925,13 +925,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="520"/>
         <source>waist_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>natural_waist</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="521"/>
         <source>Waist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Natural Waist</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="526"/>
@@ -949,7 +949,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="522"/>
         <source>Circumference around Waist, following natural contours. Waists are  typically higher in back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="528"/>
@@ -961,19 +961,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="532"/>
         <source>hip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>seat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="533"/>
         <source>Hip circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Seat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="534"/>
         <source>Circumference around Hip where Hip protrusion is greatest, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="538"/>
@@ -1951,19 +1951,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="837"/>
         <source>neck_back_to_waist_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>natural_waist_length</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="838"/>
         <source>Neck Back to Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Natural Waist Length</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="839"/>
         <source>From Neck Back down to Waist Back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="842"/>
@@ -1987,19 +1987,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="848"/>
         <source>neck_back_to_highbust_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>scye_depth</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="849"/>
         <source>Neck Back to Highbust Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Scye Depth</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="850"/>
         <source>From Neck Back down to Highbust Back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="853"/>
@@ -2347,19 +2347,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="966"/>
         <source>shoulder_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>shoulder</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="967"/>
         <source>Shoulder length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Shoulder</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="968"/>
         <source>From Neck Side to Shoulder Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="971"/>
@@ -2527,19 +2527,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1019"/>
         <source>across_back_half_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>half_back</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1020"/>
         <source>Across Back, half</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Half Back</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1021"/>
         <source>Half of &apos;Across Back&apos;. (&apos;Across Back&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1024"/>
@@ -2995,19 +2995,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1190"/>
         <source>arm_shoulder_tip_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>sleeve_length_one_piece</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1191"/>
         <source>Arm: Shoulder Tip to Wrist, bent</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sleeve Length, one piece</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1192"/>
         <source>Bend Arm, measure from Shoulder Tip around Elbow to radial Wrist bone.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1195"/>
@@ -3175,19 +3175,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1244"/>
         <source>arm_upper_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>arm_circumference</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1245"/>
         <source>Arm: Upper Arm circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Arm Circumference</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1246"/>
         <source>Arm circumference at Armpit level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1249"/>
@@ -3247,19 +3247,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1264"/>
         <source>arm_wrist_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>close_wrist_measurement</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1265"/>
         <source>Arm: Wrist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Close Wrist Measurement</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1266"/>
         <source>Wrist circumference.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1269"/>
@@ -3373,19 +3373,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1315"/>
         <source>leg_crotch_to_floor</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>inside_leg</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1316"/>
         <source>Leg: Crotch to floor</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Inside Leg</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1317"/>
         <source>Stand feet close together. Measure from crotch level (touching body, no extra space) down to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1386"/>
@@ -3403,19 +3403,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1321"/>
         <source>leg_waist_side_to_floor</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>side_seam_length_trousers</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1322"/>
         <source>Leg: Waist Side to floor</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Side Seam Length for Trousers</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1323"/>
         <source>From Waist Side along curve to Hip level then straight down to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1326"/>
@@ -3685,19 +3685,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1420"/>
         <source>rise_length_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>body_rise</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1421"/>
         <source>Rise length, side</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Body Rise</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1422"/>
         <source>From Waist Side down to surface, while seated on hard surface.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1425"/>
@@ -3793,19 +3793,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1463"/>
         <source>waist_natural_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>trouser_waist</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1464"/>
         <source>Natural Waist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Trouser Waist</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1465"/>
         <source>Torso circumference at men&apos;s natural side Abdominal Obliques indentation, if Oblique indentation isn&apos;t found then just below the Navel level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1469"/>
@@ -3901,19 +3901,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1496"/>
         <source>arm_neck_back_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>sleeve_length_for_shirt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1497"/>
         <source>Arm: Neck Back to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sleeve Length for Shirt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1498"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Neck Back to Elbow Tip to Wrist bone.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1502"/>
@@ -3991,19 +3991,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1526"/>
         <source>arm_armscye_back_center_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>sleeve_length_two_piece</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1527"/>
         <source>Arm: Armscye Back Center to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sleeve Length, two piece</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1528"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Armscye Back to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winnifred Aldrich /Men/ field.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1544"/>
