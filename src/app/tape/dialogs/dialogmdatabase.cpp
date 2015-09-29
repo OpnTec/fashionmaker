@@ -263,45 +263,23 @@ void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::InitDataBase(const QStringList &list)
 {
-    InitGroup(groupA, "A. " + tr("Direct Height", "Measurement section"), ListGroupA(), list);
-    InitGroup(groupB, "B. " + tr("Direct Width", "Measurement section"), ListGroupB(), list);
-    InitGroup(groupC, "C. " + tr("Indentation", "Measurement section"), ListGroupC(), list);
-    InitGroup(groupD, "D. " + tr("Circumference and Arc", "Measurement section"), ListGroupD(), list);
-    InitGroup(groupE, "E. " + tr("Vertical", "Measurement section"), ListGroupE(), list);
-    InitGroup(groupF, "F. " + tr("Horizontal", "Measurement section"), ListGroupF(), list);
-    InitGroup(groupG, "G. " + tr("Bust", "Measurement section"), ListGroupG(), list);
-    InitGroup(groupH, "H. " + tr("Balance", "Measurement section"), ListGroupH(), list);
-    InitGroup(groupI, "I. " + tr("Arm", "Measurement section"), ListGroupI(), list);
-    InitGroup(groupJ, "J. " + tr("Leg", "Measurement section"), ListGroupJ(), list);
-    InitGroup(groupK, "K. " + tr("Crotch and Rise", "Measurement section"), ListGroupK(), list);
-    InitGroup(groupL, "L. " + tr("Hand", "Measurement section"), ListGroupL(), list);
-    InitGroup(groupM, "M. " + tr("Foot", "Measurement section"), ListGroupM(), list);
-    InitGroup(groupN, "N. " + tr("Head", "Measurement section"), ListGroupN(), list);
-    InitGroup(groupO, "O. " + tr("Men & Tailoring", "Measurement section"), ListGroupO(), list);
-    InitGroup(groupP, "P. " + tr("Historical & Specialty", "Measurement section"), ListGroupP(), list);
+    InitGroup(groupA, "A. " + tr("Direct Height", "Measurement section"),              ListGroupA(), list);
+    InitGroup(groupB, "B. " + tr("Direct Width", "Measurement section"),               ListGroupB(), list);
+    InitGroup(groupC, "C. " + tr("Indentation", "Measurement section"),                ListGroupC(), list);
+    InitGroup(groupD, "D. " + tr("Hand", "Measurement section"),                       ListGroupD(), list);
+    InitGroup(groupE, "E. " + tr("Foot", "Measurement section"),                       ListGroupE(), list);
+    InitGroup(groupF, "F. " + tr("Head", "Measurement section"),                       ListGroupF(), list);
+    InitGroup(groupG, "G. " + tr("Circumference and Arc", "Measurement section"),      ListGroupG(), list);
+    InitGroup(groupH, "H. " + tr("Vertical", "Measurement section"),                   ListGroupH(), list);
+    InitGroup(groupI, "I. " + tr("Horizontal", "Measurement section"),                 ListGroupI(), list);
+    InitGroup(groupJ, "J. " + tr("Bust", "Measurement section"),                       ListGroupJ(), list);
+    InitGroup(groupK, "K. " + tr("Balance", "Measurement section"),                    ListGroupK(), list);
+    InitGroup(groupL, "L. " + tr("Arm", "Measurement section"),                        ListGroupL(), list);
+    InitGroup(groupM, "M. " + tr("Leg", "Measurement section"),                        ListGroupM(), list);
+    InitGroup(groupN, "N. " + tr("Crotch and Rise", "Measurement section"),            ListGroupN(), list);
+    InitGroup(groupO, "O. " + tr("Men & Tailoring", "Measurement section"),            ListGroupO(), list);
+    InitGroup(groupP, "P. " + tr("Historical & Specialty", "Measurement section"),     ListGroupP(), list);
     InitGroup(groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ(), list);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMDataBase::InitDataBase()
-{
-    InitGroup(groupA, "A. " + tr("Direct Height", "Measurement section"), ListGroupA());
-    InitGroup(groupB, "B. " + tr("Direct Width", "Measurement section"), ListGroupB());
-    InitGroup(groupC, "C. " + tr("Indentation", "Measurement section"), ListGroupC());
-    InitGroup(groupD, "D. " + tr("Circumference and Arc", "Measurement section"), ListGroupD());
-    InitGroup(groupE, "E. " + tr("Vertical", "Measurement section"), ListGroupE());
-    InitGroup(groupF, "F. " + tr("Horizontal", "Measurement section"), ListGroupF());
-    InitGroup(groupG, "G. " + tr("Bust", "Measurement section"), ListGroupG());
-    InitGroup(groupH, "H. " + tr("Balance", "Measurement section"), ListGroupH());
-    InitGroup(groupI, "I. " + tr("Arm", "Measurement section"), ListGroupI());
-    InitGroup(groupJ, "J. " + tr("Leg", "Measurement section"), ListGroupJ());
-    InitGroup(groupK, "K. " + tr("Crotch and Rise", "Measurement section"), ListGroupK());
-    InitGroup(groupL, "L. " + tr("Hand", "Measurement section"), ListGroupL());
-    InitGroup(groupM, "M. " + tr("Foot", "Measurement section"), ListGroupM());
-    InitGroup(groupN, "N. " + tr("Head", "Measurement section"), ListGroupN());
-    InitGroup(groupO, "O. " + tr("Men & Tailoring", "Measurement section"), ListGroupO());
-    InitGroup(groupP, "P. " + tr("Historical & Specialty", "Measurement section"), ListGroupP());
-    InitGroup(groupQ, "Q. " + tr("Patternmaking measurements", "Measurement section"), ListGroupQ());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -82,8 +82,7 @@ private:
     QTreeWidgetItem *groupP;
     QTreeWidgetItem *groupQ;
 
-    void InitDataBase(const QStringList &list);
-    void InitDataBase();
+    void InitDataBase(const QStringList &list = QStringList());
     void InitGroup(QTreeWidgetItem *group, const QString &groupName, const QStringList &mList,
                    const QStringList &list = QStringList());
 
