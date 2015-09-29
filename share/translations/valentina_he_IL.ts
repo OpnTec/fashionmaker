@@ -5544,6 +5544,22 @@ Do you want to save your changes?</source>
         <source>File has unknown format.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Full name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File &apos;%1&apos; doesn&apos;t exist!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t find measurement.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The name of known measurement forbidden to change.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableWindow</name>
@@ -5922,14 +5938,6 @@ Do you want to save your changes?</source>
         <source>Export options can be used with single input file only.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Sets language locale (export mode). Default is system locale. Supported locales: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Locale</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -6044,6 +6052,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VMeasurements</name>
+    <message>
+        <source>Can&apos;t find measurement &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6617,6 +6632,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error: Invalid base size argument. Must be cm, mm or inch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use for unit testing. Run the program and open a file without showing a window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Test mode doesn&apos;t support openning several files.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
