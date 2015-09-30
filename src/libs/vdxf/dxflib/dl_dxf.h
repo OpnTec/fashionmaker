@@ -119,6 +119,100 @@ public:
     DL_Dxf();
     ~DL_Dxf();
 
+    DL_Dxf(const DL_Dxf &L)
+        : version(L.version),
+        polylineLayer(L.polylineLayer),
+        vertices(L.vertices),
+        maxVertices(L.maxVertices),
+        vertexIndex(L.vertexIndex),
+        knots(L.knots),
+        maxKnots(L.maxKnots),
+        knotIndex(L.knotIndex),
+
+        weights(L.weights),
+        weightIndex(L.weightIndex),
+
+        controlPoints(L.controlPoints),
+        maxControlPoints(L.maxControlPoints),
+        controlPointIndex(L.controlPointIndex),
+
+        fitPoints(L.fitPoints),
+        maxFitPoints(L.maxFitPoints),
+        fitPointIndex(L.fitPointIndex),
+
+        leaderVertices(L.leaderVertices),
+        maxLeaderVertices(L.maxLeaderVertices),
+        leaderVertexIndex(L.leaderVertexIndex),
+
+        firstHatchLoop(L.firstHatchLoop),
+        hatchEdge(L.hatchEdge),
+        hatchEdges(L.hatchEdges),
+
+        xRecordHandle(L.xRecordHandle),
+        xRecordValues(L.xRecordValues),
+
+        groupCodeTmp(L.groupCodeTmp),
+        groupCode(L.groupCode),
+        groupValue(L.groupValue),
+        currentObjectType(L.currentObjectType),
+        settingKey(L.settingKey),
+        values(L.values),
+        firstCall(L.firstCall),
+        attrib(L.attrib),
+        libVersion(L.libVersion),
+        appDictionaryHandle(L.appDictionaryHandle),
+        styleHandleStd(L.styleHandleStd)
+    {
+    }
+
+    DL_Dxf & operator=(const DL_Dxf &L)
+    {
+        version = L.version;
+        polylineLayer = L.polylineLayer;
+        vertices = L.vertices;
+        maxVertices = L.maxVertices;
+        vertexIndex = L.vertexIndex;
+        knots = L.knots;
+        maxKnots = L.maxKnots;
+        knotIndex = L.knotIndex;
+
+        weights = L.weights;
+        weightIndex = L.weightIndex;
+
+        controlPoints = L.controlPoints;
+        maxControlPoints = L.maxControlPoints;
+        controlPointIndex = L.controlPointIndex;
+
+        fitPoints = L.fitPoints;
+        maxFitPoints = L.maxFitPoints;
+        fitPointIndex = L.fitPointIndex;
+
+        leaderVertices = L.leaderVertices;
+        maxLeaderVertices = L.maxLeaderVertices;
+        leaderVertexIndex = L.leaderVertexIndex;
+
+        firstHatchLoop = L.firstHatchLoop;
+        hatchEdge = L.hatchEdge;
+        hatchEdges = L.hatchEdges;
+
+        xRecordHandle = L.xRecordHandle;
+        xRecordValues = L.xRecordValues;
+
+        groupCodeTmp = L.groupCodeTmp;
+        groupCode = L.groupCode;
+        groupValue = L.groupValue;
+        currentObjectType = L.currentObjectType;
+        settingKey = L.settingKey;
+        values = L.values;
+        firstCall = L.firstCall;
+        attrib = L.attrib;
+        libVersion = L.libVersion;
+        appDictionaryHandle = L.appDictionaryHandle;
+        styleHandleStd = L.styleHandleStd;
+
+        return *this;
+    }
+
     bool in(const std::string& file,
             DL_CreationInterface* creationInterface);
     bool readDxfGroups(FILE* fp,

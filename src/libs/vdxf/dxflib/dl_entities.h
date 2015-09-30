@@ -103,7 +103,34 @@ struct DXFLIB_EXPORT DL_LinetypeData
           numberOfDashes(numberOfDashes),
           patternLength(patternLength),
           pattern(pattern)
-    {}
+    {
+    }
+
+    ~DL_LinetypeData()
+    {
+    }
+
+    DL_LinetypeData(const DL_LinetypeData &L)
+        : name(L.name),
+          description(L.description),
+          flags(L.flags),
+          numberOfDashes(L.numberOfDashes),
+          patternLength(L.patternLength),
+          pattern(L.pattern)
+    {
+    }
+
+    DL_LinetypeData & operator=(const DL_LinetypeData &L)
+    {
+        name = L.name;
+        description = L.description;
+        flags = L.flags;
+        numberOfDashes = L.numberOfDashes;
+        patternLength = L.patternLength;
+        pattern = L.pattern;
+
+        return *this;
+    }
 
     /** Linetype name */
     std::string name;
@@ -513,7 +540,13 @@ struct DXFLIB_EXPORT DL_SplineData
         nKnots(nKnots),
         nControl(nControl),
         nFit(nFit),
-        flags(flags)
+        flags(flags),
+        tangentStartX(),
+        tangentStartY(),
+        tangentStartZ(),
+        tangentEndX(),
+        tangentEndY(),
+        tangentEndZ()
     {
     }
 
@@ -547,7 +580,7 @@ struct DXFLIB_EXPORT DL_SplineData
  */
 struct DXFLIB_EXPORT DL_KnotData
 {
-    DL_KnotData() {}
+    DL_KnotData() : k() {}
     /**
      * Constructor.
      * Parameters: see member variables.
@@ -1352,7 +1385,8 @@ struct DXFLIB_EXPORT DL_HatchData
     /**
      * Default constructor.
      */
-    DL_HatchData() {}
+    DL_HatchData() : numLoops(), solid(), scale(), angle(), pattern(), originX(), originY()
+    {}
 
     /**
      * Constructor.
@@ -1400,7 +1434,7 @@ struct DXFLIB_EXPORT DL_HatchLoopData
     /**
      * Default constructor.
      */
-    DL_HatchLoopData() {}
+    DL_HatchLoopData() : numEdges() {}
     /**
      * Constructor.
      * Parameters: see member variables.
@@ -1424,7 +1458,12 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
     /**
      * Default constructor.
      */
-    DL_HatchEdgeData() : defined(false), x1(0.0), y1(0.0), x2(0.0), y2(0.0)
+    DL_HatchEdgeData() : defined(false), x1(0.0), y1(0.0), x2(0.0), y2(0.0),
+        type(), cx(), cy(), radius(), angle1(), angle2(), ccw(),
+        mx(), my(), ratio(), degree(), rational(), periodic(),
+        nKnots(), nControl(), nFit(), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(), startTangentY(),
+        endTangentX(), endTangentY(), vertices()
     {
     }
 
@@ -1439,7 +1478,12 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
         x1(x1),
         y1(y1),
         x2(x2),
-        y2(y2)
+        y2(y2),
+        cx(), cy(), radius(), angle1(), angle2(), ccw(),
+        mx(), my(), ratio(), degree(), rational(), periodic(),
+        nKnots(), nControl(), nFit(), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(), startTangentY(),
+        endTangentX(), endTangentY(), vertices()
     {
     }
 
@@ -1458,7 +1502,12 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
         radius(radius),
         angle1(angle1),
         angle2(angle2),
-        ccw(ccw)
+        ccw(ccw),
+        x1(), y1(), x2(), y2(),
+        mx(), my(), ratio(), degree(), rational(), periodic(),
+        nKnots(), nControl(), nFit(), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(), startTangentY(),
+        endTangentX(), endTangentY(), vertices()
     {
     }
 
@@ -1480,7 +1529,12 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
         ccw(ccw),
         mx(mx),
         my(my),
-        ratio(ratio)
+        ratio(ratio),
+        x1(), y1(), x2(), y2(),
+        degree(), rational(), periodic(), radius(),
+        nKnots(), nControl(), nFit(), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(), startTangentY(),
+        endTangentX(), endTangentY(), vertices()
     {
     }
 
@@ -1517,7 +1571,10 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
         startTangentX(startTangentX),
         startTangentY(startTangentY),
         endTangentX(endTangentX),
-        endTangentY(endTangentY)
+        endTangentY(endTangentY),
+        x1(), y1(), x2(), y2(),
+        mx(), my(), ratio(), vertices(),
+        cx(), cy(), radius(), angle1(), angle2(), ccw()
     {
     }
 

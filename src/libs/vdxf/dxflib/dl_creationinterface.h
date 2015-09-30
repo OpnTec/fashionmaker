@@ -47,13 +47,25 @@
 class DXFLIB_EXPORT DL_CreationInterface
 {
 public:
-    DL_CreationInterface()
+    DL_CreationInterface() : extrusion(), attributes()
     {
         extrusion = new DL_Extrusion;
     }
     virtual ~DL_CreationInterface()
     {
         delete extrusion;
+    }
+
+    DL_CreationInterface(const DL_CreationInterface &L) : extrusion(L.extrusion), attributes(L.attributes)
+    {
+    }
+
+    DL_CreationInterface & operator=(const DL_CreationInterface &L)
+    {
+        extrusion = L.extrusion;
+        attributes = L.attributes;
+
+        return *this;
     }
 
     /**
