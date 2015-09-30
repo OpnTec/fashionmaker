@@ -54,8 +54,8 @@ static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 //---------------------------------------------------------------------------------------------------------------------
 VDxfEngine::VDxfEngine()
     :QPaintEngine(svgEngineFeatures()),
-      size(), resolution(PrintDPI), matrix(), varMeasurement(VarMeasurement::Metric),
-      varInsunits(VarInsunits::Centimeters), dw(), dxf(), fileName()
+      size(), resolution(PrintDPI), fileName(), matrix(), dxf(), dw(),
+      varMeasurement(VarMeasurement::Metric), varInsunits(VarInsunits::Centimeters)
 {
 }
 

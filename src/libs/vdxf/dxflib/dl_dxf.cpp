@@ -327,7 +327,7 @@ bool DL_Dxf::getStrippedLine(std::string &s, unsigned int size,
 bool DL_Dxf::stripWhiteSpace(char** s)
 {
     // last non-NULL char:
-    int lastChar = strlen(*s) - 1;
+    int lastChar = static_cast<int>(strlen(*s) - 1);
 
     // Is last character CR or LF?
     while ( (lastChar >= 0) &&
@@ -2181,7 +2181,7 @@ void DL_Dxf::addHatch(DL_CreationInterface* creationInterface)
 
     for (unsigned int i=0; i<hatchEdges.size(); i++)
     {
-        creationInterface->addHatchLoop(DL_HatchLoopData(hatchEdges[i].size()));
+        creationInterface->addHatchLoop(DL_HatchLoopData(static_cast<unsigned int>(hatchEdges[i].size())));
         for (unsigned int k=0; k<hatchEdges[i].size(); k++)
         {
             creationInterface->addHatchEdge(DL_HatchEdgeData(hatchEdges[i][k]));
@@ -3143,7 +3143,7 @@ void DL_Dxf::writeMText(DL_WriterA& dw,
     dw.dxfInt(72, data.drawingDirection);
 
     // Creare text chunks of 250 characters each:
-    int length = data.text.length();
+    int length = static_cast<int>(data.text.length());
     char chunk[251];
     int i;
     for (i=250; i<length; i+=250)
@@ -3257,7 +3257,7 @@ void DL_Dxf::writeDimStyleOverrides(DL_WriterA& dw,
         dw.dxfString(1000, "DSTYLE");
         dw.dxfString(1002, "{");
         dw.dxfInt(1070, 144);
-        dw.dxfInt(1040, data.linearFactor);
+        dw.dxfInt(1040, static_cast<int>(data.linearFactor));
         dw.dxfString(1002, "}");
     }
 }
@@ -4052,7 +4052,7 @@ int DL_Dxf::writeImage(DL_WriterA& dw,
     dw.dxfReal(23, data.height);
 
     // handle of IMAGEDEF object
-    int handle = dw.incHandle();
+    int handle = static_cast<int>(dw.incHandle());
     dw.dxfHex(340, handle);
 
     // flags
@@ -4687,7 +4687,7 @@ void DL_Dxf::writeDimStyle(DL_WriterA& dw,
         dw.dxfInt(278, 44);
         dw.dxfInt(283, 0);
         dw.dxfInt(284, 8);
-        dw.dxfHex(340, styleHandleStd);
+        dw.dxfHex(340, static_cast<int>(styleHandleStd));
         //dw.dxfHex(340, 0x11);
     }
     // * /
@@ -4818,7 +4818,7 @@ void DL_Dxf::writeObjects(DL_WriterA& dw, const std::string& appDictionaryName)
     dw.dxfString(  3, "ACAD_PLOTSTYLENAME");
     dw.dxfHex(350, 0xE);
     dw.dxfString(  3, "AcDbVariableDictionary");
-    int acDbVariableDictionaryHandle = dw.handle(350);
+    int acDbVariableDictionaryHandle = static_cast<int>(dw.handle(350));
     //int acDbVariableDictionaryHandle = dw.getNextHandle();
     //dw.dxfHex(350, acDbVariableDictionaryHandle);
     //dw.incHandle();
@@ -5120,10 +5120,10 @@ void DL_Dxf::writeObjects(DL_WriterA& dw, const std::string& appDictionaryName)
     dw.dxfInt(281, 1);
     dw.dxfString(  3, "DIMASSOC");
     //dw.dxfHex(350, 0x2F);
-    dw.dxfHex(350, dw.getNextHandle()+1);        // 2E
+    dw.dxfHex(350, static_cast<int>(dw.getNextHandle()+1));        // 2E
     dw.dxfString(  3, "HIDETEXT");
     //dw.dxfHex(350, 0x2E);
-    dw.dxfHex(350, dw.getNextHandle());        // 2D
+    dw.dxfHex(350, static_cast<int>(dw.getNextHandle()));        // 2D
 
 
     dw.dxfString(  0, "DICTIONARYVAR");
@@ -5148,7 +5148,7 @@ void DL_Dxf::writeAppDictionary(DL_WriterA& dw)
 {
     dw.dxfString(  0, "DICTIONARY");
     //dw.handle();
-    dw.dxfHex(5, appDictionaryHandle);
+    dw.dxfHex(5, static_cast<int>(appDictionaryHandle));
     dw.dxfString(100, "AcDbDictionary");
     dw.dxfInt(281, 1);
 }
@@ -5156,7 +5156,7 @@ void DL_Dxf::writeAppDictionary(DL_WriterA& dw)
 int DL_Dxf::writeDictionaryEntry(DL_WriterA& dw, const std::string& name)
 {
     dw.dxfString(  3, name);
-    int handle = dw.getNextHandle();
+    int handle = static_cast<int>(dw.getNextHandle());
     dw.dxfHex(350, handle);
     dw.incHandle();
     return handle;
@@ -5166,7 +5166,7 @@ void DL_Dxf::writeXRecord(DL_WriterA& dw, int handle, int value)
 {
     dw.dxfString(  0, "XRECORD");
     dw.dxfHex(5, handle);
-    dw.dxfHex(330, appDictionaryHandle);
+    dw.dxfHex(330, static_cast<int>(appDictionaryHandle));
     dw.dxfString(100, "AcDbXrecord");
     dw.dxfInt(280, 1);
     dw.dxfInt(90, value);
@@ -5176,7 +5176,7 @@ void DL_Dxf::writeXRecord(DL_WriterA& dw, int handle, double value)
 {
     dw.dxfString(  0, "XRECORD");
     dw.dxfHex(5, handle);
-    dw.dxfHex(330, appDictionaryHandle);
+    dw.dxfHex(330, static_cast<int>(appDictionaryHandle));
     dw.dxfString(100, "AcDbXrecord");
     dw.dxfInt(280, 1);
     dw.dxfReal(40, value);
@@ -5186,7 +5186,7 @@ void DL_Dxf::writeXRecord(DL_WriterA& dw, int handle, bool value)
 {
     dw.dxfString(  0, "XRECORD");
     dw.dxfHex(5, handle);
-    dw.dxfHex(330, appDictionaryHandle);
+    dw.dxfHex(330, static_cast<int>(appDictionaryHandle));
     dw.dxfString(100, "AcDbXrecord");
     dw.dxfInt(280, 1);
     dw.dxfBool(290, value);
@@ -5196,7 +5196,7 @@ void DL_Dxf::writeXRecord(DL_WriterA& dw, int handle, const std::string& value)
 {
     dw.dxfString(  0, "XRECORD");
     dw.dxfHex(5, handle);
-    dw.dxfHex(330, appDictionaryHandle);
+    dw.dxfHex(330, static_cast<int>(appDictionaryHandle));
     dw.dxfString(100, "AcDbXrecord");
     dw.dxfInt(280, 1);
     dw.dxfString(1000, value);
@@ -5830,7 +5830,7 @@ int DL_Dxf::getLibVersion(const std::string& str)
 
     if (idx>=2)
     {
-        d[3] = str.length();
+        d[3] = static_cast<int>(str.length());
 
         v[0] = str.substr(0, d[0]);
         v[1] = str.substr(d[0]+1, d[1]-d[0]-1);

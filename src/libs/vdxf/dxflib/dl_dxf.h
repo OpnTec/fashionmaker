@@ -510,7 +510,7 @@ public:
     int toInt(const std::string& str)
     {
         char* p;
-        return strtol(str.c_str(), &p, 10);
+        return static_cast<int>(strtol(str.c_str(), &p, 10));
     }
 
     bool toBool(const std::string& str)
