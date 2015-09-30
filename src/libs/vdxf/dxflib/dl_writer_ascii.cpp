@@ -86,7 +86,7 @@ void DL_WriterA::dxfReal(int gc, double value) const
             end = i+1;
         }
     }
-    if (end>0 && end<(int)strlen(str))
+    if (end>0 && end<static_cast<int>(strlen(str)))
     {
         str[end] = '\0';
     }

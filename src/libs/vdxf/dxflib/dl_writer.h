@@ -423,7 +423,7 @@ public:
             }
             else
             {
-                dxfHex(5, h);
+                dxfHex(5, static_cast<int>(h));
             }
             dxfString(100, "AcDbSymbolTableRecord");
             dxfString(100, "AcDbLayerTableRecord");
@@ -449,7 +449,7 @@ public:
             }
             else
             {
-                dxfHex(5, h);
+                dxfHex(5, static_cast<int>(h));
             }
             //dxfHex(330, 0x5);
             dxfString(100, "AcDbSymbolTableRecord");
@@ -476,7 +476,7 @@ public:
             }
             else
             {
-                dxfHex(5, h);
+                dxfHex(5, static_cast<int>(h));
             }
             //dxfHex(330, 0x9);
             dxfString(100, "AcDbSymbolTableRecord");
@@ -503,7 +503,7 @@ public:
             }
             else
             {
-                dxfHex(5, h);
+                dxfHex(5, static_cast<int>(h));
             }
             //dxfHex(330, blockHandle);
             dxfString(100, "AcDbEntity");
@@ -535,7 +535,7 @@ public:
             }
             else
             {
-                dxfHex(5, h);
+                dxfHex(5, static_cast<int>(h));
             }
             //dxfHex(330, blockHandle);
             dxfString(100, "AcDbEntity");
@@ -593,7 +593,7 @@ public:
     unsigned long handle(int gc=5) const
     {
         // handle has to be hex
-        dxfHex(gc, m_handle);
+        dxfHex(gc, static_cast<int>(m_handle));
         return m_handle++;
     }
 
@@ -682,7 +682,7 @@ public:
      */
     virtual void dxfBool(int gc, bool value) const
     {
-        dxfInt(gc, (int)value);
+        dxfInt(gc, static_cast<int>(value));
     }
 
     /**
