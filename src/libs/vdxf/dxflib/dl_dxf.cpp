@@ -42,6 +42,7 @@
  */
 DL_Dxf::DL_Dxf()
     : version(DL_VERSION_2000),
+      polylineLayer(),
       vertices(NULL),
       maxVertices(0),
       vertexIndex(0),
@@ -65,7 +66,7 @@ DL_Dxf::DL_Dxf()
       maxLeaderVertices(0),
       leaderVertexIndex(0),
 
-      polylineLayer(), firstHatchLoop(), hatchEdge(), hatchEdges(),
+      firstHatchLoop(), hatchEdge(), hatchEdges(),
       xRecordHandle(), xRecordValues(), groupCodeTmp(), groupCode(), groupValue(),
       currentObjectType(), settingKey(), values(), firstCall(), attrib(),
       libVersion(), appDictionaryHandle(), styleHandleStd()

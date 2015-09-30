@@ -378,8 +378,8 @@ public:
     }
 
 protected:
-    DL_Attributes attributes;
     DL_Extrusion *extrusion;
+    DL_Attributes attributes;
 };
 
 #endif

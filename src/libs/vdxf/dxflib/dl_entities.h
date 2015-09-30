@@ -1474,11 +1474,11 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
     DL_HatchEdgeData(double x1, double y1,
                      double x2, double y2) :
         defined(true),
-        type(1),
         x1(x1),
         y1(y1),
         x2(x2),
         y2(y2),
+        type(1),
         cx(), cy(), radius(), angle1(), angle2(), ccw(),
         mx(), my(), ratio(), degree(), rational(), periodic(),
         nKnots(), nControl(), nFit(), controlPoints(), knots(),
@@ -1496,6 +1496,7 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
                      double angle1, double angle2,
                      bool ccw) :
         defined(true),
+        x1(), y1(), x2(), y2(),
         type(2),
         cx(cx),
         cy(cy),
@@ -1503,7 +1504,6 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
         angle1(angle1),
         angle2(angle2),
         ccw(ccw),
-        x1(), y1(), x2(), y2(),
         mx(), my(), ratio(), degree(), rational(), periodic(),
         nKnots(), nControl(), nFit(), controlPoints(), knots(),
         weights(), fitPoints(), startTangentX(), startTangentY(),
@@ -1521,17 +1521,18 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
                      double angle1, double angle2,
                      bool ccw) :
         defined(true),
+        x1(), y1(), x2(), y2(),
         type(3),
         cx(cx),
         cy(cy),
+        radius(),
         angle1(angle1),
         angle2(angle2),
         ccw(ccw),
         mx(mx),
         my(my),
         ratio(ratio),
-        x1(), y1(), x2(), y2(),
-        degree(), rational(), periodic(), radius(),
+        degree(), rational(), periodic(),
         nKnots(), nControl(), nFit(), controlPoints(), knots(),
         weights(), fitPoints(), startTangentX(), startTangentY(),
         endTangentX(), endTangentY(), vertices()
@@ -1557,8 +1558,10 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
                      double endTangentX,
                      double endTangentY) :
         defined(true),
-        type(4),
-        degree(degree),
+        x1(), y1(), x2(), y2(),
+        type(4), cx(), cy(), radius(),
+        angle1(), angle2(), ccw(),
+        mx(), my(), ratio(), degree(degree),
         rational(rational),
         periodic(periodic),
         nKnots(nKnots),
@@ -1572,9 +1575,7 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
         startTangentY(startTangentY),
         endTangentX(endTangentX),
         endTangentY(endTangentY),
-        x1(), y1(), x2(), y2(),
-        mx(), my(), ratio(), vertices(),
-        cx(), cy(), radius(), angle1(), angle2(), ccw()
+        vertices()
     {
     }
 
@@ -1582,11 +1583,6 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
      * Set to true if this edge is fully defined.
      */
     bool defined;
-
-    /**
-     * Edge type. 1=line, 2=arc, 3=elliptic arc, 4=spline.
-     */
-    int type;
 
     // line edges:
 
@@ -1598,6 +1594,11 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
     double x2;
     /*! End point (Y). */
     double y2;
+
+    /**
+     * Edge type. 1=line, 2=arc, 3=elliptic arc, 4=spline.
+     */
+    int type;
 
     /*! Center point of arc or ellipse arc (X). */
     double cx;
