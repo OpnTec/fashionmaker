@@ -23,9 +23,11 @@
 **
 **********************************************************************/
 
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
+#if defined(Q_CC_MSVC)
+    #if (_MSC_VER > 1000)
+    #pragma once
+    #endif // _MSC_VER > 1000
+#endif // Q_CC_MSVC
 
 #include <stdio.h>
 #include <string.h>
