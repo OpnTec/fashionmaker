@@ -2277,6 +2277,8 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.defined = true;
                 }
                 return true;
+            default:
+                return true;
         }
     }
     else
@@ -2298,6 +2300,8 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                 case 21:
                     hatchEdge.y2 = toReal(groupValue);
                     hatchEdge.defined = true;
+                    return true;
+                default:
                     return true;
             }
         }
@@ -2325,6 +2329,8 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                 case 73:
                     hatchEdge.ccw = static_cast<bool>(toInt(groupValue));
                     hatchEdge.defined = true;
+                    return true;
+                default:
                     return true;
             }
         }
@@ -2358,6 +2364,8 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                 case 73:
                     hatchEdge.ccw = static_cast<bool>(toInt(groupValue));
                     hatchEdge.defined = true;
+                    return true;
+                default:
                     return true;
             }
         }
@@ -2438,6 +2446,8 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     return true;
                 case 23:
                     hatchEdge.endTangentY = toReal(groupValue);
+                    return true;
+                default:
                     return true;
             }
         }
@@ -2601,6 +2611,8 @@ void DL_Dxf::writeHeader(DL_WriterA& dw)
             break;
         case DL_Codes::AC1015:
             dw.dxfString(1, "AC1015");
+            break;
+        default:
             break;
     }
 
