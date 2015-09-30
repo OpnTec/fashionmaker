@@ -53,7 +53,7 @@ QString AbstractTest::ValentinaPath() const
 {
     const QString path = QStringLiteral("/../../../app/valentina/bin/valentina");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + path + QStringList(".exe");
+    return QApplication::applicationDirPath() + path + QStringLiteral(".exe");
 #else
     return QApplication::applicationDirPath() + path;
 #endif
@@ -64,7 +64,7 @@ QString AbstractTest::TapePath() const
 {
     const QString path = QStringLiteral("/../../../app/tape/bin/tape");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + path + QStringList(".exe");
+    return QApplication::applicationDirPath() + path + QStringLiteral(".exe");
 #else
     return QApplication::applicationDirPath() + path;
 #endif
