@@ -187,19 +187,16 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
 
     QDomElement bm = createElement(tagBM);
 
-    QMultiMap<QString, QString> names = OldNamesToNewNames_InV0_3_0();
-
-    QMutableMapIterator<QString, QString> iter( names );
-    while( iter.hasNext() )
+    const QMultiMap<QString, QString> names = OldNamesToNewNames_InV0_3_0();
+    const QList<QString> keys = names.uniqueKeys();
+    for (int i = 0; i < keys.size(); ++i)
     {
-        iter.next();
-
         qreal resValue = 0;
         qreal resSizeIncrease = 0;
         qreal resHeightIncrease = 0;
 
         // This has the same effect as a .values(), just isn't as elegant
-        const QList<QString> list = names.values( iter.key() );
+        const QList<QString> list = names.values( keys.at(i) );
         foreach(const QString &val, list )
         {
             const QDomNodeList nodeList = this->elementsByTagName(val);
@@ -221,7 +218,7 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
             }
         }
 
-        bm.appendChild(AddMV0_4_0(iter.key(), resValue, resSizeIncrease, resHeightIncrease));
+        bm.appendChild(AddMV0_4_0(keys.at(i), resValue, resSizeIncrease, resHeightIncrease));
     }
 
     QDomElement rootElement = this->documentElement();
