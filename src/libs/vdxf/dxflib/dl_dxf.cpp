@@ -43,26 +43,26 @@
 DL_Dxf::DL_Dxf()
     : version(DL_VERSION_2000),
       polylineLayer(),
-      vertices(NULL),
+      vertices(nullptr),
       maxVertices(0),
       vertexIndex(0),
 
-      knots(NULL),
+      knots(nullptr),
       maxKnots(0),
       knotIndex(0),
 
-      weights(NULL),
+      weights(nullptr),
       weightIndex(0),
 
-      controlPoints(NULL),
+      controlPoints(nullptr),
       maxControlPoints(0),
       controlPointIndex(0),
 
-      fitPoints(NULL),
+      fitPoints(nullptr),
       maxFitPoints(0),
       fitPointIndex(0),
 
-      leaderVertices(NULL),
+      leaderVertices(nullptr),
       maxLeaderVertices(0),
       leaderVertexIndex(0),
 
@@ -80,27 +80,27 @@ DL_Dxf::DL_Dxf()
  */
 DL_Dxf::~DL_Dxf()
 {
-    if (vertices!=NULL)
+    if (vertices!=nullptr)
     {
         delete[] vertices;
     }
-    if (knots!=NULL)
+    if (knots!=nullptr)
     {
         delete[] knots;
     }
-    if (controlPoints!=NULL)
+    if (controlPoints!=nullptr)
     {
         delete[] controlPoints;
     }
-    if (fitPoints!=NULL)
+    if (fitPoints!=nullptr)
     {
         delete[] fitPoints;
     }
-    if (weights!=NULL)
+    if (weights!=nullptr)
     {
         delete[] weights;
     }
-    if (leaderVertices!=NULL)
+    if (leaderVertices!=nullptr)
     {
         delete[] leaderVertices;
     }
@@ -1617,7 +1617,7 @@ bool DL_Dxf::handleLWPolylineData(DL_CreationInterface* /*creationInterface*/)
         maxVertices = toInt(groupValue);
         if (maxVertices>0)
         {
-            if (vertices!=NULL)
+            if (vertices!=nullptr)
             {
                 delete[] vertices;
             }
@@ -1673,7 +1673,7 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
         maxKnots = toInt(groupValue);
         if (maxKnots>0)
         {
-            if (knots!=NULL)
+            if (knots!=nullptr)
             {
                 delete[] knots;
             }
@@ -1693,11 +1693,11 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
         maxControlPoints = toInt(groupValue);
         if (maxControlPoints>0)
         {
-            if (controlPoints!=NULL)
+            if (controlPoints!=nullptr)
             {
                 delete[] controlPoints;
             }
-            if (weights!=NULL)
+            if (weights!=nullptr)
             {
                 delete[] weights;
             }
@@ -1722,7 +1722,7 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
         maxFitPoints = toInt(groupValue);
         if (maxFitPoints>0)
         {
-            if (fitPoints!=NULL)
+            if (fitPoints!=nullptr)
             {
                 delete[] fitPoints;
             }
@@ -1812,7 +1812,7 @@ bool DL_Dxf::handleLeaderData(DL_CreationInterface* /*creationInterface*/)
         maxLeaderVertices = toInt(groupValue);
         if (maxLeaderVertices>0)
         {
-            if (leaderVertices!=NULL)
+            if (leaderVertices!=nullptr)
             {
                 delete[] leaderVertices;
             }
@@ -2279,7 +2279,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                 }
                 return true;
             default:
-                return true;
+                return false;
         }
     }
     else
@@ -2303,7 +2303,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.defined = true;
                     return true;
                 default:
-                    return true;
+                    return false;
             }
         }
 
@@ -2332,7 +2332,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.defined = true;
                     return true;
                 default:
-                    return true;
+                    return false;
             }
         }
 
@@ -2367,7 +2367,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.defined = true;
                     return true;
                 default:
-                    return true;
+                    return false;
             }
         }
 
@@ -2449,7 +2449,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.endTangentY = toReal(groupValue);
                     return true;
                 default:
-                    return true;
+                    return false;
             }
         }
     }

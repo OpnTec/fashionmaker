@@ -210,7 +210,10 @@ public:
         appDictionaryHandle = L.appDictionaryHandle;
         styleHandleStd = L.styleHandleStd;
 
-        return *this;
+        if ( &L == this )
+        {
+            return *this;
+        }
     }
 
     bool in(const std::string& file,

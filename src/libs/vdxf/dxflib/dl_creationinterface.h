@@ -65,7 +65,10 @@ public:
         extrusion = L.extrusion;
         attributes = L.attributes;
 
-        return *this;
+        if ( &L == this )
+        {
+            return *this;
+        }
     }
 
     /**

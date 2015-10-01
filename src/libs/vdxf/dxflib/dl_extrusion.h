@@ -144,7 +144,10 @@ public:
         setDirection(extru.direction[0], extru.direction[1], extru.direction[2]);
         setElevation(extru.elevation);
 
-        return *this;
+        if ( &extru == this )
+        {
+            return *this;
+        }
     }
 
 

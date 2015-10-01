@@ -95,7 +95,7 @@ struct DXFLIB_EXPORT DL_LinetypeData
         int flags,
         int numberOfDashes,
         double patternLength,
-        double* pattern = NULL
+        double* pattern = nullptr
     )
         : name(name),
           description(description),
@@ -129,7 +129,10 @@ struct DXFLIB_EXPORT DL_LinetypeData
         patternLength = L.patternLength;
         pattern = L.pattern;
 
-        return *this;
+        if ( &L == this )
+        {
+            return *this;
+        }
     }
 
     /** Linetype name */
@@ -1279,7 +1282,7 @@ struct DXFLIB_EXPORT DL_DimOrdinateData
     DL_DimOrdinateData(double ddpx1, double ddpy1, double ddpz1,
                        double ddpx2, double ddpy2, double ddpz2,
                        bool dxtype)
-        : dpx1(ddpx1), dpy1(ddpy1),  dpz1(ddpz1),
+        : dpx1(ddpx1), dpy1(ddpy1), dpz1(ddpz1),
           dpx2(ddpx2), dpy2(ddpy2), dpz2(ddpz2),
           xtype(dxtype)
     {
