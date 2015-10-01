@@ -163,18 +163,12 @@ enum class GSizes : unsigned char { ALL,
  */
 #ifndef V_NO_ASSERT
 
-#ifdef Q_CC_MSVC
-#define V_PRETTY_FUNCTION __FUNCSIG__
-#else // GCC/Clang
-#define V_PRETTY_FUNCTION __PRETTY_FUNCTION__
-#endif /*Q_CC_MSVC*/
-
 #define SCASSERT(cond)                                      \
 {                                                           \
     if (!(cond))                                            \
     {                                                       \
         qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, V_PRETTY_FUNCTION, __FILE__, __LINE__);  \
+            #cond, Q_FUNC_INFO , __FILE__, __LINE__);  \
         debug_break();                                      \
     }                                                       \
 }                                                           \

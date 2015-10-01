@@ -147,24 +147,22 @@ void MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
 {
-    QString text;
     switch (state)
     {
         case LayoutErrors::NoError:
             return;
         case LayoutErrors::PrepareLayoutError:
-            text = tr("Couldn't prepare data for creation layout");
+            qCritical() << tr("Couldn't prepare data for creation layout");
             break;
         case LayoutErrors::ProcessStoped:
             break;
         case LayoutErrors::EmptyPaperError:
-            text = tr("Several workpieces left not arranged, but none of them match for paper");
+            qCritical() << tr("Several workpieces left not arranged, but none of them match for paper");
             break;
         default:
             break;
     }
 
-    qCritical() << text;
     std::exit(V_EX_DATAERR);
 }
 
@@ -591,7 +589,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, int i) const
         QPainter painter;
         if (painter.begin( &printer ) == false)
         { // failed to open file
-            qCritical("Can't open printer %s", qPrintable(name));
+            qCritical("%s", qUtf8Printable(tr("Can't open printer %1").arg(name)));
             return;
         }
         painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
@@ -789,9 +787,8 @@ void MainWindowsNoGUI::PrintPreview()
     {
         if(QPrinterInfo::availablePrinters().isEmpty())
         {
-            QMessageBox::critical(this, tr("Print error"),
-                                  tr("Cannot proceed because there are no available printers in your system."),
-                                  QMessageBox::Ok);
+            qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                      qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
             return;
         }
         else

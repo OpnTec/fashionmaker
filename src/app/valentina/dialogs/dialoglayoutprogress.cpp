@@ -86,20 +86,17 @@ void DialogLayoutProgress::Arranged(int count)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutProgress::Error(const LayoutErrors &state)
 {
-    QString text;
     switch (state)
     {
         case LayoutErrors::NoError:
             return;
         case LayoutErrors::PrepareLayoutError:
-            text = tr("Couldn't prepare data for creation layout");
-            QMessageBox::critical(this, tr("Critical error"), text, QMessageBox::Ok, QMessageBox::Ok);
+            qCritical() << tr("Couldn't prepare data for creation layout");
             break;
         case LayoutErrors::ProcessStoped:
             break;
         case LayoutErrors::EmptyPaperError:
-            text = tr("Several workpieces left not arranged, but none of them match for paper");
-            QMessageBox::critical(this, tr("Critical error"), text, QMessageBox::Ok, QMessageBox::Ok);
+            qCritical() << tr("Several workpieces left not arranged, but none of them match for paper");
             break;
         default:
             break;

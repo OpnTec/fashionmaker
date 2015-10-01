@@ -54,7 +54,6 @@ public:
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     QString         What() const;
-    virtual void    CriticalMessageBox(const QString &situation, QWidget *parent = nullptr) const;
     void            AddMoreInformation(const QString &info);
     QString         MoreInformation() const;
 protected:

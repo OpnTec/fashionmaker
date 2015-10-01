@@ -47,6 +47,8 @@
 #include <QLocalServer>
 #include <QMessageBox>
 #include <iostream>
+#include <QGridLayout>
+#include <QSpacerItem>
 
 Q_LOGGING_CATEGORY(mApp, "m.application")
 
@@ -93,13 +95,22 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     switch (type)
     {
         case QtDebugMsg:
-            vStdOut() << msg << "\n";
+            vStdOut() << QApplication::translate("mNoisyHandler", "DEBUG:") << msg << "\n";
             return;
         case QtWarningMsg:
-        case QtCriticalMsg:
-        case QtFatalMsg:
-            vStdErr() << msg << "\n";
+            vStdErr() << QApplication::translate("mNoisyHandler", "WARNING:") << msg << "\n";
             break;
+        case QtCriticalMsg:
+            vStdErr() << QApplication::translate("mNoisyHandler", "CRITICAL:") << msg << "\n";
+            break;
+        case QtFatalMsg:
+            vStdErr() << QApplication::translate("mNoisyHandler", "FATAL:") << msg << "\n";
+            break;
+        #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
+        case QtInfoMsg:
+            vStdOut() << QApplication::translate("mNoisyHandler", "INFO:") << msg << "\n";
+            break;
+        #endif
         default:
             break;
     }
@@ -114,14 +125,23 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         switch (type)
         {
             case QtWarningMsg:
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Warning."));
                 messageBox.setIcon(QMessageBox::Warning);
                 break;
             case QtCriticalMsg:
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Critical error."));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
             case QtFatalMsg:
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error."));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
+            #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
+            case QtInfoMsg:
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information."));
+                messageBox.setIcon(QMessageBox::Information);
+                break;
+            #endif
             case QtDebugMsg:
             default:
                 break;
@@ -133,11 +153,17 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
             {
                 if (topWinAllowsPop)
                 {
-                    messageBox.setInformativeText(msg);
+                    messageBox.setText(msg);
                     messageBox.setStandardButtons(QMessageBox::Ok);
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);
+                #ifndef QT_NO_CURSOR
+                    QApplication::setOverrideCursor(Qt::ArrowCursor);
+                #endif
                     messageBox.exec();
+                #ifndef QT_NO_CURSOR
+                    QApplication::restoreOverrideCursor();
+                #endif
                 }
             }
         }
@@ -230,45 +256,51 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
     }
     catch (const VExceptionObjectError &e)
     {
-        e.CriticalMessageBox(tr("Error parsing file. Program will be terminated."), mainWindow);
-        abort();
+        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        std::exit(V_EX_DATAERR);
     }
     catch (const VExceptionBadId &e)
     {
-        e.CriticalMessageBox(tr("Error bad id. Program will be terminated."), mainWindow);
-        abort();
+        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error bad id. Program will be terminated.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        std::exit(V_EX_DATAERR);
     }
     catch (const VExceptionConversionError &e)
     {
-        e.CriticalMessageBox(tr("Error can't convert value. Program will be terminated."), mainWindow);
-        abort();
+        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value. Program will be terminated.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        std::exit(V_EX_DATAERR);
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        e.CriticalMessageBox(tr("Error empty parameter. Program will be terminated."), mainWindow);
-        abort();
+        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter. Program will be terminated.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        std::exit(V_EX_DATAERR);
     }
     catch (const VExceptionWrongId &e)
     {
-        e.CriticalMessageBox(tr("Error wrong id. Program will be terminated."), mainWindow);
-        abort();
+        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id. Program will be terminated.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        std::exit(V_EX_DATAERR);
     }
     catch (const VException &e)
     {
-        e.CriticalMessageBox(tr("Something's wrong!!"), mainWindow);
+        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return true;
     }
     // These last two cases special. I found that we can't show here modal dialog with error message.
     // Somehow program doesn't waite untile an error dialog will be closed. But if ignore this program will hang.
     catch (const qmu::QmuParserError &e)
     {
-        qCDebug(mApp, "Parser error: %s", e.GetMsg().toUtf8().constData());
-        abort();
+        qCCritical(mApp, "%s", qUtf8Printable(tr("Parser error: %1. Program will be terminated.").arg(e.GetMsg())));
+        std::exit(V_EX_DATAERR);
     }
-    catch (std::exception& e)
+    catch (std::exception &e)
     {
-        qCDebug(mApp, "Critical error! Exception thrown: %s", e.what());
-        abort();
+        qCCritical(mApp, "%s", qUtf8Printable(tr("Exception thrown: %1. Program will be terminated.").arg(e.what())));
+        std::exit(V_EX_SOFTWARE);
     }
     return false;
 }

@@ -17,6 +17,13 @@
 
 #include <QtGlobal>
 
+// Backport useful macros
+#if QT_VERSION < QT_VERSION_CHECK(5, 4, 0)
+#   ifndef qUtf8Printable
+#       define qUtf8Printable(string) QString(string).toUtf8().constData()
+#   endif
+#endif
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 
 //

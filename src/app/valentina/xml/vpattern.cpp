@@ -307,7 +307,8 @@ bool VPattern::SaveDocument(const QString &fileName, QString &error) const
     }
     catch (const VExceptionWrongId &e)
     {
-        e.CriticalMessageBox(tr("Error no unique id."), qApp->getMainWindow());
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error no unique id.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return false;
     }
 
@@ -351,44 +352,42 @@ void VPattern::LiteParseTree(const Document &parse)
     }
     catch (const VExceptionObjectError &e)
     {
-        e.CriticalMessageBox(tr("Error parsing file."), qApp->getMainWindow());
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionConversionError &e)
     {
-        e.CriticalMessageBox(tr("Error can't convert value."), qApp->getMainWindow());
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        e.CriticalMessageBox(tr("Error empty parameter."), qApp->getMainWindow());
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionWrongId &e)
     {
-        e.CriticalMessageBox(tr("Error wrong id."), qApp->getMainWindow());
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
         return;
     }
     catch (VException &e)
     {
-        e.CriticalMessageBox(tr("Error parsing file."), qApp->getMainWindow());
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
         return;
     }
     catch (const std::bad_alloc &)
     {
-#ifndef QT_NO_CURSOR
-        QApplication::restoreOverrideCursor();
-#endif
-        QMessageBox::critical(qApp->getMainWindow(), tr("Critical error!"), tr("Error parsing file (std::bad_alloc)."),
-                              QMessageBox::Ok, QMessageBox::Ok);
-#ifndef QT_NO_CURSOR
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-#endif
+        qCCritical(vXML, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
         emit SetEnabledGUI(false);
         return;
     }

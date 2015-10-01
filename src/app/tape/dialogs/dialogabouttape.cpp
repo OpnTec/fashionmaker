@@ -83,7 +83,7 @@ void DialogAboutTape::WebButtonClicked()
 {
     if ( QDesktopServices::openUrl(QUrl(VER_COMPANYDOMAIN_STR)) == false)
     {
-        QMessageBox::warning(this, tr("Warning"), tr("Cannot open your default browser"));
+        qWarning() << tr("Cannot open your default browser");
     }
 }
 

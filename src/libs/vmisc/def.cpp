@@ -418,6 +418,10 @@ void SetOverrideCursor(const QString &pixmapPath, int hotX, int hotY)
     {
         QApplication::setOverrideCursor(QCursor(newPixmap, hotX, hotY));
     }
+#else
+    Q_UNUSED(pixmapPath);
+    Q_UNUSED(hotX);
+    Q_UNUSED(hotY);
 #endif
 }
 
@@ -439,6 +443,8 @@ void RestoreOverrideCursor(const QString &pixmapPath)
     {
         QApplication::restoreOverrideCursor();
     }
+#else
+    Q_UNUSED(pixmapPath);
 #endif
 }
 

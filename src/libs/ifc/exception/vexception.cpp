@@ -80,37 +80,6 @@ QString VException::ErrorMessage() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief CriticalMessageBox show Critical Message Box.
- * @param situation main text message box.
- */
-void VException::CriticalMessageBox(const QString &situation, QWidget * parent) const
-{
-    QMessageBox msgBox(parent);
-    msgBox.setWindowTitle(tr("Critical error!"));
-    msgBox.setText(situation);
-    msgBox.setInformativeText(ErrorMessage());
-    msgBox.setStandardButtons(QMessageBox::Ok);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    if (moreInfo.isEmpty() == false)
-    {
-        msgBox.setDetailedText(DetailedInformation());
-    }
-    msgBox.setIcon(QMessageBox::Critical);
-    QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    QGridLayout* layout = static_cast<QGridLayout*>(msgBox.layout());
-    SCASSERT(layout != nullptr);
-    layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-    //Disable Qt::WaitCursor for error message.
-#ifndef QT_NO_CURSOR
-    QApplication::restoreOverrideCursor();
-#endif
-    qCDebug(vExcep, "Critical error! %s %s %s", situation.toUtf8().constData(), ErrorMessage().toUtf8().constData(),
-            DetailedInformation().toUtf8().constData());
-    msgBox.exec();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief AddMoreInformation add more information for error
  * @param info information
  */

@@ -68,8 +68,6 @@
 
 Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
 
-#define OUT_FILE_ERROR vStdErr() << tr("File error: ") << e.ErrorMessage() << e.DetailedInformation() << "\n"
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief MainWindow constructor.
@@ -289,9 +287,8 @@ bool MainWindow::LoadMeasurements(const QString &path)
         {
             if (m->MUnit() == Unit::Inch)
             {
-                QMessageBox::critical(this, tr("Wrong units."),
-                                      tr("Application doesn't support standard table with inches."));
-                qCDebug(vMainWindow, "Application doesn't support standard table with inches.");
+                qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Wrong units.")),
+                          qUtf8Printable(tr("Application doesn't support standard table with inches.")));
                 return false;
             }
             m->SetDataSize();
@@ -306,14 +303,8 @@ bool MainWindow::LoadMeasurements(const QString &path)
     }
     catch (VException &e)
     {
-        if (qApp->CheckGUI())
-        {
-            e.CriticalMessageBox(tr("File error."), this);
-        }
-        else
-        {
-            OUT_FILE_ERROR;
-        }
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         delete m;
         return false;
     }
@@ -1878,8 +1869,8 @@ bool MainWindow::SaveAs()
         {
             if (lock->GetLockError() == QLockFile::LockFailedError)
             {
-                qCCritical(vMainWindow, "%s", tr("Failed to lock. This file already opened in another window.")
-                           .toUtf8().constData());
+                qCCritical(vMainWindow, "%s",
+                           qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
                 return false;
             }
         }
@@ -1916,9 +1907,9 @@ bool MainWindow::SaveAs()
         qCDebug(vMainWindow, "Error type: %d", lock->GetLockError());
         if (lock->GetLockError() == QLockFile::LockFailedError)
         {
-            qCCritical(vMainWindow, "%s", tr("Failed to lock. This file already opened in another window. "
-                                             "Expect collissions when run 2 copies of the program.")
-                       .toUtf8().constData());
+            qCCritical(vMainWindow, "%s",
+                       qUtf8Printable(tr("Failed to lock. This file already opened in another window. Expect "
+                                         "collissions when run 2 copies of the program.")));
             lock.reset();
         }
     }
@@ -2132,44 +2123,42 @@ void MainWindow::FullParseFile()
     }
     catch (const VExceptionObjectError &e)
     {
-        e.CriticalMessageBox(tr("Error parsing file."), this);
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
+                               qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionConversionError &e)
     {
-        e.CriticalMessageBox(tr("Error can't convert value."), this);
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
+                               qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        e.CriticalMessageBox(tr("Error empty parameter."), this);
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
+                               qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionWrongId &e)
     {
-        e.CriticalMessageBox(tr("Error wrong id."), this);
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
+                               qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
         return;
     }
     catch (VException &e)
     {
-        e.CriticalMessageBox(tr("Error parsing file."), this);
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
+                               qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
         return;
     }
     catch (const std::bad_alloc &)
     {
-#ifndef QT_NO_CURSOR
-        QApplication::restoreOverrideCursor();
-#endif
-        QMessageBox::critical(this, tr("Critical error!"), tr("Error parsing file (std::bad_alloc)."), QMessageBox::Ok,
-                              QMessageBox::Ok);
-#ifndef QT_NO_CURSOR
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-#endif
+        qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
         SetEnabledGUI(false);
         return;
     }
@@ -2208,13 +2197,15 @@ void MainWindow::GlobalChangePP(const QString &patternPiece)
     }
     catch (VExceptionBadId &e)
     {
-        e.CriticalMessageBox(tr("Bad id."), this);
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Bad id.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
         return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
-        e.CriticalMessageBox(tr("Error empty parameter."), this);
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
         return;
     }
@@ -2749,7 +2740,7 @@ bool MainWindow::MaybeSave()
     {
         QMessageBox::StandardButton ret;
         ret = QMessageBox::warning(this, tr("Unsaved changes"), tr("The pattern has been modified.\n"
-                                                             "Do you want to save your changes?"),
+                                                                   "Do you want to save your changes?"),
                                    QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         if (ret == QMessageBox::Save)
         {
@@ -3140,7 +3131,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         qCDebug(vMainWindow, "Error type: %d", lock->GetLockError());
         if (lock->GetLockError() == QLockFile::LockFailedError)
         {
-            qCCritical(vMainWindow, "%s", tr("This file already opened in another window.").toUtf8().constData());
+            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
             Clear();
             return false;
         }
@@ -3195,14 +3186,8 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
     }
     catch (VException &e)
     {
-        if (qApp->CheckGUI())
-        {
-            e.CriticalMessageBox(tr("File error."), this);
-        }
-        else
-        {
-            OUT_FILE_ERROR;
-        }
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         Clear();
         return false;
     }
@@ -3560,7 +3545,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
     {
         if (details->count() == 0)
         {
-            qCCritical(vMainWindow, "%s", tr("You can't export empty scene.").toUtf8().constData());
+            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("You can't export empty scene.")));
             std::exit(V_EX_DATAERR);
         }
     }
