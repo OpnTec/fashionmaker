@@ -43,6 +43,7 @@ public:
 
 private slots:
     void TestOriginalMeasurementNamesRegExp();
+    void TestMeasurementRegExp_data();
     void TestMeasurementRegExp();
     void TestCorrectOrderMeasurement_data();
     void TestCorrectOrderMeasurement();

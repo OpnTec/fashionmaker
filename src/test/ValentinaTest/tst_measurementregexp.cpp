@@ -67,7 +67,7 @@ void TST_MeasurementRegExp::TestOriginalMeasurementNamesRegExp()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_MeasurementRegExp::TestMeasurementRegExp()
+void TST_MeasurementRegExp::TestMeasurementRegExp_data()
 {
     const int systemCounts = 55;
     const QStringList locales = SupportedLocales();
@@ -81,46 +81,62 @@ void TST_MeasurementRegExp::TestMeasurementRegExp()
         QVERIFY2(combinations == fileNames.size(), "Unexpected count of files.");
     }
 
+    QTest::addColumn<QString>("system");
+    QTest::addColumn<QString>("locale");
+
     for(int s = 0; s < systemCounts; ++s)
     {
         for(int l = 0, sz = locales.size(); l < sz; ++l)
         {
-            const int res = LoadTranslation(QString("p%1").arg(s), locales.at(l));
+            const QString system = QString("p%1").arg(s);
+            const QString locale = locales.at(l);
+            const QString tag = QString("Check translation measurements_%1_%2.qm").arg(system).arg(locale);
+            QTest::newRow(qUtf8Printable(tag)) << system << locale;
+        }
+    }
+}
 
-            switch(res)
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void TST_MeasurementRegExp::TestMeasurementRegExp()
+{
+    QFETCH(QString, system);
+    QFETCH(QString, locale);
+
+    const int res = LoadTranslation(system, locale);
+
+    switch(res)
+    {
+        case ErrorInstall:
+        case ErrorSize:
+        case ErrorLoad:
+        {
+            const QString message = QString("Failed to check translation for system = %1 and locale = %2")
+                    .arg(system)
+                    .arg(locale);
+            QSKIP(qUtf8Printable(message));
+            break;
+        }
+        case NoError:
+        {
+            CheckNames();
+
+            if (not pmsTranslator.isNull())
             {
-                case ErrorInstall:
-                case ErrorSize:
-                case ErrorLoad:
-                {
-                    const QString message = QString("Failed to check translation for system = p%1 and locale = %2")
-                            .arg(s)
-                            .arg(locales.at(l));
-                    QFAIL(qUtf8Printable(message));
-                    break;
-                }
-                case NoError:
-                {
-                    CheckNames();
+                const bool result = QCoreApplication::removeTranslator(pmsTranslator);
 
-                    if (not pmsTranslator.isNull())
-                    {
-                        const bool result = QCoreApplication::removeTranslator(pmsTranslator);
-
-                        if (result == false)
-                        {
-                            const QString message = QString("Can't remove translation for system = p%1 and locale = %2")
-                                    .arg(s)
-                                    .arg(locales.at(l));
-                            QWARN(qUtf8Printable(message));
-                        }
-                        delete pmsTranslator;
-                    }
+                if (result == false)
+                {
+                    const QString message = QString("Can't remove translation for system = %1 and locale = %2")
+                            .arg(system)
+                            .arg(locale);
+                    QWARN(qUtf8Printable(message));
                 }
-                default:
-                    QWARN("Unexpected state");
+                delete pmsTranslator;
             }
         }
+        default:
+            QWARN("Unexpected state");
     }
 }
 
