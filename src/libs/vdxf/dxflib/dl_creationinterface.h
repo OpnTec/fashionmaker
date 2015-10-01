@@ -56,21 +56,6 @@ public:
         delete extrusion;
     }
 
-    DL_CreationInterface(const DL_CreationInterface &L) : extrusion(L.extrusion), attributes(L.attributes)
-    {
-    }
-
-    DL_CreationInterface & operator=(const DL_CreationInterface &L)
-    {
-        extrusion = L.extrusion;
-        attributes = L.attributes;
-
-        if ( &L == this )
-        {
-            return *this;
-        }
-    }
-
     /**
      * Called for every code / value tuple of the DXF file. The complete DXF file
      * contents can be handled by the implemetation of this function.
@@ -379,6 +364,9 @@ public:
     {
         return extrusion;
     }
+
+private:
+    Q_DISABLE_COPY(DL_CreationInterface);
 
 protected:
     DL_Extrusion *extrusion;

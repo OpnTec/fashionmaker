@@ -110,31 +110,6 @@ struct DXFLIB_EXPORT DL_LinetypeData
     {
     }
 
-    DL_LinetypeData(const DL_LinetypeData &L)
-        : name(L.name),
-          description(L.description),
-          flags(L.flags),
-          numberOfDashes(L.numberOfDashes),
-          patternLength(L.patternLength),
-          pattern(L.pattern)
-    {
-    }
-
-    DL_LinetypeData & operator=(const DL_LinetypeData &L)
-    {
-        name = L.name;
-        description = L.description;
-        flags = L.flags;
-        numberOfDashes = L.numberOfDashes;
-        patternLength = L.patternLength;
-        pattern = L.pattern;
-
-        if ( &L == this )
-        {
-            return *this;
-        }
-    }
-
     /** Linetype name */
     std::string name;
     /** Linetype description */
@@ -147,6 +122,9 @@ struct DXFLIB_EXPORT DL_LinetypeData
     double patternLength;
     /** Pattern */
     double* pattern;
+
+private:
+    Q_DISABLE_COPY(DL_LinetypeData);
 };
 
 
@@ -544,12 +522,12 @@ struct DXFLIB_EXPORT DL_SplineData
         nControl(nControl),
         nFit(nFit),
         flags(flags),
-        tangentStartX(),
-        tangentStartY(),
-        tangentStartZ(),
-        tangentEndX(),
-        tangentEndY(),
-        tangentEndZ()
+        tangentStartX(0.0),
+        tangentStartY(0.0),
+        tangentStartZ(0.0),
+        tangentEndX(0.0),
+        tangentEndY(0.0),
+        tangentEndZ(0.0)
     {
     }
 
@@ -1462,11 +1440,11 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
      * Default constructor.
      */
     DL_HatchEdgeData() : defined(false), x1(0.0), y1(0.0), x2(0.0), y2(0.0),
-        type(), cx(), cy(), radius(), angle1(), angle2(), ccw(),
-        mx(), my(), ratio(), degree(), rational(), periodic(),
-        nKnots(), nControl(), nFit(), controlPoints(), knots(),
-        weights(), fitPoints(), startTangentX(), startTangentY(),
-        endTangentX(), endTangentY(), vertices()
+        type(0), cx(0.0), cy(0.0), radius(0.0), angle1(0.0), angle2(0.0), ccw(),
+        mx(0.0), my(0.0), ratio(0.0), degree(0), rational(), periodic(),
+        nKnots(0), nControl(0), nFit(0), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(0.0), startTangentY(0.0),
+        endTangentX(0.0), endTangentY(0.0), vertices()
     {
     }
 
@@ -1482,11 +1460,11 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
         x2(x2),
         y2(y2),
         type(1),
-        cx(), cy(), radius(), angle1(), angle2(), ccw(),
-        mx(), my(), ratio(), degree(), rational(), periodic(),
-        nKnots(), nControl(), nFit(), controlPoints(), knots(),
-        weights(), fitPoints(), startTangentX(), startTangentY(),
-        endTangentX(), endTangentY(), vertices()
+        cx(0.0), cy(0.0), radius(0.0), angle1(0.0), angle2(0.0), ccw(),
+        mx(0.0), my(0.0), ratio(0.0), degree(0), rational(), periodic(),
+        nKnots(0), nControl(0), nFit(0), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(0.0), startTangentY(0.0),
+        endTangentX(0.0), endTangentY(0.0), vertices()
     {
     }
 
@@ -1507,10 +1485,10 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
         angle1(angle1),
         angle2(angle2),
         ccw(ccw),
-        mx(), my(), ratio(), degree(), rational(), periodic(),
-        nKnots(), nControl(), nFit(), controlPoints(), knots(),
-        weights(), fitPoints(), startTangentX(), startTangentY(),
-        endTangentX(), endTangentY(), vertices()
+        mx(0.0), my(0.0), ratio(0.0), degree(0), rational(), periodic(),
+        nKnots(0), nControl(0), nFit(0), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(0.0), startTangentY(0.0),
+        endTangentX(0.0), endTangentY(0.0), vertices()
     {
     }
 
@@ -1535,10 +1513,10 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
         mx(mx),
         my(my),
         ratio(ratio),
-        degree(), rational(), periodic(),
-        nKnots(), nControl(), nFit(), controlPoints(), knots(),
-        weights(), fitPoints(), startTangentX(), startTangentY(),
-        endTangentX(), endTangentY(), vertices()
+        degree(0), rational(), periodic(),
+        nKnots(0), nControl(0), nFit(0), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(0.0), startTangentY(0.0),
+        endTangentX(0.0), endTangentY(0.0), vertices()
     {
     }
 
