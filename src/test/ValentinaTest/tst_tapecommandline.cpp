@@ -70,7 +70,7 @@ void TST_TapeCommandLine::OpenMeasurements()
     QFETCH(QString, file);
     QFETCH(bool, result);
 
-    const bool res = Run(TapePath(), QStringList() << "--test"
+    const bool res = Run(result, TapePath(), QStringList() << "--test"
                     << QApplication::applicationDirPath() + QLatin1Char('/') + tmpTestFolder + QLatin1Char('/') + file);
 
     QCOMPARE(res, result);

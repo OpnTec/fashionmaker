@@ -43,7 +43,7 @@ protected:
     QString ValentinaPath() const;
     QString TapePath() const;
 
-    bool Run(const QString &program, const QStringList &arguments);
+    bool Run(bool showWarn, const QString &program, const QStringList &arguments);
     bool CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const;
 };
 
