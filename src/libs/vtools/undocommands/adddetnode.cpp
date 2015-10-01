@@ -65,7 +65,7 @@ void AddDetNode::undo()
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagModeling.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagModeling));
         return;
     }
 }
@@ -82,7 +82,7 @@ void AddDetNode::redo()
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagModeling.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagModeling));
         return;
     }
 }

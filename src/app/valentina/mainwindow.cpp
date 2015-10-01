@@ -146,11 +146,11 @@ void MainWindow::NewPP()
 {
     qCDebug(vMainWindow, "New PP.");
     QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
-    qCDebug(vMainWindow, "Generated PP name: %s", patternPieceName.toUtf8().constData());
+    qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
     qCDebug(vMainWindow, "PP count %d", comboBoxDraws->count());
     patternPieceName = PatternPieceName(patternPieceName);
-    qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
+    qCDebug(vMainWindow, "PP name: %s", qUtf8Printable(patternPieceName));
     if (patternPieceName.isEmpty())
     {
         qCDebug(vMainWindow, "Name empty.");
@@ -165,7 +165,7 @@ void MainWindow::AddPP(const QString &PPName)
 {
     if (doc->appendPP(PPName) == false)
     {
-        qCDebug(vMainWindow, "Error creating pattern piece with the name %s.", PPName.toUtf8().constData());
+        qCDebug(vMainWindow, "Error creating pattern piece with the name %s.", qUtf8Printable(PPName));
         return;
     }
     comboBoxDraws->blockSignals(true);
@@ -1899,11 +1899,11 @@ bool MainWindow::SaveAs()
 
     if (lock->IsLocked())
     {
-        qCDebug(vMainWindow, "Pattern file %s was locked.", fileName.toUtf8().constData());
+        qCDebug(vMainWindow, "Pattern file %s was locked.", qUtf8Printable(fileName));
     }
     else
     {
-        qCDebug(vMainWindow, "Failed to lock %s", fileName.toUtf8().constData());
+        qCDebug(vMainWindow, "Failed to lock %s", qUtf8Printable(fileName));
         qCDebug(vMainWindow, "Error type: %d", lock->GetLockError());
         if (lock->GetLockError() == QLockFile::LockFailedError)
         {
@@ -1972,7 +1972,7 @@ void MainWindow::Open()
         //Absolute path to last open file
         dir = QFileInfo(files.first()).absolutePath();
     }
-    qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", dir.toUtf8().constData());
+    qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter);
     if (filePath.isEmpty())
     {
@@ -2085,7 +2085,7 @@ void MainWindow::FileClosedCorrect()
     {
         autofile.remove();
     }
-    qCDebug(vMainWindow, "File %s closed correct.", curFile.toUtf8().constData());
+    qCDebug(vMainWindow, "File %s closed correct.", qUtf8Printable(curFile));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2359,7 +2359,7 @@ void MainWindow::New()
     {
         qCDebug(vMainWindow, "New PP.");
         QString patternPieceName = QString(tr("Pattern piece %1")).arg(comboBoxDraws->count()+1);
-        qCDebug(vMainWindow, "Generated PP name: %s", patternPieceName.toUtf8().constData());
+        qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
         qCDebug(vMainWindow, "First PP");
         DialogNewPattern newPattern(pattern, patternPieceName, this);
@@ -2367,7 +2367,7 @@ void MainWindow::New()
         {
             patternPieceName = newPattern.name();
             qApp->setPatternUnit(newPattern.PatternUnit());
-            qCDebug(vMainWindow, "PP name: %s", patternPieceName.toUtf8().constData());
+            qCDebug(vMainWindow, "PP name: %s", qUtf8Printable(patternPieceName));
         }
         else
         {
@@ -2597,7 +2597,7 @@ void MainWindow::MinimumScrollBar()
  */
 bool MainWindow::SavePattern(const QString &fileName, QString &error)
 {
-    qCDebug(vMainWindow, "Saving pattern file %s.", fileName.toUtf8().constData());
+    qCDebug(vMainWindow, "Saving pattern file %s.", qUtf8Printable(fileName));
     QFileInfo tempInfo(fileName);
 
     const QString mPath = doc->MPath();
@@ -2613,14 +2613,14 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
         {
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
-            qCDebug(vMainWindow, "File %s saved.", fileName.toUtf8().constData());
+            qCDebug(vMainWindow, "File %s saved.", qUtf8Printable(fileName));
             PatternWasModified(result);
         }
     }
     else
     {
         doc->SetPath(mPath);
-        qCDebug(vMainWindow, "Could not save file %s. %s.", fileName.toUtf8().constData(), error.toUtf8().constData());
+        qCDebug(vMainWindow, "Could not save file %s. %s.", qUtf8Printable(fileName), qUtf8Printable(error));
     }
     return result;
 }
@@ -2649,7 +2649,7 @@ void MainWindow::AutoSavePattern()
  */
 void MainWindow::setCurrentFile(const QString &fileName)
 {
-    qCDebug(vMainWindow, "Set current name to \"%s\"", fileName.toUtf8().constData());
+    qCDebug(vMainWindow, "Set current name to \"%s\"", qUtf8Printable(fileName));
     curFile = fileName;
     qApp->getUndoStack()->setClean();
 
@@ -3103,7 +3103,7 @@ MainWindow::~MainWindow()
  */
 bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasureFile)
 {
-    qCDebug(vMainWindow, "Loading new file %s.", fileName.toUtf8().constData());
+    qCDebug(vMainWindow, "Loading new file %s.", qUtf8Printable(fileName));
 
     //We have unsaved changes or load more then one file per time
     if (OpenNewValentina(fileName))
@@ -3123,11 +3123,11 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
 
     if (lock->IsLocked())
     {
-        qCDebug(vMainWindow, "Pattern file %s was locked.", fileName.toUtf8().constData());
+        qCDebug(vMainWindow, "Pattern file %s was locked.", qUtf8Printable(fileName));
     }
     else
     {
-        qCDebug(vMainWindow, "Failed to lock %s", fileName.toUtf8().constData());
+        qCDebug(vMainWindow, "Failed to lock %s", qUtf8Printable(fileName));
         qCDebug(vMainWindow, "Error type: %d", lock->GetLockError());
         if (lock->GetLockError() == QLockFile::LockFailedError)
         {
@@ -3342,8 +3342,8 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                     else
                     {
                         qCDebug(vMainWindow, "Could not copy %s.autosave to %s %s",
-                                restoreFiles.at(i).toUtf8().constData(), restoreFiles.at(i).toUtf8().constData(),
-                                error.toUtf8().constData());
+                                qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(restoreFiles.at(i)),
+                                qUtf8Printable(error));
                     }
                 }
             }

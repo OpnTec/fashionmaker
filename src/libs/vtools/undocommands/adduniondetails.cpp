@@ -65,7 +65,7 @@ void AddUnionDetails::undo()
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagModeling.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagModeling));
         return;
     }
     emit NeedFullParsing();
@@ -83,7 +83,7 @@ void AddUnionDetails::redo()
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagModeling.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagModeling));
         return;
     }
     RedoFullParsing();

@@ -66,7 +66,7 @@ void AddDet::undo()
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagDetails.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagDetails));
         return;
     }
     emit NeedFullParsing();
@@ -85,7 +85,7 @@ void AddDet::redo()
     }
     else
     {
-        qCDebug(vUndo, "Can't find tag %s.", VAbstractPattern::TagDetails.toUtf8().constData());
+        qCDebug(vUndo, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagDetails));
         return;
     }
     RedoFullParsing();

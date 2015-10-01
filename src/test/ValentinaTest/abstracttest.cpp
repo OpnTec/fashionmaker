@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "abstracttest.h"
+#include "../vmisc/logging.h"
 
 #include <QtTest>
 
@@ -79,7 +80,7 @@ bool AbstractTest::Run(const QString &program, const QStringList &arguments)
     if (not info.exists())
     {
         const QString msg = QString("Can't find binary.\n%1").arg(parameters);
-        QWARN(msg.toUtf8().constData());
+        QWARN(qUtf8Printable(msg));
         return false;
     }
 
@@ -90,7 +91,7 @@ bool AbstractTest::Run(const QString &program, const QStringList &arguments)
     if (not process->waitForFinished())// 30 sec
     {
         const QString msg = QString("The operation timed out or an error occurred.\n%1").arg(parameters);
-        QWARN(msg.toUtf8().constData());
+        QWARN(qUtf8Printable(msg));
         return false;
     }
 
@@ -98,7 +99,7 @@ bool AbstractTest::Run(const QString &program, const QStringList &arguments)
     {
         const QString msg = QString("Program crashed.\n%1\n%2").arg(parameters)
                 .arg(QString(process->readAllStandardError()));
-        QWARN(msg.toUtf8().constData());
+        QWARN(qUtf8Printable(msg));
         return false;
     }
 
@@ -106,7 +107,7 @@ bool AbstractTest::Run(const QString &program, const QStringList &arguments)
     {
         const QString msg = QString("Failed.\n%1\n%2").arg(parameters)
                 .arg(QString(process->readAllStandardError()));
-        QWARN(msg.toUtf8().constData());
+        QWARN(qUtf8Printable(msg));
         return false;
     }
 

@@ -432,7 +432,7 @@ void VDomDocument::CollectId(const QDomElement &node, QVector<quint32> &vector) 
  */
 void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 {
-    qCDebug(vXML, "Validation xml file %s.", fileName.toUtf8().constData());
+    qCDebug(vXML, "Validation xml file %s.", qUtf8Printable(fileName));
     QFile pattern(fileName);
     if (pattern.open(QIODevice::ReadOnly) == false)
     {

@@ -29,6 +29,7 @@
 #include "tst_measurementregexp.h"
 #include "../qmuparser/qmudef.h"
 #include "../vmisc/def.h"
+#include "../vmisc/logging.h"
 #include "../vpatterndb/vtranslatemeasurements.h"
 
 #include <QtTest>
@@ -95,7 +96,7 @@ void TST_MeasurementRegExp::TestMeasurementRegExp()
                     const QString message = QString("Failed to check translation for system = p%1 and locale = %2")
                             .arg(s)
                             .arg(locales.at(l));
-                    QFAIL(message.toUtf8().constData());
+                    QFAIL(qUtf8Printable(message));
                     break;
                 }
                 case NoError:
@@ -111,7 +112,7 @@ void TST_MeasurementRegExp::TestMeasurementRegExp()
                             const QString message = QString("Can't remove translation for system = p%1 and locale = %2")
                                     .arg(s)
                                     .arg(locales.at(l));
-                            QWARN(message.toUtf8().constData());
+                            QWARN(qUtf8Printable(message));
                         }
                         delete pmsTranslator;
                     }
@@ -398,7 +399,7 @@ int TST_MeasurementRegExp::LoadTranslation(const QString &checkedSystem, const Q
                 .arg(checkedLocale)
                 .arg(path)
                 .arg(file);
-        QWARN(message.toUtf8().constData());
+        QWARN(qUtf8Printable(message));
 
         return ErrorSize;
     }
@@ -412,7 +413,7 @@ int TST_MeasurementRegExp::LoadTranslation(const QString &checkedSystem, const Q
                 .arg(checkedLocale)
                 .arg(path)
                 .arg(file);
-        QWARN(message.toUtf8().constData());
+        QWARN(qUtf8Printable(message));
 
         delete pmsTranslator;
 
@@ -426,7 +427,7 @@ int TST_MeasurementRegExp::LoadTranslation(const QString &checkedSystem, const Q
                 .arg(checkedLocale)
                 .arg(path)
                 .arg(file);
-        QWARN(message.toUtf8().constData());
+        QWARN(qUtf8Printable(message));
 
         delete pmsTranslator;
 
