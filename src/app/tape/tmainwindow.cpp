@@ -171,7 +171,10 @@ void TMainWindow::LoadFile(const QString &path)
             {
                 std::exit(V_EX_NOINPUT);
             }
-            return;
+            else
+            {
+                return;
+            }
         }
 
         // Check if file already opened
@@ -196,7 +199,10 @@ void TMainWindow::LoadFile(const QString &path)
             {
                 std::exit(V_EX_NOINPUT);
             }
-            return;
+            else
+            {
+                return;
+            }
         }
 
         try
@@ -270,7 +276,15 @@ void TMainWindow::LoadFile(const QString &path)
             delete data;
             data = nullptr;
             lock.reset();
-            return;
+
+            if (qApp->IsTestMode())
+            {
+                std::exit(V_EX_NOINPUT);
+            }
+            else
+            {
+                return;
+            }
         }
     }
     else
