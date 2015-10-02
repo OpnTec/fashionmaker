@@ -62,9 +62,8 @@ public:
     /**
      * @param version DXF version. Defaults to DL_VERSION_2002.
      */
-    DL_Writer(DL_Codes::version version) : m_handle(0x30), modelSpaceHandle(0), paperSpaceHandle(0), paperSpace0Handle(0), version()
+    DL_Writer(DL_Codes::version version) : m_handle(0x30), modelSpaceHandle(0), paperSpaceHandle(0), paperSpace0Handle(0), version(version)
     {
-        this->version = version;
     }
 
     virtual ~DL_Writer() {}

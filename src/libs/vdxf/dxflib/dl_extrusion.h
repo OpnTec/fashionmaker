@@ -44,11 +44,9 @@ public:
     /**
      * Default constructor.
      */
-    DL_Extrusion() : direction(), elevation()
+    DL_Extrusion() : direction(new double[3]), elevation(0.0)
     {
-        direction = new double[3];
         setDirection(0.0, 0.0, 1.0);
-        setElevation(0.0);
     }
 
 
@@ -74,9 +72,8 @@ public:
      *                  world coordinate system
      */
     DL_Extrusion(double dx, double dy, double dz, double elevation)
-        : direction(), elevation(elevation)
+        : direction(new double[3]), elevation(elevation)
     {
-        direction = new double[3];
         setDirection(dx, dy, dz);
     }
 
@@ -141,13 +138,14 @@ public:
      */
     DL_Extrusion & operator = (const DL_Extrusion& extru)
     {
-        setDirection(extru.direction[0], extru.direction[1], extru.direction[2]);
-        setElevation(extru.elevation);
-
         if ( &extru == this )
         {
             return *this;
         }
+        setDirection(extru.direction[0], extru.direction[1], extru.direction[2]);
+        setElevation(extru.elevation);
+
+        return *this;
     }
 
 

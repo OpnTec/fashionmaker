@@ -561,7 +561,7 @@ struct DXFLIB_EXPORT DL_SplineData
  */
 struct DXFLIB_EXPORT DL_KnotData
 {
-    DL_KnotData() : k() {}
+    DL_KnotData() : k(0.0) {}
     /**
      * Constructor.
      * Parameters: see member variables.
@@ -1366,7 +1366,7 @@ struct DXFLIB_EXPORT DL_HatchData
     /**
      * Default constructor.
      */
-    DL_HatchData() : numLoops(), solid(), scale(), angle(), pattern(), originX(), originY()
+    DL_HatchData() : numLoops(0), solid(), scale(0.0), angle(0.0), pattern(), originX(0.0), originY(0.0)
     {}
 
     /**
@@ -1415,7 +1415,8 @@ struct DXFLIB_EXPORT DL_HatchLoopData
     /**
      * Default constructor.
      */
-    DL_HatchLoopData() : numEdges() {}
+    DL_HatchLoopData() : numEdges(0)
+    {}
     /**
      * Constructor.
      * Parameters: see member variables.
