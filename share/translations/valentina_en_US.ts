@@ -283,7 +283,7 @@
     </message>
     <message>
         <source>Warning</source>
-        <translation>Warning</translation>
+        <translation type="vanished">Warning</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
@@ -326,7 +326,7 @@
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished">Warning</translation>
+        <translation type="obsolete">Warning</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
@@ -1890,7 +1890,7 @@
     </message>
     <message>
         <source>Critical error</source>
-        <translation>Critical error</translation>
+        <translation type="vanished">Critical error</translation>
     </message>
     <message>
         <source>Wrong paper size</source>
@@ -3715,6 +3715,14 @@
         <source>Something&apos;s wrong!!</source>
         <translation type="unfinished">Something&apos;s wrong!!</translation>
     </message>
+    <message>
+        <source>Parser error: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exception thrown: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -4194,7 +4202,7 @@ For opening pattern need keep both files: pattern and measurements. Do you want 
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Critical error!</translation>
+        <translation type="vanished">Critical error!</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -4690,6 +4698,10 @@ Do you want to save your changes?</translation>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
         <translation type="unfinished">Several workpieces left not arranged, but none of them match for paper</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open printer %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8373,11 +8385,27 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Can&apos;t find measurement.</source>
+        <source>The name of known measurement forbidden to change.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The name of known measurement forbidden to change.</source>
+        <source>Can&apos;t find measurement &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base value of known measurement forbidden to change.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The size increase value of known measurement forbidden to change.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The height increase value of known measurement forbidden to change.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The full name of known measurement forbidden to change.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8691,6 +8719,14 @@ Do you want to save your changes?</source>
         <source>Something&apos;s wrong!!</source>
         <translation>Something&apos;s wrong!!</translation>
     </message>
+    <message>
+        <source>Parser error: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exception thrown: %1. Program will be terminated.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommandLine</name>
@@ -8932,7 +8968,7 @@ Do you want to save your changes?</source>
     <name>VException</name>
     <message>
         <source>Critical error!</source>
-        <translation>Critical error!</translation>
+        <translation type="vanished">Critical error!</translation>
     </message>
 </context>
 <context>
@@ -8957,6 +8993,10 @@ Do you want to save your changes?</source>
     <name>VMeasurements</name>
     <message>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurement name is empty!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9010,7 +9050,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation>Critical error!</translation>
+        <translation type="vanished">Critical error!</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -9498,6 +9538,45 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>mNoisyHandler</name>
+    <message>
+        <source>DEBUG:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRITICAL:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FATAL:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fatal error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <source>Pattern making program.</source>
@@ -9557,6 +9636,45 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error: Test mode doesn&apos;t support openning several files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>vNoisyHandler</name>
+    <message>
+        <source>DEBUG:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRITICAL:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FATAL:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fatal error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
