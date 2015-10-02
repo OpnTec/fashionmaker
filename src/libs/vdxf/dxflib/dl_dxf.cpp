@@ -3089,13 +3089,13 @@ void DL_Dxf::writeInsert(DL_WriterA& dw,
     dw.dxfReal(10, data.ipx);
     dw.dxfReal(20, data.ipy);
     dw.dxfReal(30, data.ipz);
-    if (data.sx!=1.0 || data.sy!=1.0)
+    if (!DL_FuzzyComparePossibleNulls(data.sx, 1.0) || !DL_FuzzyComparePossibleNulls(data.sy, 1.0))
     {
         dw.dxfReal(41, data.sx);
         dw.dxfReal(42, data.sy);
         dw.dxfReal(43, 1.0);
     }
-    if (data.angle!=0.0)
+    if (!DL_FuzzyComparePossibleNulls(data.angle, 0.0))
     {
         dw.dxfReal(50, data.angle);
     }
@@ -3104,7 +3104,7 @@ void DL_Dxf::writeInsert(DL_WriterA& dw,
         dw.dxfInt(70, data.cols);
         dw.dxfInt(71, data.rows);
     }
-    if (data.colSp!=0.0 || data.rowSp!=0.0)
+    if (!DL_FuzzyComparePossibleNulls(data.colSp, 0.0) || !DL_FuzzyComparePossibleNulls(data.rowSp, 0.0))
     {
         dw.dxfReal(44, data.colSp);
         dw.dxfReal(45, data.rowSp);

@@ -26,6 +26,7 @@
 #define DL_ENTITIES_H
 
 #include "dl_global.h"
+#include "dxfdef.h"
 
 #include <string>
 #include <vector>
@@ -168,9 +169,9 @@ struct DXFLIB_EXPORT DL_StyleData
         // ignore lastHeightUsed:
         return (name==other.name &&
                 flags==other.flags &&
-                fixedTextHeight==other.fixedTextHeight &&
-                widthFactor==other.widthFactor &&
-                obliqueAngle==other.obliqueAngle &&
+                DL_FuzzyComparePossibleNulls(fixedTextHeight, other.fixedTextHeight) &&
+                DL_FuzzyComparePossibleNulls(widthFactor, other.widthFactor) &&
+                DL_FuzzyComparePossibleNulls(obliqueAngle, other.obliqueAngle) &&
                 textGenerationFlags==other.textGenerationFlags &&
                 primaryFontFile==other.primaryFontFile &&
                 bigFontFile==other.bigFontFile);
