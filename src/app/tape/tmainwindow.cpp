@@ -683,7 +683,7 @@ void TMainWindow::Remove()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0);
     m->Remove(nameField->data(Qt::UserRole).toString());
 
     MeasurementsWasSaved(false);
@@ -752,7 +752,7 @@ void TMainWindow::MoveUp()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
     m->MoveUp(nameField->data(Qt::UserRole).toString());
     MeasurementsWasSaved(false);
     RefreshData();
@@ -770,7 +770,7 @@ void TMainWindow::MoveDown()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
     m->MoveDown(nameField->data(Qt::UserRole).toString());
     MeasurementsWasSaved(false);
     RefreshData();
@@ -859,7 +859,7 @@ void TMainWindow::AddCustom()
     else
     {
         currentRow  = ui->tableWidget->currentRow()+1;
-        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+        const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
         m->AddEmptyAfter(nameField->data(Qt::UserRole).toString(), name);
     }
 
@@ -901,7 +901,7 @@ void TMainWindow::AddKnown()
         else
         {
             currentRow  = ui->tableWidget->currentRow() + list.size();
-            QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+            const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
             QString after = nameField->data(Qt::UserRole).toString();
             for (int i = 0; i < list.size(); ++i)
             {
@@ -996,7 +996,7 @@ void TMainWindow::ImportFromPattern()
     else
     {
         currentRow  = ui->tableWidget->currentRow() + measurements.size();
-        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+        const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
         QString after = nameField->data(Qt::UserRole).toString();
         for (int i = 0; i < measurements.size(); ++i)
         {
@@ -1041,7 +1041,7 @@ void TMainWindow::ShowMData()
     {
         MFields(true);
 
-        QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
+        const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
         QSharedPointer<VMeasurement> meash;
 
         try
@@ -1162,7 +1162,7 @@ void TMainWindow::SaveMName()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
 
     QSharedPointer<VMeasurement> meash;
 
@@ -1216,7 +1216,7 @@ void TMainWindow::SaveMValue()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
 
     // Replace line return character with spaces for calc if exist
     QString text = ui->plainTextEditFormula->toPlainText();
@@ -1294,7 +1294,7 @@ void TMainWindow::SaveMBaseValue(double value)
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
 
     QSharedPointer<VMeasurement> meash;
 
@@ -1340,7 +1340,7 @@ void TMainWindow::SaveMSizeIncrease(double value)
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
 
     QSharedPointer<VMeasurement> meash;
 
@@ -1387,7 +1387,7 @@ void TMainWindow::SaveMHeightIncrease(double value)
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
 
     QSharedPointer<VMeasurement> meash;
 
@@ -1432,7 +1432,7 @@ void TMainWindow::SaveMDescription()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
     m->SetMDescription(nameField->data(Qt::UserRole).toString(), ui->plainTextEditDescription->toPlainText());
 
     MeasurementsWasSaved(false);
@@ -1459,7 +1459,7 @@ void TMainWindow::SaveMFullName()
         return;
     }
 
-    QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
 
     QSharedPointer<VMeasurement> meash;
 
@@ -2190,7 +2190,7 @@ void TMainWindow::MeasurementReadOnly(bool ro)
 {
     if (ro == false)
     {
-        if (QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName))
+        if (const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName))
         {
             if (nameField->text().indexOf(CustomMSign) == 0) // Check if custom
             {
