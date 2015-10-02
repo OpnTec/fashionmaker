@@ -36,7 +36,7 @@ enum class SexType : char { Male, Female, Unknown };
 
 class VMeasurements : public VDomDocument
 {
-
+    Q_DECLARE_TR_FUNCTIONS(VMeasurements)
 public:
     VMeasurements(VContainer *data);
     VMeasurements(Unit unit, VContainer *data);

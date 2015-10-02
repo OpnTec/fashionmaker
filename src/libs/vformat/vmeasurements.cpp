@@ -739,6 +739,12 @@ QDomElement VMeasurements::MakeEmpty(const QString &name, const QString &formula
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VMeasurements::FindM(const QString &name) const
 {
+    if (name.isEmpty())
+    {
+        qWarning() << tr("The measurement name is empty!");
+        return QDomElement();
+    }
+
     QDomNodeList list = elementsByTagName(TagMeasurement);
 
     for (int i=0; i < list.size(); ++i)
