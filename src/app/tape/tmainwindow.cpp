@@ -1391,15 +1391,38 @@ void TMainWindow::SaveMFullName()
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    m->SetMFullName(nameField->data(Qt::UserRole).toString(), ui->lineEditFullName->text());
 
-    MeasurementsWasSaved(false);
+    QSharedPointer<VMeasurement> meash;
 
-    RefreshData();
+    try
+    {
+        // Translate to internal look.
+        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch(const VExceptionBadId &e)
+    {
+        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
+                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
+                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        return;
+    }
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    if (meash->IsCustom())
+    {
+        m->SetMFullName(nameField->data(Qt::UserRole).toString(), ui->lineEditFullName->text());
+
+        MeasurementsWasSaved(false);
+
+        RefreshData();
+
+        ui->tableWidget->blockSignals(true);
+        ui->tableWidget->selectRow(row);
+        ui->tableWidget->blockSignals(false);
+    }
+    else
+    {
+        qCWarning(tMainWindow, "%s", qUtf8Printable(tr("The full name of known measurement forbidden to change.")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2096,19 +2119,29 @@ void TMainWindow::MeasurementReadOnly(bool ro)
 {
     if (ro == false)
     {
-        if (QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), 0))
+        if (QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName))
         {
             if (nameField->text().indexOf(CustomMSign) == 0) // Check if custom
             {
                 ui->lineEditName->setReadOnly(ro);
                 ui->plainTextEditDescription->setReadOnly(ro);
                 ui->lineEditFullName->setReadOnly(ro);
+
+                // Need to block signals for QLineEdit in readonly mode because it still emits
+                // QLineEdit::editingFinished signal.
+                ui->lineEditName->blockSignals(ro);
+                ui->lineEditFullName->blockSignals(ro);
             }
             else
             { // known measurement
                 ui->lineEditName->setReadOnly(not ro);
                 ui->plainTextEditDescription->setReadOnly(not ro);
                 ui->lineEditFullName->setReadOnly(not ro);
+
+                // Need to block signals for QLineEdit in readonly mode because it still emits
+                // QLineEdit::editingFinished signal.
+                ui->lineEditName->blockSignals(not ro);
+                ui->lineEditFullName->blockSignals(not ro);
             }
         }
         else
@@ -2133,6 +2166,11 @@ void TMainWindow::MeasurementReadOnly(bool ro)
         ui->doubleSpinBoxInSizes->setReadOnly(ro);
         ui->doubleSpinBoxInHeights->setReadOnly(ro);
     }
+
+    // Need to block signals for QLineEdit in readonly mode because it still emits QLineEdit::editingFinished signal.
+    ui->lineEditGivenName->blockSignals(ro);
+    ui->lineEditFamilyName->blockSignals(ro);
+    ui->lineEditEmail->blockSignals(ro);
 
     Controls(); // Buttons remove, up, down
 }
