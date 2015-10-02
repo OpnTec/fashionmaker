@@ -41,31 +41,36 @@
  * Default constructor.
  */
 DL_Dxf::DL_Dxf()
+    : version(DL_VERSION_2000),
+      polylineLayer(),
+      vertices(nullptr),
+      maxVertices(0),
+      vertexIndex(0),
+
+      knots(nullptr),
+      maxKnots(0),
+      knotIndex(0),
+
+      weights(nullptr),
+      weightIndex(0),
+
+      controlPoints(nullptr),
+      maxControlPoints(0),
+      controlPointIndex(0),
+
+      fitPoints(nullptr),
+      maxFitPoints(0),
+      fitPointIndex(0),
+
+      leaderVertices(nullptr),
+      maxLeaderVertices(0),
+      leaderVertexIndex(0),
+
+      firstHatchLoop(), hatchEdge(), hatchEdges(),
+      xRecordHandle(), xRecordValues(), groupCodeTmp(), groupCode(), groupValue(),
+      currentObjectType(), settingKey(), values(), firstCall(), attrib(),
+      libVersion(), appDictionaryHandle(), styleHandleStd()
 {
-    version = DL_VERSION_2000;
-
-    vertices = NULL;
-    maxVertices = 0;
-    vertexIndex = 0;
-
-    knots = NULL;
-    maxKnots = 0;
-    knotIndex = 0;
-
-    weights = NULL;
-    weightIndex = 0;
-
-    controlPoints = NULL;
-    maxControlPoints = 0;
-    controlPointIndex = 0;
-
-    fitPoints = NULL;
-    maxFitPoints = 0;
-    fitPointIndex = 0;
-
-    leaderVertices = NULL;
-    maxLeaderVertices = 0;
-    leaderVertexIndex = 0;
 }
 
 
@@ -75,27 +80,27 @@ DL_Dxf::DL_Dxf()
  */
 DL_Dxf::~DL_Dxf()
 {
-    if (vertices!=NULL)
+    if (vertices!=nullptr)
     {
         delete[] vertices;
     }
-    if (knots!=NULL)
+    if (knots!=nullptr)
     {
         delete[] knots;
     }
-    if (controlPoints!=NULL)
+    if (controlPoints!=nullptr)
     {
         delete[] controlPoints;
     }
-    if (fitPoints!=NULL)
+    if (fitPoints!=nullptr)
     {
         delete[] fitPoints;
     }
-    if (weights!=NULL)
+    if (weights!=nullptr)
     {
         delete[] weights;
     }
-    if (leaderVertices!=NULL)
+    if (leaderVertices!=nullptr)
     {
         delete[] leaderVertices;
     }
@@ -192,7 +197,7 @@ bool DL_Dxf::readDxfGroups(FILE *fp, DL_CreationInterface* creationInterface)
             DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, fp) )
     {
 
-        groupCode = (unsigned int)toInt(groupCodeTmp);
+        groupCode = static_cast<unsigned int>(toInt(groupCodeTmp));
 
         creationInterface->processCodeValuePair(groupCode, groupValue);
         line+=2;
@@ -218,7 +223,7 @@ bool DL_Dxf::readDxfGroups(std::stringstream& stream,
             DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, stream) )
     {
 
-        groupCode = (unsigned int)toInt(groupCodeTmp);
+        groupCode = static_cast<unsigned int>(toInt(groupCodeTmp));
 
         line+=2;
         processDXFGroup(creationInterface, groupCode, groupValue);
@@ -322,7 +327,7 @@ bool DL_Dxf::getStrippedLine(std::string &s, unsigned int size,
 bool DL_Dxf::stripWhiteSpace(char** s)
 {
     // last non-NULL char:
-    int lastChar = strlen(*s) - 1;
+    int lastChar = static_cast<int>(strlen(*s) - 1);
 
     // Is last character CR or LF?
     while ( (lastChar >= 0) &&
@@ -423,7 +428,7 @@ bool DL_Dxf::processDXFGroup(DL_CreationInterface* creationInterface,
                                width,                   // width
                                linetype,                // linetype
                                handle);                 // handle
-        attrib.setInPaperSpace((bool)getIntValue(67, 0));
+        attrib.setInPaperSpace(static_cast<bool>(getIntValue(67, 0)));
         attrib.setLinetypeScale(getRealValue(48, 1.0));
         creationInterface->setAttributes(attrib);
 
@@ -1612,7 +1617,7 @@ bool DL_Dxf::handleLWPolylineData(DL_CreationInterface* /*creationInterface*/)
         maxVertices = toInt(groupValue);
         if (maxVertices>0)
         {
-            if (vertices!=NULL)
+            if (vertices!=nullptr)
             {
                 delete[] vertices;
             }
@@ -1668,7 +1673,7 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
         maxKnots = toInt(groupValue);
         if (maxKnots>0)
         {
-            if (knots!=NULL)
+            if (knots!=nullptr)
             {
                 delete[] knots;
             }
@@ -1688,11 +1693,11 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
         maxControlPoints = toInt(groupValue);
         if (maxControlPoints>0)
         {
-            if (controlPoints!=NULL)
+            if (controlPoints!=nullptr)
             {
                 delete[] controlPoints;
             }
-            if (weights!=NULL)
+            if (weights!=nullptr)
             {
                 delete[] weights;
             }
@@ -1717,7 +1722,7 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
         maxFitPoints = toInt(groupValue);
         if (maxFitPoints>0)
         {
-            if (fitPoints!=NULL)
+            if (fitPoints!=nullptr)
             {
                 delete[] fitPoints;
             }
@@ -1807,7 +1812,7 @@ bool DL_Dxf::handleLeaderData(DL_CreationInterface* /*creationInterface*/)
         maxLeaderVertices = toInt(groupValue);
         if (maxLeaderVertices>0)
         {
-            if (leaderVertices!=NULL)
+            if (leaderVertices!=nullptr)
             {
                 delete[] leaderVertices;
             }
@@ -2176,7 +2181,7 @@ void DL_Dxf::addHatch(DL_CreationInterface* creationInterface)
 
     for (unsigned int i=0; i<hatchEdges.size(); i++)
     {
-        creationInterface->addHatchLoop(DL_HatchLoopData(hatchEdges[i].size()));
+        creationInterface->addHatchLoop(DL_HatchLoopData(static_cast<unsigned int>(hatchEdges[i].size())));
         for (unsigned int k=0; k<hatchEdges[i].size(); k++)
         {
             creationInterface->addHatchEdge(DL_HatchEdgeData(hatchEdges[i][k]));
@@ -2273,6 +2278,8 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.defined = true;
                 }
                 return true;
+            default:
+                return false;
         }
     }
     else
@@ -2295,6 +2302,8 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.y2 = toReal(groupValue);
                     hatchEdge.defined = true;
                     return true;
+                default:
+                    return false;
             }
         }
 
@@ -2319,9 +2328,11 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.angle2 = toReal(groupValue)/360.0*2*M_PI;
                     return true;
                 case 73:
-                    hatchEdge.ccw = (bool)toInt(groupValue);
+                    hatchEdge.ccw = static_cast<bool>(toInt(groupValue));
                     hatchEdge.defined = true;
                     return true;
+                default:
+                    return false;
             }
         }
 
@@ -2352,9 +2363,11 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.angle2 = toReal(groupValue)/360.0*2*M_PI;
                     return true;
                 case 73:
-                    hatchEdge.ccw = (bool)toInt(groupValue);
+                    hatchEdge.ccw = static_cast<bool>(toInt(groupValue));
                     hatchEdge.defined = true;
                     return true;
+                default:
+                    return false;
             }
         }
 
@@ -2435,6 +2448,8 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                 case 23:
                     hatchEdge.endTangentY = toReal(groupValue);
                     return true;
+                default:
+                    return false;
             }
         }
     }
@@ -2598,6 +2613,8 @@ void DL_Dxf::writeHeader(DL_WriterA& dw)
         case DL_Codes::AC1015:
             dw.dxfString(1, "AC1015");
             break;
+        default:
+            break;
     }
 
     // Newer version require that (otherwise a*cad crashes..)
@@ -2727,7 +2744,7 @@ void DL_Dxf::writePolyline(DL_WriterA& dw,
         dw.entityAttributes(attrib);
         dw.dxfString(100, "AcDbEntity");
         dw.dxfString(100, "AcDbPolyline");
-        dw.dxfInt(90, (int)data.number);
+        dw.dxfInt(90, static_cast<int>(data.number));
         dw.dxfInt(70, data.flags);
     }
     else
@@ -3072,13 +3089,13 @@ void DL_Dxf::writeInsert(DL_WriterA& dw,
     dw.dxfReal(10, data.ipx);
     dw.dxfReal(20, data.ipy);
     dw.dxfReal(30, data.ipz);
-    if (data.sx!=1.0 || data.sy!=1.0)
+    if (!DL_FuzzyComparePossibleNulls(data.sx, 1.0) || !DL_FuzzyComparePossibleNulls(data.sy, 1.0))
     {
         dw.dxfReal(41, data.sx);
         dw.dxfReal(42, data.sy);
         dw.dxfReal(43, 1.0);
     }
-    if (data.angle!=0.0)
+    if (!DL_FuzzyComparePossibleNulls(data.angle, 0.0))
     {
         dw.dxfReal(50, data.angle);
     }
@@ -3087,7 +3104,7 @@ void DL_Dxf::writeInsert(DL_WriterA& dw,
         dw.dxfInt(70, data.cols);
         dw.dxfInt(71, data.rows);
     }
-    if (data.colSp!=0.0 || data.rowSp!=0.0)
+    if (!DL_FuzzyComparePossibleNulls(data.colSp, 0.0) || !DL_FuzzyComparePossibleNulls(data.rowSp, 0.0))
     {
         dw.dxfReal(44, data.colSp);
         dw.dxfReal(45, data.rowSp);
@@ -3126,7 +3143,7 @@ void DL_Dxf::writeMText(DL_WriterA& dw,
     dw.dxfInt(72, data.drawingDirection);
 
     // Creare text chunks of 250 characters each:
-    int length = data.text.length();
+    int length = static_cast<int>(data.text.length());
     char chunk[251];
     int i;
     for (i=250; i<length; i+=250)
@@ -3240,7 +3257,7 @@ void DL_Dxf::writeDimStyleOverrides(DL_WriterA& dw,
         dw.dxfString(1000, "DSTYLE");
         dw.dxfString(1002, "{");
         dw.dxfInt(1070, 144);
-        dw.dxfInt(1040, data.linearFactor);
+        dw.dxfInt(1040, static_cast<int>(data.linearFactor));
         dw.dxfString(1002, "}");
     }
 }
@@ -3810,7 +3827,7 @@ void DL_Dxf::writeHatch1(DL_WriterA& dw,
     {
         dw.dxfString(2, "SOLID");
     }
-    dw.dxfInt(70, (int)data.solid);
+    dw.dxfInt(70, static_cast<int>(data.solid));
     dw.dxfInt(71, 0);                // non-associative
     dw.dxfInt(91, data.numLoops);
 }
@@ -3927,7 +3944,7 @@ void DL_Dxf::writeHatchEdge(DL_WriterA& dw,
             dw.dxfReal(40, data.radius);
             dw.dxfReal(50, data.angle1/(2*M_PI)*360.0);
             dw.dxfReal(51, data.angle2/(2*M_PI)*360.0);
-            dw.dxfInt(73, (int)(data.ccw));
+            dw.dxfInt(73, static_cast<int>((data.ccw)));
             break;
 
         // ellipse arc:
@@ -3939,7 +3956,7 @@ void DL_Dxf::writeHatchEdge(DL_WriterA& dw,
             dw.dxfReal(40, data.ratio);
             dw.dxfReal(50, data.angle1/(2*M_PI)*360.0);
             dw.dxfReal(51, data.angle2/(2*M_PI)*360.0);
-            dw.dxfInt(73, (int)(data.ccw));
+            dw.dxfInt(73, static_cast<int>((data.ccw)));
             break;
 
         // spline:
@@ -4035,7 +4052,7 @@ int DL_Dxf::writeImage(DL_WriterA& dw,
     dw.dxfReal(23, data.height);
 
     // handle of IMAGEDEF object
-    int handle = dw.incHandle();
+    int handle = static_cast<int>(dw.incHandle());
     dw.dxfHex(340, handle);
 
     // flags
@@ -4670,7 +4687,7 @@ void DL_Dxf::writeDimStyle(DL_WriterA& dw,
         dw.dxfInt(278, 44);
         dw.dxfInt(283, 0);
         dw.dxfInt(284, 8);
-        dw.dxfHex(340, styleHandleStd);
+        dw.dxfHex(340, static_cast<int>(styleHandleStd));
         //dw.dxfHex(340, 0x11);
     }
     // * /
@@ -4801,7 +4818,7 @@ void DL_Dxf::writeObjects(DL_WriterA& dw, const std::string& appDictionaryName)
     dw.dxfString(  3, "ACAD_PLOTSTYLENAME");
     dw.dxfHex(350, 0xE);
     dw.dxfString(  3, "AcDbVariableDictionary");
-    int acDbVariableDictionaryHandle = dw.handle(350);
+    int acDbVariableDictionaryHandle = static_cast<int>(dw.handle(350));
     //int acDbVariableDictionaryHandle = dw.getNextHandle();
     //dw.dxfHex(350, acDbVariableDictionaryHandle);
     //dw.incHandle();
@@ -5103,10 +5120,10 @@ void DL_Dxf::writeObjects(DL_WriterA& dw, const std::string& appDictionaryName)
     dw.dxfInt(281, 1);
     dw.dxfString(  3, "DIMASSOC");
     //dw.dxfHex(350, 0x2F);
-    dw.dxfHex(350, dw.getNextHandle()+1);        // 2E
+    dw.dxfHex(350, static_cast<int>(dw.getNextHandle()+1));        // 2E
     dw.dxfString(  3, "HIDETEXT");
     //dw.dxfHex(350, 0x2E);
-    dw.dxfHex(350, dw.getNextHandle());        // 2D
+    dw.dxfHex(350, static_cast<int>(dw.getNextHandle()));        // 2D
 
 
     dw.dxfString(  0, "DICTIONARYVAR");
@@ -5131,7 +5148,7 @@ void DL_Dxf::writeAppDictionary(DL_WriterA& dw)
 {
     dw.dxfString(  0, "DICTIONARY");
     //dw.handle();
-    dw.dxfHex(5, appDictionaryHandle);
+    dw.dxfHex(5, static_cast<int>(appDictionaryHandle));
     dw.dxfString(100, "AcDbDictionary");
     dw.dxfInt(281, 1);
 }
@@ -5139,7 +5156,7 @@ void DL_Dxf::writeAppDictionary(DL_WriterA& dw)
 int DL_Dxf::writeDictionaryEntry(DL_WriterA& dw, const std::string& name)
 {
     dw.dxfString(  3, name);
-    int handle = dw.getNextHandle();
+    int handle = static_cast<int>(dw.getNextHandle());
     dw.dxfHex(350, handle);
     dw.incHandle();
     return handle;
@@ -5149,7 +5166,7 @@ void DL_Dxf::writeXRecord(DL_WriterA& dw, int handle, int value)
 {
     dw.dxfString(  0, "XRECORD");
     dw.dxfHex(5, handle);
-    dw.dxfHex(330, appDictionaryHandle);
+    dw.dxfHex(330, static_cast<int>(appDictionaryHandle));
     dw.dxfString(100, "AcDbXrecord");
     dw.dxfInt(280, 1);
     dw.dxfInt(90, value);
@@ -5159,7 +5176,7 @@ void DL_Dxf::writeXRecord(DL_WriterA& dw, int handle, double value)
 {
     dw.dxfString(  0, "XRECORD");
     dw.dxfHex(5, handle);
-    dw.dxfHex(330, appDictionaryHandle);
+    dw.dxfHex(330, static_cast<int>(appDictionaryHandle));
     dw.dxfString(100, "AcDbXrecord");
     dw.dxfInt(280, 1);
     dw.dxfReal(40, value);
@@ -5169,7 +5186,7 @@ void DL_Dxf::writeXRecord(DL_WriterA& dw, int handle, bool value)
 {
     dw.dxfString(  0, "XRECORD");
     dw.dxfHex(5, handle);
-    dw.dxfHex(330, appDictionaryHandle);
+    dw.dxfHex(330, static_cast<int>(appDictionaryHandle));
     dw.dxfString(100, "AcDbXrecord");
     dw.dxfInt(280, 1);
     dw.dxfBool(290, value);
@@ -5179,7 +5196,7 @@ void DL_Dxf::writeXRecord(DL_WriterA& dw, int handle, const std::string& value)
 {
     dw.dxfString(  0, "XRECORD");
     dw.dxfHex(5, handle);
-    dw.dxfHex(330, appDictionaryHandle);
+    dw.dxfHex(330, static_cast<int>(appDictionaryHandle));
     dw.dxfString(100, "AcDbXrecord");
     dw.dxfInt(280, 1);
     dw.dxfString(1000, value);
@@ -5813,7 +5830,7 @@ int DL_Dxf::getLibVersion(const std::string& str)
 
     if (idx>=2)
     {
-        d[3] = str.length();
+        d[3] = static_cast<int>(str.length());
 
         v[0] = str.substr(0, d[0]);
         v[1] = str.substr(d[0]+1, d[1]-d[0]-1);

@@ -32,9 +32,11 @@
 
 #include "dl_global.h"
 
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
+#if defined(Q_CC_MSVC)
+    #if (_MSC_VER > 1000)
+    #pragma once
+    #endif // _MSC_VER > 1000
+#endif // Q_CC_MSVC
 
 #if defined(__OS2__)||defined(__EMX__)
 #define strcasecmp(s,t) stricmp(s,t)

@@ -34,4 +34,20 @@ enum class VarMeasurement : unsigned char { English=0, Metric=1 };
 //Default drawing units for AutoCAD DesignCenter blocks:
 enum class VarInsunits : unsigned char { Inches=1, Millimeters=4, Centimeters=5 };
 
+static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2)
+{
+    if(qFuzzyIsNull(p1))
+    {
+        return qFuzzyIsNull(p2);
+    }
+    else if(qFuzzyIsNull(p2))
+    {
+        return false;
+    }
+    else
+    {
+        return qFuzzyCompare(p1, p2);
+    }
+}
+
 #endif // DXFDEF_H

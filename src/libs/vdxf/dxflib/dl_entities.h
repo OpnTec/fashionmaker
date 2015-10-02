@@ -26,6 +26,7 @@
 #define DL_ENTITIES_H
 
 #include "dl_global.h"
+#include "dxfdef.h"
 
 #include <string>
 #include <vector>
@@ -39,11 +40,9 @@ struct DXFLIB_EXPORT DL_LayerData
      * Constructor.
      * Parameters: see member variables.
      */
-    DL_LayerData(const std::string& lName,
-                 int lFlags)
+    DL_LayerData(const std::string& lName, int lFlags)
+        : name(lName), flags(lFlags)
     {
-        name = lName;
-        flags = lFlags;
     }
 
     /** Layer name. */
@@ -63,15 +62,10 @@ struct DXFLIB_EXPORT DL_BlockData
      * Constructor.
      * Parameters: see member variables.
      */
-    DL_BlockData(const std::string& bName,
-                 int bFlags,
+    DL_BlockData(const std::string& bName, int bFlags,
                  double bbpx, double bbpy, double bbpz)
-    {
-        name = bName;
-        flags = bFlags;
-        bpx = bbpx;
-        bpy = bbpy;
-        bpz = bbpz;
+        : name(bName), flags(bFlags), bpx(bbpx), bpy(bbpy), bpz(bbpz)
+    {   
     }
 
     /** Block name. */
@@ -102,7 +96,7 @@ struct DXFLIB_EXPORT DL_LinetypeData
         int flags,
         int numberOfDashes,
         double patternLength,
-        double* pattern = NULL
+        double* pattern = nullptr
     )
         : name(name),
           description(description),
@@ -110,7 +104,12 @@ struct DXFLIB_EXPORT DL_LinetypeData
           numberOfDashes(numberOfDashes),
           patternLength(patternLength),
           pattern(pattern)
-    {}
+    {
+    }
+
+    ~DL_LinetypeData()
+    {
+    }
 
     /** Linetype name */
     std::string name;
@@ -124,6 +123,9 @@ struct DXFLIB_EXPORT DL_LinetypeData
     double patternLength;
     /** Pattern */
     double* pattern;
+
+private:
+    Q_DISABLE_COPY(DL_LinetypeData);
 };
 
 
@@ -167,9 +169,9 @@ struct DXFLIB_EXPORT DL_StyleData
         // ignore lastHeightUsed:
         return (name==other.name &&
                 flags==other.flags &&
-                fixedTextHeight==other.fixedTextHeight &&
-                widthFactor==other.widthFactor &&
-                obliqueAngle==other.obliqueAngle &&
+                DL_FuzzyComparePossibleNulls(fixedTextHeight, other.fixedTextHeight) &&
+                DL_FuzzyComparePossibleNulls(widthFactor, other.widthFactor) &&
+                DL_FuzzyComparePossibleNulls(obliqueAngle, other.obliqueAngle) &&
                 textGenerationFlags==other.textGenerationFlags &&
                 primaryFontFile==other.primaryFontFile &&
                 bigFontFile==other.bigFontFile);
@@ -208,10 +210,8 @@ struct DXFLIB_EXPORT DL_PointData
      * Parameters: see member variables.
      */
     DL_PointData(double px=0.0, double py=0.0, double pz=0.0)
+        : x(px), y(py), z(pz)
     {
-        x = px;
-        y = py;
-        z = pz;
     }
 
     /*! X Coordinate of the point. */
@@ -235,14 +235,8 @@ struct DXFLIB_EXPORT DL_LineData
      */
     DL_LineData(double lx1, double ly1, double lz1,
                 double lx2, double ly2, double lz2)
+        : x1(lx1), y1(ly1), z1(lz1), x2(lx2), y2(ly2), z2(lz2)
     {
-        x1 = lx1;
-        y1 = ly1;
-        z1 = lz1;
-
-        x2 = lx2;
-        y2 = ly2;
-        z2 = lz2;
     }
 
     /*! X Start coordinate of the point. */
@@ -336,14 +330,8 @@ struct DXFLIB_EXPORT DL_ArcData
     DL_ArcData(double acx, double acy, double acz,
                double aRadius,
                double aAngle1, double aAngle2)
-    {
-
-        cx = acx;
-        cy = acy;
-        cz = acz;
-        radius = aRadius;
-        angle1 = aAngle1;
-        angle2 = aAngle2;
+        : cx(acx), cy(acy), cz(acz), radius(aRadius), angle1(aAngle1), angle2(aAngle2)
+    { 
     }
 
     /*! X Coordinate of center point. */
@@ -374,12 +362,8 @@ struct DXFLIB_EXPORT DL_CircleData
      */
     DL_CircleData(double acx, double acy, double acz,
                   double aRadius)
+        : cx(acx), cy(acy), cz(acz), radius(aRadius)
     {
-
-        cx = acx;
-        cy = acy;
-        cz = acz;
-        radius = aRadius;
     }
 
     /*! X Coordinate of center point. */
@@ -405,11 +389,8 @@ struct DXFLIB_EXPORT DL_PolylineData
      * Parameters: see member variables.
      */
     DL_PolylineData(int pNumber, int pMVerteces, int pNVerteces, int pFlags)
+        : number(pNumber), m(pMVerteces), n(pNVerteces), flags(pFlags)
     {
-        number = pNumber;
-        m = pMVerteces;
-        n = pNVerteces;
-        flags = pFlags;
     }
 
     /*! Number of vertices in this polyline. */
@@ -438,11 +419,8 @@ struct DXFLIB_EXPORT DL_VertexData
      */
     DL_VertexData(double px=0.0, double py=0.0, double pz=0.0,
                   double pBulge=0.0)
+        : x(px), y(py), z(pz), bulge(pBulge)
     {
-        x = px;
-        y = py;
-        z = pz;
-        bulge = pBulge;
     }
 
     /*! X Coordinate of the vertex. */
@@ -463,8 +441,8 @@ struct DXFLIB_EXPORT DL_VertexData
 struct DXFLIB_EXPORT DL_TraceData
 {
     DL_TraceData()
+        : thickness(0.0)
     {
-        thickness = 0.0;
         for (int i=0; i<4; i++)
         {
             x[i] = 0.0;
@@ -482,10 +460,8 @@ struct DXFLIB_EXPORT DL_TraceData
                  double sx3, double sy3, double sz3,
                  double sx4, double sy4, double sz4,
                  double sthickness=0.0)
+        : thickness(sthickness)
     {
-
-        thickness = sthickness;
-
         x[0] = sx1;
         y[0] = sy1;
         z[0] = sz1;
@@ -546,7 +522,13 @@ struct DXFLIB_EXPORT DL_SplineData
         nKnots(nKnots),
         nControl(nControl),
         nFit(nFit),
-        flags(flags)
+        flags(flags),
+        tangentStartX(0.0),
+        tangentStartY(0.0),
+        tangentStartZ(0.0),
+        tangentEndX(0.0),
+        tangentEndY(0.0),
+        tangentEndZ(0.0)
     {
     }
 
@@ -580,14 +562,14 @@ struct DXFLIB_EXPORT DL_SplineData
  */
 struct DXFLIB_EXPORT DL_KnotData
 {
-    DL_KnotData() {}
+    DL_KnotData() : k(0.0) {}
     /**
      * Constructor.
      * Parameters: see member variables.
      */
     DL_KnotData(double pk)
+        : k(pk)
     {
-        k = pk;
     }
 
     /*! Knot value. */
@@ -606,11 +588,8 @@ struct DXFLIB_EXPORT DL_ControlPointData
      * Parameters: see member variables.
      */
     DL_ControlPointData(double px, double py, double pz, double weight)
+        :  x(px), y(py), z(pz), w(weight)
     {
-        x = px;
-        y = py;
-        z = pz;
-        w = weight;
     }
 
     /*! X coordinate of the control point. */
@@ -911,7 +890,6 @@ struct DXFLIB_EXPORT DL_AttributeData : public DL_TextData
     DL_AttributeData(const DL_TextData& tData, const std::string& tag)
         : DL_TextData(tData), tag(tag)
     {
-
     }
 
     /**
@@ -1063,15 +1041,9 @@ struct DXFLIB_EXPORT DL_DimAlignedData
      */
     DL_DimAlignedData(double depx1, double depy1, double depz1,
                       double depx2, double depy2, double depz2)
-    {
-
-        epx1 = depx1;
-        epy1 = depy1;
-        epz1 = depz1;
-
-        epx2 = depx2;
-        epy2 = depy2;
-        epz2 = depz2;
+        : epx1(depx1), epy1(depy1), epz1(depz1),
+          epx2(depx2), epy2(depy2), epz2(depz2)
+    { 
     }
 
     /*! X Coordinate of Extension point 1. */
@@ -1103,18 +1075,10 @@ struct DXFLIB_EXPORT DL_DimLinearData
     DL_DimLinearData(double ddpx1, double ddpy1, double ddpz1,
                      double ddpx2, double ddpy2, double ddpz2,
                      double dAngle, double dOblique)
+        : dpx1(ddpx1), dpy1(ddpy1), dpz1(ddpz1),
+          dpx2(ddpx2), dpy2(ddpy2), dpz2(ddpz2),
+          angle(dAngle), oblique(dOblique)
     {
-
-        dpx1 = ddpx1;
-        dpy1 = ddpy1;
-        dpz1 = ddpz1;
-
-        dpx2 = ddpx2;
-        dpy2 = ddpy2;
-        dpz2 = ddpz2;
-
-        angle = dAngle;
-        oblique = dOblique;
     }
 
     /*! X Coordinate of Extension point 1. */
@@ -1149,12 +1113,8 @@ struct DXFLIB_EXPORT DL_DimRadialData
      * Parameters: see member variables.
      */
     DL_DimRadialData(double ddpx, double ddpy, double ddpz, double dleader)
+        : dpx(ddpx), dpy(ddpy), dpz(ddpz), leader(dleader)
     {
-        dpx = ddpx;
-        dpy = ddpy;
-        dpz = ddpz;
-
-        leader = dleader;
     }
 
     /*! X Coordinate of definition point. */
@@ -1180,12 +1140,8 @@ struct DXFLIB_EXPORT DL_DimDiametricData
      * Parameters: see member variables.
      */
     DL_DimDiametricData(double ddpx, double ddpy, double ddpz, double dleader)
+        : dpx(ddpx), dpy(ddpy), dpz(ddpz), leader(dleader)
     {
-        dpx = ddpx;
-        dpy = ddpy;
-        dpz = ddpz;
-
-        leader = dleader;
     }
 
     /*! X Coordinate of definition point (DXF 15). */
@@ -1214,24 +1170,12 @@ struct DXFLIB_EXPORT DL_DimAngularData
                       double ddpx2, double ddpy2, double ddpz2,
                       double ddpx3, double ddpy3, double ddpz3,
                       double ddpx4, double ddpy4, double ddpz4)
-    {
-
-        dpx1 = ddpx1;
-        dpy1 = ddpy1;
-        dpz1 = ddpz1;
-
-        dpx2 = ddpx2;
-        dpy2 = ddpy2;
-        dpz2 = ddpz2;
-
-        dpx3 = ddpx3;
-        dpy3 = ddpy3;
-        dpz3 = ddpz3;
-
-        dpx4 = ddpx4;
-        dpy4 = ddpy4;
-        dpz4 = ddpz4;
-    }
+        : dpx1(ddpx1), dpy1(ddpy1), dpz1(ddpz1),
+          dpx2(ddpx2), dpy2(ddpy2), dpz2(ddpz2),
+          dpx3(ddpx3), dpy3(ddpy3), dpz3(ddpz3),
+          dpx4(ddpx4), dpy4(ddpy4), dpz4(ddpz4)
+      {
+      }
 
     /*! X Coordinate of definition point 1. */
     double dpx1;
@@ -1275,20 +1219,11 @@ struct DXFLIB_EXPORT DL_DimAngular3PData
     DL_DimAngular3PData(double ddpx1, double ddpy1, double ddpz1,
                         double ddpx2, double ddpy2, double ddpz2,
                         double ddpx3, double ddpy3, double ddpz3)
-    {
-
-        dpx1 = ddpx1;
-        dpy1 = ddpy1;
-        dpz1 = ddpz1;
-
-        dpx2 = ddpx2;
-        dpy2 = ddpy2;
-        dpz2 = ddpz2;
-
-        dpx3 = ddpx3;
-        dpy3 = ddpy3;
-        dpz3 = ddpz3;
-    }
+        : dpx1(ddpx1), dpy1(ddpy1), dpz1(ddpz1),
+          dpx2(ddpx2), dpy2(ddpy2), dpz2(ddpz2),
+          dpx3(ddpx3), dpy3(ddpy3), dpz3(ddpz3)
+      {
+      }
 
     /*! X Coordinate of definition point 1. */
     double dpx1;
@@ -1326,17 +1261,10 @@ struct DXFLIB_EXPORT DL_DimOrdinateData
     DL_DimOrdinateData(double ddpx1, double ddpy1, double ddpz1,
                        double ddpx2, double ddpy2, double ddpz2,
                        bool dxtype)
+        : dpx1(ddpx1), dpy1(ddpy1), dpz1(ddpz1),
+          dpx2(ddpx2), dpy2(ddpy2), dpz2(ddpz2),
+          xtype(dxtype)
     {
-
-        dpx1 = ddpx1;
-        dpy1 = ddpy1;
-        dpz1 = ddpz1;
-
-        dpx2 = ddpx2;
-        dpy2 = ddpy2;
-        dpz2 = ddpz2;
-
-        xtype = dxtype;
     }
 
     /*! X Coordinate of definition point 1. */
@@ -1376,16 +1304,15 @@ struct DXFLIB_EXPORT DL_LeaderData
                   double lTextAnnotationHeight,
                   double lTextAnnotationWidth,
                   int lNumber)
+        :  arrowHeadFlag(lArrowHeadFlag),
+           leaderPathType(lLeaderPathType),
+           leaderCreationFlag(lLeaderCreationFlag),
+           hooklineDirectionFlag(lHooklineDirectionFlag),
+           hooklineFlag(lHooklineFlag),
+           textAnnotationHeight(lTextAnnotationHeight),
+           textAnnotationWidth(lTextAnnotationWidth),
+           number(lNumber)
     {
-
-        arrowHeadFlag = lArrowHeadFlag;
-        leaderPathType = lLeaderPathType;
-        leaderCreationFlag = lLeaderCreationFlag;
-        hooklineDirectionFlag = lHooklineDirectionFlag;
-        hooklineFlag = lHooklineFlag;
-        textAnnotationHeight = lTextAnnotationHeight;
-        textAnnotationWidth = lTextAnnotationWidth;
-        number = lNumber;
     }
 
     /*! Arrow head flag (71). */
@@ -1418,10 +1345,8 @@ struct DXFLIB_EXPORT DL_LeaderVertexData
      * Parameters: see member variables.
      */
     DL_LeaderVertexData(double px=0.0, double py=0.0, double pz=0.0)
+        :  x(px), y(py), z(pz)
     {
-        x = px;
-        y = py;
-        z = pz;
     }
 
     /*! X Coordinate of the vertex. */
@@ -1442,7 +1367,8 @@ struct DXFLIB_EXPORT DL_HatchData
     /**
      * Default constructor.
      */
-    DL_HatchData() {}
+    DL_HatchData() : numLoops(0), solid(), scale(0.0), angle(0.0), pattern(), originX(0.0), originY(0.0)
+    {}
 
     /**
      * Constructor.
@@ -1463,7 +1389,6 @@ struct DXFLIB_EXPORT DL_HatchData
         originX(originX),
         originY(originY)
     {
-
     }
 
     /*! Number of boundary paths (loops). */
@@ -1491,14 +1416,15 @@ struct DXFLIB_EXPORT DL_HatchLoopData
     /**
      * Default constructor.
      */
-    DL_HatchLoopData() {}
+    DL_HatchLoopData() : numEdges(0)
+    {}
     /**
      * Constructor.
      * Parameters: see member variables.
      */
     DL_HatchLoopData(int hNumEdges)
+        : numEdges(hNumEdges)
     {
-        numEdges = hNumEdges;
     }
 
     /*! Number of edges in this loop. */
@@ -1515,7 +1441,12 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
     /**
      * Default constructor.
      */
-    DL_HatchEdgeData() : defined(false), x1(0.0), y1(0.0), x2(0.0), y2(0.0)
+    DL_HatchEdgeData() : defined(false), x1(0.0), y1(0.0), x2(0.0), y2(0.0),
+        type(0), cx(0.0), cy(0.0), radius(0.0), angle1(0.0), angle2(0.0), ccw(),
+        mx(0.0), my(0.0), ratio(0.0), degree(0), rational(), periodic(),
+        nKnots(0), nControl(0), nFit(0), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(0.0), startTangentY(0.0),
+        endTangentX(0.0), endTangentY(0.0), vertices()
     {
     }
 
@@ -1526,11 +1457,16 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
     DL_HatchEdgeData(double x1, double y1,
                      double x2, double y2) :
         defined(true),
-        type(1),
         x1(x1),
         y1(y1),
         x2(x2),
-        y2(y2)
+        y2(y2),
+        type(1),
+        cx(0.0), cy(0.0), radius(0.0), angle1(0.0), angle2(0.0), ccw(),
+        mx(0.0), my(0.0), ratio(0.0), degree(0), rational(), periodic(),
+        nKnots(0), nControl(0), nFit(0), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(0.0), startTangentY(0.0),
+        endTangentX(0.0), endTangentY(0.0), vertices()
     {
     }
 
@@ -1543,13 +1479,18 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
                      double angle1, double angle2,
                      bool ccw) :
         defined(true),
+        x1(), y1(), x2(), y2(),
         type(2),
         cx(cx),
         cy(cy),
         radius(radius),
         angle1(angle1),
         angle2(angle2),
-        ccw(ccw)
+        ccw(ccw),
+        mx(0.0), my(0.0), ratio(0.0), degree(0), rational(), periodic(),
+        nKnots(0), nControl(0), nFit(0), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(0.0), startTangentY(0.0),
+        endTangentX(0.0), endTangentY(0.0), vertices()
     {
     }
 
@@ -1563,15 +1504,21 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
                      double angle1, double angle2,
                      bool ccw) :
         defined(true),
+        x1(), y1(), x2(), y2(),
         type(3),
         cx(cx),
         cy(cy),
+        radius(),
         angle1(angle1),
         angle2(angle2),
         ccw(ccw),
         mx(mx),
         my(my),
-        ratio(ratio)
+        ratio(ratio),
+        degree(0), rational(), periodic(),
+        nKnots(0), nControl(0), nFit(0), controlPoints(), knots(),
+        weights(), fitPoints(), startTangentX(0.0), startTangentY(0.0),
+        endTangentX(0.0), endTangentY(0.0), vertices()
     {
     }
 
@@ -1594,8 +1541,10 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
                      double endTangentX,
                      double endTangentY) :
         defined(true),
-        type(4),
-        degree(degree),
+        x1(), y1(), x2(), y2(),
+        type(4), cx(), cy(), radius(),
+        angle1(), angle2(), ccw(),
+        mx(), my(), ratio(), degree(degree),
         rational(rational),
         periodic(periodic),
         nKnots(nKnots),
@@ -1608,7 +1557,8 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
         startTangentX(startTangentX),
         startTangentY(startTangentY),
         endTangentX(endTangentX),
-        endTangentY(endTangentY)
+        endTangentY(endTangentY),
+        vertices()
     {
     }
 
@@ -1616,11 +1566,6 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
      * Set to true if this edge is fully defined.
      */
     bool defined;
-
-    /**
-     * Edge type. 1=line, 2=arc, 3=elliptic arc, 4=spline.
-     */
-    int type;
 
     // line edges:
 
@@ -1632,6 +1577,11 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
     double x2;
     /*! End point (Y). */
     double y2;
+
+    /**
+     * Edge type. 1=line, 2=arc, 3=elliptic arc, 4=spline.
+     */
+    int type;
 
     /*! Center point of arc or ellipse arc (X). */
     double cx;
@@ -1698,22 +1648,13 @@ struct DXFLIB_EXPORT DL_ImageData
                  double ivx, double ivy, double ivz,
                  int iwidth, int iheight,
                  int ibrightness, int icontrast, int ifade)
+        : ref(iref),
+          ipx(iipx), ipy(iipy), ipz(iipz),
+          ux(iux), uy(iuy), uz(iuz),
+          vx(ivx), vy(ivy), vz(ivz),
+          width(iwidth), height(iheight),
+          brightness(ibrightness), contrast(icontrast), fade(ifade)
     {
-        ref = iref;
-        ipx = iipx;
-        ipy = iipy;
-        ipz = iipz;
-        ux = iux;
-        uy = iuy;
-        uz = iuz;
-        vx = ivx;
-        vy = ivy;
-        vz = ivz;
-        width = iwidth;
-        height = iheight;
-        brightness = ibrightness;
-        contrast = icontrast;
-        fade = ifade;
     }
 
     /*! Reference to the image file
@@ -1762,9 +1703,8 @@ struct DXFLIB_EXPORT DL_ImageDefData
      */
     DL_ImageDefData(const std::string& iref,
                     const std::string& ifile)
-    {
-        ref = iref;
-        file = ifile;
+        : ref(iref), file(ifile)
+    {   
     }
 
     /*! Reference to the image file
