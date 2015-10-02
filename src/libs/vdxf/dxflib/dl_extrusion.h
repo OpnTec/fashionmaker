@@ -44,11 +44,9 @@ public:
     /**
      * Default constructor.
      */
-    DL_Extrusion()
+    DL_Extrusion() : direction(new double[3]), elevation(0.0)
     {
-        direction = new double[3];
         setDirection(0.0, 0.0, 1.0);
-        setElevation(0.0);
     }
 
 
@@ -60,6 +58,10 @@ public:
         delete[] direction ;
     }
 
+    DL_Extrusion(const DL_Extrusion &L)
+        : direction(L.direction), elevation(L.elevation)
+    {
+    }
 
     /**
      * Constructor for DXF extrusion.
@@ -70,10 +72,9 @@ public:
      *                  world coordinate system
      */
     DL_Extrusion(double dx, double dy, double dz, double elevation)
+        : direction(new double[3]), elevation(elevation)
     {
-        direction = new double[3];
         setDirection(dx, dy, dz);
-        setElevation(elevation);
     }
 
 
@@ -135,8 +136,12 @@ public:
     /**
      * Copies extrusion (deep copies) from another extrusion object.
      */
-    DL_Extrusion operator = (const DL_Extrusion& extru)
+    DL_Extrusion & operator = (const DL_Extrusion& extru)
     {
+        if ( &extru == this )
+        {
+            return *this;
+        }
         setDirection(extru.direction[0], extru.direction[1], extru.direction[2]);
         setElevation(extru.elevation);
 

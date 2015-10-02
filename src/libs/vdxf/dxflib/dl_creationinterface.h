@@ -47,9 +47,8 @@
 class DXFLIB_EXPORT DL_CreationInterface
 {
 public:
-    DL_CreationInterface()
+    DL_CreationInterface() : extrusion(new DL_Extrusion), attributes()
     {
-        extrusion = new DL_Extrusion;
     }
     virtual ~DL_CreationInterface()
     {
@@ -365,9 +364,12 @@ public:
         return extrusion;
     }
 
+private:
+    Q_DISABLE_COPY(DL_CreationInterface);
+
 protected:
-    DL_Attributes attributes;
     DL_Extrusion *extrusion;
+    DL_Attributes attributes;
 };
 
 #endif
