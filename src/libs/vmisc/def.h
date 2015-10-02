@@ -167,8 +167,8 @@ enum class GSizes : unsigned char { ALL,
 {                                                           \
     if (!(cond))                                            \
     {                                                       \
-        qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, Q_FUNC_INFO , __FILE__, __LINE__);  \
+        qCritical("ASSERT: %s in %s (%s:%u)",               \
+                  #cond, Q_FUNC_INFO , __FILE__, __LINE__); \
         debug_break();                                      \
     }                                                       \
 }                                                           \

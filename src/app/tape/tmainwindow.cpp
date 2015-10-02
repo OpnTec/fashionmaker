@@ -924,8 +924,6 @@ void TMainWindow::AddKnown()
         ui->tableWidget->selectRow(currentRow);
 
         MeasurementsWasSaved(false);
-
-        MFields(ui->tableWidget->rowCount() > 0);
     }
     delete dialog;
 }
@@ -1297,16 +1295,39 @@ void TMainWindow::SaveMBaseValue(double value)
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    m->SetMBaseValue(nameField->data(Qt::UserRole).toString(), value);
 
-    MeasurementsWasSaved(false);
+    QSharedPointer<VMeasurement> meash;
 
-    RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    try
+    {
+        // Translate to internal look.
+        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch(const VExceptionBadId &e)
+    {
+        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
+                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
+                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        return;
+    }
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    if (meash->IsCustom())
+    {
+        m->SetMBaseValue(nameField->data(Qt::UserRole).toString(), value);
+
+        MeasurementsWasSaved(false);
+
+        RefreshData();
+        search->RefreshList(ui->lineEditFind->text());
+
+        ui->tableWidget->blockSignals(true);
+        ui->tableWidget->selectRow(row);
+        ui->tableWidget->blockSignals(false);
+    }
+    else
+    {
+        qCWarning(tMainWindow, "%s", qUtf8Printable(tr("The base value of known measurement forbidden to change.")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1320,16 +1341,40 @@ void TMainWindow::SaveMSizeIncrease(double value)
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
 
-    MeasurementsWasSaved(false);
+    QSharedPointer<VMeasurement> meash;
 
-    RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    try
+    {
+        // Translate to internal look.
+        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch(const VExceptionBadId &e)
+    {
+        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
+                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
+                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        return;
+    }
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->selectRow(row);
-    ui->tableWidget->blockSignals(false);
+    if (meash->IsCustom())
+    {
+        m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
+
+        MeasurementsWasSaved(false);
+
+        RefreshData();
+        search->RefreshList(ui->lineEditFind->text());
+
+        ui->tableWidget->blockSignals(true);
+        ui->tableWidget->selectRow(row);
+        ui->tableWidget->blockSignals(false);
+    }
+    else
+    {
+        qCWarning(tMainWindow, "%s",
+                  qUtf8Printable(tr("The size increase value of known measurement forbidden to change.")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1343,14 +1388,38 @@ void TMainWindow::SaveMHeightIncrease(double value)
     }
 
     QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
 
-    MeasurementsWasSaved(false);
+    QSharedPointer<VMeasurement> meash;
 
-    RefreshData();
-    search->RefreshList(ui->lineEditFind->text());
+    try
+    {
+        // Translate to internal look.
+        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch(const VExceptionBadId &e)
+    {
+        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
+                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
+                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        return;
+    }
 
-    ui->tableWidget->selectRow(row);
+    if (meash->IsCustom())
+    {
+        m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
+
+        MeasurementsWasSaved(false);
+
+        RefreshData();
+        search->RefreshList(ui->lineEditFind->text());
+
+        ui->tableWidget->selectRow(row);
+    }
+    else
+    {
+        qCWarning(tMainWindow, "%s",
+                  qUtf8Printable(tr("The height increase value of known measurement forbidden to change.")));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1913,7 +1982,9 @@ void TMainWindow::RefreshTable()
         }
         else
         {
-            AddCell(qApp->TrVars()->MToUser(meash->GetName()), currentRow, 0, Qt::AlignVCenter); // name
+            QTableWidgetItem *item = AddCell(qApp->TrVars()->MToUser(meash->GetName()), currentRow, 0,
+                                             Qt::AlignVCenter); // name
+            item->setData(Qt::UserRole, meash->GetName());
 
             if (meash->IsCustom())
             {
@@ -2154,11 +2225,22 @@ void TMainWindow::MeasurementReadOnly(bool ro)
         ui->lineEditName->setReadOnly(ro);
         ui->plainTextEditDescription->setReadOnly(ro);
         ui->lineEditFullName->setReadOnly(ro);
+
+        // Need to block signals for QLineEdit in readonly mode because it still emits
+        // QLineEdit::editingFinished signal.
+        ui->lineEditName->blockSignals(ro);
+        ui->lineEditFullName->blockSignals(ro);
     }
 
     if (mType == MeasurementsType::Individual)
     {
         ui->plainTextEditFormula->setReadOnly(ro);
+
+        // Need to block signals for QLineEdit in readonly mode because it still emits QLineEdit::editingFinished
+        // signal.
+        ui->lineEditGivenName->blockSignals(ro);
+        ui->lineEditFamilyName->blockSignals(ro);
+        ui->lineEditEmail->blockSignals(ro);
     }
     else
     {
@@ -2166,11 +2248,6 @@ void TMainWindow::MeasurementReadOnly(bool ro)
         ui->doubleSpinBoxInSizes->setReadOnly(ro);
         ui->doubleSpinBoxInHeights->setReadOnly(ro);
     }
-
-    // Need to block signals for QLineEdit in readonly mode because it still emits QLineEdit::editingFinished signal.
-    ui->lineEditGivenName->blockSignals(ro);
-    ui->lineEditFamilyName->blockSignals(ro);
-    ui->lineEditEmail->blockSignals(ro);
 
     Controls(); // Buttons remove, up, down
 }
