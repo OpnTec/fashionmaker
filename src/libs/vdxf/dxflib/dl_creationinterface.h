@@ -365,7 +365,7 @@ public:
     }
 
 private:
-    Q_DISABLE_COPY(DL_CreationInterface);
+    Q_DISABLE_COPY(DL_CreationInterface)
 
 protected:
     DL_Extrusion *extrusion;

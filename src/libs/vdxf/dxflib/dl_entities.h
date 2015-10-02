@@ -30,6 +30,7 @@
 
 #include <string>
 #include <vector>
+#include <QtGlobal>
 
 /**
  * Layer Data.
@@ -65,7 +66,7 @@ struct DXFLIB_EXPORT DL_BlockData
     DL_BlockData(const std::string& bName, int bFlags,
                  double bbpx, double bbpy, double bbpz)
         : name(bName), flags(bFlags), bpx(bbpx), bpy(bbpy), bpz(bbpz)
-    {   
+    {
     }
 
     /** Block name. */
@@ -125,7 +126,7 @@ struct DXFLIB_EXPORT DL_LinetypeData
     double* pattern;
 
 private:
-    Q_DISABLE_COPY(DL_LinetypeData);
+    Q_DISABLE_COPY(DL_LinetypeData)
 };
 
 
@@ -331,7 +332,7 @@ struct DXFLIB_EXPORT DL_ArcData
                double aRadius,
                double aAngle1, double aAngle2)
         : cx(acx), cy(acy), cz(acz), radius(aRadius), angle1(aAngle1), angle2(aAngle2)
-    { 
+    {
     }
 
     /*! X Coordinate of center point. */
@@ -839,6 +840,8 @@ struct DXFLIB_EXPORT DL_TextData
     {
     }
 
+    virtual ~DL_TextData(){}
+
     /*! X Coordinate of insertion point. */
     double ipx;
     /*! Y Coordinate of insertion point. */
@@ -1043,7 +1046,7 @@ struct DXFLIB_EXPORT DL_DimAlignedData
                       double depx2, double depy2, double depz2)
         : epx1(depx1), epy1(depy1), epz1(depz1),
           epx2(depx2), epy2(depy2), epz2(depz2)
-    { 
+    {
     }
 
     /*! X Coordinate of Extension point 1. */
@@ -1704,7 +1707,7 @@ struct DXFLIB_EXPORT DL_ImageDefData
     DL_ImageDefData(const std::string& iref,
                     const std::string& ifile)
         : ref(iref), file(ifile)
-    {   
+    {
     }
 
     /*! Reference to the image file

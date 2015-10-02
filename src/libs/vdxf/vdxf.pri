@@ -16,7 +16,6 @@ HEADERS += \
     $$PWD/dxflib/dl_creationinterface.h \
     $$PWD/dxflib/dl_dxf.h \
     $$PWD/dxflib/dl_entities.h \
-    $$PWD/dxflib/dl_exception.h \
     $$PWD/dxflib/dl_extrusion.h \
     $$PWD/dxflib/dl_global.h \
     $$PWD/dxflib/dl_writer.h \

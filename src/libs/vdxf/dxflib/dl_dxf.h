@@ -457,7 +457,7 @@ public:
     }
 
 private:
-    Q_DISABLE_COPY(DL_Dxf);
+    Q_DISABLE_COPY(DL_Dxf)
     DL_Codes::version version;
 
     std::string polylineLayer;

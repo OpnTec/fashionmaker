@@ -33,8 +33,6 @@
 #include <string.h>
 
 #include "dl_writer_ascii.h"
-#include "dl_exception.h"
-
 
 /**
  * Closes the output file.
@@ -133,12 +131,6 @@ void DL_WriterA::dxfHex(int gc, int value) const
  */
 void DL_WriterA::dxfString(int gc, const char* value) const
 {
-    if (value==NULL)
-    {
-#ifndef __GCC2x__
-        //throw DL_NullStrExc();
-#endif
-    }
     m_ofile << (gc<10 ? "  " : (gc<100 ? " " : "")) << gc << "\n"
             << value << "\n";
 }
