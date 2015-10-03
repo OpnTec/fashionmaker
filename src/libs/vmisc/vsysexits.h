@@ -53,8 +53,8 @@ constexpr auto V_EX_OSERR = 71;         /*An operating system error has been det
                                         includes things like getuid returning a user that does not exist in the passwd
                                         file.*/
 
-constexpr auto V_EX_OSFILE = 72;        /*Some system file (e.g., /etc/passwd, /var/run/utmp, etc.) does not exist, cannot
-                                        be opened, or has some sort of error (e.g., syntax error).*/
+constexpr auto V_EX_OSFILE = 72;        /*Some system file (e.g., /etc/passwd, /var/run/utmp, etc.) does not exist,
+                                        cannot be opened, or has some sort of error (e.g., syntax error).*/
 
 constexpr auto  V_EX_CANTCREAT = 73;    /*A (user specified) output file cannot be created.*/
 
