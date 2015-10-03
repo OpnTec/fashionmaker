@@ -31,6 +31,11 @@
 
 #include <QObject>
 
+// Return codes for testing run application
+constexpr auto TST_EX_BIN = -1;      // Can't find binary.
+constexpr auto TST_EX_TIME_OUT = -2; // The operation timed out or an error occurred.
+constexpr auto TST_EX_CRASH = -3;    // Program crashed.
+
 class AbstractTest : public QObject
 {
     Q_OBJECT
@@ -43,7 +48,7 @@ protected:
     QString ValentinaPath() const;
     QString TapePath() const;
 
-    bool Run(bool showWarn, const QString &program, const QStringList &arguments);
+    bool Run(bool showWarn, int &exitCode, const QString &program, const QStringList &arguments);
     bool CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const;
 };
 

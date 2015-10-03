@@ -28,6 +28,7 @@
 
 #include "tmainwindow.h"
 #include "mapplication.h"
+#include "../vmisc/vsysexits.h"
 
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 
@@ -54,5 +55,5 @@ int main(int argc, char *argv[])
     }
     app.InitOptions();
     app.ParseCommandLine(app.arguments());
-    return app.IsTestMode() ? 0 : app.exec(); // single return point is always better than more
+    return app.IsTestMode() ? V_EX_OK : app.exec(); // single return point is always better than more
 }

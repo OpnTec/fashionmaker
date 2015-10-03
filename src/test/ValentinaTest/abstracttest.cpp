@@ -28,6 +28,7 @@
 
 #include "abstracttest.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/vsysexits.h"
 
 #include <QtTest>
 
@@ -72,18 +73,16 @@ QString AbstractTest::TapePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool AbstractTest::Run(bool showWarn, const QString &program, const QStringList &arguments)
+bool AbstractTest::Run(bool showWarn, int &exitCode, const QString &program, const QStringList &arguments)
 {
     const QString parameters = QString("Program: %1 \nArguments: %2.").arg(program).arg(arguments.join(", "));
 
     QFileInfo info(program);
     if (not info.exists())
     {
-        if (showWarn)
-        {
-            const QString msg = QString("Can't find binary.\n%1").arg(parameters);
-            QWARN(qUtf8Printable(msg));
-        }
+        const QString msg = QString("Can't find binary.\n%1").arg(parameters);
+        QWARN(qUtf8Printable(msg));
+        exitCode = TST_EX_BIN;
         return false;
     }
 
@@ -93,36 +92,33 @@ bool AbstractTest::Run(bool showWarn, const QString &program, const QStringList 
 
     if (not process->waitForFinished())// 30 sec
     {
-        if (showWarn)
-        {
-            const QString msg = QString("The operation timed out or an error occurred.\n%1").arg(parameters);
-            QWARN(qUtf8Printable(msg));
-        }
+        const QString msg = QString("The operation timed out or an error occurred.\n%1").arg(parameters);
+        QWARN(qUtf8Printable(msg));
+        exitCode = TST_EX_TIME_OUT;
         return false;
     }
 
     if (process->exitStatus() == QProcess::CrashExit)
     {
-        if (showWarn)
-        {
-            const QString msg = QString("Program crashed.\n%1\n%2").arg(parameters)
-                    .arg(QString(process->readAllStandardError()));
-            QWARN(qUtf8Printable(msg));
-        }
+        const QString msg = QString("Program crashed.\n%1\n%2").arg(parameters)
+                                                               .arg(QString(process->readAllStandardError()));
+        QWARN(qUtf8Printable(msg));
+        exitCode = TST_EX_CRASH;
         return false;
     }
 
-    if (process->exitCode() != 0)
+    if (process->exitCode() != V_EX_OK)
     {
         if (showWarn)
         {
-            const QString msg = QString("Failed.\n%1\n%2").arg(parameters)
-                    .arg(QString(process->readAllStandardError()));
+            const QString msg = QString("\n%1").arg(QString(process->readAllStandardError()));
             QWARN(qUtf8Printable(msg));
         }
+        exitCode = process->exitCode();
         return false;
     }
 
+    exitCode = process->exitCode();
     delete process;
     return true;
 }

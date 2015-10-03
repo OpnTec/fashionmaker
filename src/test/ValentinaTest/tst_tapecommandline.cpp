@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "tst_tapecommandline.h"
+#include "../vmisc/vsysexits.h"
 
 #include <QtTest>
 
@@ -59,9 +60,48 @@ void TST_TapeCommandLine::OpenMeasurements_data() const
 {
     QTest::addColumn<QString>("file");
     QTest::addColumn<bool>("result");
+    QTest::addColumn<int>("exitCode");
 
-    QTest::newRow("Send wrong path to file") << "wrongPath.vit" << false; // The file doesn't exist!
-    QTest::newRow("Old individual format to new version") << "keiko.vit" << true;
+    // The file doesn't exist!
+    QTest::newRow("Send wrong path to a file")                                     << "wrongPath.vit"
+                                                                                   << false
+                                                                                   << V_EX_NOINPUT;
+
+    QTest::newRow("Old individual format to new version")                          << "keiko.vit"
+                                                                                   << true
+                                                                                   << V_EX_OK;
+
+    QTest::newRow("Open empty file")                                               << "empty.vit"
+                                                                                   << true
+                                                                                   << V_EX_OK;
+
+    QTest::newRow("Open a individual measurement file with all know measurements") << "all_measurements.vit"
+                                                                                   << true
+                                                                                   << V_EX_OK;
+
+    QTest::newRow("Open a standard measurement file with all know measurements")   << "all_measurements.vst"
+                                                                                   << true
+                                                                                   << V_EX_OK;
+
+    QTest::newRow("Open a standard measurement file for man ru GOST.")             << "GOST_man_ru.vst"
+                                                                                   << true
+                                                                                   << V_EX_OK;
+
+    QTest::newRow("Broken file. Not unique name.")                                 << "broken1.vit"
+                                                                                   << false
+                                                                                   << V_EX_NOINPUT;
+
+    QTest::newRow("Broken file. Measurement name can't be empty.")                 << "broken1.vit"
+                                                                                   << false
+                                                                                   << V_EX_NOINPUT;
+
+    QTest::newRow("Broken file. An empty value shouldn't break a file.")           << "broken3.vit"
+                                                                                   << true
+                                                                                   << V_EX_OK;
+
+    QTest::newRow("Broken file. Invalid measurement name.")                        << "broken4.vit"
+                                                                                   << false
+                                                                                   << V_EX_NOINPUT;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -69,11 +109,14 @@ void TST_TapeCommandLine::OpenMeasurements()
 {
     QFETCH(QString, file);
     QFETCH(bool, result);
+    QFETCH(int, exitCode);
 
-    const bool res = Run(result, TapePath(), QStringList() << "--test"
+    int exit;
+    const bool res = Run(result, exit, TapePath(), QStringList() << "--test"
                     << QApplication::applicationDirPath() + QLatin1Char('/') + tmpTestFolder + QLatin1Char('/') + file);
 
     QCOMPARE(res, result);
+    QCOMPARE(exit, exitCode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.0</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1900-01-01</birth-date>
+        <sex>male</sex>
+        <email>username@example.com</email>
+    </personal>
+    <body-measurements>
+        <m name="" value="0"/>
+    </body-measurements>
+</vit>

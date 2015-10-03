@@ -182,7 +182,19 @@ INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
 
 TAPE_TEST_FILES += \
-    tst_tape/keiko.vit
+    tst_tape/keiko.vit \
+    tst_tape/empty.vit \
+    tst_tape/all_measurements.vit \
+    tst_tape/all_measurements.vst \
+    tst_tape/GOST_man_ru.vst \
+    tst_tape/broken1.vit \
+    tst_tape/broken2.vit \
+    tst_tape/broken3.vit \
+    tst_tape/broken4.vit
+
+# Compilation will fail without this files after we added them to this section.
+OTHER_FILES += \
+    $$TAPE_TEST_FILES
 
 for(DIR, TAPE_TEST_FILES) {
      #add these absolute paths to a variable which

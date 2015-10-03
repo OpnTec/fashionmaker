@@ -31,6 +31,8 @@
 
 #include <QTextStream>
 
+constexpr auto V_EX_OK = 0;             /*Indicate the successful exit.*/
+
 constexpr auto V_EX_USAGE = 64;         /*The command was used incorrectly, e.g., with the wrong number of arguments, a
                                         bad flag, a bad syntax in a parameter, or whatever.*/
 

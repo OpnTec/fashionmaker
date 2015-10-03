@@ -80,5 +80,5 @@ int main(int argc, char *argv[])
         }
     }
 
-    return (VApplication::CheckGUI()) ? app.exec() : 0; // single return point is always better than more
+    return (VApplication::CheckGUI()) ? app.exec() : V_EX_OK; // single return point is always better than more
 }
