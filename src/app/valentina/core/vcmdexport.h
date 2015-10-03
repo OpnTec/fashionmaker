@@ -20,6 +20,7 @@ typedef std::shared_ptr<VCommandLine> VCommandLinePtr;
 //QCommandLineParser* object must exists until this object alive
 class VCommandLine
 {
+    Q_DECLARE_TR_FUNCTIONS(VCommandLine)
 private:
     static VCommandLinePtr instance;
     QCommandLineParser parser;
@@ -41,9 +42,6 @@ protected:
 
     Cases OptGroup() const;
 
-    //@brief convinient shortcut to show error and help and exit
-    Q_NORETURN void Error(const QString& text) const;
-
     //@brief: called in destructor of application, so instance destroyed and new maybe created (never happen scenario though)
     static void Reset();
 
@@ -55,6 +53,9 @@ public:
     virtual ~VCommandLine();
 
     //@brief creates object and applies export related options to parser
+
+    //@brief tests if user enabled test mode from cmd, throws exception if not exactly 1 input VAL file supplied in case test mode enabled
+    bool IsTestModeEnabled() const;
 
     //@brief tests if user enabled export from cmd, throws exception if not exactly 1 input VAL file supplied in case export enabled
     bool IsExportEnabled() const;

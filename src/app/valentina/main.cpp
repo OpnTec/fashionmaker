@@ -66,17 +66,28 @@ int main(int argc, char *argv[])
         w.show();
         w.ReopenFilesAfterCrash(args);
     }
+    else
+    {
+        if (args.size() != 1)
+        {
+            qCritical() << QCoreApplication::translate("vmain", "Please, provide one input file.");
+            std::exit(V_EX_NOINPUT);
+        }
+    }
 
-    for (size_t i=0, sz = args.size(); i < sz;++i)
+    for (int i=0, sz = args.size(); i < sz; ++i)
     {
         const bool loaded = w.LoadPattern(args.at(static_cast<int>(i)), app.CommandLine()->OptMeasurePath());
-        if (app.CommandLine()->IsExportEnabled())
+        if (not app.CommandLine()->IsTestModeEnabled())
         {
-            if (loaded)
+            if (app.CommandLine()->IsExportEnabled())
             {
-                w.DoExport(app.CommandLine());
+                if (loaded)
+                {
+                    w.DoExport(app.CommandLine());
+                }
+                break;
             }
-            break;
         }
     }
 

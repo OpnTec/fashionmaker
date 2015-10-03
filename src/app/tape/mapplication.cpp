@@ -499,31 +499,27 @@ void MApplication::RetranslateTables()
 void MApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
     QCommandLineParser parser;
-    parser.setApplicationDescription(QCoreApplication::translate("main", "Valentina's measurements editor."));
+    parser.setApplicationDescription(tr("Valentina's measurements editor."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addPositionalArgument("filename", QCoreApplication::translate("main", "The measurement file."));
+    parser.addPositionalArgument("filename", tr("The measurement file."));
     //-----
     QCommandLineOption heightOption(QStringList() << "e" << "height",
-    QCoreApplication::translate("main", "Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, "
-                                "152, 158, 164, 170, 176, 182 or 188 cm."),
-                                QCoreApplication::translate("main", "The base height"));
+    tr("Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or "
+       "188 cm."), tr("The base height"));
     parser.addOption(heightOption);
     //-----
     QCommandLineOption sizeOption(QStringList() << "s" << "size",
-    QCoreApplication::translate("main", "Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, "
-                                "48, 50, 52, 54 or 56 cm."),
-                                QCoreApplication::translate("main", "The base size"));
+            tr("Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm."),
+            tr("The base size"));
     parser.addOption(sizeOption);
     //-----
     QCommandLineOption unitOption(QStringList() << "u" << "unit",
-    QCoreApplication::translate("main", "Set pattern file unit: cm, mm, inch."),
-                                QCoreApplication::translate("main", "The pattern unit"));
+    tr("Set pattern file unit: cm, mm, inch."), tr("The pattern unit"));
     parser.addOption(unitOption);
     //-----
     QCommandLineOption testOption(QStringList() << "test",
-    QCoreApplication::translate("main", "Use for unit testing. Run the program and open a file without showing a "
-                                "window."));
+                                 tr("Use for unit testing. Run the program and open a file without showing a window."));
     parser.addOption(testOption);
     //-----
     parser.process(arguments);
@@ -548,9 +544,9 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         }
         else
         {
-            fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
-            "Error: Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, "
-            "164, 170, 176, 182 or 188 cm.")));
+            qCCritical(mApp, "%s\n",
+                    qPrintable(tr("Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, "
+                                  "140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.")));
             parser.showHelp(V_EX_USAGE);
         }
     }
@@ -568,9 +564,9 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         }
         else
         {
-            fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
-            "Error: Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, "
-            "52, 54 or 56 cm.")));
+            qCCritical(mApp, "%s\n",
+                    qPrintable(tr("Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, "
+                                  "42, 44, 46, 48, 50, 52, 54 or 56 cm.")));
             parser.showHelp(V_EX_USAGE);
         }
     }
@@ -591,8 +587,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         }
         else
         {
-            fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
-            "Error: Invalid base size argument. Must be cm, mm or inch.")));
+            qCCritical(mApp, "%s\n", qPrintable(tr("Invalid base size argument. Must be cm, mm or inch.")));
             parser.showHelp(V_EX_USAGE);
         }
     }
@@ -628,8 +623,8 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
                 QLocalServer::removeServer(serverName);
                 if (not localServer->listen(serverName))
                 {
-                    qCWarning(mApp, "Can't begin to listen for incoming connections on name '%s'",
-                              qUtf8Printable(serverName));
+                    qCWarning(mApp, "%s",
+                     qUtf8Printable(tr("Can't begin to listen for incoming connections on name '%1'").arg(serverName)));
                 }
             }
         }
@@ -642,8 +637,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     {
         if (testMode && args.count() > 1)
         {
-            fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
-            "Error: Test mode doesn't support openning several files.")));
+            qCCritical(mApp, "%s\n", qPrintable(tr("Test mode doesn't support openning several files.")));
             parser.showHelp(V_EX_USAGE);
         }
 
@@ -673,6 +667,11 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         if (not testMode)
         {
             NewMainWindow();
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
+            parser.showHelp(V_EX_USAGE);
         }
     }
 }

@@ -50,8 +50,8 @@ const static auto SINGLE_OPTION_GAPWIDTH     = QStringLiteral("G");
 const static auto LONG_OPTION_GROUPPING      = QStringLiteral("groups");
 const static auto SINGLE_OPTION_GROUPPING    = QStringLiteral("g");
 
-#define tr(A) QCoreApplication::translate("VCommandLine", (A))
-//---------------------------------------------------------------------------------------------------------------------
+const static auto LONG_OPTION_TEST           = QStringLiteral("test");
+const static auto SINGLE_OPTION_TEST         = QStringLiteral("t");
 
 //such a tricky initialization is used, because it uses static functions which relay on static variables and order of
 //initialization is not defined between compiled units. i.e. - segv is possible (I hit it when
@@ -139,14 +139,20 @@ VCommandLine::VCommandLine() : parser()
                  {LONG_OPTION_GROUPPING,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_GROUPPING << LONG_OPTION_GROUPPING,
                                     tr("Sets layout groupping (export mode): ")
-                                    + DialogLayoutSettings::MakeGroupsHelp(), tr("Grouping type"), "2")}
+                                    + DialogLayoutSettings::MakeGroupsHelp(), tr("Grouping type"), "2")},
+
+                 {LONG_OPTION_TEST,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_TEST << LONG_OPTION_TEST,
+                                    tr("Run the program in a test mode. The program this mode load a single pattern "
+                                       "file and silently quit without showing the main window. The key have priority "
+                                       "before key '%1'.").arg(LONG_OPTION_OUTFILE))}
                  }),
     isGuiEnabled(false)
 {
-    parser.setApplicationDescription(QCoreApplication::translate("main", "Pattern making program."));
+    parser.setApplicationDescription(tr("Pattern making program."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addPositionalArgument("filename", QCoreApplication::translate("main", "Pattern file."));
+    parser.addPositionalArgument("filename", tr("Pattern file."));
 
     QMap<QString, QCommandLineOption *>::const_iterator i = optionsUsed.constBegin();
     while (i != optionsUsed.constEnd())
@@ -188,12 +194,14 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
         if ((a || b || c) && x)
         {
-            Error(tr("Cannot use pageformat and page explicit size/units together."));
+            qCritical() << tr("Cannot use pageformat and page explicit size/units together.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
 
         if ((a || b || c) && !(a && b && c))
         {
-            Error(tr("Page height, width, units must be used all 3 at once."));
+            qCritical() << tr("Page height, width, units must be used all 3 at once.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
 
     }
@@ -207,7 +215,8 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
 //        if ((a || b) && !(a && b))
 //        {
-//            Error(tr("Shift length must be used together with shift units."));
+//            qCritical() << tr("Shift length must be used together with shift units.") << "\n";
+//            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
 //        }
 //    }
 
@@ -218,14 +227,16 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     {
         if (!diag.SetIncrease(rotateDegree))
         {
-            Error(tr("Invalid rotation value. That must be one of predefined values."));
+            qCritical() << tr("Invalid rotation value. That must be one of predefined values.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
     }
 
     // if present units MUST be set before any other to keep conversions correct
     if (!diag.SelectTemplate(OptPaperSize()))
     {
-        Error(tr("Unknown page templated selected."));
+        qCritical() << tr("Unknown page templated selected.") << "\n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
 
     if (parser.isSet(*optionsUsed.value(LONG_OPTION_PAGEH))) //at this point we already sure 3 are set or none
@@ -233,7 +244,8 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
         if (!diag.SelectPaperUnit(parser.value(*optionsUsed.value(LONG_OPTION_PAGEUNITS))))
         {
-            Error(tr("Unsupported paper units."));
+            qCritical() << tr("Unsupported paper units.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
 
         diag.SetPaperHeight (Pg2Px(parser.value(*optionsUsed.value(LONG_OPTION_PAGEH)), diag));
@@ -244,7 +256,8 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     {
         if (!diag.SelectLayoutUnit(parser.value(*optionsUsed.value(LONG_OPTION_SHIFTUNITS))))
         {
-            Error(tr("Unsupported layout units."));
+            qCritical() << tr("Unsupported layout units.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
     }
 
@@ -281,7 +294,7 @@ VCommandLinePtr VCommandLine::Get(const QCoreApplication& app)
     instance->parser.process(app);
 
     //fixme: in case of additional options/modes which will need to disable GUI - add it here too
-    instance->isGuiEnabled = !instance->IsExportEnabled();
+    instance->isGuiEnabled = not (instance->IsExportEnabled() || instance->IsTestModeEnabled());
 
     return instance;
 }
@@ -294,25 +307,31 @@ VCommandLine::~VCommandLine()
 }
 
 //------------------------------------------------------------------------------------------------------
-Q_NORETURN void VCommandLine::Error(const QString &text) const
-{
-    vStdErr() << text << "\n";
-    const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-}
-
-//------------------------------------------------------------------------------------------------------
 void VCommandLine::Reset()
 {
     instance.reset();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommandLine::IsTestModeEnabled() const
+{
+    const bool r = parser.isSet(*optionsUsed.value(LONG_OPTION_TEST));
+    if (r && parser.positionalArguments().size() != 1)
+    {
+        qCritical() << tr("Test option can be used with single input file only.") << "/n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+    }
+    return r;
+}
+
 //------------------------------------------------------------------------------------------------------
 bool VCommandLine::IsExportEnabled() const
 {
-    bool r = parser.isSet(*optionsUsed.value(LONG_OPTION_OUTFILE));
+    const bool r = parser.isSet(*optionsUsed.value(LONG_OPTION_OUTFILE));
     if (r && parser.positionalArguments().size() != 1)
     {
-        Error(tr("Export options can be used with single input file only."));
+        qCritical() << tr("Export options can be used with single input file only.") << "/n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
     return r;
 }
@@ -399,5 +418,3 @@ bool VCommandLine::IsGuiEnabled() const
 {
     return isGuiEnabled;
 }
-
-#undef tr
