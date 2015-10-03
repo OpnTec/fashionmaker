@@ -3723,6 +3723,66 @@
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Valentina&apos;s measurements editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurement file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set pattern file unit: cm, mm, inch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The pattern unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use for unit testing. Run the program and open a file without showing a window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base size argument. Must be cm, mm or inch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test mode doesn&apos;t support openning several files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide one input file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -8870,6 +8930,14 @@ Do you want to save your changes?</source>
         <source>Export options can be used with single input file only.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test option can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
@@ -9580,63 +9648,11 @@ Do you want to save your changes?</source>
     <name>main</name>
     <message>
         <source>Pattern making program.</source>
-        <translation>Pattern making program.</translation>
+        <translation type="vanished">Pattern making program.</translation>
     </message>
     <message>
         <source>Pattern file.</source>
-        <translation>Pattern file.</translation>
-    </message>
-    <message>
-        <source>Valentina&apos;s measurements editor.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The measurement file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The base height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The base size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set pattern file unit: cm, mm, inch.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The pattern unit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error: Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error: Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error: Invalid base size argument. Must be cm, mm or inch.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use for unit testing. Run the program and open a file without showing a window.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error: Test mode doesn&apos;t support openning several files.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Pattern file.</translation>
     </message>
 </context>
 <context>
@@ -9675,6 +9691,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>vmain</name>
+    <message>
+        <source>Please, provide one input file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
