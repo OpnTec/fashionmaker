@@ -581,7 +581,7 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
             fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
             "Error: Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, "
             "164, 170, 176, 182 or 188 cm.")));
-            parser.showHelp(1);
+            parser.showHelp(V_EX_USAGE);
         }
     }
     }
@@ -601,7 +601,7 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
             fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
             "Error: Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, "
             "52, 54 or 56 cm.")));
-            parser.showHelp(1);
+            parser.showHelp(V_EX_USAGE);
         }
     }
     }
@@ -623,7 +623,7 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
         {
             fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
             "Error: Invalid base size argument. Must be cm, mm or inch.")));
-            parser.showHelp(1);
+            parser.showHelp(V_EX_USAGE);
         }
     }
     }
@@ -642,7 +642,7 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
         {
             fprintf(stderr, "%s\n", qPrintable(QCoreApplication::translate("main",
             "Error: Test mode doesn't support openning several files.")));
-            parser.showHelp(1);
+            parser.showHelp(V_EX_USAGE);
         }
 
         for (int i = 0; i < args.size(); ++i)

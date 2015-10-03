@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     MApplication app(argc, argv);
     if (not app.IsTheOnly())
     {
-        return 0;
+        return V_EX_OK;
     }
     app.InitOptions();
     app.ParseCommandLine(app.arguments());
