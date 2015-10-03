@@ -730,7 +730,7 @@ void VApplication::GatherLogs() const
                 }
                 else
                 {
-                    qCDebug(vApp, "Failed to lock %s", qUtf8Printable(info.absoluteFilePath())));
+                    qCDebug(vApp, "Failed to lock %s", qUtf8Printable(info.absoluteFilePath()));
                 }
             }
         }
