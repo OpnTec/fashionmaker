@@ -198,30 +198,6 @@ MApplication::MApplication(int &argc, char **argv)
     // Setting the Application version
     setApplicationVersion(APP_VERSION_STR);
     setWindowIcon(QIcon(":/tapeicon/64x64/logo.png"));
-
-    const QString serverName = QCoreApplication::applicationName();
-    QLocalSocket socket;
-    socket.connectToServer(serverName);
-    if (socket.waitForConnected(500))
-    {
-        QTextStream stream(&socket);
-        stream << QCoreApplication::arguments().join(";;");
-        stream.flush();
-        socket.waitForBytesWritten();
-        return;
-    }
-
-    localServer = new QLocalServer(this);
-    connect(localServer, &QLocalServer::newConnection, this, &MApplication::NewLocalSocketConnection);
-    if (!localServer->listen(serverName))
-    {
-        if (localServer->serverError() == QAbstractSocket::AddressInUseError
-                && QFile::exists(localServer->serverName()))
-        {
-            QFile::remove(localServer->serverName());
-            localServer->listen(serverName);
-        }
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -312,12 +288,6 @@ bool MApplication::IsTestMode() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MApplication::IsTheOnly() const
-{
-    return (localServer != 0);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 TMainWindow *MApplication::MainWindow()
 {
     Clean();
@@ -347,12 +317,12 @@ void MApplication::InitOptions()
 
     OpenSettings();
 
-    qDebug()<<"Version:"<<APP_VERSION_STR;
-    qDebug()<<"Build revision:"<<BUILD_REVISION;
-    qDebug()<<buildCompatibilityString();
-    qDebug()<<"Built on"<<__DATE__<<"at"<<__TIME__;
-    qDebug()<<"Command-line arguments:"<<this->arguments();
-    qDebug()<<"Process ID:"<<this->applicationPid();
+    qCDebug(mApp, "Version: %s", qUtf8Printable(APP_VERSION_STR));
+    qCDebug(mApp, "Build revision: %s", BUILD_REVISION);
+    qCDebug(mApp, "%s", qUtf8Printable(buildCompatibilityString()));
+    qCDebug(mApp, "Built on %s at %s", __DATE__, __TIME__);
+    qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(this->arguments().join(", ")));
+    qCDebug(mApp, "Process ID: %s", qUtf8Printable(QString().setNum(this->applicationPid())));
 
     LoadTranslation(QLocale::system().name());// By default the console version uses system locale
 
@@ -526,7 +496,7 @@ void MApplication::RetranslateTables()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::ParseCommandLine(const QStringList &arguments)
+void MApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
     QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::translate("main", "Valentina's measurements editor."));
@@ -630,8 +600,40 @@ void MApplication::ParseCommandLine(const QStringList &arguments)
 
     testMode = parser.isSet(testOption);
 
-    if (not testMode)
+    if (not testMode && connection == SocketConnection::Client)
     {
+        const QString serverName = QCoreApplication::applicationName();
+        QLocalSocket socket;
+        socket.connectToServer(serverName);
+        if (socket.waitForConnected(1000))
+        {
+            qCDebug(mApp, "Connected to the server '%s'", qUtf8Printable(serverName));
+            QTextStream stream(&socket);
+            stream << QCoreApplication::arguments().join(";;");
+            stream.flush();
+            socket.waitForBytesWritten();
+            std::exit(V_EX_OK);
+        }
+
+        qCDebug(mApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
+
+        localServer = new QLocalServer(this);
+        connect(localServer, &QLocalServer::newConnection, this, &MApplication::NewLocalSocketConnection);
+        if (not localServer->listen(serverName))
+        {
+            qCDebug(mApp, "Can't begin to listen for incoming connections on name '%s'",
+                    qUtf8Printable(serverName));
+            if (localServer->serverError() == QAbstractSocket::AddressInUseError)
+            {
+                QLocalServer::removeServer(serverName);
+                if (not localServer->listen(serverName))
+                {
+                    qCWarning(mApp, "Can't begin to listen for incoming connections on name '%s'",
+                              qUtf8Printable(serverName));
+                }
+            }
+        }
+
         LoadTranslation(TapeSettings()->GetLocale());
     }
 
@@ -732,7 +734,7 @@ void MApplication::NewLocalSocketConnection()
     const QString arg = stream.readAll();
     if (not arg.isEmpty())
     {
-        ParseCommandLine(arg.split(";;"));
+        ParseCommandLine(SocketConnection::Server, arg.split(";;"));
     }
     delete socket;
     MainWindow()->raise();

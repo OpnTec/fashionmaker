@@ -49,11 +49,7 @@ int main(int argc, char *argv[])
     qt_qhash_seed.store(0); // Lock producing random attribute order in XML
 
     MApplication app(argc, argv);
-    if (not app.IsTheOnly())
-    {
-        return V_EX_OK;
-    }
     app.InitOptions();
-    app.ParseCommandLine(app.arguments());
+    app.ParseCommandLine(SocketConnection::Client, app.arguments());
     return app.IsTestMode() ? V_EX_OK : app.exec(); // single return point is always better than more
 }

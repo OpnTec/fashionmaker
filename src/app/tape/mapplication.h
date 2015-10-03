@@ -44,6 +44,8 @@ class QLocalServer;
 #endif
 #define qApp (static_cast<MApplication*>(VAbstractApplication::instance()))
 
+enum class SocketConnection : bool {Client = false, Server = true};
+
 class MApplication : public VAbstractApplication
 {
     Q_OBJECT
@@ -55,7 +57,6 @@ public:
     virtual bool notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
 
     bool IsTestMode() const;
-    bool IsTheOnly() const;
     TMainWindow *MainWindow();
     QList<TMainWindow*> MainWindows();
 
@@ -77,7 +78,7 @@ public:
     void RetranslateGroups();
     void RetranslateTables();
 
-    void ParseCommandLine(const QStringList &arguments);
+    void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
 
 public slots:
     TMainWindow *NewMainWindow();
