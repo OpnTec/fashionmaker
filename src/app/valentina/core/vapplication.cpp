@@ -580,22 +580,6 @@ QStringList VApplication::LabelLanguages()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::StartLogging()
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    // Qt < 5.2 didn't feature categorized logging
-    // Do nothing
-#else
-    // In Qt 5.2 need manualy enable debug information for categories. This work
-    // because Qt doesn't provide debug information for categories itself. And in this
-    // case will show our messages. Another situation with Qt 5.3 that has many debug
-    // messages itself. We don't need this information and can turn on later if need.
-    // But here Qt already show our debug messages without enabling.
-    QLoggingCategory::setFilterRules("*.debug=true\n");
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-
     CreateLogDir();
     BeginLogging();
     ClearOldLogs();
