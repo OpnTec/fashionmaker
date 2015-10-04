@@ -55,7 +55,7 @@ QString AbstractTest::ValentinaPath() const
 {
     const QString path = QStringLiteral("/../../../app/valentina/bin/valentina");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + path + QStringLiteral(".exe");
+    return QApplication::applicationDirPath() + path + QLatin1Literal(".exe");
 #else
     return QApplication::applicationDirPath() + path;
 #endif
@@ -66,14 +66,14 @@ QString AbstractTest::TapePath() const
 {
     const QString path = QStringLiteral("/../../../app/tape/bin/tape");
 #ifdef Q_OS_WIN
-    return QApplication::applicationDirPath() + path + QStringLiteral(".exe");
+    return QApplication::applicationDirPath() + path + QLatin1Literal(".exe");
 #else
     return QApplication::applicationDirPath() + path;
 #endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool AbstractTest::Run(bool showWarn, int &exitCode, const QString &program, const QStringList &arguments)
+bool AbstractTest::Run(bool showWarn, int &exitCode, const QString &program, const QStringList &arguments, int msecs)
 {
     const QString parameters = QString("Program: %1 \nArguments: %2.").arg(program).arg(arguments.join(", "));
 
@@ -90,7 +90,7 @@ bool AbstractTest::Run(bool showWarn, int &exitCode, const QString &program, con
     process->setWorkingDirectory(info.absoluteDir().absolutePath());
     process->start(program, arguments);
 
-    if (not process->waitForFinished())// 30 sec
+    if (not process->waitForFinished(msecs))
     {
         const QString msg = QString("The operation timed out or an error occurred.\n%1").arg(parameters);
         QWARN(qUtf8Printable(msg));

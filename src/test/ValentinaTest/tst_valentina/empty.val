@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.2.0</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point type="single" x="0.926042" y="1.05833" id="1" name="A" mx="0.132292" my="0.264583"/>
+        </calculation>
+        <modeling/>
+        <details/>
+    </draw>
+</pattern>

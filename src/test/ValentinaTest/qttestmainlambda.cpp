@@ -36,6 +36,7 @@
 #include "tst_varc.h"
 #include "tst_measurementregexp.h"
 #include "tst_tapecommandline.h"
+#include "tst_valentinacommandline.h"
 
 int main(int argc, char** argv)
 {
@@ -56,6 +57,7 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_VArc());
     ASSERT_TEST(new TST_MeasurementRegExp());
     ASSERT_TEST(new TST_TapeCommandLine());
+    ASSERT_TEST(new TST_ValentinaCommandLine());
 
     return status;
 }

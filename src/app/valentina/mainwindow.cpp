@@ -3133,7 +3133,14 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         {
             qCCritical(vMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
             Clear();
-            return false;
+            if (VApplication::CheckGUI())
+            {
+                return false;
+            }
+            else
+            {
+                std::exit(V_EX_NOINPUT);
+            }
         }
     }
 
@@ -3189,7 +3196,14 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         Clear();
-        return false;
+        if (VApplication::CheckGUI())
+        {
+            return false;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
 
 #ifdef Q_OS_WIN32

@@ -44,7 +44,8 @@ SOURCES += \
     tst_varc.cpp \
     stable.cpp \
     tst_measurementregexp.cpp \
-    tst_tapecommandline.cpp
+    tst_tapecommandline.cpp \
+    tst_valentinacommandline.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -56,7 +57,8 @@ HEADERS += \
     tst_varc.h \
     stable.h \
     tst_measurementregexp.h \
-    tst_tapecommandline.h
+    tst_tapecommandline.h \
+    tst_valentinacommandline.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
@@ -192,9 +194,14 @@ TAPE_TEST_FILES += \
     tst_tape/broken3.vit \
     tst_tape/broken4.vit
 
+VALENTINA_TEST_FILES += \
+    tst_valentina/empty.val \
+    tst_valentina/issue_372.val
+
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \
-    $$TAPE_TEST_FILES
+    $$TAPE_TEST_FILES \
+    $$VALENTINA_TEST_FILES
 
 for(DIR, TAPE_TEST_FILES) {
      #add these absolute paths to a variable which
@@ -203,3 +210,11 @@ for(DIR, TAPE_TEST_FILES) {
 }
 
 copyToDestdir($$tape_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_tape))
+
+for(DIR, VALENTINA_TEST_FILES) {
+     #add these absolute paths to a variable which
+     #ends up as 'mkcommands = path1 path2 path3 ...'
+     valentina_path += $${PWD}/$$DIR
+}
+
+copyToDestdir($$valentina_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_valentina))

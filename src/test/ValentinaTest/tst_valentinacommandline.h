@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   abstracttest.h
+ **  @file   tst_valentinacommandline.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 5, 2015
+ **  @date   4 10, 2015
  **
  **  @brief
  **  @copyright
@@ -26,30 +26,27 @@
  **
  *************************************************************************/
 
-#ifndef ABSTRACTTEST_H
-#define ABSTRACTTEST_H
+#ifndef TST_VALENTINACOMMANDLINE_H
+#define TST_VALENTINACOMMANDLINE_H
 
-#include <QObject>
+#include "abstracttest.h"
 
-// Return codes for testing run application
-constexpr auto TST_EX_BIN = -1;      // Can't find binary.
-constexpr auto TST_EX_TIME_OUT = -2; // The operation timed out or an error occurred.
-constexpr auto TST_EX_CRASH = -3;    // Program crashed.
-
-class AbstractTest : public QObject
+class TST_ValentinaCommandLine : public AbstractTest
 {
     Q_OBJECT
 public:
-    explicit AbstractTest(QObject *parent = 0);
+    TST_ValentinaCommandLine(QObject *parent = 0);
 
-protected:
-    void Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const;
+private slots:
+    void init();
+    void OpenPatterns_data() const;
+    void OpenPatterns();
+    void ExportMode_data() const;
+    void ExportMode();
+    void cleanup();
 
-    QString ValentinaPath() const;
-    QString TapePath() const;
-
-    bool Run(bool showWarn, int &exitCode, const QString &program, const QStringList &arguments, int msecs = 30000);
-    bool CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const;
+private:
+    Q_DISABLE_COPY(TST_ValentinaCommandLine)
 };
 
-#endif // ABSTRACTTEST_H
+#endif // TST_VALENTINACOMMANDLINE_H
