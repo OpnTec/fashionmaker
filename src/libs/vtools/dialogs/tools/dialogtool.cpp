@@ -535,7 +535,10 @@ bool DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &too
 void DialogTool::DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight)
 {
     SCASSERT(formula != nullptr);
-    SCASSERT(buttonGrowLength != nullptr)
+    SCASSERT(buttonGrowLength != nullptr);
+
+    const QTextCursor cursor = formula->textCursor();
+
     if (formula->height() < DIALOG_MAX_FORMULA_HEIGHT)
     {
         formula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
@@ -556,6 +559,9 @@ void DialogTool::DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowL
     setUpdatesEnabled(false);
     repaint();
     setUpdatesEnabled(true);
+
+    formula->setFocus();
+    formula->setTextCursor(cursor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

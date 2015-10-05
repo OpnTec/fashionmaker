@@ -638,7 +638,10 @@ void DialogIncrements::SaveIncrFormula()
 void DialogIncrements::DeployFormula()
 {
     SCASSERT(ui->plainTextEditFormula != nullptr);
-    SCASSERT(ui->pushButtonGrow != nullptr)
+    SCASSERT(ui->pushButtonGrow != nullptr);
+
+    const QTextCursor cursor = ui->plainTextEditFormula->textCursor();
+
     if (ui->plainTextEditFormula->height() < DIALOG_MAX_FORMULA_HEIGHT)
     {
         ui->plainTextEditFormula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
@@ -659,6 +662,9 @@ void DialogIncrements::DeployFormula()
     setUpdatesEnabled(false);
     repaint();
     setUpdatesEnabled(true);
+
+    ui->plainTextEditFormula->setFocus();
+    ui->plainTextEditFormula->setTextCursor(cursor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
