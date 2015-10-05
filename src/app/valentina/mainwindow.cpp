@@ -3654,8 +3654,8 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
     }
     PrepareDetailsForLayout(details);
     LayoutSettings(*settings.get());
-    DialogSaveLayout dialog(scenes.size(), expParams->OptExportPath(), this);
-    dialog.SetFullPath(expParams->OptExportPath());
+    DialogSaveLayout dialog(scenes.size(), expParams->OptBaseName(), this);
+    dialog.SetDestinationPath(expParams->OptDestinationPath());
     dialog.SelectFormate(expParams->OptExportType());
     ExportLayout(dialog);
 }

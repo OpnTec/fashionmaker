@@ -5,8 +5,11 @@
 
 VCommandLinePtr VCommandLine::instance = nullptr;
 
-const static auto LONG_OPTION_OUTFILE        = QStringLiteral("outfile");
-const static auto SINGLE_OPTION_OUTFILE      = QStringLiteral("o");
+const static auto LONG_OPTION_BASENAME       = QStringLiteral("basename");
+const static auto SINGLE_OPTION_BASENAME     = QStringLiteral("b");
+
+const static auto LONG_OPTION_DESTINATION    = QStringLiteral("destination");
+const static auto SINGLE_OPTION_DESTINATION  = QStringLiteral("d");
 
 const static auto LONG_OPTION_MEASUREFILE    = QStringLiteral("mfile");
 const static auto SINGLE_OPTION_MEASUREFILE  = QStringLiteral("m");
@@ -62,10 +65,16 @@ VCommandLine::VCommandLine() : parser()
                  //keep in mind order here - that is how user will see it, so group-up for usability
                  //===================================================================================
 
-                 {LONG_OPTION_OUTFILE,
-                 new QCommandLineOption(QStringList() << SINGLE_OPTION_OUTFILE << LONG_OPTION_OUTFILE,
-                                    tr("Path to output exported layout file. Use it to enable console export mode."),
-                                    tr("The exported layout file"))},
+                 {LONG_OPTION_BASENAME,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_BASENAME << LONG_OPTION_BASENAME,
+                                    tr("The base filename of exported layout files. Use it to enable console export "
+                                       "mode."),
+                                    tr("The base filename of layout files"))},
+
+                 {LONG_OPTION_DESTINATION,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_DESTINATION << LONG_OPTION_DESTINATION,
+                                    tr("The path to output destination folder."),
+                                    tr("The destination folder"))},
 
                  {LONG_OPTION_MEASUREFILE,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_MEASUREFILE << LONG_OPTION_MEASUREFILE,
@@ -87,18 +96,18 @@ VCommandLine::VCommandLine() : parser()
 
                  {LONG_OPTION_PAGEW,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEW << LONG_OPTION_PAGEW,
-                                    tr("Page width in current units like 12.0 (cannot be used with \"")
-                                    +LONG_OPTION_PAGETEMPLATE+tr("\", export mode)."), tr("The page width"))},
+                                    tr("Page width in current units like 12.0 (cannot be used with \"%1\", export "
+                                       "mode).").arg(LONG_OPTION_PAGETEMPLATE), tr("The page width"))},
 
                  {LONG_OPTION_PAGEH,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEH << LONG_OPTION_PAGEH,
-                                    tr("Page height in current units like 12.0 (cannot be used with \"")
-                                    +LONG_OPTION_PAGETEMPLATE+tr("\", export mode)."), ("The page height"))},
+                                    tr("Page height in current units like 12.0 (cannot be used with \"%1\", export "
+                                       "mode).").arg(LONG_OPTION_PAGETEMPLATE), ("The page height"))},
 
                  {LONG_OPTION_PAGEUNITS,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEUNITS << LONG_OPTION_PAGEUNITS,
-                                    tr("Page height/width measure units (cannot be used with \"")+
-                                    LONG_OPTION_PAGETEMPLATE+tr("\", export mode): ") + VDomDocument::UnitsHelpString(),
+                                    tr("Page height/width measure units (cannot be used with \"%1\", export mode): ")
+                                        .arg(LONG_OPTION_PAGETEMPLATE) + VDomDocument::UnitsHelpString(),
                                     tr("The measure unit"))},
 
                  //===================================================================================
@@ -145,7 +154,7 @@ VCommandLine::VCommandLine() : parser()
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_TEST << LONG_OPTION_TEST,
                                     tr("Run the program in a test mode. The program this mode load a single pattern "
                                        "file and silently quit without showing the main window. The key have priority "
-                                       "before key '%1'.").arg(LONG_OPTION_OUTFILE))}
+                                       "before key '%1'.").arg(LONG_OPTION_BASENAME))}
                  }),
     isGuiEnabled(false)
 {
@@ -327,7 +336,7 @@ bool VCommandLine::IsTestModeEnabled() const
 //------------------------------------------------------------------------------------------------------
 bool VCommandLine::IsExportEnabled() const
 {
-    const bool r = parser.isSet(*optionsUsed.value(LONG_OPTION_OUTFILE));
+    const bool r = parser.isSet(*optionsUsed.value(LONG_OPTION_BASENAME));
     if (r && parser.positionalArguments().size() != 1)
     {
         qCritical() << tr("Export options can be used with single input file only.") << "/n";
@@ -384,19 +393,31 @@ QString VCommandLine::OptMeasurePath() const
     return measure;
 }
 
-//------------------------------------------------------------------------------------------------------
-QString VCommandLine::OptExportPath() const
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptBaseName() const
 {
     QString path;
     if (IsExportEnabled())
     {
-        path = parser.value(*optionsUsed.value(LONG_OPTION_OUTFILE));
+        path = parser.value(*optionsUsed.value(LONG_OPTION_BASENAME));
     }
 
     return path;
 }
 
-//------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptDestinationPath() const
+{
+    QString path;
+    if (IsExportEnabled())
+    {
+        path = parser.value(*optionsUsed.value(LONG_OPTION_DESTINATION));
+    }
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VCommandLine::OptExportType() const
 {
     int r = 0;

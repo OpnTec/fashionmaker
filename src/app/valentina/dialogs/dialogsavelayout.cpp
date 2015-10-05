@@ -40,10 +40,13 @@
 
 using namespace nm_DialogSaveLayout;
 
+const QString baseFilenameRegExp = QStringLiteral("^[\\w\\-. ]+$");
+
 bool VFrmWithTest::havePdf = false;
 bool VFrmWithTest::tested  = false;
 
-const std::vector<VFrmWithTest> DialogSaveLayout::availFormats = {
+const std::vector<VFrmWithTest> DialogSaveLayout::availFormats =
+{
     VFrmWithTest(tr("Svg files (*.svg)"), ".svg"),
     VFrmWithTest(tr("PDF files (*.pdf)"), ".pdf"),
     VFrmWithTest(tr("Images (*.png)"), ".png"),
@@ -55,8 +58,7 @@ const std::vector<VFrmWithTest> DialogSaveLayout::availFormats = {
 
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName,
-                                   QWidget *parent)
+DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *parent)
     :QDialog(parent), ui(new Ui::DialogSaveLAyout), count(count)
 {
     ui->setupUi(this);
@@ -67,16 +69,33 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName,
     SCASSERT(bOk != nullptr);
     bOk->setEnabled(false);
 
-    QRegularExpressionValidator *validator = new QRegularExpressionValidator(QRegularExpression("^[\\w\\-. ]+$"), this);
+    QRegularExpressionValidator *validator = new QRegularExpressionValidator(QRegularExpression(baseFilenameRegExp),
+                                                                             this);
     ui->lineEditFileName->setValidator(validator);
-    ui->lineEditFileName->setText(fileName+"_");
+    const QString mask = fileName+QLatin1Literal("_");
+    if (VApplication::CheckGUI())
+    {
+        ui->lineEditFileName->setText(mask);
+    }
+    else
+    {
+        if (QRegularExpression(baseFilenameRegExp).match(mask).hasMatch())
+        {
+            ui->lineEditFileName->setText(mask);
+        }
+        else
+        {
+            qCritical() << tr("The base filename has not match regular expression.");
+            std::exit(V_EX_USAGE);
+        }
+    }
 
     foreach (auto& v , availFormats)
     {
-            if (v.test())
-            {
-                ui->comboBoxFormat->addItem(v.pair.first, QVariant(v.pair.second));
-            }
+        if (v.test())
+        {
+            ui->comboBoxFormat->addItem(v.pair.first, QVariant(v.pair.second));
+        }
     }
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
@@ -126,17 +145,30 @@ QString DialogSaveLayout::MakeHelpFormatList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::SetFullPath(const QString &cmdFileName)
+void DialogSaveLayout::SetDestinationPath(const QString &cmdDestinationPath)
 {
-    QFileInfo fn(cmdFileName);
-    fn.makeAbsolute();
-    auto p = fn.dir().absolutePath();
-    auto n = fn.fileName()+"_";
-    QTextStream sout(stdout);
+    QString path;
+    if (cmdDestinationPath.isEmpty())
+    {
+        path = QDir::currentPath();
+    }
+    else if (QDir(cmdDestinationPath).isAbsolute())
+    {
+        path = cmdDestinationPath;
+    }
+    else
+    {
+        QDir dir;
+        if (not dir.cd(cmdDestinationPath))
+        {
+            qCritical() << tr("The destination directory doesn't exists or is not readable.");
+            std::exit(V_EX_DATAERR);
+        }
+        path = dir.absolutePath();
+    }
 
-    sout << tr("Output full path: ") << fn.filePath() << "\n";
-    ui->lineEditPath->setText(p);
-    ui->lineEditFileName->setText(n);
+    qDebug() << "Output full path: " << path << "\n";
+    ui->lineEditPath->setText(path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

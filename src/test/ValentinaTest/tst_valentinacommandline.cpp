@@ -98,8 +98,10 @@ void TST_ValentinaCommandLine::ExportMode_data() const
     QTest::addColumn<bool>("result");
     QTest::addColumn<int>("exitCode");
 
+    const QString tmp = QApplication::applicationDirPath() + QLatin1Char('/') + tmpTestFolder;
+
     QTest::newRow("Issue #372")<< "issue_372.val"
-                               << "-p;;0;;-o;;output"
+                               << QString("-p;;0;;-d;;%1;;-b;;output").arg(tmp)
                                << true
                                << V_EX_OK;
 }

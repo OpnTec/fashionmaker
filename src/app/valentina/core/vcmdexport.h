@@ -63,8 +63,11 @@ public:
     //@brief returns path to custom measure file or empty string
     QString OptMeasurePath() const;
 
-    //@brief returns export path or empty string if not set
-    QString OptExportPath() const;
+    //@brief returns the base name of layout files or empty string if not set
+    QString OptBaseName() const;
+
+    //@brief returns the absolute path to output destination directory or path to application's current directory if not set
+    QString OptDestinationPath() const;
 
     //@brief returns export type set, defaults 0 - svg
     int OptExportType() const;
