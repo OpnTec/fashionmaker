@@ -350,7 +350,7 @@ QString MainWindow::AbsoluteMPath(const QString &patternPath, const QString &rel
     }
     else
     {
-        if (QFileInfo(relativeMPath).isAbsolute())
+        if (relativeMPath.isEmpty() || QFileInfo(relativeMPath).isAbsolute())
         {
             return relativeMPath;
         }
