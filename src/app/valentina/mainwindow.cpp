@@ -289,7 +289,14 @@ bool MainWindow::LoadMeasurements(const QString &path)
             {
                 qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Wrong units.")),
                           qUtf8Printable(tr("Application doesn't support standard table with inches.")));
-                return false;
+                if (VApplication::CheckGUI())
+                {
+                    return false;
+                }
+                else
+                {
+                    std::exit(V_EX_DATAERR);
+                }
             }
             m->SetDataSize();
             m->SetDataHeight();
@@ -306,7 +313,14 @@ bool MainWindow::LoadMeasurements(const QString &path)
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         delete m;
-        return false;
+        if (VApplication::CheckGUI())
+        {
+            return false;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     return true;
 }
@@ -2126,41 +2140,83 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (const VExceptionConversionError &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (const VExceptionEmptyParameter &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (const VExceptionWrongId &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (VException &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (const std::bad_alloc &)
     {
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
         SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
 
     QString patternPiece = QString();
@@ -2200,14 +2256,28 @@ void MainWindow::GlobalChangePP(const QString &patternPiece)
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Bad id.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (const VExceptionEmptyParameter &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
 }
 
@@ -3174,13 +3244,31 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
             if (path.isEmpty())
             {
                 Clear();
-                return false;
+                qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
+                                                             .arg(path)));
+                if (VApplication::CheckGUI())
+                {
+                    return false;
+                }
+                else
+                {
+                    std::exit(V_EX_NOINPUT);
+                }
             }
 
             if (not LoadMeasurements(path))
             {
+                qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
+                                                             .arg(path)));
                 Clear();
-                return false;
+                if (VApplication::CheckGUI())
+                {
+                    return false;
+                }
+                else
+                {
+                    std::exit(V_EX_NOINPUT);
+                }
             }
             else
             {
@@ -3378,116 +3466,117 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
     {
         if (!qApp->CheckGUI())
         {
-            vStdErr() << tr("The measurements file \"") << path << tr("\" could not be found.\n");
-            return QString();
-        }
-
-        QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> %3").arg(path)
-                .arg(tr("could not be found. Do you want to update the file location"));
-        QMessageBox::StandardButton res = QMessageBox::question(this, "Loading measurements file", text,
-                                                                QMessageBox::Yes | QMessageBox::No,
-                                                                QMessageBox::Yes);
-        if (res == QMessageBox::No)
-        {
-            return QString();
+            return QString();// console mode doesn't support fixing path to a measurement file
         }
         else
         {
-            MeasurementsType patternType;
-            if (table.suffix() == QLatin1String("vst"))
+            const QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> could not be found. Do you "
+                                    "want to update the file location").arg(path);
+            QMessageBox::StandardButton res = QMessageBox::question(this, tr("Loading measurements file"), text,
+                                                                    QMessageBox::Yes | QMessageBox::No,
+                                                                    QMessageBox::Yes);
+            if (res == QMessageBox::No)
             {
-                patternType = MeasurementsType::Standard;
-            }
-            else if (table.suffix() == QLatin1String("vit"))
-            {
-                patternType = MeasurementsType::Individual;
-            }
-            else
-            {
-                patternType = MeasurementsType::Unknown;
-            }
-
-            QString mPath;
-            if (patternType == MeasurementsType::Standard)
-            {
-                const QString filter = tr("Standard measurements (*.vst)");
-                //Use standard path to standard measurements
-                const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
-                mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
-            }
-            else if (patternType == MeasurementsType::Individual)
-            {
-                const QString filter = tr("Individual measurements (*.vit)");
-                //Use standard path to individual measurements
-                const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
-                mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+                return QString();
             }
             else
             {
-                const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
-                //Use standard path to individual measurements
-                const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
-                mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
-            }
-
-            if (mPath.isEmpty())
-            {
-                return mPath;
-            }
-            else
-            {
-                VMeasurements *m = new VMeasurements(pattern);
-                m->setXMLContent(mPath);
-
-                patternType = m->Type();
-
-                if (patternType == MeasurementsType::Unknown)
+                MeasurementsType patternType;
+                if (table.suffix() == QLatin1String("vst"))
                 {
-                    VException e(tr("Measurement file has unknown format."));
-                    throw e;
+                    patternType = MeasurementsType::Standard;
                 }
-
-                if (patternType == MeasurementsType::Standard)
+                else if (table.suffix() == QLatin1String("vit"))
                 {
-                    VVSTConverter converter(mPath);
-                    converter.Convert();
-
-                    VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, mPath);
+                    patternType = MeasurementsType::Individual;
                 }
                 else
                 {
-                    VVITConverter converter(mPath);
-                    converter.Convert();
-
-                    VDomDocument::ValidateXML(VVITConverter::CurrentSchema, mPath);
+                    patternType = MeasurementsType::Unknown;
                 }
 
-                m->setXMLContent(mPath);// Read again after conversion
-
-                if (not m->IsDefinedKnownNamesValid())
+                QString mPath;
+                if (patternType == MeasurementsType::Standard)
                 {
-                    VException e(tr("Measurement file contains invalid known measurement(s)."));
-                    throw e;
+                    const QString filter = tr("Standard measurements (*.vst)");
+                    //Use standard path to standard measurements
+                    const QString path = qApp->ValentinaSettings()->GetPathStandardMeasurements();
+                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
                 }
-
-                const QStringList mList = m->ListAll();
-                const QStringList pList = doc->ListMeasurements();
-
-                delete m;
-
-                const QSet<QString> match = pList.toSet().subtract(mList.toSet());
-                if (not match.isEmpty())
+                else if (patternType == MeasurementsType::Individual)
                 {
-                    VException e(tr("Measurement file doesn't include all required measurements."));
-                    e.AddMoreInformation(tr("Please, additionaly provide: %1")
-                                         .arg(QStringList(match.toList()).join(", ")));
-                    throw e;
+                    const QString filter = tr("Individual measurements (*.vit)");
+                    //Use standard path to individual measurements
+                    const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
+                }
+                else
+                {
+                    const QString filter = tr("Individual measurements (*.vit);;Standard measurements (*.vst)");
+                    //Use standard path to individual measurements
+                    const QString path = qApp->ValentinaSettings()->GetPathIndividualMeasurements();
+                    mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter);
                 }
 
-                doc->SetPath(RelativeMPath(patternPath, mPath));
-                PatternWasModified(false);
-                qApp->setPatternType(patternType);
-                return mPath;
+                if (mPath.isEmpty())
+                {
+                    return mPath;
+                }
+                else
+                {
+                    VMeasurements *m = new VMeasurements(pattern);
+                    m->setXMLContent(mPath);
+
+                    patternType = m->Type();
+
+                    if (patternType == MeasurementsType::Unknown)
+                    {
+                        VException e(tr("Measurement file has unknown format."));
+                        throw e;
+                    }
+
+                    if (patternType == MeasurementsType::Standard)
+                    {
+                        VVSTConverter converter(mPath);
+                        converter.Convert();
+
+                        VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, mPath);
+                    }
+                    else
+                    {
+                        VVITConverter converter(mPath);
+                        converter.Convert();
+
+                        VDomDocument::ValidateXML(VVITConverter::CurrentSchema, mPath);
+                    }
+
+                    m->setXMLContent(mPath);// Read again after conversion
+
+                    if (not m->IsDefinedKnownNamesValid())
+                    {
+                        VException e(tr("Measurement file contains invalid known measurement(s)."));
+                        throw e;
+                    }
+
+                    const QStringList mList = m->ListAll();
+                    const QStringList pList = doc->ListMeasurements();
+
+                    delete m;
+
+                    const QSet<QString> match = pList.toSet().subtract(mList.toSet());
+                    if (not match.isEmpty())
+                    {
+                        VException e(tr("Measurement file doesn't include all required measurements."));
+                        e.AddMoreInformation(tr("Please, additionaly provide: %1")
+                                             .arg(QStringList(match.toList()).join(", ")));
+                        throw e;
+                    }
+
+                    doc->SetPath(RelativeMPath(patternPath, mPath));
+                    PatternWasModified(false);
+                    qApp->setPatternType(patternType);
+                    return mPath;
+                }
             }
         }
     }
