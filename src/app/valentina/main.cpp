@@ -78,6 +78,20 @@ int main(int argc, char *argv[])
     for (int i=0, sz = args.size(); i < sz; ++i)
     {
         const bool loaded = w.LoadPattern(args.at(static_cast<int>(i)), app.CommandLine()->OptMeasurePath());
+
+        if (app.CommandLine()->IsTestModeEnabled() || app.CommandLine()->IsExportEnabled())
+        {
+            if (app.CommandLine()->IsSetGradationSize())
+            {
+                w.SetSize(app.CommandLine()->OptGradationSize());
+            }
+
+            if (app.CommandLine()->IsSetGradationHeight())
+            {
+                w.SetHeight(app.CommandLine()->OptGradationHeight());
+            }
+        }
+
         if (not app.CommandLine()->IsTestModeEnabled())
         {
             if (app.CommandLine()->IsExportEnabled())

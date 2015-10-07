@@ -80,6 +80,12 @@ public:
     QStringList OptInputFileNames() const;
 
     bool IsGuiEnabled()const;
+
+    bool IsSetGradationSize() const;
+    bool IsSetGradationHeight() const;
+
+    QString OptGradationSize() const;
+    QString OptGradationHeight() const;
 };
 
 #endif // VCMDEXPORT_H

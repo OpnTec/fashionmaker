@@ -71,6 +71,8 @@ public:
     static QStringList ListSizes(QMap<GSizes, bool> sizes, Unit patternUnit);
     static QStringList WholeListHeights(Unit patternUnit);
     static QStringList WholeListSizes(Unit patternUnit);
+    static bool IsGradationSizeValid(const QString &size);
+    static bool IsGradationHeightValid(const QString &height);
 private:
     QSharedDataPointer<VMeasurementData> d;
 

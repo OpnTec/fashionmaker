@@ -2,6 +2,7 @@
 #include "dialogs/dialoglayoutsettings.h"
 #include "dialogs/dialogsavelayout.h"
 #include "xml/vdomdocument.h"
+#include "../vformat/vmeasurements.h"
 
 VCommandLinePtr VCommandLine::instance = nullptr;
 
@@ -56,6 +57,12 @@ const static auto SINGLE_OPTION_GROUPPING    = QStringLiteral("g");
 const static auto LONG_OPTION_TEST           = QStringLiteral("test");
 const static auto SINGLE_OPTION_TEST         = QStringLiteral("t");
 
+const static auto LONG_OPTION_GRADATIONSIZE   = QStringLiteral("gsize");
+const static auto SINGLE_OPTION_GRADATIONSIZE = QStringLiteral("x");
+
+const static auto LONG_OPTION_GRADATIONHEIGHT   = QStringLiteral("gheight");
+const static auto SINGLE_OPTION_GRADATIONHEIGHT = QStringLiteral("t");
+
 //such a tricky initialization is used, because it uses static functions which relay on static variables and order of
 //initialization is not defined between compiled units. i.e. - segv is possible (I hit it when
 //VDomDocument::UnitsHelpString() was crashing because of not inited string vars).
@@ -85,6 +92,20 @@ VCommandLine::VCommandLine() : parser()
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_EXP2FORMAT << LONG_OPTION_EXP2FORMAT,
                                     tr("Number corresponding to output format (default = 0, export mode): ") +
                                     DialogSaveLayout::MakeHelpFormatList(), tr("Format number"), "0")},
+
+                 {LONG_OPTION_GRADATIONSIZE,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONSIZE << LONG_OPTION_GRADATIONSIZE,
+                                    tr("Set size value a pattern file, that was opened with standard measurements "
+                                       "(export mode). Valid values: %1cm.")
+                                        .arg(VMeasurement::WholeListSizes(Unit::Cm).join(", ")),
+                                    tr("The size value"))},
+
+                 {LONG_OPTION_GRADATIONHEIGHT,
+                 new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONHEIGHT << LONG_OPTION_GRADATIONHEIGHT,
+                                    tr("Set height value a pattern file, that was opened with standard measurements "
+                                       "(export mode). Valid values: %1cm.")
+                                        .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", ")),
+                                    tr("The height value"))},
 
                  //===================================================================================
 
@@ -438,4 +459,46 @@ QStringList VCommandLine::OptInputFileNames() const
 bool VCommandLine::IsGuiEnabled() const
 {
     return isGuiEnabled;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommandLine::IsSetGradationSize() const
+{
+    return parser.isSet(*optionsUsed.value(LONG_OPTION_GRADATIONSIZE));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommandLine::IsSetGradationHeight() const
+{
+    return parser.isSet(*optionsUsed.value(LONG_OPTION_GRADATIONHEIGHT));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptGradationSize() const
+{
+    const QString size = parser.value(*optionsUsed.value(LONG_OPTION_GRADATIONSIZE));
+    if (VMeasurement::IsGradationSizeValid(size))
+    {
+        return size;
+    }
+    else
+    {
+        qCritical() << tr("Invalid gradation size value.") << "\n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommandLine::OptGradationHeight() const
+{
+    const QString height = parser.value(*optionsUsed.value(LONG_OPTION_GRADATIONHEIGHT));
+    if (VMeasurement::IsGradationHeightValid(height))
+    {
+        return height;
+    }
+    else
+    {
+        qCritical() << tr("Invalid gradation height value.") << "\n";
+        const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+    }
 }
