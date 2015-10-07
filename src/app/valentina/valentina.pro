@@ -973,6 +973,20 @@ INSTALL_TRANSLATIONS += \
     $${TRANSLATIONS_PATH}/measurements_p54_fi_FI.qm \
     $${TRANSLATIONS_PATH}/measurements_p54_en_US.qm
 
+INSTALL_TRANSLATIONS += \
+    $${TRANSLATIONS_PATH}/measurements_p998_ru_RU.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_uk_UA.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_de_DE.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_cs_CZ.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_he_IL.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_fr_FR.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_it_IT.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_nl_NL.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_id_ID.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_es_ES.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_fi_FI.qm \
+    $${TRANSLATIONS_PATH}/measurements_p998_en_US.qm
+
 # Set "make install" command for Unix-like systems.
 unix{
     # Prefix for binary file.
@@ -1087,6 +1101,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_ru_RU.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_ru_RU.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_ru_RU.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_ru_RU.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_ru_RU.path = "$$RESOURCES_DIR/translations/ru_RU.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_ru_RU
@@ -1150,6 +1165,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_uk_UA.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_uk_UA.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_uk_UA.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_uk_UA.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_uk_UA.path = "$$RESOURCES_DIR/translations/uk_UA.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_uk_UA
@@ -1213,6 +1229,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_de_DE.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_de_DE.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_de_DE.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_de_DE.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_de_DE.path = "$$RESOURCES_DIR/translations/de_DE.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_de_DE
@@ -1276,6 +1293,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_cs_CZ.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_cs_CZ.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_cs_CZ.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_cs_CZ.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_cs_CZ.path = "$$RESOURCES_DIR/translations/cs_CZ.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_cs_CZ
@@ -1339,6 +1357,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_he_IL.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_he_IL.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_he_IL.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_he_IL.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_he_IL.path = "$$RESOURCES_DIR/translations/he_IL.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_he_IL
@@ -1402,6 +1421,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_fr_FR.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_fr_FR.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_fr_FR.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_fr_FR.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_fr_FR.path = "$$RESOURCES_DIR/translations/fr_FR.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_fr_FR
@@ -1465,6 +1485,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_it_IT.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_it_IT.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_it_IT.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_it_IT.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_it_IT.path = "$$RESOURCES_DIR/translations/it_IT.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_it_IT
@@ -1528,6 +1549,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_nl_NL.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_nl_NL.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_nl_NL.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_nl_NL.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_nl_NL.path = "$$RESOURCES_DIR/translations/nl_NL.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_nl_NL
@@ -1591,6 +1613,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_id_ID.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_id_ID.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_id_ID.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_id_ID.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_id_ID.path = "$$RESOURCES_DIR/translations/id_ID.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_id_ID
@@ -1654,6 +1677,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_es_ES.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_es_ES.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_es_ES.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_es_ES.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_es_ES.path = "$$RESOURCES_DIR/translations/es_ES.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_es_ES
@@ -1717,6 +1741,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_fi_FI.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_fi_FI.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_fi_FI.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_fi_FI.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_fi_FI.path = "$$RESOURCES_DIR/translations/fi_FI.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_fi_FI
@@ -1780,6 +1805,7 @@ unix{
                 $${TRANSLATIONS_PATH}/measurements_p52_en_US.qm \
                 $${TRANSLATIONS_PATH}/measurements_p53_en_US.qm \
                 $${TRANSLATIONS_PATH}/measurements_p54_en_US.qm \
+                $${TRANSLATIONS_PATH}/measurements_p998_en_US.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_en_US.path = "$$RESOURCES_DIR/translations/en_US.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_en_US

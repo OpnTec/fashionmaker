@@ -347,9 +347,10 @@ void VTranslateVars::InitPatternMakingSystems()
                                      "The Art and Science of Garment Cutting", "Book name");
     InitSystem(p50_S, name, author, book);
     //=================================================================================================================
-    name = QmuTranslation::translate("Pattern_making_systems", "system_P51", "System name");
-    author = QmuTranslation::translate("Pattern_making_systems", "system_P51", "Author name");
-    book = QmuTranslation::translate("Pattern_making_systems", "system_P51", "Book name");
+    name = QmuTranslation::translate("Pattern_making_systems", "GOST 17917-86", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Ministry of consumer industry of the USSR",
+                                       "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Standard figure boys", "Book name");
     InitSystem(p51_S, name, author, book);
     //=================================================================================================================
     name = QmuTranslation::translate("Pattern_making_systems", "Eddy", "System name");
@@ -369,6 +370,11 @@ void VTranslateVars::InitPatternMakingSystems()
     book = QmuTranslation::translate("Pattern_making_systems", "The Great War: Styles and Patterns of the 1910s",
                                      "Book name");
     InitSystem(p54_S, name, author, book);
+    //=================================================================================================================
+    name = QmuTranslation::translate("Pattern_making_systems", "None", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Valentina team", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Valentina's internal standard", "Book name");
+    InitSystem(p998_S, name, author, book);
     //=================================================================================================================
 }
 

@@ -788,3 +788,17 @@ TRANSLATIONS += measurements_p54.ts \
                 measurements_p54_es_ES.ts \
                 measurements_p54_fi_FI.ts \
                 measurements_p54_en_US.ts
+
+TRANSLATIONS += measurements_p998.ts \
+                measurements_p998_ru_RU.ts \
+                measurements_p998_uk_UA.ts \
+                measurements_p998_de_DE.ts \
+                measurements_p998_cs_CZ.ts \
+                measurements_p998_he_IL.ts \
+                measurements_p998_fr_FR.ts \
+                measurements_p998_it_IT.ts \
+                measurements_p998_nl_NL.ts \
+                measurements_p998_id_ID.ts \
+                measurements_p998_es_ES.ts \
+                measurements_p998_fi_FI.ts \
+                measurements_p998_en_US.ts

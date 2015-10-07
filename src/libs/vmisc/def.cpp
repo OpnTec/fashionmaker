@@ -349,6 +349,7 @@ const QString p51_S = QStringLiteral("p51");
 const QString p52_S = QStringLiteral("p52");
 const QString p53_S = QStringLiteral("p53");
 const QString p54_S = QStringLiteral("p54");
+const QString p998_S = QStringLiteral("p998");
 
 //functions
 const QString sin_F   = QStringLiteral("sin");

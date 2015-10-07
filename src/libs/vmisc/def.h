@@ -515,6 +515,7 @@ extern const QString p51_S;
 extern const QString p52_S;
 extern const QString p53_S;
 extern const QString p54_S;
+extern const QString p998_S;
 
 // functions
 extern const QString sin_F;

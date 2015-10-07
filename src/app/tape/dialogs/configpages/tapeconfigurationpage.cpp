@@ -292,6 +292,7 @@ void TapeConfigurationPage::InitPMSystems(QComboBox *systemCombo)
     systemCombo->addItem(qApp->TrVars()->PMSystemName(p52_S), p52_S);
     systemCombo->addItem(qApp->TrVars()->PMSystemName(p53_S), p53_S);
     systemCombo->addItem(qApp->TrVars()->PMSystemName(p54_S), p54_S);
+    systemCombo->addItem(qApp->TrVars()->PMSystemName(p998_S), p998_S);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
