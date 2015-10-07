@@ -3039,7 +3039,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Output full path: </source>
+        <source>The base filename has not match regular expression.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3709,15 +3713,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The base height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3737,14 +3733,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3758,6 +3746,22 @@
     </message>
     <message>
         <source>Please, provide one input file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base height. Vali values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base size. Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base height argument. Must be %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid base size argument. Must be %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4314,11 +4318,11 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
-        <translation>Fichier de mesures file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</translation>
+        <translation type="vanished">Fichier de mesures file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</translation>
     </message>
     <message>
         <source>could not be found. Do you want to update the file location</source>
-        <translation>Ne peut être trouvé. voulez vous mettre à jour le chemin du fichier</translation>
+        <translation type="vanished">Ne peut être trouvé. voulez vous mettre à jour le chemin du fichier</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
@@ -4597,15 +4601,6 @@ Voulez-vous sauvegarder les changements ? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The measurements file &quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&quot; could not be found.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You can&apos;t export empty scene.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4619,10 +4614,6 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Create/edit measurements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measurements was updated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4652,6 +4643,62 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement files types have not match.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements was synced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t sync measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t update measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &apos;%1&apos; could not be found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loading measurements file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not supported size value &apos;%1&apos; for this pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The method %1 does nothing in GUI mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6174,21 +6221,6 @@ Voulez-vous sauvegarder les changements ? </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>system_P51</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>system_P51</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>system_P51</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Eddy</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
@@ -6216,6 +6248,36 @@ Voulez-vous sauvegarder les changements ? </translation>
     <message>
         <source>American Garment Cutter</source>
         <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GOST 17917-86</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ministry of consumer industry of the USSR</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard figure boys</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valentina team</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valentina&apos;s internal standard</source>
+        <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7314,14 +7376,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VCommandLine</name>
     <message>
-        <source>Path to output exported layout file. Use it to enable console export mode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The exported layout file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Path to custom measure file (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7346,27 +7400,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Page width in current units like 12.0 (cannot be used with &quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The page width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height in current units like 12.0 (cannot be used with &quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height/width measure units (cannot be used with &quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&quot;, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7459,6 +7493,58 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Test option can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base filename of exported layout files. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base filename of layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to output destination folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The size value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The height value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid gradation size value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid gradation height value.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
