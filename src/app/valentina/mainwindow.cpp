@@ -230,17 +230,17 @@ void MainWindow::InitScenes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MainWindow::LoadMeasurements(const QString &path)
+QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &path)
 {
+    QSharedPointer<VMeasurements> m;
     if (path.isEmpty())
     {
-        return false;
+        return m;
     }
 
-    VMeasurements *m = nullptr;
     try
     {
-        m = new VMeasurements(pattern);
+        m = QSharedPointer<VMeasurements>(new VMeasurements(pattern));
         m->setXMLContent(path);
 
         if (m->Type() == MeasurementsType::Unknown)
@@ -289,30 +289,112 @@ bool MainWindow::LoadMeasurements(const QString &path)
             {
                 qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Wrong units.")),
                           qUtf8Printable(tr("Application doesn't support standard table with inches.")));
+                m->clear();
                 if (VApplication::CheckGUI())
                 {
-                    return false;
+                    return m;
                 }
                 else
                 {
                     std::exit(V_EX_DATAERR);
                 }
             }
-            m->SetDataSize();
-            m->SetDataHeight();
         }
-
-        qApp->setPatternType(m->Type());
-        ToolBarOption();
-        pattern->ClearVariables(VarType::Measurement);
-        m->ReadMeasurements();
-        delete m;
     }
     catch (VException &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        delete m;
+        m->clear();
+        if (VApplication::CheckGUI())
+        {
+            return m;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
+    }
+    return m;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MainWindow::LoadMeasurements(const QString &path)
+{
+    QSharedPointer<VMeasurements> m = OpenMeasurementFile(path);
+
+    if (m->isNull())
+    {
+        return false;
+    }
+
+    if (m->Type() == MeasurementsType::Standard)
+    {
+        m->SetDataSize();
+        m->SetDataHeight();
+    }
+
+    try
+    {
+        qApp->setPatternType(m->Type());
+        ToolBarOption();
+        pattern->ClearVariables(VarType::Measurement);
+        m->ReadMeasurements();
+    }
+    catch (VExceptionEmptyParameter &e)
+    {
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        if (VApplication::CheckGUI())
+        {
+            return false;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
+{
+    QSharedPointer<VMeasurements> m = OpenMeasurementFile(path);
+
+    if (m->isNull())
+    {
+        return false;
+    }
+
+    if (qApp->patternType() != m->Type())
+    {
+        qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Measurement files types have not match.")));
+        if (VApplication::CheckGUI())
+        {
+            return false;
+        }
+        else
+        {
+            std::exit(V_EX_DATAERR);
+        }
+    }
+
+    if (m->Type() == MeasurementsType::Standard)
+    {
+        pattern->SetSize(size);
+        pattern->SetHeight(height);
+    }
+
+    try
+    {
+        pattern->ClearVariables(VarType::Measurement);
+        m->ReadMeasurements();
+    }
+    catch (VExceptionEmptyParameter &e)
+    {
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         if (VApplication::CheckGUI())
         {
             return false;
@@ -1172,17 +1254,22 @@ void MainWindow::SyncMeasurements()
     if (mChanges)
     {
         const QString path = AbsoluteMPath(curFile, doc->MPath());
-        if(LoadMeasurements(path))
+        if(UpdateMeasurements(path, static_cast<int>(pattern->size()), static_cast<int>(pattern->height())))
         {
             if (not watcher->files().contains(path))
             {
                 watcher->addPath(path);
             }
-            const QString msg = tr("Measurements was updated");
+            const QString msg = tr("Measurements was synced");
+            qCDebug(vMainWindow, "%s", qUtf8Printable(msg));
             helpLabel->setText(msg);
             VWidgetPopup::PopupMessage(this, msg);
             doc->LiteParseTree(Document::LiteParse);
             mChanges = false;
+        }
+        else
+        {
+            qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't sync measurements.")));
         }
     }
 
@@ -1224,14 +1311,40 @@ void MainWindow::ToolBarOption()
 
         gradationHeightsLabel = new QLabel(tr("Height: "), this);
         gradationHeights = SetGradationList(gradationHeightsLabel, listHeights);
-        SetDefaultHeight(static_cast<int>(pattern->height()));
+
+        // set default height
+        {
+            const qint32 index = gradationHeights->findText(QString("%1").arg(static_cast<int>(pattern->height())));
+            if (index != -1)
+            {
+                gradationHeights->setCurrentIndex(index);
+            }
+            else
+            {
+                pattern->SetHeight(gradationHeights->currentText().toInt());
+            }
+        }
+
         connect(gradationHeights.data(),
                 static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedHeight);
 
         gradationSizesLabel = new QLabel(tr("Size: "), this);
         gradationSizes = SetGradationList(gradationSizesLabel, listSizes);
-        SetDefaultSize(static_cast<int>(pattern->size()));
+
+        // set default size
+        {
+            const qint32 index = gradationSizes->findText(QString("%1").arg(static_cast<int>(pattern->size())));
+            if (index != -1)
+            {
+                gradationSizes->setCurrentIndex(index);
+            }
+            else
+            {
+                pattern->SetSize(gradationSizes->currentText().toInt());
+            }
+        }
+
         connect(gradationSizes.data(),
                 static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &MainWindow::ChangedSize);
@@ -1253,42 +1366,6 @@ QComboBox *MainWindow::SetGradationList(QLabel *label, const QStringList &list)
     ui->toolBarOption->addWidget(comboBox);
 
     return comboBox;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetDefaultHeight set base height in combobox.
- * @param value [in] height value in pattern units.
- */
-void MainWindow::SetDefaultHeight(int value)
-{
-    const qint32 index = gradationHeights->findText(QString("%1").arg(value));
-    if (index != -1)
-    {
-        gradationHeights->setCurrentIndex(index);
-    }
-    else
-    {
-        pattern->SetHeight(gradationHeights->currentText().toInt());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SetDefaultSize set base size in combobox.
- * @param value [in] size value in pattern units.
- */
-void MainWindow::SetDefaultSize(int value)
-{
-    const qint32 index = gradationSizes->findText(QString("%1").arg(value));
-    if (index != -1)
-    {
-        gradationSizes->setCurrentIndex(index);
-    }
-    else
-    {
-        pattern->SetSize(gradationSizes->currentText().toInt());
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2481,8 +2558,25 @@ void MainWindow::PatternWasModified(bool saved)
  */
 void MainWindow::ChangedSize(const QString & text)
 {
-    pattern->SetSize(text.toInt());
-    doc->LiteParseTree(Document::LiteParse);
+    const int size = static_cast<int>(pattern->size());
+    if (UpdateMeasurements(AbsoluteMPath(curFile, doc->MPath()), text.toInt(), static_cast<int>(pattern->height())))
+    {
+        doc->LiteParseTree(Document::LiteParse);
+    }
+    else
+    {
+        qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't update measurements.")));
+
+        const qint32 index = gradationSizes->findText(QString().setNum(size));
+        if (index != -1)
+        {
+            gradationSizes->setCurrentIndex(index);
+        }
+        else
+        {
+            qCDebug(vMainWindow, "Couldn't restore size value.");
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2492,8 +2586,25 @@ void MainWindow::ChangedSize(const QString & text)
  */
 void MainWindow::ChangedHeight(const QString &text)
 {
-    pattern->SetHeight(text.toInt());
-    doc->LiteParseTree(Document::LiteParse);
+    const int height = static_cast<int>(pattern->height());
+    if (UpdateMeasurements(AbsoluteMPath(curFile, doc->MPath()), static_cast<int>(pattern->size()), text.toInt()))
+    {
+        doc->LiteParseTree(Document::LiteParse);
+    }
+    else
+    {
+        qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't update measurements.")));
+
+        const qint32 index = gradationHeights->findText(QString().setNum(height));
+        if (index != -1)
+        {
+            gradationHeights->setCurrentIndex(index);
+        }
+        else
+        {
+            qCDebug(vMainWindow, "Couldn't restore height value.");
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3658,4 +3769,80 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
     dialog.SetDestinationPath(expParams->OptDestinationPath());
     dialog.SelectFormate(expParams->OptExportType());
     ExportLayout(dialog);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetSize(const QString &text)
+{
+    if (not qApp->CheckGUI())
+    {
+        if (this->isWindowModified() || not curFile.isEmpty())
+        {
+            if (qApp->patternType() == MeasurementsType::Standard)
+            {
+                const int size = static_cast<int>(UnitConvertor(text.toInt(), Unit::Cm, *pattern->GetPatternUnit()));
+                const qint32 index = gradationSizes->findText(QString().setNum(size));
+                if (index != -1)
+                {
+                    gradationSizes->setCurrentIndex(index);
+                }
+                else
+                {
+                    qCWarning(vMainWindow, "%s",
+                              qUtf8Printable(tr("Not supported size value '%1' for this pattern file.").arg(text)));
+                }
+            }
+            else
+            {
+                qCWarning(vMainWindow, "%s",
+                          qUtf8Printable(tr("Couldn't set size. Need a file with standard measurements.")));
+            }
+        }
+        else
+        {
+            qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set size. File wasn't opened.")));
+        }
+    }
+    else
+    {
+        qCWarning(vMainWindow, "%s", qUtf8Printable(tr("The method %1 does nothing in GUI mode").arg(Q_FUNC_INFO)));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetHeight(const QString &text)
+{
+    if (not qApp->CheckGUI())
+    {
+        if (this->isWindowModified() || not curFile.isEmpty())
+        {
+            if (qApp->patternType() == MeasurementsType::Standard)
+            {
+                const int height = static_cast<int>(UnitConvertor(text.toInt(), Unit::Cm, *pattern->GetPatternUnit()));
+                const qint32 index = gradationHeights->findText(QString().setNum(height));
+                if (index != -1)
+                {
+                    gradationHeights->setCurrentIndex(index);
+                }
+                else
+                {
+                    qCWarning(vMainWindow, "%s",
+                              qUtf8Printable(tr("Not supported height value '%1' for this pattern file.").arg(text)));
+                }
+            }
+            else
+            {
+                qCWarning(vMainWindow, "%s",
+                          qUtf8Printable(tr("Couldn't set height. Need a file with standard measurements.")));
+            }
+        }
+        else
+        {
+            qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set height. File wasn't opened.")));
+        }
+    }
+    else
+    {
+        qCWarning(vMainWindow, "%s", qUtf8Printable(tr("The method %1 does nothing in GUI mode").arg(Q_FUNC_INFO)));
+    }
 }

@@ -48,6 +48,7 @@ namespace Ui
 }
 
 class VToolOptionsPropertyBrowser;
+class VMeasurements;
 
 /**
  * @brief The MainWindow class main windows.
@@ -58,10 +59,14 @@ class MainWindow : public MainWindowsNoGUI
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow() Q_DECL_OVERRIDE;
-    bool LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
-    void               ReopenFilesAfterCrash(QStringList &args);
 
+    bool LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
+    void ReopenFilesAfterCrash(QStringList &args);
     void DoExport(const VCommandLinePtr& expParams);
+
+    void SetSize(const QString &text);
+    void SetHeight(const QString & text);
+
 public slots:
     void               mouseMove(const QPointF &scenePos);
     void               ArrowTool();
@@ -96,9 +101,6 @@ public slots:
     void               ResetWindow();
 
     void               currentPPChanged(int index);
-
-    void               ChangedSize(const QString &text);
-    void               ChangedHeight(const QString & text);
 
     void               PatternWasModified(bool saved);
 
@@ -170,6 +172,10 @@ private slots:
     void ShowMeasurements();
     void MeasurementsChanged(const QString &path);
     void SyncMeasurements();
+
+    void ChangedSize(const QString &text);
+    void ChangedHeight(const QString & text);
+
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */
@@ -283,8 +289,6 @@ private:
     void               ZoomFirstShow();
     void               UpdateHeightsList(const QStringList &list);
     void               UpdateSizesList(const QStringList &list);
-    void               SetDefaultHeight(int value);
-    void               SetDefaultSize(int value);
 
     void               AddDocks();
     void               PropertyBrowser();
@@ -297,7 +301,9 @@ private:
 
     void               InitScenes();
 
+    QSharedPointer<VMeasurements> OpenMeasurementFile(const QString &path);
     bool               LoadMeasurements(const QString &path);
+    bool               UpdateMeasurements(const QString &path, int size, int height);
 
     void               ToggleMSync(bool toggle);
 
