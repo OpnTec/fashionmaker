@@ -21,35 +21,7 @@ typedef std::shared_ptr<VCommandLine> VCommandLinePtr;
 class VCommandLine
 {
     Q_DECLARE_TR_FUNCTIONS(VCommandLine)
-private:
-    static VCommandLinePtr instance;
-    QCommandLineParser parser;
-    QMap<QString, QCommandLineOption *> optionsUsed;
-    bool isGuiEnabled;
-    friend class VApplication;
-
-    static int Lo2Px(const QString& src, const DialogLayoutSettings& converter);
-    static int Pg2Px(const QString& src, const DialogLayoutSettings& converter);
-protected:
-
-    explicit VCommandLine();
-
-
-    //@brief returns DialogLayoutSettings::PaperSizeTemplate
-    DialogLayoutSettings::PaperSizeTemplate  OptPaperSize() const;
-    //@brief returns rotation in degrees or 0 if not set
-    int OptRotation() const;
-
-    Cases OptGroup() const;
-
-    //@brief: called in destructor of application, so instance destroyed and new maybe created (never happen scenario though)
-    static void Reset();
-
-    //@brief called to create single object, by VApplication only
-    static VCommandLinePtr Get(const QCoreApplication& app);
-
 public:
-    Q_DISABLE_COPY(VCommandLine)
     virtual ~VCommandLine();
 
     //@brief creates object and applies export related options to parser
@@ -86,6 +58,34 @@ public:
 
     QString OptGradationSize() const;
     QString OptGradationHeight() const;
+
+protected:
+
+    explicit VCommandLine();
+
+    //@brief returns DialogLayoutSettings::PaperSizeTemplate
+    DialogLayoutSettings::PaperSizeTemplate  OptPaperSize() const;
+    //@brief returns rotation in degrees or 0 if not set
+    int OptRotation() const;
+
+    Cases OptGroup() const;
+
+    //@brief: called in destructor of application, so instance destroyed and new maybe created (never happen scenario though)
+    static void Reset();
+
+    //@brief called to create single object, by VApplication only
+    static VCommandLinePtr Get(const QCoreApplication& app);
+
+private:
+    Q_DISABLE_COPY(VCommandLine)
+    static VCommandLinePtr instance;
+    QCommandLineParser parser;
+    QMap<QString, QCommandLineOption *> optionsUsed;
+    bool isGuiEnabled;
+    friend class VApplication;
+
+    static int Lo2Px(const QString& src, const DialogLayoutSettings& converter);
+    static int Pg2Px(const QString& src, const DialogLayoutSettings& converter);
 };
 
 #endif // VCMDEXPORT_H
