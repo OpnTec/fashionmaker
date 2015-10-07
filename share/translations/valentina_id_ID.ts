@@ -4904,21 +4904,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>system_P25</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>system_P25</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>system_P25</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Fukomoto</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
@@ -5340,6 +5325,21 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Valentina&apos;s internal standard</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abling</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bina Abling</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Integrating Draping, Drafting and Drawing</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>

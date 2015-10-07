@@ -204,9 +204,10 @@ void VTranslateVars::InitPatternMakingSystems()
                                      "Book name");
     InitSystem(p24_S, name, author, book);
     //=================================================================================================================
-    name = QmuTranslation::translate("Pattern_making_systems", "system_P25", "System name");
-    author = QmuTranslation::translate("Pattern_making_systems", "system_P25", "Author name");
-    book = QmuTranslation::translate("Pattern_making_systems", "system_P25", "Book name");
+    name = QmuTranslation::translate("Pattern_making_systems", "Abling", "System name");
+    author = QmuTranslation::translate("Pattern_making_systems", "Bina Abling", "Author name");
+    book = QmuTranslation::translate("Pattern_making_systems", "Integrating Draping, Drafting and Drawing",
+                                     "Book name");
     InitSystem(p25_S, name, author, book);
     //=================================================================================================================
     name = QmuTranslation::translate("Pattern_making_systems", "Fukomoto", "System name");
