@@ -196,7 +196,8 @@ TAPE_TEST_FILES += \
 
 VALENTINA_TEST_FILES += \
     tst_valentina/empty.val \
-    tst_valentina/issue_372.val
+    tst_valentina/issue_372.val \
+    tst_valentina/wrong_obj_type.val
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \

@@ -71,6 +71,10 @@ void TST_ValentinaCommandLine::OpenPatterns_data() const
     QTest::newRow("Measurement independent empty file")                            << "empty.val"
                                                                                    << true
                                                                                    << V_EX_OK;
+
+    QTest::newRow("File with invalid object type")                                 << "wrong_obj_type.val"
+                                                                                   << false
+                                                                                   << V_EX_NOINPUT;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,7 +86,7 @@ void TST_ValentinaCommandLine::OpenPatterns()
     QFETCH(int, exitCode);
 
     int exit;
-    const bool res = Run(result, exit, ValentinaPath(), QStringList() << "--test"
+    const bool res = Run(result, exitCode, exit, ValentinaPath(), QStringList() << "--test"
                     << QApplication::applicationDirPath() + QLatin1Char('/') + tmpTestFolder + QLatin1Char('/') + file);
 
     QCOMPARE(res, result);
@@ -119,7 +123,7 @@ void TST_ValentinaCommandLine::ExportMode()
     const QStringList arg = QStringList() << QApplication::applicationDirPath() + QLatin1Char('/') + tmpTestFolder +
                                              QLatin1Char('/') + file
                                           << arguments.split(";;");
-    const bool res = Run(result, exit, ValentinaPath(), arg);
+    const bool res = Run(result, exitCode, exit, ValentinaPath(), arg);
 
     QCOMPARE(res, result);
     QCOMPARE(exit, exitCode);

@@ -61,7 +61,7 @@ const static auto LONG_OPTION_GRADATIONSIZE   = QStringLiteral("gsize");
 const static auto SINGLE_OPTION_GRADATIONSIZE = QStringLiteral("x");
 
 const static auto LONG_OPTION_GRADATIONHEIGHT   = QStringLiteral("gheight");
-const static auto SINGLE_OPTION_GRADATIONHEIGHT = QStringLiteral("t");
+const static auto SINGLE_OPTION_GRADATIONHEIGHT = QStringLiteral("e");
 
 //such a tricky initialization is used, because it uses static functions which relay on static variables and order of
 //initialization is not defined between compiled units. i.e. - segv is possible (I hit it when

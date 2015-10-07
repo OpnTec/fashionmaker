@@ -73,7 +73,8 @@ QString AbstractTest::TapePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool AbstractTest::Run(bool showWarn, int &exitCode, const QString &program, const QStringList &arguments, int msecs)
+bool AbstractTest::Run(bool showWarn, int exit, int &exitCode, const QString &program, const QStringList &arguments,
+                       int msecs)
 {
     const QString parameters = QString("Program: %1 \nArguments: %2.").arg(program).arg(arguments.join(", "));
 
@@ -109,7 +110,7 @@ bool AbstractTest::Run(bool showWarn, int &exitCode, const QString &program, con
 
     if (process->exitCode() != V_EX_OK)
     {
-        if (showWarn)
+        if (showWarn || process->exitCode() != exit)
         {
             const QString msg = QString("\n%1").arg(QString(process->readAllStandardError()));
             QWARN(qUtf8Printable(msg));
