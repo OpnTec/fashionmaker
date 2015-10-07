@@ -505,21 +505,23 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     parser.addPositionalArgument("filename", tr("The measurement file."));
     //-----
     QCommandLineOption heightOption(QStringList() << "e" << "height",
-    tr("Open with the base height: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182 or "
-       "188 cm."), tr("The base height"));
+            tr("Open with the base height. Vali values: %1cm.")
+                                    .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", ")),
+            tr("The base height"));
     parser.addOption(heightOption);
     //-----
     QCommandLineOption sizeOption(QStringList() << "s" << "size",
-            tr("Open with the base size: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54 or 56 cm."),
+            tr("Open with the base size. Valid values: %1cm.").arg(VMeasurement::WholeListSizes(Unit::Cm).join(", ")),
             tr("The base size"));
     parser.addOption(sizeOption);
     //-----
     QCommandLineOption unitOption(QStringList() << "u" << "unit",
-    tr("Set pattern file unit: cm, mm, inch."), tr("The pattern unit"));
+            tr("Set pattern file unit: cm, mm, inch."),
+            tr("The pattern unit"));
     parser.addOption(unitOption);
     //-----
     QCommandLineOption testOption(QStringList() << "test",
-                                 tr("Use for unit testing. Run the program and open a file without showing a window."));
+            tr("Use for unit testing. Run the program and open a file without showing a window."));
     parser.addOption(testOption);
     //-----
     parser.process(arguments);
@@ -532,44 +534,32 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     int height = 0;
     Unit unit = Unit::Cm;
 
-    {
     const QString heightValue = parser.value(heightOption);
-    if (not heightValue.isEmpty())
+    if (VMeasurement::IsGradationHeightValid(heightValue))
     {
-        const QStringList heights = VMeasurement::WholeListHeights(Unit::Cm);
-        if (heights.contains(heightValue))
-        {
-            flagHeight = true;
-            height = heightValue.toInt();
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n",
-                    qPrintable(tr("Invalid base height argument. Must be 92, 98, 104, 110, 116, 122, 128, 134, "
-                                  "140, 146, 152, 158, 164, 170, 176, 182 or 188 cm.")));
-            parser.showHelp(V_EX_USAGE);
-        }
+        flagHeight = true;
+        height = heightValue.toInt();
     }
+    else
+    {
+        qCCritical(mApp, "%s\n",
+                qPrintable(tr("Invalid base height argument. Must be %1cm.")
+                           .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", "))));
+        parser.showHelp(V_EX_USAGE);
     }
 
-    {
     const QString sizeValue = parser.value(sizeOption);
-    if (not sizeValue.isEmpty())
+    if (VMeasurement::IsGradationSizeValid(sizeValue))
     {
-        const QStringList sizes = VMeasurement::WholeListSizes(Unit::Cm);
-        if (sizes.contains(sizeValue))
-        {
-            flagSize = true;
-            size = sizeValue.toInt();
-        }
-        else
-        {
-            qCCritical(mApp, "%s\n",
-                    qPrintable(tr("Invalid base size argument. Must be 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, "
-                                  "42, 44, 46, 48, 50, 52, 54 or 56 cm.")));
-            parser.showHelp(V_EX_USAGE);
-        }
+        flagSize = true;
+        size = sizeValue.toInt();
     }
+    else
+    {
+        qCCritical(mApp, "%s\n",
+                qPrintable(tr("Invalid base size argument. Must be %1cm.")
+                           .arg(VMeasurement::WholeListSizes(Unit::Cm).join(", "))));
+        parser.showHelp(V_EX_USAGE);
     }
 
     {
