@@ -45,10 +45,12 @@ QmuFormulaBase::~QmuFormulaBase()
  */
 void QmuFormulaBase::InitCharacterSets()
 {
-    //String with all unique symbols for supported alpabets.
-    // See script alphabets.py for generation and more information.
-    //Note. MSVC doen't support normal string concatenation for long string. Thats why we use QStringList in this place.
-    QStringList symbols = QStringList() << "ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥĦШҫ̆جگĮаҳѕεشԶиһνԾрυلՆӝшËՎҔPÓՖXӛӟŞӣզhëծpóӞնxßվāŁЃֆĉЋ"
+    //String with all unique symbols for supported alphabets.
+    //See script alphabets.py for generation and more information.
+    //Note. MSVC doesn't support normal string concatenation for long string. That's why we use QStringList in this
+    //case.
+    const QStringList symbols = QStringList()
+                                        << "ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥĦШҫ̆جگĮаҳѕεشԶиһνԾрυلՆӝшËՎҔPÓՖXӛӟŞӣզhëծpóӞնxßվāŁЃֆĉЋ"
                                         << "CŬđҐГΒęҘЛΚŘġҠУGاհЫدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփїІĈЎ"
                                         << "ґĐΗЖҙĘȚΟОҡĠآΧЦتЮұİزηжԸغοоÁՀقχцÉՈيюÑՐђӋіәťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċБӸēłΔҖ"
                                         << "ЙŤěΜӜDСձģΤӰЩīņحҮбưԳصδHйԻŇμӲӴсՃمτƠщՋєLQŹՓŕÖYśÞaգĽæiŽիӓîqճöyջþĂօЄӦĊЌΑĒДҗј"
