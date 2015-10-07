@@ -534,32 +534,38 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     int height = 0;
     Unit unit = Unit::Cm;
 
-    const QString heightValue = parser.value(heightOption);
-    if (VMeasurement::IsGradationHeightValid(heightValue))
+    if (parser.isSet(heightOption))
     {
-        flagHeight = true;
-        height = heightValue.toInt();
-    }
-    else
-    {
-        qCCritical(mApp, "%s\n",
-                qPrintable(tr("Invalid base height argument. Must be %1cm.")
-                           .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", "))));
-        parser.showHelp(V_EX_USAGE);
+        const QString heightValue = parser.value(heightOption);
+        if (VMeasurement::IsGradationHeightValid(heightValue))
+        {
+            flagHeight = true;
+            height = heightValue.toInt();
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n",
+                    qPrintable(tr("Invalid base height argument. Must be %1cm.")
+                               .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", "))));
+            parser.showHelp(V_EX_USAGE);
+        }
     }
 
-    const QString sizeValue = parser.value(sizeOption);
-    if (VMeasurement::IsGradationSizeValid(sizeValue))
+    if (parser.isSet(sizeOption))
     {
-        flagSize = true;
-        size = sizeValue.toInt();
-    }
-    else
-    {
-        qCCritical(mApp, "%s\n",
-                qPrintable(tr("Invalid base size argument. Must be %1cm.")
-                           .arg(VMeasurement::WholeListSizes(Unit::Cm).join(", "))));
-        parser.showHelp(V_EX_USAGE);
+        const QString sizeValue = parser.value(sizeOption);
+        if (VMeasurement::IsGradationSizeValid(sizeValue))
+        {
+            flagSize = true;
+            size = sizeValue.toInt();
+        }
+        else
+        {
+            qCCritical(mApp, "%s\n",
+                    qPrintable(tr("Invalid base size argument. Must be %1cm.")
+                               .arg(VMeasurement::WholeListSizes(Unit::Cm).join(", "))));
+            parser.showHelp(V_EX_USAGE);
+        }
     }
 
     {
