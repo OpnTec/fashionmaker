@@ -117,7 +117,7 @@ void VPattern::Parse(const Document &parse)
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
-                                        << TagMeasurements << TagVersion << TagGradation;
+                                        << TagMeasurements << TagVersion << TagGradation << TagUnit;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -170,6 +170,9 @@ void VPattern::Parse(const Document &parse)
                         break;
                     case 7: // TagGradation
                         qCDebug(vXML, "Tag gradation.");
+                        break;
+                    case 8: // TagUnit
+                        qCDebug(vXML, "Tag unit.");
                         break;
                     default:
                         qCDebug(vXML, "Wrong tag name %s", qUtf8Printable(domElement.tagName()));
@@ -488,8 +491,8 @@ void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
                         ParseDetails(domElement, parse);
                         break;
                     default:
-                        qCDebug(vXML, "Wrong tag name");
-                        break;
+                        VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
+                        throw e;
                 }
             }
         }
@@ -548,8 +551,8 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
                     ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
                     break;
                 default:
-                    qCDebug(vXML, "Wrong tag name");
-                    break;
+                    VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
+                    throw e;
             }
         }
     }
@@ -610,9 +613,8 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                             tool = Tool::NodeSplinePath;
                             break;
                         default:
-                            qDebug()<<"Wrong node type."<<Q_FUNC_INFO;
-                            continue;
-                            break;
+                            VException e(tr("Wrong tag name '%1'.").arg(t));
+                            throw e;
                     }
                     detail.append(VNodeDetail(id, tool, nodeType, mx, my, reverse));
                 }
