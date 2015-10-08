@@ -46,15 +46,19 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
       canselButton(nullptr),
       okButton(nullptr)
 {
+    this->setMaximumHeight(300);
+
     contentsWidget = new QListWidget;
     contentsWidget->setViewMode(QListView::IconMode);
     contentsWidget->setIconSize(QSize(96, 84));
     contentsWidget->setMovement(QListView::Static);
-    contentsWidget->setMaximumWidth(128);
-    contentsWidget->setMinimumHeight(250);
+    contentsWidget->setMaximumWidth(130);
+    contentsWidget->setMinimumWidth(130);
+    contentsWidget->setMinimumHeight(260);
     contentsWidget->setSpacing(12);
 
     pagesWidget = new QStackedWidget;
+    pagesWidget->setMinimumWidth(550);
 
     configurationPage = new TapeConfigurationPage();
     pagesWidget->addWidget(configurationPage);
