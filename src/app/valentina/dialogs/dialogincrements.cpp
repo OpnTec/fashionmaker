@@ -80,7 +80,11 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(this->doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);
-    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(NameRegExp())));
+#if QT_VERSION > QT_VERSION_CHECK(5, 1, 0)
+    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(NameRegExp()), this));
+#else
+    ui->lineEditName->setValidator( new QRegExpValidator(QRegExp(NameRegExp()), this));
+#endif
 
     connect(ui->tableWidgetIncrement, &QTableWidget::itemSelectionChanged, this,
             &DialogIncrements::ShowIncrementDetails);

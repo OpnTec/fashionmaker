@@ -69,9 +69,12 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
     SCASSERT(bOk != nullptr);
     bOk->setEnabled(false);
 
-    QRegularExpressionValidator *validator = new QRegularExpressionValidator(QRegularExpression(baseFilenameRegExp),
-                                                                             this);
-    ui->lineEditFileName->setValidator(validator);
+#if QT_VERSION > QT_VERSION_CHECK(5, 1, 0)
+    ui->lineEditFileName->setValidator( new QRegularExpressionValidator(QRegularExpression(baseFilenameRegExp), this));
+#else
+    ui->lineEditFileName->setValidator( new QRegExpValidator(QRegExp(baseFilenameRegExp), this));
+#endif
+
     const QString mask = fileName+QLatin1Literal("_");
     if (VApplication::CheckGUI())
     {

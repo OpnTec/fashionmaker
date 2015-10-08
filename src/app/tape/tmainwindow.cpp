@@ -1722,7 +1722,11 @@ void TMainWindow::InitWindow()
     ui->actionReadOnly->setEnabled(true);
     ui->actionSaveAs->setEnabled(true);
 
-    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(NameRegExp())) );
+#if QT_VERSION > QT_VERSION_CHECK(5, 1, 0)
+    ui->lineEditName->setValidator( new QRegularExpressionValidator(QRegularExpression(NameRegExp()), this));
+#else
+    ui->lineEditName->setValidator( new QRegExpValidator(QRegExp(NameRegExp()), this));
+#endif
 
     connect(ui->toolButtonRemove, &QToolButton::clicked, this, &TMainWindow::Remove);
     connect(ui->toolButtonUp, &QToolButton::clicked, this, &TMainWindow::MoveUp);
