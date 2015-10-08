@@ -69,11 +69,11 @@ void TST_MeasurementRegExp::TestOriginalMeasurementNamesRegExp()
 // cppcheck-suppress unusedFunction
 void TST_MeasurementRegExp::TestMeasurementRegExp_data()
 {
-    const int systemCounts = 55;
+    const int systemCounts = 56;
     const QStringList locales = SupportedLocales();
 
     {
-        const int combinations = systemCounts * locales.size(); // 55*12=660
+        const int combinations = systemCounts * locales.size(); // 56*12=660
 
         QDir dir(TranslationsPath());
         const QStringList fileNames = dir.entryList(QStringList("measurements_p*_*.qm"));
