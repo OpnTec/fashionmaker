@@ -58,6 +58,7 @@ protected:
 private slots:
     void UpdateChecks(QTreeWidgetItem *item, int column);
     void ShowDescription(QTreeWidgetItem *item, int column);
+    void TreeMenu(const QPoint &pos);
 
 private:
     Q_DISABLE_COPY(DialogMDataBase)

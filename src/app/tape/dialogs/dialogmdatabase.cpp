@@ -63,6 +63,7 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
 
     connect(ui->treeWidget, &QTreeWidget::itemChanged, this, &DialogMDataBase::UpdateChecks);
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
+    connect(ui->treeWidget, &QTreeWidget::customContextMenuRequested, this, &DialogMDataBase::TreeMenu);
 
     ReadSettings();
 }
@@ -98,6 +99,8 @@ DialogMDataBase::DialogMDataBase(QWidget *parent)
     ui->treeWidget->installEventFilter(this);
 
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
+    connect(ui->treeWidget, &QTreeWidget::customContextMenuRequested, this, &DialogMDataBase::TreeMenu);
+    connect(ui->treeWidget, &QTreeWidget::itemActivated, this, &DialogMDataBase::ShowDescription);
 
     ReadSettings();
 }
@@ -185,14 +188,14 @@ bool DialogMDataBase::eventFilter(QObject *target, QEvent *event)
                 {
                     const QModelIndex model = ui->treeWidget->indexAbove(ui->treeWidget->currentIndex());
                     QTreeWidgetItem *item = ui->treeWidget->itemAbove(ui->treeWidget->currentItem());
-                    emit ShowDescription(item, model.column());
+                    ShowDescription(item, model.column());
                     break;
                 }
                 case Qt::Key_Down:
                 {
                     const QModelIndex model = ui->treeWidget->indexBelow(ui->treeWidget->currentIndex());
                     QTreeWidgetItem *item = ui->treeWidget->itemBelow(ui->treeWidget->currentItem());
-                    emit ShowDescription(item, model.column());
+                    ShowDescription(item, model.column());
                     break;
                 }
                 default:
@@ -296,6 +299,26 @@ void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
             .arg(qApp->TrVars()->Description(name));
 
     ui->textEdit->setHtml(text);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::TreeMenu(const QPoint &pos)
+{
+    // Because item also will be selected need to show description
+    const QModelIndex model = ui->treeWidget->currentIndex();
+    QTreeWidgetItem *item = ui->treeWidget->currentItem();
+    ShowDescription(item, model.column());
+
+    QAction *actionCollapseAll = new QAction(tr("Collapse All"), this);
+    connect(actionCollapseAll, &QAction::triggered, ui->treeWidget, &QTreeWidget::collapseAll);
+
+    QAction *actionExpandeAll = new QAction(tr("Expand All"), this);
+    connect(actionExpandeAll, &QAction::triggered, ui->treeWidget, &QTreeWidget::expandAll);
+
+    QMenu menu(this);
+    menu.addAction(actionCollapseAll);
+    menu.addAction(actionExpandeAll);
+    menu.exec(ui->treeWidget->mapToGlobal(pos));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
