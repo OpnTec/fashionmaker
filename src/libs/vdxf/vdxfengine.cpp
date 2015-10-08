@@ -29,7 +29,12 @@
 #include "vdxfengine.h"
 #include <QDebug>
 #include <QDateTime>
-#include <QtMath>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../vmisc/vmath.h"
+#else
+#   include <QtMath>
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()

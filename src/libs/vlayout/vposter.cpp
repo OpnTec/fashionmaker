@@ -29,8 +29,9 @@
 #include "vposter.h"
 #include <QPainter>
 #include <QPrinter>
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-#   include "../libs/vmisc/vmath.h"
+#   include "../vmisc/vmath.h"
 #else
 #   include <QtMath>
 #endif
