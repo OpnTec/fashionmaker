@@ -380,6 +380,11 @@ void TMainWindow::OpenTemplate()
         //Use standard path to template files
         const QString pathTo = qApp->TapeSettings()->GetPathTemplate();
         Open(pathTo, filter);
+
+        if (m != nullptr)
+        {// The file was opened.
+            SetCurrentFile(""); // Force user to to save new file
+        }
     }
     else
     {
