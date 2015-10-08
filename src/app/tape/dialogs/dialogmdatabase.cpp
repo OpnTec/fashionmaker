@@ -30,6 +30,8 @@
 #include "ui_dialogmdatabase.h"
 #include "../mapplication.h"
 
+#include <QKeyEvent>
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
     :QDialog(parent),
@@ -56,6 +58,8 @@ DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
 {
     ui->setupUi(this);
     InitDataBase(list);
+
+    ui->treeWidget->installEventFilter(this);
 
     connect(ui->treeWidget, &QTreeWidget::itemChanged, this, &DialogMDataBase::UpdateChecks);
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
@@ -90,6 +94,8 @@ DialogMDataBase::DialogMDataBase(QWidget *parent)
 {
     ui->setupUi(this);
     InitDataBase();
+
+    ui->treeWidget->installEventFilter(this);
 
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
 
@@ -163,6 +169,38 @@ void DialogMDataBase::changeEvent(QEvent *event)
 
     // remember to call base class implementation
     QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogMDataBase::eventFilter(QObject *target, QEvent *event)
+{
+    if (target == ui->treeWidget)
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            switch(keyEvent->key())
+            {
+                case Qt::Key_Up:
+                {
+                    const QModelIndex model = ui->treeWidget->indexAbove(ui->treeWidget->currentIndex());
+                    QTreeWidgetItem *item = ui->treeWidget->itemAbove(ui->treeWidget->currentItem());
+                    emit ShowDescription(item, model.column());
+                    break;
+                }
+                case Qt::Key_Down:
+                {
+                    const QModelIndex model = ui->treeWidget->indexBelow(ui->treeWidget->currentIndex());
+                    QTreeWidgetItem *item = ui->treeWidget->itemBelow(ui->treeWidget->currentItem());
+                    emit ShowDescription(item, model.column());
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+    return QDialog::eventFilter(target, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

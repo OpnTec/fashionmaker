@@ -53,6 +53,7 @@ public:
 
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+    virtual bool eventFilter(QObject *target, QEvent *event) Q_DECL_OVERRIDE;
 
 private slots:
     void UpdateChecks(QTreeWidgetItem *item, int column);

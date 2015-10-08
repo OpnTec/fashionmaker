@@ -39,6 +39,9 @@
       <property name="selectionMode">
        <enum>QAbstractItemView::SingleSelection</enum>
       </property>
+      <property name="animated">
+       <bool>true</bool>
+      </property>
       <attribute name="headerMinimumSectionSize">
        <number>57</number>
       </attribute>
@@ -63,6 +66,9 @@
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -73,6 +79,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>treeWidget</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../share/resources/tapeicon.qrc"/>
  </resources>
@@ -84,8 +95,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>540</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -100,8 +111,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>540</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
