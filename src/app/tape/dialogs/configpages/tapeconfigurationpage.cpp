@@ -106,8 +106,12 @@ void TapeConfigurationPage::LangChanged()
 void TapeConfigurationPage::SystemChanged()
 {
     systemChanged = true;
-    systemAuthorValueLabel->setText(qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString()));
-    systemBookValueLabel->setText(qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString()));
+    QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString());
+    systemAuthorValueLabel->setText(text);
+    systemAuthorValueLabel->setToolTip(text);
+    text = qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString());
+    systemBookValueLabel->setText(text);
+    systemBookValueLabel->setToolTip(text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -325,8 +329,12 @@ void TapeConfigurationPage::RetranslateUi()
     systemAuthorLabel->setText(tr("Author:"));
     systemBookLabel->setText(tr("Book:"));
 
-    systemAuthorValueLabel->setText(qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString()));
-    systemBookValueLabel->setText(qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString()));
+    QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString());
+    systemAuthorValueLabel->setText(text);
+    systemAuthorValueLabel->setToolTip(text);
+    text = qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString());
+    systemBookValueLabel->setText(text);
+    systemBookValueLabel->setToolTip(text);
 
     separatorLabel->setText(tr("Decimal separator parts"));
     osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
