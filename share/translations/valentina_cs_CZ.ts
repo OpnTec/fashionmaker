@@ -3534,132 +3534,127 @@
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation>sin</translation>
+        <translation type="vanished">sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation>cos</translation>
+        <translation type="vanished">cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation>tan</translation>
+        <translation type="vanished">tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation>asin</translation>
+        <translation type="vanished">asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation>acos</translation>
+        <translation type="vanished">acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation>atan</translation>
+        <translation type="vanished">atan</translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation>sinh</translation>
+        <translation type="vanished">sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation>cosh</translation>
+        <translation type="vanished">cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation>tanh</translation>
+        <translation type="vanished">tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation>asinh</translation>
+        <translation type="vanished">asinh</translation>
     </message>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
-        <translation>acosh</translation>
+        <translation type="vanished">acosh</translation>
     </message>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation>atanh</translation>
+        <translation type="vanished">atanh</translation>
     </message>
     <message>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
-        <translation>log2</translation>
+        <translation type="vanished">log2</translation>
     </message>
     <message>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
-        <translation>log10</translation>
+        <translation type="vanished">log10</translation>
     </message>
     <message>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
-        <translation>log</translation>
+        <translation type="vanished">log</translation>
     </message>
     <message>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
-        <translation>ln</translation>
+        <translation type="vanished">ln</translation>
     </message>
     <message>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
-        <translation>exp</translation>
+        <translation type="vanished">exp</translation>
     </message>
     <message>
         <source>sqrt</source>
         <comment>square root of a value</comment>
-        <translation>sqrt</translation>
+        <translation type="vanished">sqrt</translation>
     </message>
     <message>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
-        <translation>sign</translation>
+        <translation type="vanished">sign</translation>
     </message>
     <message>
         <source>rint</source>
         <comment>round to nearest integer</comment>
-        <translation>rint</translation>
+        <translation type="vanished">rint</translation>
     </message>
     <message>
         <source>abs</source>
         <comment>absolute value</comment>
-        <translation>abs</translation>
+        <translation type="vanished">abs</translation>
     </message>
     <message>
         <source>min</source>
         <comment>min of all arguments</comment>
-        <translation>min</translation>
+        <translation type="vanished">min</translation>
     </message>
     <message>
         <source>max</source>
         <comment>max of all arguments</comment>
-        <translation>max</translation>
+        <translation type="vanished">max</translation>
     </message>
     <message>
         <source>sum</source>
         <comment>sum of all arguments</comment>
-        <translation>sum</translation>
+        <translation type="vanished">sum</translation>
     </message>
     <message>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
-        <translation>avg</translation>
-    </message>
-    <message>
-        <source>fmod</source>
-        <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">avg</translation>
     </message>
 </context>
 <context>
@@ -5718,839 +5713,21 @@ Chcete uložit své změny?</translation>
     </message>
 </context>
 <context>
-    <name>Pattern_making_systems</name>
-    <message>
-        <source>Bunka</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bunka Fashion College</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fundamentals of Garment Design</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Barnfield and Richard</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jo Barnfield and Andrew Richards</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern Making Primer</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Friendship/Women</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Elizabeth Friendship</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Morris, K.</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Karen Morris</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sewing Lingerie that Fits</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Castro</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lucia Mors de Castro</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Patternmaking in Practic</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kim &amp; Uh</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Injoo Kim and Mykyung Uh</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Apparel Making in Fashion Design</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waugh</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Norah Waugh</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Corsets and Crinolines</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Grimble</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Frances Grimble</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fashions of the Gilded Age</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thornton&apos;s International System</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ed. R. L. Shep</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Great War: Styles and Patterns of the 1910s</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hillhouse &amp; Mansfield</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dress Design: Draping and Flat Pattern Making</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pivnick</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Esther Kaplan Pivnick</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minister &amp; Son</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Complete Guide to Practical Cutting (1853)</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Strickland</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gertrude Strickland</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A Tailoring Manual</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loh &amp; Lewis</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>May Loh and Diehl Lewis</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Patternless Fashion Design</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Morris, F. R.</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F. R. Morris</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ladies Garment Cutting and Making</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mason</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gertrude Mason</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gertrude Mason&apos;s Patternmaking Book</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kimata</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>K. Kimata</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Master Designer</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Master Designer (Chicago, IL)</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kopp</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>How to Draft Basic Patterns</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ekern</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Doris Ekern</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Slacks Cut-to-Fit for Your Figure</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Doyle</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sarah J. Doyle</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sarah&apos;s Key to Pattern Drafting</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shelton</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Karla J. Shelton</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Design and Sew Jeans</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lady Boutique</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lady Boutique</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lady Boutique magazine (Japan)</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rohr</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>M. Rohr</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Moore</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dorothy Moore</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fukomoto</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sue S. Fukomoto</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dressmaking International</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dressmaking International</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dressmaking International magazine (Japan)</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Erwin</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mabel D. Erwin</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Practical Dress Design</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gough</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>E. L. G. Gough</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Principles of Garment Cutting</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Allemong</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Elizabeth M. Allemong</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>European Cut</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>McCunn</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Donald H. McCunn</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>How to Make Your Own Sewing Patterns</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zarapkar</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zarapkar System of Cutting</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kunick</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Philip Kunick</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Handford</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jack Handford</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Davis</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>R. I. Davis</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MacLochlainn</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jason MacLochlainn</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Joseph-Armstrong</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Helen Joseph-Armstrong</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Patternmaking for Fashion Design</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Supreme System</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Frederick T. Croonberg</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sugino</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dressmaking</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern Drafting Vols. I, II, III (Japan)</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Centre Point System</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Louis Devere</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Handbook of Practical Cutting on the Centre Point System</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Aldrich/Men</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Winifred Aldrich</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Metric Pattern Cutting for Menswear</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Aldrich/Women</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Metric Pattern Cutting for Women&apos;s Wear</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kershaw</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gareth Kershaw</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Patternmaking for Menswear</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gilewska</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Teresa Gilewska</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern-Drafting for Fashion: The Basics</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lo</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dennic Chunman Lo</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern Cutting</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bray</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Natalie Bray</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Knowles/Men</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lori A. Knowles</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Friendship/Men</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern Cutting for Men&apos;s Costume</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Brown</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>P. Clement Brown</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Art in Dress</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mitchell</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jno. J. Mitchell</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Eddy</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern and Dress Design</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Knowles/Women</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>American Garment Cutter</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>GOST 17917-86</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ministry of consumer industry of the USSR</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Standard figure boys</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>None</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Valentina team</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Valentina&apos;s internal standard</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abling</source>
-        <comment>System name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bina Abling</source>
-        <comment>Author name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Integrating Draping, Drafting and Drawing</source>
-        <comment>Book name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>PostfixOperators</name>
     <message>
         <source>cm</source>
         <comment>centimeter</comment>
-        <translation>cm</translation>
+        <translation type="vanished">cm</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter</comment>
-        <translation>mm</translation>
+        <translation type="vanished">mm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation>palce</translation>
+        <translation type="vanished">palce</translation>
     </message>
 </context>
 <context>
@@ -6657,182 +5834,182 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Nalezen neočekávaný řetězec &quot;$TOK$&quot; na pozici $POS$.</translation>
+        <translation type="vanished">Nalezen neočekávaný řetězec &quot;$TOK$&quot; na pozici $POS$.</translation>
     </message>
     <message>
         <source>Internal error</source>
         <comment>Math parser error messages.</comment>
-        <translation>Vnitřní chyba</translation>
+        <translation type="vanished">Vnitřní chyba</translation>
     </message>
     <message>
         <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Neplatný název funkce, proměnné nebo konstanty: &quot;$TOK$&quot;.</translation>
+        <translation type="vanished">Neplatný název funkce, proměnné nebo konstanty: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Neplatný identifikátor binárního operátoru: &quot;$TOK$&quot;.</translation>
+        <translation type="vanished">Neplatný identifikátor binárního operátoru: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Neplatný identifikátor zaváděcího operátoru: &quot;$TOK$&quot;.</translation>
+        <translation type="vanished">Neplatný identifikátor zaváděcího operátoru: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Neplatný identifikátor ukončujícího operátoru: &quot;$TOK$&quot;.</translation>
+        <translation type="vanished">Neplatný identifikátor ukončujícího operátoru: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid pointer to callback function.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Neplatný ukazatel na funkci zpětného volání.</translation>
+        <translation type="vanished">Neplatný ukazatel na funkci zpětného volání.</translation>
     </message>
     <message>
         <source>Expression is empty.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Výraz je prázdný.</translation>
+        <translation type="vanished">Výraz je prázdný.</translation>
     </message>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Neplatný ukazatel na proměnnou.</translation>
+        <translation type="vanished">Neplatný ukazatel na proměnnou.</translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Nalezen neočekávaný operátor &quot;$TOK$&quot; na pozici $POS$</translation>
+        <translation type="vanished">Nalezen neočekávaný operátor &quot;$TOK$&quot; na pozici $POS$</translation>
     </message>
     <message>
         <source>Unexpected end of expression at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Neočekávaný konec výrazu v poloze $POS$</translation>
+        <translation type="vanished">Neočekávaný konec výrazu v poloze $POS$</translation>
     </message>
     <message>
         <source>Unexpected argument separator at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Neočekávaný oddělovač argumentů v poloze $POS$</translation>
+        <translation type="vanished">Neočekávaný oddělovač argumentů v poloze $POS$</translation>
     </message>
     <message>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Neočekávaná závorka &quot;$TOK$&quot; v poloze $POS$</translation>
+        <translation type="vanished">Neočekávaná závorka &quot;$TOK$&quot; v poloze $POS$</translation>
     </message>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Neočekávaná funkce &quot;$TOK$&quot; v poloze $POS$</translation>
+        <translation type="vanished">Neočekávaná funkce &quot;$TOK$&quot; v poloze $POS$</translation>
     </message>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Nalezena neočekávaná hodnota &quot;$TOK$&quot; v poloze $POS$</translation>
+        <translation type="vanished">Nalezena neočekávaná hodnota &quot;$TOK$&quot; v poloze $POS$</translation>
     </message>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Nalezena neočekávaná proměnná &quot;$TOK$&quot; v poloze $POS$</translation>
+        <translation type="vanished">Nalezena neočekávaná proměnná &quot;$TOK$&quot; v poloze $POS$</translation>
     </message>
     <message>
         <source>Function arguments used without a function (position: $POS$)</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Argumenty funkce použity bez funkce (pozice: $POS$)</translation>
+        <translation type="vanished">Argumenty funkce použity bez funkce (pozice: $POS$)</translation>
     </message>
     <message>
         <source>Missing parenthesis</source>
         <comment>Math parser error messages.</comment>
-        <translation>Chybějící závorka</translation>
+        <translation type="vanished">Chybějící závorka</translation>
     </message>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Příliš mnoho parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
+        <translation type="vanished">Příliš mnoho parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
     </message>
     <message>
         <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Příliš málo parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
+        <translation type="vanished">Příliš málo parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
     </message>
     <message>
         <source>Divide by zero</source>
         <comment>Math parser error messages.</comment>
-        <translation>Dělení nulou</translation>
+        <translation type="vanished">Dělení nulou</translation>
     </message>
     <message>
         <source>Domain error</source>
         <comment>Math parser error messages.</comment>
-        <translation>Chyba domény</translation>
+        <translation type="vanished">Chyba domény</translation>
     </message>
     <message>
         <source>Name conflict</source>
         <comment>Math parser error messages.</comment>
-        <translation>Střet názvu</translation>
+        <translation type="vanished">Střet názvu</translation>
     </message>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation>Neplatná hodnota pro prioritu operátoru (musí být větší nebo rovný nule).</translation>
+        <translation type="vanished">Neplatná hodnota pro prioritu operátoru (musí být větší nebo rovný nule).</translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>uživatelem stanovený binární operátor &quot;$TOK$&quot; je ve střetu s vestavěným operátorem.</translation>
+        <translation type="vanished">uživatelem stanovený binární operátor &quot;$TOK$&quot; je ve střetu s vestavěným operátorem.</translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Neočekávaný řetězec textu nalezen v poloze $POS$.</translation>
+        <translation type="vanished">Neočekávaný řetězec textu nalezen v poloze $POS$.</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Neukončený řetězec začínající v poloze $POS$.</translation>
+        <translation type="vanished">Neukončený řetězec začínající v poloze $POS$.</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Řetězcová funkce volána s argumentem, který není řetězec.</translation>
+        <translation type="vanished">Řetězcová funkce volána s argumentem, který není řetězec.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Řetězcová hodnota použita tam, kde je očekávaný číselný argument.</translation>
+        <translation type="vanished">Řetězcová hodnota použita tam, kde je očekávaný číselný argument.</translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Žádné vhodné přetížení pro operátor &quot;$TOK$&quot; v poloze $POS$.</translation>
+        <translation type="vanished">Žádné vhodné přetížení pro operátor &quot;$TOK$&quot; v poloze $POS$.</translation>
     </message>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Výsledek funkce je řetězec.</translation>
+        <translation type="vanished">Výsledek funkce je řetězec.</translation>
     </message>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Chyba při zpracování.</translation>
+        <translation type="vanished">Chyba při zpracování.</translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Desetinný oddělovač je shodný s oddělovačem argumentů funkcí.</translation>
+        <translation type="vanished">Desetinný oddělovač je shodný s oddělovačem argumentů funkcí.</translation>
     </message>
     <message>
         <source>If-then-else operator is missing an else clause</source>
         <comment>Math parser error messages. Do not translate operator name.</comment>
-        <translation>V operátoru if-then-else chybí část else</translation>
+        <translation type="vanished">V operátoru if-then-else chybí část else</translation>
     </message>
     <message>
         <source>Misplaced colon at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Chybně umístěná dvojtečka v poloze $POS$</translation>
+        <translation type="vanished">Chybně umístěná dvojtečka v poloze $POS$</translation>
     </message>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Operátoru &quot;$TOK$&quot; musí předcházet ukončující závorka.</translation>
+        <translation type="vanished">Operátoru &quot;$TOK$&quot; musí předcházet ukončující závorka.</translation>
     </message>
 </context>
 <context>
@@ -8360,53 +7537,846 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VVITConverter</name>
+    <name>VTranslateVars</name>
     <message>
-        <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="unfinished">Neočekávaná verze &quot;%1&quot;.</translation>
+        <source>Bunka</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error restoring backup file: %1.</source>
-        <translation type="unfinished">Chyba při obnově záložního souboru: %1.</translation>
-    </message>
-</context>
-<context>
-    <name>VVSTConverter</name>
-    <message>
-        <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="unfinished">Neočekávaná verze &quot;%1&quot;.</translation>
+        <source>Bunka Fashion College</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error restoring backup file: %1.</source>
-        <translation type="unfinished">Chyba při obnově záložního souboru: %1.</translation>
+        <source>Fundamentals of Garment Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>Variables</name>
+    <message>
+        <source>Barnfield and Richard</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jo Barnfield and Andrew Richards</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Making Primer</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friendship/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elizabeth Friendship</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morris, K.</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karen Morris</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sewing Lingerie that Fits</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Castro</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lucia Mors de Castro</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking in Practic</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kim &amp; Uh</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Injoo Kim and Mykyung Uh</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apparel Making in Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waugh</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Norah Waugh</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corsets and Crinolines</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grimble</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frances Grimble</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fashions of the Gilded Age</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thornton&apos;s International System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ed. R. L. Shep</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Great War: Styles and Patterns of the 1910s</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hillhouse &amp; Mansfield</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dress Design: Draping and Flat Pattern Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pivnick</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Esther Kaplan Pivnick</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minister &amp; Son</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Complete Guide to Practical Cutting (1853)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strickland</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Strickland</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A Tailoring Manual</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loh &amp; Lewis</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>May Loh and Diehl Lewis</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternless Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morris, F. R.</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F. R. Morris</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ladies Garment Cutting and Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mason</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Mason</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Mason&apos;s Patternmaking Book</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kimata</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>K. Kimata</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Designer</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Master Designer (Chicago, IL)</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kopp</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Draft Basic Patterns</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ekern</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doris Ekern</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slacks Cut-to-Fit for Your Figure</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doyle</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sarah J. Doyle</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sarah&apos;s Key to Pattern Drafting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shelton</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karla J. Shelton</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Design and Sew Jeans</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique magazine (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rohr</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M. Rohr</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Moore</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dorothy Moore</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abling</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bina Abling</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Integrating Draping, Drafting and Drawing</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fukomoto</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sue S. Fukomoto</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International magazine (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erwin</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mabel D. Erwin</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Practical Dress Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gough</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E. L. G. Gough</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Principles of Garment Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allemong</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elizabeth M. Allemong</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>European Cut</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>McCunn</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Donald H. McCunn</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Make Your Own Sewing Patterns</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zarapkar</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zarapkar System of Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kunick</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Philip Kunick</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Handford</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jack Handford</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Davis</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>R. I. Davis</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MacLochlainn</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jason MacLochlainn</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Joseph-Armstrong</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Helen Joseph-Armstrong</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking for Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Supreme System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frederick T. Croonberg</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sugino</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Drafting Vols. I, II, III (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centre Point System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Louis Devere</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Handbook of Practical Cutting on the Centre Point System</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aldrich/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Winifred Aldrich</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric Pattern Cutting for Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aldrich/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric Pattern Cutting for Women&apos;s Wear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kershaw</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gareth Kershaw</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking for Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gilewska</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Teresa Gilewska</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern-Drafting for Fashion: The Basics</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lo</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dennic Chunman Lo</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bray</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Natalie Bray</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Knowles/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lori A. Knowles</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friendship/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Cutting for Men&apos;s Costume</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brown</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P. Clement Brown</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Art in Dress</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mitchell</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jno. J. Mitchell</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GOST 17917-86</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ministry of consumer industry of the USSR</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard figure boys</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eddy</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern and Dress Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Knowles/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>American Garment Cutter</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valentina team</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valentina&apos;s internal standard</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Čára_</translation>
+        <translation type="unfinished">Čára_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Úhel čáry_</translation>
+        <translation type="unfinished">Úhel čáry_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Oblouk_</translation>
+        <translation type="unfinished">Oblouk_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Křivka_</translation>
+        <translation type="unfinished">Křivka_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>Cesta křivky</translation>
+        <translation type="unfinished">Cesta křivky</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
@@ -8442,6 +8412,201 @@ Do you want to save your changes?</source>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sin</source>
+        <comment>sine function</comment>
+        <translation type="unfinished">sin</translation>
+    </message>
+    <message>
+        <source>cos</source>
+        <comment>cosine function</comment>
+        <translation type="unfinished">cos</translation>
+    </message>
+    <message>
+        <source>tan</source>
+        <comment>tangens function</comment>
+        <translation type="unfinished">tan</translation>
+    </message>
+    <message>
+        <source>asin</source>
+        <comment>arcus sine function</comment>
+        <translation type="unfinished">asin</translation>
+    </message>
+    <message>
+        <source>acos</source>
+        <comment>arcus cosine function</comment>
+        <translation type="unfinished">acos</translation>
+    </message>
+    <message>
+        <source>atan</source>
+        <comment>arcus tangens function</comment>
+        <translation type="unfinished">atan</translation>
+    </message>
+    <message>
+        <source>sinh</source>
+        <comment>hyperbolic sine function</comment>
+        <translation type="unfinished">sinh</translation>
+    </message>
+    <message>
+        <source>cosh</source>
+        <comment>hyperbolic cosine</comment>
+        <translation type="unfinished">cosh</translation>
+    </message>
+    <message>
+        <source>tanh</source>
+        <comment>hyperbolic tangens function</comment>
+        <translation type="unfinished">tanh</translation>
+    </message>
+    <message>
+        <source>asinh</source>
+        <comment>hyperbolic arcus sine function</comment>
+        <translation type="unfinished">asinh</translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus tangens function</comment>
+        <translation type="unfinished">acosh</translation>
+    </message>
+    <message>
+        <source>atanh</source>
+        <comment>hyperbolic arcur tangens function</comment>
+        <translation type="unfinished">atanh</translation>
+    </message>
+    <message>
+        <source>log2</source>
+        <comment>logarithm to the base 2</comment>
+        <translation type="unfinished">log2</translation>
+    </message>
+    <message>
+        <source>log10</source>
+        <comment>logarithm to the base 10</comment>
+        <translation type="unfinished">log10</translation>
+    </message>
+    <message>
+        <source>log</source>
+        <comment>logarithm to the base 10</comment>
+        <translation type="unfinished">log</translation>
+    </message>
+    <message>
+        <source>ln</source>
+        <comment>logarithm to base e (2.71828...)</comment>
+        <translation type="unfinished">ln</translation>
+    </message>
+    <message>
+        <source>exp</source>
+        <comment>e raised to the power of x</comment>
+        <translation type="unfinished">exp</translation>
+    </message>
+    <message>
+        <source>sqrt</source>
+        <comment>square root of a value</comment>
+        <translation type="unfinished">sqrt</translation>
+    </message>
+    <message>
+        <source>sign</source>
+        <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
+        <translation type="unfinished">sign</translation>
+    </message>
+    <message>
+        <source>rint</source>
+        <comment>round to nearest integer</comment>
+        <translation type="unfinished">rint</translation>
+    </message>
+    <message>
+        <source>abs</source>
+        <comment>absolute value</comment>
+        <translation type="unfinished">abs</translation>
+    </message>
+    <message>
+        <source>min</source>
+        <comment>min of all arguments</comment>
+        <translation type="unfinished">min</translation>
+    </message>
+    <message>
+        <source>max</source>
+        <comment>max of all arguments</comment>
+        <translation type="unfinished">max</translation>
+    </message>
+    <message>
+        <source>sum</source>
+        <comment>sum of all arguments</comment>
+        <translation type="unfinished">sum</translation>
+    </message>
+    <message>
+        <source>avg</source>
+        <comment>mean value of all arguments</comment>
+        <translation type="unfinished">avg</translation>
+    </message>
+    <message>
+        <source>fmod</source>
+        <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <comment>centimeter</comment>
+        <translation type="unfinished">cm</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <comment>millimeter</comment>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>in</source>
+        <comment>inch</comment>
+        <translation type="unfinished">palce</translation>
+    </message>
+</context>
+<context>
+    <name>VVITConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished">Neočekávaná verze &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
+        <translation type="unfinished">Chyba při obnově záložního souboru: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VVSTConverter</name>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished">Neočekávaná verze &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error restoring backup file: %1.</source>
+        <translation type="unfinished">Chyba při obnově záložního souboru: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>Variables</name>
+    <message>
+        <source>Line_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Čára_</translation>
+    </message>
+    <message>
+        <source>AngleLine_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Úhel čáry_</translation>
+    </message>
+    <message>
+        <source>Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Oblouk_</translation>
+    </message>
+    <message>
+        <source>Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Křivka_</translation>
+    </message>
+    <message>
+        <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="vanished">Cesta křivky</translation>
     </message>
 </context>
 <context>
@@ -8524,6 +8689,189 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern file.</source>
         <translation type="vanished">Soubor se střihem.</translation>
+    </message>
+</context>
+<context>
+    <name>qmu::QmuParserErrorMsg</name>
+    <message>
+        <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished">Nalezen neočekávaný řetězec &quot;$TOK$&quot; na pozici $POS$.</translation>
+    </message>
+    <message>
+        <source>Internal error</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Vnitřní chyba</translation>
+    </message>
+    <message>
+        <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished">Neplatný název funkce, proměnné nebo konstanty: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished">Neplatný identifikátor binárního operátoru: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished">Neplatný identifikátor zaváděcího operátoru: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished">Neplatný identifikátor ukončujícího operátoru: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid pointer to callback function.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Neplatný ukazatel na funkci zpětného volání.</translation>
+    </message>
+    <message>
+        <source>Expression is empty.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Výraz je prázdný.</translation>
+    </message>
+    <message>
+        <source>Invalid pointer to variable.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Neplatný ukazatel na proměnnou.</translation>
+    </message>
+    <message>
+        <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished">Nalezen neočekávaný operátor &quot;$TOK$&quot; na pozici $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected end of expression at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished">Neočekávaný konec výrazu v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected argument separator at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished">Neočekávaný oddělovač argumentů v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished">Neočekávaná závorka &quot;$TOK$&quot; v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished">Neočekávaná funkce &quot;$TOK$&quot; v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished">Nalezena neočekávaná hodnota &quot;$TOK$&quot; v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished">Nalezena neočekávaná proměnná &quot;$TOK$&quot; v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Function arguments used without a function (position: $POS$)</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished">Argumenty funkce použity bez funkce (pozice: $POS$)</translation>
+    </message>
+    <message>
+        <source>Missing parenthesis</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Chybějící závorka</translation>
+    </message>
+    <message>
+        <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished">Příliš mnoho parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished">Příliš málo parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Divide by zero</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Dělení nulou</translation>
+    </message>
+    <message>
+        <source>Domain error</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Chyba domény</translation>
+    </message>
+    <message>
+        <source>Name conflict</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Střet názvu</translation>
+    </message>
+    <message>
+        <source>Invalid value for operator priority (must be greater or equal to zero).</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Neplatná hodnota pro prioritu operátoru (musí být větší nebo rovný nule).</translation>
+    </message>
+    <message>
+        <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished">uživatelem stanovený binární operátor &quot;$TOK$&quot; je ve střetu s vestavěným operátorem.</translation>
+    </message>
+    <message>
+        <source>Unexpected string token found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished">Neočekávaný řetězec textu nalezen v poloze $POS$.</translation>
+    </message>
+    <message>
+        <source>Unterminated string starting at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished">Neukončený řetězec začínající v poloze $POS$.</translation>
+    </message>
+    <message>
+        <source>String function called with a non string type of argument.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Řetězcová funkce volána s argumentem, který není řetězec.</translation>
+    </message>
+    <message>
+        <source>String value used where a numerical argument is expected.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Řetězcová hodnota použita tam, kde je očekávaný číselný argument.</translation>
+    </message>
+    <message>
+        <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="unfinished">Žádné vhodné přetížení pro operátor &quot;$TOK$&quot; v poloze $POS$.</translation>
+    </message>
+    <message>
+        <source>Function result is a string.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Výsledek funkce je řetězec.</translation>
+    </message>
+    <message>
+        <source>Parser error.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Chyba při zpracování.</translation>
+    </message>
+    <message>
+        <source>Decimal separator is identic to function argument separator.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="unfinished">Desetinný oddělovač je shodný s oddělovačem argumentů funkcí.</translation>
+    </message>
+    <message>
+        <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="unfinished">Operátoru &quot;$TOK$&quot; musí předcházet ukončující závorka.</translation>
+    </message>
+    <message>
+        <source>If-then-else operator is missing an else clause</source>
+        <comment>Math parser error messages. Do not translate operator name.</comment>
+        <translation type="unfinished">V operátoru if-then-else chybí část else</translation>
+    </message>
+    <message>
+        <source>Misplaced colon at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="unfinished">Chybně umístěná dvojtečka v poloze $POS$</translation>
     </message>
 </context>
 <context>

@@ -43,6 +43,11 @@ namespace qmu
  * map.insert("head_girth", VTranslation::translate("Measurements", "head_girth", "Around fullest part of Head."));
  * get translated string
  * map.value(measurement).translate();
+ *
+ * Hint. Define macros tr() for reducing code complexity.
+ * #define tr(source, disambiguation) QmuTranslation::translate("VTranslateVars", (source), (disambiguation))
+ *
+ * Don't forget to undef macros later!
  */
 class QMUPARSERSHARED_EXPORT QmuTranslation
 {
