@@ -28,13 +28,13 @@
 
 #include "dialoghistory.h"
 #include "ui_dialoghistory.h"
-#include "../../libs/vgeometry/varc.h"
-#include "../../libs/vgeometry/vsplinepath.h"
-#include "../../libs/vgeometry/vpointf.h"
-#include "../../libs/vtools/tools/vabstracttool.h"
-#include "../../libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
-#include "../../libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
-#include "../../libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/vpointf.h"
+#include "../vtools/tools/vabstracttool.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
 #include "../xml/vpattern.h"
 
 //---------------------------------------------------------------------------------------------------------------------

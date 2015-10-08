@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "tst_varc.h"
-#include "../../libs/vgeometry/varc.h"
+#include "../vgeometry/varc.h"
 
 #include <QtTest>
 

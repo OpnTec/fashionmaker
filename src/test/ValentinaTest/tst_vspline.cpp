@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "tst_vspline.h"
-#include "../../libs/vgeometry/vspline.h"
+#include "../vgeometry/vspline.h"
 
 #include <QtTest>
 

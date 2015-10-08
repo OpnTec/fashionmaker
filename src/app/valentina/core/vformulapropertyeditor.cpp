@@ -34,8 +34,8 @@
 #include <QApplication>
 #include <QColorDialog>
 
-#include "../../libs/vpropertyexplorer/vproperty.h"
-#include "../../libs/vtools/dialogs/support/dialogeditwrongformula.h"
+#include "../vpropertyexplorer/vproperty.h"
+#include "../vtools/dialogs/support/dialogeditwrongformula.h"
 
 using namespace VPE;
 

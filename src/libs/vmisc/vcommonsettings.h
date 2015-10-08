@@ -30,7 +30,7 @@
 #define VCOMMONSETTINGS_H
 
 #include <QSettings>
-#include "../../libs/vlayout/vbank.h"
+#include "../vlayout/vbank.h"
 
 class VCommonSettings : public QSettings
 {

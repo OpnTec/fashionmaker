@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "tst_vlayoutdetail.h"
-#include "../../libs/vlayout/vlayoutdetail.h"
+#include "../vlayout/vlayoutdetail.h"
 
 #include <QtDebug>
 

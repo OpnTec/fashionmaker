@@ -29,8 +29,8 @@
 #include "dialoglayoutsettings.h"
 #include "ui_dialoglayoutsettings.h"
 #include "../core/vapplication.h"
-#include "../../libs/ifc/xml/vdomdocument.h"
-#include "../../libs/vmisc/vsettings.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../vmisc/vsettings.h"
 #include <vector>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)

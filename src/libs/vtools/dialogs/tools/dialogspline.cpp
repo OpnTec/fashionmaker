@@ -29,8 +29,8 @@
 #include "dialogspline.h"
 #include "ui_dialogspline.h"
 
-#include "../../libs/vgeometry/vpointf.h"
-#include "../../libs/vpatterndb/vcontainer.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolspline.h"
 #include <QDebug>
 

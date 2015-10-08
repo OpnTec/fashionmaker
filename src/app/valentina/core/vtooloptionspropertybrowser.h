@@ -32,9 +32,9 @@
 #include <QObject>
 #include <QMap>
 
-#include "../../libs/vpropertyexplorer/vproperty.h"
-#include "../../libs/vpropertyexplorer/vpropertymodel.h"
-#include "../../libs/vpropertyexplorer/vpropertyformview.h"
+#include "../vpropertyexplorer/vproperty.h"
+#include "../vpropertyexplorer/vpropertymodel.h"
+#include "../vpropertyexplorer/vpropertyformview.h"
 
 class QDockWidget;
 class QGraphicsItem;

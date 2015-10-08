@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vundocommand.h"
-#include "../../libs/vmisc/def.h"
+#include "../vmisc/def.h"
 
 Q_LOGGING_CATEGORY(vUndo, "v.undo")
 

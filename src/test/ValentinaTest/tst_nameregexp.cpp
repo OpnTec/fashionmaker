@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "tst_nameregexp.h"
-#include "../../libs/qmuparser/qmudef.h"
+#include "../qmuparser/qmudef.h"
 
 #include <QtTest>
 

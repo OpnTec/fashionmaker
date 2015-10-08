@@ -29,7 +29,7 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-#include "../../libs/vmisc/projectversion.h"
+#include "../vmisc/projectversion.h"
 
 #define VER_INTERNALNAME_STR        "Valentina"
 #define VER_ORIGINALFILENAME_STR    "valentina.exe"

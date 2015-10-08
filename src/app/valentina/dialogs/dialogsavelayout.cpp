@@ -30,7 +30,7 @@
 #include "ui_dialogsavelayout.h"
 #include "../options.h"
 #include "../core/vapplication.h"
-#include "../../libs/vmisc/vsettings.h"
+#include "../vmisc/vsettings.h"
 
 #include <QDir>
 #include <QFileDialog>

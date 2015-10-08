@@ -31,7 +31,7 @@
 
 #include "ui_dialogdetail.h"
 #include "dialogtool.h"
-#include "../../libs/vpatterndb/vdetail.h"
+#include "../vpatterndb/vdetail.h"
 
 /**
  * @brief The DialogDetail class dialog for ToolDetai. Help create detail and edit option.

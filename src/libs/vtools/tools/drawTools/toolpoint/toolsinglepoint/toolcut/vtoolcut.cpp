@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "vtoolcut.h"
-#include "../../libs/vgeometry/vpointf.h"
-#include "../../libs/vpatterndb/vformula.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,

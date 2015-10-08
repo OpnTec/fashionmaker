@@ -29,11 +29,11 @@
 #include "dialogheight.h"
 #include "ui_dialogheight.h"
 
-#include "../../libs/vgeometry/vpointf.h"
-#include "../../libs/vpatterndb/vcontainer.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../../tools/vabstracttool.h"
 #include "../../visualization/vistoolheight.h"
-#include "../../libs/vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

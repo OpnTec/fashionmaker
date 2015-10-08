@@ -32,9 +32,9 @@
 #include <QCloseEvent>
 #include <QDialog>
 
-#include "../../libs/vlayout/vbank.h"
-#include "../../libs/ifc/ifcdef.h"
-#include "../../libs/vlayout/vlayoutgenerator.h"
+#include "../vlayout/vbank.h"
+#include "../ifc/ifcdef.h"
+#include "../vlayout/vlayoutgenerator.h"
 
 namespace Ui
 {

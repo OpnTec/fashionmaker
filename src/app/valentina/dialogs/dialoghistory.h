@@ -29,7 +29,7 @@
 #ifndef DIALOGHISTORY_H
 #define DIALOGHISTORY_H
 
-#include "../../libs/vtools/dialogs/tools/dialogtool.h"
+#include "../vtools/dialogs/tools/dialogtool.h"
 
 #include <QDomElement>
 

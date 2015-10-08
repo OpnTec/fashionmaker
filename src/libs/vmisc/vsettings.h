@@ -30,7 +30,7 @@
 #define VSETTINGS_H
 
 #include "vcommonsettings.h"
-#include "../../libs/vlayout/vbank.h"
+#include "../vlayout/vbank.h"
 
 class VSettings : public VCommonSettings
 {

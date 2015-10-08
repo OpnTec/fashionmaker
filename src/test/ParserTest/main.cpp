@@ -29,7 +29,7 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QtGlobal>
-#include "../../libs/qmuparser/qmuparsertest.h"
+#include "../qmuparser/qmuparsertest.h"
 
 using namespace qmu;
 

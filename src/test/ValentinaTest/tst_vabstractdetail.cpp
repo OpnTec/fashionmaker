@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "tst_vabstractdetail.h"
-#include "../../libs/vlayout/vabstractdetail.h"
+#include "../vlayout/vabstractdetail.h"
 
 #include <QPointF>
 #include <QVector>

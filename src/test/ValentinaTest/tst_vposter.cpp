@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "tst_vposter.h"
-#include "../../libs/vlayout/vposter.h"
+#include "../vlayout/vposter.h"
 
 #include <QImage>
 #include <QPrinter>

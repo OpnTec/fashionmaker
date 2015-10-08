@@ -31,7 +31,7 @@
 
 #include <QDialog>
 
-#include "../../libs/vlayout/vlayoutdef.h"
+#include "../vlayout/vlayoutdef.h"
 
 namespace Ui
 {

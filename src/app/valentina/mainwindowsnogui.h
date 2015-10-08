@@ -35,7 +35,7 @@
 #include "../vlayout/vlayoutdetail.h"
 #include "xml/vpattern.h"
 #include "dialogs/dialogsavelayout.h"
-#include "../../libs/vlayout/vlayoutgenerator.h"
+#include "../vlayout/vlayoutgenerator.h"
 
 
 class QGraphicsScene;

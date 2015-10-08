@@ -27,15 +27,15 @@
  *************************************************************************/
 
 #include "vtooloptionspropertybrowser.h"
-#include "../../libs/vtools/tools/drawTools/drawtools.h"
+#include "../vtools/tools/drawTools/drawtools.h"
 #include "../core/vapplication.h"
-#include "../../libs/vwidgets/vmaingraphicsview.h"
-#include "../../libs/vwidgets/vgraphicssimpletextitem.h"
-#include "../../libs/vwidgets/vcontrolpointspline.h"
-#include "../../libs/vwidgets/vsimplepoint.h"
-#include "../../libs/vpropertyexplorer/vproperties.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../vwidgets/vcontrolpointspline.h"
+#include "../vwidgets/vsimplepoint.h"
+#include "../vpropertyexplorer/vproperties.h"
 #include "vformulaproperty.h"
-#include "../../libs/vpatterndb/vformula.h"
+#include "../vpatterndb/vformula.h"
 
 #include <QDockWidget>
 #include <QHBoxLayout>
