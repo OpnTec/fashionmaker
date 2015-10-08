@@ -338,6 +338,7 @@ QTreeWidgetItem *DialogMDataBase::AddGroup(const QString &text)
     QTreeWidgetItem *group = new QTreeWidgetItem(ui->treeWidget);
     group->setText(0, text);
     group->setToolTip(0, text);
+    group->setExpanded(true);
     if (selectMode)
     {
         group->setFlags(Qt::ItemIsUserCheckable | Qt::ItemIsEnabled);
