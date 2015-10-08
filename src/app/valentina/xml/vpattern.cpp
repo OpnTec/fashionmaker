@@ -355,41 +355,83 @@ void VPattern::LiteParseTree(const Document &parse)
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (const VExceptionConversionError &e)
     {
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (const VExceptionEmptyParameter &e)
     {
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (const VExceptionWrongId &e)
     {
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (VException &e)
     {
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
     catch (const std::bad_alloc &)
     {
         qCCritical(vXML, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
         emit SetEnabledGUI(false);
-        return;
+        if (VApplication::CheckGUI())
+        {
+            return;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
+        }
     }
 
     // Restore name current pattern piece
@@ -743,8 +785,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             ParseToolTrueDarts(scene, domElement, parse);
             break;
         default:
-            qDebug() << "Illegal point type in VDomDocument::ParsePointElement().";
-            break;
+            VException e(tr("Unknown point type '%1'.").arg(type));
+            throw e;
     }
 }
 
@@ -2102,8 +2144,8 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, const QDomElement &
             ParseNodeSplinePath(domElement, parse);
             break;
         default:
-            qCDebug(vXML, "Illegal spline type in VDomDocument::ParseSplineElement().");
-            break;
+            VException e(tr("Unknown spline type '%1'.").arg(type));
+            throw e;
     }
 }
 
@@ -2138,8 +2180,8 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
             ParseToolArcWithLength(scene, domElement, parse);
             break;
         default:
-            qDebug() << "Illegal arc type in VDomDocument::ParseArcElement().";
-            break;
+            VException e(tr("Unknown arc type '%1'.").arg(type));
+            throw e;
     }
 }
 
@@ -2183,8 +2225,8 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
             }
             break;
         default:
-            qDebug() << "Illegal tools type in VDomDocument::ParseToolsElement().";
-            break;
+            VException e(tr("Unknown tools type '%1'.").arg(type));
+            throw e;
     }
 }
 
