@@ -33,7 +33,6 @@
 
 #include <QMessageBox>
 #include <QPushButton>
-#include <QtSvgDepends>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
