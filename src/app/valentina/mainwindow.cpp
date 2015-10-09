@@ -3449,7 +3449,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
     }
     return restoreFiles;
 #else
-    return qApp->getSettings()->GetRestoreFileList();
+    return qApp->ValentinaSettings()->GetRestoreFileList();
 #endif //QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
 }
 
