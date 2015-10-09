@@ -31,6 +31,7 @@
 #include "../mapplication.h"
 
 #include <QKeyEvent>
+#include <QMenu>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
