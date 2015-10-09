@@ -77,6 +77,7 @@ CONFIG(debug, debug|release){
 
 }else{
     # Release mode
+    CONFIG += silent
 
     !unix:*-g++{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll

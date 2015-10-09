@@ -94,6 +94,7 @@ CONFIG(debug, debug|release){
     DEFINES += "BUILD_REVISION=\\\"unknown\\\""
 }else{
     # Release mode
+    CONFIG += silent
     DEFINES += V_NO_ASSERT
     !unix:*-g++{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
