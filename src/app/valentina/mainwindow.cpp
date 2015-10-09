@@ -1954,16 +1954,13 @@ bool MainWindow::SaveAs()
 
     if (QFileInfo(fileName).exists())
     {
+        // Temporary try to lock the file before saving
         VLockGuard<char> tmp(fileName + ".lock");
-
         if (not tmp.IsLocked())
         {
-            if (lock->GetLockError() == QLockFile::LockFailedError)
-            {
-                qCCritical(vMainWindow, "%s",
-                           qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
-                return false;
-            }
+            qCCritical(vMainWindow, "%s",
+                       qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
+            return false;
         }
     }
 
@@ -1982,9 +1979,6 @@ bool MainWindow::SaveAs()
         return result;
     }
 
-    qCDebug(vMainWindow, "Unlock old file");
-    lock.reset();
-
     qCDebug(vMainWindow, "Locking file");
     VlpCreateLock(lock, fileName+".lock");
 
@@ -1996,13 +1990,9 @@ bool MainWindow::SaveAs()
     {
         qCDebug(vMainWindow, "Failed to lock %s", qUtf8Printable(fileName));
         qCDebug(vMainWindow, "Error type: %d", lock->GetLockError());
-        if (lock->GetLockError() == QLockFile::LockFailedError)
-        {
-            qCCritical(vMainWindow, "%s",
-                       qUtf8Printable(tr("Failed to lock. This file already opened in another window. Expect "
-                                         "collissions when run 2 copies of the program.")));
-            lock.reset();
-        }
+        qCCritical(vMainWindow, "%s",
+                   qUtf8Printable(tr("Failed to lock. This file already opened in another window. Expect "
+                                     "collissions when run 2 copies of the program.")));
     }
 
     return result;
@@ -3310,18 +3300,15 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
     {
         qCDebug(vMainWindow, "Failed to lock %s", qUtf8Printable(fileName));
         qCDebug(vMainWindow, "Error type: %d", lock->GetLockError());
-        if (lock->GetLockError() == QLockFile::LockFailedError)
+        qCCritical(vMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
+        Clear();
+        if (VApplication::CheckGUI())
         {
-            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
-            Clear();
-            if (VApplication::CheckGUI())
-            {
-                return false;
-            }
-            else
-            {
-                std::exit(V_EX_NOINPUT);
-            }
+            return false;
+        }
+        else
+        {
+            std::exit(V_EX_NOINPUT);
         }
     }
 

@@ -191,10 +191,9 @@ void TMainWindow::LoadFile(const QString &path)
 
         VlpCreateLock(lock, QFileInfo(path).fileName()+".lock");
 
-        if (lock->GetLockError() == QLockFile::LockFailedError)
+        if (not lock->IsLocked())
         {
             qCCritical(tMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
-            lock.reset();
             if (qApp->IsTestMode())
             {
                 std::exit(V_EX_NOINPUT);
@@ -515,16 +514,13 @@ void TMainWindow::FileSaveAs()
 
     if (QFileInfo(fileName).exists())
     {
+        // Temporary try to lock the file before saving
         VLockGuard<char> tmp(fileName + ".lock");
-
         if (not tmp.IsLocked())
         {
-            if (lock->GetLockError() == QLockFile::LockFailedError)
-            {
-                qCCritical(tMainWindow, "%s",
-                           qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
-                return;
-            }
+            qCCritical(tMainWindow, "%s",
+                       qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
+            return;
         }
     }
 
@@ -543,15 +539,11 @@ void TMainWindow::FileSaveAs()
         return;
     }
 
-    lock.reset();
-
     VlpCreateLock(lock, fileName + ".lock");
-
-    if (lock->GetLockError() == QLockFile::LockFailedError)
+    if (not lock->IsLocked())
     {
         qCCritical(tMainWindow, "%s", qUtf8Printable(tr("Failed to lock. This file already opened in another window. "
                                                         "Expect collissions when run 2 copies of the program.")));
-        lock.reset();
         return;
     }
 }
@@ -952,8 +944,7 @@ void TMainWindow::ImportFromPattern()
     }
 
     VLockGuard<char> tmp(QFileInfo(mPath).fileName()+".lock");
-
-    if (tmp.GetLockError() == QLockFile::LockFailedError)
+    if (not tmp.IsLocked())
     {
         qCCritical(tMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
         return;

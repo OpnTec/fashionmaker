@@ -145,21 +145,14 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
     lock.reset(new QLockFile(lockName));
     lock->setStaleLockTime(stale);
 
-    for (int i = 0; i < 2 && !lock->tryLock(timeout); i++)
+    if (QLockFile::LockFailedError == lock->error())
     {
-        if (QLockFile::LockFailedError != lock->error())
-        {
-            break;
-        }
-        else
-        {
-            // This happens if a stale lock file exists and another process uses that PID.
-            // Try removing the stale file, which will fail if a real process is holding a
-            // file-level lock. A false error is more problematic than not locking properly
-            // on corner-case systems.
-            lock->removeStaleLockFile();
-            lock->tryLock(timeout);
-        }
+        // This happens if a stale lock file exists and another process uses that PID.
+        // Try removing the stale file, which will fail if a real process is holding a
+        // file-level lock. A false error is more problematic than not locking properly
+        // on corner-case systems.
+        lock->removeStaleLockFile();
+        lock->tryLock(timeout);
     }
     res = QLockFile::NoError == (lockError = lock->error());
     if (!res)
