@@ -128,7 +128,7 @@ void DialogNewMeasurements::CurrentUnitChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::InitMTypes()
 {
-    int val;
+    int val = static_cast<int>(MeasurementsType::Unknown);
     if (ui->comboBoxMType->currentIndex() != -1)
     {
         val = ui->comboBoxMType->currentData().toInt();
@@ -166,7 +166,7 @@ void DialogNewMeasurements::InitSizesList()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
 {
-    int val;
+    int val = static_cast<int>(Unit::Cm);
     if (ui->comboBoxUnit->currentIndex() != -1)
     {
         val = ui->comboBoxUnit->currentData().toInt();
