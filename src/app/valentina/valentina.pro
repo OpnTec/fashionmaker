@@ -1850,7 +1850,7 @@ unix{
 
 # "make install" command for Windows.
 # Depend on nsis script and create installer in folder "package"
-win32{
+win32:*-g++ {
     package.path = $${OUT_PWD}/package/valentina
     package.files += \
         $${OUT_PWD}/$${DESTDIR}/valentina.exe \
