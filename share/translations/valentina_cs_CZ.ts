@@ -4510,14 +4510,6 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Print preview tailed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Print preview tailed layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Export As...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4708,6 +4700,14 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Print an original layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print preview tiled layout</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

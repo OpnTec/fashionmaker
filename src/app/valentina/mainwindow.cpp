@@ -2702,7 +2702,7 @@ void MainWindow::SetLayoutModeActions(bool enable)
     }
     ui->actionExportAs->setEnabled(value);
     ui->actionPrintPreview->setEnabled(value);
-    ui->actionPrintPreviewTailed->setEnabled(value);
+    ui->actionPrintPreviewTiled->setEnabled(value);
     ui->actionSaveAsPDF->setEnabled(value);
     ui->actionSaveAsTiledPDF->setEnabled(value);
     ui->actionPrint->setEnabled(value);
@@ -3148,7 +3148,7 @@ void MainWindow::CreateActions()
     connect(ui->actionShowM, &QAction::triggered, this, &MainWindow::ShowMeasurements);
     connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
     connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);
-    connect(ui->actionPrintPreviewTailed, &QAction::triggered, this, &MainWindow::PrintPreviewTiled);
+    connect(ui->actionPrintPreviewTiled, &QAction::triggered, this, &MainWindow::PrintPreviewTiled);
     connect(ui->actionSaveAsPDF, &QAction::triggered, this, &MainWindow::SaveAsPDF);
     connect(ui->actionSaveAsTiledPDF, &QAction::triggered, this, &MainWindow::SaveAsTiledPDF);
     connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::PrintOrigin);

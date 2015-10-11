@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>58</height>
         </rect>
        </property>
@@ -458,7 +458,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>156</height>
         </rect>
        </property>
@@ -622,7 +622,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>196</height>
         </rect>
        </property>
@@ -864,7 +864,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>58</height>
         </rect>
        </property>
@@ -950,8 +950,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>98</width>
-         <height>58</height>
+         <width>130</width>
+         <height>386</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1042,7 +1042,7 @@
      <addaction name="actionPrint"/>
      <addaction name="separator"/>
      <addaction name="actionSaveAsTiledPDF"/>
-     <addaction name="actionPrintPreviewTailed"/>
+     <addaction name="actionPrintPreviewTiled"/>
      <addaction name="actionPrintTiled"/>
      <addaction name="separator"/>
      <addaction name="actionExportAs"/>
@@ -1832,7 +1832,7 @@
     <string>Print preview original layout</string>
    </property>
   </action>
-  <action name="actionPrintPreviewTailed">
+  <action name="actionPrintPreviewTiled">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -1842,10 +1842,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Print preview tailed</string>
+    <string>Print preview tiled</string>
    </property>
    <property name="toolTip">
-    <string>Print preview tailed layout</string>
+    <string>Print preview tiled layout</string>
    </property>
   </action>
   <action name="actionExportAs">
