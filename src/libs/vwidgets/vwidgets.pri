@@ -2,7 +2,6 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
-    $$PWD/stable.cpp \
     $$PWD/vmaingraphicsscene.cpp \
     $$PWD/vmaingraphicsview.cpp \
     $$PWD/vsimplecurve.cpp \
@@ -11,6 +10,8 @@ SOURCES += \
     $$PWD/vgraphicssimpletextitem.cpp \
     $$PWD/vsimplepoint.cpp \
     $$PWD/vabstractsimple.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/stable.h \

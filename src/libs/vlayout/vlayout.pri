@@ -19,7 +19,6 @@ HEADERS += \
     vposter.h
 
 SOURCES += \
-    $$PWD/stable.cpp \
     $$PWD/vlayoutgenerator.cpp \
     $$PWD/vlayoutdetail.cpp \
     $$PWD/vabstractdetail.cpp \
@@ -29,3 +28,5 @@ SOURCES += \
     $$PWD/vbestsquare.cpp \
     $$PWD/vposition.cpp \
     vposter.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp

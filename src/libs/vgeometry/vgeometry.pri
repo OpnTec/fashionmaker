@@ -2,7 +2,6 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
-        $$PWD/stable.cpp \
         $$PWD/vgobject.cpp \
         $$PWD/vabstractcurve.cpp \
         $$PWD/varc.cpp \
@@ -10,6 +9,8 @@ SOURCES += \
         $$PWD/vspline.cpp \
         $$PWD/vsplinepath.cpp \
         $$PWD/vsplinepoint.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
         $$PWD/stable.h \

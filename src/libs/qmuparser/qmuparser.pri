@@ -9,10 +9,11 @@ SOURCES += \
     $$PWD/qmuparserbytecode.cpp \
     $$PWD/qmuparserbase.cpp \
     $$PWD/qmuparsertest.cpp \
-    $$PWD/stable.cpp \
     $$PWD/qmutranslation.cpp \
     $$PWD/qmuformulabase.cpp \
     $$PWD/qmutokenparser.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/qmuparser.h\

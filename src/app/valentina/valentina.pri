@@ -10,9 +10,9 @@ include(core/core.pri)
 SOURCES += \
         $$PWD/main.cpp \
         $$PWD/mainwindow.cpp \
-        $$PWD/stable.cpp \
         $$PWD/mainwindowsnogui.cpp
 
+win32-msvc*:SOURCES += $$PWD/stable.cpp
 
 # Some header files
 HEADERS  += \

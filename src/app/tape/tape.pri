@@ -4,7 +4,6 @@
 SOURCES  += \
     $$PWD/main.cpp \
     $$PWD/tmainwindow.cpp \
-    $$PWD/stable.cpp \
     $$PWD/mapplication.cpp \
     $$PWD/dialogs/dialogabouttape.cpp \
     $$PWD/dialogs/dialognewmeasurements.cpp \
@@ -14,6 +13,8 @@ SOURCES  += \
     $$PWD/dialogs/configpages/tapepathpage.cpp \
     $$PWD/vlitepattern.cpp \
     $$PWD/vtablesearch.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS  += \
     $$PWD/tmainwindow.h \

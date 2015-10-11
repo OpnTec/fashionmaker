@@ -2,11 +2,12 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
-    $$PWD/stable.cpp \
     $$PWD/dxflib/dl_dxf.cpp \
     $$PWD/dxflib/dl_writer_ascii.cpp \
     $$PWD/vdxfengine.cpp \
     $$PWD/vdxfpaintdevice.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/stable.h \

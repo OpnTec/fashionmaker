@@ -3,7 +3,6 @@
 
 SOURCES += \
     $$PWD/vcontainer.cpp \
-    $$PWD/stable.cpp \
     $$PWD/calculator.cpp \
     $$PWD/vdetail.cpp \
     $$PWD/vnodedetail.cpp \
@@ -23,6 +22,8 @@ SOURCES += \
     $$PWD/variables/vsplinelength.cpp \
     $$PWD/variables/vvariable.cpp \
     $$PWD/vformula.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/vcontainer.h \
