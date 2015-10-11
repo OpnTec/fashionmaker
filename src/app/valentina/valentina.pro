@@ -186,6 +186,10 @@ INSTALL_STANDARD_MEASHUREMENTS += share/resources/tables/standard/GOST_man_ru.vs
 
 TRANSLATIONS_PATH = ../../../share/translations
 
+win32 {
+    INSTALL_PDFTOPS += ../../../dist/win/pdftops.exe
+}
+
 # Add to this variable all translation files that you want install with program.
 # For generation *.qm file first you need create *.ts.
 # See section TRANSLATIONS in file ../../share/translations/translations.pro.
@@ -2015,6 +2019,15 @@ for(DIR, INSTALL_STANDARD_MEASHUREMENTS) {
 }
 
 copyToDestdir($$st_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tables/standard))
+
+win32 {
+    for(DIR, INSTALL_PDFTOPS) {
+        #add these absolute paths to a variable which
+        #ends up as 'mkcommands = path1 path2 path3 ...'
+        pdftops_path += $${PWD}/$$DIR
+    }
+    copyToDestdir($$pdftops_path, $$shell_path($${OUT_PWD}/$$DESTDIR))
+}
 
 # When the GNU linker sees a library, it discards all symbols that it doesn't need.
 # Dependent library go first.
