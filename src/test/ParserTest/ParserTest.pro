@@ -113,6 +113,8 @@ noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
                 QMAKE_POST_LINK += objcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
                 QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
                 QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
+
+                QMAKE_DISTCLEAN += bin/${TARGET}.dbg
             }
         }
     }

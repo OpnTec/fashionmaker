@@ -37,16 +37,23 @@ defineTest(copyToDestdir) {
     message("Copy to" $$DDIR "after link")
     for(FILE, files) {
 
-        # Replace slashes in paths with backslashes for Windows
-        win32{
-            FILE ~= s,/,\\,g
-            DDIR ~= s,/,\\,g
+        !exists($$DDIR/$$basename(FILE)) {
+            # Replace slashes in paths with backslashes for Windows
+            win32{
+                FILE ~= s,/,\\,g
+                DDIR ~= s,/,\\,g
+            }
+            QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
+            message("Command:" $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR))
+        } else {
+            message("File:" $$DDIR/$$basename(FILE) "already exist")
         }
-        QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
-        message("Command:" $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR))
+
+        QMAKE_CLEAN += $$DDIR/$$basename(FILE)
     }
 
     export(QMAKE_POST_LINK)
+    export(QMAKE_CLEAN)
     message("----------------------------------------------end---------------------------------------------------")
 }
 

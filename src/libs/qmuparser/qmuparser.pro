@@ -126,6 +126,8 @@ CONFIG(debug, debug|release){
                     QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
                     QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
                 }
+
+                QMAKE_DISTCLEAN += bin/${TARGET}.dbg
             }
         }
     }

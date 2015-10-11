@@ -54,7 +54,6 @@ RESOURCES += \
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \
-    share/resources/valentina.rc \ # For Windows system.
     share/resources/icon/64x64/icon64x64.ico # Valentina's logo.
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
@@ -1999,7 +1998,10 @@ for(_translation_name, INSTALL_TRANSLATIONS) {
   _translation_name_qm = $$basename(_translation_name)
   _translation_name_ts = $$section(_translation_name_qm, ".", 0, 0).ts
 
-  system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) -removeidentical -nounfinished $$shell_path($${PWD}/$${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($${PWD}/$$_translation_name))
+    !exists($${PWD}/$$_translation_name) {
+        system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) -removeidentical -nounfinished $$shell_path($${PWD}/$${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($${PWD}/$$_translation_name))
+    }
+    QMAKE_CLEAN += $${PWD}/$$_translation_name
 }
 
 for(DIR, INSTALL_TRANSLATIONS) {
@@ -2159,6 +2161,10 @@ noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
                 QMAKE_POST_LINK += objcopy --only-keep-debug ${TARGET} ${TARGET}.dbg &&
                 QMAKE_POST_LINK += objcopy --strip-debug ${TARGET} &&
                 QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
+            }
+
+            !macx{
+                QMAKE_DISTCLEAN += bin/${TARGET}.dbg
             }
         }
     }

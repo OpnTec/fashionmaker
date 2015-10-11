@@ -50,7 +50,6 @@ DATA_RESOURCE = share/resources/diagrams.qrc # External Binary Resource
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \
-    share/resources/tape.rc \ # For Windows system.
     share/resources/tapeicon/64x64/logo.ico \ # Tape's logo.
     $$DATA_RESOURCE
 
@@ -347,6 +346,8 @@ diagrams.commands = $$shell_path($$[QT_INSTALL_BINS]/rcc) --binary --no-compress
 
 QMAKE_EXTRA_COMPILERS += diagrams
 
+QMAKE_CLEAN += $${OUT_PWD}/$${DESTDIR}/diagrams.rcc
+
 noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     # do nothing
 } else {
@@ -367,6 +368,10 @@ noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
                 QMAKE_POST_LINK += objcopy --only-keep-debug ${TARGET} ${TARGET}.dbg &&
                 QMAKE_POST_LINK += objcopy --strip-debug ${TARGET} &&
                 QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
+            }
+
+            !macx{
+                QMAKE_DISTCLEAN += bin/${TARGET}.dbg
             }
         }
     }
