@@ -505,7 +505,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     parser.addPositionalArgument("filename", tr("The measurement file."));
     //-----
     QCommandLineOption heightOption(QStringList() << "e" << "height",
-            tr("Open with the base height. Vali values: %1cm.")
+            tr("Open with the base height. Valid values: %1cm.")
                                     .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", ")),
             tr("The base height"));
     parser.addOption(heightOption);
