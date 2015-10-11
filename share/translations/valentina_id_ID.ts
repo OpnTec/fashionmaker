@@ -2067,6 +2067,14 @@
         <comment>Measurement section</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Collapse All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expand All</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogMeasurements</name>
@@ -3224,10 +3232,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open with the base height. Vali values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open with the base size. Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3237,6 +3241,10 @@
     </message>
     <message>
         <source>Invalid base size argument. Must be %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open with the base height. Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4145,6 +4153,14 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please, provide one input file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -4206,6 +4222,10 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export error.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5661,6 +5681,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating true darts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong tag name &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown point type &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown spline type &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown arc type &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown tools type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7235,13 +7275,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Information.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>vmain</name>
-    <message>
-        <source>Please, provide one input file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
