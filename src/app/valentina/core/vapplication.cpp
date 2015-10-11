@@ -294,31 +294,31 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (const VExceptionBadId &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error bad id. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (const VExceptionConversionError &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (const VExceptionEmptyParameter &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (const VExceptionWrongId &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (const VException &e)
     {
@@ -331,12 +331,12 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     catch (const qmu::QmuParserError &e)
     {
         qCCritical(vApp, "%s", qUtf8Printable(tr("Parser error: %1. Program will be terminated.").arg(e.GetMsg())));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (std::exception& e)
     {
         qCCritical(vApp, "%s", qUtf8Printable(tr("Exception thrown: %1. Program will be terminated.").arg(e.what())));
-        std::exit(V_EX_SOFTWARE);
+        exit(V_EX_SOFTWARE);
     }
     return false;
 }

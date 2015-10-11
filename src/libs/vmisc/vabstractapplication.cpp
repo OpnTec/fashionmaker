@@ -63,6 +63,8 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
 
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+
+    connect(this, &QApplication::aboutToQuit, this, &VAbstractApplication::SyncSettings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,6 +135,15 @@ double VAbstractApplication::toPixel(double val) const
 double VAbstractApplication::fromPixel(double pix) const
 {
     return FromPixel(pix, _patternUnit);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::SyncSettings()
+{
+    // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
+    // instance. Solution is to call sync() before quit.
+    // Connect this slot with VApplication::aboutToQuit.
+    Settings()->sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

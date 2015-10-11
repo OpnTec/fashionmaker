@@ -101,7 +101,7 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
+bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
 {
     lGenerator.SetDetails(listDetails);
     DialogLayoutProgress progress(listDetails.count(), this);
@@ -135,14 +135,14 @@ void MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             isLayoutStale = false;
             break;
         case LayoutErrors::ProcessStoped:
-            break;
         case LayoutErrors::PrepareLayoutError:
         case LayoutErrors::EmptyPaperError:
-            break;
+            return false;
         default:
             break;
 
     }
+    return true;
 }
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
@@ -163,11 +163,10 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
             break;
     }
 
-    std::exit(V_EX_DATAERR);
+    qApp->exit(V_EX_DATAERR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
 void MainWindowsNoGUI::ExportLayoutAs()
 {
     if (isLayoutStale)
@@ -177,14 +176,24 @@ void MainWindowsNoGUI::ExportLayoutAs()
             return;
         }
     }
-    DialogSaveLayout dialog(scenes.size(), FileName(), this);
 
-    if (dialog.exec() == QDialog::Rejected)
+    try
     {
+        DialogSaveLayout dialog(scenes.size(), FileName(), this);
+
+        if (dialog.exec() == QDialog::Rejected)
+        {
+            return;
+        }
+
+        ExportLayout(dialog);
+    }
+    catch (const VException &e)
+    {
+        qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")),
+                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return;
     }
-
-    ExportLayout(dialog);
 }
 //---------------------------------------------------------------------------------------------------------------------
 

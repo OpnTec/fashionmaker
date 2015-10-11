@@ -95,7 +95,7 @@ protected:
     virtual void CleanLayout()=0;
     virtual void PrepareSceneList()=0;
     QIcon ScenePreview(int i) const;
-    void LayoutSettings(VLayoutGenerator& lGenerator);
+    bool LayoutSettings(VLayoutGenerator& lGenerator);
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 

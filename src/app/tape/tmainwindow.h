@@ -63,7 +63,7 @@ public:
     void SetPUnit(Unit unit);
 
 public slots:
-    void LoadFile(const QString &path);
+    bool LoadFile(const QString &path);
     void FileNew();
     void OpenIndividual();
     void OpenStandard();

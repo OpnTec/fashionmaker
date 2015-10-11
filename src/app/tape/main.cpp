@@ -28,7 +28,6 @@
 
 #include "tmainwindow.h"
 #include "mapplication.h"
-#include "../vmisc/vsysexits.h"
 
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 
@@ -50,6 +49,8 @@ int main(int argc, char *argv[])
 
     MApplication app(argc, argv);
     app.InitOptions();
-    app.ParseCommandLine(SocketConnection::Client, app.arguments());
-    return app.IsTestMode() ? V_EX_OK : app.exec(); // single return point is always better than more
+
+    QTimer::singleShot(0, &app, SLOT(ProcessCMD()));
+
+    return app.exec();
 }

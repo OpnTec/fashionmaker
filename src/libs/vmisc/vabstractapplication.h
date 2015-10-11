@@ -50,6 +50,7 @@ class QUndoStack;
 
 class VAbstractApplication : public QApplication
 {
+    Q_OBJECT
 public:
     VAbstractApplication(int &argc, char ** argv);
     virtual ~VAbstractApplication() Q_DECL_OVERRIDE;
@@ -91,6 +92,9 @@ public:
     void             setMainWindow(QWidget *value);
 
     QUndoStack      *getUndoStack() const;
+
+protected slots:
+    void SyncSettings();
 
 protected:
     QUndoStack         *undoStack;

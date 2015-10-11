@@ -31,6 +31,7 @@
 #include "../options.h"
 #include "../core/vapplication.h"
 #include "../vmisc/vsettings.h"
+#include "../ifc/exception/vexception.h"
 
 #include <QDir>
 #include <QFileDialog>
@@ -88,8 +89,8 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
         }
         else
         {
-            qCritical() << tr("The base filename has not match regular expression.");
-            std::exit(V_EX_USAGE);
+            VException e(tr("The base filename has not match regular expression."));
+            throw e;
         }
     }
 
@@ -119,15 +120,15 @@ void DialogSaveLayout::SelectFormate(const size_t formate)
 {
     if (formate >= availFormats.size())
     {
-        qCritical() << tr("Tried to use out of range format number.");
-        std::exit(V_EX_USAGE);
+        VException e(tr("Tried to use out of range format number."));
+        throw e;
     }
 
-    int i = ui->comboBoxFormat->findData(availFormats[formate].pair.second);
+    const int i = ui->comboBoxFormat->findData(availFormats[formate].pair.second);
     if (i < 0)
     {
-        qCritical() << tr("Selected not present format.");
-        std::exit(V_EX_USAGE);
+        VException e(tr("Selected not present format."));
+        throw e;
     }
     ui->comboBoxFormat->setCurrentIndex(i);
 }
@@ -164,8 +165,8 @@ void DialogSaveLayout::SetDestinationPath(const QString &cmdDestinationPath)
         QDir dir;
         if (not dir.cd(cmdDestinationPath))
         {
-            qCritical() << tr("The destination directory doesn't exists or is not readable.");
-            std::exit(V_EX_DATAERR);
+            VException e(tr("The destination directory doesn't exists or is not readable."));
+            throw e;
         }
         path = dir.absolutePath();
     }

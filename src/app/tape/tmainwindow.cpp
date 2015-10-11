@@ -160,7 +160,7 @@ void TMainWindow::SetPUnit(Unit unit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::LoadFile(const QString &path)
+bool TMainWindow::LoadFile(const QString &path)
 {
     if (m == nullptr)
     {
@@ -169,12 +169,9 @@ void TMainWindow::LoadFile(const QString &path)
             qCCritical(tMainWindow, "%s", qUtf8Printable(tr("File '%1' doesn't exist!").arg(path)));
             if (qApp->IsTestMode())
             {
-                std::exit(V_EX_NOINPUT);
+                qApp->exit(V_EX_NOINPUT);
             }
-            else
-            {
-                return;
-            }
+            return false;
         }
 
         // Check if file already opened
@@ -185,7 +182,7 @@ void TMainWindow::LoadFile(const QString &path)
             {
                 list.at(i)->activateWindow();
                 close();
-                return;
+                return false;
             }
         }
 
@@ -196,12 +193,9 @@ void TMainWindow::LoadFile(const QString &path)
             qCCritical(tMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
             if (qApp->IsTestMode())
             {
-                std::exit(V_EX_NOINPUT);
+                qApp->exit(V_EX_NOINPUT);
             }
-            else
-            {
-                return;
-            }
+            return false;
         }
 
         try
@@ -278,20 +272,18 @@ void TMainWindow::LoadFile(const QString &path)
 
             if (qApp->IsTestMode())
             {
-                std::exit(V_EX_NOINPUT);
+                qApp->exit(V_EX_NOINPUT);
             }
-            else
-            {
-                return;
-            }
+            return false;
         }
     }
     else
     {
         qApp->NewMainWindow();
-        qApp->MainWindow()->LoadFile(path);
+        return qApp->MainWindow()->LoadFile(path);
     }
 
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -60,14 +60,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow() Q_DECL_OVERRIDE;
 
-    bool LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
-    void ReopenFilesAfterCrash(QStringList &args);
-    void DoExport(const VCommandLinePtr& expParams);
-
-    void SetSize(const QString &text);
-    void SetHeight(const QString & text);
-
 public slots:
+    void               ProcessCMD();
+
     void               mouseMove(const QPointF &scenePos);
     void               ArrowTool();
 
@@ -309,6 +304,13 @@ private:
 
     QString            RelativeMPath(const QString &patternPath, const QString &absoluteMPath) const;
     QString            AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) const;
+
+    bool               LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
+    void               ReopenFilesAfterCrash(QStringList &args);
+    void               DoExport(const VCommandLinePtr& expParams);
+
+    void               SetSize(const QString &text);
+    void               SetHeight(const QString & text);
 };
 
 #endif // MAINWINDOW_H

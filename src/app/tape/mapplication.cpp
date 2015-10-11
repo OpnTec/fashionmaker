@@ -234,31 +234,31 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (const VExceptionBadId &e)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error bad id. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (const VExceptionConversionError &e)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (const VExceptionEmptyParameter &e)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (const VExceptionWrongId &e)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (const VException &e)
     {
@@ -271,12 +271,12 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
     catch (const qmu::QmuParserError &e)
     {
         qCCritical(mApp, "%s", qUtf8Printable(tr("Parser error: %1. Program will be terminated.").arg(e.GetMsg())));
-        std::exit(V_EX_DATAERR);
+        exit(V_EX_DATAERR);
     }
     catch (std::exception &e)
     {
         qCCritical(mApp, "%s", qUtf8Printable(tr("Exception thrown: %1. Program will be terminated.").arg(e.what())));
-        std::exit(V_EX_SOFTWARE);
+        exit(V_EX_SOFTWARE);
     }
     return false;
 }
@@ -603,7 +603,8 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
             stream << QCoreApplication::arguments().join(";;");
             stream.flush();
             socket.waitForBytesWritten();
-            std::exit(V_EX_OK);
+            qApp->exit(V_EX_OK);
+            return;
         }
 
         qCDebug(mApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
@@ -640,7 +641,15 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         for (int i = 0; i < args.size(); ++i)
         {
             NewMainWindow();
-            MainWindow()->LoadFile(args.at(i));
+            if (not MainWindow()->LoadFile(args.at(i)))
+            {
+                if (testMode)
+                {
+                    return; // process only one input file
+                }
+                delete MainWindow();
+                continue;
+            }
 
             if (flagSize)
             {
@@ -669,6 +678,11 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
             qCCritical(mApp, "%s\n", qPrintable(tr("Please, provide one input file.")));
             parser.showHelp(V_EX_USAGE);
         }
+    }
+
+    if (testMode)
+    {
+        qApp->exit(V_EX_OK); // close program after processing in console mode
     }
 }
 
@@ -708,6 +722,12 @@ TMainWindow *MApplication::NewMainWindow()
         tape->show();
     }
     return tape;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::ProcessCMD()
+{
+    ParseCommandLine(SocketConnection::Client, arguments());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

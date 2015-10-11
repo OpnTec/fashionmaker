@@ -290,14 +290,11 @@ QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &pat
                 qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Wrong units.")),
                           qUtf8Printable(tr("Application doesn't support standard table with inches.")));
                 m->clear();
-                if (VApplication::CheckGUI())
+                if (not VApplication::CheckGUI())
                 {
-                    return m;
+                    qApp->exit(V_EX_DATAERR);
                 }
-                else
-                {
-                    std::exit(V_EX_DATAERR);
-                }
+                return m;
             }
         }
     }
@@ -306,14 +303,11 @@ QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &pat
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         m->clear();
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return m;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return m;
     }
     return m;
 }
@@ -345,14 +339,11 @@ bool MainWindow::LoadMeasurements(const QString &path)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return false;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return false;
     }
     return true;
 }
@@ -370,14 +361,11 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     if (qApp->patternType() != m->Type())
     {
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Measurement files types have not match.")));
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return false;
+            qApp->exit(V_EX_DATAERR);
         }
-        else
-        {
-            std::exit(V_EX_DATAERR);
-        }
+        return false;
     }
 
     if (m->Type() == MeasurementsType::Standard)
@@ -395,14 +383,11 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return false;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return false;
     }
     return true;
 }
@@ -2207,83 +2192,65 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return;
     }
     catch (const VExceptionConversionError &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return;
     }
     catch (const VExceptionWrongId &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return;
     }
     catch (VException &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return;
     }
     catch (const std::bad_alloc &)
     {
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
         SetEnabledGUI(false);
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return;
     }
 
     QString patternPiece = QString();
@@ -2323,28 +2290,22 @@ void MainWindow::GlobalChangePP(const QString &patternPiece)
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Bad id.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return;
     }
     catch (const VExceptionEmptyParameter &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return;
     }
 }
 
@@ -3302,14 +3263,11 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         qCDebug(vMainWindow, "Error type: %d", lock->GetLockError());
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
         Clear();
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return false;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return false;
     }
 
     // On this stage scene empty. Fit scene size to view size
@@ -3344,14 +3302,11 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
                 Clear();
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
                                                              .arg(path)));
-                if (VApplication::CheckGUI())
+                if (not VApplication::CheckGUI())
                 {
-                    return false;
+                    qApp->exit(V_EX_NOINPUT);
                 }
-                else
-                {
-                    std::exit(V_EX_NOINPUT);
-                }
+                return false;
             }
 
             if (not LoadMeasurements(path))
@@ -3359,14 +3314,11 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
                                                              .arg(path)));
                 Clear();
-                if (VApplication::CheckGUI())
+                if (not VApplication::CheckGUI())
                 {
-                    return false;
+                    qApp->exit(V_EX_NOINPUT);
                 }
-                else
-                {
-                    std::exit(V_EX_NOINPUT);
-                }
+                return false;
             }
             else
             {
@@ -3382,14 +3334,11 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         Clear();
-        if (VApplication::CheckGUI())
+        if (not VApplication::CheckGUI())
         {
-            return false;
+            qApp->exit(V_EX_NOINPUT);
         }
-        else
-        {
-            std::exit(V_EX_NOINPUT);
-        }
+        return false;
     }
 
 #ifdef Q_OS_WIN32
@@ -3747,15 +3696,33 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
         if (details->count() == 0)
         {
             qCCritical(vMainWindow, "%s", qUtf8Printable(tr("You can't export empty scene.")));
-            std::exit(V_EX_DATAERR);
+            qApp->exit(V_EX_DATAERR);
+            return;
         }
     }
     PrepareDetailsForLayout(details);
-    LayoutSettings(*settings.get());
-    DialogSaveLayout dialog(scenes.size(), expParams->OptBaseName(), this);
-    dialog.SetDestinationPath(expParams->OptDestinationPath());
-    dialog.SelectFormate(expParams->OptExportType());
-    ExportLayout(dialog);
+    if (LayoutSettings(*settings.get()))
+    {
+        try
+        {
+            DialogSaveLayout dialog(scenes.size(), expParams->OptBaseName(), this);
+            dialog.SetDestinationPath(expParams->OptDestinationPath());
+            dialog.SelectFormate(expParams->OptExportType());
+            ExportLayout(dialog);
+        }
+        catch (const VException &e)
+        {
+            qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")), qUtf8Printable(e.ErrorMessage()));
+            qApp->exit(V_EX_DATAERR);
+            return;
+        }
+    }
+    else
+    {
+        return;
+    }
+
+    qApp->exit(V_EX_OK);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3831,5 +3798,68 @@ void MainWindow::SetHeight(const QString &text)
     else
     {
         qCWarning(vMainWindow, "%s", qUtf8Printable(tr("The method %1 does nothing in GUI mode").arg(Q_FUNC_INFO)));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ProcessCMD()
+{
+    auto args = qApp->CommandLine()->OptInputFileNames();
+
+    //Before we load pattern show window.
+    if (VApplication::CheckGUI())
+    {
+        show();
+        ReopenFilesAfterCrash(args);
+    }
+    else
+    {
+        if (args.size() != 1)
+        {
+            qCritical() << tr("Please, provide one input file.");
+            qApp->exit(V_EX_NOINPUT);
+            return;
+        }
+    }
+
+    for (int i=0, sz = args.size(); i < sz; ++i)
+    {
+        const bool loaded = LoadPattern(args.at(static_cast<int>(i)), qApp->CommandLine()->OptMeasurePath());
+
+        if (not loaded && not VApplication::CheckGUI())
+        {
+            return; // process only one input file
+        }
+
+        if (qApp->CommandLine()->IsTestModeEnabled() || qApp->CommandLine()->IsExportEnabled())
+        {
+            if (qApp->CommandLine()->IsSetGradationSize())
+            {
+                SetSize(qApp->CommandLine()->OptGradationSize());
+            }
+
+            if (qApp->CommandLine()->IsSetGradationHeight())
+            {
+                SetHeight(qApp->CommandLine()->OptGradationHeight());
+            }
+        }
+
+        if (not qApp->CommandLine()->IsTestModeEnabled())
+        {
+            if (qApp->CommandLine()->IsExportEnabled())
+            {
+                if (loaded)
+                {
+                    DoExport(qApp->CommandLine());
+                    return; // process only one input file
+                }
+                break;
+            }
+        }
+    }
+
+    if (not VApplication::CheckGUI())
+    {
+        qApp->exit(V_EX_OK);// close program after processing in console mode
     }
 }

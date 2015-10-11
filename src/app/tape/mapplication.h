@@ -82,6 +82,7 @@ public:
 
 public slots:
     TMainWindow *NewMainWindow();
+    void ProcessCMD();
 
 protected:
     virtual void InitTrVars() Q_DECL_OVERRIDE;
