@@ -3618,10 +3618,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Print original a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Print tiled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3832,6 +3828,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Please, provide one input file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print an original layout</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

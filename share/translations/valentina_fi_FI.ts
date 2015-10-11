@@ -4522,10 +4522,6 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Print original a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Print tiled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4736,6 +4732,10 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print an original layout</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

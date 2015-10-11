@@ -4481,10 +4481,6 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Print original a layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Print tiled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4695,6 +4691,10 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print an original layout</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

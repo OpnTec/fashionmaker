@@ -1797,7 +1797,7 @@
     <string>Print</string>
    </property>
    <property name="toolTip">
-    <string>Print original a layout</string>
+    <string>Print an original layout</string>
    </property>
   </action>
   <action name="actionPrintTiled">
