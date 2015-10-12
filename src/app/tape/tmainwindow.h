@@ -89,8 +89,10 @@ private slots:
     void ReadOnly(bool ro);
 
     void Remove();
+    void MoveTop();
     void MoveUp();
     void MoveDown();
+    void MoveBottom();
     void Fx();
 
     void AddCustom();

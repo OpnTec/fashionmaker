@@ -326,6 +326,19 @@
            </item>
            <item row="0" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QToolButton" name="toolButtonTop">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="go-top"/>
+               </property>
+              </widget>
+             </item>
              <item alignment="Qt::AlignLeft">
               <widget class="QToolButton" name="toolButtonUp">
                <property name="enabled">
@@ -359,6 +372,19 @@
                 <iconset theme="go-down">
                  <normaloff/>
                 </iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolButtonBottom">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="go-bottom"/>
                </property>
               </widget>
              </item>

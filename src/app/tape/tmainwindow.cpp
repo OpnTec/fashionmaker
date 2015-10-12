@@ -732,6 +732,24 @@ void TMainWindow::Remove()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::MoveTop()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
+    m->MoveTop(nameField->data(Qt::UserRole).toString());
+    MeasurementsWasSaved(false);
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+    ui->tableWidget->selectRow(0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::MoveUp()
 {
     const int row = ui->tableWidget->currentRow();
@@ -765,6 +783,24 @@ void TMainWindow::MoveDown()
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
     ui->tableWidget->selectRow(row+1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::MoveBottom()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
+    m->MoveBottom(nameField->data(Qt::UserRole).toString());
+    MeasurementsWasSaved(false);
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
+    ui->tableWidget->selectRow(ui->tableWidget->rowCount()-1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1712,8 +1748,10 @@ void TMainWindow::InitWindow()
 #endif
 
     connect(ui->toolButtonRemove, &QToolButton::clicked, this, &TMainWindow::Remove);
+    connect(ui->toolButtonTop, &QToolButton::clicked, this, &TMainWindow::MoveTop);
     connect(ui->toolButtonUp, &QToolButton::clicked, this, &TMainWindow::MoveUp);
     connect(ui->toolButtonDown, &QToolButton::clicked, this, &TMainWindow::MoveDown);
+    connect(ui->toolButtonBottom, &QToolButton::clicked, this, &TMainWindow::MoveBottom);
 
     connect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
@@ -2020,8 +2058,10 @@ void TMainWindow::Controls()
     if (m->ReadOnly())
     {
         ui->toolButtonRemove->setEnabled(false);
+        ui->toolButtonTop->setEnabled(false);
         ui->toolButtonUp->setEnabled(false);
         ui->toolButtonDown->setEnabled(false);
+        ui->toolButtonBottom->setEnabled(false);
         return;
     }
 
@@ -2038,24 +2078,32 @@ void TMainWindow::Controls()
     {
         if (ui->tableWidget->currentRow() == 0)
         {
+            ui->toolButtonTop->setEnabled(false);
             ui->toolButtonUp->setEnabled(false);
             ui->toolButtonDown->setEnabled(true);
+            ui->toolButtonBottom->setEnabled(true);
         }
         else if (ui->tableWidget->currentRow() == ui->tableWidget->rowCount()-1)
         {
+            ui->toolButtonTop->setEnabled(true);
             ui->toolButtonUp->setEnabled(true);
             ui->toolButtonDown->setEnabled(false);
+            ui->toolButtonBottom->setEnabled(false);
         }
         else
         {
+            ui->toolButtonTop->setEnabled(true);
             ui->toolButtonUp->setEnabled(true);
             ui->toolButtonDown->setEnabled(true);
+            ui->toolButtonBottom->setEnabled(true);
         }
     }
     else
     {
+        ui->toolButtonTop->setEnabled(false);
         ui->toolButtonUp->setEnabled(false);
         ui->toolButtonDown->setEnabled(false);
+        ui->toolButtonBottom->setEnabled(false);
     }
 }
 

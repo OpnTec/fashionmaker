@@ -48,8 +48,10 @@ public:
     void AddEmpty(const QString &name, const QString &formula = QString());
     void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString());
     void Remove(const QString &name);
+    void MoveTop(const QString &name);
     void MoveUp(const QString &name);
     void MoveDown(const QString &name);
+    void MoveBottom(const QString &name);
 
     void ReadMeasurements() const;
 

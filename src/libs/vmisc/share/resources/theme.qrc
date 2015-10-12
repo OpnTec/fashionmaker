@@ -71,5 +71,11 @@
         <file>icons/win.icon.theme/16x16/actions/go-up.png</file>
         <file>icons/win.icon.theme/24x24/actions/go-up.png</file>
         <file>icons/win.icon.theme/32x32/actions/go-up.png</file>
+        <file>icons/win.icon.theme/16x16/actions/go-top.png</file>
+        <file>icons/win.icon.theme/24x24/actions/go-top.png</file>
+        <file>icons/win.icon.theme/32x32/actions/go-top.png</file>
+        <file>icons/win.icon.theme/16x16/actions/go-bottom.png</file>
+        <file>icons/win.icon.theme/24x24/actions/go-bottom.png</file>
+        <file>icons/win.icon.theme/32x32/actions/go-bottom.png</file>
     </qresource>
 </RCC>

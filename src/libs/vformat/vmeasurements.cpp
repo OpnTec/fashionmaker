@@ -138,6 +138,25 @@ void VMeasurements::Remove(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::MoveTop(const QString &name)
+{
+    const QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        const QDomNodeList mList = elementsByTagName(TagMeasurement);
+        if (mList.size() >= 2)
+        {
+            const QDomNode top = mList.at(0);
+            if (not top.isNull())
+            {
+                const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+                list.at(0).insertBefore(node, top);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::MoveUp(const QString &name)
 {
     const QDomElement node = FindM(name);
@@ -163,6 +182,25 @@ void VMeasurements::MoveDown(const QString &name)
         {
             const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
             list.at(0).insertAfter(node, nextSibling);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::MoveBottom(const QString &name)
+{
+    const QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        const QDomNodeList mList = elementsByTagName(TagMeasurement);
+        if (mList.size() >= 2)
+        {
+            const QDomNode bottom = mList.at(mList.size()-1);
+            if (not bottom.isNull())
+            {
+                const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+                list.at(0).insertAfter(node, bottom);
+            }
         }
     }
 }
