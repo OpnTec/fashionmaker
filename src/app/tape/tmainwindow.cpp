@@ -683,7 +683,7 @@ void TMainWindow::Remove()
 
     if (ui->tableWidget->rowCount() > 0)
     {
-        ui->tableWidget->selectRow(0);
+        ui->tableWidget->selectRow(row);
     }
     else
     {
