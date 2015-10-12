@@ -7587,11 +7587,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>male</source>
-        <translation type="unfinished">Mannelijk</translation>
+        <translation type="obsolete">Mannelijk</translation>
     </message>
     <message>
         <source>female</source>
-        <translation type="unfinished">Vrouwelijk</translation>
+        <translation type="obsolete">Vrouwelijk</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -7737,6 +7737,21 @@ Do you want to save your changes?</source>
     <message>
         <source>CAlculated value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <comment>gender</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>male</source>
+        <comment>gender</comment>
+        <translation type="unfinished">Mannelijk</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <comment>gender</comment>
+        <translation type="unfinished">Vrouwelijk</translation>
     </message>
 </context>
 <context>

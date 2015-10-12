@@ -6145,11 +6145,11 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>male</source>
-        <translation type="unfinished">Mies</translation>
+        <translation type="obsolete">Mies</translation>
     </message>
     <message>
         <source>female</source>
-        <translation type="unfinished">Nainen</translation>
+        <translation type="obsolete">Nainen</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -6295,6 +6295,21 @@ Do you want to save your changes?</source>
     <message>
         <source>CAlculated value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <comment>gender</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>male</source>
+        <comment>gender</comment>
+        <translation type="unfinished">Mies</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <comment>gender</comment>
+        <translation type="unfinished">Nainen</translation>
     </message>
 </context>
 <context>

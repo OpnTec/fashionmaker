@@ -4439,14 +4439,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>male</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>female</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4589,6 +4581,21 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>CAlculated value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <comment>gender</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>male</source>
+        <comment>gender</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>female</source>
+        <comment>gender</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>

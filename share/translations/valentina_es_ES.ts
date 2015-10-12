@@ -5896,11 +5896,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>male</source>
-        <translation type="unfinished">hombre</translation>
+        <translation type="obsolete">hombre</translation>
     </message>
     <message>
         <source>female</source>
-        <translation type="unfinished">mujer</translation>
+        <translation type="obsolete">mujer</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -6046,6 +6046,21 @@ Do you want to save your changes?</source>
     <message>
         <source>CAlculated value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <comment>gender</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>male</source>
+        <comment>gender</comment>
+        <translation type="unfinished">hombre</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <comment>gender</comment>
+        <translation type="unfinished">mujer</translation>
     </message>
 </context>
 <context>

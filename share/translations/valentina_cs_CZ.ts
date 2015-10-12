@@ -6390,11 +6390,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>male</source>
-        <translation type="unfinished">muž</translation>
+        <translation type="obsolete">muž</translation>
     </message>
     <message>
         <source>female</source>
-        <translation type="unfinished">žena</translation>
+        <translation type="obsolete">žena</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -6540,6 +6540,21 @@ Do you want to save your changes?</source>
     <message>
         <source>CAlculated value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <comment>gender</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>male</source>
+        <comment>gender</comment>
+        <translation type="unfinished">muž</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <comment>gender</comment>
+        <translation type="unfinished">žena</translation>
     </message>
 </context>
 <context>

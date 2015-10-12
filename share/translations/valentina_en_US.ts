@@ -7613,11 +7613,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>male</source>
-        <translation type="unfinished">male</translation>
+        <translation type="obsolete">male</translation>
     </message>
     <message>
         <source>female</source>
-        <translation type="unfinished">female</translation>
+        <translation type="obsolete">female</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -7763,6 +7763,21 @@ Do you want to save your changes?</source>
     <message>
         <source>CAlculated value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <comment>gender</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>male</source>
+        <comment>gender</comment>
+        <translation type="unfinished">male</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <comment>gender</comment>
+        <translation type="unfinished">female</translation>
     </message>
 </context>
 <context>

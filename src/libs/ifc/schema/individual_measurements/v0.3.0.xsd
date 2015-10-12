@@ -58,6 +58,7 @@
 	</xs:simpleType>
 	<xs:simpleType name="sex">
 		<xs:restriction base="xs:string">
+			<xs:enumeration value="unknown"/>
 			<xs:enumeration value="male"/>
 			<xs:enumeration value="female"/>
 		</xs:restriction>

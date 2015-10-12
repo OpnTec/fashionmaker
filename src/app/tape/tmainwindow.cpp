@@ -1705,8 +1705,9 @@ void TMainWindow::InitWindow()
         ui->lineEditGivenName->setText(m->GivenName());
         ui->lineEditFamilyName->setText(m->FamilyName());
 
-        ui->comboBoxSex->addItem(tr("male"), QVariant(static_cast<int>(SexType::Male)));
-        ui->comboBoxSex->addItem(tr("female"), QVariant(static_cast<int>(SexType::Female)));
+        ui->comboBoxSex->addItem(tr("unknown", "gender"), QVariant(static_cast<int>(SexType::Unknown)));
+        ui->comboBoxSex->addItem(tr("male", "gender"), QVariant(static_cast<int>(SexType::Male)));
+        ui->comboBoxSex->addItem(tr("female", "gender"), QVariant(static_cast<int>(SexType::Female)));
         const qint32 index = ui->comboBoxSex->findData(static_cast<int>(m->Sex()));
         ui->comboBoxSex->setCurrentIndex(index);
 

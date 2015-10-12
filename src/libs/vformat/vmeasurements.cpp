@@ -381,7 +381,7 @@ void VMeasurements::SetBirthDate(const QDate &date)
 //---------------------------------------------------------------------------------------------------------------------
 SexType VMeasurements::Sex() const
 {
-    return StrToGender(UniqueTagText(TagSex, ""));
+    return StrToGender(UniqueTagText(TagSex, SexUnknown));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -542,7 +542,6 @@ QString VMeasurements::GenderToStr(const SexType &sex)
         case SexType::Female:
             return SexFemale;
         case SexType::Unknown:
-            return SexUnknown;
         default:
             return SexUnknown;
     }
@@ -551,7 +550,7 @@ QString VMeasurements::GenderToStr(const SexType &sex)
 //---------------------------------------------------------------------------------------------------------------------
 SexType VMeasurements::StrToGender(const QString &sex)
 {
-    QStringList genders = QStringList() << SexMale << SexFemale << SexUnknown;
+    const QStringList genders = QStringList() << SexMale << SexFemale << SexUnknown;
     switch (genders.indexOf(sex))
     {
         case 0: // SexMale
@@ -559,7 +558,6 @@ SexType VMeasurements::StrToGender(const QString &sex)
         case 1: // SexFemale
             return SexType::Female;
         case 2: // SexUnknown
-            return SexType::Unknown;
         default:
             return SexType::Unknown;
     }
@@ -708,7 +706,7 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     personal.appendChild(date);
 
     QDomElement sex = createElement(TagSex);
-    const QDomText newSex = createTextNode(GenderToStr(SexType::Male));
+    const QDomText newSex = createTextNode(GenderToStr(SexType::Unknown));
     sex.appendChild(newSex);
     personal.appendChild(sex);
 

@@ -9460,11 +9460,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>male</source>
-        <translation type="unfinished">мужчина</translation>
+        <translation type="obsolete">мужчина</translation>
     </message>
     <message>
         <source>female</source>
-        <translation type="unfinished">женщина</translation>
+        <translation type="obsolete">женщина</translation>
     </message>
     <message>
         <source>untitled</source>
@@ -9610,6 +9610,21 @@ Do you want to save your changes?</source>
     <message>
         <source>CAlculated value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <comment>gender</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>male</source>
+        <comment>gender</comment>
+        <translation type="unfinished">мужчина</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <comment>gender</comment>
+        <translation type="unfinished">женщина</translation>
     </message>
 </context>
 <context>
