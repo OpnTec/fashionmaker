@@ -7047,6 +7047,19 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>QmuParser</name>
+    <message>
+        <source>too few arguments for function sum.</source>
+        <comment>parser error message</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>too few arguments for function min.</source>
+        <comment>parser error message</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QmuParserErrorMsg</name>
     <message>
         <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
