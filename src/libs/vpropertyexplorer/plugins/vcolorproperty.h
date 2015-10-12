@@ -32,7 +32,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VColorProperty : public VProperty
 {
     Q_OBJECT
 public:
-    VColorProperty(const QString &name);
+    explicit VColorProperty(const QString &name);
 
     //! Get the data how it should be displayed
     virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;

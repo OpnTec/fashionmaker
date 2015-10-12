@@ -43,7 +43,7 @@ class VFormulaPropertyEditor : public QWidget
 
 public:
     //! Constructor taking a widget as parent
-    VFormulaPropertyEditor(QWidget *parent);
+    explicit VFormulaPropertyEditor(QWidget *parent);
 
     //! Destructor
     virtual ~VFormulaPropertyEditor() Q_DECL_OVERRIDE;

@@ -35,7 +35,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VIntegerProperty : public VProperty
 public:
     VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
-    VIntegerProperty(const QString& name);
+    explicit VIntegerProperty(const QString& name);
 
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child
@@ -89,7 +89,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VDoubleProperty : public VIntegerProperty
 public:
     VDoubleProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
-    VDoubleProperty(const QString& name);
+    explicit VDoubleProperty(const QString& name);
 
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child

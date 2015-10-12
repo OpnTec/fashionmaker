@@ -203,7 +203,7 @@ signals:
 
 protected:
     //! Protected constructor
-    VProperty(VPropertyPrivate* d);
+    explicit VProperty(VPropertyPrivate* d);
 
     //! The protected structure holding the member variables (to assure binary compatibility)
     VPropertyPrivate* d_ptr;

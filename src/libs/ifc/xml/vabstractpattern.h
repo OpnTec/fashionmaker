@@ -45,7 +45,7 @@ class VAbstractPattern : public QObject, public VDomDocument
 {
     Q_OBJECT
 public:
-    VAbstractPattern(QObject *parent = nullptr);
+    explicit VAbstractPattern(QObject *parent = nullptr);
     virtual ~VAbstractPattern() Q_DECL_OVERRIDE;
 
     QStringList    ListMeasurements() const;

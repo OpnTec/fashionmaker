@@ -331,6 +331,7 @@ void QmuParserBase::AddCallback(const QString &a_strName, const QmuParserCallbac
  *
  * @throw ParserException if the name contains invalid charakters.
  */
+// cppcheck-suppress
 void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a_Callback,
                               const QString &a_szCharSet) const
 {
@@ -361,6 +362,7 @@ void QmuParserBase::CheckOprt(const QString &a_sName, const QmuParserCallback &a
  *
  * @throw ParserException if the name contains invalid charakters.
  */
+// cppcheck-suppress
 void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet) const
 {
     std::wstring a_sNameStd = a_sName.toStdWString();

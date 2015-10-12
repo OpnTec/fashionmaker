@@ -35,7 +35,7 @@ class TST_VLayoutDetail : public AbstractTest
 {
     Q_OBJECT
 public:
-    TST_VLayoutDetail(QObject *parent = 0);
+    explicit TST_VLayoutDetail(QObject *parent = 0);
 
 private slots:
     void RemoveDublicates() const;

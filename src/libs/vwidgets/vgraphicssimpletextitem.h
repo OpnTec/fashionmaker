@@ -40,7 +40,7 @@ class VGraphicsSimpleTextItem : public QObject, public QGraphicsSimpleTextItem
 {
     Q_OBJECT
 public:
-    VGraphicsSimpleTextItem(QGraphicsItem *parent = nullptr);
+    explicit VGraphicsSimpleTextItem(QGraphicsItem *parent = nullptr);
     VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );
     virtual ~VGraphicsSimpleTextItem() Q_DECL_OVERRIDE;
 

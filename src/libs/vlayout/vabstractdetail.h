@@ -45,7 +45,7 @@ class VAbstractDetail
 {
 public:
     VAbstractDetail();
-    VAbstractDetail(const QString &name);
+    explicit VAbstractDetail(const QString &name);
     VAbstractDetail(const VAbstractDetail &detail);
     VAbstractDetail &operator=(const VAbstractDetail &detail);
     virtual ~VAbstractDetail();

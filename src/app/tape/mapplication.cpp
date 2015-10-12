@@ -183,6 +183,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress uninitMemberVar
 MApplication::MApplication(int &argc, char **argv)
     :VAbstractApplication(argc, argv),
       mainWindows(),

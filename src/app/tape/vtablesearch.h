@@ -35,7 +35,7 @@
 class VTableSearch
 {
 public:
-    VTableSearch(QTableWidget *table);
+    explicit VTableSearch(QTableWidget *table);
 
     void Find(const QString &term);
     void FindPrevious();

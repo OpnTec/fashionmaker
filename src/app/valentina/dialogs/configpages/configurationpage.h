@@ -41,7 +41,7 @@ class ConfigurationPage : public QWidget
 {
     Q_OBJECT
 public:
-    ConfigurationPage(QWidget *parent = nullptr);
+    explicit ConfigurationPage(QWidget *parent = nullptr);
     void      Apply();
 public slots:
     void      LangChanged();

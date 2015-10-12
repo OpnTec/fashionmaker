@@ -32,7 +32,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VShortcutProperty : public VProperty
 {
     Q_OBJECT
 public:
-    VShortcutProperty(const QString &name);
+    explicit VShortcutProperty(const QString &name);
 
     //! The destructor
     virtual ~VShortcutProperty() Q_DECL_OVERRIDE;

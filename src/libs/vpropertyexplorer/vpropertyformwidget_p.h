@@ -41,8 +41,8 @@ public:
     struct SEditorWidget
     {
         SEditorWidget() : FormWidget(nullptr), Editor(nullptr) {}
-        SEditorWidget(VPropertyFormWidget* form_widget) : FormWidget(form_widget), Editor(nullptr) {}
-        SEditorWidget(QWidget* editor_widget) : FormWidget(nullptr), Editor(editor_widget) {}
+        explicit SEditorWidget(VPropertyFormWidget* form_widget) : FormWidget(form_widget), Editor(nullptr) {}
+        explicit SEditorWidget(QWidget* editor_widget) : FormWidget(nullptr), Editor(editor_widget) {}
 
         VPropertyFormWidget* FormWidget;
         QWidget* Editor;
@@ -64,7 +64,7 @@ public:
     {}
 
     //! Constructor
-    VPropertyFormWidgetPrivate(const QList<VProperty*>& properties)
+    explicit VPropertyFormWidgetPrivate(const QList<VProperty*>& properties)
         : Properties(properties), EditorWidgets(QList<SEditorWidget>()), UpdateEditors(true)
     {}
 

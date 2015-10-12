@@ -34,7 +34,6 @@ namespace qmu
 /**
  * @brief Bytecode default constructor.
  */
-// cppcheck-suppress uninitMemberVar
 QmuParserByteCode::QmuParserByteCode()
     :m_iStackPos(0), m_iMaxStackSize(0), m_vRPN(), m_bEnableOptimizer(true)
 {
@@ -47,7 +46,6 @@ QmuParserByteCode::QmuParserByteCode()
  *
  * Implemented in Terms of Assign(const QParserByteCode &a_ByteCode)
  */
-// cppcheck-suppress uninitMemberVar
 QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
     :m_iStackPos(a_ByteCode.m_iStackPos), m_iMaxStackSize(a_ByteCode.m_iMaxStackSize), m_vRPN(a_ByteCode.m_vRPN),
       m_bEnableOptimizer(true)
@@ -61,7 +59,6 @@ QmuParserByteCode::QmuParserByteCode(const QmuParserByteCode &a_ByteCode)
  *
  * Implemented in Terms of Assign(const QParserByteCode &a_ByteCode)
  */
-// cppcheck-suppress operatorEqVarError
 QmuParserByteCode& QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteCode)
 {
     Assign(a_ByteCode);

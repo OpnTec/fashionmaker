@@ -568,7 +568,7 @@ struct DXFLIB_EXPORT DL_KnotData
      * Constructor.
      * Parameters: see member variables.
      */
-    DL_KnotData(double pk)
+    explicit DL_KnotData(double pk)
         : k(pk)
     {
     }
@@ -1425,7 +1425,7 @@ struct DXFLIB_EXPORT DL_HatchLoopData
      * Constructor.
      * Parameters: see member variables.
      */
-    DL_HatchLoopData(int hNumEdges)
+    explicit DL_HatchLoopData(int hNumEdges)
         : numEdges(hNumEdges)
     {
     }
@@ -1725,7 +1725,7 @@ struct DXFLIB_EXPORT DL_ImageDefData
  */
 struct DXFLIB_EXPORT DL_DictionaryData
 {
-    DL_DictionaryData(const std::string& handle) : handle(handle) {}
+    explicit DL_DictionaryData(const std::string& handle) : handle(handle) {}
     std::string handle;
 };
 

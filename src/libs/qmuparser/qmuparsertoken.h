@@ -335,6 +335,7 @@ public:
             FunctionPtr func;
         } var;
 
+        // cppcheck-suppress duplicateExpression
         Q_STATIC_ASSERT_X(sizeof(void *) == sizeof(void (*)(void)),
                           "object pointer and function pointer sizes must equal");
 

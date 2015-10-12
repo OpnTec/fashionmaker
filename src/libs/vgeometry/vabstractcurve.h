@@ -42,7 +42,7 @@ class VAbstractCurve :public VGObject
 {
 public:
     VAbstractCurve(const GOType &type, const quint32 &idObject = NULL_ID, const Draw &mode = Draw::Calculation);
-    VAbstractCurve(const VAbstractCurve &curve);
+    explicit VAbstractCurve(const VAbstractCurve &curve);
     VAbstractCurve& operator= (const VAbstractCurve &curve);
 
     virtual QVector<QPointF> GetPoints() const =0;

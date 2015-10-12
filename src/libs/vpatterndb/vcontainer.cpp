@@ -96,7 +96,7 @@ const QSharedPointer<VGObject> VContainer::GetGObject(quint32 id)const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QSharedPointer<VGObject> VContainer::GetFakeGObject(quint32 id) const
+const QSharedPointer<VGObject> VContainer::GetFakeGObject(quint32 id)
 {
     VGObject *obj = new VGObject();
     obj->setId(id);

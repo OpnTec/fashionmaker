@@ -42,7 +42,7 @@ class TapeConfigurationPage : public QWidget
 {
     Q_OBJECT
 public:
-    TapeConfigurationPage(QWidget *parent = nullptr);
+    explicit TapeConfigurationPage(QWidget *parent = nullptr);
     void      Apply();
 public slots:
     void      LangChanged();

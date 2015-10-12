@@ -184,7 +184,7 @@ private:
 
     static qreal FirstArg ( const qreal* a_afArg, int a_iArgc )
     {
-        if ( a_iArgc == false)
+        if ( a_iArgc == 0)
         {
             throw QmuParserError ( "too few arguments for function FirstArg." );
         }
@@ -194,7 +194,7 @@ private:
 
     static qreal LastArg ( const qreal* a_afArg, int a_iArgc )
     {
-        if ( a_iArgc == false)
+        if ( a_iArgc == 0)
         {
             throw QmuParserError ( "too few arguments for function LastArg." );
         }
@@ -204,7 +204,7 @@ private:
 
     static qreal Sum ( const qreal* a_afArg, int a_iArgc )
     {
-        if ( a_iArgc == false)
+        if ( a_iArgc == 0)
         {
             throw QmuParserError ( "too few arguments for function sum." );
         }

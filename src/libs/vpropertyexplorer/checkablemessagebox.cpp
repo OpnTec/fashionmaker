@@ -42,7 +42,7 @@ namespace Utils
 class CheckableMessageBoxPrivate
 {
 public:
-    CheckableMessageBoxPrivate(QDialog *q)
+    explicit CheckableMessageBoxPrivate(QDialog *q)
         : pixmapLabel(nullptr), messageLabel(nullptr), checkBox(nullptr), buttonBox(nullptr), clickedButton(nullptr)
     {
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);

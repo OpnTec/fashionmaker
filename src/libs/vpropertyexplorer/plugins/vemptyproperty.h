@@ -65,7 +65,7 @@ public:
 
 protected:
     //! Protected constructor
-    VEmptyProperty(VPropertyPrivate* d);
+    explicit VEmptyProperty(VPropertyPrivate* d);
 
 private:
     Q_DISABLE_COPY(VEmptyProperty)

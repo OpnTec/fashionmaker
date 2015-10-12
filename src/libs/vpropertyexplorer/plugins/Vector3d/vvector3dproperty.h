@@ -53,7 +53,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT QVector3DProperty : public VProperty
 {
     Q_OBJECT
 public:
-    QVector3DProperty(const QString& name);
+    explicit QVector3DProperty(const QString& name);
 
     virtual ~QVector3DProperty() Q_DECL_OVERRIDE {}
 

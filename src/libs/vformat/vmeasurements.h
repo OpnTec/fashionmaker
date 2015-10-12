@@ -38,7 +38,7 @@ class VMeasurements : public VDomDocument
 {
     Q_DECLARE_TR_FUNCTIONS(VMeasurements)
 public:
-    VMeasurements(VContainer *data);
+    explicit VMeasurements(VContainer *data);
     VMeasurements(Unit unit, VContainer *data);
     VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
     virtual ~VMeasurements() Q_DECL_OVERRIDE;

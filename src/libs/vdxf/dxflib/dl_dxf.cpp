@@ -68,7 +68,7 @@ DL_Dxf::DL_Dxf()
 
       firstHatchLoop(), hatchEdge(), hatchEdges(),
       xRecordHandle(), xRecordValues(), groupCodeTmp(), groupCode(), groupValue(),
-      currentObjectType(), settingKey(), values(), firstCall(), attrib(),
+      currentObjectType(), settingValue(), settingKey(), values(), firstCall(), attrib(),
       libVersion(), appDictionaryHandle(), styleHandleStd()
 {
 }
@@ -189,18 +189,13 @@ bool DL_Dxf::in(std::stringstream& stream,
  */
 bool DL_Dxf::readDxfGroups(FILE *fp, DL_CreationInterface* creationInterface)
 {
-
-    static int line = 1;
-
     // Read one group of the DXF file and strip the lines:
     if (DL_Dxf::getStrippedLine(groupCodeTmp, DL_DXF_MAXLINE, fp) &&
             DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, fp) )
     {
-
         groupCode = static_cast<unsigned int>(toInt(groupCodeTmp));
 
         creationInterface->processCodeValuePair(groupCode, groupValue);
-        line+=2;
         processDXFGroup(creationInterface, groupCode, groupValue);
     }
 
@@ -215,17 +210,12 @@ bool DL_Dxf::readDxfGroups(FILE *fp, DL_CreationInterface* creationInterface)
 bool DL_Dxf::readDxfGroups(std::stringstream& stream,
                            DL_CreationInterface* creationInterface)
 {
-
-    static int line = 1;
-
     // Read one group of the DXF file and chop the lines:
     if (DL_Dxf::getStrippedLine(groupCodeTmp, DL_DXF_MAXLINE, stream) &&
             DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, stream) )
     {
 
         groupCode = static_cast<unsigned int>(toInt(groupCodeTmp));
-
-        line+=2;
         processDXFGroup(creationInterface, groupCode, groupValue);
     }
     return !stream.eof();
@@ -2593,7 +2583,7 @@ DL_WriterA* DL_Dxf::out(const char* file, DL_Codes::version version)
  * @brief Writes a DXF header to the file currently opened
  * by the given DXF writer object.
  */
-void DL_Dxf::writeHeader(DL_WriterA& dw)
+void DL_Dxf::writeHeader(DL_WriterA& dw) const
 {
     dw.comment("dxflib " DL_VERSION);
     dw.sectionHeader();
@@ -2800,7 +2790,7 @@ void DL_Dxf::writeVertex(DL_WriterA& dw,
 /**
  * Writes the polyline end. Only needed for DXF R12.
  */
-void DL_Dxf::writePolylineEnd(DL_WriterA& dw)
+void DL_Dxf::writePolylineEnd(DL_WriterA& dw) const
 {
     if (version==DL_VERSION_2000)
     {
@@ -3248,7 +3238,7 @@ void DL_Dxf::writeAttribute(DL_WriterA& dw,
 }
 
 void DL_Dxf::writeDimStyleOverrides(DL_WriterA& dw,
-                                    const DL_DimensionData& data)
+                                    const DL_DimensionData& data) const
 {
 
     if (version==DL_VERSION_2000)
@@ -3781,7 +3771,7 @@ void DL_Dxf::writeLeader(DL_WriterA& dw,
  * @param data Entity data
  */
 void DL_Dxf::writeLeaderVertex(DL_WriterA& dw,
-                               const DL_LeaderVertexData& data)
+                               const DL_LeaderVertexData& data) const
 {
     if (version>DL_VERSION_R12)
     {
@@ -3843,7 +3833,7 @@ void DL_Dxf::writeHatch1(DL_WriterA& dw,
  */
 void DL_Dxf::writeHatch2(DL_WriterA& dw,
                          const DL_HatchData& data,
-                         const DL_Attributes& /*attrib*/)
+                         const DL_Attributes& /*attrib*/) const
 {
 
     dw.dxfInt(75, 0);                // odd parity
@@ -4076,7 +4066,7 @@ int DL_Dxf::writeImage(DL_WriterA& dw,
  */
 void DL_Dxf::writeImageDef(DL_WriterA& dw,
                            int handle,
-                           const DL_ImageData& data)
+                           const DL_ImageData& data) const
 {
 
     /*if (data.file.empty()) {
@@ -4187,7 +4177,7 @@ void DL_Dxf::writeLayer(DL_WriterA& dw,
  * tables section of a DXF file.
  */
 void DL_Dxf::writeLinetype(DL_WriterA& dw,
-                           const DL_LinetypeData& data)
+                           const DL_LinetypeData& data) const
 {
 
     std::string nameUpper = data.name;
@@ -4376,7 +4366,7 @@ void DL_Dxf::writeEndBlock(DL_WriterA& dw, const std::string& name)
  * Note that this method currently only writes a faked VPORT section
  * to make the file readable by Aut*cad.
  */
-void DL_Dxf::writeVPort(DL_WriterA& dw)
+void DL_Dxf::writeVPort(DL_WriterA& dw) const
 {
     dw.dxfString(0, "TABLE");
     dw.dxfString(2, "VPORT");
@@ -4533,7 +4523,7 @@ void DL_Dxf::writeStyle(DL_WriterA& dw, const DL_StyleData& style)
  * Note that this method currently only writes a faked VIEW section
  * to make the file readable by Aut*cad.
  */
-void DL_Dxf::writeView(DL_WriterA& dw)
+void DL_Dxf::writeView(DL_WriterA& dw) const
 {
     dw.dxfString(  0, "TABLE");
     dw.dxfString(  2, "VIEW");
@@ -4557,7 +4547,7 @@ void DL_Dxf::writeView(DL_WriterA& dw)
  * Note that this method currently only writes a faked UCS section
  * to make the file readable by Aut*cad.
  */
-void DL_Dxf::writeUcs(DL_WriterA& dw)
+void DL_Dxf::writeUcs(DL_WriterA& dw) const
 {
     dw.dxfString(  0, "TABLE");
     dw.dxfString(  2, "UCS");
@@ -4701,7 +4691,7 @@ void DL_Dxf::writeDimStyle(DL_WriterA& dw,
  * Note that this method currently only writes a faked BLOCKRECORD section
  * to make the file readable by Aut*cad.
  */
-void DL_Dxf::writeBlockRecord(DL_WriterA& dw)
+void DL_Dxf::writeBlockRecord(DL_WriterA& dw) const
 {
     dw.dxfString(  0, "TABLE");
     dw.dxfString(  2, "BLOCK_RECORD");
@@ -4772,7 +4762,7 @@ void DL_Dxf::writeBlockRecord(DL_WriterA& dw)
 /**
  * Writes a single block record with the given name.
  */
-void DL_Dxf::writeBlockRecord(DL_WriterA& dw, const std::string& name)
+void DL_Dxf::writeBlockRecord(DL_WriterA& dw, const std::string& name) const
 {
     dw.dxfString(  0, "BLOCK_RECORD");
     if (version==DL_VERSION_2000)
@@ -5815,9 +5805,6 @@ int DL_Dxf::getLibVersion(const std::string& str)
 {
     int d[4];
     int idx = 0;
-    //char v[4][5];
-    std::string v[4];
-    int ret = 0;
 
     for (unsigned int i=0; i<str.length() && idx<3; ++i)
     {
@@ -5832,6 +5819,8 @@ int DL_Dxf::getLibVersion(const std::string& str)
     {
         d[3] = static_cast<int>(str.length());
 
+        std::string v[4];
+
         v[0] = str.substr(0, d[0]);
         v[1] = str.substr(d[0]+1, d[1]-d[0]-1);
         v[2] = str.substr(d[1]+1, d[2]-d[1]-1);
@@ -5844,10 +5833,10 @@ int DL_Dxf::getLibVersion(const std::string& str)
             v[3] = "0";
         }
 
-        ret = (atoi(v[0].c_str())<<(3*8)) +
-              (atoi(v[1].c_str())<<(2*8)) +
-              (atoi(v[2].c_str())<<(1*8)) +
-              (atoi(v[3].c_str())<<(0*8));
+        const int ret = (atoi(v[0].c_str())<<(3*8)) +
+                        (atoi(v[1].c_str())<<(2*8)) +
+                        (atoi(v[2].c_str())<<(1*8)) +
+                        (atoi(v[3].c_str())<<(0*8));
 
         return ret;
     }

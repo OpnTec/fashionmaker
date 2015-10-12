@@ -34,7 +34,7 @@
 class VAbstractMConverter : public VAbstractConverter
 {
 public:
-    VAbstractMConverter(const QString &fileName);
+    explicit VAbstractMConverter(const QString &fileName);
     virtual ~VAbstractMConverter() Q_DECL_OVERRIDE;
 
 protected:

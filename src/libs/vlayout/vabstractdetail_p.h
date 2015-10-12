@@ -44,7 +44,7 @@ public:
         :name(QString()), seamAllowance(false), closed(true), width(0)
     {}
 
-    VAbstractDetailData(const QString &name)
+    explicit VAbstractDetailData(const QString &name)
         :name(name), seamAllowance(false), closed(true), width(0)
     {}
 

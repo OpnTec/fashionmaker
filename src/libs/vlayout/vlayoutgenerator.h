@@ -44,7 +44,7 @@ class VLayoutGenerator :public QObject
 {
     Q_OBJECT
 public:
-    VLayoutGenerator(QObject *parent = 0);
+    explicit VLayoutGenerator(QObject *parent = 0);
     virtual ~VLayoutGenerator() Q_DECL_OVERRIDE;
 
     void SetDetails(const QVector<VLayoutDetail> &details);

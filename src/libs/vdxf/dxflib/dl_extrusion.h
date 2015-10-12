@@ -59,8 +59,9 @@ public:
     }
 
     DL_Extrusion(const DL_Extrusion &L)
-        : direction(L.direction), elevation(L.elevation)
+        : direction(new double[3]), elevation(L.elevation)
     {
+        setDirection(L.direction[0], L.direction[1], L.direction[0]);
     }
 
     /**

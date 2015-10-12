@@ -143,7 +143,7 @@ public:
     void addLayer(DL_CreationInterface* creationInterface);
     void addLinetype(DL_CreationInterface *creationInterface);
     void addBlock(DL_CreationInterface* creationInterface);
-    void endBlock(DL_CreationInterface* creationInterface);
+    static void endBlock(DL_CreationInterface* creationInterface);
     void addTextStyle(DL_CreationInterface* creationInterface);
 
     void addPoint(DL_CreationInterface* creationInterface);
@@ -189,7 +189,7 @@ public:
     void addImage(DL_CreationInterface* creationInterface);
     void addImageDef(DL_CreationInterface* creationInterface);
 
-    void addComment(DL_CreationInterface* creationInterface, const std::string& comment);
+    static void addComment(DL_CreationInterface* creationInterface, const std::string& comment);
 
     void addDictionary(DL_CreationInterface* creationInterface);
     void addDictionaryEntry(DL_CreationInterface* creationInterface);
@@ -204,16 +204,16 @@ public:
     bool handleLeaderData(DL_CreationInterface* creationInterface);
     bool handleLinetypeData(DL_CreationInterface* creationInterface);
 
-    void endEntity(DL_CreationInterface* creationInterface);
+    static void endEntity(DL_CreationInterface* creationInterface);
 
-    void endSequence(DL_CreationInterface* creationInterface);
+    static void endSequence(DL_CreationInterface* creationInterface);
 
     //int  stringToInt(const char* s, bool* ok=NULL);
 
     DL_WriterA* out(const char* file,
                     DL_Codes::version version=DL_VERSION_2000);
 
-    void writeHeader(DL_WriterA& dw);
+    void writeHeader(DL_WriterA& dw) const;
 
     void writePoint(DL_WriterA& dw,
                     const DL_PointData& data,
@@ -232,16 +232,16 @@ public:
                        const DL_Attributes& attrib);
     void writeVertex(DL_WriterA& dw,
                      const DL_VertexData& data);
-    void writePolylineEnd(DL_WriterA& dw);
+    void writePolylineEnd(DL_WriterA& dw) const;
     void writeSpline(DL_WriterA& dw,
                      const DL_SplineData& data,
                      const DL_Attributes& attrib);
-    void writeControlPoint(DL_WriterA& dw,
-                           const DL_ControlPointData& data);
-    void writeFitPoint(DL_WriterA& dw,
-                       const DL_FitPointData& data);
-    void writeKnot(DL_WriterA& dw,
-                   const DL_KnotData& data);
+    static void writeControlPoint(DL_WriterA& dw,
+                                  const DL_ControlPointData& data);
+    static void writeFitPoint(DL_WriterA& dw,
+                              const DL_FitPointData& data);
+    static void writeKnot(DL_WriterA& dw,
+                          const DL_KnotData& data);
     void writeCircle(DL_WriterA& dw,
                      const DL_CircleData& data,
                      const DL_Attributes& attrib);
@@ -273,7 +273,7 @@ public:
                         const DL_AttributeData& data,
                         const DL_Attributes& attrib);
     void writeDimStyleOverrides(DL_WriterA& dw,
-                                const DL_DimensionData& data);
+                                const DL_DimensionData& data) const;
     void writeDimAligned(DL_WriterA& dw,
                          const DL_DimensionData& data,
                          const DL_DimAlignedData& edata,
@@ -306,59 +306,59 @@ public:
                      const DL_LeaderData& data,
                      const DL_Attributes& attrib);
     void writeLeaderVertex(DL_WriterA& dw,
-                           const DL_LeaderVertexData& data);
+                           const DL_LeaderVertexData& data) const;
     void writeHatch1(DL_WriterA& dw,
                      const DL_HatchData& data,
                      const DL_Attributes& attrib);
     void writeHatch2(DL_WriterA& dw,
                      const DL_HatchData& data,
-                     const DL_Attributes& attrib);
-    void writeHatchLoop1(DL_WriterA& dw,
-                         const DL_HatchLoopData& data);
-    void writeHatchLoop2(DL_WriterA& dw,
-                         const DL_HatchLoopData& data);
-    void writeHatchEdge(DL_WriterA& dw,
-                        const DL_HatchEdgeData& data);
+                     const DL_Attributes& attrib) const;
+    static void writeHatchLoop1(DL_WriterA& dw,
+                                const DL_HatchLoopData& data);
+    static void writeHatchLoop2(DL_WriterA& dw,
+                                const DL_HatchLoopData& data);
+    static void writeHatchEdge(DL_WriterA& dw,
+                               const DL_HatchEdgeData& data);
 
     int writeImage(DL_WriterA& dw,
                    const DL_ImageData& data,
                    const DL_Attributes& attrib);
 
     void writeImageDef(DL_WriterA& dw, int handle,
-                       const DL_ImageData& data);
+                       const DL_ImageData& data) const;
 
     void writeLayer(DL_WriterA& dw,
                     const DL_LayerData& data,
                     const DL_Attributes& attrib);
 
     void writeLinetype(DL_WriterA& dw,
-                       const DL_LinetypeData& data);
+                       const DL_LinetypeData& data) const;
 
-    void writeAppid(DL_WriterA& dw, const std::string& name);
+    static void writeAppid(DL_WriterA& dw, const std::string& name);
 
-    void writeBlock(DL_WriterA& dw,
-                    const DL_BlockData& data);
-    void writeEndBlock(DL_WriterA& dw, const std::string& name);
+    static void writeBlock(DL_WriterA& dw,
+                           const DL_BlockData& data);
+    static void writeEndBlock(DL_WriterA& dw, const std::string& name);
 
-    void writeVPort(DL_WriterA& dw);
+    void writeVPort(DL_WriterA& dw) const;
     void writeStyle(DL_WriterA& dw, const DL_StyleData& style);
-    void writeView(DL_WriterA& dw);
-    void writeUcs(DL_WriterA& dw);
+    void writeView(DL_WriterA& dw) const;
+    void writeUcs(DL_WriterA& dw) const;
     void writeDimStyle(DL_WriterA& dw,
                        double dimasz, double dimexe, double dimexo,
                        double dimgap, double dimtxt);
-    void writeBlockRecord(DL_WriterA& dw);
-    void writeBlockRecord(DL_WriterA& dw, const std::string& name);
+    void writeBlockRecord(DL_WriterA& dw) const;
+    void writeBlockRecord(DL_WriterA& dw, const std::string& name) const;
     void writeObjects(DL_WriterA& dw, const std::string& appDictionaryName = "");
     void writeAppDictionary(DL_WriterA& dw);
-    int writeDictionaryEntry(DL_WriterA& dw, const std::string& name);
+    static int writeDictionaryEntry(DL_WriterA& dw, const std::string& name);
     void writeXRecord(DL_WriterA& dw, int handle, int value);
     void writeXRecord(DL_WriterA& dw, int handle, double value);
     void writeXRecord(DL_WriterA& dw, int handle, bool value);
     void writeXRecord(DL_WriterA& dw, int handle, const std::string& value);
-    void writeObjectsEnd(DL_WriterA& dw);
+    static void writeObjectsEnd(DL_WriterA& dw);
 
-    void writeComment(DL_WriterA& dw, const std::string& comment);
+    static void writeComment(DL_WriterA& dw, const std::string& comment);
 
     /**
      * Converts the given string into a double or returns the given
@@ -392,12 +392,12 @@ public:
 
     static bool checkVariable(const char* var, DL_Codes::version version);
 
-    DL_Codes::version getVersion()
+    DL_Codes::version getVersion() const
     {
         return version;
     }
 
-    int getLibVersion(const std::string &str);
+    static int getLibVersion(const std::string &str);
 
     static void test();
 
@@ -415,13 +415,13 @@ public:
         return toInt(values[code]);
     }
 
-    int toInt(const std::string& str)
+    static int toInt(const std::string& str)
     {
         char* p;
         return static_cast<int>(strtol(str.c_str(), &p, 10));
     }
 
-    bool toBool(const std::string& str)
+    static bool toBool(const std::string& str)
     {
         char* p;
         return static_cast<bool>(strtol(str.c_str(), &p, 10));
@@ -445,7 +445,7 @@ public:
         return toReal(values[code]);
     }
 
-    double toReal(const std::string& str)
+    static double toReal(const std::string& str)
     {
         double ret;
         // make sure the real value uses '.' not ',':

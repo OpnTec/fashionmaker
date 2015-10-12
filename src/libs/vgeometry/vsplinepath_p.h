@@ -45,7 +45,7 @@ public:
         : path(QVector<VSplinePoint>()), kCurve(1)
     {}
 
-    VSplinePathData(qreal kCurve)
+    explicit VSplinePathData(qreal kCurve)
         : path(QVector<VSplinePoint>()), kCurve(kCurve)
     {}
 

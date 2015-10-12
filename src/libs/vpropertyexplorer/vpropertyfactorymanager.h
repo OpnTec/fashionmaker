@@ -36,7 +36,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertyFactoryManager : public QObject
     Q_OBJECT
 public:
     //! Constructor
-    VPropertyFactoryManager(QObject* parent = nullptr);
+    explicit VPropertyFactoryManager(QObject* parent = nullptr);
 
     //! Destructor
     virtual ~VPropertyFactoryManager() Q_DECL_OVERRIDE;

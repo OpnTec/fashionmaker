@@ -40,7 +40,7 @@ class TapePathPage : public QWidget
 {
     Q_OBJECT
 public:
-    TapePathPage(QWidget *parent = nullptr);
+    explicit TapePathPage(QWidget *parent = nullptr);
     void      Apply();
 public slots:
     void TableActivated();

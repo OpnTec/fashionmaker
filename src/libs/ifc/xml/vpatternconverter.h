@@ -35,7 +35,7 @@ class VPatternConverter : public VAbstractConverter
 {
     Q_DECLARE_TR_FUNCTIONS(VPatternConverter)
 public:
-    VPatternConverter(const QString &fileName);
+    explicit VPatternConverter(const QString &fileName);
     virtual ~VPatternConverter() Q_DECL_OVERRIDE;
 
     static const QString    PatternMaxVerStr;

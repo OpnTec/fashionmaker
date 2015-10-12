@@ -50,7 +50,7 @@ public:
         :QSharedData(point), _mx(point._mx), _my(point._my), _x(point._x), _y(point._y)
     {}
 
-    VPointFData(const QPointF &point)
+    explicit VPointFData(const QPointF &point)
         :_mx(0), _my(0), _x(point.x()), _y(point.y())
     {}
 

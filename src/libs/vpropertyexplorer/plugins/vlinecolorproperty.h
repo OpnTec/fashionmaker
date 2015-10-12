@@ -42,7 +42,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VLineColorProperty : public VProperty
     Q_OBJECT
 public:
     //! Constructor
-    VLineColorProperty(const QString& name);
+    explicit VLineColorProperty(const QString& name);
 
     //! Destructor
     virtual ~VLineColorProperty() Q_DECL_OVERRIDE {}

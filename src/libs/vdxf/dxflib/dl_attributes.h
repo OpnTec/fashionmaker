@@ -237,7 +237,7 @@ public:
         inPaperSpace = on;
     }
 
-    bool isInPaperSpace()
+    bool isInPaperSpace() const
     {
         return inPaperSpace;
     }

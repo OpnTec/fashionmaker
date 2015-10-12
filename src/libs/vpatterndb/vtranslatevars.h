@@ -34,7 +34,7 @@
 class VTranslateVars : public VTranslateMeasurements
 {
 public:
-    VTranslateVars(bool osSeparator);
+    explicit VTranslateVars(bool osSeparator);
     virtual ~VTranslateVars() Q_DECL_OVERRIDE;
 
     bool VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;

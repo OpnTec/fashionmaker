@@ -32,7 +32,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VBoolProperty : public VProperty
     Q_OBJECT
 public:
     //! Default constructor
-    VBoolProperty(const QString& name);
+    explicit VBoolProperty(const QString& name);
 
     //! Destructor
     virtual ~VBoolProperty()  Q_DECL_OVERRIDE {}

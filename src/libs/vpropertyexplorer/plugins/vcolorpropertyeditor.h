@@ -38,7 +38,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VColorPropertyEditor : public QWidget
 
 public:
     //! Constructor taking a widget as parent
-    VColorPropertyEditor(QWidget *parent);
+    explicit VColorPropertyEditor(QWidget *parent);
 
     //! Destructor
     virtual ~VColorPropertyEditor() Q_DECL_OVERRIDE;

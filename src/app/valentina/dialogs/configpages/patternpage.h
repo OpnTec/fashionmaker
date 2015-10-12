@@ -41,7 +41,7 @@ class PatternPage : public QWidget
 {
     Q_OBJECT
 public:
-    PatternPage(QWidget *parent = nullptr);
+    explicit PatternPage(QWidget *parent = nullptr);
     void      Apply();
 private:
     Q_DISABLE_COPY(PatternPage)

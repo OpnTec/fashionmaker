@@ -346,7 +346,7 @@ public:
     }
 
     /** @return the current attributes used for new entities. */
-    DL_Attributes getAttributes()
+    DL_Attributes getAttributes() const
     {
         return attributes;
     }

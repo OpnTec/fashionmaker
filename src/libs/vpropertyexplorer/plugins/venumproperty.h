@@ -33,7 +33,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VEnumProperty : public VProperty
     Q_OBJECT
 public:
     //! Constructor
-    VEnumProperty(const QString& name);
+    explicit VEnumProperty(const QString& name);
 
     //! Destructor
     virtual ~VEnumProperty() Q_DECL_OVERRIDE {}

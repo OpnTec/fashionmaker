@@ -35,7 +35,7 @@ class VVSTConverter : public VAbstractMConverter
 {
     Q_DECLARE_TR_FUNCTIONS(VVSTConverter)
 public:
-    VVSTConverter(const QString &fileName);
+    explicit VVSTConverter(const QString &fileName);
     virtual ~VVSTConverter() Q_DECL_OVERRIDE;
 
     static const QString    MeasurementMaxVerStr;

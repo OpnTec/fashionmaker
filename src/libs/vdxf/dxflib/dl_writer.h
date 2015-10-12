@@ -62,7 +62,8 @@ public:
     /**
      * @param version DXF version. Defaults to DL_VERSION_2002.
      */
-    DL_Writer(DL_Codes::version version) : m_handle(0x30), modelSpaceHandle(0), paperSpaceHandle(0), paperSpace0Handle(0), version(version)
+    explicit DL_Writer(DL_Codes::version version)
+        : m_handle(0x30), modelSpaceHandle(0), paperSpaceHandle(0), paperSpace0Handle(0), version(version)
     {
     }
 
@@ -616,12 +617,13 @@ public:
      * Sets the handle of the model space. Entities refer to
      * this handle.
      */
+    // cppcheck-suppress functionConst
     void setModelSpaceHandle(unsigned long h)
     {
         modelSpaceHandle = h;
     }
 
-    unsigned long getModelSpaceHandle()
+    unsigned long getModelSpaceHandle() const
     {
         return modelSpaceHandle;
     }
@@ -630,12 +632,13 @@ public:
      * Sets the handle of the paper space. Some special blocks refer to
      * this handle.
      */
+    // cppcheck-suppress functionConst
     void setPaperSpaceHandle(unsigned long h)
     {
         paperSpaceHandle = h;
     }
 
-    unsigned long getPaperSpaceHandle()
+    unsigned long getPaperSpaceHandle() const
     {
         return paperSpaceHandle;
     }
@@ -644,12 +647,13 @@ public:
      * Sets the handle of the paper space 0. Some special blocks refer to
      * this handle.
      */
+    // cppcheck-suppress functionConst
     void setPaperSpace0Handle(unsigned long h)
     {
         paperSpace0Handle = h;
     }
 
-    unsigned long getPaperSpace0Handle()
+    unsigned long getPaperSpace0Handle() const
     {
         return paperSpace0Handle;
     }

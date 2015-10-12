@@ -41,7 +41,7 @@ class CommunityPage : public QWidget
 {
     Q_OBJECT
 public:
-    CommunityPage(QWidget *parent = nullptr);
+    explicit CommunityPage(QWidget *parent = nullptr);
     void      Apply();
 private:
     Q_DISABLE_COPY(CommunityPage)

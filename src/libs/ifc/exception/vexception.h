@@ -43,7 +43,7 @@ class VException : public QException
 {
     Q_DECLARE_TR_FUNCTIONS(VException)
 public:
-    VException(const QString &what);
+    explicit VException(const QString &what);
     VException(const VException &e);
     VException &operator=(const VException &e);
     virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}

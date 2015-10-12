@@ -35,7 +35,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VObjectProperty : public VProperty
     Q_OBJECT
 public:
     //! Constructor
-    VObjectProperty(const QString& name);
+    explicit VObjectProperty(const QString& name);
 
     //! Destructor
     virtual ~VObjectProperty() Q_DECL_OVERRIDE {}

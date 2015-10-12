@@ -103,7 +103,7 @@ public:
     template <typename T>
     const QSharedPointer<T> GeometricObject(const quint32 &id) const;
     const QSharedPointer<VGObject> GetGObject(quint32 id) const;
-    const QSharedPointer<VGObject> GetFakeGObject(quint32 id) const;
+    static const QSharedPointer<VGObject> GetFakeGObject(quint32 id);
     const VDetail      GetDetail(quint32 id) const;
     qreal              GetTableValue(const QString& name, MeasurementsType patternType) const;
     template <typename T>

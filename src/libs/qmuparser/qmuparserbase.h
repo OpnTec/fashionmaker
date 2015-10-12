@@ -54,7 +54,7 @@ class QMUPARSERSHARED_EXPORT QmuParserBase
     friend class QmuParserTokenReader;
 public:
     QmuParserBase();
-    QmuParserBase(const QmuParserBase &a_Parser);
+    explicit QmuParserBase(const QmuParserBase &a_Parser);
     QmuParserBase& operator=(const QmuParserBase &a_Parser);
     virtual ~QmuParserBase();
 
@@ -248,7 +248,9 @@ private:
     qreal              ParseString() const;
     qreal              ParseCmdCode() const;
     qreal              ParseCmdCodeBulk(int nOffset, int nThreadID) const;
+    // cppcheck-suppress functionStatic
     void               CheckName(const QString &a_strName, const QString &a_CharSet) const;
+    // cppcheck-suppress functionStatic
     void               CheckOprt(const QString &a_sName, const QmuParserCallback &a_Callback,
                                  const QString &a_szCharSet) const;
     void               StackDump(const QStack<token_type > &a_stVal, const QStack<token_type > &a_stOprt) const;

@@ -35,7 +35,7 @@ class VLitePattern : public VAbstractPattern
 {
     Q_OBJECT
 public:
-    VLitePattern(QObject *parent = nullptr);
+    explicit VLitePattern(QObject *parent = nullptr);
 
     virtual void    CreateEmptyFile() Q_DECL_OVERRIDE;
 

@@ -35,7 +35,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VStringProperty : public VProperty
 public:
     VStringProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
-    VStringProperty(const QString& name);
+    explicit VStringProperty(const QString& name);
 
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child

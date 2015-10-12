@@ -581,7 +581,9 @@ QStringList VApplication::LabelLanguages()
 void VApplication::StartLogging()
 {
     CreateLogDir();
+    // cppcheck-suppress leakReturnValNotUsed
     BeginLogging();
+    // cppcheck-suppress leakReturnValNotUsed
     ClearOldLogs();
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)
     ClearOldReports();
@@ -786,6 +788,7 @@ void VApplication::CollectReport(const QString &reportName) const
     reportFile.remove(); // Clear after yourself
 
     filename = QString("%1/reports/log-%2.log").arg(qApp->applicationDirPath()).arg(timestamp);
+    // cppcheck-suppress leakReturnValNotUsed
     GatherLogs();
     QFile logFile(QString("%1/valentina.log").arg(LogDirPath()));
     logFile.copy(filename); // Collect log
@@ -849,6 +852,7 @@ void VApplication::SendReport(const QString &reportName) const
     content.append(QString("\r\n-------------------------------\r\n"));
     content.append(QString("Log:")+"\r\n");
 
+    // cppcheck-suppress leakReturnValNotUsed
     GatherLogs();
     QFile logFile(QString("%1/valentina.log").arg(LogDirPath()));
     if (logFile.open(QIODevice::ReadOnly | QIODevice::Text))

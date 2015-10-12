@@ -44,7 +44,7 @@ class QmuParserTokenReader
 private:
     typedef QmuParserToken<qreal, QString> token_type;
 public:
-    QmuParserTokenReader(QmuParserBase *a_pParent);
+    explicit QmuParserTokenReader(QmuParserBase *a_pParent);
     QmuParserTokenReader* Clone(QmuParserBase *a_pParent) const;
 
     void           AddValIdent(identfun_type a_pCallback);

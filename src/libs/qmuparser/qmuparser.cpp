@@ -134,7 +134,7 @@ qreal QmuParser::FMod(qreal number, qreal denom)
  */
 qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
 {
-    if (a_iArgc == false)
+    if (a_iArgc == 0)
     {
         throw QmuParserError("too few arguments for function sum.");
     }
@@ -154,7 +154,7 @@ qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
  */
 qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
 {
-    if (a_iArgc == false)
+    if (a_iArgc == 0)
     {
         throw QmuParserError("too few arguments for function sum.");
     }
@@ -174,7 +174,7 @@ qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
  */
 qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
 {
-    if (a_iArgc == false)
+    if (a_iArgc == 0)
     {
         throw QmuParserError("too few arguments for function min.");
     }
@@ -194,7 +194,7 @@ qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
  */
 qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
 {
-    if (a_iArgc == false)
+    if (a_iArgc == 0)
     {
         throw QmuParserError("too few arguments for function min.");
     }

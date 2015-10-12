@@ -39,7 +39,7 @@ class VPoster
 {
     Q_DECLARE_TR_FUNCTIONS(VPoster)
 public:
-    VPoster(const QPrinter *printer);
+    explicit VPoster(const QPrinter *printer);
 
     QVector<QImage> Generate(const QImage &image, int page, int sheets = 1) const;
 private:

@@ -34,7 +34,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VFileProperty : public VProperty
 {
     Q_OBJECT
 public:
-    VFileProperty(const QString &name);
+    explicit VFileProperty(const QString &name);
 
     //! The destructor
     virtual ~VFileProperty() Q_DECL_OVERRIDE;

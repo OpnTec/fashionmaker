@@ -46,7 +46,7 @@ class MainWindowsNoGUI : public QMainWindow
 {
     Q_OBJECT
 public:
-    MainWindowsNoGUI(QWidget *parent = nullptr);
+    explicit MainWindowsNoGUI(QWidget *parent = nullptr);
     virtual ~MainWindowsNoGUI() Q_DECL_OVERRIDE;
 
 public slots:

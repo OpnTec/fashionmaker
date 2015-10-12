@@ -43,7 +43,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VLineTypeProperty : public VProperty
     Q_OBJECT
 public:
     //! Constructor
-    VLineTypeProperty(const QString& name);
+    explicit VLineTypeProperty(const QString& name);
 
     //! Destructor
     virtual ~VLineTypeProperty() Q_DECL_OVERRIDE {}

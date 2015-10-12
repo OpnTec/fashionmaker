@@ -40,7 +40,7 @@ class PathPage : public QWidget
 {
     Q_OBJECT
 public:
-    PathPage(QWidget *parent = nullptr);
+    explicit PathPage(QWidget *parent = nullptr);
     void      Apply();
 public slots:
     void TableActivated();

@@ -906,14 +906,14 @@ void VPattern::ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     VToolBasePoint *spoint = 0;
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const qreal x = qApp->toPixel(GetParametrDouble(domElement, AttrX, "10.0"));
         const qreal y = qApp->toPixel(GetParametrDouble(domElement, AttrY, "10.0"));
@@ -951,15 +951,15 @@ void VPattern::ParseToolEndLine(VMainGraphicsScene *scene, QDomElement &domEleme
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-    QString typeLine;
-    QString lineColor;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+        QString typeLine;
+        QString lineColor;
+
         PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
 
         const QString formula = GetParametrString(domElement, AttrLength, "100.0");
@@ -1000,15 +1000,15 @@ void VPattern::ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domEle
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-    QString typeLine;
-    QString lineColor;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+        QString typeLine;
+        QString lineColor;
+
         PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
         const QString formula = GetParametrString(domElement, AttrLength, "100.0");
         QString f = formula;//need for saving fixed formula;
@@ -1044,15 +1044,15 @@ void VPattern::ParseToolShoulderPoint(VMainGraphicsScene *scene, QDomElement &do
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-    QString typeLine;
-    QString lineColor;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+        QString typeLine;
+        QString lineColor;
+
         PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
         const QString formula = GetParametrString(domElement, AttrLength, "100.0");
         QString f = formula;//need for saving fixed formula;
@@ -1089,15 +1089,15 @@ void VPattern::ParseToolNormal(VMainGraphicsScene *scene, QDomElement &domElemen
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-    QString typeLine;
-    QString lineColor;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+        QString typeLine;
+        QString lineColor;
+
         PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
         const QString formula = GetParametrString(domElement, AttrLength, "100.0");
         QString f = formula;//need for saving fixed formula;
@@ -1134,15 +1134,15 @@ void VPattern::ParseToolBisector(VMainGraphicsScene *scene, QDomElement &domElem
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-    QString typeLine;
-    QString lineColor;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+        QString typeLine;
+        QString lineColor;
+
         PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
         const QString formula = GetParametrString(domElement, AttrLength, "100.0");
         QString f = formula;//need for saving fixed formula;
@@ -1179,13 +1179,13 @@ void VPattern::ParseToolLineIntersect(VMainGraphicsScene *scene, const QDomEleme
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const quint32 p1Line1Id = GetParametrUInt(domElement, AttrP1Line1, NULL_ID_STR);
         const quint32 p2Line1Id = GetParametrUInt(domElement, AttrP2Line1, NULL_ID_STR);
@@ -1209,13 +1209,13 @@ void VPattern::ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &d
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const QString radius = GetParametrString(domElement, AttrRadius, "0");
         QString f = radius;//need for saving fixed formula;
@@ -1251,12 +1251,12 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
 {
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, mx, my);
         const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
@@ -1279,15 +1279,15 @@ void VPattern::ParseToolHeight(VMainGraphicsScene *scene, const QDomElement &dom
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-    QString typeLine;
-    QString lineColor;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+        QString typeLine;
+        QString lineColor;
+
         PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
         const quint32 basePointId = GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
         const quint32 p1LineId = GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
@@ -1310,13 +1310,13 @@ void VPattern::ParseToolTriangle(VMainGraphicsScene *scene, const QDomElement &d
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const quint32 axisP1Id = GetParametrUInt(domElement, AttrAxisP1, NULL_ID_STR);
         const quint32 axisP2Id = GetParametrUInt(domElement, AttrAxisP2, NULL_ID_STR);
@@ -1341,13 +1341,13 @@ void VPattern::ParseToolPointOfIntersection(VMainGraphicsScene *scene, const QDo
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const quint32 firstPointId = GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
         const quint32 secondPointId = GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
@@ -1369,13 +1369,13 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const QString formula = GetParametrString(domElement, AttrLength, "0");
         QString f = formula;//need for saving fixed formula;
@@ -1412,13 +1412,13 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const QString formula = GetParametrString(domElement, AttrLength, "0");
         QString f = formula;//need for saving fixed formula;
@@ -1456,13 +1456,13 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const QString formula = GetParametrString(domElement, AttrLength, "0");
         QString f = formula;//need for saving fixed formula;
@@ -1498,15 +1498,15 @@ void VPattern::ParseToolLineIntersectAxis(VMainGraphicsScene *scene, QDomElement
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-    QString typeLine;
-    QString lineColor;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+        QString typeLine;
+        QString lineColor;
+
         PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
 
         const quint32 basePointId = GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
@@ -1548,15 +1548,15 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-    QString typeLine;
-    QString lineColor;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+        QString typeLine;
+        QString lineColor;
+
         PointsCommonAttributes(domElement, id, name, mx, my, typeLine, lineColor);
 
         const quint32 basePointId = GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
@@ -1596,13 +1596,13 @@ void VPattern::ParseToolPointOfIntersectionArcs(VMainGraphicsScene *scene, const
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const quint32 firstArcId = GetParametrUInt(domElement, AttrFirstArc, NULL_ID_STR);
         const quint32 secondArcId = GetParametrUInt(domElement, AttrSecondArc, NULL_ID_STR);
@@ -1628,13 +1628,13 @@ void VPattern::ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QD
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const quint32 c1CenterId = GetParametrUInt(domElement, AttrC1Center, NULL_ID_STR);
         const quint32 c2CenterId = GetParametrUInt(domElement, AttrC2Center, NULL_ID_STR);
@@ -1670,13 +1670,13 @@ void VPattern::ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDo
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const quint32 cCenterId = GetParametrUInt(domElement, AttrCCenter, NULL_ID_STR);
         const quint32 tangentId = GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
@@ -1710,13 +1710,13 @@ void VPattern::ParseToolPointFromArcAndTangent(VMainGraphicsScene *scene, const 
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    QString name;
-    qreal mx = 0;
-    qreal my = 0;
-
     try
     {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
         PointsCommonAttributes(domElement, id, name, mx, my);
         const quint32 arcId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
         const quint32 tangentId = GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
@@ -1741,10 +1741,10 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-
     try
     {
+        quint32 id = 0;
+
         ToolsCommonAttributes(domElement, id);
 
         const quint32 p1Id = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
@@ -1783,10 +1783,10 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, const QDomElement &dom
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-
     try
     {
+        quint32 id = 0;
+
         ToolsCommonAttributes(domElement, id);
         const quint32 point1 = GetParametrUInt(domElement, AttrPoint1, NULL_ID_STR);
         const quint32 point4 = GetParametrUInt(domElement, AttrPoint4, NULL_ID_STR);
@@ -1814,10 +1814,10 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-
     try
     {
+        quint32 id = 0;
+
         ToolsCommonAttributes(domElement, id);
         const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
@@ -1866,12 +1866,12 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
 {
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    quint32 idObject = 0;
-    quint32 idTool = 0;
-
     try
     {
+        quint32 id = 0;
+        quint32 idObject = 0;
+        quint32 idTool = 0;
+
         SplinesCommonAttributes(domElement, id, idObject, idTool);
         VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
         spl->setIdObject(idObject);
@@ -1892,12 +1892,12 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
 {
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-    quint32 idObject = 0;
-    quint32 idTool = 0;
-
     try
     {
+        quint32 id = 0;
+        quint32 idObject = 0;
+        quint32 idTool = 0;
+
         SplinesCommonAttributes(domElement, id, idObject, idTool);
         VSplinePath *path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
         path->setIdObject(idObject);
@@ -1919,10 +1919,10 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-
     try
     {
+        quint32 id = 0;
+
         ToolsCommonAttributes(domElement, id);
         const quint32 center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         const QString radius = GetParametrString(domElement, AttrRadius, "10");
@@ -1962,10 +1962,10 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
 {
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-
     try
     {
+        quint32 id = 0;
+
         ToolsCommonAttributes(domElement, id);
         const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
@@ -1989,10 +1989,10 @@ void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &do
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
 
-    quint32 id = 0;
-
     try
     {
+        quint32 id = 0;
+
         ToolsCommonAttributes(domElement, id);
         const quint32 center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
         const QString radius = GetParametrString(domElement, AttrRadius, "10");
