@@ -84,7 +84,6 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
         RestoreDefaults();
     }
 
-
     connect(ui->comboBoxTemplates,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &DialogLayoutSettings::TemplateSelected);
     connect(ui->comboBoxPaperSizeUnit,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -272,9 +271,7 @@ void DialogLayoutSettings::SetUnitePages(bool save)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::TemplateSelected()
 {
-    const QSizeF size = Template();
-
-    SheetSize(size);
+    SheetSize(Template());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -378,7 +375,6 @@ bool DialogLayoutSettings::SelectTemplate(const PaperSizeTemplate& id)
     if (index > -1)
     {
         ui->comboBoxTemplates->setCurrentIndex(index);
-        TemplateSelected();
     }
 
     return (index > -1);
@@ -430,7 +426,10 @@ void DialogLayoutSettings::DialogAccepted()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::RestoreDefaults()
 {
+    ui->comboBoxTemplates->blockSignals(true);
     ui->comboBoxTemplates->setCurrentIndex(0);//A0
+    TemplateSelected();
+    ui->comboBoxTemplates->blockSignals(false);
 
     SetLayoutWidth(VSettings::GetDefLayoutWidth());
     SetShift(VSettings::GetDefLayoutShift());
