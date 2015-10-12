@@ -378,6 +378,7 @@ bool DialogLayoutSettings::SelectTemplate(const PaperSizeTemplate& id)
     if (index > -1)
     {
         ui->comboBoxTemplates->setCurrentIndex(index);
+        TemplateSelected();
     }
 
     return (index > -1);
