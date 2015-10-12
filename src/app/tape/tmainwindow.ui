@@ -190,6 +190,9 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="toolTip">
+              <string>Name in formula</string>
+             </property>
             </widget>
            </item>
            <item row="5" column="0">
@@ -334,6 +337,9 @@
                <property name="enabled">
                 <bool>false</bool>
                </property>
+               <property name="toolTip">
+                <string>Move measurement top</string>
+               </property>
                <property name="text">
                 <string notr="true">...</string>
                </property>
@@ -383,6 +389,9 @@
                <property name="enabled">
                 <bool>false</bool>
                </property>
+               <property name="toolTip">
+                <string>Move measurement bottom</string>
+               </property>
                <property name="text">
                 <string notr="true">...</string>
                </property>
@@ -424,6 +433,9 @@
            </item>
            <item row="4" column="1">
             <widget class="QLabel" name="labelCalculatedValue">
+             <property name="toolTip">
+              <string>CAlculated value</string>
+             </property>
              <property name="text">
               <string notr="true"/>
              </property>
@@ -479,6 +491,9 @@
             <widget class="QLineEdit" name="lineEditFullName">
              <property name="enabled">
               <bool>false</bool>
+             </property>
+             <property name="toolTip">
+              <string/>
              </property>
             </widget>
            </item>
@@ -734,6 +749,9 @@
    </property>
    <property name="windowTitle">
     <string>Menu</string>
+   </property>
+   <property name="toolTip">
+    <string/>
    </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonTextUnderIcon</enum>

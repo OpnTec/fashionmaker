@@ -6517,6 +6517,30 @@ Do you want to save your changes?</source>
         <source>The full name of known measurement forbidden to change.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Name in formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Function Wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move measurement bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CAlculated value</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableWindow</name>
