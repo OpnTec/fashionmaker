@@ -397,6 +397,9 @@
                <property name="enabled">
                 <bool>false</bool>
                </property>
+               <property name="toolTip">
+                <string>Delete measurement</string>
+               </property>
                <property name="text">
                 <string notr="true">...</string>
                </property>
