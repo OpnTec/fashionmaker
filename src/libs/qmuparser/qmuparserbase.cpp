@@ -1880,8 +1880,6 @@ void QmuParserBase::Eval(qreal *results, int nBulkSize) const
     #endif
 
     int nMaxThreads = qMin(omp_get_max_threads(), s_MaxNumOpenMPThreads);
-    // cppcheck-suppress variableScope
-    int nThreadID;
     // cppcheck-suppress unreadVariable
     int ct=0;
     omp_set_num_threads(nMaxThreads);
@@ -1889,7 +1887,7 @@ void QmuParserBase::Eval(qreal *results, int nBulkSize) const
     #pragma omp parallel for schedule(static, nBulkSize/nMaxThreads) private(nThreadID)
     for (i=0; i<nBulkSize; ++i)
     {
-        nThreadID = omp_get_thread_num();
+        int nThreadID = omp_get_thread_num();
         results[i] = ParseCmdCodeBulk(i, nThreadID);
 
         #ifdef DEBUG_OMP_STUFF
