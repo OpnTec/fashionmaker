@@ -266,6 +266,9 @@
                <property name="enabled">
                 <bool>false</bool>
                </property>
+               <property name="toolTip">
+                <string>Function Wizard</string>
+               </property>
                <property name="text">
                 <string notr="true">...</string>
                </property>
