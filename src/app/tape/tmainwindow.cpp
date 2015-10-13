@@ -375,6 +375,7 @@ void TMainWindow::OpenTemplate()
         if (m != nullptr)
         {// The file was opened.
             SetCurrentFile(""); // Force user to to save new file
+            lock.reset();// remove lock from template
         }
     }
     else
