@@ -623,12 +623,12 @@ void TMainWindow::SaveEmail()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SaveSex(int index)
+void TMainWindow::SaveGender(int index)
 {
-    const SexType type = static_cast<SexType>(ui->comboBoxSex->itemData(index).toInt());
-    if (m->Sex() != type)
+    const GenderType type = static_cast<GenderType>(ui->comboBoxGender->itemData(index).toInt());
+    if (m->Gender() != type)
     {
-        m->SetSex(type);
+        m->SetGender(type);
         MeasurementsWasSaved(false);
     }
 }
@@ -1619,7 +1619,7 @@ void TMainWindow::InitWindow()
         // Tab Information
         delete ui->lineEditGivenName;
         delete ui->lineEditFamilyName;
-        delete ui->comboBoxSex;
+        delete ui->comboBoxGender;
         delete ui->lineEditEmail;
 
         delete ui->labelGivenName;
@@ -1634,8 +1634,8 @@ void TMainWindow::InitWindow()
         delete ui->dateEditBirthDate;
         ui->dateEditBirthDate = new QDateEdit(this);
 
-        delete ui->labelSex;
-        ui->labelSex = new QLabel(this);
+        delete ui->labelGender;
+        ui->labelGender = new QLabel(this);
 
         delete ui->labelEmail;
         ui->labelEmail = new QLabel(this);
@@ -1672,7 +1672,7 @@ void TMainWindow::InitWindow()
         ui->lineEditGivenName->setEnabled(true);
         ui->lineEditFamilyName->setEnabled(true);
         ui->dateEditBirthDate->setEnabled(true);
-        ui->comboBoxSex->setEnabled(true);
+        ui->comboBoxGender->setEnabled(true);
         ui->lineEditEmail->setEnabled(true);
 
         // Tab Measurements
@@ -1705,11 +1705,11 @@ void TMainWindow::InitWindow()
         ui->lineEditGivenName->setText(m->GivenName());
         ui->lineEditFamilyName->setText(m->FamilyName());
 
-        ui->comboBoxSex->addItem(tr("unknown", "gender"), QVariant(static_cast<int>(SexType::Unknown)));
-        ui->comboBoxSex->addItem(tr("male", "gender"), QVariant(static_cast<int>(SexType::Male)));
-        ui->comboBoxSex->addItem(tr("female", "gender"), QVariant(static_cast<int>(SexType::Female)));
-        const qint32 index = ui->comboBoxSex->findData(static_cast<int>(m->Sex()));
-        ui->comboBoxSex->setCurrentIndex(index);
+        ui->comboBoxGender->addItem(tr("unknown", "gender"), QVariant(static_cast<int>(GenderType::Unknown)));
+        ui->comboBoxGender->addItem(tr("male", "gender"), QVariant(static_cast<int>(GenderType::Male)));
+        ui->comboBoxGender->addItem(tr("female", "gender"), QVariant(static_cast<int>(GenderType::Female)));
+        const qint32 index = ui->comboBoxGender->findData(static_cast<int>(m->Gender()));
+        ui->comboBoxGender->setCurrentIndex(index);
 
         ui->dateEditBirthDate->setDate(m->BirthDate());
         ui->lineEditEmail->setText(m->Email());
@@ -1717,8 +1717,8 @@ void TMainWindow::InitWindow()
         connect(ui->lineEditGivenName, &QLineEdit::editingFinished, this, &TMainWindow::SaveGivenName);
         connect(ui->lineEditFamilyName, &QLineEdit::editingFinished, this, &TMainWindow::SaveFamilyName);
         connect(ui->lineEditEmail, &QLineEdit::editingFinished, this, &TMainWindow::SaveEmail);
-        connect(ui->comboBoxSex, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-                &TMainWindow::SaveSex);
+        connect(ui->comboBoxGender, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+                &TMainWindow::SaveGender);
         connect(ui->dateEditBirthDate, &QDateEdit::dateChanged, this, &TMainWindow::SaveBirthDate);
         connect(ui->pushButtonGrow, &QPushButton::clicked, this, &TMainWindow::DeployFormula);
 
@@ -2225,7 +2225,7 @@ void TMainWindow::GUIReadOnly(bool ro)
         ui->lineEditGivenName->setReadOnly(ro);
         ui->lineEditFamilyName->setReadOnly(ro);
         ui->dateEditBirthDate->setReadOnly(ro);
-        ui->comboBoxSex->setDisabled(ro);
+        ui->comboBoxGender->setDisabled(ro);
         ui->lineEditEmail->setReadOnly(ro);
     }
 

@@ -83,7 +83,7 @@ private slots:
     void SaveGivenName();
     void SaveFamilyName();
     void SaveEmail();
-    void SaveSex(int index);
+    void SaveGender(int index);
     void SaveBirthDate(const QDate & date);
     void SaveNotes();
     void ReadOnly(bool ro);

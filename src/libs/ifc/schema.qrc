@@ -10,5 +10,6 @@
         <file>schema/standard_measurements/v0.4.0.xsd</file>
         <file>schema/individual_measurements/v0.2.0.xsd</file>
         <file>schema/individual_measurements/v0.3.0.xsd</file>
+        <file>schema/individual_measurements/v0.3.1.xsd</file>
     </qresource>
 </RCC>

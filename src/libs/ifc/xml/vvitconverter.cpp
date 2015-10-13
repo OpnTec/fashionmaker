@@ -40,8 +40,8 @@
  */
 
 const QString VVITConverter::MeasurementMinVerStr = QStringLiteral("0.2.0");
-const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.3.0");
-const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/individual_measurements/v0.3.0.xsd");
+const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.3.1");
+const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/individual_measurements/v0.3.1.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VVITConverter::VVITConverter(const QString &fileName)
@@ -89,6 +89,8 @@ QString VVITConverter::XSDSchema(int ver) const
         case (0x000200):
             return QStringLiteral("://schema/individual_measurements/v0.2.0.xsd");
         case (0x000300):
+            return QStringLiteral("://schema/individual_measurements/v0.3.0.xsd");
+        case (0x000301):
             return CurrentSchema;
         default:
         {
@@ -113,6 +115,13 @@ void VVITConverter::ApplyPatches()
                 V_FALLTHROUGH
             }
             case (0x000300):
+            {
+                ToV0_3_1();
+                const QString schema = XSDSchema(0x000301);
+                ValidateXML(schema, fileName);
+                V_FALLTHROUGH
+            }
+            case (0x000301):
                 break;
             default:
                 break;
@@ -214,11 +223,32 @@ QDomElement VVITConverter::AddMV0_3_0(const QString &name, qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::GenderV0_3_1()
+{
+    const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("sex"));
+    QDomElement sex = nodeList.at(0).toElement();
+
+    QDomElement gender = createElement(QStringLiteral("gender"));
+    gender.appendChild(createTextNode(sex.text()));
+
+    QDomElement parent = sex.parentNode().toElement();
+    parent.replaceChild(gender, sex);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ToV0_3_0()
 {
     AddRootComment();
     SetVersion(QStringLiteral("0.3.0"));
     AddNewTagsForV0_3_0();
     ConvertMeasurementsToV0_3_0();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::ToV0_3_1()
+{
+    SetVersion(QStringLiteral("0.3.1"));
+    GenderV0_3_1();
     Save();
 }

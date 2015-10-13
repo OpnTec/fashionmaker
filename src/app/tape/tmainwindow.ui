@@ -32,7 +32,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabMeasurements">
        <attribute name="icon">
@@ -344,7 +344,9 @@
                 <string notr="true">...</string>
                </property>
                <property name="icon">
-                <iconset theme="go-top"/>
+                <iconset theme="go-top">
+                 <normaloff/>
+                </iconset>
                </property>
               </widget>
              </item>
@@ -396,7 +398,9 @@
                 <string notr="true">...</string>
                </property>
                <property name="icon">
-                <iconset theme="go-bottom"/>
+                <iconset theme="go-bottom">
+                 <normaloff/>
+                </iconset>
                </property>
               </widget>
              </item>
@@ -636,14 +640,14 @@
          </widget>
         </item>
         <item row="7" column="0">
-         <widget class="QLabel" name="labelSex">
+         <widget class="QLabel" name="labelGender">
           <property name="text">
-           <string>Sex:</string>
+           <string>Gender:</string>
           </property>
          </widget>
         </item>
         <item row="7" column="1">
-         <widget class="QComboBox" name="comboBoxSex">
+         <widget class="QComboBox" name="comboBoxGender">
           <property name="enabled">
            <bool>false</bool>
           </property>

@@ -59,8 +59,10 @@ private:
     QString MUnitV0_2_0();
     void ConvertMeasurementsToV0_3_0();
     QDomElement AddMV0_3_0(const QString &name, qreal value);
+    void GenderV0_3_1();
 
     void ToV0_3_0();
+    void ToV0_3_1();
 };
 
 #endif // VVITCONVERTER_H

@@ -43,7 +43,7 @@ const QString VMeasurements::TagPersonal         = QStringLiteral("personal");
 const QString VMeasurements::TagFamilyName       = QStringLiteral("family-name");
 const QString VMeasurements::TagGivenName        = QStringLiteral("given-name");
 const QString VMeasurements::TagBirthDate        = QStringLiteral("birth-date");
-const QString VMeasurements::TagSex              = QStringLiteral("sex");
+const QString VMeasurements::TagGender           = QStringLiteral("gender");
 const QString VMeasurements::TagEmail            = QStringLiteral("email");
 const QString VMeasurements::TagReadOnly         = QStringLiteral("read-only");
 const QString VMeasurements::TagMeasurement      = QStringLiteral("m");
@@ -56,9 +56,9 @@ const QString VMeasurements::AttrDescription    = QStringLiteral("description");
 const QString VMeasurements::AttrName           = QStringLiteral("name");
 const QString VMeasurements::AttrFullName       = QStringLiteral("full_name");
 
-const QString VMeasurements::SexMale    = QStringLiteral("male");
-const QString VMeasurements::SexFemale  = QStringLiteral("female");
-const QString VMeasurements::SexUnknown = QStringLiteral("unknown");
+const QString VMeasurements::GenderMale    = QStringLiteral("male");
+const QString VMeasurements::GenderFemale  = QStringLiteral("female");
+const QString VMeasurements::GenderUnknown = QStringLiteral("unknown");
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurements::VMeasurements(VContainer *data)
@@ -379,17 +379,17 @@ void VMeasurements::SetBirthDate(const QDate &date)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-SexType VMeasurements::Sex() const
+GenderType VMeasurements::Gender() const
 {
-    return StrToGender(UniqueTagText(TagSex, SexUnknown));
+    return StrToGender(UniqueTagText(TagGender, GenderUnknown));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetSex(const SexType &sex)
+void VMeasurements::SetGender(const GenderType &gender)
 {
     if (not ReadOnly())
     {
-        setTagText(TagSex, GenderToStr(sex));
+        setTagText(TagGender, GenderToStr(gender));
     }
 }
 
@@ -533,33 +533,33 @@ void VMeasurements::SetMFullName(const QString &name, const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VMeasurements::GenderToStr(const SexType &sex)
+QString VMeasurements::GenderToStr(const GenderType &sex)
 {
     switch (sex)
     {
-        case SexType::Male:
-            return SexMale;
-        case SexType::Female:
-            return SexFemale;
-        case SexType::Unknown:
+        case GenderType::Male:
+            return GenderMale;
+        case GenderType::Female:
+            return GenderFemale;
+        case GenderType::Unknown:
         default:
-            return SexUnknown;
+            return GenderUnknown;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-SexType VMeasurements::StrToGender(const QString &sex)
+GenderType VMeasurements::StrToGender(const QString &sex)
 {
-    const QStringList genders = QStringList() << SexMale << SexFemale << SexUnknown;
+    const QStringList genders = QStringList() << GenderMale << GenderFemale << GenderUnknown;
     switch (genders.indexOf(sex))
     {
-        case 0: // SexMale
-            return SexType::Male;
-        case 1: // SexFemale
-            return SexType::Female;
-        case 2: // SexUnknown
+        case 0: // GenderMale
+            return GenderType::Male;
+        case 1: // GenderFemale
+            return GenderType::Female;
+        case 2: // GenderUnknown
         default:
-            return SexType::Unknown;
+            return GenderType::Unknown;
     }
 }
 
@@ -705,10 +705,9 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     date.appendChild(newDate);
     personal.appendChild(date);
 
-    QDomElement sex = createElement(TagSex);
-    const QDomText newSex = createTextNode(GenderToStr(SexType::Unknown));
-    sex.appendChild(newSex);
-    personal.appendChild(sex);
+    QDomElement gender = createElement(TagGender);
+    gender.appendChild(createTextNode(GenderToStr(GenderType::Unknown)));
+    personal.appendChild(gender);
 
     personal.appendChild(createElement(TagEmail));
     mElement.appendChild(personal);

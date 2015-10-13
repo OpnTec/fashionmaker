@@ -32,7 +32,7 @@
 #include "../ifc/xml/vdomdocument.h"
 #include "../vpatterndb/vcontainer.h"
 
-enum class SexType : char { Male, Female, Unknown };
+enum class GenderType : char { Male, Female, Unknown };
 
 class VMeasurements : public VDomDocument
 {
@@ -72,8 +72,8 @@ public:
     QDate   BirthDate() const;
     void    SetBirthDate(const QDate &date);
 
-    SexType Sex() const;
-    void    SetSex(const SexType &sex);
+    GenderType Gender() const;
+    void    SetGender(const GenderType &gender);
 
     QString Email() const;
     void    SetEmail(const QString &text);
@@ -100,7 +100,7 @@ public:
     static const QString TagFamilyName;
     static const QString TagGivenName;
     static const QString TagBirthDate;
-    static const QString TagSex;
+    static const QString TagGender;
     static const QString TagEmail;
     static const QString TagReadOnly;
     static const QString TagMeasurement;
@@ -113,12 +113,12 @@ public:
     static const QString AttrName;
     static const QString AttrFullName;
 
-    static const QString SexMale;
-    static const QString SexFemale;
-    static const QString SexUnknown;
+    static const QString GenderMale;
+    static const QString GenderFemale;
+    static const QString GenderUnknown;
 
-    static QString GenderToStr(const SexType &sex);
-    static SexType StrToGender(const QString &sex);
+    static QString GenderToStr(const GenderType &sex);
+    static GenderType StrToGender(const QString &sex);
 
     QStringList ListAll() const;
     QStringList ListKnown() const;
