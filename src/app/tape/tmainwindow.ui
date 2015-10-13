@@ -637,6 +637,19 @@
           <property name="displayFormat">
            <string>yyyy-MM-dd</string>
           </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+          <property name="currentSectionIndex">
+           <number>0</number>
+          </property>
+          <property name="date">
+           <date>
+            <year>1800</year>
+            <month>1</month>
+            <day>1</day>
+           </date>
+          </property>
          </widget>
         </item>
         <item row="7" column="0">

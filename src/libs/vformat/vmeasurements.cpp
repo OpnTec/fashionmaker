@@ -365,8 +365,7 @@ void VMeasurements::SetGivenName(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 QDate VMeasurements::BirthDate() const
 {
-    const QString date = UniqueTagText(TagBirthDate, "1990-02-15");
-    return QDate::fromString(date, "yyyy-MM-dd");
+    return QDate::fromString(UniqueTagText(TagBirthDate), "yyyy-MM-dd");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -699,11 +698,7 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     QDomElement personal = createElement(TagPersonal);
     personal.appendChild(createElement(TagFamilyName));
     personal.appendChild(createElement(TagGivenName));
-
-    QDomElement date = createElement(TagBirthDate);
-    const QDomText newDate = createTextNode(QDate(1990, 02, 15).toString("yyyy-MM-dd"));
-    date.appendChild(newDate);
-    personal.appendChild(date);
+    personal.appendChild(createElement(TagBirthDate));
 
     QDomElement gender = createElement(TagGender);
     gender.appendChild(createTextNode(GenderToStr(GenderType::Unknown)));
