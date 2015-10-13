@@ -7,6 +7,7 @@ Valentina main repository: https://bitbucket.org/dismine/valentina/overview
 Valentina mail list (forum) https://groups.google.com/forum/#!forum/valentina-project-list    
 PPA for Ubuntu (develop): https://launchpad.net/~dismine/+archive/valentina-dev    
 Help translate https://www.transifex.com/organization/valentina    
+IRC channel: #valentina on irc.freenode.net.
 
 Valentina
 ==========
