@@ -4,6 +4,13 @@ win32{
     QMAKE_COPY = xcopy /y
 }
 
+CONFIG(release, debug|release){
+    !noDebugSymbols:win32{
+        unset(QMAKE_STRIP)
+        QMAKE_STRIP = echo # we do striping manualy
+    }
+}
+
 defineTest(minQtVersion) {
     maj = $$1
     min = $$2
