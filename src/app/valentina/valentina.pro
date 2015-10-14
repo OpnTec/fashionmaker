@@ -1851,7 +1851,7 @@ unix{
 # "make install" command for Windows.
 # Depend on nsis script and create installer in folder "package"
 win32:*-g++ {
-    package.path = $${OUT_PWD}/package/valentina
+    package.path = $${OUT_PWD}/../../../package/valentina
     package.files += \
         $${OUT_PWD}/$${DESTDIR}/valentina.exe \
         $${OUT_PWD}/$${DESTDIR}/valentina.exe.dbg \
@@ -1891,11 +1891,11 @@ win32:*-g++ {
         $$[QT_INSTALL_BINS]/libwinpthread-1.dll
     INSTALLS += package
 
-    package_tables.path = $${OUT_PWD}/package/valentina/tables/standard
+    package_tables.path = $${OUT_PWD}/../../../package/valentina/tables/standard
     package_tables.files += $${OUT_PWD}/$${DESTDIR}/tables/standard/GOST_man_ru.vst
     INSTALLS += package_tables
 
-    package_translations.path = $${OUT_PWD}/package/valentina/translations
+    package_translations.path = $${OUT_PWD}/../../../package/valentina/translations
     package_translations.files += \
         $$INSTALL_TRANSLATIONS \ # Valentina
         $$[QT_INSTALL_TRANSLATIONS]/qt_ar.qm \
@@ -1934,17 +1934,17 @@ win32:*-g++ {
         $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_sk.qm
     INSTALLS += package_translations
 
-    package_bearer.path = $${OUT_PWD}/package/valentina/bearer
+    package_bearer.path = $${OUT_PWD}/../../../package/valentina/bearer
     package_bearer.files += \
         $$[QT_INSTALL_PLUGINS]/bearer/qgenericbearer.dll \
         $$[QT_INSTALL_PLUGINS]/bearer/qnativewifibearer.dll
     INSTALLS += package_bearer
 
-    package_iconengines.path = $${OUT_PWD}/package/valentina/iconengines
+    package_iconengines.path = $${OUT_PWD}/../../../package/valentina/iconengines
     package_iconengines.files += $$[QT_INSTALL_PLUGINS]/iconengines/qsvgicon.dll
     INSTALLS += package_iconengines
 
-    package_imageformats.path = $${OUT_PWD}/package/valentina/imageformats
+    package_imageformats.path = $${OUT_PWD}/../../../package/valentina/imageformats
     package_imageformats.files += \
         $$[QT_INSTALL_PLUGINS]/imageformats/qdds.dll \
         $$[QT_INSTALL_PLUGINS]/imageformats/qgif.dll \
@@ -1960,19 +1960,21 @@ win32:*-g++ {
         $$[QT_INSTALL_PLUGINS]/imageformats/qwebp.dll \
     INSTALLS += package_imageformats
 
-    package_platforms.path = $${OUT_PWD}/package/valentina/platforms
+    package_platforms.path = $${OUT_PWD}/../../../package/valentina/platforms
     package_platforms.files += $$[QT_INSTALL_PLUGINS]/platforms/qwindows.dll
     INSTALLS += package_platforms
 
-    package_printsupport.path = $${OUT_PWD}/package/valentina/printsupport
+    package_printsupport.path = $${OUT_PWD}/../../../package/valentina/printsupport
     package_printsupport.files += $$[QT_INSTALL_PLUGINS]/printsupport/windowsprintersupport.dll
     INSTALLS += package_printsupport
 
-    package_nsis.path = $${OUT_PWD}/package
-    package_nsis.files += $$PWD/../../dist/win/nsis/valentina.nsi
+    package_nsis.path = $${OUT_PWD}/../../../package
+    package_nsis.files += \
+        $$PWD/../../../dist/win/nsis/valentina.nsi \
+        $$PWD/../../../dist/win/nsis/unList.exe # copy exe instead of creating from nsi
     INSTALLS += package_nsis
 
-    package_nsis_headers.path = $${OUT_PWD}/package/headers
+    package_nsis_headers.path = $${OUT_PWD}/../../../package/headers
     package_nsis_headers.files += \
         $$PWD/../../../dist/win/nsis/headers/fileassoc.nsh \
         $$PWD/../../../dist/win/nsis/headers/fileversion.nsh
@@ -1982,8 +1984,8 @@ win32:*-g++ {
     # First, mangle all of INSTALLS values. We depend on them.
     unset(MANGLED_INSTALLS)
     for(x, INSTALLS):MANGLED_INSTALLS += install_$${x}
-    build_package.path = $${OUT_PWD}/package
-    build_package.commands = \"C:/Program Files/NSIS/makensisw.exe\" \"$${OUT_PWD}/package/valentina.nsi\"
+    build_package.path = $${OUT_PWD}/../../../package
+    build_package.commands = \"C:/Program Files/NSIS/makensisw.exe\" \"$${OUT_PWD}/../../../package/valentina.nsi\"
     build_package.depends = $${MANGLED_INSTALLS}
     INSTALLS += build_package
 }
