@@ -68,17 +68,17 @@
         <file alias="24x24/actions/document-print-preview.png">icons/win.icon.theme/24x24/actions/document-print-preview.png</file>
         <file alias="32x32/actions/document-print-preview.png">icons/win.icon.theme/32x32/actions/document-print-preview.png</file>
         <file alias="32x32/emblems/emblem-system.png">icons/win.icon.theme/32x32/emblems/emblem-system.png</file>
-        <file>icons/win.icon.theme/16x16/actions/go-up.png</file>
-        <file>icons/win.icon.theme/24x24/actions/go-up.png</file>
-        <file>icons/win.icon.theme/32x32/actions/go-up.png</file>
-        <file>icons/win.icon.theme/16x16/actions/go-top.png</file>
-        <file>icons/win.icon.theme/24x24/actions/go-top.png</file>
-        <file>icons/win.icon.theme/32x32/actions/go-top.png</file>
-        <file>icons/win.icon.theme/16x16/actions/go-bottom.png</file>
-        <file>icons/win.icon.theme/24x24/actions/go-bottom.png</file>
-        <file>icons/win.icon.theme/32x32/actions/go-bottom.png</file>
-        <file>icons/win.icon.theme/16x16/actions/go-previous.png</file>
-        <file>icons/win.icon.theme/24x24/actions/go-previous.png</file>
-        <file>icons/win.icon.theme/32x32/actions/go-previous.png</file>
+        <file alias="16x16/actions/go-up.png">icons/win.icon.theme/16x16/actions/go-up.png</file>
+        <file alias="24x24/actions/go-up.png">icons/win.icon.theme/24x24/actions/go-up.png</file>
+        <file alias="32x32/actions/go-up.png">icons/win.icon.theme/32x32/actions/go-up.png</file>
+        <file alias="16x16/actions/go-top.png">icons/win.icon.theme/16x16/actions/go-top.png</file>
+        <file alias="24x24/actions/go-top.png">icons/win.icon.theme/24x24/actions/go-top.png</file>
+        <file alias="32x32/actions/go-top.png">icons/win.icon.theme/32x32/actions/go-top.png</file>
+        <file alias="16x16/actions/go-bottom.png">icons/win.icon.theme/16x16/actions/go-bottom.png</file>
+        <file alias="24x24/actions/go-bottom.png">icons/win.icon.theme/24x24/actions/go-bottom.png</file>
+        <file alias="32x32/actions/go-bottom.png">icons/win.icon.theme/32x32/actions/go-bottom.png</file>
+        <file alias="16x16/actions/go-previous.png">icons/win.icon.theme/16x16/actions/go-previous.png</file>
+        <file alias="24x24/actions/go-previous.png">icons/win.icon.theme/24x24/actions/go-previous.png</file>
+        <file alias="32x32/actions/go-previous.png">icons/win.icon.theme/32x32/actions/go-previous.png</file>
     </qresource>
 </RCC>
