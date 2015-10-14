@@ -1854,17 +1854,10 @@ win32:*-g++ {
     package.path = $${OUT_PWD}/../../../package/valentina
     package.files += \
         $${OUT_PWD}/$${DESTDIR}/valentina.exe \
-        $${OUT_PWD}/$${DESTDIR}/valentina.exe.dbg \
         $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe \
-        $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe.dbg \
         $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc \
         $$PWD/../../../dist/win/valentina.ico \
         $$PWD/../../../dist/win/curl.exe \
-        $$PWD/../../../dist/win/exchndl.dll \
-        $$PWD/../../../dist/win/dbghelp.dll \
-        $$PWD/../../../dist/win/mgwhelp.dll \
-        $$PWD/../../../dist/win/symsrv.dll \
-        $$PWD/../../../dist/win/symsrv.yes \
         $$PWD/../../../dist/win/pdftops.exe \
         $$PWD/../../../AUTHORS.txt \
         $$PWD/../../../LICENSE_GPL.txt \
@@ -1872,9 +1865,7 @@ win32:*-g++ {
         $$PWD/../../../ChangeLog.txt \
         $$PWD/../../libs/qmuparser/LICENSE_BSD.txt \
         $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/qmuparser2.dll \
-        $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/qmuparser2.dll.dbg \
         $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/vpropertyexplorer.dll \
-        $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/vpropertyexplorer.dll.dbg \
         $$[QT_INSTALL_BINS]/icudt*.dll \ # Different name for different Qt releases
         $$[QT_INSTALL_BINS]/icuin*.dll \ # Different name for different Qt releases
         $$[QT_INSTALL_BINS]/icuuc*.dll \ # Different name for different Qt releases
@@ -1889,6 +1880,20 @@ win32:*-g++ {
         $$[QT_INSTALL_BINS]/libgcc_s_dw2-1.dll \
         $$[QT_INSTALL_BINS]/libstdc++-6.dll \
         $$[QT_INSTALL_BINS]/libwinpthread-1.dll
+
+    !noDebugSymbols:!noCrashReports{
+        package.files += \
+            $${OUT_PWD}/$${DESTDIR}/valentina.exe.dbg \
+            $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe.dbg \
+            $$PWD/../../../dist/win/exchndl.dll \
+            $$PWD/../../../dist/win/dbghelp.dll \
+            $$PWD/../../../dist/win/mgwhelp.dll \
+            $$PWD/../../../dist/win/symsrv.dll \
+            $$PWD/../../../dist/win/symsrv.yes \
+            $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/qmuparser2.dll.dbg \
+            $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/vpropertyexplorer.dll.dbg
+    }
+
     INSTALLS += package
 
     package_tables.path = $${OUT_PWD}/../../../package/valentina/tables/standard
