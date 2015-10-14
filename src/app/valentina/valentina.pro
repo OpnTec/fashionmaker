@@ -183,6 +183,9 @@ win32:RC_FILE = share/resources/valentina.rc
 # Keep path to all files with standard measurements we support right now
 INSTALL_STANDARD_MEASHUREMENTS += share/resources/tables/standard/GOST_man_ru.vst
 
+# Keep path to all template files we have right now
+INSTALL_STANDARD_TEMPLATES += ../tape/share/resources/templates/template_all_measurements.vit
+
 TRANSLATIONS_PATH = ../../../share/translations
 
 win32 {
@@ -1025,13 +1028,18 @@ unix{
         standard.path = $$DATADIR/$${TARGET}/tables/standard/
         standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
 
+        # Path to templates after installation
+        templates.path = $$DATADIR/$${TARGET}/tables/templates/
+        templates.files = $$INSTALL_STANDARD_TEMPLATES
+
         INSTALLS += \
             target \
             tape \
             desktop \
             pixmaps \
             translations \
-            standard
+            standard \
+            templates
     }
     macx{
         # Some macx stuff
@@ -1835,11 +1843,16 @@ unix{
     standard.path = $$RESOURCES_DIR/tables/standard/
     standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
 
+    # Copy to bundle templates files
+    templates.path = $$RESOURCES_DIR/tables/templates/
+    templates.files = $$INSTALL_STANDARD_TEMPLATES
+
     # Copy to bundle standard measurements files
     diagrams.path = $$RESOURCES_DIR/
     diagrams.files = $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc
 
     QMAKE_BUNDLE_DATA += \
+        templates \
         standard \
         libraries \
         tape \
@@ -1899,6 +1912,10 @@ win32:*-g++ {
     package_tables.path = $${OUT_PWD}/../../../package/valentina/tables/standard
     package_tables.files += $${OUT_PWD}/$${DESTDIR}/tables/standard/GOST_man_ru.vst
     INSTALLS += package_tables
+
+    package_templates.path = $${OUT_PWD}/../../../package/valentina/tables/templates
+    package_templates.files += $${OUT_PWD}/../tape/$${DESTDIR}/tables/templates/template_all_measurements.vit
+    INSTALLS += package_templates
 
     package_translations.path = $${OUT_PWD}/../../../package/valentina/translations
     package_translations.files += \
@@ -2028,6 +2045,14 @@ for(DIR, INSTALL_STANDARD_MEASHUREMENTS) {
 }
 
 copyToDestdir($$st_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tables/standard))
+
+for(DIR, INSTALL_STANDARD_TEMPLATES) {
+     #add these absolute paths to a variable which
+     #ends up as 'mkcommands = path1 path2 path3 ...'
+     t_path += $${PWD}/$$DIR
+}
+
+copyToDestdir($$t_path, $$shell_path($${OUT_PWD}/../tape/$${DESTDIR}/tables/templates))
 
 win32 {
     for(DIR, INSTALL_PDFTOPS) {
