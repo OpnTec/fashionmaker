@@ -1,5 +1,6 @@
 ;-----------------------------------------------------------------------------------------------
 ; Generate list of files and directories for uninstaller with command line support (/? for help)
+; Create installer and use like external program that generate list of files.
 ;
 ; 2006 Shengalts Aleksander aka Instructor (Shengalts@mail.ru)
 ;-----------------------------------------------------------------------------------------------
