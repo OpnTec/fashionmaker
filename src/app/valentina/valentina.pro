@@ -1870,7 +1870,6 @@ win32:*-g++ {
         $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe \
         $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc \
         $$PWD/../../../dist/win/valentina.ico \
-        $$PWD/../../../dist/win/curl.exe \
         $$PWD/../../../dist/win/pdftops.exe \
         $$PWD/../../../AUTHORS.txt \
         $$PWD/../../../LICENSE_GPL.txt \
@@ -1904,7 +1903,8 @@ win32:*-g++ {
             $$PWD/../../../dist/win/symsrv.dll \
             $$PWD/../../../dist/win/symsrv.yes \
             $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/qmuparser2.dll.dbg \
-            $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/vpropertyexplorer.dll.dbg
+            $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/vpropertyexplorer.dll.dbg \
+            $$PWD/../../../dist/win/curl.exe
     }
 
     INSTALLS += package
