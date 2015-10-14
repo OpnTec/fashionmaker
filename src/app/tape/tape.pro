@@ -40,6 +40,11 @@ RCC_DIR = rcc
 # Directory for files created uic
 UI_DIR = uic
 
+macx{
+    # logo on macx.
+    ICON = ../../../dist/Tape.icns
+}
+
 # Suport subdirectories. Just better project code tree.
 include(tape.pri)
 
