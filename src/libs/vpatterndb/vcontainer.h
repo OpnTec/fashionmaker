@@ -138,8 +138,10 @@ public:
     static void        SetHeight(qreal height);
     void               SetHeightName(const QString &name);
     static qreal       size();
+    static const qreal *rsize();
     QString            SizeName() const;
     static qreal       height();
+    static const qreal *rheight();
     QString            HeightName()const;
 
     bool               VariableExist(const QString& name);
@@ -159,6 +161,8 @@ public:
     const QMap<QString, QSharedPointer<VArcRadius> >    DataRadiusesArcs() const;
     const QMap<QString, QSharedPointer<VArcAngle> >     DataAnglesArcs() const;
     const QMap<QString, QSharedPointer<VSplineAngle> >  DataAnglesCurves() const;
+
+    const QHash<QString, const qreal *> PlainVariables() const;
 
     static bool        IsUnique(const QString &name);
 

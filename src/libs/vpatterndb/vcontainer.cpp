@@ -30,6 +30,7 @@
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
 #include "vtranslatevars.h"
 
 #include <QLineF>
@@ -488,6 +489,33 @@ const QMap<QString, QSharedPointer<VSplineAngle> > VContainer::DataAnglesCurves(
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+const QHash<QString, const qreal *> VContainer::PlainVariables() const
+{
+    QHash<QString, const qreal *> vars;
+
+    QHash<QString, QSharedPointer<VInternalVariable>>::const_iterator i = d->variables.constBegin();
+    while (i != d->variables.constEnd())
+    {
+        QSharedPointer<VInternalVariable> var = i.value();
+        if ((qApp->patternType() == MeasurementsType::Standard) &&
+            (var->GetType() == VarType::Measurement || var->GetType() == VarType::Increment))
+        {
+            QSharedPointer<VVariable> m = GetVariable<VVariable>(i.key());
+            m->SetValue(size(), height(), qApp->patternUnit());
+        }
+        vars.insert(i.key(), var->GetValue());
+    }
+
+    if (qApp->patternType() == MeasurementsType::Standard)
+    {
+        vars.insert(SizeName(), rsize());
+        vars.insert(HeightName(), rheight());
+    }
+
+    return vars;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VContainer::IsUnique(const QString &name)
 {
     return (!uniqueNames.contains(name) && !builInFunctions.contains(name));
@@ -591,6 +619,12 @@ qreal VContainer::size()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+const qreal *VContainer::rsize()
+{
+    return &_size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VContainer::SizeName() const
 {
     return d->sizeName;
@@ -604,6 +638,12 @@ QString VContainer::SizeName() const
 qreal VContainer::height()
 {
     return _height;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const qreal *VContainer::rheight()
+{
+    return &_height;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
