@@ -1,8 +1,10 @@
 #ifndef VCMDEXPORT_H
 #define VCMDEXPORT_H
+
 #include <memory>
 #include <vector>
 #include <QTextStream>
+#include <QCoreApplication>
 
 #include "dialogs/dialoglayoutsettings.h"
 #include "../vmisc/vsysexits.h"
@@ -20,7 +22,6 @@ typedef std::shared_ptr<VCommandLine> VCommandLinePtr;
 //QCommandLineParser* object must exists until this object alive
 class VCommandLine
 {
-    Q_DECLARE_TR_FUNCTIONS(VCommandLine)
 public:
     virtual ~VCommandLine();
 

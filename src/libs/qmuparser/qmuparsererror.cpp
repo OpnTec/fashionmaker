@@ -36,7 +36,7 @@ const QmuParserErrorMsg QmuParserErrorMsg::m_Instance;
 QmuParserErrorMsg::~QmuParserErrorMsg()
 {}
 
-#define tr(source, disambiguation) QmuTranslation::translate("QmuParserErrorMsg", (source), (disambiguation))
+#define translate(source, disambiguation) QmuTranslation::translate("QmuParserErrorMsg", (source), (disambiguation))
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuParserErrorMsg::QmuParserErrorMsg()
@@ -45,116 +45,116 @@ QmuParserErrorMsg::QmuParserErrorMsg()
     m_vErrMsg.clear();
 
     m_vErrMsg.insert(ecUNASSIGNABLE_TOKEN,
-                     tr("Unexpected token \"$TOK$\" found at position $POS$.",
+                     translate("Unexpected token \"$TOK$\" found at position $POS$.",
                         "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
     m_vErrMsg.insert(ecINTERNAL_ERROR,
-                     tr("Internal error",
+                     translate("Internal error",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecINVALID_NAME,
-                     tr("Invalid function-, variable- or constant name: \"$TOK$\".",
+                     translate("Invalid function-, variable- or constant name: \"$TOK$\".",
                         "Math parser error messages. Left untouched \"$TOK$\""));
     m_vErrMsg.insert(ecINVALID_BINOP_IDENT,
-                     tr("Invalid binary operator identifier: \"$TOK$\".",
+                     translate("Invalid binary operator identifier: \"$TOK$\".",
                         "Math parser error messages. Left untouched \"$TOK$\""));
     m_vErrMsg.insert(ecINVALID_INFIX_IDENT,
-                     tr("Invalid infix operator identifier: \"$TOK$\".",
+                     translate("Invalid infix operator identifier: \"$TOK$\".",
                         "Math parser error messages. Left untouched \"$TOK$\""));
     m_vErrMsg.insert(ecINVALID_POSTFIX_IDENT,
-                     tr("Invalid postfix operator identifier: \"$TOK$\".",
+                     translate("Invalid postfix operator identifier: \"$TOK$\".",
                         "Math parser error messages. Left untouched \"$TOK$\""));
     m_vErrMsg.insert(ecINVALID_FUN_PTR,
-                     tr("Invalid pointer to callback function.",
+                     translate("Invalid pointer to callback function.",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecEMPTY_EXPRESSION,
-                     tr("Expression is empty.",
+                     translate("Expression is empty.",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecINVALID_VAR_PTR,
-                     tr("Invalid pointer to variable.",
+                     translate("Invalid pointer to variable.",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecUNEXPECTED_OPERATOR,
-                     tr("Unexpected operator \"$TOK$\" found at position $POS$",
+                     translate("Unexpected operator \"$TOK$\" found at position $POS$",
                         "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
     m_vErrMsg.insert(ecUNEXPECTED_EOF,
-                     tr("Unexpected end of expression at position $POS$",
+                     translate("Unexpected end of expression at position $POS$",
                         "Math parser error messages. Left untouched $POS$"));
     m_vErrMsg.insert(ecUNEXPECTED_ARG_SEP,
-                     tr("Unexpected argument separator at position $POS$",
+                     translate("Unexpected argument separator at position $POS$",
                         "Math parser error messages. Left untouched $POS$"));
     m_vErrMsg.insert(ecUNEXPECTED_PARENS,
-                     tr("Unexpected parenthesis \"$TOK$\" at position $POS$",
+                     translate("Unexpected parenthesis \"$TOK$\" at position $POS$",
                         "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
     m_vErrMsg.insert(ecUNEXPECTED_FUN,
-                     tr("Unexpected function \"$TOK$\" at position $POS$",
+                     translate("Unexpected function \"$TOK$\" at position $POS$",
                         "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
     m_vErrMsg.insert(ecUNEXPECTED_VAL,
-                     tr("Unexpected value \"$TOK$\" found at position $POS$",
+                     translate("Unexpected value \"$TOK$\" found at position $POS$",
                         "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
     m_vErrMsg.insert(ecUNEXPECTED_VAR,
-                     tr("Unexpected variable \"$TOK$\" found at position $POS$",
+                     translate("Unexpected variable \"$TOK$\" found at position $POS$",
                         "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
     m_vErrMsg.insert(ecUNEXPECTED_ARG,
-                     tr("Function arguments used without a function (position: $POS$)",
+                     translate("Function arguments used without a function (position: $POS$)",
                         "Math parser error messages. Left untouched $POS$"));
     m_vErrMsg.insert(ecMISSING_PARENS,
-                     tr("Missing parenthesis",
+                     translate("Missing parenthesis",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecTOO_MANY_PARAMS,
-                     tr("Too many parameters for function \"$TOK$\" at expression position $POS$",
+                     translate("Too many parameters for function \"$TOK$\" at expression position $POS$",
                         "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
     m_vErrMsg.insert(ecTOO_FEW_PARAMS,
-                     tr("Too few parameters for function \"$TOK$\" at expression position $POS$",
+                     translate("Too few parameters for function \"$TOK$\" at expression position $POS$",
                         "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
     m_vErrMsg.insert(ecDIV_BY_ZERO,
-                     tr("Divide by zero",
+                     translate("Divide by zero",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecDOMAIN_ERROR,
-                     tr("Domain error",
+                     translate("Domain error",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecNAME_CONFLICT,
-                     tr("Name conflict",
+                     translate("Name conflict",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecOPT_PRI,
-                     tr("Invalid value for operator priority (must be greater or equal to zero).",
+                     translate("Invalid value for operator priority (must be greater or equal to zero).",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecBUILTIN_OVERLOAD,
-                     tr("user defined binary operator \"$TOK$\" conflicts with a built in operator.",
+                     translate("user defined binary operator \"$TOK$\" conflicts with a built in operator.",
                         "Math parser error messages. Left untouched \"$TOK$\""));
     m_vErrMsg.insert(ecUNEXPECTED_STR,
-                     tr("Unexpected string token found at position $POS$.",
+                     translate("Unexpected string token found at position $POS$.",
                         "Math parser error messages. Left untouched $POS$"));
     m_vErrMsg.insert(ecUNTERMINATED_STRING,
-                     tr("Unterminated string starting at position $POS$.",
+                     translate("Unterminated string starting at position $POS$.",
                         "Math parser error messages. Left untouched $POS$"));
     m_vErrMsg.insert(ecSTRING_EXPECTED,
-                     tr("String function called with a non string type of argument.",
+                     translate("String function called with a non string type of argument.",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecVAL_EXPECTED,
-                     tr("String value used where a numerical argument is expected.",
+                     translate("String value used where a numerical argument is expected.",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecOPRT_TYPE_CONFLICT,
-                     tr("No suitable overload for operator \"$TOK$\" at position $POS$.",
+                     translate("No suitable overload for operator \"$TOK$\" at position $POS$.",
                         "Math parser error messages. Left untouched \"$TOK$\" and $POS$"));
     m_vErrMsg.insert(ecSTR_RESULT,
-                     tr("Function result is a string.",
+                     translate("Function result is a string.",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecGENERIC,
-                     tr("Parser error.",
+                     translate("Parser error.",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecLOCALE,
-                     tr("Decimal separator is identic to function argument separator.",
+                     translate("Decimal separator is identic to function argument separator.",
                         "Math parser error messages."));
     m_vErrMsg.insert(ecUNEXPECTED_CONDITIONAL,
-                     tr("The \"$TOK$\" operator must be preceeded by a closing bracket.",
+                     translate("The \"$TOK$\" operator must be preceeded by a closing bracket.",
                         "Math parser error messages. Left untouched \"$TOK$\""));
     m_vErrMsg.insert(ecMISSING_ELSE_CLAUSE,
-                     tr("If-then-else operator is missing an else clause",
+                     translate("If-then-else operator is missing an else clause",
                         "Math parser error messages. Do not translate operator name."));
     m_vErrMsg.insert(ecMISPLACED_COLON,
-                     tr("Misplaced colon at position $POS$",
+                     translate("Misplaced colon at position $POS$",
                         "Math parser error messages. Left untouched $POS$"));
 }
 
-#undef tr
+#undef translate
 
 //---------------------------------------------------------------------------------------------------------------------
 //

@@ -439,7 +439,7 @@
      <item>
       <widget class="QToolButton" name="toolButtonExprF2">
        <property name="text">
-        <string>...</string>
+        <string notr="true">...</string>
        </property>
        <property name="icon">
         <iconset resource="../../../vmisc/share/resources/icon.qrc">

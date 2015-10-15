@@ -63,6 +63,8 @@ const static auto SINGLE_OPTION_GRADATIONSIZE = QStringLiteral("x");
 const static auto LONG_OPTION_GRADATIONHEIGHT   = QStringLiteral("gheight");
 const static auto SINGLE_OPTION_GRADATIONHEIGHT = QStringLiteral("e");
 
+#define translate(source) QCoreApplication::translate("VCommandLine", (source))
+
 //such a tricky initialization is used, because it uses static functions which relay on static variables and order of
 //initialization is not defined between compiled units. i.e. - segv is possible (I hit it when
 //VDomDocument::UnitsHelpString() was crashing because of not inited string vars).
@@ -74,115 +76,118 @@ VCommandLine::VCommandLine() : parser()
 
                  {LONG_OPTION_BASENAME,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_BASENAME << LONG_OPTION_BASENAME,
-                                    tr("The base filename of exported layout files. Use it to enable console export "
-                                       "mode."),
-                                    tr("The base filename of layout files"))},
+                                    translate("The base filename of exported layout files. Use it to enable console "
+                                              "export mode."),
+                                    translate("The base filename of layout files"))},
 
                  {LONG_OPTION_DESTINATION,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_DESTINATION << LONG_OPTION_DESTINATION,
-                                    tr("The path to output destination folder."),
-                                    tr("The destination folder"))},
+                                    translate("The path to output destination folder."),
+                                    translate("The destination folder"))},
 
                  {LONG_OPTION_MEASUREFILE,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_MEASUREFILE << LONG_OPTION_MEASUREFILE,
-                                    tr("Path to custom measure file (export mode)."),
-                                    tr("The measure file"))},
+                                    translate("Path to custom measure file (export mode)."),
+                                    translate("The measure file"))},
 
                  {LONG_OPTION_EXP2FORMAT,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_EXP2FORMAT << LONG_OPTION_EXP2FORMAT,
-                                    tr("Number corresponding to output format (default = 0, export mode): ") +
-                                    DialogSaveLayout::MakeHelpFormatList(), tr("Format number"), "0")},
+                                    translate("Number corresponding to output format (default = 0, export mode): ") +
+                                    DialogSaveLayout::MakeHelpFormatList(), translate("Format number"), "0")},
 
                  {LONG_OPTION_GRADATIONSIZE,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONSIZE << LONG_OPTION_GRADATIONSIZE,
-                                    tr("Set size value a pattern file, that was opened with standard measurements "
-                                       "(export mode). Valid values: %1cm.")
+                                    translate("Set size value a pattern file, that was opened with standard "
+                                              "measurements (export mode). Valid values: %1cm.")
                                         .arg(VMeasurement::WholeListSizes(Unit::Cm).join(", ")),
-                                    tr("The size value"))},
+                                    translate("The size value"))},
 
                  {LONG_OPTION_GRADATIONHEIGHT,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_GRADATIONHEIGHT << LONG_OPTION_GRADATIONHEIGHT,
-                                    tr("Set height value a pattern file, that was opened with standard measurements "
-                                       "(export mode). Valid values: %1cm.")
+                                    translate("Set height value a pattern file, that was opened with standard "
+                                              "measurements (export mode). Valid values: %1cm.")
                                         .arg(VMeasurement::WholeListHeights(Unit::Cm).join(", ")),
-                                    tr("The height value"))},
+                                    translate("The height value"))},
 
                  //===================================================================================
 
                  {LONG_OPTION_PAGETEMPLATE,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGETEMPLATE << LONG_OPTION_PAGETEMPLATE,
-                                    tr("Number corresponding to page template (default = 0, export mode): ")+
-                                    DialogLayoutSettings::MakeHelpTemplateList(), tr("Template number"), "0")},
+                                    translate("Number corresponding to page template (default = 0, export mode): ")+
+                                    DialogLayoutSettings::MakeHelpTemplateList(), translate("Template number"), "0")},
 
 
                  {LONG_OPTION_PAGEW,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEW << LONG_OPTION_PAGEW,
-                                    tr("Page width in current units like 12.0 (cannot be used with \"%1\", export "
-                                       "mode).").arg(LONG_OPTION_PAGETEMPLATE), tr("The page width"))},
+                                    translate("Page width in current units like 12.0 (cannot be used with \"%1\", "
+                                              "export mode).").arg(LONG_OPTION_PAGETEMPLATE),
+                                    translate("The page width"))},
 
                  {LONG_OPTION_PAGEH,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEH << LONG_OPTION_PAGEH,
-                                    tr("Page height in current units like 12.0 (cannot be used with \"%1\", export "
-                                       "mode).").arg(LONG_OPTION_PAGETEMPLATE), ("The page height"))},
+                                    translate("Page height in current units like 12.0 (cannot be used with \"%1\", "
+                                              "export mode).").arg(LONG_OPTION_PAGETEMPLATE), ("The page height"))},
 
                  {LONG_OPTION_PAGEUNITS,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEUNITS << LONG_OPTION_PAGEUNITS,
-                                    tr("Page height/width measure units (cannot be used with \"%1\", export mode): ")
+                                    translate("Page height/width measure units (cannot be used with \"%1\", export "
+                                              "mode): ")
                                         .arg(LONG_OPTION_PAGETEMPLATE) + VDomDocument::UnitsHelpString(),
-                                    tr("The measure unit"))},
+                                    translate("The measure unit"))},
 
                  //===================================================================================
 
                  {LONG_OPTION_ROTATE,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_ROTATE << LONG_OPTION_ROTATE,
-                                    tr("Rotation in degrees (one of predefined). Default (or 0) is no-rotate "
-                                       "(export mode)."), tr("Angle"))},
+                                    translate("Rotation in degrees (one of predefined). Default (or 0) is no-rotate "
+                                       "(export mode)."), translate("Angle"))},
 
                  {LONG_OPTION_CROP,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_CROP << LONG_OPTION_CROP,
-                                    tr("Auto crop unused length (export mode)."))},
+                                    translate("Auto crop unused length (export mode)."))},
 
                  {LONG_OPTION_UNITE,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_UNITE << LONG_OPTION_UNITE,
-                                    tr("Unite pages if possible (export mode)."))},
+                                    translate("Unite pages if possible (export mode)."))},
 
                  //===================================================================================
 
                  {LONG_OPTION_SAVELENGTH,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_SAVELENGTH << LONG_OPTION_SAVELENGTH,
-                                    tr("Save length of the sheet if set. (export mode)."))},
+                                    translate("Save length of the sheet if set. (export mode)."))},
 
                  {LONG_OPTION_SHIFTUNITS,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTUNITS << LONG_OPTION_SHIFTUNITS,
-                                    tr("Layout units (as paper's one except px, export mode)."), tr("The unit"))},
+                                    translate("Layout units (as paper's one except px, export mode)."),
+                                    translate("The unit"))},
 
                  {LONG_OPTION_SHIFTLENGTH,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTLENGTH << LONG_OPTION_SHIFTLENGTH,
-                                    tr("Shift layout length measured in layout units (export mode)."),
-                                    tr("Shift length"))},
+                                    translate("Shift layout length measured in layout units (export mode)."),
+                                    translate("Shift length"))},
 
                  {LONG_OPTION_GAPWIDTH,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_GAPWIDTH << LONG_OPTION_GAPWIDTH,
-                                    tr("Gap width x2, measured in layout units. (export mode)."),
-                                    tr("The gap width"))},
+                                    translate("Gap width x2, measured in layout units. (export mode)."),
+                                    translate("The gap width"))},
 
                  {LONG_OPTION_GROUPPING,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_GROUPPING << LONG_OPTION_GROUPPING,
-                                    tr("Sets layout groupping (export mode): ")
-                                    + DialogLayoutSettings::MakeGroupsHelp(), tr("Grouping type"), "2")},
+                                    translate("Sets layout groupping (export mode): ")
+                                    + DialogLayoutSettings::MakeGroupsHelp(), translate("Grouping type"), "2")},
 
                  {LONG_OPTION_TEST,
                  new QCommandLineOption(QStringList() << SINGLE_OPTION_TEST << LONG_OPTION_TEST,
-                                    tr("Run the program in a test mode. The program this mode load a single pattern "
-                                       "file and silently quit without showing the main window. The key have priority "
-                                       "before key '%1'.").arg(LONG_OPTION_BASENAME))}
+                                    translate("Run the program in a test mode. The program this mode load a single "
+                                              "pattern file and silently quit without showing the main window. The "
+                                              "key have priority before key '%1'.").arg(LONG_OPTION_BASENAME))}
                  }),
     isGuiEnabled(false)
 {
-    parser.setApplicationDescription(tr("Pattern making program."));
+    parser.setApplicationDescription(translate("Pattern making program."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addPositionalArgument("filename", tr("Pattern file."));
+    parser.addPositionalArgument("filename", translate("Pattern file."));
 
     QMap<QString, QCommandLineOption *>::const_iterator i = optionsUsed.constBegin();
     while (i != optionsUsed.constEnd())
@@ -224,19 +229,20 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
         if ((a || b || c) && x)
         {
-            qCritical() << tr("Cannot use pageformat and page explicit size/units together.") << "\n";
+            qCritical() << translate("Cannot use pageformat and page explicit size/units together.") << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
 
         if ((a || b || c) && !(a && b && c))
         {
-            qCritical() << tr("Page height, width, units must be used all 3 at once.") << "\n";
+            qCritical() << translate("Page height, width, units must be used all 3 at once.") << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
 
     }
 
-    //fixme: not really sure ...if shift length must be set with shift units ...or separated, will comment for now. Uncomment if need them both only.
+    //fixme: not really sure ...if shift length must be set with shift units ...or separated, will comment for now.
+    //Uncomment if need them both only.
 
 //    {
 //        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
@@ -245,7 +251,7 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
 //        if ((a || b) && !(a && b))
 //        {
-//            qCritical() << tr("Shift length must be used together with shift units.") << "\n";
+//            qCritical() << translate("Shift length must be used together with shift units.") << "\n";
 //            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
 //        }
 //    }
@@ -257,7 +263,7 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     {
         if (!diag.SetIncrease(rotateDegree))
         {
-            qCritical() << tr("Invalid rotation value. That must be one of predefined values.") << "\n";
+            qCritical() << translate("Invalid rotation value. That must be one of predefined values.") << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
     }
@@ -265,7 +271,7 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     // if present units MUST be set before any other to keep conversions correct
     if (!diag.SelectTemplate(OptPaperSize()))
     {
-        qCritical() << tr("Unknown page templated selected.") << "\n";
+        qCritical() << translate("Unknown page templated selected.") << "\n";
         const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
 
@@ -274,7 +280,7 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
         if (!diag.SelectPaperUnit(parser.value(*optionsUsed.value(LONG_OPTION_PAGEUNITS))))
         {
-            qCritical() << tr("Unsupported paper units.") << "\n";
+            qCritical() << translate("Unsupported paper units.") << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
 
@@ -286,7 +292,7 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     {
         if (!diag.SelectLayoutUnit(parser.value(*optionsUsed.value(LONG_OPTION_SHIFTUNITS))))
         {
-            qCritical() << tr("Unsupported layout units.") << "\n";
+            qCritical() << translate("Unsupported layout units.") << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
     }
@@ -348,7 +354,7 @@ bool VCommandLine::IsTestModeEnabled() const
     const bool r = parser.isSet(*optionsUsed.value(LONG_OPTION_TEST));
     if (r && parser.positionalArguments().size() != 1)
     {
-        qCritical() << tr("Test option can be used with single input file only.") << "/n";
+        qCritical() << translate("Test option can be used with single input file only.") << "/n";
         const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
     return r;
@@ -360,7 +366,7 @@ bool VCommandLine::IsExportEnabled() const
     const bool r = parser.isSet(*optionsUsed.value(LONG_OPTION_BASENAME));
     if (r && parser.positionalArguments().size() != 1)
     {
-        qCritical() << tr("Export options can be used with single input file only.") << "/n";
+        qCritical() << translate("Export options can be used with single input file only.") << "/n";
         const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
     return r;
@@ -483,7 +489,7 @@ QString VCommandLine::OptGradationSize() const
     }
     else
     {
-        qCritical() << tr("Invalid gradation size value.") << "\n";
+        qCritical() << translate("Invalid gradation size value.") << "\n";
         const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
 }
@@ -498,7 +504,9 @@ QString VCommandLine::OptGradationHeight() const
     }
     else
     {
-        qCritical() << tr("Invalid gradation height value.") << "\n";
+        qCritical() << translate("Invalid gradation height value.") << "\n";
         const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
     }
 }
+
+#undef translate

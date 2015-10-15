@@ -44,8 +44,8 @@ namespace qmu
  * get translated string
  * map.value(measurement).translate();
  *
- * Hint. Define macros tr() for reducing code complexity.
- * #define tr(source, disambiguation) QmuTranslation::translate("VTranslateVars", (source), (disambiguation))
+ * Hint. Define macros translate() for reducing code complexity.
+ * #define translate(source, disambiguation) QmuTranslation::translate("VTranslateVars", (source), (disambiguation))
  *
  * Don't forget to undef macros later!
  */

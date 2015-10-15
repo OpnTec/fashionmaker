@@ -26,6 +26,7 @@
 #include <sstream>
 #include <QException>
 #include <QVector>
+#include <QCoreApplication>
 
 #include "qmuparserdef.h"
 #include "qmutranslation.h"

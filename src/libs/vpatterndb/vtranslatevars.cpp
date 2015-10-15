@@ -57,7 +57,7 @@ VTranslateVars::VTranslateVars(bool osSeparator)
 VTranslateVars::~VTranslateVars()
 {}
 
-#define tr(source, disambiguation) QmuTranslation::translate("VTranslateVars", (source), (disambiguation))
+#define translate(source, disambiguation) QmuTranslation::translate("VTranslateVars", (source), (disambiguation))
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitPatternMakingSystems()
@@ -69,287 +69,287 @@ void VTranslateVars::InitPatternMakingSystems()
     QmuTranslation book;
 
     //=================================================================================================================
-    name = tr("Bunka", "System name");
-    author = tr("Bunka Fashion College", "Author name");
-    book = tr("Fundamentals of Garment Design", "Book name");
+    name = translate("Bunka", "System name");
+    author = translate("Bunka Fashion College", "Author name");
+    book = translate("Fundamentals of Garment Design", "Book name");
     InitSystem(p0_S, name, author, book);
     //=================================================================================================================
-    name = tr("Barnfield and Richard", "System name");
-    author = tr("Jo Barnfield and Andrew Richards", "Author name");
-    book = tr("Pattern Making Primer", "Book name");
+    name = translate("Barnfield and Richard", "System name");
+    author = translate("Jo Barnfield and Andrew Richards", "Author name");
+    book = translate("Pattern Making Primer", "Book name");
     InitSystem(p1_S, name, author, book);
     //=================================================================================================================
-    name = tr("Friendship/Women", "System name");
-    author = tr("Elizabeth Friendship", "Author name");
-    book = tr("Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries", "Book name");
+    name = translate("Friendship/Women", "System name");
+    author = translate("Elizabeth Friendship", "Author name");
+    book = translate("Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries", "Book name");
     InitSystem(p2_S, name, author, book);
     //=================================================================================================================
-    name = tr("Morris, K.", "System name");
-    author = tr("Karen Morris", "Author name");
-    book = tr("Sewing Lingerie that Fits", "Book name");
+    name = translate("Morris, K.", "System name");
+    author = translate("Karen Morris", "Author name");
+    book = translate("Sewing Lingerie that Fits", "Book name");
     InitSystem(p3_S, name, author, book);
     //=================================================================================================================
-    name = tr("Castro", "System name");
-    author = tr("Lucia Mors de Castro", "Author name");
-    book = tr("Patternmaking in Practic", "Book name");
+    name = translate("Castro", "System name");
+    author = translate("Lucia Mors de Castro", "Author name");
+    book = translate("Patternmaking in Practic", "Book name");
     InitSystem(p4_S, name, author, book);
     //=================================================================================================================
-    name = tr("Kim & Uh", "System name");
-    author = tr("Injoo Kim and Mykyung Uh", "Author name");
-    book = tr("Apparel Making in Fashion Design", "Book name");
+    name = translate("Kim & Uh", "System name");
+    author = translate("Injoo Kim and Mykyung Uh", "Author name");
+    book = translate("Apparel Making in Fashion Design", "Book name");
     InitSystem(p5_S, name, author, book);
     //=================================================================================================================
-    name = tr("Waugh", "System name");
-    author = tr("Norah Waugh", "Author name");
-    book = tr("Corsets and Crinolines", "Book name");
+    name = translate("Waugh", "System name");
+    author = translate("Norah Waugh", "Author name");
+    book = translate("Corsets and Crinolines", "Book name");
     InitSystem(p6_S, name, author, book);
     //=================================================================================================================
-    name = tr("Grimble", "System name");
-    author = tr("Frances Grimble", "Author name");
-    book = tr("Fashions of the Gilded Age", "Book name");
+    name = translate("Grimble", "System name");
+    author = translate("Frances Grimble", "Author name");
+    book = translate("Fashions of the Gilded Age", "Book name");
     InitSystem(p7_S, name, author, book);
     //=================================================================================================================
-    name = tr("Thornton's International System", "System name");
-    author = tr("ed. R. L. Shep", "Author name");
-    book = tr("The Great War: Styles and Patterns of the 1910s", "Book name");
+    name = translate("Thornton's International System", "System name");
+    author = translate("ed. R. L. Shep", "Author name");
+    book = translate("The Great War: Styles and Patterns of the 1910s", "Book name");
     InitSystem(p8_S, name, author, book);
     //=================================================================================================================
-    name = tr("Hillhouse & Mansfield", "System name");
-    author = tr("Marion S. Hillhouse and Evelyn A. Mansfield", "Author name");
-    book = tr("Dress Design: Draping and Flat Pattern Making", "Book name");
+    name = translate("Hillhouse & Mansfield", "System name");
+    author = translate("Marion S. Hillhouse and Evelyn A. Mansfield", "Author name");
+    book = translate("Dress Design: Draping and Flat Pattern Making", "Book name");
     InitSystem(p9_S, name, author, book);
     //=================================================================================================================
-    name = tr("Pivnick", "System name");
-    author = tr("Esther Kaplan Pivnick", "Author name");
-    book = tr("How to Design Beautiful Clothes: Designing and Pattern Making", "Book name");
+    name = translate("Pivnick", "System name");
+    author = translate("Esther Kaplan Pivnick", "Author name");
+    book = translate("How to Design Beautiful Clothes: Designing and Pattern Making", "Book name");
     InitSystem(p10_S, name, author, book);
     //=================================================================================================================
-    name = tr("Minister & Son", "System name");
-    author = tr("Edward Minister & Son, ed. R. L. Shep", "Author name");
-    book = tr("The Complete Guide to Practical Cutting (1853)", "Book name");
+    name = translate("Minister & Son", "System name");
+    author = translate("Edward Minister & Son, ed. R. L. Shep", "Author name");
+    book = translate("The Complete Guide to Practical Cutting (1853)", "Book name");
     InitSystem(p11_S, name, author, book);
     //=================================================================================================================
-    name = tr("Strickland", "System name");
-    author = tr("Gertrude Strickland", "Author name");
-    book = tr("A Tailoring Manual", "Book name");
+    name = translate("Strickland", "System name");
+    author = translate("Gertrude Strickland", "Author name");
+    book = translate("A Tailoring Manual", "Book name");
     InitSystem(p12_S, name, author, book);
     //=================================================================================================================
-    name = tr("Loh & Lewis", "System name");
-    author = tr("May Loh and Diehl Lewis", "Author name");
-    book = tr("Patternless Fashion Design", "Book name");
+    name = translate("Loh & Lewis", "System name");
+    author = translate("May Loh and Diehl Lewis", "Author name");
+    book = translate("Patternless Fashion Design", "Book name");
     InitSystem(p13_S, name, author, book);
     //=================================================================================================================
-    name = tr("Morris, F. R.", "System name");
-    author = tr("F. R. Morris", "Author name");
-    book = tr("Ladies Garment Cutting and Making", "Book name");
+    name = translate("Morris, F. R.", "System name");
+    author = translate("F. R. Morris", "Author name");
+    book = translate("Ladies Garment Cutting and Making", "Book name");
     InitSystem(p14_S, name, author, book);
     //=================================================================================================================
-    name = tr("Mason", "System name");
-    author = tr("Gertrude Mason", "Author name");
-    book = tr("Gertrude Mason's Patternmaking Book", "Book name");
+    name = translate("Mason", "System name");
+    author = translate("Gertrude Mason", "Author name");
+    book = translate("Gertrude Mason's Patternmaking Book", "Book name");
     InitSystem(p15_S, name, author, book);
     //=================================================================================================================
-    name = tr("Kimata", "System name");
-    author = tr("K. Kimata", "Author name");
-    book = tr("K.Kimata's Simplified Drafting Book for Dressmaking", "Book name");
+    name = translate("Kimata", "System name");
+    author = translate("K. Kimata", "Author name");
+    book = translate("K.Kimata's Simplified Drafting Book for Dressmaking", "Book name");
     InitSystem(p16_S, name, author, book);
     //=================================================================================================================
-    name = tr("Master Designer", "System name");
-    author = tr("The Master Designer (Chicago, IL)", "Author name");
-    book = tr("Master Designer's System of Designing, Cutting and Grading", "Book name");
+    name = translate("Master Designer", "System name");
+    author = translate("The Master Designer (Chicago, IL)", "Author name");
+    book = translate("Master Designer's System of Designing, Cutting and Grading", "Book name");
     InitSystem(p17_S, name, author, book);
     //=================================================================================================================
-    name = tr("Kopp", "System name");
-    author = tr("Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross", "Author name");
-    book = tr("How to Draft Basic Patterns", "Book name");
+    name = translate("Kopp", "System name");
+    author = translate("Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross", "Author name");
+    book = translate("How to Draft Basic Patterns", "Book name");
     InitSystem(p18_S, name, author, book);
     //=================================================================================================================
-    name = tr("Ekern", "System name");
-    author = tr("Doris Ekern", "Author name");
-    book = tr("Slacks Cut-to-Fit for Your Figure", "Book name");
+    name = translate("Ekern", "System name");
+    author = translate("Doris Ekern", "Author name");
+    book = translate("Slacks Cut-to-Fit for Your Figure", "Book name");
     InitSystem(p19_S, name, author, book);
     //=================================================================================================================
-    name = tr("Doyle", "System name");
-    author = tr("Sarah J. Doyle", "Author name");
-    book = tr("Sarah's Key to Pattern Drafting", "Book name");
+    name = translate("Doyle", "System name");
+    author = translate("Sarah J. Doyle", "Author name");
+    book = translate("Sarah's Key to Pattern Drafting", "Book name");
     InitSystem(p20_S, name, author, book);
     //=================================================================================================================
-    name = tr("Shelton", "System name");
-    author = tr("Karla J. Shelton", "Author name");
-    book = tr("Design and Sew Jeans", "Book name");
+    name = translate("Shelton", "System name");
+    author = translate("Karla J. Shelton", "Author name");
+    book = translate("Design and Sew Jeans", "Book name");
     InitSystem(p21_S, name, author, book);
     //=================================================================================================================
-    name = tr("Lady Boutique", "System name");
-    author = tr("Lady Boutique", "Author name");
-    book = tr("Lady Boutique magazine (Japan)", "Book name");
+    name = translate("Lady Boutique", "System name");
+    author = translate("Lady Boutique", "Author name");
+    book = translate("Lady Boutique magazine (Japan)", "Book name");
     InitSystem(p22_S, name, author, book);
     //=================================================================================================================
-    name = tr("Rohr", "System name");
-    author = tr("M. Rohr", "Author name");
-    book = tr("Pattern Drafting and Grading: Women's nd Misses' Garment Design", "Book name");
+    name = translate("Rohr", "System name");
+    author = translate("M. Rohr", "Author name");
+    book = translate("Pattern Drafting and Grading: Women's nd Misses' Garment Design", "Book name");
     InitSystem(p23_S, name, author, book);
     //=================================================================================================================
-    name = tr("Moore", "System name");
-    author = tr("Dorothy Moore", "Author name");
-    book = tr("Dorothy Moore's Pattern Drafting and Dressmaking", "Book name");
+    name = translate("Moore", "System name");
+    author = translate("Dorothy Moore", "Author name");
+    book = translate("Dorothy Moore's Pattern Drafting and Dressmaking", "Book name");
     InitSystem(p24_S, name, author, book);
     //=================================================================================================================
-    name = tr("Abling", "System name");
-    author = tr("Bina Abling", "Author name");
-    book = tr("Integrating Draping, Drafting and Drawing", "Book name");
+    name = translate("Abling", "System name");
+    author = translate("Bina Abling", "Author name");
+    book = translate("Integrating Draping, Drafting and Drawing", "Book name");
     InitSystem(p25_S, name, author, book);
     //=================================================================================================================
-    name = tr("Fukomoto", "System name");
-    author = tr("Sue S. Fukomoto", "Author name");
-    book = tr("Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and "
-              "Millinery", "Book name");
+    name = translate("Fukomoto", "System name");
+    author = translate("Sue S. Fukomoto", "Author name");
+    book = translate("Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and "
+                     "Millinery", "Book name");
     InitSystem(p26_S, name, author, book);
     //=================================================================================================================
-    name = tr("Dressmaking International", "System name");
-    author = tr("Dressmaking International", "Author name");
-    book = tr("Dressmaking International magazine (Japan)", "Book name");
+    name = translate("Dressmaking International", "System name");
+    author = translate("Dressmaking International", "Author name");
+    book = translate("Dressmaking International magazine (Japan)", "Book name");
     InitSystem(p27_S, name, author, book);
     //=================================================================================================================
-    name = tr("Erwin", "System name");
-    author = tr("Mabel D. Erwin", "Author name");
-    book = tr("Practical Dress Design", "Book name");
+    name = translate("Erwin", "System name");
+    author = translate("Mabel D. Erwin", "Author name");
+    book = translate("Practical Dress Design", "Book name");
     InitSystem(p28_S, name, author, book);
     //=================================================================================================================
-    name = tr("Gough", "System name");
-    author = tr("E. L. G. Gough", "Author name");
-    book = tr("Principles of Garment Cutting", "Book name");
+    name = translate("Gough", "System name");
+    author = translate("E. L. G. Gough", "Author name");
+    book = translate("Principles of Garment Cutting", "Book name");
     InitSystem(p29_S, name, author, book);
     //=================================================================================================================
-    name = tr("Allemong", "System name");
-    author = tr("Elizabeth M. Allemong", "Author name");
-    book = tr("European Cut", "Book name");
+    name = translate("Allemong", "System name");
+    author = translate("Elizabeth M. Allemong", "Author name");
+    book = translate("European Cut", "Book name");
     InitSystem(p30_S, name, author, book);
     //=================================================================================================================
-    name = tr("McCunn", "System name");
-    author = tr("Donald H. McCunn", "Author name");
-    book = tr("How to Make Your Own Sewing Patterns", "Book name");
+    name = translate("McCunn", "System name");
+    author = translate("Donald H. McCunn", "Author name");
+    book = translate("How to Make Your Own Sewing Patterns", "Book name");
     InitSystem(p31_S, name, author, book);
     //=================================================================================================================
-    name = tr("Zarapkar", "System name");
-    author = tr("Shri K. R. Zarapkar and Shri Arvind K. Zarapkar", "Author name");
-    book = tr("Zarapkar System of Cutting", "Book name");
+    name = translate("Zarapkar", "System name");
+    author = translate("Shri K. R. Zarapkar and Shri Arvind K. Zarapkar", "Author name");
+    book = translate("Zarapkar System of Cutting", "Book name");
     InitSystem(p32_S, name, author, book);
     //=================================================================================================================
-    name = tr("Kunick", "System name");
-    author = tr("Philip Kunick", "Author name");
-    book = tr("Sizing, Pattern Construction and Grading for Women's and Children's Garments", "Book name");
+    name = translate("Kunick", "System name");
+    author = translate("Philip Kunick", "Author name");
+    book = translate("Sizing, Pattern Construction and Grading for Women's and Children's Garments", "Book name");
     InitSystem(p33_S, name, author, book);
     //=================================================================================================================
-    name = tr("Handford", "System name");
-    author = tr("Jack Handford", "Author name");
-    book = tr("Professional Patternmaking for Designers: Women's Wear, Men's Casual Wear", "Book name");
+    name = translate("Handford", "System name");
+    author = translate("Jack Handford", "Author name");
+    book = translate("Professional Patternmaking for Designers: Women's Wear, Men's Casual Wear", "Book name");
     InitSystem(p34_S, name, author, book);
     //=================================================================================================================
-    name = tr("Davis", "System name");
-    author = tr("R. I. Davis", "Author name");
-    book = tr("Men's 17th & 18th Century Costume, Cut & Fashion", "Book name");
+    name = translate("Davis", "System name");
+    author = translate("R. I. Davis", "Author name");
+    book = translate("Men's 17th & 18th Century Costume, Cut & Fashion", "Book name");
     InitSystem(p35_S, name, author, book);
     //=================================================================================================================
-    name = tr("MacLochlainn", "System name");
-    author = tr("Jason MacLochlainn", "Author name");
-    book = tr("The Victorian Tailor: An Introduction to Period Tailoring", "Book name");
+    name = translate("MacLochlainn", "System name");
+    author = translate("Jason MacLochlainn", "Author name");
+    book = translate("The Victorian Tailor: An Introduction to Period Tailoring", "Book name");
     InitSystem(p36_S, name, author, book);
     //=================================================================================================================
-    name = tr("Joseph-Armstrong", "System name");
-    author = tr("Helen Joseph-Armstrong", "Author name");
-    book = tr("Patternmaking for Fashion Design", "Book name");
+    name = translate("Joseph-Armstrong", "System name");
+    author = translate("Helen Joseph-Armstrong", "Author name");
+    book = translate("Patternmaking for Fashion Design", "Book name");
     InitSystem(p37_S, name, author, book);
     //=================================================================================================================
-    name = tr("Supreme System", "System name");
-    author = tr("Frederick T. Croonberg", "Author name");
-    book = tr("The Blue Book of Men's Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)",
-              "Book name");
+    name = translate("Supreme System", "System name");
+    author = translate("Frederick T. Croonberg", "Author name");
+    book = translate("The Blue Book of Men's Tailoring, Grand Edition of Supreme System for Producing Mens Garments "
+                     "(1907)", "Book name");
     InitSystem(p38_S, name, author, book);
     //=================================================================================================================
-    name = tr("Sugino", "System name");
-    author = tr("Dressmaking", "Author name");
-    book = tr("Pattern Drafting Vols. I, II, III (Japan)", "Book name");
+    name = translate("Sugino", "System name");
+    author = translate("Dressmaking", "Author name");
+    book = translate("Pattern Drafting Vols. I, II, III (Japan)", "Book name");
     InitSystem(p39_S, name, author, book);
     //=================================================================================================================
-    name = tr("Centre Point System", "System name");
-    author = tr("Louis Devere", "Author name");
-    book = tr("The Handbook of Practical Cutting on the Centre Point System", "Book name");
+    name = translate("Centre Point System", "System name");
+    author = translate("Louis Devere", "Author name");
+    book = translate("The Handbook of Practical Cutting on the Centre Point System", "Book name");
     InitSystem(p40_S, name, author, book);
     //=================================================================================================================
-    name = tr("Aldrich/Men", "System name");
-    author = tr("Winifred Aldrich", "Author name");
-    book = tr("Metric Pattern Cutting for Menswear", "Book name");
+    name = translate("Aldrich/Men", "System name");
+    author = translate("Winifred Aldrich", "Author name");
+    book = translate("Metric Pattern Cutting for Menswear", "Book name");
     InitSystem(p41_S, name, author, book);
     //=================================================================================================================
-    name = tr("Aldrich/Women", "System name");
-    author = tr("Winifred Aldrich", "Author name");
-    book = tr("Metric Pattern Cutting for Women's Wear", "Book name");
+    name = translate("Aldrich/Women", "System name");
+    author = translate("Winifred Aldrich", "Author name");
+    book = translate("Metric Pattern Cutting for Women's Wear", "Book name");
     InitSystem(p42_S, name, author, book);
     //=================================================================================================================
-    name = tr("Kershaw", "System name");
-    author = tr("Gareth Kershaw", "Author name");
-    book = tr("Patternmaking for Menswear", "Book name");
+    name = translate("Kershaw", "System name");
+    author = translate("Gareth Kershaw", "Author name");
+    book = translate("Patternmaking for Menswear", "Book name");
     InitSystem(p43_S, name, author, book);
     //=================================================================================================================
-    name = tr("Gilewska", "System name");
-    author = tr("Teresa Gilewska", "Author name");
-    book = tr("Pattern-Drafting for Fashion: The Basics", "Book name");
+    name = translate("Gilewska", "System name");
+    author = translate("Teresa Gilewska", "Author name");
+    book = translate("Pattern-Drafting for Fashion: The Basics", "Book name");
     InitSystem(p44_S, name, author, book);
     //=================================================================================================================
-    name = tr("Lo", "System name");
-    author = tr("Dennic Chunman Lo", "Author name");
-    book = tr("Pattern Cutting", "Book name");
+    name = translate("Lo", "System name");
+    author = translate("Dennic Chunman Lo", "Author name");
+    book = translate("Pattern Cutting", "Book name");
     InitSystem(p45_S, name, author, book);
     //=================================================================================================================
-    name = tr("Bray", "System name");
-    author = tr("Natalie Bray", "Author name");
-    book = tr("Dress Pattern Designing: The Basic Principles of Cut and Fit", "Book name");
+    name = translate("Bray", "System name");
+    author = translate("Natalie Bray", "Author name");
+    book = translate("Dress Pattern Designing: The Basic Principles of Cut and Fit", "Book name");
     InitSystem(p46_S, name, author, book);
     //=================================================================================================================
-    name = tr("Knowles/Men", "System name");
-    author = tr("Lori A. Knowles", "Author name");
-    book = tr("The Practical Guide to Patternmaking for Fashion Designers: Menswear", "Book name");
+    name = translate("Knowles/Men", "System name");
+    author = translate("Lori A. Knowles", "Author name");
+    book = translate("The Practical Guide to Patternmaking for Fashion Designers: Menswear", "Book name");
     InitSystem(p47_S, name, author, book);
     //=================================================================================================================
-    name = tr("Friendship/Men", "System name");
-    author = tr("Elizabeth Friendship", "Author name");
-    book = tr("Pattern Cutting for Men's Costume", "Book name");
+    name = translate("Friendship/Men", "System name");
+    author = translate("Elizabeth Friendship", "Author name");
+    book = translate("Pattern Cutting for Men's Costume", "Book name");
     InitSystem(p48_S, name, author, book);
     //=================================================================================================================
-    name = tr("Brown", "System name");
-    author = tr("P. Clement Brown", "Author name");
-    book = tr("Art in Dress", "Book name");
+    name = translate("Brown", "System name");
+    author = translate("P. Clement Brown", "Author name");
+    book = translate("Art in Dress", "Book name");
     InitSystem(p49_S, name, author, book);
     //=================================================================================================================
-    name = tr("Mitchell", "System name");
-    author = tr("Jno. J. Mitchell", "Author name");
-    book = tr("\"Standard\" Work on Cutting (Men's Garments) 1886: The Art and Science of Garment Cutting",
-              "Book name");
+    name = translate("Mitchell", "System name");
+    author = translate("Jno. J. Mitchell", "Author name");
+    book = translate("\"Standard\" Work on Cutting (Men's Garments) 1886: The Art and Science of Garment Cutting",
+                     "Book name");
     InitSystem(p50_S, name, author, book);
     //=================================================================================================================
-    name = tr("GOST 17917-86", "System name");
-    author = tr("Ministry of consumer industry of the USSR", "Author name");
-    book = tr("Standard figure boys", "Book name");
+    name = translate("GOST 17917-86", "System name");
+    author = translate("Ministry of consumer industry of the USSR", "Author name");
+    book = translate("Standard figure boys", "Book name");
     InitSystem(p51_S, name, author, book);
     //=================================================================================================================
-    name = tr("Eddy", "System name");
-    author = tr("Josephine F. Eddy and Elizabeth C. B. Wiley", "Author name");
-    book = tr("Pattern and Dress Design", "Book name");
+    name = translate("Eddy", "System name");
+    author = translate("Josephine F. Eddy and Elizabeth C. B. Wiley", "Author name");
+    book = translate("Pattern and Dress Design", "Book name");
     InitSystem(p52_S, name, author, book);
     //=================================================================================================================
-    name = tr("Knowles/Women", "System name");
-    author = tr("Lori A. Knowles", "Author name");
-    book = tr("Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women", "Book name");
+    name = translate("Knowles/Women", "System name");
+    author = translate("Lori A. Knowles", "Author name");
+    book = translate("Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women", "Book name");
     InitSystem(p53_S, name, author, book);
     //=================================================================================================================
-    name = tr("American Garment Cutter", "System name");
-    author = tr("ed. R. L. Shep", "Author name");
-    book = tr("The Great War: Styles and Patterns of the 1910s", "Book name");
+    name = translate("American Garment Cutter", "System name");
+    author = translate("ed. R. L. Shep", "Author name");
+    book = translate("The Great War: Styles and Patterns of the 1910s", "Book name");
     InitSystem(p54_S, name, author, book);
     //=================================================================================================================
-    name = tr("None", "System name");
-    author = tr("Valentina team", "Author name");
-    book = tr("Valentina's internal standard", "Book name");
+    name = translate("None", "System name");
+    author = translate("Valentina team", "Author name");
+    book = translate("Valentina's internal standard", "Book name");
     InitSystem(p998_S, name, author, book);
     //=================================================================================================================
 }
@@ -357,60 +357,61 @@ void VTranslateVars::InitPatternMakingSystems()
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitVariables()
 {
-    variables.insert(line_, tr("Line_", "Left symbol _ in name"));
-    variables.insert(angleLine_, tr("AngleLine_", "Left symbol _ in name"));
-    variables.insert(arc_, tr("Arc_", "Left symbol _ in name"));
-    variables.insert(spl_, tr("Spl_", "Left symbol _ in name"));
-    variables.insert(splPath, tr("SplPath", "Do not add symbol _ to the end of name"));
-    variables.insert(radiusArc_, tr("RadiusArc_", "Left symbol _ in name"));
-    variables.insert(angle1Arc_, tr("Angle1Arc_", "Left symbol _ in name"));
-    variables.insert(angle2Arc_, tr("Angle2Arc_", "Left symbol _ in name"));
-    variables.insert(angle1Spl_, tr("Angle1Spl_", "Left symbol _ in name"));
-    variables.insert(angle2Spl_, tr("Angle2Spl_", "Left symbol _ in name"));
-    variables.insert(angle1SplPath, tr("Angle1SplPath", "Do not add symbol _ to the end of name"));
-    variables.insert(angle2SplPath, tr("Angle2SplPath", "Do not add symbol _ to the end of name"));
+    variables.insert(line_, translate("Line_", "Left symbol _ in name"));
+    variables.insert(angleLine_, translate("AngleLine_", "Left symbol _ in name"));
+    variables.insert(arc_, translate("Arc_", "Left symbol _ in name"));
+    variables.insert(spl_, translate("Spl_", "Left symbol _ in name"));
+    variables.insert(splPath, translate("SplPath", "Do not add symbol _ to the end of name"));
+    variables.insert(radiusArc_, translate("RadiusArc_", "Left symbol _ in name"));
+    variables.insert(angle1Arc_, translate("Angle1Arc_", "Left symbol _ in name"));
+    variables.insert(angle2Arc_, translate("Angle2Arc_", "Left symbol _ in name"));
+    variables.insert(angle1Spl_, translate("Angle1Spl_", "Left symbol _ in name"));
+    variables.insert(angle2Spl_, translate("Angle2Spl_", "Left symbol _ in name"));
+    variables.insert(angle1SplPath, translate("Angle1SplPath", "Do not add symbol _ to the end of name"));
+    variables.insert(angle2SplPath, translate("Angle2SplPath", "Do not add symbol _ to the end of name"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitFunctions()
 {
-    functions.insert(sin_F, tr("sin", "sine function"));
-    functions.insert(cos_F, tr("cos", "cosine function"));
-    functions.insert(tan_F, tr("tan", "tangens function"));
-    functions.insert(asin_F, tr("asin", "arcus sine function"));
-    functions.insert(acos_F, tr("acos", "arcus cosine function"));
-    functions.insert(atan_F, tr("atan", "arcus tangens function"));
-    functions.insert(sinh_F, tr("sinh", "hyperbolic sine function"));
-    functions.insert(cosh_F, tr("cosh", "hyperbolic cosine"));
-    functions.insert(tanh_F, tr("tanh", "hyperbolic tangens function"));
-    functions.insert(asinh_F, tr("asinh", "hyperbolic arcus sine function"));
-    functions.insert(acosh_F, tr("acosh", "hyperbolic arcus tangens function"));
-    functions.insert(atanh_F, tr("atanh", "hyperbolic arcur tangens function"));
-    functions.insert(log2_F, tr("log2", "logarithm to the base 2"));
-    functions.insert(log10_F, tr("log10", "logarithm to the base 10"));
-    functions.insert(log_F, tr("log", "logarithm to the base 10"));
-    functions.insert(ln_F, tr("ln", "logarithm to base e (2.71828...)"));
-    functions.insert(exp_F, tr("exp", "e raised to the power of x"));
-    functions.insert(sqrt_F, tr("sqrt", "square root of a value"));
-    functions.insert(sign_F, tr("sign", "sign function -1 if x<0; 1 if x>0"));
-    functions.insert(rint_F, tr("rint", "round to nearest integer"));
-    functions.insert(abs_F, tr("abs", "absolute value"));
-    functions.insert(min_F, tr("min", "min of all arguments"));
-    functions.insert(max_F, tr("max", "max of all arguments"));
-    functions.insert(sum_F, tr("sum", "sum of all arguments"));
-    functions.insert(avg_F, tr("avg", "mean value of all arguments"));
-    functions.insert(fmod_F, tr("fmod", "Returns the floating-point remainder of numer/denom (rounded towards zero)"));
+    functions.insert(sin_F, translate("sin", "sine function"));
+    functions.insert(cos_F, translate("cos", "cosine function"));
+    functions.insert(tan_F, translate("tan", "tangens function"));
+    functions.insert(asin_F, translate("asin", "arcus sine function"));
+    functions.insert(acos_F, translate("acos", "arcus cosine function"));
+    functions.insert(atan_F, translate("atan", "arcus tangens function"));
+    functions.insert(sinh_F, translate("sinh", "hyperbolic sine function"));
+    functions.insert(cosh_F, translate("cosh", "hyperbolic cosine"));
+    functions.insert(tanh_F, translate("tanh", "hyperbolic tangens function"));
+    functions.insert(asinh_F, translate("asinh", "hyperbolic arcus sine function"));
+    functions.insert(acosh_F, translate("acosh", "hyperbolic arcus tangens function"));
+    functions.insert(atanh_F, translate("atanh", "hyperbolic arcur tangens function"));
+    functions.insert(log2_F, translate("log2", "logarithm to the base 2"));
+    functions.insert(log10_F, translate("log10", "logarithm to the base 10"));
+    functions.insert(log_F, translate("log", "logarithm to the base 10"));
+    functions.insert(ln_F, translate("ln", "logarithm to base e (2.71828...)"));
+    functions.insert(exp_F, translate("exp", "e raised to the power of x"));
+    functions.insert(sqrt_F, translate("sqrt", "square root of a value"));
+    functions.insert(sign_F, translate("sign", "sign function -1 if x<0; 1 if x>0"));
+    functions.insert(rint_F, translate("rint", "round to nearest integer"));
+    functions.insert(abs_F, translate("abs", "absolute value"));
+    functions.insert(min_F, translate("min", "min of all arguments"));
+    functions.insert(max_F, translate("max", "max of all arguments"));
+    functions.insert(sum_F, translate("sum", "sum of all arguments"));
+    functions.insert(avg_F, translate("avg", "mean value of all arguments"));
+    functions.insert(fmod_F, translate("fmod",
+                                       "Returns the floating-point remainder of numer/denom (rounded towards zero)"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitPostfixOperators()
 {
-    postfixOperators.insert(cm_Oprt, tr("cm", "centimeter"));
-    postfixOperators.insert(mm_Oprt, tr("mm", "millimeter"));
-    postfixOperators.insert(in_Oprt, tr("in", "inch"));
+    postfixOperators.insert(cm_Oprt, translate("cm", "centimeter"));
+    postfixOperators.insert(mm_Oprt, translate("mm", "millimeter"));
+    postfixOperators.insert(in_Oprt, translate("in", "inch"));
 }
 
-#undef tr
+#undef translate
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitSystem(const QString &code, const QmuTranslation &name, const QmuTranslation &author,
