@@ -5,7 +5,7 @@ win32{
 }
 
 CONFIG(release, debug|release){
-    !noDebugSymbols:win32{
+    !noDebugSymbols:win32:!win32-msvc*{
         unset(QMAKE_STRIP)
         QMAKE_STRIP = echo # we do striping manualy
     }
