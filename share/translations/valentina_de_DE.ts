@@ -7098,6 +7098,22 @@ Do you want to save your changes?</source>
         <source>Gender:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create from existing ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create from existing file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export standard measurements not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableWindow</name>
