@@ -68,6 +68,7 @@ public slots:
     void OpenIndividual();
     void OpenStandard();
     void OpenTemplate();
+    void CreateFromExisting();
 
 protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
@@ -178,6 +179,8 @@ private:
     QStringList FilterMeasurements(const QStringList &mNew, const QStringList &mFilter);
 
     void UpdatePatternUnit();
+
+    bool LoadFromExistingFile(const QString &path);
 };
 
 #endif // TMAINWINDOW_H

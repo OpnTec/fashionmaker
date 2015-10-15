@@ -54,6 +54,7 @@ public:
     void MoveBottom(const QString &name);
 
     void ReadMeasurements() const;
+    void ClearForExport();
 
     MeasurementsType Type() const;
     Unit MUnit() const;

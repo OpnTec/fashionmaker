@@ -73,10 +73,14 @@ QmuTokenParser::~QmuTokenParser()
  * Work only with expressions in internal (C) locale.
  * @param formula expression for test
  * @return true if fomula has single number
- * @throw qmu::QmuParserError if expression is incorrect. Has bad separator.
  */
 bool QmuTokenParser::IsSingle(const QString &formula)
 {
+    if (formula.isEmpty())
+    {
+        return false;// if don't know say no
+    }
+
     QmuTokenParser *cal = new QmuTokenParser();
 
     // Parser doesn't know any variable on this stage. So, we just use variable factory that for each unknown
@@ -84,8 +88,16 @@ bool QmuTokenParser::IsSingle(const QString &formula)
     cal->SetVarFactory(AddVariable, cal);
     cal->SetSepForEval();//Reset separators options
 
-    cal->SetExpr(formula);
-    cal->Eval();// We don't need save result, only parse formula
+    try
+    {
+        cal->SetExpr(formula);
+        cal->Eval();// We don't need save result, only parse formula
+    }
+    catch (const qmu::QmuParserError &e)
+    {
+        Q_UNUSED(e)
+        return false;// something wrong with formula, say no
+    }
 
     QMap<int, QString> tokens = cal->GetTokens();// Tokens (variables, measurements)
     const QMap<int, QString> numbers = cal->GetNumbers();// All numbers in expression

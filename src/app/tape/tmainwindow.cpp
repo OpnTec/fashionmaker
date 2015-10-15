@@ -386,6 +386,28 @@ void TMainWindow::OpenTemplate()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::CreateFromExisting()
+{
+    if (m == nullptr)
+    {
+        const QString filter = tr("Individual measurements (*.vit)");
+        //Use standard path to standard measurements
+        const QString pathTo = qApp->TapeSettings()->GetPathIndividualMeasurements();
+        const QString mPath = QFileDialog::getOpenFileName(this, tr("Select file"), pathTo, filter);
+
+        if (not mPath.isEmpty())
+        {
+            LoadFromExistingFile(mPath);
+        }
+    }
+    else
+    {
+        qApp->NewMainWindow();
+        qApp->MainWindow()->CreateFromExisting();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::Find(const QString &term)
 {
     search->Find(term);
@@ -1557,6 +1579,7 @@ void TMainWindow::SetupMenu()
     connect(ui->actionOpenIndividual, &QAction::triggered, this, &TMainWindow::OpenIndividual);
     connect(ui->actionOpenStandard, &QAction::triggered, this, &TMainWindow::OpenStandard);
     connect(ui->actionOpenTemplate, &QAction::triggered, this, &TMainWindow::OpenTemplate);
+    connect(ui->actionCreateFromExisting, &QAction::triggered, this, &TMainWindow::CreateFromExisting);
 
     connect(ui->actionSave, &QAction::triggered, this, &TMainWindow::FileSave);
     ui->actionSave->setShortcuts(QKeySequence::Save);
@@ -2342,6 +2365,132 @@ void TMainWindow::UpdatePatternUnit()
     search->RefreshList(ui->lineEditFind->text());
 
     ui->tableWidget->selectRow(row);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool TMainWindow::LoadFromExistingFile(const QString &path)
+{
+    if (m == nullptr)
+    {
+        if (not QFileInfo(path).exists())
+        {
+            qCCritical(tMainWindow, "%s", qUtf8Printable(tr("File '%1' doesn't exist!").arg(path)));
+            if (qApp->IsTestMode())
+            {
+                qApp->exit(V_EX_NOINPUT);
+            }
+            return false;
+        }
+
+        // Check if file already opened
+        QList<TMainWindow*>list = qApp->MainWindows();
+        for (int i = 0; i < list.size(); ++i)
+        {
+            if (list.at(i)->CurrentFile() == path)
+            {
+                list.at(i)->activateWindow();
+                close();
+                return false;
+            }
+        }
+
+        VlpCreateLock(lock, QFileInfo(path).fileName()+".lock");
+
+        if (not lock->IsLocked())
+        {
+            qCCritical(tMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
+            if (qApp->IsTestMode())
+            {
+                qApp->exit(V_EX_NOINPUT);
+            }
+            return false;
+        }
+
+        try
+        {
+            data = new VContainer(qApp->TrVars(), &mUnit);
+
+            m = new VMeasurements(data);
+            m->setXMLContent(path);
+
+            mType = m->Type();
+
+            if (mType == MeasurementsType::Unknown)
+            {
+                VException e(tr("File has unknown format."));
+                throw e;
+            }
+
+            if (mType == MeasurementsType::Standard)
+            {
+                VException e(tr("Export standard measurements not supported."));
+                throw e;
+            }
+            else
+            {
+                VVITConverter converter(path);
+                converter.Convert();
+
+                VDomDocument::ValidateXML(VVITConverter::CurrentSchema, path);
+            }
+
+            m->setXMLContent(path);// Read again after conversion
+
+            if (not m->IsDefinedKnownNamesValid())
+            {
+                VException e(tr("File contains invalid known measurement(s)."));
+                throw e;
+            }
+
+            mUnit = m->MUnit();
+            pUnit = mUnit;
+
+            data->SetHeight(m->BaseHeight());
+            data->SetSize(m->BaseSize());
+
+            ui->labelToolTip->setVisible(false);
+            ui->tabWidget->setVisible(true);
+
+            InitWindow();
+
+            m->ClearForExport();
+            RefreshData();
+
+            if (ui->tableWidget->rowCount() > 0)
+            {
+                ui->tableWidget->selectRow(0);
+            }
+
+            lock.reset();// Now we can unlock the file
+
+            GUIReadOnly(m->ReadOnly()); // Keep last
+        }
+        catch (VException &e)
+        {
+            qCCritical(tMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
+                       qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+            ui->labelToolTip->setVisible(true);
+            ui->tabWidget->setVisible(false);
+            delete m;
+            m = nullptr;
+            delete data;
+            data = nullptr;
+            lock.reset();
+
+            if (qApp->IsTestMode())
+            {
+                qApp->exit(V_EX_NOINPUT);
+            }
+            return false;
+        }
+    }
+    else
+    {
+        qApp->NewMainWindow();
+        return qApp->MainWindow()->LoadFile(path);
+    }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

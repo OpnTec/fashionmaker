@@ -31,6 +31,7 @@
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../vpatterndb/calculator.h"
+#include "../qmuparser/qmutokenparser.h"
 
 const QString VMeasurements::TagVST              = QStringLiteral("vst");
 const QString VMeasurements::TagVIT              = QStringLiteral("vit");
@@ -276,6 +277,24 @@ void VMeasurements::ReadMeasurements() const
     }
 
     delete tempData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::ClearForExport()
+{
+    const QDomNodeList list = elementsByTagName(TagMeasurement);
+
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement domElement = list.at(i).toElement();
+        if (domElement.isNull() == false)
+        {
+            if (qmu::QmuTokenParser::IsSingle(domElement.attribute(AttrValue)))
+            {
+                SetAttribute(domElement, AttrValue, QString("0"));
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

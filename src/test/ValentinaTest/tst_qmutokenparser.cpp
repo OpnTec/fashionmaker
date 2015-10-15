@@ -49,6 +49,9 @@ void TST_QmuTokenParser::IsSingle_data()
     QTest::newRow("Digit and variable") << "2+a" << false;
     QTest::newRow("One variable twice") << "a+a" << false;
     QTest::newRow("Two variables") << "a+b" << false;
+    QTest::newRow("Empty string") << "" << false;
+    QTest::newRow("Several spaces") << "   " << false;
+    QTest::newRow("Invalid formula") << "2*)))" << false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
