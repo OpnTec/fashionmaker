@@ -698,7 +698,10 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     QDomElement personal = createElement(TagPersonal);
     personal.appendChild(createElement(TagFamilyName));
     personal.appendChild(createElement(TagGivenName));
-    personal.appendChild(createElement(TagBirthDate));
+
+    QDomElement date = createElement(TagBirthDate);
+    date.appendChild(createTextNode(QStringLiteral("1800-01-01")));
+    personal.appendChild(date);
 
     QDomElement gender = createElement(TagGender);
     gender.appendChild(createTextNode(GenderToStr(GenderType::Unknown)));
