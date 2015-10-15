@@ -109,4 +109,26 @@ void QmuFormulaBase::SetSepForEval()
     SetDecSep('.');
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveAll remove token from token list.
+ *
+ * Standard Qt class QMap doesn't have method RemoveAll.
+ * Example: remove "-" from tokens list if exist. If don't do that unary minus operation will broken.
+ *
+ * @param map map with tokens
+ * @param val token that need delete
+ */
+void QmuFormulaBase::RemoveAll(QMap<int, QString> &map, const QString &val)
+{
+    const QList<int> listKeys = map.keys(val);//Take all keys that contain token.
+    if (listKeys.size() > 0)
+    {
+        for (int i = 0; i < listKeys.size(); ++i)
+        {
+            map.remove(listKeys.at(i));
+        }
+    }
+}
+
 }// namespace qmu

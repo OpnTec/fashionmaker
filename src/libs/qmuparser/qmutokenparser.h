@@ -34,8 +34,11 @@ public:
     QmuTokenParser(const QString &formula, bool osSeparator, bool fromUser = true);
     virtual ~QmuTokenParser() Q_DECL_OVERRIDE;
 
+    static bool IsSingle(const QString &formula);
+
 private:
     Q_DISABLE_COPY(QmuTokenParser)
+    QmuTokenParser();
 };
 
 } // namespace qmu

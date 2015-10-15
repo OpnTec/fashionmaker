@@ -57,13 +57,12 @@ class Calculator:public qmu::QmuFormulaBase
 {
 public:
     Calculator();
-    virtual ~Calculator();
+    virtual ~Calculator() Q_DECL_OVERRIDE;
     qreal         EvalFormula(const QHash<QString, qreal *> &vars, const QString &formula);
 private:
     Q_DISABLE_COPY(Calculator)
     void          InitVariables(const QHash<QString, qreal *> &vars, const QMap<int, QString> &tokens,
                                 const QString &formula);
-    static void   RemoveAll(QMap<int, QString> &map, const QString &val);
 };
 
 #endif // CALCULATOR_H

@@ -40,6 +40,8 @@ protected:
     void          SetSepForTr(bool osSeparator, bool fromUser);
     void          SetSepForEval();
 
+    static void   RemoveAll(QMap<int, QString> &map, const QString &val);
+
 private:
     Q_DISABLE_COPY(QmuFormulaBase)
 };

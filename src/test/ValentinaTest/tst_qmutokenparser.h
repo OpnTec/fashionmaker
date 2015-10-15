@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   qttestmainlambda.cpp
+ **  @file   tst_qmutokenparser.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 3, 2015
+ **  @date   15 10, 2015
  **
  **  @brief
  **  @copyright
@@ -26,40 +26,21 @@
  **
  *************************************************************************/
 
-#include <QtTest>
+#ifndef TST_QMUTOKENPARSER_H
+#define TST_QMUTOKENPARSER_H
 
-#include "tst_vposter.h"
-#include "tst_vabstractdetail.h"
-#include "tst_vspline.h"
-#include "tst_nameregexp.h"
-#include "tst_vlayoutdetail.h"
-#include "tst_varc.h"
-#include "tst_measurementregexp.h"
-#include "tst_tapecommandline.h"
-#include "tst_valentinacommandline.h"
-#include "tst_qmutokenparser.h"
+#include <QObject>
 
-int main(int argc, char** argv)
+class TST_QmuTokenParser : public QObject
 {
-    QApplication app( argc, argv );// For QPrinter
+    Q_OBJECT
+public:
+    Q_DISABLE_COPY(TST_QmuTokenParser)
+    explicit TST_QmuTokenParser(QObject *parent = 0);
 
-    int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
-    {
-        status |= QTest::qExec(obj, argc, argv);
-        delete obj;
-    };
+private slots:
+    void IsSingle_data();
+    void IsSingle();
+};
 
-    ASSERT_TEST(new TST_VPoster());
-    ASSERT_TEST(new TST_VAbstractDetail());
-    ASSERT_TEST(new TST_VSpline());
-    ASSERT_TEST(new TST_NameRegExp());
-    ASSERT_TEST(new TST_VLayoutDetail());
-    ASSERT_TEST(new TST_VArc());
-    ASSERT_TEST(new TST_MeasurementRegExp());
-    ASSERT_TEST(new TST_TapeCommandLine());
-    ASSERT_TEST(new TST_ValentinaCommandLine());
-    ASSERT_TEST(new TST_QmuTokenParser());
-
-    return status;
-}
+#endif // TST_QMUTOKENPARSER_H
