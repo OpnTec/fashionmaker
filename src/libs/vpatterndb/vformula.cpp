@@ -226,9 +226,9 @@ void VFormula::Eval()
     {
         try
         {
-            Calculator *cal = new Calculator(data, qApp->patternType());
+            Calculator *cal = new Calculator();
             QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-            const qreal result = cal->EvalFormula(expression);
+            const qreal result = cal->EvalFormula(data->PlainVariables(), expression);
             delete cal;
 
             //if result equal 0

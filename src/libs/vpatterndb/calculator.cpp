@@ -43,15 +43,14 @@ using namespace qmu;
  *
  * const QString formula = qApp->FormulaFromUser(edit->text());
  * Calculator *cal = new Calculator(data, patternType);
- * const qreal result = cal->EvalFormula(formula);
+ * const qreal result = cal->EvalFormula(data->PlainVariables(), formula);
  * delete cal;
  *
  * @param data pointer to a variable container.
  */
-Calculator::Calculator(const VContainer *data, MeasurementsType patternType)
-    :QmuFormulaBase(), vVarVal(nullptr), data(data), patternType(patternType)
+Calculator::Calculator()
+    :QmuFormulaBase()
 {
-    SCASSERT(data != nullptr)
     InitCharacterSets();
     setAllowSubexpressions(false);//Only one expression per time
 
@@ -61,7 +60,6 @@ Calculator::Calculator(const VContainer *data, MeasurementsType patternType)
 //---------------------------------------------------------------------------------------------------------------------
 Calculator::~Calculator()
 {
-    delete [] vVarVal;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -74,7 +72,7 @@ Calculator::~Calculator()
  * @param formula string of formula.
  * @return value of formula.
  */
-qreal Calculator::EvalFormula(const QString &formula)
+qreal Calculator::EvalFormula(const QHash<QString, qreal *> &vars, const QString &formula)
 {
     // Parser doesn't know any variable on this stage. So, we just use variable factory that for each unknown variable
     // set value to 0.
@@ -106,7 +104,7 @@ qreal Calculator::EvalFormula(const QString &formula)
     }
 
     // Add variables to parser because we have deal with expression with variables.
-    InitVariables(data, tokens, formula);
+    InitVariables(vars, tokens, formula);
     return Eval();
 }
 
@@ -116,51 +114,26 @@ qreal Calculator::EvalFormula(const QString &formula)
  *
  * For optimization purpose we try don't add variables that we don't need.
  *
- * @param data pointer to a variable container. Hold all informations about variables.
+ * @param vars list of variables.
  * @param tokens all tokens (measurements names, variables with lengths) that parser have found in expression.
  * @param formula expression, need for throwing better error message.
  */
-void Calculator::InitVariables(const VContainer *data, const QMap<int, QString> &tokens, const QString &formula)
+void Calculator::InitVariables(const QHash<QString, qreal *> &vars, const QMap<int, QString> &tokens,
+                               const QString &formula)
 {
-    if (patternType == MeasurementsType::Standard)
-    {
-        vVarVal = new qreal[2]; //stabdard measurements table have two additional variables
-    }
-
-    SCASSERT(data != nullptr)
-    const QHash<QString, QSharedPointer<VInternalVariable> > *vars = data->DataVariables();
-
     QMap<int, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
         bool found = false;
-        if (vars->contains(i.value()))
+        if (vars.contains(i.value()))
         {
-            QSharedPointer<VInternalVariable> var = vars->value(i.value());
-            if (patternType == MeasurementsType::Standard && var->GetType() == VarType::Measurement)
-            {
-                QSharedPointer<VVariable> m = data->GetVariable<VVariable>(i.value());
-                m->SetValue(data->size(), data->height(), *data->GetPatternUnit());
-            }
-            DefineVar(i.value(), var->GetValue());
+            DefineVar(i.value(), vars.value(i.value()));
             found = true;
         }
 
-        if (patternType == MeasurementsType::Standard)
-        {
-            if (i.value() == data->SizeName())
-            {
-                vVarVal[0] = data->size();
-                DefineVar(data->SizeName(), &vVarVal[0]);
-                found = true;
-            }
-
-            if (i.value() == data->HeightName())
-            {
-                vVarVal[1] = data->height();
-                DefineVar(data->HeightName(), &vVarVal[1]);
-                found = true;
-            }
+        if (found == false && builInFunctions.contains(i.value()))
+        {// We have found built-in function
+            found = true;
         }
 
         if (found == false)

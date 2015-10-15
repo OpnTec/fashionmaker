@@ -829,8 +829,8 @@ qreal VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool 
             // Replace line return character with spaces for calc if exist
             QString f = formula;
             f.replace("\n", " ");
-            Calculator *cal = new Calculator(data, type);
-            const qreal result = cal->EvalFormula(f);
+            Calculator *cal = new Calculator();
+            const qreal result = cal->EvalFormula(data->PlainVariables(), f);
             delete cal;
 
             *ok = true;

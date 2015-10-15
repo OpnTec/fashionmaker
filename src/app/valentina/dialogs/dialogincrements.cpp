@@ -323,8 +323,8 @@ bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
                 f = formula;
             }
             f.replace("\n", " ");
-            Calculator *cal = new Calculator(data, qApp->patternType());
-            const qreal result = cal->EvalFormula(f);
+            Calculator *cal = new Calculator();
+            const qreal result = cal->EvalFormula(data->PlainVariables(), f);
             delete cal;
 
             label->setText(qApp->LocaleToString(result) + " " + postfix);

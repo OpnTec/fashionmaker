@@ -489,9 +489,9 @@ const QMap<QString, QSharedPointer<VSplineAngle> > VContainer::DataAnglesCurves(
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QHash<QString, const qreal *> VContainer::PlainVariables() const
+const QHash<QString, qreal *> VContainer::PlainVariables() const
 {
-    QHash<QString, const qreal *> vars;
+    QHash<QString, qreal *> vars;
 
     QHash<QString, QSharedPointer<VInternalVariable>>::const_iterator i = d->variables.constBegin();
     while (i != d->variables.constEnd())
@@ -504,6 +504,8 @@ const QHash<QString, const qreal *> VContainer::PlainVariables() const
             m->SetValue(size(), height(), qApp->patternUnit());
         }
         vars.insert(i.key(), var->GetValue());
+
+        ++i;
     }
 
     if (qApp->patternType() == MeasurementsType::Standard)
@@ -619,7 +621,7 @@ qreal VContainer::size()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const qreal *VContainer::rsize()
+qreal *VContainer::rsize()
 {
     return &_size;
 }
@@ -641,7 +643,7 @@ qreal VContainer::height()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const qreal *VContainer::rheight()
+qreal *VContainer::rheight()
 {
     return &_height;
 }

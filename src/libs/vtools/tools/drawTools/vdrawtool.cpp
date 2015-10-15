@@ -285,8 +285,8 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
     Calculator *cal = nullptr;
     try
     {
-        cal = new Calculator(data, qApp->patternType());
-        result = cal->EvalFormula(formula);
+        cal = new Calculator();
+        result = cal->EvalFormula(data->PlainVariables(), formula);
         delete cal;
     }
     catch (qmu::QmuParserError &e)
@@ -316,8 +316,8 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                         /* Need delete dialog here because parser in dialog don't allow use correct separator for
                          * parsing here. */
                         delete dialog;
-                        Calculator *cal1 = new Calculator(data, qApp->patternType());
-                        result = cal1->EvalFormula(formula);
+                        Calculator *cal1 = new Calculator();
+                        result = cal1->EvalFormula(data->PlainVariables(), formula);
                         delete cal1; /* Here can be memory leak, but dialog already check this formula and probability
                                       * very low. */
                         break;

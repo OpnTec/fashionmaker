@@ -2171,8 +2171,8 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
                 f = formula;
             }
             f.replace("\n", " ");
-            Calculator *cal = new Calculator(data, mType);
-            const qreal result = UnitConvertor(cal->EvalFormula(f), mUnit, pUnit);
+            Calculator *cal = new Calculator();
+            const qreal result = UnitConvertor(cal->EvalFormula(data->PlainVariables(), f), mUnit, pUnit);
             delete cal;
 
             label->setText(qApp->LocaleToString(result) + " " +postfix);
