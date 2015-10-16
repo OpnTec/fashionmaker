@@ -45,7 +45,7 @@ namespace qmu
  * map.value(measurement).translate();
  *
  * Hint. Define macros translate() for reducing code complexity.
- * #define translate(source, disambiguation) QmuTranslation::translate("VTranslateVars", (source), (disambiguation))
+ * #define translate(context, source, disambiguation) QmuTranslation::translate((context), (source), (disambiguation))
  *
  * Don't forget to undef macros later!
  */

@@ -2,32 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="cs">
 <context>
-    <name>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>A Tailoring Manual</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Abling</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AddDet</name>
-    <message>
-        <source>Add detail</source>
-        <translation type="vanished">Přidat detail</translation>
-    </message>
     <message>
         <source>add detail</source>
         <translation type="unfinished"></translation>
@@ -36,20 +11,12 @@
 <context>
     <name>AddPatternPiece</name>
     <message>
-        <source>Add pattern piece %1</source>
-        <translation type="vanished">Přidat díl střihu %1</translation>
-    </message>
-    <message>
         <source>add pattern piece %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddToCalc</name>
-    <message>
-        <source>Add object</source>
-        <translation type="vanished">Přidat předmět</translation>
-    </message>
     <message>
         <source>add object</source>
         <translation type="unfinished"></translation>
@@ -58,165 +25,7 @@
 <context>
     <name>AddUnionDetails</name>
     <message>
-        <source>Add union details</source>
-        <translation type="vanished">Přidat detaily spojky</translation>
-    </message>
-    <message>
         <source>add union details</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Aldrich/Men</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Aldrich/Women</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Allemong</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>American Garment Cutter</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Angle1Arc_</name>
-    <message>
-        <source>Left symbol _ in name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Angle1SplPath</name>
-    <message>
-        <source>Do not add symbol _ to the end of name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Angle1Spl_</name>
-    <message>
-        <source>Left symbol _ in name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Angle2Arc_</name>
-    <message>
-        <source>Left symbol _ in name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Angle2SplPath</name>
-    <message>
-        <source>Do not add symbol _ to the end of name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Angle2Spl_</name>
-    <message>
-        <source>Left symbol _ in name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>AngleLine_</name>
-    <message>
-        <source>Left symbol _ in name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Apparel Making in Fashion Design</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Arc_</name>
-    <message>
-        <source>Left symbol _ in name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Art in Dress</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Barnfield and Richard</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Bina Abling</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Bray</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Brown</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Bunka</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Bunka Fashion College</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Castro</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Centre Point System</name>
-    <message>
-        <source>System name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -326,7 +135,7 @@
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation>Automaticky uložit změněný střih</translation>
+        <translation>Automaticky ukládat změny ve střihu</translation>
     </message>
     <message>
         <source>min</source>
@@ -386,11 +195,11 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravování střihu</translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrdit smazání položky</translation>
     </message>
     <message>
         <source>Toolbar</source>
@@ -402,39 +211,7 @@
     </message>
 </context>
 <context>
-    <name>Corsets and Crinolines</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Davis</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Decimal separator is identic to function argument separator.</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DelTool</name>
-    <message>
-        <source>Delete tool</source>
-        <translation type="vanished">Smazat nástroj</translation>
-    </message>
     <message>
         <source>delete tool</source>
         <translation type="unfinished"></translation>
@@ -443,10 +220,6 @@
 <context>
     <name>DeleteDetail</name>
     <message>
-        <source>Delete tool</source>
-        <translation type="vanished">Smazat nástroj</translation>
-    </message>
-    <message>
         <source>delete tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -454,25 +227,7 @@
 <context>
     <name>DeletePatternPiece</name>
     <message>
-        <source>Delete pattern piece %1</source>
-        <translation type="vanished">Smazat díl střihu %1</translation>
-    </message>
-    <message>
         <source>delete pattern piece %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dennic Chunman Lo</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Design and Sew Jeans</name>
-    <message>
-        <source>Book name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -497,10 +252,6 @@
     <message>
         <source>Web site : %1</source>
         <translation>Stránky: %1</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="vanished">Varování</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
@@ -542,10 +293,6 @@
         <translation type="unfinished">Stránky: %1</translation>
     </message>
     <message>
-        <source>Warning</source>
-        <translation type="obsolete">Varování</translation>
-    </message>
-    <message>
         <source>Cannot open your default browser</source>
         <translation type="unfinished">Nelze otevřít váš výchozí prohlížeč</translation>
     </message>
@@ -555,10 +302,6 @@
     <message>
         <source>Length</source>
         <translation>Délka</translation>
-    </message>
-    <message>
-        <source>Insert variable into the formula</source>
-        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -597,56 +340,16 @@
         <translation>Ukázat čáru od prvního bodu k tomuto bodu</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
-    </message>
-    <message>
         <source>Select second point of line</source>
         <translation>Vybrat druhý bod čáry</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation type="unfinished">Bod ve vzdálenosti podél čáry</translation>
+        <translation>Bod ve vzdálenosti podél čáry</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -664,10 +367,6 @@
         <translation>Poloměr</translation>
     </message>
     <message>
-        <source>Insert variable into the formula</source>
-        <translation type="vanished">Vložit proměnnou do vzorce</translation>
-    </message>
-    <message>
         <source>Value of radius</source>
         <translation>Hodnota poloměru</translation>
     </message>
@@ -680,20 +379,12 @@
         <translation>První úhel</translation>
     </message>
     <message>
-        <source>Insert variable into formula</source>
-        <translation type="vanished">Vložit proměnnou do vzorce</translation>
-    </message>
-    <message>
         <source>Value of first angle</source>
         <translation>Hodnota prvního úhlu</translation>
     </message>
     <message>
         <source>Second angle</source>
         <translation>Druhý úhel</translation>
-    </message>
-    <message>
-        <source>Insert marked variable into formula</source>
-        <translation type="vanished">Vložit označenou proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of second angle</source>
@@ -706,46 +397,6 @@
     <message>
         <source>Select point of center of arc</source>
         <translation>Vybrat bod středu oblouku</translation>
-    </message>
-    <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables</source>
-        <translation type="vanished">Proměnné</translation>
     </message>
     <message>
         <source>Error</source>
@@ -761,11 +412,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
+        <translation>Barva</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -811,12 +458,8 @@
         <translation type="unfinished">Délka</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <source>Arc length</source>
-        <translation type="unfinished">Délka oblouku</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Center point</source>
@@ -828,7 +471,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barva</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -860,10 +503,6 @@
     <message>
         <source>Length</source>
         <translation>Délka</translation>
-    </message>
-    <message>
-        <source>Insert marked variable into the formula</source>
-        <translation type="vanished">Vložit označenou proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -910,46 +549,6 @@
         <translation>Ukázat čáru od druhého bodu k tomuto bodu</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
-    </message>
-    <message>
         <source>Select second point of angle</source>
         <translation>Vybrat druhý bod úhlu</translation>
     </message>
@@ -959,11 +558,11 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation type="unfinished">Bod podél osy úhlu</translation>
+        <translation>Bod podél osy úhlu</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -1005,60 +604,20 @@
         <translation>Ukázat čáru od prvního bodu k tomuto bodu</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables</source>
-        <translation type="vanished">Proměnné</translation>
-    </message>
-    <message>
         <source>Select axis point</source>
         <translation>Vybrat bod osy</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod průsečíku oblouku a čáry</translation>
     </message>
     <message>
         <source>Axis Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod osy</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -1076,10 +635,6 @@
         <translation>Hodnota délky</translation>
     </message>
     <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1092,56 +647,16 @@
         <translation>Štítek bodu</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
-    </message>
-    <message>
         <source>Segment an arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Selected arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybraný oblouk</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -1157,10 +672,6 @@
     <message>
         <source>Value of length</source>
         <translation>Hodnota délky</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1179,52 +690,12 @@
         <translation>Štítek bodu</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
-    </message>
-    <message>
         <source>Segmenting a simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdělení jednoduché křivky</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -1240,10 +711,6 @@
     <message>
         <source>Value of length</source>
         <translation>Hodnota délky</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1262,52 +729,12 @@
         <translation>Štítek bodu</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
-    </message>
-    <message>
         <source>Segment a curved path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -1366,7 +793,7 @@
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj pro stanovení přídavku na švy</translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
@@ -1390,10 +817,6 @@
     <message>
         <source>Value of first angle</source>
         <translation>Hodnota prvního úhlu</translation>
-    </message>
-    <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1436,32 +859,28 @@
         <translation>Skrýt prázdné míry</translation>
     </message>
     <message>
-        <source>Variables</source>
-        <translation type="vanished">Proměnné</translation>
-    </message>
-    <message>
         <source>Double click for add to formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Výška</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Velikost</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line length</source>
-        <translation type="unfinished">Délka čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation type="unfinished">Délka oblouku</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation type="unfinished">Délka křivky</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line Angle</source>
@@ -1535,52 +954,12 @@
         <translation>Ukázat čáru od prvního bodu k tomuto bodu</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables</source>
-        <translation type="vanished">Proměnné</translation>
-    </message>
-    <message>
         <source>Point at distance and angle</source>
         <translation type="unfinished">Bod ve vzdálenosti a úhlu</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -1631,11 +1010,11 @@
     </message>
     <message>
         <source>Base Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Základní bod</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -1760,64 +1139,12 @@
         <translation>Přídavky</translation>
     </message>
     <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Load another measurements table</source>
-        <translation type="vanished">Načíst jinou tabulku s mírami</translation>
-    </message>
-    <message>
-        <source>Personal information</source>
-        <translation type="vanished">Osobní informace</translation>
-    </message>
-    <message>
-        <source>Given name</source>
-        <translation type="vanished">Křestní jméno</translation>
-    </message>
-    <message>
-        <source>Family name</source>
-        <translation type="vanished">Příjmení</translation>
-    </message>
-    <message>
-        <source>Birth date</source>
-        <translation type="vanished">Datum narození</translation>
-    </message>
-    <message>
-        <source>Sex</source>
-        <translation type="vanished">Pohlaví</translation>
-    </message>
-    <message>
-        <source>Email</source>
-        <translation type="vanished">E-mail</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
         <source>The calculated value</source>
         <translation>Vypočítaná hodnota</translation>
-    </message>
-    <message>
-        <source>Base value</source>
-        <translation type="vanished">Základní hodnota</translation>
-    </message>
-    <message>
-        <source>In sizes</source>
-        <translation type="vanished">Ve velikostech</translation>
-    </message>
-    <message>
-        <source>In heights</source>
-        <translation type="vanished">Ve výškách</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="vanished">Popis</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -1832,84 +1159,16 @@
         <translation>Délka</translation>
     </message>
     <message>
-        <source>Curves</source>
-        <translation type="vanished">Křivky</translation>
-    </message>
-    <message>
         <source>Curve</source>
         <translation>Křivka</translation>
-    </message>
-    <message>
-        <source>Arcs</source>
-        <translation type="vanished">Oblouky</translation>
     </message>
     <message>
         <source>Arc</source>
         <translation>Oblouk</translation>
     </message>
     <message>
-        <source>File error.</source>
-        <translation type="vanished">Chyba souboru.</translation>
-    </message>
-    <message>
-        <source>male</source>
-        <translation type="vanished">muž</translation>
-    </message>
-    <message>
-        <source>female</source>
-        <translation type="vanished">žena</translation>
-    </message>
-    <message>
-        <source>Could not save GivenName</source>
-        <translation type="vanished">Nepodařilo se uložit křestní jméno</translation>
-    </message>
-    <message>
-        <source>Could not save FamilyName</source>
-        <translation type="vanished">Nepodařilo se uložit příjmení</translation>
-    </message>
-    <message>
-        <source>Could not save Email</source>
-        <translation type="vanished">Nepodařilo se uložit adresu elektronické pošty</translation>
-    </message>
-    <message>
-        <source>Could not save Sex</source>
-        <translation type="vanished">Nepodařilo se uložit pohlaví</translation>
-    </message>
-    <message>
-        <source>Could not save BirthDate</source>
-        <translation type="vanished">Nepodařilo se uložit datum narození</translation>
-    </message>
-    <message>
-        <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
-        <translation type="vanished">Míry používají odlišné jednotky než střih. Tento střih vyžaduje míry v %1</translation>
-    </message>
-    <message>
-        <source>Individual measurements (*.vit)</source>
-        <translation type="vanished">Individuální míry (*.vit)</translation>
-    </message>
-    <message>
-        <source>Open file</source>
-        <translation type="vanished">Otevřít soubor</translation>
-    </message>
-    <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Nesprávné jednotky.</translation>
-    </message>
-    <message>
-        <source>Standard measurements (*.vst)</source>
-        <translation type="vanished">Obvyklé míry (*.vst)</translation>
-    </message>
-    <message>
-        <source>Name_%1</source>
-        <translation type="vanished">Jméno_%1</translation>
-    </message>
-    <message>
-        <source>Can&apos;t save measurement</source>
-        <translation type="vanished">Nelze uložit míru</translation>
-    </message>
-    <message>
         <source>Tables of Variables</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulky proměnných</translation>
     </message>
     <message>
         <source>Lines angles</source>
@@ -2009,85 +1268,14 @@
     </message>
 </context>
 <context>
-    <name>DialogIndividualMeasurements</name>
-    <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">Individuální míry</translation>
-    </message>
-    <message>
-        <source>Pattern piece name</source>
-        <translation type="vanished">Název dílu střihu</translation>
-    </message>
-    <message>
-        <source>Exist measurements</source>
-        <translation type="vanished">Stávající míry</translation>
-    </message>
-    <message>
-        <source>Path:</source>
-        <translation type="vanished">Cesta:</translation>
-    </message>
-    <message>
-        <source>Given name:</source>
-        <translation type="vanished">Křestní jméno:</translation>
-    </message>
-    <message>
-        <source>Family name:</source>
-        <translation type="vanished">Příjmení:</translation>
-    </message>
-    <message>
-        <source>New measurements</source>
-        <translation type="vanished">Nové míry</translation>
-    </message>
-    <message>
-        <source>Units:</source>
-        <translation type="vanished">Jednotky:</translation>
-    </message>
-    <message>
-        <source>Could not create measurements file</source>
-        <translation type="vanished">Nepodařilo se vytvořit soubor s mírami</translation>
-    </message>
-    <message>
-        <source>Please try again or change file</source>
-        <translation type="vanished">Zkuste to, prosím, znovu, anebo změňte soubor</translation>
-    </message>
-    <message>
-        <source>File error.</source>
-        <translation type="vanished">Chyba souboru.</translation>
-    </message>
-    <message>
-        <source>Individual measurements (*.vit)</source>
-        <translation type="vanished">Individuální míry (*.vit)</translation>
-    </message>
-    <message>
-        <source>Open file</source>
-        <translation type="vanished">Otevřít soubor</translation>
-    </message>
-    <message>
-        <source>Where save measurements?</source>
-        <translation type="vanished">Kam uložit míry?</translation>
-    </message>
-    <message>
-        <source>Centimeters</source>
-        <translation type="vanished">Centimetry</translation>
-    </message>
-    <message>
-        <source>Millimiters</source>
-        <translation type="vanished">Milimetry</translation>
-    </message>
-    <message>
-        <source>Inches</source>
-        <translation type="vanished">Palce</translation>
-    </message>
-</context>
-<context>
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se připravit data pro vytvoření rozvržení</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbylo několik neposkládaných obrobků, ale žádný z nich se neshoduje s papírem</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -2106,51 +1294,51 @@
     <name>DialogLayoutSettings</name>
     <message>
         <source>Paper size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost papíru</translation>
     </message>
     <message>
         <source>Templates:</source>
-        <translation type="unfinished"></translation>
+        <translation>Předlohy:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Šířka:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška: </translation>
     </message>
     <message>
         <source>Rotate workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočit obrobek</translation>
     </message>
     <message>
         <source>Rotate by</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočit o</translation>
     </message>
     <message>
         <source>degree</source>
-        <translation type="unfinished"></translation>
+        <translation>stupňů</translation>
     </message>
     <message>
         <source>Creation options</source>
-        <translation type="unfinished"></translation>
+        <translation>Volby pro vytvoření</translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka posunutí:</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Zásada pro výběr dalšího obrobku</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
-        <translation type="unfinished"></translation>
+        <translation>Tři skupiny: velká, prostřední, malá</translation>
     </message>
     <message>
         <source>Two groups: big, small</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvě skupiny, malá, velká</translation>
     </message>
     <message>
         <source>Descending area</source>
@@ -2158,23 +1346,23 @@
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milimetry</translation>
+        <translation>Milimetry</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimetry</translation>
+        <translation>Centimetry</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Palce</translation>
+        <translation>Palce</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation type="unfinished"></translation>
+        <translation>Pixely</translation>
     </message>
     <message>
         <source>Create a layout</source>
-        <translation type="unfinished">Vytvořit rozvržení</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Auto crop unused length</source>
@@ -2253,11 +1441,11 @@
     </message>
     <message>
         <source>Line between points</source>
-        <translation type="unfinished">Čára mezi body</translation>
+        <translation>Čára mezi body</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
 </context>
 <context>
@@ -2342,46 +1530,6 @@
         <translation>Ukázat čáru od prvního bodu k tomuto bodu</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables</source>
-        <translation type="vanished">Proměnné</translation>
-    </message>
-    <message>
         <source>Select second point of line</source>
         <translation>Vybrat druhý bod čáry</translation>
     </message>
@@ -2395,15 +1543,15 @@
     </message>
     <message>
         <source>Axis Point</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bod osy</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="unfinished">Druhý bod čáry</translation>
+        <translation>Druhý bod čáry</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -2515,33 +1663,6 @@
     </message>
 </context>
 <context>
-    <name>DialogMeasurements</name>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Please, choose pattern type.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Vyberte, prosím, typ střihu.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Graduation</source>
-        <translation type="vanished">Stupňování</translation>
-    </message>
-    <message>
-        <source>Use for creation pattern standard measurement table</source>
-        <translation type="vanished">Pro vytvoření střihu použít tabulku obvyklých měr</translation>
-    </message>
-    <message>
-        <source>Individual</source>
-        <translation type="vanished">Individuální</translation>
-    </message>
-    <message>
-        <source>Use for creation pattern individual measurements</source>
-        <translation type="vanished">Pro vytvoření střihu použít Individuální míry</translation>
-    </message>
-</context>
-<context>
     <name>DialogNewMeasurements</name>
     <message>
         <source>New measurement file</source>
@@ -2565,7 +1686,7 @@
     </message>
     <message>
         <source>Individual</source>
-        <translation type="unfinished">Individuální</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Standard</source>
@@ -2592,11 +1713,11 @@
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation type="unfinished">Název dílu střihu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished">Jednotky:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -2616,10 +1737,6 @@
     <message>
         <source>Length</source>
         <translation>Délka</translation>
-    </message>
-    <message>
-        <source>Insert variable into formula</source>
-        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2654,46 +1771,6 @@
         <translation>Ukázat čáru od prvního bodu k tomuto bodu</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
-    </message>
-    <message>
         <source>Select second point of line</source>
         <translation>Vybrat druhý bod čáry</translation>
     </message>
@@ -2703,15 +1780,15 @@
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="unfinished">První bod čáry</translation>
+        <translation>První bod čáry</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="unfinished">Druhý bod čáry</translation>
+        <translation>Druhý bod čáry</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -2977,10 +2054,6 @@
         <translation>Poloměr</translation>
     </message>
     <message>
-        <source>Insert variable into formula</source>
-        <translation type="vanished">Vložit proměnnou do vzorce</translation>
-    </message>
-    <message>
         <source>Value of radius</source>
         <translation>Hodnota poloměru</translation>
     </message>
@@ -3007,46 +2080,6 @@
     <message>
         <source>End of the line</source>
         <translation>Konec čáry</translation>
-    </message>
-    <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula.</source>
-        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce.</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -3081,11 +2114,11 @@
     </message>
     <message>
         <source>X: vertical point</source>
-        <translation type="unfinished"></translation>
+        <translation>X: svislý bod</translation>
     </message>
     <message>
         <source>Y: horizontal point</source>
-        <translation type="unfinished"></translation>
+        <translation>Y: vodorovný bod</translation>
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
@@ -3108,7 +2141,7 @@
     </message>
     <message>
         <source>Selected arc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vybraný oblouk</translation>
     </message>
     <message>
         <source>Second arc</source>
@@ -3194,7 +2227,7 @@
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Cesta:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File format:</source>
@@ -3213,7 +2246,7 @@
     <name>DialogSaveLayout</name>
     <message>
         <source>Name conflict</source>
-        <translation type="unfinished">Střet názvu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
@@ -3229,27 +2262,27 @@
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation type="unfinished">Soubory SVG (*.svg)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation type="unfinished">Soubory PDF (*.pdf)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation type="unfinished">Obrázky (*.png)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation type="unfinished">Wavefront OBJ (*.obj)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation type="unfinished">Soubory PS (*.ps)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation type="unfinished">Soubory EPS (*.eps)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>DXF files (*.dxf)</source>
@@ -3277,10 +2310,6 @@
     <message>
         <source>Length</source>
         <translation>Délka</translation>
-    </message>
-    <message>
-        <source>Insert variable into formula</source>
-        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -3315,46 +2344,6 @@
         <translation>Ukázat čáru od prvního bodu k našemu bodu</translation>
     </message>
     <message>
-        <source>Input data</source>
-        <translation type="vanished">Vstupní data</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Velikost a výška</translation>
-    </message>
-    <message>
-        <source>Measurements</source>
-        <translation type="vanished">Míry</translation>
-    </message>
-    <message>
-        <source>Increments</source>
-        <translation type="vanished">Přídavky</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">Délka čar</translation>
-    </message>
-    <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Délka oblouků</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">Délka křivek</translation>
-    </message>
-    <message>
-        <source>Angle of lines</source>
-        <translation type="vanished">Úhel čar</translation>
-    </message>
-    <message>
-        <source>Hide empty measurements</source>
-        <translation type="vanished">Skrýt prázdné míry</translation>
-    </message>
-    <message>
-        <source>Variables - Click twice to insert into formula</source>
-        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
-    </message>
-    <message>
         <source>Select first point of line</source>
         <translation>Vybrat první bod čáry</translation>
     </message>
@@ -3364,11 +2353,11 @@
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation type="unfinished">Zvláštní bod na rameni</translation>
+        <translation>Zvláštní bod na rameni</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -3438,11 +2427,11 @@
     </message>
     <message>
         <source>Simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednoduchá křivka</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva</translation>
     </message>
 </context>
 <context>
@@ -3485,26 +2474,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DialogStandardMeasurements</name>
-    <message>
-        <source>Standard table</source>
-        <translation type="vanished">Standardní tabulka</translation>
-    </message>
-    <message>
-        <source>Pattern piece name</source>
-        <translation type="vanished">Název dílu střihu</translation>
-    </message>
-    <message>
-        <source>Standard measurements table</source>
-        <translation type="vanished">Tabulka s obvyklými mírami</translation>
-    </message>
-    <message>
-        <source>File error.</source>
-        <translation type="vanished">Chyba souboru.</translation>
+        <translation>Barva</translation>
     </message>
 </context>
 <context>
@@ -3524,26 +2494,6 @@
     <message>
         <source>Value</source>
         <translation>Hodnota</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="vanished">Výška</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Velikost</translation>
-    </message>
-    <message>
-        <source>Line length</source>
-        <translation type="vanished">Délka čáry</translation>
-    </message>
-    <message>
-        <source>Arc length</source>
-        <translation type="vanished">Délka oblouku</translation>
-    </message>
-    <message>
-        <source>Curve length</source>
-        <translation type="vanished">Délka křivky</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
@@ -3602,15 +2552,15 @@
     </message>
     <message>
         <source>First point of the axis</source>
-        <translation type="unfinished"></translation>
+        <translation>První bod osy</translation>
     </message>
     <message>
         <source>Second point of the axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhý bod osy</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="unfinished">Druhý bod čáry</translation>
+        <translation>Druhý bod čáry</translation>
     </message>
 </context>
 <context>
@@ -3710,536 +2660,31 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opravdu chcete sjednotit detaily?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Select first point</source>
-        <translation type="vanished">Vybrat první bod</translation>
-    </message>
-    <message>
-        <source>Select second point</source>
-        <translation type="vanished">Vybrat druhý bod</translation>
-    </message>
-    <message>
-        <source>Select another second point</source>
-        <translation type="vanished">Vybrat jiný druhý bod</translation>
-    </message>
-    <message>
-        <source>Select detail</source>
-        <translation type="vanished">Vybrat detail</translation>
-    </message>
-    <message>
         <source>Union tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Spojení</translation>
     </message>
     <message>
         <source>Select a first point</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte první bod</translation>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrobky by měly mít alespoň dva body a tři předměty</translation>
     </message>
     <message>
         <source>Select a second point</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte druhý bod</translation>
     </message>
     <message>
         <source>Select a unique point</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte jedinečný bod</translation>
     </message>
     <message>
         <source>Select a detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte detail</translation>
     </message>
     <message>
         <source>Select a point on edge</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Divide by zero</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Domain error</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Donald H. McCunn</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Doris Ekern</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Dorothy Moore</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Doyle</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dress Design: Draping and Flat Pattern Making</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dress Pattern Designing: The Basic Principles of Cut and Fit</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dressmaking</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Dressmaking International</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Dressmaking International magazine (Japan)</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>E. L. G. Gough</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Eddy</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Edward Minister &amp; Son, ed. R. L. Shep</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Ekern</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Elizabeth Friendship</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Elizabeth M. Allemong</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Erwin</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Esther Kaplan Pivnick</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>European Cut</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Expression is empty.</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>F. R. Morris</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Fashions of the Gilded Age</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Frances Grimble</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Frederick T. Croonberg</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Friendship/Men</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Friendship/Women</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Fukomoto</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Function arguments used without a function (position: $POS$)</name>
-    <message>
-        <source>Math parser error messages. Left untouched $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Function result is a string.</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Functions</name>
-    <message>
-        <source>sin</source>
-        <comment>sine function</comment>
-        <translation type="vanished">sin</translation>
-    </message>
-    <message>
-        <source>cos</source>
-        <comment>cosine function</comment>
-        <translation type="vanished">cos</translation>
-    </message>
-    <message>
-        <source>tan</source>
-        <comment>tangens function</comment>
-        <translation type="vanished">tan</translation>
-    </message>
-    <message>
-        <source>asin</source>
-        <comment>arcus sine function</comment>
-        <translation type="vanished">asin</translation>
-    </message>
-    <message>
-        <source>acos</source>
-        <comment>arcus cosine function</comment>
-        <translation type="vanished">acos</translation>
-    </message>
-    <message>
-        <source>atan</source>
-        <comment>arcus tangens function</comment>
-        <translation type="vanished">atan</translation>
-    </message>
-    <message>
-        <source>sinh</source>
-        <comment>hyperbolic sine function</comment>
-        <translation type="vanished">sinh</translation>
-    </message>
-    <message>
-        <source>cosh</source>
-        <comment>hyperbolic cosine</comment>
-        <translation type="vanished">cosh</translation>
-    </message>
-    <message>
-        <source>tanh</source>
-        <comment>hyperbolic tangens function</comment>
-        <translation type="vanished">tanh</translation>
-    </message>
-    <message>
-        <source>asinh</source>
-        <comment>hyperbolic arcus sine function</comment>
-        <translation type="vanished">asinh</translation>
-    </message>
-    <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus tangens function</comment>
-        <translation type="vanished">acosh</translation>
-    </message>
-    <message>
-        <source>atanh</source>
-        <comment>hyperbolic arcur tangens function</comment>
-        <translation type="vanished">atanh</translation>
-    </message>
-    <message>
-        <source>log2</source>
-        <comment>logarithm to the base 2</comment>
-        <translation type="vanished">log2</translation>
-    </message>
-    <message>
-        <source>log10</source>
-        <comment>logarithm to the base 10</comment>
-        <translation type="vanished">log10</translation>
-    </message>
-    <message>
-        <source>log</source>
-        <comment>logarithm to the base 10</comment>
-        <translation type="vanished">log</translation>
-    </message>
-    <message>
-        <source>ln</source>
-        <comment>logarithm to base e (2.71828...)</comment>
-        <translation type="vanished">ln</translation>
-    </message>
-    <message>
-        <source>exp</source>
-        <comment>e raised to the power of x</comment>
-        <translation type="vanished">exp</translation>
-    </message>
-    <message>
-        <source>sqrt</source>
-        <comment>square root of a value</comment>
-        <translation type="vanished">sqrt</translation>
-    </message>
-    <message>
-        <source>sign</source>
-        <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
-        <translation type="vanished">sign</translation>
-    </message>
-    <message>
-        <source>rint</source>
-        <comment>round to nearest integer</comment>
-        <translation type="vanished">rint</translation>
-    </message>
-    <message>
-        <source>abs</source>
-        <comment>absolute value</comment>
-        <translation type="vanished">abs</translation>
-    </message>
-    <message>
-        <source>min</source>
-        <comment>min of all arguments</comment>
-        <translation type="vanished">min</translation>
-    </message>
-    <message>
-        <source>max</source>
-        <comment>max of all arguments</comment>
-        <translation type="vanished">max</translation>
-    </message>
-    <message>
-        <source>sum</source>
-        <comment>sum of all arguments</comment>
-        <translation type="vanished">sum</translation>
-    </message>
-    <message>
-        <source>avg</source>
-        <comment>mean value of all arguments</comment>
-        <translation type="vanished">avg</translation>
-    </message>
-</context>
-<context>
-    <name>Fundamentals of Garment Design</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GOST 17917-86</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Gareth Kershaw</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Gertrude Mason</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Gertrude Mason&apos;s Patternmaking Book</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Gertrude Strickland</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Gilewska</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Gough</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Grimble</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Handford</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Helen Joseph-Armstrong</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Hillhouse &amp; Mansfield</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>How to Design Beautiful Clothes: Designing and Pattern Making</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>How to Draft Basic Patterns</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>How to Make Your Own Sewing Patterns</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>If-then-else operator is missing an else clause</name>
-    <message>
-        <source>Math parser error messages. Do not translate operator name.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Injoo Kim and Mykyung Uh</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Integrating Draping, Drafting and Drawing</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Internal error</name>
-    <message>
-        <source>Math parser error messages.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4248,248 +2693,6 @@
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
         <translation>Program je poskytován TAK JAK JE bez JAKÉKOLIV ZÁRUKY JAKÉHOKOLIV DRUHU, VČETNĚ ZÁRUKY VZHLEDU, PRODEJNOSTI A VHODNOSTI PRO DANÝ ÚČEL.</translation>
-    </message>
-</context>
-<context>
-    <name>Invalid binary operator identifier: &quot;$TOK$&quot;.</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Invalid infix operator identifier: &quot;$TOK$&quot;.</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Invalid pointer to callback function.</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Invalid pointer to variable.</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Invalid postfix operator identifier: &quot;$TOK$&quot;.</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Invalid value for operator priority (must be greater or equal to zero).</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Jack Handford</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Jason MacLochlainn</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Jno. J. Mitchell</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Jo Barnfield and Andrew Richards</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Joseph-Armstrong</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Josephine F. Eddy and Elizabeth C. B. Wiley</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>K. Kimata</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Karen Morris</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Karla J. Shelton</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Kershaw</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Kim &amp; Uh</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Kimata</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Knowles/Men</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Knowles/Women</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Kopp</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Kunick</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Ladies Garment Cutting and Making</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Lady Boutique</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Lady Boutique magazine (Japan)</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Line_</name>
-    <message>
-        <source>Left symbol _ in name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Lo</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Loh &amp; Lewis</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Lori A. Knowles</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Louis Devere</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Lucia Mors de Castro</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>M. Rohr</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
     </message>
 </context>
 <context>
@@ -4588,20 +2791,6 @@
     </message>
 </context>
 <context>
-    <name>Mabel D. Erwin</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>MacLochlainn</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>MainWindow</name>
     <message>
         <source>Valentina</source>
@@ -4634,10 +2823,6 @@
     <message>
         <source>Point at distance along line</source>
         <translation>Bod ve vzdálenosti podél čáry</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
     </message>
     <message>
         <source>Tools for creating lines.</source>
@@ -4689,7 +2874,7 @@
     </message>
     <message>
         <source>&amp;Pattern piece</source>
-        <translation>&amp;Díl střihu</translation>
+        <translation>Díl střihu</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -4733,11 +2918,7 @@
     </message>
     <message>
         <source>Create a new pattern</source>
-        <translation>Vytvořit nový vzor</translation>
-    </message>
-    <message>
-        <source>Ctrl+N</source>
-        <translation type="vanished">Ctrl+N</translation>
+        <translation>Vytvořit nový střih</translation>
     </message>
     <message>
         <source>Open</source>
@@ -4749,7 +2930,7 @@
     </message>
     <message>
         <source>Open file with pattern</source>
-        <translation>Otevřít soubor se vzorem</translation>
+        <translation>Otevřít soubor se střihem</translation>
     </message>
     <message>
         <source>Save</source>
@@ -4761,23 +2942,15 @@
     </message>
     <message>
         <source>Save pattern</source>
-        <translation>Uložit vzor</translation>
-    </message>
-    <message>
-        <source>Ctrl+S</source>
-        <translation type="vanished">Ctrl+S</translation>
+        <translation>Uložit střih</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Uložit &amp;jako...</translation>
+        <translation>Uložit j&amp;ako…</translation>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
-        <translation>Uložit dosud neuložený vzor</translation>
-    </message>
-    <message>
-        <source>Ctrl+Shift+S</source>
-        <translation type="vanished">Ctrl+Shift+S</translation>
+        <translation>Uložit dosud neuložený střih</translation>
     </message>
     <message>
         <source>Draw</source>
@@ -4788,20 +2961,12 @@
         <translation>Režim kreslení</translation>
     </message>
     <message>
-        <source>Ctrl+W</source>
-        <translation type="vanished">Ctrl+W</translation>
-    </message>
-    <message>
         <source>Details</source>
         <translation>Detaily</translation>
     </message>
     <message>
         <source>Details mode</source>
         <translation>Režim detailů</translation>
-    </message>
-    <message>
-        <source>Ctrl+E</source>
-        <translation type="vanished">Ctrl+E</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -4816,10 +2981,6 @@
         <translation>Přidat nový díl střihu</translation>
     </message>
     <message>
-        <source>Ctrl+Shift+N</source>
-        <translation type="vanished">Ctrl+Shift+N</translation>
-    </message>
-    <message>
         <source>Change the label of pattern piece</source>
         <translation>Změnit štítek dílu střihu</translation>
     </message>
@@ -4832,28 +2993,8 @@
         <translation>Tabulky proměnných</translation>
     </message>
     <message>
-        <source>Ctrl+T</source>
-        <translation type="vanished">Ctrl+T</translation>
-    </message>
-    <message>
         <source>History</source>
         <translation>Historie</translation>
-    </message>
-    <message>
-        <source>Ctrl+H</source>
-        <translation type="vanished">Ctrl+H</translation>
-    </message>
-    <message>
-        <source>Export pattern (layout)</source>
-        <translation type="vanished">Vyvést střih (rozvržení)</translation>
-    </message>
-    <message>
-        <source>Create layout</source>
-        <translation type="vanished">Vytvořit rozvržení</translation>
-    </message>
-    <message>
-        <source>Ctrl+L</source>
-        <translation type="vanished">Ctrl+L</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -4872,12 +3013,8 @@
         <translation>Ukončit program</translation>
     </message>
     <message>
-        <source>Ctrl+Q</source>
-        <translation type="vanished">Ctrl+Q</translation>
-    </message>
-    <message>
         <source>Preferences</source>
-        <translation>Nastavení</translation>
+        <translation>Předvolby</translation>
     </message>
     <message>
         <source>Pattern properties</source>
@@ -4897,7 +3034,7 @@
     </message>
     <message>
         <source>Edit pattern XML code</source>
-        <translation>Upravit kód XML střihu</translation>
+        <translation>Upravit XML kód střihu</translation>
     </message>
     <message>
         <source>Original zoom </source>
@@ -4909,11 +3046,7 @@
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation>Nejlepší přizpůsobení zvětšení</translation>
-    </message>
-    <message>
-        <source>Ctrl+=</source>
-        <translation type="vanished">Ctrl+=</translation>
+        <translation>Přizpůsobit velikost oknu aplikace</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -4925,7 +3058,7 @@
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation>Nahlásit chybu...</translation>
+        <translation>Nahlásit chybu…</translation>
     </message>
     <message>
         <source>Report bug</source>
@@ -4937,7 +3070,7 @@
     </message>
     <message>
         <source>Online help</source>
-        <translation>Nápověda na internetu</translation>
+        <translation>Nápověda na Internetu</translation>
     </message>
     <message>
         <source>Show online help</source>
@@ -4946,16 +3079,6 @@
     <message>
         <source>Pattern piece %1</source>
         <translation>Díl střihu %1</translation>
-    </message>
-    <message>
-        <source>Individual measurements is under development</source>
-        <translation type="vanished">Individuální míry jsou ve vývoji</translation>
-    </message>
-    <message>
-        <source>There is no way create individual measurements file independent on the pattern file.
-For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
-        <translation type="vanished">Není možné vytvářet soubor s individuálními mírami nezávisle na souboru se střihem.
-Pro otevření souboru je nutné zachovat oba soubory: střih a míry. Chcete pokračovat?</translation>
     </message>
     <message>
         <source>Select point</source>
@@ -5046,10 +3169,6 @@ Pro otevření souboru je nutné zachovat oba soubory: střih a míry. Chcete po
         <translation>střih</translation>
     </message>
     <message>
-        <source>/pattern.val</source>
-        <translation type="vanished">/pattern.val</translation>
-    </message>
-    <message>
         <source>Save as</source>
         <translation>Uložit jako</translation>
     </message>
@@ -5078,16 +3197,12 @@ Pro otevření souboru je nutné zachovat oba soubory: střih a míry. Chcete po
         <translation>Chyba. Špatný identifikátor.</translation>
     </message>
     <message>
-        <source>Critical error!</source>
-        <translation type="vanished">Vážná chyba!</translation>
-    </message>
-    <message>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Chyba při zpracování souboru (std::bad_alloc).</translation>
     </message>
     <message>
         <source>Bad id.</source>
-        <translation>Špatný identifikátor.</translation>
+        <translation>Chybný identifikátor.</translation>
     </message>
     <message>
         <source>File saved</source>
@@ -5096,10 +3211,6 @@ Pro otevření souboru je nutné zachovat oba soubory: střih a míry. Chcete po
     <message>
         <source>untitled.val</source>
         <translation>Bez názvu.val</translation>
-    </message>
-    <message>
-        <source>Unsaved change</source>
-        <translation type="vanished">Neuložená změna</translation>
     </message>
     <message>
         <source>The pattern has been modified.
@@ -5152,14 +3263,6 @@ Chcete uložit své změny?</translation>
         <translation>Znovu otevřít soubory</translation>
     </message>
     <message>
-        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
-        <translation type="vanished">Soubor s mírami &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</translation>
-    </message>
-    <message>
-        <source>could not be found. Do you want to update the file location</source>
-        <translation type="vanished">se nepodařilo nalézt. Chcete aktualizovat umístění souboru?</translation>
-    </message>
-    <message>
         <source>Standard measurements (*.vst)</source>
         <translation>Obvyklé míry (*.vst)</translation>
     </message>
@@ -5189,7 +3292,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednoduchá křivka</translation>
     </message>
     <message>
         <source>Curved path</source>
@@ -5197,7 +3300,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rozdělení jednoduché křivky</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -5205,7 +3308,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bod průsečíku oblouku a čáry</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -5217,19 +3320,19 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nástroj pro stanovení přídavku na švy</translation>
     </message>
     <message>
         <source>Union tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Spojení</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation type="unfinished">Nástrojový pruh</translation>
+        <translation>Lišta nástrojů</translation>
     </message>
     <message>
         <source>Last Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Naposledy použitý nástroj</translation>
     </message>
     <message>
         <source>Activate last used tool again</source>
@@ -5253,11 +3356,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rozvržení</translation>
     </message>
     <message>
         <source>Create a layout</source>
-        <translation type="unfinished">Vytvořit rozvržení</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show Curve Details</source>
@@ -5552,36 +3655,12 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Svg files (*.svg)</source>
-        <translation type="obsolete">Soubory SVG (*.svg)</translation>
-    </message>
-    <message>
-        <source>PDF files (*.pdf)</source>
-        <translation type="obsolete">Soubory PDF (*.pdf)</translation>
-    </message>
-    <message>
-        <source>Images (*.png)</source>
-        <translation type="obsolete">Obrázky (*.png)</translation>
-    </message>
-    <message>
-        <source>Wavefront OBJ (*.obj)</source>
-        <translation type="obsolete">Wavefront OBJ (*.obj)</translation>
-    </message>
-    <message>
-        <source>PS files (*.ps)</source>
-        <translation type="obsolete">Soubory PS (*.ps)</translation>
-    </message>
-    <message>
-        <source>EPS files (*.eps)</source>
-        <translation type="obsolete">Soubory EPS (*.eps)</translation>
-    </message>
-    <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished">Vytvoření souboru &apos;%1&apos; se nezdařilo! %2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation type="unfinished">Vážná chyba!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -5613,11 +3692,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nepodařilo se připravit data pro vytvoření rozvržení</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zbylo několik neposkládaných obrobků, ale žádný z nich se neshoduje s papírem</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -5625,934 +3704,6 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Export error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Marion S. Hillhouse and Evelyn A. Mansfield</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Mason</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Master Designer</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Master Designer&apos;s System of Designing, Cutting and Grading</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>May Loh and Diehl Lewis</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>McCunn</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Measurements</name>
-    <message>
-        <source>head_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_hlavy</translation>
-    </message>
-    <message>
-        <source>mid_neck_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">střední_obvod_krku</translation>
-    </message>
-    <message>
-        <source>neck_base_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">dolní_obvod_krku</translation>
-    </message>
-    <message>
-        <source>head_and_neck_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_hlavy_a_krku</translation>
-    </message>
-    <message>
-        <source>center_front_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">střední_horní_délka_pasu</translation>
-    </message>
-    <message>
-        <source>center_back_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">střední_zadní_délka_pasu</translation>
-    </message>
-    <message>
-        <source>shoulder_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_ramene</translation>
-    </message>
-    <message>
-        <source>side_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">boční_délka_pasu</translation>
-    </message>
-    <message>
-        <source>trunk_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_trupu</translation>
-    </message>
-    <message>
-        <source>shoulder_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_ramene</translation>
-    </message>
-    <message>
-        <source>upper_chest_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">horní_obvod_hrudi</translation>
-    </message>
-    <message>
-        <source>bust_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_přes_prsa</translation>
-    </message>
-    <message>
-        <source>under_bust_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_pod_prsy</translation>
-    </message>
-    <message>
-        <source>waist_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_pasu</translation>
-    </message>
-    <message>
-        <source>high_hip_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">horní_obvod_boků</translation>
-    </message>
-    <message>
-        <source>hip_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_boků</translation>
-    </message>
-    <message>
-        <source>upper_front_chest_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">horní_přední_šířka_hrudi</translation>
-    </message>
-    <message>
-        <source>front_chest_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_šířka_hrudi</translation>
-    </message>
-    <message>
-        <source>across_front_shoulder_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_šířka_ramen</translation>
-    </message>
-    <message>
-        <source>across_back_shoulder_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">zadní_šířka_ramen</translation>
-    </message>
-    <message>
-        <source>upper_back_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">horní_šířka_zad</translation>
-    </message>
-    <message>
-        <source>back_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">šířka_zad</translation>
-    </message>
-    <message>
-        <source>bustpoint_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_bradavky_k_bradavce</translation>
-    </message>
-    <message>
-        <source>neck_to_bustpoint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_krku_k_bradavce</translation>
-    </message>
-    <message>
-        <source>crotch_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_rozkroku</translation>
-    </message>
-    <message>
-        <source>shoulder_drop</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">pokles_ramena</translation>
-    </message>
-    <message>
-        <source>shoulder_slope_degrees</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">stupně_sklonu_ramen</translation>
-    </message>
-    <message>
-        <source>front_shoulder_slope_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_předního_sklonu_ramen</translation>
-    </message>
-    <message>
-        <source>back_shoulder_slope_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_zadního_sklonu_ramen</translation>
-    </message>
-    <message>
-        <source>front_shoulder_to_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_délka_od_ramene_k_pasu</translation>
-    </message>
-    <message>
-        <source>back_shoulder_to_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">zadní_délka_od_ramene_k_pasu</translation>
-    </message>
-    <message>
-        <source>front_neck_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_oblouk_krku</translation>
-    </message>
-    <message>
-        <source>back_neck_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">zadní_oblouk_krku</translation>
-    </message>
-    <message>
-        <source>front_upper_chest_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_horní_oblouk_hrudi</translation>
-    </message>
-    <message>
-        <source>back_upper_chest_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">zadní_horní_oblouk_hrudi</translation>
-    </message>
-    <message>
-        <source>front_waist_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_oblouk_pasu</translation>
-    </message>
-    <message>
-        <source>back_waist_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">zadní_oblouk_pasu</translation>
-    </message>
-    <message>
-        <source>front_upper_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_horní_oblouk_boků</translation>
-    </message>
-    <message>
-        <source>back_upper_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">zadní_horní_oblouk_boků</translation>
-    </message>
-    <message>
-        <source>front_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_oblouk_boků</translation>
-    </message>
-    <message>
-        <source>back_hip_arc</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">zadní_oblouk_boků</translation>
-    </message>
-    <message>
-        <source>chest_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">sklon_hrudi</translation>
-    </message>
-    <message>
-        <source>back_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">sklon_zad</translation>
-    </message>
-    <message>
-        <source>front_waist_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_sklon_pasu</translation>
-    </message>
-    <message>
-        <source>back_waist_slope</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">zadní_sklon_pasu</translation>
-    </message>
-    <message>
-        <source>front_neck_to_upper_chest_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_výška_od_krku_k_horní_hrudi</translation>
-    </message>
-    <message>
-        <source>front_neck_to_bust_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_výška_od_krku_k_prsům</translation>
-    </message>
-    <message>
-        <source>front_waist_to_upper_chest</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_od_pasu_k_horní_hrudi</translation>
-    </message>
-    <message>
-        <source>front_waist_to_lower_breast</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_od_pasu_ke_spodku_prsou</translation>
-    </message>
-    <message>
-        <source>back_waist_to_upper_chest</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_zadního_pasu_k_horní_hrudi</translation>
-    </message>
-    <message>
-        <source>strap_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_řemínku</translation>
-    </message>
-    <message>
-        <source>armscye_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_průramku</translation>
-    </message>
-    <message>
-        <source>elbow_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_lokte</translation>
-    </message>
-    <message>
-        <source>upper_arm_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_paže</translation>
-    </message>
-    <message>
-        <source>wrist_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_zápěstí</translation>
-    </message>
-    <message>
-        <source>scye_depth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">hloubka_průramku</translation>
-    </message>
-    <message>
-        <source>shoulder_and_arm_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_ramene_a_paže</translation>
-    </message>
-    <message>
-        <source>underarm_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_podpaží</translation>
-    </message>
-    <message>
-        <source>shoulder_to_elbow_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_od_ramene_k_lokti</translation>
-    </message>
-    <message>
-        <source>arm_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_paže</translation>
-    </message>
-    <message>
-        <source>hand_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">šířka_ruky</translation>
-    </message>
-    <message>
-        <source>hand_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_ruky</translation>
-    </message>
-    <message>
-        <source>hand_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_ruky</translation>
-    </message>
-    <message>
-        <source>thigh_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_stehna</translation>
-    </message>
-    <message>
-        <source>mid_thigh_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">střední_obvod_stehna</translation>
-    </message>
-    <message>
-        <source>knee_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_kolene</translation>
-    </message>
-    <message>
-        <source>calf_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_lýtka</translation>
-    </message>
-    <message>
-        <source>ankle_girth</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_kotníku</translation>
-    </message>
-    <message>
-        <source>knee_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_kolene</translation>
-    </message>
-    <message>
-        <source>ankle_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_kotníku</translation>
-    </message>
-    <message>
-        <source>foot_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">šířka_chodidla</translation>
-    </message>
-    <message>
-        <source>foot_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_chodidla</translation>
-    </message>
-    <message>
-        <source>height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška</translation>
-    </message>
-    <message>
-        <source>waist_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_pasu</translation>
-    </message>
-    <message>
-        <source>high_hip_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">horní_výška_boků</translation>
-    </message>
-    <message>
-        <source>hip_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_boků</translation>
-    </message>
-    <message>
-        <source>waist_to_hip_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_od_pasu_k_bokům</translation>
-    </message>
-    <message>
-        <source>waist_to_knee_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_od_pasu_ke_kolenům</translation>
-    </message>
-    <message>
-        <source>crotch_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_rozkroku</translation>
-    </message>
-    <message>
-        <source>size</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">velikost</translation>
-    </message>
-    <message>
-        <source>height_front_neck_base_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_předního_základního_bodu_krku</translation>
-    </message>
-    <message>
-        <source>height_base_neck_side_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_bočního_základního_bodu_krku</translation>
-    </message>
-    <message>
-        <source>height_shoulder_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_ramenního_bodu</translation>
-    </message>
-    <message>
-        <source>height_nipple_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_bodu_bradavky</translation>
-    </message>
-    <message>
-        <source>height_scapular_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_skapulárního_bodu</translation>
-    </message>
-    <message>
-        <source>height_under_buttock_folds</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_pod_hýždní_záhyb</translation>
-    </message>
-    <message>
-        <source>hips_excluding_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">body_bez_vyčnívajícího_břicha</translation>
-    </message>
-    <message>
-        <source>girth_foot_instep</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_nártu</translation>
-    </message>
-    <message>
-        <source>side_waist_to_floor</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">zboku_od_pasu_k_podlaze</translation>
-    </message>
-    <message>
-        <source>front_waist_to_floor</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">zepředu_od_pasu_k_podlaze</translation>
-    </message>
-    <message>
-        <source>arc_through_groin_area</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">oblouk_skrz_třísla</translation>
-    </message>
-    <message>
-        <source>waist_to_plane_seat</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_pasu_k_rovině_sezení</translation>
-    </message>
-    <message>
-        <source>neck_to_radial_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_krku_k_radiálnímu_bodu</translation>
-    </message>
-    <message>
-        <source>neck_to_third_finger</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_krku_k_prostředníčku</translation>
-    </message>
-    <message>
-        <source>neck_to_first_line_chest_circumference</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_krku_k_první_linii_obvodu_hrudi</translation>
-    </message>
-    <message>
-        <source>front_waist_length</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">přední_délka_pasu</translation>
-    </message>
-    <message>
-        <source>arc_through_shoulder_joint</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">oblouk_skrz_kloub_ramene</translation>
-    </message>
-    <message>
-        <source>neck_to_back_line_chest_circumference</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_krku_k_zadní_linii_obvodu_hrudi</translation>
-    </message>
-    <message>
-        <source>waist_to_neck_side</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">boční_od_pasu_ke_krku</translation>
-    </message>
-    <message>
-        <source>arc_length_upper_body</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">délka_oblouku_horní_části_těla</translation>
-    </message>
-    <message>
-        <source>chest_width</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">šířka_hrudi</translation>
-    </message>
-    <message>
-        <source>anteroposterior_diameter_hands</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">předozadní_průměr_rukou</translation>
-    </message>
-    <message>
-        <source>height_clavicular_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_klíčního_bodu</translation>
-    </message>
-    <message>
-        <source>half_girth_neck</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">půlobvod_krku</translation>
-    </message>
-    <message>
-        <source>half_girth_neck_for_shirts</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">půlobvod_krku_pro_trička</translation>
-    </message>
-    <message>
-        <source>half_girth_chest_first</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">půlobvod_hrudi_první</translation>
-    </message>
-    <message>
-        <source>half_girth_chest_second</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">půlobvod_hrudi_druhý</translation>
-    </message>
-    <message>
-        <source>half_girth_chest_third</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">půlobvod_hrudi_třetí</translation>
-    </message>
-    <message>
-        <source>half_girth_waist</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">půlobvod_pasu</translation>
-    </message>
-    <message>
-        <source>half_girth_hips_considering_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">půlobvod_boků_včetně_vyčnívajícího_bricha</translation>
-    </message>
-    <message>
-        <source>half_girth_hips_excluding_protruding_abdomen</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">půlobvod_boků_bez_vyčnívajícího_břicha</translation>
-    </message>
-    <message>
-        <source>girth_knee_flexed_feet</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">obvod_kolene_natažené_nohy</translation>
-    </message>
-    <message>
-        <source>neck_transverse_diameter</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">příčný_průměr_krku</translation>
-    </message>
-    <message>
-        <source>neck_to_front_waist_line</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_krku_k_přední_linii_pasu</translation>
-    </message>
-    <message>
-        <source>hand_vertical_diameter</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">svislý_průměr_ruky</translation>
-    </message>
-    <message>
-        <source>neck_to_knee_point</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_krku_k_bodu_kolene</translation>
-    </message>
-    <message>
-        <source>waist_to_knee</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">od_pasu_ke_koleni</translation>
-    </message>
-    <message>
-        <source>shoulder_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_ramen</translation>
-    </message>
-    <message>
-        <source>head_height</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">výška_hlavy</translation>
-    </message>
-    <message>
-        <source>body_position</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">poloha_těla</translation>
-    </message>
-    <message>
-        <source>arc_behind_shoulder_girdle</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">oblouk_za_ramenním_pletencem</translation>
-    </message>
-    <message>
-        <source>neck_to_neck_base</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">základna_od_krku_ke_krku</translation>
-    </message>
-    <message>
-        <source>depth_waist_first</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">hloubka_pasu_první</translation>
-    </message>
-    <message>
-        <source>depth_waist_second</source>
-        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
-        <translation type="vanished">hloubka_pasu_druhá</translation>
-    </message>
-</context>
-<context>
-    <name>MeasurementsDescriptions</name>
-    <message>
-        <source>Around fullest part of Head</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Okolo nejplnější části hlavy</translation>
-    </message>
-    <message>
-        <source>Around middle part of Neck</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Okolo střední části krku</translation>
-    </message>
-    <message>
-        <source>Around Neck at base</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Okolo krku v jeho základně</translation>
-    </message>
-    <message>
-        <source>Vertical Distance from Crown to Nape</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Svislá vzdálenost od koruny k šíji</translation>
-    </message>
-    <message>
-        <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Přední střed krku přes pásku na úrovni prsou po přední střed pasu</translation>
-    </message>
-    <message>
-        <source>Back Neck Center to Back Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Od zadního středu krku k zadnímu středu pasu</translation>
-    </message>
-    <message>
-        <source>NeckPoint to ShoulderTip</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Z bodu krku na vrchol ramene</translation>
-    </message>
-    <message>
-        <source>Armpit to Waist side</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Z podpaží k pasu na boku</translation>
-    </message>
-    <message>
-        <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Kolem těla ze středu délky ramene přes poprsí a rozkrok zpět nahoru do počátečního bodu</translation>
-    </message>
-    <message>
-        <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Kolem paží a těla, v úrovni bicepsu rovnoběžně s podlahou, s rukama visícíma podél těla</translation>
-    </message>
-    <message>
-        <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Kolem hrudi ve výšce založených rukou, bude rovnoběžné s podlahou přes záda, nebude rovnoběžné s podlahou přes přední část hrudi</translation>
-    </message>
-    <message>
-        <source>Around fullest part of Bust, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Přes nejplnější část poprsí, rovnoběžně s podlahou</translation>
-    </message>
-    <message>
-        <source>Around Chest below the Bust, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Přes hruď pod prsy, rovnoběžně s podlahou</translation>
-    </message>
-    <message>
-        <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Uvažte provázek kolem nejužší části pasu, při měření mějte provázek napnutý. Obvykle není rovnoběžný s podlahou pro přední a zadní části pasu.</translation>
-    </message>
-    <message>
-        <source>Around HighHip, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Kolem horní části boků, rovnoběžně s podlahou</translation>
-    </message>
-    <message>
-        <source>Around Hip, parallel to floor</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Kolem boků, rovnoběžně s podlahou</translation>
-    </message>
-    <message>
-        <source>Across Front UpperChest, smallest width from armscye to armscye</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Přes přední horní hruď, nejmenší šířka od průramku k průramku</translation>
-    </message>
-    <message>
-        <source>Across Back UpperChest, smallest width from armscye to armscye</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Přes horní část zad, nejmenší šířka od průramku k průramku</translation>
-    </message>
-    <message>
-        <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Zepředu ze středu pasu, dolů do rozkroku, a nahoru dozadu do středu pasu.</translation>
-    </message>
-    <message>
-        <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Sedněte si na židli, měřte ze strany pasu přímo dolů ke spodní části židle</translation>
-    </message>
-    <message>
-        <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Svislá vzdálenost z úrovně krčního bodu na úroveň vrcholku ramena</translation>
-    </message>
-    <message>
-        <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Úhlové stupně od krčního bodu k vrcholu ramene - vyžaduje goniometr</translation>
-    </message>
-    <message>
-        <source>ShoulderTip to Front Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Od vrcholku ramene ke středu pasu vepředu</translation>
-    </message>
-    <message>
-        <source>ShoulderTip to Back Waist Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Od vrcholku ramene ke středu pasu vzadu</translation>
-    </message>
-    <message>
-        <source>NeckPoint straight down front chest to Waistline</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Od krčního bodu přímo dolů přes hrudník na úroveň pasu</translation>
-    </message>
-    <message>
-        <source>Back NeckPoint straight down back chest to Waistline</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Od krčního bodu přímo dolů přes záda na úroveň pasu</translation>
-    </message>
-    <message>
-        <source>NeckPoint to NeckPoint through Front Neck Center</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Z krčního bodu do krčního bodu skrz přední střed krku</translation>
-    </message>
-    <message>
-        <source>NeckPoint to NeckPoint across Nape</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Z krčního bodu do krčního bodu přes šíji</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <comment>Full measurement description</comment>
-        <translation type="obsolete">Velikost</translation>
-    </message>
-    <message>
-        <source>Shoulder height</source>
-        <comment>Full measurement description</comment>
-        <translation type="obsolete">Výška ramen</translation>
-    </message>
-    <message>
-        <source>Head height</source>
-        <comment>Full measurement description</comment>
-        <translation type="obsolete">Výška hlavy</translation>
-    </message>
-    <message>
-        <source>Body position</source>
-        <comment>Full measurement description</comment>
-        <translation type="vanished">Poloha těla</translation>
-    </message>
-</context>
-<context>
-    <name>MeasurementsFullNames</name>
-    <message>
-        <source>Size</source>
-        <comment>Full measurement name</comment>
-        <translation type="obsolete">Velikost</translation>
-    </message>
-    <message>
-        <source>Shoulder height</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Výška ramen</translation>
-    </message>
-    <message>
-        <source>Head height</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Výška hlavy</translation>
-    </message>
-    <message>
-        <source>Body position</source>
-        <comment>Full measurement name</comment>
-        <translation type="vanished">Poloha těla</translation>
-    </message>
-</context>
-<context>
-    <name>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Metric Pattern Cutting for Menswear</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Metric Pattern Cutting for Women&apos;s Wear</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Minister &amp; Son</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Ministry of consumer industry of the USSR</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Misplaced colon at position $POS$</name>
-    <message>
-        <source>Math parser error messages. Left untouched $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Missing parenthesis</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Mitchell</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Moore</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Morris, F. R.</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Morris, K.</name>
-    <message>
-        <source>System name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6577,20 +3728,12 @@ Chcete uložit své změny?</translation>
 <context>
     <name>MoveSPoint</name>
     <message>
-        <source>Move single point</source>
-        <translation type="vanished">Přesunout jeden bod</translation>
-    </message>
-    <message>
         <source>move single point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSpline</name>
-    <message>
-        <source>Move spline</source>
-        <translation type="vanished">Posunout křivku</translation>
-    </message>
     <message>
         <source>move spline</source>
         <translation type="unfinished"></translation>
@@ -6599,60 +3742,7 @@ Chcete uložit své změny?</translation>
 <context>
     <name>MoveSplinePath</name>
     <message>
-        <source>Move spline path</source>
-        <translation type="vanished">Posunout cestu křivky</translation>
-    </message>
-    <message>
         <source>move spline path</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Name conflict</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Natalie Bray</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>None</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Norah Waugh</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>P. Clement Brown</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Parser error.</name>
-    <message>
-        <source>Math parser error messages.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6696,56 +3786,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Pattern Cutting</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Pattern Cutting for Men&apos;s Costume</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Pattern Drafting Vols. I, II, III (Japan)</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Pattern Making Primer</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Pattern and Dress Design</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Pattern-Drafting for Fashion: The Basics</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozvržení</translation>
     </message>
 </context>
 <context>
@@ -6773,94 +3814,6 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Count steps (0 - no limit)</source>
         <translation>Počítat kroky (0 - bez omezení)</translation>
-    </message>
-</context>
-<context>
-    <name>Patternless Fashion Design</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Patternmaking for Fashion Design</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Patternmaking for Menswear</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Patternmaking in Practic</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Philip Kunick</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Pivnick</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PostfixOperators</name>
-    <message>
-        <source>cm</source>
-        <comment>centimeter</comment>
-        <translation type="vanished">cm</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <comment>millimeter</comment>
-        <translation type="vanished">mm</translation>
-    </message>
-    <message>
-        <source>in</source>
-        <comment>inch</comment>
-        <translation type="vanished">palce</translation>
-    </message>
-</context>
-<context>
-    <name>Practical Dress Design</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Principles of Garment Cutting</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6917,15 +3870,7 @@ Chcete uložit své změny?</translation>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Vytvořit nový díl střihu pro započetí s prací.</translation>
-    </message>
-    <message>
-        <source>Add node</source>
-        <translation type="vanished">Přidat uzel</translation>
-    </message>
-    <message>
-        <source>Move detail</source>
-        <translation type="vanished">Posunout detail</translation>
+        <translation>Začněte vytvořením nového dílu střihu.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -6980,244 +3925,193 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="vanished">Nalezen neočekávaný řetězec &quot;$TOK$&quot; na pozici $POS$.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Internal error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Vnitřní chyba</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="vanished">Neplatný název funkce, proměnné nebo konstanty: &quot;$TOK$&quot;.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="vanished">Neplatný identifikátor binárního operátoru: &quot;$TOK$&quot;.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="vanished">Neplatný identifikátor zaváděcího operátoru: &quot;$TOK$&quot;.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="vanished">Neplatný identifikátor ukončujícího operátoru: &quot;$TOK$&quot;.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid pointer to callback function.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Neplatný ukazatel na funkci zpětného volání.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Expression is empty.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Výraz je prázdný.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Neplatný ukazatel na proměnnou.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="vanished">Nalezen neočekávaný operátor &quot;$TOK$&quot; na pozici $POS$</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected end of expression at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="vanished">Neočekávaný konec výrazu v poloze $POS$</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected argument separator at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="vanished">Neočekávaný oddělovač argumentů v poloze $POS$</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="vanished">Neočekávaná závorka &quot;$TOK$&quot; v poloze $POS$</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="vanished">Neočekávaná funkce &quot;$TOK$&quot; v poloze $POS$</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="vanished">Nalezena neočekávaná hodnota &quot;$TOK$&quot; v poloze $POS$</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="vanished">Nalezena neočekávaná proměnná &quot;$TOK$&quot; v poloze $POS$</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Function arguments used without a function (position: $POS$)</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="vanished">Argumenty funkce použity bez funkce (pozice: $POS$)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Missing parenthesis</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Chybějící závorka</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="vanished">Příliš mnoho parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="vanished">Příliš málo parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Divide by zero</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Dělení nulou</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Domain error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Chyba domény</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name conflict</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Střet názvu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Neplatná hodnota pro prioritu operátoru (musí být větší nebo rovný nule).</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="vanished">uživatelem stanovený binární operátor &quot;$TOK$&quot; je ve střetu s vestavěným operátorem.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="vanished">Neočekávaný řetězec textu nalezen v poloze $POS$.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="vanished">Neukončený řetězec začínající v poloze $POS$.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Řetězcová funkce volána s argumentem, který není řetězec.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Řetězcová hodnota použita tam, kde je očekávaný číselný argument.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="vanished">Žádné vhodné přetížení pro operátor &quot;$TOK$&quot; v poloze $POS$.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Výsledek funkce je řetězec.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Chyba při zpracování.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="vanished">Desetinný oddělovač je shodný s oddělovačem argumentů funkcí.</translation>
-    </message>
-    <message>
-        <source>If-then-else operator is missing an else clause</source>
-        <comment>Math parser error messages. Do not translate operator name.</comment>
-        <translation type="vanished">V operátoru if-then-else chybí část else</translation>
-    </message>
-    <message>
-        <source>Misplaced colon at position $POS$</source>
-        <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="vanished">Chybně umístěná dvojtečka v poloze $POS$</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="vanished">Operátoru &quot;$TOK$&quot; musí předcházet ukončující závorka.</translation>
+        <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>R. I. Davis</name>
     <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
+        <source>If-then-else operator is missing an else clause</source>
+        <comment>Math parser error messages. Do not translate operator name.</comment>
+        <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>RadiusArc_</name>
     <message>
-        <source>Left symbol _ in name</source>
+        <source>Misplaced colon at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RenamePP</name>
     <message>
-        <source>Rename pattern piece</source>
-        <translation type="vanished">Přejmenovat díl střihu</translation>
-    </message>
-    <message>
         <source>rename pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>Rohr</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>STDescriptions</name>
-    <message>
-        <source>Standard figures of men 1st group, chest 100 cm</source>
-        <comment>Standard table description</comment>
-        <translation type="vanished">Obvyklá čísla mužů první skupiny, hruď 100 cm</translation>
-    </message>
-</context>
-<context>
-    <name>Sarah J. Doyle</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Sarah&apos;s Key to Pattern Drafting</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SaveDetailOptions</name>
-    <message>
-        <source>Save detail option</source>
-        <translation type="vanished">Uložit volbu detailu</translation>
-    </message>
     <message>
         <source>save detail option</source>
         <translation type="unfinished"></translation>
@@ -7226,116 +4120,7 @@ Chcete uložit své změny?</translation>
 <context>
     <name>SaveToolOptions</name>
     <message>
-        <source>Save tool option</source>
-        <translation type="vanished">Uložit volbu nástroje</translation>
-    </message>
-    <message>
         <source>save tool option</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Sewing Lingerie that Fits</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Shelton</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Slacks Cut-to-Fit for Your Figure</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SplPath</name>
-    <message>
-        <source>Do not add symbol _ to the end of name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Spl_</name>
-    <message>
-        <source>Left symbol _ in name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Standard figure boys</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Strickland</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>String function called with a non string type of argument.</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>String value used where a numerical argument is expected.</name>
-    <message>
-        <source>Math parser error messages.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Sue S. Fukomoto</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Sugino</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Supreme System</name>
-    <message>
-        <source>System name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7359,15 +4144,15 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished">Základní hodnota</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation type="unfinished">Ve velikostech</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation type="unfinished">Ve výškách</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Details</source>
@@ -7431,7 +4216,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Cesta:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Path to file</source>
@@ -7459,11 +4244,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Given name:</source>
-        <translation type="unfinished">Křestní jméno:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation type="unfinished">Příjmení:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Birth date:</source>
@@ -7563,7 +4348,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Nastavení</translation>
+        <translation type="unfinished">Předvolby</translation>
     </message>
     <message>
         <source>untitled %1</source>
@@ -7638,16 +4423,8 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished">Individuální míry</translation>
     </message>
     <message>
-        <source>male</source>
-        <translation type="obsolete">muž</translation>
-    </message>
-    <message>
-        <source>female</source>
-        <translation type="obsolete">žena</translation>
-    </message>
-    <message>
         <source>untitled</source>
-        <translation type="unfinished">bez názvu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -7794,12 +4571,12 @@ Do you want to save your changes?</source>
     <message>
         <source>male</source>
         <comment>gender</comment>
-        <translation type="unfinished">muž</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>female</source>
         <comment>gender</comment>
-        <translation type="unfinished">žena</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Gender:</source>
@@ -7821,84 +4598,9 @@ Do you want to save your changes?</source>
         <source>Export standard measurements not supported.</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>TableWindow</name>
     <message>
-        <source>Create a layout</source>
-        <translation type="vanished">Vytvořit rozvržení</translation>
-    </message>
-    <message>
-        <source>toolBar</source>
-        <translation type="vanished">Nástrojový pruh</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Uložit</translation>
-    </message>
-    <message>
-        <source>Save layout</source>
-        <translation type="vanished">Uložit rozvržení</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="vanished">Zastavit</translation>
-    </message>
-    <message>
-        <source>Stop laying</source>
-        <translation type="vanished">Zastavit kladení</translation>
-    </message>
-    <message>
-        <source>Zoom In</source>
-        <translation type="vanished">Přiblížit</translation>
-    </message>
-    <message>
-        <source>Zoom Out</source>
-        <translation type="vanished">Oddálit</translation>
-    </message>
-    <message>
-        <source>untitled</source>
-        <translation type="vanished">bez názvu</translation>
-    </message>
-    <message>
-        <source>Svg files (*.svg)</source>
-        <translation type="vanished">Soubory SVG (*.svg)</translation>
-    </message>
-    <message>
-        <source>PDF files (*.pdf)</source>
-        <translation type="vanished">Soubory PDF (*.pdf)</translation>
-    </message>
-    <message>
-        <source>Images (*.png)</source>
-        <translation type="vanished">Obrázky (*.png)</translation>
-    </message>
-    <message>
-        <source>PS files (*.ps)</source>
-        <translation type="vanished">Soubory PS (*.ps)</translation>
-    </message>
-    <message>
-        <source>EPS files (*.eps)</source>
-        <translation type="vanished">Soubory EPS (*.eps)</translation>
-    </message>
-    <message>
-        <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="vanished">Vytvoření souboru &apos;%1&apos; se nezdařilo! %2</translation>
-    </message>
-    <message>
-        <source>Critical error!</source>
-        <translation type="vanished">Vážná chyba!</translation>
-    </message>
-    <message>
-        <source>Wavefront OBJ (*.obj)</source>
-        <translation type="vanished">Wavefront OBJ (*.obj)</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Upravit</translation>
-    </message>
-    <message>
-        <source>Ctrl+S</source>
-        <translation type="obsolete">Ctrl+S</translation>
+        <source>PM system:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7999,180 +4701,22 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>Teresa Gilewska</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>The Complete Guide to Practical Cutting (1853)</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>The Great War: Styles and Patterns of the 1910s</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>The Handbook of Practical Cutting on the Centre Point System</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>The Master Designer (Chicago, IL)</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>The Practical Guide to Patternmaking for Fashion Designers: Menswear</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>The Victorian Tailor: An Introduction to Period Tailoring</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Thornton&apos;s International System</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Unexpected argument separator at position $POS$</name>
-    <message>
-        <source>Math parser error messages. Left untouched $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Unexpected end of expression at position $POS$</name>
-    <message>
-        <source>Math parser error messages. Left untouched $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Unexpected function &quot;$TOK$&quot; at position $POS$</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Unexpected operator &quot;$TOK$&quot; found at position $POS$</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Unexpected string token found at position $POS$.</name>
-    <message>
-        <source>Math parser error messages. Left untouched $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Unexpected token &quot;$TOK$&quot; found at position $POS$.</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Unexpected value &quot;$TOK$&quot; found at position $POS$</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Unexpected variable &quot;$TOK$&quot; found at position $POS$</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Unterminated string starting at position $POS$.</name>
-    <message>
-        <source>Math parser error messages. Left untouched $POS$</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Příště se již neptat</translation>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Příště se již nept&amp;at</translation>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation type="unfinished"></translation>
+        <translation>Příště již nezobrazovat</translation>
     </message>
 </context>
 <context>
     <name>VAbstractConverter</name>
-    <message>
-        <source>Error creation backup file: %1.</source>
-        <translation type="vanished">Chyba při vytváření záložního souboru: %1.</translation>
-    </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
         <translation>Nebylo možné získat informace o verzi.</translation>
@@ -8218,54 +4762,46 @@ Do you want to save your changes?</source>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation type="unfinished">Nelze najít nástroj v tabulce.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <source>Confirm the deletion.</source>
-        <translation type="vanished">Potvrďte smazání.</translation>
-    </message>
-    <message>
-        <source>Do you really want delete?</source>
-        <translation type="vanished">Opravdu chcete smazat?</translation>
-    </message>
-    <message>
         <source>black</source>
-        <translation type="unfinished"></translation>
+        <translation>černá</translation>
     </message>
     <message>
         <source>green</source>
-        <translation type="unfinished"></translation>
+        <translation>zelená</translation>
     </message>
     <message>
         <source>blue</source>
-        <translation type="unfinished"></translation>
+        <translation>modrá</translation>
     </message>
     <message>
         <source>dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>tmavě červená</translation>
     </message>
     <message>
         <source>dark green</source>
-        <translation type="unfinished"></translation>
+        <translation>tmavě zelená</translation>
     </message>
     <message>
         <source>dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation>tmavě modrá</translation>
     </message>
     <message>
         <source>yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>žlutá</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrdit smazání</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete smazat?</translation>
     </message>
 </context>
 <context>
@@ -8306,16 +4842,184 @@ Do you want to save your changes?</source>
 <context>
     <name>VCommandLine</name>
     <message>
+        <source>The base filename of exported layout files. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base filename of layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to output destination folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to custom measure file (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measure file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to output format (default = 0, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The size value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The height value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number corresponding to page template (default = 0, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The measure unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Angle</source>
-        <translation type="obsolete">Úhel</translation>
+        <translation type="unfinished">Úhel</translation>
+    </message>
+    <message>
+        <source>Auto crop unused length (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unite pages if possible (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save length of the sheet if set. (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout units (as paper&apos;s one except px, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The unit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift layout length measured in layout units (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gap width x2, measured in layout units. (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The gap width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sets layout groupping (export mode): </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grouping type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pattern making program.</source>
-        <translation type="obsolete">Program na tvorbu střihů.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pattern file.</source>
-        <translation type="obsolete">Soubor se střihem.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot use pageformat and page explicit size/units together.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height, width, units must be used all 3 at once.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid rotation value. That must be one of predefined values.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown page templated selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported paper units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported layout units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test option can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid gradation size value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid gradation height value.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8412,13 +5116,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>VException</name>
-    <message>
-        <source>Critical error!</source>
-        <translation type="vanished">Vážná chyba!</translation>
-    </message>
-</context>
-<context>
     <name>VFormula</name>
     <message>
         <source>Error</source>
@@ -8472,10 +5169,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VPattern</name>
     <message>
-        <source>Can&apos;t find tool in table.</source>
-        <translation type="vanished">Nelze najít nástroj v tabulce.</translation>
-    </message>
-    <message>
         <source>Error no unique id.</source>
         <translation>Chyba. Není jedinečný identifikátor.</translation>
     </message>
@@ -8494,10 +5187,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Error wrong id.</source>
         <translation>Chyba. Špatný identifikátor.</translation>
-    </message>
-    <message>
-        <source>Critical error!</source>
-        <translation type="vanished">Vážná chyba!</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -8608,10 +5297,6 @@ Do you want to save your changes?</source>
         <translation>Chyba při vytváření nebo aktualizaci detailu spojení</translation>
     </message>
     <message>
-        <source>File error.</source>
-        <translation type="vanished">Chyba souboru.</translation>
-    </message>
-    <message>
         <source>Error creating or updating point of intersection arcs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8676,17 +5361,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
         <translation>Nelze vyjmout cestu křivky s jedním bodem</translation>
-    </message>
-</context>
-<context>
-    <name>VTableGraphicsView</name>
-    <message>
-        <source>can&apos;t find detail</source>
-        <translation type="vanished">nelze najít detail</translation>
-    </message>
-    <message>
-        <source>detail found</source>
-        <translation type="vanished">detail nalezen</translation>
     </message>
 </context>
 <context>
@@ -8820,11 +5494,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva čáry</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva</translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
@@ -8890,169 +5564,1024 @@ Do you want to save your changes?</source>
 <context>
     <name>VTranslateVars</name>
     <message>
+        <source>Bunka</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bunka Fashion College</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fundamentals of Garment Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barnfield and Richard</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jo Barnfield and Andrew Richards</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Making Primer</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friendship/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elizabeth Friendship</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morris, K.</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karen Morris</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sewing Lingerie that Fits</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Castro</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lucia Mors de Castro</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking in Practic</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kim &amp; Uh</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Injoo Kim and Mykyung Uh</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apparel Making in Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Waugh</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Norah Waugh</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corsets and Crinolines</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grimble</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frances Grimble</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fashions of the Gilded Age</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thornton&apos;s International System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ed. R. L. Shep</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Great War: Styles and Patterns of the 1910s</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hillhouse &amp; Mansfield</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dress Design: Draping and Flat Pattern Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pivnick</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Esther Kaplan Pivnick</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minister &amp; Son</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Complete Guide to Practical Cutting (1853)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strickland</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Strickland</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A Tailoring Manual</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loh &amp; Lewis</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>May Loh and Diehl Lewis</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternless Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morris, F. R.</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F. R. Morris</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ladies Garment Cutting and Making</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mason</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Mason</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gertrude Mason&apos;s Patternmaking Book</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kimata</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>K. Kimata</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Designer</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Master Designer (Chicago, IL)</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kopp</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Draft Basic Patterns</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ekern</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doris Ekern</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slacks Cut-to-Fit for Your Figure</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doyle</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sarah J. Doyle</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sarah&apos;s Key to Pattern Drafting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shelton</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Karla J. Shelton</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Design and Sew Jeans</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lady Boutique magazine (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rohr</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M. Rohr</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Moore</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dorothy Moore</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abling</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bina Abling</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Integrating Draping, Drafting and Drawing</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fukomoto</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sue S. Fukomoto</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking International magazine (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erwin</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mabel D. Erwin</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Practical Dress Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gough</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E. L. G. Gough</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Principles of Garment Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allemong</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elizabeth M. Allemong</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>European Cut</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>McCunn</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Donald H. McCunn</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How to Make Your Own Sewing Patterns</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zarapkar</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zarapkar System of Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kunick</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Philip Kunick</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Handford</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jack Handford</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Davis</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>R. I. Davis</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MacLochlainn</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jason MacLochlainn</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Joseph-Armstrong</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Helen Joseph-Armstrong</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking for Fashion Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Supreme System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frederick T. Croonberg</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sugino</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dressmaking</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Drafting Vols. I, II, III (Japan)</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Centre Point System</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Louis Devere</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Handbook of Practical Cutting on the Centre Point System</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aldrich/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Winifred Aldrich</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric Pattern Cutting for Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aldrich/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Metric Pattern Cutting for Women&apos;s Wear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kershaw</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gareth Kershaw</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Patternmaking for Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gilewska</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Teresa Gilewska</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern-Drafting for Fashion: The Basics</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lo</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dennic Chunman Lo</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bray</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Natalie Bray</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Knowles/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lori A. Knowles</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friendship/Men</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern Cutting for Men&apos;s Costume</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brown</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P. Clement Brown</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Art in Dress</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mitchell</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jno. J. Mitchell</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GOST 17917-86</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ministry of consumer industry of the USSR</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard figure boys</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eddy</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern and Dress Design</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Knowles/Women</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>American Garment Cutter</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <comment>System name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valentina team</source>
+        <comment>Author name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Valentina&apos;s internal standard</source>
+        <comment>Book name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="obsolete">Čára_</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="obsolete">Úhel čáry_</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="obsolete">Oblouk_</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="obsolete">Křivka_</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="obsolete">Cesta křivky</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation type="obsolete">sin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation type="obsolete">cos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation type="obsolete">tan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation type="obsolete">asin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation type="obsolete">acos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation type="obsolete">atan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation type="obsolete">sinh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation type="obsolete">cosh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation type="obsolete">tanh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation type="obsolete">asinh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
-        <translation type="obsolete">acosh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation type="obsolete">atanh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
-        <translation type="obsolete">log2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
-        <translation type="obsolete">log10</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
-        <translation type="obsolete">log</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
-        <translation type="obsolete">ln</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
-        <translation type="obsolete">exp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sqrt</source>
         <comment>square root of a value</comment>
-        <translation type="obsolete">sqrt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
-        <translation type="obsolete">sign</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>rint</source>
         <comment>round to nearest integer</comment>
-        <translation type="obsolete">rint</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>abs</source>
         <comment>absolute value</comment>
-        <translation type="obsolete">abs</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>min</source>
         <comment>min of all arguments</comment>
-        <translation type="obsolete">min</translation>
+        <translation type="unfinished">min</translation>
     </message>
     <message>
         <source>max</source>
         <comment>max of all arguments</comment>
-        <translation type="obsolete">max</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>sum</source>
         <comment>sum of all arguments</comment>
-        <translation type="obsolete">sum</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
-        <translation type="obsolete">avg</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fmod</source>
+        <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <comment>centimeter</comment>
-        <translation type="obsolete">cm</translation>
+        <translation type="unfinished">cm</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter</comment>
-        <translation type="obsolete">mm</translation>
+        <translation type="unfinished">mm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation type="obsolete">palce</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9075,48 +6604,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="unfinished">Chyba při obnově záložního souboru: %1.</translation>
-    </message>
-</context>
-<context>
-    <name>Valentina team</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Valentina&apos;s internal standard</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Variables</name>
-    <message>
-        <source>Line_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Čára_</translation>
-    </message>
-    <message>
-        <source>AngleLine_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Úhel čáry_</translation>
-    </message>
-    <message>
-        <source>Arc_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Oblouk_</translation>
-    </message>
-    <message>
-        <source>Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Křivka_</translation>
-    </message>
-    <message>
-        <source>SplPath</source>
-        <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="vanished">Cesta křivky</translation>
     </message>
 </context>
 <context>
@@ -9149,167 +6636,6 @@ Do you want to save your changes?</source>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Cesta křivky&lt;/b&gt;: vyberte tři nebo více bodů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
-    </message>
-</context>
-<context>
-    <name>Waugh</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Winifred Aldrich</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>Zarapkar</name>
-    <message>
-        <source>System name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Zarapkar System of Cutting</name>
-    <message>
-        <source>Book name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>abs</name>
-    <message>
-        <source>absolute value</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>acos</name>
-    <message>
-        <source>arcus cosine function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>acosh</name>
-    <message>
-        <source>hyperbolic arcus tangens function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>asin</name>
-    <message>
-        <source>arcus sine function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>asinh</name>
-    <message>
-        <source>hyperbolic arcus sine function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>atan</name>
-    <message>
-        <source>arcus tangens function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>atanh</name>
-    <message>
-        <source>hyperbolic arcur tangens function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>avg</name>
-    <message>
-        <source>mean value of all arguments</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>cm</name>
-    <message>
-        <source>centimeter</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>cos</name>
-    <message>
-        <source>cosine function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>cosh</name>
-    <message>
-        <source>hyperbolic cosine</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ed. R. L. Shep</name>
-    <message>
-        <source>Author name</source>
-        <translation type="unfinished">Jméno autora</translation>
-    </message>
-</context>
-<context>
-    <name>exp</name>
-    <message>
-        <source>e raised to the power of x</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>fmod</name>
-    <message>
-        <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>in</name>
-    <message>
-        <source>inch</source>
-        <translation type="unfinished">palec</translation>
-    </message>
-</context>
-<context>
-    <name>ln</name>
-    <message>
-        <source>logarithm to base e (2.71828...)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>log</name>
-    <message>
-        <source>logarithm to the base 10</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>log10</name>
-    <message>
-        <source>logarithm to the base 10</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>log2</name>
-    <message>
-        <source>logarithm to the base 2</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9348,284 +6674,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Information.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>main</name>
-    <message>
-        <source>Pattern making program.</source>
-        <translation type="vanished">Program na tvorbu střihů.</translation>
-    </message>
-    <message>
-        <source>Pattern file.</source>
-        <translation type="vanished">Soubor se střihem.</translation>
-    </message>
-</context>
-<context>
-    <name>max</name>
-    <message>
-        <source>max of all arguments</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>min</name>
-    <message>
-        <source>min of all arguments</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>mm</name>
-    <message>
-        <source>millimeter</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>qmu::QmuParserErrorMsg</name>
-    <message>
-        <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="obsolete">Nalezen neočekávaný řetězec &quot;$TOK$&quot; na pozici $POS$.</translation>
-    </message>
-    <message>
-        <source>Internal error</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Vnitřní chyba</translation>
-    </message>
-    <message>
-        <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="obsolete">Neplatný název funkce, proměnné nebo konstanty: &quot;$TOK$&quot;.</translation>
-    </message>
-    <message>
-        <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="obsolete">Neplatný identifikátor binárního operátoru: &quot;$TOK$&quot;.</translation>
-    </message>
-    <message>
-        <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="obsolete">Neplatný identifikátor zaváděcího operátoru: &quot;$TOK$&quot;.</translation>
-    </message>
-    <message>
-        <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="obsolete">Neplatný identifikátor ukončujícího operátoru: &quot;$TOK$&quot;.</translation>
-    </message>
-    <message>
-        <source>Invalid pointer to callback function.</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Neplatný ukazatel na funkci zpětného volání.</translation>
-    </message>
-    <message>
-        <source>Expression is empty.</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Výraz je prázdný.</translation>
-    </message>
-    <message>
-        <source>Invalid pointer to variable.</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Neplatný ukazatel na proměnnou.</translation>
-    </message>
-    <message>
-        <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="obsolete">Nalezen neočekávaný operátor &quot;$TOK$&quot; na pozici $POS$</translation>
-    </message>
-    <message>
-        <source>Unexpected end of expression at position $POS$</source>
-        <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="obsolete">Neočekávaný konec výrazu v poloze $POS$</translation>
-    </message>
-    <message>
-        <source>Unexpected argument separator at position $POS$</source>
-        <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="obsolete">Neočekávaný oddělovač argumentů v poloze $POS$</translation>
-    </message>
-    <message>
-        <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="obsolete">Neočekávaná závorka &quot;$TOK$&quot; v poloze $POS$</translation>
-    </message>
-    <message>
-        <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="obsolete">Neočekávaná funkce &quot;$TOK$&quot; v poloze $POS$</translation>
-    </message>
-    <message>
-        <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="obsolete">Nalezena neočekávaná hodnota &quot;$TOK$&quot; v poloze $POS$</translation>
-    </message>
-    <message>
-        <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="obsolete">Nalezena neočekávaná proměnná &quot;$TOK$&quot; v poloze $POS$</translation>
-    </message>
-    <message>
-        <source>Function arguments used without a function (position: $POS$)</source>
-        <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="obsolete">Argumenty funkce použity bez funkce (pozice: $POS$)</translation>
-    </message>
-    <message>
-        <source>Missing parenthesis</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Chybějící závorka</translation>
-    </message>
-    <message>
-        <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="obsolete">Příliš mnoho parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
-    </message>
-    <message>
-        <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="obsolete">Příliš málo parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
-    </message>
-    <message>
-        <source>Divide by zero</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Dělení nulou</translation>
-    </message>
-    <message>
-        <source>Domain error</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Chyba domény</translation>
-    </message>
-    <message>
-        <source>Name conflict</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Střet názvu</translation>
-    </message>
-    <message>
-        <source>Invalid value for operator priority (must be greater or equal to zero).</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Neplatná hodnota pro prioritu operátoru (musí být větší nebo rovný nule).</translation>
-    </message>
-    <message>
-        <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="obsolete">uživatelem stanovený binární operátor &quot;$TOK$&quot; je ve střetu s vestavěným operátorem.</translation>
-    </message>
-    <message>
-        <source>Unexpected string token found at position $POS$.</source>
-        <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="obsolete">Neočekávaný řetězec textu nalezen v poloze $POS$.</translation>
-    </message>
-    <message>
-        <source>Unterminated string starting at position $POS$.</source>
-        <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="obsolete">Neukončený řetězec začínající v poloze $POS$.</translation>
-    </message>
-    <message>
-        <source>String function called with a non string type of argument.</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Řetězcová funkce volána s argumentem, který není řetězec.</translation>
-    </message>
-    <message>
-        <source>String value used where a numerical argument is expected.</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Řetězcová hodnota použita tam, kde je očekávaný číselný argument.</translation>
-    </message>
-    <message>
-        <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="obsolete">Žádné vhodné přetížení pro operátor &quot;$TOK$&quot; v poloze $POS$.</translation>
-    </message>
-    <message>
-        <source>Function result is a string.</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Výsledek funkce je řetězec.</translation>
-    </message>
-    <message>
-        <source>Parser error.</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Chyba při zpracování.</translation>
-    </message>
-    <message>
-        <source>Decimal separator is identic to function argument separator.</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="obsolete">Desetinný oddělovač je shodný s oddělovačem argumentů funkcí.</translation>
-    </message>
-    <message>
-        <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="obsolete">Operátoru &quot;$TOK$&quot; musí předcházet ukončující závorka.</translation>
-    </message>
-    <message>
-        <source>If-then-else operator is missing an else clause</source>
-        <comment>Math parser error messages. Do not translate operator name.</comment>
-        <translation type="obsolete">V operátoru if-then-else chybí část else</translation>
-    </message>
-    <message>
-        <source>Misplaced colon at position $POS$</source>
-        <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="obsolete">Chybně umístěná dvojtečka v poloze $POS$</translation>
-    </message>
-</context>
-<context>
-    <name>rint</name>
-    <message>
-        <source>round to nearest integer</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>sign</name>
-    <message>
-        <source>sign function -1 if x&lt;0; 1 if x&gt;0</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>sin</name>
-    <message>
-        <source>sine function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>sinh</name>
-    <message>
-        <source>hyperbolic sine function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>sqrt</name>
-    <message>
-        <source>square root of a value</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>sum</name>
-    <message>
-        <source>sum of all arguments</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>tan</name>
-    <message>
-        <source>tangens function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>tanh</name>
-    <message>
-        <source>hyperbolic tangens function</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</name>
-    <message>
-        <source>Math parser error messages. Left untouched &quot;$TOK$&quot;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
