@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   abstracttest.h
+ **  @file   tst_qmuparsererrormsg.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 5, 2015
+ **  @date   16 10, 2015
  **
  **  @brief
  **  @copyright
@@ -26,34 +26,34 @@
  **
  *************************************************************************/
 
-#ifndef ABSTRACTTEST_H
-#define ABSTRACTTEST_H
+#ifndef TST_QMUPARSERERRORMSG_H
+#define TST_QMUPARSERERRORMSG_H
 
-#include <QObject>
+#include "abstracttest.h"
+#include "../qmuparser/qmuparsererror.h"
 
-// Return codes for testing run application
-constexpr auto TST_EX_BIN = -1;      // Can't find binary.
-constexpr auto TST_EX_TIME_OUT = -2; // The operation timed out or an error occurred.
-constexpr auto TST_EX_CRASH = -3;    // Program crashed.
+#include <QTranslator>
 
-enum ErrorState {ErrorLoad = 0, ErrorInstall, ErrorSize, NoError};
-
-class AbstractTest : public QObject
+class TST_QmuParserErrorMsg : public AbstractTest
 {
     Q_OBJECT
 public:
-    explicit AbstractTest(QObject *parent = 0);
+    explicit TST_QmuParserErrorMsg(QObject *parent = nullptr);
+    virtual ~TST_QmuParserErrorMsg() Q_DECL_OVERRIDE;
 
-protected:
-    void Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const;
+private slots:
+    void TestEErrorCodes_data();
+    void TestEErrorCodes();
 
-    QString ValentinaPath() const;
-    QString TapePath() const;
-    QString TranslationsPath() const;
+private:
+    Q_DISABLE_COPY(TST_QmuParserErrorMsg)
 
-    bool Run(bool showWarn, int exit, int &exitCode, const QString &program, const QStringList &arguments,
-             int msecs = 30000);
-    bool CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const;
+    QPointer<QTranslator> appTranslator;
+    qmu::QmuParserErrorMsg *msg;
+
+    void AddCase(int code, bool tok, bool pos);
+    int  LoadTranslation(const QString &checkedLocale);
+    void CheckStrings(int code, bool tok, bool pos);
 };
 
-#endif // ABSTRACTTEST_H
+#endif // TST_QMUPARSERERRORMSG_H

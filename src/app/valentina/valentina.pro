@@ -2023,7 +2023,7 @@ for(_translation_name, INSTALL_TRANSLATIONS) {
   _translation_name_ts = $$section(_translation_name_qm, ".", 0, 0).ts
 
     !exists($${PWD}/$$_translation_name) {
-        system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) -removeidentical -nounfinished $$shell_path($${PWD}/$${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($${PWD}/$$_translation_name))
+        system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) $$shell_path($${PWD}/$${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($${PWD}/$$_translation_name))
     }
     QMAKE_CLEAN += $${PWD}/$$_translation_name
 }

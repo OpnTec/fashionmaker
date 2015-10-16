@@ -47,7 +47,8 @@ SOURCES += \
     tst_tapecommandline.cpp \
     tst_valentinacommandline.cpp \
     tst_qmutokenparser.cpp \
-    tst_vmeasurements.cpp
+    tst_vmeasurements.cpp \
+    tst_qmuparsererrormsg.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -62,7 +63,8 @@ HEADERS += \
     tst_tapecommandline.h \
     tst_valentinacommandline.h \
     tst_qmutokenparser.h \
-    tst_vmeasurements.h
+    tst_vmeasurements.h \
+    tst_qmuparsererrormsg.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()

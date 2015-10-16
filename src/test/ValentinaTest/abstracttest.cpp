@@ -73,6 +73,12 @@ QString AbstractTest::TapePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString AbstractTest::TranslationsPath() const
+{
+    return QApplication::applicationDirPath() + QStringLiteral("/../../../app/valentina/bin/translations");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool AbstractTest::Run(bool showWarn, int exit, int &exitCode, const QString &program, const QStringList &arguments,
                        int msecs)
 {

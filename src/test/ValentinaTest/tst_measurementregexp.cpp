@@ -35,11 +35,9 @@
 #include <QtTest>
 #include <QTranslator>
 
-enum ErrorState {ErrorLoad = 0, ErrorInstall, ErrorSize, NoError};
-
 //---------------------------------------------------------------------------------------------------------------------
 TST_MeasurementRegExp::TST_MeasurementRegExp(QObject *parent)
-    :QObject(parent),
+    :AbstractTest(parent),
       pmsTranslator(nullptr),
       trMs(nullptr)
 {
@@ -394,12 +392,6 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement()
     QFETCH(QString, expect);
 
     QCOMPARE(name, expect);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString TST_MeasurementRegExp::TranslationsPath() const
-{
-    return QApplication::applicationDirPath() + QStringLiteral("/../../../app/valentina/bin/translations");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

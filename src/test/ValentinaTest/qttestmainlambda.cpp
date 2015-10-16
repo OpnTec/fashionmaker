@@ -39,6 +39,7 @@
 #include "tst_valentinacommandline.h"
 #include "tst_qmutokenparser.h"
 #include "tst_vmeasurements.h"
+#include "tst_qmuparsererrormsg.h"
 
 int main(int argc, char** argv)
 {
@@ -64,6 +65,7 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_ValentinaCommandLine());
     ASSERT_TEST(new TST_QmuTokenParser());
     ASSERT_TEST(new TST_VMeasurements());
+    ASSERT_TEST(new TST_QmuParserErrorMsg());
 
     return status;
 }

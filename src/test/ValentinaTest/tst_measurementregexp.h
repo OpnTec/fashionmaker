@@ -29,12 +29,12 @@
 #ifndef TST_MEASUREMENTREGEXP_H
 #define TST_MEASUREMENTREGEXP_H
 
-#include <QObject>
+#include "abstracttest.h"
 
 class QTranslator;
 class VTranslateMeasurements;
 
-class TST_MeasurementRegExp : public QObject
+class TST_MeasurementRegExp : public AbstractTest
 {
     Q_OBJECT
 public:
@@ -54,7 +54,6 @@ private:
     QPointer<QTranslator>   pmsTranslator;
     VTranslateMeasurements *trMs;
 
-    QString TranslationsPath() const;
     int     LoadTranslation(const QString &checkedSystem, const QString &checkedLocale);
     void    InitTrMs();
     void    CheckNames() const;
