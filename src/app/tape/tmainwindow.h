@@ -87,6 +87,7 @@ private slots:
     void SaveGender(int index);
     void SaveBirthDate(const QDate & date);
     void SaveNotes();
+    void SavePMSystem(int index);
     void ReadOnly(bool ro);
 
     void Remove();
@@ -138,12 +139,17 @@ private:
     int              formulaBaseHeight;
     VLockGuardPtr<char> lock;
     QSharedPointer<VTableSearch> search;
+    QLabel *labelGradationHeights;
+    QLabel *labelGradationSizes;
+    QLabel *labelPatternUnit;
 
     void SetupMenu();
     void InitWindow();
     void InitTable();
     void SetDecimals();
     void InitUnits();
+    void InitComboBoxUnits();
+    void InitGender(QComboBox *gender);
 
     void ShowUnits();
     void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
@@ -156,7 +162,7 @@ private:
 
     QTableWidgetItem *AddCell(const QString &text, int row, int column, int aligment, bool ok = true);
 
-    QComboBox *SetGradationList(const QString &label, const QStringList &list);
+    QComboBox *SetGradationList(QLabel *label, const QStringList &list);
     void       SetDefaultHeight(int value);
     void       SetDefaultSize(int value);
 

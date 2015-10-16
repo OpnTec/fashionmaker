@@ -40,8 +40,8 @@
  */
 
 const QString VVSTConverter::MeasurementMinVerStr = QStringLiteral("0.3.0");
-const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.4.0");
-const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/standard_measurements/v0.4.0.xsd");
+const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.4.1");
+const QString VVSTConverter::CurrentSchema        = QStringLiteral("://schema/standard_measurements/v0.4.1.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VVSTConverter::VVSTConverter(const QString &fileName)
@@ -89,6 +89,8 @@ QString VVSTConverter::XSDSchema(int ver) const
         case (0x000300):
             return QStringLiteral("://schema/standard_measurements/v0.3.0.xsd");
         case (0x000400):
+            return QStringLiteral("://schema/standard_measurements/v0.4.0.xsd");
+        case (0x000401):
             return CurrentSchema;
         default:
         {
@@ -113,6 +115,13 @@ void VVSTConverter::ApplyPatches()
                 V_FALLTHROUGH
             }
             case (0x000400):
+            {
+                ToV0_4_1();
+                const QString schema = XSDSchema(0x000401);
+                ValidateXML(schema, fileName);
+                V_FALLTHROUGH
+            }
+            case (0x000401):
                 break;
             default:
                 break;
@@ -242,6 +251,19 @@ QDomElement VVSTConverter::AddMV0_4_0(const QString &name, qreal value, qreal si
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::PM_SystemV0_4_1()
+{
+    QDomElement pm_system = createElement(QStringLiteral("pm_system"));
+    pm_system.appendChild(createTextNode(QStringLiteral("998")));
+
+    const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("size"));
+    QDomElement personal = nodeList.at(0).toElement();
+
+    QDomElement parent = personal.parentNode().toElement();
+    parent.insertBefore(pm_system, personal);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ToV0_4_0()
 {
     AddRootComment();
@@ -249,5 +271,13 @@ void VVSTConverter::ToV0_4_0()
     AddNewTagsForV0_4_0();
     RemoveTagsForV0_4_0();
     ConvertMeasurementsToV0_4_0();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ToV0_4_1()
+{
+    SetVersion(QStringLiteral("0.4.1"));
+    PM_SystemV0_4_1();
     Save();
 }

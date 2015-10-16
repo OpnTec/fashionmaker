@@ -40,8 +40,8 @@
  */
 
 const QString VVITConverter::MeasurementMinVerStr = QStringLiteral("0.2.0");
-const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.3.1");
-const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/individual_measurements/v0.3.1.xsd");
+const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.3.2");
+const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/individual_measurements/v0.3.2.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VVITConverter::VVITConverter(const QString &fileName)
@@ -91,6 +91,8 @@ QString VVITConverter::XSDSchema(int ver) const
         case (0x000300):
             return QStringLiteral("://schema/individual_measurements/v0.3.0.xsd");
         case (0x000301):
+            return QStringLiteral("://schema/individual_measurements/v0.3.1.xsd");
+        case (0x000302):
             return CurrentSchema;
         default:
         {
@@ -122,6 +124,13 @@ void VVITConverter::ApplyPatches()
                 V_FALLTHROUGH
             }
             case (0x000301):
+            {
+                ToV0_3_2();
+                const QString schema = XSDSchema(0x000302);
+                ValidateXML(schema, fileName);
+                V_FALLTHROUGH
+            }
+            case (0x000302):
                 break;
             default:
                 break;
@@ -236,6 +245,19 @@ void VVITConverter::GenderV0_3_1()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::PM_SystemV0_3_2()
+{
+    QDomElement pm_system = createElement(QStringLiteral("pm_system"));
+    pm_system.appendChild(createTextNode(QStringLiteral("998")));
+
+    const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("personal"));
+    QDomElement personal = nodeList.at(0).toElement();
+
+    QDomElement parent = personal.parentNode().toElement();
+    parent.insertBefore(pm_system, personal);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ToV0_3_0()
 {
     AddRootComment();
@@ -250,5 +272,13 @@ void VVITConverter::ToV0_3_1()
 {
     SetVersion(QStringLiteral("0.3.1"));
     GenderV0_3_1();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::ToV0_3_2()
+{
+    SetVersion(QStringLiteral("0.3.2"));
+    PM_SystemV0_3_2();
     Save();
 }

@@ -76,6 +76,9 @@ public:
     GenderType Gender() const;
     void    SetGender(const GenderType &gender);
 
+    QString PMSystem() const;
+    void    SetPMSystem(const QString &system);
+
     QString Email() const;
     void    SetEmail(const QString &text);
 
@@ -102,6 +105,7 @@ public:
     static const QString TagGivenName;
     static const QString TagBirthDate;
     static const QString TagGender;
+    static const QString TagPMSystem;
     static const QString TagEmail;
     static const QString TagReadOnly;
     static const QString TagMeasurement;
@@ -146,6 +150,8 @@ private:
     MeasurementsType ReadType() const;
 
     qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
+
+    QString ClearPMCode(const QString &code) const;
 };
 
 #endif // VMEASUREMENTS_H

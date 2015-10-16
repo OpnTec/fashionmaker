@@ -77,7 +77,6 @@ private:
 
     QGroupBox *LangGroup();
     void      SetLabelComboBox(const QStringList &list);
-    void      InitPMSystems(QComboBox *systemCombo);
     void      RetranslateUi();
 };
 

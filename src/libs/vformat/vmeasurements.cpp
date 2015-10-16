@@ -45,6 +45,7 @@ const QString VMeasurements::TagFamilyName       = QStringLiteral("family-name")
 const QString VMeasurements::TagGivenName        = QStringLiteral("given-name");
 const QString VMeasurements::TagBirthDate        = QStringLiteral("birth-date");
 const QString VMeasurements::TagGender           = QStringLiteral("gender");
+const QString VMeasurements::TagPMSystem         = QStringLiteral("pm_system");
 const QString VMeasurements::TagEmail            = QStringLiteral("email");
 const QString VMeasurements::TagReadOnly         = QStringLiteral("read-only");
 const QString VMeasurements::TagMeasurement      = QStringLiteral("m");
@@ -412,6 +413,21 @@ void VMeasurements::SetGender(const GenderType &gender)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VMeasurements::PMSystem() const
+{
+    return UniqueTagText(TagPMSystem, ClearPMCode(p998_S));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetPMSystem(const QString &system)
+{
+    if (not ReadOnly())
+    {
+        setTagText(TagPMSystem, ClearPMCode(system));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VMeasurements::Email() const
 {
     return UniqueTagText(TagEmail, "");
@@ -676,6 +692,10 @@ void VMeasurements::CreateEmptyStandardFile(Unit unit, int baseSize, int baseHei
     mUnit.appendChild(unitText);
     mElement.appendChild(mUnit);
 
+    QDomElement system = createElement(TagPMSystem);
+    system.appendChild(createTextNode(ClearPMCode(p998_S)));
+    mElement.appendChild(system);
+
     QDomElement size = createElement(TagSize);
     SetAttribute(size, AttrBase, QString().setNum(baseSize));
     mElement.appendChild(size);
@@ -713,6 +733,10 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     QDomElement mUnit = createElement(TagUnit);
     mUnit.appendChild(createTextNode(UnitsToStr(unit)));
     mElement.appendChild(mUnit);
+
+    QDomElement system = createElement(TagPMSystem);
+    system.appendChild(createTextNode(ClearPMCode(p998_S)));
+    mElement.appendChild(system);
 
     QDomElement personal = createElement(TagPersonal);
     personal.appendChild(createElement(TagFamilyName));
@@ -861,4 +885,16 @@ qreal VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool 
             return 0;
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VMeasurements::ClearPMCode(const QString &code) const
+{
+    QString clear = code;
+    const int index = clear.indexOf(QLatin1Char('p'));
+    if (index == 0)
+    {
+        clear.remove(0, 1);
+    }
+    return clear;
 }

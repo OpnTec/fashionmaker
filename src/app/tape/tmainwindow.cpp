@@ -73,7 +73,10 @@ TMainWindow::TMainWindow(QWidget *parent)
       comboBoxUnits(nullptr),
       formulaBaseHeight(0),
       lock(nullptr),
-      search()
+      search(),
+      labelGradationHeights(nullptr),
+      labelGradationSizes(nullptr),
+      labelPatternUnit(nullptr)
 {
     ui->setupUi(this);
     search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
@@ -118,6 +121,7 @@ void TMainWindow::RetranslateTable()
     {
         const int row = ui->tableWidget->currentRow();
         RefreshTable();
+        ShowUnits();
         ui->tableWidget->selectRow(row);
     }
 }
@@ -447,6 +451,49 @@ void TMainWindow::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+
+        if (mType == MeasurementsType::Standard)
+        {
+            ui->labelMType->setText(tr("Standard measurements"));
+            ui->labelBaseSizeValue->setText(QString().setNum(m->BaseSize()) + " " +
+                                            VDomDocument::UnitsToStr(m->MUnit(), true));
+            ui->labelBaseHeightValue->setText(QString().setNum(m->BaseHeight()) + " " +
+                                              VDomDocument::UnitsToStr(m->MUnit(), true));
+
+            labelGradationHeights = new QLabel(tr("Height: "));
+            labelGradationSizes = new QLabel(tr("Size: "));
+        }
+        else
+        {
+            ui->labelMType->setText(tr("Individual measurements"));
+
+            const qint32 index = ui->comboBoxGender->currentIndex();
+            ui->comboBoxGender->blockSignals(true);
+            ui->comboBoxGender->clear();
+            InitGender(ui->comboBoxGender);
+            ui->comboBoxGender->setCurrentIndex(index);
+            ui->comboBoxGender->blockSignals(false);
+        }
+
+        {
+            const qint32 index = ui->comboBoxPMSystem->currentIndex();
+            ui->comboBoxPMSystem->blockSignals(true);
+            ui->comboBoxPMSystem->clear();
+            InitPMSystems(ui->comboBoxPMSystem);
+            ui->comboBoxPMSystem->setCurrentIndex(index);
+            ui->comboBoxPMSystem->blockSignals(false);
+        }
+
+        {
+            labelPatternUnit = new QLabel(tr("Pattern unit:"));
+
+            const qint32 index = comboBoxUnits->currentIndex();
+            comboBoxUnits->blockSignals(true);
+            comboBoxUnits->clear();
+            InitComboBoxUnits();
+            comboBoxUnits->setCurrentIndex(index);
+            comboBoxUnits->blockSignals(false);
+        }
     }
 
     // remember to call base class implementation
@@ -672,6 +719,19 @@ void TMainWindow::SaveNotes()
     if (m->Notes() != ui->plainTextEditNotes->toPlainText())
     {
         m->SetNotes(ui->plainTextEditNotes->toPlainText());
+        MeasurementsWasSaved(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SavePMSystem(int index)
+{
+    QString system = ui->comboBoxPMSystem->itemData(index).toString();
+    system.remove(0, 1);// clear p
+
+    if (m->PMSystem() != system)
+    {
+        m->SetPMSystem(system);
         MeasurementsWasSaved(false);
     }
 }
@@ -1667,12 +1727,14 @@ void TMainWindow::InitWindow()
         const QStringList listHeights = VMeasurement::WholeListHeights(mUnit);
         const QStringList listSizes = VMeasurement::WholeListSizes(mUnit);
 
-        gradationHeights = SetGradationList(tr("Height: "), listHeights);
+        labelGradationHeights = new QLabel(tr("Height: "));
+        gradationHeights = SetGradationList(labelGradationHeights, listHeights);
         SetDefaultHeight(static_cast<int>(data->height()));
         connect(gradationHeights, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedHeight);
 
-        gradationSizes = SetGradationList(tr("Size: "), listSizes);
+        labelGradationSizes = new QLabel(tr("Size: "));
+        gradationSizes = SetGradationList(labelGradationSizes, listSizes);
         SetDefaultSize(static_cast<int>(data->size()));
         connect(gradationSizes, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
                 this, &TMainWindow::ChangedSize);
@@ -1729,9 +1791,8 @@ void TMainWindow::InitWindow()
         ui->lineEditGivenName->setText(m->GivenName());
         ui->lineEditFamilyName->setText(m->FamilyName());
 
-        ui->comboBoxGender->addItem(tr("unknown", "gender"), QVariant(static_cast<int>(GenderType::Unknown)));
-        ui->comboBoxGender->addItem(tr("male", "gender"), QVariant(static_cast<int>(GenderType::Male)));
-        ui->comboBoxGender->addItem(tr("female", "gender"), QVariant(static_cast<int>(GenderType::Female)));
+        ui->comboBoxGender->clear();
+        InitGender(ui->comboBoxGender);
         const qint32 index = ui->comboBoxGender->findData(static_cast<int>(m->Gender()));
         ui->comboBoxGender->setCurrentIndex(index);
 
@@ -1752,6 +1813,14 @@ void TMainWindow::InitWindow()
 
         connect(ui->toolButtonExpr, &QToolButton::clicked, this, &TMainWindow::Fx);
     }
+
+    ui->comboBoxPMSystem->setEnabled(true);
+    ui->comboBoxPMSystem->clear();
+    InitPMSystems(ui->comboBoxPMSystem);
+    const qint32 index = ui->comboBoxPMSystem->findData(QLatin1Char('p')+m->PMSystem());
+    ui->comboBoxPMSystem->setCurrentIndex(index);
+    connect(ui->comboBoxPMSystem, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &TMainWindow::SavePMSystem);
 
     connect(ui->lineEditFind, &QLineEdit::textEdited, this, &TMainWindow::Find);
     connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, &TMainWindow::FindPrevious);
@@ -1937,9 +2006,9 @@ QTableWidgetItem *TMainWindow::AddCell(const QString &text, int row, int column,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QComboBox *TMainWindow::SetGradationList(const QString &label, const QStringList &list)
+QComboBox *TMainWindow::SetGradationList(QLabel *label, const QStringList &list)
 {
-    ui->toolBarGradation->addWidget(new QLabel(label));
+    ui->toolBarGradation->addWidget(label);
 
     QComboBox *comboBox = new QComboBox;
     comboBox->addItems(list);
@@ -2253,6 +2322,8 @@ void TMainWindow::GUIReadOnly(bool ro)
         ui->lineEditEmail->setReadOnly(ro);
     }
 
+    ui->comboBoxPMSystem->setDisabled(ro);
+
     MeasurementReadOnly(ro);
 }
 
@@ -2521,12 +2592,11 @@ void TMainWindow::SetDecimals()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitUnits()
 {
-    ui->toolBarGradation->addWidget(new QLabel(tr("Pattern unit:")));
+    labelPatternUnit = new QLabel(tr("Pattern unit:"));
+    ui->toolBarGradation->addWidget(labelPatternUnit);
 
     comboBoxUnits = new QComboBox(this);
-    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Cm, true), QVariant(static_cast<int>(Unit::Cm)));
-    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Mm, true), QVariant(static_cast<int>(Unit::Mm)));
-    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Inch, true), QVariant(static_cast<int>(Unit::Inch)));
+    InitComboBoxUnits();
 
     // set default unit
     const qint32 indexUnit = comboBoxUnits->findData(static_cast<int>(pUnit));
@@ -2539,6 +2609,24 @@ void TMainWindow::InitUnits()
             &TMainWindow::PatternUnitChanged);
 
     ui->toolBarGradation->addWidget(comboBoxUnits);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitComboBoxUnits()
+{
+    SCASSERT(comboBoxUnits != nullptr);
+    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Cm, true), QVariant(static_cast<int>(Unit::Cm)));
+    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Mm, true), QVariant(static_cast<int>(Unit::Mm)));
+    comboBoxUnits->addItem(VDomDocument::UnitsToStr(Unit::Inch, true), QVariant(static_cast<int>(Unit::Inch)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitGender(QComboBox *gender)
+{
+    SCASSERT(gender != nullptr);
+    gender->addItem(tr("unknown", "gender"), QVariant(static_cast<int>(GenderType::Unknown)));
+    gender->addItem(tr("male", "gender"), QVariant(static_cast<int>(GenderType::Male)));
+    gender->addItem(tr("female", "gender"), QVariant(static_cast<int>(GenderType::Female)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

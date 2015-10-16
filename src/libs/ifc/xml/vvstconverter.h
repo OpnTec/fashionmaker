@@ -59,8 +59,10 @@ private:
     void RemoveTagsForV0_4_0();
     void ConvertMeasurementsToV0_4_0();
     QDomElement AddMV0_4_0(const QString &name, qreal value, qreal sizeIncrease, qreal heightIncrease);
+    void PM_SystemV0_4_1();
 
     void ToV0_4_0();
+    void ToV0_4_1();
 };
 
 #endif // VMEASUREMENTCONVERTER_H

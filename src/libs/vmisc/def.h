@@ -38,6 +38,8 @@
 
 #include "debugbreak.h"
 
+class QComboBox;
+
 #define SceneSize 50000
 #define DefPointRadius 1.5//mm
 
@@ -516,6 +518,8 @@ extern const QString p52_S;
 extern const QString p53_S;
 extern const QString p54_S;
 extern const QString p998_S;
+
+void InitPMSystems(QComboBox *systemCombo);
 
 // functions
 extern const QString sin_F;

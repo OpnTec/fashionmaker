@@ -27,8 +27,10 @@
  *************************************************************************/
 
 #include "def.h"
+#include "vabstractapplication.h"
+#include "../vpatterndb/vtranslatevars.h"
 
-#include <QApplication>
+#include <QComboBox>
 
 // Keep synchronize all names with initialization in VTranslateVars class!!!!!
 //measurements
@@ -965,4 +967,78 @@ QStringList AllGroupNames()
                                                     << ListGroupQ();
 
     return originalNames;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitPMSystems(QComboBox *systemCombo)
+{
+    QMap<QString, QString> systems;
+    systems.insert(qApp->TrVars()->PMSystemName(p0_S), p0_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p1_S), p1_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p2_S), p2_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p3_S), p3_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p4_S), p4_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p5_S), p5_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p6_S), p6_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p7_S), p7_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p8_S), p8_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p9_S), p9_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p10_S), p10_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p11_S), p11_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p12_S), p12_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p13_S), p13_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p14_S), p14_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p15_S), p15_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p16_S), p16_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p17_S), p17_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p18_S), p18_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p19_S), p19_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p20_S), p20_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p21_S), p21_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p22_S), p22_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p23_S), p23_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p24_S), p24_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p25_S), p25_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p26_S), p26_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p27_S), p27_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p28_S), p28_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p29_S), p29_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p30_S), p30_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p31_S), p31_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p32_S), p32_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p33_S), p33_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p34_S), p34_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p35_S), p35_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p36_S), p36_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p37_S), p37_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p38_S), p38_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p39_S), p39_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p40_S), p40_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p41_S), p41_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p42_S), p42_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p43_S), p43_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p44_S), p44_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p45_S), p45_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p46_S), p46_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p47_S), p47_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p48_S), p48_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p49_S), p49_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p50_S), p50_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p51_S), p51_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p52_S), p52_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p53_S), p53_S);
+    systems.insert(qApp->TrVars()->PMSystemName(p54_S), p54_S);
+
+// * The default option (blank field or 'None') should appear at the top of the list.
+// * The list should be sorted alphabetically so users can find their system easily.
+
+    SCASSERT(systemCombo != nullptr);
+    systemCombo->addItem(qApp->TrVars()->PMSystemName(p998_S), p998_S);
+
+    QMap<QString, QString>::const_iterator i = systems.constBegin();
+    while (i != systems.constEnd())
+    {
+        systemCombo->addItem(i.key(), i.value());
+        ++i;
+    }
 }
