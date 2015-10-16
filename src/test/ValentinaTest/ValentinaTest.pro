@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += testlib gui printsupport
+QT       += testlib gui printsupport xml xmlpatterns
 
 TARGET = ValentinaTests
 
@@ -46,7 +46,8 @@ SOURCES += \
     tst_measurementregexp.cpp \
     tst_tapecommandline.cpp \
     tst_valentinacommandline.cpp \
-    tst_qmutokenparser.cpp
+    tst_qmutokenparser.cpp \
+    tst_vmeasurements.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -60,7 +61,8 @@ HEADERS += \
     tst_measurementregexp.h \
     tst_tapecommandline.h \
     tst_valentinacommandline.h \
-    tst_qmutokenparser.h
+    tst_qmutokenparser.h \
+    tst_vmeasurements.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
@@ -123,6 +125,15 @@ CONFIG(debug, debug|release){
         }
     }
 }
+
+# VFormat static library (depend on VPatternDB, IFC)
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vformat/$${DESTDIR}/ -lvformat
+
+INCLUDEPATH += $$PWD/../../libs/vformat
+DEPENDPATH += $$PWD/../../libs/vformat
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/vformat.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vformat/$${DESTDIR}/libvformat.a
 
 #VPatternDB static library (depend on vgeometry, vmisc, VLayout)
 unix|win32: LIBS += -L$$OUT_PWD/../../libs/vpatterndb/$${DESTDIR} -lvpatterndb

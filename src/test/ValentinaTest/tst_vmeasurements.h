@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   qttestmainlambda.cpp
+ **  @file   tst_vmeasurements.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 3, 2015
+ **  @date   16 10, 2015
  **
  **  @brief
  **  @copyright
@@ -26,44 +26,21 @@
  **
  *************************************************************************/
 
-#include <QtTest>
+#ifndef TST_VMEASUREMENTS_H
+#define TST_VMEASUREMENTS_H
 
-#include "tst_vposter.h"
-#include "tst_vabstractdetail.h"
-#include "tst_vspline.h"
-#include "tst_nameregexp.h"
-#include "tst_vlayoutdetail.h"
-#include "tst_varc.h"
-#include "tst_measurementregexp.h"
-#include "tst_tapecommandline.h"
-#include "tst_valentinacommandline.h"
-#include "tst_qmutokenparser.h"
-#include "tst_vmeasurements.h"
+#include <QObject>
 
-int main(int argc, char** argv)
+class TST_VMeasurements : public QObject
 {
-    Q_INIT_RESOURCE(schema);
+    Q_OBJECT
+public:
+    explicit TST_VMeasurements(QObject *parent = nullptr);
 
-    QApplication app( argc, argv );// For QPrinter
+private slots:
+    void CreateEmptyStandardFile();
+    void CreateEmptyIndividualFile();
 
-    int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
-    {
-        status |= QTest::qExec(obj, argc, argv);
-        delete obj;
-    };
+};
 
-    ASSERT_TEST(new TST_VPoster());
-    ASSERT_TEST(new TST_VAbstractDetail());
-    ASSERT_TEST(new TST_VSpline());
-    ASSERT_TEST(new TST_NameRegExp());
-    ASSERT_TEST(new TST_VLayoutDetail());
-    ASSERT_TEST(new TST_VArc());
-    ASSERT_TEST(new TST_MeasurementRegExp());
-    ASSERT_TEST(new TST_TapeCommandLine());
-    ASSERT_TEST(new TST_ValentinaCommandLine());
-    ASSERT_TEST(new TST_QmuTokenParser());
-    ASSERT_TEST(new TST_VMeasurements());
-
-    return status;
-}
+#endif // TST_VMEASUREMENTS_H
