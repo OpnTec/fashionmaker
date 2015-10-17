@@ -46,20 +46,6 @@
     </message>
 </context>
 <context>
-    <name>Bina Abling</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Bunka Fashion College</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
     <name>CommunityPage</name>
     <message>
         <source>Server</source>
@@ -271,13 +257,6 @@
     <message>
         <source>delete pattern piece %1</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dennic Chunman Lo</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
     </message>
 </context>
 <context>
@@ -3152,104 +3131,6 @@
     </message>
 </context>
 <context>
-    <name>Donald H. McCunn</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Doris Ekern</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Dorothy Moore</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Dressmaking</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Dressmaking International</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>E. L. G. Gough</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Edward Minister &amp; Son, ed. R. L. Shep</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Elizabeth Friendship</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Elizabeth M. Allemong</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Esther Kaplan Pivnick</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>F. R. Morris</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Frances Grimble</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Frederick T. Croonberg</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
     <name>Functions</name>
     <message>
         <source>min</source>
@@ -3258,136 +3139,10 @@
     </message>
 </context>
 <context>
-    <name>Gareth Kershaw</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Gertrude Mason</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Gertrude Strickland</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Helen Joseph-Armstrong</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Injoo Kim and Mykyung Uh</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Jack Handford</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Jason MacLochlainn</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Jno. J. Mitchell</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Jo Barnfield and Andrew Richards</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Josephine F. Eddy and Elizabeth C. B. Wiley</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>K. Kimata</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Karen Morris</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Karla J. Shelton</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Lady Boutique</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Lori A. Knowles</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Louis Devere</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Lucia Mors de Castro</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>M. Rohr</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
     </message>
 </context>
 <context>
@@ -3483,13 +3238,6 @@
     <message>
         <source>Open with the base height. Valid values: %1cm.</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Mabel D. Erwin</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
     </message>
 </context>
 <context>
@@ -4418,20 +4166,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
 </context>
 <context>
-    <name>Marion S. Hillhouse and Evelyn A. Mansfield</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>May Loh and Diehl Lewis</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
     <name>Measurements</name>
     <message>
         <source>head_girth</source>
@@ -4515,13 +4249,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
 </context>
 <context>
-    <name>Ministry of consumer industry of the USSR</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
     <name>MoveDoubleLabel</name>
     <message>
         <source>move the first dart label</source>
@@ -4558,27 +4285,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     <message>
         <source>move spline path</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Natalie Bray</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Norah Waugh</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>P. Clement Brown</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
     </message>
 </context>
 <context>
@@ -4649,13 +4355,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     <message>
         <source>Count steps (0 - no limit)</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Philip Kunick</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
     </message>
 </context>
 <context>
@@ -4954,24 +4653,10 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
 </context>
 <context>
-    <name>R. I. Davis</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Sarah J. Doyle</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
     </message>
 </context>
 <context>
@@ -4986,20 +4671,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     <message>
         <source>save tool option</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>Sue S. Fukomoto</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
     </message>
 </context>
 <context>
@@ -5461,6 +5132,10 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>PM system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Create from existing ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5474,10 +5149,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export standard measurements not supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PM system:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5583,20 +5254,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Templates</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Teresa Gilewska</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>The Master Designer (Chicago, IL)</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
     </message>
 </context>
 <context>
@@ -5741,34 +5398,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VCommandLine</name>
     <message>
-        <source>Angle</source>
-        <translation type="unfinished">sudut</translation>
-    </message>
-    <message>
-        <source>Pattern making program.</source>
-        <translation type="unfinished">program pembuat pola</translation>
-    </message>
-    <message>
-        <source>Pattern file.</source>
-        <translation type="unfinished">Berkas pola.</translation>
-    </message>
-    <message>
-        <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The base filename of layout files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The path to output destination folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The destination folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Path to custom measure file (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5785,22 +5414,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The size value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The height value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
@@ -5809,19 +5422,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The page width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5831,6 +5432,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">sudut</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
@@ -5877,10 +5482,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5905,11 +5506,59 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Test option can be used with single input file only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export options can be used with single input file only.</source>
+        <source>The base filename of exported layout files. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base filename of layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to output destination folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The size value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The height value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5919,6 +5568,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Invalid gradation height value.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making program.</source>
+        <translation type="unfinished">program pembuat pola</translation>
+    </message>
+    <message>
+        <source>Pattern file.</source>
+        <translation type="unfinished">Berkas pola.</translation>
     </message>
 </context>
 <context>
@@ -6461,16 +6118,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VTranslateVars</name>
-    <message>
-        <source>min</source>
-        <comment>min of all arguments</comment>
-        <translation type="unfinished">minimal</translation>
-    </message>
-    <message>
-        <source>cm</source>
-        <comment>centimeter</comment>
-        <translation type="unfinished">cm</translation>
-    </message>
     <message>
         <source>Bunka</source>
         <comment>System name</comment>
@@ -7452,6 +7099,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>min</source>
+        <comment>min of all arguments</comment>
+        <translation type="unfinished">minimal</translation>
+    </message>
+    <message>
         <source>max</source>
         <comment>max of all arguments</comment>
         <translation type="unfinished"></translation>
@@ -7470,6 +7122,11 @@ Do you want to save your changes?</source>
         <source>fmod</source>
         <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <comment>centimeter</comment>
+        <translation type="unfinished">cm</translation>
     </message>
     <message>
         <source>mm</source>
@@ -7505,13 +7162,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>Valentina team</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
     <name>VisToolCurveIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
@@ -7541,20 +7191,6 @@ Do you want to save your changes?</source>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Winifred Aldrich</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
-    </message>
-</context>
-<context>
-    <name>ed. R. L. Shep</name>
-    <message>
-        <source>Author name</source>
-        <translation type="obsolete">Nama Pembuat</translation>
     </message>
 </context>
 <context>

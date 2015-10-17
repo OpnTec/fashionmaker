@@ -4582,6 +4582,10 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>PM system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Create from existing ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4595,10 +4599,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export standard measurements not supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PM system:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4841,22 +4841,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VCommandLine</name>
     <message>
-        <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The base filename of layout files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The path to output destination folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The destination folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Path to custom measure file (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4873,22 +4857,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The size value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The height value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
@@ -4897,19 +4865,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The page width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4969,18 +4925,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern making program.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5005,11 +4949,59 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Test option can be used with single input file only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export options can be used with single input file only.</source>
+        <source>The base filename of exported layout files. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base filename of layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to output destination folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The size value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The height value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5018,6 +5010,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid gradation height value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

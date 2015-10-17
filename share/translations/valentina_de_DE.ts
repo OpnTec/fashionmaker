@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="de">
 <context>
     <name>AddDet</name>
+    <message>
+        <source>Add detail</source>
+        <translation type="vanished">Detail hinzufügen</translation>
+    </message>
     <message>
         <source>add detail</source>
         <translation type="unfinished"></translation>
@@ -11,6 +15,10 @@
 <context>
     <name>AddPatternPiece</name>
     <message>
+        <source>Add pattern piece %1</source>
+        <translation type="vanished">Schnittteil %1 hinzufügen</translation>
+    </message>
+    <message>
         <source>add pattern piece %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18,12 +26,20 @@
 <context>
     <name>AddToCalc</name>
     <message>
+        <source>Add object</source>
+        <translation type="vanished">Objekt hinzufügen</translation>
+    </message>
+    <message>
         <source>add object</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddUnionDetails</name>
+    <message>
+        <source>Add union details</source>
+        <translation type="vanished">Vereinigung von Details hinzufügen</translation>
+    </message>
     <message>
         <source>add union details</source>
         <translation type="unfinished"></translation>
@@ -143,7 +159,7 @@
     </message>
     <message>
         <source>Interval:</source>
-        <translation>Intervall:</translation>
+        <translation>Interval:</translation>
     </message>
     <message>
         <source>Language</source>
@@ -159,7 +175,7 @@
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>Nach Sprache des Betriebssystems (%1)</translation>
+        <translation>Nach Sprache des Betriebssystemss (%1)</translation>
     </message>
     <message>
         <source>Default unit</source>
@@ -195,11 +211,11 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation>Schnittteilbearbeitung</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Löschen von Objekten bestätigen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Toolbar</source>
@@ -213,6 +229,10 @@
 <context>
     <name>DelTool</name>
     <message>
+        <source>Delete tool</source>
+        <translation type="vanished">Werkzeug löschen</translation>
+    </message>
+    <message>
         <source>delete tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -220,12 +240,20 @@
 <context>
     <name>DeleteDetail</name>
     <message>
+        <source>Delete tool</source>
+        <translation type="vanished">Werkzeug löschen</translation>
+    </message>
+    <message>
         <source>delete tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeletePatternPiece</name>
+    <message>
+        <source>Delete pattern piece %1</source>
+        <translation type="vanished">Schnittteil %1 löschen</translation>
+    </message>
     <message>
         <source>delete pattern piece %1</source>
         <translation type="unfinished"></translation>
@@ -254,6 +282,10 @@
         <translation>Webseite: %1</translation>
     </message>
     <message>
+        <source>Warning</source>
+        <translation type="vanished">Warnung</translation>
+    </message>
+    <message>
         <source>Cannot open your default browser</source>
         <translation>Konnte den Standard-Browser nicht starten</translation>
     </message>
@@ -274,7 +306,7 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Build revision:</translation>
+        <translation type="unfinished">Build revision:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
@@ -286,15 +318,19 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation>Gebaut auf %3 um %4</translation>
+        <translation type="unfinished">Gebaut auf %3 um %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation>Webseite: %1</translation>
+        <translation type="unfinished">Webseite: %1</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="obsolete">Warnung</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation>Konnte den Standard-Browser nicht starten</translation>
+        <translation type="unfinished">Konnte den Standard-Browser nicht starten</translation>
     </message>
 </context>
 <context>
@@ -304,8 +340,12 @@
         <translation>Länge</translation>
     </message>
     <message>
+        <source>Insert variable into the formula</source>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
+    </message>
+    <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation>Berechnete Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -340,16 +380,56 @@
         <translation>Linie vom ersten zu diesem Punkt zeigen</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+    </message>
+    <message>
         <source>Select second point of line</source>
         <translation>Zweiten Punkt der Linie auswählen</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Punkt in Entfernung auf der Linie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -367,6 +447,10 @@
         <translation>Radius</translation>
     </message>
     <message>
+        <source>Insert variable into the formula</source>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
+    </message>
+    <message>
         <source>Value of radius</source>
         <translation>Wert des Radius</translation>
     </message>
@@ -379,12 +463,20 @@
         <translation>Erster Winkel</translation>
     </message>
     <message>
+        <source>Insert variable into formula</source>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
+    </message>
+    <message>
         <source>Value of first angle</source>
         <translation>Wert des ersten Winkels</translation>
     </message>
     <message>
         <source>Second angle</source>
         <translation>Zweiter Winkel</translation>
+    </message>
+    <message>
+        <source>Insert marked variable into formula</source>
+        <translation type="vanished">Markierte Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of second angle</source>
@@ -397,6 +489,46 @@
     <message>
         <source>Select point of center of arc</source>
         <translation>Mittelpunkt des Bogens auswählen</translation>
+    </message>
+    <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables</source>
+        <translation type="vanished">Variablen</translation>
     </message>
     <message>
         <source>Error</source>
@@ -412,7 +544,11 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -435,43 +571,47 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation>Radius</translation>
+        <translation type="unfinished">Radius</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation>Wert des Radius</translation>
+        <translation type="unfinished">Wert des Radius</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>First angle</source>
-        <translation>Erster Winkel</translation>
-    </message>
-    <message>
-        <source>Value of first angle</source>
-        <translation>Wert des ersten Winkels</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation>Länge</translation>
-    </message>
-    <message>
-        <source>Arc length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>First angle</source>
+        <translation type="unfinished">Erster Winkel</translation>
+    </message>
+    <message>
+        <source>Value of first angle</source>
+        <translation type="unfinished">Wert des ersten Winkels</translation>
+    </message>
+    <message>
+        <source>Length</source>
+        <translation type="unfinished">Länge</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="unfinished">Bogenlänge</translation>
+    </message>
+    <message>
         <source>Center point</source>
-        <translation>Mittelpunkt</translation>
+        <translation type="unfinished">Mittelpunkt</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Mittelpunkt des Bogens auswählen</translation>
+        <translation type="unfinished">Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -487,11 +627,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Radius kann nicht negativ sein</translation>
+        <translation type="unfinished">Radius kann nicht negativ sein</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
@@ -505,8 +645,12 @@
         <translation>Länge</translation>
     </message>
     <message>
+        <source>Insert marked variable into the formula</source>
+        <translation type="vanished">Markierte Variable in die Formel einfügen</translation>
+    </message>
+    <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation>Wert der Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -549,6 +693,46 @@
         <translation>Zeige Linie vom Scheitelpunkt zu diesem Punkt </translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+    </message>
+    <message>
         <source>Select second point of angle</source>
         <translation>Scheitelpunkt auswählen</translation>
     </message>
@@ -558,11 +742,11 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Punkt entlang einer Winkelhalbierenden</translation>
+        <translation type="unfinished">Punkt entlang einer Winkelhalbierenden</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -604,6 +788,46 @@
         <translation>Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables</source>
+        <translation type="vanished">Variablen</translation>
+    </message>
+    <message>
         <source>Select axis point</source>
         <translation>Ausgangspunkt für Schnittachse auswählen</translation>
     </message>
@@ -617,7 +841,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -632,7 +856,11 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation>Wert der Länge</translation>
+    </message>
+    <message>
+        <source>_</source>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -647,16 +875,56 @@
         <translation>Bezeichnung des Punktes</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+    </message>
+    <message>
         <source>Segment an arc</source>
-        <translation>Einen Bogen unterteilen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Selected arc</source>
-        <translation>Ausgewählter Bogen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -671,7 +939,11 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation>Berechnete Länge</translation>
+    </message>
+    <message>
+        <source>_</source>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -690,12 +962,52 @@
         <translation>Bezeichnung des Punktes</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+    </message>
+    <message>
         <source>Segmenting a simple curve</source>
-        <translation>Eine einfache Kurve unterteilen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -710,7 +1022,11 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation>Wert der Länge</translation>
+    </message>
+    <message>
+        <source>_</source>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -729,12 +1045,52 @@
         <translation>Bezeichnung des Punktes</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+    </message>
+    <message>
         <source>Segment a curved path</source>
-        <translation>Eine Kurve unterteilen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -793,7 +1149,7 @@
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Tool für die Nahtzugabe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
@@ -812,11 +1168,15 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Variable in Formel einfügen</translation>
+        <translation>Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of first angle</source>
         <translation>Wert des ersten Winkels</translation>
+    </message>
+    <message>
+        <source>_</source>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -824,7 +1184,7 @@
     </message>
     <message>
         <source>Input data</source>
-        <translation>Eingabedaten</translation>
+        <translation>Eingangsgrößen</translation>
     </message>
     <message>
         <source>Size and height</source>
@@ -852,11 +1212,15 @@
     </message>
     <message>
         <source>Angle of lines</source>
-        <translation>Linienwinkel</translation>
+        <translation>Winkel einer Linie</translation>
     </message>
     <message>
         <source>Hide empty measurements</source>
-        <translation>Leere Maße ausblenden</translation>
+        <translation>Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables</source>
+        <translation type="vanished">Variablen</translation>
     </message>
     <message>
         <source>Double click for add to formula</source>
@@ -864,23 +1228,23 @@
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Größe</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Konfektion</translation>
     </message>
     <message>
         <source>Line length</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Linienlänge</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bogenlänge</translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kurvenlänge</translation>
     </message>
     <message>
         <source>Line Angle</source>
@@ -919,7 +1283,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation>Wert der Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -954,12 +1318,52 @@
         <translation>Linie vom ersten zu diesem Punkt zeigen</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables</source>
+        <translation type="vanished">Variablen</translation>
+    </message>
+    <message>
         <source>Point at distance and angle</source>
-        <translation>Punkt mit Abstand und Winkel</translation>
+        <translation type="unfinished">Punkt mit Abstand und Winkel</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -1006,15 +1410,15 @@
     </message>
     <message>
         <source>Perpendicular point along line</source>
-        <translation>Lotfußpunkt auf einer Linie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Base Point</source>
-        <translation>Basispunkt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1097,7 +1501,7 @@
     </message>
     <message>
         <source>%1 - cut curve path %2</source>
-        <translation>%1 - Kurvensegment %2</translation>
+        <translation>%1 - Pfadsegment %2</translation>
     </message>
     <message>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
@@ -1139,12 +1543,60 @@
         <translation>weitere Maße</translation>
     </message>
     <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Load another measurements table</source>
+        <translation type="vanished">Eine andere Maßtabelle laden</translation>
+    </message>
+    <message>
+        <source>Personal information</source>
+        <translation type="vanished">Persönliche Informationen</translation>
+    </message>
+    <message>
+        <source>Given name</source>
+        <translation type="vanished">Vorname</translation>
+    </message>
+    <message>
+        <source>Family name</source>
+        <translation type="vanished">Nachname</translation>
+    </message>
+    <message>
+        <source>Birth date</source>
+        <translation type="vanished">Geburtsdatum</translation>
+    </message>
+    <message>
+        <source>Sex</source>
+        <translation type="vanished">Geschlecht</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="vanished">Email</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
         <source>Name</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
         <source>The calculated value</source>
         <translation>Berechneter Wert</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <translation type="vanished">Basiswert</translation>
+    </message>
+    <message>
+        <source>In sizes</source>
+        <translation type="vanished">In Konfektionen</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="vanished">Beschreibung</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -1159,16 +1611,84 @@
         <translation>Länge</translation>
     </message>
     <message>
+        <source>Curves</source>
+        <translation type="vanished">Kurven</translation>
+    </message>
+    <message>
         <source>Curve</source>
         <translation>Kurve</translation>
+    </message>
+    <message>
+        <source>Arcs</source>
+        <translation type="vanished">Bögen</translation>
     </message>
     <message>
         <source>Arc</source>
         <translation>Bogen</translation>
     </message>
     <message>
+        <source>File error.</source>
+        <translation type="vanished">Dateifehler.</translation>
+    </message>
+    <message>
+        <source>male</source>
+        <translation type="vanished">männlich</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <translation type="vanished">weiblich</translation>
+    </message>
+    <message>
+        <source>Could not save GivenName</source>
+        <translation type="vanished">Vorname konnte nicht gespeichert werden</translation>
+    </message>
+    <message>
+        <source>Could not save FamilyName</source>
+        <translation type="vanished">Nachname konnte nicht gespeichert werden</translation>
+    </message>
+    <message>
+        <source>Could not save Email</source>
+        <translation type="vanished">Emailadresse konnte nicht gespeichert werden</translation>
+    </message>
+    <message>
+        <source>Could not save Sex</source>
+        <translation type="vanished">Geschlecht konnte nicht gespeichert werden</translation>
+    </message>
+    <message>
+        <source>Could not save BirthDate</source>
+        <translation type="vanished">Geburtsdatum konnte nicht gespeichert werden</translation>
+    </message>
+    <message>
+        <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
+        <translation type="vanished">Die Maße sind in einer anderen Einheit als das Schnittmuster. Dieses Schnittmuster setzt Maße in %1 vorraus</translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit)</source>
+        <translation type="vanished">Individuelle Maße (*.vit)</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="vanished">Datei öffnen</translation>
+    </message>
+    <message>
+        <source>Wrong units.</source>
+        <translation type="vanished">Falsche Maßeinheit.</translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst)</source>
+        <translation type="vanished">Standardmaße (*.vst)</translation>
+    </message>
+    <message>
+        <source>Name_%1</source>
+        <translation type="vanished">Name_%1</translation>
+    </message>
+    <message>
+        <source>Can&apos;t save measurement</source>
+        <translation type="vanished">Maß kann nicht gespeichert werden</translation>
+    </message>
+    <message>
         <source>Tables of Variables</source>
-        <translation>Tabelle der Variablen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lines angles</source>
@@ -1176,7 +1696,7 @@
     </message>
     <message>
         <source>Angle</source>
-        <translation>Winkel</translation>
+        <translation type="unfinished">Winkel</translation>
     </message>
     <message>
         <source>Lengths curves</source>
@@ -1196,7 +1716,7 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation>Radius</translation>
+        <translation type="unfinished">Radius</translation>
     </message>
     <message>
         <source>Angles arcs</source>
@@ -1204,11 +1724,11 @@
     </message>
     <message>
         <source>Formula</source>
-        <translation>Formel</translation>
+        <translation type="unfinished">Formel</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Details</translation>
+        <translation type="unfinished">Details</translation>
     </message>
     <message>
         <source>Move measurement up</source>
@@ -1220,7 +1740,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation type="unfinished">Name:</translation>
     </message>
     <message>
         <source>Calculated value:</source>
@@ -1232,7 +1752,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Description:</source>
@@ -1240,7 +1760,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Empty field.</source>
@@ -1248,15 +1768,15 @@
     </message>
     <message>
         <source>Empty field</source>
-        <translation>Leeres Eingabefeld</translation>
+        <translation type="unfinished">Leeres Eingabefeld</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Wert</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Auswertungsfehler: %1</translation>
+        <translation type="unfinished">Auswertungsfehler: %1</translation>
     </message>
     <message>
         <source>Increment_%1</source>
@@ -1265,6 +1785,77 @@
     <message>
         <source>Edit increment</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogIndividualMeasurements</name>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="vanished">individuelle Maße</translation>
+    </message>
+    <message>
+        <source>Pattern piece name</source>
+        <translation type="vanished">Name des Schnittteils</translation>
+    </message>
+    <message>
+        <source>Exist measurements</source>
+        <translation type="vanished">Vorhandene Maßtabelle</translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation type="vanished">Pfad:</translation>
+    </message>
+    <message>
+        <source>Given name:</source>
+        <translation type="vanished">Vorname:</translation>
+    </message>
+    <message>
+        <source>Family name:</source>
+        <translation type="vanished">Nachname:</translation>
+    </message>
+    <message>
+        <source>New measurements</source>
+        <translation type="vanished">Neue Maße</translation>
+    </message>
+    <message>
+        <source>Units:</source>
+        <translation type="vanished">Einheiten:</translation>
+    </message>
+    <message>
+        <source>Could not create measurements file</source>
+        <translation type="vanished">Die Maßdatei konnte nicht erstellt werden</translation>
+    </message>
+    <message>
+        <source>Please try again or change file</source>
+        <translation type="vanished">Bitte versuchen sie es noch einmal oder ändern sie den Datei</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="vanished">Dateifehler.</translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit)</source>
+        <translation type="vanished">Individuelle Maße (*.vit)</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="vanished">Datei öffnen</translation>
+    </message>
+    <message>
+        <source>Where save measurements?</source>
+        <translation type="vanished">Verzeichnis auswählen</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="vanished">Zentimeter</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="vanished">Millimeter</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="vanished">Zoll</translation>
     </message>
 </context>
 <context>
@@ -1294,31 +1885,31 @@
     <name>DialogLayoutSettings</name>
     <message>
         <source>Paper size</source>
-        <translation>Papiergröße</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Templates:</source>
-        <translation>Vorlagen:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Breite:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Höhe:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rotate workpiece</source>
-        <translation>Drehen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rotate by</source>
-        <translation>Drehen im Winkel von</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>degree</source>
-        <translation>Grad</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Creation options</source>
@@ -1326,7 +1917,7 @@
     </message>
     <message>
         <source>Shift length:</source>
-        <translation>Verschiebe Länge:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
@@ -1334,11 +1925,11 @@
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
-        <translation>Drei Gruppen: groß, mittel, klein</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Two groups: big, small</source>
-        <translation>Zwei Gruppen: groß, klein</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Descending area</source>
@@ -1346,23 +1937,23 @@
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Millimeter</translation>
+        <translation type="unfinished">Millimeter</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Zentimeter</translation>
+        <translation type="unfinished">Zentimeter</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Zoll</translation>
+        <translation type="unfinished">Zoll</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation>Pixel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create a layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Layout erstellen</translation>
     </message>
     <message>
         <source>Auto crop unused length</source>
@@ -1441,11 +2032,11 @@
     </message>
     <message>
         <source>Line between points</source>
-        <translation>Linie zwischen Punkten</translation>
+        <translation type="unfinished">Verbindungslinie zwischen zwei Punkten</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1484,7 +2075,7 @@
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Linienschnittpunkt</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1530,6 +2121,46 @@
         <translation>Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables</source>
+        <translation type="vanished">Variablen</translation>
+    </message>
+    <message>
         <source>Select second point of line</source>
         <translation>Zweiten Punkt der Linie auswählen</translation>
     </message>
@@ -1547,11 +2178,11 @@
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Zweiter Punkt der Linie</translation>
+        <translation type="unfinished">Zweiter Punkt der Linie</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -1566,7 +2197,7 @@
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="unfinished">Maße</translation>
     </message>
     <message>
         <source>Direct Height</source>
@@ -1663,6 +2294,33 @@
     </message>
 </context>
 <context>
+    <name>DialogMeasurements</name>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Please, choose pattern type.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Bitte einen Schnittmustertyp auswählen.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Graduation</source>
+        <translation type="vanished">Gradierung</translation>
+    </message>
+    <message>
+        <source>Use for creation pattern standard measurement table</source>
+        <translation type="vanished">Für die Erstellung eines Schnittmusters, die Standardmaßtabelle benutzen</translation>
+    </message>
+    <message>
+        <source>Individual</source>
+        <translation type="vanished">Individuell</translation>
+    </message>
+    <message>
+        <source>Use for creation pattern individual measurements</source>
+        <translation type="vanished">Für die Erstellung eines Schnittmusters individuelle Maße benutzen</translation>
+    </message>
+</context>
+<context>
     <name>DialogNewMeasurements</name>
     <message>
         <source>New measurement file</source>
@@ -1686,7 +2344,7 @@
     </message>
     <message>
         <source>Individual</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Individuell</translation>
     </message>
     <message>
         <source>Standard</source>
@@ -1694,42 +2352,42 @@
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Zentimeter</translation>
+        <translation type="unfinished">Zentimeter</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Millimeter</translation>
+        <translation type="unfinished">Millimeter</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Zoll</translation>
+        <translation type="unfinished">Zoll</translation>
     </message>
 </context>
 <context>
     <name>DialogNewPattern</name>
     <message>
         <source>Individual measurements</source>
-        <translation>Individuelle Maße</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Name des Schnittteils</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Einheiten:</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Zentimeter</translation>
+        <translation type="unfinished">Zentimeter</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Millimeter</translation>
+        <translation type="unfinished">Millimeter</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Zoll</translation>
+        <translation type="unfinished">Zoll</translation>
     </message>
 </context>
 <context>
@@ -1739,8 +2397,12 @@
         <translation>Länge</translation>
     </message>
     <message>
+        <source>Insert variable into formula</source>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
+    </message>
+    <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation>Wert der Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1771,24 +2433,64 @@
         <translation>Linie vom ersten zu diesem Punkt zeigen</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+    </message>
+    <message>
         <source>Select second point of line</source>
         <translation>Zweiten Punkt der Linie auswählen</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
-        <translation>Punkt auf einer Normalen</translation>
+        <translation type="unfinished">Punkt auf einer Normalen</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Erster Punkt der Linie</translation>
+        <translation type="unfinished">Erster Punkt der Linie</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Zweiter Punkt der Linie</translation>
+        <translation type="unfinished">Zweiter Punkt der Linie</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -1973,7 +2675,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="unfinished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Tangent point</source>
@@ -1981,11 +2683,11 @@
     </message>
     <message>
         <source>Arc</source>
-        <translation>Bogen</translation>
+        <translation type="unfinished">Bogen</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Mittelpunkt des Bogens auswählen</translation>
+        <translation type="unfinished">Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
         <source>Take</source>
@@ -2004,15 +2706,15 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation>Radius</translation>
+        <translation type="unfinished">Radius</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="unfinished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Center of the circle</source>
@@ -2020,7 +2722,7 @@
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Mittelpunkt des Bogens auswählen</translation>
+        <translation type="unfinished">Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
         <source>Tangent point</source>
@@ -2040,11 +2742,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Radius kann nicht negativ sein</translation>
+        <translation type="unfinished">Radius kann nicht negativ sein</translation>
     </message>
 </context>
 <context>
@@ -2052,6 +2754,10 @@
     <message>
         <source>Radius</source>
         <translation>Radius</translation>
+    </message>
+    <message>
+        <source>Insert variable into formula</source>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
     </message>
     <message>
         <source>Value of radius</source>
@@ -2082,12 +2788,52 @@
         <translation>Ende der Linie</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula.</source>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein.</translation>
+    </message>
+    <message>
         <source>Select second point of line</source>
         <translation>Zweiten Punkt der Linie auswählen</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation>Laufender Schnittpunkt auf Kreisbogen</translation>
+        <translation type="unfinished">Laufender Schnittpunkt auf Kreisbogen</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -2133,7 +2879,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="unfinished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>First arc</source>
@@ -2141,7 +2887,7 @@
     </message>
     <message>
         <source>Selected arc</source>
-        <translation>Ausgewählter Bogen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Second arc</source>
@@ -2168,7 +2914,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Radius of the second circle</source>
@@ -2176,7 +2922,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="unfinished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Center of the first circle</source>
@@ -2184,7 +2930,7 @@
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Mittelpunkt des Bogens auswählen</translation>
+        <translation type="unfinished">Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
         <source>Center of the second circle</source>
@@ -2208,11 +2954,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Radius kann nicht negativ sein</translation>
+        <translation type="unfinished">Radius kann nicht negativ sein</translation>
     </message>
 </context>
 <context>
@@ -2227,7 +2973,7 @@
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pfad:</translation>
     </message>
     <message>
         <source>File format:</source>
@@ -2246,7 +2992,7 @@
     <name>DialogSaveLayout</name>
     <message>
         <source>Name conflict</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Namenskonflikt</translation>
     </message>
     <message>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
@@ -2262,27 +3008,27 @@
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Svg Dateien (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PDF Dateien (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bilddateien (*.png)</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PS-Dateien (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">EPS Dateien (*.eps)</translation>
     </message>
     <message>
         <source>DXF files (*.dxf)</source>
@@ -2312,8 +3058,12 @@
         <translation>Länge</translation>
     </message>
     <message>
+        <source>Insert variable into formula</source>
+        <translation type="vanished">Variable in die Formel einfügen</translation>
+    </message>
+    <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation>Wert der Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2344,6 +3094,46 @@
         <translation>Zeige linie vom ersten punkt zu diesem Punkt</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Eingangsgrößen</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Konfektion und Größe</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Maße</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">weitere Maße</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Linienlängen</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Bogenlängen</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Kurvenlängen</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Winkel einer Linie</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Unbestückte Größen ausblenden</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Variablen - Doppelklick fügt die Variable in die Formel ein</translation>
+    </message>
+    <message>
         <source>Select first point of line</source>
         <translation>Ersten Punkt der Linie auswählen</translation>
     </message>
@@ -2353,11 +3143,11 @@
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Spezieller Punkt an der Schulter</translation>
+        <translation type="unfinished">Spezieller Punkt an der Schulter</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -2427,11 +3217,11 @@
     </message>
     <message>
         <source>Simple curve</source>
-        <translation>Einfache Kurve</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2474,7 +3264,18 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogStandardMeasurements</name>
+    <message>
+        <source>Pattern piece name</source>
+        <translation type="vanished">Name des Schnittteils</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="vanished">Dateifehler.</translation>
     </message>
 </context>
 <context>
@@ -2493,7 +3294,27 @@
     </message>
     <message>
         <source>Value</source>
-        <translation>Wert</translation>
+        <translation>Berechneter Wert</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="vanished">Größe</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="vanished">Konfektion</translation>
+    </message>
+    <message>
+        <source>Line length</source>
+        <translation type="vanished">Linienlänge</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="vanished">Bogenlänge</translation>
+    </message>
+    <message>
+        <source>Curve length</source>
+        <translation type="vanished">Kurvenlänge</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
@@ -2501,11 +3322,11 @@
     </message>
     <message>
         <source>First point</source>
-        <translation>Erster Punkt</translation>
+        <translation type="unfinished">Erster Punkt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Zweiter Punkt</translation>
+        <translation type="unfinished">Zweiter Punkt</translation>
     </message>
 </context>
 <context>
@@ -2560,7 +3381,7 @@
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Zweiter Punkt der Linie</translation>
+        <translation type="unfinished">Zweiter Punkt der Linie</translation>
     </message>
 </context>
 <context>
@@ -2575,7 +3396,7 @@
     </message>
     <message>
         <source>First point of angle</source>
-        <translation>Punkt der ersten Schenkelgeraden</translation>
+        <translation type="unfinished">Punkt der ersten Schenkelgeraden</translation>
     </message>
     <message>
         <source>Second base point</source>
@@ -2583,7 +3404,7 @@
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation>Scheitel des Winkels</translation>
+        <translation type="unfinished">Scheitel des Winkels</translation>
     </message>
     <message>
         <source>First dart point</source>
@@ -2591,7 +3412,7 @@
     </message>
     <message>
         <source>Third point of angle</source>
-        <translation>Punkt der zweiten Schenkelgeraden</translation>
+        <translation type="unfinished">Punkt der zweiten Schenkelgeraden</translation>
     </message>
     <message>
         <source>Second dart point</source>
@@ -2599,7 +3420,7 @@
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation>Zeige Linie vom Scheitelpunkt zu diesem Punkt </translation>
+        <translation type="unfinished">Zeige Linie vom Scheitelpunkt zu diesem Punkt </translation>
     </message>
     <message>
         <source>Third dart point</source>
@@ -2660,6 +3481,22 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Soll die Details wirklich vereinigt werden?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <source>Select first point</source>
+        <translation type="vanished">Ersten Punkt auswählen</translation>
+    </message>
+    <message>
+        <source>Select second point</source>
+        <translation type="vanished">Zweiten Punkt auswählen</translation>
+    </message>
+    <message>
+        <source>Select another second point</source>
+        <translation type="vanished">Einen anderen zweiten Punkt auswählen</translation>
+    </message>
+    <message>
+        <source>Select detail</source>
+        <translation type="vanished">Detail auswählen</translation>
+    </message>
+    <message>
         <source>Union tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2689,6 +3526,134 @@
     </message>
 </context>
 <context>
+    <name>Functions</name>
+    <message>
+        <source>sin</source>
+        <comment>sine function</comment>
+        <translation type="vanished">sin</translation>
+    </message>
+    <message>
+        <source>cos</source>
+        <comment>cosine function</comment>
+        <translation type="vanished">cos</translation>
+    </message>
+    <message>
+        <source>tan</source>
+        <comment>tangens function</comment>
+        <translation type="vanished">tan</translation>
+    </message>
+    <message>
+        <source>asin</source>
+        <comment>arcus sine function</comment>
+        <translation type="vanished">asin</translation>
+    </message>
+    <message>
+        <source>acos</source>
+        <comment>arcus cosine function</comment>
+        <translation type="vanished">acos</translation>
+    </message>
+    <message>
+        <source>atan</source>
+        <comment>arcus tangens function</comment>
+        <translation type="vanished">atan</translation>
+    </message>
+    <message>
+        <source>sinh</source>
+        <comment>hyperbolic sine function</comment>
+        <translation type="vanished">sinh</translation>
+    </message>
+    <message>
+        <source>cosh</source>
+        <comment>hyperbolic cosine</comment>
+        <translation type="vanished">cosh</translation>
+    </message>
+    <message>
+        <source>tanh</source>
+        <comment>hyperbolic tangens function</comment>
+        <translation type="vanished">tanh</translation>
+    </message>
+    <message>
+        <source>asinh</source>
+        <comment>hyperbolic arcus sine function</comment>
+        <translation type="vanished">asinh</translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus tangens function</comment>
+        <translation type="vanished">acosh</translation>
+    </message>
+    <message>
+        <source>atanh</source>
+        <comment>hyperbolic arcur tangens function</comment>
+        <translation type="vanished">atanh</translation>
+    </message>
+    <message>
+        <source>log2</source>
+        <comment>logarithm to the base 2</comment>
+        <translation type="vanished">log2</translation>
+    </message>
+    <message>
+        <source>log10</source>
+        <comment>logarithm to the base 10</comment>
+        <translation type="vanished">log10</translation>
+    </message>
+    <message>
+        <source>log</source>
+        <comment>logarithm to the base 10</comment>
+        <translation type="vanished">log</translation>
+    </message>
+    <message>
+        <source>ln</source>
+        <comment>logarithm to base e (2.71828...)</comment>
+        <translation type="vanished">ln</translation>
+    </message>
+    <message>
+        <source>exp</source>
+        <comment>e raised to the power of x</comment>
+        <translation type="vanished">exp</translation>
+    </message>
+    <message>
+        <source>sqrt</source>
+        <comment>square root of a value</comment>
+        <translation type="vanished">sqrt</translation>
+    </message>
+    <message>
+        <source>sign</source>
+        <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
+        <translation type="vanished">sign</translation>
+    </message>
+    <message>
+        <source>rint</source>
+        <comment>round to nearest integer</comment>
+        <translation type="vanished">rint</translation>
+    </message>
+    <message>
+        <source>abs</source>
+        <comment>absolute value</comment>
+        <translation type="vanished">abs</translation>
+    </message>
+    <message>
+        <source>min</source>
+        <comment>min of all arguments</comment>
+        <translation type="vanished">min</translation>
+    </message>
+    <message>
+        <source>max</source>
+        <comment>max of all arguments</comment>
+        <translation type="vanished">max</translation>
+    </message>
+    <message>
+        <source>sum</source>
+        <comment>sum of all arguments</comment>
+        <translation type="vanished">sum</translation>
+    </message>
+    <message>
+        <source>avg</source>
+        <comment>mean value of all arguments</comment>
+        <translation type="vanished">avg</translation>
+    </message>
+</context>
+<context>
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
@@ -2699,27 +3664,27 @@
     <name>MApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Fehler beim Parsen der Datei. Das Programm wird geschlossen.</translation>
+        <translation type="unfinished">Fehler beim Parsen der Datei. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Fehler - unbekannte Id. Fas Programm wird geschlossen.</translation>
+        <translation type="unfinished">Fehler - unbekannte Id. Fas Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
-        <translation>Fehler - Wert kann nicht konvertiert werden. Das Programm wird geschlossen.</translation>
+        <translation type="unfinished">Fehler - Wert kann nicht konvertiert werden. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation>Fehler - leerer Parameter. Das Programm wird geschlossen.</translation>
+        <translation type="unfinished">Fehler - leerer Parameter. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Fehler - falsche Id. Das Programm wird geschlossen.</translation>
+        <translation type="unfinished">Fehler - falsche Id. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation>Etwas ist schiefgegangen!</translation>
+        <translation type="unfinished">Etwas ist schiefgegangen!</translation>
     </message>
     <message>
         <source>Parser error: %1. Program will be terminated.</source>
@@ -2825,6 +3790,10 @@
         <translation>Punkt in einer Distanz auf einer Linie</translation>
     </message>
     <message>
+        <source>...</source>
+        <translation type="vanished">...</translation>
+    </message>
+    <message>
         <source>Tools for creating lines.</source>
         <translation>Werkzeuge zur Linienerzeugung.</translation>
     </message>
@@ -2921,6 +3890,10 @@
         <translation>Neues Schnittmuster erstellen</translation>
     </message>
     <message>
+        <source>Ctrl+N</source>
+        <translation type="vanished">Strg+N</translation>
+    </message>
+    <message>
         <source>Open</source>
         <translation>Öffnen</translation>
     </message>
@@ -2945,12 +3918,20 @@
         <translation>Schnittmuster speichern</translation>
     </message>
     <message>
+        <source>Ctrl+S</source>
+        <translation type="vanished">Strg+S</translation>
+    </message>
+    <message>
         <source>Save &amp;As...</source>
         <translation>Speichern &amp;unter...</translation>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
         <translation>Speichere ungesichertes Schnittmuster</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+S</source>
+        <translation type="vanished">Strg+Umschalt+S</translation>
     </message>
     <message>
         <source>Draw</source>
@@ -2961,12 +3942,20 @@
         <translation>Zeichnenmodus</translation>
     </message>
     <message>
+        <source>Ctrl+W</source>
+        <translation type="vanished">Strg+W</translation>
+    </message>
+    <message>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
         <source>Details mode</source>
         <translation>Detailmodus</translation>
+    </message>
+    <message>
+        <source>Ctrl+E</source>
+        <translation type="vanished">Strg+E</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -2981,6 +3970,10 @@
         <translation>Neues Schnittteil hinzufügen</translation>
     </message>
     <message>
+        <source>Ctrl+Shift+N</source>
+        <translation type="vanished">Strg+Umschalt+N</translation>
+    </message>
+    <message>
         <source>Change the label of pattern piece</source>
         <translation>Label des Schnittteils ändern</translation>
     </message>
@@ -2993,8 +3986,28 @@
         <translation>Variablentabellen</translation>
     </message>
     <message>
+        <source>Ctrl+T</source>
+        <translation type="vanished">Strg+T</translation>
+    </message>
+    <message>
         <source>History</source>
         <translation>Chronik</translation>
+    </message>
+    <message>
+        <source>Ctrl+H</source>
+        <translation type="vanished">Strg+H</translation>
+    </message>
+    <message>
+        <source>Export pattern (layout)</source>
+        <translation type="vanished">Schnittmuster-Layout exportieren...</translation>
+    </message>
+    <message>
+        <source>Create layout</source>
+        <translation type="vanished">Layout erstellen</translation>
+    </message>
+    <message>
+        <source>Ctrl+L</source>
+        <translation type="vanished">Strg+L</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -3011,6 +4024,10 @@
     <message>
         <source>Exit the application</source>
         <translation>Programm beenden</translation>
+    </message>
+    <message>
+        <source>Ctrl+Q</source>
+        <translation type="vanished">Strg+Q</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -3049,6 +4066,10 @@
         <translation>In Ansicht einpassen</translation>
     </message>
     <message>
+        <source>Ctrl+=</source>
+        <translation type="vanished">Ctrl+=</translation>
+    </message>
+    <message>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
@@ -3079,6 +4100,15 @@
     <message>
         <source>Pattern piece %1</source>
         <translation>Schnittteil %1</translation>
+    </message>
+    <message>
+        <source>Individual measurements is under development</source>
+        <translation type="vanished">Individuelle Maße befindet sich noch in Entwicklung</translation>
+    </message>
+    <message>
+        <source>There is no way create individual measurements file independent on the pattern file.
+For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
+        <translation type="vanished">Es gibt aktuell noch keine Möglichkeit, individuelle Körpermaße mit in der Schnittmusterdatei abzuspeichern. Um das Schnittmuster später erfolgreich wieder laden zu können muss zusätzlich die Datei mit den individuellen Maßen bereitgehalten werden. Fortfahren?</translation>
     </message>
     <message>
         <source>Select point</source>
@@ -3169,6 +4199,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>/pattern.val</source>
+        <translation type="vanished">/schnittmuster.val</translation>
+    </message>
+    <message>
         <source>Save as</source>
         <translation>Speichern als</translation>
     </message>
@@ -3197,6 +4231,10 @@
         <translation>Fehler falsche Id.</translation>
     </message>
     <message>
+        <source>Critical error!</source>
+        <translation type="vanished">Schwerwiegender Fehler!</translation>
+    </message>
+    <message>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Fehler beim Auswerten der Datei  (std::bad_alloc).</translation>
     </message>
@@ -3211,6 +4249,10 @@
     <message>
         <source>untitled.val</source>
         <translation>unbenannt.val</translation>
+    </message>
+    <message>
+        <source>Unsaved change</source>
+        <translation type="vanished">Ungespeicherte Änderungen</translation>
     </message>
     <message>
         <source>The pattern has been modified.
@@ -3263,6 +4305,14 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Zuletzt geöffnete Dateien laden?</translation>
     </message>
     <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
+        <translation type="vanished">Die Maßangaben-Datei &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</translation>
+    </message>
+    <message>
+        <source>could not be found. Do you want to update the file location</source>
+        <translation type="vanished">konnte nicht gefunden werden. Soll der Dateipfad aktualisiert werden?</translation>
+    </message>
+    <message>
         <source>Standard measurements (*.vst)</source>
         <translation>Standardmaße (*.vst)</translation>
     </message>
@@ -3272,7 +4322,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Spezieller Punkt an der Schulter</translation>
+        <translation type="unfinished">Spezieller Punkt an der Schulter</translation>
     </message>
     <message>
         <source>Triangle tool</source>
@@ -3280,7 +4330,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Point at intersection of arc and line</source>
-        <translation>Laufender Schnittpunkt auf Kreisbogen</translation>
+        <translation type="unfinished">Laufender Schnittpunkt auf Kreisbogen</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
@@ -3292,19 +4342,19 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Simple curve</source>
-        <translation>Einfache Kurve</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Curved path</source>
-        <translation>Gekrümmter Pfad</translation>
+        <translation type="unfinished">Pfad</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation>Einfache Kurve unterteilen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation>Gekrümmten Pfad unterteilen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
@@ -3312,7 +4362,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Segment an arc</source>
-        <translation>Einen Bogen unterteilen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
@@ -3320,7 +4370,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Tool für die Nahtzugabe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -3328,7 +4378,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Werkzeugleiste</translation>
     </message>
     <message>
         <source>Last Tool</source>
@@ -3360,7 +4410,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Create a layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Layout erstellen</translation>
     </message>
     <message>
         <source>Show Curve Details</source>
@@ -3655,12 +4705,36 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Svg files (*.svg)</source>
+        <translation type="obsolete">Svg Dateien (*.svg)</translation>
+    </message>
+    <message>
+        <source>PDF files (*.pdf)</source>
+        <translation type="obsolete">PDF Dateien (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Images (*.png)</source>
+        <translation type="obsolete">Bilddateien (*.png)</translation>
+    </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="obsolete">Wavefront OBJ (*.obj)</translation>
+    </message>
+    <message>
+        <source>PS files (*.ps)</source>
+        <translation type="obsolete">PS-Dateien (*.ps)</translation>
+    </message>
+    <message>
+        <source>EPS files (*.eps)</source>
+        <translation type="obsolete">EPS Dateien (*.eps)</translation>
+    </message>
+    <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler beim anlegen von Datei &apos;%1&apos;! &quot;%2&apos;</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schwerwiegender Fehler!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -3708,6 +4782,275 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
 </context>
 <context>
+    <name>Measurements</name>
+    <message>
+        <source>head_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">kopf_umfang</translation>
+    </message>
+    <message>
+        <source>neck_base_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">hals_umfang</translation>
+    </message>
+    <message>
+        <source>shoulder_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">schulter_breite</translation>
+    </message>
+    <message>
+        <source>bust_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">brust_umfang</translation>
+    </message>
+    <message>
+        <source>waist_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">taillen_umfang</translation>
+    </message>
+    <message>
+        <source>hip_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">hüft_umfang</translation>
+    </message>
+    <message>
+        <source>back_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">ruecken_breite</translation>
+    </message>
+    <message>
+        <source>crotch_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">taille_schritt_taille</translation>
+    </message>
+    <message>
+        <source>rise_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">leib_höhe</translation>
+    </message>
+    <message>
+        <source>upper_arm_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">oberarm_umfang</translation>
+    </message>
+    <message>
+        <source>wrist_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">handgelenk_umfang</translation>
+    </message>
+    <message>
+        <source>arm_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">arm_länge</translation>
+    </message>
+    <message>
+        <source>hand_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">hand_umfang</translation>
+    </message>
+    <message>
+        <source>thigh_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">oberschenkel_umfang</translation>
+    </message>
+    <message>
+        <source>knee_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">knie_umfang</translation>
+    </message>
+    <message>
+        <source>calf_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">waden_umfang</translation>
+    </message>
+    <message>
+        <source>ankle_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">knöchel_umfang</translation>
+    </message>
+    <message>
+        <source>hip_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">hüft_höhe</translation>
+    </message>
+    <message>
+        <source>crotch_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">schritt_laenge</translation>
+    </message>
+    <message>
+        <source>front_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">vordere_taillen_laenge</translation>
+    </message>
+</context>
+<context>
+    <name>MeasurementsDescriptions</name>
+    <message>
+        <source>Around Neck at base</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Halsumfang am Halsansatz gemessen</translation>
+    </message>
+    <message>
+        <source>Around fullest part of Bust, parallel to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Auch: Oberweite. Um die stärkste Brustpartie gemessen, parallel zum Boden.</translation>
+    </message>
+    <message>
+        <source>Around Hip, parallel to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Die kräftigste Hüftpartie, parallel zum Boden gemessen</translation>
+    </message>
+    <message>
+        <source>Across Back Chest, from armfold to armfold</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Waagerecht von Armansatz zu Armansatz messen. Wichtig: eine lockere, aufrechte Haltung.</translation>
+    </message>
+    <message>
+        <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Von vorne ab der unteren Kante des fixierten Taillenbandes bis hinten zur unteren Kante des Taillenbandesge messen. Dabei das Maßband zwischen den Beinen durchführen und eng am Körper messen</translation>
+    </message>
+    <message>
+        <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Auf einem harten Untergrund sitzend seitlich von Taille senkrecht abwärts zum Sitzhöcker gemessen.</translation>
+    </message>
+    <message>
+        <source>Around UpperArm</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Um die stärkste Partie des Oberarms gemessen. Den stärkeren Arm angeben.</translation>
+    </message>
+    <message>
+        <source>ShoulderTip to Wrist, with elbow bent and hand on hip</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Vom Schulteransatz bis zum Handgelenk, Ellenbogen angewinkelt und Hand auf der Hüfte</translation>
+    </message>
+    <message>
+        <source>Around Thigh</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Um die kräftigeste Oberschenkelpartie gemessen</translation>
+    </message>
+    <message>
+        <source>Around Calf</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Um die kräftigste Wadenpartie gemessen</translation>
+    </message>
+    <message>
+        <source>Crotch to Floor along inside leg</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Vom Schritt innen bis zum Boden gemessen</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>Full measurement description</comment>
+        <translation type="obsolete">Konfektion</translation>
+    </message>
+    <message>
+        <source>The distance from the base of the neck to the waist side front (waist length in the front)</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Gemessen vom seitlichen Halsansatz über die Brustspitze bis zur Unterkante des Taillenbandes</translation>
+    </message>
+</context>
+<context>
+    <name>MeasurementsFullNames</name>
+    <message>
+        <source>Head girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Kopfumfang</translation>
+    </message>
+    <message>
+        <source>Bust girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Brustumfang</translation>
+    </message>
+    <message>
+        <source>Waist girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Taillenunfang</translation>
+    </message>
+    <message>
+        <source>Hip girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Hüftumfang</translation>
+    </message>
+    <message>
+        <source>Back Chest width</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Rückenbreite</translation>
+    </message>
+    <message>
+        <source>Crotch length</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Taille-Schritt-Taille</translation>
+    </message>
+    <message>
+        <source>Rise height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Leibhöhe</translation>
+    </message>
+    <message>
+        <source>Upperarm Girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Oberarmumfang</translation>
+    </message>
+    <message>
+        <source>Wrist girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Handgelenkumfang</translation>
+    </message>
+    <message>
+        <source>Arm length</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Armlänge</translation>
+    </message>
+    <message>
+        <source>Hand girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Handumfang</translation>
+    </message>
+    <message>
+        <source>Thigh girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Oberschenkelumfang</translation>
+    </message>
+    <message>
+        <source>Knee girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Knieumfang</translation>
+    </message>
+    <message>
+        <source>Calf girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Wadenumfang</translation>
+    </message>
+    <message>
+        <source>Ankle girth</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Knöchelumfang</translation>
+    </message>
+    <message>
+        <source>Hip height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Hüfthöhe</translation>
+    </message>
+    <message>
+        <source>Crotch height/Inseam</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Schrittlänge</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>Full measurement name</comment>
+        <translation type="obsolete">Konfektion</translation>
+    </message>
+    <message>
+        <source>Front waist length</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Vordere Taillenlänge</translation>
+    </message>
+</context>
+<context>
     <name>MoveDoubleLabel</name>
     <message>
         <source>move the first dart label</source>
@@ -3721,12 +5064,20 @@ Sollen die Änderungen gespeichert werden?</translation>
 <context>
     <name>MoveLabel</name>
     <message>
+        <source>Move point label</source>
+        <translation type="vanished">Punkt-Bezeichner verschieben</translation>
+    </message>
+    <message>
         <source>move point label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSPoint</name>
+    <message>
+        <source>Move single point</source>
+        <translation type="vanished">Punkt verschieben</translation>
+    </message>
     <message>
         <source>move single point</source>
         <translation type="unfinished"></translation>
@@ -3735,12 +5086,20 @@ Sollen die Änderungen gespeichert werden?</translation>
 <context>
     <name>MoveSpline</name>
     <message>
+        <source>Move spline</source>
+        <translation type="vanished">Kurve bearbeiten</translation>
+    </message>
+    <message>
         <source>move spline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSplinePath</name>
+    <message>
+        <source>Move spline path</source>
+        <translation type="vanished">Pfad bearbeiten</translation>
+    </message>
     <message>
         <source>move spline path</source>
         <translation type="unfinished"></translation>
@@ -3817,6 +5176,24 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
 </context>
 <context>
+    <name>PostfixOperators</name>
+    <message>
+        <source>cm</source>
+        <comment>centimeter</comment>
+        <translation type="vanished">cm</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <comment>millimeter</comment>
+        <translation type="vanished">mm</translation>
+    </message>
+    <message>
+        <source>in</source>
+        <comment>inch</comment>
+        <translation type="vanished">in</translation>
+    </message>
+</context>
+<context>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
@@ -3873,6 +5250,14 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Es muss ein neues Schnittteil erstellt werden, um fortfahen zu können.</translation>
     </message>
     <message>
+        <source>Add node</source>
+        <translation type="vanished">Knoten hinzufügen</translation>
+    </message>
+    <message>
+        <source>Move detail</source>
+        <translation type="vanished">Detail bewegen</translation>
+    </message>
+    <message>
         <source>mm</source>
         <translation>mm</translation>
     </message>
@@ -3923,13 +5308,38 @@ Sollen die Änderungen gespeichert werden?</translation>
 <context>
     <name>QmuParserErrorMsg</name>
     <message>
-        <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Internal error</source>
         <comment>Math parser error messages.</comment>
+        <translation>Interner Fehler</translation>
+    </message>
+    <message>
+        <source>Expression is empty.</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Leerer Ausdruck.</translation>
+    </message>
+    <message>
+        <source>Missing parenthesis</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Fehlende Klammer</translation>
+    </message>
+    <message>
+        <source>Divide by zero</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Division durch Null</translation>
+    </message>
+    <message>
+        <source>Name conflict</source>
+        <comment>Math parser error messages.</comment>
+        <translation>Namenskonflikt</translation>
+    </message>
+    <message>
+        <source>Unexpected string token found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation>Unerwartetes String-Segment an Position $POS$ gefunden.</translation>
+    </message>
+    <message>
+        <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3954,11 +5364,6 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Invalid pointer to callback function.</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Expression is empty.</source>
         <comment>Math parser error messages.</comment>
         <translation type="unfinished"></translation>
     </message>
@@ -4008,11 +5413,6 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Missing parenthesis</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
         <translation type="unfinished"></translation>
@@ -4023,17 +5423,7 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Divide by zero</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Domain error</source>
-        <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name conflict</source>
         <comment>Math parser error messages.</comment>
         <translation type="unfinished"></translation>
     </message>
@@ -4045,11 +5435,6 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unexpected string token found at position $POS$.</source>
-        <comment>Math parser error messages. Left untouched $POS$</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4106,6 +5491,10 @@ Sollen die Änderungen gespeichert werden?</translation>
 <context>
     <name>RenamePP</name>
     <message>
+        <source>Rename pattern piece</source>
+        <translation type="vanished">Schnittteil umbenennen</translation>
+    </message>
+    <message>
         <source>rename pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4113,12 +5502,20 @@ Sollen die Änderungen gespeichert werden?</translation>
 <context>
     <name>SaveDetailOptions</name>
     <message>
+        <source>Save detail option</source>
+        <translation type="vanished">Detailoption speichern</translation>
+    </message>
+    <message>
         <source>save detail option</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SaveToolOptions</name>
+    <message>
+        <source>Save tool option</source>
+        <translation type="vanished">Werkzeugoption speichern</translation>
+    </message>
     <message>
         <source>save tool option</source>
         <translation type="unfinished"></translation>
@@ -4132,7 +5529,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Bezeichnung</translation>
+        <translation type="unfinished">Bezeichnung</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -4140,15 +5537,15 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation>Formel</translation>
+        <translation type="unfinished">Formel</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Basiswert</translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">In Konfektionen</translation>
     </message>
     <message>
         <source>In heights</source>
@@ -4156,11 +5553,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Details</translation>
+        <translation type="unfinished">Details</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation type="unfinished">Name:</translation>
     </message>
     <message>
         <source>Formula:</source>
@@ -4168,7 +5565,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Base value:</source>
@@ -4216,7 +5613,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pfad:</translation>
     </message>
     <message>
         <source>Path to file</source>
@@ -4244,11 +5641,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Given name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vorname:</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nachname:</translation>
     </message>
     <message>
         <source>Birth date:</source>
@@ -4272,7 +5669,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Window</source>
-        <translation>Fenster</translation>
+        <translation type="unfinished">Fenster</translation>
     </message>
     <message>
         <source>Help</source>
@@ -4280,7 +5677,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation>Maße</translation>
+        <translation type="unfinished">Maße</translation>
     </message>
     <message>
         <source>Menu</source>
@@ -4296,7 +5693,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation type="unfinished">Speichern</translation>
     </message>
     <message>
         <source>Save As ...</source>
@@ -4308,7 +5705,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation>Über &amp;Qt</translation>
+        <translation type="unfinished">Über &amp;Qt</translation>
     </message>
     <message>
         <source>About Tape</source>
@@ -4316,7 +5713,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Neu</translation>
+        <translation type="unfinished">Neu</translation>
     </message>
     <message>
         <source>Add known</source>
@@ -4348,7 +5745,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation>Einstellungen</translation>
+        <translation type="unfinished">Einstellungen</translation>
     </message>
     <message>
         <source>untitled %1</source>
@@ -4356,15 +5753,15 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation>Diese Datei ist bereits geöffnet.</translation>
+        <translation type="unfinished">Diese Datei ist bereits geöffnet.</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation>Dateifehler.</translation>
+        <translation type="unfinished">Dateifehler.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation>Datei konnte nicht gespeichert werden</translation>
+        <translation type="unfinished">Datei konnte nicht gespeichert werden</translation>
     </message>
     <message>
         <source>measurements</source>
@@ -4372,15 +5769,15 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation>Individuelle Maße (*.vit)</translation>
+        <translation type="unfinished">Individuelle Maße (*.vit)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation>Standardmaße (*.vst)</translation>
+        <translation type="unfinished">Standardmaße (*.vst)</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation>Speichern als</translation>
+        <translation type="unfinished">Speichern als</translation>
     </message>
     <message>
         <source>&amp;New Window</source>
@@ -4396,7 +5793,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
     <message>
         <source>Empty field.</source>
@@ -4404,7 +5801,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Auswertungsfehler: %1</translation>
+        <translation type="unfinished">Auswertungsfehler: %1</translation>
     </message>
     <message>
         <source>Standard measurements</source>
@@ -4412,7 +5809,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Größe: </translation>
+        <translation type="unfinished">Größe: </translation>
     </message>
     <message>
         <source>Size: </source>
@@ -4420,11 +5817,19 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation>Individuelle Maße</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>male</source>
+        <translation type="obsolete">männlich</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <translation type="obsolete">weiblich</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">unbenannt</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -4441,15 +5846,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Empty field</source>
-        <translation>Leeres Eingabefeld</translation>
+        <translation type="unfinished">Leeres Eingabefeld</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Wert</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation>Datei öffnen</translation>
+        <translation type="unfinished">Datei öffnen</translation>
     </message>
     <message>
         <source>Import from a pattern</source>
@@ -4457,7 +5862,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation>Schnittmuster Dateien (*.val)</translation>
+        <translation type="unfinished">Schnittmuster Dateien (*.val)</translation>
     </message>
     <message>
         <source>Pattern unit:</source>
@@ -4571,15 +5976,19 @@ Do you want to save your changes?</source>
     <message>
         <source>male</source>
         <comment>gender</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">männlich</translation>
     </message>
     <message>
         <source>female</source>
         <comment>gender</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">weiblich</translation>
     </message>
     <message>
         <source>Gender:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PM system:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4598,47 +6007,122 @@ Do you want to save your changes?</source>
         <source>Export standard measurements not supported.</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>TableWindow</name>
     <message>
-        <source>PM system:</source>
-        <translation type="unfinished"></translation>
+        <source>Create a layout</source>
+        <translation type="vanished">Layout erstellen</translation>
+    </message>
+    <message>
+        <source>toolBar</source>
+        <translation type="vanished">Werkzeugleiste</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="vanished">Speichern</translation>
+    </message>
+    <message>
+        <source>Save layout</source>
+        <translation type="vanished">Layout speichern</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="vanished">Stop</translation>
+    </message>
+    <message>
+        <source>Stop laying</source>
+        <translation type="vanished">Legen stoppen</translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation type="vanished">Vergrößern</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation type="vanished">Verkleinern</translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation type="vanished">unbenannt</translation>
+    </message>
+    <message>
+        <source>Svg files (*.svg)</source>
+        <translation type="vanished">Svg Dateien (*.svg)</translation>
+    </message>
+    <message>
+        <source>PDF files (*.pdf)</source>
+        <translation type="vanished">PDF Dateien (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Images (*.png)</source>
+        <translation type="vanished">Bilddateien (*.png)</translation>
+    </message>
+    <message>
+        <source>PS files (*.ps)</source>
+        <translation type="vanished">PS-Dateien (*.ps)</translation>
+    </message>
+    <message>
+        <source>EPS files (*.eps)</source>
+        <translation type="vanished">EPS Dateien (*.eps)</translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="vanished">Fehler beim anlegen von Datei &apos;%1&apos;! &quot;%2&apos;</translation>
+    </message>
+    <message>
+        <source>Critical error!</source>
+        <translation type="vanished">Schwerwiegender Fehler!</translation>
+    </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="vanished">Wavefront OBJ (*.obj)</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="obsolete">Auswählen...</translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="obsolete">Strg+S</translation>
     </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation>Anwenden</translation>
+        <translation type="unfinished">Anwenden</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <translation type="unfinished">&amp;Abbrechen</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;Ok</translation>
+        <translation type="unfinished">&amp;Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Einstellungen</translation>
+        <translation type="unfinished">Einstellungen</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Allgemein</translation>
+        <translation type="unfinished">Allgemein</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Verzeichnisse</translation>
+        <translation type="unfinished">Verzeichnisse</translation>
     </message>
 </context>
 <context>
     <name>TapeConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation>Sprache</translation>
+        <translation type="unfinished">Sprache</translation>
     </message>
     <message>
         <source>GUI language</source>
-        <translation>GUI Sprache</translation>
+        <translation type="unfinished">GUI Sprache</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -4654,42 +6138,42 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation>Dezimaltrennzeichen</translation>
+        <translation type="unfinished">Dezimaltrennzeichen</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>Nach Sprache des Betriebssystems (%1)</translation>
+        <translation type="unfinished">Nach Sprache des Betriebssystemss (%1)</translation>
     </message>
 </context>
 <context>
     <name>TapePathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation>Verzeichnis öffnen</translation>
+        <translation type="unfinished">Verzeichnis öffnen</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation>Verwendete Verzeichnisse</translation>
+        <translation type="unfinished">Verwendete Verzeichnisse</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Standard</translation>
+        <translation type="unfinished">Standard</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Auswählen...</translation>
+        <translation type="unfinished">Auswählen...</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation>Typ</translation>
+        <translation type="unfinished">Typ</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation>Verzeichnis</translation>
+        <translation type="unfinished">Verzeichnis</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation>Individuelle Maße</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Standard measurements</source>
@@ -4717,6 +6201,10 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VAbstractConverter</name>
+    <message>
+        <source>Error creation backup file: %1.</source>
+        <translation type="vanished">Konnte Sicherungsdatei nicht anlegen: %1.</translation>
+    </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
         <translation>Versionsinformation konnte nicht gelesen werden.</translation>
@@ -4762,11 +6250,19 @@ Do you want to save your changes?</source>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Konnte Werkzeug nicht in der List finden.</translation>
     </message>
 </context>
 <context>
     <name>VAbstractTool</name>
+    <message>
+        <source>Confirm the deletion.</source>
+        <translation type="vanished">Löschen bestätigen.</translation>
+    </message>
+    <message>
+        <source>Do you really want delete?</source>
+        <translation type="vanished">Wirklich löschen?</translation>
+    </message>
     <message>
         <source>black</source>
         <translation type="unfinished"></translation>
@@ -4842,22 +6338,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VCommandLine</name>
     <message>
-        <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The base filename of layout files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The path to output destination folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The destination folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Path to custom measure file (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4874,22 +6354,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The size value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The height value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
@@ -4898,19 +6362,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The page width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4970,18 +6422,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern making program.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5006,11 +6446,59 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Test option can be used with single input file only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export options can be used with single input file only.</source>
+        <source>The base filename of exported layout files. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base filename of layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to output destination folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The size value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The height value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5020,6 +6508,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Invalid gradation height value.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making program.</source>
+        <translation type="unfinished">Programm zur Schnittmusterkonstruktion.</translation>
+    </message>
+    <message>
+        <source>Pattern file.</source>
+        <translation type="unfinished">Schnittmusterdatei.</translation>
     </message>
 </context>
 <context>
@@ -5115,6 +6611,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VException</name>
+    <message>
+        <source>Critical error!</source>
+        <translation type="vanished">Schwerwiegender Fehler!</translation>
+    </message>
+</context>
+<context>
     <name>VFormula</name>
     <message>
         <source>Error</source>
@@ -5168,6 +6671,10 @@ Do you want to save your changes?</source>
 <context>
     <name>VPattern</name>
     <message>
+        <source>Can&apos;t find tool in table.</source>
+        <translation type="vanished">Konnte Werkzeug nicht in der List finden.</translation>
+    </message>
+    <message>
         <source>Error no unique id.</source>
         <translation>Fehler: uneindeutige ID.</translation>
     </message>
@@ -5186,6 +6693,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Error wrong id.</source>
         <translation>Fehler: falsche ID.</translation>
+    </message>
+    <message>
+        <source>Critical error!</source>
+        <translation type="vanished">Schwerwiegender Fehler!</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -5273,7 +6784,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating curve path</source>
-        <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Gekrümmter Pfad&quot;</translation>
+        <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Pfad&quot;</translation>
     </message>
     <message>
         <source>Error creating or updating modeling simple curve</source>
@@ -5294,6 +6805,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Error creating or updating union details</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Details vereinigen&quot;</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="vanished">Dateifehler.</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection arcs</source>
@@ -5360,6 +6875,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
         <translation>Splinepfad mit nur einem Punkt kann nicht zerschnitten werden</translation>
+    </message>
+</context>
+<context>
+    <name>VTableGraphicsView</name>
+    <message>
+        <source>can&apos;t find detail</source>
+        <translation type="vanished">Kann Detail nicht finden</translation>
+    </message>
+    <message>
+        <source>detail found</source>
+        <translation type="vanished">Detail gefunden</translation>
     </message>
 </context>
 <context>
@@ -5493,11 +7019,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
@@ -5505,11 +7031,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation>Erster Punkt</translation>
+        <translation type="unfinished">Erster Punkt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Zweiter Punkt</translation>
+        <translation type="unfinished">Zweiter Punkt</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -6440,107 +7966,107 @@ Do you want to save your changes?</source>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">atan</translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">asinh</translation>
     </message>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">acosh</translation>
     </message>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">atanh</translation>
     </message>
     <message>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">log2</translation>
     </message>
     <message>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">log10</translation>
     </message>
     <message>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">log</translation>
     </message>
     <message>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ln</translation>
     </message>
     <message>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">exp</translation>
     </message>
     <message>
         <source>sqrt</source>
         <comment>square root of a value</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sqrt</translation>
     </message>
     <message>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sign</translation>
     </message>
     <message>
         <source>rint</source>
         <comment>round to nearest integer</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">rint</translation>
     </message>
     <message>
         <source>abs</source>
         <comment>absolute value</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">abs</translation>
     </message>
     <message>
         <source>min</source>
@@ -6550,17 +8076,17 @@ Do you want to save your changes?</source>
     <message>
         <source>max</source>
         <comment>max of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">max</translation>
     </message>
     <message>
         <source>sum</source>
         <comment>sum of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sum</translation>
     </message>
     <message>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">avg</translation>
     </message>
     <message>
         <source>fmod</source>
@@ -6580,29 +8106,29 @@ Do you want to save your changes?</source>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">in</translation>
     </message>
 </context>
 <context>
     <name>VVITConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation>Unerwartete Version &quot;%1&quot;.</translation>
+        <translation type="unfinished">Unerwartete Version &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fehler beim wiederherstellen aus Backupdatei %1.</translation>
+        <translation type="unfinished">Fehler beim wiederherstellen aus Backupdatei %1.</translation>
     </message>
 </context>
 <context>
     <name>VVSTConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation>Unerwartete Version &quot;%1&quot;.</translation>
+        <translation type="unfinished">Unerwartete Version &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fehler beim wiederherstellen aus Backupdatei %1.</translation>
+        <translation type="unfinished">Fehler beim wiederherstellen aus Backupdatei %1.</translation>
     </message>
 </context>
 <context>
@@ -6674,6 +8200,50 @@ Do you want to save your changes?</source>
     <message>
         <source>Information.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Pattern making program.</source>
+        <translation type="vanished">Programm zur Schnittmusterkonstruktion.</translation>
+    </message>
+    <message>
+        <source>Pattern file.</source>
+        <translation type="vanished">Schnittmusterdatei.</translation>
+    </message>
+</context>
+<context>
+    <name>qmu::QmuParserErrorMsg</name>
+    <message>
+        <source>Internal error</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Interner Fehler</translation>
+    </message>
+    <message>
+        <source>Expression is empty.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Leerer Ausdruck.</translation>
+    </message>
+    <message>
+        <source>Missing parenthesis</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Fehlende Klammer</translation>
+    </message>
+    <message>
+        <source>Divide by zero</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Division durch Null</translation>
+    </message>
+    <message>
+        <source>Name conflict</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Namenskonflikt</translation>
+    </message>
+    <message>
+        <source>Unexpected string token found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="obsolete">Unerwartetes String-Segment an Position $POS$ gefunden.</translation>
     </message>
 </context>
 <context>

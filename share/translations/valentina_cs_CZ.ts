@@ -4,12 +4,20 @@
 <context>
     <name>AddDet</name>
     <message>
+        <source>Add detail</source>
+        <translation type="vanished">Přidat detail</translation>
+    </message>
+    <message>
         <source>add detail</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddPatternPiece</name>
+    <message>
+        <source>Add pattern piece %1</source>
+        <translation type="vanished">Přidat díl střihu %1</translation>
+    </message>
     <message>
         <source>add pattern piece %1</source>
         <translation type="unfinished"></translation>
@@ -18,12 +26,20 @@
 <context>
     <name>AddToCalc</name>
     <message>
+        <source>Add object</source>
+        <translation type="vanished">Přidat předmět</translation>
+    </message>
+    <message>
         <source>add object</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddUnionDetails</name>
+    <message>
+        <source>Add union details</source>
+        <translation type="vanished">Přidat detaily spojky</translation>
+    </message>
     <message>
         <source>add union details</source>
         <translation type="unfinished"></translation>
@@ -135,7 +151,7 @@
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation>Automaticky ukládat změny ve střihu</translation>
+        <translation>Automaticky uložit změněný střih</translation>
     </message>
     <message>
         <source>min</source>
@@ -195,11 +211,11 @@
     </message>
     <message>
         <source>Pattern Editing</source>
-        <translation>Upravování střihu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Confirm item deletion</source>
-        <translation>Potvrdit smazání položky</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Toolbar</source>
@@ -213,6 +229,10 @@
 <context>
     <name>DelTool</name>
     <message>
+        <source>Delete tool</source>
+        <translation type="vanished">Smazat nástroj</translation>
+    </message>
+    <message>
         <source>delete tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -220,12 +240,20 @@
 <context>
     <name>DeleteDetail</name>
     <message>
+        <source>Delete tool</source>
+        <translation type="vanished">Smazat nástroj</translation>
+    </message>
+    <message>
         <source>delete tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DeletePatternPiece</name>
+    <message>
+        <source>Delete pattern piece %1</source>
+        <translation type="vanished">Smazat díl střihu %1</translation>
+    </message>
     <message>
         <source>delete pattern piece %1</source>
         <translation type="unfinished"></translation>
@@ -252,6 +280,10 @@
     <message>
         <source>Web site : %1</source>
         <translation>Stránky: %1</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="vanished">Varování</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
@@ -293,6 +325,10 @@
         <translation type="unfinished">Stránky: %1</translation>
     </message>
     <message>
+        <source>Warning</source>
+        <translation type="obsolete">Varování</translation>
+    </message>
+    <message>
         <source>Cannot open your default browser</source>
         <translation type="unfinished">Nelze otevřít váš výchozí prohlížeč</translation>
     </message>
@@ -302,6 +338,10 @@
     <message>
         <source>Length</source>
         <translation>Délka</translation>
+    </message>
+    <message>
+        <source>Insert variable into the formula</source>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -340,16 +380,56 @@
         <translation>Ukázat čáru od prvního bodu k tomuto bodu</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+    </message>
+    <message>
         <source>Select second point of line</source>
         <translation>Vybrat druhý bod čáry</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Bod ve vzdálenosti podél čáry</translation>
+        <translation type="unfinished">Bod ve vzdálenosti podél čáry</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -367,6 +447,10 @@
         <translation>Poloměr</translation>
     </message>
     <message>
+        <source>Insert variable into the formula</source>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
+    </message>
+    <message>
         <source>Value of radius</source>
         <translation>Hodnota poloměru</translation>
     </message>
@@ -379,12 +463,20 @@
         <translation>První úhel</translation>
     </message>
     <message>
+        <source>Insert variable into formula</source>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
+    </message>
+    <message>
         <source>Value of first angle</source>
         <translation>Hodnota prvního úhlu</translation>
     </message>
     <message>
         <source>Second angle</source>
         <translation>Druhý úhel</translation>
+    </message>
+    <message>
+        <source>Insert marked variable into formula</source>
+        <translation type="vanished">Vložit označenou proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of second angle</source>
@@ -397,6 +489,46 @@
     <message>
         <source>Select point of center of arc</source>
         <translation>Vybrat bod středu oblouku</translation>
+    </message>
+    <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables</source>
+        <translation type="vanished">Proměnné</translation>
     </message>
     <message>
         <source>Error</source>
@@ -412,7 +544,11 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -458,8 +594,12 @@
         <translation type="unfinished">Délka</translation>
     </message>
     <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
+    </message>
+    <message>
         <source>Arc length</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Délka oblouku</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -471,7 +611,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -503,6 +643,10 @@
     <message>
         <source>Length</source>
         <translation>Délka</translation>
+    </message>
+    <message>
+        <source>Insert marked variable into the formula</source>
+        <translation type="vanished">Vložit označenou proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -549,6 +693,46 @@
         <translation>Ukázat čáru od druhého bodu k tomuto bodu</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+    </message>
+    <message>
         <source>Select second point of angle</source>
         <translation>Vybrat druhý bod úhlu</translation>
     </message>
@@ -558,11 +742,11 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Bod podél osy úhlu</translation>
+        <translation type="unfinished">Bod podél osy úhlu</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -604,20 +788,60 @@
         <translation>Ukázat čáru od prvního bodu k tomuto bodu</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables</source>
+        <translation type="vanished">Proměnné</translation>
+    </message>
+    <message>
         <source>Select axis point</source>
         <translation>Vybrat bod osy</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation>Bod průsečíku oblouku a čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Axis Point</source>
-        <translation>Bod osy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -635,6 +859,10 @@
         <translation>Hodnota délky</translation>
     </message>
     <message>
+        <source>_</source>
+        <translation type="vanished">_</translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -647,16 +875,56 @@
         <translation>Štítek bodu</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+    </message>
+    <message>
         <source>Segment an arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Selected arc</source>
-        <translation>Vybraný oblouk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -672,6 +940,10 @@
     <message>
         <source>Value of length</source>
         <translation>Hodnota délky</translation>
+    </message>
+    <message>
+        <source>_</source>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -690,12 +962,52 @@
         <translation>Štítek bodu</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+    </message>
+    <message>
         <source>Segmenting a simple curve</source>
-        <translation>Rozdělení jednoduché křivky</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -711,6 +1023,10 @@
     <message>
         <source>Value of length</source>
         <translation>Hodnota délky</translation>
+    </message>
+    <message>
+        <source>_</source>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -729,12 +1045,52 @@
         <translation>Štítek bodu</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+    </message>
+    <message>
         <source>Segment a curved path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -793,7 +1149,7 @@
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation>Nástroj pro stanovení přídavku na švy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
@@ -817,6 +1173,10 @@
     <message>
         <source>Value of first angle</source>
         <translation>Hodnota prvního úhlu</translation>
+    </message>
+    <message>
+        <source>_</source>
+        <translation type="vanished">_</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -859,28 +1219,32 @@
         <translation>Skrýt prázdné míry</translation>
     </message>
     <message>
+        <source>Variables</source>
+        <translation type="vanished">Proměnné</translation>
+    </message>
+    <message>
         <source>Double click for add to formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Výška</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Velikost</translation>
     </message>
     <message>
         <source>Line length</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Délka čáry</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Délka oblouku</translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Délka křivky</translation>
     </message>
     <message>
         <source>Line Angle</source>
@@ -954,12 +1318,52 @@
         <translation>Ukázat čáru od prvního bodu k tomuto bodu</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables</source>
+        <translation type="vanished">Proměnné</translation>
+    </message>
+    <message>
         <source>Point at distance and angle</source>
         <translation type="unfinished">Bod ve vzdálenosti a úhlu</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -1010,11 +1414,11 @@
     </message>
     <message>
         <source>Base Point</source>
-        <translation>Základní bod</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1139,12 +1543,64 @@
         <translation>Přídavky</translation>
     </message>
     <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Load another measurements table</source>
+        <translation type="vanished">Načíst jinou tabulku s mírami</translation>
+    </message>
+    <message>
+        <source>Personal information</source>
+        <translation type="vanished">Osobní informace</translation>
+    </message>
+    <message>
+        <source>Given name</source>
+        <translation type="vanished">Křestní jméno</translation>
+    </message>
+    <message>
+        <source>Family name</source>
+        <translation type="vanished">Příjmení</translation>
+    </message>
+    <message>
+        <source>Birth date</source>
+        <translation type="vanished">Datum narození</translation>
+    </message>
+    <message>
+        <source>Sex</source>
+        <translation type="vanished">Pohlaví</translation>
+    </message>
+    <message>
+        <source>Email</source>
+        <translation type="vanished">E-mail</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
         <source>The calculated value</source>
         <translation>Vypočítaná hodnota</translation>
+    </message>
+    <message>
+        <source>Base value</source>
+        <translation type="vanished">Základní hodnota</translation>
+    </message>
+    <message>
+        <source>In sizes</source>
+        <translation type="vanished">Ve velikostech</translation>
+    </message>
+    <message>
+        <source>In heights</source>
+        <translation type="vanished">Ve výškách</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="vanished">Popis</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -1159,16 +1615,84 @@
         <translation>Délka</translation>
     </message>
     <message>
+        <source>Curves</source>
+        <translation type="vanished">Křivky</translation>
+    </message>
+    <message>
         <source>Curve</source>
         <translation>Křivka</translation>
+    </message>
+    <message>
+        <source>Arcs</source>
+        <translation type="vanished">Oblouky</translation>
     </message>
     <message>
         <source>Arc</source>
         <translation>Oblouk</translation>
     </message>
     <message>
+        <source>File error.</source>
+        <translation type="vanished">Chyba souboru.</translation>
+    </message>
+    <message>
+        <source>male</source>
+        <translation type="vanished">muž</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <translation type="vanished">žena</translation>
+    </message>
+    <message>
+        <source>Could not save GivenName</source>
+        <translation type="vanished">Nepodařilo se uložit křestní jméno</translation>
+    </message>
+    <message>
+        <source>Could not save FamilyName</source>
+        <translation type="vanished">Nepodařilo se uložit příjmení</translation>
+    </message>
+    <message>
+        <source>Could not save Email</source>
+        <translation type="vanished">Nepodařilo se uložit adresu elektronické pošty</translation>
+    </message>
+    <message>
+        <source>Could not save Sex</source>
+        <translation type="vanished">Nepodařilo se uložit pohlaví</translation>
+    </message>
+    <message>
+        <source>Could not save BirthDate</source>
+        <translation type="vanished">Nepodařilo se uložit datum narození</translation>
+    </message>
+    <message>
+        <source>Measurements use different units than pattern. This pattern required measurements in %1</source>
+        <translation type="vanished">Míry používají odlišné jednotky než střih. Tento střih vyžaduje míry v %1</translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit)</source>
+        <translation type="vanished">Individuální míry (*.vit)</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="vanished">Otevřít soubor</translation>
+    </message>
+    <message>
+        <source>Wrong units.</source>
+        <translation type="vanished">Nesprávné jednotky.</translation>
+    </message>
+    <message>
+        <source>Standard measurements (*.vst)</source>
+        <translation type="vanished">Obvyklé míry (*.vst)</translation>
+    </message>
+    <message>
+        <source>Name_%1</source>
+        <translation type="vanished">Jméno_%1</translation>
+    </message>
+    <message>
+        <source>Can&apos;t save measurement</source>
+        <translation type="vanished">Nelze uložit míru</translation>
+    </message>
+    <message>
         <source>Tables of Variables</source>
-        <translation>Tabulky proměnných</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lines angles</source>
@@ -1268,14 +1792,85 @@
     </message>
 </context>
 <context>
+    <name>DialogIndividualMeasurements</name>
+    <message>
+        <source>Individual measurements</source>
+        <translation type="vanished">Individuální míry</translation>
+    </message>
+    <message>
+        <source>Pattern piece name</source>
+        <translation type="vanished">Název dílu střihu</translation>
+    </message>
+    <message>
+        <source>Exist measurements</source>
+        <translation type="vanished">Stávající míry</translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation type="vanished">Cesta:</translation>
+    </message>
+    <message>
+        <source>Given name:</source>
+        <translation type="vanished">Křestní jméno:</translation>
+    </message>
+    <message>
+        <source>Family name:</source>
+        <translation type="vanished">Příjmení:</translation>
+    </message>
+    <message>
+        <source>New measurements</source>
+        <translation type="vanished">Nové míry</translation>
+    </message>
+    <message>
+        <source>Units:</source>
+        <translation type="vanished">Jednotky:</translation>
+    </message>
+    <message>
+        <source>Could not create measurements file</source>
+        <translation type="vanished">Nepodařilo se vytvořit soubor s mírami</translation>
+    </message>
+    <message>
+        <source>Please try again or change file</source>
+        <translation type="vanished">Zkuste to, prosím, znovu, anebo změňte soubor</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="vanished">Chyba souboru.</translation>
+    </message>
+    <message>
+        <source>Individual measurements (*.vit)</source>
+        <translation type="vanished">Individuální míry (*.vit)</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="vanished">Otevřít soubor</translation>
+    </message>
+    <message>
+        <source>Where save measurements?</source>
+        <translation type="vanished">Kam uložit míry?</translation>
+    </message>
+    <message>
+        <source>Centimeters</source>
+        <translation type="vanished">Centimetry</translation>
+    </message>
+    <message>
+        <source>Millimiters</source>
+        <translation type="vanished">Milimetry</translation>
+    </message>
+    <message>
+        <source>Inches</source>
+        <translation type="vanished">Palce</translation>
+    </message>
+</context>
+<context>
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Nepodařilo se připravit data pro vytvoření rozvržení</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Zbylo několik neposkládaných obrobků, ale žádný z nich se neshoduje s papírem</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -1294,51 +1889,51 @@
     <name>DialogLayoutSettings</name>
     <message>
         <source>Paper size</source>
-        <translation>Velikost papíru</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Templates:</source>
-        <translation>Předlohy:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Šířka:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Výška: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rotate workpiece</source>
-        <translation>Otočit obrobek</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rotate by</source>
-        <translation>Otočit o</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>degree</source>
-        <translation>stupňů</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Creation options</source>
-        <translation>Volby pro vytvoření</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation>Délka posunutí:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation>Zásada pro výběr dalšího obrobku</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
-        <translation>Tři skupiny: velká, prostřední, malá</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Two groups: big, small</source>
-        <translation>Dvě skupiny, malá, velká</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Descending area</source>
@@ -1346,23 +1941,23 @@
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>Milimetry</translation>
+        <translation type="unfinished">Milimetry</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>Centimetry</translation>
+        <translation type="unfinished">Centimetry</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>Palce</translation>
+        <translation type="unfinished">Palce</translation>
     </message>
     <message>
         <source>Pixels</source>
-        <translation>Pixely</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create a layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vytvořit rozvržení</translation>
     </message>
     <message>
         <source>Auto crop unused length</source>
@@ -1441,11 +2036,11 @@
     </message>
     <message>
         <source>Line between points</source>
-        <translation>Čára mezi body</translation>
+        <translation type="unfinished">Čára mezi body</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1530,6 +2125,46 @@
         <translation>Ukázat čáru od prvního bodu k tomuto bodu</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables</source>
+        <translation type="vanished">Proměnné</translation>
+    </message>
+    <message>
         <source>Select second point of line</source>
         <translation>Vybrat druhý bod čáry</translation>
     </message>
@@ -1543,15 +2178,15 @@
     </message>
     <message>
         <source>Axis Point</source>
-        <translation type="unfinished">Bod osy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Druhý bod čáry</translation>
+        <translation type="unfinished">Druhý bod čáry</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -1663,6 +2298,33 @@
     </message>
 </context>
 <context>
+    <name>DialogMeasurements</name>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Please, choose pattern type.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Vyberte, prosím, typ střihu.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Graduation</source>
+        <translation type="vanished">Stupňování</translation>
+    </message>
+    <message>
+        <source>Use for creation pattern standard measurement table</source>
+        <translation type="vanished">Pro vytvoření střihu použít tabulku obvyklých měr</translation>
+    </message>
+    <message>
+        <source>Individual</source>
+        <translation type="vanished">Individuální</translation>
+    </message>
+    <message>
+        <source>Use for creation pattern individual measurements</source>
+        <translation type="vanished">Pro vytvoření střihu použít Individuální míry</translation>
+    </message>
+</context>
+<context>
     <name>DialogNewMeasurements</name>
     <message>
         <source>New measurement file</source>
@@ -1686,7 +2348,7 @@
     </message>
     <message>
         <source>Individual</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Individuální</translation>
     </message>
     <message>
         <source>Standard</source>
@@ -1713,11 +2375,11 @@
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Název dílu střihu</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jednotky:</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -1737,6 +2399,10 @@
     <message>
         <source>Length</source>
         <translation>Délka</translation>
+    </message>
+    <message>
+        <source>Insert variable into formula</source>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -1771,6 +2437,46 @@
         <translation>Ukázat čáru od prvního bodu k tomuto bodu</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+    </message>
+    <message>
         <source>Select second point of line</source>
         <translation>Vybrat druhý bod čáry</translation>
     </message>
@@ -1780,15 +2486,15 @@
     </message>
     <message>
         <source>First point of line</source>
-        <translation>První bod čáry</translation>
+        <translation type="unfinished">První bod čáry</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Druhý bod čáry</translation>
+        <translation type="unfinished">Druhý bod čáry</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -2054,6 +2760,10 @@
         <translation>Poloměr</translation>
     </message>
     <message>
+        <source>Insert variable into formula</source>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
+    </message>
+    <message>
         <source>Value of radius</source>
         <translation>Hodnota poloměru</translation>
     </message>
@@ -2080,6 +2790,46 @@
     <message>
         <source>End of the line</source>
         <translation>Konec čáry</translation>
+    </message>
+    <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula.</source>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce.</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2114,11 +2864,11 @@
     </message>
     <message>
         <source>X: vertical point</source>
-        <translation>X: svislý bod</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Y: horizontal point</source>
-        <translation>Y: vodorovný bod</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
@@ -2141,7 +2891,7 @@
     </message>
     <message>
         <source>Selected arc</source>
-        <translation type="unfinished">Vybraný oblouk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Second arc</source>
@@ -2227,7 +2977,7 @@
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cesta:</translation>
     </message>
     <message>
         <source>File format:</source>
@@ -2246,7 +2996,7 @@
     <name>DialogSaveLayout</name>
     <message>
         <source>Name conflict</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Střet názvu</translation>
     </message>
     <message>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
@@ -2262,27 +3012,27 @@
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Soubory SVG (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Soubory PDF (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Obrázky (*.png)</translation>
     </message>
     <message>
         <source>Wavefront OBJ (*.obj)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wavefront OBJ (*.obj)</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Soubory PS (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Soubory EPS (*.eps)</translation>
     </message>
     <message>
         <source>DXF files (*.dxf)</source>
@@ -2310,6 +3060,10 @@
     <message>
         <source>Length</source>
         <translation>Délka</translation>
+    </message>
+    <message>
+        <source>Insert variable into formula</source>
+        <translation type="vanished">Vložit proměnnou do vzorce</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2344,6 +3098,46 @@
         <translation>Ukázat čáru od prvního bodu k našemu bodu</translation>
     </message>
     <message>
+        <source>Input data</source>
+        <translation type="vanished">Vstupní data</translation>
+    </message>
+    <message>
+        <source>Size and height</source>
+        <translation type="vanished">Velikost a výška</translation>
+    </message>
+    <message>
+        <source>Measurements</source>
+        <translation type="vanished">Míry</translation>
+    </message>
+    <message>
+        <source>Increments</source>
+        <translation type="vanished">Přídavky</translation>
+    </message>
+    <message>
+        <source>Length of lines</source>
+        <translation type="vanished">Délka čar</translation>
+    </message>
+    <message>
+        <source>Length of arcs</source>
+        <translation type="vanished">Délka oblouků</translation>
+    </message>
+    <message>
+        <source>Length of curves</source>
+        <translation type="vanished">Délka křivek</translation>
+    </message>
+    <message>
+        <source>Angle of lines</source>
+        <translation type="vanished">Úhel čar</translation>
+    </message>
+    <message>
+        <source>Hide empty measurements</source>
+        <translation type="vanished">Skrýt prázdné míry</translation>
+    </message>
+    <message>
+        <source>Variables - Click twice to insert into formula</source>
+        <translation type="vanished">Proměnné - Klepněte dvakrát pro vložení do vzorce</translation>
+    </message>
+    <message>
         <source>Select first point of line</source>
         <translation>Vybrat první bod čáry</translation>
     </message>
@@ -2353,11 +3147,11 @@
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Zvláštní bod na rameni</translation>
+        <translation type="unfinished">Zvláštní bod na rameni</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -2427,11 +3221,11 @@
     </message>
     <message>
         <source>Simple curve</source>
-        <translation>Jednoduchá křivka</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2474,7 +3268,26 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogStandardMeasurements</name>
+    <message>
+        <source>Standard table</source>
+        <translation type="vanished">Standardní tabulka</translation>
+    </message>
+    <message>
+        <source>Pattern piece name</source>
+        <translation type="vanished">Název dílu střihu</translation>
+    </message>
+    <message>
+        <source>Standard measurements table</source>
+        <translation type="vanished">Tabulka s obvyklými mírami</translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="vanished">Chyba souboru.</translation>
     </message>
 </context>
 <context>
@@ -2494,6 +3307,26 @@
     <message>
         <source>Value</source>
         <translation>Hodnota</translation>
+    </message>
+    <message>
+        <source>Height</source>
+        <translation type="vanished">Výška</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="vanished">Velikost</translation>
+    </message>
+    <message>
+        <source>Line length</source>
+        <translation type="vanished">Délka čáry</translation>
+    </message>
+    <message>
+        <source>Arc length</source>
+        <translation type="vanished">Délka oblouku</translation>
+    </message>
+    <message>
+        <source>Curve length</source>
+        <translation type="vanished">Délka křivky</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
@@ -2552,15 +3385,15 @@
     </message>
     <message>
         <source>First point of the axis</source>
-        <translation>První bod osy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Second point of the axis</source>
-        <translation>Druhý bod osy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Druhý bod čáry</translation>
+        <translation type="unfinished">Druhý bod čáry</translation>
     </message>
 </context>
 <context>
@@ -2660,32 +3493,176 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Opravdu chcete sjednotit detaily?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <source>Select first point</source>
+        <translation type="vanished">Vybrat první bod</translation>
+    </message>
+    <message>
+        <source>Select second point</source>
+        <translation type="vanished">Vybrat druhý bod</translation>
+    </message>
+    <message>
+        <source>Select another second point</source>
+        <translation type="vanished">Vybrat jiný druhý bod</translation>
+    </message>
+    <message>
+        <source>Select detail</source>
+        <translation type="vanished">Vybrat detail</translation>
+    </message>
+    <message>
         <source>Union tool</source>
-        <translation>Nástroj Spojení</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select a first point</source>
-        <translation>Vyberte první bod</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation>Obrobky by měly mít alespoň dva body a tři předměty</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select a second point</source>
-        <translation>Vyberte druhý bod</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select a unique point</source>
-        <translation>Vyberte jedinečný bod</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select a detail</source>
-        <translation>Vyberte detail</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select a point on edge</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Functions</name>
+    <message>
+        <source>sin</source>
+        <comment>sine function</comment>
+        <translation type="vanished">sin</translation>
+    </message>
+    <message>
+        <source>cos</source>
+        <comment>cosine function</comment>
+        <translation type="vanished">cos</translation>
+    </message>
+    <message>
+        <source>tan</source>
+        <comment>tangens function</comment>
+        <translation type="vanished">tan</translation>
+    </message>
+    <message>
+        <source>asin</source>
+        <comment>arcus sine function</comment>
+        <translation type="vanished">asin</translation>
+    </message>
+    <message>
+        <source>acos</source>
+        <comment>arcus cosine function</comment>
+        <translation type="vanished">acos</translation>
+    </message>
+    <message>
+        <source>atan</source>
+        <comment>arcus tangens function</comment>
+        <translation type="vanished">atan</translation>
+    </message>
+    <message>
+        <source>sinh</source>
+        <comment>hyperbolic sine function</comment>
+        <translation type="vanished">sinh</translation>
+    </message>
+    <message>
+        <source>cosh</source>
+        <comment>hyperbolic cosine</comment>
+        <translation type="vanished">cosh</translation>
+    </message>
+    <message>
+        <source>tanh</source>
+        <comment>hyperbolic tangens function</comment>
+        <translation type="vanished">tanh</translation>
+    </message>
+    <message>
+        <source>asinh</source>
+        <comment>hyperbolic arcus sine function</comment>
+        <translation type="vanished">asinh</translation>
+    </message>
+    <message>
+        <source>acosh</source>
+        <comment>hyperbolic arcus tangens function</comment>
+        <translation type="vanished">acosh</translation>
+    </message>
+    <message>
+        <source>atanh</source>
+        <comment>hyperbolic arcur tangens function</comment>
+        <translation type="vanished">atanh</translation>
+    </message>
+    <message>
+        <source>log2</source>
+        <comment>logarithm to the base 2</comment>
+        <translation type="vanished">log2</translation>
+    </message>
+    <message>
+        <source>log10</source>
+        <comment>logarithm to the base 10</comment>
+        <translation type="vanished">log10</translation>
+    </message>
+    <message>
+        <source>log</source>
+        <comment>logarithm to the base 10</comment>
+        <translation type="vanished">log</translation>
+    </message>
+    <message>
+        <source>ln</source>
+        <comment>logarithm to base e (2.71828...)</comment>
+        <translation type="vanished">ln</translation>
+    </message>
+    <message>
+        <source>exp</source>
+        <comment>e raised to the power of x</comment>
+        <translation type="vanished">exp</translation>
+    </message>
+    <message>
+        <source>sqrt</source>
+        <comment>square root of a value</comment>
+        <translation type="vanished">sqrt</translation>
+    </message>
+    <message>
+        <source>sign</source>
+        <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
+        <translation type="vanished">sign</translation>
+    </message>
+    <message>
+        <source>rint</source>
+        <comment>round to nearest integer</comment>
+        <translation type="vanished">rint</translation>
+    </message>
+    <message>
+        <source>abs</source>
+        <comment>absolute value</comment>
+        <translation type="vanished">abs</translation>
+    </message>
+    <message>
+        <source>min</source>
+        <comment>min of all arguments</comment>
+        <translation type="vanished">min</translation>
+    </message>
+    <message>
+        <source>max</source>
+        <comment>max of all arguments</comment>
+        <translation type="vanished">max</translation>
+    </message>
+    <message>
+        <source>sum</source>
+        <comment>sum of all arguments</comment>
+        <translation type="vanished">sum</translation>
+    </message>
+    <message>
+        <source>avg</source>
+        <comment>mean value of all arguments</comment>
+        <translation type="vanished">avg</translation>
     </message>
 </context>
 <context>
@@ -2825,6 +3802,10 @@
         <translation>Bod ve vzdálenosti podél čáry</translation>
     </message>
     <message>
+        <source>...</source>
+        <translation type="vanished">...</translation>
+    </message>
+    <message>
         <source>Tools for creating lines.</source>
         <translation>Nástroje na vytváření čar.</translation>
     </message>
@@ -2874,7 +3855,7 @@
     </message>
     <message>
         <source>&amp;Pattern piece</source>
-        <translation>Díl střihu</translation>
+        <translation>&amp;Díl střihu</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -2918,7 +3899,11 @@
     </message>
     <message>
         <source>Create a new pattern</source>
-        <translation>Vytvořit nový střih</translation>
+        <translation>Vytvořit nový vzor</translation>
+    </message>
+    <message>
+        <source>Ctrl+N</source>
+        <translation type="vanished">Ctrl+N</translation>
     </message>
     <message>
         <source>Open</source>
@@ -2930,7 +3915,7 @@
     </message>
     <message>
         <source>Open file with pattern</source>
-        <translation>Otevřít soubor se střihem</translation>
+        <translation>Otevřít soubor se vzorem</translation>
     </message>
     <message>
         <source>Save</source>
@@ -2942,15 +3927,23 @@
     </message>
     <message>
         <source>Save pattern</source>
-        <translation>Uložit střih</translation>
+        <translation>Uložit vzor</translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="vanished">Ctrl+S</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Uložit j&amp;ako…</translation>
+        <translation>Uložit &amp;jako...</translation>
     </message>
     <message>
         <source>Save not yet saved pattern</source>
-        <translation>Uložit dosud neuložený střih</translation>
+        <translation>Uložit dosud neuložený vzor</translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+S</source>
+        <translation type="vanished">Ctrl+Shift+S</translation>
     </message>
     <message>
         <source>Draw</source>
@@ -2961,12 +3954,20 @@
         <translation>Režim kreslení</translation>
     </message>
     <message>
+        <source>Ctrl+W</source>
+        <translation type="vanished">Ctrl+W</translation>
+    </message>
+    <message>
         <source>Details</source>
         <translation>Detaily</translation>
     </message>
     <message>
         <source>Details mode</source>
         <translation>Režim detailů</translation>
+    </message>
+    <message>
+        <source>Ctrl+E</source>
+        <translation type="vanished">Ctrl+E</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -2981,6 +3982,10 @@
         <translation>Přidat nový díl střihu</translation>
     </message>
     <message>
+        <source>Ctrl+Shift+N</source>
+        <translation type="vanished">Ctrl+Shift+N</translation>
+    </message>
+    <message>
         <source>Change the label of pattern piece</source>
         <translation>Změnit štítek dílu střihu</translation>
     </message>
@@ -2993,8 +3998,28 @@
         <translation>Tabulky proměnných</translation>
     </message>
     <message>
+        <source>Ctrl+T</source>
+        <translation type="vanished">Ctrl+T</translation>
+    </message>
+    <message>
         <source>History</source>
         <translation>Historie</translation>
+    </message>
+    <message>
+        <source>Ctrl+H</source>
+        <translation type="vanished">Ctrl+H</translation>
+    </message>
+    <message>
+        <source>Export pattern (layout)</source>
+        <translation type="vanished">Vyvést střih (rozvržení)</translation>
+    </message>
+    <message>
+        <source>Create layout</source>
+        <translation type="vanished">Vytvořit rozvržení</translation>
+    </message>
+    <message>
+        <source>Ctrl+L</source>
+        <translation type="vanished">Ctrl+L</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -3013,8 +4038,12 @@
         <translation>Ukončit program</translation>
     </message>
     <message>
+        <source>Ctrl+Q</source>
+        <translation type="vanished">Ctrl+Q</translation>
+    </message>
+    <message>
         <source>Preferences</source>
-        <translation>Předvolby</translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Pattern properties</source>
@@ -3034,7 +4063,7 @@
     </message>
     <message>
         <source>Edit pattern XML code</source>
-        <translation>Upravit XML kód střihu</translation>
+        <translation>Upravit kód XML střihu</translation>
     </message>
     <message>
         <source>Original zoom </source>
@@ -3046,7 +4075,11 @@
     </message>
     <message>
         <source>Zoom fit best</source>
-        <translation>Přizpůsobit velikost oknu aplikace</translation>
+        <translation>Nejlepší přizpůsobení zvětšení</translation>
+    </message>
+    <message>
+        <source>Ctrl+=</source>
+        <translation type="vanished">Ctrl+=</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -3058,7 +4091,7 @@
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation>Nahlásit chybu…</translation>
+        <translation>Nahlásit chybu...</translation>
     </message>
     <message>
         <source>Report bug</source>
@@ -3070,7 +4103,7 @@
     </message>
     <message>
         <source>Online help</source>
-        <translation>Nápověda na Internetu</translation>
+        <translation>Nápověda na internetu</translation>
     </message>
     <message>
         <source>Show online help</source>
@@ -3079,6 +4112,16 @@
     <message>
         <source>Pattern piece %1</source>
         <translation>Díl střihu %1</translation>
+    </message>
+    <message>
+        <source>Individual measurements is under development</source>
+        <translation type="vanished">Individuální míry jsou ve vývoji</translation>
+    </message>
+    <message>
+        <source>There is no way create individual measurements file independent on the pattern file.
+For opening pattern need keep both files: pattern and measurements. Do you want continue?</source>
+        <translation type="vanished">Není možné vytvářet soubor s individuálními mírami nezávisle na souboru se střihem.
+Pro otevření souboru je nutné zachovat oba soubory: střih a míry. Chcete pokračovat?</translation>
     </message>
     <message>
         <source>Select point</source>
@@ -3169,6 +4212,10 @@
         <translation>střih</translation>
     </message>
     <message>
+        <source>/pattern.val</source>
+        <translation type="vanished">/pattern.val</translation>
+    </message>
+    <message>
         <source>Save as</source>
         <translation>Uložit jako</translation>
     </message>
@@ -3197,12 +4244,16 @@
         <translation>Chyba. Špatný identifikátor.</translation>
     </message>
     <message>
+        <source>Critical error!</source>
+        <translation type="vanished">Vážná chyba!</translation>
+    </message>
+    <message>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Chyba při zpracování souboru (std::bad_alloc).</translation>
     </message>
     <message>
         <source>Bad id.</source>
-        <translation>Chybný identifikátor.</translation>
+        <translation>Špatný identifikátor.</translation>
     </message>
     <message>
         <source>File saved</source>
@@ -3211,6 +4262,10 @@
     <message>
         <source>untitled.val</source>
         <translation>Bez názvu.val</translation>
+    </message>
+    <message>
+        <source>Unsaved change</source>
+        <translation type="vanished">Neuložená změna</translation>
     </message>
     <message>
         <source>The pattern has been modified.
@@ -3263,6 +4318,14 @@ Chcete uložit své změny?</translation>
         <translation>Znovu otevřít soubory</translation>
     </message>
     <message>
+        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</source>
+        <translation type="vanished">Soubor s mírami &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; %3</translation>
+    </message>
+    <message>
+        <source>could not be found. Do you want to update the file location</source>
+        <translation type="vanished">se nepodařilo nalézt. Chcete aktualizovat umístění souboru?</translation>
+    </message>
+    <message>
         <source>Standard measurements (*.vst)</source>
         <translation>Obvyklé míry (*.vst)</translation>
     </message>
@@ -3292,7 +4355,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Simple curve</source>
-        <translation>Jednoduchá křivka</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Curved path</source>
@@ -3300,7 +4363,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation type="unfinished">Rozdělení jednoduché křivky</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -3308,7 +4371,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation type="unfinished">Bod průsečíku oblouku a čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -3320,19 +4383,19 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
-        <translation type="unfinished">Nástroj pro stanovení přídavku na švy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Union tool</source>
-        <translation>Nástroj Spojení</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>Lišta nástrojů</translation>
+        <translation type="unfinished">Nástrojový pruh</translation>
     </message>
     <message>
         <source>Last Tool</source>
-        <translation>Naposledy použitý nástroj</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Activate last used tool again</source>
@@ -3356,11 +4419,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Rozvržení</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create a layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vytvořit rozvržení</translation>
     </message>
     <message>
         <source>Show Curve Details</source>
@@ -3655,12 +4718,36 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Svg files (*.svg)</source>
+        <translation type="obsolete">Soubory SVG (*.svg)</translation>
+    </message>
+    <message>
+        <source>PDF files (*.pdf)</source>
+        <translation type="obsolete">Soubory PDF (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Images (*.png)</source>
+        <translation type="obsolete">Obrázky (*.png)</translation>
+    </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="obsolete">Wavefront OBJ (*.obj)</translation>
+    </message>
+    <message>
+        <source>PS files (*.ps)</source>
+        <translation type="obsolete">Soubory PS (*.ps)</translation>
+    </message>
+    <message>
+        <source>EPS files (*.eps)</source>
+        <translation type="obsolete">Soubory EPS (*.eps)</translation>
+    </message>
+    <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vytvoření souboru &apos;%1&apos; se nezdařilo! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vážná chyba!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -3692,11 +4779,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation type="unfinished">Nepodařilo se připravit data pro vytvoření rozvržení</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished">Zbylo několik neposkládaných obrobků, ale žádný z nich se neshoduje s papírem</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -3705,6 +4792,815 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Export error.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Measurements</name>
+    <message>
+        <source>head_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_hlavy</translation>
+    </message>
+    <message>
+        <source>mid_neck_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">střední_obvod_krku</translation>
+    </message>
+    <message>
+        <source>neck_base_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">dolní_obvod_krku</translation>
+    </message>
+    <message>
+        <source>head_and_neck_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_hlavy_a_krku</translation>
+    </message>
+    <message>
+        <source>center_front_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">střední_horní_délka_pasu</translation>
+    </message>
+    <message>
+        <source>center_back_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">střední_zadní_délka_pasu</translation>
+    </message>
+    <message>
+        <source>shoulder_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_ramene</translation>
+    </message>
+    <message>
+        <source>side_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">boční_délka_pasu</translation>
+    </message>
+    <message>
+        <source>trunk_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_trupu</translation>
+    </message>
+    <message>
+        <source>shoulder_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_ramene</translation>
+    </message>
+    <message>
+        <source>upper_chest_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">horní_obvod_hrudi</translation>
+    </message>
+    <message>
+        <source>bust_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_přes_prsa</translation>
+    </message>
+    <message>
+        <source>under_bust_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_pod_prsy</translation>
+    </message>
+    <message>
+        <source>waist_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_pasu</translation>
+    </message>
+    <message>
+        <source>high_hip_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">horní_obvod_boků</translation>
+    </message>
+    <message>
+        <source>hip_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_boků</translation>
+    </message>
+    <message>
+        <source>upper_front_chest_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">horní_přední_šířka_hrudi</translation>
+    </message>
+    <message>
+        <source>front_chest_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_šířka_hrudi</translation>
+    </message>
+    <message>
+        <source>across_front_shoulder_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_šířka_ramen</translation>
+    </message>
+    <message>
+        <source>across_back_shoulder_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">zadní_šířka_ramen</translation>
+    </message>
+    <message>
+        <source>upper_back_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">horní_šířka_zad</translation>
+    </message>
+    <message>
+        <source>back_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">šířka_zad</translation>
+    </message>
+    <message>
+        <source>bustpoint_to_bustpoint</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_bradavky_k_bradavce</translation>
+    </message>
+    <message>
+        <source>neck_to_bustpoint</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_krku_k_bradavce</translation>
+    </message>
+    <message>
+        <source>crotch_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_rozkroku</translation>
+    </message>
+    <message>
+        <source>shoulder_drop</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">pokles_ramena</translation>
+    </message>
+    <message>
+        <source>shoulder_slope_degrees</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">stupně_sklonu_ramen</translation>
+    </message>
+    <message>
+        <source>front_shoulder_slope_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_předního_sklonu_ramen</translation>
+    </message>
+    <message>
+        <source>back_shoulder_slope_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_zadního_sklonu_ramen</translation>
+    </message>
+    <message>
+        <source>front_shoulder_to_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_délka_od_ramene_k_pasu</translation>
+    </message>
+    <message>
+        <source>back_shoulder_to_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">zadní_délka_od_ramene_k_pasu</translation>
+    </message>
+    <message>
+        <source>front_neck_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_oblouk_krku</translation>
+    </message>
+    <message>
+        <source>back_neck_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">zadní_oblouk_krku</translation>
+    </message>
+    <message>
+        <source>front_upper_chest_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_horní_oblouk_hrudi</translation>
+    </message>
+    <message>
+        <source>back_upper_chest_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">zadní_horní_oblouk_hrudi</translation>
+    </message>
+    <message>
+        <source>front_waist_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_oblouk_pasu</translation>
+    </message>
+    <message>
+        <source>back_waist_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">zadní_oblouk_pasu</translation>
+    </message>
+    <message>
+        <source>front_upper_hip_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_horní_oblouk_boků</translation>
+    </message>
+    <message>
+        <source>back_upper_hip_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">zadní_horní_oblouk_boků</translation>
+    </message>
+    <message>
+        <source>front_hip_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_oblouk_boků</translation>
+    </message>
+    <message>
+        <source>back_hip_arc</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">zadní_oblouk_boků</translation>
+    </message>
+    <message>
+        <source>chest_slope</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">sklon_hrudi</translation>
+    </message>
+    <message>
+        <source>back_slope</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">sklon_zad</translation>
+    </message>
+    <message>
+        <source>front_waist_slope</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_sklon_pasu</translation>
+    </message>
+    <message>
+        <source>back_waist_slope</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">zadní_sklon_pasu</translation>
+    </message>
+    <message>
+        <source>front_neck_to_upper_chest_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_výška_od_krku_k_horní_hrudi</translation>
+    </message>
+    <message>
+        <source>front_neck_to_bust_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_výška_od_krku_k_prsům</translation>
+    </message>
+    <message>
+        <source>front_waist_to_upper_chest</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_od_pasu_k_horní_hrudi</translation>
+    </message>
+    <message>
+        <source>front_waist_to_lower_breast</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_od_pasu_ke_spodku_prsou</translation>
+    </message>
+    <message>
+        <source>back_waist_to_upper_chest</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_zadního_pasu_k_horní_hrudi</translation>
+    </message>
+    <message>
+        <source>strap_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_řemínku</translation>
+    </message>
+    <message>
+        <source>armscye_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_průramku</translation>
+    </message>
+    <message>
+        <source>elbow_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_lokte</translation>
+    </message>
+    <message>
+        <source>upper_arm_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_paže</translation>
+    </message>
+    <message>
+        <source>wrist_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_zápěstí</translation>
+    </message>
+    <message>
+        <source>scye_depth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">hloubka_průramku</translation>
+    </message>
+    <message>
+        <source>shoulder_and_arm_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_ramene_a_paže</translation>
+    </message>
+    <message>
+        <source>underarm_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_podpaží</translation>
+    </message>
+    <message>
+        <source>shoulder_to_elbow_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_od_ramene_k_lokti</translation>
+    </message>
+    <message>
+        <source>arm_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_paže</translation>
+    </message>
+    <message>
+        <source>hand_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">šířka_ruky</translation>
+    </message>
+    <message>
+        <source>hand_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_ruky</translation>
+    </message>
+    <message>
+        <source>hand_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_ruky</translation>
+    </message>
+    <message>
+        <source>thigh_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_stehna</translation>
+    </message>
+    <message>
+        <source>mid_thigh_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">střední_obvod_stehna</translation>
+    </message>
+    <message>
+        <source>knee_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_kolene</translation>
+    </message>
+    <message>
+        <source>calf_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_lýtka</translation>
+    </message>
+    <message>
+        <source>ankle_girth</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_kotníku</translation>
+    </message>
+    <message>
+        <source>knee_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_kolene</translation>
+    </message>
+    <message>
+        <source>ankle_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_kotníku</translation>
+    </message>
+    <message>
+        <source>foot_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">šířka_chodidla</translation>
+    </message>
+    <message>
+        <source>foot_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_chodidla</translation>
+    </message>
+    <message>
+        <source>height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška</translation>
+    </message>
+    <message>
+        <source>waist_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_pasu</translation>
+    </message>
+    <message>
+        <source>high_hip_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">horní_výška_boků</translation>
+    </message>
+    <message>
+        <source>hip_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_boků</translation>
+    </message>
+    <message>
+        <source>waist_to_hip_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_od_pasu_k_bokům</translation>
+    </message>
+    <message>
+        <source>waist_to_knee_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_od_pasu_ke_kolenům</translation>
+    </message>
+    <message>
+        <source>crotch_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_rozkroku</translation>
+    </message>
+    <message>
+        <source>size</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">velikost</translation>
+    </message>
+    <message>
+        <source>height_front_neck_base_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_předního_základního_bodu_krku</translation>
+    </message>
+    <message>
+        <source>height_base_neck_side_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_bočního_základního_bodu_krku</translation>
+    </message>
+    <message>
+        <source>height_shoulder_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_ramenního_bodu</translation>
+    </message>
+    <message>
+        <source>height_nipple_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_bodu_bradavky</translation>
+    </message>
+    <message>
+        <source>height_scapular_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_skapulárního_bodu</translation>
+    </message>
+    <message>
+        <source>height_under_buttock_folds</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_pod_hýždní_záhyb</translation>
+    </message>
+    <message>
+        <source>hips_excluding_protruding_abdomen</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">body_bez_vyčnívajícího_břicha</translation>
+    </message>
+    <message>
+        <source>girth_foot_instep</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_nártu</translation>
+    </message>
+    <message>
+        <source>side_waist_to_floor</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">zboku_od_pasu_k_podlaze</translation>
+    </message>
+    <message>
+        <source>front_waist_to_floor</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">zepředu_od_pasu_k_podlaze</translation>
+    </message>
+    <message>
+        <source>arc_through_groin_area</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">oblouk_skrz_třísla</translation>
+    </message>
+    <message>
+        <source>waist_to_plane_seat</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_pasu_k_rovině_sezení</translation>
+    </message>
+    <message>
+        <source>neck_to_radial_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_krku_k_radiálnímu_bodu</translation>
+    </message>
+    <message>
+        <source>neck_to_third_finger</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_krku_k_prostředníčku</translation>
+    </message>
+    <message>
+        <source>neck_to_first_line_chest_circumference</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_krku_k_první_linii_obvodu_hrudi</translation>
+    </message>
+    <message>
+        <source>front_waist_length</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">přední_délka_pasu</translation>
+    </message>
+    <message>
+        <source>arc_through_shoulder_joint</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">oblouk_skrz_kloub_ramene</translation>
+    </message>
+    <message>
+        <source>neck_to_back_line_chest_circumference</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_krku_k_zadní_linii_obvodu_hrudi</translation>
+    </message>
+    <message>
+        <source>waist_to_neck_side</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">boční_od_pasu_ke_krku</translation>
+    </message>
+    <message>
+        <source>arc_length_upper_body</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">délka_oblouku_horní_části_těla</translation>
+    </message>
+    <message>
+        <source>chest_width</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">šířka_hrudi</translation>
+    </message>
+    <message>
+        <source>anteroposterior_diameter_hands</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">předozadní_průměr_rukou</translation>
+    </message>
+    <message>
+        <source>height_clavicular_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_klíčního_bodu</translation>
+    </message>
+    <message>
+        <source>half_girth_neck</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">půlobvod_krku</translation>
+    </message>
+    <message>
+        <source>half_girth_neck_for_shirts</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">půlobvod_krku_pro_trička</translation>
+    </message>
+    <message>
+        <source>half_girth_chest_first</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">půlobvod_hrudi_první</translation>
+    </message>
+    <message>
+        <source>half_girth_chest_second</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">půlobvod_hrudi_druhý</translation>
+    </message>
+    <message>
+        <source>half_girth_chest_third</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">půlobvod_hrudi_třetí</translation>
+    </message>
+    <message>
+        <source>half_girth_waist</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">půlobvod_pasu</translation>
+    </message>
+    <message>
+        <source>half_girth_hips_considering_protruding_abdomen</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">půlobvod_boků_včetně_vyčnívajícího_bricha</translation>
+    </message>
+    <message>
+        <source>half_girth_hips_excluding_protruding_abdomen</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">půlobvod_boků_bez_vyčnívajícího_břicha</translation>
+    </message>
+    <message>
+        <source>girth_knee_flexed_feet</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">obvod_kolene_natažené_nohy</translation>
+    </message>
+    <message>
+        <source>neck_transverse_diameter</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">příčný_průměr_krku</translation>
+    </message>
+    <message>
+        <source>neck_to_front_waist_line</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_krku_k_přední_linii_pasu</translation>
+    </message>
+    <message>
+        <source>hand_vertical_diameter</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">svislý_průměr_ruky</translation>
+    </message>
+    <message>
+        <source>neck_to_knee_point</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_krku_k_bodu_kolene</translation>
+    </message>
+    <message>
+        <source>waist_to_knee</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">od_pasu_ke_koleni</translation>
+    </message>
+    <message>
+        <source>shoulder_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_ramen</translation>
+    </message>
+    <message>
+        <source>head_height</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">výška_hlavy</translation>
+    </message>
+    <message>
+        <source>body_position</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">poloha_těla</translation>
+    </message>
+    <message>
+        <source>arc_behind_shoulder_girdle</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">oblouk_za_ramenním_pletencem</translation>
+    </message>
+    <message>
+        <source>neck_to_neck_base</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">základna_od_krku_ke_krku</translation>
+    </message>
+    <message>
+        <source>depth_waist_first</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">hloubka_pasu_první</translation>
+    </message>
+    <message>
+        <source>depth_waist_second</source>
+        <comment>Short measurement name. Don&apos;t use math symbols in name!!!!</comment>
+        <translation type="vanished">hloubka_pasu_druhá</translation>
+    </message>
+</context>
+<context>
+    <name>MeasurementsDescriptions</name>
+    <message>
+        <source>Around fullest part of Head</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Okolo nejplnější části hlavy</translation>
+    </message>
+    <message>
+        <source>Around middle part of Neck</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Okolo střední části krku</translation>
+    </message>
+    <message>
+        <source>Around Neck at base</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Okolo krku v jeho základně</translation>
+    </message>
+    <message>
+        <source>Vertical Distance from Crown to Nape</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Svislá vzdálenost od koruny k šíji</translation>
+    </message>
+    <message>
+        <source>Front Neck Center over tape at Bustline to Front Waist Center</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Přední střed krku přes pásku na úrovni prsou po přední střed pasu</translation>
+    </message>
+    <message>
+        <source>Back Neck Center to Back Waist Center</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Od zadního středu krku k zadnímu středu pasu</translation>
+    </message>
+    <message>
+        <source>NeckPoint to ShoulderTip</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Z bodu krku na vrchol ramene</translation>
+    </message>
+    <message>
+        <source>Armpit to Waist side</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Z podpaží k pasu na boku</translation>
+    </message>
+    <message>
+        <source>Around Body from middle of Shoulder length to BustPoint to Crotch up back to beginning point</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Kolem těla ze středu délky ramene přes poprsí a rozkrok zpět nahoru do počátečního bodu</translation>
+    </message>
+    <message>
+        <source>Around Arms and Torso, at bicep level parallel to floor, with arms hanging at the sides</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Kolem paží a těla, v úrovni bicepsu rovnoběžně s podlahou, s rukama visícíma podél těla</translation>
+    </message>
+    <message>
+        <source>Around Chest at Armfold level, will be parallel to floor across back, will not be parallel to floor across front chest</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Kolem hrudi ve výšce založených rukou, bude rovnoběžné s podlahou přes záda, nebude rovnoběžné s podlahou přes přední část hrudi</translation>
+    </message>
+    <message>
+        <source>Around fullest part of Bust, parallel to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Přes nejplnější část poprsí, rovnoběžně s podlahou</translation>
+    </message>
+    <message>
+        <source>Around Chest below the Bust, parallel to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Přes hruď pod prsy, rovnoběžně s podlahou</translation>
+    </message>
+    <message>
+        <source>Tie a string around smallest part of waist, keep string tied while taking meaasurements. Not usually parallel to floor for front waist or back waist.</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Uvažte provázek kolem nejužší části pasu, při měření mějte provázek napnutý. Obvykle není rovnoběžný s podlahou pro přední a zadní části pasu.</translation>
+    </message>
+    <message>
+        <source>Around HighHip, parallel to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Kolem horní části boků, rovnoběžně s podlahou</translation>
+    </message>
+    <message>
+        <source>Around Hip, parallel to floor</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Kolem boků, rovnoběžně s podlahou</translation>
+    </message>
+    <message>
+        <source>Across Front UpperChest, smallest width from armscye to armscye</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Přes přední horní hruď, nejmenší šířka od průramku k průramku</translation>
+    </message>
+    <message>
+        <source>Across Back UpperChest, smallest width from armscye to armscye</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Přes horní část zad, nejmenší šířka od průramku k průramku</translation>
+    </message>
+    <message>
+        <source>From Front Waist Center, down to crotch, up to Back Waist Center</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Zepředu ze středu pasu, dolů do rozkroku, a nahoru dozadu do středu pasu.</translation>
+    </message>
+    <message>
+        <source>Sit on hard chair, measure from side waist straight down to chair bottom</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Sedněte si na židli, měřte ze strany pasu přímo dolů ke spodní části židle</translation>
+    </message>
+    <message>
+        <source>Vertical Distance from NeckPoint level to ShoulderTip level</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Svislá vzdálenost z úrovně krčního bodu na úroveň vrcholku ramena</translation>
+    </message>
+    <message>
+        <source>Degrees of angle from NeckPoint to ShoulderTip – requires goniometer</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Úhlové stupně od krčního bodu k vrcholu ramene - vyžaduje goniometr</translation>
+    </message>
+    <message>
+        <source>ShoulderTip to Front Waist Center</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Od vrcholku ramene ke středu pasu vepředu</translation>
+    </message>
+    <message>
+        <source>ShoulderTip to Back Waist Center</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Od vrcholku ramene ke středu pasu vzadu</translation>
+    </message>
+    <message>
+        <source>NeckPoint straight down front chest to Waistline</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Od krčního bodu přímo dolů přes hrudník na úroveň pasu</translation>
+    </message>
+    <message>
+        <source>Back NeckPoint straight down back chest to Waistline</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Od krčního bodu přímo dolů přes záda na úroveň pasu</translation>
+    </message>
+    <message>
+        <source>NeckPoint to NeckPoint through Front Neck Center</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Z krčního bodu do krčního bodu skrz přední střed krku</translation>
+    </message>
+    <message>
+        <source>NeckPoint to NeckPoint across Nape</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Z krčního bodu do krčního bodu přes šíji</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <comment>Full measurement description</comment>
+        <translation type="obsolete">Velikost</translation>
+    </message>
+    <message>
+        <source>Shoulder height</source>
+        <comment>Full measurement description</comment>
+        <translation type="obsolete">Výška ramen</translation>
+    </message>
+    <message>
+        <source>Head height</source>
+        <comment>Full measurement description</comment>
+        <translation type="obsolete">Výška hlavy</translation>
+    </message>
+    <message>
+        <source>Body position</source>
+        <comment>Full measurement description</comment>
+        <translation type="vanished">Poloha těla</translation>
+    </message>
+</context>
+<context>
+    <name>MeasurementsFullNames</name>
+    <message>
+        <source>Size</source>
+        <comment>Full measurement name</comment>
+        <translation type="obsolete">Velikost</translation>
+    </message>
+    <message>
+        <source>Shoulder height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Výška ramen</translation>
+    </message>
+    <message>
+        <source>Head height</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Výška hlavy</translation>
+    </message>
+    <message>
+        <source>Body position</source>
+        <comment>Full measurement name</comment>
+        <translation type="vanished">Poloha těla</translation>
     </message>
 </context>
 <context>
@@ -3728,6 +5624,10 @@ Chcete uložit své změny?</translation>
 <context>
     <name>MoveSPoint</name>
     <message>
+        <source>Move single point</source>
+        <translation type="vanished">Přesunout jeden bod</translation>
+    </message>
+    <message>
         <source>move single point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3735,12 +5635,20 @@ Chcete uložit své změny?</translation>
 <context>
     <name>MoveSpline</name>
     <message>
+        <source>Move spline</source>
+        <translation type="vanished">Posunout křivku</translation>
+    </message>
+    <message>
         <source>move spline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MoveSplinePath</name>
+    <message>
+        <source>Move spline path</source>
+        <translation type="vanished">Posunout cestu křivky</translation>
+    </message>
     <message>
         <source>move spline path</source>
         <translation type="unfinished"></translation>
@@ -3786,7 +5694,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation>Rozvržení</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3814,6 +5722,24 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Count steps (0 - no limit)</source>
         <translation>Počítat kroky (0 - bez omezení)</translation>
+    </message>
+</context>
+<context>
+    <name>PostfixOperators</name>
+    <message>
+        <source>cm</source>
+        <comment>centimeter</comment>
+        <translation type="vanished">cm</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <comment>millimeter</comment>
+        <translation type="vanished">mm</translation>
+    </message>
+    <message>
+        <source>in</source>
+        <comment>inch</comment>
+        <translation type="vanished">palce</translation>
     </message>
 </context>
 <context>
@@ -3870,7 +5796,15 @@ Chcete uložit své změny?</translation>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Začněte vytvořením nového dílu střihu.</translation>
+        <translation>Vytvořit nový díl střihu pro započetí s prací.</translation>
+    </message>
+    <message>
+        <source>Add node</source>
+        <translation type="vanished">Přidat uzel</translation>
+    </message>
+    <message>
+        <source>Move detail</source>
+        <translation type="vanished">Posunout detail</translation>
     </message>
     <message>
         <source>mm</source>
@@ -3925,193 +5859,209 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nalezen neočekávaný řetězec &quot;$TOK$&quot; na pozici $POS$.</translation>
     </message>
     <message>
         <source>Internal error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vnitřní chyba</translation>
     </message>
     <message>
         <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný název funkce, proměnné nebo konstanty: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný identifikátor binárního operátoru: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný identifikátor zaváděcího operátoru: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný identifikátor ukončujícího operátoru: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid pointer to callback function.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný ukazatel na funkci zpětného volání.</translation>
     </message>
     <message>
         <source>Expression is empty.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Výraz je prázdný.</translation>
     </message>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný ukazatel na proměnnou.</translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nalezen neočekávaný operátor &quot;$TOK$&quot; na pozici $POS$</translation>
     </message>
     <message>
         <source>Unexpected end of expression at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neočekávaný konec výrazu v poloze $POS$</translation>
     </message>
     <message>
         <source>Unexpected argument separator at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neočekávaný oddělovač argumentů v poloze $POS$</translation>
     </message>
     <message>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neočekávaná závorka &quot;$TOK$&quot; v poloze $POS$</translation>
     </message>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neočekávaná funkce &quot;$TOK$&quot; v poloze $POS$</translation>
     </message>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nalezena neočekávaná hodnota &quot;$TOK$&quot; v poloze $POS$</translation>
     </message>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nalezena neočekávaná proměnná &quot;$TOK$&quot; v poloze $POS$</translation>
     </message>
     <message>
         <source>Function arguments used without a function (position: $POS$)</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Argumenty funkce použity bez funkce (pozice: $POS$)</translation>
     </message>
     <message>
         <source>Missing parenthesis</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Chybějící závorka</translation>
     </message>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Příliš mnoho parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
     </message>
     <message>
         <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Příliš málo parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
     </message>
     <message>
         <source>Divide by zero</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dělení nulou</translation>
     </message>
     <message>
         <source>Domain error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Chyba domény</translation>
     </message>
     <message>
         <source>Name conflict</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Střet názvu</translation>
     </message>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neplatná hodnota pro prioritu operátoru (musí být větší nebo rovný nule).</translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>uživatelem stanovený binární operátor &quot;$TOK$&quot; je ve střetu s vestavěným operátorem.</translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neočekávaný řetězec textu nalezen v poloze $POS$.</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neukončený řetězec začínající v poloze $POS$.</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Řetězcová funkce volána s argumentem, který není řetězec.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Řetězcová hodnota použita tam, kde je očekávaný číselný argument.</translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Žádné vhodné přetížení pro operátor &quot;$TOK$&quot; v poloze $POS$.</translation>
     </message>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Výsledek funkce je řetězec.</translation>
     </message>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při zpracování.</translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
-        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Desetinný oddělovač je shodný s oddělovačem argumentů funkcí.</translation>
     </message>
     <message>
         <source>If-then-else operator is missing an else clause</source>
         <comment>Math parser error messages. Do not translate operator name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>V operátoru if-then-else chybí část else</translation>
     </message>
     <message>
         <source>Misplaced colon at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Chybně umístěná dvojtečka v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation>Operátoru &quot;$TOK$&quot; musí předcházet ukončující závorka.</translation>
     </message>
 </context>
 <context>
     <name>RenamePP</name>
+    <message>
+        <source>Rename pattern piece</source>
+        <translation type="vanished">Přejmenovat díl střihu</translation>
+    </message>
     <message>
         <source>rename pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
+    <name>STDescriptions</name>
+    <message>
+        <source>Standard figures of men 1st group, chest 100 cm</source>
+        <comment>Standard table description</comment>
+        <translation type="vanished">Obvyklá čísla mužů první skupiny, hruď 100 cm</translation>
+    </message>
+</context>
+<context>
     <name>SaveDetailOptions</name>
+    <message>
+        <source>Save detail option</source>
+        <translation type="vanished">Uložit volbu detailu</translation>
+    </message>
     <message>
         <source>save detail option</source>
         <translation type="unfinished"></translation>
@@ -4119,6 +6069,10 @@ Chcete uložit své změny?</translation>
 </context>
 <context>
     <name>SaveToolOptions</name>
+    <message>
+        <source>Save tool option</source>
+        <translation type="vanished">Uložit volbu nástroje</translation>
+    </message>
     <message>
         <source>save tool option</source>
         <translation type="unfinished"></translation>
@@ -4144,15 +6098,15 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Základní hodnota</translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ve velikostech</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ve výškách</translation>
     </message>
     <message>
         <source>Details</source>
@@ -4216,7 +6170,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cesta:</translation>
     </message>
     <message>
         <source>Path to file</source>
@@ -4244,11 +6198,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Given name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Křestní jméno:</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Příjmení:</translation>
     </message>
     <message>
         <source>Birth date:</source>
@@ -4348,7 +6302,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Předvolby</translation>
+        <translation type="unfinished">Nastavení</translation>
     </message>
     <message>
         <source>untitled %1</source>
@@ -4423,8 +6377,16 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished">Individuální míry</translation>
     </message>
     <message>
+        <source>male</source>
+        <translation type="obsolete">muž</translation>
+    </message>
+    <message>
+        <source>female</source>
+        <translation type="obsolete">žena</translation>
+    </message>
+    <message>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bez názvu</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -4571,15 +6533,19 @@ Do you want to save your changes?</source>
     <message>
         <source>male</source>
         <comment>gender</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">muž</translation>
     </message>
     <message>
         <source>female</source>
         <comment>gender</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">žena</translation>
     </message>
     <message>
         <source>Gender:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PM system:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4598,9 +6564,84 @@ Do you want to save your changes?</source>
         <source>Export standard measurements not supported.</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>TableWindow</name>
     <message>
-        <source>PM system:</source>
-        <translation type="unfinished"></translation>
+        <source>Create a layout</source>
+        <translation type="vanished">Vytvořit rozvržení</translation>
+    </message>
+    <message>
+        <source>toolBar</source>
+        <translation type="vanished">Nástrojový pruh</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="vanished">Uložit</translation>
+    </message>
+    <message>
+        <source>Save layout</source>
+        <translation type="vanished">Uložit rozvržení</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="vanished">Zastavit</translation>
+    </message>
+    <message>
+        <source>Stop laying</source>
+        <translation type="vanished">Zastavit kladení</translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation type="vanished">Přiblížit</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation type="vanished">Oddálit</translation>
+    </message>
+    <message>
+        <source>untitled</source>
+        <translation type="vanished">bez názvu</translation>
+    </message>
+    <message>
+        <source>Svg files (*.svg)</source>
+        <translation type="vanished">Soubory SVG (*.svg)</translation>
+    </message>
+    <message>
+        <source>PDF files (*.pdf)</source>
+        <translation type="vanished">Soubory PDF (*.pdf)</translation>
+    </message>
+    <message>
+        <source>Images (*.png)</source>
+        <translation type="vanished">Obrázky (*.png)</translation>
+    </message>
+    <message>
+        <source>PS files (*.ps)</source>
+        <translation type="vanished">Soubory PS (*.ps)</translation>
+    </message>
+    <message>
+        <source>EPS files (*.eps)</source>
+        <translation type="vanished">Soubory EPS (*.eps)</translation>
+    </message>
+    <message>
+        <source>Creating file &apos;%1&apos; failed! %2</source>
+        <translation type="vanished">Vytvoření souboru &apos;%1&apos; se nezdařilo! %2</translation>
+    </message>
+    <message>
+        <source>Critical error!</source>
+        <translation type="vanished">Vážná chyba!</translation>
+    </message>
+    <message>
+        <source>Wavefront OBJ (*.obj)</source>
+        <translation type="vanished">Wavefront OBJ (*.obj)</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="obsolete">Upravit</translation>
+    </message>
+    <message>
+        <source>Ctrl+S</source>
+        <translation type="obsolete">Ctrl+S</translation>
     </message>
 </context>
 <context>
@@ -4704,19 +6745,23 @@ Do you want to save your changes?</source>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
-        <translation>Příště se již neptat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation>Příště se již nept&amp;at</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation>Příště již nezobrazovat</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VAbstractConverter</name>
+    <message>
+        <source>Error creation backup file: %1.</source>
+        <translation type="vanished">Chyba při vytváření záložního souboru: %1.</translation>
+    </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
         <translation>Nebylo možné získat informace o verzi.</translation>
@@ -4762,46 +6807,54 @@ Do you want to save your changes?</source>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nelze najít nástroj v tabulce.</translation>
     </message>
 </context>
 <context>
     <name>VAbstractTool</name>
     <message>
+        <source>Confirm the deletion.</source>
+        <translation type="vanished">Potvrďte smazání.</translation>
+    </message>
+    <message>
+        <source>Do you really want delete?</source>
+        <translation type="vanished">Opravdu chcete smazat?</translation>
+    </message>
+    <message>
         <source>black</source>
-        <translation>černá</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>green</source>
-        <translation>zelená</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>blue</source>
-        <translation>modrá</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dark red</source>
-        <translation>tmavě červená</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dark green</source>
-        <translation>tmavě zelená</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>dark blue</source>
-        <translation>tmavě modrá</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>yellow</source>
-        <translation>žlutá</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation>Potvrdit smazání</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation>Opravdu chcete smazat?</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4842,22 +6895,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VCommandLine</name>
     <message>
-        <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The base filename of layout files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The path to output destination folder.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The destination folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Path to custom measure file (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4874,22 +6911,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The size value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The height value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
@@ -4898,19 +6919,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The page width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4970,18 +6979,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern making program.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pattern file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5006,11 +7003,59 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Export options can be used with single input file only.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Test option can be used with single input file only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export options can be used with single input file only.</source>
+        <source>The base filename of exported layout files. Use it to enable console export mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The base filename of layout files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to output destination folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The size value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The height value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5020,6 +7065,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Invalid gradation height value.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making program.</source>
+        <translation type="unfinished">Program na tvorbu střihů.</translation>
+    </message>
+    <message>
+        <source>Pattern file.</source>
+        <translation type="unfinished">Soubor se střihem.</translation>
     </message>
 </context>
 <context>
@@ -5116,6 +7169,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VException</name>
+    <message>
+        <source>Critical error!</source>
+        <translation type="vanished">Vážná chyba!</translation>
+    </message>
+</context>
+<context>
     <name>VFormula</name>
     <message>
         <source>Error</source>
@@ -5169,6 +7229,10 @@ Do you want to save your changes?</source>
 <context>
     <name>VPattern</name>
     <message>
+        <source>Can&apos;t find tool in table.</source>
+        <translation type="vanished">Nelze najít nástroj v tabulce.</translation>
+    </message>
+    <message>
         <source>Error no unique id.</source>
         <translation>Chyba. Není jedinečný identifikátor.</translation>
     </message>
@@ -5187,6 +7251,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Error wrong id.</source>
         <translation>Chyba. Špatný identifikátor.</translation>
+    </message>
+    <message>
+        <source>Critical error!</source>
+        <translation type="vanished">Vážná chyba!</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -5297,6 +7365,10 @@ Do you want to save your changes?</source>
         <translation>Chyba při vytváření nebo aktualizaci detailu spojení</translation>
     </message>
     <message>
+        <source>File error.</source>
+        <translation type="vanished">Chyba souboru.</translation>
+    </message>
+    <message>
         <source>Error creating or updating point of intersection arcs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5361,6 +7433,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
         <translation>Nelze vyjmout cestu křivky s jedním bodem</translation>
+    </message>
+</context>
+<context>
+    <name>VTableGraphicsView</name>
+    <message>
+        <source>can&apos;t find detail</source>
+        <translation type="vanished">nelze najít detail</translation>
+    </message>
+    <message>
+        <source>detail found</source>
+        <translation type="vanished">detail nalezen</translation>
     </message>
 </context>
 <context>
@@ -5494,11 +7577,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Barva čáry</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
@@ -6381,27 +8464,27 @@ Do you want to save your changes?</source>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Čára_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Úhel čáry_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Oblouk_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Křivka_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cesta křivky</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
@@ -6441,107 +8524,107 @@ Do you want to save your changes?</source>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">atan</translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">asinh</translation>
     </message>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">acosh</translation>
     </message>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">atanh</translation>
     </message>
     <message>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">log2</translation>
     </message>
     <message>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">log10</translation>
     </message>
     <message>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">log</translation>
     </message>
     <message>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ln</translation>
     </message>
     <message>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">exp</translation>
     </message>
     <message>
         <source>sqrt</source>
         <comment>square root of a value</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sqrt</translation>
     </message>
     <message>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sign</translation>
     </message>
     <message>
         <source>rint</source>
         <comment>round to nearest integer</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">rint</translation>
     </message>
     <message>
         <source>abs</source>
         <comment>absolute value</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">abs</translation>
     </message>
     <message>
         <source>min</source>
@@ -6551,17 +8634,17 @@ Do you want to save your changes?</source>
     <message>
         <source>max</source>
         <comment>max of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">max</translation>
     </message>
     <message>
         <source>sum</source>
         <comment>sum of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sum</translation>
     </message>
     <message>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">avg</translation>
     </message>
     <message>
         <source>fmod</source>
@@ -6581,7 +8664,7 @@ Do you want to save your changes?</source>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">palce</translation>
     </message>
 </context>
 <context>
@@ -6604,6 +8687,34 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="unfinished">Chyba při obnově záložního souboru: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>Variables</name>
+    <message>
+        <source>Line_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Čára_</translation>
+    </message>
+    <message>
+        <source>AngleLine_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Úhel čáry_</translation>
+    </message>
+    <message>
+        <source>Arc_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Oblouk_</translation>
+    </message>
+    <message>
+        <source>Spl_</source>
+        <comment>Left symbol _ in name</comment>
+        <translation type="vanished">Křivka_</translation>
+    </message>
+    <message>
+        <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of name</comment>
+        <translation type="vanished">Cesta křivky</translation>
     </message>
 </context>
 <context>
@@ -6675,6 +8786,200 @@ Do you want to save your changes?</source>
     <message>
         <source>Information.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Pattern making program.</source>
+        <translation type="vanished">Program na tvorbu střihů.</translation>
+    </message>
+    <message>
+        <source>Pattern file.</source>
+        <translation type="vanished">Soubor se střihem.</translation>
+    </message>
+</context>
+<context>
+    <name>qmu::QmuParserErrorMsg</name>
+    <message>
+        <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="obsolete">Nalezen neočekávaný řetězec &quot;$TOK$&quot; na pozici $POS$.</translation>
+    </message>
+    <message>
+        <source>Internal error</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Vnitřní chyba</translation>
+    </message>
+    <message>
+        <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="obsolete">Neplatný název funkce, proměnné nebo konstanty: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="obsolete">Neplatný identifikátor binárního operátoru: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="obsolete">Neplatný identifikátor zaváděcího operátoru: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="obsolete">Neplatný identifikátor ukončujícího operátoru: &quot;$TOK$&quot;.</translation>
+    </message>
+    <message>
+        <source>Invalid pointer to callback function.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Neplatný ukazatel na funkci zpětného volání.</translation>
+    </message>
+    <message>
+        <source>Expression is empty.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Výraz je prázdný.</translation>
+    </message>
+    <message>
+        <source>Invalid pointer to variable.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Neplatný ukazatel na proměnnou.</translation>
+    </message>
+    <message>
+        <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="obsolete">Nalezen neočekávaný operátor &quot;$TOK$&quot; na pozici $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected end of expression at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="obsolete">Neočekávaný konec výrazu v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected argument separator at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="obsolete">Neočekávaný oddělovač argumentů v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="obsolete">Neočekávaná závorka &quot;$TOK$&quot; v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="obsolete">Neočekávaná funkce &quot;$TOK$&quot; v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="obsolete">Nalezena neočekávaná hodnota &quot;$TOK$&quot; v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="obsolete">Nalezena neočekávaná proměnná &quot;$TOK$&quot; v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Function arguments used without a function (position: $POS$)</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="obsolete">Argumenty funkce použity bez funkce (pozice: $POS$)</translation>
+    </message>
+    <message>
+        <source>Missing parenthesis</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Chybějící závorka</translation>
+    </message>
+    <message>
+        <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="obsolete">Příliš mnoho parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="obsolete">Příliš málo parametrů funkce &quot;$TOK$&quot; ve výrazu v poloze $POS$</translation>
+    </message>
+    <message>
+        <source>Divide by zero</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Dělení nulou</translation>
+    </message>
+    <message>
+        <source>Domain error</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Chyba domény</translation>
+    </message>
+    <message>
+        <source>Name conflict</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Střet názvu</translation>
+    </message>
+    <message>
+        <source>Invalid value for operator priority (must be greater or equal to zero).</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Neplatná hodnota pro prioritu operátoru (musí být větší nebo rovný nule).</translation>
+    </message>
+    <message>
+        <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="obsolete">uživatelem stanovený binární operátor &quot;$TOK$&quot; je ve střetu s vestavěným operátorem.</translation>
+    </message>
+    <message>
+        <source>Unexpected string token found at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="obsolete">Neočekávaný řetězec textu nalezen v poloze $POS$.</translation>
+    </message>
+    <message>
+        <source>Unterminated string starting at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="obsolete">Neukončený řetězec začínající v poloze $POS$.</translation>
+    </message>
+    <message>
+        <source>String function called with a non string type of argument.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Řetězcová funkce volána s argumentem, který není řetězec.</translation>
+    </message>
+    <message>
+        <source>String value used where a numerical argument is expected.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Řetězcová hodnota použita tam, kde je očekávaný číselný argument.</translation>
+    </message>
+    <message>
+        <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
+        <translation type="obsolete">Žádné vhodné přetížení pro operátor &quot;$TOK$&quot; v poloze $POS$.</translation>
+    </message>
+    <message>
+        <source>Function result is a string.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Výsledek funkce je řetězec.</translation>
+    </message>
+    <message>
+        <source>Parser error.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Chyba při zpracování.</translation>
+    </message>
+    <message>
+        <source>Decimal separator is identic to function argument separator.</source>
+        <comment>Math parser error messages.</comment>
+        <translation type="obsolete">Desetinný oddělovač je shodný s oddělovačem argumentů funkcí.</translation>
+    </message>
+    <message>
+        <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
+        <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
+        <translation type="obsolete">Operátoru &quot;$TOK$&quot; musí předcházet ukončující závorka.</translation>
+    </message>
+    <message>
+        <source>If-then-else operator is missing an else clause</source>
+        <comment>Math parser error messages. Do not translate operator name.</comment>
+        <translation type="obsolete">V operátoru if-then-else chybí část else</translation>
+    </message>
+    <message>
+        <source>Misplaced colon at position $POS$</source>
+        <comment>Math parser error messages. Left untouched $POS$</comment>
+        <translation type="obsolete">Chybně umístěná dvojtečka v poloze $POS$</translation>
     </message>
 </context>
 <context>
