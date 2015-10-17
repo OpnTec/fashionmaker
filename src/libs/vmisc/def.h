@@ -519,6 +519,7 @@ extern const QString p53_S;
 extern const QString p54_S;
 extern const QString p998_S;
 
+QStringList ListPMSystems();
 void InitPMSystems(QComboBox *systemCombo);
 
 // functions

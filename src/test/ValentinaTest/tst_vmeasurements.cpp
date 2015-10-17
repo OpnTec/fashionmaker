@@ -114,3 +114,101 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
         QFAIL(e.ErrorMessage().toUtf8().constData());
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ValidPMCodesStandardFile helps to check that all current pattern making systems match pattern inside XSD
+ * scheme.
+ */
+void TST_VMeasurements::ValidPMCodesStandardFile()
+{
+    Unit mUnit = Unit::Cm;
+    const int height = 176;
+    const int size = 50;
+
+    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit));
+    data->SetHeight(height);
+    data->SetSize(size);
+
+    QSharedPointer<VMeasurements> m =
+            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, size, height, data.data()));
+
+    const QStringList listSystems = ListPMSystems();
+    for (int i = 0; i < listSystems.size(); ++i)
+    {
+        QString code = listSystems.at(i);
+        code.remove(0, 1); // remove 'p'
+        m->SetPMSystem(code);
+
+        QTemporaryFile file;
+        if (file.open())
+        {
+            QString error;
+            const bool result = m->SaveDocument(file.fileName(), error);
+
+            const QString message = QString("Error: %1 for code=%2").arg(error).arg(listSystems.at(i));
+            QVERIFY2(result, qUtf8Printable(message));
+        }
+        else
+        {
+            QFAIL("Can't open temporary file.");
+        }
+
+        try
+        {
+            VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, file.fileName());
+        }
+        catch (VException &e)
+        {
+            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage()).arg(listSystems.at(i));
+            QFAIL(qUtf8Printable(message));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ValidPMCodesIndividualFile helps to check that all current pattern making systems match pattern inside XSD
+ * scheme.
+ */
+void TST_VMeasurements::ValidPMCodesIndividualFile()
+{
+    Unit mUnit = Unit::Cm;
+
+    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit));
+
+    QSharedPointer<VMeasurements> m =
+            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
+
+    const QStringList listSystems = ListPMSystems();
+    for (int i = 0; i < listSystems.size(); ++i)
+    {
+        QString code = listSystems.at(i);
+        code.remove(0, 1); // remove 'p'
+        m->SetPMSystem(code);
+
+        QTemporaryFile file;
+        if (file.open())
+        {
+            QString error;
+            const bool result = m->SaveDocument(file.fileName(), error);
+
+            const QString message = QString("Error: %1 for code=%2").arg(error).arg(listSystems.at(i));
+            QVERIFY2(result, qUtf8Printable(message));
+        }
+        else
+        {
+            QFAIL("Can't open temporary file.");
+        }
+
+        try
+        {
+            VDomDocument::ValidateXML(VVITConverter::CurrentSchema, file.fileName());
+        }
+        catch (VException &e)
+        {
+            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage()).arg(listSystems.at(i));
+            QFAIL(qUtf8Printable(message));
+        }
+    }
+}

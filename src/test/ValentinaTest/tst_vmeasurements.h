@@ -41,6 +41,8 @@ private slots:
     void CreateEmptyStandardFile();
     void CreateEmptyIndividualFile();
 
+    void ValidPMCodesStandardFile();
+    void ValidPMCodesIndividualFile();
 };
 
 #endif // TST_VMEASUREMENTS_H
