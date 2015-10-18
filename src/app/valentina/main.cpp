@@ -29,6 +29,7 @@
 #include "mainwindow.h"
 #include "core/vapplication.h"
 #include <QMessageBox> // For QT_REQUIRE_VERSION
+#include <QTimer>
 
 // Lock producing random attribute order in XML
 // https://stackoverflow.com/questions/27378143/qt-5-produce-random-attribute-order-in-xml

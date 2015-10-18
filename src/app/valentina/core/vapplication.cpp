@@ -50,6 +50,7 @@
 #include <QThread>
 #include <QDateTime>
 #include <QtXmlPatterns>
+#include <QIcon>
 
 Q_LOGGING_CATEGORY(vApp, "v.application")
 

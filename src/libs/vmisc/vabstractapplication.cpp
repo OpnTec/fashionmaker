@@ -30,6 +30,9 @@
 #include "../vmisc/def.h"
 
 #include <QLibraryInfo>
+#include <QLoggingCategory>
+#include <QTranslator>
+#include <QtDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)

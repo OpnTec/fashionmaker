@@ -32,6 +32,7 @@
 #include "../vgeometry/vpointf.h"
 
 #include <QDebug>
+#include <QPainterPath>
 #include <QString>
 
 //---------------------------------------------------------------------------------------------------------------------

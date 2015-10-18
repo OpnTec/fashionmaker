@@ -49,6 +49,7 @@
 #include <iostream>
 #include <QGridLayout>
 #include <QSpacerItem>
+#include <QThread>
 
 Q_LOGGING_CATEGORY(mApp, "m.application")
 

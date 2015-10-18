@@ -21,6 +21,8 @@
 
 #include "qmuformulabase.h"
 
+#include <QLocale>
+
 namespace qmu
 {
 

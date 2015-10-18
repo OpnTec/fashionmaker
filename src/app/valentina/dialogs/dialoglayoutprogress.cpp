@@ -33,6 +33,8 @@
 
 #include <QMessageBox>
 #include <QPushButton>
+#include <QMovie>
+#include <QtDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)

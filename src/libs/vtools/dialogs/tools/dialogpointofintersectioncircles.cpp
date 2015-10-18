@@ -36,6 +36,8 @@
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../support/dialogeditwrongformula.h"
 
+#include <QTimer>
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContainer *data, const quint32 &toolId,
                                                                    QWidget *parent)

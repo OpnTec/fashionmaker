@@ -34,6 +34,8 @@
 #include <QDate>
 #include <QDesktopServices>
 #include <QMessageBox>
+#include <QUrl>
+#include <QtDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutTape::DialogAboutTape(QWidget *parent)

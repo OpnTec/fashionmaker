@@ -31,6 +31,8 @@
 
 #include "abstracttest.h"
 
+#include <QPointer>
+
 class QTranslator;
 class VTranslateMeasurements;
 

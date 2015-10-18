@@ -29,6 +29,8 @@
 #ifndef DXFDEF_H
 #define DXFDEF_H
 
+#include <QtGlobal>
+
 enum class VarMeasurement : unsigned char { English=0, Metric=1 };
 
 //Default drawing units for AutoCAD DesignCenter blocks:

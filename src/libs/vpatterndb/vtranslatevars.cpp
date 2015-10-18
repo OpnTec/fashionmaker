@@ -33,6 +33,9 @@
 #include "../qmuparser/qmutokenparser.h"
 #include "../ifc/ifcdef.h"
 
+#include <QLocale>
+#include <QtDebug>
+
 using namespace qmu;
 
 //---------------------------------------------------------------------------------------------------------------------

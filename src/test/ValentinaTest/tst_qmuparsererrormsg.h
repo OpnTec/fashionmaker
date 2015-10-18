@@ -33,6 +33,7 @@
 #include "../qmuparser/qmuparsererror.h"
 
 #include <QTranslator>
+#include <QPointer>
 
 class TST_QmuParserErrorMsg : public AbstractTest
 {

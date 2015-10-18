@@ -29,6 +29,9 @@
 #include "vmeasurement.h"
 #include "vmeasurement_p.h"
 
+#include <QMap>
+#include <QtDebug>
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMeasurement create measurement for standard table

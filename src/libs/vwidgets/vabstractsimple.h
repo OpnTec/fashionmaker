@@ -30,6 +30,8 @@
 #define VABSTRACTSIMPLE_H
 
 #include <QObject>
+#include <QPen>
+#include <QColor>
 #include "../vmisc/def.h"
 
 class VAbstractSimple : public QObject

@@ -32,6 +32,7 @@
 
 #include <QFile>
 #include <QFileInfo>
+#include <QDir>
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
@@ -174,6 +175,7 @@ void VAbstractConverter::Replace(QString &formula, const QString &newName, int p
     bias = token.length() - newName.length();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const
 {
     if (bias == 0)

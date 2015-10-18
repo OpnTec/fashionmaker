@@ -33,6 +33,8 @@
 #include "../vpatterndb/calculator.h"
 #include "../qmuparser/qmutokenparser.h"
 
+#include <QDate>
+
 const QString VMeasurements::TagVST              = QStringLiteral("vst");
 const QString VMeasurements::TagVIT              = QStringLiteral("vit");
 const QString VMeasurements::TagBodyMeasurements = QStringLiteral("body-measurements");

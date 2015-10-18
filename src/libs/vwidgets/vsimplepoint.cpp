@@ -34,6 +34,7 @@
 
 #include <QGraphicsSceneMouseEvent>
 #include <QStyleOptionGraphicsItem>
+#include <QPen>
 
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
