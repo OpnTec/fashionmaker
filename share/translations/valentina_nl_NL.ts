@@ -3953,7 +3953,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Ongeldige postfix operator identificator: &quot;$TOKS&quot;.</translation>
+        <translation>Ongeldige postfix operator identificator: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid pointer to callback function.</source>
