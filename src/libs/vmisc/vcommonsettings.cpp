@@ -83,6 +83,7 @@ void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName());
     settings.setValue(SettingPathsIndividualMeasurements, value);
+    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -97,6 +98,7 @@ void VCommonSettings::SetPathStandardMeasurements(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName());
     settings.setValue(SettingPathsStandardMeasurements, value);
+    settings.sync();
 }
 
 
@@ -112,6 +114,7 @@ void VCommonSettings::SetPathTemplate(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName());
     settings.setValue(SettingPathsTemplates, value);
+    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
