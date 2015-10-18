@@ -9,3 +9,5 @@ tx pull --mode=developer
 # Update local strings
 lupdate -recursive ../share/translations/translations.pro
 lupdate -recursive ../share/translations/measurements.pro
+
+rm -f -v ../share/translations/*.qm
