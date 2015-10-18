@@ -91,7 +91,7 @@ void VSettings::SetLabelLanguage(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetPathPattern() const
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName());
+    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
     return settings.value(SettingPathsPattern, QDir::homePath()).toString();
 }
 

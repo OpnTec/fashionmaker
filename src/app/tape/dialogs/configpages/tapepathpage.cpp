@@ -183,7 +183,7 @@ QGroupBox *TapePathPage::PathGroup()
 void TapePathPage::InitTable()
 {
     pathTable = new QTableWidget();
-    pathTable->setRowCount(4);
+    pathTable->setRowCount(3);
     pathTable->setColumnCount(2);
     pathTable->verticalHeader()->setVisible(false);
     pathTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
