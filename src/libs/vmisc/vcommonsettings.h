@@ -40,12 +40,16 @@ public:
               QObject *parent = 0);
 
     virtual QString StandardTablesPath()const=0 ;
+    QString TemplatesPath() const;
 
     QString GetPathIndividualMeasurements() const;
     void SetPathIndividualMeasurements(const QString &value);
 
     QString GetPathStandardMeasurements() const;
     void SetPathStandardMeasurements(const QString &value);
+
+    QString GetPathTemplate() const;
+    void SetPathTemplate(const QString &value);
 
     bool GetOsSeparator() const;
     void SetOsSeparator(const bool &value);
@@ -97,8 +101,10 @@ public:
 
 private:
     Q_DISABLE_COPY(VCommonSettings)
+
     static const QString SettingPathsIndividualMeasurements;
     static const QString SettingPathsStandardMeasurements;
+    static const QString SettingPathsTemplates;
 
     static const QString SettingConfigurationOsSeparator;
     static const QString SettingConfigurationAutosaveState;

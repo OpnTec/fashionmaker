@@ -43,6 +43,7 @@
 
 const QString VCommonSettings::SettingPathsIndividualMeasurements     = QStringLiteral("paths/individual_measurements");
 const QString VCommonSettings::SettingPathsStandardMeasurements       = QStringLiteral("paths/standard_measurements");
+const QString VCommonSettings::SettingPathsTemplates                  = QStringLiteral("paths/templates");
 
 const QString VCommonSettings::SettingConfigurationOsSeparator         = QStringLiteral("configuration/osSeparator");
 const QString VCommonSettings::SettingConfigurationAutosaveState       = QStringLiteral("configuration/autosave/state");
@@ -65,33 +66,98 @@ const QString VCommonSettings::SettingGeneralWindowState               = QString
 const QString VCommonSettings::SettingGeneralToolbarsState             = QStringLiteral("toolbarsState");
 
 //---------------------------------------------------------------------------------------------------------------------
-VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &organization, const QString &application,
-                     QObject *parent)
+VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &organization,
+                            const QString &application, QObject *parent)
     :QSettings(format, scope, organization, application, parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathIndividualMeasurements() const
 {
-    return value(SettingPathsIndividualMeasurements, QDir::homePath()).toString();
+    QSettings settings(this->format(), this->scope(), this->organizationName());
+    return settings.value(SettingPathsIndividualMeasurements, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
 {
-    setValue(SettingPathsIndividualMeasurements, value);
+    QSettings settings(this->format(), this->scope(), this->organizationName());
+    settings.setValue(SettingPathsIndividualMeasurements, value);
+    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathStandardMeasurements() const
 {
-    return value(SettingPathsStandardMeasurements, StandardTablesPath()).toString();
+    QSettings settings(this->format(), this->scope(), this->organizationName());
+    return settings.value(SettingPathsStandardMeasurements, StandardTablesPath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathStandardMeasurements(const QString &value)
 {
-    setValue(SettingPathsStandardMeasurements, value);
+    QSettings settings(this->format(), this->scope(), this->organizationName());
+    settings.setValue(SettingPathsStandardMeasurements, value);
+    settings.sync();
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::GetPathTemplate() const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName());
+    return settings.value(SettingPathsTemplates, TemplatesPath()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathTemplate(const QString &value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName());
+    settings.setValue(SettingPathsTemplates, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::TemplatesPath() const
+{
+    const QString stPath = QStringLiteral("/tables/templates");
+    const QString unixFullPath = QStringLiteral("/usr/share/valentina/tables/templates");
+#ifdef Q_OS_WIN
+    return QApplication::applicationDirPath() + stPath;
+#elif defined(Q_OS_MAC)
+    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + stPath);
+    if (dirBundle.exists())
+    {
+        return dirBundle.absolutePath();
+    }
+    else
+    {
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return unixFullPath;
+        }
+    }
+#else // Unix
+    #ifdef QT_DEBUG
+        Q_UNUSED(unixFullPath);
+        return QApplication::applicationDirPath() + stPath;
+    #else
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return unixFullPath;
+        }
+    #endif
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
