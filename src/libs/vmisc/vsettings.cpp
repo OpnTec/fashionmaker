@@ -98,7 +98,7 @@ QString VSettings::GetPathPattern() const
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetPathPattern(const QString &value)
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName());
+    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
     settings.setValue(SettingPathsPattern, value);
     settings.sync();
 }
@@ -106,14 +106,14 @@ void VSettings::SetPathPattern(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetPathLayout() const
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName());
+    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
     return settings.value(SettingPathsLayout, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetPathLayout(const QString &value)
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName());
+    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
     settings.setValue(SettingPathsLayout, value);
     settings.sync();
 }
