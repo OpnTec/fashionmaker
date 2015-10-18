@@ -65,33 +65,35 @@ const QString VCommonSettings::SettingGeneralWindowState               = QString
 const QString VCommonSettings::SettingGeneralToolbarsState             = QStringLiteral("toolbarsState");
 
 //---------------------------------------------------------------------------------------------------------------------
-VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &organization, const QString &application,
-                     QObject *parent)
-    :QSettings(format, scope, organization, application, parent)
+VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &organization,
+                            const QString &application, QObject *parent)
+    :QSettings(format, scope, organization, application, parent), commonSettings(format, scope, organization)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathIndividualMeasurements() const
 {
-    return value(SettingPathsIndividualMeasurements, QDir::homePath()).toString();
+    QSettings settings(commonSettings.format(), commonSettings.scope(), commonSettings.organizationName());
+    return settings.value(SettingPathsIndividualMeasurements, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
 {
-    setValue(SettingPathsIndividualMeasurements, value);
+    commonSettings.setValue(SettingPathsIndividualMeasurements, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathStandardMeasurements() const
 {
-    return value(SettingPathsStandardMeasurements, StandardTablesPath()).toString();
+    QSettings settings(commonSettings.format(), commonSettings.scope(), commonSettings.organizationName());
+    return settings.value(SettingPathsStandardMeasurements, StandardTablesPath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathStandardMeasurements(const QString &value)
 {
-    setValue(SettingPathsStandardMeasurements, value);
+    commonSettings.setValue(SettingPathsStandardMeasurements, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -97,6 +97,9 @@ public:
 
 private:
     Q_DISABLE_COPY(VCommonSettings)
+
+    QSettings commonSettings;
+
     static const QString SettingPathsIndividualMeasurements;
     static const QString SettingPathsStandardMeasurements;
 
