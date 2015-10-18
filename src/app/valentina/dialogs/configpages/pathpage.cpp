@@ -66,6 +66,7 @@ void PathPage::Apply()
     qApp->ValentinaSettings()->SetPathStandardMeasurements(pathTable->item(1, 1)->text());
     qApp->ValentinaSettings()->SetPathPattern(pathTable->item(2, 1)->text());
     qApp->ValentinaSettings()->SetPathLayout(pathTable->item(3, 1)->text());
+    qApp->ValentinaSettings()->SetPathTemplate(pathTable->item(4, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -97,6 +98,10 @@ void PathPage::DefaultPath()
             item->setText(QDir::homePath());
             item->setToolTip(QDir::homePath());
             break;
+        case 4: // templates
+            item->setText(qApp->ValentinaSettings()->TemplatesPath());
+            item->setToolTip(qApp->ValentinaSettings()->TemplatesPath());
+            break;
         default:
             break;
     }
@@ -123,6 +128,9 @@ void PathPage::EditPath()
             break;
         case 3: // layout path
             path = qApp->ValentinaSettings()->GetPathLayout();
+            break;
+        case 4: // templates
+            path = qApp->ValentinaSettings()->GetPathTemplate();
             break;
         default:
             break;
@@ -169,7 +177,7 @@ QGroupBox *PathPage::PathGroup()
 void PathPage::InitTable()
 {
     pathTable = new QTableWidget();
-    pathTable->setRowCount(4);
+    pathTable->setRowCount(5);
     pathTable->setColumnCount(2);
     pathTable->verticalHeader()->setVisible(false);
     pathTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -206,6 +214,13 @@ void PathPage::InitTable()
         QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathLayout());
         item->setToolTip(qApp->ValentinaSettings()->GetPathLayout());
         pathTable->setItem(3, 1, item);
+    }
+
+    {
+        pathTable->setItem(4, 0, new QTableWidgetItem(tr("Templates")));
+        QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathTemplate());
+        item->setToolTip(qApp->ValentinaSettings()->GetPathTemplate());
+        pathTable->setItem(4, 1, item);
     }
 
     pathTable->verticalHeader()->setDefaultSectionSize(20);

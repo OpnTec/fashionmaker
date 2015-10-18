@@ -91,25 +91,31 @@ void VSettings::SetLabelLanguage(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetPathPattern() const
 {
-    return value(SettingPathsPattern, QDir::homePath()).toString();
+    QSettings settings(this->format(), this->scope(), this->organizationName());
+    return settings.value(SettingPathsPattern, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetPathPattern(const QString &value)
 {
-    setValue(SettingPathsPattern, value);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
+    settings.setValue(SettingPathsPattern, value);
+    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetPathLayout() const
 {
-    return value(SettingPathsLayout, QDir::homePath()).toString();
+    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
+    return settings.value(SettingPathsLayout, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetPathLayout(const QString &value)
 {
-    setValue(SettingPathsLayout, value);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
+    settings.setValue(SettingPathsLayout, value);
+    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

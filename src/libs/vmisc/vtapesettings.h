@@ -39,10 +39,6 @@ public:
                   QObject *parent = 0);
 
     virtual QString StandardTablesPath()const Q_DECL_OVERRIDE;
-    QString TemplatesPath() const;
-
-    QString GetPathTemplate() const;
-    void SetPathTemplate(const QString &value);
 
     QByteArray GetDataBaseGeometry() const;
     void SetDataBaseGeometry(const QByteArray &value);
@@ -50,7 +46,6 @@ public:
 private:
     Q_DISABLE_COPY(VTapeSettings)
 
-    static const QString SettingPathsTemplates;
     static const QString SettingDataBaseGeometry;
 };
 
