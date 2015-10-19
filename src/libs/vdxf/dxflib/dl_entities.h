@@ -811,6 +811,10 @@ struct DXFLIB_EXPORT DL_MTextData
 };
 
 
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wweak-vtables"
+#endif
 
 /**
  * Text Data.
@@ -841,7 +845,7 @@ struct DXFLIB_EXPORT DL_TextData
           angle(angle)
     {}
 
-    ~DL_TextData()
+    virtual ~DL_TextData()
     {}
 
     DL_TextData(const DL_TextData &data)
@@ -934,12 +938,16 @@ struct DXFLIB_EXPORT DL_AttributeData : public DL_TextData
           tag(tag)
     {}
 
-    ~DL_AttributeData()
+    virtual ~DL_AttributeData()
     {}
 
     /*! Tag. */
     std::string tag;
 };
+
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic pop
+#endif
 
 /**
  * Generic Dimension Data.
