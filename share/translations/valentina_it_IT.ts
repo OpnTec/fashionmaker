@@ -3926,6 +3926,10 @@ Do you want to save your changes?</source>
         <source>Layout</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PatternPage</name>

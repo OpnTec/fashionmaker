@@ -5572,6 +5572,10 @@ Haluatko tallentaa muutokset?</translation>
         <source>Layout</source>
         <translation>Sommittelu</translation>
     </message>
+    <message>
+        <source>Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PatternPage</name>

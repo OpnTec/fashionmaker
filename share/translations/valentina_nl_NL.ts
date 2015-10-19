@@ -5,7 +5,7 @@
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation>Voeg detail toe</translation>
+        <translation>voeg detail toe</translation>
     </message>
 </context>
 <context>
@@ -3790,6 +3790,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Layout</source>
         <translation>Opmaak</translation>
+    </message>
+    <message>
+        <source>Templates</source>
+        <translation type="unfinished">Sjablonen</translation>
     </message>
 </context>
 <context>

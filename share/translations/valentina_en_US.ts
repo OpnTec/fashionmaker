@@ -6923,6 +6923,10 @@ Do you want to save your changes?</translation>
         <source>Layout</source>
         <translation>Layout</translation>
     </message>
+    <message>
+        <source>Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PatternPage</name>

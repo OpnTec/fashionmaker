@@ -5349,6 +5349,10 @@ Quiere guardar los cambios?</translation>
         <source>Layout</source>
         <translation>Diseño</translation>
     </message>
+    <message>
+        <source>Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PatternPage</name>

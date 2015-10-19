@@ -3792,6 +3792,10 @@ Do you want to save your changes?</source>
         <source>Layout</source>
         <translation>Раскладка</translation>
     </message>
+    <message>
+        <source>Templates</source>
+        <translation type="unfinished">Шаблоны</translation>
+    </message>
 </context>
 <context>
     <name>PatternPage</name>

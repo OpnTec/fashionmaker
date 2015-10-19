@@ -5696,6 +5696,10 @@ Chcete uložit své změny?</translation>
         <source>Layout</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PatternPage</name>

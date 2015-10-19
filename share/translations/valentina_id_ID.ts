@@ -4329,6 +4329,10 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <source>Layout</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PatternPage</name>
