@@ -172,6 +172,7 @@ enum class GSizes : unsigned char { ALL,
         qCritical("ASSERT: %s in %s (%s:%u)",               \
                   #cond, Q_FUNC_INFO , __FILE__, __LINE__); \
         debug_break();                                      \
+        abort();                                            \
     }                                                       \
 }                                                           \
 

@@ -29,6 +29,7 @@
 #include <cstdio>
 #include <cassert>
 #include <cmath>
+#include <QStringList>
 
 #include "dl_attributes.h"
 #include "dl_codes.h"
@@ -5808,48 +5809,42 @@ bool DL_Dxf::checkVariable(const char* var, DL_Codes::version version)
  */
 int DL_Dxf::getLibVersion(const std::string& str)
 {
-    int d[4];
-    int idx = 0;
+    const QStringList ver = QString::fromStdString(str).split('.');
 
-    for (unsigned int i=0; i<str.length() && idx<3; ++i)
+    int v0 = 0;
+    int v1 = 0;
+    int v2 = 0;
+    int v3 = 0;
+
+    if (ver.size() >= 2 && ver.size() <= 4)
     {
-        if (str[i]=='.')
+        switch (ver.size())
         {
-            d[idx] = static_cast<int>(i);
-            idx++;
+            case 4:
+                v3 = ver.at(3).toInt();
+            #ifdef Q_CC_CLANG
+                [[clang::fallthrough]];
+            #endif
+            case 3:
+                v2 = ver.at(2).toInt();
+            #ifdef Q_CC_CLANG
+                [[clang::fallthrough]];
+            #endif
+            case 2:
+                v0 = ver.at(0).toInt();
+                v1 = ver.at(1).toInt();
+                break;
+            default:
+                break;
         }
-    }
-
-    if (idx>=2)
-    {
-        d[3] = static_cast<int>(str.length());
-
-        std::string v[4];
-
-        v[0] = str.substr(0, static_cast<unsigned int>(d[0]));
-        v[1] = str.substr(static_cast<unsigned int>(d[0]+1), static_cast<unsigned int>(d[1]-d[0]-1));
-        v[2] = str.substr(static_cast<unsigned int>(d[1]+1), static_cast<unsigned int>(d[2]-d[1]-1));
-        if (idx>=3)
-        {
-            v[3] = str.substr(static_cast<unsigned int>(d[2]+1), static_cast<unsigned int>(d[3]-d[2]-1));
-        }
-        else
-        {
-            v[3] = "0";
-        }
-
-        const int ret = (atoi(v[0].c_str())<<(3*8)) +
-                        (atoi(v[1].c_str())<<(2*8)) +
-                        (atoi(v[2].c_str())<<(1*8)) +
-                        (atoi(v[3].c_str())<<(0*8));
-
-        return ret;
     }
     else
     {
         std::cerr << "DL_Dxf::getLibVersion: invalid version number: " << str << "\n";
         return 0;
     }
+
+    return (v0<<(3*8)) + (v1<<(2*8)) + (v2<<(1*8)) + (v3<<(0*8));
 }
 
 /**
@@ -5886,19 +5881,12 @@ int DL_Dxf::getLibVersion(const std::string& str)
  */
 void DL_Dxf::test()
 {
-    char* buf1;
-    char* buf2;
-    char* buf3;
-    char* buf4;
-    char* buf5;
-    char* buf6;
-
-    buf1 = new char[10];
-    buf2 = new char[10];
-    buf3 = new char[10];
-    buf4 = new char[10];
-    buf5 = new char[10];
-    buf6 = new char[10];
+    char* buf1 = new char[10];
+    char* buf2 = new char[10];
+    char* buf3 = new char[10];
+    char* buf4 = new char[10];
+    char* buf5 = new char[10];
+    char* buf6 = new char[10];
 
     strcpy(buf1, "  10\n");
     strcpy(buf2, "10");
@@ -5906,6 +5894,14 @@ void DL_Dxf::test()
     strcpy(buf4, "  10 \n");
     strcpy(buf5, "  10 \r");
     strcpy(buf6, "\t10 \n");
+
+    // Try to avoid deleting array from an offset
+    char* buf1Copy = buf1;
+    char* buf2Copy = buf2;
+    char* buf3Copy = buf3;
+    char* buf4Copy = buf4;
+    char* buf5Copy = buf5;
+    char* buf6Copy = buf6;
 
     std::cout << "1 buf1: '" << buf1 << "'\n";
     stripWhiteSpace(&buf1);
@@ -5932,12 +5928,12 @@ void DL_Dxf::test()
     stripWhiteSpace(&buf6);
     std::cout << "2 buf6: '" << buf6 << "'\n";
 
-    delete[] buf1;
-    delete[] buf2;
-    delete[] buf3;
-    delete[] buf4;
-    delete[] buf5;
-    delete[] buf6;
+    delete[] buf1Copy;
+    delete[] buf2Copy;
+    delete[] buf3Copy;
+    delete[] buf4Copy;
+    delete[] buf5Copy;
+    delete[] buf6Copy;
 }
 
 
