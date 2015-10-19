@@ -316,6 +316,12 @@ bool DL_Dxf::getStrippedLine(std::string &s, unsigned int size,
  */
 bool DL_Dxf::stripWhiteSpace(char** s)
 {
+    // No need to check if string is null
+    if (not (*s))
+    {
+        return false;
+    }
+
     // last non-NULL char:
     int lastChar = static_cast<int>(strlen(*s) - 1);
 
@@ -5927,6 +5933,12 @@ void DL_Dxf::test()
     stripWhiteSpace(&buf6);
     std::cout << "2 buf6: '" << buf6 << "'\n";
 
+    delete[] buf1;
+    delete[] buf2;
+    delete[] buf3;
+    delete[] buf4;
+    delete[] buf5;
+    delete[] buf6;
 }
 
 

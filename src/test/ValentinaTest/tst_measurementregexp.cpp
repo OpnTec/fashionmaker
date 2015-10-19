@@ -132,6 +132,7 @@ void TST_MeasurementRegExp::TestMeasurementRegExp()
                 }
                 delete pmsTranslator;
             }
+            break;
         }
         default:
             QWARN("Unexpected state");

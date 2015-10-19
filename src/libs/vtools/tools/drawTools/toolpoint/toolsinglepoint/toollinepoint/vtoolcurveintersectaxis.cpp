@@ -146,7 +146,7 @@ QPointF VToolCurveIntersectAxis::FindPoint(const QPointF &point, qreal angle,
                                            const QSharedPointer<VAbstractCurve> &curve)
 {
     QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
-    rec.translate(static_cast<qreal>(-INT_MAX/2), static_cast<qreal>(-INT_MAX/2));
+    rec.translate(-INT_MAX/2.0, -INT_MAX/2.0);
 
     const QLineF axis = VGObject::BuildAxis(point, angle, rec);
     QVector<QPointF> points = curve->IntersectLine(axis);
