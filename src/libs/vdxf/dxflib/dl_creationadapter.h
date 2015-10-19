@@ -40,7 +40,7 @@ class DXFLIB_EXPORT DL_CreationAdapter : public DL_CreationInterface
 {
 public:
     DL_CreationAdapter() {}
-    virtual ~DL_CreationAdapter() {}
+    virtual ~DL_CreationAdapter();
     virtual void processCodeValuePair(unsigned int, const std::string&) {}
     virtual void endSection() {}
     virtual void addLayer(const DL_LayerData&) {}
@@ -134,5 +134,8 @@ public:
 #endif
     virtual void endSequence() {}
 };
+
+DL_CreationAdapter::~DL_CreationAdapter()
+{}
 
 #endif

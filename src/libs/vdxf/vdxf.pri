@@ -5,7 +5,8 @@ SOURCES += \
     $$PWD/dxflib/dl_dxf.cpp \
     $$PWD/dxflib/dl_writer_ascii.cpp \
     $$PWD/vdxfengine.cpp \
-    $$PWD/vdxfpaintdevice.cpp
+    $$PWD/vdxfpaintdevice.cpp \
+    $$PWD/dxflib/dl_writer.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 

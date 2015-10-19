@@ -2052,6 +2052,7 @@ qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) 
         }
         catch (qmu::QmuParserError &e)
         {
+            Q_UNUSED(e)
             *ok = false;
             return 0;
         }
@@ -2247,7 +2248,8 @@ void VPattern::ParseIncrementsElement(const QDomNode &node)
                     bool ok = false;
                     const qreal value = EvalFormula(data, formula, &ok);
 
-                    data->AddVariable(name, new VIncrement(data, name, index, value, formula, ok, desc));
+                    data->AddVariable(name, new VIncrement(data, name, static_cast<quint32>(index), value, formula, ok,
+                                                           desc));
                     ++index;
                 }
             }

@@ -50,10 +50,8 @@ public:
     DL_CreationInterface() : extrusion(new DL_Extrusion), attributes()
     {
     }
-    virtual ~DL_CreationInterface()
-    {
-        delete extrusion;
-    }
+
+    virtual ~DL_CreationInterface();
 
     /**
      * Called for every code / value tuple of the DXF file. The complete DXF file
@@ -371,5 +369,10 @@ protected:
     DL_Extrusion *extrusion;
     DL_Attributes attributes;
 };
+
+DL_CreationInterface::~DL_CreationInterface()
+{
+    delete extrusion;
+}
 
 #endif

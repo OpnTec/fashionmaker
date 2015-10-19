@@ -76,12 +76,12 @@ void DL_WriterA::dxfReal(int gc, double value) const
         if (str[i]=='.')
         {
             dot = true;
-            end = i+2;
+            end = static_cast<int>(i)+2;
             continue;
         }
         else if (dot && str[i]!='0')
         {
-            end = i+1;
+            end = static_cast<int>(i)+1;
         }
     }
     if (end>0 && end<static_cast<int>(strlen(str)))

@@ -34,7 +34,16 @@
 
 #include <QKeyEvent>
 
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wmissing-prototypes"
+#endif
+
 Q_LOGGING_CATEGORY(vToolSinglePoint, "v.toolSinglePoint")
+
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic pop
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -109,8 +118,6 @@ void VToolSinglePoint::NameChangePosition(const QPointF &pos)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief UpdateNamePosition save new position label to the pattern file.
- * @param mx label bias x axis.
- * @param my label bias y axis.
  */
 void VToolSinglePoint::UpdateNamePosition(quint32 id)
 {

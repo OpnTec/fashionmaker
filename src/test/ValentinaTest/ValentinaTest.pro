@@ -100,7 +100,8 @@ CONFIG(debug, debug|release){
                 -isystem "$${OUT_PWD}/$${UI_DIR}" \
                 -isystem "$${OUT_PWD}/$${MOC_DIR}" \
                 -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-                $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
+                $$CLANG_DEBUG_CXXFLAGS \ # See common.pri for more details.
+                -Wno-gnu-zero-variadic-macro-arguments\ # See macros QSKIP
         }
     } else {
         *-g++{

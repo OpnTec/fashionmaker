@@ -316,13 +316,13 @@ bool DialogLayoutSettings::SelectLayoutUnit(const QString &units)
 //---------------------------------------------------------------------------------------------------------------------
 int DialogLayoutSettings::LayoutToPixels(qreal value) const
 {
-    return static_cast<quint32>(qFloor(UnitConvertor(value, LayoutUnit(), Unit::Px)));
+    return qFloor(UnitConvertor(value, LayoutUnit(), Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int DialogLayoutSettings::PageToPixels(qreal value) const
 {
-    return static_cast<quint32>(qFloor(UnitConvertor(value, PaperUnit(), Unit::Px)));
+    return qFloor(UnitConvertor(value, PaperUnit(), Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

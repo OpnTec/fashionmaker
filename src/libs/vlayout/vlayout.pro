@@ -39,6 +39,9 @@ MOC_DIR = moc
 # objecs files
 OBJECTS_DIR = obj
 
+# Directory for files created rcc
+RCC_DIR = rcc
+
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
@@ -53,6 +56,7 @@ CONFIG(debug, debug|release){
             QMAKE_CXXFLAGS += \
                 # Key -isystem disable checking errors in system headers.
                 -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
                 $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
             noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
@@ -66,15 +70,17 @@ CONFIG(debug, debug|release){
             }
         }
         clang*{
-        QMAKE_CXXFLAGS += \
-            # Key -isystem disable checking errors in system headers.
-            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
+            QMAKE_CXXFLAGS += \
+                # Key -isystem disable checking errors in system headers.
+                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
+                $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
 
-        # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
-        # want them in global list. Compromise decision delete them from local list.
-        QMAKE_CXXFLAGS -= \
-            -Wundefined-reinterpret-cast
+            # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
+            # want them in global list. Compromise decision delete them from local list.
+            QMAKE_CXXFLAGS -= \
+                -Wundefined-reinterpret-cast \
+                -Wmissing-prototypes # rcc folder
         }
     } else {
         *-g++{

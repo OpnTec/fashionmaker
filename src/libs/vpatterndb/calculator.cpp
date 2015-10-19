@@ -46,7 +46,6 @@ using namespace qmu;
  * const qreal result = cal->EvalFormula(data->PlainVariables(), formula);
  * delete cal;
  *
- * @param data pointer to a variable container.
  */
 Calculator::Calculator()
     :QmuFormulaBase()

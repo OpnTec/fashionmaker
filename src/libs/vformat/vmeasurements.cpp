@@ -253,7 +253,8 @@ void VMeasurements::ReadMeasurements() const
             qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, "0");
             qreal kheight = GetParametrDouble(dom, AttrHeightIncrease, "0");
 
-            tempMeash = new VMeasurement(i, name, BaseSize(), BaseHeight(), base, ksize, kheight);
+            tempMeash = new VMeasurement(static_cast<unsigned int>(i), name, BaseSize(), BaseHeight(), base, ksize,
+                                         kheight);
 
             base = UnitConvertor(base, MUnit(), *data->GetPatternUnit());
             ksize = UnitConvertor(ksize, MUnit(), *data->GetPatternUnit());
@@ -262,7 +263,8 @@ void VMeasurements::ReadMeasurements() const
             const qreal baseSize = UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit());
             const qreal baseHeight = UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit());
 
-            meash = new VMeasurement(i, name, baseSize, baseHeight, base, ksize, kheight, fullName, description);
+            meash = new VMeasurement(static_cast<unsigned int>(i), name, baseSize, baseHeight, base, ksize, kheight,
+                                     fullName, description);
         }
         else
         {
@@ -270,10 +272,11 @@ void VMeasurements::ReadMeasurements() const
             bool ok = false;
             qreal value = EvalFormula(tempData, formula, &ok);
 
-            tempMeash = new VMeasurement(tempData, i, name, value, formula, ok);
+            tempMeash = new VMeasurement(tempData, static_cast<unsigned int>(i), name, value, formula, ok);
 
             value = UnitConvertor(value, MUnit(), *data->GetPatternUnit());
-            meash = new VMeasurement(data, i, name, value, formula, ok, fullName, description);
+            meash = new VMeasurement(data, static_cast<unsigned int>(i), name, value, formula, ok, fullName,
+                                     description);
         }
         tempData->AddVariable(name, tempMeash);
         data->AddVariable(name, meash);
@@ -883,6 +886,7 @@ qreal VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool 
         }
         catch (qmu::QmuParserError &e)
         {
+            Q_UNUSED(e)
             *ok = false;
             return 0;
         }

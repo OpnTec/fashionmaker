@@ -446,7 +446,6 @@ void DialogTool::setCurrentArcId(QComboBox *box, const quint32 &value, FillCombo
  * @brief setCurrentSplinePathId set current splinePath id in combobox
  * @param box combobox
  * @param value splinePath id
- * @param cut if set to ComboMode::CutSpline don't show id+1 and id+2
  */
 void DialogTool::setCurrentSplinePathId(QComboBox *box, const quint32 &value, FillComboBox rule,
                                         const quint32 &ch1, const quint32 &ch2) const

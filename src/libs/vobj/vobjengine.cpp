@@ -216,7 +216,7 @@ void VObjEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
 
     for (int i = 0; i < pointCount; ++i)
     {
-        *stream << QString(" %1").arg(globalPointsCount - static_cast<unsigned int>(pointCount) + i + 1);
+        *stream << QString(" %1").arg(static_cast<int>(globalPointsCount) - pointCount + i + 1);
     }
     *stream << endl;
 }

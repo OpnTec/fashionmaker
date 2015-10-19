@@ -288,7 +288,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wdeprecated-register \
     -Wdeprecated-writable-strings \
     -Wdirect-ivar-access \
-    -Wdisabled-macro-expansion \
+#   -Wdisabled-macro-expansion \ Disabled
     -Wdisabled-optimization \
     -Wdiscard-qual \
     -Wdistributed-object-modifiers \
@@ -414,6 +414,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wnon-virtual-dtor \
     -Wnonnull \
     -Wnonportable-cfstrings \
+    -Wno-c++98-compat \
     -WNSObject-attribute \
     -Wnull-arithmetic \
     -Wnull-character \

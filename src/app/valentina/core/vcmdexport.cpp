@@ -309,12 +309,12 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     if (parser.isSet(*optionsUsed.value(LONG_OPTION_SHIFTLENGTH)))
     {
 
-        diag.SetShift(Lo2Px(parser.value(*optionsUsed.value(LONG_OPTION_SHIFTLENGTH)), diag));
+        diag.SetShift(static_cast<quint32>(Lo2Px(parser.value(*optionsUsed.value(LONG_OPTION_SHIFTLENGTH)), diag)));
     }
 
     if (parser.isSet(*optionsUsed.value(LONG_OPTION_GAPWIDTH)))
     {
-        diag.SetLayoutWidth(Lo2Px(parser.value(*optionsUsed.value(LONG_OPTION_GAPWIDTH)), diag));
+        diag.SetLayoutWidth(static_cast<quint32>(Lo2Px(parser.value(*optionsUsed.value(LONG_OPTION_GAPWIDTH)), diag)));
     }
 
     diag.SetAutoCrop(parser.isSet(*optionsUsed.value(LONG_OPTION_CROP)));

@@ -390,7 +390,9 @@ struct DXFLIB_EXPORT DL_PolylineData
      * Parameters: see member variables.
      */
     DL_PolylineData(int pNumber, int pMVerteces, int pNVerteces, int pFlags)
-        : number(pNumber), m(pMVerteces), n(pNVerteces), flags(pFlags)
+        : number(static_cast<unsigned int>(pNumber)),
+          m(static_cast<unsigned int>(pMVerteces)),
+          n(static_cast<unsigned int>(pNVerteces)), flags(pFlags)
     {
     }
 
@@ -519,10 +521,10 @@ struct DXFLIB_EXPORT DL_SplineData
                   int nControl,
                   int nFit,
                   int flags) :
-        degree(degree),
-        nKnots(nKnots),
-        nControl(nControl),
-        nFit(nFit),
+        degree(static_cast<unsigned int>(degree)),
+        nKnots(static_cast<unsigned int>(nKnots)),
+        nControl(static_cast<unsigned int>(nControl)),
+        nFit(static_cast<unsigned int>(nFit)),
         flags(flags),
         tangentStartX(0.0),
         tangentStartY(0.0),
@@ -837,10 +839,22 @@ struct DXFLIB_EXPORT DL_TextData
           text(text),
           style(style),
           angle(angle)
-    {
-    }
+    {}
 
-    virtual ~DL_TextData(){}
+    ~DL_TextData()
+    {}
+
+    DL_TextData(const DL_TextData &data)
+        :ipx(data.ipx), ipy(data.ipy), ipz(data.ipz),
+        apx(data.apx), apy(data.apy), apz(data.apz),
+        height(data.height), xScaleFactor(data.xScaleFactor),
+        textGenerationFlags(data.textGenerationFlags),
+        hJustification(data.hJustification),
+        vJustification(data.vJustification),
+        text(data.text),
+        style(data.style),
+        angle(data.angle)
+    {}
 
     /*! X Coordinate of insertion point. */
     double ipx;
@@ -892,8 +906,7 @@ struct DXFLIB_EXPORT DL_AttributeData : public DL_TextData
 {
     DL_AttributeData(const DL_TextData& tData, const std::string& tag)
         : DL_TextData(tData), tag(tag)
-    {
-    }
+    {}
 
     /**
      * Constructor.
@@ -919,13 +932,14 @@ struct DXFLIB_EXPORT DL_AttributeData : public DL_TextData
                       style,
                       angle),
           tag(tag)
-    {
-    }
+    {}
+
+    ~DL_AttributeData()
+    {}
 
     /*! Tag. */
     std::string tag;
 };
-
 
 /**
  * Generic Dimension Data.

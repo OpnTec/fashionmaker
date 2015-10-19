@@ -92,20 +92,20 @@ CONFIG(debug, debug|release){
             }
         }
         clang*{
-        QMAKE_CXXFLAGS += \
-            # Key -isystem disable checking errors in system headers.
-            -isystem "$${OUT_PWD}/$${UI_DIR}" \
-            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-            -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
-            $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
+            QMAKE_CXXFLAGS += \
+                # Key -isystem disable checking errors in system headers.
+                -isystem "$${OUT_PWD}/$${UI_DIR}" \
+                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
+                -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
+                $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
 
-        # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
-        # want them in global list. Compromise decision delete them from local list.
-        QMAKE_CXXFLAGS -= \
-            -Wmissing-prototypes \
-            -Wundefined-reinterpret-cast
-        }
+            # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
+            # want them in global list. Compromise decision delete them from local list.
+            QMAKE_CXXFLAGS -= \
+                -Wmissing-prototypes \
+                -Wundefined-reinterpret-cast
+            }
     } else {
         *-g++{
         QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.

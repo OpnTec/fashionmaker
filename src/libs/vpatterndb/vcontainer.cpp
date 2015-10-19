@@ -37,7 +37,16 @@
 #include <QtAlgorithms>
 #include <QDebug>
 
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wmissing-prototypes"
+#endif
+
 Q_LOGGING_CATEGORY(vCon, "v.container")
+
+#ifdef Q_CC_CLANG
+    #pragma clang diagnostic pop
+#endif
 
 quint32 VContainer::_id = NULL_ID;
 qreal VContainer::_size = 50;

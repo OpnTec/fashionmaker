@@ -43,7 +43,6 @@ VIncrement::VIncrement()
 /**
  * @brief VIncrementTableRow create increment
  * @param name increment's name
- * @param id id
  * @param base value
  * @param description description of increment
  */

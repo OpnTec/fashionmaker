@@ -65,12 +65,7 @@ public:
     }
 
     /**
-     * Constructor for DXF extrusion.
-     *
-     * @param direction Vector of axis along which the entity shall be extruded
-     *                  this is also the Z axis of the Entity coordinate system
-     * @param elevation Distance of the entities XY plane from the origin of the
-     *                  world coordinate system
+     * @brief DL_Extrusion Constructor for DXF extrusion.
      */
     DL_Extrusion(double dx, double dy, double dz, double elevation)
         : direction(new double[3]), elevation(elevation)
@@ -81,7 +76,7 @@ public:
 
 
     /**
-     * Sets the direction vector.
+     * @brief setDirection Sets the direction vector.
      */
     void setDirection(double dx, double dy, double dz)
     {
@@ -100,11 +95,6 @@ public:
         return direction;
     }
 
-
-
-    /**
-     * @return direction vector.
-     */
     void getDirection(double dir[]) const
     {
         dir[0]=direction[0];
@@ -152,7 +142,14 @@ public:
 
 
 private:
+    /**
+     * @brief direction Vector of axis along which the entity shall be extruded this is also the Z axis of the Entity
+     * coordinate system
+     */
     double *direction;
+    /**
+     * @brief elevation Distance of the entities XY plane from the origin of the world coordinate system
+     */
     double elevation;
 };
 
