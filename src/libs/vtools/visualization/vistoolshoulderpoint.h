@@ -35,7 +35,7 @@ class VisToolShoulderPoint : public VisLine
 {
     Q_OBJECT
 public:
-    VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisToolShoulderPoint(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisToolShoulderPoint() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;

@@ -45,14 +45,13 @@ VObjPaintDevice::~VObjPaintDevice()
     {
         delete engine->getOutputDevice();
     }
-    delete engine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 QPaintEngine *VObjPaintDevice::paintEngine() const
 {
-    return engine;
+    return engine.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

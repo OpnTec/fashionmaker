@@ -53,15 +53,20 @@
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
-#ifdef Q_CC_CLANG
+#if defined(Q_CC_CLANG)
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Wmissing-prototypes"
+#elif defined(Q_CC_INTEL)
+    #pragma warning( push )
+    #pragma warning( disable: 1418 )
 #endif
 
 Q_LOGGING_CATEGORY(tMainWindow, "t.mainwindow")
 
-#ifdef Q_CC_CLANG
+#if defined(Q_CC_CLANG)
     #pragma clang diagnostic pop
+#elif defined(Q_CC_INTEL)
+    #pragma warning( pop )
 #endif
 
 // We need this enum in case we will add or delete a column. And also make code more readable.

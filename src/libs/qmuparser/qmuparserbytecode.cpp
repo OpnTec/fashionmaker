@@ -203,6 +203,11 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
     } // switch opcode
 }
 
+#if defined (Q_CC_INTEL)
+#pragma warning( push )
+#pragma warning( disable: 1195 )
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add an operator identifier to bytecode.
@@ -362,6 +367,10 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
         m_vRPN.push_back(tok);
     }
 }
+
+#if defined(Q_CC_INTEL)
+#pragma warning( pop )
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::AddIfElse(ECmdCode a_Oprt)

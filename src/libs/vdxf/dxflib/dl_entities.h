@@ -210,7 +210,7 @@ struct DXFLIB_EXPORT DL_PointData
      * Constructor.
      * Parameters: see member variables.
      */
-    DL_PointData(double px=0.0, double py=0.0, double pz=0.0)
+    explicit DL_PointData(double px=0.0, double py=0.0, double pz=0.0)
         : x(px), y(py), z(pz)
     {
     }
@@ -420,8 +420,7 @@ struct DXFLIB_EXPORT DL_VertexData
      * Constructor.
      * Parameters: see member variables.
      */
-    DL_VertexData(double px=0.0, double py=0.0, double pz=0.0,
-                  double pBulge=0.0)
+    explicit DL_VertexData(double px=0.0, double py=0.0, double pz=0.0, double pBulge=0.0)
         : x(px), y(py), z(pz), bulge(pBulge)
     {
     }

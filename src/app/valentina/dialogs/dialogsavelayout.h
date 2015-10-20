@@ -84,7 +84,7 @@ class DialogSaveLayout : public QDialog
     Q_OBJECT
 
 public:
-    DialogSaveLayout(int count, const QString &fileName = QString(),
+    explicit DialogSaveLayout(int count, const QString &fileName = QString(),
                      QWidget *parent = 0);
     ~DialogSaveLayout();
 

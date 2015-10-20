@@ -36,7 +36,7 @@ class VisToolPointOfIntersectionCircles : public VisLine
 {
     Q_OBJECT
 public:
-    VisToolPointOfIntersectionCircles(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisToolPointOfIntersectionCircles(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisToolPointOfIntersectionCircles() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;

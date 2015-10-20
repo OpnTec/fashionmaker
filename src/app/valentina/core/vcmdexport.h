@@ -62,7 +62,7 @@ public:
 
 protected:
 
-    explicit VCommandLine();
+    VCommandLine();
 
     //@brief returns DialogLayoutSettings::PaperSizeTemplate
     DialogLayoutSettings::PaperSizeTemplate  OptPaperSize() const;

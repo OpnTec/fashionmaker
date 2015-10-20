@@ -35,7 +35,7 @@ class VisToolArc : public VisPath
 {
     Q_OBJECT
 public:
-    VisToolArc(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisToolArc(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisToolArc() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;

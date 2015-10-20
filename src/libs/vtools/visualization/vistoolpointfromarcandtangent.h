@@ -36,7 +36,7 @@ class VisToolPointFromArcAndTangent : public VisLine
 {
     Q_OBJECT
 public:
-    VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisToolPointFromArcAndTangent() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;

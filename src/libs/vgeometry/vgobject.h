@@ -47,7 +47,7 @@ class VGObject
 {
 public:
     VGObject();
-    VGObject(const GOType &type, const quint32 &idObject = 0, const Draw &mode = Draw::Calculation);
+    explicit VGObject(const GOType &type, const quint32 &idObject = 0, const Draw &mode = Draw::Calculation);
     VGObject(const VGObject &obj);
     VGObject& operator= (const VGObject &obj);
     virtual ~VGObject();

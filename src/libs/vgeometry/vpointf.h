@@ -35,6 +35,11 @@ class QPointF;
 class QString;
 class VPointFData;
 
+#if defined (Q_CC_INTEL)
+#pragma warning(push)
+#pragma warning(disable : 2304)
+#endif
+
 /**
  * @brief The VPointF class keep data of point.
  */
@@ -63,5 +68,9 @@ public:
 private:
     QSharedDataPointer<VPointFData> d;
 };
+
+#if defined(Q_CC_INTEL)
+#pragma warning(pop)
+#endif
 
 #endif // VPOINTF_H

@@ -31,6 +31,7 @@
 
 #include <QPaintDevice>
 #include <QString>
+#include <QSharedPointer>
 
 class VObjEngine;
 class QIODevice;
@@ -58,7 +59,7 @@ protected:
     virtual int metric(PaintDeviceMetric metric) const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VObjPaintDevice)
-    VObjEngine *engine;
+    QSharedPointer<VObjEngine> engine;
     QString     fileName;
     uint        owns_iodevice;
 };

@@ -53,7 +53,7 @@ template <typename Guarded>
 class VLockGuard
 {
 public:
-    VLockGuard(const QString& lockName, int stale = 0, int timeout = 0);
+    explicit VLockGuard(const QString& lockName, int stale = 0, int timeout = 0);
 
     template <typename Alloc>
     VLockGuard(const QString& lockName, Alloc a, int stale = 0, int timeout=0);
@@ -173,6 +173,11 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
 template <typename Guarded>
 using  VLockGuardPtr = std::shared_ptr<VLockGuard<Guarded>>;
 
+#if defined (Q_CC_INTEL)
+#pragma warning( push )
+#pragma warning( disable: 1418 )
+#endif
+
 template <typename Guarded>
 void VlpCreateLock(VLockGuardPtr<Guarded>& r, const QString& lockName, int stale = 0, int timeout = 0)
 {
@@ -190,5 +195,9 @@ void VlpCreateLock(VLockGuardPtr<Guarded>& r, const QString& lockName, Alloc a, 
 {
     r.reset(new VLockGuard<Guarded>(lockName, a, d, stale, timeout));
 }
+
+#if defined(Q_CC_INTEL)
+#pragma warning( pop )
+#endif
 
 #endif // VLOCKGUARD_H

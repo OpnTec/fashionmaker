@@ -52,7 +52,7 @@ public:
      * @todo What if \c fname is NULL?  Or \c fname can't be opened for
      * another reason?
      */
-    DL_WriterA(const char* fname, DL_Codes::version version=DL_VERSION_2000)
+    explicit DL_WriterA(const char* fname, DL_Codes::version version=DL_VERSION_2000)
         : DL_Writer(version), m_ofile(fname) {}
     virtual ~DL_WriterA() {}
 

@@ -39,7 +39,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VWidgetProperty : public VEmptyProperty
 {
 public:
     //! Constructor
-    VWidgetProperty(const QString &name, QWidget* widget = nullptr);
+    explicit VWidgetProperty(const QString &name, QWidget* widget = nullptr);
 
     //! The destructor
     virtual ~VWidgetProperty() Q_DECL_OVERRIDE;

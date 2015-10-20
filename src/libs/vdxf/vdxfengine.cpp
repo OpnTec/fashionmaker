@@ -39,9 +39,12 @@
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {
-#ifdef Q_CC_CLANG
+#if defined(Q_CC_CLANG)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wsign-conversion"
+#elif defined (Q_CC_INTEL)
+#pragma warning( push )
+#pragma warning( disable: 68 )
 #endif
 
     return QPaintEngine::PaintEngineFeatures(
@@ -51,8 +54,10 @@ static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
         & ~QPaintEngine::ConicalGradientFill
         & ~QPaintEngine::PorterDuff);
 
-#ifdef Q_CC_CLANG
+#if defined(Q_CC_CLANG)
 #pragma clang diagnostic pop
+#elif defined(Q_CC_INTEL)
+#pragma warning( pop )
 #endif
 }
 

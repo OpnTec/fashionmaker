@@ -100,6 +100,11 @@ CONFIG(debug, debug|release){
         QMAKE_CXXFLAGS -= \
             -Wundefined-reinterpret-cast
         }
+        *-icc-*{
+            QMAKE_CXXFLAGS += \
+                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+                $$ICC_DEBUG_CXXFLAGS
+        }
     } else {
         *-g++{
         QMAKE_CXXFLAGS += $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.

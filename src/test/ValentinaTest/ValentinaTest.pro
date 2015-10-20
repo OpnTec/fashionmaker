@@ -103,6 +103,13 @@ CONFIG(debug, debug|release){
                 $$CLANG_DEBUG_CXXFLAGS \ # See common.pri for more details.
                 -Wno-gnu-zero-variadic-macro-arguments\ # See macros QSKIP
         }
+        *-icc-*{
+            QMAKE_CXXFLAGS += \
+                -isystem "$${OUT_PWD}/$${UI_DIR}" \
+                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
+                $$ICC_DEBUG_CXXFLAGS
+        }
     } else {
         *-g++{
             QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.

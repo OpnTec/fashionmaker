@@ -36,7 +36,7 @@ class VisToolPointFromCircleAndTangent : public VisLine
 {
     Q_OBJECT
 public:
-    VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisToolPointFromCircleAndTangent() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;

@@ -37,7 +37,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VFileEditWidget : public QWidget
     Q_OBJECT
 
 public:
-    VFileEditWidget(QWidget* parent, bool is_directory = false);
+    explicit VFileEditWidget(QWidget* parent, bool is_directory = false);
     virtual ~VFileEditWidget() Q_DECL_OVERRIDE;
 
 

@@ -36,7 +36,7 @@ class VisPath : public Visualization, public QGraphicsPathItem
 {
     Q_OBJECT
 public:
-    VisPath(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisPath(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisPath() Q_DECL_OVERRIDE;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}

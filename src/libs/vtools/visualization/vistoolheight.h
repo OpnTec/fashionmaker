@@ -35,7 +35,7 @@ class VisToolHeight : public VisLine
 {
     Q_OBJECT
 public:
-    VisToolHeight(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisToolHeight(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisToolHeight() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;

@@ -52,7 +52,21 @@
 #include <QtXmlPatterns>
 #include <QIcon>
 
+#if defined(Q_CC_CLANG)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wmissing-prototypes"
+#elif defined(Q_CC_INTEL)
+    #pragma warning( push )
+    #pragma warning( disable: 1418 )
+#endif
+
 Q_LOGGING_CATEGORY(vApp, "v.application")
+
+#if defined(Q_CC_CLANG)
+    #pragma clang diagnostic pop
+#elif defined(Q_CC_INTEL)
+    #pragma warning( pop )
+#endif
 
 constexpr auto DAYS_TO_KEEP_LOGS = 3;
 

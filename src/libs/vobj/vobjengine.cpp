@@ -40,9 +40,13 @@
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {
-#ifdef Q_CC_CLANG
+#if defined(Q_CC_CLANG)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wsign-conversion"
+#elif defined (Q_CC_INTEL)
+#pragma warning( push )
+#pragma warning( disable: 68 )
+#pragma warning( disable: 2022 )
 #endif
 
     return QPaintEngine::PaintEngineFeatures(
@@ -52,14 +56,14 @@ static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
         & ~QPaintEngine::ConicalGradientFill
         & ~QPaintEngine::PorterDuff);
 
-#ifdef Q_CC_CLANG
+#if defined(Q_CC_CLANG)
 #pragma clang diagnostic pop
 #endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VObjEngine::VObjEngine()
-    :QPaintEngine(svgEngineFeatures()), stream(nullptr), globalPointsCount(0), outputDevice(nullptr), planeCount(0),
+    :QPaintEngine(svgEngineFeatures()), stream(), globalPointsCount(0), outputDevice(), planeCount(0),
       size(), resolution(96), matrix()
 {
     for (int i=0; i < MAX_POINTS; i++)
@@ -69,17 +73,20 @@ VObjEngine::VObjEngine()
     }
 }
 
+#if defined(Q_CC_INTEL)
+#pragma warning( pop )
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VObjEngine::~VObjEngine()
 {
-    outputDevice = nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VObjEngine::begin(QPaintDevice *pdev)
 {
     Q_UNUSED(pdev)
-    if (outputDevice == nullptr)
+    if (outputDevice.isNull())
     {
         qWarning("VObjEngine::begin(), no output device");
         return false;
@@ -106,7 +113,7 @@ bool VObjEngine::begin(QPaintDevice *pdev)
         return false;
     }
 
-    stream = new QTextStream(outputDevice);
+    stream = QSharedPointer<QTextStream>(new QTextStream(outputDevice.data()));
     *stream << "# Valentina OBJ File" <<  endl;
     *stream << "# www.valentina-project.org/" <<  endl;
     return true;
@@ -115,7 +122,7 @@ bool VObjEngine::begin(QPaintDevice *pdev)
 //---------------------------------------------------------------------------------------------------------------------
 bool VObjEngine::end()
 {
-    delete stream;
+    stream.reset();
     return true;
 }
 
@@ -278,14 +285,14 @@ void VObjEngine::setSize(const QSize &value)
 //---------------------------------------------------------------------------------------------------------------------
 QIODevice *VObjEngine::getOutputDevice() const
 {
-    return outputDevice;
+    return outputDevice.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VObjEngine::setOutputDevice(QIODevice *value)
 {
     Q_ASSERT(!isActive());
-    outputDevice = value;
+    outputDevice.reset(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

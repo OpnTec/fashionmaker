@@ -35,7 +35,7 @@
 #include <QSpacerItem>
 #include <QApplication>
 
-Q_LOGGING_CATEGORY(vExcep, "v.excep")
+//Q_LOGGING_CATEGORY(vExcep, "v.excep") //Commented because don't use now
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

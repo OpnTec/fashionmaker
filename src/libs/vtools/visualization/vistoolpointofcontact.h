@@ -35,7 +35,7 @@ class VisToolPointOfContact : public VisLine
 {
     Q_OBJECT
 public:
-    VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisToolPointOfContact(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisToolPointOfContact() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;

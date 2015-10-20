@@ -43,7 +43,7 @@ class DialogMDataBase : public QDialog
     Q_OBJECT
 
 public:
-    DialogMDataBase(const QStringList &list, QWidget *parent = 0);
+    explicit DialogMDataBase(const QStringList &list, QWidget *parent = 0);
     explicit DialogMDataBase(QWidget *parent = 0);
     virtual ~DialogMDataBase() Q_DECL_OVERRIDE;
 

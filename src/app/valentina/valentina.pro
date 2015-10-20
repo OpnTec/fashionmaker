@@ -105,7 +105,15 @@ CONFIG(debug, debug|release){
             QMAKE_CXXFLAGS -= \
                 -Wmissing-prototypes \
                 -Wundefined-reinterpret-cast
-            }
+        }
+        *-icc-*{
+            QMAKE_CXXFLAGS+= \
+                -isystem "$${OUT_PWD}/$${UI_DIR}" \
+                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+                -isystem "$${OUT_PWD}/$${RCC_DIR}" \
+                -isystem "$${OUT_PWD}/../../libs/vtools/$${UI_DIR}" \ # For VTools UI files
+                $$ICC_DEBUG_CXXFLAGS
+        }
     } else {
         *-g++{
         QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.

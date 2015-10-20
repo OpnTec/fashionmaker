@@ -154,7 +154,7 @@ protected:
     virtual QModelIndex getIndexFromProperty(VProperty* property, int column = 0) const;
 
     //! Protected constructor passing the private object
-    VPropertyModel(VPropertyModelPrivate* d, QObject* parent = 0);
+    explicit VPropertyModel(VPropertyModelPrivate* d, QObject* parent = 0);
 
     //! The model data
     VPropertyModelPrivate* d_ptr;

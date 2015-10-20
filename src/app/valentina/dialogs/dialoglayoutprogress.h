@@ -43,7 +43,7 @@ class DialogLayoutProgress : public QDialog
     Q_OBJECT
 
 public:
-    DialogLayoutProgress(int count, QWidget *parent = 0);
+    explicit DialogLayoutProgress(int count, QWidget *parent = 0);
     ~DialogLayoutProgress();
 
 signals:

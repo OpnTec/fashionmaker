@@ -73,6 +73,10 @@ CONFIG(debug, debug|release){
         QMAKE_CXXFLAGS -= \
             -Wmissing-prototypes
         }
+        *-icc-*{
+            QMAKE_CXXFLAGS += \
+                $$ICC_DEBUG_CXXFLAGS
+        }
     } else {
         *-g++{
         QMAKE_CXXFLAGS += $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.

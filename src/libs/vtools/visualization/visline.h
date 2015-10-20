@@ -39,7 +39,7 @@ class VisLine: public Visualization, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
-    VisLine(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisLine(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisLine() Q_DECL_OVERRIDE;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}

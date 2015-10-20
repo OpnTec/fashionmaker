@@ -125,6 +125,9 @@ ISYSTEM += \
     -isystem "$$[QT_INSTALL_HEADERS]/QtGui" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtXmlPatterns" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtCore" \
+    -isystem "$$[QT_INSTALL_HEADERS]/QtPrintSupport" \
+    -isystem "$$[QT_INSTALL_HEADERS]/QtSvg" \
+    -isystem "$$[QT_INSTALL_HEADERS]/QtNetwork" \
     -isystem "$$[QT_INSTALL_HEADERS]/QtTest"
 } else {
 ISYSTEM += \
@@ -138,6 +141,12 @@ ISYSTEM += \
     -isystem "$$[QT_INSTALL_LIBS]/QtXmlPatterns.framework/Versions/5/Headers/" \
     -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Headers/" \
     -isystem "$$[QT_INSTALL_LIBS]/QtCore.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtPrintSupport.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtPrintSupport.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtSvg.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtSvg.framework/Versions/5/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtNetwork.framework/Headers/" \
+    -isystem "$$[QT_INSTALL_LIBS]/QtNetwork.framework/Versions/5/Headers/" \
     -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Headers/" \
     -isystem "$$[QT_INSTALL_LIBS]/QtTest.framework/Versions/5/Headers/"
 }
@@ -563,6 +572,32 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wzero-length-array \
     -Qunused-arguments \
     -fcolor-diagnostics
+
+ICC_DEBUG_CXXFLAGS += \
+    $$ISYSTEM \ # Ignore warnings Qt headers.
+    -Wcomment \
+    #-Weffc++ \ # Disabled, produce to many "false positive" warning
+    -Wextra-tokens \
+    -Wformat \
+    #-Winline \
+    -Wmain \
+    -Wmissing-declarations \
+    -Wmissing-prototypes \
+    -Wnon-virtual-dtor \
+    -Wp64 \
+    -Wpointer-arith \
+    -Wremarks \
+    -Wreturn-type \
+    -Wsign-compare \
+    -Wstrict-aliasing \
+    -Wstrict-prototypes \
+    -Wtrigraphs \
+    -Wuninitialized \
+    -Wunknown-pragmas \
+    -Wunused-variable \
+    -pedantic \
+    -Wno-pch-messages \
+    -wd1418,2012,2015 #disable warnings. Syntax example -wd1572,873,2259,2261
 } else {
 # Don't use additional GCC and Clang keys on Windows system.
 # Can't find way mark ignore Qt header on Windows.

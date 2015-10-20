@@ -37,7 +37,7 @@ class VisToolCurveIntersectAxis : public VisLine
 {
     Q_OBJECT
 public:
-    VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisToolCurveIntersectAxis() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;

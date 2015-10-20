@@ -35,7 +35,7 @@ class VisToolBisector :public VisLine
 {
     Q_OBJECT
 public:
-    VisToolBisector(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisToolBisector(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisToolBisector() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;

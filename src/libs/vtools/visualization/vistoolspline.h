@@ -35,7 +35,7 @@ class VisToolSpline : public VisPath
 {
     Q_OBJECT
 public:
-    VisToolSpline(const VContainer *data, QGraphicsItem *parent = 0);
+    explicit VisToolSpline(const VContainer *data, QGraphicsItem *parent = 0);
     virtual ~VisToolSpline() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
