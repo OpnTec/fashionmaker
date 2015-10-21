@@ -620,7 +620,6 @@ ICC_DEBUG_CXXFLAGS += \
     -Wuninitialized \
     -Wunknown-pragmas \
     -Wunused-variable \
-    -pedantic \
     -Wno-pch-messages \
     -wd1418,2012,2015,2017,2022,2013 #disable warnings. Syntax example -wd1572,873,2259,2261
 } else {
