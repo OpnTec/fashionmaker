@@ -30,6 +30,7 @@
 #define DXFDEF_H
 
 #include <QtGlobal>
+#include <ciso646> //for msvc
 
 enum class VarMeasurement : unsigned char { English=0, Metric=1 };
 

@@ -37,6 +37,7 @@
 #endif /* Q_OS_WIN */
 
 #include "debugbreak.h"
+#include <ciso646> //for msvc
 
 class QComboBox;
 

@@ -31,6 +31,7 @@
 
 #include <QtGlobal>
 #include "../vmisc/def.h"
+#include <ciso646> //for msvc
 
 extern const QString CustomMSign;
 extern const QString CustomIncrSign;
