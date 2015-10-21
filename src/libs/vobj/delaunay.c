@@ -1024,17 +1024,17 @@ delaunay2d_t* delaunay2d_from(del_point2d_t *points, unsigned int num_points) {
     qsort(del.points, num_points, sizeof(point2d_t*), cmp_points);
 
     if( num_points >= 3 ) {
-        del_divide_and_conquer( &del, 0, num_points - 1 );
+        unsigned int fbuff_size = 0;
+        unsigned int j = 0;
 
+        del_divide_and_conquer( &del, 0, num_points - 1 );
         del_build_faces( &del );
 
-        unsigned int fbuff_size	= 0;
         for( i = 0; i < del.num_faces; i++ )
             fbuff_size	+= del.faces[i].num_verts + 1;
 
         faces = (unsigned int*)malloc(sizeof(unsigned int) * fbuff_size);
 
-        unsigned int j = 0;
         for( i = 0; i < del.num_faces; i++ )
         {
             halfedge_t	*curr;
