@@ -42,7 +42,10 @@
 
 class VTranslateVars;
 
-#ifdef Q_CC_GNU
+#if defined(Q_CC_INTEL)
+    #pragma warning( push )
+    #pragma warning( disable: 2021 )
+#elif defined(Q_CC_GNU)
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Weffc++"
 #endif
@@ -84,8 +87,10 @@ public:
     const Unit *patternUnit;
 };
 
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
+#if defined(Q_CC_INTEL)
+    #pragma warning( pop )
+#elif defined(Q_CC_GNU)
+    #pragma GCC diagnostic pop
 #endif
 
 /**

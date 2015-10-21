@@ -1368,7 +1368,7 @@ struct DXFLIB_EXPORT DL_LeaderVertexData
      * Constructor.
      * Parameters: see member variables.
      */
-    DL_LeaderVertexData(double px=0.0, double py=0.0, double pz=0.0)
+    explicit DL_LeaderVertexData(double px=0.0, double py=0.0, double pz=0.0)
         :  x(px), y(py), z(pz)
     {
     }

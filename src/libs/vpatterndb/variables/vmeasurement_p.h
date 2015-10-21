@@ -43,7 +43,8 @@ class VMeasurementData : public QSharedData
 public:
 
     VMeasurementData(quint32 index, const QString &gui_text, const QString &tagName)
-        :data(VContainer(nullptr, nullptr)), index(index), gui_text(gui_text), _tagName(tagName), formulaOk(true)
+        :data(VContainer(nullptr, nullptr)), index(index), formula(), gui_text(gui_text), _tagName(tagName),
+          formulaOk(true)
     {}
 
     VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, const QString &gui_text,

@@ -576,7 +576,7 @@ CLANG_DEBUG_CXXFLAGS += \
 ICC_DEBUG_CXXFLAGS += \
     $$ISYSTEM \ # Ignore warnings Qt headers.
     -Wcomment \
-    #-Weffc++ \ # Disabled, produce to many "false positive" warning
+    -Weffc++ \
     -Wextra-tokens \
     -Wformat \
     #-Winline \
@@ -597,7 +597,7 @@ ICC_DEBUG_CXXFLAGS += \
     -Wunused-variable \
     -pedantic \
     -Wno-pch-messages \
-    -wd1418,2012,2015 #disable warnings. Syntax example -wd1572,873,2259,2261
+    -wd1418,2012,2015,2017,2022,2013 #disable warnings. Syntax example -wd1572,873,2259,2261
 } else {
 # Don't use additional GCC and Clang keys on Windows system.
 # Can't find way mark ignore Qt header on Windows.
