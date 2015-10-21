@@ -2034,12 +2034,11 @@ for(_translation_name, INSTALL_TRANSLATIONS) {
         system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) $$shell_path($${PWD}/$${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($${PWD}/$$_translation_name))
         unix {
             exists($${OUT_PWD}/$$DESTDIR/valentina) {
-                system(rm -fv $${OUT_PWD}/$$DESTDIR/valentina)
+                system(rm -fv $${OUT_PWD}/$$DESTDIR/valentina) # force to call linking
             }
             system(rm -fv $${OUT_PWD}/$$DESTDIR/translations/*.qm)
         }
     }
-    QMAKE_CLEAN += $${PWD}/$$_translation_name
 }
 
 for(DIR, INSTALL_TRANSLATIONS) {
@@ -2050,7 +2049,7 @@ for(DIR, INSTALL_TRANSLATIONS) {
 }
 
 # Make possible run program even you do not install it. Seek files in local directory.
-copyToDestdir($$tr_path, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
+forceCopyToDestdir($$tr_path, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
 
 for(DIR, INSTALL_STANDARD_MEASHUREMENTS) {
      #add these absolute paths to a variable which

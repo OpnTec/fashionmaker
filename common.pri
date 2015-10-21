@@ -64,6 +64,31 @@ defineTest(copyToDestdir) {
     message("----------------------------------------------end---------------------------------------------------")
 }
 
+# Alwayse copies the given files to the destination directory
+defineTest(forceCopyToDestdir) {
+    files = $$1
+    DDIR = $$2
+    mkpath($$DDIR)
+
+    message("----------------------------------------------begin------------------------------------------------")
+    message("Copy to" $$DDIR "after link")
+    for(FILE, files) {
+
+        # Replace slashes in paths with backslashes for Windows
+        win32{
+            FILE ~= s,/,\\,g
+            DDIR ~= s,/,\\,g
+        }
+        QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
+        message("Command:" $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR))
+        QMAKE_CLEAN += $$DDIR/$$basename(FILE)
+    }
+
+    export(QMAKE_POST_LINK)
+    export(QMAKE_CLEAN)
+    message("----------------------------------------------end---------------------------------------------------")
+}
+
 # We use precompiled headers for more fast compilation source code.
 defineReplace(set_PCH){
     macx:clang*{
