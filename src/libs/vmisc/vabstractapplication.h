@@ -36,9 +36,9 @@
 #include "def.h"
 #include "vsettings.h"
 #include "vlockguard.h"
+#include "../vpatterndb/vtranslatevars.h"
 
 class VAbstractApplication;// use in define
-class VTranslateVars;
 class VAbstractPattern;
 class VMainGraphicsView;
 class QUndoStack;
@@ -137,17 +137,6 @@ private:
     void ClearTranslation();
 };
 
-//---------------------------------------------------------------------------------------------------------------------
-inline MeasurementsType VAbstractApplication::patternType() const
-{
-    return _patternType;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::setPatternType(const MeasurementsType &patternType)
-{
-    _patternType = patternType;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
@@ -156,50 +145,6 @@ inline QString VAbstractApplication::LocaleToString(const T &value)
     QLocale loc;
     qApp->Settings()->GetOsSeparator() ? loc = QLocale::system() : loc = QLocale(QLocale::C);
     return loc.toString(value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::setCurrentDocument(VAbstractPattern *doc)
-{
-    this->doc = doc;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline VAbstractPattern *VAbstractApplication::getCurrentDocument() const
-{
-    SCASSERT(doc != nullptr)
-    return doc;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline bool VAbstractApplication::getOpeningPattern() const
-{
-    return openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::setOpeningPattern()
-{
-    openingPattern = !openingPattern;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QWidget *VAbstractApplication::getMainWindow() const
-{
-    return mainWindow;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VAbstractApplication::setMainWindow(QWidget *value)
-{
-    SCASSERT(value != nullptr)
-    mainWindow = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QUndoStack *VAbstractApplication::getUndoStack() const
-{
-    return undoStack;
 }
 
 #endif // VABSTRACTAPPLICATION_H

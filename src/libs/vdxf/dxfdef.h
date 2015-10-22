@@ -31,6 +31,10 @@
 
 #include <QtGlobal>
 
+#ifdef Q_CC_MSVC
+    #include <ciso646>
+#endif /* Q_CC_MSVC */
+
 enum class VarMeasurement : unsigned char { English=0, Metric=1 };
 
 //Default drawing units for AutoCAD DesignCenter blocks:

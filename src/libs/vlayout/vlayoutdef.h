@@ -29,6 +29,10 @@
 #ifndef VLAYOUTDEF_H
 #define VLAYOUTDEF_H
 
+#ifdef Q_CC_MSVC
+    #include <ciso646>
+#endif /* Q_CC_MSVC */
+
 enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
 
 enum class LayoutErrors : char

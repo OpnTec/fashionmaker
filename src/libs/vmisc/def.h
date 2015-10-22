@@ -38,6 +38,10 @@
 
 #include "debugbreak.h"
 
+#ifdef Q_CC_MSVC
+    #include <ciso646>
+#endif /* Q_CC_MSVC */
+
 class QComboBox;
 
 #define SceneSize 50000
