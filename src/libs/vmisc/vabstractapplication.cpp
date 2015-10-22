@@ -75,6 +75,62 @@ VAbstractApplication::~VAbstractApplication()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+MeasurementsType VAbstractApplication::patternType() const
+{
+    return _patternType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::setPatternType(const MeasurementsType &patternType)
+{
+    _patternType = patternType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::setCurrentDocument(VAbstractPattern *doc)
+{
+    this->doc = doc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractPattern *VAbstractApplication::getCurrentDocument() const
+{
+    SCASSERT(doc != nullptr)
+    return doc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractApplication::getOpeningPattern() const
+{
+    return openingPattern;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::setOpeningPattern()
+{
+    openingPattern = !openingPattern;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QWidget *VAbstractApplication::getMainWindow() const
+{
+    return mainWindow;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::setMainWindow(QWidget *value)
+{
+    SCASSERT(value != nullptr)
+    mainWindow = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QUndoStack *VAbstractApplication::getUndoStack() const
+{
+    return undoStack;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 Unit VAbstractApplication::patternUnit() const
 {
     return _patternUnit;

@@ -34,13 +34,12 @@
 #include "../vgeometry/vgobject.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "vtranslatevars.h"
 
 #include <QCoreApplication>
 #include <QHash>
 #include <QSet>
 #include <QSharedPointer>
-
-class VTranslateVars;
 
 #if defined(Q_CC_INTEL)
     #pragma warning( push )
