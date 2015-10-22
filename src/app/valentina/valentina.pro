@@ -2002,26 +2002,32 @@ win32:*-g++ {
     package_printsupport.files += $$[QT_INSTALL_PLUGINS]/printsupport/windowsprintersupport.dll
     INSTALLS += package_printsupport
 
-    package_nsis.path = $${OUT_PWD}/../../../package
-    package_nsis.files += \
-        $$PWD/../../../dist/win/nsis/valentina.nsi \
-        $$PWD/../../../dist/win/nsis/unList.exe # copy exe instead of creating from nsi
-    INSTALLS += package_nsis
+    NSIS_MAKENSISW = "C:/Program Files/NSIS/makensisw.exe"
 
-    package_nsis_headers.path = $${OUT_PWD}/../../../package/headers
-    package_nsis_headers.files += \
-        $$PWD/../../../dist/win/nsis/headers/fileassoc.nsh \
-        $$PWD/../../../dist/win/nsis/headers/fileversion.nsh
-    INSTALLS += package_nsis_headers
+    exists($$NSIS_MAKENSISW) {
+        package_nsis.path = $${OUT_PWD}/../../../package
+        package_nsis.files += \
+            $$PWD/../../../dist/win/nsis/valentina.nsi \
+            $$PWD/../../../dist/win/nsis/unList.exe # copy exe instead of creating from nsi
+        INSTALLS += package_nsis
 
-    # Do the packaging
-    # First, mangle all of INSTALLS values. We depend on them.
-    unset(MANGLED_INSTALLS)
-    for(x, INSTALLS):MANGLED_INSTALLS += install_$${x}
-    build_package.path = $${OUT_PWD}/../../../package
-    build_package.commands = \"C:/Program Files/NSIS/makensisw.exe\" \"$${OUT_PWD}/../../../package/valentina.nsi\"
-    build_package.depends = $${MANGLED_INSTALLS}
-    INSTALLS += build_package
+        package_nsis_headers.path = $${OUT_PWD}/../../../package/headers
+        package_nsis_headers.files += \
+            $$PWD/../../../dist/win/nsis/headers/fileassoc.nsh \
+            $$PWD/../../../dist/win/nsis/headers/fileversion.nsh
+        INSTALLS += package_nsis_headers
+
+        # Do the packaging
+        # First, mangle all of INSTALLS values. We depend on them.
+        unset(MANGLED_INSTALLS)
+        for(x, INSTALLS):MANGLED_INSTALLS += install_$${x}
+        build_package.path = $${OUT_PWD}/../../../package
+        build_package.commands = $$NSIS_MAKENSISW \"$${OUT_PWD}/../../../package/valentina.nsi\"
+        build_package.depends = $${MANGLED_INSTALLS}
+        INSTALLS += build_package
+    } else {
+        message("NSIS was not found!")
+    }
 }
 
 # Some systems use special name for lrelease. For example opensuse 13.2 has lrelease-qt5.
