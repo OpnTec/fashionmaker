@@ -133,8 +133,11 @@ CONFIG(debug, debug|release){
     }
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
-        # do nothing
+        DEFINES += V_NO_DEBUG
     } else {
+        noCrashReports{
+            DEFINES += V_NO_DEBUG
+        }
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
         !macx:!win32-msvc*{
@@ -1878,6 +1881,7 @@ win32:*-g++ {
         $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe \
         $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc \
         $$PWD/../../../dist/win/valentina.ico \
+        $$PWD/../../../dist/win/measurements.ico \
         $$PWD/../../../dist/win/pdftops.exe \
         $$PWD/../../../AUTHORS.txt \
         $$PWD/../../../LICENSE_GPL.txt \
