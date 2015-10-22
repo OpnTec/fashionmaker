@@ -61,7 +61,6 @@ ShowUninstDetails show
 
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "${PACKAGE_FOLDER}\LICENSE_GPL.txt"
-!insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
     ; These indented statements modify settings for MUI_PAGE_FINISH
@@ -192,8 +191,7 @@ Function un.onInit
 FunctionEnd
  
 ;-------------- Installer -------------------------
-Section "${PRODUCT_VALENTINA}  (required)"
-SectionIn RO ; define mandatory sections
+Section 
  
 ;Add files
 SetOutPath "$INSTDIR" ; Set output path to the installation directory.
