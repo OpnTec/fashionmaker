@@ -36,43 +36,6 @@
 #else
 #   define PDFTOPS "pdftops"
 #endif
-#include <vector>
-#include <functional>
-
-namespace nm_DialogSaveLayout
-{
-    struct VFrmWithTest //could declare inside dialog class, but using namespace shorter to write and understand
-    {
-        typedef std::function<bool()> test_func;
-        const std::pair<QString, QString> pair;
-        const test_func test;
-
-        VFrmWithTest(const QString& v1, const QString& v2)
-            :pair(std::make_pair(v1,v2)),
-              test([](){return true;})
-        {
-        }
-
-        VFrmWithTest(const QString& v1, const QString& v2, int dummy)
-            :pair(std::make_pair(v1,v2)), test((dummy != 1 )?TestPdf:VFrmWithTest::SingleTest)
-        {
-        }
-    private:
-        static bool havePdf;
-        static bool tested;
-
-        static bool TestPdf();
-        static bool SingleTest()
-        {
-            if (!tested)
-            {
-                havePdf = TestPdf();
-                tested = true;
-            }
-            return havePdf;
-        }
-    };
-}
 
 namespace Ui
 {
@@ -91,7 +54,7 @@ public:
     QString Path() const;
     QString FileName() const;
     QString Formate() const;
-    void SelectFormate(const size_t formate);
+    void    SelectFormate(const int formate);
     static QString MakeHelpFormatList();
     void   SetDestinationPath(const QString& cmdDestinationPath);
 public slots:
@@ -101,10 +64,16 @@ public slots:
     void PathChanged(const QString &text);
 
 private:
-    const static std::vector<nm_DialogSaveLayout::VFrmWithTest> availFormats;
     Q_DISABLE_COPY(DialogSaveLayout)
     Ui::DialogSaveLAyout *ui;
     int count;
+    // Note. We can't make availFormats static because MSVC doesn't support C++11 list initialization
+    QVector<std::pair<QString, QString>> availFormats;
+    static bool havePdf;
+    static bool tested;
+    static bool SupportPSTest();
+    static bool TestPdf();
+    static QVector<std::pair<QString, QString> > InitAvailFormats();
 };
 
 #endif // DIALOGSAVELAYOUT_H

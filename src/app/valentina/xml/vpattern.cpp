@@ -2184,8 +2184,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList tools{VToolUnionDetails::ToolType};
-
+    const QStringList tools = QStringList() << VToolUnionDetails::ToolType;
     switch (tools.indexOf(type))
     {
         case 0: //VToolUnionDetails::ToolType

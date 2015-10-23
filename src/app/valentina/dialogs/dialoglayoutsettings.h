@@ -47,8 +47,18 @@ class DialogLayoutSettings : public QDialog
 {
     Q_OBJECT
 public:
-    enum class PaperSizeTemplate : char { A0 = 0, A1, A2, A3, A4, Letter, Legal, Roll24in, Roll30in, Roll36in, Roll42in,
-                                          Roll44in};
+    enum class PaperSizeTemplate : char { A0 = 0,
+                                          A1,
+                                          A2,
+                                          A3,
+                                          A4,
+                                          Letter,
+                                          Legal,
+                                          Roll24in = 7, // Be carefull when change order roll type
+                                          Roll30in,     // Used also for showing icon
+                                          Roll36in,
+                                          Roll42in,
+                                          Roll44in = 11};
     explicit DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = nullptr, bool disableSettings = false);
     ~DialogLayoutSettings();
 
@@ -103,7 +113,7 @@ public slots:
 
 private:
     Q_DISABLE_COPY(DialogLayoutSettings)
-    typedef std::vector<QString> FormatsVector;
+    typedef QStringList FormatsVector;
     typedef int VIndexType;
     const static  FormatsVector pageFormatNames;
 

@@ -2,7 +2,7 @@
 /*                                                                           */
 /*  Routines for Arbitrary Precision Floating-point Arithmetic               */
 /*  and Fast Robust Geometric Predicates                                     */
-/*  (predicates.c)                                                           */
+/*  (predicates.cpp)                                                         */
 /*                                                                           */
 /*  May 18, 1996                                                             */
 /*                                                                           */
@@ -109,6 +109,12 @@
 #include <stdlib.h>
 #include <math.h>
 #include <QtGlobal>
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wold-style-cast"
+    #pragma GCC diagnostic ignored "-Wfloat-equal"
+#endif
 
 /* On some machines, the exact arithmetic routines might be defeated by the  */
 /*   use of internal extended precision floating-point registers.  Sometimes */
@@ -1068,3 +1074,7 @@ qreal incircle(qreal *pa, qreal *pb, qreal *pc, qreal *pd)
 
     return incircleadapt(pa, pb, pc, pd, permanent);
 }
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif

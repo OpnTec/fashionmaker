@@ -22,8 +22,15 @@
 #include <math.h>
 #include <string.h>
 #include <assert.h>
+#include <QtGlobal>
 
 #include "delaunay.h"
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wold-style-cast"
+    #pragma GCC diagnostic ignored "-Wcast-qual"
+#endif
 
 #if PREDICATE == EXACT_PREDICATE
 extern void exactinit();
@@ -1061,7 +1068,7 @@ delaunay2d_t* delaunay2d_from(del_point2d_t *points, unsigned int num_points) {
 
     res		= (delaunay2d_t*)malloc(sizeof(delaunay2d_t));
     res->num_points	= num_points;
-    res->points	= malloc(sizeof(del_point2d_t) * num_points);
+    res->points	= (del_point2d_t*)malloc(sizeof(del_point2d_t) * num_points);
     memcpy(res->points, points, sizeof(del_point2d_t) * num_points);
     res->num_faces	= del.num_faces;
     res->faces	= faces;
@@ -1074,3 +1081,7 @@ void delaunay2d_release(delaunay2d_t *del) {
     free(del->points);
     free(del);
 }
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic pop
+#endif

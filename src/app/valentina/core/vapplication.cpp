@@ -68,7 +68,7 @@ Q_LOGGING_CATEGORY(vApp, "v.application")
     #pragma warning( pop )
 #endif
 
-constexpr auto DAYS_TO_KEEP_LOGS = 3;
+Q_DECL_CONSTEXPR auto DAYS_TO_KEEP_LOGS = 3;
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -503,9 +503,8 @@ void VApplication::BeginLogging()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::ClearOldLogs() const
 {
-    QStringList filters{"*.log"};
     QDir logsDir(LogDirPath());
-    logsDir.setNameFilters(filters);
+    logsDir.setNameFilters(QStringList("*.log"));
     logsDir.setCurrent(LogDirPath());
 
     const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);

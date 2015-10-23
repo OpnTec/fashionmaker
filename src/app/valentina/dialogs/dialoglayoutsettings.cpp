@@ -31,7 +31,6 @@
 #include "../core/vapplication.h"
 #include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/vsettings.h"
-#include <vector>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -42,20 +41,19 @@
 #include <QPushButton>
 
 //must be the same order as PaperSizeTemplate constants
-const DialogLayoutSettings::FormatsVector DialogLayoutSettings::pageFormatNames={
-    "A0",
-    "A1",
-    "A2",
-    "A3",
-    "A4",
-    tr("Letter"),
-    tr("Legal"),
-    tr("Roll 24in"),
-    tr("Roll 30in"),
-    tr("Roll 36in"),
-    tr("Roll 42in"),
-    tr("Roll 44in"),
-};
+const DialogLayoutSettings::FormatsVector DialogLayoutSettings::pageFormatNames =
+        DialogLayoutSettings::FormatsVector () << QLatin1Literal("A0")
+                                               << QLatin1Literal("A1")
+                                               << QLatin1Literal("A2")
+                                               << QLatin1Literal("A3")
+                                               << QLatin1Literal("A4")
+                                               << QApplication::translate("DialogLayoutSettings", "Letter")
+                                               << QApplication::translate("DialogLayoutSettings", "Legal")
+                                               << QApplication::translate("DialogLayoutSettings", "Roll 24in")
+                                               << QApplication::translate("DialogLayoutSettings", "Roll 30in")
+                                               << QApplication::translate("DialogLayoutSettings", "Roll 36in")
+                                               << QApplication::translate("DialogLayoutSettings", "Roll 42in")
+                                               << QApplication::translate("DialogLayoutSettings", "Roll 44in");
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent, bool disableSettings)
@@ -481,7 +479,14 @@ void DialogLayoutSettings::InitTemplates()
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
     foreach(const auto& v, pageFormatNames)
     {
-        ui->comboBoxTemplates->addItem(icoPaper, v+" "+pdi, QVariant(cntr++));
+        if (cntr <= 6)
+        {
+            ui->comboBoxTemplates->addItem(icoPaper, v+" "+pdi, QVariant(cntr++));
+        }
+        else
+        {
+            ui->comboBoxTemplates->addItem(icoRoll, v+" "+pdi, QVariant(cntr++));
+        }
     }
     ui->comboBoxTemplates->setCurrentIndex(-1);
 }

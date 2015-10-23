@@ -96,7 +96,7 @@ private:
     VTranslateVars     *trVars;
     QTimer             *autoSaveTimer;
 
-    VLockGuardPtr<QFile>         lockLog;
+    std::shared_ptr<VLockGuard<QFile>> lockLog;
     std::shared_ptr<QTextStream> out;
 
     void               InitLineWidth();

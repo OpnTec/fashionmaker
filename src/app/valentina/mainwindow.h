@@ -231,7 +231,7 @@ private:
     QPointer<QLabel>   gradationHeightsLabel;
     QPointer<QLabel>   gradationSizesLabel;
     VToolOptionsPropertyBrowser *toolOptions;
-    VLockGuardPtr<char> lock;
+    std::shared_ptr<VLockGuard<char>> lock;
 
     void               ToolBarOption();
     void               ToolBarStages();

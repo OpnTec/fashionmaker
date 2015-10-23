@@ -33,6 +33,14 @@
 #include <QHash>
 #include <QRectF>
 
+// An annoying char define, from the Windows team in <rpcndr.h>
+// #define small char
+// http://stuartjames.info/Journal/c--visual-studio-2012-vs2012--win8--converting-projects-up-some-conflicts-i-found.aspx
+#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#pragma push_macro("small")
+#undef small
+#endif
+
 class QPointF;
 class VLayoutDetail;
 
@@ -91,5 +99,9 @@ private:
     void SqMaxMin(qint64 &sMax, qint64 &sMin) const;
     void BiggestBoundingRect();
 };
+
+#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#pragma pop_macro("small")
+#endif
 
 #endif // VBANK_H

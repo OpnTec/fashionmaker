@@ -32,7 +32,7 @@
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-QMUPARSERSHARED_EXPORT inline QString NameRegExp()
+inline QString NameRegExp()
 {
     //Same regexp in pattern.xsd shema file. Don't forget synchronize.
     return QStringLiteral("^([^0-9*/^+\\-=\\s()?%:;!.,`'\"]){1,1}([^*/^+\\-=\\s()?%:;!.,`'\"]){0,}$");

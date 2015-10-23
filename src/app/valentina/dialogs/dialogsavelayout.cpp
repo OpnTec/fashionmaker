@@ -39,28 +39,14 @@
 #include <QProcess>
 #include <QDebug>
 
-using namespace nm_DialogSaveLayout;
-
 const QString baseFilenameRegExp = QStringLiteral("^[\\w\\-. ]+$");
 
-bool VFrmWithTest::havePdf = false;
-bool VFrmWithTest::tested  = false;
-
-const std::vector<VFrmWithTest> DialogSaveLayout::availFormats =
-{
-    VFrmWithTest(tr("Svg files (*.svg)"), ".svg"),
-    VFrmWithTest(tr("PDF files (*.pdf)"), ".pdf"),
-    VFrmWithTest(tr("Images (*.png)"), ".png"),
-    VFrmWithTest(tr("Wavefront OBJ (*.obj)"), ".obj"),
-    VFrmWithTest(tr("PS files (*.ps)"), ".ps", 1), //fixme: use 1 to have exe once tested on 1st run, or any other value to test always as original do
-    VFrmWithTest(tr("EPS files (*.eps)"), ".eps", 1),
-    VFrmWithTest(tr("DXF files (*.dxf)"), ".dxf"),
-};
-
+bool DialogSaveLayout::havePdf = false;
+bool DialogSaveLayout::tested  = false;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogSaveLAyout), count(count)
+    :QDialog(parent), ui(new Ui::DialogSaveLAyout), count(count), availFormats(InitAvailFormats())
 {
     ui->setupUi(this);
 
@@ -96,10 +82,7 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
 
     foreach (auto& v , availFormats)
     {
-        if (v.test())
-        {
-            ui->comboBoxFormat->addItem(v.pair.first, QVariant(v.pair.second));
-        }
+        ui->comboBoxFormat->addItem(v.first, QVariant(v.second));
     }
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
@@ -116,7 +99,7 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
 }
 //---------------------------------------------------------------------------------------------------------------------
 
-void DialogSaveLayout::SelectFormate(const size_t formate)
+void DialogSaveLayout::SelectFormate(const int formate)
 {
     if (formate >= availFormats.size())
     {
@@ -124,7 +107,7 @@ void DialogSaveLayout::SelectFormate(const size_t formate)
         throw e;
     }
 
-    const int i = ui->comboBoxFormat->findData(availFormats[formate].pair.second);
+    const int i = ui->comboBoxFormat->findData(availFormats.at(formate).second);
     if (i < 0)
     {
         VException e(tr("Selected not present format."));
@@ -138,12 +121,10 @@ QString DialogSaveLayout::MakeHelpFormatList()
 {
    QString out = "\n";
    int cntr = 0;
+   const QVector<std::pair<QString, QString>> availFormats = InitAvailFormats();
    foreach(auto& v, availFormats)
    {
-       if (v.test())
-       {
-           out += "\t"+v.pair.first+" = "+ QString::number(cntr++)+"\n";
-       }
+       out += "\t"+v.first+" = "+ QString::number(cntr++)+"\n";
    }
    return out;
 }
@@ -264,9 +245,20 @@ void DialogSaveLayout::PathChanged(const QString &text)
 
     ui->lineEditPath->setPalette(palette);
 }
-//---------------------------------------------------------------------------------------------------------------------
 
-bool VFrmWithTest::TestPdf()
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogSaveLayout::SupportPSTest()
+{
+    if (!tested)
+    {
+        havePdf = TestPdf();
+        tested = true;
+    }
+    return havePdf;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogSaveLayout::TestPdf()
 {
     bool res = false;
 
@@ -285,4 +277,21 @@ bool VFrmWithTest::TestPdf()
         qDebug()<<PDFTOPS<<"error"<<proc.error()<<proc.errorString();
     }
     return res;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<std::pair<QString, QString>> DialogSaveLayout::InitAvailFormats()
+{
+    QVector<std::pair<QString, QString>> list;
+    list.append(std::make_pair(tr("Svg files (*.svg)"), QLatin1Literal(".svg")));
+    list.append(std::make_pair(tr("PDF files (*.pdf)"), QLatin1Literal(".pdf")));
+    list.append(std::make_pair(tr("Images (*.png)"), QLatin1Literal(".png")));
+    list.append(std::make_pair(tr("Wavefront OBJ (*.obj)"), QLatin1Literal(".obj")));
+    if (SupportPSTest())
+    {
+        list.append(std::make_pair(tr("PS files (*.ps)"), QLatin1Literal(".ps")));
+        list.append(std::make_pair(tr("EPS files (*.eps)"), QLatin1Literal(".eps")));
+    }
+    list.append(std::make_pair(tr("DXF files (*.dxf)"), QLatin1Literal(".dxf")));
+    return list;
 }

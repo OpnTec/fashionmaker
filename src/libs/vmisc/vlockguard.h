@@ -169,29 +169,25 @@ bool VLockGuard<Guarded>::TryLock(const QString &lockName, int stale, int timeou
 //use pointer and function below to persistent things like class-member, because lock is taken by constructor
 //helper functions allow to write shorter creating and setting new lock-pointer
 
-//new C++11 - "template typedef" http://stackoverflow.com/questions/2795023/c-template-typedef
-template <typename Guarded>
-using  VLockGuardPtr = std::shared_ptr<VLockGuard<Guarded>>;
-
 #if defined (Q_CC_INTEL)
 #pragma warning( push )
 #pragma warning( disable: 1418 )
 #endif
 
 template <typename Guarded>
-void VlpCreateLock(VLockGuardPtr<Guarded>& r, const QString& lockName, int stale = 0, int timeout = 0)
+void VlpCreateLock(std::shared_ptr<VLockGuard<Guarded>>& r, const QString& lockName, int stale = 0, int timeout = 0)
 {
     r.reset(new VLockGuard<Guarded>(lockName, stale, timeout));
 }
 
 template <typename Guarded, typename Alloc>
-void VlpCreateLock(VLockGuardPtr<Guarded>& r, const QString& lockName, Alloc a, int stale = 0, int timeout = 0)
+void VlpCreateLock(std::shared_ptr<VLockGuard<Guarded>>& r, const QString& lockName, Alloc a, int stale = 0, int timeout = 0)
 {
     r.reset(new VLockGuard<Guarded>(lockName, a, stale, timeout));
 }
 
 template <typename Guarded, typename Alloc, typename Del>
-void VlpCreateLock(VLockGuardPtr<Guarded>& r, const QString& lockName, Alloc a, Del d, int stale = 0, int timeout = 0)
+void VlpCreateLock(std::shared_ptr<VLockGuard<Guarded>>& r, const QString& lockName, Alloc a, Del d, int stale = 0, int timeout = 0)
 {
     r.reset(new VLockGuard<Guarded>(lockName, a, d, stale, timeout));
 }

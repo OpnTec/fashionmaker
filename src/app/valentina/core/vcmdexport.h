@@ -87,6 +87,8 @@ private:
 
     static int Lo2Px(const QString& src, const DialogLayoutSettings& converter);
     static int Pg2Px(const QString& src, const DialogLayoutSettings& converter);
+    
+    static QMap<QString, QCommandLineOption *> InitOptionsUsed();
 };
 
 #endif // VCMDEXPORT_H
