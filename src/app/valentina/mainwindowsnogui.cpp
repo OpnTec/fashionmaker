@@ -456,7 +456,7 @@ QIcon MainWindowsNoGUI::ScenePreview(int i) const
             painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
                                 Qt::RoundCap, Qt::RoundJoin));
             painter.setBrush ( QBrush ( Qt::NoBrush ) );
-            scenes.at(i)->render(&painter);
+            scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
             painter.end();
         }
         else
@@ -731,7 +731,7 @@ QVector<QImage> MainWindowsNoGUI::AllSheets()
             painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
                                 Qt::RoundCap, Qt::RoundJoin));
             painter.setBrush ( QBrush ( Qt::NoBrush ) );
-            scenes.at(i)->render(&painter);
+            scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
             painter.end();
             images.append(image);
 
