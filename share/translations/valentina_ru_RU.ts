@@ -6374,7 +6374,7 @@ Do you want to save your changes?</source>
     <message>
         <source>None</source>
         <comment>System name</comment>
-        <translation>Никакая</translation>
+        <translation>Внутреняя</translation>
     </message>
     <message>
         <source>Valentina team</source>
