@@ -12,6 +12,8 @@ if not exist %nsis_path% (
 :PREPARE
 cd ..
 cd
+rem force qmake create new qm files
+del /Q share\translations\*.qm
 mkdir build
 cd build
 cd
