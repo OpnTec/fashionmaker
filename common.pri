@@ -1,7 +1,16 @@
 win32{
-    unset(QMAKE_COPY)
     # Because "copy" doesn't support files that containe plus sign (+) in name we will use xcopy instead.
+    unset(QMAKE_COPY)
     QMAKE_COPY = xcopy /y
+
+    unset(QMAKE_COPY_FILE)
+    QMAKE_COPY_FILE = xcopy /y
+
+    unset(QMAKE_INSTALL_FILE)
+    QMAKE_INSTALL_FILE = xcopy /y
+
+    unset(QMAKE_INSTALL_PROGRAM)
+    QMAKE_INSTALL_PROGRAM = xcopy /y
 }
 
 CONFIG(release, debug|release){
