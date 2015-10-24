@@ -85,7 +85,7 @@ CONFIG(debug, debug|release){
 
 }else{
     # Release mode
-    CONFIG += silent
+    !win32-msvc*:CONFIG += silent
     DEFINES += QT_NO_DEBUG_OUTPUT
 
     noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols

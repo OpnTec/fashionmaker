@@ -121,7 +121,7 @@ CONFIG(debug, debug|release){
     DEFINES += "BUILD_REVISION=\\\"unknown\\\""
 }else{
     # Release mode
-    CONFIG += silent
+    !win32-msvc*:CONFIG += silent
     DEFINES += V_NO_ASSERT
     !unix:*-g++{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
@@ -391,7 +391,7 @@ noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
                 QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
             }
 
-            !macx{
+            !macx:!win32-msvc*{
                 QMAKE_DISTCLEAN += bin/${TARGET}.dbg
             }
         }
