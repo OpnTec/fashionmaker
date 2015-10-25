@@ -25,12 +25,6 @@ IF ERRORLEVEL 0 GOTO MAKE
 :MAKE
 mingw32-make -j%NUMBER_OF_PROCESSORS%
 IF ERRORLEVEL 1 GOTO ERRORMAKE
-IF ERRORLEVEL 0 GOTO QMAKE2
-
-:QMAKE2
-rem Run second time because first time qmake didn't find all files. They will be available only after build.
-qmake -r ..\Valentina.pro
-IF ERRORLEVEL 1 GOTO ERRORQMAKE2
 IF ERRORLEVEL 0 GOTO MAKEINSTALL
 
 :MAKEINSTALL

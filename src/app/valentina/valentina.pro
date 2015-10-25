@@ -1919,14 +1919,15 @@ win32:*-g++ {
             $$PWD/../../../dist/win/curl.exe
     }
 
+    package.CONFIG = no_check_exist
     INSTALLS += package
 
     package_tables.path = $${OUT_PWD}/../../../package/valentina/tables/standard
-    package_tables.files += $${OUT_PWD}/$${DESTDIR}/tables/standard/GOST_man_ru.vst
+    package_tables.files += $$INSTALL_STANDARD_MEASHUREMENTS
     INSTALLS += package_tables
 
     package_templates.path = $${OUT_PWD}/../../../package/valentina/tables/templates
-    package_templates.files += $${OUT_PWD}/../tape/$${DESTDIR}/tables/templates/template_all_measurements.vit
+    package_templates.files += $$INSTALL_STANDARD_TEMPLATES
     INSTALLS += package_templates
 
     package_translations.path = $${OUT_PWD}/../../../package/valentina/translations
@@ -1947,6 +1948,7 @@ win32:*-g++ {
         $$[QT_INSTALL_TRANSLATIONS]/qt_da.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_de.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_es.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qt_en.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_fa.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_fi.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_fr.qm \
@@ -1957,15 +1959,8 @@ win32:*-g++ {
         $$[QT_INSTALL_TRANSLATIONS]/qt_ja.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_ko.qm \
         $$[QT_INSTALL_TRANSLATIONS]/qt_lt.qm \
-        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_uk.qm \
-        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_ca.qm \
-        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_cs.qm \
-        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_de.qm \
-        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_hu.qm \
-        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_it.qm \
-        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_ja.qm \
-        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_ru.qm \
-        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_sk.qm
+        $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_*.qm \
+        $$[QT_INSTALL_TRANSLATIONS]/qtbase_*.qm
     INSTALLS += package_translations
 
     package_bearer.path = $${OUT_PWD}/../../../package/valentina/bearer
