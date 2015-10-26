@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <vst>
     <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
-    <version>0.4.0</version>
+    <version>0.4.1</version>
     <read-only>false</read-only>
     <notes>Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</notes>
     <unit>mm</unit>
+    <pm_system>51</pm_system>
     <size base="500"/>
     <height base="1760"/>
     <body-measurements>

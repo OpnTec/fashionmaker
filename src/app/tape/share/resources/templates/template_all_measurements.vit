@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <vit>
     <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
-    <version>0.3.1</version>
+    <version>0.3.2</version>
     <read-only>false</read-only>
     <notes/>
     <unit>cm</unit>
+    <pm_system>41</pm_system>
     <personal>
         <family-name/>
         <given-name/>
