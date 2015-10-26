@@ -136,25 +136,25 @@ void DialogLayoutSettings::SetPaperWidth(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int DialogLayoutSettings::GetShift() const
+quint32 DialogLayoutSettings::GetShift() const
 {
     return static_cast<quint32>(qFloor(UnitConvertor(ui->doubleSpinBoxShift->value(), oldLayoutUnit, Unit::Px)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetShift(unsigned int value)
+void DialogLayoutSettings::SetShift(quint32 value)
 {
     ui->doubleSpinBoxShift->setValue(UnitConvertor(value, Unit::Px, LayoutUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int DialogLayoutSettings::GetLayoutWidth() const
+quint32 DialogLayoutSettings::GetLayoutWidth() const
 {
     return static_cast<quint32>(qFloor(UnitConvertor(ui->doubleSpinBoxLayoutWidth->value(), oldLayoutUnit, Unit::Px)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetLayoutWidth(unsigned int value)
+void DialogLayoutSettings::SetLayoutWidth(quint32 value)
 {
     ui->doubleSpinBoxLayoutWidth->setValue(UnitConvertor(value, Unit::Px, LayoutUnit()));
 }

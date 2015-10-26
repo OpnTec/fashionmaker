@@ -295,11 +295,11 @@ void VSettings::SetLayoutPaperWidth(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int VSettings::GetLayoutShift() const
+quint32 VSettings::GetLayoutShift() const
 {
-    const unsigned int def = GetDefLayoutShift();
+    const quint32 def = GetDefLayoutShift();
     bool ok = false;
-    const unsigned int shift = value(SettingLayoutShift, def).toUInt(&ok);
+    const quint32 shift = value(SettingLayoutShift, def).toUInt(&ok);
     if (ok)
     {
         return shift;
@@ -311,23 +311,23 @@ unsigned int VSettings::GetLayoutShift() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int VSettings::GetDefLayoutShift()
+quint32 VSettings::GetDefLayoutShift()
 {
-    return static_cast<unsigned int>(UnitConvertor(50, Unit::Mm, Unit::Px));
+    return static_cast<quint32>(UnitConvertor(50, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutShift(unsigned int value)
+void VSettings::SetLayoutShift(quint32 value)
 {
     setValue(SettingLayoutShift, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int VSettings::GetLayoutWidth() const
+quint32 VSettings::GetLayoutWidth() const
 {
-    const unsigned int def = GetDefLayoutWidth();
+    const quint32 def = GetDefLayoutWidth();
     bool ok = false;
-    const unsigned int lWidth = value(SettingLayoutWidth, def).toUInt(&ok);
+    const quint32 lWidth = value(SettingLayoutWidth, def).toUInt(&ok);
     if (ok)
     {
         return lWidth;
@@ -339,13 +339,13 @@ unsigned int VSettings::GetLayoutWidth() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int VSettings::GetDefLayoutWidth()
+quint32 VSettings::GetDefLayoutWidth()
 {
-    return static_cast<unsigned int>(UnitConvertor(2.5, Unit::Mm, Unit::Px));
+    return static_cast<quint32>(UnitConvertor(2.5, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutWidth(unsigned int value)
+void VSettings::SetLayoutWidth(quint32 value)
 {
     setValue(SettingLayoutWidth, value);
 }

@@ -827,7 +827,7 @@ void VPattern::ParseCurrentPP()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VPattern::GetLabelBase(unsigned int index) const
+QString VPattern::GetLabelBase(quint32 index) const
 {
     const QStringList list = VApplication::LabelLanguages();
     const QString def = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
@@ -889,7 +889,7 @@ QString VPattern::GetLabelBase(unsigned int index) const
     }
 
     QString base;
-    const int count = qFloor(index/static_cast<unsigned int>(alphabet.size()));
+    const int count = qFloor(index/static_cast<quint32>(alphabet.size()));
     const int number = static_cast<int>(index) - alphabet.size() * count;
     int i = 0;
     do
@@ -2390,7 +2390,7 @@ QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedNa
         int i = 0;
         for (;;)
         {
-            name = GetLabelBase(static_cast<unsigned int>(drawList.size() + i));
+            name = GetLabelBase(static_cast<quint32>(drawList.size() + i));
             if (data->IsUnique(name))
             {
                 return name;
@@ -2424,7 +2424,7 @@ QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedNa
             }
         }
 
-        QString labelBase = GetLabelBase(static_cast<unsigned int>(index));
+        QString labelBase = GetLabelBase(static_cast<quint32>(index));
 
         qint32 num = 1;
         QString name;

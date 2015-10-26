@@ -40,7 +40,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VPoster::VPoster(const QPrinter *printer)
-    :printer(printer), allowence(static_cast<unsigned int>(qRound(10./25.4*printer->resolution())))//1 cm
+    :printer(printer), allowence(static_cast<quint32>(qRound(10./25.4*printer->resolution())))//1 cm
 {
 }
 

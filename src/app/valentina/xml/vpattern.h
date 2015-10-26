@@ -123,7 +123,7 @@ private:
     template <typename T>
     QRectF ToolBoundingRect(const QRectF &rec, const quint32 &id) const;
     void           ParseCurrentPP();
-    QString        GetLabelBase(unsigned int index)const;
+    QString        GetLabelBase(quint32 index)const;
 
     void ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseToolEndLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);

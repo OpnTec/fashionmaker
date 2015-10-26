@@ -608,7 +608,7 @@ void VPosition::RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, unsigned int shift)
+void VPosition::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, quint32 shift)
 {
     int processedEdges = 0;
     const int nD = detail.EdgesCount();
@@ -639,7 +639,7 @@ QPolygonF VPosition::GlobalPolygon() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPosition::CutEdge(const QLineF &edge, unsigned int shift)
+QVector<QPointF> VPosition::CutEdge(const QLineF &edge, quint32 shift)
 {
     QVector<QPointF> points;
     if (shift == 0)

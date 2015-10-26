@@ -126,8 +126,8 @@ private:
     static QPainterPath DrawContour(const QVector<QPointF> &points);
     static QPainterPath DrawDetails(const QVector<VLayoutDetail> &details);
 
-    static void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, unsigned int shift);
-    static QVector<QPointF> CutEdge(const QLineF &edge, unsigned int shift);
+    static void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, quint32 shift);
+    static QVector<QPointF> CutEdge(const QLineF &edge, quint32 shift);
 
     void Rotate(int increase);
 };

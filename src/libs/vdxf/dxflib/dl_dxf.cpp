@@ -194,7 +194,7 @@ bool DL_Dxf::readDxfGroups(FILE *fp, DL_CreationInterface* creationInterface)
     if (DL_Dxf::getStrippedLine(groupCodeTmp, DL_DXF_MAXLINE, fp) &&
             DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, fp) )
     {
-        groupCode = static_cast<unsigned int>(toInt(groupCodeTmp));
+        groupCode = static_cast<quint32>(toInt(groupCodeTmp));
 
         creationInterface->processCodeValuePair(groupCode, groupValue);
         processDXFGroup(creationInterface, static_cast<int>(groupCode), groupValue);
@@ -216,7 +216,7 @@ bool DL_Dxf::readDxfGroups(std::stringstream& stream,
             DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, stream) )
     {
 
-        groupCode = static_cast<unsigned int>(toInt(groupCodeTmp));
+        groupCode = static_cast<quint32>(toInt(groupCodeTmp));
         processDXFGroup(creationInterface, static_cast<int>(groupCode), groupValue);
     }
     return !stream.eof();
@@ -241,7 +241,7 @@ bool DL_Dxf::readDxfGroups(std::stringstream& stream,
  * @todo Is it a problem if line is blank (i.e., newline only)?
  *      Then, when function returns, (s==NULL).
  */
-bool DL_Dxf::getStrippedLine(std::string& s, unsigned int size, FILE *fp)
+bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp)
 {
     if (!feof(fp))
     {
@@ -280,7 +280,7 @@ bool DL_Dxf::getStrippedLine(std::string& s, unsigned int size, FILE *fp)
 /**
  * Same as above but for stringstreams.
  */
-bool DL_Dxf::getStrippedLine(std::string &s, unsigned int size,
+bool DL_Dxf::getStrippedLine(std::string &s, quint32 size,
                              std::stringstream& stream)
 {
 
@@ -1649,7 +1649,7 @@ bool DL_Dxf::handleLWPolylineData(DL_CreationInterface* /*creationInterface*/)
         {
             if (vertexIndex>=0 && vertexIndex<maxVertices)
             {
-                vertices[4*static_cast<unsigned int>(vertexIndex) + (groupCode/10-1)] = toReal(groupValue);
+                vertices[4*static_cast<quint32>(vertexIndex) + (groupCode/10-1)] = toReal(groupValue);
             }
         }
         else if (groupCode==42 && vertexIndex<maxVertices)
@@ -1762,7 +1762,7 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
 
         if (controlPointIndex>=0 && controlPointIndex<maxControlPoints)
         {
-            controlPoints[3*static_cast<unsigned int>(controlPointIndex) + (groupCode/10-1)] = toReal(groupValue);
+            controlPoints[3*static_cast<quint32>(controlPointIndex) + (groupCode/10-1)] = toReal(groupValue);
         }
         return true;
     }
@@ -1777,7 +1777,7 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
 
         if (fitPointIndex>=0 && fitPointIndex<maxFitPoints)
         {
-            fitPoints[3*static_cast<unsigned int>(fitPointIndex) + ((groupCode-1)/10-1)] = toReal(groupValue);
+            fitPoints[3*static_cast<quint32>(fitPointIndex) + ((groupCode-1)/10-1)] = toReal(groupValue);
         }
         return true;
     }
@@ -1843,7 +1843,7 @@ bool DL_Dxf::handleLeaderData(DL_CreationInterface* /*creationInterface*/)
             if (leaderVertexIndex>=0 &&
                     leaderVertexIndex<maxLeaderVertices)
             {
-                leaderVertices[3*static_cast<unsigned int>(leaderVertexIndex) + (groupCode/10-1)]
+                leaderVertices[3*static_cast<quint32>(leaderVertexIndex) + (groupCode/10-1)]
                     = toReal(groupValue);
             }
         }
@@ -2180,10 +2180,10 @@ void DL_Dxf::addHatch(DL_CreationInterface* creationInterface)
 
     creationInterface->addHatch(hd);
 
-    for (unsigned int i=0; i<hatchEdges.size(); i++)
+    for (quint32 i=0; i<hatchEdges.size(); i++)
     {
         creationInterface->addHatchLoop(DL_HatchLoopData(static_cast<int>(hatchEdges[i].size())));
-        for (unsigned int k=0; k<hatchEdges[i].size(); k++)
+        for (quint32 k=0; k<hatchEdges[i].size(); k++)
         {
             creationInterface->addHatchEdge(DL_HatchEdgeData(hatchEdges[i][k]));
         }
@@ -2378,7 +2378,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
             switch (groupCode)
             {
                 case 94:
-                    hatchEdge.degree = static_cast<unsigned int>(toInt(groupValue));
+                    hatchEdge.degree = static_cast<quint32>(toInt(groupValue));
                     return true;
                 case 73:
                     hatchEdge.rational = toBool(groupValue);
@@ -2387,13 +2387,13 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.periodic = toBool(groupValue);
                     return true;
                 case 95:
-                    hatchEdge.nKnots = static_cast<unsigned int>(toInt(groupValue));
+                    hatchEdge.nKnots = static_cast<quint32>(toInt(groupValue));
                     return true;
                 case 96:
-                    hatchEdge.nControl = static_cast<unsigned int>(toInt(groupValue));
+                    hatchEdge.nControl = static_cast<quint32>(toInt(groupValue));
                     return true;
                 case 97:
-                    hatchEdge.nFit = static_cast<unsigned int>(toInt(groupValue));
+                    hatchEdge.nFit = static_cast<quint32>(toInt(groupValue));
                     return true;
                 case 40:
                     if (hatchEdge.knots.size() < hatchEdge.nKnots)
@@ -3962,23 +3962,23 @@ void DL_Dxf::writeHatchEdge(DL_WriterA& dw,
             dw.dxfBool(74, data.periodic);
             dw.dxfInt(95, static_cast<int>(data.nKnots));
             dw.dxfInt(96, static_cast<int>(data.nControl));
-            for (unsigned int i=0; i<data.knots.size(); i++)
+            for (quint32 i=0; i<data.knots.size(); i++)
             {
                 dw.dxfReal(40, data.knots[i]);
             }
-            for (unsigned int i=0; i<data.controlPoints.size(); i++)
+            for (quint32 i=0; i<data.controlPoints.size(); i++)
             {
                 dw.dxfReal(10, data.controlPoints[i][0]);
                 dw.dxfReal(20, data.controlPoints[i][1]);
             }
-            for (unsigned int i=0; i<data.weights.size(); i++)
+            for (quint32 i=0; i<data.weights.size(); i++)
             {
                 dw.dxfReal(42, data.weights[i]);
             }
             if (data.nFit>0)
             {
                 dw.dxfInt(97, static_cast<int>(data.nFit));
-                for (unsigned int i=0; i<data.fitPoints.size(); i++)
+                for (quint32 i=0; i<data.fitPoints.size(); i++)
                 {
                     dw.dxfReal(11, data.fitPoints[i][0]);
                     dw.dxfReal(21, data.fitPoints[i][1]);

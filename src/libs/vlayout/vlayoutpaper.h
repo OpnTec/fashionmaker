@@ -56,8 +56,8 @@ public:
     qreal GetLayoutWidth() const;
     void  SetLayoutWidth(qreal width);
 
-    unsigned int GetShift() const;
-    void         SetShift(unsigned int shift);
+    quint32 GetShift() const;
+    void         SetShift(quint32 shift);
 
     bool GetRotate() const;
     void SetRotate(bool value);

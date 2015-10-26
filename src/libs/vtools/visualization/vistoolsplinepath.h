@@ -61,7 +61,7 @@ protected:
     VSplinePath                     path;
     Mode                            mode;
 
-    QGraphicsEllipseItem * getPoint(unsigned int i);
+    QGraphicsEllipseItem * getPoint(quint32 i);
 };
 
 #endif // VISTOOLSPLINEPATH_H

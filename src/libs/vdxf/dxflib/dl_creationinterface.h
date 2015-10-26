@@ -57,7 +57,7 @@ public:
      * Called for every code / value tuple of the DXF file. The complete DXF file
      * contents can be handled by the implemetation of this function.
      */
-    virtual void processCodeValuePair(unsigned int groupCode, const std::string& groupValue) = 0;
+    virtual void processCodeValuePair(quint32 groupCode, const std::string& groupValue) = 0;
 
     /**
      * Called when a section (entity, table entry, etc.) is finished.
@@ -327,7 +327,7 @@ public:
     virtual void setVariableString(const char* key, const char* value, int code) = 0;
     virtual void setVariableInt(const char* key, int value, int code) = 0;
     virtual void setVariableDouble(const char* key, double value, int code) = 0;
-    virtual void processCodeValuePair(unsigned int groupCode, char* groupValue) = 0;
+    virtual void processCodeValuePair(quint32 groupCode, char* groupValue) = 0;
     virtual void addComment(const char* comment) = 0;
     virtual void addMTextChunk(const char* text) = 0;
 #endif

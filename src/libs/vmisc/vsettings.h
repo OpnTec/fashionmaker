@@ -89,13 +89,13 @@ public:
     int GetLayoutPaperWidth() const;
     void SetLayoutPaperWidth(int value);
 
-    unsigned int GetLayoutShift() const;
-    static unsigned int GetDefLayoutShift();
-    void SetLayoutShift(unsigned int value);
+    quint32 GetLayoutShift() const;
+    static quint32 GetDefLayoutShift();
+    void SetLayoutShift(quint32 value);
 
-    unsigned int GetLayoutWidth() const;
-    static unsigned int GetDefLayoutWidth();
-    void SetLayoutWidth(unsigned int value);
+    quint32 GetLayoutWidth() const;
+    static quint32 GetDefLayoutWidth();
+    void SetLayoutWidth(quint32 value);
 
     Cases GetLayoutGroup() const;
     static Cases GetDefLayoutGroup();

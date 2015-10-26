@@ -268,13 +268,13 @@ void VLayoutGenerator::SetPaperWidth(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int VLayoutGenerator::GetShift() const
+quint32 VLayoutGenerator::GetShift() const
 {
     return shift;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetShift(unsigned int shift)
+void VLayoutGenerator::SetShift(quint32 shift)
 {
     this->shift = shift;
 }

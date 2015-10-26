@@ -157,7 +157,7 @@ void VObjEngine::drawPath(const QPainterPath &path)
     ++planeCount;
     *stream << "o Plane." << QString("%1").arg(planeCount, 3, 10, QLatin1Char('0')) << endl;
 
-    unsigned int num_points = 0;
+    quint32 num_points = 0;
 
     for (int i=0; i < polygon.count(); i++)
     {
@@ -175,7 +175,7 @@ void VObjEngine::drawPath(const QPainterPath &path)
     QPointF pf[MAX_POINTS];
     bool skipFace=false;//Need skip first face
 
-    for (unsigned int i = 0; i < res->num_faces; i++ )
+    for (quint32 i = 0; i < res->num_faces; i++ )
     {
         if (offset == 0)
         {

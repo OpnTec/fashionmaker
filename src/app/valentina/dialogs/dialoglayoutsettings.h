@@ -68,11 +68,11 @@ public:
     int GetPaperWidth() const;
     void SetPaperWidth(int value);
 
-    unsigned int GetShift() const;
-    void SetShift(unsigned int value);
+    quint32 GetShift() const;
+    void SetShift(quint32 value);
 
-    unsigned int GetLayoutWidth() const;
-    void SetLayoutWidth(unsigned int value);
+    quint32 GetLayoutWidth() const;
+    void SetLayoutWidth(quint32 value);
 
     Cases GetGroup() const;
     void SetGroup(const Cases &value);

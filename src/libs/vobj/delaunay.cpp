@@ -77,7 +77,7 @@ struct point2d_s
 {
     real			x, y;			/* point coordinates */
     halfedge_t*		he;			/* point halfedge */
-    unsigned int		idx;			/* point index in input buffer */
+    quint32		idx;			/* point index in input buffer */
 };
 
 struct face_s
@@ -87,7 +87,7 @@ struct face_s
     point2d_t*		p[3];
 */
     halfedge_t*		he;			/* a pointing half edge */
-    unsigned int		num_verts;		/* number of vertices on this face */
+    quint32		num_verts;		/* number of vertices on this face */
 };
 
 struct halfedge_s
@@ -105,9 +105,9 @@ struct delaunay_s
     halfedge_t*		leftmost_he;		/* left most halfedge */
     point2d_t**		points;			/* pointer to points */
     face_t*			faces;			/* faces of delaunay */
-    unsigned int		num_faces;		/* face count */
-    unsigned int		start_point;		/* start point index */
-    unsigned int		end_point;		/* end point index */
+    quint32		num_faces;		/* face count */
+    quint32		start_point;		/* start point index */
+    quint32		end_point;		/* end point index */
 };
 
 
@@ -177,7 +177,7 @@ static void halfedge_free( halfedge_t* d )
 */
 void del_free_halfedges( delaunay_t *del )
 {
-    unsigned int		i;
+    quint32		i;
     halfedge_t		*d, *sig;
 
     /* if there is nothing to do */
@@ -980,7 +980,7 @@ static void build_halfedge_face( delaunay_t *del, halfedge_t *d )
 */
 void del_build_faces( delaunay_t *del )
 {
-    unsigned int	i;
+    quint32	i;
     halfedge_t	*curr;
 
     del->num_faces	= 0;
@@ -1002,11 +1002,11 @@ void del_build_faces( delaunay_t *del )
 
 /*
 */
-delaunay2d_t* delaunay2d_from(del_point2d_t *points, unsigned int num_points) {
+delaunay2d_t* delaunay2d_from(del_point2d_t *points, quint32 num_points) {
     delaunay2d_t*	res	= NULL;
     delaunay_t	del;
-    unsigned int	i;
-    unsigned int*	faces	= NULL;
+    quint32	i;
+    quint32*	faces	= NULL;
 
     del.num_faces	= 0; //Warning using uninitialized value
 
@@ -1031,8 +1031,8 @@ delaunay2d_t* delaunay2d_from(del_point2d_t *points, unsigned int num_points) {
     qsort(del.points, num_points, sizeof(point2d_t*), cmp_points);
 
     if( num_points >= 3 ) {
-        unsigned int fbuff_size = 0;
-        unsigned int j = 0;
+        quint32 fbuff_size = 0;
+        quint32 j = 0;
 
         del_divide_and_conquer( &del, 0, num_points - 1 );
         del_build_faces( &del );
@@ -1040,7 +1040,7 @@ delaunay2d_t* delaunay2d_from(del_point2d_t *points, unsigned int num_points) {
         for( i = 0; i < del.num_faces; i++ )
             fbuff_size	+= del.faces[i].num_verts + 1;
 
-        faces = (unsigned int*)malloc(sizeof(unsigned int) * fbuff_size);
+        faces = (quint32*)malloc(sizeof(quint32) * fbuff_size);
 
         for( i = 0; i < del.num_faces; i++ )
         {

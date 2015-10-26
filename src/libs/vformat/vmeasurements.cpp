@@ -253,7 +253,7 @@ void VMeasurements::ReadMeasurements() const
             qreal ksize = GetParametrDouble(dom, AttrSizeIncrease, "0");
             qreal kheight = GetParametrDouble(dom, AttrHeightIncrease, "0");
 
-            tempMeash = new VMeasurement(static_cast<unsigned int>(i), name, BaseSize(), BaseHeight(), base, ksize,
+            tempMeash = new VMeasurement(static_cast<quint32>(i), name, BaseSize(), BaseHeight(), base, ksize,
                                          kheight);
 
             base = UnitConvertor(base, MUnit(), *data->GetPatternUnit());
@@ -263,7 +263,7 @@ void VMeasurements::ReadMeasurements() const
             const qreal baseSize = UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit());
             const qreal baseHeight = UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit());
 
-            meash = new VMeasurement(static_cast<unsigned int>(i), name, baseSize, baseHeight, base, ksize, kheight,
+            meash = new VMeasurement(static_cast<quint32>(i), name, baseSize, baseHeight, base, ksize, kheight,
                                      fullName, description);
         }
         else
@@ -272,10 +272,10 @@ void VMeasurements::ReadMeasurements() const
             bool ok = false;
             qreal value = EvalFormula(tempData, formula, &ok);
 
-            tempMeash = new VMeasurement(tempData, static_cast<unsigned int>(i), name, value, formula, ok);
+            tempMeash = new VMeasurement(tempData, static_cast<quint32>(i), name, value, formula, ok);
 
             value = UnitConvertor(value, MUnit(), *data->GetPatternUnit());
-            meash = new VMeasurement(data, static_cast<unsigned int>(i), name, value, formula, ok, fullName,
+            meash = new VMeasurement(data, static_cast<quint32>(i), name, value, formula, ok, fullName,
                                      description);
         }
         tempData->AddVariable(name, tempMeash);

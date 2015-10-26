@@ -64,7 +64,7 @@ public:
     /** @brief paperWidth width of paper in pixels*/
     int paperWidth;
 
-    unsigned int shift;
+    quint32 shift;
 };
 
 #ifdef Q_CC_GNU

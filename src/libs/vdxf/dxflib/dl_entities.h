@@ -390,20 +390,20 @@ struct DXFLIB_EXPORT DL_PolylineData
      * Parameters: see member variables.
      */
     DL_PolylineData(int pNumber, int pMVerteces, int pNVerteces, int pFlags)
-        : number(static_cast<unsigned int>(pNumber)),
-          m(static_cast<unsigned int>(pMVerteces)),
-          n(static_cast<unsigned int>(pNVerteces)), flags(pFlags)
+        : number(static_cast<quint32>(pNumber)),
+          m(static_cast<quint32>(pMVerteces)),
+          n(static_cast<quint32>(pNVerteces)), flags(pFlags)
     {
     }
 
     /*! Number of vertices in this polyline. */
-    unsigned int number;
+    quint32 number;
 
     /*! Number of vertices in m direction if polyline is a polygon mesh. */
-    unsigned int m;
+    quint32 m;
 
     /*! Number of vertices in n direction if polyline is a polygon mesh. */
-    unsigned int n;
+    quint32 n;
 
     /*! Flags */
     int flags;
@@ -520,10 +520,10 @@ struct DXFLIB_EXPORT DL_SplineData
                   int nControl,
                   int nFit,
                   int flags) :
-        degree(static_cast<unsigned int>(degree)),
-        nKnots(static_cast<unsigned int>(nKnots)),
-        nControl(static_cast<unsigned int>(nControl)),
-        nFit(static_cast<unsigned int>(nFit)),
+        degree(static_cast<quint32>(degree)),
+        nKnots(static_cast<quint32>(nKnots)),
+        nControl(static_cast<quint32>(nControl)),
+        nFit(static_cast<quint32>(nFit)),
         flags(flags),
         tangentStartX(0.0),
         tangentStartY(0.0),
@@ -535,16 +535,16 @@ struct DXFLIB_EXPORT DL_SplineData
     }
 
     /*! Degree of the spline curve. */
-    unsigned int degree;
+    quint32 degree;
 
     /*! Number of knots. */
-    unsigned int nKnots;
+    quint32 nKnots;
 
     /*! Number of control points. */
-    unsigned int nControl;
+    quint32 nControl;
 
     /*! Number of fit points. */
-    unsigned int nFit;
+    quint32 nFit;
 
     /*! Flags */
     int flags;
@@ -1550,12 +1550,12 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
      * Constructor for a spline edge.
      * Parameters: see member variables.
      */
-    DL_HatchEdgeData(unsigned int degree,
+    DL_HatchEdgeData(quint32 degree,
                      bool rational,
                      bool periodic,
-                     unsigned int nKnots,
-                     unsigned int nControl,
-                     unsigned int nFit,
+                     quint32 nKnots,
+                     quint32 nControl,
+                     quint32 nFit,
                      const std::vector<double>& knots,
                      const std::vector<std::vector<double> >& controlPoints,
                      const std::vector<std::vector<double> >& fitPoints,
@@ -1629,15 +1629,15 @@ struct DXFLIB_EXPORT DL_HatchEdgeData
 
 
     /*! Spline degree */
-    unsigned int degree;
+    quint32 degree;
     bool rational;
     bool periodic;
     /*! Number of knots. */
-    unsigned int nKnots;
+    quint32 nKnots;
     /*! Number of control points. */
-    unsigned int nControl;
+    quint32 nControl;
     /*! Number of fit points. */
-    unsigned int nFit;
+    quint32 nFit;
 
     std::vector<std::vector<double> > controlPoints;
     std::vector<double> knots;

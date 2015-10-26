@@ -58,8 +58,8 @@ public:
     int GetPaperWidth() const;
     void SetPaperWidth(int value);
 
-    unsigned int GetShift() const;
-    void         SetShift(unsigned int shift);
+    quint32 GetShift() const;
+    void         SetShift(quint32 shift);
 
     void Generate();
 
@@ -100,7 +100,7 @@ private:
     int paperWidth;
     volatile bool stopGeneration;
     LayoutErrors state;
-    unsigned int shift;
+    quint32 shift;
     bool rotate;
     int rotationIncrease;
     bool autoCrop;

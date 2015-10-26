@@ -120,9 +120,9 @@ void VisToolSplinePath::setMode(const Mode &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisToolSplinePath::getPoint(unsigned int i)
+QGraphicsEllipseItem *VisToolSplinePath::getPoint(quint32 i)
 {
-    if (static_cast<unsigned int>(points.size() - 1) >= i && points.isEmpty() == false)
+    if (static_cast<quint32>(points.size() - 1) >= i && points.isEmpty() == false)
     {
         return points.at(static_cast<int>(i));
     }

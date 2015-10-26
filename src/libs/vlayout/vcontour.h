@@ -52,8 +52,8 @@ public:
     void SetContour(const QVector<QPointF> &contour);
     QVector<QPointF> GetContour() const;
 
-    unsigned int GetShift() const;
-    void         SetShift(unsigned int shift);
+    quint32 GetShift() const;
+    void         SetShift(quint32 shift);
 
     int  GetHeight() const;
     void SetHeight(int height);

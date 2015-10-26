@@ -125,14 +125,14 @@ public:
             DL_CreationInterface* creationInterface);
     bool readDxfGroups(FILE* fp,
                        DL_CreationInterface* creationInterface);
-    static bool getStrippedLine(std::string& s, unsigned int size,
+    static bool getStrippedLine(std::string& s, quint32 size,
                                 FILE* stream);
 
     bool readDxfGroups(std::stringstream& stream,
                        DL_CreationInterface* creationInterface);
     bool in(std::stringstream &stream,
             DL_CreationInterface* creationInterface);
-    static bool getStrippedLine(std::string& s, unsigned int size,
+    static bool getStrippedLine(std::string& s, quint32 size,
                                 std::stringstream& stream);
 
     static bool stripWhiteSpace(char** s);
@@ -496,7 +496,7 @@ private:
     // Only the useful part of the group code
     std::string groupCodeTmp;
     // ...same as integer
-    unsigned int groupCode;
+    quint32 groupCode;
     // Only the useful part of the group value
     std::string groupValue;
     // Current entity type

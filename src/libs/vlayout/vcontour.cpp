@@ -82,13 +82,13 @@ QVector<QPointF> VContour::GetContour() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int VContour::GetShift() const
+quint32 VContour::GetShift() const
 {
     return d->shift;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContour::SetShift(unsigned int shift)
+void VContour::SetShift(quint32 shift)
 {
     d->shift = shift;
 }
