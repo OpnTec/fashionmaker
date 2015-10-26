@@ -163,6 +163,7 @@ protected:
 private slots:
     void LoadIndividual();
     void LoadStandard();
+    void UnloadMeasurements();
     void CreateMeasurements();
     void ShowMeasurements();
     void MeasurementsChanged(const QString &path);

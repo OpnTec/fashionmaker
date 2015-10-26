@@ -1140,6 +1140,7 @@ void MainWindow::LoadIndividual()
             {
                 watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
             }
+            ui->actionUnloadMeasurements->setEnabled(true);
             doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
             PatternWasModified(false);
@@ -1166,6 +1167,7 @@ void MainWindow::LoadStandard()
             {
                 watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
             }
+            ui->actionUnloadMeasurements->setEnabled(true);
             doc->SetPath(RelativeMPath(curFile, mPath));
             watcher->addPath(mPath);
             PatternWasModified(false);
@@ -1173,6 +1175,31 @@ void MainWindow::LoadStandard()
             helpLabel->setText(tr("Measurements loaded"));
             doc->LiteParseTree(Document::LiteParse);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::UnloadMeasurements()
+{
+    if (doc->MPath().isEmpty())
+    {
+        ui->actionUnloadMeasurements->setDisabled(true);
+        return;
+    }
+
+    if (doc->ListMeasurements().isEmpty())
+    {
+        watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
+        doc->SetPath(QString());
+        PatternWasModified(false);
+        ui->actionShowM->setEnabled(false);
+        ui->actionUnloadMeasurements->setDisabled(true);
+        helpLabel->setText(tr("Measurements unloaded"));
+    }
+    else
+    {
+        qCWarning(vMainWindow, "%s",
+                  qUtf8Printable(tr("Couldn't unload measurements. Some of them are used in the pattern.")));
     }
 }
 
@@ -2132,6 +2159,7 @@ void MainWindow::Clear()
     ui->actionShowCurveDetails->setEnabled(false);
     ui->actionLoadIndividual->setEnabled(false);
     ui->actionLoadStandard->setEnabled(false);
+    ui->actionUnloadMeasurements->setEnabled(false);
     ui->actionShowM->setEnabled(false);
     SetEnableTool(false);
     qApp->setPatternUnit(Unit::Cm);
@@ -2375,6 +2403,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionShowCurveDetails->setEnabled(enable);
     ui->actionLoadIndividual->setEnabled(enable);
     ui->actionLoadStandard->setEnabled(enable);
+    ui->actionUnloadMeasurements->setEnabled(enable);
 
     //Now we don't want allow user call context menu
     sceneDraw->SetDisableTools(!enable, doc->GetNameActivPP());
@@ -3178,6 +3207,7 @@ void MainWindow::CreateActions()
     }
 
     connect(ui->actionSyncMeasurements, &QAction::triggered, this, &MainWindow::SyncMeasurements);
+    connect(ui->actionUnloadMeasurements, &QAction::triggered, this, &MainWindow::UnloadMeasurements);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3336,6 +3366,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
             }
             else
             {
+                ui->actionUnloadMeasurements->setEnabled(true);
                 watcher->addPath(path);
                 ui->actionShowM->setEnabled(true);
             }

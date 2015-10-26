@@ -691,8 +691,11 @@ bool VDomDocument::setTagText(const QString &tag, const QString &text)
             {
                 QDomElement parent = domElement.parentNode().toElement();
                 QDomElement newTag = createElement(tag);
-                const QDomText newTagText = createTextNode(text);
-                newTag.appendChild(newTagText);
+                if (not text.isEmpty())
+                {
+                    const QDomText newTagText = createTextNode(text);
+                    newTag.appendChild(newTagText);
+                }
 
                 parent.replaceChild(newTag, domElement);
                 return true;

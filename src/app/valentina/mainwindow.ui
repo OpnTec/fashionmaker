@@ -1090,6 +1090,7 @@
     <addaction name="actionTable"/>
     <addaction name="actionLoadIndividual"/>
     <addaction name="actionLoadStandard"/>
+    <addaction name="actionUnloadMeasurements"/>
     <addaction name="actionCreateNew"/>
     <addaction name="actionShowM"/>
     <addaction name="actionSyncMeasurements"/>
@@ -1991,6 +1992,20 @@
     <string notr="true"/>
    </property>
   </action>
+  <action name="actionUnloadMeasurements">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Unload measurements</string>
+   </property>
+   <property name="toolTip">
+    <string>Unload measurements if they was not used in a pattern file.</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -2004,8 +2019,8 @@
   <tabstop>toolButtonSplinePath</tabstop>
  </tabstops>
  <resources>
-  <include location="share/resources/toolicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="share/resources/toolicon.qrc"/>
  </resources>
  <connections/>
 </ui>

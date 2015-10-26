@@ -457,12 +457,6 @@ QString VAbstractPattern::MPath() const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetPath(const QString &path)
 {
-    if (path.isEmpty())
-    {
-        qDebug()<<"Path to measurements is empty"<<Q_FUNC_INFO;
-        return;
-    }
-
     if (setTagText(TagMeasurements, path))
     {
         emit patternChanged(false);
