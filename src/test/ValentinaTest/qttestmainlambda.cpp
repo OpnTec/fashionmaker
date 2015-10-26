@@ -40,6 +40,7 @@
 #include "tst_qmutokenparser.h"
 #include "tst_vmeasurements.h"
 #include "tst_qmuparsererrormsg.h"
+#include "tst_vlockguard.h"
 
 int main(int argc, char** argv)
 {
@@ -66,6 +67,7 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_QmuTokenParser());
     ASSERT_TEST(new TST_VMeasurements());
     ASSERT_TEST(new TST_QmuParserErrorMsg());
+    ASSERT_TEST(new TST_VLockGuard());
 
     return status;
 }
