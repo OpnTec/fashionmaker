@@ -199,6 +199,8 @@ private:
 
     /** @brief isInitialized true after first show window. */
     bool               isInitialized;
+
+    /** @brief mChanges true if measurement file was changed. */
     bool               mChanges;
 
     DialogIncrements   *dialogTable;
