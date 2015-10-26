@@ -322,8 +322,8 @@ void QmuParser::InitFun()
  */
 void QmuParser::InitConst()
 {
-    DefineConst("_pi", (qreal)M_PI);
-    DefineConst("_e", (qreal)M_E);
+    DefineConst("_pi", static_cast<qreal>(M_PI));
+    DefineConst("_e", static_cast<qreal>(M_E));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

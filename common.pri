@@ -100,18 +100,20 @@ defineTest(forceCopyToDestdir) {
 
 # We use precompiled headers for more fast compilation source code.
 defineReplace(set_PCH){
-    macx:clang*{
-    # Precompiled headers don't work with clang on macx.
-    } else {
-        CONFIG += precompile_header # Turn on creation precompiled headers (PCH).
-        export(CONFIG) # export value to global variable.
+    unix:no_ccache|win32{
+        macx:clang*{
+        # Precompiled headers don't work with clang on macx.
+        } else {
+            CONFIG += precompile_header # Turn on creation precompiled headers (PCH).
+            export(CONFIG) # export value to global variable.
 
-        PRECOMPILED_HEADER = stable.h # Header file with all all static headers: libraries, static local headers.
-        export(PRECOMPILED_HEADER) # export value to global variable
+            PRECOMPILED_HEADER = stable.h # Header file with all all static headers: libraries, static local headers.
+            export(PRECOMPILED_HEADER) # export value to global variable
 
-        win32-msvc* {
-            PRECOMPILED_SOURCE = stable.cpp # MSVC need also cpp file.
-            export(PRECOMPILED_SOURCE) # export value to global variable.
+            win32-msvc* {
+                PRECOMPILED_SOURCE = stable.cpp # MSVC need also cpp file.
+                export(PRECOMPILED_SOURCE) # export value to global variable.
+            }
         }
     }
     return(true)

@@ -31,6 +31,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <QtGlobal>
 
 #include "dl_writer_ascii.h"
 

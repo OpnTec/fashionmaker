@@ -59,6 +59,11 @@ CONFIG(debug, debug|release){
                 -isystem "$${OUT_PWD}/$${RCC_DIR}" \
                 $$GCC_DEBUG_CXXFLAGS # See common.pri for more details.
 
+            # -isystem key works only for headers. In some cases it's not enough. But we can't delete these warnings and
+            # want them in the global list. Compromise decision is to delete them from the local list.
+            QMAKE_CXXFLAGS -= \
+                -Wno-long-long \
+
             noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
                 # do nothing
             } else {
