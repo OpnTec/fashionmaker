@@ -478,7 +478,7 @@ void VApplication::CreateLogDir() const
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::BeginLogging()
 {
-    VlpCreateLock(lockLog, LogPath()+".lock", [this](){return new QFile(LogPath());});
+    VlpCreateLock(lockLog, LogPath(), [this](){return new QFile(LogPath());});
 
     if (lockLog->IsLocked())
     {
@@ -517,7 +517,7 @@ void VApplication::ClearOldLogs() const
             QFileInfo info(fn);
             if (info.created().daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
             {
-                VLockGuard<QFile> tmp(info.absoluteFilePath() + ".lock", [&fn](){return new QFile(fn);});
+                VLockGuard<QFile> tmp(info.absoluteFilePath(), [&fn](){return new QFile(fn);});
                 if (tmp.GetProtected() != nullptr)
                 {
                     if (tmp.GetProtected()->remove())
@@ -709,7 +709,7 @@ void VApplication::GatherLogs() const
                     continue;
                 }
 
-                VLockGuard<QFile> tmp(info.absoluteFilePath() + ".lock", [&fn](){return new QFile(fn);});
+                VLockGuard<QFile> tmp(info.absoluteFilePath(), [&fn](){return new QFile(fn);});
 
                 if (tmp.IsLocked())
                 {

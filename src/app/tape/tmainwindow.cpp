@@ -204,7 +204,7 @@ bool TMainWindow::LoadFile(const QString &path)
             }
         }
 
-        VlpCreateLock(lock, QFileInfo(path).fileName()+".lock");
+        VlpCreateLock(lock, QFileInfo(path).fileName());
 
         if (not lock->IsLocked())
         {
@@ -591,7 +591,7 @@ void TMainWindow::FileSaveAs()
     if (QFileInfo(fileName).exists())
     {
         // Temporary try to lock the file before saving
-        VLockGuard<char> tmp(fileName + ".lock");
+        VLockGuard<char> tmp(fileName);
         if (not tmp.IsLocked())
         {
             qCCritical(tMainWindow, "%s",
@@ -615,7 +615,7 @@ void TMainWindow::FileSaveAs()
         return;
     }
 
-    VlpCreateLock(lock, fileName + ".lock");
+    VlpCreateLock(lock, fileName);
     if (not lock->IsLocked())
     {
         qCCritical(tMainWindow, "%s", qUtf8Printable(tr("Failed to lock. This file already opened in another window. "
@@ -1068,7 +1068,7 @@ void TMainWindow::ImportFromPattern()
         return;
     }
 
-    VLockGuard<char> tmp(QFileInfo(mPath).fileName()+".lock");
+    VLockGuard<char> tmp(QFileInfo(mPath).fileName());
     if (not tmp.IsLocked())
     {
         qCCritical(tMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
@@ -2479,7 +2479,7 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             }
         }
 
-        VlpCreateLock(lock, QFileInfo(path).fileName()+".lock");
+        VlpCreateLock(lock, QFileInfo(path).fileName());
 
         if (not lock->IsLocked())
         {

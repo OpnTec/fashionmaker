@@ -1954,7 +1954,7 @@ bool MainWindow::SaveAs()
     if (QFileInfo(fileName).exists())
     {
         // Temporary try to lock the file before saving
-        VLockGuard<char> tmp(fileName + ".lock");
+        VLockGuard<char> tmp(fileName);
         if (not tmp.IsLocked())
         {
             qCCritical(vMainWindow, "%s",
@@ -1979,7 +1979,7 @@ bool MainWindow::SaveAs()
     }
 
     qCDebug(vMainWindow, "Locking file");
-    VlpCreateLock(lock, fileName+".lock");
+    VlpCreateLock(lock, fileName);
 
     if (lock->IsLocked())
     {
@@ -3265,7 +3265,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
     }
 
     qCDebug(vMainWindow, "Loking file");
-    VlpCreateLock(lock, fileName+".lock");
+    VlpCreateLock(lock, fileName);
 
     if (lock->IsLocked())
     {
@@ -3395,7 +3395,7 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
         for (int i = 0; i < files.size(); ++i)
         {
             // Seeking file that realy need reopen
-            VLockGuard<char> tmp(files.at(i)+".lock");
+            VLockGuard<char> tmp(files.at(i));
             if (tmp.IsLocked())
             {
                 restoreFiles.append(files.at(i));
