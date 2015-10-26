@@ -964,7 +964,9 @@ QStringList AllGroupNames()
                                                     << ListGroupN()
                                                     << ListGroupO()
                                                     << ListGroupP()
-                                                    << ListGroupQ();
+                                                    << ListGroupQ()
+                                                    << size_M
+                                                    << height_M;
 
     return originalNames;
 }

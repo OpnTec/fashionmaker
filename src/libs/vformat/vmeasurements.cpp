@@ -617,6 +617,13 @@ QStringList VMeasurements::ListAll() const
         }
     }
 
+    if (type == MeasurementsType::Standard)
+    {
+        // Additionaly each standard table provide size and height
+        listNames.append(size_M);
+        listNames.append(height_M);
+    }
+
     return listNames;
 }
 
