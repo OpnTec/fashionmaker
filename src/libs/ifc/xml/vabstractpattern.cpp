@@ -132,6 +132,11 @@ QStringList VAbstractPattern::ListMeasurements() const
         const QList<QString> tValues = tokens.values();
         for (int j = 0; j < tValues.size(); ++j)
         {
+            if (tValues.at(j) == QLatin1Literal("-"))
+            {
+                continue;
+            }
+
             if (measurements.contains(tValues.at(j)))
             {
                 continue;
