@@ -750,6 +750,7 @@ QStringList VPatternConverter::ListPathPointExpressionsV0_1_4() const
 //---------------------------------------------------------------------------------------------------------------------
 QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
 {
+    // old name, new name
     QMap<QString, QString> names;
 
     // A02
@@ -975,6 +976,8 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("strap_length"), QStringLiteral("highbust_b_over_shoulder_to_highbust_f"));
     // P12
     names.insert(QStringLiteral("arc_through_shoulder_joint"), QStringLiteral("armscye_arc"));
+
+    names.insert(QStringLiteral("head_girth"), QStringLiteral("head_circ"));
 
     return names;
 }

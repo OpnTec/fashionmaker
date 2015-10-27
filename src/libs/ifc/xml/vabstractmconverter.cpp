@@ -52,6 +52,7 @@ void VAbstractMConverter::AddRootComment()
 //---------------------------------------------------------------------------------------------------------------------
 QMultiMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_0()
 {
+    // new name, old name
     QMultiMap<QString, QString> names;
 
     // A02
@@ -306,6 +307,8 @@ QMultiMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_0()
     names.insert(QStringLiteral("highbust_b_over_shoulder_to_highbust_f"), QStringLiteral("strap_length"));
     // P12
     names.insert(QStringLiteral("armscye_arc"), QStringLiteral("arc_through_shoulder_joint"));
+
+    names.insert(QStringLiteral("head_circ"), QStringLiteral("head_girth"));
 
     return names;
 }

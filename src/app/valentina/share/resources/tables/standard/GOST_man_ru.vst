@@ -40,6 +40,7 @@
         <m name="hand_length" base="128" description="" size_increase="2" height_increase="2" full_name=""/>
         <m name="hand_palm_width" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="head_chin_to_neck_back" base="109" description="" size_increase="1" height_increase="0" full_name=""/>
+        <m name="head_circ" base="576" description="" size_increase="4" height_increase="4" full_name=""/>
         <m name="head_crown_to_neck_back" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="head_length" base="246" description="" size_increase="-2" height_increase="6" full_name=""/>
         <m name="height_ankle" base="0" description="" size_increase="0" height_increase="0" full_name=""/>

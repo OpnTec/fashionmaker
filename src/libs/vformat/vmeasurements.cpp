@@ -647,6 +647,13 @@ QStringList VMeasurements::ListKnown() const
 bool VMeasurements::IsDefinedKnownNamesValid() const
 {
     QStringList names = AllGroupNames();
+
+    if (type == MeasurementsType::Standard)
+    {
+        names.append(size_M);
+        names.append(height_M);
+    }
+
     QSet<QString> set;
     foreach (const QString &var, names)
     {
