@@ -753,230 +753,181 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     // old name, new name
     QMap<QString, QString> names;
 
-    // A02
     names.insert(QStringLiteral("cervicale_height"), QStringLiteral("height_neck_back"));
-    // A03
     names.insert(QStringLiteral("height_scapular_point"), QStringLiteral("height_scapula"));
-    // A04
     names.insert(QStringLiteral("height_back_angle_axilla"), QStringLiteral("height_armpit"));
-    // A05
     names.insert(QStringLiteral("waist_height"), QStringLiteral("height_waist_side"));
-    // A06
     names.insert(QStringLiteral("hip_height"), QStringLiteral("height_hip"));
-    // A08
     names.insert(QStringLiteral("knee_height"), QStringLiteral("height_knee"));
-    // A11
     names.insert(QStringLiteral("ankle_height"), QStringLiteral("height_ankle"));
-    // A12
     names.insert(QStringLiteral("high_hip_height"), QStringLiteral("height_highhip"));
-    // A13
     names.insert(QStringLiteral("front_waist_to_floor"), QStringLiteral("height_waist_front"));
-    // A14
     names.insert(QStringLiteral("height_nipple_point"), QStringLiteral("height_bustpoint"));
-    // A15
-    names.insert(QStringLiteral("shoulder_height"), QStringLiteral("height_shoulder_tip"));
-    names.insert(QStringLiteral("height_shoulder_point"), QStringLiteral("height_shoulder_tip"));
-    // A16
-    names.insert(QStringLiteral("height_clavicular_point"), QStringLiteral("height_neck_front"));
-    names.insert(QStringLiteral("height_front_neck_base_point"), QStringLiteral("height_neck_front"));
-    // A17
+
+    QString name = QStringLiteral("height_shoulder_tip");
+    names.insert(QStringLiteral("shoulder_height"), name);
+    names.insert(QStringLiteral("height_shoulder_point"), name);
+
+    name = QStringLiteral("height_neck_front");
+    names.insert(QStringLiteral("height_clavicular_point"), name);
+    names.insert(QStringLiteral("height_front_neck_base_point"), name);
+
     names.insert(QStringLiteral("height_base_neck_side_point"), QStringLiteral("height_neck_side"));
-    // A18
-    names.insert(QStringLiteral("neck_to_knee_point"), QStringLiteral("height_neck_back_to_knee"));
-    names.insert(QStringLiteral("cervicale_to_knee_height"), QStringLiteral("height_neck_back_to_knee"));
-    // A19
+
+    name = QStringLiteral("height_neck_back_to_knee");
+    names.insert(QStringLiteral("neck_to_knee_point"), name);
+    names.insert(QStringLiteral("cervicale_to_knee_height"), name);
+
     names.insert(QStringLiteral("waist_to_knee_height"), QStringLiteral("height_waist_side_to_knee"));
-    // A20
     names.insert(QStringLiteral("waist_to_hip_height"), QStringLiteral("height_waist_side_to_hip"));
-    // C01
     names.insert(QStringLiteral("body_position"), QStringLiteral("indent_neck_back"));
-    // D01
-    names.insert(QStringLiteral("half_girth_neck_for_shirts"), QStringLiteral("neck_mid_circ"));
-    names.insert(QStringLiteral("mid_neck_girth"), QStringLiteral("neck_mid_circ"));
-    // D02
+
+    name = QStringLiteral("neck_mid_circ");
+    names.insert(QStringLiteral("half_girth_neck_for_shirts"), name);
+    names.insert(QStringLiteral("mid_neck_girth"), name);
+
     names.insert(QStringLiteral("neck_base_girth"), QStringLiteral("neck_circ"));
-    // D03
     names.insert(QStringLiteral("upper_chest_girth"), QStringLiteral("highbust_circ"));
-    // D04
     names.insert(QStringLiteral("bust_girth"), QStringLiteral("bust_circ"));
-    // D05
     names.insert(QStringLiteral("under_bust_girth"), QStringLiteral("lowbust_circ"));
-    // D07
     names.insert(QStringLiteral("waist_girth"), QStringLiteral("waist_circ"));
-    // D08
     names.insert(QStringLiteral("high_hip_girth"), QStringLiteral("highhip_circ"));
-    // D09
-    names.insert(QStringLiteral("hips_excluding_protruding_abdomen"), QStringLiteral("hip_circ"));
-    names.insert(QStringLiteral("hip_girth"), QStringLiteral("hip_circ"));
-    // D10
-    names.insert(QStringLiteral("half_girth_neck"), QStringLiteral("neck_arc_f"));
-    names.insert(QStringLiteral("front_neck_arc"), QStringLiteral("neck_arc_f"));
-    // D11
-    names.insert(QStringLiteral("half_girth_chest_first"), QStringLiteral("highbust_arc_f"));
-    names.insert(QStringLiteral("front_upper_chest_arc"), QStringLiteral("highbust_arc_f"));
-    // D12
+
+    name = QStringLiteral("hip_circ");
+    names.insert(QStringLiteral("hips_excluding_protruding_abdomen"), name);
+    names.insert(QStringLiteral("hip_girth"), name);
+
+    name = QStringLiteral("neck_arc_f");
+    names.insert(QStringLiteral("half_girth_neck"), name);
+    names.insert(QStringLiteral("front_neck_arc"), name);
+
+    name = QStringLiteral("highbust_arc_f");
+    names.insert(QStringLiteral("half_girth_chest_first"), name);
+    names.insert(QStringLiteral("front_upper_chest_arc"), name);
+
     names.insert(QStringLiteral("half_girth_chest_second"), QStringLiteral("bust_arc_f"));
-    // D13
     names.insert(QStringLiteral("half_girth_chest_third"), QStringLiteral("lowbust_arc_f"));
-    // D15
-    names.insert(QStringLiteral("half_girth_waist"), QStringLiteral("waist_arc_f"));
-    names.insert(QStringLiteral("front_waist_arc"), QStringLiteral("waist_arc_f"));
-    // D16
+
+    name = QStringLiteral("waist_arc_f");
+    names.insert(QStringLiteral("half_girth_waist"), name);
+    names.insert(QStringLiteral("front_waist_arc"), name);
+
     names.insert(QStringLiteral("front_upper_hip_arc"), QStringLiteral("highhip_arc_f"));
-    // D17
-    names.insert(QStringLiteral("half_girth_hips_excluding_protruding_abdomen"), QStringLiteral("hip_arc_f"));
-    names.insert(QStringLiteral("front_hip_arc"), QStringLiteral("hip_arc_f"));
-    // D18
+
+    name = QStringLiteral("hip_arc_f");
+    names.insert(QStringLiteral("half_girth_hips_excluding_protruding_abdomen"), name);
+    names.insert(QStringLiteral("front_hip_arc"), name);
+
     names.insert(QStringLiteral("back_neck_arc"), QStringLiteral("neck_arc_b"));
-    // D19
     names.insert(QStringLiteral("back_upper_chest_arc"), QStringLiteral("highbust_arc_b"));
-    // D23
     names.insert(QStringLiteral("back_waist_arc"), QStringLiteral("waist_arc_b"));
-    // D24
     names.insert(QStringLiteral("back_upper_hip_arc"), QStringLiteral("highhip_arc_b"));
-    // D25
     names.insert(QStringLiteral("back_hip_arc"), QStringLiteral("hip_arc_b"));
-    // D42
     names.insert(QStringLiteral("half_girth_hips_considering_protruding_abdomen"),
                  QStringLiteral("hip_with_abdomen_arc_f"));
-    // D43
-    names.insert(QStringLiteral("shoulder_girth"), QStringLiteral("body_armfold_circ"));
-    // D45
-    names.insert(QStringLiteral("trunk_length"), QStringLiteral("body_torso_circ"));
-    // E01
-    names.insert(QStringLiteral("front_waist_length"), QStringLiteral("neck_front_to_waist_f"));
-    names.insert(QStringLiteral("center_front_waist_length"), QStringLiteral("neck_front_to_waist_f"));
-    // E03
-    names.insert(QStringLiteral("side_waist_length"), QStringLiteral("armpit_to_waist_side"));
-    // E05
-    names.insert(QStringLiteral("neck_to_front_waist_line"), QStringLiteral("neck_side_to_waist_f"));
-    names.insert(QStringLiteral("waist_to_neck_side"), QStringLiteral("neck_side_to_waist_f"));
-    names.insert(QStringLiteral("front_shoulder_to_waist_length"), QStringLiteral("neck_side_to_waist_f"));
-    // E08
-    names.insert(QStringLiteral("back_shoulder_to_waist_length"), QStringLiteral("neck_side_to_waist_b"));
-    // E09
-    names.insert(QStringLiteral("center_back_waist_length"), QStringLiteral("neck_back_to_waist_b"));
-    // E11
-    names.insert(QStringLiteral("neck_to_first_line_chest_circumference"), QStringLiteral("neck_front_to_highbust_f"));
-    names.insert(QStringLiteral("front_neck_to_upper_chest_height"), QStringLiteral("neck_front_to_highbust_f"));
-    // E12
-    names.insert(QStringLiteral("front_neck_to_bust_height"), QStringLiteral("neck_front_to_bust_f"));
-    // E13
-    names.insert(QStringLiteral("front_waist_to_upper_chest"), QStringLiteral("highbust_to_waist_f"));
-    // E15
-    names.insert(QStringLiteral("front_waist_to_lower_breast"), QStringLiteral("lowbust_to_waist_f"));
-    // E17
-    names.insert(QStringLiteral("neck_to_back_line_chest_circumference"), QStringLiteral("neck_back_to_highbust_b"));
-    // E30
-    names.insert(QStringLiteral("depth_waist_first"), QStringLiteral("waist_to_highhip_f"));
-    // E31
-    names.insert(QStringLiteral("depth_waist_second"), QStringLiteral("waist_to_hip_f"));
-    // E36
-    names.insert(QStringLiteral("shoulder_slope_degrees"), QStringLiteral("shoulder_slope_neck_side_angle"));
-    // E37
-    names.insert(QStringLiteral("shoulder_drop"), QStringLiteral("shoulder_slope_neck_side_length"));
-    // F02
-    names.insert(QStringLiteral("across_front_shoulder_width"), QStringLiteral("shoulder_tip_to_shoulder_tip_f"));
-    // F03
-    names.insert(QStringLiteral("upper_front_chest_width"), QStringLiteral("across_chest_f"));
-    // F04
-    names.insert(QStringLiteral("chest_width"), QStringLiteral("armfold_to_armfold_f"));
-    names.insert(QStringLiteral("front_chest_width"), QStringLiteral("armfold_to_armfold_f"));
-    // F05
-    names.insert(QStringLiteral("arc_behind_shoulder_girdle"), QStringLiteral("shoulder_tip_to_shoulder_tip_b"));
-    names.insert(QStringLiteral("across_back_shoulder_width"), QStringLiteral("shoulder_tip_to_shoulder_tip_b"));
-    // F06
-    names.insert(QStringLiteral("upper_back_width"), QStringLiteral("across_back_b"));
-    // F07
-    names.insert(QStringLiteral("back_width"), QStringLiteral("armfold_to_armfold_b"));
-    // F14
-    names.insert(QStringLiteral("neck_transverse_diameter"), QStringLiteral("neck_width"));
-    // G01
-    names.insert(QStringLiteral("bustpoint_to_bustpoint"), QStringLiteral("bustpoint_to_bustpoint"));
-    // G02
-    names.insert(QStringLiteral("neck_to_bustpoint"), QStringLiteral("bustpoint_to_neck_side"));
-    // G06
-    names.insert(QStringLiteral("halter_bustpoint_to_bustpoint"), QStringLiteral("bustpoint_to_bustpoint_halter"));
-    // H01
-    names.insert(QStringLiteral("front_slash_shoulder_height"), QStringLiteral("shoulder_tip_to_waist_front"));
-    names.insert(QStringLiteral("front_shoulder_slope_length"), QStringLiteral("shoulder_tip_to_waist_front"));
-    // H02
-    names.insert(QStringLiteral("front_waist_slope"), QStringLiteral("neck_front_to_waist_side"));
-    // H04
-    names.insert(QStringLiteral("height_armhole_slash"), QStringLiteral("neck_side_to_armfold_f"));
-    names.insert(QStringLiteral("chest_slope"), QStringLiteral("neck_side_to_armfold_f"));
-    // H07
-    names.insert(QStringLiteral("slash_shoulder_height"), QStringLiteral("shoulder_tip_to_waist_back"));
-    names.insert(QStringLiteral("back_shoulder_slope_length"), QStringLiteral("shoulder_tip_to_waist_back"));
-    // H08
-    names.insert(QStringLiteral("back_waist_slope"), QStringLiteral("neck_back_to_waist_side"));
-    // H10
-    names.insert(QStringLiteral("back_slope"), QStringLiteral("neck_side_to_armfold_b"));
-    // I05
-    names.insert(QStringLiteral("arm_length"), QStringLiteral("arm_shoulder_tip_to_wrist"));
-    // I06
-    names.insert(QStringLiteral("shoulder_to_elbow_length"), QStringLiteral("arm_shoulder_tip_to_elbow"));
-    // I08
-    names.insert(QStringLiteral("underarm_length"), QStringLiteral("arm_armpit_to_wrist"));
-    // I11
-    names.insert(QStringLiteral("upper_arm_girth"), QStringLiteral("arm_upper_circ"));
-    // I15
-    names.insert(QStringLiteral("wrist_girth"), QStringLiteral("arm_wrist_circ"));
-    // I17
-    names.insert(QStringLiteral("armscye_girth"), QStringLiteral("armscye_circ"));
-    // I19
-    names.insert(QStringLiteral("anteroposterior_diameter_hands"), QStringLiteral("armscye_width"));
-    // I20
-    names.insert(QStringLiteral("neck_to_third_finger"), QStringLiteral("arm_neck_side_to_finger_tip"));
-    // I21
-    names.insert(QStringLiteral("neck_to_radial_point"), QStringLiteral("arm_neck_side_to_wrist"));
-    names.insert(QStringLiteral("shoulder_and_arm_length"), QStringLiteral("arm_neck_side_to_wrist"));
-    // J01
-    names.insert(QStringLiteral("crotch_height"), QStringLiteral("leg_crotch_to_floor"));
-    // J02
-    names.insert(QStringLiteral("side_waist_to_floor"), QStringLiteral("leg_waist_side_to_floor"));
-    // J03
-    names.insert(QStringLiteral("waist_to_knee"), QStringLiteral("leg_waist_side_to_knee"));
-    // J04
-    names.insert(QStringLiteral("thigh_girth"), QStringLiteral("leg_thigh_upper_circ"));
-    // J05
-    names.insert(QStringLiteral("mid_thigh_girth"), QStringLiteral("leg_thigh_mid_circ"));
-    // J06
-    names.insert(QStringLiteral("knee_girth"), QStringLiteral("leg_knee_circ"));
-    // J08
-    names.insert(QStringLiteral("calf_girth"), QStringLiteral("leg_calf_circ"));
-    // J10
-    names.insert(QStringLiteral("ankle_girth"), QStringLiteral("leg_ankle_circ"));
-    // J11
-    names.insert(QStringLiteral("girth_knee_flexed_feet"), QStringLiteral("leg_knee_circ_bent"));
-    // K01
-    names.insert(QStringLiteral("arc_through_groin_area"), QStringLiteral("crotch_length"));
-    // K04
-    names.insert(QStringLiteral("waist_to_plane_seat"), QStringLiteral("rise_length_side"));
-    names.insert(QStringLiteral("rise_height"), QStringLiteral("rise_length_side"));
-    // L02
-    names.insert(QStringLiteral("hand_vertical_diameter"), QStringLiteral("hand_length"));
-    // L03
-    names.insert(QStringLiteral("hand_width"), QStringLiteral("hand_palm_width"));
-    // L05
-    names.insert(QStringLiteral("hand_girth"), QStringLiteral("hand_circ"));
-    // M04
-    names.insert(QStringLiteral("girth_foot_instep"), QStringLiteral("foot_instep_circ"));
-    // N02
-    names.insert(QStringLiteral("head_height"), QStringLiteral("head_length"));
-    // N05
-    names.insert(QStringLiteral("head_and_neck_length"), QStringLiteral("head_crown_to_neck_back"));
-    // N06
-    names.insert(QStringLiteral("neck_to_neck_base"), QStringLiteral("head_chin_to_neck_back"));
-    // O02
-    names.insert(QStringLiteral("arc_length_upper_body"), QStringLiteral("waist_to_waist_halter"));
-    // O09
-    names.insert(QStringLiteral("cervicale_to_wrist_length"), QStringLiteral("arm_neck_back_to_wrist_bent"));
-    // P11
-    names.insert(QStringLiteral("strap_length"), QStringLiteral("highbust_b_over_shoulder_to_highbust_f"));
-    // P12
-    names.insert(QStringLiteral("arc_through_shoulder_joint"), QStringLiteral("armscye_arc"));
 
+    names.insert(QStringLiteral("shoulder_girth"), QStringLiteral("body_armfold_circ"));
+    names.insert(QStringLiteral("trunk_length"), QStringLiteral("body_torso_circ"));
+
+    name = QStringLiteral("neck_front_to_waist_f");
+    names.insert(QStringLiteral("front_waist_length"), name);
+    names.insert(QStringLiteral("center_front_waist_length"), name);
+
+    names.insert(QStringLiteral("side_waist_length"), QStringLiteral("armpit_to_waist_side"));
+
+    name = QStringLiteral("neck_side_to_waist_f");
+    names.insert(QStringLiteral("neck_to_front_waist_line"), name);
+    names.insert(QStringLiteral("waist_to_neck_side"), name);
+    names.insert(QStringLiteral("front_shoulder_to_waist_length"), name);
+
+    names.insert(QStringLiteral("back_shoulder_to_waist_length"), QStringLiteral("neck_side_to_waist_b"));
+    names.insert(QStringLiteral("center_back_waist_length"), QStringLiteral("neck_back_to_waist_b"));
+
+    name = QStringLiteral("neck_front_to_highbust_f");
+    names.insert(QStringLiteral("neck_to_first_line_chest_circumference"), name);
+    names.insert(QStringLiteral("front_neck_to_upper_chest_height"), name);
+
+    names.insert(QStringLiteral("front_neck_to_bust_height"), QStringLiteral("neck_front_to_bust_f"));
+    names.insert(QStringLiteral("front_waist_to_upper_chest"), QStringLiteral("highbust_to_waist_f"));
+    names.insert(QStringLiteral("front_waist_to_lower_breast"), QStringLiteral("lowbust_to_waist_f"));
+    names.insert(QStringLiteral("neck_to_back_line_chest_circumference"), QStringLiteral("neck_back_to_highbust_b"));
+    names.insert(QStringLiteral("depth_waist_first"), QStringLiteral("waist_to_highhip_f"));
+    names.insert(QStringLiteral("depth_waist_second"), QStringLiteral("waist_to_hip_f"));
+    names.insert(QStringLiteral("shoulder_slope_degrees"), QStringLiteral("shoulder_slope_neck_side_angle"));
+    names.insert(QStringLiteral("shoulder_drop"), QStringLiteral("shoulder_slope_neck_side_length"));
+    names.insert(QStringLiteral("across_front_shoulder_width"), QStringLiteral("shoulder_tip_to_shoulder_tip_f"));
+    names.insert(QStringLiteral("upper_front_chest_width"), QStringLiteral("across_chest_f"));
+
+    name = QStringLiteral("armfold_to_armfold_f");
+    names.insert(QStringLiteral("chest_width"), name);
+    names.insert(QStringLiteral("front_chest_width"), name);
+
+    name = QStringLiteral("shoulder_tip_to_shoulder_tip_b");
+    names.insert(QStringLiteral("arc_behind_shoulder_girdle"), name);
+    names.insert(QStringLiteral("across_back_shoulder_width"), name);
+
+    names.insert(QStringLiteral("upper_back_width"), QStringLiteral("across_back_b"));
+    names.insert(QStringLiteral("back_width"), QStringLiteral("armfold_to_armfold_b"));
+    names.insert(QStringLiteral("neck_transverse_diameter"), QStringLiteral("neck_width"));
+    names.insert(QStringLiteral("bustpoint_to_bustpoint"), QStringLiteral("bustpoint_to_bustpoint"));
+    names.insert(QStringLiteral("neck_to_bustpoint"), QStringLiteral("bustpoint_to_neck_side"));
+    names.insert(QStringLiteral("halter_bustpoint_to_bustpoint"), QStringLiteral("bustpoint_to_bustpoint_halter"));
+
+    name = QStringLiteral("shoulder_tip_to_waist_front");
+    names.insert(QStringLiteral("front_slash_shoulder_height"), name);
+    names.insert(QStringLiteral("front_shoulder_slope_length"), name);
+
+    names.insert(QStringLiteral("front_waist_slope"), QStringLiteral("neck_front_to_waist_side"));
+
+    name = QStringLiteral("neck_side_to_armfold_f");
+    names.insert(QStringLiteral("height_armhole_slash"), name);
+    names.insert(QStringLiteral("chest_slope"), name);
+
+    name = QStringLiteral("shoulder_tip_to_waist_back");
+    names.insert(QStringLiteral("slash_shoulder_height"), name);
+    names.insert(QStringLiteral("back_shoulder_slope_length"), name);
+
+    names.insert(QStringLiteral("back_waist_slope"), QStringLiteral("neck_back_to_waist_side"));
+    names.insert(QStringLiteral("back_slope"), QStringLiteral("neck_side_to_armfold_b"));
+    names.insert(QStringLiteral("arm_length"), QStringLiteral("arm_shoulder_tip_to_wrist"));
+    names.insert(QStringLiteral("shoulder_to_elbow_length"), QStringLiteral("arm_shoulder_tip_to_elbow"));
+    names.insert(QStringLiteral("underarm_length"), QStringLiteral("arm_armpit_to_wrist"));
+    names.insert(QStringLiteral("upper_arm_girth"), QStringLiteral("arm_upper_circ"));
+    names.insert(QStringLiteral("wrist_girth"), QStringLiteral("arm_wrist_circ"));
+    names.insert(QStringLiteral("armscye_girth"), QStringLiteral("armscye_circ"));
+    names.insert(QStringLiteral("anteroposterior_diameter_hands"), QStringLiteral("armscye_width"));
+    names.insert(QStringLiteral("neck_to_third_finger"), QStringLiteral("arm_neck_side_to_finger_tip"));
+
+    name = QStringLiteral("arm_neck_side_to_wrist");
+    names.insert(QStringLiteral("neck_to_radial_point"), name);
+    names.insert(QStringLiteral("shoulder_and_arm_length"), name);
+
+    names.insert(QStringLiteral("crotch_height"), QStringLiteral("leg_crotch_to_floor"));
+    names.insert(QStringLiteral("side_waist_to_floor"), QStringLiteral("leg_waist_side_to_floor"));
+    names.insert(QStringLiteral("waist_to_knee"), QStringLiteral("leg_waist_side_to_knee"));
+    names.insert(QStringLiteral("thigh_girth"), QStringLiteral("leg_thigh_upper_circ"));
+    names.insert(QStringLiteral("mid_thigh_girth"), QStringLiteral("leg_thigh_mid_circ"));
+    names.insert(QStringLiteral("knee_girth"), QStringLiteral("leg_knee_circ"));
+    names.insert(QStringLiteral("calf_girth"), QStringLiteral("leg_calf_circ"));
+    names.insert(QStringLiteral("ankle_girth"), QStringLiteral("leg_ankle_circ"));
+    names.insert(QStringLiteral("girth_knee_flexed_feet"), QStringLiteral("leg_knee_circ_bent"));
+    names.insert(QStringLiteral("arc_through_groin_area"), QStringLiteral("crotch_length"));
+
+    name = QStringLiteral("rise_length_side");
+    names.insert(QStringLiteral("waist_to_plane_seat"), name);
+    names.insert(QStringLiteral("rise_height"), name);
+
+    names.insert(QStringLiteral("hand_vertical_diameter"), QStringLiteral("hand_length"));
+    names.insert(QStringLiteral("hand_width"), QStringLiteral("hand_palm_width"));
+    names.insert(QStringLiteral("hand_girth"), QStringLiteral("hand_circ"));
+    names.insert(QStringLiteral("girth_foot_instep"), QStringLiteral("foot_instep_circ"));
+    names.insert(QStringLiteral("head_height"), QStringLiteral("head_length"));
+    names.insert(QStringLiteral("head_and_neck_length"), QStringLiteral("head_crown_to_neck_back"));
+    names.insert(QStringLiteral("neck_to_neck_base"), QStringLiteral("head_chin_to_neck_back"));
+    names.insert(QStringLiteral("arc_length_upper_body"), QStringLiteral("waist_to_waist_halter"));
+    names.insert(QStringLiteral("cervicale_to_wrist_length"), QStringLiteral("arm_neck_back_to_wrist_bent"));
+    names.insert(QStringLiteral("strap_length"), QStringLiteral("highbust_b_over_shoulder_to_highbust_f"));
+    names.insert(QStringLiteral("arc_through_shoulder_joint"), QStringLiteral("armscye_arc"));
     names.insert(QStringLiteral("head_girth"), QStringLiteral("head_circ"));
 
     return names;
