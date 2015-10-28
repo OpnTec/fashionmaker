@@ -841,13 +841,13 @@ void QmuParserBase::ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> 
     while (a_stOpt.size() && a_stOpt.top().GetCode()==cmELSE)
     {
         token_type opElse = a_stOpt.pop();
-        Q_ASSERT(a_stOpt.size()>0); //-V654
+        Q_ASSERT(a_stOpt.size()>0);
 
         // Take the value associated with the else branch from the value stack
         token_type vVal2 = a_stVal.pop();
 
-        Q_ASSERT(a_stOpt.size()>0); //-V654
-        Q_ASSERT(a_stVal.size()>=2); //-V654
+        Q_ASSERT(a_stOpt.size()>0);
+        Q_ASSERT(a_stVal.size()>=2);
 
         // it then else is a ternary operator Pop all three values from the value s
         // tack and just return the right value
@@ -857,8 +857,8 @@ void QmuParserBase::ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> 
         a_stVal.push( (qFuzzyCompare(vExpr.GetVal()+1, 1+0)==false) ? vVal1 : vVal2);
 
         token_type opIf = a_stOpt.pop();
-        Q_ASSERT(opElse.GetCode()==cmELSE); //-V654
-        Q_ASSERT(opIf.GetCode()==cmIF); //-V654
+        Q_ASSERT(opElse.GetCode()==cmELSE);
+        Q_ASSERT(opIf.GetCode()==cmIF);
 
         m_vRPN.AddIfElse(cmENDIF);
     } // while pending if-else-clause found
@@ -877,7 +877,7 @@ void QmuParserBase::ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type>
     }
     else
     {
-        Q_ASSERT(a_stVal.size()>=2); //-V654
+        Q_ASSERT(a_stVal.size()>=2);
         token_type valTok1 = a_stVal.pop(),
                    valTok2 = a_stVal.pop(),
                    optTok  = a_stOpt.pop(),
@@ -913,9 +913,10 @@ void QmuParserBase::ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type>
  */
 void QmuParserBase::ApplyRemainingOprt(QStack<token_type> &stOpt, QStack<token_type> &stVal) const
 {
-    const ECmdCode code = stOpt.top().GetCode();
-    while (stOpt.size() && code != cmBO && code != cmIF)
+    while (stOpt.size() && stOpt.top().GetCode() != cmBO && stOpt.top().GetCode() != cmIF)
     {
+        const ECmdCode code = stOpt.top().GetCode();
+
         if ((code >= cmLE && code <= cmASSIGN) || code == cmOPRT_INFIX || code == cmOPRT_BIN)
         {
             if (code==cmOPRT_INFIX)
@@ -1175,7 +1176,7 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
 
                 // The index of the string argument in the string table
                 int iIdxStack = pTok->Fun.idx;
-                Q_ASSERT( iIdxStack>=0 && iIdxStack<m_vStringBuf.size() ); //-V654
+                Q_ASSERT( iIdxStack>=0 && iIdxStack<m_vStringBuf.size() );
 
                 switch (pTok->Fun.argc)  // switch according to argument count
                 {
@@ -1330,30 +1331,30 @@ void QmuParserBase::CreateRPN() const
             // Next three are different kind of value entries
             //
             case cmSTRING:
-			{
+            {
                 opt.SetIdx(m_vStringBuf.size());      // Assign buffer index to token
                 stVal.push(opt);
-				const QString &str = opt.GetAsString();
+                const QString &str = opt.GetAsString();
                 m_vStringBuf.push_back(str); // Store string in internal buffer
                 m_Tokens.insert(m_pTokenReader->GetPos()-str.length(), str);
                 break;
-			}
+            }
             case cmVAR:
-			{
+            {
                 stVal.push(opt);
                 m_vRPN.AddVar( static_cast<qreal*>(opt.GetVar()) );
-				const QString &str = opt.GetAsString();
+                const QString &str = opt.GetAsString();
                 m_Tokens.insert(m_pTokenReader->GetPos()-str.length(), str);
                 break;
-		    }
+            }
             case cmVAL:
-			{
+            {
                 stVal.push(opt);
                 m_vRPN.AddVal( opt.GetVal() );
-				const QString &str = opt.GetAsString();
+                const QString &str = opt.GetAsString();
                 m_Numbers.insert(m_pTokenReader->GetPos()-str.length(), str);
                 break;
-			}
+            }
             case cmELSE:
                 m_nIfElseCounter--;
                 if (m_nIfElseCounter<0)
@@ -1395,8 +1396,7 @@ void QmuParserBase::CreateRPN() const
                 ApplyRemainingOprt(stOpt, stVal);
 
                 // Check if the bracket content has been evaluated completely
-				token_type &topToken = stOpt.top();
-                if (stOpt.size() && topToken.GetCode()==cmBO)
+                if (stOpt.size() && stOpt.top().GetCode()==cmBO)
                 {
                     // if opt is ")" and opta is "(" the bracket has been evaluated, now its time to check
                     // if there is either a function or a sign pending
@@ -1409,17 +1409,17 @@ void QmuParserBase::CreateRPN() const
 
                     stOpt.pop(); // Take opening bracket from stack
 
-                    if (iArgCount>1 && ( stOpt.size()==0 || (topToken.GetCode()!=cmFUNC &&
-                                                             topToken.GetCode()!=cmFUNC_BULK &&
-                                                             topToken.GetCode()!=cmFUNC_STR) ) )
+                    if (iArgCount>1 && ( stOpt.size()==0 || (stOpt.top().GetCode()!=cmFUNC &&
+                                                             stOpt.top().GetCode()!=cmFUNC_BULK &&
+                                                             stOpt.top().GetCode()!=cmFUNC_STR) ) )
                     {
                         Error(ecUNEXPECTED_ARG, m_pTokenReader->GetPos());
                     }
 
                     // The opening bracket was popped from the stack now check if there
                     // was a function before this bracket
-                    if (stOpt.size() && topToken.GetCode()!=cmOPRT_INFIX && topToken.GetCode()!=cmOPRT_BIN &&
-                            topToken.GetFuncAddr()!=0)
+                    if (stOpt.size() && stOpt.top().GetCode()!=cmOPRT_INFIX && stOpt.top().GetCode()!=cmOPRT_BIN &&
+                            stOpt.top().GetFuncAddr()!=0)
                     {
                         ApplyFunc(stOpt, stVal, iArgCount);
                     }
@@ -1453,16 +1453,16 @@ void QmuParserBase::CreateRPN() const
             case cmLOR:
             case cmASSIGN:
             case cmOPRT_BIN:
-			{
-				const token_type &topToken = stOpt.top();
                 // A binary operator (user defined or built in) has been found.
-                while ( stOpt.size() && topToken.GetCode() != cmBO && topToken.GetCode() != cmELSE &&
-                        topToken.GetCode() != cmIF)
+                while ( stOpt.size() && stOpt.top().GetCode() != cmBO && stOpt.top().GetCode() != cmELSE &&
+                        stOpt.top().GetCode() != cmIF)
                 {
+                    const token_type &topToken = stOpt.top();
                     int nPrec1 = GetOprtPrecedence(topToken),
                         nPrec2 = GetOprtPrecedence(opt);
 
-                    if (topToken.GetCode()==opt.GetCode())
+                    const ECmdCode code = topToken.GetCode();
+                    if (code==opt.GetCode())
                     {
                         // Deal with operator associativity
                         EOprtAssociativity eOprtAsct = GetOprtAssociativity(opt);
@@ -1477,7 +1477,7 @@ void QmuParserBase::CreateRPN() const
                         // In case the operators are not equal the precedence decides alone...
                         break;
                     }
-                    if (topToken.GetCode()==cmOPRT_INFIX)
+                    if (code==cmOPRT_INFIX)
                     {
                         ApplyFunc(stOpt, stVal, 1);
                     }
@@ -1495,7 +1495,6 @@ void QmuParserBase::CreateRPN() const
                       // The operator can't be evaluated right now, push back to the operator stack
                 stOpt.push(opt);
                 break;
-			}
             //
             // Last section contains functions and operators implicitely mapped to functions
             //
@@ -1552,7 +1551,7 @@ void QmuParserBase::CreateRPN() const
     }
 
     // get the last value (= final result) from the stack
-    Q_ASSERT(stArgCount.size()==1); //-V654
+    Q_ASSERT(stArgCount.size()==1);
     m_nFinalResultIdx = stArgCount.top();
     if (m_nFinalResultIdx==0)
     {
@@ -1799,7 +1798,7 @@ void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<to
 
     while ( stOprt.empty() == false )
     {
-		const token_type &topToken = stOprt.top();
+        const token_type &topToken = stOprt.top();
         if (topToken.GetCode()<=cmASSIGN)
         {
             qDebug() << "OPRT_INTRNL \"" << QmuParserBase::c_DefaultOprt[topToken.GetCode()] << "\" \n";
