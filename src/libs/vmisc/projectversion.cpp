@@ -41,7 +41,36 @@ extern const QString APP_VERSION_STR(QStringLiteral("%1.%2.%3.%4b").arg(MAJOR_VE
 //---------------------------------------------------------------------------------------------------------------------
 QString compilerString()
 {
-#if defined(Q_CC_CLANG) // must be before GNU, because clang claims to be GNU too
+#if defined(Q_CC_INTEL) // must be before GNU, Clang and MSVC because ICC/ICL claim to be them
+    QString iccCompact;
+#ifdef __INTEL_CLANG_COMPILER
+    iccCompact = QLatin1Literal("Clang");
+#elif defined(__INTEL_MS_COMPAT_LEVEL)
+    iccCompact = QLatin1Literal("Microsoft");
+#elif defined(__GNUC__)
+    iccCompact = QLatin1Literal("GCC");
+#else
+    iccCompact = QLatin1Literal("no");
+#endif
+    QString iccVersion;
+    if (__INTEL_COMPILER >= 1300)
+    {
+        iccVersion = QString::number(__INTEL_COMPILER/100);
+    }
+    else
+    {
+        iccVersion = QLatin1String(__INTEL_COMPILER);
+    }
+#ifdef __INTEL_COMPILER_UPDATE
+    return QLatin1String("Intel(R) C++ ") + iccVersion + QLatin1String(".") + QLatin1String(__INTEL_COMPILER_UPDATE) +
+           QLatin1String(" build ") + QLatin1String(__INTEL_COMPILER_BUILD_DATE) + QLatin1String(" [") +
+           QLatin1String(iccCompact) + QLatin1String(" compatibility]");
+#else
+    return QLatin1String("Intel(R) C++ ") + iccVersion + QLatin1String(" build ") +
+           QLatin1String(__INTEL_COMPILER_BUILD_DATE) + QLatin1String(" [") + iccCompact +
+           QLatin1String(" compatibility]");
+#endif
+#elif defined(Q_CC_CLANG) // must be before GNU, because clang claims to be GNU too
     QString isAppleString;
 #if defined(__apple_build_version__) // Apple clang has other version numbers
     isAppleString = QLatin1String(" (Apple)");
