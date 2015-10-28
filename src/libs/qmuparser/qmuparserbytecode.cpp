@@ -488,7 +488,7 @@ void QmuParserByteCode::Finalize()
     int idx;
     for (int i=0; i<m_vRPN.size(); ++i)
     {
-        switch (m_vRPN[i].Cmd)
+        switch (m_vRPN.at(i).Cmd)
         {
             case cmIF:
                 stIf.push(i);
@@ -517,7 +517,7 @@ const SToken* QmuParserByteCode::GetBase() const
     }
     else
     {
-        return &m_vRPN[0];
+        return &m_vRPN.at(0);
     }
 }
 
