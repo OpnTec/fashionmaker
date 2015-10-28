@@ -23,6 +23,7 @@
 
 #include <QString>
 #include <QDebug>
+#include <QCoreApplication>
 #include "qmuparsererror.h"
 #include <QtCore/qmath.h>
 #include <stdexcept>
@@ -41,8 +42,8 @@ namespace Test
 int QmuParserTester::c_iCount = 0;
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuParserTester::QmuParserTester()
-    : m_vTestFun()
+QmuParserTester::QmuParserTester(QObject *parent)
+    : QObject(parent), m_vTestFun()
 {
     AddTest ( &QmuParserTester::TestNames );
     AddTest ( &QmuParserTester::TestSyntax );
@@ -1098,6 +1099,9 @@ void QmuParserTester::AddTest ( testfun_type a_pFun )
 // cppcheck-suppress unusedFunction
 void QmuParserTester::Run()
 {
+    qWarning() << "-----------------------------------------------------------";
+    qWarning() << "Running test suite:\n";
+
     int iStat = 0;
     try
     {
@@ -1111,16 +1115,19 @@ void QmuParserTester::Run()
         qWarning() << "\n" << e.GetMsg();
         qWarning() << e.GetToken();
         Abort();
+        return;
     }
     catch ( std::exception &e )
     {
         qWarning() << e.what();
         Abort();
+        return;
     }
     catch ( ... )
     {
         qWarning() << "Internal error";
         Abort();
+        return;
     }
 
     if ( iStat == 0 )
@@ -1133,7 +1140,11 @@ void QmuParserTester::Run()
                  << " errors (" <<  QmuParserTester::c_iCount
                  << " expressions)";
     }
+    QCoreApplication::exit(iStat);
     QmuParserTester::c_iCount = 0;
+
+    qWarning() << "Done.";
+    qWarning() << "-----------------------------------------------------------";
 }
 
 
@@ -1498,11 +1509,11 @@ int QmuParserTester::EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_
 /**
  * @brief Internal error in test class Test is going to be aborted.
  */
-void Q_NORETURN QmuParserTester::Abort()
+void QmuParserTester::Abort()
 {
     qWarning() << "Test failed (internal error in test class)";
     while ( getchar() == false);
-    exit ( -1 );
+    QCoreApplication::exit ( -1 );
 }
 } // namespace test
 } // namespace qmu

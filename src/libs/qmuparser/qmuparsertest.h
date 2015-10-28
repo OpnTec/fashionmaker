@@ -44,14 +44,19 @@ namespace Test
  *
  * (C) 2004-2011 Ingo Berg
  */
-class QMUPARSERSHARED_EXPORT QmuParserTester // final
+class QMUPARSERSHARED_EXPORT QmuParserTester : public QObject // final
 {
+    Q_OBJECT
 public:
     typedef int ( QmuParserTester::*testfun_type ) ();
 
-    QmuParserTester();
+    QmuParserTester(QObject *parent = nullptr);
+
+public slots:
     void Run();
+
 private:
+    Q_DISABLE_COPY(QmuParserTester)
     QVector<testfun_type> m_vTestFun;
     static int c_iCount;
 
@@ -307,7 +312,7 @@ private:
     // cppcheck-suppress functionStatic
     int TestBulkMode();
 
-    static void Q_NORETURN Abort();
+    static void Abort();
 };
 } // namespace Test
 } // namespace qmu
