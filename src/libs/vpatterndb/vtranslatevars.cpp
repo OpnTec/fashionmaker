@@ -498,11 +498,12 @@ bool VTranslateVars::VariablesFromUser(QString &newFormula, int position, const 
     QMap<QString, QmuTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
     {
-        if (token.indexOf( i.value().translate() ) == 0)
+		const QmuTranslation &var = i.value();
+        if (token.indexOf( var.translate() ) == 0)
         {
-            newFormula.replace(position, i.value().translate().length(), i.key());
+            newFormula.replace(position, var.translate().length(), i.key());
             QString newToken = token;
-            newToken.replace(0, i.value().translate().length(), i.key());
+            newToken.replace(0, var.translate().length(), i.key());
             bias = token.length() - newToken.length();
             return true;
         }

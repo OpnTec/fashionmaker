@@ -35,7 +35,7 @@
 VObjPaintDevice::VObjPaintDevice()
     :QPaintDevice(), engine(new VObjEngine()), fileName(), owns_iodevice(1)
 {
-    owns_iodevice = false;
+    owns_iodevice = static_cast<int>(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ void VObjPaintDevice::setFileName(const QString &value)
         delete engine->getOutputDevice();
     }
 
-    owns_iodevice = true;
+    owns_iodevice = static_cast<int>(true);
 
     fileName = value;
     QFile *file = new QFile(fileName);
@@ -113,7 +113,7 @@ void VObjPaintDevice::setOutputDevice(QIODevice *outputDevice)
         qWarning("VObjPaintDevice::setOutputDevice(), cannot set output device while OBJ is being generated");
         return;
     }
-    owns_iodevice = false;
+    owns_iodevice = static_cast<int>(false);
     engine->setOutputDevice(outputDevice);
     fileName = QString();
 }

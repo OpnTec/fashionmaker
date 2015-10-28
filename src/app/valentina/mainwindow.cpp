@@ -1540,7 +1540,7 @@ void MainWindow::CancelTool()
             ui->actionStopTool->setEnabled(true);
             return;
         case Tool::BasePoint:
-            Q_UNREACHABLE();
+            Q_UNREACHABLE(); //-V501
             //Nothing to do here because we can't create this tool from main window.
             break;
         case Tool::EndLine:
@@ -2231,7 +2231,7 @@ void MainWindow::FullParseFile()
     }
     catch (const VExceptionObjectError &e)
     {
-        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
+        qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")), //-V807
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
         if (not VApplication::CheckGUI())
@@ -2836,7 +2836,8 @@ void MainWindow::setCurrentFile(const QString &fileName)
     else
     {
         qCDebug(vMainWindow, "Updating recent file list.");
-        QStringList files = qApp->ValentinaSettings()->GetRecentFileList();
+        VSettings *settings = qApp->ValentinaSettings();
+        QStringList files = settings->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
         while (files.size() > MaxRecentFiles)
@@ -2844,14 +2845,14 @@ void MainWindow::setCurrentFile(const QString &fileName)
             files.removeLast();
         }
 
-        qApp->ValentinaSettings()->SetRecentFileList(files);
+        settings->SetRecentFileList(files);
         UpdateRecentFileActions();
 
         qCDebug(vMainWindow, "Updating restore file list.");
-        QStringList restoreFiles = qApp->ValentinaSettings()->GetRestoreFileList();
+        QStringList restoreFiles = settings->GetRestoreFileList();
         restoreFiles.removeAll(fileName);
         restoreFiles.prepend(fileName);
-        qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
+        settings->SetRestoreFileList(restoreFiles);
     }
     shownName+="[*]";
     setWindowTitle(shownName);
@@ -2875,17 +2876,18 @@ QString MainWindow::strippedName(const QString &fullFileName)
 void MainWindow::ReadSettings()
 {
     qCDebug(vMainWindow, "Reading settings.");
-    restoreGeometry(qApp->ValentinaSettings()->GetGeometry());
-    restoreState(qApp->ValentinaSettings()->GetWindowState());
-    restoreState(qApp->ValentinaSettings()->GetToolbarsState(), APP_VERSION);
+    const VSettings *settings = qApp->ValentinaSettings();
+    restoreGeometry(settings->GetGeometry());
+    restoreState(settings->GetWindowState());
+    restoreState(settings->GetToolbarsState(), APP_VERSION);
 
     // Scene antialiasing
-    const bool graphOutputValue = qApp->ValentinaSettings()->GetGraphicalOutput();
+    const bool graphOutputValue = settings->GetGraphicalOutput();
     ui->view->setRenderHint(QPainter::Antialiasing, graphOutputValue);
     ui->view->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputValue);
 
     // Stack limit
-    qApp->getUndoStack()->setUndoLimit(qApp->ValentinaSettings()->GetUndoCount());
+    qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());
 
     // Text under tool buton icon
     ToolBarStyles();
@@ -2899,9 +2901,10 @@ void MainWindow::WriteSettings()
 {
     ActionDraw(true);
 
-    qApp->ValentinaSettings()->SetGeometry(saveGeometry());
-    qApp->ValentinaSettings()->SetWindowState(saveState());
-    qApp->ValentinaSettings()->SetToolbarsState(saveState(APP_VERSION));
+    VSettings *setings = qApp->ValentinaSettings();
+    setings->SetGeometry(saveGeometry());
+    setings->SetWindowState(saveState());
+    setings->SetToolbarsState(saveState(APP_VERSION));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3004,7 +3007,7 @@ void MainWindow::LastUsedTool()
             ArrowTool();
             break;
         case Tool::BasePoint:
-            Q_UNREACHABLE();
+            Q_UNREACHABLE(); //-V501
             //Nothing to do here because we can't create this tool from main window.
             break;
         case Tool::EndLine:
@@ -3849,7 +3852,8 @@ void MainWindow::SetHeight(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ProcessCMD()
 {
-    auto args = qApp->CommandLine()->OptInputFileNames();
+    const VCommandLinePtr cmd = qApp->CommandLine();
+    auto args = cmd->OptInputFileNames();
 
     //Before we load pattern show window.
     if (VApplication::CheckGUI())
@@ -3869,33 +3873,33 @@ void MainWindow::ProcessCMD()
 
     for (int i=0, sz = args.size(); i < sz; ++i)
     {
-        const bool loaded = LoadPattern(args.at(static_cast<int>(i)), qApp->CommandLine()->OptMeasurePath());
+        const bool loaded = LoadPattern(args.at(static_cast<int>(i)), cmd->OptMeasurePath());
 
         if (not loaded && not VApplication::CheckGUI())
         {
             return; // process only one input file
         }
 
-        if (qApp->CommandLine()->IsTestModeEnabled() || qApp->CommandLine()->IsExportEnabled())
+        if (cmd->IsTestModeEnabled() || cmd->IsExportEnabled())
         {
-            if (qApp->CommandLine()->IsSetGradationSize())
+            if (cmd->IsSetGradationSize())
             {
-                SetSize(qApp->CommandLine()->OptGradationSize());
+                SetSize(cmd->OptGradationSize());
             }
 
-            if (qApp->CommandLine()->IsSetGradationHeight())
+            if (cmd->IsSetGradationHeight())
             {
-                SetHeight(qApp->CommandLine()->OptGradationHeight());
+                SetHeight(cmd->OptGradationHeight());
             }
         }
 
-        if (not qApp->CommandLine()->IsTestModeEnabled())
+        if (not cmd->IsTestModeEnabled())
         {
-            if (qApp->CommandLine()->IsExportEnabled())
+            if (cmd->IsExportEnabled())
             {
                 if (loaded)
                 {
-                    DoExport(qApp->CommandLine());
+                    DoExport(cmd);
                     return; // process only one input file
                 }
                 break;

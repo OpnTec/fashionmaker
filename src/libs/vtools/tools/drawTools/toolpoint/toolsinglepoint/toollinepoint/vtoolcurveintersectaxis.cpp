@@ -84,9 +84,9 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(DialogTool *dialog, VMa
     const quint32 basePointId = dialogTool->GetBasePointId();
     const quint32 curveId = dialogTool->getCurveId();
 
-    VToolCurveIntersectAxis *point = nullptr;
-    point=Create(0, pointName, typeLine, lineColor, formulaAngle, basePointId, curveId, 5, 10, scene, doc, data,
-                 Document::FullParse, Source::FromGui);
+    VToolCurveIntersectAxis *point = Create(0, pointName, typeLine, lineColor, formulaAngle, basePointId, 
+		                                    curveId, 5, 10, scene, doc, data, Document::FullParse, 
+											Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;

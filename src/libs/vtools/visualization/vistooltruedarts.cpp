@@ -62,7 +62,7 @@ VisToolTrueDarts::VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent
     d2p2 = InitItem<QGraphicsLineItem>(supportColor, this);
 
     point1 = InitPoint(mainColor, this);
-    point2 = InitPoint(mainColor, this);
+    point2 = InitPoint(mainColor, this); //-V656
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -684,7 +684,7 @@ void DialogTool::FormulaChanged()
     }
 }
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FormulaChangedPlainText()
+void DialogTool::FormulaChangedPlainText() //-V524
 {
     QPlainTextEdit* edit = qobject_cast<QPlainTextEdit*>(sender());
     if (edit)

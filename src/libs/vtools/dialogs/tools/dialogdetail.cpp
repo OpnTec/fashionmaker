@@ -256,8 +256,9 @@ void DialogDetail::setDetail(const VDetail &value)
     ui.listWidget->clear();
     for (int i = 0; i < detail.CountNode(); ++i)
     {
-        NewItem(detail.at(i).getId(), detail.at(i).getTypeTool(), detail.at(i).getTypeNode(), detail.at(i).getMx(),
-                detail.at(i).getMy(), detail.at(i).getReverse());
+		const VNodeDetail &node = detail.at(i);
+        NewItem(node.getId(), node.getTypeTool(), node.getTypeNode(), node.getMx(),
+                node.getMy(), node.getReverse());
     }
     ui.lineEditNameDetail->setText(detail.getName());
     ui.checkBoxSeams->setChecked(detail.getSeamAllowance());

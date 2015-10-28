@@ -81,30 +81,12 @@ DL_Dxf::DL_Dxf()
  */
 DL_Dxf::~DL_Dxf()
 {
-    if (vertices!=nullptr)
-    {
-        delete[] vertices;
-    }
-    if (knots!=nullptr)
-    {
-        delete[] knots;
-    }
-    if (controlPoints!=nullptr)
-    {
-        delete[] controlPoints;
-    }
-    if (fitPoints!=nullptr)
-    {
-        delete[] fitPoints;
-    }
-    if (weights!=nullptr)
-    {
-        delete[] weights;
-    }
-    if (leaderVertices!=nullptr)
-    {
-        delete[] leaderVertices;
-    }
+    delete[] vertices;
+    delete[] knots;
+    delete[] controlPoints;
+    delete[] fitPoints;
+    delete[] weights;
+    delete[] leaderVertices;
 }
 
 
@@ -270,7 +252,7 @@ bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp)
     }
     else
     {
-        s = "";
+        s.clear();
         return false;
     }
 }
@@ -341,7 +323,7 @@ bool DL_Dxf::stripWhiteSpace(char** s)
         ++(*s);
     }
 
-    return ((*s) ? true : false);
+    return true;
 }
 
 
@@ -616,7 +598,7 @@ bool DL_Dxf::processDXFGroup(DL_CreationInterface* creationInterface,
 //        }
         values.clear();
         settingValue[0] = '\0';
-        settingKey = "";
+        settingKey.clear();
         firstHatchLoop = true;
         //firstHatchEdge = true;
         hatchEdge = DL_HatchEdgeData();
@@ -1618,10 +1600,7 @@ bool DL_Dxf::handleLWPolylineData(DL_CreationInterface* /*creationInterface*/)
         maxVertices = toInt(groupValue);
         if (maxVertices>0)
         {
-            if (vertices!=nullptr)
-            {
-                delete[] vertices;
-            }
+            delete[] vertices;
             vertices = new double[4*maxVertices];
             for (int i=0; i<maxVertices; ++i)
             {
@@ -1674,10 +1653,7 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
         maxKnots = toInt(groupValue);
         if (maxKnots>0)
         {
-            if (knots!=nullptr)
-            {
-                delete[] knots;
-            }
+            delete[] knots;
             knots = new double[maxKnots];
             for (int i=0; i<maxKnots; ++i)
             {
@@ -1694,14 +1670,8 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
         maxControlPoints = toInt(groupValue);
         if (maxControlPoints>0)
         {
-            if (controlPoints!=nullptr)
-            {
-                delete[] controlPoints;
-            }
-            if (weights!=nullptr)
-            {
-                delete[] weights;
-            }
+            delete[] controlPoints;
+            delete[] weights;
             controlPoints = new double[3*maxControlPoints];
             weights = new double[maxControlPoints];
             for (int i=0; i<maxControlPoints; ++i)
@@ -1723,10 +1693,7 @@ bool DL_Dxf::handleSplineData(DL_CreationInterface* /*creationInterface*/)
         maxFitPoints = toInt(groupValue);
         if (maxFitPoints>0)
         {
-            if (fitPoints!=nullptr)
-            {
-                delete[] fitPoints;
-            }
+            delete[] fitPoints;
             fitPoints = new double[3*maxFitPoints];
             for (int i=0; i<maxFitPoints; ++i)
             {
@@ -1813,10 +1780,7 @@ bool DL_Dxf::handleLeaderData(DL_CreationInterface* /*creationInterface*/)
         maxLeaderVertices = toInt(groupValue);
         if (maxLeaderVertices>0)
         {
-            if (leaderVertices!=nullptr)
-            {
-                delete[] leaderVertices;
-            }
+            delete[] leaderVertices;
             leaderVertices = new double[3*maxLeaderVertices];
             for (int i=0; i<maxLeaderVertices; ++i)
             {
@@ -4049,7 +4013,7 @@ int DL_Dxf::writeImage(DL_WriterA& dw,
 
     // handle of IMAGEDEF object
     int handle = static_cast<int>(dw.incHandle());
-    dw.dxfHex(340, handle);
+    dw.dxfHex(340, handle); //-V525
 
     // flags
     dw.dxfInt(70, 15);
@@ -4084,10 +4048,10 @@ void DL_Dxf::writeImageDef(DL_WriterA& dw,
     dw.dxfString(0, "IMAGEDEF");
     if (version==DL_VERSION_2000)
     {
-        dw.dxfHex(5, handle);
+		dw.dxfHex(5, handle);    
     }
 
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbRasterImageDef");
         dw.dxfInt(90, 0);
@@ -4381,7 +4345,7 @@ void DL_Dxf::writeVPort(DL_WriterA& dw) const
         dw.dxfHex(5, 0x8);
     }
     //dw.dxfHex(330, 0);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTable");
     }
@@ -4393,7 +4357,7 @@ void DL_Dxf::writeVPort(DL_WriterA& dw) const
         dw.handle();
     }
     //dw.dxfHex(330, 8);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTableRecord");
         dw.dxfString(100, "AcDbViewportTableRecord");
@@ -4484,7 +4448,7 @@ void DL_Dxf::writeStyle(DL_WriterA& dw, const DL_StyleData& style)
         }
     }
     //dw.dxfHex(330, 3);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTableRecord");
         dw.dxfString(100, "AcDbTextStyleTableRecord");
@@ -4538,7 +4502,7 @@ void DL_Dxf::writeView(DL_WriterA& dw) const
         dw.dxfHex(5, 6);
     }
     //dw.dxfHex(330, 0);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTable");
     }
@@ -4562,7 +4526,7 @@ void DL_Dxf::writeUcs(DL_WriterA& dw) const
         dw.dxfHex(5, 7);
     }
     //dw.dxfHex(330, 0);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTable");
     }
@@ -4604,7 +4568,7 @@ void DL_Dxf::writeDimStyle(DL_WriterA& dw,
     }
     //dw.handle(105);
     //dw.dxfHex(330, 0xA);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTableRecord");
         dw.dxfString(100, "AcDbDimStyleTableRecord");
@@ -4706,7 +4670,7 @@ void DL_Dxf::writeBlockRecord(DL_WriterA& dw) const
         dw.dxfHex(5, 1);
     }
     //dw.dxfHex(330, 0);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTable");
     }
@@ -4720,7 +4684,7 @@ void DL_Dxf::writeBlockRecord(DL_WriterA& dw) const
     //int msh = dw.handle();
     //dw.setModelSpaceHandle(msh);
     //dw.dxfHex(330, 1);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTableRecord");
         dw.dxfString(100, "AcDbBlockTableRecord");
@@ -4736,7 +4700,7 @@ void DL_Dxf::writeBlockRecord(DL_WriterA& dw) const
     //int psh = dw.handle();
     //dw.setPaperSpaceHandle(psh);
     //dw.dxfHex(330, 1);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTableRecord");
         dw.dxfString(100, "AcDbBlockTableRecord");
@@ -4752,7 +4716,7 @@ void DL_Dxf::writeBlockRecord(DL_WriterA& dw) const
     //int ps0h = dw.handle();
     //dw.setPaperSpace0Handle(ps0h);
     //dw.dxfHex(330, 1);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTableRecord");
         dw.dxfString(100, "AcDbBlockTableRecord");
@@ -4776,7 +4740,7 @@ void DL_Dxf::writeBlockRecord(DL_WriterA& dw, const std::string& name) const
         dw.handle();
     }
     //dw->dxfHex(330, 1);
-    if (version==DL_VERSION_2000)
+    if (version==DL_VERSION_2000) //-V581
     {
         dw.dxfString(100, "AcDbSymbolTableRecord");
         dw.dxfString(100, "AcDbBlockTableRecord");
@@ -5231,10 +5195,6 @@ bool DL_Dxf::checkVariable(const char* var, DL_Codes::version version)
     else if (version==DL_VERSION_R12)
     {
         // these are all the variables recognized by dxf r12:
-        if (!strcmp(var, "$ACADVER"))
-        {
-            return true;
-        }
         if (!strcmp(var, "$ACADVER"))
         {
             return true;

@@ -104,9 +104,8 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
     QString formulaAngle = dialogTool->GetAngle();
     const quint32 basePointId = dialogTool->GetBasePointId();
 
-    VToolEndLine *point = nullptr;
-    point=Create(0, pointName, typeLine, lineColor, formulaLength, formulaAngle, basePointId, 5, 10, scene, doc, data,
-                 Document::FullParse, Source::FromGui);
+    VToolEndLine *point = Create(0, pointName, typeLine, lineColor, formulaLength, formulaAngle, 
+		                         basePointId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;

@@ -590,22 +590,10 @@ void DialogPatternXmlEdit::RemoveChangeStackElement(ChangesStackElement* elmt)
 
     if (changeStackRoot == elmt)
     {
-        if (elmt->newText != nullptr)
-        {
-            delete elmt->newText;
-        }
-        if (elmt->newValue != nullptr)
-        {
-            delete elmt->newValue;
-        }
-        if (elmt->oldText != nullptr)
-        {
-            delete elmt->oldText;
-        }
-        if (elmt->oldValue != nullptr)
-        {
-            delete elmt->oldValue;
-        }
+        delete elmt->newText;
+        delete elmt->newValue;
+        delete elmt->oldText;
+        delete elmt->oldValue;
         this->changeStackRoot = elmt->next;
         if (this->changeStackLast == elmt)
         {
@@ -627,22 +615,10 @@ void DialogPatternXmlEdit::RemoveChangeStackElement(ChangesStackElement* elmt)
         SCASSERT(index->next != nullptr);
         return;
     }
-    if (index->next->newText != nullptr)
-    {
-        delete index->next->newText;
-    }
-    if (index->next->newValue != nullptr)
-    {
-        delete index->next->newValue;
-    }
-    if (index->next->oldText != nullptr)
-    {
-        delete index->next->oldText;
-    }
-    if (index->next->oldValue != nullptr)
-    {
-        delete index->next->oldValue;
-    }
+    delete index->next->newText;
+    delete index->next->newValue;
+    delete index->next->oldText;
+    delete index->next->oldValue;
     index->next=index->next->next;
     if (this->changeStackLast == elmt)
     {
@@ -903,7 +879,7 @@ void DialogPatternXmlEdit::NameTextEdited(QString newtext)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternXmlEdit::ValueTextEdited(QString newtext)
+void DialogPatternXmlEdit::ValueTextEdited(QString newtext) //-V524
 {
     Q_UNUSED(newtext)
     //QMessageBox::information(this, "valueTextEdited", QString("%1").arg(newtext));
@@ -934,14 +910,8 @@ void DialogPatternXmlEdit::ClearStack()
     ChangesStackElement * tmp;
     while (changeStackRoot != nullptr)
     {
-        if (changeStackRoot->newText != nullptr)
-        {
-            delete changeStackRoot->newText;
-        }
-        if (changeStackRoot->newValue != nullptr)
-        {
-            delete changeStackRoot->newValue;
-        }
+        delete changeStackRoot->newText;
+        delete changeStackRoot->newValue;
         tmp=changeStackRoot;
         changeStackRoot=changeStackRoot->next;
         delete tmp;
@@ -1084,13 +1054,14 @@ void DialogPatternXmlEdit::ReadNodes(QDomNode dNode, VXMLTreeElement* root, VXML
             {
                 for (int i = 0; i < tNode.attributes().size(); i++)
                 {
-                    if ((tNode.attributes().item(i).nodeName() == "name")
+                    const QDomNode node = tNode.attributes().item(i);
+                    if ((node.nodeName() == "name")
                             && (refresh == false))
                     {
-                        ui->comboBox_Base_Selection->addItem(tNode.attributes().item(i).nodeValue(),
+                        ui->comboBox_Base_Selection->addItem(node.nodeValue(),
                                                              QVariant(rootBasesNum));
                         rootBases[rootBasesNum]=new VXMLTreeElement(
-                                    QString("Drawing %1").arg(tNode.attributes().item(i).nodeValue()),
+                                    QString("Drawing %1").arg(node.nodeValue()),
                                     VXMLTreeElement::TypeRoot, tNode, false);
                         rootBasesNum++;
                         //QStandardItem* rootNode = (QStandardItem*) rootBases[rootBasesNum]->invisibleRootItem();
@@ -1124,11 +1095,12 @@ void DialogPatternXmlEdit::ReadNodes(QDomNode dNode, VXMLTreeElement* root, VXML
                 tElement->SetTreeNodeValue(tNode.nodeValue());
             }
 
-            for (int i = 0; i < tNode.attributes().size(); i++)
+            const QDomNamedNodeMap attr = tNode.attributes();
+            for (int i = 0; i < attr.size(); i++)
             {
-                tElement2 = new VXMLTreeElement(tNode.attributes().item(i).nodeName(), VXMLTreeElement::TypeAttr,
+                tElement2 = new VXMLTreeElement(attr.item(i).nodeName(), VXMLTreeElement::TypeAttr,
                             tNode, false);
-                tElement2->SetTreeNodeValue(tNode.attributes().item(i).nodeValue());
+                tElement2->SetTreeNodeValue(attr.item(i).nodeValue());
                 tElement->appendRow(tElement2);
                 xmlmodel->appendchain(tElement2);
             }
@@ -1172,22 +1144,12 @@ void VXMLTreeView::appendchain(VXMLTreeElement* elmt)
     if (last == nullptr)
     { // first element
         current = new TreeElementchain;
-        if (current == nullptr)
-        {
-            SCASSERT(current != nullptr);
-            // TODO : throw exception
-        }
         current->elmt=elmt;
         current->next=nullptr;
         last=items=current;
         return;
     }
     TreeElementchain* temp= new TreeElementchain;
-    if (temp == nullptr)
-    {
-        SCASSERT(temp != nullptr);
-        // TODO : throw exception
-    }
     temp->elmt=elmt;
     temp->next=nullptr;
     last->next=temp;

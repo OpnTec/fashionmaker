@@ -65,9 +65,10 @@ TapePathPage::TapePathPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void TapePathPage::Apply()
 {
-    qApp->TapeSettings()->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
-    qApp->TapeSettings()->SetPathStandardMeasurements(pathTable->item(1, 1)->text());
-    qApp->TapeSettings()->SetPathTemplate(pathTable->item(2, 1)->text());
+    VTapeSettings *settings = qApp->TapeSettings();
+    settings->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
+    settings->SetPathStandardMeasurements(pathTable->item(1, 1)->text());
+    settings->SetPathTemplate(pathTable->item(2, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,24 +195,26 @@ void TapePathPage::InitTable()
     const QStringList tableHeader = QStringList() << tr("Type") << tr("Path");
     pathTable->setHorizontalHeaderLabels(tableHeader);
 
+    const VTapeSettings *settings = qApp->TapeSettings();
+
     {
         pathTable->setItem(0, 0, new QTableWidgetItem(tr("Individual measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->TapeSettings()->GetPathIndividualMeasurements());
-        item->setToolTip(qApp->TapeSettings()->GetPathIndividualMeasurements());
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathIndividualMeasurements());
+        item->setToolTip(settings->GetPathIndividualMeasurements());
         pathTable->setItem(0, 1, item);
     }
 
     {
         pathTable->setItem(1, 0, new QTableWidgetItem(tr("Standard measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->TapeSettings()->GetPathStandardMeasurements());
-        item->setToolTip(qApp->TapeSettings()->GetPathStandardMeasurements());
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathStandardMeasurements());
+        item->setToolTip(settings->GetPathStandardMeasurements());
         pathTable->setItem(1, 1, item);
     }
 
     {
         pathTable->setItem(2, 0, new QTableWidgetItem(tr("Templates")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->TapeSettings()->GetPathTemplate());
-        item->setToolTip(qApp->TapeSettings()->GetPathTemplate());
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathTemplate());
+        item->setToolTip(settings->GetPathTemplate());
         pathTable->setItem(2, 1, item);
     }
 

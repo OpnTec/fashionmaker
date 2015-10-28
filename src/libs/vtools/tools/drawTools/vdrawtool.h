@@ -128,8 +128,7 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, b
 
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
-    QAction *actionRemove = nullptr;
-    actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
     if (showRemove)
     {
         if (_referens > 1)

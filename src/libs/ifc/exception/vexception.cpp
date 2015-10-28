@@ -44,7 +44,7 @@
  */
 VException::VException(const QString &what):QException(), what(what), moreInfo(QString())
 {
-    Q_ASSERT_X(what.isEmpty() == false, Q_FUNC_INFO, "Error message is empty");
+    Q_ASSERT_X(not what.isEmpty(), Q_FUNC_INFO, "Error message is empty");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

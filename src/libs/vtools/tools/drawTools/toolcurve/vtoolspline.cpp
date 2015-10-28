@@ -139,9 +139,8 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     const qreal angle2 = dialogTool->GetAngle2();
     const qreal kCurve = dialogTool->GetKCurve();
     const QString color = dialogTool->GetColor();
-    VToolSpline *spl = nullptr;
-    spl = Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, color, scene, doc, data, Document::FullParse,
-                 Source::FromGui);
+    VToolSpline *spl = Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, color, scene, doc, data, 
+		                      Document::FullParse, Source::FromGui);
     if (spl != nullptr)
     {
         spl->dialog=dialogTool;

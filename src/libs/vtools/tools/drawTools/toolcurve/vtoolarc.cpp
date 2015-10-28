@@ -100,8 +100,8 @@ VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstr
     QString f1 = dialogTool->GetF1();
     QString f2 = dialogTool->GetF2();
     const QString color = dialogTool->GetColor();
-    VToolArc* point = nullptr;
-    point=Create(0, center, radius, f1, f2, color, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolArc* point = Create(0, center, radius, f1, f2, color, scene, doc, data, Document::FullParse, 
+		                     Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -344,12 +344,13 @@ void VToolArc::SetVisualization()
     {
         const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
         VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
-        SCASSERT(visual != nullptr)
+        SCASSERT(visual != nullptr);
 
+		const VTranslateVars *trVars = qApp->TrVars();
         visual->setPoint1Id(arc->GetCenter().id());
-        visual->setRadius(qApp->TrVars()->FormulaToUser(arc->GetFormulaRadius()));
-        visual->setF1(qApp->TrVars()->FormulaToUser(arc->GetFormulaF1()));
-        visual->setF2(qApp->TrVars()->FormulaToUser(arc->GetFormulaF2()));
+        visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius()));
+        visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1()));
+        visual->setF2(trVars->FormulaToUser(arc->GetFormulaF2()));
         visual->RefreshGeometry();
     }
 }

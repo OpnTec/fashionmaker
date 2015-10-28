@@ -53,7 +53,7 @@ VSplinePath::~VSplinePath()
 //---------------------------------------------------------------------------------------------------------------------
 void VSplinePath::append(const VSplinePoint &point)
 {
-    if (d->path.size() > 0 && d->path.last().P().toQPointF() == point.P().toQPointF())
+    if (d->path.size() > 0 && d->path.last().P().toQPointF() == point.P().toQPointF()) //-V807
     {
         return;
     }
@@ -92,8 +92,9 @@ VSpline VSplinePath::GetSpline(qint32 index) const
     {
         throw VException(tr("This spline does not exist."));
     }
-    VSpline spl(d->path.at(index-1).P(), d->path.at(index).P(), d->path.at(index-1).Angle2(),
-                d->path.at(index).Angle1(), d->path.at(index-1).KAsm2(), d->path.at(index).KAsm1(), d->kCurve);
+	const VSplinePoint &p1 = d->path.at(index-1);
+	const VSplinePoint &p2 = d->path.at(index);
+    VSpline spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), d->kCurve);
     return spl;
 }
 
@@ -103,8 +104,9 @@ QPainterPath VSplinePath::GetPath(PathDirection direction) const
     QPainterPath painterPath;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-        VSpline spl(d->path.at(i-1).P(), d->path.at(i).P(), d->path.at(i-1).Angle2(), d->path.at(i).Angle1(),
-                    d->path.at(i-1).KAsm2(), d->path.at(i).KAsm1(), d->kCurve);
+		const VSplinePoint &p1 = d->path.at(i-1);
+		const VSplinePoint &p2 = d->path.at(i);
+        VSpline spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), d->kCurve);
         painterPath.addPath(spl.GetPath(direction));
     }
     return painterPath;
@@ -116,8 +118,9 @@ QVector<QPointF> VSplinePath::GetPoints() const
     QVector<QPointF> pathPoints;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-        VSpline spl(d->path.at(i-1).P(), d->path.at(i).P(), d->path.at(i-1).Angle2(), d->path.at(i).Angle1(),
-                    d->path.at(i-1).KAsm2(), d->path.at(i).KAsm1(), d->kCurve);
+		const VSplinePoint &p1 = d->path.at(i-1);
+		const VSplinePoint &p2 = d->path.at(i);
+        VSpline spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), d->kCurve);
         pathPoints += spl.GetPoints();
     }
     return pathPoints;
@@ -129,8 +132,10 @@ qreal VSplinePath::GetLength() const
     qreal length = 0;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-        VSpline spl(d->path.at(i-1).P(), d->path.at(i).P(), d->path.at(i-1).Angle2(), d->path.at(i).Angle1(),
-                    d->path.at(i-1).KAsm2(), d->path.at(i).KAsm1(), d->kCurve);
+		const VSplinePoint &p1 = d->path.at(i-1);
+		const VSplinePoint &p2 = d->path.at(i);
+        VSpline spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(),
+                    p1.KAsm2(), p2.KAsm1(), d->kCurve);
         length += spl.GetLength();
     }
     return length;
@@ -217,8 +222,10 @@ QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF
     fullLength = 0;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-        VSpline spl = VSpline(d->path.at(i-1).P(), d->path.at(i).P(), d->path.at(i-1).Angle2(), d->path.at(i).Angle1(),
-                              d->path.at(i-1).KAsm2(), d->path.at(i).KAsm1(), d->kCurve);
+		const VSplinePoint &point1 = d->path.at(i-1);
+		const VSplinePoint &point2 = d->path.at(i);
+        VSpline spl = VSpline(point1.P(), point2.P(), point1.Angle2(), point2.Angle1(), point1.KAsm2(), 
+			                  point2.KAsm1(), d->kCurve);
         fullLength += spl.GetLength();
         if (fullLength > length)
         {
@@ -236,8 +243,9 @@ int VSplinePath::Segment(const QPointF &p) const
     int index = -1;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-        VSpline spl = VSpline(d->path.at(i-1).P(), d->path.at(i).P(), d->path.at(i-1).Angle2(), d->path.at(i).Angle1(),
-                              d->path.at(i-1).KAsm2(), d->path.at(i).KAsm1(), d->kCurve);
+		const VSplinePoint &p1 = d->path.at(i-1);
+		const VSplinePoint &p2 = d->path.at(i);
+        VSpline spl = VSpline(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), d->kCurve);
 
         const qreal t = spl.ParamT(p);
 

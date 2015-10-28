@@ -58,17 +58,18 @@ PatternPage::PatternPage(QWidget *parent):
 //---------------------------------------------------------------------------------------------------------------------
 void PatternPage::Apply()
 {
-    qApp->ValentinaSettings()->SetUser(userName->text());
+    VSettings *settings = qApp->ValentinaSettings();
+    settings->SetUser(userName->text());
 
     // Scene antialiasing
-    qApp->ValentinaSettings()->SetGraphicalOutput(graphOutputCheck->isChecked());
+    settings->SetGraphicalOutput(graphOutputCheck->isChecked());
     qApp->getSceneView()->setRenderHint(QPainter::Antialiasing, graphOutputCheck->isChecked());
     qApp->getSceneView()->setRenderHint(QPainter::SmoothPixmapTransform, graphOutputCheck->isChecked());
 
     /* Maximum number of commands in undo stack may only be set when the undo stack is empty, since setting it on a
      * non-empty stack might delete the command at the current index. Calling setUndoLimit() on a non-empty stack
      * prints a warning and does nothing.*/
-    qApp->ValentinaSettings()->SetUndoCount(undoCount->value());
+    settings->SetUndoCount(undoCount->value());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

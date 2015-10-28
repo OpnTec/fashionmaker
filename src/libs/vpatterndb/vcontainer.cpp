@@ -177,7 +177,7 @@ quint32 VContainer::AddGObject(VGObject *obj)
  * @param detail new detail
  * @return return id of new detail in container
  */
-quint32 VContainer::AddDetail(VDetail detail)
+quint32 VContainer::AddDetail(const VDetail &detail)
 {
     quint32 id = getNextId();
     d->details[id] = detail;
@@ -224,7 +224,7 @@ void VContainer::UpdateId(quint32 newId)
 template <typename val>
 void VContainer::UpdateObject(QHash<quint32, val> &obj, const quint32 &id, val point)
 {
-    Q_ASSERT_X(id > NULL_ID, Q_FUNC_INFO, "id = 0");
+    Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
     SCASSERT(point.isNull() == false);
     point->setId(id);
     if (d->gObjects.contains(id))
@@ -276,7 +276,7 @@ void VContainer::ClearForFullParse()
 void VContainer::ClearGObjects()
 {
     QHash<quint32, QSharedPointer<VGObject> >::iterator i;
-    for (i = d->gObjects.begin(); i != d->gObjects.end(); ++i)
+    for (i = d->gObjects.begin(); i != d->gObjects.end(); ++i) //-V807
     {
         i.value().clear();
     }
@@ -286,7 +286,7 @@ void VContainer::ClearGObjects()
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearCalculationGObjects()
 {
-    if (not d->gObjects.isEmpty())
+    if (not d->gObjects.isEmpty()) //-V807
     {
         QVector<quint32> keys;
         QHash<quint32, QSharedPointer<VGObject> >::iterator i;
@@ -312,7 +312,7 @@ void VContainer::ClearCalculationGObjects()
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearVariables(const VarType &type)
 {
-    if (d->variables.size()>0)
+    if (d->variables.size()>0) //-V807
     {
         if (type == VarType::Unknown)
         {
@@ -421,7 +421,7 @@ void VContainer::UpdateGObject(quint32 id, VGObject* obj)
  */
 void VContainer::UpdateDetail(quint32 id, const VDetail &detail)
 {
-    Q_ASSERT_X(id > NULL_ID, Q_FUNC_INFO, "id = 0");
+    Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
     d->details[id] = detail;
     UpdateId(id);
 }

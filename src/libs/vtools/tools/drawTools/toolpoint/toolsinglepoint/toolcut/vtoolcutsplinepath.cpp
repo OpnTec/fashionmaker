@@ -97,9 +97,8 @@ VToolCutSplinePath* VToolCutSplinePath::Create(DialogTool *dialog, VMainGraphics
     QString formula = dialogTool->GetFormula();
     const quint32 splinePathId = dialogTool->getSplinePathId();
     const QString color = dialogTool->GetColor();
-    VToolCutSplinePath* point = nullptr;
-    point = Create(0, pointName, formula, splinePathId, 5, 10, color, scene, doc, data, Document::FullParse,
-                   Source::FromGui);
+    VToolCutSplinePath* point = Create(0, pointName, formula, splinePathId, 5, 10, color, scene, doc, data, Document::FullParse,
+                                       Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;

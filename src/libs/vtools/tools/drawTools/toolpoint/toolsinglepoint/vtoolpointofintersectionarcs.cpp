@@ -68,9 +68,8 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(DialogTool *d
     const quint32 secondArcId = dialogTool->GetSecondArcId();
     const CrossCirclesPoint pType = dialogTool->GetCrossArcPoint();
     const QString pointName = dialogTool->getPointName();
-    VToolPointOfIntersectionArcs *point = nullptr;
-    point = Create(0, pointName, firstArcId, secondArcId, pType, 5, 10, scene, doc, data, Document::FullParse,
-                   Source::FromGui);
+    VToolPointOfIntersectionArcs *point = Create(0, pointName, firstArcId, secondArcId, pType, 5, 10, scene, doc, 
+		                                         data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -126,19 +125,20 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const quint32
 QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType)
 {
     QPointF p1, p2;
-    const int res = VGObject::IntersectionCircles(arc1->GetCenter().toQPointF(), arc1->GetRadius(),
-                                            arc2->GetCenter().toQPointF(), arc2->GetRadius(), p1, p2);
+	const QPointF centerArc1 = arc1->GetCenter().toQPointF();
+	const QPointF centerArc2 = arc2->GetCenter().toQPointF();
+    const int res = VGObject::IntersectionCircles(centerArc1, arc1->GetRadius(), centerArc2, arc2->GetRadius(), p1, p2);
 
-    QLineF r1Arc1(arc1->GetCenter().toQPointF(), p1);
+    QLineF r1Arc1(centerArc1, p1);
     r1Arc1.setLength(r1Arc1.length()+10);
 
-    QLineF r1Arc2(arc2->GetCenter().toQPointF(), p1);
+    QLineF r1Arc2(centerArc2, p1);
     r1Arc2.setLength(r1Arc2.length()+10);
 
-    QLineF r2Arc1(arc1->GetCenter().toQPointF(), p2);
+    QLineF r2Arc1(centerArc1, p2);
     r2Arc1.setLength(r2Arc1.length()+10);
 
-    QLineF r2Arc2(arc2->GetCenter().toQPointF(), p2);
+    QLineF r2Arc2(centerArc2, p2);
     r2Arc2.setLength(r2Arc2.length()+10);
 
     switch(res)
@@ -250,7 +250,7 @@ CrossCirclesPoint VToolPointOfIntersectionArcs::GetCrossCirclesPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionArcs::SetCrossCirclesPoint(CrossCirclesPoint &value)
+void VToolPointOfIntersectionArcs::SetCrossCirclesPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
 

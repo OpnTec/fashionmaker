@@ -68,9 +68,8 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(DialogTool *dia
     const quint32 tangentPointId = dialogTool->GetTangentPointId();
     const CrossCirclesPoint pType = dialogTool->GetCrossCirclesPoint();
     const QString pointName = dialogTool->getPointName();
-    VToolPointFromArcAndTangent *point = nullptr;
-    point = Create(0, pointName, arcId, tangentPointId, pType, 5, 10, scene, doc, data, Document::FullParse,
-                   Source::FromGui);
+    VToolPointFromArcAndTangent *point = Create(0, pointName, arcId, tangentPointId, pType, 5, 10, scene, doc, 
+		                                        data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -244,7 +243,7 @@ CrossCirclesPoint VToolPointFromArcAndTangent::GetCrossCirclesPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::SetCrossCirclesPoint(CrossCirclesPoint &value)
+void VToolPointFromArcAndTangent::SetCrossCirclesPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
 

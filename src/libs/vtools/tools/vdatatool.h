@@ -46,7 +46,6 @@ class VDataTool : public QObject
 public:
     explicit VDataTool(VContainer *data, QObject *parent = nullptr);
     virtual ~VDataTool() Q_DECL_OVERRIDE;
-    VDataTool             &operator= (const VDataTool &tool);
     VContainer            getData() const;
     void                  setData(const VContainer *value);
     virtual quint32       referens() const;
@@ -58,6 +57,8 @@ protected:
 
     /** @brief _referens keep count tools what use this tool. If value more than 1 you can't delete tool. */
     quint32                _referens;
+private:
+    Q_DISABLE_COPY(VDataTool)
 };
 
 //---------------------------------------------------------------------------------------------------------------------

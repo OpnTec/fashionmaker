@@ -132,8 +132,7 @@ VToolSplinePath* VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene 
     {
         doc->IncrementReferens((*path)[i].P().id());
     }
-    VToolSplinePath* spl = nullptr;
-    spl = Create(0, path, color, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolSplinePath* spl = Create(0, path, color, scene, doc, data, Document::FullParse, Source::FromGui);
     if (spl != nullptr)
     {
         spl->dialog=dialogTool;

@@ -50,7 +50,7 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
 {
     this->typeLine = typeLine;
     this->lineColor = lineColor;
-    Q_ASSERT_X(basePointId > 0, Q_FUNC_INFO, "basePointId <= 0");
+    Q_ASSERT_X(basePointId != 0, Q_FUNC_INFO, "basePointId == 0"); //-V654 //-V712
     QPointF point1 = data->GeometricObject<VPointF>(basePointId)->toQPointF();
     QPointF point2 = data->GeometricObject<VPointF>(id)->toQPointF();
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);

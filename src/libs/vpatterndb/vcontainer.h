@@ -49,7 +49,7 @@
     #pragma GCC diagnostic ignored "-Weffc++"
 #endif
 
-class VContainerData : public QSharedData
+class VContainerData : public QSharedData //-V690
 {
 public:
 
@@ -117,7 +117,7 @@ public:
     static void        UpdateId(quint32 newId);
 
     quint32            AddGObject(VGObject *obj);
-    quint32            AddDetail(VDetail detail);
+    quint32            AddDetail(const VDetail &detail);
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
     void               AddArc(const quint32 &arcId, const quint32 &parentId = 0);
 

@@ -97,7 +97,7 @@ private:
     void InitVariables();
 
     template <class key, class val>
-    void ShowVariable(const QMap<key, val> var);
+    void ShowVariable(const QMap<key, val> &var);
 
     void SetDescription(const QString &name, qreal value, const QString &unit, const QString &description);
 };

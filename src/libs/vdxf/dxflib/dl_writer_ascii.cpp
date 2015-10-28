@@ -72,7 +72,7 @@ void DL_WriterA::dxfReal(int gc, double value) const
     // Cut away those zeros at the end:
     bool dot = false;
     int end = -1;
-    for (quint32 i=0; i<strlen(str); ++i)
+    for (quint32 i=0, sz = strlen(str); i<sz; ++i)
     {
         if (str[i]=='.')
         {

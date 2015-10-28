@@ -423,7 +423,7 @@ void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, co
  * @param var container with variables
  */
 template <class key, class val>
-void DialogEditWrongFormula::ShowVariable(const QMap<key, val> var)
+void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
 {
     ui->listWidget->blockSignals(true);
     ui->listWidget->clear();

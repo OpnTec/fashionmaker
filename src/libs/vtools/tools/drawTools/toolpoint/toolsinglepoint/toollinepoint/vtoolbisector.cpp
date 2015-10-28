@@ -137,9 +137,8 @@ VToolBisector* VToolBisector::Create(DialogTool *dialog, VMainGraphicsScene *sce
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
-    VToolBisector *point = nullptr;
-    point=Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, lineColor, pointName, 5, 10, scene,
-                 doc, data, Document::FullParse, Source::FromGui);
+    VToolBisector *point = Create(0, formula, firstPointId, secondPointId, thirdPointId, typeLine, lineColor, 
+		                          pointName, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;

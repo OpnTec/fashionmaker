@@ -161,7 +161,7 @@ CrossCirclesPoint DialogPointFromCircleAndTangent::GetCrossCirclesPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointFromCircleAndTangent::SetCrossCirclesPoint(CrossCirclesPoint &p)
+void DialogPointFromCircleAndTangent::SetCrossCirclesPoint(const CrossCirclesPoint &p)
 {
     const qint32 index = ui->comboBoxResult->findData(static_cast<int>(p));
     if (index != -1)

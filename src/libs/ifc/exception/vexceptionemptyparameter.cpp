@@ -41,8 +41,8 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QS
                                                    const QDomElement &domElement)
     : VException(what), name(name), tagText(QString()), tagName(QString()), lineNumber(-1)
 {
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
-    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "Parameter name is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "Parameter name is empty");
     QTextStream stream(&tagText);
     domElement.save(stream, 4);
     tagName = domElement.tagName();

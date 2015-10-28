@@ -67,23 +67,24 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void ConfigurationPage::Apply()
 {
-    qApp->ValentinaSettings()->SetAutosaveState(autoSaveCheck->isChecked());
-    qApp->ValentinaSettings()->SetAutosaveTime(autoTime->value());
+    VSettings *settings = qApp->ValentinaSettings();
+    settings->SetAutosaveState(autoSaveCheck->isChecked());
+    settings->SetAutosaveTime(autoTime->value());
 
     QTimer *autoSaveTimer = qApp->getAutoSaveTimer();
     SCASSERT(autoSaveTimer);
 
     autoSaveCheck->isChecked() ? autoSaveTimer->start(autoTime->value()*60000) : autoSaveTimer->stop();
 
-    qApp->ValentinaSettings()->SetOsSeparator(osOptionCheck->isChecked());
-    qApp->ValentinaSettings()->SetSendReportState(sendReportCheck->isChecked());
-    qApp->ValentinaSettings()->SetConfirmItemDelete(askPointDeletionCheck->isChecked());
-    qApp->ValentinaSettings()->SetToolBarStyle(toolBarStyleCheck->isChecked());
+    settings->SetOsSeparator(osOptionCheck->isChecked());
+    settings->SetSendReportState(sendReportCheck->isChecked());
+    settings->SetConfirmItemDelete(askPointDeletionCheck->isChecked());
+    settings->SetToolBarStyle(toolBarStyleCheck->isChecked());
 
     if (langChanged)
     {
         const QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
-        qApp->ValentinaSettings()->SetLocale(locale);
+        settings->SetLocale(locale);
         langChanged = false;
         const QString text = tr("Setup user interface language updated and will be used the next time start") + " " +
                                 QApplication::applicationName();
@@ -92,7 +93,7 @@ void ConfigurationPage::Apply()
     if (this->unitChanged)
     {
         const QString unit = qvariant_cast<QString>(this->unitCombo->itemData(this->unitCombo->currentIndex()));
-        qApp->ValentinaSettings()->SetUnit(unit);
+        settings->SetUnit(unit);
         this->unitChanged = false;
         const QString text = tr("Default unit updated and will be used the next pattern creation");
         QMessageBox::information(this, QApplication::applicationName(), text);
@@ -100,7 +101,7 @@ void ConfigurationPage::Apply()
     if (labelLangChanged)
     {
         const QString locale = qvariant_cast<QString>(labelCombo->itemData(labelCombo->currentIndex()));
-        qApp->ValentinaSettings()->SetLabelLanguage(locale);
+        settings->SetLabelLanguage(locale);
         labelLangChanged = false;
     }
 }
@@ -181,7 +182,8 @@ QGroupBox *ConfigurationPage::LangGroup()
     }
 
     // set default translators and language checked
-    qint32 index = langCombo->findData(qApp->ValentinaSettings()->GetLocale());
+    const VSettings *settings = qApp->ValentinaSettings();
+    qint32 index = langCombo->findData(settings->GetLocale());
     if (index != -1)
     {
         langCombo->setCurrentIndex(index);
@@ -197,7 +199,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     QLabel *separatorLabel = new QLabel(tr("Decimal separator parts"));
 
     osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
-    osOptionCheck->setChecked(qApp->ValentinaSettings()->GetOsSeparator());
+    osOptionCheck->setChecked(settings->GetOsSeparator());
 
     QHBoxLayout *separatorLayout = new QHBoxLayout;
     separatorLayout->addWidget(separatorLabel);
@@ -212,7 +214,7 @@ QGroupBox *ConfigurationPage::LangGroup()
     this->unitCombo->addItem(tr("Inches"), "in");
 
     // set default unit
-    qint32 indexUnit = this->unitCombo->findData(qApp->ValentinaSettings()->GetUnit());
+    qint32 indexUnit = this->unitCombo->findData(settings->GetUnit());
     if (indexUnit != -1)
     {
         this->unitCombo->setCurrentIndex(indexUnit);
@@ -231,7 +233,7 @@ QGroupBox *ConfigurationPage::LangGroup()
 
     SetLabelComboBox(VApplication::LabelLanguages());
 
-    index = labelCombo->findData(qApp->ValentinaSettings()->GetLabelLanguage());
+    index = labelCombo->findData(settings->GetLabelLanguage());
     if (index != -1)
     {
         labelCombo->setCurrentIndex(index);

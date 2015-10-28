@@ -37,7 +37,7 @@
 VExceptionConversionError::VExceptionConversionError(const QString &what, const QString &str)
     :VException(what), str(str)
 {
-    Q_ASSERT_X(str.isEmpty() == false, Q_FUNC_INFO, "Error converting string is empty");
+    Q_ASSERT_X(not str.isEmpty(), Q_FUNC_INFO, "Error converting string is empty");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

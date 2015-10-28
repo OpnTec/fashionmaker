@@ -94,8 +94,8 @@ VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     QString formula = dialogTool->GetFormula();
     const quint32 arcId = dialogTool->getArcId();
     const QString color = dialogTool->GetColor();
-    VToolCutArc* point = nullptr;
-    point=Create(0, pointName, formula, arcId, 5, 10, color, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolCutArc* point = Create(0, pointName, formula, arcId, 5, 10, color, scene, doc, data, Document::FullParse, 
+		                        Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;

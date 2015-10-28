@@ -48,7 +48,7 @@ qreal VisLine::CorrectAngle(const qreal &angle) const
     qreal ang = angle;
     if (angle > 360)
     {
-        ang = angle - 360 * qFloor(angle/360);
+        ang = angle - 360.0 * qFloor(angle/360);
     }
 
     switch (qFloor((qAbs(ang)+22.5)/45))

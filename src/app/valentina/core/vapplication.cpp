@@ -307,7 +307,7 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
     }
     catch (const VExceptionObjectError &e)
     {
-        qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")),
+        qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }

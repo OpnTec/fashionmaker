@@ -158,7 +158,7 @@ void DialogIncrements::FillIncrements()
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-void DialogIncrements::FillTable(const QMap<QString, T> varTable, QTableWidget *table)
+void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget *table)
 {
     SCASSERT(table != nullptr);
 

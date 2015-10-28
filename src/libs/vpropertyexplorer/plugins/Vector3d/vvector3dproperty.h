@@ -27,7 +27,7 @@
 namespace VPE
 {
 
-struct VPROPERTYEXPLORERSHARED_EXPORT Vector3D
+struct VPROPERTYEXPLORERSHARED_EXPORT Vector3D //-V690
 {
 public:
     Vector3D()

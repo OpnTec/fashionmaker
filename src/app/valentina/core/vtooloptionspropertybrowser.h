@@ -75,7 +75,7 @@ private:
     void SetPointName2(const QString &name);
 
     template<class Tool>
-    void SetCrossCirclesPoint(const QVariant value);
+    void SetCrossCirclesPoint(const QVariant &value);
 
     template<class Tool>
     void AddPropertyPointName(Tool *i, const QString &propertyName);

@@ -203,8 +203,8 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
  */
 quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
-    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null"); //-V591
 
     bool ok = false;
     QString parametr;
@@ -233,8 +233,8 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
 //---------------------------------------------------------------------------------------------------------------------
 bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
-    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     QString parametr;
     bool val = true;
@@ -279,8 +279,8 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 QString VDomDocument::GetParametrString(const QDomElement &domElement, const QString &name,
                                         const QString &defValue) const
 {
-    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     const QString parameter = domElement.attribute(name, defValue);
     if (parameter.isEmpty())
     {
@@ -305,8 +305,8 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
  */
 qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
-    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     bool ok = false;
     qreal param = 0;
@@ -338,7 +338,7 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
  */
 quint32 VDomDocument::GetParametrId(const QDomElement &domElement) const
 {
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     quint32 id = 0;
 

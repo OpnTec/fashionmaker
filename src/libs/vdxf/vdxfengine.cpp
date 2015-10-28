@@ -296,7 +296,8 @@ void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
     QPointF startPoint = matrix.map(p);
     double rotationAngle = atan(matrix.m12()/matrix.m11());
 
-    int textSize = textItem.font().pixelSize() == -1 ? textItem.font().pointSize() : textItem.font().pixelSize();
+    const QFont f = textItem.font();
+    int textSize = f.pixelSize() == -1 ? f.pointSize() : f.pixelSize();
     dxf->writeText(
                 *dw,
                 DL_TextData(startPoint.x(),
@@ -311,7 +312,7 @@ void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
                             0, // Horizontal justification (0 = Left (default), 1 = Center, 2 = Right,)
                             0, // Vertical justification (0 = Baseline (default), 1 = Bottom, 2 = Middle, 3= Top)
                             textItem.text().toUtf8().constData(),  // text data
-                            textItem.font().family().toUtf8().constData(), // font
+                            f.family().toUtf8().constData(), // font
                             -rotationAngle
                             ),
                 DL_Attributes("0", getPenColor(), state->pen().width(), getPenStyle(), 1.0));
@@ -341,7 +342,7 @@ QSize VDxfEngine::getSize() const
  //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::setSize(const QSize &value)
 {
-    Q_ASSERT(!isActive());
+    Q_ASSERT(not isActive());
     size = value;
 }
 
@@ -354,7 +355,7 @@ int VDxfEngine::getResolution() const
  //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::setResolution(int value)
 {
-    Q_ASSERT(!isActive());
+    Q_ASSERT(not isActive());
     resolution = value;
 }
 
@@ -367,7 +368,7 @@ QString VDxfEngine::getFileName() const
  //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::setFileName(const QString &value)
 {
-    Q_ASSERT(!isActive());
+    Q_ASSERT(not isActive());
     fileName = value;
 }
 
@@ -471,13 +472,13 @@ int VDxfEngine::getPenColor()
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::setMeasurement(const VarMeasurement &var)
 {
-    Q_ASSERT(!isActive());
+    Q_ASSERT(not isActive());
     varMeasurement = var;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::setInsunits(const VarInsunits &var)
 {
-    Q_ASSERT(!isActive());
+    Q_ASSERT(not isActive());
     varInsunits = var;
 }

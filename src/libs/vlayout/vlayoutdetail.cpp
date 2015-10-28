@@ -164,22 +164,23 @@ void VLayoutDetail::Mirror(const QLineF &edge)
     const QLineF axis = QLineF(edge.x2(), edge.y2(), edge.x2() + 100, edge.y2()); // Ox axis
 
     const qreal angle = edge.angleTo(axis);
+	const QPointF p2 = edge.p2();
     QTransform m;
-    m.translate(edge.p2().x(), edge.p2().y());
+    m.translate(p2.x(), p2.y());
     m.rotate(-angle);
-    m.translate(-edge.p2().x(), -edge.p2().y());
+    m.translate(-p2.x(), -p2.y());
     d->matrix *= m;
 
     m.reset();
-    m.translate(edge.p2().x(), edge.p2().y());
+    m.translate(p2.x(), p2.y());
     m.scale(m.m11(), m.m22()*-1);
-    m.translate(-edge.p2().x(), -edge.p2().y());
+    m.translate(-p2.x(), -p2.y());
     d->matrix *= m;
 
     m.reset();
-    m.translate(edge.p2().x(), edge.p2().y());
+    m.translate(p2.x(), p2.y());
     m.rotate(-(360-angle));
-    m.translate(-edge.p2().x(), -edge.p2().y());
+    m.translate(-p2.x(), -p2.y());
     d->matrix *= m;
 
     d->mirror = !d->mirror;
@@ -214,8 +215,9 @@ QLineF VLayoutDetail::Edge(int i) const
     if (d->mirror)
     {
         const int oldI1 = i1;
-        i1 = (d->layoutAllowence.size()-1) - i2;
-        i2 = (d->layoutAllowence.size()-1) - oldI1;
+		const int size = d->layoutAllowence.size()-1; //-V807
+        i1 = size - i2;
+        i2 = size - oldI1;
         return QLineF(d->matrix.map(d->layoutAllowence.at(i2)), d->matrix.map(d->layoutAllowence.at(i1)));
     }
     else
@@ -280,7 +282,7 @@ bool VLayoutDetail::isNull() const
 //---------------------------------------------------------------------------------------------------------------------
 qint64 VLayoutDetail::Square() const
 {
-    if (d->layoutAllowence.isEmpty())
+    if (d->layoutAllowence.isEmpty()) //-V807
     {
         return 0;
     }

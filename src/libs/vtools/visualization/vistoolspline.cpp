@@ -39,7 +39,7 @@ VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
       angle2(EMPTY_ANGLE), kAsm1(1), kAsm2(1), kCurve(1)
 {
     lineP1 = InitPoint(supportColor, this);
-    lineP4 = InitPoint(supportColor, this);
+    lineP4 = InitPoint(supportColor, this); //-V656
     line = InitItem<QGraphicsLineItem>(mainColor, this);
 }
 

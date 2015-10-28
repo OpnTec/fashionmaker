@@ -62,11 +62,12 @@ PathPage::PathPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void PathPage::Apply()
 {
-    qApp->ValentinaSettings()->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
-    qApp->ValentinaSettings()->SetPathStandardMeasurements(pathTable->item(1, 1)->text());
-    qApp->ValentinaSettings()->SetPathPattern(pathTable->item(2, 1)->text());
-    qApp->ValentinaSettings()->SetPathLayout(pathTable->item(3, 1)->text());
-    qApp->ValentinaSettings()->SetPathTemplate(pathTable->item(4, 1)->text());
+    VSettings *settings = qApp->ValentinaSettings();
+    settings->SetPathIndividualMeasurements(pathTable->item(0, 1)->text());
+    settings->SetPathStandardMeasurements(pathTable->item(1, 1)->text());
+    settings->SetPathPattern(pathTable->item(2, 1)->text());
+    settings->SetPathLayout(pathTable->item(3, 1)->text());
+    settings->SetPathTemplate(pathTable->item(4, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -187,39 +188,40 @@ void PathPage::InitTable()
 
     QStringList tableHeader = QStringList() << tr("Type") << tr("Path");
     pathTable->setHorizontalHeaderLabels(tableHeader);
+    const VSettings *settings = qApp->ValentinaSettings();
 
     {
         pathTable->setItem(0, 0, new QTableWidgetItem(tr("Individual measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathIndividualMeasurements());
-        item->setToolTip(qApp->ValentinaSettings()->GetPathIndividualMeasurements());
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathIndividualMeasurements());
+        item->setToolTip(settings->GetPathIndividualMeasurements());
         pathTable->setItem(0, 1, item);
     }
 
     {
         pathTable->setItem(1, 0, new QTableWidgetItem(tr("Standard measurements")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathStandardMeasurements());
-        item->setToolTip(qApp->ValentinaSettings()->GetPathStandardMeasurements());
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathStandardMeasurements());
+        item->setToolTip(settings->GetPathStandardMeasurements());
         pathTable->setItem(1, 1, item);
     }
 
     {
         pathTable->setItem(2, 0, new QTableWidgetItem(tr("Patterns")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathPattern());
-        item->setToolTip(qApp->ValentinaSettings()->GetPathPattern());
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathPattern());
+        item->setToolTip(settings->GetPathPattern());
         pathTable->setItem(2, 1, item);
     }
 
     {
         pathTable->setItem(3, 0, new QTableWidgetItem(tr("Layout")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathLayout());
-        item->setToolTip(qApp->ValentinaSettings()->GetPathLayout());
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathLayout());
+        item->setToolTip(settings->GetPathLayout());
         pathTable->setItem(3, 1, item);
     }
 
     {
         pathTable->setItem(4, 0, new QTableWidgetItem(tr("Templates")));
-        QTableWidgetItem *item = new QTableWidgetItem(qApp->ValentinaSettings()->GetPathTemplate());
-        item->setToolTip(qApp->ValentinaSettings()->GetPathTemplate());
+        QTableWidgetItem *item = new QTableWidgetItem(settings->GetPathTemplate());
+        item->setToolTip(settings->GetPathTemplate());
         pathTable->setItem(4, 1, item);
     }
 

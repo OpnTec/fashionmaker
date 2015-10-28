@@ -591,7 +591,7 @@ void VToolOptionsPropertyBrowser::SetPointName2(const QString &name)
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
-void VToolOptionsPropertyBrowser::SetCrossCirclesPoint(const QVariant value)
+void VToolOptionsPropertyBrowser::SetCrossCirclesPoint(const QVariant &value)
 {
     if (Tool *i = qgraphicsitem_cast<Tool *>(currentItem))
     {

@@ -236,31 +236,29 @@ void DialogMDataBase::UpdateChecks(QTreeWidgetItem *item, int column)
     }
     else if (item->childCount() == 0 || column == -1)
     {
-        if (item->parent() == nullptr)
+        QTreeWidgetItem *parent = item->parent();
+        if (parent == nullptr)
         {
             return;
         }
-        for (int j = 0; j < item->parent()->childCount(); ++j)
+        for (int j = 0; j < parent->childCount(); ++j)
         {
-            if (j != item->parent()->indexOfChild(item)
-                    && item->checkState(0) != item->parent()->child(j)->checkState(0))
+            if (j != parent->indexOfChild(item)
+                    && item->checkState(0) != parent->child(j)->checkState(0))
             {
                 diff = true;
             }
         }
         if (diff)
         {
-            item->parent()->setCheckState(0, Qt::PartiallyChecked);
+            parent->setCheckState(0, Qt::PartiallyChecked);
         }
         else
         {
-            item->parent()->setCheckState(0, item->checkState(0));
+            parent->setCheckState(0, item->checkState(0));
         }
 
-        if (item->parent() != nullptr)
-        {
-            UpdateChecks(item->parent(), -1);
-        }
+        UpdateChecks(parent, -1);
     }
 }
 
@@ -286,7 +284,8 @@ void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
     }
 
     const QString name = item->data(0, Qt::UserRole).toString();
-    const QString number = qApp->TrVars()->MNumber(name);
+    const VTranslateVars *trv = qApp->TrVars();
+    const QString number = trv->MNumber(name);
     const QString iconPath = QString("://diagrams/%1.png").arg(MapDiagrams(number));
 
     QString text = QString("<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
@@ -296,8 +295,8 @@ void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
                            "%5</p>")
             .arg(iconPath)
             .arg(number)
-            .arg(qApp->TrVars()->GuiText(name))
-            .arg(qApp->TrVars()->Description(name));
+            .arg(trv->GuiText(name))
+            .arg(trv->Description(name));
 
     ui->textEdit->setHtml(text);
 }

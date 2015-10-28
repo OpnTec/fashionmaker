@@ -98,9 +98,8 @@ VToolNormal* VToolNormal::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
     const qreal angle = dialogTool->GetAngle();
-    VToolNormal *point = nullptr;
-    point=Create(0, formula, firstPointId, secondPointId, typeLine, lineColor, pointName, angle, 5, 10, scene, doc,
-                 data, Document::FullParse, Source::FromGui);
+    VToolNormal *point = Create(0, formula, firstPointId, secondPointId, typeLine, lineColor, pointName, angle, 5, 10, 
+		                        scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;

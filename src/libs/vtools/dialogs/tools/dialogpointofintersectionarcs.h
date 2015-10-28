@@ -53,7 +53,7 @@ public:
     void           SetSecondArcId(const quint32 &value);
 
     CrossCirclesPoint GetCrossArcPoint() const;
-    void              SetCrossArcPoint(CrossCirclesPoint &p);
+    void              SetCrossArcPoint(const CrossCirclesPoint &p);
 
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;

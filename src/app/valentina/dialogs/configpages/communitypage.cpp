@@ -57,17 +57,18 @@ CommunityPage::CommunityPage(QWidget *parent):
 //---------------------------------------------------------------------------------------------------------------------
 void CommunityPage::Apply()
 {
-    qApp->ValentinaSettings()->SetServer(this->server->text());
-    qApp->ValentinaSettings()->SetServerSecure(this->secureComm->isChecked());
-    qApp->ValentinaSettings()->SetProxy(this->useProxy->isChecked());
-    qApp->ValentinaSettings()->SetProxyAddress(this->proxyAddress->text());
-    qApp->ValentinaSettings()->SetProxyPort(this->proxyPort->text());
-    qApp->ValentinaSettings()->SetProxyUser(this->proxyUser->text());
-    qApp->ValentinaSettings()->SetProxyPass(this->proxyPass->text());
+    VSettings *settings = qApp->ValentinaSettings();
+    settings->SetServer(this->server->text());
+    settings->SetServerSecure(this->secureComm->isChecked());
+    settings->SetProxy(this->useProxy->isChecked());
+    settings->SetProxyAddress(this->proxyAddress->text());
+    settings->SetProxyPort(this->proxyPort->text());
+    settings->SetProxyUser(this->proxyUser->text());
+    settings->SetProxyPass(this->proxyPass->text());
 
-    qApp->ValentinaSettings()->SetUsername(this->username->text());
-    qApp->ValentinaSettings()->SetSavePassword(this->savePassword->isChecked());
-    qApp->ValentinaSettings()->SetUserPassword(this->userpassword->text());
+    settings->SetUsername(this->username->text());
+    settings->SetSavePassword(this->savePassword->isChecked());
+    settings->SetUserPassword(this->userpassword->text());
 
 }
 
@@ -136,12 +137,13 @@ QGroupBox *CommunityPage::ProxyGroup()
 
     QFormLayout *proxyLayout = new QFormLayout;
 
-    CommunityPage::add_checkbox(&this->useProxy, proxyLayout, qApp->ValentinaSettings()->GetProxy(), tr("Use Proxy"));
-    CommunityPage::add_lineedit(&this->proxyAddress, proxyLayout, qApp->ValentinaSettings()->GetProxyAddress(),
+    const VSettings *settings = qApp->ValentinaSettings();
+    CommunityPage::add_checkbox(&this->useProxy, proxyLayout, settings->GetProxy(), tr("Use Proxy"));
+    CommunityPage::add_lineedit(&this->proxyAddress, proxyLayout, settings->GetProxyAddress(),
                                 tr("Proxy address"));
-    CommunityPage::add_lineedit(&this->proxyPort, proxyLayout, qApp->ValentinaSettings()->GetProxyPort(), tr("Proxy port"));
-    CommunityPage::add_lineedit(&this->proxyUser, proxyLayout, qApp->ValentinaSettings()->GetProxyUser(), tr("Proxy user"));
-    CommunityPage::add_lineedit(&this->proxyPass, proxyLayout, qApp->ValentinaSettings()->GetProxyPass(), tr("Proxy pass"));
+    CommunityPage::add_lineedit(&this->proxyPort, proxyLayout, settings->GetProxyPort(), tr("Proxy port"));
+    CommunityPage::add_lineedit(&this->proxyUser, proxyLayout, settings->GetProxyUser(), tr("Proxy user"));
+    CommunityPage::add_lineedit(&this->proxyPass, proxyLayout, settings->GetProxyPass(), tr("Proxy pass"));
     connect(this->useProxy, &QCheckBox::stateChanged, this, &CommunityPage::ProxyCheckChanged);
     this->ProxyCheckChanged();
 
@@ -156,11 +158,10 @@ QGroupBox *CommunityPage::UserGroup()
     QGroupBox *userGroup = new QGroupBox(tr("User settings"));
     QFormLayout *userLayout = new QFormLayout;
 
-    CommunityPage::add_lineedit(&this->username, userLayout, qApp->ValentinaSettings()->GetUsername(), tr("User Name"));
-    CommunityPage::add_checkbox(&this->savePassword, userLayout, qApp->ValentinaSettings()->GetSavePassword(),
-                                tr("Save password"));
-    CommunityPage::add_lineedit(&this->userpassword, userLayout, qApp->ValentinaSettings()->GetUserPassword(),
-                                tr("Password"));
+    const VSettings *settings = qApp->ValentinaSettings();
+    CommunityPage::add_lineedit(&this->username, userLayout, settings->GetUsername(), tr("User Name"));
+    CommunityPage::add_checkbox(&this->savePassword, userLayout, settings->GetSavePassword(), tr("Save password"));
+    CommunityPage::add_lineedit(&this->userpassword, userLayout, settings->GetUserPassword(), tr("Password"));
 
     connect(this->savePassword, &QCheckBox::stateChanged, this, &CommunityPage::PasswordCheckChanged);
     this->PasswordCheckChanged();

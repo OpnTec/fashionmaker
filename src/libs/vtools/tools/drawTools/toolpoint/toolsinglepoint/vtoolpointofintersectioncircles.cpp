@@ -79,9 +79,9 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(DialogT
     QString secondCircleRadius = dialogTool->GetSecondCircleRadius();
     const CrossCirclesPoint pType = dialogTool->GetCrossCirclesPoint();
     const QString pointName = dialogTool->getPointName();
-    VToolPointOfIntersectionCircles *point = nullptr;
-    point = Create(0, pointName, firstCircleCenterId, secondCircleCenterId, firstCircleRadius, secondCircleRadius,
-                   pType, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolPointOfIntersectionCircles *point = Create(0, pointName, firstCircleCenterId, secondCircleCenterId, 
+		                                            firstCircleRadius, secondCircleRadius, pType, 5, 10, scene, doc,
+													data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -263,7 +263,7 @@ CrossCirclesPoint VToolPointOfIntersectionCircles::GetCrossCirclesPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCircles::SetCrossCirclesPoint(CrossCirclesPoint &value)
+void VToolPointOfIntersectionCircles::SetCrossCirclesPoint(const CrossCirclesPoint &value)
 {
     crossPoint = value;
 

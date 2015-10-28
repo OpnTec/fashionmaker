@@ -41,7 +41,7 @@ VisToolPointOfIntersectionCircles::VisToolPointOfIntersectionCircles(const VCont
     c2Path = InitItem<QGraphicsEllipseItem>(Qt::darkRed, this);
     point = InitPoint(mainColor, this);
     c1Center = InitPoint(supportColor, this);
-    c2Center = InitPoint(supportColor, this);
+    c2Center = InitPoint(supportColor, this);  //-V656
 }
 
 //---------------------------------------------------------------------------------------------------------------------

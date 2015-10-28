@@ -153,38 +153,38 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
     for (int i = 0; i< detail.CountNode(); ++i)
     {
         quint32 id = 0;
-        switch (detail.at(i).getTypeTool())
+		const VNodeDetail &nodeD = detail.at(i);
+        switch (nodeD.getTypeTool())
         {
             case (Tool::NodePoint):
             {
-                id = CreateNode<VPointF>(data, detail.at(i).getId());
-                VNodePoint::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
+                id = CreateNode<VPointF>(data, nodeD.getId());
+                VNodePoint::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeArc):
             {
-                id = CreateNode<VArc>(data, detail.at(i).getId());
-                VNodeArc::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
+                id = CreateNode<VArc>(data, nodeD.getId());
+                VNodeArc::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeSpline):
             {
-                id = CreateNode<VSpline>(data, detail.at(i).getId());
-                VNodeSpline::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
+                id = CreateNode<VSpline>(data, nodeD.getId());
+                VNodeSpline::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeSplinePath):
             {
-                id = CreateNode<VSplinePath>(data, detail.at(i).getId());
-                VNodeSplinePath::Create(doc, data, id, detail.at(i).getId(), Document::FullParse, Source::FromGui);
+                id = CreateNode<VSplinePath>(data, nodeD.getId());
+                VNodeSplinePath::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             default:
                 qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
         }
-        VNodeDetail node(id, detail.at(i).getTypeTool(), NodeDetail::Contour, detail.at(i).getMx(),
-                         detail.at(i).getMy(), detail.at(i).getReverse());
+        VNodeDetail node(id, nodeD.getTypeTool(), NodeDetail::Contour, nodeD.getMx(), nodeD.getMy(), nodeD.getReverse());
         det.append(node);
     }
     det.setName(detail.getName());

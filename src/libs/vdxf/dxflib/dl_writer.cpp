@@ -347,7 +347,7 @@ void DL_Writer::entityAttributes(const DL_Attributes &attrib) const
     {
         dxfInt(370, attrib.getWidth());
     }
-    if (version>=DL_VERSION_2000)
+    if (version>=DL_VERSION_2000) //-V581
     {
         dxfReal(48, attrib.getLinetypeScale());
     }

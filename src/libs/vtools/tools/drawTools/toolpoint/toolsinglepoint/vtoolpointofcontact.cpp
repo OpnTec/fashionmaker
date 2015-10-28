@@ -155,9 +155,8 @@ VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphi
     const quint32 firstPointId = dialogTool->GetFirstPoint();
     const quint32 secondPointId = dialogTool->GetSecondPoint();
     const QString pointName = dialogTool->getPointName();
-    VToolPointOfContact *point = nullptr;
-    point=Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, data,
-           Document::FullParse, Source::FromGui);
+    VToolPointOfContact *point = Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, 
+		                                data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;

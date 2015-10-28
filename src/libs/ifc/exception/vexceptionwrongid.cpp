@@ -39,7 +39,7 @@
 VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &domElement)
     :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
 {
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     QTextStream stream(&tagText);
     domElement.save(stream, 4);
     tagName = domElement.tagName();

@@ -288,7 +288,7 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop) const
         }
         const int height = scene->itemsBoundingRect().toRect().height() + static_cast<int>(d->layoutWidth)*2;
         delete scene;
-        if (d->globalContour.GetHeight() > height)
+        if (d->globalContour.GetHeight() > height) //-V807
         {
             paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), height));
         }

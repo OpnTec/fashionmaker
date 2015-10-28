@@ -58,7 +58,7 @@ public:
         qreal L = 0, radius = 0, angle = 90;
         QPointF point1 = this->p1.toQPointF();
         QPointF point4 = this->p4.toQPointF();
-        radius = QLineF(point1, point4).length()/1.414213;//1.414213=sqrt(2);
+        radius = QLineF(point1, point4).length()/M_SQRT2;
         L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
         QLineF p1p2(this->p1.x(), this->p1.y(), this->p1.x() + L * kAsm1, this->p1.y());
         p1p2.setAngle(angle1);
@@ -77,7 +77,7 @@ public:
         qreal L = 0, radius = 0, angle = 90;
         QPointF point1 = this->p1.toQPointF();
         QPointF point4 = this->p4.toQPointF();
-        radius = QLineF(point1, point4).length()/1.414213;//1.414213=sqrt(2);
+        radius = QLineF(point1, point4).length()/M_SQRT2;
         L = kCurve * radius * 4 / 3 * tan( angle * M_PI / 180.0 / 4 );
 
         this->kCurve = kCurve;

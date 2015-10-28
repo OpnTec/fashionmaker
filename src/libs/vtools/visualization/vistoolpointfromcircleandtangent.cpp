@@ -39,7 +39,7 @@ VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContai
     cPath = InitItem<QGraphicsEllipseItem>(Qt::darkGreen, this);
     point = InitPoint(mainColor, this);
     tangent = InitPoint(supportColor, this);
-    cCenter = InitPoint(supportColor, this);
+    cCenter = InitPoint(supportColor, this); //-V656
     tangent2 = InitItem<QGraphicsLineItem>(supportColor, this);
 }
 

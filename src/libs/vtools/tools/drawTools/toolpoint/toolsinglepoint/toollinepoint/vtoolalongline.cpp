@@ -205,9 +205,8 @@ VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *s
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
-    VToolAlongLine *point=nullptr;
-    point = Create(0, pointName, typeLine, lineColor, formula, firstPointId, secondPointId, 5, 10, scene, doc, data,
-                   Document::FullParse, Source::FromGui);
+    VToolAlongLine *point = Create(0, pointName, typeLine, lineColor, formula, firstPointId, secondPointId, 
+		                           5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;

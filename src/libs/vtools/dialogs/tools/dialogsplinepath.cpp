@@ -84,7 +84,8 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ui->listWidget->clear();
     for (qint32 i = 0; i < path.CountPoint(); ++i)
     {
-        NewItem(path.at(i).P().id(), path.at(i).KAsm1(), path.at(i).Angle1(), path.at(i).KAsm2(), path.at(i).Angle2());
+		const VSplinePoint &point = path.at(i);
+        NewItem(point.P().id(), point.KAsm1(), point.Angle1(), point.KAsm2(), point.Angle2());
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->doubleSpinBoxKcurve->setValue(path.GetKCurve());

@@ -101,9 +101,8 @@ VToolLine *VToolLine::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbs
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
 
-    VToolLine *line = nullptr;
-    line = Create(0, firstPoint, secondPoint, typeLine, lineColor,  scene, doc, data, Document::FullParse,
-                  Source::FromGui);
+    VToolLine *line = Create(0, firstPoint, secondPoint, typeLine, lineColor,  scene, doc, data, Document::FullParse,
+                             Source::FromGui);
     if (line != nullptr)
     {
         line->dialog=dialogTool;

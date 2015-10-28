@@ -419,11 +419,11 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
     {
         idetail.next();
         VLayoutDetail det = VLayoutDetail();
-        det.SetCountourPoints(idetail.value().ContourPoints(pattern));
-        det.SetSeamAllowencePoints(idetail.value().SeamAllowancePoints(pattern),
-                                   idetail.value().getSeamAllowance());
-        det.setName(idetail.value().getName());
-        det.setWidth(qApp->toPixel(idetail.value().getWidth()));
+        const VDetail &d = idetail.value();
+        det.SetCountourPoints(d.ContourPoints(pattern));
+        det.SetSeamAllowencePoints(d.SeamAllowancePoints(pattern), d.getSeamAllowance());
+        det.setName(d.getName());
+        det.setWidth(qApp->toPixel(d.getWidth()));
 
         listDetails.append(det);
     }
@@ -935,20 +935,21 @@ void MainWindowsNoGUI::UnitePages()
     for (int i = 0; i < papers.size(); ++i)
     {
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-        SCASSERT(paper != nullptr)
-                if (length + paper->rect().height() <= QIMAGE_MAX)
+        SCASSERT(paper != nullptr);
+        const QRectF rec = paper->rect();
+        if (length + rec.height() <= QIMAGE_MAX)
         {
             UniteDetails(j, nDetails, length, i);
-            length += paper->rect().height();
-            UnitePapers(j, nPapers, paper->rect().width(), length);
+            length += rec.height();
+            UnitePapers(j, nPapers, rec.width(), length);
         }
         else
         {
             length = 0; // Strat new paper
             ++j;// New paper
             UniteDetails(j, nDetails, length, i);
-            length += paper->rect().height();
-            UnitePapers(j, nPapers, paper->rect().width(), length);
+            length += rec.height();
+            UnitePapers(j, nPapers, rec.width(), length);
         }
     }
 

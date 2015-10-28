@@ -265,7 +265,7 @@ void VPattern::setCurrentData()
  */
 void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 {
-    Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
+    Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0"); //-V712 //-V654
     SCASSERT(data != nullptr);
     ToolExists(id);
     VDataTool *tool = tools.value(id);
@@ -355,7 +355,7 @@ void VPattern::LiteParseTree(const Document &parse)
     }
     catch (const VExceptionObjectError &e)
     {
-        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
         if (not VApplication::CheckGUI())
@@ -548,7 +548,7 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
  */
 void VPattern::ParseDetailElement(const QDomElement &domElement, const Document &parse)
 {
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     try
     {
         VDetail detail;
@@ -620,7 +620,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
  */
 void VPattern::ParseDetails(const QDomElement &domElement, const Document &parse)
 {
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     QDomNode domNode = domElement.firstChild();
     while (domNode.isNull() == false)
     {
@@ -675,8 +675,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                  const Document &parse, const QString &type)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
-    Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of point is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of point is empty");
 
     QStringList points = QStringList() << VToolBasePoint::ToolType                  /*0*/
                                        << VToolEndLine::ToolType                    /*1*/
@@ -785,7 +785,7 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
                                 const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     try
     {
         quint32 id = 0;
@@ -904,7 +904,7 @@ QString VPattern::GetLabelBase(quint32 index) const
 void VPattern::ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     VToolBasePoint *spoint = 0;
     try
@@ -949,7 +949,7 @@ void VPattern::ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &
 void VPattern::ParseToolEndLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -998,7 +998,7 @@ void VPattern::ParseToolEndLine(VMainGraphicsScene *scene, QDomElement &domEleme
 void VPattern::ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1042,7 +1042,7 @@ void VPattern::ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domEle
 void VPattern::ParseToolShoulderPoint(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1087,7 +1087,7 @@ void VPattern::ParseToolShoulderPoint(VMainGraphicsScene *scene, QDomElement &do
 void VPattern::ParseToolNormal(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1132,7 +1132,7 @@ void VPattern::ParseToolNormal(VMainGraphicsScene *scene, QDomElement &domElemen
 void VPattern::ParseToolBisector(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1177,7 +1177,7 @@ void VPattern::ParseToolBisector(VMainGraphicsScene *scene, QDomElement &domElem
 void VPattern::ParseToolLineIntersect(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1207,7 +1207,7 @@ void VPattern::ParseToolLineIntersect(VMainGraphicsScene *scene, const QDomEleme
 void VPattern::ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1249,7 +1249,7 @@ void VPattern::ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &d
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &parse)
 {
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1277,7 +1277,7 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
 void VPattern::ParseToolHeight(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1308,7 +1308,7 @@ void VPattern::ParseToolHeight(VMainGraphicsScene *scene, const QDomElement &dom
 void VPattern::ParseToolTriangle(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1339,7 +1339,7 @@ void VPattern::ParseToolPointOfIntersection(VMainGraphicsScene *scene, const QDo
                                             const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1367,7 +1367,7 @@ void VPattern::ParseToolPointOfIntersection(VMainGraphicsScene *scene, const QDo
 void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1410,7 +1410,7 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
 void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1454,7 +1454,7 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
 void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1496,7 +1496,7 @@ void VPattern::ParseToolLineIntersectAxis(VMainGraphicsScene *scene, QDomElement
                                           const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1546,7 +1546,7 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
                                            const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1594,7 +1594,7 @@ void VPattern::ParseToolPointOfIntersectionArcs(VMainGraphicsScene *scene, const
                                                 const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1626,7 +1626,7 @@ void VPattern::ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QD
                                                    const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1668,7 +1668,7 @@ void VPattern::ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDo
                                                   const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1708,7 +1708,7 @@ void VPattern::ParseToolPointFromArcAndTangent(VMainGraphicsScene *scene, const 
                                                const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1739,7 +1739,7 @@ void VPattern::ParseToolPointFromArcAndTangent(VMainGraphicsScene *scene, const 
 void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1781,7 +1781,7 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
 void VPattern::ParseToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1812,7 +1812,7 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, const QDomElement &dom
 void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1864,7 +1864,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &parse)
 {
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1890,7 +1890,7 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document &parse)
 {
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -1960,7 +1960,7 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse)
 {
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     try
     {
@@ -2145,8 +2145,8 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
                                const QString &type)
 {
     SCASSERT(scene != nullptr);
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
-    Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of arc is empty");
 
     QStringList arcs = QStringList() << VToolArc::ToolType            /*0*/
                                      << VNodeArc::ToolType            /*1*/
@@ -2604,7 +2604,7 @@ QRectF VPattern::ToolBoundingRect(const QRectF &rec, const quint32 &id) const
  */
 void VPattern::IncrementReferens(quint32 id) const
 {
-    Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
+    Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
     ToolExists(id);
     VDataTool *tool = tools.value(id);
     SCASSERT(tool != nullptr);
@@ -2618,7 +2618,7 @@ void VPattern::IncrementReferens(quint32 id) const
  */
 void VPattern::DecrementReferens(quint32 id) const
 {
-    Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
+    Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
     ToolExists(id);
     VDataTool *tool = tools.value(id);
     SCASSERT(tool != nullptr);

@@ -37,9 +37,9 @@ VToolCut::VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, c
     :VToolSinglePoint(doc, data, id, parent), formula(formula), firstCurve(nullptr), secondCurve(nullptr),
       curveCutId(curveCutId), curve1id(curve1id), curve2id(curve2id), detailsMode(false)
 {
-    Q_ASSERT_X(curveCutId > 0, Q_FUNC_INFO, "curveCutId <= 0");
-    Q_ASSERT_X(curve1id > 0, Q_FUNC_INFO, "curve1id <= 0");
-    Q_ASSERT_X(curve2id > 0, Q_FUNC_INFO, "curve2id <= 0");
+    Q_ASSERT_X(curveCutId != 0, Q_FUNC_INFO, "curveCutId == 0"); //-V654 //-V712
+    Q_ASSERT_X(curve1id != 0, Q_FUNC_INFO, "curve1id == 0"); //-V654 //-V712
+    Q_ASSERT_X(curve2id != 0, Q_FUNC_INFO, "curve2id == 0"); //-V654 //-V712
 
     lineColor = color;
 
@@ -159,7 +159,7 @@ void VToolCut::RemoveReferens()
 // cppcheck-suppress unusedFunction
 void VToolCut::FullUpdateCurveFromFile(const QString &attrCurve)
 {
-    Q_ASSERT_X(attrCurve.isEmpty() == false, Q_FUNC_INFO, "attribute name is empty");
+    Q_ASSERT_X(not attrCurve.isEmpty(), Q_FUNC_INFO, "attribute name is empty");
 
     QDomElement domElement = doc->elementById(id);
     if (domElement.isElement())

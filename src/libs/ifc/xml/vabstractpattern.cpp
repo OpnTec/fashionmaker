@@ -170,7 +170,7 @@ QStringList VAbstractPattern::ListMeasurements() const
  */
 void VAbstractPattern::ChangeActivPP(const QString &name, const Document &parse)
 {
-    Q_ASSERT_X(name.isEmpty() == false, "ChangeActivPP", "name pattern piece is empty");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
     if (CheckExistNamePP(name) && this->nameActivPP != name)
     {
         this->nameActivPP = name;
@@ -231,7 +231,7 @@ bool VAbstractPattern::GetActivDrawElement(QDomElement &element) const
  */
 bool VAbstractPattern::CheckExistNamePP(const QString &name) const
 {
-    Q_ASSERT_X(name.isEmpty() == false, "CheckNameDraw", "name draw is empty");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name draw is empty");
     const QDomNodeList elements = this->documentElement().elementsByTagName( TagDraw );
     if (elements.size() == 0)
     {
@@ -260,7 +260,7 @@ bool VAbstractPattern::CheckExistNamePP(const QString &name) const
  */
 bool VAbstractPattern::GetActivNodeElement(const QString &name, QDomElement &element) const
 {
-    Q_ASSERT_X(name.isEmpty() == false, "GetActivNodeElement", "name draw is empty");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name draw is empty");
     QDomElement drawElement;
     if (GetActivDrawElement(drawElement))
     {
@@ -328,8 +328,8 @@ QDomElement VAbstractPattern::GetPPElement(const QString &name)
  */
 bool VAbstractPattern::ChangeNamePP(const QString &oldName, const QString &newName)
 {
-    Q_ASSERT_X(newName.isEmpty() == false, "SetNamePP", "new name pattern piece is empty");
-    Q_ASSERT_X(oldName.isEmpty() == false, "SetNamePP", "old name pattern piece is empty");
+    Q_ASSERT_X(not newName.isEmpty(), Q_FUNC_INFO, "new name pattern piece is empty");
+    Q_ASSERT_X(not oldName.isEmpty(), Q_FUNC_INFO, "old name pattern piece is empty");
 
     if (CheckExistNamePP(oldName) == false)
     {
@@ -373,7 +373,7 @@ bool VAbstractPattern::ChangeNamePP(const QString &oldName, const QString &newNa
  */
 bool VAbstractPattern::appendPP(const QString &name)
 {
-    Q_ASSERT_X(name.isEmpty() == false, "appendPP", "name pattern piece is empty");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
     if (name.isEmpty())
     {
         return false;
@@ -422,7 +422,7 @@ VDataTool *VAbstractPattern::getTool(const quint32 &id)
  */
 void VAbstractPattern::AddTool(const quint32 &id, VDataTool *tool)
 {
-    Q_ASSERT_X(id > 0, Q_FUNC_INFO, "id <= 0");
+    Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
     SCASSERT(tool != nullptr);
     tools.insert(id, tool);
 }
@@ -913,7 +913,7 @@ void VAbstractPattern::ToolExists(const quint32 &id) const
  */
 void VAbstractPattern::SetActivPP(const QString &name)
 {
-    Q_ASSERT_X(name.isEmpty() == false, "SetActivPP", "name pattern piece is empty");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
     this->nameActivPP = name;
     emit ChangedActivPP(name);
 }

@@ -35,7 +35,7 @@ VisToolPointOfIntersection::VisToolPointOfIntersection(const VContainer *data, Q
     : VisLine(data, parent), point2Id(NULL_ID), point(nullptr), axisP1(nullptr), axisP2(nullptr), axis2(nullptr)
 {
     axisP1 = InitPoint(supportColor, this);
-    axisP2 = InitPoint(supportColor, this);
+    axisP2 = InitPoint(supportColor, this); //-V656
     axis2 = InitItem<QGraphicsLineItem>(supportColor, this);
 
     point = InitPoint(mainColor, this);

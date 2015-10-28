@@ -92,7 +92,7 @@ void VToolBasePoint::ShowVisualization(bool show)
  */
 void VToolBasePoint::AddToFile()
 {
-    Q_ASSERT_X(namePP.isEmpty() == false, "AddToFile", "name pattern piece is empty");
+    Q_ASSERT_X(not namePP.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
 
     QDomElement sPoint = doc->createElement(TagName);
 

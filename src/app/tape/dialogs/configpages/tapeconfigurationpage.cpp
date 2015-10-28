@@ -76,16 +76,17 @@ TapeConfigurationPage::TapeConfigurationPage(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void TapeConfigurationPage::Apply()
 {
-    qApp->TapeSettings()->SetOsSeparator(osOptionCheck->isChecked());
+    VTapeSettings *settings = qApp->TapeSettings();
+    settings->SetOsSeparator(osOptionCheck->isChecked());
 
     if (langChanged || systemChanged)
     {
         const QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
-        qApp->TapeSettings()->SetLocale(locale);
+        settings->SetLocale(locale);
         langChanged = false;
 
         const QString code = qvariant_cast<QString>(systemCombo->itemData(systemCombo->currentIndex()));
-        qApp->TapeSettings()->SetPMSystemCode(code);
+        settings->SetPMSystemCode(code);
         systemChanged = false;
 
         qApp->LoadTranslation(locale);
@@ -173,7 +174,8 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     }
 
     // set default translators and language checked
-    qint32 index = langCombo->findData(qApp->TapeSettings()->GetLocale());
+    VTapeSettings *settings = qApp->TapeSettings();
+    qint32 index = langCombo->findData(settings->GetLocale());
     if (index != -1)
     {
         langCombo->setCurrentIndex(index);
@@ -209,7 +211,7 @@ QGroupBox *TapeConfigurationPage::LangGroup()
             &TapeConfigurationPage::SystemChanged);
 
     // set default pattern making system
-    index = systemCombo->findData(qApp->TapeSettings()->GetPMSystemCode());
+    index = systemCombo->findData(settings->GetPMSystemCode());
     if (index != -1)
     {
         systemCombo->setCurrentIndex(index);
@@ -219,7 +221,7 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     separatorLabel = new QLabel(tr("Decimal separator parts"));
 
     osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
-    osOptionCheck->setChecked(qApp->TapeSettings()->GetOsSeparator());
+    osOptionCheck->setChecked(settings->GetOsSeparator());
 
     langLayout->addRow(separatorLabel, osOptionCheck);
     //-----------------------

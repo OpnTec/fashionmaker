@@ -48,23 +48,6 @@ VDataTool::~VDataTool()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief operator = assignment operator.
- * @param tool tool
- * @return tool
- */
-VDataTool &VDataTool::operator =(const VDataTool &tool)
-{
-    if ( &tool == this )
-    {
-        return *this;
-    }
-    data = tool.getData();
-    _referens = tool.referens();
-    return *this;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief decrementReferens decrement referens.
  */
 void VDataTool::decrementReferens()

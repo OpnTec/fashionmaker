@@ -44,7 +44,7 @@ VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)
     hypotenuseP1 = InitPoint(supportColor, this);
     hypotenuseP2 = InitPoint(supportColor, this);
     foot1 = InitItem<QGraphicsLineItem>(supportColor, this);
-    foot2 = InitItem<QGraphicsLineItem>(supportColor, this);
+    foot2 = InitItem<QGraphicsLineItem>(supportColor, this); //-V656
 
     point = InitPoint(mainColor, this);
 }

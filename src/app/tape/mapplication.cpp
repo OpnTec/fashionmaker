@@ -158,7 +158,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 break;
             #endif
             case QtDebugMsg:
-                Q_UNREACHABLE();
+                Q_UNREACHABLE(); //-V501
             default:
                 break;
         }
@@ -249,7 +249,7 @@ bool MApplication::notify(QObject *receiver, QEvent *event)
     }
     catch (const VExceptionObjectError &e)
     {
-        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")),
+        qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }

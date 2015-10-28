@@ -211,7 +211,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
         switch ( tool.getTypeTool() )
         {
             case Tool::Arrow:
-                Q_UNREACHABLE();
+                Q_UNREACHABLE(); //-V501
                 break;
             case Tool::BasePoint:
             {

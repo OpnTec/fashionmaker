@@ -86,9 +86,8 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(DialogTool *dialog, V
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
     const QString pointName = dialogTool->getPointName();
-    VToolPointOfIntersection *point = nullptr;
-    point = Create(0, pointName, firstPointId, secondPointId, 5, 10, scene, doc, data, Document::FullParse,
-                   Source::FromGui);
+    VToolPointOfIntersection *point = Create(0, pointName, firstPointId, secondPointId, 5, 10, scene, doc, 
+		                                     data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;

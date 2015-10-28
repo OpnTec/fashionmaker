@@ -120,7 +120,7 @@ int QmuParserTester::TestInterface()
         iStat += 1;  // not supposed to reach this, nonexisting variable "c" deleted...
     }
     catch ( ... )
-    {
+    { //-V565
         // failure is expected...
     }
 
@@ -282,16 +282,16 @@ int QmuParserTester::TestNames()
     QmuParser p;
 
 #define PARSER_THROWCHECK(DOMAIN, FAIL, EXPR, ARG) \
-      iErr = 0;                                      \
-      QmuParserTester::c_iCount++;                      \
-      try                                            \
-      {                                              \
-        p.Define##DOMAIN(EXPR, ARG);                 \
-      }                                              \
-      catch (QmuParserError &)                 \
-      {                                              \
-        iErr = (FAIL==false) ? 0 : 1;                \
-      }                                              \
+      iErr = 0;                                    \
+      QmuParserTester::c_iCount++;                 \
+      try                                          \
+      {                                            \
+        p.Define##DOMAIN(EXPR, ARG);               \
+      }                                            \
+      catch (QmuParserError &)                     \
+      {                                            \
+        iErr = static_cast<int>(FAIL);             \
+      }                                            \
       iStat += iErr;
 
     // constant names
@@ -1209,7 +1209,7 @@ int QmuParserTester::EqnTestWithVarChange ( const QString &a_str, double a_fVar1
         fVal[0] = p.Eval();
 
         // cppcheck-suppress redundantAssignment
-        var = a_fVar2;
+        var = a_fVar2; //-V519
         fVal[1] = p.Eval();
 
         if ( fabs ( a_fRes1 - fVal[0] ) > 0.0000000001 )

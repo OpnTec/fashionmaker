@@ -195,7 +195,7 @@ QVector<QPointF> VArc::GetPoints() const
     qreal i = 0;
     const qreal angle = AngleArc();
     const qint32 k = static_cast<qint32>(angle);
-    const qreal s = angle/(k/4);
+    const qreal s = angle/(k/4); //-V636
     do
     {
         QPointF pStart;

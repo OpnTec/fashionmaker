@@ -37,6 +37,10 @@
 #   include <QtMath>
 #endif
 
+#ifdef Q_CC_MSVC
+    #include <ciso646>
+#endif /* Q_CC_MSVC */
+
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {
@@ -278,7 +282,7 @@ QSize VObjEngine::getSize() const
 //---------------------------------------------------------------------------------------------------------------------
 void VObjEngine::setSize(const QSize &value)
 {
-    Q_ASSERT(!isActive());
+    Q_ASSERT(not isActive());
     size = value;
 }
 
@@ -291,7 +295,7 @@ QIODevice *VObjEngine::getOutputDevice() const
 //---------------------------------------------------------------------------------------------------------------------
 void VObjEngine::setOutputDevice(QIODevice *value)
 {
-    Q_ASSERT(!isActive());
+    Q_ASSERT(not isActive());
     outputDevice.reset(value);
 }
 
@@ -304,7 +308,7 @@ int VObjEngine::getResolution() const
 //---------------------------------------------------------------------------------------------------------------------
 void VObjEngine::setResolution(int value)
 {
-    Q_ASSERT(!isActive());
+    Q_ASSERT(not isActive());
     resolution = value;
 }
 

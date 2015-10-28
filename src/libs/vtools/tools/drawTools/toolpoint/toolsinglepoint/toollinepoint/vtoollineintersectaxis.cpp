@@ -86,9 +86,9 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(DialogTool *dialog, VMain
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
 
-    VToolLineIntersectAxis *point = nullptr;
-    point=Create(0, pointName, typeLine, lineColor, formulaAngle, basePointId, firstPointId, secondPointId, 5, 10,
-                 scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolLineIntersectAxis *point = Create(0, pointName, typeLine, lineColor, formulaAngle, 
+		                                   basePointId, firstPointId, secondPointId, 5, 10,
+                                           scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;

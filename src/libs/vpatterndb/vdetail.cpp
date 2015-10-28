@@ -329,7 +329,7 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
  */
 QList<quint32> VDetail::Missing(const VDetail &det) const
 {
-    if (d->nodes.size() == det.CountNode())
+    if (d->nodes.size() == det.CountNode()) //-V807
     {
         return QList<quint32>();
     }
@@ -483,7 +483,7 @@ QPainterPath VDetail::ContourPath(const VContainer *data) const
 QVector<VNodeDetail> VDetail::listNodePoint() const
 {
     QVector<VNodeDetail> list;
-    for (int i = 0; i < d->nodes.size(); ++i)
+    for (int i = 0; i < d->nodes.size(); ++i) //-V807
     {
         if (d->nodes.at(i).getTypeTool() == Tool::NodePoint)
         {

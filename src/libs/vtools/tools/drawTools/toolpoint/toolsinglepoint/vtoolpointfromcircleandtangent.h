@@ -63,7 +63,7 @@ public:
     void     SetCircleRadius(const VFormula &value);
 
     CrossCirclesPoint GetCrossCirclesPoint() const;
-    void              SetCrossCirclesPoint(CrossCirclesPoint &value);
+    void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
 
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
 protected:

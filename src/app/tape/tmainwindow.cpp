@@ -109,16 +109,8 @@ TMainWindow::TMainWindow(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow::~TMainWindow()
 {
-    if (data != nullptr)
-    {
-        delete data;
-    }
-
-    if (m != nullptr)
-    {
-        delete m;
-    }
-
+    delete data;
+    delete m;
     delete ui;
 }
 
@@ -2411,20 +2403,22 @@ void TMainWindow::MeasurementReadOnly(bool ro)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ReadSettings()
 {
-    restoreGeometry(qApp->TapeSettings()->GetGeometry());
-    restoreState(qApp->TapeSettings()->GetWindowState());
-    restoreState(qApp->TapeSettings()->GetToolbarsState(), APP_VERSION);
+    const VTapeSettings *settings = qApp->TapeSettings();
+    restoreGeometry(settings->GetGeometry());
+    restoreState(settings->GetWindowState());
+    restoreState(settings->GetToolbarsState(), APP_VERSION);
 
     // Stack limit
-    //qApp->getUndoStack()->setUndoLimit(qApp->TapeSettings()->GetUndoCount());
+    //qApp->getUndoStack()->setUndoLimit(settings->GetUndoCount());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::WriteSettings()
 {
-    qApp->TapeSettings()->SetGeometry(saveGeometry());
-    qApp->TapeSettings()->SetWindowState(saveState());
-    qApp->TapeSettings()->SetToolbarsState(saveState(APP_VERSION));
+    VTapeSettings *settings = qApp->TapeSettings();
+    settings->SetGeometry(saveGeometry());
+    settings->SetWindowState(saveState());
+    settings->SetToolbarsState(saveState(APP_VERSION));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
