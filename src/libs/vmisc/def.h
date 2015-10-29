@@ -466,6 +466,9 @@ QStringList ListGroupO();
 QStringList ListGroupP();
 QStringList ListGroupQ();
 
+QStringList ListNumbers(const QStringList & listMeasurements);
+QString MapDiagrams(const QString &number);
+
 // pattern making systems codes
 extern const QString p0_S;
 extern const QString p1_S;

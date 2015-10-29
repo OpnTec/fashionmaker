@@ -2962,7 +2962,7 @@
     </message>
     <message>
         <source>Draw mode</source>
-        <translation>Modalità Disegno</translation>
+        <translation type="vanished">Modalità Disegno</translation>
     </message>
     <message>
         <source>Details</source>
@@ -2970,7 +2970,7 @@
     </message>
     <message>
         <source>Details mode</source>
-        <translation>Modalità dettagli</translation>
+        <translation type="vanished">Modalità dettagli</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -3364,7 +3364,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Create a layout</source>
-        <translation>Crea un layout</translation>
+        <translation type="vanished">Crea un layout</translation>
     </message>
     <message>
         <source>Show Curve Details</source>
@@ -3641,6 +3641,34 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements if they was not used in a pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements unloaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3933,27 +3961,27 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gettone inaspettato &quot;$TOK$&quot; ha trovato una posizone $POS$.</translation>
     </message>
     <message>
         <source>Internal error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Errore interno</translation>
     </message>
     <message>
         <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nome funzione-, variabile- o costante invalidi: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Operatore binario identificativo non valido: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Identificatore operatore infisso non valido: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
@@ -4043,7 +4071,7 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Name conflict</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished">Conflitto di nome</translation>
+        <translation>Conflitto di nome</translation>
     </message>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
@@ -4140,7 +4168,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -4152,15 +4180,15 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore di base</translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelle taglie</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelle altezze</translation>
     </message>
     <message>
         <source>Details</source>
@@ -4252,11 +4280,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Given name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome specificato:</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cognome:</translation>
     </message>
     <message>
         <source>Birth date:</source>
@@ -4579,12 +4607,12 @@ Do you want to save your changes?</source>
     <message>
         <source>male</source>
         <comment>gender</comment>
-        <translation type="unfinished"></translation>
+        <translation>maschio</translation>
     </message>
     <message>
         <source>female</source>
         <comment>gender</comment>
-        <translation type="unfinished"></translation>
+        <translation>femmina</translation>
     </message>
     <message>
         <source>Gender:</source>
@@ -4610,12 +4638,24 @@ Do you want to save your changes?</source>
         <source>Export standard measurements not supported.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Measurement diagram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation type="unfinished">Applica</translation>
+        <translation>Applica</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -4623,7 +4663,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -4631,7 +4671,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Configurazione</translation>
+        <translation>Configurazione</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -4642,7 +4682,7 @@ Do you want to save your changes?</source>
     <name>TapeConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Lingua</translation>
+        <translation>Lingua</translation>
     </message>
     <message>
         <source>GUI language</source>
@@ -4887,7 +4927,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angolo</translation>
+        <translation>Angolo</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
@@ -5114,7 +5154,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opzioni</translation>
+        <translation>Opzioni</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -5373,7 +5413,7 @@ Do you want to save your changes?</source>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opzioni</translation>
+        <translation>Opzioni</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -5428,7 +5468,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Second angle</source>
-        <translation type="unfinished">Secondo angolo</translation>
+        <translation>Secondo angolo</translation>
     </message>
     <message>
         <source>Point along bisector</source>
@@ -5572,7 +5612,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Bunka</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bunka</translation>
     </message>
     <message>
         <source>Bunka Fashion College</source>
@@ -5607,7 +5647,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Elizabeth Friendship</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Elizabeth Friendship</translation>
     </message>
     <message>
         <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
@@ -5617,12 +5657,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Morris, K.</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Morris, K.</translation>
     </message>
     <message>
         <source>Karen Morris</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Karen Morris</translation>
     </message>
     <message>
         <source>Sewing Lingerie that Fits</source>
@@ -5632,12 +5672,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Castro</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Castro</translation>
     </message>
     <message>
         <source>Lucia Mors de Castro</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lucia Mors de Castro</translation>
     </message>
     <message>
         <source>Patternmaking in Practic</source>
@@ -5647,7 +5687,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Kim &amp; Uh</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kim &amp; Uh</translation>
     </message>
     <message>
         <source>Injoo Kim and Mykyung Uh</source>
@@ -5662,12 +5702,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Waugh</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Waugh</translation>
     </message>
     <message>
         <source>Norah Waugh</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Norah Waugh</translation>
     </message>
     <message>
         <source>Corsets and Crinolines</source>
@@ -5677,12 +5717,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Grimble</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Grimble</translation>
     </message>
     <message>
         <source>Frances Grimble</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Frances Grimble</translation>
     </message>
     <message>
         <source>Fashions of the Gilded Age</source>
@@ -5697,7 +5737,7 @@ Do you want to save your changes?</source>
     <message>
         <source>ed. R. L. Shep</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>ed. R. L. Shep</translation>
     </message>
     <message>
         <source>The Great War: Styles and Patterns of the 1910s</source>
@@ -5707,7 +5747,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Hillhouse &amp; Mansfield</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hillhouse &amp; Mansfield</translation>
     </message>
     <message>
         <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
@@ -5722,12 +5762,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Pivnick</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pivnick</translation>
     </message>
     <message>
         <source>Esther Kaplan Pivnick</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Esther Kaplan Pivnick</translation>
     </message>
     <message>
         <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
@@ -5737,12 +5777,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Minister &amp; Son</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Minister &amp; Son</translation>
     </message>
     <message>
         <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Edward Minister &amp; Son, ed. R. L. Shep</translation>
     </message>
     <message>
         <source>The Complete Guide to Practical Cutting (1853)</source>
@@ -5752,12 +5792,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Strickland</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Strickland</translation>
     </message>
     <message>
         <source>Gertrude Strickland</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gertrude Strickland</translation>
     </message>
     <message>
         <source>A Tailoring Manual</source>
@@ -5767,7 +5807,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Loh &amp; Lewis</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Loh &amp; Lewis</translation>
     </message>
     <message>
         <source>May Loh and Diehl Lewis</source>
@@ -5782,12 +5822,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Morris, F. R.</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Morris, F. R.</translation>
     </message>
     <message>
         <source>F. R. Morris</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>F. R. Morris</translation>
     </message>
     <message>
         <source>Ladies Garment Cutting and Making</source>
@@ -5797,12 +5837,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Mason</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mason</translation>
     </message>
     <message>
         <source>Gertrude Mason</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gertrude Mason</translation>
     </message>
     <message>
         <source>Gertrude Mason&apos;s Patternmaking Book</source>
@@ -5812,12 +5852,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Kimata</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kimata</translation>
     </message>
     <message>
         <source>K. Kimata</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>K. Kimata</translation>
     </message>
     <message>
         <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
@@ -5842,12 +5882,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Kopp</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kopp</translation>
     </message>
     <message>
         <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</translation>
     </message>
     <message>
         <source>How to Draft Basic Patterns</source>
@@ -5857,12 +5897,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Ekern</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ekern</translation>
     </message>
     <message>
         <source>Doris Ekern</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Doris Ekern</translation>
     </message>
     <message>
         <source>Slacks Cut-to-Fit for Your Figure</source>
@@ -5872,12 +5912,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Doyle</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Doyle</translation>
     </message>
     <message>
         <source>Sarah J. Doyle</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sarah J. Doyle</translation>
     </message>
     <message>
         <source>Sarah&apos;s Key to Pattern Drafting</source>
@@ -5887,12 +5927,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Shelton</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Shelton</translation>
     </message>
     <message>
         <source>Karla J. Shelton</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Karla J. Shelton</translation>
     </message>
     <message>
         <source>Design and Sew Jeans</source>
@@ -5917,12 +5957,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Rohr</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Rohr</translation>
     </message>
     <message>
         <source>M. Rohr</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>M. Rohr</translation>
     </message>
     <message>
         <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
@@ -5932,12 +5972,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Moore</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Moore</translation>
     </message>
     <message>
         <source>Dorothy Moore</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dorothy Moore</translation>
     </message>
     <message>
         <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
@@ -5947,12 +5987,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Abling</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Abling</translation>
     </message>
     <message>
         <source>Bina Abling</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bina Abling</translation>
     </message>
     <message>
         <source>Integrating Draping, Drafting and Drawing</source>
@@ -5962,12 +6002,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Fukomoto</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fukomoto</translation>
     </message>
     <message>
         <source>Sue S. Fukomoto</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sue S. Fukomoto</translation>
     </message>
     <message>
         <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
@@ -5992,12 +6032,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Erwin</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Erwin</translation>
     </message>
     <message>
         <source>Mabel D. Erwin</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mabel D. Erwin</translation>
     </message>
     <message>
         <source>Practical Dress Design</source>
@@ -6007,12 +6047,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Gough</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gough</translation>
     </message>
     <message>
         <source>E. L. G. Gough</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>E. L. G. Gough</translation>
     </message>
     <message>
         <source>Principles of Garment Cutting</source>
@@ -6022,12 +6062,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Allemong</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Allemong</translation>
     </message>
     <message>
         <source>Elizabeth M. Allemong</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Elizabeth M. Allemong</translation>
     </message>
     <message>
         <source>European Cut</source>
@@ -6037,12 +6077,12 @@ Do you want to save your changes?</source>
     <message>
         <source>McCunn</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>McCunn</translation>
     </message>
     <message>
         <source>Donald H. McCunn</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donald H. McCunn</translation>
     </message>
     <message>
         <source>How to Make Your Own Sewing Patterns</source>
@@ -6052,7 +6092,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Zarapkar</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zarapkar</translation>
     </message>
     <message>
         <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
@@ -6067,12 +6107,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Kunick</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kunick</translation>
     </message>
     <message>
         <source>Philip Kunick</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Philip Kunick</translation>
     </message>
     <message>
         <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
@@ -6082,12 +6122,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Handford</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Handford</translation>
     </message>
     <message>
         <source>Jack Handford</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Jack Handford</translation>
     </message>
     <message>
         <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
@@ -6097,12 +6137,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Davis</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Davis</translation>
     </message>
     <message>
         <source>R. I. Davis</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>R. I. Davis</translation>
     </message>
     <message>
         <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
@@ -6112,12 +6152,12 @@ Do you want to save your changes?</source>
     <message>
         <source>MacLochlainn</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>MacLochlainn</translation>
     </message>
     <message>
         <source>Jason MacLochlainn</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Jason MacLochlainn</translation>
     </message>
     <message>
         <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
@@ -6127,12 +6167,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Joseph-Armstrong</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Joseph-Armstrong</translation>
     </message>
     <message>
         <source>Helen Joseph-Armstrong</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Helen Joseph-Armstrong</translation>
     </message>
     <message>
         <source>Patternmaking for Fashion Design</source>
@@ -6147,7 +6187,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Frederick T. Croonberg</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Frederick T. Croonberg</translation>
     </message>
     <message>
         <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
@@ -6157,7 +6197,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Sugino</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sugino</translation>
     </message>
     <message>
         <source>Dressmaking</source>
@@ -6177,7 +6217,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Louis Devere</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Louis Devere</translation>
     </message>
     <message>
         <source>The Handbook of Practical Cutting on the Centre Point System</source>
@@ -6192,7 +6232,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Winifred Aldrich</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winifred Aldrich</translation>
     </message>
     <message>
         <source>Metric Pattern Cutting for Menswear</source>
@@ -6212,12 +6252,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Kershaw</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kershaw</translation>
     </message>
     <message>
         <source>Gareth Kershaw</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gareth Kershaw</translation>
     </message>
     <message>
         <source>Patternmaking for Menswear</source>
@@ -6227,12 +6267,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Gilewska</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gilewska</translation>
     </message>
     <message>
         <source>Teresa Gilewska</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Teresa Gilewska</translation>
     </message>
     <message>
         <source>Pattern-Drafting for Fashion: The Basics</source>
@@ -6242,12 +6282,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Lo</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lo</translation>
     </message>
     <message>
         <source>Dennic Chunman Lo</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dennic Chunman Lo</translation>
     </message>
     <message>
         <source>Pattern Cutting</source>
@@ -6257,12 +6297,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Bray</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bray</translation>
     </message>
     <message>
         <source>Natalie Bray</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Natalie Bray</translation>
     </message>
     <message>
         <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
@@ -6277,7 +6317,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Lori A. Knowles</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lori A. Knowles</translation>
     </message>
     <message>
         <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
@@ -6297,12 +6337,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Brown</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Brown</translation>
     </message>
     <message>
         <source>P. Clement Brown</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>P. Clement Brown</translation>
     </message>
     <message>
         <source>Art in Dress</source>
@@ -6312,12 +6352,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Mitchell</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mitchell</translation>
     </message>
     <message>
         <source>Jno. J. Mitchell</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Jno. J. Mitchell</translation>
     </message>
     <message>
         <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
@@ -6327,7 +6367,7 @@ Do you want to save your changes?</source>
     <message>
         <source>GOST 17917-86</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>GOST 17917-86</translation>
     </message>
     <message>
         <source>Ministry of consumer industry of the USSR</source>
@@ -6342,7 +6382,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Eddy</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Eddy</translation>
     </message>
     <message>
         <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
@@ -6552,7 +6592,7 @@ Do you want to save your changes?</source>
     <message>
         <source>min</source>
         <comment>min of all arguments</comment>
-        <translation type="unfinished">min</translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>max</source>
@@ -6577,17 +6617,17 @@ Do you want to save your changes?</source>
     <message>
         <source>cm</source>
         <comment>centimeter</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter</comment>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation type="unfinished"></translation>
+        <translation>in</translation>
     </message>
 </context>
 <context>

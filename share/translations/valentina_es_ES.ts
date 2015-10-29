@@ -274,7 +274,7 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation type="unfinished">Crear revisión:</translation>
+        <translation>Crear revisión:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
@@ -286,15 +286,15 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation type="unfinished">Construido sobre %3 y %4</translation>
+        <translation>Construido sobre %3 y %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation type="unfinished">Sitio web: %1</translation>
+        <translation>Sitio web: %1</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation type="unfinished">No se puede abrir su navegador por defecto</translation>
+        <translation>No se puede abrir su navegador por defecto</translation>
     </message>
 </context>
 <context>
@@ -435,43 +435,43 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Radios</translation>
+        <translation>Radios</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor del radio</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
-        <translation type="unfinished">Primer ángulo</translation>
+        <translation>Primer ángulo</translation>
     </message>
     <message>
         <source>Value of first angle</source>
-        <translation type="unfinished">Valor del primer ángulo</translation>
+        <translation>Valor del primer ángulo</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">Longitud</translation>
+        <translation>Longitud</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud de arco</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">Punto central</translation>
+        <translation>Punto central</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished">Seleccionar punto del centro del arco</translation>
+        <translation>Seleccionar punto del centro del arco</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished">Color</translation>
+        <translation>Color</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -487,11 +487,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished">Radio no puede ser negativo</translation>
+        <translation>Radio no puede ser negativo</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
@@ -864,27 +864,27 @@
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Altura</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Line length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud de línea</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud de arco</translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud de curva</translation>
     </message>
     <message>
         <source>Line Angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Ángulo de la línea</translation>
     </message>
     <message>
         <source>Radius of arcs</source>
@@ -1176,7 +1176,7 @@
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Ángulo</translation>
+        <translation>Ángulo</translation>
     </message>
     <message>
         <source>Lengths curves</source>
@@ -1196,7 +1196,7 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Radios</translation>
+        <translation>Radios</translation>
     </message>
     <message>
         <source>Angles arcs</source>
@@ -1204,11 +1204,11 @@
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Fórmula</translation>
+        <translation>Fórmula</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished">Detalles</translation>
+        <translation>Detalles</translation>
     </message>
     <message>
         <source>Move measurement up</source>
@@ -1220,7 +1220,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nombre:</translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Calculated value:</source>
@@ -1232,7 +1232,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -1240,7 +1240,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Empty field.</source>
@@ -1248,15 +1248,15 @@
     </message>
     <message>
         <source>Empty field</source>
-        <translation type="unfinished">Campo vacío</translation>
+        <translation>Campo vacío</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valor</translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Error en análisis: %1</translation>
+        <translation>Error en análisis: %1</translation>
     </message>
     <message>
         <source>Increment_%1</source>
@@ -1362,7 +1362,7 @@
     </message>
     <message>
         <source>Create a layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear un diseño</translation>
     </message>
     <message>
         <source>Auto crop unused length</source>
@@ -1566,7 +1566,7 @@
     </message>
     <message>
         <source>Measurements</source>
-        <translation type="unfinished">Medidas</translation>
+        <translation>Medidas</translation>
     </message>
     <message>
         <source>Direct Height</source>
@@ -1686,7 +1686,7 @@
     </message>
     <message>
         <source>Individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Individual</translation>
     </message>
     <message>
         <source>Standard</source>
@@ -1694,42 +1694,42 @@
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centímetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milímetros</translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulgadas</translation>
     </message>
 </context>
 <context>
     <name>DialogNewPattern</name>
     <message>
         <source>Individual measurements</source>
-        <translation type="unfinished">Medidas individuales</translation>
+        <translation>Medidas individuales</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de la pieza del patrón</translation>
     </message>
     <message>
         <source>Units:</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidades:</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centímetros</translation>
+        <translation>Centímetros</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Milímetros</translation>
+        <translation>Milímetros</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulgadas</translation>
     </message>
 </context>
 <context>
@@ -1973,7 +1973,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de punto</translation>
     </message>
     <message>
         <source>Tangent point</source>
@@ -1981,11 +1981,11 @@
     </message>
     <message>
         <source>Arc</source>
-        <translation type="unfinished">Arco</translation>
+        <translation>Arco</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished">Seleccionar punto del centro del arco</translation>
+        <translation>Seleccionar punto del centro del arco</translation>
     </message>
     <message>
         <source>Take</source>
@@ -2004,15 +2004,15 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">Radios</translation>
+        <translation>Radios</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de punto</translation>
     </message>
     <message>
         <source>Center of the circle</source>
@@ -2020,7 +2020,7 @@
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished">Seleccionar punto del centro del arco</translation>
+        <translation>Seleccionar punto del centro del arco</translation>
     </message>
     <message>
         <source>Tangent point</source>
@@ -2040,11 +2040,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished">Radio no puede ser negativo</translation>
+        <translation>Radio no puede ser negativo</translation>
     </message>
 </context>
 <context>
@@ -2133,7 +2133,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de punto</translation>
     </message>
     <message>
         <source>First arc</source>
@@ -2141,7 +2141,7 @@
     </message>
     <message>
         <source>Selected arc</source>
-        <translation type="unfinished">Arco seleccionado</translation>
+        <translation>Arco seleccionado</translation>
     </message>
     <message>
         <source>Second arc</source>
@@ -2168,7 +2168,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius of the second circle</source>
@@ -2176,7 +2176,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de punto</translation>
     </message>
     <message>
         <source>Center of the first circle</source>
@@ -2184,7 +2184,7 @@
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished">Seleccionar punto del centro del arco</translation>
+        <translation>Seleccionar punto del centro del arco</translation>
     </message>
     <message>
         <source>Center of the second circle</source>
@@ -2208,11 +2208,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished">Radio no puede ser negativo</translation>
+        <translation>Radio no puede ser negativo</translation>
     </message>
 </context>
 <context>
@@ -2227,7 +2227,7 @@
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta:</translation>
     </message>
     <message>
         <source>File format:</source>
@@ -2246,7 +2246,7 @@
     <name>DialogSaveLayout</name>
     <message>
         <source>Name conflict</source>
-        <translation type="unfinished"></translation>
+        <translation>Conflicto en nombre</translation>
     </message>
     <message>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
@@ -2501,11 +2501,11 @@
     </message>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Primer punto</translation>
+        <translation>Primer punto</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">Segundo punto</translation>
+        <translation>Segundo punto</translation>
     </message>
 </context>
 <context>
@@ -2575,7 +2575,7 @@
     </message>
     <message>
         <source>First point of angle</source>
-        <translation type="unfinished">Primer punto del ángulo</translation>
+        <translation>Primer punto del ángulo</translation>
     </message>
     <message>
         <source>Second base point</source>
@@ -2583,7 +2583,7 @@
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation type="unfinished">Segundo punto del ángulo </translation>
+        <translation>Segundo punto del ángulo </translation>
     </message>
     <message>
         <source>First dart point</source>
@@ -2591,7 +2591,7 @@
     </message>
     <message>
         <source>Third point of angle</source>
-        <translation type="unfinished">Tercer punto del ángulo</translation>
+        <translation>Tercer punto del ángulo</translation>
     </message>
     <message>
         <source>Second dart point</source>
@@ -2599,7 +2599,7 @@
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation type="unfinished">Mostrar línea desde segundo punto hasta este punto</translation>
+        <translation>Mostrar línea desde segundo punto hasta este punto</translation>
     </message>
     <message>
         <source>Third dart point</source>
@@ -2958,7 +2958,7 @@
     </message>
     <message>
         <source>Draw mode</source>
-        <translation>Modo de dibujo</translation>
+        <translation type="vanished">Modo de dibujo</translation>
     </message>
     <message>
         <source>Details</source>
@@ -2966,7 +2966,7 @@
     </message>
     <message>
         <source>Details mode</source>
-        <translation>Modo de detalles</translation>
+        <translation type="vanished">Modo de detalles</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -3356,11 +3356,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished">Diseño</translation>
+        <translation>Diseño</translation>
     </message>
     <message>
         <source>Create a layout</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Crear un diseño</translation>
     </message>
     <message>
         <source>Show Curve Details</source>
@@ -3400,7 +3400,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation type="unfinished"></translation>
+        <translation>Páginas de diseño</translation>
     </message>
     <message>
         <source>Save as PDF</source>
@@ -3639,6 +3639,34 @@ Quiere guardar los cambios?</translation>
         <source>Print preview tiled layout</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements if they was not used in a pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements unloaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -3660,7 +3688,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Critical error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Error crítico!!</translation>
     </message>
     <message>
         <source>Print to pdf</source>
@@ -3692,11 +3720,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation type="unfinished">No se ha podido preparar los datos para la creación del diseño</translation>
+        <translation>No se ha podido preparar los datos para la creación del diseño</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished">Piezas de trabajo no están ordenadas, y no coinciden con el papel</translation>
+        <translation>Piezas de trabajo no están ordenadas, y no coinciden con el papel</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -3934,7 +3962,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Internal error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Error interno</translation>
     </message>
     <message>
         <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
@@ -3964,7 +3992,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Expression is empty.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>La expresión está vacía.</translation>
     </message>
     <message>
         <source>Invalid pointer to variable.</source>
@@ -4014,7 +4042,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Missing parenthesis</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Faltan paréntesis</translation>
     </message>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
@@ -4029,17 +4057,17 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Divide by zero</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>División por cero</translation>
     </message>
     <message>
         <source>Domain error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Error de dominio</translation>
     </message>
     <message>
         <source>Name conflict</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Conflicto en nombre</translation>
     </message>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
@@ -4079,12 +4107,12 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>El resultado de la función es una cadena.</translation>
     </message>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Error en análisis</translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
@@ -4094,7 +4122,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>El operador &quot;$TOK$&quot; tiene que estar precedido de paréntesis cerrados.</translation>
     </message>
     <message>
         <source>If-then-else operator is missing an else clause</source>
@@ -4136,7 +4164,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Calculated value</source>
@@ -4144,27 +4172,27 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Fórmula</translation>
+        <translation>Fórmula</translation>
     </message>
     <message>
         <source>Base value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor base</translation>
     </message>
     <message>
         <source>In sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>En tamaños</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation type="unfinished"></translation>
+        <translation>En alturas</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished">Detalles</translation>
+        <translation>Detalles</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nombre:</translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Formula:</source>
@@ -4172,7 +4200,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostrar cálculo total en una caja de mensajes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Base value:</source>
@@ -4220,7 +4248,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta:</translation>
     </message>
     <message>
         <source>Path to file</source>
@@ -4248,11 +4276,11 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Given name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Apellidos:</translation>
     </message>
     <message>
         <source>Birth date:</source>
@@ -4276,7 +4304,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Window</source>
-        <translation type="unfinished">Ventana</translation>
+        <translation>Ventana</translation>
     </message>
     <message>
         <source>Help</source>
@@ -4284,7 +4312,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Measurements</source>
-        <translation type="unfinished">Medidas</translation>
+        <translation>Medidas</translation>
     </message>
     <message>
         <source>Menu</source>
@@ -4300,7 +4328,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Guardar</translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <source>Save As ...</source>
@@ -4312,7 +4340,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished">Sobre &amp;Qt</translation>
+        <translation>Sobre &amp;Qt</translation>
     </message>
     <message>
         <source>About Tape</source>
@@ -4320,7 +4348,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nuevo</translation>
+        <translation>Nuevo</translation>
     </message>
     <message>
         <source>Add known</source>
@@ -4352,7 +4380,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Preferencias</translation>
+        <translation>Preferencias</translation>
     </message>
     <message>
         <source>untitled %1</source>
@@ -4360,15 +4388,15 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation type="unfinished">Este archivo ha sido abierto en otra ventana.</translation>
+        <translation>Este archivo ha sido abierto en otra ventana.</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Error en archivo.</translation>
+        <translation>Error en archivo.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">No se ha guardado archivo</translation>
+        <translation>No se ha guardado archivo</translation>
     </message>
     <message>
         <source>measurements</source>
@@ -4376,15 +4404,15 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
-        <translation type="unfinished">Medidas individuales (*.vit)</translation>
+        <translation>Medidas individuales (*.vit)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst)</source>
-        <translation type="unfinished">Medidas estándar (*.vst)</translation>
+        <translation>Medidas estándar (*.vst)</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Guardar como</translation>
+        <translation>Guardar como</translation>
     </message>
     <message>
         <source>&amp;New Window</source>
@@ -4400,7 +4428,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Empty field.</source>
@@ -4408,27 +4436,27 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Error en análisis: %1</translation>
+        <translation>Error en análisis: %1</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation type="unfinished">Medidas estándar</translation>
+        <translation>Medidas estándar</translation>
     </message>
     <message>
         <source>Height: </source>
-        <translation type="unfinished">Altura:</translation>
+        <translation>Altura:</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation type="unfinished">Tamaño:</translation>
+        <translation>Tamaño:</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation type="unfinished">Medidas individuales</translation>
+        <translation>Medidas individuales</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin título</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -4445,15 +4473,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Empty field</source>
-        <translation type="unfinished">Campo vacío</translation>
+        <translation>Campo vacío</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valor</translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Abrir archivo</translation>
+        <translation>Abrir archivo</translation>
     </message>
     <message>
         <source>Import from a pattern</source>
@@ -4461,7 +4489,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation type="unfinished">Archivos de patrón (*.val)</translation>
+        <translation>Archivos de patrón (*.val)</translation>
     </message>
     <message>
         <source>Pattern unit:</source>
@@ -4575,12 +4603,12 @@ Do you want to save your changes?</source>
     <message>
         <source>male</source>
         <comment>gender</comment>
-        <translation type="unfinished"></translation>
+        <translation>hombre</translation>
     </message>
     <message>
         <source>female</source>
         <comment>gender</comment>
-        <translation type="unfinished"></translation>
+        <translation>mujer</translation>
     </message>
     <message>
         <source>Gender:</source>
@@ -4606,43 +4634,55 @@ Do you want to save your changes?</source>
         <source>Export standard measurements not supported.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Measurement diagram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
     <message>
         <source>Apply</source>
-        <translation type="unfinished">Aplicar</translation>
+        <translation>Aplicar</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Cancelar</translation>
+        <translation>&amp;Cancelar</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation type="unfinished">Preferencias</translation>
+        <translation>Preferencias</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Configuración</translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="unfinished">Carpetas</translation>
+        <translation>Carpetas</translation>
     </message>
 </context>
 <context>
     <name>TapeConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Idioma</translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <source>GUI language</source>
-        <translation type="unfinished">Idioma de interfaz gráfica de usuario</translation>
+        <translation>Idioma de interfaz gráfica de usuario</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -4658,46 +4698,46 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="unfinished">Partes separador decimal</translation>
+        <translation>Partes separador decimal</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation type="unfinished">Con las opciones del SO (%1)</translation>
+        <translation>Con las opciones del SO (%1)</translation>
     </message>
 </context>
 <context>
     <name>TapePathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation type="unfinished">Abrir Directorio</translation>
+        <translation>Abrir Directorio</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation type="unfinished">Directorios que usa Valentina</translation>
+        <translation>Directorios que usa Valentina</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Defecto</translation>
+        <translation>Defecto</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Editar</translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Tipo</translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished">Directorio</translation>
+        <translation>Directorio</translation>
     </message>
     <message>
         <source>Individual measurements</source>
-        <translation type="unfinished">Medidas individuales</translation>
+        <translation>Medidas individuales</translation>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation type="unfinished">Medidas estándar</translation>
+        <translation>Medidas estándar</translation>
     </message>
     <message>
         <source>Templates</source>
@@ -4766,7 +4806,7 @@ Do you want to save your changes?</source>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se encuentra herramienta en la tabla.</translation>
     </message>
 </context>
 <context>
@@ -4883,7 +4923,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Ángulo</translation>
+        <translation>Ángulo</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
@@ -5019,11 +5059,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Programa generando patrón</translation>
     </message>
     <message>
         <source>Pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo de patrón.</translation>
     </message>
 </context>
 <context>
@@ -5392,7 +5432,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation type="unfinished">Punto de distancia y ángulo</translation>
+        <translation>Punto de distancia y ángulo</translation>
     </message>
     <message>
         <source>Line type</source>
@@ -5408,7 +5448,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation type="unfinished">Punto de distancia a lo largo de la línea</translation>
+        <translation>Punto de distancia a lo largo de la línea</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -5428,7 +5468,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation type="unfinished"></translation>
+        <translation>Punto a lo largo de la bisectriz</translation>
     </message>
     <message>
         <source>Cut arc tool</source>
@@ -5444,7 +5484,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Perpendicular point along line</source>
-        <translation type="unfinished">Punto Perpendicular a lo largo de la línea</translation>
+        <translation>Punto Perpendicular a lo largo de la línea</translation>
     </message>
     <message>
         <source>Line between points</source>
@@ -5452,7 +5492,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation type="unfinished">Punto de intersección en línea</translation>
+        <translation>Punto de intersección en línea</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
@@ -5508,11 +5548,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Primer punto</translation>
+        <translation>Primer punto</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">Segundo punto</translation>
+        <translation>Segundo punto</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -6383,7 +6423,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Línea_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
@@ -6443,127 +6483,127 @@ Do you want to save your changes?</source>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation>tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation>atan</translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation type="unfinished"></translation>
+        <translation>cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation>tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>asinh</translation>
     </message>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation>acosh</translation>
     </message>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation>atanh</translation>
     </message>
     <message>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
-        <translation type="unfinished"></translation>
+        <translation>log2</translation>
     </message>
     <message>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
-        <translation type="unfinished"></translation>
+        <translation>log10</translation>
     </message>
     <message>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
-        <translation type="unfinished"></translation>
+        <translation>log</translation>
     </message>
     <message>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
-        <translation type="unfinished"></translation>
+        <translation>in</translation>
     </message>
     <message>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
-        <translation type="unfinished"></translation>
+        <translation>exp</translation>
     </message>
     <message>
         <source>sqrt</source>
         <comment>square root of a value</comment>
-        <translation type="unfinished"></translation>
+        <translation>sqrt</translation>
     </message>
     <message>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
-        <translation type="unfinished"></translation>
+        <translation>sign</translation>
     </message>
     <message>
         <source>rint</source>
         <comment>round to nearest integer</comment>
-        <translation type="unfinished"></translation>
+        <translation>rint</translation>
     </message>
     <message>
         <source>abs</source>
         <comment>absolute value</comment>
-        <translation type="unfinished"></translation>
+        <translation>abs</translation>
     </message>
     <message>
         <source>min</source>
         <comment>min of all arguments</comment>
-        <translation type="unfinished">min</translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>max</source>
         <comment>max of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation>max</translation>
     </message>
     <message>
         <source>sum</source>
         <comment>sum of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation>sum</translation>
     </message>
     <message>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation>avg</translation>
     </message>
     <message>
         <source>fmod</source>
@@ -6573,17 +6613,17 @@ Do you want to save your changes?</source>
     <message>
         <source>cm</source>
         <comment>centimeter</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter</comment>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation type="unfinished"></translation>
+        <translation>in</translation>
     </message>
 </context>
 <context>

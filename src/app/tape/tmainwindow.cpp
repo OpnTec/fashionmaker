@@ -90,7 +90,10 @@ TMainWindow::TMainWindow(QWidget *parent)
       search(),
       labelGradationHeights(nullptr),
       labelGradationSizes(nullptr),
-      labelPatternUnit(nullptr)
+      labelPatternUnit(nullptr),
+      actionDockDiagram(nullptr),
+      dockDiagramVisible(false),
+      isInitialized(false)
 {
     ui->setupUi(this);
     search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
@@ -504,6 +507,27 @@ void TMainWindow::changeEvent(QEvent *event)
 
     // remember to call base class implementation
     QMainWindow::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::showEvent(QShowEvent *event)
+{
+    QMainWindow::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    dockDiagramVisible = ui->dockWidgetDiagram->isVisible();
+    ui->dockWidgetDiagram->setVisible(false);
+
+    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1169,6 +1193,8 @@ void TMainWindow::ShowMData()
             return;
         }
 
+        ShowMDiagram(meash->GetName());
+
         ui->lineEditName->blockSignals(true);
         ui->plainTextEditDescription->blockSignals(true);
         ui->lineEditFullName->blockSignals(true);
@@ -1236,6 +1262,31 @@ void TMainWindow::ShowMData()
     {
         MFields(false);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ShowMDiagram(const QString &name)
+{
+    const VTranslateVars *trv = qApp->TrVars();
+    const QString number = trv->MNumber(name);
+
+    if (number.isEmpty())
+    {
+        ui->labelDiagram->setText(tr("<html><head/><body><p><span style=\" font-size:340pt;\">?</span></p>"
+                                     "<p align=\"center\">Unknown measurement</p></body></html>"));
+    }
+    else
+    {
+        const QString iconPath = QString("://diagrams/%1.png").arg(MapDiagrams(number));
+        ui->labelDiagram->setText(QString("<html><head/><body><img src=\"%1\" align=\"center\">"
+                                          "<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>")
+                                          .arg(iconPath).arg(number).arg(trv->GuiText(name)));
+    }
+    // This part is very ugly, can't find better way to resize dockWidget.
+    ui->labelDiagram->adjustSize();
+    // And also thos 50 px. DockWidget has some border. And i can't find how big it is.
+    // Can lead to problem in future.
+    ui->dockWidgetDiagram->setMaximumWidth(ui->labelDiagram->width()+50);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1664,6 +1715,9 @@ void TMainWindow::SetupMenu()
     connect(ui->actionAddKnown, &QAction::triggered, this, &TMainWindow::AddKnown);
     connect(ui->actionDatabase, &QAction::triggered, qApp, &MApplication::ShowDataBase);
     connect(ui->actionImportFromPattern, &QAction::triggered, this, &TMainWindow::ImportFromPattern);
+    actionDockDiagram = ui->dockWidgetDiagram->toggleViewAction();
+    ui->menuMeasurements->addAction(actionDockDiagram);
+    actionDockDiagram->setEnabled(false);
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowWindowMenu);
@@ -1680,6 +1734,8 @@ void TMainWindow::InitWindow()
     SCASSERT(m != nullptr);
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
+    ui->dockWidgetDiagram->setVisible(dockDiagramVisible);
+    actionDockDiagram->setEnabled(true);
     ui->tabWidget->setCurrentIndex(0);
 
     ui->plainTextEditNotes->setEnabled(true);

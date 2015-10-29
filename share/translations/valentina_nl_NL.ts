@@ -1862,7 +1862,7 @@
     </message>
     <message>
         <source>Add  son</source>
-        <translation type="unfinished"></translation>
+        <translation>Add  son</translation>
     </message>
     <message>
         <source>Remove attribute</source>
@@ -2962,7 +2962,7 @@
     </message>
     <message>
         <source>Draw mode</source>
-        <translation>Teken modus</translation>
+        <translation type="vanished">Teken modus</translation>
     </message>
     <message>
         <source>Details</source>
@@ -2970,7 +2970,7 @@
     </message>
     <message>
         <source>Details mode</source>
-        <translation>Details modus</translation>
+        <translation type="vanished">Details modus</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -3363,7 +3363,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create a layout</source>
-        <translation>Maak een opmaak</translation>
+        <translation type="vanished">Maak een opmaak</translation>
     </message>
     <message>
         <source>Show Curve Details</source>
@@ -3642,6 +3642,34 @@ Do you want to save your changes?</source>
         <source>Print preview tiled layout</source>
         <translation>Print voorbeeldweergave papierformaatindeling opmaak</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements if they was not used in a pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements unloaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -3793,7 +3821,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Templates</source>
-        <translation type="unfinished">Sjablonen</translation>
+        <translation>Sjablonen</translation>
     </message>
 </context>
 <context>
@@ -3932,17 +3960,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Unexpected token &quot;$TOK$&quot; found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onverwacht teken &quot;$TOK$&quot;gevonden op positie $POS$.</translation>
     </message>
     <message>
         <source>Internal error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Interne fout</translation>
     </message>
     <message>
         <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige functie-, variabele- of constant naam:&quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
@@ -3962,152 +3990,152 @@ Do you want to save your changes?</source>
     <message>
         <source>Invalid pointer to callback function.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige aanwijzer naar terughaalfunktie.</translation>
     </message>
     <message>
         <source>Expression is empty.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Beschrijving is leeg.</translation>
     </message>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige aanwijzer voor variabele.</translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onverwachte bediener &quot;$TOK$&quot; gevonden op positie $POS$</translation>
     </message>
     <message>
         <source>Unexpected end of expression at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onverwacht eind van beschrijving voor positie $POS$</translation>
     </message>
     <message>
         <source>Unexpected argument separator at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onverwacht argument scheidingsteken voor positie $POS$</translation>
     </message>
     <message>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onverwacht tussenzin &quot;$TOK$&quot;voor positie $POS$</translation>
     </message>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onverwachte funktie &quot;$TOK$&quot; voor positie $POS$</translation>
     </message>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onverwachte waarde &quot;$TOK$&quot; gevonden op positie $POS$</translation>
     </message>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onverwachte variabele &quot;$TOK$&quot; gevonden op positie $POS$</translation>
     </message>
     <message>
         <source>Function arguments used without a function (position: $POS$)</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Funktie argumenten gebruikt zonder funktie( positie : $POS$)</translation>
     </message>
     <message>
         <source>Missing parenthesis</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tussenzin missend</translation>
     </message>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Te veel parameters voor funktie &quot;$TOK$&quot; voor beschrijving positie $POS$</translation>
     </message>
     <message>
         <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Te weinig parameters voor funktie &quot;$TOK$&quot; voor beschrijving positie $POS$</translation>
     </message>
     <message>
         <source>Divide by zero</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gedeeld door nul</translation>
     </message>
     <message>
         <source>Domain error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Domein fout</translation>
     </message>
     <message>
         <source>Name conflict</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished">Naam conflict.</translation>
+        <translation>Naam conflict.</translation>
     </message>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige waarde voor bediener prioriteiten( moet groter zijn of gelijk aan nul).</translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Door de gebruiker definieerde binary bediener &quot;$TOK$&quot; komt in conflict met een ingebouwde bediener.</translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onverwachte karakterreeks teken gevonden op positie $POS$.</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onbeëindigd karakterreeks startend op positie $POS$</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Karakterreeks funktie benoemd met een niet-karakterreeks type argument.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Karakterreeks waarde gebruikt waar een nummeriek argument wordt verwacht.</translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Geen passende overbelasting voor bediener &quot;$TOK$&quot; voor positie $POS$.</translation>
     </message>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Funktie resultaat is een karakterreeks.</translation>
     </message>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Uitpak fout.</translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Decimale afscheidingsteken is identiek aan de funktie argument afscheidingsteken.</translation>
     </message>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>De &quot;$TOK$&quot; bediener moet vervolgd worden met een gesloten accolade.</translation>
     </message>
     <message>
         <source>If-then-else operator is missing an else clause</source>
         <comment>Math parser error messages. Do not translate operator name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Als-dan-anders bediener vermist een anders clausule</translation>
     </message>
     <message>
         <source>Misplaced colon at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Misplaatste dubbele punt op positie $POS$</translation>
     </message>
 </context>
 <context>
@@ -4610,6 +4638,18 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Export standard measurements not supported.</source>
         <translation>Exporteer niet ondersteunde maten.</translation>
     </message>
+    <message>
+        <source>Measurement diagram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -4851,55 +4891,55 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VCommandLine</name>
     <message>
         <source>Path to custom measure file (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Pad naar gebruikelijke maten bestand (export modus).</translation>
     </message>
     <message>
         <source>The measure file</source>
-        <translation type="unfinished"></translation>
+        <translation>Het maten bestand</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
+        <translation>Nummer behorend bij de uitkomst indeling( standaardinstelling = 0, export modus):</translation>
     </message>
     <message>
         <source>Format number</source>
-        <translation type="unfinished"></translation>
+        <translation>Indeling nummer</translation>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
+        <translation>Nummer behorende bij de pagina sjabloon( standaardinstelling = 0, export modus):</translation>
     </message>
     <message>
         <source>Template number</source>
-        <translation type="unfinished"></translation>
+        <translation>Sjabloon nummer</translation>
     </message>
     <message>
         <source>The page width</source>
-        <translation type="unfinished"></translation>
+        <translation>De pagina breedte</translation>
     </message>
     <message>
         <source>The measure unit</source>
-        <translation type="unfinished"></translation>
+        <translation>De maten eenheid</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotaties in graden( éen van de voorafvastgestelde). Standaardinstelling( of 0) is geen rotatie (export modus).</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Hoek</translation>
+        <translation>Hoek</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch inkorten van ongebruikte lengte (export modus)</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Voegt pagina&apos;s samen wanneer mogelijk ( export modus).</translation>
     </message>
     <message>
         <source>Save length of the sheet if set. (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Slaat lengte van blad op wanneer ingesteld. ( export modus).</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
@@ -5023,11 +5063,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Pattern making program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon teken programma.</translation>
     </message>
     <message>
         <source>Pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon bestand.</translation>
     </message>
 </context>
 <context>
@@ -5574,7 +5614,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Bunka</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bunka</translation>
     </message>
     <message>
         <source>Bunka Fashion College</source>
@@ -5619,12 +5659,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Morris, K.</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Morris, K.</translation>
     </message>
     <message>
         <source>Karen Morris</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Karen Morris</translation>
     </message>
     <message>
         <source>Sewing Lingerie that Fits</source>
@@ -5634,12 +5674,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Castro</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Castro</translation>
     </message>
     <message>
         <source>Lucia Mors de Castro</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lucia Mors de Castro</translation>
     </message>
     <message>
         <source>Patternmaking in Practic</source>
@@ -5649,7 +5689,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Kim &amp; Uh</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kim &amp; Uh</translation>
     </message>
     <message>
         <source>Injoo Kim and Mykyung Uh</source>
@@ -5664,12 +5704,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Waugh</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Waugh</translation>
     </message>
     <message>
         <source>Norah Waugh</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Norah Waugh</translation>
     </message>
     <message>
         <source>Corsets and Crinolines</source>
@@ -5679,12 +5719,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Grimble</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Grimble</translation>
     </message>
     <message>
         <source>Frances Grimble</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Frances Grimble</translation>
     </message>
     <message>
         <source>Fashions of the Gilded Age</source>
@@ -5699,7 +5739,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>ed. R. L. Shep</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>ed. R. L. Shep</translation>
     </message>
     <message>
         <source>The Great War: Styles and Patterns of the 1910s</source>
@@ -5709,7 +5749,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Hillhouse &amp; Mansfield</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hillhouse &amp; Mansfield</translation>
     </message>
     <message>
         <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
@@ -5724,12 +5764,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Pivnick</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pivnick</translation>
     </message>
     <message>
         <source>Esther Kaplan Pivnick</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Esther Kaplan Pivnick</translation>
     </message>
     <message>
         <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
@@ -5739,12 +5779,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Minister &amp; Son</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Minister &amp; Son</translation>
     </message>
     <message>
         <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Edward Minister &amp; Son, ed. R. L. Shep</translation>
     </message>
     <message>
         <source>The Complete Guide to Practical Cutting (1853)</source>
@@ -5754,12 +5794,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Strickland</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Strickland</translation>
     </message>
     <message>
         <source>Gertrude Strickland</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gertrude Strickland</translation>
     </message>
     <message>
         <source>A Tailoring Manual</source>
@@ -5769,7 +5809,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Loh &amp; Lewis</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Loh &amp; Lewis</translation>
     </message>
     <message>
         <source>May Loh and Diehl Lewis</source>
@@ -5784,12 +5824,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Morris, F. R.</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Morris, F. R.</translation>
     </message>
     <message>
         <source>F. R. Morris</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>F. R. Morris</translation>
     </message>
     <message>
         <source>Ladies Garment Cutting and Making</source>
@@ -5799,12 +5839,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Mason</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mason</translation>
     </message>
     <message>
         <source>Gertrude Mason</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gertrude Mason</translation>
     </message>
     <message>
         <source>Gertrude Mason&apos;s Patternmaking Book</source>
@@ -5814,12 +5854,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Kimata</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kimata</translation>
     </message>
     <message>
         <source>K. Kimata</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>K. Kimata</translation>
     </message>
     <message>
         <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
@@ -5844,12 +5884,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Kopp</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kopp</translation>
     </message>
     <message>
         <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</translation>
     </message>
     <message>
         <source>How to Draft Basic Patterns</source>
@@ -5859,12 +5899,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Ekern</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ekern</translation>
     </message>
     <message>
         <source>Doris Ekern</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Doris Ekern</translation>
     </message>
     <message>
         <source>Slacks Cut-to-Fit for Your Figure</source>
@@ -5874,12 +5914,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Doyle</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Doyle</translation>
     </message>
     <message>
         <source>Sarah J. Doyle</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sarah J. Doyle</translation>
     </message>
     <message>
         <source>Sarah&apos;s Key to Pattern Drafting</source>
@@ -5889,12 +5929,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Shelton</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Shelton</translation>
     </message>
     <message>
         <source>Karla J. Shelton</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Karla J. Shelton</translation>
     </message>
     <message>
         <source>Design and Sew Jeans</source>
@@ -5919,12 +5959,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Rohr</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Rohr</translation>
     </message>
     <message>
         <source>M. Rohr</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>M. Rohr</translation>
     </message>
     <message>
         <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
@@ -5934,12 +5974,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Moore</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Moore</translation>
     </message>
     <message>
         <source>Dorothy Moore</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dorothy Moore</translation>
     </message>
     <message>
         <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
@@ -5949,12 +5989,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Abling</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Abling</translation>
     </message>
     <message>
         <source>Bina Abling</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bina Abling</translation>
     </message>
     <message>
         <source>Integrating Draping, Drafting and Drawing</source>
@@ -5964,12 +6004,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Fukomoto</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fukomoto</translation>
     </message>
     <message>
         <source>Sue S. Fukomoto</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sue S. Fukomoto</translation>
     </message>
     <message>
         <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
@@ -5994,12 +6034,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Erwin</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Erwin</translation>
     </message>
     <message>
         <source>Mabel D. Erwin</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mabel D. Erwin</translation>
     </message>
     <message>
         <source>Practical Dress Design</source>
@@ -6009,12 +6049,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Gough</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gough</translation>
     </message>
     <message>
         <source>E. L. G. Gough</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>E. L. G. Gough</translation>
     </message>
     <message>
         <source>Principles of Garment Cutting</source>
@@ -6024,12 +6064,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Allemong</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Allemong</translation>
     </message>
     <message>
         <source>Elizabeth M. Allemong</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Elizabeth M. Allemong</translation>
     </message>
     <message>
         <source>European Cut</source>
@@ -6039,12 +6079,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>McCunn</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>McCunn</translation>
     </message>
     <message>
         <source>Donald H. McCunn</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donald H. McCunn</translation>
     </message>
     <message>
         <source>How to Make Your Own Sewing Patterns</source>
@@ -6054,7 +6094,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Zarapkar</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zarapkar</translation>
     </message>
     <message>
         <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
@@ -6069,12 +6109,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Kunick</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kunick</translation>
     </message>
     <message>
         <source>Philip Kunick</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Philip Kunick</translation>
     </message>
     <message>
         <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
@@ -6084,12 +6124,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Handford</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Handford</translation>
     </message>
     <message>
         <source>Jack Handford</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Jack Handford</translation>
     </message>
     <message>
         <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
@@ -6099,12 +6139,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Davis</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Davis</translation>
     </message>
     <message>
         <source>R. I. Davis</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>R. I. Davis</translation>
     </message>
     <message>
         <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
@@ -6114,12 +6154,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>MacLochlainn</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>MacLochlainn</translation>
     </message>
     <message>
         <source>Jason MacLochlainn</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Jason MacLochlainn</translation>
     </message>
     <message>
         <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
@@ -6129,12 +6169,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Joseph-Armstrong</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Joseph-Armstrong</translation>
     </message>
     <message>
         <source>Helen Joseph-Armstrong</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Helen Joseph-Armstrong</translation>
     </message>
     <message>
         <source>Patternmaking for Fashion Design</source>
@@ -6149,7 +6189,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Frederick T. Croonberg</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Frederick T. Croonberg</translation>
     </message>
     <message>
         <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
@@ -6159,7 +6199,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Sugino</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sugino</translation>
     </message>
     <message>
         <source>Dressmaking</source>
@@ -6179,7 +6219,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Louis Devere</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Louis Devere</translation>
     </message>
     <message>
         <source>The Handbook of Practical Cutting on the Centre Point System</source>
@@ -6214,12 +6254,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Kershaw</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kershaw</translation>
     </message>
     <message>
         <source>Gareth Kershaw</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gareth Kershaw</translation>
     </message>
     <message>
         <source>Patternmaking for Menswear</source>
@@ -6229,12 +6269,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Gilewska</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gilewska</translation>
     </message>
     <message>
         <source>Teresa Gilewska</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Teresa Gilewska</translation>
     </message>
     <message>
         <source>Pattern-Drafting for Fashion: The Basics</source>
@@ -6244,12 +6284,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Lo</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lo</translation>
     </message>
     <message>
         <source>Dennic Chunman Lo</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dennic Chunman Lo</translation>
     </message>
     <message>
         <source>Pattern Cutting</source>
@@ -6259,12 +6299,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Bray</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bray</translation>
     </message>
     <message>
         <source>Natalie Bray</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Natalie Bray</translation>
     </message>
     <message>
         <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
@@ -6279,7 +6319,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Lori A. Knowles</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lori A. Knowles</translation>
     </message>
     <message>
         <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
@@ -6299,12 +6339,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Brown</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Brown</translation>
     </message>
     <message>
         <source>P. Clement Brown</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>P. Clement Brown</translation>
     </message>
     <message>
         <source>Art in Dress</source>
@@ -6319,7 +6359,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Jno. J. Mitchell</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Jno. J. Mitchell</translation>
     </message>
     <message>
         <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
@@ -6329,7 +6369,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>GOST 17917-86</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>GOST 17917-86</translation>
     </message>
     <message>
         <source>Ministry of consumer industry of the USSR</source>
@@ -6344,7 +6384,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Eddy</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Eddy</translation>
     </message>
     <message>
         <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
@@ -6389,27 +6429,27 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lijn_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>HoekLijn_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Boog_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Spl_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>SplPath</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
@@ -6449,127 +6489,127 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>sin</source>
         <comment>sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>sin</translation>
     </message>
     <message>
         <source>cos</source>
         <comment>cosine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>cos</translation>
     </message>
     <message>
         <source>tan</source>
         <comment>tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation>tan</translation>
     </message>
     <message>
         <source>asin</source>
         <comment>arcus sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>asin</translation>
     </message>
     <message>
         <source>acos</source>
         <comment>arcus cosine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>acos</translation>
     </message>
     <message>
         <source>atan</source>
         <comment>arcus tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation>atan</translation>
     </message>
     <message>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>sinh</translation>
     </message>
     <message>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
-        <translation type="unfinished"></translation>
+        <translation>cosh</translation>
     </message>
     <message>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation>tanh</translation>
     </message>
     <message>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
-        <translation type="unfinished"></translation>
+        <translation>asinh</translation>
     </message>
     <message>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation>acosh</translation>
     </message>
     <message>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation type="unfinished"></translation>
+        <translation>atanh</translation>
     </message>
     <message>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
-        <translation type="unfinished"></translation>
+        <translation>log2</translation>
     </message>
     <message>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
-        <translation type="unfinished"></translation>
+        <translation>log10</translation>
     </message>
     <message>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
-        <translation type="unfinished"></translation>
+        <translation>log</translation>
     </message>
     <message>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
-        <translation type="unfinished"></translation>
+        <translation>In</translation>
     </message>
     <message>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
-        <translation type="unfinished"></translation>
+        <translation>exp</translation>
     </message>
     <message>
         <source>sqrt</source>
         <comment>square root of a value</comment>
-        <translation type="unfinished"></translation>
+        <translation>sqrt</translation>
     </message>
     <message>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
-        <translation type="unfinished"></translation>
+        <translation>sign</translation>
     </message>
     <message>
         <source>rint</source>
         <comment>round to nearest integer</comment>
-        <translation type="unfinished"></translation>
+        <translation>rint</translation>
     </message>
     <message>
         <source>abs</source>
         <comment>absolute value</comment>
-        <translation type="unfinished"></translation>
+        <translation>abs</translation>
     </message>
     <message>
         <source>min</source>
         <comment>min of all arguments</comment>
-        <translation type="unfinished">min</translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>max</source>
         <comment>max of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation>max</translation>
     </message>
     <message>
         <source>sum</source>
         <comment>sum of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation>som</translation>
     </message>
     <message>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
-        <translation type="unfinished"></translation>
+        <translation>gemiddeld</translation>
     </message>
     <message>
         <source>fmod</source>
@@ -6579,17 +6619,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>cm</source>
         <comment>centimeter</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>mm</source>
         <comment>millimeter</comment>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation type="unfinished"></translation>
+        <translation>in</translation>
     </message>
 </context>
 <context>

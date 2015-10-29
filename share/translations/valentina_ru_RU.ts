@@ -2962,7 +2962,7 @@
     </message>
     <message>
         <source>Draw mode</source>
-        <translation>Режим рисования</translation>
+        <translation type="vanished">Режим рисования</translation>
     </message>
     <message>
         <source>Details</source>
@@ -2970,7 +2970,7 @@
     </message>
     <message>
         <source>Details mode</source>
-        <translation>Режим деталей</translation>
+        <translation type="vanished">Режим деталей</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -3363,7 +3363,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create a layout</source>
-        <translation>Создать раскладку</translation>
+        <translation type="vanished">Создать раскладку</translation>
     </message>
     <message>
         <source>Show Curve Details</source>
@@ -3643,6 +3643,34 @@ Do you want to save your changes?</source>
         <source>Print preview tiled layout</source>
         <translation>Предварительный просмотр плиткой</translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unload measurements if they was not used in a pattern file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements unloaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -3794,7 +3822,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Templates</source>
-        <translation type="unfinished">Шаблоны</translation>
+        <translation>Шаблоны</translation>
     </message>
 </context>
 <context>
@@ -4611,6 +4639,18 @@ Do you want to save your changes?</source>
         <source>Export standard measurements not supported.</source>
         <translation>Экспорт стандартных мерок не поддерживается.</translation>
     </message>
+    <message>
+        <source>Measurement diagram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -4868,7 +4908,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
+        <translation>Номер соответствующий шабло</translation>
     </message>
     <message>
         <source>Template number</source>
@@ -5644,7 +5684,8 @@ Do you want to save your changes?</source>
     <message>
         <source>Patternmaking in Practic</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Patternmaking in Practic
+(Практическое изготовление выкроек)</translation>
     </message>
     <message>
         <source>Kim &amp; Uh</source>
@@ -5704,7 +5745,8 @@ Do you want to save your changes?</source>
     <message>
         <source>The Great War: Styles and Patterns of the 1910s</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Great War: Styles and Patterns of the 1910s
+(Великая война: стили и модели 1910-х годов)</translation>
     </message>
     <message>
         <source>Hillhouse &amp; Mansfield</source>
@@ -5749,7 +5791,8 @@ Do you want to save your changes?</source>
     <message>
         <source>The Complete Guide to Practical Cutting (1853)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Complete Guide to Practical Cutting (1853)
+(Полное руководство по практической резке (1853))</translation>
     </message>
     <message>
         <source>Strickland</source>
@@ -5764,7 +5807,8 @@ Do you want to save your changes?</source>
     <message>
         <source>A Tailoring Manual</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>A Tailoring Manual
+(Руководство по шитью)</translation>
     </message>
     <message>
         <source>Loh &amp; Lewis</source>
@@ -5794,7 +5838,8 @@ Do you want to save your changes?</source>
     <message>
         <source>Ladies Garment Cutting and Making</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ladies Garment Cutting and Making
+(Кройка и создание женской одежды)</translation>
     </message>
     <message>
         <source>Mason</source>
@@ -5854,7 +5899,8 @@ Do you want to save your changes?</source>
     <message>
         <source>How to Draft Basic Patterns</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>How to Draft Basic Patterns
+(Создание основных выкроек)</translation>
     </message>
     <message>
         <source>Ekern</source>
@@ -5899,7 +5945,8 @@ Do you want to save your changes?</source>
     <message>
         <source>Design and Sew Jeans</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Design and Sew Jeans
+(Кройка и шитьё джинс)</translation>
     </message>
     <message>
         <source>Lady Boutique</source>
@@ -5979,17 +6026,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Dressmaking International</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking International</translation>
     </message>
     <message>
         <source>Dressmaking International</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking International</translation>
     </message>
     <message>
         <source>Dressmaking International magazine (Japan)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking International magazine (Япония)</translation>
     </message>
     <message>
         <source>Erwin</source>

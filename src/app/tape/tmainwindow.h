@@ -73,6 +73,7 @@ public slots:
 protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 
 private slots:
     void FileSave();
@@ -142,6 +143,9 @@ private:
     QLabel *labelGradationHeights;
     QLabel *labelGradationSizes;
     QLabel *labelPatternUnit;
+    QAction *actionDockDiagram;
+    bool dockDiagramVisible;
+    bool isInitialized;
 
     void SetupMenu();
     void InitWindow();
@@ -172,6 +176,7 @@ private:
     QString ClearCustomName(const QString &name) const;
 
     bool EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label);
+    void ShowMDiagram(const QString &name);
 
     void Open(const QString &pathTo, const QString &filter);
     void GUIReadOnly(bool ro);

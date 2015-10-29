@@ -88,7 +88,14 @@ QString VTranslateMeasurements::MToUser(const QString &measurement) const
 //---------------------------------------------------------------------------------------------------------------------
 QString VTranslateMeasurements::MNumber(const QString &measurement) const
 {
-    return numbers.value(measurement);
+    if (numbers.contains(measurement))
+    {
+        return numbers.value(measurement);
+    }
+    else
+    {
+        return QString();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
