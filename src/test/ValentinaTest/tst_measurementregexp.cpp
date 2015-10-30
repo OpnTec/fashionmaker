@@ -71,7 +71,7 @@ void TST_MeasurementRegExp::TestMeasurementRegExp_data()
     const QStringList locales = SupportedLocales();
 
     {
-        const int combinations = systemCounts * locales.size(); // 56*12=660
+        const int combinations = systemCounts * locales.size();
 
         QDir dir(TranslationsPath());
         const QStringList fileNames = dir.entryList(QStringList("measurements_p*_*.qm"));

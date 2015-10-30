@@ -2961,16 +2961,8 @@
         <translation>Disegna</translation>
     </message>
     <message>
-        <source>Draw mode</source>
-        <translation type="vanished">Modalità Disegno</translation>
-    </message>
-    <message>
         <source>Details</source>
         <translation>Dettagli</translation>
-    </message>
-    <message>
-        <source>Details mode</source>
-        <translation type="vanished">Modalità dettagli</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -3361,10 +3353,6 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Layout</source>
         <translation>Layout</translation>
-    </message>
-    <message>
-        <source>Create a layout</source>
-        <translation type="vanished">Crea un layout</translation>
     </message>
     <message>
         <source>Show Curve Details</source>

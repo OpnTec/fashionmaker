@@ -153,13 +153,12 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     for (int i = 0; i < fileNames.size(); ++i)
     {
         // get locale extracted by filename
-        QString locale;
-        locale = fileNames.at(i);                  // "valentina_de_De.qm"
-        locale.truncate(locale.lastIndexOf('.'));   // "valentina_de_De"
-        locale.remove(0, locale.indexOf('_') + 1);   // "de_De"
+        QString locale = fileNames.at(i);                         // "valentina_de_De.qm"
+        locale.truncate(locale.lastIndexOf(QLatin1String(".")));  // "valentina_de_De"
+        locale.remove(0, locale.indexOf(QLatin1String("_")) + 1); // "de_De"
 
-        QLocale loc = QLocale(locale);
-        QString lang = loc.nativeLanguageName();
+        const QLocale loc(locale);
+        const QString lang = loc.nativeLanguageName();
         QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(loc.country())));
 
         langCombo->addItem(ico, lang, locale);
@@ -169,12 +168,12 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     {
         // English language is internal and doens't have own *.qm file.
         QIcon ico(QString("%1/%2.png").arg("://flags").arg(QLocale::countryToString(QLocale::UnitedStates)));
-        QString lang = QLocale("en_US").nativeLanguageName();
+        const QString lang = QLocale("en_US").nativeLanguageName();
         langCombo->addItem(ico, lang, "en_US");
     }
 
     // set default translators and language checked
-    VTapeSettings *settings = qApp->TapeSettings();
+    const VTapeSettings *settings = qApp->TapeSettings();
     qint32 index = langCombo->findData(settings->GetLocale());
     if (index != -1)
     {

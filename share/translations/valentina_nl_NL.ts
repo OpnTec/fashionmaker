@@ -2961,16 +2961,8 @@
         <translation>Teken</translation>
     </message>
     <message>
-        <source>Draw mode</source>
-        <translation type="vanished">Teken modus</translation>
-    </message>
-    <message>
         <source>Details</source>
         <translation>Details</translation>
-    </message>
-    <message>
-        <source>Details mode</source>
-        <translation type="vanished">Details modus</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -3360,10 +3352,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Layout</source>
         <translation>Opmaak</translation>
-    </message>
-    <message>
-        <source>Create a layout</source>
-        <translation type="vanished">Maak een opmaak</translation>
     </message>
     <message>
         <source>Show Curve Details</source>

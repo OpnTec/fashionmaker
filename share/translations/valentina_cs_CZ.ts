@@ -2957,16 +2957,8 @@
         <translation>Kreslit</translation>
     </message>
     <message>
-        <source>Draw mode</source>
-        <translation type="vanished">Režim kreslení</translation>
-    </message>
-    <message>
         <source>Details</source>
         <translation>Detaily</translation>
-    </message>
-    <message>
-        <source>Details mode</source>
-        <translation type="vanished">Režim detailů</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -3357,10 +3349,6 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Layout</source>
         <translation>Rozvržení</translation>
-    </message>
-    <message>
-        <source>Create a layout</source>
-        <translation type="vanished">Vytvořit rozvržení</translation>
     </message>
     <message>
         <source>Show Curve Details</source>

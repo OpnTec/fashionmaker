@@ -2957,16 +2957,8 @@
         <translation>Zeichnen</translation>
     </message>
     <message>
-        <source>Draw mode</source>
-        <translation type="vanished">Zeichnenmodus</translation>
-    </message>
-    <message>
         <source>Details</source>
         <translation>Details</translation>
-    </message>
-    <message>
-        <source>Details mode</source>
-        <translation type="vanished">Detailmodus</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -3357,10 +3349,6 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Layout</source>
         <translation>Layout</translation>
-    </message>
-    <message>
-        <source>Create a layout</source>
-        <translation type="vanished">Layout erstellen</translation>
     </message>
     <message>
         <source>Show Curve Details</source>

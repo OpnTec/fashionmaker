@@ -31,7 +31,10 @@ TRANSLATIONS += measurements_p0.ts \
                 measurements_p0_id_ID.ts \
                 measurements_p0_es_ES.ts \
                 measurements_p0_fi_FI.ts \
-                measurements_p0_en_US.ts
+                measurements_p0_en_US.ts \
+				measurements_p0_en_CA.ts \
+                measurements_p0_en_IN.ts \
+                measurements_p0_ro_RO.ts
 
 TRANSLATIONS += measurements_p1.ts \
                 measurements_p1_ru_RU.ts \
@@ -45,7 +48,10 @@ TRANSLATIONS += measurements_p1.ts \
                 measurements_p1_id_ID.ts \
                 measurements_p1_es_ES.ts \
                 measurements_p1_fi_FI.ts \
-                measurements_p1_en_US.ts
+                measurements_p1_en_US.ts \
+				measurements_p1_en_CA.ts \
+                measurements_p1_en_IN.ts \
+                measurements_p1_ro_RO.ts
 
 TRANSLATIONS += measurements_p2.ts \
                 measurements_p2_ru_RU.ts \
@@ -59,7 +65,10 @@ TRANSLATIONS += measurements_p2.ts \
                 measurements_p2_id_ID.ts \
                 measurements_p2_es_ES.ts \
                 measurements_p2_fi_FI.ts \
-                measurements_p2_en_US.ts
+                measurements_p2_en_US.ts \
+				measurements_p2_en_CA.ts \
+                measurements_p2_en_IN.ts \
+                measurements_p2_ro_RO.ts
 
 TRANSLATIONS += measurements_p3.ts \
                 measurements_p3_ru_RU.ts \
@@ -73,7 +82,10 @@ TRANSLATIONS += measurements_p3.ts \
                 measurements_p3_id_ID.ts \
                 measurements_p3_es_ES.ts \
                 measurements_p3_fi_FI.ts \
-                measurements_p3_en_US.ts
+                measurements_p3_en_US.ts \
+				measurements_p3_en_CA.ts \
+                measurements_p3_en_IN.ts \
+                measurements_p3_ro_RO.ts
 
 TRANSLATIONS += measurements_p4.ts \
                 measurements_p4_ru_RU.ts \
@@ -87,7 +99,10 @@ TRANSLATIONS += measurements_p4.ts \
                 measurements_p4_id_ID.ts \
                 measurements_p4_es_ES.ts \
                 measurements_p4_fi_FI.ts \
-                measurements_p4_en_US.ts
+                measurements_p4_en_US.ts \
+				measurements_p4_en_CA.ts \
+                measurements_p4_en_IN.ts \
+                measurements_p4_ro_RO.ts
 
 TRANSLATIONS += measurements_p5.ts \
                 measurements_p5_ru_RU.ts \
@@ -101,7 +116,10 @@ TRANSLATIONS += measurements_p5.ts \
                 measurements_p5_id_ID.ts \
                 measurements_p5_es_ES.ts \
                 measurements_p5_fi_FI.ts \
-                measurements_p5_en_US.ts
+                measurements_p5_en_US.ts \
+				measurements_p5_en_CA.ts \
+                measurements_p5_en_IN.ts \
+                measurements_p5_ro_RO.ts
 
 TRANSLATIONS += measurements_p6.ts \
                 measurements_p6_ru_RU.ts \
@@ -115,7 +133,10 @@ TRANSLATIONS += measurements_p6.ts \
                 measurements_p6_id_ID.ts \
                 measurements_p6_es_ES.ts \
                 measurements_p6_fi_FI.ts \
-                measurements_p6_en_US.ts
+                measurements_p6_en_US.ts \
+				measurements_p6_en_CA.ts \
+                measurements_p6_en_IN.ts \
+                measurements_p6_ro_RO.ts
 
 TRANSLATIONS += measurements_p7.ts \
                 measurements_p7_ru_RU.ts \
@@ -129,7 +150,10 @@ TRANSLATIONS += measurements_p7.ts \
                 measurements_p7_id_ID.ts \
                 measurements_p7_es_ES.ts \
                 measurements_p7_fi_FI.ts \
-                measurements_p7_en_US.ts
+                measurements_p7_en_US.ts \
+				measurements_p7_en_CA.ts \
+                measurements_p7_en_IN.ts \
+                measurements_p7_ro_RO.ts
 
 TRANSLATIONS += measurements_p8.ts \
                 measurements_p8_ru_RU.ts \
@@ -143,7 +167,10 @@ TRANSLATIONS += measurements_p8.ts \
                 measurements_p8_id_ID.ts \
                 measurements_p8_es_ES.ts \
                 measurements_p8_fi_FI.ts \
-                measurements_p8_en_US.ts
+                measurements_p8_en_US.ts \
+				measurements_p8_en_CA.ts \
+                measurements_p8_en_IN.ts \
+                measurements_p8_ro_RO.ts
 
 TRANSLATIONS += measurements_p9.ts \
                 measurements_p9_ru_RU.ts \
@@ -157,7 +184,10 @@ TRANSLATIONS += measurements_p9.ts \
                 measurements_p9_id_ID.ts \
                 measurements_p9_es_ES.ts \
                 measurements_p9_fi_FI.ts \
-                measurements_p9_en_US.ts
+                measurements_p9_en_US.ts \
+				measurements_p9_en_CA.ts \
+                measurements_p9_en_IN.ts \
+                measurements_p9_ro_RO.ts
 
 TRANSLATIONS += measurements_p10.ts \
                 measurements_p10_ru_RU.ts \
@@ -171,7 +201,10 @@ TRANSLATIONS += measurements_p10.ts \
                 measurements_p10_id_ID.ts \
                 measurements_p10_es_ES.ts \
                 measurements_p10_fi_FI.ts \
-                measurements_p10_en_US.ts
+                measurements_p10_en_US.ts \
+				measurements_p10_en_CA.ts \
+                measurements_p10_en_IN.ts \
+                measurements_p10_ro_RO.ts
 
 TRANSLATIONS += measurements_p11.ts \
                 measurements_p11_ru_RU.ts \
@@ -185,7 +218,10 @@ TRANSLATIONS += measurements_p11.ts \
                 measurements_p11_id_ID.ts \
                 measurements_p11_es_ES.ts \
                 measurements_p11_fi_FI.ts \
-                measurements_p11_en_US.ts
+                measurements_p11_en_US.ts \
+				measurements_p11_en_CA.ts \
+                measurements_p11_en_IN.ts \
+                measurements_p11_ro_RO.ts
 
 TRANSLATIONS += measurements_p12.ts \
                 measurements_p12_ru_RU.ts \
@@ -199,7 +235,10 @@ TRANSLATIONS += measurements_p12.ts \
                 measurements_p12_id_ID.ts \
                 measurements_p12_es_ES.ts \
                 measurements_p12_fi_FI.ts \
-                measurements_p12_en_US.ts
+                measurements_p12_en_US.ts \
+				measurements_p12_en_CA.ts \
+                measurements_p12_en_IN.ts \
+                measurements_p12_ro_RO.ts
 
 TRANSLATIONS += measurements_p13.ts \
                 measurements_p13_ru_RU.ts \
@@ -213,7 +252,10 @@ TRANSLATIONS += measurements_p13.ts \
                 measurements_p13_id_ID.ts \
                 measurements_p13_es_ES.ts \
                 measurements_p13_fi_FI.ts \
-                measurements_p13_en_US.ts
+                measurements_p13_en_US.ts \
+				measurements_p13_en_CA.ts \
+                measurements_p13_en_IN.ts \
+                measurements_p13_ro_RO.ts
 
 TRANSLATIONS += measurements_p14.ts \
                 measurements_p14_ru_RU.ts \
@@ -227,7 +269,10 @@ TRANSLATIONS += measurements_p14.ts \
                 measurements_p14_id_ID.ts \
                 measurements_p14_es_ES.ts \
                 measurements_p14_fi_FI.ts \
-                measurements_p14_en_US.ts
+                measurements_p14_en_US.ts \
+				measurements_p14_en_CA.ts \
+                measurements_p14_en_IN.ts \
+                measurements_p14_ro_RO.ts
 
 TRANSLATIONS += measurements_p15.ts \
                 measurements_p15_ru_RU.ts \
@@ -241,7 +286,10 @@ TRANSLATIONS += measurements_p15.ts \
                 measurements_p15_id_ID.ts \
                 measurements_p15_es_ES.ts \
                 measurements_p15_fi_FI.ts \
-                measurements_p15_en_US.ts
+                measurements_p15_en_US.ts \
+				measurements_p15_en_CA.ts \
+                measurements_p15_en_IN.ts \
+                measurements_p15_ro_RO.ts
 
 TRANSLATIONS += measurements_p16.ts \
                 measurements_p16_ru_RU.ts \
@@ -255,7 +303,10 @@ TRANSLATIONS += measurements_p16.ts \
                 measurements_p16_id_ID.ts \
                 measurements_p16_es_ES.ts \
                 measurements_p16_fi_FI.ts \
-                measurements_p16_en_US.ts
+                measurements_p16_en_US.ts \
+				measurements_p16_en_CA.ts \
+                measurements_p16_en_IN.ts \
+                measurements_p16_ro_RO.ts
 
 TRANSLATIONS += measurements_p17.ts \
                 measurements_p17_ru_RU.ts \
@@ -269,7 +320,10 @@ TRANSLATIONS += measurements_p17.ts \
                 measurements_p17_id_ID.ts \
                 measurements_p17_es_ES.ts \
                 measurements_p17_fi_FI.ts \
-                measurements_p17_en_US.ts
+                measurements_p17_en_US.ts \
+				measurements_p17_en_CA.ts \
+                measurements_p17_en_IN.ts \
+                measurements_p17_ro_RO.ts
 
 TRANSLATIONS += measurements_p18.ts \
                 measurements_p18_ru_RU.ts \
@@ -283,7 +337,10 @@ TRANSLATIONS += measurements_p18.ts \
                 measurements_p18_id_ID.ts \
                 measurements_p18_es_ES.ts \
                 measurements_p18_fi_FI.ts \
-                measurements_p18_en_US.ts
+                measurements_p18_en_US.ts \
+				measurements_p18_en_CA.ts \
+                measurements_p18_en_IN.ts \
+                measurements_p18_ro_RO.ts
 
 TRANSLATIONS += measurements_p19.ts \
                 measurements_p19_ru_RU.ts \
@@ -297,7 +354,10 @@ TRANSLATIONS += measurements_p19.ts \
                 measurements_p19_id_ID.ts \
                 measurements_p19_es_ES.ts \
                 measurements_p19_fi_FI.ts \
-                measurements_p19_en_US.ts
+                measurements_p19_en_US.ts \
+				measurements_p19_en_CA.ts \
+                measurements_p19_en_IN.ts \
+                measurements_p19_ro_RO.ts
 
 TRANSLATIONS += measurements_p20.ts \
                 measurements_p20_ru_RU.ts \
@@ -311,7 +371,10 @@ TRANSLATIONS += measurements_p20.ts \
                 measurements_p20_id_ID.ts \
                 measurements_p20_es_ES.ts \
                 measurements_p20_fi_FI.ts \
-                measurements_p20_en_US.ts
+                measurements_p20_en_US.ts \
+				measurements_p20_en_CA.ts \
+                measurements_p20_en_IN.ts \
+                measurements_p20_ro_RO.ts
 
 TRANSLATIONS += measurements_p21.ts \
                 measurements_p21_ru_RU.ts \
@@ -325,7 +388,10 @@ TRANSLATIONS += measurements_p21.ts \
                 measurements_p21_id_ID.ts \
                 measurements_p21_es_ES.ts \
                 measurements_p21_fi_FI.ts \
-                measurements_p21_en_US.ts
+                measurements_p21_en_US.ts \
+				measurements_p21_en_CA.ts \
+                measurements_p21_en_IN.ts \
+                measurements_p21_ro_RO.ts
 
 TRANSLATIONS += measurements_p22.ts \
                 measurements_p22_ru_RU.ts \
@@ -339,7 +405,10 @@ TRANSLATIONS += measurements_p22.ts \
                 measurements_p22_id_ID.ts \
                 measurements_p22_es_ES.ts \
                 measurements_p22_fi_FI.ts \
-                measurements_p22_en_US.ts
+                measurements_p22_en_US.ts \
+				measurements_p22_en_CA.ts \
+                measurements_p22_en_IN.ts \
+                measurements_p22_ro_RO.ts
 
 TRANSLATIONS += measurements_p23.ts \
                 measurements_p23_ru_RU.ts \
@@ -353,7 +422,10 @@ TRANSLATIONS += measurements_p23.ts \
                 measurements_p23_id_ID.ts \
                 measurements_p23_es_ES.ts \
                 measurements_p23_fi_FI.ts \
-                measurements_p23_en_US.ts
+                measurements_p23_en_US.ts \
+				measurements_p23_en_CA.ts \
+                measurements_p23_en_IN.ts \
+                measurements_p23_ro_RO.ts
 
 TRANSLATIONS += measurements_p24.ts \
                 measurements_p24_ru_RU.ts \
@@ -367,7 +439,10 @@ TRANSLATIONS += measurements_p24.ts \
                 measurements_p24_id_ID.ts \
                 measurements_p24_es_ES.ts \
                 measurements_p24_fi_FI.ts \
-                measurements_p24_en_US.ts
+                measurements_p24_en_US.ts \
+				measurements_p24_en_CA.ts \
+                measurements_p24_en_IN.ts \
+                measurements_p24_ro_RO.ts
 
 TRANSLATIONS += measurements_p25.ts \
                 measurements_p25_ru_RU.ts \
@@ -381,7 +456,10 @@ TRANSLATIONS += measurements_p25.ts \
                 measurements_p25_id_ID.ts \
                 measurements_p25_es_ES.ts \
                 measurements_p25_fi_FI.ts \
-                measurements_p25_en_US.ts
+                measurements_p25_en_US.ts \
+				measurements_p25_en_CA.ts \
+                measurements_p25_en_IN.ts \
+                measurements_p25_ro_RO.ts
 
 TRANSLATIONS += measurements_p26.ts \
                 measurements_p26_ru_RU.ts \
@@ -395,7 +473,10 @@ TRANSLATIONS += measurements_p26.ts \
                 measurements_p26_id_ID.ts \
                 measurements_p26_es_ES.ts \
                 measurements_p26_fi_FI.ts \
-                measurements_p26_en_US.ts
+                measurements_p26_en_US.ts \
+				measurements_p26_en_CA.ts \
+                measurements_p26_en_IN.ts \
+                measurements_p26_ro_RO.ts
 
 TRANSLATIONS += measurements_p27.ts \
                 measurements_p27_ru_RU.ts \
@@ -409,7 +490,10 @@ TRANSLATIONS += measurements_p27.ts \
                 measurements_p27_id_ID.ts \
                 measurements_p27_es_ES.ts \
                 measurements_p27_fi_FI.ts \
-                measurements_p27_en_US.ts
+                measurements_p27_en_US.ts \
+				measurements_p27_en_CA.ts \
+                measurements_p27_en_IN.ts \
+                measurements_p27_ro_RO.ts
 
 TRANSLATIONS += measurements_p28.ts \
                 measurements_p28_ru_RU.ts \
@@ -423,7 +507,10 @@ TRANSLATIONS += measurements_p28.ts \
                 measurements_p28_id_ID.ts \
                 measurements_p28_es_ES.ts \
                 measurements_p28_fi_FI.ts \
-                measurements_p28_en_US.ts
+                measurements_p28_en_US.ts \
+				measurements_p28_en_CA.ts \
+                measurements_p28_en_IN.ts \
+                measurements_p28_ro_RO.ts
 
 TRANSLATIONS += measurements_p29.ts \
                 measurements_p29_ru_RU.ts \
@@ -437,7 +524,10 @@ TRANSLATIONS += measurements_p29.ts \
                 measurements_p29_id_ID.ts \
                 measurements_p29_es_ES.ts \
                 measurements_p29_fi_FI.ts \
-                measurements_p29_en_US.ts
+                measurements_p29_en_US.ts \
+				measurements_p29_en_CA.ts \
+                measurements_p29_en_IN.ts \
+                measurements_p29_ro_RO.ts
 
 TRANSLATIONS += measurements_p30.ts \
                 measurements_p30_ru_RU.ts \
@@ -451,7 +541,10 @@ TRANSLATIONS += measurements_p30.ts \
                 measurements_p30_id_ID.ts \
                 measurements_p30_es_ES.ts \
                 measurements_p30_fi_FI.ts \
-                measurements_p30_en_US.ts
+                measurements_p30_en_US.ts \
+				measurements_p30_en_CA.ts \
+                measurements_p30_en_IN.ts \
+                measurements_p30_ro_RO.ts
 
 TRANSLATIONS += measurements_p31.ts \
                 measurements_p31_ru_RU.ts \
@@ -465,7 +558,10 @@ TRANSLATIONS += measurements_p31.ts \
                 measurements_p31_id_ID.ts \
                 measurements_p31_es_ES.ts \
                 measurements_p31_fi_FI.ts \
-                measurements_p31_en_US.ts
+                measurements_p31_en_US.ts \
+				measurements_p31_en_CA.ts \
+                measurements_p31_en_IN.ts \
+                measurements_p31_ro_RO.ts
 
 TRANSLATIONS += measurements_p32.ts \
                 measurements_p32_ru_RU.ts \
@@ -479,7 +575,10 @@ TRANSLATIONS += measurements_p32.ts \
                 measurements_p32_id_ID.ts \
                 measurements_p32_es_ES.ts \
                 measurements_p32_fi_FI.ts \
-                measurements_p32_en_US.ts
+                measurements_p32_en_US.ts \
+				measurements_p32_en_CA.ts \
+                measurements_p32_en_IN.ts \
+                measurements_p32_ro_RO.ts
 
 TRANSLATIONS += measurements_p33.ts \
                 measurements_p33_ru_RU.ts \
@@ -493,7 +592,10 @@ TRANSLATIONS += measurements_p33.ts \
                 measurements_p33_id_ID.ts \
                 measurements_p33_es_ES.ts \
                 measurements_p33_fi_FI.ts \
-                measurements_p33_en_US.ts
+                measurements_p33_en_US.ts \
+				measurements_p33_en_CA.ts \
+                measurements_p33_en_IN.ts \
+                measurements_p33_ro_RO.ts
 
 TRANSLATIONS += measurements_p34.ts \
                 measurements_p34_ru_RU.ts \
@@ -507,7 +609,10 @@ TRANSLATIONS += measurements_p34.ts \
                 measurements_p34_id_ID.ts \
                 measurements_p34_es_ES.ts \
                 measurements_p34_fi_FI.ts \
-                measurements_p34_en_US.ts
+                measurements_p34_en_US.ts \
+				measurements_p34_en_CA.ts \
+                measurements_p34_en_IN.ts \
+                measurements_p34_ro_RO.ts
 
 TRANSLATIONS += measurements_p35.ts \
                 measurements_p35_ru_RU.ts \
@@ -521,7 +626,10 @@ TRANSLATIONS += measurements_p35.ts \
                 measurements_p35_id_ID.ts \
                 measurements_p35_es_ES.ts \
                 measurements_p35_fi_FI.ts \
-                measurements_p35_en_US.ts
+                measurements_p35_en_US.ts \
+				measurements_p35_en_CA.ts \
+                measurements_p35_en_IN.ts \
+                measurements_p35_ro_RO.ts
 
 TRANSLATIONS += measurements_p36.ts \
                 measurements_p36_ru_RU.ts \
@@ -535,7 +643,10 @@ TRANSLATIONS += measurements_p36.ts \
                 measurements_p36_id_ID.ts \
                 measurements_p36_es_ES.ts \
                 measurements_p36_fi_FI.ts \
-                measurements_p36_en_US.ts
+                measurements_p36_en_US.ts \
+				measurements_p36_en_CA.ts \
+                measurements_p36_en_IN.ts \
+                measurements_p36_ro_RO.ts
 
 TRANSLATIONS += measurements_p37.ts \
                 measurements_p37_ru_RU.ts \
@@ -549,7 +660,10 @@ TRANSLATIONS += measurements_p37.ts \
                 measurements_p37_id_ID.ts \
                 measurements_p37_es_ES.ts \
                 measurements_p37_fi_FI.ts \
-                measurements_p37_en_US.ts
+                measurements_p37_en_US.ts \
+				measurements_p37_en_CA.ts \
+                measurements_p37_en_IN.ts \
+                measurements_p37_ro_RO.ts
 
 TRANSLATIONS += measurements_p38.ts \
                 measurements_p38_ru_RU.ts \
@@ -563,7 +677,10 @@ TRANSLATIONS += measurements_p38.ts \
                 measurements_p38_id_ID.ts \
                 measurements_p38_es_ES.ts \
                 measurements_p38_fi_FI.ts \
-                measurements_p38_en_US.ts
+                measurements_p38_en_US.ts \
+				measurements_p38_en_CA.ts \
+                measurements_p38_en_IN.ts \
+                measurements_p38_ro_RO.ts
 
 TRANSLATIONS += measurements_p39.ts \
                 measurements_p39_ru_RU.ts \
@@ -577,7 +694,10 @@ TRANSLATIONS += measurements_p39.ts \
                 measurements_p39_id_ID.ts \
                 measurements_p39_es_ES.ts \
                 measurements_p39_fi_FI.ts \
-                measurements_p39_en_US.ts
+                measurements_p39_en_US.ts \
+				measurements_p39_en_CA.ts \
+                measurements_p39_en_IN.ts \
+                measurements_p39_ro_RO.ts
 
 TRANSLATIONS += measurements_p40.ts \
                 measurements_p40_ru_RU.ts \
@@ -591,7 +711,10 @@ TRANSLATIONS += measurements_p40.ts \
                 measurements_p40_id_ID.ts \
                 measurements_p40_es_ES.ts \
                 measurements_p40_fi_FI.ts \
-                measurements_p40_en_US.ts
+                measurements_p40_en_US.ts \
+				measurements_p40_en_CA.ts \
+                measurements_p40_en_IN.ts \
+                measurements_p40_ro_RO.ts
 
 TRANSLATIONS += measurements_p41.ts \
                 measurements_p41_ru_RU.ts \
@@ -605,7 +728,10 @@ TRANSLATIONS += measurements_p41.ts \
                 measurements_p41_id_ID.ts \
                 measurements_p41_es_ES.ts \
                 measurements_p41_fi_FI.ts \
-                measurements_p41_en_US.ts
+                measurements_p41_en_US.ts \
+				measurements_p41_en_CA.ts \
+                measurements_p41_en_IN.ts \
+                measurements_p41_ro_RO.ts
 
 TRANSLATIONS += measurements_p42.ts \
                 measurements_p42_ru_RU.ts \
@@ -619,7 +745,10 @@ TRANSLATIONS += measurements_p42.ts \
                 measurements_p42_id_ID.ts \
                 measurements_p42_es_ES.ts \
                 measurements_p42_fi_FI.ts \
-                measurements_p42_en_US.ts
+                measurements_p42_en_US.ts \
+				measurements_p42_en_CA.ts \
+                measurements_p42_en_IN.ts \
+                measurements_p42_ro_RO.ts
 
 TRANSLATIONS += measurements_p43.ts \
                 measurements_p43_ru_RU.ts \
@@ -633,7 +762,10 @@ TRANSLATIONS += measurements_p43.ts \
                 measurements_p43_id_ID.ts \
                 measurements_p43_es_ES.ts \
                 measurements_p43_fi_FI.ts \
-                measurements_p43_en_US.ts
+                measurements_p43_en_US.ts \
+				measurements_p43_en_CA.ts \
+                measurements_p43_en_IN.ts \
+                measurements_p43_ro_RO.ts
 
 TRANSLATIONS += measurements_p44.ts \
                 measurements_p44_ru_RU.ts \
@@ -647,7 +779,10 @@ TRANSLATIONS += measurements_p44.ts \
                 measurements_p44_id_ID.ts \
                 measurements_p44_es_ES.ts \
                 measurements_p44_fi_FI.ts \
-                measurements_p44_en_US.ts
+                measurements_p44_en_US.ts \
+				measurements_p44_en_CA.ts \
+                measurements_p44_en_IN.ts \
+                measurements_p44_ro_RO.ts
 
 TRANSLATIONS += measurements_p45.ts \
                 measurements_p45_ru_RU.ts \
@@ -661,7 +796,10 @@ TRANSLATIONS += measurements_p45.ts \
                 measurements_p45_id_ID.ts \
                 measurements_p45_es_ES.ts \
                 measurements_p45_fi_FI.ts \
-                measurements_p45_en_US.ts
+                measurements_p45_en_US.ts \
+				measurements_p45_en_CA.ts \
+                measurements_p45_en_IN.ts \
+                measurements_p45_ro_RO.ts
 
 TRANSLATIONS += measurements_p46.ts \
                 measurements_p46_ru_RU.ts \
@@ -675,7 +813,10 @@ TRANSLATIONS += measurements_p46.ts \
                 measurements_p46_id_ID.ts \
                 measurements_p46_es_ES.ts \
                 measurements_p46_fi_FI.ts \
-                measurements_p46_en_US.ts
+                measurements_p46_en_US.ts \
+				measurements_p46_en_CA.ts \
+                measurements_p46_en_IN.ts \
+                measurements_p46_ro_RO.ts
 
 TRANSLATIONS += measurements_p47.ts \
                 measurements_p47_ru_RU.ts \
@@ -689,7 +830,10 @@ TRANSLATIONS += measurements_p47.ts \
                 measurements_p47_id_ID.ts \
                 measurements_p47_es_ES.ts \
                 measurements_p47_fi_FI.ts \
-                measurements_p47_en_US.ts
+                measurements_p47_en_US.ts \
+				measurements_p47_en_CA.ts \
+                measurements_p47_en_IN.ts \
+                measurements_p47_ro_RO.ts
 
 TRANSLATIONS += measurements_p48.ts \
                 measurements_p48_ru_RU.ts \
@@ -703,7 +847,10 @@ TRANSLATIONS += measurements_p48.ts \
                 measurements_p48_id_ID.ts \
                 measurements_p48_es_ES.ts \
                 measurements_p48_fi_FI.ts \
-                measurements_p48_en_US.ts
+                measurements_p48_en_US.ts \
+				measurements_p48_en_CA.ts \
+                measurements_p48_en_IN.ts \
+                measurements_p48_ro_RO.ts
 
 TRANSLATIONS += measurements_p49.ts \
                 measurements_p49_ru_RU.ts \
@@ -717,7 +864,10 @@ TRANSLATIONS += measurements_p49.ts \
                 measurements_p49_id_ID.ts \
                 measurements_p49_es_ES.ts \
                 measurements_p49_fi_FI.ts \
-                measurements_p49_en_US.ts
+                measurements_p49_en_US.ts \
+				measurements_p49_en_CA.ts \
+                measurements_p49_en_IN.ts \
+                measurements_p49_ro_RO.ts
 
 TRANSLATIONS += measurements_p50.ts \
                 measurements_p50_ru_RU.ts \
@@ -731,7 +881,10 @@ TRANSLATIONS += measurements_p50.ts \
                 measurements_p50_id_ID.ts \
                 measurements_p50_es_ES.ts \
                 measurements_p50_fi_FI.ts \
-                measurements_p50_en_US.ts
+                measurements_p50_en_US.ts \
+				measurements_p50_en_CA.ts \
+                measurements_p50_en_IN.ts \
+                measurements_p50_ro_RO.ts
 
 TRANSLATIONS += measurements_p51.ts \
                 measurements_p51_ru_RU.ts \
@@ -745,7 +898,10 @@ TRANSLATIONS += measurements_p51.ts \
                 measurements_p51_id_ID.ts \
                 measurements_p51_es_ES.ts \
                 measurements_p51_fi_FI.ts \
-                measurements_p51_en_US.ts
+                measurements_p51_en_US.ts \
+				measurements_p51_en_CA.ts \
+                measurements_p51_en_IN.ts \
+                measurements_p51_ro_RO.ts
 
 TRANSLATIONS += measurements_p52.ts \
                 measurements_p52_ru_RU.ts \
@@ -759,7 +915,10 @@ TRANSLATIONS += measurements_p52.ts \
                 measurements_p52_id_ID.ts \
                 measurements_p52_es_ES.ts \
                 measurements_p52_fi_FI.ts \
-                measurements_p52_en_US.ts
+                measurements_p52_en_US.ts \
+				measurements_p52_en_CA.ts \
+                measurements_p52_en_IN.ts \
+                measurements_p52_ro_RO.ts
 
 TRANSLATIONS += measurements_p53.ts \
                 measurements_p53_ru_RU.ts \
@@ -773,7 +932,10 @@ TRANSLATIONS += measurements_p53.ts \
                 measurements_p53_id_ID.ts \
                 measurements_p53_es_ES.ts \
                 measurements_p53_fi_FI.ts \
-                measurements_p53_en_US.ts
+                measurements_p53_en_US.ts \
+				measurements_p53_en_CA.ts \
+                measurements_p53_en_IN.ts \
+                measurements_p53_ro_RO.ts
 
 TRANSLATIONS += measurements_p54.ts \
                 measurements_p54_ru_RU.ts \
@@ -787,7 +949,10 @@ TRANSLATIONS += measurements_p54.ts \
                 measurements_p54_id_ID.ts \
                 measurements_p54_es_ES.ts \
                 measurements_p54_fi_FI.ts \
-                measurements_p54_en_US.ts
+                measurements_p54_en_US.ts \
+				measurements_p54_en_CA.ts \
+                measurements_p54_en_IN.ts \
+                measurements_p54_ro_RO.ts
 
 TRANSLATIONS += measurements_p998.ts \
                 measurements_p998_ru_RU.ts \
@@ -801,4 +966,7 @@ TRANSLATIONS += measurements_p998.ts \
                 measurements_p998_id_ID.ts \
                 measurements_p998_es_ES.ts \
                 measurements_p998_fi_FI.ts \
-                measurements_p998_en_US.ts
+                measurements_p998_en_US.ts \
+				measurements_p998_en_CA.ts \
+                measurements_p998_en_IN.ts \
+                measurements_p998_ro_RO.ts

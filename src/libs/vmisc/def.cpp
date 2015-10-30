@@ -940,7 +940,10 @@ QStringList SupportedLocales()
                                               << QStringLiteral("id_ID")
                                               << QStringLiteral("es_ES")
                                               << QStringLiteral("fi_FI")
-                                              << QStringLiteral("en_US");
+                                              << QStringLiteral("en_US")
+                                              << QStringLiteral("en_CA")
+                                              << QStringLiteral("en_IN")
+                                              << QStringLiteral("ro_RO");
 
     return locales;
 }

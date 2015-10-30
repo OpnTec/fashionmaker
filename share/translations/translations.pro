@@ -52,4 +52,7 @@ TRANSLATIONS += valentina.ts \
                 valentina_id_ID.ts \
                 valentina_es_ES.ts \
                 valentina_fi_FI.ts \
-                valentina_en_US.ts
+                valentina_en_US.ts \
+                valentina_en_CA.ts \
+                valentina_en_IN.ts \
+                valentina_ro_RO.ts

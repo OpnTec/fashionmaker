@@ -2961,16 +2961,8 @@
         <translation>Рисование</translation>
     </message>
     <message>
-        <source>Draw mode</source>
-        <translation type="vanished">Режим рисования</translation>
-    </message>
-    <message>
         <source>Details</source>
         <translation>Детали</translation>
-    </message>
-    <message>
-        <source>Details mode</source>
-        <translation type="vanished">Режим деталей</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -3360,10 +3352,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Layout</source>
         <translation>Раскладка</translation>
-    </message>
-    <message>
-        <source>Create a layout</source>
-        <translation type="vanished">Создать раскладку</translation>
     </message>
     <message>
         <source>Show Curve Details</source>

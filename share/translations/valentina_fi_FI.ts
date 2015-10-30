@@ -2957,16 +2957,8 @@
         <translation>Piirrä</translation>
     </message>
     <message>
-        <source>Draw mode</source>
-        <translation type="vanished">Piirtotila</translation>
-    </message>
-    <message>
         <source>Details</source>
         <translation>Yksityiskohdat</translation>
-    </message>
-    <message>
-        <source>Details mode</source>
-        <translation type="vanished">Yksityiskohtatila</translation>
     </message>
     <message>
         <source>Pointer tools</source>
@@ -3357,10 +3349,6 @@ Haluatko tallentaa muutokset?</translation>
     <message>
         <source>Layout</source>
         <translation>Sommittelu</translation>
-    </message>
-    <message>
-        <source>Create a layout</source>
-        <translation type="vanished">Luo sommittelu</translation>
     </message>
     <message>
         <source>Show Curve Details</source>
