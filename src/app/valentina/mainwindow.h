@@ -266,7 +266,6 @@ private:
     bool               SavePattern(const QString &curFile, QString &error);
     void               AutoSavePattern();
     void               setCurrentFile(const QString &fileName);
-    QString            strippedName(const QString &fullFileName);
 
     void               ReadSettings();
     void               WriteSettings();

@@ -38,6 +38,7 @@
 #include "core/vapplication.h"
 #include "../vmisc/undoevent.h"
 #include "../vmisc/vsettings.h"
+#include "../vmisc/def.h"
 #include "undocommands/renamepp.h"
 #include "core/vtooloptionspropertybrowser.h"
 #include "options.h"
@@ -2828,7 +2829,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     curFile = fileName;
     qApp->getUndoStack()->setClean();
 
-    QString shownName = strippedName(curFile);
+    QString shownName = StrippedName(curFile);
     if (curFile.isEmpty())
     {
         shownName = tr("untitled.val");
@@ -2856,17 +2857,6 @@ void MainWindow::setCurrentFile(const QString &fileName)
     }
     shownName+="[*]";
     setWindowTitle(shownName);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief strippedName the function call around curFile to exclude the path to the file.
- * @param fullFileName full path to the file.
- * @return file name.
- */
-QString MainWindow::strippedName(const QString &fullFileName)
-{
-    return QFileInfo(fullFileName).fileName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2941,7 +2931,7 @@ void MainWindow::UpdateRecentFileActions()
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
-       QString text = QString("&%1. %2").arg(i + 1).arg(strippedName(files.at(i)));
+       QString text = QString("&%1. %2").arg(i + 1).arg(StrippedName(files.at(i)));
        recentFileActs[i]->setText(text);
        recentFileActs[i]->setData(files.at(i));
        recentFileActs[i]->setVisible(true);

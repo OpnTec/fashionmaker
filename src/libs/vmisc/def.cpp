@@ -1670,3 +1670,14 @@ QString MapDiagrams(const QString &number)
 
     return QString();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief strippedName the function call around curFile to exclude the path to the file.
+ * @param fullFileName full path to the file.
+ * @return file name.
+ */
+QString StrippedName(const QString &fullFileName)
+{
+    return QFileInfo(fullFileName).fileName();
+}
