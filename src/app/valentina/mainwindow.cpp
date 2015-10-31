@@ -421,41 +421,6 @@ void MainWindow::ToggleMSync(bool toggle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MainWindow::RelativeMPath(const QString &patternPath, const QString &absoluteMPath) const
-{
-    if (patternPath.isEmpty())
-    {
-        return absoluteMPath;
-    }
-
-    if (absoluteMPath.isEmpty() || QFileInfo(absoluteMPath).isRelative())
-    {
-        return absoluteMPath;
-    }
-
-    QDir dir(QFileInfo(patternPath).absoluteDir());
-    return dir.relativeFilePath(absoluteMPath);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString MainWindow::AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) const
-{
-    if (patternPath.isEmpty())
-    {
-        return relativeMPath;
-    }
-    else
-    {
-        if (relativeMPath.isEmpty() || QFileInfo(relativeMPath).isAbsolute())
-        {
-            return relativeMPath;
-        }
-
-        return QFileInfo(QFileInfo(patternPath).absoluteDir(), relativeMPath).absoluteFilePath();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief OptionDraw help change name of pattern piece.
  */

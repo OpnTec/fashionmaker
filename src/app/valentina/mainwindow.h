@@ -304,9 +304,6 @@ private:
 
     void               ToggleMSync(bool toggle);
 
-    QString            RelativeMPath(const QString &patternPath, const QString &absoluteMPath) const;
-    QString            AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) const;
-
     bool               LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
     void               ReopenFilesAfterCrash(QStringList &args);
     void               DoExport(const VCommandLinePtr& expParams);
