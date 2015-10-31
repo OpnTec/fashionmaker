@@ -75,6 +75,9 @@ public:
 
     /** @brief _y y coordinate */
     qreal   _y;
+
+private:
+    VPointFData &operator=(const VPointFData &) Q_DECL_EQ_DELETE;
 };
 
 VPointFData::~VPointFData()

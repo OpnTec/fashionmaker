@@ -75,6 +75,9 @@ public:
 
     qreal baseSize;
     qreal baseHeight;
+
+private:
+    VVariableData &operator=(const VVariableData &) Q_DECL_EQ_DELETE;
 };
 
 VVariableData::~VVariableData()

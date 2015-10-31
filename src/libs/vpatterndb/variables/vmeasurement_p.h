@@ -65,6 +65,9 @@ public:
     QString gui_text;
     QString _tagName;
     bool formulaOk;
+
+private:
+    VMeasurementData &operator=(const VMeasurementData &) Q_DECL_EQ_DELETE;
 };
 
 VMeasurementData::~VMeasurementData()

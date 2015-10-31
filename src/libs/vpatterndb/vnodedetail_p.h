@@ -79,6 +79,9 @@ public:
    * @brief reverse true if need reverse points list for node.
    */
   bool        reverse;
+
+private:
+    VNodeDetailData &operator=(const VNodeDetailData &) Q_DECL_EQ_DELETE;
 };
 
 #ifdef Q_CC_GNU

@@ -66,6 +66,9 @@ public:
 
     /** @brief my bias y axis. */
     qreal          my;
+
+private:
+    VDetailData &operator=(const VDetailData &) Q_DECL_EQ_DELETE;
 };
 
 #ifdef Q_CC_GNU

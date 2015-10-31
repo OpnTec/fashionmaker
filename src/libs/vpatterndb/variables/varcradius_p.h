@@ -55,6 +55,9 @@ public:
     virtual  ~VArcRadiusData() Q_DECL_OVERRIDE;
 
     quint32 arcId;
+
+private:
+    VArcRadiusData &operator=(const VArcRadiusData &) Q_DECL_EQ_DELETE;
 };
 
 VArcRadiusData::~VArcRadiusData()

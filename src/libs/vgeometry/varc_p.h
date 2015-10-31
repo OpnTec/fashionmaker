@@ -100,6 +100,9 @@ public:
     bool               isFlipped;
 
     QString            formulaLength;
+
+private:
+    VArcData &operator=(const VArcData &) Q_DECL_EQ_DELETE;
 };
 
 VArcData::~VArcData()

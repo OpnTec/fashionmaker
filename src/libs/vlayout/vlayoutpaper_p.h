@@ -74,6 +74,9 @@ public:
     bool rotate;
     int rotationIncrease;
     bool saveLength;
+
+private:
+    VLayoutPaperData &operator=(const VLayoutPaperData &) Q_DECL_EQ_DELETE;
 };
 
 #ifdef Q_CC_GNU

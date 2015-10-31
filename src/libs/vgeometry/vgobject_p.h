@@ -69,6 +69,9 @@ public:
 
     /** @brief mode object created in calculation or drawing mode */
     Draw    mode;
+
+private:
+    VGObjectData &operator=(const VGObjectData &) Q_DECL_EQ_DELETE;
 };
 
 VGObjectData::~VGObjectData()

@@ -58,6 +58,9 @@ public:
 
     quint32 p1Id;
     quint32 p2Id;
+
+private:
+    VLineAngleData &operator=(const VLineAngleData &) Q_DECL_EQ_DELETE;
 };
 
 VLineAngleData::~VLineAngleData()

@@ -63,6 +63,9 @@ public:
     bool           closed;
     /** @brief width value seamAllowance in mm. */
     qreal          width;
+
+private:
+    VAbstractDetailData &operator=(const VAbstractDetailData &) Q_DECL_EQ_DELETE;
 };
 
 #ifdef Q_CC_GNU

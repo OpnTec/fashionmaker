@@ -78,6 +78,9 @@ public:
 
     /** @brief kAsm2 coefficient of length second control line. */
     qreal          kAsm2;
+
+private:
+    VSplinePointData &operator=(const VSplinePointData &) Q_DECL_EQ_DELETE;
 };
 
 VSplinePointData::~VSplinePointData()
