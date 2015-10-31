@@ -359,6 +359,14 @@ bool MainWindow::LoadMeasurements(const QString &path)
         }
         return false;
     }
+    QString shownName = strippedName(curFile);
+    if (curFile.isEmpty())
+    {
+        shownName = tr("untitled.val");
+    }
+    shownName += "[*]";
+    shownName += " [" + strippedName(path) + "[*]]";
+    setWindowTitle(shownName);
     return true;
 }
 
@@ -1195,6 +1203,14 @@ void MainWindow::UnloadMeasurements()
         ui->actionShowM->setEnabled(false);
         ui->actionUnloadMeasurements->setDisabled(true);
         helpLabel->setText(tr("Measurements unloaded"));
+
+        QString shownName = strippedName(curFile);
+        if (curFile.isEmpty())
+        {
+            shownName = tr("untitled.val");
+        }
+        shownName += "[*]";
+        setWindowTitle(shownName);
     }
     else
     {
@@ -2855,6 +2871,12 @@ void MainWindow::setCurrentFile(const QString &fileName)
         settings->SetRestoreFileList(restoreFiles);
     }
     shownName+="[*]";
+
+    QString path = AbsoluteMPath(fileName, doc->MPath());
+    if(not path.isEmpty())
+    {
+        shownName += " [" + strippedName(path) + "[*]]";
+    }
     setWindowTitle(shownName);
 }
 
