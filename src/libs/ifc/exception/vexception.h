@@ -34,8 +34,6 @@
 #include <QCoreApplication>
 #include "../ifcdef.h"
 
-class QWidget;
-
 /**
  * @brief The VException class parent for all exception. Could be use for abstract exception
  */
@@ -43,7 +41,7 @@ class VException : public QException
 {
     Q_DECLARE_TR_FUNCTIONS(VException)
 public:
-    explicit VException(const QString &what);
+    explicit VException(const QString &what) V_NOEXCEPT_EXPR (true);
     VException(const VException &e);
     VException &operator=(const VException &e);
     virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
@@ -85,5 +83,20 @@ inline QString VException::MoreInformation() const
 {
     return moreInfo;
 }
+
+// Want have special exception for catching unhadled deleting a tool
+class VExceptionToolWasDeleted : public VException
+{
+    Q_DECLARE_TR_FUNCTIONS(VExceptionToolDeleted)
+public:
+    explicit VExceptionToolWasDeleted(const QString &what) V_NOEXCEPT_EXPR (true);
+    VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e);
+    VExceptionToolWasDeleted &operator=(const VExceptionToolWasDeleted &e);
+    virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
+
+    Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
+    // cppcheck-suppress unusedFunction
+    virtual VExceptionToolWasDeleted *clone() const Q_DECL_OVERRIDE;
+};
 
 #endif // VEXCEPTION_H

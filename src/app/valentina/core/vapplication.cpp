@@ -335,6 +335,13 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         exit(V_EX_DATAERR);
     }
+    catch (const VExceptionToolWasDeleted &e)
+    {
+        qCCritical(vApp, "%s\n\n%s\n\n%s",
+                   qUtf8Printable("Unhadled deleting tool. Continue use object after deleting"),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        exit(V_EX_DATAERR);
+    }
     catch (const VException &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Something's wrong!!")),

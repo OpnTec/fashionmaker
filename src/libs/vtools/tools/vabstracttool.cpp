@@ -80,6 +80,10 @@ void VAbstractTool::DeleteTool(bool ask)
         DelTool *delTool = new DelTool(doc, id);
         connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
         qApp->getUndoStack()->push(delTool);
+
+        // Throw exception, this will help prevent case when we forget to immediately quit function.
+        VExceptionToolWasDeleted e("Tool was used after deleting.");
+        throw e;
     }
 }
 

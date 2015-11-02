@@ -155,8 +155,8 @@ VToolPointOfContact* VToolPointOfContact::Create(DialogTool *dialog, VMainGraphi
     const quint32 firstPointId = dialogTool->GetFirstPoint();
     const quint32 secondPointId = dialogTool->GetSecondPoint();
     const QString pointName = dialogTool->getPointName();
-    VToolPointOfContact *point = Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc, 
-		                                data, Document::FullParse, Source::FromGui);
+    VToolPointOfContact *point = Create(0, radius, center, firstPointId, secondPointId, pointName, 5, 10, scene, doc,
+                                        data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -251,7 +251,15 @@ void VToolPointOfContact::SetFactor(qreal factor)
  */
 void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogPointOfContact>(this, event);
+    try
+    {
+        ContextMenu<DialogPointOfContact>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

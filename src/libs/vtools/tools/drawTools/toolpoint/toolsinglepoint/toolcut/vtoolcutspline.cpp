@@ -210,7 +210,15 @@ void VToolCutSpline::CurveChoosed(quint32 id)
  */
 void VToolCutSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogCutSpline>(this, event);
+    try
+    {
+        ContextMenu<DialogCutSpline>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -74,6 +74,9 @@ public slots:
     virtual void Disable(bool disable, const QString &namePP)=0;
 protected:
 
+    enum class RemoveOption : bool {Disable = false, Enable = true};
+    enum class Referens : bool {Follow = true, Ignore = false};
+
     /** @brief nameActivDraw name of tool's pattern peace. */
     QString      nameActivDraw;
 
@@ -105,7 +108,9 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement)=0;
 
     template <typename Dialog, typename Tool>
-    void ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, bool showRemove = true);
+    void ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event,
+                     const RemoveOption &showRemove = RemoveOption::Enable,
+                     const Referens &ref = Referens::Follow);
 
     template <typename Item>
     void ShowItem(Item *item, quint32 id, bool enable);
@@ -119,9 +124,11 @@ template <typename Dialog, typename Tool>
  * @brief ContextMenu show context menu for tool.
  * @param tool tool.
  * @param event context menu event.
- * @param showRemove true - tool have option delete.
+ * @param showRemove true - tool enable option delete.
+ * @param ref true - do not ignore referens value.
  */
-void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, bool showRemove)
+void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, const RemoveOption &showRemove,
+                            const Referens &ref)
 {
     SCASSERT(tool != nullptr);
     SCASSERT(event != nullptr);
@@ -129,11 +136,18 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, b
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
     QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
-    if (showRemove)
+    if (showRemove == RemoveOption::Enable)
     {
-        if (_referens > 1)
+        if (ref == Referens::Follow)
         {
-            actionRemove->setEnabled(false);
+            if (_referens > 1)
+            {
+                actionRemove->setEnabled(false);
+            }
+            else
+            {
+                actionRemove->setEnabled(true);
+            }
         }
         else
         {
@@ -161,7 +175,7 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, b
     }
     if (selectedAction == actionRemove)
     {
-        DeleteTool();
+        DeleteTool(); // do not catch exception here
         return; //Leave this method immediately after call!!!
     }
 }

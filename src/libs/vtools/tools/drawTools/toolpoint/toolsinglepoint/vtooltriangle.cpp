@@ -93,8 +93,8 @@ VToolTriangle* VToolTriangle::Create(DialogTool *dialog, VMainGraphicsScene *sce
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
     const QString pointName = dialogTool->getPointName();
-    VToolTriangle* point = Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10, 
-		                          scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolTriangle* point = Create(0, pointName, axisP1Id, axisP2Id, firstPointId, secondPointId, 5, 10,
+                                  scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -226,7 +226,15 @@ void VToolTriangle::RemoveReferens()
  */
 void VToolTriangle::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogTriangle>(this, event);
+    try
+    {
+        ContextMenu<DialogTriangle>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

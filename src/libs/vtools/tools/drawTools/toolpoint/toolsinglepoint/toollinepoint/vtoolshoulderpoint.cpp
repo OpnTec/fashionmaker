@@ -138,8 +138,8 @@ VToolShoulderPoint* VToolShoulderPoint::Create(DialogTool *dialog, VMainGraphics
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
-    VToolShoulderPoint * point = Create(0, formula, p1Line, p2Line, pShoulder, typeLine, lineColor, pointName, 5, 
-		                                10, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolShoulderPoint * point = Create(0, formula, p1Line, p2Line, pShoulder, typeLine, lineColor, pointName, 5,
+                                        10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -235,7 +235,15 @@ void VToolShoulderPoint::SetFactor(qreal factor)
  */
 void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogShoulderPoint>(this, event);
+    try
+    {
+        ContextMenu<DialogShoulderPoint>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

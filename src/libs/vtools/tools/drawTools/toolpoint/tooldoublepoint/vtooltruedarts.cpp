@@ -120,9 +120,9 @@ VToolTrueDarts *VToolTrueDarts::Create(DialogTool *dialog, VMainGraphicsScene *s
     const quint32 dartP2Id = dialogTool->GetSecondDartPointId();
     const quint32 dartP3Id = dialogTool->GetThirdDartPointId();
 
-    VToolTrueDarts *point = Create(0, 0, 0, baseLineP1Id, baseLineP2Id, dartP1Id, dartP2Id, dartP3Id, 
-		                           point1Name, 5, 10, point2Name, 5, 10, scene, doc, data, Document::FullParse, 
-								   Source::FromGui);
+    VToolTrueDarts *point = Create(0, 0, 0, baseLineP1Id, baseLineP2Id, dartP1Id, dartP2Id, dartP3Id,
+                                   point1Name, 5, 10, point2Name, 5, 10, scene, doc, data, Document::FullParse,
+                                   Source::FromGui);
     if (point != nullptr)
     {
         point->dialog = dialogTool;
@@ -291,7 +291,15 @@ void VToolTrueDarts::SetDartP3Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogTrueDarts>(this, event);
+    try
+    {
+        ContextMenu<DialogTrueDarts>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

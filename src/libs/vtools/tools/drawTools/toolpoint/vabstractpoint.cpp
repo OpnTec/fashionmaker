@@ -60,7 +60,15 @@ void VAbstractPoint::ShowTool(quint32 id, bool enable)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPoint::DeleteFromLabel()
 {
-    DeleteTool(); //Leave this method immediately after call!!!
+    try
+    {
+        DeleteTool();
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

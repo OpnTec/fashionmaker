@@ -100,8 +100,8 @@ VToolArc* VToolArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstr
     QString f1 = dialogTool->GetF1();
     QString f2 = dialogTool->GetF2();
     const QString color = dialogTool->GetColor();
-    VToolArc* point = Create(0, center, radius, f1, f2, color, scene, doc, data, Document::FullParse, 
-		                     Source::FromGui);
+    VToolArc* point = Create(0, center, radius, f1, f2, color, scene, doc, data, Document::FullParse,
+                             Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -293,7 +293,15 @@ void VToolArc::ShowVisualization(bool show)
  */
 void VToolArc::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogArc>(this, event);
+    try
+    {
+        ContextMenu<DialogArc>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -346,7 +354,7 @@ void VToolArc::SetVisualization()
         VisToolArc *visual = qobject_cast<VisToolArc *>(vis);
         SCASSERT(visual != nullptr);
 
-		const VTranslateVars *trVars = qApp->TrVars();
+        const VTranslateVars *trVars = qApp->TrVars();
         visual->setPoint1Id(arc->GetCenter().id());
         visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius()));
         visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1()));

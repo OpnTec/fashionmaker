@@ -68,8 +68,8 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(DialogTool *dia
     const quint32 tangentPointId = dialogTool->GetTangentPointId();
     const CrossCirclesPoint pType = dialogTool->GetCrossCirclesPoint();
     const QString pointName = dialogTool->getPointName();
-    VToolPointFromArcAndTangent *point = Create(0, pointName, arcId, tangentPointId, pType, 5, 10, scene, doc, 
-		                                        data, Document::FullParse, Source::FromGui);
+    VToolPointFromArcAndTangent *point = Create(0, pointName, arcId, tangentPointId, pType, 5, 10, scene, doc,
+                                                data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -267,7 +267,15 @@ void VToolPointFromArcAndTangent::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogPointFromArcAndTangent>(this, event);
+    try
+    {
+        ContextMenu<DialogPointFromArcAndTangent>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

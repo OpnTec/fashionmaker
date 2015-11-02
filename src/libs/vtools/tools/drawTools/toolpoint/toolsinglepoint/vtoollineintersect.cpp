@@ -93,8 +93,8 @@ VToolLineIntersect* VToolLineIntersect::Create(DialogTool *dialog, VMainGraphics
     const quint32 p1Line2Id = dialogTool->GetP1Line2();
     const quint32 p2Line2Id = dialogTool->GetP2Line2();
     const QString pointName = dialogTool->getPointName();
-    VToolLineIntersect* point = Create(0, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, pointName, 5, 10, scene, doc, 
-		                               data, Document::FullParse, Source::FromGui);
+    VToolLineIntersect* point = Create(0, p1Line1Id, p2Line1Id, p1Line2Id, p2Line2Id, pointName, 5, 10, scene, doc,
+                                       data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -197,7 +197,15 @@ void VToolLineIntersect::SetFactor(qreal factor)
  */
 void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogLineIntersect>(this, event);
+    try
+    {
+        ContextMenu<DialogLineIntersect>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

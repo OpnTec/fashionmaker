@@ -153,7 +153,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
     for (int i = 0; i< detail.CountNode(); ++i)
     {
         quint32 id = 0;
-		const VNodeDetail &nodeD = detail.at(i);
+        const VNodeDetail &nodeD = detail.at(i);
         switch (nodeD.getTypeTool())
         {
             case (Tool::NodePoint):
@@ -238,7 +238,15 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
  */
 void VToolDetail::Remove(bool ask)
 {
-    DeleteTool(ask);
+    try
+    {
+        DeleteTool(ask);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -367,8 +375,16 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
     switch (event->key())
     {
         case Qt::Key_Delete:
-            DeleteTool();
-            return; //Leave this method immediately after call!!!
+            try
+            {
+                DeleteTool();
+            }
+            catch(const VExceptionToolWasDeleted &e)
+            {
+                Q_UNUSED(e);
+                return;//Leave this method immediately!!!
+            }
+            break;
         default:
             break;
     }
@@ -420,7 +436,15 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
     if (selectedAction == actionRemove)
     {
-        DeleteTool();
+        try
+        {
+            DeleteTool();
+        }
+        catch(const VExceptionToolWasDeleted &e)
+        {
+            Q_UNUSED(e);
+            return;//Leave this method immediately!!!
+        }
         return; //Leave this method immediately after call!!!
     }
 }
@@ -525,6 +549,10 @@ void VToolDetail::DeleteTool(bool ask)
         connect(delDet, &DeleteDetail::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     }
     qApp->getUndoStack()->push(delDet);
+
+    // Throw exception, this will help prevent case when we forget to immediately quit function.
+    VExceptionToolWasDeleted e("Tool was used after deleting.");
+    throw e;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

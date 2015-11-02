@@ -317,7 +317,15 @@ void VToolSplinePath::ShowVisualization(bool show)
  */
 void VToolSplinePath::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogSplinePath>(this, event);
+    try
+    {
+        ContextMenu<DialogSplinePath>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

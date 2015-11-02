@@ -79,9 +79,9 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(DialogT
     QString secondCircleRadius = dialogTool->GetSecondCircleRadius();
     const CrossCirclesPoint pType = dialogTool->GetCrossCirclesPoint();
     const QString pointName = dialogTool->getPointName();
-    VToolPointOfIntersectionCircles *point = Create(0, pointName, firstCircleCenterId, secondCircleCenterId, 
-		                                            firstCircleRadius, secondCircleRadius, pType, 5, 10, scene, doc,
-													data, Document::FullParse, Source::FromGui);
+    VToolPointOfIntersectionCircles *point = Create(0, pointName, firstCircleCenterId, secondCircleCenterId,
+                                                    firstCircleRadius, secondCircleRadius, pType, 5, 10, scene, doc,
+                                                    data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -287,7 +287,15 @@ void VToolPointOfIntersectionCircles::RemoveReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogPointOfIntersectionCircles>(this, event);
+    try
+    {
+        ContextMenu<DialogPointOfIntersectionCircles>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

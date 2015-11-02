@@ -86,8 +86,8 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(DialogTool *dialog, V
     const quint32 firstPointId = dialogTool->GetFirstPointId();
     const quint32 secondPointId = dialogTool->GetSecondPointId();
     const QString pointName = dialogTool->getPointName();
-    VToolPointOfIntersection *point = Create(0, pointName, firstPointId, secondPointId, 5, 10, scene, doc, 
-		                                     data, Document::FullParse, Source::FromGui);
+    VToolPointOfIntersection *point = Create(0, pointName, firstPointId, secondPointId, 5, 10, scene, doc,
+                                             data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -170,7 +170,15 @@ void VToolPointOfIntersection::RemoveReferens()
  */
 void VToolPointOfIntersection::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogPointOfIntersection>(this, event);
+    try
+    {
+        ContextMenu<DialogPointOfIntersection>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -104,8 +104,8 @@ VToolEndLine* VToolEndLine::Create(DialogTool *dialog, VMainGraphicsScene *scene
     QString formulaAngle = dialogTool->GetAngle();
     const quint32 basePointId = dialogTool->GetBasePointId();
 
-    VToolEndLine *point = Create(0, pointName, typeLine, lineColor, formulaLength, formulaAngle, 
-		                         basePointId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolEndLine *point = Create(0, pointName, typeLine, lineColor, formulaLength, formulaAngle,
+                                 basePointId, 5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -183,7 +183,15 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
  */
 void VToolEndLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogEndLine>(this, event);
+    try
+    {
+        ContextMenu<DialogEndLine>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

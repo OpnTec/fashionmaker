@@ -180,6 +180,10 @@ void VToolBasePoint::DeleteTool(bool ask)
         DeletePatternPiece *deletePP = new DeletePatternPiece(doc, nameActivDraw);
         connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
         qApp->getUndoStack()->push(deletePP);
+
+        // Throw exception, this will help prevent case when we forget to immediately quit function.
+        VExceptionToolWasDeleted e("Tool was used after deleting.");
+        throw e;
     }
 }
 
@@ -291,17 +295,22 @@ void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
     QApplication::restoreOverrideCursor();
 #endif
 
-    quint32 ref = _referens; // store referens
-    _referens = 1; // make available delete pattern piece
-    if (doc->CountPP() > 1)
+    try
     {
-        ContextMenu<DialogSinglePoint>(this, event);
+        if (doc->CountPP() > 1)
+        {
+            ContextMenu<DialogSinglePoint>(this, event, RemoveOption::Enable, Referens::Ignore);
+        }
+        else
+        {
+            ContextMenu<DialogSinglePoint>(this, event, RemoveOption::Disable);
+        }
     }
-    else
+    catch(const VExceptionToolWasDeleted &e)
     {
-        ContextMenu<DialogSinglePoint>(this, event, false);
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
     }
-    _referens = ref; // restore referens. If not restore garbage collector delete point!!!
 }
 
 //---------------------------------------------------------------------------------------------------------------------

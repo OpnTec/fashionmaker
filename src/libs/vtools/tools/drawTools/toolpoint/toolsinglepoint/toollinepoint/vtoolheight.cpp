@@ -94,8 +94,8 @@ VToolHeight* VToolHeight::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     const quint32 p1LineId = dialogTool->GetP1LineId();
     const quint32 p2LineId = dialogTool->GetP2LineId();
 
-    VToolHeight *point = Create(0, pointName, typeLine, lineColor, basePointId, p1LineId, p2LineId, 5, 10, scene, doc, 
-		                        data, Document::FullParse, Source::FromGui);
+    VToolHeight *point = Create(0, pointName, typeLine, lineColor, basePointId, p1LineId, p2LineId, 5, 10, scene, doc,
+                                data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
@@ -189,7 +189,15 @@ QPointF VToolHeight::FindPoint(const QLineF &line, const QPointF &point)
  */
 void VToolHeight::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogHeight>(this, event);
+    try
+    {
+        ContextMenu<DialogHeight>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

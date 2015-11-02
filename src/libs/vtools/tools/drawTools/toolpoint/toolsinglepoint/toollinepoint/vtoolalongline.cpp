@@ -77,7 +77,15 @@ void VToolAlongLine::SetFactor(qreal factor)
 //cppcheck-suppress unusedFunction
 void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    ContextMenu<DialogAlongLine>(this, event);
+    try
+    {
+        ContextMenu<DialogAlongLine>(this, event);
+    }
+    catch(const VExceptionToolWasDeleted &e)
+    {
+        Q_UNUSED(e);
+        return;//Leave this method immediately!!!
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -205,8 +213,8 @@ VToolAlongLine* VToolAlongLine::Create(DialogTool *dialog, VMainGraphicsScene *s
     const QString typeLine = dialogTool->GetTypeLine();
     const QString lineColor = dialogTool->GetLineColor();
     const QString pointName = dialogTool->getPointName();
-    VToolAlongLine *point = Create(0, pointName, typeLine, lineColor, formula, firstPointId, secondPointId, 
-		                           5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
+    VToolAlongLine *point = Create(0, pointName, typeLine, lineColor, formula, firstPointId, secondPointId,
+                                   5, 10, scene, doc, data, Document::FullParse, Source::FromGui);
     if (point != nullptr)
     {
         point->dialog=dialogTool;
