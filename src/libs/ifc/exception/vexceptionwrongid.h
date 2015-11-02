@@ -39,7 +39,7 @@ class QDomElement;
 class VExceptionWrongId : public VException
 {
 public:
-    VExceptionWrongId(const QString &what, const QDomElement &domElement);
+    VExceptionWrongId(const QString &error, const QDomElement &domElement);
     VExceptionWrongId(const VExceptionWrongId &e);
     virtual ~VExceptionWrongId() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
     virtual QString ErrorMessage() const Q_DECL_OVERRIDE;

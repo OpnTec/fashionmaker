@@ -62,7 +62,7 @@ VExceptionWrongId::VExceptionWrongId(const VExceptionWrongId &e)
  */
 QString VExceptionWrongId::ErrorMessage() const
 {
-    QString error = QString("ExceptionWrongId: %1").arg(what);
+    QString error = QString("ExceptionWrongId: %1").arg(error);
     return error;
 }
 

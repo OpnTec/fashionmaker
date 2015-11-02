@@ -41,7 +41,7 @@ class VException : public QException
 {
     Q_DECLARE_TR_FUNCTIONS(VException)
 public:
-    explicit VException(const QString &what) V_NOEXCEPT_EXPR (true);
+    explicit VException(const QString &error);
     VException(const VException &e);
     VException &operator=(const VException &e);
     virtual ~VException() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
@@ -51,12 +51,14 @@ public:
     virtual VException *clone() const Q_DECL_OVERRIDE;
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
-    QString         What() const;
+    QString         WhatUtf8() const V_NOEXCEPT_EXPR (true);
     void            AddMoreInformation(const QString &info);
     QString         MoreInformation() const;
+    virtual const char* what() const V_NOEXCEPT_EXPR (true);
+
 protected:
-    /** @brief what string with error */
-    QString         what;
+    /** @brief error string with error */
+    QString         error;
 
     /** @brief moreInfo more information about error */
     QString         moreInfo;
@@ -69,9 +71,9 @@ protected:
  * @brief What return string with error
  * @return string with error
  */
-inline QString VException::What() const
+inline QString VException::WhatUtf8() const V_NOEXCEPT_EXPR (true)
 {
-    return what;
+    return error;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -89,7 +91,7 @@ class VExceptionToolWasDeleted : public VException
 {
     Q_DECLARE_TR_FUNCTIONS(VExceptionToolDeleted)
 public:
-    explicit VExceptionToolWasDeleted(const QString &what) V_NOEXCEPT_EXPR (true);
+    explicit VExceptionToolWasDeleted(const QString &error);
     VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e);
     VExceptionToolWasDeleted &operator=(const VExceptionToolWasDeleted &e);
     virtual ~VExceptionToolWasDeleted() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}

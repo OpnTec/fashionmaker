@@ -62,7 +62,7 @@ VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e)
  */
 QString VExceptionObjectError::ErrorMessage() const
 {
-    QString error = QString("ExceptionObjectError: %1").arg(what);
+    QString error = QString("ExceptionObjectError: %1").arg(error);
     return error;
 }
 

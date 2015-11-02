@@ -69,7 +69,7 @@ VExceptionEmptyParameter::~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true)
  */
 QString VExceptionEmptyParameter::ErrorMessage() const
 {
-    QString error = QString("ExceptionEmptyParameter: %1 %2").arg(what, name);
+    QString error = QString("ExceptionEmptyParameter: %1 %2").arg(error, name);
     return error;
 }
 
