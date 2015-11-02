@@ -84,6 +84,9 @@ public:
 
     const VTranslateVars *trVars;
     const Unit *patternUnit;
+
+private:
+    VContainerData &operator=(const VContainerData &) Q_DECL_EQ_DELETE;
 };
 
 #if defined(Q_CC_INTEL)

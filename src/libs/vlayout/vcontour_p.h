@@ -65,6 +65,9 @@ public:
     int paperWidth;
 
     quint32 shift;
+
+private:
+    VContourData &operator=(const VContourData &) Q_DECL_EQ_DELETE;
 };
 
 #ifdef Q_CC_GNU

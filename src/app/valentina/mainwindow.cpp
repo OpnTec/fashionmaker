@@ -38,6 +38,7 @@
 #include "core/vapplication.h"
 #include "../vmisc/undoevent.h"
 #include "../vmisc/vsettings.h"
+#include "../vmisc/def.h"
 #include "undocommands/renamepp.h"
 #include "core/vtooloptionspropertybrowser.h"
 #include "options.h"
@@ -424,41 +425,6 @@ void MainWindow::ToggleMSync(bool toggle)
     else
     {
         ui->actionSyncMeasurements->setEnabled(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString MainWindow::RelativeMPath(const QString &patternPath, const QString &absoluteMPath) const
-{
-    if (patternPath.isEmpty())
-    {
-        return absoluteMPath;
-    }
-
-    if (absoluteMPath.isEmpty() || QFileInfo(absoluteMPath).isRelative())
-    {
-        return absoluteMPath;
-    }
-
-    QDir dir(QFileInfo(patternPath).absoluteDir());
-    return dir.relativeFilePath(absoluteMPath);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString MainWindow::AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) const
-{
-    if (patternPath.isEmpty())
-    {
-        return relativeMPath;
-    }
-    else
-    {
-        if (relativeMPath.isEmpty() || QFileInfo(relativeMPath).isAbsolute())
-        {
-            return relativeMPath;
-        }
-
-        return QFileInfo(QFileInfo(patternPath).absoluteDir(), relativeMPath).absoluteFilePath();
     }
 }
 
@@ -2844,7 +2810,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     curFile = fileName;
     qApp->getUndoStack()->setClean();
 
-    QString shownName = strippedName(curFile);
+    QString shownName = StrippedName(curFile);
     if (curFile.isEmpty())
     {
         shownName = tr("untitled.val");
@@ -2878,17 +2844,6 @@ void MainWindow::setCurrentFile(const QString &fileName)
         shownName += " [" + strippedName(path) + "[*]]";
     }
     setWindowTitle(shownName);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief strippedName the function call around curFile to exclude the path to the file.
- * @param fullFileName full path to the file.
- * @return file name.
- */
-QString MainWindow::strippedName(const QString &fullFileName)
-{
-    return QFileInfo(fullFileName).fileName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2963,7 +2918,7 @@ void MainWindow::UpdateRecentFileActions()
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
-       QString text = QString("&%1. %2").arg(i + 1).arg(strippedName(files.at(i)));
+       QString text = QString("&%1. %2").arg(i + 1).arg(StrippedName(files.at(i)));
        recentFileActs[i]->setText(text);
        recentFileActs[i]->setData(files.at(i));
        recentFileActs[i]->setVisible(true);

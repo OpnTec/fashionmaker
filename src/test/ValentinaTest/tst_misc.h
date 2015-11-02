@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vlinelength_p.h
+ **  @file   tst_misc.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   20 8, 2014
+ **  @date   31 10, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,49 +26,26 @@
  **
  *************************************************************************/
 
-#ifndef VLINELENGTH_P_H
-#define VLINELENGTH_P_H
+#ifndef TST_MISC_H
+#define TST_MISC_H
 
-#include <QSharedData>
+#include <QObject>
 
-#include "../ifc/ifcdef.h"
-
-#ifdef Q_CC_GNU
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Weffc++"
-#endif
-
-class VLengthLineData : public QSharedData
+class TST_Misc :public QObject
 {
+    Q_OBJECT
 public:
+    explicit TST_Misc(QObject *parent = nullptr);
 
-    VLengthLineData()
-        :p1Id(NULL_ID), p2Id(NULL_ID), patternUnit(Unit::Cm)
-    {}
+private slots:
+    void TestRelativeFilePath_data();
+    void TestRelativeFilePath();
 
-    VLengthLineData(const quint32 &p1Id, const quint32 &p2Id, Unit patternUnit)
-        :p1Id(p1Id), p2Id(p2Id), patternUnit(patternUnit)
-    {}
-
-    VLengthLineData(const VLengthLineData &var)
-        :QSharedData(var), p1Id(var.p1Id), p2Id(var.p2Id), patternUnit(var.patternUnit)
-    {}
-
-    virtual  ~VLengthLineData();
-
-    quint32 p1Id;
-    quint32 p2Id;
-    Unit    patternUnit;
+    void TestAbsoluteFilePath_data();
+    void TestAbsoluteFilePath();
 
 private:
-    VLengthLineData &operator=(const VLengthLineData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_COPY(TST_Misc)
 };
 
-VLengthLineData::~VLengthLineData()
-{}
-
-#ifdef Q_CC_GNU
-#pragma GCC diagnostic pop
-#endif
-
-#endif // VLINELENGTH_P_H
+#endif // TST_MISC_H

@@ -587,4 +587,8 @@ void CheckFactor(qreal &oldFactor, const qreal &Newfactor);
 QStringList SupportedLocales();
 QStringList AllGroupNames();
 
+QString StrippedName(const QString &fullFileName);
+QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath);
+QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath);
+
 #endif // DEF_H

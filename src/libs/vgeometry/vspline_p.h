@@ -113,6 +113,9 @@ public:
 
     /** @brief kCurve coefficient of curvature spline. */
     qreal          kCurve;
+
+private:
+    VSplineData &operator=(const VSplineData &) Q_DECL_EQ_DELETE;
 };
 
 VSplineData::~VSplineData()

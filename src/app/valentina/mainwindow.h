@@ -266,7 +266,6 @@ private:
     bool               SavePattern(const QString &curFile, QString &error);
     void               AutoSavePattern();
     void               setCurrentFile(const QString &fileName);
-    QString            strippedName(const QString &fullFileName);
 
     void               ReadSettings();
     void               WriteSettings();
@@ -304,9 +303,6 @@ private:
     bool               UpdateMeasurements(const QString &path, int size, int height);
 
     void               ToggleMSync(bool toggle);
-
-    QString            RelativeMPath(const QString &patternPath, const QString &absoluteMPath) const;
-    QString            AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) const;
 
     bool               LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
     void               ReopenFilesAfterCrash(QStringList &args);

@@ -62,6 +62,9 @@ public:
     QString formula;
     bool    formulaOk;
     VContainer data;
+
+private:
+    VIncrementData &operator=(const VIncrementData &) Q_DECL_EQ_DELETE;
 };
 
 VIncrementData::~VIncrementData()

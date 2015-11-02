@@ -31,6 +31,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 
 #include <QComboBox>
+#include <QDir>
 
 // Keep synchronize all names with initialization in VTranslateVars class!!!!!
 //measurements
@@ -1669,4 +1670,52 @@ QString MapDiagrams(const QString &number)
     }
 
     return QString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief strippedName the function call around curFile to exclude the path to the file.
+ * @param fullFileName full path to the file.
+ * @return file name.
+ */
+QString StrippedName(const QString &fullFileName)
+{
+    return QFileInfo(fullFileName).fileName();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath)
+{
+    if (patternPath.isEmpty())
+    {
+        return absoluteMPath;
+    }
+
+    if (absoluteMPath.isEmpty() || QFileInfo(absoluteMPath).isRelative())
+    {
+        return absoluteMPath;
+    }
+
+    QDir dir(QFileInfo(patternPath).absoluteDir());
+    return dir.relativeFilePath(absoluteMPath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
+{
+    if (patternPath.isEmpty())
+    {
+        return relativeMPath;
+    }
+    else
+    {
+        if (relativeMPath.isEmpty() || QFileInfo(relativeMPath).isAbsolute())
+        {
+            return relativeMPath;
+        }
+
+        return QFileInfo(QFileInfo(patternPath).absoluteDir(), relativeMPath).absoluteFilePath();
+    }
+
+    return QString();// should never reach
 }
