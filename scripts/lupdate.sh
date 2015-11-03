@@ -4,7 +4,7 @@
 # Please, run this script from folder <root_folder>/scripts.
 
 # Download last translations from transifex.com. 
-tx pull --mode=developer
+tx pull --mode=developer -f -s --skip
 
 # Update local strings
 lupdate -recursive ../share/translations/translations.pro
