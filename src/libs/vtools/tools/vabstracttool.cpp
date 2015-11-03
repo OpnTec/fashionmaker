@@ -67,16 +67,22 @@ VAbstractTool::~VAbstractTool()
  */
 void VAbstractTool::DeleteTool(bool ask)
 {
+    qCDebug(vTool, "Deleting abstract tool.");
     if (_referens <= 1)
     {
+        qCDebug(vTool, "No children.");
         qApp->getSceneView()->itemClicked(nullptr);
         if (ask)
         {
+            qCDebug(vTool, "Asking.");
             if (ConfirmDeletion() == QMessageBox::No)
             {
+                qCDebug(vTool, "User said no.");
                 return;
             }
         }
+
+        qCDebug(vTool, "Begin deleting.");
         DelTool *delTool = new DelTool(doc, id);
         connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
         qApp->getUndoStack()->push(delTool);
@@ -84,6 +90,10 @@ void VAbstractTool::DeleteTool(bool ask)
         // Throw exception, this will help prevent case when we forget to immediately quit function.
         VExceptionToolWasDeleted e("Tool was used after deleting.");
         throw e;
+    }
+    else
+    {
+        qCDebug(vTool, "Can't delete, tool has children.");
     }
 }
 

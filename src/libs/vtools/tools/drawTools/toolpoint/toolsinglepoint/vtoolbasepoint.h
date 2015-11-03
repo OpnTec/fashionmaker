@@ -32,7 +32,7 @@
 #include "vtoolsinglepoint.h"
 
 /**
- * @brief The VToolBasePoint class tool for creation pattern base point. Obly base point can move. All object
+ * @brief The VToolBasePoint class tool for creation pattern base point. Only base point can move. All object
  * pattern peace depend on base point.
  */
 class VToolBasePoint : public VToolSinglePoint

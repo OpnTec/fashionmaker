@@ -166,25 +166,26 @@ void VToolBasePoint::decrementReferens()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::DeleteTool(bool ask)
 {
-    if (_referens <= 1)
+    qCDebug(vTool, "Deleting base point.");
+    qApp->getSceneView()->itemClicked(nullptr);
+    if (ask)
     {
-        qApp->getSceneView()->itemClicked(nullptr);
-        if (ask)
+        qCDebug(vTool, "Asking.");
+        if (ConfirmDeletion() == QMessageBox::No)
         {
-            if (ConfirmDeletion() == QMessageBox::No)
-            {
-                return;
-            }
+            qCDebug(vTool, "User said no.");
+            return;
         }
-
-        DeletePatternPiece *deletePP = new DeletePatternPiece(doc, nameActivDraw);
-        connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-        qApp->getUndoStack()->push(deletePP);
-
-        // Throw exception, this will help prevent case when we forget to immediately quit function.
-        VExceptionToolWasDeleted e("Tool was used after deleting.");
-        throw e;
     }
+
+    qCDebug(vTool, "Begin deleting.");
+    DeletePatternPiece *deletePP = new DeletePatternPiece(doc, nameActivDraw);
+    connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(deletePP);
+
+    // Throw exception, this will help prevent case when we forget to immediately quit function.
+    VExceptionToolWasDeleted e("Tool was used after deleting.");
+    throw e;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -291,26 +292,32 @@ void VToolBasePoint::ReadToolAttributes(const QDomElement &domElement)
  */
 void VToolBasePoint::contextMenuEvent ( QGraphicsSceneContextMenuEvent * event )
 {
+    qCDebug(vTool, "Context menu base point");
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
+    qCDebug(vTool, "Restored overriden cursor");
 #endif
 
     try
     {
         if (doc->CountPP() > 1)
         {
+            qCDebug(vTool, "PP count > 1");
             ContextMenu<DialogSinglePoint>(this, event, RemoveOption::Enable, Referens::Ignore);
         }
         else
         {
+            qCDebug(vTool, "PP count = 1");
             ContextMenu<DialogSinglePoint>(this, event, RemoveOption::Disable);
         }
     }
     catch(const VExceptionToolWasDeleted &e)
     {
+        qCDebug(vTool, "Tool was deleted. Immediately leave method.");
         Q_UNUSED(e);
         return;//Leave this method immediately!!!
     }
+    qCDebug(vTool, "Context menu closed. Tool was not deleted.");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -133,6 +133,7 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, c
     SCASSERT(tool != nullptr);
     SCASSERT(event != nullptr);
 
+    qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
     QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
@@ -142,26 +143,31 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, c
         {
             if (_referens > 1)
             {
+                qCDebug(vTool, "Remove disabled. Tool has childern.");
                 actionRemove->setEnabled(false);
             }
             else
             {
+                qCDebug(vTool, "Remove enabled. Tool has not childern.");
                 actionRemove->setEnabled(true);
             }
         }
         else
         {
+            qCDebug(vTool, "Remove enabled. Ignore referens value.");
             actionRemove->setEnabled(true);
         }
     }
     else
     {
+        qCDebug(vTool, "Remove disabled.");
         actionRemove->setEnabled(false);
     }
 
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)
     {
+        qCDebug(vTool, "Show options.");
         qApp->getSceneView()->itemClicked(nullptr);
         dialog = new Dialog(getData(), id, qApp->getMainWindow());
         dialog->setModal(true);
@@ -175,6 +181,7 @@ void VDrawTool::ContextMenu(Tool *tool, QGraphicsSceneContextMenuEvent *event, c
     }
     if (selectedAction == actionRemove)
     {
+        qCDebug(vTool, "Deleting tool.");
         DeleteTool(); // do not catch exception here
         return; //Leave this method immediately after call!!!
     }
