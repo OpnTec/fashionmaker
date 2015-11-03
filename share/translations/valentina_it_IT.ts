@@ -2727,7 +2727,7 @@
     </message>
     <message>
         <source>Parser error: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore codifica:%1. Il programma verrà interrotto.</translation>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
@@ -4868,7 +4868,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Parser error: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore codifica:%1. Il programma verrà interrotto.</translation>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
