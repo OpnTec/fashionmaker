@@ -9,337 +9,337 @@ source_file = share/translations/valentina.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p0_ts]
+[valentina-project.measurements_p0ts]
 file_filter = share/translations/measurements_p0_<lang>.ts
 source_file = share/translations/measurements_p0.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p1_ts]
+[valentina-project.measurements_p1ts]
 file_filter = share/translations/measurements_p1_<lang>.ts
 source_file = share/translations/measurements_p1.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p2_ts]
+[valentina-project.measurements_p2ts]
 file_filter = share/translations/measurements_p2_<lang>.ts
 source_file = share/translations/measurements_p2.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p3_ts]
+[valentina-project.measurements_p3ts]
 file_filter = share/translations/measurements_p3_<lang>.ts
 source_file = share/translations/measurements_p3.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p4_ts]
+[valentina-project.measurements_p4ts]
 file_filter = share/translations/measurements_p4_<lang>.ts
 source_file = share/translations/measurements_p4.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p5_ts]
+[valentina-project.measurements_p5ts]
 file_filter = share/translations/measurements_p5_<lang>.ts
 source_file = share/translations/measurements_p5.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p6_ts]
+[valentina-project.measurements_p6ts]
 file_filter = share/translations/measurements_p6_<lang>.ts
 source_file = share/translations/measurements_p6.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p7_ts]
+[valentina-project.measurements_p7ts]
 file_filter = share/translations/measurements_p7_<lang>.ts
 source_file = share/translations/measurements_p7.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p8_ts]
+[valentina-project.measurements_p8ts]
 file_filter = share/translations/measurements_p8_<lang>.ts
 source_file = share/translations/measurements_p8.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p9_ts]
+[valentina-project.measurements_p9ts]
 file_filter = share/translations/measurements_p9_<lang>.ts
 source_file = share/translations/measurements_p9.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p10_ts]
+[valentina-project.measurements_p10ts]
 file_filter = share/translations/measurements_p10_<lang>.ts
 source_file = share/translations/measurements_p10.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p11_ts]
+[valentina-project.measurements_p11ts]
 file_filter = share/translations/measurements_p11_<lang>.ts
 source_file = share/translations/measurements_p11.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p12_ts]
+[valentina-project.measurements_p12ts]
 file_filter = share/translations/measurements_p12_<lang>.ts
 source_file = share/translations/measurements_p12.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p13_ts]
+[valentina-project.measurements_p13ts]
 file_filter = share/translations/measurements_p13_<lang>.ts
 source_file = share/translations/measurements_p13.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p14_ts]
+[valentina-project.measurements_p14ts]
 file_filter = share/translations/measurements_p14_<lang>.ts
 source_file = share/translations/measurements_p14.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p15_ts]
+[valentina-project.measurements_p15ts]
 file_filter = share/translations/measurements_p15_<lang>.ts
 source_file = share/translations/measurements_p15.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p16_ts]
+[valentina-project.measurements_p16ts]
 file_filter = share/translations/measurements_p16_<lang>.ts
 source_file = share/translations/measurements_p16.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p17_ts]
+[valentina-project.measurements_p17ts]
 file_filter = share/translations/measurements_p17_<lang>.ts
 source_file = share/translations/measurements_p17.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p18_ts]
+[valentina-project.measurements_p18ts]
 file_filter = share/translations/measurements_p18_<lang>.ts
 source_file = share/translations/measurements_p18.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p19_ts]
+[valentina-project.measurements_p19ts]
 file_filter = share/translations/measurements_p19_<lang>.ts
 source_file = share/translations/measurements_p19.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p20_ts]
+[valentina-project.measurements_p20ts]
 file_filter = share/translations/measurements_p20_<lang>.ts
 source_file = share/translations/measurements_p20.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p21_ts]
+[valentina-project.measurements_p21ts]
 file_filter = share/translations/measurements_p21_<lang>.ts
 source_file = share/translations/measurements_p21.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p22_ts]
+[valentina-project.measurements_p22ts]
 file_filter = share/translations/measurements_p22_<lang>.ts
 source_file = share/translations/measurements_p22.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p23_ts]
+[valentina-project.measurements_p23ts]
 file_filter = share/translations/measurements_p23_<lang>.ts
 source_file = share/translations/measurements_p23.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p24_ts]
+[valentina-project.measurements_p24ts]
 file_filter = share/translations/measurements_p24_<lang>.ts
 source_file = share/translations/measurements_p24.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p25_ts]
+[valentina-project.measurements_p25ts]
 file_filter = share/translations/measurements_p25_<lang>.ts
 source_file = share/translations/measurements_p25.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p26_ts]
+[valentina-project.measurements_p26ts]
 file_filter = share/translations/measurements_p26_<lang>.ts
 source_file = share/translations/measurements_p26.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p27_ts]
+[valentina-project.measurements_p27ts]
 file_filter = share/translations/measurements_p27_<lang>.ts
 source_file = share/translations/measurements_p27.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p28_ts]
+[valentina-project.measurements_p28ts]
 file_filter = share/translations/measurements_p28_<lang>.ts
 source_file = share/translations/measurements_p28.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p29_ts]
+[valentina-project.measurements_p29ts]
 file_filter = share/translations/measurements_p29_<lang>.ts
 source_file = share/translations/measurements_p29.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p30_ts]
+[valentina-project.measurements_p30ts]
 file_filter = share/translations/measurements_p30_<lang>.ts
 source_file = share/translations/measurements_p30.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p31_ts]
+[valentina-project.measurements_p31ts]
 file_filter = share/translations/measurements_p31_<lang>.ts
 source_file = share/translations/measurements_p31.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p32_ts]
+[valentina-project.measurements_p32ts]
 file_filter = share/translations/measurements_p32_<lang>.ts
 source_file = share/translations/measurements_p32.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p33_ts]
+[valentina-project.measurements_p33ts]
 file_filter = share/translations/measurements_p33_<lang>.ts
 source_file = share/translations/measurements_p33.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p34_ts]
+[valentina-project.measurements_p34ts]
 file_filter = share/translations/measurements_p34_<lang>.ts
 source_file = share/translations/measurements_p34.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p35_ts]
+[valentina-project.measurements_p35ts]
 file_filter = share/translations/measurements_p35_<lang>.ts
 source_file = share/translations/measurements_p35.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p36_ts]
+[valentina-project.measurements_p36ts]
 file_filter = share/translations/measurements_p36_<lang>.ts
 source_file = share/translations/measurements_p36.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p37_ts]
+[valentina-project.measurements_p37ts]
 file_filter = share/translations/measurements_p37_<lang>.ts
 source_file = share/translations/measurements_p37.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p38_ts]
+[valentina-project.measurements_p38ts]
 file_filter = share/translations/measurements_p38_<lang>.ts
 source_file = share/translations/measurements_p38.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p39_ts]
+[valentina-project.measurements_p39ts]
 file_filter = share/translations/measurements_p39_<lang>.ts
 source_file = share/translations/measurements_p39.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p40_ts]
+[valentina-project.measurements_p40ts]
 file_filter = share/translations/measurements_p40_<lang>.ts
 source_file = share/translations/measurements_p40.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p41_ts]
+[valentina-project.measurements_p41ts]
 file_filter = share/translations/measurements_p41_<lang>.ts
 source_file = share/translations/measurements_p41.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p42_ts]
+[valentina-project.measurements_p42ts]
 file_filter = share/translations/measurements_p42_<lang>.ts
 source_file = share/translations/measurements_p42.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p43_ts]
+[valentina-project.measurements_p43ts]
 file_filter = share/translations/measurements_p43_<lang>.ts
 source_file = share/translations/measurements_p43.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p44_ts]
+[valentina-project.measurements_p44ts]
 file_filter = share/translations/measurements_p44_<lang>.ts
 source_file = share/translations/measurements_p44.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p45_ts]
+[valentina-project.measurements_p45ts]
 file_filter = share/translations/measurements_p45_<lang>.ts
 source_file = share/translations/measurements_p45.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p46_ts]
+[valentina-project.measurements_p46ts]
 file_filter = share/translations/measurements_p46_<lang>.ts
 source_file = share/translations/measurements_p46.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p47_ts]
+[valentina-project.measurements_p47ts]
 file_filter = share/translations/measurements_p47_<lang>.ts
 source_file = share/translations/measurements_p47.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p48_ts]
+[valentina-project.measurements_p48ts]
 file_filter = share/translations/measurements_p48_<lang>.ts
 source_file = share/translations/measurements_p48.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p49_ts]
+[valentina-project.measurements_p49ts]
 file_filter = share/translations/measurements_p49_<lang>.ts
 source_file = share/translations/measurements_p49.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p50_ts]
+[valentina-project.measurements_p50ts]
 file_filter = share/translations/measurements_p50_<lang>.ts
 source_file = share/translations/measurements_p50.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p51_ts]
+[valentina-project.measurements_p51ts]
 file_filter = share/translations/measurements_p51_<lang>.ts
 source_file = share/translations/measurements_p51.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p52_ts]
+[valentina-project.measurements_p52ts]
 file_filter = share/translations/measurements_p52_<lang>.ts
 source_file = share/translations/measurements_p52.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p53_ts]
+[valentina-project.measurements_p53ts]
 file_filter = share/translations/measurements_p53_<lang>.ts
 source_file = share/translations/measurements_p53.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p54_ts]
+[valentina-project.measurements_p54ts]
 file_filter = share/translations/measurements_p54_<lang>.ts
 source_file = share/translations/measurements_p54.ts
 source_lang = en
 type = QT
 
-[valentina-project.measurements_p998_ts]
+[valentina-project.measurements_p998ts]
 file_filter = share/translations/measurements_p998_<lang>.ts
 source_file = share/translations/measurements_p998.ts
 source_lang = en
