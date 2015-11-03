@@ -67,31 +67,7 @@ void TST_MeasurementRegExp::TestOriginalMeasurementNamesRegExp()
 // cppcheck-suppress unusedFunction
 void TST_MeasurementRegExp::TestMeasurementRegExp_data()
 {
-    const int systemCounts = 56;
-    const QStringList locales = SupportedLocales();
-
-    {
-        const int combinations = systemCounts * locales.size();
-
-        QDir dir(TranslationsPath());
-        const QStringList fileNames = dir.entryList(QStringList("measurements_p*_*.qm"));
-
-        QVERIFY2(combinations == fileNames.size(), "Unexpected count of files.");
-    }
-
-    QTest::addColumn<QString>("system");
-    QTest::addColumn<QString>("locale");
-
-    for(int s = 0; s < systemCounts; ++s)
-    {
-        for(int l = 0, sz = locales.size(); l < sz; ++l)
-        {
-            const QString system = QString("p%1").arg(s);
-            const QString locale = locales.at(l);
-            const QString tag = QString("Check translation measurements_%1_%2.qm").arg(system).arg(locale);
-            QTest::newRow(qUtf8Printable(tag)) << system << locale;
-        }
-    }
+    PrepareMeasurementData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,7 +93,7 @@ void TST_MeasurementRegExp::TestMeasurementRegExp()
         }
         case NoError:
         {
-            CheckNames();
+            CheckRegExpNames();
 
             if (not pmsTranslator.isNull())
             {
@@ -396,6 +372,86 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_MeasurementRegExp::TestAllTranslatedMeasurementsIsUnique_data()
+{
+    PrepareMeasurementData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_MeasurementRegExp::TestAllTranslatedMeasurementsIsUnique()
+{
+    QFETCH(QString, system);
+    QFETCH(QString, locale);
+
+    const int res = LoadTranslation(system, locale);
+
+    switch(res)
+    {
+        case ErrorInstall:
+        case ErrorSize:
+        case ErrorLoad:
+        {
+            const QString message = QString("Failed to check translation for system = %1 and locale = %2")
+                    .arg(system)
+                    .arg(locale);
+            QSKIP(qUtf8Printable(message));
+            break;
+        }
+        case NoError:
+        {
+            CheckIsNamesUnique();
+
+            if (not pmsTranslator.isNull())
+            {
+                const bool result = QCoreApplication::removeTranslator(pmsTranslator);
+
+                if (result == false)
+                {
+                    const QString message = QString("Can't remove translation for system = %1 and locale = %2")
+                            .arg(system)
+                            .arg(locale);
+                    QWARN(qUtf8Printable(message));
+                }
+                delete pmsTranslator;
+            }
+            break;
+        }
+        default:
+            QWARN("Unexpected state");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_MeasurementRegExp::PrepareMeasurementData()
+{
+    const int systemCounts = 56;
+    const QStringList locales = SupportedLocales();
+
+    {
+        const int combinations = systemCounts * locales.size();
+
+        QDir dir(TranslationsPath());
+        const QStringList fileNames = dir.entryList(QStringList("measurements_p*_*.qm"));
+
+        QVERIFY2(combinations == fileNames.size(), "Unexpected count of files.");
+    }
+
+    QTest::addColumn<QString>("system");
+    QTest::addColumn<QString>("locale");
+
+    for(int s = 0; s < systemCounts; ++s)
+    {
+        for(int l = 0, sz = locales.size(); l < sz; ++l)
+        {
+            const QString system = QString("p%1").arg(s);
+            const QString locale = locales.at(l);
+            const QString tag = QString("Check translation measurements_%1_%2.qm").arg(system).arg(locale);
+            QTest::newRow(qUtf8Printable(tag)) << system << locale;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int TST_MeasurementRegExp::LoadTranslation(const QString &checkedSystem, const QString &checkedLocale)
 {
     const QString path = TranslationsPath();
@@ -462,7 +518,7 @@ void TST_MeasurementRegExp::InitTrMs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_MeasurementRegExp::CheckNames() const
+void TST_MeasurementRegExp::CheckRegExpNames() const
 {
     const QStringList originalNames = AllGroupNames();
     const QRegularExpression re(NameRegExp());
@@ -471,5 +527,19 @@ void TST_MeasurementRegExp::CheckNames() const
     {
         const QString translated = trMs->MToUser(str);
         QCOMPARE(re.match(translated).hasMatch(), true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_MeasurementRegExp::CheckIsNamesUnique() const
+{
+    const QStringList originalNames = AllGroupNames();
+    QSet<QString> names;
+
+    foreach(const QString &str, originalNames)
+    {
+        const QString translated = trMs->MToUser(str);
+        QCOMPARE(names.contains(translated), false);
+        names.insert(translated);
     }
 }

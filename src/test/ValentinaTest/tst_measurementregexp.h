@@ -49,6 +49,8 @@ private slots:
     void TestMeasurementRegExp();
     void TestCorrectOrderMeasurement_data();
     void TestCorrectOrderMeasurement();
+    void TestAllTranslatedMeasurementsIsUnique_data();
+    void TestAllTranslatedMeasurementsIsUnique();
 
 private:
     Q_DISABLE_COPY(TST_MeasurementRegExp)
@@ -56,9 +58,11 @@ private:
     QPointer<QTranslator>   pmsTranslator;
     VTranslateMeasurements *trMs;
 
+    void    PrepareMeasurementData();
     int     LoadTranslation(const QString &checkedSystem, const QString &checkedLocale);
     void    InitTrMs();
-    void    CheckNames() const;
+    void    CheckRegExpNames() const;
+    void    CheckIsNamesUnique() const;
 };
 
 #endif // TST_MEASUREMENTREGEXP_H
