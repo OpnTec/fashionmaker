@@ -190,7 +190,8 @@ void MainWindow::AddPP(const QString &PPName)
     //Create single point
     ui->view->itemClicked(nullptr);//hide options previous tool
     const QString label = doc->GenerateLabel(LabelType::NewPatternPiece);
-    const quint32 id = pattern->AddGObject(new VPointF(30+comboBoxDraws->count()*5, 40, label, 5, 10));
+    const QPointF startPosition = StartPositionNewPP();
+    const quint32 id = pattern->AddGObject(new VPointF(startPosition.x(), startPosition.y(), label, 5, 10));
     VToolBasePoint *spoint = new VToolBasePoint(doc, pattern, id, Source::FromGui, PPName);
     sceneDraw->addItem(spoint);
     ui->view->itemClicked(spoint);
@@ -218,7 +219,35 @@ void MainWindow::AddPP(const QString &PPName)
     }
     comboBoxDraws->blockSignals(false);
 
+    // Show best for new PP
+    ui->view->fitInView(doc->ActiveDrawBoundingRect(), Qt::KeepAspectRatio);
+    ui->view->NewFactor(ui->view->transform().m11());
+
     ui->actionNewDraw->setEnabled(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF MainWindow::StartPositionNewPP() const
+{
+    const qreal originX = 30.0;
+    const qreal originY = 40.0;
+    const qreal margin = 40.0;
+    if (comboBoxDraws->count() > 1)
+    {
+        const QRectF rect = sceneDraw->itemsBoundingRect();
+        if (rect.width() <= rect.height())
+        {
+            return QPointF(rect.width()+margin, originY);
+        }
+        else
+        {
+            return QPointF(originX, rect.height()+margin);
+        }
+    }
+    else
+    {
+        return QPointF(originX, originY);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

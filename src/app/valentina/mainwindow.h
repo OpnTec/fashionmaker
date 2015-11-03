@@ -295,6 +295,7 @@ private:
     void               ToolBarStyle(QToolBar *bar);
 
     void               AddPP(const QString &PPName);
+    QPointF            StartPositionNewPP() const;
 
     void               InitScenes();
 
