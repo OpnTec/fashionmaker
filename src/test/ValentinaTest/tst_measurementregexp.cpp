@@ -526,7 +526,8 @@ void TST_MeasurementRegExp::CheckRegExpNames() const
     foreach(const QString &str, originalNames)
     {
         const QString translated = trMs->MToUser(str);
-        QCOMPARE(re.match(translated).hasMatch(), true);
+        const QString message = QString("Original name:'%1', translated name:'%2'").arg(str).arg(translated);
+        QVERIFY2(re.match(translated).hasMatch(), qUtf8Printable(message));
     }
 }
 
@@ -539,7 +540,8 @@ void TST_MeasurementRegExp::CheckIsNamesUnique() const
     foreach(const QString &str, originalNames)
     {
         const QString translated = trMs->MToUser(str);
-        QCOMPARE(names.contains(translated), false);
+        const QString message = QString("Original name:'%1', translated name:'%2'").arg(str).arg(translated);
+        QVERIFY2(not names.contains(translated), qUtf8Printable(message));
         names.insert(translated);
     }
 }
