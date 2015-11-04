@@ -310,6 +310,11 @@ private:
 
     void               SetSize(const QString &text);
     void               SetHeight(const QString & text);
+
+    QString            GetPatternFileName();
+    QString            GetMeasurementFileName();
+
+    void               UpdateWindowTitle();
 };
 
 #endif // MAINWINDOW_H
