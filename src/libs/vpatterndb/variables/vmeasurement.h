@@ -33,6 +33,7 @@
 #include "../ifc/ifcdef.h"
 
 #include <QStringList>
+#include <QMap>
 
 class VMeasurementData;
 class VContainer;

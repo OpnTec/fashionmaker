@@ -104,7 +104,6 @@ private:
     void CreateShadows();
     void CreateScenes();
 
-
     void SvgFile(const QString &name, int i)const;
     void PngFile(const QString &name, int i)const;
     void PdfFile(const QString &name, int i)const;
@@ -114,13 +113,14 @@ private:
     void ObjFile(const QString &name, int i)const;
     void DxfFile(const QString &name, int i)const;
 
-    QVector<QImage> AllSheets();
+    QVector<QImage> AllSheets() const;
 
     void SaveLayoutAs();
     void PrintPreview();
     void LayoutPrint();
 
     void SetPrinterSettings(QPrinter *printer);
+    bool IsLayoutGrayscale() const;
 
     bool isPagesUniform() const;
     QString FileName() const;

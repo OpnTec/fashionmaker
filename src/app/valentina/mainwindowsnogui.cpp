@@ -705,7 +705,7 @@ void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QImage> MainWindowsNoGUI::AllSheets()
+QVector<QImage> MainWindowsNoGUI::AllSheets() const
 {
     QVector<QImage> images;
     for (int i=0; i < scenes.size(); ++i)
@@ -842,14 +842,14 @@ void MainWindowsNoGUI::LayoutPrint()
 void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
 {
     SCASSERT(printer != nullptr)
-            printer->setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
+    printer->setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
 
     // Set orientation
     if (papers.size() > 0)
     {
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
         SCASSERT(paper != nullptr)
-                if (paper->rect().height()>= paper->rect().width())
+        if (paper->rect().height()>= paper->rect().width())
         {
             printer->setOrientation(QPrinter::Portrait);
         }
@@ -863,11 +863,30 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
     {
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
         SCASSERT(paper != nullptr)
-                printer->setPaperSize ( QSizeF(FromPixel(paper->rect().width(), Unit::Mm),
-                                               FromPixel(paper->rect().height(), Unit::Mm)), QPrinter::Millimeter );
+        printer->setPaperSize ( QSizeF(FromPixel(paper->rect().width(), Unit::Mm),
+                                       FromPixel(paper->rect().height(), Unit::Mm)), QPrinter::Millimeter );
     }
 
+    printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName() + QLatin1Literal(".pdf"));
     printer->setDocName(FileName());
+
+    IsLayoutGrayscale() ? printer->setColorMode(QPrinter::GrayScale) : printer->setColorMode(QPrinter::Color);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MainWindowsNoGUI::IsLayoutGrayscale() const
+{
+    const QVector<QImage> images = AllSheets();
+
+    for(int i=0; i < images.size(); ++i)
+    {
+        if (not images.at(i).isGrayscale())
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -881,11 +900,11 @@ bool MainWindowsNoGUI::isPagesUniform() const
     {
         QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
         SCASSERT(paper != nullptr)
-                for (int i=1; i < papers.size(); ++i)
+        for (int i=1; i < papers.size(); ++i)
         {
             QGraphicsRectItem *p = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
             SCASSERT(p != nullptr)
-                    if (paper->rect() != p->rect())
+            if (paper->rect() != p->rect())
             {
                 return false;
             }
