@@ -75,8 +75,6 @@ DialogBisector::DialogBisector(const VContainer *data, const quint32 &toolId, QW
             this, &DialogBisector::PointNameChanged);
 
     vis = new VisToolBisector(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -50,10 +50,13 @@ public:
     Unit PatternUnit() const;
 public slots:
     void CheckState();
+protected:
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogNewPattern)
     Ui::DialogNewPattern *ui;
     VContainer *data;
+    bool isInitialized;
     void InitUnits();
 };
 

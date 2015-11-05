@@ -39,7 +39,7 @@
 DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent) :
     QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc), heightsChecked(MAX_HEIGHTS),
     sizesChecked(MAX_SIZES),  heights (QMap<GHeights, bool>()), sizes(QMap<GSizes, bool>()),
-    data(QMap<QCheckBox *, int>()), descriptionChanged(false), gradationChanged(false)
+    data(QMap<QCheckBox *, int>()), descriptionChanged(false), gradationChanged(false), isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -80,9 +80,6 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
     SetOptions(sizes);
 
     gradationChanged = false;//Set to default value after initialization
-
-    setMaximumSize(size());
-    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -252,6 +249,27 @@ void DialogPatternProperties::CheckStateSize(int state)
 void DialogPatternProperties::DescEdited()
 {
     descriptionChanged = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    setMaximumSize(size());
+    setMinimumSize(size());
+
+    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------

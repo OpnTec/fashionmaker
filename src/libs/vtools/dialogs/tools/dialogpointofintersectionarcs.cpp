@@ -57,8 +57,6 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
             this, &DialogPointOfIntersectionArcs::ArcChanged);
 
     vis = new VisToolPointOfIntersectionArcs(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

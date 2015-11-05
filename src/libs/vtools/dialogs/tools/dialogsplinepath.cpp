@@ -61,8 +61,6 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
             this, &DialogSplinePath::KAsm2Changed);
 
     vis = new VisToolSplinePath(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,7 +82,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ui->listWidget->clear();
     for (qint32 i = 0; i < path.CountPoint(); ++i)
     {
-		const VSplinePoint &point = path.at(i);
+        const VSplinePoint &point = path.at(i);
         NewItem(point.P().id(), point.KAsm1(), point.Angle1(), point.KAsm2(), point.Angle2());
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);

@@ -48,8 +48,6 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, const quint32 &tool
     CheckState();
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogTool::NamePointChanged);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

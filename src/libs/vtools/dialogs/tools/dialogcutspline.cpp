@@ -65,8 +65,6 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, 
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSpline::DeployFormulaTextEdit);
 
     vis = new VisToolCutSpline(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

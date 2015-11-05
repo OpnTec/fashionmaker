@@ -38,7 +38,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogLayoutProgress), maxCount(count), movie(nullptr)
+    :QDialog(parent), ui(new Ui::DialogLayoutProgress), maxCount(count), movie(nullptr), isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -59,9 +59,6 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
     setModal(true);
 
     this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
-
-    setMaximumSize(size());
-    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -116,4 +113,25 @@ void DialogLayoutProgress::Finished()
 void DialogLayoutProgress::StopWorking()
 {
     emit Abort();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutProgress::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    setMaximumSize(size());
+    setMinimumSize(size());
+
+    isInitialized = true;//first show windows are held
 }

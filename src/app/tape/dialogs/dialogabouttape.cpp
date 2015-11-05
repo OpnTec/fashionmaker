@@ -34,13 +34,15 @@
 #include <QDate>
 #include <QDesktopServices>
 #include <QMessageBox>
+#include <QShowEvent>
 #include <QUrl>
 #include <QtDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutTape::DialogAboutTape(QWidget *parent)
     :QDialog(parent),
-      ui(new Ui::DialogAboutTape)
+      ui(new Ui::DialogAboutTape),
+      isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -54,10 +56,6 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
     FontPointSize(ui->label_Legal_Stuff, 11);
     FontPointSize(ui->label_Tape_Built, 11);
     FontPointSize(ui->label_QT_Version, 11);
-
-    adjustSize();
-    setMaximumSize(size());
-    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,6 +76,27 @@ void DialogAboutTape::changeEvent(QEvent *event)
 
     // remember to call base class implementation
     QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAboutTape::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    setMaximumSize(size());
+    setMinimumSize(size());
+
+    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -31,10 +31,13 @@
 
 #include "../vpatterndb/variables/vmeasurement.h"
 
+#include <QShowEvent>
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogNewMeasurements::DialogNewMeasurements(QWidget *parent)
     :QDialog(parent),
-      ui(new Ui::DialogNewMeasurements)
+      ui(new Ui::DialogNewMeasurements),
+      isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -48,10 +51,6 @@ DialogNewMeasurements::DialogNewMeasurements(QWidget *parent)
 
     connect(ui->comboBoxUnit, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogNewMeasurements::CurrentUnitChanged);
-
-    adjustSize();
-    setMaximumSize(size());
-    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,6 +97,27 @@ void DialogNewMeasurements::changeEvent(QEvent *event)
 
     // remember to call base class implementation
     QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNewMeasurements::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    setMaximumSize(size());
+    setMinimumSize(size());
+
+    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------

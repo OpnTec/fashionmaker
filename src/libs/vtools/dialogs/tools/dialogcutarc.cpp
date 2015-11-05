@@ -66,8 +66,6 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutArc::DeployFormulaTextEdit);
 
     vis = new VisToolCutArc(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

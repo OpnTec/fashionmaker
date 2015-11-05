@@ -45,6 +45,7 @@ public:
 
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 
 private slots:
     void WebButtonClicked();
@@ -52,6 +53,7 @@ private slots:
 private:
     Q_DISABLE_COPY(DialogAboutTape)
     Ui::DialogAboutTape *ui;
+    bool isInitialized;
 
     void FontPointSize(QWidget *w, int pointSize);
 

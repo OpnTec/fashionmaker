@@ -53,6 +53,7 @@ public:
 
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 
 private slots:
     void CurrentTypeChanged(int index);
@@ -61,6 +62,7 @@ private slots:
 private:
     Q_DISABLE_COPY(DialogNewMeasurements)
     Ui::DialogNewMeasurements *ui;
+    bool isInitialized;
 
     void InitMTypes();
     void InitHeightsList();

@@ -106,6 +106,11 @@ void DialogTool::showEvent(QShowEvent *event)
     {
         return;
     }
+    // do your init stuff here
+
+    setMaximumSize(size());
+    setMinimumSize(size());
+
     isInitialized = true;//first show windows are held
     ShowVisualization();
 }
@@ -279,13 +284,6 @@ bool DialogTool::eventFilter(QObject *object, QEvent *event)
         return QDialog::eventFilter(object, event);
     }
     return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FixateSize()
-{
-    setMaximumSize(size());
-    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

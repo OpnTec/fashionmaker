@@ -78,8 +78,6 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NamePointChanged);
 
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -256,7 +254,7 @@ void DialogDetail::setDetail(const VDetail &value)
     ui.listWidget->clear();
     for (int i = 0; i < detail.CountNode(); ++i)
     {
-		const VNodeDetail &node = detail.at(i);
+        const VNodeDetail &node = detail.at(i);
         NewItem(node.getId(), node.getTypeTool(), node.getTypeNode(), node.getMx(),
                 node.getMy(), node.getReverse());
     }

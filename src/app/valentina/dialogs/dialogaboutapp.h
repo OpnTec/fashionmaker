@@ -44,8 +44,12 @@ public:
     explicit DialogAboutApp(QWidget *parent = 0);
     ~DialogAboutApp();
 
+protected:
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+
 private:
     Ui::DialogAboutApp *ui;
+    bool isInitialized;
     Q_DISABLE_COPY(DialogAboutApp)
 
     void FontPointSize(QWidget *w, int pointSize);

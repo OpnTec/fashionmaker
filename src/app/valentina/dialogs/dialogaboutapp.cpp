@@ -39,7 +39,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DialogAboutApp)
+    ui(new Ui::DialogAboutApp),
+    isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -66,15 +67,33 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
     FontPointSize(ui->label_contrib_label, 11);
     FontPointSize(ui->label_Valentina_Built, 11);
     FontPointSize(ui->label_QT_Version, 11);
-
-    setMaximumSize(size());
-    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::~DialogAboutApp()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAboutApp::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    setMaximumSize(size());
+    setMinimumSize(size());
+
+    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------

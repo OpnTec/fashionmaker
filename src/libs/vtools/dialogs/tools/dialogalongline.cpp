@@ -76,8 +76,6 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
 
     // Call after initialization vis!!!!
     SetTypeLine(TypeLineNone);//By default don't show line
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

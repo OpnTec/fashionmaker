@@ -54,8 +54,6 @@ DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *dat
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointFromArcAndTangent::NamePointChanged);
 
     vis = new VisToolPointFromArcAndTangent(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

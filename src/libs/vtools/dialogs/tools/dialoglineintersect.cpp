@@ -65,8 +65,6 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &
             this, &DialogLineIntersect::PointNameChanged);
 
     vis = new VisToolLineIntersect(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

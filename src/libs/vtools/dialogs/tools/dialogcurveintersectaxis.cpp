@@ -68,8 +68,6 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
     connect(timerFormula, &QTimer::timeout, this, &DialogCurveIntersectAxis::EvalAngle);
 
     vis = new VisToolCurveIntersectAxis(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

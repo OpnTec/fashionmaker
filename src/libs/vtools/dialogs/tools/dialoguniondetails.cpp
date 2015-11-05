@@ -43,8 +43,6 @@ DialogUnionDetails::DialogUnionDetails(const VContainer *data, const quint32 &to
 {
     ui->setupUi(this);
     InitOkCancel(ui);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

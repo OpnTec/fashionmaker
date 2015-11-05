@@ -80,8 +80,6 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
     connect(timerFormula, &QTimer::timeout, this, &DialogEndLine::EvalAngle);
 
     vis = new VisToolEndLine(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

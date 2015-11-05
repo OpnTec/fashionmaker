@@ -62,11 +62,13 @@ public slots:
     void ShowExample();
     void Browse();
     void PathChanged(const QString &text);
-
+protected:
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogSaveLayout)
     Ui::DialogSaveLAyout *ui;
     int count;
+    bool isInitialized;
     // Note. We can't make availFormats static because MSVC doesn't support C++11 list initialization
     QVector<std::pair<QString, QString>> availFormats;
     static bool havePdf;

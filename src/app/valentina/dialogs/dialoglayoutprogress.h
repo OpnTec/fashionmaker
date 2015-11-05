@@ -56,11 +56,15 @@ public slots:
     void Finished();
     void StopWorking();
 
+protected:
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+
 private:
     Q_DISABLE_COPY(DialogLayoutProgress)
     Ui::DialogLayoutProgress *ui;
     const int maxCount;
     QMovie *movie;
+    bool isInitialized;
 };
 
 #endif // DIALOGLAYOUTPROGRESS_H

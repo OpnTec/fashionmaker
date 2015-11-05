@@ -65,8 +65,6 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
             this, &DialogHeight::PointNameChanged);
 
     vis = new VisToolHeight(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

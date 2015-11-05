@@ -63,8 +63,6 @@ DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *p
             this, &DialogLine::PointNameChanged);
 
     vis = new VisToolLine(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

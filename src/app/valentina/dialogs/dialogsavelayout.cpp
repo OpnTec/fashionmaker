@@ -46,7 +46,7 @@ bool DialogSaveLayout::tested  = false;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogSaveLAyout), count(count), availFormats(InitAvailFormats())
+    :QDialog(parent), ui(new Ui::DialogSaveLAyout), count(count), isInitialized(false), availFormats(InitAvailFormats())
 {
     ui->setupUi(this);
 
@@ -93,9 +93,6 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
 
     ui->lineEditPath->setText(qApp->ValentinaSettings()->GetPathLayout());
     ShowExample();//Show example for current format.
-
-    setMaximumSize(size());
-    setMinimumSize(size());
 }
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -244,6 +241,27 @@ void DialogSaveLayout::PathChanged(const QString &text)
     }
 
     ui->lineEditPath->setPalette(palette);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    setMaximumSize(size());
+    setMinimumSize(size());
+
+    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -61,8 +61,6 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, con
 
     vis = new VisToolPointOfIntersection(data);
     vis->VisualMode(NULL_ID);//Show vertical axis
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

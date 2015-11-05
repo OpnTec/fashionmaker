@@ -76,8 +76,6 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
             this, &DialogLineIntersectAxis::PointNameChanged);
 
     vis = new VisToolLineIntersectAxis(data);
-
-    FixateSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

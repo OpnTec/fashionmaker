@@ -56,6 +56,8 @@ public slots:
     void         CheckStateHeight(int state);
     void         CheckStateSize(int state);
     void         DescEdited();
+protected:
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
@@ -67,6 +69,7 @@ private:
     QMap<QCheckBox *, int> data;
     bool                   descriptionChanged;
     bool                   gradationChanged;
+    bool                   isInitialized;
 
     void         SetHeightsChecked(bool enabled);
     void         SetSizesChecked(bool enabled);
