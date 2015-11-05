@@ -496,12 +496,15 @@ void TMainWindow::changeEvent(QEvent *event)
         {
             labelPatternUnit = new QLabel(tr("Pattern unit:"));
 
-            const qint32 index = comboBoxUnits->currentIndex();
-            comboBoxUnits->blockSignals(true);
-            comboBoxUnits->clear();
-            InitComboBoxUnits();
-            comboBoxUnits->setCurrentIndex(index);
-            comboBoxUnits->blockSignals(false);
+            if (comboBoxUnits != nullptr)
+            {
+                const qint32 index = comboBoxUnits->currentIndex();
+                comboBoxUnits->blockSignals(true);
+                comboBoxUnits->clear();
+                InitComboBoxUnits();
+                comboBoxUnits->setCurrentIndex(index);
+                comboBoxUnits->blockSignals(false);
+            }
         }
     }
 
