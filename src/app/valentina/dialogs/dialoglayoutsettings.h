@@ -100,6 +100,8 @@ public:
     qreal LayoutToPixels(qreal value) const;
     qreal PageToPixels(qreal value) const;
     static QString MakeGroupsHelp();
+protected:
+    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 public slots:
     void ConvertPaperSize();
     void ConvertLayoutSize();
@@ -123,6 +125,7 @@ private:
     Unit oldPaperUnit;
     Unit oldLayoutUnit;
     VLayoutGenerator *generator;
+    bool isInitialized;
 
     void InitPaperUnits();
     void InitLayoutUnits();

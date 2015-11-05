@@ -58,7 +58,7 @@ const DialogLayoutSettings::FormatsVector DialogLayoutSettings::pageFormatNames 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent, bool disableSettings)
     : QDialog(parent), disableSettings(disableSettings), ui(new Ui::DialogLayoutSettings), oldPaperUnit(Unit::Mm),
-      oldLayoutUnit(Unit::Mm), generator(generator)
+      oldLayoutUnit(Unit::Mm), generator(generator), isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -100,9 +100,6 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
 
     QPushButton *bRestoreDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
     connect(bRestoreDefaults, &QPushButton::clicked, this, &DialogLayoutSettings::RestoreDefaults);
-
-    setMaximumSize(size());
-    setMinimumSize(size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,6 +329,27 @@ QString DialogLayoutSettings::MakeGroupsHelp()
 {
     //that is REALLY dummy ... can't figure fast how to automate generation... :/
     return tr("\n\tThree groups: big, middle, small = 0\n\tTwo groups: big, small = 1\n\tDescending area = 2\n");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    setMaximumSize(size());
+    setMinimumSize(size());
+
+    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
