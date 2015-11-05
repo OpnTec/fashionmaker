@@ -295,11 +295,11 @@ void VSettings::SetLayoutPaperWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VSettings::GetLayoutShift() const
+qreal VSettings::GetLayoutShift() const
 {
-    const quint32 def = GetDefLayoutShift();
+    const qreal def = GetDefLayoutShift();
     bool ok = false;
-    const quint32 shift = value(SettingLayoutShift, def).toUInt(&ok);
+    const qreal shift = value(SettingLayoutShift, def).toDouble(&ok);
     if (ok)
     {
         return shift;
@@ -317,17 +317,17 @@ qreal VSettings::GetDefLayoutShift()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutShift(quint32 value)
+void VSettings::SetLayoutShift(qreal value)
 {
     setValue(SettingLayoutShift, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VSettings::GetLayoutWidth() const
+qreal VSettings::GetLayoutWidth() const
 {
-    const quint32 def = GetDefLayoutWidth();
+    const qreal def = GetDefLayoutWidth();
     bool ok = false;
-    const quint32 lWidth = value(SettingLayoutWidth, def).toUInt(&ok);
+    const qreal lWidth = value(SettingLayoutWidth, def).toDouble(&ok);
     if (ok)
     {
         return lWidth;
@@ -345,7 +345,7 @@ qreal VSettings::GetDefLayoutWidth()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutWidth(quint32 value)
+void VSettings::SetLayoutWidth(qreal value)
 {
     setValue(SettingLayoutWidth, value);
 }

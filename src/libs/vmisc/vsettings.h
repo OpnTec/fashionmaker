@@ -89,13 +89,13 @@ public:
     qreal GetLayoutPaperWidth() const;
     void SetLayoutPaperWidth(qreal value);
 
-    quint32 GetLayoutShift() const;
+    qreal GetLayoutShift() const;
     static qreal GetDefLayoutShift();
-    void SetLayoutShift(quint32 value);
+    void SetLayoutShift(qreal value);
 
-    quint32 GetLayoutWidth() const;
+    qreal GetLayoutWidth() const;
     static qreal GetDefLayoutWidth();
-    void SetLayoutWidth(quint32 value);
+    void SetLayoutWidth(qreal value);
 
     Cases GetLayoutGroup() const;
     static Cases GetDefLayoutGroup();
