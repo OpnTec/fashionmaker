@@ -258,20 +258,29 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
     }
 
-    //fixme: not really sure ...if shift length must be set with shift units ...or separated, will comment for now.
-    //Uncomment if need them both only.
+    {
+        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
+        bool a = parser.isSet(*optionsUsed.value(LONG_OPTION_SHIFTLENGTH));
+        bool b = parser.isSet(*optionsUsed.value(LONG_OPTION_SHIFTUNITS));
 
-//    {
-//        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-//        bool a = parser.isSet(optionsUsed.value(LONG_OPTION_SHIFTLENGTH));
-//        bool b = parser.isSet(optionsUsed.value(LONG_OPTION_SHIFTUNITS));
+        if ((a || b) && !(a && b))
+        {
+            qCritical() << translate("VCommandLine", "Shift length must be used together with shift units.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+    }
 
-//        if ((a || b) && !(a && b))
-//        {
-//            qCritical() << translate("VCommandLine", "Shift length must be used together with shift units.") << "\n";
-//            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-//        }
-//    }
+    {
+        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
+        bool a = parser.isSet(*optionsUsed.value(LONG_OPTION_GAPWIDTH));
+        bool b = parser.isSet(*optionsUsed.value(LONG_OPTION_SHIFTUNITS));
+
+        if ((a || b) && !(a && b))
+        {
+            qCritical() << translate("VCommandLine", "Gap width must be used together with shift units.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+    }
 
     int rotateDegree = OptRotation();
     diag.SetRotate(rotateDegree != 0 );
