@@ -62,17 +62,17 @@ public:
     explicit DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = nullptr, bool disableSettings = false);
     ~DialogLayoutSettings();
 
-    int GetPaperHeight() const;
-    void SetPaperHeight(int value);
+    qreal GetPaperHeight() const;
+    void SetPaperHeight(qreal value);
 
-    int GetPaperWidth() const;
-    void SetPaperWidth(int value);
+    qreal GetPaperWidth() const;
+    void SetPaperWidth(qreal value);
 
-    quint32 GetShift() const;
-    void SetShift(quint32 value);
+    qreal GetShift() const;
+    void SetShift(qreal value);
 
-    quint32 GetLayoutWidth() const;
-    void SetLayoutWidth(quint32 value);
+    qreal GetLayoutWidth() const;
+    void SetLayoutWidth(qreal value);
 
     Cases GetGroup() const;
     void SetGroup(const Cases &value);
@@ -97,8 +97,8 @@ public:
     static QString MakeHelpTemplateList();
     bool SelectPaperUnit(const QString& units);
     bool SelectLayoutUnit(const QString& units);
-    int  LayoutToPixels(qreal value) const;
-    int  PageToPixels(qreal value) const;
+    qreal LayoutToPixels(qreal value) const;
+    qreal PageToPixels(qreal value) const;
     static QString MakeGroupsHelp();
 public slots:
     void ConvertPaperSize();

@@ -59,7 +59,7 @@ public:
     void SetPaperWidth(int value);
 
     quint32 GetShift() const;
-    void         SetShift(quint32 shift);
+    void    SetShift(quint32 shift);
 
     void Generate();
 

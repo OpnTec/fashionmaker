@@ -83,18 +83,18 @@ public:
     QString GetUserPassword() const;
     void SetUserPassword(const QString &value);
 
-    int GetLayoutPaperHeight() const;
-    void SetLayoutPaperHeight(int value);
+    qreal GetLayoutPaperHeight() const;
+    void SetLayoutPaperHeight(qreal value);
 
-    int GetLayoutPaperWidth() const;
-    void SetLayoutPaperWidth(int value);
+    qreal GetLayoutPaperWidth() const;
+    void SetLayoutPaperWidth(qreal value);
 
     quint32 GetLayoutShift() const;
-    static quint32 GetDefLayoutShift();
+    static qreal GetDefLayoutShift();
     void SetLayoutShift(quint32 value);
 
     quint32 GetLayoutWidth() const;
-    static quint32 GetDefLayoutWidth();
+    static qreal GetDefLayoutWidth();
     void SetLayoutWidth(quint32 value);
 
     Cases GetLayoutGroup() const;

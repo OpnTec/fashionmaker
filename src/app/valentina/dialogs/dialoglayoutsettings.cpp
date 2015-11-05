@@ -112,49 +112,49 @@ DialogLayoutSettings::~DialogLayoutSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int DialogLayoutSettings::GetPaperHeight() const
+qreal DialogLayoutSettings::GetPaperHeight() const
 {
-    return qFloor(UnitConvertor(ui->doubleSpinBoxPaperHeight->value(), oldPaperUnit, Unit::Px));
+    return UnitConvertor(ui->doubleSpinBoxPaperHeight->value(), oldPaperUnit, Unit::Px);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetPaperHeight(int value)
+void DialogLayoutSettings::SetPaperHeight(qreal value)
 {
     ui->doubleSpinBoxPaperHeight->setValue(UnitConvertor(value, Unit::Px, PaperUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int DialogLayoutSettings::GetPaperWidth() const
+qreal DialogLayoutSettings::GetPaperWidth() const
 {
-    return qFloor(UnitConvertor(ui->doubleSpinBoxPaperWidth->value(), oldPaperUnit, Unit::Px));
+    return UnitConvertor(ui->doubleSpinBoxPaperWidth->value(), oldPaperUnit, Unit::Px);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetPaperWidth(int value)
+void DialogLayoutSettings::SetPaperWidth(qreal value)
 {
     ui->doubleSpinBoxPaperWidth->setValue(UnitConvertor(value, Unit::Px, PaperUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogLayoutSettings::GetShift() const
+qreal DialogLayoutSettings::GetShift() const
 {
-    return static_cast<quint32>(qFloor(UnitConvertor(ui->doubleSpinBoxShift->value(), oldLayoutUnit, Unit::Px)));
+    return UnitConvertor(ui->doubleSpinBoxShift->value(), oldLayoutUnit, Unit::Px);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetShift(quint32 value)
+void DialogLayoutSettings::SetShift(qreal value)
 {
     ui->doubleSpinBoxShift->setValue(UnitConvertor(value, Unit::Px, LayoutUnit()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogLayoutSettings::GetLayoutWidth() const
+qreal DialogLayoutSettings::GetLayoutWidth() const
 {
-    return static_cast<quint32>(qFloor(UnitConvertor(ui->doubleSpinBoxLayoutWidth->value(), oldLayoutUnit, Unit::Px)));
+    return UnitConvertor(ui->doubleSpinBoxLayoutWidth->value(), oldLayoutUnit, Unit::Px);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetLayoutWidth(quint32 value)
+void DialogLayoutSettings::SetLayoutWidth(qreal value)
 {
     ui->doubleSpinBoxLayoutWidth->setValue(UnitConvertor(value, Unit::Px, LayoutUnit()));
 }
@@ -282,11 +282,15 @@ void DialogLayoutSettings::ConvertPaperSize()
     ui->doubleSpinBoxPaperWidth->setMaximum(FromPixel(QIMAGE_MAX, paperUnit));
     ui->doubleSpinBoxPaperHeight->setMaximum(FromPixel(QIMAGE_MAX, paperUnit));
 
-    ui->doubleSpinBoxPaperWidth->setValue(UnitConvertor(width, oldPaperUnit, paperUnit));
-    ui->doubleSpinBoxPaperHeight->setValue(UnitConvertor(height, oldPaperUnit, paperUnit));
+    const qreal newWidth = UnitConvertor(width, oldPaperUnit, paperUnit);
+    const qreal newHeight = UnitConvertor(height, oldPaperUnit, paperUnit);
+
     oldPaperUnit = paperUnit;
     CorrectPaperDecimals();
     MinimumPaperSize();
+
+    ui->doubleSpinBoxPaperWidth->setValue(newWidth);
+    ui->doubleSpinBoxPaperHeight->setValue(newHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -312,15 +316,15 @@ bool DialogLayoutSettings::SelectLayoutUnit(const QString &units)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int DialogLayoutSettings::LayoutToPixels(qreal value) const
+qreal DialogLayoutSettings::LayoutToPixels(qreal value) const
 {
-    return qFloor(UnitConvertor(value, LayoutUnit(), Unit::Px));
+    return UnitConvertor(value, LayoutUnit(), Unit::Px);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int DialogLayoutSettings::PageToPixels(qreal value) const
+qreal DialogLayoutSettings::PageToPixels(qreal value) const
 {
-    return qFloor(UnitConvertor(value, PaperUnit(), Unit::Px));
+    return UnitConvertor(value, PaperUnit(), Unit::Px);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -340,11 +344,15 @@ void DialogLayoutSettings::ConvertLayoutSize()
     ui->doubleSpinBoxLayoutWidth->setMaximum(FromPixel(QIMAGE_MAX, unit));
     ui->doubleSpinBoxShift->setMaximum(FromPixel(QIMAGE_MAX, unit));
 
-    ui->doubleSpinBoxLayoutWidth->setValue(UnitConvertor(layoutWidth, oldLayoutUnit, unit));
-    ui->doubleSpinBoxShift->setValue(UnitConvertor(shift, oldLayoutUnit, unit));
+    const qreal newLayoutWidth = UnitConvertor(layoutWidth, oldLayoutUnit, unit);
+    const qreal newShift = UnitConvertor(shift, oldLayoutUnit, unit);
+
     oldLayoutUnit = unit;
     CorrectLayoutDecimals();
     MinimumLayoutSize();
+
+    ui->doubleSpinBoxLayoutWidth->setValue(newLayoutWidth);
+    ui->doubleSpinBoxShift->setValue(newShift);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -404,9 +412,9 @@ void DialogLayoutSettings::DialogAccepted()
     SCASSERT(generator != nullptr)
     generator->SetLayoutWidth(GetLayoutWidth());
     generator->SetCaseType(GetGroup());
-    generator->SetPaperHeight(GetPaperHeight());
-    generator->SetPaperWidth(GetPaperWidth());
-    generator->SetShift(GetShift());
+    generator->SetPaperHeight(qFloor(GetPaperHeight()));
+    generator->SetPaperWidth(qFloor(GetPaperWidth()));
+    generator->SetShift(qFloor(GetShift()));
     generator->SetRotate(GetRotate());
     generator->SetRotationIncrease(GetIncrease());
     generator->SetAutoCrop(GetAutoCrop());
@@ -636,8 +644,8 @@ void DialogLayoutSettings::CorrectPaperDecimals()
             ui->doubleSpinBoxPaperHeight->setDecimals(5);
             break;
         case Unit::Px:
-            ui->doubleSpinBoxPaperWidth->setDecimals(0);
-            ui->doubleSpinBoxPaperHeight->setDecimals(0);
+            ui->doubleSpinBoxPaperWidth->setDecimals(2);
+            ui->doubleSpinBoxPaperHeight->setDecimals(2);
             break;
         default:
             break;
@@ -659,8 +667,8 @@ void DialogLayoutSettings::CorrectLayoutDecimals()
             ui->doubleSpinBoxShift->setDecimals(5);
             break;
         case Unit::Px:
-            ui->doubleSpinBoxLayoutWidth->setDecimals(0);
-            ui->doubleSpinBoxShift->setDecimals(0);
+            ui->doubleSpinBoxLayoutWidth->setDecimals(2);
+            ui->doubleSpinBoxShift->setDecimals(2);
             break;
         default:
             break;

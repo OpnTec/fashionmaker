@@ -85,9 +85,9 @@ private:
     bool isGuiEnabled;
     friend class VApplication;
 
-    static int Lo2Px(const QString& src, const DialogLayoutSettings& converter);
-    static int Pg2Px(const QString& src, const DialogLayoutSettings& converter);
-    
+    static qreal Lo2Px(const QString& src, const DialogLayoutSettings& converter);
+    static qreal Pg2Px(const QString& src, const DialogLayoutSettings& converter);
+
     static QMap<QString, QCommandLineOption *> InitOptionsUsed();
 };
 

@@ -82,17 +82,15 @@ VCommandLine::VCommandLine() : parser(), optionsUsed(InitOptionsUsed()), isGuiEn
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VCommandLine::Lo2Px(const QString &src, const DialogLayoutSettings &converter)
+qreal VCommandLine::Lo2Px(const QString &src, const DialogLayoutSettings &converter)
 {
-    //that is dirty-dirty hack ...eventually number is converted float <--> int 3 or 4 times including inside dialog ...
-    // that will loose precision for sure
-    return converter.LayoutToPixels(src.toFloat());
+    return converter.LayoutToPixels(src.toDouble());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VCommandLine::Pg2Px(const QString& src, const DialogLayoutSettings& converter)
+qreal VCommandLine::Pg2Px(const QString& src, const DialogLayoutSettings& converter)
 {
-    return converter.PageToPixels(src.toFloat());
+    return converter.PageToPixels(src.toDouble());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -320,12 +318,12 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     if (parser.isSet(*optionsUsed.value(LONG_OPTION_SHIFTLENGTH)))
     {
 
-        diag.SetShift(static_cast<quint32>(Lo2Px(parser.value(*optionsUsed.value(LONG_OPTION_SHIFTLENGTH)), diag)));
+        diag.SetShift(Lo2Px(parser.value(*optionsUsed.value(LONG_OPTION_SHIFTLENGTH)), diag));
     }
 
     if (parser.isSet(*optionsUsed.value(LONG_OPTION_GAPWIDTH)))
     {
-        diag.SetLayoutWidth(static_cast<quint32>(Lo2Px(parser.value(*optionsUsed.value(LONG_OPTION_GAPWIDTH)), diag)));
+        diag.SetLayoutWidth(Lo2Px(parser.value(*optionsUsed.value(LONG_OPTION_GAPWIDTH)), diag));
     }
 
     diag.SetAutoCrop(parser.isSet(*optionsUsed.value(LONG_OPTION_CROP)));
