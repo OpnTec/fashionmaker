@@ -3906,7 +3906,5 @@ QString MainWindow::GetMeasurementFileName()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateWindowTitle()
 {
-    QString shownName = GetPatternFileName();
-    shownName += GetMeasurementFileName();
-    setWindowTitle(shownName);
+    setWindowTitle(qvariant_cast<QString>(GetPatternFileName()+GetMeasurementFileName()));
 }
