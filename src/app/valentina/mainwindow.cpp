@@ -1226,6 +1226,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
     if (checkFile.exists())
     {
         mChanges = true;
+        UpdateWindowTitle();
     }
     else
     {
@@ -1264,6 +1265,7 @@ void MainWindow::SyncMeasurements()
             VWidgetPopup::PopupMessage(this, msg);
             doc->LiteParseTree(Document::LiteParse);
             mChanges = false;
+            UpdateWindowTitle();
         }
         else
         {
@@ -3895,7 +3897,7 @@ QString MainWindow::GetMeasurementFileName()
 
         if(mChanges)
         {
-            shownName += "[*]";
+            shownName += "*";
         }
 
         shownName += "]";
@@ -3906,5 +3908,5 @@ QString MainWindow::GetMeasurementFileName()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateWindowTitle()
 {
-    setWindowTitle(qvariant_cast<QString>(GetPatternFileName()+GetMeasurementFileName()));
+    setWindowTitle(GetPatternFileName()+GetMeasurementFileName());
 }
