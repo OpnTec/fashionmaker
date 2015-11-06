@@ -1226,7 +1226,6 @@ void MainWindow::MeasurementsChanged(const QString &path)
     if (checkFile.exists())
     {
         mChanges = true;
-        UpdateWindowTitle();
     }
     else
     {
@@ -1244,6 +1243,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
         }
     }
 
+    UpdateWindowTitle();
     ToggleMSync(true);
 }
 
