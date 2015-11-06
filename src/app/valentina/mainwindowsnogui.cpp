@@ -867,7 +867,11 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
                                        FromPixel(paper->rect().height(), Unit::Mm)), QPrinter::Millimeter );
     }
 
+    #ifdef Q_OS_WIN
+    printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName());
+    #else
     printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName() + QLatin1Literal(".pdf"));
+    #endif
     printer->setDocName(FileName());
 
     IsLayoutGrayscale() ? printer->setColorMode(QPrinter::GrayScale) : printer->setColorMode(QPrinter::Color);
