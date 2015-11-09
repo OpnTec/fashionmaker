@@ -87,6 +87,7 @@ protected:
     QString            curFile;
 
     bool isLayoutStale;
+    QMarginsF margins;
 
     void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
     void ExportLayout(const DialogSaveLayout &dialog);

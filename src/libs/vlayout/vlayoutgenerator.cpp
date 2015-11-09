@@ -38,7 +38,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
-    :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0),
+    :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0), margins(),
       stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true), rotationIncrease(180),
       autoCrop(false), saveLength(false), unitePages(false)
 {}
@@ -99,7 +99,7 @@ void VLayoutGenerator::Generate()
                 break;
             }
 
-            VLayoutPaper paper(paperHeight, paperWidth);
+            VLayoutPaper paper(PageHeight(), PageWidth());
             paper.SetShift(shift);
             paper.SetLayoutWidth(bank->GetLayoutWidth());
             paper.SetPaperIndex(static_cast<quint32>(papers.count()));
@@ -190,6 +190,18 @@ void VLayoutGenerator::Abort()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VLayoutGenerator::PageHeight() const
+{
+    return paperHeight - static_cast<int>(margins.top() + margins.bottom());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutGenerator::PageWidth() const
+{
+    return paperWidth - static_cast<int>(margins.left() + margins.right());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VLayoutGenerator::IsUnitePages() const
 {
     return unitePages;
@@ -265,6 +277,18 @@ int VLayoutGenerator::GetPaperWidth() const
 void VLayoutGenerator::SetPaperWidth(int value)
 {
     paperWidth = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF VLayoutGenerator::GetFields() const
+{
+    return margins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetFields(const QMarginsF &value)
+{
+    margins = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

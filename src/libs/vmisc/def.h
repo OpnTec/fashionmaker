@@ -43,6 +43,7 @@
 #endif /* Q_CC_MSVC */
 
 class QComboBox;
+class QPrinter;
 
 #define SceneSize 50000
 #define DefPointRadius 1.5//mm
@@ -590,5 +591,7 @@ QStringList AllGroupNames();
 QString StrippedName(const QString &fullFileName);
 QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath);
 QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath);
+
+QSharedPointer<QPrinter> DefaultPrinter();
 
 #endif // DEF_H

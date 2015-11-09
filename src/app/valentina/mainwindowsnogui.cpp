@@ -62,7 +62,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP())), doc(nullptr), papers(QList<QGraphicsItem *>()),
       shadows(QList<QGraphicsItem *>()), scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()),
       undoAction(nullptr), redoAction(nullptr), actionDockWidgetToolOptions(nullptr), curFile(QString()),
-      isLayoutStale(true), isTiled(false)
+      isLayoutStale(true), margins(), isTiled(false)
 {
     InitTempLayoutScene();
 }
@@ -132,6 +132,7 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             CreateShadows();
             CreateScenes();
             PrepareSceneList();
+            margins = lGenerator.GetFields();
             isLayoutStale = false;
             break;
         case LayoutErrors::ProcessStoped:
@@ -356,7 +357,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
             {
                 index = lastPage - j;
             }
-            painter.drawImage(QPointF(), poster.at(index));
+            painter.drawImage(QPointF(margins.left(), margins.top()), poster.at(index));
         }
     }
 
@@ -789,28 +790,18 @@ void MainWindowsNoGUI::PrintPreview()
             return;
         }
     }
-    QPrinterInfo def = QPrinterInfo::defaultPrinter();
 
-    //if there is no default printer set the print preview won't show
-    if(def.isNull() || def.printerName().isEmpty())
+    QSharedPointer<QPrinter> printer = DefaultPrinter();
+    if (printer.isNull())
     {
-        if(QPrinterInfo::availablePrinters().isEmpty())
-        {
-            qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
-                      qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
-            return;
-        }
-        else
-        {
-            def = QPrinterInfo::availablePrinters().first();
-        }
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
     }
 
-    QPrinter printer(def, QPrinter::ScreenResolution);
-    printer.setResolution(static_cast<int>(PrintDPI));
-    SetPrinterSettings(&printer);
+    SetPrinterSettings(printer.data());
     // display print preview dialog
-    QPrintPreviewDialog  preview(&printer);
+    QPrintPreviewDialog  preview(printer.data());
     connect(&preview, &QPrintPreviewDialog::paintRequested, this, &MainWindowsNoGUI::PrintPages);
     preview.exec();
 }
@@ -865,6 +856,14 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
         SCASSERT(paper != nullptr)
         printer->setPaperSize ( QSizeF(FromPixel(paper->rect().width(), Unit::Mm),
                                        FromPixel(paper->rect().height(), Unit::Mm)), QPrinter::Millimeter );
+    }
+
+    {
+        const qreal left = FromPixel(margins.left(), Unit::Mm);
+        const qreal top = FromPixel(margins.top(), Unit::Mm);
+        const qreal right = FromPixel(margins.right(), Unit::Mm);
+        const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
+        printer->setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
     }
 
     printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName() + QLatin1Literal(".pdf"));

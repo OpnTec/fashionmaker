@@ -32,6 +32,8 @@
 #include <QDebug>
 #include <QLocale>
 #include <QApplication>
+#include <QPrinter>
+#include <QSharedPointer>
 
 #include "../ifc/ifcdef.h"
 
@@ -69,12 +71,16 @@ const QString VSettings::SettingLayoutRotationIncrease           = QStringLitera
 const QString VSettings::SettingLayoutAutoCrop                   = QStringLiteral("layout/autoCrop");
 const QString VSettings::SettingLayoutSaveLength                 = QStringLiteral("layout/saveLength");
 const QString VSettings::SettingLayoutUnitePages                 = QStringLiteral("layout/unitePages");
+const QString VSettings::SettingFields                           = QStringLiteral("layout/fields");
+const QString VSettings::SettingIgnoreFields                     = QStringLiteral("layout/ignoreFields");
 
 //---------------------------------------------------------------------------------------------------------------------
 VSettings::VSettings(Format format, Scope scope, const QString &organization, const QString &application,
                      QObject *parent)
     :VCommonSettings(format, scope, organization, application, parent)
-{}
+{
+    qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetLabelLanguage() const
@@ -351,6 +357,49 @@ void VSettings::SetLayoutWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QMarginsF VSettings::GetFields() const
+{
+    const QMarginsF def = GetDefFields();
+    const QVariant val = value(SettingFields, QVariant::fromValue(def));
+    if (val.canConvert<QMarginsF>())
+    {
+        return val.value<QMarginsF>();
+    }
+    return def;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMarginsF VSettings::GetDefFields()
+{
+    QSharedPointer<QPrinter> printer = DefaultPrinter();
+    if (printer.isNull())
+    {
+        return QMarginsF();
+    }
+
+    qreal left = 0;
+    qreal top = 0;
+    qreal right = 0;
+    qreal bottom = 0;
+    printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
+    // We can't use Unit::Px because our dpi in most cases is different
+    QMarginsF def;
+    def.setLeft(UnitConvertor(left, Unit::Mm, Unit::Px));
+    def.setRight(UnitConvertor(right, Unit::Mm, Unit::Px));
+    def.setTop(UnitConvertor(top, Unit::Mm, Unit::Px));
+    def.setBottom(UnitConvertor(bottom, Unit::Mm, Unit::Px));
+    return def;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetFields(const QMarginsF &value)
+{
+    QVariant val = QVariant::fromValue(value);
+    QString str = val.toString();
+    setValue(SettingFields, val);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 Cases VSettings::GetLayoutGroup() const
 {
     const Cases def = GetDefLayoutGroup();
@@ -441,7 +490,13 @@ void VSettings::SetLayoutRotationIncrease(int value)
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutAutoCrop() const
 {
-    return value(SettingLayoutAutoCrop, false).toBool();
+    return value(SettingLayoutAutoCrop, GetDefLayoutAutoCrop()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefLayoutAutoCrop()
+{
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -453,7 +508,13 @@ void VSettings::SetLayoutAutoCrop(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutSaveLength() const
 {
-    return value(SettingLayoutSaveLength, false).toBool();
+    return value(SettingLayoutSaveLength, GetDefLayoutSaveLength()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefLayoutSaveLength()
+{
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -465,13 +526,37 @@ void VSettings::SetLayoutSaveLength(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutUnitePages() const
 {
-    return value(SettingLayoutUnitePages, false).toBool();
+    return value(SettingLayoutUnitePages, GetDefLayoutUnitePages()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefLayoutUnitePages()
+{
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSettings::SetLayoutUnitePages(bool value)
 {
     setValue(SettingLayoutUnitePages, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetIgnoreAllFields() const
+{
+    return value(SettingIgnoreFields, GetDefIgnoreAllFields()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefIgnoreAllFields()
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetIgnoreAllFields(bool value)
+{
+    setValue(SettingIgnoreFields, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
