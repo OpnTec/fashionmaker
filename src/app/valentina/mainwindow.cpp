@@ -1142,6 +1142,8 @@ void MainWindow::LoadIndividual()
             ui->actionShowM->setEnabled(true);
             helpLabel->setText(tr("Measurements loaded"));
             doc->LiteParseTree(Document::LiteParse);
+
+            UpdateWindowTitle();
         }
     }
 }
@@ -1169,6 +1171,8 @@ void MainWindow::LoadStandard()
             ui->actionShowM->setEnabled(true);
             helpLabel->setText(tr("Measurements loaded"));
             doc->LiteParseTree(Document::LiteParse);
+
+            UpdateWindowTitle();
         }
     }
 }
@@ -1190,6 +1194,8 @@ void MainWindow::UnloadMeasurements()
         ui->actionShowM->setEnabled(false);
         ui->actionUnloadMeasurements->setDisabled(true);
         helpLabel->setText(tr("Measurements unloaded"));
+
+        UpdateWindowTitle();
     }
     else
     {
@@ -1266,6 +1272,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
         }
     }
 
+    UpdateWindowTitle();
     ToggleMSync(true);
 }
 
@@ -1287,6 +1294,7 @@ void MainWindow::SyncMeasurements()
             VWidgetPopup::PopupMessage(this, msg);
             doc->LiteParseTree(Document::LiteParse);
             mChanges = false;
+            UpdateWindowTitle();
         }
         else
         {
@@ -2823,12 +2831,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     curFile = fileName;
     qApp->getUndoStack()->setClean();
 
-    QString shownName = StrippedName(curFile);
-    if (curFile.isEmpty())
-    {
-        shownName = tr("untitled.val");
-    }
-    else
+    if (not curFile.isEmpty())
     {
         qCDebug(vMainWindow, "Updating recent file list.");
         VSettings *settings = qApp->ValentinaSettings();
@@ -2849,8 +2852,8 @@ void MainWindow::setCurrentFile(const QString &fileName)
         restoreFiles.prepend(fileName);
         settings->SetRestoreFileList(restoreFiles);
     }
-    shownName+="[*]";
-    setWindowTitle(shownName);
+
+    UpdateWindowTitle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3895,4 +3898,44 @@ void MainWindow::ProcessCMD()
     {
         qApp->exit(V_EX_OK);// close program after processing in console mode
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString MainWindow::GetPatternFileName()
+{
+    QString shownName = tr("untitled.val");
+    if(not curFile.isEmpty())
+    {
+        shownName = StrippedName(curFile);
+    }
+    shownName += "[*]";
+    return shownName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString MainWindow::GetMeasurementFileName()
+{
+    if(doc->MPath().isEmpty())
+    {
+        return "";
+    }
+    else
+    {
+        QString shownName = " [";
+        shownName += StrippedName(AbsoluteMPath(curFile, doc->MPath()));
+
+        if(mChanges)
+        {
+            shownName += "*";
+        }
+
+        shownName += "]";
+        return shownName;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::UpdateWindowTitle()
+{
+    setWindowTitle(GetPatternFileName()+GetMeasurementFileName());
 }
