@@ -62,7 +62,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP())), doc(nullptr), papers(QList<QGraphicsItem *>()),
       shadows(QList<QGraphicsItem *>()), scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()),
       undoAction(nullptr), redoAction(nullptr), actionDockWidgetToolOptions(nullptr), curFile(QString()),
-      isLayoutStale(true), margins(), isTiled(false)
+      isLayoutStale(true), margins(), paperSize(), isTiled(false)
 {
     InitTempLayoutScene();
 }
@@ -133,6 +133,7 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             CreateScenes();
             PrepareSceneList();
             margins = lGenerator.GetFields();
+            paperSize = QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight());
             isLayoutStale = false;
             break;
         case LayoutErrors::ProcessStoped:
@@ -799,7 +800,7 @@ void MainWindowsNoGUI::PrintPreview()
         return;
     }
 
-    SetPrinterSettings(printer.data());
+    SetPrinterSettings(printer.data(), false);
     // display print preview dialog
     QPrintPreviewDialog  preview(printer.data());
     connect(&preview, &QPrintPreviewDialog::paintRequested, this, &MainWindowsNoGUI::PrintPages);
@@ -830,7 +831,7 @@ void MainWindowsNoGUI::LayoutPrint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
+void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, bool prepareForPrinting)
 {
     SCASSERT(printer != nullptr)
     printer->setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
@@ -852,10 +853,8 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
 
     if (not isTiled && papers.size() > 0)
     {
-        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
-        SCASSERT(paper != nullptr)
-        printer->setPaperSize ( QSizeF(FromPixel(paper->rect().width(), Unit::Mm),
-                                       FromPixel(paper->rect().height(), Unit::Mm)), QPrinter::Millimeter );
+        printer->setPaperSize ( QSizeF(FromPixel(paperSize.width(), Unit::Mm),
+                                       FromPixel(paperSize.height(), Unit::Mm)), QPrinter::Millimeter );
     }
 
     {
@@ -866,11 +865,14 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
         printer->setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
     }
 
-    #ifdef Q_OS_WIN
-    printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName());
-    #else
-    printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName() + QLatin1Literal(".pdf"));
-    #endif
+    if (prepareForPrinting)
+    {
+        #ifdef Q_OS_WIN
+        printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName());
+        #else
+        printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName() + QLatin1Literal(".pdf"));
+        #endif
+    }
     printer->setDocName(FileName());
 
     IsLayoutGrayscale() ? printer->setColorMode(QPrinter::GrayScale) : printer->setColorMode(QPrinter::Color);

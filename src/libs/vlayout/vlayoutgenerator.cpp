@@ -192,13 +192,13 @@ void VLayoutGenerator::Abort()
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutGenerator::PageHeight() const
 {
-    return paperHeight - static_cast<int>(margins.top() + margins.bottom());
+    return static_cast<int>(paperHeight - (margins.top() + margins.bottom()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutGenerator::PageWidth() const
 {
-    return paperWidth - static_cast<int>(margins.left() + margins.right());
+    return static_cast<int>(paperWidth - (margins.left() + margins.right()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -268,13 +268,13 @@ void VLayoutGenerator::SetRotate(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutGenerator::GetPaperWidth() const
+qreal VLayoutGenerator::GetPaperWidth() const
 {
     return paperWidth;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetPaperWidth(int value)
+void VLayoutGenerator::SetPaperWidth(qreal value)
 {
     paperWidth = value;
 }
@@ -304,13 +304,13 @@ void VLayoutGenerator::SetShift(quint32 shift)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutGenerator::GetPaperHeight() const
+qreal VLayoutGenerator::GetPaperHeight() const
 {
     return paperHeight;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetPaperHeight(int value)
+void VLayoutGenerator::SetPaperHeight(qreal value)
 {
     paperHeight = value;
 }

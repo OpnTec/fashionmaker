@@ -528,8 +528,8 @@ void DialogLayoutSettings::DialogAccepted()
     SCASSERT(generator != nullptr)
     generator->SetLayoutWidth(GetLayoutWidth());
     generator->SetCaseType(GetGroup());
-    generator->SetPaperHeight(qFloor(GetPaperHeight()));
-    generator->SetPaperWidth(qFloor(GetPaperWidth()));
+    generator->SetPaperHeight(GetPaperHeight());
+    generator->SetPaperWidth(GetPaperWidth());
     generator->SetShift(qFloor(GetShift()));
     generator->SetRotate(GetRotate());
     generator->SetRotationIncrease(GetIncrease());

@@ -88,6 +88,7 @@ protected:
 
     bool isLayoutStale;
     QMarginsF margins;
+    QSizeF paperSize;
 
     void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
     void ExportLayout(const DialogSaveLayout &dialog);
@@ -120,7 +121,7 @@ private:
     void PrintPreview();
     void LayoutPrint();
 
-    void SetPrinterSettings(QPrinter *printer);
+    void SetPrinterSettings(QPrinter *printer, bool prepareForPrinting = true);
     bool IsLayoutGrayscale() const;
 
     bool isPagesUniform() const;

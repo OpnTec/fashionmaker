@@ -53,11 +53,11 @@ public:
     void SetCaseType(Cases caseType);
     int DetailsCount();
 
-    int GetPaperHeight() const;
-    void SetPaperHeight(int value);
+    qreal GetPaperHeight() const;
+    void SetPaperHeight(qreal value);
 
-    int GetPaperWidth() const;
-    void SetPaperWidth(int value);
+    qreal GetPaperWidth() const;
+    void SetPaperWidth(qreal value);
 
     QMarginsF GetFields() const;
     void SetFields(const QMarginsF &value);
@@ -100,8 +100,8 @@ private:
     Q_DISABLE_COPY(VLayoutGenerator)
     QVector<VLayoutPaper> papers;
     VBank *bank;
-    int paperHeight;
-    int paperWidth;
+    qreal paperHeight;
+    qreal paperWidth;
     QMarginsF margins;
     volatile bool stopGeneration;
     LayoutErrors state;
