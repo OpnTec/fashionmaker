@@ -63,6 +63,21 @@ const static auto SINGLE_OPTION_GRADATIONSIZE = QStringLiteral("x");
 const static auto LONG_OPTION_GRADATIONHEIGHT   = QStringLiteral("gheight");
 const static auto SINGLE_OPTION_GRADATIONHEIGHT = QStringLiteral("e");
 
+const static auto LONG_OPTION_IGNORE_MARGINS   = QStringLiteral("ignoremargins");
+const static auto SINGLE_OPTION_IGNORE_MARGINS = QStringLiteral("i");
+
+const static auto LONG_OPTION_LEFT_MARGIN   = QStringLiteral("lmargin");
+const static auto SINGLE_OPTION_LEFT_MARGIN  = QStringLiteral("L");
+
+const static auto LONG_OPTION_RIGHT_MARGIN   = QStringLiteral("rmargin");
+const static auto SINGLE_OPTION_RIGHT_MARGIN  = QStringLiteral("R");
+
+const static auto LONG_OPTION_TOP_MARGIN   = QStringLiteral("tmargin");
+const static auto SINGLE_OPTION_TOP_MARGIN  = QStringLiteral("T");
+
+const static auto LONG_OPTION_BOTTOM_MARGIN   = QStringLiteral("bmargin");
+const static auto SINGLE_OPTION_BOTTOM_MARGIN  = QStringLiteral("B");
+
 #define translate(context, source) QCoreApplication::translate((context), (source))
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -168,6 +183,43 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                                     "with \"%1\", export mode): ")
                                                     .arg(LONG_OPTION_PAGETEMPLATE) + VDomDocument::UnitsHelpString(),
                                           translate("VCommandLine", "The measure unit")));
+
+    optionsIndex.insert(LONG_OPTION_IGNORE_MARGINS, index++);
+    options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_IGNORE_MARGINS << LONG_OPTION_IGNORE_MARGINS,
+                                          translate("VCommandLine",
+                                                    "Ignore margins printing (export mode). Set all margins to 0.")));
+
+    optionsIndex.insert(LONG_OPTION_LEFT_MARGIN, index++);
+    options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_LEFT_MARGIN << LONG_OPTION_LEFT_MARGIN,
+                                          translate("VCommandLine",
+                                                    "Page left margin in current units like 3.0 (export mode). If "
+                                                    "not set will be used value from default printer. Or 0 if none "
+                                                    "printers was found."),
+                                          ("The left margin")));
+
+    optionsIndex.insert(LONG_OPTION_RIGHT_MARGIN, index++);
+    options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_RIGHT_MARGIN << LONG_OPTION_RIGHT_MARGIN,
+                                          translate("VCommandLine",
+                                                    "Page right margin in current units like 3.0 (export mode). If "
+                                                    "not set will be used value from default printer. Or 0 if none "
+                                                    "printers was found."),
+                                          ("The right margin")));
+
+    optionsIndex.insert(LONG_OPTION_TOP_MARGIN, index++);
+    options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_TOP_MARGIN << LONG_OPTION_TOP_MARGIN,
+                                          translate("VCommandLine",
+                                                    "Page top margin in current units like 3.0 (export mode). If "
+                                                    "not set will be used value from default printer. Or 0 if none "
+                                                    "printers was found."),
+                                          ("The top margin")));
+
+    optionsIndex.insert(LONG_OPTION_BOTTOM_MARGIN, index++);
+    options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_BOTTOM_MARGIN << LONG_OPTION_BOTTOM_MARGIN,
+                                          translate("VCommandLine",
+                                                    "Page bottom margin in current units like 3.0 (export mode). If "
+                                                    "not set will be used value from default printer. Or 0 if none "
+                                                    "printers was found."),
+                                          ("The bottom margin")));
 
     //=================================================================================================================
     optionsIndex.insert(LONG_OPTION_ROTATE, index++);
@@ -278,6 +330,54 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         }
     }
 
+    {
+        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
+        bool a = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_LEFT_MARGIN)));
+        bool b = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEUNITS)));
+
+        if ((a || b) && !(a && b))
+        {
+            qCritical() << translate("VCommandLine", "Left margin must be used together with page units.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+    }
+
+    {
+        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
+        bool a = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_RIGHT_MARGIN)));
+        bool b = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEUNITS)));
+
+        if ((a || b) && !(a && b))
+        {
+            qCritical() << translate("VCommandLine", "Right margin must be used together with page units.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+    }
+
+    {
+        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
+        bool a = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_TOP_MARGIN)));
+        bool b = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEUNITS)));
+
+        if ((a || b) && !(a && b))
+        {
+            qCritical() << translate("VCommandLine", "Top margin must be used together with page units.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+    }
+
+    {
+        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
+        bool a = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_BOTTOM_MARGIN)));
+        bool b = parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_PAGEUNITS)));
+
+        if ((a || b) && !(a && b))
+        {
+            qCritical() << translate("VCommandLine", "Bottom margin must be used together with page units.") << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+    }
+
     int rotateDegree = OptRotation();
     diag.SetRotate(rotateDegree != 0 );
 
@@ -335,6 +435,48 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     diag.SetUnitePages(parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_UNITE))));
     diag.SetSaveLength(parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_SAVELENGTH))));
     diag.SetGroup(OptGroup());
+
+    if (parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_IGNORE_MARGINS))))
+    {
+        diag.SetIgnoreAllFields(true);
+    }
+    else
+    {
+        QMarginsF margins = diag.GetFields();
+
+        {
+            const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_LEFT_MARGIN));
+            if (parser.isSet(*option))
+            {
+                margins.setLeft(Pg2Px(parser.value(*option), diag));
+            }
+        }
+
+        {
+            const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_RIGHT_MARGIN));
+            if (parser.isSet(*option))
+            {
+                margins.setRight(Pg2Px(parser.value(*option), diag));
+            }
+        }
+
+        {
+            const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_TOP_MARGIN));
+            if (parser.isSet(*option))
+            {
+                margins.setTop(Pg2Px(parser.value(*option), diag));
+            }
+        }
+
+        {
+            const QCommandLineOption *option = optionsUsed.value(optionsIndex.value(LONG_OPTION_BOTTOM_MARGIN));
+            if (parser.isSet(*option))
+            {
+                margins.setBottom(Pg2Px(parser.value(*option), diag));
+            }
+        }
+        diag.SetFields(margins);
+    }
 
     diag.DialogAccepted(); // filling VLayoutGenerator
 
