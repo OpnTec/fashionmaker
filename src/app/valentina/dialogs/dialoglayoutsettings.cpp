@@ -778,8 +778,8 @@ QSizeF DialogLayoutSettings::TemplateSize(const PaperSizeTemplate &tmpl) const
             height = UnitConvertor(11, Unit::Inch, paperUnit);
             return RoundTemplateSize(width, height);
         case PaperSizeTemplate::Legal:
-            width = UnitConvertor(11, Unit::Inch, paperUnit);
-            height = UnitConvertor(17, Unit::Inch, paperUnit);
+            width = UnitConvertor(8.5, Unit::Inch, paperUnit);
+            height = UnitConvertor(14, Unit::Inch, paperUnit);
             return RoundTemplateSize(width, height);
         case PaperSizeTemplate::Roll24in:
             width = UnitConvertor(24, Unit::Inch, paperUnit);
