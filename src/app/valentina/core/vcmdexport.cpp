@@ -3,80 +3,9 @@
 #include "dialogs/dialogsavelayout.h"
 #include "xml/vdomdocument.h"
 #include "../vformat/vmeasurements.h"
+#include "../vmisc/commandoptions.h"
 
 VCommandLinePtr VCommandLine::instance = nullptr;
-
-const static auto LONG_OPTION_BASENAME       = QStringLiteral("basename");
-const static auto SINGLE_OPTION_BASENAME     = QStringLiteral("b");
-
-const static auto LONG_OPTION_DESTINATION    = QStringLiteral("destination");
-const static auto SINGLE_OPTION_DESTINATION  = QStringLiteral("d");
-
-const static auto LONG_OPTION_MEASUREFILE    = QStringLiteral("mfile");
-const static auto SINGLE_OPTION_MEASUREFILE  = QStringLiteral("m");
-
-const static auto LONG_OPTION_PAGETEMPLATE   = QStringLiteral("pageformat");
-const static auto SINGLE_OPTION_PAGETEMPLATE = QStringLiteral("p");
-
-const static auto LONG_OPTION_EXP2FORMAT     = QStringLiteral("format");
-const static auto SINGLE_OPTION_EXP2FORMAT   = QStringLiteral("f");
-
-const static auto LONG_OPTION_ROTATE         = QStringLiteral("rotate");
-const static auto SINGLE_OPTION_ROTATE       = QStringLiteral("r");
-
-const static auto LONG_OPTION_CROP           = QStringLiteral("crop");
-const static auto SINGLE_OPTION_CROP         = QStringLiteral("c");
-
-const static auto LONG_OPTION_UNITE          = QStringLiteral("unite");
-const static auto SINGLE_OPTION_UNITE        = QStringLiteral("u");
-
-const static auto LONG_OPTION_PAGEW          = QStringLiteral("pagew");
-const static auto SINGLE_OPTION_PAGEW        = QStringLiteral("W");
-
-const static auto LONG_OPTION_PAGEH          = QStringLiteral("pageh");
-const static auto SINGLE_OPTION_PAGEH        = QStringLiteral("H");
-
-const static auto LONG_OPTION_PAGEUNITS      = QStringLiteral("pageunits");
-const static auto SINGLE_OPTION_PAGEUNITS    = QStringLiteral("U");
-
-const static auto LONG_OPTION_SAVELENGTH     = QStringLiteral("savelen");
-const static auto SINGLE_OPTION_SAVELENGTH   = QStringLiteral("S");
-
-const static auto LONG_OPTION_SHIFTLENGTH    = QStringLiteral("shiftlen");
-const static auto SINGLE_OPTION_SHIFTLENGTH  = QStringLiteral("s");
-
-const static auto LONG_OPTION_SHIFTUNITS     = QStringLiteral("layounits");
-const static auto SINGLE_OPTION_SHIFTUNITS   = QStringLiteral("l");
-
-const static auto LONG_OPTION_GAPWIDTH       = QStringLiteral("gapwidth");
-const static auto SINGLE_OPTION_GAPWIDTH     = QStringLiteral("G");
-
-const static auto LONG_OPTION_GROUPPING      = QStringLiteral("groups");
-const static auto SINGLE_OPTION_GROUPPING    = QStringLiteral("g");
-
-const static auto LONG_OPTION_TEST           = QStringLiteral("test");
-const static auto SINGLE_OPTION_TEST         = QStringLiteral("t");
-
-const static auto LONG_OPTION_GRADATIONSIZE   = QStringLiteral("gsize");
-const static auto SINGLE_OPTION_GRADATIONSIZE = QStringLiteral("x");
-
-const static auto LONG_OPTION_GRADATIONHEIGHT   = QStringLiteral("gheight");
-const static auto SINGLE_OPTION_GRADATIONHEIGHT = QStringLiteral("e");
-
-const static auto LONG_OPTION_IGNORE_MARGINS   = QStringLiteral("ignoremargins");
-const static auto SINGLE_OPTION_IGNORE_MARGINS = QStringLiteral("i");
-
-const static auto LONG_OPTION_LEFT_MARGIN   = QStringLiteral("lmargin");
-const static auto SINGLE_OPTION_LEFT_MARGIN  = QStringLiteral("L");
-
-const static auto LONG_OPTION_RIGHT_MARGIN   = QStringLiteral("rmargin");
-const static auto SINGLE_OPTION_RIGHT_MARGIN  = QStringLiteral("R");
-
-const static auto LONG_OPTION_TOP_MARGIN   = QStringLiteral("tmargin");
-const static auto SINGLE_OPTION_TOP_MARGIN  = QStringLiteral("T");
-
-const static auto LONG_OPTION_BOTTOM_MARGIN   = QStringLiteral("bmargin");
-const static auto SINGLE_OPTION_BOTTOM_MARGIN  = QStringLiteral("B");
 
 #define translate(context, source) QCoreApplication::translate((context), (source))
 

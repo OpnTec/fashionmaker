@@ -11,7 +11,8 @@ SOURCES += \
     $$PWD/projectversion.cpp \
     $$PWD/vcommonsettings.cpp \
     $$PWD/vtapesettings.cpp \
-    $$PWD/backport/qmarginsf.cpp
+    $$PWD/backport/qmarginsf.cpp \
+    $$PWD/commandoptions.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -32,4 +33,5 @@ HEADERS += \
     $$PWD/vlockguard.h \
     $$PWD/vsysexits.h \
     $$PWD/backport/qmarginsf.h \
-    $$PWD/vmargins.h
+    $$PWD/vmargins.h \
+    $$PWD/commandoptions.h

@@ -50,7 +50,8 @@ SOURCES += \
     tst_vmeasurements.cpp \
     tst_qmuparsererrormsg.cpp \
     tst_vlockguard.cpp \
-    tst_misc.cpp
+    tst_misc.cpp \
+    tst_vcommandline.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -68,7 +69,8 @@ HEADERS += \
     tst_vmeasurements.h \
     tst_qmuparsererrormsg.h \
     tst_vlockguard.h \
-    tst_misc.h
+    tst_misc.h \
+    tst_vcommandline.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
