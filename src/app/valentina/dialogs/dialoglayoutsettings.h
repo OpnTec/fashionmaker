@@ -35,6 +35,7 @@
 #include "../vlayout/vbank.h"
 #include "../ifc/ifcdef.h"
 #include "../vlayout/vlayoutgenerator.h"
+#include "../vmisc/vmargins.h"
 
 namespace Ui
 {
@@ -75,6 +76,9 @@ public:
     qreal GetLayoutWidth() const;
     void SetLayoutWidth(qreal value);
 
+    QMarginsF GetFields() const;
+    void SetFields(const QMarginsF &value);
+
     Cases GetGroup() const;
     void SetGroup(const Cases &value);
 
@@ -92,6 +96,9 @@ public:
 
     bool IsUnitePages() const;
     void SetUnitePages(bool save);
+
+    bool IsIgnoreAllFields() const;
+    void SetIgnoreAllFields(bool value);
 
     //support functions for the command line parser which uses invisible dialog to properly build layout generator
     bool SelectTemplate(const PaperSizeTemplate& id);
@@ -114,7 +121,9 @@ public slots:
 
     void DialogAccepted();
     void RestoreDefaults();
-
+private slots:
+    void CorrectMaxFileds();
+    void IgnoreAllFields(int state);
 private:
     Q_DISABLE_COPY(DialogLayoutSettings)
     typedef QStringList FormatsVector;
@@ -135,13 +144,13 @@ private:
     QSizeF Template();
     QSizeF TemplateSize(const PaperSizeTemplate &tmpl) const;
     QSizeF RoundTemplateSize(qreal width, qreal height) const;
+    QMarginsF RoundMargins(const QMarginsF &margins) const;
 
     Unit PaperUnit() const;
     Unit LayoutUnit() const;
 
     void CorrectPaperDecimals();
     void CorrectLayoutDecimals();
-    void Label();
 
     void MinimumPaperSize();
     void MinimumLayoutSize();

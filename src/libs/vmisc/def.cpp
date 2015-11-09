@@ -32,6 +32,7 @@
 
 #include <QComboBox>
 #include <QDir>
+#include <QPrinterInfo>
 
 // Keep synchronize all names with initialization in VTranslateVars class!!!!!
 //measurements
@@ -1718,4 +1719,27 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
     }
 
     return QString();// should never reach
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSharedPointer<QPrinter> DefaultPrinter()
+{
+    QPrinterInfo def = QPrinterInfo::defaultPrinter();
+
+    //if there is no default printer set the print preview won't show
+    if(def.isNull() || def.printerName().isEmpty())
+    {
+        if(QPrinterInfo::availablePrinters().isEmpty())
+        {
+            return QSharedPointer<QPrinter>();
+        }
+        else
+        {
+            def = QPrinterInfo::availablePrinters().first();
+        }
+    }
+
+    QSharedPointer<QPrinter> printer = QSharedPointer<QPrinter>(new QPrinter(def, QPrinter::ScreenResolution));
+    printer->setResolution(static_cast<int>(PrintDPI));
+    return printer;
 }

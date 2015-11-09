@@ -190,7 +190,7 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
     pen.setColor(Qt::black);
     painter.setPen(pen);
 
-	const QRect rec = image.rect();
+    const QRect rec = image.rect();
     if (j != 0 && PageRect().x() > 0)
     {// Left border
         painter.drawLine(QLine(0, 0, 0, rec.height()));
@@ -244,11 +244,11 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
 QRect VPoster::PageRect() const
 {
     // Because the Point unit is defined to be 1/72th of an inch
-    // we can't use method pageRect(QPrinter::Point). Our dpi different can be different.
+    // we can't use method pageRect(QPrinter::Point). Our dpi value can be different.
     // We convert value yourself to pixels.
     const QRectF rect = printer->pageRect(QPrinter::Millimeter);
-    QRect pageRect(qFloor(ToPixel(rect.x())), qFloor(ToPixel(rect.y())), qFloor(ToPixel(rect.width())),
-                   qFloor(ToPixel(rect.height())));
+    const QRect pageRect(qFloor(ToPixel(rect.x())), qFloor(ToPixel(rect.y())), qFloor(ToPixel(rect.width())),
+                         qFloor(ToPixel(rect.height())));
     return pageRect;
 }
 

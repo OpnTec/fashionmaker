@@ -30,6 +30,7 @@
 #define MAINWINDOWSNOGUI_H
 
 #include <QMainWindow>
+#include <QPrinter>
 
 #include "../vpatterndb/vdetail.h"
 #include "../vlayout/vlayoutdetail.h"
@@ -87,6 +88,8 @@ protected:
     QString            curFile;
 
     bool isLayoutStale;
+    QMarginsF margins;
+    QSizeF paperSize;
 
     void PrepareDetailsForLayout(const QHash<quint32, VDetail> *details);
     void ExportLayout(const DialogSaveLayout &dialog);
@@ -119,8 +122,9 @@ private:
     void PrintPreview();
     void LayoutPrint();
 
-    void SetPrinterSettings(QPrinter *printer);
+    void SetPrinterSettings(QPrinter *printer, bool prepareForPrinting = true);
     bool IsLayoutGrayscale() const;
+    QPrinter::PaperSize FindTemplate(const QSizeF &size) const;
 
     bool isPagesUniform() const;
     QString FileName() const;

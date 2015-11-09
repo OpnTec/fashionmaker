@@ -17,6 +17,7 @@
 
 class VCommandLine;
 typedef std::shared_ptr<VCommandLine> VCommandLinePtr;
+typedef QList<QCommandLineOption *> VCommandLineOptions;
 
 //@brief: class used to install export command line options and parse their values
 //QCommandLineParser* object must exists until this object alive
@@ -81,14 +82,15 @@ private:
     Q_DISABLE_COPY(VCommandLine)
     static VCommandLinePtr instance;
     QCommandLineParser parser;
-    QMap<QString, QCommandLineOption *> optionsUsed;
+    VCommandLineOptions optionsUsed;
+    QMap<QString, int> optionsIndex;
     bool isGuiEnabled;
     friend class VApplication;
 
     static qreal Lo2Px(const QString& src, const DialogLayoutSettings& converter);
     static qreal Pg2Px(const QString& src, const DialogLayoutSettings& converter);
 
-    static QMap<QString, QCommandLineOption *> InitOptionsUsed();
+    static void InitOptions(VCommandLineOptions &options, QMap<QString, int> &optionsIndex);
 };
 
 #endif // VCMDEXPORT_H

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>661</width>
-    <height>345</height>
+    <height>453</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,12 +23,12 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QGroupBox" name="groupBoxPaperSize">
+        <widget class="QGroupBox" name="groupBoxPaperFormat">
          <property name="autoFillBackground">
           <bool>false</bool>
          </property>
          <property name="title">
-          <string>Paper size</string>
+          <string>Paper format</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -72,22 +72,6 @@
           </item>
           <item>
            <layout class="QGridLayout" name="gridLayout">
-            <item row="1" column="2">
-             <widget class="QComboBox" name="comboBoxPaperSizeUnit">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>124</width>
-                <height>0</height>
-               </size>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="labelWidth">
               <property name="sizePolicy">
@@ -146,14 +130,7 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="2">
-             <widget class="QLabel" name="labelSizeDescription">
-              <property name="text">
-               <string notr="true">TextLabel</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
+            <item row="2" column="0">
              <layout class="QHBoxLayout" name="horizontalLayout">
               <item>
                <widget class="QToolButton" name="toolButtonPortrate">
@@ -203,175 +180,77 @@
               </item>
              </layout>
             </item>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="comboBoxPaperSizeUnit">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>124</width>
+                <height>0</height>
+               </size>
+              </property>
+             </widget>
+            </item>
            </layout>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="checkBoxAutoCrop">
-            <property name="text">
-             <string>Auto crop unused length</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="checkBoxUnitePages">
-            <property name="text">
-             <string>Unite pages (if possible)</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="Line" name="line_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBoxRotate">
+        <widget class="QGroupBox" name="groupBoxPaperFileds">
          <property name="title">
-          <string>Rotate workpiece</string>
+          <string>Fields</string>
          </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+         <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelLeftField">
             <property name="text">
-             <string>Rotate by</string>
+             <string>Left:</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QComboBox" name="comboBoxIncrease">
-            <property name="currentIndex">
-             <number>21</number>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxLeftField"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelRightField">
+            <property name="text">
+             <string>Right:</string>
             </property>
-            <item>
-             <property name="text">
-              <string notr="true">1</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">2</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">3</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">4</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">5</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">6</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">8</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">9</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">10</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">12</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">15</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">18</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">20</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">24</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">30</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">36</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">40</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">45</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">60</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">72</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">90</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">180</string>
-             </property>
-            </item>
            </widget>
           </item>
-          <item>
-           <widget class="QLabel" name="label_3">
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxRightField"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelTopField">
             <property name="text">
-             <string>degree</string>
+             <string>Top:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxTopField"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelBottomField">
+            <property name="text">
+             <string>Bottom:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxBottomField"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QCheckBox" name="checkBoxIgnoreFileds">
+            <property name="text">
+             <string>Ignore fileds</string>
             </property>
            </widget>
           </item>
@@ -464,6 +343,162 @@
          </widget>
         </item>
         <item>
+         <widget class="QGroupBox" name="groupBoxRotate">
+          <property name="title">
+           <string>Rotate workpiece</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Rotate by</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="comboBoxIncrease">
+             <property name="currentIndex">
+              <number>21</number>
+             </property>
+             <item>
+              <property name="text">
+               <string notr="true">1</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">2</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">3</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">4</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">5</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">6</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">8</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">9</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">10</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">12</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">15</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">18</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">20</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">24</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">30</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">36</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">40</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">45</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">60</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">72</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">90</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">180</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>degree</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QGroupBox" name="groupBoxCase">
           <property name="title">
            <string>Principle of choosing the next workpiece</string>
@@ -510,6 +545,27 @@
             </layout>
            </item>
           </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxAutoCrop">
+          <property name="text">
+           <string>Auto crop unused length</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxUnitePages">
+          <property name="text">
+           <string>Unite pages (if possible)</string>
+          </property>
          </widget>
         </item>
        </layout>
@@ -567,7 +623,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroupPrinciple"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

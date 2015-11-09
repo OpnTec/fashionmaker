@@ -45,7 +45,6 @@
 #include <QProcess>
 #include <QToolButton>
 #include <QtSvg>
-#include <QPrinter>
 #include <QPrintPreviewDialog>
 #include <QPrintDialog>
 #include <QPrinterInfo>
@@ -62,7 +61,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       pattern(new VContainer(qApp->TrVars(), qApp->patternUnitP())), doc(nullptr), papers(QList<QGraphicsItem *>()),
       shadows(QList<QGraphicsItem *>()), scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()),
       undoAction(nullptr), redoAction(nullptr), actionDockWidgetToolOptions(nullptr), curFile(QString()),
-      isLayoutStale(true), isTiled(false)
+      isLayoutStale(true), margins(), paperSize(), isTiled(false)
 {
     InitTempLayoutScene();
 }
@@ -132,6 +131,8 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             CreateShadows();
             CreateScenes();
             PrepareSceneList();
+            margins = lGenerator.GetFields();
+            paperSize = QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight());
             isLayoutStale = false;
             break;
         case LayoutErrors::ProcessStoped:
@@ -356,7 +357,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
             {
                 index = lastPage - j;
             }
-            painter.drawImage(QPointF(), poster.at(index));
+            painter.drawImage(QPointF(margins.left(), margins.top()), poster.at(index));
         }
     }
 
@@ -789,28 +790,18 @@ void MainWindowsNoGUI::PrintPreview()
             return;
         }
     }
-    QPrinterInfo def = QPrinterInfo::defaultPrinter();
 
-    //if there is no default printer set the print preview won't show
-    if(def.isNull() || def.printerName().isEmpty())
+    QSharedPointer<QPrinter> printer = DefaultPrinter();
+    if (printer.isNull())
     {
-        if(QPrinterInfo::availablePrinters().isEmpty())
-        {
-            qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
-                      qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
-            return;
-        }
-        else
-        {
-            def = QPrinterInfo::availablePrinters().first();
-        }
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
     }
 
-    QPrinter printer(def, QPrinter::ScreenResolution);
-    printer.setResolution(static_cast<int>(PrintDPI));
-    SetPrinterSettings(&printer);
+    SetPrinterSettings(printer.data(), false);
     // display print preview dialog
-    QPrintPreviewDialog  preview(&printer);
+    QPrintPreviewDialog  preview(printer.data());
     connect(&preview, &QPrintPreviewDialog::paintRequested, this, &MainWindowsNoGUI::PrintPages);
     preview.exec();
 }
@@ -839,7 +830,7 @@ void MainWindowsNoGUI::LayoutPrint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
+void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, bool prepareForPrinting)
 {
     SCASSERT(printer != nullptr)
     printer->setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
@@ -861,17 +852,34 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer)
 
     if (not isTiled && papers.size() > 0)
     {
-        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
-        SCASSERT(paper != nullptr)
-        printer->setPaperSize ( QSizeF(FromPixel(paper->rect().width(), Unit::Mm),
-                                       FromPixel(paper->rect().height(), Unit::Mm)), QPrinter::Millimeter );
+        const QSizeF size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paperSize.height(), Unit::Mm));
+        const QPrinter::PageSize pSZ = FindTemplate(size);
+        if (pSZ == QPrinter::Custom)
+        {
+            printer->setPaperSize (size, QPrinter::Millimeter );
+        }
+        else
+        {
+            printer->setPaperSize (pSZ);
+        }
     }
 
-    #ifdef Q_OS_WIN
-    printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName());
-    #else
-    printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName() + QLatin1Literal(".pdf"));
-    #endif
+    {
+        const qreal left = FromPixel(margins.left(), Unit::Mm);
+        const qreal top = FromPixel(margins.top(), Unit::Mm);
+        const qreal right = FromPixel(margins.right(), Unit::Mm);
+        const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
+        printer->setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
+    }
+
+    if (prepareForPrinting)
+    {
+        #ifdef Q_OS_WIN
+        printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName());
+        #else
+        printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName() + QLatin1Literal(".pdf"));
+        #endif
+    }
     printer->setDocName(FileName());
 
     IsLayoutGrayscale() ? printer->setColorMode(QPrinter::GrayScale) : printer->setColorMode(QPrinter::Color);
@@ -891,6 +899,47 @@ bool MainWindowsNoGUI::IsLayoutGrayscale() const
     }
 
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPrinter::PaperSize MainWindowsNoGUI::FindTemplate(const QSizeF &size) const
+{
+    if (size == QSizeF(841, 1189))
+    {
+        return QPrinter::A0;
+    }
+
+    if (size == QSizeF(594, 841))
+    {
+        return QPrinter::A1;
+    }
+
+    if (size == QSizeF(420, 594))
+    {
+        return QPrinter::A2;
+    }
+
+    if (size == QSizeF(297, 420))
+    {
+        return QPrinter::A3;
+    }
+
+    if (size == QSizeF(210, 297))
+    {
+        return QPrinter::A4;
+    }
+
+    if (size == QSizeF(215.9, 355.6))
+    {
+        return QPrinter::Legal;
+    }
+
+    if (size == QSizeF(215.9, 279.4))
+    {
+        return QPrinter::Letter;
+    }
+
+    return QPrinter::Custom;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

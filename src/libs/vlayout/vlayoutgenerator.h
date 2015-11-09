@@ -34,6 +34,7 @@
 
 #include "vlayoutdef.h"
 #include "vbank.h"
+#include "../vmisc/vmargins.h"
 #include <memory>
 
 class VLayoutPaper;
@@ -52,11 +53,14 @@ public:
     void SetCaseType(Cases caseType);
     int DetailsCount();
 
-    int GetPaperHeight() const;
-    void SetPaperHeight(int value);
+    qreal GetPaperHeight() const;
+    void SetPaperHeight(qreal value);
 
-    int GetPaperWidth() const;
-    void SetPaperWidth(int value);
+    qreal GetPaperWidth() const;
+    void SetPaperWidth(qreal value);
+
+    QMarginsF GetFields() const;
+    void SetFields(const QMarginsF &value);
 
     quint32 GetShift() const;
     void    SetShift(quint32 shift);
@@ -96,8 +100,9 @@ private:
     Q_DISABLE_COPY(VLayoutGenerator)
     QVector<VLayoutPaper> papers;
     VBank *bank;
-    int paperHeight;
-    int paperWidth;
+    qreal paperHeight;
+    qreal paperWidth;
+    QMarginsF margins;
     volatile bool stopGeneration;
     LayoutErrors state;
     quint32 shift;
@@ -106,6 +111,9 @@ private:
     bool autoCrop;
     bool saveLength;
     bool unitePages;
+
+    int PageHeight() const;
+    int PageWidth() const;
 };
 
 typedef std::shared_ptr<VLayoutGenerator> VLayoutGeneratorPtr;

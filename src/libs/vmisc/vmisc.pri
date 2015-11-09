@@ -10,7 +10,8 @@ SOURCES += \
     $$PWD/vabstractapplication.cpp \
     $$PWD/projectversion.cpp \
     $$PWD/vcommonsettings.cpp \
-    $$PWD/vtapesettings.cpp
+    $$PWD/vtapesettings.cpp \
+    $$PWD/backport/qmarginsf.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -29,4 +30,6 @@ HEADERS += \
     $$PWD/vtapesettings.h \
     $$PWD/debugbreak.h \
     $$PWD/vlockguard.h \
-    $$PWD/vsysexits.h
+    $$PWD/vsysexits.h \
+    $$PWD/backport/qmarginsf.h \
+    $$PWD/vmargins.h
