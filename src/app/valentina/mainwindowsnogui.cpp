@@ -45,7 +45,6 @@
 #include <QProcess>
 #include <QToolButton>
 #include <QtSvg>
-#include <QPrinter>
 #include <QPrintPreviewDialog>
 #include <QPrintDialog>
 #include <QPrinterInfo>
@@ -853,8 +852,16 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, bool prepareForPrin
 
     if (not isTiled && papers.size() > 0)
     {
-        printer->setPaperSize ( QSizeF(FromPixel(paperSize.width(), Unit::Mm),
-                                       FromPixel(paperSize.height(), Unit::Mm)), QPrinter::Millimeter );
+        const QSizeF size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paperSize.height(), Unit::Mm));
+        const QPrinter::PageSize pSZ = FindTemplate(size);
+        if (pSZ == QPrinter::Custom)
+        {
+            printer->setPaperSize (size, QPrinter::Millimeter );
+        }
+        else
+        {
+            printer->setPaperSize (pSZ);
+        }
     }
 
     {
@@ -892,6 +899,47 @@ bool MainWindowsNoGUI::IsLayoutGrayscale() const
     }
 
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPrinter::PaperSize MainWindowsNoGUI::FindTemplate(const QSizeF &size) const
+{
+    if (size == QSizeF(841, 1189))
+    {
+        return QPrinter::A0;
+    }
+
+    if (size == QSizeF(594, 841))
+    {
+        return QPrinter::A1;
+    }
+
+    if (size == QSizeF(420, 594))
+    {
+        return QPrinter::A2;
+    }
+
+    if (size == QSizeF(297, 420))
+    {
+        return QPrinter::A3;
+    }
+
+    if (size == QSizeF(210, 297))
+    {
+        return QPrinter::A4;
+    }
+
+    if (size == QSizeF(215.9, 355.6))
+    {
+        return QPrinter::Legal;
+    }
+
+    if (size == QSizeF(215.9, 279.4))
+    {
+        return QPrinter::Letter;
+    }
+
+    return QPrinter::Custom;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

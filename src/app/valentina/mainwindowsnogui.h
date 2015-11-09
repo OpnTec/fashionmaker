@@ -30,6 +30,7 @@
 #define MAINWINDOWSNOGUI_H
 
 #include <QMainWindow>
+#include <QPrinter>
 
 #include "../vpatterndb/vdetail.h"
 #include "../vlayout/vlayoutdetail.h"
@@ -123,6 +124,7 @@ private:
 
     void SetPrinterSettings(QPrinter *printer, bool prepareForPrinting = true);
     bool IsLayoutGrayscale() const;
+    QPrinter::PaperSize FindTemplate(const QSizeF &size) const;
 
     bool isPagesUniform() const;
     QString FileName() const;
