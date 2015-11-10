@@ -180,31 +180,49 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
             return;
     }
 
-    QListWidgetItem *item = new QListWidgetItem(name);
-    item->setFont(QFont("Times", 12, QFont::Bold));
-    VNodeDetail node(id, typeTool, typeNode, mx, my, reverse);
-    item->setData(Qt::UserRole, QVariant::fromValue(node));
-    ui.listWidget->addItem(item);
-    ui.listWidget->setCurrentRow(ui.listWidget->count()-1);
+    bool canAddNewPoint = false;
 
-    ui.doubleSpinBoxBiasX->blockSignals(true);
-    ui.doubleSpinBoxBiasY->blockSignals(true);
-
-    ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
-    ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
-    if (node.getTypeTool() == Tool::NodePoint)
+    if(ui.listWidget->count() == 0)
     {
-        ui.checkBoxReverse->setChecked(false);
-        ui.checkBoxReverse->setEnabled(false);
+        canAddNewPoint = true;
     }
     else
     {
-        ui.checkBoxReverse->setEnabled(true);
-        ui.checkBoxReverse->setChecked(node.getReverse());
+        QString lastItemName = ui.listWidget->item(ui.listWidget->count()-1)->text();
+        if(QString::compare(lastItemName, name) != 0)
+        {
+            canAddNewPoint = true;
+        }
     }
 
-    ui.doubleSpinBoxBiasX->blockSignals(false);
-    ui.doubleSpinBoxBiasY->blockSignals(false);
+    if(canAddNewPoint)
+    {
+        QListWidgetItem *item = new QListWidgetItem(name);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        VNodeDetail node(id, typeTool, typeNode, mx, my, reverse);
+        item->setData(Qt::UserRole, QVariant::fromValue(node));
+        ui.listWidget->addItem(item);
+        ui.listWidget->setCurrentRow(ui.listWidget->count()-1);
+
+        ui.doubleSpinBoxBiasX->blockSignals(true);
+        ui.doubleSpinBoxBiasY->blockSignals(true);
+
+        ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
+        ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
+        if (node.getTypeTool() == Tool::NodePoint)
+        {
+            ui.checkBoxReverse->setChecked(false);
+            ui.checkBoxReverse->setEnabled(false);
+        }
+        else
+        {
+            ui.checkBoxReverse->setEnabled(true);
+            ui.checkBoxReverse->setChecked(node.getReverse());
+        }
+
+        ui.doubleSpinBoxBiasX->blockSignals(false);
+        ui.doubleSpinBoxBiasY->blockSignals(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
