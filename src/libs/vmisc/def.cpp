@@ -135,6 +135,7 @@ const QString hipWithAbdomenArcF_M = QStringLiteral("hip_with_abdomen_arc_f"); /
 const QString bodyArmfoldCirc_M    = QStringLiteral("body_armfold_circ");      // G43
 const QString bodyBustCirc_M       = QStringLiteral("body_bust_circ");         // G44
 const QString bodyTorsoCirc_M      = QStringLiteral("body_torso_circ");        // G45
+const QString hipCircWithAbdomen_M = QStringLiteral("hip_circ_with_abdomen");  // G46
 // H
 const QString neckFrontToWaistF_M             = QStringLiteral("neck_front_to_waist_f");             // H01
 const QString neckFrontToWaistFlatF_M         = QStringLiteral("neck_front_to_waist_flat_f");        // H02
@@ -176,6 +177,8 @@ const QString shoulderSlopeNeckSideLength_M   = QStringLiteral("shoulder_slope_n
 const QString shoulderSlopeNeckBackAngle_M    = QStringLiteral("shoulder_slope_neck_back_angle");    // H38
 const QString shoulderSlopeNeckBackHeight_M   = QStringLiteral("shoulder_slope_neck_back_height");   // H39
 const QString shoulderSlopeShoulderTipAngle_M = QStringLiteral("shoulder_slope_shoulder_tip_angle"); // H40
+const QString neckBackToAcrossBack_M          = QStringLiteral("neck_back_to_across_back");          // H41
+const QString acrossBackToWaistB_M            = QStringLiteral("across_back_to_waist_b");            // H42
 // I
 const QString shoulderLength_M                = QStringLiteral("shoulder_length");                     // I01
 const QString shoulderTipToShoulderTipF_M     = QStringLiteral("shoulder_tip_to_shoulder_tip_f");      // I02
@@ -237,6 +240,7 @@ const QString armNeckSideToFingerTip_M      = QStringLiteral("arm_neck_side_to_f
 const QString armscyeCirc_M                 = QStringLiteral("armscye_circ");                     // L19
 const QString armscyeLength_M               = QStringLiteral("armscye_length");                   // L20
 const QString armscyeWidth_M                = QStringLiteral("armscye_width");	                  // L21
+const QString armNeckSideToOuterElbow_M     = QStringLiteral("arm_neck_side_to_outer_elbow");     // L22
 // M
 const QString legCrotchToFloor_M    = QStringLiteral("leg_crotch_to_floor");     // M01
 const QString legWaistSideToFloor_M = QStringLiteral("leg_waist_side_to_floor"); // M02
@@ -662,51 +666,52 @@ QStringList ListGroupF()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ListGroupG()
 {
-    const QStringList list = QStringList() << neckMidCirc_M        // G01
-                                           << neckCirc_M           // G02
-                                           << highbustCirc_M       // G03
-                                           << bustCirc_M           // G04
-                                           << lowbustCirc_M        // G05
-                                           << ribCirc_M            // G06
-                                           << waistCirc_M          // G07
-                                           << highhipCirc_M        // G08
-                                           << hipCirc_M            // G09
-                                           << neckArcF_M           // G10
-                                           << highbustArcF_M       // G11
-                                           << bustArcF_M           // G12
-                                           << lowbustArcF_M        // G13
-                                           << ribArcF_M            // G14
-                                           << waistArcF_M          // G15
-                                           << highhipArcF_M        // G16
-                                           << hipArcF_M            // G17
-                                           << neckArcHalfF_M       // G18
-                                           << highbustArcHalfF_M   // G19
-                                           << bustArcHalfF_M       // G20
-                                           << lowbustArcHalfF_M    // G21
-                                           << ribArcHalfF_M        // G22
-                                           << waistArcHalfF_M      // G23
-                                           << highhipArcHalfF_M    // G24
-                                           << hipArcHalfF_M        // G25
-                                           << neckArcB_M           // G26
-                                           << highbustArcB_M       // G27
-                                           << bustArcB_M           // G28
-                                           << lowbustArcB_M        // G29
-                                           << ribArcB_M            // G30
-                                           << waistArcB_M          // G31
-                                           << highhipArcB_M        // G32
-                                           << hipArcB_M            // G33
-                                           << neckArcHalfB_M       // G34
-                                           << highbustArcHalfB_M   // G35
-                                           << bustArcHalfB_M       // G36
-                                           << lowbustArcHalfB_M    // G37
-                                           << ribArcHalfB_M        // G38
-                                           << waistArcHalfB_M      // G39
-                                           << highhipArcHalfB_M    // G40
-                                           << hipArcHalfB_M        // G41
-                                           << hipWithAbdomenArcF_M // G42
-                                           << bodyArmfoldCirc_M    // G43
-                                           << bodyBustCirc_M       // G44
-                                           << bodyTorsoCirc_M;     // G45
+    const QStringList list = QStringList() << neckMidCirc_M         // G01
+                                           << neckCirc_M            // G02
+                                           << highbustCirc_M        // G03
+                                           << bustCirc_M            // G04
+                                           << lowbustCirc_M         // G05
+                                           << ribCirc_M             // G06
+                                           << waistCirc_M           // G07
+                                           << highhipCirc_M         // G08
+                                           << hipCirc_M             // G09
+                                           << neckArcF_M            // G10
+                                           << highbustArcF_M        // G11
+                                           << bustArcF_M            // G12
+                                           << lowbustArcF_M         // G13
+                                           << ribArcF_M             // G14
+                                           << waistArcF_M           // G15
+                                           << highhipArcF_M         // G16
+                                           << hipArcF_M             // G17
+                                           << neckArcHalfF_M        // G18
+                                           << highbustArcHalfF_M    // G19
+                                           << bustArcHalfF_M        // G20
+                                           << lowbustArcHalfF_M     // G21
+                                           << ribArcHalfF_M         // G22
+                                           << waistArcHalfF_M       // G23
+                                           << highhipArcHalfF_M     // G24
+                                           << hipArcHalfF_M         // G25
+                                           << neckArcB_M            // G26
+                                           << highbustArcB_M        // G27
+                                           << bustArcB_M            // G28
+                                           << lowbustArcB_M         // G29
+                                           << ribArcB_M             // G30
+                                           << waistArcB_M           // G31
+                                           << highhipArcB_M         // G32
+                                           << hipArcB_M             // G33
+                                           << neckArcHalfB_M        // G34
+                                           << highbustArcHalfB_M    // G35
+                                           << bustArcHalfB_M        // G36
+                                           << lowbustArcHalfB_M     // G37
+                                           << ribArcHalfB_M         // G38
+                                           << waistArcHalfB_M       // G39
+                                           << highhipArcHalfB_M     // G40
+                                           << hipArcHalfB_M         // G41
+                                           << hipWithAbdomenArcF_M  // G42
+                                           << bodyArmfoldCirc_M     // G43
+                                           << bodyBustCirc_M        // G44
+                                           << bodyTorsoCirc_M       // G45
+                                           << hipCircWithAbdomen_M; // G46
 
     return list;
 }
@@ -753,7 +758,9 @@ QStringList ListGroupH()
                                            << shoulderSlopeNeckSideLength_M    // H37
                                            << shoulderSlopeNeckBackAngle_M     // H38
                                            << shoulderSlopeNeckBackHeight_M    // H39
-                                           << shoulderSlopeShoulderTipAngle_M; // H40
+                                           << shoulderSlopeShoulderTipAngle_M  // H40
+                                           << neckBackToAcrossBack_M           // H41
+                                           << acrossBackToWaistB_M;            // H42
 
     return list;
 }
@@ -838,7 +845,8 @@ QStringList ListGroupL()
                                            << armNeckSideToFingerTip_M      // L18
                                            << armscyeCirc_M                 // L19
                                            << armscyeLength_M               // L20
-                                           << armscyeWidth_M;	            // L21
+                                           << armscyeWidth_M 	            // L21
+                                           << armNeckSideToOuterElbow_M;    // L22
 
     return list;
 }
@@ -1302,6 +1310,8 @@ QString MapDiagrams(const QString &number)
             return QStringLiteral("Gp7");
         case 44: // G45
             return QStringLiteral("Gp8");
+        case 45: // G46
+            return QStringLiteral("Gp9");
         default:
             break;
     }
@@ -1389,6 +1399,10 @@ QString MapDiagrams(const QString &number)
             return QStringLiteral("Hp11");
         case 39: // H40
             return QStringLiteral("Hp12");
+        case 40: // H41
+            V_FALLTHROUGH
+        case 41: // H42
+            return QStringLiteral("Hp13");
         default:
             break;
     }
@@ -1531,6 +1545,8 @@ QString MapDiagrams(const QString &number)
             return QStringLiteral("Lp8");
         case 20: // L21
             return QStringLiteral("Lp9");
+        case 21: // L22
+            return QStringLiteral("Lp10");
         default:
             break;
     }

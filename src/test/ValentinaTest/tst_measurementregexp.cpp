@@ -212,6 +212,7 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("G43") << bodyArmfoldCirc_M << "body_armfold_circ";
     QTest::newRow("G44") << bodyBustCirc_M << "body_bust_circ";
     QTest::newRow("G45") << bodyTorsoCirc_M << "body_torso_circ";
+    QTest::newRow("G46") << hipCircWithAbdomen_M << "hip_circ_with_abdomen";
     QTest::newRow("H01") << neckFrontToWaistF_M << "neck_front_to_waist_f";
     QTest::newRow("H02") << neckFrontToWaistFlatF_M << "neck_front_to_waist_flat_f";
     QTest::newRow("H03") << armpitToWaistSide_M << "armpit_to_waist_side";
@@ -252,6 +253,8 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("H38") << shoulderSlopeNeckBackAngle_M << "shoulder_slope_neck_back_angle";
     QTest::newRow("H39") << shoulderSlopeNeckBackHeight_M << "shoulder_slope_neck_back_height";
     QTest::newRow("H40") << shoulderSlopeShoulderTipAngle_M << "shoulder_slope_shoulder_tip_angle";
+    QTest::newRow("H41") << neckBackToAcrossBack_M << "neck_back_to_across_back";
+    QTest::newRow("H42") << acrossBackToWaistB_M << "across_back_to_waist_b";
     QTest::newRow("I01") << shoulderLength_M << "shoulder_length";
     QTest::newRow("I02") << shoulderTipToShoulderTipF_M << "shoulder_tip_to_shoulder_tip_f";
     QTest::newRow("I03") << acrossChestF_M << "across_chest_f";
@@ -309,6 +312,7 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("L19") << armscyeCirc_M << "armscye_circ";
     QTest::newRow("L20") << armscyeLength_M << "armscye_length";
     QTest::newRow("L21") << armscyeWidth_M << "armscye_width";
+    QTest::newRow("L22") << armNeckSideToOuterElbow_M << "arm_neck_side_to_outer_elbow";
     QTest::newRow("M01") << legCrotchToFloor_M << "leg_crotch_to_floor";
     QTest::newRow("M02") << legWaistSideToFloor_M << "leg_waist_side_to_floor";
     QTest::newRow("M03") << legThighUpperCirc_M << "leg_thigh_upper_circ";
@@ -350,7 +354,8 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("P04") << highbustBackOverShoulderToArmfoldFront_M << "highbust_back_over_shoulder_to_armfold_front";
     QTest::newRow("P05") << highbustBackOverShoulderToWaistFront_M << "highbust_back_over_shoulder_to_waist_front";
     QTest::newRow("P06") << neckBackToArmfoldFrontToNeckBack_M << "neck_back_to_armfold_front_to_neck_back";
-    QTest::newRow("P07") << acrossBackCenterToArmfoldFrontToAcrossBackCenter_M << "across_back_center_to_armfold_front_to_across_back_center";
+    QTest::newRow("P07") << acrossBackCenterToArmfoldFrontToAcrossBackCenter_M
+                         << "across_back_center_to_armfold_front_to_across_back_center";
     QTest::newRow("P08") << neckBackToArmfoldFrontToHighbustBack_M << "neck_back_to_armfold_front_to_highbust_back";
     QTest::newRow("P09") << armfoldToArmfoldBust_M << "armfold_to_armfold_bust";
     QTest::newRow("P10") << armfoldToBustFront_M << "armfold_to_bust_front";

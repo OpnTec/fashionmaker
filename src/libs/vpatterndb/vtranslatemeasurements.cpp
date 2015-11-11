@@ -904,6 +904,14 @@ void VTranslateMeasurements::InitGroupG()
                   "Full measurement description.");
     InitMeasurement(bodyTorsoCirc_M, m, g, d, "G45");
     //=================================================================================================================
+    m = translate("VTranslateMeasurements", "hip_circ_with_abdomen",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Hip circumference, including Abdomen", "Full measurement name.");
+    d = translate("VTranslateMeasurements",
+                  "Measurement at Hip level, including the depth of the Abdomen. (Hip arc, back + Hip arc with "
+                  "abdomen, front).", "Full measurement description.");
+    InitMeasurement(hipCircWithAbdomen_M, m, g, d, "G46", "(hip_arc_b + hip_with_abdomen_arc_f)");
+    //=================================================================================================================
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1194,6 +1202,20 @@ void VTranslateMeasurements::InitGroupH()
                   "Angle formed by line from Neck Side to Shoulder Tip and vertical line at Shoulder Tip.",
                   "Full measurement description.");
     InitMeasurement(shoulderSlopeShoulderTipAngle_M, m, g, d, "H40");
+    //=================================================================================================================
+    m = translate("VTranslateMeasurements", "neck_back_to_across_back",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Neck Back to Across Back", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "From neck back, down to level of Across Back measurement.",
+                  "Full measurement description.");
+    InitMeasurement(neckBackToAcrossBack_M, m, g, d, "H41");
+    //=================================================================================================================
+    m = translate("VTranslateMeasurements", "across_back_to_waist_b",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Across Back to Waist back", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "From middle of Across Back down to Waist back.",
+                  "Full measurement description.");
+    InitMeasurement(acrossBackToWaistB_M, m, g, d, "H42", "(neck_back_to_waist_b - neck_back_to_across_back)");
     //=================================================================================================================
 }
 
@@ -1645,6 +1667,13 @@ void VTranslateMeasurements::InitGroupL()
     d = translate("VTranslateMeasurements", "Horizontal distance between Armscye Front and Armscye Back.",
                   "Full measurement description.");
     InitMeasurement(armscyeWidth_M, m, g, d, "L21");
+    //=================================================================================================================
+    m = translate("VTranslateMeasurements", "arm_neck_side_to_outer_elbow",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Arm: Neck side to Elbow", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "From Neck Side over Shoulder Tip down to Elbow. (Shoulder length + "
+                  "Arm: Shoulder Tip to Elbow).", "Full measurement description.");
+    InitMeasurement(armNeckSideToOuterElbow_M, m, g, d, "L22", "(shoulder_length + arm_shoulder_tip_to_elbow)");
     //=================================================================================================================
 }
 

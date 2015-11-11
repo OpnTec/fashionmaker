@@ -291,6 +291,7 @@ extern const QString hipWithAbdomenArcF_M; // G42
 extern const QString bodyArmfoldCirc_M;    // G43
 extern const QString bodyBustCirc_M;       // G44
 extern const QString bodyTorsoCirc_M;      // G45
+extern const QString hipCircWithAbdomen_M; // G46
 // H
 extern const QString neckFrontToWaistF_M;             // H01
 extern const QString neckFrontToWaistFlatF_M;         // H02
@@ -332,6 +333,8 @@ extern const QString shoulderSlopeNeckSideLength_M;   // H37
 extern const QString shoulderSlopeNeckBackAngle_M;    // H38
 extern const QString shoulderSlopeNeckBackHeight_M;   // H39
 extern const QString shoulderSlopeShoulderTipAngle_M; // H40
+extern const QString neckBackToAcrossBack_M;          // H41
+extern const QString acrossBackToWaistB_M;            // H42
 // I
 extern const QString shoulderLength_M;                // I01
 extern const QString shoulderTipToShoulderTipF_M;     // I02
@@ -393,6 +396,7 @@ extern const QString armNeckSideToFingerTip_M;      // L18
 extern const QString armscyeCirc_M;                 // L19
 extern const QString armscyeLength_M;               // L20
 extern const QString armscyeWidth_M;	            // L21
+extern const QString armNeckSideToOuterElbow_M;     // L22
 // M
 extern const QString legCrotchToFloor_M;    // M01
 extern const QString legWaistSideToFloor_M; // M02
