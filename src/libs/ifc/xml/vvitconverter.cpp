@@ -40,8 +40,8 @@
  */
 
 const QString VVITConverter::MeasurementMinVerStr = QStringLiteral("0.2.0");
-const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.3.2");
-const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/individual_measurements/v0.3.2.xsd");
+const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.3.3");
+const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/individual_measurements/v0.3.3.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VVITConverter::VVITConverter(const QString &fileName)
@@ -93,6 +93,8 @@ QString VVITConverter::XSDSchema(int ver) const
         case (0x000301):
             return QStringLiteral("://schema/individual_measurements/v0.3.1.xsd");
         case (0x000302):
+            return QStringLiteral("://schema/individual_measurements/v0.3.2.xsd");
+        case (0x000303):
             return CurrentSchema;
         default:
         {
@@ -131,6 +133,13 @@ void VVITConverter::ApplyPatches()
                 V_FALLTHROUGH
             }
             case (0x000302):
+            {
+                ToV0_3_3();
+                const QString schema = XSDSchema(0x000303);
+                ValidateXML(schema, fileName);
+                V_FALLTHROUGH
+            }
+            case (0x000303):
                 break;
             default:
                 break;
@@ -258,6 +267,34 @@ void VVITConverter::PM_SystemV0_3_2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::ConvertMeasurementsToV0_3_3()
+{
+    const QMap<QString, QString> names = OldNamesToNewNames_InV0_3_3();
+    auto i = names.constBegin();
+    while (i != names.constEnd())
+    {
+        const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("m"));
+        if (nodeList.isEmpty())
+        {
+            continue;
+        }
+
+        for (int ii = 0; ii < nodeList.size(); ++ii)
+        {
+            const QString attrName = QStringLiteral("name");
+            QDomElement element = nodeList.at(ii).toElement();
+            const QString name = GetParametrString(element, attrName);
+            if (name == i.value())
+            {
+                SetAttribute(element, attrName, i.key());
+            }
+        }
+
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVITConverter::ToV0_3_0()
 {
     AddRootComment();
@@ -280,5 +317,13 @@ void VVITConverter::ToV0_3_2()
 {
     SetVersion(QStringLiteral("0.3.2"));
     PM_SystemV0_3_2();
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::ToV0_3_3()
+{
+    SetVersion(QStringLiteral("0.3.3"));
+    ConvertMeasurementsToV0_3_3();
     Save();
 }

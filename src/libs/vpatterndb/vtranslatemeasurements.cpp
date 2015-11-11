@@ -1852,6 +1852,13 @@ void VTranslateMeasurements::InitGroupN()
                   "Full measurement description.");
     InitMeasurement(riseLengthF_M, m, g, d, "N07");
     //=================================================================================================================
+    m = translate("VTranslateMeasurements", "rise_length_side",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Rise length, side", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "Vertical distance from Waist side down to Crotch level. Use formula "
+                  "(Height: Waist side - Leg: Crotch to floor).", "Full measurement description.");
+    InitMeasurement(riseLengthSide_M, m, g, d, "N08");
+    //=================================================================================================================
 }
 
 //---------------------------------------------------------------------------------------------------------------------

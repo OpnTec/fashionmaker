@@ -334,6 +334,7 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("N05") << riseLengthDiag_M << "rise_length_diag";
     QTest::newRow("N06") << riseLengthB_M << "rise_length_b";
     QTest::newRow("N07") << riseLengthF_M << "rise_length_f";
+    QTest::newRow("N08") << riseLengthSide_M << "rise_length_side";
     QTest::newRow("O01") << neckBackToWaistFront_M << "neck_back_to_waist_front";
     QTest::newRow("O02") << waistToWaistHalter_M << "waist_to_waist_halter";
     QTest::newRow("O03") << waistNaturalCirc_M << "waist_natural_circ";

@@ -43,8 +43,8 @@
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.2.0");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.2.0.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.2.1");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.2.1.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -100,6 +100,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000104):
             return QStringLiteral("://schema/pattern/v0.1.4.xsd");
         case (0x000200):
+            return QStringLiteral("://schema/pattern/v0.2.0.xsd");
+        case (0x000201):
             return CurrentSchema;
         default:
         {
@@ -152,6 +154,13 @@ void VPatternConverter::ApplyPatches()
                 V_FALLTHROUGH
             }
             case (0x000200):
+            {
+                ToV0_2_1();
+                const QString schema = XSDSchema(0x000201);
+                ValidateXML(schema, fileName);
+                V_FALLTHROUGH
+            }
+            case (0x000201):
                 break;
             default:
                 break;
@@ -212,6 +221,14 @@ void VPatternConverter::ToV0_2_0()
     TagIncrementToV0_2_0();
     ConvertMeasurementsToV0_2_0();
     TagMeasurementsToV0_2_0();//Alwayse last!!!
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_2_1()
+{
+    SetVersion(QStringLiteral("0.2.1"));
+    ConvertMeasurementsToV0_2_1();
     Save();
 }
 
@@ -666,6 +683,17 @@ void VPatternConverter::TagMeasurementsToV0_2_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ConvertMeasurementsToV0_2_1()
+{
+    const QMap<QString, QString> names = OldNamesToNewNames_InV0_2_1();
+
+    // Structure did not change. We can use the same code.
+    ConvertPointExpressionsToV0_2_0(names);
+    ConvertArcExpressionsToV0_2_0(names);
+    ConvertPathPointExpressionsToV0_2_0(names);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::MUnitV0_1_4() const
 {
     const QDomElement element = TagMeasurementsV0_1_4();
@@ -826,7 +854,7 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("shoulder_girth"), QStringLiteral("body_armfold_circ"));
     names.insert(QStringLiteral("trunk_length"), QStringLiteral("body_torso_circ"));
     names.insert(QStringLiteral("front_waist_length"), QStringLiteral("neck_front_to_waist_f"));
-    names.insert(QStringLiteral("center_front_waist_length"), QStringLiteral("neck_front_to_waist_flat"));
+    names.insert(QStringLiteral("center_front_waist_length"), QStringLiteral("neck_front_to_waist_flat_f"));
     names.insert(QStringLiteral("side_waist_length"), QStringLiteral("armpit_to_waist_side"));
     names.insert(QStringLiteral("waist_to_neck_side"), QStringLiteral("neck_side_to_waist_b"));
 
@@ -919,6 +947,17 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("height_under_buttock_folds"), QStringLiteral("height_gluteal_fold"));
     names.insert(QStringLiteral("scye_depth"), QStringLiteral("neck_back_to_highbust_b"));
     names.insert(QStringLiteral("back_waist_to_upper_chest"), QStringLiteral("across_back_to_waist_b"));
+
+    return names;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_1()
+{
+    // old name, new name
+    QMap<QString, QString> names;
+
+    names.insert(QStringLiteral("rise_length_side"), QStringLiteral("rise_length_side_sitting"));
 
     return names;
 }

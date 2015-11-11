@@ -340,6 +340,7 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Np2.png \
         $${PWD}/share/resources/diagrams/Np3.png \
         $${PWD}/share/resources/diagrams/Np4.png \
+        $${PWD}/share/resources/diagrams/Np5.png \
         $${PWD}/share/resources/diagrams/Op1.png \
         $${PWD}/share/resources/diagrams/Op2.png \
         $${PWD}/share/resources/diagrams/Op3.png \

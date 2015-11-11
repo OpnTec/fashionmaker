@@ -264,6 +264,7 @@ const QString riseLengthSideSitting_M = QStringLiteral("rise_length_side_sitting
 const QString riseLengthDiag_M        = QStringLiteral("rise_length_diag");         // N05
 const QString riseLengthB_M           = QStringLiteral("rise_length_b");            // N06
 const QString riseLengthF_M           = QStringLiteral("rise_length_f");            // N07
+const QString riseLengthSide_M        = QStringLiteral("rise_length_side");         // N08
 // O
 const QString neckBackToWaistFront_M            = QStringLiteral("neck_back_to_waist_front");	           // O01
 const QString waistToWaistHalter_M              = QStringLiteral("waist_to_waist_halter");	               // O02
@@ -881,7 +882,8 @@ QStringList ListGroupN()
                                            << riseLengthSideSitting_M // N04
                                            << riseLengthDiag_M        // N05
                                            << riseLengthB_M           // N06
-                                           << riseLengthF_M;          // N07
+                                           << riseLengthF_M           // N07
+                                           << riseLengthSide_M;       // N08
 
     return list;
 }
@@ -1603,6 +1605,8 @@ QString MapDiagrams(const QString &number)
             V_FALLTHROUGH
         case 6: // N07
             return QStringLiteral("Np4");
+        case 7: // N08
+            return QStringLiteral("Np5");
         default:
             break;
     }

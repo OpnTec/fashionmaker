@@ -420,6 +420,7 @@ extern const QString riseLengthSideSitting_M; // N04
 extern const QString riseLengthDiag_M;        // N05
 extern const QString riseLengthB_M;           // N06
 extern const QString riseLengthF_M;           // N07
+extern const QString riseLengthSide_M;        // N08
 // O
 extern const QString neckBackToWaistFront_M;	        // O01
 extern const QString waistToWaistHalter_M;	            // O02
