@@ -276,6 +276,7 @@ void VVITConverter::ConvertMeasurementsToV0_3_3()
         const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("m"));
         if (nodeList.isEmpty())
         {
+            ++i;
             continue;
         }
 

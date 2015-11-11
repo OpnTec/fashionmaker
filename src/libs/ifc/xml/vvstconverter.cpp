@@ -282,6 +282,7 @@ void VVSTConverter::ConvertMeasurementsToV0_4_2()
         const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("m"));
         if (nodeList.isEmpty())
         {
+            ++i;
             continue;
         }
 
