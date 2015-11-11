@@ -78,7 +78,6 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NamePointChanged);
 
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
-    connect(ui.buttonBox, &QDialogButtonBox::accepted, this, &DialogDetail::DeleteLastPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,16 +117,7 @@ void DialogDetail::ChosenObject(quint32 id, const SceneObject &type)
             EnableObjectGUI(true);
         }
 
-        if (not DetailIsValid())
-        {
-            ValidObjects(false);
-        }
-        else
-        {
-            ValidObjects(true);
-
-        }
-
+        ValidObjects(DetailIsValid());
         this->show();
     }
 }
@@ -189,8 +179,8 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
     }
     else
     {
-        QString lastItemName = ui.listWidget->item(ui.listWidget->count()-1)->text();
-        if(QString::compare(lastItemName, name) != 0)
+        QString previousItemName = ui.listWidget->item(ui.listWidget->count()-1)->text();
+        if(QString::compare(previousItemName, name) != 0)
         {
             canAddNewPoint = true;
         }
@@ -421,24 +411,8 @@ void DialogDetail::DeleteItem()
         EnableObjectGUI(false);
     }
 
-    int rowNumber = ui.listWidget->currentRow();
-
-    if (rowNumber != 0 && rowNumber != ui.listWidget->count()-1)
-    {
-        QString previousRow = ui.listWidget->item(rowNumber-1)->text();
-        QString nextRow = ui.listWidget->item(rowNumber+1)->text();
-
-        if (QString::compare(previousRow, nextRow) == 0)
-        {
-            ValidObjects(false);
-        }
-    }
-
-    delete ui.listWidget->item(rowNumber);
-    if (not DetailIsValid())
-    {
-        ValidObjects(false);
-    }
+    delete ui.listWidget->item(ui.listWidget->currentRow());
+    ValidObjects(DetailIsValid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -448,21 +422,34 @@ bool DialogDetail::DetailIsValid()
     {
         return false;
     }
-    else if (ui.listWidget->count() == 3)
+    else
     {
         if (FirstPointEqualLast())
         {
             return false;
         }
-    }
+        else
+        {
+            for (int i=0; i<ui.listWidget->count()-1; i++)
+            {
+                QString previousRow = ui.listWidget->item(i)->text();
+                QString nextRow = ui.listWidget->item(i+1)->text();
+
+                if (QString::compare(previousRow, nextRow) == 0)
+                {
+                    return false;
+                }
+            }
+        }
+    }  
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogDetail::FirstPointEqualLast()
 {
-    QString firstDetailPoint = ui.listWidget->item(0)->text();
-    QString lastDetailPoint = ui.listWidget->item(ui.listWidget->count()-1)->text();
+    const QString firstDetailPoint = ui.listWidget->item(0)->text();
+    const QString lastDetailPoint = ui.listWidget->item(ui.listWidget->count()-1)->text();
 
     if (QString::compare(firstDetailPoint, lastDetailPoint) == 0)
     {
@@ -471,17 +458,5 @@ bool DialogDetail::FirstPointEqualLast()
     else
     {
         return false;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogDetail::DeleteLastPoint()
-{
-    if (ui.listWidget->count() > 3)
-    {
-        if (FirstPointEqualLast())
-        {
-            delete ui.listWidget->item(ui.listWidget->count()-1);
-        }
     }
 }
