@@ -286,6 +286,7 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Gp6.png \
         $${PWD}/share/resources/diagrams/Gp7.png \
         $${PWD}/share/resources/diagrams/Gp8.png \
+        $${PWD}/share/resources/diagrams/Gp9.png \
         $${PWD}/share/resources/diagrams/Hp1.png \
         $${PWD}/share/resources/diagrams/Hp2.png \
         $${PWD}/share/resources/diagrams/Hp3.png \
@@ -298,6 +299,7 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Hp10.png \
         $${PWD}/share/resources/diagrams/Hp11.png \
         $${PWD}/share/resources/diagrams/Hp12.png \
+        $${PWD}/share/resources/diagrams/Hp13.png \
         $${PWD}/share/resources/diagrams/Ip1.png \
         $${PWD}/share/resources/diagrams/Ip2.png \
         $${PWD}/share/resources/diagrams/Ip3.png \
@@ -330,6 +332,7 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Lp7.png \
         $${PWD}/share/resources/diagrams/Lp8.png \
         $${PWD}/share/resources/diagrams/Lp9.png \
+        $${PWD}/share/resources/diagrams/Lp10.png \
         $${PWD}/share/resources/diagrams/Mp1.png \
         $${PWD}/share/resources/diagrams/Mp2.png \
         $${PWD}/share/resources/diagrams/Mp3.png \
@@ -337,6 +340,7 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Np2.png \
         $${PWD}/share/resources/diagrams/Np3.png \
         $${PWD}/share/resources/diagrams/Np4.png \
+        $${PWD}/share/resources/diagrams/Np5.png \
         $${PWD}/share/resources/diagrams/Op1.png \
         $${PWD}/share/resources/diagrams/Op2.png \
         $${PWD}/share/resources/diagrams/Op3.png \

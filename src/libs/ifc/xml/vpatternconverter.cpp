@@ -43,8 +43,8 @@
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.2.0");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.2.0.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.2.1");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.2.1.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -100,6 +100,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000104):
             return QStringLiteral("://schema/pattern/v0.1.4.xsd");
         case (0x000200):
+            return QStringLiteral("://schema/pattern/v0.2.0.xsd");
+        case (0x000201):
             return CurrentSchema;
         default:
         {
@@ -152,6 +154,13 @@ void VPatternConverter::ApplyPatches()
                 V_FALLTHROUGH
             }
             case (0x000200):
+            {
+                ToV0_2_1();
+                const QString schema = XSDSchema(0x000201);
+                ValidateXML(schema, fileName);
+                V_FALLTHROUGH
+            }
+            case (0x000201):
                 break;
             default:
                 break;
@@ -212,6 +221,14 @@ void VPatternConverter::ToV0_2_0()
     TagIncrementToV0_2_0();
     ConvertMeasurementsToV0_2_0();
     TagMeasurementsToV0_2_0();//Alwayse last!!!
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_2_1()
+{
+    SetVersion(QStringLiteral("0.2.1"));
+    ConvertMeasurementsToV0_2_1();
     Save();
 }
 
@@ -666,6 +683,17 @@ void VPatternConverter::TagMeasurementsToV0_2_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ConvertMeasurementsToV0_2_1()
+{
+    const QMap<QString, QString> names = OldNamesToNewNames_InV0_2_1();
+
+    // Structure did not change. We can use the same code.
+    ConvertPointExpressionsToV0_2_0(names);
+    ConvertArcExpressionsToV0_2_0(names);
+    ConvertPathPointExpressionsToV0_2_0(names);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::MUnitV0_1_4() const
 {
     const QDomElement element = TagMeasurementsV0_1_4();
@@ -792,10 +820,8 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("under_bust_girth"), QStringLiteral("lowbust_circ"));
     names.insert(QStringLiteral("waist_girth"), QStringLiteral("waist_circ"));
     names.insert(QStringLiteral("high_hip_girth"), QStringLiteral("highhip_circ"));
-
-    name = QStringLiteral("hip_circ");
-    names.insert(QStringLiteral("hips_excluding_protruding_abdomen"), name);
-    names.insert(QStringLiteral("hip_girth"), name);
+    names.insert(QStringLiteral("hips_excluding_protruding_abdomen"), QStringLiteral("hip_circ"));
+    names.insert(QStringLiteral("hip_girth"), QStringLiteral("hip_circ_with_abdomen"));
 
     name = QStringLiteral("neck_arc_f");
     names.insert(QStringLiteral("half_girth_neck"), name);
@@ -825,19 +851,15 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("back_hip_arc"), QStringLiteral("hip_arc_b"));
     names.insert(QStringLiteral("half_girth_hips_considering_protruding_abdomen"),
                  QStringLiteral("hip_with_abdomen_arc_f"));
-
     names.insert(QStringLiteral("shoulder_girth"), QStringLiteral("body_armfold_circ"));
     names.insert(QStringLiteral("trunk_length"), QStringLiteral("body_torso_circ"));
-
-    name = QStringLiteral("neck_front_to_waist_f");
-    names.insert(QStringLiteral("front_waist_length"), name);
-    names.insert(QStringLiteral("center_front_waist_length"), name);
-
+    names.insert(QStringLiteral("front_waist_length"), QStringLiteral("neck_front_to_waist_f"));
+    names.insert(QStringLiteral("center_front_waist_length"), QStringLiteral("neck_front_to_waist_flat_f"));
     names.insert(QStringLiteral("side_waist_length"), QStringLiteral("armpit_to_waist_side"));
+    names.insert(QStringLiteral("waist_to_neck_side"), QStringLiteral("neck_side_to_waist_b"));
 
     name = QStringLiteral("neck_side_to_waist_f");
     names.insert(QStringLiteral("neck_to_front_waist_line"), name);
-    names.insert(QStringLiteral("waist_to_neck_side"), name);
     names.insert(QStringLiteral("front_shoulder_to_waist_length"), name);
 
     names.insert(QStringLiteral("back_shoulder_to_waist_length"), QStringLiteral("neck_side_to_waist_b"));
@@ -857,10 +879,8 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("shoulder_drop"), QStringLiteral("shoulder_slope_neck_side_length"));
     names.insert(QStringLiteral("across_front_shoulder_width"), QStringLiteral("shoulder_tip_to_shoulder_tip_f"));
     names.insert(QStringLiteral("upper_front_chest_width"), QStringLiteral("across_chest_f"));
-
-    name = QStringLiteral("armfold_to_armfold_f");
-    names.insert(QStringLiteral("chest_width"), name);
-    names.insert(QStringLiteral("front_chest_width"), name);
+    names.insert(QStringLiteral("chest_width"), QStringLiteral("across_chest_f"));
+    names.insert(QStringLiteral("front_chest_width"), QStringLiteral("armfold_to_armfold_f"));
 
     name = QStringLiteral("shoulder_tip_to_shoulder_tip_b");
     names.insert(QStringLiteral("arc_behind_shoulder_girdle"), name);
@@ -897,11 +917,8 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("armscye_girth"), QStringLiteral("armscye_circ"));
     names.insert(QStringLiteral("anteroposterior_diameter_hands"), QStringLiteral("armscye_width"));
     names.insert(QStringLiteral("neck_to_third_finger"), QStringLiteral("arm_neck_side_to_finger_tip"));
-
-    name = QStringLiteral("arm_neck_side_to_wrist");
-    names.insert(QStringLiteral("neck_to_radial_point"), name);
-    names.insert(QStringLiteral("shoulder_and_arm_length"), name);
-
+    names.insert(QStringLiteral("neck_to_radial_point"), QStringLiteral("arm_neck_side_to_outer_elbow"));
+    names.insert(QStringLiteral("shoulder_and_arm_length"), QStringLiteral("arm_neck_side_to_wrist"));
     names.insert(QStringLiteral("crotch_height"), QStringLiteral("leg_crotch_to_floor"));
     names.insert(QStringLiteral("side_waist_to_floor"), QStringLiteral("leg_waist_side_to_floor"));
     names.insert(QStringLiteral("waist_to_knee"), QStringLiteral("leg_waist_side_to_knee"));
@@ -912,11 +929,8 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("ankle_girth"), QStringLiteral("leg_ankle_circ"));
     names.insert(QStringLiteral("girth_knee_flexed_feet"), QStringLiteral("leg_knee_circ_bent"));
     names.insert(QStringLiteral("arc_through_groin_area"), QStringLiteral("crotch_length"));
-
-    name = QStringLiteral("rise_length_side");
-    names.insert(QStringLiteral("waist_to_plane_seat"), name);
-    names.insert(QStringLiteral("rise_height"), name);
-
+    names.insert(QStringLiteral("waist_to_plane_seat"), QStringLiteral("rise_length_side_sitting"));
+    names.insert(QStringLiteral("rise_height"), QStringLiteral("rise_length_diag"));
     names.insert(QStringLiteral("hand_vertical_diameter"), QStringLiteral("hand_length"));
     names.insert(QStringLiteral("hand_width"), QStringLiteral("hand_palm_width"));
     names.insert(QStringLiteral("hand_girth"), QStringLiteral("hand_circ"));
@@ -929,6 +943,21 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("strap_length"), QStringLiteral("highbust_b_over_shoulder_to_highbust_f"));
     names.insert(QStringLiteral("arc_through_shoulder_joint"), QStringLiteral("armscye_arc"));
     names.insert(QStringLiteral("head_girth"), QStringLiteral("head_circ"));
+    names.insert(QStringLiteral("elbow_girth"), QStringLiteral("arm_elbow_circ"));
+    names.insert(QStringLiteral("height_under_buttock_folds"), QStringLiteral("height_gluteal_fold"));
+    names.insert(QStringLiteral("scye_depth"), QStringLiteral("neck_back_to_highbust_b"));
+    names.insert(QStringLiteral("back_waist_to_upper_chest"), QStringLiteral("across_back_to_waist_b"));
+
+    return names;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_1()
+{
+    // old name, new name
+    QMap<QString, QString> names;
+
+    names.insert(QStringLiteral("rise_length_side"), QStringLiteral("rise_length_side_sitting"));
 
     return names;
 }

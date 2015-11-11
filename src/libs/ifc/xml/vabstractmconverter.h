@@ -40,6 +40,7 @@ public:
 protected:
     void AddRootComment();
     static QMultiMap<QString, QString> OldNamesToNewNames_InV0_3_0();
+    static QMap<QString, QString> OldNamesToNewNames_InV0_3_3();
 
 private:
     Q_DISABLE_COPY(VAbstractMConverter)

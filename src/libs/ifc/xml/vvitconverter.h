@@ -61,10 +61,12 @@ private:
     QDomElement AddMV0_3_0(const QString &name, qreal value);
     void GenderV0_3_1();
     void PM_SystemV0_3_2();
+    void ConvertMeasurementsToV0_3_3();
 
     void ToV0_3_0();
     void ToV0_3_1();
     void ToV0_3_2();
+    void ToV0_3_3();
 };
 
 #endif // VVITCONVERTER_H

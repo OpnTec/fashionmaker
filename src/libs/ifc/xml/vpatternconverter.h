@@ -60,11 +60,14 @@ private:
     void ToV0_1_3();
     void ToV0_1_4();
     void ToV0_2_0();
+    void ToV0_2_1();
 
     void          TagUnitToV0_2_0();
     void          TagIncrementToV0_2_0();
     void          ConvertMeasurementsToV0_2_0();
     void          TagMeasurementsToV0_2_0();
+
+    void          ConvertMeasurementsToV0_2_1();
 
     QSet<QString> FixIncrementsToV0_2_0();
     QString       FixIncrementInFormulaToV0_2_0(const QString &formula, const QSet<QString> &names);
@@ -83,6 +86,7 @@ private:
     QStringList ListPathPointExpressionsV0_1_4() const;
 
     static QMap<QString, QString> OldNamesToNewNames_InV0_2_0();
+    static QMap<QString, QString> OldNamesToNewNames_InV0_2_1();
 };
 
 #endif // VPATTERNCONVERTER_H

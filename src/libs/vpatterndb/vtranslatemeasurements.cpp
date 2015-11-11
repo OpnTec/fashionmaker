@@ -904,6 +904,14 @@ void VTranslateMeasurements::InitGroupG()
                   "Full measurement description.");
     InitMeasurement(bodyTorsoCirc_M, m, g, d, "G45");
     //=================================================================================================================
+    m = translate("VTranslateMeasurements", "hip_circ_with_abdomen",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Hip circumference, including Abdomen", "Full measurement name.");
+    d = translate("VTranslateMeasurements",
+                  "Measurement at Hip level, including the depth of the Abdomen. (Hip arc, back + Hip arc with "
+                  "abdomen, front).", "Full measurement description.");
+    InitMeasurement(hipCircWithAbdomen_M, m, g, d, "G46", "(hip_arc_b + hip_with_abdomen_arc_f)");
+    //=================================================================================================================
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1194,6 +1202,20 @@ void VTranslateMeasurements::InitGroupH()
                   "Angle formed by line from Neck Side to Shoulder Tip and vertical line at Shoulder Tip.",
                   "Full measurement description.");
     InitMeasurement(shoulderSlopeShoulderTipAngle_M, m, g, d, "H40");
+    //=================================================================================================================
+    m = translate("VTranslateMeasurements", "neck_back_to_across_back",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Neck Back to Across Back", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "From neck back, down to level of Across Back measurement.",
+                  "Full measurement description.");
+    InitMeasurement(neckBackToAcrossBack_M, m, g, d, "H41");
+    //=================================================================================================================
+    m = translate("VTranslateMeasurements", "across_back_to_waist_b",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Across Back to Waist back", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "From middle of Across Back down to Waist back.",
+                  "Full measurement description.");
+    InitMeasurement(acrossBackToWaistB_M, m, g, d, "H42", "(neck_back_to_waist_b - neck_back_to_across_back)");
     //=================================================================================================================
 }
 
@@ -1646,6 +1668,13 @@ void VTranslateMeasurements::InitGroupL()
                   "Full measurement description.");
     InitMeasurement(armscyeWidth_M, m, g, d, "L21");
     //=================================================================================================================
+    m = translate("VTranslateMeasurements", "arm_neck_side_to_outer_elbow",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Arm: Neck side to Elbow", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "From Neck Side over Shoulder Tip down to Elbow. (Shoulder length + "
+                  "Arm: Shoulder Tip to Elbow).", "Full measurement description.");
+    InitMeasurement(armNeckSideToOuterElbow_M, m, g, d, "L22", "(shoulder_length + arm_shoulder_tip_to_elbow)");
+    //=================================================================================================================
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1792,12 +1821,15 @@ void VTranslateMeasurements::InitGroupN()
                   "Full measurement description.");
     InitMeasurement(crotchLengthF_M, m, g, d, "N03", "(crotch_length - crotch_length_b)");
     //=================================================================================================================
-    m = translate("VTranslateMeasurements", "rise_length_side",
+    m = translate("VTranslateMeasurements", "rise_length_side_sitting",
                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = translate("VTranslateMeasurements", "Rise length, side", "Full measurement name.");
-    d = translate("VTranslateMeasurements", "From Waist Side down to surface, while seated on hard surface.",
+    g = translate("VTranslateMeasurements",
+                  "Sit on hard surface. Rise length, side, taken from waist over hip curve down to surface",
+                  "Full measurement name.");
+    d = translate("VTranslateMeasurements",
+                  "From Waist Side around hp curve down to surface, while seated on hard surface.",
                   "Full measurement description.");
-    InitMeasurement(riseLengthSide_M, m, g, d, "N04");
+    InitMeasurement(riseLengthSideSitting_M, m, g, d, "N04");
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "rise_length_diag",
                   "Name in a formula. Don't use math symbols and space in name!!!!");
@@ -1819,6 +1851,13 @@ void VTranslateMeasurements::InitGroupN()
     d = translate("VTranslateMeasurements", "Vertical Distance from Waist Front to Crotch level.",
                   "Full measurement description.");
     InitMeasurement(riseLengthF_M, m, g, d, "N07");
+    //=================================================================================================================
+    m = translate("VTranslateMeasurements", "rise_length_side",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Rise length, side", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "Vertical distance from Waist side down to Crotch level. Use formula "
+                  "(Height: Waist side - Leg: Crotch to floor).", "Full measurement description.");
+    InitMeasurement(riseLengthSide_M, m, g, d, "N08");
     //=================================================================================================================
 }
 
