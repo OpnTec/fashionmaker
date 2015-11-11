@@ -54,20 +54,18 @@ class VContainerData : public QSharedData //-V690
 public:
 
     VContainerData(const VTranslateVars *trVars, const Unit *patternUnit)
-        :sizeName(size_M), heightName(height_M), gObjects(QHash<quint32, QSharedPointer<VGObject> >()),
+        :gObjects(QHash<quint32, QSharedPointer<VGObject> >()),
           variables(QHash<QString, QSharedPointer<VInternalVariable> > ()), details(QHash<quint32, VDetail>()),
           trVars(trVars), patternUnit(patternUnit)
     {}
 
     VContainerData(const VContainerData &data)
-        :QSharedData(data), sizeName(data.sizeName), heightName(data.heightName), gObjects(data.gObjects),
+        :QSharedData(data), gObjects(data.gObjects),
           variables(data.variables), details(data.details), trVars(data.trVars), patternUnit(data.patternUnit)
     {}
 
     virtual ~VContainerData();
 
-    QString        sizeName;
-    QString        heightName;
     /**
      * @brief gObjects graphicals objects of pattern.
      */
@@ -141,15 +139,11 @@ public:
     static void        ClearUniqueNames();
 
     static void        SetSize(qreal size);
-    void               SetSizeName(const QString &name);
     static void        SetHeight(qreal height);
-    void               SetHeightName(const QString &name);
     static qreal       size();
     static qreal      *rsize();
-    QString            SizeName() const;
     static qreal       height();
     static qreal      *rheight();
-    QString            HeightName()const;
 
     bool               VariableExist(const QString& name);
 

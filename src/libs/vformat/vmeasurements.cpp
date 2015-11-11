@@ -617,13 +617,6 @@ QStringList VMeasurements::ListAll() const
         }
     }
 
-    if (type == MeasurementsType::Standard)
-    {
-        // Additionaly each standard table provide size and height
-        listNames.append(size_M);
-        listNames.append(height_M);
-    }
-
     return listNames;
 }
 
@@ -648,12 +641,6 @@ bool VMeasurements::IsDefinedKnownNamesValid() const
 {
     QStringList names = AllGroupNames();
 
-    if (type == MeasurementsType::Standard)
-    {
-        names.append(size_M);
-        names.append(height_M);
-    }
-
     QSet<QString> set;
     foreach (const QString &var, names)
     {
@@ -676,14 +663,12 @@ bool VMeasurements::IsDefinedKnownNamesValid() const
 void VMeasurements::SetDataSize()
 {
     data->SetSize(UnitConvertor(BaseSize(), MUnit(), *data->GetPatternUnit()));
-    data->SetSizeName(size_M);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetDataHeight()
 {
     data->SetHeight(UnitConvertor(BaseHeight(), MUnit(), *data->GetPatternUnit()));
-    data->SetHeightName(height_M);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

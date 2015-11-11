@@ -120,23 +120,6 @@ void DialogEditWrongFormula::ValChenged(int row)
         return;
     }
     QListWidgetItem *item = ui->listWidget->item( row );
-    if (ui->radioButtonSizeGrowth->isChecked())
-    {
-        if (item->text()==data->HeightName())
-        {
-            SetDescription(item->text(), data->height(), VDomDocument::UnitsToStr(qApp->patternUnit(), true),
-                           tr("Height"));
-            return;
-        }
-
-        if (item->text()==data->SizeName())
-        {
-            SetDescription(item->text(), data->size(), VDomDocument::UnitsToStr(qApp->patternUnit(), true),
-                           tr("Size"));
-            return;
-        }
-
-    }
     if (ui->radioButtonStandardTable->isChecked())
     {
         const QString name = qApp->TrVars()->VarFromUser(item->text());
@@ -201,31 +184,6 @@ void DialogEditWrongFormula::ValChenged(int row)
                        degreeSymbol, tr("Curve angle"));
         return;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief SizeHeight show in list base variables
- */
-void DialogEditWrongFormula::SizeHeight()
-{
-    ui->checkBoxHideEmpty->setEnabled(false);
-
-    ui->listWidget->blockSignals(true);
-    ui->listWidget->clear();
-
-    {
-    QListWidgetItem *item = new QListWidgetItem(data->HeightName());
-    item->setFont(QFont("Times", 12, QFont::Bold));
-    ui->listWidget->addItem(item);
-    }
-
-    QListWidgetItem *item = new QListWidgetItem(data->SizeName());
-    item->setFont(QFont("Times", 12, QFont::Bold));
-    ui->listWidget->addItem(item);
-
-    ui->listWidget->blockSignals(false);
-    ui->listWidget->setCurrentRow (0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -386,17 +344,9 @@ void DialogEditWrongFormula::InitVariables()
 {
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogEditWrongFormula::ValChenged);
 
-    if (qApp->patternType() == MeasurementsType::Standard)
-    {
-        SizeHeight();
-        connect(ui->radioButtonSizeGrowth, &QRadioButton::clicked, this, &DialogEditWrongFormula::SizeHeight);
-    }
-    else
-    {
-        ui->radioButtonSizeGrowth->setEnabled(false);
-        ui->radioButtonStandardTable->setChecked(true);
-        Measurements();
-    }
+    ui->radioButtonStandardTable->setChecked(true);
+    Measurements();
+
     connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogEditWrongFormula::Measurements);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogEditWrongFormula::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogEditWrongFormula::LengthLines);

@@ -64,7 +64,6 @@ public slots:
     void         DeployFormulaTextEdit();
     virtual void EvalFormula() Q_DECL_OVERRIDE;
     void         ValChenged(int row);
-    void         SizeHeight();
     void         PutHere();
     void         PutVal(QListWidgetItem * item);
 

@@ -507,7 +507,7 @@ const QHash<QString, qreal *> VContainer::PlainVariables() const
 {
     QHash<QString, qreal *> vars;
 
-    QHash<QString, QSharedPointer<VInternalVariable>>::const_iterator i = d->variables.constBegin();
+    auto i = d->variables.constBegin();
     while (i != d->variables.constEnd())
     {
         QSharedPointer<VInternalVariable> var = i.value();
@@ -520,12 +520,6 @@ const QHash<QString, qreal *> VContainer::PlainVariables() const
         vars.insert(i.key(), var->GetValue());
 
         ++i;
-    }
-
-    if (qApp->patternType() == MeasurementsType::Standard)
-    {
-        vars.insert(SizeName(), rsize());
-        vars.insert(HeightName(), rheight());
     }
 
     return vars;
@@ -603,12 +597,6 @@ void VContainer::SetSize(qreal size)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContainer::SetSizeName(const QString &name)
-{
-    d->sizeName = name;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetGrowth set value of growth
  * @param height value of height
@@ -616,12 +604,6 @@ void VContainer::SetSizeName(const QString &name)
 void VContainer::SetHeight(qreal height)
 {
     _height = height;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VContainer::SetHeightName(const QString &name)
-{
-    d->heightName = name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -641,12 +623,6 @@ qreal *VContainer::rsize()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VContainer::SizeName() const
-{
-    return d->sizeName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief height return height
  * @return height in pattern units
@@ -660,12 +636,6 @@ qreal VContainer::height()
 qreal *VContainer::rheight()
 {
     return &_height;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VContainer::HeightName() const
-{
-    return d->heightName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

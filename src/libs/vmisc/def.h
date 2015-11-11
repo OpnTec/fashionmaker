@@ -192,8 +192,6 @@ enum class GSizes : unsigned char { ALL,
 #endif
 
 // measurements
-// Need for standard table
-extern const QString size_M;
 // A
 extern const QString height_M;                    // A01
 extern const QString heightNeckBack_M;            // A02

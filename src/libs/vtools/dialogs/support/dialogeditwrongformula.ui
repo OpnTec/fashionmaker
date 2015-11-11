@@ -225,22 +225,6 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButtonSizeGrowth">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Size and height</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QRadioButton" name="radioButtonStandardTable">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
@@ -250,6 +234,9 @@
            </property>
            <property name="text">
             <string>Measurements</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -404,7 +391,6 @@
   <tabstop>plainTextEditFormula</tabstop>
   <tabstop>toolButtonPutHere</tabstop>
   <tabstop>pushButtonGrowLength</tabstop>
-  <tabstop>radioButtonSizeGrowth</tabstop>
   <tabstop>radioButtonStandardTable</tabstop>
   <tabstop>radioButtonIncrements</tabstop>
   <tabstop>radioButtonLengthLine</tabstop>

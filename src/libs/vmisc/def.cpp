@@ -36,8 +36,6 @@
 
 // Keep synchronize all names with initialization in VTranslateVars class!!!!!
 //measurements
-// Need for standard table
-const QString size_M = QStringLiteral("size");
 // A
 const QString height_M                    = QStringLiteral("height");                         // A01
 const QString heightNeckBack_M            = QStringLiteral("height_neck_back");               // A02
