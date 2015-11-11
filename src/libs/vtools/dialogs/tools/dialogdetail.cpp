@@ -117,16 +117,7 @@ void DialogDetail::ChosenObject(quint32 id, const SceneObject &type)
             EnableObjectGUI(true);
         }
 
-        if (CreateDetail().ContourPoints(data).size() < 3)
-        {
-            ValidObjects(false);
-        }
-        else
-        {
-            ValidObjects(true);
-
-        }
-
+        ValidObjects(DetailIsValid());
         this->show();
     }
 }
@@ -180,31 +171,49 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
             return;
     }
 
-    QListWidgetItem *item = new QListWidgetItem(name);
-    item->setFont(QFont("Times", 12, QFont::Bold));
-    VNodeDetail node(id, typeTool, typeNode, mx, my, reverse);
-    item->setData(Qt::UserRole, QVariant::fromValue(node));
-    ui.listWidget->addItem(item);
-    ui.listWidget->setCurrentRow(ui.listWidget->count()-1);
+    bool canAddNewPoint = false;
 
-    ui.doubleSpinBoxBiasX->blockSignals(true);
-    ui.doubleSpinBoxBiasY->blockSignals(true);
-
-    ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
-    ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
-    if (node.getTypeTool() == Tool::NodePoint)
+    if(ui.listWidget->count() == 0)
     {
-        ui.checkBoxReverse->setChecked(false);
-        ui.checkBoxReverse->setEnabled(false);
+        canAddNewPoint = true;
     }
     else
     {
-        ui.checkBoxReverse->setEnabled(true);
-        ui.checkBoxReverse->setChecked(node.getReverse());
+        const QString previousItemName = ui.listWidget->item(ui.listWidget->count()-1)->text();
+        if(QString::compare(previousItemName, name) != 0)
+        {
+            canAddNewPoint = true;
+        }
     }
 
-    ui.doubleSpinBoxBiasX->blockSignals(false);
-    ui.doubleSpinBoxBiasY->blockSignals(false);
+    if(canAddNewPoint)
+    {
+        QListWidgetItem *item = new QListWidgetItem(name);
+        item->setFont(QFont("Times", 12, QFont::Bold));
+        VNodeDetail node(id, typeTool, typeNode, mx, my, reverse);
+        item->setData(Qt::UserRole, QVariant::fromValue(node));
+        ui.listWidget->addItem(item);
+        ui.listWidget->setCurrentRow(ui.listWidget->count()-1);
+
+        ui.doubleSpinBoxBiasX->blockSignals(true);
+        ui.doubleSpinBoxBiasY->blockSignals(true);
+
+        ui.doubleSpinBoxBiasX->setValue(qApp->fromPixel(node.getMx()));
+        ui.doubleSpinBoxBiasY->setValue(qApp->fromPixel(node.getMy()));
+        if (node.getTypeTool() == Tool::NodePoint)
+        {
+            ui.checkBoxReverse->setChecked(false);
+            ui.checkBoxReverse->setEnabled(false);
+        }
+        else
+        {
+            ui.checkBoxReverse->setEnabled(true);
+            ui.checkBoxReverse->setChecked(node.getReverse());
+        }
+
+        ui.doubleSpinBoxBiasX->blockSignals(false);
+        ui.doubleSpinBoxBiasY->blockSignals(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -402,9 +411,56 @@ void DialogDetail::DeleteItem()
         EnableObjectGUI(false);
     }
 
-    delete ui.listWidget->item( ui.listWidget->currentRow() );
-    if (CreateDetail().ContourPoints(data).size() < 3 )
+    delete ui.listWidget->item(ui.listWidget->currentRow());
+    ValidObjects(DetailIsValid());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogDetail::DetailIsValid() const
+{
+    if (ui.listWidget->count() < 3)
     {
-        ValidObjects(false);
+        return false;
     }
+    else
+    {
+        if (FirstPointEqualLast())
+        {
+            return false;
+        }
+        else
+        {
+            for (int i=0, sz = ui.listWidget->count()-1; i<sz; ++i)
+            {
+                const QString previousRow = ui.listWidget->item(i)->text();
+                const QString nextRow = ui.listWidget->item(i+1)->text();
+
+                if (QString::compare(previousRow, nextRow) == 0)
+                {
+                    return false;
+                }
+            }
+        }
+    }  
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogDetail::FirstPointEqualLast() const
+{
+    if (ui.listWidget->count() > 1)
+    {
+        const QString firstDetailPoint = ui.listWidget->item(0)->text();
+        const QString lastDetailPoint = ui.listWidget->item(ui.listWidget->count()-1)->text();
+
+        if (QString::compare(firstDetailPoint, lastDetailPoint) == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return false;
 }

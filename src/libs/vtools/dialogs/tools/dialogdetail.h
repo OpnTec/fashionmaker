@@ -74,6 +74,8 @@ private:
     /** @brief closed keep option about equdistant (closed or not) */
     bool             closed;
     bool             flagWidth;
+    bool             DetailIsValid() const;
+    bool             FirstPointEqualLast() const;
 
     void             NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
                              qreal mx = 0, qreal my = 0, bool reverse = false);
