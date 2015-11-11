@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <vst>
     <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
-    <version>0.4.1</version>
+    <version>0.4.2</version>
     <read-only>false</read-only>
     <notes>Типовые фигуры мужчин 1-й полнотной группы, обхват груди 100 см</notes>
     <unit>mm</unit>
@@ -9,45 +9,31 @@
     <size base="500"/>
     <height base="1760"/>
     <body-measurements>
-        <m name="across_back_b" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="across_chest_f" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="arm_armpit_to_wrist" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="arm_neck_back_to_wrist_bent" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
+        <m name="across_chest_f" base="370" description="" size_increase="14" height_increase="4" full_name=""/>
         <m name="arm_neck_side_to_finger_tip" base="970" description="" size_increase="2" height_increase="29" full_name=""/>
-        <m name="arm_neck_side_to_wrist" base="500" description="" size_increase="2" height_increase="15" full_name=""/>
+        <m name="arm_neck_side_to_outer_elbow" base="500" description="" size_increase="2" height_increase="15" full_name=""/>
+        <m name="arm_neck_side_to_wrist" base="768" description="" size_increase="2" height_increase="24" full_name=""/>
         <m name="arm_shoulder_tip_to_elbow" base="338" description="" size_increase="2" height_increase="12" full_name=""/>
         <m name="arm_shoulder_tip_to_wrist" base="594" description="" size_increase="3" height_increase="19" full_name=""/>
         <m name="arm_upper_circ" base="316" description="" size_increase="12" height_increase="0" full_name=""/>
         <m name="arm_wrist_circ" base="180" description="" size_increase="4" height_increase="0" full_name=""/>
         <m name="armfold_to_armfold_b" base="416" description="" size_increase="10" height_increase="2" full_name=""/>
-        <m name="armfold_to_armfold_f" base="370" description="" size_increase="14" height_increase="4" full_name=""/>
-        <m name="armpit_to_waist_side" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="armscye_arc" base="355" description="" size_increase="5" height_increase="5" full_name=""/>
-        <m name="armscye_circ" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="armscye_width" base="121" description="" size_increase="6" height_increase="0" full_name=""/>
-        <m name="body_armfold_circ" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="body_torso_circ" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="bust_arc_f" base="522" description="" size_increase="19" height_increase="1" full_name=""/>
         <m name="bust_circ" base="1044" description="" size_increase="38" height_increase="2" full_name=""/>
         <m name="bustpoint_to_bustpoint" base="224" description="" size_increase="6" height_increase="0" full_name=""/>
-        <m name="bustpoint_to_bustpoint_halter" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="bustpoint_to_neck_side" base="262" description="" size_increase="8" height_increase="3" full_name=""/>
         <m name="crotch_length" base="783" description="" size_increase="14" height_increase="15" full_name=""/>
         <m name="foot_instep_circ" base="350" description="" size_increase="2" height_increase="8" full_name=""/>
-        <m name="foot_length" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="foot_width" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="hand_circ" base="263" description="" size_increase="3" height_increase="3" full_name=""/>
         <m name="hand_length" base="128" description="" size_increase="2" height_increase="2" full_name=""/>
-        <m name="hand_palm_width" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="head_chin_to_neck_back" base="109" description="" size_increase="1" height_increase="0" full_name=""/>
         <m name="head_circ" base="576" description="" size_increase="4" height_increase="4" full_name=""/>
-        <m name="head_crown_to_neck_back" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="head_length" base="246" description="" size_increase="-2" height_increase="6" full_name=""/>
-        <m name="height_ankle" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="height_armpit" base="1328" description="" size_increase="0" height_increase="49" full_name=""/>
         <m name="height_bustpoint" base="1257" description="" size_increase="-1" height_increase="49" full_name=""/>
-        <m name="height_highhip" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="height_hip" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
+        <m name="height_gluteal_fold" base="811" description="" size_increase="-1" height_increase="36" full_name=""/>
         <m name="height_knee" base="503" description="" size_increase="0" height_increase="22" full_name=""/>
         <m name="height_neck_back" base="1522" description="" size_increase="2" height_increase="54" full_name=""/>
         <m name="height_neck_back_to_knee" base="1019" description="" size_increase="0" height_increase="34" full_name=""/>
@@ -57,19 +43,11 @@
         <m name="height_shoulder_tip" base="67" description="" size_increase="0" height_increase="2" full_name=""/>
         <m name="height_waist_front" base="1110" description="" size_increase="0" height_increase="43" full_name=""/>
         <m name="height_waist_side" base="1102" description="" size_increase="0" height_increase="43" full_name=""/>
-        <m name="height_waist_side_to_hip" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="height_waist_side_to_knee" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="highbust_arc_b" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="highbust_arc_f" base="517" description="" size_increase="18" height_increase="2" full_name=""/>
-        <m name="highbust_b_over_shoulder_to_highbust_f" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="highbust_circ" base="1034" description="" size_increase="36" height_increase="4" full_name=""/>
-        <m name="highbust_to_waist_f" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="highhip_arc_b" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="highhip_arc_f" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="highhip_circ" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="hip_arc_b" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="hip_arc_f" base="482" description="" size_increase="12" height_increase="6" full_name=""/>
         <m name="hip_circ" base="964" description="" size_increase="24" height_increase="12" full_name=""/>
+        <m name="hip_circ_with_abdomen" base="984" description="" size_increase="30" height_increase="10" full_name=""/>
         <m name="hip_with_abdomen_arc_f" base="492" description="" size_increase="15" height_increase="5" full_name=""/>
         <m name="indent_neck_back" base="84" description="" size_increase="0" height_increase="3" full_name=""/>
         <m name="leg_ankle_circ" base="234" description="" size_increase="4" height_increase="4" full_name=""/>
@@ -77,33 +55,25 @@
         <m name="leg_crotch_to_floor" base="826" description="" size_increase="-3" height_increase="37" full_name=""/>
         <m name="leg_knee_circ" base="386" description="" size_increase="8" height_increase="8" full_name=""/>
         <m name="leg_knee_circ_bent" base="399" description="" size_increase="9" height_increase="8" full_name=""/>
-        <m name="leg_thigh_mid_circ" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="leg_thigh_upper_circ" base="566" description="" size_increase="18" height_increase="6" full_name=""/>
         <m name="leg_waist_side_to_floor" base="1120" description="" size_increase="0" height_increase="44" full_name=""/>
         <m name="leg_waist_side_to_knee" base="603" description="" size_increase="-2" height_increase="24" full_name=""/>
         <m name="lowbust_arc_f" base="500" description="" size_increase="20" height_increase="0" full_name=""/>
         <m name="lowbust_circ" base="1000" description="" size_increase="40" height_increase="0" full_name=""/>
-        <m name="lowbust_to_waist_f" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="neck_arc_b" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="neck_arc_f" base="202" description="" size_increase="4" height_increase="2" full_name=""/>
         <m name="neck_back_to_highbust_b" base="208" description="" size_increase="3" height_increase="5" full_name=""/>
         <m name="neck_back_to_waist_b" base="438" description="" size_increase="2" height_increase="10" full_name=""/>
-        <m name="neck_back_to_waist_side" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="neck_circ" base="404" description="" size_increase="8" height_increase="2" full_name=""/>
-        <m name="neck_front_to_bust_f" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="neck_front_to_highbust_f" base="214" description="" size_increase="3" height_increase="3" full_name=""/>
         <m name="neck_front_to_waist_f" base="460" description="" size_increase="7" height_increase="9" full_name=""/>
-        <m name="neck_front_to_waist_side" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="neck_mid_circ" base="205" description="" size_increase="5" height_increase="0" full_name=""/>
-        <m name="neck_side_to_armfold_b" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="neck_side_to_armfold_f" base="324" description="" size_increase="7" height_increase="2" full_name=""/>
-        <m name="neck_side_to_waist_b" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
+        <m name="neck_side_to_waist_b" base="469" description="" size_increase="2" height_increase="10" full_name=""/>
         <m name="neck_side_to_waist_f" base="449" description="" size_increase="6" height_increase="8" full_name=""/>
         <m name="neck_width" base="130" description="" size_increase="2" height_increase="2" full_name=""/>
-        <m name="rise_length_side" base="260" description="" size_increase="1" height_increase="6" full_name=""/>
+        <m name="rise_length_diag" base="316" description="" size_increase="4" height_increase="7" full_name=""/>
+        <m name="rise_length_side_sitting" base="260" description="" size_increase="1" height_increase="6" full_name=""/>
         <m name="shoulder_length" base="160" description="" size_increase="1" height_increase="4" full_name=""/>
-        <m name="shoulder_slope_neck_side_angle" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
-        <m name="shoulder_slope_neck_side_length" base="0" description="" size_increase="0" height_increase="0" full_name=""/>
         <m name="shoulder_tip_to_shoulder_tip_b" base="535" description="" size_increase="7" height_increase="7" full_name=""/>
         <m name="shoulder_tip_to_shoulder_tip_f" base="412" description="" size_increase="5" height_increase="8" full_name=""/>
         <m name="shoulder_tip_to_waist_back" base="495" description="" size_increase="5" height_increase="7" full_name=""/>
