@@ -958,6 +958,7 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_1()
     QMap<QString, QString> names;
 
     names.insert(QStringLiteral("rise_length_side"), QStringLiteral("rise_length_side_sitting"));
+    names.insert(QStringLiteral("size"), QStringLiteral("bust_arc_f"));
 
     return names;
 }
