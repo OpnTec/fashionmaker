@@ -273,7 +273,7 @@ unix{
         libraries.files += $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
 
         tape.path = $$MACOS_DIR
-        tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape
+        tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape.app
 
         # Utility pdftops need for saving a layout image to PS and EPS formates.
         xpdf.path = $$MACOS_DIR

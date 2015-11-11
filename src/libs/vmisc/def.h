@@ -32,6 +32,7 @@
 #include <csignal>
 #include <QtGlobal>
 #include <QStringList>
+#include <QSharedPointer>
 #ifdef Q_OS_WIN
     #include <windows.h>
 #endif /* Q_OS_WIN */
