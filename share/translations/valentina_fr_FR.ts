@@ -828,7 +828,7 @@
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Taille et stature</translation>
+        <translation type="vanished">Taille et stature</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -864,11 +864,11 @@
     </message>
     <message>
         <source>Height</source>
-        <translation>Hauteur</translation>
+        <translation type="vanished">Hauteur</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Taille</translation>
+        <translation type="vanished">Taille</translation>
     </message>
     <message>
         <source>Line length</source>
@@ -1129,7 +1129,7 @@
     </message>
     <message>
         <source>Correction the dart %1_%2_%3</source>
-        <translation type="unfinished"></translation>
+        <translation>Corriger la pince %1_%2_%3</translation>
     </message>
 </context>
 <context>
@@ -1294,7 +1294,7 @@
     <name>DialogLayoutSettings</name>
     <message>
         <source>Paper size</source>
-        <translation>Format du papier</translation>
+        <translation type="vanished">Format du papier</translation>
     </message>
     <message>
         <source>Templates:</source>
@@ -1416,6 +1416,48 @@
 </source>
         <translation>
 </translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fields</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore fileds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong fields.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fields go beyond printing. 
+
+Apply settings anyway?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1647,7 +1689,7 @@
     <message>
         <source>Historical &amp; Specialty</source>
         <comment>Measurement section</comment>
-        <translation type="unfinished"></translation>
+        <translation>Historiques &amp; Spécialisés</translation>
     </message>
     <message>
         <source>Patternmaking measurements</source>
@@ -1970,7 +2012,7 @@
     <name>DialogPointFromArcAndTangent</name>
     <message>
         <source>Point from arc and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Point à partir d&apos;un arc et d&apos;une tangente</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2001,7 +2043,7 @@
     <name>DialogPointFromCircleAndTangent</name>
     <message>
         <source>Point from circle and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Point à partir d&apos;un cercle et d&apos;une tangente</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -2033,7 +2075,7 @@
     </message>
     <message>
         <source>Select a circle center</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir le centre du cercle</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -2240,7 +2282,7 @@
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>EtiquetteTexte</translation>
     </message>
 </context>
 <context>
@@ -2732,27 +2774,27 @@
     </message>
     <message>
         <source>Valentina&apos;s measurements editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;éditeur de mesures Valentina</translation>
     </message>
     <message>
         <source>The measurement file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier de mesures.</translation>
     </message>
     <message>
         <source>The base height</source>
-        <translation type="unfinished"></translation>
+        <translation>La hauteur de base</translation>
     </message>
     <message>
         <source>The base size</source>
-        <translation type="unfinished"></translation>
+        <translation>La taille de base</translation>
     </message>
     <message>
         <source>Set pattern file unit: cm, mm, inch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir l&apos;unité du patron: cm, mm, pouces.</translation>
     </message>
     <message>
         <source>The pattern unit</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;unité du patron</translation>
     </message>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing a window.</source>
@@ -2768,7 +2810,7 @@
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le mode test ne supporte pas l&apos;ouverture de plusieurs fichiers.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -3374,11 +3416,11 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Point from circle and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Point à partir d&apos;un cercle et d&apos;une tangente</translation>
     </message>
     <message>
         <source>Point from arc and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Point à partir d&apos;un arc et d&apos;une tangente</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -3446,7 +3488,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Select point on tangent </source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir un point sur la tangente</translation>
     </message>
     <message>
         <source>Select point of the center of the arc</source>
@@ -3611,7 +3653,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Export error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur d&apos;exportation.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -3655,6 +3697,10 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>True darts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3722,7 +3768,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Export error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur d&apos;exportation.</translation>
     </message>
 </context>
 <context>
@@ -3846,7 +3892,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Displays this help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer cette aide.</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
@@ -4342,11 +4388,11 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Add known</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter connue</translation>
     </message>
     <message>
         <source>Add custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter personnalisé</translation>
     </message>
     <message>
         <source>Read only</source>
@@ -4536,7 +4582,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom complet</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
@@ -4584,12 +4630,12 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Delete measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer la mesure</translation>
     </message>
     <message>
         <source>unknown</source>
         <comment>gender</comment>
-        <translation type="unfinished"></translation>
+        <translation>inconnu</translation>
     </message>
     <message>
         <source>male</source>
@@ -4603,7 +4649,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Gender:</source>
-        <translation type="unfinished"></translation>
+        <translation>Genre: </translation>
     </message>
     <message>
         <source>PM system:</source>
@@ -4611,15 +4657,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Create from existing ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer à partir de ...</translation>
     </message>
     <message>
         <source>Create from existing file</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer à partir d&apos;un fichier existant</translation>
     </message>
     <message>
         <source>Select file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner un fichier</translation>
     </message>
     <message>
         <source>Export standard measurements not supported.</source>
@@ -4627,15 +4673,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Measurement diagram</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagramme des mesures</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Mesure inconnue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Mesure inconnue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -4958,7 +5004,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Grouping type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de groupes</translation>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
@@ -5010,7 +5056,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The destination folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Le dossier de destination</translation>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
@@ -5055,6 +5101,50 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Pattern file.</source>
         <translation>Fichier Patron.</translation>
+    </message>
+    <message>
+        <source>Ignore margins printing (export mode). Set all margins to 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift length must be used together with shift units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gap width must be used together with shift units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5171,7 +5261,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VMeasurements</name>
     <message>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de trouver la mesure &apos;%1&apos;</translation>
     </message>
     <message>
         <source>The measurement name is empty!</source>
@@ -6406,7 +6496,7 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Valentina team</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>La team Valentina</translation>
     </message>
     <message>
         <source>Valentina&apos;s internal standard</source>
@@ -6441,17 +6531,17 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>RayonArc_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle1Arc_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle2Arc_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
@@ -6682,35 +6772,35 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>WARNING:</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTISSEMENT:</translation>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>CRITIQUE:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>FATAL:</translation>
     </message>
     <message>
         <source>INFO:</source>
-        <translation type="unfinished"></translation>
+        <translation>INFO:</translation>
     </message>
     <message>
         <source>Warning.</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertissement.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur critique.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur fatale.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Information.</translation>
     </message>
 </context>
 <context>
@@ -6721,35 +6811,35 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>WARNING:</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTISSEMENT:</translation>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>CRITIQUE:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>FATAL:</translation>
     </message>
     <message>
         <source>INFO:</source>
-        <translation type="unfinished"></translation>
+        <translation>INFO:</translation>
     </message>
     <message>
         <source>Warning.</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertissement.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur critique.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur fatale.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Information.</translation>
     </message>
 </context>
 </TS>

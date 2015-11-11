@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>Cannot open your default browser</source>
-        <translation>Не могу открыть браузер по умолчанию</translation>
+        <translation>Невозможно открыть браузер по умолчанию</translation>
     </message>
     <message>
         <source>Build revision:</source>
@@ -828,7 +828,7 @@
     </message>
     <message>
         <source>Size and height</source>
-        <translation>Размер и рост</translation>
+        <translation type="vanished">Размер и рост</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -864,11 +864,11 @@
     </message>
     <message>
         <source>Height</source>
-        <translation>Рост</translation>
+        <translation type="vanished">Рост</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Размер</translation>
+        <translation type="vanished">Размер</translation>
     </message>
     <message>
         <source>Line length</source>
@@ -1029,7 +1029,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Не могу создать запись.</translation>
+        <translation>Невозможно создать запись.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -1294,7 +1294,7 @@
     <name>DialogLayoutSettings</name>
     <message>
         <source>Paper size</source>
-        <translation>Размер листа:</translation>
+        <translation type="vanished">Размер листа:</translation>
     </message>
     <message>
         <source>Templates:</source>
@@ -1419,6 +1419,48 @@
 	1 — две группы: большая, малая
 	2 — по уменьшению площади
 </translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fields</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore fileds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong fields.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fields go beyond printing. 
+
+Apply settings anyway?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1914,7 +1956,7 @@
     </message>
     <message>
         <source>Cannot undo change</source>
-        <translation>Не могу отменить изменения</translation>
+        <translation>Невозможно отменить изменение</translation>
     </message>
     <message>
         <source>&lt;no value&gt;</source>
@@ -2767,7 +2809,7 @@
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
-        <translation>Не могу начать слушать входящие соединения с именем &apos;%1&apos;</translation>
+        <translation>Невозможно начать слушать входящие соединения с именем &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
@@ -3182,7 +3224,7 @@
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation>Ошибка, не могу конвертовать значение.</translation>
+        <translation>Ошибка, невозможно преобразовать значение.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
@@ -3645,18 +3687,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unload measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить мерки</translation>
     </message>
     <message>
         <source>Unload measurements if they was not used in a pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить мерки, если они не используются в файле выкройки.</translation>
     </message>
     <message>
         <source>Measurements unloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Мерки сброшены</translation>
     </message>
     <message>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
+        <translation>Невозможно сбросить мерки. Некоторые их них используются в выкройке.</translation>
+    </message>
+    <message>
+        <source>True darts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4633,11 +4679,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Неизвестная мерка&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Неизвестная мерка&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -4760,7 +4806,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation>Слишком много тегов &lt;%1&gt; в файле.</translation>
+        <translation>В файле слишком много меток &lt;%1&gt;.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
@@ -4853,7 +4899,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
-        <translation>Ошибка не могу конвертировать значение. Програма будет закрыта.</translation>
+        <translation>Ошибка, невозможно преобразовать значение. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
@@ -4996,7 +5042,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Test option can be used with single input file only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметр проверки может быть использован только для одного входного файла.</translation>
     </message>
     <message>
         <source>The base filename of exported layout files. Use it to enable console export mode.</source>
@@ -5044,11 +5090,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверная градация значения размера.</translation>
     </message>
     <message>
         <source>Invalid gradation height value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверная градация значения высоты.</translation>
     </message>
     <message>
         <source>Pattern making program.</source>
@@ -5058,27 +5104,71 @@ Do you want to save your changes?</source>
         <source>Pattern file.</source>
         <translation>Файл лекала.</translation>
     </message>
+    <message>
+        <source>Ignore margins printing (export mode). Set all margins to 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift length must be used together with shift units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gap width must be used together with shift units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VContainer</name>
     <message>
         <source>Can&apos;t find object</source>
-        <translation>Не могу найти объект</translation>
+        <translation>Невозможно найти объект</translation>
     </message>
     <message>
         <source>Can&apos;t cast object</source>
-        <translation>Не могу привести объект</translation>
+        <translation>Невозможно привести объект</translation>
     </message>
     <message>
         <source>Can&apos;t find object. Type mismatch.</source>
-        <translation>Не могу найти объект. Несоответствие типа.</translation>
+        <translation>Невозможно найти объект. Несоответствие типа.</translation>
     </message>
 </context>
 <context>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation>Не могу конвертировать toUInt параметр</translation>
+        <translation>Невозможно преобразовать параметр toUInt</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
@@ -5090,18 +5180,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation>Не могу конвертировать toDouble параметр</translation>
+        <translation>Невозможно преобразовать параметр toDouble</translation>
     </message>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation>Не могу открыть файл %1:
+        <translation>Невозможно открыть файл %1:
 %2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation>Не могу окрыть файл схемы %1:\n%2.</translation>
+        <translation>Невозможно открыть файл схемы %1:
+%2.</translation>
     </message>
     <message>
         <source>Could not load schema file.</source>
@@ -5214,7 +5305,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation>Ошибка, не могу конвертовать значение.</translation>
+        <translation>Ошибка, невозможно преобразовать значение.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
@@ -5354,11 +5445,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное название метки «%1».</translation>
     </message>
     <message>
         <source>Unknown point type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный тип точки «%1».</translation>
     </message>
     <message>
         <source>Unknown spline type &apos;%1&apos;.</source>
@@ -5366,11 +5457,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown arc type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный тип дуги «%1».</translation>
     </message>
     <message>
         <source>Unknown tools type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный тип инструмента «%1».</translation>
     </message>
 </context>
 <context>
@@ -5396,7 +5487,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
-        <translation>Не могу разреть сплайн из одной точки</translation>
+        <translation>Невозможно разрезать сплайн из одной точки</translation>
     </message>
 </context>
 <context>
