@@ -330,7 +330,7 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("N01") << crotchLength_M << "crotch_length";
     QTest::newRow("N02") << crotchLengthB_M << "crotch_length_b";
     QTest::newRow("N03") << crotchLengthF_M << "crotch_length_f";
-    QTest::newRow("N04") << riseLengthSide_M << "rise_length_side";
+    QTest::newRow("N04") << riseLengthSideSitting_M << "rise_length_side_sitting";
     QTest::newRow("N05") << riseLengthDiag_M << "rise_length_diag";
     QTest::newRow("N06") << riseLengthB_M << "rise_length_b";
     QTest::newRow("N07") << riseLengthF_M << "rise_length_f";

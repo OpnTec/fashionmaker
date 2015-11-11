@@ -208,7 +208,7 @@ QMultiMap<QString, QString> VAbstractMConverter::OldNamesToNewNames_InV0_3_0()
     names.insert(name, QStringLiteral("arc_through_groin_area"));
     names.insert(name, QStringLiteral("crotch_length"));
 
-    names.insert(QStringLiteral("rise_length_side"), QStringLiteral("waist_to_plane_seat"));
+    names.insert(QStringLiteral("rise_length_side_sitting"), QStringLiteral("waist_to_plane_seat"));
     names.insert(QStringLiteral("rise_length_diag"), QStringLiteral("rise_height"));
 
     name = QStringLiteral("hand_length");

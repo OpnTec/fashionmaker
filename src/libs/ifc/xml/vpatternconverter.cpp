@@ -901,7 +901,7 @@ QMap<QString, QString> VPatternConverter::OldNamesToNewNames_InV0_2_0()
     names.insert(QStringLiteral("ankle_girth"), QStringLiteral("leg_ankle_circ"));
     names.insert(QStringLiteral("girth_knee_flexed_feet"), QStringLiteral("leg_knee_circ_bent"));
     names.insert(QStringLiteral("arc_through_groin_area"), QStringLiteral("crotch_length"));
-    names.insert(QStringLiteral("waist_to_plane_seat"), QStringLiteral("rise_length_side"));
+    names.insert(QStringLiteral("waist_to_plane_seat"), QStringLiteral("rise_length_side_sitting"));
     names.insert(QStringLiteral("rise_height"), QStringLiteral("rise_length_diag"));
     names.insert(QStringLiteral("hand_vertical_diameter"), QStringLiteral("hand_length"));
     names.insert(QStringLiteral("hand_width"), QStringLiteral("hand_palm_width"));

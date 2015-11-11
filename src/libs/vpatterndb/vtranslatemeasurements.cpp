@@ -1821,12 +1821,15 @@ void VTranslateMeasurements::InitGroupN()
                   "Full measurement description.");
     InitMeasurement(crotchLengthF_M, m, g, d, "N03", "(crotch_length - crotch_length_b)");
     //=================================================================================================================
-    m = translate("VTranslateMeasurements", "rise_length_side",
+    m = translate("VTranslateMeasurements", "rise_length_side_sitting",
                   "Name in a formula. Don't use math symbols and space in name!!!!");
-    g = translate("VTranslateMeasurements", "Rise length, side", "Full measurement name.");
-    d = translate("VTranslateMeasurements", "From Waist Side down to surface, while seated on hard surface.",
+    g = translate("VTranslateMeasurements",
+                  "Sit on hard surface. Rise length, side, taken from waist over hip curve down to surface",
+                  "Full measurement name.");
+    d = translate("VTranslateMeasurements",
+                  "From Waist Side around hp curve down to surface, while seated on hard surface.",
                   "Full measurement description.");
-    InitMeasurement(riseLengthSide_M, m, g, d, "N04");
+    InitMeasurement(riseLengthSideSitting_M, m, g, d, "N04");
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "rise_length_diag",
                   "Name in a formula. Don't use math symbols and space in name!!!!");

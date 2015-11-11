@@ -257,13 +257,13 @@ const QString legCrotchToAnkle_M    = QStringLiteral("leg_crotch_to_ankle");    
 const QString legWaistSideToAnkle_M = QStringLiteral("leg_waist_side_to_ankle"); // M13
 const QString legWaistSideToKnee_M  = QStringLiteral("leg_waist_side_to_knee");  // M14
 // N
-const QString crotchLength_M   = QStringLiteral("crotch_length");    // N01
-const QString crotchLengthB_M  = QStringLiteral("crotch_length_b");  // N02
-const QString crotchLengthF_M  = QStringLiteral("crotch_length_f");  // N03
-const QString riseLengthSide_M = QStringLiteral("rise_length_side"); // N04
-const QString riseLengthDiag_M = QStringLiteral("rise_length_diag"); // N05
-const QString riseLengthB_M    = QStringLiteral("rise_length_b");    // N06
-const QString riseLengthF_M    = QStringLiteral("rise_length_f");    // N07
+const QString crotchLength_M          = QStringLiteral("crotch_length");            // N01
+const QString crotchLengthB_M         = QStringLiteral("crotch_length_b");          // N02
+const QString crotchLengthF_M         = QStringLiteral("crotch_length_f");          // N03
+const QString riseLengthSideSitting_M = QStringLiteral("rise_length_side_sitting"); // N04
+const QString riseLengthDiag_M        = QStringLiteral("rise_length_diag");         // N05
+const QString riseLengthB_M           = QStringLiteral("rise_length_b");            // N06
+const QString riseLengthF_M           = QStringLiteral("rise_length_f");            // N07
 // O
 const QString neckBackToWaistFront_M            = QStringLiteral("neck_back_to_waist_front");	           // O01
 const QString waistToWaistHalter_M              = QStringLiteral("waist_to_waist_halter");	               // O02
@@ -875,13 +875,13 @@ QStringList ListGroupM()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ListGroupN()
 {
-    const QStringList list = QStringList() << crotchLength_M   // N01
-                                           << crotchLengthB_M  // N02
-                                           << crotchLengthF_M  // N03
-                                           << riseLengthSide_M // N04
-                                           << riseLengthDiag_M // N05
-                                           << riseLengthB_M    // N06
-                                           << riseLengthF_M;   // N07
+    const QStringList list = QStringList() << crotchLength_M          // N01
+                                           << crotchLengthB_M         // N02
+                                           << crotchLengthF_M         // N03
+                                           << riseLengthSideSitting_M // N04
+                                           << riseLengthDiag_M        // N05
+                                           << riseLengthB_M           // N06
+                                           << riseLengthF_M;          // N07
 
     return list;
 }

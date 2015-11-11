@@ -413,13 +413,13 @@ extern const QString legCrotchToAnkle_M;    // M12
 extern const QString legWaistSideToAnkle_M; // M13
 extern const QString legWaistSideToKnee_M;  // M14
 // N
-extern const QString crotchLength_M;   // N01
-extern const QString crotchLengthB_M;  // N02
-extern const QString crotchLengthF_M;  // N03
-extern const QString riseLengthSide_M; // N04
-extern const QString riseLengthDiag_M; // N05
-extern const QString riseLengthB_M;    // N06
-extern const QString riseLengthF_M;    // N07
+extern const QString crotchLength_M;          // N01
+extern const QString crotchLengthB_M;         // N02
+extern const QString crotchLengthF_M;         // N03
+extern const QString riseLengthSideSitting_M; // N04
+extern const QString riseLengthDiag_M;        // N05
+extern const QString riseLengthB_M;           // N06
+extern const QString riseLengthF_M;           // N07
 // O
 extern const QString neckBackToWaistFront_M;	        // O01
 extern const QString waistToWaistHalter_M;	            // O02
