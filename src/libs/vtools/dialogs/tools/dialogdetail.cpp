@@ -179,7 +179,7 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
     }
     else
     {
-        QString previousItemName = ui.listWidget->item(ui.listWidget->count()-1)->text();
+        const QString previousItemName = ui.listWidget->item(ui.listWidget->count()-1)->text();
         if(QString::compare(previousItemName, name) != 0)
         {
             canAddNewPoint = true;
@@ -416,7 +416,7 @@ void DialogDetail::DeleteItem()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogDetail::DetailIsValid()
+bool DialogDetail::DetailIsValid() const
 {
     if (ui.listWidget->count() < 3)
     {
@@ -430,10 +430,10 @@ bool DialogDetail::DetailIsValid()
         }
         else
         {
-            for (int i=0; i<ui.listWidget->count()-1; i++)
+            for (int i=0, sz = ui.listWidget->count()-1; i<sz; ++i)
             {
-                QString previousRow = ui.listWidget->item(i)->text();
-                QString nextRow = ui.listWidget->item(i+1)->text();
+                const QString previousRow = ui.listWidget->item(i)->text();
+                const QString nextRow = ui.listWidget->item(i+1)->text();
 
                 if (QString::compare(previousRow, nextRow) == 0)
                 {
@@ -446,17 +446,21 @@ bool DialogDetail::DetailIsValid()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogDetail::FirstPointEqualLast()
+bool DialogDetail::FirstPointEqualLast() const
 {
-    const QString firstDetailPoint = ui.listWidget->item(0)->text();
-    const QString lastDetailPoint = ui.listWidget->item(ui.listWidget->count()-1)->text();
+    if (ui.listWidget->count() > 1)
+    {
+        const QString firstDetailPoint = ui.listWidget->item(0)->text();
+        const QString lastDetailPoint = ui.listWidget->item(ui.listWidget->count()-1)->text();
 
-    if (QString::compare(firstDetailPoint, lastDetailPoint) == 0)
-    {
-        return true;
+        if (QString::compare(firstDetailPoint, lastDetailPoint) == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
