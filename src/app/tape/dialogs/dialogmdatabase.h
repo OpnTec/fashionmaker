@@ -59,6 +59,7 @@ private slots:
     void UpdateChecks(QTreeWidgetItem *item, int column);
     void ShowDescription(QTreeWidgetItem *item, int column);
     void TreeMenu(const QPoint &pos);
+    void Recheck();
 
 private:
     Q_DISABLE_COPY(DialogMDataBase)
@@ -85,7 +86,7 @@ private:
     QTreeWidgetItem *groupQ;
 
     void InitDataBase(const QStringList &list = QStringList());
-    void InitGroup(QTreeWidgetItem *group, const QString &groupName, const QStringList &mList,
+    void InitGroup(QTreeWidgetItem **group, const QString &groupName, const QStringList &mList,
                    const QStringList &list = QStringList());
 
     QTreeWidgetItem *AddGroup(const QString &text);
@@ -96,6 +97,9 @@ private:
 
     void RetranslateGroup(QTreeWidgetItem *group, const QString &groupText, const QStringList &list);
     void RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name);
+
+    void ChangeCheckState(QTreeWidgetItem *group, Qt::CheckState check);
+    Qt::CheckState GlobalCheckState() const;
 };
 
 #endif // DIALOGMDATABASE_H
