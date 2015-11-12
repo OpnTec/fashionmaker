@@ -216,9 +216,12 @@ DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
 TAPE_TEST_FILES += \
     tst_tape/keiko.vit \
     tst_tape/empty.vit \
-    tst_tape/all_measurements.vit \
-    tst_tape/all_measurements.vst \
-    tst_tape/GOST_man_ru.vst \
+    tst_tape/all_measurements_v0.3.0.vit \
+    tst_tape/all_measurements_v0.4.0.vst \
+    tst_tape/GOST_man_ru_v0.3.0.vst \
+    tst_tape/all_measurements_v0.3.3.vit \
+    tst_tape/all_measurements_v0.4.2.vst \
+    tst_tape/GOST_man_ru_v0.4.2.vst \
     tst_tape/broken1.vit \
     tst_tape/broken2.vit \
     tst_tape/broken3.vit \

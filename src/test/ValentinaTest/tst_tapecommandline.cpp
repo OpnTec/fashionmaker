@@ -75,15 +75,27 @@ void TST_TapeCommandLine::OpenMeasurements_data() const
                                                                                    << true
                                                                                    << V_EX_OK;
 
-    QTest::newRow("Open a individual measurement file with all know measurements") << "all_measurements.vit"
+    QTest::newRow("Open the VIT file with all know measurements (v0.3.0)")         << "all_measurements_v0.3.0.vit"
                                                                                    << true
                                                                                    << V_EX_OK;
 
-    QTest::newRow("Open a standard measurement file with all know measurements")   << "all_measurements.vst"
+    QTest::newRow("Open the VST file with all know measurements (v0.4.0)")         << "all_measurements_v0.4.0.vst"
                                                                                    << true
                                                                                    << V_EX_OK;
 
-    QTest::newRow("Open a standard measurement file for man ru GOST.")             << "GOST_man_ru.vst"
+    QTest::newRow("Open the VST file for man ru GOST (v0.3.0).")                   << "GOST_man_ru_v0.3.0.vst"
+                                                                                   << true
+                                                                                   << V_EX_OK;
+
+    QTest::newRow("Open the VIT file with all know measurements (v0.3.3)")         << "all_measurements_v0.3.3.vit"
+                                                                                   << true
+                                                                                   << V_EX_OK;
+
+    QTest::newRow("Open the VST file with all know measurements (v0.4.2)")         << "all_measurements_v0.4.2.vst"
+                                                                                   << true
+                                                                                   << V_EX_OK;
+
+    QTest::newRow("Open the VST file for man ru GOST (v0.4.2).")                   << "GOST_man_ru_v0.4.2.vst"
                                                                                    << true
                                                                                    << V_EX_OK;
 
