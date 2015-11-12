@@ -225,12 +225,15 @@ TAPE_TEST_FILES += \
     tst_tape/broken1.vit \
     tst_tape/broken2.vit \
     tst_tape/broken3.vit \
-    tst_tape/broken4.vit
+    tst_tape/broken4.vit \
+    tst_tape/text.vit \
+    tst_tape/text.vst
 
 VALENTINA_TEST_FILES += \
     tst_valentina/empty.val \
     tst_valentina/issue_372.val \
-    tst_valentina/wrong_obj_type.val
+    tst_valentina/wrong_obj_type.val \
+    tst_valentina/text.val
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \

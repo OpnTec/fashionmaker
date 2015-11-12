@@ -75,6 +75,10 @@ void TST_ValentinaCommandLine::OpenPatterns_data() const
     QTest::newRow("File with invalid object type")                                 << "wrong_obj_type.val"
                                                                                    << false
                                                                                    << V_EX_NOINPUT;
+
+    QTest::newRow("Empty text VAL file")                                           << "txt.val"
+                                                                                   << false
+                                                                                   << V_EX_NOINPUT;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

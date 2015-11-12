@@ -114,6 +114,14 @@ void TST_TapeCommandLine::OpenMeasurements_data() const
     QTest::newRow("Broken file. Invalid measurement name.")                        << "broken4.vit"
                                                                                    << false
                                                                                    << V_EX_NOINPUT;
+
+    QTest::newRow("Empty text VIT file.")                                          << "text.vit"
+                                                                                   << false
+                                                                                   << V_EX_NOINPUT;
+
+    QTest::newRow("Empty text VST file.")                                          << "text.vst"
+                                                                                   << false
+                                                                                   << V_EX_NOINPUT;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
