@@ -78,6 +78,8 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NamePointChanged);
 
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
+    connect(ui.toolButtonUp, &QToolButton::clicked, this, &DialogDetail::ScrollUp);
+    connect(ui.toolButtonDown, &QToolButton::clicked, this, &DialogDetail::ScrollDown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,6 +172,8 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
             qDebug()<<"Got wrong tools. Ignore.";
             return;
     }
+    ui.toolButtonUp->setEnabled(ui.checkBoxSeams->isChecked() && not ui.checkBoxClosed->isChecked());
+    ui.toolButtonDown->setEnabled(ui.checkBoxSeams->isChecked() && not ui.checkBoxClosed->isChecked());
 
     bool canAddNewPoint = false;
 
@@ -338,6 +342,9 @@ void DialogDetail::ClickedSeams(bool checked)
     ui.checkBoxClosed->setEnabled(checked);
     ui.doubleSpinBoxSeams->setEnabled(checked);
 
+    ui.toolButtonUp->setEnabled(checked && not ui.checkBoxClosed->isChecked());
+    ui.toolButtonDown->setEnabled(checked && not ui.checkBoxClosed->isChecked());
+
     if (checked && ui.doubleSpinBoxSeams->value() <= 0)
     {
         flagWidth = false;
@@ -359,6 +366,8 @@ void DialogDetail::ClickedSeams(bool checked)
 void DialogDetail::ClickedClosed(bool checked)
 {
     closed = checked;
+    ui.toolButtonUp->setEnabled(not checked);
+    ui.toolButtonDown->setEnabled(not checked);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -413,6 +422,26 @@ void DialogDetail::DeleteItem()
 
     delete ui.listWidget->item(ui.listWidget->currentRow());
     ValidObjects(DetailIsValid());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::ScrollUp()
+{
+    if (ui.listWidget->count() > 1)
+    {
+        QListWidgetItem *item = ui.listWidget->takeItem(ui.listWidget->count()-1);
+        ui.listWidget->insertItem(0, item);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::ScrollDown()
+{
+    if (ui.listWidget->count() > 1)
+    {
+        QListWidgetItem *item = ui.listWidget->takeItem(0);
+        ui.listWidget->addItem(item);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
