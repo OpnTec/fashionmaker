@@ -54,6 +54,8 @@ public slots:
     void             ClickedReverse(bool checked);
     void             ObjectChanged(int row);
     void             DeleteItem();
+    void             ScrollUp();
+    void             ScrollDown();
 protected:
     /**
      * @brief SaveData Put dialog data in local variables

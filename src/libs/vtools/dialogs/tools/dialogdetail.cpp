@@ -78,6 +78,8 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NamePointChanged);
 
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
+    connect(ui.toolButtonUp, &QToolButton::clicked, this, &DialogDetail::ScrollUp);
+    connect(ui.toolButtonDown, &QToolButton::clicked, this, &DialogDetail::ScrollDown);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -176,6 +178,8 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
     if(ui.listWidget->count() == 0)
     {
         canAddNewPoint = true;
+        ui.toolButtonUp->setEnabled(false);
+        ui.toolButtonDown->setEnabled(false);
     }
     else
     {
@@ -184,6 +188,8 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
         {
             canAddNewPoint = true;
         }
+        ui.toolButtonUp->setEnabled(true);
+        ui.toolButtonDown->setEnabled(true);
     }
 
     if(canAddNewPoint)
@@ -413,6 +419,37 @@ void DialogDetail::DeleteItem()
 
     delete ui.listWidget->item(ui.listWidget->currentRow());
     ValidObjects(DetailIsValid());
+
+    if(ui.listWidget->count() < 2)
+    {
+        ui.toolButtonUp->setEnabled(false);
+        ui.toolButtonDown->setEnabled(false);
+    }
+    else
+    {
+        ui.toolButtonUp->setEnabled(true);
+        ui.toolButtonDown->setEnabled(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::ScrollUp()
+{
+    if (ui.listWidget->count() > 1)
+    {
+        QListWidgetItem *item = ui.listWidget->takeItem(0);
+        ui.listWidget->addItem(item);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::ScrollDown()
+{
+    if (ui.listWidget->count() > 1)
+    {
+        QListWidgetItem *item = ui.listWidget->takeItem(ui.listWidget->count()-1);
+        ui.listWidget->insertItem(0, item);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
