@@ -178,6 +178,8 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
     if(ui.listWidget->count() == 0)
     {
         canAddNewPoint = true;
+        ui.toolButtonUp->setEnabled(false);
+        ui.toolButtonDown->setEnabled(false);
     }
     else
     {
@@ -186,6 +188,8 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
         {
             canAddNewPoint = true;
         }
+        ui.toolButtonUp->setEnabled(true);
+        ui.toolButtonDown->setEnabled(true);
     }
 
     if(canAddNewPoint)
@@ -340,9 +344,6 @@ void DialogDetail::ClickedSeams(bool checked)
     ui.checkBoxClosed->setEnabled(checked);
     ui.doubleSpinBoxSeams->setEnabled(checked);
 
-    ui.toolButtonUp->setEnabled(checked);
-    ui.toolButtonDown->setEnabled(checked);
-
     if (checked && ui.doubleSpinBoxSeams->value() <= 0)
     {
         flagWidth = false;
@@ -418,6 +419,17 @@ void DialogDetail::DeleteItem()
 
     delete ui.listWidget->item(ui.listWidget->currentRow());
     ValidObjects(DetailIsValid());
+
+    if(ui.listWidget->count() < 2)
+    {
+        ui.toolButtonUp->setEnabled(false);
+        ui.toolButtonDown->setEnabled(false);
+    }
+    else
+    {
+        ui.toolButtonUp->setEnabled(true);
+        ui.toolButtonDown->setEnabled(true);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
