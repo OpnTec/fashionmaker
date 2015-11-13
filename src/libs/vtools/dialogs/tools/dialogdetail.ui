@@ -355,7 +355,7 @@
             <item>
              <widget class="QToolButton" name="toolButtonDown">
               <property name="toolTip">
-               <string>Scroll down</string>
+               <string>Scroll down the list</string>
               </property>
               <property name="text">
                <string>...</string>
@@ -368,7 +368,7 @@
             <item>
              <widget class="QToolButton" name="toolButtonUp">
               <property name="toolTip">
-               <string>Scroll up</string>
+               <string>Scroll up the list</string>
               </property>
               <property name="text">
                <string>...</string>

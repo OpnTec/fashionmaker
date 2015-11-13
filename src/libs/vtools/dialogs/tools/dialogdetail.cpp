@@ -429,8 +429,8 @@ void DialogDetail::ScrollUp()
 {
     if (ui.listWidget->count() > 1)
     {
-        QListWidgetItem *item = ui.listWidget->takeItem(ui.listWidget->count()-1);
-        ui.listWidget->insertItem(0, item);
+        QListWidgetItem *item = ui.listWidget->takeItem(0);
+        ui.listWidget->addItem(item);
     }
 }
 
@@ -439,8 +439,8 @@ void DialogDetail::ScrollDown()
 {
     if (ui.listWidget->count() > 1)
     {
-        QListWidgetItem *item = ui.listWidget->takeItem(0);
-        ui.listWidget->addItem(item);
+        QListWidgetItem *item = ui.listWidget->takeItem(ui.listWidget->count()-1);
+        ui.listWidget->insertItem(0, item);
     }
 }
 
