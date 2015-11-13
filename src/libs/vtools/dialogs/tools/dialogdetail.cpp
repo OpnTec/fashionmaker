@@ -172,8 +172,6 @@ void DialogDetail::NewItem(quint32 id, const Tool &typeTool, const NodeDetail &t
             qDebug()<<"Got wrong tools. Ignore.";
             return;
     }
-    ui.toolButtonUp->setEnabled(ui.checkBoxSeams->isChecked() && not ui.checkBoxClosed->isChecked());
-    ui.toolButtonDown->setEnabled(ui.checkBoxSeams->isChecked() && not ui.checkBoxClosed->isChecked());
 
     bool canAddNewPoint = false;
 
@@ -342,8 +340,8 @@ void DialogDetail::ClickedSeams(bool checked)
     ui.checkBoxClosed->setEnabled(checked);
     ui.doubleSpinBoxSeams->setEnabled(checked);
 
-    ui.toolButtonUp->setEnabled(checked && not ui.checkBoxClosed->isChecked());
-    ui.toolButtonDown->setEnabled(checked && not ui.checkBoxClosed->isChecked());
+    ui.toolButtonUp->setEnabled(checked);
+    ui.toolButtonDown->setEnabled(checked);
 
     if (checked && ui.doubleSpinBoxSeams->value() <= 0)
     {
@@ -366,8 +364,6 @@ void DialogDetail::ClickedSeams(bool checked)
 void DialogDetail::ClickedClosed(bool checked)
 {
     closed = checked;
-    ui.toolButtonUp->setEnabled(not checked);
-    ui.toolButtonDown->setEnabled(not checked);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
