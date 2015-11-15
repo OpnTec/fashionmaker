@@ -13,3 +13,6 @@ lupdate -recursive ../share/translations/measurements.pro
 rm -f -v ../share/translations/*.qm
 # force to run qmake
 touch -am ../Valentina.pro
+
+echo Done.
+echo For updating files run: clean all, qmake, rebuild all.
