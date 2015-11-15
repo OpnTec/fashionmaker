@@ -4137,7 +4137,7 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>operatore binario definito dall&apos;utente &quot;$ TOK $&quot; in conflitto con un operatore integrato.</translation>
+        <translation>operatore binario definito dall&apos;utente &quot;$TOK$&quot; in conflitto con un operatore integrato.</translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
@@ -4162,7 +4162,7 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation>Nessun sovraccarico adatto per l&apos;operatore &quot;$ TOK $&quot; nella posizione $ POS $.</translation>
+        <translation>Nessun sovraccarico adatto per l&apos;operatore &quot;$TOK$&quot; nella posizione $POS$.</translation>
     </message>
     <message>
         <source>Function result is a string.</source>
