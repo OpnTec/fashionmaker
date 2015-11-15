@@ -799,6 +799,18 @@
         <source>All objects in path should follow in clockwise direction.</source>
         <translation>All objects in path should follow in clockwise direction.</translation>
     </message>
+    <message>
+        <source>Scroll down the list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scroll up the list</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1422,45 +1434,47 @@
     </message>
     <message>
         <source>Paper format</source>
-        <translation type="unfinished"></translation>
+        <translation>Paper format</translation>
     </message>
     <message>
         <source>Fields</source>
-        <translation type="unfinished"></translation>
+        <translation>Fields</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Left:</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished"></translation>
+        <translation>Right:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished"></translation>
+        <translation>Top:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bottom:</translation>
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignore fileds</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Custom</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wrong fields.</translation>
     </message>
     <message>
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Fields go beyond printing. 
+
+Apply settings anyway?</translation>
     </message>
 </context>
 <context>
@@ -1706,6 +1720,14 @@ Apply settings anyway?</source>
     <message>
         <source>Expand All</source>
         <translation>Expand All</translation>
+    </message>
+    <message>
+        <source>Check all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uncheck all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3703,7 +3725,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>True darts</source>
-        <translation type="unfinished">True darts</translation>
+        <translation>True darts</translation>
     </message>
 </context>
 <context>
@@ -5106,47 +5128,47 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Set all margins to 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignore margins printing (export mode). Set all margins to 0.</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</translation>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift length must be used together with shift units.</translation>
     </message>
     <message>
         <source>Gap width must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gap width must be used together with shift units.</translation>
     </message>
     <message>
         <source>Left margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Left margin must be used together with page units.</translation>
     </message>
     <message>
         <source>Right margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Right margin must be used together with page units.</translation>
     </message>
     <message>
         <source>Top margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Top margin must be used together with page units.</translation>
     </message>
     <message>
         <source>Bottom margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bottom margin must be used together with page units.</translation>
     </message>
 </context>
 <context>

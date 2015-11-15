@@ -799,6 +799,18 @@
         <source>All objects in path should follow in clockwise direction.</source>
         <translation>Toate obiectele de pe rută trebuie să urmeze în sensul acelor de ceasornic.</translation>
     </message>
+    <message>
+        <source>Scroll down the list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scroll up the list</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1701,6 +1713,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Expand All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uncheck all</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -3755,24 +3755,24 @@
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1826"/>
-        <source>Sit on hard surface. Rise length, side, taken from waist over hip curve down to surface</source>
+        <source>Rise length, side, sitting</source>
         <comment>Full measurement name.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1829"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1828"/>
         <source>From Waist Side around hp curve down to surface, while seated on hard surface.</source>
         <comment>Full measurement description.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1855"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>
         <source>rise_length_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>rise_length_side</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1857"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1856"/>
         <source>Rise length, side</source>
         <comment>Full measurement name.</comment>
         <translation>Rise length, side</translation>
@@ -3783,578 +3783,578 @@
         <translation type="vanished">From Waist Side down to surface, while seated on hard surface.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1834"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1833"/>
         <source>rise_length_diag</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>rise_length_diag</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1836"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1835"/>
         <source>Rise length, diagonal</source>
         <comment>Full measurement name.</comment>
         <translation>Rise length, diagonal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1837"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1836"/>
         <source>Measure from Waist Side diagonally to a string tied at the top of the leg, seated on a hard surface.</source>
         <comment>Full measurement description.</comment>
         <translation>Measure from Waist Side diagonally to a string tied at the top of the leg, seated on a hard surface.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1841"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1840"/>
         <source>rise_length_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>rise_length_b</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1843"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1842"/>
         <source>Rise length, back</source>
         <comment>Full measurement name.</comment>
         <translation>Rise length, back</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1844"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1843"/>
         <source>Vertical distance from Waist Back to Crotch level.</source>
         <comment>Full measurement description.</comment>
         <translation>Vertical distance from Waist Back to Crotch level.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1848"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1847"/>
         <source>rise_length_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>rise_length_f</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1850"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1849"/>
         <source>Rise length, front</source>
         <comment>Full measurement name.</comment>
         <translation>Rise length, front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1851"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1850"/>
         <source>Vertical Distance from Waist Front to Crotch level.</source>
         <comment>Full measurement description.</comment>
         <translation>Vertical Distance from Waist Front to Crotch level.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1858"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1857"/>
         <source>Vertical distance from Waist side down to Crotch level. Use formula (Height: Waist side - Leg: Crotch to floor).</source>
         <comment>Full measurement description.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1874"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1873"/>
         <source>neck_back_to_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>neck_back_to_waist_front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1876"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1875"/>
         <source>Neck Back to Waist Front</source>
         <comment>Full measurement name.</comment>
         <translation>Neck Back to Waist Front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1877"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1876"/>
         <source>From Neck Back around Neck Side down to Waist Front.</source>
         <comment>Full measurement description.</comment>
         <translation>From Neck Back around Neck Side down to Waist Front.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1881"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1880"/>
         <source>waist_to_waist_halter</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>waist_to_waist_halter</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1883"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1882"/>
         <source>Waist to Waist Halter, around Neck Back</source>
         <comment>Full measurement name.</comment>
         <translation>Waist to Waist Halter, around Neck Back</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1884"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1883"/>
         <source>From Waist level around Neck Back to Waist level.</source>
         <comment>Full measurement description.</comment>
         <translation>From Waist level around Neck Back to Waist level.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1888"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1887"/>
         <source>waist_natural_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>waist_natural_circ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1890"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1889"/>
         <source>Natural Waist circumference</source>
         <comment>Full measurement name.</comment>
         <translation>Natural Waist circumference</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1891"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1890"/>
         <source>Torso circumference at men&apos;s natural side Abdominal Obliques indentation, if Oblique indentation isn&apos;t found then just below the Navel level.</source>
         <comment>Full measurement description.</comment>
         <translation>Torso circumference at men&apos;s natural side Abdominal Obliques indentation, if Oblique indentation isn&apos;t found then just below the Navel level.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1896"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1895"/>
         <source>waist_natural_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>waist_natural_arc_f</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1898"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1897"/>
         <source>Natural Waist arc, front</source>
         <comment>Full measurement name.</comment>
         <translation>Natural Waist arc, front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1899"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1898"/>
         <source>From Side to Side at the Natural Waist level, across the front.</source>
         <comment>Full measurement description.</comment>
         <translation>From Side to Side at the Natural Waist level, across the front.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1903"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1902"/>
         <source>waist_natural_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>waist_natural_arc_b</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1905"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1904"/>
         <source>Natural Waist arc, back</source>
         <comment>Full measurement name.</comment>
         <translation>Natural Waist arc, back</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1906"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1905"/>
         <source>From Side to Side at Natural Waist level, across the back. Calculate as ( Natural Waist circumference  - Natural Waist arc (front) ).</source>
         <comment>Full measurement description.</comment>
         <translation>From Side to Side at Natural Waist level, across the back. Calculate as ( Natural Waist circumference  - Natural Waist arc (front) ).</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1910"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1909"/>
         <source>waist_to_natural_waist_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>waist_to_natural_waist_f</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1912"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1911"/>
         <source>Waist Front to Natural Waist Front</source>
         <comment>Full measurement name.</comment>
         <translation>Waist Front to Natural Waist Front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1913"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1912"/>
         <source>Length from Waist Front to Natural Waist Front.</source>
         <comment>Full measurement description.</comment>
         <translation>Length from Waist Front to Natural Waist Front.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1917"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1916"/>
         <source>waist_to_natural_waist_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>waist_to_natural_waist_b</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1919"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1918"/>
         <source>Waist Back to Natural Waist Back</source>
         <comment>Full measurement name.</comment>
         <translation>Waist Back to Natural Waist Back</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1920"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1919"/>
         <source>Length from Waist Back to Natural Waist Back.</source>
         <comment>Full measurement description.</comment>
         <translation>Length from Waist Back to Natural Waist Back.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1924"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1923"/>
         <source>arm_neck_back_to_elbow_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>arm_neck_back_to_elbow_bent</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1926"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1925"/>
         <source>Arm: Neck Back to Elbow, high bend</source>
         <comment>Full measurement name.</comment>
         <translation>Arm: Neck Back to Elbow, high bend</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1927"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1926"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Neck Back to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
         <translation>Bend Arm with Elbow out, hand in front. Measure from Neck Back to Elbow Tip.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1932"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1931"/>
         <source>arm_neck_back_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>arm_neck_back_to_wrist_bent</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1934"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1933"/>
         <source>Arm: Neck Back to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
         <translation>Arm: Neck Back to Wrist, high bend</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1935"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1934"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Neck Back to Elbow Tip to Wrist bone.</source>
         <comment>Full measurement description.</comment>
         <translation>Bend Arm with Elbow out, hand in front. Measure from Neck Back to Elbow Tip to Wrist bone.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1939"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1938"/>
         <source>arm_neck_side_to_elbow_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>arm_neck_side_to_elbow_bent</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1941"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1940"/>
         <source>Arm: Neck Side to Elbow, high bend</source>
         <comment>Full measurement name.</comment>
         <translation>Arm: Neck Side to Elbow, high bend</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1942"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1941"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Neck Side to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
         <translation>Bend Arm with Elbow out, hand in front. Measure from Neck Side to Elbow Tip.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1946"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1945"/>
         <source>arm_neck_side_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>arm_neck_side_to_wrist_bent</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1948"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1947"/>
         <source>Arm: Neck Side to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
         <translation>Arm: Neck Side to Wrist, high bend</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1949"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1948"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Neck Side to Elbow Tip to Wrist bone.</source>
         <comment>Full measurement description.</comment>
         <translation>Bend Arm with Elbow out, hand in front. Measure from Neck Side to Elbow Tip to Wrist bone.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1954"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1953"/>
         <source>arm_across_back_center_to_elbow_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>arm_across_back_center_to_elbow_bent</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1956"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1955"/>
         <source>Arm: Across Back Center to Elbow, high bend</source>
         <comment>Full measurement name.</comment>
         <translation>Arm: Across Back Center to Elbow, high bend</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1957"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1956"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Middle of Back to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
         <translation>Bend Arm with Elbow out, hand in front. Measure from Middle of Back to Elbow Tip.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1962"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1961"/>
         <source>arm_across_back_center_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>arm_across_back_center_to_wrist_bent</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1964"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1963"/>
         <source>Arm: Across Back Center to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
         <translation>Arm: Across Back Center to Wrist, high bend</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1965"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1964"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Middle of Back to Elbow Tip to Wrist bone.</source>
         <comment>Full measurement description.</comment>
         <translation>Bend Arm with Elbow out, hand in front. Measure from Middle of Back to Elbow Tip to Wrist bone.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1970"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1969"/>
         <source>arm_armscye_back_center_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>arm_armscye_back_center_to_wrist_bent</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1972"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1971"/>
         <source>Arm: Armscye Back Center to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
         <translation>Arm: Armscye Back Center to Wrist, high bend</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1973"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1972"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Armscye Back to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
         <translation>Bend Arm with Elbow out, hand in front. Measure from Armscye Back to Elbow Tip.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1990"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1989"/>
         <source>neck_back_to_bust_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>neck_back_to_bust_front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1992"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1991"/>
         <source>Neck Back to Bust Front</source>
         <comment>Full measurement name.</comment>
         <translation>Neck Back to Bust Front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1993"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1992"/>
         <source>From Neck Back, over Shoulder, to Bust Front.</source>
         <comment>Full measurement description.</comment>
         <translation>From Neck Back, over Shoulder, to Bust Front.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1997"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1996"/>
         <source>neck_back_to_armfold_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>neck_back_to_armfold_front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1999"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1998"/>
         <source>Neck Back to Armfold Front</source>
         <comment>Full measurement name.</comment>
         <translation>Neck Back to Armfold Front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2000"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1999"/>
         <source>From Neck Back over Shoulder to Armfold Front.</source>
         <comment>Full measurement description.</comment>
         <translation>From Neck Back over Shoulder to Armfold Front.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2004"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2003"/>
         <source>neck_back_to_armfold_front_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>neck_back_to_armfold_front_to_waist_side</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2006"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2005"/>
         <source>Neck Back, over Shoulder, to Waist Side</source>
         <comment>Full measurement name.</comment>
         <translation>Neck Back, over Shoulder, to Waist Side</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2007"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2006"/>
         <source>From Neck Back, over Shoulder, down chest to Waist Side.</source>
         <comment>Full measurement description.</comment>
         <translation>From Neck Back, over Shoulder, down chest to Waist Side.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2011"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2010"/>
         <source>highbust_back_over_shoulder_to_armfold_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>highbust_back_over_shoulder_to_armfold_front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2013"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2012"/>
         <source>Highbust Back, over Shoulder, to Armfold Front</source>
         <comment>Full measurement name.</comment>
         <translation>Highbust Back, over Shoulder, to Armfold Front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2014"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2013"/>
         <source>From Highbust Back over Shoulder to Armfold Front.</source>
         <comment>Full measurement description.</comment>
         <translation>From Highbust Back over Shoulder to Armfold Front.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2018"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2017"/>
         <source>highbust_back_over_shoulder_to_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>highbust_back_over_shoulder_to_waist_front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2020"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2019"/>
         <source>Highbust Back, over Shoulder, to Waist Front</source>
         <comment>Full measurement name.</comment>
         <translation>Highbust Back, over Shoulder, to Waist Front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2021"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2020"/>
         <source>From Highbust Back, over Shoulder touching  Neck Side, to Waist Front.</source>
         <comment>Full measurement description.</comment>
         <translation>From Highbust Back, over Shoulder touching  Neck Side, to Waist Front.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2025"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2024"/>
         <source>neck_back_to_armfold_front_to_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>neck_back_to_armfold_front_to_neck_back</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2027"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2026"/>
         <source>Neck Back, to Armfold Front, to Neck Back</source>
         <comment>Full measurement name.</comment>
         <translation>Neck Back, to Armfold Front, to Neck Back</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2028"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2027"/>
         <source>From Neck Back, over Shoulder to Armfold Front, under arm and return to start.</source>
         <comment>Full measurement description.</comment>
         <translation>From Neck Back, over Shoulder to Armfold Front, under arm and return to start.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2033"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2032"/>
         <source>across_back_center_to_armfold_front_to_across_back_center</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>across_back_center_to_armfold_front_to_across_back_center</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2035"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2034"/>
         <source>Across Back Center, circled around Shoulder</source>
         <comment>Full measurement name.</comment>
         <translation>Across Back Center, circled around Shoulder</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2036"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2035"/>
         <source>From center of Across Back, over Shoulder, under Arm, and return to start.</source>
         <comment>Full measurement description.</comment>
         <translation>From center of Across Back, over Shoulder, under Arm, and return to start.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2041"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2040"/>
         <source>neck_back_to_armfold_front_to_highbust_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>neck_back_to_armfold_front_to_highbust_back</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2043"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2042"/>
         <source>Neck Back, to Armfold Front, to Highbust Back</source>
         <comment>Full measurement name.</comment>
         <translation>Neck Back, to Armfold Front, to Highbust Back</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2044"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2043"/>
         <source>From Neck Back over Shoulder to Armfold Front, under arm to Highbust Back.</source>
         <comment>Full measurement description.</comment>
         <translation>From Neck Back over Shoulder to Armfold Front, under arm to Highbust Back.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2049"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2048"/>
         <source>armfold_to_armfold_bust</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>armfold_to_armfold_bust</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2051"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2050"/>
         <source>Armfold to Armfold, front, curved through Bust Front</source>
         <comment>Full measurement name.</comment>
         <translation>Armfold to Armfold, front, curved through Bust Front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2053"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2052"/>
         <source>Measure in a curve from Armfold Left Front through Bust Front curved back up to Armfold Right Front.</source>
         <comment>Full measurement description.</comment>
         <translation>Measure in a curve from Armfold Left Front through Bust Front curved back up to Armfold Right Front.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2057"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2056"/>
         <source>armfold_to_bust_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>armfold_to_bust_front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2059"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2058"/>
         <source>Armfold to Bust Front</source>
         <comment>Full measurement name.</comment>
         <translation>Armfold to Bust Front</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2060"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2059"/>
         <source>Measure from Armfold Front to Bust Front, shortest distance between the two, as straight as possible.</source>
         <comment>Full measurement description.</comment>
         <translation>Measure from Armfold Front to Bust Front, shortest distance between the two, as straight as possible.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2064"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2063"/>
         <source>highbust_b_over_shoulder_to_highbust_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>highbust_b_over_shoulder_to_highbust_f</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2066"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2065"/>
         <source>Highbust Back, over Shoulder, to Highbust level</source>
         <comment>Full measurement name.</comment>
         <translation>Highbust Back, over Shoulder, to Highbust level</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2068"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2067"/>
         <source>From Highbust Back, over Shoulder, then aim at Bustpoint, stopping measurement at Highbust level.</source>
         <comment>Full measurement description.</comment>
         <translation>From Highbust Back, over Shoulder, then aim at Bustpoint, stopping measurement at Highbust level.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2073"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2072"/>
         <source>armscye_arc</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>armscye_arc</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2075"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2074"/>
         <source>Armscye: Arc</source>
         <comment>Full measurement name.</comment>
         <translation>Armscye: Arc</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2076"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2075"/>
         <source>From Armscye at Across Chest over ShoulderTip  to Armscye at Across Back.</source>
         <comment>Full measurement description.</comment>
         <translation>From Armscye at Across Chest over ShoulderTip  to Armscye at Across Back.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2092"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2091"/>
         <source>dart_width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>dart_width_shoulder</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2094"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2093"/>
         <source>Dart Width: Shoulder</source>
         <comment>Full measurement name.</comment>
         <translation>Dart Width: Shoulder</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2095"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2103"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2094"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2102"/>
         <source>This information is pulled from pattern charts in some patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
         <comment>Full measurement description.</comment>
         <translation>This information is pulled from pattern charts in some patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2100"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2099"/>
         <source>dart_width_bust</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>dart_width_bust</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2102"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2101"/>
         <source>Dart Width: Bust</source>
         <comment>Full measurement name.</comment>
         <translation>Dart Width: Bust</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2108"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2107"/>
         <source>dart_width_waist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
         <translation>dart_width_waist</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2110"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2109"/>
         <source>Dart Width: Waist</source>
         <comment>Full measurement name.</comment>
         <translation>Dart Width: Waist</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2111"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2110"/>
         <source>This information is pulled from pattern charts in some  patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
         <comment>Full measurement description.</comment>
         <translation>This information is pulled from pattern charts in some  patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</translation>

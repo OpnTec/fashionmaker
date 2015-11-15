@@ -799,6 +799,18 @@
         <source>All objects in path should follow in clockwise direction.</source>
         <translation>Tutti gli oggetti sul tracciato devono seguire il senso orario.</translation>
     </message>
+    <message>
+        <source>Scroll down the list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scroll up the list</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1422,45 +1434,47 @@
     </message>
     <message>
         <source>Paper format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato carta</translation>
     </message>
     <message>
         <source>Fields</source>
-        <translation type="unfinished"></translation>
+        <translation>Campi</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sinistra:</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished"></translation>
+        <translation>Destra:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished"></translation>
+        <translation>Top:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fondo</translation>
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora campo</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizzato</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
-        <translation type="unfinished"></translation>
+        <translation>Campi sbagliati</translation>
     </message>
     <message>
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>I campi vanno al di là della stampa. 
+
+Applicare le impostazioni comunque?</translation>
     </message>
 </context>
 <context>
@@ -1701,10 +1715,18 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Collapse All</source>
-        <translation type="unfinished"></translation>
+        <translation>Collassa tutto</translation>
     </message>
     <message>
         <source>Expand All</source>
+        <translation>Espandi tutto</translation>
+    </message>
+    <message>
+        <source>Check all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uncheck all</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1892,7 +1914,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;No selection&gt;</source>
-        <translation>&lt;No selezione&gt;</translation>
+        <translation>&lt;No selection&gt;</translation>
     </message>
     <message>
         <source>Type : </source>
@@ -1960,7 +1982,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;no value&gt;</source>
-        <translation>&lt;nessun valore&gt;</translation>
+        <translation>&lt;no value&gt;</translation>
     </message>
     <message>
         <source>Unchanged</source>
@@ -2344,11 +2366,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The base filename has not match regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il nome del file di base non ha corrispondenza con espressioni regolari.</translation>
     </message>
     <message>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
-        <translation type="unfinished"></translation>
+        <translation>La directory di destinazione non esiste o non è leggibile.</translation>
     </message>
 </context>
 <context>
@@ -3679,31 +3701,31 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modalità per lavorare con i dettagli. Prima di essere in grado di abilitare i &amp;quot;Details mode&amp;quot; è necessario creare almeno un dettaglio &amp;quot;Draw mode&amp;quot;. I dettagli creati in questa fase saranno utilizzati per creare un layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modalità per creare un layout di dettagli. Questa modalità è disponibile se è stato creato almeno un dettaglio sul piano &amp;quot;Details mode&amp;quot;. Il layout può venire esportato nel tuo formato di file preferito e salvato nel tuo disco rigido.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unload measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Scarica misure</translation>
     </message>
     <message>
         <source>Unload measurements if they was not used in a pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scarica misure se non sono state usate in un file cartamodello.</translation>
     </message>
     <message>
         <source>Measurements unloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Misure scaricate</translation>
     </message>
     <message>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile scaricare misure. Alcune di queste sono utilizzate nel cartamodello.</translation>
     </message>
     <message>
         <source>True darts</source>
-        <translation type="unfinished">Pince precisa</translation>
+        <translation>Pince precisa</translation>
     </message>
 </context>
 <context>
@@ -3766,7 +3788,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile aprire stampante %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -3856,7 +3878,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Templates</translation>
     </message>
 </context>
 <context>
@@ -3982,12 +4004,12 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>too few arguments for function sum.</source>
         <comment>parser error message</comment>
-        <translation type="unfinished"></translation>
+        <translation>troppo pochi elementi per la funzione somma</translation>
     </message>
     <message>
         <source>too few arguments for function min.</source>
         <comment>parser error message</comment>
-        <translation type="unfinished"></translation>
+        <translation>troppo pochi elementi per la funzione sottrazione.</translation>
     </message>
 </context>
 <context>
@@ -4020,87 +4042,87 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Operatore di suffisso non valido identificativo:&quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid pointer to callback function.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Puntatore non valido per la funzione di richiamo. </translation>
     </message>
     <message>
         <source>Expression is empty.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;espressione è vuota.</translation>
     </message>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Puntatore non valido per la variabile. </translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Operatore inaspettato &quot;$TOK$&quot; trovato nella posizione $POS$</translation>
     </message>
     <message>
         <source>Unexpected end of expression at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Inattesa fine dell&apos;espressione nella posizione $POS$</translation>
     </message>
     <message>
         <source>Unexpected argument separator at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Elemento separatore inaspettato in posizione $POS$</translation>
     </message>
     <message>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Parentesi inaspettata &quot;$TOK$&quot; in posizione $POS$</translation>
     </message>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Funzione inaspettata &quot;$TOK$&quot; in posizione $POS$</translation>
     </message>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Valore inaspettato &quot;$TOK$&quot; trovato in posizione $POS$</translation>
     </message>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Variabile inaspettata &quot;$TOK$&quot; trovata in posizione $POS$</translation>
     </message>
     <message>
         <source>Function arguments used without a function (position: $POS$)</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Elementi della funzione utilizzati senza una funzione (posizione: $POS$)</translation>
     </message>
     <message>
         <source>Missing parenthesis</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Parentesi mancante</translation>
     </message>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Troppi parametri per la funzione &quot;$TOK$&quot; nella posizione espressione $POS$</translation>
     </message>
     <message>
         <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Troppo pochi parametri per funzione &quot;$TOK$&quot; nella posizione espressione $POS$</translation>
     </message>
     <message>
         <source>Divide by zero</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dividi per zero</translation>
     </message>
     <message>
         <source>Domain error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Errore di dominio</translation>
     </message>
     <message>
         <source>Name conflict</source>
@@ -4110,95 +4132,95 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Valore non valido per priorità degli operatori (deve essere maggiore o uguale a zero).</translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>operatore binario definito dall&apos;utente &quot;$ TOK $&quot; in conflitto con un operatore integrato.</translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Elemento della stringa inaspettato trovato in posizione $POS$.</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Stringa non terminata a partire dalla posizione $POS$.</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Funzione stringa chiamata con un tipo di argomento non stringa.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Valore stringa utilizzato dove è previsto un argomento numerico. </translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nessun sovraccarico adatto per l&apos;operatore &quot;$ TOK $&quot; nella posizione $ POS $.</translation>
     </message>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>La funzione risultante è una stringa.</translation>
     </message>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Errore parser.</translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Il separatore decimale è identico all&apos;argomento separatore della funzione.</translation>
     </message>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;operatore &quot;$TOK$&quot; deve essere preceduto da una parentesi di chiusura.</translation>
     </message>
     <message>
         <source>If-then-else operator is missing an else clause</source>
         <comment>Math parser error messages. Do not translate operator name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>All&apos;operatore if-then-else manca la clausola else</translation>
     </message>
     <message>
         <source>Misplaced colon at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Due punti fuori posto alla posizione $POS$</translation>
     </message>
 </context>
 <context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Rinomina la parte di cartamodello</translation>
     </message>
 </context>
 <context>
     <name>SaveDetailOptions</name>
     <message>
         <source>save detail option</source>
-        <translation type="unfinished"></translation>
+        <translation>salva l&apos;opzione del dettaglio</translation>
     </message>
 </context>
 <context>
     <name>SaveToolOptions</name>
     <message>
         <source>save tool option</source>
-        <translation type="unfinished"></translation>
+        <translation>salva opzione strumento</translation>
     </message>
 </context>
 <context>
     <name>TMainWindow</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Seleziona nuovo per la creazione di un file delle misure.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Name</source>
@@ -4206,7 +4228,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Calculated value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore calcolato</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -4242,15 +4264,15 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Base value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore base:</translation>
     </message>
     <message>
         <source>In sizes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelle misure:</translation>
     </message>
     <message>
         <source>In heights:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelle altezze:</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -4270,19 +4292,19 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Full name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome intero:</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazione</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo:</translation>
     </message>
     <message>
         <source>Measurement type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo di misura</translation>
     </message>
     <message>
         <source>Path:</source>
@@ -4290,11 +4312,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Path to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Percorso al file</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra in Explorer</translation>
     </message>
     <message>
         <source>Base size:</source>
@@ -4302,7 +4324,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Base size value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore base della misura</translation>
     </message>
     <message>
         <source>Base height:</source>
@@ -4310,7 +4332,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Base height value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore base dell&apos;altezza</translation>
     </message>
     <message>
         <source>Given name:</source>
@@ -4322,23 +4344,23 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Birth date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Data di nascita:</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
+        <translation>aaaa-MM-gg</translation>
     </message>
     <message>
         <source>Email:</source>
-        <translation type="unfinished"></translation>
+        <translation>Email:</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Note:</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>File</translation>
     </message>
     <message>
         <source>Window</source>
@@ -4346,7 +4368,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Aiuto</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -4354,15 +4376,15 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <source>Gradation</source>
-        <translation type="unfinished"></translation>
+        <translation>Gradazione</translation>
     </message>
     <message>
         <source>Open individual ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Individuale aperto ...</translation>
     </message>
     <message>
         <source>Save</source>
@@ -4370,11 +4392,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Save As ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva come ...</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Termina</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -4390,31 +4412,31 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Add known</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi nota</translation>
     </message>
     <message>
         <source>Add custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungere personalizzato</translation>
     </message>
     <message>
         <source>Read only</source>
-        <translation type="unfinished"></translation>
+        <translation>Sola lettura</translation>
     </message>
     <message>
         <source>Open standard ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Open standard ...</translation>
     </message>
     <message>
         <source>Open template</source>
-        <translation type="unfinished"></translation>
+        <translation>Open template</translation>
     </message>
     <message>
         <source>Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Database</translation>
     </message>
     <message>
         <source>Show information about all known measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra informazioni su tutte le misure conosciute</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -4422,7 +4444,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>untitled %1</source>
-        <translation type="unfinished"></translation>
+        <translation>untitled %1</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
@@ -4438,7 +4460,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Misure</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit)</source>
@@ -4454,15 +4476,15 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>&amp;New Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;New Window</translation>
     </message>
     <message>
         <source>Edit measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica misure</translation>
     </message>
     <message>
         <source>M_%1</source>
-        <translation type="unfinished"></translation>
+        <translation>M_%1</translation>
     </message>
     <message>
         <source>Error</source>
@@ -4494,11 +4516,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>senza titolo</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Empty&gt;</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -4507,7 +4529,8 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Measurements have been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le misure sono state modificate.
+Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Empty field</source>
@@ -4523,7 +4546,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Import from a pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Importa dal cartamodello</translation>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
@@ -4531,39 +4554,39 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern unit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Unità pattern:</translation>
     </message>
     <message>
         <source>Find:</source>
-        <translation type="unfinished"></translation>
+        <translation>Trova:</translation>
     </message>
     <message>
         <source>Find Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Trova Precedente</translation>
     </message>
     <message>
         <source>Ctrl+Shift+G</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+G</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Trova Prossimo</translation>
     </message>
     <message>
         <source>Ctrl+G</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+G</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Misure individuali (*.vit);;Misure Standard (*.vst);;Tutti i file (*.*)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Misure standard (*.vst);;Misure individuali (*.vit);;Tutti i file (*.*)</translation>
     </message>
     <message>
         <source>Measurements (*.vst *.vit);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Misure (*.vst *.vit);;Tutti i file (*.*)</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
@@ -4575,68 +4598,68 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File contains invalid known measurement(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Il file contiene misura(e) non valide.</translation>
     </message>
     <message>
         <source>File has unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il file ha un formato sconosciuto.</translation>
     </message>
     <message>
         <source>Full name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome intero</translation>
     </message>
     <message>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
-        <translation type="unfinished"></translation>
+        <translation>File &apos;%1&apos; non esiste!</translation>
     </message>
     <message>
         <source>The name of known measurement forbidden to change.</source>
-        <translation type="unfinished"></translation>
+        <translation>è proibito cambiare il nome di misure note. </translation>
     </message>
     <message>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile trovare misure &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>The base value of known measurement forbidden to change.</source>
-        <translation type="unfinished"></translation>
+        <translation>è proibito cambiare il valore base di misure conosciute.</translation>
     </message>
     <message>
         <source>The size increase value of known measurement forbidden to change.</source>
-        <translation type="unfinished"></translation>
+        <translation>è proibito cambiare l&apos;aumento di valore delle misure conosciute.</translation>
     </message>
     <message>
         <source>The height increase value of known measurement forbidden to change.</source>
-        <translation type="unfinished"></translation>
+        <translation>è proibito cambiare il valore di aumento dell&apos;altezza delle misure conosciute. </translation>
     </message>
     <message>
         <source>The full name of known measurement forbidden to change.</source>
-        <translation type="unfinished"></translation>
+        <translation>è proibito cambiare il nome completo della misura conosciuta.</translation>
     </message>
     <message>
         <source>Name in formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome nella formula</translation>
     </message>
     <message>
         <source>Function Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Creazione guidata funzione</translation>
     </message>
     <message>
         <source>Move measurement top</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta la misura in alto</translation>
     </message>
     <message>
         <source>Move measurement bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta la misura in basso</translation>
     </message>
     <message>
         <source>Delete measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancella misura</translation>
     </message>
     <message>
         <source>unknown</source>
         <comment>gender</comment>
-        <translation type="unfinished"></translation>
+        <translation>sconosciuto</translation>
     </message>
     <message>
         <source>male</source>
@@ -4650,39 +4673,39 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Gender:</source>
-        <translation type="unfinished"></translation>
+        <translation>Genere:</translation>
     </message>
     <message>
         <source>PM system:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistema PM:</translation>
     </message>
     <message>
         <source>Create from existing ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea da esistente ...</translation>
     </message>
     <message>
         <source>Create from existing file</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea da file esistente</translation>
     </message>
     <message>
         <source>Select file</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona file</translation>
     </message>
     <message>
         <source>Export standard measurements not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esporta misure standard non supportato.</translation>
     </message>
     <message>
         <source>Measurement diagram</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagramma misure</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Misure sconosciuta&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Misura sconosciuta&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -4724,15 +4747,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistema di modellistica</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished"></translation>
+        <translation>Autore:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished"></translation>
+        <translation>Libro:</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
@@ -4779,111 +4802,111 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Templates</translation>
     </message>
 </context>
 <context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Non chiedere di nuovo</translation>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Do not &amp;ask again</translation>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation type="unfinished"></translation>
+        <translation>Do not &amp;show again</translation>
     </message>
 </context>
 <context>
     <name>VAbstractConverter</name>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile ottenere le informazioni sulla versione.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Troppe etichette &lt;%1&gt; nel file.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione &quot;%1&quot; non valida.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione &quot;0.0.0&quot; non valida.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione invalida. Versione minima supportata è %1</translation>
     </message>
     <message>
         <source>Invalid version. Maximum supported version is %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione invalida. Versione massima supportata è %1</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore id non unico.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile cambiare versione.</translation>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nella creazione del file di backup: %1.</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nella creazione di una copia di riserva: %1.</translation>
     </message>
 </context>
 <context>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile trovare strumento sulla tavola.</translation>
     </message>
 </context>
 <context>
     <name>VAbstractTool</name>
     <message>
         <source>black</source>
-        <translation type="unfinished"></translation>
+        <translation>nero</translation>
     </message>
     <message>
         <source>green</source>
-        <translation type="unfinished"></translation>
+        <translation>verde</translation>
     </message>
     <message>
         <source>blue</source>
-        <translation type="unfinished"></translation>
+        <translation>blu</translation>
     </message>
     <message>
         <source>dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>rosso scuro</translation>
     </message>
     <message>
         <source>dark green</source>
-        <translation type="unfinished"></translation>
+        <translation>verde scuro</translation>
     </message>
     <message>
         <source>dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation>blu scuro</translation>
     </message>
     <message>
         <source>yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>giallo</translation>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Conferma cancellazione</translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi veramente cancellare?</translation>
     </message>
 </context>
 <context>
@@ -4925,39 +4948,39 @@ Do you want to save your changes?</source>
     <name>VCommandLine</name>
     <message>
         <source>Path to custom measure file (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Percorso del file di misura personalizzato (modalità di esportazione).</translation>
     </message>
     <message>
         <source>The measure file</source>
-        <translation type="unfinished"></translation>
+        <translation>Il file di misura</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
+        <translation>Numero corrispondente al formato di output (default = 0, modalità esportazione)</translation>
     </message>
     <message>
         <source>Format number</source>
-        <translation type="unfinished"></translation>
+        <translation>Numero formato</translation>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
+        <translation>Numero corrispondente alla pagina di template (default = 0, export mode): </translation>
     </message>
     <message>
         <source>Template number</source>
-        <translation type="unfinished"></translation>
+        <translation>Numero template</translation>
     </message>
     <message>
         <source>The page width</source>
-        <translation type="unfinished"></translation>
+        <translation>Larghezza pagina</translation>
     </message>
     <message>
         <source>The measure unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Unità di misura</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Gradi di rotazione (uno dei predefiniti). Predefinito (o 0) è no-rotazione (modalità esportazione).</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -4965,31 +4988,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritaglio automatico lunghezza inutilizzata (modalità esportazione).</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>unisci pagine se possibile (modalità esportazione).</translation>
     </message>
     <message>
         <source>Save length of the sheet if set. (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva lunghezza del foglio se impostato. (modalità esportazione).</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Unità layout (come per la carta eccetto px, modalità esportazione)</translation>
     </message>
     <message>
         <source>The unit</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;unità</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta lunghezza di layout misurato in unità di layout (modalità di esportazione).</translation>
     </message>
     <message>
         <source>Shift length</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta lunghezza</translation>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
@@ -5294,7 +5317,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore id non unico.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
