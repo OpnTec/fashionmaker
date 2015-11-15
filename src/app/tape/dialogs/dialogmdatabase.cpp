@@ -32,6 +32,8 @@
 
 #include <QKeyEvent>
 #include <QMenu>
+#include <QSvgRenderer>
+#include <QtSvg>
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
@@ -163,6 +165,48 @@ void DialogMDataBase::RetranslateGroups()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogMDataBase::ImgTag(const QString &number)
+{
+    QString imgUrl("<img src=\"wrong.png\" align=\"center\"/>"); // In case of error
+    const QString filePath = QString("://diagrams/%1.svg").arg(MapDiagrams(number));
+    if (QFileInfo(filePath).exists())
+    {
+        // Load your SVG
+        QSvgRenderer renderer;
+        const bool ok = renderer.load(filePath);
+        if (ok)
+        {
+            const QScreen *screen = QApplication::screens().at(0);
+            if (screen)
+            {
+                const QSize defSize = renderer.defaultSize();
+
+                // Prepare a QImage with desired characteritisc
+                QImage image(defSize, QImage::Format_RGB32);
+                image.fill(Qt::white);
+
+                const QRect geometry = screen->geometry();
+                const int baseHeight = 1440;
+                const int imgHeight = geometry.height() * defSize.height() / baseHeight;
+
+                QImage scaledImg = image.scaledToHeight(imgHeight);
+
+                // Get QPainter that paints to the image
+                QPainter painter(&scaledImg);
+                renderer.render(&painter);
+
+                QByteArray byteArray;
+                QBuffer buffer(&byteArray);
+                scaledImg.save(&buffer, "PNG");
+                imgUrl = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + "\" align=\"center\"/>";
+            }
+        }
+    }
+
+    return imgUrl;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMDataBase::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
@@ -286,14 +330,12 @@ void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
     const QString name = item->data(0, Qt::UserRole).toString();
     const VTranslateVars *trv = qApp->TrVars();
     const QString number = trv->MNumber(name);
-    const QString iconPath = QString("://diagrams/%1.png").arg(MapDiagrams(number));
 
-    QString text = QString("<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                           "normal\"> <img src=\"%1\" align=\"center\">"
-                           "<br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
-                           "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: normal\">"
-                           "%5</p>")
-            .arg(iconPath)
+    const QString text = QString("<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                                 "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
+                                 "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                                 "normal\">%4</p>")
+            .arg(ImgTag(number))
             .arg(number)
             .arg(trv->GuiText(name))
             .arg(trv->Description(name));

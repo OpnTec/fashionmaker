@@ -1280,14 +1280,13 @@ void TMainWindow::ShowMDiagram(const QString &name)
     }
     else
     {
-        const QString iconPath = QString("://diagrams/%1.png").arg(MapDiagrams(number));
-        ui->labelDiagram->setText(QString("<html><head/><body><img src=\"%1\" align=\"center\">"
+        ui->labelDiagram->setText(QString("<html><head/><body><p align=\"center\">%1</p>"
                                           "<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>")
-                                          .arg(iconPath).arg(number).arg(trv->GuiText(name)));
+                                          .arg(DialogMDataBase::ImgTag(number)).arg(number).arg(trv->GuiText(name)));
     }
     // This part is very ugly, can't find better way to resize dockWidget.
     ui->labelDiagram->adjustSize();
-    // And also thos 50 px. DockWidget has some border. And i can't find how big it is.
+    // And also those 50 px. DockWidget has some border. And i can't find how big it is.
     // Can lead to problem in future.
     ui->dockWidgetDiagram->setMaximumWidth(ui->labelDiagram->width()+50);
 }

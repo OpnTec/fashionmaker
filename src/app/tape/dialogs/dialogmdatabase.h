@@ -51,6 +51,8 @@ public:
 
     void RetranslateGroups();
 
+    static QString ImgTag(const QString &number);
+
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual bool eventFilter(QObject *target, QEvent *event) Q_DECL_OVERRIDE;
