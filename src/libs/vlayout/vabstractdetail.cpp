@@ -203,7 +203,7 @@ QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, co
         }
         else if (i == 0 && eqv == EquidistantType::OpenEquidistant)
         {//first point, polyline doesn't closed
-            ekvPoints.append(SingleParallelPoint(QLineF(p.at(0), p.at(1)), 90, width));
+            ekvPoints.append(UnclosedEkvPoint(QLineF(p.at(0), p.at(1)), QLineF(p.at(0), p.at(p.size()-1)), width));
             continue;
         }
         if (i == p.size()-1 && eqv == EquidistantType::CloseEquidistant)
@@ -213,8 +213,9 @@ QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, co
         }
         else if (i == p.size()-1 && eqv == EquidistantType::OpenEquidistant)
         {//last point, polyline doesn't closed
-                ekvPoints.append(SingleParallelPoint(QLineF(p.at(p.size()-1), p.at(p.size()-2)), -90, width));
-                continue;
+            ekvPoints.append(UnclosedEkvPoint(QLineF(p.at(p.size()-2), p.at(p.size()-1)),
+                                              QLineF(p.at(0), p.at(p.size()-1)), width));
+            continue;
         }
         //points in the middle of polyline
         ekvPoints<<EkvPoint(QLineF(p.at(i-1), p.at(i)), QLineF(p.at(i+1), p.at(i)), width);
@@ -430,6 +431,50 @@ QVector<QPointF> VAbstractDetail::EkvPoint(const QLineF &line1, const QLineF &li
             break;
     }
     return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief UnclosedEkvPoint helps find point of an unclosed seam allowance. One side of two lines should be equal.
+ *
+ * In case of the first seam allowance point equal should be the first point of the two lines. In case the last point -
+ * the last point of the two lines.
+ *
+ * @param line line of a seam allowance
+ * @param helpLine help line of the main path that cut unclosed seam allowance
+ * @param width seam allowance width
+ * @return seam allowance point
+ */
+QPointF VAbstractDetail::UnclosedEkvPoint(const QLineF &line, const QLineF &helpLine, const qreal &width)
+{
+    if (width <= 0)
+    {
+        return QPointF();
+    }
+
+    if (not (line.p2() == helpLine.p2() || line.p1() == helpLine.p1()))
+    {
+        qDebug()<<"Two points of two lines must be equal.";
+        return QPointF();
+    }
+
+    QPointF CrosPoint;
+    const QLineF bigLine = ParallelLine(line, width );
+    QLineF::IntersectType type = bigLine.intersect( helpLine, &CrosPoint );
+    switch (type)
+    {
+        case (QLineF::BoundedIntersection):
+        case (QLineF::UnboundedIntersection):
+            return CrosPoint;
+            break;
+        case (QLineF::NoIntersection):
+            /*If we have correct lines this means lines lie on a line.*/
+            return bigLine.p2();
+            break;
+        default:
+            break;
+    }
+    return QPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
