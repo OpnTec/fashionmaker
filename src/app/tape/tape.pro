@@ -264,6 +264,7 @@ INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
 
 # The list helps to check that all files are exist.
+# Don't forget to convert text to curves.
 DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Ap1.svg \
         $${PWD}/share/resources/diagrams/Ap2.svg \

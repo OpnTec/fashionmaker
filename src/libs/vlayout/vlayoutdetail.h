@@ -49,7 +49,7 @@ public:
     void SetCountourPoints(const QVector<QPointF> &points);
 
     QVector<QPointF> GetSeamAllowencePoints() const;
-    void SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence = true);
+    void SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence = true, bool closed = true);
 
     QVector<QPointF> GetLayoutAllowencePoints() const;
     void SetLayoutAllowencePoints();

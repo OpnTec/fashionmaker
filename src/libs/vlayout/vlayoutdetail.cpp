@@ -87,11 +87,12 @@ QVector<QPointF> VLayoutDetail::GetSeamAllowencePoints() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence)
+void VLayoutDetail::SetSeamAllowencePoints(const QVector<QPointF> &points, bool seamAllowence, bool closed)
 {
     if (seamAllowence)
     {
         setSeamAllowance(seamAllowence);
+        setClosed(closed);
         d->seamAllowence = points;
         if (not d->seamAllowence.isEmpty())
         {
@@ -164,7 +165,7 @@ void VLayoutDetail::Mirror(const QLineF &edge)
     const QLineF axis = QLineF(edge.x2(), edge.y2(), edge.x2() + 100, edge.y2()); // Ox axis
 
     const qreal angle = edge.angleTo(axis);
-	const QPointF p2 = edge.p2();
+    const QPointF p2 = edge.p2();
     QTransform m;
     m.translate(p2.x(), p2.y());
     m.rotate(-angle);
@@ -215,7 +216,7 @@ QLineF VLayoutDetail::Edge(int i) const
     if (d->mirror)
     {
         const int oldI1 = i1;
-		const int size = d->layoutAllowence.size()-1; //-V807
+        const int size = d->layoutAllowence.size()-1; //-V807
         i1 = size - i2;
         i2 = size - oldI1;
         return QLineF(d->matrix.map(d->layoutAllowence.at(i2)), d->matrix.map(d->layoutAllowence.at(i1)));

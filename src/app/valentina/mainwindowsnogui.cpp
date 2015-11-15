@@ -422,7 +422,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
         VLayoutDetail det = VLayoutDetail();
         const VDetail &d = idetail.value();
         det.SetCountourPoints(d.ContourPoints(pattern));
-        det.SetSeamAllowencePoints(d.SeamAllowancePoints(pattern), d.getSeamAllowance());
+        det.SetSeamAllowencePoints(d.SeamAllowancePoints(pattern), d.getSeamAllowance(), d.getClosed());
         det.setName(d.getName());
         det.setWidth(qApp->toPixel(d.getWidth()));
 
