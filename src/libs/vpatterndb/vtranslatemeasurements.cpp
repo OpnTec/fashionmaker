@@ -1824,8 +1824,7 @@ void VTranslateMeasurements::InitGroupN()
     m = translate("VTranslateMeasurements", "rise_length_side_sitting",
                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = translate("VTranslateMeasurements",
-                  "Sit on hard surface. Rise length, side, taken from waist over hip curve down to surface",
-                  "Full measurement name.");
+                  "Rise length, side, sitting", "Full measurement name.");
     d = translate("VTranslateMeasurements",
                   "From Waist Side around hp curve down to surface, while seated on hard surface.",
                   "Full measurement description.");
