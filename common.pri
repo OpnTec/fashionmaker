@@ -610,7 +610,8 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wwrite-strings \
     -Wzero-length-array \
     -Qunused-arguments \
-    -fcolor-diagnostics
+    -fcolor-diagnostics \
+    -fms-extensions # Need for pragma message
 
 ICC_DEBUG_CXXFLAGS += \
     $$ISYSTEM \ # Ignore warnings Qt headers.
@@ -650,5 +651,6 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wall \
     -Wextra \
     -pedantic \
-    -fno-omit-frame-pointer # Need for exchndl.dll
+    -fno-omit-frame-pointer \ # Need for exchndl.dll
+    -fms-extensions # Need for pragma message
 }

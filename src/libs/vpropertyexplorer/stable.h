@@ -22,9 +22,7 @@
 #define STABLE_H
 
 /* I like to include this pragma too, so the build log indicates if pre-compiled headers were in use. */
-#ifndef __clang__
 #pragma message("Compiling precompiled headers for VPropertyExplorer library.\n")
-#endif
 
 /* Add C includes here */
 
