@@ -455,20 +455,18 @@ void DialogDetail::ScrollDown()
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogDetail::DetailIsValid() const
 {
-    QIcon icon = QIcon::fromTheme("dialog-warning",
+    const QIcon icon = QIcon::fromTheme("dialog-warning",
                                   QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
 
-    QPixmap pixmap = icon.pixmap(QSize(16, 16));
+    const QPixmap pixmap = icon.pixmap(QSize(16, 16));
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     pixmap.save(&buffer, "PNG");
     QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + "\"/>";
 
-    ui.helpLabel->setTextFormat(Qt::RichText);
-
     if (ui.listWidget->count() < 3)
     {
-        url += QString(tr(" You need more points!"));
+        url += QString(" ") + tr("You need more points!");
         ui.helpLabel->setText(url);
         return false;
     }
@@ -476,7 +474,7 @@ bool DialogDetail::DetailIsValid() const
     {
         if (FirstPointEqualLast())
         {
-            url += QString(tr(" First point can not equal the last point!"));
+            url += QString(" ") +tr("First point can not equal the last point!");
             ui.helpLabel->setText(url);
             return false;
         }
@@ -489,14 +487,14 @@ bool DialogDetail::DetailIsValid() const
 
                 if (QString::compare(previousRow, nextRow) == 0)
                 {
-                    url += QString(tr(" You have double points!"));
+                    url += QString(" ") +tr("You have double points!");
                     ui.helpLabel->setText(url);
                     return false;
                 }
             }
         }
     }
-    ui.helpLabel->setText(QString(tr("Ready!")));
+    ui.helpLabel->setText(tr("Ready!"));
     return true;
 }
 
