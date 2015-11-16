@@ -18,6 +18,10 @@ TEMPLATE = app
 # Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target
 
+macx { # No bundle for tape
+    CONFIG -= app_bundle
+}
+
 # We use C++11 standard
 CONFIG += c++11
 
