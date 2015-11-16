@@ -60,6 +60,5 @@ VExceptionConversionError::~VExceptionConversionError() V_NOEXCEPT_EXPR (true)
  */
 QString VExceptionConversionError::ErrorMessage() const
 {
-    QString error = QString("ExceptionConversionError: %1 \"%2\"").arg(error, str);
-    return error;
+    return QString("ExceptionConversionError: %1 \"%2\"").arg(error, str);
 }
