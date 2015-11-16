@@ -3780,7 +3780,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1826"/>
         <source>Rise length, side, sitting</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Rise length, side, sitting</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>

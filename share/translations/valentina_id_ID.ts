@@ -1161,6 +1161,22 @@
         <source>Scroll up the list</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point can not equal the last point!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>

@@ -801,14 +801,30 @@
     </message>
     <message>
         <source>Scroll down the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Scroll down the list</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Scroll up the list</source>
+        <translation>Scroll up the list</translation>
+    </message>
+    <message>
+        <source>Ready!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You need more points!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point can not equal the last point!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have double points!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1723,11 +1739,11 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Check all</source>
-        <translation type="unfinished"></translation>
+        <translation>Check all</translation>
     </message>
     <message>
         <source>Uncheck all</source>
-        <translation type="unfinished"></translation>
+        <translation>Uncheck all</translation>
     </message>
 </context>
 <context>
