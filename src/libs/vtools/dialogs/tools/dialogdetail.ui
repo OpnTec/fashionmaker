@@ -391,6 +391,19 @@
     </layout>
    </item>
    <item>
+    <widget class="QLabel" name="helpLabel">
+     <property name="text">
+      <string>Ready!</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>

@@ -80,5 +80,6 @@
         <file alias="16x16/actions/go-previous.png">icons/win.icon.theme/16x16/actions/go-previous.png</file>
         <file alias="24x24/actions/go-previous.png">icons/win.icon.theme/24x24/actions/go-previous.png</file>
         <file alias="32x32/actions/go-previous.png">icons/win.icon.theme/32x32/actions/go-previous.png</file>
+        <file alias="16x16/status/dialog-warning.png">icons/win.icon.theme/16x16/status/dialog-warning.png</file>
     </qresource>
 </RCC>
