@@ -43,6 +43,8 @@
 #   include <QtMath>
 #endif
 
+Q_DECLARE_METATYPE(QMarginsF)
+
 const QString VSettings::SettingConfigurationLabelLanguage       = QStringLiteral("configuration/label_language");
 
 const QString VSettings::SettingPathsPattern                     = QStringLiteral("paths/pattern");

@@ -30,14 +30,11 @@
 #define VMARGINS_H
 
 #include <QtGlobal>
-#include <QMetaType>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 #   include "backport/qmarginsf.h"
 #else
 #   include <QMargins>
 #endif
-
-Q_DECLARE_METATYPE(QMarginsF)
 
 #endif // VMARGINS_H
