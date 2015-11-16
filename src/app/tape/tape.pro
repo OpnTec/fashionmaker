@@ -59,16 +59,7 @@ OTHER_FILES += \
     $$DATA_RESOURCE
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
-macx {
-    CONFIG(debug, debug|release){
-        $$enable_ccache()# Use only in debug mode on Mac
-    }
-} else {
-    $$enable_ccache()
-}
-
-# Set precompiled headers. Function set_PCH() defined in common.pri.
-$$set_PCH()
+$$enable_ccache()
 
 CONFIG(debug, debug|release){
     # Debug mode

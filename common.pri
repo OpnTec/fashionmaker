@@ -13,6 +13,11 @@ win32{
     QMAKE_INSTALL_PROGRAM = xcopy /y
 }
 
+macx{
+    # QTBUG-31034 qmake doesn't allow override QMAKE_CXX
+    CONFIG+=no_ccache
+}
+
 CONFIG(release, debug|release){
     !noDebugSymbols:win32:!win32-msvc*{
         unset(QMAKE_STRIP)
@@ -100,20 +105,16 @@ defineTest(forceCopyToDestdir) {
 
 # We use precompiled headers for more fast compilation source code.
 defineReplace(set_PCH){
-    unix:no_ccache|win32{
-        macx:clang*{
-        # Precompiled headers don't work with clang on macx.
-        } else {
-            CONFIG += precompile_header # Turn on creation precompiled headers (PCH).
-            export(CONFIG) # export value to global variable.
+    no_ccache{
+        CONFIG += precompile_header # Turn on creation precompiled headers (PCH).
+        export(CONFIG) # export value to global variable.
 
-            PRECOMPILED_HEADER = stable.h # Header file with all all static headers: libraries, static local headers.
-            export(PRECOMPILED_HEADER) # export value to global variable
+        PRECOMPILED_HEADER = stable.h # Header file with all all static headers: libraries, static local headers.
+        export(PRECOMPILED_HEADER) # export value to global variable
 
-            win32-msvc* {
-                PRECOMPILED_SOURCE = stable.cpp # MSVC need also cpp file.
-                export(PRECOMPILED_SOURCE) # export value to global variable.
-            }
+        win32-msvc* {
+            PRECOMPILED_SOURCE = stable.cpp # MSVC need also cpp file.
+            export(PRECOMPILED_SOURCE) # export value to global variable.
         }
     }
     return(true)
@@ -121,7 +122,7 @@ defineReplace(set_PCH){
 
 defineReplace(enable_ccache){
     no_ccache{ # For enable run qmake with CONFIG+=no_ccache
-        # do nothing
+        $$set_PCH()
     } else {
         # ccache support only Unix systems.
         unix:{
@@ -140,6 +141,8 @@ defineReplace(enable_ccache){
                 QMAKE_CXX = ccache clang++
                 export(QMAKE_CXX) # export value to global variable.
             }
+        } else {
+            $$set_PCH()
         }
     }
     return(true)

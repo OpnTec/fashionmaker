@@ -42,9 +42,6 @@ OBJECTS_DIR = obj
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
-# Set precompiled headers. Function set_PCH() defined in common.pri.
-$$set_PCH()
-
 CONFIG(debug, debug|release){
     # Debug mode
     unix {

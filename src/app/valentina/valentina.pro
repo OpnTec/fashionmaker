@@ -57,16 +57,8 @@ OTHER_FILES += \
     share/resources/icon/64x64/icon64x64.ico # Valentina's logo.
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
-macx {
-    CONFIG(debug, debug|release){
-        $$enable_ccache()# Use only in debug mode on Mac
-    }
-} else {
-    $$enable_ccache()
-}
+$$enable_ccache()
 
-# Set precompiled headers. Function set_PCH() defined in common.pri.
-$$set_PCH()
 
 CONFIG(debug, debug|release){
     # Debug mode
