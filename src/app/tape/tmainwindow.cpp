@@ -647,7 +647,8 @@ void TMainWindow::FileSaveAs()
 void TMainWindow::AboutToShowWindowMenu()
 {
     ui->menuWindow->clear();
-    ui->menuWindow->addAction(tr("&New Window"), this, SLOT(NewWindow()));
+    QAction *action = ui->menuWindow->addAction(tr("&New Window"), this, SLOT(NewWindow()));
+    action->setMenuRole(QAction::NoRole);
     ui->menuWindow->addSeparator();
 
     QList<TMainWindow*> windows = qApp->MainWindows();
@@ -665,6 +666,7 @@ void TMainWindow::AboutToShowWindowMenu()
         QAction *action = ui->menuWindow->addAction(title, this, SLOT(ShowWindow()));
         action->setData(i);
         action->setCheckable(true);
+        action->setMenuRole(QAction::NoRole);
         if (window == this)
         {
             action->setChecked(true);
@@ -1718,6 +1720,7 @@ void TMainWindow::SetupMenu()
     connect(ui->actionDatabase, &QAction::triggered, qApp, &MApplication::ShowDataBase);
     connect(ui->actionImportFromPattern, &QAction::triggered, this, &TMainWindow::ImportFromPattern);
     actionDockDiagram = ui->dockWidgetDiagram->toggleViewAction();
+    actionDockDiagram->setMenuRole(QAction::NoRole);
     ui->menuMeasurements->addAction(actionDockDiagram);
     actionDockDiagram->setEnabled(false);
 

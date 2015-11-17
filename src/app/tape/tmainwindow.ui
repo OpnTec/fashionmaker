@@ -889,6 +889,9 @@
    <property name="text">
     <string>Open individual ...</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSave">
    <property name="enabled">
@@ -901,6 +904,9 @@
    </property>
    <property name="text">
     <string>Save</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionSaveAs">
@@ -915,6 +921,9 @@
    <property name="text">
     <string>Save As ...</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionQuit">
    <property name="icon">
@@ -925,10 +934,16 @@
    <property name="text">
     <string>Quit</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
   </action>
   <action name="actionAboutQt">
    <property name="text">
     <string>About &amp;Qt</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutQtRole</enum>
    </property>
   </action>
   <action name="actionAboutTape">
@@ -940,6 +955,9 @@
    <property name="text">
     <string>About Tape</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
+   </property>
   </action>
   <action name="actionNew">
    <property name="icon">
@@ -949,6 +967,9 @@
    </property>
    <property name="text">
     <string>New</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionAddKnown">
@@ -962,6 +983,9 @@
    <property name="text">
     <string>Add known</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionAddCustom">
    <property name="enabled">
@@ -973,6 +997,9 @@
    </property>
    <property name="text">
     <string>Add custom</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionReadOnly">
@@ -989,6 +1016,9 @@
    <property name="text">
     <string>Read only</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionOpenStandard">
    <property name="icon">
@@ -998,6 +1028,9 @@
    </property>
    <property name="text">
     <string>Open standard ...</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionOpenTemplate">
@@ -1009,6 +1042,9 @@
    <property name="text">
     <string>Open template</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionDatabase">
    <property name="text">
@@ -1017,10 +1053,16 @@
    <property name="toolTip">
     <string>Show information about all known measurement</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
    </property>
   </action>
   <action name="actionImportFromPattern">
@@ -1029,6 +1071,9 @@
    </property>
    <property name="text">
     <string>Import from a pattern</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionCreateFromExisting">
@@ -1040,6 +1085,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
  </widget>

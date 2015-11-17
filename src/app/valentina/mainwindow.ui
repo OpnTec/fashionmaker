@@ -375,7 +375,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>117</width>
          <height>58</height>
         </rect>
        </property>
@@ -461,7 +461,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>117</width>
          <height>156</height>
         </rect>
        </property>
@@ -625,7 +625,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>117</width>
          <height>196</height>
         </rect>
        </property>
@@ -867,7 +867,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>117</width>
          <height>58</height>
         </rect>
        </property>
@@ -1358,6 +1358,9 @@
    <property name="shortcut">
     <string notr="true">Ctrl+N</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionOpen">
    <property name="icon">
@@ -1376,6 +1379,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionSave">
@@ -1399,6 +1405,9 @@
    <property name="shortcut">
     <string notr="true">Ctrl+S</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSaveAs">
    <property name="enabled">
@@ -1417,6 +1426,9 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+Shift+S</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionDraw">
@@ -1442,6 +1454,9 @@
    <property name="shortcut">
     <string notr="true">Ctrl+W</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionDetails">
    <property name="checkable">
@@ -1462,6 +1477,9 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+E</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionArrowTool">
@@ -1502,6 +1520,9 @@
    <property name="shortcut">
     <string notr="true">Ctrl+Shift+N</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionOptionDraw">
    <property name="enabled">
@@ -1519,6 +1540,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionTable">
@@ -1541,6 +1565,9 @@
    <property name="shortcut">
     <string notr="true">Ctrl+T</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionHistory">
    <property name="checkable">
@@ -1558,6 +1585,9 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+H</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionLayout">
@@ -1580,6 +1610,9 @@
    <property name="shortcut">
     <string notr="true">Ctrl+L</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionAbout_Qt">
    <property name="text">
@@ -1587,6 +1620,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutQtRole</enum>
    </property>
   </action>
   <action name="actionAbout_Valentina">
@@ -1600,6 +1636,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
    </property>
   </action>
   <action name="actionExit">
@@ -1617,6 +1656,9 @@
    <property name="shortcut">
     <string notr="true">Ctrl+Q</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
   </action>
   <action name="actionPreferences">
    <property name="text">
@@ -1625,6 +1667,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
   </action>
   <action name="actionPattern_properties">
    <property name="text">
@@ -1632,6 +1677,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionZoomIn">
@@ -1652,6 +1700,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionZoomOut">
    <property name="enabled">
@@ -1671,6 +1722,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionEdit_pattern_code">
    <property name="text">
@@ -1678,6 +1732,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionZoomOriginal">
@@ -1698,6 +1755,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionZoomFitBest">
    <property name="enabled">
@@ -1713,6 +1773,9 @@
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+=</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionStopTool">
@@ -1747,6 +1810,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionCloseWindow">
    <property name="text">
@@ -1754,6 +1820,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionOnlineHelp">
@@ -1771,6 +1840,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionLast_tool">
    <property name="enabled">
@@ -1784,6 +1856,9 @@
    </property>
    <property name="shortcut">
     <string notr="true">L</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionShowCurveDetails">
@@ -1801,6 +1876,9 @@
    </property>
    <property name="shortcut">
     <string notr="true">F2</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionSaveAsPDF">
@@ -1943,6 +2021,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionLoadStandard">
    <property name="enabled">
@@ -1954,6 +2035,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionCreateNew">
    <property name="text">
@@ -1964,6 +2048,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionShowM">
@@ -1978,6 +2065,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionSyncMeasurements">
@@ -1994,6 +2084,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionUnloadMeasurements">
    <property name="enabled">
@@ -2007,6 +2100,9 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
  </widget>
