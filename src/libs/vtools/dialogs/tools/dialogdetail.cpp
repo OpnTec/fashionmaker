@@ -28,6 +28,7 @@
 
 #include "dialogdetail.h"
 
+#include <QBuffer>
 #include <QDebug>
 
 #include "../../../vgeometry/varc.h"
