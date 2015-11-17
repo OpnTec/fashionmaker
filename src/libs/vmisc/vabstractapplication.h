@@ -118,6 +118,7 @@ protected:
 
     QPointer<QTranslator> qtTranslator;
     QPointer<QTranslator> qtxmlTranslator;
+    QPointer<QTranslator> qtBaseTranslator;
     QPointer<QTranslator> appTranslator;
     QPointer<QTranslator> pmsTranslator;
 

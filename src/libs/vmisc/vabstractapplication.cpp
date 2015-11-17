@@ -42,6 +42,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
       settings(nullptr),
       qtTranslator(nullptr),
       qtxmlTranslator(nullptr),
+      qtBaseTranslator(nullptr),
       appTranslator(nullptr),
       pmsTranslator(nullptr),
       _patternUnit(Unit::Cm),
@@ -233,6 +234,14 @@ void VAbstractApplication::LoadTranslation(const QString &locale)
 #endif
     installTranslator(qtxmlTranslator);
 
+    qtBaseTranslator = new QTranslator(this);
+#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
+    qtBaseTranslator->load("qtbase_" + locale, translationsPath(locale));
+#else
+    qtBaseTranslator->load("qtbase_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
+    installTranslator(qtBaseTranslator);
+
     appTranslator = new QTranslator(this);
     appTranslator->load("valentina_" + locale, translationsPath(locale));
     installTranslator(appTranslator);
@@ -259,6 +268,12 @@ void VAbstractApplication::ClearTranslation()
     {
         removeTranslator(qtxmlTranslator);
         delete qtxmlTranslator;
+    }
+
+    if (not qtBaseTranslator.isNull())
+    {
+        removeTranslator(qtBaseTranslator);
+        delete qtBaseTranslator;
     }
 
     if (not appTranslator.isNull())
