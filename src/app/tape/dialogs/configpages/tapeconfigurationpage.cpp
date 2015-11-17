@@ -40,6 +40,7 @@
 #include <QCheckBox>
 #include <QIcon>
 #include <QFormLayout>
+#include <QDirIterator>
 
 //---------------------------------------------------------------------------------------------------------------------
 TapeConfigurationPage::TapeConfigurationPage(QWidget *parent)
@@ -147,8 +148,14 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     guiLabel = new QLabel(tr("GUI language"));
     langCombo = new QComboBox;
 
-    QDir dir(qApp->translationsPath());
-    const QStringList fileNames = dir.entryList(QStringList("valentina_*.qm"));
+    QStringList fileNames;
+    QDirIterator it(qApp->translationsPath(), QStringList() << QStringList("valentina_*.qm"), QDir::Files,
+                    QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        it.next();
+        fileNames.append(it.fileName());
+    }
 
     for (int i = 0; i < fileNames.size(); ++i)
     {

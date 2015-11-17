@@ -218,29 +218,29 @@ void VAbstractApplication::LoadTranslation(const QString &locale)
     ClearTranslation();
 
     qtTranslator = new QTranslator(this);
-#if defined(Q_OS_WIN)
-    qtTranslator->load("qt_" + locale, translationsPath());
+#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
+    qtTranslator->load("qt_" + locale, translationsPath(locale));
 #else
     qtTranslator->load("qt_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 #endif
     installTranslator(qtTranslator);
 
     qtxmlTranslator = new QTranslator(this);
-#if defined(Q_OS_WIN)
-    qtxmlTranslator->load("qtxmlpatterns_" + locale, translationsPath());
+#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
+    qtxmlTranslator->load("qtxmlpatterns_" + locale, translationsPath(locale));
 #else
     qtxmlTranslator->load("qtxmlpatterns_" + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 #endif
     installTranslator(qtxmlTranslator);
 
     appTranslator = new QTranslator(this);
-    appTranslator->load("valentina_" + locale, translationsPath());
+    appTranslator->load("valentina_" + locale, translationsPath(locale));
     installTranslator(appTranslator);
 
     const QString system = Settings()->GetPMSystemCode();
 
     pmsTranslator = new QTranslator(this);
-    pmsTranslator->load("measurements_" + system + "_" + locale, translationsPath());
+    pmsTranslator->load("measurements_" + system + "_" + locale, translationsPath(locale));
     installTranslator(pmsTranslator);
 
     InitTrVars();//Very important do it after load QM files.

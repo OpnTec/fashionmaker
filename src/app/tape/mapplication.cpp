@@ -397,10 +397,14 @@ VTapeSettings *MApplication::TapeSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MApplication::translationsPath() const
+/**
+ * @brief translationsPath This function is implementation of the method VAbstractApplication::translationsPath.
+ */
+QString MApplication::translationsPath(const QString &locale) const
 {
     const QString trPath = QStringLiteral("/translations");
 #ifdef Q_OS_WIN
+    Q_UNUSED(locale)
     QDir dir(QApplication::applicationDirPath() + trPath);
     if (dir.exists())
     {
@@ -411,7 +415,17 @@ QString MApplication::translationsPath() const
         return QApplication::applicationDirPath() + "/../../valentina/bin" + trPath;
     }
 #elif defined(Q_OS_MAC)
-    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + trPath);
+    QString mainPath;
+    if (locale.isEmpty())
+    {
+        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath;
+    }
+    else
+    {
+        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath + QLatin1Literal("/")
+                + locale + QLatin1Literal(".lproj");
+    }
+    QDir dirBundle(mainPath);
     if (dirBundle.exists())
     {
         return dirBundle.absolutePath();
@@ -429,13 +443,14 @@ QString MApplication::translationsPath() const
         }
     }
 #else // Unix
+    Q_UNUSED(locale)
     QDir dir1(QApplication::applicationDirPath() + trPath);
     if (dir1.exists())
     {
         return dir1.absolutePath();
     }
 
-    QDir dir2(QApplication::applicationDirPath() + "/../../valentina/bin" + trPath);
+    QDir dir2(QApplication::applicationDirPath() + QLatin1Literal("/../../valentina/bin") + trPath);
     if (dir2.exists())
     {
         return dir2.absolutePath();

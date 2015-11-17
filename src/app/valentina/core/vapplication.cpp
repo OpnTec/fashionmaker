@@ -364,13 +364,27 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VApplication::translationsPath() const
+/**
+ * @brief translationsPath This function is implementation of the method VAbstractApplication::translationsPath.
+ */
+QString VApplication::translationsPath(const QString &locale) const
 {
     const QString trPath = QStringLiteral("/translations");
 #ifdef Q_OS_WIN
+    Q_UNUSED(locale)
     return QApplication::applicationDirPath() + trPath;
 #elif defined(Q_OS_MAC)
-    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + trPath);
+    QString mainPath;
+    if (locale.isEmpty())
+    {
+        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath;
+    }
+    else
+    {
+        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath + QLatin1Literal("/")
+                + locale + QLatin1Literal(".lproj");
+    }
+    QDir dirBundle(mainPath);
     if (dirBundle.exists())
     {
         return dirBundle.absolutePath();
@@ -388,6 +402,7 @@ QString VApplication::translationsPath() const
         }
     }
 #else // Unix
+    Q_UNUSED(locale)
     QDir dir(QApplication::applicationDirPath() + trPath);
     if (dir.exists())
     {

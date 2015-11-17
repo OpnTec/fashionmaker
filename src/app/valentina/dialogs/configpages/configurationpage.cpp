@@ -41,6 +41,7 @@
 #include <QCheckBox>
 #include <QIcon>
 #include <QVBoxLayout>
+#include <QDirIterator>
 
 //---------------------------------------------------------------------------------------------------------------------
 ConfigurationPage::ConfigurationPage(QWidget *parent)
@@ -155,8 +156,14 @@ QGroupBox *ConfigurationPage::LangGroup()
     QLabel *guiLabel = new QLabel(tr("GUI language"));
     langCombo = new QComboBox;
 
-    QDir dir(qApp->translationsPath());
-    const QStringList fileNames = dir.entryList(QStringList("valentina_*.qm"));
+    QStringList fileNames;
+    QDirIterator it(qApp->translationsPath(), QStringList() << QStringList("valentina_*.qm"), QDir::Files,
+                    QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        it.next();
+        fileNames.append(it.fileName());
+    }
 
     for (int i = 0; i < fileNames.size(); ++i)
     {

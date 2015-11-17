@@ -61,7 +61,7 @@ public:
 
     void               InitOptions();
 
-    virtual QString    translationsPath() const Q_DECL_OVERRIDE;
+    virtual QString    translationsPath(const QString &locale = QString()) const Q_DECL_OVERRIDE;
     QString            TapeFilePath() const;
 
     QTimer             *getAutoSaveTimer() const;

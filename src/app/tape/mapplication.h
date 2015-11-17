@@ -71,7 +71,7 @@ public:
     virtual void  OpenSettings() Q_DECL_OVERRIDE;
     VTapeSettings *TapeSettings();
 
-    virtual QString translationsPath() const Q_DECL_OVERRIDE;
+    virtual QString translationsPath(const QString &locale = QString()) const Q_DECL_OVERRIDE;
     QString diagramsPath() const;
 
     void ShowDataBase();
