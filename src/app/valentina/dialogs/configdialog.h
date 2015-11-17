@@ -47,6 +47,7 @@ signals:
     void              UpdateProperties();
 protected:
     virtual void      closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void      showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(ConfigDialog)
     QListWidget       *contentsWidget;
@@ -55,6 +56,7 @@ private:
     PatternPage       *patternPage;
     CommunityPage     *communityPage;
     PathPage          *pathPage;
+    bool              isInitialized;
     void              createIcons();
     void              createIcon(const QString &icon, const QString &text);
     void              Apply();

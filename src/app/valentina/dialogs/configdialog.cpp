@@ -38,7 +38,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 ConfigDialog::ConfigDialog(QWidget *parent) :
     QDialog(parent), contentsWidget(nullptr), pagesWidget(nullptr), configurationPage(nullptr), patternPage(nullptr),
-    communityPage(nullptr), pathPage(nullptr)
+    communityPage(nullptr), pathPage(nullptr), isInitialized(false)
 {
     contentsWidget = new QListWidget;
     contentsWidget->setViewMode(QListView::IconMode);
@@ -92,7 +92,6 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     setWindowTitle(tr("Config Dialog"));
 
-    this->setFixedSize(QSize(750, 565));
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 }
 
@@ -114,6 +113,27 @@ void ConfigDialog::closeEvent(QCloseEvent *event)
         done(QDialog::Accepted);
     }
     event->accept();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigDialog::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    setMaximumSize(size());
+    setMinimumSize(size());
+
+    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
