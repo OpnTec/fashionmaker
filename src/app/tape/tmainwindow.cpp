@@ -660,7 +660,7 @@ void TMainWindow::AboutToShowWindowMenu()
         const int index = title.lastIndexOf("[*]");
         if (index != -1)
         {
-            title.replace(index, 3, "*");
+            window->isWindowModified() ? title.replace(index, 3, "*") : title.replace(index, 3, "");
         }
 
         QAction *action = ui->menuWindow->addAction(title, this, SLOT(ShowWindow()));
