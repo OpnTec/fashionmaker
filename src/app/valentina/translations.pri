@@ -4,7 +4,68 @@ TRANSLATIONS_PATH = ../../../share/translations
 # For generation *.qm file first you need create *.ts.
 # See section TRANSLATIONS in file ../../share/translations/translations.pro.
 # See section TRANSLATIONS in file ../../share/translations/measurements.pro.
-INSTALL_TRANSLATIONS += $$files($${TRANSLATIONS_PATH}/*.qm)
+
+PMSYSTEMS += \
+    p0 p1 p2 p3 p4 p5 p6 p7 p8 p9 p10 p11 p12 p13 p14 p15 p16 p17 p18 p19 p20 p21 p22 p23 p24 p25 p26 p27 p28 p29 p30 \
+    p31 p32 p33 p34 p35 p36 p37 p38 p39 p40 p41 p42 p43 p44 p45 p46 p47 p48 p49 p50 p51 p52 p53 p54 p998
+
+LANGUAGES += \
+    ru_RU \
+    uk_UA \
+    de_DE \
+    cs_CZ \
+    he_IL \
+    fr_FR \
+    it_IT \
+    nl_NL \
+    id_ID \
+    es_ES \
+    fi_FI \
+    en_US \
+    en_CA \
+    en_IN \
+    ro_RO
+
+for(lang, LANGUAGES) {
+    INSTALL_TRANSLATIONS += $${TRANSLATIONS_PATH}/valentina_$${lang}.qm
+}
+
+for(lang, LANGUAGES) {
+    for(sys, PMSYSTEMS) {
+        INSTALL_TRANSLATIONS += $${TRANSLATIONS_PATH}/measurements_$${sys}_$${lang}.qm
+    }
+}
+
+# Some systems use special name for lrelease. For example opensuse 13.2 has lrelease-qt5.
+isEmpty(LRELEASE){
+    LRELEASE = lrelease
+}
+
+# Run generation *.qm file for available *.ts files each time you run qmake.
+for(_translation_name, INSTALL_TRANSLATIONS) {
+  _translation_name_qm = $$basename(_translation_name)
+  _translation_name_ts = $$section(_translation_name_qm, ".", 0, 0).ts
+
+    !exists($${PWD}/$$_translation_name) {
+        system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) $$shell_path($${PWD}/$${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($${PWD}/$$_translation_name))
+        unix {
+            exists($${OUT_PWD}/$$DESTDIR/valentina) {
+                system(rm -fv $${OUT_PWD}/$$DESTDIR/valentina) # force to call linking
+            }
+            system(rm -fv $${OUT_PWD}/$$DESTDIR/translations/*.qm)
+        }
+    }
+}
+
+for(DIR, INSTALL_TRANSLATIONS) {
+     #add these absolute paths to a variable which
+     #ends up as 'mkcommands = path1 path2 path3 ...'
+
+     tr_path += $${PWD}/$$DIR
+}
+
+# Make possible run program even you do not install it. Seek files in local directory.
+forceCopyToDestdir($$tr_path, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
 
 macx{
     RESOURCES_DIR = "Contents/Resources"

@@ -455,37 +455,6 @@ win32:*-g++ {
     }
 }
 
-# Some systems use special name for lrelease. For example opensuse 13.2 has lrelease-qt5.
-isEmpty(LRELEASE){
-    LRELEASE = lrelease
-}
-
-# Run generation *.qm file for available *.ts files each time you run qmake.
-for(_translation_name, INSTALL_TRANSLATIONS) {
-  _translation_name_qm = $$basename(_translation_name)
-  _translation_name_ts = $$section(_translation_name_qm, ".", 0, 0).ts
-
-    !exists($${PWD}/$$_translation_name) {
-        system($$shell_path($$[QT_INSTALL_BINS]/$$LRELEASE) $$shell_path($${PWD}/$${TRANSLATIONS_PATH}/$$_translation_name_ts) -qm $$shell_path($${PWD}/$$_translation_name))
-        unix {
-            exists($${OUT_PWD}/$$DESTDIR/valentina) {
-                system(rm -fv $${OUT_PWD}/$$DESTDIR/valentina) # force to call linking
-            }
-            system(rm -fv $${OUT_PWD}/$$DESTDIR/translations/*.qm)
-        }
-    }
-}
-
-for(DIR, INSTALL_TRANSLATIONS) {
-     #add these absolute paths to a variable which
-     #ends up as 'mkcommands = path1 path2 path3 ...'
-
-     tr_path += $${PWD}/$$DIR
-}
-
-# Make possible run program even you do not install it. Seek files in local directory.
-forceCopyToDestdir($$tr_path, $$shell_path($${OUT_PWD}/$$DESTDIR/translations))
-
 for(DIR, INSTALL_STANDARD_MEASHUREMENTS) {
      #add these absolute paths to a variable which
      #ends up as 'mkcommands = path1 path2 path3 ...'
