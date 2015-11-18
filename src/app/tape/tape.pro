@@ -206,8 +206,8 @@ macx{
     templates.files = $$INSTALL_STANDARD_TEMPLATES
 
     # Copy to bundle standard measurements files
-    diagrams.path = $$RESOURCES_DIR/
-    diagrams.files = $${OUT_PWD}/$${DESTDIR}/diagrams.rcc
+    # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
+    forceCopyToDestdir($${OUT_PWD}/$${DESTDIR}/diagrams.rcc, $$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/))
 
     format.path = $$RESOURCES_DIR/
     format.files = $$PWD/../../../dist/macx/measurements.icns
@@ -216,7 +216,6 @@ macx{
         templates \
         standard \
         libraries \
-        diagrams \
         format
 }
 
