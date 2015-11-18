@@ -38,8 +38,6 @@ public:
     VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
                   QObject *parent = 0);
 
-    virtual QString StandardTablesPath()const Q_DECL_OVERRIDE;
-
     QByteArray GetDataBaseGeometry() const;
     void SetDataBaseGeometry(const QByteArray &value);
 

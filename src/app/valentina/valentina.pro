@@ -183,18 +183,14 @@ message(Examples: $$[QT_INSTALL_EXAMPLES])
 # Path to recource file.
 win32:RC_FILE = share/resources/valentina.rc
 
-# Keep path to all files with standard measurements we support right now
-INSTALL_STANDARD_MEASHUREMENTS += share/resources/tables/standard/GOST_man_ru.vst
-
-# Keep path to all template files we have right now
-INSTALL_STANDARD_TEMPLATES += ../tape/share/resources/templates/template_all_measurements.vit
+# INSTALL_STANDARD_MEASHUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
+include(../tables.pri)
 
 win32 {
     INSTALL_PDFTOPS += ../../../dist/win/pdftops.exe
 }
 
-# TRANSLATIONS_PATH defined inside translations.pri
-include(translations.pri)
+include(../translations.pri)
 
 # Set "make install" command for Unix-like systems.
 unix{
@@ -274,7 +270,7 @@ unix{
         # logo on macx.
         ICON = ../../../dist/Valentina.icns
 
-        QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/Info.plist
+        QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/valentina/Info.plist
 
         # Copy to bundle standard measurements files
         standard.path = $$RESOURCES_DIR/tables/standard/
@@ -455,22 +451,6 @@ win32:*-g++ {
     }
 }
 
-for(DIR, INSTALL_STANDARD_MEASHUREMENTS) {
-     #add these absolute paths to a variable which
-     #ends up as 'mkcommands = path1 path2 path3 ...'
-     st_path += $${PWD}/$$DIR
-}
-
-copyToDestdir($$st_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tables/standard))
-
-for(DIR, INSTALL_STANDARD_TEMPLATES) {
-     #add these absolute paths to a variable which
-     #ends up as 'mkcommands = path1 path2 path3 ...'
-     t_path += $${PWD}/$$DIR
-}
-
-copyToDestdir($$t_path, $$shell_path($${OUT_PWD}/../tape/$${DESTDIR}/tables/templates))
-
 win32 {
     for(DIR, INSTALL_PDFTOPS) {
         #add these absolute paths to a variable which
@@ -627,5 +607,5 @@ noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
 
 macx{
    # run macdeployqt to include all qt libraries in packet
-   QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/macdeployqt $${OUT_PWD}/$${DESTDIR}/$${TARGET}.app -executable=$${OUT_PWD}/$${DESTDIR}/$${TARGET}.app/$$MACOS_DIR/tape
+   QMAKE_POST_LINK += $$[QT_INSTALL_BINS]/macdeployqt $${OUT_PWD}/$${DESTDIR}/$${TARGET}.app
 }

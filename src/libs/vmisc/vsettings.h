@@ -41,8 +41,6 @@ public:
     VSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = 0);
 
-    virtual QString StandardTablesPath() const Q_DECL_OVERRIDE;
-
     QString GetLabelLanguage() const;
     void SetLabelLanguage(const QString &value);
 

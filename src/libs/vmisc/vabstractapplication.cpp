@@ -29,6 +29,7 @@
 #include "vabstractapplication.h"
 #include "../vmisc/def.h"
 
+#include <QDir>
 #include <QLibraryInfo>
 #include <QLoggingCategory>
 #include <QTranslator>
@@ -74,6 +75,61 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::~VAbstractApplication()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief translationsPath return path to the root directory that contain QM files.
+ * @param locale used only in Mac OS. If empty return path to the root directory. If not - return path to locale
+ * subdirectory inside an app bundle.
+ * @return path to a directory that contain QM files.
+ */
+QString VAbstractApplication::translationsPath(const QString &locale) const
+{
+    const QString trPath = QStringLiteral("/translations");
+#ifdef Q_OS_WIN
+    Q_UNUSED(locale)
+    return QApplication::applicationDirPath() + trPath;
+#elif defined(Q_OS_MAC)
+    QString mainPath;
+    if (locale.isEmpty())
+    {
+        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath;
+    }
+    else
+    {
+        mainPath = QApplication::applicationDirPath() + QLatin1Literal("/../Resources") + trPath + QLatin1Literal("/")
+                + locale + QLatin1Literal(".lproj");
+    }
+    QDir dirBundle(mainPath);
+    if (dirBundle.exists())
+    {
+        return dirBundle.absolutePath();
+    }
+    else
+    {
+        QDir dir(QApplication::applicationDirPath() + trPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/translations");
+        }
+    }
+#else // Unix
+    Q_UNUSED(locale)
+    QDir dir(QApplication::applicationDirPath() + trPath);
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+    else
+    {
+        return QStringLiteral("/usr/share/valentina/translations");
+    }
+#endif
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 MeasurementsType VAbstractApplication::patternType() const

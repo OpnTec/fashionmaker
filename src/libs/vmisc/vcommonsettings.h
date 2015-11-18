@@ -39,7 +39,7 @@ public:
     VCommonSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = 0);
 
-    virtual QString StandardTablesPath()const=0 ;
+    QString StandardTablesPath() const;
     QString TemplatesPath() const;
 
     QString GetPathIndividualMeasurements() const;

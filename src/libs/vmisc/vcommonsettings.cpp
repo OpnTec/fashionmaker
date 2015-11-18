@@ -72,6 +72,47 @@ VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &orga
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VCommonSettings::StandardTablesPath() const
+{
+    const QString stPath = QStringLiteral("/tables/standard");
+#ifdef Q_OS_WIN
+    return QApplication::applicationDirPath() + stPath;
+#elif defined(Q_OS_MAC)
+    QDir dirBundle(QApplication::applicationDirPath() + QStringLiteral("/../Resources") + stPath);
+    if (dirBundle.exists())
+    {
+        return dirBundle.absolutePath();
+    }
+    else
+    {
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/tables/standard");
+        }
+    }
+#else // Unix
+    #ifdef QT_DEBUG
+        return QApplication::applicationDirPath() + stPath;
+    #else
+        QDir dir(QApplication::applicationDirPath() + stPath);
+        if (dir.exists())
+        {
+            return dir.absolutePath();
+        }
+        else
+        {
+            return QStringLiteral("/usr/share/valentina/tables/standard");
+        }
+    #endif
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathIndividualMeasurements() const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName());

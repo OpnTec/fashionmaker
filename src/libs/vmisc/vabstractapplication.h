@@ -56,13 +56,8 @@ public:
     virtual ~VAbstractApplication() Q_DECL_OVERRIDE;
 
     virtual const VTranslateVars *TrVars()=0;
-    /**
-     * @brief translationsPath return path to the root directory that contain QM files.
-     * @param locale used only in Mac OS. If empty return path to the root directory. If not - return path to locale
-     * subdirectory inside an app bundle.
-     * @return path to a directory that contain QM files.
-     */
-    virtual QString  translationsPath(const QString &locale = QString()) const=0;
+
+    QString          translationsPath(const QString &locale = QString()) const;
 
     void             LoadTranslation(const QString &locale);
 
