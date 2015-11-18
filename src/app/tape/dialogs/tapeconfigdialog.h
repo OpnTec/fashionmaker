@@ -49,6 +49,7 @@ signals:
 protected:
     virtual void      closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void      changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+    virtual void      showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(TapeConfigDialog)
     QListWidget           *contentsWidget;
@@ -58,6 +59,7 @@ private:
     QPushButton           *applyButton;
     QPushButton           *canselButton;
     QPushButton           *okButton;
+    bool                  isInitialized;
 
     void createIcons();
     void createIcon(const QString &icon, const QString &text);

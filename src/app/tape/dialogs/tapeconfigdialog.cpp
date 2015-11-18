@@ -44,10 +44,9 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
       pathPage(nullptr),
       applyButton(nullptr),
       canselButton(nullptr),
-      okButton(nullptr)
+      okButton(nullptr),
+      isInitialized(false)
 {
-    this->setMaximumHeight(300);
-
     contentsWidget = new QListWidget;
     contentsWidget->setViewMode(QListView::IconMode);
     contentsWidget->setIconSize(QSize(96, 84));
@@ -131,6 +130,27 @@ void TapeConfigDialog::changeEvent(QEvent *event)
 
     // remember to call base class implementation
     QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapeConfigDialog::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    if (isInitialized)
+    {
+        return;
+    }
+    // do your init stuff here
+
+    setMaximumSize(size());
+    setMinimumSize(size());
+
+    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
