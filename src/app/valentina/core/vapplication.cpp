@@ -79,6 +79,15 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         type = QtWarningMsg;
     }
 
+#if defined(Q_OS_MAC)
+    // Try hide very annoying, Qt related, warnings in Mac OS X
+    // Remove after Qt fix will be released
+    if ((type == QtWarningMsg) && msg.contains("QNSView"))
+    {
+        type = QtDebugMsg;
+    }
+#endif
+
     // this is another one that doesn't make sense as just a debug message.  pretty serious
     // sign of a problem
     // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
