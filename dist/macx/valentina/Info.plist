@@ -8,6 +8,8 @@
 	<string>@ICON@</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.6</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2013-2015, Valentina project</string>
 	<key>CFBundleSignature</key>
@@ -17,9 +19,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>org.valentinaproject.@EXECUTABLE@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>@SHORT_VERSION@</string>
+	<string>0.4.0</string>
 	<key>CFBundleVersion</key>
-	<string>@FULL_VERSION@</string>
+	<string>0.4.0.0</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleDocumentTypes</key>
@@ -42,7 +44,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleTypeIconFile</key>
-			<string>measurements</string>
+			<string>measurements.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.valentinaproject.vit</string>
@@ -56,7 +58,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleTypeIconFile</key>
-			<string>measurements</string>
+			<string>measurements.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.valentinaproject.vst</string>
@@ -67,5 +69,68 @@
 			<string>Owner</string>
 		</dict>
 	</array>
-</dict>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Valentina pattern file</string>
+			<key>UTTypeIconFile</key>
+			<string>@ICON@</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.valentinaproject.val</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>val</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Valentina individual measurements</string>
+			<key>UTTypeIconFile</key>
+			<string>measurements.icns</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.valentinaproject.vit</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>vit</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Valentina standard measurements</string>
+			<key>UTTypeIconFile</key>
+			<string>measurements.icns</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.valentinaproject.vst</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>vst</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>	
 </plist>
