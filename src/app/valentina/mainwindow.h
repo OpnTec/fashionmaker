@@ -60,6 +60,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     virtual ~MainWindow() Q_DECL_OVERRIDE;
 
+    bool               LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
+
 public slots:
     void               ProcessCMD();
 
@@ -305,7 +307,6 @@ private:
 
     void               ToggleMSync(bool toggle);
 
-    bool               LoadPattern(const QString &curFile, const QString &customMeasureFile = QString());
     void               ReopenFilesAfterCrash(QStringList &args);
     void               DoExport(const VCommandLinePtr& expParams);
 

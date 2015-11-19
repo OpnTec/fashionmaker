@@ -392,6 +392,51 @@ void MApplication::InitTrVars()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool MApplication::event(QEvent *e)
+{
+    switch(e->type())
+    {
+        // In Mac OS X the QFileOpenEvent event is generated when user perform "Open With" from Finder (this event is
+        // Mac specific).
+        case QEvent::FileOpen:
+        {
+            QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
+            if(fileOpenEvent)
+            {
+                const QString macFileOpen = fileOpenEvent->file();
+                if(not macFileOpen.isEmpty())
+                {
+                    TMainWindow *mw = MainWindow();
+                    if (mw)
+                    {
+                        mw->LoadFile(macFileOpen);  // open file in existing window
+                    }
+                    return true;
+                }
+            }
+        }
+#if defined(Q_OS_MAC)
+        case QEvent::ApplicationActivate:
+        {
+            Clean();
+            if (!mainWindows.isEmpty())
+            {
+                TMainWindow *mw = MainWindow();
+                if (mw && not mw->isMinimized())
+                {
+                    mw->show();
+                }
+                return true;
+            }
+        }
+#endif //defined(Q_OS_MAC)
+        default:
+            return VAbstractApplication::event(e);
+    }
+    return VAbstractApplication::event(e);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MApplication::OpenSettings()
 {
     settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QApplication::organizationName(),
@@ -667,32 +712,6 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         qApp->exit(V_EX_OK); // close program after processing in console mode
     }
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_WS_MAC)
-bool MApplication::event(QEvent* event)
-{
-    switch (event->type())
-    {
-        case QEvent::ApplicationActivate:
-        {
-            Clean();
-            if (!mainWindows.isEmpty())
-            {
-                TMainWindow *mw = MainWindow();
-                if (mw && !mw->isMinimized())
-                {
-                    MainWindow()->show();
-                }
-                return true;
-            }
-        }
-        default:
-            break;
-    }
-    return QApplication::event(event);
-}
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 TMainWindow *MApplication::NewMainWindow()

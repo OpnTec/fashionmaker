@@ -84,6 +84,7 @@ public:
 
 protected:
     virtual void       InitTrVars() Q_DECL_OVERRIDE;
+    virtual bool	   event(QEvent *e) Q_DECL_OVERRIDE;
 
 private slots:
 #if defined(Q_OS_WIN) && defined(Q_CC_GNU)

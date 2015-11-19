@@ -60,10 +60,6 @@ public:
     TMainWindow *MainWindow();
     QList<TMainWindow*> MainWindows();
 
-#if defined(Q_WS_MAC)
-    bool event(QEvent *event);
-#endif
-
     void InitOptions();
 
     virtual const VTranslateVars *TrVars() Q_DECL_OVERRIDE;
@@ -85,6 +81,7 @@ public slots:
 
 protected:
     virtual void InitTrVars() Q_DECL_OVERRIDE;
+    virtual bool event(QEvent *e) Q_DECL_OVERRIDE;
 
 private slots:
     void OpenFile(const QString &path);

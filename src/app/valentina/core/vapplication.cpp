@@ -36,6 +36,7 @@
 #include "../version.h"
 #include "../vmisc/logging.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "../mainwindow.h"
 
 #include <QDebug>
 #include <QDir>
@@ -599,6 +600,46 @@ const VTranslateVars *VApplication::TrVars()
 void VApplication::InitTrVars()
 {
     trVars = new VTranslateVars(ValentinaSettings()->GetOsSeparator());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VApplication::event(QEvent *e)
+{
+    switch(e->type())
+    {
+        // In Mac OS X the QFileOpenEvent event is generated when user perform "Open With" from Finder (this event is
+        // Mac specific).
+        case QEvent::FileOpen:
+        {
+            QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
+            if(fileOpenEvent)
+            {
+                const QString macFileOpen = fileOpenEvent->file();
+                if(not macFileOpen.isEmpty())
+                {
+                    MainWindow *window = qobject_cast<MainWindow*>(mainWindow);
+                    if (window)
+                    {
+                        window->LoadPattern(macFileOpen);  // open file in existing window
+                    }
+                    return true;
+                }
+            }
+        }
+#if defined(Q_OS_MAC)
+        case QEvent::ApplicationActivate:
+        {
+            if (mainWindow && not mainWindow->isMinimized())
+            {
+                mainWindow->show();
+            }
+            return true;
+        }
+#endif //defined(Q_OS_MAC)
+        default:
+            return VAbstractApplication::event(e);
+    }
+    return VAbstractApplication::event(e);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
