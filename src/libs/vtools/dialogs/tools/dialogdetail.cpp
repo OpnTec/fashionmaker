@@ -473,6 +473,12 @@ bool DialogDetail::DetailIsValid() const
     }
     else
     {
+        if(not DetailIsClockwise())
+        {
+            url += QString(" ") +tr("You have to choose points in a clockwise direction!");
+            ui.helpLabel->setText(url);
+            return false;
+        }
         if (FirstPointEqualLast())
         {
             url += QString(" ") +tr("First point can not equal the last point!");
@@ -515,6 +521,38 @@ bool DialogDetail::FirstPointEqualLast() const
         {
             return false;
         }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogDetail::DetailIsClockwise() const
+{
+    VDetail detail;
+    if(ui.listWidget->count() < 3)
+    {
+        return true;
+    }
+    for (qint32 i = 0; i < ui.listWidget->count(); ++i)
+    {
+        QListWidgetItem *item = ui.listWidget->item(i);
+        detail.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
+    }
+    QVector<QPointF> points = detail.ContourPoints(data);
+
+    QVector<qreal> x;
+    QVector<qreal> y;
+    const int n = points.size();
+    for (int i=0; i < n; ++i)
+    {
+        x.append(points.at(i).x());
+        y.append(points.at(i).y());
+    }
+
+    qreal res = detail.SumTrapezoids(n, x, y);
+    if (res < 0)
+    {
+        return true;
     }
     return false;
 }

@@ -289,7 +289,6 @@ qint64 VLayoutDetail::Square() const
     }
 
     const int n = d->layoutAllowence.count();
-    qreal s, res = 0;
     qint64 sq = 0;
 
     QVector<qreal> x;
@@ -301,28 +300,8 @@ qint64 VLayoutDetail::Square() const
         y.append(d->layoutAllowence.at(i).y());
     }
 
-    // Calculation a polygon area through the sum of the areas of trapezoids
-    for (int i = 0; i < n; ++i)
-    {
-        if (i == 0)
-        {
-            s = x.at(i)*(y.at(n-1) - y.at(i+1)); //if i == 0, then y[i-1] replace on y[n-1]
-            res += s;
-        }
-        else
-        {
-            if (i == n-1)
-            {
-                s = x.at(i)*(y.at(i-1) - y.at(0)); // if i == n-1, then y[i+1] replace on y[0]
-                res += s;
-            }
-            else
-            {
-                s = x.at(i)*(y.at(i-1) - y.at(i+1));
-                res += s;
-            }
-        }
-    }
+    qreal res = this->SumTrapezoids(n, x, y);
+
     sq = qFloor(qAbs(res/2.0));
     return sq;
 }

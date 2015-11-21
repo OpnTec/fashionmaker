@@ -65,6 +65,8 @@ public:
     void    setWidth(const qreal &value);
 
     static QVector<QPointF> Equidistant(const QVector<QPointF> &points, const EquidistantType &eqv, qreal width);
+    qreal SumTrapezoids(int n,  QVector<qreal> x,  QVector<qreal> y) const;
+
 
 protected:
     static QVector<QPointF> RemoveDublicates(const QVector<QPointF> &points);
