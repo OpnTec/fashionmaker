@@ -210,25 +210,33 @@ unix{
         tape.files += $${OUT_PWD}/../tape/$${DESTDIR}/tape
 
         # .desktop file
-        desktop.path = $$DATADIR/applications/
-        desktop.files += ../../../dist/$${TARGET}.desktop
+        desktop.path = /usr/share/applications/
+        desktop.files += ../../../dist/$${TARGET}.desktop \
+        desktop.files += ../../../dist/tape.desktop
 
         # logo
-        pixmaps.path = $$DATADIR/pixmaps/
-        pixmaps.files += ../../../dist/$${TARGET}.png \
-                         ../../../dist/application-x-valentina-pattern.png
+        pixmaps.path = /usr/share/pixmaps/
+        pixmaps.files += \
+            ../../../dist/$${TARGET}.png \
+            ../../../dist/tape.png \
+            ../../../dist/application-x-valentina-pattern.png \
+            ../../../dist/application-x-valentina-i-measurements.png \
+            ../../../dist/application-x-valentina-s-measurements.png \
 
         # Path to translation files after installation
-        translations.path = $$DATADIR/$${TARGET}/translations/
+        translations.path = /usr/share/$${TARGET}/translations/
         translations.files = $$INSTALL_TRANSLATIONS
 
         # Path to standard measurement after installation
-        standard.path = $$DATADIR/$${TARGET}/tables/standard/
+        standard.path = /usr/share/$${TARGET}/tables/standard/
         standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
 
         # Path to templates after installation
-        templates.path = $$DATADIR/$${TARGET}/tables/templates/
+        templates.path = /usr/share/$${TARGET}/tables/templates/
         templates.files = $$INSTALL_STANDARD_TEMPLATES
+
+        diagrams.path = /usr/share/$${TARGET}/
+        diagrams.files = $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc
 
         INSTALLS += \
             target \
@@ -237,7 +245,8 @@ unix{
             pixmaps \
             translations \
             standard \
-            templates
+            templates \
+            diagrams
     }
     macx{
         # Some macx stuff

@@ -1,12 +1,15 @@
 [Desktop Entry]
 Type=Application
+Encoding=UTF-8
 Name=Valentina
-Exec=valentina %U
+Exec=valentina %F
 Version=1.0
 Encoding=UTF-8
 GenericName=Pattern making program
-Comment=Valentina is a cross-platform patternmaking program which allows designers to create and model patterns of clothing. This software allows pattern creation, using either standard sizing tables or an individual’s set of measurements. It blends new technologies with traditional methods to create a unique pattern making tool.
-Icon=valentina
-Terminal=false
+Comment=Creating pattern of clothes
+Comment[ru]=Создание выкроек одежды
+Comment[uk]=Створеня викрійок одягу
+Icon=/usr/share/pixmaps/valentina.png
+Terminal=true
 MimeType=application/x-valentina-pattern;
-Categories=Graphics;VectorGraphics;2DGraphics;
+Categories=Graphics;VectorGraphics;2DGraphics;Qt;

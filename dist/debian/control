@@ -5,7 +5,6 @@ Maintainer: Roman Telezhynskyi <dismine@gmail.com>
 Build-Depends: debhelper (>= 8.0.0), 
                qtbase5-dev (>= 5.0.0), 
                libqt5svg5-dev (>= 5.0.0), 
-               ccache, 
                g++ (>= 4.6.0), 
                qt5-default (>= 5.0.0), 
                qttools5-dev-tools (>= 5.0.0), 
@@ -23,4 +22,3 @@ Description: Pattern making program.
  creation, using either standard sizing tables or an individual’s set of 
  measurements. It blends new technologies with traditional methods to create 
  a unique pattern making tool.
- Supported langugages: En, Ru, Uk, Cz, It, Fr, De, Nl
