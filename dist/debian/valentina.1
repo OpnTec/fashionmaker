@@ -1,86 +1,144 @@
 .\" Manpage for valentina.
-.\" Contact dismine@gmail.com.in to correct errors.
-.TH man 1 "8 September 2015" "valentina man page"
+.\" Contact dismine@gmail.com to correct errors.
+.TH valentina 1 "21 October, 2015" "valentina man page"
 .SH NAME
 valentina \- Pattern making program.
 .SH SYNOPSIS
 valentina [options] file
 .SH DESCRIPTION
-Valentina is a cross-platform patternmaking program which allows designers 
+.B Valentina
+is a cross-platform patternmaking program which allows designers 
 to create and model patterns of clothing. This software allows pattern 
 creation, using either standard sizing tables or an individual’s set of 
 measurements. It blends new technologies with traditional methods to create 
 a unique pattern making tool.
 .SH OPTIONS
-  -h, --help                                Displays this help.
-  -v, --version                             Displays version information.
-  -o, --outfile <The exported layout file>  Path to output exported layout
-                                            file. Use it to enable console
-                                            export mode.
-  -m, --mfile <The measure file>            Path to custom measure file (export
-                                            mode).
-  -f, --format <Format number>              Number corresponding to output
-                                            format (default = 0, export mode): 
-                                            Svg files (*.svg) = 0
-                                            PDF files (*.pdf) = 1
-                                            Images (*.png) = 2
-                                            Wavefront OBJ (*.obj) = 3
-                                            PS files (*.ps) = 4
-                                            EPS files (*.eps) = 5
-                                            DXF files (*.dxf) = 6
-
-  -p, --pageformat <Template number>        Number corresponding to page
-                                            template (default = 0, export mode):
-                                            A0 = 0
-                                            A1 = 1
-                                            A2 = 2
-                                            A3 = 3
-                                            A4 = 4
-                                            Letter = 5
-                                            Legal = 6
-                                            Roll 24in = 7
-                                            Roll 30in = 8
-                                            Roll 36in = 9
-                                            Roll 42in = 10
-                                            Roll 44in = 11
-
-  -W, --pagew <The page width>              Page width in current units like
-                                            12.0 (cannot be used with
-                                            "pageformat", export mode).
-  -H, --pageh <The page height>             Page height in current units like
-                                            12.0 (cannot be used with
-                                            "pageformat", export mode).
-  -U, --pageunits <The measure unit>        Page height/width measure units
-                                            (cannot be used with "pageformat",
-                                            export mode): mm, cm, inch, px
-  -r, --rotate <Angle>                      Rotation in degrees (one of
-                                            predefined). Default (or 0) is
-                                            no-rotate (export mode).
-  -c, --crop                                Auto crop unused length (export
-                                            mode).
-  -u, --unite                               Unite pages if possible (export
-                                            mode).
-  -S, --savelen                             Save length of the sheet if set.
-                                            (export mode).
-  -l, --layounits <The unit>                Layout units (as paper's one except
-                                            px, export mode).
-  -s, --shiftlen <Shift length>             Shift layout length measured in
-                                            layout units (export mode).
-  -G, --gapwidth <The gap width>            Gap width x2, measured in layout
-                                            units. (export mode).
-  -g, --groups <Grouping type>              Sets layout groupping (export
-                                            mode): 
-                                            Three groups: big, middle, small = 0
-                                            Two groups: big, small = 1
-                                            Descending area = 2
-  -L, --locale <Locale>                     Sets language locale (export mode).
-		                                    Default is system locale. Supported
-		                                    locales: ru_RU, uk_UA, de_DE, cs_CZ,
-		                                    he_IL, fr_FR, it_IT, nl_NL, id_ID,
-		                                    es_ES, fi_FI, en_US
-
-
-Arguments:
-  filename                                  Pattern file.
+.IP "-h, --help"
+Displays this help.
+.IP "-v, --version"
+Displays version information.
+.IP "-b, --basename <The base filename of layout files>"
+.RB "The base filename of exported layout files. Use it to enable console " "export mode" "."
+.IP "-d, --destination <The destination folder>"
+The path to output destination folder. By default the directory at which the application was started.
+.IP "-m, --mfile <The measure file>"
+.RB "Path to custom measure file (" "export mode" ")."
+.IP "-f, --format <Format number>" 
+.RB "Number corresponding to output format (default = 0, " "export mode" "):" 
+.RS 
+.BR "*" " Svg files (*.svg) = 0,"
+.RE
+.RS 
+.BR "*" " PDF files (*.pdf) = 1,"
+.RE
+.RS 
+.BR "*" " Images (*.png) = 2,"
+.RE
+.RS 
+.BR "*" " Wavefront OBJ (*.obj) = 3,"
+.RE
+.RS 
+.BR "*" " PS files (*.ps) = 4,"
+.RE
+.RS 
+.BR "*" " EPS files (*.eps) = 5,"
+.RE
+.RS 
+.BR "*" " DXF files (*.dxf) = 6."
+.RE
+.IP "-x, --gsize <The size value>"
+.RB "Set size value a pattern file, that was opened with standard measurements " "(export mode)" ". Valid values: 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56cm."
+.IP "-e, --gheight <The height value>"
+.RB "Set height value a pattern file, that was opened with standard measurements (" "export mode" "). Valid values: 92, 98, 104, 110, 116, 122, 128, 134, 140, 146, 152, 158, 164, 170, 176, 182, 188, 194cm."
+.IP "-p, --pageformat <Template number>"
+.RB "Number corresponding to page  template (default = 0, " "export mode" "):"
+.RS
+.BR "*" " A0 = 0,"
+.RE
+.RS
+.BR "*" " A1 = 1,"
+.RE
+.RS
+.BR "*" " A2 = 2,"
+.RE
+.RS
+.BR "*" " A3 = 3,"
+.RE
+.RS
+.BR "*" " A4 = 4,"
+.RE
+.RS
+.BR "*" " Letter = 5,"
+.RE
+.RS
+.BR "*" " Legal = 6,"
+.RE
+.RS
+.BR "*" " Roll 24in = 7,"
+.RE
+.RS
+.BR "*" " Roll 30in = 8,"
+.RE
+.RS
+.BR "*" " Roll 36in = 9,"
+.RE
+.RS
+.BR "*" " Roll 42in = 10,"
+.RE
+.RS
+.BR "*" " Roll 44in = 11."
+.RE
+.IP "-W, --pagew <The page width>"
+.RB "Page width in current units like 12.0 (cannot be used with \*(lqpageformat\*(rq, " "export mode" ")."
+.IP "-H, --pageh <The page height>"
+.RB "Page height in current units like 12.0 (cannot be used with \*(lqpageformat\*(rq, " "export mode" ")."
+.IP "-U, --pageunits <The measure unit>"
+.RB "Page height/width measure units (cannot be used with \*(lqpageformat\*(rq, " "export mode" "). Valid values: mm, cm, inch, px."
+.IP "-i, --ignoremargins"
+.RB "Ignore margins printing (" "export mode" "). Disable value keys: \*(lqlmargin", \*(lqrmargin\*(rq, \*(lqtmargin\*(rq, \*(lqbmargin\*(rq. Set all margins to 0."
+.IP "-L, --lmargin <The left margin>"
+.RB "Page left margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key \*(lqignoremargins\*(rq is used."
+.IP "-R, --rmargin <The right margin>"
+.RB "Page right margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key \*(lqignoremargins\*(rq is used."
+.IP "-T, --tmargin <The top margin>"
+.RB "Page top margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key \*(lqignoremargins\*(rq is used."
+.IP "-B, --bmargin <The bottom margin>"
+.RB "Page bottom margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key \*(lqignoremargins\*(rq is used."
+.IP "-r, --rotate <Angle>"
+.RB "Rotation in degrees (one of predefined, " "export mode" "). Default value is " "180" ". 0 is no-rotate. Valid values: 0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 180. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree."
+.IP "-c, --crop"
+.RB "Auto crop unused length (" "export mode" ")."
+.IP "-u, --unite"
+.RB "Unite pages if possible (" "export mode" "). Maximum value limited by QImage that supports only a maximum of " "32768x32768 px" " images."
+.IP "-S, --savelen"
+.RB "Save length of the sheet if set (" "export mode" "). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used."
+.IP "-l, --layounits <The unit>"
+.RB "Layout units (as paper's one except px, " "export mode" ")."
+.IP "-s, --shiftlen <Shift length>"
+.RB "Shift layout length measured in layout units (" "export mode" "). The option show how many points along edge will be used in creating a layout."
+.IP "-G, --gapwidth <The gap width>"
+.RB "The layout gap width x2, measured in layout units (" "export mode" "). Set distance between details and a detail and a sheet."
+.IP "-g, --groups <Grouping type>"
+.RB "Sets layout groupping cases (" "export mode" "):"
+.RS
+.BR "*" " Three groups: big, middle, small = 0,"
+.RE
+.RS
+.BR "*" " Two groups: big, small = 1,"
+.RE
+.RS
+.BR "*" " Descending area = 2."
+.RE
+.IP "-t, --test"
+Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key \*(lqbasename\*(rq.
+.IP Arguments: 
+.I filename
+\- a pattern file.
 .SH AUTHOR
-This  manual  page  was  written  by Roman Telezhynskyi <dismine@gmail.com>
+.RI "This  manual  page  was  written  by Roman Telezhynskyi <" dismine@gmail.com ">"
+.SH "SEE ALSO"
+.RB "Full " "User Manual" " is availiable in" 
+.UR https://bitbucket.org/dismine/valentina/wiki/manual/Content
+.UE
+
+.BR tape (1)
