@@ -81,7 +81,8 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
 
     optionsIndex.insert(LONG_OPTION_DESTINATION, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_DESTINATION << LONG_OPTION_DESTINATION,
-                                          translate("VCommandLine", "The path to output destination folder."),
+                                          translate("VCommandLine", "The path to output destination folder. By "
+                                                    "default the directory at which the application was started."),
                                           translate("VCommandLine", "The destination folder")));
 
     optionsIndex.insert(LONG_OPTION_MEASUREFILE, index++);
@@ -137,21 +138,25 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     optionsIndex.insert(LONG_OPTION_PAGEUNITS, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_PAGEUNITS << LONG_OPTION_PAGEUNITS,
                                           translate("VCommandLine", "Page height/width measure units (cannot be used "
-                                                    "with \"%1\", export mode): ")
-                                                    .arg(LONG_OPTION_PAGETEMPLATE) + VDomDocument::UnitsHelpString(),
+                                                    "with \"%1\", export mode). Valid values: %2.")
+                                                    .arg(LONG_OPTION_PAGETEMPLATE).arg(VDomDocument::UnitsHelpString()),
                                           translate("VCommandLine", "The measure unit")));
 
     optionsIndex.insert(LONG_OPTION_IGNORE_MARGINS, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_IGNORE_MARGINS << LONG_OPTION_IGNORE_MARGINS,
                                           translate("VCommandLine",
-                                                    "Ignore margins printing (export mode). Set all margins to 0.")));
+                                                    "Ignore margins printing (export mode). Disable value keys: "
+                                                    "\"%1\", \"%2\", \"%3\", \"%4\". Set all margins to 0.")
+                                          .arg(LONG_OPTION_LEFT_MARGIN).arg(LONG_OPTION_RIGHT_MARGIN)
+                                          .arg(LONG_OPTION_TOP_MARGIN).arg(LONG_OPTION_BOTTOM_MARGIN)));
 
     optionsIndex.insert(LONG_OPTION_LEFT_MARGIN, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_LEFT_MARGIN << LONG_OPTION_LEFT_MARGIN,
                                           translate("VCommandLine",
                                                     "Page left margin in current units like 3.0 (export mode). If "
                                                     "not set will be used value from default printer. Or 0 if none "
-                                                    "printers was found."),
+                                                    "printers was found. Value will be ignored if key \"%1\" is used.")
+                                          .arg(LONG_OPTION_IGNORE_MARGINS),
                                           ("The left margin")));
 
     optionsIndex.insert(LONG_OPTION_RIGHT_MARGIN, index++);
@@ -159,7 +164,8 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                           translate("VCommandLine",
                                                     "Page right margin in current units like 3.0 (export mode). If "
                                                     "not set will be used value from default printer. Or 0 if none "
-                                                    "printers was found."),
+                                                    "printers was found. Value will be ignored if key \"%1\" is used.")
+                                          .arg(LONG_OPTION_IGNORE_MARGINS),
                                           ("The right margin")));
 
     optionsIndex.insert(LONG_OPTION_TOP_MARGIN, index++);
@@ -167,7 +173,8 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                           translate("VCommandLine",
                                                     "Page top margin in current units like 3.0 (export mode). If "
                                                     "not set will be used value from default printer. Or 0 if none "
-                                                    "printers was found."),
+                                                    "printers was found. Value will be ignored if key \"%1\" is used.")
+                                          .arg(LONG_OPTION_IGNORE_MARGINS),
                                           ("The top margin")));
 
     optionsIndex.insert(LONG_OPTION_BOTTOM_MARGIN, index++);
@@ -175,14 +182,19 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
                                           translate("VCommandLine",
                                                     "Page bottom margin in current units like 3.0 (export mode). If "
                                                     "not set will be used value from default printer. Or 0 if none "
-                                                    "printers was found."),
+                                                    "printers was found. Value will be ignored if key \"%1\" is used.")
+                                          .arg(LONG_OPTION_IGNORE_MARGINS),
                                           ("The bottom margin")));
 
     //=================================================================================================================
     optionsIndex.insert(LONG_OPTION_ROTATE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_ROTATE << LONG_OPTION_ROTATE,
-                                          translate("VCommandLine", "Rotation in degrees (one of predefined). Default "
-                                                                    "(or 0) is no-rotate (export mode)."),
+                                          translate("VCommandLine", "Rotation in degrees (one of predefined, "
+                                                    "export mode). Default value is 180. 0 is no-rotate. Valid values: "
+                                                    "%1. Each value show how many times details will be rotated. For "
+                                                    "example 180 mean two times (360/180=2) by 180 degree.")
+                                          .arg("0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, "
+                                               "60, 72, 90, 180"),
                                           translate("VCommandLine", "Angle")));
 
     optionsIndex.insert(LONG_OPTION_CROP, index++);
@@ -191,13 +203,17 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
 
     optionsIndex.insert(LONG_OPTION_UNITE, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_UNITE << LONG_OPTION_UNITE,
-                                          translate("VCommandLine", "Unite pages if possible (export mode).")));
+                                          translate("VCommandLine", "Unite pages if possible (export mode). Maximum "
+                                                    "value limited by QImage that supports only a maximum of "
+                                                    "32768x32768 px images.")));
 
     //=================================================================================================================
     optionsIndex.insert(LONG_OPTION_SAVELENGTH, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_SAVELENGTH << LONG_OPTION_SAVELENGTH,
                                           translate("VCommandLine",
-                                                    "Save length of the sheet if set. (export mode).")));
+                                                    "Save length of the sheet if set (export mode). The option tells "
+                                                    "the program to use as much as possible width of sheet. Quality "
+                                                    "of a layout can be worse when this option was used.")));
 
     optionsIndex.insert(LONG_OPTION_SHIFTUNITS, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTUNITS << LONG_OPTION_SHIFTUNITS,
@@ -208,28 +224,29 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
     optionsIndex.insert(LONG_OPTION_SHIFTLENGTH, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTLENGTH << LONG_OPTION_SHIFTLENGTH,
                                           translate("VCommandLine", "Shift layout length measured in layout units "
-                                                                    "(export mode)."),
+                                                    "(export mode). The option show how many points along edge will "
+                                                    "be used in creating a layout."),
                                           translate("VCommandLine", "Shift length")));
 
     optionsIndex.insert(LONG_OPTION_GAPWIDTH, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GAPWIDTH << LONG_OPTION_GAPWIDTH,
                                           translate("VCommandLine",
-                                                    "Gap width x2, measured in layout units. (export mode)."),
+                                                    "The layout gap width x2, measured in layout units (export mode). "
+                                                    "Set distance between details and a detail and a sheet."),
                                           translate("VCommandLine", "The gap width")));
 
     optionsIndex.insert(LONG_OPTION_GROUPPING, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GROUPPING << LONG_OPTION_GROUPPING,
-                                          translate("VCommandLine", "Sets layout groupping (export mode): ")
-                                          + DialogLayoutSettings::MakeGroupsHelp(),
+                                          translate("VCommandLine", "Sets layout groupping cases (export mode): %1.")
+                                          .arg(DialogLayoutSettings::MakeGroupsHelp()),
                                           translate("VCommandLine", "Grouping type"), "2"));
 
     optionsIndex.insert(LONG_OPTION_TEST, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_TEST << LONG_OPTION_TEST,
-                                          translate("VCommandLine", "Run the program in a test mode. The program this "
-                                                                    "mode load a single pattern file and silently "
-                                                                    "quit without showing the main window. The key "
-                                                                    "have priority before key '%1'.")
-                                                                    .arg(LONG_OPTION_BASENAME)));
+                                          translate("VCommandLine", "Run the program in a test mode. The program in "
+                                                    "this mode loads a single pattern file and silently quit without "
+                                                    "showing the main window. The key have priority before key '%1'.")
+                                                    .arg(LONG_OPTION_BASENAME)));
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -506,10 +523,16 @@ DialogLayoutSettings::PaperSizeTemplate VCommandLine::OptPaperSize() const
 //------------------------------------------------------------------------------------------------------
 int VCommandLine::OptRotation() const
 {
-    int rotate = 0;
+    int rotate = 180;
     if (parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_ROTATE))))
     {
-        rotate = parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_ROTATE))).toInt();
+        bool ok = false;
+        rotate = parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_ROTATE))).toInt(&ok);
+
+        if (not ok)
+        {
+            rotate = 180;
+        }
     }
 
     return rotate;

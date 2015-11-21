@@ -430,7 +430,7 @@ qreal DialogLayoutSettings::PageToPixels(qreal value) const
 QString DialogLayoutSettings::MakeGroupsHelp()
 {
     //that is REALLY dummy ... can't figure fast how to automate generation... :/
-    return tr("\n\tThree groups: big, middle, small = 0\n\tTwo groups: big, small = 1\n\tDescending area = 2\n");
+    return tr("\n\tThree groups: big, middle, small = 0;\n\tTwo groups: big, small = 1;\n\tDescending area = 2");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
