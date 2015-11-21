@@ -548,7 +548,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     parser.addOption(unitOption);
     //-----
     QCommandLineOption testOption(QStringList() << "test",
-            tr("Use for unit testing. Run the program and open a file without showing a window."));
+            tr("Use for unit testing. Run the program and open a file without showing the main window."));
     parser.addOption(testOption);
     //-----
     parser.process(arguments);
