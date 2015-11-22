@@ -508,7 +508,7 @@ QPointF VAbstractDetail::SingleParallelPoint(const QLineF &line, const qreal &an
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractDetail::SumTrapezoids(int n, QVector<qreal> x, QVector<qreal> y) const
+qreal VAbstractDetail::SumTrapezoids(int n, QVector<qreal> x, QVector<qreal> y)
 {
     // Calculation a polygon area through the sum of the areas of trapezoids
     qreal s, res = 0;
