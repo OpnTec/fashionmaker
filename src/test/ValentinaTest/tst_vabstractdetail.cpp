@@ -55,6 +55,9 @@ void TST_VAbstractDetail::EquidistantRemoveLoop() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractDetail::SumTrapezoids() const
 {
+    // Case3 checks that the method 'SumTrapezoids' returns negative value for three clockwise allocated points
+    // Case4 checks that the method 'SumTrapezoids' returns positive value for three counterclock-wise allocated points
+    // Case5 checks that the method 'SumTrapezoids' returns 0 for one point
     Case3();
     Case4();
     Case5();
