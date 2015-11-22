@@ -288,8 +288,7 @@ qint64 VLayoutDetail::Square() const
         return 0;
     }
 
-    const QVector<QPointF> points = d->layoutAllowence;
-    const qreal res = SumTrapezoids(points);
+    const qreal res = SumTrapezoids(d->layoutAllowence);
 
     const qint64 sq = qFloor(qAbs(res/2.0));
     return sq;
