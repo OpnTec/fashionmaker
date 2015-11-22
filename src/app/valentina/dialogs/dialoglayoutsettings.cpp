@@ -258,7 +258,8 @@ bool DialogLayoutSettings::SetIncrease(int increase)
     bool failed = (index == -1);
     if (failed)
     {
-        index = 21;//180 degree
+        const QString def = QString::number(VSettings::GetDefLayoutRotationIncrease());// Value by default
+        index = ui->comboBoxIncrease->findText(def);
     }
 
     ui->comboBoxIncrease->setCurrentIndex(index);

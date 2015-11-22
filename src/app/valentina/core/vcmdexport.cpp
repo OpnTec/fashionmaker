@@ -32,6 +32,7 @@
 #include "xml/vdomdocument.h"
 #include "../vformat/vmeasurements.h"
 #include "../vmisc/commandoptions.h"
+#include "../vmisc/vsettings.h"
 
 VCommandLinePtr VCommandLine::instance = nullptr;
 
@@ -352,12 +353,12 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         }
     }
 
-    int rotateDegree = OptRotation();
-    diag.SetRotate(rotateDegree != 0 );
+    const int rotateDegree = OptRotation();
+    diag.SetRotate(rotateDegree != 0 ); // 0 disable rotation
 
-    if (rotateDegree != 0)
+    if (rotateDegree != VSettings::GetDefLayoutRotationIncrease())//Value by default
     {
-        if (!diag.SetIncrease(rotateDegree))
+        if (not diag.SetIncrease(rotateDegree))
         {
             qCritical() << translate("VCommandLine", "Invalid rotation value. That must be one of predefined values.")
                         << "\n";
@@ -523,7 +524,7 @@ DialogLayoutSettings::PaperSizeTemplate VCommandLine::OptPaperSize() const
 //------------------------------------------------------------------------------------------------------
 int VCommandLine::OptRotation() const
 {
-    int rotate = 180;
+    int rotate = VSettings::GetDefLayoutRotationIncrease();
     if (parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_ROTATE))))
     {
         bool ok = false;
@@ -531,7 +532,7 @@ int VCommandLine::OptRotation() const
 
         if (not ok)
         {
-            rotate = 180;
+            rotate = VSettings::GetDefLayoutRotationIncrease();
         }
     }
 
