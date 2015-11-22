@@ -9,6 +9,7 @@
     <size base="500"/>
     <height base="1760"/>
     <body-measurements>
+        <m name="height" base="1760" size_increase="0" height_increase="60"/>
         <m name="across_chest_f" base="370" description="" size_increase="14" height_increase="4" full_name=""/>
         <m name="arm_neck_side_to_finger_tip" base="970" description="" size_increase="2" height_increase="29" full_name=""/>
         <m name="arm_neck_side_to_outer_elbow" base="500" description="" size_increase="2" height_increase="15" full_name=""/>
