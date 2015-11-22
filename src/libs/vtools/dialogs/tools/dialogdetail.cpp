@@ -530,7 +530,7 @@ bool DialogDetail::DetailIsClockwise() const
 {
     if(ui.listWidget->count() < 3)
     {
-        return true;
+        return false;
     }
     VDetail detail;
     for (qint32 i = 0; i < ui.listWidget->count(); ++i)
