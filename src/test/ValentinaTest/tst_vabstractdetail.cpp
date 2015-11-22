@@ -32,6 +32,8 @@
 #include <QPointF>
 #include <QVector>
 
+#include <QtTest>
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VAbstractDetail::TST_VAbstractDetail(QObject *parent)
     :AbstractTest(parent)
@@ -51,6 +53,15 @@ void TST_VAbstractDetail::EquidistantRemoveLoop() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::SumTrapezoids() const
+{
+    Case3();
+    Case4();
+    Case5();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
 void TST_VAbstractDetail::Case1() const
 {
     const QVector<QPointF> points = InputPointsCase1(); // Input points.
@@ -76,6 +87,33 @@ void TST_VAbstractDetail::Case2() const
 
     // Begin comparison
     Comparison(ekv, ekvOrig);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::Case3() const
+{
+    const QVector<QPointF> points = InputPointsCase3(); // Input points.
+
+    const qreal result = VAbstractDetail::SumTrapezoids(points);
+    QVERIFY(result < 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::Case4() const
+{
+    const QVector<QPointF> points = InputPointsCase4(); // Input points.
+
+    const qreal result = VAbstractDetail::SumTrapezoids(points);
+    QVERIFY(result > 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::Case5() const
+{
+    const QVector<QPointF> points = InputPointsCase5(); // Input points.
+
+    const qreal result = VAbstractDetail::SumTrapezoids(points);
+    QVERIFY(result == 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,6 +359,40 @@ QVector<QPointF> TST_VAbstractDetail::OutputPointsCase2() const
     points += QPointF(488.279, 455.72);
     points += QPointF(-2.79526, 455.75);
     points += QPointF(-2.79526, 4.83848);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractDetail::InputPointsCase3() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(35, 35);
+    points += QPointF(50, 50);
+    points += QPointF(15, 50);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractDetail::InputPointsCase4() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(15, 15);
+    points += QPointF(15, 50);
+    points += QPointF(50, 50);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractDetail::InputPointsCase5() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(35, 35);
 
     return points;
 }
