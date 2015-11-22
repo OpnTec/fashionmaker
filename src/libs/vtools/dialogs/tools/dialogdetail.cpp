@@ -463,19 +463,25 @@ bool DialogDetail::DetailIsValid() const
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     pixmap.save(&buffer, "PNG");
-    QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + "\"/>";
+    QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QLatin1Literal("\"/> ");
 
     if (ui.listWidget->count() < 3)
     {
-        url += QString(" ") + tr("You need more points!");
+        url += tr("You need more points!");
         ui.helpLabel->setText(url);
         return false;
     }
     else
     {
+        if(not DetailIsClockwise())
+        {
+            url += tr("You have to choose points in a clockwise direction!");
+            ui.helpLabel->setText(url);
+            return false;
+        }
         if (FirstPointEqualLast())
         {
-            url += QString(" ") +tr("First point can not equal the last point!");
+            url += tr("First point can not equal the last point!");
             ui.helpLabel->setText(url);
             return false;
         }
@@ -488,7 +494,7 @@ bool DialogDetail::DetailIsValid() const
 
                 if (QString::compare(previousRow, nextRow) == 0)
                 {
-                    url += QString(" ") +tr("You have double points!");
+                    url += tr("You have double points!");
                     ui.helpLabel->setText(url);
                     return false;
                 }
@@ -515,6 +521,29 @@ bool DialogDetail::FirstPointEqualLast() const
         {
             return false;
         }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogDetail::DetailIsClockwise() const
+{
+    if(ui.listWidget->count() < 3)
+    {
+        return false;
+    }
+    VDetail detail;
+    for (qint32 i = 0; i < ui.listWidget->count(); ++i)
+    {
+        QListWidgetItem *item = ui.listWidget->item(i);
+        detail.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
+    }
+    const QVector<QPointF> points = detail.ContourPoints(data);
+
+    const qreal res = VDetail::SumTrapezoids(points);
+    if (res < 0)
+    {
+        return true;
     }
     return false;
 }
