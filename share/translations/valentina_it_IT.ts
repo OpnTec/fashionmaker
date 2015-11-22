@@ -827,6 +827,10 @@
         <source>You have double points!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>You have to choose points in a clockwise direction!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1442,7 +1446,7 @@
 	Two groups: big, small = 1
 	Descending area = 2
 </source>
-        <translation>
+        <translation type="vanished">
 ⇥Tre gruppi: grande, medio, piccolo = 0
 ⇥Due gruppi: grande, piccolo = 1
 ⇥Area discendente = 2
@@ -1491,6 +1495,13 @@ Apply settings anyway?</source>
         <translation>I campi vanno al di là della stampa. 
 
 Applicare le impostazioni comunque?</translation>
+    </message>
+    <message>
+        <source>
+	Three groups: big, middle, small = 0;
+	Two groups: big, small = 1;
+	Descending area = 2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2839,7 +2850,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing a window.</source>
-        <translation>Utilizzare per testare l&apos;unità. Eseguire il programma e aprire un file senza mostrare la finestra.</translation>
+        <translation type="vanished">Utilizzare per testare l&apos;unità. Eseguire il programma e aprire un file senza mostrare la finestra.</translation>
     </message>
     <message>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
@@ -2872,6 +2883,10 @@ Applicare le impostazioni comunque?</translation>
     <message>
         <source>Open with the base height. Valid values: %1cm.</source>
         <translation>Aprire con altezza base. Valori validi: %1cm.</translation>
+    </message>
+    <message>
+        <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4638,15 +4653,15 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>The base value of known measurement forbidden to change.</source>
-        <translation>è proibito cambiare il valore base di misure conosciute.</translation>
+        <translation type="vanished">è proibito cambiare il valore base di misure conosciute.</translation>
     </message>
     <message>
         <source>The size increase value of known measurement forbidden to change.</source>
-        <translation>è proibito cambiare l&apos;aumento di valore delle misure conosciute.</translation>
+        <translation type="vanished">è proibito cambiare l&apos;aumento di valore delle misure conosciute.</translation>
     </message>
     <message>
         <source>The height increase value of known measurement forbidden to change.</source>
-        <translation>è proibito cambiare il valore di aumento dell&apos;altezza delle misure conosciute. </translation>
+        <translation type="vanished">è proibito cambiare il valore di aumento dell&apos;altezza delle misure conosciute. </translation>
     </message>
     <message>
         <source>The full name of known measurement forbidden to change.</source>
@@ -4996,7 +5011,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
-        <translation>Gradi di rotazione (uno dei predefiniti). Predefinito (o 0) è no-rotazione (modalità esportazione).</translation>
+        <translation type="vanished">Gradi di rotazione (uno dei predefiniti). Predefinito (o 0) è no-rotazione (modalità esportazione).</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -5008,11 +5023,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode).</source>
-        <translation>unisci pagine se possibile (modalità esportazione).</translation>
+        <translation type="vanished">unisci pagine se possibile (modalità esportazione).</translation>
     </message>
     <message>
         <source>Save length of the sheet if set. (export mode).</source>
-        <translation>Salva lunghezza del foglio se impostato. (modalità esportazione).</translation>
+        <translation type="vanished">Salva lunghezza del foglio se impostato. (modalità esportazione).</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
@@ -5024,22 +5039,14 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode).</source>
-        <translation>Sposta lunghezza di layout misurato in unità di layout (modalità di esportazione).</translation>
+        <translation type="vanished">Sposta lunghezza di layout misurato in unità di layout (modalità di esportazione).</translation>
     </message>
     <message>
         <source>Shift length</source>
         <translation>Sposta lunghezza</translation>
     </message>
     <message>
-        <source>Gap width x2, measured in layout units. (export mode).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The gap width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sets layout groupping (export mode): </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5075,10 +5082,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Test option can be used with single input file only.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5088,10 +5091,6 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>The base filename of layout files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The path to output destination folder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5123,10 +5122,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Invalid gradation size value.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5140,26 +5135,6 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Pattern file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ignore margins printing (export mode). Set all margins to 0.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5184,6 +5159,62 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Bottom margin must be used together with page units.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to output destination folder. By default the directory at which the application was started.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sets layout groupping cases (export mode): %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
