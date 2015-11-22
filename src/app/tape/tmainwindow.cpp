@@ -1485,23 +1485,16 @@ void TMainWindow::SaveMBaseValue(double value)
         return;
     }
 
-    if (meash->IsCustom())
-    {
-        m->SetMBaseValue(nameField->data(Qt::UserRole).toString(), value);
+    m->SetMBaseValue(nameField->data(Qt::UserRole).toString(), value);
 
-        MeasurementsWasSaved(false);
+    MeasurementsWasSaved(false);
 
-        RefreshData();
-        search->RefreshList(ui->lineEditFind->text());
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
-        ui->tableWidget->blockSignals(true);
-        ui->tableWidget->selectRow(row);
-        ui->tableWidget->blockSignals(false);
-    }
-    else
-    {
-        qCWarning(tMainWindow, "%s", qUtf8Printable(tr("The base value of known measurement forbidden to change.")));
-    }
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1531,24 +1524,16 @@ void TMainWindow::SaveMSizeIncrease(double value)
         return;
     }
 
-    if (meash->IsCustom())
-    {
-        m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
+    m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
 
-        MeasurementsWasSaved(false);
+    MeasurementsWasSaved(false);
 
-        RefreshData();
-        search->RefreshList(ui->lineEditFind->text());
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
-        ui->tableWidget->blockSignals(true);
-        ui->tableWidget->selectRow(row);
-        ui->tableWidget->blockSignals(false);
-    }
-    else
-    {
-        qCWarning(tMainWindow, "%s",
-                  qUtf8Printable(tr("The size increase value of known measurement forbidden to change.")));
-    }
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1578,22 +1563,14 @@ void TMainWindow::SaveMHeightIncrease(double value)
         return;
     }
 
-    if (meash->IsCustom())
-    {
-        m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
+    m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
 
-        MeasurementsWasSaved(false);
+    MeasurementsWasSaved(false);
 
-        RefreshData();
-        search->RefreshList(ui->lineEditFind->text());
+    RefreshData();
+    search->RefreshList(ui->lineEditFind->text());
 
-        ui->tableWidget->selectRow(row);
-    }
-    else
-    {
-        qCWarning(tMainWindow, "%s",
-                  qUtf8Printable(tr("The height increase value of known measurement forbidden to change.")));
-    }
+    ui->tableWidget->selectRow(row);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
