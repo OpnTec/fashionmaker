@@ -116,7 +116,7 @@ void TST_VAbstractDetail::Case5() const
     const QVector<QPointF> points = InputPointsCase5(); // Input points.
 
     const qreal result = VAbstractDetail::SumTrapezoids(points);
-    QVERIFY(result == 0);
+    QVERIFY(qFuzzyIsNull(result));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
