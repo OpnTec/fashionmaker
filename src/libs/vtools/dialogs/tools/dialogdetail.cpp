@@ -463,7 +463,7 @@ bool DialogDetail::DetailIsValid() const
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     pixmap.save(&buffer, "PNG");
-    QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + "\"/>" + QString(" ");
+    QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + "\"/> ";
 
     if (ui.listWidget->count() < 3)
     {
