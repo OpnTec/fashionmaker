@@ -508,29 +508,33 @@ QPointF VAbstractDetail::SingleParallelPoint(const QLineF &line, const qreal &an
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractDetail::SumTrapezoids(int n, QVector<qreal> x, QVector<qreal> y)
+qreal VAbstractDetail::SumTrapezoids(const QVector<QPointF> &points)
 {
     // Calculation a polygon area through the sum of the areas of trapezoids
     qreal s, res = 0;
+    const int n = points.size();
 
-    for (int i = 0; i < n; ++i)
+    if(n > 2)
     {
-        if (i == 0)
+        for (int i = 0; i < n; ++i)
         {
-            s = x.at(i)*(y.at(n-1) - y.at(i+1)); //if i == 0, then y[i-1] replace on y[n-1]
-            res += s;
-        }
-        else
-        {
-            if (i == n-1)
+            if (i == 0)
             {
-                s = x.at(i)*(y.at(i-1) - y.at(0)); // if i == n-1, then y[i+1] replace on y[0]
+                s = points.at(i).x()*(points.at(n-1).y() - points.at(i+1).y()); //if i == 0, then y[i-1] replace on y[n-1]
                 res += s;
             }
             else
             {
-                s = x.at(i)*(y.at(i-1) - y.at(i+1));
-                res += s;
+                if (i == n-1)
+                {
+                    s = points.at(i).x()*(points.at(i-1).y() - points.at(0).y()); // if i == n-1, then y[i+1] replace on y[0]
+                    res += s;
+                }
+                else
+                {
+                    s = points.at(i).x()*(points.at(i-1).y() - points.at(i+1).y());
+                    res += s;
+                }
             }
         }
     }

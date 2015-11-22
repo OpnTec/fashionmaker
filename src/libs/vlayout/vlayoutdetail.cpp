@@ -288,21 +288,10 @@ qint64 VLayoutDetail::Square() const
         return 0;
     }
 
-    const int n = d->layoutAllowence.count();
-    qint64 sq = 0;
+    const QVector<QPointF> points = d->layoutAllowence;
+    const qreal res = SumTrapezoids(points);
 
-    QVector<qreal> x;
-    QVector<qreal> y;
-
-    for (int i=0; i < n; ++i)
-    {
-        x.append(d->layoutAllowence.at(i).x());
-        y.append(d->layoutAllowence.at(i).y());
-    }
-
-    qreal res = this->SumTrapezoids(n, x, y);
-
-    sq = qFloor(qAbs(res/2.0));
+    const qint64 sq = qFloor(qAbs(res/2.0));
     return sq;
 }
 
