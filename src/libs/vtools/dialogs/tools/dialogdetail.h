@@ -78,6 +78,7 @@ private:
     bool             flagWidth;
     bool             DetailIsValid() const;
     bool             FirstPointEqualLast() const;
+    bool             DetailIsClockwise() const;
 
     void             NewItem(quint32 id, const Tool &typeTool, const NodeDetail &typeNode,
                              qreal mx = 0, qreal my = 0, bool reverse = false);
