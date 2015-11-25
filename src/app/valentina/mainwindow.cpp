@@ -1825,8 +1825,8 @@ void MainWindow::ActionDetails(bool checked)
         if(drawMode)
         {
             currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+            drawMode = false;
         }
-        drawMode = false;
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);
         comboBoxDraws->setEnabled(false);
 
@@ -1911,9 +1911,8 @@ void MainWindow::ActionLayout(bool checked)
         if(drawMode)
         {
             currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+            drawMode = false;
         }
-        drawMode = false;
-
         comboBoxDraws->setCurrentIndex(-1);
         comboBoxDraws->setEnabled(false);
 
