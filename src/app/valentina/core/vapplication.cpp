@@ -599,7 +599,10 @@ const VTranslateVars *VApplication::TrVars()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::InitTrVars()
 {
-    trVars = new VTranslateVars(ValentinaSettings()->GetOsSeparator());
+    if (trVars == nullptr)
+    {
+        trVars = new VTranslateVars(ValentinaSettings()->GetOsSeparator());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
