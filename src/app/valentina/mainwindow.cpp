@@ -3311,7 +3311,10 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         Clear();
-        qApp->exit(V_EX_NOINPUT);
+        if (not VApplication::CheckGUI())
+        {
+            qApp->exit(V_EX_NOINPUT);
+        }
         return false;
     }
 
