@@ -153,6 +153,13 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
             MoveSPoint *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), id, this->scene());
             connect(moveSP, &MoveSPoint::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
             qApp->getUndoStack()->push(moveSP);
+            if (scene())
+            {
+                if (QGraphicsView *view = scene()->views().at(0))
+                {
+                    view->ensureVisible(this);
+                }
+            }
             changeFinished = true;
         }
     }

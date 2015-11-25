@@ -29,6 +29,7 @@
 #include "vcontrolpointspline.h"
 
 #include <QGraphicsSceneMouseEvent>
+#include <QGraphicsView>
 #include <QPen>
 #include <QStyleOptionGraphicsItem>
 
@@ -129,6 +130,13 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
             // value - new position.
             QPointF newPos = value.toPointF();
             emit ControlPointChangePosition(indexSpline, position, newPos);
+            if (scene())
+            {
+                if (QGraphicsView *view = scene()->views().at(0))
+                {
+                    view->ensureVisible(this);
+                }
+            }
             changeFinished = false;
         }
     }

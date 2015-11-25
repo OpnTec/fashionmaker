@@ -34,6 +34,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -123,6 +124,13 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
             changeFinished = false;
             QPointF newPos = value.toPointF() + this->parentItem()->pos();
             emit NameChangePosition(newPos);
+            if (scene())
+            {
+                if (QGraphicsView *view = scene()->views().at(0))
+                {
+                    view->ensureVisible(this);
+                }
+            }
             changeFinished = true;
          }
      }

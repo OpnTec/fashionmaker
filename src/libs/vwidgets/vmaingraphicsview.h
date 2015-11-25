@@ -125,8 +125,8 @@ public slots:
     void     ZoomOriginal();
     void     ZoomFitBest();
 protected:
-    void     mousePressEvent(QMouseEvent *mousePress);
-    void     mouseReleaseEvent(QMouseEvent *event);
+    virtual void mousePressEvent(QMouseEvent *mousePress) Q_DECL_OVERRIDE;
+    virtual void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VMainGraphicsView)
     GraphicsViewZoom* zoom;
