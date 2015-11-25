@@ -1822,8 +1822,11 @@ void MainWindow::ActionDetails(bool checked)
         disconnect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
 
+        if(drawMode)
+        {
+            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+        }
         drawMode = false;
-        currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);
         comboBoxDraws->setEnabled(false);
 
@@ -1905,8 +1908,12 @@ void MainWindow::ActionLayout(bool checked)
         ui->view->setScene(currentScene);
         disconnect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
 
+        if(drawMode)
+        {
+            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+        }
         drawMode = false;
-        currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+
         comboBoxDraws->setCurrentIndex(-1);
         comboBoxDraws->setEnabled(false);
 
