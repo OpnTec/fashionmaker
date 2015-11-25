@@ -82,4 +82,6 @@ private:
     static QPointF          SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width);
 };
 
+Q_DECLARE_TYPEINFO(VAbstractDetail, Q_MOVABLE_TYPE);
+
 #endif // VABSTRACTDETAIL_H

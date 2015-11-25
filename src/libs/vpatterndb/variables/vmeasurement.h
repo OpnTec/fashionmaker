@@ -80,4 +80,6 @@ private:
     static void        ListValue(QStringList &list, qreal value, Unit patternUnit);
 };
 
+Q_DECLARE_TYPEINFO(VMeasurement, Q_MOVABLE_TYPE);
+
 #endif // VSTANDARDTABLEROW_H

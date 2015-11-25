@@ -89,4 +89,6 @@ private:
     qreal MaxLength() const;
 };
 
+Q_DECLARE_TYPEINFO(VArc, Q_MOVABLE_TYPE);
+
 #endif // VARC_H

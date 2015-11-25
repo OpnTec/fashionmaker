@@ -54,4 +54,6 @@ private:
     QSharedDataPointer<VCurveVariableData> d;
 };
 
+Q_DECLARE_TYPEINFO(VCurveVariable, Q_MOVABLE_TYPE);
+
 #endif // VCURVEVARIABLE_H

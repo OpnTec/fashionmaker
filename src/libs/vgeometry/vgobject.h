@@ -95,4 +95,6 @@ private:
     static int     PointInCircle (const QPointF &p, const QPointF &center, qreal radius);
 };
 
+Q_DECLARE_TYPEINFO(VGObject, Q_MOVABLE_TYPE);
+
 #endif // VGOBJECT_H

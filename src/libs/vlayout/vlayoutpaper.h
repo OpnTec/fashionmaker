@@ -84,4 +84,6 @@ private:
 
 };
 
+Q_DECLARE_TYPEINFO(VLayoutPaper, Q_MOVABLE_TYPE);
+
 #endif // VLAYOUTPAPER_H

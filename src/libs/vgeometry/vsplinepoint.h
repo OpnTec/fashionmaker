@@ -62,5 +62,6 @@ protected:
 };
 
 Q_DECLARE_METATYPE(VSplinePoint)
+Q_DECLARE_TYPEINFO(VSplinePoint, Q_MOVABLE_TYPE);
 
 #endif // VSPLINEPOINT_H

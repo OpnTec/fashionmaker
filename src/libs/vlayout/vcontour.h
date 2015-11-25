@@ -78,4 +78,6 @@ private:
     void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const;
 };
 
+Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE);
+
 #endif // VCONTOUR_H

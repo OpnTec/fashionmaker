@@ -52,4 +52,6 @@ private:
     QSharedDataPointer<VLengthLineData> d;
 };
 
+Q_DECLARE_TYPEINFO(VLengthLine, Q_MOVABLE_TYPE);
+
 #endif // VLINELENGTH_H

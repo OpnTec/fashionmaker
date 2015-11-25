@@ -60,4 +60,6 @@ private:
     QSharedDataPointer<VInternalVariableData> d;
 };
 
+Q_DECLARE_TYPEINFO(VInternalVariable, Q_MOVABLE_TYPE);
+
 #endif // VINTERNALVARIABLE_H

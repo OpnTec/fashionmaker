@@ -56,4 +56,6 @@ private:
     QSharedDataPointer<VIncrementData> d;
 };
 
+Q_DECLARE_TYPEINFO(VIncrement, Q_MOVABLE_TYPE);
+
 #endif // VINCREMENTTABLEROW_H

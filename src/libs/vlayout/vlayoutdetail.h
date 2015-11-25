@@ -85,4 +85,6 @@ private:
     static QVector<QPointF> RoundPoints(const QVector<QPointF> &points);
 };
 
+Q_DECLARE_TYPEINFO(VLayoutDetail, Q_MOVABLE_TYPE);
+
 #endif // VLAYOUTDETAIL_H

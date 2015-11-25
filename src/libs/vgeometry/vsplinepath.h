@@ -182,4 +182,6 @@ private:
     QSharedDataPointer<VSplinePathData> d;
 };
 
+Q_DECLARE_TYPEINFO(VSplinePath, Q_MOVABLE_TYPE);
+
 #endif // VSPLINEPATH_H

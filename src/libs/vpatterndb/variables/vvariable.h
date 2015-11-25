@@ -64,4 +64,6 @@ private:
     QSharedDataPointer<VVariableData> d;
 };
 
+Q_DECLARE_TYPEINFO(VVariable, Q_MOVABLE_TYPE);
+
 #endif // VVARIABLE_H

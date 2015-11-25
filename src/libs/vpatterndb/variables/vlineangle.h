@@ -51,4 +51,6 @@ private:
     QSharedDataPointer<VLineAngleData> d;
 };
 
+Q_DECLARE_TYPEINFO(VLineAngle, Q_MOVABLE_TYPE);
+
 #endif // VLINEANGLE_H

@@ -89,4 +89,6 @@ private:
     static int     Sign(long double ld);
 };
 
+Q_DECLARE_TYPEINFO(VSpline, Q_MOVABLE_TYPE);
+
 #endif // VSPLINE_H

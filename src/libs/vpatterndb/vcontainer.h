@@ -198,7 +198,7 @@ private:
     const QMap<QString, QSharedPointer<T> > DataVar(const VarType &type) const;
 };
 
-
+Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE);
 
 /*
 *  Defintion of templated member functions of VContainer

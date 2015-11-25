@@ -69,6 +69,8 @@ private:
     QSharedDataPointer<VPointFData> d;
 };
 
+Q_DECLARE_TYPEINFO(VPointF, Q_MOVABLE_TYPE);
+
 #if defined(Q_CC_INTEL)
 #pragma warning(pop)
 #endif

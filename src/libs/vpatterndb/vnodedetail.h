@@ -125,5 +125,6 @@ private:
 };
 
 Q_DECLARE_METATYPE(VNodeDetail)
+Q_DECLARE_TYPEINFO(VNodeDetail, Q_MOVABLE_TYPE);
 
 #endif // VNODEDETAIL_H
