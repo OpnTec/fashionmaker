@@ -120,9 +120,17 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
 {
     if (change == ItemPositionChange && scene())
     {
-        // value - new position.
-        QPointF newPos = value.toPointF();
-        emit ControlPointChangePosition(indexSpline, position, newPos);
+        // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+        // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
+        static bool changeFinished = true;
+        if (changeFinished)
+        {
+            changeFinished = false;
+            // value - new position.
+            QPointF newPos = value.toPointF();
+            emit ControlPointChangePosition(indexSpline, position, newPos);
+            changeFinished = false;
+        }
     }
     return QGraphicsItem::itemChange(change, value);
 }

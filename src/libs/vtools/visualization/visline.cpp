@@ -85,6 +85,16 @@ QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
     }
 
     QRectF scRect = this->scene()->sceneRect();
+
+    //Limit size of the scene rect. Axis that has same size as scene rect cause scene size growth.
+    QLineF line1 = QLineF(scRect.topLeft(), scRect.bottomRight());
+    line1.setLength(20);
+
+    QLineF line2 = QLineF(scRect.bottomRight(), scRect.topLeft());
+    line2.setLength(20);
+
+    scRect = QRectF(line1.p2(), line2.p2());
+
     if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
     {
         return VGObject::BuildRay(firstPoint, CorrectAngle(angle), scRect);

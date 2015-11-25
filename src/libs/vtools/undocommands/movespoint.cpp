@@ -123,9 +123,6 @@ void MoveSPoint::Do(double x, double y)
         doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(y)));
 
         emit NeedLiteParsing(Document::LitePPParse);
-
-        QList<QGraphicsView*> list = scene->views();
-        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {

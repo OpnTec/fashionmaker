@@ -146,10 +146,6 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             currentItem = item->parentItem();
             ShowItemOptions(currentItem);
             break;
-        case VSimpleCurve::Type:
-            currentItem = item->parentItem();
-            ShowItemOptions(currentItem);
-            break;
         case VToolLineIntersectAxis::Type:
             ShowOptionsToolLineIntersectAxis(item);
             break;

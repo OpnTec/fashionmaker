@@ -93,9 +93,6 @@ void MoveSplinePath::Do(const VSplinePath &splPath)
         VToolSplinePath::UpdatePathPoint(doc, domElement, splPath);
 
         emit NeedLiteParsing(Document::LiteParse);
-
-        QList<QGraphicsView*> list = scene->views();
-        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {

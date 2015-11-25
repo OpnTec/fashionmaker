@@ -53,9 +53,6 @@ VToolCutSpline::VToolCutSpline(VAbstractPattern *doc, VContainer *data, const qu
                                const QString &color, const Source &typeCreation, QGraphicsItem *parent)
     :VToolCut(doc, data, id, formula, splineId, spl1id, spl2id, color, parent)
 {
-    RefreshCurve(firstCurve, curve1id, SimpleCurvePoint::ForthPoint);
-    RefreshCurve(secondCurve, curve2id, SimpleCurvePoint::FirstPoint);
-
     ToolCreation(typeCreation);
 }
 
@@ -195,16 +192,6 @@ void VToolCutSpline::ShowVisualization(bool show)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief CurveChoosed send signal about selection from spline.
- * @param id object id in container.
- */
-void VToolCutSpline::CurveChoosed(quint32 id)
-{
-    emit ChoosedTool(id, SceneObject::Spline);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */
@@ -234,31 +221,6 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshCurve refresh curve on scene.
- * @param curve curve.
- * @param curveId curve id.
- */
-void VToolCutSpline::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
-                                  PathDirection direction)
-{
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(curveId);
-    QPainterPath path;
-    path.addPath(spl->GetPath(direction));
-    path.setFillRule( Qt::WindingFill );
-    if (curvePosition == SimpleCurvePoint::FirstPoint)
-    {
-        path.translate(-spl->GetP1().toQPointF().x(), -spl->GetP1().toQPointF().y());
-    }
-    else
-    {
-        path.translate(-spl->GetP4().toQPointF().x(), -spl->GetP4().toQPointF().y());
-    }
-    curve->SetCurrentColor(QColor(lineColor));
-    curve->setPath(path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

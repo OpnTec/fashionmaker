@@ -56,9 +56,6 @@ VToolCutSplinePath::VToolCutSplinePath(VAbstractPattern *doc, VContainer *data, 
                                        const Source &typeCreation, QGraphicsItem *parent)
     :VToolCut(doc, data, id, formula, splinePathId, splPath1id, splPath2id, color, parent)
 {
-    RefreshCurve(firstCurve, curve1id, SimpleCurvePoint::ForthPoint);
-    RefreshCurve(secondCurve, curve2id, SimpleCurvePoint::FirstPoint);
-
     ToolCreation(typeCreation);
 }
 
@@ -239,16 +236,6 @@ void VToolCutSplinePath::ShowVisualization(bool show)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief CurveChoosed send signal about selection splinePath.
- * @param id object id in container.
- */
-void VToolCutSplinePath::CurveChoosed(quint32 id)
-{
-    emit ChoosedTool(id, SceneObject::SplinePath);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */
@@ -278,33 +265,6 @@ void VToolCutSplinePath::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshCurve refresh curve on scene.
- * @param curve curve.
- * @param curveId curve id.
- */
-void VToolCutSplinePath::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
-                                      PathDirection direction)
-{
-    const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(curveId);
-    QPainterPath path;
-    path.addPath(splPath->GetPath(direction));
-    path.setFillRule( Qt::WindingFill );
-    if (curvePosition == SimpleCurvePoint::FirstPoint)
-    {
-        VSpline spl = splPath->GetSpline(1);
-        path.translate(-spl.GetP1().toQPointF().x(), -spl.GetP1().toQPointF().y());
-    }
-    else
-    {
-        VSpline spl = splPath->GetSpline(splPath->Count());
-        path.translate(-spl.GetP4().toQPointF().x(), -spl.GetP4().toQPointF().y());
-    }
-    curve->SetCurrentColor(QColor(lineColor));
-    curve->setPath(path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

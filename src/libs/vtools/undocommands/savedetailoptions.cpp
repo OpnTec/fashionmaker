@@ -71,9 +71,6 @@ void SaveDetailOptions::undo()
             }
         }
         emit NeedLiteParsing(Document::LiteParse);
-
-        QList<QGraphicsView*> list = scene->views();
-        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {
@@ -108,9 +105,6 @@ void SaveDetailOptions::redo()
             }
         }
         emit NeedLiteParsing(Document::LiteParse);
-
-        QList<QGraphicsView*> listV = scene->views();
-        VMainGraphicsView::NewSceneRect(scene, listV[0]);
     }
     else
     {

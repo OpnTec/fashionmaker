@@ -121,9 +121,6 @@ void MoveLabel::Do(double mx, double my)
         doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(my)));
 
         emit NeedLiteParsing(Document::LitePPParse);
-
-        QList<QGraphicsView*> list = scene->views();
-        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {

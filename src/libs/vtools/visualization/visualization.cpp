@@ -112,6 +112,7 @@ QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsIte
     point->setBrush(QBrush(Qt::NoBrush));
     point->setPen(QPen(color, qApp->toPixel(WidthMainLine(*Visualization::data->GetPatternUnit()))/factor));
     point->setRect(PointRect(ToPixel(DefPointRadius/*mm*/, Unit::Mm)));
+    point->setPos(QPointF());
     point->setFlags(QGraphicsItem::ItemStacksBehindParent);
     point->setVisible(false);
     return point;

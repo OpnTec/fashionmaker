@@ -30,7 +30,6 @@
 #define VTOOLCUT_H
 
 #include "../vtoolsinglepoint.h"
-#include "../vwidgets/vsimplecurve.h"
 #include "../../../toolcurve/vabstractspline.h"
 
 class VFormula;
@@ -52,8 +51,6 @@ public:
     void    setCurveCutId(const quint32 &value);
 
 public slots:
-    virtual void  CurveChoosed(quint32 id)=0;
-    void          HoverPath(quint32 id, SimpleCurvePoint curvePosition, PathDirection direction);
     virtual void  Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     void          DetailsMode(bool mode);
     virtual void  FullUpdateFromFile() Q_DECL_OVERRIDE;
@@ -61,20 +58,12 @@ protected:
     /** @brief formula keep formula of length */
     QString       formula;
 
-    /** @brief firstCurve first curve after cutting. */
-    VSimpleCurve  *firstCurve;
-
-    /** @brief secondCurve second curve after cutting. */
-    VSimpleCurve  *secondCurve;
-
     quint32       curveCutId;
     quint32       curve1id;
     quint32       curve2id;
 
     bool          detailsMode;
 
-    virtual void  RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
-                               PathDirection direction = PathDirection::Hide)=0;
     void          RefreshGeometry();
     virtual void  RemoveReferens() Q_DECL_OVERRIDE;
     void          FullUpdateCurveFromFile(const QString &attrCurve);

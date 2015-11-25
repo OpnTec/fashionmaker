@@ -70,9 +70,6 @@ void MoveDetail::undo()
         SaveCoordinates(domElement, oldX, oldY);
 
         emit NeedLiteParsing(Document::LiteParse);
-
-        QList<QGraphicsView*> list = scene->views();
-        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {
@@ -96,9 +93,6 @@ void MoveDetail::redo()
             emit NeedLiteParsing(Document::LiteParse);
         }
         redoFlag = true;
-
-        QList<QGraphicsView*> list = scene->views();
-        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {

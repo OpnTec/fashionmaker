@@ -178,9 +178,6 @@ void MoveDoubleLabel::Do(double mx, double my)
         }
 
         emit NeedLiteParsing(Document::LitePPParse);
-
-        QList<QGraphicsView*> list = scene->views();
-        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {

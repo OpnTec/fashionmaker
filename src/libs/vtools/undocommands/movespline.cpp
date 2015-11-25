@@ -99,9 +99,6 @@ void MoveSpline::Do(const VSpline &spl)
         doc->SetAttribute(domElement, AttrKCurve, QString().setNum(spl.GetKcurve()));
 
         emit NeedLiteParsing(Document::LiteParse);
-
-        QList<QGraphicsView*> list = scene->views();
-        VMainGraphicsView::NewSceneRect(scene, list[0]);
     }
     else
     {

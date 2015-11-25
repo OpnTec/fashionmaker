@@ -115,8 +115,16 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
 {
      if (change == ItemPositionChange && scene())
      {
-         QPointF newPos = value.toPointF() + this->parentItem()->pos();
-         emit NameChangePosition(newPos);
+         // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+         // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
+         static bool changeFinished = true;
+         if (changeFinished)
+         {
+            changeFinished = false;
+            QPointF newPos = value.toPointF() + this->parentItem()->pos();
+            emit NameChangePosition(newPos);
+            changeFinished = true;
+         }
      }
      return QGraphicsItem::itemChange(change, value);
 }

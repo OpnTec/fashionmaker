@@ -54,9 +54,6 @@ VToolCutArc::VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 
                          const Source &typeCreation, QGraphicsItem * parent)
     :VToolCut(doc, data, id, formula, arcId, arc1id, arc2id, color, parent)
 {
-    RefreshCurve(firstCurve, curve1id, SimpleCurvePoint::ForthPoint);
-    RefreshCurve(secondCurve, curve2id, SimpleCurvePoint::FirstPoint);
-
     ToolCreation(typeCreation);
 }
 
@@ -187,16 +184,6 @@ void VToolCutArc::ShowVisualization(bool show)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief CurveChoosed send signal about selection from cutted arc.
- * @param id object id in container.
- */
-void VToolCutArc::CurveChoosed(quint32 id)
-{
-    emit ChoosedTool(id, SceneObject::Arc);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief contextMenuEvent handle context menu events.
  * @param event context menu event.
  */
@@ -226,31 +213,6 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
     doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshCurve refresh curve on scene.
- * @param curve curve.
- * @param curveId curve id.
- */
-void VToolCutArc::RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
-                               PathDirection direction)
-{
-    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(curveId);
-    QPainterPath path;
-    path.addPath(arc->GetPath(direction));
-    path.setFillRule( Qt::WindingFill );
-    if (curvePosition == SimpleCurvePoint::FirstPoint)
-    {
-        path.translate(-arc->GetP1().x(), -arc->GetP1().y());
-    }
-    else
-    {
-        path.translate(-arc->GetP2().x(), -arc->GetP2().y());
-    }
-    curve->SetCurrentColor(QColor(lineColor));
-    curve->setPath(path);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

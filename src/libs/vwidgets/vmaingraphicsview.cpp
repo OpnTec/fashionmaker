@@ -32,7 +32,7 @@
 #include <QWheelEvent>
 #include <QApplication>
 #include <QScrollBar>
-#include "vsimplecurve.h"
+#include "vsimplepoint.h"
 
 #include <QGraphicsItem>
 #include <QMouseEvent>
@@ -211,6 +211,7 @@ void VMainGraphicsView::ZoomOriginal()
     trans.setMatrix(1.0, trans.m12(), trans.m13(), trans.m21(), 1.0, trans.m23(), trans.m31(), trans.m32(),
                     trans.m33());
     this->setTransform(trans);
+    VMainGraphicsView::NewSceneRect(this->scene(), this);
     emit NewFactor(1.0);
 }
 
@@ -225,6 +226,7 @@ void VMainGraphicsView::ZoomFitBest()
     }
 
     this->fitInView(rect, Qt::KeepAspectRatio);
+    VMainGraphicsView::NewSceneRect(this->scene(), this);
     emit NewFactor(this->transform().m11());
 }
 
@@ -255,7 +257,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
                     {
                         if (this->scene()->items().contains(list.at(i)))
                         {
-                            if (list.at(i)->type() <= VSimpleCurve::Type &&
+                            if (list.at(i)->type() <= VSimplePoint::Type &&
                                 list.at(i)->type() > QGraphicsItem::UserType)
                             {
                                 emit itemClicked(list.at(i));
@@ -308,25 +310,20 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
     SCASSERT(sc != nullptr);
     SCASSERT(view != nullptr);
 
-    const QRectF rect = sc->itemsBoundingRect();
-    const QRect rec0 = QRect(0, 0, view->rect().width()-2, view->rect().height()-2);
-    const QTransform t = view->transform();
+    //Calculate view rect
+    //to receive the currently visible area, map the widgets bounds to the scene
+    const QPointF a = view->mapToScene(0, 0 );
+    const QPointF b = view->mapToScene(view->viewport()->width(), view->viewport()->height());
+    const QRectF viewRect = QRectF( a, b );
 
-    QRectF rec1;
-    if (t.m11() < 1)
-    {
-        const qreal width = rec0.width()/t.m11();
-        const qreal height = rec0.height()/t.m22();
-        rec1 = QRect(0, 0, static_cast<qint32>(width), static_cast<qint32>(height));
+    //Calculate scene rect
+    const QRectF itemsRect = sc->itemsBoundingRect();
 
-        rec1.translate(rec0.center().x()-rec1.center().x(), rec0.center().y()-rec1.center().y());
-        const QPolygonF polygone = view->mapToScene(rec1.toRect());
-        rec1 = polygone.boundingRect();
+    //Unite two rects
+    const QRectF newRect = itemsRect.united(viewRect);
+
+    if (newRect != itemsRect)
+    {//Update if only need
+        sc->setSceneRect(newRect);
     }
-    else
-    {
-        rec1 = rec0;
-    }
-    rec1 = rec1.united(rect.toRect());
-    sc->setSceneRect(rec1);
 }

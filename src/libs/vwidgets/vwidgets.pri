@@ -4,7 +4,6 @@
 SOURCES += \
     $$PWD/vmaingraphicsscene.cpp \
     $$PWD/vmaingraphicsview.cpp \
-    $$PWD/vsimplecurve.cpp \
     $$PWD/vwidgetpopup.cpp \
     $$PWD/vcontrolpointspline.cpp \
     $$PWD/vgraphicssimpletextitem.cpp \
@@ -17,7 +16,6 @@ HEADERS += \
     $$PWD/stable.h \
     $$PWD/vmaingraphicsscene.h \
     $$PWD/vmaingraphicsview.h \
-    $$PWD/vsimplecurve.h \
     $$PWD/vwidgetpopup.h \
     $$PWD/vcontrolpointspline.h \
     $$PWD/vgraphicssimpletextitem.h \

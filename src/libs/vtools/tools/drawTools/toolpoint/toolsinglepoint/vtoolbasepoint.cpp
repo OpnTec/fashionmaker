@@ -141,12 +141,20 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
     }
     if (change == ItemPositionHasChanged && scene())
     {
-        // value - this is new position.
-        QPointF newPos = value.toPointF();
+        // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+        // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
+        static bool changeFinished = true;
+        if (changeFinished)
+        {
+            changeFinished = false;
+            // value - this is new position.
+            QPointF newPos = value.toPointF();
 
-        MoveSPoint *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), id, this->scene());
-        connect(moveSP, &MoveSPoint::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        qApp->getUndoStack()->push(moveSP);
+            MoveSPoint *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), id, this->scene());
+            connect(moveSP, &MoveSPoint::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+            qApp->getUndoStack()->push(moveSP);
+            changeFinished = true;
+        }
     }
     return QGraphicsItem::itemChange(change, value);
 }

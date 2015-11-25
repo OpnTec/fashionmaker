@@ -55,13 +55,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutSpline)};
     virtual void  ShowVisualization(bool show) Q_DECL_OVERRIDE;
-public slots:
-    virtual void  CurveChoosed(quint32 id) Q_DECL_OVERRIDE;
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void  SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
-    virtual void  RefreshCurve(VSimpleCurve *curve, quint32 curveId, SimpleCurvePoint curvePosition,
-                               PathDirection direction = PathDirection::Hide) Q_DECL_OVERRIDE;
     virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void  ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void  SetVisualization() Q_DECL_OVERRIDE;
