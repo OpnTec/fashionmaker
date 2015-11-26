@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
    <mime-type type="application/x-valentina-pattern">
+     <sub-class-of type="text/xml"/>
      <_comment>Valentina pattern</_comment>
 	 <comment xml:lang="af">Valentina pattern</comment>
      <comment xml:lang="ar">Valentina pattern</comment>
@@ -94,6 +95,7 @@
      <icon name="application-x-valentina-pattern"/>
    </mime-type>
    <mime-type type="application/x-valentina-i-measurements">
+     <sub-class-of type="text/xml"/>
      <_comment>Valentina individual measurments</_comment>
 	 <comment xml:lang="af">Valentina individual measurments</comment>
      <comment xml:lang="ar">Valentina individual measurments</comment>
@@ -186,7 +188,8 @@
      <glob pattern="*.vit"/>
      <icon name="application-x-valentina-i-measurements"/>
    </mime-type>
-   <mime-type type="application/x-valentina-pattern">
+   <mime-type type="application/x-valentina-s-measurements">
+     <sub-class-of type="text/xml"/>
      <_comment>Valentina standard measurments</_comment>
 	 <comment xml:lang="af">Valentina standard measurments</comment>
      <comment xml:lang="ar">Valentina standard measurments</comment>
