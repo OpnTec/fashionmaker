@@ -171,52 +171,75 @@ include(../tables.pri)
 copyToDestdir($$INSTALL_STANDARD_TEMPLATES, $$shell_path($${OUT_PWD}/$${DESTDIR}/tables/templates))
 include(../translations.pri)
 
-macx{
-    # Some macx stuff
-    QMAKE_MAC_SDK = macosx
+# Set "make install" command for Unix-like systems.
+unix{
+    # Prefix for binary file.
+    isEmpty(PREFIX){
+        PREFIX = $$DEFAULT_PREFIX
+    }
 
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
-    # Path to resources in app bundle
-    #RESOURCES_DIR = "Contents/Resources" defined in translation.pri
-    FRAMEWORKS_DIR = "Contents/Frameworks"
-    MACOS_DIR = "Contents/MacOS"
-    # On macx we will use app bundle. Bundle doesn't need bin directory inside.
-    # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
-    target.path = $$MACOS_DIR
+    unix:!macx{
+        DATADIR =$$PREFIX/share
+        DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
 
-    #languages added inside translations.pri
+        # Path to bin file after installation
+        target.path = $$PREFIX/bin
 
-    # Symlinks also good names for copying. Make will take origin file and copy them with using symlink name.
-    # For bundle this names more then enough. We don't need care much about libraries versions.
-    libraries.path = $$FRAMEWORKS_DIR
-    libraries.files += $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
-    libraries.files += $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
+        rcc_diagrams.path = /usr/share/valentina/
+        rcc_diagrams.files = $${OUT_PWD}/$${DESTDIR}/diagrams.rcc
+        rcc_diagrams.CONFIG = no_check_exist
 
-    # logo on macx.
-    ICON = $$PWD/../../../dist/Tape.icns
+        INSTALLS += \
+            target \
+            rcc_diagrams
+    }
+    macx{
+        # Some macx stuff
+        QMAKE_MAC_SDK = macosx
 
-    QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/tape/Info.plist
+        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+        # Path to resources in app bundle
+        #RESOURCES_DIR = "Contents/Resources" defined in translation.pri
+        FRAMEWORKS_DIR = "Contents/Frameworks"
+        MACOS_DIR = "Contents/MacOS"
+        # On macx we will use app bundle. Bundle doesn't need bin directory inside.
+        # See issue #166: Creating OSX Homebrew (Mac OS X package manager) formula.
+        target.path = $$MACOS_DIR
 
-    # Copy to bundle standard measurements files
-    standard.path = $$RESOURCES_DIR/tables/standard/
-    standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+        #languages added inside translations.pri
 
-    # Copy to bundle templates files
-    templates.path = $$RESOURCES_DIR/tables/templates/
-    templates.files = $$INSTALL_STANDARD_TEMPLATES
+        # Symlinks also good names for copying. Make will take origin file and copy them with using symlink name.
+        # For bundle this names more then enough. We don't need care much about libraries versions.
+        libraries.path = $$FRAMEWORKS_DIR
+        libraries.files += $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/libqmuparser.2.dylib
+        libraries.files += $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/libvpropertyexplorer.1.dylib
 
-    # Copy to bundle standard measurements files
-    # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
-    forceCopyToDestdir($${OUT_PWD}/$${DESTDIR}/diagrams.rcc, $$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/))
+        # logo on macx.
+        ICON = $$PWD/../../../dist/Tape.icns
 
-    format.path = $$RESOURCES_DIR/
-    format.files = $$PWD/../../../dist/macx/measurements.icns
+        QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/tape/Info.plist
 
-    QMAKE_BUNDLE_DATA += \
-        templates \
-        standard \
-        libraries \
-        format
+        # Copy to bundle standard measurements files
+        standard.path = $$RESOURCES_DIR/tables/standard/
+        standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+
+        # Copy to bundle templates files
+        templates.path = $$RESOURCES_DIR/tables/templates/
+        templates.files = $$INSTALL_STANDARD_TEMPLATES
+
+        # Copy to bundle standard measurements files
+        # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
+        forceCopyToDestdir($${OUT_PWD}/$${DESTDIR}/diagrams.rcc, $$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/))
+
+        format.path = $$RESOURCES_DIR/
+        format.files = $$PWD/../../../dist/macx/measurements.icns
+
+        QMAKE_BUNDLE_DATA += \
+            templates \
+            standard \
+            libraries \
+            format
+    }
 }
 
 # Compilation will fail without this files after we added them to this section.

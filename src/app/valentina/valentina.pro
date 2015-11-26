@@ -235,9 +235,6 @@ unix{
         templates.path = /usr/share/$${TARGET}/tables/templates/
         templates.files = $$INSTALL_STANDARD_TEMPLATES
 
-        diagrams.path = /usr/share/$${TARGET}/
-        diagrams.files = $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc
-
         INSTALLS += \
             target \
             tape \
@@ -245,8 +242,7 @@ unix{
             pixmaps \
             translations \
             standard \
-            templates \
-            diagrams
+            templates
     }
     macx{
         # Some macx stuff
@@ -289,10 +285,6 @@ unix{
         templates.path = $$RESOURCES_DIR/tables/templates/
         templates.files = $$INSTALL_STANDARD_TEMPLATES
 
-        # Copy to bundle standard measurements files
-        diagrams.path = $$RESOURCES_DIR/
-        diagrams.files = $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc
-
         format.path = $$RESOURCES_DIR/
         format.files = $$PWD/../../../dist/macx/measurements.icns
 
@@ -302,7 +294,6 @@ unix{
             libraries \
             tape \
             xpdf \
-            diagrams \
             format
     }
 }
