@@ -7,20 +7,13 @@ compiler:
   - gcc
   - clang
 
-env:
-  global:
-   # COVERITY_SCAN_TOKEN
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "DO0hLop827D9LXcCxMQ3AmSowl1fC8NPeU/um5Jc0aJqnBvizw4BTWyXyYPlCzci1Lx+4SlRAFBttd0FIMIUEi/9atLR9zSivwLCZ86HaP2gJjzOz/TjM+ZQUcIHsZ2x1kf2dngEoWG5Ur3sa9T+HYd9t32F+aO/PjjN5wFtI6I="
-
 before_install:
   # g++4.8.1
   - if [ "$CXX" == "g++" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
   - sudo add-apt-repository ppa:ubuntu-sdk-team/ppa -y
   - sudo apt-get update -qq
   - sudo apt-get install -y qtbase5-dev libqt5svg5-dev ccache qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev
-  - sudo apt-get install -y libqt5core5 libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf cppcheck
+  - sudo apt-get install -y libqt5core5 libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf
 
 install:
   # g++4.8.1
@@ -36,11 +29,10 @@ before_script:
   - which qmake
   - uname -a
   - qmake --version
-  - qmake ../Valentina.pro -r
+  - qmake ../Valentina.pro -r CONFIG+=no_ccache
 
 script:
   - $CXX --version
-  - cppcheck --error-exitcode=1 --quiet --inline-suppr --template '{file}:{line}:{message}:{id}' --std=posix --force --report-progress --enable=performance,portability ../src
   - make -j$(nproc)
   - DISPLAY=:99.0 make check
 
@@ -49,31 +41,6 @@ notifications:
      recipients:
         - dismine@gmail.com
         - susan.spencer@gmail.com
+		- zhuravska19@gmail.com
      on_success: change
      on_failure: always
-
-addons:
-  coverity_scan:
-
-    # GitHub project metadata
-    # ** specific to your project **
-    project:
-      name: "dismine/Valentina"
-      description: "Build submitted via Travis CI"
-
-    # Where email notification of build analysis results will be sent
-    notification_email: dismine@gmail.com
-
-    # Commands to prepare for build_command
-    # ** likely specific to your build **
-    build_command_prepend: "qmake ../Valentina.pro -r; make clean"
-
-    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
-    # ** likely specific to your build **
-    build_command:   "make -j$(nproc)"
-
-    # Pattern to match selecting branches that will run analysis. We recommend leaving this set to 'coverity_scan'.
-    # Take care in resource usage, and consider the build frequency allowances per
-    #   https://scan.coverity.com/faq#frequency
-    # We push code to github not so frequent so leave master branch.
-    branch_pattern: master
