@@ -28,10 +28,10 @@
 
 #include "vabstractapplication.h"
 #include "../vmisc/def.h"
+#include "../vmisc/logging.h"
 
 #include <QDir>
 #include <QLibraryInfo>
-#include <QLoggingCategory>
 #include <QTranslator>
 #include <QtDebug>
 
