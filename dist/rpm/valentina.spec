@@ -154,6 +154,6 @@ rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dis
 
 
 %changelog
-* Mon Oct 27 2015 Roman Telezhinskyi
+* Mon Nov 27 2015 Roman Telezhinskyi
  - Auto build
 
