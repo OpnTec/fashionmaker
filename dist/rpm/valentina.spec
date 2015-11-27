@@ -8,6 +8,8 @@ Requires(postun): desktop-file-utils
 
 # Fedora specifics
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
+BuildRequires: qt5-qtbase-devel >= 5.0.0
+BuildRequires: pkgconfig(Qt5Svg)
 BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: pkgconfig(Qt5Gui)
 BuildRequires: pkgconfig(Qt5Network)
