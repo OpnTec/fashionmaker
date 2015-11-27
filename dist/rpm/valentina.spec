@@ -2,7 +2,9 @@ Name:valentina
 
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
-BuildRequires: ccache
+
+Requires(post): desktop-file-utils
+Requires(postun): desktop-file-utils
 
 # Fedora specifics
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
@@ -73,9 +75,9 @@ a unique pattern making tool.
 
 %build
 %if 0%{?suse_version} >= 1320
-qmake-qt5 PREFIX=%{buildroot}%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r
+qmake-qt5 PREFIX=%{buildroot}%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r CONFIG+=no_ccache
 %else
-qmake-qt5 PREFIX=%{buildroot}%{_prefix} Valentina.pro -r
+qmake-qt5 PREFIX=%{buildroot}%{_prefix} Valentina.pro -r CONFIG+=no_ccache
 %endif
 %{__make} %{?jobs:-j %jobs}
 
@@ -85,33 +87,65 @@ export NO_DEBUGINFO_STRIP_DEBUG=true
 gzip -9c dist/debian/%{name}.1 > dist/debian/%{name}.1.gz &&
 %{__install} -Dm 644 dist/debian/%{name}.1.gz %{buildroot}%{_mandir}/man1/%{name}.1.gz
 
+gzip -9c dist/debian/tape.1 > dist/debian/tape.1.gz &&
+%{__install} -Dm 644 dist/debian/tape.1.gz %{buildroot}%{_mandir}/man1/tape.1.gz
+
+cp dist/debian/valentina.sharedmimeinfo dist/debian/%{name}.xml &&
+%{__install} -Dm 644 dist/debian/%{name}.xml %{_datadir}/mime/packages/%{name}.xml
+
+cp dist/debian/valentina.mime dist/debian/%{name} &&
+%{__install} -Dm 644 dist/debian/%{name} %{_libdir}/mime/packages/%{name}
+
 %if 0%{?suse_version} > 0
 %suse_update_desktop_file -r %{name} VectorGraphics
 %endif
 
-%post -p /sbin/ldconfig
+%post 
+/sbin/ldconfig
+/usr/bin/update-desktop-database &> /dev/null || :
+/bin/touch --no-create %{_datadir}/mime/packages &>/dev/null || :
 
-%postun -p /sbin/ldconfig
+%postun
+/sbin/ldconfig
+/usr/bin/update-desktop-database &> /dev/null || :
+if [ $1 -eq 0 ] ; then
+  /usr/bin/update-mime-database %{_datadir}/mime &> /dev/null || :
+fi
+
+%posttrans
+# Fedora specifics
+%if 0%{?fedora_version} > 0 || 0%{?rhel_version} > 0 || 0%{?centos_version} > 0
+/usr/bin/update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
+%else
+/usr/bin/update-mime-database %{_datadir}/mime &> /dev/null || :
+%endif
 
 %files
 %defattr(-,root,root,-)
 %doc README.txt LICENSE_GPL.txt 
 %doc %{_mandir}/man1/%{name}.1.gz
+%doc %{_mandir}/man1/tape.1.gz
 %{_bindir}/valentina
+%{_bindir}/tape
 %{_libdir}/libvpropertyexplorer.so
 %{_libdir}/libvpropertyexplorer.so.*
 %{_libdir}/libqmuparser.so
 %{_libdir}/libqmuparser.so.*
 %{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/tape.desktop
 %{_datadir}/pixmaps/*
 %dir %{_datadir}/%{name}
+%{_datadir}/%{name}/diagrams.rcc
 %dir %{_datadir}/%{name}/translations
 %{_datadir}/%{name}/translations/*.qm
 %dir %{_datadir}/%{name}/tables
 %dir %{_datadir}/%{name}/tables/standard
 %{_datadir}/%{name}/tables/standard/*.vst
+%dir %{_datadir}/%{name}/tables/templates
+%{_datadir}/%{name}/tables/templates/*.vit
 
 %clean
+rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dist/debian/%{name}
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
 
 
