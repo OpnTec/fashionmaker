@@ -83,7 +83,9 @@ qmake-qt5 PREFIX=%{buildroot}%{_prefix} Valentina.pro -r CONFIG+=no_ccache
 
 %install
 export NO_DEBUGINFO_STRIP_DEBUG=true
-%{__make} install
+
+%{__make} INSTALL_ROOT=%{buildroot} install
+
 gzip -9c dist/debian/%{name}.1 > dist/debian/%{name}.1.gz &&
 %{__install} -Dm 644 dist/debian/%{name}.1.gz %{buildroot}%{_mandir}/man1/%{name}.1.gz
 
@@ -91,10 +93,10 @@ gzip -9c dist/debian/tape.1 > dist/debian/tape.1.gz &&
 %{__install} -Dm 644 dist/debian/tape.1.gz %{buildroot}%{_mandir}/man1/tape.1.gz
 
 cp dist/debian/valentina.sharedmimeinfo dist/debian/%{name}.xml &&
-%{__install} -Dm 644 dist/debian/%{name}.xml %{_datadir}/mime/packages/%{name}.xml
+%{__install} -Dm 644 dist/debian/%{name}.xml %{buildroot}%{_datadir}/mime/packages/%{name}.xml
 
 cp dist/debian/valentina.mime dist/debian/%{name} &&
-%{__install} -Dm 644 dist/debian/%{name} %{_libdir}/mime/packages/%{name}
+%{__install} -Dm 644 dist/debian/%{name} %{buildroot}%{_libdir}/mime/packages/%{name}
 
 %if 0%{?suse_version} > 0
 %suse_update_desktop_file -r %{name} VectorGraphics
@@ -150,6 +152,6 @@ rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dis
 
 
 %changelog
-* Mon Dec 22 2014 Roman Telezhinskyi
- - Initial build
+* Mon Oct 27 2015 Roman Telezhinskyi
+ - Auto build
 
