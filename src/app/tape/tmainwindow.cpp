@@ -1706,7 +1706,7 @@ void TMainWindow::SetupMenu()
     AboutToShowWindowMenu();
 
     // Help
-    connect(ui->actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt);
+    connect(ui->actionAboutQt, &QAction::triggered, qApp, &MApplication::aboutQt);
     connect(ui->actionAboutTape, &QAction::triggered, this, &TMainWindow::AboutApplication);
 }
 
