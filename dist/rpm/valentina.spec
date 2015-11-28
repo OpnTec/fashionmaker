@@ -77,9 +77,9 @@ a unique pattern making tool.
 
 %build
 %if 0%{?suse_version} >= 1320
-qmake-qt5 PREFIX=%{buildroot}%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r CONFIG+=no_ccache
+qmake-qt5 PREFIX=%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r CONFIG+=no_ccache
 %else
-qmake-qt5 PREFIX=%{buildroot}%{_prefix} Valentina.pro -r CONFIG+=no_ccache
+qmake-qt5 PREFIX=%{_prefix} Valentina.pro -r CONFIG+=no_ccache
 %endif
 %{__make} %{?jobs:-j %jobs}
 
