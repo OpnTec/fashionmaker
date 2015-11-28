@@ -160,7 +160,7 @@ diagrams.CONFIG += no_link target_predeps
 diagrams.depends = $$DIAGRAMS # expects a list of files
 diagrams.input = DATA_RESOURCE # expects the name of a variable
 diagrams.output = ${QMAKE_FILE_BASE}.rcc
-diagrams.commands = $$shell_path($$[QT_INSTALL_BINS]/rcc) --binary --no-compress ${QMAKE_FILE_IN} -o $${OUT_PWD}/$${DESTDIR}/${QMAKE_FILE_OUT}
+diagrams.commands = $$shell_path($$[QT_INSTALL_BINS]/rcc) -binary -no-compress ${QMAKE_FILE_IN} -o $${OUT_PWD}/$${DESTDIR}/${QMAKE_FILE_OUT}
 
 QMAKE_EXTRA_COMPILERS += diagrams
 
