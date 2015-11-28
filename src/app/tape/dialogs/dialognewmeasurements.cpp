@@ -63,7 +63,7 @@ DialogNewMeasurements::~DialogNewMeasurements()
 MeasurementsType DialogNewMeasurements::Type() const
 {
 #if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
-    return static_cast<Unit>(ui->comboBoxMType->itemData(ui->comboBoxMType->currentIndex()).toInt());
+    return static_cast<MeasurementsType>(ui->comboBoxMType->itemData(ui->comboBoxMType->currentIndex()).toInt());
 #else
     return static_cast<MeasurementsType>(ui->comboBoxMType->currentData().toInt());
 #endif
