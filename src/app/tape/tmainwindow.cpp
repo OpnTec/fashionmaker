@@ -698,6 +698,12 @@ void TMainWindow::AboutApplication()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::AboutQt()
+{
+    QMessageBox::aboutQt(this, tr("About Qt"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveGivenName()
 {
     if (m->GivenName() != ui->lineEditGivenName->text())
@@ -1706,7 +1712,7 @@ void TMainWindow::SetupMenu()
     AboutToShowWindowMenu();
 
     // Help
-    connect(ui->actionAboutQt, &QAction::triggered, qApp, &MApplication::aboutQt);
+    connect(ui->actionAboutQt, &QAction::triggered, this, &TMainWindow::AboutQt);
     connect(ui->actionAboutTape, &QAction::triggered, this, &TMainWindow::AboutApplication);
 }
 

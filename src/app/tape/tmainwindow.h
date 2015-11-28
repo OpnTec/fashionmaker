@@ -81,6 +81,7 @@ private slots:
     void AboutToShowWindowMenu();
     void ShowWindow();
     void AboutApplication();
+    void AboutQt();
 
     void SaveGivenName();
     void SaveFamilyName();
