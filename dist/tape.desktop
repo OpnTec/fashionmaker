@@ -11,4 +11,4 @@ Comment[ru]=Создавайте и редактируйте мерки
 Icon=/usr/share/pixmaps/tape.png
 Terminal=false
 MimeType=application/x-valentina-s-measurements;application/x-valentina-i-measurements;
-Categories=Qt;Utility;
+Categories=Qt;Utility;FileTools;

@@ -11,4 +11,4 @@ Comment[uk]=Створеня викрійок одягу
 Icon=/usr/share/pixmaps/valentina.png
 Terminal=false
 MimeType=application/x-valentina-pattern;
-Categories=Graphics;VectorGraphics;2DGraphics;Qt;
+Categories=Graphics;VectorGraphics;2DGraphics;Qt;Engineering;
