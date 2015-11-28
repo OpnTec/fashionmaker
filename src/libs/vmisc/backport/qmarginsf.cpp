@@ -363,7 +363,9 @@ QDataStream &operator>>(QDataStream &s, QMarginsF &m)
 #ifndef QT_NO_DEBUG_STREAM
 QDebug operator<<(QDebug dbg, const QMarginsF &m)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     QDebugStateSaver saver(dbg);
+#endif // QT_VERSION >= QT_VERSION_CHECK(5, 1, 0)
     dbg.nospace();
     dbg << "QMarginsF" << '(';
     dbg << m.left() << ", " << m.top() << ", " << m.right() << ", " << m.bottom();
