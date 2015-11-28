@@ -108,10 +108,18 @@ void TapeConfigurationPage::LangChanged()
 void TapeConfigurationPage::SystemChanged()
 {
     systemChanged = true;
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->itemData(systemCombo->currentIndex()).toString());
+#else
     QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString());
+#endif
     systemAuthorValueLabel->setText(text);
     systemAuthorValueLabel->setToolTip(text);
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    text = qApp->TrVars()->PMSystemBook(systemCombo->itemData(systemCombo->currentIndex()).toString());
+#else
     text = qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString());
+#endif
     systemBookValueLabel->setText(text);
     systemBookValueLabel->setToolTip(text);
 }
@@ -263,10 +271,18 @@ void TapeConfigurationPage::RetranslateUi()
     systemAuthorLabel->setText(tr("Author:"));
     systemBookLabel->setText(tr("Book:"));
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->itemData(systemCombo->currentIndex()).toString());
+#else
     QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString());
+#endif
     systemAuthorValueLabel->setText(text);
     systemAuthorValueLabel->setToolTip(text);
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    text = qApp->TrVars()->PMSystemBook(systemCombo->itemData(systemCombo->currentIndex()).toString());
+#else
     text = qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString());
+#endif
     systemBookValueLabel->setText(text);
     systemBookValueLabel->setToolTip(text);
 
