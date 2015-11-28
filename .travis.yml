@@ -17,7 +17,7 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - ubuntu-sdk-team-ppa
+    - ubuntu-sdk-team
     packages:
     - qtbase5-dev 
     - libqt5svg5-dev 
