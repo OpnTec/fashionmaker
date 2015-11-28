@@ -101,8 +101,8 @@ cp dist/debian/valentina.mime dist/debian/%{name} &&
 %{__install} -Dm 644 dist/debian/%{name} %{buildroot}%{_libdir}/mime/packages/%{name}
 
 %if 0%{?suse_version} > 0
-%suse_update_desktop_file %{name}
-%suse_update_desktop_file tape
+%suse_update_desktop_file -r %{name} Graphics VectorGraphics 2DGraphics Education Engineering Utility Printing
+%suse_update_desktop_file -r tape Utility Applet
 %endif
 
 %post 
