@@ -136,6 +136,8 @@ fi
 %{_libdir}/libvpropertyexplorer.so.*
 %{_libdir}/libqmuparser.so
 %{_libdir}/libqmuparser.so.*
+%{_libdir}/mime/packages/%{name}
+%{_datadir}/mime/packages/%{name}.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/applications/tape.desktop
 %{_datadir}/pixmaps/*
