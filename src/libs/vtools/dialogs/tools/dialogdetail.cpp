@@ -52,12 +52,12 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     ui.labelUnitX->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     ui.labelUnitY->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
 
-    // Default value for seam allowence is 1 cm. But pattern have different units, so just set 1 in dialog not enough.
-    ui.doubleSpinBoxSeams->setValue(UnitConvertor(1, Unit::Cm, qApp->patternUnit()));
     if(qApp->patternUnit() == Unit::Inch)
     {
         ui.doubleSpinBoxSeams->setDecimals(5);
     }
+    // Default value for seam allowence is 1 cm. But pattern have different units, so just set 1 in dialog not enough.
+    ui.doubleSpinBoxSeams->setValue(UnitConvertor(1, Unit::Cm, qApp->patternUnit()));
 
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr);
