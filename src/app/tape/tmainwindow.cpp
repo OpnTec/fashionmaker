@@ -1973,21 +1973,15 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
     if (curFile.isEmpty())
     {
         shownName = tr("untitled");
-        if (mType == MeasurementsType::Standard)
-        {
-            shownName += ".vst";
-        }
-        else
-        {
-            shownName += ".vit";
-        }
+        mType == MeasurementsType::Standard ? shownName += ".vst" : shownName += ".vit";
         ui->labelPathToFile->setText(tr("<Empty>"));
+        ui->labelPathToFile->setToolTip(tr("File was not saved yet."));
         ui->pushButtonShowInExplorer->setEnabled(false);
     }
     else
     {
-        ui->labelPathToFile->setText(curFile);
-        ui->labelPathToFile->setToolTip(curFile);
+        ui->labelPathToFile->setText(QDir::toNativeSeparators(curFile));
+        ui->labelPathToFile->setToolTip(QDir::toNativeSeparators(curFile));
         ui->pushButtonShowInExplorer->setEnabled(true);
     }
     shownName += "[*]";
