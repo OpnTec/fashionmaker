@@ -7,499 +7,504 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="189"/>
         <source>height</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="191"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Total</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="192"/>
         <source>Vertical distance from crown of head to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom Scheitel zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="196"/>
         <source>height_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_halswirbel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="198"/>
         <source>Height: Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Nacken hinten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="199"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom Halswirbel zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="203"/>
         <source>height_scapula</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_schulterblatt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="205"/>
         <source>Height: Scapula</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Schulterblatt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="206"/>
         <source>Vertical distance from the Scapula (Blade point) to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessumg vom Schulterblatt zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="210"/>
         <source>height_armpit</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_achsel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="212"/>
         <source>Height: Armpit</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Achse</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="213"/>
         <source>Vertical distance from the Armpit to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung von der Achsel zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="217"/>
         <source>height_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_seitliche_taillie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="219"/>
         <source>Height: Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Seitliche Taillie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="220"/>
         <source>Vertical distance from the Waist Side to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung der Tallie bis zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="224"/>
         <source>height_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="226"/>
         <source>Height: Hip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="227"/>
         <source>Vertical distance from the Hip level to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom Hüfte zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="231"/>
         <source>height_gluteal_fold</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_gesäß</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="233"/>
         <source>Height: Gluteal Fold</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Gesäß</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="234"/>
         <source>Vertical distance from the Gluteal fold, where the Gluteal muscle meets the top of the back thigh, to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom Gesäß, bei dem die Po-Muskeln die Schenkel berühren, bis zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="238"/>
         <source>height_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_knie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="240"/>
         <source>Height: Knee</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Knie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="241"/>
         <source>Vertical distance from the fold at the back of the Knee to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung von der Kniekehle bis zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="245"/>
         <source>height_calf</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_wade</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="247"/>
         <source>Height: Calf</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Wade</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="248"/>
         <source>Vertical distance from the widest point of the calf to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom dicksten Punkt der Wade zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="252"/>
         <source>height_ankle_high</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_knöchel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="254"/>
         <source>Height: Ankle High</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Knöchel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="255"/>
         <source>Vertical distance from the deepest indentation of the back of the ankle to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom tiefsten Einschnitt des Sprunggelenks bis zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="259"/>
         <source>height_ankle</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_spunggelenk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="261"/>
         <source>Height: Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Sprunggelenk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="262"/>
         <source>Vertical distance from point where the front leg meets the foot to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung von der Stelle an der das Vorderbein den Fuß berührt bis zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="266"/>
         <source>height_highhip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_hohehüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="268"/>
         <source>Height: Highhip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Hohe Hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="269"/>
         <source>Vertical distance from the Highhip level, where front abdomen is most prominent, to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>
+
+
+
+Vertikalen Abstand von der hohen Hüfte Ebene, stärkste Stelle des  vorderen Bauches, bis zum Boden.
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="273"/>
         <source>height_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_vordere_taillie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="275"/>
         <source>Height: Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: vordere Taillie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="276"/>
         <source>Vertical distance from the Waist Front to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung von der vorderen Taillie zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="280"/>
         <source>height_bustpoint</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_brustpunkt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="282"/>
         <source>Height: Bustpoint</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Brustpunkt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="283"/>
         <source>Vertical distance from Bustpoint to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikaler Abstand vom Brustpunkt bis zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="287"/>
         <source>height_shoulder_tip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_schulterspitze</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="289"/>
         <source>Height: Shoulder Tip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Schulterspitze</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="290"/>
         <source>Vertical distance from the Shoulder Tip to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung von der Schulterspitze zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="294"/>
         <source>height_neck_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_hals_vorne</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="296"/>
         <source>Height: Neck Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Hals vorne</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="297"/>
         <source>Vertical distance from the Neck Front to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung von der vorderseite des Halses zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="301"/>
         <source>height_neck_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_halsseite</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="303"/>
         <source>Height: Neck Side</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Halsseite</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="304"/>
         <source>Vertical distance from the Neck Side to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung von der Halsseiten zum Boden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="308"/>
         <source>height_neck_back_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_halswirbel_zu_den_knien</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="310"/>
         <source>Height: Neck Back to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Halswirbel zu den Knien</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="311"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the fold at the back of the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom Halswirbel (cervicale vertebra) zur Kniekehle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="315"/>
         <source>height_waist_side_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_seitliche_taillie_zu_den_knien</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="317"/>
         <source>Height: Waist Side to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Seitliche Taillie zu den Knien</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="318"/>
         <source>Vertical distance from the Waist Side to the fold at the back of the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung von der seitlichen Taillie zu der Kniekehle.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="323"/>
         <source>height_waist_side_to_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_seitliche_taillie_zu_der_hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="325"/>
         <source>Height: Waist Side to Hip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: seitliche Taillie zu der Hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="326"/>
         <source>Vertical distance from the Waist Side to the Hip level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung von der seitlichen Taillie zum Hüftgelenk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="330"/>
         <source>height_knee_to_ankle</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_knie_zu_der_achsel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="332"/>
         <source>Height: Knee to Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Knie zu der Achsel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="333"/>
         <source>Vertical distance from the fold at the back of the knee to the point where the front leg meets the top of the foot.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung von der Kniekehle zu dem Punkt an dem sich das Vorderbein und der Fuß treffen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="337"/>
         <source>height_neck_back_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>höhe_halswirbel_zu_der_seitlichen_taillie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="339"/>
         <source>Height: Neck Back to Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Höhe: Halswirbel zu der seitlichen Taillie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="340"/>
         <source>Vertical distance from Neck Back to Waist Side. (&apos;Height: Neck Back&apos; - &apos;Height: Waist Side&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom Halswirbel zu der seitlichen Taillie. (&apos;Höhe Halswirbel&apos; - &apos;Höhe: seitliche Taillie&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="356"/>
         <source>width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>breite_schulter</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="358"/>
         <source>Width: Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Breite: Schulter</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="359"/>
         <source>Horizontal distance from Shoulder Tip to Shoulder Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Horizontale Abmessung von Schulterspitze zu Schulterspitze</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="363"/>
         <source>width_bust</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>breite_brust</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="365"/>
         <source>Width: Bust</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Breite: Brust</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="366"/>
         <source>Horizontal distance from Bust Side to Bust Side.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Horizontale Abmessung von der Brustseite zur Brustseite.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="370"/>
         <source>width_waist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>breite_taillie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="372"/>
         <source>Width: Waist</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Breite: Taillie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="373"/>
         <source>Horizontal distance from Waist Side to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Horizontale Abmessung von der einen Seite der Taillie zur anderen Seite.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="377"/>
         <source>width_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>breite_hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="379"/>
         <source>Width: Hip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Breite: Hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="380"/>
         <source>Horizontal distance from Hip Side to Hip Side.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Horizontale Abmessung von der einen Seite der Hüfte zur anderen Seite.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="384"/>
         <source>width_abdomen_to_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>breite_bauch_zu_der_hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="386"/>
         <source>Width: Abdomen to Hip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Breite: Bauch zu der Hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="387"/>
         <source>Horizontal distance from the greatest abdomen prominence to the greatest hip prominence.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Horizontaler Abstand von der stärksten Stelle des vorderen Bauches bis zur stärksten Stelle des größten Hüftumfanges.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="403"/>
         <source>indent_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>vertiefung_genick</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="405"/>
         <source>Indent: Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertiefung: Nacken hinten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="406"/>
@@ -511,13 +516,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="410"/>
         <source>indent_waist_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>vertiefung_taille_hinten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="412"/>
         <source>Indent: Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertiefung: Taille hinten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="413"/>
@@ -529,13 +534,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="417"/>
         <source>indent_ankle_high</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertiefung_knöchel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="419"/>
         <source>Indent: Ankle High</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertiefung: Knöchel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="420"/>
@@ -547,85 +552,86 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="436"/>
         <source>hand_palm_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>Handfläche_länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="438"/>
         <source>Hand: Palm length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hand: Länge der Handfläche</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="439"/>
         <source>Length from Wrist line to base of middle finger.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Länge vom Handgelenk bis zum Ansatz des Mittelfingers.
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="443"/>
         <source>hand_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hand_länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="445"/>
         <source>Hand: Length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hand: Länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="446"/>
         <source>Length from Wrist line to end of middle finger.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Länge vom Handgelenk bis zum Ende des Mittelfingers. </translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="450"/>
         <source>hand_palm_width</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>Handteller_weite</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="452"/>
         <source>Hand: Palm width</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Weite: Handteller</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="453"/>
         <source>Measure where Palm is widest.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Messen des größten Handtellerumfanges.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="456"/>
         <source>hand_palm_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>Handteller_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="458"/>
         <source>Hand: Palm circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hand: Handflächenumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="459"/>
         <source>Circumference where Palm is widest.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Umfang, an der die Handfläche am stärksten ist.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="462"/>
         <source>hand_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hand_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="464"/>
         <source>Hand: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hand: Umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="465"/>
@@ -637,181 +643,184 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="481"/>
         <source>foot_width</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>fuss_breite</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="483"/>
         <source>Foot: Width</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fuss: Breite</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="484"/>
         <source>Measure at widest part of foot.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>An der stärksten Stelle des Fusses messen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="487"/>
         <source>foot_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>fuss_länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="489"/>
         <source>Foot: Length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fuss: Länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="490"/>
         <source>Measure from back of heel to end of longest toe.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Messen Sie von der Ferse bis zum Ende der längsten Zehe.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="494"/>
         <source>foot_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>fuss_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="496"/>
         <source>Foot: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fuss: Umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="497"/>
         <source>Measure circumference around widest part of foot.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Umfang am breitesten Teil des Fußes messen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="501"/>
         <source>foot_instep_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>fuss_spannumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="503"/>
         <source>Foot: Instep circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fuß: Spannumfang
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="504"/>
         <source>Measure circumference at tallest part of instep.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Am höchsten Teil der Spanns messen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="520"/>
         <source>head_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>kopf_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="522"/>
         <source>Head: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kopf: Umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="523"/>
         <source>Measure circumference at largest level of head.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Messen der stärksten Stelle des Kopfumfanges.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="527"/>
         <source>head_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>kopf_länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="529"/>
         <source>Head: Length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kopf: Länge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="530"/>
         <source>Vertical distance from Head Crown to bottom of jaw.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom Scheitel zur Unterseite des Kiefers.
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="534"/>
         <source>head_depth</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>kopf_tiefe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="536"/>
         <source>Head: Depth</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kopf: Tiefe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="537"/>
         <source>Horizontal distance from front of forehead to back of head.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Horizontalen Abstand vor der Stirn zum Hinterkopf .</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="541"/>
         <source>head_width</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>kopf_breite</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="543"/>
         <source>Head: Width</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kopf: Breite</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="544"/>
         <source>Horizontal distance from Head Side to Head Side, where Head is widest.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Horizontale Abstand von Schläfe zu Schläfe , wo der Kopf am breitesten ist .
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="548"/>
         <source>head_crown_to_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>kopf_scheitel_bis_zum_hinteren_halsansatz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="550"/>
         <source>Head: Crown to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kopf: Scheitel bis zum hinteren Halsansatz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="551"/>
         <source>Vertical distance from Crown to Neck Back. (&apos;Height: Total&apos; - &apos;Height: Neck Back&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom Scheitel bis zum hinteren Halsansatz (&apos;Höhe: Gesamt&apos; - &apos;Höhe: hinterer Halsansatz&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="555"/>
         <source>head_chin_to_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>kopf_kinn_zum_hinteren_halsansatz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="557"/>
         <source>Head: Chin to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kopf: Kinn zum hinteren Halsansatz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="558"/>
         <source>Vertical distance from Chin to Neck Back. (&apos;Height&apos; - &apos;Height: Neck Back&apos; - &apos;Head: Length&apos;)</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Abmessung vom Kinn zum hinteren Halsansatz. (&apos;Höhe&apos; . &apos;Höhe hinterer Halsansatz&apos; - &apos;Kopf: Länge&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="575"/>
@@ -823,43 +832,43 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="577"/>
         <source>Neck circumference, midsection</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Halsumfang, in der Mitte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="578"/>
         <source>Circumference of Neck midsection, about halfway between jaw and torso.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Halsumfang, auf halbem Weg zwischen Kiefer und Oberkörper.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="582"/>
         <source>neck_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>halsumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="584"/>
         <source>Neck circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Halsumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="585"/>
         <source>Neck circumference at base of Neck, touching Neck Back, Neck Sides, and Neck Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Halsumfang am Halsansatz, berührend den Hals hinten, Halsseiten und vorderen Halsansatz.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="590"/>
         <source>highbust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hohebrust_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="592"/>
         <source>Highbust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hoher Brustumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="593"/>
@@ -871,109 +880,111 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="597"/>
         <source>bust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>brust_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="599"/>
         <source>Bust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Brustumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="600"/>
         <source>Circumference around Bust, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Brustumfang, parallel zum Boden gemessen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="604"/>
         <source>lowbust_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>unterbrust_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="606"/>
         <source>Lowbust circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unterbrust Umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="607"/>
         <source>Circumference around LowBust under the breasts, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unterbrustumfang, unter den Brüsten, parallel zum Boden gemessen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="611"/>
         <source>rib_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>umfang_rippen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="613"/>
         <source>Rib circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Umfang der Rippen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="614"/>
         <source>Circumference around Ribs at level of the lowest rib at the side, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Umfang der Rippen auf der Ebene der untersten Rippe an der Seite, parallel zum Boden gemessen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="619"/>
         <source>waist_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>taille_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="621"/>
         <source>Waist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Taillenumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="627"/>
         <source>highhip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hohehüfte_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="629"/>
         <source>Highhip circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Umfang hohe Hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="622"/>
         <source>Circumference around Waist, following natural contours. Waists are  typically higher in back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Umfang der Taille, folgen der natürlichen Form. Taillen sind in der Regel auf der Rückseite höher</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="630"/>
         <source>Circumference around Highhip, where Abdomen protrusion is  greatest, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Umfang der hohen Höfte , Stelle des stärksten Bauchumfanges, parallel zum Boden gemessen.
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="635"/>
         <source>hip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hüfte_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="637"/>
         <source>Hip circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hüftumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="638"/>
         <source>Circumference around Hip where Hip protrusion is greatest, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Stärkste Stelle des Hüftumfanges, parallel zum Boden gemessen.
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="643"/>
@@ -991,7 +1002,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="646"/>
         <source>From Neck Side to Neck Side through Neck Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Von Halsseite zur Halsseite über den vorderen Halsansatz.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="650"/>
@@ -1027,7 +1038,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="660"/>
         <source>From Bust Side to Bust Side across chest.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Von Brustseite zu Brustseite über die Brüste gemessen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="664"/>
@@ -1045,7 +1056,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="667"/>
         <source>From Lowbust Side to Lowbust Side across front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Von Unterbrustseite bis Unterbrustseite über die Vorderseite.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="671"/>
@@ -1153,7 +1164,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="709"/>
         <source>Half of &apos;Highbust arc, front&apos;. From Highbust Front to Highbust Side. (&apos;Highbust arc,  front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Die Hälfte des vorderen Brustumfanges. Von Seite zu Seite über die Brüste gemessen. (&apos;Hoher Brustumfang vorne&apos;/2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="714"/>
@@ -1225,7 +1236,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="738"/>
         <source>Half of &apos;Waist arc, front&apos;. (&apos;Waist arc, front&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Die Hälfte des vorderen Taillenumfang. (&apos;Taillenumfang vorne&apos;/2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="742"/>
@@ -3445,19 +3456,20 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1690"/>
         <source>leg_crotch_to_floor</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>bein_schritt_bis_zum_boden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1692"/>
         <source>Leg: Crotch to floor</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Beine: Vom Schritt bis Boden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1693"/>
         <source>Stand feet close together. Measure from crotch level (touching body, no extra space) down to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Füße eng zusammen stellen. Messen Sie vom Schritt-Höhe (Körper berühren, keine zusätzlichen Platz ) bis zum Boden.
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1784"/>
@@ -3493,121 +3505,123 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1698"/>
         <source>leg_waist_side_to_floor</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>beine_taille_seite_bis_boden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1700"/>
         <source>Leg: Waist Side to floor</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Beine: Taille an der Seite bis zum Boden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1701"/>
         <source>From Waist Side along curve to Hip level then straight down to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Von der Taille entlang der Seite und Hüftkurve, ab Hüfthöhe gerade nach unten bis zum Boden .
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1705"/>
         <source>leg_thigh_upper_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>beine_oberschenkel_umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1707"/>
         <source>Leg: Thigh Upper circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Beine: Oberschenkel-Umfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1708"/>
         <source>Thigh circumference at the fullest part of the upper Thigh near the Crotch.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Oberschenkelumfang an der breitesten Stelle des Oberschenkels in der Nähe des Schrittes.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1713"/>
         <source>leg_thigh_mid_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>beine_oberschenkel_umfang_mitte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1715"/>
         <source>Leg: Thigh Middle circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Beine: Oberschenkel-Mittelumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1716"/>
         <source>Thigh circumference about halfway between Crotch and Knee.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Oberschenkelumfang etwa auf halbem Weg zwischen Schritt und Knie.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1720"/>
         <source>leg_knee_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>beine_knieumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1722"/>
         <source>Leg: Knee circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Beine: Knieumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1723"/>
         <source>Knee circumference with straight leg.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Knie Umfang mit geradem Bein.
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1726"/>
         <source>leg_knee_small_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>beine_kleinster_knieumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1728"/>
         <source>Leg: Knee Small circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Beine: kleinster Knieumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1729"/>
         <source>Leg circumference just below the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Beinumfang knapp unter dem Knie.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1732"/>
         <source>leg_calf_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>bein_wadenumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1734"/>
         <source>Leg: Calf circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bein: Wadenumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1735"/>
         <source>Calf circumference at the largest part of lower leg.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Wadenumfang an der stärksten Stelle des Unterschenkels.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1739"/>
         <source>leg_ankle_high_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>bein_oberer_knöchelumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1741"/>
         <source>Leg: Ankle High circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bein: oberer Knöchelumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1742"/>
@@ -3631,25 +3645,26 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1750"/>
         <source>Ankle circumference where front of leg meets the top of the foot.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1754"/>
         <source>leg_knee_circ_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>bein_umfang_gewinkeltes_knie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1756"/>
         <source>Leg: Knee circumference, bent</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bein: Umfang des gewinkelten Knies</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1757"/>
         <source>Knee circumference with leg bent.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Knieumfang mit abgewinkeltem Bein.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1760"/>
@@ -3772,6 +3787,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1826"/>
+        <source>Rise length, side, sitting</source>
+        <comment>Full measurement name.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>
         <source>rise_length_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
@@ -3787,12 +3808,6 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1833"/>
         <source>rise_length_diag</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1826"/>
-        <source>Rise length, side, sitting</source>
-        <comment>Full measurement name.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3889,7 +3904,8 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1889"/>
         <source>Natural Waist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Umfang der natürlichen Taille
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1890"/>
@@ -4315,44 +4331,44 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2091"/>
         <source>dart_width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>abnäher_breite_schulter</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2093"/>
         <source>Dart Width: Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Abnäherbreite: Schulter</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2094"/>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2102"/>
         <source>This information is pulled from pattern charts in some patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Diese Informationen wurden von den Schnittmuster-Tabellen von einigen Schnittmustersystemen wie z. B.  Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;. übernommen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2099"/>
         <source>dart_width_bust</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>abnäher_breite_brust</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2101"/>
         <source>Dart Width: Bust</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Abnäherbreite: Brust</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2107"/>
         <source>dart_width_waist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>Abnäher_breite_hüfte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2109"/>
         <source>Dart Width: Waist</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Abnäherbreite: Hüfte</translation>
     </message>
 </context>
 </TS>

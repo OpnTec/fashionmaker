@@ -4707,6 +4707,14 @@ Do you want to save your changes?</source>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished">O Qt</translation>
+    </message>
+    <message>
+        <source>File was not saved yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>

@@ -5,7 +5,7 @@
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation type="unfinished"></translation>
+        <translation>añadir detalle</translation>
     </message>
 </context>
 <context>
@@ -19,14 +19,14 @@
     <name>AddToCalc</name>
     <message>
         <source>add object</source>
-        <translation type="unfinished"></translation>
+        <translation>añadir objeto</translation>
     </message>
 </context>
 <context>
     <name>AddUnionDetails</name>
     <message>
         <source>add union details</source>
-        <translation type="unfinished"></translation>
+        <translation>añadir detalles de la unión</translation>
     </message>
 </context>
 <context>
@@ -1315,7 +1315,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Encontrando la mejor posición para las piezas. Por favor, espera.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
@@ -4707,6 +4707,14 @@ Do you want to save your changes?</source>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished">Sobre Qt</translation>
+    </message>
+    <message>
+        <source>File was not saved yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -6789,78 +6797,78 @@ Do you want to save your changes?</source>
     <name>mNoisyHandler</name>
     <message>
         <source>DEBUG:</source>
-        <translation type="unfinished"></translation>
+        <translation>DEPURAR:</translation>
     </message>
     <message>
         <source>WARNING:</source>
-        <translation type="unfinished"></translation>
+        <translation>ADVERTENCIA:</translation>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>CRÍTICO:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>FATAL:</translation>
     </message>
     <message>
         <source>INFO:</source>
-        <translation type="unfinished"></translation>
+        <translation>INFORMACIÓN:</translation>
     </message>
     <message>
         <source>Warning.</source>
-        <translation type="unfinished"></translation>
+        <translation>Advertencia.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error crítico.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error fatal.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Información.</translation>
     </message>
 </context>
 <context>
     <name>vNoisyHandler</name>
     <message>
         <source>DEBUG:</source>
-        <translation type="unfinished"></translation>
+        <translation>DEPURAR:</translation>
     </message>
     <message>
         <source>WARNING:</source>
-        <translation type="unfinished"></translation>
+        <translation>ADVERTENCIA:</translation>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>CRÍTICO:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>FATAL:</translation>
     </message>
     <message>
         <source>INFO:</source>
-        <translation type="unfinished"></translation>
+        <translation>INFORMACIÓN:</translation>
     </message>
     <message>
         <source>Warning.</source>
-        <translation type="unfinished"></translation>
+        <translation>Advertencia.</translation>
     </message>
     <message>
         <source>Critical error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error crítico.</translation>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error fatal.</translation>
     </message>
     <message>
         <source>Information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Información.</translation>
     </message>
 </context>
 </TS>

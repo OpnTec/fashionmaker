@@ -797,35 +797,35 @@
     </message>
     <message>
         <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les objets du chemin doivent se suivre dans le sens des aiguilles d&apos;une montre</translation>
     </message>
     <message>
         <source>Scroll down the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Faire défiler la liste</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Scroll up the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Faire défiler la liste</translation>
     </message>
     <message>
         <source>Ready!</source>
-        <translation type="unfinished"></translation>
+        <translation>Prêt!</translation>
     </message>
     <message>
         <source>You need more points!</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez besoin de plus de points!</translation>
     </message>
     <message>
         <source>First point can not equal the last point!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le premier point ne peut être identique au premier!</translation>
     </message>
     <message>
         <source>You have double points!</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez des points en double!</translation>
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
@@ -1216,7 +1216,7 @@
     </message>
     <message>
         <source>Angles curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Angles des courbes</translation>
     </message>
     <message>
         <source>Lengths arcs</source>
@@ -1232,7 +1232,7 @@
     </message>
     <message>
         <source>Angles arcs</source>
-        <translation type="unfinished"></translation>
+        <translation>Angles des arcs</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -1292,11 +1292,11 @@
     </message>
     <message>
         <source>Increment_%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Increment_%1</translation>
     </message>
     <message>
         <source>Edit increment</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer l&apos;incrément</translation>
     </message>
 </context>
 <context>
@@ -1406,7 +1406,7 @@
     </message>
     <message>
         <source>Gap width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecartement :</translation>
     </message>
     <message>
         <source>Save length of the sheet</source>
@@ -1451,31 +1451,31 @@
     </message>
     <message>
         <source>Paper format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format du papier</translation>
     </message>
     <message>
         <source>Fields</source>
-        <translation type="unfinished"></translation>
+        <translation>Champs</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gauche:</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished"></translation>
+        <translation>Droite:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas:</translation>
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer les champs</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -1483,13 +1483,15 @@
     </message>
     <message>
         <source>Wrong fields.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mauvais champs.</translation>
     </message>
     <message>
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Les champs dépassent l&apos;impression.
+
+Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>
@@ -1723,7 +1725,7 @@ Apply settings anyway?</source>
     <message>
         <source>Men &amp; Tailoring</source>
         <comment>Measurement section</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hommes &amp; Tailleurs</translation>
     </message>
     <message>
         <source>Historical &amp; Specialty</source>
@@ -1737,19 +1739,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Collapse All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout replier</translation>
     </message>
     <message>
         <source>Expand All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout déplier</translation>
     </message>
     <message>
         <source>Check all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout cocher</translation>
     </message>
     <message>
         <source>Uncheck all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout décocher</translation>
     </message>
 </context>
 <context>
@@ -2817,7 +2819,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur d&apos;exception : %1. Fin du programme.</translation>
     </message>
     <message>
         <source>Valentina&apos;s measurements editor.</source>
@@ -2857,7 +2859,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de choisir un fichier.</translation>
     </message>
     <message>
         <source>Open with the base size. Valid values: %1cm.</source>
@@ -3491,7 +3493,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer en tant que PDF</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
@@ -3515,7 +3517,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Print preview original layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer la mise en page originale</translation>
     </message>
     <message>
         <source>Export As...</source>
@@ -3527,11 +3529,11 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Select first an arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez d&apos;abord un arc </translation>
     </message>
     <message>
         <source>Select first circle center </source>
-        <translation type="unfinished"></translation>
+        <translation>Chosissez d&apos;abord le centre du cercle</translation>
     </message>
     <message>
         <source>Select point on tangent </source>
@@ -3539,7 +3541,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Select point of the center of the arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez d&apos;abord le centre de l&apos;arc</translation>
     </message>
     <message>
         <source>Select the first base line point</source>
@@ -3704,7 +3706,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de choisir un fichier.</translation>
     </message>
     <message>
         <source>Print an original layout</source>
@@ -3775,7 +3777,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Print to pdf</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprimer en PDF</translation>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
@@ -3811,7 +3813,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;utiiser l&apos;imprimante %1</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -3963,7 +3965,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Usage: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisation : %1</translation>
     </message>
     <message>
         <source>Options:</source>
@@ -4625,7 +4627,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>File has unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de fichier inconnu.</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -4717,6 +4719,14 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Mesure inconnue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished">À propos de Qt</translation>
+    </message>
+    <message>
+        <source>File was not saved yet.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4952,7 +4962,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur : %1. Fin du programme.</translation>
     </message>
 </context>
 <context>
@@ -5058,6 +5068,10 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>The path to output destination folder.</source>
+        <translation type="vanished">Le dossier de destination</translation>
+    </message>
+    <message>
         <source>The destination folder</source>
         <translation>Le dossier de destination</translation>
     </message>
@@ -5067,7 +5081,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The size value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur de taille de base</translation>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
@@ -5075,7 +5089,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>The height value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur de hauteur de base</translation>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
