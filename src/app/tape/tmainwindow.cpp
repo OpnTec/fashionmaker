@@ -2684,7 +2684,7 @@ void TMainWindow::InitGender(QComboBox *gender)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ShowInGraphicalShell()
 {
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
     QStringList args;
     args << "-e";
     args << "tell application \"Finder\"";
@@ -2695,11 +2695,8 @@ void TMainWindow::ShowInGraphicalShell()
     args << "-e";
     args << "end tell";
     QProcess::startDetached("osascript", args);
-#elif defined(Q_WS_WIN)
-    QStringList args;
-    args << "/select," << QDir::toNativeSeparators(curFile);
-    const QString command = "explorer" + " " + args;
-    QProcess::startDetached(command);
+#elif defined(Q_OS_WIN)
+    QProcess::startDetached(QString("explorer /select, \"%1\"").arg(QDir::toNativeSeparators(curFile)));
 #else
     const QString app = "xdg-open %d";
     QString cmd;
