@@ -3776,7 +3776,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
         {
             DialogSaveLayout dialog(scenes.size(), expParams->OptBaseName(), this);
             dialog.SetDestinationPath(expParams->OptDestinationPath());
-            dialog.SelectFormate(static_cast<quint32>(expParams->OptExportType()));
+            dialog.SelectFormate(expParams->OptExportType());
             ExportLayout(dialog);
         }
         catch (const VException &e)

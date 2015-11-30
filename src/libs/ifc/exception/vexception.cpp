@@ -40,7 +40,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VException constructor exception
- * @param what string with error
+ * @param error string with error
  */
 VException::VException(const QString &error)
     :QException(), error(error), moreInfo(QString())

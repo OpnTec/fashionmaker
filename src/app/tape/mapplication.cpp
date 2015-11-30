@@ -414,6 +414,7 @@ bool MApplication::event(QEvent *e)
                     return true;
                 }
             }
+            break;
         }
 #if defined(Q_OS_MAC)
         case QEvent::ApplicationActivate:
@@ -428,6 +429,7 @@ bool MApplication::event(QEvent *e)
                 }
                 return true;
             }
+            break;
         }
 #endif //defined(Q_OS_MAC)
         default:

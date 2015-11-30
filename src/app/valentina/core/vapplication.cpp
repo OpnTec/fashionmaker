@@ -628,6 +628,7 @@ bool VApplication::event(QEvent *e)
                     return true;
                 }
             }
+            break;
         }
 #if defined(Q_OS_MAC)
         case QEvent::ApplicationActivate:
