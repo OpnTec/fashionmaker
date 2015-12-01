@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
+    <width>355</width>
     <height>245</height>
    </rect>
   </property>
@@ -23,6 +23,9 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::ExpandingFieldsGrow</enum>
+     </property>
      <property name="labelAlignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
@@ -35,12 +38,22 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Point label</string>
+        <string>Point label:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEditNamePoint"/>
+      <widget class="QLineEdit" name="lineEditNamePoint">
+       <property name="toolTip">
+        <string>Unique label</string>
+       </property>
+       <property name="placeholderText">
+        <string>Choose unique label.</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="labelBasePoint">
@@ -51,16 +64,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Base point</string>
+        <string>Base point:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="comboBoxBasePoint">
-       <property name="toolTip">
-        <string>Base Point</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxBasePoint"/>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="labelFirstLinePoint">
@@ -71,16 +80,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>First point of line</string>
+        <string>First point of line:</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="comboBoxP1Line">
-       <property name="toolTip">
-        <string>First point of line</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxP1Line"/>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="labelSecondLinePoint">
@@ -91,21 +96,17 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Second point of line</string>
+        <string>Second point of line:</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QComboBox" name="comboBoxP2Line">
-       <property name="toolTip">
-        <string>Second point of line</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxP2Line"/>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>Type of line</string>
+        <string>Type of line:</string>
        </property>
       </widget>
      </item>
@@ -123,9 +124,6 @@
          <height>16777215</height>
         </size>
        </property>
-       <property name="toolTip">
-        <string>Show line from first point to our point</string>
-       </property>
        <property name="iconSize">
         <size>
          <width>80</width>
@@ -137,7 +135,7 @@
      <item row="5" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Line color</string>
+        <string>Line color:</string>
        </property>
       </widget>
      </item>

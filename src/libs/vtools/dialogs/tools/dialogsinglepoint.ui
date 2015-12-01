@@ -31,8 +31,17 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLineEdit" name="lineEditName">
+       <property name="toolTip">
+        <string>Unique label</string>
+       </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Choose unique label.</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>419</width>
-    <height>284</height>
+    <height>288</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_9">
-     <item>
+     <item alignment="Qt::AlignLeft">
       <widget class="QLabel" name="labelEditFormula">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -66,7 +66,7 @@
         </palette>
        </property>
        <property name="text">
-        <string>Angle</string>
+        <string>Angle:</string>
        </property>
       </widget>
      </item>
@@ -83,8 +83,11 @@
        </property>
       </spacer>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QToolButton" name="toolButtonExprAngle">
+       <property name="toolTip">
+        <string>Formula wizard</string>
+       </property>
        <property name="text">
         <string notr="true">...</string>
        </property>
@@ -100,7 +103,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string/>
@@ -110,7 +113,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QLabel" name="labelResultCalculation">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -125,7 +128,7 @@
         </size>
        </property>
        <property name="toolTip">
-        <string>Value of angle</string>
+        <string>Value</string>
        </property>
        <property name="text">
         <string notr="true">_</string>
@@ -155,6 +158,9 @@
          <width>4</width>
          <height>0</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Calculation</string>
        </property>
        <property name="tabChangesFocus">
         <bool>true</bool>
@@ -199,7 +205,7 @@
    <item>
     <layout class="QFormLayout" name="formLayout">
      <property name="fieldGrowthPolicy">
-      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      <enum>QFormLayout::ExpandingFieldsGrow</enum>
      </property>
      <item row="0" column="0">
       <widget class="QLabel" name="label_4">
@@ -210,14 +216,14 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Axis point</string>
+        <string>Axis point:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
       <widget class="QComboBox" name="comboBoxAxisPoint">
        <property name="toolTip">
-        <string>Axis Point</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -230,16 +236,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Curve</string>
+        <string>Curve:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="comboBoxCurve">
-       <property name="toolTip">
-        <string>Curve</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxCurve"/>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="labelEditNamePoint">
@@ -250,7 +252,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Point label</string>
+        <string>Point label:</string>
        </property>
       </widget>
      </item>
@@ -262,12 +264,21 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Unique label</string>
+       </property>
+       <property name="placeholderText">
+        <string>Choose unique label.</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>Type of line</string>
+        <string>Type of line:</string>
        </property>
       </widget>
      </item>
@@ -285,9 +296,6 @@
          <height>16777215</height>
         </size>
        </property>
-       <property name="toolTip">
-        <string>Show line from first point to this point</string>
-       </property>
        <property name="iconSize">
         <size>
          <width>80</width>
@@ -299,7 +307,7 @@
      <item row="4" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Line color</string>
+        <string>Line color:</string>
        </property>
       </widget>
      </item>

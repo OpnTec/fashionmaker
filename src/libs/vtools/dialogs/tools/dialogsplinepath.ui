@@ -143,7 +143,7 @@
    <item>
     <layout class="QFormLayout" name="formLayout">
      <property name="fieldGrowthPolicy">
-      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      <enum>QFormLayout::ExpandingFieldsGrow</enum>
      </property>
      <item row="0" column="0">
       <widget class="QLabel" name="label_4">
@@ -160,7 +160,7 @@
         </size>
        </property>
        <property name="text">
-        <string>Coefficient of curvature of the curve</string>
+        <string>Coefficient of curvature of the curve:</string>
        </property>
       </widget>
      </item>
@@ -189,7 +189,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>Color</string>
+        <string>Color:</string>
        </property>
       </widget>
      </item>

@@ -45,7 +45,17 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEditPath"/>
+      <widget class="QLineEdit" name="lineEditPath">
+       <property name="toolTip">
+        <string>Destination folder</string>
+       </property>
+       <property name="placeholderText">
+        <string>Path to destination folder.</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="0" column="2">
       <widget class="QPushButton" name="pushButtonBrowse">
@@ -54,6 +64,9 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Select path to destination folder</string>
        </property>
        <property name="text">
         <string>Browse...</string>
@@ -71,7 +84,17 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEditFileName"/>
+      <widget class="QLineEdit" name="lineEditFileName">
+       <property name="toolTip">
+        <string>File base name</string>
+       </property>
+       <property name="placeholderText">
+        <string>File base name. </string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="2" column="2">
       <widget class="QLabel" name="labelExample">

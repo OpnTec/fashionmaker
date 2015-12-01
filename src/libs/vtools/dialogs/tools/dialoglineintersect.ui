@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>367</width>
+    <width>375</width>
     <height>196</height>
    </rect>
   </property>
@@ -32,12 +32,22 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Point label</string>
+        <string>Point label:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEditNamePoint"/>
+      <widget class="QLineEdit" name="lineEditNamePoint">
+       <property name="toolTip">
+        <string>Unique label</string>
+       </property>
+       <property name="placeholderText">
+        <string>Choose unique label.</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -59,7 +69,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>First point</string>
+        <string>First point:</string>
        </property>
       </widget>
      </item>
@@ -69,7 +79,7 @@
      <item>
       <widget class="QLabel" name="labelP2Line1">
        <property name="text">
-        <string>Second point</string>
+        <string>Second point:</string>
        </property>
       </widget>
      </item>
@@ -96,7 +106,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>First point</string>
+        <string>First point:</string>
        </property>
       </widget>
      </item>
@@ -106,7 +116,7 @@
      <item>
       <widget class="QLabel" name="labelP2Line2">
        <property name="text">
-        <string>Second point</string>
+        <string>Second point:</string>
        </property>
       </widget>
      </item>

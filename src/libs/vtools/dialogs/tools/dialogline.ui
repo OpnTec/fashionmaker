@@ -29,6 +29,9 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QFormLayout" name="formLayout_2">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::ExpandingFieldsGrow</enum>
+     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="labelFirstPoint">
        <property name="minimumSize">
@@ -38,7 +41,7 @@
         </size>
        </property>
        <property name="text">
-        <string>First point</string>
+        <string>First point:</string>
        </property>
       </widget>
      </item>
@@ -67,7 +70,7 @@
         </size>
        </property>
        <property name="text">
-        <string>Second point</string>
+        <string>Second point:</string>
        </property>
       </widget>
      </item>
@@ -96,7 +99,7 @@
         </size>
        </property>
        <property name="text">
-        <string>Type of line</string>
+        <string>Type of line:</string>
        </property>
       </widget>
      </item>
@@ -120,9 +123,6 @@
          <height>16777215</height>
         </size>
        </property>
-       <property name="toolTip">
-        <string>Show line from first point to this point</string>
-       </property>
        <property name="iconSize">
         <size>
          <width>80</width>
@@ -134,7 +134,7 @@
      <item row="3" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Line color</string>
+        <string>Line color:</string>
        </property>
       </widget>
      </item>

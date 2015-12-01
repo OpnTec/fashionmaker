@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
+    <width>348</width>
     <height>212</height>
    </rect>
   </property>
@@ -23,6 +23,9 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::ExpandingFieldsGrow</enum>
+     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="labelEditNamePoint">
        <property name="sizePolicy">
@@ -32,12 +35,22 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Point label</string>
+        <string>Point label:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEditNamePoint"/>
+      <widget class="QLineEdit" name="lineEditNamePoint">
+       <property name="toolTip">
+        <string>Unique label</string>
+       </property>
+       <property name="placeholderText">
+        <string>Choose unique label.</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="labelAxisP1">
@@ -48,16 +61,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>First point of axis</string>
+        <string>First point of axis:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="comboBoxAxisP1">
-       <property name="toolTip">
-        <string>First point of the axis</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxAxisP1"/>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="labelAxisP2">
@@ -68,16 +77,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Second point of axis</string>
+        <string>Second point of axis:</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="comboBoxAxisP2">
-       <property name="toolTip">
-        <string>Second point of the axis</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxAxisP2"/>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="labelFirstPoint">
@@ -88,16 +93,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>First point</string>
+        <string>First point:</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QComboBox" name="comboBoxFirstPoint">
-       <property name="toolTip">
-        <string>First point of line</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxFirstPoint"/>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="labelSecondPoint">
@@ -108,16 +109,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Second point</string>
+        <string>Second point:</string>
        </property>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QComboBox" name="comboBoxSecondPoint">
-       <property name="toolTip">
-        <string>Second point of line</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxSecondPoint"/>
      </item>
     </layout>
    </item>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>339</width>
-    <height>329</height>
+    <height>341</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
+     <item alignment="Qt::AlignLeft">
       <widget class="QLabel" name="labelEditRadius">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -66,7 +66,7 @@
         </palette>
        </property>
        <property name="text">
-        <string>Radius</string>
+        <string>Radius:</string>
        </property>
       </widget>
      </item>
@@ -83,8 +83,11 @@
        </property>
       </spacer>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QToolButton" name="toolButtonExprRadius">
+       <property name="toolTip">
+        <string>Formula wizard</string>
+       </property>
        <property name="text">
         <string notr="true">...</string>
        </property>
@@ -100,7 +103,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_6">
        <property name="text">
         <string/>
@@ -110,7 +113,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QLabel" name="labelResultRadius">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -125,7 +128,7 @@
         </size>
        </property>
        <property name="toolTip">
-        <string>Value of radius</string>
+        <string>Value</string>
        </property>
        <property name="text">
         <string notr="true">_</string>
@@ -149,6 +152,9 @@
          <width>16777215</width>
          <height>28</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Calculation</string>
        </property>
        <property name="tabChangesFocus">
         <bool>true</bool>
@@ -195,7 +201,7 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
-     <item>
+     <item alignment="Qt::AlignLeft">
       <widget class="QLabel" name="labelEditF1">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -241,7 +247,7 @@
         </palette>
        </property>
        <property name="text">
-        <string>First angle</string>
+        <string>First angle:</string>
        </property>
       </widget>
      </item>
@@ -258,8 +264,11 @@
        </property>
       </spacer>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QToolButton" name="toolButtonExprF1">
+       <property name="toolTip">
+        <string>Formula wizard</string>
+       </property>
        <property name="text">
         <string notr="true">...</string>
        </property>
@@ -275,7 +284,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_9">
        <property name="text">
         <string/>
@@ -285,7 +294,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QLabel" name="labelResultF1">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -300,7 +309,7 @@
         </size>
        </property>
        <property name="toolTip">
-        <string>Value of first angle</string>
+        <string>Value</string>
        </property>
        <property name="text">
         <string notr="true">_</string>
@@ -324,6 +333,9 @@
          <width>16777215</width>
          <height>28</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Calculation</string>
        </property>
        <property name="tabChangesFocus">
         <bool>true</bool>
@@ -370,7 +382,7 @@
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_11">
-     <item>
+     <item alignment="Qt::AlignLeft">
       <widget class="QLabel" name="labelEditLength">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -416,7 +428,7 @@
         </palette>
        </property>
        <property name="text">
-        <string>Length</string>
+        <string>Length:</string>
        </property>
       </widget>
      </item>
@@ -433,8 +445,11 @@
        </property>
       </spacer>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QToolButton" name="toolButtonExprLength">
+       <property name="toolTip">
+        <string>Formula wizard</string>
+       </property>
        <property name="text">
         <string notr="true">...</string>
        </property>
@@ -450,7 +465,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QLabel" name="label_10">
        <property name="text">
         <string/>
@@ -460,7 +475,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignRight">
       <widget class="QLabel" name="labelResultLength">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -475,7 +490,7 @@
         </size>
        </property>
        <property name="toolTip">
-        <string>Arc length</string>
+        <string>Value</string>
        </property>
        <property name="text">
         <string notr="true">_</string>
@@ -499,6 +514,9 @@
          <width>16777215</width>
          <height>28</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Calculation</string>
        </property>
        <property name="tabChangesFocus">
         <bool>true</bool>
@@ -545,6 +563,9 @@
    </item>
    <item>
     <layout class="QFormLayout" name="formLayout_2">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::ExpandingFieldsGrow</enum>
+     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="label_7">
        <property name="sizePolicy">
@@ -554,16 +575,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Center point</string>
+        <string>Center point:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QComboBox" name="comboBoxCenter">
-       <property name="toolTip">
-        <string>Select point of center of arc</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxCenter"/>
      </item>
      <item row="1" column="1">
       <widget class="QComboBox" name="comboBoxColor"/>
@@ -571,7 +588,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_8">
        <property name="text">
-        <string>Color</string>
+        <string>Color:</string>
        </property>
       </widget>
      </item>

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>522</width>
-    <height>368</height>
+    <height>425</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -75,7 +75,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Bias X</string>
+            <string>Bias X:</string>
            </property>
           </widget>
          </item>
@@ -121,7 +121,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Bias Y</string>
+            <string>Bias Y:</string>
            </property>
           </widget>
          </item>
@@ -221,7 +221,7 @@
                <locale language="English" country="UnitedStates"/>
               </property>
               <property name="text">
-               <string>Name of detail</string>
+               <string>Name of detail:</string>
               </property>
              </widget>
             </item>
@@ -235,6 +235,9 @@
               </property>
               <property name="text">
                <string>Detail</string>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -264,7 +267,7 @@
                <locale language="English" country="UnitedStates"/>
               </property>
               <property name="text">
-               <string>Width</string>
+               <string>Width:</string>
               </property>
              </widget>
             </item>
@@ -329,7 +332,7 @@
             <property name="bottomMargin">
              <number>10</number>
             </property>
-            <item>
+            <item alignment="Qt::AlignLeft">
              <widget class="QToolButton" name="toolButtonDelete">
               <property name="enabled">
                <bool>false</bool>
@@ -352,7 +355,7 @@
               </property>
              </spacer>
             </item>
-            <item>
+            <item alignment="Qt::AlignRight">
              <widget class="QToolButton" name="toolButtonDown">
               <property name="toolTip">
                <string>Scroll down the list</string>
@@ -361,11 +364,13 @@
                <string>...</string>
               </property>
               <property name="icon">
-               <iconset theme="go-down"/>
+               <iconset theme="go-down">
+                <normaloff/>
+               </iconset>
               </property>
              </widget>
             </item>
-            <item>
+            <item alignment="Qt::AlignRight">
              <widget class="QToolButton" name="toolButtonUp">
               <property name="toolTip">
                <string>Scroll up the list</string>
@@ -374,7 +379,9 @@
                <string>...</string>
               </property>
               <property name="icon">
-               <iconset theme="go-up"/>
+               <iconset theme="go-up">
+                <normaloff/>
+               </iconset>
               </property>
              </widget>
             </item>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>333</width>
+    <width>372</width>
     <height>278</height>
    </rect>
   </property>
@@ -20,6 +20,9 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::ExpandingFieldsGrow</enum>
+     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="labelFirstBasePoint">
        <property name="sizePolicy">
@@ -29,16 +32,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>First base point</string>
+        <string>First base point:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QComboBox" name="comboBoxFirstBasePoint">
-       <property name="toolTip">
-        <string>First point of angle</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxFirstBasePoint"/>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="labelSecondBasePoint">
@@ -49,16 +48,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Second base point</string>
+        <string>Second base point:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="comboBoxSecondBasePoint">
-       <property name="toolTip">
-        <string>Second point of angle</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxSecondBasePoint"/>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="labelFirstDartPoint">
@@ -69,21 +64,17 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>First dart point</string>
+        <string>First dart point:</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QComboBox" name="comboBoxFirstDartPoint">
-       <property name="toolTip">
-        <string>Third point of angle</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="comboBoxFirstDartPoint"/>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="labelSecondDartPoint">
        <property name="text">
-        <string>Second dart point</string>
+        <string>Second dart point:</string>
        </property>
       </widget>
      </item>
@@ -101,9 +92,6 @@
          <height>0</height>
         </size>
        </property>
-       <property name="toolTip">
-        <string>Show line from second point to this point</string>
-       </property>
        <property name="iconSize">
         <size>
          <width>80</width>
@@ -115,7 +103,7 @@
      <item row="4" column="0">
       <widget class="QLabel" name="labelThirdDartPoint">
        <property name="text">
-        <string>Third dart point</string>
+        <string>Third dart point:</string>
        </property>
       </widget>
      </item>
@@ -131,22 +119,42 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>First new dart point</string>
+        <string>First new dart point:</string>
        </property>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QLineEdit" name="lineEditFirstNewDartPoint"/>
+      <widget class="QLineEdit" name="lineEditFirstNewDartPoint">
+       <property name="toolTip">
+        <string>Unique label</string>
+       </property>
+       <property name="placeholderText">
+        <string>Choose unique label.</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="labelSecondNewDartPoint">
        <property name="text">
-        <string>Second new dart point</string>
+        <string>Second new dart point:</string>
        </property>
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="QLineEdit" name="lineEditSecondNewDartPoint"/>
+      <widget class="QLineEdit" name="lineEditSecondNewDartPoint">
+       <property name="toolTip">
+        <string>Unique label</string>
+       </property>
+       <property name="placeholderText">
+        <string>Choose unique label.</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

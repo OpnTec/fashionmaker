@@ -207,6 +207,9 @@
           <string>Fields</string>
          </property>
          <layout class="QFormLayout" name="formLayout">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::ExpandingFieldsGrow</enum>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="labelLeftField">
             <property name="text">
@@ -215,7 +218,11 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBoxLeftField"/>
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxLeftField">
+            <property name="decimals">
+             <number>5</number>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="labelRightField">
@@ -225,7 +232,11 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBoxRightField"/>
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxRightField">
+            <property name="decimals">
+             <number>5</number>
+            </property>
+           </widget>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="labelTopField">
@@ -235,7 +246,11 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBoxTopField"/>
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxTopField">
+            <property name="decimals">
+             <number>5</number>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="labelBottomField">
@@ -245,7 +260,11 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBoxBottomField"/>
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxBottomField">
+            <property name="decimals">
+             <number>5</number>
+            </property>
+           </widget>
           </item>
           <item row="4" column="0">
            <widget class="QCheckBox" name="checkBoxIgnoreFileds">
@@ -623,7 +642,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupPrinciple"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroupPrinciple"/>
  </buttongroups>
 </ui>

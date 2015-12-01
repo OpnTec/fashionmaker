@@ -264,6 +264,12 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="placeholderText">
+              <string>Unique increment name</string>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item row="4" column="0">
@@ -305,6 +311,9 @@
                  <width>16777215</width>
                  <height>28</height>
                 </size>
+               </property>
+               <property name="toolTip">
+                <string>Calculation</string>
                </property>
                <property name="tabChangesFocus">
                 <bool>true</bool>
@@ -359,6 +368,9 @@
               <widget class="QToolButton" name="toolButtonExpr">
                <property name="enabled">
                 <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Formula wizard</string>
                </property>
                <property name="text">
                 <string notr="true">...</string>
