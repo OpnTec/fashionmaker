@@ -42,6 +42,7 @@
 #include <QIcon>
 #include <QVBoxLayout>
 #include <QDirIterator>
+#include <QFormLayout>
 
 //---------------------------------------------------------------------------------------------------------------------
 ConfigurationPage::ConfigurationPage(QWidget *parent)
@@ -153,7 +154,6 @@ QGroupBox *ConfigurationPage::SaveGroup()
 QGroupBox *ConfigurationPage::LangGroup()
 {
     QGroupBox *langGroup = new QGroupBox(tr("Language"));
-    QLabel *guiLabel = new QLabel(tr("GUI language"));
     langCombo = new QComboBox;
 
     QStringList fileNames;
@@ -198,30 +198,23 @@ QGroupBox *ConfigurationPage::LangGroup()
     connect(langCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &ConfigurationPage::LangChanged);
 
-    QHBoxLayout *guiLangLayout = new QHBoxLayout;
-    guiLangLayout->addWidget(guiLabel);
-    guiLangLayout->addWidget(langCombo);
+    QFormLayout *langLayout = new QFormLayout;
+    langLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
+    langLayout->addRow(tr("GUI language:"), langCombo);
 
     //-------------------- Decimal separator setup
-    QLabel *separatorLabel = new QLabel(tr("Decimal separator parts"));
-
     osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
     osOptionCheck->setChecked(settings->GetOsSeparator());
-
-    QHBoxLayout *separatorLayout = new QHBoxLayout;
-    separatorLayout->addWidget(separatorLabel);
-    separatorLayout->addWidget(osOptionCheck);
+    langLayout->addRow(tr("Decimal separator parts:"), osOptionCheck);
 
     //----------------------- Unit setup
     this->unitCombo = new QComboBox;
-    QLabel *unitLabel = new QLabel(tr("Default unit"));
-
     this->unitCombo->addItem(tr("Centimeters"), "cm");
     this->unitCombo->addItem(tr("Millimiters"), "mm");
     this->unitCombo->addItem(tr("Inches"), "in");
 
     // set default unit
-    qint32 indexUnit = this->unitCombo->findData(settings->GetUnit());
+    const qint32 indexUnit = this->unitCombo->findData(settings->GetUnit());
     if (indexUnit != -1)
     {
         this->unitCombo->setCurrentIndex(indexUnit);
@@ -229,13 +222,9 @@ QGroupBox *ConfigurationPage::LangGroup()
     connect(this->unitCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &ConfigurationPage::UnitChanged);
 
-    QHBoxLayout *UnitLayout = new QHBoxLayout;
-    UnitLayout->addWidget(unitLabel);
-    UnitLayout->addWidget(this->unitCombo);
+    langLayout->addRow(tr("Default unit:"), this->unitCombo);
 
     //----------------------- Label language
-
-    QLabel *labelName = new QLabel(tr("Label language"));
     labelCombo = new QComboBox;
 
     SetLabelComboBox(VApplication::LabelLanguages());
@@ -248,19 +237,9 @@ QGroupBox *ConfigurationPage::LangGroup()
     connect(labelCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &ConfigurationPage::LabelLangChanged);
 
-    QHBoxLayout *labelLangLayout = new QHBoxLayout;
-    labelLangLayout->addWidget(labelName);
-    labelLangLayout->addWidget(labelCombo);
+    langLayout->addRow(tr("Label language:"), labelCombo);
 
-    //-----------------------
-
-    QVBoxLayout *langLayout = new QVBoxLayout;
-    langLayout->addLayout(guiLangLayout);
-    langLayout->addLayout(separatorLayout);
-    langLayout->addLayout(UnitLayout);
-    langLayout->addLayout(labelLangLayout);
     langGroup->setLayout(langLayout);
-
     return langGroup;
 }
 

@@ -102,8 +102,9 @@ QGroupBox *CommunityPage::ServerGroup()
 {
     QGroupBox *ServerGroup = new QGroupBox(tr("Server"));
     QFormLayout *serverLayout = new QFormLayout;
+    serverLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
 
-    CommunityPage::add_lineedit(&this->server, serverLayout, qApp->ValentinaSettings()->GetServer(), tr("Server name/IP"));
+    CommunityPage::add_lineedit(&this->server, serverLayout, qApp->ValentinaSettings()->GetServer(), tr("Server name/IP:"));
 
     CommunityPage::add_checkbox(&this->secureComm, serverLayout, qApp->ValentinaSettings()->GetServerSecure(),
                                 tr("Secure connection"));
@@ -126,6 +127,9 @@ void CommunityPage::add_lineedit(QLineEdit** theline, QFormLayout *layout, QStri
 {
     QLabel *labelbox = new QLabel(label);
     (*theline)= new QLineEdit;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    (*theline)->setClearButtonEnabled(true);
+#endif
     (*theline)->setText(value);
     layout->addRow(labelbox, *theline);
 }
@@ -136,14 +140,15 @@ QGroupBox *CommunityPage::ProxyGroup()
     QGroupBox *proxyGroup = new QGroupBox(tr("Proxy settings"));
 
     QFormLayout *proxyLayout = new QFormLayout;
+    proxyLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
 
     const VSettings *settings = qApp->ValentinaSettings();
     CommunityPage::add_checkbox(&this->useProxy, proxyLayout, settings->GetProxy(), tr("Use Proxy"));
     CommunityPage::add_lineedit(&this->proxyAddress, proxyLayout, settings->GetProxyAddress(),
-                                tr("Proxy address"));
-    CommunityPage::add_lineedit(&this->proxyPort, proxyLayout, settings->GetProxyPort(), tr("Proxy port"));
-    CommunityPage::add_lineedit(&this->proxyUser, proxyLayout, settings->GetProxyUser(), tr("Proxy user"));
-    CommunityPage::add_lineedit(&this->proxyPass, proxyLayout, settings->GetProxyPass(), tr("Proxy pass"));
+                                tr("Proxy address:"));
+    CommunityPage::add_lineedit(&this->proxyPort, proxyLayout, settings->GetProxyPort(), tr("Proxy port:"));
+    CommunityPage::add_lineedit(&this->proxyUser, proxyLayout, settings->GetProxyUser(), tr("Proxy user:"));
+    CommunityPage::add_lineedit(&this->proxyPass, proxyLayout, settings->GetProxyPass(), tr("Proxy pass:"));
     connect(this->useProxy, &QCheckBox::stateChanged, this, &CommunityPage::ProxyCheckChanged);
     this->ProxyCheckChanged();
 
@@ -157,11 +162,12 @@ QGroupBox *CommunityPage::UserGroup()
 {
     QGroupBox *userGroup = new QGroupBox(tr("User settings"));
     QFormLayout *userLayout = new QFormLayout;
+    userLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
 
     const VSettings *settings = qApp->ValentinaSettings();
-    CommunityPage::add_lineedit(&this->username, userLayout, settings->GetUsername(), tr("User Name"));
+    CommunityPage::add_lineedit(&this->username, userLayout, settings->GetUsername(), tr("User Name:"));
     CommunityPage::add_checkbox(&this->savePassword, userLayout, settings->GetSavePassword(), tr("Save password"));
-    CommunityPage::add_lineedit(&this->userpassword, userLayout, settings->GetUserPassword(), tr("Password"));
+    CommunityPage::add_lineedit(&this->userpassword, userLayout, settings->GetUserPassword(), tr("Password:"));
 
     connect(this->savePassword, &QCheckBox::stateChanged, this, &CommunityPage::PasswordCheckChanged);
     this->PasswordCheckChanged();

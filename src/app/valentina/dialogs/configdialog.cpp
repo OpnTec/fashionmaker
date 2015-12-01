@@ -63,13 +63,13 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     pagesWidget->addWidget(pathPage);
 
     QPushButton *applyButton = new QPushButton(tr("Apply"));
-    QPushButton *canselButton = new QPushButton(tr("&Cancel"));
+    QPushButton *cancelButton = new QPushButton(tr("&Cancel"));
     QPushButton *okButton = new QPushButton(tr("&Ok"));
 
     createIcons();
     contentsWidget->setCurrentRow(0);
 
-    connect(canselButton, &QPushButton::clicked, this, &ConfigDialog::close);
+    connect(cancelButton, &QPushButton::clicked, this, &ConfigDialog::close);
     connect(applyButton, &QPushButton::clicked, this, &ConfigDialog::Apply);
     connect(okButton, &QPushButton::clicked, this, &ConfigDialog::Ok);
 
@@ -80,7 +80,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     QHBoxLayout *buttonsLayout = new QHBoxLayout;
     buttonsLayout->addStretch(1);
     buttonsLayout->addWidget(applyButton);
-    buttonsLayout->addWidget(canselButton);
+    buttonsLayout->addWidget(cancelButton);
     buttonsLayout->addWidget(okButton);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;

@@ -38,6 +38,7 @@
 #include <QSpinBox>
 #include <QLineEdit>
 #include <QVBoxLayout>
+#include <QFormLayout>
 
 //---------------------------------------------------------------------------------------------------------------------
 PatternPage::PatternPage(QWidget *parent):
@@ -76,14 +77,16 @@ void PatternPage::Apply()
 QGroupBox *PatternPage::UserGroup()
 {
     QGroupBox *userGroup = new QGroupBox(tr("User"));
-    QLabel *nameLabel = new QLabel(tr("User name"));
 
     userName = new QLineEdit;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    userName->setClearButtonEnabled(true);
+#endif
     userName->setText(qApp->ValentinaSettings()->GetUser());
 
-    QHBoxLayout *nameLayout = new QHBoxLayout;
-    nameLayout->addWidget(nameLabel);
-    nameLayout->addWidget(userName);
+    QFormLayout *nameLayout = new QFormLayout;
+    nameLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
+    nameLayout->addRow(tr("User name:"), userName);
 
     QVBoxLayout *userLayout = new QVBoxLayout;
     userLayout->addLayout(nameLayout);
@@ -112,14 +115,13 @@ QGroupBox *PatternPage::GraphOutputGroup()
 QGroupBox *PatternPage::UndoGroup()
 {
     QGroupBox *undoGroup = new QGroupBox(tr("Undo"));
-    QLabel *undoLabel = new QLabel(tr("Count steps (0 - no limit)"));
     undoCount = new QSpinBox;
     undoCount->setMinimum(0);
     undoCount->setValue(qApp->ValentinaSettings()->GetUndoCount());
 
-    QHBoxLayout *countLayout = new QHBoxLayout;
-    countLayout->addWidget(undoLabel);
-    countLayout->addWidget(undoCount);
+    QFormLayout *countLayout = new QFormLayout;
+    countLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
+    countLayout->addRow(tr("Count steps (0 - no limit):"), undoCount);
 
     QVBoxLayout *undoLayout = new QVBoxLayout;
     undoLayout->addLayout(countLayout);
