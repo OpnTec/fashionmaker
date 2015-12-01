@@ -107,6 +107,11 @@ TMainWindow::TMainWindow(QWidget *parent)
     setWindowTitle(tr("untitled %1").arg(qApp->MainWindows().size()+1));
 
     ReadSettings();
+
+#if defined(Q_OS_MAC)
+    // On Mac deafault icon size is 32x32.
+    ui->toolBarGradation->setIconSize(QSize(24, 24));
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1206,9 +1211,10 @@ void TMainWindow::ShowMData()
 
         ShowMDiagram(meash->GetName());
 
-        ui->lineEditName->blockSignals(true);
+        // Don't block all signal for QLineEdits. Need for correct handle with clear button.
+        disconnect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(true);
-        ui->lineEditFullName->blockSignals(true);
+        disconnect(ui->lineEditFullName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMFullName);
         if (meash->IsCustom())
         {
             ui->plainTextEditDescription->setPlainText(meash->GetDescription());
@@ -1222,9 +1228,9 @@ void TMainWindow::ShowMData()
             ui->lineEditFullName->setText(qApp->TrVars()->GuiText(meash->GetName()));
             ui->lineEditName->setText(nameField->text());
         }
-        ui->lineEditName->blockSignals(false);
+        connect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(false);
-        ui->lineEditFullName->blockSignals(false);
+        connect(ui->lineEditFullName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMFullName);
 
         if (mType == MeasurementsType::Standard)
         {
@@ -1973,15 +1979,15 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
     if (curFile.isEmpty())
     {
         shownName = tr("untitled");
-        mType == MeasurementsType::Standard ? shownName += ".vst" : shownName += ".vit";
-        ui->labelPathToFile->setText(tr("<Empty>"));
-        ui->labelPathToFile->setToolTip(tr("File was not saved yet."));
+        mType == MeasurementsType::Standard ? shownName += QLatin1Literal(".vst") : shownName += QLatin1Literal(".vit");
+        ui->lineEditPathToFile->setText(tr("<Empty>"));
+        ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
         ui->pushButtonShowInExplorer->setEnabled(false);
     }
     else
     {
-        ui->labelPathToFile->setText(QDir::toNativeSeparators(curFile));
-        ui->labelPathToFile->setToolTip(QDir::toNativeSeparators(curFile));
+        ui->lineEditPathToFile->setText(QDir::toNativeSeparators(curFile));
+        ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(curFile));
         ui->pushButtonShowInExplorer->setEnabled(true);
     }
     shownName += "[*]";
