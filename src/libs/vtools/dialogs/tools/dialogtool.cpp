@@ -200,11 +200,18 @@ void DialogTool::FillComboBoxLineColors(QComboBox *box) const
 {
     SCASSERT(box != nullptr);
 
+    box->clear();
+    int size = box->iconSize().height();
+    // On Mac pixmap should be little bit smaller.
+#if defined(Q_OS_MAC)
+    size -= 2; // Two pixels should be enough.
+#endif //defined(Q_OS_MAC)
+
     const QMap<QString, QString> map = VAbstractTool::ColorsList();
     QMap<QString, QString>::const_iterator i = map.constBegin();
     while (i != map.constEnd())
     {
-        QPixmap pix(16, 16);
+        QPixmap pix(size, size);
         pix.fill(QColor(i.key()));
         box->addItem(QIcon(pix), i.value(), QVariant(i.key()));
         ++i;
