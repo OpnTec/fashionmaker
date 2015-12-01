@@ -1211,10 +1211,9 @@ void TMainWindow::ShowMData()
 
         ShowMDiagram(meash->GetName());
 
-        // Don't block all signal for QLineEdits. Need for correct handle with clear button.
+        // Don't block all signal for QLineEdit. Need for correct handle with clear button.
         disconnect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(true);
-        disconnect(ui->lineEditFullName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMFullName);
         if (meash->IsCustom())
         {
             ui->plainTextEditDescription->setPlainText(meash->GetDescription());
@@ -1230,7 +1229,6 @@ void TMainWindow::ShowMData()
         }
         connect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
         ui->plainTextEditDescription->blockSignals(false);
-        connect(ui->lineEditFullName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMFullName);
 
         if (mType == MeasurementsType::Standard)
         {
@@ -1905,7 +1903,7 @@ void TMainWindow::InitWindow()
 
     connect(ui->lineEditName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
-    connect(ui->lineEditFullName, &QLineEdit::editingFinished, this, &TMainWindow::SaveMFullName);
+    connect(ui->lineEditFullName, &QLineEdit::textEdited, this, &TMainWindow::SaveMFullName);
 
     connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, &TMainWindow::ShowInGraphicalShell);
 
