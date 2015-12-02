@@ -393,6 +393,20 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        {
+            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+            event->accept();
+        }
+    }
+    QGraphicsPathItem::mousePressEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseReleaseEvent handle mouse release events.
  * @param event mouse release event.
@@ -402,6 +416,8 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton)
     {
         emit ChoosedTool(id, SceneObject::Detail);
+        //Disable cursor-arrow-closehand
+        RestoreOverrideCursor(cursorArrowCloseHand);
     }
     QGraphicsItem::mouseReleaseEvent(event);
 }
@@ -410,7 +426,7 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolDetail::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    QApplication::setOverrideCursor(QCursor(cursorArrowOpenHand, 1, 1));
+    SetOverrideCursor(cursorArrowOpenHand, 1, 1);
 }
 
 ////---------------------------------------------------------------------------------------------------------------------
@@ -418,7 +434,7 @@ void VToolDetail::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     //Disable cursor-arrow-openhand
-    QApplication::restoreOverrideCursor();
+    RestoreOverrideCursor(cursorArrowOpenHand);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
