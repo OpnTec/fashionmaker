@@ -113,6 +113,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
             qApp->getUndoStack()->endMacro();
         }
     }
+    setAcceptHoverEvents(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -403,6 +404,21 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         emit ChoosedTool(id, SceneObject::Detail);
     }
     QGraphicsItem::mouseReleaseEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED(event);
+    QApplication::setOverrideCursor(QCursor(cursorArrowOpenHand, 1, 1));
+}
+
+////---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED(event);
+    //Disable cursor-arrow-openhand
+    QApplication::restoreOverrideCursor();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
