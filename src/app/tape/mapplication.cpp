@@ -420,16 +420,12 @@ bool MApplication::event(QEvent *e)
         case QEvent::ApplicationActivate:
         {
             Clean();
-            if (!mainWindows.isEmpty())
+            TMainWindow *mw = MainWindow();
+            if (mw && not mw->isMinimized())
             {
-                TMainWindow *mw = MainWindow();
-                if (mw && not mw->isMinimized())
-                {
-                    mw->show();
-                }
-                return true;
+                mw->show();
             }
-            break;
+            return true;
         }
 #endif //defined(Q_OS_MAC)
         default:
