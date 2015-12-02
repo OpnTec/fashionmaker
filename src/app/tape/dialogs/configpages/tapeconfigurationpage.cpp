@@ -120,8 +120,7 @@ void TapeConfigurationPage::SystemChanged()
 #else
     text = qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString());
 #endif
-    systemBookValueLabel->setText(text);
-    systemBookValueLabel->setToolTip(text);
+    systemBookValueLabel->setPlainText(text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,7 +152,7 @@ void TapeConfigurationPage::changeEvent(QEvent *event)
 QGroupBox *TapeConfigurationPage::LangGroup()
 {
     langGroup = new QGroupBox(tr("Language"));
-    guiLabel = new QLabel(tr("GUI language"));
+    guiLabel = new QLabel(tr("GUI language:"));
     langCombo = new QComboBox;
 
     QStringList fileNames;
@@ -198,10 +197,11 @@ QGroupBox *TapeConfigurationPage::LangGroup()
             &TapeConfigurationPage::LangChanged);
 
     QFormLayout *langLayout = new QFormLayout;
+    langLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
     langLayout->addRow(guiLabel, langCombo);
 
     //-------------------- Pattern making system
-    systemLabel = new QLabel(tr("Pattern making system"));
+    systemLabel = new QLabel(tr("Pattern making system:"));
     systemCombo = new QComboBox;
 
     InitPMSystems(systemCombo);
@@ -216,8 +216,9 @@ QGroupBox *TapeConfigurationPage::LangGroup()
 
     //----
     systemBookLabel = new QLabel(tr("Book:"));
-    systemBookValueLabel = new QLabel("");
-    systemBookValueLabel->setWordWrap(true);
+    systemBookValueLabel = new QPlainTextEdit("");
+    systemBookValueLabel->setReadOnly(true);
+    systemBookValueLabel->setFixedHeight(4 * QFontMetrics(systemBookValueLabel->font()).lineSpacing());
 
     langLayout->addRow(systemBookLabel, systemBookValueLabel);
 
@@ -232,7 +233,7 @@ QGroupBox *TapeConfigurationPage::LangGroup()
     }
 
     //-------------------- Decimal separator setup
-    separatorLabel = new QLabel(tr("Decimal separator parts"));
+    separatorLabel = new QLabel(tr("Decimal separator parts:"));
 
     osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
     osOptionCheck->setChecked(settings->GetOsSeparator());
@@ -283,8 +284,7 @@ void TapeConfigurationPage::RetranslateUi()
 #else
     text = qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString());
 #endif
-    systemBookValueLabel->setText(text);
-    systemBookValueLabel->setToolTip(text);
+    systemBookValueLabel->setPlainText(text);
 
     separatorLabel->setText(tr("Decimal separator parts"));
     osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));

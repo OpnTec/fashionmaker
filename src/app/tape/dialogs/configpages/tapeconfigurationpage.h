@@ -30,6 +30,7 @@
 #define CONFIGURATIONPAGE_H
 
 #include <QObject>
+#include <QPlainTextEdit>
 #include <QWidget>
 
 class QCheckBox;
@@ -66,7 +67,7 @@ private:
     QCheckBox *askPointDeletionCheck;
     QCheckBox *toolBarStyleCheck;
     QLabel    *systemAuthorValueLabel;
-    QLabel    *systemBookValueLabel;
+    QPlainTextEdit *systemBookValueLabel;
 
     QGroupBox *langGroup;
     QLabel    *guiLabel;
