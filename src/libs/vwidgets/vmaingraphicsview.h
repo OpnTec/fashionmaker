@@ -36,11 +36,6 @@
  * This class adds ability to zoom QGraphicsView using mouse wheel. The point under cursor
  * remains motionless while it's possible.
  *
- * Note that it becomes not possible when the scene's
- * size is not large enough comparing to the viewport size. QGraphicsView centers the picture
- * when it's smaller than the view. And QGraphicsView's scrolls boundaries don't allow to
- * put any picture point at any viewport position.
- *
  * When the user starts scrolling, this class remembers original scene position and
  * keeps it until scrolling is completed. It's better than getting original scene position at
  * each scrolling step because that approach leads to position errors due to before-mentioned
@@ -79,18 +74,18 @@ public slots:
     void scrollingTime(qreal x);
     void animFinished();
 private:
+    Q_DISABLE_COPY(GraphicsViewZoom)
     QGraphicsView*        _view;
     Qt::KeyboardModifiers _modifiers;
     double                _zoom_factor_base;
     QPointF               target_scene_pos;
     QPointF               target_viewport_pos;
     QTimeLine            *anim;
-
-    bool eventFilter(QObject* object, QEvent* event);
-private:
-    Q_DISABLE_COPY(GraphicsViewZoom)
     /** @brief _numScheduledScalings keep number scheduled scalings. */
     qint32   _numScheduledScalings;
+
+    virtual bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
+    void FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view);
 };
 
 /**
