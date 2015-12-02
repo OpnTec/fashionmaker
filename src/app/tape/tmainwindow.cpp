@@ -2014,17 +2014,32 @@ bool TMainWindow::MaybeSave()
             return true;// Don't ask if file was created without modifications.
         }
 
-        QMessageBox::StandardButton ret;
-        ret = QMessageBox::warning(this, tr("Unsaved changes"), tr("Measurements have been modified.\n"
-                                                                   "Do you want to save your changes?"),
-                                   QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        if (ret == QMessageBox::Save)
+        QMessageBox *messageBox = new QMessageBox(tr("Unsaved changes"),
+                                                  tr("Measurements have been modified.\n"
+                                                     "Do you want to save your changes?"),
+                                                  QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No,
+                                                  QMessageBox::Cancel, this, Qt::Sheet);
+
+        messageBox->setDefaultButton(QMessageBox::Yes);
+        messageBox->setEscapeButton(QMessageBox::Cancel);
+
+        messageBox->setButtonText(QMessageBox::Yes, curFile.isEmpty() ? tr("Save...") : tr("Save"));
+        messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
+
+        messageBox->setWindowModality(Qt::ApplicationModal);
+        const QMessageBox::StandardButton ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
+
+        switch (ret)
         {
-            FileSave();
-        }
-        else if (ret == QMessageBox::Cancel)
-        {
-            return false;
+            case QMessageBox::Yes:
+                FileSave();
+                return true;
+            case QMessageBox::No:
+                return true;
+            case QMessageBox::Cancel:
+                return false;
+            default:
+                break;
         }
     }
     return true;
