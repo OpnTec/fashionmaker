@@ -137,7 +137,7 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
                     view->ensureVisible(this);
                 }
             }
-            changeFinished = false;
+            changeFinished = true;
         }
     }
     return QGraphicsItem::itemChange(change, value);
