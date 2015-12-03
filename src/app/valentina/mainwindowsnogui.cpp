@@ -134,10 +134,18 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             margins = lGenerator.GetFields();
             paperSize = QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight());
             isLayoutStale = false;
+            if (VApplication::CheckGUI())
+            {
+                QApplication::alert(this);
+            }
             break;
         case LayoutErrors::ProcessStoped:
         case LayoutErrors::PrepareLayoutError:
         case LayoutErrors::EmptyPaperError:
+            if (VApplication::CheckGUI())
+            {
+                QApplication::alert(this);
+            }
             return false;
         default:
             break;
