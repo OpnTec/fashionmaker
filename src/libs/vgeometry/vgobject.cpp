@@ -418,7 +418,7 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
  *
  * Original idea http://www.sunshine2k.de/coding/java/PointOnLine/PointOnLine.html
  */
-bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2)
+bool VGObject::IsPointOnLineSegment(const QPoint &t, const QPoint &p1, const QPoint &p2)
 {
     // The test point must lie inside the bounding box spanned by the two line points.
     if (not ( (p1.x() <= t.x() && t.x() <= p2.x()) || (p2.x() <= t.x() && t.x() <= p1.x()) ))
@@ -443,7 +443,7 @@ bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
  *
  *  The pdp is zero only if the t lies on the line e1 = vector from p1 to p2.
  */
-bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2)
+bool VGObject::IsPointOnLineviaPDP(const QPoint &t, const QPoint &p1, const QPoint &p2)
 {
     return ( qAbs(PerpDotProduct(p1, p2, t) < GetEpsilon(p1, p2)) );
 }
@@ -454,7 +454,7 @@ bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QP
  * This is actually the same as the area of the triangle defined by the three points, multiplied by 2.
  * @return 2 * triangleArea(a,b,c)
  */
-double VGObject::PerpDotProduct(const QPointF &t, const QPointF &p1, const QPointF &p2)
+double VGObject::PerpDotProduct(const QPoint &t, const QPoint &p1, const QPoint &p2)
 {
     return (p1.x() - t.x()) * (p2.y() - t.y()) - (p1.y() - t.y()) * (p2.x() - t.x());
 }

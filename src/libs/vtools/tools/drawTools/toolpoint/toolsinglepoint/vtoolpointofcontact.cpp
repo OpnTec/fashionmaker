@@ -101,8 +101,10 @@ QPointF VToolPointOfContact::FindPoint(const qreal &radius, const QPointF &cente
             break;
         case 2:
         {
-            const bool flagP1 = VGObject::IsPointOnLineSegment (p1, firstPoint, secondPoint);
-            const bool flagP2 = VGObject::IsPointOnLineSegment (p2, firstPoint, secondPoint);
+            const bool flagP1 = VGObject::IsPointOnLineSegment (p1.toPoint(), firstPoint.toPoint(),
+                                                                secondPoint.toPoint());
+            const bool flagP2 = VGObject::IsPointOnLineSegment (p2.toPoint(), firstPoint.toPoint(),
+                                                                secondPoint.toPoint());
             if ((flagP1 == true && flagP2 == true) ||
                 (flagP1 == false && flagP2 == false)/*In case we have something wrong*/)
             {

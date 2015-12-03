@@ -41,6 +41,7 @@ signals:
 
 private slots:
     void GetSegmentPoints();
+    void GetSegmentPoints_issue412();
 
 };
 

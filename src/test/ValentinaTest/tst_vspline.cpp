@@ -88,3 +88,43 @@ void TST_VSpline::GetSegmentPoints()
     // Begin comparison
     Comparison(points, origPoints);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::GetSegmentPoints_issue412()
+{
+    // Input data taken from real case
+    // See issue #412 https://bitbucket.org/dismine/valentina/issues/412/error-in-detail-using-segment-a-simple
+    VPointF p1(869.11748031496063, -61.117228346456692, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF p4(491.16472440944887, 316.83552755905515, "p4", 5.0000125984251973, 9.9999874015748045);
+
+    VSpline spl(p1, p4, 270, 0, 1, 1, 1);
+
+    QPointF begin(869.11748031496063, -61.117228346456692);
+    QPointF end(758.41768107838425, 206.13572832247544);
+
+    QVector<QPointF> points;
+    points << spl.GetSegmentPoints(begin, end, false);
+
+    QVector<QPointF> origPoints;
+    origPoints.append(QPointF(869.117480315, -61.1172283465));
+    origPoints.append(QPointF(869.034855699, -51.3519540199));
+    origPoints.append(QPointF(868.055234051, -32.0262592346));
+    origPoints.append(QPointF(866.119738229, -12.967761819));
+    origPoints.append(QPointF(863.252115711, 5.79979075097));
+    origPoints.append(QPointF(859.476113972, 24.2526509993));
+    origPoints.append(QPointF(854.815480488, 42.36707145));
+    origPoints.append(QPointF(849.293962735, 60.1193046272));
+    origPoints.append(QPointF(842.93530819, 77.4856030548));
+    origPoints.append(QPointF(835.763264327, 94.4422192569));
+    origPoints.append(QPointF(827.801578624, 110.965405758));
+    origPoints.append(QPointF(819.073998555, 127.031415081));
+    origPoints.append(QPointF(809.604271597, 142.616499751));
+    origPoints.append(QPointF(799.416145227, 157.696912291));
+    origPoints.append(QPointF(788.533366919, 172.248905226));
+    origPoints.append(QPointF(776.97968415, 186.24873108));
+    origPoints.append(QPointF(764.778844396, 199.672642377));
+    origPoints.append(QPointF(758.417681078, 206.135728322));
+
+    // Begin comparison
+    Comparison(points, origPoints);
+}
