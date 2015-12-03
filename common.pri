@@ -13,6 +13,18 @@ win32{
     QMAKE_INSTALL_PROGRAM = xcopy /y
 }
 
+unix{
+    macx{
+        VCOPY = $$QMAKE_COPY
+    } else {
+        VCOPY = $$QMAKE_COPY -u
+    }
+}
+
+win32{
+    VCOPY = $$QMAKE_COPY /D
+}
+
 macx{
     # QTBUG-31034 qmake doesn't allow override QMAKE_CXX
     CONFIG+=no_ccache
@@ -64,8 +76,8 @@ defineTest(copyToDestdir) {
                 FILE ~= s,/,\\,g
                 DDIR ~= s,/,\\,g
             }
-            QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
-            message("Command:" $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR))
+            QMAKE_POST_LINK += $$VCOPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
+            message("Command:" $$VCOPY $$quote($$FILE) $$quote($$DDIR))
         } else {
             message("File:" $$DDIR/$$basename(FILE) "already exist")
         }
@@ -93,8 +105,8 @@ defineTest(forceCopyToDestdir) {
             FILE ~= s,/,\\,g
             DDIR ~= s,/,\\,g
         }
-        QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
-        message("Command:" $$QMAKE_COPY $$quote($$FILE) $$quote($$DDIR))
+        QMAKE_POST_LINK += $$VCOPY $$quote($$FILE) $$quote($$DDIR) $$escape_expand(\\n\\t)
+        message("Command:" $$VCOPY $$quote($$FILE) $$quote($$DDIR))
         QMAKE_CLEAN += $$DDIR/$$basename(FILE)
     }
 
