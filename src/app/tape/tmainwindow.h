@@ -193,6 +193,8 @@ private:
     void UpdatePatternUnit();
 
     bool LoadFromExistingFile(const QString &path);
+
+    void CreateWindowMenu(QMenu *menu);
 };
 
 #endif // TMAINWINDOW_H

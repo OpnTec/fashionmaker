@@ -138,6 +138,11 @@ MainWindow::MainWindow(QWidget *parent)
     setCurrentFile("");
     WindowsLocale();
 
+    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &MainWindow::ShowPaper);
+    ui->dockWidgetLayoutPages->setVisible(false);
+
+    connect(watcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::MeasurementsChanged);
+
 #if defined(Q_OS_MAC)
     // On Mac deafault icon size is 32x32.
     ui->toolBarArrows->setIconSize(QSize(24, 24));
@@ -145,12 +150,29 @@ MainWindow::MainWindow(QWidget *parent)
     ui->toolBarOption->setIconSize(QSize(24, 24));
     ui->toolBarStages->setIconSize(QSize(24, 24));
     ui->toolBarTools->setIconSize(QSize(24, 24));
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
+    // Mac OS Dock Menu
+    QMenu *menu = new QMenu(this);
+
+    QAction *actionNewPattern = menu->addAction(tr("New pattern"));
+    actionNewPattern->setMenuRole(QAction::NoRole);
+    connect(actionNewPattern, &QAction::triggered, this, &MainWindow::New);
+
+    QAction *actionOpenPattern = menu->addAction(tr("Open pattern"));
+    actionOpenPattern->setMenuRole(QAction::NoRole);
+    connect(actionOpenPattern, &QAction::triggered, this, &MainWindow::Open);
+
+    QAction *actionOpenTape = menu->addAction(tr("Create/Edit measurements"));
+    actionOpenTape->setMenuRole(QAction::NoRole);
+    connect(actionOpenTape, &QAction::triggered, this, &MainWindow::CreateMeasurements);
+
+    menu->addAction(ui->actionPreferences);
+
+    extern void qt_mac_set_dock_menu(QMenu *);
+    qt_mac_set_dock_menu(menu);
 #endif
-
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &MainWindow::ShowPaper);
-    ui->dockWidgetLayoutPages->setVisible(false);
-
-    connect(watcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::MeasurementsChanged);
+#endif //defined(Q_OS_MAC)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
