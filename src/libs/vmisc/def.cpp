@@ -1761,3 +1761,28 @@ QSharedPointer<QPrinter> DefaultPrinter()
     printer->setResolution(static_cast<int>(PrintDPI));
     return printer;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QPixmap darkenPixmap(const QPixmap &pixmap)
+{
+    QImage img = pixmap.toImage().convertToFormat(QImage::Format_ARGB32);
+    const int imgh = img.height();
+    const int imgw = img.width();
+    for (int y = 0; y < imgh; ++y)
+    {
+        for (int x = 0; x < imgw; ++x)
+        {
+            int h, s, v;
+            QRgb pixel = img.pixel(x, y);
+            const int a = qAlpha(pixel);
+            QColor hsvColor(pixel);
+            hsvColor.getHsv(&h, &s, &v);
+            s = qMin(100, s * 2);
+            v = v / 2;
+            hsvColor.setHsv(h, s, v);
+            pixel = hsvColor.rgb();
+            img.setPixel(x, y, qRgba(qRed(pixel), qGreen(pixel), qBlue(pixel), a));
+        }
+    }
+    return QPixmap::fromImage(img);
+}

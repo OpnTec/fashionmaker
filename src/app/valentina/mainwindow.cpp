@@ -67,6 +67,11 @@
 #include <chrono>
 #include <thread>
 
+#if defined(Q_OS_MAC)
+#include <QMimeData>
+#include <QDrag>
+#endif //defined(Q_OS_MAC)
+
 #if defined(Q_CC_CLANG)
     #pragma clang diagnostic push
     #pragma clang diagnostic ignored "-Wmissing-prototypes"
@@ -1114,6 +1119,82 @@ void MainWindow::customEvent(QEvent *event)
     }
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_OS_MAC)
+bool MainWindow::event(QEvent *event)
+{
+    if (not isActiveWindow())
+    {
+        return MainWindowsNoGUI::event(event);
+    }
+
+    switch (event->type())
+    {
+        case QEvent::IconDrag:
+        {
+            event->accept();
+            const Qt::KeyboardModifiers currentModifiers = qApp->keyboardModifiers();
+
+            if (currentModifiers == Qt::NoModifier)
+            {
+                QDrag *drag = new QDrag(this);
+                QMimeData *data = new QMimeData();
+                data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(curFile));
+                drag->setMimeData(data);
+                const QPixmap cursorPixmap = style()->standardPixmap(QStyle::SP_FileIcon, 0, this);
+                drag->setPixmap(cursorPixmap);
+
+                QPoint hotspot(cursorPixmap.width() - 5, 5);
+                drag->setHotSpot(hotspot);
+
+                drag->start(Qt::LinkAction | Qt::CopyAction);
+            }
+            else if (currentModifiers == Qt::ControlModifier)
+            {
+                QMenu menu(this);
+                connect(&menu, &QMenu::triggered, this, &MainWindow::OpenAt);
+
+                QFileInfo info(curFile);
+                QAction *action = menu.addAction(info.fileName());
+                action->setIcon(QIcon(QApplication::applicationDirPath() +
+                                      QLatin1Literal("/../Resources/measurements.icns")));
+                const QStringList folders = info.absolutePath().split('/');
+                QStringListIterator it(folders);
+
+                it.toBack();
+                while (it.hasPrevious())
+                {
+                    QString string = it.previous();
+                    QIcon icon;
+
+                    if (not string.isEmpty())
+                    {
+                        icon = style()->standardIcon(QStyle::SP_DirClosedIcon, 0, this);
+                    }
+                    else
+                    { // At the root
+                        string = "/";
+                        icon = style()->standardIcon(QStyle::SP_DriveHDIcon, 0, this);
+                    }
+                    action = menu.addAction(string);
+                    action->setIcon(icon);
+                }
+                QPoint pos(QCursor::pos().x() - 20, frameGeometry().y());
+                menu.exec(pos);
+            }
+            else
+            {
+                event->ignore();
+            }
+            return true;
+        }
+        default:
+            return MainWindowsNoGUI::event(event);
+    }
+}
+#endif //defined(Q_OS_MAC)
+
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CleanLayout()
 {
@@ -1326,6 +1407,21 @@ void MainWindow::SyncMeasurements()
 
     ToggleMSync(false);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_OS_MAC)
+void MainWindow::OpenAt(QAction *where)
+{
+    const QString path = curFile.left(curFile.indexOf(where->text())) + where->text();
+    if (path == curFile)
+    {
+        return;
+    }
+    QProcess process;
+    process.start(QStringLiteral("/usr/bin/open"), QStringList() << path, QIODevice::ReadOnly);
+    process.waitForFinished();
+}
+#endif //defined(Q_OS_MAC)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -2880,6 +2976,30 @@ void MainWindow::setCurrentFile(const QString &fileName)
         restoreFiles.prepend(fileName);
         settings->SetRestoreFileList(restoreFiles);
     }
+
+#if defined(Q_OS_MAC)
+    static QIcon fileIcon = QIcon(QApplication::applicationDirPath() +
+                                  QLatin1Literal("/../Resources/measurements.icns"));
+    QIcon icon;
+    if (not curFile.isEmpty())
+    {
+        if (not isWindowModified())
+        {
+            icon = fileIcon;
+        }
+        else
+        {
+            static QIcon darkIcon;
+
+            if (darkIcon.isNull())
+            {
+                darkIcon = QIcon(darkenPixmap(fileIcon.pixmap(16, 16)));
+            }
+            icon = darkIcon;
+        }
+    }
+    setWindowIcon(icon);
+#endif //defined(Q_OS_MAC)
 
     UpdateWindowTitle();
 }

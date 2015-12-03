@@ -74,6 +74,9 @@ protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+#if defined(Q_OS_MAC)
+    virtual bool event(QEvent *event) Q_DECL_OVERRIDE;
+#endif //defined(Q_OS_MAC)
 
 private slots:
     void FileSave();
@@ -82,6 +85,10 @@ private slots:
     void ShowWindow();
     void AboutApplication();
     void AboutQt();
+
+#if defined(Q_OS_MAC)
+    void OpenAt(QAction *where);
+#endif //defined(Q_OS_MAC)
 
     void SaveGivenName();
     void SaveFamilyName();

@@ -597,4 +597,6 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath);
 
 QSharedPointer<QPrinter> DefaultPrinter();
 
+QPixmap darkenPixmap(const QPixmap &pixmap);
+
 #endif // DEF_H
