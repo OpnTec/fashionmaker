@@ -229,7 +229,7 @@ bool TMainWindow::LoadFile(const QString &path)
             }
         }
 
-        VlpCreateLock(lock, QFileInfo(path).fileName());
+        VlpCreateLock(lock, path);
 
         if (not lock->IsLocked())
         {
@@ -1191,7 +1191,7 @@ void TMainWindow::ImportFromPattern()
         return;
     }
 
-    VLockGuard<char> tmp(QFileInfo(mPath).fileName());
+    VLockGuard<char> tmp(mPath);
     if (not tmp.IsLocked())
     {
         qCCritical(tMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
@@ -2645,7 +2645,7 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
             }
         }
 
-        VlpCreateLock(lock, QFileInfo(path).fileName());
+        VlpCreateLock(lock, path);
 
         if (not lock->IsLocked())
         {
