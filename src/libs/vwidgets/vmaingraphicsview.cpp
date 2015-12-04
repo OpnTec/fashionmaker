@@ -352,7 +352,7 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
     //Calculate view rect
     //to receive the currently visible area, map the widgets bounds to the scene
     const QPointF a = view->mapToScene(0, 0 );
-    const QPointF b = view->mapToScene(view->viewport()->width(), view->viewport()->height());
+    const QPointF b = view->mapToScene(view->width(), view->height());
     const QRectF viewRect = QRectF( a, b );
 
     //Calculate scene rect
