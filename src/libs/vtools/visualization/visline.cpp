@@ -88,10 +88,10 @@ QPointF VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const
 
     //Limit size of the scene rect. Axis that has same size as scene rect cause scene size growth.
     QLineF line1 = QLineF(scRect.topLeft(), scRect.bottomRight());
-    line1.setLength(20);
+    line1.setLength(2);
 
     QLineF line2 = QLineF(scRect.bottomRight(), scRect.topLeft());
-    line2.setLength(20);
+    line2.setLength(2);
 
     scRect = QRectF(line1.p2(), line2.p2());
 
