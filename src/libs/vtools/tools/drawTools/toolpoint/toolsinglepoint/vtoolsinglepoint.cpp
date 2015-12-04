@@ -297,7 +297,7 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
         }
     }
 
-    return QGraphicsItem::itemChange(change, value);
+    return QGraphicsEllipseItem::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

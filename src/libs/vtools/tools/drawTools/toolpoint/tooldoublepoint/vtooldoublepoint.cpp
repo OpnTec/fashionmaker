@@ -218,7 +218,7 @@ QVariant VToolDoublePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
         }
     }
 
-    return QGraphicsItem::itemChange(change, value);
+    return QGraphicsPathItem::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
