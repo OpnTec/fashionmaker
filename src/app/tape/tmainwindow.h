@@ -87,6 +87,7 @@ private slots:
     void AboutQt();
 
 #if defined(Q_OS_MAC)
+    void AboutToShowDockMenu();
     void OpenAt(QAction *where);
 #endif //defined(Q_OS_MAC)
 

@@ -120,18 +120,8 @@ TMainWindow::TMainWindow(QWidget *parent)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
     // Mac OS Dock Menu
     QMenu *menu = new QMenu(this);
-
-    CreateWindowMenu(ui->menuWindow);
-
-    menu->addSeparator();
-
-    menu->addAction(ui->actionOpenIndividual);
-    menu->addAction(ui->actionOpenStandard);
-    menu->addAction(ui->actionOpenTemplate);
-
-    menu->addSeparator();
-
-    menu->addAction(ui->actionPreferences);
+    connect(menu, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowDockMenu);
+    AboutToShowDockMenu();
 
     extern void qt_mac_set_dock_menu(QMenu *);
     qt_mac_set_dock_menu(menu);
@@ -765,6 +755,7 @@ void TMainWindow::ShowWindow()
         {
             const int offset = qvariant_cast<int>(v);
             QList<TMainWindow*> windows = qApp->MainWindows();
+            windows.at(offset)->raise();
             windows.at(offset)->activateWindow();
         }
     }
@@ -786,6 +777,28 @@ void TMainWindow::AboutQt()
 
 //---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_MAC)
+void TMainWindow::AboutToShowDockMenu()
+{
+    if (QMenu *menu = qobject_cast<QMenu *>(sender()))
+    {
+        menu->clear();
+        CreateWindowMenu(menu);
+
+        menu->addSeparator();
+
+        menu->addAction(ui->actionOpenIndividual);
+        menu->addAction(ui->actionOpenStandard);
+        menu->addAction(ui->actionOpenTemplate);
+
+        menu->addSeparator();
+
+        QAction *actionPreferences = menu->addAction(tr("Preferences"));
+        actionPreferences->setMenuRole(QAction::NoRole);
+        connect(actionPreferences, &QAction::triggered, this, &TMainWindow::Preferences);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::OpenAt(QAction *where)
 {
     const QString path = curFile.left(curFile.indexOf(where->text())) + where->text();
@@ -2758,7 +2771,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
     {
         TMainWindow *window = windows.at(i);
 
-        QString title = window->windowTitle();
+        QString title = QString("%1. %2").arg(i+1).arg(window->windowTitle());
         const int index = title.lastIndexOf("[*]");
         if (index != -1)
         {
@@ -2769,7 +2782,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
         action->setData(i);
         action->setCheckable(true);
         action->setMenuRole(QAction::NoRole);
-        if (window == this)
+        if (window->isActiveWindow())
         {
             action->setChecked(true);
         }

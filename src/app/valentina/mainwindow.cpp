@@ -172,7 +172,9 @@ MainWindow::MainWindow(QWidget *parent)
     actionOpenTape->setMenuRole(QAction::NoRole);
     connect(actionOpenTape, &QAction::triggered, this, &MainWindow::CreateMeasurements);
 
-    menu->addAction(ui->actionPreferences);
+    QAction *actionPreferences = menu->addAction(tr("Preferences"));
+    actionPreferences->setMenuRole(QAction::NoRole);
+    connect(actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
 
     extern void qt_mac_set_dock_menu(QMenu *);
     qt_mac_set_dock_menu(menu);
