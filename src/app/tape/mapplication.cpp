@@ -223,7 +223,9 @@ MApplication::MApplication(int &argc, char **argv)
     setOrganizationDomain(VER_COMPANYDOMAIN_STR);
     // Setting the Application version
     setApplicationVersion(APP_VERSION_STR);
+#if !defined(Q_OS_MAC)
     setWindowIcon(QIcon(":/tapeicon/64x64/logo.png"));
+#endif // !defined(Q_OS_MAC)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

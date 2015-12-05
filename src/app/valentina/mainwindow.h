@@ -159,10 +159,6 @@ protected:
     virtual void       showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
     virtual void       closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void       customEvent(QEvent * event) Q_DECL_OVERRIDE;
-#if defined(Q_OS_MAC)
-    virtual bool       event(QEvent *event) Q_DECL_OVERRIDE;
-#endif //defined(Q_OS_MAC)
-
     virtual void       CleanLayout() Q_DECL_OVERRIDE;
     virtual void       PrepareSceneList() Q_DECL_OVERRIDE;
 private slots:

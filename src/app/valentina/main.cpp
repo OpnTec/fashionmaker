@@ -56,7 +56,9 @@ int main(int argc, char *argv[])
     app.InitOptions();
 
     MainWindow w;
+#if !defined(Q_OS_MAC)
     app.setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
+#endif // !defined(Q_OS_MAC)
     app.setMainWindow(&w);
 
     QTimer::singleShot(0, &w, SLOT(ProcessCMD()));

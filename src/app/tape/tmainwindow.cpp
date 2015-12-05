@@ -554,81 +554,6 @@ void TMainWindow::showEvent(QShowEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-#if defined(Q_OS_MAC)
-bool TMainWindow::event(QEvent *event)
-{
-    if (not isActiveWindow())
-    {
-        return QMainWindow::event(event);
-    }
-
-    switch (event->type())
-    {
-        case QEvent::IconDrag:
-        {
-            event->accept();
-            const Qt::KeyboardModifiers currentModifiers = qApp->keyboardModifiers();
-
-            if (currentModifiers == Qt::NoModifier)
-            {
-                QDrag *drag = new QDrag(this);
-                QMimeData *data = new QMimeData();
-                data->setUrls(QList<QUrl>() << QUrl::fromLocalFile(curFile));
-                drag->setMimeData(data);
-                const QPixmap cursorPixmap = style()->standardPixmap(QStyle::SP_FileIcon, 0, this);
-                drag->setPixmap(cursorPixmap);
-
-                QPoint hotspot(cursorPixmap.width() - 5, 5);
-                drag->setHotSpot(hotspot);
-
-                drag->start(Qt::LinkAction | Qt::CopyAction);
-            }
-            else if (currentModifiers == Qt::ControlModifier)
-            {
-                QMenu menu(this);
-                connect(&menu, &QMenu::triggered, this, &TMainWindow::OpenAt);
-
-                QFileInfo info(curFile);
-                QAction *action = menu.addAction(info.fileName());
-                action->setIcon(QIcon(QApplication::applicationDirPath() +
-                                      QLatin1Literal("/../Resources/measurements.icns")));
-                const QStringList folders = info.absolutePath().split('/');
-                QStringListIterator it(folders);
-
-                it.toBack();
-                while (it.hasPrevious())
-                {
-                    QString string = it.previous();
-                    QIcon icon;
-
-                    if (not string.isEmpty())
-                    {
-                        icon = style()->standardIcon(QStyle::SP_DirClosedIcon, 0, this);
-                    }
-                    else
-                    { // At the root
-                        string = "/";
-                        icon = style()->standardIcon(QStyle::SP_DriveHDIcon, 0, this);
-                    }
-                    action = menu.addAction(string);
-                    action->setIcon(icon);
-                }
-                QPoint pos(QCursor::pos().x() - 20, frameGeometry().y());
-                menu.exec(pos);
-            }
-            else
-            {
-                event->ignore();
-            }
-            return true;
-        }
-        default:
-            return QMainWindow::event(event);
-    }
-}
-#endif //defined(Q_OS_MAC)
-
-//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::FileSave()
 {
     if (curFile.isEmpty())
@@ -2094,6 +2019,7 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
     }
     shownName += "[*]";
     setWindowTitle(shownName);
+    setWindowFilePath(curFile);
 
 #if defined(Q_OS_MAC)
     static QIcon fileIcon = QIcon(QApplication::applicationDirPath() +

@@ -42,7 +42,7 @@
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>Viewer</string>
 			<key>CFBundleTypeIconFile</key>
 			<string>measurements.icns</string>
 			<key>LSItemContentTypes</key>
@@ -52,11 +52,11 @@
 			<key>CFBundleTypeName</key>
 			<string>Valentina individual measurements</string>
 			<key>LSHandlerRank</key>
-			<string>Owner</string>
+			<string>Alternate</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>Viewer</string>
 			<key>CFBundleTypeIconFile</key>
 			<string>measurements.icns</string>
 			<key>LSItemContentTypes</key>
@@ -66,7 +66,7 @@
 			<key>CFBundleTypeName</key>
 			<string>Valentina standard measurements</string>
 			<key>LSHandlerRank</key>
-			<string>Owner</string>
+			<string>Alternate</string>
 		</dict>
 	</array>
 	<key>UTExportedTypeDeclarations</key>
@@ -89,6 +89,8 @@
 				<array>
 					<string>val</string>
 				</array>
+				<key>public.mime-type</key>
+            	<string>text/xml</string>
 			</dict>
 		</dict>
 		<dict>
@@ -109,6 +111,8 @@
 				<array>
 					<string>vit</string>
 				</array>
+				<key>public.mime-type</key>
+            	<string>text/xml</string>
 			</dict>
 		</dict>
 		<dict>
@@ -129,6 +133,8 @@
 				<array>
 					<string>vst</string>
 				</array>
+				<key>public.mime-type</key>
+            	<string>text/xml</string>
 			</dict>
 		</dict>
 	</array>

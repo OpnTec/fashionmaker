@@ -75,6 +75,8 @@
 				<array>
 					<string>vit</string>
 				</array>
+				<key>public.mime-type</key>
+            	<string>text/xml</string>
 			</dict>
 		</dict>
 		<dict>
@@ -95,6 +97,8 @@
 				<array>
 					<string>vst</string>
 				</array>
+				<key>public.mime-type</key>
+            	<string>text/xml</string>
 			</dict>
 		</dict>
 	</array>

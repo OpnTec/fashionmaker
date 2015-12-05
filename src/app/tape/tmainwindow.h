@@ -74,9 +74,6 @@ protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
-#if defined(Q_OS_MAC)
-    virtual bool event(QEvent *event) Q_DECL_OVERRIDE;
-#endif //defined(Q_OS_MAC)
 
 private slots:
     void FileSave();
