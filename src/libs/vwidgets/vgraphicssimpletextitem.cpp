@@ -126,9 +126,13 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
             emit NameChangePosition(newPos);
             if (scene())
             {
-                if (QGraphicsView *view = scene()->views().at(0))
+                const QList<QGraphicsView *> viewList = scene()->views();
+                if (not viewList.isEmpty())
                 {
-                    view->ensureVisible(this);
+                    if (QGraphicsView *view = viewList.at(0))
+                    {
+                        view->ensureVisible(this);
+                    }
                 }
             }
             changeFinished = true;
