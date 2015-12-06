@@ -2181,9 +2181,7 @@ void MainWindow::Clear()
     qCDebug(vMainWindow, "Reseting main window.");
     lock.reset();
     qCDebug(vMainWindow, "Unlocked pattern file.");
-    ui->actionDetails->setChecked(true);
     ui->actionDraw->setChecked(true);
-    ui->actionLayout->setEnabled(true);
     qCDebug(vMainWindow, "Returned to Draw mode.");
     pattern->Clear();
     qCDebug(vMainWindow, "Clearing pattern.");
@@ -3418,14 +3416,15 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
             doc->SetPath(RelativeMPath(fileName, customMeasureFile));
         }
         qApp->setPatternUnit(doc->MUnit());
-        QString path = AbsoluteMPath(fileName, doc->MPath());
+        const QString path = AbsoluteMPath(fileName, doc->MPath());
 
         if (not path.isEmpty())
         {
             // Check if exist
-            path = CheckPathToMeasurements(fileName, path);
-            if (path.isEmpty())
+            const QString newPath = CheckPathToMeasurements(fileName, path);
+            if (newPath.isEmpty())
             {
+                qApp->setOpeningPattern();// End opening file
                 Clear();
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
                                                              .arg(path)));
@@ -3436,10 +3435,11 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
                 return false;
             }
 
-            if (not LoadMeasurements(path))
+            if (not LoadMeasurements(newPath))
             {
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
-                                                             .arg(path)));
+                                                             .arg(newPath)));
+                qApp->setOpeningPattern();// End opening file
                 Clear();
                 if (not VApplication::CheckGUI())
                 {
@@ -3461,6 +3461,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        qApp->setOpeningPattern();// End opening file
         Clear();
         if (not VApplication::CheckGUI())
         {
@@ -3490,10 +3491,9 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         //Fit scene size to best size for first show
         ZoomFirstShow();
 
-        qApp->setOpeningPattern();// End opening file
-
         ui->actionDraw->setChecked(true);
     }
+    qApp->setOpeningPattern();// End opening file
     return true;
 }
 
