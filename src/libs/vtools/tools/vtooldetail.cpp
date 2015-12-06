@@ -423,6 +423,13 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+    Q_UNUSED(event);
+    SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
