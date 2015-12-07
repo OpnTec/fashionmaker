@@ -29,6 +29,7 @@
 #include "varc.h"
 #include "varc_p.h"
 #include "../ifc/ifcdef.h"
+#include "vspline.h"
 
 #include <QDebug>
 #include <QLineF>
@@ -192,32 +193,68 @@ qreal VArc::AngleArc() const
 QVector<QPointF> VArc::GetPoints() const
 {
     QVector<QPointF> points;
-    qreal i = 0;
-    const qreal angle = AngleArc();
-    const qint32 k = static_cast<qint32>(angle);
-    const qreal s = angle/(k/4); //-V636
-    do
+    QVector<qreal> sectionAngle;
+
+    QPointF pStart;
+    d->isFlipped ? pStart = GetP2() : pStart = GetP1();
+
     {
-        QPointF pStart;
-        if (d->isFlipped)
+        qreal angle = AngleArc();
+
+        if (qFuzzyIsNull(angle))
         {
-            pStart = GetP2();
+            points.append(pStart);
+            return points;
         }
-        else
+
+        if (angle > 360 || angle < 0)
+        {// Filter incorect value
+            QLineF dummy(0,0, 100, 0);
+            dummy.setAngle(angle);
+            angle = dummy.angle();
+        }
+
+        const qreal angleInterpolation = 45; //degree
+        const int sections = qFloor(angle / angleInterpolation);
+        for (int i = 0; i < sections; ++i)
         {
-            pStart = GetP1();
+            sectionAngle.append(angleInterpolation);
         }
-        QLineF line(d->center.toQPointF(), pStart);
-        line.setAngle(line.angle()+i);
-        points.append(line.p2());
-        i = i + s;
-        if (i > angle)
+
+        const qreal tail = angle - sections * angleInterpolation;
+        if (tail > 0)
         {
-            QLineF line(d->center.toQPointF(), pStart);
-            line.setAngle(line.angle()+angle);
-            points.append(line.p2());
+            sectionAngle.append(tail);
         }
-    } while (i <= angle);
+    }
+
+    for (int i = 0; i < sectionAngle.size(); ++i)
+    {
+        const qreal lDistance = GetRadius() * 4.0/3.0 * qTan(M_PI/180.0 * sectionAngle.at(i) * 0.25);
+
+        const QPointF center = GetCenter().toQPointF();
+
+        QLineF lineP1P2(pStart, center);
+        lineP1P2.setAngle(lineP1P2.angle() - 90.0);
+        lineP1P2.setLength(lDistance);
+
+        QLineF lineP4P3(center, pStart);
+        lineP4P3.setAngle(lineP4P3.angle() + sectionAngle.at(i));
+        lineP4P3.setLength(GetRadius());//in case of computing error
+        lineP4P3 = QLineF(lineP4P3.p2(), center);
+        lineP4P3.setAngle(lineP4P3.angle() + 90.0);
+        lineP4P3.setLength(lDistance);
+
+        VSpline spl(VPointF(pStart), lineP1P2.p2(), lineP4P3.p2(), VPointF(lineP4P3.p1()), 1.0);
+        QVector<QPointF> splPoints = spl.GetPoints();
+        if (not splPoints.isEmpty() && i != sectionAngle.size() - 1)
+        {
+            splPoints.removeLast();
+        }
+
+        points << splPoints;
+        pStart = lineP4P3.p1();
+    }
     return points;
 }
 
