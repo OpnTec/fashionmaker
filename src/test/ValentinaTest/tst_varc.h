@@ -40,6 +40,8 @@ public:
 private slots:
     void CompareTwoWays();
     void NegativeArc();
+    void TestGetPoints_data();
+    void TestGetPoints();
 };
 
 #endif // TST_VARC_H
