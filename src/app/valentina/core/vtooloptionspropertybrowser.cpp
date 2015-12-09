@@ -438,7 +438,8 @@ void VToolOptionsPropertyBrowser::AddPropertyFormula(const QString &propertyName
 template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyPointName(Tool *i, const QString &propertyName)
 {
-    VProperty* itemName = new VProperty(propertyName);
+    VStringProperty *itemName = new VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
     itemName->setValue(i->name());
     AddProperty(itemName, AttrName);
 }
@@ -448,7 +449,8 @@ void VToolOptionsPropertyBrowser::AddPropertyPointName(Tool *i, const QString &p
 template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyPointName1(Tool *i, const QString &propertyName)
 {
-    VProperty* itemName = new VProperty(propertyName);
+    VStringProperty *itemName = new VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
     itemName->setValue(i->nameP1());
     AddProperty(itemName, AttrName1);
 }
@@ -457,7 +459,8 @@ void VToolOptionsPropertyBrowser::AddPropertyPointName1(Tool *i, const QString &
 template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyPointName2(Tool *i, const QString &propertyName)
 {
-    VProperty* itemName = new VProperty(propertyName);
+    VStringProperty *itemName = new VStringProperty(propertyName);
+    itemName->setClearButtonEnable(true);
     itemName->setValue(i->nameP2());
     AddProperty(itemName, AttrName2);
 }

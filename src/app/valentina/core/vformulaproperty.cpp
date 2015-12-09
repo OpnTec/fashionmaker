@@ -52,6 +52,7 @@ VFormulaProperty::VFormulaProperty(const QString &name)
 
     VStringProperty* tmpFormula = new VStringProperty(tr("Formula"));
     addChild(tmpFormula);
+    tmpFormula->setClearButtonEnable(true);
     tmpFormula->setUpdateBehaviour(true, false);
     tmpFormula->setTypeForParent(static_cast<int>(ChildType::Formula));
 
