@@ -2880,7 +2880,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
     curFile = fileName;
     qApp->getUndoStack()->setClean();
 
-    if (not curFile.isEmpty())
+    if (not curFile.isEmpty() && VApplication::IsGUIMode())
     {
         qCDebug(vMainWindow, "Updating recent file list.");
         VSettings *settings = qApp->ValentinaSettings();
