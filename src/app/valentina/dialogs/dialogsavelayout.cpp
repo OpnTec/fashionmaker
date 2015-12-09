@@ -68,7 +68,7 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
 #endif
 
     const QString mask = fileName+QLatin1Literal("_");
-    if (VApplication::CheckGUI())
+    if (VApplication::IsGUIMode())
     {
         ui->lineEditFileName->setText(mask);
     }

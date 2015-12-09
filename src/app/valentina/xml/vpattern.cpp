@@ -358,7 +358,7 @@ void VPattern::LiteParseTree(const Document &parse)
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -369,7 +369,7 @@ void VPattern::LiteParseTree(const Document &parse)
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -380,7 +380,7 @@ void VPattern::LiteParseTree(const Document &parse)
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -391,7 +391,7 @@ void VPattern::LiteParseTree(const Document &parse)
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -402,7 +402,7 @@ void VPattern::LiteParseTree(const Document &parse)
         qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         emit SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -412,7 +412,7 @@ void VPattern::LiteParseTree(const Document &parse)
     {
         qCCritical(vXML, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
         emit SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }

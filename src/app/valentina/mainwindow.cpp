@@ -364,7 +364,7 @@ QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &pat
                 qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Wrong units.")),
                           qUtf8Printable(tr("Application doesn't support standard table with inches.")));
                 m->clear();
-                if (not VApplication::CheckGUI())
+                if (not VApplication::IsGUIMode())
                 {
                     qApp->exit(V_EX_DATAERR);
                 }
@@ -377,7 +377,7 @@ QSharedPointer<VMeasurements> MainWindow::OpenMeasurementFile(const QString &pat
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         m->clear();
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -413,7 +413,7 @@ bool MainWindow::LoadMeasurements(const QString &path)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -435,7 +435,7 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     if (qApp->patternType() != m->Type())
     {
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Measurement files types have not match.")));
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_DATAERR);
         }
@@ -457,7 +457,7 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -2286,7 +2286,7 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")), //-V807
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -2297,7 +2297,7 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -2308,7 +2308,7 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -2319,7 +2319,7 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -2330,7 +2330,7 @@ void MainWindow::FullParseFile()
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                                qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -2340,7 +2340,7 @@ void MainWindow::FullParseFile()
     {
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
         SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -2384,7 +2384,7 @@ void MainWindow::GlobalChangePP(const QString &patternPiece)
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Bad id.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -2395,7 +2395,7 @@ void MainWindow::GlobalChangePP(const QString &patternPiece)
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         SetEnabledGUI(false);
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -3368,7 +3368,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("File error.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         Clear();
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -3388,7 +3388,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         qCDebug(vMainWindow, "Error type: %d", lock->GetLockError());
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
         Clear();
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -3428,7 +3428,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
                 Clear();
                 qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
                                                              .arg(path)));
-                if (not VApplication::CheckGUI())
+                if (not VApplication::IsGUIMode())
                 {
                     qApp->exit(V_EX_NOINPUT);
                 }
@@ -3441,7 +3441,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
                                                              .arg(newPath)));
                 qApp->setOpeningPattern();// End opening file
                 Clear();
-                if (not VApplication::CheckGUI())
+                if (not VApplication::IsGUIMode())
                 {
                     qApp->exit(V_EX_NOINPUT);
                 }
@@ -3463,7 +3463,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         qApp->setOpeningPattern();// End opening file
         Clear();
-        if (not VApplication::CheckGUI())
+        if (not VApplication::IsGUIMode())
         {
             qApp->exit(V_EX_NOINPUT);
         }
@@ -3639,7 +3639,7 @@ QString MainWindow::CheckPathToMeasurements(const QString &patternPath, const QS
     QFileInfo table(path);
     if (table.exists() == false)
     {
-        if (!qApp->CheckGUI())
+        if (!qApp->IsGUIMode())
         {
             return QString();// console mode doesn't support fixing path to a measurement file
         }
@@ -3856,7 +3856,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetSize(const QString &text)
 {
-    if (not qApp->CheckGUI())
+    if (not qApp->IsGUIMode())
     {
         if (this->isWindowModified() || not curFile.isEmpty())
         {
@@ -3894,7 +3894,7 @@ void MainWindow::SetSize(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetHeight(const QString &text)
 {
-    if (not qApp->CheckGUI())
+    if (not qApp->IsGUIMode())
     {
         if (this->isWindowModified() || not curFile.isEmpty())
         {
@@ -3936,7 +3936,7 @@ void MainWindow::ProcessCMD()
     auto args = cmd->OptInputFileNames();
 
     //Before we load pattern show window.
-    if (VApplication::CheckGUI())
+    if (VApplication::IsGUIMode())
     {
         show();
         ReopenFilesAfterCrash(args);
@@ -3955,7 +3955,7 @@ void MainWindow::ProcessCMD()
     {
         const bool loaded = LoadPattern(args.at(static_cast<int>(i)), cmd->OptMeasurePath());
 
-        if (not loaded && not VApplication::CheckGUI())
+        if (not loaded && not VApplication::IsGUIMode())
         {
             return; // process only one input file
         }
@@ -3987,7 +3987,7 @@ void MainWindow::ProcessCMD()
         }
     }
 
-    if (not VApplication::CheckGUI())
+    if (not VApplication::IsGUIMode())
     {
         qApp->exit(V_EX_OK);// close program after processing in console mode
     }

@@ -186,7 +186,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
         if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
         {
-            if (VApplication::CheckGUI())
+            if (VApplication::IsGUIMode())
             {
                 if (topWinAllowsPop)
                 {
@@ -541,7 +541,7 @@ void VApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
-    if (VApplication::CheckGUI())// By default console version uses system locale
+    if (VApplication::IsGUIMode())// By default console version uses system locale
     {
         LoadTranslation(ValentinaSettings()->GetLocale());
     }
@@ -666,7 +666,7 @@ VSettings *VApplication::ValentinaSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VApplication::CheckGUI()
+bool VApplication::IsGUIMode()
 {
     return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsGuiEnabled();
 }

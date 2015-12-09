@@ -77,7 +77,7 @@ public:
     static void        DrMingw();
     void               CollectReports() const;
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
-    bool static CheckGUI();
+    bool static IsGUIMode();
 
     virtual void OpenSettings() Q_DECL_OVERRIDE;
     VSettings *ValentinaSettings();

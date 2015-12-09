@@ -104,7 +104,7 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
 {
     lGenerator.SetDetails(listDetails);
     DialogLayoutProgress progress(listDetails.count(), this);
-    if (VApplication::CheckGUI())
+    if (VApplication::IsGUIMode())
     {
         connect(&lGenerator, &VLayoutGenerator::Start, &progress, &DialogLayoutProgress::Start);
         connect(&lGenerator, &VLayoutGenerator::Arranged, &progress, &DialogLayoutProgress::Arranged);
@@ -134,7 +134,7 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             margins = lGenerator.GetFields();
             paperSize = QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight());
             isLayoutStale = false;
-            if (VApplication::CheckGUI())
+            if (VApplication::IsGUIMode())
             {
                 QApplication::alert(this);
             }
@@ -142,7 +142,7 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
         case LayoutErrors::ProcessStoped:
         case LayoutErrors::PrepareLayoutError:
         case LayoutErrors::EmptyPaperError:
-            if (VApplication::CheckGUI())
+            if (VApplication::IsGUIMode())
             {
                 QApplication::alert(this);
             }
