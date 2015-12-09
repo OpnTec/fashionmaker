@@ -43,6 +43,10 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
 {
     ui->setupUi(this);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    ui->lineEditAuthor->setClearButtonEnabled(true);
+#endif
+
     SCASSERT(doc != nullptr);
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));

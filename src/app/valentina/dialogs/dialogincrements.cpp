@@ -60,6 +60,11 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
       formulaBaseHeight(0)
 {
     ui->setupUi(this);
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    ui->lineEditName->setClearButtonEnabled(true);
+#endif
+
     formulaBaseHeight = ui->plainTextEditFormula->height();
 
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));

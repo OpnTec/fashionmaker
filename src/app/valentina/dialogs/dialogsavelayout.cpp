@@ -50,6 +50,11 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
 {
     ui->setupUi(this);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    ui->lineEditPath->setClearButtonEnabled(true);
+    ui->lineEditFileName->setClearButtonEnabled(true);
+#endif
+
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);

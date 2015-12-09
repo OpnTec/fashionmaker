@@ -44,6 +44,11 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &
     :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersect), flagPoint(true)
 {
     ui->setupUi(this);
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    ui->lineEditNamePoint->setClearButtonEnabled(true);
+#endif
+
     number = 0;
     InitOkCancelApply(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));

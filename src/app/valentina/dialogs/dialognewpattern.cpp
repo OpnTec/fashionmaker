@@ -45,6 +45,10 @@ DialogNewPattern::DialogNewPattern(VContainer *data, const QString &patternPiece
 {
     ui->setupUi(this);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    ui->lineEditName->setClearButtonEnabled(true);
+#endif
+
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
 
     QRect position = this->frameGeometry();

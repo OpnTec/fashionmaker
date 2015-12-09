@@ -75,9 +75,6 @@
             <property name="placeholderText">
              <string>Search</string>
             </property>
-            <property name="clearButtonEnabled">
-             <bool>true</bool>
-            </property>
            </widget>
           </item>
           <item>
@@ -219,9 +216,6 @@
              </property>
              <property name="placeholderText">
               <string>Measurement's name in a formula.</string>
-             </property>
-             <property name="clearButtonEnabled">
-              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -558,9 +552,6 @@
              <property name="placeholderText">
               <string>Measurement's human-readable name.</string>
              </property>
-             <property name="clearButtonEnabled">
-              <bool>true</bool>
-             </property>
             </widget>
            </item>
           </layout>
@@ -625,9 +616,6 @@
             </property>
             <property name="placeholderText">
              <string notr="true">Path to the measurement file.</string>
-            </property>
-            <property name="clearButtonEnabled">
-             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -698,9 +686,6 @@
           <property name="placeholderText">
            <string>Customer's name.</string>
           </property>
-          <property name="clearButtonEnabled">
-           <bool>true</bool>
-          </property>
          </widget>
         </item>
         <item row="6" column="0">
@@ -723,9 +708,6 @@
           </property>
           <property name="placeholderText">
            <string>Customer's family name.</string>
-          </property>
-          <property name="clearButtonEnabled">
-           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -798,9 +780,6 @@
           </property>
           <property name="placeholderText">
            <string>Customer's email address.</string>
-          </property>
-          <property name="clearButtonEnabled">
-           <bool>true</bool>
           </property>
          </widget>
         </item>

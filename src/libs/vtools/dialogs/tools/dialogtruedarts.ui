@@ -131,9 +131,6 @@
        <property name="placeholderText">
         <string>Choose unique label.</string>
        </property>
-       <property name="clearButtonEnabled">
-        <bool>true</bool>
-       </property>
       </widget>
      </item>
      <item row="6" column="0">
@@ -150,9 +147,6 @@
        </property>
        <property name="placeholderText">
         <string>Choose unique label.</string>
-       </property>
-       <property name="clearButtonEnabled">
-        <bool>true</bool>
        </property>
       </widget>
      </item>

@@ -47,6 +47,11 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
       ch1(NULL_ID), ch2(NULL_ID)
 {
     ui->setupUi(this);
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    ui->lineEditNamePoint->setClearButtonEnabled(true);
+#endif
+
     InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
     labelEditNamePoint = ui->labelEditNamePoint;

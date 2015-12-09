@@ -47,6 +47,11 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     :DialogTool(data, toolId, parent), ui(), detail(VDetail()), supplement(true), closed(true), flagWidth(true)
 {
     ui.setupUi(this);
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    ui.lineEditNameDetail->setClearButtonEnabled(true);
+#endif
+
     labelEditNamePoint = ui.labelEditNameDetail;
     ui.labelUnit->setText( VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     ui.labelUnitX->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));

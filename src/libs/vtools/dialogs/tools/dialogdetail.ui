@@ -236,9 +236,6 @@
               <property name="text">
                <string>Detail</string>
               </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
              </widget>
             </item>
            </layout>

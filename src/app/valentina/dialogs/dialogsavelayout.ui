@@ -52,9 +52,6 @@
        <property name="placeholderText">
         <string>Path to destination folder.</string>
        </property>
-       <property name="clearButtonEnabled">
-        <bool>true</bool>
-       </property>
       </widget>
      </item>
      <item row="0" column="2">
@@ -90,9 +87,6 @@
        </property>
        <property name="placeholderText">
         <string>File base name. </string>
-       </property>
-       <property name="clearButtonEnabled">
-        <bool>true</bool>
        </property>
       </widget>
      </item>

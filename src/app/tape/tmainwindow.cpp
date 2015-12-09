@@ -101,6 +101,16 @@ TMainWindow::TMainWindow(QWidget *parent)
       isInitialized(false)
 {
     ui->setupUi(this);
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    ui->lineEditFind->setClearButtonEnabled(true);
+    ui->lineEditName->setClearButtonEnabled(true);
+    ui->lineEditFullName->setClearButtonEnabled(true);
+    ui->lineEditGivenName->setClearButtonEnabled(true);
+    ui->lineEditFamilyName->setClearButtonEnabled(true);
+    ui->lineEditEmail->setClearButtonEnabled(true);
+#endif
+
     search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
     ui->tabWidget->setVisible(false);
 
