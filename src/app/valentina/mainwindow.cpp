@@ -3854,7 +3854,7 @@ void MainWindow::DoExport(const VCommandLinePtr &expParams)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::SetSize(const QString &text)
+bool MainWindow::SetSize(const QString &text)
 {
     if (not qApp->IsGUIMode())
     {
@@ -3870,29 +3870,34 @@ void MainWindow::SetSize(const QString &text)
                 }
                 else
                 {
-                    qCWarning(vMainWindow, "%s",
+                    qCCritical(vMainWindow, "%s",
                               qUtf8Printable(tr("Not supported size value '%1' for this pattern file.").arg(text)));
+                    return false;
                 }
             }
             else
             {
-                qCWarning(vMainWindow, "%s",
+                qCCritical(vMainWindow, "%s",
                           qUtf8Printable(tr("Couldn't set size. Need a file with standard measurements.")));
+                return false;
             }
         }
         else
         {
-            qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set size. File wasn't opened.")));
+            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set size. File wasn't opened.")));
+            return false;
         }
     }
     else
     {
         qCWarning(vMainWindow, "%s", qUtf8Printable(tr("The method %1 does nothing in GUI mode").arg(Q_FUNC_INFO)));
+        return false;
     }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::SetHeight(const QString &text)
+bool MainWindow::SetHeight(const QString &text)
 {
     if (not qApp->IsGUIMode())
     {
@@ -3908,25 +3913,30 @@ void MainWindow::SetHeight(const QString &text)
                 }
                 else
                 {
-                    qCWarning(vMainWindow, "%s",
+                    qCCritical(vMainWindow, "%s",
                               qUtf8Printable(tr("Not supported height value '%1' for this pattern file.").arg(text)));
+                    return false;
                 }
             }
             else
             {
-                qCWarning(vMainWindow, "%s",
+                qCCritical(vMainWindow, "%s",
                           qUtf8Printable(tr("Couldn't set height. Need a file with standard measurements.")));
+                return false;
             }
         }
         else
         {
-            qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set height. File wasn't opened.")));
+            qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Couldn't set height. File wasn't opened.")));
+            return false;
         }
     }
     else
     {
         qCWarning(vMainWindow, "%s", qUtf8Printable(tr("The method %1 does nothing in GUI mode").arg(Q_FUNC_INFO)));
+        return false;
     }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3960,16 +3970,18 @@ void MainWindow::ProcessCMD()
             return; // process only one input file
         }
 
+        bool hSetted = true;
+        bool sSetted = true;
         if (loaded && (cmd->IsTestModeEnabled() || cmd->IsExportEnabled()))
         {
             if (cmd->IsSetGradationSize())
             {
-                SetSize(cmd->OptGradationSize());
+                sSetted = SetSize(cmd->OptGradationSize());
             }
 
             if (cmd->IsSetGradationHeight())
             {
-                SetHeight(cmd->OptGradationHeight());
+                hSetted = SetHeight(cmd->OptGradationHeight());
             }
         }
 
@@ -3977,10 +3989,15 @@ void MainWindow::ProcessCMD()
         {
             if (cmd->IsExportEnabled())
             {
-                if (loaded)
+                if (loaded && hSetted && sSetted)
                 {
                     DoExport(cmd);
                     return; // process only one input file
+                }
+                else
+                {
+                    qApp->exit(V_EX_DATAERR);
+                    return;
                 }
                 break;
             }

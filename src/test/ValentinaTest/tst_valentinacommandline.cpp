@@ -112,6 +112,30 @@ void TST_ValentinaCommandLine::ExportMode_data() const
                                << QString("-p;;0;;-d;;%1;;-b;;output").arg(tmp)
                                << true
                                << V_EX_OK;
+
+    QTest::newRow("A file with limited gradation. Standard measurements. Wrong data.")
+            << "glimited_vst.val"
+            << QString("-p;;0;;-d;;%1;;--gsize;;46;;--gheight;;164;;-b;;output").arg(tmp)
+            << false
+            << V_EX_DATAERR;
+
+    QTest::newRow("A file with limited gradation. Standard measurements. Correct data.")
+            << "glimited_vst.val"
+            << QString("-p;;0;;-d;;%1;;--gsize;;40;;--gheight;;134;;-b;;output").arg(tmp)
+            << true
+            << V_EX_OK;
+
+    QTest::newRow("A file with limited gradation. Individual measurements.")
+            << "glimited_vit.val"
+            << QString("-p;;0;;-d;;%1;;--gsize;;40;;--gheight;;134;;-b;;output").arg(tmp)
+            << false
+            << V_EX_DATAERR;
+
+    QTest::newRow("A file with limited gradation. No measurements.")
+            << "glimited_no_m.val"
+            << QString("-p;;0;;-d;;%1;;--gsize;;40;;--gheight;;134;;-b;;output").arg(tmp)
+            << false
+            << V_EX_DATAERR;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
