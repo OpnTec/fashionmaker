@@ -240,6 +240,9 @@ private:
     VToolOptionsPropertyBrowser *toolOptions;
     std::shared_ptr<VLockGuard<char>> lock;
 
+    void               SetDefaultHeight();
+    void               SetDefaultSize();
+
     void               ToolBarOption();
     void               ToolBarStages();
     void               ToolBarDraws();

@@ -77,6 +77,15 @@ public:
 
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
 
+    bool IsDefCustom() const;
+    void SetDefCustom(bool value);
+
+    int  GetDefCustomHeight() const;
+    void SetDefCustomHeight(int value);
+
+    int  GetDefCustomSize() const;
+    void SetDefCustomSize(int value);
+
 public slots:
     void           LiteParseTree(const Document &parse);
 

@@ -34,6 +34,7 @@
 #include <QMap>
 
 class VPattern;
+class VContainer;
 class QCheckBox;
 
 namespace Ui
@@ -45,7 +46,7 @@ class DialogPatternProperties : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DialogPatternProperties(VPattern *doc, QWidget *parent = nullptr);
+    explicit DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent = nullptr);
     virtual ~DialogPatternProperties() Q_DECL_OVERRIDE;
 signals:
     void         UpdateGradation();
@@ -58,10 +59,14 @@ public slots:
     void         DescEdited();
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+private slots:
+    void ToggleComboBox();
+    void DefValueChanged();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
     VPattern               *doc;
+    VContainer             *pattern;
     char                   heightsChecked;
     char                   sizesChecked;
     QMap<GHeights, bool>   heights;
@@ -69,6 +74,7 @@ private:
     QMap<QCheckBox *, int> data;
     bool                   descriptionChanged;
     bool                   gradationChanged;
+    bool                   defaultChanged;
     bool                   isInitialized;
 
     void         SetHeightsChecked(bool enabled);
@@ -79,9 +85,18 @@ private:
     void         Init(QCheckBox *check, int val, Func slot);
     template<typename GVal>
     void         SetOptions(const QMap<GVal, bool> &option);
+    template<typename GVal>
+    void         InitComboBox(QComboBox *box, const QMap<GVal, bool> &option);
     void         CheckApplyOk();
     void         SaveDescription();
     void         SaveGradation();
+    void         SaveDefValues();
+
+    void         SetDefaultHeight(const QString &def);
+    void         SetDefaultSize(const QString &def);
+
+    void         UpdateDefHeight();
+    void         UpdateDefSize();
 };
 
 #endif // DIALOGPATTERNPROPERTIES_H

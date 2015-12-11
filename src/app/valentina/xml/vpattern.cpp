@@ -2445,6 +2445,152 @@ QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedNa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VPattern::IsDefCustom() const
+{
+    QDomNodeList tags = elementsByTagName(TagGradation);
+    if (tags.size() == 0)
+    {
+        return false;
+    }
+
+    const QDomNode domNode = tags.at(0);
+    const QDomElement domElement = domNode.toElement();
+    if (domElement.isNull() == false)
+    {
+        return GetParametrBool(domElement, AttrCustom, QStringLiteral("false"));
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetDefCustom(bool value)
+{
+    CheckTagExists(TagGradation);
+    QDomNodeList tags = elementsByTagName(TagGradation);
+    if (tags.size() == 0)
+    {
+        qDebug()<<"Can't save attribute "<<AttrCustom<<Q_FUNC_INFO;
+        return;
+    }
+
+    QDomNode domNode = tags.at(0);
+    QDomElement domElement = domNode.toElement();
+    if (domElement.isNull() == false)
+    {
+        SetAttribute(domElement, AttrCustom, value);
+    }
+    else
+    {
+        qDebug()<<"Can't save attribute "<<AttrCustom<<Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPattern::GetDefCustomHeight() const
+{
+    QDomNodeList tags = elementsByTagName(TagGradation);
+    if (tags.size() == 0)
+    {
+        return 0;
+    }
+
+    const QDomNode domNode = tags.at(0);
+    const QDomElement domElement = domNode.toElement();
+    if (domElement.isNull() == false)
+    {
+        return static_cast<int>(GetParametrUInt(domElement, AttrDefHeight, QStringLiteral("0")));
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetDefCustomHeight(int value)
+{
+    CheckTagExists(TagGradation);
+    QDomNodeList tags = elementsByTagName(TagGradation);
+    if (tags.size() == 0)
+    {
+        qDebug()<<"Can't save attribute "<<AttrDefHeight<<Q_FUNC_INFO;
+        return;
+    }
+
+    QDomNode domNode = tags.at(0);
+    QDomElement domElement = domNode.toElement();
+    if (domElement.isNull() == false)
+    {
+        if (value == 0)
+        {
+            domElement.removeAttribute(AttrDefHeight);
+        }
+        else
+        {
+            SetAttribute(domElement, AttrDefHeight, value);
+        }
+    }
+    else
+    {
+        qDebug()<<"Can't save attribute "<<AttrDefHeight<<Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPattern::GetDefCustomSize() const
+{
+    QDomNodeList tags = elementsByTagName(TagGradation);
+    if (tags.size() == 0)
+    {
+        return 0;
+    }
+
+    const QDomNode domNode = tags.at(0);
+    const QDomElement domElement = domNode.toElement();
+    if (domElement.isNull() == false)
+    {
+        return static_cast<int>(GetParametrUInt(domElement, AttrDefSize, QStringLiteral("0")));
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetDefCustomSize(int value)
+{
+    CheckTagExists(TagGradation);
+    QDomNodeList tags = elementsByTagName(TagGradation);
+    if (tags.size() == 0)
+    {
+        qDebug()<<"Can't save attribute "<<AttrDefSize<<Q_FUNC_INFO;
+        return;
+    }
+
+    QDomNode domNode = tags.at(0);
+    QDomElement domElement = domNode.toElement();
+    if (domElement.isNull() == false)
+    {
+        if (value == 0)
+        {
+            domElement.removeAttribute(AttrDefSize);
+        }
+        else
+        {
+            SetAttribute(domElement, AttrDefSize, value);
+        }
+    }
+    else
+    {
+        qDebug()<<"Can't save attribute "<<AttrDefSize<<Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::PrepareForParse(const Document &parse)
 {
     SCASSERT(sceneDraw != nullptr);

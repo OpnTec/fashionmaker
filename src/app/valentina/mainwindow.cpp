@@ -1054,7 +1054,7 @@ void MainWindow::OpenRecentFile()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::PatternProperties()
 {
-    DialogPatternProperties proper(doc, this);
+    DialogPatternProperties proper(doc, pattern, this);
     connect(&proper, &DialogPatternProperties::UpdateGradation, this, &MainWindow::UpdateGradation);
     proper.exec();
 }
@@ -1387,17 +1387,7 @@ void MainWindow::ToolBarOption()
         gradationHeights = SetGradationList(gradationHeightsLabel, listHeights);
 
         // set default height
-        {
-            const qint32 index = gradationHeights->findText(QString("%1").arg(static_cast<int>(pattern->height())));
-            if (index != -1)
-            {
-                gradationHeights->setCurrentIndex(index);
-            }
-            else
-            {
-                pattern->SetHeight(gradationHeights->currentText().toInt());
-            }
-        }
+        SetDefaultHeight();
 
         connect(gradationHeights.data(),
                 static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
@@ -1407,17 +1397,7 @@ void MainWindow::ToolBarOption()
         gradationSizes = SetGradationList(gradationSizesLabel, listSizes);
 
         // set default size
-        {
-            const qint32 index = gradationSizes->findText(QString("%1").arg(static_cast<int>(pattern->size())));
-            if (index != -1)
-            {
-                gradationSizes->setCurrentIndex(index);
-            }
-            else
-            {
-                pattern->SetSize(gradationSizes->currentText().toInt());
-            }
-        }
+        SetDefaultSize();
 
         connect(gradationSizes.data(),
                 static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
@@ -2649,6 +2629,56 @@ void MainWindow::ChangedHeight(const QString &text)
         else
         {
             qCDebug(vMainWindow, "Couldn't restore height value.");
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetDefaultHeight()
+{
+    const QString defHeight = QString().setNum(static_cast<int>(UnitConvertor(doc->GetDefCustomHeight(),
+                                                                           *pattern->GetPatternUnit(), Unit::Cm)));
+    int index = gradationHeights->findText(defHeight);
+    if (index != -1)
+    {
+        gradationHeights->setCurrentIndex(index);
+    }
+    else
+    {
+        const int height = static_cast<int>(UnitConvertor(pattern->height(), *pattern->GetPatternUnit(), Unit::Cm));
+        index = gradationHeights->findText(QString().setNum(height));
+        if (index != -1)
+        {
+            gradationHeights->setCurrentIndex(index);
+        }
+        else
+        {
+            pattern->SetHeight(gradationHeights->currentText().toInt());
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetDefaultSize()
+{
+    const QString defSize = QString().setNum(static_cast<int>(UnitConvertor(doc->GetDefCustomSize(),
+                                                                         *pattern->GetPatternUnit(), Unit::Cm)));
+    int index = gradationSizes->findText(defSize);
+    if (index != -1)
+    {
+        gradationSizes->setCurrentIndex(index);
+    }
+    else
+    {
+        const int size = static_cast<int>(UnitConvertor(pattern->size(), *pattern->GetPatternUnit(), Unit::Cm));
+        index = gradationSizes->findText(QString().setNum(size));
+        if (index != -1)
+        {
+            gradationSizes->setCurrentIndex(index);
+        }
+        else
+        {
+            pattern->SetSize(gradationSizes->currentText().toInt());
         }
     }
 }

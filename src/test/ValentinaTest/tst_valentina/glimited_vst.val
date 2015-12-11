@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pattern>
     <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
-    <version>0.2.1</version>
+    <version>0.2.2</version>
     <unit>cm</unit>
     <author/>
     <description/>
     <notes/>
-    <gradation>
+    <gradation custom="false">
         <heights h116="true" h176="true" h104="true" h164="false" h152="true" h92="true" h140="true" h98="true" h158="true" h146="true" h134="true" h194="true" all="false" h122="true" h182="true" h110="true" h170="true" h128="true" h188="true"/>
         <sizes s34="true" s36="true" s22="true" s38="true" s24="true" s26="true" s28="true" s50="true" s52="true" s54="true" s40="true" s56="true" all="false" s42="true" s44="true" s30="true" s46="false" s48="true" s32="true"/>
     </gradation>

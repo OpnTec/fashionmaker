@@ -30,16 +30,18 @@
 #include "ui_dialogpatternproperties.h"
 #include <QPushButton>
 #include "../xml/vpattern.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
 
 #define MAX_HEIGHTS 18
 #define MAX_SIZES 18
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent) :
-    QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc), heightsChecked(MAX_HEIGHTS),
+DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pattern, QWidget *parent) :
+    QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc), pattern(pattern), heightsChecked(MAX_HEIGHTS),
     sizesChecked(MAX_SIZES),  heights (QMap<GHeights, bool>()), sizes(QMap<GSizes, bool>()),
-    data(QMap<QCheckBox *, int>()), descriptionChanged(false), gradationChanged(false), isInitialized(false)
+    data(QMap<QCheckBox *, int>()), descriptionChanged(false), gradationChanged(false), defaultChanged(false),
+    isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -69,7 +71,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
     connect(bCansel, &QPushButton::clicked, this, &DialogPatternProperties::close);
 
     ui->tabWidget->setCurrentIndex(0);
-    if (qApp->patternType() == MeasurementsType::Individual)
+    if (qApp->patternType() != MeasurementsType::Standard)
     {
         ui->tabWidget->setTabEnabled(1, false);
     }
@@ -83,7 +85,30 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, QWidget *parent)
     SetOptions(heights);
     SetOptions(sizes);
 
-    gradationChanged = false;//Set to default value after initialization
+    InitComboBox(ui->comboBoxHeight, heights);
+    InitComboBox(ui->comboBoxSize, sizes);
+
+    const QString height = QString().setNum(static_cast<int>(UnitConvertor(doc->GetDefCustomHeight(),
+                                                                           *pattern->GetPatternUnit(), Unit::Cm)));
+    SetDefaultHeight(height);
+
+    const QString size = QString().setNum(static_cast<int>(UnitConvertor(doc->GetDefCustomSize(),
+                                                                         *pattern->GetPatternUnit(), Unit::Cm)));
+    SetDefaultSize(size);
+
+    connect(ui->radioButtonDefFromP, &QRadioButton::toggled, this, &DialogPatternProperties::ToggleComboBox);
+    connect(ui->radioButtonDefFromP, &QRadioButton::toggled, this, &DialogPatternProperties::DefValueChanged);
+
+    ui->radioButtonDefFromP->setChecked(doc->IsDefCustom());
+
+    connect(ui->comboBoxHeight, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &DialogPatternProperties::DefValueChanged);
+    connect(ui->comboBoxSize, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &DialogPatternProperties::DefValueChanged);
+
+    //Initialization change value. Set to default value after initialization
+    gradationChanged = false;
+    defaultChanged = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,10 +125,14 @@ void DialogPatternProperties::Apply()
         case 0:
             SaveDescription();
             descriptionChanged = false;
+            emit doc->patternChanged(false);
             break;
         case 1:
             SaveGradation();
             gradationChanged = false;
+            SaveDefValues();
+            defaultChanged = false;
+            emit doc->patternChanged(false);
             break;
         default:
             break;
@@ -113,6 +142,11 @@ void DialogPatternProperties::Apply()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::Ok()
 {
+    if (descriptionChanged || gradationChanged || defaultChanged)
+    {
+        emit doc->patternChanged(false);
+    }
+
     if (descriptionChanged)
     {
         SaveDescription();
@@ -123,6 +157,12 @@ void DialogPatternProperties::Ok()
     {
         SaveGradation();
         gradationChanged = false;
+    }
+
+    if (defaultChanged)
+    {
+        SaveDefValues();
+        defaultChanged = false;
     }
 
     close();
@@ -204,6 +244,8 @@ void DialogPatternProperties::CheckStateHeight(int state)
             heights.insert(static_cast<GHeights>(data.value(box)), box->isChecked());
         }
 
+        UpdateDefHeight();
+
         CheckApplyOk();
         gradationChanged = true;
     }
@@ -244,6 +286,8 @@ void DialogPatternProperties::CheckStateSize(int state)
             sizes.insert(static_cast<GSizes>(data.value(box)), box->isChecked());
         }
 
+        UpdateDefSize();
+
         CheckApplyOk();
         gradationChanged = true;
     }
@@ -274,6 +318,19 @@ void DialogPatternProperties::showEvent(QShowEvent *event)
     setMinimumSize(size());
 
     isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ToggleComboBox()
+{
+    ui->comboBoxHeight->setEnabled(ui->radioButtonDefFromP->isChecked());
+    ui->comboBoxSize->setEnabled(ui->radioButtonDefFromP->isChecked());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::DefValueChanged()
+{
+    defaultChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -397,6 +454,86 @@ void DialogPatternProperties::SaveGradation()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveDefValues()
+{
+    if (ui->radioButtonDefFromM->isChecked())
+    {
+        doc->SetDefCustom(false);
+        doc->SetDefCustomHeight(0);
+        doc->SetDefCustomSize(0);
+    }
+    else
+    {
+        doc->SetDefCustom(true);
+        const int height = static_cast<int>(UnitConvertor(ui->comboBoxHeight->currentText().toInt(),
+                                                          Unit::Cm, *pattern->GetPatternUnit()));
+        doc->SetDefCustomHeight(height);
+        const int size = static_cast<int>(UnitConvertor(ui->comboBoxSize->currentText().toInt(),
+                                                        Unit::Cm, *pattern->GetPatternUnit()));
+        doc->SetDefCustomSize(size);
+    }
+    defaultChanged = false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SetDefaultHeight(const QString &def)
+{
+    int index = ui->comboBoxHeight->findText(def);
+    if (index != -1)
+    {
+        ui->comboBoxHeight->setCurrentIndex(index);
+        defaultChanged = true;
+    }
+    else
+    {
+        const int height = static_cast<int>(UnitConvertor(pattern->height(), *pattern->GetPatternUnit(), Unit::Cm));
+        index = ui->comboBoxHeight->findText(QString().setNum(height));
+        if (index != -1)
+        {
+            ui->comboBoxHeight->setCurrentIndex(index);
+            defaultChanged = true;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SetDefaultSize(const QString &def)
+{
+    int index = ui->comboBoxSize->findText(def);
+    if (index != -1)
+    {
+        ui->comboBoxSize->setCurrentIndex(index);
+        defaultChanged = true;
+    }
+    else
+    {
+        const int size = static_cast<int>(UnitConvertor(pattern->size(), *pattern->GetPatternUnit(), Unit::Cm));
+        index = ui->comboBoxSize->findText(QString().setNum(size));
+        if (index != -1)
+        {
+            ui->comboBoxSize->setCurrentIndex(index);
+            defaultChanged = true;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::UpdateDefHeight()
+{
+    const QString def = ui->comboBoxHeight->currentText();
+    InitComboBox(ui->comboBoxHeight, heights);
+    SetDefaultHeight(def);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::UpdateDefSize()
+{
+    const QString def = ui->comboBoxSize->currentText();
+    InitComboBox(ui->comboBoxSize, sizes);
+    SetDefaultSize(def);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template<typename Func>
 void DialogPatternProperties::Init(QCheckBox *check, int val, Func slot)
 {
@@ -422,6 +559,25 @@ void DialogPatternProperties::SetOptions(const QMap<GVal, bool> &option)
                     box->setCheckState(Qt::Unchecked);
                 }
             }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename GVal>
+void DialogPatternProperties::InitComboBox(QComboBox *box, const QMap<GVal, bool> &option)
+{
+    SCASSERT(box != nullptr);
+
+    box->clear();
+
+    QMapIterator<GVal, bool> i(option);
+    while (i.hasNext())
+    {
+        i.next();
+        if (i.value() && i.key() != GVal::ALL)
+        {
+            box->addItem(QString().setNum(static_cast<int>(i.key())));
         }
     }
 }

@@ -167,6 +167,10 @@ public:
     static const QString AttrS54;
     static const QString AttrS56;
 
+    static const QString AttrCustom;
+    static const QString AttrDefHeight;
+    static const QString AttrDefSize;
+
     static const QString IncrementName;
     static const QString IncrementFormula;
     static const QString IncrementDescription;
