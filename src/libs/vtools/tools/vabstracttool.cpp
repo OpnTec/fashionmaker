@@ -33,6 +33,7 @@
 #include "../../vmisc/vsettings.h"
 #include "../undocommands/deltool.h"
 #include "../undocommands/savetooloptions.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
 
 #include <QGraphicsView>
 #include <QIcon>

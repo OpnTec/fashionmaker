@@ -34,7 +34,6 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "visualization/visualization.h"
-#include "../vwidgets/vgraphicssimpletextitem.h"
 
 class QDomElement;
 class QLineF;
@@ -44,6 +43,7 @@ class QGraphicsView;
 class QGraphicsItem;
 class QRectF;
 class Visualization;
+class VGraphicsSimpleTextItem;
 
 /**
  * @brief The VAbstractTool abstract class for all tools.
