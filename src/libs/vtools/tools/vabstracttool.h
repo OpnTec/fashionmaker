@@ -34,6 +34,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "visualization/visualization.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
 
 class QDomElement;
 class QLineF;
@@ -121,6 +122,9 @@ protected:
 
     virtual void SetVisualization()=0;
     void ToolCreation(const Source &typeCreation);
+
+    static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint, QGraphicsLineItem *lineName,
+                            qreal radius, const QPen pen);
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };

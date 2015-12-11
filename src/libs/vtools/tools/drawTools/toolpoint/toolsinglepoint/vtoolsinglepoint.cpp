@@ -247,32 +247,10 @@ void VToolSinglePoint::RefreshPointGeometry(const VPointF &point)
 void VToolSinglePoint::RefreshLine(quint32 id)
 {
     Q_UNUSED(id)
+    QPen pen(CorrectColor(Qt::black));
+    pen.setWidthF(qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor);
 
-    QRectF nRec = namePoint->sceneBoundingRect();
-    nRec.translate(- scenePos());
-    if (this->rect().intersects(nRec) == false)
-    {
-        const QRectF nameRec = namePoint->sceneBoundingRect();
-        QPointF p1, p2;
-        VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - scenePos()), p1, p2);
-        const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
-        lineName->setLine(QLineF(p1, pRec - scenePos()));
-        lineName->setPen(QPen(CorrectColor(Qt::black),
-                              qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-
-        if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
-        {
-            lineName->setVisible(false);
-        }
-        else
-        {
-            lineName->setVisible(true);
-        }
-    }
-    else
-    {
-        lineName->setVisible(false);
-    }
+    VAbstractTool::RefreshLine(this, namePoint, lineName, radius, pen);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

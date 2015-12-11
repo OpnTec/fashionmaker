@@ -278,26 +278,6 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
  * @brief RefreshLine refresh label line on scene.
  */
 void VNodePoint::RefreshLine()
-{    QRectF nRec = namePoint->sceneBoundingRect();
-     nRec.translate(- scenePos());
-     if (this->rect().intersects(nRec) == false)
-     {
-         QRectF nameRec = namePoint->sceneBoundingRect();
-         QPointF p1, p2;
-         VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
-         QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
-         lineName->setLine(QLineF(p1, pRec - scenePos()));
-         if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
-         {
-             lineName->setVisible(false);
-         }
-         else
-         {
-             lineName->setVisible(true);
-         }
-     }
-     else
-     {
-         lineName->setVisible(false);
-     }
+{
+    VAbstractTool::RefreshLine(this, namePoint, lineName, radius, QPen(Qt::black));
 }
