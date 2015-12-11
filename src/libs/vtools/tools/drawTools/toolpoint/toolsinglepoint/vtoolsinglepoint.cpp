@@ -247,10 +247,8 @@ void VToolSinglePoint::RefreshPointGeometry(const VPointF &point)
 void VToolSinglePoint::RefreshLine(quint32 id)
 {
     Q_UNUSED(id)
-    QPen pen(CorrectColor(Qt::black));
-    pen.setWidthF(qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor);
-
-    VAbstractTool::RefreshLine(this, namePoint, lineName, radius, pen);
+    VAbstractTool::RefreshLine(this, namePoint, lineName, radius);
+    lineName->setPen(QPen(CorrectColor(Qt::black), qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

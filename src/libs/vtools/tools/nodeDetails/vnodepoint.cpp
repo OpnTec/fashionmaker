@@ -279,5 +279,5 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
  */
 void VNodePoint::RefreshLine()
 {
-    VAbstractTool::RefreshLine(this, namePoint, lineName, radius, QPen(Qt::black));
+    VAbstractTool::RefreshLine(this, namePoint, lineName, radius);
 }
