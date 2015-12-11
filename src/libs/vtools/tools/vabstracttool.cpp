@@ -33,6 +33,7 @@
 #include "../../vmisc/vsettings.h"
 #include "../undocommands/deltool.h"
 #include "../undocommands/savetooloptions.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
 
 #include <QGraphicsView>
 #include <QIcon>
@@ -313,5 +314,41 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
             }
         }
         history->insert(index+1, record);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RefreshLine refresh line to label on scene.
+ */
+void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint, QGraphicsLineItem *lineName,
+                                const qreal radius)
+{
+    SCASSERT(point != nullptr);
+    SCASSERT(namePoint != nullptr);
+    SCASSERT(lineName != nullptr);
+
+    QRectF nRec = namePoint->sceneBoundingRect();
+    nRec.translate(- point->scenePos());
+    if (point->rect().intersects(nRec) == false)
+    {
+        const QRectF nameRec = namePoint->sceneBoundingRect();
+        QPointF p1, p2;
+        VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - point->scenePos()), p1, p2);
+        const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(point->scenePos(), nameRec.center()));
+        lineName->setLine(QLineF(p1, pRec - point->scenePos()));
+
+        if (QLineF(p1, pRec - point->scenePos()).length() <= ToPixel(4, Unit::Mm))
+        {
+            lineName->setVisible(false);
+        }
+        else
+        {
+            lineName->setVisible(true);
+        }
+    }
+    else
+    {
+        lineName->setVisible(false);
     }
 }

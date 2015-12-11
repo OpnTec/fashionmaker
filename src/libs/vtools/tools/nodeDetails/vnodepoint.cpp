@@ -279,17 +279,5 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
  */
 void VNodePoint::RefreshLine()
 {
-    QRectF nameRec = namePoint->sceneBoundingRect();
-    QPointF p1, p2;
-    VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center()- scenePos()), p1, p2);
-    QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(scenePos(), nameRec.center()));
-    lineName->setLine(QLineF(p1, pRec - scenePos()));
-    if (QLineF(p1, pRec - scenePos()).length() <= ToPixel(4, Unit::Mm))
-    {
-        lineName->setVisible(false);
-    }
-    else
-    {
-        lineName->setVisible(true);
-    }
+    VAbstractTool::RefreshLine(this, namePoint, lineName, radius);
 }
