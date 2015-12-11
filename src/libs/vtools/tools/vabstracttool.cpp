@@ -323,6 +323,10 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
 void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint, QGraphicsLineItem *lineName,
                                 const qreal radius)
 {
+    SCASSERT(point != nullptr);
+    SCASSERT(namePoint != nullptr);
+    SCASSERT(lineName != nullptr);
+
     QRectF nRec = namePoint->sceneBoundingRect();
     nRec.translate(- point->scenePos());
     if (point->rect().intersects(nRec) == false)
