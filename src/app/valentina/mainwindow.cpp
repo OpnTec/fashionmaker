@@ -3485,7 +3485,10 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
             }
         }
 
-        ToolBarOption();
+        if (qApp->patternType() == MeasurementsType::Unknown)
+        {// Show toolbar only if was not uploaded any measurements.
+            ToolBarOption();
+        }
     }
     catch (VException &e)
     {
