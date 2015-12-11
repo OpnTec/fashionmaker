@@ -321,7 +321,7 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
  * @brief RefreshLine refresh line to label on scene.
  */
 void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint, QGraphicsLineItem *lineName,
-                                qreal radius, const QPen pen)
+                                const qreal radius, const QPen pen)
 {
     QRectF nRec = namePoint->sceneBoundingRect();
     nRec.translate(- point->scenePos());

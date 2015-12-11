@@ -124,7 +124,7 @@ protected:
     void ToolCreation(const Source &typeCreation);
 
     static void RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint, QGraphicsLineItem *lineName,
-                            qreal radius, const QPen pen);
+                            const qreal radius, const QPen pen);
 private:
     Q_DISABLE_COPY(VAbstractTool)
 };
