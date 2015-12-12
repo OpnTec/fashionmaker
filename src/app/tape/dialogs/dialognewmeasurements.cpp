@@ -30,6 +30,8 @@
 #include "ui_dialognewmeasurements.h"
 
 #include "../vpatterndb/variables/vmeasurement.h"
+#include "../vmisc/vtapesettings.h"
+#include "../mapplication.h"
 
 #include <QShowEvent>
 
@@ -45,6 +47,22 @@ DialogNewMeasurements::DialogNewMeasurements(QWidget *parent)
     InitUnits(MeasurementsType::Individual);
     InitHeightsList();
     InitSizesList();
+
+    const VTapeSettings *settings = qApp->TapeSettings();
+
+    const int height = static_cast<int>(UnitConvertor(settings->GetDefHeight(), Unit::Cm, MUnit()));
+    int index = ui->comboBoxBaseHeight->findText(QString().setNum(height));
+    if (index != -1)
+    {
+        ui->comboBoxBaseHeight->setCurrentIndex(index);
+    }
+
+    const int size = static_cast<int>(UnitConvertor(settings->GetDefSize(), Unit::Cm, MUnit()));
+    index = ui->comboBoxBaseSize->findText(QString().setNum(size));
+    if (index != -1)
+    {
+        ui->comboBoxBaseSize->setCurrentIndex(index);
+    }
 
     connect(ui->comboBoxMType, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogNewMeasurements::CurrentTypeChanged);
@@ -155,8 +173,17 @@ void DialogNewMeasurements::CurrentTypeChanged(int index)
 void DialogNewMeasurements::CurrentUnitChanged(int index)
 {
     Q_UNUSED(index);
-    InitHeightsList();
-    InitSizesList();
+
+    if (MUnit() != Unit::Inch)
+    {
+        int i = ui->comboBoxBaseHeight->currentIndex();
+        InitHeightsList();
+        ui->comboBoxBaseHeight->setCurrentIndex(i);
+
+        i = ui->comboBoxBaseSize->currentIndex();
+        InitSizesList();
+        ui->comboBoxBaseSize->setCurrentIndex(i);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -222,11 +249,17 @@ void DialogNewMeasurements::InitUnits(const MeasurementsType &type)
     {
         ui->comboBoxUnit->addItem(tr("Inches"), static_cast<int>(Unit::Inch));
     }
+    ui->comboBoxUnit->setCurrentIndex(-1);
     ui->comboBoxUnit->blockSignals(false);
 
     int index = ui->comboBoxUnit->findData(val);
     if (index != -1)
     {
+        ui->comboBoxUnit->setCurrentIndex(index);
+    }
+    else
+    {
+        index = ui->comboBoxUnit->findData(static_cast<int>(Unit::Cm));
         ui->comboBoxUnit->setCurrentIndex(index);
     }
 }

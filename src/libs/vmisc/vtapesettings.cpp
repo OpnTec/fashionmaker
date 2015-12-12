@@ -33,6 +33,9 @@
 
 const QString VTapeSettings::SettingDataBaseGeometry    = QStringLiteral("database/geometry");
 
+const QString VTapeSettings::SettingDefHeight = QStringLiteral("gradation/defHeight");
+const QString VTapeSettings::SettingDefSize   = QStringLiteral("gradation/defHeight");
+
 //---------------------------------------------------------------------------------------------------------------------
 VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organization, const QString &application,
                              QObject *parent)
@@ -50,4 +53,28 @@ QByteArray VTapeSettings::GetDataBaseGeometry() const
 void VTapeSettings::SetDataBaseGeometry(const QByteArray &value)
 {
     setValue(SettingDataBaseGeometry, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetDefHeight(int value)
+{
+    setValue(SettingDefHeight, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VTapeSettings::GetDefHeight() const
+{
+    return value(SettingDefHeight, 176).toInt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetDefSize(int value)
+{
+    setValue(SettingDefSize, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VTapeSettings::GetDefSize() const
+{
+    return value(SettingDefSize, 50).toInt();
 }

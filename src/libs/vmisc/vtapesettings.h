@@ -41,10 +41,18 @@ public:
     QByteArray GetDataBaseGeometry() const;
     void SetDataBaseGeometry(const QByteArray &value);
 
+    void SetDefHeight(int value);
+    int  GetDefHeight() const;
+
+    void SetDefSize(int value);
+    int  GetDefSize() const;
+
 private:
     Q_DISABLE_COPY(VTapeSettings)
 
     static const QString SettingDataBaseGeometry;
+    static const QString SettingDefHeight;
+    static const QString SettingDefSize;
 };
 
 #endif // VTAPESETTINGS_H
