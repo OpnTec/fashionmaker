@@ -2491,17 +2491,24 @@ void VPattern::SetDefCustom(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 int VPattern::GetDefCustomHeight() const
 {
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (IsDefCustom())
     {
-        return 0;
-    }
+        QDomNodeList tags = elementsByTagName(TagGradation);
+        if (tags.size() == 0)
+        {
+            return 0;
+        }
 
-    const QDomNode domNode = tags.at(0);
-    const QDomElement domElement = domNode.toElement();
-    if (domElement.isNull() == false)
-    {
-        return static_cast<int>(GetParametrUInt(domElement, AttrDefHeight, QStringLiteral("0")));
+        const QDomNode domNode = tags.at(0);
+        const QDomElement domElement = domNode.toElement();
+        if (domElement.isNull() == false)
+        {
+            return static_cast<int>(GetParametrUInt(domElement, AttrDefHeight, QStringLiteral("0")));
+        }
+        else
+        {
+            return 0;
+        }
     }
     else
     {
@@ -2542,17 +2549,24 @@ void VPattern::SetDefCustomHeight(int value)
 //---------------------------------------------------------------------------------------------------------------------
 int VPattern::GetDefCustomSize() const
 {
-    QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (IsDefCustom())
     {
-        return 0;
-    }
+        QDomNodeList tags = elementsByTagName(TagGradation);
+        if (tags.size() == 0)
+        {
+            return 0;
+        }
 
-    const QDomNode domNode = tags.at(0);
-    const QDomElement domElement = domNode.toElement();
-    if (domElement.isNull() == false)
-    {
-        return static_cast<int>(GetParametrUInt(domElement, AttrDefSize, QStringLiteral("0")));
+        const QDomNode domNode = tags.at(0);
+        const QDomElement domElement = domNode.toElement();
+        if (domElement.isNull() == false)
+        {
+            return static_cast<int>(GetParametrUInt(domElement, AttrDefSize, QStringLiteral("0")));
+        }
+        else
+        {
+            return 0;
+        }
     }
     else
     {
