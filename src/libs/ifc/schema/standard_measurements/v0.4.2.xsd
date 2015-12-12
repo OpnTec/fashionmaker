@@ -10,12 +10,12 @@
 				<xs:element name="pm_system" type="psCode"></xs:element>
 				<xs:element name="size">
 					<xs:complexType>
-						<xs:attribute name="base" type="xs:double" use="required"></xs:attribute>
+						<xs:attribute name="base" type="baseSize" use="required"></xs:attribute>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="height">
 					<xs:complexType>
-						<xs:attribute name="base" type="xs:double" use="required"></xs:attribute>
+						<xs:attribute name="base" type="baseHeight" use="required"></xs:attribute>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="body-measurements">
@@ -63,4 +63,84 @@
 			<xs:pattern value="^^(([0-9]|[1-4][0-9]|5[0-4])|998)$"/>
 		</xs:restriction>
 	</xs:simpleType>
+    <xs:simpleType name="baseHeight">
+        <xs:restriction base="xs:unsignedInt">
+            <xs:enumeration value="92"/>
+            <xs:enumeration value="98"/>
+            <xs:enumeration value="104"/>
+            <xs:enumeration value="110"/>
+            <xs:enumeration value="116"/>
+            <xs:enumeration value="122"/>
+            <xs:enumeration value="128"/>
+            <xs:enumeration value="134"/>
+            <xs:enumeration value="140"/>
+            <xs:enumeration value="146"/>
+            <xs:enumeration value="152"/>
+            <xs:enumeration value="158"/>
+            <xs:enumeration value="164"/>
+            <xs:enumeration value="170"/>
+            <xs:enumeration value="176"/>
+            <xs:enumeration value="182"/>
+            <xs:enumeration value="188"/>
+            <xs:enumeration value="194"/>
+            <xs:enumeration value="920"/>
+            <xs:enumeration value="980"/>
+            <xs:enumeration value="1040"/>
+            <xs:enumeration value="1100"/>
+            <xs:enumeration value="1160"/>
+            <xs:enumeration value="1220"/>
+            <xs:enumeration value="1280"/>
+            <xs:enumeration value="1340"/>
+            <xs:enumeration value="1400"/>
+            <xs:enumeration value="1460"/>
+            <xs:enumeration value="1520"/>
+            <xs:enumeration value="1580"/>
+            <xs:enumeration value="1640"/>
+            <xs:enumeration value="1700"/>
+            <xs:enumeration value="1760"/>
+            <xs:enumeration value="1820"/>
+            <xs:enumeration value="1880"/>
+            <xs:enumeration value="1940"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="baseSize">
+        <xs:restriction base="xs:unsignedInt">
+            <xs:enumeration value="22"/>
+            <xs:enumeration value="24"/>
+            <xs:enumeration value="26"/>
+            <xs:enumeration value="28"/>
+            <xs:enumeration value="30"/>
+            <xs:enumeration value="32"/>
+            <xs:enumeration value="34"/>
+            <xs:enumeration value="36"/>
+            <xs:enumeration value="38"/>
+            <xs:enumeration value="40"/>
+            <xs:enumeration value="42"/>
+            <xs:enumeration value="44"/>
+            <xs:enumeration value="46"/>
+            <xs:enumeration value="48"/>
+            <xs:enumeration value="50"/>
+            <xs:enumeration value="52"/>
+            <xs:enumeration value="54"/>
+            <xs:enumeration value="56"/>
+            <xs:enumeration value="220"/>
+            <xs:enumeration value="240"/>
+            <xs:enumeration value="260"/>
+            <xs:enumeration value="280"/>
+            <xs:enumeration value="300"/>
+            <xs:enumeration value="320"/>
+            <xs:enumeration value="340"/>
+            <xs:enumeration value="360"/>
+            <xs:enumeration value="380"/>
+            <xs:enumeration value="400"/>
+            <xs:enumeration value="420"/>
+            <xs:enumeration value="440"/>
+            <xs:enumeration value="460"/>
+            <xs:enumeration value="480"/>
+            <xs:enumeration value="500"/>
+            <xs:enumeration value="520"/>
+            <xs:enumeration value="540"/>
+            <xs:enumeration value="560"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>
