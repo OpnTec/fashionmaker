@@ -1188,6 +1188,9 @@ void MainWindow::LoadStandard()
 
     if (not mPath.isEmpty())
     {
+        const int hIndex = gradationHeights->currentIndex();
+        const int sIndex = gradationSizes->currentIndex();
+
         if(LoadMeasurements(mPath))
         {
             if (not doc->MPath().isEmpty())
@@ -1203,6 +1206,19 @@ void MainWindow::LoadStandard()
             doc->LiteParseTree(Document::LiteParse);
 
             UpdateWindowTitle();
+
+            if (qApp->patternType() == MeasurementsType::Standard)
+            {
+                if (hIndex != -1)
+                {
+                    gradationHeights->setCurrentIndex(hIndex);
+                }
+
+                if (sIndex != -1)
+                {
+                    gradationSizes->setCurrentIndex(sIndex);
+                }
+            }
         }
     }
 }
