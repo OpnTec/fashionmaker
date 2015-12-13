@@ -86,15 +86,16 @@ void TST_TSTranslation::CheckEnglishLocalization()
                 continue;
             }
 
-            if (message.hasAttribute(attrType))
+            const QDomElement translationTag = message.firstChildElement(QStringLiteral("translation"));
+            if (translationTag.hasAttribute(attrType))
             {
-                const QString attrVal = message.attribute(attrType);
+                const QString attrVal = translationTag.attribute(attrType);
                 if (attrVal == QLatin1Literal("vanished") || attrVal == QLatin1Literal("unfinished"))
                 {
                     continue;
                 }
             }
-            const QString translation = message.firstChildElement(QStringLiteral("translation")).text();
+            const QString translation = translationTag.text();
             if (translation.isEmpty())
             {
                 continue;
