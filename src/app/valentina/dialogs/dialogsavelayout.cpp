@@ -80,7 +80,7 @@ DialogSaveLayout::DialogSaveLayout(int count, const QString &fileName, QWidget *
         }
         else
         {
-            VException e(tr("The base filename has not match regular expression."));
+            VException e(tr("The base filename does not match a regular expression."));
             throw e;
         }
     }

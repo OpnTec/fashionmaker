@@ -37,7 +37,7 @@
     </message>
     <message>
         <source>Server name/IP</source>
-        <translation>Имя / IP сервера</translation>
+        <translation type="vanished">Имя / IP сервера</translation>
     </message>
     <message>
         <source>Secure connection</source>
@@ -53,19 +53,19 @@
     </message>
     <message>
         <source>Proxy address</source>
-        <translation>Адрес прокси</translation>
+        <translation type="vanished">Адрес прокси</translation>
     </message>
     <message>
         <source>Proxy port</source>
-        <translation>Порт прокси-сервера</translation>
+        <translation type="vanished">Порт прокси-сервера</translation>
     </message>
     <message>
         <source>Proxy user</source>
-        <translation>Пользователь Proxy</translation>
+        <translation type="vanished">Пользователь Proxy</translation>
     </message>
     <message>
         <source>Proxy pass</source>
-        <translation>Пароль прокси-сервера</translation>
+        <translation type="vanished">Пароль прокси-сервера</translation>
     </message>
     <message>
         <source>User settings</source>
@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>User Name</source>
-        <translation>Имя пользователя</translation>
+        <translation type="vanished">Имя пользователя</translation>
     </message>
     <message>
         <source>Save password</source>
@@ -81,7 +81,35 @@
     </message>
     <message>
         <source>Password</source>
-        <translation>Пароль</translation>
+        <translation type="vanished">Пароль</translation>
+    </message>
+    <message>
+        <source>Server name/IP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy user:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy pass:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -151,11 +179,11 @@
     </message>
     <message>
         <source>GUI language</source>
-        <translation>Язык интерфейса</translation>
+        <translation type="vanished">Язык интерфейса</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation>Разделитель дробной части</translation>
+        <translation type="vanished">Разделитель дробной части</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
@@ -163,7 +191,7 @@
     </message>
     <message>
         <source>Default unit</source>
-        <translation>Единица измерения по умолчанию</translation>
+        <translation type="vanished">Единица измерения по умолчанию</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -179,7 +207,7 @@
     </message>
     <message>
         <source>Label language</source>
-        <translation>Язык имени точки</translation>
+        <translation type="vanished">Язык имени точки</translation>
     </message>
     <message>
         <source>Send crash reports</source>
@@ -208,6 +236,22 @@
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
         <translation>Текст отображается под иконками. (рекомендуется для начинающих.)</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label language:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -301,11 +345,11 @@
     <name>DialogAlongLine</name>
     <message>
         <source>Length</source>
-        <translation>Длина</translation>
+        <translation type="vanished">Длина</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Значение длины</translation>
+        <translation type="vanished">Значение длины</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -313,31 +357,31 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Первая точка</translation>
+        <translation type="vanished">Первая точка</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Первая точка линии</translation>
+        <translation type="vanished">Первая точка линии</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Вторая точка</translation>
+        <translation type="vanished">Вторая точка</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Вторая точка линии</translation>
+        <translation type="vanished">Вторая точка линии</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Тип линии</translation>
+        <translation type="vanished">Тип линии</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию от первой точки до этой</translation>
+        <translation type="vanished">Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -349,11 +393,63 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation>Цвет линии</translation>
+        <translation type="vanished">Цвет линии</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Редактировать длину</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of the line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of the line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -364,11 +460,11 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation>Радиус</translation>
+        <translation type="vanished">Радиус</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation>Значение радиуса</translation>
+        <translation type="vanished">Значение радиуса</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -376,27 +472,27 @@
     </message>
     <message>
         <source>First angle</source>
-        <translation>Первый угол</translation>
+        <translation type="vanished">Первый угол</translation>
     </message>
     <message>
         <source>Value of first angle</source>
-        <translation>Значение первого угла</translation>
+        <translation type="vanished">Значение первого угла</translation>
     </message>
     <message>
         <source>Second angle</source>
-        <translation>Второй угол</translation>
+        <translation type="vanished">Второй угол</translation>
     </message>
     <message>
         <source>Value of second angle</source>
-        <translation>Значение второго угла</translation>
+        <translation type="vanished">Значение второго угла</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation>Центральная точка</translation>
+        <translation type="vanished">Центральная точка</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Выберите точку центра дуги</translation>
+        <translation type="vanished">Выберите точку центра дуги</translation>
     </message>
     <message>
         <source>Error</source>
@@ -412,7 +508,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Цвет</translation>
+        <translation type="vanished">Цвет</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -426,6 +522,46 @@
         <source>Edit second angle</source>
         <translation>Редактировать второй угол</translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select center point of the arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -435,11 +571,11 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation>Радиус</translation>
+        <translation type="vanished">Радиус</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation>Значение радиуса</translation>
+        <translation type="vanished">Значение радиуса</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -447,31 +583,31 @@
     </message>
     <message>
         <source>First angle</source>
-        <translation>Первый угол</translation>
+        <translation type="vanished">Первый угол</translation>
     </message>
     <message>
         <source>Value of first angle</source>
-        <translation>Значение первого угла</translation>
+        <translation type="vanished">Значение первого угла</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation>Длина</translation>
+        <translation type="vanished">Длина</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Длина дуги</translation>
+        <translation type="vanished">Длина дуги</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation>Центральная точка</translation>
+        <translation type="vanished">Центральная точка</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Выберите точку центра дуги</translation>
+        <translation type="vanished">Выберите точку центра дуги</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Цвет</translation>
+        <translation type="vanished">Цвет</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -497,16 +633,48 @@
         <source>Length can&apos;t be equal 0</source>
         <translation>Длина не может быть нулевой</translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogBisector</name>
     <message>
         <source>Length</source>
-        <translation>Длина</translation>
+        <translation type="vanished">Длина</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Значение длины</translation>
+        <translation type="vanished">Значение длины</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -514,39 +682,39 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Первая точка</translation>
+        <translation type="vanished">Первая точка</translation>
     </message>
     <message>
         <source>First point of angle</source>
-        <translation>Первая точка угла</translation>
+        <translation type="vanished">Первая точка угла</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Вторая точка</translation>
+        <translation type="vanished">Вторая точка</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation>Вторая точка угла</translation>
+        <translation type="vanished">Вторая точка угла</translation>
     </message>
     <message>
         <source>Third point</source>
-        <translation>Третья точка</translation>
+        <translation type="vanished">Третья точка</translation>
     </message>
     <message>
         <source>Third point of angle</source>
-        <translation>Третья точка угла</translation>
+        <translation type="vanished">Третья точка угла</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Тип линии</translation>
+        <translation type="vanished">Тип линии</translation>
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation>Показать линию от первой точки до этой</translation>
+        <translation type="vanished">Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Select second point of angle</source>
@@ -562,22 +730,70 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation>Цвет линии</translation>
+        <translation type="vanished">Цвет линии</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Редактировать длину</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogCurveIntersectAxis</name>
     <message>
         <source>Angle</source>
-        <translation>Угол</translation>
+        <translation type="vanished">Угол</translation>
     </message>
     <message>
         <source>Value of angle</source>
-        <translation>Значение угла</translation>
+        <translation type="vanished">Значение угла</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -585,23 +801,23 @@
     </message>
     <message>
         <source>Axis point</source>
-        <translation>Точка оси</translation>
+        <translation type="vanished">Точка оси</translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation>Кривая</translation>
+        <translation type="vanished">Кривая</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Тип линии</translation>
+        <translation type="vanished">Тип линии</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию от первой точки до этой</translation>
+        <translation type="vanished">Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -613,26 +829,70 @@
     </message>
     <message>
         <source>Axis Point</source>
-        <translation>Точка оси</translation>
+        <translation type="vanished">Точка оси</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Цвет линии</translation>
+        <translation type="vanished">Цвет линии</translation>
     </message>
     <message>
         <source>Edit angle</source>
         <translation>Редактрировать угол</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogCutArc</name>
     <message>
         <source>Length</source>
-        <translation>Длина</translation>
+        <translation type="vanished">Длина</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Значение длины</translation>
+        <translation type="vanished">Значение длины</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -640,11 +900,11 @@
     </message>
     <message>
         <source>Arc</source>
-        <translation>Дуга</translation>
+        <translation type="vanished">Дуга</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -652,26 +912,62 @@
     </message>
     <message>
         <source>Selected arc</source>
-        <translation>Выбранная дуга</translation>
+        <translation type="vanished">Выбранная дуга</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Цвет</translation>
+        <translation type="vanished">Цвет</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Редактировать длину</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogCutSpline</name>
     <message>
         <source>Length</source>
-        <translation>Длина</translation>
+        <translation type="vanished">Длина</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Значение длины</translation>
+        <translation type="vanished">Значение длины</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -679,15 +975,15 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation>Кривая</translation>
+        <translation type="vanished">Кривая</translation>
     </message>
     <message>
         <source>Selected curve</source>
-        <translation>Выбранная кривая</translation>
+        <translation type="vanished">Выбранная кривая</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -695,22 +991,58 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Цвет</translation>
+        <translation type="vanished">Цвет</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Редактировать длину</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogCutSplinePath</name>
     <message>
         <source>Length</source>
-        <translation>Длина</translation>
+        <translation type="vanished">Длина</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Значение длины</translation>
+        <translation type="vanished">Значение длины</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -718,15 +1050,15 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation>Кривая</translation>
+        <translation type="vanished">Кривая</translation>
     </message>
     <message>
         <source>Selected curve path</source>
-        <translation>Выбранная сложная кривая</translation>
+        <translation type="vanished">Выбранная сложная кривая</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -734,11 +1066,47 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Цвет</translation>
+        <translation type="vanished">Цвет</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Редактировать длину</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -749,7 +1117,7 @@
     </message>
     <message>
         <source>Bias X</source>
-        <translation>Смещение по Х</translation>
+        <translation type="vanished">Смещение по Х</translation>
     </message>
     <message>
         <source>cm</source>
@@ -757,7 +1125,7 @@
     </message>
     <message>
         <source>Bias Y</source>
-        <translation>Смещение по Y</translation>
+        <translation type="vanished">Смещение по Y</translation>
     </message>
     <message>
         <source>Options</source>
@@ -765,7 +1133,7 @@
     </message>
     <message>
         <source>Name of detail</source>
-        <translation>Имя детали</translation>
+        <translation type="vanished">Имя детали</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -773,7 +1141,7 @@
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation type="vanished">Ширина</translation>
     </message>
     <message>
         <source>Closed</source>
@@ -831,6 +1199,22 @@
         <source>You have to choose points in a clockwise direction!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bias X:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bias Y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Ширина:</translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -840,7 +1224,7 @@
     </message>
     <message>
         <source>Formula</source>
-        <translation>Формула</translation>
+        <translation type="vanished">Формула</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
@@ -848,7 +1232,7 @@
     </message>
     <message>
         <source>Value of first angle</source>
-        <translation>Значение первого угла</translation>
+        <translation type="vanished">Значение первого угла</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -942,16 +1326,28 @@
         <source>Curve angle</source>
         <translation>Угол кривой</translation>
     </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished">Формула:</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
     <message>
         <source>Length</source>
-        <translation>Длина</translation>
+        <translation type="vanished">Длина</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Значение длины</translation>
+        <translation type="vanished">Значение длины</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -959,31 +1355,31 @@
     </message>
     <message>
         <source>Angle</source>
-        <translation>Угол</translation>
+        <translation type="vanished">Угол</translation>
     </message>
     <message>
         <source>Value of angle</source>
-        <translation>Значение угла</translation>
+        <translation type="vanished">Значение угла</translation>
     </message>
     <message>
         <source>Base point</source>
-        <translation>Базовая точка</translation>
+        <translation type="vanished">Базовая точка</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Первая точка линии</translation>
+        <translation type="vanished">Первая точка линии</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Тип линии</translation>
+        <translation type="vanished">Тип линии</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию от первой точки до этой</translation>
+        <translation type="vanished">Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -991,7 +1387,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation>Цвет линии</translation>
+        <translation type="vanished">Цвет линии</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -1001,32 +1397,76 @@
         <source>Edit length</source>
         <translation>Редактировать длину</translation>
     </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Base point</source>
-        <translation>Базовая точка</translation>
+        <translation type="vanished">Базовая точка</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Первая точка линии</translation>
+        <translation type="vanished">Первая точка линии</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Вторая точка линии</translation>
+        <translation type="vanished">Вторая точка линии</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Тип линии</translation>
+        <translation type="vanished">Тип линии</translation>
     </message>
     <message>
         <source>Show line from first point to our point</source>
-        <translation>Показать линию от первой точки к нашей</translation>
+        <translation type="vanished">Показать линию от первой точки к нашей</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -1042,11 +1482,43 @@
     </message>
     <message>
         <source>Base Point</source>
-        <translation>Базовая точка</translation>
+        <translation type="vanished">Базовая точка</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Цвет линии</translation>
+        <translation type="vanished">Цвет линии</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1298,6 +1770,18 @@
         <source>Edit increment</source>
         <translation>Изменить прибавку</translation>
     </message>
+    <message>
+        <source>Unique increment name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLayoutProgress</name>
@@ -1506,19 +1990,19 @@ Apply settings anyway?</source>
     <name>DialogLine</name>
     <message>
         <source>First point</source>
-        <translation>Первая точка</translation>
+        <translation type="vanished">Первая точка</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Вторая точка</translation>
+        <translation type="vanished">Вторая точка</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Тип линии</translation>
+        <translation type="vanished">Тип линии</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию от первой точки до этой</translation>
+        <translation type="vanished">Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -1530,14 +2014,30 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Цвет линии</translation>
+        <translation type="vanished">Цвет линии</translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First line</source>
@@ -1545,11 +2045,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation>Первая точка</translation>
+        <translation type="vanished">Первая точка</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Вторая точка</translation>
+        <translation type="vanished">Вторая точка</translation>
     </message>
     <message>
         <source>Second line</source>
@@ -1571,16 +2071,36 @@ Apply settings anyway?</source>
         <source>Point at line intersection</source>
         <translation>Точка пересечения линий</translation>
     </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersectAxis</name>
     <message>
         <source>Angle</source>
-        <translation>Угол</translation>
+        <translation type="vanished">Угол</translation>
     </message>
     <message>
         <source>Value of angle</source>
-        <translation>Значение угла</translation>
+        <translation type="vanished">Значение угла</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1588,7 +2108,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Axis point</source>
-        <translation>Точка оси</translation>
+        <translation type="vanished">Точка оси</translation>
     </message>
     <message>
         <source>First point of line</source>
@@ -1596,19 +2116,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First line point</source>
-        <translation>Первая точка линии</translation>
+        <translation type="vanished">Первая точка линии</translation>
     </message>
     <message>
         <source>Second line point</source>
-        <translation>Вторая точка линии</translation>
+        <translation type="vanished">Вторая точка линии</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Тип линии</translation>
+        <translation type="vanished">Тип линии</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
@@ -1636,11 +2156,59 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Цвет линии</translation>
+        <translation type="vanished">Цвет линии</translation>
     </message>
     <message>
         <source>Edit angle</source>
         <translation>Редактрировать угол</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1806,7 +2374,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation>Название чертежа</translation>
+        <translation type="vanished">Название чертежа</translation>
     </message>
     <message>
         <source>Units:</source>
@@ -1824,16 +2392,28 @@ Apply settings anyway?</source>
         <source>Inches</source>
         <translation>Дюймы</translation>
     </message>
+    <message>
+        <source>Pattern piece name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique pattern piece name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique pattern piece name.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNormal</name>
     <message>
         <source>Length</source>
-        <translation>Длина</translation>
+        <translation type="vanished">Длина</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Значение длины</translation>
+        <translation type="vanished">Значение длины</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1841,27 +2421,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Первая точка</translation>
+        <translation type="vanished">Первая точка</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Вторая точка</translation>
+        <translation type="vanished">Вторая точка</translation>
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation>Доп. угол градусы</translation>
+        <translation type="vanished">Доп. угол градусы</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Тип линии</translation>
+        <translation type="vanished">Тип линии</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Показать линию от первой точки до этой</translation>
+        <translation type="vanished">Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1873,19 +2453,67 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Первая точка линии</translation>
+        <translation type="vanished">Первая точка линии</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Вторая точка линии</translation>
+        <translation type="vanished">Вторая точка линии</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Цвет линии</translation>
+        <translation type="vanished">Цвет линии</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Редактировать длину</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional angle degrees:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1921,6 +2549,26 @@ Apply settings anyway?</source>
     <message>
         <source>All sizes (cm)</source>
         <translation>Все размеры (см)</translation>
+    </message>
+    <message>
+        <source>Default height and size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>From standard measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Высота:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2066,27 +2714,51 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Метка точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Tangent point</source>
-        <translation>Точка касательной</translation>
+        <translation type="vanished">Точка касательной</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation>Дуга</translation>
+        <translation type="vanished">Дуга</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Выберите точку центра дуги</translation>
+        <translation type="vanished">Выберите точку центра дуги</translation>
     </message>
     <message>
         <source>Take</source>
-        <translation>Взять</translation>
+        <translation type="vanished">Взять</translation>
     </message>
     <message>
         <source>Select an arc</source>
         <translation>Выберите дугу</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2097,7 +2769,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Радиус</translation>
+        <translation type="vanished">Радиус</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2105,23 +2777,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Метка точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Center of the circle</source>
-        <translation>Центр окружности</translation>
+        <translation type="vanished">Центр окружности</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Выберите точку центра дуги</translation>
+        <translation type="vanished">Выберите точку центра дуги</translation>
     </message>
     <message>
         <source>Tangent point</source>
-        <translation>Точка касательной</translation>
+        <translation type="vanished">Точка касательной</translation>
     </message>
     <message>
         <source>Take</source>
-        <translation>Взять</translation>
+        <translation type="vanished">Взять</translation>
     </message>
     <message>
         <source>Select a circle center</source>
@@ -2139,16 +2811,56 @@ Apply settings anyway?</source>
         <source>Radius can&apos;t be negative</source>
         <translation>Значение радиуса не может быть отрицательным</translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfContact</name>
     <message>
         <source>Radius</source>
-        <translation>Радиус</translation>
+        <translation type="vanished">Радиус</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation>Значение радиуса</translation>
+        <translation type="vanished">Значение радиуса</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2156,11 +2868,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>Center of arc</source>
-        <translation>Центр дуги</translation>
+        <translation type="vanished">Центр дуги</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
@@ -2168,11 +2880,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Top of the line</source>
-        <translation>Начало линии</translation>
+        <translation type="vanished">Начало линии</translation>
     </message>
     <message>
         <source>End of the line</source>
-        <translation>Конец линии</translation>
+        <translation type="vanished">Конец линии</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2186,20 +2898,60 @@ Apply settings anyway?</source>
         <source>Edit radius</source>
         <translation>Редактировать радиус</translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top of the line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of the line:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point of angle</source>
-        <translation>Первая точка угла</translation>
+        <translation type="vanished">Первая точка угла</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation>Вторая точка угла</translation>
+        <translation type="vanished">Вторая точка угла</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
@@ -2207,15 +2959,35 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>X: vertical point</source>
-        <translation>Х: вертикальная точка</translation>
+        <translation type="vanished">Х: вертикальная точка</translation>
     </message>
     <message>
         <source>Y: horizontal point</source>
-        <translation>Y: горизонтальная точка</translation>
+        <translation type="vanished">Y: горизонтальная точка</translation>
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
         <translation>Выберите точку по горозинтали</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X: vertical point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y: horizontal point:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2226,27 +2998,51 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Метка точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>First arc</source>
-        <translation>Первая дуга</translation>
+        <translation type="vanished">Первая дуга</translation>
     </message>
     <message>
         <source>Selected arc</source>
-        <translation>Выбранная дуга</translation>
+        <translation type="vanished">Выбранная дуга</translation>
     </message>
     <message>
         <source>Second arc</source>
-        <translation>Вторая дуга</translation>
+        <translation type="vanished">Вторая дуга</translation>
     </message>
     <message>
         <source>Take</source>
-        <translation>Взять</translation>
+        <translation type="vanished">Взять</translation>
     </message>
     <message>
         <source>Select second an arc</source>
         <translation>Выберите вторую дугу</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2257,7 +3053,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius of the first circle</source>
-        <translation>Радиус первой окружности</translation>
+        <translation type="vanished">Радиус первой окружности</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2265,27 +3061,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius of the second circle</source>
-        <translation>Радиус второй окружности</translation>
+        <translation type="vanished">Радиус второй окружности</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Метка точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Center of the first circle</source>
-        <translation>Центр первой окружности</translation>
+        <translation type="vanished">Центр первой окружности</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Выберите точку центра дуги</translation>
+        <translation type="vanished">Выберите точку центра дуги</translation>
     </message>
     <message>
         <source>Center of the second circle</source>
-        <translation>Центр второй окружности</translation>
+        <translation type="vanished">Центр второй окружности</translation>
     </message>
     <message>
         <source>Take</source>
-        <translation>Взять</translation>
+        <translation type="vanished">Взять</translation>
     </message>
     <message>
         <source>Select second circle center</source>
@@ -2306,6 +3102,50 @@ Apply settings anyway?</source>
     <message>
         <source>Radius can&apos;t be negative</source>
         <translation>Значение радиуса не может быть отрицательным</translation>
+    </message>
+    <message>
+        <source>Radius of the first circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius of the second circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the first circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the second circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2333,6 +3173,26 @@ Apply settings anyway?</source>
     <message>
         <source>TextLabel</source>
         <translation>ТекстоваяМетка</translation>
+    </message>
+    <message>
+        <source>Destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to destination folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path to destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File base name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File base name. </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2391,22 +3251,26 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The base filename has not match regular expression.</source>
-        <translation>Базовое имя файла не соответствует регулярному выражению.</translation>
+        <translation type="vanished">Базовое имя файла не соответствует регулярному выражению.</translation>
     </message>
     <message>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation>Каталог назначения не существует или не может быть прочитан.</translation>
+    </message>
+    <message>
+        <source>The base filename does not match a regular expression.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogShoulderPoint</name>
     <message>
         <source>Length</source>
-        <translation>Длина</translation>
+        <translation type="vanished">Длина</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Значение длины</translation>
+        <translation type="vanished">Значение длины</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2414,27 +3278,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Первая точка</translation>
+        <translation type="vanished">Первая точка</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Вторая точка</translation>
+        <translation type="vanished">Вторая точка</translation>
     </message>
     <message>
         <source>Third point</source>
-        <translation>Третья точка</translation>
+        <translation type="vanished">Третья точка</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Тип линии</translation>
+        <translation type="vanished">Тип линии</translation>
     </message>
     <message>
         <source>Show line from first point to our point</source>
-        <translation>Показать линию от первой точки к нашей</translation>
+        <translation type="vanished">Показать линию от первой точки к нашей</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -2450,11 +3314,59 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Цвет линии</translation>
+        <translation type="vanished">Цвет линии</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Редактировать длину</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2482,6 +3394,14 @@ Apply settings anyway?</source>
     <message>
         <source>Point label</source>
         <translation>Имя точки</translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2512,7 +3432,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
-        <translation>Коэффициент кривизны кривой</translation>
+        <translation type="vanished">Коэффициент кривизны кривой</translation>
     </message>
     <message>
         <source>Select last point of curve</source>
@@ -2524,7 +3444,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color</source>
-        <translation>Цвет</translation>
+        <translation type="vanished">Цвет</translation>
+    </message>
+    <message>
+        <source>Coefficient of curvature of the curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2559,7 +3487,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
-        <translation>Коэффициент кривизны кривой</translation>
+        <translation type="vanished">Коэффициент кривизны кривой</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
@@ -2567,7 +3495,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color</source>
-        <translation>Цвет</translation>
+        <translation type="vanished">Цвет</translation>
+    </message>
+    <message>
+        <source>Coefficient of curvature of the curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2605,27 +3541,27 @@ Apply settings anyway?</source>
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation type="vanished">Имя точки</translation>
     </message>
     <message>
         <source>First point of axis</source>
-        <translation>Первая точка оси</translation>
+        <translation type="vanished">Первая точка оси</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Первая точка линии</translation>
+        <translation type="vanished">Первая точка линии</translation>
     </message>
     <message>
         <source>Second point of axis</source>
-        <translation>Вторая точка оси</translation>
+        <translation type="vanished">Вторая точка оси</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Первая точка</translation>
+        <translation type="vanished">Первая точка</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Вторая точка</translation>
+        <translation type="vanished">Вторая точка</translation>
     </message>
     <message>
         <source>Select second point of axis</source>
@@ -2645,15 +3581,43 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point of the axis</source>
-        <translation>Первая точка оси</translation>
+        <translation type="vanished">Первая точка оси</translation>
     </message>
     <message>
         <source>Second point of the axis</source>
-        <translation>Вторая точка оси</translation>
+        <translation type="vanished">Вторая точка оси</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Вторая точка линии</translation>
+        <translation type="vanished">Вторая точка линии</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of axis:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of axis:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2664,47 +3628,47 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First base point</source>
-        <translation>Первая базовая точка</translation>
+        <translation type="vanished">Первая базовая точка</translation>
     </message>
     <message>
         <source>First point of angle</source>
-        <translation>Первая точка угла</translation>
+        <translation type="vanished">Первая точка угла</translation>
     </message>
     <message>
         <source>Second base point</source>
-        <translation>Вторая базовая точка</translation>
+        <translation type="vanished">Вторая базовая точка</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation>Вторая точка угла</translation>
+        <translation type="vanished">Вторая точка угла</translation>
     </message>
     <message>
         <source>First dart point</source>
-        <translation>Первая точка вытачки</translation>
+        <translation type="vanished">Первая точка вытачки</translation>
     </message>
     <message>
         <source>Third point of angle</source>
-        <translation>Третья точка угла</translation>
+        <translation type="vanished">Третья точка угла</translation>
     </message>
     <message>
         <source>Second dart point</source>
-        <translation>Вторая точка вытачки</translation>
+        <translation type="vanished">Вторая точка вытачки</translation>
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation>Показать линию от второй точки в этой точке</translation>
+        <translation type="vanished">Показать линию от второй точки в этой точке</translation>
     </message>
     <message>
         <source>Third dart point</source>
-        <translation>Третья точка вытачки</translation>
+        <translation type="vanished">Третья точка вытачки</translation>
     </message>
     <message>
         <source>First new dart point</source>
-        <translation>Первая точка вытачки</translation>
+        <translation type="vanished">Первая точка вытачки</translation>
     </message>
     <message>
         <source>Second new dart point</source>
-        <translation>Вторая точка вытачки</translation>
+        <translation type="vanished">Вторая точка вытачки</translation>
     </message>
     <message>
         <source>Select the second base point</source>
@@ -2721,6 +3685,42 @@ Apply settings anyway?</source>
     <message>
         <source>Select the third dart point</source>
         <translation>Выберите третью точку вытачки</translation>
+    </message>
+    <message>
+        <source>First base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First new dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second new dart point:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3756,6 +4756,26 @@ Do you want to save your changes?</source>
         <source>True darts</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create/Edit measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -3918,7 +4938,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>User name</source>
-        <translation>Имя пользователя</translation>
+        <translation type="vanished">Имя пользователя</translation>
     </message>
     <message>
         <source>Graphical output</source>
@@ -3934,7 +4954,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Count steps (0 - no limit)</source>
-        <translation>Количество шагов (0 - без ограничений)</translation>
+        <translation type="vanished">Количество шагов (0 - без ограничений)</translation>
+    </message>
+    <message>
+        <source>User name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit):</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4341,7 +5369,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path to file</source>
-        <translation>Расположение файла</translation>
+        <translation type="vanished">Расположение файла</translation>
     </message>
     <message>
         <source>Show in Explorer</source>
@@ -4667,7 +5695,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Name in formula</source>
-        <translation>Имя в формуле</translation>
+        <translation type="vanished">Имя в формуле</translation>
     </message>
     <message>
         <source>Function Wizard</source>
@@ -4744,6 +5772,42 @@ Do you want to save your changes?</source>
         <source>File was not saved yet.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement&apos;s name in a formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement&apos;s name in a formula.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement&apos;s human-readable name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -4780,7 +5844,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>GUI language</source>
-        <translation>Язык интерфейса</translation>
+        <translation type="vanished">Язык интерфейса</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -4796,11 +5860,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation>Разделитель десятичной части</translation>
+        <translation type="vanished">Разделитель десятичной части</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
         <translation>С опциями ОС (%1)</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default height and size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default size:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5283,7 +6371,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not load schema file.</source>
-        <translation>Неудалось открыть файл схемы.</translation>
+        <translation type="vanished">Неудалось открыть файл схемы.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
@@ -5312,6 +6400,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Could not remove document file</source>
         <translation>Не удалось удалить файл документа</translation>
+    </message>
+    <message>
+        <source>Could not load schema file &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

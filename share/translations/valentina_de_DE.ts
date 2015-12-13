@@ -37,7 +37,7 @@
     </message>
     <message>
         <source>Server name/IP</source>
-        <translation>Servername/IP</translation>
+        <translation type="vanished">Servername/IP</translation>
     </message>
     <message>
         <source>Secure connection</source>
@@ -53,19 +53,19 @@
     </message>
     <message>
         <source>Proxy address</source>
-        <translation>Proxyadresse</translation>
+        <translation type="vanished">Proxyadresse</translation>
     </message>
     <message>
         <source>Proxy port</source>
-        <translation>Proxyport</translation>
+        <translation type="vanished">Proxyport</translation>
     </message>
     <message>
         <source>Proxy user</source>
-        <translation>Proxybenutzer</translation>
+        <translation type="vanished">Proxybenutzer</translation>
     </message>
     <message>
         <source>Proxy pass</source>
-        <translation>Proxy Passwort</translation>
+        <translation type="vanished">Proxy Passwort</translation>
     </message>
     <message>
         <source>User settings</source>
@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>User Name</source>
-        <translation>Benutzername</translation>
+        <translation type="vanished">Benutzername</translation>
     </message>
     <message>
         <source>Save password</source>
@@ -81,7 +81,35 @@
     </message>
     <message>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation type="vanished">Passwort</translation>
+    </message>
+    <message>
+        <source>Server name/IP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy user:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy pass:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -151,11 +179,11 @@
     </message>
     <message>
         <source>GUI language</source>
-        <translation>GUI Sprache</translation>
+        <translation type="vanished">GUI Sprache</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation>Dezimaltrennzeichen</translation>
+        <translation type="vanished">Dezimaltrennzeichen</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
@@ -163,7 +191,7 @@
     </message>
     <message>
         <source>Default unit</source>
-        <translation>Standard-Maßeinheit</translation>
+        <translation type="vanished">Standard-Maßeinheit</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -179,7 +207,7 @@
     </message>
     <message>
         <source>Label language</source>
-        <translation>Sprache für Label</translation>
+        <translation type="vanished">Sprache für Label</translation>
     </message>
     <message>
         <source>Send crash reports</source>
@@ -208,6 +236,22 @@
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
         <translation>Der Text wird unter dem Symbol angezeigt (empfohlen für Anfänger). </translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label language:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -266,11 +310,11 @@
     <name>DialogAboutTape</name>
     <message>
         <source>About Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>Über Tape</translation>
     </message>
     <message>
         <source>Tape version</source>
-        <translation type="unfinished"></translation>
+        <translation>Tape Version</translation>
     </message>
     <message>
         <source>Build revision:</source>
@@ -301,11 +345,11 @@
     <name>DialogAlongLine</name>
     <message>
         <source>Length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -313,31 +357,31 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Erster Punkt</translation>
+        <translation type="vanished">Erster Punkt</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Erster Punkt der Linie</translation>
+        <translation type="vanished">Erster Punkt der Linie</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Zweiter Punkt</translation>
+        <translation type="vanished">Zweiter Punkt</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Zweiter Punkt der Linie</translation>
+        <translation type="vanished">Zweiter Punkt der Linie</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Linientyp</translation>
+        <translation type="vanished">Linientyp</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Linie vom ersten zu diesem Punkt zeigen</translation>
+        <translation type="vanished">Linie vom ersten zu diesem Punkt zeigen</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -349,11 +393,63 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="vanished">Linienfarbe</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Länge ändern</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of the line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of the line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -364,11 +460,11 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation>Radius</translation>
+        <translation type="vanished">Radius</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation>Wert des Radius</translation>
+        <translation type="vanished">Wert des Radius</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -376,27 +472,27 @@
     </message>
     <message>
         <source>First angle</source>
-        <translation>Erster Winkel</translation>
+        <translation type="vanished">Erster Winkel</translation>
     </message>
     <message>
         <source>Value of first angle</source>
-        <translation>Wert des ersten Winkels</translation>
+        <translation type="vanished">Wert des ersten Winkels</translation>
     </message>
     <message>
         <source>Second angle</source>
-        <translation>Zweiter Winkel</translation>
+        <translation type="vanished">Zweiter Winkel</translation>
     </message>
     <message>
         <source>Value of second angle</source>
-        <translation>Wert des zweiten Winkels</translation>
+        <translation type="vanished">Wert des zweiten Winkels</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation>Mittelpunkt</translation>
+        <translation type="vanished">Mittelpunkt</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Mittelpunkt des Bogens auswählen</translation>
+        <translation type="vanished">Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
         <source>Error</source>
@@ -412,7 +508,7 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -426,6 +522,46 @@
         <source>Edit second angle</source>
         <translation>Zweiten Winkel bearbeiten</translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select center point of the arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -435,11 +571,11 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation>Radius</translation>
+        <translation type="vanished">Radius</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation>Wert des Radius</translation>
+        <translation type="vanished">Wert des Radius</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -447,31 +583,31 @@
     </message>
     <message>
         <source>First angle</source>
-        <translation>Erster Winkel</translation>
+        <translation type="vanished">Erster Winkel</translation>
     </message>
     <message>
         <source>Value of first angle</source>
-        <translation>Wert des ersten Winkels</translation>
+        <translation type="vanished">Wert des ersten Winkels</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation>BogenlÃ¤nge</translation>
+        <translation type="vanished">BogenlÃ¤nge</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation>Mittelpunkt</translation>
+        <translation type="vanished">Mittelpunkt</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Mittelpunkt des Bogens auswählen</translation>
+        <translation type="vanished">Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -497,16 +633,48 @@
         <source>Length can&apos;t be equal 0</source>
         <translation>Länge kann nicht gleich 0 sein.</translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogBisector</name>
     <message>
         <source>Length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -514,39 +682,39 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Erster Punkt</translation>
+        <translation type="vanished">Erster Punkt</translation>
     </message>
     <message>
         <source>First point of angle</source>
-        <translation>Punkt der ersten Schenkelgeraden</translation>
+        <translation type="vanished">Punkt der ersten Schenkelgeraden</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Zweiter Punkt</translation>
+        <translation type="vanished">Zweiter Punkt</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation>Scheitel des Winkels</translation>
+        <translation type="vanished">Scheitel des Winkels</translation>
     </message>
     <message>
         <source>Third point</source>
-        <translation>Punkt der zweiten Scheitelgeraden</translation>
+        <translation type="vanished">Punkt der zweiten Scheitelgeraden</translation>
     </message>
     <message>
         <source>Third point of angle</source>
-        <translation>Punkt der zweiten Schenkelgeraden</translation>
+        <translation type="vanished">Punkt der zweiten Schenkelgeraden</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Linientyp</translation>
+        <translation type="vanished">Linientyp</translation>
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation>Zeige Linie vom Scheitelpunkt zu diesem Punkt </translation>
+        <translation type="vanished">Zeige Linie vom Scheitelpunkt zu diesem Punkt </translation>
     </message>
     <message>
         <source>Select second point of angle</source>
@@ -562,22 +730,70 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="vanished">Linienfarbe</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Länge ändern</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogCurveIntersectAxis</name>
     <message>
         <source>Angle</source>
-        <translation>Winkel</translation>
+        <translation type="vanished">Winkel</translation>
     </message>
     <message>
         <source>Value of angle</source>
-        <translation>Berecheter Winkel</translation>
+        <translation type="vanished">Berecheter Winkel</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -585,23 +801,23 @@
     </message>
     <message>
         <source>Axis point</source>
-        <translation>Punkt der Schnittachse</translation>
+        <translation type="vanished">Punkt der Schnittachse</translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation>Kurve</translation>
+        <translation type="vanished">Kurve</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Linientyp</translation>
+        <translation type="vanished">Linientyp</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
+        <translation type="vanished">Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -613,26 +829,70 @@
     </message>
     <message>
         <source>Axis Point</source>
-        <translation>Punkt der Schnittachse</translation>
+        <translation type="vanished">Punkt der Schnittachse</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="vanished">Linienfarbe</translation>
     </message>
     <message>
         <source>Edit angle</source>
         <translation>Winkel bearbeiten</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogCutArc</name>
     <message>
         <source>Length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -640,11 +900,11 @@
     </message>
     <message>
         <source>Arc</source>
-        <translation>Bogen</translation>
+        <translation type="vanished">Bogen</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -652,26 +912,62 @@
     </message>
     <message>
         <source>Selected arc</source>
-        <translation>Ausgewählter Bogen</translation>
+        <translation type="vanished">Ausgewählter Bogen</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Länge ändern</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogCutSpline</name>
     <message>
         <source>Length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -679,15 +975,15 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation>Kurve</translation>
+        <translation type="vanished">Kurve</translation>
     </message>
     <message>
         <source>Selected curve</source>
-        <translation>Ausgewählte Kurve</translation>
+        <translation type="vanished">Ausgewählte Kurve</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -695,22 +991,58 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Länge ändern</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogCutSplinePath</name>
     <message>
         <source>Length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -718,15 +1050,15 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation>Kurve</translation>
+        <translation type="vanished">Kurve</translation>
     </message>
     <message>
         <source>Selected curve path</source>
-        <translation>Ausgewählter Kurvenpfad</translation>
+        <translation type="vanished">Ausgewählter Kurvenpfad</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -734,11 +1066,47 @@
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Länge ändern</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -749,7 +1117,7 @@
     </message>
     <message>
         <source>Bias X</source>
-        <translation>Bias X</translation>
+        <translation type="vanished">Bias X</translation>
     </message>
     <message>
         <source>cm</source>
@@ -757,7 +1125,7 @@
     </message>
     <message>
         <source>Bias Y</source>
-        <translation>Bias Y</translation>
+        <translation type="vanished">Bias Y</translation>
     </message>
     <message>
         <source>Options</source>
@@ -765,7 +1133,7 @@
     </message>
     <message>
         <source>Name of detail</source>
-        <translation>Name des Details</translation>
+        <translation type="vanished">Name des Details</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -773,7 +1141,7 @@
     </message>
     <message>
         <source>Width</source>
-        <translation>Breite</translation>
+        <translation type="vanished">Breite</translation>
     </message>
     <message>
         <source>Closed</source>
@@ -831,6 +1199,22 @@
         <source>You have to choose points in a clockwise direction!</source>
         <translation>Sie müssen Punkte im Uhrzeigersinn wählen!</translation>
     </message>
+    <message>
+        <source>Bias X:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bias Y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished">Breite:</translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -840,7 +1224,7 @@
     </message>
     <message>
         <source>Formula</source>
-        <translation>Formel</translation>
+        <translation type="vanished">Formel</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
@@ -848,7 +1232,7 @@
     </message>
     <message>
         <source>Value of first angle</source>
-        <translation>Wert des ersten Winkels</translation>
+        <translation type="vanished">Wert des ersten Winkels</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -942,16 +1326,28 @@
         <source>Curve angle</source>
         <translation>Kurvenwinkel</translation>
     </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished">Formel:</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
     <message>
         <source>Length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -959,31 +1355,31 @@
     </message>
     <message>
         <source>Angle</source>
-        <translation>Winkel</translation>
+        <translation type="vanished">Winkel</translation>
     </message>
     <message>
         <source>Value of angle</source>
-        <translation>Berechneter Winkel</translation>
+        <translation type="vanished">Berechneter Winkel</translation>
     </message>
     <message>
         <source>Base point</source>
-        <translation>Startpunkt</translation>
+        <translation type="vanished">Startpunkt</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Erster Punkt der Linie</translation>
+        <translation type="vanished">Erster Punkt der Linie</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Linientyp</translation>
+        <translation type="vanished">Linientyp</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Linie vom ersten zu diesem Punkt zeigen</translation>
+        <translation type="vanished">Linie vom ersten zu diesem Punkt zeigen</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -991,7 +1387,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="vanished">Linienfarbe</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -1001,32 +1397,76 @@
         <source>Edit length</source>
         <translation>Länge ändern</translation>
     </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Base point</source>
-        <translation>Startpunkt</translation>
+        <translation type="vanished">Startpunkt</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Erster Punkt der Linie</translation>
+        <translation type="vanished">Erster Punkt der Linie</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Zweiter Punkt der Linie</translation>
+        <translation type="vanished">Zweiter Punkt der Linie</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Linientyp</translation>
+        <translation type="vanished">Linientyp</translation>
     </message>
     <message>
         <source>Show line from first point to our point</source>
-        <translation>Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
+        <translation type="vanished">Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -1042,11 +1482,43 @@
     </message>
     <message>
         <source>Base Point</source>
-        <translation>Basispunkt</translation>
+        <translation type="vanished">Basispunkt</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="vanished">Linienfarbe</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1298,6 +1770,18 @@
         <source>Edit increment</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unique increment name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLayoutProgress</name>
@@ -1315,7 +1799,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Positionen der Teile werden berechnet. Bitte warten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
@@ -1374,7 +1858,7 @@
     </message>
     <message>
         <source>Descending area</source>
-        <translation type="unfinished"></translation>
+        <translation>Absteigender Bereich</translation>
     </message>
     <message>
         <source>Millimiters</source>
@@ -1442,7 +1926,7 @@
     </message>
     <message>
         <source>Paper format</source>
-        <translation type="unfinished"></translation>
+        <translation>Papierformat</translation>
     </message>
     <message>
         <source>Fields</source>
@@ -1494,19 +1978,19 @@ Apply settings anyway?</source>
     <name>DialogLine</name>
     <message>
         <source>First point</source>
-        <translation>Erster Punkt</translation>
+        <translation type="vanished">Erster Punkt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Zweiter Punkt</translation>
+        <translation type="vanished">Zweiter Punkt</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Linientyp</translation>
+        <translation type="vanished">Linientyp</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Linie vom ersten zu diesem Punkt zeigen</translation>
+        <translation type="vanished">Linie vom ersten zu diesem Punkt zeigen</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -1518,14 +2002,30 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="vanished">Linienfarbe</translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>First line</source>
@@ -1533,11 +2033,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation>Erster Punkt</translation>
+        <translation type="vanished">Erster Punkt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Zweiter Punkt</translation>
+        <translation type="vanished">Zweiter Punkt</translation>
     </message>
     <message>
         <source>Second line</source>
@@ -1559,16 +2059,36 @@ Apply settings anyway?</source>
         <source>Point at line intersection</source>
         <translation>Linienschnittpunkt</translation>
     </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersectAxis</name>
     <message>
         <source>Angle</source>
-        <translation>Winkel</translation>
+        <translation type="vanished">Winkel</translation>
     </message>
     <message>
         <source>Value of angle</source>
-        <translation>Berechneter Winkel</translation>
+        <translation type="vanished">Berechneter Winkel</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1576,7 +2096,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Axis point</source>
-        <translation>Punkt der Schnittachse</translation>
+        <translation type="vanished">Punkt der Schnittachse</translation>
     </message>
     <message>
         <source>First point of line</source>
@@ -1584,19 +2104,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First line point</source>
-        <translation>Punkt 1 der Linie</translation>
+        <translation type="vanished">Punkt 1 der Linie</translation>
     </message>
     <message>
         <source>Second line point</source>
-        <translation>Punkt 2 der Linie</translation>
+        <translation type="vanished">Punkt 2 der Linie</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Linientyp</translation>
+        <translation type="vanished">Linientyp</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
@@ -1612,7 +2132,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point intersect line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt schneidet Linie und Achse</translation>
     </message>
     <message>
         <source>Axis Point</source>
@@ -1624,18 +2144,66 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="vanished">Linienfarbe</translation>
     </message>
     <message>
         <source>Edit angle</source>
         <translation>Winkel bearbeiten</translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogMDataBase</name>
     <message>
         <source>Measurement data base</source>
-        <translation type="unfinished"></translation>
+        <translation>Maße-Datenbank</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -1724,7 +2292,7 @@ Apply settings anyway?</source>
     <message>
         <source>Patternmaking measurements</source>
         <comment>Measurement section</comment>
-        <translation type="unfinished"></translation>
+        <translation>Schnittmuster Maße</translation>
     </message>
     <message>
         <source>Collapse All</source>
@@ -1794,7 +2362,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Schnitteil-Name</translation>
     </message>
     <message>
         <source>Units:</source>
@@ -1812,16 +2380,28 @@ Apply settings anyway?</source>
         <source>Inches</source>
         <translation>Zoll</translation>
     </message>
+    <message>
+        <source>Pattern piece name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique pattern piece name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique pattern piece name.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNormal</name>
     <message>
         <source>Length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1829,27 +2409,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Erster Punkt</translation>
+        <translation type="vanished">Erster Punkt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Zweiter Punkt</translation>
+        <translation type="vanished">Zweiter Punkt</translation>
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation>Zusätzlicher Winkel</translation>
+        <translation type="vanished">Zusätzlicher Winkel</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Linientyp</translation>
+        <translation type="vanished">Linientyp</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Linie vom ersten zu diesem Punkt zeigen</translation>
+        <translation type="vanished">Linie vom ersten zu diesem Punkt zeigen</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1861,19 +2441,67 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Erster Punkt der Linie</translation>
+        <translation type="vanished">Erster Punkt der Linie</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Zweiter Punkt der Linie</translation>
+        <translation type="vanished">Zweiter Punkt der Linie</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="vanished">Linienfarbe</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Länge ändern</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional angle degrees:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1900,14 +2528,34 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Heights and Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Längen und Größen</translation>
     </message>
     <message>
         <source>All heights (cm)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Längen (cm)</translation>
     </message>
     <message>
         <source>All sizes (cm)</source>
+        <translation>Alle Größen (cm)</translation>
+    </message>
+    <message>
+        <source>Default height and size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>From standard measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished">Höhe:</translation>
+    </message>
+    <message>
+        <source>Size:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2054,26 +2702,42 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
-    </message>
-    <message>
-        <source>Tangent point</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation>Bogen</translation>
+        <translation type="vanished">Bogen</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Mittelpunkt des Bogens auswählen</translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
         <source>Select an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2085,7 +2749,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Radius</translation>
+        <translation type="vanished">Radius</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2093,23 +2757,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
-    </message>
-    <message>
-        <source>Center of the circle</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Mittelpunkt des Bogens auswählen</translation>
-    </message>
-    <message>
-        <source>Tangent point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
         <source>Select a circle center</source>
@@ -2127,16 +2779,56 @@ Apply settings anyway?</source>
         <source>Radius can&apos;t be negative</source>
         <translation>Radius kann nicht negativ sein</translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfContact</name>
     <message>
         <source>Radius</source>
-        <translation>Radius</translation>
+        <translation type="vanished">Radius</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation>Wert des Radius</translation>
+        <translation type="vanished">Wert des Radius</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2144,11 +2836,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Center of arc</source>
-        <translation>Mittelpunkt des Bogens</translation>
+        <translation type="vanished">Mittelpunkt des Bogens</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
@@ -2156,11 +2848,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Top of the line</source>
-        <translation>Anfang der Linie</translation>
+        <translation type="vanished">Anfang der Linie</translation>
     </message>
     <message>
         <source>End of the line</source>
-        <translation>Ende der Linie</translation>
+        <translation type="vanished">Ende der Linie</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2174,35 +2866,95 @@ Apply settings anyway?</source>
         <source>Edit radius</source>
         <translation>Radius verändern</translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top of the line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of the line:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>First point of angle</source>
-        <translation>Punkt der ersten Schenkelgeraden</translation>
+        <translation type="vanished">Punkt der ersten Schenkelgeraden</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation>Scheitel des Winkels</translation>
+        <translation type="vanished">Scheitel des Winkels</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt von X und Y zwei anderer Punkte</translation>
     </message>
     <message>
         <source>X: vertical point</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">X: vertikaler Punkt</translation>
     </message>
     <message>
         <source>Y: horizontal point</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Y: horizontaler Punkt</translation>
     </message>
     <message>
         <source>Select point for Y value (horizontal)</source>
+        <translation>Punkt für Y-Wert (horizontal) auswählen</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X: vertical point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y: horizontal point:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2214,26 +2966,38 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
-    </message>
-    <message>
-        <source>First arc</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Selected arc</source>
-        <translation>Ausgewählter Bogen</translation>
-    </message>
-    <message>
-        <source>Second arc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ausgewählter Bogen</translation>
     </message>
     <message>
         <source>Select second an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2244,36 +3008,16 @@ Apply settings anyway?</source>
         <translation>Dialog</translation>
     </message>
     <message>
-        <source>Radius of the first circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Radius of the second circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
-    </message>
-    <message>
-        <source>Center of the first circle</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>Mittelpunkt des Bogens auswählen</translation>
-    </message>
-    <message>
-        <source>Center of the second circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
         <source>Select second circle center</source>
@@ -2294,6 +3038,50 @@ Apply settings anyway?</source>
     <message>
         <source>Radius can&apos;t be negative</source>
         <translation>Radius kann nicht negativ sein</translation>
+    </message>
+    <message>
+        <source>Radius of the first circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius of the second circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the first circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the second circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2322,12 +3110,32 @@ Apply settings anyway?</source>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to destination folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path to destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File base name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File base name. </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLayout</name>
     <message>
         <source>Name conflict</source>
-        <translation type="unfinished"></translation>
+        <translation>Namenskonflikt</translation>
     </message>
     <message>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
@@ -2378,11 +3186,11 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The base filename has not match regular expression.</source>
+        <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The destination directory doesn&apos;t exists or is not readable.</source>
+        <source>The base filename does not match a regular expression.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2390,11 +3198,11 @@ Apply settings anyway?</source>
     <name>DialogShoulderPoint</name>
     <message>
         <source>Length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Länge</translation>
+        <translation type="vanished">Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2402,27 +3210,27 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Erster Punkt</translation>
+        <translation type="vanished">Erster Punkt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Zweiter Punkt</translation>
+        <translation type="vanished">Zweiter Punkt</translation>
     </message>
     <message>
         <source>Third point</source>
-        <translation>Dritter Punkt</translation>
+        <translation type="vanished">Dritter Punkt</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Linientyp</translation>
+        <translation type="vanished">Linientyp</translation>
     </message>
     <message>
         <source>Show line from first point to our point</source>
-        <translation>Zeige linie vom ersten punkt zu diesem Punkt</translation>
+        <translation type="vanished">Zeige linie vom ersten punkt zu diesem Punkt</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -2438,11 +3246,59 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Line color</source>
-        <translation>Linienfarbe</translation>
+        <translation type="vanished">Linienfarbe</translation>
     </message>
     <message>
         <source>Edit length</source>
         <translation>Länge ändern</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2470,6 +3326,14 @@ Apply settings anyway?</source>
     <message>
         <source>Point label</source>
         <translation>Bezeichnung des Punktes</translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2500,7 +3364,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
-        <translation>Koeffizient für die Krümmung der Kurve</translation>
+        <translation type="vanished">Koeffizient für die Krümmung der Kurve</translation>
     </message>
     <message>
         <source>Select last point of curve</source>
@@ -2512,7 +3376,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
+    </message>
+    <message>
+        <source>Coefficient of curvature of the curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2547,7 +3419,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
-        <translation>Koeffizient für die Krümmung der Kurve</translation>
+        <translation type="vanished">Koeffizient für die Krümmung der Kurve</translation>
     </message>
     <message>
         <source>Select point of curve path</source>
@@ -2555,7 +3427,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
+    </message>
+    <message>
+        <source>Coefficient of curvature of the curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2593,27 +3473,27 @@ Apply settings anyway?</source>
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation type="vanished">Bezeichnung des Punktes</translation>
     </message>
     <message>
         <source>First point of axis</source>
-        <translation>Erster Punkt der Achse</translation>
+        <translation type="vanished">Erster Punkt der Achse</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Erster Punkt der Linie</translation>
+        <translation type="vanished">Erster Punkt der Linie</translation>
     </message>
     <message>
         <source>Second point of axis</source>
-        <translation>Zweiter Punkt der Achse</translation>
+        <translation type="vanished">Zweiter Punkt der Achse</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Erster Punkt</translation>
+        <translation type="vanished">Erster Punkt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Zweiter Punkt</translation>
+        <translation type="vanished">Zweiter Punkt</translation>
     </message>
     <message>
         <source>Select second point of axis</source>
@@ -2633,15 +3513,43 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point of the axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Erster Punkt der Achse</translation>
     </message>
     <message>
         <source>Second point of the axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Zweiter Punkt der Achse</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>Zweiter Punkt der Linie</translation>
+        <translation type="vanished">Zweiter Punkt der Linie</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of axis:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of axis:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2651,48 +3559,20 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>First base point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>First point of angle</source>
-        <translation>Punkt der ersten Schenkelgeraden</translation>
-    </message>
-    <message>
-        <source>Second base point</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Punkt der ersten Schenkelgeraden</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation>Scheitel des Winkels</translation>
-    </message>
-    <message>
-        <source>First dart point</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Scheitel des Winkels</translation>
     </message>
     <message>
         <source>Third point of angle</source>
-        <translation>Punkt der zweiten Schenkelgeraden</translation>
-    </message>
-    <message>
-        <source>Second dart point</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Punkt der zweiten Schenkelgeraden</translation>
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation>Zeige Linie vom Scheitelpunkt zu diesem Punkt </translation>
-    </message>
-    <message>
-        <source>Third dart point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>First new dart point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Second new dart point</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Zeige Linie vom Scheitelpunkt zu diesem Punkt </translation>
     </message>
     <message>
         <source>Select the second base point</source>
@@ -2708,6 +3588,42 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select the third dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First new dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second new dart point:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2742,23 +3658,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Union tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Vereinigen-Werkzeug</translation>
     </message>
     <message>
         <source>Select a first point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersten Punkt auswählen</translation>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Rohling sollte mindestens zwei Punkte und drei Objekte</translation>
     </message>
     <message>
         <source>Select a second point</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweiten Punkt auswählen</translation>
     </message>
     <message>
         <source>Select a unique point</source>
-        <translation type="unfinished"></translation>
+        <translation>Eindeutigen Punkt auswählen</translation>
     </message>
     <message>
         <source>Select a detail</source>
@@ -2766,14 +3682,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select a point on edge</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt am Rand auswählen</translation>
     </message>
 </context>
 <context>
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IRGENDEINER ART, EINSCHLIESSLICH DER GARANTIE FÜR DESIGN UND EIGNUNG FÜR EINEN BESTIMMTEN ZWECK zur Verfügung gestellt.</translation>
     </message>
 </context>
 <context>
@@ -3227,7 +4144,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size: </source>
-        <translation type="unfinished"></translation>
+        <translation>Größe:</translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
@@ -3239,7 +4156,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittmuster</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -3357,11 +4274,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt von X und Y zwei anderer Punkte</translation>
     </message>
     <message>
         <source>Point intersect line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt schneidet Linie und Achse</translation>
     </message>
     <message>
         <source>Simple curve</source>
@@ -3389,7 +4306,8 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
@@ -3397,7 +4315,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Union tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Vereinigen-Werkzeug</translation>
     </message>
     <message>
         <source>toolBar</source>
@@ -3405,15 +4323,15 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Last Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Letztes Werkzeug</translation>
     </message>
     <message>
         <source>Activate last used tool again</source>
-        <translation type="unfinished"></translation>
+        <translation>Zuletzt benutztes Werkzeug auswählen</translation>
     </message>
     <message>
         <source>Select point for X value (vertical)</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt für X-Wert (vertikal) auswählen</translation>
     </message>
     <message>
         <source>Mode</source>
@@ -3469,7 +4387,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation type="unfinished"></translation>
+        <translation>Layoutseiten </translation>
     </message>
     <message>
         <source>Save as PDF</source>
@@ -3569,23 +4487,23 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Show measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Maße anzeigen</translation>
     </message>
     <message>
         <source>Sync measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Maße synchronisieren</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
-        <translation type="unfinished"></translation>
+        <translation>Individuelle Maße (*vit);;Standard Maße (*.vst)</translation>
     </message>
     <message>
         <source>Measurements loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Maße gelanden</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard Maße (*.vst);;Individuelle Maße (*.vit)</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene.</source>
@@ -3601,7 +4519,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Create/edit measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellen/Bearbeiten Maße</translation>
     </message>
     <message>
         <source>%1, %2 (%3)</source>
@@ -3618,15 +4536,15 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß-Datei enthält ungültiges Maß(e).</translation>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß-Datei hat ein unbekanntes Format.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß-Datei beinhaltet nicht alle erforderlichen Maße.</translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
@@ -3638,19 +4556,19 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Measurements was synced</source>
-        <translation type="unfinished"></translation>
+        <translation>Maße wurden synchronisiert</translation>
     </message>
     <message>
         <source>Couldn&apos;t sync measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maße konnten nicht synchronisiert werden.</translation>
     </message>
     <message>
         <source>Couldn&apos;t update measurements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maße konnten nicht aktualisiert werden.</translation>
     </message>
     <message>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Maß-Datei &apos;%1&apos; konnte nicht gefunden werden.</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
@@ -3658,7 +4576,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Loading measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Laden Maße-Datei</translation>
     </message>
     <message>
         <source>Not supported size value &apos;%1&apos; for this pattern file.</source>
@@ -3740,6 +4658,26 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>True darts</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create/Edit measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -3757,7 +4695,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen der Datei &apos;%1&apos;! %2</translation>
     </message>
     <message>
         <source>Critical error!</source>
@@ -3902,7 +4840,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>User name</source>
-        <translation>Benutzername</translation>
+        <translation type="vanished">Benutzername</translation>
     </message>
     <message>
         <source>Graphical output</source>
@@ -3918,7 +4856,15 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit)</source>
-        <translation>Schritte (0 - unbegrenzt)</translation>
+        <translation type="vanished">Schritte (0 - unbegrenzt)</translation>
+    </message>
+    <message>
+        <source>User name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit):</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4065,12 +5011,12 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Expression is empty.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ausdruck ist leer.</translation>
     </message>
     <message>
         <source>Invalid pointer to variable.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Undefinierte Variable.</translation>
     </message>
     <message>
         <source>Unexpected operator &quot;$TOK$&quot; found at position $POS$</source>
@@ -4130,17 +5076,17 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Divide by zero</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Division durch Null</translation>
     </message>
     <message>
         <source>Domain error</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Domain Fehler</translation>
     </message>
     <message>
         <source>Name conflict</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Namenskonflikt</translation>
     </message>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
@@ -4180,32 +5126,32 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Function result is a string.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Funktionsergebnis ist eine Zeichenfolge.</translation>
     </message>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Parserfehler.</translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dezimaltrennzeichen ist identisch zur Funktion Argument Trennzeichen.</translation>
     </message>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Der &quot;$TOK$&quot; Operator muss durch eine schließende Klammer eingeschlossen werden.</translation>
     </message>
     <message>
         <source>If-then-else operator is missing an else clause</source>
         <comment>Math parser error messages. Do not translate operator name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>If-Then-else-Operator fehlt eine else-Klausel</translation>
     </message>
     <message>
         <source>Misplaced colon at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unangebrachter Doppelpunkt an Stellung $POS$ </translation>
     </message>
 </context>
 <context>
@@ -4257,7 +5203,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation type="unfinished"></translation>
+        <translation>In Körpergrößen</translation>
     </message>
     <message>
         <source>Details</source>
@@ -4322,10 +5268,6 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Path:</source>
         <translation>Verzeichnis:</translation>
-    </message>
-    <message>
-        <source>Path to file</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Show in Explorer</source>
@@ -4417,7 +5359,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>About Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>Über Tape</translation>
     </message>
     <message>
         <source>New</source>
@@ -4521,7 +5463,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation type="unfinished"></translation>
+        <translation>Größe:</translation>
     </message>
     <message>
         <source>Individual measurements</source>
@@ -4529,7 +5471,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>ohne Titel</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -4590,11 +5532,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Individuelle Maße (*vit);;Standard Maße (*.vst);;Alle Dateien (*.*)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard Maße (*.vst);;Individuelle Maße (*.vit);;Alle Dateien (*.*)</translation>
     </message>
     <message>
         <source>Measurements (*.vst *.vit);;All files (*.*)</source>
@@ -4634,10 +5576,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The full name of known measurement forbidden to change.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name in formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4715,6 +5653,42 @@ Do you want to save your changes?</source>
         <source>File was not saved yet.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement&apos;s name in a formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement&apos;s name in a formula.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement&apos;s human-readable name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TapeConfigDialog</name>
@@ -4751,7 +5725,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>GUI language</source>
-        <translation>GUI Sprache</translation>
+        <translation type="vanished">GUI Sprache</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -4767,11 +5741,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation>Dezimaltrennzeichen</translation>
+        <translation type="vanished">Dezimaltrennzeichen</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
         <translation>Nach Sprache des Betriebssystems (%1)</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default height and size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default size:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4817,15 +5815,15 @@ Do you want to save your changes?</source>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Nachfrage nicht mehr anzeigen</translation>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Nachfrage nicht mehr &amp;anzeigen</translation>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Nachfrage nicht mehr &amp;anzeigen</translation>
     </message>
 </context>
 <context>
@@ -4875,7 +5873,7 @@ Do you want to save your changes?</source>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkzeug kann in der Tabelle nicht gefunden werden.</translation>
     </message>
 </context>
 <context>
@@ -4910,11 +5908,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Confirm deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschvorgang bestätigen </translation>
     </message>
     <message>
         <source>Do you really want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie wirklich löschen?</translation>
     </message>
 </context>
 <context>
@@ -5225,7 +6223,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not load schema file.</source>
-        <translation>Konnte Schema-Datei nicht öffnen.</translation>
+        <translation type="vanished">Konnte Schema-Datei nicht öffnen.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
@@ -5254,6 +6252,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Could not remove document file</source>
         <translation>Konnte Dokument nicht entfernen</translation>
+    </message>
+    <message>
+        <source>Could not load schema file &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5658,7 +6660,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt schneidet Kurve und Achse</translation>
     </message>
     <message>
         <source>First point</source>
@@ -6417,7 +7419,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Schnittmuster-Design: Die Grundlagen Zuschneiden und Anpassen</translation>
     </message>
     <message>
         <source>Knowles/Men</source>
@@ -6537,17 +7539,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Linie_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winkel-Linie_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kreisbogen_</translation>
     </message>
     <message>
         <source>Spl_</source>

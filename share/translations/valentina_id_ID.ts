@@ -53,7 +53,7 @@
     </message>
     <message>
         <source>Server name/IP</source>
-        <translation>Nama Server/IP</translation>
+        <translation type="vanished">Nama Server/IP</translation>
     </message>
     <message>
         <source>Secure connection</source>
@@ -69,19 +69,15 @@
     </message>
     <message>
         <source>Proxy address</source>
-        <translation>Alamat Proxy</translation>
+        <translation type="vanished">Alamat Proxy</translation>
     </message>
     <message>
         <source>Proxy port</source>
-        <translation>Saluran Proxy</translation>
+        <translation type="vanished">Saluran Proxy</translation>
     </message>
     <message>
         <source>Proxy user</source>
-        <translation>Pengguna Proxy</translation>
-    </message>
-    <message>
-        <source>Proxy pass</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Pengguna Proxy</translation>
     </message>
     <message>
         <source>User settings</source>
@@ -89,7 +85,7 @@
     </message>
     <message>
         <source>User Name</source>
-        <translation>Nama Pengguna</translation>
+        <translation type="vanished">Nama Pengguna</translation>
     </message>
     <message>
         <source>Save password</source>
@@ -97,7 +93,35 @@
     </message>
     <message>
         <source>Password</source>
-        <translation>Sandi</translation>
+        <translation type="vanished">Sandi</translation>
+    </message>
+    <message>
+        <source>Server name/IP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy user:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxy pass:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -167,11 +191,11 @@
     </message>
     <message>
         <source>GUI language</source>
-        <translation>Bahasa GUI</translation>
+        <translation type="vanished">Bahasa GUI</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation>komponen pemisah desimal</translation>
+        <translation type="vanished">komponen pemisah desimal</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
@@ -179,7 +203,7 @@
     </message>
     <message>
         <source>Default unit</source>
-        <translation>Unit Standar</translation>
+        <translation type="vanished">Unit Standar</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -195,7 +219,7 @@
     </message>
     <message>
         <source>Label language</source>
-        <translation>label bahasa</translation>
+        <translation type="vanished">label bahasa</translation>
     </message>
     <message>
         <source>Send crash reports</source>
@@ -223,6 +247,22 @@
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label language:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -337,7 +377,7 @@
     <name>DialogAlongLine</name>
     <message>
         <source>Length</source>
-        <translation>panjang</translation>
+        <translation type="vanished">panjang</translation>
     </message>
     <message>
         <source>Insert variable into the formula</source>
@@ -345,7 +385,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Nilai panjang</translation>
+        <translation type="vanished">Nilai panjang</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -353,31 +393,31 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>label titik</translation>
+        <translation type="vanished">label titik</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Titik pertama</translation>
+        <translation type="vanished">Titik pertama</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation>Titik pertama dari baris</translation>
+        <translation type="vanished">Titik pertama dari baris</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>titik kedua</translation>
+        <translation type="vanished">titik kedua</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation>titik kedua dari baris</translation>
+        <translation type="vanished">titik kedua dari baris</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Jenis baris</translation>
+        <translation type="vanished">Jenis baris</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Tampilkan garis dari titik pertama ke titik ini</translation>
+        <translation type="vanished">Tampilkan garis dari titik pertama ke titik ini</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -428,11 +468,59 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Line color</source>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit length</source>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of the line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of the line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -444,7 +532,7 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation>radius
+        <translation type="vanished">radius
 </translation>
     </message>
     <message>
@@ -453,7 +541,7 @@
     </message>
     <message>
         <source>Value of radius</source>
-        <translation>nilai radius</translation>
+        <translation type="vanished">nilai radius</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -461,7 +549,7 @@
     </message>
     <message>
         <source>First angle</source>
-        <translation>sudut pertama</translation>
+        <translation type="vanished">sudut pertama</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
@@ -469,11 +557,11 @@
     </message>
     <message>
         <source>Value of first angle</source>
-        <translation>nilai dari sudut pertama</translation>
+        <translation type="vanished">nilai dari sudut pertama</translation>
     </message>
     <message>
         <source>Second angle</source>
-        <translation>sudut kedua</translation>
+        <translation type="vanished">sudut kedua</translation>
     </message>
     <message>
         <source>Insert marked variable into formula</source>
@@ -481,15 +569,15 @@
     </message>
     <message>
         <source>Value of second angle</source>
-        <translation>nilai dari sudut kedua</translation>
+        <translation type="vanished">nilai dari sudut kedua</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation>titik tengah</translation>
+        <translation type="vanished">titik tengah</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation>pilih titik tengah dari busur</translation>
+        <translation type="vanished">pilih titik tengah dari busur</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -544,10 +632,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit radius</source>
         <translation type="unfinished"></translation>
     </message>
@@ -559,6 +643,46 @@
         <source>Edit second angle</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select center point of the arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogArcWithLength</name>
@@ -568,12 +692,12 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">radius
+        <translation type="obsolete">radius
 </translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation type="unfinished">nilai radius</translation>
+        <translation type="obsolete">nilai radius</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -581,31 +705,23 @@
     </message>
     <message>
         <source>First angle</source>
-        <translation type="unfinished">sudut pertama</translation>
+        <translation type="obsolete">sudut pertama</translation>
     </message>
     <message>
         <source>Value of first angle</source>
-        <translation type="unfinished">nilai dari sudut pertama</translation>
+        <translation type="obsolete">nilai dari sudut pertama</translation>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">panjang</translation>
-    </message>
-    <message>
-        <source>Arc length</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">panjang</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="unfinished">titik tengah</translation>
+        <translation type="obsolete">titik tengah</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished">pilih titik tengah dari busur</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">pilih titik tengah dari busur</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -631,12 +747,44 @@
         <source>Length can&apos;t be equal 0</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogBisector</name>
     <message>
         <source>Length</source>
-        <translation>panjang</translation>
+        <translation type="vanished">panjang</translation>
     </message>
     <message>
         <source>Insert marked variable into the formula</source>
@@ -644,7 +792,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation>nilai panjang</translation>
+        <translation type="vanished">nilai panjang</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -652,39 +800,39 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation>label titik</translation>
+        <translation type="vanished">label titik</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation>Titik pertama</translation>
+        <translation type="vanished">Titik pertama</translation>
     </message>
     <message>
         <source>First point of angle</source>
-        <translation>Titik pertama dari sudut</translation>
+        <translation type="vanished">Titik pertama dari sudut</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>titik kedua</translation>
+        <translation type="vanished">titik kedua</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation>titik kedua dari sudut</translation>
+        <translation type="vanished">titik kedua dari sudut</translation>
     </message>
     <message>
         <source>Third point</source>
-        <translation>titik ketiga</translation>
+        <translation type="vanished">titik ketiga</translation>
     </message>
     <message>
         <source>Third point of angle</source>
-        <translation>titik ketiga dari sudut</translation>
+        <translation type="vanished">titik ketiga dari sudut</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Jenis baris</translation>
+        <translation type="vanished">Jenis baris</translation>
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation>Tampilkan garis dari titik kedua ke titik ini</translation>
+        <translation type="vanished">Tampilkan garis dari titik kedua ke titik ini</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -739,11 +887,55 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Line color</source>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit length</source>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -751,11 +943,11 @@
     <name>DialogCurveIntersectAxis</name>
     <message>
         <source>Angle</source>
-        <translation>sudut</translation>
+        <translation type="vanished">sudut</translation>
     </message>
     <message>
         <source>Value of angle</source>
-        <translation>nilai dari sudut</translation>
+        <translation type="vanished">nilai dari sudut</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -763,23 +955,23 @@
     </message>
     <message>
         <source>Axis point</source>
-        <translation>titik sumbu</translation>
+        <translation type="vanished">titik sumbu</translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation>kurva</translation>
+        <translation type="vanished">kurva</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>label titik</translation>
+        <translation type="vanished">label titik</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation>Jenis baris</translation>
+        <translation type="vanished">Jenis baris</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Tampilkan garis dari titik pertama ke titik ini</translation>
+        <translation type="vanished">Tampilkan garis dari titik pertama ke titik ini</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -830,15 +1022,51 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Axis Point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -846,11 +1074,11 @@
     <name>DialogCutArc</name>
     <message>
         <source>Length</source>
-        <translation>panjang</translation>
+        <translation type="vanished">panjang</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Nilai panjang</translation>
+        <translation type="vanished">Nilai panjang</translation>
     </message>
     <message>
         <source>_</source>
@@ -862,11 +1090,11 @@
     </message>
     <message>
         <source>Arc</source>
-        <translation>busur</translation>
+        <translation type="vanished">busur</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>label titik</translation>
+        <translation type="vanished">label titik</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -913,15 +1141,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Selected arc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -929,11 +1185,11 @@
     <name>DialogCutSpline</name>
     <message>
         <source>Length</source>
-        <translation>panjang</translation>
+        <translation type="vanished">panjang</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Nilai panjang</translation>
+        <translation type="vanished">Nilai panjang</translation>
     </message>
     <message>
         <source>_</source>
@@ -945,15 +1201,15 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation>kurva</translation>
+        <translation type="vanished">kurva</translation>
     </message>
     <message>
         <source>Selected curve</source>
-        <translation>kurva yang telah dipilih</translation>
+        <translation type="vanished">kurva yang telah dipilih</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>label titik</translation>
+        <translation type="vanished">label titik</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -1000,11 +1256,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color</source>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit length</source>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1012,11 +1300,11 @@
     <name>DialogCutSplinePath</name>
     <message>
         <source>Length</source>
-        <translation>panjang</translation>
+        <translation type="vanished">panjang</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation>Nilai panjang</translation>
+        <translation type="vanished">Nilai panjang</translation>
     </message>
     <message>
         <source>_</source>
@@ -1028,15 +1316,15 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation>kurva</translation>
+        <translation type="vanished">kurva</translation>
     </message>
     <message>
         <source>Selected curve path</source>
-        <translation>jalur kurva yang telah dipilih</translation>
+        <translation type="vanished">jalur kurva yang telah dipilih</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation>label titik</translation>
+        <translation type="vanished">label titik</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -1083,11 +1371,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color</source>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit length</source>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1098,16 +1418,8 @@
         <translation>rincial</translation>
     </message>
     <message>
-        <source>Bias X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>cm</source>
         <translation>cm</translation>
-    </message>
-    <message>
-        <source>Bias Y</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Options</source>
@@ -1115,7 +1427,7 @@
     </message>
     <message>
         <source>Name of detail</source>
-        <translation>nama rincian</translation>
+        <translation type="vanished">nama rincian</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -1123,7 +1435,7 @@
     </message>
     <message>
         <source>Width</source>
-        <translation>lebar</translation>
+        <translation type="vanished">lebar</translation>
     </message>
     <message>
         <source>Closed</source>
@@ -1181,6 +1493,22 @@
         <source>You have to choose points in a clockwise direction!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bias X:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bias Y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name of detail:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEditWrongFormula</name>
@@ -1190,7 +1518,7 @@
     </message>
     <message>
         <source>Formula</source>
-        <translation>rumus</translation>
+        <translation type="vanished">rumus</translation>
     </message>
     <message>
         <source>Insert variable into formula</source>
@@ -1198,7 +1526,7 @@
     </message>
     <message>
         <source>Value of first angle</source>
-        <translation>nilai dari sudut pertama</translation>
+        <translation type="vanished">nilai dari sudut pertama</translation>
     </message>
     <message>
         <source>_</source>
@@ -1292,16 +1620,24 @@
         <source>Curve angle</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Formula:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogEndLine</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">panjang</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">panjang</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1309,31 +1645,27 @@
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">sudut</translation>
+        <translation type="obsolete">sudut</translation>
     </message>
     <message>
         <source>Value of angle</source>
-        <translation type="unfinished">nilai dari sudut</translation>
-    </message>
-    <message>
-        <source>Base point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">nilai dari sudut</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="unfinished">Titik pertama dari baris</translation>
+        <translation type="obsolete">Titik pertama dari baris</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="unfinished">Jenis baris</translation>
+        <translation type="obsolete">Jenis baris</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="unfinished">Tampilkan garis dari titik pertama ke titik ini</translation>
+        <translation type="obsolete">Tampilkan garis dari titik pertama ke titik ini</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -1348,10 +1680,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Line color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1359,32 +1687,68 @@
         <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
-    </message>
-    <message>
-        <source>Base point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="unfinished">Titik pertama dari baris</translation>
+        <translation type="obsolete">Titik pertama dari baris</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="unfinished">titik kedua dari baris</translation>
+        <translation type="obsolete">titik kedua dari baris</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="unfinished">Jenis baris</translation>
-    </message>
-    <message>
-        <source>Show line from first point to our point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Jenis baris</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -1399,11 +1763,35 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Base Point</source>
+        <source>Point label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Line color</source>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1669,6 +2057,18 @@
         <source>Edit increment</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unique increment name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIndividualMeasurements</name>
@@ -1880,19 +2280,19 @@ Apply settings anyway?</source>
     <name>DialogLine</name>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Titik pertama</translation>
+        <translation type="obsolete">Titik pertama</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">titik kedua</translation>
+        <translation type="obsolete">titik kedua</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="unfinished">Jenis baris</translation>
+        <translation type="obsolete">Jenis baris</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="unfinished">Tampilkan garis dari titik pertama ke titik ini</translation>
+        <translation type="obsolete">Tampilkan garis dari titik pertama ke titik ini</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -1903,7 +2303,19 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Line color</source>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1911,7 +2323,7 @@ Apply settings anyway?</source>
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>First line</source>
@@ -1919,11 +2331,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Titik pertama</translation>
+        <translation type="obsolete">Titik pertama</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">titik kedua</translation>
+        <translation type="obsolete">titik kedua</translation>
     </message>
     <message>
         <source>Second line</source>
@@ -1945,16 +2357,36 @@ Apply settings anyway?</source>
         <source>Point at line intersection</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLineIntersectAxis</name>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">sudut</translation>
+        <translation type="obsolete">sudut</translation>
     </message>
     <message>
         <source>Value of angle</source>
-        <translation type="unfinished">nilai dari sudut</translation>
+        <translation type="obsolete">nilai dari sudut</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1962,27 +2394,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Axis point</source>
-        <translation type="unfinished">titik sumbu</translation>
+        <translation type="obsolete">titik sumbu</translation>
     </message>
     <message>
         <source>First point of line</source>
         <translation type="unfinished">Titik pertama dari baris</translation>
     </message>
     <message>
-        <source>First line point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Second line point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="unfinished">Jenis baris</translation>
+        <translation type="obsolete">Jenis baris</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
@@ -2017,11 +2441,55 @@ Apply settings anyway?</source>
         <translation type="unfinished">titik kedua dari baris</translation>
     </message>
     <message>
-        <source>Line color</source>
+        <source>Edit angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit angle</source>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second line point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2195,7 +2663,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation type="unfinished">Nama potongan pola</translation>
+        <translation type="obsolete">Nama potongan pola</translation>
     </message>
     <message>
         <source>Units:</source>
@@ -2213,16 +2681,24 @@ Apply settings anyway?</source>
         <source>Inches</source>
         <translation type="unfinished">Inchi</translation>
     </message>
+    <message>
+        <source>Pattern piece name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique pattern piece name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique pattern piece name.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogNormal</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">panjang</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">panjang</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2230,27 +2706,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Titik pertama</translation>
+        <translation type="obsolete">Titik pertama</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">titik kedua</translation>
-    </message>
-    <message>
-        <source>Additional angle degrees</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">titik kedua</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="unfinished">Jenis baris</translation>
+        <translation type="obsolete">Jenis baris</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="unfinished">Tampilkan garis dari titik pertama ke titik ini</translation>
+        <translation type="obsolete">Tampilkan garis dari titik pertama ke titik ini</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -2270,18 +2742,62 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="unfinished">Titik pertama dari baris</translation>
+        <translation type="obsolete">Titik pertama dari baris</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="unfinished">titik kedua dari baris</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">titik kedua dari baris</translation>
     </message>
     <message>
         <source>Edit length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Additional angle degrees:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2317,6 +2833,26 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>All sizes (cm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default height and size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>From standard measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2463,26 +2999,42 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
-    </message>
-    <message>
-        <source>Tangent point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation type="unfinished">busur</translation>
+        <translation type="obsolete">busur</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished">pilih titik tengah dari busur</translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">pilih titik tengah dari busur</translation>
     </message>
     <message>
         <source>Select an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2494,7 +3046,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">radius
+        <translation type="obsolete">radius
 </translation>
     </message>
     <message>
@@ -2503,23 +3055,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
-    </message>
-    <message>
-        <source>Center of the circle</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished">pilih titik tengah dari busur</translation>
-    </message>
-    <message>
-        <source>Tangent point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">pilih titik tengah dari busur</translation>
     </message>
     <message>
         <source>Select a circle center</source>
@@ -2537,17 +3077,57 @@ Apply settings anyway?</source>
         <source>Radius can&apos;t be negative</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tangent point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfContact</name>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">radius
+        <translation type="obsolete">radius
 </translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation type="unfinished">nilai radius</translation>
+        <translation type="obsolete">nilai radius</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2555,23 +3135,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
-    </message>
-    <message>
-        <source>Center of arc</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
         <translation type="unfinished">pilih titik tengah dari busur</translation>
-    </message>
-    <message>
-        <source>Top of the line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End of the line</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -2589,35 +3157,87 @@ Apply settings anyway?</source>
         <source>Edit radius</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Radius:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top of the line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of the line:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>First point of angle</source>
-        <translation type="unfinished">Titik pertama dari sudut</translation>
+        <translation type="obsolete">Titik pertama dari sudut</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation type="unfinished">titik kedua dari sudut</translation>
+        <translation type="obsolete">titik kedua dari sudut</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>X: vertical point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Y: horizontal point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select point for Y value (horizontal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X: vertical point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Y: horizontal point:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2629,26 +3249,34 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
-    </message>
-    <message>
-        <source>First arc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Selected arc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Second arc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>Select second an arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second arc:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2659,36 +3287,16 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Radius of the first circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Radius of the second circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
-    </message>
-    <message>
-        <source>Center of the first circle</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="unfinished">pilih titik tengah dari busur</translation>
-    </message>
-    <message>
-        <source>Center of the second circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">pilih titik tengah dari busur</translation>
     </message>
     <message>
         <source>Select second circle center</source>
@@ -2708,6 +3316,50 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius of the first circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radius of the second circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the first circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Center of the second circle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2735,6 +3387,26 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path to destination folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path to destination folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File base name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File base name. </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2793,11 +3465,11 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The base filename has not match regular expression.</source>
+        <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The destination directory doesn&apos;t exists or is not readable.</source>
+        <source>The base filename does not match a regular expression.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2805,11 +3477,7 @@ Apply settings anyway?</source>
     <name>DialogShoulderPoint</name>
     <message>
         <source>Length</source>
-        <translation type="unfinished">panjang</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">panjang</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2817,27 +3485,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Titik pertama</translation>
+        <translation type="obsolete">Titik pertama</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">titik kedua</translation>
+        <translation type="obsolete">titik kedua</translation>
     </message>
     <message>
         <source>Third point</source>
-        <translation type="unfinished">titik ketiga</translation>
+        <translation type="obsolete">titik ketiga</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="unfinished">Jenis baris</translation>
-    </message>
-    <message>
-        <source>Show line from first point to our point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Jenis baris</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -2860,11 +3524,55 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Line color</source>
+        <source>Edit length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit length</source>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type of line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2894,6 +3602,14 @@ Apply settings anyway?</source>
         <source>Point label</source>
         <translation type="unfinished">label titik</translation>
     </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSpline</name>
@@ -2922,10 +3638,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Coefficient of curvature of the curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select last point of curve</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2934,7 +3646,11 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color</source>
+        <source>Coefficient of curvature of the curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2969,15 +3685,15 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Coefficient of curvature of the curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select point of curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color</source>
+        <source>Coefficient of curvature of the curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3023,27 +3739,19 @@ Apply settings anyway?</source>
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">label titik</translation>
-    </message>
-    <message>
-        <source>First point of axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">label titik</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="unfinished">Titik pertama dari baris</translation>
-    </message>
-    <message>
-        <source>Second point of axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Titik pertama dari baris</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Titik pertama</translation>
+        <translation type="obsolete">Titik pertama</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">titik kedua</translation>
+        <translation type="obsolete">titik kedua</translation>
     </message>
     <message>
         <source>Select second point of axis</source>
@@ -3062,16 +3770,36 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>First point of the axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Second point of the axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Second point of line</source>
-        <translation type="unfinished">titik kedua dari baris</translation>
+        <translation type="obsolete">titik kedua dari baris</translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of axis:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of axis:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3081,48 +3809,20 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>First base point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>First point of angle</source>
-        <translation type="unfinished">Titik pertama dari sudut</translation>
-    </message>
-    <message>
-        <source>Second base point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Titik pertama dari sudut</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation type="unfinished">titik kedua dari sudut</translation>
-    </message>
-    <message>
-        <source>First dart point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">titik kedua dari sudut</translation>
     </message>
     <message>
         <source>Third point of angle</source>
-        <translation type="unfinished">titik ketiga dari sudut</translation>
-    </message>
-    <message>
-        <source>Second dart point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">titik ketiga dari sudut</translation>
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation type="unfinished">Tampilkan garis dari titik kedua ke titik ini</translation>
-    </message>
-    <message>
-        <source>Third dart point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>First new dart point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Second new dart point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Tampilkan garis dari titik kedua ke titik ini</translation>
     </message>
     <message>
         <source>Select the second base point</source>
@@ -3138,6 +3838,42 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select the third dart point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second base point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First new dart point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second new dart point:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4186,6 +4922,26 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <source>True darts</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create/Edit measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -4430,10 +5186,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>User name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Graphical output</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4446,7 +5198,11 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Count steps (0 - no limit)</source>
+        <source>User name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Count steps (0 - no limit):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4861,10 +5617,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Path to file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show in Explorer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5174,10 +5926,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name in formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Function Wizard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5252,6 +6000,42 @@ Do you want to save your changes?</source>
         <source>File was not saved yet.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement&apos;s name in a formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement&apos;s name in a formula.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurement&apos;s human-readable name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s family name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Customer&apos;s email address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableWindow</name>
@@ -5295,7 +6079,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>GUI language</source>
-        <translation type="unfinished">Bahasa GUI</translation>
+        <translation type="obsolete">Bahasa GUI</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -5311,11 +6095,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="unfinished">komponen pemisah desimal</translation>
+        <translation type="obsolete">komponen pemisah desimal</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
         <translation type="unfinished">dengan pilihan OS (%1)</translation>
+    </message>
+    <message>
+        <source>GUI language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimal separator parts:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default height and size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default size:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5767,10 +6575,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not load schema file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5796,6 +6600,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not remove document file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not load schema file &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
