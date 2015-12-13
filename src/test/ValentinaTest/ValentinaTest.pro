@@ -51,7 +51,8 @@ SOURCES += \
     tst_qmuparsererrormsg.cpp \
     tst_vlockguard.cpp \
     tst_misc.cpp \
-    tst_vcommandline.cpp
+    tst_vcommandline.cpp \
+    tst_tstranslation.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -70,10 +71,13 @@ HEADERS += \
     tst_qmuparsererrormsg.h \
     tst_vlockguard.h \
     tst_misc.h \
-    tst_vcommandline.h
+    tst_vcommandline.h \
+    tst_tstranslation.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
+
+DEFINES += TS_DIR=\\\"$${PWD}/../../../share/translations\\\"
 
 CONFIG(debug, debug|release){
     # Debug mode
