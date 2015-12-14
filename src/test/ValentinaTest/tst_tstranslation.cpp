@@ -32,65 +32,48 @@
 #include <QDomDocument>
 #include <QtTest>
 
+const QString TST_TSTranslation::TagName           = QStringLiteral("name");
+const QString TST_TSTranslation::TagMessage        = QStringLiteral("message");
+const QString TST_TSTranslation::TagSource         = QStringLiteral("source");
+const QString TST_TSTranslation::TagTranslation    = QStringLiteral("translation");
+
+const QString TST_TSTranslation::AttrType          = QStringLiteral("type");
+const QString TST_TSTranslation::AttrValVanished   = QStringLiteral("vanished");
+const QString TST_TSTranslation::AttrValUnfinished = QStringLiteral("unfinished");
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_TSTranslation::TST_TSTranslation(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    tsFile(),
+    tsXML()
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_TSTranslation::CheckEnglishLocalization()
 {
-    const QString path = QString("%1/valentina_en_US.ts").arg(TS_DIR);
-    QFile tsFile(path);
-    if (not tsFile.exists())
-    {
-        QSKIP("Can't find valentina_en_US.ts");
-    }
-
-    if (tsFile.open(QIODevice::ReadOnly) == false)
-    {
-        const QString message = QString("Can't open file valentina_en_US.ts.\n%1").arg(tsFile.errorString());
-        QSKIP(qUtf8Printable(message));
-    }
-
-    QString errorMsg;
-    int errorLine = -1;
-    int errorColumn = -1;
-    QDomDocument ts;
-    if (ts.setContent(&tsFile, &errorMsg, &errorLine, &errorColumn) == false)
-    {
-        tsFile.close();
-        const QString message = QString("Parsing error file valentina_en_US.ts in line %1 column %2")
-                .arg(errorLine).arg(errorColumn);
-        QFAIL(qUtf8Printable(message));
-    }
-
-    const QDomNodeList messages = ts.elementsByTagName(QStringLiteral("message"));
+    const QDomNodeList messages = LoadTSFile(QStringLiteral("valentina_en_US.ts"));
     if (messages.isEmpty())
     {
-        tsFile.close();
-        QFAIL("File doesn't contain any messages");
+        QSKIP("Can't begin test.");
     }
 
-    const QString attrType = QStringLiteral("type");
-    const qint32 num = messages.size();
-    for (qint32 i = 0; i < num; ++i)
+    for (qint32 i = 0, num = messages.size(); i < num; ++i)
     {
         const QDomElement message = messages.at(i).toElement();
         if (message.isNull() == false)
         {
-            const QString source = message.firstChildElement(QStringLiteral("source")).text();
+            const QString source = message.firstChildElement(TagSource).text();
             if (source.isEmpty())
             {
                 continue;
             }
 
-            const QDomElement translationTag = message.firstChildElement(QStringLiteral("translation"));
-            if (translationTag.hasAttribute(attrType))
+            const QDomElement translationTag = message.firstChildElement(TagTranslation);
+            if (translationTag.hasAttribute(AttrType))
             {
-                const QString attrVal = translationTag.attribute(attrType);
-                if (attrVal == QLatin1Literal("vanished") || attrVal == QLatin1Literal("unfinished"))
+                const QString attrVal = translationTag.attribute(AttrType);
+                if (attrVal == AttrValVanished || attrVal == AttrValUnfinished)
                 {
                     continue;
                 }
@@ -105,7 +88,6 @@ void TST_TSTranslation::CheckEnglishLocalization()
         }
         else
         {
-            tsFile.close();
             const QString message = QString("Message %1 is null.").arg(i);
             QFAIL(qUtf8Printable(message));
         }
@@ -115,46 +97,18 @@ void TST_TSTranslation::CheckEnglishLocalization()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_TSTranslation::CheckEmptyToolButton()
 {
-    const QString path = QString("%1/valentina.ts").arg(TS_DIR);
-    QFile tsFile(path);
-    if (not tsFile.exists())
-    {
-        QSKIP("Can't find valentina.ts");
-    }
-
-    if (tsFile.open(QIODevice::ReadOnly) == false)
-    {
-        const QString message = QString("Can't open file valentina.ts.\n%1").arg(tsFile.errorString());
-        QSKIP(qUtf8Printable(message));
-    }
-
-    QString errorMsg;
-    int errorLine = -1;
-    int errorColumn = -1;
-    QDomDocument ts;
-    if (ts.setContent(&tsFile, &errorMsg, &errorLine, &errorColumn) == false)
-    {
-        tsFile.close();
-        const QString message = QString("Parsing error file valentina.ts in line %1 column %2")
-                .arg(errorLine).arg(errorColumn);
-        QFAIL(qUtf8Printable(message));
-    }
-
-    const QDomNodeList messages = ts.elementsByTagName(QStringLiteral("message"));
+    const QDomNodeList messages = LoadTSFile(QStringLiteral("valentina.ts"));
     if (messages.isEmpty())
     {
-        tsFile.close();
-        QFAIL("File doesn't contain any messages");
+        QSKIP("Can't begin test.");
     }
 
-    const QString attrType = QStringLiteral("type");
-    const qint32 num = messages.size();
-    for (qint32 i = 0; i < num; ++i)
+    for (qint32 i = 0, num = messages.size(); i < num; ++i)
     {
         const QDomElement message = messages.at(i).toElement();
         if (message.isNull() == false)
         {
-            const QString source = message.firstChildElement(QStringLiteral("source")).text();
+            const QString source = message.firstChildElement(TagSource).text();
             if (source.isEmpty())
             {
                 continue;
@@ -162,11 +116,11 @@ void TST_TSTranslation::CheckEmptyToolButton()
 
             if (source == QLatin1Literal("..."))
             {
-                const QDomElement translationTag = message.firstChildElement(QStringLiteral("translation"));
-                if (translationTag.hasAttribute(attrType))
+                const QDomElement translationTag = message.firstChildElement(TagTranslation);
+                if (translationTag.hasAttribute(AttrType))
                 {
-                    const QString attrVal = translationTag.attribute(attrType);
-                    if (attrVal == QLatin1Literal("vanished"))
+                    const QString attrVal = translationTag.attribute(AttrType);
+                    if (attrVal == AttrValVanished)
                     {
                         continue;
                     }
@@ -175,21 +129,60 @@ void TST_TSTranslation::CheckEmptyToolButton()
                 const QDomNode context = message.parentNode();
                 if (context.isNull())
                 {
-                    tsFile.close();
                     QFAIL("Can't get context.");
                 }
 
-                const QString contextName = context.firstChildElement(QStringLiteral("name")).text();
+                const QString contextName = context.firstChildElement(TagName).text();
                 const QString error = QString("Found '...' in context '%1'").arg(contextName);
-                tsFile.close();
                 QFAIL(qUtf8Printable(error));
             }
         }
         else
         {
-            tsFile.close();
             const QString message = QString("Message %1 is null.").arg(i);
             QFAIL(qUtf8Printable(message));
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomNodeList TST_TSTranslation::LoadTSFile(const QString &filename)
+{
+    tsFile.reset();
+    tsFile = QSharedPointer<QFile>(new QFile(QString("%1/%2").arg(TS_DIR).arg(filename)));
+    if (not tsFile->exists())
+    {
+        const QString message = QString("Can't find '%1'.\n%2.").arg(filename).arg(tsFile->errorString());
+        QWARN(qUtf8Printable(message));
+        return QDomNodeList();
+    }
+
+    if (tsFile->open(QIODevice::ReadOnly) == false)
+    {
+        const QString message = QString("Can't open file '%1'.\n%2.").arg(filename).arg(tsFile->errorString());
+        QWARN(qUtf8Printable(message));
+        return QDomNodeList();
+    }
+
+    QString errorMsg;
+    int errorLine = -1;
+    int errorColumn = -1;
+    tsXML.reset();
+    tsXML = QSharedPointer<QDomDocument>(new QDomDocument());
+    if (tsXML->setContent(tsFile.data(), &errorMsg, &errorLine, &errorColumn) == false)
+    {
+        const QString message = QString("Parsing error file valentina_en_US.ts in line %1 column %2.")
+                .arg(errorLine).arg(errorColumn);
+        QWARN(qUtf8Printable(message));
+        return QDomNodeList();
+    }
+
+    const QDomNodeList messages = tsXML->elementsByTagName(TagMessage);
+    if (messages.isEmpty())
+    {
+        QWARN("File doesn't contain any messages.");
+        return QDomNodeList();
+    }
+
+    return messages;
 }

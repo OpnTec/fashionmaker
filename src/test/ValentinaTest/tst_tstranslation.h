@@ -29,7 +29,10 @@
 #ifndef TST_TSTRANSLATION_H
 #define TST_TSTRANSLATION_H
 
+#include <QDomDocument>
+#include <QFile>
 #include <QObject>
+#include <QSharedPointer>
 
 class TST_TSTranslation : public QObject
 {
@@ -43,7 +46,19 @@ private slots:
 
 private:
     Q_DISABLE_COPY(TST_TSTranslation)
+    QSharedPointer<QFile> tsFile;
+    QSharedPointer<QDomDocument> tsXML;
 
+    static const QString TagName;
+    static const QString TagMessage;
+    static const QString TagSource;
+    static const QString TagTranslation;
+
+    static const QString AttrType;
+    static const QString AttrValVanished;
+    static const QString AttrValUnfinished;
+
+    QDomNodeList LoadTSFile(const QString &filename);
 };
 
 #endif // TST_TSTRANSLATION_H
