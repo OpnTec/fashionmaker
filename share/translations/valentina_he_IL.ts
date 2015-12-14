@@ -246,10 +246,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Built on %3 at %4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Web site : %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -259,6 +255,10 @@
     </message>
     <message>
         <source>Build revision:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -285,15 +285,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Built on %3 at %4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Web site : %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

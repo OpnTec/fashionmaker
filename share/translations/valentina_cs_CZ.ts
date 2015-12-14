@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation>Sestaveno %3 v %4</translation>
+        <translation type="vanished">Sestaveno %3 v %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -304,6 +304,10 @@
     <message>
         <source>Build revision:</source>
         <translation>Revize sestavení:</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Sestaveno %3 v %2 {1 ?}</translation>
     </message>
 </context>
 <context>
@@ -330,7 +334,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation>Sestaveno %3 v %4</translation>
+        <translation type="vanished">Sestaveno %3 v %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -339,6 +343,10 @@
     <message>
         <source>Cannot open your default browser</source>
         <translation>Nelze otevřít váš výchozí prohlížeč</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Sestaveno %3 v %2 {1 ?}</translation>
     </message>
 </context>
 <context>

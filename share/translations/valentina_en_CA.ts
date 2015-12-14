@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation>Built on %3 at %4</translation>
+        <translation type="vanished">Built on %3 at %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -304,6 +304,10 @@
     <message>
         <source>Build revision:</source>
         <translation>Build revision:</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Built on %3 at %2 {1 ?}</translation>
     </message>
 </context>
 <context>
@@ -330,7 +334,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation>Built on %3 at %4</translation>
+        <translation type="vanished">Built on %3 at %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -339,6 +343,10 @@
     <message>
         <source>Cannot open your default browser</source>
         <translation>Cannot open your default browser</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Built on %3 at %2 {1 ?}</translation>
     </message>
 </context>
 <context>

@@ -315,11 +315,11 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation>Dibuat pada %3 at %4</translation>
+        <translation type="vanished">Dibuat pada %3 at %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation>Situs web : % 1</translation>
+        <translation>Situs web : %1</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -332,6 +332,10 @@
     <message>
         <source>Build revision:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Dibuat pada %3 at %2 {1 ?}</translation>
     </message>
 </context>
 <context>
@@ -358,7 +362,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation type="unfinished">Dibuat pada %3 at %4</translation>
+        <translation type="obsolete">Dibuat pada %3 at %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -371,6 +375,10 @@
     <message>
         <source>Cannot open your default browser</source>
         <translation type="unfinished">Tidak dapat membuka peramban bawaan Anda</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Dibuat pada %3 at %2 {1 ?}</translation>
     </message>
 </context>
 <context>

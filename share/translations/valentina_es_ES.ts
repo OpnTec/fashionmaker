@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation>Construido sobre %3 y %4</translation>
+        <translation type="vanished">Construido sobre %3 y %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -304,6 +304,10 @@
     <message>
         <source>Build revision:</source>
         <translation>Crear revisión:</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Construido sobre %3 y %2 {1 ?}</translation>
     </message>
 </context>
 <context>
@@ -330,7 +334,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation>Construido sobre %3 y %4</translation>
+        <translation type="vanished">Construido sobre %3 y %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -339,6 +343,10 @@
     <message>
         <source>Cannot open your default browser</source>
         <translation>No se puede abrir su navegador por defecto</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Construido sobre %3 y %2 {1 ?}</translation>
     </message>
 </context>
 <context>
@@ -4241,7 +4249,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
-        <translation>Valentina no se cerró correctamente. ¿Quieres volver a abrir archivos (1%) que había abierto?</translation>
+        <translation>Valentina no se cerró correctamente. ¿Quieres volver a abrir archivos (%1) que había abierto?</translation>
     </message>
     <message>
         <source>Reopen files.</source>

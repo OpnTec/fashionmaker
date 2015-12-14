@@ -12,7 +12,7 @@
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
-        <translation>Aggiungi parte del cartamodello 1%</translation>
+        <translation>Aggiungi parte del cartamodello %1</translation>
     </message>
 </context>
 <context>
@@ -187,7 +187,7 @@
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>Con opzioni OS (1%)</translation>
+        <translation>Con opzioni OS (%1)</translation>
     </message>
     <message>
         <source>Default unit</source>
@@ -272,7 +272,7 @@
     <name>DeletePatternPiece</name>
     <message>
         <source>delete pattern piece %1</source>
-        <translation>Elimina parte del modello 1%</translation>
+        <translation>Elimina parte del modello %1</translation>
     </message>
 </context>
 <context>
@@ -291,11 +291,11 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation>Costruito su 3% al 4%</translation>
+        <translation type="vanished">Costruito su 3% al 4%</translation>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation>Sito web : 1%</translation>
+        <translation>Sito web : %1</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
@@ -304,6 +304,10 @@
     <message>
         <source>Build revision:</source>
         <translation>Costruisci revisione:</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Costruito su 3% al 2% {1 ?}</translation>
     </message>
 </context>
 <context>
@@ -330,15 +334,19 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation>Costruito su 3% al 4%</translation>
+        <translation type="vanished">Costruito su 3% al 4%</translation>
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation>Sito web : 1%</translation>
+        <translation>Sito web : %1</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
         <translation>Non è possibile aprire il browser predefinito</translation>
+    </message>
+    <message>
+        <source>Built on %1 at %2</source>
+        <translation type="unfinished">Costruito su 3% al 2% {1 ?}</translation>
     </message>
 </context>
 <context>
@@ -1537,7 +1545,7 @@
     </message>
     <message>
         <source>%1 - Base point</source>
-        <translation>1% - Punto base</translation>
+        <translation>%1 - Punto base</translation>
     </message>
     <message>
         <source>%1_%2 - Line from point %1 to point %2</source>
@@ -1549,7 +1557,7 @@
     </message>
     <message>
         <source>%1 - Point of shoulder</source>
-        <translation>1% - Punto della spalla</translation>
+        <translation>%1 - Punto della spalla</translation>
     </message>
     <message>
         <source>%3 - normal to line %1_%2</source>
@@ -3822,7 +3830,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
-        <translation>Eccezione generata:% 1. Il programma verrà terminato.</translation>
+        <translation>Eccezione generata:%1. Il programma verrà terminato.</translation>
     </message>
     <message>
         <source>Valentina&apos;s measurements editor.</source>
@@ -3858,7 +3866,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
-        <translation>Impossibile iniziare a registrare le connessioni in entrata sul nome &apos;% 1&apos;</translation>
+        <translation>Impossibile iniziare a registrare le connessioni in entrata sul nome &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
@@ -4648,7 +4656,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
-        <translation>Si prega di fornire inoltre: % 1</translation>
+        <translation>Si prega di fornire inoltre: %1</translation>
     </message>
     <message>
         <source>Measurement files types have not match.</source>
@@ -4672,7 +4680,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
-        <translation>Il file delle misure &lt;br/&gt; &lt;b&gt;% 1 &lt;/ b&gt; &lt;br/&gt; non è stato trovato. Aggiornare la posizione del file</translation>
+        <translation>Il file delle misure &lt;br/&gt;&lt;b&gt;%1&lt;/ b&gt;&lt;br/&gt; non è stato trovato. Aggiornare la posizione del file</translation>
     </message>
     <message>
         <source>Loading measurements file</source>
@@ -4692,7 +4700,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>The method %1 does nothing in GUI mode</source>
-        <translation>Il metodo% 1 non fa nulla in modalità GUI</translation>
+        <translation>Il metodo %1 non fa nulla in modalità GUI</translation>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
@@ -5866,7 +5874,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
-        <translation>Con opzioni OS (1%)</translation>
+        <translation>Con opzioni OS (%1)</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -6068,7 +6076,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
-        <translation>Eccezione generata:% 1. Il programma verrà terminato.</translation>
+        <translation>Eccezione generata:%1. Il programma verrà terminato.</translation>
     </message>
 </context>
 <context>
@@ -6187,7 +6195,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="vanished">Eseguire il programma in modalità di test. Il programma in questa modalità carica un singolo file di pattern ed esce silenziosamente senza visualizzare la finestra principale. La chiave ha priorità prima della chiave &apos;% 1&apos;.</translation>
+        <translation type="vanished">Eseguire il programma in modalità di test. Il programma in questa modalità carica un singolo file di pattern ed esce silenziosamente senza visualizzare la finestra principale. La chiave ha priorità prima della chiave &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Test option can be used with single input file only.</source>
@@ -6211,7 +6219,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Fissare il valore della dimensione del file di pattern che è stato aperto con misure standard (modalità di esportazione). Valori validi: % 1 cm.</translation>
+        <translation>Fissare il valore della dimensione del file di pattern che è stato aperto con misure standard (modalità di esportazione). Valori validi: %1 cm.</translation>
     </message>
     <message>
         <source>The size value</source>
@@ -6219,7 +6227,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Fissare il valore dell&apos;altezza del file di pattern che è stato aperto con misure standard (modalità di esportazione). Valori validi: % 1 cm.</translation>
+        <translation>Fissare il valore dell&apos;altezza del file di pattern che è stato aperto con misure standard (modalità di esportazione). Valori validi: %1 cm.</translation>
     </message>
     <message>
         <source>The height value</source>
