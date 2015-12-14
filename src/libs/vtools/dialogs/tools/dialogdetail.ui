@@ -358,7 +358,7 @@
                <string>Scroll down the list</string>
               </property>
               <property name="text">
-               <string>...</string>
+               <string notr="true">...</string>
               </property>
               <property name="icon">
                <iconset theme="go-down">
@@ -373,7 +373,7 @@
                <string>Scroll up the list</string>
               </property>
               <property name="text">
-               <string>...</string>
+               <string notr="true">...</string>
               </property>
               <property name="icon">
                <iconset theme="go-up">
