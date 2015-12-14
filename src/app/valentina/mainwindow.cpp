@@ -2661,8 +2661,7 @@ void MainWindow::SetDefaultHeight()
     }
     else
     {
-        const int height = static_cast<int>(UnitConvertor(pattern->height(), *pattern->GetPatternUnit(), Unit::Cm));
-        index = gradationHeights->findText(QString().setNum(height));
+        index = gradationHeights->findText(QString().setNum(pattern->height()));
         if (index != -1)
         {
             gradationHeights->setCurrentIndex(index);
@@ -2686,8 +2685,7 @@ void MainWindow::SetDefaultSize()
     }
     else
     {
-        const int size = static_cast<int>(UnitConvertor(pattern->size(), *pattern->GetPatternUnit(), Unit::Cm));
-        index = gradationSizes->findText(QString().setNum(size));
+        index = gradationSizes->findText(QString().setNum(pattern->size()));
         if (index != -1)
         {
             gradationSizes->setCurrentIndex(index);
