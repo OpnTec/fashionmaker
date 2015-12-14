@@ -32,3 +32,5 @@ Patch contributors:
 		* Developing.
 		* Testing.
 		* Translation.
+	Bettina Gatzlaff <bettina.gatzlaff@gmail.com>
+		* Testing
