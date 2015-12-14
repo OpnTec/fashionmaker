@@ -39,6 +39,7 @@ public:
 
 private slots:
     void CheckEnglishLocalization();
+    void CheckEmptyToolButton();
 
 private:
     Q_DISABLE_COPY(TST_TSTranslation)
