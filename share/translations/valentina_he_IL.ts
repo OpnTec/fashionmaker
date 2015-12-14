@@ -1056,10 +1056,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Scroll up the list</source>
         <translation type="unfinished"></translation>
     </message>
