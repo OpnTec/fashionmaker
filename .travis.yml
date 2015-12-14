@@ -24,7 +24,7 @@ addons:
     - qt5-default 
     - qttools5-dev-tools 
     - libqt5xmlpatterns5-dev
-    - libqt5core5 
+    - libqt5core5a 
     - libqt5gui5 
     - libqt5printsupport5 
     - libqt5svg5 
