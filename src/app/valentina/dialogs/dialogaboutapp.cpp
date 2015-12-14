@@ -51,7 +51,7 @@ DialogAboutApp::DialogAboutApp(QWidget *parent) :
     ui->label_QT_Version->setText(buildCompatibilityString());
 
     QDate date = QLocale(QLocale::C).toDate(QString(__DATE__).simplified(), QLatin1String("MMM d yyyy"));
-    ui->label_Valentina_Built->setText(tr("Built on %3 at %4").arg(date.toString()).arg(__TIME__));
+    ui->label_Valentina_Built->setText(tr("Built on %1 at %2").arg(date.toString()).arg(__TIME__));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",
                                                            "The program is provided AS IS with NO WARRANTY OF ANY "
