@@ -28,6 +28,7 @@
 
 #include "tst_tstranslation.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/def.h"
 
 #include <QDomDocument>
 #include <QtTest>
@@ -136,6 +137,112 @@ void TST_TSTranslation::CheckEmptyToolButton()
                 const QString error = QString("Found '...' in context '%1'").arg(contextName);
                 QFAIL(qUtf8Printable(error));
             }
+        }
+        else
+        {
+            const QString message = QString("Message %1 is null.").arg(i);
+            QFAIL(qUtf8Printable(message));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::CheckPlaceMarkerExist_data()
+{
+    const QStringList locales = SupportedLocales();
+
+    {
+        QDir dir(TS_DIR);
+        const QStringList fileNames = dir.entryList(QStringList("valentina*.ts"));
+        QVERIFY2(locales.size() == fileNames.size()-1, "Unexpected count of files.");
+    }
+
+    QTest::addColumn<QString>("filename");
+
+    for(int i = 0; i < locales.size(); ++i)
+    {
+        const QString filename = QString("valentina_%1.ts").arg(locales.at(i));
+        const QString tag = QString("Check localization strings valentina_%1.ts").arg(locales.at(i));
+        QTest::newRow(qUtf8Printable(tag)) << filename;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::CheckPlaceMarkerExist()
+{
+    QFETCH(QString, filename);
+
+    const QDomNodeList messages = LoadTSFile(filename);
+    if (messages.isEmpty())
+    {
+        QSKIP("Can't begin test.");
+    }
+
+    for (qint32 i = 0, num = messages.size(); i < num; ++i)
+    {
+        const QDomElement message = messages.at(i).toElement();
+        if (message.isNull() == false)
+        {
+            const QString source = message.firstChildElement(TagSource).text();
+            if (source.isEmpty())
+            {
+                continue;
+            }
+
+            const QDomElement translationTag = message.firstChildElement(TagTranslation);
+            if (translationTag.hasAttribute(AttrType))
+            {
+                const QString attrVal = translationTag.attribute(AttrType);
+                if (attrVal == AttrValVanished || attrVal == AttrValUnfinished)
+                {
+                    continue;
+                }
+            }
+            const QString translation = translationTag.text();
+            if (translation.isEmpty())
+            {
+                continue;
+            }
+
+            int sourceMarkCount = 0;
+            int translationMarkCount = 0;
+
+            for (int i = 1; i <= 99; ++i)
+            {
+                const QString marker = QLatin1Literal("%") + QString().setNum(i);
+                const bool sourceMark = source.indexOf(marker) != -1;
+                if (sourceMark)
+                {
+                    ++sourceMarkCount;
+                    if (sourceMarkCount != i)
+                    {
+                        const QString message = QString("In source string '%1' was missed place marker '%2'.")
+                                .arg(source).arg(QLatin1Literal("%") + QString().setNum(sourceMarkCount));
+                        QFAIL(qUtf8Printable(message));
+                    }
+                }
+
+                const bool translationMark = translation.indexOf(marker) != -1;
+                if (translationMark)
+                {
+                    ++translationMarkCount;
+                    if (translationMarkCount != i)
+                    {
+                        const QString message = QString("In translation string '%1' was missed place marker '%2'.")
+                                .arg(translation).arg(QLatin1Literal("%") + QString().setNum(translationMarkCount));
+                        QFAIL(qUtf8Printable(message));
+                    }
+                }
+
+                if (sourceMark != translationMark)
+                {
+                    const QString message =
+                            QString("Compare to source string in translation string '%1' was missed place marker '%2'.")
+                            .arg(translation).arg(marker);
+                    QFAIL(qUtf8Printable(message));
+                }
+            }
+
         }
         else
         {

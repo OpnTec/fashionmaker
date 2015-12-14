@@ -43,6 +43,8 @@ public:
 private slots:
     void CheckEnglishLocalization();
     void CheckEmptyToolButton();
+    void CheckPlaceMarkerExist_data();
+    void CheckPlaceMarkerExist();
 
 private:
     Q_DISABLE_COPY(TST_TSTranslation)
