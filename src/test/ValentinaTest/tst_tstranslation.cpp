@@ -41,6 +41,7 @@ const QString TST_TSTranslation::TagTranslation    = QStringLiteral("translation
 const QString TST_TSTranslation::AttrType          = QStringLiteral("type");
 const QString TST_TSTranslation::AttrValVanished   = QStringLiteral("vanished");
 const QString TST_TSTranslation::AttrValUnfinished = QStringLiteral("unfinished");
+const QString TST_TSTranslation::AttrValObsolete   = QStringLiteral("obsolete");
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_TSTranslation::TST_TSTranslation(QObject *parent) :
@@ -74,7 +75,7 @@ void TST_TSTranslation::CheckEnglishLocalization()
             if (translationTag.hasAttribute(AttrType))
             {
                 const QString attrVal = translationTag.attribute(AttrType);
-                if (attrVal == AttrValVanished || attrVal == AttrValUnfinished)
+                if (attrVal == AttrValVanished || attrVal == AttrValUnfinished || attrVal == AttrValObsolete)
                 {
                     continue;
                 }
@@ -121,7 +122,7 @@ void TST_TSTranslation::CheckEmptyToolButton()
                 if (translationTag.hasAttribute(AttrType))
                 {
                     const QString attrVal = translationTag.attribute(AttrType);
-                    if (attrVal == AttrValVanished)
+                    if (attrVal == AttrValVanished || attrVal == AttrValObsolete)
                     {
                         continue;
                     }
@@ -193,7 +194,7 @@ void TST_TSTranslation::CheckPlaceMarkerExist()
             if (translationTag.hasAttribute(AttrType))
             {
                 const QString attrVal = translationTag.attribute(AttrType);
-                if (attrVal == AttrValVanished || attrVal == AttrValUnfinished)
+                if (attrVal == AttrValVanished || attrVal == AttrValUnfinished || attrVal == AttrValObsolete)
                 {
                     continue;
                 }

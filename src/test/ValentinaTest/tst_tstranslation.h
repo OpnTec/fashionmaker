@@ -59,6 +59,7 @@ private:
     static const QString AttrType;
     static const QString AttrValVanished;
     static const QString AttrValUnfinished;
+    static const QString AttrValObsolete;
 
     QDomNodeList LoadTSFile(const QString &filename);
 };
