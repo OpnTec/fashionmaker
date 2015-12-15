@@ -85,7 +85,7 @@ void TST_MeasurementRegExp::TestMeasurementRegExp()
         case ErrorSize:
         case ErrorLoad:
         {
-            const QString message = QString("Failed to check translation for system = %1 and locale = %2")
+            const QString message = QString("Can't to check translation for system = %1 and locale = %2")
                     .arg(system)
                     .arg(locale);
             QSKIP(qUtf8Printable(message));
@@ -397,7 +397,7 @@ void TST_MeasurementRegExp::TestAllTranslatedMeasurementsIsUnique()
         case ErrorSize:
         case ErrorLoad:
         {
-            const QString message = QString("Failed to check translation for system = %1 and locale = %2")
+            const QString message = QString("Can't to check translation for system = %1 and locale = %2")
                     .arg(system)
                     .arg(locale);
             QSKIP(qUtf8Printable(message));

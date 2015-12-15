@@ -217,8 +217,9 @@ void TST_TSTranslation::CheckPlaceMarkerExist()
                     ++sourceMarkCount;
                     if (sourceMarkCount != i)
                     {
-                        const QString message = QString("In source string '%1' was missed place marker '%2'.")
-                                .arg(source).arg(QLatin1Literal("%") + QString().setNum(sourceMarkCount));
+                        const QString message = QString("In source string '%1' was missed place marker ")
+                                .arg(source) + QLatin1Literal("'%") + QString().setNum(sourceMarkCount) +
+                                QLatin1Literal("'.");
                         QFAIL(qUtf8Printable(message));
                     }
                 }
@@ -229,8 +230,9 @@ void TST_TSTranslation::CheckPlaceMarkerExist()
                     ++translationMarkCount;
                     if (translationMarkCount != i)
                     {
-                        const QString message = QString("In translation string '%1' was missed place marker '%2'.")
-                                .arg(translation).arg(QLatin1Literal("%") + QString().setNum(translationMarkCount));
+                        const QString message = QString("In translation string '%1' was missed place marker ")
+                                .arg(translation) + QLatin1Literal("'%") + QString().setNum(translationMarkCount) +
+                                QLatin1Literal("'.");
                         QFAIL(qUtf8Printable(message));
                     }
                 }
@@ -238,8 +240,9 @@ void TST_TSTranslation::CheckPlaceMarkerExist()
                 if (sourceMark != translationMark)
                 {
                     const QString message =
-                            QString("Compare to source string in translation string '%1' was missed place marker '%2'.")
-                            .arg(translation).arg(marker);
+                        QString("Compare to source string in the translation string '%1' was missed place marker ")
+                            .arg(translation) + QLatin1Literal("'%") + QString().setNum(sourceMarkCount) +
+                            QLatin1Literal("'.");
                     QFAIL(qUtf8Printable(message));
                 }
             }
