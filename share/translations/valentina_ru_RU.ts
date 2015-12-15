@@ -4785,15 +4785,15 @@ Do you want to save your changes?</source>
     <name>MainWindowsNoGUI</name>
     <message>
         <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
-        <translation>При сохранении многостраничного документа все страницы должны быть одного размера. Вместо этого используйте функцию экспорта.</translation>
+        <translation type="vanished">При сохранении многостраничного документа все страницы должны быть одного размера. Вместо этого используйте функцию экспорта.</translation>
     </message>
     <message>
         <source>For previewing multypage document all sheet should have the same size.</source>
-        <translation>При предварительном просмотре многостраничного документа все страницы должны быть одного размера.</translation>
+        <translation type="vanished">При предварительном просмотре многостраничного документа все страницы должны быть одного размера.</translation>
     </message>
     <message>
         <source>For printing multypages document all sheet should have the same size.</source>
-        <translation>При печати многостраничного документа все страницы должны быть одного размера.</translation>
+        <translation type="vanished">При печати многостраничного документа все страницы должны быть одного размера.</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
@@ -4846,6 +4846,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Export error.</source>
         <translation>Ошибка экспорта.</translation>
+    </message>
+    <message>
+        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

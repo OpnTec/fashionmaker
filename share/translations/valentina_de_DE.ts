@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>Server name/IP:</source>
-        <translation type="unfinished"></translation>
+        <translation>Servername/IP:</translation>
     </message>
     <message>
         <source>Proxy address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxyadresse:</translation>
     </message>
     <message>
         <source>Proxy port:</source>
@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Gebaut auf %3 um %2 {1 ?}</translation>
+        <translation>Erstellt von %1 auf %2</translation>
     </message>
 </context>
 <context>
@@ -346,7 +346,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Gebaut auf %3 um %2 {1 ?}</translation>
+        <translation>Erstellt von %1 auf %2</translation>
     </message>
 </context>
 <context>
@@ -1724,11 +1724,11 @@
     </message>
     <message>
         <source>Move measurement up</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß vergrößern</translation>
     </message>
     <message>
         <source>Move measurement down</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß verkleinern</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -1854,7 +1854,7 @@
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Grundsatz der Auswahl des nächsten Schnittteils</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -1890,7 +1890,7 @@
     </message>
     <message>
         <source>Auto crop unused length</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisches Zuschneider der ungenutzten Länge</translation>
     </message>
     <message>
         <source>Unite pages (if possible)</source>
@@ -3853,7 +3853,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingehende Verbindung &apos;%1&apos; kann nicht aufgefangen werden</translation>
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
@@ -4459,11 +4459,11 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Point of intersection arcs</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittpunkt Bögen </translation>
     </message>
     <message>
         <source>Point of intersection circles</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittpunkt Kreise</translation>
     </message>
     <message>
         <source>Point from circle and tangent</source>
@@ -4475,7 +4475,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation> Bogen mit vorgegebener Länge </translation>
     </message>
     <message>
         <source>Settings</source>
@@ -4724,31 +4724,31 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modus zur Arbeit mit Schnitteilen. Diese Schnitteile sind die Basis für den nächsten Schritt &amp;quot;Details mode&amp;quot;. Bevor Sie weiterarbeiten können mit &amp;quot;Details mode&amp;quot; müssen Sie zunächst ein Detail erzeugen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modus für die Arbeit mit Details. Bevor Sie weitermachen können mit  &amp;quot;Details mode&amp;quot; müssen Sie zunächst ein Detail erstellen &amp;quot;Draw mode&amp;quot;. Details zu dieser Phase werden für die Erstellung eines Layouts verwendet. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modus zum Erstellen von Details. Dieser Modus ist verfügbar, wenn mindestens ein Detail erstellt wurde &amp;quot;Details mode&amp;quot;. Das Layout kann mit ihrem gewünschten Dateiformat exportiert und auf ihrer Festplatte gespeichert werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Unload measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen der geladenen Maße</translation>
     </message>
     <message>
         <source>Unload measurements if they was not used in a pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen der geladen Maße, die nicht im Schnitteil verwendet wurden.</translation>
     </message>
     <message>
         <source>Measurements unloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Geladene Maße gelöscht</translation>
     </message>
     <message>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geladene Maße können nicht gelöscht werden. Sie werden im Schnittteil verwendet.</translation>
     </message>
     <message>
         <source>True darts</source>
@@ -4779,15 +4779,15 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <name>MainWindowsNoGUI</name>
     <message>
         <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
-        <translation>Zum Speichern eines mehrseitiges Dokument müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion .</translation>
+        <translation type="vanished">Zum Speichern eines mehrseitiges Dokument müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion .</translation>
     </message>
     <message>
         <source>For previewing multypage document all sheet should have the same size.</source>
-        <translation>Für die Vorschau eines mehrseitiges Dokumentes müssen alle Blätter die gleiche Größe haben.</translation>
+        <translation type="vanished">Für die Vorschau eines mehrseitiges Dokumentes müssen alle Blätter die gleiche Größe haben.</translation>
     </message>
     <message>
         <source>For printing multypages document all sheet should have the same size.</source>
-        <translation>Zum Drucken eines mehrseitiges Dokumentes müssen alle Blätter die gleiche Größe haben.</translation>
+        <translation type="vanished">Zum Drucken eines mehrseitiges Dokumentes müssen alle Blätter die gleiche Größe haben.</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
@@ -4840,6 +4840,18 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Export error.</source>
         <translation>Export Fehler.</translation>
+    </message>
+    <message>
+        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5335,11 +5347,11 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Move measurement up</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß vergrößern</translation>
     </message>
     <message>
         <source>Move measurement down</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß verkleinern</translation>
     </message>
     <message>
         <source>Calculated value:</source>
@@ -5739,63 +5751,63 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create from existing file</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellen aus vorhandener Datei</translation>
     </message>
     <message>
         <source>Select file</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei auswählen</translation>
     </message>
     <message>
         <source>Export standard measurements not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportieren von Standard-Maßen wird nicht unterstützt.</translation>
     </message>
     <message>
         <source>Measurement diagram</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß-Diagramm</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unbekanntes Maß&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unbekanntes Maß&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">Über Qt</translation>
+        <translation>Über QT</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei konnte nicht gespeichert werden.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche</translation>
     </message>
     <message>
         <source>Measurement&apos;s name in a formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des Maßes in Formel</translation>
     </message>
     <message>
         <source>Measurement&apos;s name in a formula.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des Maßes in Formel</translation>
     </message>
     <message>
         <source>Measurement&apos;s human-readable name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des Maßes für den Benutzer.</translation>
     </message>
     <message>
         <source>Customer&apos;s name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kundenname</translation>
     </message>
     <message>
         <source>Customer&apos;s family name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Familienname des Kunden</translation>
     </message>
     <message>
         <source>Customer&apos;s email address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Email-Adresse des Kunden</translation>
     </message>
     <message>
         <source>Save...</source>
@@ -5845,7 +5857,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittmuster-System</translation>
     </message>
     <message>
         <source>Author:</source>
@@ -5873,7 +5885,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittmuster-System:</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -5881,11 +5893,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard Höhe:</translation>
     </message>
     <message>
         <source>Default size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard Größe:</translation>
     </message>
 </context>
 <context>
@@ -5978,11 +5990,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler Erstellung Sicherungsdatei: %1</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler Erstellung reservierte Kopie : %1</translation>
     </message>
 </context>
 <context>
@@ -6070,35 +6082,39 @@ Do you want to save your changes?</source>
     <name>VCommandLine</name>
     <message>
         <source>Path to custom measure file (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad zur individuellen Maß-Datei (Export-Modus).</translation>
     </message>
     <message>
         <source>The measure file</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Maßsatz-Datei.</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl entspricht Ausgabeformat (default = 0 , Export -Modus):</translation>
     </message>
     <message>
         <source>Format number</source>
-        <translation type="unfinished"></translation>
+        <translation>Format Nummer</translation>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl entsprechend Seitenvorlage (default = 0 , Export -Modus):</translation>
     </message>
     <message>
         <source>Template number</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorlage Nummer</translation>
     </message>
     <message>
         <source>The page width</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Seitenbreite</translation>
     </message>
     <message>
         <source>The measure unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Maßeinheit</translation>
+    </message>
+    <message>
+        <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
+        <translation type="vanished">Drehung in Grad (einer vordefinierten). Standard (oder 0 ) nicht drehen (Export-Modus)</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -6106,27 +6122,47 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisches Zuschneider der ungenutzten Länge ( Export-Modus ) .</translation>
+    </message>
+    <message>
+        <source>Unite pages if possible (export mode).</source>
+        <translation type="vanished">Seiten zusammenfassen wenn möglich (Export-Modus).</translation>
+    </message>
+    <message>
+        <source>Save length of the sheet if set. (export mode).</source>
+        <translation type="vanished">Speichern der Länge des Blattes, wenn gesetzt. (Export-Modus).</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Layout -Einheiten (eines Papiers mit Ausnahme von px, Export-Modus).</translation>
     </message>
     <message>
         <source>The unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Einhzeit</translation>
+    </message>
+    <message>
+        <source>Shift layout length measured in layout units (export mode).</source>
+        <translation type="vanished">Verschieben der gemessenen Layout-Längen in Layout-Einheiten ( Export-Modus).</translation>
     </message>
     <message>
         <source>Shift length</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschieben Länge</translation>
+    </message>
+    <message>
+        <source>Gap width x2, measured in layout units. (export mode).</source>
+        <translation type="vanished">Spaltbreite x2, gemessen in Layout-Einheiten. (Export-Modus).</translation>
     </message>
     <message>
         <source>The gap width</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Spaltenbreite</translation>
+    </message>
+    <message>
+        <source>Sets layout groupping (export mode): </source>
+        <translation type="vanished">Layout-Gruppen festlegen (Export -Modus):</translation>
     </message>
     <message>
         <source>Grouping type</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppentyp</translation>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
@@ -6138,47 +6174,51 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid rotation value. That must be one of predefined values.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültige Rotationswert. Dies muss ein vordefinierter Werte sein.</translation>
     </message>
     <message>
         <source>Unknown page templated selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannte Seitenvorlage verwendet.</translation>
     </message>
     <message>
         <source>Unsupported paper units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht unterstützte Papiergröße.</translation>
     </message>
     <message>
         <source>Unsupported layout units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht unterstützte Layout-Größe.</translation>
     </message>
     <message>
         <source>Export options can be used with single input file only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Export-Optionen können nur mit einer Eingabedatei verwendet werden.</translation>
     </message>
     <message>
         <source>Test option can be used with single input file only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Test- Option kann nur mit einer Eingabedatei verwendet werden.</translation>
     </message>
     <message>
         <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Basisdateiname der exportierten Layout-Dateie . Verwenden Sie diesen um den Export-Konsolen-Modus zu aktivieren.</translation>
     </message>
     <message>
         <source>The base filename of layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Basisdateinamen der Layoutdateien</translation>
+    </message>
+    <message>
+        <source>The path to output destination folder.</source>
+        <translation type="vanished">Der Pfad zum Zielordner</translation>
     </message>
     <message>
         <source>The destination folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Zielordner</translation>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Setze Größenwert einer Schnitteil-Datei, die mit Standard-Maßen (Export-Modus) geöffnet wurde. Gültige Werte: %1 cm.</translation>
     </message>
     <message>
         <source>The size value</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Basisgröße</translation>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
@@ -6186,7 +6226,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The height value</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Basishöhe</translation>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
@@ -6198,11 +6238,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Größen-Gradierungsmaß</translation>
     </message>
     <message>
         <source>Invalid gradation height value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Längen-Gradierungsmaß</translation>
     </message>
     <message>
         <source>Pattern making program.</source>
@@ -6211,6 +6251,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern file.</source>
         <translation>Schnittmuster-File.</translation>
+    </message>
+    <message>
+        <source>Ignore margins printing (export mode). Set all margins to 0.</source>
+        <translation type="vanished">Ignorieren der Seitenränder zum Druck (Export-Modus). Setzen Sie alle Seitenränder auf 0.</translation>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
@@ -6411,11 +6455,11 @@ Do you want to save your changes?</source>
     <name>VMeasurements</name>
     <message>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß &apos;%1&apos; kann nicht gefunden werden.</translation>
     </message>
     <message>
         <source>The measurement name is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des Maßes ist leer!</translation>
     </message>
 </context>
 <context>
@@ -6572,43 +6616,43 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of intersection arcs</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren des Bogen-Schnittpunktes</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection circles</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren des Kreis-Schnittpunktes</translation>
     </message>
     <message>
         <source>Error creating or updating point from circle and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren eines Berührungpunktes</translation>
     </message>
     <message>
         <source>Error creating or updating point from arc and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren eines Punktes von Bogen und Tangente</translation>
     </message>
     <message>
         <source>Error creating or updating true darts</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren des Abnäherausgleichs</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falscher Symbolname &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown point type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Punkt Typ &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown spline type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Spline Type &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown arc type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Bogen Typ &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown tools type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Werkzeug Typ &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -6788,7 +6832,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation> Bogen mit vorgegebener Länge</translation>
     </message>
     <message>
         <source>True darts</source>
@@ -6796,15 +6840,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point 1 label</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt 1 Bezeichnung</translation>
     </message>
     <message>
         <source>Point 2 label</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt 2 Bezeichnung</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two arcs</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt aus Schnittpunkt zwei Bögen</translation>
     </message>
     <message>
         <source>Take</source>
@@ -6812,27 +6856,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt aus zwei Kreisen</translation>
     </message>
     <message>
         <source>First circle radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Erster Kreisradius</translation>
     </message>
     <message>
         <source>Second circle radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweiter Kreisradius</translation>
     </message>
     <message>
         <source>Tool to make point from circle and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation> Punkt aus Bogen und Tangente</translation>
     </message>
     <message>
         <source>Circle radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreisradius</translation>
     </message>
     <message>
         <source>Tool to make point from arc and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation> Punkt aus Bogen und Tangente</translation>
     </message>
 </context>
 <context>
@@ -6845,42 +6889,42 @@ Do you want to save your changes?</source>
     <message>
         <source>Bunka Fashion College</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Bunka Fashion College</translation>
     </message>
     <message>
         <source>Fundamentals of Garment Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fundamentals of Garment Design</translation>
     </message>
     <message>
         <source>Barnfield and Richard</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Barnfield and Richard</translation>
     </message>
     <message>
         <source>Jo Barnfield and Andrew Richards</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Jo Barnfield and Andrew Richards</translation>
     </message>
     <message>
         <source>Pattern Making Primer</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern Making Primer</translation>
     </message>
     <message>
         <source>Friendship/Women</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Friendship/Women</translation>
     </message>
     <message>
         <source>Elizabeth Friendship</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Elizabeth Friendship</translation>
     </message>
     <message>
         <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</translation>
     </message>
     <message>
         <source>Morris, K.</source>
@@ -6895,7 +6939,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Sewing Lingerie that Fits</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sewing Lingerie that Fits</translation>
     </message>
     <message>
         <source>Castro</source>
@@ -6910,7 +6954,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Patternmaking in Practic</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Patternmaking in Practic</translation>
     </message>
     <message>
         <source>Kim &amp; Uh</source>
@@ -6920,12 +6964,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Injoo Kim and Mykyung Uh</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Injoo Kim and Mykyung Uh</translation>
     </message>
     <message>
         <source>Apparel Making in Fashion Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Apparel Making in Fashion Design</translation>
     </message>
     <message>
         <source>Waugh</source>
@@ -6940,7 +6984,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Corsets and Crinolines</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Corsets and Crinolines</translation>
     </message>
     <message>
         <source>Grimble</source>
@@ -6955,12 +6999,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Fashions of the Gilded Age</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fashions of the Gilded Age</translation>
     </message>
     <message>
         <source>Thornton&apos;s International System</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Thornton&apos;s International System</translation>
     </message>
     <message>
         <source>ed. R. L. Shep</source>
@@ -6970,7 +7014,7 @@ Do you want to save your changes?</source>
     <message>
         <source>The Great War: Styles and Patterns of the 1910s</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Great War: Styles and Patterns of the 1910s</translation>
     </message>
     <message>
         <source>Hillhouse &amp; Mansfield</source>
@@ -6980,12 +7024,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Marion S. Hillhouse and Evelyn A. Mansfield</translation>
     </message>
     <message>
         <source>Dress Design: Draping and Flat Pattern Making</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dress Design: Draping and Flat Pattern Making</translation>
     </message>
     <message>
         <source>Pivnick</source>
@@ -7000,7 +7044,7 @@ Do you want to save your changes?</source>
     <message>
         <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>How to Design Beautiful Clothes: Designing and Pattern Making</translation>
     </message>
     <message>
         <source>Minister &amp; Son</source>
@@ -7015,7 +7059,7 @@ Do you want to save your changes?</source>
     <message>
         <source>The Complete Guide to Practical Cutting (1853)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Complete Guide to Practical Cutting (1853)</translation>
     </message>
     <message>
         <source>Strickland</source>
@@ -7030,7 +7074,7 @@ Do you want to save your changes?</source>
     <message>
         <source>A Tailoring Manual</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>A Tailoring Manual</translation>
     </message>
     <message>
         <source>Loh &amp; Lewis</source>
@@ -7040,12 +7084,12 @@ Do you want to save your changes?</source>
     <message>
         <source>May Loh and Diehl Lewis</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>May Loh and Diehl Lewis</translation>
     </message>
     <message>
         <source>Patternless Fashion Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Patternless Fashion Design</translation>
     </message>
     <message>
         <source>Morris, F. R.</source>
@@ -7060,7 +7104,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Ladies Garment Cutting and Making</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ladies Garment Cutting and Making</translation>
     </message>
     <message>
         <source>Mason</source>
@@ -7075,7 +7119,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Gertrude Mason&apos;s Patternmaking Book</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gertrude Mason&apos;s Patternmaking Book</translation>
     </message>
     <message>
         <source>Kimata</source>
@@ -7090,22 +7134,22 @@ Do you want to save your changes?</source>
     <message>
         <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</translation>
     </message>
     <message>
         <source>Master Designer</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Master Designer</translation>
     </message>
     <message>
         <source>The Master Designer (Chicago, IL)</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Master Designer (Chicago, IL)</translation>
     </message>
     <message>
         <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Master Designer&apos;s System of Designing, Cutting and Grading</translation>
     </message>
     <message>
         <source>Kopp</source>
@@ -7120,7 +7164,7 @@ Do you want to save your changes?</source>
     <message>
         <source>How to Draft Basic Patterns</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>How to Draft Basic Patterns</translation>
     </message>
     <message>
         <source>Ekern</source>
@@ -7135,7 +7179,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Slacks Cut-to-Fit for Your Figure</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Slacks Cut-to-Fit for Your Figure</translation>
     </message>
     <message>
         <source>Doyle</source>
@@ -7150,7 +7194,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Sarah&apos;s Key to Pattern Drafting</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sarah&apos;s Key to Pattern Drafting</translation>
     </message>
     <message>
         <source>Shelton</source>
@@ -7165,22 +7209,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Design and Sew Jeans</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Design and Sew Jeans</translation>
     </message>
     <message>
         <source>Lady Boutique</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lady Boutique</translation>
     </message>
     <message>
         <source>Lady Boutique</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lady Boutique</translation>
     </message>
     <message>
         <source>Lady Boutique magazine (Japan)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lady Boutique magazine (Japan)</translation>
     </message>
     <message>
         <source>Rohr</source>
@@ -7195,7 +7239,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</translation>
     </message>
     <message>
         <source>Moore</source>
@@ -7210,7 +7254,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</translation>
     </message>
     <message>
         <source>Abling</source>
@@ -7225,7 +7269,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Integrating Draping, Drafting and Drawing</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Integrating Draping, Drafting and Drawing</translation>
     </message>
     <message>
         <source>Fukomoto</source>
@@ -7240,22 +7284,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</translation>
     </message>
     <message>
         <source>Dressmaking International</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking International</translation>
     </message>
     <message>
         <source>Dressmaking International</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking International</translation>
     </message>
     <message>
         <source>Dressmaking International magazine (Japan)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking International magazine (Japan)</translation>
     </message>
     <message>
         <source>Erwin</source>
@@ -7270,7 +7314,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Practical Dress Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Practical Dress Design</translation>
     </message>
     <message>
         <source>Gough</source>
@@ -7280,12 +7324,12 @@ Do you want to save your changes?</source>
     <message>
         <source>E. L. G. Gough</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>E. L. G. Gough</translation>
     </message>
     <message>
         <source>Principles of Garment Cutting</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Principles of Garment Cutting</translation>
     </message>
     <message>
         <source>Allemong</source>
@@ -7315,7 +7359,7 @@ Do you want to save your changes?</source>
     <message>
         <source>How to Make Your Own Sewing Patterns</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>How to Make Your Own Sewing Patterns</translation>
     </message>
     <message>
         <source>Zarapkar</source>
@@ -7325,12 +7369,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</translation>
     </message>
     <message>
         <source>Zarapkar System of Cutting</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zarapkar System of Cutting</translation>
     </message>
     <message>
         <source>Kunick</source>
@@ -7345,7 +7389,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</translation>
     </message>
     <message>
         <source>Handford</source>
@@ -7360,7 +7404,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</translation>
     </message>
     <message>
         <source>Davis</source>
@@ -7375,7 +7419,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</translation>
     </message>
     <message>
         <source>MacLochlainn</source>
@@ -7390,7 +7434,7 @@ Do you want to save your changes?</source>
     <message>
         <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Victorian Tailor: An Introduction to Period Tailoring</translation>
     </message>
     <message>
         <source>Joseph-Armstrong</source>
@@ -7405,12 +7449,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Patternmaking for Fashion Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Patternmaking for Fashion Design</translation>
     </message>
     <message>
         <source>Supreme System</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Supreme System</translation>
     </message>
     <message>
         <source>Frederick T. Croonberg</source>
@@ -7420,7 +7464,7 @@ Do you want to save your changes?</source>
     <message>
         <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</translation>
     </message>
     <message>
         <source>Sugino</source>
@@ -7430,17 +7474,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Dressmaking</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dressmaking</translation>
     </message>
     <message>
         <source>Pattern Drafting Vols. I, II, III (Japan)</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern Drafting Vols. I, II, III (Japan)</translation>
     </message>
     <message>
         <source>Centre Point System</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Centre Point System</translation>
     </message>
     <message>
         <source>Louis Devere</source>
@@ -7450,12 +7494,12 @@ Do you want to save your changes?</source>
     <message>
         <source>The Handbook of Practical Cutting on the Centre Point System</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Handbook of Practical Cutting on the Centre Point System</translation>
     </message>
     <message>
         <source>Aldrich/Men</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Aldrich/Men</translation>
     </message>
     <message>
         <source>Winifred Aldrich</source>
@@ -7465,17 +7509,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Metric Pattern Cutting for Menswear</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Metric Pattern Cutting for Menswear</translation>
     </message>
     <message>
         <source>Aldrich/Women</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Aldrich/Women</translation>
     </message>
     <message>
         <source>Metric Pattern Cutting for Women&apos;s Wear</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Metric Pattern Cutting for Women&apos;s Wear</translation>
     </message>
     <message>
         <source>Kershaw</source>
@@ -7490,7 +7534,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Patternmaking for Menswear</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Patternmaking for Menswear</translation>
     </message>
     <message>
         <source>Gilewska</source>
@@ -7505,7 +7549,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern-Drafting for Fashion: The Basics</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern-Drafting for Fashion: The Basics</translation>
     </message>
     <message>
         <source>Lo</source>
@@ -7520,7 +7564,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern Cutting</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern Cutting</translation>
     </message>
     <message>
         <source>Bray</source>
@@ -7540,7 +7584,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Knowles/Men</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Knowles/Men</translation>
     </message>
     <message>
         <source>Lori A. Knowles</source>
@@ -7550,17 +7594,17 @@ Do you want to save your changes?</source>
     <message>
         <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>The Practical Guide to Patternmaking for Fashion Designers: Menswear</translation>
     </message>
     <message>
         <source>Friendship/Men</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Friendship/Men</translation>
     </message>
     <message>
         <source>Pattern Cutting for Men&apos;s Costume</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern Cutting for Men&apos;s Costume</translation>
     </message>
     <message>
         <source>Brown</source>
@@ -7575,7 +7619,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Art in Dress</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Art in Dress</translation>
     </message>
     <message>
         <source>Mitchell</source>
@@ -7590,7 +7634,7 @@ Do you want to save your changes?</source>
     <message>
         <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</translation>
     </message>
     <message>
         <source>GOST 17917-86</source>
@@ -7600,12 +7644,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Ministry of consumer industry of the USSR</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ministry of consumer industry of the USSR</translation>
     </message>
     <message>
         <source>Standard figure boys</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Standard figure boys</translation>
     </message>
     <message>
         <source>Eddy</source>
@@ -7615,42 +7659,42 @@ Do you want to save your changes?</source>
     <message>
         <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Josephine F. Eddy and Elizabeth C. B. Wiley</translation>
     </message>
     <message>
         <source>Pattern and Dress Design</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pattern and Dress Design</translation>
     </message>
     <message>
         <source>Knowles/Women</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Knowles/Women</translation>
     </message>
     <message>
         <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</translation>
     </message>
     <message>
         <source>American Garment Cutter</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>American Garment Cutter</translation>
     </message>
     <message>
         <source>None</source>
         <comment>System name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>Valentina team</source>
         <comment>Author name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Valentina Team</translation>
     </message>
     <message>
         <source>Valentina&apos;s internal standard</source>
         <comment>Book name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Valentina&apos;s interner Standard</translation>
     </message>
     <message>
         <source>Line_</source>
@@ -7855,7 +7899,7 @@ Do you want to save your changes?</source>
     <message>
         <source>in</source>
         <comment>inch</comment>
-        <translation type="unfinished"></translation>
+        <translation>in</translation>
     </message>
 </context>
 <context>

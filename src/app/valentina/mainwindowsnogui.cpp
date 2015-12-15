@@ -274,7 +274,7 @@ void MainWindowsNoGUI::SaveAsPDF()
 {
     if (not isPagesUniform())
     {
-        qCritical()<<tr("For saving multypage document all sheet should have the same size. Use export "
+        qCritical()<<tr("For saving multipage document all sheet should have the same size. Use export "
                         "function instead.");
         return;
     }
@@ -377,7 +377,7 @@ void MainWindowsNoGUI::PrintPreviewOrigin()
 {
     if (not isPagesUniform())
     {
-        qCritical()<<tr("For previewing multypage document all sheet should have the same size.");
+        qCritical()<<tr("For previewing multipage document all sheet should have the same size.");
         return;
     }
 
@@ -397,7 +397,7 @@ void MainWindowsNoGUI::PrintOrigin()
 {
     if (not isPagesUniform())
     {
-        qCritical()<<tr("For printing multypages document all sheet should have the same size.");
+        qCritical()<<tr("For printing multipages document all sheet should have the same size.");
         return;
     }
 

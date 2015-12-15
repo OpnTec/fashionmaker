@@ -4785,15 +4785,15 @@ Do you want to save your changes?</translation>
     <name>MainWindowsNoGUI</name>
     <message>
         <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
-        <translation>For saving multypage document all sheet should have the same size. Use export function instead.</translation>
+        <translation type="vanished">For saving multipage document all sheet should have the same size. Use export function instead.</translation>
     </message>
     <message>
         <source>For previewing multypage document all sheet should have the same size.</source>
-        <translation>For previewing multypage document all sheet should have the same size.</translation>
+        <translation type="vanished">For previewing multipage document all sheet should have the same size.</translation>
     </message>
     <message>
         <source>For printing multypages document all sheet should have the same size.</source>
-        <translation>For printing multypages document all sheet should have the same size.</translation>
+        <translation type="vanished">For printing multipages document all sheet should have the same size.</translation>
     </message>
     <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
@@ -4846,6 +4846,18 @@ Do you want to save your changes?</translation>
     <message>
         <source>Export error.</source>
         <translation>Export error.</translation>
+    </message>
+    <message>
+        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

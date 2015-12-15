@@ -4684,18 +4684,6 @@ Quiere guardar los cambios?</translation>
 <context>
     <name>MainWindowsNoGUI</name>
     <message>
-        <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>For previewing multypage document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>For printing multypages document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Creating file &apos;%1&apos; failed! %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4745,6 +4733,18 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Export error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For previewing multipage document all sheet should have the same size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For printing multipages document all sheet should have the same size.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
