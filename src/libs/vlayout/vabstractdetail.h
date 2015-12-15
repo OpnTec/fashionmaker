@@ -70,12 +70,12 @@ public:
 
 protected:
     static QVector<QPointF> RemoveDublicates(const QVector<QPointF> &points);
+    static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points);
+    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
 
 private:
     QSharedDataPointer<VAbstractDetailData> d;
 
-    static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points);
-    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     static QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width);
     static QPointF          UnclosedEkvPoint(const QLineF &line, const QLineF &helpLine, const qreal &width);
     static QLineF           ParallelLine(const QLineF &line, qreal width );

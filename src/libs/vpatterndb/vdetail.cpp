@@ -382,6 +382,8 @@ QVector<QPointF> VDetail::ContourPoints(const VContainer *data) const
                 break;
         }
     }
+
+    points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
     return points;
 }
 
@@ -425,6 +427,8 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
                 break;
         }
     }
+
+    pointsEkv = CheckLoops(CorrectEquidistantPoints(pointsEkv));//A path can contains loops
 
     if (getClosed() == true)
     {
