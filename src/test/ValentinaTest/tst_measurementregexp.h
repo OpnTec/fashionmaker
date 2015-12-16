@@ -45,12 +45,10 @@ public:
 
 private slots:
     void TestOriginalMeasurementNamesRegExp();
-    void TestMeasurementRegExp_data();
-    void TestMeasurementRegExp();
+    void TestVariableStrings_data();
+    void TestVariableStrings();
     void TestCorrectOrderMeasurement_data();
     void TestCorrectOrderMeasurement();
-    void TestAllTranslatedMeasurementsIsUnique_data();
-    void TestAllTranslatedMeasurementsIsUnique();
 
 private:
     Q_DISABLE_COPY(TST_MeasurementRegExp)

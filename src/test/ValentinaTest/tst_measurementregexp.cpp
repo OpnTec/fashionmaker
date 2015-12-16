@@ -65,14 +65,14 @@ void TST_MeasurementRegExp::TestOriginalMeasurementNamesRegExp()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_MeasurementRegExp::TestMeasurementRegExp_data()
+void TST_MeasurementRegExp::TestVariableStrings_data()
 {
     PrepareMeasurementData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_MeasurementRegExp::TestMeasurementRegExp()
+void TST_MeasurementRegExp::TestVariableStrings()
 {
     QFETCH(QString, system);
     QFETCH(QString, locale);
@@ -94,6 +94,7 @@ void TST_MeasurementRegExp::TestMeasurementRegExp()
         case NoError:
         {
             CheckRegExpNames();
+            CheckIsNamesUnique();
 
             if (not pmsTranslator.isNull())
             {
@@ -378,56 +379,6 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_MeasurementRegExp::TestAllTranslatedMeasurementsIsUnique_data()
-{
-    PrepareMeasurementData();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TST_MeasurementRegExp::TestAllTranslatedMeasurementsIsUnique()
-{
-    QFETCH(QString, system);
-    QFETCH(QString, locale);
-
-    const int res = LoadTranslation(system, locale);
-
-    switch(res)
-    {
-        case ErrorInstall:
-        case ErrorSize:
-        case ErrorLoad:
-        {
-            const QString message = QString("Can't to check translation for system = %1 and locale = %2")
-                    .arg(system)
-                    .arg(locale);
-            QSKIP(qUtf8Printable(message));
-            break;
-        }
-        case NoError:
-        {
-            CheckIsNamesUnique();
-
-            if (not pmsTranslator.isNull())
-            {
-                const bool result = QCoreApplication::removeTranslator(pmsTranslator);
-
-                if (result == false)
-                {
-                    const QString message = QString("Can't remove translation for system = %1 and locale = %2")
-                            .arg(system)
-                            .arg(locale);
-                    QWARN(qUtf8Printable(message));
-                }
-                delete pmsTranslator;
-            }
-            break;
-        }
-        default:
-            QWARN("Unexpected state");
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TST_MeasurementRegExp::PrepareMeasurementData()
 {
     const int systemCounts = 56;
@@ -532,8 +483,11 @@ void TST_MeasurementRegExp::CheckRegExpNames() const
     foreach(const QString &str, originalNames)
     {
         const QString translated = trMs->MToUser(str);
-        const QString message = QString("Original name:'%1', translated name:'%2'").arg(str).arg(translated);
-        QVERIFY2(re.match(translated).hasMatch(), qUtf8Printable(message));
+        if (not re.match(translated).hasMatch())
+        {
+            const QString message = QString("Original name:'%1', translated name:'%2'").arg(str).arg(translated);
+            QFAIL(qUtf8Printable(message));
+        }
     }
 }
 
@@ -546,8 +500,11 @@ void TST_MeasurementRegExp::CheckIsNamesUnique() const
     foreach(const QString &str, originalNames)
     {
         const QString translated = trMs->MToUser(str);
-        const QString message = QString("Original name:'%1', translated name:'%2'").arg(str).arg(translated);
-        QVERIFY2(not names.contains(translated), qUtf8Printable(message));
+        if (names.contains(translated))
+        {
+            const QString message = QString("Original name:'%1', translated name:'%2'").arg(str).arg(translated);
+            QFAIL(qUtf8Printable(message));
+        }
         names.insert(translated);
     }
 }
