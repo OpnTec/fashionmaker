@@ -55,6 +55,7 @@ VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quin
 {
     radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm);
     namePoint = new VGraphicsSimpleTextItem(this);
+    connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VNodePoint::PointChoosed);
     lineName = new QGraphicsLineItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this,
             &VNodePoint::NameChangePosition);
@@ -78,7 +79,8 @@ VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quin
  * @param idTool tool id.
  * @param parent QObject parent
  */
-void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Document &parse,
+void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene,
+                        quint32 id, quint32 idPoint, const Document &parse,
                         const Source &typeCreation, const quint32 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
@@ -87,6 +89,7 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, quint32 id, qui
         //TODO Need create garbage collector and remove all nodes, what we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool, parent);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VNodePoint::EnableToolMove);
         doc->AddTool(id, point);
         if (idTool != 0)
         {
@@ -131,6 +134,12 @@ void VNodePoint::RestoreNode()
 QString VNodePoint::getTagName() const
 {
     return VNodePoint::TagName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::PointChoosed()
+{
+    emit ChoosedTool(id, SceneObject::Point);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -280,4 +289,11 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
 void VNodePoint::RefreshLine()
 {
     VAbstractTool::RefreshLine(this, namePoint, lineName, radius);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::EnableToolMove(bool move)
+{
+    this->setFlag(QGraphicsItem::ItemIsMovable, move);
+    namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
 }

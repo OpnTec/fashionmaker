@@ -82,7 +82,7 @@ VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, co
  * @param pRotate point rotation.
  * @param angle angle rotation.
  */
-void VToolUnionDetails::AddToNewDetail(QObject *tool, VAbstractPattern *doc, VContainer *data, VDetail &newDetail,
+void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data, VDetail &newDetail,
                                        const VDetail &det, const int &i, const quint32 &idTool, const qreal &dx,
                                        const qreal &dy, const quint32 &pRotate, const qreal &angle)
 {
@@ -105,7 +105,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VAbstractPattern *doc, VCo
                 VPointF *point1 = new VPointF(*point);
                 point1->setMode(Draw::Modeling);
                 id = data->AddGObject(point1);
-                VNodePoint::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
+                VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
             }
         }
         break;
@@ -546,7 +546,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         VDetail newDetail;
         do
         {
-            AddToNewDetail(unionDetails, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id);
+            AddToNewDetail(unionDetails, scene, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id);
             ++i;
             if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-2)
             {
@@ -558,7 +558,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                     {
                         j=0;
                     }
-                    AddToNewDetail(unionDetails, doc, data, newDetail, d2.RemoveEdge(indexD2), j, id, dx, dy,
+                    AddToNewDetail(unionDetails, scene, doc, data, newDetail, d2.RemoveEdge(indexD2), j, id, dx, dy,
                                    det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
