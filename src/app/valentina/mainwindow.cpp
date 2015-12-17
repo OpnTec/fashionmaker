@@ -289,6 +289,7 @@ void MainWindow::InitScenes()
     connect(this, &MainWindow::EnableItemMove, sceneDraw, &VMainGraphicsScene::EnableItemMove);
     connect(sceneDraw, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
     sceneDetails = new VMainGraphicsScene();
+    connect(this, &MainWindow::EnableItemMove, sceneDetails, &VMainGraphicsScene::EnableItemMove);
     connect(sceneDetails, &VMainGraphicsScene::mouseMove, this, &MainWindow::mouseMove);
 
     ui->view->setScene(currentScene);

@@ -160,7 +160,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
             case (Tool::NodePoint):
             {
                 id = CreateNode<VPointF>(data, nodeD.getId());
-                VNodePoint::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+                VNodePoint::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeArc):

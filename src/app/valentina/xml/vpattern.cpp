@@ -1263,7 +1263,7 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idObject );
         data->UpdateGObject(id, new VPointF(point->toQPointF(), point->name(), mx, my, idObject,
                                             Draw::Modeling));
-        VNodePoint::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
+        VNodePoint::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
