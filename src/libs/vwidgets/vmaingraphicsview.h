@@ -73,6 +73,8 @@ signals:
 public slots:
     void scrollingTime(qreal x);
     void animFinished();
+protected:
+    virtual bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(GraphicsViewZoom)
     QGraphicsView*        _view;
@@ -84,7 +86,6 @@ private:
     /** @brief _numScheduledScalings keep number scheduled scalings. */
     qint32   _numScheduledScalings;
 
-    virtual bool eventFilter(QObject* object, QEvent* event) Q_DECL_OVERRIDE;
     void FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view);
 };
 

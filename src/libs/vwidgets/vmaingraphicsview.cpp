@@ -90,29 +90,19 @@ void GraphicsViewZoom::set_zoom_factor_base(double value)
 void GraphicsViewZoom::scrollingTime(qreal x)
 {
     Q_UNUSED(x);
-    qreal factor = 1.0;
-    if (_numScheduledScalings < 0)
+
+    qreal scroll = _view->verticalScrollBar()->pageStep()/60;
+    if (_numScheduledScalings > 0)
     {
-        factor = factor*13.8;
+        scroll = scroll * -1;
     }
-    else
-    {
-        factor = factor*-13.8;
-    }
-    _view->verticalScrollBar()->setValue(qRound(_view->verticalScrollBar()->value() + factor));
+    _view->verticalScrollBar()->setValue(qRound(_view->verticalScrollBar()->value() + scroll));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::animFinished()
 {
-    if (_numScheduledScalings > 0)
-    {
-        _numScheduledScalings--;
-    }
-    else
-    {
-        _numScheduledScalings++;
-    }
+    _numScheduledScalings > 0 ? _numScheduledScalings-- : _numScheduledScalings++;
     anim->stop();
 
     /*
@@ -133,53 +123,69 @@ void GraphicsViewZoom::animFinished()
 //---------------------------------------------------------------------------------------------------------------------
 bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
 {
-  if (event->type() == QEvent::MouseMove)
-  {
-    /*
-     * Here we are saving cursor position on view and scene.
-     * This data need for gentle_zoom().
-     * Almoust the same we do in method GraphicsViewZoom::animFinished.
-     */
-    QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
-    QPointF delta = target_viewport_pos - mouse_event->pos();
-    if (qAbs(delta.x()) > 5 || qAbs(delta.y()) > 5)
+    if (event->type() == QEvent::MouseMove)
     {
-      target_viewport_pos = mouse_event->pos();
-      target_scene_pos = _view->mapToScene(mouse_event->pos());
-    }
-  }
-  else if (event->type() == QEvent::Wheel)
-  {
-    QWheelEvent* wheel_event = static_cast<QWheelEvent*>(event);
-    if (QApplication::keyboardModifiers() == _modifiers)
-    {
-      if (wheel_event->orientation() == Qt::Vertical)
-      {
-        double angle = wheel_event->angleDelta().y();
-        double factor = qPow(_zoom_factor_base, angle);
-        gentle_zoom(factor);
-        return true;
-      }
-    }
-    else
-    {
-        int numSteps = wheel_event->delta() / 8 / 15;  // see QWheelEvent documentation
-
-        _numScheduledScalings += numSteps;
-        if (_numScheduledScalings * numSteps < 0)
-        {  // if user moved the wheel in another direction, we reset
-            _numScheduledScalings = numSteps;       // previously scheduled scalings
-        }
-
-        if (anim->state() != QTimeLine::Running)
+        /*
+         * Here we are saving cursor position on view and scene.
+         * This data need for gentle_zoom().
+         * Almoust the same we do in method GraphicsViewZoom::animFinished.
+         */
+        QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
+        QPointF delta = target_viewport_pos - mouse_event->pos();
+        if (qAbs(delta.x()) > 5 || qAbs(delta.y()) > 5)
         {
-            anim->start();
+            target_viewport_pos = mouse_event->pos();
+            target_scene_pos = _view->mapToScene(mouse_event->pos());
         }
-        return true;
+        return false;
     }
-  }
-  Q_UNUSED(object)
-  return false;
+    else if (event->type() == QEvent::Wheel)
+    {
+        QWheelEvent* wheel_event = static_cast<QWheelEvent*>(event);
+        if (QApplication::keyboardModifiers() == _modifiers)
+        {
+            if (wheel_event->orientation() == Qt::Vertical)
+            {
+                double angle = wheel_event->angleDelta().y();
+                double factor = qPow(_zoom_factor_base, angle);
+                gentle_zoom(factor);
+                return true;
+            }
+        }
+        else
+        {
+            const QPoint numPixels = wheel_event->pixelDelta();
+            const QPoint numDegrees = wheel_event->angleDelta() / 8;
+            int numSteps;
+
+            if (not numPixels.isNull())
+            {
+                numSteps = numPixels.y();
+            }
+            else if (not numDegrees.isNull())
+            {
+                numSteps = numDegrees.y() / 15;
+            }
+            else
+            {
+                return true;//Just ignore
+            }
+
+            _numScheduledScalings += numSteps;
+            if (_numScheduledScalings * numSteps < 0)
+            {  // if user moved the wheel in another direction, we reset
+                _numScheduledScalings = numSteps;       // previously scheduled scalings
+            }
+
+            if (anim->state() != QTimeLine::Running)
+            {
+                anim->start();
+            }
+            return true;
+        }
+    }
+
+    return QObject::eventFilter(object, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
