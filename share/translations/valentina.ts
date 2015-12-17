@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation>Built on %3 at %2 {1 ?}</translation>
+        <translation>Built on %1 at %2</translation>
     </message>
 </context>
 <context>
@@ -346,7 +346,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation>Built on %3 at %2 {1 ?}</translation>
+        <translation>Built on %1 at %2</translation>
     </message>
 </context>
 <context>
@@ -4858,15 +4858,15 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>For saving multipage document all sheet should have the same size. Use export function instead.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
+        <translation>For previewing multipage document all sheet should have the same size.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
+        <translation>For printing multipages document all sheet should have the same size.</translation>
     </message>
 </context>
 <context>

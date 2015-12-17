@@ -1393,25 +1393,25 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="811"/>
         <source>hip_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hüftumfang_hinten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="813"/>
         <source>Hip arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hüftumfang, hinten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="814"/>
         <source>From Hip Side to Hip Side across back. (&apos;Hip circumference&apos; - &apos;Hip arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Von Hüftseite zu Hüfteseite über die Rückseite. (&apos;Hüftumfang&apos; - &apos;Hüftumfang vorne&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="819"/>
         <source>neck_arc_half_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hälfte_hinterer_halsumfang</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="821"/>
@@ -1465,55 +1465,55 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="841"/>
         <source>lowbust_arc_half_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hälfte_unterbrustumfang_hinten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="843"/>
         <source>Lowbust arc, back, half</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Die Hälfte des hinteren hohen Brustumfanges</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="844"/>
         <source>Half of &apos;Lowbust Arc, back&apos;. (&apos;Lowbust arc, back&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Die Hälfte von &apos;Hoher Brustumfang, hinten&apos;. (&apos;Hoher Brustumfang, hinten&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="848"/>
         <source>rib_arc_half_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hälfte_rippenumfang_hinten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="850"/>
         <source>Rib arc, back, half</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Die Hälfte des hinteren Rippenumfanges</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="851"/>
         <source>Half of &apos;Rib arc, back&apos;. (&apos;Rib arc, back&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Die Hälfte von &apos;Rippenumfang, hinten&apos;. (&apos;Rippenumfang, hinten&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="855"/>
         <source>waist_arc_half_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>hälfte_taillenumfang_hinten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="857"/>
         <source>Waist arc, back, half</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Die Hälfte des hinteren Taillenumfanges</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="858"/>
         <source>Half of &apos;Waist arc, back&apos;. (&apos;Waist  arc, back&apos; / 2).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Die Hälfte von &apos;hinterer Taillenumfang&apos;. (&apos;hinterer Taillenumfang&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="862"/>

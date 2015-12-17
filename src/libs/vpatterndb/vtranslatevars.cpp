@@ -498,7 +498,7 @@ bool VTranslateVars::VariablesFromUser(QString &newFormula, int position, const 
     QMap<QString, QmuTranslation>::const_iterator i = variables.constBegin();
     while (i != variables.constEnd())
     {
-		const QmuTranslation &var = i.value();
+        const QmuTranslation &var = i.value();
         if (token.indexOf( var.translate() ) == 0)
         {
             newFormula.replace(position, var.translate().length(), i.key());
@@ -591,6 +591,21 @@ bool VTranslateVars::VariablesToUser(QString &newFormula, int position, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::InternalVarToUser(const QString &var) const
+{
+    QString newVar = var;
+    int bias = 0;
+    if (VariablesToUser(newVar, 0, var, bias))
+    {
+        return newVar;
+    }
+    else
+    {
+        return var;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VTranslateVars::VarToUser(const QString &var) const
 {
     if (measurements.contains(var))
@@ -608,13 +623,7 @@ QString VTranslateVars::VarToUser(const QString &var) const
         return postfixOperators.value(var).translate();
     }
 
-    QString newVar = var;
-    int bias = 0;
-    if (VariablesToUser(newVar, 0, var, bias))
-    {
-        return newVar;
-    }
-    return newVar;
+    return InternalVarToUser(var);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

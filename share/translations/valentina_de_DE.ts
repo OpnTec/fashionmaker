@@ -7704,7 +7704,7 @@ Do you want to save your changes?</source>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Winkel-Linie_</translation>
+        <translation>WinkelLinie_</translation>
     </message>
     <message>
         <source>Arc_</source>

@@ -42,6 +42,8 @@ public:
     bool FunctionsFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
     bool VariablesToUser(QString &newFormula, int position, const QString &token, int &bias) const;
 
+    QString InternalVarToUser(const QString &var) const;
+
     QString VarToUser(const QString &var) const;
     QString VarFromUser(const QString &var) const;
 
