@@ -88,6 +88,8 @@ Q_LOGGING_CATEGORY(vMainWindow, "v.mainwindow")
     #pragma warning( pop )
 #endif
 
+const QString autosavePrefix = QStringLiteral(".autosave");
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief MainWindow constructor.
@@ -2092,7 +2094,7 @@ bool MainWindow::Save()
         bool result = SavePattern(curFile, error);
         if (result)
         {
-            QString autofile = curFile +".autosave";
+            QString autofile = curFile + autosavePrefix;
             QFile file(autofile);
             file.remove();
         }
@@ -2237,7 +2239,7 @@ void MainWindow::FileClosedCorrect()
     qApp->ValentinaSettings()->SetRestoreFileList(restoreFiles);
 
     // Remove autosave file
-    QFile autofile(curFile +".autosave");
+    QFile autofile(curFile + autosavePrefix);
     if (autofile.exists())
     {
         autofile.remove();
@@ -2907,7 +2909,7 @@ void MainWindow::AutoSavePattern()
 
     if (curFile.isEmpty() == false && this->isWindowModified() == true)
     {
-        QString autofile = curFile +".autosave";
+        QString autofile = curFile + autosavePrefix;
         QString error;
         SavePattern(autofile, error);
     }
@@ -3636,7 +3638,7 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
         QStringList restoreFiles;
         for (int i = 0; i < files.size(); ++i)
         {
-            QFile file(files.at(i) +".autosave");
+            QFile file(files.at(i) + autosavePrefix);
             if (file.exists())
             {
                 restoreFiles.append(files.at(i));
@@ -3657,18 +3659,18 @@ void MainWindow::ReopenFilesAfterCrash(QStringList &args)
                 for (int i = 0; i < restoreFiles.size(); ++i)
                 {
                     QString error;
-                    if (VDomDocument::SafeCopy(restoreFiles.at(i) +".autosave", restoreFiles.at(i), error))
+                    if (VDomDocument::SafeCopy(restoreFiles.at(i) + autosavePrefix, restoreFiles.at(i), error))
                     {
-                        QFile autoFile(restoreFiles.at(i) +".autosave");
+                        QFile autoFile(restoreFiles.at(i) + autosavePrefix);
                         autoFile.remove();
                         LoadPattern(restoreFiles.at(i));
                         args.removeAll(restoreFiles.at(i));// Do not open file twice after we restore him.
                     }
                     else
                     {
-                        qCDebug(vMainWindow, "Could not copy %s.autosave to %s %s",
-                                qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(restoreFiles.at(i)),
-                                qUtf8Printable(error));
+                        qCDebug(vMainWindow, "Could not copy %s%s to %s %s",
+                                qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(autosavePrefix),
+                                qUtf8Printable(restoreFiles.at(i)), qUtf8Printable(error));
                     }
                 }
             }
