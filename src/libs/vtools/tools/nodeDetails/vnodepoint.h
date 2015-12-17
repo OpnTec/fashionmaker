@@ -48,7 +48,8 @@ public:
     VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Source &typeCreation,
                const quint32 &idTool = 0,  QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr );
 
-    static void  Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint, const Document &parse,
+    static void  Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene,
+                        quint32 id, quint32 idPoint, const Document &parse,
                         const Source &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;
@@ -60,6 +61,8 @@ public:
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
     void         NameChangePosition(const QPointF &pos);
+    void         PointChoosed();
+    void         EnableToolMove(bool move);
 protected:
     /** @brief radius radius circle. */
     qreal        radius;
