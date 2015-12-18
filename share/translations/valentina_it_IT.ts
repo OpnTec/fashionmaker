@@ -6512,7 +6512,7 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation>Errore id non unico.</translation>
+        <translation type="vanished">Errore id non unico.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -6676,6 +6676,10 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Unknown tools type &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error not unique id.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

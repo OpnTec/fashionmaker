@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation>Erstellt von %1 auf %2</translation>
+        <translation type="unfinished">Gebaut auf %3 um %2 {1 ?}</translation>
     </message>
 </context>
 <context>
@@ -346,7 +346,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation>Erstellt von %1 auf %2</translation>
+        <translation type="unfinished">Gebaut auf %3 um %2 {1 ?}</translation>
     </message>
 </context>
 <context>
@@ -6488,7 +6488,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation>Fehler: uneindeutige ID.</translation>
+        <translation type="vanished">Fehler: uneindeutige ID.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -6653,6 +6653,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Unbekannter Werkzeug Typ &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Error not unique id.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

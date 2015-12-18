@@ -6475,7 +6475,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation>Fout geen unieke ID.</translation>
+        <translation type="vanished">Fout geen unieke ID.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -6640,6 +6640,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Onbekende gereedschap type &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Error not unique id.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

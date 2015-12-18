@@ -6447,7 +6447,7 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation>Erreur : id non unique.</translation>
+        <translation type="vanished">Erreur : id non unique.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -6611,6 +6611,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Unknown tools type &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error not unique id.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

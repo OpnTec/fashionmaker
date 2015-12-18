@@ -6331,7 +6331,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation>Chyba. Není jedinečný identifikátor.</translation>
+        <translation type="vanished">Chyba. Není jedinečný identifikátor.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -6495,6 +6495,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown tools type &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error not unique id.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
