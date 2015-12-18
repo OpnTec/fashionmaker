@@ -256,6 +256,7 @@ void MainWindow::AddPP(const QString &PPName)
     ui->view->NewFactor(ui->view->transform().m11());
 
     ui->actionNewDraw->setEnabled(true);
+    helpLabel->setText("");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
