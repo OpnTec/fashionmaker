@@ -107,7 +107,7 @@ const QString VAbstractPattern::IncrementDescription = QStringLiteral("descripti
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::VAbstractPattern(QObject *parent)
     : QObject(parent), VDomDocument(), nameActivPP(QString()), cursor(0), tools(QHash<quint32, VDataTool*>()),
-      history(QVector<VToolRecord>()), patternPieces(QStringList())
+      history(QVector<VToolRecord>()), patternPieces(QStringList()), modified(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -673,6 +673,7 @@ void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
                         SetAttribute(domElement, AttrH188, options.value(GHeights::H188));
                         SetAttribute(domElement, AttrH194, options.value(GHeights::H194));
 
+                        modified = true;
                         emit patternChanged(false);
                         return;
                         break;
@@ -816,6 +817,7 @@ void VAbstractPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
                         SetAttribute(domElement, AttrS54, options.value(GSizes::S54));
                         SetAttribute(domElement, AttrS56, options.value(GSizes::S56));
 
+                        modified = true;
                         emit patternChanged(false);
                         return;
                         break;
@@ -839,6 +841,7 @@ void VAbstractPattern::SetDescription(const QString &text)
 {
     CheckTagExists(TagDescription);
     setTagText(TagDescription, text);
+    modified = true;
     emit patternChanged(false);
 }
 
@@ -853,6 +856,7 @@ void VAbstractPattern::SetNotes(const QString &text)
 {
     CheckTagExists(TagNotes);
     setTagText(TagNotes, text);
+    modified = true;
     emit patternChanged(false);
 }
 
@@ -1242,4 +1246,14 @@ bool VAbstractPattern::IsFunction(const QString &token) const
     }
 
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief IsModified state of the document for cases that do not cover QUndoStack.
+ * @return true if the document was modified without using QUndoStack.
+ */
+bool VAbstractPattern::IsModified() const
+{
+    return modified;
 }

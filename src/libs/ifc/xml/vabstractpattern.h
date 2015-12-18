@@ -103,6 +103,8 @@ public:
     QString        GetVersion() const;
     void           SetVersion();
 
+    bool           IsModified() const;
+
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;
@@ -236,6 +238,9 @@ protected:
 
     /** @brief patternPieces list of patern pieces names for combobox*/
     QStringList    patternPieces;
+
+    /** @brief modified keep state of the document for cases that do not cover QUndoStack*/
+    mutable bool   modified;
 
     void           ToolExists(const quint32 &id) const;
 

@@ -310,12 +310,18 @@ bool VPattern::SaveDocument(const QString &fileName, QString &error) const
     }
     catch (const VExceptionWrongId &e)
     {
-        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error no unique id.")),
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error not unique id.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return false;
     }
 
-    return VDomDocument::SaveDocument(fileName, error);
+    const bool saved = VAbstractPattern::SaveDocument(fileName, error);
+    if (saved && QFileInfo(fileName).suffix() != QLatin1Literal("autosave"))
+    {
+        modified = false;
+    }
+
+    return saved;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -977,6 +983,7 @@ void VPattern::ParseToolEndLine(VMainGraphicsScene *scene, QDomElement &domEleme
         {
             SetAttribute(domElement, AttrLength, f);
             SetAttribute(domElement, AttrAngle, angleFix);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1021,6 +1028,7 @@ void VPattern::ParseToolAlongLine(VMainGraphicsScene *scene, QDomElement &domEle
         if (f != formula)
         {
             SetAttribute(domElement, AttrLength, f);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1066,6 +1074,7 @@ void VPattern::ParseToolShoulderPoint(VMainGraphicsScene *scene, QDomElement &do
         if (f != formula)
         {
             SetAttribute(domElement, AttrLength, f);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1111,6 +1120,7 @@ void VPattern::ParseToolNormal(VMainGraphicsScene *scene, QDomElement &domElemen
         if (f != formula)
         {
             SetAttribute(domElement, AttrLength, f);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1156,6 +1166,7 @@ void VPattern::ParseToolBisector(VMainGraphicsScene *scene, QDomElement &domElem
         if (f != formula)
         {
             SetAttribute(domElement, AttrLength, f);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1229,6 +1240,7 @@ void VPattern::ParseToolPointOfContact(VMainGraphicsScene *scene, QDomElement &d
         if (f != radius)
         {
             SetAttribute(domElement, AttrRadius, f);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1389,6 +1401,7 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
         if (f != formula)
         {
             SetAttribute(domElement, AttrLength, f);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1433,6 +1446,7 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         if (f != formula)
         {
             SetAttribute(domElement, AttrLength, f);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1474,6 +1488,7 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
         if (f != formula)
         {
             SetAttribute(domElement, AttrLength, f);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1522,6 +1537,7 @@ void VPattern::ParseToolLineIntersectAxis(VMainGraphicsScene *scene, QDomElement
         if (angleFix != angle)
         {
             SetAttribute(domElement, AttrAngle, angleFix);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1570,6 +1586,7 @@ void VPattern::ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElemen
         if (angleFix != angle)
         {
             SetAttribute(domElement, AttrAngle, angleFix);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1652,6 +1669,7 @@ void VPattern::ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QD
         {
             SetAttribute(domElement, AttrC1Center, c1R);
             SetAttribute(domElement, AttrC2Center, c2R);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1692,6 +1710,7 @@ void VPattern::ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDo
         if (cR != cRadius)
         {
             SetAttribute(domElement, AttrCCenter, cR);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -1940,6 +1959,7 @@ void VPattern::ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, 
             SetAttribute(domElement, AttrRadius, r);
             SetAttribute(domElement, AttrAngle1, f1Fix);
             SetAttribute(domElement, AttrAngle2, f2Fix);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -2011,6 +2031,7 @@ void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &do
             SetAttribute(domElement, AttrRadius, r);
             SetAttribute(domElement, AttrAngle1, f1Fix);
             SetAttribute(domElement, AttrLength, lengthFix);
+            modified = true;
             haveLiteChange();
         }
     }
@@ -2268,6 +2289,7 @@ void VPattern::SetAuthor(const QString &text)
 {
     CheckTagExists(TagAuthor);
     setTagText(TagAuthor, text);
+    modified = true;
     emit patternChanged(false);
 }
 
@@ -2481,6 +2503,7 @@ void VPattern::SetDefCustom(bool value)
     if (domElement.isNull() == false)
     {
         SetAttribute(domElement, AttrCustom, value);
+        modified = true;
     }
     else
     {
@@ -2539,6 +2562,7 @@ void VPattern::SetDefCustomHeight(int value)
         {
             SetAttribute(domElement, AttrDefHeight, value);
         }
+        modified = true;
     }
     else
     {
@@ -2597,6 +2621,7 @@ void VPattern::SetDefCustomSize(int value)
         {
             SetAttribute(domElement, AttrDefSize, value);
         }
+        modified = true;
     }
     else
     {

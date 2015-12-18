@@ -2590,8 +2590,9 @@ void MainWindow::PatternWasModified(bool saved)
 {
     if (guiEnabled)
     {
-        setWindowModified(!saved);
-        ui->actionSave->setEnabled(!saved);
+        const bool state = doc->IsModified() || !saved;
+        setWindowModified(state);
+        ui->actionSave->setEnabled(state);
         isLayoutStale = true;
     }
 }
@@ -2883,7 +2884,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
     const bool result = doc->SaveDocument(fileName, error);
     if (result)
     {
-        if (tempInfo.suffix() != "autosave")
+        if (tempInfo.suffix() != QLatin1Literal("autosave"))
         {
             setCurrentFile(fileName);
             helpLabel->setText(tr("File saved"));
@@ -3528,13 +3529,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
 
     if (guiEnabled)
     { // No errors occurred
-        bool patternModified = this->isWindowModified();
         setCurrentFile(fileName);
-        if (patternModified)
-        {
-            //For situation where was fixed wrong formula need return for document status was modified.
-            PatternWasModified(!patternModified);
-        }
         helpLabel->setText(tr("File loaded"));
         qCDebug(vMainWindow, "File loaded.");
 

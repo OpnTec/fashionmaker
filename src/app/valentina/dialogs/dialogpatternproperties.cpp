@@ -142,11 +142,6 @@ void DialogPatternProperties::Apply()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::Ok()
 {
-    if (descriptionChanged || gradationChanged || defaultChanged)
-    {
-        emit doc->patternChanged(false);
-    }
-
     if (descriptionChanged)
     {
         SaveDescription();
