@@ -1777,6 +1777,7 @@ void MainWindow::ActionDraw(bool checked)
     if (checked)
     {
         qCDebug(vMainWindow, "Show draw scene");
+        ArrowTool();
 
         leftGoToStage->setPixmap(QPixmap("://icon/24x24/fast_forward_left_to_right_arrow.png"));
         rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
@@ -1839,6 +1840,7 @@ void MainWindow::ActionDetails(bool checked)
 {
     if (checked)
     {
+        ArrowTool();
         const QHash<quint32, VDetail> *details = pattern->DataDetails();
         if(not qApp->getOpeningPattern())
         {
@@ -1924,6 +1926,7 @@ void MainWindow::ActionLayout(bool checked)
 {
     if (checked)
     {
+        ArrowTool();
         const QHash<quint32, VDetail> *details = pattern->DataDetails();
         if(not qApp->getOpeningPattern())
         {
