@@ -761,30 +761,48 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
     qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
 
-    QTemporaryFile patternFile(destination + QLatin1Literal(".XXXXXX"));
-    if (not patternFile.setPermissions(QFile::ReadOwner | QFile::WriteOwner))
+    QTemporaryFile destFile(destination + QLatin1Literal(".XXXXXX"));
+    destFile.setAutoRemove(false);
+    if (not destFile.open())
     {
-        error = patternFile.errorString();
+        error = destFile.errorString();
         result = false;
     }
     else
     {
         QFile sourceFile(source);
-        if ( not sourceFile.copy(patternFile.fileName()) )
+        if (sourceFile.open(QIODevice::ReadOnly))
         {
-            error = sourceFile.errorString();
-            result = false;
-        }
-        else
-        {
-            if (not patternFile.rename(destination))
+            result = true;
+            char block[4096];
+            qint64 bytes;
+            while ((bytes = sourceFile.read(block, sizeof(block))) > 0)
             {
-                error = patternFile.errorString();
+                if (bytes != destFile.write(block, bytes))
+                {
+                    error = destFile.errorString();
+                    result = false;
+                    break;
+                }
+            }
+
+            if (bytes == -1)
+            {
+                error = sourceFile.errorString();
                 result = false;
             }
-            else
+
+            if (result)
             {
-                result = true;
+                if (not destFile.rename(destination))
+                {
+                    error = destFile.errorString();
+                    result = false;
+                }
+                else
+                {
+                    result = true;
+                }
             }
         }
     }
