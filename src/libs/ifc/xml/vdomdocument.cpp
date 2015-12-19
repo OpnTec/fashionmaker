@@ -32,6 +32,12 @@
 #include "exception/vexceptionbadid.h"
 #include "exception/vexceptionwrongid.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../vmisc/backport/qsavefile.h"
+#else
+#   include <QSaveFile>
+#endif
+
 #include <QAbstractMessageHandler>
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
@@ -627,23 +633,23 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error) const
         qDebug()<<"Got empty file name.";
         return false;
     }
-    //Writing in temporary file
-    QFileInfo tempInfo(fileName);
-    QString temp = tempInfo.absolutePath() + "/" + tempInfo.baseName() + ".tmp";
-    QFile tempFile(temp);
-    if (tempFile.open(QIODevice::WriteOnly| QIODevice::Truncate))
+    bool success = false;
+    QSaveFile file(fileName);
+    if (file.open(QIODevice::WriteOnly))
     {
         const int indent = 4;
-        QTextStream out(&tempFile);
+        QTextStream out(&file);
         out.setCodec("UTF-8");
         save(out, indent);
-        tempFile.close();
+        success = file.commit();
     }
-    //Copy document to file
-    bool result = VDomDocument::SafeCopy(temp, fileName, error);
-    tempFile.remove();//Clear temp file
 
-    return result;
+    if (not success)
+    {
+        error = file.errorString();
+    }
+
+    return success;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -755,35 +761,32 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
     qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
 
-    QFile patternFile(destination);
-    patternFile.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
-    // We need here temporary file because we want restore document after error of copying temp file.
-    QTemporaryFile tempOfPattern;
-    if (tempOfPattern.open())
+    QTemporaryFile patternFile(destination + QLatin1Literal(".XXXXXX"));
+    if (not patternFile.setPermissions(QFile::ReadOwner | QFile::WriteOwner))
     {
-        if (patternFile.exists())
-        {
-            patternFile.copy(tempOfPattern.fileName());
-        }
+        error = patternFile.errorString();
+        result = false;
     }
-    if ( patternFile.exists() == false || patternFile.remove() )
+    else
     {
         QFile sourceFile(source);
-        if ( sourceFile.copy(patternFile.fileName()) == false )
+        if ( not sourceFile.copy(patternFile.fileName()) )
         {
-            error = tr("Could not copy temp file to document file");
-            tempOfPattern.copy(destination);
+            error = sourceFile.errorString();
             result = false;
         }
         else
         {
-            result = true;
+            if (not patternFile.rename(destination))
+            {
+                error = patternFile.errorString();
+                result = false;
+            }
+            else
+            {
+                result = true;
+            }
         }
-    }
-    else
-    {
-        error = tr("Could not remove document file");
-        result = false;
     }
 
 #ifdef Q_OS_WIN32
