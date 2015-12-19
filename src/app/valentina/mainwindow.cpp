@@ -1192,8 +1192,16 @@ void MainWindow::LoadStandard()
 
     if (not mPath.isEmpty())
     {
-        const int hIndex = gradationHeights->currentIndex();
-        const int sIndex = gradationSizes->currentIndex();
+        int hIndex = -1;
+        if (not gradationHeights.isNull())
+        {
+            hIndex = gradationHeights->currentIndex();
+        }
+        int sIndex = -1;
+        if (not gradationSizes.isNull())
+        {
+            sIndex = gradationSizes->currentIndex();
+        }
 
         if(LoadMeasurements(mPath))
         {
@@ -1213,12 +1221,12 @@ void MainWindow::LoadStandard()
 
             if (qApp->patternType() == MeasurementsType::Standard)
             {
-                if (hIndex != -1)
+                if (hIndex != -1 && not gradationSizes.isNull())
                 {
                     gradationHeights->setCurrentIndex(hIndex);
                 }
 
-                if (sIndex != -1)
+                if (sIndex != -1 && not gradationSizes.isNull())
                 {
                     gradationSizes->setCurrentIndex(sIndex);
                 }
