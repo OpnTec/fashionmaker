@@ -1889,6 +1889,7 @@ void TMainWindow::InitWindow()
         const qint32 index = ui->comboBoxGender->findData(static_cast<int>(m->Gender()));
         ui->comboBoxGender->setCurrentIndex(index);
 
+        ui->dateEditBirthDate->setDisplayFormat(QLocale::system().dateFormat());
         ui->dateEditBirthDate->setDate(m->BirthDate());
         ui->lineEditEmail->setText(m->Email());
 
