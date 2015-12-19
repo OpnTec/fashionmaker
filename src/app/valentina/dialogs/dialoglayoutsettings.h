@@ -35,7 +35,12 @@
 #include "../vlayout/vbank.h"
 #include "../ifc/ifcdef.h"
 #include "../vlayout/vlayoutgenerator.h"
-#include "../vmisc/vmargins.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
+#   include "../vmisc/backport/qmarginsf.h"
+#else
+#   include <QMargins>
+#endif
 
 namespace Ui
 {
