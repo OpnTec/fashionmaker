@@ -1192,15 +1192,15 @@ void MainWindow::LoadStandard()
 
     if (not mPath.isEmpty())
     {
-        int hIndex = -1;
+        QString hText;
         if (not gradationHeights.isNull())
         {
-            hIndex = gradationHeights->currentIndex();
+            hText = gradationHeights->currentText();
         }
-        int sIndex = -1;
+        QString sText;
         if (not gradationSizes.isNull())
         {
-            sIndex = gradationSizes->currentIndex();
+            sText = gradationSizes->currentText();
         }
 
         if(LoadMeasurements(mPath))
@@ -1221,14 +1221,14 @@ void MainWindow::LoadStandard()
 
             if (qApp->patternType() == MeasurementsType::Standard)
             {
-                if (hIndex != -1 && not gradationSizes.isNull())
+                if (not hText.isEmpty() && not gradationSizes.isNull())
                 {
-                    gradationHeights->setCurrentIndex(hIndex);
+                    gradationHeights->setCurrentText(hText);
                 }
 
-                if (sIndex != -1 && not gradationSizes.isNull())
+                if (not sText.isEmpty() && not gradationSizes.isNull())
                 {
-                    gradationSizes->setCurrentIndex(sIndex);
+                    gradationSizes->setCurrentText(sText);
                 }
             }
         }
