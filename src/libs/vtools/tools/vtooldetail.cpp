@@ -428,14 +428,20 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolDetail::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+    }
 }
 
 ////---------------------------------------------------------------------------------------------------------------------
@@ -443,7 +449,10 @@ void VToolDetail::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        RestoreOverrideCursor(cursorArrowOpenHand);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
