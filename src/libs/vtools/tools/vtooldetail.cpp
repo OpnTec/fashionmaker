@@ -105,6 +105,8 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     RefreshGeometry();
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
+
+    connect(scene, &VMainGraphicsScene::EnableToolMove, this, &VToolDetail::EnableToolMove);
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
         AddToFile();
@@ -606,4 +608,10 @@ void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);
     doc->IncrementReferens(node.getId());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::EnableToolMove(bool move)
+{
+    this->setFlag(QGraphicsItem::ItemIsMovable, move);
 }
