@@ -294,6 +294,5 @@ void VNodePoint::RefreshLine()
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::EnableToolMove(bool move)
 {
-    this->setFlag(QGraphicsItem::ItemIsMovable, move);
     namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
 }

@@ -89,6 +89,7 @@ public:
 public slots:
     virtual void       FullUpdateFromFile () Q_DECL_OVERRIDE;
     virtual void       FullUpdateFromGuiOk(int result);
+    void               EnableToolMove(bool move);
 protected:
     virtual void       AddToFile () Q_DECL_OVERRIDE;
     virtual void       RefreshDataInFile() Q_DECL_OVERRIDE;

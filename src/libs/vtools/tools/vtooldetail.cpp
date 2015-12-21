@@ -105,6 +105,8 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     RefreshGeometry();
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
+
+    connect(scene, &VMainGraphicsScene::EnableToolMove, this, &VToolDetail::EnableToolMove);
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
         AddToFile();
@@ -426,14 +428,20 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VToolDetail::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
-    SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+    }
 }
 
 ////---------------------------------------------------------------------------------------------------------------------
@@ -441,7 +449,10 @@ void VToolDetail::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
+    if (flags() & QGraphicsItem::ItemIsMovable)
+    {
+        RestoreOverrideCursor(cursorArrowOpenHand);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -606,4 +617,10 @@ void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);
     doc->IncrementReferens(node.getId());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::EnableToolMove(bool move)
+{
+    this->setFlag(QGraphicsItem::ItemIsMovable, move);
 }
