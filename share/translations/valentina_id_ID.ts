@@ -5310,6 +5310,21 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
 </context>
 <context>
+    <name>QSaveFile</name>
+    <message>
+        <source>Existing file %1 is not writable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Writing canceled by application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Partial write. Partition full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QmuParser</name>
     <message>
         <source>too few arguments for function sum.</source>
@@ -6596,14 +6611,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not copy temp file to document file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not remove document file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

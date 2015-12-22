@@ -4961,6 +4961,21 @@ Haluatko tallentaa muutokset?</translation>
     </message>
 </context>
 <context>
+    <name>QSaveFile</name>
+    <message>
+        <source>Existing file %1 is not writable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Writing canceled by application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Partial write. Partition full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QmuParser</name>
     <message>
         <source>too few arguments for function sum.</source>
@@ -6250,11 +6265,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
-        <translation>Tilapäistiedostoa ei voitu kopioida dokumenttiin</translation>
+        <translation type="vanished">Tilapäistiedostoa ei voitu kopioida dokumenttiin</translation>
     </message>
     <message>
         <source>Could not remove document file</source>
-        <translation>Dokumenttitiedostoa ei voitu poistaa</translation>
+        <translation type="vanished">Dokumenttitiedostoa ei voitu poistaa</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>

@@ -5073,6 +5073,21 @@ Do you want to save your changes?</translation>
     </message>
 </context>
 <context>
+    <name>QSaveFile</name>
+    <message>
+        <source>Existing file %1 is not writable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Writing canceled by application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Partial write. Partition full?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QmuParser</name>
     <message>
         <source>too few arguments for function sum.</source>
@@ -6419,11 +6434,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Could not copy temp file to document file</source>
-        <translation>Could not copy temp file to document file</translation>
+        <translation type="vanished">Could not copy temp file to document file</translation>
     </message>
     <message>
         <source>Could not remove document file</source>
-        <translation>Could not remove document file</translation>
+        <translation type="vanished">Could not remove document file</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
