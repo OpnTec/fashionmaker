@@ -3579,7 +3579,17 @@ QStringList MainWindow::GetUnlokedRestoreFileList() const
             files.removeAll(restoreFiles.at(i));
         }
 
-        qApp->ValentinaSettings()->SetRestoreFileList(files);
+        // Clear all files that do not exist.
+        QStringList filtered;
+        for (int i = 0; i < files.size(); ++i)
+        {
+            if (QFileInfo(files.at(i)).exists())
+            {
+                filtered.append(files.at(i));
+            }
+        }
+
+        qApp->ValentinaSettings()->SetRestoreFileList(filtered);
     }
     return restoreFiles;
 #else
