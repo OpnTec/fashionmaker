@@ -43,6 +43,8 @@ private slots:
     void OpenPatterns();
     void ExportMode_data() const;
     void ExportMode();
+    void TestMode_data() const;
+    void TestMode();
     void cleanup();
 
 private:

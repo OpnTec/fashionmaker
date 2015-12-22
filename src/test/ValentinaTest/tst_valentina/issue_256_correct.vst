@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vst>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.4.2</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <size base="50"/>
+    <height base="176"/>
+    <body-measurements>
+        <m name="height_neck_back" base="141.5" size_increase="0" height_increase="0"/>
+        <m name="height_scapula" base="128" size_increase="0" height_increase="0"/>
+        <m name="height_armpit" base="0" size_increase="0" height_increase="0"/>
+    </body-measurements>
+</vst>

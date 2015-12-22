@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name>Spencer</family-name>
+        <given-name>Susan</given-name>
+        <birth-date>1900-01-01</birth-date>
+        <gender>female</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m name="height" value="167.64" description="Vertical distance from top of Head to Floor" full_name="Height->Total"/>
+        <m name="height_neck_back" value="141.5" description="Vertical distance from Neck Back (Nape) to Floor" full_name="Height->Neck Back (Nape)"/>
+        <m name="height_armpit" value="0" description="Vertical distance from Highbust Side (Armpit) to Floor" full_name="Height->Highbust Side (Armpit)"/>
+        <m name="height_waist_side" value="101" description="Vertical distance from Waist Side to Floor" full_name="Height->Waist Side"/>
+        <m name="height_hip" value="82" description="Vertical distance from Hip to Floor" full_name="Height->Hip"/>
+        <m name="height_gluteal_fold" value="0" description="Vertical distance from Gluteal Fold to Floor" full_name="Height->Gluteal Fold"/>
+        <m name="height_knee" value="42" description="Vertical distance from Knee to Floor" full_name="Height->Knee"/>
+        <m name="height_calf" value="30.3" description="Vertical distance from Calf to Floor" full_name="Height->Calf"/>
+        <m name="height_ankle_high" value="11.5" description="Vertical distance from High Ankle to Floor" full_name="Height->High Ankle"/>
+        <m name="height_ankle" value="9" description="Vertical distance from Ankle to Floor" full_name="Height->Ankle"/>
+        <m name="height_highhip" value="0" description="Vertical distance from HighHip to Floor" full_name="Height->HighHip"/>
+        <m name="height_waist_front" value="101.2" description="Vertical distance from Waist Front to Floor" full_name="Height->Waist Front"/>
+        <m name="height_bustpoint" value="0" description="Vertical distance from Bustpoint to Floor" full_name="Height->Bustpoint"/>
+        <m name="height_shoulder_tip" value="0" description="Vertical distance from Shoulder Tip to Floor" full_name="Height->Shoulder Tip"/>
+        <m name="height_neck_front" value="133" description="Vertical distance from Neck Front to Floor" full_name="Height->Neck Front"/>
+        <m name="height_neck_side" value="0" description="Vertical distance from Neck Side to Floor" full_name="Height->Neck Side"/>
+        <m name="height_neck_back_to_knee" value="(height_neck_back - height_knee)" description="Vertical distance from Neck Back (Nape) to Knee" full_name="Height->Neck Back to Knee"/>
+        <m name="height_waist_side_to_knee" value="(height_waist_side - height_knee)" description="Vertical distance from Waist Side to Knee" full_name="Height->Waist Side to Knee"/>
+        <m name="height_waist_side_to_hip" value="(height_waist_side - height_hip)" description="Vertical distance from Waist Side to Hip" full_name="Height->Waist Side to Hip"/>
+    </body-measurements>
+</vit>

@@ -239,7 +239,14 @@ VALENTINA_TEST_FILES += \
     tst_valentina/glimited_vit.val \
     tst_valentina/glimited.vit \
     tst_valentina/glimited_vst.val \
-    tst_valentina/glimited.vst
+    tst_valentina/glimited.vst \
+    tst_valentina/issue_256.val \
+    tst_valentina/issue_256_wrong_path.val \
+    tst_valentina/issue_256_correct.vit \
+    tst_valentina/issue_256_wrong.vit \
+    tst_valentina/issue_256_correct.vst \
+    tst_valentina/issue_256_wrong.vit
+
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \

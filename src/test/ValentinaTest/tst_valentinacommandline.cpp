@@ -48,8 +48,8 @@ void TST_ValentinaCommandLine::init()
         QFAIL("Fail to remove temp directory.");
     }
 
-    if (not CopyRecursively(QApplication::applicationDirPath() + QLatin1Char('/') + QLatin1Literal("tst_valentina"),
-                            QApplication::applicationDirPath() + QLatin1Char('/') + tmpTestFolder))
+    if (not CopyRecursively(QApplication::applicationDirPath() + QDir::separator() + QLatin1Literal("tst_valentina"),
+                            QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder))
     {
         QFAIL("Fail to prepare files for testing.");
     }
@@ -91,7 +91,8 @@ void TST_ValentinaCommandLine::OpenPatterns()
 
     int exit;
     const bool res = Run(result, exitCode, exit, ValentinaPath(), QStringList() << "--test"
-                    << QApplication::applicationDirPath() + QLatin1Char('/') + tmpTestFolder + QLatin1Char('/') + file);
+                    << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder + QDir::separator() +
+                         file);
 
     QCOMPARE(res, result);
     QCOMPARE(exit, exitCode);
@@ -106,7 +107,7 @@ void TST_ValentinaCommandLine::ExportMode_data() const
     QTest::addColumn<bool>("result");
     QTest::addColumn<int>("exitCode");
 
-    const QString tmp = QApplication::applicationDirPath() + QLatin1Char('/') + tmpTestFolder;
+    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
 
     QTest::newRow("Issue #372")<< "issue_372.val"
                                << QString("-p;;0;;-d;;%1;;-b;;output").arg(tmp)
@@ -148,8 +149,71 @@ void TST_ValentinaCommandLine::ExportMode()
     QFETCH(int, exitCode);
 
     int exit;
-    const QStringList arg = QStringList() << QApplication::applicationDirPath() + QLatin1Char('/') + tmpTestFolder +
-                                             QLatin1Char('/') + file
+    const QStringList arg = QStringList() << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder +
+                                             QDir::separator() + file
+                                          << arguments.split(";;");
+    const bool res = Run(result, exitCode, exit, ValentinaPath(), arg);
+
+    QCOMPARE(res, result);
+    QCOMPARE(exit, exitCode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_ValentinaCommandLine::TestMode_data() const
+{
+    QTest::addColumn<QString>("file");
+    QTest::addColumn<QString>("arguments");
+    QTest::addColumn<bool>("result");
+    QTest::addColumn<int>("exitCode");
+
+    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
+
+    QTest::newRow("Issue #256. Correct path.")<< "issue_256.val"
+                               << QString("--test")
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("Issue #256. Wrong path.")<< "issue_256_wrong_path.vit"
+                               << QString("--test")
+                               << false
+                               << V_EX_NOINPUT;
+
+    QTest::newRow("Issue #256. Correct individual measurements.")<< "issue_256.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("issue_256_correct.vit"))
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("Issue #256. Wrong individual measurements.")<< "issue_256.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("issue_256_wrong.vit"))
+                               << false
+                               << V_EX_NOINPUT;
+
+    QTest::newRow("Issue #256. Correct standard measurements.")<< "issue_256.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("issue_256_correct.vst"))
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("Issue #256. Wrong standard measurements.")<< "issue_256.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("issue_256_wrong.vst"))
+                               << false
+                               << V_EX_NOINPUT;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_ValentinaCommandLine::TestMode()
+{
+    QFETCH(QString, file);
+    QFETCH(QString, arguments);
+    QFETCH(bool, result);
+    QFETCH(int, exitCode);
+
+    int exit;
+    const QStringList arg = QStringList() << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder +
+                                             QDir::separator() + file
                                           << arguments.split(";;");
     const bool res = Run(result, exitCode, exit, ValentinaPath(), arg);
 

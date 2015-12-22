@@ -555,8 +555,9 @@ QString VCommandLine::OptMeasurePath() const
 {
     QString measure;
     if (parser.isSet(*optionsUsed.value(optionsIndex.value(LONG_OPTION_MEASUREFILE)))
-            && IsExportEnabled() //todo: don't want yet to allow user set measure file for general loading, because need to fix multiply opened windows as well
-            )
+            && (IsExportEnabled() || IsTestModeEnabled()))
+            //todo: don't want yet to allow user set measure file for general loading,
+            //because need to fix multiply opened windows as well
     {
         measure = parser.value(*optionsUsed.value(optionsIndex.value(LONG_OPTION_MEASUREFILE)));
     }
