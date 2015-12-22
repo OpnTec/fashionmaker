@@ -32,6 +32,7 @@
 #include <QtTest>
 
 const QString tmpTestFolder = QStringLiteral("tst_valentina_tmp");
+const QString tmpTestCollectionFolder = QStringLiteral("tst_valentina_collection_tmp");
 
 TST_ValentinaCommandLine::TST_ValentinaCommandLine(QObject *parent)
     :AbstractTest(parent)
@@ -42,16 +43,34 @@ TST_ValentinaCommandLine::TST_ValentinaCommandLine(QObject *parent)
 // cppcheck-suppress unusedFunction
 void TST_ValentinaCommandLine::init()
 {
-    QDir tmpDir(tmpTestFolder);
-    if (not tmpDir.removeRecursively())
-    {
-        QFAIL("Fail to remove temp directory.");
+    {// Test files
+        QDir tmpDir(tmpTestFolder);
+        if (not tmpDir.removeRecursively())
+        {
+            QFAIL("Fail to remove test temp directory.");
+        }
+
+        if (not CopyRecursively(QApplication::applicationDirPath() + QDir::separator() +
+                                QLatin1Literal("tst_valentina"),
+                                QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder))
+        {
+            QFAIL("Fail to prepare test files for testing.");
+        }
     }
 
-    if (not CopyRecursively(QApplication::applicationDirPath() + QDir::separator() + QLatin1Literal("tst_valentina"),
-                            QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder))
-    {
-        QFAIL("Fail to prepare files for testing.");
+    {// Collection
+        QDir tmpDir(tmpTestCollectionFolder);
+        if (not tmpDir.removeRecursively())
+        {
+            QFAIL("Fail to remove collection temp directory.");
+        }
+
+        if (not CopyRecursively(QApplication::applicationDirPath() + QDir::separator() +
+                                QLatin1Literal("tst_valentina_collection"),
+                                QApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder))
+        {
+            QFAIL("Fail to prepare collection files for testing.");
+        }
     }
 }
 
@@ -90,9 +109,9 @@ void TST_ValentinaCommandLine::OpenPatterns()
     QFETCH(int, exitCode);
 
     int exit;
+    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
     const bool res = Run(result, exitCode, exit, ValentinaPath(), QStringList() << "--test"
-                    << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder + QDir::separator() +
-                         file);
+                    << tmp + QDir::separator() + file);
 
     QCOMPARE(res, result);
     QCOMPARE(exit, exitCode);
@@ -149,8 +168,8 @@ void TST_ValentinaCommandLine::ExportMode()
     QFETCH(int, exitCode);
 
     int exit;
-    const QStringList arg = QStringList() << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder +
-                                             QDir::separator() + file
+    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
+    const QStringList arg = QStringList() << tmp + QDir::separator() + file
                                           << arguments.split(";;");
     const bool res = Run(result, exitCode, exit, ValentinaPath(), arg);
 
@@ -212,8 +231,43 @@ void TST_ValentinaCommandLine::TestMode()
     QFETCH(int, exitCode);
 
     int exit;
-    const QStringList arg = QStringList() << QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder +
-                                             QDir::separator() + file
+    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestFolder;
+    const QStringList arg = QStringList() << tmp + QDir::separator() + file
+                                          << arguments.split(";;");
+    const bool res = Run(result, exitCode, exit, ValentinaPath(), arg);
+
+    QCOMPARE(res, result);
+    QCOMPARE(exit, exitCode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_ValentinaCommandLine::TestOpenCollection_data() const
+{
+    QTest::addColumn<QString>("file");
+    QTest::addColumn<QString>("arguments");
+    QTest::addColumn<bool>("result");
+    QTest::addColumn<int>("exitCode");
+
+    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder;
+
+    QTest::newRow("jacketМ6_30-110")<< "jacketМ6_30-110.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("GOST_man_ru.vst"))
+                               << true
+                               << V_EX_OK;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_ValentinaCommandLine::TestOpenCollection()
+{
+    QFETCH(QString, file);
+    QFETCH(QString, arguments);
+    QFETCH(bool, result);
+    QFETCH(int, exitCode);
+
+    int exit;
+    const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder;
+    const QStringList arg = QStringList() << tmp + QDir::separator() + file
                                           << arguments.split(";;");
     const bool res = Run(result, exitCode, exit, ValentinaPath(), arg);
 
@@ -225,9 +279,19 @@ void TST_ValentinaCommandLine::TestMode()
 // cppcheck-suppress unusedFunction
 void TST_ValentinaCommandLine::cleanup()
 {
-    QDir tmpDir(tmpTestFolder);
-    if (not tmpDir.removeRecursively())
     {
-        QWARN("Fail to remove temp directory.");
+        QDir tmpDir(tmpTestFolder);
+        if (not tmpDir.removeRecursively())
+        {
+            QWARN("Fail to remove test temp directory.");
+        }
+    }
+
+    {
+        QDir tmpDir(tmpTestCollectionFolder);
+        if (not tmpDir.removeRecursively())
+        {
+            QWARN("Fail to remove collection temp directory.");
+        }
     }
 }

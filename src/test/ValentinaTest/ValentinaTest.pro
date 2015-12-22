@@ -247,11 +247,16 @@ VALENTINA_TEST_FILES += \
     tst_valentina/issue_256_correct.vst \
     tst_valentina/issue_256_wrong.vit
 
+COLLECTION_FILES += \
+    $${PWD}/../../app/share/tables/standard/GOST_man_ru.vst \
+    $${PWD}/../../app/share/collection/jacketМ6_30-110.val
+
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \
     $$TAPE_TEST_FILES \
-    $$VALENTINA_TEST_FILES
+    $$VALENTINA_TEST_FILES \
+    $$COLLECTION_FILES
 
 for(DIR, TAPE_TEST_FILES) {
      #add these absolute paths to a variable which
@@ -268,3 +273,11 @@ for(DIR, VALENTINA_TEST_FILES) {
 }
 
 copyToDestdir($$valentina_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_valentina))
+
+for(DIR, COLLECTION_FILES) {
+     #add these absolute paths to a variable which
+     #ends up as 'mkcommands = path1 path2 path3 ...'
+     collection_path += $$DIR
+}
+
+copyToDestdir($$collection_path, $$shell_path($${OUT_PWD}/$$DESTDIR/tst_valentina_collection))
