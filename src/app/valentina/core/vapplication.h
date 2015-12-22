@@ -78,6 +78,7 @@ public:
     void               CollectReports() const;
 #endif // defined(Q_OS_WIN) && defined(Q_CC_GNU)
     bool static IsGUIMode();
+    virtual bool IsAppInGUIMode() const;
 
     virtual void OpenSettings() Q_DECL_OVERRIDE;
     VSettings *ValentinaSettings();

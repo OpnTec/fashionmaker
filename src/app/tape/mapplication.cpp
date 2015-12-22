@@ -323,6 +323,15 @@ bool MApplication::IsTestMode() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief IsAppInGUIMode little hack that allow to have access to application state from VAbstractApplication class.
+ */
+bool MApplication::IsAppInGUIMode() const
+{
+    return IsTestMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 TMainWindow *MApplication::MainWindow()
 {
     Clean();

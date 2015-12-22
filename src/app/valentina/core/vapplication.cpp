@@ -672,6 +672,15 @@ bool VApplication::IsGUIMode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief IsAppInGUIMode little hack that allow to have access to application state from VAbstractApplication class.
+ */
+bool VApplication::IsAppInGUIMode() const
+{
+    return IsGUIMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 const VCommandLinePtr VApplication::CommandLine() const
 {
     return VCommandLine::instance;

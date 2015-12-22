@@ -299,46 +299,54 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                  << "--------------------------------------";
         delete cal;
 
-        DialogUndo *dialogUndo = new DialogUndo(qApp->getMainWindow());
-        forever
+        if (qApp->IsAppInGUIMode())
         {
-            if (dialogUndo->exec() == QDialog::Accepted)
+            DialogUndo *dialogUndo = new DialogUndo(qApp->getMainWindow());
+            forever
             {
-                const UndoButton resultUndo = dialogUndo->Result();
-                if (resultUndo == UndoButton::Fix)
+                if (dialogUndo->exec() == QDialog::Accepted)
                 {
-                    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
-                    dialog->setWindowTitle(tr("Edit wrong formula"));
-                    dialog->SetFormula(formula);
-                    if (dialog->exec() == QDialog::Accepted)
+                    const UndoButton resultUndo = dialogUndo->Result();
+                    if (resultUndo == UndoButton::Fix)
                     {
-                        formula = dialog->GetFormula();
-                        /* Need delete dialog here because parser in dialog don't allow use correct separator for
-                         * parsing here. */
-                        delete dialog;
-                        Calculator *cal1 = new Calculator();
-                        result = cal1->EvalFormula(data->PlainVariables(), formula);
-                        delete cal1; /* Here can be memory leak, but dialog already check this formula and probability
-                                      * very low. */
-                        break;
+                        DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId,
+                                                                                    qApp->getMainWindow());
+                        dialog->setWindowTitle(tr("Edit wrong formula"));
+                        dialog->SetFormula(formula);
+                        if (dialog->exec() == QDialog::Accepted)
+                        {
+                            formula = dialog->GetFormula();
+                            /* Need delete dialog here because parser in dialog don't allow use correct separator for
+                             * parsing here. */
+                            delete dialog;
+                            Calculator *cal1 = new Calculator();
+                            result = cal1->EvalFormula(data->PlainVariables(), formula);
+                            delete cal1; /* Here can be memory leak, but dialog already check this formula and
+                                            probability very low. */
+                            break;
+                        }
+                        else
+                        {
+                            delete dialog;
+                        }
                     }
                     else
                     {
-                        delete dialog;
+                        throw VExceptionUndo(QString("Undo wrong formula %1").arg(formula));
                     }
                 }
                 else
                 {
-                    throw VExceptionUndo(QString("Undo wrong formula %1").arg(formula));
+                    delete dialogUndo;
+                    throw;
                 }
             }
-            else
-            {
-                delete dialogUndo;
-                throw;
-            }
+            delete dialogUndo;
         }
-        delete dialogUndo;
+        else
+        {
+            throw;
+        }
     }
     return result;
 }

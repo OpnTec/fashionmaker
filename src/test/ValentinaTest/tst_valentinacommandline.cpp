@@ -220,6 +220,11 @@ void TST_ValentinaCommandLine::TestMode_data() const
                                                                 QLatin1Literal("issue_256_wrong.vst"))
                                << false
                                << V_EX_NOINPUT;
+
+    QTest::newRow("Wrong formula.")<< "wrong_formula.val"
+                               << QString("--test")
+                               << false
+                               << V_EX_DATAERR;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

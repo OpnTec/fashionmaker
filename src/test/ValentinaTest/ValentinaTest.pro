@@ -245,7 +245,8 @@ VALENTINA_TEST_FILES += \
     tst_valentina/issue_256_correct.vit \
     tst_valentina/issue_256_wrong.vit \
     tst_valentina/issue_256_correct.vst \
-    tst_valentina/issue_256_wrong.vit
+    tst_valentina/issue_256_wrong.vit \
+    tst_valentina/wrong_formula.val
 
 COLLECTION_FILES += \
     $${PWD}/../../app/share/tables/standard/GOST_man_ru.vst \

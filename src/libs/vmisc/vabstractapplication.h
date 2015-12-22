@@ -94,6 +94,8 @@ public:
 
     QUndoStack      *getUndoStack() const;
 
+    virtual bool     IsAppInGUIMode()const =0;
+
 protected slots:
     void SyncSettings();
 
