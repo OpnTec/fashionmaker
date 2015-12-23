@@ -322,6 +322,8 @@ private:
     QString            GetMeasurementFileName();
 
     void               UpdateWindowTitle();
+
+    bool               IgnoreLocking(int error, const QString &path);
 };
 
 #endif // MAINWINDOW_H

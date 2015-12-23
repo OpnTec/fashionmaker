@@ -200,6 +200,8 @@ private:
     bool LoadFromExistingFile(const QString &path);
 
     void CreateWindowMenu(QMenu *menu);
+
+    bool IgnoreLocking(int error, const QString &path);
 };
 
 #endif // TMAINWINDOW_H

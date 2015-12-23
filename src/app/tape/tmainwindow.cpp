@@ -233,12 +233,10 @@ bool TMainWindow::LoadFile(const QString &path)
 
         if (not lock->IsLocked())
         {
-            qCCritical(tMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
-            if (qApp->IsTestMode())
+            if (not IgnoreLocking(lock->GetLockError(), path))
             {
-                qApp->exit(V_EX_NOINPUT);
+                return false;
             }
-            return false;
         }
 
         try
@@ -2599,12 +2597,10 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
 
         if (not lock->IsLocked())
         {
-            qCCritical(tMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
-            if (qApp->IsTestMode())
+            if (not IgnoreLocking(lock->GetLockError(), path))
             {
-                qApp->exit(V_EX_NOINPUT);
+                return false;
             }
-            return false;
         }
 
         try
@@ -2724,6 +2720,72 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
             action->setChecked(true);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool TMainWindow::IgnoreLocking(int error, const QString &path)
+{
+    QMessageBox::StandardButton answer = QMessageBox::Abort;
+    if (not qApp->IsTestMode())
+    {
+        switch(error)
+        {
+            case QLockFile::LockFailedError:
+                answer = QMessageBox::warning(this, tr("Locking file"),
+                                              tr("This file already opened in another window. Ignore if you want "
+                                                 "to continue (not recommended, can cause a data corruption)."),
+                                              QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                break;
+            case QLockFile::PermissionError:
+                answer = QMessageBox::question(this, tr("Locking file"),
+                                               tr("The lock file could not be created, for lack of permissions. "
+                                                  "Ignore if you want to continue (not recommended, can cause "
+                                                  "a data corruption)."),
+                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                break;
+            case QLockFile::UnknownError:
+                answer = QMessageBox::question(this, tr("Locking file"),
+                                               tr("Unknown error happened, for instance a full partition "
+                                                  "prevented writing out the lock file. Ignore if you want to "
+                                                  "continue (not recommended, can cause a data corruption)."),
+                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                break;
+            default:
+                answer = QMessageBox::Abort;
+                break;
+        }
+    }
+
+    if (answer == QMessageBox::Abort)
+    {
+        qCDebug(tMainWindow, "Failed to lock %s", qUtf8Printable(path));
+        qCDebug(tMainWindow, "Error type: %d", error);
+        if (qApp->IsTestMode())
+        {
+            switch(error)
+            {
+                case QLockFile::LockFailedError:
+                    qCCritical(tMainWindow, "%s",
+                               qUtf8Printable(tr("This file already opened in another window.")));
+                    break;
+                case QLockFile::PermissionError:
+                    qCCritical(tMainWindow, "%s",
+                               qUtf8Printable(tr("The lock file could not be created, for lack of permissions.")));
+                    break;
+                case QLockFile::UnknownError:
+                    qCCritical(tMainWindow, "%s",
+                               qUtf8Printable(tr("Unknown error happened, for instance a full partition "
+                                                 "prevented writing out the lock file.")));
+                    break;
+                default:
+                    break;
+            }
+
+            qApp->exit(V_EX_NOINPUT);
+        }
+        return false;
+    }
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
