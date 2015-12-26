@@ -256,6 +256,7 @@
                                                                              <xs:attribute name="type" type="xs:string"></xs:attribute>
                                                                              <xs:attribute name="indexD1" type="xs:unsignedInt"></xs:attribute>
                                                                              <xs:attribute name="indexD2" type="xs:unsignedInt"></xs:attribute>
+                                                                             <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
                                                                        </xs:complexType>
                                                                     </xs:element>
                                                                </xs:choice>           

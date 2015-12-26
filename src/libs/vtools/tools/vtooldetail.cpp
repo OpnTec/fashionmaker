@@ -98,7 +98,6 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
                 qDebug()<<"Get wrong tool type. Ignore.";
                 break;
         }
-        doc->IncrementReferens(detail.at(i).getId());
     }
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -162,29 +161,25 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
             case (Tool::NodePoint):
             {
                 id = CreateNode<VPointF>(data, nodeD.getId());
-                VNodePoint::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui,
-                                   NodeUsage::InUse);
+                VNodePoint::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeArc):
             {
                 id = CreateNode<VArc>(data, nodeD.getId());
-                VNodeArc::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui,
-                                 NodeUsage::InUse);
+                VNodeArc::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeSpline):
             {
                 id = CreateNode<VSpline>(data, nodeD.getId());
-                VNodeSpline::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui,
-                                    NodeUsage::InUse);
+                VNodeSpline::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeSplinePath):
             {
                 id = CreateNode<VSplinePath>(data, nodeD.getId());
-                VNodeSplinePath::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui,
-                                        NodeUsage::InUse);
+                VNodeSplinePath::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             default:

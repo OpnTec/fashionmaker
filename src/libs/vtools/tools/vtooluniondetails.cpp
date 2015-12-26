@@ -64,6 +64,7 @@ VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, co
                                      const Source &typeCreation, QObject *parent)
     :VAbstractTool(doc, data, id, parent), d1(d1), d2(d2), indexD1(indexD1), indexD2(indexD2)
 {
+    _referens = 0;
     ToolCreation(typeCreation);
 }
 
@@ -105,8 +106,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                 VPointF *point1 = new VPointF(*point);
                 point1->setMode(Draw::Modeling);
                 id = data->AddGObject(point1);
-                VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui,
-                                   NodeUsage::InUse, idTool, tool);
+                VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
             }
         }
         break;
@@ -142,8 +142,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                 arc2->setMode(Draw::Modeling);
                 id = data->AddGObject(arc2);
 
-                VNodeArc::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, NodeUsage::InUse,
-                                 idTool, tool);
+                VNodeArc::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
             }
         }
         break;
@@ -177,8 +176,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                 VSpline *spl1 = new VSpline(*spl);
                 spl1->setMode(Draw::Modeling);
                 id = data->AddGObject(spl1);
-                VNodeSpline::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui,
-                                    NodeUsage::InUse, idTool, tool);
+                VNodeSpline::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
 
                 delete p4;
                 delete p1;
@@ -233,8 +231,8 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                 VSplinePath *path1 = new VSplinePath(*path);
                 path1->setMode(Draw::Modeling);
                 id = data->AddGObject(path1);
-                VNodeSplinePath::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui,
-                                        NodeUsage::InUse, idTool, tool);
+                VNodeSplinePath::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool,
+                                        tool);
             }
         }
         break;
@@ -425,6 +423,57 @@ void VToolUnionDetails::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolUnionDetails::incrementReferens()
+{
+    ++_referens;
+    if (_referens == 1)
+    {
+        for (int i = 0; i < d1.CountNode(); ++i)
+        {
+            doc->IncrementReferens(d1.at(i).getId());
+        }
+
+        for (int i = 0; i < d2.CountNode(); ++i)
+        {
+            doc->IncrementReferens(d2.at(i).getId());
+        }
+
+        QDomElement domElement = doc->elementById(id);
+        if (domElement.isElement())
+        {
+            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolUnionDetails::decrementReferens()
+{
+    if (_referens > 0)
+    {
+        --_referens;
+    }
+    if (_referens == 0)
+    {
+        for (int i = 0; i < d1.CountNode(); ++i)
+        {
+            doc->DecrementReferens(d1.at(i).getId());
+        }
+
+        for (int i = 0; i < d2.CountNode(); ++i)
+        {
+            doc->DecrementReferens(d2.at(i).getId());
+        }
+
+        QDomElement domElement = doc->elementById(id);
+        if (domElement.isElement())
+        {
+            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool from GUI.
  * @param dialog dialog.
@@ -490,15 +539,6 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation, doc);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         tools->insert(id, unionDetails);
-        for (int i = 0; i < d1.CountNode(); ++i)
-        {
-            doc->IncrementReferens(d1.at(i).getId());
-        }
-        for (int i = 0; i < d2.CountNode(); ++i)
-        {
-            doc->IncrementReferens(d2.at(i).getId());
-        }
-
     }
     //Then create new details
     VNodeDetail det1p1;

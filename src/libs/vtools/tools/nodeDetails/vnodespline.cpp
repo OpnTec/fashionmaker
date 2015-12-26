@@ -71,8 +71,7 @@ VNodeSpline::VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, qu
  */
 VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id,
                                  quint32 idSpline, const Document &parse,
-                                 const Source &typeCreation, const NodeUsage &inUse, const quint32 &idTool,
-                                 QObject *parent)
+                                 const Source &typeCreation, const quint32 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
     VNodeSpline *spl = nullptr;
@@ -87,21 +86,10 @@ VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, VMainG
         doc->AddTool(id, spl);
         if (idTool != NULL_ID)
         {
-            if (inUse == NodeUsage::InUse)
-            {
-                doc->IncrementReferens(idTool);
-            }
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
             SCASSERT(tool != nullptr);
             spl->setParent(tool);// Adopted by a tool
-        }
-        else
-        {
-            if (inUse == NodeUsage::InUse)
-            {
-                doc->IncrementReferens(idSpline);
-            }
         }
     }
     else

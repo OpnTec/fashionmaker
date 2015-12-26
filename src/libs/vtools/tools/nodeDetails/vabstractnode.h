@@ -45,7 +45,6 @@ public:
     virtual      ~VAbstractNode() Q_DECL_OVERRIDE {}
     static const QString AttrIdObject;
     static const QString AttrIdTool;
-    static const QString AttrInUse;
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
     virtual void incrementReferens() Q_DECL_OVERRIDE;
     virtual void decrementReferens() Q_DECL_OVERRIDE;

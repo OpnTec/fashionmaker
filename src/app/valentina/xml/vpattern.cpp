@@ -1279,11 +1279,10 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         PointsCommonAttributes(domElement, id, mx, my);
         const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-        const NodeUsage inUse = GetParametrUsage(domElement, VAbstractNode::AttrInUse);
         const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idObject );
         data->UpdateGObject(id, new VPointF(point->toQPointF(), point->name(), mx, my, idObject,
                                             Draw::Modeling));
-        VNodePoint::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, inUse, idTool);
+        VNodePoint::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1900,12 +1899,11 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         quint32 idTool = 0;
 
         SplinesCommonAttributes(domElement, id, idObject, idTool);
-        const NodeUsage inUse = GetParametrUsage(domElement, VAbstractNode::AttrInUse);
         VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
         spl->setIdObject(idObject);
         spl->setMode(Draw::Modeling);
         data->UpdateGObject(id, spl);
-        VNodeSpline::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, inUse, idTool);
+        VNodeSpline::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1927,12 +1925,11 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         quint32 idTool = 0;
 
         SplinesCommonAttributes(domElement, id, idObject, idTool);
-        const NodeUsage inUse = GetParametrUsage(domElement, VAbstractNode::AttrInUse);
         VSplinePath *path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
         path->setIdObject(idObject);
         path->setMode(Draw::Modeling);
         data->UpdateGObject(id, path);
-        VNodeSplinePath::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, inUse, idTool);
+        VNodeSplinePath::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1999,12 +1996,11 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         ToolsCommonAttributes(domElement, id);
         const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-        const NodeUsage inUse = GetParametrUsage(domElement, VAbstractNode::AttrInUse);
         VArc *arc = new VArc(*data->GeometricObject<VArc>(idObject));
         arc->setIdObject(idObject);
         arc->setMode(Draw::Modeling);
         data->UpdateGObject(id, arc);
-        VNodeArc::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, inUse, idTool);
+        VNodeArc::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {

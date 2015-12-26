@@ -69,8 +69,7 @@ VNodeArc::VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 
  * @param parent QObject parent
  */
 void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id, quint32 idArc,
-                      const Document &parse,
-                      const Source &typeCreation, const NodeUsage &inUse, const quint32 &idTool, QObject *parent)
+                      const Document &parse, const Source &typeCreation, const quint32 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
     if (parse == Document::FullParse)
@@ -84,21 +83,10 @@ void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScen
         doc->AddTool(id, arc);
         if (idTool != NULL_ID)
         {
-            if (inUse == NodeUsage::InUse)
-            {
-                doc->IncrementReferens(idTool);
-            }
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
             SCASSERT(tool != nullptr);
             arc->setParent(tool);// Adopted by a tool
-        }
-        else
-        {
-            if (inUse == NodeUsage::InUse)
-            {
-                doc->IncrementReferens(idArc);
-            }
         }
     }
     else

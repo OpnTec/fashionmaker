@@ -33,7 +33,6 @@
 
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
-const QString VAbstractNode::AttrInUse = QStringLiteral("inUse");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -61,11 +60,8 @@ void VAbstractNode::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractNode::incrementReferens()
 {
-    if (_referens <= 0)
-    {
-        ++_referens;
-    }
-    if (_referens > 0)
+    ++_referens;
+    if (_referens == 1)
     {
         idTool != NULL_ID ? doc->IncrementReferens(idTool) : doc->IncrementReferens(idNode);
         ShowNode();
@@ -87,7 +83,7 @@ void VAbstractNode::decrementReferens()
     {
         --_referens;
     }
-    if (_referens <= 0)
+    if (_referens == 0)
     {
         idTool != NULL_ID ? doc->DecrementReferens(idTool) : doc->DecrementReferens(idNode);
         HideNode();

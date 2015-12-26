@@ -41,6 +41,8 @@
 #include <QMessageBox>
 #include <QtCore/qmath.h>
 
+const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VAbstractTool container.

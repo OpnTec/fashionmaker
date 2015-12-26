@@ -81,7 +81,7 @@ VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quin
  */
 void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene,
                         quint32 id, quint32 idPoint, const Document &parse,
-                        const Source &typeCreation, const NodeUsage &inUse, const quint32 &idTool, QObject *parent)
+                        const Source &typeCreation, const quint32 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodePoint, doc);
     if (parse == Document::FullParse)
@@ -98,21 +98,10 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
         doc->AddTool(id, point);
         if (idTool != NULL_ID)
         {
-            if (inUse == NodeUsage::InUse)
-            {
-                doc->IncrementReferens(idTool);
-            }
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
             SCASSERT(tool != nullptr);
             point->setParent(tool);// Adopted by a tool
-        }
-        else
-        {
-            if (inUse == NodeUsage::InUse)
-            {
-                doc->IncrementReferens(idPoint);
-            }
         }
     }
     else

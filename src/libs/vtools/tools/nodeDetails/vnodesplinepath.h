@@ -43,8 +43,7 @@ public:
                     const quint32 &idTool = 0, QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr);
     static void  Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id,
                         quint32 idSpline, const Document &parse,
-                        const Source &typeCreation, const NodeUsage &inUse, const quint32 &idTool = 0,
-                        QObject *parent = 0);
+                        const Source &typeCreation, const quint32 &idTool = 0, QObject *parent = 0);
     static const QString TagName;
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
