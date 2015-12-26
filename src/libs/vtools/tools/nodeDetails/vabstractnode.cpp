@@ -33,6 +33,7 @@
 
 const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
+const QString VAbstractNode::AttrInUse = QStringLiteral("inUse");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -52,37 +53,28 @@ VAbstractNode::VAbstractNode(VAbstractPattern *doc, VContainer *data, const quin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractNode::DeleteNode()
-{
-    if (_referens <= 1)
-    {
-        RemoveReferens();//deincrement referens
-    }
-}
-
-void VAbstractNode::RestoreNode()
-{
-    if (_referens <= 1)
-    {
-        RestoreReferens();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractNode::ShowVisualization(bool show)
 {
     Q_UNUSED(show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AddToModeling add tag to modeling tag current pattern peace.
- * @param domElement tag.
- */
-void VAbstractNode::AddToModeling(const QDomElement &domElement)
+void VAbstractNode::incrementReferens()
 {
-    AddDetNode *addNode = new AddDetNode(domElement, doc);
-    qApp->getUndoStack()->push(addNode);
+    if (_referens <= 0)
+    {
+        ++_referens;
+    }
+    if (_referens > 0)
+    {
+        idTool != NULL_ID ? doc->IncrementReferens(idTool) : doc->IncrementReferens(idNode);
+        ShowNode();
+        QDomElement domElement = doc->elementById(id);
+        if (domElement.isElement())
+        {
+            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -97,41 +89,23 @@ void VAbstractNode::decrementReferens()
     }
     if (_referens <= 0)
     {
-        doc->DecrementReferens(idNode);
+        idTool != NULL_ID ? doc->DecrementReferens(idTool) : doc->DecrementReferens(idNode);
+        HideNode();
         QDomElement domElement = doc->elementById(id);
         if (domElement.isElement())
         {
-            QDomNode element = domElement.parentNode();
-            if (element.isNull() == false)
-            {
-                element.removeChild(domElement);
-            }
+            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractNode::RemoveReferens()
+/**
+ * @brief AddToModeling add tag to modeling tag current pattern peace.
+ * @param domElement tag.
+ */
+void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
-    if (idTool != 0)
-    {
-        doc->DecrementReferens(idTool);
-    }
-    else
-    {
-        doc->DecrementReferens(idNode);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractNode::RestoreReferens()
-{
-    if (idTool != 0)
-    {
-        doc->IncrementReferens(idTool);
-    }
-    else
-    {
-        doc->IncrementReferens(idNode);
-    }
+    AddDetNode *addNode = new AddDetNode(domElement, doc);
+    qApp->getUndoStack()->push(addNode);
 }

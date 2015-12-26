@@ -275,6 +275,33 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+NodeUsage VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name) const
+{
+    const bool value = GetParametrBool(domElement, name, QStringLiteral("true"));
+    if (value)
+    {
+        return NodeUsage::InUse;
+    }
+    else
+    {
+        return NodeUsage::NotInUse;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDomDocument::SetParametrUsage(QDomElement &domElement, const QString &name, const NodeUsage &value)
+{
+    if (value == NodeUsage::InUse)
+    {
+        domElement.setAttribute(name, QStringLiteral("true"));
+    }
+    else
+    {
+        domElement.setAttribute(name, QStringLiteral("false"));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns the string value of the given attribute. RENAME: see above
  *
@@ -794,6 +821,7 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
 
             if (result)
             {
+                QFile::remove(destination);
                 if (not destFile.rename(destination))
                 {
                     error = destFile.errorString();

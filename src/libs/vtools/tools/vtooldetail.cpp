@@ -162,25 +162,29 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
             case (Tool::NodePoint):
             {
                 id = CreateNode<VPointF>(data, nodeD.getId());
-                VNodePoint::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+                VNodePoint::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui,
+                                   NodeUsage::InUse);
             }
             break;
             case (Tool::NodeArc):
             {
                 id = CreateNode<VArc>(data, nodeD.getId());
-                VNodeArc::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+                VNodeArc::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui,
+                                 NodeUsage::InUse);
             }
             break;
             case (Tool::NodeSpline):
             {
                 id = CreateNode<VSpline>(data, nodeD.getId());
-                VNodeSpline::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+                VNodeSpline::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui,
+                                    NodeUsage::InUse);
             }
             break;
             case (Tool::NodeSplinePath):
             {
                 id = CreateNode<VSplinePath>(data, nodeD.getId());
-                VNodeSplinePath::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+                VNodeSplinePath::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui,
+                                        NodeUsage::InUse);
             }
             break;
             default:
@@ -306,7 +310,7 @@ void VToolDetail::AddToFile()
        AddNode(doc, domElement, detail.at(i));
     }
 
-    AddDet *addDet = new AddDet(domElement, doc);
+    AddDet *addDet = new AddDet(domElement, doc, detail);
     connect(addDet, &AddDet::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addDet);
 }
@@ -501,19 +505,6 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveReferens decrement value of reference.
- */
-void VToolDetail::RemoveReferens()
-{
-    VDetail detail = VAbstractTool::data.GetDetail(id);
-    for (int i = 0; i< detail.CountNode(); ++i)
-    {
-        doc->DecrementReferens(detail.at(i).getId());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief AddNode add node to the file.
  * @param domElement tag in xml tree.
  * @param node node of detail.
@@ -588,7 +579,7 @@ void VToolDetail::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::DeleteTool(bool ask)
 {
-    DeleteDetail *delDet = new DeleteDetail(doc, id);
+    DeleteDetail *delDet = new DeleteDetail(doc, id, VAbstractTool::data.GetDetail(id));
     if (ask)
     {
         if (ConfirmDeletion() == QMessageBox::No)

@@ -58,6 +58,7 @@ public:
 
     quint32        SPointActiveDraw();
 
+    virtual void   setXMLContent(const QString &fileName) Q_DECL_OVERRIDE;
     virtual bool   SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
 
     QRectF         ActiveDrawBoundingRect() const;
@@ -174,6 +175,8 @@ private:
 
     QDomElement MakeEmptyIncrement(const QString &name);
     QDomElement FindIncrement(const QString &name) const;
+
+    void GarbageCollector();
 };
 
 #endif // VPATTERN_H

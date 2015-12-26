@@ -87,13 +87,17 @@ public:
 
     quint32        GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     bool           GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue) const;
+
+    NodeUsage      GetParametrUsage(const QDomElement& domElement, const QString &name) const;
+    void           SetParametrUsage(QDomElement& domElement, const QString &name, const NodeUsage &value);
+
     QString        GetParametrString(const QDomElement& domElement, const QString &name,
                                      const QString &defValue = QString()) const;
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     quint32        GetParametrId(const QDomElement& domElement) const;
 
     static void    ValidateXML(const QString &schema, const QString &fileName);
-    void           setXMLContent(const QString &fileName);
+    virtual void   setXMLContent(const QString &fileName);
     static Unit    StrToUnits(const QString &unit);
     static QString UnitsToStr(const Unit &unit, const bool translate = false);
     static QString UnitsHelpString();

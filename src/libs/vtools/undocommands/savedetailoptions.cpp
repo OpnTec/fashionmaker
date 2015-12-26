@@ -60,13 +60,10 @@ void SaveDetailOptions::undo()
            VToolDetail::AddNode(doc, domElement, oldDet.at(i));
         }
         QVector<VNodeDetail> nodes = oldDet.getNodes();
-        QHash<quint32, VDataTool*>* tools = doc->getTools();
         if (nodes.size()>0)
         {
             for (qint32 i = 0; i < nodes.size(); ++i)
             {
-                VAbstractNode *node = qobject_cast<VAbstractNode *>(tools->value(nodes.at(i).getId()));
-                node->RestoreNode();
                 doc->IncrementReferens(nodes.at(i).getId());
             }
         }
@@ -94,13 +91,10 @@ void SaveDetailOptions::redo()
            VToolDetail::AddNode(doc, domElement, newDet.at(i));
         }
         QList<quint32> list = oldDet.Missing(newDet);
-        QHash<quint32, VDataTool*>* tools = doc->getTools();
         if (list.size()>0)
         {
             for (qint32 i = 0; i < list.size(); ++i)
             {
-                VAbstractNode *node = qobject_cast<VAbstractNode *>(tools->value(list.at(i)));
-                node->DeleteNode();
                 doc->DecrementReferens(list.at(i));
             }
         }

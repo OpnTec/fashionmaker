@@ -1790,6 +1790,7 @@ void MainWindow::ActionDraw(bool checked)
         leftGoToStage->setPixmap(QPixmap("://icon/24x24/fast_forward_left_to_right_arrow.png"));
         rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
 
+        ui->actionDraw->setChecked(true);
         ui->actionDetails->setChecked(false);
         ui->actionLayout->setChecked(false);
         SaveCurrentScene();
@@ -1868,6 +1869,7 @@ void MainWindow::ActionDetails(bool checked)
         rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
 
         ui->actionDraw->setChecked(false);
+        ui->actionDetails->setChecked(true);
         ui->actionLayout->setChecked(false);
         SaveCurrentScene();
 
@@ -1955,6 +1957,7 @@ void MainWindow::ActionLayout(bool checked)
 
         ui->actionDraw->setChecked(false);
         ui->actionDetails->setChecked(false);
+        ui->actionLayout->setChecked(true);
         SaveCurrentScene();
 
         PrepareDetailsForLayout(details);
@@ -2192,7 +2195,7 @@ void MainWindow::Clear()
     qCDebug(vMainWindow, "Reseting main window.");
     lock.reset();
     qCDebug(vMainWindow, "Unlocked pattern file.");
-    ui->actionDraw->setChecked(true);
+    ActionDraw(true);
     qCDebug(vMainWindow, "Returned to Draw mode.");
     pattern->Clear();
     qCDebug(vMainWindow, "Clearing pattern.");
@@ -2489,9 +2492,7 @@ void MainWindow::Layout()
     else
     {
         listDetails.clear();
-        ui->actionDetails->setChecked(false);
-        ui->actionLayout->setChecked(false);
-        ui->actionDraw->setChecked(true);
+        ActionDraw(true);
         SetLayoutModeActions(false);
     }
 }
@@ -3543,7 +3544,7 @@ bool MainWindow::LoadPattern(const QString &fileName, const QString& customMeasu
         //Fit scene size to best size for first show
         ZoomFirstShow();
 
-        ui->actionDraw->setChecked(true);
+        ActionDraw(true);
     }
     qApp->setOpeningPattern();// End opening file
     return true;
