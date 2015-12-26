@@ -2138,7 +2138,7 @@ void VPattern::GarbageCollector()
                     if (inUse == NodeUsage::InUse)
                     { // It is dangerous to leave object with attribute 'inUse'
                       // Each parse should confirm this status.
-                        modNode.removeAttribute(VAbstractNode::AttrInUse);
+                        SetParametrUsage(modNode, VAbstractNode::AttrInUse, NodeUsage::NotInUse);
                     }
                     else
                     { // Parent was deleted. We do not need this object anymore
@@ -2146,8 +2146,8 @@ void VPattern::GarbageCollector()
                     }
                 }
                 else
-                { // Last parse did not confirm use of an object
-                    modElement.removeChild(modNode); // was not used
+                { // Each parse should confirm his status.
+                    SetParametrUsage(modNode, VAbstractNode::AttrInUse, NodeUsage::NotInUse);
                 }
 
                 modNode = nextSibling;
