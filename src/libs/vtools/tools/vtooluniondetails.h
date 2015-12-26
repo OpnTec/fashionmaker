@@ -79,6 +79,8 @@ public:
                                  const qreal &angle);
     virtual QString getTagName() const Q_DECL_OVERRIDE;
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
+    virtual void incrementReferens() Q_DECL_OVERRIDE;
+    virtual void decrementReferens() Q_DECL_OVERRIDE;
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.

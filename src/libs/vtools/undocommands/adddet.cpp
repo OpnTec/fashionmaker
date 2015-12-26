@@ -29,8 +29,8 @@
 #include "adddet.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddDet::AddDet(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent)
+AddDet::AddDet(const QDomElement &xml, VAbstractPattern *doc, const VDetail &detail, QUndoCommand *parent)
+    : VUndoCommand(xml, doc, parent), detail(detail)
 {
     setText(tr("add detail"));
     nodeId = doc->GetParametrId(xml);
@@ -56,6 +56,15 @@ void AddDet::undo()
             {
                 qCDebug(vUndo, "Can't delete node");
                 return;
+            }
+
+            QVector<VNodeDetail> nodes = detail.getNodes();
+            if (nodes.size()>0)
+            {
+                for (qint32 i = 0; i < nodes.size(); ++i)
+                {
+                    doc->DecrementReferens(nodes.at(i).getId());
+                }
             }
         }
         else

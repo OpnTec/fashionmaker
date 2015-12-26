@@ -30,8 +30,8 @@
 #include "../tools/vtooldetail.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DeleteDetail::DeleteDetail(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID)
+DeleteDetail::DeleteDetail(VAbstractPattern *doc, quint32 id, const VDetail &detail, QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent), parentNode(QDomNode()), siblingId(NULL_ID), detail(detail)
 {
     setText(tr("delete tool"));
     nodeId = id;
@@ -88,6 +88,15 @@ void DeleteDetail::redo()
         VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(nodeId));
         SCASSERT(toolDet != nullptr);
         toolDet->hide();
+
+        QVector<VNodeDetail> nodes = detail.getNodes();
+        if (nodes.size()>0)
+        {
+            for (qint32 i = 0; i < nodes.size(); ++i)
+            {
+                doc->DecrementReferens(nodes.at(i).getId());
+            }
+        }
 
         emit NeedFullParsing(); // Doesn't work when UnionDetail delete detail.
     }

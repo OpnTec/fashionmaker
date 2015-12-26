@@ -292,6 +292,7 @@ void DialogDetail::setDetail(const VDetail &value)
     ui.listWidget->setCurrentRow(0);
     ui.listWidget->setFocus(Qt::OtherFocusReason);
     ui.toolButtonDelete->setEnabled(true);
+    ValidObjects(DetailIsValid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -490,7 +491,7 @@ bool DialogDetail::DetailIsValid() const
         }
         if (FirstPointEqualLast())
         {
-            url += tr("First point can not equal the last point!");
+            url += tr("First point cannot be equal to the last point!");
             ui.helpLabel->setText(url);
             return false;
         }

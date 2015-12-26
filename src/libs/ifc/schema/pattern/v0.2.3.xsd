@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+         <!-- XML Schema Generated from XML Document-->
+         <xs:element name="pattern">
+               <xs:complexType>
+                     <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                            <xs:element name="version" type="formatVersion"></xs:element>
+                            <xs:element name="unit" type="units"></xs:element>
+                            <xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="gradation" minOccurs="0" maxOccurs="1">
+                                <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="heights">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="all" type="xs:boolean" use="required"></xs:attribute>
+                                                         <xs:attribute name="h92" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h98" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h104" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h110" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h116" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h122" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h128" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h134" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h140" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h146" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h152" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h158" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h164" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h170" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h176" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h182" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h188" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="h194" type="xs:boolean"></xs:attribute>       
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="sizes">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="all" type="xs:boolean" use="required"></xs:attribute>
+                                                         <xs:attribute name="s22" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s24" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s26" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s28" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s30" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s32" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s34" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s36" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s38" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s40" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s42" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s44" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s46" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s48" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s50" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s52" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s54" type="xs:boolean"></xs:attribute>
+                                                         <xs:attribute name="s56" type="xs:boolean"></xs:attribute>    
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                       <xs:attribute name="custom" type="xs:boolean"></xs:attribute>
+                                       <xs:attribute name="defHeight" type="baseHeight"></xs:attribute>
+                                       <xs:attribute name="defSize" type="baseSize"></xs:attribute>
+                                 </xs:complexType>
+                            </xs:element>
+                           <xs:element name="measurements" type="xs:string"></xs:element>
+                           <xs:element name="increments" minOccurs="0" maxOccurs="1">
+                                 <xs:complexType>
+                                       <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                                             <xs:element name="increment" minOccurs="0" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:attribute name="description" type="xs:string" use="required"></xs:attribute>
+                                                         <xs:attribute name="name" type="shortName" use="required"></xs:attribute>
+                                                         <xs:attribute name="formula" type="xs:string" use="required"></xs:attribute>      
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                                 <xs:unique name="incrementName">
+                                    <xs:selector xpath="increment"/>
+                                    <xs:field xpath="@name"/>
+                                 </xs:unique>
+                           </xs:element>
+                           <xs:element name="draw" minOccurs="1" maxOccurs="unbounded">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="calculation" minOccurs="1" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:choice minOccurs="0" maxOccurs="unbounded">   
+                                                                     <xs:element name="point" minOccurs="0" maxOccurs="unbounded">
+                                                                           <xs:complexType>
+                                                                                 <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="x" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="y" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="mx" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="my" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="name" type="shortName"></xs:attribute>
+                                                                                 <xs:attribute name="firstPoint" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="secondPoint" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="thirdPoint" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="basePoint" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="pShoulder" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="p1Line" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="p2Line" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="length" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="angle" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="typeLine" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="splinePath" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="spline" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="p1Line1" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="p1Line2" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="p2Line1" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="p2Line2" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="center" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="radius" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="axisP1" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="axisP2" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="arc" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="curve" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="lineColor" type="colors"></xs:attribute>
+                                                                                 <xs:attribute name="color" type="colors"></xs:attribute>
+                                                                                 <xs:attribute name="firstArc" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="secondArc" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="crossPoint" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="c1Center" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="c2Center" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="c1Radius" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="c2Radius" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="cRadius" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="tangent" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="cCenter" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="name1" type="shortName"></xs:attribute>
+                                                                                 <xs:attribute name="mx1" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="my1" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="name2" type="shortName"></xs:attribute>
+                                                                                 <xs:attribute name="mx2" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="my2" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="point1" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="point2" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="dartP1" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="dartP2" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="dartP3" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="baseLineP1" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="baseLineP2" type="xs:unsignedInt"></xs:attribute>
+                                                                           </xs:complexType>
+                                                                     </xs:element>                                                              
+                                                                     <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
+                                                                           <xs:complexType>
+                                                                                 <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="firstPoint" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="secondPoint" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="typeLine" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="lineColor" type="colors"></xs:attribute>
+                                                                           </xs:complexType>
+                                                                     </xs:element> 
+                                                                     <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">
+                                                                           <xs:complexType>
+                                                                                 <xs:attribute name="angle1" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="angle2" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="radius" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="center" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="color" type="colors"></xs:attribute>
+                                                                                 <xs:attribute name="length" type="xs:string"></xs:attribute>
+                                                                           </xs:complexType>
+                                                                     </xs:element>
+                                                                     <xs:element name="spline" minOccurs="0" maxOccurs="unbounded">
+                                                                           <xs:complexType>
+                                                                                 <xs:sequence>
+                                                                                       <xs:element name="pathPoint" minOccurs="0" maxOccurs="unbounded">
+                                                                                             <xs:complexType>
+                                                                                                   <xs:attribute name="kAsm2" type="xs:string"></xs:attribute>
+                                                                                                   <xs:attribute name="pSpline" type="xs:unsignedInt"></xs:attribute>
+                                                                                                   <xs:attribute name="angle" type="xs:string"></xs:attribute>
+                                                                                                   <xs:attribute name="kAsm1" type="xs:string"></xs:attribute>
+                                                                                             </xs:complexType>
+                                                                                       </xs:element>
+                                                                                 </xs:sequence>
+                                                                                 <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="kCurve" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="kAsm1" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="kAsm2" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="angle1" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="angle2" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="point1" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="point4" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="color" type="colors"></xs:attribute>
+                                                                           </xs:complexType>
+                                                                     </xs:element>
+                                                               </xs:choice>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="modeling" minOccurs="1" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:choice minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:element name="point" minOccurs="0" maxOccurs="unbounded">
+                                                                           <xs:complexType>
+                                                                                 <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="mx" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="typeObject" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="my" type="xs:double"></xs:attribute>
+                                                                                 <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="idTool" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
+                                                                           </xs:complexType>
+                                                                     </xs:element>
+                                                                     <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">
+                                                                           <xs:complexType>
+                                                                                 <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="typeObject" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="idTool" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
+                                                                           </xs:complexType>
+                                                                     </xs:element>
+                                                                     <xs:element name="spline" minOccurs="0" maxOccurs="unbounded">
+                                                                           <xs:complexType>
+                                                                                 <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                 <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="typeObject" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="idTool" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
+                                                                           </xs:complexType>
+                                                                     </xs:element>
+                                                                     <xs:element name="tools" minOccurs="0" maxOccurs="unbounded">
+                                                                       <xs:complexType>
+                                                                             <xs:sequence>
+                                                                                   <xs:element name="det" minOccurs="2" maxOccurs="2">
+                                                                                         <xs:complexType>
+                                                                                               <xs:sequence>
+                                                                                                     <xs:element name="node" maxOccurs="unbounded">
+                                                                                                           <xs:complexType>
+                                                                                                                 <xs:attribute name="nodeType" type="xs:string"></xs:attribute>
+                                                                                                                 <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
+                                                                                                                 <xs:attribute name="mx" type="xs:double"></xs:attribute>
+                                                                                                                 <xs:attribute name="my" type="xs:double"></xs:attribute>
+                                                                                                                 <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                                                 <xs:attribute name="reverse" type="xs:unsignedInt"></xs:attribute>
+                                                                                                           </xs:complexType>
+                                                                                                     </xs:element>
+                                                                                               </xs:sequence>
+                                                                                         </xs:complexType>
+                                                                                   </xs:element>
+                                                                             </xs:sequence>
+                                                                             <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                             <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                             <xs:attribute name="indexD1" type="xs:unsignedInt"></xs:attribute>
+                                                                             <xs:attribute name="indexD2" type="xs:unsignedInt"></xs:attribute>
+                                                                             <xs:attribute name="inUse" type="xs:boolean"></xs:attribute>
+                                                                       </xs:complexType>
+                                                                    </xs:element>
+                                                               </xs:choice>           
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="details" minOccurs="1" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="detail" minOccurs="0" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="node" maxOccurs="unbounded">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="nodeType" type="xs:string"></xs:attribute>
+                                                                                             <xs:attribute name="idObject" type="xs:unsignedInt"></xs:attribute>
+                                                                                             <xs:attribute name="mx" type="xs:double"></xs:attribute>
+                                                                                             <xs:attribute name="my" type="xs:double"></xs:attribute>
+                                                                                             <xs:attribute name="type" type="xs:string"></xs:attribute>
+                                                                                             <xs:attribute name="reverse" type="xs:unsignedInt"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                           <xs:attribute name="id" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                           <xs:attribute name="supplement" type="xs:unsignedInt"></xs:attribute>
+                                                                           <xs:attribute name="mx" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="my" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="width" type="xs:double"></xs:attribute>
+                                                                           <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                                                           <xs:attribute name="closed" type="xs:unsignedInt"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                       <xs:attribute name="name" type="xs:string"></xs:attribute>
+                                 </xs:complexType>
+                           </xs:element>
+                     </xs:sequence>
+               </xs:complexType>
+         </xs:element>
+    <xs:simpleType name="shortName">
+        <xs:restriction base="xs:string">   
+            <xs:pattern value="^([^0-9*/^+\-=\s()?%:;!.,`'\&quot;]){1,1}([^*/^+\-=\s()?%:;!.,`'\&quot;]){0,}$"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="units">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="mm"/>
+            <xs:enumeration value="cm"/>
+            <xs:enumeration value="inch"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="measurementsTypes">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="standard"/>
+            <xs:enumeration value="individual"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="formatVersion">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="^(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))$"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="colors">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="black"/>
+            <xs:enumeration value="green"/>
+            <xs:enumeration value="blue"/>
+            <xs:enumeration value="darkRed"/>
+            <xs:enumeration value="darkGreen"/>
+            <xs:enumeration value="darkBlue"/>
+            <xs:enumeration value="yellow"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="baseHeight">
+        <xs:restriction base="xs:unsignedInt">
+            <xs:enumeration value="92"/>
+            <xs:enumeration value="98"/>
+            <xs:enumeration value="104"/>
+            <xs:enumeration value="110"/>
+            <xs:enumeration value="116"/>
+            <xs:enumeration value="122"/>
+            <xs:enumeration value="128"/>
+            <xs:enumeration value="134"/>
+            <xs:enumeration value="140"/>
+            <xs:enumeration value="146"/>
+            <xs:enumeration value="152"/>
+            <xs:enumeration value="158"/>
+            <xs:enumeration value="164"/>
+            <xs:enumeration value="170"/>
+            <xs:enumeration value="176"/>
+            <xs:enumeration value="182"/>
+            <xs:enumeration value="188"/>
+            <xs:enumeration value="194"/>
+            <xs:enumeration value="920"/>
+            <xs:enumeration value="980"/>
+            <xs:enumeration value="1040"/>
+            <xs:enumeration value="1100"/>
+            <xs:enumeration value="1160"/>
+            <xs:enumeration value="1220"/>
+            <xs:enumeration value="1280"/>
+            <xs:enumeration value="1340"/>
+            <xs:enumeration value="1400"/>
+            <xs:enumeration value="1460"/>
+            <xs:enumeration value="1520"/>
+            <xs:enumeration value="1580"/>
+            <xs:enumeration value="1640"/>
+            <xs:enumeration value="1700"/>
+            <xs:enumeration value="1760"/>
+            <xs:enumeration value="1820"/>
+            <xs:enumeration value="1880"/>
+            <xs:enumeration value="1940"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="baseSize">
+        <xs:restriction base="xs:unsignedInt">
+            <xs:enumeration value="22"/>
+            <xs:enumeration value="24"/>
+            <xs:enumeration value="26"/>
+            <xs:enumeration value="28"/>
+            <xs:enumeration value="30"/>
+            <xs:enumeration value="32"/>
+            <xs:enumeration value="34"/>
+            <xs:enumeration value="36"/>
+            <xs:enumeration value="38"/>
+            <xs:enumeration value="40"/>
+            <xs:enumeration value="42"/>
+            <xs:enumeration value="44"/>
+            <xs:enumeration value="46"/>
+            <xs:enumeration value="48"/>
+            <xs:enumeration value="50"/>
+            <xs:enumeration value="52"/>
+            <xs:enumeration value="54"/>
+            <xs:enumeration value="56"/>
+            <xs:enumeration value="220"/>
+            <xs:enumeration value="240"/>
+            <xs:enumeration value="260"/>
+            <xs:enumeration value="280"/>
+            <xs:enumeration value="300"/>
+            <xs:enumeration value="320"/>
+            <xs:enumeration value="340"/>
+            <xs:enumeration value="360"/>
+            <xs:enumeration value="380"/>
+            <xs:enumeration value="400"/>
+            <xs:enumeration value="420"/>
+            <xs:enumeration value="440"/>
+            <xs:enumeration value="460"/>
+            <xs:enumeration value="480"/>
+            <xs:enumeration value="500"/>
+            <xs:enumeration value="520"/>
+            <xs:enumeration value="540"/>
+            <xs:enumeration value="560"/>
+        </xs:restriction>
+    </xs:simpleType>
+   </xs:schema>

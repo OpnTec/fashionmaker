@@ -92,6 +92,13 @@ void VPattern::CreateEmptyFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::setXMLContent(const QString &fileName)
+{
+    VDomDocument::setXMLContent(fileName);
+    GarbageCollector();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Parse parse file.
  * @param parse parser file mode.
@@ -1896,7 +1903,7 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         spl->setIdObject(idObject);
         spl->setMode(Draw::Modeling);
         data->UpdateGObject(id, spl);
-        VNodeSpline::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
+        VNodeSpline::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1922,7 +1929,7 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         path->setIdObject(idObject);
         path->setMode(Draw::Modeling);
         data->UpdateGObject(id, path);
-        VNodeSplinePath::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
+        VNodeSplinePath::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1993,7 +2000,7 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         arc->setIdObject(idObject);
         arc->setMode(Draw::Modeling);
         data->UpdateGObject(id, arc);
-        VNodeArc::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
+        VNodeArc::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2109,6 +2116,44 @@ QDomElement VPattern::FindIncrement(const QString &name) const
     }
 
     return QDomElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::GarbageCollector()
+{
+    QDomNodeList modelingList = elementsByTagName(TagModeling);
+    for (int i=0; i < modelingList.size(); ++i)
+    {
+        QDomElement modElement = modelingList.at(i).toElement();
+        if (not modElement.isNull())
+        {
+            QDomElement modNode = modElement.firstChild().toElement();
+            while (not modNode.isNull())
+            {
+                // First get next sibling because later will not have chance to get it
+                QDomElement nextSibling = modNode.nextSibling().toElement();
+                if (modNode.hasAttribute(VAbstractNode::AttrInUse))
+                {
+                    const NodeUsage inUse = GetParametrUsage(modNode, VAbstractNode::AttrInUse);
+                    if (inUse == NodeUsage::InUse)
+                    { // It is dangerous to leave object with attribute 'inUse'
+                      // Each parse should confirm this status.
+                        modNode.removeAttribute(VAbstractNode::AttrInUse);
+                    }
+                    else
+                    { // Parent was deleted. We do not need this object anymore
+                        modElement.removeChild(modNode);
+                    }
+                }
+                else
+                { // Last parse did not confirm use of an object
+                    modElement.removeChild(modNode); // was not used
+                }
+
+                modNode = nextSibling;
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

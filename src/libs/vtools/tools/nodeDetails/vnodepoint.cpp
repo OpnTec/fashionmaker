@@ -89,44 +89,24 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
         //TODO Need create garbage collector and remove all nodes, what we don't use.
         //Better check garbage before each saving file. Check only modeling tags.
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool, parent);
+
+        // Try to prevent memory leak
+        point->hide();// If no one will use node, it will stay hidden
+        scene->addItem(point);// First adopted by scene
+
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VNodePoint::EnableToolMove);
         doc->AddTool(id, point);
-        if (idTool != 0)
+        if (idTool != NULL_ID)
         {
-            doc->IncrementReferens(idTool);
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
             SCASSERT(tool != nullptr);
-            point->setParent(tool);
-        }
-        else
-        {
-            doc->IncrementReferens(idPoint);
+            point->setParent(tool);// Adopted by a tool
         }
     }
     else
     {
         doc->UpdateToolData(id, data);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DeleteNode delete node from detail.
- */
-void VNodePoint::DeleteNode()
-{
-    VAbstractNode::DeleteNode();
-    this->setVisible(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodePoint::RestoreNode()
-{
-    if (this->isVisible() == false)
-    {
-        VAbstractNode::RestoreNode();
-        this->setVisible(true);
     }
 }
 
@@ -289,6 +269,18 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
 void VNodePoint::RefreshLine()
 {
     VAbstractTool::RefreshLine(this, namePoint, lineName, radius);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::ShowNode()
+{
+    show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::HideNode()
+{
+    hide();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

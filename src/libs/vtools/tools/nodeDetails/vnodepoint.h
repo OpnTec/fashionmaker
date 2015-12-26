@@ -53,8 +53,6 @@ public:
                         const Source &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;
-    virtual void DeleteNode() Q_DECL_OVERRIDE;
-    virtual void RestoreNode() Q_DECL_OVERRIDE;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::NodePoint)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
@@ -81,6 +79,8 @@ protected:
     virtual void UpdateNamePosition(qreal mx, qreal my);
     virtual void RefreshPointGeometry(const VPointF &point);
     void         RefreshLine();
+    virtual void ShowNode() Q_DECL_OVERRIDE;
+    virtual void HideNode() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VNodePoint)
 };

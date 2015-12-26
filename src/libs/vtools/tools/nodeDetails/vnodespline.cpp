@@ -69,8 +69,8 @@ VNodeSpline::VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, qu
  * @param idTool id node.
  * @return pointer to node.
  */
-VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                                 const Document &parse,
+VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id,
+                                 quint32 idSpline, const Document &parse,
                                  const Source &typeCreation, const quint32 &idTool, QObject *parent)
 {
     VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
@@ -78,18 +78,18 @@ VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, quint3
     if (parse == Document::FullParse)
     {
         spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool, parent);
+
+        // Try to prevent memory leak
+        spl->hide();// If no one will use node, it will stay hidden
+        scene->addItem(spl);// First adopted by scene
+
         doc->AddTool(id, spl);
-        if (idTool != 0)
+        if (idTool != NULL_ID)
         {
-            doc->IncrementReferens(idTool);
             //Some nodes we don't show on scene. Tool that create this nodes must free memory.
             VDataTool *tool = doc->getTool(idTool);
             SCASSERT(tool != nullptr);
-            spl->setParent(tool);
-        }
-        else
-        {
-            doc->IncrementReferens(idSpline);
+            spl->setParent(tool);// Adopted by a tool
         }
     }
     else
@@ -97,26 +97,6 @@ VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, quint3
         doc->UpdateToolData(id, data);
     }
     return spl;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief DeleteNode delete node from detail.
- */
-void VNodeSpline::DeleteNode()
-{
-    VAbstractNode::DeleteNode();
-    this->setVisible(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodeSpline::RestoreNode()
-{
-    if (this->isVisible() == false)
-    {
-        VAbstractNode::RestoreNode();
-        this->setVisible(true);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -204,6 +184,18 @@ void VNodeSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
     this->setPen(QPen(currentColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodeSpline::ShowNode()
+{
+    show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodeSpline::HideNode()
+{
+    hide();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -42,12 +42,11 @@ public:
     VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
              const quint32 &idTool = 0, QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr);
 
-    static void  Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Document &parse,
+    static void  Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id,
+                        quint32 idArc, const Document &parse,
                         const Source &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
     static const QString TagName;
     static const QString ToolType;
-    virtual void DeleteNode() Q_DECL_OVERRIDE;
-    virtual void RestoreNode() Q_DECL_OVERRIDE;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::NodeArc)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
@@ -59,6 +58,8 @@ protected:
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void ShowNode() Q_DECL_OVERRIDE;
+    virtual void HideNode() Q_DECL_OVERRIDE;
 private:
     void         RefreshGeometry();
 };

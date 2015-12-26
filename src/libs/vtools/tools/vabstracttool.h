@@ -56,6 +56,8 @@ public:
     virtual ~VAbstractTool() Q_DECL_OVERRIDE;
     quint32                 getId() const;
 
+    static const QString AttrInUse;
+
     static const QStringList    StylesList();
     static Qt::PenStyle         LineStyleToPenStyle(const QString &typeLine);
     static QMap<QString, QIcon> LineStylesPics();
