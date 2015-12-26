@@ -1197,7 +1197,7 @@
     </message>
     <message>
         <source>First point can not equal the last point!</source>
-        <translation>First point can not equal the last point!</translation>
+        <translation type="vanished">First point can not equal the last point!</translation>
     </message>
     <message>
         <source>You have double points!</source>
@@ -1222,6 +1222,10 @@
     <message>
         <source>Width:</source>
         <translation>Width:</translation>
+    </message>
+    <message>
+        <source>First point cannot be equal to the last point!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3763,7 +3767,7 @@ Apply settings anyway?</translation>
     <name>DialogUnionDetails</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Union tool</source>
@@ -3792,6 +3796,10 @@ Apply settings anyway?</translation>
     <message>
         <source>Select a point on edge</source>
         <translation>Select a point on edge</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4789,6 +4797,30 @@ Do you want to save your changes?</translation>
         <source>Don&apos;t Save</source>
         <translation>Don&apos;t Save</translation>
     </message>
+    <message>
+        <source>Locking file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The lock file could not be created, for lack of permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -5085,15 +5117,15 @@ Do you want to save your changes?</translation>
     <name>QSaveFile</name>
     <message>
         <source>Existing file %1 is not writable</source>
-        <translation type="unfinished"></translation>
+        <translation>Existing file %1 is not writable</translation>
     </message>
     <message>
         <source>Writing canceled by application</source>
-        <translation type="unfinished"></translation>
+        <translation>Writing canceled by application</translation>
     </message>
     <message>
         <source>Partial write. Partition full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Partial write. Partition full?</translation>
     </message>
 </context>
 <context>
@@ -5847,6 +5879,30 @@ Do you want to save your changes?</translation>
     <message>
         <source>Don&apos;t Save</source>
         <translation>Don&apos;t Save</translation>
+    </message>
+    <message>
+        <source>Locking file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The lock file could not be created, for lack of permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
