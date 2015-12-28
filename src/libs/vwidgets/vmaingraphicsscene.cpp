@@ -30,6 +30,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QList>
 #include <QGraphicsItem>
+#include <QApplication>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -71,6 +72,14 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     emit mousePress(event->scenePos());
     QGraphicsScene::mousePressEvent(event);
+    if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
+    {
+        QList<QGraphicsItem *> items = selectedItems();
+        for (int i=0; i< items.size(); i++)
+        {
+            items[i]->setSelected(false);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
