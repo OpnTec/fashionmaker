@@ -69,6 +69,9 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 
+    // Enable support for HiDPI bitmap resources
+    setAttribute(Qt::AA_UseHighDpiPixmaps);
+
     connect(this, &QApplication::aboutToQuit, this, &VAbstractApplication::SyncSettings);
 }
 
