@@ -57,5 +57,6 @@
         <file>toolicon/32x32/splinePath@2x.png</file>
         <file>toolicon/32x32/true_darts@2x.png</file>
         <file>toolicon/32x32/union@2x.png</file>
+        <file>toolicon/32x32/triangle@2x.png</file>
     </qresource>
 </RCC>
