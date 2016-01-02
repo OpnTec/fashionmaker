@@ -952,6 +952,17 @@ void MainWindow::ToolCurveIntersectAxis(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolArcIntersectAxis(bool checked)
+{
+    // Reuse ToolCurveIntersectAxis but with different cursor and tool tip
+    SetToolButtonWithApply<DialogCurveIntersectAxis>(checked, Tool::CurveIntersectAxis,
+                                                     ":/cursor/arc_intersect_axis_cursor.png",
+                                                     tr("Select arc"),
+                                                     &MainWindow::ClosedDialogWithApply<VToolCurveIntersectAxis>,
+                                                     &MainWindow::ApplyDialog<VToolCurveIntersectAxis>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolPointOfIntersectionArcs(bool checked)
 {
     SetToolButtonWithApply<DialogPointOfIntersectionArcs>(checked, Tool::PointOfIntersectionArcs,
@@ -1537,7 +1548,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonArcCutPoint, &QToolButton::clicked, this, &MainWindow::ToolCutArc);
     connect(ui->toolButtonLineIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolLineIntersectAxis);
     connect(ui->toolButtonCurveIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
-    connect(ui->toolButtonArcIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolCurveIntersectAxis);
+    connect(ui->toolButtonArcIntersectAxis, &QToolButton::clicked, this, &MainWindow::ToolArcIntersectAxis);
     connect(ui->toolButtonLayoutSettings, &QToolButton::clicked, this, &MainWindow::ToolLayoutSettings);
     connect(ui->toolButtonPointOfIntersectionArcs, &QToolButton::clicked, this,
             &MainWindow::ToolPointOfIntersectionArcs);
