@@ -1225,7 +1225,7 @@
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation type="unfinished"></translation>
+        <translation>il primo punto non può essere uguale all&apos;ultimo!</translation>
     </message>
 </context>
 <context>
@@ -1784,7 +1784,7 @@
     </message>
     <message>
         <source>Unique increment name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome incremento unico</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2416,7 +2416,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome unico del pezzo del modello</translation>
     </message>
     <message>
         <source>Choose unique pattern piece name.</source>
@@ -3800,7 +3800,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vuoi veramente unire i dettagli?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -4804,7 +4804,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo file è già aperto in un&apos;altra finestra. Ignora se vuoi continuare (non consigliato, può provocare un danneggiamento dei dati).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -5887,7 +5887,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo file è già aperto in un&apos;altra finestra. Ignora se vuoi continuare (non consigliato, può provocare un danneggiamento dei dati). </translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
