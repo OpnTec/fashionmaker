@@ -541,9 +541,6 @@ void VApplication::InitOptions()
     qDebug()<<"Command-line arguments:"<<this->arguments();
     qDebug()<<"Process ID:"<<this->applicationPid();
 
-    // Enable support for HiDPI bitmap resources
-    setAttribute(Qt::AA_UseHighDpiPixmaps);
-
     if (VApplication::IsGUIMode())// By default console version uses system locale
     {
         LoadTranslation(ValentinaSettings()->GetLocale());
