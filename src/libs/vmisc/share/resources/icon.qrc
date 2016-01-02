@@ -51,5 +51,9 @@
         <file>icon/24x24/right_to_left_arrow.png</file>
         <file>icon/32x32/clockwise.png</file>
         <file>icon/32x32/syncM.png</file>
+        <file>icon/16x16/toolsectionarc@2x.png</file>
+        <file>icon/16x16/toolsectioncurve@2x.png</file>
+        <file>icon/16x16/toolsectionline@2x.png</file>
+        <file>icon/16x16/toolsectionpoint@2x.png</file>
     </qresource>
 </RCC>
