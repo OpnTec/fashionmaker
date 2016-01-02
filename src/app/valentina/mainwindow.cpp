@@ -561,10 +561,12 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         emit EnableItemMove(false);
         currentTool = lastUsedTool = t;
         auto cursorResource = cursor;
-        if (qApp->devicePixelRatio() >= 2) {
-            // try to load HiDPI versions of the cursors if availible
+        if (qApp->devicePixelRatio() >= 2)
+        {
+            // Try to load HiDPI versions of the cursors if availible
             auto cursorHidpiResource = QString(cursor).replace(".png", "@2x.png");
-            if (QFileInfo(cursorResource).exists()) {
+            if (QFileInfo(cursorResource).exists())
+            {
                 cursorResource = cursorHidpiResource;
             }
         }
