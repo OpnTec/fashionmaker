@@ -2513,7 +2513,10 @@ void MainWindow::Layout()
     else
     {
         listDetails.clear();
-        ActionDraw(true);
+        if (not ui->actionDraw->isChecked())
+        {
+            ActionDraw(true);
+        }
         SetLayoutModeActions(false);
     }
 }
