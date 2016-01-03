@@ -654,24 +654,48 @@ void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
                 {
                     case 0: // TagHeights
                         SetAttribute(domElement, AttrAll, options.value(GHeights::ALL));
-                        SetAttribute(domElement, AttrH92, options.value(GHeights::H92));
-                        SetAttribute(domElement, AttrH98, options.value(GHeights::H98));
-                        SetAttribute(domElement, AttrH104, options.value(GHeights::H104));
-                        SetAttribute(domElement, AttrH110, options.value(GHeights::H110));
-                        SetAttribute(domElement, AttrH116, options.value(GHeights::H116));
-                        SetAttribute(domElement, AttrH122, options.value(GHeights::H122));
-                        SetAttribute(domElement, AttrH128, options.value(GHeights::H128));
-                        SetAttribute(domElement, AttrH134, options.value(GHeights::H134));
-                        SetAttribute(domElement, AttrH140, options.value(GHeights::H140));
-                        SetAttribute(domElement, AttrH146, options.value(GHeights::H146));
-                        SetAttribute(domElement, AttrH152, options.value(GHeights::H152));
-                        SetAttribute(domElement, AttrH158, options.value(GHeights::H158));
-                        SetAttribute(domElement, AttrH164, options.value(GHeights::H164));
-                        SetAttribute(domElement, AttrH170, options.value(GHeights::H170));
-                        SetAttribute(domElement, AttrH176, options.value(GHeights::H176));
-                        SetAttribute(domElement, AttrH182, options.value(GHeights::H182));
-                        SetAttribute(domElement, AttrH188, options.value(GHeights::H188));
-                        SetAttribute(domElement, AttrH194, options.value(GHeights::H194));
+                        if (options.value(GHeights::ALL))
+                        {
+                            domElement.removeAttribute(AttrH92);
+                            domElement.removeAttribute(AttrH98);
+                            domElement.removeAttribute(AttrH104);
+                            domElement.removeAttribute(AttrH110);
+                            domElement.removeAttribute(AttrH116);
+                            domElement.removeAttribute(AttrH122);
+                            domElement.removeAttribute(AttrH128);
+                            domElement.removeAttribute(AttrH134);
+                            domElement.removeAttribute(AttrH140);
+                            domElement.removeAttribute(AttrH146);
+                            domElement.removeAttribute(AttrH152);
+                            domElement.removeAttribute(AttrH158);
+                            domElement.removeAttribute(AttrH164);
+                            domElement.removeAttribute(AttrH170);
+                            domElement.removeAttribute(AttrH176);
+                            domElement.removeAttribute(AttrH182);
+                            domElement.removeAttribute(AttrH188);
+                            domElement.removeAttribute(AttrH194);
+                        }
+                        else
+                        {
+                            SetAttribute(domElement, AttrH92, options.value(GHeights::H92));
+                            SetAttribute(domElement, AttrH98, options.value(GHeights::H98));
+                            SetAttribute(domElement, AttrH104, options.value(GHeights::H104));
+                            SetAttribute(domElement, AttrH110, options.value(GHeights::H110));
+                            SetAttribute(domElement, AttrH116, options.value(GHeights::H116));
+                            SetAttribute(domElement, AttrH122, options.value(GHeights::H122));
+                            SetAttribute(domElement, AttrH128, options.value(GHeights::H128));
+                            SetAttribute(domElement, AttrH134, options.value(GHeights::H134));
+                            SetAttribute(domElement, AttrH140, options.value(GHeights::H140));
+                            SetAttribute(domElement, AttrH146, options.value(GHeights::H146));
+                            SetAttribute(domElement, AttrH152, options.value(GHeights::H152));
+                            SetAttribute(domElement, AttrH158, options.value(GHeights::H158));
+                            SetAttribute(domElement, AttrH164, options.value(GHeights::H164));
+                            SetAttribute(domElement, AttrH170, options.value(GHeights::H170));
+                            SetAttribute(domElement, AttrH176, options.value(GHeights::H176));
+                            SetAttribute(domElement, AttrH182, options.value(GHeights::H182));
+                            SetAttribute(domElement, AttrH188, options.value(GHeights::H188));
+                            SetAttribute(domElement, AttrH194, options.value(GHeights::H194));
+                        }
 
                         modified = true;
                         emit patternChanged(false);
@@ -798,24 +822,48 @@ void VAbstractPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
                         break;
                     case 1: // TagSizes
                         SetAttribute(domElement, AttrAll, options.value(GSizes::ALL));
-                        SetAttribute(domElement, AttrS22, options.value(GSizes::S22));
-                        SetAttribute(domElement, AttrS24, options.value(GSizes::S24));
-                        SetAttribute(domElement, AttrS26, options.value(GSizes::S26));
-                        SetAttribute(domElement, AttrS28, options.value(GSizes::S28));
-                        SetAttribute(domElement, AttrS30, options.value(GSizes::S30));
-                        SetAttribute(domElement, AttrS32, options.value(GSizes::S32));
-                        SetAttribute(domElement, AttrS34, options.value(GSizes::S34));
-                        SetAttribute(domElement, AttrS36, options.value(GSizes::S36));
-                        SetAttribute(domElement, AttrS38, options.value(GSizes::S38));
-                        SetAttribute(domElement, AttrS40, options.value(GSizes::S40));
-                        SetAttribute(domElement, AttrS42, options.value(GSizes::S42));
-                        SetAttribute(domElement, AttrS44, options.value(GSizes::S44));
-                        SetAttribute(domElement, AttrS46, options.value(GSizes::S46));
-                        SetAttribute(domElement, AttrS48, options.value(GSizes::S48));
-                        SetAttribute(domElement, AttrS50, options.value(GSizes::S50));
-                        SetAttribute(domElement, AttrS52, options.value(GSizes::S52));
-                        SetAttribute(domElement, AttrS54, options.value(GSizes::S54));
-                        SetAttribute(domElement, AttrS56, options.value(GSizes::S56));
+                        if (options.value(GSizes::ALL))
+                        {
+                            domElement.removeAttribute(AttrS22);
+                            domElement.removeAttribute(AttrS24);
+                            domElement.removeAttribute(AttrS26);
+                            domElement.removeAttribute(AttrS28);
+                            domElement.removeAttribute(AttrS30);
+                            domElement.removeAttribute(AttrS32);
+                            domElement.removeAttribute(AttrS34);
+                            domElement.removeAttribute(AttrS36);
+                            domElement.removeAttribute(AttrS38);
+                            domElement.removeAttribute(AttrS40);
+                            domElement.removeAttribute(AttrS42);
+                            domElement.removeAttribute(AttrS44);
+                            domElement.removeAttribute(AttrS46);
+                            domElement.removeAttribute(AttrS48);
+                            domElement.removeAttribute(AttrS50);
+                            domElement.removeAttribute(AttrS52);
+                            domElement.removeAttribute(AttrS54);
+                            domElement.removeAttribute(AttrS56);
+                        }
+                        else
+                        {
+                            SetAttribute(domElement, AttrS22, options.value(GSizes::S22));
+                            SetAttribute(domElement, AttrS24, options.value(GSizes::S24));
+                            SetAttribute(domElement, AttrS26, options.value(GSizes::S26));
+                            SetAttribute(domElement, AttrS28, options.value(GSizes::S28));
+                            SetAttribute(domElement, AttrS30, options.value(GSizes::S30));
+                            SetAttribute(domElement, AttrS32, options.value(GSizes::S32));
+                            SetAttribute(domElement, AttrS34, options.value(GSizes::S34));
+                            SetAttribute(domElement, AttrS36, options.value(GSizes::S36));
+                            SetAttribute(domElement, AttrS38, options.value(GSizes::S38));
+                            SetAttribute(domElement, AttrS40, options.value(GSizes::S40));
+                            SetAttribute(domElement, AttrS42, options.value(GSizes::S42));
+                            SetAttribute(domElement, AttrS44, options.value(GSizes::S44));
+                            SetAttribute(domElement, AttrS46, options.value(GSizes::S46));
+                            SetAttribute(domElement, AttrS48, options.value(GSizes::S48));
+                            SetAttribute(domElement, AttrS50, options.value(GSizes::S50));
+                            SetAttribute(domElement, AttrS52, options.value(GSizes::S52));
+                            SetAttribute(domElement, AttrS54, options.value(GSizes::S54));
+                            SetAttribute(domElement, AttrS56, options.value(GSizes::S56));
+                        }
 
                         modified = true;
                         emit patternChanged(false);
@@ -973,8 +1021,14 @@ void VAbstractPattern::CheckTagExists(const QString &tag)
             case 4: //TagGradation
             {
                 QDomElement gradation = createElement(TagGradation);
-                gradation.appendChild(createElement(TagHeights));
-                gradation.appendChild(createElement(TagSizes));
+
+                QDomElement heights = createElement(TagHeights);
+                heights.setAttribute(AttrAll, QLatin1Literal("true"));
+                gradation.appendChild(heights);
+
+                QDomElement sizes = createElement(TagSizes);
+                sizes.setAttribute(AttrAll, QLatin1Literal("true"));
+                gradation.appendChild(sizes);
 
                 for (int i = tags.indexOf(tag)-1; i >= 0; --i)
                 {

@@ -2547,7 +2547,16 @@ void VPattern::SetDefCustom(bool value)
     QDomElement domElement = domNode.toElement();
     if (domElement.isNull() == false)
     {
-        SetAttribute(domElement, AttrCustom, value);
+        if (value == false)
+        {
+            domElement.removeAttribute(AttrDefHeight);
+            SetDefCustomHeight(0);
+            SetDefCustomSize(0);
+        }
+        else
+        {
+            SetAttribute(domElement, AttrCustom, value);
+        }
         modified = true;
     }
     else

@@ -88,12 +88,10 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     InitComboBox(ui->comboBoxHeight, heights);
     InitComboBox(ui->comboBoxSize, sizes);
 
-    const QString height = QString().setNum(static_cast<int>(UnitConvertor(doc->GetDefCustomHeight(),
-                                                                           *pattern->GetPatternUnit(), Unit::Cm)));
+    const QString height = QString().setNum(doc->GetDefCustomHeight());
     SetDefaultHeight(height);
 
-    const QString size = QString().setNum(static_cast<int>(UnitConvertor(doc->GetDefCustomSize(),
-                                                                         *pattern->GetPatternUnit(), Unit::Cm)));
+    const QString size = QString().setNum(doc->GetDefCustomSize());
     SetDefaultSize(size);
 
     connect(ui->radioButtonDefFromP, &QRadioButton::toggled, this, &DialogPatternProperties::ToggleComboBox);
@@ -454,18 +452,12 @@ void DialogPatternProperties::SaveDefValues()
     if (ui->radioButtonDefFromM->isChecked())
     {
         doc->SetDefCustom(false);
-        doc->SetDefCustomHeight(0);
-        doc->SetDefCustomSize(0);
     }
     else
     {
         doc->SetDefCustom(true);
-        const int height = static_cast<int>(UnitConvertor(ui->comboBoxHeight->currentText().toInt(),
-                                                          Unit::Cm, *pattern->GetPatternUnit()));
-        doc->SetDefCustomHeight(height);
-        const int size = static_cast<int>(UnitConvertor(ui->comboBoxSize->currentText().toInt(),
-                                                        Unit::Cm, *pattern->GetPatternUnit()));
-        doc->SetDefCustomSize(size);
+        doc->SetDefCustomHeight(ui->comboBoxHeight->currentText().toInt());
+        doc->SetDefCustomSize(ui->comboBoxSize->currentText().toInt());
     }
     defaultChanged = false;
 }
@@ -481,7 +473,7 @@ void DialogPatternProperties::SetDefaultHeight(const QString &def)
     }
     else
     {
-        const int height = static_cast<int>(UnitConvertor(pattern->height(), *pattern->GetPatternUnit(), Unit::Cm));
+        const int height = static_cast<int>(pattern->height());
         index = ui->comboBoxHeight->findText(QString().setNum(height));
         if (index != -1)
         {
@@ -502,7 +494,7 @@ void DialogPatternProperties::SetDefaultSize(const QString &def)
     }
     else
     {
-        const int size = static_cast<int>(UnitConvertor(pattern->size(), *pattern->GetPatternUnit(), Unit::Cm));
+        const int size = static_cast<int>(pattern->size());
         index = ui->comboBoxSize->findText(QString().setNum(size));
         if (index != -1)
         {
@@ -572,7 +564,8 @@ void DialogPatternProperties::InitComboBox(QComboBox *box, const QMap<GVal, bool
         i.next();
         if (i.value() && i.key() != GVal::ALL)
         {
-            box->addItem(QString().setNum(static_cast<int>(i.key())));
+            box->addItem(QString().setNum(static_cast<int>(UnitConvertor(static_cast<int>(i.key()), Unit::Cm,
+                                                                         *pattern->GetPatternUnit()))));
         }
     }
 }
