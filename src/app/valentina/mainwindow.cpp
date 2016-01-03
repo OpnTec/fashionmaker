@@ -158,6 +158,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->toolBarStages->setIconSize(QSize(24, 24));
     ui->toolBarTools->setIconSize(QSize(24, 24));
 
+    setUnifiedTitleAndToolBarOnMac(true);
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
     // Mac OS Dock Menu
     QMenu *menu = new QMenu(this);
