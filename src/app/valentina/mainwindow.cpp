@@ -1127,6 +1127,7 @@ void MainWindow::changeEvent(QEvent *event)
         ui->retranslateUi(this);
         undoAction->setText(tr("&Undo"));
         redoAction->setText(tr("&Redo"));
+        helpLabel->setText(QObject::tr("Create new pattern piece to start working."));
     }
     // remember to call base class implementation
     QMainWindow::changeEvent(event);
