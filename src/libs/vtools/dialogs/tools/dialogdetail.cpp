@@ -67,9 +67,9 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     bOk = ui.buttonBox->button(QDialogButtonBox::Ok);
     SCASSERT(bOk != nullptr);
     connect(bOk, &QPushButton::clicked, this, &DialogTool::DialogAccepted);
-    QPushButton *bCansel = ui.buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCansel != nullptr);
-    connect(bCansel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
+    QPushButton *bCancel = ui.buttonBox->button(QDialogButtonBox::Cancel);
+    SCASSERT(bCancel != nullptr);
+    connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
     flagName = true;//We have default name of detail.
     ChangeColor(labelEditNamePoint, okColor);

@@ -43,7 +43,7 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
       configurationPage(nullptr),
       pathPage(nullptr),
       applyButton(nullptr),
-      canselButton(nullptr),
+      cancelButton(nullptr),
       okButton(nullptr),
       isInitialized(false)
 {
@@ -66,14 +66,14 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
     pagesWidget->addWidget(pathPage);
 
     applyButton = new QPushButton(tr("Apply"));
-    canselButton = new QPushButton(tr("&Cancel"));
+    cancelButton = new QPushButton(tr("&Cancel"));
     okButton = new QPushButton(tr("&Ok"));
 
     createIcons();
     connect(contentsWidget, &QListWidget::currentItemChanged, this, &TapeConfigDialog::changePage);
     contentsWidget->setCurrentRow(0);
 
-    connect(canselButton, &QPushButton::clicked, this, &TapeConfigDialog::close);
+    connect(cancelButton, &QPushButton::clicked, this, &TapeConfigDialog::close);
     connect(applyButton, &QPushButton::clicked, this, &TapeConfigDialog::Apply);
     connect(okButton, &QPushButton::clicked, this, &TapeConfigDialog::Ok);
 
@@ -84,7 +84,7 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
     QHBoxLayout *buttonsLayout = new QHBoxLayout;
     buttonsLayout->addStretch(1);
     buttonsLayout->addWidget(applyButton);
-    buttonsLayout->addWidget(canselButton);
+    buttonsLayout->addWidget(cancelButton);
     buttonsLayout->addWidget(okButton);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -200,7 +200,7 @@ void TapeConfigDialog::Ok()
 void TapeConfigDialog::RetranslateUi()
 {
     applyButton->setText(tr("Apply"));
-    canselButton->setText(tr("&Cancel"));
+    cancelButton->setText(tr("&Cancel"));
     okButton->setText(tr("&Ok"));
     setWindowTitle(tr("Config Dialog"));
     contentsWidget->item(0)->setText(tr("Configuration"));
