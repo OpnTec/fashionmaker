@@ -46,6 +46,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     contentsWidget->setIconSize(QSize(96, 84));
     contentsWidget->setMovement(QListView::Static);
     contentsWidget->setMaximumWidth(128);
+    contentsWidget->setMinimumWidth(128);
     contentsWidget->setMinimumHeight(500);
     contentsWidget->setSpacing(12);
 
