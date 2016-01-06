@@ -215,6 +215,7 @@ private:
 
     /** @brief comboBoxDraws comboc who show name of pattern peaces. */
     QComboBox          *comboBoxDraws;
+    QLabel             *patternPieceLabel;
 
     /** @brief mode keep current draw mode. */
     Draw               mode;

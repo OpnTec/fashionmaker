@@ -100,8 +100,8 @@ MainWindow::MainWindow(QWidget *parent)
       lastUsedTool(Tool::Arrow), sceneDraw(nullptr), sceneDetails(nullptr),
       mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), mChanges(false), dialogTable(nullptr),
       dialogTool(nullptr),
-      dialogHistory(nullptr), comboBoxDraws(nullptr), mode(Draw::Calculation), currentDrawIndex(0),
-      currentToolBoxIndex(0), drawMode(true), recentFileActs(),
+      dialogHistory(nullptr), comboBoxDraws(nullptr), patternPieceLabel(nullptr), mode(Draw::Calculation),
+      currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true), recentFileActs(),
       separatorAct(nullptr),
       leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true),
       gradationHeights(nullptr), gradationSizes(nullptr), gradationHeightsLabel(nullptr), gradationSizesLabel(nullptr),
@@ -1128,6 +1128,7 @@ void MainWindow::changeEvent(QEvent *event)
         undoAction->setText(tr("&Undo"));
         redoAction->setText(tr("&Redo"));
         helpLabel->setText(QObject::tr("Create new pattern piece to start working."));
+        patternPieceLabel->setText(tr("Pattern Piece: "));
     }
     // remember to call base class implementation
     QMainWindow::changeEvent(event);
@@ -1506,7 +1507,8 @@ void MainWindow::ToolBarStages()
  */
 void MainWindow::ToolBarDraws()
 {
-    ui->toolBarDraws->addWidget(new QLabel(tr("Pattern Piece: ")));
+    patternPieceLabel = new QLabel(tr("Pattern Piece: "));
+    ui->toolBarDraws->addWidget(patternPieceLabel);
 
     // By using Qt UI Designer we can't add QComboBox to toolbar
     comboBoxDraws = new QComboBox;
