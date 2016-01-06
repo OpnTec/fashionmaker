@@ -276,9 +276,9 @@ QGroupBox *ConfigurationPage::SendGroup()
     sendReportCheck->setChecked(qApp->ValentinaSettings()->GetSendReportState());
 
     description = new QLabel(tr("After each crash Valentina collect information that may help us fix a "
-                                        "problem. We do not collect any personal information. Find more about what "
-                                        "<a href=\"https://bitbucket.org/dismine/valentina/wiki/manual/"
-                                        "Crash_reports\">kind of information</a> we collect."));
+                                "problem. We do not collect any personal information. Find more about what "
+                                "<a href=\"https://bitbucket.org/dismine/valentina/wiki/manual/"
+                                "Crash_reports\">kind of information</a> we collect."));
     description->setTextFormat(Qt::RichText);
     description->setTextInteractionFlags(Qt::TextBrowserInteraction);
     description->setOpenExternalLinks(true);
@@ -372,9 +372,9 @@ void ConfigurationPage::RetranslateUi()
     sendGroup->setTitle(tr("Send crash reports"));
     sendReportCheck->setText(tr("Send crash reports (recommended)"));
     description->setText(tr("After each crash Valentina collect information that may help us fix a "
-                                        "problem. We do not collect any personal information. Find more about what "
-                                        "<a href=\"https://bitbucket.org/dismine/valentina/wiki/manual/"
-                                        "Crash_reports\">kind of information</a> we collect."));
+                            "problem. We do not collect any personal information. Find more about what "
+                            "<a href=\"https://bitbucket.org/dismine/valentina/wiki/manual/"
+                            "Crash_reports\">kind of information</a> we collect."));
 
     drawGroup->setTitle(tr("Pattern Editing"));
     askPointDeletionCheck->setText(tr("Confirm item deletion"));
