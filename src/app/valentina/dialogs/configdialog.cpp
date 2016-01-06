@@ -38,7 +38,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 ConfigDialog::ConfigDialog(QWidget *parent) :
     QDialog(parent), contentsWidget(nullptr), pagesWidget(nullptr), configurationPage(nullptr), patternPage(nullptr),
-    communityPage(nullptr), pathPage(nullptr), isInitialized(false)
+    communityPage(nullptr), pathPage(nullptr), applyButton(nullptr), cancelButton(nullptr), okButton(nullptr),
+    isInitialized(false)
 {
     contentsWidget = new QListWidget;
     contentsWidget->setViewMode(QListView::IconMode);
@@ -62,9 +63,9 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     pathPage = new PathPage();
     pagesWidget->addWidget(pathPage);
 
-    QPushButton *applyButton = new QPushButton(tr("Apply"));
-    QPushButton *cancelButton = new QPushButton(tr("&Cancel"));
-    QPushButton *okButton = new QPushButton(tr("&Ok"));
+    applyButton = new QPushButton(tr("Apply"));
+    cancelButton = new QPushButton(tr("&Cancel"));
+    okButton = new QPushButton(tr("&Ok"));
 
     createIcons();
     contentsWidget->setCurrentRow(0);
@@ -113,6 +114,19 @@ void ConfigDialog::closeEvent(QCloseEvent *event)
         done(QDialog::Accepted);
     }
     event->accept();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigDialog::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        RetranslateUi();
+    }
+
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -188,3 +202,17 @@ void ConfigDialog::Ok()
     Apply();
     done(QDialog::Accepted);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigDialog::RetranslateUi()
+{
+    applyButton->setText(tr("Apply"));
+    cancelButton->setText(tr("&Cancel"));
+    okButton->setText(tr("&Ok"));
+    setWindowTitle(tr("Config Dialog"));
+    contentsWidget->item(0)->setText(tr("Configuration"));
+    contentsWidget->item(1)->setText(tr("Pattern"));
+    contentsWidget->item(2)->setText(tr("Community"));
+    contentsWidget->item(3)->setText(tr("Paths"));
+}
+
