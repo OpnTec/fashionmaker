@@ -46,9 +46,30 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 ConfigurationPage::ConfigurationPage(QWidget *parent)
-    : QWidget(parent), autoSaveCheck(nullptr), autoTime(nullptr), langCombo(nullptr), labelCombo(nullptr),
-      unitCombo(nullptr), osOptionCheck(nullptr), langChanged(false), unitChanged(false), labelLangChanged(false),
-      sendReportCheck(nullptr), askPointDeletionCheck(nullptr), toolBarStyleCheck(nullptr)
+    : QWidget(parent),
+      autoSaveCheck(nullptr),
+      autoTime(nullptr),
+      langCombo(nullptr),
+      labelCombo(nullptr),
+      unitCombo(nullptr),
+      osOptionCheck(nullptr),
+      langChanged(false),
+      unitChanged(false),
+      labelLangChanged(false),
+      sendReportCheck(nullptr),
+      askPointDeletionCheck(nullptr),
+      toolBarStyleCheck(nullptr),
+      saveGroup(nullptr),
+      intervalLabel(nullptr),
+      langGroup(nullptr),
+      guiLabel(nullptr),
+      separatorLabel(nullptr),
+      unitLabel(nullptr),
+      languageLabel(nullptr),
+      sendGroup(nullptr),
+      description(nullptr),
+      drawGroup(nullptr),
+      toolBarGroup(nullptr)
 {
     QGroupBox *saveGroup = SaveGroup();
     QGroupBox *langGroup = LangGroup();
@@ -88,9 +109,7 @@ void ConfigurationPage::Apply()
         const QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
         settings->SetLocale(locale);
         langChanged = false;
-        const QString text = tr("Setup user interface language updated and will be used the next time start") + " " +
-                                QApplication::applicationName();
-        QMessageBox::information(this, QApplication::applicationName(), text);
+        qApp->LoadTranslation(locale);
     }
     if (this->unitChanged)
     {
@@ -129,7 +148,7 @@ void ConfigurationPage::LabelLangChanged()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::SaveGroup()
 {
-    QGroupBox *saveGroup = new QGroupBox(tr("Save"));
+    saveGroup = new QGroupBox(tr("Save"));
 
     autoSaveCheck = new QCheckBox(tr("Auto-save modified pattern"));
     autoSaveCheck->setChecked(qApp->ValentinaSettings()->GetAutosaveState());
@@ -141,7 +160,8 @@ QGroupBox *ConfigurationPage::SaveGroup()
 
     QHBoxLayout *autosaveLayout = new QHBoxLayout;
     autosaveLayout->addWidget(autoSaveCheck);
-    autosaveLayout->addWidget(new QLabel(tr("Interval:")));
+    intervalLabel = new QLabel(tr("Interval:"));
+    autosaveLayout->addWidget(intervalLabel);
     autosaveLayout->addWidget(autoTime);
 
     QVBoxLayout *saveLayout = new QVBoxLayout;
@@ -153,7 +173,8 @@ QGroupBox *ConfigurationPage::SaveGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::LangGroup()
 {
-    QGroupBox *langGroup = new QGroupBox(tr("Language"));
+    langGroup = new QGroupBox(tr("Language"));
+    guiLabel  = new QLabel(tr("GUI language:"));
     langCombo = new QComboBox;
 
     QStringList fileNames;
@@ -200,12 +221,13 @@ QGroupBox *ConfigurationPage::LangGroup()
 
     QFormLayout *langLayout = new QFormLayout;
     langLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
-    langLayout->addRow(tr("GUI language:"), langCombo);
+    langLayout->addRow(guiLabel, langCombo);
 
     //-------------------- Decimal separator setup
-    osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
+    separatorLabel = new QLabel(tr("Decimal separator parts:"));
+    osOptionCheck  = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
     osOptionCheck->setChecked(settings->GetOsSeparator());
-    langLayout->addRow(tr("Decimal separator parts:"), osOptionCheck);
+    langLayout->addRow(separatorLabel, osOptionCheck);
 
     //----------------------- Unit setup
     this->unitCombo = new QComboBox;
@@ -222,7 +244,8 @@ QGroupBox *ConfigurationPage::LangGroup()
     connect(this->unitCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &ConfigurationPage::UnitChanged);
 
-    langLayout->addRow(tr("Default unit:"), this->unitCombo);
+    unitLabel = new QLabel(tr("Default unit:"));
+    langLayout->addRow(unitLabel, this->unitCombo);
 
     //----------------------- Label language
     labelCombo = new QComboBox;
@@ -237,7 +260,8 @@ QGroupBox *ConfigurationPage::LangGroup()
     connect(labelCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &ConfigurationPage::LabelLangChanged);
 
-    langLayout->addRow(tr("Label language:"), labelCombo);
+    languageLabel = new QLabel(tr("Label language:"));
+    langLayout->addRow(languageLabel, labelCombo);
 
     langGroup->setLayout(langLayout);
     return langGroup;
@@ -246,12 +270,12 @@ QGroupBox *ConfigurationPage::LangGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::SendGroup()
 {
-    QGroupBox *sendGroup = new QGroupBox(tr("Send crash reports"));
+    sendGroup = new QGroupBox(tr("Send crash reports"));
 
     sendReportCheck = new QCheckBox(tr("Send crash reports (recommended)"));
     sendReportCheck->setChecked(qApp->ValentinaSettings()->GetSendReportState());
 
-    QLabel *description = new QLabel(tr("After each crash Valentina collect information that may help us fix a "
+    description = new QLabel(tr("After each crash Valentina collect information that may help us fix a "
                                         "problem. We do not collect any personal information. Find more about what "
                                         "<a href=\"https://bitbucket.org/dismine/valentina/wiki/manual/"
                                         "Crash_reports\">kind of information</a> we collect."));
@@ -271,7 +295,7 @@ QGroupBox *ConfigurationPage::SendGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::DrawGroup()
 {
-    QGroupBox *drawGroup = new QGroupBox(tr("Pattern Editing"));
+    drawGroup = new QGroupBox(tr("Pattern Editing"));
 
     askPointDeletionCheck = new QCheckBox(tr("Confirm item deletion"));
     askPointDeletionCheck->setChecked(qApp->ValentinaSettings()->GetConfirmItemDelete());
@@ -286,7 +310,7 @@ QGroupBox *ConfigurationPage::DrawGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::ToolBarGroup()
 {
-    QGroupBox *toolBarGroup = new QGroupBox(tr("Toolbar"));
+    toolBarGroup = new QGroupBox(tr("Toolbar"));
 
     toolBarStyleCheck = new QCheckBox(tr("The text appears under the icon. (recommended for beginners.)"));
     toolBarStyleCheck->setChecked(qApp->ValentinaSettings()->GetToolBarStyle());
@@ -306,4 +330,55 @@ void ConfigurationPage::SetLabelComboBox(const QStringList &list)
         QLocale loc = QLocale(list.at(i));
         labelCombo->addItem(loc.nativeLanguageName(), list.at(i));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigurationPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        RetranslateUi();
+    }
+
+    // remember to call base class implementation
+   QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigurationPage::RetranslateUi()
+{
+    toolBarStyleCheck->setText(tr("The text appears under the icon. (recommended for beginners.)"));
+    askPointDeletionCheck->setText(tr("Confirm item deletion"));
+
+    saveGroup->setTitle(tr("Save"));
+    autoSaveCheck->setText(tr("Auto-save modified pattern"));
+    autoTime->setSuffix(tr("min"));
+    intervalLabel->setText(tr("Interval:"));
+
+    langGroup->setTitle(tr("Language"));
+    guiLabel->setText(tr("GUI language:"));
+
+    separatorLabel->setText(tr("Decimal separator parts:"));
+    osOptionCheck->setText(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
+
+    unitLabel->setText(tr("Default unit:"));
+    this->unitCombo->setItemText(0, tr("Centimeters"));
+    this->unitCombo->setItemText(1, tr("Millimiters"));
+    this->unitCombo->setItemText(2, tr("Inches"));
+
+    languageLabel->setText(tr("Label language:"));
+
+    sendGroup->setTitle(tr("Send crash reports"));
+    sendReportCheck->setText(tr("Send crash reports (recommended)"));
+    description->setText(tr("After each crash Valentina collect information that may help us fix a "
+                                        "problem. We do not collect any personal information. Find more about what "
+                                        "<a href=\"https://bitbucket.org/dismine/valentina/wiki/manual/"
+                                        "Crash_reports\">kind of information</a> we collect."));
+
+    drawGroup->setTitle(tr("Pattern Editing"));
+    askPointDeletionCheck->setText(tr("Confirm item deletion"));
+    toolBarGroup->setTitle(tr("Toolbar"));
+    toolBarStyleCheck->setText(tr("The text appears under the icon. (recommended for beginners.)"));
+
 }
