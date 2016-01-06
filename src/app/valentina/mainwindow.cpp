@@ -1125,6 +1125,8 @@ void MainWindow::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
+        undoAction->setText(tr("&Undo"));
+        redoAction->setText(tr("&Redo"));
     }
     // remember to call base class implementation
     QMainWindow::changeEvent(event);
