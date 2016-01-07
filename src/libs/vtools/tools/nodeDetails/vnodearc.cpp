@@ -76,10 +76,6 @@ void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScen
     {
         VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool, parent);
 
-        // Try to prevent memory leak
-        arc->hide();// If no one will use node, it will stay hidden
-        scene->addItem(arc);// First adopted by scene
-
         doc->AddTool(id, arc);
         if (idTool != NULL_ID)
         {
@@ -87,6 +83,13 @@ void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScen
             VDataTool *tool = doc->getTool(idTool);
             SCASSERT(tool != nullptr);
             arc->setParent(tool);// Adopted by a tool
+        }
+        else
+        {
+            // Try to prevent memory leak
+            scene->addItem(arc);// First adopted by scene
+            arc->hide();// If no one will use node, it will stay hidden
+            arc->SetParentType(ParentType::Scene);
         }
     }
     else
@@ -186,7 +189,10 @@ void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VNodeArc::ShowNode()
 {
-    show();
+    if (parentType != ParentType::Scene)
+    {
+        show();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -79,22 +79,20 @@ void VNodeSplinePath::Create(VAbstractPattern *doc, VContainer *data, VMainGraph
     {
         VNodeSplinePath *splPath = new VNodeSplinePath(doc, data, id, idSpline, typeCreation, idTool, parent);
 
-        // Try to prevent memory leak
-        splPath->hide();// If no one will use node, it will stay hidden
-        scene->addItem(splPath);// First adopted by scene
-
         doc->AddTool(id, splPath);
-        const QSharedPointer<VSplinePath> path = data->GeometricObject<VSplinePath>(id);
-        const QVector<VSplinePoint> *points = path->GetPoint();
-        for (qint32 i = 0; i<points->size(); ++i)
+        if (idTool != NULL_ID)
         {
-            if (idTool != NULL_ID)
-            {
-                //Some nodes we don't show on scene. Tool that create this nodes must free memory.
-                VDataTool *tool = doc->getTool(idTool);
-                SCASSERT(tool != nullptr);
-                splPath->setParent(tool);// Adopted by a tool
-            }
+            //Some nodes we don't show on scene. Tool that create this nodes must free memory.
+            VDataTool *tool = doc->getTool(idTool);
+            SCASSERT(tool != nullptr);
+            splPath->setParent(tool);// Adopted by a tool
+        }
+        else
+        {
+            // Try to prevent memory leak
+            scene->addItem(splPath);// First adopted by scene
+            splPath->hide();// If no one will use node, it will stay hidden
+            splPath->SetParentType(ParentType::Scene);
         }
     }
     else
@@ -193,7 +191,10 @@ void VNodeSplinePath::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VNodeSplinePath::ShowNode()
 {
-    show();
+    if (parentType != ParentType::Scene)
+    {
+        show();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

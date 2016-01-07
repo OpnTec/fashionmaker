@@ -36,7 +36,8 @@ class AddDet : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddDet(const QDomElement &xml, VAbstractPattern *doc, const VDetail &detail, QUndoCommand *parent = 0);
+    AddDet(const QDomElement &xml, VAbstractPattern *doc, const VDetail &detail, const QString &drawName = QString(),
+           QUndoCommand *parent = 0);
     virtual ~AddDet() Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
     virtual void undo() Q_DECL_OVERRIDE;
@@ -45,6 +46,9 @@ public:
 private:
     Q_DISABLE_COPY(AddDet)
     VDetail detail;
+    QString drawName;
+
+    QDomElement GetDetailsSection() const;
 };
 
 #endif // ADDDET_H

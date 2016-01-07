@@ -79,10 +79,6 @@ VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, VMainG
     {
         spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool, parent);
 
-        // Try to prevent memory leak
-        spl->hide();// If no one will use node, it will stay hidden
-        scene->addItem(spl);// First adopted by scene
-
         doc->AddTool(id, spl);
         if (idTool != NULL_ID)
         {
@@ -90,6 +86,13 @@ VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, VMainG
             VDataTool *tool = doc->getTool(idTool);
             SCASSERT(tool != nullptr);
             spl->setParent(tool);// Adopted by a tool
+        }
+        else
+        {
+            // Try to prevent memory leak
+            scene->addItem(spl);// First adopted by scene
+            spl->hide();// If no one will use node, it will stay hidden
+            spl->SetParentType(ParentType::Scene);
         }
     }
     else
@@ -189,7 +192,10 @@ void VNodeSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VNodeSpline::ShowNode()
 {
-    show();
+    if (parentType != ParentType::Scene)
+    {
+        show();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

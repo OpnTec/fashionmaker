@@ -74,8 +74,8 @@ const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
  * @param parent parent object
  */
 VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
-                         VMainGraphicsScene *scene, QGraphicsItem *parent)
-    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene)
+                         VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem *parent)
+    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene), drawName(drawName)
 {
     VDetail detail = data->GetDetail(id);
     for (int i = 0; i< detail.CountNode(); ++i)
@@ -208,7 +208,7 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
  * @param typeCreation way we create this tool.
  */
 void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                         VContainer *data, const Document &parse, const Source &typeCreation)
+                         VContainer *data, const Document &parse, const Source &typeCreation, const QString &drawName)
 {
     quint32 id = _id;
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
@@ -226,7 +226,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
     VAbstractTool::AddRecord(id, Tool::Detail, doc);
     if (parse == Document::FullParse)
     {
-        VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene);
+        VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene, drawName);
         scene->addItem(detail);
         connect(detail, &VToolDetail::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
@@ -305,7 +305,7 @@ void VToolDetail::AddToFile()
        AddNode(doc, domElement, detail.at(i));
     }
 
-    AddDet *addDet = new AddDet(domElement, doc, detail);
+    AddDet *addDet = new AddDet(domElement, doc, detail, drawName);
     connect(addDet, &AddDet::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     qApp->getUndoStack()->push(addDet);
 }
@@ -602,6 +602,7 @@ void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
     SCASSERT(tool != nullptr);
     connect(tool, &Tool::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
     tool->setParentItem(this);
+    tool->SetParentType(ParentType::Item);
     doc->IncrementReferens(node.getId());
 }
 

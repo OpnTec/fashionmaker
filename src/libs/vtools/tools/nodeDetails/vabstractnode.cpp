@@ -46,7 +46,8 @@ const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
  */
 VAbstractNode::VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                              const quint32 &idTool, QObject *parent)
-    : VAbstractTool(doc, data, id, parent), idNode(idNode), idTool(idTool), currentColor(Qt::black)
+    : VAbstractTool(doc, data, id, parent), parentType(ParentType::Item), idNode(idNode), idTool(idTool),
+      currentColor(Qt::black)
 {
     _referens = 0;
 }
@@ -93,6 +94,18 @@ void VAbstractNode::decrementReferens()
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+ParentType VAbstractNode::GetParentType() const
+{
+    return parentType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::SetParentType(const ParentType &value)
+{
+    parentType = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

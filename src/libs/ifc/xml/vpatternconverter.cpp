@@ -43,8 +43,8 @@
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.2.3");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.2.3.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.2.4");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.2.4.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -106,6 +106,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000202):
             return QStringLiteral("://schema/pattern/v0.2.2.xsd");
         case (0x000203):
+            return QStringLiteral("://schema/pattern/v0.2.3.xsd");
+        case (0x000204):
             return CurrentSchema;
         default:
         {
@@ -179,6 +181,13 @@ void VPatternConverter::ApplyPatches()
                 V_FALLTHROUGH
             }
             case (0x000203):
+            {
+                ToV0_2_4();
+                const QString schema = XSDSchema(0x000204);
+                ValidateXML(schema, fileName);
+                V_FALLTHROUGH
+            }
+            case (0x000204):
                 break;
             default:
                 break;
@@ -261,6 +270,14 @@ void VPatternConverter::ToV0_2_2()
 void VPatternConverter::ToV0_2_3()
 {
     SetVersion(QStringLiteral("0.2.3"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_2_4()
+{
+    FixToolUnionToV0_2_4();
+    SetVersion(QStringLiteral("0.2.4"));
     Save();
 }
 
@@ -805,6 +822,74 @@ QStringList VPatternConverter::ListPathPointExpressionsV0_1_4() const
     }
 
     return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::FixToolUnionToV0_2_4()
+{
+    QDomElement root = documentElement();
+    const QDomNodeList modelings = root.elementsByTagName(QStringLiteral("modeling"));
+    for (int i=0; i<modelings.size(); ++i)
+    {
+        ParseModelingToV0_2_4(modelings.at(i).toElement());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ParseModelingToV0_2_4(const QDomElement &modeling)
+{
+    QDomElement node = modeling.firstChild().toElement();
+    while (not node.isNull())
+    {
+        if (node.tagName() == QLatin1Literal("tools"))
+        {
+            const quint32 toolId = node.attribute(QStringLiteral("id")).toUInt();
+            QVector<quint32> children;
+            QDomElement childNode = node.nextSibling().toElement();
+            const QString attrIdTool = QStringLiteral("idTool");
+            while (not childNode.isNull())
+            {
+                if (childNode.hasAttribute(attrIdTool) && childNode.attribute(attrIdTool).toUInt() == toolId)
+                {
+                    children.append(childNode.attribute(QStringLiteral("idObject")).toUInt());
+                }
+                else
+                {
+                    break;
+                }
+                childNode = childNode.nextSibling().toElement();
+            }
+
+            if (not children.isEmpty())
+            {
+                SaveChildrenToolUnionToV0_2_4(toolId, children);
+            }
+            node = childNode;
+            continue;
+        }
+        node = node.nextSibling().toElement();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<quint32> &children)
+{
+    QDomElement toolUnion = elementById(id);
+    if (toolUnion.isNull())
+    {
+        return;
+    }
+
+    QDomElement tagChildren = createElement(QString("children"));
+
+    for (int i=0; i<children.size(); ++i)
+    {
+        QDomElement tagChild = createElement(QString("child"));
+        tagChild.appendChild(createTextNode(QString().setNum(children.at(i))));
+        tagChildren.appendChild(tagChild);
+    }
+
+    toolUnion.appendChild(tagChildren);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -2264,7 +2264,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
                 const QVector<VDetail> vector = VToolUnionDetails::GetDetailFromFile(this, domElement);
 
                 VToolUnionDetails::Create(id, vector[0], vector[1], 0, 0, indexD1, indexD2, scene, this, data, parse,
-                                        Source::FromFile);
+                                          Source::FromFile);
             }
             catch (const VExceptionBadId &e)
             {

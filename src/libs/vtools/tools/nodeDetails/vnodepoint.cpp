@@ -90,10 +90,6 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
         //Better check garbage before each saving file. Check only modeling tags.
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool, parent);
 
-        // Try to prevent memory leak
-        point->hide();// If no one will use node, it will stay hidden
-        scene->addItem(point);// First adopted by scene
-
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VNodePoint::EnableToolMove);
         doc->AddTool(id, point);
         if (idTool != NULL_ID)
@@ -102,6 +98,13 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
             VDataTool *tool = doc->getTool(idTool);
             SCASSERT(tool != nullptr);
             point->setParent(tool);// Adopted by a tool
+        }
+        else
+        {
+            // Try to prevent memory leak
+            scene->addItem(point);// First adopted by scene
+            point->hide();// If no one will use node, it will stay hidden
+            point->SetParentType(ParentType::Scene);
         }
     }
     else
@@ -274,7 +277,10 @@ void VNodePoint::RefreshLine()
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::ShowNode()
 {
-    show();
+    if (parentType != ParentType::Scene)
+    {
+        show();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

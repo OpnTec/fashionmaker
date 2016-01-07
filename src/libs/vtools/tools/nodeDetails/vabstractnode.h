@@ -33,6 +33,8 @@
 
 #include <QColor>
 
+enum class ParentType : bool {Scene, Item};
+
 /**
  * @brief The VAbstractNode class parent class for all detail node.
  */
@@ -48,6 +50,12 @@ public:
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
     virtual void incrementReferens() Q_DECL_OVERRIDE;
     virtual void decrementReferens() Q_DECL_OVERRIDE;
+
+    ParentType GetParentType() const;
+    void       SetParentType(const ParentType &value);
+
+protected:
+    ParentType parentType;
 protected:
     /** @brief idNodenode id. */
     quint32       idNode;

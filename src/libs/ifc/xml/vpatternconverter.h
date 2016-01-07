@@ -63,6 +63,7 @@ private:
     void ToV0_2_1();
     void ToV0_2_2();
     void ToV0_2_3();
+    void ToV0_2_4();
 
     void          TagUnitToV0_2_0();
     void          TagIncrementToV0_2_0();
@@ -86,6 +87,10 @@ private:
     QDomElement TagMeasurementsV0_1_4() const;
     QDomElement TagIncrementsV0_1_4() const;
     QStringList ListPathPointExpressionsV0_1_4() const;
+
+    void FixToolUnionToV0_2_4();
+    void ParseModelingToV0_2_4(const QDomElement &modeling);
+    void SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<quint32> &children);
 
     static QMap<QString, QString> OldNamesToNewNames_InV0_2_0();
     static QMap<QString, QString> OldNamesToNewNames_InV0_2_1();

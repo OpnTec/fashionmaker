@@ -1311,3 +1311,23 @@ bool VAbstractPattern::IsModified() const
 {
     return modified;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VAbstractPattern::GetDraw(const QString &name) const
+{
+    const QDomNodeList draws = documentElement().elementsByTagName(TagDraw);
+    for (int i=0; i < draws.size(); ++i)
+    {
+        QDomElement draw = draws.at(i).toElement();
+        if (draw.isNull())
+        {
+            continue;
+        }
+
+        if (draw.attribute(AttrName) == name)
+        {
+            return draw;
+        }
+    }
+    return QDomElement();
+}

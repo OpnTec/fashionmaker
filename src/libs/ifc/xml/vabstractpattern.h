@@ -105,6 +105,8 @@ public:
 
     bool           IsModified() const;
 
+    QDomElement    GetDraw(const QString &name) const;
+
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;

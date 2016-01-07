@@ -14,7 +14,6 @@ HEADERS += \
     $$PWD/deletepatternpiece.h \
     $$PWD/adddetnode.h \
     $$PWD/adddet.h \
-    $$PWD/adduniondetails.h \
     $$PWD/deletedetail.h \
     $$PWD/vundocommand.h \
     $$PWD/renamepp.h \
@@ -34,7 +33,6 @@ SOURCES += \
     $$PWD/deletepatternpiece.cpp \
     $$PWD/adddetnode.cpp \
     $$PWD/adddet.cpp \
-    $$PWD/adduniondetails.cpp \
     $$PWD/deletedetail.cpp \
     $$PWD/vundocommand.cpp \
     $$PWD/renamepp.cpp \

@@ -29,8 +29,9 @@
 #include "adddet.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-AddDet::AddDet(const QDomElement &xml, VAbstractPattern *doc, const VDetail &detail, QUndoCommand *parent)
-    : VUndoCommand(xml, doc, parent), detail(detail)
+AddDet::AddDet(const QDomElement &xml, VAbstractPattern *doc, const VDetail &detail, const QString &drawName,
+               QUndoCommand *parent)
+    : VUndoCommand(xml, doc, parent), detail(detail), drawName(drawName)
 {
     setText(tr("add detail"));
     nodeId = doc->GetParametrId(xml);
@@ -46,13 +47,13 @@ void AddDet::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement element;
-    if (doc->GetActivNodeElement(VAbstractPattern::TagDetails, element))
+    QDomElement details = GetDetailsSection();
+    if (not details.isNull())
     {
         QDomElement domElement = doc->elementById(nodeId);
         if (domElement.isElement())
         {
-            if (element.removeChild(domElement).isNull())
+            if (details.removeChild(domElement).isNull())
             {
                 qCDebug(vUndo, "Can't delete node");
                 return;
@@ -87,10 +88,10 @@ void AddDet::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement element;
-    if (doc->GetActivNodeElement(VAbstractPattern::TagDetails, element))
+    QDomElement details = GetDetailsSection();
+    if (not details.isNull())
     {
-        element.appendChild(xml);
+        details.appendChild(xml);
     }
     else
     {
@@ -98,4 +99,19 @@ void AddDet::redo()
         return;
     }
     RedoFullParsing();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement AddDet::GetDetailsSection() const
+{
+    QDomElement details;
+    if (drawName.isEmpty())
+    {
+        doc->GetActivNodeElement(VAbstractPattern::TagDetails, details);
+    }
+    else
+    {
+        details = doc->GetDraw(drawName).firstChildElement(VAbstractPattern::TagDetails);
+    }
+    return details;
 }

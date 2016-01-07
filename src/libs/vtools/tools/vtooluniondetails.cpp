@@ -33,18 +33,37 @@
 #include "../../vgeometry/varc.h"
 #include "../../vgeometry/vsplinepath.h"
 #include "../dialogs/tools/dialoguniondetails.h"
-#include "../undocommands/adduniondetails.h"
+
+#include <QUndoStack>
 
 const QString VToolUnionDetails::TagName          = QStringLiteral("tools");
 const QString VToolUnionDetails::ToolType         = QStringLiteral("unionDetails");
 const QString VToolUnionDetails::TagDetail        = QStringLiteral("det");
 const QString VToolUnionDetails::TagNode          = QStringLiteral("node");
+const QString VToolUnionDetails::TagChildren      = QStringLiteral("children");
+const QString VToolUnionDetails::TagChild         = QStringLiteral("child");
 const QString VToolUnionDetails::AttrIndexD1      = QStringLiteral("indexD1");
 const QString VToolUnionDetails::AttrIndexD2      = QStringLiteral("indexD2");
 const QString VToolUnionDetails::AttrIdObject     = QStringLiteral("idObject");
 const QString VToolUnionDetails::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolUnionDetails::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolUnionDetails::NodeTypeModeling = QStringLiteral("Modeling");
+
+#if defined(Q_CC_CLANG)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wmissing-prototypes"
+#elif defined(Q_CC_INTEL)
+    #pragma warning( push )
+    #pragma warning( disable: 1418 )
+#endif
+
+Q_LOGGING_CATEGORY(vToolUnion, "v.toolUnion")
+
+#if defined(Q_CC_CLANG)
+    #pragma clang diagnostic pop
+#elif defined(Q_CC_INTEL)
+    #pragma warning( pop )
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -61,8 +80,8 @@ const QString VToolUnionDetails::NodeTypeModeling = QStringLiteral("Modeling");
  */
 VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1,
                                      const VDetail &d2, const quint32 &indexD1, const quint32 &indexD2,
-                                     const Source &typeCreation, QObject *parent)
-    :VAbstractTool(doc, data, id, parent), d1(d1), d2(d2), indexD1(indexD1), indexD2(indexD2)
+                                     const Source &typeCreation, const QString &drawName, QObject *parent)
+    :VAbstractTool(doc, data, id, parent), d1(d1), d2(d2), indexD1(indexD1), indexD2(indexD2), drawName(drawName)
 {
     _referens = 0;
     ToolCreation(typeCreation);
@@ -83,8 +102,9 @@ VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, co
  * @param pRotate point rotation.
  * @param angle angle rotation.
  */
-void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data, VDetail &newDetail,
-                                       const VDetail &det, const int &i, const quint32 &idTool, const qreal &dx,
+void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                       VContainer *data, VDetail &newDetail, const VDetail &det, const int &i,
+                                       const quint32 &idTool, QVector<quint32> &children, const qreal &dx,
                                        const qreal &dy, const quint32 &pRotate, const qreal &angle)
 {
     quint32 id = 0, idObject = 0;
@@ -103,6 +123,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                 BiasRotatePoint(point, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
                                 angle);
                 idObject = data->AddGObject(point);
+                children.append(idObject);
                 VPointF *point1 = new VPointF(*point);
                 point1->setMode(Draw::Modeling);
                 id = data->AddGObject(point1);
@@ -137,6 +158,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                                  QString().setNum(l2.angle()));
                 arc1->setMode(Draw::Modeling);
                 idObject = data->AddGObject(arc1);
+                children.append(idObject);
 
                 VArc *arc2 = new VArc(*arc1);
                 arc2->setMode(Draw::Modeling);
@@ -172,6 +194,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
                 Draw::Modeling);
                 idObject = data->AddGObject(spl);
+                children.append(idObject);
 
                 VSpline *spl1 = new VSpline(*spl);
                 spl1->setMode(Draw::Modeling);
@@ -227,6 +250,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                     delete p1;
                 }
                 idObject = data->AddGObject(path);
+                children.append(idObject);
 
                 VSplinePath *path1 = new VSplinePath(*path);
                 path1->setMode(Draw::Modeling);
@@ -250,14 +274,15 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
  * @param data container with variables.
  * @param det detail what we union.
  * @param i index node in detail.
- * @param idCount count updated or created objects.
+ * @param children list ids of all children.
  * @param dx bias node x axis.
  * @param dy bias node y axis.
  * @param pRotate point rotation.
  * @param angle angle rotation.
  */
-void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const int &i,
-                                     quint32 &idCount, const qreal &dx, const qreal &dy, const quint32 &pRotate,
+void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const int &i,
+                                     QVector<quint32> &children, const qreal &dx, const qreal &dy,
+                                     const quint32 &pRotate,
                                      const qreal &angle)
 {
     switch (det.at(i).getTypeTool())
@@ -269,10 +294,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 VPointF *point = new VPointF(*data->GeometricObject<VPointF>(det.at(i).getId()));
                 point->setMode(Draw::Modeling);
                 BiasRotatePoint(point, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
-                ++idCount;// For parent
-                data->UpdateGObject(idDetail+idCount, point);
-
-                ++idCount;// For child
+                data->UpdateGObject(TakeNextId(children), point);
             }
         }
         break;
@@ -297,10 +319,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                      QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
                 arc1->setMode(Draw::Modeling);
-                ++idCount;// For parent
-                data->UpdateGObject(idDetail+idCount, arc1);
-
-                ++idCount;// For child
+                data->UpdateGObject(TakeNextId(children), arc1);
                 delete center;
             }
         }
@@ -326,11 +345,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
 
                 VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
                 Draw::Modeling);
-
-                ++idCount;// For parent
-                data->UpdateGObject(idDetail+idCount, spl);
-
-                ++idCount;// For child
+                data->UpdateGObject(TakeNextId(children), spl);
                 delete p1;
                 delete p4;
             }
@@ -376,11 +391,7 @@ void VToolUnionDetails::UpdatePoints(const quint32 &idDetail, VContainer *data, 
                     delete p1;
                     delete p4;
                 }
-
-                ++idCount;//For parent
-                data->UpdateGObject(idDetail+idCount, path);
-
-                ++idCount;// For child
+                data->UpdateGObject(TakeNextId(children), path);
             }
         }
         break;
@@ -520,9 +531,12 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
 {
     VToolUnionDetails *unionDetails = 0;
     quint32 id = _id;
+    QString drawName;
     if (typeCreation == Source::FromGui)
     {
         id = data->getNextId();
+        drawName = DrawName(doc, d1id, d2id);
+        SCASSERT(not drawName.isEmpty());
     }
     else
     {
@@ -536,7 +550,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     if (parse == Document::FullParse)
     {
         //Scene doesn't show this tool, so doc will destroy this object.
-        unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation, doc);
+        unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation, drawName, doc);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         tools->insert(id, unionDetails);
     }
@@ -566,18 +580,6 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     const QLineF p4p3 = QLineF(point4.toQPointF(), point3.toQPointF());
     const QLineF p1p2 = QLineF(point1.toQPointF(), point2.toQPointF());
 
-    // How many points do we need to skip?
-    // If lengths of edges not equal we should left the second point of the second detail.
-    qint32 skip;
-    if (qFuzzyCompare(p1p2.length(), p4p3.length()))
-    {
-        skip = 2;
-    }
-    else
-    {
-        skip = 1;
-    }
-
     const qreal angle = p4p3.angleTo(p1p2);
     qint32 pointsD2 = 0; //Keeps number points the second detail, what we have already added.
 
@@ -588,11 +590,12 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     {
         qint32 i = 0;
         VDetail newDetail;
+        QVector<quint32> children;
         do
         {
-            AddToNewDetail(unionDetails, scene, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id);
+            AddToNewDetail(unionDetails, scene, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id, children);
             ++i;
-            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-2)
+            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-1)
             {
                 qint32 j = 0;
                 FindIndexJ(pointsD2, d2, indexD2, j);
@@ -602,17 +605,17 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                     {
                         j=0;
                     }
-                    AddToNewDetail(unionDetails, scene, doc, data, newDetail, d2.RemoveEdge(indexD2), j, id, dx, dy,
-                                   det1p1.getId(), angle);
+                    AddToNewDetail(unionDetails, scene, doc, data, newDetail, d2.RemoveEdge(indexD2), j, id, children,
+                                   dx, dy, det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
-                } while (pointsD2 < countNodeD2-skip);
+                } while (pointsD2 < countNodeD2-1);
             }
         } while (i < countNodeD1);
 
         newDetail.setName("Detail");
         newDetail.setWidth(d1.getWidth());
-        VToolDetail::Create(0, newDetail, scene, doc, data, parse, Source::FromTool);
+        VToolDetail::Create(0, newDetail, scene, doc, data, parse, Source::FromTool, drawName);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         SCASSERT(tools != nullptr);
 
@@ -627,31 +630,40 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         SCASSERT(toolDet != nullptr);
         bool ask = false;
         toolDet->Remove(ask);
+
+        SCASSERT(not children.isEmpty())
+        SaveChildren(doc, id, children);
     }
     else
     {
-        quint32 idCount = 0;
-        qint32 i = 0;
-        do
+        QVector<quint32> children = AllChildren(doc, id);
+        if (not children.isEmpty())
         {
-            UpdatePoints(id, data, d1.RemoveEdge(indexD1), i, idCount);
-            ++i;
-            if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-2)
+            qint32 i = 0;
+            do
             {
-                qint32 j = 0;
-                FindIndexJ(pointsD2, d2, indexD2, j);
-                do
+                //UpdatePoints(data, d1.RemoveEdge(indexD1), i, children);
+                ++i;
+                if (i > d1.indexOfNode(det1p1.getId()))
                 {
-                    if (j >= d2.RemoveEdge(indexD2).CountNode())
+                    const int childrenCount = children.size();
+                    VDetail d2REdge = d2.RemoveEdge(indexD2);
+                    qint32 j = 0;
+                    FindIndexJ(pointsD2, d2, indexD2, j);
+                    do
                     {
-                        j=0;
-                    }
-                    UpdatePoints(id, data, d2.RemoveEdge(indexD2), j, idCount, dx, dy, det1p1.getId(), angle);
-                    ++pointsD2;
-                    ++j;
-                } while (pointsD2 < countNodeD2-skip);
-            }
-        } while (i<countNodeD1);
+                        if (j >= countNodeD2)
+                        {
+                            j=0;
+                        }
+                        UpdatePoints(data, d2REdge, j, children, dx, dy, det1p1.getId(), angle);
+                        ++pointsD2;
+                        ++j;
+                    } while (pointsD2 < childrenCount);
+                    break;
+                }
+            } while (i<countNodeD1);
+        }
     }
     return nullptr;
 }
@@ -857,7 +869,146 @@ QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail 
  */
 void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
 {
-    AddUnionDetails *addUnion = new AddUnionDetails(domElement, doc);
-    connect(addUnion, &AddUnionDetails::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-    qApp->getUndoStack()->push(addUnion);
+    QDomElement modeling = doc->GetDraw(drawName).firstChildElement(VAbstractPattern::TagModeling);
+    if (not modeling.isNull())
+    {
+        modeling.appendChild(domElement);
+    }
+    else
+    {
+        qCDebug(vToolUnion, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagModeling));
+        return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolUnionDetails::SaveChildren(VAbstractPattern *doc, quint32 id, const QVector<quint32> &children)
+{
+    QDomElement toolUnion = doc->elementById(id);
+    if (toolUnion.isNull())
+    {
+        return;
+    }
+
+    QDomElement tagChildren = doc->createElement(TagChildren);
+
+    for (int i=0; i<children.size(); ++i)
+    {
+        QDomElement tagChild = doc->createElement(TagChild);
+        tagChild.appendChild(doc->createTextNode(QString().setNum(children.at(i))));
+        tagChildren.appendChild(tagChild);
+    }
+
+    toolUnion.appendChild(tagChildren);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<quint32> VToolUnionDetails::AllChildren(VAbstractPattern *doc, quint32 id)
+{
+    const QDomElement toolUnion = doc->elementById(id);
+    if (toolUnion.isNull())
+    {
+        return QVector<quint32>();
+    }
+
+    const QDomElement tagChildren = toolUnion.firstChildElement(TagChildren);
+    if (tagChildren.isNull())
+    {
+        return QVector<quint32>();
+    }
+
+    QVector<quint32> childrenId;
+    const QDomNodeList listChildren = tagChildren.elementsByTagName(TagChild);
+    for (int i=0; i < listChildren.size(); ++i)
+    {
+        const QDomElement domElement = listChildren.at(i).toElement();
+        if (not domElement.isNull())
+        {
+            childrenId.append(domElement.text().toUInt());
+        }
+    }
+    return childrenId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VToolUnionDetails::TakeNextId(QVector<quint32> &children)
+{
+    quint32 idChild = NULL_ID;
+    if (not children.isEmpty())
+    {
+        idChild = children.takeFirst();
+    }
+    else
+    {
+        idChild = NULL_ID;
+    }
+    return idChild;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolUnionDetails::DrawName(VAbstractPattern *doc, quint32 d1id, quint32 d2id)
+{
+    const QDomElement detail1 = doc->elementById(d1id);
+    if (detail1.isNull())
+    {
+        return QString();
+    }
+
+    const QDomElement detail2 = doc->elementById(d2id);
+    if (detail2.isNull())
+    {
+        return QString();
+    }
+
+    const QDomElement draw1 = detail1.parentNode().parentNode().toElement();
+    if (draw1.isNull() || not draw1.hasAttribute(VAbstractPattern::AttrName))
+    {
+        return QString();
+    }
+
+    const QDomElement draw2 = detail2.parentNode().parentNode().toElement();
+    if (draw2.isNull() || not draw2.hasAttribute(VAbstractPattern::AttrName))
+    {
+        return QString();
+    }
+
+    const QString draw1Name = draw1.attribute(VAbstractPattern::AttrName);
+    const QString draw2Name = draw2.attribute(VAbstractPattern::AttrName);
+
+    if (draw1Name == draw2Name)
+    {
+        return draw1Name;
+    }
+
+    const QDomElement pattern = draw1.parentNode().toElement();
+    if (pattern.isNull())
+    {
+        return QString();
+    }
+
+    int indexD1 = 0;
+    int indexD2 = 0;
+    const QDomNodeList listDraws = pattern.elementsByTagName(VAbstractPattern::TagDraw);
+    for (int i=0; i < listDraws.size(); ++i)
+    {
+        const QDomElement draw = listDraws.at(i).toElement();
+        if (draw == draw1)
+        {
+            indexD1 = i;
+        }
+
+        if (draw == draw2)
+        {
+            indexD2 = i;
+        }
+    }
+
+    if (indexD1 >= indexD2)
+    {
+        return draw1Name;
+    }
+    else
+    {
+        return draw2Name;
+    }
 }

@@ -44,7 +44,7 @@ class VToolUnionDetails : public VAbstractTool
 public:
     VToolUnionDetails(VAbstractPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1, const VDetail &d2,
                       const quint32 &indexD1, const quint32 &indexD2, const Source &typeCreation,
-                      QObject *parent = nullptr);
+                      const QString &drawName, QObject *parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -63,18 +63,21 @@ public:
     static const QString ToolType;
     static const QString TagDetail;
     static const QString TagNode;
+    static const QString TagChildren;
+    static const QString TagChild;
     static const QString AttrIndexD1;
     static const QString AttrIndexD2;
     static const QString AttrIdObject;
     static const QString AttrNodeType;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
-    static void  AddToNewDetail(QObject *tool, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data, VDetail &newDetail,
-                                const VDetail &det, const int &i, const quint32 &idTool, const qreal &dx = 0,
+    static void  AddToNewDetail(QObject *tool, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                VDetail &newDetail, const VDetail &det, const int &i, const quint32 &idTool,
+                                QVector<quint32> &children, const qreal &dx = 0,
                                 const qreal &dy = 0, const quint32 &pRotate = 0, const qreal &angle = 0);
-    static void  UpdatePoints(const quint32 &idDetail, VContainer *data, const VDetail &det, const int &i,
-                              quint32 &idCount, const qreal &dx = 0, const qreal &dy = 0, const quint32 &pRotate = 0,
-                              const qreal &angle = 0);
+    static void  UpdatePoints(VContainer *data, const VDetail &det, const int &i,
+                              QVector<quint32> &children, const qreal &dx = 0, const qreal &dy = 0,
+                              const quint32 &pRotate = 0, const qreal &angle = 0);
     static void  BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
                                  const qreal &angle);
     virtual QString getTagName() const Q_DECL_OVERRIDE;
@@ -104,10 +107,17 @@ private:
     /** @brief indexD2 index edge in second detail. */
     quint32      indexD2;
 
+    QString      drawName;
+
     void         AddDetail(QDomElement &domElement, VDetail &d);
     void         AddNode(QDomElement &domElement, const VNodeDetail &node);
     QDomNode     UpdateDetail(const QDomNode &domNode, const VDetail &d);
     void         AddToModeling(const QDomElement &domElement);
+
+    static void             SaveChildren(VAbstractPattern *doc, quint32 id, const QVector<quint32> &children);
+    static QVector<quint32> AllChildren(VAbstractPattern *doc, quint32 id);
+    static quint32          TakeNextId(QVector<quint32> &children);
+    static QString          DrawName(VAbstractPattern *doc, quint32 d1id, quint32 d2id);
 };
 
 #endif // VTOOLUNIONDETAILS_H
