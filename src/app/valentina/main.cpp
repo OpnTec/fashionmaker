@@ -61,7 +61,15 @@ int main(int argc, char *argv[])
 #endif // !defined(Q_OS_MAC)
     app.setMainWindow(&w);
 
-    QTimer::singleShot(0, &w, SLOT(ProcessCMD()));
+    int msec = 0;
+    //Before we load pattern show window.
+    if (VApplication::IsGUIMode())
+    {
+        w.show();
+        msec = 15; // set delay for correct the first fitbest zoom
+    }
+
+    QTimer::singleShot(msec, &w, SLOT(ProcessCMD()));
 
     return app.exec();
 }

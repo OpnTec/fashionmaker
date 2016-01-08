@@ -4024,10 +4024,8 @@ void MainWindow::ProcessCMD()
     const VCommandLinePtr cmd = qApp->CommandLine();
     auto args = cmd->OptInputFileNames();
 
-    //Before we load pattern show window.
     if (VApplication::IsGUIMode())
     {
-        show();
         ReopenFilesAfterCrash(args);
     }
     else
