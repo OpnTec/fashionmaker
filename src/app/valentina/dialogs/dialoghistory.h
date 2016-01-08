@@ -68,6 +68,7 @@ signals:
     void              ShowHistoryTool(quint32 id, bool enable);
 protected:
     virtual void      closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void      changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogHistory)
 
@@ -89,6 +90,7 @@ private:
     void              ShowPoint();
     QString           PointName(quint32 pointId);
     quint32           AttrUInt(const QDomElement &domElement, const QString &name);
+    void              RetranslateUi();
 };
 
 #endif // DIALOGHISTORY_H

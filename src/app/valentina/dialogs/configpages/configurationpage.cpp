@@ -380,5 +380,4 @@ void ConfigurationPage::RetranslateUi()
     askPointDeletionCheck->setText(tr("Confirm item deletion"));
     toolBarGroup->setTitle(tr("Toolbar"));
     toolBarStyleCheck->setText(tr("The text appears under the icon. (recommended for beginners.)"));
-
 }

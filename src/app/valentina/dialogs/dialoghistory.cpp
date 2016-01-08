@@ -502,3 +502,23 @@ void DialogHistory::closeEvent(QCloseEvent *event)
     emit ShowHistoryTool(id, false);
     DialogTool::closeEvent(event);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogHistory::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+        RetranslateUi();
+    }
+
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogHistory::RetranslateUi()
+{
+    UpdateHistory();
+}

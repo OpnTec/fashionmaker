@@ -1129,6 +1129,7 @@ void MainWindow::changeEvent(QEvent *event)
         redoAction->setText(tr("&Redo"));
         helpLabel->setText(QObject::tr("Create new pattern piece to start working."));
         patternPieceLabel->setText(tr("Pattern Piece: "));
+        UpdateWindowTitle();
     }
     // remember to call base class implementation
     QMainWindow::changeEvent(event);
