@@ -144,18 +144,21 @@ void DialogPatternProperties::Ok()
     {
         SaveDescription();
         descriptionChanged = false;
+        emit doc->patternChanged(false);
     }
 
     if (gradationChanged)
     {
         SaveGradation();
         gradationChanged = false;
+        emit doc->patternChanged(false);
     }
 
     if (defaultChanged)
     {
         SaveDefValues();
         defaultChanged = false;
+        emit doc->patternChanged(false);
     }
 
     close();
