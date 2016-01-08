@@ -128,9 +128,9 @@ QGroupBox *CommunityPage::ServerGroup()
     serverNameLabel = new QLabel(tr("Server name/IP:"));
     secureConnectionLabel = new QLabel(tr("Secure connection"));
 
-    CommunityPage::add_lineedit(&this->server, serverLayout, qApp->ValentinaSettings()->GetServer(), serverNameLabel);
+    CommunityPage::AddLineedit(&this->server, serverLayout, qApp->ValentinaSettings()->GetServer(), serverNameLabel);
 
-    CommunityPage::add_checkbox(&this->secureComm, serverLayout, qApp->ValentinaSettings()->GetServerSecure(),
+    CommunityPage::AddCheckbox(&this->secureComm, serverLayout, qApp->ValentinaSettings()->GetServerSecure(),
                                 secureConnectionLabel);
 
     serverGroup->setLayout(serverLayout);
@@ -138,7 +138,7 @@ QGroupBox *CommunityPage::ServerGroup()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void CommunityPage::add_checkbox(QCheckBox** thebox, QFormLayout *layout, bool checked, QLabel *label)
+void CommunityPage::AddCheckbox(QCheckBox** thebox, QFormLayout *layout, bool checked, QLabel *label)
 {
     (*thebox)= new QCheckBox;
     (*thebox)->setChecked(checked);
@@ -146,7 +146,7 @@ void CommunityPage::add_checkbox(QCheckBox** thebox, QFormLayout *layout, bool c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void CommunityPage::add_lineedit(QLineEdit** theline, QFormLayout *layout, QString value, QLabel *label)
+void CommunityPage::AddLineedit(QLineEdit** theline, QFormLayout *layout, QString value, QLabel *label)
 {
     (*theline)= new QLineEdit;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
@@ -184,12 +184,12 @@ QGroupBox *CommunityPage::ProxyGroup()
     proxyPassLabel    = new QLabel(tr("Proxy pass:"));
 
     const VSettings *settings = qApp->ValentinaSettings();
-    CommunityPage::add_checkbox(&this->useProxy, proxyLayout, settings->GetProxy(), useProxyLabel);
-    CommunityPage::add_lineedit(&this->proxyAddress, proxyLayout, settings->GetProxyAddress(),
+    CommunityPage::AddCheckbox(&this->useProxy, proxyLayout, settings->GetProxy(), useProxyLabel);
+    CommunityPage::AddLineedit(&this->proxyAddress, proxyLayout, settings->GetProxyAddress(),
                                 proxyAddressLabel);
-    CommunityPage::add_lineedit(&this->proxyPort, proxyLayout, settings->GetProxyPort(), proxyPortLabel);
-    CommunityPage::add_lineedit(&this->proxyUser, proxyLayout, settings->GetProxyUser(), proxyUserLabel);
-    CommunityPage::add_lineedit(&this->proxyPass, proxyLayout, settings->GetProxyPass(), proxyPassLabel);
+    CommunityPage::AddLineedit(&this->proxyPort, proxyLayout, settings->GetProxyPort(), proxyPortLabel);
+    CommunityPage::AddLineedit(&this->proxyUser, proxyLayout, settings->GetProxyUser(), proxyUserLabel);
+    CommunityPage::AddLineedit(&this->proxyPass, proxyLayout, settings->GetProxyPass(), proxyPassLabel);
     connect(this->useProxy, &QCheckBox::stateChanged, this, &CommunityPage::ProxyCheckChanged);
     this->ProxyCheckChanged();
 
@@ -210,9 +210,9 @@ QGroupBox *CommunityPage::UserGroup()
     userpasswordLabel = new QLabel(tr("Password:"));
 
     const VSettings *settings = qApp->ValentinaSettings();
-    CommunityPage::add_lineedit(&this->username, userLayout, settings->GetUsername(), usernameLabel);
-    CommunityPage::add_checkbox(&this->savePassword, userLayout, settings->GetSavePassword(), savePasswordLabel);
-    CommunityPage::add_lineedit(&this->userpassword, userLayout, settings->GetUserPassword(), userpasswordLabel);
+    CommunityPage::AddLineedit(&this->username, userLayout, settings->GetUsername(), usernameLabel);
+    CommunityPage::AddCheckbox(&this->savePassword, userLayout, settings->GetSavePassword(), savePasswordLabel);
+    CommunityPage::AddLineedit(&this->userpassword, userLayout, settings->GetUserPassword(), userpasswordLabel);
 
     connect(this->savePassword, &QCheckBox::stateChanged, this, &CommunityPage::PasswordCheckChanged);
     this->PasswordCheckChanged();

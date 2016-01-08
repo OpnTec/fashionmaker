@@ -79,8 +79,8 @@ private:
     QLabel    *savePasswordLabel;
     QLabel    *userpasswordLabel;
 
-    static void add_checkbox(QCheckBox** thebox, QFormLayout *layout, bool checked, QLabel* label);
-    static void add_lineedit(QLineEdit** theline, QFormLayout *layout, QString value, QLabel *label);
+    static void AddCheckbox(QCheckBox** thebox, QFormLayout *layout, bool checked, QLabel* label);
+    static void AddLineedit(QLineEdit** theline, QFormLayout *layout, QString value, QLabel *label);
 
     void ProxyCheckChanged();
     void PasswordCheckChanged();
