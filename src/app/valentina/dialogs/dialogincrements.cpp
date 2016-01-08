@@ -720,6 +720,18 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+    }
+    // remember to call base class implementation
+   QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::ShowIncrementDetails()
 {
     if (ui->tableWidgetIncrement->rowCount() > 0)

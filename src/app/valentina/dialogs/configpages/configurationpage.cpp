@@ -340,7 +340,6 @@ void ConfigurationPage::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         RetranslateUi();
     }
-
     // remember to call base class implementation
    QWidget::changeEvent(event);
 }
