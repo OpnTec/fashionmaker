@@ -418,7 +418,7 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
                 const QPointF begin = StartSegment(data, i);
                 const QPointF end = EndSegment(data, i);
 
-                QVector<QPointF> nodePoints = curve->GetSegmentPoints(begin, end, at(i).getReverse());
+                const QVector<QPointF> nodePoints = curve->GetSegmentPoints(begin, end, at(i).getReverse());
                 pointsEkv << biasPoints(nodePoints, at(i).getMx(), at(i).getMy());
             }
             break;
@@ -520,7 +520,14 @@ int VDetail::indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id)
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VDetail::StartSegment(const VContainer *data, const int &i) const
 {
-    QPointF begin;
+    if (i < 0 && i > CountNode()-1)
+    {
+        return QPointF();
+    }
+
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).getId());
+
+    QPointF begin = curve->GetPoints().first();
     if (CountNode() > 1)
     {
         if (i == 0)
@@ -544,7 +551,14 @@ QPointF VDetail::StartSegment(const VContainer *data, const int &i) const
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VDetail::EndSegment(const VContainer *data, const int &i) const
 {
-    QPointF end;
+    if (i < 0 && i > CountNode()-1)
+    {
+        return QPointF();
+    }
+
+    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).getId());
+
+    QPointF end = curve->GetPoints().last();
     if (CountNode() > 2)
     {
         if (i == CountNode() - 1)

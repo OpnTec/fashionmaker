@@ -82,15 +82,15 @@ public:
     static QPointF ClosestPoint(const QLineF &line, const QPointF &point);
     static QPointF addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k);
     static void    LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
-    static bool    IsPointOnLineSegment (const QPoint &t, const QPoint &p1, const QPoint &p2);
+    static bool    IsPointOnLineSegment (const QPointF &t, const QPointF &p1, const QPointF &p2);
 
     static QVector<QPointF> GetReversePoints(const QVector<QPointF> &points);
     static int GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints);
 private:
     QSharedDataPointer<VGObjectData> d;
 
-    static bool    IsPointOnLineviaPDP(const QPoint &t, const QPoint &p1, const QPoint &p2);
-    static double  PerpDotProduct(const QPoint &t, const QPoint &p1, const QPoint &p2);
+    static bool    IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2);
+    static double  PerpDotProduct(const QPointF &t, const QPointF &p1, const QPointF &p2);
     static double  GetEpsilon(const QPointF &p1, const QPointF &p2);
 
     static int     PointInCircle (const QPointF &p, const QPointF &center, qreal radius);
