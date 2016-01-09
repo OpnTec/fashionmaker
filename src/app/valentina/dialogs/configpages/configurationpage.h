@@ -30,6 +30,7 @@
 #define CONFIGURATIONPAGE_H
 
 #include <QObject>
+#include <QPlainTextEdit>
 #include <QWidget>
 
 class QCheckBox;
@@ -46,6 +47,7 @@ public:
     void      Apply();
 public slots:
     void      LangChanged();
+    void      SystemChanged();
     void      UnitChanged();
     void      LabelLangChanged();
 protected:
@@ -59,6 +61,7 @@ private:
     QComboBox *unitCombo;
     QCheckBox *osOptionCheck;
     bool      langChanged;
+    bool      systemChanged;
     bool      unitChanged;
     bool      labelLangChanged;
     QCheckBox *sendReportCheck;
@@ -73,6 +76,14 @@ private:
     QLabel    *unitLabel;
     QLabel    *languageLabel;
 
+    QGroupBox *pmSystemGroup;
+    QLabel    *systemLabel;
+    QComboBox *systemCombo;
+    QLabel    *systemAuthorLabel;
+    QLabel    *systemBookLabel;
+    QLabel    *systemAuthorValueLabel;
+    QPlainTextEdit *systemBookValueLabel;
+
     QGroupBox *sendGroup;
     QLabel    *description;
 
@@ -81,6 +92,7 @@ private:
 
     QGroupBox *SaveGroup();
     QGroupBox *LangGroup();
+    QGroupBox *PMSystemGroup();
     QGroupBox *SendGroup();
     QGroupBox *DrawGroup();
     QGroupBox *ToolBarGroup();

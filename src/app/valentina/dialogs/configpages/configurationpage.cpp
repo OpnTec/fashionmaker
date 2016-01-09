@@ -54,6 +54,7 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
       unitCombo(nullptr),
       osOptionCheck(nullptr),
       langChanged(false),
+      systemChanged(),
       unitChanged(false),
       labelLangChanged(false),
       sendReportCheck(nullptr),
@@ -66,20 +67,29 @@ ConfigurationPage::ConfigurationPage(QWidget *parent)
       separatorLabel(nullptr),
       unitLabel(nullptr),
       languageLabel(nullptr),
+      pmSystemGroup(nullptr),
+      systemLabel(nullptr),
+      systemCombo(nullptr),
+      systemAuthorLabel(nullptr),
+      systemBookLabel(nullptr),
+      systemAuthorValueLabel(nullptr),
+      systemBookValueLabel(nullptr),
       sendGroup(nullptr),
       description(nullptr),
       drawGroup(nullptr),
       toolBarGroup(nullptr)
 {
-    QGroupBox *saveGroup = SaveGroup();
-    QGroupBox *langGroup = LangGroup();
-    QGroupBox *sendGroup = SendGroup();
-    QGroupBox *drawGroup = DrawGroup();
-    QGroupBox *toolBarGroup = ToolBarGroup();
+    QGroupBox *saveGroup     = SaveGroup();
+    QGroupBox *langGroup     = LangGroup();
+    QGroupBox *pmSystemGroup = PMSystemGroup();
+    QGroupBox *sendGroup     = SendGroup();
+    QGroupBox *drawGroup     = DrawGroup();
+    QGroupBox *toolBarGroup  = ToolBarGroup();
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addWidget(saveGroup);
     mainLayout->addWidget(langGroup);
+    mainLayout->addWidget(pmSystemGroup);
     mainLayout->addWidget(sendGroup);
     mainLayout->addWidget(drawGroup);
     mainLayout->addWidget(toolBarGroup);
@@ -110,6 +120,12 @@ void ConfigurationPage::Apply()
         settings->SetLocale(locale);
         langChanged = false;
         qApp->LoadTranslation(locale);
+    }
+    if (systemChanged)
+    {
+        const QString code = qvariant_cast<QString>(systemCombo->itemData(systemCombo->currentIndex()));
+        settings->SetPMSystemCode(code);
+        systemChanged = false;
     }
     if (this->unitChanged)
     {
@@ -268,6 +284,49 @@ QGroupBox *ConfigurationPage::LangGroup()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QGroupBox *ConfigurationPage::PMSystemGroup()
+{
+    pmSystemGroup = new QGroupBox(tr("Pattern making system"));
+
+    systemLabel = new QLabel(tr("Pattern making system:"));
+    systemCombo = new QComboBox;
+
+    InitPMSystems(systemCombo);
+
+    QFormLayout *pmSystemLayout = new QFormLayout;
+    pmSystemLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
+    pmSystemLayout->addRow(systemLabel, systemCombo);
+
+    //----
+    systemAuthorLabel = new QLabel(tr("Author:"));
+    systemAuthorValueLabel = new QLabel("");
+
+    pmSystemLayout->addRow(systemAuthorLabel, systemAuthorValueLabel);
+
+    //----
+    systemBookLabel = new QLabel(tr("Book:"));
+    systemBookValueLabel = new QPlainTextEdit("");
+    systemBookValueLabel->setReadOnly(true);
+    systemBookValueLabel->setFixedHeight(4 * QFontMetrics(systemBookValueLabel->font()).lineSpacing());
+
+    pmSystemLayout->addRow(systemBookLabel, systemBookValueLabel);
+
+    connect(systemCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
+            &ConfigurationPage::SystemChanged);
+
+    // set default pattern making system
+    const VSettings *settings = qApp->ValentinaSettings();
+    const int index = systemCombo->findData(settings->GetPMSystemCode());
+    if (index != -1)
+    {
+        systemCombo->setCurrentIndex(index);
+    }
+
+    pmSystemGroup->setLayout(pmSystemLayout);
+    return pmSystemGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QGroupBox *ConfigurationPage::SendGroup()
 {
     sendGroup = new QGroupBox(tr("Send crash reports"));
@@ -320,6 +379,26 @@ QGroupBox *ConfigurationPage::ToolBarGroup()
 
     toolBarGroup->setLayout(editLayout);
     return toolBarGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigurationPage::SystemChanged()
+{
+    systemChanged = true;
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->itemData(systemCombo->currentIndex()).toString());
+#else
+    QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString());
+#endif
+    systemAuthorValueLabel->setText(text);
+    systemAuthorValueLabel->setToolTip(text);
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    text = qApp->TrVars()->PMSystemBook(systemCombo->itemData(systemCombo->currentIndex()).toString());
+#else
+    text = qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString());
+#endif
+    systemBookValueLabel->setPlainText(text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
