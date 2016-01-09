@@ -1,12 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pattern>
     <!--Valentina pattern format.-->
-    <version>0.2.2</version>
+    <version>0.2.4</version>
     <unit>mm</unit>
     <author/>
     <description/>
     <notes/>
-    <measurements>build-Valentina-Desktop-Debug/src/app/valentina/bin/tables/standard/GOST_man_ru.vst</measurements>
+    <gradation defSize="300" defHeight="1100" custom="true">
+        <heights all="true"/>
+        <sizes all="true"/>
+    </gradation>
+    <measurements>../../../../../build-Valentina-Desktop-Debug/src/app/valentina/bin/tables/standard/GOST_man_ru.vst</measurements>
     <increments>
         <increment name="#Пс_впрз" description="Высота основания" formula="16.1"/>
         <increment name="#Пк_впрз1" description="проймы сзади АГ" formula="14"/>
@@ -135,43 +139,43 @@
             <line typeLine="hair" id="295" firstPoint="292" secondPoint="291" lineColor="black"/>
         </calculation>
         <modeling>
-            <point type="modeling" typeObject="Calculation" id="117" idObject="50" mx="1.32292" my="2.64583"/>
-            <arc type="modeling" typeObject="Calculation" id="118" idObject="76"/>
-            <point type="modeling" typeObject="Calculation" id="119" idObject="61" mx="1.32292" my="2.64583"/>
-            <point type="modeling" typeObject="Calculation" id="120" idObject="71" mx="1.32292" my="2.64583"/>
-            <point type="modeling" typeObject="Calculation" id="121" idObject="97" mx="1.32292" my="2.64583"/>
-            <spline type="modelingSpline" typeObject="Calculation" id="122" idObject="98"/>
-            <point type="modeling" typeObject="Calculation" id="123" idObject="95" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="296" idObject="33" mx="1.32292" my="2.64583"/>
-            <spline type="modelingPath" id="297" idObject="77"/>
-            <point type="modeling" id="298" idObject="43" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="299" idObject="47" mx="1.32292" my="2.64583"/>
-            <spline type="modelingPath" id="300" idObject="288"/>
-            <point type="modeling" id="301" idObject="287" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="302" idObject="286" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="304" idObject="286" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="305" idObject="287" mx="1.32292" my="2.64583"/>
-            <spline type="modelingPath" id="306" idObject="289"/>
-            <point type="modeling" id="307" idObject="203" mx="23.5479" my="13.2292"/>
-            <spline type="modelingPath" id="308" idObject="205"/>
-            <point type="modeling" id="309" idObject="87" mx="-8.05159" my="7.80181"/>
-            <point type="modeling" id="310" idObject="73" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="311" idObject="37" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="313" idObject="51" mx="-49.2909" my="-13.3361"/>
-            <point type="modeling" id="314" idObject="50" mx="1.32292" my="2.64583"/>
-            <arc type="modeling" id="315" idObject="76"/>
-            <point type="modeling" id="316" idObject="61" mx="22.4896" my="-8.99584"/>
-            <point type="modeling" id="317" idObject="291" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="318" idObject="292" mx="1.32292" my="2.64583"/>
-            <spline type="modelingPath" id="319" idObject="293"/>
-            <point type="modeling" id="321" idObject="291" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="322" idObject="71" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="323" idObject="73" mx="1.32292" my="2.64583"/>
-            <point type="modeling" id="324" idObject="87" mx="-8.05159" my="7.80181"/>
-            <spline type="modelingPath" id="325" idObject="211"/>
-            <point type="modeling" id="326" idObject="209" mx="18.0755" my="25.1094"/>
-            <spline type="modelingPath" id="327" idObject="294"/>
-            <point type="modeling" id="328" idObject="292" mx="1.32292" my="2.64583"/>
+            <point type="modeling" typeObject="Calculation" inUse="true" id="117" idObject="50" mx="1.32292" my="2.64583"/>
+            <arc type="modeling" typeObject="Calculation" inUse="true" id="118" idObject="76"/>
+            <point type="modeling" typeObject="Calculation" inUse="true" id="119" idObject="61" mx="1.32292" my="2.64583"/>
+            <point type="modeling" typeObject="Calculation" inUse="true" id="120" idObject="71" mx="1.32292" my="2.64583"/>
+            <point type="modeling" typeObject="Calculation" inUse="true" id="121" idObject="97" mx="1.32292" my="2.64583"/>
+            <spline type="modelingSpline" typeObject="Calculation" inUse="true" id="122" idObject="98"/>
+            <point type="modeling" typeObject="Calculation" inUse="true" id="123" idObject="95" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="296" idObject="33" mx="1.32292" my="2.64583"/>
+            <spline type="modelingPath" inUse="true" id="297" idObject="77"/>
+            <point type="modeling" inUse="true" id="298" idObject="43" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="299" idObject="47" mx="1.32292" my="2.64583"/>
+            <spline type="modelingPath" inUse="true" id="300" idObject="288"/>
+            <point type="modeling" inUse="true" id="301" idObject="287" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="302" idObject="286" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="304" idObject="286" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="305" idObject="287" mx="1.32292" my="2.64583"/>
+            <spline type="modelingPath" inUse="true" id="306" idObject="289"/>
+            <point type="modeling" inUse="true" id="307" idObject="203" mx="23.5479" my="13.2292"/>
+            <spline type="modelingPath" inUse="true" id="308" idObject="205"/>
+            <point type="modeling" inUse="true" id="309" idObject="87" mx="-8.05159" my="7.80181"/>
+            <point type="modeling" inUse="true" id="310" idObject="73" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="311" idObject="37" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="313" idObject="51" mx="-49.2909" my="-13.3361"/>
+            <point type="modeling" inUse="true" id="314" idObject="50" mx="1.32292" my="2.64583"/>
+            <arc type="modeling" inUse="true" id="315" idObject="76"/>
+            <point type="modeling" inUse="true" id="316" idObject="61" mx="22.4896" my="-8.99584"/>
+            <point type="modeling" inUse="true" id="317" idObject="291" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="318" idObject="292" mx="1.32292" my="2.64583"/>
+            <spline type="modelingPath" inUse="true" id="319" idObject="293"/>
+            <point type="modeling" inUse="true" id="321" idObject="291" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="322" idObject="71" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="323" idObject="73" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="324" idObject="87" mx="-8.05159" my="7.80181"/>
+            <spline type="modelingPath" inUse="true" id="325" idObject="211"/>
+            <point type="modeling" inUse="true" id="326" idObject="209" mx="18.0755" my="25.1094"/>
+            <spline type="modelingPath" inUse="true" id="327" idObject="294"/>
+            <point type="modeling" inUse="true" id="328" idObject="292" mx="1.32292" my="2.64583"/>
         </modeling>
         <details>
             <detail closed="1" id="124" name="Подборт" supplement="1" width="7" mx="298.62" my="-50.9212">
@@ -180,7 +184,7 @@
                 <node type="NodePoint" nodeType="Contour" idObject="119" mx="3" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="120" mx="3" my="3"/>
                 <node type="NodePoint" nodeType="Contour" idObject="121" mx="0" my="3"/>
-                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="122" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="122" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="123" mx="0" my="0"/>
             </detail>
             <detail closed="0" id="303" name="Деталь" supplement="1" width="7" mx="10.0402" my="-26.0133">
@@ -282,15 +286,15 @@
             <spline type="simple" point4="139" kAsm1="1.47978" kAsm2="0.645471" angle1="98.0171" angle2="286.671" id="169" kCurve="1" color="black" point1="132"/>
         </calculation>
         <modeling>
-            <point type="modeling" id="330" idObject="132" mx="1.32292" my="2.64583"/>
-            <spline type="modelingSpline" id="331" idObject="169"/>
-            <point type="modeling" id="332" idObject="139" mx="1.32292" my="2.64583"/>
-            <spline type="modelingPath" id="333" idObject="167"/>
-            <point type="modeling" id="334" idObject="125" mx="1.32292" my="2.64583"/>
-            <spline type="modelingPath" id="335" idObject="166"/>
-            <point type="modeling" id="336" idObject="138" mx="1.32292" my="2.64583"/>
-            <spline type="modelingSpline" id="337" idObject="168"/>
-            <point type="modeling" id="338" idObject="130" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="330" idObject="132" mx="1.32292" my="2.64583"/>
+            <spline type="modelingSpline" inUse="true" id="331" idObject="169"/>
+            <point type="modeling" inUse="true" id="332" idObject="139" mx="1.32292" my="2.64583"/>
+            <spline type="modelingPath" inUse="true" id="333" idObject="167"/>
+            <point type="modeling" inUse="true" id="334" idObject="125" mx="1.32292" my="2.64583"/>
+            <spline type="modelingPath" inUse="true" id="335" idObject="166"/>
+            <point type="modeling" inUse="true" id="336" idObject="138" mx="1.32292" my="2.64583"/>
+            <spline type="modelingSpline" inUse="true" id="337" idObject="168"/>
+            <point type="modeling" inUse="true" id="338" idObject="130" mx="1.32292" my="2.64583"/>
         </modeling>
         <details>
             <detail closed="1" id="339" name="Деталь" supplement="1" width="7" mx="-151.4" my="6.83743">
@@ -356,15 +360,15 @@
             <spline type="simple" point4="230" kAsm1="1.00163" kAsm2="0.505257" angle1="11.0159" angle2="176.295" id="275" kCurve="1" color="black" point1="250"/>
         </calculation>
         <modeling>
-            <point type="modeling" id="276" idObject="250" mx="1.32292" my="2.64583"/>
-            <spline type="modelingSpline" id="277" idObject="275"/>
-            <point type="modeling" id="278" idObject="230" mx="1.32292" my="2.64583"/>
-            <spline type="modelingPath" id="279" idObject="261"/>
-            <point type="modeling" id="280" idObject="237" mx="1.32292" my="2.64583"/>
-            <spline type="modelingSpline" id="281" idObject="258"/>
-            <point type="modeling" id="282" idObject="235" mx="8.68713" my="2.03215"/>
-            <point type="modeling" id="283" idObject="254" mx="1.32292" my="2.64583"/>
-            <spline type="modelingPath" id="284" idObject="263"/>
+            <point type="modeling" inUse="true" id="276" idObject="250" mx="1.32292" my="2.64583"/>
+            <spline type="modelingSpline" inUse="true" id="277" idObject="275"/>
+            <point type="modeling" inUse="true" id="278" idObject="230" mx="1.32292" my="2.64583"/>
+            <spline type="modelingPath" inUse="true" id="279" idObject="261"/>
+            <point type="modeling" inUse="true" id="280" idObject="237" mx="1.32292" my="2.64583"/>
+            <spline type="modelingSpline" inUse="true" id="281" idObject="258"/>
+            <point type="modeling" inUse="true" id="282" idObject="235" mx="8.68713" my="2.03215"/>
+            <point type="modeling" inUse="true" id="283" idObject="254" mx="1.32292" my="2.64583"/>
+            <spline type="modelingPath" inUse="true" id="284" idObject="263"/>
         </modeling>
         <details>
             <detail closed="1" id="285" name="Деталь" supplement="1" width="7" mx="-49.2726" my="-53.1166">

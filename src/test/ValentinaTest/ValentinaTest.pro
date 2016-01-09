@@ -250,8 +250,18 @@ VALENTINA_TEST_FILES += \
 
 COLLECTION_FILES += \
     $${PWD}/../../app/share/tables/standard/GOST_man_ru.vst \
-    $${PWD}/../../app/share/collection/jacketМ6_30-110.val
-
+    $${PWD}/../../app/share/collection/bra.val \
+    $${PWD}/../../app/share/collection/bra.vit \
+    $${PWD}/../../app/share/collection/jacketМ1_52-176.val \
+    $${PWD}/../../app/share/collection/jacketМ2_40-146.val \
+    $${PWD}/../../app/share/collection/jacketМ3_40-146.val \
+    $${PWD}/../../app/share/collection/jacketМ4_40-146.val \
+    $${PWD}/../../app/share/collection/jacketМ5_30-110.val \
+    $${PWD}/../../app/share/collection/jacketМ6_30-110.val \
+    $${PWD}/../../app/share/collection/pantsМ1_52-176.val \
+    $${PWD}/../../app/share/collection/pantsМ2_40-146.val \
+    $${PWD}/../../app/share/collection/pantsМ7.val \
+    $${PWD}/../../app/share/collection/TShirt_test.val
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \

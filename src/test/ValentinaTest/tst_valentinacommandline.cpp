@@ -255,11 +255,69 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
 
     const QString tmp = QApplication::applicationDirPath() + QDir::separator() + tmpTestCollectionFolder;
 
+    QTest::newRow("bra")<< "bra.val"
+                               << QString("--test")
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("jacketМ1_52-176")<< "jacketМ1_52-176.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("GOST_man_ru.vst"))
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("jacketМ2_40-146")<< "jacketМ2_40-146.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("GOST_man_ru.vst"))
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("jacketМ3_40-146")<< "jacketМ3_40-146.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("GOST_man_ru.vst"))
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("jacketМ4_40-146")<< "jacketМ4_40-146.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("GOST_man_ru.vst"))
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("jacketМ5_30-110")<< "jacketМ5_30-110.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("GOST_man_ru.vst"))
+                               << true
+                               << V_EX_OK;
+
     QTest::newRow("jacketМ6_30-110")<< "jacketМ6_30-110.val"
                                << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
                                                                 QLatin1Literal("GOST_man_ru.vst"))
                                << true
                                << V_EX_OK;
+
+    QTest::newRow("pantsМ1_52-176")<< "pantsМ1_52-176.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("GOST_man_ru.vst"))
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("pantsМ2_40-146")<< "pantsМ2_40-146.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("GOST_man_ru.vst"))
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("pantsМ7")<< "pantsМ7.val"
+                               << QString("--test;;-m;;%1").arg(tmp + QDir::separator() +
+                                                                QLatin1Literal("GOST_man_ru.vst"))
+                               << true
+                               << V_EX_OK;
+
+    QTest::newRow("TShirt_test")<< "TShirt_test.val"
+                                << QString("--test")
+                                << true
+                                << V_EX_OK;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
