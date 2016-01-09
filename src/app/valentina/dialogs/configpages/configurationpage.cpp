@@ -447,6 +447,33 @@ void ConfigurationPage::RetranslateUi()
 
     languageLabel->setText(tr("Label language:"));
 
+    pmSystemGroup->setTitle(tr("Pattern making system"));
+    systemLabel->setText(tr("Pattern making system:"));
+
+    const int index = systemCombo->currentIndex();
+    systemCombo->blockSignals(true);
+    systemCombo->clear();
+    InitPMSystems(systemCombo);
+    systemCombo->setCurrentIndex(index);
+    systemCombo->blockSignals(false);
+
+    systemAuthorLabel->setText(tr("Author:"));
+    systemBookLabel->setText(tr("Book:"));
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->itemData(systemCombo->currentIndex()).toString());
+#else
+    QString text = qApp->TrVars()->PMSystemAuthor(systemCombo->currentData().toString());
+#endif
+    systemAuthorValueLabel->setText(text);
+    systemAuthorValueLabel->setToolTip(text);
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    text = qApp->TrVars()->PMSystemBook(systemCombo->itemData(systemCombo->currentIndex()).toString());
+#else
+    text = qApp->TrVars()->PMSystemBook(systemCombo->currentData().toString());
+#endif
+    systemBookValueLabel->setPlainText(text);
+
     sendGroup->setTitle(tr("Send crash reports"));
     sendReportCheck->setText(tr("Send crash reports (recommended)"));
     description->setText(tr("After each crash Valentina collect information that may help us fix a "
