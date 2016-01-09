@@ -52,7 +52,8 @@ SOURCES += \
     tst_vlockguard.cpp \
     tst_misc.cpp \
     tst_vcommandline.cpp \
-    tst_tstranslation.cpp
+    tst_tstranslation.cpp \
+    tst_vdetail.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -72,7 +73,8 @@ HEADERS += \
     tst_vlockguard.h \
     tst_misc.h \
     tst_vcommandline.h \
-    tst_tstranslation.h
+    tst_tstranslation.h \
+    tst_vdetail.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
