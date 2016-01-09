@@ -128,3 +128,54 @@ void TST_VSpline::GetSegmentPoints_issue412()
     // Begin comparison
     Comparison(points, origPoints);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::GetSegmentPoints_TestPuzzle()
+{
+    // Input data taken from real case
+    // See the file <root>/src/app/share/collection/TestPuzzle.val
+    // Test issue with method IsPointOnLineSegment.
+    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+
+    VSpline spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
+
+    QPointF begin(1168.85828031, 39.9998740157);
+    QPointF end(957.69883966, 943.844812978);
+
+    QVector<QPointF> points;
+    points << spl.GetSegmentPoints(begin, end, false);
+
+    QVector<QPointF> origPoints;
+    origPoints.append(QPointF(1168.85828031, 39.9998740157));
+    origPoints.append(QPointF(1158.40802126, 52.3497961203));
+    origPoints.append(QPointF(1138.64676795, 77.3443304348));
+    origPoints.append(QPointF(1120.21162184, 102.681357357));
+    origPoints.append(QPointF(1103.0570157, 128.348504087));
+    origPoints.append(QPointF(1087.13738226, 154.333397827));
+    origPoints.append(QPointF(1072.40715426, 180.623665779));
+    origPoints.append(QPointF(1058.82076446, 207.206935142));
+    origPoints.append(QPointF(1046.33264559, 234.070833119));
+    origPoints.append(QPointF(1034.8972304, 261.20298691));
+    origPoints.append(QPointF(1024.46895163, 288.591023717));
+    origPoints.append(QPointF(1015.00224202, 316.22257074));
+    origPoints.append(QPointF(1006.45153433, 344.085255182));
+    origPoints.append(QPointF(998.771261285, 372.166704242));
+    origPoints.append(QPointF(991.915855642, 400.454545123));
+    origPoints.append(QPointF(985.83975014, 428.936405026));
+    origPoints.append(QPointF(980.497377524, 457.599911151));
+    origPoints.append(QPointF(975.843170537, 486.432690699));
+    origPoints.append(QPointF(971.831561923, 515.422370873));
+    origPoints.append(QPointF(968.416984426, 544.556578873));
+    origPoints.append(QPointF(965.55387079, 573.8229419));
+    origPoints.append(QPointF(963.19665376, 603.209087156));
+    origPoints.append(QPointF(961.299766078, 632.702641841));
+    origPoints.append(QPointF(959.17457231, 677.107741373));
+    origPoints.append(QPointF(957.595965967, 736.590833735));
+    origPoints.append(QPointF(957.038466409, 796.280853437));
+    origPoints.append(QPointF(957.305645106, 885.992413851));
+    origPoints.append(QPointF(957.69883966, 943.844812978));
+
+    // Begin comparison
+    Comparison(points, origPoints);
+}
