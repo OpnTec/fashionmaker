@@ -64,7 +64,127 @@ void TST_VAbstractDetail::SumTrapezoids() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::PathRemoveLoop_data() const
+{
+    QTest::addColumn<QVector<QPointF>>("path");
+    QTest::addColumn<QVector<QPointF>>("expect");
 
+    QVector<QPointF> path;
+    path << QPointF(10, 10);
+    path << QPointF(20, 10);
+    path << QPointF(20, 20);
+    path << QPointF(10, 20);
+    path << QPointF(10, 10);
+    QTest::newRow("Correct closed a path (four unique points)") << path << path;
+
+    path.removeLast();
+    QTest::newRow("Correct unclosed a path (four unique points)") << path << path;
+
+    path.clear();
+    path << QPointF(0, 10);
+    path << QPointF(10, 10);
+    path << QPointF(20, 10);
+    path << QPointF(20, 20);
+    path << QPointF(10, 20);
+    path << QPointF(0, 20);
+    path << QPointF(0, 10);
+    QTest::newRow("Correct closed a path (six unique points)") << path << path;
+
+    path.removeLast();
+    QTest::newRow("Correct unclosed a path (six unique points)") << path << path;
+
+    path.clear();
+    path << QPointF(20, 10);
+    path << QPointF(10, 20);
+    path << QPointF(10, 10);
+    path << QPointF(20, 20);
+    path << QPointF(20, 10);
+
+    QVector<QPointF> res;
+    res << QPointF(20, 10);
+    res << QPointF(15, 15);
+    res << QPointF(20, 20);
+    res << QPointF(20, 10);
+    QTest::newRow("One loop, closed a path (four unique points)") << path << res;
+
+    path.removeLast();
+    res.removeLast();
+    QTest::newRow("One loop, unclosed a path (four unique points)") << path << res;
+
+    path.clear();
+    path << QPointF(20, 10);
+    path << QPointF(10, 20);
+    path << QPointF(0, 10);
+    path << QPointF(0, 20);
+    path << QPointF(10, 10);
+    path << QPointF(20, 20);
+    path << QPointF(20, 10);
+
+    res.clear();
+    res << QPointF(20, 10);
+    res << QPointF(15, 15);
+    res << QPointF(20, 20);
+    res << QPointF(20, 10);
+    QTest::newRow("Two loops, closed a path (six unique points)") << path << res;
+
+    path.removeLast();
+    res.removeLast();
+    QTest::newRow("Two loops, unclosed a path (six unique points)") << path << res;
+
+    path.clear();
+    path << QPointF(20, 10);
+    path << QPointF(10, 20);
+    path << QPointF(0, 20);
+    path << QPointF(0, 10);
+    path << QPointF(10, 10);
+    path << QPointF(20, 20);
+    path << QPointF(20, 10);
+
+    res.clear();
+    res << QPointF(20, 10);
+    res << QPointF(15, 15);
+    res << QPointF(20, 20);
+    res << QPointF(20, 10);
+    QTest::newRow("One loop, the first loop, closed a path (six unique points)") << path << res;
+
+    path.removeLast();
+    res.removeLast();
+    QTest::newRow("One loop, the first loop, unclosed a path (six unique points)") << path << res;
+
+    path.clear();
+    path << QPointF(20, 10);
+    path << QPointF(10, 10);
+    path << QPointF(0, 20);
+    path << QPointF(0, 10);
+    path << QPointF(10, 20);
+    path << QPointF(20, 20);
+    path << QPointF(20, 10);
+
+    res.clear();
+    res << QPointF(20, 10);
+    res << QPointF(10, 10);
+    res << QPointF(5, 15);
+    res << QPointF(10, 20);
+    res << QPointF(20, 20);
+    res << QPointF(20, 10);
+    QTest::newRow("One loop, the second loop, closed a path (six unique points)") << path << res;
+
+    path.removeLast();
+    res.removeLast();
+    QTest::newRow("One loop, the second loop, unclosed a path (six unique points)") << path << res;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::PathRemoveLoop() const
+{
+    QFETCH(QVector<QPointF>, path);
+    QFETCH(QVector<QPointF>, expect);
+
+    QVector<QPointF> res = VAbstractDetail::CheckLoops(path);
+    Comparison(res, expect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractDetail::Case1() const
 {
     const QVector<QPointF> points = InputPointsCase1(); // Input points.

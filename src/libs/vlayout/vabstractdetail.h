@@ -65,13 +65,12 @@ public:
     void    setWidth(const qreal &value);
 
     static QVector<QPointF> Equidistant(const QVector<QPointF> &points, const EquidistantType &eqv, qreal width);
-    static qreal SumTrapezoids(const QVector<QPointF> &points);
-
+    static qreal            SumTrapezoids(const QVector<QPointF> &points);
+    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
 
 protected:
     static QVector<QPointF> RemoveDublicates(const QVector<QPointF> &points);
     static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points);
-    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
 
 private:
     QSharedDataPointer<VAbstractDetailData> d;

@@ -42,6 +42,8 @@ signals:
 private slots:
     void EquidistantRemoveLoop() const;
     void SumTrapezoids() const;
+    void PathRemoveLoop_data() const;
+    void PathRemoveLoop() const;
 
 private:
     void Case1() const;

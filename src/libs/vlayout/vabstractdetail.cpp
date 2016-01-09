@@ -300,57 +300,59 @@ QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF
  */
 QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
 {
-    QVector<QPointF> ekvPoints;
+    const int count = points.size();
     /*If we got less than 4 points no need seek loops.*/
-    if (points.size() < 4)
+    if (count < 4)
     {
         qDebug()<<"Less then 4 points. Doesn't need check for loops.";
         return points;
     }
+
     bool closed = false;
-    if (points.at(0) == points.at(points.size()-1))
+    if (points.first() == points.last())
     {
         closed = true;
     }
+
+    QVector<QPointF> ekvPoints;
+
     qint32 i, j;
-    for (i = 0; i < points.size(); ++i)
+    for (i = 0; i < count; ++i)
     {
         /*Last three points no need check.*/
-        if (i >= points.size()-3)
+        /*Triangle has not contain loops*/
+        if (i >= count-3)
         {
             ekvPoints.append(points.at(i));
             continue;
         }
+
         QPointF crosPoint;
         QLineF::IntersectType intersect = QLineF::NoIntersection;
-        QLineF line1(points.at(i), points.at(i+1));
-        for (j = i+2; j < points.size()-1; ++j)
+        const QLineF line1(points.at(i), points.at(i+1));
+        // Because a path can contains several loops we will seek the last and only then remove the loop(s)
+        // That's why we parse from the end
+        for (j = count-2; j >= i+2; --j)
         {
-            QLineF line2(points.at(j), points.at(j+1));
+            const QLineF line2(points.at(j), points.at(j+1));
             intersect = line1.intersect(line2, &crosPoint);
-            if (intersect == QLineF::BoundedIntersection)
-            {
+            if (intersect == QLineF::BoundedIntersection && not (i == 0 && j+1 == count-1 && closed))
+            { // Break, but not if intersects the first edge and the last edge in closed path
                 break;
             }
+            intersect = QLineF::NoIntersection;
         }
+
         if (intersect == QLineF::BoundedIntersection)
         {
-            if (i == 0 && j+1 == points.size()-1 && closed)
-            {
-                /*We got closed contour.*/
-                ekvPoints.append(points.at(i));
-            }
-            else
-            {
-                /*We found loop.*/
-                ekvPoints.append(points.at(i));
-                ekvPoints.append(crosPoint);
-                i = j;
-            }
+            /*We have found loop.*/
+            ekvPoints.append(points.at(i));
+            ekvPoints.append(crosPoint);
+            i = j;
         }
         else
         {
-            /*We did not found loop.*/
+            /*We have not found loop.*/
             ekvPoints.append(points.at(i));
         }
     }
