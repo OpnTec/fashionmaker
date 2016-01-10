@@ -2517,6 +2517,11 @@ void MainWindow::Layout()
         {
             ActionDraw(true);
         }
+        else
+        {
+            ui->actionDetails->setChecked(false);
+            ui->actionLayout->setChecked(false);
+        }
         SetLayoutModeActions(false);
     }
 }
