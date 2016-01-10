@@ -270,7 +270,7 @@ COLLECTION_FILES += \
     $${PWD}/../../app/share/collection/PajamaTopWrap2.val \
     $${PWD}/../../app/share/collection/Susan.vit \
     $${PWD}/../../app/share/collection/Moulage_0.5_armhole_neckline.val \
-    $${PWD}/../../app/share/collection/0.7_Armhole_adjustment_0.10.val
+    $${PWD}/../../app/share/collection/0.7_Armhole_adjustment_0.10.val \
     $${PWD}/../../app/share/collection/my_calculated_measurements_for_val.vit
 
 
