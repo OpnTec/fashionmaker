@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Valentina pattern format.-->
+    <version>0.2.4</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements>my_calculated_measurements_for_val.vit</measurements>
+    <increments>
+        <increment name="#inch" description="1 inch" formula="2.54"/>
+        <increment name="#quarter" description="1/4" formula="0.64"/>
+        <increment name="#threeEight" description="3/8" formula="0.95"/>
+        <increment name="#oneEight" description="1/8" formula="0.32"/>
+        <increment name="#fiveEight" description="5/8" formula="1.59"/>
+        <increment name="#ShoulderDart" description="Shoulder dart for C cup" formula="1.59"/>
+        <increment name="#Waistdart" description="Waist dart for 2 &quot; to 7&quot; low hip - waist - Was supposed to be less but based on Suzy made more" formula="1.59"/>
+        <increment name="#armholedart" description=" Armhome dart for C cup" formula="1.59"/>
+        <increment name="#Centerfrontdart" description="Center front dart width for C cup" formula="1.59"/>
+        <increment name="#threequarter" description="3/4&quot;" formula="1.91"/>
+        <increment name="#Backwaistdart" description="Back waist dart - was supposed to 0 but based on Suzy" formula="0.64"/>
+        <increment name="#Sidedartwidth" description="Side Dart width for C cup" formula="3.18"/>
+    </increments>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point type="single" x="0.926042" y="1.05833" id="1" name="A" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="A1" basePoint="1" mx="0.132292" lineColor="darkRed" angle="360" my="0.264583" length="4*2.54"/>
+            <point type="normal" typeLine="hair" id="3" name="A2" firstPoint="1" secondPoint="2" mx="-0.0207727" lineColor="black" angle="180" my="-1.13487" length="neck_side_to_waist_f"/>
+            <point type="endLine" typeLine="hair" id="4" name="A3" basePoint="3" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="4.5*2.54"/>
+            <point type="endLine" typeLine="hair" id="5" name="A4" basePoint="4" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="4*2.54"/>
+            <point type="endLine" typeLine="hair" id="6" name="Z" basePoint="5" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="(leg_thigh_mid_circ/4)+0.635"/>
+            <point type="endLine" typeLine="hair" id="7" name="A6" basePoint="4" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="(leg_thigh_mid_circ/4)+0.635"/>
+            <point type="endLine" typeLine="hair" id="8" name="A7" basePoint="3" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="(leg_thigh_mid_circ/4)+0.635"/>
+            <line typeLine="hair" id="9" firstPoint="8" secondPoint="6" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="10" name="I" firstPoint="1" secondPoint="3" mx="0.319782" lineColor="black" my="-1.9853" length="neck_side_to_waist_f/2"/>
+            <point type="endLine" typeLine="hair" id="11" name="JBustguide" basePoint="10" mx="1.52685" lineColor="black" angle="0" my="-1.47861" length="(bust_circ/4)+0.635"/>
+            <point type="endLine" typeLine="hair" id="12" name="A10" basePoint="1" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="3*2.54"/>
+            <point type="endLine" typeLine="hair" id="13" name="A11" basePoint="12" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="8*2.54"/>
+            <point type="alongLine" typeLine="hair" id="14" name="B" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="(neck_circ/6)+0.635"/>
+            <point type="endLine" typeLine="hair" id="15" name="C" basePoint="14" mx="0.23794" lineColor="black" angle="90" my="0.123719" length="(neck_circ/6)+0.635+0.3175"/>
+            <point type="alongLine" typeLine="hair" id="16" name="D" firstPoint="14" secondPoint="15" mx="0.132292" lineColor="black" my="0.264583" length="((neck_circ/6)+0.635+0.3175)/2"/>
+            <point type="endLine" typeLine="hair" id="17" name="E" basePoint="16" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="6*2.54"/>
+            <point type="alongLine" typeLine="hair" id="18" name="tmp" firstPoint="16" secondPoint="17" mx="0.132292" lineColor="black" my="0.264583" length="Line_D_E/4"/>
+            <point type="shoulder" typeLine="hair" id="19" name="A13" p2Line="18" pShoulder="15" mx="-0.321325" lineColor="black" my="-2.90271" length="shoulder_length+1.5875" p1Line="16"/>
+            <point type="endLine" typeLine="hair" id="20" name="F" basePoint="15" mx="0.769702" lineColor="black" angle="343.365" my="-0.231607" length="shoulder_length+#ShoulderDart"/>
+            <point type="alongLine" typeLine="hair" id="21" name="G" firstPoint="15" secondPoint="20" mx="-0.264583" lineColor="black" my="0.132291" length="shoulder_length/2"/>
+            <point type="alongLine" typeLine="hair" id="22" name="H" firstPoint="20" secondPoint="15" mx="0.132292" lineColor="black" my="0.264583" length="shoulder_length/2"/>
+            <point type="alongLine" typeLine="hair" id="23" name="K" firstPoint="10" secondPoint="11" mx="0.226037" lineColor="black" my="-1.89155" length="bustpoint_to_bustpoint/2"/>
+            <point type="endLine" typeLine="dashLine" id="24" name="A14" basePoint="23" mx="0.413527" lineColor="black" angle="90" my="-0.766613" length="2*2.54"/>
+            <point type="endLine" typeLine="dashLine" id="25" name="A15" basePoint="23" mx="2.43331" lineColor="black" angle="270" my="-0.800702" length="2*2.54"/>
+            <point type="endLine" typeLine="hair" id="26" name="tmp1" basePoint="24" mx="0.64789" lineColor="black" angle="90" my="-1.51657" length="2.54"/>
+            <point type="shoulder" typeLine="hair" id="27" name="L_bust" p2Line="24" pShoulder="1" mx="0.218633" lineColor="black" my="0.0690758" length="neck_front_to_bust_f" p1Line="26"/>
+            <point type="height" typeLine="hair" id="34" name="M" basePoint="27" p2Line="3" mx="0.132292" lineColor="black" my="0.264583" p1Line="1"/>
+            <point type="height" typeLine="hair" id="35" name="O" basePoint="27" p2Line="6" mx="0.132292" lineColor="black" my="0.264583" p1Line="5"/>
+            <point type="height" typeLine="hair" id="36" name="N" basePoint="27" p2Line="8" mx="0.202724" lineColor="black" my="-2.27097" p1Line="3"/>
+            <point type="alongLine" typeLine="hair" id="41" name="Q" firstPoint="36" secondPoint="8" mx="1.70852" lineColor="black" my="-1.8792" length="#Waistdart/2"/>
+            <point type="alongLine" typeLine="hair" id="42" name="P" firstPoint="36" secondPoint="3" mx="-0.595606" lineColor="black" my="-1.59197" length="#Waistdart/2"/>
+            <point type="alongLine" typeLine="hair" id="43" name="S" firstPoint="35" secondPoint="36" mx="0.132292" lineColor="black" my="0.264583" length="3*#inch"/>
+            <point type="endLine" typeLine="hair" id="44" name="T" basePoint="42" mx="-1.8759" lineColor="black" angle="270" my="-0.492125" length="#inch/2"/>
+            <point type="endLine" typeLine="hair" id="45" name="U" basePoint="41" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="#inch/2"/>
+            <line typeLine="hair" id="46" firstPoint="44" secondPoint="43" lineColor="black"/>
+            <line typeLine="hair" id="47" firstPoint="45" secondPoint="43" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="49" name="V" firstPoint="27" secondPoint="36" mx="-1.81112" lineColor="black" my="-1.25607" length="#threequarter"/>
+            <line typeLine="hair" id="50" firstPoint="49" secondPoint="41" lineColor="black"/>
+            <line typeLine="hair" id="51" firstPoint="49" secondPoint="42" lineColor="black"/>
+            <line typeLine="hair" id="52" firstPoint="21" secondPoint="27" lineColor="black"/>
+            <line typeLine="hair" id="53" firstPoint="27" secondPoint="22" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="54" name="W2ndBust" basePoint="34" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="Line_I_JBustguide"/>
+            <point type="endLine" typeLine="dashLine" id="55" name="A8" basePoint="54" mx="0.64789" lineColor="black" angle="90" my="-1.59157" length="4*#inch"/>
+            <point type="alongLine" typeLine="hair" id="56" name="X" firstPoint="3" secondPoint="8" mx="0.132292" lineColor="black" my="0.264583" length="((waist_circ/4)+#quarter)+#Waistdart"/>
+            <point type="lineIntersect" id="57" name="Ints1" p2Line1="44" p2Line2="7" p1Line1="43" p1Line2="4" mx="-2.31277" my="-1.56424"/>
+            <point type="lineIntersect" id="58" name="Ints2" p2Line1="45" p2Line2="4" p1Line1="43" p1Line2="7" mx="0.629255" my="-1.8823"/>
+            <line typeLine="hair" id="59" firstPoint="57" secondPoint="58" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="61" name="Y" basePoint="4" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="(highhip_circ/4)+#quarter+Line_Ints1_Ints2"/>
+            <line typeLine="hair" id="62" firstPoint="61" secondPoint="6" lineColor="black"/>
+            <line typeLine="hair" id="63" firstPoint="56" secondPoint="61" lineColor="black"/>
+            <point type="normal" typeLine="hair" id="64" name="R" firstPoint="44" secondPoint="42" mx="-0.020777" lineColor="black" angle="0" my="0.352052" length="Line_P_A2"/>
+            <line typeLine="hair" id="65" firstPoint="45" secondPoint="56" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="67" name="tmp2" basePoint="54" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="#inch"/>
+            <point type="shoulder" typeLine="hair" id="68" name="a3rdbust" p2Line="54" pShoulder="56" mx="0.59633" lineColor="black" my="-1.48845" length="armpit_to_waist_side+#Sidedartwidth" p1Line="67"/>
+            <point type="endLine" typeLine="hair" id="69" name="b" basePoint="68" mx="0.132292" lineColor="black" angle="180" my="0.264583" length="Line_I_JBustguide"/>
+            <line typeLine="hair" id="70" firstPoint="56" secondPoint="68" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="71" name="c" firstPoint="56" secondPoint="68" mx="0.132292" lineColor="black" my="0.264583" length="3*#inch"/>
+            <point type="normal" typeLine="hair" id="72" name="A5" firstPoint="71" secondPoint="68" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#oneEight"/>
+            <line typeLine="hair" id="73" firstPoint="72" secondPoint="56" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="74" name="A9" basePoint="54" mx="0.950093" lineColor="black" angle="90" my="-0.120265" length="#Sidedartwidth/2"/>
+            <point type="endLine" typeLine="hair" id="75" name="A12" basePoint="54" mx="0.75767" lineColor="black" angle="270" my="-0.649432" length="#Sidedartwidth/2"/>
+            <line typeLine="hair" id="76" firstPoint="27" secondPoint="74" lineColor="black"/>
+            <line typeLine="hair" id="77" firstPoint="27" secondPoint="75" lineColor="black"/>
+            <point type="lineIntersect" id="78" name="e" p2Line1="71" p2Line2="27" p1Line1="68" p1Line2="75" mx="-1.83041" my="-0.112861"/>
+            <line typeLine="hair" id="79" firstPoint="78" secondPoint="72" lineColor="black"/>
+            <point type="lineIntersect" id="80" name="d" p2Line1="71" p2Line2="27" p1Line1="68" p1Line2="74" mx="-1.1707" my="-1.98924"/>
+            <point type="alongLine" typeLine="hair" id="81" name="A16" firstPoint="49" secondPoint="42" mx="-3.91579" lineColor="black" my="1.92643" length="Line_V_P/3"/>
+            <point type="alongLine" typeLine="hair" id="82" name="A17" firstPoint="49" secondPoint="41" mx="0.0470637" lineColor="black" my="-2.46255" length="Line_V_Q/3"/>
+            <point type="normal" typeLine="hair" id="83" name="A18" firstPoint="81" secondPoint="49" mx="-2.38178" lineColor="black" angle="0" my="-3.14433" length="#quarter"/>
+            <point type="normal" typeLine="hair" id="84" name="A19" firstPoint="82" secondPoint="49" mx="0.771459" lineColor="black" angle="180" my="-0.246751" length="#quarter"/>
+            <spline type="simple" point4="41" kAsm1="0.633221" kAsm2="1.62204" angle1="279.541" angle2="83.7825" id="85" kCurve="1" color="black" point1="49"/>
+            <spline type="simple" point4="49" kAsm1="1.50929" kAsm2="0.508178" angle1="96.2418" angle2="260.109" id="86" kCurve="1" color="black" point1="42"/>
+            <point type="lineIntersect" id="87" name="A20" p2Line1="27" p2Line2="12" p1Line1="22" p1Line2="13" mx="0.319542" my="-2.19132"/>
+            <point type="normal" typeLine="hair" id="88" name="f" firstPoint="87" secondPoint="22" mx="0.616812" lineColor="black" angle="180" my="-0.278336" length="#oneEight"/>
+            <point type="lineIntersect" id="89" name="A22" p2Line1="27" p2Line2="12" p1Line1="21" p1Line2="13" mx="-2.69556" my="-6.24334"/>
+            <spline type="simple" point4="27" kAsm1="1.092" kAsm2="0.61314" angle1="262.96" angle2="76.7863" id="90" kCurve="1" color="black" point1="22"/>
+            <point type="alongLine" typeLine="hair" id="91" name="g" firstPoint="12" secondPoint="13" mx="-0.331746" lineColor="black" my="0.109904" length="across_chest_f/2"/>
+            <point type="pointOfIntersection" id="92" name="h" firstPoint="91" secondPoint="68" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="93" name="i" basePoint="92" mx="0.132292" lineColor="black" angle="45" my="0.264583" length="#inch"/>
+            <point type="endLine" typeLine="hair" id="94" name="a1" basePoint="68" mx="-3.43157" lineColor="black" angle="180" my="0.342058" length="#inch/2"/>
+            <point type="normal" typeLine="hair" id="96" name="k" firstPoint="93" secondPoint="92" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#armholedart/2"/>
+            <point type="normal" typeLine="hair" id="97" name="j" firstPoint="93" secondPoint="92" mx="0.0120268" lineColor="black" angle="180" my="-1.15455" length="#armholedart/2"/>
+            <line typeLine="hair" id="98" firstPoint="97" secondPoint="27" lineColor="black"/>
+            <line typeLine="hair" id="99" firstPoint="96" secondPoint="27" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="101" name="l" basePoint="14" mx="0.132292" lineColor="black" angle="90+45" my="0.264583" length="#inch"/>
+            <point type="endLine" typeLine="hair" id="102" name="A21" basePoint="1" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="#inch/2"/>
+            <spline type="simple" point4="15" kAsm1="1.16349" kAsm2="1.10493" angle1="3.32386" angle2="261.824" id="103" kCurve="1" color="black" point1="102"/>
+            <spline type="simple" point4="68" kAsm1="2.23568" kAsm2="1.21177" angle1="237.407" angle2="181.375" id="104" kCurve="1" color="black" point1="20"/>
+            <point type="cutSpline" id="105" name="m" spline="104" color="black" mx="0.132292" my="0.264583" length="Spl_F_a3rdbust-(((armscye_circ/2)-#quarter)+#armholedart)"/>
+            <line typeLine="hair" id="108" firstPoint="15" secondPoint="105" lineColor="black"/>
+        </calculation>
+        <modeling/>
+        <details/>
+    </draw>
+</pattern>

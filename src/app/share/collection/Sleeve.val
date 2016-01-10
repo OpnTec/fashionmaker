@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Valentina pattern format.-->
+    <version>0.2.4</version>
+    <unit>mm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <gradation>
+        <heights h116="false" h176="false" h104="false" h164="false" h152="false" h92="false" h140="false" h98="false" h158="false" h146="false" h134="false" h194="true" all="false" h122="false" h182="false" h110="false" h170="false" h128="false" h188="false"/>
+        <sizes s34="false" s36="false" s22="false" s38="false" s24="false" s26="false" s28="false" s50="false" s52="false" s54="false" s40="false" s56="true" all="false" s42="false" s44="false" s30="false" s46="false" s48="false" s32="false"/>
+    </gradation>
+    <measurements>../../../../../build-Valentina-Desktop-Debug/src/app/valentina/bin/tables/standard/GOST_man_ru.vst</measurements>
+    <increments>
+        <increment name="#arm_scye_girth" description="Description" formula="810"/>
+    </increments>
+    <draw name="Sleeve">
+        <calculation>
+            <point type="single" x="9.26" y="10.58" name="A" id="1" mx="1.32292" my="2.64583"/>
+            <point type="endLine" typeLine="hair" name="A1" id="3" basePoint="1" lineColor="black" mx="1.32292" my="2.64583" angle="90" length="arm_shoulder_tip_to_wrist"/>
+            <point type="alongLine" typeLine="hair" name="A2" id="4" firstPoint="3" secondPoint="1" lineColor="black" mx="1.32292" my="2.64583" length="#arm_scye_girth/3-4"/>
+            <point type="normal" typeLine="hair" name="A3" id="5" firstPoint="4" secondPoint="3" lineColor="black" mx="1.32292" my="2.64583" angle="0" length="sqrt((#arm_scye_girth/2-0.5)^2-Line_A1_A2^2)"/>
+            <point type="alongLine" typeLine="hair" name="A4" id="6" firstPoint="5" secondPoint="4" lineColor="black" mx="1.32292" my="2.64583" length="Line_A2_A3*2"/>
+            <point type="normal" typeLine="hair" name="A5" id="7" firstPoint="1" secondPoint="4" lineColor="black" mx="1.32292" my="2.64583" angle="0" length="arm_wrist_circ/2+2"/>
+            <point type="alongLine" typeLine="hair" name="A6" id="8" firstPoint="7" secondPoint="1" lineColor="black" mx="1.32292" my="2.64583" length="Line_A_A5*2"/>
+            <line typeLine="hair" id="9" firstPoint="5" secondPoint="7" lineColor="black"/>
+            <line typeLine="hair" id="10" firstPoint="8" secondPoint="6" lineColor="black"/>
+            <line typeLine="hair" id="11" firstPoint="5" secondPoint="3" lineColor="black"/>
+            <line typeLine="hair" id="12" firstPoint="3" secondPoint="6" lineColor="black"/>
+            <point type="height" typeLine="hair" name="A7" id="19" basePoint="5" p2Line="6" lineColor="black" mx="1.32292" my="2.64583" p1Line="8"/>
+            <point type="height" typeLine="hair" name="A8" id="20" basePoint="3" p2Line="19" lineColor="black" mx="1.32292" my="2.64583" p1Line="5"/>
+            <point type="height" typeLine="hair" name="A9" id="21" basePoint="7" p2Line="19" lineColor="black" mx="1.32292" my="2.64583" p1Line="5"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="13" idObject="5" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="14" idObject="3" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="15" idObject="6" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="16" idObject="8" mx="1.32292" my="2.64583"/>
+            <point type="modeling" inUse="true" id="17" idObject="7" mx="1.32292" my="2.64583"/>
+        </modeling>
+        <details>
+            <detail closed="1" name="Detail" id="18" supplement="1" mx="0" width="10" my="0">
+                <node type="NodePoint" nodeType="Contour" idObject="13" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="14" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="15" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="16" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="17" mx="0" my="0"/>
+            </detail>
+        </details>
+    </draw>
+</pattern>

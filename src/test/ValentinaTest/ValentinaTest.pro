@@ -263,7 +263,16 @@ COLLECTION_FILES += \
     $${PWD}/../../app/share/collection/pantsМ1_52-176.val \
     $${PWD}/../../app/share/collection/pantsМ2_40-146.val \
     $${PWD}/../../app/share/collection/pantsМ7.val \
-    $${PWD}/../../app/share/collection/TShirt_test.val
+    $${PWD}/../../app/share/collection/TShirt_test.val \
+    $${PWD}/../../app/share/collection/TestDart.val \
+    $${PWD}/../../app/share/collection/patrón_blusa.val \
+    $${PWD}/../../app/share/collection/blusa.vit \
+    $${PWD}/../../app/share/collection/PajamaTopWrap2.val \
+    $${PWD}/../../app/share/collection/Susan.vit \
+    $${PWD}/../../app/share/collection/Moulage_0.5_armhole_neckline.val \
+    $${PWD}/../../app/share/collection/0.7_Armhole_adjustment_0.10.val
+    $${PWD}/../../app/share/collection/my_calculated_measurements_for_val.vit
+
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \

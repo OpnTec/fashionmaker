@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.2.4</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point type="single" x="1.34938" y="1.24354" id="1" name="A" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="A1" basePoint="1" mx="0.132292" lineColor="black" angle="0" my="0.264583" length="10"/>
+            <point type="endLine" typeLine="hair" id="3" name="A2" basePoint="1" mx="0.132292" lineColor="black" angle="270" my="0.264583" length="Line_A_A1"/>
+            <point type="pointOfIntersection" id="4" name="A3" firstPoint="2" secondPoint="3" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="5" firstPoint="3" secondPoint="4" lineColor="black"/>
+            <line typeLine="hair" id="6" firstPoint="2" secondPoint="4" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="18" name="A4" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="(Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="19" name="A5" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="2 *  (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="20" name="A6" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="3 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="21" name="A7" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="4 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="22" name="A8" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="5 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="23" name="A9" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="6 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="24" name="A10" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="7 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="25" name="A11" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="8 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="26" name="A12" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="9 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="27" name="A13" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="1 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="28" name="A14" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="2 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="29" name="A15" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="3 * 1 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="30" name="A16" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="4 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="31" name="A17" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="5 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="32" name="A18" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="6 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="33" name="A19" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="7 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="34" name="A20" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="8 * (Line_A_A1/10)"/>
+            <point type="alongLine" typeLine="none" id="35" name="A21" firstPoint="1" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" length="9 * (Line_A_A1/10)"/>
+            <point type="endLine" typeLine="hair" id="36" name="A22" basePoint="18" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="37" name="A23" basePoint="19" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="38" name="A24" basePoint="20" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="39" name="A25" basePoint="21" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="40" name="A26" basePoint="22" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="41" name="A27" basePoint="23" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="42" name="A28" basePoint="24" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="43" name="A29" basePoint="25" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="44" name="A30" basePoint="26" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="46" name="A31" basePoint="27" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="47" name="A32" basePoint="28" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="48" name="A33" basePoint="29" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="49" name="A34" basePoint="30" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="50" name="A35" basePoint="31" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="51" name="A36" basePoint="32" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="52" name="A37" basePoint="33" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="53" name="A38" basePoint="34" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A_A1"/>
+            <point type="endLine" typeLine="hair" id="54" name="A39" basePoint="35" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_A_A1"/>
+            <point type="pointOfIntersection" id="96" name="A40" firstPoint="18" secondPoint="27" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="97" name="A41" firstPoint="19" secondPoint="27" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="98" name="A42" firstPoint="19" secondPoint="28" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="99" name="A43" firstPoint="20" secondPoint="28" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="100" name="A44" firstPoint="20" secondPoint="29" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="101" name="A45" firstPoint="21" secondPoint="29" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="102" name="A46" firstPoint="21" secondPoint="30" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="103" name="A47" firstPoint="22" secondPoint="30" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="104" name="A48" firstPoint="22" secondPoint="31" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="105" name="A49" firstPoint="23" secondPoint="31" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="106" name="A50" firstPoint="23" secondPoint="32" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="107" name="A51" firstPoint="24" secondPoint="32" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="108" name="A52" firstPoint="24" secondPoint="33" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="109" name="A53" firstPoint="25" secondPoint="33" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="110" name="A54" firstPoint="25" secondPoint="34" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="111" name="A55" firstPoint="26" secondPoint="34" mx="0.132292" my="0.264583"/>
+            <point type="pointOfIntersection" id="112" name="A56" firstPoint="26" secondPoint="35" mx="0.132292" my="0.264583"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="false" id="7" idObject="1" mx="0.0264587" my="0.291041"/>
+            <point type="modeling" inUse="false" id="8" idObject="2" mx="-1.85208" my="0.264583"/>
+            <point type="modeling" inUse="false" id="9" idObject="4" mx="-2.03729" my="-1.71979"/>
+            <point type="modeling" inUse="false" id="10" idObject="3" mx="0.47625" my="-1.95792"/>
+            <point type="modeling" inUse="false" id="11" idObject="1" mx="0.0264587" my="0.291041"/>
+            <point type="modeling" inUse="false" id="13" idObject="1" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="14" idObject="2" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="15" idObject="4" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="16" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="17" idObject="1" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="55" idObject="1" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="56" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="57" idObject="36" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="58" idObject="37" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="59" idObject="19" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="60" idObject="20" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="61" idObject="38" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="62" idObject="39" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="63" idObject="21" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="64" idObject="22" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="65" idObject="40" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="66" idObject="41" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="67" idObject="23" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="68" idObject="24" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="69" idObject="42" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="70" idObject="43" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="71" idObject="25" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="72" idObject="26" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="73" idObject="44" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="74" idObject="4" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="75" idObject="54" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="76" idObject="35" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="77" idObject="34" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="78" idObject="53" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="79" idObject="52" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="80" idObject="33" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="81" idObject="32" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="82" idObject="51" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="83" idObject="50" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="84" idObject="31" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="85" idObject="30" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="86" idObject="49" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="87" idObject="48" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="88" idObject="30" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="89" idObject="29" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="90" idObject="48" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="91" idObject="47" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="92" idObject="28" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="93" idObject="27" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="94" idObject="46" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="113" idObject="1" mx="-1.33256" my="-0.427153"/>
+            <point type="modeling" inUse="false" id="114" idObject="18" mx="0.132292" my="-0.617041"/>
+            <point type="modeling" inUse="false" id="115" idObject="96" mx="-1.319" my="0.156075"/>
+            <point type="modeling" inUse="false" id="116" idObject="97" mx="0.159419" my="-0.617041"/>
+            <point type="modeling" inUse="false" id="117" idObject="98" mx="-1.27831" my="0.210329"/>
+            <point type="modeling" inUse="false" id="118" idObject="99" mx="0.308617" my="-0.657731"/>
+            <point type="modeling" inUse="false" id="119" idObject="100" mx="-1.19693" my="0.223893"/>
+            <point type="modeling" inUse="false" id="120" idObject="101" mx="0.349307" my="-0.562787"/>
+            <point type="modeling" inUse="false" id="121" idObject="104" mx="-1.27831" my="0.25102"/>
+            <point type="modeling" inUse="false" id="122" idObject="105" mx="0.227236" my="-0.671295"/>
+            <point type="modeling" inUse="false" id="123" idObject="106" mx="-1.53601" my="0.29171"/>
+            <point type="modeling" inUse="false" id="124" idObject="107" mx="0.389997" my="-0.589914"/>
+            <point type="modeling" inUse="false" id="125" idObject="108" mx="-1.54957" my="0.210329"/>
+            <point type="modeling" inUse="false" id="126" idObject="109" mx="0.335744" my="-0.657731"/>
+            <point type="modeling" inUse="false" id="127" idObject="110" mx="-1.30543" my="0.156075"/>
+            <point type="modeling" inUse="false" id="128" idObject="111" mx="0.159419" my="-0.359335"/>
+            <point type="modeling" inUse="false" id="129" idObject="112" mx="-1.22405" my="0.0475679"/>
+            <point type="modeling" inUse="false" id="130" idObject="54" mx="0.267926" my="-0.400026"/>
+            <point type="modeling" inUse="false" id="131" idObject="4" mx="0.200109" my="0.0882582"/>
+            <point type="modeling" inUse="false" id="132" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="133" idObject="1" mx="-1.34612" my="-0.440716"/>
+            <point type="modeling" inUse="true" id="134" idObject="1" mx="-1.13771" my="-1.00542"/>
+            <point type="modeling" inUse="true" id="135" idObject="18" mx="0.264584" my="-0.740834"/>
+            <point type="modeling" inUse="true" id="136" idObject="96" mx="-1.40229" my="0.132291"/>
+            <point type="modeling" inUse="true" id="137" idObject="97" mx="0.291042" my="-0.635"/>
+            <point type="modeling" inUse="true" id="138" idObject="98" mx="-1.32292" my="0.15875"/>
+            <point type="modeling" inUse="true" id="139" idObject="99" mx="0.291042" my="-0.820209"/>
+            <point type="modeling" inUse="true" id="140" idObject="100" mx="-1.34937" my="0.185208"/>
+            <point type="modeling" inUse="true" id="141" idObject="101" mx="0.370417" my="-0.767292"/>
+            <point type="modeling" inUse="true" id="142" idObject="102" mx="-1.29646" my="0.105833"/>
+            <point type="modeling" inUse="true" id="143" idObject="103" mx="0.343959" my="-0.661459"/>
+            <point type="modeling" inUse="true" id="144" idObject="104" mx="-1.40229" my="0.0793747"/>
+            <point type="modeling" inUse="true" id="145" idObject="105" mx="0.264584" my="-0.687917"/>
+            <point type="modeling" inUse="true" id="146" idObject="106" mx="-1.24354" my="0.132291"/>
+            <point type="modeling" inUse="true" id="147" idObject="107" mx="0.291042" my="-0.714375"/>
+            <point type="modeling" inUse="true" id="148" idObject="108" mx="-1.21708" my="0.264583"/>
+            <point type="modeling" inUse="true" id="149" idObject="109" mx="0.291042" my="-0.740834"/>
+            <point type="modeling" inUse="true" id="150" idObject="110" mx="-1.37583" my="0.185208"/>
+            <point type="modeling" inUse="true" id="151" idObject="111" mx="0.211667" my="-0.635"/>
+            <point type="modeling" inUse="true" id="152" idObject="112" mx="-1.79917" my="0.132291"/>
+            <point type="modeling" inUse="true" id="153" idObject="54" mx="0.211667" my="-0.502709"/>
+            <point type="modeling" inUse="true" id="154" idObject="4" mx="-0.264583" my="0.0793747"/>
+            <point type="modeling" inUse="true" id="155" idObject="3" mx="-1.48167" my="-1.24354"/>
+            <point type="modeling" inUse="true" id="156" idObject="1" mx="-1.13771" my="-0.9525"/>
+            <point type="modeling" inUse="false" id="158" idObject="1" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="159" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="160" idObject="36" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="161" idObject="37" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="162" idObject="19" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="163" idObject="20" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="164" idObject="38" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="165" idObject="39" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="166" idObject="21" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="167" idObject="22" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="168" idObject="40" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="169" idObject="41" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="170" idObject="23" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="171" idObject="24" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="172" idObject="42" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="173" idObject="43" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="174" idObject="25" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="175" idObject="26" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="176" idObject="44" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="177" idObject="4" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="178" idObject="2" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="179" idObject="1" mx="-0.85725" my="-1.21973"/>
+            <point type="modeling" inUse="false" id="180" idObject="3" mx="-0.828146" my="-1.51077"/>
+            <point type="modeling" inUse="false" id="181" idObject="36" mx="-0.973666" my="0.0608538"/>
+            <point type="modeling" inUse="false" id="182" idObject="18" mx="-0.769937" my="-1.30704"/>
+            <point type="modeling" inUse="false" id="183" idObject="19" mx="-0.682625" my="0.0608538"/>
+            <point type="modeling" inUse="false" id="184" idObject="37" mx="-0.915458" my="-1.24883"/>
+            <point type="modeling" inUse="false" id="185" idObject="38" mx="-0.944562" my="0.701145"/>
+            <point type="modeling" inUse="false" id="186" idObject="20" mx="-0.711729" my="-1.42346"/>
+            <point type="modeling" inUse="false" id="187" idObject="21" mx="-0.682625" my="0.089958"/>
+            <point type="modeling" inUse="false" id="188" idObject="39" mx="-0.944562" my="-1.91823"/>
+            <point type="modeling" inUse="false" id="189" idObject="40" mx="-0.915458" my="0.0317497"/>
+            <point type="modeling" inUse="false" id="190" idObject="22" mx="-0.769937" my="-1.48167"/>
+            <point type="modeling" inUse="false" id="191" idObject="23" mx="-0.65352" my="0.0608538"/>
+            <point type="modeling" inUse="false" id="192" idObject="41" mx="-0.944562" my="-1.39435"/>
+            <point type="modeling" inUse="false" id="193" idObject="42" mx="-0.944562" my="0.817562"/>
+            <point type="modeling" inUse="false" id="194" idObject="24" mx="-0.85725" my="-1.42346"/>
+            <point type="modeling" inUse="false" id="195" idObject="25" mx="-1.00277" my="0.119062"/>
+            <point type="modeling" inUse="false" id="196" idObject="43" mx="-0.973666" my="-2.06375"/>
+            <point type="modeling" inUse="false" id="197" idObject="44" mx="-1.06098" my="0.0608538"/>
+            <point type="modeling" inUse="false" id="198" idObject="26" mx="-0.711729" my="-1.42346"/>
+            <point type="modeling" inUse="false" id="199" idObject="2" mx="-0.740833" my="0.148166"/>
+            <point type="modeling" inUse="false" id="200" idObject="4" mx="-0.799041" my="-1.42346"/>
+            <point type="modeling" inUse="false" id="201" idObject="3" mx="-0.828145" my="-1.51077"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="157" name="Detail" supplement="0" mx="0" width="1" my="0">
+                <node type="NodePoint" nodeType="Contour" idObject="134" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="135" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="136" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="137" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="138" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="139" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="140" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="141" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="142" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="143" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="144" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="145" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="146" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="147" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="148" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="149" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="150" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="151" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="152" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="153" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="154" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="155" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="156" mx="0" my="0"/>
+            </detail>
+        </details>
+    </draw>
+</pattern>
