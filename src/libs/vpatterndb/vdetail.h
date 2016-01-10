@@ -82,6 +82,7 @@ public:
     QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;
 
     QPainterPath ContourPath(const VContainer *data) const;
+    QPainterPath SeamAllowancePath(const VContainer *data) const;
     QVector<VNodeDetail> listNodePoint()const;
 private:
     QSharedDataPointer<VDetailData> d;

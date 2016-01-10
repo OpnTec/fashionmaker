@@ -30,7 +30,7 @@
 #define VTOOLDETAIL_H
 
 #include "vabstracttool.h"
-#include <QGraphicsPathItem>
+#include "../vwidgets/vnobrushscalepathitem.h"
 
 class VMainGraphicsScene;
 class DialogTool;
@@ -38,7 +38,7 @@ class DialogTool;
 /**
  * @brief The VToolDetail class for working with detail.
  */
-class VToolDetail: public VAbstractTool, public QGraphicsPathItem
+class VToolDetail: public VAbstractTool, public VNoBrushScalePathItem
 {
     Q_OBJECT
 public:
@@ -110,6 +110,8 @@ private:
     /** @brief sceneDetails pointer to the scene. */
     VMainGraphicsScene *sceneDetails;
     QString            drawName;
+
+    VNoBrushScalePathItem *seamAllowance;
 
     void               RefreshGeometry ();
     template <typename Tool>

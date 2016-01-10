@@ -446,9 +446,7 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VDetail::ContourPath(const VContainer *data) const
 {
-    QVector<QPointF> points = ContourPoints(data);
-    QVector<QPointF> pointsEkv = SeamAllowancePoints(data);
-
+    const QVector<QPointF> points = ContourPoints(data);
     QPainterPath path;
 
     // contour
@@ -458,25 +456,33 @@ QPainterPath VDetail::ContourPath(const VContainer *data) const
         path.lineTo(points.at(i));
     }
     path.lineTo(points.at(0));
+    path.setFillRule(Qt::WindingFill);
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VDetail::SeamAllowancePath(const VContainer *data) const
+{
+    const QVector<QPointF> pointsEkv = SeamAllowancePoints(data);
+    QPainterPath ekv;
 
     // seam allowence
-    if (getSeamAllowance() == true)
+    if (getSeamAllowance())
     {
         if (not pointsEkv.isEmpty())
         {
-            QPainterPath ekv;
             ekv.moveTo(pointsEkv.at(0));
             for (qint32 i = 1; i < pointsEkv.count(); ++i)
             {
                 ekv.lineTo(pointsEkv.at(i));
             }
 
-            path.addPath(ekv);
-            path.setFillRule(Qt::WindingFill);
+            ekv.setFillRule(Qt::WindingFill);
         }
     }
 
-    return path;
+    return ekv;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

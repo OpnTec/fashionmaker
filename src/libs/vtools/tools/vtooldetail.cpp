@@ -28,9 +28,9 @@
 
 #include "vtooldetail.h"
 #include "nodeDetails/nodedetails.h"
-#include "../../vgeometry/varc.h"
-#include "../../vgeometry/vsplinepath.h"
-#include "../../vwidgets/vmaingraphicsscene.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 #include "../dialogs/tools/dialogtool.h"
 #include "../dialogs/tools/dialogdetail.h"
 #include "../undocommands/savedetailoptions.h"
@@ -75,7 +75,8 @@ const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
  */
 VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                          VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem *parent)
-    :VAbstractTool(doc, data, id), QGraphicsPathItem(parent), dialog(nullptr), sceneDetails(scene), drawName(drawName)
+    :VAbstractTool(doc, data, id), VNoBrushScalePathItem(parent), dialog(nullptr), sceneDetails(scene),
+      drawName(drawName), seamAllowance(new VNoBrushScalePathItem(this))
 {
     VDetail detail = data->GetDetail(id);
     for (int i = 0; i< detail.CountNode(); ++i)
@@ -102,6 +103,10 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     RefreshGeometry();
+
+    this->setBrush(QBrush(Qt::Dense7Pattern));
+    seamAllowance->setBrush(QBrush(Qt::FDiagPattern));
+
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);
 
@@ -404,7 +409,7 @@ void VToolDetail::mousePressEvent(QGraphicsSceneMouseEvent *event)
             event->accept();
         }
     }
-    QGraphicsPathItem::mousePressEvent(event);
+    VNoBrushScalePathItem::mousePressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -565,9 +570,23 @@ void VToolDetail::ShowVisualization(bool show)
 void VToolDetail::RefreshGeometry()
 {
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-    VDetail detail = VAbstractTool::data.GetDetail(id);
-    this->setPath(detail.ContourPath(this->getData()));
+
+    const VDetail detail = VAbstractTool::data.GetDetail(id);
+    QPainterPath mainPath = detail.ContourPath(this->getData());
+    this->setPath(mainPath);
     this->setPos(detail.getMx(), detail.getMy());
+
+    if (detail.getSeamAllowance())
+    {
+        mainPath.addPath(detail.SeamAllowancePath(this->getData()));
+        mainPath.setFillRule(Qt::OddEvenFill);
+        seamAllowance->setPath(mainPath);
+    }
+    else
+    {
+        seamAllowance->setPath(QPainterPath());
+    }
+
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 

@@ -8,7 +8,8 @@ SOURCES += \
     $$PWD/vcontrolpointspline.cpp \
     $$PWD/vgraphicssimpletextitem.cpp \
     $$PWD/vsimplepoint.cpp \
-    $$PWD/vabstractsimple.cpp
+    $$PWD/vabstractsimple.cpp \
+    $$PWD/vnobrushscalepathitem.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -20,4 +21,5 @@ HEADERS += \
     $$PWD/vcontrolpointspline.h \
     $$PWD/vgraphicssimpletextitem.h \
     $$PWD/vsimplepoint.h \
-    $$PWD/vabstractsimple.h
+    $$PWD/vabstractsimple.h \
+    $$PWD/vnobrushscalepathitem.h
