@@ -172,6 +172,33 @@ void TST_VAbstractDetail::PathRemoveLoop_data() const
     path.removeLast();
     res.removeLast();
     QTest::newRow("One loop, the second loop, unclosed a path (six unique points)") << path << res;
+
+    path.clear();
+    path << QPointF(20, 10);
+    path << QPointF(10, 10);
+    path << QPointF(20, 15);
+    path << QPointF(10, 20);
+    path << QPointF(20, 20);
+    path << QPointF(20, 10);
+    QTest::newRow("Correct closed a path, point on line (four unique points)") << path << path;
+
+    path.removeLast();
+    QTest::newRow("Corect unclosed a path, point on line (four unique points)") << path << path;
+
+    path.clear();
+    path << QPointF(20, 10);
+    path << QPointF(10, 10);
+    path << QPointF(0, 10);
+    path << QPointF(10, 15);
+    path << QPointF(0, 20);
+    path << QPointF(10, 20);
+    path << QPointF(20, 20);
+    path << QPointF(10, 15);
+    path << QPointF(20, 10);
+    QTest::newRow("Correct closed a path, point on line (six unique points)") << path << path;
+
+    path.removeLast();
+    QTest::newRow("Corect unclosed a path, point on line (six unique points)") << path << path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

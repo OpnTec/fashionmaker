@@ -338,7 +338,11 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
             intersect = line1.intersect(line2, &crosPoint);
             if (intersect == QLineF::BoundedIntersection && not (i == 0 && j+1 == count-1 && closed))
             { // Break, but not if intersects the first edge and the last edge in closed path
-                break;
+                if (line1.p1() != crosPoint && line1.p2() != crosPoint &&
+                    line2.p1() != crosPoint && line2.p2() != crosPoint)
+                {
+                    break;
+                }
             }
             intersect = QLineF::NoIntersection;
         }
