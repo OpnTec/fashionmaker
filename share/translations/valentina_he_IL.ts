@@ -23,13 +23,6 @@
     </message>
 </context>
 <context>
-    <name>AddUnionDetails</name>
-    <message>
-        <source>add union details</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>CommunityPage</name>
     <message>
         <source>Server</source>

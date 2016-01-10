@@ -26,7 +26,7 @@
     <name>AddUnionDetails</name>
     <message>
         <source>add union details</source>
-        <translation>add union details</translation>
+        <translation type="vanished">add union details</translation>
     </message>
 </context>
 <context>

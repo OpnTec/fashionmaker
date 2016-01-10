@@ -26,7 +26,7 @@
     <name>AddUnionDetails</name>
     <message>
         <source>add union details</source>
-        <translation>Verbindungsdetail hinzufügen</translation>
+        <translation type="vanished">Verbindungsdetail hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Gebaut auf %3 um %2 {1 ?}</translation>
+        <translation>Erstellt von %1 auf %2</translation>
     </message>
 </context>
 <context>
@@ -346,7 +346,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Gebaut auf %3 um %2 {1 ?}</translation>
+        <translation>Erstellt von %1 auf %2</translation>
     </message>
 </context>
 <context>
@@ -1225,7 +1225,7 @@
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
-        <translation type="unfinished"></translation>
+        <translation>Der erste Punkt kann nicht gleich dem letzten Punkt sein!</translation>
     </message>
 </context>
 <context>
@@ -3782,7 +3782,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sollen die Details wirklich vereinigt werden?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>

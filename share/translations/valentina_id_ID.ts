@@ -40,10 +40,6 @@
         <source>Add union details</source>
         <translation type="vanished">Tambah rincian himpunan</translation>
     </message>
-    <message>
-        <source>add union details</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>CommunityPage</name>

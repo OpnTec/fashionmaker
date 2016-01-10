@@ -26,7 +26,7 @@
     <name>AddUnionDetails</name>
     <message>
         <source>add union details</source>
-        <translation>Voeg een samengevoegd detail toe</translation>
+        <translation type="vanished">Voeg een samengevoegd detail toe</translation>
     </message>
 </context>
 <context>

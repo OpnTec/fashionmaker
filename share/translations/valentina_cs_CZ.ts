@@ -5,28 +5,21 @@
     <name>AddDet</name>
     <message>
         <source>add detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat detail</translation>
     </message>
 </context>
 <context>
     <name>AddPatternPiece</name>
     <message>
         <source>add pattern piece %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat díl střihu %1</translation>
     </message>
 </context>
 <context>
     <name>AddToCalc</name>
     <message>
         <source>add object</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>AddUnionDetails</name>
-    <message>
-        <source>add union details</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat předmět</translation>
     </message>
 </context>
 <context>

@@ -26,7 +26,7 @@
     <name>AddUnionDetails</name>
     <message>
         <source>add union details</source>
-        <translation>добавить объединение деталей</translation>
+        <translation type="vanished">добавить объединение деталей</translation>
     </message>
 </context>
 <context>
