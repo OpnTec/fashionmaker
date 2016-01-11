@@ -1093,6 +1093,7 @@ QStringList VAbstractPattern::ListPointExpressions() const
     {
         const QDomElement dom = list.at(i).toElement();
 
+        // Each tag can contains several attributes.
         try
         {
             expressions.append(GetParametrString(dom, AttrLength));
@@ -1131,6 +1132,15 @@ QStringList VAbstractPattern::ListPointExpressions() const
         try
         {
             expressions.append(GetParametrString(dom, AttrCRadius));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrRadius));
         }
         catch (VExceptionEmptyParameter &e)
         {
