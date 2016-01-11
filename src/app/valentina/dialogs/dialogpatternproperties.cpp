@@ -66,9 +66,9 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this,
             &DialogPatternProperties::Apply);
 
-    QPushButton *bCansel = ui->buttonBox->button(QDialogButtonBox::Cancel);
-    SCASSERT(bCansel != nullptr);
-    connect(bCansel, &QPushButton::clicked, this, &DialogPatternProperties::close);
+    QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
+    SCASSERT(bCancel != nullptr);
+    connect(bCancel, &QPushButton::clicked, this, &DialogPatternProperties::close);
 
     ui->tabWidget->setCurrentIndex(0);
     if (qApp->patternType() != MeasurementsType::Standard)

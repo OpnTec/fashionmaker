@@ -502,3 +502,31 @@ void DialogHistory::closeEvent(QCloseEvent *event)
     emit ShowHistoryTool(id, false);
     DialogTool::closeEvent(event);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogHistory::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+        RetranslateUi();
+    }
+
+    // remember to call base class implementation
+    QDialog::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogHistory::RetranslateUi()
+{
+    qint32 currentRow = cursorRow;
+    UpdateHistory();
+
+    QTableWidgetItem *item = ui->tableWidget->item(cursorRow, 0);
+    SCASSERT(item != nullptr);
+    item->setIcon(QIcon(""));
+
+    cursorRow = currentRow;
+    cellClicked(cursorRow, 0);
+}

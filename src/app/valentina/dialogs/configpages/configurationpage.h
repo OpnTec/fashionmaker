@@ -30,12 +30,14 @@
 #define CONFIGURATIONPAGE_H
 
 #include <QObject>
+#include <QPlainTextEdit>
 #include <QWidget>
 
 class QCheckBox;
 class QSpinBox;
 class QComboBox;
 class QGroupBox;
+class QLabel;
 
 class ConfigurationPage : public QWidget
 {
@@ -45,8 +47,11 @@ public:
     void      Apply();
 public slots:
     void      LangChanged();
+    void      SystemChanged();
     void      UnitChanged();
     void      LabelLangChanged();
+protected:
+    virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(ConfigurationPage)
     QCheckBox *autoSaveCheck;
@@ -56,18 +61,44 @@ private:
     QComboBox *unitCombo;
     QCheckBox *osOptionCheck;
     bool      langChanged;
+    bool      systemChanged;
     bool      unitChanged;
     bool      labelLangChanged;
     QCheckBox *sendReportCheck;
     QCheckBox *askPointDeletionCheck;
     QCheckBox *toolBarStyleCheck;
 
+    QGroupBox *saveGroup;
+    QLabel    *intervalLabel;
+    QGroupBox *langGroup;
+    QLabel    *guiLabel;
+    QLabel    *separatorLabel;
+    QLabel    *unitLabel;
+    QLabel    *languageLabel;
+
+    QGroupBox *pmSystemGroup;
+    QLabel    *systemLabel;
+    QComboBox *systemCombo;
+    QLabel    *systemAuthorLabel;
+    QLabel    *systemBookLabel;
+    QLabel    *systemAuthorValueLabel;
+    QPlainTextEdit *systemBookValueLabel;
+
+    QGroupBox *sendGroup;
+    QLabel    *description;
+
+    QGroupBox *drawGroup;
+    QGroupBox *toolBarGroup;
+
     QGroupBox *SaveGroup();
     QGroupBox *LangGroup();
+    QGroupBox *PMSystemGroup();
     QGroupBox *SendGroup();
     QGroupBox *DrawGroup();
     QGroupBox *ToolBarGroup();
     void      SetLabelComboBox(const QStringList &list);
+
+    void      RetranslateUi();
 };
 
 #endif // CONFIGURATIONPAGE_H

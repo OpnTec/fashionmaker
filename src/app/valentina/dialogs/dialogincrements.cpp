@@ -428,16 +428,22 @@ void DialogIncrements::EnableDetails(bool enabled)
  */
 void DialogIncrements::FullUpdateFromFile()
 {
-    FillIncrements();
-
     ui->tableWidgetLines->clearContents();
-    FillLengthsLines();
-
     ui->tableWidgetSplines->clearContents();
-    FillLengthsCurves();
-
     ui->tableWidgetArcs->clearContents();
+    ui->tableWidgetAnglesArcs->clearContents();
+    ui->tableWidgetAnglesCurves->clearContents();
+    ui->tableWidgetLinesAngles->clearContents();
+    ui->tableWidgetRadiusesArcs->clearContents();
+
+    FillIncrements();
+    FillLengthsLines();
+    FillLengthLinesAngles();
+    FillLengthsCurves();
     FillLengthArcs();
+    FillRadiusesArcs();
+    FillAnglesArcs();
+    FillAnglesCurves();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -717,6 +723,19 @@ void DialogIncrements::closeEvent(QCloseEvent *event)
 
     emit DialogClosed(QDialog::Accepted);
     event->accept();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        ui->retranslateUi(this);
+        FullUpdateFromFile();
+    }
+    // remember to call base class implementation
+   QWidget::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

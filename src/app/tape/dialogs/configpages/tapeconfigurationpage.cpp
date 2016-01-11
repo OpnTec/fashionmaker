@@ -336,7 +336,7 @@ void TapeConfigurationPage::RetranslateUi()
     langGroup->setTitle(tr("Language"));
     guiLabel->setText(tr("GUI language:"));
     separatorLabel->setText(tr("Decimal separator parts:"));
-    osOptionCheck = new QCheckBox(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
+    osOptionCheck->setText(tr("With OS options (%1)").arg(QLocale::system().decimalPoint().toLatin1()));
 
     pmSystemGroup->setTitle(tr("Pattern making system"));
     systemLabel->setText(tr("Pattern making system:"));

@@ -42,7 +42,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 PatternPage::PatternPage(QWidget *parent):
-    QWidget(parent), userName(nullptr), graphOutputCheck(nullptr), undoCount(nullptr)
+    QWidget(parent),
+    userGroup(nullptr),
+    userName(nullptr),
+    userNameLabel(nullptr),
+    graphOutputGroup(nullptr),
+    graphOutputCheck(nullptr),
+    undoGroup(nullptr),
+    undoCount(nullptr),
+    countStepsLabel(nullptr)
 {
     QGroupBox *userGroup = UserGroup();
     QGroupBox *graphOutputGroup = GraphOutputGroup();
@@ -74,9 +82,22 @@ void PatternPage::Apply()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void PatternPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        RetranslateUi();
+    }
+
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QGroupBox *PatternPage::UserGroup()
 {
-    QGroupBox *userGroup = new QGroupBox(tr("User"));
+    userGroup = new QGroupBox(tr("User"));
 
     userName = new QLineEdit;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
@@ -85,8 +106,9 @@ QGroupBox *PatternPage::UserGroup()
     userName->setText(qApp->ValentinaSettings()->GetUser());
 
     QFormLayout *nameLayout = new QFormLayout;
+    userNameLabel = new QLabel(tr("User name:"));
     nameLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
-    nameLayout->addRow(tr("User name:"), userName);
+    nameLayout->addRow(userNameLabel, userName);
 
     QVBoxLayout *userLayout = new QVBoxLayout;
     userLayout->addLayout(nameLayout);
@@ -97,7 +119,7 @@ QGroupBox *PatternPage::UserGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *PatternPage::GraphOutputGroup()
 {
-    QGroupBox *graphOutputGroup = new QGroupBox(tr("Graphical output"));
+    graphOutputGroup = new QGroupBox(tr("Graphical output"));
 
     graphOutputCheck = new QCheckBox(tr("Use antialiasing"));
     graphOutputCheck->setChecked(qApp->ValentinaSettings()->GetGraphicalOutput());
@@ -114,17 +136,29 @@ QGroupBox *PatternPage::GraphOutputGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *PatternPage::UndoGroup()
 {
-    QGroupBox *undoGroup = new QGroupBox(tr("Undo"));
+    undoGroup = new QGroupBox(tr("Undo"));
     undoCount = new QSpinBox;
     undoCount->setMinimum(0);
     undoCount->setValue(qApp->ValentinaSettings()->GetUndoCount());
 
     QFormLayout *countLayout = new QFormLayout;
+    countStepsLabel = new QLabel(tr("Count steps (0 - no limit):"));
     countLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
-    countLayout->addRow(tr("Count steps (0 - no limit):"), undoCount);
+    countLayout->addRow(countStepsLabel, undoCount);
 
     QVBoxLayout *undoLayout = new QVBoxLayout;
     undoLayout->addLayout(countLayout);
     undoGroup->setLayout(undoLayout);
     return undoGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PatternPage::RetranslateUi()
+{
+    userGroup->setTitle(tr("User"));
+    userNameLabel->setText(tr("User name:"));
+    graphOutputGroup->setTitle(tr("Graphical output"));
+    graphOutputCheck->setText(tr("Use antialiasing"));
+    undoGroup->setTitle(tr("Undo"));
+    countStepsLabel->setText(tr("Count steps (0 - no limit):"));
 }

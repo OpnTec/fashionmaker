@@ -59,7 +59,7 @@ signals:
 
 protected:
     virtual void         closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
-
+    virtual void         changeEvent ( QEvent * event) Q_DECL_OVERRIDE;
 private slots:
     void ShowIncrementDetails();
     void AddIncrement();

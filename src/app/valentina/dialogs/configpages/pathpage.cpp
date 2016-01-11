@@ -48,7 +48,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 PathPage::PathPage(QWidget *parent)
-    : QWidget(parent), defaultButton(nullptr), editButton(nullptr), pathTable(nullptr)
+    : QWidget(parent), defaultButton(nullptr), editButton(nullptr), pathTable(nullptr), pathGroup(nullptr)
 {
     QGroupBox *pathGroup = PathGroup();
     SCASSERT(pathGroup != nullptr);
@@ -149,9 +149,22 @@ void PathPage::EditPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void PathPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        RetranslateUi();
+    }
+
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QGroupBox *PathPage::PathGroup()
 {
-    QGroupBox *pathGroup = new QGroupBox(tr("Path that use Valentina"));
+    pathGroup = new QGroupBox(tr("Path that use Valentina"));
     InitTable();
 
     defaultButton = new QPushButton(tr("Default"));
@@ -231,4 +244,21 @@ void PathPage::InitTable()
     pathTable->horizontalHeader()->setStretchLastSection(true);
 
     connect(pathTable, &QTableWidget::itemSelectionChanged, this, &PathPage::TableActivated);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PathPage::RetranslateUi()
+{
+    pathGroup->setTitle(tr("Path that use Valentina"));
+    defaultButton->setText(tr("Default"));
+    editButton->setText(tr("Edit"));
+
+    const QStringList tableHeader = QStringList() << tr("Type") << tr("Path");
+    pathTable->setHorizontalHeaderLabels(tableHeader);
+
+    pathTable->item(0, 0)->setText(tr("Individual measurements"));
+    pathTable->item(1, 0)->setText(tr("Standard measurements"));
+    pathTable->item(2, 0)->setText(tr("Patterns"));
+    pathTable->item(3, 0)->setText(tr("Layout"));
+    pathTable->item(4, 0)->setText(tr("Templates"));
 }

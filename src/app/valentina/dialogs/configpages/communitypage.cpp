@@ -38,9 +38,30 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 CommunityPage::CommunityPage(QWidget *parent):
-    QWidget(parent), server(nullptr), secureComm(nullptr), useProxy(nullptr), proxyAddress(nullptr),
-    proxyPort(nullptr), proxyUser(nullptr), proxyPass(nullptr), username(nullptr), savePassword(nullptr),
-    userpassword(nullptr)
+    QWidget(parent),
+    serverGroup(nullptr),
+    server(nullptr),
+    secureComm(nullptr),
+    serverNameLabel(nullptr),
+    secureConnectionLabel(nullptr),
+    proxyGroup(nullptr),
+    useProxy(nullptr),
+    proxyAddress(nullptr),
+    proxyPort(nullptr),
+    proxyUser(nullptr),
+    proxyPass(nullptr),
+    useProxyLabel(nullptr),
+    proxyAddressLabel(nullptr),
+    proxyPortLabel(nullptr),
+    proxyUserLabel(nullptr),
+    proxyPassLabel(nullptr),
+    userGroup(nullptr),
+    username(nullptr),
+    savePassword(nullptr),
+    userpassword(nullptr),
+    usernameLabel(nullptr),
+    savePasswordLabel(nullptr),
+    userpasswordLabel(nullptr)
 {
     QGroupBox *serverGroup = ServerGroup();
     QGroupBox *proxyGroup = ProxyGroup();
@@ -100,55 +121,75 @@ void CommunityPage::PasswordCheckChanged()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *CommunityPage::ServerGroup()
 {
-    QGroupBox *ServerGroup = new QGroupBox(tr("Server"));
+    serverGroup = new QGroupBox(tr("Server"));
     QFormLayout *serverLayout = new QFormLayout;
     serverLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
 
-    CommunityPage::add_lineedit(&this->server, serverLayout, qApp->ValentinaSettings()->GetServer(), tr("Server name/IP:"));
+    serverNameLabel = new QLabel(tr("Server name/IP:"));
+    secureConnectionLabel = new QLabel(tr("Secure connection"));
 
-    CommunityPage::add_checkbox(&this->secureComm, serverLayout, qApp->ValentinaSettings()->GetServerSecure(),
-                                tr("Secure connection"));
+    CommunityPage::AddLineedit(&this->server, serverLayout, qApp->ValentinaSettings()->GetServer(), serverNameLabel);
 
-    ServerGroup->setLayout(serverLayout);
-    return ServerGroup;
+    CommunityPage::AddCheckbox(&this->secureComm, serverLayout, qApp->ValentinaSettings()->GetServerSecure(),
+                                secureConnectionLabel);
+
+    serverGroup->setLayout(serverLayout);
+    return serverGroup;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void CommunityPage::add_checkbox(QCheckBox** thebox, QFormLayout *layout, bool checked, QString label)
+void CommunityPage::AddCheckbox(QCheckBox** thebox, QFormLayout *layout, bool checked, QLabel *label)
 {
-    QLabel *labelbox = new QLabel(label);
     (*thebox)= new QCheckBox;
     (*thebox)->setChecked(checked);
-    layout->addRow(labelbox, *thebox);
+    layout->addRow(label, *thebox);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void CommunityPage::add_lineedit(QLineEdit** theline, QFormLayout *layout, QString value, QString label)
+void CommunityPage::AddLineedit(QLineEdit** theline, QFormLayout *layout, QString value, QLabel *label)
 {
-    QLabel *labelbox = new QLabel(label);
     (*theline)= new QLineEdit;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     (*theline)->setClearButtonEnabled(true);
 #endif
     (*theline)->setText(value);
-    layout->addRow(labelbox, *theline);
+    layout->addRow(label, *theline);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void CommunityPage::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        // retranslate designer form (single inheritance approach)
+        RetranslateUi();
+    }
+
+    // remember to call base class implementation
+    QWidget::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *CommunityPage::ProxyGroup()
 {
-    QGroupBox *proxyGroup = new QGroupBox(tr("Proxy settings"));
+    proxyGroup = new QGroupBox(tr("Proxy settings"));
 
     QFormLayout *proxyLayout = new QFormLayout;
     proxyLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
 
+    useProxyLabel     = new QLabel(tr("Use Proxy"));
+    proxyAddressLabel = new QLabel(tr("Proxy address:"));
+    proxyPortLabel    = new QLabel(tr("Proxy port:"));
+    proxyUserLabel    = new QLabel(tr("Proxy user:"));
+    proxyPassLabel    = new QLabel(tr("Proxy pass:"));
+
     const VSettings *settings = qApp->ValentinaSettings();
-    CommunityPage::add_checkbox(&this->useProxy, proxyLayout, settings->GetProxy(), tr("Use Proxy"));
-    CommunityPage::add_lineedit(&this->proxyAddress, proxyLayout, settings->GetProxyAddress(),
-                                tr("Proxy address:"));
-    CommunityPage::add_lineedit(&this->proxyPort, proxyLayout, settings->GetProxyPort(), tr("Proxy port:"));
-    CommunityPage::add_lineedit(&this->proxyUser, proxyLayout, settings->GetProxyUser(), tr("Proxy user:"));
-    CommunityPage::add_lineedit(&this->proxyPass, proxyLayout, settings->GetProxyPass(), tr("Proxy pass:"));
+    CommunityPage::AddCheckbox(&this->useProxy, proxyLayout, settings->GetProxy(), useProxyLabel);
+    CommunityPage::AddLineedit(&this->proxyAddress, proxyLayout, settings->GetProxyAddress(),
+                                proxyAddressLabel);
+    CommunityPage::AddLineedit(&this->proxyPort, proxyLayout, settings->GetProxyPort(), proxyPortLabel);
+    CommunityPage::AddLineedit(&this->proxyUser, proxyLayout, settings->GetProxyUser(), proxyUserLabel);
+    CommunityPage::AddLineedit(&this->proxyPass, proxyLayout, settings->GetProxyPass(), proxyPassLabel);
     connect(this->useProxy, &QCheckBox::stateChanged, this, &CommunityPage::ProxyCheckChanged);
     this->ProxyCheckChanged();
 
@@ -160,14 +201,18 @@ QGroupBox *CommunityPage::ProxyGroup()
 //---------------------------------------------------------------------------------------------------------------------
 QGroupBox *CommunityPage::UserGroup()
 {
-    QGroupBox *userGroup = new QGroupBox(tr("User settings"));
+    userGroup = new QGroupBox(tr("User settings"));
     QFormLayout *userLayout = new QFormLayout;
     userLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
 
+    usernameLabel     = new QLabel(tr("User Name:"));
+    savePasswordLabel = new QLabel(tr("Save password"));
+    userpasswordLabel = new QLabel(tr("Password:"));
+
     const VSettings *settings = qApp->ValentinaSettings();
-    CommunityPage::add_lineedit(&this->username, userLayout, settings->GetUsername(), tr("User Name:"));
-    CommunityPage::add_checkbox(&this->savePassword, userLayout, settings->GetSavePassword(), tr("Save password"));
-    CommunityPage::add_lineedit(&this->userpassword, userLayout, settings->GetUserPassword(), tr("Password:"));
+    CommunityPage::AddLineedit(&this->username, userLayout, settings->GetUsername(), usernameLabel);
+    CommunityPage::AddCheckbox(&this->savePassword, userLayout, settings->GetSavePassword(), savePasswordLabel);
+    CommunityPage::AddLineedit(&this->userpassword, userLayout, settings->GetUserPassword(), userpasswordLabel);
 
     connect(this->savePassword, &QCheckBox::stateChanged, this, &CommunityPage::PasswordCheckChanged);
     this->PasswordCheckChanged();
@@ -175,4 +220,24 @@ QGroupBox *CommunityPage::UserGroup()
     userGroup->setLayout(userLayout);
 
     return userGroup;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void CommunityPage::RetranslateUi()
+{
+    serverGroup->setTitle(tr("Server"));
+    serverNameLabel->setText(tr("Server name/IP:"));
+    secureConnectionLabel->setText(tr("Secure connection"));
+
+    proxyGroup->setTitle(tr("Proxy settings"));
+    useProxyLabel->setText(tr("Use Proxy"));
+    proxyAddressLabel->setText(tr("Proxy address:"));
+    proxyPortLabel->setText(tr("Proxy port:"));
+    proxyUserLabel->setText(tr("Proxy user:"));
+    proxyPassLabel->setText(tr("Proxy pass:"));
+
+    userGroup->setTitle(tr("User settings"));
+    usernameLabel->setText(tr("User Name:"));
+    savePasswordLabel->setText(tr("Save password"));
+    userpasswordLabel->setText(tr("Password:"));
 }

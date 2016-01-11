@@ -158,6 +158,7 @@ signals:
 protected:
     virtual void       keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
     virtual void       showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual void       changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void       closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void       customEvent(QEvent * event) Q_DECL_OVERRIDE;
     virtual void       CleanLayout() Q_DECL_OVERRIDE;
@@ -214,6 +215,7 @@ private:
 
     /** @brief comboBoxDraws comboc who show name of pattern peaces. */
     QComboBox          *comboBoxDraws;
+    QLabel             *patternPieceLabel;
 
     /** @brief mode keep current draw mode. */
     Draw               mode;

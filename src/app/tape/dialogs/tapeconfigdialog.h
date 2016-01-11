@@ -57,7 +57,7 @@ private:
     TapeConfigurationPage *configurationPage;
     TapePathPage          *pathPage;
     QPushButton           *applyButton;
-    QPushButton           *canselButton;
+    QPushButton           *cancelButton;
     QPushButton           *okButton;
     bool                  isInitialized;
 
