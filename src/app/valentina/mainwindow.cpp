@@ -1127,7 +1127,7 @@ void MainWindow::changeEvent(QEvent *event)
         ui->retranslateUi(this);
         undoAction->setText(tr("&Undo"));
         redoAction->setText(tr("&Redo"));
-        helpLabel->setText(QObject::tr("Create new pattern piece to start working."));
+        helpLabel->setText(QObject::tr("Changes applied."));
         patternPieceLabel->setText(tr("Pattern Piece: "));
         UpdateWindowTitle();
     }
