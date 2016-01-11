@@ -520,5 +520,13 @@ void DialogHistory::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::RetranslateUi()
 {
+    qint32 currentRow = cursorRow;
     UpdateHistory();
+
+    QTableWidgetItem *item = ui->tableWidget->item(cursorRow, 0);
+    SCASSERT(item != nullptr);
+    item->setIcon(QIcon(""));
+
+    cursorRow = currentRow;
+    cellClicked(cursorRow, 0);
 }
