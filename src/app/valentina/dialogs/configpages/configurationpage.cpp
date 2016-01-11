@@ -114,18 +114,17 @@ void ConfigurationPage::Apply()
     settings->SetConfirmItemDelete(askPointDeletionCheck->isChecked());
     settings->SetToolBarStyle(toolBarStyleCheck->isChecked());
 
-    if (langChanged)
+    if (langChanged || systemChanged)
     {
         const QString locale = qvariant_cast<QString>(langCombo->itemData(langCombo->currentIndex()));
         settings->SetLocale(locale);
         langChanged = false;
-        qApp->LoadTranslation(locale);
-    }
-    if (systemChanged)
-    {
+
         const QString code = qvariant_cast<QString>(systemCombo->itemData(systemCombo->currentIndex()));
         settings->SetPMSystemCode(code);
         systemChanged = false;
+
+        qApp->LoadTranslation(locale);
     }
     if (this->unitChanged)
     {
