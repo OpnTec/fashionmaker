@@ -17,7 +17,11 @@ QT       += core gui widgets xml svg printsupport xmlpatterns
 TEMPLATE = app
 
 # Name of binary file
-TARGET = valentina
+macx{
+    TARGET = Valentina
+} else {
+    TARGET = valentina
+}
 
 # Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target
