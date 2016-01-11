@@ -151,7 +151,7 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation>Die Änderung der Spracheinstellung wird erst beim nächsten Programmstart wirksam.</translation>
+        <translation type="vanished">Die Änderung der Spracheinstellung wird erst beim nächsten Programmstart wirksam.</translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
@@ -252,6 +252,22 @@
     <message>
         <source>Label language:</source>
         <translation>Sprache der Bezeichnung:</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished">Schnittmuster-System</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished">Schnittmuster-System:</translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished">Autor:</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished">Buch:</translation>
     </message>
 </context>
 <context>
@@ -3172,7 +3188,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation>Textbezeichnung</translation>
+        <translation type="vanished">Textbezeichnung</translation>
     </message>
     <message>
         <source>Destination folder</source>
@@ -5097,6 +5113,10 @@ Punkt schneidet Kreisbogen und Achse</translation>
         <source>move detail</source>
         <translation>Detail bewegen</translation>
     </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -5462,7 +5482,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation>yyyy-MM-dd</translation>
+        <translation type="vanished">yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Email:</source>

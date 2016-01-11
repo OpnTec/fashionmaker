@@ -151,7 +151,7 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation>L&apos;impostazione della lingua dell&apos;interfaccia utente è stata aggiornata e verrà utilizzata con il prossimo avvio </translation>
+        <translation type="vanished">L&apos;impostazione della lingua dell&apos;interfaccia utente è stata aggiornata e verrà utilizzata con il prossimo avvio </translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
@@ -252,6 +252,22 @@
     <message>
         <source>Label language:</source>
         <translation>Lingua etichetta</translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished">Sistema di modellistica</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished">Sistema di modellistica</translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished">Autore:</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished">Libro:</translation>
     </message>
 </context>
 <context>
@@ -3190,7 +3206,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation>EtichettaTesto</translation>
+        <translation type="vanished">EtichettaTesto</translation>
     </message>
     <message>
         <source>Destination folder</source>
@@ -5113,6 +5129,10 @@ Vuoi salvare i cambiamenti?</translation>
         <source>move detail</source>
         <translation>muovi dettaglio</translation>
     </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -5478,7 +5498,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation>aaaa-MM-gg</translation>
+        <translation type="vanished">aaaa-MM-gg</translation>
     </message>
     <message>
         <source>Email:</source>

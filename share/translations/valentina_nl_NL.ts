@@ -151,7 +151,7 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation>De taal van de setup gebruikers interface is opgewaardeerd en zal gebruikt worden bij de volgende start</translation>
+        <translation type="vanished">De taal van de setup gebruikers interface is opgewaardeerd en zal gebruikt worden bij de volgende start</translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
@@ -252,6 +252,22 @@
     <message>
         <source>Label language:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished">Patroon teken systeem</translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished">Auteursnaam:</translation>
+    </message>
+    <message>
+        <source>Book:</source>
+        <translation type="unfinished">Boek:</translation>
     </message>
 </context>
 <context>
@@ -3176,7 +3192,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation>TekstLabel</translation>
+        <translation type="vanished">TekstLabel</translation>
     </message>
     <message>
         <source>Destination folder</source>
@@ -5098,6 +5114,10 @@ Do you want to save your changes?</source>
         <source>move detail</source>
         <translation>Verplaats detail</translation>
     </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -5463,7 +5483,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation>yyyy-MM-dd</translation>
+        <translation type="vanished">yyyy-MM-dd</translation>
     </message>
     <message>
         <source>Email:</source>

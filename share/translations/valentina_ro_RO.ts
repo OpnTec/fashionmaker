@@ -151,7 +151,7 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation>Setare limbaj interfață de utilizator actualizată și va fi folosită la următoarul Start</translation>
+        <translation type="vanished">Setare limbaj interfață de utilizator actualizată și va fi folosită la următoarul Start</translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
@@ -251,6 +251,22 @@
     </message>
     <message>
         <source>Label language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Book:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3091,10 +3107,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Destination folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4958,6 +4970,10 @@ Do you want to save your changes?</source>
         <source>move detail</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -5315,10 +5331,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Birth date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

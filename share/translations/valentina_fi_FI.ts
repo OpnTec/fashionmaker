@@ -144,7 +144,7 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation>Asetusten käyttöliittymän kieli päivitetty. Päivitys otetaan käyttöön uudelleen käynnistyksen jälkeen.</translation>
+        <translation type="vanished">Asetusten käyttöliittymän kieli päivitetty. Päivitys otetaan käyttöön uudelleen käynnistyksen jälkeen.</translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
@@ -244,6 +244,22 @@
     </message>
     <message>
         <source>Label language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern making system:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Book:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3104,10 +3120,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Destination folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4980,6 +4992,10 @@ Haluatko tallentaa muutokset?</translation>
         <source>move detail</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Changes applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -5337,10 +5353,6 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Birth date:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
