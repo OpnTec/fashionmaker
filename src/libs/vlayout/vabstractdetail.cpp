@@ -340,7 +340,7 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
             { // Break, but not if intersects the first edge and the last edge in closed path
                 if (line1.p1() != crosPoint && line1.p2() != crosPoint &&
                     line2.p1() != crosPoint && line2.p2() != crosPoint)
-                {
+                { // Break, but not if loop creates crosPoint when it is first or last point of lines
                     break;
                 }
             }

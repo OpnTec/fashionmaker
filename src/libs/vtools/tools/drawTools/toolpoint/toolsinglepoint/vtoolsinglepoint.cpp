@@ -108,6 +108,7 @@ void VToolSinglePoint::setName(const QString &name)
 void VToolSinglePoint::SetEnabled(bool enabled)
 {
     SetToolEnabled(this, enabled);
+    SetToolEnabled(lineName, enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
