@@ -169,6 +169,7 @@ void DialogHistory::FillTable()
                 QTableWidgetItem *item = new QTableWidgetItem(QString());
                 item->setTextAlignment(Qt::AlignHCenter);
                 item->setData(Qt::UserRole, tool.getId());
+                item->setFlags(item->flags() ^ Qt::ItemIsEditable);
                 ui->tableWidget->setItem(currentRow, 0, item);
             }
 
