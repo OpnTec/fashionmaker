@@ -255,19 +255,19 @@
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished">Система создания выроек</translation>
+        <translation>Система создания выроек</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished">Система создания выкроек</translation>
+        <translation>Система создания выкроек:</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished">Автор:</translation>
+        <translation>Автор:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished">Книга:</translation>
+        <translation>Книга:</translation>
     </message>
 </context>
 <context>
@@ -5130,7 +5130,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменения применены.</translation>
     </message>
 </context>
 <context>

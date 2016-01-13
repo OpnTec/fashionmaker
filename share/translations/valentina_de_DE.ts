@@ -255,19 +255,19 @@
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished">Schnittmuster-System</translation>
+        <translation>Schnittmuster-System</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished">Schnittmuster-System:</translation>
+        <translation>Schnittmuster-System:</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished">Autor:</translation>
+        <translation>Autor:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished">Buch:</translation>
+        <translation>Buch:</translation>
     </message>
 </context>
 <context>

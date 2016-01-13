@@ -103,7 +103,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="226"/>
         <source>Height: Hip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Высота: бедро</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="227"/>
@@ -175,7 +175,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="254"/>
         <source>Height: Ankle High</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Высота: щиколотка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="255"/>
@@ -193,13 +193,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="261"/>
         <source>Height: Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Высота: лодыжка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="262"/>
         <source>Vertical distance from point where the front leg meets the foot to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальное расстояние от точки переда ноги до уровня пола.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="266"/>

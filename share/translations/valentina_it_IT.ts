@@ -255,19 +255,19 @@
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished">Sistema di modellistica</translation>
+        <translation>Sistema di modellistica</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished">Sistema di modellistica</translation>
+        <translation>Sistema di modellistica</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished">Autore:</translation>
+        <translation>Autore:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished">Libro:</translation>
+        <translation>Libro:</translation>
     </message>
 </context>
 <context>
@@ -429,7 +429,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -552,7 +552,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -663,7 +663,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -766,7 +766,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -869,7 +869,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -952,7 +952,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1027,7 +1027,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1102,7 +1102,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1431,7 +1431,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1808,7 +1808,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
 </context>
 <context>
@@ -2202,7 +2202,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2507,7 +2507,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2851,7 +2851,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2938,7 +2938,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3143,7 +3143,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3360,7 +3360,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula magica</translation>
     </message>
     <message>
         <source>Value</source>

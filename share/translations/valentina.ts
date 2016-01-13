@@ -255,19 +255,19 @@
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished">Pattern making system</translation>
+        <translation>Pattern making system</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished">Pattern making system:</translation>
+        <translation>Pattern making system:</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished">Author:</translation>
+        <translation>Author:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished">Book:</translation>
+        <translation>Book:</translation>
     </message>
 </context>
 <context>
@@ -5130,7 +5130,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Changes applied.</translation>
     </message>
 </context>
 <context>

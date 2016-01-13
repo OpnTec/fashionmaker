@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished">Patroon teken systeem</translation>
+        <translation>Patroon teken systeem</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
@@ -263,11 +263,11 @@
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished">Auteursnaam:</translation>
+        <translation>Auteursnaam:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished">Boek:</translation>
+        <translation>Boek:</translation>
     </message>
 </context>
 <context>
@@ -433,7 +433,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -556,7 +556,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calulation</source>
@@ -667,7 +667,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -770,7 +770,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -873,7 +873,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -956,7 +956,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1031,7 +1031,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1106,7 +1106,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1196,6 +1196,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>...</source>
+        <translation type="vanished">...</translation>
+    </message>
+    <message>
         <source>Scroll up the list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1229,7 +1233,7 @@
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Breedte:</translation>
+        <translation>Breedte:</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
@@ -1348,11 +1352,11 @@
     </message>
     <message>
         <source>Formula:</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule:</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1427,7 +1431,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2192,7 +2196,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2497,7 +2501,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2584,7 +2588,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Hoogte:</translation>
+        <translation>Hoogte:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -2841,7 +2845,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2928,7 +2932,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -3133,7 +3137,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -3350,7 +3354,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -4777,7 +4781,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>True darts</source>
-        <translation type="unfinished"></translation>
+        <translation>Coupenaden goed plaatsen</translation>
     </message>
     <message>
         <source>New pattern</source>
@@ -5844,7 +5848,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">Over Qt</translation>
+        <translation>Over Qt</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>

@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished">Programme de réalisation de patrons.</translation>
+        <translation>Programme de réalisation de patrons.</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
@@ -263,11 +263,11 @@
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished">Auteur:</translation>
+        <translation>Auteur:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished">Livre:</translation>
+        <translation>Livre:</translation>
     </message>
 </context>
 <context>
@@ -433,7 +433,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -556,7 +556,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calulation</source>
@@ -667,7 +667,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -770,7 +770,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -873,7 +873,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -956,7 +956,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1031,7 +1031,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1106,7 +1106,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1237,7 +1237,7 @@
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Largeur :</translation>
+        <translation>Largeur :</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
@@ -1356,11 +1356,11 @@
     </message>
     <message>
         <source>Formula:</source>
-        <translation type="unfinished">Formule:</translation>
+        <translation>Formule:</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1435,7 +1435,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2199,7 +2199,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2504,7 +2504,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2591,7 +2591,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Hauteur :</translation>
+        <translation>Hauteur :</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -2848,7 +2848,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2935,7 +2935,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -3140,7 +3140,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -3353,7 +3353,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -5829,7 +5829,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">À propos de Qt</translation>
+        <translation>À propos de Qt</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>

@@ -433,7 +433,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -556,7 +556,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calulation</source>
@@ -667,7 +667,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -770,7 +770,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -873,7 +873,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -956,7 +956,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1031,7 +1031,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1106,7 +1106,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1196,6 +1196,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>...</source>
+        <translation type="vanished">...</translation>
+    </message>
+    <message>
         <source>Scroll up the list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1229,7 +1233,7 @@
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Lățime:</translation>
+        <translation>Lățime:</translation>
     </message>
     <message>
         <source>First point cannot be equal to the last point!</source>
@@ -1352,7 +1356,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -1427,7 +1431,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2180,7 +2184,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2485,7 +2489,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2572,7 +2576,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished">Înălțime:</translation>
+        <translation>Înălțime:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -2809,7 +2813,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -2884,7 +2888,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -3049,7 +3053,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -3258,7 +3262,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valoare</translation>
+        <translation>Valoare</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -5675,7 +5679,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>About Qt</source>
-        <translation type="unfinished">Despre Qt</translation>
+        <translation>Despre Qt</translation>
     </message>
     <message>
         <source>File was not saved yet.</source>
