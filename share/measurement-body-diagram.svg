@@ -26,7 +26,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -326,13 +326,13 @@
      inkscape:window-height="1056"
      id="ValentinaMeasurements"
      showgrid="false"
-     inkscape:zoom="0.37300002"
-     inkscape:cx="1309.8271"
-     inkscape:cy="3000.9839"
+     inkscape:zoom="2.1100067"
+     inkscape:cx="2841.9301"
+     inkscape:cy="80.298375"
      inkscape:window-x="65"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      fit-margin-left="0"
      fit-margin-top="0"
      fit-margin-right="0"
@@ -377,7 +377,7 @@
            id="tspan5409-1"
            x="-4038.5618"
            y="5271.6616"
-           style="font-style:italic;font-size:42.92770004px;fill:#b78761;fill-opacity:1;stroke:#b78761;stroke-width:0.89429998;stroke-linecap:round;stroke-opacity:1">©2015 Valentina Project</tspan><tspan
+           style="font-style:italic;font-size:42.92770004px;fill:#b78761;fill-opacity:1;stroke:#b78761;stroke-width:0.89429998;stroke-linecap:round;stroke-opacity:1">©2015 - 2016 Valentina Project</tspan><tspan
            sodipodi:role="line"
            x="-4038.5618"
            y="5325.3213"
