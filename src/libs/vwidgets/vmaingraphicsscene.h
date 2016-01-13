@@ -49,6 +49,8 @@ public:
     void          setTransform(const QTransform &transform);
     void          SetDisableTools(bool enabled, const QString &namePP);
     QPointF       getScenePos() const;
+
+    QRectF        VisibleItemsBoundingRect() const;
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SetFactor(qreal factor);

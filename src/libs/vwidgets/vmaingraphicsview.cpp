@@ -33,6 +33,7 @@
 #include <QApplication>
 #include <QScrollBar>
 #include "vsimplepoint.h"
+#include "vmaingraphicsscene.h"
 
 #include <QGraphicsItem>
 #include <QMouseEvent>
@@ -263,15 +264,16 @@ void VMainGraphicsView::ZoomOriginal()
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::ZoomFitBest()
 {
-    QRectF rect = this->scene()->itemsBoundingRect();
-
+    VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+    SCASSERT(currentScene);
+    const QRectF rect = currentScene->VisibleItemsBoundingRect();
     if (rect.isEmpty())
     {
         return;
     }
 
     this->fitInView(rect, Qt::KeepAspectRatio);
-    VMainGraphicsView::NewSceneRect(this->scene(), this);
+    VMainGraphicsView::NewSceneRect(scene(), this);
     emit NewFactor(this->transform().m11());
 }
 
@@ -357,12 +359,14 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 
     //Calculate view rect
     //to receive the currently visible area, map the widgets bounds to the scene
-    const QPointF a = view->mapToScene(0, 0 );
+    const QPointF a = view->mapToScene(0, 0);
     const QPointF b = view->mapToScene(view->width(), view->height());
     const QRectF viewRect = QRectF( a, b );
 
     //Calculate scene rect
-    const QRectF itemsRect = sc->itemsBoundingRect();
+    VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(sc);
+    SCASSERT(currentScene);
+    const QRectF itemsRect = currentScene->VisibleItemsBoundingRect();
 
     //Unite two rects
     const QRectF newRect = itemsRect.united(viewRect);

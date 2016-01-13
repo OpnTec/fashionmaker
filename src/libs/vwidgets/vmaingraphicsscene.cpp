@@ -89,6 +89,21 @@ QPointF VMainGraphicsScene::getScenePos() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QRectF VMainGraphicsScene::VisibleItemsBoundingRect() const
+{
+    QRectF rect;
+    foreach(QGraphicsItem *item, items())
+    {
+        if(not item->isVisible())
+        {
+            continue;
+        }
+        rect = rect.united(item->sceneBoundingRect());
+    }
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief transform return view transformation.
  * @return view transformation.
