@@ -177,6 +177,9 @@ void DialogHistory::FillTable()
             item->setFlags(item->flags() ^ Qt::ItemIsEditable);
             ui->tableWidget->setItem(currentRow, 1, item);
             ++count;
+
+            item = ui->tableWidget->item(currentRow, 0);
+            item->setFlags(item->flags() ^ Qt::ItemIsEditable);
         }
     }
     ui->tableWidget->setRowCount(count);//Real row count
