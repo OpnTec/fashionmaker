@@ -269,7 +269,7 @@ QPointF MainWindow::StartPositionNewPP() const
     const qreal margin = 40.0;
     if (comboBoxDraws->count() > 1)
     {
-        const QRectF rect = sceneDraw->itemsBoundingRect();
+        const QRectF rect = sceneDraw->VisibleItemsBoundingRect();
         if (rect.width() <= rect.height())
         {
             return QPointF(rect.width()+margin, originY);
