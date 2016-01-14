@@ -40,13 +40,13 @@ extern const QString APP_VERSION_STR;
 /*
    APP_VERSION is (major << 16) + (minor << 8) + patch.
 */
-#define APP_VERSION 0x000400
+#define APP_VERSION 0x000500
 
 // Change version number in projectversion.cpp too.
 // Synchronize valentina.nsi
 
-#define VER_FILEVERSION             0,4,0,0
-#define VER_FILEVERSION_STR         "0.4.0.0b\0"
+#define VER_FILEVERSION             0,5,0,0
+#define VER_FILEVERSION_STR         "0.5.0.0a\0"
 
 #define V_PRERELEASE // Mark prerelease builds
 
@@ -56,7 +56,7 @@ extern const QString APP_VERSION_STR;
 #define VER_COMPANYNAME_STR         "ValentinaTeam"
 //#define VER_FILEDESCRIPTION_STR   "Patternmaking program." // Defined in program
 //#define VER_INTERNALNAME_STR      "Valentina" // Defined in program
-#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2014-2015 Valentina Team"
+#define VER_LEGALCOPYRIGHT_STR      "Copyright © 2014-2016 Valentina Team"
 #define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
 #define VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR
 //#define VER_ORIGINALFILENAME_STR  "valentina.exe" // Defined in program
