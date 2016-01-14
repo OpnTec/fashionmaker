@@ -549,6 +549,12 @@ void VToolSplinePath::SetVisualization()
  */
 void VToolSplinePath::RefreshGeometry()
 {
+    // Very important to disable control points. Without it the pogram can't move the curve.
+    foreach (VControlPointSpline *point, controlPoints)
+    {
+        point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+    }
+
     if (isHovered || detailsMode)
     {
         this->setPath(ToolPath(PathDirection::Show));
@@ -583,4 +589,31 @@ void VToolSplinePath::RefreshGeometry()
     }
 
     SetVisualization();
+
+    // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+    // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
+    static bool changeFinished = true;
+    if (changeFinished)
+    {
+       changeFinished = false;
+
+       const QList<QGraphicsView *> viewList = scene()->views();
+       if (not viewList.isEmpty())
+       {
+           if (QGraphicsView *view = viewList.at(0))
+           {
+               VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+               SCASSERT(currentScene);
+               const QPointF cursorPosition = currentScene->getScenePos();
+               view->ensureVisible(QRectF(cursorPosition.x()-50, cursorPosition.y()-50, 100, 100));
+           }
+       }
+
+       changeFinished = true;
+    }
+
+    foreach (VControlPointSpline *point, controlPoints)
+    {
+        point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    }
 }
