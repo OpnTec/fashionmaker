@@ -346,14 +346,34 @@ void VToolDetail::RefreshDataInFile()
  */
 QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    if (change == ItemPositionHasChanged && scene())
+    if (change == ItemPositionChange && scene())
     {
-        // value - this is new position.
-        QPointF newPos = value.toPointF();
+        // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+        // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
+        static bool changeFinished = true;
+        if (changeFinished)
+        {
+           changeFinished = false;
 
-        MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id, this->scene());
-        connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        qApp->getUndoStack()->push(moveDet);
+           // value - this is new position.
+           const QPointF newPos = value.toPointF();
+
+           MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id, scene());
+           connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+           qApp->getUndoStack()->push(moveDet);
+
+           const QList<QGraphicsView *> viewList = scene()->views();
+           if (not viewList.isEmpty())
+           {
+               if (QGraphicsView *view = viewList.at(0))
+               {
+                   view->ensureVisible(mapToScene(boundingRect()|childrenBoundingRect()).boundingRect());
+               }
+           }
+           // Don't forget to update geometry, because first change never call full parse
+           RefreshGeometry();
+           changeFinished = true;
+        }
     }
 
     if (change == QGraphicsItem::ItemSelectedChange)
