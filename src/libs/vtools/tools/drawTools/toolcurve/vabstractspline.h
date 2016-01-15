@@ -133,6 +133,11 @@ inline void VAbstractSpline::ShowToolVisualization(bool show)
     {
         ShowHandles(show);
     }
+
+    if (scene())
+    { // Showing/hiding control points require recalculation scene size.
+        VMainGraphicsView::NewSceneRect(scene(), qApp->getSceneView());
+    }
 }
 
 #endif // VABSTRACTSPLINE_H
