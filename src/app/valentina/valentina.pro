@@ -289,8 +289,9 @@ unix{
         templates.path = $$RESOURCES_DIR/tables/templates/
         templates.files = $$INSTALL_STANDARD_TEMPLATES
 
-        format.path = $$RESOURCES_DIR/
-        format.files = $$PWD/../../../dist/macx/measurements.icns
+        icns_resources.path = $$RESOURCES_DIR/
+        icns_resources.files += $$PWD/../../../dist/macx/measurements.icns
+        icns_resources.files += $$PWD/../../../dist/Tape.icns
 
         QMAKE_BUNDLE_DATA += \
             templates \
@@ -298,7 +299,7 @@ unix{
             libraries \
             tape \
             xpdf \
-            format
+            icns_resources
     }
 }
 
