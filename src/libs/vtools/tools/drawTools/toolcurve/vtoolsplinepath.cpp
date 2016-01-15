@@ -503,6 +503,27 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, id, this->scene());
     connect(moveSplPath, &VUndoCommand::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveSplPath);
+
+    // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+    // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
+    static bool changeFinished = true;
+    if (changeFinished)
+    {
+       changeFinished = false;
+
+       const QList<QGraphicsView *> viewList = scene()->views();
+       if (not viewList.isEmpty())
+       {
+           if (QGraphicsView *view = viewList.at(0))
+           {
+               VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+               SCASSERT(currentScene);
+               const QPointF cursorPosition = currentScene->getScenePos();
+               view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
+           }
+       }
+       changeFinished = true;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -589,28 +610,6 @@ void VToolSplinePath::RefreshGeometry()
     }
 
     SetVisualization();
-
-    // Each time we move something we call recalculation scene rect. In some cases this can cause moving
-    // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
-    static bool changeFinished = true;
-    if (changeFinished)
-    {
-       changeFinished = false;
-
-       const QList<QGraphicsView *> viewList = scene()->views();
-       if (not viewList.isEmpty())
-       {
-           if (QGraphicsView *view = viewList.at(0))
-           {
-               VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-               SCASSERT(currentScene);
-               const QPointF cursorPosition = currentScene->getScenePos();
-               view->ensureVisible(QRectF(cursorPosition.x()-50, cursorPosition.y()-50, 100, 100));
-           }
-       }
-
-       changeFinished = true;
-    }
 
     foreach (VControlPointSpline *point, controlPoints)
     {

@@ -371,10 +371,5 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
     const QRectF itemsRect = currentScene->VisibleItemsBoundingRect();
 
     //Unite two rects
-    const QRectF newRect = itemsRect.united(viewRect);
-
-    if (newRect != itemsRect)
-    {//Update if only need
-        sc->setSceneRect(newRect);
-    }
+    sc->setSceneRect(itemsRect.united(viewRect));
 }
