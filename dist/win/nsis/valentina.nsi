@@ -20,7 +20,7 @@ SetCompressor /FINAL /SOLID lzma
 !define FILE_TAPE "tape"
 
 !insertmacro GetPEVersionLocal "${PACKAGE_FOLDER}\${FILE_VALENTINA}.exe" ver
-!define MUI_VERSION "${ver_1}.${ver_2}.${ver_3}b" ; Delete "b" before release
+!define MUI_VERSION "${ver_1}.${ver_2}.${ver_3}a" ; Delete "a" before release
 
 !define MUI_BRANDINGTEXT "${PRODUCT_VALENTINA} ${MUI_VERSION}"
 !define WEBSITE_LINK "http://www.valentina-project.org/"
