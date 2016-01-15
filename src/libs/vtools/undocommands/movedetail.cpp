@@ -92,6 +92,10 @@ void MoveDetail::redo()
         {
             emit NeedLiteParsing(Document::LiteParse);
         }
+        else
+        {
+            VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
+        }
         redoFlag = true;
     }
     else
