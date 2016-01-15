@@ -101,6 +101,7 @@ public:
     void setShowToolOptions(bool value);
 
     static void NewSceneRect(QGraphicsScene *sc, QGraphicsView *view);
+    static QRectF SceneVisibleArea(QGraphicsView *view);
 
 signals:
     /**

@@ -31,6 +31,7 @@
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "../dialogs/tools/dialogtool.h"
 #include "../dialogs/tools/dialogdetail.h"
 #include "../undocommands/savedetailoptions.h"
@@ -348,31 +349,50 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
 {
     if (change == ItemPositionChange && scene())
     {
-        // Each time we move something we call recalculation scene rect. In some cases this can cause moving
-        // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
-        static bool changeFinished = true;
-        if (changeFinished)
-        {
-           changeFinished = false;
+            // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+            // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
+            static bool changeFinished = true;
+            if (changeFinished)
+            {
+               changeFinished = false;
 
-           // value - this is new position.
-           const QPointF newPos = value.toPointF();
+               // value - this is new position.
+               const QPointF newPos = value.toPointF();
 
-           MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id, scene());
-           connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-           qApp->getUndoStack()->push(moveDet);
+               MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id, scene());
+               connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+               qApp->getUndoStack()->push(moveDet);
 
-           const QList<QGraphicsView *> viewList = scene()->views();
-           if (not viewList.isEmpty())
-           {
-               if (QGraphicsView *view = viewList.at(0))
+               const QList<QGraphicsView *> viewList = scene()->views();
+               if (not viewList.isEmpty())
                {
-                   view->ensureVisible(mapToScene(boundingRect()|childrenBoundingRect()).boundingRect());
+                   if (QGraphicsView *view = viewList.at(0))
+                   {
+                       const int xmargin = 50;
+                       const int ymargin = 50;
+
+                       const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
+                       const QRectF itemRect = mapToScene(boundingRect()|childrenBoundingRect()).boundingRect();
+
+                       // If item's rect is bigger than view's rect ensureVisible works very unstable.
+                       if (itemRect.height() + 2*ymargin < viewRect.height() &&
+                           itemRect.width() + 2*xmargin < viewRect.width())
+                       {
+                            view->ensureVisible(itemRect, xmargin, ymargin);
+                       }
+                       else
+                       {
+                           // Ensure visible only small rect around a cursor
+                           VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+                           SCASSERT(currentScene);
+                           const QPointF cursorPosition = currentScene->getScenePos();
+                           view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
+                       }
+                   }
                }
-           }
-           // Don't forget to update geometry, because first change never call full parse
-           RefreshGeometry();
-           changeFinished = true;
+               // Don't forget to update geometry, because first change never call full parse
+               RefreshGeometry();
+               changeFinished = true;
         }
     }
 

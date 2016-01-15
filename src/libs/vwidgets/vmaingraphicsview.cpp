@@ -360,10 +360,7 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
     SCASSERT(view != nullptr);
 
     //Calculate view rect
-    //to receive the currently visible area, map the widgets bounds to the scene
-    const QPointF a = view->mapToScene(0, 0);
-    const QPointF b = view->mapToScene(view->width(), view->height());
-    const QRectF viewRect = QRectF( a, b );
+    const QRectF viewRect = SceneVisibleArea(view);
 
     //Calculate scene rect
     VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(sc);
@@ -372,4 +369,12 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view)
 
     //Unite two rects
     sc->setSceneRect(itemsRect.united(viewRect));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VMainGraphicsView::SceneVisibleArea(QGraphicsView *view)
+{
+    SCASSERT(view != nullptr);
+    //to receive the currently visible area, map the widgets bounds to the scene
+    return QRectF(view->mapToScene(0, 0), view->mapToScene(view->width(), view->height()));
 }
