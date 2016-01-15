@@ -36,6 +36,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 
+#include "vmaingraphicsscene.h"
+#include "vmaingraphicsview.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGraphicsSimpleTextItem default constructor.
@@ -131,7 +134,26 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
                 {
                     if (QGraphicsView *view = viewList.at(0))
                     {
-                        view->ensureVisible(this);
+                        const int xmargin = 50;
+                        const int ymargin = 50;
+
+                        const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
+                        const QRectF itemRect = mapToScene(boundingRect()).boundingRect();
+
+                        // If item's rect is bigger than view's rect ensureVisible works very unstable.
+                        if (itemRect.height() + 2*ymargin < viewRect.height() &&
+                            itemRect.width() + 2*xmargin < viewRect.width())
+                        {
+                             view->ensureVisible(itemRect, xmargin, ymargin);
+                        }
+                        else
+                        {
+                            // Ensure visible only small rect around a cursor
+                            VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+                            SCASSERT(currentScene);
+                            const QPointF cursorPosition = currentScene->getScenePos();
+                            view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
+                        }
                     }
                 }
             }
