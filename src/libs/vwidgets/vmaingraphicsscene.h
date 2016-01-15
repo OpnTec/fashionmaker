@@ -51,6 +51,8 @@ public:
     QPointF       getScenePos() const;
 
     QRectF        VisibleItemsBoundingRect() const;
+    void          InitOrigins();
+    void          SetOriginsVisible(bool visible);
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SetFactor(qreal factor);
@@ -97,6 +99,7 @@ private:
     /** @brief _transform view transform value. */
     QTransform    _transform;
     QPointF       scenePos;
+    QVector<QGraphicsItem *> origins;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

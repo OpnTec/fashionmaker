@@ -32,12 +32,16 @@
 #include <QGraphicsItem>
 #include <QApplication>
 
+#include "../vmisc/def.h"
+#include "../ifc/ifcdef.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMainGraphicsScene default constructor.
  */
 VMainGraphicsScene::VMainGraphicsScene()
-    :QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform()), scenePos(QPointF())
+    :QGraphicsScene(), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform()), scenePos(QPointF()),
+      origins()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,7 +52,7 @@ VMainGraphicsScene::VMainGraphicsScene()
  */
 VMainGraphicsScene::VMainGraphicsScene(const QRectF & sceneRect, QObject * parent)
     :QGraphicsScene ( sceneRect, parent ), horScrollBar(0), verScrollBar(0), scaleFactor(1), _transform(QTransform()),
-      scenePos(QPointF())
+      scenePos(QPointF()), origins()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -79,6 +83,108 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
         {
             items[i]->setSelected(false);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::InitOrigins()
+{
+    qDeleteAll(origins);
+
+    QPen originsPen(Qt::green, ToPixel(WidthHairLine(Unit::Mm), Unit::Mm), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QBrush axisTextBrush(Qt::green);
+    const qreal arrowAngle = 35.0;
+    const qreal arrowLength = 12.0;
+
+    {
+        // X axis
+        const QLineF lineX(QPointF(25, 0), QPointF(-5, 0));
+        QGraphicsLineItem *xLine1 = new QGraphicsLineItem(lineX);
+        xLine1->setPen(originsPen);
+        xLine1->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        xLine1->setZValue(-1.0);
+        addItem(xLine1);
+        origins.append(xLine1);
+
+        // Arrow left side
+        QLineF arrowLeftLine = lineX;
+        arrowLeftLine.setAngle(arrowLeftLine.angle()-arrowAngle);
+        arrowLeftLine.setLength(arrowLength);
+        QGraphicsLineItem *xLine2 = new QGraphicsLineItem(arrowLeftLine);
+        xLine2->setPen(originsPen);
+        xLine2->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        xLine2->setZValue(-1.0);
+        addItem(xLine2);
+        origins.append(xLine2);
+
+        // Arrow right side
+        QLineF arrowRightLine = lineX;
+        arrowRightLine.setAngle(arrowRightLine.angle()+arrowAngle);
+        arrowRightLine.setLength(arrowLength);
+        QGraphicsLineItem *xLine3 = new QGraphicsLineItem(arrowRightLine);
+        xLine3->setPen(originsPen);
+        xLine3->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        xLine3->setZValue(-1.0);
+        addItem(xLine3);
+        origins.append(xLine3);
+
+        // X axis text
+        QGraphicsSimpleTextItem *xOrigin = new QGraphicsSimpleTextItem(QStringLiteral("X"), xLine1);
+        xOrigin->setBrush(axisTextBrush);
+        xOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        xOrigin->setZValue(-1.0);
+        xOrigin->setPos(25, -(xOrigin->boundingRect().height()/2));
+        origins.append(xOrigin);
+    }
+
+    {
+        // Y axis
+        const QLineF lineY(QPointF(0, 25), QPointF(0, -5));
+        QGraphicsLineItem *yLine1 = new QGraphicsLineItem(lineY);
+        yLine1->setPen(originsPen);
+        yLine1->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        yLine1->setZValue(-1.0);
+        addItem(yLine1);
+        origins.append(yLine1);
+
+        // Arrow left side
+        QLineF arrowLeftLine = lineY;
+        arrowLeftLine.setAngle(arrowLeftLine.angle()-arrowAngle);
+        arrowLeftLine.setLength(arrowLength);
+        QGraphicsLineItem *yLine2 = new QGraphicsLineItem(arrowLeftLine);
+        yLine2->setPen(originsPen);
+        yLine2->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        yLine2->setZValue(-1.0);
+        addItem(yLine2);
+        origins.append(yLine2);
+
+        // Arrow right side
+        QLineF arrowRightLine = lineY;
+        arrowRightLine.setAngle(arrowRightLine.angle()+arrowAngle);
+        arrowRightLine.setLength(arrowLength);
+        QGraphicsLineItem *yLine3 = new QGraphicsLineItem(arrowRightLine);
+        yLine3->setPen(originsPen);
+        yLine3->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        yLine3->setZValue(-1.0);
+        addItem(yLine3);
+        origins.append(yLine3);
+
+        // Y axis text
+        QGraphicsSimpleTextItem *yOrigin = new QGraphicsSimpleTextItem(QStringLiteral("Y"), yLine1);
+        yOrigin->setBrush(axisTextBrush);
+        yOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+        yOrigin->setZValue(-1.0);
+        yOrigin->setPos(-(yOrigin->boundingRect().width()/2), 25);
+        origins.append(yOrigin);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::SetOriginsVisible(bool visible)
+{
+    foreach (QGraphicsItem *item, origins)
+    {
+        item->setVisible(visible);
     }
 }
 

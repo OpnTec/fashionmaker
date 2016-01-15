@@ -2692,7 +2692,9 @@ void VPattern::PrepareForParse(const Document &parse)
     {
         TestUniqueId();
         sceneDraw->clear();
+        sceneDraw->InitOrigins();
         sceneDetail->clear();
+        sceneDetail->InitOrigins();
         data->ClearForFullParse();
         nameActivPP.clear();
         patternPieces.clear();
