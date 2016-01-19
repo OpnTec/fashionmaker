@@ -47,8 +47,7 @@ const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/in
 VVITConverter::VVITConverter(const QString &fileName)
     :VAbstractMConverter(fileName)
 {
-    const QString schema = XSDSchema(ver);
-    ValidateXML(schema, fileName);
+    ValidateInputFile(CurrentSchema);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,8 +81,6 @@ QString VVITConverter::MaxVerStr() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VVITConverter::XSDSchema(int ver) const
 {
-    CheckVersion(ver);
-
     switch (ver)
     {
         case (0x000200):
@@ -97,10 +94,8 @@ QString VVITConverter::XSDSchema(int ver) const
         case (0x000303):
             return CurrentSchema;
         default:
-        {
-            const QString errorMsg(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
-            throw VException(errorMsg);
-        }
+            InvalidVersion(ver);
+            break;
     }
 }
 
@@ -162,6 +157,13 @@ void VVITConverter::ApplyPatches()
 
         throw;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VVITConverter::DowngradeToCurrentMaxVersion()
+{
+    SetVersion(MeasurementMaxVerStr);
+    Save();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

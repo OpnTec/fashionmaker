@@ -50,8 +50,7 @@ const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pa
 VPatternConverter::VPatternConverter(const QString &fileName)
     :VAbstractConverter(fileName)
 {
-    const QString schema = XSDSchema(ver);
-    ValidateXML(schema, fileName);
+    ValidateInputFile(CurrentSchema);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -85,8 +84,6 @@ QString VPatternConverter::MaxVerStr() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::XSDSchema(int ver) const
 {
-    CheckVersion(ver);
-
     switch (ver)
     {
         case (0x000100):
@@ -110,10 +107,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000204):
             return CurrentSchema;
         default:
-        {
-            const QString errorMsg(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
-            throw VException(errorMsg);
-        }
+            InvalidVersion(ver);
+            break;
     }
 }
 
@@ -210,6 +205,13 @@ void VPatternConverter::ApplyPatches()
 
         throw;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::DowngradeToCurrentMaxVersion()
+{
+    SetVersion(PatternMaxVerStr);
+    Save();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

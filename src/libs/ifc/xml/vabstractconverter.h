@@ -45,8 +45,9 @@ protected:
     int     ver;
     QString fileName;
 
+    void ValidateInputFile(const QString &currentSchema) const;
     int  GetVersion(const QString &version) const;
-    void CheckVersion(int ver) const;
+    Q_NORETURN void InvalidVersion(int ver) const;
     void Save() const;
     void SetVersion(const QString &version);
 
@@ -58,6 +59,7 @@ protected:
 
     virtual QString XSDSchema(int ver) const =0;
     virtual void    ApplyPatches() =0;
+    virtual void    DowngradeToCurrentMaxVersion() =0;
 
     void Replace(QString &formula, const QString &newName, int position, const QString &token, int &bias) const;
     void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const;

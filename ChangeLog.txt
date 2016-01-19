@@ -1,3 +1,6 @@
+# Version 0.5.0
+- [#325] Check pattern for inverse compatibility.
+
 # Version 0.3.3 Released May 20, 2015
 - [#297] Scaling Error - Print.
 - [#304] Layout appears different than my pattern.

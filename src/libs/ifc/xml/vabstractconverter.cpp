@@ -65,7 +65,14 @@ void VAbstractConverter::Convert()
 
     ReserveFile();
 
-    ApplyPatches();
+    if (ver <= MaxVer())
+    {
+        ApplyPatches();
+    }
+    else
+    {
+        DowngradeToCurrentMaxVersion();
+    }
 
     QFile file(backupFileName);
     file.remove();
@@ -104,25 +111,25 @@ int VAbstractConverter::GetVersion(const QString &version) const
 {
     ValidateVersion(version);
 
-    QStringList ver = version.split(".");
+    const QStringList ver = version.split(".");
 
     bool ok = false;
-    int major = ver.at(0).toInt(&ok);
-    if (ok == false)
+    const int major = ver.at(0).toInt(&ok);
+    if (not ok)
     {
         return 0x0;
     }
 
     ok = false;
-    int minor = ver.at(1).toInt(&ok);
-    if (ok == false)
+    const int minor = ver.at(1).toInt(&ok);
+    if (not ok)
     {
         return 0x0;
     }
 
     ok = false;
-    int patch = ver.at(2).toInt(&ok);
-    if (ok == false)
+    const int patch = ver.at(2).toInt(&ok);
+    if (not ok)
     {
         return 0x0;
     }
@@ -133,7 +140,7 @@ int VAbstractConverter::GetVersion(const QString &version) const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::ValidateVersion(const QString &version) const
 {
-    QRegExp rx(QStringLiteral("^(0|([1-9][0-9]*)).(0|([1-9][0-9]*)).(0|([1-9][0-9]*))$"));
+    const QRegExp rx(QStringLiteral("^(0|([1-9][0-9]*)).(0|([1-9][0-9]*)).(0|([1-9][0-9]*))$"));
 
     if (rx.exactMatch(version) == false)
     {
@@ -207,7 +214,7 @@ void VAbstractConverter::BiasTokens(int position, int bias, QMap<int, QString> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::CheckVersion(int ver) const
+Q_NORETURN void VAbstractConverter::InvalidVersion(int ver) const
 {
     if (ver < MinVer())
     {
@@ -220,6 +227,9 @@ void VAbstractConverter::CheckVersion(int ver) const
         const QString errorMsg(tr("Invalid version. Maximum supported version is %1").arg(MaxVerStr()));
         throw VException(errorMsg);
     }
+
+    const QString errorMsg(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
+    throw VException(errorMsg);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,6 +250,43 @@ bool VAbstractConverter::SaveDocument(const QString &fileName, QString &error) c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
+{
+    QString schema;
+    try
+    {
+        schema = XSDSchema(ver);
+    }
+    catch(const VException &e)
+    {
+        if (ver < MinVer())
+        { // Version less than minimally supported version. Can't do anything.
+            throw e;
+        }
+        else if (ver > MaxVer())
+        { // Version bigger than maximum supported version. We still have a chance to open the file.
+            try
+            { // Try to open like the current version.
+                ValidateXML(currentSchema, fileName);
+            }
+            catch(const VException &exp)
+            { // Nope, we can't.
+                Q_UNUSED(exp);
+                throw e;
+            }
+        }
+        else
+        { // Unexpected version. Most time mean that we do not catch all versions between min and max.
+            throw e;
+        }
+
+        return; // All is fine and we can try to convert to current max version.
+    }
+
+    ValidateXML(schema, fileName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::Save() const
 {
     QString error;
@@ -253,6 +300,8 @@ void VAbstractConverter::Save() const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::SetVersion(const QString &version)
 {
+    ValidateVersion(version);
+
     if (setTagText(TagVersion, version) == false)
     {
         VException e(tr("Could not change version."));
