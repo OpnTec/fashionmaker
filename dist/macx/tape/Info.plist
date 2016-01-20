@@ -30,7 +30,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleTypeIconFile</key>
-			<string>measurements.incs</string>
+			<string>i-measurements.incs</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.valentinaproject.vit</string>
@@ -44,7 +44,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleTypeIconFile</key>
-			<string>measurements.icns</string>
+			<string>s-measurements.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.valentinaproject.vst</string>
@@ -66,7 +66,7 @@
 			<key>UTTypeDescription</key>
 			<string>Valentina individual measurements</string>
 			<key>UTTypeIconFile</key>
-			<string>measurements.icns</string>
+			<string>i-measurements.icns</string>
 			<key>UTTypeIdentifier</key>
 			<string>org.valentinaproject.vit</string>
 			<key>UTTypeTagSpecification</key>
@@ -88,7 +88,7 @@
 			<key>UTTypeDescription</key>
 			<string>Valentina standard measurements</string>
 			<key>UTTypeIconFile</key>
-			<string>measurements.icns</string>
+			<string>s-measurements.icns</string>
 			<key>UTTypeIdentifier</key>
 			<string>org.valentinaproject.vst</string>
 			<key>UTTypeTagSpecification</key>

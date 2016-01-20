@@ -290,8 +290,9 @@ unix{
         templates.files = $$INSTALL_STANDARD_TEMPLATES
 
         icns_resources.path = $$RESOURCES_DIR/
-        icns_resources.files += $$PWD/../../../dist/macx/measurements.icns
-        icns_resources.files += $$PWD/../../../dist/Tape.icns
+        icns_resources.files += $$PWD/../../../dist/macx/i-measurements.icns
+        icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
+        icns_resources.files += $$PWD/../../../dist/macx/pattern.icns
 
         QMAKE_BUNDLE_DATA += \
             templates \
@@ -312,7 +313,9 @@ win32:*-g++ {
         $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe \
         $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc \
         $$PWD/../../../dist/win/valentina.ico \
-        $$PWD/../../../dist/win/measurements.ico \
+        $$PWD/../../../dist/win/i-measurements.ico \
+        $$PWD/../../../dist/win/s-measurements.ico \
+        $$PWD/../../../dist/win/pattern.ico \
         $$PWD/../../../dist/win/pdftops.exe \
         $$PWD/../../../AUTHORS.txt \
         $$PWD/../../../LICENSE_GPL.txt \

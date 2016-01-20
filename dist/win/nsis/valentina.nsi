@@ -219,10 +219,10 @@ CreateShortCut "$DESKTOP\${PRODUCT_TAPE}.lnk" "$INSTDIR\${FILE_TAPE}.exe" ""
   
 ; File associations
 ; Valentina
-!insertmacro APP_ASSOCIATE "val" "valentina.pattern" "text/plain" "${PRODUCT_VALENTINA} pattern file" "$INSTDIR\${FILE_VALENTINA}.exe,0" "Open with ${PRODUCT_VALENTINA}" "$INSTDIR\${FILE_VALENTINA}.exe $\"%1$\""
+!insertmacro APP_ASSOCIATE "val" "valentina.pattern" "text/plain" "${PRODUCT_VALENTINA} pattern file" "$INSTDIR\pattern.ico" "Open with ${PRODUCT_VALENTINA}" "$INSTDIR\${FILE_VALENTINA}.exe $\"%1$\""
 ; Tape
-!insertmacro APP_ASSOCIATE "vit" "valentina.IndividualMeasurements" "text/plain" "${PRODUCT_VALENTINA} individual measurement file" "$INSTDIR\measurements.ico" "Open with ${PRODUCT_TAPE}" "$INSTDIR\${FILE_TAPE}.exe $\"%1$\""
-!insertmacro APP_ASSOCIATE "vst" "valentina.StandardMeasurements" "text/plain" "${PRODUCT_VALENTINA} standard measurement file" "$INSTDIR\measurements.ico" "Open with ${PRODUCT_TAPE}" "$INSTDIR\${FILE_TAPE}.exe $\"%1$\""
+!insertmacro APP_ASSOCIATE "vit" "valentina.IndividualMeasurements" "text/plain" "${PRODUCT_VALENTINA} individual measurement file" "$INSTDIR\i-measurements.ico" "Open with ${PRODUCT_TAPE}" "$INSTDIR\${FILE_TAPE}.exe $\"%1$\""
+!insertmacro APP_ASSOCIATE "vst" "valentina.StandardMeasurements" "text/plain" "${PRODUCT_VALENTINA} standard measurement file" "$INSTDIR\s-measurements.ico" "Open with ${PRODUCT_TAPE}" "$INSTDIR\${FILE_TAPE}.exe $\"%1$\""
 !insertmacro UPDATEFILEASSOC 
 
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayName" "${PRODUCT_VALENTINA}"

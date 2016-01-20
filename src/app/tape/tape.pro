@@ -234,7 +234,8 @@ unix{
         forceCopyToDestdir($${OUT_PWD}/$${DESTDIR}/diagrams.rcc, $$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/))
 
         format.path = $$RESOURCES_DIR/
-        format.files = $$PWD/../../../dist/macx/measurements.icns
+        format.files += $$PWD/../../../dist/macx/i-measurements.icns
+        format.files += $$PWD/../../../dist/macx/s-measurements.icns
 
         QMAKE_BUNDLE_DATA += \
             templates \
