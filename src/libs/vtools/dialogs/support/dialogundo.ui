@@ -29,7 +29,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Error while calculation formula. You can try undo last operation or fix broken formula.</string>
+        <string>Error while calculation formula. You can try to undo last operation or fix broken formula.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>

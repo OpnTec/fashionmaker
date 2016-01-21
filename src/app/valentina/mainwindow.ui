@@ -375,7 +375,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -461,7 +461,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>156</height>
         </rect>
        </property>
@@ -625,7 +625,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>196</height>
         </rect>
        </property>
@@ -867,7 +867,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -953,8 +953,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
-         <height>386</height>
+         <width>98</width>
+         <height>58</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1066,7 +1066,7 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionOnlineHelp"/>
-    <addaction name="actionRepotBug"/>
+    <addaction name="actionReportBug"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
    </widget>
@@ -1800,9 +1800,9 @@
     <string notr="true"/>
    </property>
   </action>
-  <action name="actionRepotBug">
+  <action name="actionReportBug">
    <property name="text">
-    <string>Repot Bug...</string>
+    <string>Report Bug...</string>
    </property>
    <property name="toolTip">
     <string>Report bug</string>

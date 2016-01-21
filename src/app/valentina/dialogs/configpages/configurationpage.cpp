@@ -131,7 +131,8 @@ void ConfigurationPage::Apply()
         const QString unit = qvariant_cast<QString>(this->unitCombo->itemData(this->unitCombo->currentIndex()));
         settings->SetUnit(unit);
         this->unitChanged = false;
-        const QString text = tr("Default unit updated and will be used the next pattern creation");
+        const QString text = tr("The Default unit has been updated and will be used as the default for the next "
+                                "pattern you create.");
         QMessageBox::information(this, QApplication::applicationName(), text);
     }
     if (labelLangChanged)
@@ -333,7 +334,7 @@ QGroupBox *ConfigurationPage::SendGroup()
     sendReportCheck = new QCheckBox(tr("Send crash reports (recommended)"));
     sendReportCheck->setChecked(qApp->ValentinaSettings()->GetSendReportState());
 
-    description = new QLabel(tr("After each crash Valentina collect information that may help us fix a "
+    description = new QLabel(tr("After each crash Valentina collects information that may help us fix the "
                                 "problem. We do not collect any personal information. Find more about what "
                                 "<a href=\"https://bitbucket.org/dismine/valentina/wiki/manual/"
                                 "Crash_reports\">kind of information</a> we collect."));
@@ -475,7 +476,7 @@ void ConfigurationPage::RetranslateUi()
 
     sendGroup->setTitle(tr("Send crash reports"));
     sendReportCheck->setText(tr("Send crash reports (recommended)"));
-    description->setText(tr("After each crash Valentina collect information that may help us fix a "
+    description->setText(tr("After each crash Valentina collects information that may help us fix the "
                             "problem. We do not collect any personal information. Find more about what "
                             "<a href=\"https://bitbucket.org/dismine/valentina/wiki/manual/"
                             "Crash_reports\">kind of information</a> we collect."));
