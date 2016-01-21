@@ -953,7 +953,8 @@ QStringList SupportedLocales()
                                               << QStringLiteral("en_US")
                                               << QStringLiteral("en_CA")
                                               << QStringLiteral("en_IN")
-                                              << QStringLiteral("ro_RO");
+                                              << QStringLiteral("ro_RO")
+                                              << QStringLiteral("zh_CN");
 
     return locales;
 }
