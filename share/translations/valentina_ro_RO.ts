@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation>Unitate implicit actualizată și va fi folosită la următoarea crearea de model</translation>
+        <translation type="vanished">Unitate implicit actualizată și va fi folosită la următoarea crearea de model</translation>
     </message>
     <message>
         <source>Save</source>
@@ -219,7 +219,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>După fiecare blocaj Valentina colectează informații care ne pot ajuta să rezolvăm problema. Noi nu colectăm informații personale. Afla mai multe despre ceea ce &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt; fel de informații &lt;/a&gt; colectăm noi.</translation>
+        <translation type="vanished">După fiecare blocaj Valentina colectează informații care ne pot ajuta să rezolvăm problema. Noi nu colectăm informații personale. Afla mai multe despre ceea ce &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt; fel de informații &lt;/a&gt; colectăm noi.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -267,6 +267,14 @@
     </message>
     <message>
         <source>Book:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1862,15 +1870,15 @@
     </message>
     <message>
         <source>Creation options</source>
-        <translation>Creare Opțiuni</translation>
+        <translation type="vanished">Creare Opțiuni</translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation>Schimbare lungime:</translation>
+        <translation type="vanished">Schimbare lungime:</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation>Principiul alegerii piesei următoare</translation>
+        <translation type="vanished">Principiul alegerii piesei următoare</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -1995,6 +2003,18 @@ Apply settings anyway?</source>
 	Three groups: big, middle, small = 0;
 	Two groups: big, small = 1;
 	Descending area = 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layout options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rule for choosing the next workpiece</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2638,10 +2658,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Immediate apply</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Base selection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2715,6 +2731,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Attribute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Immediately apply</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3635,7 +3655,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation>Eroare în timpul calcularii formulei. Puteți încerca, de a anula ultima operație sau repara formula stricată.</translation>
+        <translation type="vanished">Eroare în timpul calcularii formulei. Puteți încerca, de a anula ultima operație sau repara formula stricată.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -3648,6 +3668,10 @@ Apply settings anyway?</source>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp; Anulare</translation>
+    </message>
+    <message>
+        <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4051,7 +4075,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation>Raportează o Eroare...</translation>
+        <translation type="vanished">Raportează o Eroare...</translation>
     </message>
     <message>
         <source>Report bug</source>
@@ -4701,6 +4725,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report Bug...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5924,6 +5952,10 @@ Do you want to save your changes?</source>
         <source>Error creating a reserv copy: %1.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPattern</name>
@@ -6057,10 +6089,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Shift length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The gap width</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6153,10 +6181,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Shift length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Gap width must be used together with shift units.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6217,10 +6241,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6230,6 +6250,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length must be used together with shift units.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6540,10 +6572,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VPatternConverter</name>
-    <message>
-        <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="unfinished"></translation>
@@ -7788,20 +7816,12 @@ Do you want to save your changes?</source>
 <context>
     <name>VVITConverter</name>
     <message>
-        <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VVSTConverter</name>
-    <message>
-        <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="unfinished"></translation>

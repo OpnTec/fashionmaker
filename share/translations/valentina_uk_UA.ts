@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation>Одиниці виміру оновленні і будуть використані при наступному створенні лекала</translation>
+        <translation type="vanished">Одиниці виміру оновленні і будуть використані при наступному створенні лекала</translation>
     </message>
     <message>
         <source>Save</source>
@@ -219,7 +219,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информацію&lt;/a&gt; яку ми збираємо.</translation>
+        <translation type="vanished">Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информацію&lt;/a&gt; яку ми збираємо.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -268,6 +268,14 @@
     <message>
         <source>Book:</source>
         <translation>Книга:</translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1866,15 +1874,15 @@
     </message>
     <message>
         <source>Creation options</source>
-        <translation>Опції створення</translation>
+        <translation type="vanished">Опції створення</translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation>Довжина зміщення:</translation>
+        <translation type="vanished">Довжина зміщення:</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation>Принцип вибору наступної деталі</translation>
+        <translation type="vanished">Принцип вибору наступної деталі</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -2019,6 +2027,18 @@ Apply settings anyway?</source>
 ⇥Дві групи: великі, маленькі = 1;
 ⇥За зменшенням площі = 2
 </translation>
+    </message>
+    <message>
+        <source>Layout options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rule for choosing the next workpiece</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2662,7 +2682,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediate apply</source>
-        <translation>Негайно застосувати</translation>
+        <translation type="vanished">Негайно застосувати</translation>
     </message>
     <message>
         <source>Base selection</source>
@@ -2739,6 +2759,10 @@ Apply settings anyway?</source>
     <message>
         <source>Attribute</source>
         <translation>Атрибут</translation>
+    </message>
+    <message>
+        <source>Immediately apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3766,7 +3790,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation>Помилка при розрахунку формули. Ви можете попробувати відмінити останню операцію чи виправити поламану формулу.</translation>
+        <translation type="vanished">Помилка при розрахунку формули. Ви можете попробувати відмінити останню операцію чи виправити поламану формулу.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -3779,6 +3803,10 @@ Apply settings anyway?</source>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Відмінити</translation>
+    </message>
+    <message>
+        <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4186,7 +4214,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation>Повідомити про помилку...</translation>
+        <translation type="vanished">Повідомити про помилку...</translation>
     </message>
     <message>
         <source>Report bug</source>
@@ -4837,6 +4865,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
         <translation>Сталася невідома помилка, наприклад переповнення розділу попередило запис lock файлу.</translation>
+    </message>
+    <message>
+        <source>Report Bug...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6104,6 +6136,10 @@ Do you want to save your changes?</source>
         <source>Error creating a reserv copy: %1.</source>
         <translation>Помилка створення резервної копії: %1.</translation>
     </message>
+    <message>
+        <source>Unexpected version &quot;%1&quot;.</source>
+        <translation type="unfinished">Неочікувана версія &quot;%1&quot;.</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPattern</name>
@@ -6254,7 +6290,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift length</source>
-        <translation>Довжина зміщення</translation>
+        <translation type="vanished">Довжина зміщення</translation>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
@@ -6390,7 +6426,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
-        <translation>Довжина зміщення має бути разом з одиницями виміру зміщення.</translation>
+        <translation type="vanished">Довжина зміщення має бути разом з одиницями виміру зміщення.</translation>
     </message>
     <message>
         <source>Gap width must be used together with shift units.</source>
@@ -6454,7 +6490,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation>Довжина зміщення розкладки у одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки. </translation>
+        <translation type="vanished">Довжина зміщення розкладки у одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки. </translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
@@ -6467,6 +6503,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
         <translation>Запускає програму в тестовому режимі. Програма в цьому режимі завантажує один файл лекала і мовчки завершується, не показуючи головне вікно. Ключ має пріорітет перед ключем &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length must be used together with shift units.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6795,7 +6843,7 @@ Do you want to save your changes?</source>
     <name>VPatternConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation>Неочікувана версія &quot;%1&quot;.</translation>
+        <translation type="vanished">Неочікувана версія &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
@@ -8042,7 +8090,7 @@ Do you want to save your changes?</source>
     <name>VVITConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation>Неочікувана версія &quot;%1&quot;.</translation>
+        <translation type="vanished">Неочікувана версія &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
@@ -8053,7 +8101,7 @@ Do you want to save your changes?</source>
     <name>VVSTConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation>Неочікувана версія &quot;%1&quot;.</translation>
+        <translation type="vanished">Неочікувана версія &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
