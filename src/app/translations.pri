@@ -24,7 +24,8 @@ LANGUAGES += \
     en_US \
     en_CA \
     en_IN \
-    ro_RO
+    ro_RO \
+    zh_CN
 
 for(lang, LANGUAGES) {
     INSTALL_TRANSLATIONS += $${TRANSLATIONS_PATH}/valentina_$${lang}.qm
@@ -207,5 +208,14 @@ macx{
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_ro_RO.path = "$$RESOURCES_DIR/translations/ro_RO.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_ro_RO
+        }
+
+        exists($${TRANSLATIONS_PATH}/valentina_zh_CN.qm){
+            TRANSLATION_zh_CN.files += \
+                $$files($${TRANSLATIONS_PATH}/*_zh_CN.qm) \
+                $$[QT_INSTALL_TRANSLATIONS]/qt_zh_CN.qm \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_ro_RO.path = "$$RESOURCES_DIR/translations/zh_CN.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_zh_CN
         }
 }

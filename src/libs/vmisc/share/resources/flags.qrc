@@ -20,5 +20,6 @@
         <file>flags/India.png</file>
         <file>flags/Poland.png</file>
         <file>flags/Romania.png</file>
+        <file>flags/China.png</file>
     </qresource>
 </RCC>
