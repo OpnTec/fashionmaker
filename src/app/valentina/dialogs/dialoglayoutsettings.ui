@@ -281,7 +281,7 @@
      <item>
       <widget class="QGroupBox" name="groupBoxCreationOptions">
        <property name="title">
-        <string>Creation options</string>
+        <string>Layout options</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
@@ -315,7 +315,7 @@
           <item row="1" column="0">
            <widget class="QLabel" name="labelShiftLength">
             <property name="text">
-             <string>Shift length:</string>
+             <string>Shift/Offset length:</string>
             </property>
            </widget>
           </item>
@@ -520,7 +520,7 @@
         <item>
          <widget class="QGroupBox" name="groupBoxCase">
           <property name="title">
-           <string>Principle of choosing the next workpiece</string>
+           <string>Rule for choosing the next workpiece</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
@@ -642,7 +642,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroupPrinciple"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

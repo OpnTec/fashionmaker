@@ -224,10 +224,10 @@ void VCommandLine::InitOptions(VCommandLineOptions &options, QMap<QString, int> 
 
     optionsIndex.insert(LONG_OPTION_SHIFTLENGTH, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_SHIFTLENGTH << LONG_OPTION_SHIFTLENGTH,
-                                          translate("VCommandLine", "Shift layout length measured in layout units "
-                                                    "(export mode). The option show how many points along edge will "
-                                                    "be used in creating a layout."),
-                                          translate("VCommandLine", "Shift length")));
+                                          translate("VCommandLine", "Shift/Offset layout length measured in layout "
+                                                    "units (export mode). The option show how many points along edge "
+                                                    "will be used in creating a layout."),
+                                          translate("VCommandLine", "Shift/Offset length")));
 
     optionsIndex.insert(LONG_OPTION_GAPWIDTH, index++);
     options.append(new QCommandLineOption(QStringList() << SINGLE_OPTION_GAPWIDTH << LONG_OPTION_GAPWIDTH,
@@ -288,7 +288,8 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
         if ((a || b) && !(a && b))
         {
-            qCritical() << translate("VCommandLine", "Shift length must be used together with shift units.") << "\n";
+            qCritical() << translate("VCommandLine", "Shift/Offset length must be used together with shift units.")
+                        << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
     }

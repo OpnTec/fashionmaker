@@ -294,7 +294,7 @@
            <item row="4" column="0">
             <widget class="QCheckBox" name="checkBox_Apply_Changes">
              <property name="text">
-              <string>Immediate apply</string>
+              <string>Immediately apply</string>
              </property>
              <property name="tristate">
               <bool>false</bool>

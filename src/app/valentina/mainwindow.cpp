@@ -3332,7 +3332,7 @@ void MainWindow::CreateActions()
     connect(ui->actionAbout_Valentina, &QAction::triggered, this, &MainWindow::About);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
     connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::Preferences);
-    connect(ui->actionRepotBug, &QAction::triggered, this, &MainWindow::RepotBug);
+    connect(ui->actionReportBug, &QAction::triggered, this, &MainWindow::RepotBug);
     connect(ui->actionOnlineHelp, &QAction::triggered, this, &MainWindow::OnlineHelp);
     connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
