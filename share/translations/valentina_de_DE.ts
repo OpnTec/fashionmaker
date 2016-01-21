@@ -101,11 +101,11 @@
     </message>
     <message>
         <source>Proxy pass:</source>
-        <translation>Proxy Passwort:</translation>
+        <translation>Proxypasswort:</translation>
     </message>
     <message>
         <source>User Name:</source>
-        <translation>Username:</translation>
+        <translation>Benutzername:</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation>Die Änderung der Standardmaßeinheit  wird erst für neu angelegte Schnittmuster-Dateien wirksam</translation>
+        <translation type="vanished">Die Änderung der Standardmaßeinheit  wird erst für neu angelegte Schnittmuster-Dateien wirksam</translation>
     </message>
     <message>
         <source>Save</source>
@@ -219,7 +219,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;welche Information&lt;/a&gt; übertragen werden.</translation>
+        <translation type="vanished">Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;welche Information&lt;/a&gt; übertragen werden.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -268,6 +268,14 @@
     <message>
         <source>Book:</source>
         <translation>Buch:</translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -429,7 +437,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -453,7 +461,7 @@
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Zweiter Punkt</translation>
+        <translation>Zweiter Punkt:</translation>
     </message>
     <message>
         <source>Second point of the line</source>
@@ -461,11 +469,11 @@
     </message>
     <message>
         <source>Type of line:</source>
-        <translation>Linientyp</translation>
+        <translation>Linientyp:</translation>
     </message>
     <message>
         <source>Line color:</source>
-        <translation>Linienfarbe</translation>
+        <translation>Linienfarbe:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -619,7 +627,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation type="vanished">BogenlÃ¤nge</translation>
+        <translation type="vanished">Bogenlänge</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -766,7 +774,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -817,7 +825,7 @@
     </message>
     <message>
         <source>Value of angle</source>
-        <translation type="vanished">Berecheter Winkel</translation>
+        <translation type="vanished">Berechneter Winkel</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -841,7 +849,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
+        <translation type="vanished">Linie vom ersten zu diesem Punkt zeigen</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -865,11 +873,11 @@
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Winkel:</translation>
+        <translation>Winkel</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -885,7 +893,7 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Kurve</translation>
+        <translation>Kurve:</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -952,7 +960,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -964,11 +972,11 @@
     </message>
     <message>
         <source>Arc:</source>
-        <translation>Bogen</translation>
+        <translation>Bogen:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation>Bezeichnung des Punktes:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -1027,7 +1035,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1102,7 +1110,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1114,7 +1122,7 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Kurve</translation>
+        <translation>Kurve:</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -1264,7 +1272,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeige die ganze Berechnung in der Nachrichtenbox box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -1280,7 +1288,7 @@
     </message>
     <message>
         <source>Increments</source>
-        <translation>Weitere Maße</translation>
+        <translation>weitere Maße</translation>
     </message>
     <message>
         <source>Length of lines</source>
@@ -1316,15 +1324,15 @@
     </message>
     <message>
         <source>Line length</source>
-        <translation>LinienlÃ¤nge</translation>
+        <translation>Linienlänge</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation>BogenlÃ¤nge</translation>
+        <translation>Bogenlänge</translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation>KurvenlÃ¤nge</translation>
+        <translation>Kurvenlänge</translation>
     </message>
     <message>
         <source>Line Angle</source>
@@ -1431,7 +1439,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1808,7 +1816,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
 </context>
 <context>
@@ -1866,15 +1874,15 @@
     </message>
     <message>
         <source>Creation options</source>
-        <translation>Optionen erstellen</translation>
+        <translation type="vanished">Optionen erstellen</translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation>Verschiebe Länge:</translation>
+        <translation type="vanished">Verschiebe Länge:</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation>Grundsatz der Auswahl des nächsten Schnittteils</translation>
+        <translation type="vanished">Grundsatz der Auswahl des nächsten Schnittteils</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -2001,6 +2009,18 @@ Apply settings anyway?</source>
 	Descending area = 2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Layout options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rule for choosing the next workpiece</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -2022,11 +2042,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select second point</source>
-        <translation>Wähle zweiten Punkt</translation>
+        <translation>Zweiten Punkt wählen</translation>
     </message>
     <message>
         <source>Line between points</source>
-        <translation>Linie zwischen Punkten</translation>
+        <translation>Verbindungslinie zwischen zwei Punkten</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -2148,7 +2168,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
+        <translation>Linie vom ersten zu diesem Punkt zeigen</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2180,11 +2200,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Winkel:</translation>
+        <translation>Winkel</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2355,11 +2375,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Base size:</source>
-        <translation>Basis Größe:</translation>
+        <translation>Basisgröße:</translation>
     </message>
     <message>
         <source>Base height:</source>
-        <translation>Basis Höhe:</translation>
+        <translation>Basishöhe</translation>
     </message>
     <message>
         <source>Individual</source>
@@ -2433,7 +2453,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die ganze Berechnung in der Messagebox anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2489,7 +2509,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2643,7 +2663,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediate apply</source>
-        <translation>Sofort übernehmen</translation>
+        <translation type="vanished">Sofort übernehmen</translation>
     </message>
     <message>
         <source>Base selection</source>
@@ -2720,6 +2740,10 @@ Apply settings anyway?</source>
     <message>
         <source>Attribute</source>
         <translation>Attribut</translation>
+    </message>
+    <message>
+        <source>Immediately apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2817,7 +2841,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit radius</source>
-        <translation>Radius verändern</translation>
+        <translation>Radius bearbeiten</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2833,7 +2857,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2845,7 +2869,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation>Bezeichnung des Punktes:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -2880,7 +2904,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die vollständige Berechnung in einer Messagebox anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2912,7 +2936,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit radius</source>
-        <translation>Radius verändern</translation>
+        <translation>Radius bearbeiten</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -2920,7 +2944,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3125,7 +3149,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3306,7 +3330,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Third point</source>
-        <translation type="vanished">Dritter Punkt</translation>
+        <translation type="vanished">Punkt der zweiten Scheitelgeraden</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -3314,7 +3338,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show line from first point to our point</source>
-        <translation type="vanished">Zeige linie vom ersten punkt zu diesem Punkt</translation>
+        <translation type="vanished">Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -3342,7 +3366,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel-Assistent</translation>
+        <translation>Formel Assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3747,7 +3771,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation>Fehler beim Berechnen der Formel. Machen sie den letzten Schritt rückgängig oder korrigieren sie die Formel.</translation>
+        <translation type="vanished">Fehler beim Berechnen der Formel. Machen sie den letzten Schritt rückgängig oder korrigieren sie die Formel.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -3761,6 +3785,10 @@ Apply settings anyway?</source>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
     </message>
+    <message>
+        <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogUnionDetails</name>
@@ -3770,7 +3798,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Union tool</source>
-        <translation>Vereinigen-Werkzeug</translation>
+        <translation>Vereinigung Werkzeug</translation>
     </message>
     <message>
         <source>Select a first point</source>
@@ -3778,7 +3806,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation>Rohling sollte mindestens zwei Punkte und drei Objekte</translation>
+        <translation>Rohling sollte mindestens zwei Punkte und drei Objekte haben</translation>
     </message>
     <message>
         <source>Select a second point</source>
@@ -3805,8 +3833,7 @@ Apply settings anyway?</source>
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
-        <translation>
-Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IRGENDEINER ART, EINSCHLIESSLICH DER GARANTIE FÜR DESIGN UND EIGNUNG FÜR EINEN BESTIMMTEN ZWECK zur Verfügung gestellt.</translation>
+        <translation>Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IRGENDEINER ART, EINSCHLIESSLICH DER GARANTIE FÜR DESIGN UND EIGNUNG FÜR EINEN BESTIMMTEN ZWECK zur Verfügung gestellt.</translation>
     </message>
 </context>
 <context>
@@ -3817,7 +3844,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Fehler - unbekannte Id. Fas Programm wird geschlossen.</translation>
+        <translation>Fehler - unbekannte Id. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
@@ -3940,7 +3967,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Punkt in einer Distanz auf einer Linie</translation>
+        <translation>Punkt in Entfernung auf der Linie</translation>
     </message>
     <message>
         <source>Tools for creating lines.</source>
@@ -4012,7 +4039,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Toolbar pattern</source>
-        <translation>ToolbarSchnittmuster</translation>
+        <translation>Toolbar Schnittmuster</translation>
     </message>
     <message>
         <source>Toolbar options</source>
@@ -4168,7 +4195,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation>Programmfehler melden...</translation>
+        <translation type="vanished">Programmfehler melden...</translation>
     </message>
     <message>
         <source>Report bug</source>
@@ -4256,7 +4283,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>About Qt</source>
-        <translation>Über Qt</translation>
+        <translation>Über QT</translation>
     </message>
     <message>
         <source>Height: </source>
@@ -4276,7 +4303,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>pattern</source>
-        <translation>Schnittmuster</translation>
+        <translation>Modell</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -4292,19 +4319,19 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Error parsing file.</source>
-        <translation>Fehler beim Parsen der Datei.</translation>
+        <translation>Fehler beim Auswerten der Datei.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation>Fehler Wert kann nicht konvertiert werden.</translation>
+        <translation>Fehler: Wert kann nicht konvertiert werden.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Fehler leerer parameter.</translation>
+        <translation>Fehler: leerer Parameter.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation>Fehler falsche Id.</translation>
+        <translation>Fehler: falsche ID.</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -4406,15 +4433,15 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Curved path</source>
-        <translation>Gekrümmter Pfad</translation>
+        <translation>Pfad</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
-        <translation>Einfache Kurve unterteilen</translation>
+        <translation>Eine einfache Kurve unterteilen</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation>Gekrümmten Pfad unterteilen</translation>
+        <translation>Eine Kurve unterteilen</translation>
     </message>
     <message>
         <source>Point intersect curve and axis</source>
@@ -4426,8 +4453,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
-        <translation>
-Punkt schneidet Kreisbogen und Achse</translation>
+        <translation>Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
@@ -4435,7 +4461,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Union tool</source>
-        <translation>Vereinigen-Werkzeug</translation>
+        <translation>Vereinigung Werkzeug</translation>
     </message>
     <message>
         <source>toolBar</source>
@@ -4499,7 +4525,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Arc with given length</source>
-        <translation> Bogen mit vorgegebener Länge </translation>
+        <translation> Bogen mit vorgegebener Länge</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -4820,6 +4846,10 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report Bug...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5378,7 +5408,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>In heights</source>
-        <translation>In Körpergrößen</translation>
+        <translation>In Längen</translation>
     </message>
     <message>
         <source>Details</source>
@@ -6038,7 +6068,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation>Diese Nachfrage nicht mehr &amp;anzeigen</translation>
+        <translation>Diese Nachfrage nicht mehr &amp;stellen</translation>
     </message>
     <message>
         <source>Do not &amp;show again</source>
@@ -6073,7 +6103,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation>Fehler: mehrdeutige ID.</translation>
+        <translation>Fehler: uneindeutige ID.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
@@ -6142,7 +6172,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Fehler - unbekannte Id. Fas Programm wird geschlossen.</translation>
+        <translation>Fehler - unbekannte Id. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
@@ -6237,7 +6267,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift length</source>
-        <translation>Verschieben Länge</translation>
+        <translation type="vanished">Verschieben Länge</translation>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
@@ -6341,15 +6371,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern file.</source>
-        <translation>Schnittmuster-File.</translation>
+        <translation>Schnittmuster-Datei.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Set all margins to 0.</source>
         <translation type="vanished">Ignorieren der Seitenränder zum Druck (Export-Modus). Setzen Sie alle Seitenränder auf 0.</translation>
-    </message>
-    <message>
-        <source>Shift length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Gap width must be used together with shift units.</source>
@@ -6412,10 +6438,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6425,6 +6447,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length must be used together with shift units.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6635,7 +6669,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of contact</source>
-        <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Schmittpukt Kreis und Gerade&quot;</translation>
+        <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Schnittpunkt Kreis und Gerade&quot;</translation>
     </message>
     <message>
         <source>Error creating or updating modeling point</source>
@@ -6791,7 +6825,7 @@ Do you want to save your changes?</source>
     <name>VToolOptionsPropertyBrowser</name>
     <message>
         <source>Base point</source>
-        <translation>Ausgangspunkt</translation>
+        <translation>Startpunkt</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -6819,7 +6853,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Punkt auf einer Linie</translation>
+        <translation>Punkt in Entfernung auf der Linie</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -6855,7 +6889,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Perpendicular point along line</source>
-        <translation>Loftfußpunkt auf einer Linie</translation>
+        <translation>Lotfußpunkt auf einer Linie</translation>
     </message>
     <message>
         <source>Line between points</source>
@@ -6863,7 +6897,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Schnittpunkt zweier Linien</translation>
+        <translation>Linienschnittpunkt</translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
@@ -8044,11 +8078,11 @@ Do you want to save your changes?</source>
     <name>VisToolSplinePath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
-        <translation>&lt;b&gt;Pfad&lt;/b&gt;: drei oder mehr Punket auswählen</translation>
+        <translation>&lt;b&gt;Pfad&lt;/b&gt;: drei oder mehr Punkte auswählen</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Pfad&lt;/b&gt;: drei oder mehr Punket auswählen, &lt;b&gt;Enter&lt;/b&gt; - fertigstellen</translation>
+        <translation>&lt;b&gt;Pfad&lt;/b&gt;: drei oder mehr Punkte auswählen, &lt;b&gt;Enter&lt;/b&gt; - fertigstellen</translation>
     </message>
 </context>
 <context>

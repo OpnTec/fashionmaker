@@ -37,7 +37,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="199"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du cou dos (vertèbre cervicale) au sol.</translation>
+        <translation>Longueur verticale de la nuque (vertèbre cervicale) au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="203"/>
@@ -103,7 +103,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="226"/>
         <source>Height: Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Hanche</translation>
+        <translation>Hauteur : Hanche</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="227"/>
@@ -319,13 +319,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="310"/>
         <source>Height: Neck Back to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Cou dos au genou</translation>
+        <translation>Hauteur: Nuque au genou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="311"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the fold at the back of the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du cou dos (vertèbre cervicale) au pli derrière le genou.</translation>
+        <translation>Longueur verticale de la nuque (vertèbre cervicale) au pli derrière le genou.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="315"/>
@@ -391,13 +391,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="339"/>
         <source>Height: Neck Back to Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur: Cou dos au côté taille</translation>
+        <translation>Hauteur: Nuque au côté taille</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="340"/>
         <source>Vertical distance from Neck Back to Waist Side. (&apos;Height: Neck Back&apos; - &apos;Height: Waist Side&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur verticale du dos du cou au côté de la taille. (&apos;Hauteur: Cou dos&apos; - &apos;Hauteur: Taille côté&apos;).</translation>
+        <translation>Longueur verticale de la nuque au côté de la taille. (&apos;Hauteur: Nuque&apos; - &apos;Hauteur: Taille côté&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="356"/>
@@ -565,7 +565,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="443"/>
         <source>hand_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Longueur_main</translation>
+        <translation>main_longueur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="445"/>
@@ -745,7 +745,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="534"/>
         <source>head_depth</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>Tete_profondeur</translation>
+        <translation>tete_profondeur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="536"/>
@@ -769,7 +769,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="543"/>
         <source>Head: Width</source>
         <comment>Full measurement name.</comment>
-        <translation>Tête : largeur</translation>
+        <translation>Tête : Largeur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="544"/>
@@ -781,7 +781,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="548"/>
         <source>head_crown_to_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>haut_tete_a_nuque</translation>
+        <translation>tete_haut_a_nuque</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="550"/>
@@ -883,7 +883,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="600"/>
         <source>Circumference around Bust, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence autour du buste, parallèle au sol</translation>
+        <translation>Circonférence du buste, parallèle au sol.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="604"/>

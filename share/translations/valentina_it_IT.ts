@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancella</translation>
+        <translation>&amp;Cancel</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation>L&apos;unità di default aggiornata verrà utilizzata con la creazione del prossimo modello</translation>
+        <translation type="vanished">L&apos;unità di default aggiornata verrà utilizzata con la creazione del prossimo modello</translation>
     </message>
     <message>
         <source>Save</source>
@@ -219,7 +219,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>Dopo ogni crash Valentina recupera informazioni che ci possono aiutare a risolvere un problema. Non raccogliamo informazioni personali. Scopri di più sul &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt; genere di informazioni&lt;/a&gt; che raccogliamo.</translation>
+        <translation type="vanished">Dopo ogni crash Valentina recupera informazioni che ci possono aiutare a risolvere un problema. Non raccogliamo informazioni personali. Scopri di più sul &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt; genere di informazioni&lt;/a&gt; che raccogliamo.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -268,6 +268,14 @@
     <message>
         <source>Book:</source>
         <translation>Libro:</translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -405,7 +413,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostra la linea dal primo punto a questo punto</translation>
+        <translation type="vanished">Mostra la linea dal primo punto a questo punto </translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -417,7 +425,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="vanished">Colore della linea</translation>
+        <translation type="vanished">Colore linea</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -564,7 +572,7 @@
     </message>
     <message>
         <source>First angle:</source>
-        <translation>Primo angolo</translation>
+        <translation>primo angolo</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -576,7 +584,7 @@
     </message>
     <message>
         <source>Center point:</source>
-        <translation>punto centrale</translation>
+        <translation>Punto centrale</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
@@ -584,7 +592,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation>colore</translation>
+        <translation>Colore</translation>
     </message>
 </context>
 <context>
@@ -619,7 +627,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation type="vanished">Lunhgezza arco</translation>
+        <translation type="vanished">Lunghezza arco</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -659,7 +667,7 @@
     </message>
     <message>
         <source>Radius:</source>
-        <translation>raggio</translation>
+        <translation>Raggio</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -667,11 +675,11 @@
     </message>
     <message>
         <source>Value</source>
-        <translation>valore</translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>calcolo</translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>First angle:</source>
@@ -679,7 +687,7 @@
     </message>
     <message>
         <source>Length:</source>
-        <translation>lunghezza</translation>
+        <translation>Lunghezza</translation>
     </message>
     <message>
         <source>Center point:</source>
@@ -714,7 +722,7 @@
     </message>
     <message>
         <source>First point of angle</source>
-        <translation type="vanished">Primo punto dell&apos;angolo</translation>
+        <translation type="vanished">Primo punto di un angolo</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -722,7 +730,7 @@
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation type="vanished">Secondo punto dell&apos;angolo</translation>
+        <translation type="vanished">Secondo punto di un angolo</translation>
     </message>
     <message>
         <source>Third point</source>
@@ -730,7 +738,7 @@
     </message>
     <message>
         <source>Third point of angle</source>
-        <translation type="vanished">Terzo punto dell&apos;angolo</translation>
+        <translation type="vanished">Terzo punto di un angolo</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -774,11 +782,11 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>calcolo</translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Etichetta del punto</translation>
+        <translation>Nome del punto</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -794,7 +802,7 @@
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto</translation>
+        <translation>Secondo punto </translation>
     </message>
     <message>
         <source>Third point:</source>
@@ -829,7 +837,7 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="vanished">Curva</translation>
+        <translation type="vanished">Curva </translation>
     </message>
     <message>
         <source>Point label</source>
@@ -857,7 +865,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="vanished">Colore linea </translation>
+        <translation type="vanished">Colore linea</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -877,7 +885,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>calcolo</translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>Axis point:</source>
@@ -889,7 +897,7 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Etichetta del punto</translation>
+        <translation>Nome del punto</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -916,7 +924,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valore della lunghezza</translation>
+        <translation type="vanished">Valore di lunghezza</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -960,15 +968,15 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>calcolo</translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>Arc:</source>
-        <translation>arco</translation>
+        <translation>Arco</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Punto etichetta</translation>
+        <translation>Nome del punto</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -991,11 +999,11 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valore della lunghezza</translation>
+        <translation type="vanished">Valore di lunghezza</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo completo nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1039,7 +1047,7 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Curva</translation>
+        <translation>curva</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -1066,7 +1074,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valore della lunghezza</translation>
+        <translation type="vanished">Valore di lunghezza</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1074,7 +1082,7 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="vanished">Curva</translation>
+        <translation type="vanished">Curva </translation>
     </message>
     <message>
         <source>Selected curve path</source>
@@ -1110,7 +1118,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>calcolo</translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>Curve:</source>
@@ -1118,7 +1126,7 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Punto etichetta</translation>
+        <translation>Nome del punto</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -1364,7 +1372,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>calcolo</translation>
+        <translation>Calcolo</translation>
     </message>
 </context>
 <context>
@@ -1407,7 +1415,7 @@
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostra la linea dal primo punto a questo punto</translation>
+        <translation type="vanished">Mostra la linea dal primo punto a questo punto </translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -1415,7 +1423,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="vanished">Colore della linea</translation>
+        <translation type="vanished">Colore linea</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -1526,7 +1534,7 @@
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>Scegli un&apos;etichetta</translation>
+        <translation>Scegli una etichetta</translation>
     </message>
     <message>
         <source>Base point:</source>
@@ -1692,7 +1700,7 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation>Curva</translation>
+        <translation>Curva </translation>
     </message>
     <message>
         <source>Arc</source>
@@ -1804,7 +1812,7 @@
     </message>
     <message>
         <source>Calculation</source>
-        <translation>calcolo</translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -1815,7 +1823,7 @@
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Impossibile preparare i dati per la creazione del layout</translation>
+        <translation>Impossibile preparare i dati per la creazione del layout </translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -1866,15 +1874,15 @@
     </message>
     <message>
         <source>Creation options</source>
-        <translation>Crea opzioni</translation>
+        <translation type="vanished">Crea opzioni</translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation>Lunghezza spostamento:</translation>
+        <translation type="vanished">Lunghezza spostamento:</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation>Criterio della scelta del pezzo successivo</translation>
+        <translation type="vanished">Criterio della scelta del pezzo successivo</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -2019,6 +2027,18 @@ Applicare le impostazioni comunque?</translation>
 ⇥Area discendente = 2
 </translation>
     </message>
+    <message>
+        <source>Layout options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rule for choosing the next workpiece</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -2048,7 +2068,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="vanished">Colore della linea</translation>
+        <translation type="vanished">Colore linea</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -2056,7 +2076,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto</translation>
+        <translation>Secondo punto </translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -2111,11 +2131,11 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>etichetta</translation>
+        <translation>Etichetta</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>segli un&apos;etichetta</translation>
+        <translation>Scegli una etichetta</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -2123,7 +2143,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto</translation>
+        <translation>Secondo punto </translation>
     </message>
 </context>
 <context>
@@ -2166,7 +2186,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation>Mostra la linea dal primo punto a questo punto</translation>
+        <translation>Mostra la linea dal primo punto a questo punto </translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2230,11 +2250,11 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>etichetta</translation>
+        <translation>Etichetta</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation>scegli un&apos;etichetta</translation>
+        <translation>Scegli una etichetta</translation>
     </message>
     <message>
         <source>Type of line:</source>
@@ -2447,7 +2467,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valore della lunghezza</translation>
+        <translation type="vanished">Valore di lunghezza</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2475,7 +2495,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Mostra la linea dal primo punto a questo punto</translation>
+        <translation type="vanished">Mostra la linea dal primo punto a questo punto </translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2535,7 +2555,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation>Secondo punto</translation>
+        <translation>Secondo punto </translation>
     </message>
     <message>
         <source>Additional angle degrees:</source>
@@ -2661,7 +2681,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Immediate apply</source>
-        <translation>Applicazione immediata</translation>
+        <translation type="vanished">Applicazione immediata</translation>
     </message>
     <message>
         <source>Base selection</source>
@@ -2738,6 +2758,10 @@ Applicare le impostazioni comunque?</translation>
     <message>
         <source>Attribute</source>
         <translation>Attributo</translation>
+    </message>
+    <message>
+        <source>Immediately apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2859,7 +2883,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation>calcolo</translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -2981,11 +3005,11 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>First point of angle</source>
-        <translation type="vanished">Primo punto dell&apos;angolo</translation>
+        <translation type="vanished">Primo punto di un angolo</translation>
     </message>
     <message>
         <source>Second point of angle</source>
-        <translation type="vanished">Secondo punto dell&apos;angolo</translation>
+        <translation type="vanished">Secondo punto di un angolo</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
@@ -3028,7 +3052,7 @@ Applicare le impostazioni comunque?</translation>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
         <source>Dialog</source>
-        <translation>Finestra </translation>
+        <translation>Finestra</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3304,7 +3328,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Valore della lunghezza</translation>
+        <translation type="vanished">Valore di lunghezza</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -3348,7 +3372,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Line color</source>
-        <translation type="vanished">Colore della linea</translation>
+        <translation type="vanished">Colore linea</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -3560,7 +3584,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Errore parser: %1</translation>
+        <translation>Errore Parser: %1</translation>
     </message>
     <message>
         <source>First point</source>
@@ -3607,7 +3631,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Select second point</source>
-        <translation>Seleziona secondo punto</translation>
+        <translation>Seleziona il secondo punto</translation>
     </message>
     <message>
         <source>Triangle tool</source>
@@ -3765,7 +3789,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation>Errore durante la formula di calcolo. Si può provare ad annullare l&apos;ultima operazione o a correggere la formula guasta.</translation>
+        <translation type="vanished">Errore durante la formula di calcolo. Si può provare ad annullare l&apos;ultima operazione o a correggere la formula guasta.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -3778,6 +3802,10 @@ Applicare le impostazioni comunque?</translation>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel</translation>
+    </message>
+    <message>
+        <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3830,11 +3858,11 @@ Applicare le impostazioni comunque?</translation>
     <name>MApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Errore file di analisi. Il programma verrà interrotto.</translation>
+        <translation>Errore file di analisi. Il programma verrà terminato.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Errore id non valida. Il programma verrà interrotto.</translation>
+        <translation>Errore id scorretto. Il programma verrà interrotto.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
@@ -3902,7 +3930,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation>Si prega di fornire un file di input.</translation>
+        <translation>Si prega di fornire un di input.</translation>
     </message>
     <message>
         <source>Open with the base size. Valid values: %1cm.</source>
@@ -3953,7 +3981,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation>Punto a distanza e angolo</translation>
+        <translation>Punto a distanza lungo la linea</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
@@ -3973,7 +4001,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point at line intersection</source>
-        <translation>Punto a</translation>
+        <translation>Punto all&apos;intersezione delle linee</translation>
     </message>
     <message>
         <source>Tools for creating curves.</source>
@@ -3981,7 +4009,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation>Curva</translation>
+        <translation>Curva </translation>
     </message>
     <message>
         <source>Tools for creating arcs.</source>
@@ -4185,7 +4213,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation>Segnalazione Bug...</translation>
+        <translation type="vanished">Segnalazione Bug...</translation>
     </message>
     <message>
         <source>Report bug</source>
@@ -4411,7 +4439,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Point from X and Y of two other points</source>
-        <translation>Punto da X e Y di due altri punti</translation>
+        <translation>Punto da X a Y di due altri punti</translation>
     </message>
     <message>
         <source>Point intersect line and axis</source>
@@ -4439,7 +4467,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Segment an arc</source>
-        <translation>Segmenta l&apos;arco</translation>
+        <translation>Segmento di arco</translation>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
@@ -4668,7 +4696,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Impossibile bloccare. Questo file è già aperto in un altra finestra. Previsti conflitti quando 2 copie del programma sono in esecuzione.</translation>
+        <translation>Impossibile bloccare. </translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
@@ -4808,7 +4836,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Save...</source>
-        <translation>Salva</translation>
+        <translation>Salva...</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -4820,7 +4848,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Questo file è già aperto in un&apos;altra finestra. Ignora se vuoi continuare (non consigliato, può provocare un danneggiamento dei dati).</translation>
+        <translation>Questo file è già aperto in un&apos;altra finestra. Ignora se vuoi continuare (non consigliato, può provocare un danneggiamento dei dati). </translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -4836,6 +4864,10 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report Bug...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6254,7 +6286,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Shift length</source>
-        <translation>Sposta lunghezza</translation>
+        <translation type="vanished">Sposta lunghezza</translation>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
@@ -6390,7 +6422,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
-        <translation>La lunghezza dello spostamento deve essere usato con le unità dello spostamento</translation>
+        <translation type="vanished">La lunghezza dello spostamento deve essere usato con le unità dello spostamento</translation>
     </message>
     <message>
         <source>Gap width must be used together with shift units.</source>
@@ -6453,10 +6485,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6466,6 +6494,18 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length must be used together with shift units.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

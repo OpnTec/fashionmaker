@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation>Одиниці виміру оновленні і будуть використані при наступному створенні лекала</translation>
+        <translation type="vanished">Одиниці виміру оновленні і будуть використані при наступному створенні лекала</translation>
     </message>
     <message>
         <source>Save</source>
@@ -167,7 +167,7 @@
     </message>
     <message>
         <source>min</source>
-        <translation>хв</translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Interval:</source>
@@ -219,7 +219,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информацію&lt;/a&gt; яку ми збираємо.</translation>
+        <translation type="vanished">Після кожного падіння Valentina збирає інформацію яка може допомогти нам у виправленні помилки. Ми не збираємо персональну інформацію користувачів. Дізнатися більше про &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информацію&lt;/a&gt; яку ми збираємо.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -268,6 +268,14 @@
     <message>
         <source>Book:</source>
         <translation>Книга:</translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -516,7 +524,7 @@
     </message>
     <message>
         <source>Select point of center of arc</source>
-        <translation type="vanished">Виберіть точку центра дуги</translation>
+        <translation type="vanished">Виберіть точку центру дуги</translation>
     </message>
     <message>
         <source>Error</source>
@@ -885,7 +893,7 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Крива:</translation>
+        <translation>Крива</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -1043,7 +1051,7 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Мітка точки:</translation>
+        <translation>Ім&apos;я точки:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -1118,7 +1126,7 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Мітка точки:</translation>
+        <translation>Ім&apos;я точки:</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -1256,7 +1264,7 @@
     </message>
     <message>
         <source>Insert variable into formula</source>
-        <translation>Вставити змінну у формулу</translation>
+        <translation>Вставте значення в формулу</translation>
     </message>
     <message>
         <source>Value of first angle</source>
@@ -1284,7 +1292,7 @@
     </message>
     <message>
         <source>Length of lines</source>
-        <translation>Довжина ліній</translation>
+        <translation>Довжини лінії</translation>
     </message>
     <message>
         <source>Length of arcs</source>
@@ -1292,7 +1300,7 @@
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Довжина кривих</translation>
+        <translation>Довжни кривих</translation>
     </message>
     <message>
         <source>Angle of lines</source>
@@ -1498,7 +1506,7 @@
     </message>
     <message>
         <source>Select first point of line</source>
-        <translation>Виберість першу точку лінії</translation>
+        <translation>Виберіть першу точку лінії</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1850,7 +1858,7 @@
     </message>
     <message>
         <source>Height:</source>
-        <translation>Висота:</translation>
+        <translation>Зріст:</translation>
     </message>
     <message>
         <source>Rotate workpiece</source>
@@ -1866,15 +1874,15 @@
     </message>
     <message>
         <source>Creation options</source>
-        <translation>Опції створення</translation>
+        <translation type="vanished">Опції створення</translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation>Довжина зміщення:</translation>
+        <translation type="vanished">Довжина зміщення:</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation>Принцип вибору наступної деталі</translation>
+        <translation type="vanished">Принцип вибору наступної деталі</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -1995,7 +2003,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation>Користувацький</translation>
+        <translation>Користувацькі</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -2019,6 +2027,18 @@ Apply settings anyway?</source>
 ⇥Дві групи: великі, маленькі = 1;
 ⇥За зменшенням площі = 2
 </translation>
+    </message>
+    <message>
+        <source>Layout options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rule for choosing the next workpiece</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2468,7 +2488,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Additional angle degrees</source>
-        <translation type="vanished">Додатковий кут градуси</translation>
+        <translation type="vanished">Дод. кут градуси</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -2662,7 +2682,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediate apply</source>
-        <translation>Негайно застосувати</translation>
+        <translation type="vanished">Негайно застосувати</translation>
     </message>
     <message>
         <source>Base selection</source>
@@ -2739,6 +2759,10 @@ Apply settings anyway?</source>
     <message>
         <source>Attribute</source>
         <translation>Атрибут</translation>
+    </message>
+    <message>
+        <source>Immediately apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3337,7 +3361,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select first point of line</source>
-        <translation>Виберість першу точку лінії</translation>
+        <translation>Виберіть першу точку лінії</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -3345,7 +3369,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Спеціальна точка на плече</translation>
+        <translation>Спеціальна точка на плечі</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -3604,7 +3628,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select first point</source>
-        <translation>Виберість першу точку</translation>
+        <translation>Виберіть першу точку</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -3766,7 +3790,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation>Помилка при розрахунку формули. Ви можете попробувати відмінити останню операцію чи виправити поламану формулу.</translation>
+        <translation type="vanished">Помилка при розрахунку формули. Ви можете попробувати відмінити останню операцію чи виправити поламану формулу.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -3779,6 +3803,10 @@ Apply settings anyway?</source>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Відмінити</translation>
+    </message>
+    <message>
+        <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3859,7 +3887,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
-        <translation>Виключення: %1. Програма буде закрита.</translation>
+        <translation>Програмне виключення: %1. Програма буде закрита.</translation>
     </message>
     <message>
         <source>Valentina&apos;s measurements editor.</source>
@@ -3950,15 +3978,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Інструмент точка бісектриси кута</translation>
+        <translation>Точка бісектриси кута</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation>Інструмент точка на кінці лінії</translation>
+        <translation>Точка на кінці лінії</translation>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Інструмент точка вздовж лінії</translation>
+        <translation>Точка вздовж лінії</translation>
     </message>
     <message>
         <source>Tools for creating lines.</source>
@@ -4186,7 +4214,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation>Повідомити про помилку...</translation>
+        <translation type="vanished">Повідомити про помилку...</translation>
     </message>
     <message>
         <source>Report bug</source>
@@ -4515,7 +4543,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Arc with given length</source>
-        <translation>Дуга за заданою довжиною</translation>
+        <translation>Дуга із заданою довжиною</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -4607,7 +4635,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation>Незбережені зміни</translation>
+        <translation>Не збереженні змінення</translation>
     </message>
     <message>
         <source>Load Individual ...</source>
@@ -4664,11 +4692,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>Не вдалося заблокувати. Цей файл вже відкрито в іншому вікні.</translation>
+        <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні.</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Не вдалося заблокувати. Цей файл вже відкрито в іншому вікні. Очікуйте колізій якщо відкрито 2 копії програми.</translation>
+        <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні. Можливі конфлікти, якщо одночасно запущено кілька екземплярів програми.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
@@ -4837,6 +4865,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
         <translation>Сталася невідома помилка, наприклад переповнення розділу попередило запис lock файлу.</translation>
+    </message>
+    <message>
+        <source>Report Bug...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5903,27 +5935,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Locking file</source>
-        <translation>Файл блокування</translation>
+        <translation>Блокування файлу</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Цей файл вже відкрит в іншому вікні. Ігноруйте, якщо бажаєте продовжити (не рекомендується, може призвести до пошкодження даних).</translation>
+        <translation>Цей файл вже відкритий в іншому вікні. Ігноруйте якщо ви хочете продовжити (не рекомендується, може призвести до втрати даних).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Файл блокування не може бути створений через відсутність дозволу. Ігноруйте, якщо бажаєте продовжити (не рекомендується, може призвести до пошкодження даних).</translation>
+        <translation>Не вдалося створити lock файл через відсутність дозволів. Ігноруйте якщо хочете продовжити (не рекомендується, може призвести до втрати даних).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation>Виникла невідома помилка, наприклад, повністю заповнений розділ заважає запису файлу блокування. Ігноруйте, якщо ви хочете продовжити (не рекомендується, може призвести до пошкодження даних).</translation>
+        <translation>Сталася невідома помилка, наприклад переповнення розділу попередило запис lock файлу. Ігноруйте якщо бажаєте продовжити (не рекомендується, може призвести до втрати даних).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation>Файл блокування не може бути створений, не вистачає прав доступу.</translation>
+        <translation>Не вдалося створити lock файл через відсутність дозволів.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Виникла невідома помилка, наприклад, повністю заповнений розділ заважає запису файла блокування.</translation>
+        <translation>Сталася невідома помилка, наприклад переповнення розділу попередило запис lock файлу.</translation>
     </message>
 </context>
 <context>
@@ -6254,7 +6286,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift length</source>
-        <translation>Довжина зміщення</translation>
+        <translation type="vanished">Довжина зміщення</translation>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
@@ -6390,7 +6422,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
-        <translation>Довжина зміщення має бути разом з одиницями виміру зміщення.</translation>
+        <translation type="vanished">Довжина зміщення має бути разом з одиницями виміру зміщення.</translation>
     </message>
     <message>
         <source>Gap width must be used together with shift units.</source>
@@ -6454,7 +6486,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation>Довжина зміщення розкладки у одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки. </translation>
+        <translation type="vanished">Довжина зміщення розкладки у одиницях виміру розкладки (режим експорту). Опція показує як багато точок уздовж ребра буде створено під час створення розкладки. </translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
@@ -6467,6 +6499,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
         <translation>Запускає програму в тестовому режимі. Програма в цьому режимі завантажує один файл лекала і мовчки завершується, не показуючи головне вікно. Ключ має пріорітет перед ключем &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length must be used together with shift units.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6844,7 +6888,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation>Інструмент точка на кінці лінії</translation>
+        <translation>Точка на кінці лінії</translation>
     </message>
     <message>
         <source>Line type</source>
@@ -6860,7 +6904,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Інструмент точка вздовж лінії</translation>
+        <translation>Точка вздовж лінії</translation>
     </message>
     <message>
         <source>Arc</source>
@@ -6880,7 +6924,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Інструмент точка бісектриси кута</translation>
+        <translation>Точка бісектриси кута</translation>
     </message>
     <message>
         <source>Cut arc tool</source>
@@ -6924,7 +6968,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Спеціальна точка на плече</translation>
+        <translation>Спеціальна точка на плечі</translation>
     </message>
     <message>
         <source>Curve tool</source>

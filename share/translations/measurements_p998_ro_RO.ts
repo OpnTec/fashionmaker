@@ -7,19 +7,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="189"/>
         <source>height</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>înălțime</translation>
+        <translation>înălțimea</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="191"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation>Înăltime: Total</translation>
+        <translation>Înăltime: Totală</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="192"/>
         <source>Vertical distance from crown of head to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanța pe verticală de deasupra capului pâna la podea.</translation>
+        <translation>Distanța pe verticală de la creștetul capului la podea.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="196"/>
@@ -37,7 +37,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="199"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanța verticală de la Ceafă (vertebra cervicală) până la podea.</translation>
+        <translation>Distanța verticală de la Ceafă (vertebra cervicală) la podea.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="203"/>
@@ -49,13 +49,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="205"/>
         <source>Height: Scapula</source>
         <comment>Full measurement name.</comment>
-        <translation>înălțime_omoplat</translation>
+        <translation>Înălțime: Omoplat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="206"/>
         <source>Vertical distance from the Scapula (Blade point) to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanța verticală de la omoplat (punctul placii omoplatului) pâna la podea.</translation>
+        <translation>Distanța verticală de la omoplat (punctul placii omoplatului) la podea.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="210"/>
@@ -73,7 +73,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="213"/>
         <source>Vertical distance from the Armpit to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanța verticală de la subraț până la podea.</translation>
+        <translation>Distanța verticală de la subraț la podea.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="217"/>
@@ -91,7 +91,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="220"/>
         <source>Vertical distance from the Waist Side to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanța verticală de la Talia Laterală până la podea.</translation>
+        <translation>Distanța verticală de la Talia Laterală la podea.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="224"/>
@@ -205,13 +205,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="266"/>
         <source>height_highhip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>înălțime_înâlțime_șold</translation>
+        <translation>înălțime_șold_înalt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="268"/>
         <source>Height: Highhip</source>
         <comment>Full measurement name.</comment>
-        <translation>Înălțime: Înâlțime Șold</translation>
+        <translation>Înălțime: Șold Înalt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="269"/>
@@ -295,13 +295,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="301"/>
         <source>height_neck_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>înălțime_gât_lateral</translation>
+        <translation>înălțime_laterală_gât</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="303"/>
         <source>Height: Neck Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Înălțime: Gât Lateral</translation>
+        <translation>Înălțime:  Laterală Gât</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="304"/>
@@ -331,13 +331,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="315"/>
         <source>height_waist_side_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>înălțime_laterală_talie_la_genunchi</translation>
+        <translation>înălțime_talie_laterală_la_genunchi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="317"/>
         <source>Height: Waist Side to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Înălțime: Laterală Talie la Genunchi</translation>
+        <translation>Înălțime: Talie Laterală la Genunchi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="318"/>
@@ -361,7 +361,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="326"/>
         <source>Vertical distance from the Waist Side to the Hip level.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanța verticală de la Laterala Taliei până la nivelul Șoldului.</translation>
+        <translation>Distanța verticală de la Talia Laterală până la nivelul Șoldului.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="330"/>
@@ -397,8 +397,8 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="340"/>
         <source>Vertical distance from Neck Back to Waist Side. (&apos;Height: Neck Back&apos; - &apos;Height: Waist Side&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Distanța verticală de la Spatele Gâtului la Talia Laterală
-(&quot;Înălțime: Neck Înapoi &apos;-&apos; Înălțime: talie Side&quot;).</translation>
+        <translation>Distanța verticală de la Gât la Talie
+(&apos;Înălțime: Gât&apos; - &apos;Înălțime: Talie&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="356"/>
@@ -494,13 +494,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="403"/>
         <source>indent_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>aliniere_spate_gât</translation>
+        <translation>marcare_gât_spate</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="405"/>
         <source>Indent: Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Aliniere: Spate Gât</translation>
+        <translation>Marcare: Gât Spate</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="406"/>
@@ -614,7 +614,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="459"/>
         <source>Circumference where Palm is widest.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circumferinta Palmei în cel mai lat loc.</translation>
+        <translation>Circumferința Palmei în cel mai lat loc.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="462"/>
@@ -645,7 +645,7 @@ Măsura circumferinta in jurul celei mai mare parți ale mâinii.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="483"/>
         <source>Foot: Width</source>
         <comment>Full measurement name.</comment>
-        <translation>Picior: Lațime</translation>
+        <translation>Labă Picior: Lățime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="484"/>
@@ -681,7 +681,7 @@ Măsura circumferinta in jurul celei mai mare parți ale mâinii.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="496"/>
         <source>Foot: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Labă Picior: Circumfetință</translation>
+        <translation>Labă Picior: Circumferință</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="497"/>
@@ -808,7 +808,7 @@ Măsura circumferinta in jurul celei mai mare parți ale mâinii.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="557"/>
         <source>Head: Chin to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Cap: Bărbie până la Spate Gât</translation>
+        <translation>Cap: Bărbie la Spate Gât</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="558"/>
@@ -833,7 +833,7 @@ Măsura circumferinta in jurul celei mai mare parți ale mâinii.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="578"/>
         <source>Circumference of Neck midsection, about halfway between jaw and torso.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circumferința Gâtului la mijloc, aproximativ jumatatea drumului intre maxilarului și trunchiului.</translation>
+        <translation>Circumferința Gâtului la mijloc, aproximativ jumatatea distanței intre maxilar și bust.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="582"/>
@@ -1007,7 +1007,7 @@ Măsura circumferinta in jurul celei mai mare parți ale mâinii.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="652"/>
         <source>Highbust arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Piept înalt curbură, prin față</translation>
+        <translation>Piept superior curbură, prin față</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="653"/>
@@ -1097,7 +1097,7 @@ Măsura circumferinta in jurul celei mai mare parți ale mâinii.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="687"/>
         <source>Highhip arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Șold înalt, curbură, prin față</translation>
+        <translation>Șold înalt, curbură, față</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="688"/>
@@ -1145,13 +1145,13 @@ Măsura circumferinta in jurul celei mai mare parți ale mâinii.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="706"/>
         <source>highbust_arc_half_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>piept_înalt_curbură_jumătate_f</translation>
+        <translation>piept_superior_curbură_jumătate_f</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="708"/>
         <source>Highbust arc, front, half</source>
         <comment>Full measurement name.</comment>
-        <translation>Piept înalt curbură, jumătate, față</translation>
+        <translation>Piept superior curbură, jumătate, față</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="709"/>
@@ -1535,7 +1535,7 @@ Măsura circumferinta in jurul celei mai mare parți ale mâinii.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="865"/>
         <source>Half of &apos;Highhip arc, back&apos;. From Highhip Back to Highbust Side. (&apos;Highhip arc, back&apos;/ 2).</source>
         <comment>Full measurement description.</comment>
-        <translation>Jumătate din &apos;Șold înalt curbură, spate&apos;. De la (&apos;Șold înalt curbură, spate&apos; / 2).</translation>
+        <translation>Jumătate din &apos;Șold înalt curbură, spate&apos;. De la Șold înalt spate pâna la Piept înalt lateral (&apos;Șold înalt curbură, spate&apos; / 2).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="870"/>
@@ -1590,7 +1590,7 @@ Măsoară dintr-o parte pâna in cealaltă peste hârtie.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="888"/>
         <source>Measure around arms and torso at Armfold level.</source>
         <comment>Full measurement description.</comment>
-        <translation>Măsură în jurul brațelor și a trunchiului la nivelul îndoiturii măinilor (a coatelor).</translation>
+        <translation>Măsură în jurul brațelor și a trunchiului la nivelul îndoiturii măinilor.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="892"/>
@@ -1620,7 +1620,7 @@ Măsoară dintr-o parte pâna in cealaltă peste hârtie.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="901"/>
         <source>Body circumference of full torso</source>
         <comment>Full measurement name.</comment>
-        <translation>Circumferința corpului unde bustul este cel mai mare</translation>
+        <translation>Circumferința corpului unde trunchiul este cel mai mare</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="902"/>
@@ -1662,19 +1662,19 @@ Măsoară dintr-o parte pâna in cealaltă peste hârtie.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="930"/>
         <source>From Neck Front, over tape between Breastpoints, down to Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>De la gât anterior, peste bandă pe mijlocul pieptului, până la talie față.</translation>
+        <translation>De la gât anterior, peste bandă printre sâni, până la talie față.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="934"/>
         <source>neck_front_to_waist_flat_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>gât_anterior_la_talie_drept_f</translation>
+        <translation>gât_anterior_la_talie_întins_f</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="936"/>
         <source>Neck Front to Waist Front flat</source>
         <comment>Full measurement name.</comment>
-        <translation>Gât anterior la talie anterior drept</translation>
+        <translation>Gât anterior la talie anterior întins</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="937"/>
@@ -1692,7 +1692,7 @@ Măsoară dintr-o parte pâna in cealaltă peste hârtie.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="943"/>
         <source>Armpit to Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>De la subsuoară la talie laterală</translation>
+        <translation>De la subraț la talie laterală</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="944"/>
@@ -1950,7 +1950,7 @@ Măsoară dintr-o parte pâna in cealaltă peste hârtie.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1042"/>
         <source>From Shoulder Tip, curving around Armscye Back, then down to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>De la vârful umărului, în curbură în jurul răscroiturii brațului prin spate, apoi în jos la talie lateral.</translation>
+        <translation>De la vârful umărului, curbat în jurul răscroiturii brațului prin spate, apoi în jos la talie lateral.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1046"/>
@@ -1968,7 +1968,7 @@ Măsoară dintr-o parte pâna in cealaltă peste hârtie.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1049"/>
         <source>From Neck Side straight down back to Waist level.</source>
         <comment>Full measurement description.</comment>
-        <translation>De la gât lateral drept în jos prin spate la nivelul taliei.</translation>
+        <translation>De la gât lateral drept în jos prin spate la talie.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1053"/>
@@ -2258,7 +2258,7 @@ Măsoară dintr-o parte pâna in cealaltă peste hârtie.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1156"/>
         <source>From Waist Back down to Hip Back. Requires tape to cover the gap between buttocks.</source>
         <comment>Full measurement description.</comment>
-        <translation>De la Talie în jos spate pâna la Șold spate. Necesar o banda de a face legătura între Punctele șezutului.</translation>
+        <translation>De la Talie spate în jos pâna la Șold spate. Necesar o banda de a face legătura între Punctele șezutului.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1161"/>
@@ -2288,7 +2288,7 @@ Măsoară dintr-o parte pâna in cealaltă peste hârtie.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1169"/>
         <source>Shoulder Slope Angle from Neck Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Umăr înclinare unghi de la Gât lateral</translation>
+        <translation>Umăr la Gât înclinare unghi lateral</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1170"/>
@@ -2456,7 +2456,7 @@ Măsoară dintr-o parte pâna in cealaltă peste hârtie.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1248"/>
         <source>From Armscye to Armscye at narrowest width across chest.</source>
         <comment>Full measurement description.</comment>
-        <translation>De la subbraț la subbraț, prin cea mai scurtă lățime </translation>
+        <translation>De la subraț la subraț, prin cea mai scurtă lățime </translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1252"/>
@@ -2726,7 +2726,7 @@ Măsoară dintr-o parte pâna in cealaltă peste hârtie.</translation>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1365"/>
         <source>From Bustpoint to straight down to Waist level, forming a straight line (not curving along the body).</source>
         <comment>Full measurement description.</comment>
-        <translation>De la Piept vârf drept în jos la nivelul Taliei, formând o linie dreaptă (nu o linie curbata după corp)</translation>
+        <translation>De la Piept vârf drept în jos la nivelul Taliei, formând o linie dreaptă (nu o linie curbata după corp).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1370"/>

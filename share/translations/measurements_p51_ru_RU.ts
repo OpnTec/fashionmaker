@@ -253,7 +253,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="283"/>
         <source>Vertical distance from Bustpoint to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Размерный признак в стандарте №6. Расстояние по вертикали от пола до сосковой точки.</translation>
+        <translation>Расстояние по вертикали от сосковой точки до пола.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="287"/>
@@ -271,7 +271,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="290"/>
         <source>Vertical distance from the Shoulder Tip to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Размерный признак в стандарте №5. Расстояние по вертикали от пола до плечевой точки.</translation>
+        <translation>Расстояние по вертикали от плечевой точки до пола.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="294"/>

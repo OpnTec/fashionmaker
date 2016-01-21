@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation>Default unit updated and will be used the next pattern creation</translation>
+        <translation type="vanished">Default unit updated and will be used the next pattern creation</translation>
     </message>
     <message>
         <source>Save</source>
@@ -219,7 +219,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</translation>
+        <translation type="vanished">After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -268,6 +268,14 @@
     <message>
         <source>Book:</source>
         <translation>Book:</translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1866,15 +1874,15 @@
     </message>
     <message>
         <source>Creation options</source>
-        <translation>Creation options</translation>
+        <translation type="vanished">Creation options</translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation>Shift length:</translation>
+        <translation type="vanished">Shift length:</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation>Principle of choosing the next workpiece</translation>
+        <translation type="vanished">Principle of choosing the next workpiece</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -2017,6 +2025,18 @@ Apply settings anyway?</translation>
 	Three groups: big, middle, small = 0;
 	Two groups: big, small = 1;
 	Descending area = 2</translation>
+    </message>
+    <message>
+        <source>Layout options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rule for choosing the next workpiece</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2660,7 +2680,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Immediate apply</source>
-        <translation>Immediate apply</translation>
+        <translation type="vanished">Immediate apply</translation>
     </message>
     <message>
         <source>Base selection</source>
@@ -2737,6 +2757,10 @@ Apply settings anyway?</translation>
     <message>
         <source>Attribute</source>
         <translation>Attribute</translation>
+    </message>
+    <message>
+        <source>Immediately apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3764,7 +3788,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation>Error while calculation formula. You can try undo last operation or fix broken formula.</translation>
+        <translation type="vanished">Error while calculation formula. You can try undo last operation or fix broken formula.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -3777,6 +3801,10 @@ Apply settings anyway?</translation>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Cancel</translation>
+    </message>
+    <message>
+        <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4184,7 +4212,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation>Repot Bug...</translation>
+        <translation type="vanished">Repot Bug...</translation>
     </message>
     <message>
         <source>Report bug</source>
@@ -4836,6 +4864,10 @@ Do you want to save your changes?</translation>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
         <translation>Unknown error happened, for instance a full partition prevented writing out the lock file.</translation>
+    </message>
+    <message>
+        <source>Report Bug...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6253,7 +6285,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Shift length</source>
-        <translation>Shift length</translation>
+        <translation type="vanished">Shift length</translation>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
@@ -6389,7 +6421,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
-        <translation>Shift length must be used together with shift units.</translation>
+        <translation type="vanished">Shift length must be used together with shift units.</translation>
     </message>
     <message>
         <source>Gap width must be used together with shift units.</source>
@@ -6453,7 +6485,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</translation>
+        <translation type="vanished">Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
@@ -6466,6 +6498,18 @@ Do you want to save your changes?</translation>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
         <translation>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length must be used together with shift units.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

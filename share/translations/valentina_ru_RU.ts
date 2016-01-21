@@ -61,7 +61,7 @@
     </message>
     <message>
         <source>Proxy user</source>
-        <translation type="vanished">Пользователь Proxy</translation>
+        <translation type="vanished">Пользователь прокси-сервера</translation>
     </message>
     <message>
         <source>Proxy pass</source>
@@ -128,7 +128,7 @@
     </message>
     <message>
         <source>Config Dialog</source>
-        <translation>Диалог параметров</translation>
+        <translation>Диалог настройки</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation>Единицы измерения обновлены и будут применены при следующем создании лекала</translation>
+        <translation type="vanished">Единицы измерения обновлены и будут применены при следующем создании лекала</translation>
     </message>
     <message>
         <source>Save</source>
@@ -167,7 +167,7 @@
     </message>
     <message>
         <source>min</source>
-        <translation>мин</translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Interval:</source>
@@ -219,7 +219,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
+        <translation type="vanished">После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -243,7 +243,7 @@
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation>Разделитель дробовой части:</translation>
+        <translation>Разделитель дробной части</translation>
     </message>
     <message>
         <source>Default unit:</source>
@@ -268,6 +268,14 @@
     <message>
         <source>Book:</source>
         <translation>Книга:</translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -307,7 +315,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation type="vanished">Создано %3 в %4</translation>
+        <translation type="vanished">Собрано на %3 %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -338,7 +346,7 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Ревизия:</translation>
+        <translation>Резвизия:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
@@ -354,7 +362,7 @@
     </message>
     <message>
         <source>Web site : %1</source>
-        <translation>Веб-сайт: %1</translation>
+        <translation>Веб сайт : %1</translation>
     </message>
     <message>
         <source>Cannot open your default browser</source>
@@ -377,11 +385,11 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -413,7 +421,7 @@
     </message>
     <message>
         <source>Point at distance along line</source>
-        <translation>Точка вдоль линии</translation>
+        <translation>Инструмент точка вдоль линии</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -524,7 +532,7 @@
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Радиус не может иметь значение меньше нуля</translation>
+        <translation>Значение радиуса не может быть отрицательным</translation>
     </message>
     <message>
         <source>Angles equal</source>
@@ -603,7 +611,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -635,7 +643,7 @@
     </message>
     <message>
         <source>Edit radius</source>
-        <translation>Изменить радиус</translation>
+        <translation>Редактировать радиус</translation>
     </message>
     <message>
         <source>Edit the first angle</source>
@@ -651,7 +659,7 @@
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Радиус не может быть отрицательным</translation>
+        <translation>Значение радиуса не может быть отрицательным</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
@@ -706,7 +714,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -750,7 +758,7 @@
     </message>
     <message>
         <source>Point along bisector</source>
-        <translation>Точка вдоль биссектрисы</translation>
+        <translation>Инструмент точка биссектрисы</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -821,7 +829,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -833,7 +841,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -928,7 +936,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -1007,7 +1015,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -1082,11 +1090,11 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation>Разделить сложною кривую</translation>
+        <translation>Разделение сложной кривой</translation>
     </message>
     <message>
         <source>Color</source>
@@ -1248,7 +1256,7 @@
     <name>DialogEditWrongFormula</name>
     <message>
         <source>Edit formula</source>
-        <translation>Редактировать формулу</translation>
+        <translation>Изменить формулу</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -1399,7 +1407,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1411,7 +1419,7 @@
     </message>
     <message>
         <source>Point at distance and angle</source>
-        <translation>Точка на конце отрезка</translation>
+        <translation>Инструмент точка на конце отрезка</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -1474,7 +1482,7 @@
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Base point</source>
@@ -1672,7 +1680,7 @@
     </message>
     <message>
         <source>Name</source>
-        <translation>Обозначение</translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>The calculated value</source>
@@ -1752,11 +1760,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>Название:</translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <source>Calculated value:</source>
-        <translation>Вычисленное значение:</translation>
+        <translation>Рассчитанное значение:</translation>
     </message>
     <message>
         <source>Formula:</source>
@@ -1764,7 +1772,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -1866,15 +1874,15 @@
     </message>
     <message>
         <source>Creation options</source>
-        <translation>Опции создания</translation>
+        <translation type="vanished">Опции создания</translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation>Длина смещения:</translation>
+        <translation type="vanished">Длина смещения:</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation>Принцип выбора очередной детали</translation>
+        <translation type="vanished">Принцип выбора очередной детали</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -1994,7 +2002,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation>Пользовательский</translation>
+        <translation>Пользовательские</translation>
     </message>
     <message>
         <source>Wrong fields.</source>
@@ -2017,6 +2025,18 @@ Apply settings anyway?</source>
 ⇥Три группы: большие, средние, малые = 0;
 ⇥Две группы: большие, малые = 1;
 ⇥По уменьшению площади = 2</translation>
+    </message>
+    <message>
+        <source>Layout options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rule for choosing the next workpiece</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2070,7 +2090,7 @@ Apply settings anyway?</source>
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>First line</source>
@@ -2137,7 +2157,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Axis point</source>
@@ -2157,7 +2177,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -2454,7 +2474,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2585,7 +2605,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation>Размер и рост по умолчанию</translation>
+        <translation>Рост и размер по умолчанию</translation>
     </message>
     <message>
         <source>From standard measurements</source>
@@ -2608,7 +2628,7 @@ Apply settings anyway?</source>
     <name>DialogPatternXmlEdit</name>
     <message>
         <source>XML Editor</source>
-        <translation>XML редактор</translation>
+        <translation>XML-редактор</translation>
     </message>
     <message>
         <source>Value :</source>
@@ -2660,7 +2680,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediate apply</source>
-        <translation>Немедленно применить</translation>
+        <translation type="vanished">Немедленно применить</translation>
     </message>
     <message>
         <source>Base selection</source>
@@ -2700,11 +2720,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Node Name</source>
-        <translation>Имя Узла</translation>
+        <translation>Имя узла</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Название:</translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <source>Node Value (may be empty)</source>
@@ -2737,6 +2757,10 @@ Apply settings anyway?</source>
     <message>
         <source>Attribute</source>
         <translation>Атрибут</translation>
+    </message>
+    <message>
+        <source>Immediately apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2806,7 +2830,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2834,7 +2858,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Edit radius</source>
-        <translation>Изменить радиус</translation>
+        <translation>Редактировать радиус</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2901,7 +2925,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>Center of arc</source>
@@ -2976,7 +3000,7 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -3090,7 +3114,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius of the second circle</source>
@@ -3311,7 +3335,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>First point</source>
@@ -3426,7 +3450,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation>Метка точки</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -3559,7 +3583,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Ошибка синтаксического анализа: %1</translation>
+        <translation>Ошибка разбора: %1</translation>
     </message>
     <message>
         <source>First point</source>
@@ -3574,7 +3598,7 @@ Apply settings anyway?</source>
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Имя точки</translation>
+        <translation type="vanished">Метка точки</translation>
     </message>
     <message>
         <source>First point of axis</source>
@@ -3689,7 +3713,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Show line from second point to this point</source>
-        <translation type="vanished">Показать линию от второй точки в этой точке</translation>
+        <translation type="vanished">Показать линию от первой точки до этой</translation>
     </message>
     <message>
         <source>Third dart point</source>
@@ -3764,7 +3788,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation>Ошибка при расчете формулы. Вы можете попробовать отменить последнюю операцию или исправить неисправную формулу.</translation>
+        <translation type="vanished">Ошибка при расчете формулы. Вы можете попробовать отменить последнюю операцию или исправить неисправную формулу.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -3777,6 +3801,10 @@ Apply settings anyway?</source>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Отмена</translation>
+    </message>
+    <message>
+        <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3829,23 +3857,23 @@ Apply settings anyway?</source>
     <name>MApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Ошибка разбора файла. Работа программы будет завершена.</translation>
+        <translation>Ошибка парсинга файла. Програма будет закрыта.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Ошибка идентификатора. Работа программы будет завершена.</translation>
+        <translation>Ошибка, неправильный id. Програма будет закрыта.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
-        <translation>Ошибка преобразования значения. Работа программы будет завершена.</translation>
+        <translation>Ошибка, невозможно преобразовать значение. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation>Ошибка пустого параметра. Работа программы будет завершена.</translation>
+        <translation>Ошибка пустой параметр. Програма будет закрыта.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Ошибка неправильного идентификатора. Работа программы будет завершена.</translation>
+        <translation>Ошибка неправильный id. Програма будет закрыта.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
@@ -3901,7 +3929,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Please, provide one input file.</source>
-        <translation>Укажите один входной файл.</translation>
+        <translation>Необходимо указать один входной файл.</translation>
     </message>
     <message>
         <source>Open with the base size. Valid values: %1cm.</source>
@@ -4140,7 +4168,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation>Свойства</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Pattern properties</source>
@@ -4184,7 +4212,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation>Сообщить об ошибке...</translation>
+        <translation type="vanished">Сообщить об ошибке...</translation>
     </message>
     <message>
         <source>Report bug</source>
@@ -4280,7 +4308,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size: </source>
-        <translation>Размеры: </translation>
+        <translation>Размер:</translation>
     </message>
     <message>
         <source>Pattern Piece: </source>
@@ -4300,7 +4328,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation>Не удалось сохранить файл</translation>
+        <translation>Невозможно сохранить файл</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -4316,7 +4344,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Ошибка, пустой параметр.</translation>
+        <translation>Помилка, пустий параметр.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -4791,7 +4819,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>True darts</source>
-        <translation>Выточка</translation>
+        <translation>Вытачка</translation>
     </message>
     <message>
         <source>New pattern</source>
@@ -4815,7 +4843,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Locking file</source>
-        <translation>Блокировка файла</translation>
+        <translation>Файл блокировки</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -4835,7 +4863,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись файла блокировки.</translation>
+        <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись lock файла.</translation>
+    </message>
+    <message>
+        <source>Report Bug...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4890,11 +4922,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Невозможно подготовить данные для создания выкройки</translation>
+        <translation>Не удалось подготовить данные для создания лекала</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Несколько заготовок деталей остались не размещёнными, но никакая из них не подходит для листа бумаги</translation>
+        <translation>Несколько деталей остались не уложеными, но никто из них не подходит для листа</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -4960,7 +4992,7 @@ Do you want to save your changes?</source>
     <name>PathPage</name>
     <message>
         <source>Open Directory</source>
-        <translation>Открыть директорию</translation>
+        <translation>Открыть каталог</translation>
     </message>
     <message>
         <source>Path that use Valentina</source>
@@ -4972,7 +5004,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Редактировать</translation>
+        <translation>Изменить</translation>
     </message>
     <message>
         <source>Type</source>
@@ -4992,7 +5024,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements</source>
-        <translation>Стандартная таблица мерок</translation>
+        <translation>Стандартные мерки</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -5409,7 +5441,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показать полный расчет в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Base value:</source>
@@ -5549,7 +5581,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation>О &amp;Qt</translation>
+        <translation>Про &amp;Qt</translation>
     </message>
     <message>
         <source>About Tape</source>
@@ -5557,7 +5589,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>New</source>
-        <translation>Новый</translation>
+        <translation>Новое</translation>
     </message>
     <message>
         <source>Add known</source>
@@ -5699,7 +5731,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation>Файлы выкроек (*.val)</translation>
+        <translation>Файл лекала (*.val)</translation>
     </message>
     <message>
         <source>Pattern unit:</source>
@@ -5918,7 +5950,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation>lock файл не может быть создан, не хватает доступа</translation>
+        <translation>lock файл не может быть создан, не хватает доступа.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
@@ -5933,11 +5965,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>От&amp;мена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>О&amp;к</translation>
+        <translation>&amp;Ок</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -5976,7 +6008,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="vanished">Разделитель десятичной части</translation>
+        <translation type="vanished">Разделитель дробной части</translation>
     </message>
     <message>
         <source>With OS options (%1)</source>
@@ -5992,7 +6024,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation>Система создания выкроек</translation>
+        <translation>Система создания выкроек:</translation>
     </message>
     <message>
         <source>Default height and size</source>
@@ -6015,7 +6047,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path that use Valentina</source>
-        <translation>Путь для использования Valentin&apos;ой</translation>
+        <translation>Путь, что использует Валентина</translation>
     </message>
     <message>
         <source>Default</source>
@@ -6174,7 +6206,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
-        <translation>Что то не так!!!</translation>
+        <translation>Что-то не так!</translation>
     </message>
     <message>
         <source>Parser error: %1. Program will be terminated.</source>
@@ -6253,7 +6285,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift length</source>
-        <translation>Длина смещения</translation>
+        <translation type="vanished">Длина смещения</translation>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
@@ -6389,7 +6421,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
-        <translation>Длина смещения должна быть использована вместе с единицами измерения смещения.</translation>
+        <translation type="vanished">Длина смещения должна быть использована вместе с единицами измерения смещения.</translation>
     </message>
     <message>
         <source>Gap width must be used together with shift units.</source>
@@ -6453,7 +6485,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation>Смещение в единицах раскладки (режим экспорта). Указывает как много точек вдоль ребра будет создано при создании раскладки.</translation>
+        <translation type="vanished">Смещение в единицах раскладки (режим экспорта). Указывает как много точек вдоль ребра будет создано при создании раскладки.</translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
@@ -6466,6 +6498,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
         <translation>Запускает программу в тестовом режиме. Программа в этом режиме загружает один файл лекала и молча завершается, не показывая главное окно. Ключ имеет приоритет перед ключом &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length must be used together with shift units.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6795,7 +6839,7 @@ Do you want to save your changes?</source>
     <name>VPatternConverter</name>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation>Неожиданная версия &quot;%1&quot;.</translation>
+        <translation>Неожиданная версия «%1».</translation>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
@@ -6836,7 +6880,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Имя точки</translation>
+        <translation>Метка точки</translation>
     </message>
     <message>
         <source>Position</source>
@@ -6924,7 +6968,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Специальная точка на плечо</translation>
+        <translation>Специальная точка на плече</translation>
     </message>
     <message>
         <source>Curve tool</source>
@@ -6972,7 +7016,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>True darts</source>
-        <translation>Выточка</translation>
+        <translation>Вытачка</translation>
     </message>
     <message>
         <source>Point 1 label</source>
@@ -8053,7 +8097,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Ошибка восстановления из резервного файла: %1.</translation>
+        <translation>Ошибка востановления с резервного файла: %1.</translation>
     </message>
 </context>
 <context>
@@ -8064,7 +8108,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Ошибка восстановления из резервного файла: %1.</translation>
+        <translation>Ошибка востановления с резервного файла: %1.</translation>
     </message>
 </context>
 <context>
@@ -8111,11 +8155,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation>КРИТИЧЕСКИ:</translation>
+        <translation>КРИТИЧЕСКАЯ:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation>ФАТАЛЬНО:</translation>
+        <translation>ФАТАЛЬНАЯ:</translation>
     </message>
     <message>
         <source>INFO:</source>

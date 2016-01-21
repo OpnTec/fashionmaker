@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>%Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -148,11 +148,11 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation>Oletusarvoinen yksikkö päivitetty ja otetaan käyttöön seuraavan kaavan luonnin yhteydessä</translation>
+        <translation type="vanished">Oletusarvoinen yksikkö päivitetty ja otetaan käyttöön seuraavan kaavan luonnin yhteydessä</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Tallenna</translation>
+        <translation>Talenna</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
@@ -188,15 +188,15 @@
     </message>
     <message>
         <source>Centimeters</source>
-        <translation>senttimetriä</translation>
+        <translation>Senttimetriä</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation>millimetriä</translation>
+        <translation>Millimetriä</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation>tuumaa</translation>
+        <translation>Tuumaa</translation>
     </message>
     <message>
         <source>Label language</source>
@@ -212,7 +212,7 @@
     </message>
     <message>
         <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation>Valentina kerää tietoa jokaisesta ohjelman kaatumisesta. Ohjelma ei kerää henkilökohtaisia tietoja. Lisätietoa kerätystä  &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;tiedosta. &lt;/a&gt; </translation>
+        <translation type="vanished">Valentina kerää tietoa jokaisesta ohjelman kaatumisesta. Ohjelma ei kerää henkilökohtaisia tietoja. Lisätietoja kerätyistä  &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;tiedoista. &lt;/a&gt; </translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -260,6 +260,14 @@
     </message>
     <message>
         <source>Book:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -374,7 +382,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -699,7 +707,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -826,7 +834,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -842,7 +850,7 @@
     </message>
     <message>
         <source>Point intersect curve and axis</source>
-        <translation>Käyrän ja akselin leikkauspiste</translation>
+        <translation>Kaaren ja akselin leikkauspiste</translation>
     </message>
     <message>
         <source>Axis Point</source>
@@ -921,7 +929,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -1000,7 +1008,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -1075,7 +1083,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -1277,11 +1285,11 @@
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Kaarenpituus</translation>
+        <translation>Kaarien pituus</translation>
     </message>
     <message>
         <source>Length of curves</source>
-        <translation>Polun pituus</translation>
+        <translation>Käyrän pituus</translation>
     </message>
     <message>
         <source>Angle of lines</source>
@@ -1388,7 +1396,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1463,7 +1471,7 @@
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Base point</source>
@@ -1855,15 +1863,15 @@
     </message>
     <message>
         <source>Creation options</source>
-        <translation>Luomisasetukset</translation>
+        <translation type="vanished">Luomisasetukset</translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation>Siirron pituus:</translation>
+        <translation type="vanished">Siirron pituus:</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
-        <translation>Seuraavan kaavan valintaperiaate</translation>
+        <translation type="vanished">Seuraavan kaavan valintaperiaate</translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -1990,6 +1998,18 @@ Apply settings anyway?</source>
 	Descending area = 2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Layout options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rule for choosing the next workpiece</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -2042,7 +2062,7 @@ Apply settings anyway?</source>
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First line</source>
@@ -2129,7 +2149,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -2426,7 +2446,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2632,7 +2652,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediate apply</source>
-        <translation>Lisää heti</translation>
+        <translation type="vanished">Lisää heti</translation>
     </message>
     <message>
         <source>Base selection</source>
@@ -2709,6 +2729,10 @@ Apply settings anyway?</source>
     <message>
         <source>Attribute</source>
         <translation>Attribuutti</translation>
+    </message>
+    <message>
+        <source>Immediately apply</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2853,7 +2877,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>Center of arc</source>
@@ -2928,7 +2952,7 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -3223,7 +3247,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point</source>
@@ -3338,7 +3362,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Unique label</source>
@@ -3486,7 +3510,7 @@ Apply settings anyway?</source>
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Pistenimilappu</translation>
+        <translation type="vanished">Pisteen nimi</translation>
     </message>
     <message>
         <source>First point of axis</source>
@@ -3648,7 +3672,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation>Virhe kaava laskemisessa. Yritä perua viimeisin komento tai korjaa matemaattinen kaava</translation>
+        <translation type="vanished">Virhe kaava laskemisessa. Yritä perua viimeisin komento tai korjaa matemaattinen kaava</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -3661,6 +3685,10 @@ Apply settings anyway?</source>
     <message>
         <source>&amp;Cancel</source>
         <translation>&amp;Peru</translation>
+    </message>
+    <message>
+        <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4064,7 +4092,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Repot Bug...</source>
-        <translation>Ilmoita ohjelmistovirheestä...</translation>
+        <translation type="vanished">Ilmoita ohjelmistovirheestä...</translation>
     </message>
     <message>
         <source>Report bug</source>
@@ -4278,7 +4306,7 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
-        <translation>Valitse olkapään erityispiste</translation>
+        <translation>Olkapään erityispiste</translation>
     </message>
     <message>
         <source>Triangle tool</source>
@@ -4715,6 +4743,10 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report Bug...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6079,10 +6111,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Shift length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The gap width</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6175,10 +6203,6 @@ Do you want to save your changes?</source>
         <translation>Kaava tiedosto.</translation>
     </message>
     <message>
-        <source>Shift length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Gap width must be used together with shift units.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6239,10 +6263,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6252,6 +6272,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift/Offset length must be used together with shift units.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6623,7 +6655,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation>Pistenimilappu</translation>
+        <translation>Pisteen nimi</translation>
     </message>
     <message>
         <source>Position</source>
