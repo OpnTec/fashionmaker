@@ -98,7 +98,8 @@ const QString autosavePrefix = QStringLiteral(".autosave");
 MainWindow::MainWindow(QWidget *parent)
     :MainWindowsNoGUI(parent), ui(new Ui::MainWindow), watcher(new QFileSystemWatcher(this)), currentTool(Tool::Arrow),
       lastUsedTool(Tool::Arrow), sceneDraw(nullptr), sceneDetails(nullptr),
-      mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), mChanges(false), dialogTable(nullptr),
+      mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), mChanges(false), patternReadOnly(false),
+      dialogTable(nullptr),
       dialogTool(nullptr),
       dialogHistory(nullptr), comboBoxDraws(nullptr), patternPieceLabel(nullptr), mode(Draw::Calculation),
       currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true), recentFileActs(),
@@ -2099,6 +2100,25 @@ bool MainWindow::SaveAs()
         }
     }
 
+    if (curFile == fileName && patternReadOnly)
+    {
+        const QString message = QString("Failed to save the pattern '%1'. Error writing. The document is read-only.")
+                .arg(fileName);
+        QMessageBox messageBox;
+        messageBox.setIcon(QMessageBox::Critical);
+        messageBox.setInformativeText(message);
+        messageBox.setDefaultButton(QMessageBox::Ok);
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+
+        return false;
+    }
+
+    // Need for restoring previous state in case of failure
+    const bool wasModified = doc->IsModified(); // Need because SetReadOnly() will change internal state
+    const bool readOnly = doc->IsReadOnly();
+
+    doc->SetReadOnly(false);// Save as... disable read only state
     QString error;
     const bool result = SavePattern(fileName, error);
     if (result == false)
@@ -2111,8 +2131,14 @@ bool MainWindow::SaveAs()
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();
 
+        // Restoring previous state
+        doc->SetReadOnly(readOnly);
+        doc->SetModified(wasModified);
+
         return result;
     }
+
+    patternReadOnly = false;
 
     qCDebug(vMainWindow, "Locking file");
     VlpCreateLock(lock, fileName);
@@ -2416,6 +2442,7 @@ void MainWindow::FullParseFile()
     GlobalChangePP(patternPiece);
 
     SetEnableTool(comboBoxDraws->count() > 0);
+    patternReadOnly = doc->IsReadOnly();
     SetEnableWidgets(true);
 }
 
@@ -2489,9 +2516,13 @@ void MainWindow::SetEnableWidgets(bool enable)
 {
     comboBoxDraws->setEnabled(enable);
     ui->actionOptionDraw->setEnabled(enable);
-    if (enable && not curFile.isEmpty())
+    if (enable && not curFile.isEmpty() && not patternReadOnly)
     {
         ui->actionSave->setEnabled(enable);
+    }
+    else
+    {
+        ui->actionSave->setEnabled(false);
     }
     ui->actionSaveAs->setEnabled(enable);
     ui->actionPattern_properties->setEnabled(enable);
@@ -2654,7 +2685,7 @@ void MainWindow::PatternWasModified(bool saved)
     {
         const bool state = doc->IsModified() || !saved;
         setWindowModified(state);
-        ui->actionSave->setEnabled(state);
+        not patternReadOnly ? ui->actionSave->setEnabled(state): ui->actionSave->setEnabled(false);
         isLayoutStale = true;
     }
 }

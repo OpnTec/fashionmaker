@@ -104,6 +104,7 @@ public:
     void           SetVersion();
 
     bool           IsModified() const;
+    void           SetModified(bool modified);
 
     QDomElement    GetDraw(const QString &name) const;
 

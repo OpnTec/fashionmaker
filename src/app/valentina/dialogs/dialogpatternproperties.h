@@ -62,6 +62,7 @@ protected:
 private slots:
     void ToggleComboBox();
     void DefValueChanged();
+    void SecurityValueChanged();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
@@ -75,6 +76,7 @@ private:
     bool                   descriptionChanged;
     bool                   gradationChanged;
     bool                   defaultChanged;
+    bool                   securityChanged;
     bool                   isInitialized;
 
     void         SetHeightsChecked(bool enabled);

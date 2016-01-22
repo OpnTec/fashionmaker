@@ -209,6 +209,8 @@ private:
     /** @brief mChanges true if measurement file was changed. */
     bool               mChanges;
 
+    bool               patternReadOnly;
+
     DialogIncrements   *dialogTable;
     DialogTool         *dialogTool;
     DialogHistory      *dialogHistory;

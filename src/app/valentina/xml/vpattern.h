@@ -87,6 +87,11 @@ public:
     int  GetDefCustomSize() const;
     void SetDefCustomSize(int value);
 
+    bool IsReadOnly() const;
+    void SetReadOnly(bool rOnly);
+
+    static const QString AttrReadOnly;
+
 public slots:
     void           LiteParseTree(const Document &parse);
 

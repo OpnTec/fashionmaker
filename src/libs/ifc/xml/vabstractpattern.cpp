@@ -1323,6 +1323,12 @@ bool VAbstractPattern::IsModified() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetModified(bool modified)
+{
+    this->modified = modified;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QDomElement VAbstractPattern::GetDraw(const QString &name) const
 {
     const QDomNodeList draws = documentElement().elementsByTagName(TagDraw);

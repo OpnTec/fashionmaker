@@ -49,6 +49,8 @@
 #include <QUndoStack>
 #include <QtCore/qmath.h>
 
+const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");
+
 //---------------------------------------------------------------------------------------------------------------------
 VPattern::VPattern(VContainer *data, Draw *mode, VMainGraphicsScene *sceneDraw,
                    VMainGraphicsScene *sceneDetail, QObject *parent)
@@ -2680,6 +2682,38 @@ void VPattern::SetDefCustomSize(int value)
     else
     {
         qDebug()<<"Can't save attribute "<<AttrDefSize<<Q_FUNC_INFO;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPattern::IsReadOnly() const
+{
+    const QDomElement pattern = documentElement();
+
+    if (pattern.isNull())
+    {
+        return false;
+    }
+
+    return GetParametrBool(pattern, AttrReadOnly, QStringLiteral("false"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetReadOnly(bool rOnly)
+{
+    QDomElement pattern = documentElement();
+
+    if (not pattern.isNull())
+    {
+        if (rOnly)
+        {
+            SetAttribute(pattern, AttrReadOnly, rOnly);
+        }
+        else
+        {// For better backward compatibility
+            pattern.removeAttribute(AttrReadOnly);
+        }
+        modified = true;
     }
 }
 

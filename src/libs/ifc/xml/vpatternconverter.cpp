@@ -43,8 +43,8 @@
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.2.4");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.2.4.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.2.5");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.2.5.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -105,6 +105,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000203):
             return QStringLiteral("://schema/pattern/v0.2.3.xsd");
         case (0x000204):
+            return QStringLiteral("://schema/pattern/v0.2.4.xsd");
+        case (0x000205):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -183,6 +185,13 @@ void VPatternConverter::ApplyPatches()
                 V_FALLTHROUGH
             }
             case (0x000204):
+            {
+                ToV0_2_5();
+                const QString schema = XSDSchema(0x000205);
+                ValidateXML(schema, fileName);
+                V_FALLTHROUGH
+            }
+            case (0x000205):
                 break;
             default:
                 break;
@@ -280,6 +289,13 @@ void VPatternConverter::ToV0_2_4()
 {
     FixToolUnionToV0_2_4();
     SetVersion(QStringLiteral("0.2.4"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_2_5()
+{
+    SetVersion(QStringLiteral("0.2.5"));
     Save();
 }
 

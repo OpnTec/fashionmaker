@@ -41,7 +41,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc), pattern(pattern), heightsChecked(MAX_HEIGHTS),
     sizesChecked(MAX_SIZES),  heights (QMap<GHeights, bool>()), sizes(QMap<GSizes, bool>()),
     data(QMap<QCheckBox *, int>()), descriptionChanged(false), gradationChanged(false), defaultChanged(false),
-    isInitialized(false)
+    securityChanged(false), isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -104,9 +104,22 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     connect(ui->comboBoxSize, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &DialogPatternProperties::DefValueChanged);
 
+    const bool readOnly = doc->IsReadOnly();
+    ui->checkBoxPatternReadOnly->setChecked(readOnly);
+    if (not readOnly)
+    {
+        connect(ui->checkBoxPatternReadOnly, &QRadioButton::toggled, this,
+                &DialogPatternProperties::SecurityValueChanged);
+    }
+    else
+    {
+        ui->checkBoxPatternReadOnly->setDisabled(true);
+    }
+
     //Initialization change value. Set to default value after initialization
     gradationChanged = false;
     defaultChanged = false;
+    securityChanged = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -130,6 +143,11 @@ void DialogPatternProperties::Apply()
             gradationChanged = false;
             SaveDefValues();
             defaultChanged = false;
+            emit doc->patternChanged(false);
+            break;
+        case 2:
+            doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
+            securityChanged = false;
             emit doc->patternChanged(false);
             break;
         default:
@@ -158,6 +176,13 @@ void DialogPatternProperties::Ok()
     {
         SaveDefValues();
         defaultChanged = false;
+        emit doc->patternChanged(false);
+    }
+
+    if (securityChanged)
+    {
+        doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
+        securityChanged = false;
         emit doc->patternChanged(false);
     }
 
@@ -327,6 +352,12 @@ void DialogPatternProperties::ToggleComboBox()
 void DialogPatternProperties::DefValueChanged()
 {
     defaultChanged = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SecurityValueChanged()
+{
+    securityChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
