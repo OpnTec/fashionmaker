@@ -2091,6 +2091,7 @@ bool MainWindow::SaveAs()
     if (QFileInfo(fileName).exists())
     {
         // Temporary try to lock the file before saving
+        // Also help to rewite current read-only pattern
         VLockGuard<char> tmp(fileName);
         if (not tmp.IsLocked())
         {
@@ -2098,20 +2099,6 @@ bool MainWindow::SaveAs()
                        qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
             return false;
         }
-    }
-
-    if (curFile == fileName && patternReadOnly)
-    {
-        const QString message = QString("Failed to save the pattern '%1'. Error writing. The document is read-only.")
-                .arg(fileName);
-        QMessageBox messageBox;
-        messageBox.setIcon(QMessageBox::Critical);
-        messageBox.setInformativeText(message);
-        messageBox.setDefaultButton(QMessageBox::Ok);
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.exec();
-
-        return false;
     }
 
     // Need for restoring previous state in case of failure
