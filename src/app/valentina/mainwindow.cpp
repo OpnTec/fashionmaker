@@ -217,6 +217,13 @@ void MainWindow::AddPP(const QString &PPName)
         qCDebug(vMainWindow, "Error creating pattern piece with the name %s.", qUtf8Printable(PPName));
         return;
     }
+
+    if (comboBoxDraws->count() == 0)
+    {
+        sceneDraw->InitOrigins();
+        sceneDetails->InitOrigins();
+    }
+
     comboBoxDraws->blockSignals(true);
     comboBoxDraws->addItem(PPName);
 
