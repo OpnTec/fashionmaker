@@ -112,7 +112,7 @@ void DialogHeight::SetBasePointId(const quint32 &value)
 
     VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -224,7 +224,7 @@ void DialogHeight::SaveData()
     VisToolHeight *line = qobject_cast<VisToolHeight *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetBasePointId());
+    line->setObject1Id(GetBasePointId());
     line->setLineP1Id(GetP1LineId());
     line->setLineP2Id(GetP2LineId());
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));

@@ -143,8 +143,8 @@ void VToolAlongLine::SetVisualization()
     {
         VisToolAlongLine *visual = qobject_cast<VisToolAlongLine *>(vis);
         SCASSERT(visual != nullptr)
-        visual->setPoint1Id(basePointId);
-        visual->setPoint2Id(secondPointId);
+        visual->setObject1Id(basePointId);
+        visual->setObject2Id(secondPointId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();

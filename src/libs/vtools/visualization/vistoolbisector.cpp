@@ -33,7 +33,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolBisector::VisToolBisector(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent), point2Id(NULL_ID), point3Id(NULL_ID), point(nullptr), line1P1(nullptr), line1P2(nullptr),
+    :VisLine(data, parent), object2Id(NULL_ID), object3Id(NULL_ID), point(nullptr), line1P1(nullptr), line1P2(nullptr),
       line1(nullptr), line2P2(nullptr), line2(nullptr), length(0)
 {
     line1P1 = InitPoint(supportColor, this);
@@ -47,15 +47,15 @@ VisToolBisector::VisToolBisector(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolBisector::setPoint2Id(const quint32 &value)
+void VisToolBisector::setObject2Id(const quint32 &value)
 {
-    point2Id = value;
+    object2Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolBisector::setPoint3Id(const quint32 &value)
+void VisToolBisector::setObject3Id(const quint32 &value)
 {
-    point3Id = value;
+    object3Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -71,29 +71,29 @@ VisToolBisector::~VisToolBisector()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolBisector::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(line1P1, first->toQPointF(), supportColor);
 
-        if (point2Id <= NULL_ID)
+        if (object2Id <= NULL_ID)
         {
             DrawLine(line1, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
             DrawPoint(line1P2, second->toQPointF(), supportColor);
 
             DrawLine(line1, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
 
-            if (point3Id <= NULL_ID)
+            if (object3Id <= NULL_ID)
             {
                 DrawLine(line2, QLineF(second->toQPointF(), Visualization::scenePos), supportColor);
             }
             else
             {
-                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(point3Id);
+                const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(object3Id);
                 DrawPoint(line2P2, third->toQPointF(), supportColor);
 
                 DrawLine(line2, QLineF(second->toQPointF(), third->toQPointF()), supportColor);

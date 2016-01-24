@@ -128,7 +128,7 @@ void DialogPointOfIntersectionCircles::SetFirstCircleCenterId(const quint32 &val
 
     VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
     SCASSERT(point != nullptr);
-    point->setPoint1Id(value);
+    point->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ void DialogPointOfIntersectionCircles::SetSecondCircleCenterId(const quint32 &va
 
     VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
     SCASSERT(point != nullptr);
-    point->setPoint2Id(value);
+    point->setObject2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -200,7 +200,7 @@ void DialogPointOfIntersectionCircles::SetSecondCircleRadius(const QString &valu
 //---------------------------------------------------------------------------------------------------------------------
 CrossCirclesPoint DialogPointOfIntersectionCircles::GetCrossCirclesPoint() const
 {
-    return getCurrentCrossPoint(ui->comboBoxResult);
+    return getCurrentCrossPoint<CrossCirclesPoint>(ui->comboBoxResult);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -242,7 +242,7 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
                         if (SetObject(id, ui->comboBoxCircle2Center, ""))
                         {
                             number = 0;
-                            point->setPoint2Id(id);
+                            point->setObject2Id(id);
                             point->RefreshGeometry();
                             prepare = true;
                             DialogAccepted();
@@ -389,8 +389,8 @@ void DialogPointOfIntersectionCircles::SaveData()
     VisToolPointOfIntersectionCircles *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
     SCASSERT(point != nullptr);
 
-    point->setPoint1Id(GetFirstCircleCenterId());
-    point->setPoint2Id(GetSecondCircleCenterId());
+    point->setObject1Id(GetFirstCircleCenterId());
+    point->setObject2Id(GetSecondCircleCenterId());
     point->setC1Radius(c1Radius);
     point->setC2Radius(c2Radius);
     point->setCrossPoint(GetCrossCirclesPoint());

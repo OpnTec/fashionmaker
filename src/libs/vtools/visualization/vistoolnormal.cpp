@@ -32,7 +32,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolNormal::VisToolNormal(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), point2Id(NULL_ID), point(nullptr), lineP1(nullptr), lineP2(nullptr), line(nullptr),
+    : VisLine(data, parent), object2Id(NULL_ID), point(nullptr), lineP1(nullptr), lineP2(nullptr), line(nullptr),
       length(0), angle(0)
 {
     this->mainColor = Qt::red;
@@ -51,12 +51,12 @@ VisToolNormal::~VisToolNormal()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolNormal::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(lineP1, first->toQPointF(), supportColor);
 
-        if (point2Id <= NULL_ID)
+        if (object2Id <= NULL_ID)
         {
             QLineF line_mouse(first->toQPointF(), Visualization::scenePos);
             DrawLine(line, line_mouse, supportColor);
@@ -67,7 +67,7 @@ void VisToolNormal::RefreshGeometry()
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
             DrawPoint(lineP2, second->toQPointF(), supportColor);
 
             QLineF line_mouse(first->toQPointF(), second->toQPointF());
@@ -92,9 +92,9 @@ void VisToolNormal::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolNormal::setPoint2Id(const quint32 &value)
+void VisToolNormal::setObject2Id(const quint32 &value)
 {
-    point2Id = value;
+    object2Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

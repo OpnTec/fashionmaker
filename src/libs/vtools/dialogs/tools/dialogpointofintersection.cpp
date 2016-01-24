@@ -110,7 +110,7 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
                     if (SetObject(id, ui->comboBoxFirstPoint, tr("Select point for Y value (horizontal)")))
                     {
                         number++;
-                        line->setPoint1Id(id);
+                        line->setObject1Id(id);
                         line->RefreshGeometry();
                     }
                     break;
@@ -141,7 +141,7 @@ void DialogPointOfIntersection::SaveData()
     VisToolPointOfIntersection *line = qobject_cast<VisToolPointOfIntersection *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetFirstPointId());
+    line->setObject1Id(GetFirstPointId());
     line->setPoint2Id(GetSecondPointId());
     line->RefreshGeometry();
 }
@@ -182,7 +182,7 @@ void DialogPointOfIntersection::SetFirstPointId(const quint32 &value)
 
     VisToolPointOfIntersection *line = qobject_cast<VisToolPointOfIntersection *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -54,6 +54,7 @@
 #include "dialogs/tools/dialogcurveintersectaxis.h"
 #include "dialogs/tools/dialogpointofintersectionarcs.h"
 #include "dialogs/tools/dialogpointofintersectioncircles.h"
+#include "dialogs/tools/dialogpointofintersectioncurves.h"
 #include "dialogs/tools/dialogpointfromcircleandtangent.h"
 #include "dialogs/tools/dialogpointfromarcandtangent.h"
 #include "dialogs/tools/dialogtruedarts.h"

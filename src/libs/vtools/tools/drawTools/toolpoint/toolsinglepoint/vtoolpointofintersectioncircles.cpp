@@ -344,8 +344,8 @@ void VToolPointOfIntersectionCircles::SetVisualization()
         VisToolPointOfIntersectionCircles *visual = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(firstCircleCenterId);
-        visual->setPoint2Id(secondCircleCenterId);
+        visual->setObject1Id(firstCircleCenterId);
+        visual->setObject2Id(secondCircleCenterId);
         visual->setC1Radius(firstCircleRadius);
         visual->setC2Radius(secondCircleRadius);
         visual->setCrossPoint(crossPoint);

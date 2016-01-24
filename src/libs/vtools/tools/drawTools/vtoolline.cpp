@@ -405,7 +405,7 @@ void VToolLine::SetVisualization()
         VisToolLine *visual = qobject_cast<VisToolLine *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(firstPoint);
+        visual->setObject1Id(firstPoint);
         visual->setPoint2Id(secondPoint);
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();

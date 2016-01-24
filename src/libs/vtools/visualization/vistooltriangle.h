@@ -40,7 +40,7 @@ public:
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
-    void         setPoint2Id(const quint32 &value);
+    void         setObject2Id(const quint32 &value);
     void         setHypotenuseP1Id(const quint32 &value);
     void         setHypotenuseP2Id(const quint32 &value);
 
@@ -48,7 +48,7 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolTriangle)};
 private:
     Q_DISABLE_COPY(VisToolTriangle)
-    quint32              point2Id;//axis second point
+    quint32              object2Id;//axis second point
     quint32              hypotenuseP1Id;
     quint32              hypotenuseP2Id;
     QGraphicsEllipseItem *point;

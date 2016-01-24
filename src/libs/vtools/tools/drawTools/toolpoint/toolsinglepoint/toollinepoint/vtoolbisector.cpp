@@ -302,9 +302,9 @@ void VToolBisector::SetVisualization()
         VisToolBisector *visual = qobject_cast<VisToolBisector *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(firstPointId);
-        visual->setPoint2Id(basePointId);
-        visual->setPoint3Id(thirdPointId);
+        visual->setObject1Id(firstPointId);
+        visual->setObject2Id(basePointId);
+        visual->setObject3Id(thirdPointId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();

@@ -50,9 +50,9 @@ VisToolPointFromArcAndTangent::~VisToolPointFromArcAndTangent()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromArcAndTangent::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)// tangent point
+    if (object1Id > NULL_ID)// tangent point
     {
-        const QSharedPointer<VPointF> tan = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> tan = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(tangent, tan->toQPointF(), supportColor);
 
         if (arcId > NULL_ID)// circle center

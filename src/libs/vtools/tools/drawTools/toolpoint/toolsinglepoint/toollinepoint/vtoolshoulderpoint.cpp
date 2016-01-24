@@ -306,7 +306,7 @@ void VToolShoulderPoint::SetVisualization()
         VisToolShoulderPoint *visual = qobject_cast<VisToolShoulderPoint *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(pShoulder);
+        visual->setObject1Id(pShoulder);
         visual->setLineP1Id(basePointId);
         visual->setLineP2Id(p2Line);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));

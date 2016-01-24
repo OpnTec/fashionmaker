@@ -125,6 +125,7 @@ public slots:
     void               ToolArcIntersectAxis(bool checked);
     void               ToolPointOfIntersectionArcs(bool checked);
     void               ToolPointOfIntersectionCircles(bool checked);
+    void               ToolPointOfIntersectionCurves(bool checked);
     void               ToolPointFromCircleAndTangent(bool checked);
     void               ToolPointFromArcAndTangent(bool checked);
     void               ToolArcWithLength(bool checked);

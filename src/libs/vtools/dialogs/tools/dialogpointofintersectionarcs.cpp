@@ -113,7 +113,7 @@ void DialogPointOfIntersectionArcs::SetSecondArcId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 CrossCirclesPoint DialogPointOfIntersectionArcs::GetCrossArcPoint() const
 {
-    return getCurrentCrossPoint(ui->comboBoxResult);
+    return getCurrentCrossPoint<CrossCirclesPoint>(ui->comboBoxResult);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

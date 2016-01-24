@@ -32,7 +32,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolAlongLine::VisToolAlongLine(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), point2Id(NULL_ID), point(nullptr), lineP1(nullptr), lineP2(nullptr), line(nullptr),
+    : VisLine(data, parent), object2Id(NULL_ID), point(nullptr), lineP1(nullptr), lineP2(nullptr), line(nullptr),
       length(0)
 {
     this->mainColor = Qt::red;
@@ -49,9 +49,9 @@ VisToolAlongLine::~VisToolAlongLine()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolAlongLine::setPoint2Id(const quint32 &value)
+void VisToolAlongLine::setObject2Id(const quint32 &value)
 {
-    point2Id = value;
+    object2Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -63,18 +63,18 @@ void VisToolAlongLine::setLength(const QString &expression)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolAlongLine::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(lineP1, first->toQPointF(), supportColor);
 
-        if (point2Id <= NULL_ID)
+        if (object2Id <= NULL_ID)
         {
             DrawLine(line, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
             DrawPoint(lineP2, second->toQPointF(), supportColor);
 
             DrawLine(line, QLineF(first->toQPointF(), second->toQPointF()), supportColor);

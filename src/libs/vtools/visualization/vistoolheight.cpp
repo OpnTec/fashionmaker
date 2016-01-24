@@ -51,9 +51,9 @@ VisToolHeight::~VisToolHeight()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolHeight::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(base_point, first->toQPointF(), supportColor);
 
         if (lineP1Id <= NULL_ID)

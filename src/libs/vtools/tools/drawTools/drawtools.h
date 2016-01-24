@@ -52,6 +52,7 @@
 #include "toolpoint/toolsinglepoint/vtoolpointofintersection.h"
 #include "toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.h"
 #include "toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.h"
+#include "toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
 #include "toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
 #include "toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
 #include "toolpoint/tooldoublepoint/vtooltruedarts.h"

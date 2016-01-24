@@ -119,7 +119,7 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
                             ui->spinBoxAngle1->setValue(static_cast<qint32>(QLineF(p1, p4).angle()));
                             ui->spinBoxAngle2->setValue(static_cast<qint32>(QLineF(p4, p1).angle()));
 
-                            path->setPoint4Id(id);
+                            path->setObject4Id(id);
                             path->RefreshGeometry();
                             prepare = true;
                             DialogAccepted();
@@ -150,8 +150,8 @@ void DialogSpline::SaveData()
     VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr);
 
-    path->setPoint1Id(GetP1());
-    path->setPoint4Id(GetP4());
+    path->setObject1Id(GetP1());
+    path->setObject4Id(GetP4());
     path->SetAngle1(angle1);
     path->SetAngle2(angle2);
     path->SetKAsm1(kAsm1);
@@ -287,7 +287,7 @@ void DialogSpline::SetP4(const quint32 &value)
 
     VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr);
-    path->setPoint4Id(value);
+    path->setObject4Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,7 +301,7 @@ void DialogSpline::SetP1(const quint32 &value)
 
     VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr);
-    path->setPoint1Id(value);
+    path->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

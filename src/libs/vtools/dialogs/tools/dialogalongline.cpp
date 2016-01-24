@@ -171,7 +171,7 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         if (flagError)
                         {
-                            line->setPoint2Id(id);
+                            line->setObject2Id(id);
                             line->RefreshGeometry();
                             prepare = true;
                             this->setModal(true);
@@ -201,8 +201,8 @@ void DialogAlongLine::SaveData()
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetFirstPointId());
-    line->setPoint2Id(GetSecondPointId());
+    line->setObject1Id(GetFirstPointId());
+    line->setObject2Id(GetSecondPointId());
     line->setLength(formula);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();
@@ -226,7 +226,7 @@ void DialogAlongLine::SetSecondPointId(const quint32 &value)
 
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint2Id(value);
+    line->setObject2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,7 +240,7 @@ void DialogAlongLine::SetFirstPointId(const quint32 &value)
 
     VisToolAlongLine *line = qobject_cast<VisToolAlongLine *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

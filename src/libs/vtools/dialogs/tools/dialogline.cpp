@@ -120,7 +120,7 @@ void DialogLine::SetFirstPoint(const quint32 &value)
 
     VisToolLine *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ void DialogLine::SaveData()
     VisToolLine *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetFirstPoint());
+    line->setObject1Id(GetFirstPoint());
     line->setPoint2Id(GetSecondPoint());
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();

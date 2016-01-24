@@ -124,7 +124,7 @@ void DialogCutSplinePath::setSplinePathId(const quint32 &value)
 
     VisToolCutSplinePath *path = qobject_cast<VisToolCutSplinePath *>(vis);
     SCASSERT(path != nullptr);
-    path->setPoint1Id(value);
+    path->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -180,7 +180,7 @@ void DialogCutSplinePath::SaveData()
     VisToolCutSplinePath *path = qobject_cast<VisToolCutSplinePath *>(vis);
     SCASSERT(path != nullptr);
 
-    path->setPoint1Id(getSplinePathId());
+    path->setObject1Id(getSplinePathId());
     path->setLength(formula);
     path->RefreshGeometry();
 }

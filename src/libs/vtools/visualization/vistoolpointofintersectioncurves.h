@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vistoolbisector.h
+ **  @file   vistoolpointofintersectioncurves.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   24 7, 2014
+ **  @date   24 1, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,35 +26,37 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLBISECTOR_H
-#define VISTOOLBISECTOR_H
+#ifndef VISTOOLPOINTOFINTERSECTIONCURVES_H
+#define VISTOOLPOINTOFINTERSECTIONCURVES_H
 
-#include "visline.h"
+#include "vispath.h"
+#include "../ifc/xml/vabstractpattern.h"
 
-class VisToolBisector :public VisLine
+class VisToolPointOfIntersectionCurves : public VisPath
 {
     Q_OBJECT
 public:
-    explicit VisToolBisector(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisToolBisector() Q_DECL_OVERRIDE;
+    explicit VisToolPointOfIntersectionCurves(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisToolPointOfIntersectionCurves() Q_DECL_OVERRIDE {}
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    void         setObject2Id(const quint32 &value);
-    void         setObject3Id(const quint32 &value);
-    void         setLength(const QString &expression);
+    virtual void VisualMode(const quint32 &id) Q_DECL_OVERRIDE;
+
+    void setObject2Id(const quint32 &value);
+    void setVCrossPoint(const VCrossCurvesPoint &value);
+    void setHCrossPoint(const HCrossCurvesPoint &value);
+
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolBisector)};
+    enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCurves)};
 private:
-    Q_DISABLE_COPY(VisToolBisector)
+    Q_DISABLE_COPY(VisToolPointOfIntersectionCurves)
     quint32              object2Id;
-    quint32              object3Id;
+    VCrossCurvesPoint    vCrossPoint;
+    HCrossCurvesPoint    hCrossPoint;
+
     QGraphicsEllipseItem *point;
-    QGraphicsEllipseItem *line1P1;
-    QGraphicsEllipseItem *line1P2;
-    QGraphicsLineItem    *line1;
-    QGraphicsEllipseItem *line2P2;
-    QGraphicsLineItem    *line2;
-    qreal                length;
+    QGraphicsPathItem    *visCurve2;
+
 };
 
-#endif // VISTOOLBISECTOR_H
+#endif // VISTOOLPOINTOFINTERSECTIONCURVES_H

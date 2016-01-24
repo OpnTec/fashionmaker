@@ -104,7 +104,7 @@ quint32 DialogArcWithLength::GetCenter() const
 void DialogArcWithLength::SetCenter(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxCenter, value);
-    vis->setPoint1Id(value);
+    vis->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -325,7 +325,7 @@ void DialogArcWithLength::SaveData()
     VisToolArcWithLength *path = qobject_cast<VisToolArcWithLength *>(vis);
     SCASSERT(path != nullptr);
 
-    path->setPoint1Id(GetCenter());
+    path->setObject1Id(GetCenter());
     path->setRadius(radius);
     path->setF1(f1);
     path->setLength(length);

@@ -51,9 +51,9 @@ VisToolCutSpline::~VisToolCutSpline()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCutSpline::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VSpline> spl = Visualization::data->GeometricObject<VSpline>(point1Id);
+        const QSharedPointer<VSpline> spl = Visualization::data->GeometricObject<VSpline>(object1Id);
         DrawPath(this, spl->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
 
         if (qFuzzyCompare(1 + length, 1 + 0) == false)

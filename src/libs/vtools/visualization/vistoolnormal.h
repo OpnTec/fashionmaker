@@ -40,7 +40,7 @@ public:
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
-    void         setPoint2Id(const quint32 &value);
+    void         setObject2Id(const quint32 &value);
     void         setLength(const QString &expression);
     qreal        GetAngle() const;
     void         SetAngle(const qreal &value);
@@ -48,7 +48,7 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolNormal)};
 private:
     Q_DISABLE_COPY(VisToolNormal)
-    quint32              point2Id;
+    quint32              object2Id;
     QGraphicsEllipseItem *point;
     QGraphicsEllipseItem *lineP1;
     QGraphicsEllipseItem *lineP2;

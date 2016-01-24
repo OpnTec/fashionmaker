@@ -38,7 +38,7 @@ Q_LOGGING_CATEGORY(vVis, "v.visualization")
 //---------------------------------------------------------------------------------------------------------------------
 Visualization::Visualization(const VContainer *data)
     :QObject(), data(data), factor(VDrawTool::factor), scenePos(QPointF()),
-      mainColor(Qt::red), supportColor(Qt::magenta), lineStyle(Qt::SolidLine), point1Id(NULL_ID), toolTip(QString())
+      mainColor(Qt::red), supportColor(Qt::magenta), lineStyle(Qt::SolidLine), object1Id(NULL_ID), toolTip(QString())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -46,9 +46,9 @@ Visualization::~Visualization()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void Visualization::setPoint1Id(const quint32 &value)
+void Visualization::setObject1Id(const quint32 &value)
 {
-    point1Id = value;
+    object1Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ void Visualization::VisualMode(const quint32 &pointId)
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
     SCASSERT(scene != nullptr);
 
-    this->point1Id = pointId;
+    this->object1Id = pointId;
     this->scenePos = scene->getScenePos();
     RefreshGeometry();
 

@@ -282,8 +282,8 @@ void VToolTriangle::SetVisualization()
         VisToolTriangle * visual = qobject_cast<VisToolTriangle *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(axisP1Id);
-        visual->setPoint2Id(axisP2Id);
+        visual->setObject1Id(axisP1Id);
+        visual->setObject2Id(axisP2Id);
         visual->setHypotenuseP1Id(firstPointId);
         visual->setHypotenuseP2Id(secondPointId);
         visual->RefreshGeometry();

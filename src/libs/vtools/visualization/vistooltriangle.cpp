@@ -34,7 +34,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolTriangle::VisToolTriangle(const VContainer *data, QGraphicsItem *parent)
-    :VisLine(data, parent), point2Id(NULL_ID), hypotenuseP1Id(NULL_ID), hypotenuseP2Id(NULL_ID), point(nullptr),
+    :VisLine(data, parent), object2Id(NULL_ID), hypotenuseP1Id(NULL_ID), hypotenuseP2Id(NULL_ID), point(nullptr),
       axisP1(nullptr), axisP2(nullptr), axis(nullptr), hypotenuseP1(nullptr), hypotenuseP2(nullptr), foot1(nullptr),
       foot2(nullptr)
 {
@@ -56,18 +56,18 @@ VisToolTriangle::~VisToolTriangle()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolTriangle::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(axisP1, first->toQPointF(), supportColor);
 
-        if (point2Id <= NULL_ID)
+        if (object2Id <= NULL_ID)
         {
             DrawAimedAxis(axis, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
             DrawPoint(axisP2, second->toQPointF(), supportColor);
 
             DrawAimedAxis(axis, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
@@ -112,9 +112,9 @@ void VisToolTriangle::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolTriangle::setPoint2Id(const quint32 &value)
+void VisToolTriangle::setObject2Id(const quint32 &value)
 {
-    point2Id = value;
+    object2Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

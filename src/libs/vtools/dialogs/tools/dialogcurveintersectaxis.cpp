@@ -155,7 +155,7 @@ void DialogCurveIntersectAxis::setCurveId(const quint32 &value)
 
     VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -288,7 +288,7 @@ void DialogCurveIntersectAxis::SaveData()
     VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(getCurveId());
+    line->setObject1Id(getCurveId());
     line->setAxisPointId(GetBasePointId());
     line->SetAngle(formulaAngle);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
