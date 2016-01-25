@@ -480,7 +480,7 @@ void VToolOptionsPropertyBrowser::AddPropertyCrossPoint(Tool *i, const QString &
 {
     VEnumProperty* itemProperty = new VEnumProperty(propertyName);
     itemProperty->setLiterals(QStringList()<< tr("First point") << tr("Second point"));
-    itemProperty->setValue(static_cast<int>(i->GetCrossCirclesPoint()));
+    itemProperty->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
     AddProperty(itemProperty, AttrCrossPoint);
 }
 
@@ -490,7 +490,7 @@ void VToolOptionsPropertyBrowser::AddPropertyVCrossPoint(Tool *i, const QString 
 {
     auto itemProperty = new VEnumProperty(propertyName);
     itemProperty->setLiterals(QStringList()<< tr("Highest point") << tr("Lowest point"));
-    itemProperty->setValue(static_cast<int>(i->GetVCrossPoint()));
+    itemProperty->setValue(static_cast<int>(i->GetVCrossPoint())-1);
     AddProperty(itemProperty, AttrVCrossPoint);
 }
 
@@ -500,7 +500,7 @@ void VToolOptionsPropertyBrowser::AddPropertyHCrossPoint(Tool *i, const QString 
 {
     auto itemProperty = new VEnumProperty(propertyName);
     itemProperty->setLiterals(QStringList()<< tr("Leftmost point") << tr("Rightmost point"));
-    itemProperty->setValue(static_cast<int>(i->GetHCrossPoint()));
+    itemProperty->setValue(static_cast<int>(i->GetHCrossPoint())-1);
     AddProperty(itemProperty, AttrHCrossPoint);
 }
 
@@ -629,9 +629,9 @@ Type VToolOptionsPropertyBrowser::GetCrossPoint(const QVariant &value)
     {
         switch(val)
         {
+            case 0:
             case 1:
-            case 2:
-                cross = static_cast<Type>(val);
+                cross = static_cast<Type>(val+1);
                 break;
             default:
                 break;
@@ -2037,7 +2037,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionArcs()
     VToolPointOfIntersectionArcs *i = qgraphicsitem_cast<VToolPointOfIntersectionArcs *>(currentItem);
 
     idToProperty[AttrName]->setValue(i->name());
-    idToProperty[AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint()));
+    idToProperty[AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2046,7 +2046,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionCircles()
     VToolPointOfIntersectionCircles *i = qgraphicsitem_cast<VToolPointOfIntersectionCircles *>(currentItem);
 
     idToProperty[AttrName]->setValue(i->name());
-    idToProperty[AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint()));
+    idToProperty[AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
 
     QVariant c1Radius;
     c1Radius.setValue(i->GetFirstCircleRadius());
@@ -2063,8 +2063,8 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionCurves()
     auto i = qgraphicsitem_cast<VToolPointOfIntersectionCurves *>(currentItem);
 
     idToProperty[AttrName]->setValue(i->name());
-    idToProperty[AttrVCrossPoint]->setValue(static_cast<int>(i->GetVCrossPoint()));
-    idToProperty[AttrHCrossPoint]->setValue(static_cast<int>(i->GetHCrossPoint()));
+    idToProperty[AttrVCrossPoint]->setValue(static_cast<int>(i->GetVCrossPoint())-1);
+    idToProperty[AttrHCrossPoint]->setValue(static_cast<int>(i->GetHCrossPoint())-1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2073,7 +2073,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointFromCircleAndTangent()
     VToolPointFromCircleAndTangent *i = qgraphicsitem_cast<VToolPointFromCircleAndTangent *>(currentItem);
 
     idToProperty[AttrName]->setValue(i->name());
-    idToProperty[AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint()));
+    idToProperty[AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
 
     QVariant cRadius;
     cRadius.setValue(i->GetCircleRadius());
@@ -2086,7 +2086,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointFromArcAndTangent()
     VToolPointFromArcAndTangent *i = qgraphicsitem_cast<VToolPointFromArcAndTangent *>(currentItem);
 
     idToProperty[AttrName]->setValue(i->name());
-    idToProperty[AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint()));
+    idToProperty[AttrCrossPoint]->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

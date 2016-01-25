@@ -46,6 +46,7 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
     labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
+    CheckState();
 
     FillComboBoxCurves(ui->comboBoxCurve1);
     FillComboBoxCurves(ui->comboBoxCurve2);
@@ -53,6 +54,10 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
     FillComboBoxHCrossCurvesPoint(ui->comboBoxHCorrection);
 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfIntersectionCurves::NamePointChanged);
+    connect(ui->comboBoxCurve1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogPointOfIntersectionCurves::CurveChanged);
+    connect(ui->comboBoxCurve2, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogPointOfIntersectionCurves::CurveChanged);
 
     vis = new VisToolPointOfIntersectionCurves(data);
 }
@@ -80,7 +85,7 @@ quint32 DialogPointOfIntersectionCurves::GetFirstCurveId() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCurves::SetFirstCurveId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxCurve1, value);
+    setCurrentCurveId(ui->comboBoxCurve1, value);
 
     auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
     SCASSERT(point != nullptr);
@@ -96,7 +101,7 @@ quint32 DialogPointOfIntersectionCurves::GetSecondCurveId() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCurves::SetSecondCurveId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxCurve2, value);
+    setCurrentCurveId(ui->comboBoxCurve2, value);
 
     auto point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
     SCASSERT(point != nullptr);
@@ -201,4 +206,35 @@ void DialogPointOfIntersectionCurves::SaveData()
     point->setVCrossPoint(GetVCrossPoint());
     point->setHCrossPoint(GetHCrossPoint());
     point->RefreshGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::CheckState()
+{
+    SCASSERT(bOk != nullptr);
+    bOk->setEnabled(flagName && flagError);
+    // In case dialog hasn't apply button
+    if ( bApply != nullptr)
+    {
+        bApply->setEnabled(bOk->isEnabled());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersectionCurves::CurveChanged()
+{
+    QColor color = okColor;
+    if (getCurrentObjectId(ui->comboBoxCurve1) == getCurrentObjectId(ui->comboBoxCurve2))
+    {
+        flagError = false;
+        color = errorColor;
+    }
+    else
+    {
+        flagError = true;
+        color = okColor;
+    }
+    ChangeColor(ui->labelCurve1, color);
+    ChangeColor(ui->labelCurve2, color);
+    CheckState();
 }
