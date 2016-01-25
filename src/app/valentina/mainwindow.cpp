@@ -4164,7 +4164,7 @@ QString MainWindow::GetPatternFileName()
     {
         shownName = StrippedName(curFile);
     }
-    shownName += "[*]";
+    shownName += QLatin1Literal("[*]");
     return shownName;
 }
 
@@ -4177,15 +4177,15 @@ QString MainWindow::GetMeasurementFileName()
     }
     else
     {
-        QString shownName = " [";
+        QString shownName(" [");
         shownName += StrippedName(AbsoluteMPath(curFile, doc->MPath()));
 
         if(mChanges)
         {
-            shownName += "*";
+            shownName += QLatin1Literal("*");
         }
 
-        shownName += "]";
+        shownName += QLatin1Literal("]");
         return shownName;
     }
 }
@@ -4193,7 +4193,14 @@ QString MainWindow::GetMeasurementFileName()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateWindowTitle()
 {
-    setWindowTitle(GetPatternFileName()+GetMeasurementFileName());
+    if (not patternReadOnly)
+    {
+        setWindowTitle(GetPatternFileName()+GetMeasurementFileName());
+    }
+    else
+    {
+        setWindowTitle(GetPatternFileName()+GetMeasurementFileName() + " " + tr("(read only)"));
+    }
     setWindowFilePath(curFile);
 
 #if defined(Q_OS_MAC)
