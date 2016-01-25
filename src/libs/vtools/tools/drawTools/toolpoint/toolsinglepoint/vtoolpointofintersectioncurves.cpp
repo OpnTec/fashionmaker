@@ -217,7 +217,7 @@ QPointF VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1
 
     QPointF crossPoint = vIntersections.at(0);
 
-    if (hCrossPoint == HCrossCurvesPoint::RightPoint)
+    if (hCrossPoint == HCrossCurvesPoint::RightmostPoint)
     {
         qreal maxX = vIntersections.at(0).x();
 

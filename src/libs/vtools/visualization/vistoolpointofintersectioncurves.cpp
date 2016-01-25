@@ -34,7 +34,7 @@ VisToolPointOfIntersectionCurves::VisToolPointOfIntersectionCurves(const VContai
     :VisPath(data, parent),
       object2Id(NULL_ID),
       vCrossPoint(VCrossCurvesPoint::HighestPoint),
-      hCrossPoint(HCrossCurvesPoint::LeftPoint),
+      hCrossPoint(HCrossCurvesPoint::LeftmostPoint),
       point(nullptr),
       visCurve2(nullptr)
 {

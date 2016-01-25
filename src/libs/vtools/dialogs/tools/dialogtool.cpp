@@ -241,8 +241,8 @@ void DialogTool::FillComboBoxHCrossCurvesPoint(QComboBox *box) const
 {
     SCASSERT(box != nullptr);
 
-    box->addItem(tr("Leftmost point"), QVariant(static_cast<int>(HCrossCurvesPoint::LeftPoint)));
-    box->addItem(tr("Rightmost point"), QVariant(static_cast<int>(HCrossCurvesPoint::RightPoint)));
+    box->addItem(tr("Leftmost point"), QVariant(static_cast<int>(HCrossCurvesPoint::LeftmostPoint)));
+    box->addItem(tr("Rightmost point"), QVariant(static_cast<int>(HCrossCurvesPoint::RightmostPoint)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

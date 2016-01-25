@@ -40,7 +40,7 @@ enum class LabelType : char {NewPatternPiece, NewLabel};
 // Don't touch values!!!. Same values stored in xml.
 enum class CrossCirclesPoint : char {FirstPoint = 1, SecondPoint = 2};
 enum class VCrossCurvesPoint : char {HighestPoint = 1, LowestPoint = 2};
-enum class HCrossCurvesPoint : char {LeftPoint = 1, RightPoint = 2};
+enum class HCrossCurvesPoint : char {LeftmostPoint = 1, RightmostPoint = 2};
 
 class VDataTool;
 class VContainer;
