@@ -133,6 +133,11 @@ QPointF VToolPointOfIntersectionCurves::FindPoint(const QVector<QPointF> &curve1
                                                   const QVector<QPointF> &curve2Points,
                                                   VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint)
 {
+    if (curve1Points.isEmpty() || curve2Points.isEmpty())
+    {
+        return QPointF();
+    }
+
     QVector<QPointF> intersections;
     for ( auto i = 0; i < curve1Points.count()-1; ++i )
     {
