@@ -2524,7 +2524,7 @@ void MainWindow::SetEnableWidgets(bool enable)
 {
     comboBoxDraws->setEnabled(enable);
     ui->actionOptionDraw->setEnabled(enable);
-    if (enable && not curFile.isEmpty() && not patternReadOnly)
+    if (enable && not patternReadOnly)
     {
         ui->actionSave->setEnabled(enable);
     }
