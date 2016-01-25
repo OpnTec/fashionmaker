@@ -33,7 +33,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionCircles::VisToolPointOfIntersectionCircles(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), point2Id(NULL_ID), c1Radius(0), c2Radius(0),
+    : VisLine(data, parent), object2Id(NULL_ID), c1Radius(0), c2Radius(0),
       crossPoint(CrossCirclesPoint::FirstPoint), point(nullptr), c1Center(nullptr), c2Center(nullptr), c1Path(nullptr),
       c2Path(nullptr)
 {
@@ -51,14 +51,14 @@ VisToolPointOfIntersectionCircles::~VisToolPointOfIntersectionCircles()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionCircles::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(c1Center, first->toQPointF(), supportColor);
 
-        if (point2Id > NULL_ID)
+        if (object2Id > NULL_ID)
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
             DrawPoint(c2Center, second->toQPointF(), supportColor);
 
             if (c1Radius > 0 && c2Radius > 0)
@@ -84,7 +84,7 @@ void VisToolPointOfIntersectionCircles::VisualMode(const quint32 &id)
     VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
     SCASSERT(scene != nullptr);
 
-    this->point1Id = id;
+    this->object1Id = id;
     Visualization::scenePos = scene->getScenePos();
     RefreshGeometry();
 
@@ -92,9 +92,9 @@ void VisToolPointOfIntersectionCircles::VisualMode(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointOfIntersectionCircles::setPoint2Id(const quint32 &value)
+void VisToolPointOfIntersectionCircles::setObject2Id(const quint32 &value)
 {
-    point2Id = value;
+    object2Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

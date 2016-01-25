@@ -42,7 +42,7 @@ public:
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     virtual void VisualMode(const quint32 &id) Q_DECL_OVERRIDE;
 
-    void         setPoint2Id(const quint32 &value);
+    void         setObject2Id(const quint32 &value);
     void         setC1Radius(const QString &value);
     void         setC2Radius(const QString &value);
     void         setCrossPoint(const CrossCirclesPoint &value);
@@ -51,7 +51,7 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolPointOfIntersectionCircles)};
 private:
     Q_DISABLE_COPY(VisToolPointOfIntersectionCircles)
-    quint32              point2Id;
+    quint32              object2Id;
     qreal                c1Radius;
     qreal                c2Radius;
     CrossCirclesPoint    crossPoint;

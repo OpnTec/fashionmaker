@@ -32,7 +32,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/logging.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "visualization/visualization.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 
 #include <QDialog>
@@ -42,12 +42,12 @@
 #include <QRadioButton>
 #include <QPushButton>
 #include <QCheckBox>
+#include <QComboBox>
 
 Q_DECLARE_LOGGING_CATEGORY(vDialog)
 
 class QDoubleSpinBox;
 class QLabel;
-class QComboBox;
 class QListWidgetItem;
 class VContainer;
 class QPlainTextEdit;
@@ -196,6 +196,8 @@ protected:
     void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
     void             FillComboBoxLineColors(QComboBox *box)const;
     void             FillComboBoxCrossCirclesPoints(QComboBox *box) const;
+    void             FillComboBoxVCrossCurvesPoint(QComboBox *box) const;
+    void             FillComboBoxHCrossCurvesPoint(QComboBox *box) const;
 
     virtual void     CheckState();
     QString          GetComboBoxCurrentData(const QComboBox *box)const;
@@ -219,8 +221,10 @@ protected:
                                             const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
     void             setCurrentCurveId(QComboBox *box, const quint32 &value) const;
 
-    quint32           getCurrentObjectId(QComboBox *box) const;
-    CrossCirclesPoint getCurrentCrossPoint(QComboBox *box) const;
+    quint32          getCurrentObjectId(QComboBox *box) const;
+
+    template <typename T>
+    T                getCurrentCrossPoint(QComboBox *box) const;
 
     bool             SetObject(const quint32 &id, QComboBox *box, const QString &toolTip);
     void             DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
@@ -359,6 +363,34 @@ inline void DialogTool::DeleteVisualization()
     if (qApp->getCurrentScene()->items().contains(toolVis))
     { // In some cases scene delete object yourself. If not make check program will crash.
         delete vis;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline T DialogTool::getCurrentCrossPoint(QComboBox *box) const
+{
+    int value;
+    bool ok = false;
+#if QT_VERSION < QT_VERSION_CHECK(5, 2, 0)
+    value = box->itemData(box->currentIndex()).toInt(&ok);
+#else
+    value = box->currentData().toInt(&ok);
+#endif
+    if (not ok)
+    {
+        return static_cast<T>(1);
+    }
+
+    switch(value)
+    {
+        case 1:
+        case 2:
+            return static_cast<T>(value);
+            break;
+        default:
+            return static_cast<T>(1);
+            break;
     }
 }
 

@@ -179,7 +179,7 @@ void DialogLineIntersect::SaveData()
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetP1Line1());
+    line->setObject1Id(GetP1Line1());
     line->setLine1P2Id(GetP2Line1());
     line->setLine2P1Id(GetP1Line2());
     line->setLine2P2Id(GetP2Line2());
@@ -333,7 +333,7 @@ void DialogLineIntersect::SetP1Line1(const quint32 &value)
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -40,7 +40,7 @@ public:
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
-    void         setPoint4Id(const quint32 &value);
+    void         setObject4Id(const quint32 &value);
     void         SetAngle1(const qreal &value);
     void         SetAngle2(const qreal &value);
     void         SetKAsm1(const qreal &value);
@@ -51,7 +51,7 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolSpline)};
 protected:
     Q_DISABLE_COPY(VisToolSpline)
-    quint32              point4Id;
+    quint32              object4Id;
     QGraphicsEllipseItem *lineP1;
     QGraphicsEllipseItem *lineP4;
     QGraphicsLineItem    *line;

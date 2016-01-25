@@ -278,7 +278,7 @@ void VToolCurveIntersectAxis::SetVisualization()
         VisToolCurveIntersectAxis *visual = qobject_cast<VisToolCurveIntersectAxis *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(curveId);
+        visual->setObject1Id(curveId);
         visual->setAxisPointId(basePointId);
         visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));

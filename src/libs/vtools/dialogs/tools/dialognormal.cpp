@@ -165,7 +165,7 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         if (SetObject(id, ui->comboBoxSecondPoint, ""))
                         {
-                            line->setPoint2Id(id);
+                            line->setObject2Id(id);
                             line->RefreshGeometry();
                             prepare = true;
                             this->setModal(true);
@@ -191,8 +191,8 @@ void DialogNormal::SaveData()
     VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetFirstPointId());
-    line->setPoint2Id(GetSecondPointId());
+    line->setObject1Id(GetFirstPointId());
+    line->setObject2Id(GetSecondPointId());
     line->setLength(formula);
     line->SetAngle(angle);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
@@ -217,7 +217,7 @@ void DialogNormal::SetSecondPointId(const quint32 &value)
 
     VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint2Id(value);
+    line->setObject2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -243,7 +243,7 @@ void DialogNormal::SetFirstPointId(const quint32 &value)
 
     VisToolNormal *line = qobject_cast<VisToolNormal *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

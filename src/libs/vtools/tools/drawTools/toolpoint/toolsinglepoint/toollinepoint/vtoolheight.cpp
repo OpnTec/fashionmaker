@@ -246,7 +246,7 @@ void VToolHeight::SetVisualization()
         VisToolHeight *visual = qobject_cast<VisToolHeight *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(basePointId);
+        visual->setObject1Id(basePointId);
         visual->setLineP1Id(p1LineId);
         visual->setLineP2Id(p2LineId);
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));

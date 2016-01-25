@@ -241,7 +241,7 @@ void VToolCutArc::SetVisualization()
         VisToolCutArc *visual = qobject_cast<VisToolCutArc *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(curveCutId);
+        visual->setObject1Id(curveCutId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formula));
         visual->RefreshGeometry();
     }

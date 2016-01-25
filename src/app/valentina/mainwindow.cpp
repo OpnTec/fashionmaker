@@ -217,6 +217,13 @@ void MainWindow::AddPP(const QString &PPName)
         qCDebug(vMainWindow, "Error creating pattern piece with the name %s.", qUtf8Printable(PPName));
         return;
     }
+
+    if (comboBoxDraws->count() == 0)
+    {
+        sceneDraw->InitOrigins();
+        sceneDetails->InitOrigins();
+    }
+
     comboBoxDraws->blockSignals(true);
     comboBoxDraws->addItem(PPName);
 
@@ -996,6 +1003,16 @@ void MainWindow::ToolPointOfIntersectionCircles(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolPointOfIntersectionCurves(bool checked)
+{
+    SetToolButtonWithApply<DialogPointOfIntersectionCurves>(checked, Tool::PointOfIntersectionCurves,
+                                                             "://cursor/intersection_curves_cursor.png",
+                                                             tr("Select first curve"),
+                                                    &MainWindow::ClosedDialogWithApply<VToolPointOfIntersectionCurves>,
+                                                             &MainWindow::ApplyDialog<VToolPointOfIntersectionCurves>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolPointFromCircleAndTangent(bool checked)
 {
     SetToolButtonWithApply<DialogPointFromCircleAndTangent>(checked, Tool::PointFromCircleAndTangent,
@@ -1585,6 +1602,7 @@ void MainWindow::InitToolButtons()
             &MainWindow::ToolPointOfIntersectionArcs);
     connect(ui->toolButtonPointOfIntersectionCircles, &QToolButton::clicked, this,
             &MainWindow::ToolPointOfIntersectionCircles);
+    connect(ui->toolButtonIntersectionCurves, &QToolButton::clicked, this, &MainWindow::ToolPointOfIntersectionCurves);
     connect(ui->toolButtonPointFromCircleAndTangent, &QToolButton::clicked, this,
             &MainWindow::ToolPointFromCircleAndTangent);
     connect(ui->toolButtonPointFromArcAndTangent, &QToolButton::clicked, this, &MainWindow::ToolPointFromArcAndTangent);
@@ -1713,6 +1731,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::PointOfIntersectionCircles:
             ui->toolButtonPointOfIntersectionCircles->setChecked(false);
+            break;
+        case Tool::PointOfIntersectionCurves:
+            ui->toolButtonIntersectionCurves->setChecked(false);
             break;
         case Tool::PointFromCircleAndTangent:
             ui->toolButtonPointFromCircleAndTangent->setChecked(false);
@@ -2503,7 +2524,7 @@ void MainWindow::SetEnableWidgets(bool enable)
 {
     comboBoxDraws->setEnabled(enable);
     ui->actionOptionDraw->setEnabled(enable);
-    if (enable && not curFile.isEmpty() && not patternReadOnly)
+    if (enable && not patternReadOnly)
     {
         ui->actionSave->setEnabled(enable);
     }
@@ -2892,6 +2913,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonCurveIntersectAxis->setEnabled(drawTools);
     ui->toolButtonArcIntersectAxis->setEnabled(drawTools);
     ui->toolButtonPointOfIntersectionArcs->setEnabled(drawTools);
+    ui->toolButtonIntersectionCurves->setEnabled(drawTools);
     ui->toolButtonPointOfIntersectionCircles->setEnabled(drawTools);
     ui->toolButtonPointFromCircleAndTangent->setEnabled(drawTools);
     ui->toolButtonPointFromArcAndTangent->setEnabled(drawTools);
@@ -3271,6 +3293,10 @@ void MainWindow::LastUsedTool()
         case Tool::PointOfIntersectionCircles:
             ui->toolButtonPointOfIntersectionCircles->setChecked(true);
             ToolPointOfIntersectionCircles(true);
+            break;
+        case Tool::PointOfIntersectionCurves:
+            ui->toolButtonIntersectionCurves->setChecked(true);
+            ToolPointOfIntersectionCurves(true);
             break;
         case Tool::PointFromCircleAndTangent:
             ui->toolButtonPointFromCircleAndTangent->setChecked(true);
@@ -4138,7 +4164,7 @@ QString MainWindow::GetPatternFileName()
     {
         shownName = StrippedName(curFile);
     }
-    shownName += "[*]";
+    shownName += QLatin1Literal("[*]");
     return shownName;
 }
 
@@ -4151,15 +4177,15 @@ QString MainWindow::GetMeasurementFileName()
     }
     else
     {
-        QString shownName = " [";
+        QString shownName(" [");
         shownName += StrippedName(AbsoluteMPath(curFile, doc->MPath()));
 
         if(mChanges)
         {
-            shownName += "*";
+            shownName += QLatin1Literal("*");
         }
 
-        shownName += "]";
+        shownName += QLatin1Literal("]");
         return shownName;
     }
 }
@@ -4167,7 +4193,14 @@ QString MainWindow::GetMeasurementFileName()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::UpdateWindowTitle()
 {
-    setWindowTitle(GetPatternFileName()+GetMeasurementFileName());
+    if (not patternReadOnly)
+    {
+        setWindowTitle(GetPatternFileName()+GetMeasurementFileName());
+    }
+    else
+    {
+        setWindowTitle(GetPatternFileName()+GetMeasurementFileName() + " " + tr("(read only)"));
+    }
     setWindowFilePath(curFile);
 
 #if defined(Q_OS_MAC)

@@ -318,7 +318,7 @@ void VToolPointOfContact::SetVisualization()
         VisToolPointOfContact *visual = qobject_cast<VisToolPointOfContact *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(firstPointId);
+        visual->setObject1Id(firstPointId);
         visual->setLineP2Id(secondPointId);
         visual->setRadiusId(center);
         visual->setRadius(qApp->TrVars()->FormulaToUser(arcRadius));

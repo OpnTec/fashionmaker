@@ -54,9 +54,9 @@ VisToolLineIntersectAxis::~VisToolLineIntersectAxis()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolLineIntersectAxis::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(lineP1, first->toQPointF(), supportColor);
 
         if (point2Id <= NULL_ID)

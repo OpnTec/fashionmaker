@@ -33,7 +33,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromCircleAndTangent::VisToolPointFromCircleAndTangent(const VContainer *data, QGraphicsItem *parent)
-    : VisLine(data, parent), point2Id(NULL_ID), cRadius(0), crossPoint(CrossCirclesPoint::FirstPoint),
+    : VisLine(data, parent), object2Id(NULL_ID), cRadius(0), crossPoint(CrossCirclesPoint::FirstPoint),
       point(nullptr), tangent(nullptr), cCenter(nullptr), cPath(nullptr), tangent2(nullptr)
 {
     cPath = InitItem<QGraphicsEllipseItem>(Qt::darkGreen, this);
@@ -50,14 +50,14 @@ VisToolPointFromCircleAndTangent::~VisToolPointFromCircleAndTangent()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromCircleAndTangent::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)// tangent point
+    if (object1Id > NULL_ID)// tangent point
     {
-        const QSharedPointer<VPointF> tan = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> tan = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(tangent, tan->toQPointF(), supportColor);
 
-        if (point2Id > NULL_ID)// circle center
+        if (object2Id > NULL_ID)// circle center
         {
-            const QSharedPointer<VPointF> center = Visualization::data->GeometricObject<VPointF>(point2Id);
+            const QSharedPointer<VPointF> center = Visualization::data->GeometricObject<VPointF>(object2Id);
             DrawPoint(cCenter, center->toQPointF(), supportColor);
 
             if (cRadius > 0)
@@ -76,9 +76,9 @@ void VisToolPointFromCircleAndTangent::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolPointFromCircleAndTangent::setPoint2Id(const quint32 &value)
+void VisToolPointFromCircleAndTangent::setObject2Id(const quint32 &value)
 {
-    point2Id = value;
+    object2Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

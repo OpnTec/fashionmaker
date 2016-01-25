@@ -318,7 +318,7 @@ void VToolPointFromArcAndTangent::SetVisualization()
         VisToolPointFromArcAndTangent *visual = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(tangentPointId);
+        visual->setObject1Id(tangentPointId);
         visual->setArcId(arcId);
         visual->setCrossPoint(crossPoint);
         visual->RefreshGeometry();

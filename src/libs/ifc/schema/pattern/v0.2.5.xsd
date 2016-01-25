@@ -120,11 +120,15 @@
                                                                                  <xs:attribute name="axisP2" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="arc" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="curve" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="curve1" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="curve2" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="lineColor" type="colors"></xs:attribute>
                                                                                  <xs:attribute name="color" type="colors"></xs:attribute>
                                                                                  <xs:attribute name="firstArc" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="secondArc" type="xs:unsignedInt"></xs:attribute>
-                                                                                 <xs:attribute name="crossPoint" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="crossPoint" type="crossType"></xs:attribute>
+                                                                                 <xs:attribute name="vCrossPoint" type="crossType"></xs:attribute>
+                                                                                 <xs:attribute name="hCrossPoint" type="crossType"></xs:attribute>
                                                                                  <xs:attribute name="c1Center" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="c2Center" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="c1Radius" type="xs:string"></xs:attribute>
@@ -419,6 +423,12 @@
             <xs:enumeration value="520"/>
             <xs:enumeration value="540"/>
             <xs:enumeration value="560"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="crossType">
+        <xs:restriction base="xs:unsignedInt">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
         </xs:restriction>
     </xs:simpleType>
    </xs:schema>

@@ -481,8 +481,8 @@ void VToolSpline::SetVisualization()
         SCASSERT(visual != nullptr);
 
         const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-        visual->setPoint1Id(spl->GetP1().id());
-        visual->setPoint4Id(spl->GetP4().id());
+        visual->setObject1Id(spl->GetP1().id());
+        visual->setObject4Id(spl->GetP4().id());
         visual->SetAngle1(spl->GetStartAngle());
         visual->SetAngle2(spl->GetEndAngle());
         visual->SetKAsm1(spl->GetKasm1());

@@ -249,7 +249,7 @@ void VToolCutSpline::SetVisualization()
         VisToolCutSpline *visual = qobject_cast<VisToolCutSpline *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(curveCutId);
+        visual->setObject1Id(curveCutId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formula));
         visual->RefreshGeometry();
     }

@@ -253,7 +253,7 @@ void DialogEndLine::SetBasePointId(const quint32 &value)
 
     VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -324,7 +324,7 @@ void DialogEndLine::SaveData()
     VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetBasePointId());
+    line->setObject1Id(GetBasePointId());
     line->setLength(formulaLength);
     line->SetAngle(formulaAngle);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));

@@ -48,7 +48,7 @@ public:
 
     virtual void RefreshGeometry()=0;
 
-    void         setPoint1Id(const quint32 &value);
+    void         setObject1Id(const quint32 &value);
     void         setLineStyle(const Qt::PenStyle &value);
     void         setScenePos(const QPointF &value);
     virtual void VisualMode(const quint32 &pointId);
@@ -65,7 +65,7 @@ protected:
     QColor           mainColor;
     QColor           supportColor;
     Qt::PenStyle     lineStyle;
-    quint32          point1Id;
+    quint32          object1Id;
     QString          toolTip;
 
     virtual void InitPen()=0;

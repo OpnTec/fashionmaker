@@ -145,7 +145,7 @@ void DialogCutArc::SaveData()
     VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr);
 
-    path->setPoint1Id(getArcId());
+    path->setObject1Id(getArcId());
     path->setLength(formula);
     path->RefreshGeometry();
 }
@@ -168,7 +168,7 @@ void DialogCutArc::setArcId(const quint32 &value)
 
     VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr);
-    path->setPoint1Id(value);
+    path->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

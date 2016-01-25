@@ -40,7 +40,7 @@ public:
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
-    void setPoint2Id(const quint32 &value);
+    void setObject2Id(const quint32 &value);
     void setD1PointId(const quint32 &value);
     void setD2PointId(const quint32 &value);
     void setD3PointId(const quint32 &value);

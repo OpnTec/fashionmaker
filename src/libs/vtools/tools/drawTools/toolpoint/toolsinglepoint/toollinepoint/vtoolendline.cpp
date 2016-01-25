@@ -240,7 +240,7 @@ void VToolEndLine::SetVisualization()
         VisToolEndLine *visual = qobject_cast<VisToolEndLine *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(basePointId);
+        visual->setObject1Id(basePointId);
         visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
         visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));

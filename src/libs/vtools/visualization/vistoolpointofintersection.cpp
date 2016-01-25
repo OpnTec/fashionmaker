@@ -49,14 +49,14 @@ VisToolPointOfIntersection::~VisToolPointOfIntersection()
 void VisToolPointOfIntersection::RefreshGeometry()
 {
     QLineF axisL1;
-    if (point1Id <= NULL_ID)
+    if (object1Id <= NULL_ID)
     {
         axisL1 = Axis(Visualization::scenePos, 90);
         DrawLine(this, axisL1, supportColor, Qt::DashLine);
     }
     else
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(axisP1, first->toQPointF(), supportColor);
 
         axisL1 = Axis(first->toQPointF(), 90);

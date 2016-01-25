@@ -46,7 +46,7 @@ VisToolLine::~VisToolLine()
 void VisToolLine::RefreshGeometry()
 {
     QLineF line;
-    const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
+    const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
     if (point2Id == NULL_ID)
     {
         line = QLineF(first->toQPointF(), Visualization::scenePos);

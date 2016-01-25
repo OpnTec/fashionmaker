@@ -72,9 +72,9 @@ VisToolTrueDarts::~VisToolTrueDarts()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolTrueDarts::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> blP1 = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> blP1 = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(baseLineP1, blP1->toQPointF(), supportColor);
 
         if (baseLineP2Id <= NULL_ID)
@@ -135,7 +135,7 @@ void VisToolTrueDarts::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolTrueDarts::setPoint2Id(const quint32 &value)
+void VisToolTrueDarts::setObject2Id(const quint32 &value)
 {
     baseLineP2Id = value;
 }

@@ -164,7 +164,7 @@ void DialogLineIntersectAxis::SetFirstPointId(const quint32 &value)
 
     VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -356,7 +356,7 @@ void DialogLineIntersectAxis::SaveData()
     VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetFirstPointId());
+    line->setObject1Id(GetFirstPointId());
     line->setPoint2Id(GetSecondPointId());
     line->setAxisPointId(GetBasePointId());
     line->SetAngle(formulaAngle);

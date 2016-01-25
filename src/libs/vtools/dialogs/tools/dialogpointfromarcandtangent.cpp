@@ -103,13 +103,13 @@ void DialogPointFromArcAndTangent::SetTangentPointId(const quint32 &value)
 
     VisToolPointFromArcAndTangent *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
     SCASSERT(point != nullptr);
-    point->setPoint1Id(value);
+    point->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 CrossCirclesPoint DialogPointFromArcAndTangent::GetCrossCirclesPoint() const
 {
-    return getCurrentCrossPoint(ui->comboBoxResult);
+    return getCurrentCrossPoint<CrossCirclesPoint>(ui->comboBoxResult);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ void DialogPointFromArcAndTangent::SaveData()
     VisToolPointFromArcAndTangent *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
     SCASSERT(point != nullptr);
 
-    point->setPoint1Id(GetTangentPointId());
+    point->setObject1Id(GetTangentPointId());
     point->setArcId(GetArcId());
     point->setCrossPoint(GetCrossCirclesPoint());
     point->RefreshGeometry();

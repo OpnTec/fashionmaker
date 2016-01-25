@@ -112,7 +112,7 @@ void DialogPointFromCircleAndTangent::SetCircleCenterId(const quint32 &value)
 
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
     SCASSERT(point != nullptr);
-    point->setPoint2Id(value);
+    point->setObject2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,13 +153,13 @@ void DialogPointFromCircleAndTangent::SetTangentPointId(const quint32 &value)
 
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
     SCASSERT(point != nullptr);
-    point->setPoint1Id(value);
+    point->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 CrossCirclesPoint DialogPointFromCircleAndTangent::GetCrossCirclesPoint() const
 {
-    return getCurrentCrossPoint(ui->comboBoxResult);
+    return getCurrentCrossPoint<CrossCirclesPoint>(ui->comboBoxResult);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -201,7 +201,7 @@ void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject
                         if (SetObject(id, ui->comboBoxCircleCenter, ""))
                         {
                             number = 0;
-                            point->setPoint2Id(id);
+                            point->setObject2Id(id);
                             point->RefreshGeometry();
                             prepare = true;
                             this->setModal(true);
@@ -299,8 +299,8 @@ void DialogPointFromCircleAndTangent::SaveData()
     VisToolPointFromCircleAndTangent *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
     SCASSERT(point != nullptr);
 
-    point->setPoint1Id(GetTangentPointId());
-    point->setPoint2Id(GetCircleCenterId());
+    point->setObject1Id(GetTangentPointId());
+    point->setObject2Id(GetCircleCenterId());
     point->setCRadius(radius);
     point->setCrossPoint(GetCrossCirclesPoint());
     point->RefreshGeometry();

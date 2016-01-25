@@ -219,7 +219,7 @@ void DialogShoulderPoint::SaveData()
     VisToolShoulderPoint *line = qobject_cast<VisToolShoulderPoint *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetP3());
+    line->setObject1Id(GetP3());
     line->setLineP1Id(GetP1Line());
     line->setLineP2Id(GetP2Line());
     line->setLength(formula);
@@ -245,7 +245,7 @@ void DialogShoulderPoint::SetP3(const quint32 &value)
 
     VisToolShoulderPoint *line = qobject_cast<VisToolShoulderPoint *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -292,7 +292,7 @@ void VToolLineIntersectAxis::SetVisualization()
         VisToolLineIntersectAxis *visual = qobject_cast<VisToolLineIntersectAxis *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(firstPointId);
+        visual->setObject1Id(firstPointId);
         visual->setPoint2Id(secondPointId);
         visual->setAxisPointId(basePointId);
         visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));

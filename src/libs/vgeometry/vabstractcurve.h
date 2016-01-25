@@ -56,6 +56,8 @@ public:
 
     virtual qreal            GetStartAngle () const=0;
     virtual qreal            GetEndAngle () const=0;
+
+    static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
 private:

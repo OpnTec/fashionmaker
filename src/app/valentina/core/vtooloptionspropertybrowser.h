@@ -74,8 +74,17 @@ private:
     template<class Tool>
     void SetPointName2(const QString &name);
 
+    template<class Type>
+    Type GetCrossPoint(const QVariant &value);
+
     template<class Tool>
     void SetCrossCirclesPoint(const QVariant &value);
+
+    template<class Tool>
+    void SetVCrossCurvesPoint(const QVariant &value);
+
+    template<class Tool>
+    void SetHCrossCurvesPoint(const QVariant &value);
 
     template<class Tool>
     void AddPropertyPointName(Tool *i, const QString &propertyName);
@@ -88,6 +97,12 @@ private:
 
     template<class Tool>
     void AddPropertyCrossPoint(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyVCrossPoint(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyHCrossPoint(Tool *i, const QString &propertyName);
 
     template<class Tool>
     void AddPropertyLineType(Tool *i, const QString &propertyName, const QMap<QString, QIcon> &styles);
@@ -118,6 +133,7 @@ private:
     void ChangeDataToolPointOfIntersection(VPE::VProperty *property);
     void ChangeDataToolPointOfIntersectionArcs(VPE::VProperty *property);
     void ChangeDataToolPointOfIntersectionCircles(VPE::VProperty *property);
+    void ChangeDataToolPointOfIntersectionCurves(VPE::VProperty *property);
     void ChangeDataToolPointFromCircleAndTangent(VPE::VProperty *property);
     void ChangeDataToolPointFromArcAndTangent(VPE::VProperty *property);
     void ChangeDataToolShoulderPoint(VPE::VProperty *property);
@@ -145,6 +161,7 @@ private:
     void ShowOptionsToolPointOfIntersection(QGraphicsItem *item);
     void ShowOptionsToolPointOfIntersectionArcs(QGraphicsItem *item);
     void ShowOptionsToolPointOfIntersectionCircles(QGraphicsItem *item);
+    void ShowOptionsToolPointOfIntersectionCurves(QGraphicsItem *item);
     void ShowOptionsToolPointFromCircleAndTangent(QGraphicsItem *item);
     void ShowOptionsToolPointFromArcAndTangent(QGraphicsItem *item);
     void ShowOptionsToolShoulderPoint(QGraphicsItem *item);
@@ -172,6 +189,7 @@ private:
     void UpdateOptionsToolPointOfIntersection();
     void UpdateOptionsToolPointOfIntersectionArcs();
     void UpdateOptionsToolPointOfIntersectionCircles();
+    void UpdateOptionsToolPointOfIntersectionCurves();
     void UpdateOptionsToolPointFromCircleAndTangent();
     void UpdateOptionsToolPointFromArcAndTangent();
     void UpdateOptionsToolShoulderPoint();

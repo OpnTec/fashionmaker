@@ -155,18 +155,7 @@ QPainterPath VAbstractCurve::GetPath(PathDirection direction) const
  */
 QVector<QPointF> VAbstractCurve::IntersectLine(const QLineF &line) const
 {
-    QVector<QPointF> points = this->GetPoints();
-    QVector<QPointF> intersections;
-    for ( qint32 i = 0; i < points.count()-1; ++i )
-    {
-        QPointF crosPoint;
-        QLineF::IntersectType type = line.intersect(QLineF ( points.at(i), points.at(i+1)), &crosPoint);
-        if ( type == QLineF::BoundedIntersection )
-        {
-            intersections.append(crosPoint);
-        }
-    }
-    return intersections;
+    return CurveIntersectLine(this->GetPoints(), line);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -174,6 +163,22 @@ bool VAbstractCurve::IsIntersectLine(const QLineF &line) const
 {
     const QVector<QPointF> points = IntersectLine(line);
     return not points.isEmpty();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line)
+{
+    QVector<QPointF> intersections;
+    for ( auto i = 0; i < points.count()-1; ++i )
+    {
+        QPointF crosPoint;
+        const auto type = line.intersect(QLineF(points.at(i), points.at(i+1)), &crosPoint);
+        if ( type == QLineF::BoundedIntersection )
+        {
+            intersections.append(crosPoint);
+        }
+    }
+    return intersections;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

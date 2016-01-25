@@ -360,8 +360,8 @@ void VToolTrueDarts::SetVisualization()
         VisToolTrueDarts *visual = qobject_cast<VisToolTrueDarts *>(vis);
         SCASSERT(visual != nullptr);
 
-        visual->setPoint1Id(baseLineP1Id);
-        visual->setPoint2Id(baseLineP2Id);
+        visual->setObject1Id(baseLineP1Id);
+        visual->setObject2Id(baseLineP2Id);
         visual->setD1PointId(dartP1Id);
         visual->setD2PointId(dartP2Id);
         visual->setD3PointId(dartP3Id);

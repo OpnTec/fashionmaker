@@ -84,7 +84,10 @@ private:
     QPointF               target_viewport_pos;
     QTimeLine            *anim;
     /** @brief _numScheduledScalings keep number scheduled scalings. */
-    qint32   _numScheduledScalings;
+    qint32   _numScheduledScrollings;
+
+    static const int duration;
+    static const int updateInterval;
 
     void FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view);
 };

@@ -159,8 +159,8 @@ private:
     void ParseToolCurveIntersectAxis(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolPointOfIntersectionArcs(VMainGraphicsScene *scene, const QDomElement &domElement,
                                           const Document &parse);
-    void ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QDomElement &domElement,
-                                             const Document &parse);
+    void ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+    void ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDomElement &domElement,
                                             const Document &parse);
     void ParseToolPointFromArcAndTangent(VMainGraphicsScene *scene, const QDomElement &domElement,

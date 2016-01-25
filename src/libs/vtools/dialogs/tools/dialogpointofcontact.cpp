@@ -214,7 +214,7 @@ void DialogPointOfContact::SaveData()
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetFirstPoint());
+    line->setObject1Id(GetFirstPoint());
     line->setLineP2Id(GetSecondPoint());
     line->setRadiusId(getCenter());
     line->setRadius(radius);
@@ -253,7 +253,7 @@ void DialogPointOfContact::SetFirstPoint(const quint32 &value)
 
     VisToolPointOfContact *line = qobject_cast<VisToolPointOfContact *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

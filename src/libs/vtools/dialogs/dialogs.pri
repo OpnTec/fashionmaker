@@ -33,7 +33,8 @@ HEADERS += \
     $$PWD/tools/dialoguniondetails.h \
     $$PWD/support/dialogeditwrongformula.h \
     $$PWD/support/dialogundo.h \
-    $$PWD/tools/dialogtruedarts.h
+    $$PWD/tools/dialogtruedarts.h \
+    $$PWD/tools/dialogpointofintersectioncurves.h
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -66,7 +67,8 @@ SOURCES += \
     $$PWD/tools/dialoguniondetails.cpp \
     $$PWD/support/dialogeditwrongformula.cpp \
     $$PWD/support/dialogundo.cpp \
-    $$PWD/tools/dialogtruedarts.cpp
+    $$PWD/tools/dialogtruedarts.cpp \
+    $$PWD/tools/dialogpointofintersectioncurves.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -98,4 +100,5 @@ FORMS += \
     $$PWD/tools/dialoguniondetails.ui \
     $$PWD/support/dialogeditwrongformula.ui \
     $$PWD/support/dialogundo.ui \
-    $$PWD/tools/dialogtruedarts.ui
+    $$PWD/tools/dialogtruedarts.ui \
+    $$PWD/tools/dialogpointofintersectioncurves.ui

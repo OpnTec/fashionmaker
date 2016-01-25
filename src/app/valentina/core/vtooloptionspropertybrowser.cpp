@@ -126,6 +126,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolPointOfIntersectionCircles::Type:
             ShowOptionsToolPointOfIntersectionCircles(item);
             break;
+        case VToolPointOfIntersectionCurves::Type:
+            ShowOptionsToolPointOfIntersectionCurves(item);
+            break;
         case VToolShoulderPoint::Type:
             ShowOptionsToolShoulderPoint(item);
             break;
@@ -230,6 +233,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             break;
         case VToolPointOfIntersectionCircles::Type:
             UpdateOptionsToolPointOfIntersectionCircles();
+            break;
+        case VToolPointOfIntersectionCurves::Type:
+            UpdateOptionsToolPointOfIntersectionCurves();
             break;
         case VToolShoulderPoint::Type:
             UpdateOptionsToolShoulderPoint();
@@ -350,6 +356,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             break;
         case VToolPointOfIntersectionCircles::Type:
             ChangeDataToolPointOfIntersectionCircles(prop);
+            break;
+        case VToolPointOfIntersectionCurves::Type:
+            ChangeDataToolPointOfIntersectionCurves(prop);
             break;
         case VToolShoulderPoint::Type:
             ChangeDataToolShoulderPoint(prop);
@@ -477,6 +486,26 @@ void VToolOptionsPropertyBrowser::AddPropertyCrossPoint(Tool *i, const QString &
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyVCrossPoint(Tool *i, const QString &propertyName)
+{
+    auto itemProperty = new VEnumProperty(propertyName);
+    itemProperty->setLiterals(QStringList()<< tr("Highest point") << tr("Lowest point"));
+    itemProperty->setValue(static_cast<int>(i->GetVCrossPoint())-1);
+    AddProperty(itemProperty, AttrVCrossPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyHCrossPoint(Tool *i, const QString &propertyName)
+{
+    auto itemProperty = new VEnumProperty(propertyName);
+    itemProperty->setLiterals(QStringList()<< tr("Leftmost point") << tr("Rightmost point"));
+    itemProperty->setValue(static_cast<int>(i->GetHCrossPoint())-1);
+    AddProperty(itemProperty, AttrHCrossPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyLineType(Tool *i, const QString &propertyName,
                                                       const QMap<QString, QIcon> &styles)
 {
@@ -589,31 +618,64 @@ void VToolOptionsPropertyBrowser::SetPointName2(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template<class Type>
+Type VToolOptionsPropertyBrowser::GetCrossPoint(const QVariant &value)
+{
+    bool ok = false;
+    const int val = value.toInt(&ok);
+
+    auto cross = static_cast<Type>(1);
+    if (ok)
+    {
+        switch(val)
+        {
+            case 0:
+            case 1:
+                cross = static_cast<Type>(val+1);
+                break;
+            default:
+                break;
+        }
+    }
+
+    return cross;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
 void VToolOptionsPropertyBrowser::SetCrossCirclesPoint(const QVariant &value)
 {
     if (Tool *i = qgraphicsitem_cast<Tool *>(currentItem))
     {
-        bool ok = false;
-        const int val = value.toInt(&ok);
+        i->SetCrossCirclesPoint(GetCrossPoint<CrossCirclesPoint>(value));
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
 
-        CrossCirclesPoint cross = CrossCirclesPoint::FirstPoint;
-        if (ok)
-        {
-            switch(val)
-            {
-                case 0:
-                    cross = CrossCirclesPoint::FirstPoint;
-                    break;
-                case 1:
-                    cross = CrossCirclesPoint::SecondPoint;
-                    break;
-                default:
-                    cross = CrossCirclesPoint::FirstPoint;
-                    break;
-            }
-        }
-        i->SetCrossCirclesPoint(cross);
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetVCrossCurvesPoint(const QVariant &value)
+{
+    if (auto i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        i->SetVCrossPoint(GetCrossPoint<VCrossCurvesPoint>(value));
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetHCrossCurvesPoint(const QVariant &value)
+{
+    if (auto i = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        i->SetHCrossPoint(GetCrossPoint<HCrossCurvesPoint>(value));
     }
     else
     {
@@ -1112,6 +1174,39 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCircles(VProp
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCurves(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    const QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    auto i = qgraphicsitem_cast<VToolPointOfIntersectionCurves *>(currentItem);
+    SCASSERT(i != nullptr);
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0: // AttrName
+            SetPointName<VToolPointOfIntersectionCurves>(value.toString());
+            break;
+        case 34: // AttrVCrossPoint
+        {
+            const QVariant value = property->data(VProperty::DPC_Data, Qt::EditRole);
+            SetVCrossCurvesPoint<VToolPointOfIntersectionCurves>(value);
+            break;
+        }
+        case 35: // AttrHCrossPoint
+        {
+            const QVariant value = property->data(VProperty::DPC_Data, Qt::EditRole);
+            SetHCrossCurvesPoint<VToolPointOfIntersectionCurves>(value);
+            break;
+        }
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ChangeDataToolPointFromCircleAndTangent(VProperty *property)
 {
     SCASSERT(property != nullptr)
@@ -1559,6 +1654,18 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionCircles(QGra
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionCurves(QGraphicsItem *item)
+{
+    auto i = qgraphicsitem_cast<VToolPointOfIntersectionCurves *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Tool to make point from intersection two curves"));
+
+    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyVCrossPoint(i, tr("Vertical correction"));
+    AddPropertyHCrossPoint(i, tr("Horizontal correction"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolPointFromCircleAndTangent(QGraphicsItem *item)
 {
     VToolPointFromCircleAndTangent *i = qgraphicsitem_cast<VToolPointFromCircleAndTangent *>(item);
@@ -1951,6 +2058,16 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionCircles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolPointOfIntersectionCurves()
+{
+    auto i = qgraphicsitem_cast<VToolPointOfIntersectionCurves *>(currentItem);
+
+    idToProperty[AttrName]->setValue(i->name());
+    idToProperty[AttrVCrossPoint]->setValue(static_cast<int>(i->GetVCrossPoint())-1);
+    idToProperty[AttrHCrossPoint]->setValue(static_cast<int>(i->GetHCrossPoint())-1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::UpdateOptionsToolPointFromCircleAndTangent()
 {
     VToolPointFromCircleAndTangent *i = qgraphicsitem_cast<VToolPointFromCircleAndTangent *>(currentItem);
@@ -2104,6 +2221,8 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << AttrC2Radius                       /* 30 */
                                      << AttrCRadius                        /* 31 */
                                      << AttrName1                          /* 32 */
-                                     << AttrName2;                         /* 33 */
+                                     << AttrName2                          /* 33 */
+                                     << AttrVCrossPoint                    /* 34 */
+                                     << AttrHCrossPoint;                   /* 35 */
     return attr;
 }

@@ -35,7 +35,7 @@ const int EMPTY_ANGLE = -1;
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent), point4Id(NULL_ID), lineP1(nullptr), lineP4(nullptr), line(nullptr), angle1(EMPTY_ANGLE),
+    : VisPath(data, parent), object4Id(NULL_ID), lineP1(nullptr), lineP4(nullptr), line(nullptr), angle1(EMPTY_ANGLE),
       angle2(EMPTY_ANGLE), kAsm1(1), kAsm2(1), kCurve(1)
 {
     lineP1 = InitPoint(supportColor, this);
@@ -50,18 +50,18 @@ VisToolSpline::~VisToolSpline()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(point1Id);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(lineP1, first->toQPointF(), supportColor);
 
-        if (point4Id <= NULL_ID)
+        if (object4Id <= NULL_ID)
         {
             DrawLine(line, QLineF(first->toQPointF(), Visualization::scenePos), mainColor);
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point4Id);
+            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object4Id);
             DrawPoint(lineP4, second->toQPointF(), supportColor);
 
             if (qFuzzyCompare(angle1, EMPTY_ANGLE) || qFuzzyCompare(angle2, EMPTY_ANGLE))
@@ -78,9 +78,9 @@ void VisToolSpline::RefreshGeometry()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolSpline::setPoint4Id(const quint32 &value)
+void VisToolSpline::setObject4Id(const quint32 &value)
 {
-    point4Id = value;
+    object4Id = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

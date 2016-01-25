@@ -29,7 +29,8 @@ HEADERS += \
     $$PWD/vistoolpointfromcircleandtangent.h \
     $$PWD/vistoolpointfromarcandtangent.h \
     $$PWD/vistoolarcwithlength.h \
-    visualization/vistooltruedarts.h
+    $$PWD/vistooltruedarts.h \
+    $$PWD/vistoolpointofintersectioncurves.h
 
 SOURCES += \
     $$PWD/visline.cpp \
@@ -59,4 +60,5 @@ SOURCES += \
     $$PWD/vistoolpointfromcircleandtangent.cpp \
     $$PWD/vistoolpointfromarcandtangent.cpp \
     $$PWD/vistoolarcwithlength.cpp \
-    visualization/vistooltruedarts.cpp
+    $$PWD/vistooltruedarts.cpp \
+    $$PWD/vistoolpointofintersectioncurves.cpp

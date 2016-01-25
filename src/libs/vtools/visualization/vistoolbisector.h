@@ -39,15 +39,15 @@ public:
     virtual ~VisToolBisector() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
-    void         setPoint2Id(const quint32 &value);
-    void         setPoint3Id(const quint32 &value);
+    void         setObject2Id(const quint32 &value);
+    void         setObject3Id(const quint32 &value);
     void         setLength(const QString &expression);
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolBisector)};
 private:
     Q_DISABLE_COPY(VisToolBisector)
-    quint32              point2Id;
-    quint32              point3Id;
+    quint32              object2Id;
+    quint32              object3Id;
     QGraphicsEllipseItem *point;
     QGraphicsEllipseItem *line1P1;
     QGraphicsEllipseItem *line1P2;

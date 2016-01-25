@@ -714,7 +714,8 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
                                        << VToolPointOfIntersectionCircles::ToolType /*18*/
                                        << VToolPointFromCircleAndTangent::ToolType  /*19*/
                                        << VToolPointFromArcAndTangent::ToolType     /*20*/
-                                       << VToolTrueDarts::ToolType;                 /*21*/
+                                       << VToolTrueDarts::ToolType                  /*21*/
+                                       << VToolPointOfIntersectionCurves::ToolType; /*22*/
     switch (points.indexOf(type))
     {
         case 0: //VToolBasePoint::ToolType
@@ -782,6 +783,9 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             break;
         case 21: //VToolTrueDarts::ToolType
             ParseToolTrueDarts(scene, domElement, parse);
+            break;
+        case 22: //VToolPointOfIntersectionCurves::ToolType
+            ParseToolPointOfIntersectionCurves(scene, domElement, parse);
             break;
         default:
             VException e(tr("Unknown point type '%1'.").arg(type));
@@ -1685,6 +1689,37 @@ void VPattern::ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QD
     catch (const VExceptionBadId &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating point of intersection circles"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDomElement &domElement,
+                                                  const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        quint32 id = 0;
+        QString name;
+        qreal mx = 0;
+        qreal my = 0;
+
+        PointsCommonAttributes(domElement, id, name, mx, my);
+        const auto curve1Id = GetParametrUInt(domElement, AttrCurve1, NULL_ID_STR);
+        const auto curve2Id = GetParametrUInt(domElement, AttrCurve2, NULL_ID_STR);
+        const auto vCrossPoint = static_cast<VCrossCurvesPoint>(GetParametrUInt(domElement, AttrVCrossPoint, "1"));
+        const auto hCrossPoint = static_cast<HCrossCurvesPoint>(GetParametrUInt(domElement, AttrHCrossPoint, "1"));
+
+        VToolPointOfIntersectionCurves::Create(id, name, curve1Id, curve2Id, vCrossPoint, hCrossPoint, mx, my,
+                                               scene, this, data, parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating point of intersection curves"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
         throw excep;
     }

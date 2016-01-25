@@ -39,15 +39,18 @@
 #include <QMouseEvent>
 #include <qmath.h>
 
+const int GraphicsViewZoom::duration = 300;
+const int GraphicsViewZoom::updateInterval = 40;
+
 //---------------------------------------------------------------------------------------------------------------------
 GraphicsViewZoom::GraphicsViewZoom(QGraphicsView* view)
   : QObject(view), _view(view), _modifiers(Qt::ControlModifier), _zoom_factor_base(1.0015),
-    target_scene_pos(QPointF()), target_viewport_pos(QPointF()), anim(nullptr), _numScheduledScalings(0)
+    target_scene_pos(QPointF()), target_viewport_pos(QPointF()), anim(nullptr), _numScheduledScrollings(0)
 {
   _view->viewport()->installEventFilter(this);
   _view->setMouseTracking(true);
-  anim = new QTimeLine(300, this);
-  anim->setUpdateInterval(20);
+  anim = new QTimeLine(duration, this);
+  anim->setUpdateInterval(updateInterval);
   connect(anim, &QTimeLine::valueChanged, this, &GraphicsViewZoom::scrollingTime, Qt::UniqueConnection);
   connect(anim, &QTimeLine::finished, this, &GraphicsViewZoom::animFinished, Qt::UniqueConnection);
 }
@@ -91,9 +94,17 @@ void GraphicsViewZoom::set_zoom_factor_base(double value)
 void GraphicsViewZoom::scrollingTime(qreal x)
 {
     Q_UNUSED(x);
+    // Try to adapt scrolling to speed of rotating mouse wheel and scale factor
+    // Value of _numScheduledScrollings is too short, so we scale the value
 
-    qreal scroll = _view->verticalScrollBar()->pageStep()/60;
-    if (_numScheduledScalings > 0)
+    qreal scroll = (qAbs(_numScheduledScrollings)*(10 + 10/_view->transform().m22()))/(duration/updateInterval);
+
+    if (qAbs(scroll) < 1)
+    {
+        scroll = 1;
+    }
+
+    if (_numScheduledScrollings > 0)
     {
         scroll = scroll * -1;
     }
@@ -103,7 +114,7 @@ void GraphicsViewZoom::scrollingTime(qreal x)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::animFinished()
 {
-    _numScheduledScalings > 0 ? _numScheduledScalings-- : _numScheduledScalings++;
+    _numScheduledScrollings = 0;
     anim->stop();
 
     /*
@@ -147,8 +158,8 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
         {
             if (wheel_event->orientation() == Qt::Vertical)
             {
-                double angle = wheel_event->angleDelta().y();
-                double factor = qPow(_zoom_factor_base, angle);
+                const double angle = wheel_event->angleDelta().y();
+                const double factor = qPow(_zoom_factor_base, angle);
                 gentle_zoom(factor);
                 return true;
             }
@@ -172,10 +183,10 @@ bool GraphicsViewZoom::eventFilter(QObject *object, QEvent *event)
                 return true;//Just ignore
             }
 
-            _numScheduledScalings += numSteps;
-            if (_numScheduledScalings * numSteps < 0)
-            {  // if user moved the wheel in another direction, we reset
-                _numScheduledScalings = numSteps;       // previously scheduled scalings
+            _numScheduledScrollings += numSteps;
+            if (_numScheduledScrollings * numSteps < 0)
+            {  // if user moved the wheel in another direction, we reset previously scheduled scalings
+                _numScheduledScrollings = numSteps;
             }
 
             if (anim->state() != QTimeLine::Running)

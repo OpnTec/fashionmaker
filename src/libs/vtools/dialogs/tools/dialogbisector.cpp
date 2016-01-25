@@ -176,7 +176,7 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
                         if (SetObject(id, ui->comboBoxSecondPoint, tr("Select third point of angle")))
                         {
                             number++;
-                            line->setPoint2Id(id);
+                            line->setObject2Id(id);
                             line->RefreshGeometry();
                         }
                     }
@@ -192,7 +192,7 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         if (SetObject(id, ui->comboBoxThirdPoint, ""))
                         {
-                            line->setPoint3Id(id);
+                            line->setObject3Id(id);
                             line->RefreshGeometry();
                             prepare = true;
                             this->setModal(true);
@@ -263,7 +263,7 @@ void DialogBisector::SetFirstPointId(const quint32 &value)
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint1Id(value);
+    line->setObject1Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -277,7 +277,7 @@ void DialogBisector::SetSecondPointId(const quint32 &value)
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint2Id(value);
+    line->setObject2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -291,7 +291,7 @@ void DialogBisector::SetThirdPointId(const quint32 &value)
 
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
     SCASSERT(line != nullptr);
-    line->setPoint3Id(value);
+    line->setObject3Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -317,9 +317,9 @@ void DialogBisector::SaveData()
     VisToolBisector *line = qobject_cast<VisToolBisector *>(vis);
     SCASSERT(line != nullptr);
 
-    line->setPoint1Id(GetFirstPointId());
-    line->setPoint2Id(GetSecondPointId());
-    line->setPoint3Id(GetThirdPointId());
+    line->setObject1Id(GetFirstPointId());
+    line->setObject2Id(GetSecondPointId());
+    line->setObject3Id(GetThirdPointId());
     line->setLength(formula);
     line->setLineStyle(VAbstractTool::LineStyleToPenStyle(GetTypeLine()));
     line->RefreshGeometry();

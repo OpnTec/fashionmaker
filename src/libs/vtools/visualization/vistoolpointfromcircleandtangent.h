@@ -41,7 +41,7 @@ public:
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
-    void         setPoint2Id(const quint32 &value);
+    void         setObject2Id(const quint32 &value);
     void         setCRadius(const QString &value);
     void         setCrossPoint(const CrossCirclesPoint &value);
 
@@ -49,7 +49,7 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::ToolPointFromCircleAndTangent)};
 private:
     Q_DISABLE_COPY(VisToolPointFromCircleAndTangent)
-    quint32              point2Id;
+    quint32              object2Id;
     qreal                cRadius;
     CrossCirclesPoint    crossPoint;
     QGraphicsEllipseItem *point;

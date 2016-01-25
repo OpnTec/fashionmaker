@@ -51,9 +51,9 @@ VisToolCutArc::~VisToolCutArc()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCutArc::RefreshGeometry()
 {
-    if (point1Id > NULL_ID)
+    if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(point1Id);
+        const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(object1Id);
         DrawPath(this, arc->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
 
         if (qFuzzyCompare(1 + length, 1 + 0) == false)
