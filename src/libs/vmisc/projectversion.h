@@ -46,7 +46,7 @@ extern const QString APP_VERSION_STR;
 // Synchronize valentina.nsi
 
 #define VER_FILEVERSION             0,4,0,0
-#define VER_FILEVERSION_STR         "0.4.0.0RC1\0"
+#define VER_FILEVERSION_STR         "0.4.0.0\0"
 
 #define V_PRERELEASE // Mark prerelease builds
 
