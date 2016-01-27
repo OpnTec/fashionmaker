@@ -4,7 +4,7 @@
 - New icon for VAL file. Updated Tape logo. Updated ico for standard measurements.
 - [#325] Check pattern for inverse compatibility.
 
-# Version 0.4.0
+# Version 0.4.0 January 27, 2016
 - [#209] New tool for Point from arc and tangent (Draw)
 - [#232] Intersection of Arcs (Draw)
 - [#246] Arc with Given Length (Draw)
