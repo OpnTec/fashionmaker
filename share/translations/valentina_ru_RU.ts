@@ -1835,7 +1835,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лучшей позиции для детали. Пожалуйста, подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лутшей позиции для детали. Пожалуйста подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
@@ -3857,11 +3857,11 @@ Apply settings anyway?</source>
     <name>MApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Ошибка парсинга файла. Програма будет закрыта.</translation>
+        <translation>Ошибка парсинга файла. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Ошибка, неправильный id. Програма будет закрыта.</translation>
+        <translation>Ошибка, неправильный id. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
@@ -3869,11 +3869,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation>Ошибка пустой параметр. Програма будет закрыта.</translation>
+        <translation>Ошибка пустой параметр. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Ошибка неправильный id. Програма будет закрыта.</translation>
+        <translation>Ошибка неправильный id. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
@@ -4549,7 +4549,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation>Страницы раскладки</translation>
+        <translation>Страницы роскладки</translation>
     </message>
     <message>
         <source>Save as PDF</source>
@@ -4585,7 +4585,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print preview original layout</source>
-        <translation>Просмотр оригинальной раскладки</translation>
+        <translation>Просмотр оригинальной роскладки</translation>
     </message>
     <message>
         <source>Export As...</source>
@@ -4593,7 +4593,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export original layout</source>
-        <translation>Экспорт оригинальной раскладки</translation>
+        <translation>Экспорт оригинальной роскладки</translation>
     </message>
     <message>
         <source>Select first an arc</source>
@@ -4625,11 +4625,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout mode</source>
-        <translation>Режим раскладки</translation>
+        <translation>Режим роскладки</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
-        <translation>Сейчас невозможно использовать режим раскладки. Создайте хотя бы одну заготовку детали.</translation>
+        <translation>Сейчас невозможно использовать режим роскладки. Создайте хотя бы одну заготовку детали.</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -6186,11 +6186,11 @@ Do you want to save your changes?</source>
     <name>VApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Ошибка парсинга файла. Програма будет закрыта.</translation>
+        <translation>Ошибка парсинга файла. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Ошибка, неправильный id. Програма будет закрыта.</translation>
+        <translation>Ошибка, неправильный id. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
@@ -6198,11 +6198,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error empty parameter. Program will be terminated.</source>
-        <translation>Ошибка пустой параметр. Програма будет закрыта.</translation>
+        <translation>Ошибка пустой параметр. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Ошибка неправильный id. Програма будет закрыта.</translation>
+        <translation>Ошибка неправильный id. Программа будет закрыта.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
@@ -6273,7 +6273,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation>Единицы измерения раскладки (как для бумаги, кроме пикселей, режим экспорта).</translation>
+        <translation>Единицы измерения роскладки (как для бумаги, кроме пикселей, режим экспорта).</translation>
     </message>
     <message>
         <source>The unit</source>
@@ -6281,7 +6281,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode).</source>
-        <translation type="vanished">Смещение в единицах раскладки (режим экспорта).</translation>
+        <translation type="vanished">Смещение в единицах роскладки (режим экспорта).</translation>
     </message>
     <message>
         <source>Shift length</source>
@@ -6289,7 +6289,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
-        <translation type="vanished">Ширина зазора ×2 в единицах раскладки (режим экспорта).</translation>
+        <translation type="vanished">Ширина зазора ×2 в единицах роскладки (режим экспорта).</translation>
     </message>
     <message>
         <source>The gap width</source>
@@ -6297,7 +6297,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Sets layout groupping (export mode): </source>
-        <translation type="vanished">Устанавливает тип группировки раскладки (режим экспорта):</translation>
+        <translation type="vanished">Устанавливает тип группировки роскладки (режим экспорта):</translation>
     </message>
     <message>
         <source>Grouping type</source>
@@ -6325,7 +6325,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unsupported layout units.</source>
-        <translation>Не поддерживаемые единицы измерения для раскладки.</translation>
+        <translation>Не поддерживаемые единицы измерения для роскладки.</translation>
     </message>
     <message>
         <source>Export options can be used with single input file only.</source>
@@ -6341,11 +6341,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation>Базовое имя экспортируемых файлов раскладки. Используйте для консольного режима экспорта.</translation>
+        <translation>Базовое имя экспортируемых файлов роскладки. Используйте для консольного режима экспорта.</translation>
     </message>
     <message>
         <source>The base filename of layout files</source>
-        <translation>Базовое имя файлов раскладки</translation>
+        <translation>Базовое имя файлов роскладки</translation>
     </message>
     <message>
         <source>The path to output destination folder.</source>
@@ -6481,19 +6481,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
-        <translation>Сохранить длину листа, если установлен (режим экспорта). Эта опция указывает программе использовать как можно больше ширины листа. Качество раскладки может быть хуже вовремя исползования этой опции.</translation>
+        <translation>Сохранить длину листа, если установлен (режим экспорта). Эта опция указывает программе использовать как можно больше ширины листа. Качество роскладки может быть хуже вовремя исползования этой опции.</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="vanished">Смещение в единицах раскладки (режим экспорта). Указывает как много точек вдоль ребра будет создано при создании раскладки.</translation>
+        <translation type="vanished">Смещение в единицах роскладки (режим экспорта). Указывает как много точек вдоль ребра будет создано при создании роскладки.</translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
-        <translation>Ширина зазора ×2 в единицах раскладки (режим экспорта). Устанавливает дистанцию между деталями и деталью и краем листа.</translation>
+        <translation>Ширина зазора ×2 в единицах роскладки (режим экспорта). Устанавливает дистанцию между деталями и деталью и краем листа.</translation>
     </message>
     <message>
         <source>Sets layout groupping cases (export mode): %1.</source>
-        <translation>Устанавливает тип группировки раскладки (режим экспорта): %1.</translation>
+        <translation>Устанавливает тип группировки роскладки (режим экспорта): %1.</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
