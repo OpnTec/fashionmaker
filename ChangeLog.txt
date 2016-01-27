@@ -4,6 +4,28 @@
 - New icon for VAL file. Updated Tape logo. Updated ico for standard measurements.
 - [#325] Check pattern for inverse compatibility.
 
+# Version 0.4.0
+- [#209] New tool for Point from arc and tangent (Draw)
+- [#232] Intersection of Arcs (Draw)
+- [#246] Arc with Given Length (Draw)
+- [#259] Draw free curve path point at distance (Draw)
+- [#301] True darts (Draw)
+- [#73] Seam Allowance - Width
+- [#329] Add ScrollUp/ScrollDown Button in Detail view
+- [#179] Export to DXF
+- [#202] Posterazor feature
+- [#277] Add 'Letter' and 'Legal' to paper size selection
+- [#334] Command Line Support
+- [#290] Add paper type 'Roll - 36" & 'Roll - 44" to 'Create Layout' paper size
+- [#172] Search field for dialog measurements
+- [#181] Better measurements standard
+- [#314] New measurement structure
+- [#275] Add 'Show Curve Details' icon on top menu bar to show/hide control points and curve direction
+- [#282] Add dialog for File/New, update Create Pattern Piece dialog
+- [#284] Remove History icon from work menu, add to top menu
+- [#285] Remove Table of Variables icon from work menu
+- [#286] Add 'Mode' menu picklist to top menu, create enable/disable for design workflow
+
 # Version 0.3.3 Released May 20, 2015
 - [#297] Scaling Error - Print.
 - [#304] Layout appears different than my pattern.
