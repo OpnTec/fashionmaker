@@ -1878,7 +1878,7 @@
     </message>
     <message>
         <source>Shift length:</source>
-        <translation type="vanished">Shift/Offset length</translation>
+        <translation type="vanished">Shift/Offset length:</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
@@ -6281,11 +6281,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode).</source>
-        <translation type="vanished">Shift layout length measured in layout units (export mode).</translation>
+        <translation type="vanished">Shift/Offset layout length measured in layout units (export mode).</translation>
     </message>
     <message>
         <source>Shift length</source>
-        <translation type="vanished">Shift length</translation>
+        <translation type="vanished">Shift/Offset length</translation>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
@@ -6421,7 +6421,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Shift length must be used together with shift units.</source>
-        <translation type="vanished">Shift length must be used together with shift units.</translation>
+        <translation type="vanished">Shift/Offset length must be used together with shift units.</translation>
     </message>
     <message>
         <source>Gap width must be used together with shift units.</source>
@@ -6485,7 +6485,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="vanished">Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</translation>
+        <translation type="vanished">Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
