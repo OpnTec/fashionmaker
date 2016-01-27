@@ -1,0 +1,62 @@
+language: cpp
+
+os:
+  - linux
+
+compiler:
+  - gcc
+  - clang
+
+sudo: false
+
+install:
+  # g++4.8.1
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"  CC="gcc-4.8"; fi
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - ubuntu-sdk-team
+    packages:
+    - qtbase5-dev 
+    - libqt5svg5-dev 
+    - qt5-default 
+    - qttools5-dev-tools 
+    - libqt5xmlpatterns5-dev
+    - libqt5core5a 
+    - libqt5gui5 
+    - libqt5printsupport5 
+    - libqt5svg5 
+    - libqt5widgets5 
+    - libqt5xml5 
+    - libqt5xmlpatterns5 
+    - xpdf
+    - gcc-4.8
+    - g++-4.8
+    - clang
+
+before_script:
+  # QTestLib require GUI support for some tests
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - mkdir build
+  - cd build
+  - which qmake
+  - uname -a
+  - qmake --version
+  - qmake ../Valentina.pro -r CONFIG+=no_ccache
+
+script:
+  - $CXX --version
+  - make -j$(nproc)
+  - DISPLAY=:99.0 make check
+
+notifications:
+   email:
+     recipients:
+        - dismine@gmail.com
+        - susan.spencer@gmail.com
+        - zhuravska19@gmail.com
+     on_success: change
+     on_failure: always

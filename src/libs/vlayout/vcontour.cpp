@@ -32,7 +32,12 @@
 
 #include <QPointF>
 #include <QLineF>
-#include <QtMath>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../vmisc/vmath.h"
+#else
+#   include <QtMath>
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VContour::VContour()
@@ -77,13 +82,13 @@ QVector<QPointF> VContour::GetContour() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int VContour::GetShift() const
+quint32 VContour::GetShift() const
 {
     return d->shift;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContour::SetShift(unsigned int shift)
+void VContour::SetShift(quint32 shift)
 {
     d->shift = shift;
 }
@@ -113,10 +118,16 @@ void VContour::SetWidth(int width)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QSizeF VContour::GetSize() const
+{
+    return QSizeF(d->paperWidth, d->paperHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VContour::UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const
 {
     QVector<QPointF> newContour;
-    if (d->globalContour.isEmpty())
+    if (d->globalContour.isEmpty()) //-V807
     {
         AppendWhole(newContour, detail, detJ);
     }
@@ -222,7 +233,7 @@ int VContour::EdgesCount() const
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VContour::GlobalEdge(int i) const
 {
-    if (d->globalContour.isEmpty())
+    if (d->globalContour.isEmpty()) //-V807
     {
         // Because sheet is blank we have one global edge for all cases - Ox axis.
         const QLineF axis = EmptySheetEdge();

@@ -54,7 +54,7 @@ class QMUPARSERSHARED_EXPORT QmuParserBase
     friend class QmuParserTokenReader;
 public:
     QmuParserBase();
-    QmuParserBase(const QmuParserBase &a_Parser);
+    explicit QmuParserBase(const QmuParserBase &a_Parser);
     QmuParserBase& operator=(const QmuParserBase &a_Parser);
     virtual ~QmuParserBase();
 
@@ -106,19 +106,10 @@ public:
     void               SetArgSep(char_type cArgSep);
     QChar              GetArgSep() const;
     void Q_NORETURN    Error(EErrorCodes a_iErrc, int a_iPos = -1, const QString &a_strTok = QString() ) const;
-    /**
-     * @fn void qmu::QmuParserBase::DefineFun(const string_type &a_strName, fun_type0 a_pFun,
-     * bool a_bAllowOpt = true)
-     * @brief Define a parser function without arguments.
-     * @param a_strName Name of the function
-     * @param a_pFun Pointer to the callback function
-     * @param a_bAllowOpt A flag indicating this function may be optimized
-     */
+
     template<typename T>
-    void DefineFun(const QString &a_strName, T a_pFun, bool a_bAllowOpt = true)
-    {
-        AddCallback( a_strName, QmuParserCallback(a_pFun, a_bAllowOpt), m_FunDef, ValidNameChars() );
-    }
+    void DefineFun(const QString &a_strName, T a_pFun, bool a_bAllowOpt = true);
+
     void setAllowSubexpressions(bool value);
 
     std::locale getLocale() const;
@@ -146,17 +137,17 @@ protected:
             :std::numpunct<TChar>(), m_nGroup(nGroup), m_cDecPoint(cDecSep), m_cThousandsSep(cThousandsSep)
             {}
         protected:
-            virtual char_type do_decimal_point() const
+            virtual char_type do_decimal_point() const Q_DECL_OVERRIDE
             {
                 return m_cDecPoint;
             }
 
-            virtual char_type do_thousands_sep() const
+            virtual char_type do_thousands_sep() const Q_DECL_OVERRIDE
             {
                 return m_cThousandsSep;
             }
 
-            virtual std::string do_grouping() const
+            virtual std::string do_grouping() const Q_DECL_OVERRIDE
             {
                 // fix for issue 4: https://code.google.com/p/muparser/issues/detail?id=4
                 // courtesy of Jens Bartsch
@@ -257,11 +248,28 @@ private:
     qreal              ParseString() const;
     qreal              ParseCmdCode() const;
     qreal              ParseCmdCodeBulk(int nOffset, int nThreadID) const;
+    // cppcheck-suppress functionStatic
     void               CheckName(const QString &a_strName, const QString &a_CharSet) const;
+    // cppcheck-suppress functionStatic
     void               CheckOprt(const QString &a_sName, const QmuParserCallback &a_Callback,
                                  const QString &a_szCharSet) const;
     void               StackDump(const QStack<token_type > &a_stVal, const QStack<token_type > &a_stOprt) const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @fn void qmu::QmuParserBase::DefineFun(const string_type &a_strName, fun_type0 a_pFun,
+ * bool a_bAllowOpt = true)
+ * @brief Define a parser function without arguments.
+ * @param a_strName Name of the function
+ * @param a_pFun Pointer to the callback function
+ * @param a_bAllowOpt A flag indicating this function may be optimized
+ */
+template<typename T>
+inline void QmuParserBase::DefineFun(const QString &a_strName, T a_pFun, bool a_bAllowOpt)
+{
+    AddCallback( a_strName, QmuParserCallback(a_pFun, a_bAllowOpt), m_FunDef, ValidNameChars() );
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

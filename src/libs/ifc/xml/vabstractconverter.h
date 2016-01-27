@@ -35,11 +35,11 @@ class VAbstractConverter :public VDomDocument
 {
     Q_DECLARE_TR_FUNCTIONS(VAbstractConverter)
 public:
-    VAbstractConverter(const QString &fileName);
-    virtual ~VAbstractConverter();
+    explicit VAbstractConverter(const QString &fileName);
+    virtual ~VAbstractConverter() Q_DECL_OVERRIDE;
 
     void         Convert();
-    virtual bool SaveDocument(const QString &fileName, QString &error) const;
+    virtual bool SaveDocument(const QString &fileName, QString &error) const Q_DECL_OVERRIDE;
 
 protected:
     int     ver;
@@ -59,12 +59,18 @@ protected:
     virtual QString XSDSchema(int ver) const =0;
     virtual void    ApplyPatches() =0;
 
+    void Replace(QString &formula, const QString &newName, int position, const QString &token, int &bias) const;
+    void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const;
+    static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
+
 private:
     Q_DISABLE_COPY(VAbstractConverter)
 
     QString GetVersionStr() const;
 
-    void    ValidateVersion(const QString &version) const;
+    void ValidateVersion(const QString &version) const;
+
+    void ReserveFile() const;
 };
 
 #endif // VABSTRACTCONVERTER_H

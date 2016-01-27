@@ -29,13 +29,16 @@
 #ifndef VLAYOUTDEF_H
 #define VLAYOUTDEF_H
 
+#ifdef Q_CC_MSVC
+    #include <ciso646>
+#endif /* Q_CC_MSVC */
+
 enum class EquidistantType : char { OpenEquidistant, CloseEquidistant };
 
 enum class LayoutErrors : char
 {
     NoError,
     PrepareLayoutError,
-    PaperSizeError,
     ProcessStoped,
     EmptyPaperError
 };
@@ -46,6 +49,9 @@ enum class BestFrom : char
     Combine = 1
 };
 
+/* Warning! Debugging doesn't work stable in debug mode. If you need big allocation use release mode. Or disable
+ * Address Sanitizer. See page https://bitbucket.org/dismine/valentina/wiki/developers/Address_Sanitizer
+ */
 //#define LAYOUT_DEBUG // Enable debug mode
 
 // This block help rule debug mode. Don't turn all options at the same time!
@@ -54,14 +60,15 @@ enum class BestFrom : char
 #   define SHOW_VERTICES         // Show contour vertices
 #   define SHOW_DIRECTION        // Show contour direction
 #   define ARRANGED_DETAILS      // Show already arranged details
+//#   define SHOW_SHEET            // Show sheet rect
 
 // Debugging
 #   define SHOW_CANDIDATE        // Show each position
-#   define SHOW_ROTATION         // For each position show rotation part
-#   define SHOW_COMBINE          // For each position show edge combine part
-#   define SHOW_MIRROR           // For each position show mirror part
+//#   define SHOW_ROTATION         // For each position show rotation part
+//#   define SHOW_COMBINE          // For each position show edge combine part
+//#   define SHOW_MIRROR           // For each position show mirror part
 //#   define SHOW_CANDIDATE_BEST   // For only correct positions that pass checks
-//#   define SHOW_BEST             // Show only best position for workpiece
+#   define SHOW_BEST             // Show only best position for workpiece
 #endif//LAYOUT_DEBUG
 
 #endif // VLAYOUTDEF_H

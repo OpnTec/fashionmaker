@@ -35,7 +35,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VIntegerProperty : public VProperty
 public:
     VIntegerProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
-    VIntegerProperty(const QString& name);
+    explicit VIntegerProperty(const QString& name);
 
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child
@@ -43,32 +43,32 @@ public:
     //! \delegate A pointer to the QAbstractItemDelegate requesting the editor. This can be used to connect signals and
     //! slots.
     virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                                  const QAbstractItemDelegate* delegate);
+                                  const QAbstractItemDelegate* delegate) Q_DECL_OVERRIDE;
 
     //! Gets the data from the widget
-    virtual QVariant getEditorData(const QWidget* editor) const;
+    virtual QVariant getEditorData(const QWidget* editor) const Q_DECL_OVERRIDE;
 
     //! Sets the settings. Available settings:
     //!
     //! key: "Min" - value: Minimum number as integer
     //! key: "Max" - value: Maximum number as integer
-    virtual void setSetting(const QString& key, const QVariant& value);
+    virtual void setSetting(const QString& key, const QVariant& value) Q_DECL_OVERRIDE;
 
     //! Get the settings. This function has to be implemented in a subclass in order to have an effect
-    virtual QVariant getSetting(const QString& key) const;
+    virtual QVariant getSetting(const QString& key) const Q_DECL_OVERRIDE;
 
     //! Returns the list of keys of the property's settings
-    virtual QStringList getSettingKeys() const;
+    virtual QStringList getSettingKeys() const Q_DECL_OVERRIDE;
 
     //! Returns a string containing the type of the property
-    virtual QString type() const;
+    virtual QString type() const Q_DECL_OVERRIDE;
 
     //! Clones this property
     //! \param include_children Indicates whether to also clone the children
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const;
+    virtual VProperty* clone(bool include_children = true, VProperty* container = NULL) const Q_DECL_OVERRIDE;
 public slots:
     void valueChanged(int i);
 protected:
@@ -89,7 +89,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VDoubleProperty : public VIntegerProperty
 public:
     VDoubleProperty(const QString& name, const QMap<QString, QVariant>& settings);
 
-    VDoubleProperty(const QString& name);
+    explicit VDoubleProperty(const QString& name);
 
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child

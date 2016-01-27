@@ -44,7 +44,7 @@ public:
         :name(QString()), seamAllowance(false), closed(true), width(0)
     {}
 
-    VAbstractDetailData(const QString &name)
+    explicit VAbstractDetailData(const QString &name)
         :name(name), seamAllowance(false), closed(true), width(0)
     {}
 
@@ -63,6 +63,9 @@ public:
     bool           closed;
     /** @brief width value seamAllowance in mm. */
     qreal          width;
+
+private:
+    VAbstractDetailData &operator=(const VAbstractDetailData &) Q_DECL_EQ_DELETE;
 };
 
 #ifdef Q_CC_GNU

@@ -35,6 +35,7 @@
 #include <QCoreApplication>
 #include <QThreadPool>
 #include <QPen>
+#include <QGraphicsScene>
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper()
@@ -106,13 +107,13 @@ void VLayoutPaper::SetLayoutWidth(qreal width)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int VLayoutPaper::GetShift() const
+quint32 VLayoutPaper::GetShift() const
 {
     return d->globalContour.GetShift();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPaper::SetShift(unsigned int shift)
+void VLayoutPaper::SetShift(quint32 shift)
 {
     d->globalContour.SetShift(shift);
 }
@@ -147,13 +148,25 @@ void VLayoutPaper::SetRotationIncrease(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VLayoutPaper::IsSaveLength() const
+{
+    return d->saveLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetSaveLength(bool value)
+{
+    d->saveLength = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::SetPaperIndex(quint32 index)
 {
     d->paperIndex = index;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, bool &stop)
+bool VLayoutPaper::ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop)
 {
     // First need set size of paper
     if (d->globalContour.GetHeight() <= 0 || d->globalContour.GetWidth() <= 0)
@@ -178,19 +191,19 @@ int VLayoutPaper::Count() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
+bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
 {
-    VBestSquare bestResult;
+    VBestSquare bestResult(d->globalContour.GetSize(), d->saveLength);
     QThreadPool *thread_pool = QThreadPool::globalInstance();
+    thread_pool->setExpiryTimeout(1000);
     QVector<VPosition *> threads;
 
     for (int j=1; j <= d->globalContour.EdgesCount(); ++j)
     {
         for (int i=1; i<= detail.EdgesCount(); i++)
         {
-            QCoreApplication::processEvents();
-
-            VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->rotate, d->rotationIncrease);
+            VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->rotate, d->rotationIncrease,
+                                              d->saveLength);
             //Info for debug
             #ifdef LAYOUT_DEBUG
                 thread->setPaperIndex(d->paperIndex);
@@ -203,19 +216,22 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
             threads.append(thread);
             thread_pool->start(thread);
 
-            d->frame = d->frame + 3 + static_cast<unsigned int>(360/d->rotationIncrease*2);
+            d->frame = d->frame + 3 + static_cast<quint32>(360/d->rotationIncrease*2);
         }
     }
 
-    if (thread_pool->waitForDone() == false)
+    // Wait for done
+    do
     {
-        return false;
+        QCoreApplication::processEvents();
+        QThread::msleep(250);
     }
-
-    QCoreApplication::processEvents();
+    while(thread_pool->activeThreadCount() > 0 && not stop);
 
     if (stop)
     {
+        qDeleteAll(threads.begin(), threads.end());
+        threads.clear();
         return false;
     }
 
@@ -233,7 +249,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, bool &stop)
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail)
 {
-    if (bestResult.ValideResult())
+    if (bestResult.ValidResult())
     {
         VLayoutDetail workDetail = detail;
         workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
@@ -255,14 +271,36 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutDetail
 #endif
     }
 
-    return bestResult.ValideResult(); // Do we have the best result?
+    return bestResult.ValidResult(); // Do we have the best result?
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsRectItem *VLayoutPaper::GetPaperItem() const
+QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop) const
 {
-    QGraphicsRectItem *paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(),
-                                                            d->globalContour.GetHeight()));
+    QGraphicsRectItem *paper;
+    if (autoCrop)
+    {
+        QGraphicsScene *scene = new QGraphicsScene();
+        QList<QGraphicsItem *> list = GetDetails();
+        for (int i=0; i < list.size(); ++i)
+        {
+            scene->addItem(list.at(i));
+        }
+        const int height = scene->itemsBoundingRect().toRect().height() + static_cast<int>(d->layoutWidth)*2;
+        delete scene;
+        if (d->globalContour.GetHeight() > height) //-V807
+        {
+            paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), height));
+        }
+        else
+        {
+            paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), d->globalContour.GetHeight()));
+        }
+    }
+    else
+    {
+        paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), d->globalContour.GetHeight()));
+    }
     paper->setPen(QPen(Qt::black, 1));
     paper->setBrush(QBrush(Qt::white));
     return paper;

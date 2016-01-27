@@ -1,0 +1,666 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Valentina pattern format.-->
+    <version>0.2.4</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements>my_calculated_measurements_for_val.vit</measurements>
+    <increments>
+        <increment name="#AShoulderDart" description="Description" formula="0.95"/>
+        <increment name="#BShoulderDart" description="Description" formula="1.27"/>
+        <increment name="#CShoulderDart" description="Description" formula="1.59"/>
+        <increment name="#DShoulderDart" description="Description" formula="1.91"/>
+        <increment name="#ASideDart" description="Description" formula="1.91"/>
+        <increment name="#BSideDart" description="Description" formula="2.54"/>
+        <increment name="#CSideDart" description="Description" formula="3.18"/>
+        <increment name="#DSideDart" description="Description" formula="3.81"/>
+        <increment name="#AarmholeDart" description="Description" formula="0.95"/>
+        <increment name="#BarmholeDart" description="Description" formula="1.27"/>
+        <increment name="#CarmholeDart" description="Description" formula="1.59"/>
+        <increment name="#DarmholeDart" description="Description" formula="1.91"/>
+        <increment name="#AcenterFrontDart" description="Description" formula="0.95"/>
+        <increment name="#BcenterFrontDart" description="Description" formula="1.27"/>
+        <increment name="#CcenterFrontDart" description="Description" formula="1.59"/>
+        <increment name="#DcenterFrontDart" description="Description" formula="1.91"/>
+        <increment name="#WaistDartzeroOne" description="Description" formula="0"/>
+        <increment name="#WaistDartTwoSeven" description="IMP - This is changed. original is 3/8(0.95). making it 5/8&quot;(1.59)" formula="1.59"/>
+        <increment name="#WaistDartEihtNine" description="Description" formula="1.91"/>
+        <increment name="#WaistDartTenThirteen" description="Description" formula="2.54"/>
+        <increment name="#WaistdartfourteenSixteen" description="Description" formula="3.18"/>
+        <increment name="#odd" description="1= Odd, 0 = even" formula="0"/>
+        <increment name="#inch" description="1&quot;" formula="2.54"/>
+        <increment name="#oneFour" description="1/4&quot;" formula="0.64"/>
+        <increment name="#threeEight" description="3/8&quot;" formula="0.95"/>
+        <increment name="#oneEight" description="1/8&quot;" formula="0.32"/>
+        <increment name="#fiveEight" description="5/8&quot;" formula="1.59"/>
+        <increment name="#threeFour" description="3/4&quot;" formula="1.91"/>
+        <increment name="#HighhipGuideline" description="4 1/2 inches from waist" formula="11.43"/>
+        <increment name="#LowHipGuideline" description="8 1/2 inches from waist" formula="21.59"/>
+        <increment name="#backNeckLengthGuide" description="9&quot; - Back Neck length guideline industry standard" formula="22.86"/>
+        <increment name="#BackCountouring" description="3/8&quot; - 0.95 cm" formula="0.95"/>
+        <increment name="#frontNeckLengthGuide" description="4&quot; front neck guideline" formula="10.16"/>
+        <increment name="#crossFrontGuideline" description="8&quot; Cross front guideline" formula="20.32"/>
+        <increment name="#crossFrontGuidelineVertical" description="3&quot; from neck guideline vertical" formula="7.62"/>
+        <increment name="#FrontShoulderLengthGuide" description="6&quot;" formula="15.24"/>
+        <increment name="#WaistdartVanisfromLH" description="3&quot; from low hip towards high hip" formula="7.62"/>
+        <increment name="#HighFiguretoLowfigurePOint" description="High figure to low figure point" formula="1.91"/>
+        <increment name="#FrontSideShapingVertical" description="3 inches from waist" formula="7.62"/>
+        <increment name="#FrontSideshapinghorizontal" description="1/8&quot;" formula="0.32"/>
+        <increment name="#FrontwaistBump" description="Quarter inch" formula="0.64"/>
+        <increment name="#Chesthollow" description="to cater for chest hollow below collar bone" formula="0.32"/>
+    </increments>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point type="single" x="0.926042" y="1.05833" id="1" name="A" mx="-1.21064" my="-2.1527"/>
+            <point type="endLine" typeLine="hair" id="36" name="G" basePoint="1" mx="0.409758" lineColor="black" my="-1.67768" angle="270" length="neck_back_to_waist_b"/>
+            <point type="endLine" typeLine="hair" id="37" name="A2" basePoint="36" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="(waist_circ>highhip_circ &amp;&amp; waist_circ>leg_thigh_mid_circ)?(waist_circ/4)-#oneFour:((highhip_circ>waist_circ &amp;&amp; highhip_circ>leg_thigh_mid_circ))?(highhip_circ/4)-#oneFour:(leg_thigh_mid_circ/4)-#oneFour"/>
+            <point type="endLine" typeLine="hair" id="38" name="A3" basePoint="36" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="#HighhipGuideline"/>
+            <point type="endLine" typeLine="hair" id="39" name="U" basePoint="36" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="#LowHipGuideline"/>
+            <point type="normal" typeLine="hair" id="40" name="A5" firstPoint="38" secondPoint="36" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="(waist_circ>highhip_circ &amp;&amp; waist_circ>leg_thigh_mid_circ)?(waist_circ/4)-#oneFour:((highhip_circ>waist_circ &amp;&amp; highhip_circ>leg_thigh_mid_circ))?(highhip_circ/4)-#oneFour:(leg_thigh_mid_circ/4)-#oneFour"/>
+            <point type="normal" typeLine="hair" id="41" name="V" firstPoint="39" secondPoint="38" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="(waist_circ>highhip_circ &amp;&amp; waist_circ>leg_thigh_mid_circ)?(waist_circ/4)-#oneFour:((highhip_circ>waist_circ &amp;&amp; highhip_circ>leg_thigh_mid_circ))?(highhip_circ/4)-#oneFour:(leg_thigh_mid_circ/4)-#oneFour"/>
+            <line typeLine="hair" id="42" firstPoint="37" secondPoint="40" lineColor="black"/>
+            <line typeLine="hair" id="43" firstPoint="40" secondPoint="41" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="44" name="A7" basePoint="1" mx="-2.83879" lineColor="black" my="1.1794" angle="180" length="#backNeckLengthGuide"/>
+            <point type="alongLine" typeLine="hair" id="45" name="A8" firstPoint="1" secondPoint="36" mx="-2.58928" lineColor="black" my="2.44614" length="neck_back_to_waist_b/2"/>
+            <point type="endLine" typeLine="hair" id="46" name="A9" basePoint="45" mx="1.09081" lineColor="black" my="0.371085" angle="180" length="(bust_circ/4)-#oneFour"/>
+            <point type="alongLine" typeLine="hair" id="47" name="J" firstPoint="1" secondPoint="36" mx="-1.0092" lineColor="black" my="-1.54838" length="neck_back_to_waist_b/4"/>
+            <point type="normal" typeLine="hair" id="48" name="A11" firstPoint="47" secondPoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#backNeckLengthGuide"/>
+            <point type="alongLine" typeLine="hair" id="49" name="B" firstPoint="1" secondPoint="44" mx="0.132292" lineColor="black" my="0.264583" length="(neck_circ/6)+#threeEight"/>
+            <point type="endLine" typeLine="hair" id="50" name="C" basePoint="49" mx="0.374342" lineColor="black" my="-2.25274" angle="90" length="(Line_A_B/3)+#oneEight"/>
+            <point type="alongLine" typeLine="hair" id="52" name="tmp1" firstPoint="49" secondPoint="44" mx="-4.40335" lineColor="black" my="1.17632" length="1"/>
+            <point type="shoulder" typeLine="hair" id="53" name="DShdr1Back" p2Line="52" pShoulder="50" mx="1.17984" lineColor="black" my="-0.474922" p1Line="49" length="shoulder_length+(rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==1?#AShoulderDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==2?#BShoulderDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*2.54):(lowbust_circ+4*#inch)))/#inch)==3?#CShoulderDart:#DShoulderDart)"/>
+            <line typeLine="hair" id="55" firstPoint="50" secondPoint="53" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="56" name="E" firstPoint="50" secondPoint="53" mx="2.04665" lineColor="black" my="0.351462" length="shoulder_length/2"/>
+            <point type="alongLine" typeLine="hair" id="57" name="F" firstPoint="53" secondPoint="50" mx="-1.41412" lineColor="black" my="-2.95711" length="shoulder_length/2"/>
+            <point type="endLine" typeLine="hair" id="58" name="H" basePoint="36" mx="-0.905098" lineColor="black" my="-1.44776" angle="180.08" length="#BackCountouring"/>
+            <point type="alongLine" typeLine="hair" id="59" name="I" firstPoint="36" secondPoint="39" mx="0.132292" lineColor="black" my="0.264583" length="7*#inch"/>
+            <point type="endLine" typeLine="hair" id="60" name="R" basePoint="58" mx="-3.43553" lineColor="black" my="0.10483" angle="270" length="#inch/2"/>
+            <line typeLine="hair" id="61" firstPoint="60" secondPoint="59" lineColor="black"/>
+            <line typeLine="hair" id="62" firstPoint="47" secondPoint="58" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="64" name="K" firstPoint="58" secondPoint="37" mx="1.72598" lineColor="black" my="-2.84195" length="((waist_circ/4)-#oneFour)/2"/>
+            <point type="alongLine" typeLine="hair" id="65" name="L" firstPoint="64" secondPoint="37" mx="-2.8093" lineColor="black" my="-2.94486" length="((rint((leg_thigh_mid_circ-waist_circ)/#inch)>=0 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=1)?#WaistDartzeroOne:(rint((leg_thigh_mid_circ-waist_circ)/#inch)>=2 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=7)?#WaistDartTwoSeven:(rint((leg_thigh_mid_circ-waist_circ)/#inch)>=8 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=9)?#WaistDartEihtNine:(rint((leg_thigh_mid_circ-waist_circ)/#inch)>=10 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=13)?#WaistDartTenThirteen:#WaistdartfourteenSixteen)-#BackCountouring "/>
+            <point type="alongLine" typeLine="hair" id="66" name="M" firstPoint="65" secondPoint="37" mx="0.132292" lineColor="black" my="0.264583" length="((waist_circ/4)-#oneFour)/2"/>
+            <point type="alongLine" typeLine="hair" id="67" name="A1" firstPoint="64" secondPoint="65" mx="-1.03796" lineColor="black" my="-3.1435" length="Line_K_L/2"/>
+            <point type="normal" typeLine="hair" id="68" name="N" firstPoint="67" secondPoint="36" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="Line_G_U"/>
+            <point type="alongLine" typeLine="hair" id="69" name="O" firstPoint="68" secondPoint="67" mx="0.132292" lineColor="black" my="0.264583" length="#WaistdartVanisfromLH"/>
+            <point type="endLine" typeLine="hair" id="70" name="Q" basePoint="65" mx="-3.80829" lineColor="black" my="-0.321179" angle="270" length="#inch/2"/>
+            <point type="endLine" typeLine="hair" id="71" name="P" basePoint="64" mx="1.14406" lineColor="black" my="-0.747183" angle="270" length="#inch/2"/>
+            <line typeLine="hair" id="72" firstPoint="66" secondPoint="70" lineColor="black"/>
+            <line typeLine="hair" id="73" firstPoint="71" secondPoint="60" lineColor="black"/>
+            <line typeLine="hair" id="74" firstPoint="70" secondPoint="69" lineColor="black"/>
+            <line typeLine="hair" id="75" firstPoint="71" secondPoint="69" lineColor="black"/>
+            <point type="lineIntersect" id="76" name="S" p2Line1="59" p2Line2="40" p1Line1="60" p1Line2="38" mx="-4.0852" my="-3.48429"/>
+            <point type="lineIntersect" id="77" name="A12" p2Line1="69" p2Line2="40" p1Line1="71" p1Line2="38" mx="0.323576" my="-2.55002"/>
+            <point type="lineIntersect" id="78" name="A13" p2Line1="69" p2Line2="38" p1Line1="70" p1Line2="40" mx="-3.85734" my="-2.7413"/>
+            <line typeLine="hair" id="79" firstPoint="78" secondPoint="77" lineColor="black"/>
+            <line typeLine="hair" id="80" firstPoint="38" secondPoint="76" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="81" name="T" firstPoint="38" secondPoint="40" mx="0.132292" lineColor="black" my="0.264583" length="((highhip_circ/4)-#oneFour)-Line_A13_A12-Line_A3_S"/>
+            <line typeLine="hair" id="82" firstPoint="66" secondPoint="81" lineColor="black"/>
+            <line typeLine="hair" id="83" firstPoint="81" secondPoint="41" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="84" name="W" firstPoint="47" secondPoint="48" mx="0.132292" lineColor="black" my="0.264583" length="armfold_to_armfold_b/2"/>
+            <point type="lineIntersect" id="85" name="X" p2Line1="58" p2Line2="46" p1Line1="47" p1Line2="45" mx="-1.55044" my="-0.278582"/>
+            <point type="endLine" typeLine="hair" id="86" name="Y" basePoint="85" mx="-4.50055" lineColor="black" my="-4.52802" angle="180" length="(bust_circ/4)-#oneFour"/>
+            <point type="endLine" typeLine="dashLine" id="87" name="tmp2" basePoint="86" mx="-4.91688" lineColor="black" my="-2.06394" angle="90" length="2*#inch"/>
+            <point type="endLine" typeLine="dashLine" id="88" name="A4" basePoint="86" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="2*#inch"/>
+            <point type="alongLine" typeLine="hair" id="89" name="A6" firstPoint="88" secondPoint="86" mx="0.877807" lineColor="black" my="-1.91871" length="0.5"/>
+            <point type="shoulder" typeLine="hair" id="90" name="Z" p2Line="89" pShoulder="66" mx="1.22483" lineColor="black" my="-2.67448" p1Line="88" length="armpit_to_waist_side"/>
+            <line typeLine="hair" id="91" firstPoint="66" secondPoint="90" lineColor="black"/>
+            <line typeLine="hair" id="92" firstPoint="86" secondPoint="45" lineColor="black"/>
+            <point type="normal" typeLine="hair" id="93" name="NewBustline" firstPoint="90" secondPoint="87" mx="-7.03413" lineColor="black" my="-3.99897" angle="180" length="Line_Y_A8"/>
+            <point type="lineIntersect" id="94" name="a" p2Line1="58" p2Line2="90" p1Line1="47" p1Line2="93" mx="-1.27354" my="-3.13284"/>
+            <point type="alongLine" typeLine="hair" id="95" name="A14" firstPoint="66" secondPoint="90" mx="-5.5496" lineColor="black" my="1.31895" length="3*#inch"/>
+            <point type="normal" typeLine="hair" id="96" name="b" firstPoint="95" secondPoint="90" mx="1.47955" lineColor="black" my="-0.848369" angle="180" length="#oneEight"/>
+            <line typeLine="hair" id="97" firstPoint="66" secondPoint="96" lineColor="black"/>
+            <line typeLine="hair" id="98" firstPoint="96" secondPoint="90" lineColor="black"/>
+            <line typeLine="hair" id="99" firstPoint="56" secondPoint="64" lineColor="black"/>
+            <point type="lineIntersect" id="100" name="A10" p2Line1="93" p2Line2="64" p1Line1="90" p1Line2="56" mx="0.374342" my="-2.78525"/>
+            <point type="alongLine" typeLine="hair" id="101" name="c" firstPoint="100" secondPoint="64" mx="1.34254" lineColor="black" my="0.361404" length="#inch"/>
+            <line typeLine="hair" id="102" firstPoint="101" secondPoint="65" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="103" name="d" firstPoint="56" secondPoint="64" mx="0.567982" lineColor="black" my="-1.42977" length="3.5*#inch"/>
+            <line typeLine="hair" id="104" firstPoint="93" secondPoint="47" lineColor="black"/>
+            <point type="normal" typeLine="hair" id="105" name="e" firstPoint="84" secondPoint="47" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="Line_NewBustline_J"/>
+            <point type="endLine" typeLine="hair" id="106" name="f" basePoint="105" mx="-2.04616" lineColor="black" my="-3.07571" angle="135" length="#inch"/>
+            <spline point4="84" type="simple" kAsm1="1.12718" kAsm2="0.876291" angle1="359.772" angle2="265.156" id="107" kCurve="1" color="black" point1="90"/>
+            <spline point4="53" type="simple" kAsm1="1.32308" kAsm2="1.01019" angle1="90.6985" angle2="280.723" id="108" kCurve="1" color="black" point1="84"/>
+            <point type="endLine" typeLine="hair" id="109" name="g" basePoint="49" mx="1.10049" lineColor="black" my="-2.68843" angle="45" length="#inch/2"/>
+            <spline point4="1" type="simple" kAsm1="1.09554" kAsm2="0.935991" angle1="277.383" angle2="175.887" id="110" kCurve="1" color="black" point1="50"/>
+            <line typeLine="hair" id="111" firstPoint="57" secondPoint="103" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="114" name="A16" basePoint="36" mx="2.64008" lineColor="black" my="-0.725335" angle="0" length="(waist_circ>highhip_circ &amp;&amp; waist_circ>leg_thigh_mid_circ)?(waist_circ/4)+#oneFour:((highhip_circ>waist_circ &amp;&amp; highhip_circ>leg_thigh_mid_circ))?(highhip_circ/4)+#oneFour:(leg_thigh_mid_circ/4)+#oneFour"/>
+            <point type="endLine" typeLine="hair" id="115" name="A17" basePoint="38" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="(waist_circ>highhip_circ &amp;&amp; waist_circ>leg_thigh_mid_circ)?(waist_circ/4)+#oneFour:((highhip_circ>waist_circ &amp;&amp; highhip_circ>leg_thigh_mid_circ))?(highhip_circ/4)+#oneFour:(leg_thigh_mid_circ/4)+#oneFour"/>
+            <point type="endLine" typeLine="hair" id="116" name="ZZ" basePoint="39" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="(waist_circ>highhip_circ &amp;&amp; waist_circ>leg_thigh_mid_circ)?(waist_circ/4)+#oneFour:((highhip_circ>waist_circ &amp;&amp; highhip_circ>leg_thigh_mid_circ))?(highhip_circ/4)+#oneFour:(leg_thigh_mid_circ/4)+#oneFour"/>
+            <line typeLine="hair" id="117" firstPoint="114" secondPoint="116" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="118" name="AA" firstPoint="36" secondPoint="1" mx="0.132292" lineColor="black" my="0.264583" length="neck_side_to_waist_f"/>
+            <point type="endLine" typeLine="hair" id="120" name="A20" basePoint="118" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#frontNeckLengthGuide"/>
+            <point type="alongLine" typeLine="hair" id="121" name="II" firstPoint="36" secondPoint="118" mx="0.723182" lineColor="black" my="-1.80353" length="neck_side_to_waist_f/2"/>
+            <point type="endLine" typeLine="hair" id="122" name="JJFirstBust" basePoint="121" mx="1.74664" lineColor="black" my="-2.81276" angle="0" length="(bust_circ/4)+#oneFour"/>
+            <point type="alongLine" typeLine="hair" id="125" name="A23" firstPoint="118" secondPoint="121" mx="0.132292" lineColor="black" my="0.264583" length="#crossFrontGuidelineVertical"/>
+            <point type="endLine" typeLine="hair" id="126" name="A24" basePoint="125" mx="1.28025" lineColor="black" my="-2.62511" angle="0" length="#crossFrontGuideline"/>
+            <point type="alongLine" typeLine="hair" id="151" name="BB" firstPoint="118" secondPoint="120" mx="0.132292" lineColor="black" my="0.264583" length="(neck_circ/6)+#oneFour"/>
+            <point type="endLine" typeLine="hair" id="152" name="CC" basePoint="151" mx="0.132292" lineColor="black" my="0.264583" angle="90" length="Line_AA_BB+#oneEight"/>
+            <point type="alongLine" typeLine="hair" id="153" name="DD" firstPoint="151" secondPoint="152" mx="-2.37899" lineColor="black" my="0.11686" length="Line_BB_CC/2"/>
+            <point type="endLine" typeLine="hair" id="155" name="EE" basePoint="153" mx="1.73818" lineColor="black" my="-0.252175" angle="0" length="#FrontShoulderLengthGuide"/>
+            <point type="alongLine" typeLine="hair" id="156" name="tmp4" firstPoint="153" secondPoint="155" mx="0.132292" lineColor="black" my="0.264583" length="1"/>
+            <point type="shoulder" typeLine="hair" id="157" name="FFArmhole" p2Line="156" pShoulder="152" mx="2.92013" lineColor="black" my="0.614333" p1Line="153" length="shoulder_length+(rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==1?#AShoulderDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==2?#BShoulderDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*2.54):(lowbust_circ+4*#inch)))/#inch)==3?#CShoulderDart:#DShoulderDart)"/>
+            <line typeLine="hair" id="159" firstPoint="152" secondPoint="157" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="160" name="GG" firstPoint="152" secondPoint="157" mx="-1.86196" lineColor="black" my="-2.68987" length="shoulder_length/2"/>
+            <point type="alongLine" typeLine="hair" id="161" name="HH" firstPoint="157" secondPoint="152" mx="1.68338" lineColor="black" my="-2.2467" length="shoulder_length/2"/>
+            <line typeLine="hair" id="162" firstPoint="121" secondPoint="122" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="163" name="KK" firstPoint="121" secondPoint="122" mx="0.501599" lineColor="black" my="-1.8774" length="bustpoint_to_bustpoint/2"/>
+            <point type="endLine" typeLine="dashLine" id="164" name="A22" basePoint="163" mx="0.132292" lineColor="black" my="0.264583" angle="90" length="2*#inch"/>
+            <point type="endLine" typeLine="dashLine" id="165" name="A26" basePoint="163" mx="-3.04375" lineColor="black" my="-0.769481" angle="270" length="2*#inch"/>
+            <point type="endLine" typeLine="hair" id="167" name="tmp5" basePoint="164" mx="-2.67558" lineColor="black" my="-1.66851" angle="90" length="2"/>
+            <point type="shoulder" typeLine="hair" id="168" name="LBust" p2Line="164" pShoulder="118" mx="3.82536" lineColor="black" my="0.190722" p1Line="167" length="neck_front_to_bust_f"/>
+            <line typeLine="hair" id="169" firstPoint="118" secondPoint="168" lineColor="black"/>
+            <point type="normal" typeLine="hair" id="170" name="MM" firstPoint="168" secondPoint="165" mx="0.206153" lineColor="black" my="0.560024" angle="180" length="Line_II_KK"/>
+            <point type="height" typeLine="hair" id="171" name="OO" basePoint="168" p2Line="116" mx="0.132292" lineColor="black" my="0.264583" p1Line="39"/>
+            <point type="lineIntersect" id="172" name="NN" p2Line1="171" p2Line2="36" p1Line1="168" p1Line2="114" mx="-2.43857" my="-3.57796"/>
+            <point type="alongLine" typeLine="hair" id="173" name="PP" firstPoint="172" secondPoint="36" mx="-3.58575" lineColor="black" my="-3.61994" length="((rint((leg_thigh_mid_circ-waist_circ)/#inch)>=0 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=1)?#WaistDartzeroOne:(rint((leg_thigh_mid_circ-waist_circ)/#inch)>=2 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=7)?#WaistDartTwoSeven:(rint((leg_thigh_mid_circ-waist_circ)/#inch)>=8 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=9)?#WaistDartEihtNine:(rint((leg_thigh_mid_circ-waist_circ)/#inch)>=10 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=13)?#WaistDartTenThirteen:#WaistdartfourteenSixteen)/2"/>
+            <point type="alongLine" typeLine="hair" id="174" name="QQ" firstPoint="172" secondPoint="114" mx="1.63061" lineColor="black" my="-3.78642" length="((rint((leg_thigh_mid_circ-waist_circ)/#inch)>=0 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=1)?#WaistDartzeroOne:(rint((leg_thigh_mid_circ-waist_circ)/#inch)>=2 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=7)?#WaistDartTwoSeven:(rint((leg_thigh_mid_circ-waist_circ)/#inch)>=8 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=9)?#WaistDartEihtNine:(rint((leg_thigh_mid_circ-waist_circ)/#inch)>=10 &amp;&amp; rint((leg_thigh_mid_circ-waist_circ)/#inch)&lt;=13)?#WaistDartTenThirteen:#WaistdartfourteenSixteen)/2"/>
+            <point type="alongLine" typeLine="hair" id="175" name="RR" firstPoint="36" secondPoint="38" mx="0.132292" lineColor="black" my="0.264583" length="#inch/2"/>
+            <point type="alongLine" typeLine="hair" id="177" name="SS" firstPoint="171" secondPoint="172" mx="0.132292" lineColor="black" my="0.264583" length="#WaistdartVanisfromLH"/>
+            <point type="endLine" typeLine="hair" id="178" name="TT" basePoint="173" mx="-2.94047" lineColor="black" my="-0.148176" angle="270" length="#inch/2"/>
+            <point type="endLine" typeLine="hair" id="179" name="UU" basePoint="174" mx="1.92091" lineColor="black" my="-0.331624" angle="270" length="#inch/2"/>
+            <line typeLine="hair" id="180" firstPoint="178" secondPoint="177" lineColor="black"/>
+            <line typeLine="hair" id="181" firstPoint="179" secondPoint="177" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="183" name="VV" firstPoint="168" secondPoint="172" mx="1.00367" lineColor="black" my="-0.881969" length="#HighFiguretoLowfigurePOint"/>
+            <line typeLine="hair" id="184" firstPoint="183" secondPoint="174" lineColor="black"/>
+            <line typeLine="hair" id="185" firstPoint="183" secondPoint="173" lineColor="black"/>
+            <line typeLine="hair" id="186" firstPoint="160" secondPoint="168" lineColor="black"/>
+            <line typeLine="hair" id="187" firstPoint="161" secondPoint="168" lineColor="black"/>
+            <point type="normal" typeLine="hair" id="188" name="WW2ndBust" firstPoint="170" secondPoint="121" mx="1.14126" lineColor="black" my="-1.45066" angle="180" length="(bust_circ/4)+#oneFour"/>
+            <point type="normal" typeLine="dashDotLine" id="189" name="A18" firstPoint="188" secondPoint="168" mx="1.64574" lineColor="black" my="-2.15694" angle="180" length="4*#inch"/>
+            <line typeLine="hair" id="190" firstPoint="173" secondPoint="174" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="191" name="XX" firstPoint="36" secondPoint="114" mx="0.132292" lineColor="black" my="0.264583" length="(waist_circ/4)+#oneFour+Line_PP_QQ"/>
+            <point type="lineIntersect" id="192" name="Tmp7" p2Line1="179" p2Line2="38" p1Line1="177" p1Line2="115" mx="2.12553" my="-3.81901"/>
+            <point type="lineIntersect" id="193" name="Tmp6" p2Line1="178" p2Line2="115" p1Line1="177" p1Line2="38" mx="-5.59099" my="-3.71518"/>
+            <line typeLine="hair" id="194" firstPoint="193" secondPoint="192" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="195" name="YY" firstPoint="38" secondPoint="115" mx="-2.55879" lineColor="black" my="-3.9047" length="(highhip_circ/4)+#oneFour+Line_Tmp6_Tmp7"/>
+            <line typeLine="hair" id="196" firstPoint="195" secondPoint="116" lineColor="black"/>
+            <line typeLine="hair" id="197" firstPoint="191" secondPoint="195" lineColor="black"/>
+            <line typeLine="hair" id="198" firstPoint="175" secondPoint="178" lineColor="black"/>
+            <line typeLine="hair" id="199" firstPoint="179" secondPoint="191" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="201" name="tmp8" basePoint="188" mx="1.37545" lineColor="black" my="0.166439" angle="270" length="1"/>
+            <point type="shoulder" typeLine="hair" id="202" name="a3rdBust" p2Line="188" pShoulder="191" mx="3.76457" lineColor="black" my="-1.24887" p1Line="201" length="armpit_to_waist_side+(rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==1?#ASideDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==2?#BSideDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*2.54):(lowbust_circ+4*#inch)))/#inch)==3?#CSideDart:#DSideDart)"/>
+            <line typeLine="hair" id="203" firstPoint="202" secondPoint="191" lineColor="black"/>
+            <point type="pointOfIntersection" id="204" name="bb" firstPoint="118" secondPoint="202" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="205" firstPoint="204" secondPoint="202" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="208" name="A19" firstPoint="191" secondPoint="202" mx="0.567683" lineColor="black" my="0.547178" length="#FrontSideShapingVertical"/>
+            <point type="normal" typeLine="hair" id="209" name="A21" firstPoint="208" secondPoint="191" mx="-3.69281" lineColor="black" my="-1.4741" angle="180" length="#FrontSideshapinghorizontal"/>
+            <line typeLine="hair" id="210" firstPoint="209" secondPoint="191" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="211" name="A25" firstPoint="188" secondPoint="202" mx="0.655727" lineColor="black" my="-4.83891" length="((rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==1?#ASideDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==2?#BSideDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*2.54):(lowbust_circ+4*#inch)))/#inch)==3?#CSideDart:#DSideDart))/2"/>
+            <point type="alongLine" typeLine="hair" id="212" name="A27" firstPoint="188" secondPoint="201" mx="0.139569" lineColor="black" my="1.1253" length="((rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==1?#ASideDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==2?#BSideDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*2.54):(lowbust_circ+4*#inch)))/#inch)==3?#CSideDart:#DSideDart))/2"/>
+            <line typeLine="hair" id="213" firstPoint="168" secondPoint="211" lineColor="black"/>
+            <line typeLine="hair" id="214" firstPoint="168" secondPoint="212" lineColor="black"/>
+            <point type="lineIntersect" id="215" name="A28" p2Line1="208" p2Line2="168" p1Line1="202" p1Line2="212" mx="-2.79698" my="0.660431"/>
+            <point type="lineIntersect" id="216" name="A29" p2Line1="208" p2Line2="168" p1Line1="202" p1Line2="211" mx="-2.28238" my="-2.15009"/>
+            <line typeLine="hair" id="217" firstPoint="209" secondPoint="215" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="218" name="A30" firstPoint="183" secondPoint="173" mx="-2.08446" lineColor="black" my="-2.42718" length="Line_VV_PP/3"/>
+            <point type="alongLine" typeLine="hair" id="219" name="A31" firstPoint="183" secondPoint="174" mx="1.87402" lineColor="black" my="-2.70428" length="Line_VV_PP/3"/>
+            <point type="endLine" typeLine="hair" id="220" name="A32" basePoint="219" mx="5.61272" lineColor="black" my="-2.49002" angle="0" length="#FrontwaistBump"/>
+            <point type="endLine" typeLine="hair" id="221" name="A33" basePoint="218" mx="-3.94494" lineColor="black" my="-0.566697" angle="180" length="#FrontwaistBump"/>
+            <spline point4="173" type="simple" kAsm1="0.298854" kAsm2="1.2878" angle1="253.054" angle2="99.8213" id="222" kCurve="1" color="black" point1="183"/>
+            <spline point4="174" type="simple" kAsm1="0.128689" kAsm2="1.44195" angle1="279.47" angle2="80.3781" id="223" kCurve="1" color="black" point1="183"/>
+            <point type="lineIntersect" id="225" name="del4" p2Line1="202" p2Line2="220" p1Line1="191" p1Line2="221" mx="4.29938" my="1.60572"/>
+            <point type="lineIntersect" id="226" name="del3" p2Line1="221" p2Line2="36" p1Line1="225" p1Line2="170" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="227" firstPoint="226" secondPoint="225" lineColor="yellow"/>
+            <point type="lineIntersect" id="228" name="del1" p2Line1="96" p2Line2="226" p1Line1="46" p1Line2="221" mx="0.132292" my="0.264583"/>
+            <point type="lineIntersect" id="229" name="del2" p2Line1="58" p2Line2="226" p1Line1="85" p1Line2="221" mx="-2.78946" my="-2.46558"/>
+            <line typeLine="hair" id="230" firstPoint="228" secondPoint="229" lineColor="yellow"/>
+            <point type="lineIntersect" id="232" name="A34" p2Line1="168" p2Line2="125" p1Line1="161" p1Line2="126" mx="-4.73602" my="-2.45935"/>
+            <point type="alongLine" typeLine="hair" id="233" name="A35" firstPoint="232" secondPoint="126" mx="4.59491" lineColor="black" my="-3.38665" length="#Chesthollow"/>
+            <spline point4="168" type="simple" kAsm1="0.638151" kAsm2="1.34708" angle1="263.104" angle2="75.7068" id="234" kCurve="1" color="black" point1="161"/>
+            <point type="lineIntersect" id="235" name="A36" p2Line1="168" p2Line2="125" p1Line1="160" p1Line2="126" mx="-3.63485" my="-4.60373"/>
+            <line typeLine="hair" id="236" firstPoint="235" secondPoint="233" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="237" name="gg" firstPoint="125" secondPoint="126" mx="-1.54493" lineColor="black" my="0.301518" length="(across_chest_f/2)+Line_A36_A35"/>
+            <point type="pointOfIntersection" id="238" name="A37" firstPoint="237" secondPoint="204" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="239" name="ii" basePoint="238" mx="0.132292" lineColor="black" my="0.264583" angle="45" length="#inch"/>
+            <point type="normal" typeLine="hair" id="241" name="kk" firstPoint="239" secondPoint="238" mx="1.59693" lineColor="black" my="-1.71466" angle="0" length="((rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==1?#AarmholeDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==2?#BarmholeDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*2.54):(lowbust_circ+4*#inch)))/#inch)==3?#CarmholeDart:#DarmholeDart))/2"/>
+            <point type="normal" typeLine="hair" id="242" name="jj" firstPoint="239" secondPoint="238" mx="0.0927072" lineColor="black" my="-1.79383" angle="180" length="((rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==1?#AarmholeDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*#inch):(lowbust_circ+4*#inch)))/#inch)==2?#BarmholeDart:rint((bust_circ-((#odd==1)?(lowbust_circ+5*2.54):(lowbust_circ+4*#inch)))/#inch)==3?#CarmholeDart:#DarmholeDart))/2"/>
+            <line typeLine="hair" id="243" firstPoint="242" secondPoint="168" lineColor="black"/>
+            <line typeLine="hair" id="244" firstPoint="241" secondPoint="168" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="246" name="A38" basePoint="151" mx="0.132292" lineColor="black" my="0.264583" angle="135" length="#inch"/>
+            <spline point4="152" type="simple" kAsm1="0.752352" kAsm2="1.42917" angle1="0.468534" angle2="269.739" id="247" kCurve="1" color="black" point1="118"/>
+            <spline point4="202" type="simple" kAsm1="2.70163" kAsm2="0.323775" angle1="243.992" angle2="178.111" id="248" kCurve="1" color="black" point1="157"/>
+            <point type="cutSpline" id="251" name="ShdrLBelowFrnt" spline="248" color="black" mx="-1.40413" my="3.50303" length="(sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2-#oneFour:armscye_circ/2+#oneFour)-Spl_FFArmhole_a3rdBust)==-1)?(-((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2-#oneFour:armscye_circ/2+#oneFour)-Spl_FFArmhole_a3rdBust)):0"/>
+            <point type="normal" typeLine="hair" id="254" name="ShdrLAboveFrnt" firstPoint="157" secondPoint="153" mx="4.20273" lineColor="black" my="-3.3843" angle="180" length="(sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2-#oneFour:armscye_circ/2+#oneFour)-Spl_FFArmhole_a3rdBust)==-1)?0:(neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2-#oneFour:armscye_circ/2+#oneFour)-Spl_FFArmhole_a3rdBust"/>
+            <line typeLine="hair" id="255" firstPoint="152" secondPoint="251" lineColor="yellow"/>
+            <spline point4="90" type="simple" kAsm1="0.793018" kAsm2="1.04324" angle1="282.994" angle2="1.23972" id="259" kCurve="1" color="black" point1="53"/>
+            <point type="cutSpline" id="260" name="ShdrLBelowBack" spline="259" color="yellow" mx="-8.88108" my="2.08081" length="(sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_DShdr1Back_Z)==-1)?(-((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_DShdr1Back_Z)):0"/>
+            <point type="normal" typeLine="hair" id="263" name="ShdrLAboveBack" firstPoint="53" secondPoint="1" mx="-11.3935" lineColor="black" my="-7.68168" angle="0" length="(sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_DShdr1Back_Z)==-1)?0:((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_DShdr1Back_Z)"/>
+            <point type="alongLine" typeLine="hair" id="264" name="ShdrPt2AboveBack" firstPoint="50" secondPoint="263" mx="7.58963" lineColor="yellow" my="-8.02658" length="Line_C_DShdr1Back"/>
+            <point type="alongLine" typeLine="hair" id="265" name="ShdrPt2Belowback" firstPoint="50" secondPoint="260" mx="1.93939" lineColor="yellow" my="2.21069" length="Line_C_DShdr1Back"/>
+            <point type="endLine" typeLine="hair" id="267" name="starightguide" basePoint="50" mx="-1.64986" lineColor="black" my="-8.05937" angle="180" length="Line_C_DShdr1Back"/>
+            <point type="endLine" typeLine="hair" id="268" name="starightguidefront" basePoint="152" mx="-4.65784" lineColor="black" my="-2.53657" angle="0" length="Line_CC_FFArmhole"/>
+            <line typeLine="hair" id="269" firstPoint="264" secondPoint="267" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="272" name="tmp" basePoint="267" mx="-17.4407" lineColor="black" my="-4.38382" angle="270" length="0"/>
+            <point type="alongLine" typeLine="hair" id="273" name="tmp9" firstPoint="50" secondPoint="272" mx="-17.5847" lineColor="darkBlue" my="-1.80496" length="Line_C_DShdr1Back"/>
+            <spline point4="273" type="simple" kAsm1="0.372374" kAsm2="2.3618" angle1="11.4116" angle2="282.346" id="274" kCurve="1" color="black" point1="90"/>
+            <line typeLine="hair" id="275" firstPoint="264" secondPoint="267" lineColor="black"/>
+            <line typeLine="hair" id="276" firstPoint="265" secondPoint="267" lineColor="black"/>
+            <point type="alongLine" typeLine="hair" id="277" name="ShdrPt2BelowFrnt" firstPoint="152" secondPoint="251" mx="3.95499" lineColor="yellow" my="1.79366" length="Line_CC_FFArmhole"/>
+            <point type="alongLine" typeLine="hair" id="278" name="ShdrPt2AboveFrnt" firstPoint="152" secondPoint="254" mx="7.78015" lineColor="yellow" my="0.373629" length="Line_CC_FFArmhole"/>
+            <line typeLine="hair" id="280" firstPoint="278" secondPoint="268" lineColor="black"/>
+            <line typeLine="hair" id="281" firstPoint="277" secondPoint="268" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="282" name="A39" basePoint="152" mx="1.62662" lineColor="black" my="-2.37656" angle="64.9833" length="(sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_FFArmhole_a3rdBust)==-1)?Line_ShdrPt2BelowFrnt_starightguidefront:Line_ShdrPt2AboveFrnt_starightguidefront"/>
+            <line typeLine="hair" id="286" firstPoint="278" secondPoint="268" lineColor="black"/>
+            <line typeLine="hair" id="287" firstPoint="277" secondPoint="268" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="288" name="AngleShdrFront" basePoint="268" mx="7.78384" lineColor="black" my="-0.770626" angle="270" length="(((sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_DShdr1Back_Z)==-1)?Line_ShdrPt2Belowback_starightguide:Line_ShdrPt2AboveBack_starightguide)+(((sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_DShdr1Back_Z)==-1)?Line_ShdrPt2BelowFrnt_starightguidefront:Line_ShdrPt2AboveFrnt_starightguidefront)))/2"/>
+            <point type="alongLine" typeLine="hair" id="289" name="finalShdrFront" firstPoint="152" secondPoint="288" mx="11.5805" lineColor="blue" my="-8.42123" length="Line_CC_FFArmhole"/>
+            <line typeLine="hair" id="292" firstPoint="264" secondPoint="267" lineColor="black"/>
+            <point type="endLine" typeLine="hair" id="293" name="AngleShdrBack" basePoint="267" mx="-16.5211" lineColor="black" my="-0.676519" angle="270" length="(((sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_DShdr1Back_Z)==-1)?Line_ShdrPt2Belowback_starightguide:Line_ShdrPt2AboveBack_starightguide)+(((sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_DShdr1Back_Z)==-1)?Line_ShdrPt2BelowFrnt_starightguidefront:Line_ShdrPt2AboveFrnt_starightguidefront)))/2"/>
+            <point type="alongLine" typeLine="hair" id="294" name="FinalBackShdr" firstPoint="50" secondPoint="293" mx="-18.4033" lineColor="blue" my="2.92421" length="Line_C_DShdr1Back"/>
+            <point type="endLine" typeLine="hair" id="295" name="Angleback" basePoint="1" mx="-1.31711" lineColor="black" my="-5.63864" angle="102.347" length="((sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_DShdr1Back_Z)==-1)?Line_ShdrPt2Belowback_starightguide:Line_ShdrPt2AboveBack_starightguide)"/>
+            <point type="endLine" typeLine="hair" id="296" name="Anglefront" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="64.2553" length="(sign((neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_DShdr1Back_Z)==-1)?Line_ShdrPt2BelowFrnt_starightguidefront:Line_ShdrPt2AboveFrnt_starightguidefront"/>
+            <point type="endLine" typeLine="hair" id="297" name="A15" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="78.5738" length="Line_ShdrPt2AboveBack_starightguide"/>
+            <point type="alongLine" typeLine="hair" id="298" name="i" firstPoint="50" secondPoint="294" mx="3.44288" lineColor="blue" my="-3.82715" length="shoulder_length/2"/>
+            <point type="alongLine" typeLine="hair" id="299" name="j" firstPoint="294" secondPoint="50" mx="0.281082" lineColor="blue" my="-4.34792" length="shoulder_length/2"/>
+            <line typeLine="hair" id="300" firstPoint="298" secondPoint="64" lineColor="blue"/>
+            <point type="alongLine" typeLine="hair" id="301" name="d1" firstPoint="298" secondPoint="64" mx="1.6202" lineColor="blue" my="-2.78562" length="3.5*#inch"/>
+            <line typeLine="hair" id="302" firstPoint="299" secondPoint="301" lineColor="blue"/>
+            <point type="alongLine" typeLine="hair" id="303" name="c1" firstPoint="100" secondPoint="64" mx="-3.2884" lineColor="black" my="0.93972" length="#inch"/>
+            <line typeLine="hair" id="304" firstPoint="65" secondPoint="303" lineColor="blue"/>
+            <point type="alongLine" typeLine="hair" id="305" name="GG1" firstPoint="152" secondPoint="289" mx="-1.71308" lineColor="blue" my="-4.5964" length="shoulder_length/2"/>
+            <point type="alongLine" typeLine="hair" id="306" name="HH1" firstPoint="289" secondPoint="152" mx="-0.992936" lineColor="blue" my="-4.32635" length="shoulder_length/2"/>
+            <line typeLine="hair" id="307" firstPoint="306" secondPoint="168" lineColor="black"/>
+            <point type="lineIntersect" id="308" name="A34a" p2Line1="306" p2Line2="125" p1Line1="168" p1Line2="126" mx="-0.00273567" my="1.56985"/>
+            <point type="alongLine" typeLine="hair" id="309" name="A35a" firstPoint="308" secondPoint="126" mx="1.6176" lineColor="black" my="-3.74123" length="#oneEight"/>
+            <line typeLine="hair" id="310" firstPoint="305" secondPoint="168" lineColor="blue"/>
+            <spline point4="309" type="simple" kAsm1="0.950771" kAsm2="1.11268" angle1="260.081" angle2="74.4134" id="311" kCurve="1" color="blue" point1="306"/>
+            <spline point4="168" type="simple" kAsm1="0.834025" kAsm2="1.10807" angle1="260.739" angle2="73.9907" id="312" kCurve="1" color="blue" point1="309"/>
+            <point type="endLine" typeLine="hair" id="313" name="frontarm" basePoint="90" mx="-1.44341" lineColor="black" my="5.59417" angle="148.847" length="(neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2-#oneFour:armscye_circ/2+#oneFour)-Spl_FFArmhole_ShdrLBelowFrnt"/>
+            <point type="endLine" typeLine="hair" id="314" name="backarm" basePoint="90" mx="-7.42182" lineColor="black" my="2.90621" angle="160" length="neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour"/>
+            <point type="endLine" typeLine="hair" id="315" name="A40" basePoint="90" mx="-2.83374" lineColor="black" my="0.44996" angle="189.907" length="(neck_back_to_waist_b>neck_side_to_waist_f?armscye_circ/2+#oneFour:armscye_circ/2-#oneFour)-Spl_FFArmhole_a3rdBust"/>
+            <spline point4="294" type="simple" kAsm1="1.11479" kAsm2="0.741008" angle1="0.279933" angle2="279.664" id="316" kCurve="1" color="blue" point1="90"/>
+            <spline point4="289" type="simple" kAsm1="1.67562" kAsm2="1.21788" angle1="178.404" angle2="247.458" id="317" kCurve="1" color="blue" point1="202"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="false" id="127" idObject="90" mx="1.22483" my="-2.67448"/>
+            <point type="modeling" inUse="false" id="128" idObject="106" mx="-2.04616" my="-3.07571"/>
+            <spline type="modelingSpline" inUse="false" id="129" idObject="108"/>
+            <point type="modeling" inUse="false" id="130" idObject="53" mx="1.80537" my="0.0463557"/>
+            <point type="modeling" inUse="false" id="131" idObject="57" mx="-1.41412" my="-2.95711"/>
+            <point type="modeling" inUse="false" id="132" idObject="103" mx="0.567982" my="-1.42977"/>
+            <point type="modeling" inUse="false" id="133" idObject="100" mx="0.374342" my="-2.78525"/>
+            <point type="modeling" inUse="false" id="134" idObject="90" mx="1.22483" my="-2.67448"/>
+            <point type="modeling" inUse="false" id="135" idObject="103" mx="0.567982" my="-1.42977"/>
+            <point type="modeling" inUse="false" id="136" idObject="56" mx="0.26116" my="-3.66588"/>
+            <spline type="modelingSpline" inUse="false" id="137" idObject="110"/>
+            <spline type="modelingSpline" inUse="false" id="138" idObject="110"/>
+            <spline type="modelingSpline" inUse="false" id="139" idObject="110"/>
+            <point type="modeling" inUse="false" id="140" idObject="93" mx="-7.03413" my="-3.99897"/>
+            <point type="modeling" inUse="false" id="141" idObject="100" mx="0.374342" my="-2.78525"/>
+            <point type="modeling" inUse="false" id="142" idObject="103" mx="0.567982" my="-1.42977"/>
+            <point type="modeling" inUse="false" id="144" idObject="53" mx="1.80537" my="0.0463557"/>
+            <point type="modeling" inUse="false" id="145" idObject="57" mx="-1.41412" my="-2.95711"/>
+            <point type="modeling" inUse="false" id="146" idObject="103" mx="0.567982" my="-1.42977"/>
+            <point type="modeling" inUse="false" id="147" idObject="100" mx="0.374342" my="-2.78525"/>
+            <spline type="modelingSpline" inUse="false" id="148" idObject="107"/>
+            <point type="modeling" inUse="false" id="149" idObject="90" mx="1.22483" my="-2.67448"/>
+            <point type="modeling" inUse="false" id="318" idObject="50" mx="0.374342" my="-2.25274"/>
+            <spline type="modelingSpline" inUse="false" id="319" idObject="110"/>
+            <point type="modeling" inUse="false" id="320" idObject="47" mx="-1.0092" my="-1.54838"/>
+            <point type="modeling" inUse="false" id="321" idObject="58" mx="-0.905098" my="-1.44776"/>
+            <point type="modeling" inUse="false" id="322" idObject="64" mx="1.72598" my="-2.84195"/>
+            <point type="modeling" inUse="false" id="323" idObject="303" mx="-3.2884" my="0.93972"/>
+            <point type="modeling" inUse="false" id="324" idObject="65" mx="-2.8093" my="-2.94486"/>
+            <point type="modeling" inUse="false" id="325" idObject="66" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="326" idObject="96" mx="1.47955" my="-0.848369"/>
+            <point type="modeling" inUse="false" id="327" idObject="90" mx="1.22483" my="-2.67448"/>
+            <spline type="modelingSpline" inUse="false" id="328" idObject="316"/>
+            <point type="modeling" inUse="false" id="329" idObject="299" mx="0.281082" my="-4.34792"/>
+            <point type="modeling" inUse="false" id="330" idObject="301" mx="1.6202" my="-2.78562"/>
+            <point type="modeling" inUse="false" id="331" idObject="298" mx="3.44288" my="-3.82715"/>
+            <point type="modeling" inUse="false" id="332" idObject="294" mx="1.07395" my="3.27918"/>
+            <point type="modeling" inUse="false" id="333" idObject="299" mx="0.281082" my="-4.34792"/>
+            <point type="modeling" inUse="false" id="334" idObject="301" mx="1.6202" my="-2.78562"/>
+            <point type="modeling" inUse="false" id="335" idObject="100" mx="0.374342" my="-2.78525"/>
+            <point type="modeling" inUse="false" id="336" idObject="303" mx="-3.2884" my="0.93972"/>
+            <point type="modeling" inUse="false" id="337" idObject="65" mx="-2.8093" my="-2.94486"/>
+            <point type="modeling" inUse="false" id="338" idObject="66" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="339" idObject="96" mx="1.47955" my="-0.848369"/>
+            <point type="modeling" inUse="false" id="340" idObject="46" mx="1.09081" my="0.371085"/>
+            <point type="modeling" inUse="false" id="341" idObject="90" mx="1.22483" my="-2.67448"/>
+            <spline type="modelingSpline" inUse="false" id="342" idObject="316"/>
+            <point type="modeling" inUse="false" id="344" idObject="298" mx="3.44288" my="-3.82715"/>
+            <point type="modeling" inUse="false" id="345" idObject="50" mx="0.374342" my="-2.25274"/>
+            <spline type="modelingSpline" inUse="false" id="346" idObject="110"/>
+            <point type="modeling" inUse="false" id="347" idObject="47" mx="-1.0092" my="-1.54838"/>
+            <point type="modeling" inUse="false" id="348" idObject="85" mx="-1.55044" my="-0.278582"/>
+            <point type="modeling" inUse="false" id="349" idObject="58" mx="-0.905098" my="-1.44776"/>
+            <point type="modeling" inUse="false" id="350" idObject="64" mx="1.72598" my="-2.84195"/>
+            <point type="modeling" inUse="false" id="351" idObject="303" mx="-3.2884" my="0.93972"/>
+            <point type="modeling" inUse="false" id="352" idObject="100" mx="0.374342" my="-2.78525"/>
+            <point type="modeling" inUse="false" id="353" idObject="301" mx="1.6202" my="-2.78562"/>
+            <point type="modeling" inUse="false" id="354" idObject="298" mx="3.44288" my="-3.82715"/>
+            <point type="modeling" inUse="false" id="356" idObject="41" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="357" idObject="68" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="358" idObject="69" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="359" idObject="78" mx="-3.85734" my="-2.7413"/>
+            <point type="modeling" inUse="false" id="360" idObject="70" mx="-3.80829" my="-0.321179"/>
+            <point type="modeling" inUse="false" id="361" idObject="66" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="362" idObject="81" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="364" idObject="68" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="365" idObject="39" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="366" idObject="59" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="367" idObject="76" mx="-4.0852" my="-3.48429"/>
+            <point type="modeling" inUse="false" id="368" idObject="60" mx="-3.43553" my="0.10483"/>
+            <point type="modeling" inUse="false" id="369" idObject="71" mx="1.14406" my="-0.747183"/>
+            <point type="modeling" inUse="false" id="370" idObject="77" mx="0.323576" my="-2.55002"/>
+            <point type="modeling" inUse="false" id="371" idObject="77" mx="0.323576" my="-2.55002"/>
+            <point type="modeling" inUse="false" id="372" idObject="69" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="373" idObject="68" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="375" idObject="39" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="376" idObject="171" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="377" idObject="177" mx="-3.0843" my="0.502849"/>
+            <point type="modeling" inUse="false" id="378" idObject="178" mx="-2.94047" my="-0.148176"/>
+            <point type="modeling" inUse="false" id="379" idObject="175" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="380" idObject="38" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="381" idObject="59" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="383" idObject="171" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="384" idObject="116" mx="-8.08788" my="-4.61987"/>
+            <point type="modeling" inUse="false" id="385" idObject="195" mx="-2.55879" my="-3.9047"/>
+            <point type="modeling" inUse="false" id="386" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="387" idObject="179" mx="1.92091" my="-0.331624"/>
+            <point type="modeling" inUse="false" id="388" idObject="177" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="389" idObject="171" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="391" idObject="118" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="false" id="392" idObject="247"/>
+            <point type="modeling" inUse="false" id="393" idObject="152" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="394" idObject="305" mx="-3.55162" my="3.83926"/>
+            <point type="modeling" inUse="false" id="395" idObject="168" mx="-2.60782" my="-4.45546"/>
+            <point type="modeling" inUse="false" id="396" idObject="183" mx="-3.16598" my="-1.0011"/>
+            <spline type="modelingSpline" inUse="false" id="397" idObject="222"/>
+            <point type="modeling" inUse="false" id="398" idObject="173" mx="-3.58575" my="-3.61994"/>
+            <point type="modeling" inUse="false" id="399" idObject="36" mx="0.409758" my="-1.67768"/>
+            <point type="modeling" inUse="false" id="400" idObject="118" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="402" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="false" id="403" idObject="289" mx="11.5805" my="-8.42123"/>
+            <spline type="modelingSpline" inUse="false" id="404" idObject="317"/>
+            <point type="modeling" inUse="false" id="405" idObject="237" mx="-1.54493" my="0.301518"/>
+            <point type="modeling" inUse="false" id="406" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="false" id="407" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="408" idObject="202" mx="3.76457" my="-1.24887"/>
+            <point type="modeling" inUse="false" id="409" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="false" id="410" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="411" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="412" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="413" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="414" idObject="174" mx="1.63061" my="-3.78642"/>
+            <spline type="modelingSpline" inUse="false" id="415" idObject="223"/>
+            <point type="modeling" inUse="false" id="416" idObject="183" mx="1.00367" my="-0.881969"/>
+            <point type="modeling" inUse="false" id="417" idObject="168" mx="3.82536" my="0.190722"/>
+            <spline type="modelingSpline" inUse="false" id="418" idObject="312"/>
+            <spline type="modelingSpline" inUse="false" id="419" idObject="311"/>
+            <point type="modeling" inUse="false" id="420" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="false" id="421" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="false" id="422" idObject="289" mx="11.5805" my="-8.42123"/>
+            <spline type="modelingSpline" inUse="false" id="423" idObject="317"/>
+            <point type="modeling" inUse="false" id="424" idObject="237" mx="-1.54493" my="0.301518"/>
+            <point type="modeling" inUse="false" id="425" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="false" id="426" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="427" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="428" idObject="202" mx="3.76457" my="-1.24887"/>
+            <point type="modeling" inUse="false" id="429" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="false" id="430" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="431" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="432" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="433" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="434" idObject="174" mx="1.63061" my="-3.78642"/>
+            <spline type="modelingSpline" inUse="false" id="435" idObject="223"/>
+            <point type="modeling" inUse="false" id="436" idObject="183" mx="1.00367" my="-0.881969"/>
+            <point type="modeling" inUse="false" id="437" idObject="168" mx="3.82536" my="0.190722"/>
+            <spline type="modelingSpline" inUse="false" id="438" idObject="312"/>
+            <spline type="modelingSpline" inUse="false" id="439" idObject="311"/>
+            <point type="modeling" inUse="false" id="440" idObject="174" mx="1.63061" my="-3.78642"/>
+            <spline type="modelingSpline" inUse="false" id="441" idObject="223"/>
+            <point type="modeling" inUse="false" id="442" idObject="183" mx="1.00367" my="-0.881969"/>
+            <point type="modeling" inUse="false" id="443" idObject="168" mx="3.82536" my="0.190722"/>
+            <spline type="modelingSpline" inUse="false" id="444" idObject="312"/>
+            <spline type="modelingSpline" inUse="false" id="445" idObject="311"/>
+            <point type="modeling" inUse="false" id="446" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="false" id="447" idObject="289" mx="11.5805" my="-8.42123"/>
+            <spline type="modelingSpline" inUse="false" id="448" idObject="317"/>
+            <point type="modeling" inUse="false" id="449" idObject="237" mx="-1.54493" my="0.301518"/>
+            <point type="modeling" inUse="false" id="450" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="false" id="451" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="452" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="453" idObject="202" mx="3.76457" my="-1.24887"/>
+            <point type="modeling" inUse="false" id="454" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="false" id="455" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="456" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="457" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="458" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="459" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="false" id="461" idObject="174" mx="1.63061" my="-3.78642"/>
+            <spline type="modelingSpline" inUse="false" id="462" idObject="223"/>
+            <point type="modeling" inUse="false" id="463" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="464" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="465" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="466" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="467" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="false" id="468" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="false" id="469" idObject="220" mx="5.61272" my="-2.49002"/>
+            <point type="modeling" inUse="false" id="470" idObject="183" mx="1.00367" my="-0.881969"/>
+            <point type="modeling" inUse="false" id="471" idObject="220" mx="5.82902" my="1.61966"/>
+            <point type="modeling" inUse="false" id="472" idObject="174" mx="1.63061" my="-3.78642"/>
+            <spline type="modelingSpline" inUse="false" id="473" idObject="223"/>
+            <point type="modeling" inUse="false" id="474" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="475" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="476" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="477" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="478" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="false" id="479" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="false" id="480" idObject="220" mx="5.61272" my="-2.49002"/>
+            <point type="modeling" inUse="false" id="481" idObject="183" mx="1.00367" my="-0.881969"/>
+            <point type="modeling" inUse="false" id="482" idObject="220" mx="5.61272" my="-2.49002"/>
+            <point type="modeling" inUse="false" id="483" idObject="174" mx="1.63061" my="-3.78642"/>
+            <spline type="modelingSpline" inUse="false" id="484" idObject="223"/>
+            <point type="modeling" inUse="false" id="485" idObject="168" mx="3.82536" my="0.190722"/>
+            <spline type="modelingSpline" inUse="false" id="486" idObject="312"/>
+            <spline type="modelingSpline" inUse="false" id="487" idObject="311"/>
+            <point type="modeling" inUse="false" id="488" idObject="306" mx="0.845605" my="3.56856"/>
+            <point type="modeling" inUse="false" id="489" idObject="289" mx="-6.12219" my="5.56806"/>
+            <point type="modeling" inUse="false" id="490" idObject="237" mx="-1.54493" my="0.301518"/>
+            <point type="modeling" inUse="false" id="491" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="false" id="492" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="493" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="494" idObject="202" mx="-5.76607" my="1.37206"/>
+            <point type="modeling" inUse="false" id="495" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="false" id="496" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="497" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="498" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="499" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="500" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="false" id="501" idObject="171" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="502" idObject="116" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="503" idObject="195" mx="-2.55879" my="-3.9047"/>
+            <point type="modeling" inUse="false" id="504" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="505" idObject="179" mx="1.92091" my="-0.331624"/>
+            <point type="modeling" inUse="false" id="506" idObject="177" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="507" idObject="171" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="509" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="false" id="510" idObject="220" mx="5.61272" my="-2.49002"/>
+            <point type="modeling" inUse="false" id="511" idObject="183" mx="1.00367" my="-0.881969"/>
+            <spline type="modelingSpline" inUse="false" id="512" idObject="223"/>
+            <point type="modeling" inUse="false" id="513" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="514" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="515" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="516" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="517" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="false" id="518" idObject="202" mx="3.76457" my="-1.24887"/>
+            <point type="modeling" inUse="false" id="519" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="520" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="521" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="false" id="522" idObject="237" mx="-1.54493" my="0.301518"/>
+            <point type="modeling" inUse="false" id="523" idObject="289" mx="-6.05118" my="2.30074"/>
+            <point type="modeling" inUse="false" id="524" idObject="306" mx="0.555793" my="1.39203"/>
+            <spline type="modelingSpline" inUse="false" id="525" idObject="311"/>
+            <spline type="modelingSpline" inUse="false" id="526" idObject="312"/>
+            <point type="modeling" inUse="false" id="527" idObject="183" mx="1.00367" my="-0.881969"/>
+            <point type="modeling" inUse="false" id="529" idObject="36" mx="0.409758" my="-1.67768"/>
+            <point type="modeling" inUse="false" id="530" idObject="170" mx="0.206153" my="0.560024"/>
+            <point type="modeling" inUse="false" id="531" idObject="118" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="false" id="532" idObject="247"/>
+            <point type="modeling" inUse="false" id="533" idObject="305" mx="-4.92967" my="3.38551"/>
+            <point type="modeling" inUse="false" id="534" idObject="168" mx="-3.08435" my="-5.05113"/>
+            <point type="modeling" inUse="false" id="535" idObject="183" mx="1.00367" my="-0.881969"/>
+            <spline type="modelingSpline" inUse="false" id="536" idObject="222"/>
+            <point type="modeling" inUse="false" id="537" idObject="118" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="false" id="538" idObject="247"/>
+            <point type="modeling" inUse="false" id="539" idObject="305" mx="-1.71308" my="-4.5964"/>
+            <point type="modeling" inUse="false" id="540" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="541" idObject="183" mx="1.00367" my="-0.881969"/>
+            <spline type="modelingSpline" inUse="false" id="542" idObject="222"/>
+            <point type="modeling" inUse="false" id="543" idObject="173" mx="-3.58575" my="-3.61994"/>
+            <point type="modeling" inUse="false" id="544" idObject="36" mx="0.409758" my="-1.67768"/>
+            <point type="modeling" inUse="false" id="545" idObject="118" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="546" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="false" id="547" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="548" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="549" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="550" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="551" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="false" id="552" idObject="202" mx="3.76457" my="-1.24887"/>
+            <spline type="modelingSpline" inUse="false" id="553" idObject="317"/>
+            <point type="modeling" inUse="false" id="554" idObject="289" mx="4.06146" my="-0.208127"/>
+            <spline type="modelingSpline" inUse="false" id="555" idObject="317"/>
+            <point type="modeling" inUse="false" id="556" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="557" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="558" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="false" id="559" idObject="289" mx="1.16952" my="-3.79413"/>
+            <point type="modeling" inUse="false" id="560" idObject="152" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="561" idObject="246" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="562" idObject="118" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="563" idObject="36" mx="0.409758" my="-1.67768"/>
+            <spline type="modelingSpline" inUse="false" id="564" idObject="222"/>
+            <point type="modeling" inUse="false" id="565" idObject="183" mx="1.00367" my="-0.881969"/>
+            <spline type="modelingSpline" inUse="false" id="566" idObject="223"/>
+            <point type="modeling" inUse="false" id="568" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="false" id="569" idObject="289" mx="11.5805" my="-8.42123"/>
+            <spline type="modelingSpline" inUse="false" id="570" idObject="317"/>
+            <point type="modeling" inUse="false" id="571" idObject="202" mx="3.76457" my="-1.24887"/>
+            <spline type="modelingSpline" inUse="false" id="572" idObject="317"/>
+            <point type="modeling" inUse="false" id="573" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="false" id="574" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="575" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="576" idObject="202" mx="3.76457" my="-1.24887"/>
+            <point type="modeling" inUse="false" id="577" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="false" id="578" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="579" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="580" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="581" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="582" idObject="174" mx="1.63061" my="-3.78642"/>
+            <spline type="modelingSpline" inUse="false" id="583" idObject="223"/>
+            <point type="modeling" inUse="false" id="584" idObject="183" mx="1.00367" my="-0.881969"/>
+            <point type="modeling" inUse="false" id="585" idObject="168" mx="3.82536" my="0.190722"/>
+            <spline type="modelingSpline" inUse="false" id="586" idObject="312"/>
+            <spline type="modelingSpline" inUse="false" id="587" idObject="311"/>
+            <point type="modeling" inUse="false" id="589" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="590" idObject="183" mx="1.00367" my="-0.881969"/>
+            <spline type="modelingSpline" inUse="false" id="591" idObject="223"/>
+            <point type="modeling" inUse="false" id="592" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="false" id="593" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="594" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="595" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="596" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="597" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="false" id="598" idObject="202" mx="3.76457" my="-1.24887"/>
+            <point type="modeling" inUse="false" id="599" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="600" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="601" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="false" id="602" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="603" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="604" idObject="202" mx="3.76457" my="-1.24887"/>
+            <spline type="modelingSpline" inUse="false" id="605" idObject="248"/>
+            <point type="modeling" inUse="false" id="606" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <spline type="modelingSpline" inUse="false" id="607" idObject="311"/>
+            <spline type="modelingSpline" inUse="false" id="608" idObject="312"/>
+            <point type="modeling" inUse="false" id="609" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="false" id="610" idObject="289" mx="11.5805" my="-8.42123"/>
+            <point type="modeling" inUse="false" id="611" idObject="237" mx="-1.54493" my="0.301518"/>
+            <point type="modeling" inUse="false" id="612" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="false" id="613" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="614" idObject="239" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="615" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="616" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="617" idObject="202" mx="3.76457" my="-1.24887"/>
+            <point type="modeling" inUse="false" id="618" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="false" id="619" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="620" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="621" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="622" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="623" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="624" idObject="174" mx="1.63061" my="-3.78642"/>
+            <spline type="modelingSpline" inUse="false" id="625" idObject="223"/>
+            <point type="modeling" inUse="false" id="626" idObject="183" mx="1.00367" my="-0.881969"/>
+            <point type="modeling" inUse="false" id="627" idObject="168" mx="3.82536" my="0.190722"/>
+            <spline type="modelingSpline" inUse="false" id="628" idObject="312"/>
+            <spline type="modelingSpline" inUse="false" id="629" idObject="234"/>
+            <point type="modeling" inUse="false" id="630" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="false" id="631" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="false" id="632" idObject="289" mx="11.5805" my="-8.42123"/>
+            <point type="modeling" inUse="false" id="633" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="false" id="634" idObject="289" mx="11.5805" my="-8.42123"/>
+            <point type="modeling" inUse="false" id="635" idObject="237" mx="-1.54493" my="0.301518"/>
+            <point type="modeling" inUse="false" id="636" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="false" id="637" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="638" idObject="239" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="639" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="640" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="false" id="641" idObject="202" mx="3.76457" my="-1.24887"/>
+            <point type="modeling" inUse="false" id="642" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="false" id="643" idObject="168" mx="3.82536" my="0.190722"/>
+            <point type="modeling" inUse="false" id="644" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="false" id="645" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="false" id="646" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="false" id="647" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="false" id="648" idObject="220" mx="5.61272" my="-2.49002"/>
+            <point type="modeling" inUse="false" id="649" idObject="183" mx="1.00367" my="-0.881969"/>
+            <point type="modeling" inUse="false" id="650" idObject="168" mx="-3.92503" my="-3.16393"/>
+            <spline type="modelingSpline" inUse="false" id="651" idObject="312"/>
+            <spline type="modelingSpline" inUse="false" id="652" idObject="311"/>
+            <point type="modeling" inUse="false" id="653" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="true" id="655" idObject="306" mx="-0.992936" my="-4.32635"/>
+            <point type="modeling" inUse="true" id="656" idObject="289" mx="-1.45603" my="1.77097"/>
+            <point type="modeling" inUse="true" id="657" idObject="237" mx="-1.54493" my="0.301518"/>
+            <point type="modeling" inUse="true" id="658" idObject="242" mx="0.0927072" my="-1.79383"/>
+            <point type="modeling" inUse="true" id="659" idObject="168" mx="-5.40068" my="6.61327"/>
+            <point type="modeling" inUse="true" id="660" idObject="241" mx="1.59693" my="-1.71466"/>
+            <point type="modeling" inUse="true" id="661" idObject="202" mx="3.76457" my="-1.24887"/>
+            <point type="modeling" inUse="true" id="662" idObject="216" mx="-2.28238" my="-2.15009"/>
+            <point type="modeling" inUse="true" id="663" idObject="168" mx="-6.06332" my="-1.23651"/>
+            <point type="modeling" inUse="true" id="664" idObject="215" mx="-2.79698" my="0.660431"/>
+            <point type="modeling" inUse="true" id="665" idObject="209" mx="-3.69281" my="-1.4741"/>
+            <point type="modeling" inUse="true" id="666" idObject="191" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="667" idObject="174" mx="1.63061" my="-3.78642"/>
+            <point type="modeling" inUse="true" id="668" idObject="220" mx="5.61272" my="-2.49002"/>
+            <point type="modeling" inUse="true" id="669" idObject="183" mx="1.00367" my="-0.881969"/>
+            <point type="modeling" inUse="true" id="670" idObject="168" mx="-5.45165" my="2.17865"/>
+            <point type="modeling" inUse="true" id="671" idObject="309" mx="1.6176" my="-3.74123"/>
+            <point type="modeling" inUse="false" id="672" idObject="306" mx="-0.992936" my="-4.32635"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="673" name="Detail" supplement="0" mx="0.560698" width="1" my="0.917506">
+                <node type="NodePoint" nodeType="Contour" idObject="655" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="656" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="657" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="658" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="659" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="660" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="661" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="662" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="663" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="664" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="665" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="666" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="667" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="668" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="669" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="670" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="671" mx="0" my="0"/>
+            </detail>
+        </details>
+    </draw>
+</pattern>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vst>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.4.2</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <size base="22"/>
+    <height base="92"/>
+    <body-measurements>
+        <m name="@M_2" base="0" size_increase="0" height_increase="0"/>
+    </body-measurements>
+</vst>

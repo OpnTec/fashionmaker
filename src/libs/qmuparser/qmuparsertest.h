@@ -44,14 +44,19 @@ namespace Test
  *
  * (C) 2004-2011 Ingo Berg
  */
-class QMUPARSERSHARED_EXPORT QmuParserTester // final
+class QMUPARSERSHARED_EXPORT QmuParserTester : public QObject // final
 {
+    Q_OBJECT
 public:
     typedef int ( QmuParserTester::*testfun_type ) ();
 
-    QmuParserTester();
+    QmuParserTester(QObject *parent = nullptr);
+
+public slots:
     void Run();
+
 private:
+    Q_DISABLE_COPY(QmuParserTester)
     QVector<testfun_type> m_vTestFun;
     static int c_iCount;
 
@@ -64,7 +69,7 @@ private:
     static int ThrowTest ( const QString &a_str, int a_iErrc, bool a_bFail = true );
 
     // Test Bulkmode
-    int EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass);
+    static int EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass);
 
     // Multiarg callbacks
     static qreal f1of1 ( qreal v )
@@ -184,7 +189,7 @@ private:
 
     static qreal FirstArg ( const qreal* a_afArg, int a_iArgc )
     {
-        if ( a_iArgc == false)
+        if ( a_iArgc == 0)
         {
             throw QmuParserError ( "too few arguments for function FirstArg." );
         }
@@ -194,7 +199,7 @@ private:
 
     static qreal LastArg ( const qreal* a_afArg, int a_iArgc )
     {
-        if ( a_iArgc == false)
+        if ( a_iArgc == 0)
         {
             throw QmuParserError ( "too few arguments for function LastArg." );
         }
@@ -204,7 +209,7 @@ private:
 
     static qreal Sum ( const qreal* a_afArg, int a_iArgc )
     {
-        if ( a_iArgc == false)
+        if ( a_iArgc == 0)
         {
             throw QmuParserError ( "too few arguments for function sum." );
         }
@@ -307,7 +312,7 @@ private:
     // cppcheck-suppress functionStatic
     int TestBulkMode();
 
-    static void Q_NORETURN Abort();
+    static void Abort();
 };
 } // namespace Test
 } // namespace qmu

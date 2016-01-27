@@ -186,6 +186,7 @@ QVariant VProperty::getValue() const
     return d_ptr->VariantValue;
 }
 
+// cppcheck-suppress unusedFunction
 QString VProperty::serialize() const
 {
     return getValue().toString();

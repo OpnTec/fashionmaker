@@ -33,25 +33,28 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertyDelegate : public QStyledItemDeleg
     Q_OBJECT
 public:
     explicit VPropertyDelegate(QObject *parent = 0);
-    virtual ~VPropertyDelegate();
+    virtual ~VPropertyDelegate() Q_DECL_OVERRIDE;
 
     //! Creates the editor widget
-    virtual QWidget* createEditor (QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+    virtual QWidget* createEditor (QWidget* parent, const QStyleOptionViewItem& option,
+                                   const QModelIndex& index) const Q_DECL_OVERRIDE;
 
     //! Sets the index data to the editor
-    virtual void setEditorData (QWidget * editor, const QModelIndex & index) const;
+    virtual void setEditorData (QWidget * editor, const QModelIndex & index) const Q_DECL_OVERRIDE;
 
     //! Updates the index data
-    virtual void setModelData (QWidget * editor, QAbstractItemModel * model, const QModelIndex & index) const;
+    virtual void setModelData (QWidget * editor, QAbstractItemModel * model,
+                               const QModelIndex & index) const Q_DECL_OVERRIDE;
 
     //! Returns the size hint
-    virtual QSize sizeHint (const QStyleOptionViewItem& option, const QModelIndex& index) const;
+    virtual QSize sizeHint (const QStyleOptionViewItem& option, const QModelIndex& index) const Q_DECL_OVERRIDE;
 
     //! Sets the row height. Set this to 0 and the standard will be taken
     void setRowHeight(int height = 0, bool add_to_standard = false);
 
     //! Renders the delegate using the given painter and style option for the item specified by index.
-    virtual void paint (QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
+    virtual void paint (QPainter* painter, const QStyleOptionViewItem& option,
+                        const QModelIndex& index ) const Q_DECL_OVERRIDE;
 
 protected:
     int RowHeight;

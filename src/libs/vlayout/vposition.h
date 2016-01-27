@@ -46,11 +46,9 @@ class QPainterPath;
 class VPosition : public QRunnable
 {
 public:
-    VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, bool *stop, bool rotate,
-              int rotationIncrease);
-    virtual ~VPosition(){}
-
-    virtual void run();
+    VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop, bool rotate,
+              int rotationIncrease, bool saveLength);
+    virtual ~VPosition() Q_DECL_OVERRIDE{}
 
     quint32 getPaperIndex() const;
     void setPaperIndex(const quint32 &value);
@@ -68,6 +66,8 @@ public:
     static void DrawDebug(const VContour &contour, const VLayoutDetail &detail, int frame, quint32 paperIndex,
                           int detailsCount, const QVector<VLayoutDetail> &details = QVector<VLayoutDetail>());
 
+    static int Bias(int length, int maxLength);
+
 private:
     Q_DISABLE_COPY(VPosition)
     VBestSquare bestResult;
@@ -79,9 +79,13 @@ private:
     quint32 frame;
     quint32 detailsCount;
     QVector<VLayoutDetail> details;
-    bool *stop;
+    volatile bool *stop;
     bool rotate;
     int rotationIncrease;
+    /**
+     * @brief angle_between keep angle between global edge and detail edge. Need for optimization rotation.
+     */
+    qreal angle_between;
 
     enum class CrossingType : char
     {
@@ -97,9 +101,11 @@ private:
         EdgeError = 2
     };
 
+    virtual void run() Q_DECL_OVERRIDE;
+
     void SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &detail, int globalI, int detJ, BestFrom type);
 
-    bool CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) const;
+    bool CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge);
     bool CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int angle) const;
 
     CrossingType Crossing(const VLayoutDetail &detail, const int &globalI, const int &detailI) const;
@@ -107,7 +113,7 @@ private:
     qreal        CheckSide(const QLineF &edge, const QPointF &p) const;
     bool         SheetContains(const QRectF &rect) const;
 
-    void CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge) const;
+    void CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge);
     void RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const;
 
     QPolygonF GlobalPolygon() const;
@@ -120,8 +126,8 @@ private:
     static QPainterPath DrawContour(const QVector<QPointF> &points);
     static QPainterPath DrawDetails(const QVector<VLayoutDetail> &details);
 
-    static void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, unsigned int shift);
-    static QVector<QPointF> CutEdge(const QLineF &edge, unsigned int shift);
+    static void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, quint32 shift);
+    static QVector<QPointF> CutEdge(const QLineF &edge, quint32 shift);
 
     void Rotate(int increase);
 };

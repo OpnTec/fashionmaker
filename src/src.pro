@@ -1,8 +1,8 @@
 TEMPLATE = subdirs
-CONFIG   += ordered
-
-# Order is important
 SUBDIRS = \
     libs \
     app \
     test
+
+app.depends = libs
+test.depends = libs

@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 # File with common stuff for whole project
-include(../../../Valentina.pri)
+include(../../../common.pri)
 
 # Library use widgets
 QT       += widgets
@@ -57,67 +57,85 @@ unix:!macx{
     INSTALLS += target
 }
 
-# Set using ccache. Function enable_ccache() defined in Valentina.pri.
+# Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
-
-# Set precompiled headers. Function set_PCH() defined in Valentina.pri.
-$$set_PCH()
 
 CONFIG(debug, debug|release){
     # Debug mode
     unix {
         #Turn on compilers warnings.
         *-g++{
-        QMAKE_CXXFLAGS += \
-            -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            # Key -isystem disable checking errors in system headers.
-            $$GCC_DEBUG_CXXFLAGS \ # See Valentina.pri for more details.
+            QMAKE_CXXFLAGS += \
+                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+                # Key -isystem disable checking errors in system headers.
+                $$GCC_DEBUG_CXXFLAGS \ # See common.pri for more details.
 
-        # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
-        # want them in global list. Compromise decision delete them from local list.
-        QMAKE_CXXFLAGS -= \
-            -Wswitch-default
+            # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
+            # want them in global list. Compromise decision delete them from local list.
+            QMAKE_CXXFLAGS -= \
+                -Wswitch-default
 
-        #gcc’s 4.8.0 Address Sanitizer
-        #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
-        QMAKE_CFLAGS+=-fsanitize=address -fno-omit-frame-pointer
-        QMAKE_LFLAGS+=-fsanitize=address
+            noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
+                # do nothing
+            } else {
+                #gcc’s 4.8.0 Address Sanitizer
+                #http://blog.qt.digia.com/blog/2013/04/17/using-gccs-4-8-0-address-sanitizer-with-qt/
+                QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
+                QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
+                QMAKE_LFLAGS += -fsanitize=address
+            }
         }
 
         clang*{
         QMAKE_CXXFLAGS += \
             # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
-            $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+            $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
 
         # -isystem key works only for headers. In some cases it's not enough. But we can't delete this warnings and
         # want them in global list. Compromise decision delete them from local list.
         QMAKE_CXXFLAGS -= \
             -Wundefined-reinterpret-cast
         }
+        *-icc-*{
+            QMAKE_CXXFLAGS += \
+                -isystem "$${OUT_PWD}/$${MOC_DIR}" \
+                $$ICC_DEBUG_CXXFLAGS
+        }
     } else {
         *-g++{
-        QMAKE_CXXFLAGS += $$CLANG_DEBUG_CXXFLAGS # See Valentina.pri for more details.
+        QMAKE_CXXFLAGS += $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
         }
     }
 
 }else{
     # Release mode
+    !win32-msvc*:CONFIG += silent
 
     !unix:*-g++{
         QMAKE_CXXFLAGS += -fno-omit-frame-pointer # Need for exchndl.dll
     }
 
     !macx:!win32-msvc*{
-        # Turn on debug symbols in release mode on Unix systems.
-        # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
-        QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
-        QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
-        QMAKE_LFLAGS_RELEASE =
+        noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
+            # do nothing
+        } else {
+            # Turn on debug symbols in release mode on Unix systems.
+            # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
+            QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+            QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
+            QMAKE_LFLAGS_RELEASE =
 
-        # Strip debug symbols.
-        QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
-        QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
-        QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
+            noStripDebugSymbols { # For enable run qmake with CONFIG+=noStripDebugSymbols
+                # do nothing
+            } else {
+                # Strip debug symbols.
+                QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
+                QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
+                QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
+            }
+
+            QMAKE_DISTCLEAN += bin/${TARGET}.dbg
+        }
     }
 }

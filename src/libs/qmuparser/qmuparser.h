@@ -46,16 +46,14 @@ namespace qmu
     {
     public:
         QmuParser();
-        virtual void InitCharSets();
-        virtual void InitFun();
-        virtual void InitConst();
-        virtual void InitOprt();
-        virtual void OnDetectVar(const QString &pExpr, int &nStart, int &nEnd);
+        virtual void InitCharSets() Q_DECL_OVERRIDE;
+        virtual void InitFun() Q_DECL_OVERRIDE;
+        virtual void InitConst() Q_DECL_OVERRIDE;
+        virtual void InitOprt() Q_DECL_OVERRIDE;
+        virtual void OnDetectVar(const QString &pExpr, int &nStart, int &nEnd) Q_DECL_OVERRIDE;
         qreal        Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const;
     protected:
         static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const std::locale &s_locale);
-        // Trigonometric functions
-        static qreal Tan2(qreal, qreal);
         // hyperbolic functions
         static qreal Sinh(qreal);
         static qreal Cosh(qreal);
@@ -71,6 +69,7 @@ namespace qmu
         static qreal Abs(qreal);
         static qreal Rint(qreal);
         static qreal Sign(qreal);
+        static qreal FMod(qreal, qreal);
         // Prefix operators
         // !!! Unary Minus is a MUST if you want to use negative signs !!!
         static qreal UnaryMinus(qreal v);

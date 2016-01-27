@@ -36,28 +36,34 @@
 class VBestSquare
 {
 public:
-    VBestSquare();
+    VBestSquare(const QSizeF &sheetSize, bool saveLength);
 
-    void NewResult(qint64 square, int i, int j, const QTransform &matrix, bool mirror, BestFrom type);
+    void NewResult(const QSizeF &candidate, int i, int j, const QTransform &matrix, bool mirror, BestFrom type);
     void NewResult(const VBestSquare &best);
 
-    qint64     BestSquare() const;
+    QSizeF     BestSize() const;
     int        GContourEdge() const;
     int        DetailEdge() const;
     QTransform Matrix() const;
-    bool       ValideResult() const;
+    bool       ValidResult() const;
     bool       Mirror() const;
     BestFrom   Type() const;
+
+    bool IsSaveLength() const;
 
 private:
     // All nedded information about best result
     int resI; // Edge of global contour
     int resJ; // Edge of detail
     QTransform resMatrix; // Matrix for rotation and translation detail
-    qint64 resSquare; // Best square size (least). For begin set max value.
+    QSizeF bestSize;
+    qreal sheetWidth;
     bool valideResult;
     bool resMirror;
     BestFrom type;
+    bool saveLength;
+
+    static qint64 Square(const QSizeF &size);
 };
 
 #endif // VBESTSQUARE_H

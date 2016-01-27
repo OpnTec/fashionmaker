@@ -137,6 +137,7 @@ VProperty* VPropertyFactoryManager::createProperty(const QString& type, const QS
     return tmpResult;
 }
 
+// cppcheck-suppress unusedFunction
 VPropertyFactoryManager *VPropertyFactoryManager::getDefaultManager()
 {
     if (!DefaultManager)
@@ -148,6 +149,7 @@ VPropertyFactoryManager *VPropertyFactoryManager::getDefaultManager()
     return DefaultManager;
 }
 
+// cppcheck-suppress unusedFunction
 QStringList VPropertyFactoryManager::getSupportedTypes()
 {
     return d_ptr->Factories.keys();

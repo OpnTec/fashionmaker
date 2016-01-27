@@ -23,6 +23,7 @@
 
 #include <QString>
 #include <QDebug>
+#include <QCoreApplication>
 #include "qmuparsererror.h"
 #include <QtCore/qmath.h>
 #include <stdexcept>
@@ -41,8 +42,8 @@ namespace Test
 int QmuParserTester::c_iCount = 0;
 
 //---------------------------------------------------------------------------------------------------------------------
-QmuParserTester::QmuParserTester()
-    : m_vTestFun()
+QmuParserTester::QmuParserTester(QObject *parent)
+    : QObject(parent), m_vTestFun()
 {
     AddTest ( &QmuParserTester::TestNames );
     AddTest ( &QmuParserTester::TestSyntax );
@@ -120,7 +121,7 @@ int QmuParserTester::TestInterface()
         iStat += 1;  // not supposed to reach this, nonexisting variable "c" deleted...
     }
     catch ( ... )
-    {
+    { //-V565
         // failure is expected...
     }
 
@@ -282,16 +283,16 @@ int QmuParserTester::TestNames()
     QmuParser p;
 
 #define PARSER_THROWCHECK(DOMAIN, FAIL, EXPR, ARG) \
-      iErr = 0;                                      \
-      QmuParserTester::c_iCount++;                      \
-      try                                            \
-      {                                              \
-        p.Define##DOMAIN(EXPR, ARG);                 \
-      }                                              \
-      catch (QmuParserError &)                 \
-      {                                              \
-        iErr = (FAIL==false) ? 0 : 1;                \
-      }                                              \
+      iErr = 0;                                    \
+      QmuParserTester::c_iCount++;                 \
+      try                                          \
+      {                                            \
+        p.Define##DOMAIN(EXPR, ARG);               \
+      }                                            \
+      catch (QmuParserError &)                     \
+      {                                            \
+        iErr = static_cast<int>(FAIL);             \
+      }                                            \
       iStat += iErr;
 
     // constant names
@@ -1098,6 +1099,9 @@ void QmuParserTester::AddTest ( testfun_type a_pFun )
 // cppcheck-suppress unusedFunction
 void QmuParserTester::Run()
 {
+    qWarning() << "-----------------------------------------------------------";
+    qWarning() << "Running test suite:\n";
+
     int iStat = 0;
     try
     {
@@ -1111,16 +1115,19 @@ void QmuParserTester::Run()
         qWarning() << "\n" << e.GetMsg();
         qWarning() << e.GetToken();
         Abort();
+        return;
     }
     catch ( std::exception &e )
     {
         qWarning() << e.what();
         Abort();
+        return;
     }
     catch ( ... )
     {
         qWarning() << "Internal error";
         Abort();
+        return;
     }
 
     if ( iStat == 0 )
@@ -1133,7 +1140,11 @@ void QmuParserTester::Run()
                  << " errors (" <<  QmuParserTester::c_iCount
                  << " expressions)";
     }
+    QCoreApplication::exit(iStat);
     QmuParserTester::c_iCount = 0;
+
+    qWarning() << "Done.";
+    qWarning() << "-----------------------------------------------------------";
 }
 
 
@@ -1209,7 +1220,7 @@ int QmuParserTester::EqnTestWithVarChange ( const QString &a_str, double a_fVar1
         fVal[0] = p.Eval();
 
         // cppcheck-suppress redundantAssignment
-        var = a_fVar2;
+        var = a_fVar2; //-V519
         fVal[1] = p.Eval();
 
         if ( fabs ( a_fRes1 - fVal[0] ) > 0.0000000001 )
@@ -1264,8 +1275,8 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 
         p1.reset ( new qmu::QmuParser() );
         // Add constants
-        p1->DefineConst ( "pi", ( qreal ) M_PI );
-        p1->DefineConst ( "e", ( qreal ) M_E );
+        p1->DefineConst ( "pi", static_cast<qreal>(M_PI) );
+        p1->DefineConst ( "e", static_cast<qreal>(M_E) );
         p1->DefineConst ( "const", 1 );
         p1->DefineConst ( "const1", 2 );
         p1->DefineConst ( "const2", 3 );
@@ -1442,17 +1453,17 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 int QmuParserTester::EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_fPass)
 {
     QmuParserTester::c_iCount++;
-
-    // Define Bulk Variables
-    int nBulkSize = 4;
-    double vVariableA[] = { 1, 2, 3, 4 };   // variable values
-    double vVariableB[] = { 2, 2, 2, 2 };   // variable values
-    double vVariableC[] = { 3, 3, 3, 3 };   // variable values
-    double vResults[] = { 0, 0, 0, 0 };   // variable values
     int iRet(0);
 
     try
     {
+        // Define Bulk Variables
+        int nBulkSize = 4;
+        double vVariableA[] = { 1, 2, 3, 4 };   // variable values
+        double vVariableB[] = { 2, 2, 2, 2 };   // variable values
+        double vVariableC[] = { 3, 3, 3, 3 };   // variable values
+        double vResults[] = { 0, 0, 0, 0 };   // variable values
+
         QmuParser p;
         p.DefineConst("const1", 1);
         p.DefineConst("const2", 2);
@@ -1498,11 +1509,11 @@ int QmuParserTester::EqnTestBulk(const QString &a_str, double a_fRes[4], bool a_
 /**
  * @brief Internal error in test class Test is going to be aborted.
  */
-void Q_NORETURN QmuParserTester::Abort()
+void QmuParserTester::Abort()
 {
     qWarning() << "Test failed (internal error in test class)";
     while ( getchar() == false);
-    exit ( -1 );
+    QCoreApplication::exit ( -1 );
 }
 } // namespace test
 } // namespace qmu

@@ -56,18 +56,17 @@ public:
           IgnoreDataChangedSignal(false)
     {}
 
-    VPropertyFormViewPrivate(VPropertyModel* prop_model)
+    explicit VPropertyFormViewPrivate(VPropertyModel* prop_model)
         : VPropertyFormWidgetPrivate(), Model(prop_model), PropertySet(NULL), NeedsRebuild(false),
           IgnoreDataChangedSignal(false)
     {}
 
-    VPropertyFormViewPrivate(VPropertySet* prop_set)
+    explicit VPropertyFormViewPrivate(VPropertySet* prop_set)
         : VPropertyFormWidgetPrivate(), Model(NULL), PropertySet(prop_set), NeedsRebuild(false),
           IgnoreDataChangedSignal(false)
     {}
 
-    virtual ~VPropertyFormViewPrivate()
-    {}
+    virtual ~VPropertyFormViewPrivate() Q_DECL_OVERRIDE {}
 
 private:
     Q_DISABLE_COPY(VPropertyFormViewPrivate)

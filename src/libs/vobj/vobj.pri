@@ -3,10 +3,10 @@
 
 SOURCES += \
     $$PWD/vobjengine.cpp \
-    $$PWD/delaunay.c \
-    $$PWD/predicates.c \
     $$PWD/vobjpaintdevice.cpp \
-    $$PWD/stable.cpp
+    $$PWD/stable.cpp \
+    $$PWD/delaunay.cpp \
+    $$PWD/predicates.cpp
 
 HEADERS += \
     $$PWD/vobjengine.h \

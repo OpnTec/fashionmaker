@@ -32,6 +32,12 @@
 #include "exception/vexceptionbadid.h"
 #include "exception/vexceptionwrongid.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../vmisc/backport/qsavefile.h"
+#else
+#   include <QSaveFile>
+#endif
+
 #include <QAbstractMessageHandler>
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
@@ -51,7 +57,7 @@ public:
 protected:
     // cppcheck-suppress unusedFunction
     virtual void handleMessage(QtMsgType type, const QString &description,
-                               const QUrl &identifier, const QSourceLocation &sourceLocation);
+                               const QUrl &identifier, const QSourceLocation &sourceLocation) Q_DECL_OVERRIDE;
 private:
     QtMsgType       m_messageType;
     QString         m_description;
@@ -92,7 +98,6 @@ void MessageHandler::handleMessage(QtMsgType type, const QString &description, c
 Q_LOGGING_CATEGORY(vXML, "v.xml")
 
 const QString VDomDocument::AttrId     = QStringLiteral("id");
-const QString VDomDocument::AttrUnit   = QStringLiteral("unit");
 const QString VDomDocument::UnitMM     = QStringLiteral("mm");
 const QString VDomDocument::UnitCM     = QStringLiteral("cm");
 const QString VDomDocument::UnitINCH   = QStringLiteral("inch");
@@ -204,8 +209,8 @@ bool VDomDocument::find(const QDomElement &node, const QString& id)
  */
 quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
-    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null"); //-V591
 
     bool ok = false;
     QString parametr;
@@ -234,8 +239,8 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
 //---------------------------------------------------------------------------------------------------------------------
 bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
-    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     QString parametr;
     bool val = true;
@@ -270,6 +275,33 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+NodeUsage VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name) const
+{
+    const bool value = GetParametrBool(domElement, name, QStringLiteral("true"));
+    if (value)
+    {
+        return NodeUsage::InUse;
+    }
+    else
+    {
+        return NodeUsage::NotInUse;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDomDocument::SetParametrUsage(QDomElement &domElement, const QString &name, const NodeUsage &value)
+{
+    if (value == NodeUsage::InUse)
+    {
+        domElement.setAttribute(name, QStringLiteral("true"));
+    }
+    else
+    {
+        domElement.setAttribute(name, QStringLiteral("false"));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Returns the string value of the given attribute. RENAME: see above
  *
@@ -280,8 +312,8 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 QString VDomDocument::GetParametrString(const QDomElement &domElement, const QString &name,
                                         const QString &defValue) const
 {
-    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     const QString parameter = domElement.attribute(name, defValue);
     if (parameter.isEmpty())
     {
@@ -306,8 +338,8 @@ QString VDomDocument::GetParametrString(const QDomElement &domElement, const QSt
  */
 qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue) const
 {
-    Q_ASSERT_X(name.isEmpty() == false, Q_FUNC_INFO, "name of parametr is empty");
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     bool ok = false;
     qreal param = 0;
@@ -339,7 +371,7 @@ qreal VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStri
  */
 quint32 VDomDocument::GetParametrId(const QDomElement &domElement) const
 {
-    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
 
     quint32 id = 0;
 
@@ -377,7 +409,15 @@ QString VDomDocument::UniqueTagText(const QString &tagName, const QString &defVa
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                return domElement.text();
+                const QString text = domElement.text();
+                if (text.isEmpty())
+                {
+                    return defVal;
+                }
+                else
+                {
+                    return text;
+                }
             }
         }
     }
@@ -425,7 +465,7 @@ void VDomDocument::CollectId(const QDomElement &node, QVector<quint32> &vector) 
  */
 void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
 {
-    qCDebug(vXML)<<"Validation xml file"<<fileName<<".";
+    qCDebug(vXML, "Validation xml file %s.", qUtf8Printable(fileName));
     QFile pattern(fileName);
     if (pattern.open(QIODevice::ReadOnly) == false)
     {
@@ -448,10 +488,10 @@ void VDomDocument::ValidateXML(const QString &schema, const QString &fileName)
     {
         pattern.close();
         fileSchema.close();
-        const QString errorMsg(tr("Could not load schema file.").arg(fileSchema.fileName()));
+        const QString errorMsg(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
         throw VException(errorMsg);
     }
-    qCDebug(vXML)<<"Schema loaded.";
+    qCDebug(vXML, "Schema loaded.");
 
     bool errorOccurred = false;
     if (sch.isValid() == false)
@@ -598,6 +638,21 @@ QString VDomDocument::UnitsToStr(const Unit &unit, const bool translate)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VDomDocument::UnitsHelpString()
+{
+    QString r;
+    for (auto i = static_cast<int>(Unit::Mm), last = static_cast<int>(Unit::LAST_UNIT_DO_NOT_USE); i < last;++i)
+    {
+        r += UnitsToStr(static_cast<Unit>(i));
+        if (i < last - 1)
+        {
+            r += ", ";
+        }
+    }
+    return r;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VDomDocument::SaveDocument(const QString &fileName, QString &error) const
 {
     if (fileName.isEmpty())
@@ -605,26 +660,27 @@ bool VDomDocument::SaveDocument(const QString &fileName, QString &error) const
         qDebug()<<"Got empty file name.";
         return false;
     }
-    //Writing in temporary file
-    QFileInfo tempInfo(fileName);
-    QString temp = tempInfo.absolutePath() + "/" + tempInfo.baseName() + ".tmp";
-    QFile tempFile(temp);
-    if (tempFile.open(QIODevice::WriteOnly| QIODevice::Truncate))
+    bool success = false;
+    QSaveFile file(fileName);
+    if (file.open(QIODevice::WriteOnly))
     {
         const int indent = 4;
-        QTextStream out(&tempFile);
+        QTextStream out(&file);
         out.setCodec("UTF-8");
         save(out, indent);
-        tempFile.close();
+        success = file.commit();
     }
-    //Copy document to file
-    bool result = VDomDocument::SafeCopy(temp, fileName, error);
-    tempFile.remove();//Clear temp file
 
-    return result;
+    if (not success)
+    {
+        error = file.errorString();
+    }
+
+    return success;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QString VDomDocument::Major() const
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
@@ -633,6 +689,7 @@ QString VDomDocument::Major() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QString VDomDocument::Minor() const
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
@@ -641,6 +698,7 @@ QString VDomDocument::Minor() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QString VDomDocument::Patch() const
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
@@ -666,8 +724,11 @@ bool VDomDocument::setTagText(const QString &tag, const QString &text)
             {
                 QDomElement parent = domElement.parentNode().toElement();
                 QDomElement newTag = createElement(tag);
-                const QDomText newTagText = createTextNode(text);
-                newTag.appendChild(newTagText);
+                if (not text.isEmpty())
+                {
+                    const QDomText newTagText = createTextNode(text);
+                    newTag.appendChild(newTagText);
+                }
 
                 parent.replaceChild(newTag, domElement);
                 return true;
@@ -727,35 +788,51 @@ bool VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
     qt_ntfs_permission_lookup++; // turn checking on
 #endif /*Q_OS_WIN32*/
 
-    QFile patternFile(destination);
-    patternFile.setPermissions(QFile::ReadOwner | QFile::WriteOwner);
-    // We need here temporary file because we want restore document after error of copying temp file.
-    QTemporaryFile tempOfPattern;
-    if (tempOfPattern.open())
+    QTemporaryFile destFile(destination + QLatin1Literal(".XXXXXX"));
+    destFile.setAutoRemove(false);
+    if (not destFile.open())
     {
-        if (patternFile.exists())
-        {
-            patternFile.copy(tempOfPattern.fileName());
-        }
-    }
-    if ( patternFile.exists() == false || patternFile.remove() )
-    {
-        QFile sourceFile(source);
-        if ( sourceFile.copy(patternFile.fileName()) == false )
-        {
-            error = tr("Could not copy temp file to document file");
-            tempOfPattern.copy(destination);
-            result = false;
-        }
-        else
-        {
-            result = true;
-        }
+        error = destFile.errorString();
+        result = false;
     }
     else
     {
-        error = tr("Could not remove document file");
-        result = false;
+        QFile sourceFile(source);
+        if (sourceFile.open(QIODevice::ReadOnly))
+        {
+            result = true;
+            char block[4096];
+            qint64 bytes;
+            while ((bytes = sourceFile.read(block, sizeof(block))) > 0)
+            {
+                if (bytes != destFile.write(block, bytes))
+                {
+                    error = destFile.errorString();
+                    result = false;
+                    break;
+                }
+            }
+
+            if (bytes == -1)
+            {
+                error = sourceFile.errorString();
+                result = false;
+            }
+
+            if (result)
+            {
+                QFile::remove(destination);
+                if (not destFile.rename(destination))
+                {
+                    error = destFile.errorString();
+                    result = false;
+                }
+                else
+                {
+                    result = true;
+                }
+            }
+        }
     }
 
 #ifdef Q_OS_WIN32

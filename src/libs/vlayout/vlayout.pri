@@ -15,10 +15,10 @@ HEADERS += \
     $$PWD/vcontour.h \
     $$PWD/vcontour_p.h \
     $$PWD/vbestsquare.h \
-    $$PWD/vposition.h
+    $$PWD/vposition.h \
+    vposter.h
 
 SOURCES += \
-    $$PWD/stable.cpp \
     $$PWD/vlayoutgenerator.cpp \
     $$PWD/vlayoutdetail.cpp \
     $$PWD/vabstractdetail.cpp \
@@ -26,4 +26,7 @@ SOURCES += \
     $$PWD/vbank.cpp \
     $$PWD/vcontour.cpp \
     $$PWD/vbestsquare.cpp \
-    $$PWD/vposition.cpp
+    $$PWD/vposition.cpp \
+    vposter.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp

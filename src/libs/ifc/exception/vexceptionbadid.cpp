@@ -31,20 +31,20 @@
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionBadId exception bad id
- * @param what string with error
+ * @param error string with error
  * @param id id
  */
-VExceptionBadId::VExceptionBadId(const QString &what, const quint32 &id)
-    :VException(what), id(id), key(QString()){}
+VExceptionBadId::VExceptionBadId(const QString &error, const quint32 &id)
+    :VException(error), id(id), key(QString()){}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionBadId exception bad id
- * @param what string with error
+ * @param error string with error
  * @param key string key
  */
-VExceptionBadId::VExceptionBadId(const QString &what, const QString &key)
-    :VException(what), id(NULL_ID), key(key){}
+VExceptionBadId::VExceptionBadId(const QString &error, const QString &key)
+    :VException(error), id(NULL_ID), key(key){}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -77,11 +77,11 @@ QString VExceptionBadId::ErrorMessage() const
     QString error;
     if (key.isEmpty())
     {
-        error = QString("ExceptionBadId: %1, id = %2").arg(what).arg(id);
+        error = QString("ExceptionBadId: %1, id = %2").arg(error).arg(id);
     }
     else
     {
-        error = QString("ExceptionBadId: %1, id = %2").arg(what).arg(key);
+        error = QString("ExceptionBadId: %1, id = %2").arg(error).arg(key);
     }
     return error;
 }

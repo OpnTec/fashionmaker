@@ -31,6 +31,8 @@
 #include "exception/vexceptionwrongid.h"
 
 #include <QFile>
+#include <QFileInfo>
+#include <QDir>
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
@@ -54,12 +56,14 @@ void VAbstractConverter::Convert()
     }
 
     QString error;
-    const QString backupFileName = fileName +".backup";
+    const QString backupFileName = fileName + QLatin1Literal(".backup");
     if (SafeCopy(fileName, backupFileName, error) == false)
     {
-        const QString errorMsg(tr("Error creation backup file: %1.").arg(error));
+        const QString errorMsg(tr("Error creating a backup file: %1.").arg(error));
         throw VException(errorMsg);
     }
+
+    ReserveFile();
 
     ApplyPatches();
 
@@ -142,6 +146,64 @@ void VAbstractConverter::ValidateVersion(const QString &version) const
         const QString errorMsg(tr("Version \"0.0.0\" invalid."));
         throw VException(errorMsg);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::ReserveFile() const
+{
+    //It's not possible in all cases make conversion without lose data.
+    //For such cases we will store old version in a reserve file.
+    QString error;
+    QFileInfo info(fileName);
+    const QString reserveFileName = QString("%1/%2(v%3).%4")
+            .arg(info.absoluteDir().absolutePath())
+            .arg(info.baseName())
+            .arg(GetVersionStr())
+            .arg(info.completeSuffix());
+    if (not SafeCopy(fileName, reserveFileName, error))
+    {
+        const QString errorMsg(tr("Error creating a reserv copy: %1.").arg(error));
+        throw VException(errorMsg);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::Replace(QString &formula, const QString &newName, int position, const QString &token,
+                                 int &bias) const
+{
+    formula.replace(position, token.length(), newName);
+    bias = token.length() - newName.length();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const
+{
+    if (bias == 0)
+    {
+        return;// Nothing to correct;
+    }
+
+    BiasTokens(position, bias, tokens);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractConverter::BiasTokens(int position, int bias, QMap<int, QString> &tokens)
+{
+    QMap<int, QString> newTokens;
+    QMap<int, QString>::const_iterator i = tokens.constBegin();
+    while (i != tokens.constEnd())
+    {
+        if (i.key()<= position)
+        { // Tokens before position "position" did not change his positions.
+            newTokens.insert(i.key(), i.value());
+        }
+        else
+        {
+            newTokens.insert(i.key()-bias, i.value());
+        }
+        ++i;
+    }
+    tokens = newTokens;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

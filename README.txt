@@ -7,6 +7,7 @@ Valentina main repository: https://bitbucket.org/dismine/valentina/overview
 Valentina mail list (forum) https://groups.google.com/forum/#!forum/valentina-project-list    
 PPA for Ubuntu (develop): https://launchpad.net/~dismine/+archive/valentina-dev    
 Help translate https://www.transifex.com/organization/valentina    
+IRC channel: #valentina on irc.freenode.net.
 
 Valentina
 ==========
@@ -33,8 +34,7 @@ Compiling Valentina
 Prerequisites:   
    * Qt 5.2.0 or later (On Unix development packages needed)   
    * mercurial (only for working with repository)   
-   * On Unix:   
-     - ccache   
+   * On Unix:     
      - g++ (at least GCC 4.6 is needed and GCC 4.8 is recommended) or
        clang (clang 3.4 recommended)
      - xpdf package (tool pdftops).    
@@ -48,9 +48,19 @@ The installed toolchains have to match the one Qt was compiled with.
 
 You can build Valentina with
 
-    cd $SOURCE_DIRECTORY
-    qmake Valentina.pro -r (or qmake-qt5, depending on your platform)
+    cd $SOURCE_DIRECTORY\build
+    qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache
     make (or mingw32-make or nmake or jom, depending on your platform)
+
+Note: On some platforms e.g. Fedora, all Qt-tools come as qmake-qt5 
+    etc. In this case you should install qtchooser. This wrapper 
+    resolves the Qt version with respect to QT_SELECT. So run 
+
+    export QT_SELECT=5
+
+    prior to qmake. You will not come along with just using qmake-qt5
+    here.
+
 
 Note:In order to build and use Valentina, the PATH environment variable 
 needs to be extended:
@@ -69,7 +79,7 @@ Unix systems:
 Default prefix for command "make install" is /usr. For using another 
 prefix build with qmake command:
 
-qmake PREFIX=/usr/local PREFIX_LIB=/usr/lib/i386-linux-gnu Valentina.pro -r
+qmake PREFIX=/usr/local PREFIX_LIB=/usr/lib/i386-linux-gnu Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache
 
 where /usr/local is a new prefix for installation binary files and /usr/lib/i386-linux-gnu is new prefix for install libraries.
 

@@ -114,7 +114,7 @@ void VPropertyFormView::rowsRemoved(const QModelIndex &parent, int start, int en
     updatePropertyList();
 }
 
-void VPropertyFormView::rowsInserted(const QModelIndex &parent, int start, int end)
+void VPropertyFormView::rowsInserted(const QModelIndex &parent, int start, int end) //-V524
 {
     // todo: Only rebuild the neccessary parts
     Q_UNUSED(parent)

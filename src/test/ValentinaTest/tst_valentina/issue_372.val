@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.2.0</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <draw name="Чертеж 1">
+        <calculation>
+            <point type="single" x="0.926042" y="1.05833" id="1" name="A" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="A1" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="3"/>
+            <point type="endLine" typeLine="hair" id="3" name="A2" basePoint="2" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="3"/>
+            <line typeLine="hair" id="4" firstPoint="1" secondPoint="3" lineColor="black"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" id="5" idObject="1" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="6" idObject="2" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="7" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="8" idObject="1" mx="0.132292" my="0.264583"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="9" name="Деталь" supplement="1" mx="0.608542" width="1" my="0.608542">
+                <node type="NodePoint" nodeType="Contour" idObject="5" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="6" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="7" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="8" mx="0" my="0"/>
+            </detail>
+        </details>
+    </draw>
+</pattern>

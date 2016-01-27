@@ -10,4 +10,6 @@ HEADERS += \
     $$PWD/ifcdef.h
 
 SOURCES += \
-    $$PWD/stable.cpp
+    $$PWD/ifcdef.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp

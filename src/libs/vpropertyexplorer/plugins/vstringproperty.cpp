@@ -29,7 +29,7 @@ using namespace VPE;
 
 
 VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name, QVariant::String), readOnly(false), typeForParent(0)
+    : VProperty(name, QVariant::String), readOnly(false), typeForParent(0), clearButton(false)
 {
     VProperty::setSettings(settings);
     d_ptr->VariantValue.setValue(QString());
@@ -37,7 +37,7 @@ VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, Q
 }
 
 VPE::VStringProperty::VStringProperty(const QString &name)
-    : VProperty(name), readOnly(false), typeForParent(0)
+    : VProperty(name), readOnly(false), typeForParent(0), clearButton(false)
 {
     d_ptr->VariantValue.setValue(QString());
     d_ptr->VariantValue.convert(QVariant::String);
@@ -52,6 +52,9 @@ QWidget *VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionV
     QLineEdit* tmpEditor = new QLineEdit(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setReadOnly(readOnly);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    tmpEditor->setClearButtonEnabled(clearButton);
+#endif
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tmpEditor->setText(d_ptr->VariantValue.toString());
 
@@ -73,6 +76,11 @@ QVariant VPE::VStringProperty::getEditorData(const QWidget *editor) const
 void VPE::VStringProperty::setReadOnly(bool readOnly)
 {
     this->readOnly = readOnly;
+}
+
+void VStringProperty::setClearButtonEnable(bool value)
+{
+    this->clearButton = value;
 }
 
 void VPE::VStringProperty::setSetting(const QString &key, const QVariant &value)
@@ -123,6 +131,7 @@ void VStringProperty::UpdateParent(const QVariant &value)
     emit childChanged(value, typeForParent);
 }
 
+// cppcheck-suppress unusedFunction
 int VStringProperty::getTypeForParent() const
 {
     return typeForParent;

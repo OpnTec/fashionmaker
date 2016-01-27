@@ -10,34 +10,40 @@ CRCCheck force
 XPStyle on
 SetCompressor /FINAL /SOLID lzma
 
-!define MUI_PRODUCT "Valentina"
-!define MUI_FILE "valentina"
+!insertmacro un.GetTime
 
-!insertmacro GetPEVersionLocal "valentina\valentina.exe" ver
+!define PACKAGE_FOLDER "valentina"
+
+!define PRODUCT_VALENTINA "Valentina"
+!define FILE_VALENTINA "valentina"
+!define PRODUCT_TAPE "Tape"
+!define FILE_TAPE "tape"
+
+!insertmacro GetPEVersionLocal "${PACKAGE_FOLDER}\${FILE_VALENTINA}.exe" ver
 !define MUI_VERSION "${ver_1}.${ver_2}.${ver_3}"
 
-!define MUI_BRANDINGTEXT "Valentina ${MUI_VERSION}"
+!define MUI_BRANDINGTEXT "${PRODUCT_VALENTINA} ${MUI_VERSION}"
 !define WEBSITE_LINK "http://www.valentina-project.org/"
 !define PUBLISHER "Roman Telezhynskyi"
 
-InstallDir "$LOCALAPPDATA\${MUI_PRODUCT}"                 ; Default installation folder
+InstallDir "$LOCALAPPDATA\${PRODUCT_VALENTINA}"                 ; Default installation folder
 Name "${MUI_BRANDINGTEXT}"                                ; Name displayed on installer
-Icon "valentina\${MUI_FILE}.ico"
+Icon "${PACKAGE_FOLDER}\${FILE_VALENTINA}.ico"
 Caption "${MUI_BRANDINGTEXT}"
 
 !define /date MYTIMESTAMP "%Y%m%d%H%M%S"
-OutFile "${MUI_FILE}_${MUI_VERSION}-${MYTIMESTAMP}_i386.exe"  ; Resulting installer filename
+OutFile "${FILE_VALENTINA}_${MUI_VERSION}-${MYTIMESTAMP}_i386.exe"  ; Resulting installer filename
 
-InstallDirRegKey HKCU "$LOCALAPPDATA\${MUI_PRODUCT}" ""   ; Get installation folder from registry if available
-LicenseData "valentina\LICENSE_GPL.txt"
+InstallDirRegKey HKCU "$LOCALAPPDATA\${PRODUCT_VALENTINA}" ""   ; Get installation folder from registry if available
+LicenseData "${PACKAGE_FOLDER}\LICENSE_GPL.txt"
 RequestExecutionLevel user                                ; Request application privileges for Windows Vista
   
 ShowInstDetails show
 ShowUninstDetails show
 
 ; ----------- Icon and Bitmap ---------  
-!define MUI_ICON "valentina\${MUI_FILE}.ico"
-!define MUI_UNICON "valentina\${MUI_FILE}.ico"
+!define MUI_ICON "${PACKAGE_FOLDER}\${FILE_VALENTINA}.ico"
+!define MUI_UNICON "${PACKAGE_FOLDER}\${FILE_VALENTINA}.ico"
 ;!define MUI_SPECIALBITMAP "Bitmap.bmp"
 
 ; -------------------------------------
@@ -46,23 +52,22 @@ ShowUninstDetails show
 ;------------- Language Selection Dialog Settings --------------
 ;Remember the installer language
 !define MUI_LANGDLL_REGISTRY_ROOT "HKCU" 
-!define MUI_LANGDLL_REGISTRY_KEY "Software\${MUI_PRODUCT}" 
+!define MUI_LANGDLL_REGISTRY_KEY "Software\${PRODUCT_VALENTINA}" 
 !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
-!define REG_UNINSTALL "Software\Microsoft\Windows\CurrentVersion\Uninstall\${MUI_PRODUCT}"
+!define REG_UNINSTALL "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_VALENTINA}"
 !define REGISTRY_ROOT "HKCU"
 
 ;-------------- Install Pages -------------
 
 !insertmacro MUI_PAGE_WELCOME
-!insertmacro MUI_PAGE_LICENSE "valentina\LICENSE_GPL.txt"
-!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_LICENSE "${PACKAGE_FOLDER}\LICENSE_GPL.txt"
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
     ; These indented statements modify settings for MUI_PAGE_FINISH
     !define MUI_FINISHPAGE_NOAUTOCLOSE
-    !define MUI_FINISHPAGE_RUN "$INSTDIR\${MUI_FILE}.exe"
+    !define MUI_FINISHPAGE_RUN "$INSTDIR\${FILE_VALENTINA}.exe"
     !define MUI_FINISHPAGE_RUN_CHECKED
-    !define MUI_FINISHPAGE_RUN_TEXT "Launch ${MUI_PRODUCT}"
+    !define MUI_FINISHPAGE_RUN_TEXT "Launch ${PRODUCT_VALENTINA}"
     !define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
     !define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\README.txt"
 !insertmacro MUI_PAGE_FINISH
@@ -147,7 +152,7 @@ Function checkAlreadyInstalled
 	ReadRegStr $R0 "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "UninstallString"
 	StrCmp $R0 "" done
 	MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
-	"${MUI_PRODUCT} is already installed. $\n$\nClick `OK` to remove the \
+	"${PRODUCT_VALENTINA} is already installed. $\n$\nClick `OK` to remove the \
 	previous version or `Cancel` to cancel this upgrade." \
 	IDOK UnInstall
 	Abort
@@ -186,38 +191,42 @@ Function un.onInit
 FunctionEnd
  
 ;-------------- Installer -------------------------
-Section "Valentina  (required)"
-SectionIn RO ; define mandatory sections
+Section 
  
 ;Add files
 SetOutPath "$INSTDIR" ; Set output path to the installation directory.
-File /r "valentina\*.*"
+File /r "${PACKAGE_FOLDER}\*.*"
 
 ;create start-menu items  
-!define START_LINK_DIR "$SMPROGRAMS\${MUI_PRODUCT}"
-!define START_LINK_RUN "$SMPROGRAMS\${MUI_PRODUCT}\${MUI_PRODUCT}.lnk"
-!define START_LINK_UNINSTALLER "$SMPROGRAMS\${MUI_PRODUCT}\Uninstall ${MUI_PRODUCT}.lnk"
+!define START_LINK_DIR "$SMPROGRAMS\${PRODUCT_VALENTINA}"
+!define START_LINK_RUN "$SMPROGRAMS\${PRODUCT_VALENTINA}\${PRODUCT_VALENTINA}.lnk"
+!define START_LINK_RUN_TAPE "$SMPROGRAMS\${PRODUCT_VALENTINA}\${PRODUCT_TAPE}.lnk"
+!define START_LINK_UNINSTALLER "$SMPROGRAMS\${PRODUCT_VALENTINA}\Uninstall ${PRODUCT_VALENTINA}.lnk"
 
 # In your main installer section...
 SetShellVarContext current
 CreateDirectory "${START_LINK_DIR}"
-CreateShortCut "${START_LINK_RUN}" "$INSTDIR\${MUI_FILE}.exe"
+CreateShortCut "${START_LINK_RUN}" "$INSTDIR\${FILE_VALENTINA}.exe"
+CreateShortCut "${START_LINK_RUN_TAPE}" "$INSTDIR\${FILE_TAPE}.exe"
 CreateShortCut "${START_LINK_UNINSTALLER}" "$INSTDIR\Uninstall.exe"
  
 ;create desktop shortcut
-CreateShortCut "$DESKTOP\${MUI_PRODUCT}.lnk" "$INSTDIR\${MUI_FILE}.exe" ""
+CreateShortCut "$DESKTOP\${PRODUCT_VALENTINA}.lnk" "$INSTDIR\${FILE_VALENTINA}.exe" ""
+CreateShortCut "$DESKTOP\${PRODUCT_TAPE}.lnk" "$INSTDIR\${FILE_TAPE}.exe" ""
  
 ;write uninstall information to the registry
 !define UNINSTALLER_NAME "Uninstall.exe"
   
 ; File associations
-!insertmacro APP_ASSOCIATE "val" "valentina.pattern" "Valentina pattern file" "$INSTDIR\${MUI_FILE}.exe,0" "Open with Valentina" "$\"$INSTDIR\${MUI_FILE}.exe$\" $\"%1$\""
-; Example of association icon with file type
-; !insertmacro APP_ASSOCIATE "osapp" "OSA.osapp" "Plugin Package" "$INSTDIR\PluginIcon.ico" "Open" "$INSTDIR\PluginInstaller.exe $\"%1$\""
+; Valentina
+!insertmacro APP_ASSOCIATE "val" "valentina.pattern" "text/plain" "${PRODUCT_VALENTINA} pattern file" "$INSTDIR\${FILE_VALENTINA}.exe,0" "Open with ${PRODUCT_VALENTINA}" "$INSTDIR\${FILE_VALENTINA}.exe $\"%1$\""
+; Tape
+!insertmacro APP_ASSOCIATE "vit" "valentina.IndividualMeasurements" "text/plain" "${PRODUCT_VALENTINA} individual measurement file" "$INSTDIR\measurements.ico" "Open with ${PRODUCT_TAPE}" "$INSTDIR\${FILE_TAPE}.exe $\"%1$\""
+!insertmacro APP_ASSOCIATE "vst" "valentina.StandardMeasurements" "text/plain" "${PRODUCT_VALENTINA} standard measurement file" "$INSTDIR\measurements.ico" "Open with ${PRODUCT_TAPE}" "$INSTDIR\${FILE_TAPE}.exe $\"%1$\""
 !insertmacro UPDATEFILEASSOC 
 
-WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayName" "${MUI_PRODUCT}"
-WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayIcon" "$\"$INSTDIR\${MUI_FILE}.exe$\""
+WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayName" "${PRODUCT_VALENTINA}"
+WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayIcon" "$\"$INSTDIR\${FILE_VALENTINA}.exe$\""
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "Publisher" "${PUBLISHER}"
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "DisplayVersion" "${MUI_VERSION}"
 
@@ -233,7 +242,7 @@ WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "InstallSource" "$\"$EXEDIR$\"
 WriteRegDWord "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "NoModify" 1
 WriteRegDWord "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "NoRepair" 1
 WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "UninstallString" "$\"$INSTDIR\${UNINSTALLER_NAME}$\""
-WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "Comments" "Uninstalls ${MUI_PRODUCT}."
+WriteRegStr "${REGISTRY_ROOT}" "${REG_UNINSTALL}" "Comments" "Uninstalls ${PRODUCT_VALENTINA}."
  
 WriteUninstaller "$INSTDIR\${UNINSTALLER_NAME}" ; Location of the uninstaller
  
@@ -242,26 +251,32 @@ SectionEnd
 ;--------------------------------    
 ;Uninstaller Section  
 Section "Uninstall"
- 
-;Delete Files 
-RMDir /r "$INSTDIR\*.*"    
- 
-;Remove the installation directory
-RMDir "$INSTDIR"
- 
+;Generate list and include it in script at compile-time
+!execute 'unList.exe /DATE=0 /INSTDIR=${PACKAGE_FOLDER} /LOG=Test.log /PREFIX="	" /UNDIR_VAR=$INSTDIR /MB=0'
+;Log contain commands for removing files
+!include "Test.log"
+
 ;Delete Start Menu Shortcuts
 SetShellVarContext current
-Delete "$DESKTOP\${MUI_PRODUCT}.lnk"
+Delete "$DESKTOP\${PRODUCT_VALENTINA}.lnk"
+Delete "$DESKTOP\${PRODUCT_TAPE}.lnk"
 Delete "${START_LINK_DIR}\*.*"
 RmDir  "${START_LINK_DIR}"
 
 ; Removing file associations  
 !insertmacro APP_UNASSOCIATE "val" "valentina.pattern"  
+!insertmacro APP_UNASSOCIATE "vit" "valentina.IndividualMeasurements"  
+!insertmacro APP_UNASSOCIATE "vst" "valentina.StandardMeasurements"  
  
 ;Delete Uninstaller And Unistall Registry Entries
-DeleteRegKey "${REGISTRY_ROOT}" "SOFTWARE\${MUI_PRODUCT}"
-DeleteRegKey "${REGISTRY_ROOT}" "${REG_UNINSTALL}"  
-
+DeleteRegKey "${REGISTRY_ROOT}" "SOFTWARE\${PRODUCT_VALENTINA}"
+DeleteRegKey "${REGISTRY_ROOT}" "${REG_UNINSTALL}"     
+ 
+Delete "$INSTDIR\${UNINSTALLER_NAME}"
+ 
+;Remove the installation directory
+RMDir "$INSTDIR"
+ 
 SectionEnd
  
 ;eof

@@ -28,10 +28,12 @@
 
 #include <QCoreApplication>
 #include <QDebug>
+#include <QTimer>
 #include <QtGlobal>
-#include "../../libs/qmuparser/qmuparsertest.h"
+#include "../qmuparser/qmuparsertest.h"
 
 using namespace qmu;
+using namespace Test;
 
 //---------------------------------------------------------------------------------------------------------------------
 void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -46,11 +48,11 @@ void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const 
             fprintf(stderr, "%s\n", localMsg.constData());
             break;
         case QtCriticalMsg:
-            fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+            fprintf(stderr, "Critical: %s (%s:%i, %s)\n", localMsg.constData(), context.file, context.line,
                     context.function);
             break;
         case QtFatalMsg:
-            fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line,
+            fprintf(stderr, "Fatal: %s (%s:%i, %s)\n", localMsg.constData(), context.file, context.line,
                     context.function);
             abort();
         default:
@@ -62,18 +64,8 @@ void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-
     qInstallMessageHandler(testMessageOutput);
-
-    qWarning() << "-----------------------------------------------------------";
-    qWarning() << "Running test suite:\n";
-
-
-    qmu::Test::QmuParserTester pt;
-    pt.Run();
-
-    qWarning() << "Done.";
-    qWarning() << "-----------------------------------------------------------";
-
+    QmuParserTester pt;
+    QTimer::singleShot(0, &pt, SLOT(Run()));
     return a.exec();
 }

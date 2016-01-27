@@ -4,9 +4,19 @@
 HEADERS += \
     $$PWD/vabstractconverter.h \
     $$PWD/vdomdocument.h \
-    $$PWD/vpatternconverter.h
+    $$PWD/vpatternconverter.h \
+    $$PWD/vtoolrecord.h \
+    $$PWD/vabstractpattern.h \
+    $$PWD/vvstconverter.h \
+    $$PWD//vvitconverter.h \
+    $$PWD//vabstractmconverter.h
 
 SOURCES += \
     $$PWD/vabstractconverter.cpp \
     $$PWD/vdomdocument.cpp \
-    $$PWD/vpatternconverter.cpp
+    $$PWD/vpatternconverter.cpp \
+    $$PWD/vtoolrecord.cpp \
+    $$PWD/vabstractpattern.cpp \
+    $$PWD/vvstconverter.cpp \
+    $$PWD//vvitconverter.cpp \
+    $$PWD//vabstractmconverter.cpp

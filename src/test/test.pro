@@ -1,3 +1,4 @@
 TEMPLATE = subdirs
-CONFIG   += ordered
-SUBDIRS = ParserTest
+SUBDIRS = \
+    ParserTest \
+    ValentinaTest

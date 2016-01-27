@@ -168,11 +168,13 @@ void VFileEditWidget::dragEnterEvent(QDragEnterEvent* event)
     }
 }
 
+// cppcheck-suppress unusedFunction
 void VFileEditWidget::dragMoveEvent(QDragMoveEvent* event)
 {
     event->acceptProposedAction();
 }
 
+// cppcheck-suppress unusedFunction
 void VFileEditWidget::dragLeaveEvent(QDragLeaveEvent* event)
 {
     event->accept();

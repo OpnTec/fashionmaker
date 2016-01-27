@@ -38,7 +38,7 @@ public:
     VPropertyDelegate* PropertyDelegate;
 
     //! Constructor
-    VPropertyTreeViewPrivate(VPropertyDelegate* delegate)
+    explicit VPropertyTreeViewPrivate(VPropertyDelegate* delegate)
         : PropertyDelegate(delegate) {}
 
     //! Constructor

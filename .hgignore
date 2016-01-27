@@ -5,6 +5,15 @@ syntax: glob
 # Backup files left behind by the Emacs editor.
 *~
 
+# Valentina lock files
+*.lock
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
 # Lock files used by the Emacs editor.
 # Notice that the "#" character is quoted with a backslash.
 # This prevents it from being interpreted as starting a comment.
@@ -17,7 +26,7 @@ syntax: glob
 .DS_Store
 ._.DS_Store
 
-# Ignore this directory.
+# Ignore these directories.
 html/
 latex/
 bin/
@@ -36,6 +45,8 @@ cov-int/
 *.lo
 *.o
 *.obj
+*.ko
+*.elf
 
 # Precompiled Headers
 *.gch
@@ -45,6 +56,7 @@ cov-int/
 *.so
 *.dylib
 *.dll
+*.so.*
 
 # Fortran module files
 *.mod
@@ -54,11 +66,18 @@ cov-int/
 *.la
 *.a
 *.lib
+*.lo
 
 # Executables
 *.exe
 *.out
 *.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
 
 # Qt-es
 /.qmake.cache
@@ -72,7 +91,7 @@ ui_*.h
 Makefile*
 *-build-*
 
-# Ignore Qt translation file .
+# Ignore Qt translation file
 *.qm
 
 # QtCreator
@@ -89,3 +108,48 @@ Makefile*
 
 # Xcode project
 *.xcodeproj
+
+# OSX specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk

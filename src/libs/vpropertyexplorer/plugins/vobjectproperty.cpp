@@ -113,12 +113,14 @@ QVariant VObjectProperty::getEditorData(const QWidget *editor) const
 }
 
 //! Sets the objects list
+// cppcheck-suppress unusedFunction
 void VObjectProperty::setObjectsList(const QMap<QString, quint32> &objects)
 {
     this->objects = objects;
 }
 
 //! Get the settings. This function has to be implemented in a subclass in order to have an effect
+// cppcheck-suppress unusedFunction
 QMap<QString, quint32> VObjectProperty::getObjects() const
 {
     return objects;

@@ -71,6 +71,9 @@ public:
     qreal layoutWidth;
 
     bool mirror;
+
+private:
+    VLayoutDetailData &operator=(const VLayoutDetailData &) Q_DECL_EQ_DELETE;
 };
 
 #ifdef Q_CC_GNU

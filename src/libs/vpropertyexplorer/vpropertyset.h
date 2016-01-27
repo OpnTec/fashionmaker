@@ -45,7 +45,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertySet
 {
 public:
     //! Default constructor, creating an empty property set
-    explicit VPropertySet();
+    VPropertySet();
 
     //! Destructor
     virtual ~VPropertySet();

@@ -203,7 +203,7 @@ QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, co
         }
         else if (i == 0 && eqv == EquidistantType::OpenEquidistant)
         {//first point, polyline doesn't closed
-            ekvPoints.append(SingleParallelPoint(QLineF(p.at(0), p.at(1)), 90, width));
+            ekvPoints.append(UnclosedEkvPoint(QLineF(p.at(0), p.at(1)), QLineF(p.at(0), p.at(p.size()-1)), width));
             continue;
         }
         if (i == p.size()-1 && eqv == EquidistantType::CloseEquidistant)
@@ -213,8 +213,9 @@ QVector<QPointF> VAbstractDetail::Equidistant(const QVector<QPointF> &points, co
         }
         else if (i == p.size()-1 && eqv == EquidistantType::OpenEquidistant)
         {//last point, polyline doesn't closed
-                ekvPoints.append(SingleParallelPoint(QLineF(p.at(p.size()-1), p.at(p.size()-2)), -90, width));
-                continue;
+            ekvPoints.append(UnclosedEkvPoint(QLineF(p.at(p.size()-2), p.at(p.size()-1)),
+                                              QLineF(p.at(0), p.at(p.size()-1)), width));
+            continue;
         }
         //points in the middle of polyline
         ekvPoints<<EkvPoint(QLineF(p.at(i-1), p.at(i)), QLineF(p.at(i+1), p.at(i)), width);
@@ -299,57 +300,63 @@ QVector<QPointF> VAbstractDetail::CorrectEquidistantPoints(const QVector<QPointF
  */
 QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
 {
-    QVector<QPointF> ekvPoints;
+    const int count = points.size();
     /*If we got less than 4 points no need seek loops.*/
-    if (points.size() < 4)
+    if (count < 4)
     {
         qDebug()<<"Less then 4 points. Doesn't need check for loops.";
         return points;
     }
+
     bool closed = false;
-    if (points.at(0) == points.at(points.size()-1))
+    if (points.first() == points.last())
     {
         closed = true;
     }
+
+    QVector<QPointF> ekvPoints;
+
     qint32 i, j;
-    for (i = 0; i < points.size(); ++i)
+    for (i = 0; i < count; ++i)
     {
         /*Last three points no need check.*/
-        if (i >= points.size()-3)
+        /*Triangle has not contain loops*/
+        if (i >= count-3)
         {
             ekvPoints.append(points.at(i));
             continue;
         }
+
         QPointF crosPoint;
         QLineF::IntersectType intersect = QLineF::NoIntersection;
-        QLineF line1(points.at(i), points.at(i+1));
-        for (j = i+2; j < points.size()-1; ++j)
+        const QLineF line1(points.at(i), points.at(i+1));
+        // Because a path can contains several loops we will seek the last and only then remove the loop(s)
+        // That's why we parse from the end
+        for (j = count-2; j >= i+2; --j)
         {
-            QLineF line2(points.at(j), points.at(j+1));
+            const QLineF line2(points.at(j), points.at(j+1));
             intersect = line1.intersect(line2, &crosPoint);
-            if (intersect == QLineF::BoundedIntersection)
-            {
-                break;
+            if (intersect == QLineF::BoundedIntersection && not (i == 0 && j+1 == count-1 && closed))
+            { // Break, but not if intersects the first edge and the last edge in closed path
+                if (line1.p1() != crosPoint && line1.p2() != crosPoint &&
+                    line2.p1() != crosPoint && line2.p2() != crosPoint)
+                { // Break, but not if loop creates crosPoint when it is first or last point of lines
+                    break;
+                }
             }
+            intersect = QLineF::NoIntersection;
         }
+
         if (intersect == QLineF::BoundedIntersection)
         {
-            if (i == 0 && j+1 == points.size()-1 && closed)
-            {
-                /*We got closed contour.*/
-                ekvPoints.append(points.at(i));
-            }
-            else
-            {
-                /*We found loop.*/
-                ekvPoints.append(points.at(i));
-                ekvPoints.append(crosPoint);
-                i = j;
-            }
+            /*We have found loop.*/
+            ekvPoints.append(points.at(i));
+            ekvPoints.append(crosPoint);
+            i = j;
         }
         else
         {
-            /*We did not found loop.*/
+            /*We have not found loop.*/
             ekvPoints.append(points.at(i));
         }
     }
@@ -434,6 +441,50 @@ QVector<QPointF> VAbstractDetail::EkvPoint(const QLineF &line1, const QLineF &li
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief UnclosedEkvPoint helps find point of an unclosed seam allowance. One side of two lines should be equal.
+ *
+ * In case of the first seam allowance point equal should be the first point of the two lines. In case the last point -
+ * the last point of the two lines.
+ *
+ * @param line line of a seam allowance
+ * @param helpLine help line of the main path that cut unclosed seam allowance
+ * @param width seam allowance width
+ * @return seam allowance point
+ */
+QPointF VAbstractDetail::UnclosedEkvPoint(const QLineF &line, const QLineF &helpLine, const qreal &width)
+{
+    if (width <= 0)
+    {
+        return QPointF();
+    }
+
+    if (not (line.p2() == helpLine.p2() || line.p1() == helpLine.p1()))
+    {
+        qDebug()<<"Two points of two lines must be equal.";
+        return QPointF();
+    }
+
+    QPointF CrosPoint;
+    const QLineF bigLine = ParallelLine(line, width );
+    QLineF::IntersectType type = bigLine.intersect( helpLine, &CrosPoint );
+    switch (type)
+    {
+        case (QLineF::BoundedIntersection):
+        case (QLineF::UnboundedIntersection):
+            return CrosPoint;
+            break;
+        case (QLineF::NoIntersection):
+            /*If we have correct lines this means lines lie on a line.*/
+            return bigLine.p2();
+            break;
+        default:
+            break;
+    }
+    return QPointF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief ParallelLine create parallel line.
  * @param line starting line.
  * @param width width to parallel line.
@@ -460,4 +511,38 @@ QPointF VAbstractDetail::SingleParallelPoint(const QLineF &line, const qreal &an
     pLine.setAngle( pLine.angle() + angle );
     pLine.setLength( width );
     return pLine.p2();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractDetail::SumTrapezoids(const QVector<QPointF> &points)
+{
+    // Calculation a polygon area through the sum of the areas of trapezoids
+    qreal s, res = 0;
+    const int n = points.size();
+
+    if(n > 2)
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            if (i == 0)
+            {
+                s = points.at(i).x()*(points.at(n-1).y() - points.at(i+1).y()); //if i == 0, then y[i-1] replace on y[n-1]
+                res += s;
+            }
+            else
+            {
+                if (i == n-1)
+                {
+                    s = points.at(i).x()*(points.at(i-1).y() - points.at(0).y()); // if i == n-1, then y[i+1] replace on y[0]
+                    res += s;
+                }
+                else
+                {
+                    s = points.at(i).x()*(points.at(i-1).y() - points.at(i+1).y());
+                    res += s;
+                }
+            }
+        }
+    }
+    return res;
 }

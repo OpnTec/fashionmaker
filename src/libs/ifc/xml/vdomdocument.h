@@ -31,10 +31,11 @@
 
 #include <QDomDocument>
 #include <QDebug>
-#include <QLoggingCategory>
 #include <QCoreApplication>
 
-#include "ifcdef.h"
+#include "../ifc/ifcdef.h"
+#include "../vmisc/def.h"
+#include "../vmisc/logging.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 
@@ -69,7 +70,6 @@ class VDomDocument : public QDomDocument
     Q_DECLARE_TR_FUNCTIONS(VDomDocument)
 public:
     static const QString    AttrId;
-    static const QString    AttrUnit;
     static const QString    UnitMM;
     static const QString    UnitCM;
     static const QString    UnitINCH;
@@ -81,30 +81,27 @@ public:
     QDomElement    elementById(const QString& id);
     QDomElement    elementById(quint32 id);
     void           removeAllChilds(QDomElement &element);
+
     template <typename T>
-    /**
-     * @brief SetAttribute set attribute in pattern file. Replace "," by ".".
-     * @param domElement element in xml tree.
-     * @param name name of attribute.
-     * @param value value of attribute.
-     */
-    void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const
-    {
-        QString val = QString().setNum(value);
-        val = val.replace(",", ".");
-        domElement.setAttribute(name, val);
-    }
+    void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
+
     quint32        GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     bool           GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue) const;
+
+    NodeUsage      GetParametrUsage(const QDomElement& domElement, const QString &name) const;
+    void           SetParametrUsage(QDomElement& domElement, const QString &name, const NodeUsage &value);
+
     QString        GetParametrString(const QDomElement& domElement, const QString &name,
                                      const QString &defValue = QString()) const;
     qreal          GetParametrDouble(const QDomElement& domElement, const QString &name, const QString &defValue) const;
     quint32        GetParametrId(const QDomElement& domElement) const;
 
     static void    ValidateXML(const QString &schema, const QString &fileName);
-    void           setXMLContent(const QString &fileName);
+    virtual void   setXMLContent(const QString &fileName);
     static Unit    StrToUnits(const QString &unit);
     static QString UnitsToStr(const Unit &unit, const bool translate = false);
+    static QString UnitsHelpString();
+
     virtual bool   SaveDocument(const QString &fileName, QString &error) const;
     QString        Major() const;
     QString        Minor() const;
@@ -131,6 +128,21 @@ private:
 
     bool           find(const QDomElement &node, const QString& id);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+/**
+ * @brief SetAttribute set attribute in pattern file. Replace "," by ".".
+ * @param domElement element in xml tree.
+ * @param name name of attribute.
+ * @param value value of attribute.
+ */
+inline void VDomDocument::SetAttribute(QDomElement &domElement, const QString &name, const T &value) const
+{
+    QString val = QString().setNum(value);
+    val = val.replace(",", ".");
+    domElement.setAttribute(name, val);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>

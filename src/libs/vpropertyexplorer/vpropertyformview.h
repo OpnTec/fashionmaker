@@ -47,12 +47,12 @@ public:
     explicit VPropertyFormView(VPropertySet* property_set, QWidget *parent = 0);
 
     //! Destructor
-    virtual ~VPropertyFormView();
+    virtual ~VPropertyFormView() Q_DECL_OVERRIDE;
 
 
 public slots:
     //! Rebuilds the whole form
-    virtual void build();
+    virtual void build() Q_DECL_OVERRIDE;
 
     //! Set the source model. Leads to the rebuild of the form
     //! \param model The model to use

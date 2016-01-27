@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>tapeicon/64x64/logo.png</file>
+        <file>tapeicon/16x16/info.png</file>
+        <file>tapeicon/16x16/measurement.png</file>
+        <file>tapeicon/24x24/fx.png</file>
+        <file>tapeicon/24x24/orange_plus.png</file>
+        <file>tapeicon/24x24/red_plus.png</file>
+        <file>tapeicon/24x24/padlock_locked.png</file>
+        <file>tapeicon/24x24/padlock_opened.png</file>
+    </qresource>
+</RCC>

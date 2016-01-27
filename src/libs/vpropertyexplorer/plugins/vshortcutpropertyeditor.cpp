@@ -80,6 +80,7 @@ QString VShortcutEditWidget::getShortcutAsString() const
     return CurrentKeySequence.toString();
 }
 
+// cppcheck-suppress unusedFunction
 QKeySequence VShortcutEditWidget::getShortcut()
 {
     return CurrentKeySequence;

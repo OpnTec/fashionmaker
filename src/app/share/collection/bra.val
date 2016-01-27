@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Valentina pattern format.-->
+    <version>0.2.4</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements>bra.vit</measurements>
+    <increments/>
+    <draw name="Bra">
+        <calculation>
+            <point type="single" x="0.819903" y="23.1895" id="1" name="Т" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="Т4" basePoint="1" mx="0.132292" angle="0" my="0.264583" length="highbust_circ/2"/>
+            <point type="alongLine" typeLine="none" id="3" name="T2" firstPoint="1" secondPoint="2" mx="0.132292" my="0.264583" length="Line_Т_Т4/2"/>
+            <point type="alongLine" typeLine="none" id="4" name="T1" firstPoint="1" secondPoint="3" mx="0.132292" my="0.264583" length="Line_Т_T2/2"/>
+            <point type="alongLine" typeLine="none" id="5" name="T3" firstPoint="3" secondPoint="2" mx="0.132292" my="0.264583" length="Line_T2_Т4/2"/>
+            <point type="endLine" typeLine="hair" id="6" name="B" basePoint="1" mx="-2.09946" angle="90" my="-2.94479" length="highbust_to_waist_f"/>
+            <point type="endLine" typeLine="hair" id="7" name="B1" basePoint="4" mx="0.754797" angle="90" my="-1.83637" length="highbust_to_waist_f+6"/>
+            <point type="endLine" typeLine="hair" id="8" name="В2" basePoint="3" mx="0.132292" angle="90" my="0.264583" length="armpit_to_waist_side"/>
+            <point type="endLine" typeLine="hair" id="9" name="В3" basePoint="5" mx="0.132292" angle="90" my="0.264583" length="across_back_to_waist_b"/>
+            <point type="endLine" typeLine="hair" id="10" name="В4" basePoint="9" mx="0.646079" angle="0" my="-1.93736" length="3"/>
+            <point type="endLine" typeLine="hair" id="11" name="В5" basePoint="2" mx="0.132292" angle="90" my="0.264583" length="across_back_to_waist_b-6"/>
+            <line typeLine="hair" id="12" firstPoint="6" secondPoint="7"/>
+            <spline point4="11" type="simple" kAsm1="0.722178" kAsm2="0.676466" angle1="274.169" angle2="187.017" id="13" kCurve="1" point1="10"/>
+            <point type="alongLine" typeLine="none" id="14" name="Т5" firstPoint="1" secondPoint="4" mx="0.132292" my="0.264583" length="(highbust_circ-waist_circ)/2/2"/>
+            <line typeLine="hair" id="15" firstPoint="6" secondPoint="14"/>
+            <point type="alongLine" typeLine="none" id="16" name="Т6" firstPoint="2" secondPoint="5" mx="0.132292" my="0.264583" length="(highbust_circ-waist_circ)/2/2"/>
+            <line typeLine="hair" id="17" firstPoint="16" secondPoint="11"/>
+            <point type="alongLine" typeLine="none" id="18" name="Т7" firstPoint="3" secondPoint="8" mx="0.132292" my="0.264583" length="2.5"/>
+            <spline type="path" id="19" kCurve="1">
+                <pathPoint kAsm1="1" kAsm2="1.00957" pSpline="14" angle="10.7913"/>
+                <pathPoint kAsm1="1.0069" kAsm2="1.01803" pSpline="18" angle="0.832637"/>
+                <pathPoint kAsm1="0.966617" kAsm2="1" pSpline="16" angle="346.792"/>
+            </spline>
+            <point type="alongLine" typeLine="none" id="20" name="Г" firstPoint="4" secondPoint="7" mx="0.132292" my="0.264583" length="lowbust_to_waist_f"/>
+            <point type="endLine" typeLine="hair" id="21" name="Г1х" basePoint="20" mx="-4.12783" angle="180" my="0.896469" length="Line_Т_T1"/>
+            <point type="lineIntersect" id="22" name="Г1" p2Line1="14" p2Line2="21" p1Line1="6" p1Line2="20" mx="-0.344796" my="-3.77231"/>
+            <point type="alongLine" typeLine="none" id="23" name="Г2" firstPoint="22" secondPoint="20" mx="-0.813146" my="1.28881" length="2.5"/>
+            <point type="alongLine" typeLine="none" id="24" name="Г3" firstPoint="6" secondPoint="7" mx="1.38006" my="-0.432699" length="2.5"/>
+            <point type="endLine" typeLine="hair" id="25" name="Г4" basePoint="20" mx="0.132292" angle="0" my="0.264583" length="Line_Г2_Г-2"/>
+            <line typeLine="hair" id="26" firstPoint="7" secondPoint="8"/>
+            <point type="endLine" typeLine="hair" id="27" name="В5х" basePoint="25" mx="0.132292" angle="90" my="0.264583" length="Line_Г_B1"/>
+            <point type="lineIntersect" id="28" name="В51" p2Line1="8" p2Line2="27" p1Line1="7" p1Line2="25" mx="1.30666" my="-1.38687"/>
+            <line typeLine="hair" id="29" firstPoint="20" secondPoint="28"/>
+            <point type="alongLine" typeLine="none" id="30" name="Г5" firstPoint="20" secondPoint="28" mx="-1.22557" my="-4.4329" length="Line_Г_В51/3"/>
+            <point type="normal" typeLine="hair" id="31" name="Г6" firstPoint="30" secondPoint="20" mx="1.67258" angle="0" my="-1.78048" length="1.7"/>
+            <line typeLine="hair" id="32" firstPoint="23" secondPoint="24"/>
+            <point type="alongLine" typeLine="none" id="33" name="Г7" firstPoint="23" secondPoint="24" mx="1.56355" my="-1.68047" length="Line_Г2_Г3/2"/>
+            <line typeLine="hair" id="34" firstPoint="33" secondPoint="20"/>
+            <point type="alongLine" typeLine="none" id="35" name="Г8" firstPoint="33" secondPoint="20" mx="0.132292" my="0.264583" length="Line_Г7_Г/3"/>
+            <point type="normal" typeLine="hair" id="36" name="Г9" firstPoint="35" secondPoint="33" mx="1.47166" angle="0" my="1.60396" length="2.5"/>
+            <spline type="path" id="37" kCurve="1">
+                <pathPoint kAsm1="1" kAsm2="1" pSpline="24" angle="285.289"/>
+                <pathPoint kAsm1="0.947578" kAsm2="1.20549" pSpline="33" angle="288.038"/>
+                <pathPoint kAsm1="0.918205" kAsm2="0.343325" pSpline="36" angle="323.362"/>
+                <pathPoint kAsm1="0.975465" kAsm2="1" pSpline="20" angle="9.78436"/>
+                <pathPoint kAsm1="1.08715" kAsm2="0.728559" pSpline="31" angle="46.6117"/>
+                <pathPoint kAsm1="1" kAsm2="1" pSpline="28" angle="77.5159"/>
+            </spline>
+        </calculation>
+        <modeling/>
+        <details/>
+    </draw>
+</pattern>

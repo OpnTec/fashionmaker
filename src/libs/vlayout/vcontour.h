@@ -33,6 +33,7 @@
 
 #include <QVector>
 #include <QSharedDataPointer>
+#include <QSizeF>
 
 class VContourData;
 class QPointF;
@@ -46,19 +47,21 @@ public:
     VContour(int height, int width);
     VContour(const VContour &contour);
     VContour &operator=(const VContour &contour);
-    virtual ~VContour();
+    ~VContour();
 
     void SetContour(const QVector<QPointF> &contour);
     QVector<QPointF> GetContour() const;
 
-    unsigned int GetShift() const;
-    void         SetShift(unsigned int shift);
+    quint32 GetShift() const;
+    void         SetShift(quint32 shift);
 
     int  GetHeight() const;
     void SetHeight(int height);
 
     int  GetWidth() const;
     void SetWidth(int width);
+
+    QSizeF GetSize() const;
 
     QVector<QPointF> UniteWithContour(const VLayoutDetail &detail, int globalI, int detJ, BestFrom type) const;
 
@@ -74,5 +77,7 @@ private:
 
     void AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const;
 };
+
+Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE);
 
 #endif // VCONTOUR_H

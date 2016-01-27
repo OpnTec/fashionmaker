@@ -37,10 +37,10 @@
 class VExceptionConversionError : public VException
 {
 public:
-    VExceptionConversionError(const QString &what, const QString &str);
+    VExceptionConversionError(const QString &error, const QString &str);
     VExceptionConversionError(const VExceptionConversionError &e);
-    virtual         ~VExceptionConversionError() V_NOEXCEPT_EXPR (true);
-    virtual QString ErrorMessage() const;
+    virtual         ~VExceptionConversionError() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE;
+    virtual QString ErrorMessage() const Q_DECL_OVERRIDE;
     QString         String() const;
 protected:
     /** @brief str string, where happend error */

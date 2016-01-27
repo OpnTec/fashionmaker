@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Valentina pattern format.-->
+    <version>0.2.4</version>
+    <unit>cm</unit>
+    <author>Juan Carlos Gonzalez</author>
+    <description/>
+    <notes/>
+    <measurements>blusa.vit</measurements>
+    <increments>
+        <increment name="#Nombre_1" description="Descripción" formula="1"/>
+    </increments>
+    <draw name="delantero">
+        <calculation>
+            <point type="single" x="21.1137" y="1.00542" name="A" id="1" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="dotLine" name="A1" id="2" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="3.5"/>
+            <point type="endLine" typeLine="dotLine" name="A2" id="3" basePoint="2" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="6"/>
+            <point type="endLine" typeLine="dotLine" name="A3" id="4" basePoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="10"/>
+            <point type="endLine" typeLine="dotLine" name="A4" id="5" basePoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="2"/>
+            <point type="endLine" typeLine="dotLine" name="A5" id="6" basePoint="5" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="11.5"/>
+            <point type="endLine" typeLine="dotLine" name="A6" id="7" basePoint="6" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="24.5"/>
+            <point type="endLine" typeLine="dotLine" name="A7" id="8" basePoint="7" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="2"/>
+            <point type="endLine" typeLine="dotLine" name="A8" id="9" basePoint="4" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="5"/>
+            <point type="endLine" typeLine="dotLine" name="A9" id="10" basePoint="2" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="2"/>
+            <line typeLine="hair" id="11" firstPoint="3" secondPoint="10" lineColor="darkRed"/>
+            <spline point4="3" type="simple" kAsm1="0.939992" kAsm2="1.12639" angle1="4.70013" angle2="241.501" id="12" kCurve="1" color="darkRed" point1="9"/>
+            <point type="endLine" typeLine="dotLine" name="A10" id="13" basePoint="8" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="9.5"/>
+            <point type="endLine" typeLine="hair" name="A11" id="14" basePoint="13" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="10"/>
+            <line typeLine="hair" id="15" firstPoint="9" secondPoint="14" lineColor="darkRed"/>
+            <line typeLine="hair" id="16" firstPoint="14" secondPoint="13" lineColor="darkRed"/>
+            <line typeLine="hair" id="17" firstPoint="13" secondPoint="7" lineColor="darkRed"/>
+            <point type="endLine" typeLine="dotLine" name="A12" id="18" basePoint="6" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="5"/>
+            <line typeLine="hair" id="19" firstPoint="7" secondPoint="18" lineColor="darkRed"/>
+            <point type="endLine" typeLine="dotLine" name="A13" id="20" basePoint="18" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="1.5"/>
+            <spline point4="10" type="simple" kAsm1="1.37938" kAsm2="0.596749" angle1="129.55" angle2="230.215" id="21" kCurve="1" color="darkRed" point1="18"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" id="43" idObject="3" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="44" idObject="21"/>
+            <spline type="modelingSpline" id="45" idObject="21"/>
+            <point type="modeling" id="46" idObject="7" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="47" idObject="13" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="48" idObject="14" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="49" idObject="9" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="50" idObject="12"/>
+            <point type="modeling" id="90" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="91" idObject="10" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="92" idObject="21"/>
+            <point type="modeling" id="93" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="94" idObject="7" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="95" idObject="13" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="96" idObject="14" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="97" idObject="9" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="98" idObject="12"/>
+            <point type="modeling" id="99" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="100" idObject="10" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="101" idObject="21"/>
+            <point type="modeling" id="102" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="103" idObject="7" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="104" idObject="13" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="105" idObject="14" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="106" idObject="9" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="107" idObject="12"/>
+            <point type="modeling" id="108" idObject="3" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="109" idObject="12"/>
+            <point type="modeling" id="110" idObject="9" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="111" idObject="14" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="112" idObject="13" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="113" idObject="7" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="114" idObject="18" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="115" idObject="21"/>
+            <point type="modeling" id="116" idObject="10" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="117" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="118" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="119" idObject="10" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="120" idObject="21"/>
+            <point type="modeling" id="121" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="122" idObject="7" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="123" idObject="13" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="124" idObject="14" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="125" idObject="9" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="126" idObject="12"/>
+            <point type="modeling" id="127" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="128" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="129" idObject="7" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="130" idObject="13" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="131" idObject="14" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="132" idObject="9" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="133" idObject="12"/>
+            <spline type="modelingSpline" id="134" idObject="12"/>
+            <point type="modeling" id="135" idObject="10" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="136" idObject="21"/>
+            <point type="modeling" id="137" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="139" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="140" idObject="10" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="141" idObject="21"/>
+            <point type="modeling" id="142" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="143" idObject="7" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="144" idObject="13" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="145" idObject="14" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="146" idObject="9" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="147" idObject="12"/>
+            <point type="modeling" id="148" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="149" idObject="10" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="150" idObject="21"/>
+            <point type="modeling" id="151" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="152" idObject="7" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="153" idObject="13" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="154" idObject="14" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="155" idObject="9" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="156" idObject="12"/>
+            <point type="modeling" id="157" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="158" idObject="10" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="159" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="160" idObject="7" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="161" idObject="13" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="162" idObject="14" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="163" idObject="9" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="164" idObject="12"/>
+            <point type="modeling" id="165" idObject="3" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="166" idObject="21"/>
+            <point type="modeling" id="167" idObject="10" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="168" idObject="21"/>
+            <point type="modeling" id="169" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="170" idObject="18" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="171" idObject="7" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="172" idObject="13" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="173" idObject="14" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="174" idObject="9" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="175" idObject="12"/>
+            <point type="modeling" id="176" idObject="3" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="177" idObject="10" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="178" idObject="21"/>
+            <point type="modeling" id="179" idObject="18" mx="0.132292" my="0.264583"/>
+        </modeling>
+        <details>
+            <detail closed="1" name="Detalle" id="180" supplement="1" mx="0" width="1" my="0">
+                <node type="NodePoint" nodeType="Contour" idObject="170" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="171" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="172" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="173" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="174" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="175" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="176" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="177" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="178" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="179" mx="0" my="0"/>
+            </detail>
+        </details>
+    </draw>
+    <draw name="espalda">
+        <calculation>
+            <point type="single" x="46.1486" y="1.05833" name="B" id="22" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="dotLine" name="B1" id="23" basePoint="22" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="2"/>
+            <point type="endLine" typeLine="dotLine" name="B2" id="24" basePoint="23" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="11.5"/>
+            <point type="endLine" typeLine="dotLine" name="B3" id="25" basePoint="24" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="24.5"/>
+            <point type="endLine" typeLine="dotLine" name="B4" id="26" basePoint="25" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="2"/>
+            <point type="endLine" typeLine="dotLine" name="B5" id="27" basePoint="26" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="19.5"/>
+            <line typeLine="hair" id="28" firstPoint="27" secondPoint="25" lineColor="blue"/>
+            <point type="endLine" typeLine="dotLine" name="B6" id="29" basePoint="24" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="5"/>
+            <line typeLine="hair" id="30" firstPoint="25" secondPoint="29" lineColor="blue"/>
+            <point type="endLine" typeLine="dotLine" name="B7" id="31" basePoint="22" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="3.5"/>
+            <point type="endLine" typeLine="dotLine" name="B8" id="32" basePoint="31" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="2"/>
+            <point type="endLine" typeLine="dotLine" name="B9" id="33" basePoint="31" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="6"/>
+            <point type="endLine" typeLine="dotLine" name="B10" id="34" basePoint="33" mx="0.21533" lineColor="black" my="-3.72122" angle="180" length="3"/>
+            <point type="endLine" typeLine="dotLine" name="B11" id="35" basePoint="34" mx="-6.67679" lineColor="black" my="-1.56224" angle="180" length="7"/>
+            <point type="endLine" typeLine="dotLine" name="B12" id="36" basePoint="35" mx="0.132292" lineColor="black" my="0.264583" angle="270" length="2"/>
+            <spline point4="32" type="simple" kAsm1="1.54534" kAsm2="0.458799" angle1="128.447" angle2="237.104" id="37" kCurve="1" color="blue" point1="29"/>
+            <line typeLine="hair" id="38" firstPoint="36" secondPoint="27" lineColor="blue"/>
+            <line typeLine="hair" id="39" firstPoint="33" secondPoint="32" lineColor="blue"/>
+            <line typeLine="hair" id="40" firstPoint="33" secondPoint="34" lineColor="blue"/>
+            <spline point4="36" type="simple" kAsm1="0.631359" kAsm2="1.2418" angle1="213.279" angle2="351.699" id="41" kCurve="1" color="blue" point1="34"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" id="51" idObject="34" mx="0.21533" my="-3.72122"/>
+            <point type="modeling" id="52" idObject="33" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="53" idObject="32" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="54" idObject="37"/>
+            <point type="modeling" id="55" idObject="29" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="56" idObject="25" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="57" idObject="27" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="58" idObject="36" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="59" idObject="41"/>
+            <point type="modeling" id="60" idObject="34" mx="0.21533" my="-3.72122"/>
+            <point type="modeling" id="61" idObject="33" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="62" idObject="32" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="63" idObject="37"/>
+            <point type="modeling" id="64" idObject="29" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="65" idObject="25" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="66" idObject="27" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="67" idObject="36" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="68" idObject="41"/>
+            <point type="modeling" id="69" idObject="34" mx="0.21533" my="-3.72122"/>
+            <point type="modeling" id="70" idObject="33" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="71" idObject="32" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="72" idObject="37"/>
+            <point type="modeling" id="73" idObject="29" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="74" idObject="25" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="75" idObject="27" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="76" idObject="36" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="77" idObject="41"/>
+            <point type="modeling" id="78" idObject="34" mx="0.21533" my="-3.72122"/>
+            <spline type="modelingSpline" id="79" idObject="41"/>
+            <point type="modeling" id="80" idObject="36" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="81" idObject="27" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="82" idObject="25" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="83" idObject="29" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="84" idObject="37"/>
+            <point type="modeling" id="85" idObject="32" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="86" idObject="33" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="87" idObject="41"/>
+            <point type="modeling" id="88" idObject="34" mx="0.21533" my="-3.72122"/>
+            <point type="modeling" id="181" idObject="36" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="182" idObject="41"/>
+            <point type="modeling" id="183" idObject="34" mx="0.21533" my="-3.72122"/>
+            <point type="modeling" id="184" idObject="33" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="185" idObject="32" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" id="186" idObject="37"/>
+            <point type="modeling" id="187" idObject="29" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="188" idObject="25" mx="0.132292" my="0.264583"/>
+            <point type="modeling" id="189" idObject="27" mx="0.132292" my="0.264583"/>
+        </modeling>
+        <details>
+            <detail closed="1" name="Деталь" id="190" supplement="1" mx="0" width="1" my="0">
+                <node type="NodePoint" nodeType="Contour" idObject="181" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="182" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="183" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="184" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="185" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="186" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="187" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="188" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="189" mx="0" my="0"/>
+            </detail>
+        </details>
+    </draw>
+</pattern>

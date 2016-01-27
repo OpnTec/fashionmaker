@@ -45,7 +45,7 @@ class VAbstractDetail
 {
 public:
     VAbstractDetail();
-    VAbstractDetail(const QString &name);
+    explicit VAbstractDetail(const QString &name);
     VAbstractDetail(const VAbstractDetail &detail);
     VAbstractDetail &operator=(const VAbstractDetail &detail);
     virtual ~VAbstractDetail();
@@ -65,18 +65,22 @@ public:
     void    setWidth(const qreal &value);
 
     static QVector<QPointF> Equidistant(const QVector<QPointF> &points, const EquidistantType &eqv, qreal width);
+    static qreal            SumTrapezoids(const QVector<QPointF> &points);
+    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
 
 protected:
     static QVector<QPointF> RemoveDublicates(const QVector<QPointF> &points);
+    static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points);
 
 private:
     QSharedDataPointer<VAbstractDetailData> d;
 
-    static QVector<QPointF> CorrectEquidistantPoints(const QVector<QPointF> &points);
-    static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
     static QVector<QPointF> EkvPoint(const QLineF &line1, const QLineF &line2, const qreal &width);
+    static QPointF          UnclosedEkvPoint(const QLineF &line, const QLineF &helpLine, const qreal &width);
     static QLineF           ParallelLine(const QLineF &line, qreal width );
     static QPointF          SingleParallelPoint(const QLineF &line, const qreal &angle, const qreal &width);
 };
+
+Q_DECLARE_TYPEINFO(VAbstractDetail, Q_MOVABLE_TYPE);
 
 #endif // VABSTRACTDETAIL_H

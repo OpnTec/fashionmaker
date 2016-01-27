@@ -34,11 +34,13 @@
 #include <QImage>
 #include <QDir>
 #include <QGraphicsItem>
+#include <QThreadPool>
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
-    :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0),
-      stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true), rotationIncrease(180)
+    :QObject(parent), papers(QVector<VLayoutPaper>()), bank(new VBank()), paperHeight(0), paperWidth(0), margins(),
+      stopGeneration(false), state(LayoutErrors::NoError), shift(0), rotate(true), rotationIncrease(180),
+      autoCrop(false), saveLength(false), unitePages(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -66,6 +68,7 @@ void VLayoutGenerator::SetCaseType(Cases caseType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 int VLayoutGenerator::DetailsCount()
 {
     return bank->AllDetailsCount();
@@ -89,7 +92,6 @@ void VLayoutGenerator::Generate()
 
     if (bank->Prepare())
     {
-        CheckDetailsSize();
         while (bank->AllDetailsCount() > 0)
         {
             if (stopGeneration)
@@ -97,12 +99,13 @@ void VLayoutGenerator::Generate()
                 break;
             }
 
-            VLayoutPaper paper(paperHeight, paperWidth);
+            VLayoutPaper paper(PageHeight(), PageWidth());
             paper.SetShift(shift);
             paper.SetLayoutWidth(bank->GetLayoutWidth());
             paper.SetPaperIndex(static_cast<quint32>(papers.count()));
             paper.SetRotate(rotate);
             paper.SetRotationIncrease(rotationIncrease);
+            paper.SetSaveLength(saveLength);
             do
             {
                 const int index = bank->GetTiket();
@@ -160,7 +163,7 @@ QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
     QList<QGraphicsItem *> list;
     for (int i=0; i < papers.count(); ++i)
     {
-        list.append(papers.at(i).GetPaperItem());
+        list.append(papers.at(i).GetPaperItem(autoCrop));
     }
     return list;
 }
@@ -181,9 +184,61 @@ void VLayoutGenerator::Abort()
 {
     stopGeneration = true;
     state = LayoutErrors::ProcessStoped;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
+    QThreadPool::globalInstance()->clear();
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VLayoutGenerator::PageHeight() const
+{
+    return static_cast<int>(paperHeight - (margins.top() + margins.bottom()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VLayoutGenerator::PageWidth() const
+{
+    return static_cast<int>(paperWidth - (margins.left() + margins.right()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::IsUnitePages() const
+{
+    return unitePages;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetUnitePages(bool value)
+{
+    unitePages = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::IsSaveLength() const
+{
+    return saveLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetSaveLength(bool value)
+{
+    saveLength = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::GetAutoCrop() const
+{
+    return autoCrop;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetAutoCrop(bool value)
+{
+    autoCrop = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 int VLayoutGenerator::GetRotationIncrease() const
 {
     return rotationIncrease;
@@ -213,49 +268,49 @@ void VLayoutGenerator::SetRotate(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::CheckDetailsSize()
-{
-    const QRectF rec = bank->GetBiggestBoundingRect();
-    if (rec.width() > paperWidth || rec.height() > paperHeight)
-    {
-        state = LayoutErrors::PaperSizeError;
-        emit Error(state);
-        stopGeneration = true;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VLayoutGenerator::GetPaperWidth() const
+qreal VLayoutGenerator::GetPaperWidth() const
 {
     return paperWidth;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetPaperWidth(int value)
+void VLayoutGenerator::SetPaperWidth(qreal value)
 {
     paperWidth = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-unsigned int VLayoutGenerator::GetShift() const
+QMarginsF VLayoutGenerator::GetFields() const
+{
+    return margins;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetFields(const QMarginsF &value)
+{
+    margins = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VLayoutGenerator::GetShift() const
 {
     return shift;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetShift(unsigned int shift)
+void VLayoutGenerator::SetShift(quint32 shift)
 {
     this->shift = shift;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutGenerator::GetPaperHeight() const
+qreal VLayoutGenerator::GetPaperHeight() const
 {
     return paperHeight;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetPaperHeight(int value)
+void VLayoutGenerator::SetPaperHeight(qreal value)
 {
     paperHeight = value;
 }

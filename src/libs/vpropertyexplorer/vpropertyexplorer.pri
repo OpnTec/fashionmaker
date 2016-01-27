@@ -27,10 +27,11 @@ SOURCES += \
     $$PWD/plugins/vstringproperty.cpp \
     $$PWD/plugins/vpointfproperty.cpp \
     $$PWD/plugins/vobjectproperty.cpp \
-    $$PWD/stable.cpp \
     $$PWD/plugins/vlinetypeproperty.cpp \
     $$PWD/plugins/vlinecolorproperty.cpp \
     $$PWD/checkablemessagebox.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS +=\
     $$PWD/vpropertyexplorer_global.h \

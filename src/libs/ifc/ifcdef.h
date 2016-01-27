@@ -29,78 +29,21 @@
 #ifndef IFCDEF_H
 #define IFCDEF_H
 
-#include <csignal>
 #include <QtGlobal>
+#include "../vmisc/def.h"
+
+extern const QString CustomMSign;
+extern const QString CustomIncrSign;
 
 #ifdef Q_OS_WIN32
     extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
     #include <windows.h>
 #endif /*Q_OS_WIN32*/
 
-enum class Unit : char { Mm, Cm, Inch, Px };
-enum class MeasurementsType : char { Standard, Individual };
-
 static const quint32 null_id = 0;
 
 #define NULL_ID null_id//use this value for initialization variables that keeps id values. 0 mean uknown id value.
 #define NULL_ID_STR "0"
-
-/*
- * This macros SCASSERT (for Stop and Continue Assert) will break into the debugger on the line of the assert and allow
- * you to continue afterwards should you choose to.
- * idea: Q_ASSERT no longer pauses debugger - http://qt-project.org/forums/viewthread/13148
- * Usefull links:
- * 1. What's the difference between __PRETTY_FUNCTION__, __FUNCTION__, __func__? -
- *    https://stackoverflow.com/questions/4384765/whats-the-difference-between-pretty-function-function-func
- *
- * 2. Windows Predefined Macros - http://msdn.microsoft.com/library/b0084kay.aspx
- *
- * 3. Windows DebugBreak function - http://msdn.microsoft.com/en-us/library/ms679297%28VS.85%29.aspx
- *
- * 4. Continue to debug after failed assertion on Linux? [C/C++] -
- * https://stackoverflow.com/questions/1721543/continue-to-debug-after-failed-assertion-on-linux-c-c
- */
-#ifndef V_NO_ASSERT
-#ifdef Q_OS_WIN32
-#ifdef Q_CC_MSVC
-#define SCASSERT(cond)                                      \
-{                                                           \
-    if (!(cond))                                            \
-    {                                                       \
-        qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, __FUNCSIG__, __FILE__, __LINE__);        \
-        DebugBreak();                                       \
-    }                                                       \
-}                                                           \
-
-#else // GCC (Windows)
-
-#define SCASSERT(cond)                                      \
-{                                                           \
-    if (!(cond))                                            \
-    {                                                       \
-        qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
-        DebugBreak();                                       \
-    }                                                       \
-}                                                           \
-
-#endif /*Q_CC_MSVC*/
-#else // UNIX
-#define SCASSERT(cond)                                      \
-{                                                           \
-    if (!(cond))                                            \
-    {                                                       \
-        qDebug("ASSERT: %s in %s (%s:%u)",                  \
-            #cond, __PRETTY_FUNCTION__, __FILE__, __LINE__);\
-        std::raise(SIGTRAP);                                \
-    }                                                       \
-}                                                           \
-
-#endif /* Q_OS_WIN32 */
-#else // define but disable this function if debugging is not set
-#define SCASSERT(cond) qt_noop();
-#endif /* V_NO_ASSERT */
 
 // Detect whether the compiler supports C++11 noexcept exception specifications.
 #  if   defined(__clang__)
@@ -112,9 +55,110 @@ static const quint32 null_id = 0;
 #      define V_NOEXCEPT_EXPR(x) noexcept(x) // GCC 4.7 and following have noexcept
 #    endif
 #  elif defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 180021114
-#    define QMUP_NOEXCEPT_EXPR(x) noexcept(x)
+#    define V_NOEXCEPT_EXPR(x) noexcept(x)
 #  else
 #    define V_NOEXCEPT_EXPR(x)
 #  endif
+
+qreal WidthMainLine(Unit patternUnit);
+qreal WidthHairLine(Unit patternUnit);
+
+extern const QString AttrType;
+extern const QString AttrMx;
+extern const QString AttrMy;
+extern const QString AttrName;
+extern const QString AttrMx1;
+extern const QString AttrMy1;
+extern const QString AttrName1;
+extern const QString AttrMx2;
+extern const QString AttrMy2;
+extern const QString AttrName2;
+extern const QString AttrBaseLineP1;
+extern const QString AttrBaseLineP2;
+extern const QString AttrDartP1;
+extern const QString AttrDartP2;
+extern const QString AttrDartP3;
+extern const QString AttrX;
+extern const QString AttrY;
+extern const QString AttrTypeLine;
+extern const QString AttrLength;
+extern const QString AttrBasePoint;
+extern const QString AttrFirstPoint;
+extern const QString AttrSecondPoint;
+extern const QString AttrThirdPoint;
+extern const QString AttrCenter;
+extern const QString AttrRadius;
+extern const QString AttrAngle;
+extern const QString AttrAngle1;
+extern const QString AttrAngle2;
+extern const QString AttrP1Line;
+extern const QString AttrP2Line;
+extern const QString AttrP1Line1;
+extern const QString AttrP2Line1;
+extern const QString AttrP1Line2;
+extern const QString AttrP2Line2;
+extern const QString AttrPShoulder;
+extern const QString AttrPoint1;
+extern const QString AttrPoint2;
+extern const QString AttrPoint4;
+extern const QString AttrKAsm1;
+extern const QString AttrKAsm2;
+extern const QString AttrKCurve;
+extern const QString AttrPathPoint;
+extern const QString AttrPSpline;
+extern const QString AttrAxisP1;
+extern const QString AttrAxisP2;
+extern const QString AttrCurve;
+extern const QString AttrLineColor;
+extern const QString AttrColor;
+extern const QString AttrFirstArc;
+extern const QString AttrSecondArc;
+extern const QString AttrCrossPoint;
+extern const QString AttrC1Center;
+extern const QString AttrC2Center;
+extern const QString AttrC1Radius;
+extern const QString AttrC2Radius;
+extern const QString AttrCCenter;
+extern const QString AttrTangent;
+extern const QString AttrCRadius;
+extern const QString AttrArc;
+
+extern const QString TypeLineNone;
+extern const QString TypeLineLine;
+extern const QString TypeLineDashLine;
+extern const QString TypeLineDotLine;
+extern const QString TypeLineDashDotLine;
+extern const QString TypeLineDashDotDotLine;
+
+extern const QString ColorBlack;
+extern const QString ColorGreen;
+extern const QString ColorBlue;
+extern const QString ColorDarkRed;
+extern const QString ColorDarkGreen;
+extern const QString ColorDarkBlue;
+extern const QString ColorYellow;
+
+// variables name
+// Hacks for avoiding the linker error "undefined reference to"
+#define SPL_ "Spl_"
+#define ARC_ "Arc_"
+
+extern const QString line_;
+extern const QString angleLine_;
+extern const QString arc_;
+extern const QString spl_;
+extern const QString splPath;
+extern const QString radius_V;
+extern const QString radiusArc_;
+extern const QString angle1_V;
+extern const QString angle2_V;
+extern const QString angle1Arc_;
+extern const QString angle2Arc_;
+extern const QString angle1Spl_;
+extern const QString angle2Spl_;
+extern const QString angle1SplPath;
+extern const QString angle2SplPath;
+
+extern const QStringList builInVariables;
 
 #endif // IFCDEF_H

@@ -45,7 +45,7 @@ public:
     VLayoutPaper(int height, int width);
     VLayoutPaper(const VLayoutPaper &paper);
     VLayoutPaper &operator=(const VLayoutPaper &paper);
-    virtual ~VLayoutPaper();
+    ~VLayoutPaper();
 
     int  GetHeight() const;
     void SetHeight(int height);
@@ -56,8 +56,8 @@ public:
     qreal GetLayoutWidth() const;
     void  SetLayoutWidth(qreal width);
 
-    unsigned int GetShift() const;
-    void         SetShift(unsigned int shift);
+    quint32 GetShift() const;
+    void         SetShift(quint32 shift);
 
     bool GetRotate() const;
     void SetRotate(bool value);
@@ -65,20 +65,25 @@ public:
     int GetRotationIncrease() const;
     void SetRotationIncrease(int value);
 
+    bool IsSaveLength() const;
+    void SetSaveLength(bool value);
+
     void SetPaperIndex(quint32 index);
 
-    bool ArrangeDetail(const VLayoutDetail &detail, bool &stop);
+    bool ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop);
     int  Count() const;
-    QGraphicsRectItem *GetPaperItem() const;
+    QGraphicsRectItem *GetPaperItem(bool autoCrop) const;
     QList<QGraphicsItem *> GetDetails() const;
 
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 
-    bool AddToSheet(const VLayoutDetail &detail, bool &stop);
+    bool AddToSheet(const VLayoutDetail &detail, volatile bool &stop);
 
     bool SaveResult(const VBestSquare &bestResult, const VLayoutDetail &detail);
 
 };
+
+Q_DECLARE_TYPEINFO(VLayoutPaper, Q_MOVABLE_TYPE);
 
 #endif // VLAYOUTPAPER_H

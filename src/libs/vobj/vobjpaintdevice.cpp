@@ -35,7 +35,7 @@
 VObjPaintDevice::VObjPaintDevice()
     :QPaintDevice(), engine(new VObjEngine()), fileName(), owns_iodevice(1)
 {
-    owns_iodevice = false;
+    owns_iodevice = static_cast<int>(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -45,16 +45,17 @@ VObjPaintDevice::~VObjPaintDevice()
     {
         delete engine->getOutputDevice();
     }
-    delete engine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QPaintEngine *VObjPaintDevice::paintEngine() const
 {
-    return engine;
+    return engine.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QString VObjPaintDevice::getFileName() const
 {
     return fileName;
@@ -74,7 +75,7 @@ void VObjPaintDevice::setFileName(const QString &value)
         delete engine->getOutputDevice();
     }
 
-    owns_iodevice = true;
+    owns_iodevice = static_cast<int>(true);
 
     fileName = value;
     QFile *file = new QFile(fileName);
@@ -112,7 +113,7 @@ void VObjPaintDevice::setOutputDevice(QIODevice *outputDevice)
         qWarning("VObjPaintDevice::setOutputDevice(), cannot set output device while OBJ is being generated");
         return;
     }
-    owns_iodevice = false;
+    owns_iodevice = static_cast<int>(false);
     engine->setOutputDevice(outputDevice);
     fileName = QString();
 }
@@ -154,6 +155,10 @@ int VObjPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
             return engine->getResolution();
         case QPaintDevice::PdmPhysicalDpiY:
             return engine->getResolution();
+#if QT_VERSION > QT_VERSION_CHECK(5, 0, 2)
+        case QPaintDevice::PdmDevicePixelRatio:
+            return 1;
+#endif
         default:
             qWarning("VObjPaintDevice::metric(), unhandled metric %d\n", metric);
             break;

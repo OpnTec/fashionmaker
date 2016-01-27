@@ -31,6 +31,7 @@
 
 #include <QPaintDevice>
 #include <QString>
+#include <QSharedPointer>
 
 class VObjEngine;
 class QIODevice;
@@ -39,8 +40,8 @@ class VObjPaintDevice : public QPaintDevice
 {
 public:
     VObjPaintDevice();
-    virtual ~VObjPaintDevice();
-    virtual QPaintEngine *paintEngine() const;
+    virtual ~VObjPaintDevice() Q_DECL_OVERRIDE;
+    virtual QPaintEngine *paintEngine() const Q_DECL_OVERRIDE;
 
     QString getFileName() const;
     void setFileName(const QString &value);
@@ -55,10 +56,10 @@ public:
     void setResolution(int dpi);
 
 protected:
-    virtual int metric(PaintDeviceMetric metric) const;
+    virtual int metric(PaintDeviceMetric metric) const Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VObjPaintDevice)
-    VObjEngine *engine;
+    QSharedPointer<VObjEngine> engine;
     QString     fileName;
     uint        owns_iodevice;
 };

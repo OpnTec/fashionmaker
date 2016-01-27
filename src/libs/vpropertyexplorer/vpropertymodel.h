@@ -59,7 +59,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertyModel : public QAbstractItemModel
     Q_OBJECT
 public:
     explicit VPropertyModel(QObject * parent = 0);
-    virtual ~VPropertyModel();
+    virtual ~VPropertyModel() Q_DECL_OVERRIDE;
 
     //! Adds the property to the model and attaches it to the parentid
     //! \param emitsignals If this is set to false, this function will not call beginInsertRows() and endInsertRows(),
@@ -78,25 +78,26 @@ public:
     virtual Qt::ItemFlags flags (const QModelIndex& index) const;
 
     //! Sets the role data for the item at index to value
-    virtual bool setData (const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+    virtual bool setData (const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) Q_DECL_OVERRIDE;
 
     //! Returns the model index at row/column
-    virtual QModelIndex index (int row, int column, const QModelIndex & parent = QModelIndex() ) const;
+    virtual QModelIndex index (int row, int column, const QModelIndex & parent = QModelIndex() ) const Q_DECL_OVERRIDE;
 
     //! Returns the parent of one model index
-    virtual QModelIndex parent (const QModelIndex& index) const;
+    virtual QModelIndex parent (const QModelIndex& index) const Q_DECL_OVERRIDE;
 
     //! Returns the data of an model index
-    virtual QVariant data (const QModelIndex& index, int role = Qt::DisplayRole) const;
+    virtual QVariant data (const QModelIndex& index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
     //! Returns the data for the given role and section in the header with the specified orientation.
-    virtual QVariant headerData (int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+    virtual QVariant headerData (int section, Qt::Orientation orientation,
+                                 int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
     //! Returns the number of rows
-    virtual int rowCount ( const QModelIndex & parent = QModelIndex() ) const;
+    virtual int rowCount ( const QModelIndex & parent = QModelIndex() ) const Q_DECL_OVERRIDE;
 
     //! Returns the number of columns
-    virtual int columnCount ( const QModelIndex & parent = QModelIndex() ) const;
+    virtual int columnCount ( const QModelIndex & parent = QModelIndex() ) const Q_DECL_OVERRIDE;
 
     //! Gets a property by its ModelIndex
     //! \param index The modelIndex of the property.
@@ -153,7 +154,7 @@ protected:
     virtual QModelIndex getIndexFromProperty(VProperty* property, int column = 0) const;
 
     //! Protected constructor passing the private object
-    VPropertyModel(VPropertyModelPrivate* d, QObject* parent = 0);
+    explicit VPropertyModel(VPropertyModelPrivate* d, QObject* parent = 0);
 
     //! The model data
     VPropertyModelPrivate* d_ptr;

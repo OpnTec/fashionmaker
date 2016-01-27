@@ -75,12 +75,17 @@ QWidget *VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionVie
     Q_UNUSED(options);
     Q_UNUSED(delegate);
     QComboBox* tmpEditor = new QComboBox(parent);
-    tmpEditor->clear();
+
+    int size = tmpEditor->iconSize().height();
+    // On Mac pixmap should be little bit smaller.
+#if defined(Q_OS_MAC)
+    size -= 2; // Two pixels should be enough.
+#endif //defined(Q_OS_MAC)
 
     QMap<QString, QString>::const_iterator i = colors.constBegin();
     while (i != colors.constEnd())
     {
-        QPixmap pix(16, 16);
+        QPixmap pix(size, size);
         pix.fill(QColor(i.key()));
         tmpEditor->addItem(QIcon(pix), i.value(), QVariant(i.key()));
         ++i;
@@ -118,6 +123,7 @@ void VLineColorProperty::setColors(const QMap<QString, QString> &colors)
     }
 }
 
+// cppcheck-suppress unusedFunction
 QMap<QString, QString> VLineColorProperty::getColors() const
 {
     return colors;

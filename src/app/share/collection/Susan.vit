@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name>Spencer</family-name>
+        <given-name>Susan</given-name>
+        <birth-date>1959-11-04</birth-date>
+        <gender>female</gender>
+        <email>susan.spencer@gmail.com</email>
+    </personal>
+    <body-measurements>
+        <m name="across_back_b" value="0" description="" full_name=""/>
+        <m name="across_back_to_waist_b" value="0" description="" full_name=""/>
+        <m name="across_chest_f" value="0" description="" full_name=""/>
+        <m name="arm_armpit_to_wrist" value="48" description="" full_name=""/>
+        <m name="arm_elbow_circ" value="30" description="" full_name=""/>
+        <m name="arm_neck_back_to_wrist_bent" value="0" description="" full_name=""/>
+        <m name="arm_neck_side_to_finger_tip" value="0" description="" full_name=""/>
+        <m name="arm_neck_side_to_outer_elbow" value="0" description="" full_name=""/>
+        <m name="arm_neck_side_to_wrist" value="0" description="" full_name=""/>
+        <m name="arm_shoulder_tip_to_elbow" value="34" description="" full_name=""/>
+        <m name="arm_shoulder_tip_to_wrist" value="61" description="" full_name=""/>
+        <m name="arm_upper_circ" value="33" description="" full_name=""/>
+        <m name="arm_wrist_circ" value="16" description="" full_name=""/>
+        <m name="armfold_to_armfold_b" value="39" description="" full_name=""/>
+        <m name="armfold_to_armfold_f" value="43" description="" full_name=""/>
+        <m name="armpit_to_waist_side" value="20" description="" full_name=""/>
+        <m name="armscye_arc" value="0" description="" full_name=""/>
+        <m name="armscye_circ" value="0" description="" full_name=""/>
+        <m name="armscye_width" value="0" description="" full_name=""/>
+        <m name="body_armfold_circ" value="0" description="" full_name=""/>
+        <m name="body_torso_circ" value="0" description="" full_name=""/>
+        <m name="bust_arc_f" value="0" description="" full_name=""/>
+        <m name="bust_circ" value="105" description="" full_name=""/>
+        <m name="bustpoint_to_bustpoint" value="21" description="" full_name=""/>
+        <m name="bustpoint_to_bustpoint_halter" value="0" description="" full_name=""/>
+        <m name="bustpoint_to_neck_side" value="0" description="" full_name=""/>
+        <m name="crotch_length" value="81" description="" full_name=""/>
+        <m name="foot_instep_circ" value="0" description="" full_name=""/>
+        <m name="foot_length" value="0" description="" full_name=""/>
+        <m name="foot_width" value="0" description="" full_name=""/>
+        <m name="hand_circ" value="21" description="" full_name=""/>
+        <m name="hand_length" value="18.5" description="" full_name=""/>
+        <m name="hand_palm_width" value="0" description="" full_name=""/>
+        <m name="head_chin_to_neck_back" value="0" description="" full_name=""/>
+        <m name="head_circ" value="0" description="" full_name=""/>
+        <m name="head_crown_to_neck_back" value="0" description="" full_name=""/>
+        <m name="head_length" value="0" description="" full_name=""/>
+        <m name="height_ankle" value="6.5" description="" full_name=""/>
+        <m name="height_armpit" value="0" description="" full_name=""/>
+        <m name="height_bustpoint" value="0" description="" full_name=""/>
+        <m name="height_gluteal_fold" value="0" description="" full_name=""/>
+        <m name="height_highhip" value="12" description="" full_name=""/>
+        <m name="height_hip" value="0" description="" full_name=""/>
+        <m name="height_knee" value="45" description="" full_name=""/>
+        <m name="height_neck_back" value="0" description="" full_name=""/>
+        <m name="height_neck_back_to_knee" value="0" description="" full_name=""/>
+        <m name="height_neck_front" value="0" description="" full_name=""/>
+        <m name="height_neck_side" value="0" description="" full_name=""/>
+        <m name="height_scapula" value="0" description="" full_name=""/>
+        <m name="height_shoulder_tip" value="0" description="" full_name=""/>
+        <m name="height_waist_front" value="0" description="" full_name=""/>
+        <m name="height_waist_side" value="108" description="" full_name=""/>
+        <m name="height_waist_side_to_hip" value="17" description="" full_name=""/>
+        <m name="height_waist_side_to_knee" value="0" description="" full_name=""/>
+        <m name="highbust_arc_b" value="53" description="" full_name=""/>
+        <m name="highbust_arc_f" value="51" description="" full_name=""/>
+        <m name="highbust_b_over_shoulder_to_highbust_f" value="0" description="" full_name=""/>
+        <m name="highbust_circ" value="104" description="" full_name=""/>
+        <m name="highbust_to_waist_f" value="0" description="" full_name=""/>
+        <m name="highhip_arc_b" value="50" description="" full_name=""/>
+        <m name="highhip_arc_f" value="56" description="" full_name=""/>
+        <m name="highhip_circ" value="106" description="" full_name=""/>
+        <m name="hip_arc_b" value="61" description="" full_name=""/>
+        <m name="hip_arc_f" value="53" description="" full_name=""/>
+        <m name="hip_circ" value="0" description="" full_name=""/>
+        <m name="hip_circ_with_abdomen" value="114" description="" full_name=""/>
+        <m name="hip_with_abdomen_arc_f" value="0" description="" full_name=""/>
+        <m name="indent_neck_back" value="0" description="" full_name=""/>
+        <m name="leg_ankle_circ" value="31" description="" full_name=""/>
+        <m name="leg_calf_circ" value="39" description="" full_name=""/>
+        <m name="leg_crotch_to_floor" value="76" description="" full_name=""/>
+        <m name="leg_knee_circ" value="41" description="" full_name=""/>
+        <m name="leg_knee_circ_bent" value="0" description="" full_name=""/>
+        <m name="leg_thigh_mid_circ" value="0" description="" full_name=""/>
+        <m name="leg_thigh_upper_circ" value="69" description="" full_name=""/>
+        <m name="leg_waist_side_to_floor" value="0" description="" full_name=""/>
+        <m name="leg_waist_side_to_knee" value="0" description="" full_name=""/>
+        <m name="lowbust_arc_f" value="0" description="" full_name=""/>
+        <m name="lowbust_circ" value="0" description="" full_name=""/>
+        <m name="lowbust_to_waist_f" value="0" description="" full_name=""/>
+        <m name="neck_arc_b" value="20" description="" full_name=""/>
+        <m name="neck_arc_f" value="28" description="" full_name=""/>
+        <m name="neck_back_to_highbust_b" value="0" description="" full_name=""/>
+        <m name="neck_back_to_waist_b" value="41" description="" full_name=""/>
+        <m name="neck_back_to_waist_side" value="0" description="" full_name=""/>
+        <m name="neck_circ" value="41" description="" full_name=""/>
+        <m name="neck_front_to_bust_f" value="18" description="" full_name=""/>
+        <m name="neck_front_to_highbust_f" value="8" description="" full_name=""/>
+        <m name="neck_front_to_waist_f" value="0" description="" full_name=""/>
+        <m name="neck_front_to_waist_flat_f" value="34" description="" full_name=""/>
+        <m name="neck_front_to_waist_side" value="0" description="" full_name=""/>
+        <m name="neck_mid_circ" value="0" description="" full_name=""/>
+        <m name="neck_side_to_armfold_b" value="0" description="" full_name=""/>
+        <m name="neck_side_to_armfold_f" value="0" description="" full_name=""/>
+        <m name="neck_side_to_waist_b" value="47" description="" full_name=""/>
+        <m name="neck_side_to_waist_f" value="48" description="" full_name=""/>
+        <m name="neck_width" value="0" description="" full_name=""/>
+        <m name="rise_length_diag" value="32.5" description="" full_name=""/>
+        <m name="rise_length_side_sitting" value="0" description="" full_name=""/>
+        <m name="shoulder_length" value="15" description="" full_name=""/>
+        <m name="shoulder_slope_neck_side_angle" value="0" description="" full_name=""/>
+        <m name="shoulder_slope_neck_side_length" value="0" description="" full_name=""/>
+        <m name="shoulder_tip_to_shoulder_tip_b" value="47" description="" full_name=""/>
+        <m name="shoulder_tip_to_shoulder_tip_f" value="43" description="" full_name=""/>
+        <m name="shoulder_tip_to_waist_back" value="44" description="" full_name=""/>
+        <m name="shoulder_tip_to_waist_front" value="47" description="" full_name=""/>
+        <m name="waist_arc_b" value="47" description="" full_name=""/>
+        <m name="waist_arc_f" value="48" description="" full_name=""/>
+        <m name="waist_circ" value="95" description="" full_name=""/>
+        <m name="waist_to_highhip_f" value="0" description="" full_name=""/>
+        <m name="waist_to_hip_f" value="0" description="" full_name=""/>
+        <m name="waist_to_waist_halter" value="0" description="" full_name=""/>
+    </body-measurements>
+</vit>

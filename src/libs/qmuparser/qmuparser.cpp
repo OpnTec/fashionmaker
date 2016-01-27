@@ -23,6 +23,7 @@
 
 #include <QtGlobal>
 #include <QtCore/qmath.h>
+#include <QCoreApplication>
 
 using namespace std;
 
@@ -36,32 +37,38 @@ using namespace std;
  */
 namespace qmu
 {
+//---------------------------------------------------------------------------------------------------------------------
 // Trigonometric function
 qreal QmuParser::Sinh(qreal v)
 {
     return sinh(v);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::Cosh(qreal v)
 {
     return cosh(v);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::Tanh(qreal v)
 {
     return tanh(v);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ASinh(qreal v)
 {
     return log(v + qSqrt(v * v + 1));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ACosh(qreal v)
 {
     return log(v + qSqrt(v * v - 1));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::ATanh(qreal v)
 {
     return (0.5 * log((1 + v) / (1 - v)));
@@ -69,6 +76,7 @@ qreal QmuParser::ATanh(qreal v)
 //---------------------------------------------------------------------------------------------------------------------
 // Logarithm functions
 
+//---------------------------------------------------------------------------------------------------------------------
 // Logarithm base 2
 qreal QmuParser::Log2(qreal v)
 {
@@ -81,6 +89,7 @@ qreal QmuParser::Log2(qreal v)
     return log(v)/log(2.0);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 // Logarithm base 10
 qreal QmuParser::Log10(qreal v)
 {
@@ -100,14 +109,22 @@ qreal QmuParser::Abs(qreal v)
     return qAbs(v);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::Rint(qreal v)
 {
     return qFloor(v + 0.5);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 qreal QmuParser::Sign(qreal v)
 {
     return ((v<0) ? -1 : (v>0) ? 1 : 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal QmuParser::FMod(qreal number, qreal denom)
+{
+    return fmod(number, denom);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,9 +135,10 @@ qreal QmuParser::Sign(qreal v)
  */
 qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
 {
-    if (a_iArgc == false)
+    if (a_iArgc == 0)
     {
-        throw QmuParserError("too few arguments for function sum.");
+        throw QmuParserError(QCoreApplication::translate("QmuParser", "too few arguments for function sum.",
+                                                         "parser error message"));
     }
     qreal fRes=0;
     for (int i=0; i<a_iArgc; ++i)
@@ -138,9 +156,10 @@ qreal QmuParser::Sum(const qreal *a_afArg, int a_iArgc)
  */
 qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
 {
-    if (a_iArgc == false)
+    if (a_iArgc == 0)
     {
-        throw QmuParserError("too few arguments for function sum.");
+        throw QmuParserError(QCoreApplication::translate("QmuParser", "too few arguments for function sum.",
+                                                         "parser error message"));
     }
     qreal fRes=0;
     for (int i=0; i<a_iArgc; ++i)
@@ -158,9 +177,10 @@ qreal QmuParser::Avg(const qreal *a_afArg, int a_iArgc)
  */
 qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
 {
-    if (a_iArgc == false)
+    if (a_iArgc == 0)
     {
-        throw QmuParserError("too few arguments for function min.");
+        throw QmuParserError(QCoreApplication::translate("QmuParser", "too few arguments for function min.",
+                                                         "parser error message"));
     }
     qreal fRes=a_afArg[0];
     for (int i=0; i<a_iArgc; ++i)
@@ -178,9 +198,10 @@ qreal QmuParser::Min(const qreal *a_afArg, int a_iArgc)
  */
 qreal QmuParser::Max(const qreal *a_afArg, int a_iArgc)
 {
-    if (a_iArgc == false)
+    if (a_iArgc == 0)
     {
-        throw QmuParserError("too few arguments for function min.");
+        throw QmuParserError(QCoreApplication::translate("QmuParser", "too few arguments for function min.",
+                                                         "parser error message"));
     }
     qreal fRes=a_afArg[0];
     for (int i=0; i<a_iArgc; ++i)
@@ -284,6 +305,7 @@ void QmuParser::InitFun()
     DefineFun("sign",  Sign);
     DefineFun("rint",  Rint);
     DefineFun("abs",   Abs);
+    DefineFun("fmod",  FMod);
     // Functions with variable number of arguments
     DefineFun("sum",   Sum);
     DefineFun("avg",   Avg);
@@ -300,8 +322,8 @@ void QmuParser::InitFun()
  */
 void QmuParser::InitConst()
 {
-    DefineConst("_pi", (qreal)M_PI);
-    DefineConst("_e", (qreal)M_E);
+    DefineConst("_pi", static_cast<qreal>(M_PI));
+    DefineConst("_e", static_cast<qreal>(M_E));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

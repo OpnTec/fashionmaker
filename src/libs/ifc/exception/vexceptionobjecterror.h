@@ -39,11 +39,11 @@ class QDomElement;
 class VExceptionObjectError : public VException
 {
 public:
-    VExceptionObjectError(const QString &what, const QDomElement &domElement);
+    VExceptionObjectError(const QString &error, const QDomElement &domElement);
     VExceptionObjectError(const VExceptionObjectError &e);
-    virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) {}
-    virtual QString ErrorMessage() const;
-    virtual QString DetailedInformation() const;
+    virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
+    virtual QString ErrorMessage() const Q_DECL_OVERRIDE;
+    virtual QString DetailedInformation() const Q_DECL_OVERRIDE;
     QString         TagText() const;
     QString         TagName() const;
     qint32          LineNumber() const;

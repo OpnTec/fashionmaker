@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.2.2</version>
+    <unit>cm</unit>
+    <author/>
+    <description/>
+    <notes/>
+    <measurements>issue_256_correct.vit</measurements>
+    <increments/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point type="single" x="1.34938" y="1.24354" id="1" name="A" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="2" name="A1" basePoint="1" mx="0.175422" lineColor="black" angle="0" my="0.27896" length="height_scapula/10+"/>
+            <point type="endLine" typeLine="hair" id="3" name="A2" basePoint="1" mx="0.132292" lineColor="black" angle="269.719" my="0.264583" length="Line_A_A1"/>
+            <point type="pointOfIntersection" id="4" name="A3" firstPoint="2" secondPoint="3" mx="0.132292" my="0.264583"/>
+            <line typeLine="hair" id="5" firstPoint="3" secondPoint="4" lineColor="black"/>
+            <line typeLine="hair" id="6" firstPoint="2" secondPoint="4" lineColor="black"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" id="7" idObject="1" mx="0.0264587" my="0.291041"/>
+            <point type="modeling" id="8" idObject="2" mx="-1.85208" my="0.264583"/>
+            <point type="modeling" id="9" idObject="4" mx="-2.03729" my="-1.71979"/>
+            <point type="modeling" id="10" idObject="3" mx="0.47625" my="-1.95792"/>
+            <point type="modeling" id="11" idObject="1" mx="0.0264587" my="0.291041"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="12" name="Detail" supplement="1" width="1" mx="0.185208" my="-0.079375">
+                <node type="NodePoint" nodeType="Contour" idObject="7" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="8" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="9" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="10" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="11" mx="0" my="0"/>
+            </detail>
+        </details>
+    </draw>
+</pattern>

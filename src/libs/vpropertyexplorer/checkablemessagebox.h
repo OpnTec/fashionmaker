@@ -18,19 +18,18 @@
 #ifndef CHECKABLEMESSAGEBOX_H
 #define CHECKABLEMESSAGEBOX_H
 
+#include "vpropertyexplorer_global.h"
 #include <QDialogButtonBox>
 #include <QMessageBox>
 
-QT_BEGIN_NAMESPACE
 class QSettings;
-QT_END_NAMESPACE
 
 namespace Utils
 {
 
 class CheckableMessageBoxPrivate;
 
-class Q_DECL_EXPORT CheckableMessageBox : public QDialog
+class VPROPERTYEXPLORERSHARED_EXPORT CheckableMessageBox : public QDialog
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText)
@@ -42,7 +41,7 @@ class Q_DECL_EXPORT CheckableMessageBox : public QDialog
 
 public:
     explicit CheckableMessageBox(QWidget *parent);
-    virtual ~CheckableMessageBox();
+    virtual ~CheckableMessageBox() Q_DECL_OVERRIDE;
 
     static QDialogButtonBox::StandardButton
         question(QWidget *parent,

@@ -31,13 +31,13 @@
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionConversionError exception conversion error
- * @param what string with error
+ * @param error string with error
  * @param str string, where happend error
  */
-VExceptionConversionError::VExceptionConversionError(const QString &what, const QString &str)
-    :VException(what), str(str)
+VExceptionConversionError::VExceptionConversionError(const QString &error, const QString &str)
+    :VException(error), str(str)
 {
-    Q_ASSERT_X(str.isEmpty() == false, Q_FUNC_INFO, "Error converting string is empty");
+    Q_ASSERT_X(not str.isEmpty(), Q_FUNC_INFO, "Error converting string is empty");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,6 +60,5 @@ VExceptionConversionError::~VExceptionConversionError() V_NOEXCEPT_EXPR (true)
  */
 QString VExceptionConversionError::ErrorMessage() const
 {
-    QString error = QString("ExceptionConversionError: %1 \"%2\"").arg(what, str);
-    return error;
+    return QString("ExceptionConversionError: %1 \"%2\"").arg(error, str);
 }

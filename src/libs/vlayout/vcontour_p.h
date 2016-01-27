@@ -64,7 +64,10 @@ public:
     /** @brief paperWidth width of paper in pixels*/
     int paperWidth;
 
-    unsigned int shift;
+    quint32 shift;
+
+private:
+    VContourData &operator=(const VContourData &) Q_DECL_EQ_DELETE;
 };
 
 #ifdef Q_CC_GNU

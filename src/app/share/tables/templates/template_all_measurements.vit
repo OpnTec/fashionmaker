@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>41</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m name="height" value="0"/>
+        <m name="height_neck_back" value="0"/>
+        <m name="height_scapula" value="0"/>
+        <m name="height_armpit" value="0"/>
+        <m name="height_waist_side" value="0"/>
+        <m name="height_hip" value="0"/>
+        <m name="height_gluteal_fold" value="0"/>
+        <m name="height_knee" value="0"/>
+        <m name="height_calf" value="0"/>
+        <m name="height_ankle_high" value="0"/>
+        <m name="height_ankle" value="0"/>
+        <m name="height_highhip" value="0"/>
+        <m name="height_waist_front" value="0"/>
+        <m name="height_bustpoint" value="0"/>
+        <m name="height_shoulder_tip" value="0"/>
+        <m name="height_neck_front" value="0"/>
+        <m name="height_neck_side" value="0"/>
+        <m name="height_neck_back_to_knee" value="(height_neck_back - height_knee)"/>
+        <m name="height_waist_side_to_knee" value="(height_waist_side - height_knee)"/>
+        <m name="height_waist_side_to_hip" value="(height_waist_side - height_hip)"/>
+        <m name="height_knee_to_ankle" value="(height_knee - height_ankle)"/>
+        <m name="height_neck_back_to_waist_side" value="(height_neck_back - height_waist_side)"/>
+        <m name="width_shoulder" value="0"/>
+        <m name="width_bust" value="0"/>
+        <m name="width_waist" value="0"/>
+        <m name="width_hip" value="0"/>
+        <m name="width_abdomen_to_hip" value="0"/>
+        <m name="indent_neck_back" value="0"/>
+        <m name="indent_waist_back" value="0"/>
+        <m name="indent_ankle_high" value="0"/>
+        <m name="hand_palm_length" value="0"/>
+        <m name="hand_length" value="0"/>
+        <m name="hand_palm_width" value="0"/>
+        <m name="hand_palm_circ" value="0"/>
+        <m name="hand_circ" value="0"/>
+        <m name="foot_width" value="0"/>
+        <m name="foot_length" value="0"/>
+        <m name="foot_circ" value="0"/>
+        <m name="foot_instep_circ" value="0"/>
+        <m name="head_circ" value="0"/>
+        <m name="head_length" value="0"/>
+        <m name="head_depth" value="0"/>
+        <m name="head_width" value="0"/>
+        <m name="head_crown_to_neck_back" value="(height - height_neck_back)"/>
+        <m name="head_chin_to_neck_back" value="(height - height_neck_back - head_length)"/>
+        <m name="neck_mid_circ" value="0"/>
+        <m name="neck_circ" value="0"/>
+        <m name="highbust_circ" value="0"/>
+        <m name="bust_circ" value="0"/>
+        <m name="lowbust_circ" value="0"/>
+        <m name="rib_circ" value="0"/>
+        <m name="waist_circ" value="0"/>
+        <m name="highhip_circ" value="0"/>
+        <m name="hip_circ" value="0"/>
+        <m name="neck_arc_f" value="0"/>
+        <m name="highbust_arc_f" value="0"/>
+        <m name="bust_arc_f" value="0"/>
+        <m name="lowbust_arc_f" value="0"/>
+        <m name="rib_arc_f" value="0"/>
+        <m name="waist_arc_f" value="0"/>
+        <m name="highhip_arc_f" value="0"/>
+        <m name="hip_arc_f" value="0"/>
+        <m name="neck_arc_half_f" value="(neck_arc_f/2)"/>
+        <m name="highbust_arc_half_f" value="(highbust_arc_f/2)"/>
+        <m name="bust_arc_half_f" value="(bust_arc_f/2)"/>
+        <m name="lowbust_arc_half_f" value="(lowbust_arc_f/2)"/>
+        <m name="rib_arc_half_f" value="(rib_arc_f/2)"/>
+        <m name="waist_arc_half_f" value="(waist_arc_f/2)"/>
+        <m name="highhip_arc_half_f" value="(highhip_arc_f/2)"/>
+        <m name="hip_arc_half_f" value="(hip_arc_f/2)"/>
+        <m name="neck_arc_b" value="(neck_circ - neck_arc_f)"/>
+        <m name="highbust_arc_b" value="(highbust_circ - highbust_arc_f)"/>
+        <m name="bust_arc_b" value="(bust_circ - bust_arc_f)"/>
+        <m name="lowbust_arc_b" value="(lowbust_circ - lowbust_arc_f)"/>
+        <m name="rib_arc_b" value="(rib_circ - rib_arc_f)"/>
+        <m name="waist_arc_b" value="(waist_circ - waist_arc_f)"/>
+        <m name="highhip_arc_b" value="(highhip_circ - highhip_arc_f)"/>
+        <m name="hip_arc_b" value="(hip_circ - hip_arc_f)"/>
+        <m name="neck_arc_half_b" value="(neck_arc_b/2)"/>
+        <m name="highbust_arc_half_b" value="(highbust_arc_b/2)"/>
+        <m name="bust_arc_half_b" value="(bust_arc_b/2)"/>
+        <m name="lowbust_arc_half_b" value="(lowbust_arc_b/2)"/>
+        <m name="rib_arc_half_b" value="(rib_arc_b/2)"/>
+        <m name="waist_arc_half_b" value="(waist_arc_b/2)"/>
+        <m name="highhip_arc_half_b" value="(highhip_arc_b/2)"/>
+        <m name="hip_arc_half_b" value="(hip_arc_b/2)"/>
+        <m name="hip_with_abdomen_arc_f" value="0"/>
+        <m name="body_armfold_circ" value="0"/>
+        <m name="body_bust_circ" value="0"/>
+        <m name="body_torso_circ" value="0"/>
+        <m name="hip_circ_with_abdomen" value="(hip_arc_b + hip_with_abdomen_arc_f)"/>
+        <m name="neck_front_to_waist_f" value="0"/>
+        <m name="neck_front_to_waist_flat_f" value="0"/>
+        <m name="armpit_to_waist_side" value="0"/>
+        <m name="shoulder_tip_to_waist_side_f" value="0"/>
+        <m name="neck_side_to_waist_f" value="0"/>
+        <m name="neck_side_to_waist_bustpoint_f" value="0"/>
+        <m name="neck_front_to_highbust_f" value="0"/>
+        <m name="highbust_to_waist_f" value="(neck_front_to_waist_f - neck_front_to_highbust_f)"/>
+        <m name="neck_front_to_bust_f" value="0"/>
+        <m name="bust_to_waist_f" value="(neck_front_to_waist_f - neck_front_to_bust_f)"/>
+        <m name="lowbust_to_waist_f" value="0"/>
+        <m name="rib_to_waist_side" value="0"/>
+        <m name="shoulder_tip_to_armfold_f" value="0"/>
+        <m name="neck_side_to_bust_f" value="0"/>
+        <m name="neck_side_to_highbust_f" value="0"/>
+        <m name="shoulder_center_to_highbust_f" value="0"/>
+        <m name="shoulder_tip_to_waist_side_b" value="0"/>
+        <m name="neck_side_to_waist_b" value="0"/>
+        <m name="neck_back_to_waist_b" value="0"/>
+        <m name="neck_side_to_waist_scapula_b" value="0"/>
+        <m name="neck_back_to_highbust_b" value="0"/>
+        <m name="highbust_to_waist_b" value="(neck_back_to_waist_b - neck_back_to_highbust_b)"/>
+        <m name="neck_back_to_bust_b" value="0"/>
+        <m name="bust_to_waist_b" value="(neck_back_to_waist_b - neck_back_to_bust_b)"/>
+        <m name="lowbust_to_waist_b" value="0"/>
+        <m name="shoulder_tip_to_armfold_b" value="0"/>
+        <m name="neck_side_to_bust_b" value="0"/>
+        <m name="neck_side_to_highbust_b" value="0"/>
+        <m name="shoulder_center_to_highbust_b" value="0"/>
+        <m name="waist_to_highhip_f" value="0"/>
+        <m name="waist_to_hip_f" value="0"/>
+        <m name="waist_to_highhip_side" value="0"/>
+        <m name="waist_to_highhip_b" value="0"/>
+        <m name="waist_to_hip_b" value="0"/>
+        <m name="waist_to_hip_side" value="0"/>
+        <m name="shoulder_slope_neck_side_angle" value="0"/>
+        <m name="shoulder_slope_neck_side_length" value="0"/>
+        <m name="shoulder_slope_neck_back_angle" value="0"/>
+        <m name="shoulder_slope_neck_back_height" value="0"/>
+        <m name="shoulder_slope_shoulder_tip_angle" value="0"/>
+        <m name="neck_back_to_across_back" value="0"/>
+        <m name="across_back_to_waist_b" value="(neck_back_to_waist_b - neck_back_to_across_back)"/>
+        <m name="shoulder_length" value="0"/>
+        <m name="shoulder_tip_to_shoulder_tip_f" value="0"/>
+        <m name="across_chest_f" value="0"/>
+        <m name="armfold_to_armfold_f" value="0"/>
+        <m name="shoulder_tip_to_shoulder_tip_half_f" value="(shoulder_tip_to_shoulder_tip_f/2)"/>
+        <m name="across_chest_half_f" value="(across_chest_f/2)"/>
+        <m name="shoulder_tip_to_shoulder_tip_b" value="0"/>
+        <m name="across_back_b" value="0"/>
+        <m name="armfold_to_armfold_b" value="0"/>
+        <m name="shoulder_tip_to_shoulder_tip_half_b" value="(shoulder_tip_to_shoulder_tip_b/2)"/>
+        <m name="across_back_half_b" value="(across_back_b/2)"/>
+        <m name="neck_front_to_shoulder_tip_f" value="0"/>
+        <m name="neck_back_to_shoulder_tip_b" value="0"/>
+        <m name="neck_width" value="0"/>
+        <m name="bustpoint_to_bustpoint" value="0"/>
+        <m name="bustpoint_to_neck_side" value="0"/>
+        <m name="bustpoint_to_lowbust" value="0"/>
+        <m name="bustpoint_to_waist" value="0"/>
+        <m name="bustpoint_to_bustpoint_half" value="(bustpoint_to_bustpoint/2)"/>
+        <m name="bustpoint_neck_side_to_waist" value="(bustpoint_to_neck_side + bustpoint_to_waist)"/>
+        <m name="bustpoint_to_shoulder_tip" value="0"/>
+        <m name="bustpoint_to_waist_front" value="0"/>
+        <m name="bustpoint_to_bustpoint_halter" value="0"/>
+        <m name="shoulder_tip_to_waist_front" value="0"/>
+        <m name="neck_front_to_waist_side" value="0"/>
+        <m name="neck_side_to_waist_side_f" value="0"/>
+        <m name="shoulder_tip_to_waist_back" value="0"/>
+        <m name="shoulder_tip_to_waist_b_1in_offset" value="0"/>
+        <m name="neck_back_to_waist_side" value="0"/>
+        <m name="neck_side_to_waist_side_b" value="0"/>
+        <m name="neck_side_to_armfold_f" value="0"/>
+        <m name="neck_side_to_armpit_f" value="0"/>
+        <m name="neck_side_to_bust_side_f" value="0"/>
+        <m name="neck_side_to_armfold_b" value="0"/>
+        <m name="neck_side_to_armpit_b" value="0"/>
+        <m name="neck_side_to_bust_side_b" value="0"/>
+        <m name="arm_shoulder_tip_to_wrist_bent" value="0"/>
+        <m name="arm_shoulder_tip_to_elbow_bent" value="0"/>
+        <m name="arm_elbow_to_wrist_bent" value="(arm_shoulder_tip_to_wrist_bent - arm_shoulder_tip_to_elbow_bent)"/>
+        <m name="arm_elbow_circ_bent" value="0"/>
+        <m name="arm_shoulder_tip_to_wrist" value="0"/>
+        <m name="arm_shoulder_tip_to_elbow" value="0"/>
+        <m name="arm_elbow_to_wrist" value="(arm_shoulder_tip_to_wrist - arm_shoulder_tip_to_elbow)"/>
+        <m name="arm_armpit_to_wrist" value="0"/>
+        <m name="arm_armpit_to_elbow" value="0"/>
+        <m name="arm_elbow_to_wrist_inside" value="(arm_armpit_to_wrist - arm_armpit_to_elbow)"/>
+        <m name="arm_upper_circ" value="0"/>
+        <m name="arm_above_elbow_circ" value="0"/>
+        <m name="arm_elbow_circ" value="0"/>
+        <m name="arm_lower_circ" value="0"/>
+        <m name="arm_wrist_circ" value="0"/>
+        <m name="arm_shoulder_tip_to_armfold_line" value="0"/>
+        <m name="arm_neck_side_to_wrist" value="(shoulder_length + arm_shoulder_tip_to_wrist)"/>
+        <m name="arm_neck_side_to_finger_tip" value="(shoulder_length + arm_shoulder_tip_to_wrist + hand_length)"/>
+        <m name="armscye_circ" value="0"/>
+        <m name="armscye_length" value="0"/>
+        <m name="armscye_width" value="0"/>
+        <m name="arm_neck_side_to_outer_elbow" value="(shoulder_length + arm_shoulder_tip_to_elbow)"/>
+        <m name="leg_crotch_to_floor" value="0"/>
+        <m name="leg_waist_side_to_floor" value="0"/>
+        <m name="leg_thigh_upper_circ" value="0"/>
+        <m name="leg_thigh_mid_circ" value="0"/>
+        <m name="leg_knee_circ" value="0"/>
+        <m name="leg_knee_small_circ" value="0"/>
+        <m name="leg_calf_circ" value="0"/>
+        <m name="leg_ankle_high_circ" value="0"/>
+        <m name="leg_ankle_circ" value="0"/>
+        <m name="leg_knee_circ_bent" value="0"/>
+        <m name="leg_ankle_diag_circ" value="0"/>
+        <m name="leg_crotch_to_ankle" value="(leg_crotch_to_floor - height_ankle)"/>
+        <m name="leg_waist_side_to_ankle" value="(leg_waist_side_to_floor - height_ankle)"/>
+        <m name="leg_waist_side_to_knee" value="(leg_waist_side_to_floor - height_knee)"/>
+        <m name="crotch_length" value="0"/>
+        <m name="crotch_length_b" value="0"/>
+        <m name="crotch_length_f" value="(crotch_length - crotch_length_b)"/>
+        <m name="rise_length_side_sitting" value="0"/>
+        <m name="rise_length_diag" value="0"/>
+        <m name="rise_length_b" value="0"/>
+        <m name="rise_length_f" value="0"/>
+        <m name="rise_length_side" value="0"/>
+        <m name="neck_back_to_waist_front" value="0"/>
+        <m name="waist_to_waist_halter" value="0"/>
+        <m name="waist_natural_circ" value="0"/>
+        <m name="waist_natural_arc_f" value="0"/>
+        <m name="waist_natural_arc_b" value="(waist_natural_circ - waist_natural_arc_f)"/>
+        <m name="waist_to_natural_waist_f" value="0"/>
+        <m name="waist_to_natural_waist_b" value="0"/>
+        <m name="arm_neck_back_to_elbow_bent" value="0"/>
+        <m name="arm_neck_back_to_wrist_bent" value="0"/>
+        <m name="arm_neck_side_to_elbow_bent" value="0"/>
+        <m name="arm_neck_side_to_wrist_bent" value="0"/>
+        <m name="arm_across_back_center_to_elbow_bent" value="0"/>
+        <m name="arm_across_back_center_to_wrist_bent" value="0"/>
+        <m name="arm_armscye_back_center_to_wrist_bent" value="0"/>
+        <m name="neck_back_to_bust_front" value="0"/>
+        <m name="neck_back_to_armfold_front" value="0"/>
+        <m name="neck_back_to_armfold_front_to_waist_side" value="0"/>
+        <m name="highbust_back_over_shoulder_to_armfold_front" value="0"/>
+        <m name="highbust_back_over_shoulder_to_waist_front" value="0"/>
+        <m name="neck_back_to_armfold_front_to_neck_back" value="0"/>
+        <m name="across_back_center_to_armfold_front_to_across_back_center" value="0"/>
+        <m name="neck_back_to_armfold_front_to_highbust_back" value="0"/>
+        <m name="armfold_to_armfold_bust" value="0"/>
+        <m name="armfold_to_bust_front" value="0"/>
+        <m name="highbust_b_over_shoulder_to_highbust_f" value="0"/>
+        <m name="armscye_arc" value="0"/>
+        <m name="dart_width_shoulder" value="0"/>
+        <m name="dart_width_bust" value="0"/>
+        <m name="dart_width_waist" value="0"/>
+    </body-measurements>
+</vit>

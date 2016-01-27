@@ -26,6 +26,7 @@
 #include <sstream>
 #include <QException>
 #include <QVector>
+#include <QCoreApplication>
 
 #include "qmuparserdef.h"
 #include "qmutranslation.h"
@@ -93,7 +94,7 @@ enum EErrorCodes
 //---------------------------------------------------------------------------
 /** @brief A class that handles the error messages.
 */
-class QmuParserErrorMsg
+class QMUPARSERSHARED_EXPORT QmuParserErrorMsg
 {
 public:
     typedef QmuParserErrorMsg self_type;
@@ -140,7 +141,7 @@ public:
     QmuParserError ( const QString &a_szMsg, int a_iPos, const QString &sTok = QString() );
     QmuParserError ( const QmuParserError &a_Obj );
     QmuParserError& operator= ( const QmuParserError &a_Obj );
-    virtual ~QmuParserError() QMUP_NOEXCEPT_EXPR (true){}
+    virtual ~QmuParserError() QMUP_NOEXCEPT_EXPR (true) Q_DECL_OVERRIDE {}
 
     void           SetFormula ( const QString &a_strFormula );
     const QString& GetExpr() const;
@@ -148,8 +149,8 @@ public:
     int            GetPos() const;
     const QString& GetToken() const;
     EErrorCodes    GetCode() const;
-    Q_NORETURN virtual void   raise() const;
-    virtual QmuParserError *clone() const;
+    Q_NORETURN virtual void   raise() const Q_DECL_OVERRIDE;
+    virtual QmuParserError *clone() const Q_DECL_OVERRIDE;
 private:
     QString m_sMsg;      ///< The message string
     QString m_sExpr;     ///< Formula string

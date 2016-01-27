@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vposition.h"
+#include "../vmisc/def.h"
 
 #include <QPointF>
 #include <QRectF>
@@ -37,13 +38,20 @@
 #include <QPainter>
 #include <QCoreApplication>
 #include <QDir>
-#include <QtMath>
+#include <QtWidgets>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../vmisc/vmath.h"
+#else
+#   include <QtMath>
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, bool *stop, bool rotate,
-                     int rotationIncrease)
-    :QRunnable(), bestResult(VBestSquare()), gContour(gContour), detail(detail), i(i), j(j), paperIndex(0), frame(0),
-      detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop), rotate(rotate), rotationIncrease(rotationIncrease)
+VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detail, int i, volatile bool *stop,
+                     bool rotate, int rotationIncrease, bool saveLength)
+    :QRunnable(), bestResult(VBestSquare(gContour.GetSize(), saveLength)), gContour(gContour), detail(detail), i(i),
+      j(j), paperIndex(0), frame(0), detailsCount(0), details(QVector<VLayoutDetail>()), stop(stop), rotate(rotate),
+      rotationIncrease(rotationIncrease), angle_between(0)
 {
     if ((rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0) == false)
     {
@@ -54,8 +62,6 @@ VPosition::VPosition(const VContour &gContour, int j, const VLayoutDetail &detai
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::run()
 {
-    QCoreApplication::processEvents();
-
     if (*stop)
     {
         return;
@@ -91,6 +97,7 @@ void VPosition::run()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VPosition::getPaperIndex() const
 {
     return paperIndex;
@@ -103,6 +110,7 @@ void VPosition::setPaperIndex(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VPosition::getFrame() const
 {
     return frame;
@@ -115,6 +123,7 @@ void VPosition::setFrame(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 quint32 VPosition::getDetailsCount() const
 {
     return detailsCount;
@@ -142,33 +151,32 @@ VBestSquare VPosition::getBestResult() const
 void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, int frame, quint32 paperIndex,
                           int detailsCount, const QVector<VLayoutDetail> &details)
 {
-    QImage frameImage(contour.GetWidth()*2, contour.GetHeight()*2, QImage::Format_RGB32);
-    frameImage.fill(Qt::white);
-    QPainter paint;
-    paint.begin(&frameImage);
+    const int biasWidth = Bias(contour.GetWidth(), QIMAGE_MAX);
+    const int biasHeight = Bias(contour.GetHeight(), QIMAGE_MAX);
 
-    paint.setPen(QPen(Qt::darkRed, 15, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-    paint.drawRect(QRectF(contour.GetWidth()/2, contour.GetHeight()/2, contour.GetWidth(), contour.GetHeight()));
+    QPicture picture;
+    QPainter paint;
+    paint.begin(&picture);
 
     paint.setPen(QPen(Qt::black, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     QPainterPath p;
     if (contour.GetContour().isEmpty())
     {
-        p = DrawContour(contour.CutEdge(QLineF(0, 0, contour.GetWidth(), 0)));
-        p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
+        p = DrawContour(contour.CutEdge(contour.EmptySheetEdge()));
+        p.translate(biasWidth/2, biasHeight/2);
         paint.drawPath(p);
     }
     else
     {
         p = DrawContour(contour.GetContour());
-        p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
+        p.translate(biasWidth/2, biasHeight/2);
         paint.drawPath(p);
     }
 
 #ifdef SHOW_CANDIDATE
     paint.setPen(QPen(Qt::darkGreen, 6, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     p = DrawContour(detail.GetLayoutAllowencePoints());
-    p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
+    p.translate(biasWidth/2, biasHeight/2);
     paint.drawPath(p);
 #else
     Q_UNUSED(detail)
@@ -178,16 +186,56 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
 #ifdef ARRANGED_DETAILS
     paint.setPen(QPen(Qt::blue, 2, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
     p = DrawDetails(details);
-    p.translate(contour.GetWidth()/2, contour.GetHeight()/2);
+    p.translate(biasWidth/2, biasHeight/2);
     paint.drawPath(p);
 #else
     Q_UNUSED(details)
 #endif
 
+    // Calculate bounding rect before draw sheet rect
+    const QRect pictureRect = picture.boundingRect();
+
+    // Sheet
+#ifdef SHOW_SHEET
+    paint.setPen(QPen(Qt::darkRed, 15, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+    paint.drawRect(QRectF(biasWidth/2, biasHeight/2, contour.GetWidth(), contour.GetHeight()));
+#endif
+
     paint.end();
+
+    // Dump frame to image
+    // Note. If program was build with Address Sanitizer possible crashes. Address Sanitizer doesn't support big
+    // allocations. See page https://bitbucket.org/dismine/valentina/wiki/developers/Address_Sanitizer
+    QImage frameImage(pictureRect.width()+biasWidth, pictureRect.height()+biasHeight, QImage::Format_RGB32);
+
+    if (frameImage.isNull())
+    {
+        return;
+    }
+
+    frameImage.fill(Qt::white);
+
+    QPainter paintFrameImage;
+    paintFrameImage.begin(&frameImage);
+    paintFrameImage.drawPicture(0, 0, picture);
+    paintFrameImage.end();
+
     const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug/")+QString("%1_%2_%3.png").arg(paperIndex)
             .arg(detailsCount).arg(frame);
     frameImage.save (path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPosition::Bias(int length, int maxLength)
+{
+    if (length < maxLength && length*2 < maxLength)
+    {
+        return length;
+    }
+    else
+    {
+        return maxLength-length;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -196,13 +244,12 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutDetail &deta
 {
     QVector<QPointF> newGContour = gContour.UniteWithContour(detail, globalI, detJ, type);
     newGContour.append(newGContour.first());
-    const QRectF rec = QPolygonF(newGContour).boundingRect();
-    bestResult.NewResult(static_cast<qint64>(rec.width()*rec.height()), globalI, detJ, detail.GetMatrix(),
-                         detail.IsMirror(), type);
+    const QSizeF size = QPolygonF(newGContour).boundingRect().size();
+    bestResult.NewResult(size, globalI, detJ, detail.GetMatrix(), detail.IsMirror(), type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) const
+bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
 {
     const QLineF globalEdge = gContour.GlobalEdge(j);
     bool flagMirror = false;
@@ -219,7 +266,14 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge) cons
     CrossingType type = CrossingType::Intersection;
     if (SheetContains(detail.BoundingRect()))
     {
-        type = Crossing(detail, j, dEdge);
+        if (not gContour.GetContour().isEmpty())
+        {
+            type = Crossing(detail, j, dEdge);
+        }
+        else
+        {
+            type = CrossingType::NoIntersection;
+        }
     }
 
     switch (type)
@@ -443,8 +497,8 @@ VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, cons
 
         for (int i=0; i<polyCorners; i++)
         {
-            const qreal xi = gContour.at(i).x();
-            const qreal xj = gContour.at(j).x();
+            const qreal xi = gContour.at(i).x(); //-V807
+            const qreal xj = gContour.at(j).x(); //-V807
             const qreal yi = gContour.at(i).y();
             const qreal yj = gContour.at(j).y();
             if (qFuzzyCompare(yj, yi))
@@ -485,9 +539,10 @@ VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, cons
                     const qreal yi = gContour.at(i).y();
                     const qreal yj = gContour.at(j).y();
 
-                    if (((yi < p.at(n).y() && yj >= p.at(n).y()) || (yj < p.at(n).y() && yi >= p.at(n).y())))
+					const QPointF &pn = p.at(n);
+                    if (((yi < pn.y() && yj >= pn.y()) || (yj < pn.y() && yi >= pn.y())))
                     {
-                        oddNodes ^= (p.at(n).y() * multiple.at(i) + constant.at(i) < p.at(n).x());
+                        oddNodes ^= (pn.y() * multiple.at(i) + constant.at(i) < pn.x());
                     }
 
                     j=i;
@@ -517,7 +572,7 @@ bool VPosition::SheetContains(const QRectF &rect) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge) const
+void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge)
 {
     QLineF detailEdge = detail.Edge(dEdge);
 
@@ -527,11 +582,14 @@ void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, co
 
     detailEdge.translate(dx, dy); // Use values for translate detail edge.
 
-    const qreal angle_between = globalEdge.angleTo(detailEdge); // Seek angle between two edges.
+    angle_between = globalEdge.angleTo(detailEdge); // Seek angle between two edges.
 
     // Now we move detail to position near to global contour edge.
     detail.Translate(dx, dy);
-    detail.Rotate(detailEdge.p2(), -angle_between);
+    if (not qFuzzyCompare(angle_between+360, 0+360))
+    {
+        detail.Rotate(detailEdge.p2(), -angle_between);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -551,7 +609,7 @@ void VPosition::RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, unsigned int shift)
+void VPosition::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ, quint32 shift)
 {
     int processedEdges = 0;
     const int nD = detail.EdgesCount();
@@ -573,6 +631,7 @@ void VPosition::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &deta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
 QPolygonF VPosition::GlobalPolygon() const
 {
     QVector<QPointF> points = gContour.GetContour();
@@ -581,7 +640,7 @@ QPolygonF VPosition::GlobalPolygon() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPosition::CutEdge(const QLineF &edge, unsigned int shift)
+QVector<QPointF> VPosition::CutEdge(const QLineF &edge, quint32 shift)
 {
     QVector<QPointF> points;
     if (shift == 0)
@@ -615,14 +674,17 @@ QVector<QPointF> VPosition::CutEdge(const QLineF &edge, unsigned int shift)
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::Rotate(int increase)
 {
-    for (int angle = 0; angle <= 360; angle = angle+increase)
+    int startAngle = 0;
+    if (qFuzzyCompare(angle_between+360, 0+360))
+    {
+        startAngle = increase;
+    }
+    for (int angle = startAngle; angle < 360; angle = angle+increase)
     {
         if (*stop)
         {
             return;
         }
-
-        QCoreApplication::processEvents();
 
         // We should use copy of the detail.
         VLayoutDetail workDetail = detail;

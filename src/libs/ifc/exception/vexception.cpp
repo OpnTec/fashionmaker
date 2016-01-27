@@ -27,22 +27,25 @@
  *************************************************************************/
 
 #include "vexception.h"
+#include "../vmisc/logging.h"
+#include "../vmisc/def.h"
+
 #include <QGridLayout>
 #include <QMessageBox>
 #include <QSpacerItem>
 #include <QApplication>
-#include <QLoggingCategory>
 
-Q_LOGGING_CATEGORY(vExcep, "v.excep")
+//Q_LOGGING_CATEGORY(vExcep, "v.excep") //Commented because don't use now
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VException constructor exception
- * @param what string with error
+ * @param error string with error
  */
-VException::VException(const QString &what):QException(), what(what), moreInfo(QString())
+VException::VException(const QString &error)
+    :QException(), error(error), moreInfo(QString())
 {
-    Q_ASSERT_X(what.isEmpty() == false, Q_FUNC_INFO, "Error message is empty");
+    Q_ASSERT_X(not error.isEmpty(), Q_FUNC_INFO, "Error message is empty");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -50,7 +53,7 @@ VException::VException(const QString &what):QException(), what(what), moreInfo(Q
  * @brief VException copy constructor
  * @param e exception
  */
-VException::VException(const VException &e):what(e.What()), moreInfo(e.MoreInformation())
+VException::VException(const VException &e):error(e.WhatUtf8()), moreInfo(e.MoreInformation())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,7 +63,7 @@ VException &VException::operator=(const VException &e)
     {
         return *this;
     }
-    this->what = e.What();
+    this->error = e.WhatUtf8();
     this->moreInfo = e.MoreInformation();
     return *this;
 }
@@ -72,38 +75,7 @@ VException &VException::operator=(const VException &e)
  */
 QString VException::ErrorMessage() const
 {
-    QString error = QString("Exception: %1").arg(what);
-    return error;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CriticalMessageBox show Critical Message Box.
- * @param situation main text message box.
- */
-void VException::CriticalMessageBox(const QString &situation, QWidget * parent) const
-{
-    QMessageBox msgBox(parent);
-    msgBox.setWindowTitle(tr("Critical error!"));
-    msgBox.setText(situation);
-    msgBox.setInformativeText(ErrorMessage());
-    msgBox.setStandardButtons(QMessageBox::Ok);
-    msgBox.setDefaultButton(QMessageBox::Ok);
-    if (moreInfo.isEmpty() == false)
-    {
-        msgBox.setDetailedText(DetailedInformation());
-    }
-    msgBox.setIcon(QMessageBox::Critical);
-    QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    QGridLayout* layout = static_cast<QGridLayout*>(msgBox.layout());
-    SCASSERT(layout != nullptr);
-    layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-    //Disable Qt::WaitCursor for error message.
-#ifndef QT_NO_CURSOR
-    QApplication::restoreOverrideCursor();
-#endif
-    qCDebug(vExcep)<<"Critical error!"<<situation<<ErrorMessage()<<DetailedInformation();
-    msgBox.exec();
+    return QString("Exception: %1").arg(error);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -158,7 +130,53 @@ VException *VException::clone() const
 /**
  * @brief raise method raise for exception
  */
+// cppcheck-suppress unusedFunction
 Q_NORETURN void VException::raise() const
 {
     throw *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+const char* VException::what() const V_NOEXCEPT_EXPR (true)
+{
+    return error.toUtf8().constData();
+}
+
+//-----------------------------------------VExceptionToolWasDeleted----------------------------------------------------
+VExceptionToolWasDeleted::VExceptionToolWasDeleted(const QString &error)
+    :VException(error)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VExceptionToolWasDeleted::VExceptionToolWasDeleted(const VExceptionToolWasDeleted &e)
+    :VException(e)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VExceptionToolWasDeleted &VExceptionToolWasDeleted::operator=(const VExceptionToolWasDeleted &e)
+{
+    if ( &e == this )
+    {
+        return *this;
+    }
+    VException::operator=(e);
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief raise method raise for exception
+ */
+// cppcheck-suppress unusedFunction
+Q_NORETURN void VExceptionToolWasDeleted::VExceptionToolWasDeleted::raise() const
+{
+    throw *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VExceptionToolWasDeleted *VExceptionToolWasDeleted::clone() const
+{
+    return new VExceptionToolWasDeleted(*this);
 }

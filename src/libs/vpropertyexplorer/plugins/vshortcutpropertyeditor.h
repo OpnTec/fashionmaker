@@ -37,8 +37,8 @@ class VPROPERTYEXPLORERSHARED_EXPORT VShortcutEditWidget : public QWidget
     Q_OBJECT
 
 public:
-    VShortcutEditWidget(QWidget* parent);
-    virtual ~VShortcutEditWidget();
+    explicit VShortcutEditWidget(QWidget* parent);
+    virtual ~VShortcutEditWidget() Q_DECL_OVERRIDE;
 
     //! Needed for proper event handling
     bool eventFilter(QObject* obj, QEvent* evenvt);
