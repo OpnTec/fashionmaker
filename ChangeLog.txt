@@ -1,4 +1,4 @@
-# Version 0.4.1
+# Version 0.4.1 January 29, 2016
 - [#438] Broken switching pattern pieces.
 - Fixed wrong title for dialog "New pattern".
 
