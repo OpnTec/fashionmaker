@@ -1181,8 +1181,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolPointOfIntersectionCurves(VPrope
     const QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
-    auto i = qgraphicsitem_cast<VToolPointOfIntersectionCurves *>(currentItem);
-    SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
