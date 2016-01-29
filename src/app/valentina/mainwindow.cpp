@@ -1870,7 +1870,6 @@ void MainWindow::ActionDraw(bool checked)
         drawMode = true;
 
         SetEnableTool(true);
-        doc->setCurrentData();
         ui->toolBox->setCurrentIndex(currentToolBoxIndex);
 
         ui->actionHistory->setEnabled(true);
@@ -1913,10 +1912,18 @@ void MainWindow::ActionDetails(bool checked)
     if (checked)
     {
         ArrowTool();
-        const QHash<quint32, VDetail> *details = pattern->DataDetails();
+
+        if(drawMode)
+        {
+            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+            drawMode = false;
+        }
+        comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);// Need to get data about all details
+        comboBoxDraws->setEnabled(false);
+
         if(not qApp->getOpeningPattern())
         {
-            if (details->count() == 0)
+            if (pattern->DataDetails()->count() == 0)
             {
                 QMessageBox::information(this, tr("Detail mode"), tr("You can't use now the Detail mode. "
                                                                      "Please, create at least one workpiece."),
@@ -1941,14 +1948,6 @@ void MainWindow::ActionDetails(bool checked)
         ui->view->setScene(currentScene);
         disconnect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
         RestoreCurrentScene();
-
-        if(drawMode)
-        {
-            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
-            drawMode = false;
-        }
-        comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);
-        comboBoxDraws->setEnabled(false);
 
         if (mode == Draw::Calculation)
         {
@@ -2000,6 +1999,15 @@ void MainWindow::ActionLayout(bool checked)
     if (checked)
     {
         ArrowTool();
+
+        if(drawMode)
+        {
+            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+            drawMode = false;
+        }
+        comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);// Need to get data about all details
+        comboBoxDraws->setEnabled(false);
+
         const QHash<quint32, VDetail> *details = pattern->DataDetails();
         if(not qApp->getOpeningPattern())
         {
@@ -2012,6 +2020,8 @@ void MainWindow::ActionLayout(bool checked)
                 return;
             }
         }
+
+        comboBoxDraws->setCurrentIndex(-1);// Hide pattern pieces
 
         qCDebug(vMainWindow, "Show layout scene");
 
@@ -2029,14 +2039,6 @@ void MainWindow::ActionLayout(bool checked)
         ui->view->itemClicked(nullptr);
         ui->view->setScene(currentScene);
         disconnect(ui->view, &VMainGraphicsView::NewFactor, sceneDraw, &VMainGraphicsScene::SetFactor);
-
-        if(drawMode)
-        {
-            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
-            drawMode = false;
-        }
-        comboBoxDraws->setCurrentIndex(-1);
-        comboBoxDraws->setEnabled(false);
 
         if (mode == Draw::Calculation)
         {
@@ -3912,7 +3914,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
     if (index != -1)
     {
         doc->ChangeActivPP(comboBoxDraws->itemText(index));
-        doc->LiteParseTree(Document::LiteParse);
+        doc->setCurrentData();
         emit RefreshHistory();
         if (drawMode)
         {
