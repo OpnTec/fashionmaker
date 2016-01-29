@@ -293,7 +293,9 @@ COLLECTION_FILES += \
     $${PWD}/../../app/share/collection/0.7_Armhole_adjustment_0.10.val \
     $${PWD}/../../app/share/collection/my_calculated_measurements_for_val.vit \
     $${PWD}/../../app/share/collection/Keiko_skirt.val \
-    $${PWD}/../../app/share/collection/keiko.vit
+    $${PWD}/../../app/share/collection/keiko.vit \
+    $${PWD}/../../app/share/collection/medidas_eli2015.vit \
+    $${PWD}/../../app/share/collection/pantalon_base_Eli.val
 
 
 # Compilation will fail without this files after we added them to this section.
