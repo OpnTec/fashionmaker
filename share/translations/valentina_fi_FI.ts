@@ -2395,7 +2395,7 @@ Apply settings anyway?</source>
     <name>DialogNewPattern</name>
     <message>
         <source>Individual measurements</source>
-        <translation>Yksilölliset mitat</translation>
+        <translation type="vanished">Yksilölliset mitat</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
@@ -2427,6 +2427,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique pattern piece name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2593,6 +2597,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open only for read</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3126,6 +3138,45 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogPointOfIntersectionCurves</name>
+    <message>
+        <source>Tool point of intersection curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second curve:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unique label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose unique label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical correction:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal correction:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select second curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogSaveLAyout</name>
     <message>
         <source>Save Layout</source>
@@ -3504,6 +3555,22 @@ Apply settings anyway?</source>
     <message>
         <source>Second point</source>
         <translation>Toinen piste</translation>
+    </message>
+    <message>
+        <source>Highest point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4747,6 +4814,18 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Report Bug...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point intersection curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(read only)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6613,6 +6692,10 @@ Do you want to save your changes?</source>
         <source>Error not unique id.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating point of intersection curves</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -6835,6 +6918,34 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool to make point from arc and tangent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Highest point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool to make point from intersection two curves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal correction</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
