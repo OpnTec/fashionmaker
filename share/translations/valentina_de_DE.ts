@@ -2406,7 +2406,7 @@ Apply settings anyway?</source>
     <name>DialogNewPattern</name>
     <message>
         <source>Individual measurements</source>
-        <translation>Individuelle Maße</translation>
+        <translation type="vanished">Individuelle Maße</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
@@ -2439,6 +2439,10 @@ Apply settings anyway?</source>
     <message>
         <source>Choose unique pattern piece name.</source>
         <translation>Eindeutigen Namen für das Schnitteil eingeben. </translation>
+    </message>
+    <message>
+        <source>New pattern</source>
+        <translation type="unfinished">Neues Schnittmuster</translation>
     </message>
 </context>
 <context>

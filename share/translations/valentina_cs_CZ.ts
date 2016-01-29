@@ -2395,7 +2395,7 @@ Apply settings anyway?</source>
     <name>DialogNewPattern</name>
     <message>
         <source>Individual measurements</source>
-        <translation>Individuální míry</translation>
+        <translation type="vanished">Individuální míry</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
@@ -2427,6 +2427,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Choose unique pattern piece name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

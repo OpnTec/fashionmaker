@@ -2423,7 +2423,7 @@ Apply settings anyway?</source>
     <name>DialogNewPattern</name>
     <message>
         <source>Individual measurements</source>
-        <translation>Индивидуальные мерки</translation>
+        <translation type="vanished">Индивидуальные мерки</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
@@ -2456,6 +2456,10 @@ Apply settings anyway?</source>
     <message>
         <source>Choose unique pattern piece name.</source>
         <translation>Выберете уникальное имя чертежа.</translation>
+    </message>
+    <message>
+        <source>New pattern</source>
+        <translation type="unfinished">Новое лекало</translation>
     </message>
 </context>
 <context>
