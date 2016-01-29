@@ -2425,7 +2425,7 @@ Apply settings anyway?</source>
     <name>DialogNewPattern</name>
     <message>
         <source>Individual measurements</source>
-        <translation>Індивідуальні мірки</translation>
+        <translation type="vanished">Індивідуальні мірки</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
@@ -2458,6 +2458,10 @@ Apply settings anyway?</source>
     <message>
         <source>Choose unique pattern piece name.</source>
         <translation>Виберіть унікальне ім&apos;я лекала.</translation>
+    </message>
+    <message>
+        <source>New pattern</source>
+        <translation type="unfinished">Нове лекало</translation>
     </message>
 </context>
 <context>

@@ -3901,20 +3901,32 @@ void MainWindow::ZoomFirstShow()
     /* If don't call ZoomFitBest() twice, after first scaling or moving pattern piece, scene change coordinate and whole
      * pattern will be moved. Looks very ugly. It is best solution that i have now.
      */
-    ActionDetails(true);
-    ui->view->ZoomFitBest();
 
-    ActionDraw(true);
+    if (pattern->DataDetails()->size() > 0)
+    {
+        ActionDetails(true);
+        ui->view->ZoomFitBest();
+    }
+
+    if (not ui->actionDraw->isChecked())
+    {
+        ActionDraw(true);
+    }
     ui->view->ZoomFitBest();
 
     VMainGraphicsView::NewSceneRect(sceneDraw, ui->view);
     VMainGraphicsView::NewSceneRect(sceneDetails, ui->view);
 
-    ActionDetails(true);
-    ui->view->ZoomFitBest();
+    if (pattern->DataDetails()->size() > 0)
+    {
+        ActionDetails(true);
+        ui->view->ZoomFitBest();
+    }
 
-    ActionDraw(true);
-    ui->view->ZoomFitBest();
+    if (not ui->actionDraw->isChecked())
+    {
+        ActionDraw(true);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

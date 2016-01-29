@@ -2418,7 +2418,7 @@ Appliquer les réglages quand-même ?</translation>
     <name>DialogNewPattern</name>
     <message>
         <source>Individual measurements</source>
-        <translation>Mesures individuelles</translation>
+        <translation type="vanished">Mesures individuelles</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
@@ -2450,6 +2450,10 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Choose unique pattern piece name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
