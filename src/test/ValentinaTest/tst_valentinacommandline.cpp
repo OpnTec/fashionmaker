@@ -257,24 +257,24 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     const QString testGOST = QString("--test;;-m;;%1").arg(tmp + QDir::separator() + QLatin1Literal("GOST_man_ru.vst"));
     const QString keyTest = QStringLiteral("--test");
 
-    QTest::newRow("bra")             << "bra.val"             << keyTest  << true << V_EX_OK;
-    QTest::newRow("jacketМ1_52-176") << "jacketМ1_52-176.val" << testGOST << true << V_EX_OK;
-    QTest::newRow("jacketМ2_40-146") << "jacketМ2_40-146.val" << testGOST << true << V_EX_OK;
-    QTest::newRow("jacketМ3_40-146") << "jacketМ3_40-146.val" << testGOST << true << V_EX_OK;
-    QTest::newRow("jacketМ4_40-146") << "jacketМ4_40-146.val" << testGOST << true << V_EX_OK;
-    QTest::newRow("jacketМ5_30-110") << "jacketМ5_30-110.val" << testGOST << true << V_EX_OK;
-    QTest::newRow("jacketМ6_30-110") << "jacketМ6_30-110.val" << testGOST << true << V_EX_OK;
-    QTest::newRow("pantsМ1_52-176")  << "pantsМ1_52-176.val"  << testGOST << true << V_EX_OK;
-    QTest::newRow("pantsМ2_40-146")  << "pantsМ2_40-146.val"  << testGOST << true << V_EX_OK;
-    QTest::newRow("pantsМ7")         << "pantsМ7.val"         << testGOST << true << V_EX_OK;
-    QTest::newRow("TShirt_test")     << "TShirt_test.val"     << keyTest  << true << V_EX_OK;
-    QTest::newRow("TestDart")        << "TestDart.val"        << keyTest  << true << V_EX_OK;
-    QTest::newRow("patrón_blusa")    << "patrón_blusa.val"    << keyTest  << true << V_EX_OK;
-    QTest::newRow("PajamaTopWrap2")  << "PajamaTopWrap2.val"  << keyTest  << true << V_EX_OK;
-    QTest::newRow("Keiko_skirt")     << "Keiko_skirt.val"     << keyTest  << true << V_EX_OK;
+    QTest::newRow("bra")               << "bra.val"               << keyTest  << true << V_EX_OK;
+    QTest::newRow("jacketМ1_52-176")   << "jacketМ1_52-176.val"   << testGOST << true << V_EX_OK;
+    QTest::newRow("jacketМ2_40-146")   << "jacketМ2_40-146.val"   << testGOST << true << V_EX_OK;
+    QTest::newRow("jacketМ3_40-146")   << "jacketМ3_40-146.val"   << testGOST << true << V_EX_OK;
+    QTest::newRow("jacketМ4_40-146")   << "jacketМ4_40-146.val"   << testGOST << true << V_EX_OK;
+    QTest::newRow("jacketМ5_30-110")   << "jacketМ5_30-110.val"   << testGOST << true << V_EX_OK;
+    QTest::newRow("jacketМ6_30-110")   << "jacketМ6_30-110.val"   << testGOST << true << V_EX_OK;
+    QTest::newRow("pantsМ1_52-176")    << "pantsМ1_52-176.val"    << testGOST << true << V_EX_OK;
+    QTest::newRow("pantsМ2_40-146")    << "pantsМ2_40-146.val"    << testGOST << true << V_EX_OK;
+    QTest::newRow("pantsМ7")           << "pantsМ7.val"           << testGOST << true << V_EX_OK;
+    QTest::newRow("TShirt_test")       << "TShirt_test.val"       << keyTest  << true << V_EX_OK;
+    QTest::newRow("TestDart")          << "TestDart.val"          << keyTest  << true << V_EX_OK;
+    QTest::newRow("patrón_blusa")      << "patrón_blusa.val"      << keyTest  << true << V_EX_OK;
+    QTest::newRow("PajamaTopWrap2")    << "PajamaTopWrap2.val"    << keyTest  << true << V_EX_OK;
+    QTest::newRow("Keiko_skirt")       << "Keiko_skirt.val"       << keyTest  << true << V_EX_OK;
+    QTest::newRow("pantalon_base_Eli") << "pantalon_base_Eli.val" << keyTest  << true << V_EX_OK;
     QTest::newRow("Moulage_0.5_armhole_neckline") << "Moulage_0.5_armhole_neckline.val" << keyTest << true << V_EX_OK;
     QTest::newRow("0.7_Armhole_adjustment_0.10")  << "0.7_Armhole_adjustment_0.10.val"  << keyTest << true << V_EX_OK;
-    QTest::newRow("pantalon_base_Eli") << "pantalon_base_Eli.val" << keyTest  << true << V_EX_OK;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
