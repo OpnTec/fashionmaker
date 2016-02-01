@@ -83,7 +83,7 @@ quint32 DialogPointFromArcAndTangent::GetArcId() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromArcAndTangent::SetArcId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxArc, value);
+    setCurrentArcId(ui->comboBoxArc, value);
 
     VisToolPointFromArcAndTangent *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
     SCASSERT(point != nullptr);
