@@ -87,7 +87,7 @@ quint32 DialogPointOfIntersectionArcs::GetFirstArcId() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionArcs::SetFirstArcId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxArc1, value);
+    setCurrentArcId(ui->comboBoxArc1, value);
 
     VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
     SCASSERT(point != nullptr);
@@ -103,7 +103,7 @@ quint32 DialogPointOfIntersectionArcs::GetSecondArcId() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionArcs::SetSecondArcId(const quint32 &value)
 {
-    setCurrentPointId(ui->comboBoxArc2, value);
+    setCurrentArcId(ui->comboBoxArc2, value);
 
     VisToolPointOfIntersectionArcs *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
     SCASSERT(point != nullptr);
