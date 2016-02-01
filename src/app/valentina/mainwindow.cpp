@@ -481,19 +481,6 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToggleMSync(bool toggle)
-{
-    if (mChanges)
-    {
-        ui->actionSyncMeasurements->setEnabled(toggle);
-    }
-    else
-    {
-        ui->actionSyncMeasurements->setEnabled(false);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief OptionDraw help change name of pattern piece.
  */
@@ -1389,7 +1376,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
     }
 
     UpdateWindowTitle();
-    ToggleMSync(true);
+    ui->actionSyncMeasurements->setEnabled(mChanges);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1411,14 +1398,13 @@ void MainWindow::SyncMeasurements()
             doc->LiteParseTree(Document::LiteParse);
             mChanges = false;
             UpdateWindowTitle();
+            ui->actionSyncMeasurements->setEnabled(mChanges);
         }
         else
         {
             qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't sync measurements.")));
         }
     }
-
-    ToggleMSync(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
