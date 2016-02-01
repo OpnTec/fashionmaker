@@ -4,6 +4,9 @@
 - New icon for VAL file. Updated Tape logo. Updated ico for standard measurements.
 - [#325] Check pattern for inverse compatibility.
 
+# Version 0.4.2
+- [#442] 'Broken Formula' error when using Intersect Circles tool.
+
 # Version 0.4.1 January 29, 2016
 - [#438] Broken switching pattern pieces.
 - Fixed wrong title for dialog "New pattern".
