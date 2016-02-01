@@ -79,6 +79,7 @@ public slots:
 protected:
     virtual void CheckState() Q_DECL_OVERRIDE;
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+    virtual void showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(DialogEditWrongFormula)
     Ui::DialogEditWrongFormula *ui;

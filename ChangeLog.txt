@@ -5,6 +5,7 @@
 - [#325] Check pattern for inverse compatibility.
 
 # Version 0.4.2
+- [#439] Widen Formula Dialog.
 - Fixed broken tool dialogs "Intersection arcs" and "Point from arc and tangent".
 - [#442] 'Broken Formula' error when using Intersect Circles tool.
 
