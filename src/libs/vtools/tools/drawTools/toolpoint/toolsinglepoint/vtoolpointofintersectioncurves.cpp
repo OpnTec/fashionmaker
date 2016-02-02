@@ -121,8 +121,8 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const qui
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointOfIntersectionCurves::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointOfIntersectionCurves::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(firstCurveId);
-        doc->IncrementReferens(secondCurveId);
+        doc->IncrementReferens(curve1->getIdTool());
+        doc->IncrementReferens(curve2->getIdTool());
         return point;
     }
     return nullptr;
@@ -324,8 +324,11 @@ void VToolPointOfIntersectionCurves::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCurves::RemoveReferens()
 {
-    doc->DecrementReferens(firstCurveId);
-    doc->DecrementReferens(secondCurveId);
+    const auto curve1 = VAbstractTool::data.GetGObject(firstCurveId);
+    const auto curve2 = VAbstractTool::data.GetGObject(secondCurveId);
+
+    doc->DecrementReferens(curve1->getIdTool());
+    doc->DecrementReferens(curve2->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
