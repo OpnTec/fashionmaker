@@ -98,7 +98,8 @@ const QString autosavePrefix = QStringLiteral(".autosave");
 MainWindow::MainWindow(QWidget *parent)
     :MainWindowsNoGUI(parent), ui(new Ui::MainWindow), watcher(new QFileSystemWatcher(this)), currentTool(Tool::Arrow),
       lastUsedTool(Tool::Arrow), sceneDraw(nullptr), sceneDetails(nullptr),
-      mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), mChanges(false), patternReadOnly(false),
+      mouseCoordinate(nullptr), helpLabel(nullptr), isInitialized(false), mChanges(false), mChangesAsked(true),
+      patternReadOnly(false),
       dialogTable(nullptr),
       dialogTool(nullptr),
       dialogHistory(nullptr), comboBoxDraws(nullptr), patternPieceLabel(nullptr), mode(Draw::Calculation),
@@ -150,6 +151,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->dockWidgetLayoutPages->setVisible(false);
 
     connect(watcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::MeasurementsChanged);
+    connect(qApp, &QApplication::focusChanged, this, &MainWindow::OnWindowFocusChanged);
 
 #if defined(Q_OS_MAC)
     // On Mac deafault icon size is 32x32.
@@ -1358,6 +1360,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
     if (checkFile.exists())
     {
         mChanges = true;
+        mChangesAsked = false;
     }
     else
     {
@@ -1366,6 +1369,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
             if (checkFile.exists())
             {
                 mChanges = true;
+                mChangesAsked = false;
                 break;
             }
             else
@@ -1397,6 +1401,7 @@ void MainWindow::SyncMeasurements()
             VWidgetPopup::PopupMessage(this, msg);
             doc->LiteParseTree(Document::LiteParse);
             mChanges = false;
+            mChangesAsked = true;
             UpdateWindowTitle();
             ui->actionSyncMeasurements->setEnabled(mChanges);
         }
@@ -1405,6 +1410,29 @@ void MainWindow::SyncMeasurements()
             qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Couldn't sync measurements.")));
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::OnWindowFocusChanged(QWidget *old, QWidget *now)
+{
+    if (old == nullptr && isAncestorOf(now) == true)
+    {// focus IN
+        if (mChanges && not mChangesAsked)
+        {
+            const auto answer = QMessageBox::question(this, tr("Measurements"),
+                                                  tr("Measurements was changed. Do you want to sync measurements now?"),
+                                                      QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+            if (answer == QMessageBox::Yes)
+            {
+                SyncMeasurements();
+            }
+            mChangesAsked = true;
+        }
+    }
+
+    // In case we will need it
+    // else if (isAncestorOf(old) == true && now == nullptr)
+    // focus OUT
 }
 
 //---------------------------------------------------------------------------------------------------------------------

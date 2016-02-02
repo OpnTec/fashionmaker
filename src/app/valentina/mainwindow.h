@@ -172,6 +172,7 @@ private slots:
     void ShowMeasurements();
     void MeasurementsChanged(const QString &path);
     void SyncMeasurements();
+    void OnWindowFocusChanged(QWidget* old, QWidget* now);
 #if defined(Q_OS_MAC)
     void OpenAt(QAction *where);
 #endif //defined(Q_OS_MAC)
@@ -209,6 +210,7 @@ private:
 
     /** @brief mChanges true if measurement file was changed. */
     bool               mChanges;
+    bool               mChangesAsked;
 
     bool               patternReadOnly;
 
