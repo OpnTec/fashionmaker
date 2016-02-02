@@ -145,9 +145,9 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const quint32 _id, const 
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolLineIntersectAxis::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolLineIntersectAxis::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(basePointId);
-        doc->IncrementReferens(firstPointId);
-        doc->IncrementReferens(secondPointId);
+        doc->IncrementReferens(basePoint->getIdTool());
+        doc->IncrementReferens(firstPoint->getIdTool());
+        doc->IncrementReferens(secondPoint->getIdTool());
         return point;
     }
     return nullptr;

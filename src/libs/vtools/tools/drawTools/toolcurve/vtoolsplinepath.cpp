@@ -130,7 +130,7 @@ VToolSplinePath* VToolSplinePath::Create(DialogTool *dialog, VMainGraphicsScene 
     const QString color = dialogTool->GetColor();
     for (qint32 i = 0; i < path->CountPoint(); ++i)
     {
-        doc->IncrementReferens((*path)[i].P().id());
+        doc->IncrementReferens((*path)[i].P().getIdTool());
     }
     VToolSplinePath* spl = Create(0, path, color, scene, doc, data, Document::FullParse, Source::FromGui);
     if (spl != nullptr)
@@ -371,10 +371,10 @@ void VToolSplinePath::AddPathPoint(VAbstractPattern *doc, QDomElement &domElemen
  */
 void VToolSplinePath::RemoveReferens()
 {
-    VSplinePath splPath = *VAbstractTool::data.GeometricObject<VSplinePath>(id);
+    const VSplinePath splPath = *VAbstractTool::data.GeometricObject<VSplinePath>(id);
     for (qint32 i = 0; i < splPath.Count(); ++i)
     {
-        doc->DecrementReferens(splPath.at(i).P().id());
+        doc->DecrementReferens(splPath.at(i).P().getIdTool());
     }
 }
 

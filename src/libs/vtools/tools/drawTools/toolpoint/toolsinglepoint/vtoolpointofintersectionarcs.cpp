@@ -114,8 +114,8 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const quint32
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointOfIntersectionArcs::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointOfIntersectionArcs::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(firstArcId);
-        doc->IncrementReferens(secondArcId);
+        doc->IncrementReferens(firstArc->getIdTool());
+        doc->IncrementReferens(secondArc->getIdTool());
         return point;
     }
     return nullptr;
@@ -267,8 +267,11 @@ void VToolPointOfIntersectionArcs::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionArcs::RemoveReferens()
 {
-    doc->DecrementReferens(firstArcId);
-    doc->DecrementReferens(secondArcId);
+    const auto firstArc = VAbstractTool::data.GetGObject(firstArcId);
+    const auto secondArc = VAbstractTool::data.GetGObject(secondArcId);
+
+    doc->DecrementReferens(firstArc->getIdTool());
+    doc->DecrementReferens(secondArc->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

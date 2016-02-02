@@ -1,4 +1,5 @@
 # Version 0.4.2
+- [#441] Broken reference incrementation for tool "True Dart point".
 - [#439] Widen Formula Dialog.
 - Fixed broken tool dialogs "Intersection arcs" and "Point from arc and tangent".
 - [#442] 'Broken Formula' error when using Intersect Circles tool.
