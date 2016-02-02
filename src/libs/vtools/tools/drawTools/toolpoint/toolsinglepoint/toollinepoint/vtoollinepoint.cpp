@@ -86,7 +86,8 @@ void VToolLinePoint::RefreshGeometry()
  */
 void VToolLinePoint::RemoveReferens()
 {
-    doc->DecrementReferens(basePointId);
+    const auto basePoint = VAbstractTool::data.GetGObject(basePointId);
+    doc->DecrementReferens(basePoint->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

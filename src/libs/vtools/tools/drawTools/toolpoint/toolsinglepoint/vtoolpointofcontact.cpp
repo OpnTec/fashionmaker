@@ -225,9 +225,9 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointOfContact::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointOfContact::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(center);
-        doc->IncrementReferens(firstPointId);
-        doc->IncrementReferens(secondPointId);
+        doc->IncrementReferens(centerP->getIdTool());
+        doc->IncrementReferens(firstP->getIdTool());
+        doc->IncrementReferens(secondP->getIdTool());
         return point;
     }
     return nullptr;
@@ -268,9 +268,13 @@ void VToolPointOfContact::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
  */
 void VToolPointOfContact::RemoveReferens()
 {
-    doc->DecrementReferens(center);
-    doc->DecrementReferens(firstPointId);
-    doc->DecrementReferens(secondPointId);
+    const auto c = VAbstractTool::data.GetGObject(center);
+    const auto firstPoint = VAbstractTool::data.GetGObject(firstPointId);
+    const auto secondPoint = VAbstractTool::data.GetGObject(secondPointId);
+
+    doc->DecrementReferens(c->getIdTool());
+    doc->DecrementReferens(firstPoint->getIdTool());
+    doc->DecrementReferens(secondPoint->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

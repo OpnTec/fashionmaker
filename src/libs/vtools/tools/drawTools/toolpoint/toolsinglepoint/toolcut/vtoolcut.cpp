@@ -123,7 +123,9 @@ void VToolCut::RefreshGeometry()
  */
 void VToolCut::RemoveReferens()
 {
-    doc->DecrementReferens(curveCutId);
+    const auto curve = VAbstractTool::data.GetGObject(curveCutId);
+
+    doc->DecrementReferens(curve->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

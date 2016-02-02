@@ -123,8 +123,8 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const qui
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointFromCircleAndTangent::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointFromCircleAndTangent::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(circleCenterId);
-        doc->IncrementReferens(tangentPointId);
+        doc->IncrementReferens(cPoint.getIdTool());
+        doc->IncrementReferens(tPoint.getIdTool());
         return point;
     }
     return nullptr;
@@ -244,8 +244,11 @@ void VToolPointFromCircleAndTangent::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromCircleAndTangent::RemoveReferens()
 {
-    doc->DecrementReferens(circleCenterId);
-    doc->DecrementReferens(tangentPointId);
+    const auto circleCenter = VAbstractTool::data.GetGObject(circleCenterId);
+    const auto tangentPoint = VAbstractTool::data.GetGObject(tangentPointId);
+
+    doc->DecrementReferens(circleCenter->getIdTool());
+    doc->DecrementReferens(tangentPoint->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

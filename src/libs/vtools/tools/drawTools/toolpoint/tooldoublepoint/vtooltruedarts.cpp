@@ -159,13 +159,13 @@ VToolTrueDarts *VToolTrueDarts::Create(quint32 _id,
     if (typeCreation == Source::FromGui)
     {
         id = data->getNextId();//Just reserve id for tool
-        p1id = data->AddGObject(new VPointF(fPoint1, point1Name, mx1, my1));
-        p2id = data->AddGObject(new VPointF(fPoint2, point2Name, mx2, my2));
+        p1id = data->AddGObject(new VPointF(fPoint1, point1Name, mx1, my1, id));
+        p2id = data->AddGObject(new VPointF(fPoint2, point2Name, mx2, my2, id));
     }
     else
     {
-        data->UpdateGObject(p1id, new VPointF(fPoint1, point1Name, mx1, my1));
-        data->UpdateGObject(p2id, new VPointF(fPoint2, point2Name, mx2, my2));
+        data->UpdateGObject(p1id, new VPointF(fPoint1, point1Name, mx1, my1, id));
+        data->UpdateGObject(p2id, new VPointF(fPoint2, point2Name, mx2, my2, id));
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -182,11 +182,11 @@ VToolTrueDarts *VToolTrueDarts::Create(quint32 _id,
         connect(scene, &VMainGraphicsScene::DisableItem, points, &VToolTrueDarts::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, points, &VToolTrueDarts::EnableToolMove);
         doc->AddTool(id, points);
-        doc->IncrementReferens(baseLineP1Id);
-        doc->IncrementReferens(baseLineP2Id);
-        doc->IncrementReferens(dartP1Id);
-        doc->IncrementReferens(dartP2Id);
-        doc->IncrementReferens(dartP3Id);
+        doc->IncrementReferens(baseLineP1->getIdTool());
+        doc->IncrementReferens(baseLineP2->getIdTool());
+        doc->IncrementReferens(dartP1->getIdTool());
+        doc->IncrementReferens(dartP2->getIdTool());
+        doc->IncrementReferens(dartP3->getIdTool());
         return points;
     }
     return nullptr;
@@ -305,11 +305,17 @@ void VToolTrueDarts::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolTrueDarts::RemoveReferens()
 {
-    doc->DecrementReferens(baseLineP1Id);
-    doc->DecrementReferens(baseLineP2Id);
-    doc->DecrementReferens(dartP1Id);
-    doc->DecrementReferens(dartP2Id);
-    doc->DecrementReferens(dartP3Id);
+    const auto baseLineP1 = VAbstractTool::data.GetGObject(baseLineP1Id);
+    const auto baseLineP2 = VAbstractTool::data.GetGObject(baseLineP2Id);
+    const auto dartP1 = VAbstractTool::data.GetGObject(dartP1Id);
+    const auto dartP2 = VAbstractTool::data.GetGObject(dartP2Id);
+    const auto dartP3 = VAbstractTool::data.GetGObject(dartP3Id);
+
+    doc->DecrementReferens(baseLineP1->getIdTool());
+    doc->DecrementReferens(baseLineP2->getIdTool());
+    doc->DecrementReferens(dartP1->getIdTool());
+    doc->DecrementReferens(dartP2->getIdTool());
+    doc->DecrementReferens(dartP3->getIdTool());
     VToolDoublePoint::RemoveReferens();
 }
 

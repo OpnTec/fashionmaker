@@ -1908,7 +1908,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
                     path->append(splPoint);
                     if (parse == Document::FullParse)
                     {
-                        IncrementReferens(pSpline);
+                        IncrementReferens(p.getIdTool());
                     }
                 }
             }

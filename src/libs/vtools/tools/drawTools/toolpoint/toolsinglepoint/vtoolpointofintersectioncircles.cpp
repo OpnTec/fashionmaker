@@ -135,8 +135,8 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const q
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointOfIntersectionCircles::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointOfIntersectionCircles::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(firstCircleCenterId);
-        doc->IncrementReferens(secondCircleCenterId);
+        doc->IncrementReferens(c1Point.getIdTool());
+        doc->IncrementReferens(c2Point.getIdTool());
         return point;
     }
     return nullptr;
@@ -280,8 +280,11 @@ void VToolPointOfIntersectionCircles::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointOfIntersectionCircles::RemoveReferens()
 {
-    doc->DecrementReferens(firstCircleCenterId);
-    doc->DecrementReferens(secondCircleCenterId);
+    const auto firstCircleCenter = VAbstractTool::data.GetGObject(firstCircleCenterId);
+    const auto secondCircleCenter = VAbstractTool::data.GetGObject(secondCircleCenterId);
+
+    doc->DecrementReferens(firstCircleCenter->getIdTool());
+    doc->DecrementReferens(secondCircleCenter->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

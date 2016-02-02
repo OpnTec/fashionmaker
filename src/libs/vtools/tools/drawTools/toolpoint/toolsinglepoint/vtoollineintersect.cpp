@@ -169,10 +169,10 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
             connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolLineIntersect::Disable);
             connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolLineIntersect::EnableToolMove);
             doc->AddTool(id, point);
-            doc->IncrementReferens(p1Line1Id);
-            doc->IncrementReferens(p2Line1Id);
-            doc->IncrementReferens(p1Line2Id);
-            doc->IncrementReferens(p2Line2Id);
+            doc->IncrementReferens(p1Line1->getIdTool());
+            doc->IncrementReferens(p2Line1->getIdTool());
+            doc->IncrementReferens(p1Line2->getIdTool());
+            doc->IncrementReferens(p2Line2->getIdTool());
             return point;
         }
     }
@@ -214,10 +214,15 @@ void VToolLineIntersect::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolLineIntersect::RemoveReferens()
 {
-    doc->DecrementReferens(p1Line1);
-    doc->DecrementReferens(p2Line1);
-    doc->DecrementReferens(p1Line2);
-    doc->DecrementReferens(p2Line2);
+    const auto p1L1 = VAbstractTool::data.GetGObject(p1Line1);
+    const auto p2L1 = VAbstractTool::data.GetGObject(p2Line1);
+    const auto p1L2 = VAbstractTool::data.GetGObject(p1Line2);
+    const auto p2L2 = VAbstractTool::data.GetGObject(p2Line2);
+
+    doc->DecrementReferens(p1L1->getIdTool());
+    doc->DecrementReferens(p2L1->getIdTool());
+    doc->DecrementReferens(p1L2->getIdTool());
+    doc->DecrementReferens(p2L2->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

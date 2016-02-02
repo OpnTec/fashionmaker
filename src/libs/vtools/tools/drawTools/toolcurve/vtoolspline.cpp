@@ -201,8 +201,8 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
         connect(scene, &VMainGraphicsScene::EnableToolMove, spl, &VToolSpline::EnableToolMove);
         connect(scene, &VMainGraphicsScene::CurveDetailsMode, spl, &VToolSpline::DetailsMode);
         doc->AddTool(id, spl);
-        doc->IncrementReferens(p1);
-        doc->IncrementReferens(p4);
+        doc->IncrementReferens(point1.getIdTool());
+        doc->IncrementReferens(point4.getIdTool());
         return spl;
     }
     return nullptr;
@@ -287,9 +287,9 @@ void VToolSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolSpline::RemoveReferens()
 {
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    doc->DecrementReferens(spl->GetP1().id());
-    doc->DecrementReferens(spl->GetP4().id());
+    const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
+    doc->DecrementReferens(spl->GetP1().getIdTool());
+    doc->DecrementReferens(spl->GetP4().getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

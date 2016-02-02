@@ -129,7 +129,7 @@ VToolArcWithLength *VToolArcWithLength::Create(const quint32 _id, const quint32 
         connect(scene, &VMainGraphicsScene::NewFactor, toolArc, &VToolArcWithLength::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, toolArc, &VToolArcWithLength::Disable);
         doc->AddTool(id, toolArc);
-        doc->IncrementReferens(center);
+        doc->IncrementReferens(c.getIdTool());
         return toolArc;
     }
     return nullptr;
@@ -269,8 +269,8 @@ void VToolArcWithLength::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::RemoveReferens()
 {
-    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
-    doc->DecrementReferens(arc->GetCenter().id());
+    const auto arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    doc->DecrementReferens(arc->GetCenter().getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

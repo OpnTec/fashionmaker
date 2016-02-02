@@ -162,9 +162,9 @@ VToolHeight* VToolHeight::Create(const quint32 _id, const QString &pointName, co
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolHeight::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolHeight::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(basePointId);
-        doc->IncrementReferens(p1LineId);
-        doc->IncrementReferens(p2LineId);
+        doc->IncrementReferens(basePoint->getIdTool());
+        doc->IncrementReferens(p1Line->getIdTool());
+        doc->IncrementReferens(p2Line->getIdTool());
         return point;
     }
     return nullptr;

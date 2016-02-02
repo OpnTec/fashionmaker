@@ -113,8 +113,8 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const quint32 _
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointFromArcAndTangent::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointFromArcAndTangent::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(arcId);
-        doc->IncrementReferens(tangentPointId);
+        doc->IncrementReferens(arc.getIdTool());
+        doc->IncrementReferens(tPoint.getIdTool());
         return point;
     }
     return nullptr;
@@ -260,8 +260,11 @@ void VToolPointFromArcAndTangent::ShowVisualization(bool show)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPointFromArcAndTangent::RemoveReferens()
 {
-    doc->DecrementReferens(arcId);
-    doc->DecrementReferens(tangentPointId);
+    const auto arc = VAbstractTool::data.GetGObject(arcId);
+    const auto tP = VAbstractTool::data.GetGObject(tangentPointId);
+
+    doc->DecrementReferens(arc->getIdTool());
+    doc->DecrementReferens(tP->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

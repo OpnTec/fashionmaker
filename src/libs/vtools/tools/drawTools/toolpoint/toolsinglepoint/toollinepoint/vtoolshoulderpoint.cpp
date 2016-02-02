@@ -209,9 +209,9 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolShoulderPoint::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolShoulderPoint::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(p1Line);
-        doc->IncrementReferens(p2Line);
-        doc->IncrementReferens(pShoulder);
+        doc->IncrementReferens(firstPoint->getIdTool());
+        doc->IncrementReferens(secondPoint->getIdTool());
+        doc->IncrementReferens(shoulderPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -252,8 +252,11 @@ void VToolShoulderPoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolShoulderPoint::RemoveReferens()
 {
-    doc->DecrementReferens(p2Line);
-    doc->DecrementReferens(pShoulder);
+    const auto p2 = VAbstractTool::data.GetGObject(p2Line);
+    const auto pS = VAbstractTool::data.GetGObject(pShoulder);
+
+    doc->DecrementReferens(p2->getIdTool());
+    doc->DecrementReferens(pS->getIdTool());
     VToolLinePoint::RemoveReferens();
 }
 

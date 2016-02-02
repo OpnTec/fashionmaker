@@ -205,9 +205,9 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolBisector::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolBisector::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(firstPointId);
-        doc->IncrementReferens(secondPointId);
-        doc->IncrementReferens(thirdPointId);
+        doc->IncrementReferens(firstPoint->getIdTool());
+        doc->IncrementReferens(secondPoint->getIdTool());
+        doc->IncrementReferens(thirdPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -248,8 +248,11 @@ void VToolBisector::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolBisector::RemoveReferens()
 {
-    doc->DecrementReferens(firstPointId);
-    doc->DecrementReferens(thirdPointId);
+    const auto firstPoint = VAbstractTool::data.GetGObject(firstPointId);
+    const auto thirdPoint = VAbstractTool::data.GetGObject(thirdPointId);
+
+    doc->DecrementReferens(firstPoint->getIdTool());
+    doc->DecrementReferens(thirdPoint->getIdTool());
     VToolLinePoint::RemoveReferens();
 }
 

@@ -222,7 +222,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
         doc->AddTool(id, point);
         doc->AddTool(splPath1id, point);
         doc->AddTool(splPath2id, point);
-        doc->IncrementReferens(splinePathId);
+        doc->IncrementReferens(splPath->getIdTool());
         return point;
     }
     return nullptr;
