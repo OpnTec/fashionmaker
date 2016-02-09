@@ -193,6 +193,11 @@ void DialogHistory::FillTable()
     ui->tableWidget->verticalHeader()->setDefaultSectionSize(20);
 }
 
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Record return description for record
@@ -212,6 +217,12 @@ QString DialogHistory::Record(const VToolRecord &tool)
         switch ( tool.getTypeTool() )
         {
             case Tool::Arrow:
+            case Tool::SinglePoint:
+            case Tool::DoublePoint:
+            case Tool::LinePoint:
+            case Tool::AbstractSpline:
+            case Tool::Cut:
+            case Tool::LAST_ONE_DO_NOT_USE:
                 Q_UNREACHABLE(); //-V501
                 break;
             case Tool::BasePoint:
@@ -400,6 +411,10 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 return QString(tr("%1 - point of circles intersection")).arg(PointName(tool.getId()));
             }
+            case Tool::PointOfIntersectionCurves:
+            {
+                return QString(tr("%1 - point of curves intersection")).arg(PointName(tool.getId()));
+            }
             case Tool::PointFromCircleAndTangent:
             {
                 return QString(tr("%1 - point from circle and tangent")).arg(PointName(tool.getId()));
@@ -429,10 +444,6 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 break;
             case Tool::NodeSplinePath:
                 break;
-            default:
-                qDebug()<<"Got wrong tool type. Ignore.";
-                return tr("Can't create record.");
-                break;
         }
     }
     catch (const VExceptionBadId &e)
@@ -440,8 +451,13 @@ QString DialogHistory::Record(const VToolRecord &tool)
         qDebug()<<e.ErrorMessage()<<Q_FUNC_INFO;
         return tr("Can't create record.");
     }
-    return QString();
+    qDebug()<<"Can't create history record for the tool.";
+    return tr("Can't create record.");
 }
+
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic pop
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
