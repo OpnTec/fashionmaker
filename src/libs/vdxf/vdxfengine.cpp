@@ -95,7 +95,7 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
     QByteArray fileNameArray = getFileName().toLocal8Bit();
     dw = dxf->out(fileNameArray.data(), exportVersion);
 
-    if (dw==NULL)
+    if (dw==nullptr)
     {
         qWarning("VDxfEngine::begin(), can't open file");
         return false;
@@ -123,10 +123,37 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
 
     dw->sectionTables();
     dxf->writeVPort(*dw);
+
+    dw->tableLinetypes(25);
+    dxf->writeLinetype(*dw, DL_LinetypeData("BYBLOCK", "BYBLOCK", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("BYLAYER", "BYLAYER", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("CONTINUOUS", "Continuous", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("ACAD_ISO02W100", "ACAD_ISO02W100", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("ACAD_ISO03W100", "ACAD_ISO03W100", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("ACAD_ISO04W100", "ACAD_ISO04W100", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("ACAD_ISO05W100", "ACAD_ISO05W100", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("BORDER", "BORDER", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("BORDER2", "BORDER2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("BORDERX2", "BORDERX2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("CENTER", "CENTER", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("CENTER2", "CENTER2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("CENTERX2", "CENTERX2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DASHDOT", "DASHDOT", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DASHDOT2", "DASHDOT2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DASHDOTX2", "DASHDOTX2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DASHED", "DASHED", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DASHED2", "DASHED2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DASHEDX2", "DASHEDX2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DIVIDE", "DIVIDE", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DIVIDE2", "DIVIDE2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DIVIDEX2", "DIVIDEX2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DOT", "DOT", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DOT2", "DOT2", 0, 0, 0.0));
+    dxf->writeLinetype(*dw, DL_LinetypeData("DOTX2", "DOTX2", 0, 0, 0.0));
     dw->tableEnd();
+
     int numberOfLayers = 1;
     dw->tableLayers(numberOfLayers);
-
     dxf->writeLayer(*dw,
                    DL_LayerData("0", 0),
                    DL_Attributes(
@@ -135,7 +162,46 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
                        100,                  // default width
                        "CONTINUOUS",         // default line style
                        1.0));                // default line type scale
+
     dw->tableEnd();
+
+    dw->tableStyle(1);
+    DL_StyleData style("Standard", 0, 0.0, 1.0, 0.0, 0, 2.5, "txt", "");
+    style.bold = false;
+    style.italic = false;
+    dxf->writeStyle(*dw, style);
+    dw->tableEnd();
+
+    dxf->writeView(*dw);
+    dxf->writeUcs(*dw);
+    dw->tableAppid(1);
+    dw->tableAppidEntry(0x12);
+    dw->dxfString(2, "ACAD");
+    dw->dxfInt(70, 0);
+    dw->tableEnd();
+
+    dxf->writeDimStyle(*dw, 1, 1, 1, 1, 1);
+
+    dxf->writeBlockRecord(*dw);
+    dxf->writeBlockRecord(*dw, "layout");
+    dw->tableEnd();
+
+    dw->sectionEnd();
+
+    dw->sectionBlocks();
+    dxf->writeBlock(*dw, DL_BlockData("*Model_Space", 0, 0.0, 0.0, 0.0));
+    dxf->writeEndBlock(*dw, "*Model_Space");
+    dxf->writeBlock(*dw, DL_BlockData("*Paper_Space", 0, 0.0, 0.0, 0.0));
+    dxf->writeEndBlock(*dw, "*Paper_Space");
+    dxf->writeBlock(*dw, DL_BlockData("*Paper_Space0", 0, 0.0, 0.0, 0.0));
+    dxf->writeEndBlock(*dw, "*Paper_Space0");
+
+    dxf->writeBlock(*dw, DL_BlockData("layout", 0, 0.0, 0.0, 0.0));
+    // ...
+    // write block entities e.g. with dxf->writeLine(), ..
+    // ...
+    dxf->writeEndBlock(*dw, "layout");
+
     dw->sectionEnd();
 
     dw->sectionEntities();
@@ -146,6 +212,8 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
 bool VDxfEngine::end()
 {
     dw->sectionEnd();
+    dxf->writeObjects(*dw);
+    dxf->writeObjectsEnd(*dw);
     dw->dxfEOF();
     dw->close();
     delete dw;
@@ -172,14 +240,18 @@ void VDxfEngine::updateState(const QPaintEngineState &state)
  //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawPath(const QPainterPath &path)
 {
-    QPolygonF polygon = path.toFillPolygon(matrix);
-    if (polygon.size() < 3)
-    {
-        return;
-    }
+    const QList<QPolygonF> subpaths = path.toSubpathPolygons(matrix);
 
-    for (int i=1; i < polygon.count(); i++)
+    for (int j=0; j < subpaths.size(); ++j)
     {
+        const QPolygonF polygon = subpaths.at(j);
+        if (polygon.size() < 3)
+        {
+            return;
+        }
+
+        for (int i=1; i < polygon.count(); i++)
+        {
             dxf->writeLine(
             *dw,
             DL_LineData(polygon.at(i-1).x(), // start point
@@ -188,7 +260,8 @@ void VDxfEngine::drawPath(const QPainterPath &path)
             polygon.at(i).x(), // end point
             getSize().height() - polygon.at(i).y(),
             0.0),
-            DL_Attributes("0", getPenColor(), state->pen().width(), getPenStyle(), 1.0));
+            DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+        }
     }
 }
 
@@ -208,7 +281,7 @@ void VDxfEngine::drawLines(const QLineF * lines, int lineCount)
             p2.x(), // end point
             getSize().height() - p2.y(),
             0.0),
-            DL_Attributes("0", getPenColor(), state->pen().width(), getPenStyle(), 1.0));
+            DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
     }
 }
 
@@ -236,7 +309,7 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
             p2.x(), // end point
             getSize().height() - p2.y(),
             0.0),
-            DL_Attributes("0", getPenColor(), state->pen().width(), getPenStyle(), 1.0));
+            DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
     }
 }
 
@@ -281,7 +354,7 @@ void VDxfEngine::drawEllipse(const QRectF & rect)
                                ratio,
                                0,6.28 // startangle and endangle of ellipse in rad
                                ),
-                DL_Attributes("0", getPenColor(), state->pen().width(), getPenStyle(), 1.0));
+                DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -315,7 +388,7 @@ void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
                             f.family().toUtf8().constData(), // font
                             -rotationAngle
                             ),
-                DL_Attributes("0", getPenColor(), state->pen().width(), getPenStyle(), 1.0));
+                DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
 }
 
  //---------------------------------------------------------------------------------------------------------------------

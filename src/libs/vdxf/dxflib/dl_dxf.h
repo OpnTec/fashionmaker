@@ -27,6 +27,7 @@
 
 #include "dl_global.h"
 
+#include <limits>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
@@ -50,15 +51,19 @@
 #define M_PI 3.1415926535897932384626433832795
 #endif
 
+#ifndef DL_NANDOUBLE
+#define DL_NANDOUBLE std::numeric_limits<double>::quiet_NaN()
+#endif
+
 class DL_CreationInterface;
 class DL_WriterA;
 
 
-#define DL_VERSION "3.7.5.0"
+#define DL_VERSION "3.12.2.0"
 
 #define DL_VERSION_MAJOR    3
-#define DL_VERSION_MINOR    7
-#define DL_VERSION_REV      5
+#define DL_VERSION_MINOR    12
+#define DL_VERSION_REV      2
 #define DL_VERSION_BUILD    0
 
 #define DL_UNKNOWN               0
@@ -126,16 +131,16 @@ public:
     bool readDxfGroups(FILE* fp,
                        DL_CreationInterface* creationInterface);
     static bool getStrippedLine(std::string& s, quint32 size,
-                                FILE* stream);
-
+                               FILE* stream, bool stripSpace = true);
+    
     bool readDxfGroups(std::stringstream& stream,
                        DL_CreationInterface* creationInterface);
     bool in(std::stringstream &stream,
             DL_CreationInterface* creationInterface);
     static bool getStrippedLine(std::string& s, quint32 size,
-                                std::stringstream& stream);
+                               std::stringstream& stream, bool stripSpace = true);
 
-    static bool stripWhiteSpace(char** s);
+    static bool stripWhiteSpace(char** s, bool stripSpaces = true);
 
     bool processDXFGroup(DL_CreationInterface* creationInterface,
                          int groupCode, const std::string& groupValue);

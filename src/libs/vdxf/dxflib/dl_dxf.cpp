@@ -172,13 +172,16 @@ bool DL_Dxf::in(std::stringstream& stream,
  */
 bool DL_Dxf::readDxfGroups(FILE *fp, DL_CreationInterface* creationInterface)
 {
+    static int line = 1;
+
     // Read one group of the DXF file and strip the lines:
     if (DL_Dxf::getStrippedLine(groupCodeTmp, DL_DXF_MAXLINE, fp) &&
-            DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, fp) )
+        DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, fp, false) )
     {
         groupCode = static_cast<quint32>(toInt(groupCodeTmp));
 
         creationInterface->processCodeValuePair(groupCode, groupValue);
+        line+=2;
         processDXFGroup(creationInterface, static_cast<int>(groupCode), groupValue);
     }
 
@@ -193,12 +196,16 @@ bool DL_Dxf::readDxfGroups(FILE *fp, DL_CreationInterface* creationInterface)
 bool DL_Dxf::readDxfGroups(std::stringstream& stream,
                            DL_CreationInterface* creationInterface)
 {
+    static int line = 1;
+
     // Read one group of the DXF file and chop the lines:
     if (DL_Dxf::getStrippedLine(groupCodeTmp, DL_DXF_MAXLINE, stream) &&
-            DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, stream) )
+        DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, stream, false) ) 
     {
 
         groupCode = static_cast<quint32>(toInt(groupCodeTmp));
+
+        line+=2;
         processDXFGroup(creationInterface, static_cast<int>(groupCode), groupValue);
     }
     return !stream.eof();
@@ -223,7 +230,7 @@ bool DL_Dxf::readDxfGroups(std::stringstream& stream,
  * @todo Is it a problem if line is blank (i.e., newline only)?
  *      Then, when function returns, (s==NULL).
  */
-bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp)
+bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp, bool stripSpace) 
 {
     if (!feof(fp))
     {
@@ -240,7 +247,7 @@ bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp)
             // Both guaranteed to be NULL terminated.
 
             // Strip leading whitespace and trailing CR/LF.
-            stripWhiteSpace(&line);
+            stripWhiteSpace(&line, stripSpace);
 
             s = line;
             assert(size > s.length());
@@ -263,7 +270,7 @@ bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp)
  * Same as above but for stringstreams.
  */
 bool DL_Dxf::getStrippedLine(std::string &s, quint32 size,
-                             std::stringstream& stream)
+                             std::stringstream& stream, bool stripSpace) 
 {
 
     if (!stream.eof())
@@ -272,7 +279,7 @@ bool DL_Dxf::getStrippedLine(std::string &s, quint32 size,
         char* line = new char[size+1];
         char* oriLine = line;
         stream.getline(line, static_cast<int>(size));
-        stripWhiteSpace(&line);
+        stripWhiteSpace(&line, stripSpace);
         s = line;
         assert(size > s.length());
         delete[] oriLine;
@@ -297,33 +304,30 @@ bool DL_Dxf::getStrippedLine(std::string &s, quint32 size,
  * @retval true if \p s is non-NULL
  * @retval false if \p s is NULL
  */
-bool DL_Dxf::stripWhiteSpace(char** s)
+bool DL_Dxf::stripWhiteSpace(char** s, bool stripSpace)
 {
-    // No need to check if string is null
-    if (not (*s))
-    {
-        return false;
-    }
-
     // last non-NULL char:
     int lastChar = static_cast<int>(strlen(*s) - 1);
 
     // Is last character CR or LF?
     while ( (lastChar >= 0) &&
             (((*s)[lastChar] == 10) || ((*s)[lastChar] == 13) ||
-             ((*s)[lastChar] == ' ' || ((*s)[lastChar] == '\t'))) )
+             (stripSpace && ((*s)[lastChar] == ' ' || ((*s)[lastChar] == '\t')))) ) 
     {
         (*s)[lastChar] = '\0';
         lastChar--;
     }
 
     // Skip whitespace, excluding \n, at beginning of line
-    while ((*s)[0]==' ' || (*s)[0]=='\t')
+    if (stripSpace) 
     {
-        ++(*s);
+        while ((*s)[0]==' ' || (*s)[0]=='\t') 
+        {
+            ++(*s);
+        }
     }
-
-    return true;
+    
+    return ((*s) ? true : false);
 }
 
 
@@ -1475,9 +1479,9 @@ bool DL_Dxf::handleXRecordData(DL_CreationInterface* creationInterface)
 
     // string:
     if (groupCode<=9 ||
-            groupCode==100 || groupCode==102 || groupCode==105 ||
-            (groupCode>=300 && groupCode<=369) ||
-            (groupCode>=1000 && groupCode<=1009))
+        groupCode==100 || groupCode==102 || groupCode==105 ||
+        (groupCode>=300 && groupCode<=369) ||
+        (groupCode>=1000 && groupCode<=1009)) 
     {
 
         creationInterface->addXRecordString(static_cast<int>(groupCode), groupValue);
@@ -1831,9 +1835,9 @@ void DL_Dxf::addText(DL_CreationInterface* creationInterface)
         getRealValue(20, 0.0),
         getRealValue(30, 0.0),
         // alignment point
-        getRealValue(11, 0.0),
-        getRealValue(21, 0.0),
-        getRealValue(31, 0.0),
+        getRealValue(11, DL_NANDOUBLE),
+        getRealValue(21, DL_NANDOUBLE),
+        getRealValue(31, DL_NANDOUBLE),
         // height
         getRealValue(40, 2.5),
         // x scale
@@ -2244,7 +2248,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                 }
                 return true;
             default:
-                return false;
+                break;
         }
     }
     else
@@ -2268,7 +2272,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.defined = true;
                     return true;
                 default:
-                    return false;
+					break;
             }
         }
 
@@ -2297,7 +2301,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.defined = true;
                     return true;
                 default:
-                    return false;
+                    break;
             }
         }
 
@@ -2332,7 +2336,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.defined = true;
                     return true;
                 default:
-                    return false;
+                    break;
             }
         }
 
@@ -2414,7 +2418,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.endTangentY = toReal(groupValue);
                     return true;
                 default:
-                    return false;
+                    break;
             }
         }
     }
@@ -2577,6 +2581,9 @@ void DL_Dxf::writeHeader(DL_WriterA& dw) const
             break;
         case DL_Codes::AC1015:
             dw.dxfString(1, "AC1015");
+		    break;
+        case DL_Codes::AC1009_MIN:
+            // minimalistic DXF version is unidentified in file:
             break;
         default:
             break;
@@ -3043,7 +3050,14 @@ void DL_Dxf::writeInsert(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        dw.dxfString(100, "AcDbBlockReference");
+        if (data.cols!=1 || data.rows!=1) 
+        {
+            dw.dxfString(100, "AcDbMInsertBlock");
+        }
+        else 
+        {
+            dw.dxfString(100, "AcDbBlockReference");
+        }
     }
     dw.entityAttributes(attrib);
     dw.dxfString(2, data.name);
@@ -3070,7 +3084,6 @@ void DL_Dxf::writeInsert(DL_WriterA& dw,
         dw.dxfReal(44, data.colSp);
         dw.dxfReal(45, data.rowSp);
     }
-
 }
 
 
@@ -3218,7 +3231,9 @@ void DL_Dxf::writeDimStyleOverrides(DL_WriterA& dw,
         dw.dxfString(1000, "DSTYLE");
         dw.dxfString(1002, "{");
         dw.dxfInt(1070, 144);
-        dw.dxfInt(1040, static_cast<int>(data.linearFactor));
+        dw.dxfReal(1040, data.linearFactor);
+        dw.dxfInt(1070,40);
+        dw.dxfReal(1040, data.dimScale);
         dw.dxfString(1002, "}");
     }
 }
@@ -3977,9 +3992,10 @@ int DL_Dxf::writeImage(DL_WriterA& dw,
                        const DL_Attributes& attrib)
 {
 
-    /*if (data.file.empty()) {
+    /*if (data.file.empty()) 
+    {
         std::cerr << "DL_Dxf::writeImage: "
-        << "Image file must not be empty\n";
+                  << "Image file must not be empty\n";
         return;
     }*/
 
@@ -4039,9 +4055,10 @@ void DL_Dxf::writeImageDef(DL_WriterA& dw,
                            const DL_ImageData& data) const
 {
 
-    /*if (data.file.empty()) {
+    /*if (data.file.empty()) 
+    {
         std::cerr << "DL_Dxf::writeImage: "
-        << "Image file must not be empty\n";
+                  << "Image file must not be empty\n";
         return;
     }*/
 
