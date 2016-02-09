@@ -2985,7 +2985,7 @@ bool MainWindow::SavePattern(const QString &fileName, QString &error)
     qCDebug(vMainWindow, "Saving pattern file %s.", qUtf8Printable(fileName));
     QFileInfo tempInfo(fileName);
 
-    const QString mPath = doc->MPath();
+    const QString mPath = AbsoluteMPath(curFile, doc->MPath());
     if (not mPath.isEmpty() && curFile != fileName)
     {
         doc->SetPath(RelativeMPath(fileName, mPath));
