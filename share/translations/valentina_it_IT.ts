@@ -1671,6 +1671,10 @@
         <source>Correction the dart %1_%2_%3</source>
         <translation>Correzione della pince %1_%2_%3</translation>
     </message>
+    <message>
+        <source>%1 - point of curves intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -4949,6 +4953,10 @@ Vuoi salvare i cambiamenti?</translation>
         <source>(read only)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Measurements was changed. Do you want to sync measurements now?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -5148,6 +5156,17 @@ Vuoi salvare i cambiamenti?</translation>
     <message>
         <source>Count steps (0 - no limit):</source>
         <translation>Conto passi (0-infinito)</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>The path to the measurments is already relative.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to the measurments is already absolute.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

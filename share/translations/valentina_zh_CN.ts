@@ -1442,142 +1442,147 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="54"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="454"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="470"/>
         <source>Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="208"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="305"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="377"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="434"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="441"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="213"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="316"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="388"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="452"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="455"/>
         <source>Can&apos;t create record.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="219"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="230"/>
         <source>%1 - Base point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="223"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="229"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="234"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="240"/>
         <source>%1_%2 - Line from point %1 to point %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="235"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="246"/>
         <source>%3 - Point along line %1_%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="242"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="253"/>
         <source>%1 - Point of shoulder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="246"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="257"/>
         <source>%3 - normal to line %1_%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="253"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="264"/>
         <source>%4 - bisector of angle %1_%2_%3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="261"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="272"/>
         <source>%5 - intersection of lines %1_%2 and %3_%4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="272"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="283"/>
         <source>Curve %1_%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="278"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="289"/>
         <source>Arc with center in point %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="284"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="295"/>
         <source>Arc with center in point %1 and length %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="296"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="307"/>
         <source>Curve point %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="311"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="322"/>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="319"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="330"/>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="326"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="337"/>
         <source>Triangle: axis %1_%2, points %3 and %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="334"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="345"/>
         <source>%1 - point of intersection %2 and %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="343"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="354"/>
         <source>%1 - cut arc with center %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="352"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="363"/>
         <source>%1 - cut curve %2_%3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="366"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="377"/>
         <source>%1 - cut curve path %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="383"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="394"/>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="391"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="402"/>
         <source>%1 - point of intersection curve and axis through point %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="397"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="408"/>
         <source>%1 - point of arcs intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="401"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="412"/>
         <source>%1 - point of circles intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="405"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="416"/>
+        <source>%1 - point of curves intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="420"/>
         <source>%1 - point from circle and tangent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="409"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="424"/>
         <source>%1 - point from arc and tangent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="413"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="428"/>
         <source>Correction the dart %1_%2_%3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3160,24 +3165,24 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="311"/>
         <source>Edit first circle radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="325"/>
         <source>Edit second circle radius</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="346"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="365"/>
-        <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="347"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="366"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="348"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="367"/>
         <source>Radius can&apos;t be negative</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4237,6 +4242,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1117"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1422"/>
         <source>Measurements</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4328,7 +4334,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1423"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3106"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3122"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4439,7 +4445,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1691"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="180"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="182"/>
         <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4655,544 +4661,549 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="168"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="170"/>
         <source>New pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="172"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="174"/>
         <source>Open pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="176"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="178"/>
         <source>Create/Edit measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="197"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2654"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="199"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2670"/>
         <source>Pattern piece %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="336"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3857"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="338"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3873"/>
         <source>Measurement file has unknown format.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="359"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3880"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="361"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3896"/>
         <source>Measurement file contains invalid known measurement(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="369"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3892"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="371"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3908"/>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="370"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3893"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="372"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3909"/>
         <source>Please, additionaly provide: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="378"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="380"/>
         <source>Wrong units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="379"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="381"/>
         <source>Application doesn&apos;t support standard table with inches.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="391"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="428"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="472"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3514"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3606"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="393"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="430"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="474"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3530"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3622"/>
         <source>File error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="451"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="453"/>
         <source>Measurement files types have not match.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="697"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="722"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="734"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="686"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="711"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="723"/>
         <source>Select point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="709"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="698"/>
         <source>Select first point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="747"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="850"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="959"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="736"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="839"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="948"/>
         <source>Select first point of line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="760"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="749"/>
         <source>Select first point of angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="773"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="762"/>
         <source>Select first point of first line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="786"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="775"/>
         <source>Select first point curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="799"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="788"/>
         <source>Select simple curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="812"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="801"/>
         <source>Select point of center of arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="824"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="813"/>
         <source>Select point of curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="837"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="826"/>
         <source>Select curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="863"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="852"/>
         <source>Select points, arcs, curves clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="888"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="877"/>
         <source>Select base point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="901"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="890"/>
         <source>Select first point of axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="915"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="904"/>
         <source>Select point for X value (vertical)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="928"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="917"/>
         <source>Select detail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="950"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="980"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="939"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="969"/>
         <source>Select arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="969"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="958"/>
         <source>Select curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="990"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="979"/>
         <source>Select first an arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1000"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="989"/>
         <source>Select first circle center </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1010"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="999"/>
         <source>Select first curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1020"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1030"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1009"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1019"/>
         <source>Select point on tangent </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1040"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1029"/>
         <source>Select point of the center of the arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1050"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1039"/>
         <source>Select the first base line point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1072"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1061"/>
         <source>About Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1146"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3162"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1135"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3178"/>
         <source>&amp;Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1147"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3168"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1136"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3184"/>
         <source>&amp;Redo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1149"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1529"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1138"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1543"/>
         <source>Pattern Piece: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1217"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3838"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1206"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3854"/>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1220"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1249"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2226"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3827"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3834"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3841"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1209"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1238"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2242"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3843"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3850"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3857"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1235"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1275"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1224"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1264"/>
         <source>Measurements loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1246"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1235"/>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1312"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1301"/>
         <source>Measurements unloaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1319"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1308"/>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1407"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1398"/>
         <source>Measurements was synced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1417"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1410"/>
         <source>Couldn&apos;t sync measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1472"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1423"/>
+        <source>Measurements was changed. Do you want to sync measurements now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1486"/>
         <source>Height: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1482"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1496"/>
         <source>Size: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1632"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1646"/>
         <source>%1, %2 (%3)</source>
         <extracomment>Coords in status line: &quot;X, Y (units)&quot;</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1921"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1942"/>
         <source>Detail mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1921"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1942"/>
         <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2008"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2030"/>
         <source>Layout mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2008"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2030"/>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2090"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2212"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2106"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2228"/>
         <source>Pattern files (*.val)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2094"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2098"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2110"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2114"/>
         <source>pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2100"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2116"/>
         <source>Save as</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2120"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2136"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2136"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2195"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2152"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2211"/>
         <source>Could not save file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2163"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2179"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2375"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2419"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2391"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2435"/>
         <source>Error parsing file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2386"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2402"/>
         <source>Error can&apos;t convert value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2397"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2485"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2413"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2501"/>
         <source>Error empty parameter.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2408"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2424"/>
         <source>Error wrong id.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2430"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2446"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2474"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2490"/>
         <source>Bad id.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2715"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2743"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2731"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2759"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2984"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3000"/>
         <source>File saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3097"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3113"/>
         <source>Unsaved changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3098"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3114"/>
         <source>The pattern has been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3106"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3122"/>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3107"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3123"/>
         <source>Don&apos;t Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3438"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3454"/>
         <source>Pattern piece:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3440"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3456"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3570"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3581"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3586"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3597"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3626"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3642"/>
         <source>File loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3749"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3765"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3751"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3767"/>
         <source>Reopen files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3796"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3812"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3798"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3814"/>
         <source>Loading measurements file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3824"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3840"/>
         <source>Standard measurements (*.vst)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3831"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3847"/>
         <source>Individual measurements (*.vit)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3974"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4002"/>
         <source>You can&apos;t export empty scene.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3991"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4019"/>
         <source>Export error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4022"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4050"/>
         <source>Not supported size value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4029"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4057"/>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4035"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4063"/>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4041"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4084"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4069"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4112"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4065"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4093"/>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4072"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4100"/>
         <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4078"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4106"/>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4104"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4132"/>
         <source>Please, provide one input file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4162"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4190"/>
         <source>untitled.val</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4202"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4230"/>
         <source>(read only)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4240"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4246"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4253"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4268"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4274"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4281"/>
         <source>Locking file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4241"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4269"/>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4247"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4275"/>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4254"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4282"/>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4276"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4304"/>
         <source>This file already opened in another window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4280"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4308"/>
         <source>The lock file could not be created, for lack of permissions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4284"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4312"/>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5433,6 +5444,19 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>QApplication</name>
+    <message>
+        <location filename="../../src/libs/vmisc/def.cpp" line="1717"/>
+        <source>The path to the measurments is already relative.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/def.cpp" line="1734"/>
+        <source>The path to the measurments is already absolute.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QCommandLineParser</name>
     <message>
         <location filename="../../src/libs/vmisc/backport/qcommandlineparser.cpp" line="270"/>
@@ -5496,12 +5520,12 @@ Do you want to save your changes?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="123"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="124"/>
         <source>Create new pattern piece to start working.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1148"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1137"/>
         <source>Changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7632,296 +7656,296 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1434"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1432"/>
         <source>Base point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1436"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1450"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1464"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1503"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1527"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1539"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1551"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1563"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1588"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1599"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1618"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1629"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1639"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1650"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1663"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1675"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1687"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1698"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1747"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1757"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1770"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1434"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1448"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1462"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1501"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1525"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1537"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1549"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1561"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1586"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1597"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1616"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1627"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1637"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1648"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1661"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1673"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1685"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1696"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1745"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1755"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1768"/>
         <source>Point label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1438"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1436"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1448"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1446"/>
         <source>Point at distance and angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1449"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1463"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1502"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1562"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1575"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1598"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1697"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1756"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1769"/>
+        <source>Line type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1450"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1464"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1503"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1563"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1576"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1599"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1698"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1757"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1770"/>
+        <source>Line color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1451"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1465"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1490"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1504"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1564"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1577"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1600"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1526"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1538"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1550"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1596"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1699"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1758"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1771"/>
-        <source>Line type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1452"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1466"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1505"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1565"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1578"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1601"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1700"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1759"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1772"/>
-        <source>Line color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1453"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1467"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1492"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1506"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1528"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1540"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1552"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1598"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1701"/>
         <source>Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1454"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1760"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1773"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1452"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1758"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1771"/>
         <source>Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1462"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1460"/>
         <source>Point at distance along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1475"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1473"/>
         <source>Arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1477"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1490"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1619"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1475"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1488"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1617"/>
         <source>Radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1476"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1489"/>
+        <source>First angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1477"/>
+        <source>Second angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1478"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1491"/>
-        <source>First angle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1479"/>
-        <source>Second angle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1480"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1493"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1529"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1541"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1553"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1719"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1737"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1527"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1539"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1551"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1717"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1735"/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1488"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1486"/>
         <source>Arc with given length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1501"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1499"/>
         <source>Point along bisector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1514"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1512"/>
         <source>True darts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1516"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1514"/>
         <source>Point 1 label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1517"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1515"/>
         <source>Point 2 label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1525"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1523"/>
         <source>Cut arc tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1537"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1535"/>
         <source>Tool for segmenting a curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1549"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1547"/>
         <source>Tool segment a pathed curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1561"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1559"/>
         <source>Perpendicular point along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1573"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1571"/>
         <source>Line between points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1586"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1584"/>
         <source>Point at line intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1596"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1594"/>
         <source>Point along perpendicular</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1603"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1601"/>
         <source>Additional angle degrees</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1616"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1614"/>
         <source>Point at intersection of arc and line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1627"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1625"/>
         <source>Tool to make point from x &amp; y of two other points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1637"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1635"/>
         <source>Tool to make point from intersection two arcs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1640"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1653"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1677"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1688"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1638"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1651"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1675"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1686"/>
         <source>Take</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1648"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1646"/>
         <source>Tool to make point from intersection two circles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1651"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1649"/>
         <source>First circle radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1652"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1650"/>
         <source>Second circle radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1661"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1659"/>
         <source>Tool to make point from intersection two curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1664"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1662"/>
         <source>Vertical correction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1665"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1663"/>
         <source>Horizontal correction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1673"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1671"/>
         <source>Tool to make point from circle and tangent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1676"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1674"/>
         <source>Circle radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1685"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1683"/>
         <source>Tool to make point from arc and tangent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1696"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1694"/>
         <source>Special point on shoulder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1709"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1707"/>
         <source>Curve tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1711"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1729"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1709"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1727"/>
         <source>Curve factor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1727"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1725"/>
         <source>Tool for path curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1745"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1743"/>
         <source>Tool triangle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1755"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1753"/>
         <source>Point intersection line and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1768"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1766"/>
         <source>Point intersection curve and axis</source>
         <translation type="unfinished"></translation>
     </message>

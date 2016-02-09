@@ -1671,6 +1671,10 @@
         <source>Correction the dart %1_%2_%3</source>
         <translation>Correction the dart %1_%2_%3</translation>
     </message>
+    <message>
+        <source>%1 - point of curves intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -2459,7 +2463,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">New pattern</translation>
+        <translation>New pattern</translation>
     </message>
 </context>
 <context>
@@ -2629,11 +2633,11 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Security</translation>
     </message>
     <message>
         <source>Open only for read</source>
-        <translation type="unfinished"></translation>
+        <translation>Open only for read</translation>
     </message>
 </context>
 <context>
@@ -3221,39 +3225,39 @@ Apply settings anyway?</translation>
     <name>DialogPointOfIntersectionCurves</name>
     <message>
         <source>Tool point of intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool point of intersection curves</translation>
     </message>
     <message>
         <source>First curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>First curve:</translation>
     </message>
     <message>
         <source>Second curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>Second curve:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished">Point label:</translation>
+        <translation>Point label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished">Unique label</translation>
+        <translation>Unique label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished">Choose unique label.</translation>
+        <translation>Choose unique label.</translation>
     </message>
     <message>
         <source>Vertical correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertical correction:</translation>
     </message>
     <message>
         <source>Horizontal correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal correction:</translation>
     </message>
     <message>
         <source>Select second curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Select second curve</translation>
     </message>
 </context>
 <context>
@@ -3646,19 +3650,19 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Highest point</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Lowest point</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Leftmost point</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Rightmost point</translation>
     </message>
 </context>
 <context>
@@ -4938,14 +4942,18 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Point intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Point intersection curves</translation>
     </message>
     <message>
         <source>Select first curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Select first curve</translation>
     </message>
     <message>
         <source>(read only)</source>
+        <translation>(read only)</translation>
+    </message>
+    <message>
+        <source>Measurements was changed. Do you want to sync measurements now?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5147,6 +5155,17 @@ Do you want to save your changes?</translation>
     <message>
         <source>Count steps (0 - no limit):</source>
         <translation>Count steps (0 - no limit):</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>The path to the measurments is already relative.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to the measurments is already absolute.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6919,7 +6938,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creating or updating point of intersection curves</translation>
     </message>
 </context>
 <context>
@@ -7147,31 +7166,31 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Highest point</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Lowest point</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Leftmost point</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Rightmost point</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool to make point from intersection two curves</translation>
     </message>
     <message>
         <source>Vertical correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertical correction</translation>
     </message>
     <message>
         <source>Horizontal correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal correction</translation>
     </message>
 </context>
 <context>

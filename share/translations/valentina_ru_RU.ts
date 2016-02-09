@@ -1671,6 +1671,10 @@
         <source>Correction the dart %1_%2_%3</source>
         <translation>Правка вытачки %1_%2_%3</translation>
     </message>
+    <message>
+        <source>%1 - point of curves intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -4720,7 +4724,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Sync measurements</source>
-        <translation>Согласовать
+        <translation>Синхронизировать
 мерки</translation>
     </message>
     <message>
@@ -4786,11 +4790,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Measurements was synced</source>
-        <translation>Мерки согласованы</translation>
+        <translation>Мерки синхронизированы</translation>
     </message>
     <message>
         <source>Couldn&apos;t sync measurements.</source>
-        <translation>Невозможно согласовать мерки</translation>
+        <translation>Невозможно синхронизировать мерки </translation>
     </message>
     <message>
         <source>Couldn&apos;t update measurements.</source>
@@ -4946,6 +4950,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>(read only)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measurements was changed. Do you want to sync measurements now?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5147,6 +5155,17 @@ Do you want to save your changes?</source>
     <message>
         <source>Count steps (0 - no limit):</source>
         <translation>Количество шагов (0 - без ограничений)</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>The path to the measurments is already relative.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to the measurments is already absolute.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
