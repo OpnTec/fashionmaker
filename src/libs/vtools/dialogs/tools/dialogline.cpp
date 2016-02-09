@@ -182,13 +182,16 @@ void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
                     }
                     break;
                 case 1:
-                    if (SetObject(id, ui->comboBoxSecondPoint, ""))
+                    if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
                     {
-                        if (flagError)
+                        if (SetObject(id, ui->comboBoxSecondPoint, ""))
                         {
-                            number = 0;
-                            prepare = true;
-                            DialogAccepted();
+                            if (flagError)
+                            {
+                                number = 0;
+                                prepare = true;
+                                DialogAccepted();
+                            }
                         }
                     }
                     break;

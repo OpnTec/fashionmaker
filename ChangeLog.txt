@@ -1,4 +1,5 @@
 # Version 0.4.2
+- Tool line. Block selecting the same point twice.
 - [#443] Not valid dxf file. libdxf updated to version 3.12.2.0. Fixed drawing subpaths.
 - Fixed combobox width in Dialog "Tool True Dart point".
 - [#441] Broken reference incrementation for tool "True Dart point".
