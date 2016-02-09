@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m full_name="Полуобхват груди" value="46" description="Обхват груди (Ог)" name="@Сг"/>
+        <m value="42" name="@Дс"/>
+        <m value="32" name="@Ст"/>
+        <m value="48" name="@Сб"/>
+        <m value="18" name="@Дб"/>
+        <m value="28" name="@Ди"/>
+        <m value="18" name="@Во"/>
+        <m value="61" name="@Др"/>
+        <m value="37.25" name="@Дл"/>
+    </body-measurements>
+</vit>

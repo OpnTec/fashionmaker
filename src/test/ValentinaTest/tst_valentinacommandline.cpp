@@ -273,6 +273,7 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     QTest::newRow("PajamaTopWrap2")    << "PajamaTopWrap2.val"    << keyTest  << true << V_EX_OK;
     QTest::newRow("Keiko_skirt")       << "Keiko_skirt.val"       << keyTest  << true << V_EX_OK;
     QTest::newRow("pantalon_base_Eli") << "pantalon_base_Eli.val" << keyTest  << true << V_EX_OK;
+    QTest::newRow("IMK_Zhaketa")       << "IMK_Zhaketa_poluprilegayuschego_silueta.val" << keyTest << true << V_EX_OK;
     QTest::newRow("Moulage_0.5_armhole_neckline") << "Moulage_0.5_armhole_neckline.val" << keyTest << true << V_EX_OK;
     QTest::newRow("0.7_Armhole_adjustment_0.10")  << "0.7_Armhole_adjustment_0.10.val"  << keyTest << true << V_EX_OK;
 }
