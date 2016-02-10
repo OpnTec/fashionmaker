@@ -551,8 +551,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     {
         //Scene doesn't show this tool, so doc will destroy this object.
         unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation, drawName, doc);
-        QHash<quint32, VDataTool*>* tools = doc->getTools();
-        tools->insert(id, unionDetails);
+        doc->AddTool(id, unionDetails);
     }
     //Then create new details
     VNodeDetail det1p1;

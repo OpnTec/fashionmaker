@@ -244,9 +244,7 @@ void MainWindow::AddPP(const QString &PPName)
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolBasePoint::SetFactor);
     connect(sceneDraw, &VMainGraphicsScene::EnableToolMove, spoint, &VToolBasePoint::EnableToolMove);
 
-    QHash<quint32, VDataTool*>* tools = doc->getTools();
-    SCASSERT(tools != nullptr);
-    tools->insert(id, spoint);
+    doc->AddTool(id, spoint);
     VDrawTool::AddRecord(id, Tool::BasePoint, doc);
     SetEnableTool(true);
     SetEnableWidgets(true);

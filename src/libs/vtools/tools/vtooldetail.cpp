@@ -235,8 +235,7 @@ void VToolDetail::Create(const quint32 &_id, const VDetail &newDetail, VMainGrap
         VToolDetail *detail = new VToolDetail(doc, data, id, typeCreation, scene, drawName);
         scene->addItem(detail);
         connect(detail, &VToolDetail::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        QHash<quint32, VDataTool*>* tools = doc->getTools();
-        tools->insert(id, detail);
+        doc->AddTool(id, detail);
     }
 }
 
