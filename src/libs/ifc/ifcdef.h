@@ -146,6 +146,7 @@ extern const QString ColorYellow;
 // Hacks for avoiding the linker error "undefined reference to"
 #define SPL_ "Spl_"
 #define ARC_ "Arc_"
+#define EARC_ "EllipticalArc_"
 
 extern const QString line_;
 extern const QString angleLine_;
