@@ -289,7 +289,7 @@ void VContainer::AddVariable(const QString& name, T *var)
             throw VExceptionBadId(tr("Can't find object. Type mismatch."), name);
         }
     }
-    d->variables[name] = QSharedPointer<T>(var);
+    d->variables.insert(name, QSharedPointer<T>(var));
     uniqueNames.insert(name);
 }
 

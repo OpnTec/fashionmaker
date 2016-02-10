@@ -88,13 +88,13 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
                 InitTool<VNodePoint>(scene, detail.at(i));
                 break;
             case (Tool::NodeArc):
-                InitTool<VNodeArc>(scene, detail.at(i));
+                doc->IncrementReferens(detail.at(i).getId());
                 break;
             case (Tool::NodeSpline):
-                InitTool<VNodeSpline>(scene, detail.at(i));
+                doc->IncrementReferens(detail.at(i).getId());
                 break;
             case (Tool::NodeSplinePath):
-                InitTool<VNodeSplinePath>(scene, detail.at(i));
+                doc->IncrementReferens(detail.at(i).getId());
                 break;
             default:
                 qDebug()<<"Get wrong tool type. Ignore.";
@@ -173,26 +173,27 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
             case (Tool::NodeArc):
             {
                 id = CreateNode<VArc>(data, nodeD.getId());
-                VNodeArc::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+                VNodeArc::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeSpline):
             {
                 id = CreateNode<VSpline>(data, nodeD.getId());
-                VNodeSpline::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+                VNodeSpline::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             case (Tool::NodeSplinePath):
             {
                 id = CreateNode<VSplinePath>(data, nodeD.getId());
-                VNodeSplinePath::Create(doc, data, scene, id, nodeD.getId(), Document::FullParse, Source::FromGui);
+                VNodeSplinePath::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
             default:
                 qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
                 break;
         }
-        VNodeDetail node(id, nodeD.getTypeTool(), NodeDetail::Contour, nodeD.getMx(), nodeD.getMy(), nodeD.getReverse());
+        VNodeDetail node(id, nodeD.getTypeTool(), NodeDetail::Contour, nodeD.getMx(), nodeD.getMy(),
+                         nodeD.getReverse());
         det.append(node);
     }
     det.setName(detail.getName());

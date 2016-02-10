@@ -1940,7 +1940,7 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         spl->setIdObject(idObject);
         spl->setMode(Draw::Modeling);
         data->UpdateGObject(id, spl);
-        VNodeSpline::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
+        VNodeSpline::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1966,7 +1966,7 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         path->setIdObject(idObject);
         path->setMode(Draw::Modeling);
         data->UpdateGObject(id, path);
-        VNodeSplinePath::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
+        VNodeSplinePath::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2037,7 +2037,7 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         arc->setIdObject(idObject);
         arc->setMode(Draw::Modeling);
         data->UpdateGObject(id, arc);
-        VNodeArc::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
+        VNodeArc::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2767,6 +2767,7 @@ void VPattern::PrepareForParse(const Document &parse)
         data->ClearForFullParse();
         nameActivPP.clear();
         patternPieces.clear();
+        qDeleteAll(toolsOnRemove);//Remove all invisible on a scene objects.
         tools.clear();
         cursor = 0;
         history.clear();

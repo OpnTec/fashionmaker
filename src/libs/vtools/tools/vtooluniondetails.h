@@ -71,7 +71,7 @@ public:
     static const QString AttrNodeType;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
-    static void  AddToNewDetail(QObject *tool, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+    static void  AddToNewDetail(VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                 VDetail &newDetail, const VDetail &det, const int &i, const quint32 &idTool,
                                 QVector<quint32> &children, const qreal &dx = 0,
                                 const qreal &dy = 0, const quint32 &pRotate = 0, const qreal &angle = 0);

@@ -107,7 +107,8 @@ const QString VAbstractPattern::IncrementDescription = QStringLiteral("descripti
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::VAbstractPattern(QObject *parent)
     : QObject(parent), VDomDocument(), nameActivPP(QString()), cursor(0), tools(QHash<quint32, VDataTool*>()),
-      history(QVector<VToolRecord>()), patternPieces(QStringList()), modified(false)
+      toolsOnRemove(QVector<VDataTool*>()), history(QVector<VToolRecord>()), patternPieces(QStringList()),
+      modified(false)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -429,6 +430,13 @@ void VAbstractPattern::AddTool(const quint32 &id, VDataTool *tool)
     Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
     SCASSERT(tool != nullptr);
     tools.insert(id, tool);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::AddToolOnRemove(VDataTool *tool)
+{
+    SCASSERT(tool != nullptr);
+    toolsOnRemove.append(tool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

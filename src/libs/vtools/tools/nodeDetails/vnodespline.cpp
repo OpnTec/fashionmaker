@@ -47,13 +47,9 @@ const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
  * @param parent QGraphicsItem parent.
  */
 VNodeSpline::VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                         const Source &typeCreation, const quint32 &idTool, QObject *qoParent,
-                         QGraphicsItem * parent)
-    :VAbstractNode(doc, data, id, idSpline, idTool, qoParent), QGraphicsPathItem(parent)
+                         const Source &typeCreation, const quint32 &idTool, QObject *qoParent)
+    :VAbstractNode(doc, data, id, idSpline, idTool, qoParent)
 {
-    RefreshGeometry();
-    this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
-
     ToolCreation(typeCreation);
 }
 
@@ -69,15 +65,15 @@ VNodeSpline::VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, qu
  * @param idTool id node.
  * @return pointer to node.
  */
-VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id,
+VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, quint32 id,
                                  quint32 idSpline, const Document &parse,
-                                 const Source &typeCreation, const quint32 &idTool, QObject *parent)
+                                 const Source &typeCreation, const quint32 &idTool)
 {
     VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
     VNodeSpline *spl = nullptr;
     if (parse == Document::FullParse)
     {
-        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool, parent);
+        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool, doc);
 
         doc->AddTool(id, spl);
         if (idTool != NULL_ID)
@@ -89,10 +85,8 @@ VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, VMainG
         }
         else
         {
-            // Try to prevent memory leak
-            scene->addItem(spl);// First adopted by scene
-            spl->hide();// If no one will use node, it will stay hidden
-            spl->SetParentType(ParentType::Scene);
+            // Help to delete the node before each FullParse
+            doc->AddToolOnRemove(spl);
         }
     }
     else
@@ -106,15 +100,6 @@ VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, VMainG
 QString VNodeSpline::getTagName() const
 {
     return VNodeSpline::TagName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VNodeSpline::FullUpdateFromFile()
-{
-    RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,68 +136,4 @@ void VNodeSpline::RefreshDataInFile()
             doc->SetAttribute(domElement, AttrIdTool, idTool);
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief mouseReleaseEvent handle mouse release events.
- * @param event mouse release event.
- */
-void VNodeSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
-    {
-        emit ChoosedTool(id, SceneObject::Spline);
-    }
-    QGraphicsItem::mouseReleaseEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief hoverMoveEvent handle hover move events.
- * @param event hover move event.
- */
-void VNodeSpline::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief hoverLeaveEvent handle hover leave events.
- * @param event hover leave event.
- */
-void VNodeSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodeSpline::ShowNode()
-{
-    if (parentType != ParentType::Scene)
-    {
-        show();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodeSpline::HideNode()
-{
-    hide();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshGeometry refresh item on scene.
- */
-void VNodeSpline::RefreshGeometry()
-{
-//    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-//    QPainterPath path;
-//    path.addPath(spl->GetPath());
-//    path.setFillRule( Qt::WindingFill );
-//    this->setPath(path);
 }

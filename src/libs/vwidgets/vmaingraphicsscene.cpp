@@ -89,7 +89,13 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::InitOrigins()
 {
-    qDeleteAll(origins);
+    foreach (QGraphicsItem *item, origins)
+    {
+        if (this->items().contains(item))
+        {
+            delete item;
+        }
+    }
 
     QPen originsPen(Qt::green, ToPixel(WidthHairLine(Unit::Mm), Unit::Mm), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     QBrush axisTextBrush(Qt::green);

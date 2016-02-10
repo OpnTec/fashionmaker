@@ -81,6 +81,8 @@ public:
     VDataTool     *getTool(const quint32 &id);
     void           AddTool(const quint32 &id, VDataTool *tool);
 
+    void           AddToolOnRemove(VDataTool *tool);
+
     QVector<VToolRecord> *getHistory();
     QVector<VToolRecord> getLocalHistory() const;
 
@@ -239,6 +241,8 @@ protected:
 
     /** @brief tools list with pointer on tools. */
     QHash<quint32, VDataTool*> tools;
+
+    QVector<VDataTool*> toolsOnRemove;
 
     /** @brief history history records. */
     QVector<VToolRecord> history;
