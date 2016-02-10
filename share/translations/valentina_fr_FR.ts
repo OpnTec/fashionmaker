@@ -5063,6 +5063,17 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
 </context>
 <context>
+    <name>QApplication</name>
+    <message>
+        <source>The path to the measurments is already relative.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to the measurments is already absolute.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>

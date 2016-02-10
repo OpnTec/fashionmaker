@@ -2459,7 +2459,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">New pattern</translation>
+        <translation>New pattern</translation>
     </message>
 </context>
 <context>
@@ -5072,6 +5072,17 @@ Do you want to save your changes?</translation>
     <message>
         <source>Count steps (0 - no limit):</source>
         <translation>Count steps (0 - no limit):</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>The path to the measurments is already relative.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to the measurments is already absolute.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
