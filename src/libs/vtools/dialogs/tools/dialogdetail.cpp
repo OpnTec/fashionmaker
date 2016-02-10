@@ -387,6 +387,7 @@ void DialogDetail::ClickedReverse(bool checked)
     VNodeDetail node = qvariant_cast<VNodeDetail>(item->data(Qt::UserRole));
     node.setReverse(checked);
     item->setData(Qt::UserRole, QVariant::fromValue(node));
+    ValidObjects(DetailIsValid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -450,6 +451,7 @@ void DialogDetail::ScrollUp()
     {
         QListWidgetItem *item = ui.listWidget->takeItem(0);
         ui.listWidget->addItem(item);
+        ValidObjects(DetailIsValid());
     }
 }
 
@@ -460,6 +462,7 @@ void DialogDetail::ScrollDown()
     {
         QListWidgetItem *item = ui.listWidget->takeItem(ui.listWidget->count()-1);
         ui.listWidget->insertItem(0, item);
+        ValidObjects(DetailIsValid());
     }
 }
 
@@ -475,7 +478,7 @@ bool DialogDetail::DetailIsValid() const
     pixmap.save(&buffer, "PNG");
     QString url = QString("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QLatin1Literal("\"/> ");
 
-    if (ui.listWidget->count() < 3)
+    if(CreateDetail().ContourPoints(data).count() < 3)
     {
         url += tr("You need more points!");
         ui.helpLabel->setText(url);
@@ -538,17 +541,12 @@ bool DialogDetail::FirstPointEqualLast() const
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogDetail::DetailIsClockwise() const
 {
-    if(ui.listWidget->count() < 3)
+    const QVector<QPointF> points = CreateDetail().ContourPoints(data);
+
+    if(points.count() < 3)
     {
         return false;
     }
-    VDetail detail;
-    for (qint32 i = 0; i < ui.listWidget->count(); ++i)
-    {
-        QListWidgetItem *item = ui.listWidget->item(i);
-        detail.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
-    }
-    const QVector<QPointF> points = detail.ContourPoints(data);
 
     const qreal res = VDetail::SumTrapezoids(points);
     if (res < 0)

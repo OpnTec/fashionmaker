@@ -7,6 +7,7 @@
 - [#325] Check pattern for inverse compatibility.
 
 # Version 0.4.2
+- Fixed triggering validation a detail. Two new cases: has been changed Reverse option and the list has been scrolled.
 - Fixed broken path to measurements after using Save As option.
 - Tool line. Block selecting the same point twice.
 - [#443] Not valid dxf file. libdxf updated to version 3.12.2.0. Fixed drawing subpaths.
