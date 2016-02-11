@@ -204,16 +204,16 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief mouseReleaseEvent  handle mouse release events.
+ * @brief mousePressEvent  handle mouse press events.
  * @param event mouse release event.
  */
-void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void VAbstractSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
         emit ChoosedTool(id, sceneType);
     }
-    QGraphicsItem::mouseReleaseEvent(event);
+    QGraphicsPathItem::mousePressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

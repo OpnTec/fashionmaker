@@ -73,7 +73,7 @@ protected:
     QGraphicsLineItem       *lineName;
 
     virtual void            UpdateNamePosition(quint32 id) Q_DECL_OVERRIDE;
-    virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void            mousePressEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     virtual void            hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void            RefreshPointGeometry(const VPointF &point);

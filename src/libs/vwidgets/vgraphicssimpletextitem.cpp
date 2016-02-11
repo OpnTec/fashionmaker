@@ -217,6 +217,9 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
             SetOverrideCursor(cursorArrowCloseHand, 1, 1);
         }
     }
+
+    emit PointChoosed();
+
     QGraphicsSimpleTextItem::mousePressEvent(event);
 }
 
@@ -231,10 +234,7 @@ void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             RestoreOverrideCursor(cursorArrowCloseHand);
         }
     }
-    else
-    {
-        emit PointChoosed();
-    }
+
     QGraphicsSimpleTextItem::mouseReleaseEvent(event);
 }
 

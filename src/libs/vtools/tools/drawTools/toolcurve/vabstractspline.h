@@ -88,7 +88,7 @@ protected:
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void     keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     mousePressEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
     virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
