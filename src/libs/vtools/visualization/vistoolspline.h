@@ -62,9 +62,8 @@ public slots:
 protected:
     Q_DISABLE_COPY(VisToolSpline)
     quint32              object4Id;
-    QGraphicsEllipseItem *lineP1;
-    QGraphicsEllipseItem *lineP4;
-    QGraphicsLineItem    *line;
+    QGraphicsEllipseItem *point1;
+    QGraphicsEllipseItem *point4;
     qreal                angle1;
     qreal                angle2;
     qreal                kAsm1;

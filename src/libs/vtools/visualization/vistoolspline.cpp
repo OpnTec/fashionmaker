@@ -38,9 +38,8 @@ const int EMPTY_ANGLE = -1;
 VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
     : VisPath(data, parent),
       object4Id(NULL_ID),
-      lineP1(nullptr),
-      lineP4(nullptr),
-      line(nullptr),
+      point1(nullptr),
+      point4(nullptr),
       angle1(EMPTY_ANGLE),
       angle2(EMPTY_ANGLE),
       kAsm1(1),
@@ -53,9 +52,8 @@ VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
       p3(),
       controlPoints()
 {
-    lineP1 = InitPoint(supportColor, this);
-    lineP4 = InitPoint(supportColor, this); //-V656
-    line = InitItem<QGraphicsLineItem>(mainColor, this);
+    point1 = InitPoint(supportColor, this);
+    point4 = InitPoint(supportColor, this); //-V656
 
     auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, *data->GetPatternUnit(), this);
     controlPoint1->hide();
@@ -79,7 +77,7 @@ void VisToolSpline::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const auto first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(lineP1, first->toQPointF(), supportColor);
+        DrawPoint(point1, first->toQPointF(), supportColor);
 
         if (mode == Mode::Creation)
         {
@@ -110,7 +108,7 @@ void VisToolSpline::RefreshGeometry()
         else
         {
             const auto second = Visualization::data->GeometricObject<VPointF>(object4Id);
-            DrawPoint(lineP4, second->toQPointF(), supportColor);
+            DrawPoint(point4, second->toQPointF(), supportColor);
 
             if (mode == Mode::Creation)
             {
