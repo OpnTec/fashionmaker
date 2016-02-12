@@ -124,27 +124,25 @@ VEllipticalArc::~VEllipticalArc()
  */
 qreal VEllipticalArc::GetLength() const
 {
-    QPointF firstPoint;
-    QPointF point2;
-    QPointF point3;
-    QPointF lastPoint;
+    qreal length = 0;
 
-    if (not d->isFlipped)
+    QVector<qreal> sectionAngle = GetAngles();
+
+    for (int i = 0; i < sectionAngle.size()-1; ++i)
     {
-       firstPoint = GetP1();
-       point2 = GetPoint((2*GetStartAngle() + GetEndAngle())/3);
-       point3 = GetPoint((GetStartAngle() + 2*GetEndAngle())/3);
-       lastPoint = GetP2();
+        QPointF firstPoint = GetPoint(sectionAngle.at(i));
+        QPointF point2 = GetPoint((2*sectionAngle.at(i) + sectionAngle.at(i+1))/3);
+        QPointF point3 = GetPoint((sectionAngle.at(i) + 2*sectionAngle.at(i+1))/3);
+        QPointF lastPoint = GetPoint(sectionAngle.at(i+1));
+
+        qreal dx1 = point2.rx() - firstPoint.rx();
+        qreal dy1 = point2.ry() - firstPoint.ry();
+        qreal dx2 = point3.rx() - point2.rx();
+        qreal dy2 = point3.ry() - point2.ry();
+        qreal dx3 = lastPoint.rx() - point3.rx();
+        qreal dy3 = lastPoint.ry() - point3.ry();
+        length += qSqrt(dx1*dx1 + dy1*dy1) + qSqrt(dx2*dx2 + dy2*dy2) + qSqrt(dx3*dx3 + dy3*dy3);
     }
-    else
-    {
-        firstPoint = GetP2();
-        point2 = GetPoint((2*GetEndAngle() + GetStartAngle())/3);
-        point3 = GetPoint((GetEndAngle() + 2*GetStartAngle())/3);
-        lastPoint = GetP1();
-    }
-    VSpline spl(VPointF(firstPoint), point2, point3, VPointF(lastPoint), 1.0);
-    qreal length = spl.GetLength();
 
     if (d->isFlipped)
     {
@@ -222,24 +220,19 @@ qreal VEllipticalArc::AngleArc() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief GetPoints return list of points needed for drawing arc.
- * @return list of points
+ * @brief GetAngles return list of angles needed for drawing arc.
+ * @return list of angles
  */
-QVector<QPointF> VEllipticalArc::GetPoints() const
+QVector<qreal> VEllipticalArc::GetAngles() const
 {
-    QVector<QPointF> points;
     QVector<qreal> sectionAngle;
-
-    QPointF pStart;
-    d->isFlipped ? pStart = GetP2() : pStart = GetP1();
-
     {
         qreal angle = AngleArc();
 
         if (qFuzzyIsNull(angle))
-        {
-            points.append(pStart);
-            return points;
+        {// Return the array that includes one angle
+            sectionAngle.append(d->f1);
+            return sectionAngle;
         }
 
         if (angle > 360 || angle < 0)
@@ -262,20 +255,45 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
             sectionAngle.append(tail);
         }
     }
-    for (int i = 0; i < sectionAngle.size(); ++i)
+    return sectionAngle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetPoints return list of points needed for drawing arc.
+ * @return list of points
+ */
+QVector<QPointF> VEllipticalArc::GetPoints() const
+{
+    QVector<QPointF> points;
+    QVector<qreal> sectionAngle = GetAngles();
+
+    QPointF pStart;
+    d->isFlipped ? pStart = GetP2() : pStart = GetP1();
+
+    // if angle1 == angle2 and we have just one point of arc
+    if(sectionAngle.size() == 1)
     {
-        QPointF firstPoint = GetPoint(sectionAngle.at(i));
-        QPointF point2 = GetPoint((2*sectionAngle.at(i) + sectionAngle.at(i+1))/3);
-        QPointF point3 = GetPoint((sectionAngle.at(i) + 2*sectionAngle.at(i+1))/3);
-        QPointF lastPoint = GetPoint(sectionAngle.at(i+1));
-
-        VSpline spl(VPointF(firstPoint), point2, point3, VPointF(lastPoint), 1.0);
-
-        QVector<QPointF> splPoints = spl.GetPoints();
-
-        if (not splPoints.isEmpty() && i != sectionAngle.size() - 1)
+        points.append(GetP1());
+    }
+    else
+    {
+        for (int i = 0; i < sectionAngle.size()-1; ++i)
         {
-            splPoints.removeLast();
+            QPointF firstPoint = GetPoint(sectionAngle.at(i));
+            QPointF point2 = GetPoint((2*sectionAngle.at(i) + sectionAngle.at(i+1))/3);
+            QPointF point3 = GetPoint((sectionAngle.at(i) + 2*sectionAngle.at(i+1))/3);
+            QPointF lastPoint = GetPoint(sectionAngle.at(i+1));
+
+            VSpline spl(VPointF(firstPoint), point2, point3, VPointF(lastPoint), 1.0);
+
+            QVector<QPointF> splPoints = spl.GetPoints();
+
+            if (not splPoints.isEmpty() && i != sectionAngle.size() - 1)
+            {
+                splPoints.removeLast();
+            }
+            points << splPoints;
         }
         points << splPoints;
     }
