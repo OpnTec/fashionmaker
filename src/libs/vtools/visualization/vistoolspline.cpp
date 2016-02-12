@@ -73,6 +73,9 @@ VisToolSpline::~VisToolSpline()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::RefreshGeometry()
 {
+    //Radius of point circle, but little bigger. Need handle with hover sizes.
+    const static qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
+
     if (object1Id > NULL_ID)
     {
         const auto first = Visualization::data->GeometricObject<VPointF>(object1Id);
@@ -84,7 +87,14 @@ void VisToolSpline::RefreshGeometry()
             {
                 p2 = Visualization::scenePos;
                 controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, p2, first->toQPointF());
-                controlPoints[0]->show();
+
+                if (not controlPoints[0]->isVisible())
+                {
+                    if (QLineF(first->toQPointF(), p2).length() > radius)
+                    {
+                        controlPoints[0]->show();
+                    }
+                }
             }
             else
             {
@@ -109,9 +119,15 @@ void VisToolSpline::RefreshGeometry()
                     QLineF ctrlLine (second->toQPointF(), Visualization::scenePos);
                     ctrlLine.setAngle(ctrlLine.angle()+180);
                     p3 = ctrlLine.p2();
-
                     controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, p3, second->toQPointF());
-                    controlPoints[1]->show();
+
+                    if (not controlPoints[1]->isVisible())
+                    {
+                        if (QLineF(second->toQPointF(), p3).length() > radius)
+                        {
+                            controlPoints[1]->show();
+                        }
+                    }
                 }
                 else
                 {
