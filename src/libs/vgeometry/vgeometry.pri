@@ -9,7 +9,7 @@ SOURCES += \
         $$PWD/vspline.cpp \
         $$PWD/vsplinepath.cpp \
         $$PWD/vsplinepoint.cpp \
-    $$PWD/vellipticalarc.cpp
+        $$PWD/vellipticalarc.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -29,5 +29,5 @@ HEADERS += \
         $$PWD/vsplinepoint.h \
         $$PWD/vsplinepoint_p.h \
         $$PWD/vgeometrydef.h \
-    $$PWD/vellipticalarc.h \
-    $$PWD/vellipticalarc_p.h
+        $$PWD/vellipticalarc.h \
+        $$PWD/vellipticalarc_p.h

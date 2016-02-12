@@ -32,6 +32,7 @@
 #include "../ifc/ifcdef.h"
 #include <QtCore/qmath.h>
 #include <QLineF>
+#include <QPainterPath>
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -124,25 +125,15 @@ VEllipticalArc::~VEllipticalArc()
  */
 qreal VEllipticalArc::GetLength() const
 {
-    qreal length = 0;
-
-    QVector<qreal> sectionAngle = GetAngles();
-
-    for (int i = 0; i < sectionAngle.size()-1; ++i)
+    qreal length;
+    QPainterPath elArc;
+    QVector<QPointF> points = GetPoints();
+    elArc.moveTo(points.at(0));
+    for (qint32 i = 1; i < points.count(); ++i)
     {
-        QPointF firstPoint = GetPoint(sectionAngle.at(i));
-        QPointF point2 = GetPoint((2*sectionAngle.at(i) + sectionAngle.at(i+1))/3);
-        QPointF point3 = GetPoint((sectionAngle.at(i) + 2*sectionAngle.at(i+1))/3);
-        QPointF lastPoint = GetPoint(sectionAngle.at(i+1));
-
-        qreal dx1 = point2.rx() - firstPoint.rx();
-        qreal dy1 = point2.ry() - firstPoint.ry();
-        qreal dx2 = point3.rx() - point2.rx();
-        qreal dy2 = point3.ry() - point2.ry();
-        qreal dx3 = lastPoint.rx() - point3.rx();
-        qreal dy3 = lastPoint.ry() - point3.ry();
-        length += qSqrt(dx1*dx1 + dy1*dy1) + qSqrt(dx2*dx2 + dy2*dy2) + qSqrt(dx3*dx3 + dy3*dy3);
+    elArc.lineTo(points.at(i));
     }
+    length = elArc.length();
 
     if (d->isFlipped)
     {
@@ -163,11 +154,10 @@ QPointF VEllipticalArc::GetP1() const
     QPointF p1 ( GetCenter().x () + qFloor((d->radius1 + d->radius2)*cos(d->f1*M_PI/180)),
                  GetCenter().y () + qFloor((d->radius1 + d->radius2)*sin(d->f1*M_PI/180)));
     // rotation of point
-    QPointF pointRotation;
-    pointRotation.setX(p1.rx()*qCos(GetRotationAngle()) - p1.ry()*qSin(GetRotationAngle()));
-    pointRotation.setY(p1.rx()*qSin(GetRotationAngle()) + p1.ry()*qCos(GetRotationAngle()));
+    QLineF line(GetCenter().toQPointF(), p1);
+    line.setAngle(line.angle() + GetRotationAngle());
 
-    return pointRotation;
+    return line.p2();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -181,11 +171,10 @@ QPointF VEllipticalArc::GetP2 () const
     QPointF p2 ( GetCenter().x () + qFloor((d->radius1 + d->radius2)*cos(d->f2*M_PI/180)),
                  GetCenter().y () + qFloor((d->radius1 + d->radius2)*sin(d->f2*M_PI/180)));
     // rotation of point
-    QPointF pointRotation;
-    pointRotation.setX(p2.rx()*qCos(GetRotationAngle()) - p2.ry()*qSin(GetRotationAngle()));
-    pointRotation.setY(p2.rx()*qSin(GetRotationAngle()) + p2.ry()*qCos(GetRotationAngle()));
+    QLineF line(GetCenter().toQPointF(), p2);
+    line.setAngle(line.angle() + GetRotationAngle());
 
-    return pointRotation;
+    return line.p2();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -198,13 +187,11 @@ QPointF VEllipticalArc::GetPoint (qreal angle) const
     // p - point without rotation
     QPointF p ( GetCenter().x () + qFloor((d->radius1 + d->radius2)*cos(angle*M_PI/180)),
                 GetCenter().y () + qFloor((d->radius1 + d->radius2)*sin(angle*M_PI/180)));
-
     // rotation of point
-    QPointF pointRotation;
-    pointRotation.setX(p.rx()*qCos(GetRotationAngle()) - p.ry()*qSin(GetRotationAngle()));
-    pointRotation.setY(p.rx()*qSin(GetRotationAngle()) + p.ry()*qCos(GetRotationAngle()));
+    QLineF line(GetCenter().toQPointF(), p);
+    line.setAngle(line.angle() + GetRotationAngle());
 
-    return pointRotation;
+    return line.p2();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -233,6 +220,7 @@ qreal VEllipticalArc::AngleArc() const
 
     return ang;
 }
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetAngles return list of angles needed for drawing arc.
@@ -241,34 +229,32 @@ qreal VEllipticalArc::AngleArc() const
 QVector<qreal> VEllipticalArc::GetAngles() const
 {
     QVector<qreal> sectionAngle;
+    qreal angle = AngleArc();
+
+    if (qFuzzyIsNull(angle))
+    {// Return the array that includes one angle
+        sectionAngle.append(d->f1);
+        return sectionAngle;
+    }
+
+    if (angle > 360 || angle < 0)
+    {// Filter incorect value of angle
+        QLineF dummy(0,0, 100, 0);
+        dummy.setAngle(angle);
+        angle = dummy.angle();
+    }
+
+    const qreal angleInterpolation = 45; //degree
+    const int sections = qFloor(angle / angleInterpolation);
+    for (int i = 0; i < sections; ++i)
     {
-        qreal angle = AngleArc();
+        sectionAngle.append(angleInterpolation);
+    }
 
-        if (qFuzzyIsNull(angle))
-        {// Return the array that includes one angle
-            sectionAngle.append(d->f1);
-            return sectionAngle;
-        }
-
-        if (angle > 360 || angle < 0)
-        {// Filter incorect value of angle
-            QLineF dummy(0,0, 100, 0);
-            dummy.setAngle(angle);
-            angle = dummy.angle();
-        }
-
-        const qreal angleInterpolation = 45; //degree
-        const int sections = qFloor(angle / angleInterpolation);
-        for (int i = 0; i < sections; ++i)
-        {
-            sectionAngle.append(angleInterpolation);
-        }
-
-        const qreal tail = angle - sections * angleInterpolation;
-        if (tail > 0)
-        {
-            sectionAngle.append(tail);
-        }
+    const qreal tail = angle - sections * angleInterpolation;
+    if (tail > 0)
+    {
+        sectionAngle.append(tail);
     }
     return sectionAngle;
 }

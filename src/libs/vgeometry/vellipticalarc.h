@@ -68,10 +68,11 @@ public:
     qreal              GetRotationAngle() const;
 
     QString            GetFormulaRadius1 () const;
-    QString            GetFormulaRadius2 () const;
     void               SetFormulaRadius1 (const QString &formula, qreal value);
-    void               SetFormulaRadius2 (const QString &formula, qreal value);
     qreal              GetRadius1 () const;
+
+    QString            GetFormulaRadius2 () const;
+    void               SetFormulaRadius2 (const QString &formula, qreal value);
     qreal              GetRadius2 () const;
 
     VPointF            GetCenter () const;
@@ -83,7 +84,7 @@ public:
 
     QPointF            GetP1() const;
     QPointF            GetP2 () const;
-    QPointF            GetPoint (qreal angle) const;
+
     qreal              AngleArc() const;
     QVector<qreal>     GetAngles () const;
     QVector<QPointF>   GetPoints () const;
@@ -97,6 +98,7 @@ private:
     void FindF2(qreal length);
 
     qreal MaxLength() const;
+    QPointF GetPoint (qreal angle) const;
 };
 
 Q_DECLARE_TYPEINFO(VEllipticalArc, Q_MOVABLE_TYPE);
