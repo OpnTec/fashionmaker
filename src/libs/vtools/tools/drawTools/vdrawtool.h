@@ -31,12 +31,10 @@
 
 #include "../vabstracttool.h"
 #include "../../dialogs/tools/dialogtool.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
 #include <QMenu>
 #include <QGraphicsSceneContextMenuEvent>
-#include <QGraphicsView>
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.

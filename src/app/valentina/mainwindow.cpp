@@ -48,6 +48,12 @@
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../vwidgets/vwidgetpopup.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/drawtools.h"
+#include "../vtools/dialogs/tooldialogs.h"
+#include "tools/vtooldetail.h"
+#include "tools/vtooluniondetails.h"
+#include "dialogs/dialogs.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -66,6 +72,8 @@
 #include <QDesktopServices>
 #include <chrono>
 #include <thread>
+#include <QFileSystemWatcher>
+#include <QComboBox>
 
 #if defined(Q_OS_MAC)
 #include <QMimeData>

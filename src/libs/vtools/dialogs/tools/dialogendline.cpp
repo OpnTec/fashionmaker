@@ -279,7 +279,7 @@ void DialogEndLine::ShowDialog(bool click)
     {
         if (click)
         {
-            /*We will ignore click if poinet is in point circle*/
+            /*We will ignore click if pointer is in point circle*/
             VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
             SCASSERT(scene != nullptr);
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
