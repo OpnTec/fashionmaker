@@ -65,6 +65,8 @@ public:
     void               SetFormulaF2 (const QString &formula, qreal value);
     virtual qreal      GetEndAngle () const Q_DECL_OVERRIDE;
 
+    qreal              GetRotationAngle() const;
+
     QString            GetFormulaRadius1 () const;
     QString            GetFormulaRadius2 () const;
     void               SetFormulaRadius1 (const QString &formula, qreal value);
@@ -83,6 +85,7 @@ public:
     QPointF            GetP2 () const;
     QPointF            GetPoint (qreal angle) const;
     qreal              AngleArc() const;
+    QVector<qreal>     GetAngles () const;
     QVector<QPointF>   GetPoints () const;
     QPointF            CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2) const;
     QPointF            CutArc (const qreal &length) const;

@@ -159,10 +159,15 @@ qreal VEllipticalArc::GetLength() const
  */
 QPointF VEllipticalArc::GetP1() const
 {
-    // we ignore the rotation!
+    // p1 - point without rotation
     QPointF p1 ( GetCenter().x () + qFloor((d->radius1 + d->radius2)*cos(d->f1*M_PI/180)),
                  GetCenter().y () + qFloor((d->radius1 + d->radius2)*sin(d->f1*M_PI/180)));
-    return p1;
+    // rotation of point
+    QPointF pointRotation;
+    pointRotation.setX(p1.rx()*qCos(GetRotationAngle()) - p1.ry()*qSin(GetRotationAngle()));
+    pointRotation.setY(p1.rx()*qSin(GetRotationAngle()) + p1.ry()*qCos(GetRotationAngle()));
+
+    return pointRotation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -172,10 +177,15 @@ QPointF VEllipticalArc::GetP1() const
  */
 QPointF VEllipticalArc::GetP2 () const
 {
-    // we ignore the rotation!
+    // p2 - point without rotation
     QPointF p2 ( GetCenter().x () + qFloor((d->radius1 + d->radius2)*cos(d->f2*M_PI/180)),
                  GetCenter().y () + qFloor((d->radius1 + d->radius2)*sin(d->f2*M_PI/180)));
-    return p2;
+    // rotation of point
+    QPointF pointRotation;
+    pointRotation.setX(p2.rx()*qCos(GetRotationAngle()) - p2.ry()*qSin(GetRotationAngle()));
+    pointRotation.setY(p2.rx()*qSin(GetRotationAngle()) + p2.ry()*qCos(GetRotationAngle()));
+
+    return pointRotation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -185,10 +195,16 @@ QPointF VEllipticalArc::GetP2 () const
  */
 QPointF VEllipticalArc::GetPoint (qreal angle) const
 {
-    // we ignore the rotation!
+    // p - point without rotation
     QPointF p ( GetCenter().x () + qFloor((d->radius1 + d->radius2)*cos(angle*M_PI/180)),
-                 GetCenter().y () + qFloor((d->radius1 + d->radius2)*sin(angle*M_PI/180)));
-    return p;
+                GetCenter().y () + qFloor((d->radius1 + d->radius2)*sin(angle*M_PI/180)));
+
+    // rotation of point
+    QPointF pointRotation;
+    pointRotation.setX(p.rx()*qCos(GetRotationAngle()) - p.ry()*qSin(GetRotationAngle()));
+    pointRotation.setY(p.rx()*qSin(GetRotationAngle()) + p.ry()*qCos(GetRotationAngle()));
+
+    return pointRotation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -217,7 +233,6 @@ qreal VEllipticalArc::AngleArc() const
 
     return ang;
 }
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetAngles return list of angles needed for drawing arc.
@@ -295,9 +310,7 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
             }
             points << splPoints;
         }
-        points << splPoints;
     }
-    // we ignore the rotation of ellipse.
     return points;
 }
 
@@ -420,6 +433,16 @@ QString VEllipticalArc::GetFormulaRadius1() const
 QString VEllipticalArc::GetFormulaRadius2() const
 {
     return d->formulaRadius2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetRotationAngle return rotation angle.
+ * @return rotationAngle.
+ */
+qreal VEllipticalArc::GetRotationAngle() const
+{
+    return d->rotationAngle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
