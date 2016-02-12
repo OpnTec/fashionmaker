@@ -30,9 +30,10 @@
 #define VABSTRACTSPLINE_H
 
 #include "../vdrawtool.h"
-#include "../vwidgets/vcontrolpointspline.h"
 
 #include <QGraphicsPathItem>
+
+class VControlPointSpline;
 
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 {
@@ -56,15 +57,6 @@ public slots:
     virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     void             DetailsMode(bool mode);
 signals:
-    /**
-     * @brief RefreshLine refresh control line.
-     * @param indexSpline position spline in spline list.
-     * @param pos position point in spline.
-     * @param controlPoint new position control point.
-     * @param splinePoint new position spline point.
-     */
-    void             RefreshLine(const qint32 &indexSpline, SplinePointPosition pos,
-                                 const QPointF &controlPoint, const QPointF &splinePoint);
     /**
      * @brief setEnabledPoint disable control points.
      * @param enable enable or diasable points.

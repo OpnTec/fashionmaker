@@ -31,6 +31,7 @@
 #include "../../../dialogs/tools/dialogspline.h"
 #include "../../../undocommands/movespline.h"
 #include "../../../visualization/vistoolspline.h"
+#include "../vwidgets/vcontrolpointspline.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -64,23 +65,20 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
     this->setAcceptHoverEvents(true);
     this->setPath(ToolPath());
 
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    VControlPointSpline *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, spl->GetP2(),
-                                                                 spl->GetP1().toQPointF(), *data->GetPatternUnit(),
-                                                                 this);
+    const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
+
+    auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, spl->GetP2(),
+                                                  spl->GetP1().toQPointF(), *data->GetPatternUnit(), this);
     connect(controlPoint1, &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
-    connect(this, &VToolSpline::RefreshLine, controlPoint1, &VControlPointSpline::RefreshLine);
     connect(this, &VToolSpline::setEnabledPoint, controlPoint1, &VControlPointSpline::setEnabledPoint);
     connect(controlPoint1, &VControlPointSpline::ShowContextMenu, this, &VToolSpline::contextMenuEvent);
     controlPoints.append(controlPoint1);
 
-    VControlPointSpline *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, spl->GetP3(),
-                                                                 spl->GetP4().toQPointF(), *data->GetPatternUnit(),
-                                                                 this);
+    auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, spl->GetP3(),
+                                                  spl->GetP4().toQPointF(), *data->GetPatternUnit(), this);
     connect(controlPoint2, &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
-    connect(this, &VToolSpline::RefreshLine, controlPoint2, &VControlPointSpline::RefreshLine);
     connect(this, &VToolSpline::setEnabledPoint, controlPoint2, &VControlPointSpline::setEnabledPoint);
     connect(controlPoint2, &VControlPointSpline::ShowContextMenu, this, &VToolSpline::contextMenuEvent);
     controlPoints.append(controlPoint2);
@@ -488,6 +486,7 @@ void VToolSpline::SetVisualization()
         visual->SetKAsm1(spl->GetKasm1());
         visual->SetKAsm2(spl->GetKasm2());
         visual->SetKCurve(spl->GetKcurve());
+        visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
 }
@@ -499,7 +498,7 @@ void VToolSpline::SetVisualization()
 void VToolSpline::RefreshGeometry()
 {
     // Very important to disable control points. Without it the pogram can't move the curve.
-    foreach (VControlPointSpline *point, controlPoints)
+    foreach (auto *point, controlPoints)
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     }
@@ -515,26 +514,27 @@ void VToolSpline::RefreshGeometry()
         this->setPath(ToolPath());
     }
 
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    QPointF splinePoint = VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id())->toQPointF();
-    QPointF controlPoint = spl->GetP2();
-    emit RefreshLine(1, SplinePointPosition::FirstPoint, controlPoint, splinePoint);
-    splinePoint = VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id())->toQPointF();
-    controlPoint = spl->GetP3();
-    emit RefreshLine(1, SplinePointPosition::LastPoint, controlPoint, splinePoint);
-
     controlPoints[0]->blockSignals(true);
     controlPoints[1]->blockSignals(true);
 
-    controlPoints[0]->setPos(spl->GetP2());
-    controlPoints[1]->setPos(spl->GetP3());
+    const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
+
+    {
+        const QPointF splinePoint = VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id())->toQPointF();
+        controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, spl->GetP2(), splinePoint);
+    }
+
+    {
+        const QPointF splinePoint = VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id())->toQPointF();
+        controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, spl->GetP3(), splinePoint);
+    }
 
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
 
     SetVisualization();
 
-    foreach (VControlPointSpline *point, controlPoints)
+    foreach (auto *point, controlPoints)
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }

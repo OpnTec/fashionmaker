@@ -31,6 +31,8 @@
 
 #include "vispath.h"
 
+class VControlPointSpline;
+
 class VisToolSpline : public VisPath
 {
     Q_OBJECT
@@ -47,8 +49,16 @@ public:
     void         SetKAsm2(const qreal &value);
     void         SetKCurve(const qreal &value);
 
+    QPointF      GetP2() const;
+    QPointF      GetP3() const;
+
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSpline)};
+
+public slots:
+    void MouseLeftPressed();
+    void MouseLeftReleased();
+
 protected:
     Q_DISABLE_COPY(VisToolSpline)
     quint32              object4Id;
@@ -60,6 +70,15 @@ protected:
     qreal                kAsm1;
     qreal                kAsm2;
     qreal                kCurve;
+
+    bool isLeftMousePressed;
+    bool p2Selected;
+    bool p3Selected;
+
+    QPointF p2;
+    QPointF p3;
+
+    QVector<VControlPointSpline *> controlPoints;
 };
 
 #endif // VISTOOLSPLINE_H

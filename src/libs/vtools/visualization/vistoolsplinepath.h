@@ -32,8 +32,6 @@
 #include "vispath.h"
 #include "../../vgeometry/vsplinepath.h"
 
-enum class Mode : char {Creation, Show};
-
 class VisToolSplinePath : public VisPath
 {
     Q_OBJECT
@@ -49,8 +47,6 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
 
-    Mode getMode() const;
-    void setMode(const Mode &value);
 signals:
     void PathChanged(const VSplinePath &path);
 
@@ -59,7 +55,6 @@ protected:
     QVector<QGraphicsEllipseItem *> points;
     QGraphicsLineItem               *line;
     VSplinePath                     path;
-    Mode                            mode;
 
     QGraphicsEllipseItem * getPoint(quint32 i);
 };

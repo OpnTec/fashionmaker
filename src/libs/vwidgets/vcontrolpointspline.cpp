@@ -37,6 +37,19 @@
 #include "vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, Unit patternUnit,
+                                         QGraphicsItem *parent)
+    :QGraphicsEllipseItem(parent),
+      radius(CircleRadius()),
+      controlLine(nullptr),
+      indexSpline(indexSpline),
+      position(position),
+      patternUnit(patternUnit)
+{
+    Init();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VControlPointSpline constructor.
  * @param indexSpline index spline in list.
@@ -48,28 +61,22 @@
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position,
                                          const QPointF &controlPoint, const QPointF &splinePoint, Unit patternUnit,
                                          QGraphicsItem *parent)
-    :QGraphicsEllipseItem(parent), radius(0), controlLine(nullptr), indexSpline(indexSpline), position(position),
+    :QGraphicsEllipseItem(parent),
+      radius(CircleRadius()),
+      controlLine(nullptr),
+      indexSpline(indexSpline),
+      position(position),
       patternUnit(patternUnit)
 {
-    //create circle
-    radius = (1.5/*mm*/ / 25.4) * PrintDPI;
-    QRectF rec = QRectF(0, 0, radius*2, radius*2);
-    rec.translate(-rec.center().x(), -rec.center().y());
-    this->setRect(rec);
-    this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
-    this->setBrush(QBrush(Qt::NoBrush));
+    Init();
+
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setAcceptHoverEvents(true);
     this->setPos(controlPoint);
-    this->setZValue(100);
 
-    QPointF p1, p2;
-    VGObject::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
-    controlLine = new QGraphicsLineItem(QLineF(splinePoint-controlPoint, p1), this);
-    controlLine->setPen(QPen(Qt::red, ToPixel(WidthHairLine(patternUnit), patternUnit)));
-    controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+    SetCtrlLine(controlPoint, splinePoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -197,21 +204,43 @@ void VControlPointSpline::contextMenuEvent(QGraphicsSceneContextMenuEvent *event
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VControlPointSpline::Init()
+{
+    auto rec = QRectF(0, 0, radius*2, radius*2);
+    rec.translate(-rec.center().x(), -rec.center().y());
+    this->setRect(rec);
+    this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
+    this->setBrush(QBrush(Qt::NoBrush));
+    this->setZValue(100);
+
+    controlLine = new QGraphicsLineItem(this);
+    controlLine->setPen(QPen(Qt::red, ToPixel(WidthHairLine(patternUnit), patternUnit)));
+    controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VControlPointSpline::SetCtrlLine(const QPointF &controlPoint, const QPointF &splinePoint)
+{
+    QPointF p1, p2;
+    VGObject::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
+    controlLine->setLine(QLineF(splinePoint-controlPoint, p1));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RefreshLine refresh line control point.
+ * @brief RefreshCtrlPoint refresh the control point.
  * @param indexSpline index spline in list.
  * @param pos position point in spline.
  * @param controlPoint control point.
  * @param splinePoint spline point.
  */
-void VControlPointSpline::RefreshLine(const qint32 &indexSpline, SplinePointPosition pos,
-                                      const QPointF &controlPoint, const QPointF &splinePoint)
+void VControlPointSpline::RefreshCtrlPoint(const qint32 &indexSpline, SplinePointPosition pos,
+                                           const QPointF &controlPoint, const QPointF &splinePoint)
 {
     if (this->indexSpline == indexSpline && this->position == pos)
     {
-        QPointF p1, p2;
-        VGObject::LineIntersectCircle(QPointF(), radius, QLineF( QPointF(), splinePoint-controlPoint), p1, p2);
-        controlLine->setLine(QLineF(splinePoint-controlPoint, p1));
+        this->setPos(controlPoint);
+        SetCtrlLine(controlPoint, splinePoint);
     }
 }
 

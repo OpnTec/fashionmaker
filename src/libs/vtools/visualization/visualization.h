@@ -39,6 +39,8 @@
 
 Q_DECLARE_LOGGING_CATEGORY(vVis)
 
+enum class Mode : char {Creation, Show};
+
 class Visualization : public QObject
 {
     Q_OBJECT
@@ -53,6 +55,9 @@ public:
     void         setScenePos(const QPointF &value);
     virtual void VisualMode(const quint32 &pointId);
     void         setMainColor(const QColor &value);
+
+    Mode GetMode() const;
+    void SetMode(const Mode &value);
 signals:
     void         ToolTip(const QString &toolTip);
 public slots:
@@ -67,6 +72,7 @@ protected:
     Qt::PenStyle     lineStyle;
     quint32          object1Id;
     QString          toolTip;
+    Mode             mode;
 
     virtual void InitPen()=0;
     virtual void AddOnScene()=0;

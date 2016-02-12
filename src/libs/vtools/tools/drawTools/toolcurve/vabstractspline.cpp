@@ -27,6 +27,8 @@
  *************************************************************************/
 
 #include "vabstractspline.h"
+#include "../vwidgets/vcontrolpointspline.h"
+
 #include <QKeyEvent>
 
 const QString VAbstractSpline::TagName = QStringLiteral("spline");

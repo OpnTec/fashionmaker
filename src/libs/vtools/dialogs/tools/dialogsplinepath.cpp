@@ -271,19 +271,7 @@ void DialogSplinePath::PathUpdated(const VSplinePath &path)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::ShowVisualization()
 {
-    if (prepare == false)
-    {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
-        SCASSERT(scene != nullptr);
-
-        VisToolSplinePath *visPath = qobject_cast<VisToolSplinePath *>(vis);
-        SCASSERT(visPath != nullptr);
-
-        connect(scene, &VMainGraphicsScene::NewFactor, visPath, &Visualization::SetFactor);
-        scene->addItem(visPath);
-        visPath->setMode(Mode::Show);
-        visPath->RefreshGeometry();
-    }
+    AddVisualization<VisToolSplinePath>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -30,8 +30,10 @@
 #include "ui_dialogspline.h"
 
 #include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../../visualization/vistoolspline.h"
+
 #include <QDebug>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -41,8 +43,7 @@
  * @param parent parent widget
  */
 DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), angle1(0), angle2(0), kAsm1(1), kAsm2(1),
-      kCurve(1)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), angle1(0), angle2(0), kAsm1(1), kAsm2(1), kCurve(1)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -57,6 +58,13 @@ DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidge
             this, &DialogSpline::PointNameChanged);
 
     vis = new VisToolSpline(data);
+    auto path = qobject_cast<VisToolSpline *>(vis);
+    SCASSERT(path != nullptr);
+
+    auto scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+    SCASSERT(scene != nullptr);
+    connect(scene, &VMainGraphicsScene::MouseLeftPressed, path, &VisToolSpline::MouseLeftPressed);
+    connect(scene, &VMainGraphicsScene::MouseLeftReleased, path, &VisToolSpline::MouseLeftReleased);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,7 +96,7 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+            auto *path = qobject_cast<VisToolSpline *>(vis);
             SCASSERT(path != nullptr);
 
             switch (number)
@@ -96,7 +104,7 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
                 case 0:
                     if (SetObject(id, ui->comboBoxP1, tr("Select last point of curve")))
                     {
-                        number++;
+                        ++number;
                         path->VisualMode(id);
                     }
                     break;
@@ -104,29 +112,13 @@ void DialogSpline::ChosenObject(quint32 id, const SceneObject &type)
                 {
                     if (getCurrentObjectId(ui->comboBoxP1) != id)
                     {
-                        const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(id);
-                        qint32 index = ui->comboBoxP4->findText(point->name());
-                        if ( index != -1 )
-                        { // -1 for not found
-                            ui->comboBoxP4->setCurrentIndex(index);
-                            emit ToolTip("");
-                            index = ui->comboBoxP1->currentIndex();
-                            quint32 p1Id = qvariant_cast<quint32>(ui->comboBoxP1->itemData(index));
-
-                            QPointF p1 = data->GeometricObject<VPointF>(p1Id)->toQPointF();
-                            QPointF p4 = data->GeometricObject<VPointF>(id)->toQPointF();
-
-                            ui->spinBoxAngle1->setValue(static_cast<qint32>(QLineF(p1, p4).angle()));
-                            ui->spinBoxAngle2->setValue(static_cast<qint32>(QLineF(p4, p1).angle()));
+                        if (SetObject(id, ui->comboBoxP4, ""))
+                        {
+                            ++number;
 
                             path->setObject4Id(id);
                             path->RefreshGeometry();
                             prepare = true;
-                            DialogAccepted();
-                        }
-                        else
-                        {
-                            qWarning()<<"Can't find object by name"<<point->name();
                         }
                     }
                     break;
@@ -181,6 +173,32 @@ void DialogSpline::PointNameChanged()
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSpline::ShowDialog(bool click)
+{
+    if (prepare && click)
+    {
+        const auto p1 = data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP1));
+        const auto p4 = data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP4));
+
+        auto *path = qobject_cast<VisToolSpline *>(vis);
+        SCASSERT(path != nullptr);
+
+        const QPointF p2 = path->GetP2();
+        const QPointF p3 = path->GetP3();
+
+        VSpline spline(*p1, p2, p3, *p4, kCurve);
+
+        ui->spinBoxAngle1->setValue(static_cast<qint32>(spline.GetStartAngle()));
+        ui->spinBoxAngle2->setValue(static_cast<qint32>(spline.GetEndAngle()));
+
+        ui->doubleSpinBoxKasm1->setValue(spline.GetKasm1());
+        ui->doubleSpinBoxKasm2->setValue(spline.GetKasm2());
+
+        DialogAccepted();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

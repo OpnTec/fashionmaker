@@ -30,8 +30,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSplinePath::VisToolSplinePath(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent), points(QVector<QGraphicsEllipseItem *>()), line(nullptr), path(VSplinePath()),
-      mode(Mode::Creation)
+    : VisPath(data, parent), points(QVector<QGraphicsEllipseItem *>()), line(nullptr), path(VSplinePath())
 {
     line = InitItem<QGraphicsLineItem>(mainColor, this);
 }
@@ -105,18 +104,6 @@ void VisToolSplinePath::setPath(const VSplinePath &value)
 VSplinePath VisToolSplinePath::getPath()
 {
     return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Mode VisToolSplinePath::getMode() const
-{
-    return mode;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VisToolSplinePath::setMode(const Mode &value)
-{
-    mode = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

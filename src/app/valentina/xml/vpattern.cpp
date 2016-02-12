@@ -42,6 +42,7 @@
 #include "../vmisc/vsettings.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vsplinepath.h"
 #include "../core/vapplication.h"
 #include "../vpatterndb/calculator.h"
 
