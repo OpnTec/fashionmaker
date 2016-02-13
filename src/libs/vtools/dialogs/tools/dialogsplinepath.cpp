@@ -95,7 +95,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->doubleSpinBoxKcurve->setValue(path.GetKCurve());
 
-    VisToolSplinePath *visPath = qobject_cast<VisToolSplinePath *>(vis);
+    auto visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr);
     visPath->setPath(path);
     ui->listWidget->blockSignals(false);
@@ -155,9 +155,10 @@ void DialogSplinePath::SaveData()
 {
     SavePath();
 
-    VisToolSplinePath *visPath = qobject_cast<VisToolSplinePath *>(vis);
+    auto visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr);
     visPath->setPath(path);
+    visPath->SetMode(Mode::Show);
     visPath->RefreshGeometry();
 }
 

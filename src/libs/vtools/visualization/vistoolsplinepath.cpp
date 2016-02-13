@@ -66,6 +66,22 @@ void VisToolSplinePath::RefreshGeometry()
 
         if (mode == Mode::Creation)
         {
+            if (size > 1)
+            {
+                for (qint32 i = 1; i<=path.Count(); ++i)
+                {
+                    const int preLastPoint = (path.Count() - 1) * 2;
+                    const int lastPoint = preLastPoint + 1;
+
+                    VSpline spl = path.GetSpline(i);
+
+                    ctrlPoints[preLastPoint]->RefreshCtrlPoint(i, SplinePointPosition::FirstPoint, spl.GetP2(),
+                                                               spl.GetP1().toQPointF());
+                    ctrlPoints[lastPoint]->RefreshCtrlPoint(i, SplinePointPosition::LastPoint, spl.GetP3(),
+                                                            spl.GetP4().toQPointF());
+                }
+            }
+
             Creating(pathPoints.at(size-1).P().toQPointF(), size);
         }
 
@@ -161,29 +177,6 @@ QGraphicsEllipseItem *VisToolSplinePath::getPoint(quint32 i)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSharedPointer<VSpline> VisToolSplinePath::NewCurveSegmen(const QPointF &pSpl, int size)
-{
-    auto spline = QSharedPointer<VSpline>(new VSpline(VPointF(pSpl), ctrlPoint, Visualization::scenePos,
-                                                      VPointF(Visualization::scenePos), path.GetKCurve()));
-
-    if (size == 1)
-    {
-        path[size-1].SetAngle2(spline->GetStartAngle());
-        path[size-1].SetKAsm2(spline->GetKasm1());
-        emit PathChanged(path);
-    }
-    else
-    {
-        path[size-1].SetAngle2(spline->GetStartAngle());
-        path[size-1].SetKAsm1(spline->GetKasm1());
-        path[size-1].SetKAsm2(spline->GetKasm1());
-        emit PathChanged(path);
-    }
-
-    return spline;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
 {
     //Radius of point circle, but little bigger. Need handle with hover sizes.
@@ -224,15 +217,15 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
             }
         }
 
+        QLineF ctrlLine (pSpl, Visualization::scenePos);
+        ctrlLine.setAngle(ctrlLine.angle()+180);
+
         if (size == 1)
         {
             ctrlPoints[lastPoint]->RefreshCtrlPoint(size, SplinePointPosition::FirstPoint, ctrlPoint, pSpl);
         }
         else
         {
-            QLineF ctrlLine (pSpl, Visualization::scenePos);
-            ctrlLine.setAngle(ctrlLine.angle()+180);
-
             ctrlPoints[preLastPoint]->RefreshCtrlPoint(size-1, SplinePointPosition::LastPoint, ctrlLine.p2(), pSpl);
             ctrlPoints[lastPoint]->RefreshCtrlPoint(size, SplinePointPosition::FirstPoint, ctrlPoint, pSpl);
         }
@@ -243,14 +236,32 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
         if (size == 1)
         {
             path[size-1].SetAngle2(spline.GetStartAngle());
-            path[size-1].SetKAsm2(spline.GetKasm1());
+            if (ctrlPoint != pSpl)
+            {
+                path[size-1].SetKAsm2(spline.GetKasm1());
+            }
+            else
+            {
+                path[size-1].SetKAsm2(0);
+            }
             emit PathChanged(path);
         }
         else
         {
+            const VSpline spl = path.GetSpline(size - 1);
+            VSpline preSpl(spl.GetP1(), spl.GetP2(), ctrlLine.p2(), VPointF(pSpl), path.GetKCurve());
+
             path[size-1].SetAngle2(spline.GetStartAngle());
-            path[size-1].SetKAsm1(spline.GetKasm1());
-            path[size-1].SetKAsm2(spline.GetKasm1());
+            if (ctrlPoint != pSpl)
+            {
+                path[size-1].SetKAsm1(preSpl.GetKasm2());
+                path[size-1].SetKAsm2(spline.GetKasm1());
+            }
+            else
+            {
+                path[size-1].SetKAsm1(0);
+                path[size-1].SetKAsm2(0);
+            }
             emit PathChanged(path);
         }
     }
@@ -262,7 +273,15 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
                        VPointF(Visualization::scenePos), path.GetKCurve());
 
         path[size-1].SetAngle2(spline.GetStartAngle());
-        path[size-1].SetKAsm2(spline.GetKasm1());
+
+        if (ctrlPoint != pSpl)
+        {
+            path[size-1].SetKAsm2(spline.GetKasm1());
+        }
+        else
+        {
+            path[size-1].SetKAsm2(0);
+        }
         emit PathChanged(path);
 
         DrawPath(newCurveSegment, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);

@@ -69,7 +69,6 @@ protected:
     QPointF ctrlPoint;
 
     QGraphicsEllipseItem * getPoint(quint32 i);
-    QSharedPointer<VSpline> NewCurveSegmen(const QPointF &pSpl, int size);
     void Creating(const QPointF &pSpl, int size);
 };
 

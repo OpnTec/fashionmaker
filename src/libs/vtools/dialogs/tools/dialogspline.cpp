@@ -139,7 +139,7 @@ void DialogSpline::SaveData()
     kAsm2 = ui->doubleSpinBoxKasm2->value();
     kCurve = ui->doubleSpinBoxKcurve->value();
 
-    VisToolSpline *path = qobject_cast<VisToolSpline *>(vis);
+    auto path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr);
 
     path->setObject1Id(GetP1());
@@ -149,6 +149,7 @@ void DialogSpline::SaveData()
     path->SetKAsm1(kAsm1);
     path->SetKAsm2(kAsm2);
     path->SetKCurve(kCurve);
+    path->SetMode(Mode::Show);
     path->RefreshGeometry();
 }
 
