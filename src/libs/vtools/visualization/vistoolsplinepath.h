@@ -32,7 +32,7 @@
 #include "vispath.h"
 #include "../../vgeometry/vsplinepath.h"
 
-enum class Mode : char {Creation, Show};
+class VControlPointSpline;
 
 class VisToolSplinePath : public VisPath
 {
@@ -49,19 +49,27 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
 
-    Mode getMode() const;
-    void setMode(const Mode &value);
 signals:
     void PathChanged(const VSplinePath &path);
+
+public slots:
+    void MouseLeftPressed();
+    void MouseLeftReleased();
 
 protected:
     Q_DISABLE_COPY(VisToolSplinePath)
     QVector<QGraphicsEllipseItem *> points;
-    QGraphicsLineItem               *line;
+    QVector<VControlPointSpline *>  ctrlPoints;
+    QGraphicsPathItem               *newCurveSegment;
     VSplinePath                     path;
-    Mode                            mode;
+
+    bool isLeftMousePressed;
+    bool pointSelected;
+
+    QPointF ctrlPoint;
 
     QGraphicsEllipseItem * getPoint(quint32 i);
+    void Creating(const QPointF &pSpl, int size);
 };
 
 #endif // VISTOOLSPLINEPATH_H

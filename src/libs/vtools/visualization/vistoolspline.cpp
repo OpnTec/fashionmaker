@@ -30,17 +30,38 @@
 #include "../../vgeometry/vpointf.h"
 #include "../../vgeometry/vspline.h"
 #include "../../vpatterndb/vcontainer.h"
+#include "../vwidgets/vcontrolpointspline.h"
 
 const int EMPTY_ANGLE = -1;
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSpline::VisToolSpline(const VContainer *data, QGraphicsItem *parent)
-    : VisPath(data, parent), object4Id(NULL_ID), lineP1(nullptr), lineP4(nullptr), line(nullptr), angle1(EMPTY_ANGLE),
-      angle2(EMPTY_ANGLE), kAsm1(1), kAsm2(1), kCurve(1)
+    : VisPath(data, parent),
+      object4Id(NULL_ID),
+      point1(nullptr),
+      point4(nullptr),
+      angle1(EMPTY_ANGLE),
+      angle2(EMPTY_ANGLE),
+      kAsm1(1),
+      kAsm2(1),
+      kCurve(1),
+      isLeftMousePressed(false),
+      p2Selected(false),
+      p3Selected(false),
+      p2(),
+      p3(),
+      controlPoints()
 {
-    lineP1 = InitPoint(supportColor, this);
-    lineP4 = InitPoint(supportColor, this); //-V656
-    line = InitItem<QGraphicsLineItem>(mainColor, this);
+    point1 = InitPoint(supportColor, this);
+    point4 = InitPoint(supportColor, this); //-V656
+
+    auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, *data->GetPatternUnit(), this);
+    controlPoint1->hide();
+    controlPoints.append(controlPoint1);
+
+    auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, *data->GetPatternUnit(), this);
+    controlPoint2->hide();
+    controlPoints.append(controlPoint2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -50,23 +71,80 @@ VisToolSpline::~VisToolSpline()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSpline::RefreshGeometry()
 {
+    //Radius of point circle, but little bigger. Need handle with hover sizes.
+    const static qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
+
     if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(lineP1, first->toQPointF(), supportColor);
+        const auto first = Visualization::data->GeometricObject<VPointF>(object1Id);
+        DrawPoint(point1, first->toQPointF(), supportColor);
+
+        if (mode == Mode::Creation)
+        {
+            if (isLeftMousePressed && not p2Selected)
+            {
+                p2 = Visualization::scenePos;
+                controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, p2, first->toQPointF());
+
+                if (not controlPoints[0]->isVisible())
+                {
+                    if (QLineF(first->toQPointF(), p2).length() > radius)
+                    {
+                        controlPoints[0]->show();
+                    }
+                    else
+                    {
+                        p2 = first->toQPointF();
+                    }
+                }
+            }
+            else
+            {
+                p2Selected = true;
+            }
+        }
 
         if (object4Id <= NULL_ID)
         {
-            DrawLine(line, QLineF(first->toQPointF(), Visualization::scenePos), mainColor);
+            VSpline spline(*first, p2, Visualization::scenePos, VPointF(Visualization::scenePos), kCurve);
+            DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
         }
         else
         {
-            const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object4Id);
-            DrawPoint(lineP4, second->toQPointF(), supportColor);
+            const auto second = Visualization::data->GeometricObject<VPointF>(object4Id);
+            DrawPoint(point4, second->toQPointF(), supportColor);
+
+            if (mode == Mode::Creation)
+            {
+                if (isLeftMousePressed && not p3Selected)
+                {
+                    QLineF ctrlLine (second->toQPointF(), Visualization::scenePos);
+                    ctrlLine.setAngle(ctrlLine.angle()+180);
+                    p3 = ctrlLine.p2();
+                    controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, p3, second->toQPointF());
+
+                    if (not controlPoints[1]->isVisible())
+                    {
+                        if (QLineF(second->toQPointF(), p3).length() > radius)
+                        {
+                            controlPoints[1]->show();
+                        }
+                        else
+                        {
+                            p3 = second->toQPointF();
+                        }
+                    }
+                }
+                else
+                {
+                    p3Selected = true;
+                }
+            }
 
             if (qFuzzyCompare(angle1, EMPTY_ANGLE) || qFuzzyCompare(angle2, EMPTY_ANGLE))
             {
-                DrawLine(line, QLineF(first->toQPointF(), second->toQPointF()), mainColor);
+                VSpline spline(*first, p2, p3, *second, kCurve);
+                DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
             }
             else
             {
@@ -111,4 +189,35 @@ void VisToolSpline::SetKAsm2(const qreal &value)
 void VisToolSpline::SetKCurve(const qreal &value)
 {
     kCurve = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VisToolSpline::GetP2() const
+{
+    return p2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VisToolSpline::GetP3() const
+{
+    return p3;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolSpline::MouseLeftPressed()
+{
+    if (mode == Mode::Creation)
+    {
+        isLeftMousePressed = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolSpline::MouseLeftReleased()
+{
+    if (mode == Mode::Creation)
+    {
+        isLeftMousePressed = false;
+        RefreshGeometry();
+    }
 }

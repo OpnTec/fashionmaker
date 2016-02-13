@@ -30,17 +30,10 @@
 #define MAINWINDOW_H
 
 #include "mainwindowsnogui.h"
-#include "../vwidgets/vmaingraphicsview.h"
-#include "../vtools/dialogs/tooldialogs.h"
-#include "dialogs/dialogs.h"
-#include "tools/vtooldetail.h"
-#include "tools/vtooluniondetails.h"
-#include "tools/drawTools/drawtools.h"
 #include "core/vcmdexport.h"
 #include "../vmisc/vlockguard.h"
-#include <QPointer>
 
-#include <QFileSystemWatcher>
+#include <QPointer>
 
 namespace Ui
 {
@@ -49,6 +42,12 @@ namespace Ui
 
 class VToolOptionsPropertyBrowser;
 class VMeasurements;
+class VMainGraphicsScene;
+class QFileSystemWatcher;
+class QLabel;
+class DialogIncrements;
+class DialogTool;
+class DialogHistory;
 
 /**
  * @brief The MainWindow class main windows.

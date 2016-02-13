@@ -31,6 +31,8 @@
 
 #include "vabstractspline.h"
 
+class VSpline;
+
 /**
  * @brief The VToolSpline class tool for creation spline. I mean bezier curve.
  */

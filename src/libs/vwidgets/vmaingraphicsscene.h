@@ -61,17 +61,17 @@ public slots:
 protected:
     virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
+    virtual void  mouseReleaseEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
 signals:
     /**
      * @brief mouseMove send new mouse position.
      * @param scenePos new mouse position.
      */
     void          mouseMove(const QPointF &scenePos);
-    /**
-     * @brief mousePress send new mouse press position.
-     * @param scenePos new mouse press position.
-     */
-    void          mousePress(QPointF scenePos);
+
+    void          MouseLeftPressed();
+    void          MouseLeftReleased();
+
     /**
      * @brief ChoosedObject send option choosed object.
      * @param id object id.

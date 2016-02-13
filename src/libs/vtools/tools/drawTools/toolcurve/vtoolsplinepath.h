@@ -31,6 +31,10 @@
 
 #include "vabstractspline.h"
 
+class VSplinePath;
+class VSplinePoint;
+class VSpline;
+
 /**
  * @brief The VToolSplinePath class tool for creation spline path.
  */

@@ -74,7 +74,11 @@ void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
  */
 void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    emit mousePress(event->scenePos());
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    {
+        emit MouseLeftPressed();
+    }
+
     QGraphicsScene::mousePressEvent(event);
     if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
     {
@@ -84,6 +88,16 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
             items[i]->setSelected(false);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    {
+        emit MouseLeftReleased();
+    }
+    QGraphicsScene::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

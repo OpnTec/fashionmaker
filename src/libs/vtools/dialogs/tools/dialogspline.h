@@ -72,6 +72,7 @@ public:
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     virtual void  PointNameChanged() Q_DECL_OVERRIDE;
+    virtual void  ShowDialog(bool click) Q_DECL_OVERRIDE;
 protected:
     virtual void  ShowVisualization() Q_DECL_OVERRIDE;
     /**

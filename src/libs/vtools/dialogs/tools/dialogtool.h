@@ -349,6 +349,7 @@ inline void DialogTool::AddVisualization()
             scene->addItem(toolVis);
         }
 
+        toolVis->SetMode(Mode::Show);
         toolVis->RefreshGeometry();
     }
 }

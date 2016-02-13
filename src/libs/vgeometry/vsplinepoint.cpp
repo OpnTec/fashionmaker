@@ -87,7 +87,7 @@ void VSplinePoint::SetAngle1(const qreal &value)
     line.setAngle(value);
     d->angle1 = line.angle();
 
-    line.setAngle(value+180);
+    line.setAngle(d->angle1+180);
     d->angle2 = line.angle();
 }
 
@@ -102,7 +102,7 @@ void VSplinePoint::SetAngle2(const qreal &value)
     line.setAngle(value);
     d->angle2 = line.angle();
 
-    line.setAngle(value-180);
+    line.setAngle(d->angle2+180);
     d->angle1 = line.angle();
 }
 

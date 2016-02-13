@@ -173,13 +173,13 @@ void VSimplePoint::ContextMenu(QGraphicsSceneContextMenuEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
         emit Choosed(id);
     }
-    QGraphicsEllipseItem::mouseReleaseEvent(event);
+    QGraphicsEllipseItem::mousePressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

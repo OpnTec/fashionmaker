@@ -446,9 +446,14 @@ void VToolDetail::mousePressEvent(QGraphicsSceneMouseEvent *event)
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
             SetOverrideCursor(cursorArrowCloseHand, 1, 1);
-            event->accept();
         }
     }
+
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    {
+        emit ChoosedTool(id, SceneObject::Detail);
+    }
+
     VNoBrushScalePathItem::mousePressEvent(event);
 }
 
@@ -461,11 +466,10 @@ void VToolDetail::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        emit ChoosedTool(id, SceneObject::Detail);
         //Disable cursor-arrow-closehand
         RestoreOverrideCursor(cursorArrowCloseHand);
     }
-    QGraphicsItem::mouseReleaseEvent(event);
+    VNoBrushScalePathItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
