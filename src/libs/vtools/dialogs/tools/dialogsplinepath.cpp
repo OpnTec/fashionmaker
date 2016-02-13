@@ -61,6 +61,13 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
             this, &DialogSplinePath::KAsm2Changed);
 
     vis = new VisToolSplinePath(data);
+    auto path = qobject_cast<VisToolSplinePath *>(vis);
+    SCASSERT(path != nullptr);
+
+    auto scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
+    SCASSERT(scene != nullptr);
+    connect(scene, &VMainGraphicsScene::MouseLeftPressed, path, &VisToolSplinePath::MouseLeftPressed);
+    connect(scene, &VMainGraphicsScene::MouseLeftReleased, path, &VisToolSplinePath::MouseLeftReleased);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -126,7 +133,7 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 
         SavePath();
 
-        VisToolSplinePath *visPath = qobject_cast<VisToolSplinePath *>(vis);
+        auto visPath = qobject_cast<VisToolSplinePath *>(vis);
         SCASSERT(visPath != nullptr);
         visPath->setPath(path);
 

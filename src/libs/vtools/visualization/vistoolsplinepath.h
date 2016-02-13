@@ -32,6 +32,8 @@
 #include "vispath.h"
 #include "../../vgeometry/vsplinepath.h"
 
+class VControlPointSpline;
+
 class VisToolSplinePath : public VisPath
 {
     Q_OBJECT
@@ -50,13 +52,25 @@ public:
 signals:
     void PathChanged(const VSplinePath &path);
 
+public slots:
+    void MouseLeftPressed();
+    void MouseLeftReleased();
+
 protected:
     Q_DISABLE_COPY(VisToolSplinePath)
     QVector<QGraphicsEllipseItem *> points;
-    QGraphicsLineItem               *line;
+    QVector<VControlPointSpline *>  ctrlPoints;
+    QGraphicsPathItem               *newCurveSegment;
     VSplinePath                     path;
 
+    bool isLeftMousePressed;
+    bool pointSelected;
+
+    QPointF ctrlPoint;
+
     QGraphicsEllipseItem * getPoint(quint32 i);
+    QSharedPointer<VSpline> NewCurveSegmen(const QPointF &pSpl, int size);
+    void Creating(const QPointF &pSpl, int size);
 };
 
 #endif // VISTOOLSPLINEPATH_H
