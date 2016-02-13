@@ -92,6 +92,10 @@ void VisToolSpline::RefreshGeometry()
                     {
                         controlPoints[0]->show();
                     }
+                    else
+                    {
+                        p2 = first->toQPointF();
+                    }
                 }
             }
             else
@@ -124,6 +128,10 @@ void VisToolSpline::RefreshGeometry()
                         if (QLineF(second->toQPointF(), p3).length() > radius)
                         {
                             controlPoints[1]->show();
+                        }
+                        else
+                        {
+                            p3 = second->toQPointF();
                         }
                     }
                 }
