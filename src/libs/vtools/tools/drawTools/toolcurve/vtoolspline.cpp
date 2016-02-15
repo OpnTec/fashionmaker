@@ -316,6 +316,18 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrKAsm1, spl->GetKasm1());
     doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
     doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
+
+    if (spl->GetDuplicate() > 0)
+    {
+        doc->SetAttribute(tag, AttrDuplicate, spl->GetDuplicate());
+    }
+    else
+    {
+        if (tag.hasAttribute(AttrDuplicate))
+        {
+            tag.removeAttribute(AttrDuplicate);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -178,6 +178,8 @@ public:
 
     virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
     virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
+protected:
+    virtual void CreateName() Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VSplinePathData> d;
 };

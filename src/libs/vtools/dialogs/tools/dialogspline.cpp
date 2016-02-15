@@ -43,7 +43,7 @@
  * @param parent parent widget
  */
 DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), spl()
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSpline), spl(), newDuplicate(-1)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -129,7 +129,17 @@ void DialogSpline::SaveData()
     const qreal kAsm2 = ui->doubleSpinBoxKasm2->value();
     const qreal kCurve = ui->doubleSpinBoxKcurve->value();
 
+    const quint32 d = spl.GetDuplicate();//Save previous value
     spl = VSpline(*GetP1(), *GetP4(), angle1, angle2, kAsm1, kAsm2, kCurve);
+
+    if (newDuplicate <= -1)
+    {
+        spl.SetDuplicate(d);
+    }
+    else
+    {
+        spl.SetDuplicate(static_cast<quint32>(newDuplicate));
+    }
 
     auto path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr);
@@ -158,6 +168,20 @@ const QSharedPointer<VPointF> DialogSpline::GetP4() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 DialogSpline::DNumber(const QString &baseName) const
+{
+    quint32 num = 1;
+    QString name;
+    do
+    {
+        name = baseName + QString("_%1").arg(num);
+        ++num;
+    } while (not data->IsUnique(name));
+
+    return num;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::PointNameChanged()
 {
     QSet<quint32> set;
@@ -169,11 +193,33 @@ void DialogSpline::PointNameChanged()
     {
         flagError = false;
         color = errorColor;
+
+        ui->lineEditSplineName->setText(QString());
     }
     else
     {
         flagError = true;
         color = okColor;
+
+        if (getCurrentObjectId(ui->comboBoxP1) == spl.GetP1().id() &&
+            getCurrentObjectId(ui->comboBoxP4) == spl.GetP4().id())
+        {
+            newDuplicate = -1;
+            ui->lineEditSplineName->setText(spl.name());
+        }
+        else
+        {
+            VSpline spline(*GetP1(), *GetP4(), spl.GetStartAngle(), spl.GetEndAngle(), spl.GetKasm1(), spl.GetKasm2(),
+                           spl.GetKcurve());
+
+            if (not data->IsUnique(spline.name()))
+            {
+                newDuplicate = DNumber(spline.name());
+                spline.SetDuplicate(newDuplicate);
+
+                ui->lineEditSplineName->setText(spline.name());
+            }
+        }
     }
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
@@ -188,13 +234,20 @@ void DialogSpline::ShowDialog(bool click)
         auto *path = qobject_cast<VisToolSpline *>(vis);
         SCASSERT(path != nullptr);
 
-        VSpline spl(*GetP1(), path->GetP2(), path->GetP3(), *GetP4(), 1);
+        spl = VSpline(*GetP1(), path->GetP2(), path->GetP3(), *GetP4(), ui->doubleSpinBoxKcurve->value());
 
         ui->spinBoxAngle1->setValue(static_cast<qint32>(spl.GetStartAngle()));
         ui->spinBoxAngle2->setValue(static_cast<qint32>(spl.GetEndAngle()));
 
         ui->doubleSpinBoxKasm1->setValue(spl.GetKasm1());
         ui->doubleSpinBoxKasm2->setValue(spl.GetKasm2());
+
+        if (not data->IsUnique(spl.name()))
+        {
+            spl.SetDuplicate(DNumber(spl.name()));
+        }
+
+        ui->lineEditSplineName->setText(spl.name());
 
         DialogAccepted();
     }
@@ -224,6 +277,8 @@ void DialogSpline::SetSpline(const VSpline &spline)
     ui->doubleSpinBoxKasm1->setValue(spl.GetKasm1());
     ui->doubleSpinBoxKasm2->setValue(spl.GetKasm2());
     ui->doubleSpinBoxKcurve->setValue(spl.GetKcurve());
+
+    ui->lineEditSplineName->setText(spl.name());
 
     auto path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr);

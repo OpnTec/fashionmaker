@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>540</width>
-    <height>233</height>
+    <height>273</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -206,6 +206,20 @@
      </item>
      <item row="1" column="1">
       <widget class="QComboBox" name="comboBoxColor"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelName">
+       <property name="text">
+        <string>Name:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lineEditSplineName">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
