@@ -1861,8 +1861,12 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, const QDomElement &dom
         const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
 
-        VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, color, scene, this, data,
-                            parse, Source::FromFile);
+        const auto p1 = data->GeometricObject<VPointF>(point1);
+        const auto p4 = data->GeometricObject<VPointF>(point4);
+
+        VSpline spline(*p1, *p4, angle1, angle2, kAsm1, kAsm2, kCurve);
+
+        VToolSpline::Create(id, spline, color, scene, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {

@@ -44,12 +44,10 @@ public:
                  QGraphicsItem * parent = nullptr );
     virtual ~VToolSpline() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
-    static VToolSpline *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
-    static VToolSpline *Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
-                               const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                               const QString &color, VMainGraphicsScene  *scene, VAbstractPattern *doc,
-                               VContainer *data,
-                               const Document &parse, const Source &typeCreation);
+    static VToolSpline *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data);
+    static VToolSpline *Create(const quint32 _id, const VSpline &spl, const QString &color, VMainGraphicsScene  *scene,
+                               VAbstractPattern *doc, VContainer *data, const Document &parse,
+                               const Source &typeCreation);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Spline)};
