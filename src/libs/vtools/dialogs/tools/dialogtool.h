@@ -255,6 +255,7 @@ protected:
     virtual void     SaveData() {}
     void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
     bool             eventFilter(QObject *object, QEvent *event);
+    quint32          DNumber(const QString &baseName) const;
 private:
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 

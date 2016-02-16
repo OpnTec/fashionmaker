@@ -319,6 +319,7 @@ QVector<VSplinePoint> VSplinePath::GetSplinePath() const
 void VSplinePath::Clear()
 {
     d->path.clear();
+    SetDuplicate(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

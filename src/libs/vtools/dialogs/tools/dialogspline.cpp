@@ -52,6 +52,8 @@ DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidge
     FillComboBoxPoints(ui->comboBoxP4);
     FillComboBoxLineColors(ui->comboBoxColor);
 
+    CheckState();
+
     connect(ui->comboBoxP1, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
             this, &DialogSpline::PointNameChanged);
     connect(ui->comboBoxP4, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
@@ -132,14 +134,7 @@ void DialogSpline::SaveData()
     const quint32 d = spl.GetDuplicate();//Save previous value
     spl = VSpline(*GetP1(), *GetP4(), angle1, angle2, kAsm1, kAsm2, kCurve);
 
-    if (newDuplicate <= -1)
-    {
-        spl.SetDuplicate(d);
-    }
-    else
-    {
-        spl.SetDuplicate(static_cast<quint32>(newDuplicate));
-    }
+    newDuplicate <= -1 ? spl.SetDuplicate(d) : spl.SetDuplicate(static_cast<quint32>(newDuplicate));
 
     auto path = qobject_cast<VisToolSpline *>(vis);
     SCASSERT(path != nullptr);
@@ -168,20 +163,6 @@ const QSharedPointer<VPointF> DialogSpline::GetP4() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 DialogSpline::DNumber(const QString &baseName) const
-{
-    quint32 num = 1;
-    QString name;
-    do
-    {
-        name = baseName + QString("_%1").arg(num);
-        ++num;
-    } while (not data->IsUnique(name));
-
-    return num;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::PointNameChanged()
 {
     QSet<quint32> set;
@@ -194,7 +175,7 @@ void DialogSpline::PointNameChanged()
         flagError = false;
         color = errorColor;
 
-        ui->lineEditSplineName->setText(QString());
+        ui->lineEditSplineName->setText(tr("Invalid spline"));
     }
     else
     {
@@ -216,11 +197,11 @@ void DialogSpline::PointNameChanged()
             {
                 newDuplicate = DNumber(spline.name());
                 spline.SetDuplicate(newDuplicate);
-
-                ui->lineEditSplineName->setText(spline.name());
             }
+            ui->lineEditSplineName->setText(spline.name());
         }
     }
+    ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
     CheckState();

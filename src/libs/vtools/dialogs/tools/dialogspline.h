@@ -75,8 +75,6 @@ private:
 
     const QSharedPointer<VPointF> GetP1() const;
     const QSharedPointer<VPointF> GetP4() const;
-
-    quint32 DNumber(const QString &baseName) const;
 };
 
 #endif // DIALOGSPLINE_H
