@@ -52,6 +52,8 @@ public:
 
     void setEnabled(bool enabled);
 
+    QString name() const;
+
 public slots:
     virtual void     FullUpdateFromFile () Q_DECL_OVERRIDE;
     virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;

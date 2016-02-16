@@ -87,7 +87,7 @@ private:
     void SetHCrossCurvesPoint(const QVariant &value);
 
     template<class Tool>
-    void AddPropertyPointName(Tool *i, const QString &propertyName);
+    void AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly = false);
 
     template<class Tool>
     void AddPropertyPointName1(Tool *i, const QString &propertyName);

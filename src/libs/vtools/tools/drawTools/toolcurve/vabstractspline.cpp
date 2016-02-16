@@ -266,3 +266,9 @@ void VAbstractSpline::setEnabled(bool enabled)
                     qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::name() const
+{
+    return ObjectName<VAbstractCurve>(id);
+}
