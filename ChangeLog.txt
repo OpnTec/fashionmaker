@@ -1,4 +1,5 @@
 # Version 0.4.2
+- In dialog 'tool Spline Path' fixed broken selecting new point into the list of points.
 - Regesign dialogs tool 'Spline' and 'Spline Path' for avoiding text squeeze.
 - Fixed getting correct reversed segment for single in the list curve.
 - Fixed triggering validation a detail. Two new cases: has been changed Reverse option and the list 
