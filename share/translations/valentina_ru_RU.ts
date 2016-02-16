@@ -3520,27 +3520,27 @@ Apply settings anyway?</source>
     <name>DialogSpline</name>
     <message>
         <source>First point</source>
-        <translation>Первая точка</translation>
+        <translation type="vanished">Первая точка</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Коэффициент длины первой контрольной точки</translation>
+        <translation type="vanished">Коэффициент длины первой контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Угол первой контрольной точки</translation>
+        <translation type="vanished">Угол первой контрольной точки</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Вторая точка</translation>
+        <translation type="vanished">Вторая точка</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Коэффициент длины второй контрольной точки</translation>
+        <translation type="vanished">Коэффициент длины второй контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Угол второй контрольной точки</translation>
+        <translation type="vanished">Угол второй контрольной точки</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -3566,6 +3566,34 @@ Apply settings anyway?</source>
         <source>Color:</source>
         <translation>Цвет:</translation>
     </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished">Первая точка:</translation>
+    </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Угол:</translation>
+    </message>
+    <message>
+        <source>Length ratio:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished">Вторая точка:</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid spline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -3575,23 +3603,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point of curve</source>
-        <translation>Точка кривой</translation>
+        <translation type="vanished">Точка кривой</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Коэффициент длины первой контрольной точки</translation>
+        <translation type="vanished">Коэффициент длины первой контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Угол первой контрольной точки</translation>
+        <translation type="vanished">Угол первой контрольной точки</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Коэффициент длины второй контрольной точки</translation>
+        <translation type="vanished">Коэффициент длины второй контрольной точки</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Угол второй контрольной точки</translation>
+        <translation type="vanished">Угол второй контрольной точки</translation>
     </message>
     <message>
         <source>List of points</source>
@@ -3616,6 +3644,34 @@ Apply settings anyway?</source>
     <message>
         <source>Color:</source>
         <translation>Цвет:</translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Угол:</translation>
+    </message>
+    <message>
+        <source>Length ratio:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid spline path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7190,6 +7246,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Horizontal correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

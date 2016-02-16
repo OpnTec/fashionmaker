@@ -3432,27 +3432,27 @@ Apply settings anyway?</source>
     <name>DialogSpline</name>
     <message>
         <source>First point</source>
-        <translation>Ensimmäinen piste</translation>
+        <translation type="vanished">Ensimmäinen piste</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Ensimmäisen kontrollipisteen pituussuhde</translation>
+        <translation type="vanished">Ensimmäisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Ensimmäisen kontrollipisteen kulma</translation>
+        <translation type="vanished">Ensimmäisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Toinen piste</translation>
+        <translation type="vanished">Toinen piste</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Toisen kontrollipisteen pituussuhde</translation>
+        <translation type="vanished">Toisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Toisen kontrollipisteen kulma</translation>
+        <translation type="vanished">Toisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -3478,6 +3478,34 @@ Apply settings anyway?</source>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length ratio:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nmi:</translation>
+    </message>
+    <message>
+        <source>Invalid spline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -3487,23 +3515,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point of curve</source>
-        <translation>Käyrän piste</translation>
+        <translation type="vanished">Käyrän piste</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Ensimmäisen kontrollipisteen pituussuhde</translation>
+        <translation type="vanished">Ensimmäisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Ensimmäisen kontrollipisteen kulma</translation>
+        <translation type="vanished">Ensimmäisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Toisen kontrollipisteen pituussuhde</translation>
+        <translation type="vanished">Toisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Toisen kontrollipisteen kulma</translation>
+        <translation type="vanished">Toisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>List of points</source>
@@ -3527,6 +3555,34 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length ratio:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nmi:</translation>
+    </message>
+    <message>
+        <source>Invalid spline path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6966,6 +7022,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Horizontal correction</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nimi</translation>
     </message>
 </context>
 <context>

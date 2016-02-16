@@ -3686,27 +3686,11 @@ Apply settings anyway?</source>
     <name>DialogSpline</name>
     <message>
         <source>First point</source>
-        <translation type="unfinished">Titik pertama</translation>
-    </message>
-    <message>
-        <source>Length ratio of the first control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The angle of the first control point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Titik pertama</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">titik kedua</translation>
-    </message>
-    <message>
-        <source>Length ratio of the second control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The angle of the second control point</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">titik kedua</translation>
     </message>
     <message>
         <source>Select last point of curve</source>
@@ -3724,31 +3708,39 @@ Apply settings anyway?</source>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length ratio:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid spline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
     <message>
         <source>Curved path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Point of curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length ratio of the first control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The angle of the first control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length ratio of the second control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The angle of the second control point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3765,6 +3757,34 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length ratio:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid spline path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7268,6 +7288,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Horizontal correction</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nama</translation>
     </message>
 </context>
 <context>
