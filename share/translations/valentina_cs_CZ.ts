@@ -3385,11 +3385,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Poměr délky prvního ovládacího bodu</translation>
+        <translation type="vanished">Poměr délky prvního ovládacího bodu</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Úhel prvního ovládacího bodu</translation>
+        <translation type="vanished">Úhel prvního ovládacího bodu</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -3397,11 +3397,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Poměr délky druhého ovládacího bodu</translation>
+        <translation type="vanished">Poměr délky druhého ovládacího bodu</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Úhel druhého ovládacího bodu</translation>
+        <translation type="vanished">Úhel druhého ovládacího bodu</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -3427,6 +3427,18 @@ Apply settings anyway?</source>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Úhel</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -3436,23 +3448,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point of curve</source>
-        <translation>Bod křivky</translation>
+        <translation type="vanished">Bod křivky</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Poměr délky prvního ovládacího bodu</translation>
+        <translation type="vanished">Poměr délky prvního ovládacího bodu</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Úhel prvního ovládacího bodu</translation>
+        <translation type="vanished">Úhel prvního ovládacího bodu</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Poměr délky druhého ovládacího bodu</translation>
+        <translation type="vanished">Poměr délky druhého ovládacího bodu</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Úhel druhého ovládacího bodu</translation>
+        <translation type="vanished">Úhel druhého ovládacího bodu</translation>
     </message>
     <message>
         <source>List of points</source>
@@ -3476,6 +3488,26 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point</source>
+        <translation type="unfinished">Bod</translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Úhel</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

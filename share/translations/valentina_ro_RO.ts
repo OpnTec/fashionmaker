@@ -3372,11 +3372,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Raport lungime al primului punct de control</translation>
+        <translation type="vanished">Raport lungime al primului punct de control</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Unghiul primului punct de control</translation>
+        <translation type="vanished">Unghiul primului punct de control</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -3384,11 +3384,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Raport lungime al celui de al doilea punct de control</translation>
+        <translation type="vanished">Raport lungime al celui de al doilea punct de control</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Unghiul celui de al doilea punct de control</translation>
+        <translation type="vanished">Unghiul celui de al doilea punct de control</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -3414,6 +3414,18 @@ Apply settings anyway?</source>
         <source>Color:</source>
         <translation>Culoare:</translation>
     </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Unghi</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -3423,23 +3435,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point of curve</source>
-        <translation>Punctul curbei</translation>
+        <translation type="vanished">Punctul curbei</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Raport lungime al primului punct de control</translation>
+        <translation type="vanished">Raport lungime al primului punct de control</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Unghiul primului punct de control</translation>
+        <translation type="vanished">Unghiul primului punct de control</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Raport lungime al celui de al doilea punct de control</translation>
+        <translation type="vanished">Raport lungime al celui de al doilea punct de control</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Unghiul celui de al doilea punct de control</translation>
+        <translation type="vanished">Unghiul celui de al doilea punct de control</translation>
     </message>
     <message>
         <source>List of points</source>
@@ -3464,6 +3476,26 @@ Apply settings anyway?</source>
     <message>
         <source>Color:</source>
         <translation>Culoare:</translation>
+    </message>
+    <message>
+        <source>Point</source>
+        <translation type="unfinished">Punct</translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Unghi</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

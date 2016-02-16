@@ -3464,11 +3464,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Ratio de longueur du premier point de contrôle</translation>
+        <translation type="vanished">Ratio de longueur du premier point de contrôle</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Angle du premier point de contrôle</translation>
+        <translation type="vanished">Angle du premier point de contrôle</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -3476,11 +3476,11 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Ratio de longueur du deuxième point de contrôle</translation>
+        <translation type="vanished">Ratio de longueur du deuxième point de contrôle</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Angle du deuxième point de contrôle</translation>
+        <translation type="vanished">Angle du deuxième point de contrôle</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -3506,6 +3506,18 @@ Appliquer les réglages quand-même ?</translation>
         <source>Color:</source>
         <translation>Couleur:</translation>
     </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -3515,23 +3527,23 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Point of curve</source>
-        <translation>Point de courbe</translation>
+        <translation type="vanished">Point de courbe</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Ratio de longueur du premier point de contrôle</translation>
+        <translation type="vanished">Ratio de longueur du premier point de contrôle</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Angle du premier point de contrôle</translation>
+        <translation type="vanished">Angle du premier point de contrôle</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Ratio de longueur du deuxième point de contrôle</translation>
+        <translation type="vanished">Ratio de longueur du deuxième point de contrôle</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Angle du deuxième point de contrôle</translation>
+        <translation type="vanished">Angle du deuxième point de contrôle</translation>
     </message>
     <message>
         <source>List of points</source>
@@ -3556,6 +3568,26 @@ Appliquer les réglages quand-même ?</translation>
     <message>
         <source>Color:</source>
         <translation>Couleur:</translation>
+    </message>
+    <message>
+        <source>Point</source>
+        <translation type="unfinished">Point</translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
