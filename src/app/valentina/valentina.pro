@@ -431,7 +431,11 @@ win32:*-g++ {
     package_printsupport.files += $$[QT_INSTALL_PLUGINS]/printsupport/windowsprintersupport.dll
     INSTALLS += package_printsupport
 
-    NSIS_MAKENSISW = "C:/Program Files/NSIS/makensisw.exe"
+    contains(QT_ARCH, i386) {
+        NSIS_MAKENSISW = "C:/Program Files/NSIS/makensisw.exe"
+    } else {
+        NSIS_MAKENSISW = "C:/Program Files (x86)/NSIS/makensisw.exe"
+    }
 
     exists($$NSIS_MAKENSISW) {
         package_nsis.path = $${OUT_PWD}/../../../package
