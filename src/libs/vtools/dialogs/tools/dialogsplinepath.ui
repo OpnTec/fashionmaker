@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>353</height>
+    <width>519</width>
+    <height>401</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,17 +20,17 @@
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
           <widget class="QLabel" name="labelPoint">
            <property name="text">
-            <string>Point of curve</string>
+            <string>Point:</string>
            </property>
           </widget>
          </item>
@@ -40,94 +40,99 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Length ratio of the first control point</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBoxKasm1">
-           <property name="singleStep">
-            <double>0.010000000000000</double>
-           </property>
-           <property name="value">
-            <double>1.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>First control point</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout_2">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+          </property>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Angle:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxAngle1">
+            <property name="maximum">
+             <double>360.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxKasm1">
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+            <property name="value">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Length ratio:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>The angle of the first control point</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBoxAngle1">
-           <property name="maximum">
-            <double>360.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <item>
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>Length ratio of the second control point</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBoxKasm2">
-           <property name="singleStep">
-            <double>0.010000000000000</double>
-           </property>
-           <property name="value">
-            <double>1.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="label_7">
-           <property name="text">
-            <string>The angle of the second control point</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBoxAngle2">
-           <property name="maximum">
-            <double>360.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Second control point</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Length ratio:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxKasm2">
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+            <property name="value">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Angle:</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxAngle2">
+            <property name="maximum">
+             <double>360.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </item>
@@ -225,12 +230,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>comboBoxPoint</tabstop>
-  <tabstop>doubleSpinBoxKasm1</tabstop>
-  <tabstop>doubleSpinBoxAngle1</tabstop>
-  <tabstop>doubleSpinBoxKasm2</tabstop>
-  <tabstop>doubleSpinBoxAngle2</tabstop>
-  <tabstop>listWidget</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>

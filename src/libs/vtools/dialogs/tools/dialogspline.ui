@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>540</width>
-    <height>273</height>
+    <width>459</width>
+    <height>289</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,132 +20,237 @@
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <property name="spacing">
+      <number>6</number>
+     </property>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QLabel" name="labelFirstPoint">
+           <property name="minimumSize">
+            <size>
+             <width>89</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
-            <string>First point</string>
+            <string>First point:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBoxP1"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Length ratio of the first control point</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBoxKasm1">
-           <property name="singleStep">
-            <double>0.010000000000000</double>
-           </property>
-           <property name="value">
-            <double>1.000000000000000</double>
+          <widget class="QComboBox" name="comboBoxP1">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>The angle of the first control point</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="spinBoxAngle1">
-           <property name="maximum">
-            <number>360</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Control point</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <layout class="QFormLayout" name="formLayout_2">
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="doubleSpinBoxKasm1">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Angle:</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="spinBoxAngle1">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximum">
+               <number>360</number>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Length ratio:</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QLabel" name="labelSecondPoint">
            <property name="text">
-            <string>Second point</string>
+            <string>Second point:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBoxP4"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <item>
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>Length ratio of the second control point</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBoxKasm2">
-           <property name="singleStep">
-            <double>0.010000000000000</double>
-           </property>
-           <property name="value">
-            <double>1.000000000000000</double>
+          <widget class="QComboBox" name="comboBoxP4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="label_7">
-           <property name="text">
-            <string>The angle of the second control point</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="spinBoxAngle2">
-           <property name="maximum">
-            <number>360</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Control point</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QFormLayout" name="formLayout_3">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Length ratio:</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="doubleSpinBoxKasm2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Angle:</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="spinBoxAngle2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximum">
+               <number>360</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </item>
@@ -178,7 +283,7 @@
      <item row="0" column="1">
       <widget class="QDoubleSpinBox" name="doubleSpinBoxKcurve">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -205,7 +310,14 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="comboBoxColor"/>
+      <widget class="QComboBox" name="comboBoxColor">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="labelName">
@@ -242,6 +354,8 @@
   <tabstop>comboBoxP4</tabstop>
   <tabstop>doubleSpinBoxKasm2</tabstop>
   <tabstop>spinBoxAngle2</tabstop>
+  <tabstop>doubleSpinBoxKcurve</tabstop>
+  <tabstop>comboBoxColor</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
@@ -255,8 +369,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>246</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -271,8 +385,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>246</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
