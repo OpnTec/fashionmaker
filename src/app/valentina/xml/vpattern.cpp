@@ -1894,7 +1894,13 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         ToolsCommonAttributes(domElement, id);
         const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
-        VSplinePath *path = new VSplinePath(kCurve);
+        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
+
+        auto path = new VSplinePath(kCurve);
+        if (duplicate > 0)
+        {
+            path->SetDuplicate(duplicate);
+        }
 
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();

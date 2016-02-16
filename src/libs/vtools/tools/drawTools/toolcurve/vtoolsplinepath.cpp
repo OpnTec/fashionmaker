@@ -404,6 +404,18 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrKCurve, splPath->GetKCurve());
 
+    if (splPath->GetDuplicate() > 0)
+    {
+        doc->SetAttribute(tag, AttrDuplicate, splPath->GetDuplicate());
+    }
+    else
+    {
+        if (tag.hasAttribute(AttrDuplicate))
+        {
+            tag.removeAttribute(AttrDuplicate);
+        }
+    }
+
     doc->RemoveAllChild(tag);
     for (qint32 i = 0; i < splPath->CountPoint(); ++i)
     {
