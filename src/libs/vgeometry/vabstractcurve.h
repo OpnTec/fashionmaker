@@ -37,6 +37,7 @@ enum class PathDirection : char { Hide, Show };
 
 class QPainterPath;
 class QLineF;
+class VAbstractCurveData;
 
 class VAbstractCurve :public VGObject
 {
@@ -45,6 +46,7 @@ public:
                             const Draw &mode = Draw::Calculation);
     explicit VAbstractCurve(const VAbstractCurve &curve);
     VAbstractCurve& operator= (const VAbstractCurve &curve);
+    virtual ~VAbstractCurve() Q_DECL_OVERRIDE;
 
     virtual QVector<QPointF> GetPoints() const =0;
     QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse = false) const;
@@ -57,12 +59,20 @@ public:
     virtual qreal            GetStartAngle () const=0;
     virtual qreal            GetEndAngle () const=0;
 
+    quint32                  GetDuplicate() const;
+    void                     SetDuplicate(quint32 number);
+
     static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
+    virtual void             CreateName() =0;
 private:
+    QSharedDataPointer<VAbstractCurveData> d;
+
     static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin);
     static QVector<QPointF>  ToEnd(const QVector<QPointF> &points, const QPointF &end);
 };
+
+Q_DECLARE_TYPEINFO(VAbstractCurve, Q_MOVABLE_TYPE);
 
 #endif // VABSTRACTCURVE_H

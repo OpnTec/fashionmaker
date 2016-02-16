@@ -104,14 +104,8 @@ void VToolSpline::setDialog()
     SCASSERT(dialog != nullptr);
     DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const QSharedPointer<VSpline> spl = VAbstractTool::data.GeometricObject<VSpline>(id);
-    dialogTool->SetP1(spl->GetP1().id());
-    dialogTool->SetP4(spl->GetP4().id());
-    dialogTool->SetAngle1(spl->GetStartAngle());
-    dialogTool->SetAngle2(spl->GetEndAngle());
-    dialogTool->SetKAsm1(spl->GetKasm1());
-    dialogTool->SetKAsm2(spl->GetKasm2());
-    dialogTool->SetKCurve(spl->GetKcurve());
+    const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
+    dialogTool->SetSpline(*spl);
     dialogTool->SetColor(lineColor);
 }
 
@@ -127,18 +121,12 @@ void VToolSpline::setDialog()
 VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data)
 {
     SCASSERT(dialog != nullptr);
-    DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
+    auto dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    const quint32 p1 = dialogTool->GetP1();
-    const quint32 p4 = dialogTool->GetP4();
-    const qreal kAsm1 = dialogTool->GetKAsm1();
-    const qreal kAsm2 = dialogTool->GetKAsm2();
-    const qreal angle1 = dialogTool->GetAngle1();
-    const qreal angle2 = dialogTool->GetAngle2();
-    const qreal kCurve = dialogTool->GetKCurve();
-    const QString color = dialogTool->GetColor();
-    VToolSpline *spl = Create(0, p1, p4, kAsm1, kAsm2, angle1, angle2, kCurve, color, scene, doc, data,
-                              Document::FullParse, Source::FromGui);
+
+    auto spl = Create(0, dialogTool->GetSpline(), dialogTool->GetColor(), scene, doc, data, Document::FullParse,
+                      Source::FromGui);
+
     if (spl != nullptr)
     {
         spl->dialog=dialogTool;
@@ -150,13 +138,8 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
 /**
  * @brief Create help create tool.
  * @param _id tool id, 0 if tool doesn't exist yet.
- * @param p1 id first spline point.
- * @param p4 id last spline point.
- * @param kAsm1 coefficient of length first control line.
- * @param kAsm2 coefficient of length second control line.
- * @param angle1 angle from first point to first control point.
- * @param angle2 angle from second point to second control point.
- * @param kCurve coefficient of curvature spline.
+ * @param spl spline.
+ * @param color spline color.
  * @param scene pointer to scene.
  * @param doc dom document container.
  * @param data container with variables.
@@ -164,15 +147,11 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
  * @param typeCreation way we create this tool.
  * @return the created tool
  */
-VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const quint32 &p4, const qreal &kAsm1,
-                                 const qreal kAsm2, const qreal &angle1, const qreal &angle2, const qreal &kCurve,
-                                 const QString &color, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                 VContainer *data,
-                                 const Document &parse, const Source &typeCreation)
+VToolSpline* VToolSpline::Create(const quint32 _id, const VSpline &spl, const QString &color, VMainGraphicsScene *scene,
+                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                 const Source &typeCreation)
 {
-    VPointF point1 = *data->GeometricObject<VPointF>(p1);
-    VPointF point4 = *data->GeometricObject<VPointF>(p4);
-    VSpline *spline = new VSpline(point1, point4, angle1, angle2, kAsm1, kAsm2, kCurve);
+    auto spline = new VSpline(spl);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -191,17 +170,17 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const quint32 &p1, const qui
     VDrawTool::AddRecord(id, Tool::Spline, doc);
     if (parse == Document::FullParse)
     {
-        VToolSpline *spl = new VToolSpline(doc, data, id, color, typeCreation);
-        scene->addItem(spl);
-        connect(spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, spl, &VToolSpline::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, spl, &VToolSpline::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, spl, &VToolSpline::EnableToolMove);
-        connect(scene, &VMainGraphicsScene::CurveDetailsMode, spl, &VToolSpline::DetailsMode);
-        doc->AddTool(id, spl);
-        doc->IncrementReferens(point1.getIdTool());
-        doc->IncrementReferens(point4.getIdTool());
-        return spl;
+        auto _spl = new VToolSpline(doc, data, id, color, typeCreation);
+        scene->addItem(_spl);
+        connect(_spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+        connect(scene, &VMainGraphicsScene::NewFactor, _spl, &VToolSpline::SetFactor);
+        connect(scene, &VMainGraphicsScene::DisableItem, _spl, &VToolSpline::Disable);
+        connect(scene, &VMainGraphicsScene::EnableToolMove, _spl, &VToolSpline::EnableToolMove);
+        connect(scene, &VMainGraphicsScene::CurveDetailsMode, _spl, &VToolSpline::DetailsMode);
+        doc->AddTool(id, _spl);
+        doc->IncrementReferens(spline->GetP1().id());
+        doc->IncrementReferens(spline->GetP4().id());
+        return _spl;
     }
     return nullptr;
 }
@@ -297,13 +276,10 @@ void VToolSpline::RemoveReferens()
 void VToolSpline::SaveDialog(QDomElement &domElement)
 {
     SCASSERT(dialog != nullptr);
-    DialogSpline *dialogTool = qobject_cast<DialogSpline*>(dialog);
+    auto dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
 
-    VPointF point1 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->GetP1());
-    VPointF point4 = *VAbstractTool::data.GeometricObject<VPointF>(dialogTool->GetP4());
-    VSpline spl = VSpline (point1, point4, dialogTool->GetAngle1(), dialogTool->GetAngle2(),
-                           dialogTool->GetKAsm1(), dialogTool->GetKAsm2(), dialogTool->GetKCurve());
+    const VSpline spl = dialogTool->GetSpline();
 
     controlPoints[0]->blockSignals(true);
     controlPoints[1]->blockSignals(true);
@@ -313,8 +289,6 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
 
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
-
-    spl = VSpline (point1, controlPoints[0]->pos(), controlPoints[1]->pos(), point4, dialogTool->GetKCurve());
 
     doc->SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
     doc->SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
@@ -342,6 +316,18 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrKAsm1, spl->GetKasm1());
     doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
     doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
+
+    if (spl->GetDuplicate() > 0)
+    {
+        doc->SetAttribute(tag, AttrDuplicate, spl->GetDuplicate());
+    }
+    else
+    {
+        if (tag.hasAttribute(AttrDuplicate))
+        {
+            tag.removeAttribute(AttrDuplicate);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -112,6 +112,9 @@ protected:
 
     template <typename Item>
     void ShowItem(Item *item, quint32 id, bool enable);
+
+    template <typename T>
+    QString ObjectName(quint32 id) const;
 private:
     Q_DISABLE_COPY(VDrawTool)
 };
@@ -199,6 +202,27 @@ void VDrawTool::ShowItem(Item *item, quint32 id, bool enable)
     if (id == item->id)
     {
         ShowVisualization(enable);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+/**
+ * @brief ObjectName get object (point, curve, arc) name.
+ * @param id object id in container.
+ */
+QString VDrawTool::ObjectName(quint32 id) const
+{
+    try
+    {
+        return VAbstractTool::data.GeometricObject<T>(id)->name();
+    }
+    catch (const VExceptionBadId &e)
+    {
+        qCDebug(vTool, "Error! Couldn't get object name by id = %s. %s %s", qUtf8Printable(QString().setNum(id)),
+                qUtf8Printable(e.ErrorMessage()),
+                qUtf8Printable(e.DetailedInformation()));
+        return QString("");// Return empty string for property browser
     }
 }
 

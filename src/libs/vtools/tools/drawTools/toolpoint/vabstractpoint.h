@@ -50,7 +50,6 @@ public slots:
     void         DeleteFromLabel();
 
 protected:
-    QString PointName(quint32 id) const;
     void    SetPointName(quint32 id, const QString &name);
 
     template <typename T>

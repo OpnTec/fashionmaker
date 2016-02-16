@@ -30,6 +30,7 @@
 #define DIALOGSPLINE_H
 
 #include "dialogtool.h"
+#include "../vgeometry/vspline.h"
 
 namespace Ui
 {
@@ -46,29 +47,11 @@ public:
     DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogSpline() Q_DECL_OVERRIDE;
 
-    quint32       GetP1() const;
-    void          SetP1(const quint32 &value);
+    VSpline GetSpline() const;
+    void    SetSpline(const VSpline &spline);
 
-    quint32       GetP4() const;
-    void          SetP4(const quint32 &value);
-
-    qreal         GetAngle1() const;
-    void          SetAngle1(const qreal &value);
-
-    qreal         GetAngle2() const;
-    void          SetAngle2(const qreal &value);
-
-    qreal         GetKAsm1() const;
-    void          SetKAsm1(const qreal &value);
-
-    qreal         GetKAsm2() const;
-    void          SetKAsm2(const qreal &value);
-
-    qreal         GetKCurve() const;
-    void          SetKCurve(const qreal &value);
-
-    QString       GetColor() const;
-    void          SetColor(const QString &value);
+    QString GetColor() const;
+    void    SetColor(const QString &value);
 public slots:
     virtual void  ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     virtual void  PointNameChanged() Q_DECL_OVERRIDE;
@@ -85,20 +68,13 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogSpline *ui;
 
-    /** @brief angle1 first angle of spline in degree */
-    qreal         angle1;
+    /** @brief spl spline */
+    VSpline spl;
 
-    /** @brief angle2 second angle of spline in degree */
-    qreal         angle2;
+    qint32 newDuplicate;
 
-    /** @brief kAsm1 first coefficient asymmetry */
-    qreal         kAsm1;
-
-    /** @brief kAsm2 second coefficient asymmetry */
-    qreal         kAsm2;
-
-    /** @brief kCurve coefficient curve */
-    qreal         kCurve;
+    const QSharedPointer<VPointF> GetP1() const;
+    const QSharedPointer<VPointF> GetP4() const;
 };
 
 #endif // DIALOGSPLINE_H

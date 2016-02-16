@@ -27,4 +27,5 @@ HEADERS += \
         $$PWD/vsplinepath_p.h \
         $$PWD/vsplinepoint.h \
         $$PWD/vsplinepoint_p.h \
-        $$PWD/vgeometrydef.h
+        $$PWD/vgeometrydef.h \
+        $$PWD/vabstractcurve_p.h

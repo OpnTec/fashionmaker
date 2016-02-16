@@ -39,7 +39,7 @@
  * @param parent parent widget
  */
 DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogSplinePath), path(VSplinePath())
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogSplinePath), path(VSplinePath()), newDuplicate(-1)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -94,6 +94,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     }
     ui->listWidget->setFocus(Qt::OtherFocusReason);
     ui->doubleSpinBoxKcurve->setValue(path.GetKCurve());
+    ui->lineEditSplPathName->setText(path.name());
 
     auto visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr);
@@ -123,7 +124,7 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {
-        if (path.CountPoint() >= 2 && path.at(path.CountPoint()-1).P().id() == id)
+        if (AllIds().contains(id))
         {
             return;
         }
@@ -153,7 +154,9 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::SaveData()
 {
+    const quint32 d = path.GetDuplicate();//Save previous value
     SavePath();
+    newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
 
     auto visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr);
@@ -195,6 +198,45 @@ void DialogSplinePath::currentPointChanged(int index)
     DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
     EnableFields();
     item->setData(Qt::UserRole, QVariant::fromValue(p));
+    item->setText(p.P().name());
+
+    QColor color = okColor;
+    if (not IsPathValid())
+    {
+        flagError = false;
+        color = errorColor;
+
+        ui->lineEditSplPathName->setText(tr("Invalid spline path"));
+    }
+    else
+    {
+        flagError = true;
+        color = okColor;
+
+        auto first = qvariant_cast<VSplinePoint>(ui->listWidget->item(0)->data(Qt::UserRole));
+        auto last = qvariant_cast<VSplinePoint>(ui->listWidget->item(ui->listWidget->count()-1)->data(Qt::UserRole));
+
+        if (first.P().id() == path.at(0).P().id() && last.P().id() == path.at(path.CountPoint()-1).P().id())
+        {
+            newDuplicate = -1;
+            ui->lineEditSplPathName->setText(path.name());
+        }
+        else
+        {
+            VSplinePath newPath = ExtractPath();
+
+            if (not data->IsUnique(newPath.name()))
+            {
+                newDuplicate = DNumber(newPath.name());
+                newPath.SetDuplicate(newDuplicate);
+            }
+
+            ui->lineEditSplPathName->setText(newPath.name());
+        }
+    }
+    ChangeColor(ui->labelName, color);
+    ChangeColor(ui->labelPoint, color);
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -265,6 +307,12 @@ void DialogSplinePath::ShowDialog(bool click)
         if (path.CountPoint() >= 3)
         {
             emit ToolTip("");
+
+            if (not data->IsUnique(path.name()))
+            {
+                path.SetDuplicate(DNumber(path.name()));
+            }
+
             DialogAccepted();
         }
     }
@@ -368,10 +416,39 @@ void DialogSplinePath::EnableFields()
 void DialogSplinePath::SavePath()
 {
     path.Clear();
+    path = ExtractPath();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSet<quint32> DialogSplinePath::AllIds() const
+{
+    QSet<quint32> ids;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
     {
-        QListWidgetItem *item = ui->listWidget->item(i);
-        path.append( qvariant_cast<VSplinePoint>(item->data(Qt::UserRole)));
+        ids.insert(qvariant_cast<VSplinePoint>(ui->listWidget->item(i)->data(Qt::UserRole)).P().id());
     }
-    path.SetKCurve(ui->doubleSpinBoxKcurve->value());
+
+    return ids;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogSplinePath::IsPathValid() const
+{
+    if (path.CountPoint() < 3)
+    {
+        return false;
+    }
+
+    return (AllIds().size() == path.CountPoint());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSplinePath DialogSplinePath::ExtractPath() const
+{
+    VSplinePath path(ui->doubleSpinBoxKcurve->value());
+    for (qint32 i = 0; i < ui->listWidget->count(); ++i)
+    {
+        path.append( qvariant_cast<VSplinePoint>(ui->listWidget->item(i)->data(Qt::UserRole)));
+    }
+    return path;
 }

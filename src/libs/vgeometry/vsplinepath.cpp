@@ -59,13 +59,7 @@ void VSplinePath::append(const VSplinePoint &point)
     }
 
     d->path.append(point);
-    QString name = splPath;
-    name.append(QString("_%1").arg(d->path.first().P().name()));
-    if (d->path.size() > 1)
-    {
-        name.append(QString("_%1").arg(d->path.last().P().name()));
-    }
-    setName(name);
+    CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,8 +86,8 @@ VSpline VSplinePath::GetSpline(qint32 index) const
     {
         throw VException(tr("This spline does not exist."));
     }
-	const VSplinePoint &p1 = d->path.at(index-1);
-	const VSplinePoint &p2 = d->path.at(index);
+    const VSplinePoint &p1 = d->path.at(index-1);
+    const VSplinePoint &p2 = d->path.at(index);
     VSpline spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), d->kCurve);
     return spl;
 }
@@ -104,8 +98,8 @@ QPainterPath VSplinePath::GetPath(PathDirection direction) const
     QPainterPath painterPath;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-		const VSplinePoint &p1 = d->path.at(i-1);
-		const VSplinePoint &p2 = d->path.at(i);
+        const VSplinePoint &p1 = d->path.at(i-1);
+        const VSplinePoint &p2 = d->path.at(i);
         VSpline spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), d->kCurve);
         painterPath.addPath(spl.GetPath(direction));
     }
@@ -118,8 +112,8 @@ QVector<QPointF> VSplinePath::GetPoints() const
     QVector<QPointF> pathPoints;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-		const VSplinePoint &p1 = d->path.at(i-1);
-		const VSplinePoint &p2 = d->path.at(i);
+        const VSplinePoint &p1 = d->path.at(i-1);
+        const VSplinePoint &p2 = d->path.at(i);
         VSpline spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), d->kCurve);
         pathPoints += spl.GetPoints();
     }
@@ -132,8 +126,8 @@ qreal VSplinePath::GetLength() const
     qreal length = 0;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-		const VSplinePoint &p1 = d->path.at(i-1);
-		const VSplinePoint &p2 = d->path.at(i);
+        const VSplinePoint &p1 = d->path.at(i-1);
+        const VSplinePoint &p2 = d->path.at(i);
         VSpline spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(),
                     p1.KAsm2(), p2.KAsm1(), d->kCurve);
         length += spl.GetLength();
@@ -222,10 +216,10 @@ QPointF VSplinePath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF
     fullLength = 0;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-		const VSplinePoint &point1 = d->path.at(i-1);
-		const VSplinePoint &point2 = d->path.at(i);
-        VSpline spl = VSpline(point1.P(), point2.P(), point1.Angle2(), point2.Angle1(), point1.KAsm2(), 
-			                  point2.KAsm1(), d->kCurve);
+        const VSplinePoint &point1 = d->path.at(i-1);
+        const VSplinePoint &point2 = d->path.at(i);
+        VSpline spl = VSpline(point1.P(), point2.P(), point1.Angle2(), point2.Angle1(), point1.KAsm2(),
+                              point2.KAsm1(), d->kCurve);
         fullLength += spl.GetLength();
         if (fullLength > length)
         {
@@ -243,8 +237,8 @@ int VSplinePath::Segment(const QPointF &p) const
     int index = -1;
     for (qint32 i = 1; i <= Count(); ++i)
     {
-		const VSplinePoint &p1 = d->path.at(i-1);
-		const VSplinePoint &p2 = d->path.at(i);
+        const VSplinePoint &p1 = d->path.at(i-1);
+        const VSplinePoint &p2 = d->path.at(i);
         VSpline spl = VSpline(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), d->kCurve);
 
         const qreal t = spl.ParamT(p);
@@ -289,6 +283,27 @@ qreal VSplinePath::GetEndAngle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSplinePath::CreateName()
+{
+    QString name;
+    if (not d->path.isEmpty())
+    {
+        name = splPath;
+        name.append(QString("_%1").arg(d->path.first().P().name()));
+        if (d->path.size() > 1)
+        {
+            name.append(QString("_%1").arg(d->path.last().P().name()));
+        }
+
+        if (GetDuplicate() > 0)
+        {
+            name += QString("_%1").arg(GetDuplicate());
+        }
+    }
+    setName(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qint32 VSplinePath::CountPoint() const
 {
     return d->path.size();
@@ -304,6 +319,7 @@ QVector<VSplinePoint> VSplinePath::GetSplinePath() const
 void VSplinePath::Clear()
 {
     d->path.clear();
+    SetDuplicate(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

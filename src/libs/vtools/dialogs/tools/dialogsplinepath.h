@@ -77,10 +77,15 @@ private:
     /** @brief path spline path */
     VSplinePath        path;
 
+    qint32             newDuplicate;
+
     void               NewItem(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     void               DataPoint(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
     void               EnableFields();
     void               SavePath();
+    QSet<quint32>      AllIds() const;
+    bool               IsPathValid() const;
+    VSplinePath        ExtractPath() const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

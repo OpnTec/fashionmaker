@@ -95,7 +95,7 @@ void VToolSinglePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolSinglePoint::name() const
 {
-    return PointName(id);
+    return ObjectName<VPointF>(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
