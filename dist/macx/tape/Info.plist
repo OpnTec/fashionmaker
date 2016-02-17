@@ -11,7 +11,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>10.6</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2013-2015, Valentina project</string>
+	<string>© 2013-2016, Valentina project</string>
 	<key>CFBundleSignature</key>
 	<string>@TYPEINFO@</string>
 	<key>CFBundleExecutable</key>
@@ -19,9 +19,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>org.valentinaproject.@EXECUTABLE@</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.4.1</string>
+	<string>0.4.2</string>
 	<key>CFBundleVersion</key>
-	<string>0.4.1.0</string>
+	<string>0.4.2.0</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleDocumentTypes</key>
