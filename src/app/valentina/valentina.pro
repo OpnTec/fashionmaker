@@ -294,6 +294,10 @@ unix{
         icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
         icns_resources.files += $$PWD/../../../dist/macx/pattern.icns
 
+        # Copy to bundle standard measurements files
+        # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
+        QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/../tape/$${DESTDIR}/tape.app/$$RESOURCES_DIR/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
+
         QMAKE_BUNDLE_DATA += \
             templates \
             standard \
