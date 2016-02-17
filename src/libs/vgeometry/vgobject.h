@@ -68,6 +68,8 @@ public:
     quint32         id() const;
     virtual void    setId(const quint32 &id);
 
+    quint32         getIdTool() const;
+
     static QLineF  BuildLine(const QPointF &p1, const qreal& length, const qreal &angle);
     static QPointF BuildRay(const QPointF &firstPoint, const qreal &angle, const QRectF &scRect);
     static QLineF  BuildAxis(const QPointF &p, const qreal &angle, const QRectF &scRect);

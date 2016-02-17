@@ -308,6 +308,19 @@ void DialogEditWrongFormula::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::showEvent(QShowEvent *event)
+{
+    DialogTool::showEvent( event );
+    if ( event->spontaneous() )
+    {
+        return;
+    }
+
+    setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
+    setMinimumSize(QSize(0, 0));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::SetFormula(const QString &value)
 {
     formula = qApp->TrVars()->FormulaToUser(value);

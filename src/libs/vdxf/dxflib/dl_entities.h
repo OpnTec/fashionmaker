@@ -847,18 +847,6 @@ struct DXFLIB_EXPORT DL_TextData
     virtual ~DL_TextData()
     {}
 
-    DL_TextData(const DL_TextData &data)
-        :ipx(data.ipx), ipy(data.ipy), ipz(data.ipz),
-        apx(data.apx), apy(data.apy), apz(data.apz),
-        height(data.height), xScaleFactor(data.xScaleFactor),
-        textGenerationFlags(data.textGenerationFlags),
-        hJustification(data.hJustification),
-        vJustification(data.vJustification),
-        text(data.text),
-        style(data.style),
-        angle(data.angle)
-    {}
-
     /*! X Coordinate of insertion point. */
     double ipx;
     /*! Y Coordinate of insertion point. */
@@ -966,7 +954,8 @@ struct DXFLIB_EXPORT DL_DimensionData
                      const std::string& text,
                      const std::string& style,
                      double angle,
-                     double linearFactor = 1.0) :
+                     double linearFactor = 1.0,
+                     double dimScale = 1.0) :
         dpx(dpx), dpy(dpy), dpz(dpz),
         mpx(mpx), mpy(mpy), mpz(mpz),
         type(type),
@@ -976,7 +965,8 @@ struct DXFLIB_EXPORT DL_DimensionData
         text(text),
         style(style),
         angle(angle),
-        linearFactor(linearFactor)
+        linearFactor(linearFactor),
+        dimScale(dimScale)
     {
 
     }
@@ -1050,6 +1040,10 @@ struct DXFLIB_EXPORT DL_DimensionData
      * Linear factor style override.
      */
     double linearFactor;
+    /**
+     * Dimension scale (dimscale) style override.
+     */
+    double dimScale;
 };
 
 

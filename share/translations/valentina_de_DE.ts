@@ -3456,11 +3456,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Längenverhältnis des ersten Kontrollpunktes</translation>
+        <translation type="vanished">Längenverhältnis des ersten Kontrollpunktes</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Winkel des ersten Kontrollpunktes</translation>
+        <translation type="vanished">Winkel des ersten Kontrollpunktes</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -3468,11 +3468,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Längenverhältnis des zweiten Kontrollpunktes</translation>
+        <translation type="vanished">Längenverhältnis des zweiten Kontrollpunktes</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Winkel des zweiten Kontrollpunktes</translation>
+        <translation type="vanished">Winkel des zweiten Kontrollpunktes</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -3498,6 +3498,18 @@ Apply settings anyway?</source>
         <source>Color:</source>
         <translation>Farbe:</translation>
     </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Winkel</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -3507,23 +3519,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point of curve</source>
-        <translation>Punkt der Kurve</translation>
+        <translation type="vanished">Punkt der Kurve</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Längenverhältnis des ersten Kontrollpunktes</translation>
+        <translation type="vanished">Längenverhältnis des ersten Kontrollpunktes</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Winkel des ersten Kontrollpunktes</translation>
+        <translation type="vanished">Winkel des ersten Kontrollpunktes</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Längenverhältnis des zweiten Kontrollpunktes</translation>
+        <translation type="vanished">Längenverhältnis des zweiten Kontrollpunktes</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Winkel des zweiten Kontrollpunktes</translation>
+        <translation type="vanished">Winkel des zweiten Kontrollpunktes</translation>
     </message>
     <message>
         <source>List of points</source>
@@ -3548,6 +3560,26 @@ Apply settings anyway?</source>
     <message>
         <source>Color:</source>
         <translation>Farbe:</translation>
+    </message>
+    <message>
+        <source>Point</source>
+        <translation type="unfinished">Punkt</translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Winkel</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5055,6 +5087,17 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Count steps (0 - no limit):</source>
         <translation>Schritte (0 - unbegrenzt):</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>The path to the measurments is already relative.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to the measurments is already absolute.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

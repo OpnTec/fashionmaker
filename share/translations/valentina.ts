@@ -2459,7 +2459,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">New pattern</translation>
+        <translation>New pattern</translation>
     </message>
 </context>
 <context>
@@ -3473,11 +3473,11 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Length ratio of the first control point</translation>
+        <translation type="vanished">Length ratio of the first control point</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>The angle of the first control point</translation>
+        <translation type="vanished">The angle of the first control point</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -3485,11 +3485,11 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Length ratio of the second control point</translation>
+        <translation type="vanished">Length ratio of the second control point</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>The angle of the second control point</translation>
+        <translation type="vanished">The angle of the second control point</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -3515,6 +3515,18 @@ Apply settings anyway?</translation>
         <source>Color:</source>
         <translation>Color:</translation>
     </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -3524,23 +3536,23 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Point of curve</source>
-        <translation>Point of curve</translation>
+        <translation type="vanished">Point of curve</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Length ratio of the first control point</translation>
+        <translation type="vanished">Length ratio of the first control point</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>The angle of the first control point</translation>
+        <translation type="vanished">The angle of the first control point</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Length ratio of the second control point</translation>
+        <translation type="vanished">Length ratio of the second control point</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>The angle of the second control point</translation>
+        <translation type="vanished">The angle of the second control point</translation>
     </message>
     <message>
         <source>List of points</source>
@@ -3565,6 +3577,26 @@ Apply settings anyway?</translation>
     <message>
         <source>Color:</source>
         <translation>Color:</translation>
+    </message>
+    <message>
+        <source>Point</source>
+        <translation type="unfinished">Point</translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Angle</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5072,6 +5104,17 @@ Do you want to save your changes?</translation>
     <message>
         <source>Count steps (0 - no limit):</source>
         <translation>Count steps (0 - no limit):</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>The path to the measurments is already relative.</source>
+        <translation>The path to the measurments is already relative.</translation>
+    </message>
+    <message>
+        <source>The path to the measurments is already absolute.</source>
+        <translation>The path to the measurments is already absolute.</translation>
     </message>
 </context>
 <context>

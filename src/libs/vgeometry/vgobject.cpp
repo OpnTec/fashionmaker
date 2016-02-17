@@ -181,6 +181,26 @@ void VGObject::setId(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 VGObject::getIdTool() const
+{
+    if (d->mode == Draw::Calculation)
+    {
+        if (d->idObject != NULL_ID)
+        {
+            return d->idObject;
+        }
+        else
+        {
+            return d->_id;
+        }
+    }
+    else
+    {
+        return d->_id;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QLineF VGObject::BuildLine(const QPointF &p1, const qreal &length, const qreal &angle)
 {
     QLineF line = QLineF();

@@ -89,8 +89,8 @@ private:
 
     static int indexOfNode(const QVector<VNodeDetail> &list, const quint32 &id);
 
-    QPointF StartSegment(const VContainer *data, const int &i) const;
-    QPointF EndSegment(const VContainer *data, const int &i) const;
+    QPointF StartSegment(const VContainer *data, const int &i, bool reverse) const;
+    QPointF EndSegment(const VContainer *data, const int &i, bool reverse) const;
 
     static QVector<QPointF> biasPoints(const QVector<QPointF> &points, const qreal &mx, const qreal &my);
 };

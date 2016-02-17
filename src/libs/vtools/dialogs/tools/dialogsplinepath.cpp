@@ -187,6 +187,7 @@ void DialogSplinePath::currentPointChanged(int index)
     DataPoint(p.P().id(), p.KAsm1(), p.Angle1(), p.KAsm2(), p.Angle2());
     EnableFields();
     item->setData(Qt::UserRole, QVariant::fromValue(p));
+    item->setText(p.P().name());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

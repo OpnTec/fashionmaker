@@ -170,7 +170,7 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolEndLine::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolEndLine::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(basePointId);
+        doc->IncrementReferens(basePoint->getIdTool());
         return point;
     }
     return nullptr;

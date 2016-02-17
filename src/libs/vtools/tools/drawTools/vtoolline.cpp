@@ -155,8 +155,12 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, line, &VToolLine::Disable);
         doc->AddTool(id, line);
-        doc->IncrementReferens(firstPoint);
-        doc->IncrementReferens(secondPoint);
+
+        const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
+        const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);
+
+        doc->IncrementReferens(first->getIdTool());
+        doc->IncrementReferens(second->getIdTool());
         return line;
     }
     return nullptr;
@@ -307,8 +311,11 @@ void VToolLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  */
 void VToolLine::RemoveReferens()
 {
-    doc->DecrementReferens(firstPoint);
-    doc->DecrementReferens(secondPoint);
+    const auto p1 = VAbstractTool::data.GetGObject(firstPoint);
+    const auto p2 = VAbstractTool::data.GetGObject(secondPoint);
+
+    doc->DecrementReferens(p1->getIdTool());
+    doc->DecrementReferens(p2->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

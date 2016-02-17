@@ -33,6 +33,7 @@
 #include <QComboBox>
 #include <QDir>
 #include <QPrinterInfo>
+#include <QDebug>
 
 // Keep synchronize all names with initialization in VTranslateVars class!!!!!
 //measurements
@@ -1705,38 +1706,35 @@ QString StrippedName(const QString &fullFileName)
 //---------------------------------------------------------------------------------------------------------------------
 QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath)
 {
-    if (patternPath.isEmpty())
+    if (patternPath.isEmpty() || absoluteMPath.isEmpty())
     {
         return absoluteMPath;
     }
 
-    if (absoluteMPath.isEmpty() || QFileInfo(absoluteMPath).isRelative())
+    if (QFileInfo(absoluteMPath).isRelative())
     {
+        qWarning() << QApplication::tr("The path to the measurments is already relative.");
         return absoluteMPath;
     }
 
-    QDir dir(QFileInfo(patternPath).absoluteDir());
-    return dir.relativeFilePath(absoluteMPath);
+    return QFileInfo(patternPath).absoluteDir().relativeFilePath(absoluteMPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
 {
-    if (patternPath.isEmpty())
+    if (patternPath.isEmpty() || relativeMPath.isEmpty())
     {
         return relativeMPath;
     }
-    else
-    {
-        if (relativeMPath.isEmpty() || QFileInfo(relativeMPath).isAbsolute())
-        {
-            return relativeMPath;
-        }
 
-        return QFileInfo(QFileInfo(patternPath).absoluteDir(), relativeMPath).absoluteFilePath();
+    if (QFileInfo(relativeMPath).isAbsolute())
+    {
+        qWarning() << QApplication::tr("The path to the measurments is already absolute.");
+        return relativeMPath;
     }
 
-    return QString();// should never reach
+    return QFileInfo(QFileInfo(patternPath).absoluteDir(), relativeMPath).absoluteFilePath();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

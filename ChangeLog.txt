@@ -1,3 +1,19 @@
+# Version 0.4.2 February 17, 2016
+- Measurement Diagram is not shown on Mac OS X.
+- In dialog 'tool Spline Path' fixed broken selecting new point into the list of points.
+- Regesign dialogs tool 'Spline' and 'Spline Path' for avoiding text squeeze.
+- Fixed getting correct reversed segment for single in the list curve.
+- Fixed triggering validation a detail. Two new cases: has been changed Reverse option and the list 
+has been scrolled. Fixed validation when the list conatains only curve.
+- Fixed broken path to measurements after using Save As option.
+- Tool line. Block selecting the same point twice.
+- [#443] Not valid dxf file. libdxf updated to version 3.12.2.0. Fixed drawing subpaths.
+- Fixed combobox width in Dialog "Tool True Dart point".
+- [#441] Broken reference incrementation for tool "True Dart point".
+- [#439] Widen Formula Dialog.
+- Fixed broken tool dialogs "Intersection arcs" and "Point from arc and tangent".
+- [#442] 'Broken Formula' error when using Intersect Circles tool.
+
 # Version 0.4.1 January 29, 2016
 - [#438] Broken switching pattern pieces.
 - Fixed wrong title for dialog "New pattern".

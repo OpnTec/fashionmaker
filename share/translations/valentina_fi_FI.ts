@@ -3385,11 +3385,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Ensimmäisen kontrollipisteen pituussuhde</translation>
+        <translation type="vanished">Ensimmäisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Ensimmäisen kontrollipisteen kulma</translation>
+        <translation type="vanished">Ensimmäisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>Second point</source>
@@ -3397,11 +3397,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Toisen kontrollipisteen pituussuhde</translation>
+        <translation type="vanished">Toisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Toisen kontrollipisteen kulma</translation>
+        <translation type="vanished">Toisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -3427,6 +3427,18 @@ Apply settings anyway?</source>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Kulma</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -3436,23 +3448,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point of curve</source>
-        <translation>Käyrän piste</translation>
+        <translation type="vanished">Käyrän piste</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Ensimmäisen kontrollipisteen pituussuhde</translation>
+        <translation type="vanished">Ensimmäisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Ensimmäisen kontrollipisteen kulma</translation>
+        <translation type="vanished">Ensimmäisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Toisen kontrollipisteen pituussuhde</translation>
+        <translation type="vanished">Toisen kontrollipisteen pituussuhde</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Toisen kontrollipisteen kulma</translation>
+        <translation type="vanished">Toisen kontrollipisteen kulma</translation>
     </message>
     <message>
         <source>List of points</source>
@@ -3476,6 +3488,26 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point</source>
+        <translation type="unfinished">Piste</translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">Kulma</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4939,6 +4971,17 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Count steps (0 - no limit):</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>The path to the measurments is already relative.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to the measurments is already absolute.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

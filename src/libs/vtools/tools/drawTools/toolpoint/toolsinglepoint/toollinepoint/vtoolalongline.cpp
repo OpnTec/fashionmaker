@@ -94,7 +94,8 @@ void VToolAlongLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolAlongLine::RemoveReferens()
 {
-    doc->DecrementReferens(secondPointId);
+    const auto secondPoint = VAbstractTool::data.GetGObject(secondPointId);
+    doc->DecrementReferens(secondPoint->getIdTool());
     VToolLinePoint::RemoveReferens();
 }
 
@@ -279,8 +280,8 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolAlongLine::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolAlongLine::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(firstPointId);
-        doc->IncrementReferens(secondPointId);
+        doc->IncrementReferens(firstPoint->getIdTool());
+        doc->IncrementReferens(secondPoint->getIdTool());
         return point;
     }
     return nullptr;

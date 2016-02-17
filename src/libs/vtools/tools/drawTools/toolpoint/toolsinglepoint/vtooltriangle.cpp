@@ -156,10 +156,10 @@ VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName
         connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolTriangle::Disable);
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolTriangle::EnableToolMove);
         doc->AddTool(id, point);
-        doc->IncrementReferens(axisP1Id);
-        doc->IncrementReferens(axisP2Id);
-        doc->IncrementReferens(firstPointId);
-        doc->IncrementReferens(secondPointId);
+        doc->IncrementReferens(axisP1->getIdTool());
+        doc->IncrementReferens(axisP2->getIdTool());
+        doc->IncrementReferens(firstPoint->getIdTool());
+        doc->IncrementReferens(secondPoint->getIdTool());
         return point;
     }
     return nullptr;
@@ -213,10 +213,15 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
  */
 void VToolTriangle::RemoveReferens()
 {
-    doc->DecrementReferens(axisP1Id);
-    doc->DecrementReferens(axisP2Id);
-    doc->DecrementReferens(firstPointId);
-    doc->DecrementReferens(secondPointId);
+    const auto axisP1 = VAbstractTool::data.GetGObject(axisP1Id);
+    const auto axisP2 = VAbstractTool::data.GetGObject(axisP2Id);
+    const auto firstPoint = VAbstractTool::data.GetGObject(firstPointId);
+    const auto secondPoint = VAbstractTool::data.GetGObject(secondPointId);
+
+    doc->DecrementReferens(axisP1->getIdTool());
+    doc->DecrementReferens(axisP2->getIdTool());
+    doc->DecrementReferens(firstPoint->getIdTool());
+    doc->DecrementReferens(secondPoint->getIdTool());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

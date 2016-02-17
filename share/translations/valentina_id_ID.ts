@@ -3638,24 +3638,8 @@ Apply settings anyway?</source>
         <translation type="unfinished">Titik pertama</translation>
     </message>
     <message>
-        <source>Length ratio of the first control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The angle of the first control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Second point</source>
         <translation type="unfinished">titik kedua</translation>
-    </message>
-    <message>
-        <source>Length ratio of the second control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The angle of the second control point</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select last point of curve</source>
@@ -3673,31 +3657,23 @@ Apply settings anyway?</source>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">sudut</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
     <message>
         <source>Curved path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Point of curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length ratio of the first control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The angle of the first control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length ratio of the second control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The angle of the second control point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3714,6 +3690,26 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle</source>
+        <translation type="unfinished">sudut</translation>
+    </message>
+    <message>
+        <source>Length ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5256,6 +5252,17 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <source>cm</source>
         <comment>centimeter</comment>
         <translation type="obsolete">cm</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>The path to the measurments is already relative.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The path to the measurments is already absolute.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

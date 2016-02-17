@@ -170,7 +170,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
         doc->AddTool(id, point);
         doc->AddTool(arc1id, point);
         doc->AddTool(arc2id, point);
-        doc->IncrementReferens(arcId);
+        doc->IncrementReferens(arc->getIdTool());
         return point;
     }
     return nullptr;

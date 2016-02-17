@@ -37,6 +37,8 @@ VisToolPointOfIntersectionCircles::VisToolPointOfIntersectionCircles(const VCont
       crossPoint(CrossCirclesPoint::FirstPoint), point(nullptr), c1Center(nullptr), c2Center(nullptr), c1Path(nullptr),
       c2Path(nullptr)
 {
+    this->setPen(QPen(Qt::NoPen)); // don't use parent this time
+
     c1Path = InitItem<QGraphicsEllipseItem>(Qt::darkGreen, this);
     c2Path = InitItem<QGraphicsEllipseItem>(Qt::darkRed, this);
     point = InitPoint(mainColor, this);
