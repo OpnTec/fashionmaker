@@ -69,6 +69,7 @@ public slots:
     void OpenStandard();
     void OpenTemplate();
     void CreateFromExisting();
+    void OpenRecentFile();
 
 protected:
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
@@ -152,6 +153,10 @@ private:
     QAction *actionDockDiagram;
     bool dockDiagramVisible;
     bool isInitialized;
+    enum { MaxRecentFiles = 5 };
+    QAction            *recentFileActs[MaxRecentFiles];
+    QAction            *separatorAct;
+
 
     void SetupMenu();
     void InitWindow();
@@ -163,6 +168,7 @@ private:
 
     void ShowUnits();
     void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
+    void UpdateRecentFileActions();
 
     void MeasurementsWasSaved(bool saved);
     void SetCurrentFile(const QString &fileName);

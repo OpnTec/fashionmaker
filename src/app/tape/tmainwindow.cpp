@@ -117,6 +117,12 @@ TMainWindow::TMainWindow(QWidget *parent)
     ui->mainToolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     ui->toolBarGradation->setContextMenuPolicy(Qt::PreventContextMenu);
 
+    for (int i = 0; i < MaxRecentFiles; ++i)
+    {
+        recentFileActs[i] = nullptr;
+    }
+    separatorAct=nullptr;
+
     SetupMenu();
 
     setWindowTitle(tr("untitled %1").arg(qApp->MainWindows().size()+1));
@@ -165,7 +171,7 @@ void TMainWindow::RetranslateTable()
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------------
+//--------separatorAct-------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetBaseMHeight(int height)
 {
     if (m != nullptr)
@@ -1735,6 +1741,20 @@ void TMainWindow::SetupMenu()
     connect(ui->actionReadOnly, &QAction::triggered, this, &TMainWindow::ReadOnly);
     connect(ui->actionPreferences, &QAction::triggered, this, &TMainWindow::Preferences);
 
+    for (int i = 0; i < MaxRecentFiles; ++i)
+    {
+        recentFileActs[i] = new QAction(this);
+        connect(recentFileActs[i], &QAction::triggered, this, &TMainWindow::OpenRecentFile);
+        ui->menuFile->insertAction(ui->actionPreferences, recentFileActs[i]);
+        recentFileActs[i]->setVisible(false);
+    }
+
+    separatorAct = new QAction(this);
+    separatorAct->setSeparator(true);
+    separatorAct->setVisible(false);
+    ui->menuFile->insertAction(ui->actionPreferences, separatorAct );
+
+
     connect(ui->actionQuit, &QAction::triggered, this, &TMainWindow::close);
     ui->actionQuit->setShortcuts(QKeySequence::Quit);
 
@@ -1755,6 +1775,10 @@ void TMainWindow::SetupMenu()
     // Help
     connect(ui->actionAboutQt, &QAction::triggered, this, &TMainWindow::AboutQt);
     connect(ui->actionAboutTape, &QAction::triggered, this, &TMainWindow::AboutApplication);
+
+    //Actions for recent files loaded by a tape window application.
+    UpdateRecentFileActions();
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2025,6 +2049,16 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
         ui->lineEditPathToFile->setText(QDir::toNativeSeparators(curFile));
         ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(curFile));
         ui->pushButtonShowInExplorer->setEnabled(true);
+        VTapeSettings *settings = qApp->TapeSettings();
+        QStringList files = settings->GetRecentFileList();
+        files.removeAll(fileName);
+        files.prepend(fileName);
+        while (files.size() > MaxRecentFiles)
+        {
+            files.removeLast();
+        }
+        settings->SetRecentFileList(files);
+        UpdateRecentFileActions();
     }
     shownName += "[*]";
     setWindowTitle(shownName);
@@ -2689,6 +2723,30 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
 
     return true;
 }
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::UpdateRecentFileActions()
+{
+    qCDebug(tMainWindow, "Updating recent file actions.");
+    const QStringList files = qApp->TapeSettings()->GetRecentFileList();
+    const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
+    qCDebug(tMainWindow, "Updating recent file actions = %i ",numRecentFiles);
+
+    for (int i = 0; i < numRecentFiles; ++i)
+    {
+        QString text = QString("&%1. %2").arg(i + 1).arg(StrippedName(files.at(i)));
+        qCDebug(tMainWindow, "file %i = %s",numRecentFiles,text);
+        recentFileActs[i]->setText(text);
+        recentFileActs[i]->setData(files.at(i));
+        recentFileActs[i]->setVisible(true);
+    }
+
+    for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
+    {
+        recentFileActs[j]->setVisible(false);
+    }
+
+    separatorAct->setVisible(numRecentFiles>0);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::CreateWindowMenu(QMenu *menu)
@@ -2718,6 +2776,19 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
         if (window->isActiveWindow())
         {
             action->setChecked(true);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::OpenRecentFile()
+{
+    if (auto action=qobject_cast<QAction *>(sender()))
+    {
+        const QString filePath = action->data().toString();
+        if (not filePath.isEmpty())
+        {
+            LoadFile(filePath);
         }
     }
 }
