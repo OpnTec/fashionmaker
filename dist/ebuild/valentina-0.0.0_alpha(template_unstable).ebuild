@@ -16,11 +16,11 @@ LICENSE="GPL-3"
 SLOT="1"
 KEYWORDS="~amd64 ~x86"
 
-LANGS="ru_RU uk_UA de_DE cs_CZ he_IL fr_FR it_IT nl_NL id_ID es_ES fi_FI en_US en_CA en_IN ro_RO zh_CN"
-for X in ${LANGS} ; do
-	if [[ ${X} != "en" ]]; then
-    	IUSE="${IUSE} linguas_${X}"
-	fi
+# en_IN not supported in Gentoo so not added here
+LANGS="ru_RU uk_UA de_DE cs_CZ he_IL fr_FR it_IT nl_NL id_ID es_ES fi_FI en_US en_CA ro_RO zh_CN"
+
+for LANG in ${LANGS}; do
+	IUSE="${IUSE} linguas_${LANG}"
 done
 
 CDEPEND="
@@ -39,7 +39,14 @@ DEPEND="${CDEPEND}
 		dev-util/ccache"
 
 src_configure() {
-	eqmake5 Valentina.pro -r
+	local locales=""
+
+    for LANG in ${LANGS}; do
+        if use linguas_${LANG}; then
+            locales="${locales} ${LANG}"
+        fi
+    done
+	eqmake5 LOCALES="${locales}" Valentina.pro -r
 }
 
 src_install() {
