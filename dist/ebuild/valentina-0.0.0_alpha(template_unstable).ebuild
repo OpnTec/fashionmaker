@@ -33,7 +33,7 @@ CDEPEND="
 		dev-qt/qtxmlpatterns:5
 		dev-qt/qtprintsupport:5
 		dev-qt/qtnetwork:5
-		app-text/popple"
+		app-text/poppler"
 RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 		dev-util/ccache"
