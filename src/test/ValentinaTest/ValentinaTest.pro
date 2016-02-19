@@ -54,7 +54,8 @@ SOURCES += \
     tst_vcommandline.cpp \
     tst_tstranslation.cpp \
     tst_vdetail.cpp \
-    tst_findpoint.cpp
+    tst_findpoint.cpp \
+    tst_vellipticalarc.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -76,7 +77,8 @@ HEADERS += \
     tst_vcommandline.h \
     tst_tstranslation.h \
     tst_vdetail.h \
-    tst_findpoint.h
+    tst_findpoint.h \
+    tst_vellipticalarc.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
