@@ -125,13 +125,13 @@ VEllipticalArc::~VEllipticalArc()
  */
 qreal VEllipticalArc::GetLength() const
 {
-    qreal length;
+    qreal length = 0;
     QPainterPath elArc;
     QVector<QPointF> points = GetPoints();
     elArc.moveTo(points.at(0));
     for (qint32 i = 1; i < points.count(); ++i)
     {
-    elArc.lineTo(points.at(i));
+        elArc.lineTo(points.at(i));
     }
     length = elArc.length();
 
@@ -344,7 +344,9 @@ void VEllipticalArc::FindF2(qreal length)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VEllipticalArc::MaxLength() const
 {
-    return M_PI*(d->radius1+d->radius2);
+    const qreal h = ((d->radius1-d->radius2)*(d->radius1-d->radius2))/((d->radius1+d->radius2)*(d->radius1+d->radius2));
+    const qreal ellipseLength =  M_PI*(d->radius1+d->radius2)*(1+3*h/(10+qSqrt(4-3*h)));
+    return ellipseLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

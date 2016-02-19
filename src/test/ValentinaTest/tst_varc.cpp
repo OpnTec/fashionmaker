@@ -190,19 +190,19 @@ void TST_VArc::TestGetPoints()
     }
 
     {
-        qreal gSquere = 0.0;// geometry squere
+        qreal gSquere = 0.0;// geometry square
 
         if (qFuzzyCompare(arc.AngleArc(), 360.0))
-        {// circle squere
+        {// circle square
             gSquere = M_PI * radius * radius;
         }
         else
-        {// sector squere
+        {// sector square
             gSquere = (M_PI * radius * radius) / 360.0 * arc.AngleArc();
             points.append(center.toQPointF());
         }
 
-        // calculated squere
+        // calculated square
         const qreal cSquare = qAbs(VAbstractDetail::SumTrapezoids(points)/2.0);
         const qreal value = qAbs(gSquere - cSquare);
         const QString errorMsg =
