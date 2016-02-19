@@ -98,7 +98,9 @@ TMainWindow::TMainWindow(QWidget *parent)
       labelPatternUnit(nullptr),
       actionDockDiagram(nullptr),
       dockDiagramVisible(false),
-      isInitialized(false)
+      isInitialized(false),
+      recentFileActs(),
+      separatorAct(nullptr)
 {
     ui->setupUi(this);
 
@@ -117,11 +119,11 @@ TMainWindow::TMainWindow(QWidget *parent)
     ui->mainToolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     ui->toolBarGradation->setContextMenuPolicy(Qt::PreventContextMenu);
 
+    //MSVC doesn't support int arrays in initializer list
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
         recentFileActs[i] = nullptr;
     }
-    separatorAct=nullptr;
 
     SetupMenu();
 
@@ -2049,7 +2051,7 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
         ui->lineEditPathToFile->setText(QDir::toNativeSeparators(curFile));
         ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(curFile));
         ui->pushButtonShowInExplorer->setEnabled(true);
-        VTapeSettings *settings = qApp->TapeSettings();
+        auto settings = qApp->TapeSettings();
         QStringList files = settings->GetRecentFileList();
         files.removeAll(fileName);
         files.prepend(fileName);
@@ -2733,8 +2735,8 @@ void TMainWindow::UpdateRecentFileActions()
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
-        QString text = QString("&%1. %2").arg(i + 1).arg(StrippedName(files.at(i)));
-        qCDebug(tMainWindow, "file %i = %s",numRecentFiles,text);
+        const QString text = QString("&%1. %2").arg(i + 1).arg(StrippedName(files.at(i)));
+        qCDebug(tMainWindow, "file %i = %s", numRecentFiles, qUtf8Printable(text));
         recentFileActs[i]->setText(text);
         recentFileActs[i]->setData(files.at(i));
         recentFileActs[i]->setVisible(true);
