@@ -150,14 +150,7 @@ qreal VEllipticalArc::GetLength() const
  */
 QPointF VEllipticalArc::GetP1() const
 {
-    // p1 - point without rotation
-    QPointF p1 ( GetCenter().x () + qFloor((d->radius1 + d->radius2)*cos(d->f1*M_PI/180)),
-                 GetCenter().y () + qFloor((d->radius1 + d->radius2)*sin(d->f1*M_PI/180)));
-    // rotation of point
-    QLineF line(GetCenter().toQPointF(), p1);
-    line.setAngle(line.angle() + GetRotationAngle());
-
-    return line.p2();
+    return GetPoint(d->f1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -167,14 +160,7 @@ QPointF VEllipticalArc::GetP1() const
  */
 QPointF VEllipticalArc::GetP2 () const
 {
-    // p2 - point without rotation
-    QPointF p2 ( GetCenter().x () + qFloor((d->radius1 + d->radius2)*cos(d->f2*M_PI/180)),
-                 GetCenter().y () + qFloor((d->radius1 + d->radius2)*sin(d->f2*M_PI/180)));
-    // rotation of point
-    QLineF line(GetCenter().toQPointF(), p2);
-    line.setAngle(line.angle() + GetRotationAngle());
-
-    return line.p2();
+    return GetPoint(d->f2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -184,9 +170,42 @@ QPointF VEllipticalArc::GetP2 () const
  */
 QPointF VEllipticalArc::GetPoint (qreal angle) const
 {
+    if (angle > 360 || angle < 0)
+    {// Filter incorect value of angle
+        QLineF dummy(0,0, 100, 0);
+        dummy.setAngle(angle);
+        angle = dummy.angle();
+    }
+
     // p - point without rotation
-    QPointF p ( GetCenter().x () + qFloor((d->radius1 + d->radius2)*cos(angle*M_PI/180)),
-                GetCenter().y () + qFloor((d->radius1 + d->radius2)*sin(angle*M_PI/180)));
+    qreal x = qAbs((d->radius1 * d->radius2)/
+            (qSqrt(d->radius2*d->radius2+d->radius1*d->radius1*qTan(M_PI*angle/180)*qTan(M_PI*angle/180))));
+    qreal y = qAbs(qTan(M_PI*angle/180) * x);
+
+    if (angle > 90 && angle <= 180)
+    {
+        x = -x;
+    }
+    else if (angle > 180 && angle < 270)
+    {
+        x = -x;
+        y = -y;
+    }
+    else if (angle > 270)
+    {
+        y = -y;
+    }
+    else if (angle == 90)
+    {
+        x = 0;
+        y = d->radius2;
+    }
+    else if (angle == 270)
+    {
+        x = 0;
+        y = -d->radius2;
+    }
+    QPointF p ( GetCenter().x () + x, GetCenter().y () + y);
     // rotation of point
     QLineF line(GetCenter().toQPointF(), p);
     line.setAngle(line.angle() + GetRotationAngle());
