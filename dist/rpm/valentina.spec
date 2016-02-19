@@ -32,11 +32,11 @@ BuildRequires: libqt5-qttools
 BuildRequires: libQt5Svg-devel
 BuildRequires: update-desktop-files
 
-%if 0%{?suse_version} >= 1310
+%if 0%{?suse_version} == 1310
 BuildRequires: libQt5XmlPatterns-devel
 %endif
 
-%if 0%{?suse_version} >= 1320
+%if 0%{?suse_version} >= 1315
 BuildRequires: libqt5-linguist-devel
 BuildRequires: libqt5-qtxmlpatterns-devel
 %endif
@@ -49,7 +49,7 @@ Version:	0.4.2
 Release:	0
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
-Source0:	%{name}-%{version}.tar
+Source0:	%{name}-%{version}.tar.gz
 Group:		Graphics
 Summary:	Pattern Making Application
 BuildRoot:  %{_tmppath}/%{name}-%{version}-build 
@@ -59,7 +59,7 @@ Packager:   Roman Telezhinskyi <dismine@gmail.com>
 %global _enable_debug_package 0
 %global __debug_install_post %{nil} 
 %global debug_package %{nil}
-%if 0%{?suse_version} >= 1320
+%if 0%{?suse_version} >= 1315
 %global suse_insert_debug_package %{nil} 
 %global _suse_insert_debug_package %{nil} 
 %global _suse_insert_debug_package_seen %{nil}
@@ -76,7 +76,7 @@ a unique pattern making tool.
 %setup -q -n %{name}-%{version}
 
 %build
-%if 0%{?suse_version} >= 1320
+%if 0%{?suse_version} >= 1315
 qmake-qt5 PREFIX=%{_prefix} LRELEASE=lrelease-qt5 Valentina.pro -r CONFIG+=no_ccache
 %else
 qmake-qt5 PREFIX=%{_prefix} Valentina.pro -r CONFIG+=no_ccache
