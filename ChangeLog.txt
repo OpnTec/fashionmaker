@@ -7,6 +7,7 @@
 - Added language Chinese (China).
 - New icon for VAL file. Updated Tape logo. Updated ico for standard measurements.
 - [#325] Check pattern for inverse compatibility.
+- [#385] : Add 'Open Recent' option in Tape.exe, 'File' dropdown menu.
 
 # Version 0.4.3
 - [#405] Fixed crash after deleting first pattern piece in the list.
