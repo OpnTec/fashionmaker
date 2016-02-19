@@ -288,9 +288,6 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
     QVector<QPointF> points;
     QVector<qreal> sectionAngle = GetAngles();
 
-    QPointF pStart;
-    d->isFlipped ? pStart = GetP2() : pStart = GetP1();
-
     // if angle1 == angle2 and we have just one point of arc
     if(sectionAngle.size() == 1)
     {
@@ -298,14 +295,20 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
     }
     else
     {
-        for (int i = 0; i < sectionAngle.size()-1; ++i)
+        qreal currentAngle;
+        d->isFlipped ? currentAngle = GetEndAngle() : currentAngle = GetStartAngle();
+        for (int i = 0; i < sectionAngle.size(); ++i)
         {
-            QPointF firstPoint = GetPoint(sectionAngle.at(i));
-            QPointF point2 = GetPoint((2*sectionAngle.at(i) + sectionAngle.at(i+1))/3);
-            QPointF point3 = GetPoint((sectionAngle.at(i) + 2*sectionAngle.at(i+1))/3);
-            QPointF lastPoint = GetPoint(sectionAngle.at(i+1));
+            QPointF startPoint = GetPoint(currentAngle);
+            QPointF ellipsePoint2 = GetPoint(currentAngle + sectionAngle.at(i)/3);
+            QPointF ellipsePoint3 = GetPoint(currentAngle + 2*sectionAngle.at(i)/3);
+            QPointF lastPoint = GetPoint(currentAngle + sectionAngle.at(i));
+            // four points that are on ellipse
 
-            VSpline spl(VPointF(firstPoint), point2, point3, VPointF(lastPoint), 1.0);
+            QPointF bezierPoint1 = ( -5*startPoint + 18*ellipsePoint2 -9*ellipsePoint3 + 2*lastPoint )/6;
+            QPointF bezierPoint2 = ( 2*startPoint - 9*ellipsePoint2 + 18*ellipsePoint3 - 5*lastPoint )/6;
+
+            VSpline spl(VPointF(startPoint), bezierPoint1, bezierPoint2, VPointF(lastPoint), 1.0);
 
             QVector<QPointF> splPoints = spl.GetPoints();
 
@@ -314,6 +317,7 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
                 splPoints.removeLast();
             }
             points << splPoints;
+            currentAngle += sectionAngle.at(i);
         }
     }
     return points;
