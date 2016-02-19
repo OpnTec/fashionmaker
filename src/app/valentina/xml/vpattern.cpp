@@ -2783,7 +2783,10 @@ void VPattern::PrepareForParse(const Document &parse)
         data->ClearForFullParse();
         nameActivPP.clear();
         patternPieces.clear();
+
         qDeleteAll(toolsOnRemove);//Remove all invisible on a scene objects.
+        toolsOnRemove.clear();
+
         tools.clear();
         cursor = 0;
         history.clear();

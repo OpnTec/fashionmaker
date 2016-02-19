@@ -8,6 +8,9 @@
 - New icon for VAL file. Updated Tape logo. Updated ico for standard measurements.
 - [#325] Check pattern for inverse compatibility.
 
+# Version 0.4.3
+- [#405] Fixed crash after deleting first pattern piece in the list.
+
 # Version 0.4.2 February 17, 2016
 - Measurement Diagram is not shown on Mac OS X.
 - In dialog 'tool Spline Path' fixed broken selecting new point into the list of points.
