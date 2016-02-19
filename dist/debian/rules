@@ -18,7 +18,7 @@
 	mkdir -p builddir
 	  
   builddir/Makefile: builddir
-	cd builddir && qmake PREFIX=/usr PREFIX_LIB=$(PREFIX_LIB) CONFIG+=no_ccache ../$(APPNAME).pro -r
+	cd builddir && qmake PREFIX=/usr PREFIX_LIB=$(PREFIX_LIB) "CONFIG += noTests noRunPath no_ccache noDebugSymbols" ../$(APPNAME).pro -r
   build: build-stamp
   build-stamp: builddir/Makefile
 	dh_testdir
