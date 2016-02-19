@@ -36,10 +36,13 @@ DeletePatternPiece::DeletePatternPiece(VAbstractPattern *doc, const QString &nam
 {
     setText(tr("delete pattern piece %1").arg(namePP));
 
-    QDomElement patternP = doc->GetPPElement(namePP);
+    const QDomElement patternP = doc->GetPPElement(namePP);
     patternPiece = patternP.cloneNode().toElement();
-    QDomNode previousPP = patternP.previousSibling();//find previous pattern piece
-    previousPPName = doc->GetParametrString(previousPP.toElement(), VAbstractPattern::AttrName, "");
+    const QDomElement previousPP = patternP.previousSibling().toElement();//find previous pattern piece
+    if (not previousPP.isNull() && previousPP.tagName() == VAbstractPattern::TagDraw)
+    {
+        previousPPName = doc->GetParametrString(previousPP, VAbstractPattern::AttrName, "");
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -52,11 +55,28 @@ void DeletePatternPiece::undo()
     qCDebug(vUndo, "Undo.");
 
     QDomElement rootElement = doc->documentElement();
-    QDomNode previousPP = doc->GetPPElement(previousPPName);
-    rootElement.insertAfter(patternPiece, previousPP);
+
+    if (not previousPPName.isEmpty())
+    { // not first in the list, add after tag draw
+        const QDomNode previousPP = doc->GetPPElement(previousPPName);
+        rootElement.insertAfter(patternPiece, previousPP);
+    }
+    else
+    { // first in the list, add after tag increments
+        const QDomNodeList list = rootElement.elementsByTagName(VAbstractPattern::TagIncrements);
+        QDomElement increment;
+
+        if (not list.isEmpty())
+        {
+            increment = list.at(0).toElement();
+        }
+
+        Q_ASSERT_X(not increment.isNull(), Q_FUNC_INFO, "Couldn't' find tag Increments");
+        rootElement.insertAfter(patternPiece, increment);
+    }
 
     emit NeedFullParsing();
-    doc->ChangedActivPP(namePP);
+    doc->ChangeActivPP(namePP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -65,7 +85,7 @@ void DeletePatternPiece::redo()
     qCDebug(vUndo, "Redo.");
 
     QDomElement rootElement = doc->documentElement();
-    QDomElement patternPiece = doc->GetPPElement(namePP);
+    const QDomElement patternPiece = doc->GetPPElement(namePP);
     rootElement.removeChild(patternPiece);
     emit NeedFullParsing();
 }
