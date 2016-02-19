@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit qmake-utils
+inherit qmake-utils gnome2-utils fdo-mime
 
 DESCRIPTION="Cloth patternmaking software"
 HOMEPAGE="http://www.valentina-project.org/"
@@ -13,6 +13,7 @@ SRC_URI="https://bitbucket.org/dismine/valentina/get/v0.0.0.zip -> ${P}.zip"
 LICENSE="GPL-3"
 SLOT="1"
 KEYWORDS="~amd64 ~x86"
+IUSE="gnome"
 
 # en_IN not supported in Gentoo so not added here
 LANGS="ru_RU uk_UA de_DE cs_CZ he_IL fr_FR it_IT nl_NL id_ID es_ES fi_FI en_US en_CA ro_RO"
@@ -52,5 +53,21 @@ src_configure() {
 
 src_install() {
 	emake install INSTALL_ROOT="${D}"
-#	dodoc Changelog.txt README.txt
+
+	dodoc LICENSE_GPL.txt ChangeLog.txt README.txt
+
+	doman dist/debian/${PN}.1
+	doman dist/debian/tape.1
+
+	cp dist/debian/valentina.sharedmimeinfo dist/debian/${PN}.xml || die
+	insinto /usr/share/mime/packages
+	doins dist/debian/${PN}.xml
+}
+
+pkg_postinst() {
+	fdo-mime_desktop_database_update
+
+	if use gnome ; then
+		gnome2_icon_cache_update
+	fi
 }
