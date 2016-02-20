@@ -1,0 +1,6 @@
+Use debian.* files for building unstable package for Debian.
+For stable version enought to ceate an archive debian.tar.gz with folder debian inside.
+
+Run obs_debian.sh for updating files.
+
+Don't forget to update version inside valentina.dsc if need!

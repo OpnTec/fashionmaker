@@ -49,7 +49,7 @@ Version:	0.4.2
 Release:	0
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
-Source0:	%{name}-%{version}.tar
+Source0:	%{name}-%{version}.tar.gz
 Group:		Graphics
 Summary:	Pattern Making Application
 BuildRoot:  %{_tmppath}/%{name}-%{version}-build 
