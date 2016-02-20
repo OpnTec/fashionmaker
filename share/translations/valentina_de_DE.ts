@@ -271,11 +271,11 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Standardmaßeinheit wurde geändert und wird als Standard für neu angelegte Schnittmuster wirksam.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;welche Information&lt;/a&gt; übertragen werden.</translation>
     </message>
 </context>
 <context>
@@ -1827,7 +1827,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrere Schnitteile wurden nicht arrangiert, da sie nicht auf das Papier passen</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -1961,6 +1961,18 @@
         <translation>Rolle 44 Inch</translation>
     </message>
     <message>
+        <source>
+	Three groups: big, middle, small = 0
+	Two groups: big, small = 1
+	Descending area = 2
+</source>
+        <translation type="vanished">
+⇥Drei Gruppen: groß, mittel, klein = 0
+⇥Zwei Gruppen: groß, klein = 1
+⇥Absteigende Fläche = 2
+</translation>
+    </message>
+    <message>
         <source>Paper format</source>
         <translation>Papierformat</translation>
     </message>
@@ -2000,26 +2012,32 @@
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Felder gehen über den Druckbereich hinaus.
+
+Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>
 	Three groups: big, middle, small = 0;
 	Two groups: big, small = 1;
 	Descending area = 2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+⇥Drei Gruppen: groß, mittel, klein = 0
+⇥Zwei Gruppen: groß, klein = 1
+⇥Absteigende Fläche = 2
+</translation>
     </message>
     <message>
         <source>Layout options</source>
-        <translation type="unfinished"></translation>
+        <translation>Layoutoptionen</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiebungs-/Ausgleichslänge:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Regel zur Auswahl des nächsten Schnittteils</translation>
     </message>
 </context>
 <context>
@@ -2442,7 +2460,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">Neues Schnittmuster</translation>
+        <translation>Neues Schnittmuster</translation>
     </message>
 </context>
 <context>
@@ -2747,7 +2765,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Sofort übernehmen</translation>
     </message>
 </context>
 <context>
@@ -3500,15 +3518,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrollpunkt</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Winkel</translation>
+        <translation>Winkel</translation>
     </message>
     <message>
         <source>Length ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Längenverhältnis</translation>
     </message>
 </context>
 <context>
@@ -3563,23 +3581,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point</source>
-        <translation type="unfinished">Punkt</translation>
+        <translation>Punkt</translation>
     </message>
     <message>
         <source>First control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Erster Kontrollpunkt</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Winkel</translation>
+        <translation>Winkel</translation>
     </message>
     <message>
         <source>Length ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Längenverhältnis</translation>
     </message>
     <message>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweiter Kontrollpunkt</translation>
     </message>
 </context>
 <context>
@@ -3823,7 +3841,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Berechnen der Formel. Machen Sie den letzten Schritt rückgängig oder korrigieren Sie die Formel.</translation>
     </message>
 </context>
 <context>
@@ -4866,7 +4884,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Datei ist bereits in einem anderen Fenster geöffnet. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -4886,7 +4904,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmfehler melden...</translation>
     </message>
 </context>
 <context>
@@ -4945,7 +4963,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrere Schnitteile wurden nicht arrangiert, da sie nicht auf das Papier passen</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -4957,15 +4975,15 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zum Drucken eines mehrseitiges Dokument müssen alle Blätter die gleiche Größe haben.</translation>
     </message>
 </context>
 <context>
@@ -5192,22 +5210,22 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Änderungen angewendet.</translation>
     </message>
 </context>
 <context>
     <name>QSaveFile</name>
     <message>
         <source>Existing file %1 is not writable</source>
-        <translation type="unfinished"></translation>
+        <translation>Die existierende Datei %1 kann nicht geschrieben werden</translation>
     </message>
     <message>
         <source>Writing canceled by application</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreiben vom Programm abgebrochen</translation>
     </message>
     <message>
         <source>Partial write. Partition full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur teilweise geschrieben. Partition voll?</translation>
     </message>
 </context>
 <context>
@@ -5293,7 +5311,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwartete Funktion &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
     </message>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
@@ -5303,17 +5321,17 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwartete Variable &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
     </message>
     <message>
         <source>Function arguments used without a function (position: $POS$)</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Funktionsargument ohne Funktion benutzt (Position: $POS$)</translation>
     </message>
     <message>
         <source>Missing parenthesis</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fehlende Klammer</translation>
     </message>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
@@ -5353,7 +5371,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwarteter string zeichen an position $POS$ gefunden.</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
@@ -5967,7 +5985,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Datei ist bereits in einem anderen Fenster geöffnet. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -6430,19 +6448,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Left margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der linke Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>Right margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der rechte Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>Top margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der obere Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>Bottom margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der untere Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>The path to output destination folder. By default the directory at which the application was started.</source>
@@ -6502,11 +6520,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiebungs-/Ausgleichslänge</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Verschiebungs-/Ausgleichslänge muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
     </message>
 </context>
 <context>
@@ -6828,7 +6846,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error not unique id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler: uneindeutige ID.</translation>
     </message>
 </context>
 <context>
@@ -7900,17 +7918,17 @@ Do you want to save your changes?</source>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>RadiusBogen_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winkel1Bogen_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winkel2Bogen_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
@@ -8136,7 +8154,7 @@ Do you want to save your changes?</source>
     <name>mNoisyHandler</name>
     <message>
         <source>DEBUG:</source>
-        <translation type="unfinished"></translation>
+        <translation>ENTBUGGEN:</translation>
     </message>
     <message>
         <source>WARNING:</source>
@@ -8144,11 +8162,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>KRITISCH:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>FATAL:</translation>
     </message>
     <message>
         <source>INFO:</source>
@@ -8164,7 +8182,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fataler Fehler.</translation>
     </message>
     <message>
         <source>Information.</source>
@@ -8175,7 +8193,7 @@ Do you want to save your changes?</source>
     <name>vNoisyHandler</name>
     <message>
         <source>DEBUG:</source>
-        <translation type="unfinished"></translation>
+        <translation>ENTBUGGEN:</translation>
     </message>
     <message>
         <source>WARNING:</source>
@@ -8183,11 +8201,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>KRITISCH:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>FATAL:</translation>
     </message>
     <message>
         <source>INFO:</source>
@@ -8203,7 +8221,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fataler Fehler.</translation>
     </message>
     <message>
         <source>Information.</source>
