@@ -1,5 +1,5 @@
 Use debian.* files for building unstable package for Debian.
-For stable version enought to ceate an archive debian.tar.gz with folder debian inside.
+For stable version enough to create an archive debian.tar.gz with folder debian inside.
 
 Run obs_debian.sh for updating files.
 
