@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Proxy pass</source>
-        <translation type="vanished">Proxy Passwort</translation>
+        <translation type="vanished">Proxypasswort</translation>
     </message>
     <message>
         <source>User settings</source>
@@ -101,7 +101,7 @@
     </message>
     <message>
         <source>Proxy pass:</source>
-        <translation>Proxy Passwort:</translation>
+        <translation>Proxypasswort:</translation>
     </message>
     <message>
         <source>User Name:</source>
@@ -124,7 +124,7 @@
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;Okay</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -179,7 +179,7 @@
     </message>
     <message>
         <source>GUI language</source>
-        <translation type="vanished">GUI Sprache</translation>
+        <translation type="vanished">Sprache der Benutzeroberfläche</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
@@ -207,7 +207,7 @@
     </message>
     <message>
         <source>Label language</source>
-        <translation type="vanished">Sprache für Label</translation>
+        <translation type="vanished">Sprache der Bezeichnung</translation>
     </message>
     <message>
         <source>Send crash reports</source>
@@ -231,7 +231,7 @@
     </message>
     <message>
         <source>Toolbar</source>
-        <translation>Toolbar</translation>
+        <translation>Symbolleiste</translation>
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
@@ -239,7 +239,7 @@
     </message>
     <message>
         <source>GUI language:</source>
-        <translation>GUI Sprache:</translation>
+        <translation>Sprache der Benutzeroberfläche:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
@@ -271,11 +271,11 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Standardmaßeinheit wurde geändert und wird als Standard für neu angelegte Schnittmuster wirksam.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach jedem Absturz stellt Valentina Informationen zusammen, die helfen können, das Problem zu beheben. Es werden keine persönlichen Daten übertragen. Finde mehr darüber heraus, &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;welche Information&lt;/a&gt; übertragen werden.</translation>
     </message>
 </context>
 <context>
@@ -307,7 +307,7 @@
     </message>
     <message>
         <source>Valentina version</source>
-        <translation>Valentina Version</translation>
+        <translation>Valentina-Version</translation>
     </message>
     <message>
         <source>Contributors</source>
@@ -327,7 +327,7 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Build revision:</translation>
+        <translation>Build-Revision:</translation>
     </message>
     <message>
         <source>Built on %1 at %2</source>
@@ -342,19 +342,19 @@
     </message>
     <message>
         <source>Tape version</source>
-        <translation>Tape Version</translation>
+        <translation>Tape-Version</translation>
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Build revision:</translation>
+        <translation>Build-Revision:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
-        <translation>Dieses Programm ist teil des Valentina Projektes.</translation>
+        <translation>Dieses Programm ist Teil des Valentina-Projekts.</translation>
     </message>
     <message>
         <source>Build revision: %1</source>
-        <translation>Build revision: %1</translation>
+        <translation>Build-Revision: %1</translation>
     </message>
     <message>
         <source>Built on %3 at %4</source>
@@ -381,7 +381,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Länge</translation>
+        <translation type="vanished">Wert der Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -560,7 +560,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel Assistent</translation>
+        <translation>Formelassistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -627,7 +627,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation type="vanished">BogenlÃ¤nge</translation>
+        <translation type="vanished">Bogenlänge</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -663,7 +663,7 @@
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
-        <translation>Länge kann nicht gleich 0 sein.</translation>
+        <translation>Länge kann nicht gleich 0 sein</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -671,7 +671,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formel Assistent</translation>
+        <translation>Formelassistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -683,7 +683,7 @@
     </message>
     <message>
         <source>First angle:</source>
-        <translation>Erster Winkel</translation>
+        <translation>Erster Winkel:</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -790,7 +790,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>eindeutige Bezeichnung</translation>
+        <translation>Eindeutige Bezeichnung</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -825,7 +825,7 @@
     </message>
     <message>
         <source>Value of angle</source>
-        <translation type="vanished">Berecheter Winkel</translation>
+        <translation type="vanished">Wert des Winkels</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -889,11 +889,11 @@
     </message>
     <message>
         <source>Axis point:</source>
-        <translation>Punkt der Schnittachse</translation>
+        <translation>Punkt der Schnittachse:</translation>
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Kurve</translation>
+        <translation>Kurve:</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -901,7 +901,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>eindeutige Bezeichnung</translation>
+        <translation>Eindeutige Bezeichnung</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -924,7 +924,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Länge</translation>
+        <translation type="vanished">Wert der LÃ¤nge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -976,11 +976,11 @@
     </message>
     <message>
         <source>Point label:</source>
-        <translation>Bezeichnung des Punktes</translation>
+        <translation>Bezeichnung des Punktes:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>eindeutige Bezeichnung</translation>
+        <translation>Eindeutige Bezeichnung</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -999,7 +999,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Länge</translation>
+        <translation type="vanished">Wert der LÃ¤nge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1055,7 +1055,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>eindeutige Bezeichnung</translation>
+        <translation>Eindeutige Bezeichnung</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1074,7 +1074,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Länge</translation>
+        <translation type="vanished">Wert der LÃ¤nge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1122,7 +1122,7 @@
     </message>
     <message>
         <source>Curve:</source>
-        <translation>Kurve</translation>
+        <translation>Kurve:</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -1130,7 +1130,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>eindeutige Bezeichnung</translation>
+        <translation>Eindeutige Bezeichnung</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1149,7 +1149,7 @@
     </message>
     <message>
         <source>Bias X</source>
-        <translation type="vanished">Bias X</translation>
+        <translation type="vanished">Fadenlauf X</translation>
     </message>
     <message>
         <source>cm</source>
@@ -1157,7 +1157,7 @@
     </message>
     <message>
         <source>Bias Y</source>
-        <translation type="vanished">Bias Y</translation>
+        <translation type="vanished">Fadenlauf Y</translation>
     </message>
     <message>
         <source>Options</source>
@@ -1185,7 +1185,7 @@
     </message>
     <message>
         <source>Got wrong scene object. Ignore.</source>
-        <translation>Falsches scene object. Wird ignoriert.</translation>
+        <translation>Falsches Szenenobjekt. Wird ignoriert.</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -1241,7 +1241,7 @@
     </message>
     <message>
         <source>Name of detail:</source>
-        <translation>Name des Details</translation>
+        <translation>Name des Details:</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -1272,7 +1272,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeige die ganze Berechnung in der Nachrichtenbox box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zeige die ganze Berechnung in der Nachrichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Input data</source>
@@ -1280,7 +1280,7 @@
     </message>
     <message>
         <source>Size and height</source>
-        <translation type="vanished">Konfektion und Größe</translation>
+        <translation type="vanished">Konfektions- und Körpergröße</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -1324,31 +1324,31 @@
     </message>
     <message>
         <source>Line length</source>
-        <translation>LinienlÃ¤nge</translation>
+        <translation>Linienlänge</translation>
     </message>
     <message>
         <source>Arc length</source>
-        <translation>BogenlÃ¤nge</translation>
+        <translation>Bogenlänge</translation>
     </message>
     <message>
         <source>Curve length</source>
-        <translation>KurvenlÃ¤nge</translation>
+        <translation>Kurvenlänge</translation>
     </message>
     <message>
         <source>Line Angle</source>
-        <translation>Linienwerkzeug</translation>
+        <translation>Linienwinkel</translation>
     </message>
     <message>
         <source>Radius of arcs</source>
-        <translation>Radius des Bogens</translation>
+        <translation>Radius der Bögen</translation>
     </message>
     <message>
         <source>Angles of arcs</source>
-        <translation>Winkel des Bogens</translation>
+        <translation>Winkel der Bögen</translation>
     </message>
     <message>
         <source>Angles of curves</source>
-        <translation>Winkel der Kurve</translation>
+        <translation>Winkel der Kurven</translation>
     </message>
     <message>
         <source>Arc radius</source>
@@ -1383,7 +1383,7 @@
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Länge</translation>
+        <translation type="vanished">Längenwert</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1451,7 +1451,7 @@
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Winkel</translation>
+        <translation>Winkel:</translation>
     </message>
     <message>
         <source>Base point:</source>
@@ -1463,7 +1463,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>eindeutige Bezeichnung</translation>
+        <translation>Eindeutige Bezeichnung</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1530,7 +1530,7 @@
     </message>
     <message>
         <source>Unique label</source>
-        <translation>eindeutige Bezeichnung</translation>
+        <translation>Eindeutige Bezeichnung</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -1831,7 +1831,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrere Schnitteile wurden nicht arrangiert, da sie nicht auf das Papier passen</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -1965,6 +1965,17 @@
         <translation>Rolle 44 Inch</translation>
     </message>
     <message>
+        <source>
+	Three groups: big, middle, small = 0
+	Two groups: big, small = 1
+	Descending area = 2
+</source>
+        <translation type="vanished">
+⇥Drei Gruppen: groß, mittel, klein = 0
+⇥Zwei Gruppen: groß, klein = 1
+⇥Absteigende Fläche = 2</translation>
+    </message>
+    <message>
         <source>Paper format</source>
         <translation>Papierformat</translation>
     </message>
@@ -2004,26 +2015,32 @@
         <source>Fields go beyond printing. 
 
 Apply settings anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Felder gehen über den Druckbereich hinaus.
+
+Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>
 	Three groups: big, middle, small = 0;
 	Two groups: big, small = 1;
 	Descending area = 2</source>
-        <translation type="unfinished"></translation>
+        <translation>
+⇥Drei Gruppen: groß, mittel, klein = 0
+⇥Zwei Gruppen: groß, klein = 1
+⇥Absteigende Fläche = 2
+</translation>
     </message>
     <message>
         <source>Layout options</source>
-        <translation type="unfinished"></translation>
+        <translation>Layoutoptionen</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiebungs-/Ausgleichslänge:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Regel zur Auswahl des nächsten Schnittteils</translation>
     </message>
 </context>
 <context>
@@ -2446,7 +2463,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">Neues Schnittmuster</translation>
+        <translation>Neues Schnittmuster</translation>
     </message>
 </context>
 <context>
@@ -2616,11 +2633,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheit</translation>
     </message>
     <message>
         <source>Open only for read</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreibgeschützt öffnen</translation>
     </message>
 </context>
 <context>
@@ -2759,7 +2776,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Sofort übernehmen</translation>
     </message>
 </context>
 <context>
@@ -3212,35 +3229,35 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>Erste Kurve:</translation>
     </message>
     <message>
         <source>Second curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweite Kurve:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezeichnung des Punktes:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished">eindeutige Bezeichnung</translation>
+        <translation>eindeutige Bezeichnung:</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished">Eindeutige Bezeichnung wählen.</translation>
+        <translation>Eindeutige Bezeichnung wählen.</translation>
     </message>
     <message>
         <source>Vertical correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Korrektur:</translation>
     </message>
     <message>
         <source>Horizontal correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontale Korrektur:</translation>
     </message>
     <message>
         <source>Select second curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweite Kurve auswählen</translation>
     </message>
 </context>
 <context>
@@ -3551,31 +3568,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished">Erster Punkt:</translation>
+        <translation>Erster Punkt:</translation>
     </message>
     <message>
         <source>Control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrollpunkt</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Winkel:</translation>
     </message>
     <message>
         <source>Length ratio:</source>
-        <translation type="unfinished"></translation>
+        <translation>Längenverhältnis:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweiter Punkt:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Invalid spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültige Spline/glatte Kurve</translation>
     </message>
 </context>
 <context>
@@ -3630,31 +3647,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt:</translation>
     </message>
     <message>
         <source>First control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Erster Kontrollpunkt</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Winkel:</translation>
     </message>
     <message>
         <source>Length ratio:</source>
-        <translation type="unfinished"></translation>
+        <translation>Längenverhältnis:</translation>
     </message>
     <message>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweiter Kontrollpunkt</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Spline-Pfad/glatte Kurve</translation>
     </message>
 </context>
 <context>
@@ -3689,19 +3706,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Höchster Punkt</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterster Punkt</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt ganz links</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt ganz rechts</translation>
     </message>
 </context>
 <context>
@@ -3914,7 +3931,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Berechnen der Formel. Machen Sie den letzten Schritt rückgängig oder korrigieren Sie die Formel.</translation>
     </message>
 </context>
 <context>
@@ -4959,7 +4976,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Datei ist bereits in einem anderen Fenster geöffnet. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -4979,23 +4996,23 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmfehler melden...</translation>
     </message>
     <message>
         <source>Point intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnittpunkt zwischen zwei Kurven</translation>
     </message>
     <message>
         <source>Select first curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Erste Kurve auswählen</translation>
     </message>
     <message>
         <source>(read only)</source>
-        <translation type="unfinished"></translation>
+        <translation>(schreibgeschützt)</translation>
     </message>
     <message>
         <source>Measurements was changed. Do you want to sync measurements now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Maße wurden geändert. Sollen die Maße jetzt synchronisiert werden?</translation>
     </message>
 </context>
 <context>
@@ -5054,7 +5071,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrere Schnitteile wurden nicht arrangiert, da sie nicht auf das Papier passen</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
@@ -5066,15 +5083,15 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zum Speichern eines mehrseitiges Dokument müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben.</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zum Drucken eines mehrseitiges Dokument müssen alle Blätter die gleiche Größe haben.</translation>
     </message>
 </context>
 <context>
@@ -5301,22 +5318,22 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Änderungen angewendet.</translation>
     </message>
 </context>
 <context>
     <name>QSaveFile</name>
     <message>
         <source>Existing file %1 is not writable</source>
-        <translation type="unfinished"></translation>
+        <translation>Die existierende Datei %1 kann nicht geschrieben werden</translation>
     </message>
     <message>
         <source>Writing canceled by application</source>
-        <translation type="unfinished"></translation>
+        <translation>Schreiben vom Programm abgebrochen</translation>
     </message>
     <message>
         <source>Partial write. Partition full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur teilweise geschrieben. Partition voll?</translation>
     </message>
 </context>
 <context>
@@ -5402,7 +5419,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwartete Funktion &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
     </message>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
@@ -5412,17 +5429,17 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwartete Variable &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
     </message>
     <message>
         <source>Function arguments used without a function (position: $POS$)</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Funktionsargument ohne Funktion benutzt (Position: $POS$)</translation>
     </message>
     <message>
         <source>Missing parenthesis</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fehlende Klammer</translation>
     </message>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
@@ -5462,7 +5479,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwarteter String  &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
@@ -6076,7 +6093,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Datei ist bereits in einem anderen Fenster geöffnet. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -6543,19 +6560,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Left margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der linke Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>Right margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der rechte Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>Top margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der obere Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>Bottom margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der untere Rand muss zusammen mit Seiteneinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>The path to output destination folder. By default the directory at which the application was started.</source>
@@ -6615,11 +6632,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiebungs-/Ausgleichslänge</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Verschiebungs-/Ausgleichslänge muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
     </message>
 </context>
 <context>
@@ -6941,7 +6958,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error not unique id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler: uneindeutige ID.</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection curves</source>
@@ -7173,19 +7190,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Höchster Punkt</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterster Punkt</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt ganz links</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt ganz rechts</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
@@ -8049,17 +8066,17 @@ Do you want to save your changes?</source>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>RadiusBogen_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winkel1Bogen_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Winkel2Bogen_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
@@ -8285,7 +8302,7 @@ Do you want to save your changes?</source>
     <name>mNoisyHandler</name>
     <message>
         <source>DEBUG:</source>
-        <translation type="unfinished"></translation>
+        <translation>ENTBUGGEN:</translation>
     </message>
     <message>
         <source>WARNING:</source>
@@ -8293,11 +8310,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>KRITISCH:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>FATAL:</translation>
     </message>
     <message>
         <source>INFO:</source>
@@ -8313,7 +8330,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fataler Fehler.</translation>
     </message>
     <message>
         <source>Information.</source>
@@ -8324,7 +8341,7 @@ Do you want to save your changes?</source>
     <name>vNoisyHandler</name>
     <message>
         <source>DEBUG:</source>
-        <translation type="unfinished"></translation>
+        <translation>ENTBUGGEN:</translation>
     </message>
     <message>
         <source>WARNING:</source>
@@ -8332,11 +8349,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>CRITICAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>KRITISCH:</translation>
     </message>
     <message>
         <source>FATAL:</source>
-        <translation type="unfinished"></translation>
+        <translation>FATAL:</translation>
     </message>
     <message>
         <source>INFO:</source>
@@ -8352,7 +8369,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Fatal error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fataler Fehler.</translation>
     </message>
     <message>
         <source>Information.</source>

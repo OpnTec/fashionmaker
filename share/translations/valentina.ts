@@ -3568,31 +3568,31 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished">First point:</translation>
+        <translation>First point:</translation>
     </message>
     <message>
         <source>Control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Control point</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>Length ratio:</source>
-        <translation type="unfinished"></translation>
+        <translation>Length ratio:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished">Second point:</translation>
+        <translation>Second point:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Invalid spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Invalid spline</translation>
     </message>
 </context>
 <context>
@@ -3647,31 +3647,31 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Point:</translation>
     </message>
     <message>
         <source>First control point</source>
-        <translation type="unfinished"></translation>
+        <translation>First control point</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
     </message>
     <message>
         <source>Length ratio:</source>
-        <translation type="unfinished"></translation>
+        <translation>Length ratio:</translation>
     </message>
     <message>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Second control point</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Invalid spline path</translation>
     </message>
 </context>
 <context>
@@ -7250,7 +7250,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
 </context>
 <context>
