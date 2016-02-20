@@ -5479,7 +5479,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Unerwarteter String  &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
+        <translation>Unerwarteter string zeichen an position $POS$ gefunden.</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
