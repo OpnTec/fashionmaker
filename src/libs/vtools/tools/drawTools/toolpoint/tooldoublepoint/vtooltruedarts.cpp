@@ -66,7 +66,7 @@ void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLin
     const qreal degrees = d2d3.angleTo(d2d1);
 
     QLineF d2blP2(dartP2, baseLineP2);
-    d2blP2.setAngle(d2d3.angle()+degrees);
+    d2blP2.setAngle(d2blP2.angle()+degrees);
     const QPointF bP2Temp = d2blP2.p2();
 
     const QLineF bP1bP2Temp(baseLineP1, bP2Temp);
