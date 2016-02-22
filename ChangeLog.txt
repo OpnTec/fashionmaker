@@ -10,6 +10,7 @@
 - [#385] Add 'Open Recent' option in Tape.exe, 'File' dropdown menu.
 
 # Version 0.4.3
+- Fixed wrong calculation tool True darts.
 - [#405] Fixed crash after deleting first pattern piece in the list.
 
 # Version 0.4.2 February 17, 2016

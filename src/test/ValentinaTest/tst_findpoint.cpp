@@ -28,6 +28,7 @@
 
 #include "tst_findpoint.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
+#include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
 
 #include <QtTest>
 
@@ -164,4 +165,46 @@ void TST_FindPoint::TestPointOfIntersectionCurves()
                                                                      static_cast<VCrossCurvesPoint>(vCross),
                                                                      static_cast<HCrossCurvesPoint>(hCross));
     QCOMPARE(result.toPoint(), expect.toPoint());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_FindPoint::TestTrueDarts_data()
+{
+    QTest::addColumn<QPointF>("baseLineP1");
+    QTest::addColumn<QPointF>("baseLineP2");
+    QTest::addColumn<QPointF>("dartP1");
+    QTest::addColumn<QPointF>("dartP2");
+    QTest::addColumn<QPointF>("dartP3");
+    QTest::addColumn<QPointF>("expectP1");
+    QTest::addColumn<QPointF>("expectP2");
+
+    const QPointF baseLineP1(30.0, 3094.31433071);
+    const QPointF baseLineP2(621.006962676, 3222.38611313);
+    const QPointF dartP1(196.220708253, 3130.33451951);
+    const QPointF dartP2(196.220708253, 3470.49199983);
+    const QPointF dartP3(270.096578587, 3146.34349232);
+    const QPointF p1(196.220708253, 3106.93562497);
+    const QPointF p2(277.006407384, 3116.02492305);
+
+    QTest::newRow("Real case") << baseLineP1 << baseLineP2 << dartP1 << dartP2 << dartP3 << p1 << p2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_FindPoint::TestTrueDarts()
+{
+    QFETCH(QPointF, baseLineP1);
+    QFETCH(QPointF, baseLineP2);
+    QFETCH(QPointF, dartP1);
+    QFETCH(QPointF, dartP2);
+    QFETCH(QPointF, dartP3);
+    QFETCH(QPointF, expectP1);
+    QFETCH(QPointF, expectP2);
+
+    QPointF p1;
+    QPointF p2;
+
+    VToolTrueDarts::FindPoint(baseLineP1, baseLineP2, dartP1, dartP2, dartP3, p1, p2);
+
+    QCOMPARE(p1.toPoint(), expectP1.toPoint());
+    QCOMPARE(p2.toPoint(), expectP2.toPoint());
 }

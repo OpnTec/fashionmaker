@@ -41,6 +41,9 @@ private slots:
     void TestPointOfIntersectionCurves_data();
     void TestPointOfIntersectionCurves();
 
+    void TestTrueDarts_data();
+    void TestTrueDarts();
+
 };
 
 #endif // TST_FINDPOINT_H
