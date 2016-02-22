@@ -67,13 +67,8 @@ void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLin
 
     QLineF d2blP2(dartP2, baseLineP2);
     d2blP2.setAngle(d2blP2.angle()+degrees);
-    const QPointF bP2Temp = d2blP2.p2();
 
-    const QLineF bP1bP2Temp(baseLineP1, bP2Temp);
-
-    const QLineF::IntersectType res = bP1bP2Temp.intersect(d2d1, &p1);
-
-    if (res == QLineF::NoIntersection)
+    if (QLineF(baseLineP1, d2blP2.p2()).intersect(d2d1, &p1) == QLineF::NoIntersection)
     {
         p1 = QPointF(0, 0);
         p2 = QPointF(0, 0);
