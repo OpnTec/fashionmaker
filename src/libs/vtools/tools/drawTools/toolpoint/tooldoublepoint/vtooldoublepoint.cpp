@@ -128,8 +128,8 @@ void VToolDoublePoint::Disable(bool disable, const QString &namePP)
 {
     enabled = !CorrectDisable(disable, namePP);
     this->SetEnabled(enabled);
-    firstPoint->setEnabled(enabled);
-    secondPoint->setEnabled(enabled);
+    firstPoint->SetEnabled(enabled);
+    secondPoint->SetEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
