@@ -32,7 +32,7 @@
 #include "../vobj/vobjpaintdevice.h"
 #include "../vdxf/vdxfpaintdevice.h"
 #include "dialogs/dialoglayoutsettings.h"
-
+#include "../vwidgets/vmaingraphicsscene.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialogsavelayout.h"
@@ -437,7 +437,7 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::InitTempLayoutScene()
 {
-    tempSceneLayout = new QGraphicsScene();
+    tempSceneLayout = new VMainGraphicsScene();
     tempSceneLayout->setBackgroundBrush( QBrush(QColor(Qt::gray), Qt::SolidPattern) );
 }
 
@@ -503,7 +503,7 @@ void MainWindowsNoGUI::CreateScenes()
 {
     for (int i=0; i<papers.size(); ++i)
     {
-        QGraphicsScene *scene = new QGraphicsScene();
+        QGraphicsScene *scene = new VMainGraphicsScene();
         scene->setBackgroundBrush(QBrush(QColor(Qt::gray), Qt::SolidPattern));
         scene->addItem(shadows.at(i));
         scene->addItem(papers.at(i));

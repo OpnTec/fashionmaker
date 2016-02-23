@@ -11,6 +11,7 @@
 - [#385] Add 'Open Recent' option in Tape.exe, 'File' dropdown menu.
 
 # Version 0.4.3
+- Using QGraphicsScene instead of VMainGraphicsScene caused a crash.
 - Fixed bug disabling tool True darts.
 - Fixed wrong calculation tool True darts.
 - [#405] Fixed crash after deleting first pattern piece in the list.
