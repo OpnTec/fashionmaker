@@ -37,7 +37,7 @@
 VBank::VBank()
     :details(QVector<VLayoutDetail>()), unsorted(QHash<int, qint64>()), big(QHash<int, qint64>()),
       middle(QHash<int, qint64>()), small(QHash<int, qint64>()), layoutWidth(0), caseType(Cases::CaseDesc),
-      prepare(false), boundingRect(QRectF())
+      prepare(false), diagonal(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -168,10 +168,18 @@ bool VBank::Prepare()
         return prepare;
     }
 
+    diagonal = 0;
     for (int i=0; i < details.size(); ++i)
     {
         details[i].SetLayoutWidth(layoutWidth);
         details[i].SetLayoutAllowencePoints();
+
+        const qreal d = details.at(i).Diagonal();
+        if (d > diagonal)
+        {
+            diagonal = d;
+        }
+
         const qint64 square = details.at(i).Square();
         if (square <= 0)
         {
@@ -181,7 +189,6 @@ bool VBank::Prepare()
         unsorted.insert(i, square);
     }
 
-    BiggestBoundingRect();
     PrepareGroup();
 
     prepare = true;
@@ -196,7 +203,7 @@ void VBank::Reset()
     big.clear();
     middle.clear();
     small.clear();
-    boundingRect = QRectF();
+    diagonal = 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -218,37 +225,9 @@ int VBank::LeftArrange() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VBank::BiggestBoundingRect()
+qreal VBank::GetBiggestDiagonal() const
 {
-    int index = -1;
-    qint64 sMax = LLONG_MIN;
-
-    QHash<int, qint64>::const_iterator i = unsorted.constBegin();
-    while (i != unsorted.constEnd())
-    {
-        if (i.value() > sMax)
-        {
-            sMax = i.value();
-            index = i.key();
-        }
-
-        ++i;
-    }
-
-    if (index >= 0 && index < details.size())
-    {
-        boundingRect = QPolygonF(details.at(index).GetLayoutAllowencePoints()).boundingRect();
-    }
-    else
-    {
-        boundingRect = QRectF();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VBank::GetBiggestBoundingRect() const
-{
-    return boundingRect;
+    return diagonal;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

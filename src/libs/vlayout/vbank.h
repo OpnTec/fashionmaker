@@ -69,7 +69,7 @@ public:
     int LeftArrange() const;
     int ArrangedCount() const;
 
-    QRectF GetBiggestBoundingRect() const;
+    qreal GetBiggestDiagonal() const;
 
 private:
     Q_DISABLE_COPY(VBank)
@@ -84,7 +84,7 @@ private:
 
     Cases caseType;
     bool prepare;
-    QRectF boundingRect;
+    qreal diagonal;
 
     void PrepareGroup();
 
@@ -97,7 +97,6 @@ private:
     int GetNextDescGroup() const;
 
     void SqMaxMin(qint64 &sMax, qint64 &sMin) const;
-    void BiggestBoundingRect();
 };
 
 #if defined (Q_OS_WIN) && defined (Q_CC_MSVC)

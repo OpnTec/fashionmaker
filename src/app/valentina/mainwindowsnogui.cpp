@@ -124,10 +124,6 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             CleanLayout();
             papers = lGenerator.GetPapersItems();// Blank sheets
             details = lGenerator.GetAllDetails();// All details
-            if (lGenerator.IsUnitePages())
-            {
-                UnitePages();
-            }
             CreateShadows();
             CreateScenes();
             PrepareSceneList();
@@ -997,92 +993,4 @@ int MainWindowsNoGUI::ContinueIfLayoutStale()
     layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
     msgBox.exec();
     return msgBox.result();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::UnitePages()
-{
-    if (papers.size() < 2)
-    {
-        return;
-    }
-
-    QList<QGraphicsItem *> nPapers;
-    QList<QList<QGraphicsItem *> > nDetails;
-    qreal length = 0;
-    int j = 0; // papers count
-
-    for (int i = 0; i < papers.size(); ++i)
-    {
-        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-        SCASSERT(paper != nullptr);
-        const QRectF rec = paper->rect();
-        if (length + rec.height() <= QIMAGE_MAX)
-        {
-            UniteDetails(j, nDetails, length, i);
-            length += rec.height();
-            UnitePapers(j, nPapers, rec.width(), length);
-        }
-        else
-        {
-            length = 0; // Strat new paper
-            ++j;// New paper
-            UniteDetails(j, nDetails, length, i);
-            length += rec.height();
-            UnitePapers(j, nPapers, rec.width(), length);
-        }
-    }
-
-    qDeleteAll (papers);
-    papers.clear();
-    papers = nPapers;
-
-    details.clear();
-    details = nDetails;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QList<QGraphicsItem *> MainWindowsNoGUI::MoveDetails(qreal length, const QList<QGraphicsItem *> &details)
-{
-    if (qFuzzyCompare(length+1, 0+1))
-    {
-        return details;
-    }
-
-    for (int i = 0; i < details.size(); ++i)
-    {
-        details.at(i)->moveBy(0, length);
-    }
-
-    return details;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::UnitePapers(int j, QList<QGraphicsItem *> &nPapers, qreal width, qreal length)
-{
-    if ((j == 0 && nPapers.isEmpty()) || j >= nPapers.size())
-    {//First or new paper in list
-        QGraphicsRectItem *paper = new QGraphicsRectItem(0, 0, width, length);
-        paper->setPen(QPen(Qt::black, 1));
-        paper->setBrush(QBrush(Qt::white));
-        nPapers.insert(j, paper);
-    }
-    else
-    {// Avoid memory leak
-        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(nPapers.at(j));
-        paper->setRect(0, 0, width, length);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::UniteDetails(int j, QList<QList<QGraphicsItem *> > &nDetails, qreal length, int i)
-{
-    if ((j == 0 && nDetails.isEmpty()) || j >= nDetails.size())
-    {//First or new details in paper
-        nDetails.insert(j, MoveDetails(length, details.at(i)));
-    }
-    else
-    {
-        nDetails[j].append(MoveDetails(length, details.at(i)));
-    }
 }

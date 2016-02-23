@@ -72,6 +72,7 @@ public:
     int    EdgeByPoint(const QPointF &p1) const;
 
     QRectF BoundingRect() const;
+    qreal  Diagonal() const;
 
     bool isNull() const;
     qint64 Square() const;

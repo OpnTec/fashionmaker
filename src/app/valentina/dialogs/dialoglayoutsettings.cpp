@@ -303,6 +303,30 @@ void DialogLayoutSettings::SetUnitePages(bool save)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::IsStripOptimization() const
+{
+    return ui->groupBoxStrips->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetStripOptimization(bool save)
+{
+    ui->groupBoxStrips->setChecked(save);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint8 DialogLayoutSettings::GetMultiplier() const
+{
+    return static_cast<quint8>(ui->spinBoxMultiplier->value());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetMultiplier(const quint8 &value)
+{
+    ui->spinBoxMultiplier->setValue(static_cast<int>(value));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogLayoutSettings::IsIgnoreAllFields() const
 {
     return ui->checkBoxIgnoreFileds->isChecked();
@@ -537,6 +561,8 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetAutoCrop(GetAutoCrop());
     generator->SetSaveLength(IsSaveLength());
     generator->SetUnitePages(IsUnitePages());
+    generator->SetStripOptimization(IsStripOptimization());
+    generator->SetMultiplier(GetMultiplier());
 
     if (IsIgnoreAllFields())
     {
@@ -603,6 +629,7 @@ void DialogLayoutSettings::RestoreDefaults()
     SetIncrease(VSettings::GetDefLayoutRotationIncrease());
     SetFields(VSettings::GetDefFields());
     SetIgnoreAllFields(VSettings::GetDefIgnoreAllFields());
+    SetMultiplier(VSettings::GetDefMultiplier());
 
     CorrectMaxFileds();
     IgnoreAllFields(ui->checkBoxIgnoreFileds->isChecked());
@@ -953,6 +980,8 @@ void DialogLayoutSettings::ReadSettings()
     SetUnitePages(settings->GetLayoutUnitePages());
     SetFields(settings->GetFields());
     SetIgnoreAllFields(settings->GetIgnoreAllFields());
+    SetStripOptimization(settings->GetStripOptimization());
+    SetMultiplier(settings->GetMultiplier());
 
     FindTemplate();
 
@@ -976,6 +1005,8 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetLayoutUnitePages(IsUnitePages());
     settings->SetFields(GetFields());
     settings->SetIgnoreAllFields(IsIgnoreAllFields());
+    settings->SetStripOptimization(IsStripOptimization());
+    settings->SetMultiplier(GetMultiplier());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -998,4 +1029,5 @@ void DialogLayoutSettings::SetAdditionalOptions(bool value)
     SetAutoCrop(value);
     SetSaveLength(value);
     SetUnitePages(value);
+    SetStripOptimization(value);
 }

@@ -75,6 +75,8 @@ const QString VSettings::SettingLayoutSaveLength                 = QStringLitera
 const QString VSettings::SettingLayoutUnitePages                 = QStringLiteral("layout/unitePages");
 const QString VSettings::SettingFields                           = QStringLiteral("layout/fields");
 const QString VSettings::SettingIgnoreFields                     = QStringLiteral("layout/ignoreFields");
+const QString VSettings::SettingStripOptimization                = QStringLiteral("layout/stripOptimization");
+const QString VSettings::SettingMultiplier                       = QStringLiteral("layout/multiplier");
 
 //---------------------------------------------------------------------------------------------------------------------
 VSettings::VSettings(Format format, Scope scope, const QString &organization, const QString &application,
@@ -559,4 +561,40 @@ bool VSettings::GetDefIgnoreAllFields()
 void VSettings::SetIgnoreAllFields(bool value)
 {
     setValue(SettingIgnoreFields, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetStripOptimization() const
+{
+    return value(SettingStripOptimization, GetDefStripOptimization()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefStripOptimization()
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetStripOptimization(bool value)
+{
+    setValue(SettingStripOptimization, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint8 VSettings::GetMultiplier() const
+{
+    return static_cast<quint8>(value(SettingMultiplier, GetDefMultiplier()).toUInt());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint8 VSettings::GetDefMultiplier()
+{
+    return 1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetMultiplier(quint8 value)
+{
+    setValue(SettingMultiplier, value);
 }
