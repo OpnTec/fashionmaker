@@ -57,13 +57,13 @@ void TST_VEllipticalArc::CompareTwoWays()
     const QString errorMsg =
             QString("Difference between real and computing lengthes bigger than eps = %1.").arg(eps);
     QVERIFY2(qAbs(arc1.GetLength() - length) <= eps, qUtf8Printable(errorMsg));
-    //QVERIFY2(arc2.GetLength() - length <= eps, qUtf8Printable(errorMsg));
-    //QVERIFY2(arc1.GetLength() - arc2.GetEndAngle() <= eps, qUtf8Printable(errorMsg));
+    QVERIFY2(qAbs(arc2.GetLength() - length) <= eps, qUtf8Printable(errorMsg));
+    QVERIFY2(qAbs(arc1.GetLength() - arc2.GetLength()) <= eps, qUtf8Printable(errorMsg));
 
     // compare angles
-    //QVERIFY2(arc1.GetEndAngle() - arc2.GetEndAngle() <= eps, qUtf8Printable(errorMsg));
-    //QVERIFY2(arc1.GetEndAngle() - f2 <= eps, qUtf8Printable(errorMsg));
-    //QVERIFY2(arc1.GetEndAngle() - f2 <= eps, qUtf8Printable(errorMsg));
+    QVERIFY2(qAbs(arc1.GetEndAngle() - arc2.GetEndAngle()) <= eps, qUtf8Printable(errorMsg));
+    QVERIFY2(qAbs(arc1.GetEndAngle() - f2) <= eps, qUtf8Printable(errorMsg));
+    QVERIFY2(qAbs(arc1.GetEndAngle() - f2) <= eps, qUtf8Printable(errorMsg));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,14 +78,15 @@ void TST_VEllipticalArc::NegativeArc()
 
     const qreal h = ((radius1-radius2)*(radius1-radius2))/((radius1+radius2)*(radius1+radius2));
     const qreal length = M_PI*(radius1+radius2)*(1+3*h/(10+qSqrt(4-3*h)))/2;
-    VEllipticalArc arc(-length, center, radius1, radius2, f1);
+    qreal l = -length;
+    VEllipticalArc arc(l, center, radius1, radius2, f1);
 
     const qreal eps = 1; // computing error
     const QString errorMsg =
             QString("Difference between real and computing lengthes bigger than eps = %1.").arg(eps);
 
-    //QVERIFY2(qAbs(arc.GetLength() - length) <= eps, qUtf8Printable(errorMsg));
-    //QVERIFY2(arc.GetEndAngle() - f2 <= eps, qUtf8Printable(errorMsg));
+    QVERIFY2(qAbs(arc.GetLength() + length) <= eps, qUtf8Printable(errorMsg));
+    QVERIFY2(arc.GetEndAngle() - f2 <= eps, qUtf8Printable(errorMsg));
 }
 
 // cppcheck-suppress unusedFunction

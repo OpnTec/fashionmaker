@@ -361,7 +361,44 @@ void VEllipticalArc::EllipticalArcName()
 //---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::FindF2(qreal length)
 {
-    // We need to calculate the second angle,
+    qreal gap = 180;
+    if (length < 0)
+    {
+        //length = qAbs(length);
+        d->isFlipped = true;
+        gap = -gap;
+    }
+    while (length > MaxLength())
+    {
+        //length = length - MaxLength();
+    }
+
+    // We need to calculate the second angle
+    // first approximation of angle between start and end angles
+
+    qreal endAngle = GetStartAngle() + gap;
+    d->f2 = endAngle; // we need to set the end anngle, because we want to use GetLength()
+
+    qreal lenBez = GetLength(); // first approximation of length
+
+    qreal eps = 0.001 * qAbs(length);
+
+    while (qAbs(lenBez - length) > eps)
+    {
+        gap = gap/2;
+        if (lenBez > length)
+        { // we selected too big end angle
+            endAngle = endAngle - qAbs(gap);
+        }
+        else
+        { // we selected too little end angle
+            endAngle = endAngle + qAbs(gap);
+        }
+        d->f2 = endAngle;
+        lenBez = GetLength();
+    }
+    d->formulaF2 = QString("%1").arg(d->f2);
+    d->formulaLength = QString("%1").arg(lenBez);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
