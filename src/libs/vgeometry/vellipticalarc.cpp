@@ -288,37 +288,29 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
     QVector<QPointF> points;
     QVector<qreal> sectionAngle = GetAngles();
 
-    // if angle1 == angle2 and we have just one point of arc
-    if(sectionAngle.size() == 1)
+    qreal currentAngle;
+    d->isFlipped ? currentAngle = GetEndAngle() : currentAngle = GetStartAngle();
+    for (int i = 0; i < sectionAngle.size(); ++i)
     {
-        points.append(GetP1());
-    }
-    else
-    {
-        qreal currentAngle;
-        d->isFlipped ? currentAngle = GetEndAngle() : currentAngle = GetStartAngle();
-        for (int i = 0; i < sectionAngle.size(); ++i)
+        QPointF startPoint = GetPoint(currentAngle);
+        QPointF ellipsePoint2 = GetPoint(currentAngle + sectionAngle.at(i)/3);
+        QPointF ellipsePoint3 = GetPoint(currentAngle + 2*sectionAngle.at(i)/3);
+        QPointF lastPoint = GetPoint(currentAngle + sectionAngle.at(i));
+        // four points that are on ellipse
+
+        QPointF bezierPoint1 = ( -5*startPoint + 18*ellipsePoint2 -9*ellipsePoint3 + 2*lastPoint )/6;
+        QPointF bezierPoint2 = ( 2*startPoint - 9*ellipsePoint2 + 18*ellipsePoint3 - 5*lastPoint )/6;
+
+        VSpline spl(VPointF(startPoint), bezierPoint1, bezierPoint2, VPointF(lastPoint), 1.0);
+
+        QVector<QPointF> splPoints = spl.GetPoints();
+
+        if (not splPoints.isEmpty() && i != sectionAngle.size() - 1)
         {
-            QPointF startPoint = GetPoint(currentAngle);
-            QPointF ellipsePoint2 = GetPoint(currentAngle + sectionAngle.at(i)/3);
-            QPointF ellipsePoint3 = GetPoint(currentAngle + 2*sectionAngle.at(i)/3);
-            QPointF lastPoint = GetPoint(currentAngle + sectionAngle.at(i));
-            // four points that are on ellipse
-
-            QPointF bezierPoint1 = ( -5*startPoint + 18*ellipsePoint2 -9*ellipsePoint3 + 2*lastPoint )/6;
-            QPointF bezierPoint2 = ( 2*startPoint - 9*ellipsePoint2 + 18*ellipsePoint3 - 5*lastPoint )/6;
-
-            VSpline spl(VPointF(startPoint), bezierPoint1, bezierPoint2, VPointF(lastPoint), 1.0);
-
-            QVector<QPointF> splPoints = spl.GetPoints();
-
-            if (not splPoints.isEmpty() && i != sectionAngle.size() - 1)
-            {
-                splPoints.removeLast();
-            }
-            points << splPoints;
-            currentAngle += sectionAngle.at(i);
+            splPoints.removeLast();
         }
+        points << splPoints;
+        currentAngle += sectionAngle.at(i);
     }
     return points;
 }
