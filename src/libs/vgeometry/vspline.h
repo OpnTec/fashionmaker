@@ -51,6 +51,9 @@ public:
              quint32 idObject = 0, Draw mode = Draw::Calculation);
     VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject = 0,
              Draw mode = Draw::Calculation);
+    VSpline (VPointF p1, VPointF p4, qreal angle1, const QString &angle1Formula, qreal angle2,
+             const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
+             const QString &c2LengthFormula, qreal kCurve, quint32 idObject = 0, Draw mode = Draw::Calculation);
     virtual ~VSpline() Q_DECL_OVERRIDE;
     VSpline &operator=(const VSpline &spl);
     VPointF GetP1 () const;
@@ -60,6 +63,15 @@ public:
 
     virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
     virtual qreal GetEndAngle() const Q_DECL_OVERRIDE;
+
+    QString GetStartAngleFormula () const;
+    QString GetEndAngleFormula() const;
+
+    qreal   GetC1Length() const;
+    qreal   GetC2Length() const;
+
+    QString C1LengthFormula() const;
+    QString C2LengthFormula() const;
 
     qreal   GetLength () const;
     qreal   GetKasm1() const;
