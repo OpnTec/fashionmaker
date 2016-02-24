@@ -35,7 +35,7 @@ class TST_ValentinaCommandLine : public AbstractTest
 {
     Q_OBJECT
 public:
-    explicit TST_ValentinaCommandLine(QObject *parent = 0);
+    explicit TST_ValentinaCommandLine(QObject *parent = nullptr);
 
 private slots:
     void init();

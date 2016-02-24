@@ -36,7 +36,7 @@ class TST_QmuTokenParser : public QObject
     Q_OBJECT
 public:
     Q_DISABLE_COPY(TST_QmuTokenParser)
-    explicit TST_QmuTokenParser(QObject *parent = 0);
+    explicit TST_QmuTokenParser(QObject *parent = nullptr);
 
 private slots:
     void IsSingle_data();

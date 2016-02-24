@@ -35,7 +35,7 @@ class TST_TapeCommandLine : public AbstractTest
 {
     Q_OBJECT
 public:
-    explicit TST_TapeCommandLine(QObject *parent = 0);
+    explicit TST_TapeCommandLine(QObject *parent = nullptr);
 
 private slots:
     void init();

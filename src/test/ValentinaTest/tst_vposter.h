@@ -38,7 +38,7 @@ class TST_VPoster : public QObject
     Q_OBJECT
 
 public:
-    explicit TST_VPoster(QObject *parent = 0);
+    explicit TST_VPoster(QObject *parent = nullptr);
 
 signals:
 

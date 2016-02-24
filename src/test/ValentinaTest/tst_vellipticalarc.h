@@ -35,13 +35,16 @@ class TST_VEllipticalArc : public QObject
 {
     Q_OBJECT
 public:
-    explicit TST_VEllipticalArc(QObject *parent = 0);
+    explicit TST_VEllipticalArc(QObject *parent = nullptr);
 
 private slots:
     void CompareTwoWays();
     void NegativeArc();
     void TestGetPoints_data();
     void TestGetPoints();
+
+private:
+    Q_DISABLE_COPY(TST_VEllipticalArc)
 };
 
 #endif // TST_VELLIPTICALARC_H

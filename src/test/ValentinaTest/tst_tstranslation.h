@@ -38,7 +38,7 @@ class TST_TSTranslation : public QObject
 {
     Q_OBJECT
 public:
-    explicit TST_TSTranslation(QObject *parent = 0);
+    explicit TST_TSTranslation(QObject *parent = nullptr);
 
 private slots:
     void CheckEnglishLocalization();
