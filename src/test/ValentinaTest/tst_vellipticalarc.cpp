@@ -91,7 +91,31 @@ void TST_VEllipticalArc::NegativeArc()
 
 // cppcheck-suppress unusedFunction
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VEllipticalArc::TestGetPoints_data()
+void TST_VEllipticalArc::TestGetPoints1_data()
+{
+    TestData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestGetPoints2_data()
+{
+    TestData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestGetPoints3_data()
+{
+    TestData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestGetPoints4_data()
+{
+    TestData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestData()
 {
     QTest::addColumn<qreal>("radius1");
     QTest::addColumn<qreal>("radius2");
@@ -100,39 +124,39 @@ void TST_VEllipticalArc::TestGetPoints_data()
     QTest::addColumn<qreal>("rotationAngle");
 
     QTest::newRow("Full circle: radiuses 10, 20") << 10.0 << 20.0 << 0.0 << 360.0 << 0.0;
-    QTest::newRow("Full circle: radiuses 150, 200") << 150.0 << 200.0 << 0.0 << 360.0 << 0.0;
-    QTest::newRow("Full circle: radiuses 1500, 1000") << 1500.0 << 1000.0 << 0.0 << 360.0 << 0.0;
+    QTest::newRow("Full circle: radiuses 150, 200") << 150.0 << 200.0 << 0.0 << 360.0 << 30.0;
+    QTest::newRow("Full circle: radiuses 1500, 1000") << 1500.0 << 1000.0 << 0.0 << 360.0 << 50.0;
     QTest::newRow("Full circle: radiuses 50000, 10000") << 50000.0 << 10000.0 << 0.0 << 360.0 << 0.0;
-    QTest::newRow("Full circle: radiuses 90000, 80000") << 90000.0 << 80000.0 << 0.0 << 360.0 << 0.0;
+    QTest::newRow("Full circle: radiuses 90000, 80000") << 90000.0 << 80000.0 << 0.0 << 360.0 << 90.0;
 
     QTest::newRow("Arc less than 45 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 10.5 << 0.0;
-    QTest::newRow("Arc less than 45 degree, radiuses 150, 50") << 150.0 << 50.0 << 0.0 << 10.5 << 0.0;
-    QTest::newRow("Arc less than 45 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 10.5 << 0.0;
-    QTest::newRow("Arc less than 45 degree, radiuses 50000, 10000") << 50000.0 << 10000.0 << 0.0 << 10.5 << 0.0;
+    QTest::newRow("Arc less than 45 degree, radiuses 150, 50") << 150.0 << 50.0 << 0.0 << 10.5 << 180.0;
+    QTest::newRow("Arc less than 45 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 10.5 << 90.0;
+    QTest::newRow("Arc less than 45 degree, radiuses 50000, 10000") << 50000.0 << 10000.0 << 0.0 << 10.5 << 40.0;
     QTest::newRow("Arc less than 45 degree, radiuses 90000, 10000") << 90000.0 << 10000.0 << 0.0 << 10.5 << 0.0;
 
-    QTest::newRow("Arc 45 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 45.0 << 0.0;
-    QTest::newRow("Arc 45 degree, radiuses 150, 15") << 150.0 << 15.0 << 0.0 << 45.0 << 0.0;
+    QTest::newRow("Arc 45 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 45.0 << 45.0;
+    QTest::newRow("Arc 45 degree, radiuses 150, 15") << 150.0 << 15.0 << 0.0 << 45.0 << 30.0;
     QTest::newRow("Arc 45 degree, radiuses 1500, 150") << 1500.0 << 150.0 << 0.0 << 45.0 << 0.0;
     QTest::newRow("Arc 45 degree, radiuses 50000, 50000") << 50000.0 << 50000.0 << 0.0 << 45.0 << 0.0;
-    QTest::newRow("Arc 45 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 45.0 << 0.0;
+    QTest::newRow("Arc 45 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 45.0 << 270.0;
 
-    QTest::newRow("Arc less than 90 degree, radiuses 100, 400") << 100.0 << 400.0 << 0.0 << 75.0 << 0.0;
-    QTest::newRow("Arc less than 90 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 75.0 << 0.0;
-    QTest::newRow("Arc less than 90 degree, radiuses 1500, 50000") << 1500.0 << 50000.0 << 0.0 << 75.0 << 0.0;
+    QTest::newRow("Arc less than 90 degree, radiuses 100, 400") << 100.0 << 400.0 << 0.0 << 75.0 << 50.0;
+    QTest::newRow("Arc less than 90 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 75.0 << 90.0;
+    QTest::newRow("Arc less than 90 degree, radiuses 1500, 50000") << 1500.0 << 50000.0 << 0.0 << 75.0 << 180.0;
     QTest::newRow("Arc less than 90 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 75.0 << 0.0;
-    QTest::newRow("Arc less than 90 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 75.0 << 0.0;
+    QTest::newRow("Arc less than 90 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 75.0 << 30.0;
 
-    QTest::newRow("Arc 90 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 90.0 << 0.0;
+    QTest::newRow("Arc 90 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 90.0 << 30.0;
     QTest::newRow("Arc 90 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 90.0 << 0.0;
-    QTest::newRow("Arc 90 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 90.0 << 0.0;
-    QTest::newRow("Arc 90 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 90.0 << 0.0;
-    QTest::newRow("Arc 90 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 90.0 << 0.0;
+    QTest::newRow("Arc 90 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 90.0 << 70.0;
+    QTest::newRow("Arc 90 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 90.0 << 30.0;
+    QTest::newRow("Arc 90 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 90.0 << 235.0;
 
-    QTest::newRow("Arc less than 135 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 110.6 << 0.0;
-    QTest::newRow("Arc less than 135 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 110.6 << 0.0;
-    QTest::newRow("Arc less than 135 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 110.6 << 0.0;
-    QTest::newRow("Arc less than 135 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 110.6 << 0.0;
+    QTest::newRow("Arc less than 135 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 110.6 << 60.0;
+    QTest::newRow("Arc less than 135 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 110.6 << 300.0;
+    QTest::newRow("Arc less than 135 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 110.6 << 360.0;
+    QTest::newRow("Arc less than 135 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 110.6 << 290.0;
     QTest::newRow("Arc less than 135 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 110.6 << 0.0;
 
     QTest::newRow("Arc 135 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 135.0 << 0.0;
@@ -180,8 +204,9 @@ void TST_VEllipticalArc::TestGetPoints_data()
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_VEllipticalArc::TestGetPoints()
+void TST_VEllipticalArc::TestGetPoints1()
 {
+    //Any point must satisfy the equation of ellipse
     QFETCH(qreal, radius1);
     QFETCH(qreal, radius2);
     QFETCH(qreal, startAngle);
@@ -194,7 +219,7 @@ void TST_VEllipticalArc::TestGetPoints()
     QVector<QPointF> points = arc.GetPoints();
     {
         qreal eps = 0.5;
-        const QString errorMsg = QString("Broken the first rule, part 1. Any point must satisfy the equation of ellipse.");
+        const QString errorMsg = QString("Broken the first rule. Any point must satisfy the equation of ellipse.");
         for (int i=0; i < points.size(); ++i)
         {
             QPointF p = points.at(i);
@@ -203,82 +228,130 @@ void TST_VEllipticalArc::TestGetPoints()
             QVERIFY2( diff <= eps, qUtf8Printable(errorMsg));
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void TST_VEllipticalArc::TestGetPoints2()
+{
+    // Distance from the any point to the focus1 plus distance from this point to the focus2 should be the same.
+    QFETCH(qreal, radius1);
+    QFETCH(qreal, radius2);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, endAngle);
+    QFETCH(qreal, rotationAngle);
+
+    const VPointF center;
+    VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
+    QVector<QPointF> points = arc.GetPoints();
+
+    const qreal c = qSqrt(qAbs(radius2*radius2 - radius1*radius1));
+    // distance from the center to the focus
+
+    QPointF focus1 = center.toQPointF();
+    QPointF focus2 = center.toQPointF();
+
+    if (radius1 < radius2)
     {
-        const qreal c = qSqrt(qAbs(radius2*radius2 - radius1*radius1));
-        // distance from the center to the focus
-
-        QPointF focus1 = center.toQPointF();
-        QPointF focus2 = center.toQPointF();
-
-        if (radius1 < radius2)
-        {
-            focus1.setY(focus1.ry() + c);
-            QLineF line(center.toQPointF(), focus1);
-            line.setAngle(line.angle() + rotationAngle);
-            focus1 = line.p2();
-
-            focus2.setY(focus2.ry() - c);
-            line.setP2(focus2);
-            line.setAngle(line.angle() + rotationAngle);
-            focus2 = line.p2();
-        }
-        else
-        {
-            focus1.setX(focus1.rx() + c);
-            QLineF line(center.toQPointF(), focus1);
-            line.setAngle(line.angle() + rotationAngle);
-            focus1 = line.p2();
-
-            focus2.setX(focus2.rx() - c);
-            line.setP2(focus2);
-            line.setAngle(line.angle() + rotationAngle);
-            focus2 = line.p2();
-        }
-
-        QPointF ellipsePoint(center.x() + radius1, center.y());
-        QLineF line(center.toQPointF(), ellipsePoint);
+        focus1.setY(focus1.ry() + c);
+        QLineF line(center.toQPointF(), focus1);
         line.setAngle(line.angle() + rotationAngle);
-        ellipsePoint = line.p2();
+        focus1 = line.p2();
 
-        const QLineF distance1(focus1, ellipsePoint);
-        const QLineF distance2(focus2, ellipsePoint);
-
-        const qreal distance = distance1.length() + distance2.length();
-        const qreal eps = distance * 0.5/ 100; // computing error 0.5 % from origin distance
-        for (int i=0; i < points.size(); ++i)
-        {
-            const QLineF rLine1(focus1, points.at(i));
-            const QLineF rLine2(focus2, points.at(i));
-            const qreal resultingDistance = rLine1.length()+rLine2.length();
-            const qreal diff = qAbs(resultingDistance - distance);
-            const QString errorMsg = QString("Broken the first rule, part 2. Distance from the any point to the focus1 plus"
-                                             " distance from this point to the focus2 should be the same. Problem with point '%1'."
-                                             " The disired distance is '%2', but resulting distance is '%3'. Difference is '%4' and it"
-                                             " biggest than eps ('%5')").arg(i).arg(distance).arg(resultingDistance).arg(diff).arg(eps);
-            QVERIFY2( diff <= eps, qUtf8Printable(errorMsg));
-        }
+        focus2.setY(focus2.ry() - c);
+        line.setP2(focus2);
+        line.setAngle(line.angle() + rotationAngle);
+        focus2 = line.p2();
     }
+    else
     {
-        if (qFuzzyCompare(arc.AngleArc(), 360.0))
-        {// calculated full ellipse square
-            const qreal ellipseSquare = M_PI * radius1 * radius2;
-            const qreal epsSquare = ellipseSquare * 0.24 / 100; // computing error 0.24 % from origin squere
-            const qreal arcSquare = qAbs(VAbstractDetail::SumTrapezoids(points)/2.0);
-            const qreal diffSquare = qAbs(ellipseSquare - arcSquare);
-            const QString errorMsg1 = QString("Broken the second rule. Interpolation has too big computing error. "
-                                              "Difference ='%1' bigger than eps = '%2'.").arg(diffSquare).arg(epsSquare);
-            QVERIFY2(diffSquare <= epsSquare, qUtf8Printable(errorMsg1));
+        focus1.setX(focus1.rx() + c);
+        QLineF line(center.toQPointF(), focus1);
+        line.setAngle(line.angle() + rotationAngle);
+        focus1 = line.p2();
 
-            // calculated full ellipse length
-            const qreal h = ((radius1-radius2)*(radius1-radius2))/((radius1+radius2)*(radius1+radius2));
-            const qreal ellipseLength =  M_PI*(radius1+radius2)*(1+3*h/(10+qSqrt(4-3*h)));
-            const qreal epsLength = ellipseLength*0.5/100; // computing error
-            VEllipticalArc arc(center, radius1, radius2, 0, 360, 0);
-            const qreal arcLength = arc.GetLength();
-            const qreal diffLength = qAbs(arcLength - ellipseLength);
-            const QString errorMsg2 = QString("Difference between real and computing lengthes "
-                                              "(diff = '%1') bigger than eps = '%2'.").arg(diffLength).arg(epsLength);
-            QVERIFY2(diffLength <= epsLength, qUtf8Printable(errorMsg2));
-        }
+        focus2.setX(focus2.rx() - c);
+        line.setP2(focus2);
+        line.setAngle(line.angle() + rotationAngle);
+        focus2 = line.p2();
+    }
+
+    QPointF ellipsePoint(center.x() + radius1, center.y());
+    QLineF line(center.toQPointF(), ellipsePoint);
+    line.setAngle(line.angle() + rotationAngle);
+    ellipsePoint = line.p2();
+
+    const QLineF distance1(focus1, ellipsePoint);
+    const QLineF distance2(focus2, ellipsePoint);
+
+    const qreal distance = distance1.length() + distance2.length();
+    const qreal eps = distance * 0.5/ 100; // computing error 0.5 % from origin distance
+    for (int i=0; i < points.size(); ++i)
+    {
+        const QLineF rLine1(focus1, points.at(i));
+        const QLineF rLine2(focus2, points.at(i));
+        const qreal resultingDistance = rLine1.length()+rLine2.length();
+        const qreal diff = qAbs(resultingDistance - distance);
+        const QString errorMsg = QString("Broken the first rule, part 2. Distance from the any point to the focus1"
+                                         " plus distance from this point to the focus2 should be the same. Problem"
+                                         " with point '%1'. The disired distance is '%2', but resulting distance"
+                                         " is '%3'. Difference is '%4' and it biggest than eps "
+                                         "('%5')").arg(i).arg(distance).arg(resultingDistance).arg(diff).arg(eps);
+        QVERIFY2( diff <= eps, qUtf8Printable(errorMsg));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void TST_VEllipticalArc::TestGetPoints3()
+{
+    // Compare full ellipse square with square of VAbstractDetail
+    QFETCH(qreal, radius1);
+    QFETCH(qreal, radius2);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, endAngle);
+    QFETCH(qreal, rotationAngle);
+
+    const VPointF center;
+    VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
+    QVector<QPointF> points = arc.GetPoints();
+
+    if (qFuzzyCompare(arc.AngleArc(), 360.0))
+    {// calculated full ellipse square
+        const qreal ellipseSquare = M_PI * radius1 * radius2;
+        const qreal epsSquare = ellipseSquare * 0.24 / 100; // computing error 0.24 % from origin squere
+        const qreal arcSquare = qAbs(VAbstractDetail::SumTrapezoids(points)/2.0);
+        const qreal diffSquare = qAbs(ellipseSquare - arcSquare);
+        const QString errorMsg1 = QString("Broken the second rule. Interpolation has too big computing error. "
+                                          "Difference ='%1' bigger than eps = '%2'.").arg(diffSquare).arg(epsSquare);
+        QVERIFY2(diffSquare <= epsSquare, qUtf8Printable(errorMsg1));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void TST_VEllipticalArc::TestGetPoints4()
+{
+    // Compare real full ellipse length with calculated
+    QFETCH(qreal, radius1);
+    QFETCH(qreal, radius2);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, endAngle);
+    QFETCH(qreal, rotationAngle);
+
+    const VPointF center;
+    VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
+
+    if (qFuzzyCompare(arc.AngleArc(), 360.0))
+    {// calculated full ellipse length
+        const qreal h = ((radius1-radius2)*(radius1-radius2))/((radius1+radius2)*(radius1+radius2));
+        const qreal ellipseLength =  M_PI*(radius1+radius2)*(1+3*h/(10+qSqrt(4-3*h)));
+        const qreal epsLength = ellipseLength*0.5/100; // computing error
+        VEllipticalArc arc(center, radius1, radius2, 0, 360, 0);
+        const qreal arcLength = arc.GetLength();
+        const qreal diffLength = qAbs(arcLength - ellipseLength);
+        const QString errorMsg2 = QString("Difference between real and computing lengthes "
+                                          "(diff = '%1') bigger than eps = '%2'.").arg(diffLength).arg(epsLength);
+        QVERIFY2(diffLength <= epsLength, qUtf8Printable(errorMsg2));
     }
 }

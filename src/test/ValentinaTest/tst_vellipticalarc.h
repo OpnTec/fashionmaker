@@ -40,11 +40,18 @@ public:
 private slots:
     void CompareTwoWays();
     void NegativeArc();
-    void TestGetPoints_data();
-    void TestGetPoints();
+    void TestGetPoints1_data();
+    void TestGetPoints2_data();
+    void TestGetPoints3_data();
+    void TestGetPoints4_data();
+    void TestGetPoints1();
+    void TestGetPoints2();
+    void TestGetPoints3();
+    void TestGetPoints4();
 
 private:
     Q_DISABLE_COPY(TST_VEllipticalArc)
+    void TestData();
 };
 
 #endif // TST_VELLIPTICALARC_H
