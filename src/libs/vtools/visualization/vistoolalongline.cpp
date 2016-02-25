@@ -57,7 +57,7 @@ void VisToolAlongLine::setObject2Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolAlongLine::setLength(const QString &expression)
 {
-    length = FindLength(expression);
+    length = FindLength(expression, Visualization::data->PlainVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

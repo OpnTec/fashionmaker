@@ -102,13 +102,13 @@ void VisToolPointOfIntersectionCircles::setObject2Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionCircles::setC1Radius(const QString &value)
 {
-    c1Radius = FindLength(value);
+    c1Radius = FindLength(value, Visualization::data->PlainVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointOfIntersectionCircles::setC2Radius(const QString &value)
 {
-    c2Radius = FindLength(value);
+    c2Radius = FindLength(value, Visualization::data->PlainVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

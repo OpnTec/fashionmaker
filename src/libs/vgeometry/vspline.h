@@ -70,8 +70,8 @@ public:
     qreal   GetC1Length() const;
     qreal   GetC2Length() const;
 
-    QString C1LengthFormula() const;
-    QString C2LengthFormula() const;
+    QString GetC1LengthFormula() const;
+    QString GetC2LengthFormula() const;
 
     qreal   GetLength () const;
     qreal   GetKasm1() const;

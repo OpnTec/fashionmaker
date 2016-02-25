@@ -94,7 +94,7 @@ QString VisToolCurveIntersectAxis::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCurveIntersectAxis::SetAngle(const QString &expression)
 {
-    angle = FindVal(expression);
+    angle = FindVal(expression, Visualization::data->PlainVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

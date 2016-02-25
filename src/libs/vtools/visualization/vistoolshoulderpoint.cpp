@@ -118,5 +118,5 @@ void VisToolShoulderPoint::setLineP2Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolShoulderPoint::setLength(const QString &expression)
 {
-    length = FindLength(expression);
+    length = FindLength(expression, Visualization::data->PlainVariables());
 }

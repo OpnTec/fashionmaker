@@ -768,13 +768,13 @@ qreal VSpline::GetC2Length() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSpline::C1LengthFormula() const
+QString VSpline::GetC1LengthFormula() const
 {
     return d->c1LengthF;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VSpline::C2LengthFormula() const
+QString VSpline::GetC2LengthFormula() const
 {
     return d->c2LengthF;
 }

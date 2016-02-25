@@ -61,7 +61,7 @@ void VisToolBisector::setObject3Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolBisector::setLength(const QString &expression)
 {
-    length = FindLength(expression);
+    length = FindLength(expression, Visualization::data->PlainVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

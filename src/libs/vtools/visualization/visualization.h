@@ -58,6 +58,9 @@ public:
 
     Mode GetMode() const;
     void SetMode(const Mode &value);
+
+    static qreal FindLength(const QString &expression, const QHash<QString, qreal *> &vars);
+    static qreal FindVal(const QString &expression, const QHash<QString, qreal *> &vars);
 signals:
     void         ToolTip(const QString &toolTip);
 public slots:
@@ -79,8 +82,6 @@ protected:
 
     QGraphicsEllipseItem *InitPoint(const QColor &color, QGraphicsItem *parent) const;
     QRectF       PointRect(const qreal &radius) const;
-    qreal        FindLength(const QString &expression);
-    qreal        FindVal(const QString &expression);
     void         DrawPoint(QGraphicsEllipseItem *point, const QPointF &pos, const QColor &color,
                            Qt::PenStyle style = Qt::SolidLine);
     virtual void DrawLine(QGraphicsLineItem *lineItem, const QLineF &line, const QColor &color,

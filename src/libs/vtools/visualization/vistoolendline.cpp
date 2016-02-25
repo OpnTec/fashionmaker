@@ -74,11 +74,11 @@ QString VisToolEndLine::Angle() const
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEndLine::SetAngle(const QString &expression)
 {
-    angle = FindVal(expression);
+    angle = FindVal(expression, Visualization::data->PlainVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolEndLine::setLength(const QString &expression)
 {
-    length = FindLength(expression);
+    length = FindLength(expression, Visualization::data->PlainVariables());
 }
