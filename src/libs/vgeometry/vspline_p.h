@@ -30,9 +30,11 @@
 #define VSPLINE_P_H
 
 #include <QSharedData>
-#include "vpointf.h"
 #include <QLineF>
 #include <QtCore/qmath.h>
+
+#include "vpointf.h"
+#include "../vmisc/vabstractapplication.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -139,12 +141,12 @@ VSplineData::VSplineData(VPointF p1, VPointF p4, qreal angle1, qreal angle2, qre
     QLineF p1p2(p1.x(), p1.y(), p1.x() + L * kAsm1, p1.y());
     p1p2.setAngle(angle1);
     c1Length = p1p2.length();
-    c1LengthF = QString().number(c1Length);
+    c1LengthF = QString().number(qApp->fromPixel(c1Length));
 
     QLineF p4p3(p4.x(), p4.y(), p4.x() + L * kAsm2, p4.y());
     p4p3.setAngle(angle2);
     c2Length = p4p3.length();
-    c2LengthF = QString().number(c2Length);
+    c2LengthF = QString().number(qApp->fromPixel(c2Length));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -167,7 +169,7 @@ VSplineData::VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal k
     angle1F = QString().number(angle1);
 
     c1Length = p1p2.length();
-    c1LengthF = QString().number(c1Length);
+    c1LengthF = QString().number(qApp->fromPixel(c1Length));
 
     QLineF p4p3(p4.toQPointF(), p3);
 
@@ -175,7 +177,7 @@ VSplineData::VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal k
     angle2F = QString().number(angle2);
 
     c2Length = p4p3.length();
-    c2LengthF = QString().number(c2Length);
+    c2LengthF = QString().number(qApp->fromPixel(c2Length));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

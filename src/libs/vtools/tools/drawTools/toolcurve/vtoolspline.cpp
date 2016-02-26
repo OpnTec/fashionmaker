@@ -39,7 +39,8 @@
 #   include <QtMath>
 #endif
 
-const QString VToolSpline::ToolType = QStringLiteral("simple");
+const QString VToolSpline::ToolType = QStringLiteral("simpleInteractive");
+const QString VToolSpline::OldToolType = QStringLiteral("simple");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -124,8 +125,8 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     auto dialogTool = qobject_cast<DialogSpline*>(dialog);
     SCASSERT(dialogTool != nullptr);
 
-    auto spl = Create(0, dialogTool->GetSpline(), dialogTool->GetColor(), scene, doc, data, Document::FullParse,
-                      Source::FromGui);
+    auto spl = Create(0, new VSpline(dialogTool->GetSpline()), dialogTool->GetColor(), scene, doc, data,
+                      Document::FullParse, Source::FromGui);
 
     if (spl != nullptr)
     {
@@ -138,7 +139,7 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
 /**
  * @brief Create help create tool.
  * @param _id tool id, 0 if tool doesn't exist yet.
- * @param spl spline.
+ * @param spline spline.
  * @param color spline color.
  * @param scene pointer to scene.
  * @param doc dom document container.
@@ -147,11 +148,10 @@ VToolSpline* VToolSpline::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
  * @param typeCreation way we create this tool.
  * @return the created tool
  */
-VToolSpline* VToolSpline::Create(const quint32 _id, const VSpline &spl, const QString &color, VMainGraphicsScene *scene,
+VToolSpline* VToolSpline::Create(const quint32 _id, VSpline *spline, const QString &color, VMainGraphicsScene *scene,
                                  VAbstractPattern *doc, VContainer *data, const Document &parse,
                                  const Source &typeCreation)
 {
-    auto spline = new VSpline(spl);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -183,6 +183,30 @@ VToolSpline* VToolSpline::Create(const quint32 _id, const VSpline &spl, const QS
         return _spl;
     }
     return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VToolSpline *VToolSpline::Create(const quint32 _id, quint32 point1, quint32 point4, QString &a1, QString &a2,
+                                 QString &l1, QString &l2, qreal kCurve, quint32 duplicate, const QString &color,
+                                 VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                 const Document &parse, const Source &typeCreation)
+{
+    qreal calcAngle1 = CheckFormula(_id, a1, data);
+    qreal calcAngle2 = CheckFormula(_id, a2, data);
+
+    qreal calcLength1 = qApp->toPixel(CheckFormula(_id, l1, data));
+    qreal calcLength2 = qApp->toPixel(CheckFormula(_id, l2, data));
+
+    auto p1 = data->GeometricObject<VPointF>(point1);
+    auto p4 = data->GeometricObject<VPointF>(point4);
+
+    auto spline = new VSpline(*p1, *p4, calcAngle1, a1, calcAngle2, a2, calcLength1, l1, calcLength2, l2, kCurve);
+    if (duplicate > 0)
+    {
+        spline->SetDuplicate(duplicate);
+    }
+
+    return VToolSpline::Create(_id, spline, color, scene, doc, data, parse, typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -290,14 +314,8 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     controlPoints[0]->blockSignals(false);
     controlPoints[1]->blockSignals(false);
 
-    doc->SetAttribute(domElement, AttrPoint1, spl.GetP1().id());
-    doc->SetAttribute(domElement, AttrPoint4, spl.GetP4().id());
-    doc->SetAttribute(domElement, AttrAngle1, spl.GetStartAngle());
-    doc->SetAttribute(domElement, AttrAngle2, spl.GetEndAngle());
-    doc->SetAttribute(domElement, AttrKAsm1, spl.GetKasm1());
-    doc->SetAttribute(domElement, AttrKAsm2, spl.GetKasm2());
-    doc->SetAttribute(domElement, AttrKCurve, spl.GetKcurve());
-    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
+    SetSplineAttributes(domElement, spl);
+    doc->SetAttribute(domElement, AttrColor,   dialogTool->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -305,29 +323,9 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VAbstractSpline::SaveOptions(tag, obj);
 
-    QSharedPointer<VSpline> spl = qSharedPointerDynamicCast<VSpline>(obj);
+    auto spl = qSharedPointerDynamicCast<VSpline>(obj);
     SCASSERT(spl.isNull() == false);
-
-    doc->SetAttribute(tag, AttrType, ToolType);
-    doc->SetAttribute(tag, AttrPoint1, spl->GetP1().id());
-    doc->SetAttribute(tag, AttrPoint4, spl->GetP4().id());
-    doc->SetAttribute(tag, AttrAngle1, spl->GetStartAngle());
-    doc->SetAttribute(tag, AttrAngle2, spl->GetEndAngle());
-    doc->SetAttribute(tag, AttrKAsm1, spl->GetKasm1());
-    doc->SetAttribute(tag, AttrKAsm2, spl->GetKasm2());
-    doc->SetAttribute(tag, AttrKCurve, spl->GetKcurve());
-
-    if (spl->GetDuplicate() > 0)
-    {
-        doc->SetAttribute(tag, AttrDuplicate, spl->GetDuplicate());
-    }
-    else
-    {
-        if (tag.hasAttribute(AttrDuplicate))
-        {
-            tag.removeAttribute(AttrDuplicate);
-        }
-    }
+    SetSplineAttributes(tag, *spl);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -523,5 +521,44 @@ void VToolSpline::RefreshGeometry()
     foreach (auto *point, controlPoints)
     {
         point->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &spl)
+{
+    if (domElement.attribute(AttrType) == OldToolType)
+    {
+        doc->SetAttribute(domElement, AttrType, ToolType);
+    }
+
+    doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());
+    doc->SetAttribute(domElement, AttrPoint4,  spl.GetP4().id());
+    doc->SetAttribute(domElement, AttrAngle1,  spl.GetStartAngleFormula());
+    doc->SetAttribute(domElement, AttrAngle2,  spl.GetEndAngleFormula());
+    doc->SetAttribute(domElement, AttrLength1, spl.GetC1LengthFormula());
+    doc->SetAttribute(domElement, AttrLength2, spl.GetC2LengthFormula());
+    doc->SetAttribute(domElement, AttrKCurve,  spl.GetKcurve());
+
+    if (spl.GetDuplicate() > 0)
+    {
+        doc->SetAttribute(domElement, AttrDuplicate, spl.GetDuplicate());
+    }
+    else
+    {
+        if (domElement.hasAttribute(AttrDuplicate))
+        {
+            domElement.removeAttribute(AttrDuplicate);
+        }
+    }
+
+    if (domElement.hasAttribute(AttrKAsm1))
+    {
+        domElement.removeAttribute(AttrKAsm1);
+    }
+
+    if (domElement.hasAttribute(AttrKAsm2))
+    {
+        domElement.removeAttribute(AttrKAsm2);
     }
 }

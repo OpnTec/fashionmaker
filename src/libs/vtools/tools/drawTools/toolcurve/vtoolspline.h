@@ -45,10 +45,15 @@ public:
     virtual ~VToolSpline() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolSpline *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data);
-    static VToolSpline *Create(const quint32 _id, const VSpline &spl, const QString &color, VMainGraphicsScene  *scene,
+    static VToolSpline *Create(const quint32 _id, VSpline *spline, const QString &color, VMainGraphicsScene *scene,
                                VAbstractPattern *doc, VContainer *data, const Document &parse,
                                const Source &typeCreation);
+    static VToolSpline *Create(const quint32 _id, quint32 point1, quint32 point4, QString &a1, QString &a2, QString &l1,
+                               QString &l2, qreal kCurve, quint32 duplicate, const QString &color,
+                               VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                               const Document &parse, const Source &typeCreation);
     static const QString ToolType;
+    static const QString OldToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Spline)};
 
@@ -73,8 +78,10 @@ protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolSpline)
-    void         RefreshGeometry ();
     QPointF oldPosition;
+
+    void RefreshGeometry ();
+    void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);
 };
 
 #endif // VTOOLSPLINE_H

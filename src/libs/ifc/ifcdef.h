@@ -91,6 +91,8 @@ extern const QString AttrRadius;
 extern const QString AttrAngle;
 extern const QString AttrAngle1;
 extern const QString AttrAngle2;
+extern const QString AttrLength1;
+extern const QString AttrLength2;
 extern const QString AttrP1Line;
 extern const QString AttrP2Line;
 extern const QString AttrP1Line1;
@@ -101,8 +103,8 @@ extern const QString AttrPShoulder;
 extern const QString AttrPoint1;
 extern const QString AttrPoint2;
 extern const QString AttrPoint4;
-extern const QString AttrKAsm1;
-extern const QString AttrKAsm2;
+extern const QString AttrKAsm1;// TODO. Delete if minimal supported version is 0.2.7
+extern const QString AttrKAsm2;// TODO. Delete if minimal supported version is 0.2.7
 extern const QString AttrKCurve;
 extern const QString AttrDuplicate;
 extern const QString AttrPathPoint;
