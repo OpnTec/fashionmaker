@@ -32,6 +32,7 @@
 #include "../../../undocommands/movespline.h"
 #include "../../../visualization/vistoolspline.h"
 #include "../vwidgets/vcontrolpointspline.h"
+#include "../qmuparser/qmutokenparser.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -335,9 +336,17 @@ void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
-            oldPosition = event->scenePos();
-            event->accept();
+            const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+
+            if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
+                qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
+                qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
+                qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+            {
+                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+                oldPosition = event->scenePos();
+                event->accept();
+            }
         }
     }
     VAbstractSpline::mousePressEvent(event);
@@ -350,8 +359,16 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            //Disable cursor-arrow-closehand
-            RestoreOverrideCursor(cursorArrowCloseHand);
+            const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+
+            if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
+                qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
+                qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
+                qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+            {
+                //Disable cursor-arrow-closehand
+                RestoreOverrideCursor(cursorArrowCloseHand);
+            }
         }
     }
     VAbstractSpline::mouseReleaseEvent(event);
@@ -360,74 +377,81 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    // Don't need check if left mouse button was pressed. According to the Qt documentation "If you do receive this
-    // event, you can be certain that this item also received a mouse press event, and that this item is the current
-    // mouse grabber.".
+    const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
 
-    // Magic Bezier Drag Equations follow!
-    // "weight" describes how the influence of the drag should be distributed
-    // among the handles; 0 = front handle only, 1 = back handle only.
-
-    const QSharedPointer<VSpline> spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-    const qreal t = spline->ParamT(oldPosition);
-
-    if (qFloor(t) == -1)
+    if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
+        qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
+        qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
+        qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
     {
-        return;
-    }
+        // Don't need check if left mouse button was pressed. According to the Qt documentation "If you do receive this
+        // event, you can be certain that this item also received a mouse press event, and that this item is the current
+        // mouse grabber.".
 
-    double weight;
-    if (t <= 1.0 / 6.0)
-    {
-        weight = 0;
-    }
-    else if (t <= 0.5)
-    {
-        weight = (pow((6 * t - 1) / 2.0, 3)) / 2;
-    }
-    else if (t <= 5.0 / 6.0)
-    {
-        weight = (1 - pow((6 * (1-t) - 1) / 2.0, 3)) / 2 + 0.5;
-    }
-    else
-    {
-        weight = 1;
-    }
+        // Magic Bezier Drag Equations follow!
+        // "weight" describes how the influence of the drag should be distributed
+        // among the handles; 0 = front handle only, 1 = back handle only.
 
-    const QPointF delta = event->scenePos() - oldPosition;
-    const QPointF offset0 = ((1-weight)/(3*t*(1-t)*(1-t))) * delta;
-    const QPointF offset1 = (weight/(3*t*t*(1-t))) * delta;
+        const qreal t = spline->ParamT(oldPosition);
 
-    const QPointF p2 = spline->GetP2() + offset0;
-    const QPointF p3 = spline->GetP3() + offset1;
+        if (qFloor(t) == -1)
+        {
+            return;
+        }
 
-    oldPosition = event->scenePos(); // Now mouse here
+        double weight;
+        if (t <= 1.0 / 6.0)
+        {
+            weight = 0;
+        }
+        else if (t <= 0.5)
+        {
+            weight = (pow((6 * t - 1) / 2.0, 3)) / 2;
+        }
+        else if (t <= 5.0 / 6.0)
+        {
+            weight = (1 - pow((6 * (1-t) - 1) / 2.0, 3)) / 2 + 0.5;
+        }
+        else
+        {
+            weight = 1;
+        }
 
-    VSpline spl = VSpline(spline->GetP1(), p2, p3, spline->GetP4(), spline->GetKcurve());
+        const QPointF delta = event->scenePos() - oldPosition;
+        const QPointF offset0 = ((1-weight)/(3*t*(1-t)*(1-t))) * delta;
+        const QPointF offset1 = (weight/(3*t*t*(1-t))) * delta;
 
-    MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
-    connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-    qApp->getUndoStack()->push(moveSpl);
+        const QPointF p2 = spline->GetP2() + offset0;
+        const QPointF p3 = spline->GetP3() + offset1;
 
-    // Each time we move something we call recalculation scene rect. In some cases this can cause moving
-    // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
-    static bool changeFinished = true;
-    if (changeFinished)
-    {
-       changeFinished = false;
+        oldPosition = event->scenePos(); // Now mouse here
 
-       const QList<QGraphicsView *> viewList = scene()->views();
-       if (not viewList.isEmpty())
-       {
-           if (QGraphicsView *view = viewList.at(0))
+        VSpline spl = VSpline(spline->GetP1(), p2, p3, spline->GetP4(), spline->GetKcurve());
+
+        MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
+        connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        qApp->getUndoStack()->push(moveSpl);
+
+        // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+        // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
+        static bool changeFinished = true;
+        if (changeFinished)
+        {
+           changeFinished = false;
+
+           const QList<QGraphicsView *> viewList = scene()->views();
+           if (not viewList.isEmpty())
            {
-               VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-               SCASSERT(currentScene);
-               const QPointF cursorPosition = currentScene->getScenePos();
-               view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
+               if (QGraphicsView *view = viewList.at(0))
+               {
+                   VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+                   SCASSERT(currentScene);
+                   const QPointF cursorPosition = currentScene->getScenePos();
+                   view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
+               }
            }
-       }
-       changeFinished = true;
+           changeFinished = true;
+        }
     }
 }
 
@@ -436,7 +460,15 @@ void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+        const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+
+        if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
+            qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
+            qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
+            qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+        {
+            SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+        }
     }
 
     VAbstractSpline::hoverEnterEvent(event);
@@ -447,8 +479,16 @@ void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        //Disable cursor-arrow-openhand
-        RestoreOverrideCursor(cursorArrowOpenHand);
+        const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+
+        if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
+            qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
+            qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
+            qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+        {
+            //Disable cursor-arrow-openhand
+            RestoreOverrideCursor(cursorArrowOpenHand);
+        }
     }
 
     VAbstractSpline::hoverLeaveEvent(event);
@@ -527,6 +567,8 @@ void VToolSpline::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &spl)
 {
+    SCASSERT(doc != nullptr);
+
     if (domElement.attribute(AttrType) == OldToolType)
     {
         doc->SetAttribute(domElement, AttrType, ToolType);
