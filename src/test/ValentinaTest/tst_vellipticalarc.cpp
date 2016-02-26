@@ -197,9 +197,12 @@ void TST_VEllipticalArc::TestData()
 
     QTest::newRow("Arc start 90 degree, angle 45 degree, radiuses 100, 50") << 100.0 << 50.0 << 90.0 << 135.0 << 0.0;
     QTest::newRow("Arc start 90 degree, angle 45 degree, radiuses 150, 400") << 150.0 << 400.0 << 90.0 << 135.0 << 0.0;
-    QTest::newRow("Arc start 90 degree, angle 45 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 90.0 << 135.0 << 0.0;
-    QTest::newRow("Arc start 90 degree, angle 45 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 90.0 << 135.0 << 0.0;
-    QTest::newRow("Arc start 90 degree, angle 45 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 90.0 << 135.0 << 0.0;
+    QTest::newRow("Arc start 90 degree, angle 45 degree, radiuses 1500, 800")
+            << 1500.0 << 800.0 << 90.0 << 135.0 << 0.0;
+    QTest::newRow("Arc start 90 degree, angle 45 degree, radiuses 50000, 5000")
+            << 50000.0 << 5000.0 << 90.0 << 135.0 << 0.0;
+    QTest::newRow("Arc start 90 degree, angle 45 degree, radiuses 90000, 50000")
+            << 90000.0 << 50000.0 << 90.0 << 135.0 << 0.0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

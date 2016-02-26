@@ -356,13 +356,12 @@ void VEllipticalArc::FindF2(qreal length)
     qreal gap = 180;
     if (length < 0)
     {
-        //length = qAbs(length);
         d->isFlipped = true;
         gap = -gap;
     }
     while (length > MaxLength())
     {
-        //length = length - MaxLength();
+        length = length - MaxLength();
     }
 
     // We need to calculate the second angle
@@ -386,6 +385,7 @@ void VEllipticalArc::FindF2(qreal length)
         { // we selected too little end angle
             endAngle = endAngle + qAbs(gap);
         }
+        // we need to set d->f2, because we use it when we calculate GetLength
         d->f2 = endAngle;
         lenBez = GetLength();
     }

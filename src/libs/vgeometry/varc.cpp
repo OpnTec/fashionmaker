@@ -283,7 +283,7 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
         len = length;
     }
 
-    qreal n = (len*180)/(M_PI*d->radius);
+    qreal n = (len*180)/(M_PI*d->radius); // n - is angle in degrees
     QLineF line(GetCenter().toQPointF(), GetP1());
     line.setAngle(line.angle()+n);
 
