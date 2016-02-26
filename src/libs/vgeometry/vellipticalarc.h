@@ -40,16 +40,17 @@ class VEllipticalArc : public VAbstractCurve
     Q_DECLARE_TR_FUNCTIONS(VEllipticalArc)
 public:
     VEllipticalArc();
-    VEllipticalArc (VPointF center, qreal radius1, qreal radius2, QString formulaRadius1, QString formulaRadius2, qreal f1,
-          QString formulaF1, qreal f2, QString formulaF2, qreal rotationAngle, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VEllipticalArc (VPointF center, qreal radius1, qreal radius2, QString formulaRadius1, QString formulaRadius2,
+          qreal f1, QString formulaF1, qreal f2, QString formulaF2, qreal rotationAngle,
+          quint32 idObject = 0, Draw mode = Draw::Calculation);
 
     VEllipticalArc (VPointF center, qreal radius1, qreal radius2, qreal f1, qreal f2, qreal rotationAngle);
 
     VEllipticalArc (qreal length, QString formulaLength, VPointF center, qreal radius1, qreal radius2,
-          QString formulaRadius1, QString formulaRadius2, qreal f1,
-          QString formulaF1,  quint32 idObject = 0, Draw mode = Draw::Calculation);
+          QString formulaRadius1, QString formulaRadius2, qreal f1, QString formulaF1,
+          qreal rotationAngle, quint32 idObject = 0, Draw mode = Draw::Calculation);
 
-    VEllipticalArc (qreal length, VPointF center, qreal radius1, qreal radius2, qreal f1);
+    VEllipticalArc (qreal length, VPointF center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle);
 
     VEllipticalArc(const VEllipticalArc &arc);
 

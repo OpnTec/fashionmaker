@@ -29,24 +29,26 @@ public:
     {}
 
     VEllipticalArcData (QString formulaLength, VPointF center, qreal radius1, qreal radius2,
-                        QString formulaRadius1, QString formulaRadius2, qreal f1, QString formulaF1)
+                        QString formulaRadius1, QString formulaRadius2, qreal f1, QString formulaF1,
+                        qreal rotationAngle)
         : f1(f1), f2(0), formulaF1(formulaF1), formulaF2("0"), radius1(radius1),radius2(radius2),
           formulaRadius1(formulaRadius1), formulaRadius2(formulaRadius2),
-          center(center), isFlipped(false), formulaLength(formulaLength), rotationAngle(0)
+          center(center), isFlipped(false), formulaLength(formulaLength), rotationAngle(rotationAngle)
     {}
 
-    VEllipticalArcData(VPointF center, qreal radius1, qreal radius2, qreal f1)
+    VEllipticalArcData(VPointF center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle)
         : f1(f1), f2(0), formulaF1(QString("%1").arg(f1)), formulaF2("0"),
           radius1(radius1), radius2(radius2),
           formulaRadius1(QString("%1").arg(radius1)), formulaRadius2(QString("%1").arg(radius2)),
-          center(center), isFlipped(false), formulaLength(), rotationAngle(0)
+          center(center), isFlipped(false), formulaLength(), rotationAngle(rotationAngle)
     {}
 
     VEllipticalArcData(const VEllipticalArcData &arc)
         : QSharedData(arc), f1(arc.f1), f2(arc.f2), formulaF1(arc.formulaF1), formulaF2(arc.formulaF2),
           radius1(arc.radius1), radius2(arc.radius2),
           formulaRadius1(arc.formulaRadius1), formulaRadius2(arc.formulaRadius2),
-          center(arc.center), isFlipped(arc.isFlipped), formulaLength(arc.formulaLength), rotationAngle(arc.rotationAngle)
+          center(arc.center), isFlipped(arc.isFlipped), formulaLength(arc.formulaLength),
+          rotationAngle(arc.rotationAngle)
     {}
 
     virtual ~VEllipticalArcData();

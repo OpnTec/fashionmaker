@@ -51,7 +51,7 @@ void TST_VEllipticalArc::CompareTwoWays()
     const qreal length =  M_PI*(radius1+radius2)*(1+3*h/(10+qSqrt(4-3*h)))/4;
 
     VEllipticalArc arc1(center, radius1, radius2, f1, f2, rotationAngle);
-    VEllipticalArc arc2(length, center, radius1, radius2, f1);
+    VEllipticalArc arc2(length, center, radius1, radius2, f1, rotationAngle);
 
     const qreal eps = length*0.5/100; // computing error
     const QString errorMsg =
@@ -75,11 +75,12 @@ void TST_VEllipticalArc::NegativeArc()
     const qreal radius2 = 200;
     const qreal f1 = 1;
     const qreal f2 = 181;
+    const qreal rotationAngle = 0;
 
     const qreal h = ((radius1-radius2)*(radius1-radius2))/((radius1+radius2)*(radius1+radius2));
     const qreal length = M_PI*(radius1+radius2)*(1+3*h/(10+qSqrt(4-3*h)))/2;
     qreal l = -length;
-    VEllipticalArc arc(l, center, radius1, radius2, f1);
+    VEllipticalArc arc(l, center, radius1, radius2, f1, rotationAngle);
 
     const qreal eps = 1; // computing error
     const QString errorMsg =
