@@ -98,7 +98,6 @@ void MoveSpline::Do(const VSpline &spl)
         doc->SetAttribute(domElement, AttrAngle2,  spl.GetEndAngleFormula());
         doc->SetAttribute(domElement, AttrLength1, spl.GetC1LengthFormula());
         doc->SetAttribute(domElement, AttrLength2, spl.GetC2LengthFormula());
-        doc->SetAttribute(domElement, AttrKCurve,  spl.GetKcurve());
 
         emit NeedLiteParsing(Document::LiteParse);
     }

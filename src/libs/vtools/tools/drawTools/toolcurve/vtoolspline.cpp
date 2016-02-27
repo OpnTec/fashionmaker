@@ -196,7 +196,7 @@ VToolSpline* VToolSpline::Create(const quint32 _id, VSpline *spline, const QStri
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSpline *VToolSpline::Create(const quint32 _id, quint32 point1, quint32 point4, QString &a1, QString &a2,
-                                 QString &l1, QString &l2, qreal kCurve, quint32 duplicate, const QString &color,
+                                 QString &l1, QString &l2, quint32 duplicate, const QString &color,
                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                  const Document &parse, const Source &typeCreation)
 {
@@ -209,7 +209,7 @@ VToolSpline *VToolSpline::Create(const quint32 _id, quint32 point1, quint32 poin
     auto p1 = data->GeometricObject<VPointF>(point1);
     auto p4 = data->GeometricObject<VPointF>(point4);
 
-    auto spline = new VSpline(*p1, *p4, calcAngle1, a1, calcAngle2, a2, calcLength1, l1, calcLength2, l2, kCurve);
+    auto spline = new VSpline(*p1, *p4, calcAngle1, a1, calcAngle2, a2, calcLength1, l1, calcLength2, l2);
     if (duplicate > 0)
     {
         spline->SetDuplicate(duplicate);
@@ -277,7 +277,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
 
         spl = VSpline(spline->GetP1(), spline->GetP4(), newAngle1, newAngle1F, spline->GetEndAngle(),
                       spline->GetEndAngleFormula(), newLength1, newLength1F, spline->GetC2Length(),
-                      spline->GetC2LengthFormula(), spline->GetKcurve());
+                      spline->GetC2LengthFormula());
     }
     else
     {
@@ -302,7 +302,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
         }
         spl = VSpline(spline->GetP1(), spline->GetP4(), spline->GetStartAngle(), spline->GetStartAngleFormula(),
                       newAngle2, newAngle2F, spline->GetC1Length(), spline->GetC1LengthFormula(),
-                      newLength2, newLength2F, spline->GetKcurve());
+                      newLength2, newLength2F);
     }
 
     MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
@@ -477,7 +477,7 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         oldPosition = event->scenePos(); // Now mouse here
 
-        VSpline spl = VSpline(spline->GetP1(), p2, p3, spline->GetP4(), spline->GetKcurve());
+        VSpline spl = VSpline(spline->GetP1(), p2, p3, spline->GetP4());
 
         MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
         connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -635,7 +635,6 @@ void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &sp
     doc->SetAttribute(domElement, AttrAngle2,  spl.GetEndAngleFormula());
     doc->SetAttribute(domElement, AttrLength1, spl.GetC1LengthFormula());
     doc->SetAttribute(domElement, AttrLength2, spl.GetC2LengthFormula());
-    doc->SetAttribute(domElement, AttrKCurve,  spl.GetKcurve());
 
     if (spl.GetDuplicate() > 0)
     {
@@ -647,6 +646,11 @@ void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &sp
         {
             domElement.removeAttribute(AttrDuplicate);
         }
+    }
+
+    if (domElement.hasAttribute(AttrKCurve))
+    {
+        domElement.removeAttribute(AttrKCurve);
     }
 
     if (domElement.hasAttribute(AttrKAsm1))

@@ -1908,11 +1908,10 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         const QString length2 = GetParametrString(domElement, AttrLength2, "0");
         QString l2 = length2;//need for saving fixed formula;
 
-        const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
 
-        VToolSpline::Create(id, point1, point4, a1, a2, l1, l2, kCurve, duplicate, color, scene, this, data, parse,
+        VToolSpline::Create(id, point1, point4, a1, a2, l1, l2, duplicate, color, scene, this, data, parse,
                             Source::FromFile);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (a1 != angle1 || a2 != angle2 || l1 != length1 || l2 != length2)

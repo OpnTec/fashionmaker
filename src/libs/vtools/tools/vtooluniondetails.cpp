@@ -191,8 +191,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 VPointF *p4 = new VPointF(spline->GetP4());
                 BiasRotatePoint(p4, dx, dy, p, angle);
 
-                VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
-                Draw::Modeling);
+                VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, 0, Draw::Modeling);
                 idObject = data->AddGObject(spl);
                 children.append(idObject);
 
@@ -238,7 +237,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                     VPointF *p4 = new VPointF(spline.GetP4());
                     BiasRotatePoint(p4, dx, dy, p, angle);
 
-                    VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
+                    VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4);
                     if (i==1)
                     {
                         path->append(VSplinePoint(*p1, point1.KAsm1(), spl.GetStartAngle()+180,
@@ -342,8 +341,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                 VPointF *p4 = new VPointF(spline->GetP4());
                 BiasRotatePoint(p4, dx, dy, p, angle);
 
-                VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline->GetKcurve(), 0,
-                Draw::Modeling);
+                VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, 0, Draw::Modeling);
                 data->UpdateGObject(TakeNextId(children), spl);
                 delete p1;
                 delete p4;
@@ -379,7 +377,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                     VPointF *p4 = new VPointF(spline.GetP4());
                     BiasRotatePoint(p4, dx, dy, p, angle);
 
-                    VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, spline.GetKcurve());
+                    VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4);
                     if (i==1)
                     {
                         path->append(VSplinePoint(*p1, point1.KAsm1(), spl.GetStartAngle()+180,

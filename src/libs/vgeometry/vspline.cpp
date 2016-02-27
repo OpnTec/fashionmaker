@@ -75,8 +75,8 @@ VSpline::VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm
  * @param p3 second control point.
  * @param p4 second point spline.
  */
-VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject, Draw mode)
-    :VAbstractCurve(GOType::Spline, idObject, mode), d(new VSplineData(p1, p2, p3, p4, kCurve))
+VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, quint32 idObject, Draw mode)
+    :VAbstractCurve(GOType::Spline, idObject, mode), d(new VSplineData(p1, p2, p3, p4))
 {
     CreateName();
 }
@@ -95,16 +95,15 @@ VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, 
  * @param c1LengthFormula formula length from first point to first control point.
  * @param c2Length length from second point to first control point.
  * @param c2LengthFormula formula length from second point to first control point.
- * @param kCurve coefficient of curvature spline.
  * @param idObject
  * @param mode
  */
 VSpline::VSpline(VPointF p1, VPointF p4, qreal angle1, const QString &angle1Formula, qreal angle2,
                  const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
-                 const QString &c2LengthFormula, qreal kCurve, quint32 idObject, Draw mode)
+                 const QString &c2LengthFormula, quint32 idObject, Draw mode)
     : VAbstractCurve(GOType::Spline, idObject, mode),
       d(new VSplineData(p1, p4, angle1, angle1Formula, angle2,angle2Formula, c1Length, c1LengthFormula, c2Length,
-                        c2LengthFormula, kCurve))
+                        c2LengthFormula))
 {
     CreateName();
 }
@@ -238,8 +237,8 @@ QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2) const
     QPointF spl2p3;
     QPointF cutPoint = CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
 
-    spl1 = VSpline(GetP1(), spl1p2, spl1p3, cutPoint, GetKcurve());
-    spl2 = VSpline(cutPoint, spl2p2, spl2p3, GetP4(), GetKcurve());
+    spl1 = VSpline(GetP1(), spl1p2, spl1p3, cutPoint);
+    spl2 = VSpline(cutPoint, spl2p2, spl2p3, GetP4());
     return cutPoint;
 }
 
@@ -849,15 +848,6 @@ qreal VSpline::GetKasm2() const
 qreal VSpline::GetKcurve() const
 {
     return d->kCurve;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSpline::SetKcurve(qreal factor)
-{
-    if (factor > 0)
-    {
-        d->kCurve = factor;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

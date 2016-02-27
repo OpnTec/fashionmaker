@@ -135,11 +135,11 @@ VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointNa
         VPointF *p = new VPointF(point, pointName, mx, my);
         id = data->AddGObject(p);
 
-        VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
+        VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p);
         spl1id = data->AddGObject(spline1);
         data->AddCurve<VSpline>(spl1id, id);
 
-        VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
+        VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4());
         spl2id = data->AddGObject(spline2);
         data->AddCurve<VSpline>(spl2id, id);
     }
@@ -151,11 +151,11 @@ VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointNa
         spl1id = id + 1;
         spl2id = id + 2;
 
-        VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p, spl->GetKcurve());
+        VSpline *spline1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p);
         data->UpdateGObject(spl1id, spline1);
         data->AddCurve<VSpline>(spl1id, id);
 
-        VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4(), spl->GetKcurve());
+        VSpline *spline2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4());
         data->UpdateGObject(spl2id, spline2);
         data->AddCurve<VSpline>(spl2id, id);
 

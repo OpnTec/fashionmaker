@@ -443,8 +443,7 @@ VSpline DialogSpline::CurrentSpline() const
     length1F = qApp->TrVars()->FormulaFromUser(length1F, separator);
     length2F = qApp->TrVars()->FormulaFromUser(length2F, separator);
 
-    VSpline spline(*GetP1(), *GetP4(), angle1, angle1F, angle2, angle2F, length1, length1F,  length2, length2F,
-                   ui->doubleSpinBoxKcurve->value());
+    VSpline spline(*GetP1(), *GetP4(), angle1, angle1F, angle2, angle2F, length1, length1F,  length2, length2F);
 
     return spline;
 }
@@ -502,7 +501,7 @@ void DialogSpline::ShowDialog(bool click)
         auto *path = qobject_cast<VisToolSpline *>(vis);
         SCASSERT(path != nullptr);
 
-        spl = VSpline(*GetP1(), path->GetP2(), path->GetP3(), *GetP4(), ui->doubleSpinBoxKcurve->value());
+        spl = VSpline(*GetP1(), path->GetP2(), path->GetP3(), *GetP4());
 
         const QString angle1F = qApp->TrVars()->FormulaToUser(spl.GetStartAngleFormula());
         const QString angle2F = qApp->TrVars()->FormulaToUser(spl.GetEndAngleFormula());
@@ -566,8 +565,6 @@ void DialogSpline::SetSpline(const VSpline &spline)
 
     ui->plainTextEditLength1F->setPlainText(length1F);
     ui->plainTextEditLength2F->setPlainText(length2F);
-    ui->doubleSpinBoxKcurve->setValue(spl.GetKcurve());
-
     ui->lineEditSplineName->setText(spl.name());
 
     auto path = qobject_cast<VisToolSpline *>(vis);

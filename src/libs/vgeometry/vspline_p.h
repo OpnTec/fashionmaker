@@ -47,9 +47,9 @@ public:
     VSplineData();
     VSplineData(const VSplineData &spline);
     VSplineData(VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve);
-    VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve);
+    VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4);
     VSplineData(VPointF p1, VPointF p4, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
-                qreal c1Length, const QString &c1LengthF, qreal c2Length, const QString &c2LengthF, qreal kCurve);
+                qreal c1Length, const QString &c1LengthF, qreal c2Length, const QString &c2LengthF);
     virtual ~VSplineData();
 
     static qreal GetL(const QPointF &p1, const QPointF &p4, qreal kCurve);
@@ -150,7 +150,7 @@ VSplineData::VSplineData(VPointF p1, VPointF p4, qreal angle1, qreal angle2, qre
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VSplineData::VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve)
+VSplineData::VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4)
     : p1(p1),
       p4(p4),
       angle1(0),
@@ -161,7 +161,7 @@ VSplineData::VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal k
       c1LengthF("0"),
       c2Length(0),
       c2LengthF("0"),
-      kCurve(kCurve)
+      kCurve(1)
 {
     QLineF p1p2(p1.toQPointF(), p2);
 
@@ -183,7 +183,7 @@ VSplineData::VSplineData(VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal k
 //---------------------------------------------------------------------------------------------------------------------
 VSplineData::VSplineData(VPointF p1, VPointF p4, qreal angle1, const QString &angle1F, qreal angle2,
                          const QString &angle2F, qreal c1Length, const QString &c1LengthF,
-                         qreal c2Length, const QString &c2LengthF, qreal kCurve)
+                         qreal c2Length, const QString &c2LengthF)
     : p1(p1),
       p4(p4),
       angle1(angle1),
@@ -194,7 +194,7 @@ VSplineData::VSplineData(VPointF p1, VPointF p4, qreal angle1, const QString &an
       c1LengthF(c1LengthF),
       c2Length(c2Length),
       c2LengthF(c2LengthF),
-      kCurve(kCurve)
+      kCurve(1)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -230,8 +230,7 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
             ctrlPoints[lastPoint]->RefreshCtrlPoint(size, SplinePointPosition::FirstPoint, ctrlPoint, pSpl);
         }
 
-        VSpline spline(VPointF(pSpl), ctrlPoint, Visualization::scenePos,
-                       VPointF(Visualization::scenePos), path.GetKCurve());
+        VSpline spline(VPointF(pSpl), ctrlPoint, Visualization::scenePos, VPointF(Visualization::scenePos));
 
         if (size == 1)
         {
@@ -249,7 +248,7 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
         else
         {
             const VSpline spl = path.GetSpline(size - 1);
-            VSpline preSpl(spl.GetP1(), spl.GetP2(), ctrlLine.p2(), VPointF(pSpl), path.GetKCurve());
+            VSpline preSpl(spl.GetP1(), spl.GetP2(), ctrlLine.p2(), VPointF(pSpl));
 
             path[size-1].SetAngle2(spline.GetStartAngle());
             if (ctrlPoint != pSpl)
@@ -269,8 +268,7 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
     {
         pointSelected = true;
 
-        VSpline spline(VPointF(pSpl), ctrlPoint, Visualization::scenePos,
-                       VPointF(Visualization::scenePos), path.GetKCurve());
+        VSpline spline(VPointF(pSpl), ctrlPoint, Visualization::scenePos, VPointF(Visualization::scenePos));
 
         path[size-1].SetAngle2(spline.GetStartAngle());
 

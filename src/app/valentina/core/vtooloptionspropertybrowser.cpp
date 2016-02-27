@@ -1337,13 +1337,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VProperty *property)
                 i->setSpline(spl);
             }
             break;
-        case 25: // AttrKCurve
-            if (value.toDouble() > 0)
-            {
-                spl.SetKcurve(value.toDouble());
-                i->setSpline(spl);
-            }
-            break;
         case 27: // AttrTypeColor
             i->SetLineColor(value.toString());
             break;
@@ -1773,13 +1766,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     length2.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
     AddPropertyFormula(tr("C2: length"), length2, AttrLength2);
 
-    auto itemFactor = new VDoubleProperty(tr("Curve factor"));
-    itemFactor->setSetting("Min", 0.1);
-    itemFactor->setSetting("Max", 1000);
-    itemFactor->setSetting("Step", 0.01);
-    itemFactor->setSetting("Precision", 3);
-    itemFactor->setValue(spl.GetKcurve());
-    AddProperty(itemFactor, AttrKCurve);
     AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
 
@@ -2217,7 +2203,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     length2.setValue(length2F);
     idToProperty[AttrLength2]->setValue(length2);
 
-    idToProperty[AttrKCurve]->setValue(spl.GetKcurve());
     idToProperty[AttrColor]->setValue(VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
 }
 
@@ -2309,7 +2294,7 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << AttrPShoulder                      /* 22 */
                                      << AttrAxisP1                         /* 23 */
                                      << AttrAxisP2                         /* 24 */
-                                     << AttrKCurve                         /* 25 */
+                                     << AttrKCurve /*Not used*/            /* 25 */
                                      << AttrLineColor                      /* 26 */
                                      << AttrColor                          /* 27 */
                                      << AttrCrossPoint                     /* 28 */

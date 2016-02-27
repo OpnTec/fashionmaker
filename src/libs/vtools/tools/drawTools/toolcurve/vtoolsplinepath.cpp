@@ -199,11 +199,11 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
     VSpline spl = newSplPath.GetSpline(indexSpline);
     if (position == SplinePointPosition::FirstPoint)
     {
-        spl = VSpline(spl.GetP1(), pos, spl.GetP3(), spl.GetP4(), spl.GetKcurve());
+        spl = VSpline(spl.GetP1(), pos, spl.GetP3(), spl.GetP4());
     }
     else
     {
-        spl = VSpline(spl.GetP1(), spl.GetP2(), pos, spl.GetP4(), spl.GetKcurve());
+        spl = VSpline(spl.GetP1(), spl.GetP2(), pos, spl.GetP4());
     }
 
     UpdateControlPoints(spl, newSplPath, indexSpline);
@@ -256,8 +256,7 @@ void VToolSplinePath::RefreshSplinePath(VSplinePath &splPath)
         controlPoints[j-2]->blockSignals(false);
         controlPoints[j-1]->blockSignals(false);
 
-        spl = VSpline (spl.GetP1(),  controlPoints[j-2]->pos(), controlPoints[j-1]->pos(), spl.GetP4(),
-                splPath.GetKCurve());
+        spl = VSpline (spl.GetP1(),  controlPoints[j-2]->pos(), controlPoints[j-1]->pos(), spl.GetP4());
         UpdateControlPoints(spl, splPath, i);
     }
 }
@@ -506,7 +505,7 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     oldPosition = event->scenePos(); // Now mouse here
 
-    const VSpline spl = VSpline(spline.GetP1(), p2, p3, spline.GetP4(), spline.GetKcurve());
+    const VSpline spl = VSpline(spline.GetP1(), p2, p3, spline.GetP4());
 
     UpdateControlPoints(spl, newSplPath, indexSpline);
 

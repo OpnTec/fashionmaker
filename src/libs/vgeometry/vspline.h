@@ -49,11 +49,11 @@ public:
     VSpline (const VSpline &spline );
     VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
              quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject = 0,
+    VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, quint32 idObject = 0,
              Draw mode = Draw::Calculation);
     VSpline (VPointF p1, VPointF p4, qreal angle1, const QString &angle1Formula, qreal angle2,
              const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
-             const QString &c2LengthFormula, qreal kCurve, quint32 idObject = 0, Draw mode = Draw::Calculation);
+             const QString &c2LengthFormula, quint32 idObject = 0, Draw mode = Draw::Calculation);
     virtual ~VSpline() Q_DECL_OVERRIDE;
     VSpline &operator=(const VSpline &spl);
 
@@ -88,7 +88,6 @@ public:
     qreal   GetKasm1() const;
     qreal   GetKasm2() const;
     qreal   GetKcurve() const;
-    void    SetKcurve(qreal factor);
     qreal   LengthT(qreal t) const;
     QPointF CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
     QPointF CutSpline ( qreal length, VSpline &spl1, VSpline &spl2) const;
