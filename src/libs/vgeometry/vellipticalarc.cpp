@@ -58,7 +58,7 @@ VEllipticalArc::VEllipticalArc (VPointF center, qreal radius1, qreal radius2,
       d (new VEllipticalArcData(center, radius1, radius2, formulaRadius1, formulaRadius2,
       f1, formulaF1, f2, formulaF2, rotationAngle))
 {
-    EllipticalArcName();
+    CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ VEllipticalArc::VEllipticalArc(VPointF center, qreal radius1, qreal radius2, qre
     : VAbstractCurve(GOType::EllipticalArc, NULL_ID, Draw::Calculation),
       d (new VEllipticalArcData(center, radius1, radius2, f1, f2, rotationAngle))
 {
-    EllipticalArcName();
+    CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ VEllipticalArc::VEllipticalArc(qreal length, QString formulaLength, VPointF cent
       d (new VEllipticalArcData(formulaLength, center, radius1, radius2, formulaRadius1, formulaRadius2,
            f1, formulaF1, rotationAngle))
 {
-    EllipticalArcName();
+    CreateName();
     FindF2(length);
 }
 
@@ -87,7 +87,7 @@ VEllipticalArc::VEllipticalArc(qreal length, VPointF center, qreal radius1, qrea
     : VAbstractCurve(GOType::EllipticalArc, NULL_ID, Draw::Calculation),
       d (new VEllipticalArcData(center, radius1, radius2, f1, rotationAngle))
 {
-    EllipticalArcName();
+    CreateName();
     FindF2(length);
 }
 
@@ -372,13 +372,25 @@ QPointF VEllipticalArc::CutArc(const qreal &length) const
 void VEllipticalArc::setId(const quint32 &id)
 {
     VAbstractCurve::setId(id);
-    setName(EARC_ + QString("%1_%2").arg(d->center.name()).arg(id));
+    CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VEllipticalArc::EllipticalArcName()
+void VEllipticalArc::CreateName()
 {
-    setName(EARC_ + QString("%1").arg(this->GetCenter().name()));
+    QString name = EARC_ + QString("%1").arg(this->GetCenter().name());
+
+    if (VAbstractCurve::id() != NULL_ID)
+    {
+        name += QString("_%1").arg(VAbstractCurve::id());
+    }
+
+    if (GetDuplicate() > 0)
+    {
+        name += QString("_%1").arg(GetDuplicate());
+    }
+
+    setName(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

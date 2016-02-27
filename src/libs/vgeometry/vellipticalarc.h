@@ -92,10 +92,10 @@ public:
     QPointF            CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2) const;
     QPointF            CutArc (const qreal &length) const;
     virtual void       setId(const quint32 &id) Q_DECL_OVERRIDE;
+protected:
+    virtual void CreateName() Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VEllipticalArcData> d;
-
-    void EllipticalArcName();
     void FindF2(qreal length);
 
     qreal MaxLength() const;
