@@ -69,16 +69,24 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
 
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
 
+    const bool freeAngle1 = qmu::QmuTokenParser::IsSingle(spl->GetStartAngleFormula());
+    const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
+
     auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, spl->GetP2(),
-                                                  spl->GetP1().toQPointF(), *data->GetPatternUnit(), this);
+                                                  spl->GetP1().toQPointF(), *data->GetPatternUnit(), freeAngle1,
+                                                  freeLength1, this);
     connect(controlPoint1, &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
     connect(this, &VToolSpline::setEnabledPoint, controlPoint1, &VControlPointSpline::setEnabledPoint);
     connect(controlPoint1, &VControlPointSpline::ShowContextMenu, this, &VToolSpline::contextMenuEvent);
     controlPoints.append(controlPoint1);
 
+    const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl->GetEndAngleFormula());
+    const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
+
     auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, spl->GetP3(),
-                                                  spl->GetP4().toQPointF(), *data->GetPatternUnit(), this);
+                                                  spl->GetP4().toQPointF(), *data->GetPatternUnit(), freeAngle2,
+                                                  freeLength2, this);
     connect(controlPoint2, &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
     connect(this, &VToolSpline::setEnabledPoint, controlPoint2, &VControlPointSpline::setEnabledPoint);
@@ -247,11 +255,54 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
     VSpline spl;
     if (position == SplinePointPosition::FirstPoint)
     {
-        spl = VSpline(spline->GetP1(), pos, spline->GetP3(), spline->GetP4(), spline->GetKcurve());
+        QLineF line(spline->GetP1().toQPointF(), pos);
+
+        qreal newAngle1 = line.angle();
+        QString newAngle1F = QString().setNum(newAngle1);
+
+        qreal newLength1 = line.length();
+        QString newLength1F = QString().setNum(qApp->fromPixel(newLength1));
+
+        if (not qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()))
+        {
+            newAngle1 = spline->GetStartAngle();
+            newAngle1F = spline->GetStartAngleFormula();
+        }
+
+        if (not qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()))
+        {
+            newLength1 = spline->GetC1Length();
+            newLength1F = spline->GetC1LengthFormula();
+        }
+
+        spl = VSpline(spline->GetP1(), spline->GetP4(), newAngle1, newAngle1F, spline->GetEndAngle(),
+                      spline->GetEndAngleFormula(), newLength1, newLength1F, spline->GetC2Length(),
+                      spline->GetC2LengthFormula(), spline->GetKcurve());
     }
     else
     {
-        spl = VSpline(spline->GetP1(), spline->GetP2(), pos, spline->GetP4(), spline->GetKcurve());
+        QLineF line(spline->GetP4().toQPointF(), pos);
+
+        qreal newAngle2 = line.angle();
+        QString newAngle2F = QString().setNum(newAngle2);
+
+        qreal newLength2 = line.length();
+        QString newLength2F = QString().setNum(qApp->fromPixel(newLength2));
+
+        if (not qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()))
+        {
+            newAngle2 = spline->GetEndAngle();
+            newAngle2F = spline->GetEndAngleFormula();
+        }
+
+        if (not qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+        {
+            newLength2 = spline->GetC2Length();
+            newLength2F = spline->GetC2LengthFormula();
+        }
+        spl = VSpline(spline->GetP1(), spline->GetP4(), spline->GetStartAngle(), spline->GetStartAngleFormula(),
+                      newAngle2, newAngle2F, spline->GetC1Length(), spline->GetC1LengthFormula(),
+                      newLength2, newLength2F, spline->GetKcurve());
     }
 
     MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
@@ -544,13 +595,21 @@ void VToolSpline::RefreshGeometry()
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
 
     {
+        const bool freeAngle1 = qmu::QmuTokenParser::IsSingle(spl->GetStartAngleFormula());
+        const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
+
         const QPointF splinePoint = VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id())->toQPointF();
-        controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, spl->GetP2(), splinePoint);
+        controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, spl->GetP2(), splinePoint, freeAngle1,
+                                           freeLength1);
     }
 
     {
+        const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl->GetEndAngleFormula());
+        const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
+
         const QPointF splinePoint = VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id())->toQPointF();
-        controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, spl->GetP3(), splinePoint);
+        controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, spl->GetP3(), splinePoint, freeAngle2,
+                                           freeLength2);
     }
 
     controlPoints[0]->blockSignals(false);
@@ -569,11 +628,7 @@ void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &sp
 {
     SCASSERT(doc != nullptr);
 
-    if (domElement.attribute(AttrType) == OldToolType)
-    {
-        doc->SetAttribute(domElement, AttrType, ToolType);
-    }
-
+    doc->SetAttribute(domElement, AttrType,    ToolType);
     doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());
     doc->SetAttribute(domElement, AttrPoint4,  spl.GetP4().id());
     doc->SetAttribute(domElement, AttrAngle1,  spl.GetStartAngleFormula());

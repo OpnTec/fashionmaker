@@ -44,7 +44,9 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
       controlLine(nullptr),
       indexSpline(indexSpline),
       position(position),
-      patternUnit(patternUnit)
+      patternUnit(patternUnit),
+      freeAngle(true),
+      freeLength(true)
 {
     Init();
 }
@@ -60,13 +62,15 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
  */
 VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position,
                                          const QPointF &controlPoint, const QPointF &splinePoint, Unit patternUnit,
-                                         QGraphicsItem *parent)
+                                         bool freeAngle, bool freeLength, QGraphicsItem *parent)
     :QGraphicsEllipseItem(parent),
       radius(CircleRadius()),
       controlLine(nullptr),
       indexSpline(indexSpline),
       position(position),
-      patternUnit(patternUnit)
+      patternUnit(patternUnit),
+      freeAngle(freeAngle),
+      freeLength(freeLength)
 {
     Init();
 
@@ -107,7 +111,10 @@ void VControlPointSpline::paint(QPainter *painter, const QStyleOptionGraphicsIte
 void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     this->setPen(QPen(Qt::black, ToPixel(WidthMainLine(patternUnit), patternUnit)));
-    SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+    if (freeAngle || freeLength)
+    {
+        SetOverrideCursor(cursorArrowOpenHand, 1, 1);
+    }
     QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
@@ -115,8 +122,11 @@ void VControlPointSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     this->setPen(QPen(Qt::black, ToPixel(WidthHairLine(patternUnit), patternUnit)));
-    //Disable cursor-arrow-openhand
-    RestoreOverrideCursor(cursorArrowOpenHand);
+    if (freeAngle || freeLength)
+    {
+        //Disable cursor-arrow-openhand
+        RestoreOverrideCursor(cursorArrowOpenHand);
+    }
     QGraphicsEllipseItem::hoverLeaveEvent(event);
 }
 
@@ -129,49 +139,81 @@ void VControlPointSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
  */
 QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-    if (change == ItemPositionChange && scene())
+    switch (change)
     {
-        // Each time we move something we call recalculation scene rect. In some cases this can cause moving
-        // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last move.
-        static bool changeFinished = true;
-        if (changeFinished)
+        case ItemPositionChange:
         {
-            changeFinished = false;
-            // value - new position.
-            QPointF newPos = value.toPointF();
-            emit ControlPointChangePosition(indexSpline, position, newPos);
-            if (scene())
+            if (not freeAngle || not freeLength)
             {
-                const QList<QGraphicsView *> viewList = scene()->views();
-                if (not viewList.isEmpty())
+                const QPointF splPoint = controlLine->line().p1() + pos();
+
+                QLineF newLine(splPoint, value.toPointF());// value - new position.
+                QLineF oldLine(splPoint, pos());// pos() - old position.
+
+                if (not freeAngle)
                 {
-                    if (QGraphicsView *view = viewList.at(0))
+                    newLine.setAngle(oldLine.angle());
+                }
+
+                if (not freeLength)
+                {
+                    qreal length = controlLine->line().length();
+                    qreal l2 = oldLine.length();
+                    newLine.setLength(oldLine.length());
+                }
+
+                return newLine.p2();
+            }
+
+            break;
+        }
+        case ItemPositionHasChanged:
+        {
+            // Each time we move something we call recalculation scene rect. In some cases this can cause moving
+            // objects positions. And this cause infinite redrawing. That's why we wait the finish of saving the last
+            // move.
+            static bool changeFinished = true;
+            if (changeFinished)
+            {
+                changeFinished = false;
+                // value - new position.
+                emit ControlPointChangePosition(indexSpline, position, value.toPointF());
+                if (scene())
+                {
+                    const QList<QGraphicsView *> viewList = scene()->views();
+                    if (not viewList.isEmpty())
                     {
-                        const int xmargin = 50;
-                        const int ymargin = 50;
-
-                        const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
-                        const QRectF itemRect = mapToScene(boundingRect()).boundingRect();
-
-                        // If item's rect is bigger than view's rect ensureVisible works very unstable.
-                        if (itemRect.height() + 2*ymargin < viewRect.height() &&
-                            itemRect.width() + 2*xmargin < viewRect.width())
+                        if (QGraphicsView *view = viewList.at(0))
                         {
-                             view->ensureVisible(itemRect, xmargin, ymargin);
-                        }
-                        else
-                        {
-                            // Ensure visible only small rect around a cursor
-                            VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-                            SCASSERT(currentScene);
-                            const QPointF cursorPosition = currentScene->getScenePos();
-                            view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
+                            const int xmargin = 50;
+                            const int ymargin = 50;
+
+                            const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
+                            const QRectF itemRect = mapToScene(boundingRect()).boundingRect();
+
+                            // If item's rect is bigger than view's rect ensureVisible works very unstable.
+                            if (itemRect.height() + 2*ymargin < viewRect.height() &&
+                                itemRect.width() + 2*xmargin < viewRect.width())
+                            {
+                                 view->ensureVisible(itemRect, xmargin, ymargin);
+                            }
+                            else
+                            {
+                                // Ensure visible only small rect around a cursor
+                                VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+                                SCASSERT(currentScene);
+                                const QPointF cursorPosition = currentScene->getScenePos();
+                                view->ensureVisible(QRectF(cursorPosition.x()-5, cursorPosition.y()-5, 10, 10));
+                            }
                         }
                     }
                 }
+                changeFinished = true;
             }
-            changeFinished = true;
+            break;
         }
+        default:
+            break;
     }
     return QGraphicsItem::itemChange(change, value);
 }
@@ -181,7 +223,10 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        if (freeAngle || freeLength)
+        {
+            SetOverrideCursor(cursorArrowCloseHand, 1, 1);
+        }
     }
     QGraphicsEllipseItem::mousePressEvent(event);
 }
@@ -191,8 +236,11 @@ void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        //Disable cursor-arrow-closehand
-        RestoreOverrideCursor(cursorArrowCloseHand);
+        if (freeAngle || freeLength)
+        {
+            //Disable cursor-arrow-closehand
+            RestoreOverrideCursor(cursorArrowCloseHand);
+        }
     }
     QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
@@ -235,10 +283,13 @@ void VControlPointSpline::SetCtrlLine(const QPointF &controlPoint, const QPointF
  * @param splinePoint spline point.
  */
 void VControlPointSpline::RefreshCtrlPoint(const qint32 &indexSpline, SplinePointPosition pos,
-                                           const QPointF &controlPoint, const QPointF &splinePoint)
+                                           const QPointF &controlPoint, const QPointF &splinePoint, bool freeAngle,
+                                           bool freeLength)
 {
     if (this->indexSpline == indexSpline && this->position == pos)
     {
+        this->freeAngle = freeAngle;
+        this->freeLength = freeLength;
         this->setPos(controlPoint);
         SetCtrlLine(controlPoint, splinePoint);
     }
