@@ -221,7 +221,7 @@ VToolSpline *VToolSpline::Create(const quint32 _id, quint32 point1, quint32 poin
 //---------------------------------------------------------------------------------------------------------------------
 VSpline VToolSpline::getSpline() const
 {
-    QSharedPointer<VSpline> spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+    auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
     return *spline.data();
 }
 

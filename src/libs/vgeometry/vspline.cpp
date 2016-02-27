@@ -690,6 +690,12 @@ VPointF VSpline::GetP1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSpline::SetP1(const VPointF &p)
+{
+    d->p1 = p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief GetP2 return first control point.
  * @return first control point.
@@ -721,6 +727,12 @@ QPointF VSpline::GetP3() const
 VPointF VSpline::GetP4() const
 {
     return d->p4;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSpline::SetP4(const VPointF &p)
+{
+    d->p4 = p;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -756,6 +768,20 @@ QString VSpline::GetEndAngleFormula() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSpline::SetStartAngle(qreal angle, const QString &formula)
+{
+    d->angle1 = angle;
+    d->angle1F = formula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSpline::SetEndAngle(qreal angle, const QString &formula)
+{
+    d->angle2 = angle;
+    d->angle2F = formula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VSpline::GetC1Length() const
 {
     return d->c1Length;
@@ -777,6 +803,20 @@ QString VSpline::GetC1LengthFormula() const
 QString VSpline::GetC2LengthFormula() const
 {
     return d->c2LengthF;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSpline::SetC1Length(qreal length, const QString &formula)
+{
+    d->c1Length = length;
+    d->c1LengthF = formula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSpline::SetC2Length(qreal length, const QString &formula)
+{
+    d->c2Length = length;
+    d->c2LengthF = formula;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

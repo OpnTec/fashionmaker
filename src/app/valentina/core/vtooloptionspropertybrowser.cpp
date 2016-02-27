@@ -1298,20 +1298,52 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VProperty *property)
     QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = propertyToId[property];
 
-    VToolSpline *i = qgraphicsitem_cast<VToolSpline *>(currentItem);
+    auto i = qgraphicsitem_cast<VToolSpline *>(currentItem);
     SCASSERT(i != nullptr);
+
+    VSpline spl = i->getSpline();
+    const VFormula f = value.value<VFormula>();
+
     switch (PropertiesList().indexOf(id))
     {
         case 0: // AttrName
             Q_UNREACHABLE();//The attribute is read only
             break;
-        case 25: // AttrKCurve
-        {
-            VSpline spl = i->getSpline();
-            spl.SetKcurve(value.toDouble());
-            i->setSpline(spl);
+        case 9: // AttrAngle1
+            if (not f.error())
+            {
+                spl.SetStartAngle(f.getDoubleValue(), f.GetFormula(FormulaType::FromUser));
+                i->setSpline(spl);
+            }
             break;
-        }
+        case 10: // AttrAngle2
+            if (not f.error())
+            {
+                spl.SetEndAngle(f.getDoubleValue(), f.GetFormula(FormulaType::FromUser));
+                i->setSpline(spl);
+            }
+            break;
+        case 36: // AttrLength1
+            if (not f.error() && f.getDoubleValue() >= 0)
+            {
+                spl.SetC1Length(qApp->toPixel(f.getDoubleValue()), f.GetFormula(FormulaType::FromUser));
+                i->setSpline(spl);
+            }
+            break;
+        case 37: // AttrLength2
+            if (not f.error() && f.getDoubleValue() >= 0)
+            {
+                spl.SetC2Length(qApp->toPixel(f.getDoubleValue()), f.GetFormula(FormulaType::FromUser));
+                i->setSpline(spl);
+            }
+            break;
+        case 25: // AttrKCurve
+            if (value.toDouble() > 0)
+            {
+                spl.SetKcurve(value.toDouble());
+                i->setSpline(spl);
+            }
+            break;
         case 27: // AttrTypeColor
             i->SetLineColor(value.toString());
             break;
@@ -1709,14 +1741,39 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *it
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
 {
-    VToolSpline *i = qgraphicsitem_cast<VToolSpline *>(item);
+    auto i = qgraphicsitem_cast<VToolSpline *>(item);
     i->ShowVisualization(true);
     formView->setTitle(tr("Curve tool"));
 
+    const auto spl = i->getSpline();
+
     AddPropertyObjectName(i, tr("Name"), true);
 
-    VDoubleProperty* itemFactor = new VDoubleProperty(tr("Curve factor"));
-    VSpline spl = i->getSpline();
+    VFormula angle1(spl.GetStartAngleFormula(), i->getData());
+    angle1.setCheckZero(false);
+    angle1.setToolId(i->getId());
+    angle1.setPostfix(degreeSymbol);
+    AddPropertyFormula(tr("C1: angle"), angle1, AttrAngle1);
+
+    VFormula length1(spl.GetC1LengthFormula(), i->getData());
+    length1.setCheckZero(false);
+    length1.setToolId(i->getId());
+    length1.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    AddPropertyFormula(tr("C1: length"), length1, AttrLength1);
+
+    VFormula angle2(spl.GetEndAngleFormula(), i->getData());
+    angle2.setCheckZero(false);
+    angle2.setToolId(i->getId());
+    angle2.setPostfix(degreeSymbol);
+    AddPropertyFormula(tr("C2: angle"), angle2, AttrAngle2);
+
+    VFormula length2(spl.GetC2LengthFormula(), i->getData());
+    length2.setCheckZero(false);
+    length2.setToolId(i->getId());
+    length2.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    AddPropertyFormula(tr("C2: length"), length2, AttrLength2);
+
+    auto itemFactor = new VDoubleProperty(tr("Curve factor"));
     itemFactor->setSetting("Min", 0.1);
     itemFactor->setSetting("Max", 1000);
     itemFactor->setSetting("Step", 0.01);
@@ -2124,9 +2181,43 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolShoulderPoint()
 void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
 {
     auto i = qgraphicsitem_cast<VToolSpline *>(currentItem);
+    const VSpline spl = i->getSpline();
 
     idToProperty[AttrName]->setValue(i->name());
-    idToProperty[AttrKCurve]->setValue(i->getSpline().GetKcurve());
+
+    VFormula angle1F(spl.GetStartAngleFormula(), i->getData());
+    angle1F.setCheckZero(false);
+    angle1F.setToolId(i->getId());
+    angle1F.setPostfix(degreeSymbol);
+    QVariant angle1;
+    angle1.setValue(angle1F);
+    idToProperty[AttrAngle1]->setValue(angle1);
+
+    VFormula length1F(spl.GetC1LengthFormula(), i->getData());
+    length1F.setCheckZero(false);
+    length1F.setToolId(i->getId());
+    length1F.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    QVariant length1;
+    length1.setValue(length1F);
+    idToProperty[AttrLength1]->setValue(length1);
+
+    VFormula angle2F(spl.GetEndAngleFormula(), i->getData());
+    angle2F.setCheckZero(false);
+    angle2F.setToolId(i->getId());
+    angle2F.setPostfix(degreeSymbol);
+    QVariant angle2;
+    angle2.setValue(angle2F);
+    idToProperty[AttrAngle2]->setValue(angle2);
+
+    VFormula length2F(spl.GetC2LengthFormula(), i->getData());
+    length2F.setCheckZero(false);
+    length2F.setToolId(i->getId());
+    length2F.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
+    QVariant length2;
+    length2.setValue(length2F);
+    idToProperty[AttrLength2]->setValue(length2);
+
+    idToProperty[AttrKCurve]->setValue(spl.GetKcurve());
     idToProperty[AttrColor]->setValue(VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
 }
 
@@ -2228,6 +2319,8 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << AttrName1                          /* 32 */
                                      << AttrName2                          /* 33 */
                                      << AttrVCrossPoint                    /* 34 */
-                                     << AttrHCrossPoint;                   /* 35 */
+                                     << AttrHCrossPoint                    /* 35 */
+                                     << AttrLength1                        /* 36 */
+                                     << AttrLength2;                       /* 37 */
     return attr;
 }
