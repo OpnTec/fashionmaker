@@ -37,6 +37,7 @@ class VLayoutDetail;
 class QGraphicsItem;
 class VBestSquare;
 class QGraphicsRectItem;
+class QRectF;
 
 class VLayoutPaper
 {
@@ -57,7 +58,7 @@ public:
     void  SetLayoutWidth(qreal width);
 
     quint32 GetShift() const;
-    void         SetShift(quint32 shift);
+    void    SetShift(quint32 shift);
 
     bool GetRotate() const;
     void SetRotate(bool value);
@@ -73,7 +74,12 @@ public:
     bool ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop);
     int  Count() const;
     QGraphicsRectItem *GetPaperItem(bool autoCrop) const;
-    QList<QGraphicsItem *> GetDetails() const;
+    QList<QGraphicsItem *> GetItemDetails() const;
+
+    QVector<VLayoutDetail> GetDetails() const;
+    void                   SetDetails(const QList<VLayoutDetail>& details);
+
+    QRectF BoundingRect() const;
 
 private:
     QSharedDataPointer<VLayoutPaperData> d;

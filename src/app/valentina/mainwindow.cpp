@@ -48,6 +48,12 @@
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../vwidgets/vwidgetpopup.h"
+#include "../vwidgets/vmaingraphicsscene.h"
+#include "tools/drawTools/drawtools.h"
+#include "../vtools/dialogs/tooldialogs.h"
+#include "tools/vtooldetail.h"
+#include "tools/vtooluniondetails.h"
+#include "dialogs/dialogs.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -66,6 +72,8 @@
 #include <QDesktopServices>
 #include <chrono>
 #include <thread>
+#include <QFileSystemWatcher>
+#include <QComboBox>
 
 #if defined(Q_OS_MAC)
 #include <QMimeData>
@@ -244,9 +252,7 @@ void MainWindow::AddPP(const QString &PPName)
     connect(sceneDraw, &VMainGraphicsScene::NewFactor, spoint, &VToolBasePoint::SetFactor);
     connect(sceneDraw, &VMainGraphicsScene::EnableToolMove, spoint, &VToolBasePoint::EnableToolMove);
 
-    QHash<quint32, VDataTool*>* tools = doc->getTools();
-    SCASSERT(tools != nullptr);
-    tools->insert(id, spoint);
+    doc->AddTool(id, spoint);
     VDrawTool::AddRecord(id, Tool::BasePoint, doc);
     SetEnableTool(true);
     SetEnableWidgets(true);

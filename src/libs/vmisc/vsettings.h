@@ -134,6 +134,14 @@ public:
     static bool GetDefIgnoreAllFields();
     void SetIgnoreAllFields(bool value);
 
+    bool GetStripOptimization() const;
+    static bool GetDefStripOptimization();
+    void SetStripOptimization(bool value);
+
+    quint8 GetMultiplier() const;
+    static quint8 GetDefMultiplier();
+    void SetMultiplier(quint8 value);
+
 private:
     Q_DISABLE_COPY(VSettings)
     static const QString SettingConfigurationLabelLanguage;
@@ -166,6 +174,8 @@ private:
     static const QString SettingLayoutUnitePages;
     static const QString SettingFields;
     static const QString SettingIgnoreFields;
+    static const QString SettingStripOptimization;
+    static const QString SettingMultiplier;
 };
 
 #endif // VSETTINGS_H

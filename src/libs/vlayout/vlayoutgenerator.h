@@ -92,6 +92,12 @@ public:
     bool IsUnitePages() const;
     void SetUnitePages(bool value);
 
+    quint8 GetMultiplier() const;
+    void   SetMultiplier(const quint8 &value);
+
+    bool IsStripOptimization() const;
+    void SetStripOptimization(bool value);
+
 signals:
     void Start();
     void Arranged(int count);
@@ -116,9 +122,18 @@ private:
     bool autoCrop;
     bool saveLength;
     bool unitePages;
+    bool stripOptimizationEnabled;
+    quint8 multiplier;
+    bool stripOptimization;
 
     int PageHeight() const;
     int PageWidth() const;
+
+    void GatherPages();
+    void UnitePages();
+    void UniteDetails(int j, QList<QList<VLayoutDetail> > &nDetails, qreal length, int i);
+    void UnitePapers(int j, QList<qreal> &papersLength, qreal length);
+    QList<VLayoutDetail> MoveDetails(qreal length, const QVector<VLayoutDetail> &details);
 };
 
 typedef std::shared_ptr<VLayoutGenerator> VLayoutGeneratorPtr;

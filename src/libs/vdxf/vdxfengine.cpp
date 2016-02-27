@@ -245,43 +245,41 @@ void VDxfEngine::drawPath(const QPainterPath &path)
     for (int j=0; j < subpaths.size(); ++j)
     {
         const QPolygonF polygon = subpaths.at(j);
-        if (polygon.size() < 3)
+        if (polygon.isEmpty())
         {
             return;
         }
 
-        for (int i=1; i < polygon.count(); i++)
+        dxf->writePolyline(*dw,
+                           DL_PolylineData(polygon.size(), 0, 0, 0),
+                           DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+
+        for (int i=0; i < polygon.count(); ++i)
         {
-            dxf->writeLine(
-            *dw,
-            DL_LineData(polygon.at(i-1).x(), // start point
-            getSize().height() - polygon.at(i-1).y(),
-            0.0,
-            polygon.at(i).x(), // end point
-            getSize().height() - polygon.at(i).y(),
-            0.0),
-            DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+            dxf->writeVertex(*dw, DL_VertexData(polygon.at(i).x(), getSize().height() - polygon.at(i).y(), 0, 0));
         }
+
+        dxf->writePolylineEnd(*dw);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawLines(const QLineF * lines, int lineCount)
 {
-    for (int i = 0; i < lineCount; i++)
+    for (int i = 0; i < lineCount; ++i)
     {
-            QPointF p1 = matrix.map(lines[i].p1());
-            QPointF p2 = matrix.map(lines[i].p2());
+        QPointF p1 = matrix.map(lines[i].p1());
+        QPointF p2 = matrix.map(lines[i].p2());
 
-            dxf->writeLine(
-            *dw,
-            DL_LineData(p1.x(), // start point
-            getSize().height() - p1.y(),
-            0.0,
-            p2.x(), // end point
-            getSize().height() - p2.y(),
-            0.0),
-            DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+        dxf->writeLine(
+        *dw,
+        DL_LineData(p1.x(), // start point
+        getSize().height() - p1.y(),
+        0.0,
+        p2.x(), // end point
+        getSize().height() - p2.y(),
+        0.0),
+        DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
     }
 }
 
@@ -296,21 +294,22 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
 {
     Q_UNUSED(mode)
 
-    for (int i = 1; i < pointCount; i++)
+    if (pointCount <= 0)
     {
-            QPointF p1 = matrix.map(points[i-1]);
-            QPointF p2 = matrix.map(points[i]);
-
-            dxf->writeLine(
-            *dw,
-            DL_LineData(p1.x(), // start point
-            getSize().height() - p1.y(),
-            0.0,
-            p2.x(), // end point
-            getSize().height() - p2.y(),
-            0.0),
-            DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+        return;
     }
+
+    dxf->writePolyline(*dw,
+                       DL_PolylineData(pointCount, 0, 0, 0),
+                       DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+
+    for (int i = 0; i < pointCount; ++i)
+    {
+        QPointF p = matrix.map(points[i]);
+        dxf->writeVertex(*dw, DL_VertexData(p.x(), getSize().height() - p.y(), 0, 0));
+    }
+
+    dxf->writePolylineEnd(*dw);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

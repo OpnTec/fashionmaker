@@ -445,11 +445,12 @@ void VToolOptionsPropertyBrowser::AddPropertyFormula(const QString &propertyName
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
-void VToolOptionsPropertyBrowser::AddPropertyPointName(Tool *i, const QString &propertyName)
+void VToolOptionsPropertyBrowser::AddPropertyObjectName(Tool *i, const QString &propertyName, bool readOnly)
 {
-    VStringProperty *itemName = new VStringProperty(propertyName);
+    auto itemName = new VStringProperty(propertyName);
     itemName->setClearButtonEnable(true);
     itemName->setValue(i->name());
+    itemName->setReadOnly(readOnly);
     AddProperty(itemName, AttrName);
 }
 
@@ -1301,6 +1302,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VProperty *property)
     SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
+        case 0: // AttrName
+            Q_UNREACHABLE();//The attribute is read only
+            break;
         case 25: // AttrKCurve
         {
             VSpline spl = i->getSpline();
@@ -1329,6 +1333,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSplinePath(VProperty *property)
     SCASSERT(i != nullptr);
     switch (PropertiesList().indexOf(id))
     {
+        case 0: // AttrName
+            Q_UNREACHABLE();//The attribute is read only
+            break;
         case 25: // AttrKCurve
         {
             VSplinePath splPath = i->getSplinePath();
@@ -1431,7 +1438,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item
     i->ShowVisualization(true);
     formView->setTitle(tr("Base point"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
 
     VPointFProperty* itemPosition = new VPointFProperty(tr("Position"));
     itemPosition->setValue(i->pos());
@@ -1445,7 +1452,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEndLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Point at distance and angle"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
@@ -1459,7 +1466,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolAlongLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Point at distance along line"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
@@ -1498,7 +1505,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Point along bisector"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
@@ -1522,7 +1529,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Cut arc tool"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
     AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
@@ -1534,7 +1541,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSpline(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool for segmenting a curve"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
     AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
@@ -1546,7 +1553,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool segment a pathed curve"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
     AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
@@ -1558,7 +1565,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolHeight(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Perpendicular point along line"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
 }
@@ -1583,7 +1590,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersect(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Point at line intersection"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1594,7 +1601,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolNormal(QGraphicsItem *item)
     formView->setTitle(tr("Point along perpendicular"));
 
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
 
@@ -1613,7 +1620,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfContact(QGraphicsItem *i
     i->ShowVisualization(true);
     formView->setTitle(tr("Point at intersection of arc and line"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Radius"), i->getArcRadius(), AttrRadius);
 }
 
@@ -1624,7 +1631,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersection(QGraphicsIt
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from x & y of two other points"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1634,7 +1641,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionArcs(QGraphi
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from intersection two arcs"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyCrossPoint(i, tr("Take"));
 }
 
@@ -1645,7 +1652,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionCircles(QGra
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from intersection two circles"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("First circle radius"), i->GetFirstCircleRadius(), AttrC1Radius);
     AddPropertyFormula(tr("Second circle radius"), i->GetSecondCircleRadius(), AttrC2Radius);
     AddPropertyCrossPoint(i, tr("Take"));
@@ -1658,7 +1665,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointOfIntersectionCurves(QGrap
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from intersection two curves"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyVCrossPoint(i, tr("Vertical correction"));
     AddPropertyHCrossPoint(i, tr("Horizontal correction"));
 }
@@ -1670,7 +1677,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointFromCircleAndTangent(QGrap
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from circle and tangent"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Circle radius"), i->GetCircleRadius(), AttrCRadius);
     AddPropertyCrossPoint(i, tr("Take"));
 }
@@ -1682,7 +1689,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolPointFromArcAndTangent(QGraphic
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool to make point from arc and tangent"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyCrossPoint(i, tr("Take"));
 }
 
@@ -1693,7 +1700,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Special point on shoulder"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Length"), i->GetFormulaLength(), AttrLength);
@@ -1705,6 +1712,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     VToolSpline *i = qgraphicsitem_cast<VToolSpline *>(item);
     i->ShowVisualization(true);
     formView->setTitle(tr("Curve tool"));
+
+    AddPropertyObjectName(i, tr("Name"), true);
 
     VDoubleProperty* itemFactor = new VDoubleProperty(tr("Curve factor"));
     VSpline spl = i->getSpline();
@@ -1724,6 +1733,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool for path curve"));
 
+    AddPropertyObjectName(i, tr("Name"), true);
+
     VDoubleProperty* itemFactor = new VDoubleProperty(tr("Curve factor"));
     VSplinePath splPath = i->getSplinePath();
     itemFactor->setSetting("Min", 0.1);
@@ -1742,7 +1753,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolTriangle(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Tool triangle"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1752,7 +1763,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersectAxis(QGraphicsItem
     i->ShowVisualization(true);
     formView->setTitle(tr("Point intersection line and axis"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
@@ -1765,7 +1776,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
     i->ShowVisualization(true);
     formView->setTitle(tr("Point intersection curve and axis"));
 
-    AddPropertyPointName(i, tr("Point label"));
+    AddPropertyObjectName(i, tr("Point label"));
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
@@ -2112,25 +2123,21 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolShoulderPoint()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
 {
-    VToolSpline *i = qgraphicsitem_cast<VToolSpline *>(currentItem);
+    auto i = qgraphicsitem_cast<VToolSpline *>(currentItem);
 
-    VSpline spl = i->getSpline();
-    idToProperty[AttrKCurve]->setValue(spl.GetKcurve());
-
-    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-    idToProperty[AttrColor]->setValue(index);
+    idToProperty[AttrName]->setValue(i->name());
+    idToProperty[AttrKCurve]->setValue(i->getSpline().GetKcurve());
+    idToProperty[AttrColor]->setValue(VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
 {
-    VToolSplinePath *i = qgraphicsitem_cast<VToolSplinePath *>(currentItem);
+    auto i = qgraphicsitem_cast<VToolSplinePath *>(currentItem);
 
-    VSplinePath splPath = i->getSplinePath();
-    idToProperty[AttrKCurve]->setValue(splPath.GetKCurve());
-
-    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-    idToProperty[AttrColor]->setValue(index);
+    idToProperty[AttrName]->setValue(i->name());
+    idToProperty[AttrKCurve]->setValue(i->getSplinePath().GetKCurve());
+    idToProperty[AttrColor]->setValue(VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -42,6 +42,7 @@
 #include "../vmisc/vsettings.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vsplinepath.h"
 #include "../core/vapplication.h"
 #include "../vpatterndb/calculator.h"
 
@@ -1859,9 +1860,18 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, const QDomElement &dom
         const qreal kAsm2 = GetParametrDouble(domElement, AttrKAsm2, "1.0");
         const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
 
-        VToolSpline::Create(id, point1, point4, kAsm1, kAsm2, angle1, angle2, kCurve, color, scene, this, data,
-                            parse, Source::FromFile);
+        const auto p1 = data->GeometricObject<VPointF>(point1);
+        const auto p4 = data->GeometricObject<VPointF>(point4);
+
+        VSpline spline(*p1, *p4, angle1, angle2, kAsm1, kAsm2, kCurve);
+        if (duplicate > 0)
+        {
+            spline.SetDuplicate(duplicate);
+        }
+
+        VToolSpline::Create(id, spline, color, scene, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1884,7 +1894,13 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         ToolsCommonAttributes(domElement, id);
         const qreal kCurve = GetParametrDouble(domElement, AttrKCurve, "1.0");
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
-        VSplinePath *path = new VSplinePath(kCurve);
+        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
+
+        auto path = new VSplinePath(kCurve);
+        if (duplicate > 0)
+        {
+            path->SetDuplicate(duplicate);
+        }
 
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();
@@ -1940,7 +1956,7 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         spl->setIdObject(idObject);
         spl->setMode(Draw::Modeling);
         data->UpdateGObject(id, spl);
-        VNodeSpline::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
+        VNodeSpline::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -1966,7 +1982,7 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         path->setIdObject(idObject);
         path->setMode(Draw::Modeling);
         data->UpdateGObject(id, path);
-        VNodeSplinePath::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
+        VNodeSplinePath::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2037,7 +2053,7 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         arc->setIdObject(idObject);
         arc->setMode(Draw::Modeling);
         data->UpdateGObject(id, arc);
-        VNodeArc::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
+        VNodeArc::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2767,6 +2783,10 @@ void VPattern::PrepareForParse(const Document &parse)
         data->ClearForFullParse();
         nameActivPP.clear();
         patternPieces.clear();
+
+        qDeleteAll(toolsOnRemove);//Remove all invisible on a scene objects.
+        toolsOnRemove.clear();
+
         tools.clear();
         cursor = 0;
         history.clear();

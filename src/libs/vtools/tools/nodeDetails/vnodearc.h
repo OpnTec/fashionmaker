@@ -35,33 +35,27 @@
 /**
  * @brief The VNodeArc class arc detail node.
  */
-class VNodeArc :public VAbstractNode, public QGraphicsPathItem
+class VNodeArc :public VAbstractNode
 {
     Q_OBJECT
 public:
     VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
-             const quint32 &idTool = 0, QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr);
+             const quint32 &idTool = 0, QObject *qoParent = nullptr);
 
-    static void  Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id,
-                        quint32 idArc, const Document &parse,
-                        const Source &typeCreation, const quint32 &idTool = 0, QObject *parent = nullptr);
+    static void  Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Document &parse,
+                        const Source &typeCreation, const quint32 &idTool = 0);
     static const QString TagName;
     static const QString ToolType;
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::NodeArc)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 public slots:
-    virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
+    virtual void FullUpdateFromFile() Q_DECL_OVERRIDE {}
 protected:
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void ShowNode() Q_DECL_OVERRIDE;
-    virtual void HideNode() Q_DECL_OVERRIDE;
+    virtual void ShowNode() Q_DECL_OVERRIDE {}
+    virtual void HideNode() Q_DECL_OVERRIDE {}
 private:
-    void         RefreshGeometry();
+    Q_DISABLE_COPY(VNodeArc)
 };
 
 #endif // VNODEARC_H4

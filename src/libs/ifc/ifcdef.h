@@ -104,6 +104,7 @@ extern const QString AttrPoint4;
 extern const QString AttrKAsm1;
 extern const QString AttrKAsm2;
 extern const QString AttrKCurve;
+extern const QString AttrDuplicate;
 extern const QString AttrPathPoint;
 extern const QString AttrPSpline;
 extern const QString AttrAxisP1;

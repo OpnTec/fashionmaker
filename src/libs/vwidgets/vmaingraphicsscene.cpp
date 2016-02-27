@@ -74,7 +74,11 @@ void VMainGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
  */
 void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    emit mousePress(event->scenePos());
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    {
+        emit MouseLeftPressed();
+    }
+
     QGraphicsScene::mousePressEvent(event);
     if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
     {
@@ -87,9 +91,25 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    {
+        emit MouseLeftReleased();
+    }
+    QGraphicsScene::mouseReleaseEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::InitOrigins()
 {
-    qDeleteAll(origins);
+    foreach (QGraphicsItem *item, origins)
+    {
+        if (this->items().contains(item))
+        {
+            delete item;
+        }
+    }
 
     QPen originsPen(Qt::green, ToPixel(WidthHairLine(Unit::Mm), Unit::Mm), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     QBrush axisTextBrush(Qt::green);

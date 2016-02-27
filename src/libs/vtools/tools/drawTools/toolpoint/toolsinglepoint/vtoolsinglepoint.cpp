@@ -95,7 +95,7 @@ void VToolSinglePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolSinglePoint::name() const
 {
-    return PointName(id);
+    return ObjectName<VPointF>(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -177,16 +177,16 @@ void VToolSinglePoint::FullUpdateFromFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief mouseReleaseEvent  handle mouse release events.
+ * @brief mousePressEvent  handle mouse press events.
  * @param event mouse release event.
  */
-void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
         PointChoosed();
     }
-    QGraphicsEllipseItem::mouseReleaseEvent(event);
+    QGraphicsEllipseItem::mousePressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

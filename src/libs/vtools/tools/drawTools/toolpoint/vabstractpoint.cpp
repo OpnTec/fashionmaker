@@ -72,21 +72,6 @@ void VAbstractPoint::DeleteFromLabel()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VAbstractPoint::PointName(quint32 id) const
-{
-    try
-    {
-        return VAbstractTool::data.GeometricObject<VPointF>(id)->name();
-    }
-    catch (const VExceptionBadId &e)
-    {
-        qCDebug(vTool, "Error! Couldn't get point name. %s %s", qUtf8Printable(e.ErrorMessage()),
-                qUtf8Printable(e.DetailedInformation()));
-        return QString("");// Return empty string for property browser
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPoint::SetPointName(quint32 id, const QString &name)
 {
     // Don't know if need check name here.

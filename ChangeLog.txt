@@ -1,11 +1,28 @@
 # Version 0.5.0
+- [#306] Layout generator optimization. Divide into strips.
+- Fixed case with duplicate names of curves if they connect same points.
+- [#216] Better powerful way creation curved path.
+- Improved exporting to dxf. QPainterPath export as Polyline.
 - Show additional message dialog if measurements was changed. Related to issue [#440].
 - [#132] Intersect Curves.
 - Added language Chinese (China).
 - New icon for VAL file. Updated Tape logo. Updated ico for standard measurements.
 - [#325] Check pattern for inverse compatibility.
+- [#385] Add 'Open Recent' option in Tape.exe, 'File' dropdown menu.
 
-# Version 0.4.2
+# Version 0.4.3
+- Using QGraphicsScene instead of VMainGraphicsScene caused a crash.
+- Fixed bug disabling tool True darts.
+- Fixed wrong calculation tool True darts.
+- [#405] Fixed crash after deleting first pattern piece in the list.
+
+# Version 0.4.2 February 17, 2016
+- Measurement Diagram is not shown on Mac OS X.
+- In dialog 'tool Spline Path' fixed broken selecting new point into the list of points.
+- Regesign dialogs tool 'Spline' and 'Spline Path' for avoiding text squeeze.
+- Fixed getting correct reversed segment for single in the list curve.
+- Fixed triggering validation a detail. Two new cases: has been changed Reverse option and the list 
+has been scrolled. Fixed validation when the list conatains only curve.
 - Fixed broken path to measurements after using Save As option.
 - Tool line. Block selecting the same point twice.
 - [#443] Not valid dxf file. libdxf updated to version 3.12.2.0. Fixed drawing subpaths.

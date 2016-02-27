@@ -256,8 +256,14 @@ QRectF VLayoutDetail::BoundingRect() const
 {
     QVector<QPointF> points = GetLayoutAllowencePoints();
     points.append(points.first());
-    QRectF rec =  QPolygonF(points).boundingRect();
-    return rec;
+    return QPolygonF(points).boundingRect();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VLayoutDetail::Diagonal() const
+{
+    const QRectF rec = BoundingRect();
+    return qSqrt(pow(rec.height(), 2) + pow(rec.width(), 2));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

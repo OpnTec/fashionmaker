@@ -3521,27 +3521,27 @@ Applicare le impostazioni comunque?</translation>
     <name>DialogSpline</name>
     <message>
         <source>First point</source>
-        <translation>Primo punto</translation>
+        <translation type="vanished">Primo punto</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Coefficiente di lunghezza del primo punto di controllo</translation>
+        <translation type="vanished">Coefficiente di lunghezza del primo punto di controllo</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Angolo del primo punto di controllo</translation>
+        <translation type="vanished">Angolo del primo punto di controllo</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Secondo punto</translation>
+        <translation type="vanished">Secondo punto</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Coefficiente di lunghezza del secondo punto di controllo</translation>
+        <translation type="vanished">Coefficiente di lunghezza del secondo punto di controllo</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Angolo del secondo punto di controllo </translation>
+        <translation type="vanished">Angolo del secondo punto di controllo </translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -3567,6 +3567,34 @@ Applicare le impostazioni comunque?</translation>
         <source>Color:</source>
         <translation>Colore</translation>
     </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished">Primo punto</translation>
+    </message>
+    <message>
+        <source>Control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Angolo</translation>
+    </message>
+    <message>
+        <source>Length ratio:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
+    </message>
+    <message>
+        <source>Invalid spline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
@@ -3576,23 +3604,23 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Point of curve</source>
-        <translation>Punto della curva</translation>
+        <translation type="vanished">Punto della curva</translation>
     </message>
     <message>
         <source>Length ratio of the first control point</source>
-        <translation>Coefficiente di lunghezza del primo punto di controllo</translation>
+        <translation type="vanished">Coefficiente di lunghezza del primo punto di controllo</translation>
     </message>
     <message>
         <source>The angle of the first control point</source>
-        <translation>Angolo del primo punto di controllo</translation>
+        <translation type="vanished">Angolo del primo punto di controllo</translation>
     </message>
     <message>
         <source>Length ratio of the second control point</source>
-        <translation>Coefficiente di lunghezza del secondo punto di controllo</translation>
+        <translation type="vanished">Coefficiente di lunghezza del secondo punto di controllo</translation>
     </message>
     <message>
         <source>The angle of the second control point</source>
-        <translation>Angolo del secondo punto di controllo </translation>
+        <translation type="vanished">Angolo del secondo punto di controllo </translation>
     </message>
     <message>
         <source>List of points</source>
@@ -3617,6 +3645,34 @@ Applicare le impostazioni comunque?</translation>
     <message>
         <source>Color:</source>
         <translation>Colore</translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Angolo</translation>
+    </message>
+    <message>
+        <source>Length ratio:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second control point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
+    </message>
+    <message>
+        <source>Invalid spline path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7174,6 +7230,10 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Horizontal correction</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nome</translation>
     </message>
 </context>
 <context>

@@ -54,8 +54,7 @@ SOURCES += \
     tst_vcommandline.cpp \
     tst_tstranslation.cpp \
     tst_vdetail.cpp \
-    tst_findpoint.cpp \
-    tst_vellipticalarc.cpp
+    tst_findpoint.cpp
 
 HEADERS += \
     tst_vposter.h \
@@ -77,8 +76,7 @@ HEADERS += \
     tst_vcommandline.h \
     tst_tstranslation.h \
     tst_vdetail.h \
-    tst_findpoint.h \
-    tst_vellipticalarc.h
+    tst_findpoint.h
 
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
@@ -299,7 +297,9 @@ COLLECTION_FILES += \
     $${PWD}/../../app/share/collection/medidas_eli2015.vit \
     $${PWD}/../../app/share/collection/pantalon_base_Eli.val \
     $${PWD}/../../app/share/collection/Razmernye_priznaki_dlya_zhenskogo_zhaketa.vit \
-    $${PWD}/../../app/share/collection/IMK_Zhaketa_poluprilegayuschego_silueta.val
+    $${PWD}/../../app/share/collection/IMK_Zhaketa_poluprilegayuschego_silueta.val \
+    $${PWD}/../../app/share/collection/Lara_Jil.vit \
+    $${PWD}/../../app/share/collection/modell_2.val
 
 
 # Compilation will fail without this files after we added them to this section.

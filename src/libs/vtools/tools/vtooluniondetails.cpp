@@ -102,7 +102,7 @@ VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, co
  * @param pRotate point rotation.
  * @param angle angle rotation.
  */
-void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene, VAbstractPattern *doc,
+void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPattern *doc,
                                        VContainer *data, VDetail &newDetail, const VDetail &det, const int &i,
                                        const quint32 &idTool, QVector<quint32> &children, const qreal &dx,
                                        const qreal &dy, const quint32 &pRotate, const qreal &angle)
@@ -127,7 +127,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                 VPointF *point1 = new VPointF(*point);
                 point1->setMode(Draw::Modeling);
                 id = data->AddGObject(point1);
-                VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
+                VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool);
             }
         }
         break;
@@ -164,7 +164,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                 arc2->setMode(Draw::Modeling);
                 id = data->AddGObject(arc2);
 
-                VNodeArc::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
+                VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool);
             }
         }
         break;
@@ -199,7 +199,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                 VSpline *spl1 = new VSpline(*spl);
                 spl1->setMode(Draw::Modeling);
                 id = data->AddGObject(spl1);
-                VNodeSpline::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool, tool);
+                VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool);
 
                 delete p4;
                 delete p1;
@@ -255,8 +255,7 @@ void VToolUnionDetails::AddToNewDetail(QObject *tool, VMainGraphicsScene *scene,
                 VSplinePath *path1 = new VSplinePath(*path);
                 path1->setMode(Draw::Modeling);
                 id = data->AddGObject(path1);
-                VNodeSplinePath::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool,
-                                        tool);
+                VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool);
             }
         }
         break;
@@ -551,8 +550,9 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     {
         //Scene doesn't show this tool, so doc will destroy this object.
         unionDetails = new VToolUnionDetails(doc, data, id, d1, d2, indexD1, indexD2, typeCreation, drawName, doc);
-        QHash<quint32, VDataTool*>* tools = doc->getTools();
-        tools->insert(id, unionDetails);
+        doc->AddTool(id, unionDetails);
+        // Unfortunatelly doc will destroy all objects only in the end, but we should delete them before each FullParse
+        doc->AddToolOnRemove(unionDetails);
     }
     //Then create new details
     VNodeDetail det1p1;
@@ -593,7 +593,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         QVector<quint32> children;
         do
         {
-            AddToNewDetail(unionDetails, scene, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id, children);
+            AddToNewDetail(scene, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id, children);
             ++i;
             if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-1)
             {
@@ -605,7 +605,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                     {
                         j=0;
                     }
-                    AddToNewDetail(unionDetails, scene, doc, data, newDetail, d2.RemoveEdge(indexD2), j, id, children,
+                    AddToNewDetail(scene, doc, data, newDetail, d2.RemoveEdge(indexD2), j, id, children,
                                    dx, dy, det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;

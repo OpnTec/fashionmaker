@@ -51,7 +51,7 @@ void VisToolEndLine::RefreshGeometry()
 {
     const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
     QLineF line;
-    if (qFuzzyCompare(1 + length, 1 + 0))
+    if (qFuzzyIsNull(length))
     {
         line = QLineF(first->toQPointF(), Ray(first->toQPointF()));
     }

@@ -37,8 +37,16 @@ Q_LOGGING_CATEGORY(vVis, "v.visualization")
 
 //---------------------------------------------------------------------------------------------------------------------
 Visualization::Visualization(const VContainer *data)
-    :QObject(), data(data), factor(VDrawTool::factor), scenePos(QPointF()),
-      mainColor(Qt::red), supportColor(Qt::magenta), lineStyle(Qt::SolidLine), object1Id(NULL_ID), toolTip(QString())
+    :QObject(),
+      data(data),
+      factor(VDrawTool::factor),
+      scenePos(QPointF()),
+      mainColor(Qt::red),
+      supportColor(Qt::magenta),
+      lineStyle(Qt::SolidLine),
+      object1Id(NULL_ID),
+      toolTip(QString()),
+      mode(Mode::Creation)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -195,4 +203,17 @@ void Visualization::DrawPath(QGraphicsPathItem *pathItem, const QPainterPath &pa
                           cap));
     pathItem->setPath(path);
     pathItem->setVisible(true);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+Mode Visualization::GetMode() const
+{
+    return mode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void Visualization::SetMode(const Mode &value)
+{
+    mode = value;
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>661</width>
-    <height>453</height>
+    <width>623</width>
+    <height>531</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -277,6 +277,13 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line_6">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QGroupBox" name="groupBoxCreationOptions">
@@ -585,6 +592,54 @@
           <property name="text">
            <string>Unite pages (if possible)</string>
           </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBoxStrips">
+          <property name="toolTip">
+           <string>Enabling for sheets that have big height will speed up creating. </string>
+          </property>
+          <property name="title">
+           <string>Divide into strips</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Multiplier</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="spinBoxMultiplier">
+             <property name="toolTip">
+              <string>Set multiplier for length of the biggest workpiece in layout.</string>
+             </property>
+             <property name="prefix">
+              <string>x</string>
+             </property>
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>10</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>

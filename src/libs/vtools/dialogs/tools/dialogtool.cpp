@@ -312,6 +312,20 @@ bool DialogTool::eventFilter(QObject *object, QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+quint32 DialogTool::DNumber(const QString &baseName) const
+{
+    quint32 num = 0;
+    QString name;
+    do
+    {
+        ++num;
+        name = baseName + QString("_%1").arg(num);
+    } while (not data->IsUnique(name));
+
+    return num;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ValFormulaChanged handle change formula
  * @param flag flag state of formula

@@ -294,6 +294,10 @@ unix{
         icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
         icns_resources.files += $$PWD/../../../dist/macx/pattern.icns
 
+        # Copy to bundle standard measurements files
+        # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
+        QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/../tape/$${DESTDIR}/tape.app/$$RESOURCES_DIR/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
+
         QMAKE_BUNDLE_DATA += \
             templates \
             standard \
@@ -431,7 +435,11 @@ win32:*-g++ {
     package_printsupport.files += $$[QT_INSTALL_PLUGINS]/printsupport/windowsprintersupport.dll
     INSTALLS += package_printsupport
 
-    NSIS_MAKENSISW = "C:/Program Files/NSIS/makensisw.exe"
+    contains(QT_ARCH, i386) {
+        NSIS_MAKENSISW = "C:/Program Files/NSIS/makensisw.exe"
+    } else {
+        NSIS_MAKENSISW = "C:/Program Files (x86)/NSIS/makensisw.exe"
+    }
 
     exists($$NSIS_MAKENSISW) {
         package_nsis.path = $${OUT_PWD}/../../../package
@@ -468,10 +476,16 @@ win32 {
     copyToDestdir($$pdftops_path, $$shell_path($${OUT_PWD}/$$DESTDIR))
 }
 
-unix:!macx{
-    # suppress the default RPATH
-    QMAKE_LFLAGS_RPATH =
-    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\' -Wl,-rpath,$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -Wl,-rpath,$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}"
+noRunPath{ # For enable run qmake with CONFIG+=noRunPath
+    # do nothing
+} else {
+    unix:!macx{
+        # suppress the default RPATH
+        # helps to run the program without Qt Creator
+        # see problem with path to libqmuparser and libpropertybrowser
+        QMAKE_LFLAGS_RPATH =
+        QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\' -Wl,-rpath,$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -Wl,-rpath,$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}"
+    }
 }
 
 # When the GNU linker sees a library, it discards all symbols that it doesn't need.

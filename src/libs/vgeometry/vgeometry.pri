@@ -31,3 +31,4 @@ HEADERS += \
         $$PWD/vgeometrydef.h \
         $$PWD/vellipticalarc.h \
         $$PWD/vellipticalarc_p.h
+	$$PWD/vabstractcurve_p.h

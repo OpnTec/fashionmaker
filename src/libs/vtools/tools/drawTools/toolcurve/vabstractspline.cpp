@@ -27,6 +27,8 @@
  *************************************************************************/
 
 #include "vabstractspline.h"
+#include "../vwidgets/vcontrolpointspline.h"
+
 #include <QKeyEvent>
 
 const QString VAbstractSpline::TagName = QStringLiteral("spline");
@@ -204,16 +206,16 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief mouseReleaseEvent  handle mouse release events.
+ * @brief mousePressEvent  handle mouse press events.
  * @param event mouse release event.
  */
-void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void VAbstractSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
         emit ChoosedTool(id, sceneType);
     }
-    QGraphicsItem::mouseReleaseEvent(event);
+    QGraphicsPathItem::mousePressEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -263,4 +265,10 @@ void VAbstractSpline::setEnabled(bool enabled)
         setPen(QPen(Qt::gray,
                     qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractSpline::name() const
+{
+    return ObjectName<VAbstractCurve>(id);
 }

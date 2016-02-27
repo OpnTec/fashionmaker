@@ -231,7 +231,7 @@ unix{
 
         # Copy to bundle standard measurements files
         # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
-        forceCopyToDestdir($${OUT_PWD}/$${DESTDIR}/diagrams.rcc, $$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/))
+        QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/$${DESTDIR}/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
 
         format.path = $$RESOURCES_DIR/
         format.files += $$PWD/../../../dist/macx/i-measurements.icns
@@ -348,10 +348,16 @@ CONFIG(debug, debug|release){
 # Path to recource file.
 win32:RC_FILE = share/resources/tape.rc
 
-unix:!macx{
-    # suppress the default RPATH
-    QMAKE_LFLAGS_RPATH =
-    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\' -Wl,-rpath,$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -Wl,-rpath,$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}"
+noRunPath{ # For enable run qmake with CONFIG+=noRunPath
+    # do nothing
+} else {
+    unix:!macx{
+        # suppress the default RPATH
+        # helps to run the program without Qt Creator
+        # see problem with path to libqmuparser and libpropertybrowser
+        QMAKE_LFLAGS_RPATH =
+        QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\' -Wl,-rpath,$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -Wl,-rpath,$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}"
+    }
 }
 
 # When the GNU linker sees a library, it discards all symbols that it doesn't need.

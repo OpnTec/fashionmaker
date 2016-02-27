@@ -102,6 +102,12 @@ public:
     bool IsUnitePages() const;
     void SetUnitePages(bool save);
 
+    bool IsStripOptimization() const;
+    void SetStripOptimization(bool save);
+
+    quint8 GetMultiplier() const;
+    void   SetMultiplier(const quint8 &value);
+
     bool IsIgnoreAllFields() const;
     void SetIgnoreAllFields(bool value);
 

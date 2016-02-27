@@ -47,12 +47,9 @@ const QString VNodeArc::ToolType = QStringLiteral("modeling");
  * @param parent parent object.
  */
 VNodeArc::VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
-                   const quint32 &idTool, QObject *qoParent, QGraphicsItem *parent)
-    :VAbstractNode(doc, data, id, idArc, idTool, qoParent), QGraphicsPathItem(parent)
+                   const quint32 &idTool, QObject *qoParent)
+    :VAbstractNode(doc, data, id, idArc, idTool, qoParent)
 {
-    RefreshGeometry();
-    this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
-
     ToolCreation(typeCreation);
 }
 
@@ -68,13 +65,13 @@ VNodeArc::VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 
  * @param idTool tool id.
  * @param parent QObject parent
  */
-void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene, quint32 id, quint32 idArc,
-                      const Document &parse, const Source &typeCreation, const quint32 &idTool, QObject *parent)
+void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc,
+                      const Document &parse, const Source &typeCreation, const quint32 &idTool)
 {
     VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
     if (parse == Document::FullParse)
     {
-        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool, parent);
+        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool, doc);
 
         doc->AddTool(id, arc);
         if (idTool != NULL_ID)
@@ -86,10 +83,8 @@ void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScen
         }
         else
         {
-            // Try to prevent memory leak
-            scene->addItem(arc);// First adopted by scene
-            arc->hide();// If no one will use node, it will stay hidden
-            arc->SetParentType(ParentType::Scene);
+            // Help to delete the node before each FullParse
+            doc->AddToolOnRemove(arc);
         }
     }
     else
@@ -102,15 +97,6 @@ void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScen
 QString VNodeArc::getTagName() const
 {
     return VNodeArc::TagName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FullUpdateFromFile update tool data form file.
- */
-void VNodeArc::FullUpdateFromFile()
-{
-    RefreshGeometry();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,69 +133,4 @@ void VNodeArc::RefreshDataInFile()
             doc->SetAttribute(domElement, AttrIdTool, idTool);
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief mouseReleaseEvent handle mouse release events.
- * @param event mouse release event.
- */
-void VNodeArc::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
-    {
-        emit ChoosedTool(id, SceneObject::Arc);
-    }
-    QGraphicsItem::mouseReleaseEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief hoverMoveEvent handle hover move events.
- * @param event hover move event.
- */
-// cppcheck-suppress unusedFunction
-void VNodeArc::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(WidthMainLine(*VAbstractTool::data.GetPatternUnit()))));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief hoverLeaveEvent handle hover leave events.
- * @param event hover leave event.
- */
-void VNodeArc::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    Q_UNUSED(event);
-    this->setPen(QPen(currentColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodeArc::ShowNode()
-{
-    if (parentType != ParentType::Scene)
-    {
-        show();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodeArc::HideNode()
-{
-    hide();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RefreshGeometry refresh item on scene.
- */
-void VNodeArc::RefreshGeometry()
-{
-//    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
-//    QPainterPath path;
-//    path.addPath(arc->GetPath());
-//    path.setFillRule( Qt::WindingFill );
-//    this->setPath(path);
 }

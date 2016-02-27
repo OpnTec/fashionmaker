@@ -76,7 +76,7 @@ void VToolDoublePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolDoublePoint::nameP1() const
 {
-    return PointName(p1id);
+    return ObjectName<VPointF>(p1id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ void VToolDoublePoint::setNameP1(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolDoublePoint::nameP2() const
 {
-    return PointName(p2id);
+    return ObjectName<VPointF>(p2id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -128,8 +128,8 @@ void VToolDoublePoint::Disable(bool disable, const QString &namePP)
 {
     enabled = !CorrectDisable(disable, namePP);
     this->SetEnabled(enabled);
-    firstPoint->setEnabled(enabled);
-    secondPoint->setEnabled(enabled);
+    firstPoint->SetEnabled(enabled);
+    secondPoint->SetEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

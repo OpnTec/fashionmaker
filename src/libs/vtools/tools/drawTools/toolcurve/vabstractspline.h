@@ -30,9 +30,10 @@
 #define VABSTRACTSPLINE_H
 
 #include "../vdrawtool.h"
-#include "../vwidgets/vcontrolpointspline.h"
 
 #include <QGraphicsPathItem>
+
+class VControlPointSpline;
 
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 {
@@ -51,20 +52,13 @@ public:
 
     void setEnabled(bool enabled);
 
+    QString name() const;
+
 public slots:
     virtual void     FullUpdateFromFile () Q_DECL_OVERRIDE;
     virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     void             DetailsMode(bool mode);
 signals:
-    /**
-     * @brief RefreshLine refresh control line.
-     * @param indexSpline position spline in spline list.
-     * @param pos position point in spline.
-     * @param controlPoint new position control point.
-     * @param splinePoint new position spline point.
-     */
-    void             RefreshLine(const qint32 &indexSpline, SplinePointPosition pos,
-                                 const QPointF &controlPoint, const QPointF &splinePoint);
     /**
      * @brief setEnabledPoint disable control points.
      * @param enable enable or diasable points.
@@ -88,7 +82,7 @@ protected:
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void     keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
-    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     mousePressEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
     virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;

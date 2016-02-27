@@ -27,17 +27,18 @@
  *************************************************************************/
 
 #include "vabstractcurve.h"
+#include "vabstractcurve_p.h"
 
 #include <QPainterPath>
 #include <QDebug>
 
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
-    :VGObject(type, idObject, mode)
+    :VGObject(type, idObject, mode), d (new VAbstractCurveData())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::VAbstractCurve(const VAbstractCurve &curve)
-    :VGObject(curve)
+    :VGObject(curve), d (curve.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,8 +49,13 @@ VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
         return *this;
     }
     VGObject::operator=(curve);
+    d = curve.d;
     return *this;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractCurve::~VAbstractCurve()
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse) const
@@ -163,6 +169,19 @@ bool VAbstractCurve::IsIntersectLine(const QLineF &line) const
 {
     const QVector<QPointF> points = IntersectLine(line);
     return not points.isEmpty();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VAbstractCurve::GetDuplicate() const
+{
+    return d->duplicate;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetDuplicate(quint32 number)
+{
+    d->duplicate = number;
+    CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

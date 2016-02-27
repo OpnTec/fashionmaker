@@ -281,7 +281,7 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop) const
     if (autoCrop)
     {
         QGraphicsScene *scene = new QGraphicsScene();
-        QList<QGraphicsItem *> list = GetDetails();
+        QList<QGraphicsItem *> list = GetItemDetails();
         for (int i=0; i < list.size(); ++i)
         {
             scene->addItem(list.at(i));
@@ -307,7 +307,7 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<QGraphicsItem *> VLayoutPaper::GetDetails() const
+QList<QGraphicsItem *> VLayoutPaper::GetItemDetails() const
 {
     QList<QGraphicsItem *> list;
     for (int i=0; i < d->details.count(); ++i)
@@ -315,4 +315,28 @@ QList<QGraphicsItem *> VLayoutPaper::GetDetails() const
         list.append(d->details.at(i).GetItem());
     }
     return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VLayoutDetail> VLayoutPaper::GetDetails() const
+{
+    return d->details;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetDetails(const QList<VLayoutDetail> &details)
+{
+    d->details = details.toVector();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VLayoutPaper::BoundingRect() const
+{
+    QRectF rec;
+    for (int i=0; i < d->details.count(); ++i)
+    {
+        rec = rec.united(d->details.at(i).BoundingRect());
+    }
+
+    return rec;
 }
