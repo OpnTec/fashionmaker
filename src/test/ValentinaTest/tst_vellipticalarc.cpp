@@ -129,7 +129,6 @@ void TST_VEllipticalArc::TestData()
     QTest::newRow("Full circle: radiuses 150, 200, rotation 30") << 150.0 << 200.0 << 0.0 << 360.0 << 30.0;
     QTest::newRow("Full circle: radiuses 1500, 1000") << 1500.0 << 1000.0 << 0.0 << 360.0 << 0.0;
     QTest::newRow("Full circle: radiuses 1500, 1000, rotation 50") << 1500.0 << 1000.0 << 0.0 << 360.0 << 50.0;
-    QTest::newRow("Full circle: radiuses 50000, 10000") << 50000.0 << 10000.0 << 0.0 << 360.0 << 0.0;
     QTest::newRow("Full circle: radiuses 90000, 80000, rotation 90") << 90000.0 << 80000.0 << 0.0 << 360.0 << 90.0;
 
     QTest::newRow("Arc less than 45 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 10.5 << 0.0;
@@ -141,7 +140,7 @@ void TST_VEllipticalArc::TestData()
 
     QTest::newRow("Arc 45 degree, radiuses 100, 50, rotation 45") << 100.0 << 50.0 << 0.0 << 45.0 << 45.0;
     QTest::newRow("Arc 45 degree, radiuses 150, 15, rotation 30") << 150.0 << 15.0 << 0.0 << 45.0 << 30.0;
-    QTest::newRow("Arc 45 degree, radiuses 1500, 150") << 1500.0 << 150.0 << 0.0 << 45.0 << 0.0;
+    QTest::newRow("Arc 45 degree, radiuses 1500, 150, rotation 45") << 1500.0 << 150.0 << 0.0 << 45.0 << 45.0;
     QTest::newRow("Arc 45 degree, radiuses 50000, 50000") << 50000.0 << 50000.0 << 0.0 << 45.0 << 0.0;
     QTest::newRow("Arc 45 degree, radiuses 90000, 50000, rotation 270") << 90000.0 << 50000.0 << 0.0 << 45.0 << 270.0;
 
@@ -149,7 +148,8 @@ void TST_VEllipticalArc::TestData()
     QTest::newRow("Arc less than 90 degree, radiuses 150, 400, rotation 90") << 150.0 << 400.0 << 0.0 << 75.0 << 90.0;
     QTest::newRow("Arc less than 90 degree, radiuses 1500, 50000, rotation 180")
             << 1500.0 << 50000.0 << 0.0 << 75.0 << 180.0;
-    QTest::newRow("Arc less than 90 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 75.0 << 0.0;
+    QTest::newRow("Arc less than 90 degree, radiuses 50000, 5000, rotation 30")
+            << 50000.0 << 5000.0 << 0.0 << 75.0 << 30.0;
     QTest::newRow("Arc less than 90 degree, radiuses 90000, 50000, rotation 30")
             << 90000.0 << 50000.0 << 0.0 << 75.0 << 30.0;
 
@@ -171,37 +171,40 @@ void TST_VEllipticalArc::TestData()
     QTest::newRow("Arc 135 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 135.0 << 0.0;
     QTest::newRow("Arc 135 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 135.0 << 0.0;
     QTest::newRow("Arc 135 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 135.0 << 0.0;
-    QTest::newRow("Arc 135 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 135.0 << 0.0;
+    QTest::newRow("Arc 135 degree, radiuses 50000, 5000, rotation 20") << 50000.0 << 5000.0 << 0.0 << 135.0 << 20.0;
     QTest::newRow("Arc 135 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 135.0 << 0.0;
 
     QTest::newRow("Arc less than 180 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 160.7 << 0.0;
     QTest::newRow("Arc less than 180 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 160.7 << 0.0;
     QTest::newRow("Arc less than 180 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 160.7 << 0.0;
-    QTest::newRow("Arc less than 180 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 160.7 << 0.0;
+    QTest::newRow("Arc less than 180 degree, radiuses 50000, 5000, rotation 270")
+            << 50000.0 << 5000.0 << 0.0 << 160.7 << 270.0;
     QTest::newRow("Arc less than 180 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 160.7 << 0.0;
 
     QTest::newRow("Arc 180 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 180.0 << 0.0;
     QTest::newRow("Arc 180 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 180.0 << 0.0;
     QTest::newRow("Arc 180 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 180.0 << 0.0;
-    QTest::newRow("Arc 180 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 180.0 << 0.0;
+    QTest::newRow("Arc 180 degree, radiuses 50000, 5000, rotation 60") << 50000.0 << 5000.0 << 0.0 << 180.0 << 60.0;
     QTest::newRow("Arc 180 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 180.0 << 0.0;
 
     QTest::newRow("Arc less than 270 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 150.3 << 0.0;
     QTest::newRow("Arc less than 270 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 150.3 << 0.0;
     QTest::newRow("Arc less than 270 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 150.3 << 0.0;
-    QTest::newRow("Arc less than 270 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 150.3 << 0.0;
+    QTest::newRow("Arc less than 270 degree, radiuses 50000, 5000, rotation 20")
+            << 50000.0 << 5000.0 << 0.0 << 150.3 << 20.0;
     QTest::newRow("Arc less than 270 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 150.3 << 0.0;
 
     QTest::newRow("Arc 270 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 270.0 << 0.0;
     QTest::newRow("Arc 270 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 270.0 << 0.0;
     QTest::newRow("Arc 270 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 270.0 << 0.0;
-    QTest::newRow("Arc 270 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 270.0 << 0.0;
+    QTest::newRow("Arc 270 degree, radiuses 50000, 5000, rotation 90") << 50000.0 << 5000.0 << 0.0 << 270.0 << 90.0;
     QTest::newRow("Arc 270 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 270.0 << 0.0;
 
     QTest::newRow("Arc less than 360 degree, radiuses 100, 50") << 100.0 << 50.0 << 0.0 << 340.0 << 0.0;
     QTest::newRow("Arc less than 360 degree, radiuses 150, 400") << 150.0 << 400.0 << 0.0 << 340.0 << 0.0;
     QTest::newRow("Arc less than 360 degree, radiuses 1500, 800") << 1500.0 << 800.0 << 0.0 << 340.0 << 0.0;
-    QTest::newRow("Arc less than 360 degree, radiuses 50000, 5000") << 50000.0 << 5000.0 << 0.0 << 340.0 << 0.0;
+    QTest::newRow("Arc less than 360 degree, radiuses 50000, 5000, rotation 30")
+            << 50000.0 << 5000.0 << 0.0 << 340.0 << 30.0;
     QTest::newRow("Arc less than 360 degree, radiuses 90000, 50000") << 90000.0 << 50000.0 << 0.0 << 340.0 << 0.0;
 
     QTest::newRow("Arc start 90 degree, angle 45 degree, radiuses 100, 50") << 100.0 << 50.0 << 90.0 << 135.0 << 0.0;
@@ -300,7 +303,7 @@ void TST_VEllipticalArc::TestGetPoints2()
     const QLineF distance2(focus2, ellipsePoint);
 
     const qreal distance = distance1.length() + distance2.length();
-    const qreal eps = distance * 0.5 / 100; // computing error 0.5 % from origin distance
+    const qreal eps = distance * 1.1 / 100; // computing error 1.1 % from origin distance
     for (int i=0; i < points.size(); ++i)
     {
         const QLineF rLine1(focus1, points.at(i));
@@ -334,7 +337,7 @@ void TST_VEllipticalArc::TestGetPoints3()
     if (qFuzzyCompare(arc.AngleArc(), 360.0))
     {// calculated full ellipse square
         const qreal ellipseSquare = M_PI * radius1 * radius2;
-        const qreal epsSquare = ellipseSquare * 0.24 / 100; // computing error 0.24 % from origin squere
+        const qreal epsSquare = ellipseSquare * 0.5 / 100; // computing error 0.5 % from origin squere
         const qreal arcSquare = qAbs(VAbstractDetail::SumTrapezoids(points)/2.0);
         const qreal diffSquare = qAbs(ellipseSquare - arcSquare);
         const QString errorMsg1 = QString("Broken the second rule. Interpolation has too big computing error. "
