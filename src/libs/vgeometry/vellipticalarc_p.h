@@ -23,8 +23,8 @@ public:
     {}
 
     VEllipticalArcData(VPointF center, qreal radius1, qreal radius2, qreal f1, qreal f2, qreal rotationAngle)
-        : f1(f1), f2(f2), formulaF1(QString().number(qApp->fromPixel(f1))),
-          formulaF2(QString().number(qApp->fromPixel(f2))), radius1(radius1), radius2(radius2),
+        : f1(f1), f2(f2), formulaF1(QString().number(f1)),
+          formulaF2(QString().number(f2)), radius1(radius1), radius2(radius2),
           formulaRadius1(QString().number(qApp->fromPixel(radius1))),
           formulaRadius2(QString().number(qApp->fromPixel(radius2))),
           center(center), isFlipped(false), formulaLength(), rotationAngle(rotationAngle)
@@ -39,7 +39,7 @@ public:
     {}
 
     VEllipticalArcData(VPointF center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle)
-        : f1(f1), f2(0), formulaF1(QString().number(qApp->fromPixel(f1))), formulaF2("0"),
+        : f1(f1), f2(0), formulaF1(QString().number(f1)), formulaF2("0"),
           radius1(radius1), radius2(radius2),
           formulaRadius1(QString().number(qApp->fromPixel(radius1))),
           formulaRadius2(QString().number(qApp->fromPixel(radius2))),

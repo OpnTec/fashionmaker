@@ -55,19 +55,19 @@ public:
     {}
 
     VArcData(VPointF center, qreal radius, qreal f1, qreal f2)
-        : f1(f1), formulaF1(QString().number(qApp->fromPixel(f1))),
-          f2(f2), formulaF2(QString().number(qApp->fromPixel(f2))),
+        : f1(f1), formulaF1(QString().number(f1)),
+          f2(f2), formulaF2(QString().number(f2)),
           radius(radius), formulaRadius(QString().number(qApp->fromPixel(radius))),
           center(center), isFlipped(false), formulaLength()
     {}
 
-    VArcData (QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1 )
+    VArcData (QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1)
         : f1(f1), formulaF1(formulaF1), f2(0), formulaF2("0"), radius(radius), formulaRadius(formulaRadius),
           center(center), isFlipped(false), formulaLength(formulaLength)
     {}
 
     VArcData(VPointF center, qreal radius, qreal f1)
-        : f1(f1), formulaF1(QString().number(qApp->fromPixel(f1))), f2(0), formulaF2("0"), radius(radius),
+        : f1(f1), formulaF1(QString().number(f1)), f2(0), formulaF2("0"), radius(radius),
           formulaRadius(QString().number(qApp->fromPixel(radius))), center(center), isFlipped(false), formulaLength()
     {}
 

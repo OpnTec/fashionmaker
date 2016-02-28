@@ -432,7 +432,7 @@ void VEllipticalArc::FindF2(qreal length)
         d->f2 = endAngle;
         lenBez = GetLength();
     }
-    d->formulaF2 = QString().number(qApp->fromPixel(d->f2));
+    d->formulaF2 = QString().number(d->f2);
     d->formulaLength = QString().number(qApp->fromPixel(lenBez));
 }
 
