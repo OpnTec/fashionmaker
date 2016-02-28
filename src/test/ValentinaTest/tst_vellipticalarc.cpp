@@ -29,6 +29,7 @@
 #include "tst_vellipticalarc.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../vlayout/vabstractdetail.h"
+#include "../vmisc/logging.h"
 
 #include <QtTest>
 
@@ -232,9 +233,9 @@ void TST_VEllipticalArc::TestGetPoints1()
     VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
 
     QVector<QPointF> points = arc.GetPoints();
-    if (rotationAngle == 0.0)
+    if (qFuzzyIsNull(rotationAngle))
     { // equation of ellipse will be different when rotation angle isn't 0 so we can't use this test in this case
-        qreal eps = 0.05;
+        const qreal eps = 0.05;
 
         for (int i=0; i < points.size(); ++i)
         {

@@ -5,6 +5,11 @@
 #include "../vmisc/vabstractapplication.h"
 #include "vpointf.h"
 
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
 class VEllipticalArcData : public QSharedData
 {
 public:
@@ -85,6 +90,10 @@ private:
 
 VEllipticalArcData::~VEllipticalArcData()
 {}
+
+#ifdef Q_CC_GNU
+#pragma GCC diagnostic pop
+#endif
 
 #endif // VELLIPTICALARC_P
 
