@@ -55,7 +55,7 @@ void TST_VEllipticalArc::CompareTwoWays()
 
     const qreal eps = length*0.5/100; // computing error
     const QString errorMsg =
-            QString("Difference between real and computing lengthes bigger than eps = %1.").arg(eps);
+            QString("Difference between real and computing lengthes bigger than eps = %1.").number(eps);
     QVERIFY2(qAbs(arc1.GetLength() - length) <= eps, qUtf8Printable(errorMsg));
     QVERIFY2(qAbs(arc2.GetLength() - length) <= eps, qUtf8Printable(errorMsg));
     QVERIFY2(qAbs(arc1.GetLength() - arc2.GetLength()) <= eps, qUtf8Printable(errorMsg));
@@ -84,7 +84,7 @@ void TST_VEllipticalArc::NegativeArc()
 
     const qreal eps = 1; // computing error
     const QString errorMsg =
-            QString("Difference between real and computing lengthes bigger than eps = %1.").arg(eps);
+            QString("Difference between real and computing lengthes bigger than eps = %1.").number(eps);
 
     QVERIFY2(qAbs(arc.GetLength() + length) <= eps, qUtf8Printable(errorMsg));
     QVERIFY2(arc.GetEndAngle() - f2 <= eps, qUtf8Printable(errorMsg));
@@ -242,7 +242,7 @@ void TST_VEllipticalArc::TestGetPoints1()
             const qreal equationRes = p.rx()*p.rx()/(radius1*radius1) + p.ry()*p.ry()/(radius2*radius2);
             const qreal diff = qAbs(equationRes - 1);
             const QString errorMsg = QString("Broken the first rule. Any point must satisfy the equation of ellipse."
-                                             "diff = '%1' > eps = '%2'").arg(diff).arg(eps);
+                                             "diff = '%1' > eps = '%2'").number(diff).number(eps);
             QVERIFY2( diff <= eps, qUtf8Printable(errorMsg));
         }
     }
@@ -313,8 +313,8 @@ void TST_VEllipticalArc::TestGetPoints2()
         const QString errorMsg = QString("Broken the first rule, part 2. Distance from the any point to the focus1"
                                          " plus distance from this point to the focus2 should be the same. Problem"
                                          " with point '%1'. The disired distance is '%2', but resulting distance"
-                                         " is '%3'. Difference is '%4' and it biggest than eps "
-                                         "('%5')").arg(i).arg(distance).arg(resultingDistance).arg(diff).arg(eps);
+                                         " is '%3'. Difference is '%4' and it biggest than eps '%5')").number(i)
+                                         .number(distance).number(resultingDistance).number(diff).number(eps);
         QVERIFY2( diff <= eps, qUtf8Printable(errorMsg));
     }
 }
