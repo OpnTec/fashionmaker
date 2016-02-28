@@ -135,13 +135,13 @@ QRectF Visualization::PointRect(const qreal &radius) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindLength(const QString &expression)
+qreal Visualization::FindLength(const QString &expression, const QHash<QString, qreal *> &vars)
 {
-    return qApp->toPixel(FindVal(expression));
+    return qApp->toPixel(FindVal(expression, vars));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal Visualization::FindVal(const QString &expression)
+qreal Visualization::FindVal(const QString &expression, const QHash<QString, qreal *> &vars)
 {
     qreal val = 0;
     if (expression.isEmpty())
@@ -157,7 +157,7 @@ qreal Visualization::FindVal(const QString &expression)
             formula.replace("\n", " ");
             formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
             Calculator *cal = new Calculator();
-            val = cal->EvalFormula(data->PlainVariables(), formula);
+            val = cal->EvalFormula(vars, formula);
             delete cal;
         }
         catch (qmu::QmuParserError &e)

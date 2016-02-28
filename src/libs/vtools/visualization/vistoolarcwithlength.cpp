@@ -61,17 +61,17 @@ void VisToolArcWithLength::RefreshGeometry()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArcWithLength::setRadius(const QString &expression)
 {
-    radius = FindLength(expression);
+    radius = FindLength(expression, Visualization::data->PlainVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArcWithLength::setF1(const QString &expression)
 {
-    f1 = FindVal(expression);
+    f1 = FindVal(expression, Visualization::data->PlainVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolArcWithLength::setLength(const QString &expression)
 {
-    length = FindLength(expression);
+    length = FindLength(expression, Visualization::data->PlainVariables());
 }

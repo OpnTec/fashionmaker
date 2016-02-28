@@ -106,7 +106,7 @@ void VisToolSpline::RefreshGeometry()
 
         if (object4Id <= NULL_ID)
         {
-            VSpline spline(*first, p2, Visualization::scenePos, VPointF(Visualization::scenePos), kCurve);
+            VSpline spline(*first, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
             DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
         }
         else
@@ -143,7 +143,7 @@ void VisToolSpline::RefreshGeometry()
 
             if (qFuzzyCompare(angle1, EMPTY_ANGLE) || qFuzzyCompare(angle2, EMPTY_ANGLE))
             {
-                VSpline spline(*first, p2, p3, *second, kCurve);
+                VSpline spline(*first, p2, p3, *second);
                 DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
             }
             else

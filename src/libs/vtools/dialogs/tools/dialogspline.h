@@ -57,11 +57,28 @@ public slots:
     virtual void  PointNameChanged() Q_DECL_OVERRIDE;
     virtual void  ShowDialog(bool click) Q_DECL_OVERRIDE;
 protected:
+    virtual void  CheckState() Q_DECL_OVERRIDE;
     virtual void  ShowVisualization() Q_DECL_OVERRIDE;
     /**
      * @brief SaveData Put dialog data in local variables
      */
     virtual void  SaveData() Q_DECL_OVERRIDE;
+    virtual void  closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+private slots:
+    void DeployAngle1TextEdit();
+    void DeployAngle2TextEdit();
+    void DeployLength1TextEdit();
+    void DeployLength2TextEdit();
+
+    void Angle1Changed();
+    void Angle2Changed();
+    void Length1Changed();
+    void Length2Changed();
+
+    void FXAngle1();
+    void FXAngle2();
+    void FXLength1();
+    void FXLength2();
 private:
     Q_DISABLE_COPY(DialogSpline)
 
@@ -73,8 +90,33 @@ private:
 
     qint32 newDuplicate;
 
+    /** @brief formulaBaseHeight base height defined by dialogui */
+    int formulaBaseHeightAngle1;
+    int formulaBaseHeightAngle2;
+    int formulaBaseHeightLength1;
+    int formulaBaseHeightLength2;
+
+    /** @brief timerAngle1 timer of check first angle formula */
+    QTimer *timerAngle1;
+    QTimer *timerAngle2;
+    QTimer *timerLength1;
+    QTimer *timerLength2;
+
+    /** @brief flagAngle1 true if value of first angle is correct */
+    bool flagAngle1;
+    bool flagAngle2;
+    bool flagLength1;
+    bool flagLength2;
+
     const QSharedPointer<VPointF> GetP1() const;
     const QSharedPointer<VPointF> GetP4() const;
+
+    void EvalAngle1();
+    void EvalAngle2();
+    void EvalLength1();
+    void EvalLength2();
+
+    VSpline CurrentSpline() const;
 };
 
 #endif // DIALOGSPLINE_H

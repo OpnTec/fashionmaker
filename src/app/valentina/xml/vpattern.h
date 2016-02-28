@@ -119,7 +119,7 @@ private:
                                      const Document &parse, const QString &type);
     void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                     const Document &parse);
-    void           ParseSplineElement(VMainGraphicsScene *scene, const QDomElement& domElement,
+    void           ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                       const Document &parse, const QString& type);
     void           ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                    const Document &parse, const QString& type);
@@ -167,7 +167,10 @@ private:
                                          const Document &parse);
     void ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
 
-    void ParseToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+    // TODO. Delete if minimal supported version is 0.2.7
+    void ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
+
+    void ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
     void ParseNodeSpline(const QDomElement &domElement, const Document &parse);
     void ParseNodeSplinePath(const QDomElement &domElement, const Document &parse);

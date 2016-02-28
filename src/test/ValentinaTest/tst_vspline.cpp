@@ -179,3 +179,51 @@ void TST_VSpline::GetSegmentPoints_TestPuzzle()
     // Begin comparison
     Comparison(points, origPoints);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::CompareThreeWays()
+{
+    // Input data taken from real case
+    // See the file <root>/src/app/share/collection/TestPuzzle.val
+    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+
+    VSpline spl1(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
+    VSpline spl2(spl1.GetP1(), spl1.GetP2(), spl1.GetP3(), spl1.GetP4(), 1);
+    VSpline spl3(spl1.GetP1(), spl1.GetP4(), spl1.GetStartAngle(), "", spl2.GetEndAngle(), "", spl2.GetC1Length(), "",
+                 spl2.GetC2Length(), "", 1);
+
+    QWARN("Comparing first and second splines.");
+    CompareSplines(spl1, spl2);
+
+    QWARN("Comparing second and third splines.");
+    CompareSplines(spl2, spl3);
+
+    QWARN("Comparing third and first splines.");
+    CompareSplines(spl3, spl1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::CompareSplines(const VSpline &spl1, const VSpline &spl2) const
+{
+    QCOMPARE(spl1.GetP1().toQPointF().toPoint(), spl2.GetP1().toQPointF().toPoint());
+    QCOMPARE(spl1.GetP2().toPoint(), spl2.GetP2().toPoint());
+    QCOMPARE(spl1.GetP3().toPoint(), spl2.GetP3().toPoint());
+    QCOMPARE(spl1.GetP4().toQPointF().toPoint(), spl2.GetP4().toQPointF().toPoint());
+
+    QCOMPARE(spl1.GetStartAngle(), spl2.GetStartAngle());
+    QCOMPARE(spl1.GetEndAngle(), spl2.GetEndAngle());
+
+    QCOMPARE(spl1.GetC1Length(), spl2.GetC1Length());
+    QCOMPARE(spl1.GetC2Length(), spl2.GetC2Length());
+
+    QCOMPARE(spl1.GetLength(), spl2.GetLength());
+
+    QCOMPARE(spl1.GetKasm1(), spl2.GetKasm1());
+    QCOMPARE(spl1.GetKasm2(), spl2.GetKasm2());
+
+    QCOMPARE(spl1.GetKcurve(), spl2.GetKcurve());
+
+    // Compare points
+    Comparison(spl1.GetPoints(), spl2.GetPoints());
+}

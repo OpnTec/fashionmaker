@@ -31,6 +31,8 @@
 
 #include "abstracttest.h"
 
+class VSpline;
+
 class TST_VSpline : public AbstractTest
 {
     Q_OBJECT
@@ -43,6 +45,11 @@ private slots:
     void GetSegmentPoints();
     void GetSegmentPoints_issue412();
     void GetSegmentPoints_TestPuzzle();
+    void CompareThreeWays();
+
+private:
+    Q_DISABLE_COPY(TST_VSpline)
+    void CompareSplines(const VSpline &spl1, const VSpline &spl2) const;
 };
 
 #endif // TST_VSPLINE_H

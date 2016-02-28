@@ -44,6 +44,9 @@ private slots:
     void TestAbsoluteFilePath_data();
     void TestAbsoluteFilePath();
 
+    void TestCLocale_data();
+    void TestCLocale();
+
 private:
     Q_DISABLE_COPY(TST_Misc)
 };

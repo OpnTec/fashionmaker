@@ -44,7 +44,8 @@ public:
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, Unit patternUnit,
                         QGraphicsItem * parent = nullptr);
     VControlPointSpline(const qint32 &indexSpline, SplinePointPosition position, const QPointF &controlPoint,
-                        const QPointF &splinePoint, Unit patternUnit, QGraphicsItem * parent = nullptr);
+                        const QPointF &splinePoint, Unit patternUnit, bool freeAngle, bool freeLength,
+                        QGraphicsItem * parent = nullptr);
     virtual ~VControlPointSpline() Q_DECL_OVERRIDE;
     virtual void      paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
                             QWidget * widget = 0) Q_DECL_OVERRIDE;
@@ -66,7 +67,7 @@ signals:
     void              ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
 public slots:
     void              RefreshCtrlPoint(const qint32 &indexSpline, SplinePointPosition pos, const QPointF &controlPoint,
-                                       const QPointF &splinePoint);
+                                       const QPointF &splinePoint, bool freeAngle = true, bool freeLength = true);
     void              setEnabledPoint(bool enable);
 protected:
     /** @brief radius radius circle. */
@@ -90,6 +91,9 @@ private:
     SplinePointPosition position;
 
     Unit              patternUnit;
+
+    bool freeAngle;
+    bool freeLength;
 
     inline qreal CircleRadius() const;
     void  Init();

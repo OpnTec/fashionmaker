@@ -52,6 +52,12 @@ void TST_QmuTokenParser::IsSingle_data()
     QTest::newRow("Empty string") << "" << false;
     QTest::newRow("Several spaces") << "   " << false;
     QTest::newRow("Invalid formula") << "2*)))" << false;
+    QTest::newRow("Incorrect thousand separator 15 500") << "15 500" << false;
+    QTest::newRow("Correct C locale 15500") << "15500" << true;
+    QTest::newRow("Correct C locale 15,500") << "15,500" << true;
+    QTest::newRow("Correct C locale 15,500.1") << "15,500.1" << true;
+    QTest::newRow("Not C locale 15,5") << "15,5" << false;
+    QTest::newRow("Not C locale 15.500,1") << "15.500,1" << false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

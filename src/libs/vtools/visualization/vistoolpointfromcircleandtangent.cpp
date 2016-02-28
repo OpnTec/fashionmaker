@@ -84,7 +84,7 @@ void VisToolPointFromCircleAndTangent::setObject2Id(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolPointFromCircleAndTangent::setCRadius(const QString &value)
 {
-    cRadius = FindLength(value);
+    cRadius = FindLength(value, Visualization::data->PlainVariables());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

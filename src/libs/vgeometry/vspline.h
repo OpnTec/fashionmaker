@@ -49,23 +49,45 @@ public:
     VSpline (const VSpline &spline );
     VSpline (VPointF p1, VPointF p4, qreal angle1, qreal angle2, qreal kAsm1, qreal kAsm2, qreal kCurve,
              quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, qreal kCurve, quint32 idObject = 0,
+    VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, quint32 idObject = 0,
              Draw mode = Draw::Calculation);
+    VSpline (VPointF p1, VPointF p4, qreal angle1, const QString &angle1Formula, qreal angle2,
+             const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
+             const QString &c2LengthFormula, quint32 idObject = 0, Draw mode = Draw::Calculation);
     virtual ~VSpline() Q_DECL_OVERRIDE;
     VSpline &operator=(const VSpline &spl);
+
     VPointF GetP1 () const;
+    void    SetP1 (const VPointF &p);
+
     QPointF GetP2 () const;
     QPointF GetP3 () const;
+
     VPointF GetP4 () const;
+    void    SetP4 (const VPointF &p);
 
     virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
     virtual qreal GetEndAngle() const Q_DECL_OVERRIDE;
+
+    QString GetStartAngleFormula () const;
+    QString GetEndAngleFormula() const;
+
+    void    SetStartAngle(qreal angle, const QString &formula);
+    void    SetEndAngle(qreal angle, const QString &formula);
+
+    qreal   GetC1Length() const;
+    qreal   GetC2Length() const;
+
+    QString GetC1LengthFormula() const;
+    QString GetC2LengthFormula() const;
+
+    void    SetC1Length(qreal length, const QString &formula);
+    void    SetC2Length(qreal length, const QString &formula);
 
     qreal   GetLength () const;
     qreal   GetKasm1() const;
     qreal   GetKasm2() const;
     qreal   GetKcurve() const;
-    void    SetKcurve(qreal factor);
     qreal   LengthT(qreal t) const;
     QPointF CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
     QPointF CutSpline ( qreal length, VSpline &spl1, VSpline &spl2) const;
