@@ -2,7 +2,7 @@
 #define VELLIPTICALARC_P
 
 #include <QSharedData>
-#include <../vmisc/vabstractapplication.h>
+#include "../vmisc/vabstractapplication.h"
 #include "vpointf.h"
 
 class VEllipticalArcData : public QSharedData

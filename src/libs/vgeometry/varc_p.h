@@ -31,7 +31,7 @@
 
 #include <QSharedData>
 #include "vgeometrydef.h"
-#include <../vmisc/vabstractapplication.h>
+#include "../vmisc/vabstractapplication.h"
 #include "vpointf.h"
 
 #ifdef Q_CC_GNU
