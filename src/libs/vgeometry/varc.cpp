@@ -283,7 +283,7 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
         len = length;
     }
 
-    qreal n = (len*180)/(M_PI*d->radius);
+    qreal n = (len*180)/(M_PI*d->radius); // n - is angle in degrees
     QLineF line(GetCenter().toQPointF(), GetP1());
     line.setAngle(line.angle()+n);
 
@@ -354,7 +354,7 @@ void VArc::FindF2(qreal length)
     startAngle.setAngle(d->f1 + arcAngle);// We use QLineF just because it is easy way correct angle value
 
     d->f2 = startAngle.angle();
-    d->formulaF2 = QString("%1").arg(d->f2);
+    d->formulaF2 = QString().number(d->f2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

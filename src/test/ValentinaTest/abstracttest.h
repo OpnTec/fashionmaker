@@ -46,7 +46,7 @@ class AbstractTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit AbstractTest(QObject *parent = 0);
+    explicit AbstractTest(QObject *parent = nullptr);
 
 protected:
     void Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const;

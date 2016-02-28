@@ -35,7 +35,7 @@ class TST_VArc : public QObject
 {
     Q_OBJECT
 public:
-    explicit TST_VArc(QObject *parent = 0);
+    explicit TST_VArc(QObject *parent = nullptr);
 
 private slots:
     void CompareTwoWays();

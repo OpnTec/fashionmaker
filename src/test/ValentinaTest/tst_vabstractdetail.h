@@ -35,7 +35,7 @@ class TST_VAbstractDetail : public AbstractTest
 {
     Q_OBJECT
 public:
-    explicit TST_VAbstractDetail(QObject *parent = 0);
+    explicit TST_VAbstractDetail(QObject *parent = nullptr);
 
 signals:
 

@@ -40,7 +40,7 @@ class TST_MeasurementRegExp : public AbstractTest
 {
     Q_OBJECT
 public:
-    explicit TST_MeasurementRegExp(QObject *parent = 0);
+    explicit TST_MeasurementRegExp(QObject *parent = nullptr);
     virtual ~TST_MeasurementRegExp() Q_DECL_OVERRIDE;
 
 private slots:

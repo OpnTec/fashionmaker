@@ -7,6 +7,8 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
+QT += widgets
+
 # Name of library
 TARGET = vgeometry
 

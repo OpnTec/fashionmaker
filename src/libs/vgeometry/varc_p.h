@@ -31,6 +31,7 @@
 
 #include <QSharedData>
 #include "vgeometrydef.h"
+#include "../vmisc/vabstractapplication.h"
 #include "vpointf.h"
 
 #ifdef Q_CC_GNU
@@ -54,18 +55,20 @@ public:
     {}
 
     VArcData(VPointF center, qreal radius, qreal f1, qreal f2)
-        : f1(f1), formulaF1(QString("%1").arg(f1)), f2(f2), formulaF2(QString("%1").arg(f2)), radius(radius),
-          formulaRadius(QString("%1").arg(radius)), center(center), isFlipped(false), formulaLength()
+        : f1(f1), formulaF1(QString().number(f1)),
+          f2(f2), formulaF2(QString().number(f2)),
+          radius(radius), formulaRadius(QString().number(qApp->fromPixel(radius))),
+          center(center), isFlipped(false), formulaLength()
     {}
 
-    VArcData (QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1 )
+    VArcData (QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1)
         : f1(f1), formulaF1(formulaF1), f2(0), formulaF2("0"), radius(radius), formulaRadius(formulaRadius),
           center(center), isFlipped(false), formulaLength(formulaLength)
     {}
 
     VArcData(VPointF center, qreal radius, qreal f1)
-        : f1(f1), formulaF1(QString("%1").arg(f1)), f2(0), formulaF2("0"), radius(radius),
-          formulaRadius(QString("%1").arg(radius)), center(center), isFlipped(false), formulaLength()
+        : f1(f1), formulaF1(QString().number(f1)), f2(0), formulaF2("0"), radius(radius),
+          formulaRadius(QString().number(qApp->fromPixel(radius))), center(center), isFlipped(false), formulaLength()
     {}
 
     VArcData(const VArcData &arc)
