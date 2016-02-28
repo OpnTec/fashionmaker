@@ -130,3 +130,26 @@ void TST_Misc::TestAbsoluteFilePath()
     const QString result = AbsoluteMPath(patternPath, relativeMPath);
     QCOMPARE(output, result);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_Misc::TestCLocale_data()
+{
+    QTest::addColumn<qreal>("number");
+    QTest::addColumn<QString>("expected");
+
+    QTest::newRow("10000") << 10000.0 << "10000";
+    QTest::newRow("10000.5") << 10000.5 << "10000.5";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Need for testing thousand separator in the C locale.
+// Better be sure that the C locale have not thousand separator
+void TST_Misc::TestCLocale()
+{
+    QFETCH(qreal, number);
+    QFETCH(QString, expected);
+
+    const QString localized = QString().number(number);
+
+    QCOMPARE(localized, expected);
+}
