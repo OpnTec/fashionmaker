@@ -437,7 +437,7 @@ void DialogPatternProperties::CheckApplyOk()
 void DialogPatternProperties::SaveDescription()
 {
     doc->SetNotes(ui->plainTextEditTechNotes->document()->toPlainText());
-    doc->SetDescription(ui->plainTextEditTechNotes->document()->toPlainText());
+    doc->SetDescription(ui->plainTextEditDescription->document()->toPlainText());
     doc->SetAuthor(ui->lineEditAuthor->text());
 }
 

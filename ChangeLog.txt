@@ -1,4 +1,5 @@
 # Version 0.4.3
+- Fixed broken saving pattern description.
 - Fixed UI bug. Release a dialog size for deploying a formula field.
 - Fixed broken formula when for system locale thousand separator is a space.
 - Using QGraphicsScene instead of VMainGraphicsScene caused a crash.
