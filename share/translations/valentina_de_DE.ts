@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Proxy pass</source>
-        <translation type="vanished">Proxy Passwort</translation>
+        <translation type="vanished">Proxypasswort</translation>
     </message>
     <message>
         <source>User settings</source>
@@ -124,7 +124,7 @@
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;Okay</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
-        <translation type="vanished">Die Änderung der Standardmaßeinheit  wird erst für neu angelegte Schnittmuster-Dateien wirksam</translation>
+        <translation type="vanished">Die Änderung der Standardmaßeinheit  wird erst für neu angelegte Schnittmusterdateien wirksam</translation>
     </message>
     <message>
         <source>Save</source>
@@ -179,7 +179,7 @@
     </message>
     <message>
         <source>GUI language</source>
-        <translation type="vanished">GUI Sprache</translation>
+        <translation type="vanished">Sprache der Benutzeroberfläche</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
@@ -191,7 +191,7 @@
     </message>
     <message>
         <source>Default unit</source>
-        <translation type="vanished">Standard-Maßeinheit</translation>
+        <translation type="vanished">Standardmaßeinheit</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -1998,7 +1998,7 @@
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation type="unfinished"></translation>
+        <translation>Felder ignorieren</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -4880,7 +4880,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sperrdatei</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -4888,19 +4888,19 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>DIe Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverust führen)</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplatten-Partition verhindert, dass die Sperrdatei geschrieben werden konnte. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplatten-Partition verhindert, dass die Sperrdatei geschrieben werden konnte.</translation>
     </message>
     <message>
         <source>Report Bug...</source>
@@ -5111,11 +5111,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Pfad zu den Maßen ist schon relativ.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Pfad zu den Maßen ist schon absolut.</translation>
     </message>
 </context>
 <context>
@@ -5301,12 +5301,12 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Unexpected argument separator at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwarteter Argumentseparator an Position $POS$</translation>
     </message>
     <message>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwartete Klammer &quot;$TOK$&quot; an Position $POS$.</translation>
     </message>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
@@ -5316,7 +5316,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwarteter Wert &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
     </message>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
@@ -5336,12 +5336,12 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zu viele Parameter für die Funktion &quot;$TOK$&quot; in der Ausdrucksposition $POS$</translation>
     </message>
     <message>
         <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zu wenige Parameter für die Funktion &quot;$TOK$&quot; in der Ausdrucksposition $POS$</translation>
     </message>
     <message>
         <source>Divide by zero</source>
@@ -5361,12 +5361,12 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Wert für die Operatorpriorität (muss größer oder gleich Null sein).</translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Der benutzerdefinierte Binäroperator &quot;$TOK$&quot; steht im Konflikt mit einem eingebauten Operator.</translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
@@ -5376,22 +5376,22 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nicht beendeter String beginnend an der Position $POS$.</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Stringfunktion mit einem Argument, das kein String ist, aufgerufen.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>String anstelle einer Zahl verwendet.</translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kein verwendbarer Overload für Operator &quot;$TOK$&quot; an der Position $POS$.</translation>
     </message>
     <message>
         <source>Function result is a string.</source>
@@ -5874,11 +5874,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Move measurement top</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß nach ganz oben bewegen</translation>
     </message>
     <message>
         <source>Move measurement bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß nach ganz unten bewegen</translation>
     </message>
     <message>
         <source>Delete measurement</source>
@@ -5981,7 +5981,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sperrdatei</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -5989,19 +5989,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>DIe Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverust führen)</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplatten-Partition verhindert, dass die Sperrdatei geschrieben werden konnte. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplatten-Partition verhindert, dass die Sperrdatei geschrieben werden konnte.</translation>
     </message>
 </context>
 <context>
@@ -6352,11 +6352,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seitenformat und explizite Größe/Einheiten der Seite können nicht zusammen verwendet werden.</translation>
     </message>
     <message>
         <source>Page height, width, units must be used all 3 at once.</source>
-        <translation type="unfinished"></translation>
+        <translation>Höhe, Breite und Einheiten der Seite müssen alle 3 auf einmal benutzt werden.</translation>
     </message>
     <message>
         <source>Invalid rotation value. That must be one of predefined values.</source>
@@ -6377,6 +6377,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Export options can be used with single input file only.</source>
         <translation>Export-Optionen können nur mit einer Eingabedatei verwendet werden.</translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="vanished">Das Programm in einem Test-Modus laufen lassen. In diesem Modus läd das Programm eine einzelne Schnittmuster-Datei und schließt still, ohne das Hauptfenster zu zeigen. Der Schlüssel hat Vorrang vor dem Schlüssel &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Test option can be used with single input file only.</source>
@@ -6408,7 +6412,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Setze Größenwert einer Schnitteil-Datei, die mit Standard-Maßen (Export-Modus) geöffnet wurde. Gültige Werte: %1 cm.</translation>
     </message>
     <message>
         <source>The height value</source>
@@ -6416,11 +6420,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Seitenbreite in der derzeitigen Einheit wie 12.0 (kann nicht mit &quot;%1&quot; benutzt werden, Exportmodus).</translation>
     </message>
     <message>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Seitenhöhe in der derzeitigen Einheit wie 12.0 (kann nicht mit &quot;%1&quot; benutzt werden, Exportmodus).</translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
+        <translation type="vanished">Einheiten für die Seitenhöhe/-breite (kann nicht mit &quot;%1&quot;, Exportmodus, benutzt werden):</translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
@@ -6443,8 +6451,28 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ignorieren der Seitenränder zum Druck (Export-Modus). Setzen Sie alle Seitenränder auf 0.</translation>
     </message>
     <message>
+        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Linker Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
+    </message>
+    <message>
+        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Rechter Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
+    </message>
+    <message>
+        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Oberer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
+    </message>
+    <message>
+        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Unterer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
+    </message>
+    <message>
+        <source>Shift length must be used together with shift units.</source>
+        <translation type="vanished">Die Verschiebungslänge muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
+    </message>
+    <message>
         <source>Gap width must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Spaltenbreite muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>Left margin must be used together with page units.</source>
@@ -6464,59 +6492,63 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The path to output destination folder. By default the directory at which the application was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Pfad zum Zielordner. Standardmäßig das Verzeichnis, in dem das Programm gestartet wurde.</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einheiten für die Seitenhöhe/-breite (kann nicht mit &quot;%1&quot;, Exportmodus, benutzt werden). Gültige Werte: %2.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorieren der Seitenränder zum Druck (Export-Modus). Deaktiviert Werte-Schlüssel: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Setzen Sie alle Seitenränder auf 0.</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Linker Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann. Der Wert wird ignoriert, falls &quot;%1&quot; verwendet wird.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechter Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann. Der Wert wird ignoriert, falls &quot;%1&quot; verwendet wird.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann. Der Wert wird ignoriert, falls &quot;%1&quot; verwendet wird.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann. Der Wert wird ignoriert, falls &quot;%1&quot; verwendet wird.</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drehung in Grad (eins der vordefinierten, Exportmodus). Standardwert ist 180. 0 bedeutet keine Drehung. Gültige erte: %1. Jeder Wert zeigt, wie oft Details gedreht werden sollen. Zum Beispiel bedeutet 180, dass das Detail zweimal im 180 Grad gedreht word (360/180=2).</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seiten verbinden, falls möglich (Exportmodus). Maximaler Wert wird durch QImage limitiert, das nur Bilder mit bis zu 32768 x 32768 Pixeln unterstützt.</translation>
     </message>
     <message>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern der Blattlänge, falls gesetzt (Export-Modus). Diese Einstellung sagt dem Programm, möglichst viel der Breite eines Blattes zu benutzen. Die Qualität der Anordnung kann sich verschlechtern, wenn diese Einstellung benutzt wurde.</translation>
+    </message>
+    <message>
+        <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="vanished">Verschieben der gemessenen Layoutlängen in Layouteinheiten (Exportmodus). Die Option zeigt, wie viele Punkte entlang der Kante verwendet werden, um ein Layout zu erstellen.</translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Layout-Spaltbreite x2, gemessen in Layout-Einheiten. (Export-Modus). Legt den Abstand zwischen Details und einem Detail und einem Blatt fest.</translation>
     </message>
     <message>
         <source>Sets layout groupping cases (export mode): %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Legt Layoutgruppierungsfälle fest (Export-Modus): %1.</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Programm in einem Test-Modus laufen lassen. In diesem Modus läd das Programm eine einzelne Schnittmuster-Datei und schließt still, ohne das Hauptfenster zu zeigen. Der Schlüssel hat Vorrang vor dem Schlüssel &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschieben der gemessenen Layoutlängen in Layouteinheiten (Exportmodus). Die Option zeigt, wie viele Punkte entlang der Kante verwendet werden, um ein Layout zu erstellen.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
@@ -6605,7 +6637,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Schema-Datei %1 nicht öffnen:</translation>
     </message>
 </context>
 <context>
@@ -7908,12 +7940,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Spl_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>SplPath</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
@@ -7933,22 +7965,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle1Spl_</translation>
     </message>
     <message>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle2Spl_</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle1SplPath</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle2SplPath</translation>
     </message>
     <message>
         <source>sin</source>
@@ -8078,7 +8110,7 @@ Do you want to save your changes?</source>
     <message>
         <source>fmod</source>
         <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
-        <translation type="unfinished"></translation>
+        <translation>fmod</translation>
     </message>
     <message>
         <source>cm</source>
