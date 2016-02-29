@@ -187,7 +187,7 @@ message(Examples: $$[QT_INSTALL_EXAMPLES])
 # Path to recource file.
 win32:RC_FILE = share/resources/valentina.rc
 
-# INSTALL_STANDARD_MEASHUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
+# INSTALL_STANDARD_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
 include(../tables.pri)
 
 win32 {
@@ -233,7 +233,7 @@ unix{
 
         # Path to standard measurement after installation
         standard.path = /usr/share/$${TARGET}/tables/standard/
-        standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+        standard.files = $$INSTALL_STANDARD_MEASUREMENTS
 
         # Path to templates after installation
         templates.path = /usr/share/$${TARGET}/tables/templates/
@@ -283,7 +283,7 @@ unix{
 
         # Copy to bundle standard measurements files
         standard.path = $$RESOURCES_DIR/tables/standard/
-        standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+        standard.files = $$INSTALL_STANDARD_MEASUREMENTS
 
         # Copy to bundle templates files
         templates.path = $$RESOURCES_DIR/tables/templates/
@@ -361,7 +361,7 @@ win32:*-g++ {
     INSTALLS += package
 
     package_tables.path = $${OUT_PWD}/../../../package/valentina/tables/standard
-    package_tables.files += $$INSTALL_STANDARD_MEASHUREMENTS
+    package_tables.files += $$INSTALL_STANDARD_MEASUREMENTS
     INSTALLS += package_tables
 
     package_templates.path = $${OUT_PWD}/../../../package/valentina/tables/templates

@@ -168,7 +168,7 @@ QMAKE_EXTRA_COMPILERS += diagrams
 
 QMAKE_CLEAN += $${OUT_PWD}/$${DESTDIR}/diagrams.rcc
 
-# INSTALL_STANDARD_MEASHUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
+# INSTALL_STANDARD_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
 include(../tables.pri)
 copyToDestdir($$INSTALL_STANDARD_TEMPLATES, $$shell_path($${OUT_PWD}/$${DESTDIR}/tables/templates))
 include(../translations.pri)
@@ -223,7 +223,7 @@ unix{
 
         # Copy to bundle standard measurements files
         standard.path = $$RESOURCES_DIR/tables/standard/
-        standard.files = $$INSTALL_STANDARD_MEASHUREMENTS
+        standard.files = $$INSTALL_STANDARD_MEASUREMENTS
 
         # Copy to bundle templates files
         templates.path = $$RESOURCES_DIR/tables/templates/
