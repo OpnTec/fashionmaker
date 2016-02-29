@@ -2044,6 +2044,26 @@ Apply settings anyway?</source>
         <source>Rule for choosing the next workpiece</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Divide into strips</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiplier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set multiplier for length of the biggest workpiece in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -3562,7 +3582,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Коефіцієнт кривизни кривої:</translation>
+        <translation type="vanished">Коефіцієнт кривизни кривої:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -3581,10 +3601,6 @@ Apply settings anyway?</source>
         <translation type="unfinished">Кут:</translation>
     </message>
     <message>
-        <source>Length ratio:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Second point:</source>
         <translation type="unfinished">Друга точка:</translation>
     </message>
@@ -3594,6 +3610,50 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid spline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Довжина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значення</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished">Розрахунок</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Edit first control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Помилка</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be negative</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6996,6 +7056,10 @@ Do you want to save your changes?</source>
         <source>Error creating or updating point of intersection curves</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating simple interactive spline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -7251,6 +7315,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Name</source>
         <translation type="unfinished">Позначення</translation>
+    </message>
+    <message>
+        <source>C1: angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C1: length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

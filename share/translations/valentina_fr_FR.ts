@@ -2036,6 +2036,26 @@ Appliquer les réglages quand-même ?</translation>
         <source>Rule for choosing the next workpiece</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Divide into strips</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiplier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set multiplier for length of the biggest workpiece in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -3550,7 +3570,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Coefficient de courbure:</translation>
+        <translation type="vanished">Coefficient de courbure:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -3569,10 +3589,6 @@ Appliquer les réglages quand-même ?</translation>
         <translation type="unfinished">Angle:</translation>
     </message>
     <message>
-        <source>Length ratio:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Second point:</source>
         <translation type="unfinished">Deuxième point:</translation>
     </message>
@@ -3582,6 +3598,50 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Invalid spline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Longueur:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valeur</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be negative</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6902,6 +6962,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Error creating or updating point of intersection curves</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating simple interactive spline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -7158,6 +7222,22 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Name</source>
         <translation type="unfinished">Nom</translation>
+    </message>
+    <message>
+        <source>C1: angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C1: length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

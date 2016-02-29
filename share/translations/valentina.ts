@@ -2042,6 +2042,26 @@ Apply settings anyway?</translation>
         <source>Rule for choosing the next workpiece</source>
         <translation>Rule for choosing the next workpiece</translation>
     </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Divide into strips</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiplier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set multiplier for length of the biggest workpiece in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -3560,7 +3580,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Coefficient of curvature of the curve:</translation>
+        <translation type="vanished">Coefficient of curvature of the curve:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -3580,7 +3600,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Length ratio:</source>
-        <translation>Length ratio:</translation>
+        <translation type="vanished">Length ratio:</translation>
     </message>
     <message>
         <source>Second point:</source>
@@ -3593,6 +3613,50 @@ Apply settings anyway?</translation>
     <message>
         <source>Invalid spline</source>
         <translation>Invalid spline</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Length:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Formula wizard</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Value</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished">Calulation</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Edit first control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be negative</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6996,6 +7060,10 @@ Do you want to save your changes?</translation>
         <source>Error creating or updating point of intersection curves</source>
         <translation>Error creating or updating point of intersection curves</translation>
     </message>
+    <message>
+        <source>Error creating or updating simple interactive spline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -7251,6 +7319,22 @@ Do you want to save your changes?</translation>
     <message>
         <source>Name</source>
         <translation>Name</translation>
+    </message>
+    <message>
+        <source>C1: angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C1: length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

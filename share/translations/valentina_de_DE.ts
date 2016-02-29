@@ -315,7 +315,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation type="vanished">Gebaut auf %3 um %4</translation>
+        <translation type="vanished">Erstellt am %3 um %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -358,7 +358,7 @@
     </message>
     <message>
         <source>Built on %3 at %4</source>
-        <translation type="vanished">Gebaut auf %3 um %4</translation>
+        <translation type="vanished">Erstellt am %3 um %4</translation>
     </message>
     <message>
         <source>Web site : %1</source>
@@ -370,7 +370,7 @@
     </message>
     <message>
         <source>Built on %1 at %2</source>
-        <translation>Erstellt von %1 auf %2</translation>
+        <translation>Erstellt am %1 um %2</translation>
     </message>
 </context>
 <context>
@@ -1094,7 +1094,7 @@
     </message>
     <message>
         <source>Segment a curved path</source>
-        <translation>Eine Kurve unterteilen</translation>
+        <translation>Einen gekrümmten Pfad unterteilen</translation>
     </message>
     <message>
         <source>Color</source>
@@ -1613,7 +1613,7 @@
     </message>
     <message>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
-        <translation>%4 - Schmittpunkt von Bogen mit Mittelpunkt %1 und Linie %2_%3</translation>
+        <translation>%4 - Schnittpunkt von Bogen mit Mittelpunkt %1 und Linie %2_%3</translation>
     </message>
     <message>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
@@ -1661,11 +1661,11 @@
     </message>
     <message>
         <source>%1 - point from circle and tangent</source>
-        <translation>%1 - Schnittpunkt des Kreises und Tangente</translation>
+        <translation>%1 - Schnittpunkt des Kreises und der Tangente</translation>
     </message>
     <message>
         <source>%1 - point from arc and tangent</source>
-        <translation>%1 - Schnittpunkt des Bogens und Tangente</translation>
+        <translation>%1 - Schnittpunkt des Bogens und der Tangente</translation>
     </message>
     <message>
         <source>Correction the dart %1_%2_%3</source>
@@ -1673,7 +1673,7 @@
     </message>
     <message>
         <source>%1 - point of curves intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Schnittpunkt der Kurve</translation>
     </message>
 </context>
 <context>
@@ -1716,7 +1716,7 @@
     </message>
     <message>
         <source>Lines angles</source>
-        <translation>Linien-Winkel</translation>
+        <translation>Linienwinkel</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -1756,11 +1756,11 @@
     </message>
     <message>
         <source>Move measurement up</source>
-        <translation>Maß vergrößern</translation>
+        <translation>Maß nach oben bewegen</translation>
     </message>
     <message>
         <source>Move measurement down</source>
-        <translation>Maß verkleinern</translation>
+        <translation>Maß nach unten bewegen</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -1831,7 +1831,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Mehrere Schnitteile wurden nicht arrangiert, da sie nicht auf das Papier passen</translation>
+        <translation>Mehrere Schnittteile wurden nicht arrangiert, da sie nicht auf das Papier passen</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -1878,11 +1878,11 @@
     </message>
     <message>
         <source>Creation options</source>
-        <translation type="vanished">Optionen erstellen</translation>
+        <translation type="vanished">Erstelloptionen</translation>
     </message>
     <message>
         <source>Shift length:</source>
-        <translation type="vanished">Verschiebe Länge:</translation>
+        <translation type="vanished">Verschiebungs-/Ausgleichslänge</translation>
     </message>
     <message>
         <source>Principle of choosing the next workpiece</source>
@@ -1922,7 +1922,7 @@
     </message>
     <message>
         <source>Auto crop unused length</source>
-        <translation>Automatisches Zuschneider der ungenutzten Länge</translation>
+        <translation>Automatisches Zuschneiden der ungenutzten Länge</translation>
     </message>
     <message>
         <source>Unite pages (if possible)</source>
@@ -1938,31 +1938,31 @@
     </message>
     <message>
         <source>Letter</source>
-        <translation>Letter</translation>
+        <translation>Letter (US-Papiergröße)</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Legal</translation>
+        <translation>Legal (US-Papiergröße)</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Rolle 24 Inch</translation>
+        <translation>Rolle 24 Zoll</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Rolle 30 Inch</translation>
+        <translation>Rolle 30 Zoll</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Rolle 36 Inch</translation>
+        <translation>Rolle 36 Zoll</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Rolle 42 Inch</translation>
+        <translation>Rolle 42 Zoll</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Rolle 44 Inch</translation>
+        <translation>Rolle 44 Zoll</translation>
     </message>
     <message>
         <source>
@@ -2001,7 +2001,7 @@
     </message>
     <message>
         <source>Ignore fileds</source>
-        <translation type="unfinished"></translation>
+        <translation>Felder ignorieren</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -2042,6 +2042,26 @@ Einstellungen trotzdem anwenden?</translation>
         <source>Rule for choosing the next workpiece</source>
         <translation>Regel zur Auswahl des nächsten Schnittteils</translation>
     </message>
+    <message>
+        <source>Enabling for sheets that have big height will speed up creating. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Divide into strips</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiplier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set multiplier for length of the biggest workpiece in layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -2063,7 +2083,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Select second point</source>
-        <translation>Wähle zweiten Punkt</translation>
+        <translation>Zweiten Punkt wählen</translation>
     </message>
     <message>
         <source>Line between points</source>
@@ -2272,7 +2292,7 @@ Einstellungen trotzdem anwenden?</translation>
     <name>DialogMDataBase</name>
     <message>
         <source>Measurement data base</source>
-        <translation>Maße-Datenbank</translation>
+        <translation>Maßdatenbank</translation>
     </message>
     <message>
         <source>Measurements</source>
@@ -2341,7 +2361,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Foot</source>
         <comment>Measurement section</comment>
-        <translation>Fuss</translation>
+        <translation>Fuß</translation>
     </message>
     <message>
         <source>Head</source>
@@ -2351,7 +2371,7 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Men &amp; Tailoring</source>
         <comment>Measurement section</comment>
-        <translation>Mann &amp; Schneidern</translation>
+        <translation>Mann &amp; Maßanfertigung</translation>
     </message>
     <message>
         <source>Historical &amp; Specialty</source>
@@ -2361,19 +2381,19 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Patternmaking measurements</source>
         <comment>Measurement section</comment>
-        <translation>Schnittmuster Maße</translation>
+        <translation>Schnittmustermaße</translation>
     </message>
     <message>
         <source>Collapse All</source>
-        <translation>Alles ausklappen</translation>
-    </message>
-    <message>
-        <source>Expand All</source>
         <translation>Alles einklappen</translation>
     </message>
     <message>
+        <source>Expand All</source>
+        <translation>Alles ausklappen</translation>
+    </message>
+    <message>
         <source>Check all</source>
-        <translation>Alles aktivieren</translation>
+        <translation>Alle aktivieren</translation>
     </message>
     <message>
         <source>Uncheck all</source>
@@ -2384,11 +2404,11 @@ Einstellungen trotzdem anwenden?</translation>
     <name>DialogNewMeasurements</name>
     <message>
         <source>New measurement file</source>
-        <translation>Neue Maßsatz-Datei</translation>
+        <translation>Neue Maßsatzdatei</translation>
     </message>
     <message>
         <source>Measurement type:</source>
-        <translation>Maßsatz-Typ</translation>
+        <translation>Maßsatz-Typ:</translation>
     </message>
     <message>
         <source>Unit:</source>
@@ -2396,11 +2416,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Base size:</source>
-        <translation>Basis Größe:</translation>
+        <translation>Basisgröße:</translation>
     </message>
     <message>
         <source>Base height:</source>
-        <translation>Basis Höhe:</translation>
+        <translation>Basishöhe:</translation>
     </message>
     <message>
         <source>Individual</source>
@@ -2431,7 +2451,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Pattern piece name</source>
-        <translation type="vanished">Schnitteil-Name</translation>
+        <translation type="vanished">Schnittteil-Name</translation>
     </message>
     <message>
         <source>Units:</source>
@@ -2451,11 +2471,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Pattern piece name:</source>
-        <translation>Name des Schnitteils.</translation>
+        <translation>Name des Schnittteils:</translation>
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation>Eindeutiger Name des Schnitteils.</translation>
+        <translation>Eindeutiger Name des Schnittteils</translation>
     </message>
     <message>
         <source>Choose unique pattern piece name.</source>
@@ -2474,11 +2494,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Value of length</source>
-        <translation type="vanished">Länge</translation>
+        <translation type="vanished">Wert der Länge</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die ganze Berechnung in der Messagebox anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die ganze Berechnung im Fenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2502,7 +2522,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
-        <translation type="vanished">Linie vom ersten zu diesem Punkt zeigen</translation>
+        <translation type="vanished">Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2644,7 +2664,7 @@ Einstellungen trotzdem anwenden?</translation>
     <name>DialogPatternXmlEdit</name>
     <message>
         <source>XML Editor</source>
-        <translation>XML Editor</translation>
+        <translation>XML-Editor</translation>
     </message>
     <message>
         <source>Value :</source>
@@ -2692,7 +2712,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Undo last</source>
-        <translation>Rückgängig machen</translation>
+        <translation>Rückgängig</translation>
     </message>
     <message>
         <source>Immediate apply</source>
@@ -2783,7 +2803,7 @@ Einstellungen trotzdem anwenden?</translation>
     <name>DialogPointFromArcAndTangent</name>
     <message>
         <source>Point from arc and tangent</source>
-        <translation> Schnittpunkt des Bogens und Tangente</translation>
+        <translation> Schnittpunkt des Bogens und der Tangente</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -2937,7 +2957,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die vollständige Berechnung in einer Messagebox anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die vollständige Berechnung im Fenster anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3225,7 +3245,7 @@ Einstellungen trotzdem anwenden?</translation>
     <name>DialogPointOfIntersectionCurves</name>
     <message>
         <source>Tool point of intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt aus Schnittpunkt zweier Kurven</translation>
     </message>
     <message>
         <source>First curve:</source>
@@ -3241,7 +3261,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation>eindeutige Bezeichnung:</translation>
+        <translation>eindeutige Bezeichnung</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
@@ -3315,7 +3335,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
-        <translation>Ordner enthalten bereits eine Datei mit Namen %1 . Überschreiben des Dateinamens trotz Konflikt?</translation>
+        <translation>Der Ordner enthält bereits eine Datei namens %1. Datei überschreiben?</translation>
     </message>
     <message>
         <source>Example:</source>
@@ -3327,11 +3347,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Svg files (*.svg)</source>
-        <translation>SVG Dateien (*.svg)</translation>
+        <translation>SVG-Dateien (*.svg)</translation>
     </message>
     <message>
         <source>PDF files (*.pdf)</source>
-        <translation>PDF Dateien (*.pdf)</translation>
+        <translation>PDF-Dateien (*.pdf)</translation>
     </message>
     <message>
         <source>Images (*.png)</source>
@@ -3343,19 +3363,19 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>PS files (*.ps)</source>
-        <translation>PS Dateien (*.ps)</translation>
+        <translation>PS-Dateien (*.ps)</translation>
     </message>
     <message>
         <source>EPS files (*.eps)</source>
-        <translation>EPS Dateien (*.eps)</translation>
+        <translation>EPS-Dateien (*.eps)</translation>
     </message>
     <message>
         <source>DXF files (*.dxf)</source>
-        <translation>DXF Dateien (*.dxf)</translation>
+        <translation>DXF-Dateien (*.dxf)</translation>
     </message>
     <message>
         <source>Tried to use out of range format number.</source>
-        <translation>Versucht außerhalb der Reichweite Nummernformat zu verwenden.</translation>
+        <translation>Die verwendete Formatnummer liegt außerhalb der Reichweite.</translation>
     </message>
     <message>
         <source>Selected not present format.</source>
@@ -3410,7 +3430,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Show line from first point to our point</source>
-        <translation type="vanished">Zeige linie vom ersten punkt zu diesem Punkt</translation>
+        <translation type="vanished">Verbindungslinie bis zum Schnittpunkt wird mit angegebenem Stil gezeichnet</translation>
     </message>
     <message>
         <source>Select first point of line</source>
@@ -3497,11 +3517,11 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Y coordinate</source>
-        <translation>Y Koordinate</translation>
+        <translation>Y-Koordinate</translation>
     </message>
     <message>
         <source>X coordinate</source>
-        <translation>X Koordinate</translation>
+        <translation>X-Koordinate</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3560,7 +3580,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Koeffizient für die Krümmung der Kurve:</translation>
+        <translation type="vanished">Koeffizient für die Krümmung der Kurve:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -3580,7 +3600,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Length ratio:</source>
-        <translation>Längenverhältnis:</translation>
+        <translation type="vanished">Längenverhältnis:</translation>
     </message>
     <message>
         <source>Second point:</source>
@@ -3594,12 +3614,56 @@ Einstellungen trotzdem anwenden?</translation>
         <source>Invalid spline</source>
         <translation>Ungültige Spline/glatte Kurve</translation>
     </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Länge:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished">Berechnung</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be negative</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSplinePath</name>
     <message>
         <source>Curved path</source>
-        <translation>Pfad</translation>
+        <translation>Gekrümmter Pfad</translation>
     </message>
     <message>
         <source>Point of curve</source>
@@ -3753,7 +3817,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Select first point</source>
-        <translation>Zweiten Punkt wählen</translation>
+        <translation>Ersten Punkt wählen</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -3915,7 +3979,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation type="vanished">Fehler beim Berechnen der Formel. Machen sie den letzten Schritt rückgängig oder korrigieren sie die Formel.</translation>
+        <translation type="vanished">Fehler beim Berechnen der Formel. Machen Sie den letzten Schritt rückgängig oder korrigieren Sie die Formel.</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
@@ -3950,7 +4014,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Workpiece should have at least two points and three objects</source>
-        <translation>Rohling sollte mindestens zwei Punkte und drei Objekte</translation>
+        <translation>Rohling sollte mindestens zwei Punkte und drei Objekte beinhalten</translation>
     </message>
     <message>
         <source>Select a second point</source>
@@ -3977,19 +4041,18 @@ Einstellungen trotzdem anwenden?</translation>
     <name>InternalStrings</name>
     <message>
         <source>The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</source>
-        <translation>
-Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IRGENDEINER ART, EINSCHLIESSLICH DER GARANTIE FÜR DESIGN UND EIGNUNG FÜR EINEN BESTIMMTEN ZWECK zur Verfügung gestellt.</translation>
+        <translation>Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IRGENDEINER ART, EINSCHLIESSLICH DER GARANTIE FÜR DESIGN UND EIGNUNG FÜR EINEN BESTIMMTEN ZWECK, zur Verfügung gestellt.</translation>
     </message>
 </context>
 <context>
     <name>MApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Fehler beim Parsen der Datei. Das Programm wird geschlossen.</translation>
+        <translation>Fehler beim Verarbeiten der Datei. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Fehler - unbekannte Id. Fas Programm wird geschlossen.</translation>
+        <translation>Fehler - unbekannte ID. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
@@ -4001,7 +4064,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Fehler - falsche Id. Das Programm wird geschlossen.</translation>
+        <translation>Fehler - falsche ID. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
@@ -4017,15 +4080,15 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Valentina&apos;s measurements editor.</source>
-        <translation>Valentina´s Maßsatz-Editor.</translation>
+        <translation>Valentinas Maßsatzeditor.</translation>
     </message>
     <message>
         <source>The measurement file.</source>
-        <translation>Die Maßsatz-Datei.</translation>
+        <translation>Die Maßsatzdatei.</translation>
     </message>
     <message>
         <source>The base height</source>
-        <translation>Die Basishöhe.</translation>
+        <translation>Die Basishöhe</translation>
     </message>
     <message>
         <source>The base size</source>
@@ -4033,19 +4096,19 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Set pattern file unit: cm, mm, inch.</source>
-        <translation>Maßeinheit bestimmen der Schnittmuster-Datei: cm, mm, inch.</translation>
+        <translation>Maßeinheit der Schnittmuster-Datei bestimmen: cm, mm, Zoll.</translation>
     </message>
     <message>
         <source>The pattern unit</source>
-        <translation>Die Schnittmuster Maßeinheit</translation>
+        <translation>Die Schnittmuster-Maßeinheit</translation>
     </message>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing a window.</source>
-        <translation type="vanished">Verwenden zum Einheiten testen. Ausführung des Programms und öffnen einer Datei ohne Fensteranzeige.</translation>
+        <translation type="vanished">Zum Testen der Einheiten verwenden. Führen Sie das Programm aus und öffnen Sie eine Datei ohne Fensteranzeige.</translation>
     </message>
     <message>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
-        <translation>Ungültige Basisgröße. Muss cm, mm oder inch sein .</translation>
+        <translation>Ungültige Basisgröße. Muss cm, mm oder Zoll sein .</translation>
     </message>
     <message>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
@@ -4053,7 +4116,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation>Test-Modus unterstützt nicht das Öffnen mehrer Dateien.</translation>
+        <translation>Der Test-Modus unterstützt das Öffnen mehrerer Dateien nicht.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -4065,7 +4128,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Invalid base height argument. Must be %1cm.</source>
-        <translation>Ungültige Basishöhe. Muss in %1cm sein.</translation>
+        <translation>Ungültige Basishöhe. Muss %1cm sein.</translation>
     </message>
     <message>
         <source>Invalid base size argument. Must be %1cm.</source>
@@ -4320,11 +4383,11 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Original zoom </source>
-        <translation>Originialgröße</translation>
+        <translation>Originalgröße</translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation>Originialgröße</translation>
+        <translation>Originalgröße</translation>
     </message>
     <message>
         <source>Zoom fit best</source>
@@ -4376,7 +4439,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Select first point of angle</source>
-        <translation>Den Erstehn Punkt des Winkels wählen</translation>
+        <translation>Den ersten Punkt des Winkels wählen</translation>
     </message>
     <message>
         <source>Select first point of first line</source>
@@ -4432,7 +4495,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Height: </source>
-        <translation>Größe: </translation>
+        <translation>Höhe:</translation>
     </message>
     <message>
         <source>Size: </source>
@@ -4444,7 +4507,7 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation>Schnittmuster Dateien (*.val)</translation>
+        <translation>Schnittmusterdateien (*.val)</translation>
     </message>
     <message>
         <source>pattern</source>
@@ -4464,19 +4527,19 @@ Das Programm wird in dem Zustand WIE ES IST OHNE GARANTIE UND GEWÄHRLEISTUNG IR
     </message>
     <message>
         <source>Error parsing file.</source>
-        <translation>Fehler beim Parsen der Datei.</translation>
+        <translation>Fehler beim Auswerten der Datei.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value.</source>
-        <translation>Fehler Wert kann nicht konvertiert werden.</translation>
+        <translation>Fehler: Wert kann nicht konvertiert werden.</translation>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Fehler leerer parameter.</translation>
+        <translation>Fehler: Leerer Parameter.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
-        <translation>Fehler falsche Id.</translation>
+        <translation>Fehler: Falsche ID.</translation>
     </message>
     <message>
         <source>Error parsing file (std::bad_alloc).</source>
@@ -4598,8 +4661,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
-        <translation>
-Punkt schneidet Kreisbogen und Achse</translation>
+        <translation>Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
@@ -4635,7 +4697,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Config pattern piece</source>
-        <translation>Konfigurieren Schnitteil</translation>
+        <translation>Schnittteil konfigurieren</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -4643,11 +4705,11 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Show Curve Details</source>
-        <translation>Anzeige Kurven-Details</translation>
+        <translation>Kurvendetails anzeigen</translation>
     </message>
     <message>
         <source>Show/hide control points and curve direction</source>
-        <translation>Anzeigen / verbergen Kontrollpunkte und Kurvenrichtung</translation>
+        <translation>Kontrollpunkte und Kurvenrichtung anzeigen/verbergen</translation>
     </message>
     <message>
         <source>Tools</source>
@@ -4679,7 +4741,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Layout pages</source>
-        <translation>Layoutseiten </translation>
+        <translation>Seiten in Layout darstellen</translation>
     </message>
     <message>
         <source>Save as PDF</source>
@@ -4695,7 +4757,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Split and save a layout into smaller pages</source>
-        <translation>Teilenh und speichern eines Layout mit kleinere Seiten</translation>
+        <translation>Teilen und Speichern eines Layouts in kleinere Seiten</translation>
     </message>
     <message>
         <source>Print</source>
@@ -4703,11 +4765,11 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Print tiled</source>
-        <translation>Gekachelt Drucken</translation>
+        <translation>Gekachelt drucken</translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
-        <translation>Teilen und speichern eines Layout mit kleinere Seiten (für normale Drucker)</translation>
+        <translation>Teilen und Speichern eines Layouts in kleinere Seiten (für normale Drucker)</translation>
     </message>
     <message>
         <source>Print preview</source>
@@ -4715,7 +4777,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Print preview original layout</source>
-        <translation>Druckvorschau originales Layout</translation>
+        <translation>Druckvorschau mit Originallayout</translation>
     </message>
     <message>
         <source>Export As...</source>
@@ -4723,7 +4785,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Export original layout</source>
-        <translation>Exportieren originales Layout</translation>
+        <translation>Originallayout exportieren</translation>
     </message>
     <message>
         <source>Select first an arc</source>
@@ -4739,11 +4801,11 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Select point of the center of the arc</source>
-        <translation>Mittelpunkt des Bogens auswÃ¤hlen</translation>
+        <translation>Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
         <source>Select the first base line point</source>
-        <translation>Wählen Sie die den ersten Punkt der Grundlinie</translation>
+        <translation>Wählen Sie den ersten Punkt der Grundlinie</translation>
     </message>
     <message>
         <source>Detail mode</source>
@@ -4751,15 +4813,15 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
-        <translation>Sie können nicht den Detail-Modus wechseln. Bitte erstellen Sie zuerst ein Schnitteil.</translation>
+        <translation>Sie können nicht in den Detailmodus wechseln. Bitte erstellen Sie zuerst ein Schnittteil.</translation>
     </message>
     <message>
         <source>Layout mode</source>
-        <translation>Layout-Modus</translation>
+        <translation>Layoutmodus</translation>
     </message>
     <message>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
-        <translation>Sie können nicht den Layout-Modus wechseln. Bitte erstellen Sie zuerst ein Schnitteil.</translation>
+        <translation>Sie können nicht in den Layoutmodus wechseln. Bitte erstellen Sie zuerst ein Schnittteil.</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -4767,15 +4829,15 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Load Individual ...</source>
-        <translation>Laden Individuell ...</translation>
+        <translation>Individuelle Maße laden...</translation>
     </message>
     <message>
         <source>Load Standard ...</source>
-        <translation>Laden Standard ...</translation>
+        <translation>Standardmaße laden...</translation>
     </message>
     <message>
         <source>Show ...</source>
-        <translation>Anzeigen ...</translation>
+        <translation>Anzeigen...</translation>
     </message>
     <message>
         <source>Show measurements</source>
@@ -4787,19 +4849,19 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
-        <translation>Individuelle Maße (*vit);;Standard Maße (*.vst)</translation>
+        <translation>Individuelle Maße (*vit);;Standardmaße (*.vst)</translation>
     </message>
     <message>
         <source>Measurements loaded</source>
-        <translation>Maße gelanden</translation>
+        <translation>Maße geladen</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
-        <translation>Standard Maße (*.vst);;Individuelle Maße (*.vit)</translation>
+        <translation>Standardmaße (*.vst);;Individuelle Maße (*.vit)</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene.</source>
-        <translation>Sie können ein leeres Layout nicht zu exportieren.</translation>
+        <translation>Sie können ein leeres Layout nicht exportieren.</translation>
     </message>
     <message>
         <source>Create new Layout</source>
@@ -4811,7 +4873,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Create/edit measurements</source>
-        <translation>Erstellen/Bearbeiten Maße</translation>
+        <translation>Maße erstellen/bearbeiten</translation>
     </message>
     <message>
         <source>%1, %2 (%3)</source>
@@ -4820,23 +4882,23 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>Fehler beim Sperren. Diese Datei ist bereits geöffnet.</translation>
+        <translation>Fehler beim Sperren. Diese Datei ist bereits in einem anderen Fenster geöffnet.</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Fehler beim Sperren. Diese Datei ist bereits geöffnet. Es werden Konfikte erwartet, wenn das Programm 2x ausgeführt wird.</translation>
+        <translation>Fehler beim Sperren. Diese Datei ist bereits in einem anderen Fenster geöffnet. Bei zweifachem Ausführen kann es zu Konflikten kommen.</translation>
     </message>
     <message>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation>Maß-Datei enthält ungültiges Maß(e).</translation>
+        <translation>Maßdatei enthält ungültiges Maß</translation>
     </message>
     <message>
         <source>Measurement file has unknown format.</source>
-        <translation>Maß-Datei hat ein unbekanntes Format.</translation>
+        <translation>Maßdatei hat ein unbekanntes Format.</translation>
     </message>
     <message>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation>Maß-Datei beinhaltet nicht alle erforderlichen Maße.</translation>
+        <translation>Maßdatei beinhaltet nicht alle erforderlichen Maße.</translation>
     </message>
     <message>
         <source>Please, additionaly provide: %1</source>
@@ -4844,7 +4906,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Measurement files types have not match.</source>
-        <translation>Maß-Dateien Typen stimmen nicht überein.</translation>
+        <translation>Die Arten der Maßdateien stimmen nicht überein.</translation>
     </message>
     <message>
         <source>Measurements was synced</source>
@@ -4860,27 +4922,27 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
-        <translation>Die Maß-Datei &apos;%1&apos; konnte nicht gefunden werden.</translation>
+        <translation>Die Maßdatei &apos;%1&apos; konnte nicht gefunden werden.</translation>
     </message>
     <message>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
-        <translation>Die Maß-Datei  &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; kann nicht gefunden werden. Möchten Sie den Speicherort der Datei aktualisierenj</translation>
+        <translation>Die Maßdatei  &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; konnte nicht gefunden werden. Möchten Sie den Speicherort der Datei aktualisieren?</translation>
     </message>
     <message>
         <source>Loading measurements file</source>
-        <translation>Laden Maße-Datei</translation>
+        <translation>Lädt die Maßdatei</translation>
     </message>
     <message>
         <source>Not supported size value &apos;%1&apos; for this pattern file.</source>
-        <translation>Nicht unterstütze Größen-Einheit &apos;%1&apos; für diese Schnittmuster-Datei.</translation>
+        <translation>Die Größeneinheit &apos;%1&apos; wird für diese Schnittmusterdatei nicht unterstützt.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
-        <translation>Größe kann nicht bestimmt werden. Benötigt wird eine Datei mit Standard-Maßen.</translation>
+        <translation>Größe konnte nicht bestimmt werden. Die Datei muss Standardmaße haben.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
-        <translation>Größe kann nicht bestimmt werden. Datei nicht geöffnet.</translation>
+        <translation>Größe konnte nicht bestimmt werden. Datei nicht geöffnet.</translation>
     </message>
     <message>
         <source>The method %1 does nothing in GUI mode</source>
@@ -4888,19 +4950,19 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
-        <translation>Nicht unterstütze Höhen-Einheit &apos;%1&apos; für diese Schnittmuster-Datei.</translation>
+        <translation>Nicht unterstütze Höheneinheit &apos;%1&apos; für diese Schnittmusterdatei.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
-        <translation>Höhe kann nicht bestimmt werden. Benötigt wird eine Datei mit Standard-Maßen.</translation>
+        <translation>Höhe konnte nicht bestimmt werden. Die Datei muss Standardmaße haben.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
-        <translation>Höhe kann nicht bestimmt werden. Datei nicht geöffnet.</translation>
+        <translation>Höhe konnte nicht bestimmt werden. Datei nicht geöffnet.</translation>
     </message>
     <message>
         <source>Export error.</source>
-        <translation>Export Fehler.</translation>
+        <translation>Export-Fehler.</translation>
     </message>
     <message>
         <source>Please, provide one input file.</source>
@@ -4920,11 +4982,11 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modus zur Arbeit mit Schnitteilen. Diese Schnitteile sind die Basis für den nächsten Schritt &amp;quot;Details mode&amp;quot;. Bevor Sie weiterarbeiten können mit &amp;quot;Details mode&amp;quot; müssen Sie zunächst ein Detail erzeugen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modus zur Arbeit mit Schnittteilen. Diese Schnittteile sind die Basis für den nächsten Schritt &amp;quot;Details mode&amp;quot;. Bevor Sie mit &amp;quot;Details mode&amp;quot; weiterarbeiten können, müssen Sie zunächst ein Detail erzeugen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modus für die Arbeit mit Details. Bevor Sie weitermachen können mit  &amp;quot;Details mode&amp;quot; müssen Sie zunächst ein Detail erstellen &amp;quot;Draw mode&amp;quot;. Details zu dieser Phase werden für die Erstellung eines Layouts verwendet. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modus zur Arbeit mit Details. Bevor Sie mit &amp;quot;Details mode&amp;quot; weitermachen können, müssen Sie zunächst ein Detail erstellen &amp;quot;Draw mode&amp;quot;. In dieser Phase erstellte Details werden für die Erstellung eines Layouts verwendet. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4936,7 +4998,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Unload measurements if they was not used in a pattern file.</source>
-        <translation>Löschen der geladen Maße, die nicht im Schnitteil verwendet wurden.</translation>
+        <translation>Löschen der geladenen Maße, die nicht im Schnittteil verwendet wurden.</translation>
     </message>
     <message>
         <source>Measurements unloaded</source>
@@ -4944,7 +5006,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
-        <translation>Geladene Maße können nicht gelöscht werden. Sie werden im Schnittteil verwendet.</translation>
+        <translation>Geladene Maße, die im Schnittteil verwendet werden, können nicht gelöscht werden.</translation>
     </message>
     <message>
         <source>True darts</source>
@@ -4960,7 +5022,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Create/Edit measurements</source>
-        <translation>Erstellen/Bearbeiten Maße</translation>
+        <translation>Maße erstellen/bearbeiten</translation>
     </message>
     <message>
         <source>Save...</source>
@@ -4968,11 +5030,11 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation>Nicht Speichern</translation>
+        <translation>Nicht speichern</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei wird gesperrt</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -4980,19 +5042,19 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>DIe Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverust führen)</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplatten-Partition verhindert, dass die Sperrdatei geschrieben werden konnte. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplatten-Partition verhindert, dass die Sperrdatei geschrieben werden konnte.</translation>
     </message>
     <message>
         <source>Report Bug...</source>
@@ -5019,7 +5081,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <name>MainWindowsNoGUI</name>
     <message>
         <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="vanished">Zum Speichern eines mehrseitiges Dokument müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion .</translation>
+        <translation type="vanished">Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
     </message>
     <message>
         <source>For previewing multypage document all sheet should have the same size.</source>
@@ -5043,15 +5105,15 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>PDF file (*.pdf)</source>
-        <translation>PDF file (*.pdf)</translation>
+        <translation>PDF-Datei (*.pdf)</translation>
     </message>
     <message>
         <source>Print error</source>
-        <translation>Drucker-Fehler</translation>
+        <translation>Druckfehler</translation>
     </message>
     <message>
         <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation>Prozess kann nicht fortgesetzt werden , es sind keine verfügbaren Drucker in Ihrem System vorhanden.</translation>
+        <translation>Prozess kann nicht fortgesetzt werden, da keine verfügbaren Drucker in Ihrem System vorhanden sind.</translation>
     </message>
     <message>
         <source>unnamed</source>
@@ -5063,7 +5125,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation>Das Layout wurde seit der letzten Änderung nicht aktualisiert. Möchten sie fortfahren?</translation>
+        <translation>Das Layout wurde seit der letzten Änderung nicht aktualisiert. Möchten Sie fortfahren?</translation>
     </message>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
@@ -5071,19 +5133,19 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Mehrere Schnitteile wurden nicht arrangiert, da sie nicht auf das Papier passen</translation>
+        <translation>Mehrere Schnittteile wurden nicht arrangiert, da sie nicht auf das Papier passen</translation>
     </message>
     <message>
         <source>Can&apos;t open printer %1</source>
-        <translation>Drucker %1 kann nicht geöffner werden.</translation>
+        <translation>Drucker %1 kann nicht geöffnet werden</translation>
     </message>
     <message>
         <source>Export error.</source>
-        <translation>Export Fehler.</translation>
+        <translation>Export-Fehler.</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation>Zum Speichern eines mehrseitiges Dokument müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
+        <translation>Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
@@ -5091,7 +5153,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
-        <translation>Zum Drucken eines mehrseitiges Dokument müssen alle Blätter die gleiche Größe haben.</translation>
+        <translation>Zum Drucken eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben.</translation>
     </message>
 </context>
 <context>
@@ -5149,7 +5211,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Auswählen...</translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <source>Type</source>
@@ -5219,18 +5281,18 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Pfad zu den Maßen ist schon relativ.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Pfad zu den Maßen ist schon absolut.</translation>
     </message>
 </context>
 <context>
     <name>QCommandLineParser</name>
     <message>
         <source>Displays version information.</source>
-        <translation>Anzeige Versionsinformationen.</translation>
+        <translation>Zeigt Versionsinformationen an.</translation>
     </message>
     <message>
         <source>Displays this help.</source>
@@ -5238,15 +5300,15 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Unknown option &apos;%1&apos;.</source>
-        <translation>Unbekannt option &apos;%1&apos;.</translation>
+        <translation>Unbekannte Option &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown options: %1.</source>
-        <translation>Unbekannt option &apos;%1&apos;.</translation>
+        <translation>Unbekannte Optionen: &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Missing value after &apos;%1&apos;.</source>
-        <translation>Fehlende Wert nach &quot;%1&quot;.</translation>
+        <translation>Fehlender Wert nach &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Unexpected value after &apos;%1&apos;.</source>
@@ -5254,7 +5316,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>[options]</source>
-        <translation>[options]</translation>
+        <translation>[optionen]</translation>
     </message>
     <message>
         <source>Usage: %1</source>
@@ -5280,7 +5342,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Es muss ein neues Schnittteil erstellt werden, um fortfahen zu können.</translation>
+        <translation>Erstellen Sie ein neues Schnittteil, um fortzufahren.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -5306,7 +5368,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>px</source>
-        <translation>px</translation>
+        <translation>Pixel</translation>
     </message>
     <message>
         <source>add node</source>
@@ -5341,12 +5403,12 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>too few arguments for function sum.</source>
         <comment>parser error message</comment>
-        <translation>zu wenige Argumente für Summenfunktion.</translation>
+        <translation>Zu wenige Argumente für Summenfunktion.</translation>
     </message>
     <message>
         <source>too few arguments for function min.</source>
         <comment>parser error message</comment>
-        <translation>zu wenige Argumente für Funktion min.</translation>
+        <translation>Zu wenige Argumente für Funktion min.</translation>
     </message>
 </context>
 <context>
@@ -5364,12 +5426,12 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Invalid function-, variable- or constant name: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Ungültige Funktions-, variablen oder konstanter Name: &quot;$TOK$&quot;.</translation>
+        <translation>Ungültiger Funktions-, Variablen oder Konstantenname: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid binary operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Ungültige Binäroperator: &quot;$TOK$&quot;.</translation>
+        <translation>Ungültiger Binäroperator: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
@@ -5384,7 +5446,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Invalid pointer to callback function.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Ungültige Zeiger auf Callback-Funktion.</translation>
+        <translation>Ungültiger Zeiger auf Callback-Funktion.</translation>
     </message>
     <message>
         <source>Expression is empty.</source>
@@ -5409,12 +5471,12 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Unexpected argument separator at position $POS$</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwarteter Argumentseparator an Position $POS$</translation>
     </message>
     <message>
         <source>Unexpected parenthesis &quot;$TOK$&quot; at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwartete Klammer &quot;$TOK$&quot; an Position $POS$.</translation>
     </message>
     <message>
         <source>Unexpected function &quot;$TOK$&quot; at position $POS$</source>
@@ -5424,7 +5486,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Unexpected value &quot;$TOK$&quot; found at position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Unerwarteter Wert &quot;$TOK$&quot; an Position $POS$ gefunden.</translation>
     </message>
     <message>
         <source>Unexpected variable &quot;$TOK$&quot; found at position $POS$</source>
@@ -5444,12 +5506,12 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Too many parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zu viele Parameter für die Funktion &quot;$TOK$&quot; in der Ausdrucksposition $POS$</translation>
     </message>
     <message>
         <source>Too few parameters for function &quot;$TOK$&quot; at expression position $POS$</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zu wenige Parameter für die Funktion &quot;$TOK$&quot; in der Ausdrucksposition $POS$</translation>
     </message>
     <message>
         <source>Divide by zero</source>
@@ -5459,7 +5521,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Domain error</source>
         <comment>Math parser error messages.</comment>
-        <translation>Domain Fehler</translation>
+        <translation>Domainfehler</translation>
     </message>
     <message>
         <source>Name conflict</source>
@@ -5469,37 +5531,37 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Invalid value for operator priority (must be greater or equal to zero).</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiger Wert für die Operatorpriorität (muss größer oder gleich Null sein).</translation>
     </message>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Der benutzerdefinierte Binäroperator &quot;$TOK$&quot; steht im Konflikt mit einem eingebauten Operator.</translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation>Unerwarteter string zeichen an position $POS$ gefunden.</translation>
+        <translation>Unerwarteter String an Position $POS$ gefunden.</translation>
     </message>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nicht beendeter String beginnend an der Position $POS$.</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Stringfunktion mit einem Argument, das kein String ist, aufgerufen.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>String anstelle einer Zahl verwendet.</translation>
     </message>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kein verwendbarer Overload für Operator &quot;$TOK$&quot; an der Position $POS$.</translation>
     </message>
     <message>
         <source>Function result is a string.</source>
@@ -5509,12 +5571,12 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>Parser error.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Parserfehler.</translation>
+        <translation>Auswertungsfehler.</translation>
     </message>
     <message>
         <source>Decimal separator is identic to function argument separator.</source>
         <comment>Math parser error messages.</comment>
-        <translation>Dezimaltrennzeichen ist identisch zur Funktion Argument Trennzeichen.</translation>
+        <translation>Dezimaltrennzeichen ist identisch zum Trennzeichen des Funktionsarguments.</translation>
     </message>
     <message>
         <source>The &quot;$TOK$&quot; operator must be preceeded by a closing bracket.</source>
@@ -5524,7 +5586,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <message>
         <source>If-then-else operator is missing an else clause</source>
         <comment>Math parser error messages. Do not translate operator name.</comment>
-        <translation>If-Then-else-Operator fehlt eine else-Klausel</translation>
+        <translation>Dem if-then-else-Operator fehlt eine else-Klausel</translation>
     </message>
     <message>
         <source>Misplaced colon at position $POS$</source>
@@ -5536,28 +5598,28 @@ Punkt schneidet Kreisbogen und Achse</translation>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
-        <translation>Umbenennen Schnitteil</translation>
+        <translation>Schnittteil umbenennen</translation>
     </message>
 </context>
 <context>
     <name>SaveDetailOptions</name>
     <message>
         <source>save detail option</source>
-        <translation>Speichern Details-Optionen</translation>
+        <translation>Detailoption speichern</translation>
     </message>
 </context>
 <context>
     <name>SaveToolOptions</name>
     <message>
         <source>save tool option</source>
-        <translation>Speicherwerkzeug Optionen</translation>
+        <translation>Werkzeugoption speichern</translation>
     </message>
 </context>
 <context>
     <name>TMainWindow</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Auswählen für eine neue Maß-Datei.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Neu auswählen, um eine neue Maßdatei zu erstellen.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Name</source>
@@ -5617,11 +5679,11 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Move measurement up</source>
-        <translation>Maß vergrößern</translation>
+        <translation>Maß nach oben bewegen</translation>
     </message>
     <message>
         <source>Move measurement down</source>
-        <translation>Maß verkleinern</translation>
+        <translation>Maß nach unten bewegen</translation>
     </message>
     <message>
         <source>Calculated value:</source>
@@ -5629,7 +5691,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Full name:</source>
-        <translation>vollständiger Name</translation>
+        <translation>Vollständiger Name:</translation>
     </message>
     <message>
         <source>Information</source>
@@ -5641,7 +5703,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Measurement type</source>
-        <translation>Maßsatz-Typ</translation>
+        <translation>Maßsatztyp</translation>
     </message>
     <message>
         <source>Path:</source>
@@ -5677,7 +5739,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Family name:</source>
-        <translation>Familienname:</translation>
+        <translation>Nachname:</translation>
     </message>
     <message>
         <source>Birth date:</source>
@@ -5721,7 +5783,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Open individual ...</source>
-        <translation>Öffnen Individuell ...</translation>
+        <translation>Individuelle Maße öffnen...</translation>
     </message>
     <message>
         <source>Save</source>
@@ -5729,7 +5791,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Save As ...</source>
-        <translation>Speichern als ...</translation>
+        <translation>Speichern unter ...</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -5761,11 +5823,11 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Open standard ...</source>
-        <translation>Öffnen Standard ...</translation>
+        <translation>Standardmaße öffnen...</translation>
     </message>
     <message>
         <source>Open template</source>
-        <translation>Öffnen Vorlage</translation>
+        <translation>Vorlage öffnen</translation>
     </message>
     <message>
         <source>Database</source>
@@ -5809,7 +5871,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation>Speichern als</translation>
+        <translation>Speichern unter</translation>
     </message>
     <message>
         <source>&amp;New Window</source>
@@ -5817,7 +5879,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Edit measurement</source>
-        <translation>Maße Bearbeiten</translation>
+        <translation>Maß bearbeiten</translation>
     </message>
     <message>
         <source>M_%1</source>
@@ -5841,7 +5903,7 @@ Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Height: </source>
-        <translation>Größe: </translation>
+        <translation>Höhe:</translation>
     </message>
     <message>
         <source>Size: </source>
@@ -5882,15 +5944,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Import from a pattern</source>
-        <translation>Importieren von einem Schnitteil</translation>
+        <translation>Importieren von einem Schnittteil</translation>
     </message>
     <message>
         <source>Pattern files (*.val)</source>
-        <translation>Schnittmuster Dateien (*.val)</translation>
+        <translation>Schnittmuster-Dateien (*.val)</translation>
     </message>
     <message>
         <source>Pattern unit:</source>
-        <translation>Schnitteil Einheit:</translation>
+        <translation>Schnittteil-Einheit:</translation>
     </message>
     <message>
         <source>Find:</source>
@@ -5914,11 +5976,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)</source>
-        <translation>Individuelle Maße (*vit);;Standard Maße (*.vst);;Alle Dateien (*.*)</translation>
+        <translation>Individuelle Maße (*vit);;Standardmaße (*.vst);;Alle Dateien (*.*)</translation>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)</source>
-        <translation>Standard Maße (*.vst);;Individuelle Maße (*.vit);;Alle Dateien (*.*)</translation>
+        <translation>Standardmaße (*.vst);;Individuelle Maße (*.vit);;Alle Dateien (*.*)</translation>
     </message>
     <message>
         <source>Measurements (*.vst *.vit);;All files (*.*)</source>
@@ -5926,19 +5988,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>Fehler beim Sperren. Diese Datei ist bereits geöffnet.</translation>
+        <translation>Fehler beim Sperren. Diese Datei ist bereits in einem anderen Fenster geöffnet.</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>Fehler beim Sperren. Diese Datei ist bereits geöffnet. Es werden Konfikte erwartet, wenn das Programm 2x ausgeführt wird.</translation>
+        <translation>Fehler beim Sperren. Diese Datei ist bereits in einem anderen Fenster geöffnet. Bei zweifachem Ausführen kann es zu Konflikten kommen.</translation>
     </message>
     <message>
         <source>File contains invalid known measurement(s).</source>
-        <translation>Datei enthält ungültiges Maß(e).</translation>
+        <translation>Maßdatei enthält ungültiges Maß</translation>
     </message>
     <message>
         <source>File has unknown format.</source>
-        <translation>Unbekanntes Dateiformat:</translation>
+        <translation>Unbekanntes Dateiformat.</translation>
     </message>
     <message>
         <source>Full name</source>
@@ -5950,7 +6012,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The name of known measurement forbidden to change.</source>
-        <translation>Der Name des bekannten Maßes kann nicht geändert werden.</translation>
+        <translation>Der Name eines bekannten Maßes kann nicht geändert werden.</translation>
     </message>
     <message>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
@@ -5982,15 +6044,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Move measurement top</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß nach ganz oben bewegen</translation>
     </message>
     <message>
         <source>Move measurement bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Maß nach ganz unten bewegen</translation>
     </message>
     <message>
         <source>Delete measurement</source>
-        <translation>Löschen Maß</translation>
+        <translation>Maß löschen</translation>
     </message>
     <message>
         <source>unknown</source>
@@ -6013,11 +6075,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>PM system:</source>
-        <translation>PM System:</translation>
+        <translation>Schnittmustersystem:</translation>
     </message>
     <message>
         <source>Create from existing ...</source>
-        <translation>Erstellen aus vorhandenem ...</translation>
+        <translation>Erstellen aus vorhandenem...</translation>
     </message>
     <message>
         <source>Create from existing file</source>
@@ -6029,11 +6091,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export standard measurements not supported.</source>
-        <translation>Exportieren von Standard-Maßen wird nicht unterstützt.</translation>
+        <translation>Exportieren von Standardmaßen wird nicht unterstützt.</translation>
     </message>
     <message>
         <source>Measurement diagram</source>
-        <translation>Maß-Diagramm</translation>
+        <translation>Maßdiagramm</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -6073,7 +6135,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Customer&apos;s family name.</source>
-        <translation>Familienname des Kunden</translation>
+        <translation>Nachname des Kunden</translation>
     </message>
     <message>
         <source>Customer&apos;s email address.</source>
@@ -6085,11 +6147,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation>Nicht Speichern</translation>
+        <translation>Nicht speichern</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei wird gesperrt</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
@@ -6097,19 +6159,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>DIe Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen)</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplattenpartition verhindert, dass die Sperrdatei geschrieben werden konnte. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Sperrdatei konnte aufgrund fehlender Berechtigungen nicht erstellt werden.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplattenpartition verhindert, dass die Sperrdatei geschrieben werden konnte.</translation>
     </message>
 </context>
 <context>
@@ -6124,7 +6186,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Config Dialog</source>
@@ -6147,7 +6209,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>GUI language</source>
-        <translation type="vanished">GUI Sprache</translation>
+        <translation type="vanished">Sprache der Benutzeroberfläche</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -6171,7 +6233,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation>GUI Sprache:</translation>
+        <translation>Sprache der Benutzeroberfläche:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
@@ -6187,11 +6249,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Default height:</source>
-        <translation>Standard Höhe:</translation>
+        <translation>Standardhöhe:</translation>
     </message>
     <message>
         <source>Default size:</source>
-        <translation>Standard Größe:</translation>
+        <translation>Standardgröße:</translation>
     </message>
 </context>
 <context>
@@ -6210,7 +6272,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Auswählen...</translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <source>Type</source>
@@ -6237,15 +6299,15 @@ Do you want to save your changes?</source>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
-        <translation>Diese Nachfrage nicht mehr anzeigen</translation>
+        <translation>Nicht erneut fragen</translation>
     </message>
     <message>
         <source>Do not &amp;ask again</source>
-        <translation>Diese Nachfrage nicht mehr &amp;anzeigen</translation>
+        <translation>Nicht erneut &amp;fragen</translation>
     </message>
     <message>
         <source>Do not &amp;show again</source>
-        <translation>Diese Nachfrage nicht mehr &amp;anzeigen</translation>
+        <translation>Nicht erneut &amp;anzeigen</translation>
     </message>
 </context>
 <context>
@@ -6264,7 +6326,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation>Versionsnummer 0.0.0 ist ungültig.</translation>
+        <translation>Versionsnummer &quot;0.0.0&quot; ist ungültig.</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported version is %1</source>
@@ -6272,11 +6334,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid version. Maximum supported version is %1</source>
-        <translation>Ungültige Version. Höchstens Version %1 unterztützt</translation>
+        <translation>Ungültige Version. Höchstens Version %1 unterstützt</translation>
     </message>
     <message>
         <source>Error no unique id.</source>
-        <translation>Fehler: mehrdeutige ID.</translation>
+        <translation>Fehler: uneindeutige ID.</translation>
     </message>
     <message>
         <source>Could not change version.</source>
@@ -6284,15 +6346,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating a backup file: %1.</source>
-        <translation>Fehler Erstellung Sicherungsdatei: %1</translation>
+        <translation>Fehler bei der Erstellung der Sicherungsdatei: %1</translation>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
-        <translation>Fehler Erstellung reservierte Kopie : %1</translation>
+        <translation>Fehler bei der Erstellung einer reservierten Kopie : %1</translation>
     </message>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="unfinished">Unerwartete Version &quot;%1&quot;.</translation>
+        <translation>Unerwartete Version &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
@@ -6345,11 +6407,11 @@ Do you want to save your changes?</source>
     <name>VApplication</name>
     <message>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Fehler beim Parsen der Datei. Das Programm wird geschlossen.</translation>
+        <translation>Fehler beim Verarbeiten der Datei. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Error bad id. Program will be terminated.</source>
-        <translation>Fehler - unbekannte Id. Fas Programm wird geschlossen.</translation>
+        <translation>Fehler - unbekannte ID. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
@@ -6361,7 +6423,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error wrong id. Program will be terminated.</source>
-        <translation>Fehler - falsche Id. Das Programm wird geschlossen.</translation>
+        <translation>Fehler - falsche ID. Das Programm wird geschlossen.</translation>
     </message>
     <message>
         <source>Something&apos;s wrong!!</source>
@@ -6369,7 +6431,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Parser error: %1. Program will be terminated.</source>
-        <translation>Parser-Fehler: %1. Programm wird beendet.</translation>
+        <translation>Auswertungsfehler: %1. Programm wird beendet.</translation>
     </message>
     <message>
         <source>Exception thrown: %1. Program will be terminated.</source>
@@ -6380,11 +6442,11 @@ Do you want to save your changes?</source>
     <name>VCommandLine</name>
     <message>
         <source>Path to custom measure file (export mode).</source>
-        <translation>Pfad zur individuellen Maß-Datei (Export-Modus).</translation>
+        <translation>Pfad zur individuellen Maßdatei (Exportmodus).</translation>
     </message>
     <message>
         <source>The measure file</source>
-        <translation>Die Maßsatz-Datei.</translation>
+        <translation>Die Maßsatzdatei.</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): </source>
@@ -6396,11 +6458,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation>Anzahl entsprechend Seitenvorlage (default = 0 , Export -Modus):</translation>
+        <translation>Anzahl entsprechend Seitenvorlage (Standard = 0, Exportmodus):</translation>
     </message>
     <message>
         <source>Template number</source>
-        <translation>Vorlage Nummer</translation>
+        <translation>Vorlagennummer</translation>
     </message>
     <message>
         <source>The page width</source>
@@ -6412,7 +6474,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
-        <translation type="vanished">Drehung in Grad (einer vordefinierten). Standard (oder 0 ) nicht drehen (Export-Modus)</translation>
+        <translation type="vanished">Drehung in Grad. Standard (oder 0) bedeutet, dass nichts gedreht wird (Exportmodus)</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -6420,11 +6482,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
-        <translation>Automatisches Zuschneider der ungenutzten Länge ( Export-Modus ) .</translation>
+        <translation>Automatisches Zuschneiden der ungenutzten Länge (Exportmodus).</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode).</source>
-        <translation type="vanished">Seiten zusammenfassen wenn möglich (Export-Modus).</translation>
+        <translation type="vanished">Seiten, wenn möglich, zusammenfassen (Exportmodus).</translation>
     </message>
     <message>
         <source>Save length of the sheet if set. (export mode).</source>
@@ -6436,7 +6498,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The unit</source>
-        <translation>Die Einhzeit</translation>
+        <translation>Die Einheit</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode).</source>
@@ -6444,7 +6506,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift length</source>
-        <translation type="vanished">Verschieben Länge</translation>
+        <translation type="vanished">Verschiebungslänge</translation>
     </message>
     <message>
         <source>Gap width x2, measured in layout units. (export mode).</source>
@@ -6464,15 +6526,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seitenformat und explizite Größe/Einheiten der Seite können nicht zusammen verwendet werden.</translation>
     </message>
     <message>
         <source>Page height, width, units must be used all 3 at once.</source>
-        <translation type="unfinished"></translation>
+        <translation>Höhe, Breite und Einheiten der Seite müssen alle 3 auf einmal benutzt werden.</translation>
     </message>
     <message>
         <source>Invalid rotation value. That must be one of predefined values.</source>
-        <translation>Ungültige Rotationswert. Dies muss ein vordefinierter Werte sein.</translation>
+        <translation>Ungültiger Rotationswert. Dies muss ein vordefinierter Wert sein.</translation>
     </message>
     <message>
         <source>Unknown page templated selected.</source>
@@ -6488,19 +6550,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export options can be used with single input file only.</source>
-        <translation>Export-Optionen können nur mit einer Eingabedatei verwendet werden.</translation>
+        <translation>Exportoptionen können nur mit einer Eingabedatei verwendet werden.</translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="vanished">Das Programm in einem Testmodus laufen lassen. In diesem Modus lädt das Programm eine einzelne Schnittmuster-Datei und schließt still, ohne das Hauptfenster zu zeigen. Der Schlüssel hat Vorrang vor dem Schlüssel &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Test option can be used with single input file only.</source>
-        <translation>Test- Option kann nur mit einer Eingabedatei verwendet werden.</translation>
+        <translation>Testoption kann nur mit einer Eingabedatei verwendet werden.</translation>
     </message>
     <message>
         <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation>Der Basisdateiname der exportierten Layout-Dateie . Verwenden Sie diesen um den Export-Konsolen-Modus zu aktivieren.</translation>
+        <translation>Der Basisdateiname der exportierten Layout-Dateien. Verwenden Sie diesen, um den Export-Konsolen-Modus zu aktivieren.</translation>
     </message>
     <message>
         <source>The base filename of layout files</source>
-        <translation>Der Basisdateinamen der Layoutdateien</translation>
+        <translation>Der Basisdateiname der Layoutdateien</translation>
     </message>
     <message>
         <source>The path to output destination folder.</source>
@@ -6512,7 +6578,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation>Setze Größenwert einer Schnitteil-Datei, die mit Standard-Maßen (Export-Modus) geöffnet wurde. Gültige Werte: %1 cm.</translation>
+        <translation>Größenwert einer Schnittteildatei setzen, die mit Standardmaßen (Exportmodus) geöffnet wurde. Gültige Werte: %1 cm.</translation>
     </message>
     <message>
         <source>The size value</source>
@@ -6520,7 +6586,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Größenwert einer Schnittteildatei setzen, die mit Standardmaßen (Exportmodus) geöffnet wurde. Gültige Werte: %1 cm.</translation>
     </message>
     <message>
         <source>The height value</source>
@@ -6528,11 +6594,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Seitenbreite in der derzeitigen Einheit wie 12.0 (kann nicht mit &quot;%1&quot; benutzt werden, Exportmodus).</translation>
     </message>
     <message>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Seitenhöhe in der derzeitigen Einheit wie 12.0 (kann nicht mit &quot;%1&quot; benutzt werden, Exportmodus).</translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
+        <translation type="vanished">Einheiten für die Seitenhöhe/-breite (kann nicht mit &quot;%1&quot;, Exportmodus, benutzt werden):</translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
@@ -6548,15 +6618,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern file.</source>
-        <translation>Schnittmuster-File.</translation>
+        <translation>Schnittmusterdatei.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Set all margins to 0.</source>
         <translation type="vanished">Ignorieren der Seitenränder zum Druck (Export-Modus). Setzen Sie alle Seitenränder auf 0.</translation>
     </message>
     <message>
+        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Linker Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
+    </message>
+    <message>
+        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Rechter Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
+    </message>
+    <message>
+        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Oberer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
+    </message>
+    <message>
+        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Unterer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann.</translation>
+    </message>
+    <message>
+        <source>Shift length must be used together with shift units.</source>
+        <translation type="vanished">Die Verschiebungslänge muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
+    </message>
+    <message>
         <source>Gap width must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Spaltenbreite muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>Left margin must be used together with page units.</source>
@@ -6576,59 +6666,63 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The path to output destination folder. By default the directory at which the application was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Pfad zum Zielordner. Standardmäßig das Verzeichnis, in dem das Programm gestartet wurde.</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einheiten für die Seitenhöhe/-breite (kann nicht mit &quot;%1&quot;, Exportmodus, benutzt werden). Gültige Werte: %2.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorieren der Seitenränder zum Druck (Export-Modus). Deaktiviert Werte-Schlüssel: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Setzen Sie alle Seitenränder auf 0.</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Linker Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann. Der Wert wird ignoriert, falls &quot;%1&quot; verwendet wird.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechter Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann. Der Wert wird ignoriert, falls &quot;%1&quot; verwendet wird.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann. Der Wert wird ignoriert, falls &quot;%1&quot; verwendet wird.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterer Seitenrand in der derzeitigen Größe wie 3.0 (Exportmodus). Wenn kein Wert eingegeben wird, wird die Einstellung des Standarddruckers verwendet. Oder 0, falls kein Drucker gefunden werden kann. Der Wert wird ignoriert, falls &quot;%1&quot; verwendet wird.</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drehung in Grad (eins der vordefinierten, Exportmodus). Standardwert ist 180. 0 bedeutet keine Drehung. Gültige erte: %1. Jeder Wert zeigt, wie oft Details gedreht werden sollen. Zum Beispiel bedeutet 180, dass das Detail zweimal im 180 Grad gedreht word (360/180=2).</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seiten verbinden, falls möglich (Exportmodus). Maximaler Wert wird durch QImage limitiert, das nur Bilder mit bis zu 32768 x 32768 Pixeln unterstützt.</translation>
     </message>
     <message>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern der Blattlänge, falls gesetzt (Export-Modus). Diese Einstellung sagt dem Programm, möglichst viel der Breite eines Blattes zu benutzen. Die Qualität der Anordnung kann sich verschlechtern, wenn diese Einstellung benutzt wurde.</translation>
+    </message>
+    <message>
+        <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="vanished">Verschieben der gemessenen Layoutlängen in Layouteinheiten (Exportmodus). Die Option zeigt, wie viele Punkte entlang der Kante verwendet werden, um ein Layout zu erstellen.</translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Layout-Spaltbreite x2, gemessen in Layout-Einheiten. (Export-Modus). Legt den Abstand zwischen Details und einem Detail und einem Blatt fest.</translation>
     </message>
     <message>
         <source>Sets layout groupping cases (export mode): %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Legt Layoutgruppierungsfälle fest (Export-Modus): %1.</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Programm in einem Testmodus laufen lassen. In diesem Modus lädt das Programm eine einzelne Schnittmuster-Datei und schließt still, ohne das Hauptfenster zu zeigen. Der Schlüssel hat Vorrang vor dem Schlüssel &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschieben der gemessenen Layoutlängen in Layouteinheiten (Exportmodus). Die Option zeigt, wie viele Punkte entlang der Kante verwendet werden, um ein Layout zu erstellen.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
@@ -6666,11 +6760,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation>Leerer Parameter übermittelt</translation>
+        <translation>Leerer Parameter erhalten</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation>Kann Parameter nicht toDouble konvertieren</translation>
+        <translation>Kann Parameter toDouble nicht konvertieren</translation>
     </message>
     <message>
         <source>Can&apos;t open file %1:
@@ -6680,12 +6774,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation>Konnte Schema-Datei %1 nicht öffnen:
+        <translation>Konnte Schemadatei %1 nicht öffnen:
 %2.</translation>
     </message>
     <message>
         <source>Could not load schema file.</source>
-        <translation type="vanished">Konnte Schema-Datei nicht öffnen.</translation>
+        <translation type="vanished">Konnte Schemadatei nicht öffnen.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
@@ -6717,7 +6811,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Schemadatei %1 nicht öffnen.</translation>
     </message>
 </context>
 <context>
@@ -6846,7 +6940,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of contact</source>
-        <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Schmittpukt Kreis und Gerade&quot;</translation>
+        <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Schnittpunkt Kreis und Gerade&quot;</translation>
     </message>
     <message>
         <source>Error creating or updating modeling point</source>
@@ -6962,6 +7056,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of intersection curves</source>
+        <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Kurvenschnittpunkt&quot;</translation>
+    </message>
+    <message>
+        <source>Error creating or updating simple interactive spline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6973,14 +7071,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fehler beim wiederherstellen aus Backupdatei %1.</translation>
+        <translation>Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
     </message>
 </context>
 <context>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation>Nicht genügend Punkte um den Spline zu erstellen.</translation>
+        <translation>Nicht genügend Punkte vorhanden, um den Spline zu erstellen.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
@@ -7150,15 +7248,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point 1 label</source>
-        <translation>Punkt 1 Bezeichnung</translation>
+        <translation>Bezeichnung des Punktes 1</translation>
     </message>
     <message>
         <source>Point 2 label</source>
-        <translation>Punt 2 Bezeichnung</translation>
+        <translation>Bezeichnung des Punktes 2</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two arcs</source>
-        <translation>Punkt aus Schnittpunkt zwei Bögen</translation>
+        <translation>Punkt aus Schnittpunkt zweier Bögen</translation>
     </message>
     <message>
         <source>Take</source>
@@ -7166,7 +7264,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
-        <translation>Punkt aus zwei Kreisen</translation>
+        <translation>Punkt aus Schnittpunkt zweier Kreise</translation>
     </message>
     <message>
         <source>First circle radius</source>
@@ -7206,19 +7304,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt aus Schnittpunkt zweier Kurven</translation>
     </message>
     <message>
         <source>Vertical correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Korrektur</translation>
     </message>
     <message>
         <source>Horizontal correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontale Korrektur</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Bezeichnung</translation>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <source>C1: angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C1: length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C2: length</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7241,12 +7355,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Barnfield and Richard</source>
         <comment>System name</comment>
-        <translation>Barnfield and Richard</translation>
+        <translation>Barnfield und Richard</translation>
     </message>
     <message>
         <source>Jo Barnfield and Andrew Richards</source>
         <comment>Author name</comment>
-        <translation>Jo Barnfield and Andrew Richards</translation>
+        <translation>Jo Barnfield und Andrew Richards</translation>
     </message>
     <message>
         <source>Pattern Making Primer</source>
@@ -7296,7 +7410,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Patternmaking in Practic</source>
         <comment>Book name</comment>
-        <translation>Patternmaking in Practic</translation>
+        <translation>Patternmaking in Practice</translation>
     </message>
     <message>
         <source>Kim &amp; Uh</source>
@@ -7346,7 +7460,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Thornton&apos;s International System</source>
         <comment>System name</comment>
-        <translation>Thornton&apos;s International System</translation>
+        <translation>Thorntons internationales System</translation>
     </message>
     <message>
         <source>ed. R. L. Shep</source>
@@ -7366,7 +7480,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
         <comment>Author name</comment>
-        <translation>Marion S. Hillhouse and Evelyn A. Mansfield</translation>
+        <translation>Marion S. Hillhouse und Evelyn A. Mansfield</translation>
     </message>
     <message>
         <source>Dress Design: Draping and Flat Pattern Making</source>
@@ -7391,12 +7505,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Minister &amp; Son</source>
         <comment>System name</comment>
-        <translation>Minister &amp; Son</translation>
+        <translation>Minister &amp; Sohn</translation>
     </message>
     <message>
         <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
         <comment>Author name</comment>
-        <translation>Edward Minister &amp; Son, ed. R. L. Shep</translation>
+        <translation>Edward Minister &amp; Sohn, ed. R. L. Shep</translation>
     </message>
     <message>
         <source>The Complete Guide to Practical Cutting (1853)</source>
@@ -7426,7 +7540,7 @@ Do you want to save your changes?</source>
     <message>
         <source>May Loh and Diehl Lewis</source>
         <comment>Author name</comment>
-        <translation>May Loh and Diehl Lewis</translation>
+        <translation>May Loh und Diehl Lewis</translation>
     </message>
     <message>
         <source>Patternless Fashion Design</source>
@@ -7581,7 +7695,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
         <comment>Book name</comment>
-        <translation>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</translation>
+        <translation>Pattern Drafting and Grading: Women&apos;s and Misses&apos; Garment Design</translation>
     </message>
     <message>
         <source>Moore</source>
@@ -7841,7 +7955,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Aldrich/Men</source>
         <comment>System name</comment>
-        <translation>Aldrich/Men</translation>
+        <translation>Aldrich/Herren</translation>
     </message>
     <message>
         <source>Winifred Aldrich</source>
@@ -7856,7 +7970,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Aldrich/Women</source>
         <comment>System name</comment>
-        <translation>Aldrich/Women</translation>
+        <translation>Aldrich/Damen</translation>
     </message>
     <message>
         <source>Metric Pattern Cutting for Women&apos;s Wear</source>
@@ -7921,12 +8035,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
         <comment>Book name</comment>
-        <translation>Schnittmuster-Design: Die Grundlagen Zuschneiden und Anpassen</translation>
+        <translation>Schnittmuster-Design: Die Grundlagen des Zuschneidens und Anpassens</translation>
     </message>
     <message>
         <source>Knowles/Men</source>
         <comment>System name</comment>
-        <translation>Knowles/Men</translation>
+        <translation>Knowles/Herren</translation>
     </message>
     <message>
         <source>Lori A. Knowles</source>
@@ -7941,7 +8055,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Friendship/Men</source>
         <comment>System name</comment>
-        <translation>Friendship/Men</translation>
+        <translation>Friendship/Herren</translation>
     </message>
     <message>
         <source>Pattern Cutting for Men&apos;s Costume</source>
@@ -8001,7 +8115,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
         <comment>Author name</comment>
-        <translation>Josephine F. Eddy and Elizabeth C. B. Wiley</translation>
+        <translation>Josephine F. Eddy und Elizabeth C. B. Wiley</translation>
     </message>
     <message>
         <source>Pattern and Dress Design</source>
@@ -8011,7 +8125,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Knowles/Women</source>
         <comment>System name</comment>
-        <translation>Knowles/Women</translation>
+        <translation>Knowles/Damen</translation>
     </message>
     <message>
         <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
@@ -8031,7 +8145,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Valentina team</source>
         <comment>Author name</comment>
-        <translation>Valentina Team</translation>
+        <translation>Valentina-Team</translation>
     </message>
     <message>
         <source>Valentina&apos;s internal standard</source>
@@ -8056,12 +8170,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Spl_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>SplPath</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
@@ -8081,22 +8195,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle1Spl_</translation>
     </message>
     <message>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle2Spl_</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle1SplPath</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle2SplPath</translation>
     </message>
     <message>
         <source>sin</source>
@@ -8226,7 +8340,7 @@ Do you want to save your changes?</source>
     <message>
         <source>fmod</source>
         <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
-        <translation type="unfinished"></translation>
+        <translation>fmod</translation>
     </message>
     <message>
         <source>cm</source>
@@ -8252,7 +8366,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fehler beim wiederherstellen aus Backupdatei %1.</translation>
+        <translation>Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
     </message>
 </context>
 <context>
@@ -8263,7 +8377,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Fehler beim wiederherstellen aus Backupdatei %1.</translation>
+        <translation>Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
     </message>
 </context>
 <context>
@@ -8291,11 +8405,11 @@ Do you want to save your changes?</source>
     <name>VisToolSplinePath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
-        <translation>&lt;b&gt;Pfad&lt;/b&gt;: drei oder mehr Punket auswählen</translation>
+        <translation>&lt;b&gt;Gekrümmter Pfad&lt;/b&gt;: drei oder mehr Punkte auswählen</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Pfad&lt;/b&gt;: drei oder mehr Punket auswählen, &lt;b&gt;Enter&lt;/b&gt; - fertigstellen</translation>
+        <translation>&lt;b&gt;Gekrümmter Pfad&lt;/b&gt;: drei oder mehr Punkte auswählen, &lt;b&gt;Enter&lt;/b&gt; zum Fertigstellen drücken</translation>
     </message>
 </context>
 <context>
