@@ -29,7 +29,7 @@
 #ifndef VARCLENGTH_H
 #define VARCLENGTH_H
 
-#include "vcurvelength.h"
+#include "../vpatterndb/variables/vcurvelength.h"
 
 class VAbstractCurve;
 
