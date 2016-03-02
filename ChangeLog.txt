@@ -6,6 +6,7 @@
 - Fixed bug disabling tool True darts.
 - Fixed wrong calculation tool True darts.
 - [#405] Fixed crash after deleting first pattern piece in the list.
+- [#421] Fixed warning: unable to set geometry.
 
 # Version 0.4.2 February 17, 2016
 - Measurement Diagram is not shown on Mac OS X.
