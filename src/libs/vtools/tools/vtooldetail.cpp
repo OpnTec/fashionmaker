@@ -330,7 +330,7 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrSupplement, QString().setNum(static_cast<quint8>(det.getSeamAllowance())));
         doc->SetAttribute(domElement, AttrClosed, QString().setNum(static_cast<quint8>(det.getClosed())));
         doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
-        doc->RemoveAllChild(domElement);
+        doc->RemoveAllChildren(domElement);
         for (int i = 0; i < det.CountNode(); ++i)
         {
            AddNode(doc, domElement, det.at(i));

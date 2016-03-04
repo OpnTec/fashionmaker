@@ -28,6 +28,7 @@
 
 #include "vabstractspline.h"
 #include "../vwidgets/vcontrolpointspline.h"
+#include "../qmuparser/qmutokenparser.h"
 
 #include <QKeyEvent>
 
@@ -240,6 +241,66 @@ void VAbstractSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     VDrawTool::SaveOptions(tag, obj);
 
     doc->SetAttribute(tag, AttrColor, lineColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSpline VAbstractSpline::CorrectedSpline(const VSpline &spline, const SplinePointPosition &position,
+                                         const QPointF &pos) const
+{
+    VSpline spl;
+    if (position == SplinePointPosition::FirstPoint)
+    {
+        QLineF line(spline.GetP1().toQPointF(), pos);
+
+        qreal newAngle1 = line.angle();
+        QString newAngle1F = QString().setNum(newAngle1);
+
+        qreal newLength1 = line.length();
+        QString newLength1F = QString().setNum(qApp->fromPixel(newLength1));
+
+        if (not qmu::QmuTokenParser::IsSingle(spline.GetStartAngleFormula()))
+        {
+            newAngle1 = spline.GetStartAngle();
+            newAngle1F = spline.GetStartAngleFormula();
+        }
+
+        if (not qmu::QmuTokenParser::IsSingle(spline.GetC1LengthFormula()))
+        {
+            newLength1 = spline.GetC1Length();
+            newLength1F = spline.GetC1LengthFormula();
+        }
+
+        spl = VSpline(spline.GetP1(), spline.GetP4(), newAngle1, newAngle1F, spline.GetEndAngle(),
+                      spline.GetEndAngleFormula(), newLength1, newLength1F, spline.GetC2Length(),
+                      spline.GetC2LengthFormula());
+    }
+    else
+    {
+        QLineF line(spline.GetP4().toQPointF(), pos);
+
+        qreal newAngle2 = line.angle();
+        QString newAngle2F = QString().setNum(newAngle2);
+
+        qreal newLength2 = line.length();
+        QString newLength2F = QString().setNum(qApp->fromPixel(newLength2));
+
+        if (not qmu::QmuTokenParser::IsSingle(spline.GetEndAngleFormula()))
+        {
+            newAngle2 = spline.GetEndAngle();
+            newAngle2F = spline.GetEndAngleFormula();
+        }
+
+        if (not qmu::QmuTokenParser::IsSingle(spline.GetC2LengthFormula()))
+        {
+            newLength2 = spline.GetC2Length();
+            newLength2F = spline.GetC2LengthFormula();
+        }
+        spl = VSpline(spline.GetP1(), spline.GetP4(), spline.GetStartAngle(), spline.GetStartAngleFormula(),
+                      newAngle2, newAngle2F, spline.GetC1Length(), spline.GetC1LengthFormula(),
+                      newLength2, newLength2F);
+    }
+
+    return spl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -42,15 +42,12 @@ class VSplinePathData : public QSharedData
 public:
 
     VSplinePathData()
-        : path(QVector<VSplinePoint>()), kCurve(1)
-    {}
-
-    explicit VSplinePathData(qreal kCurve)
-        : path(QVector<VSplinePoint>()), kCurve(kCurve)
+        : path(QVector<VSplinePoint>())
     {}
 
     VSplinePathData(const VSplinePathData &splPath)
-        : QSharedData(splPath), path(splPath.path), kCurve(splPath.kCurve)
+        : QSharedData(splPath),
+          path(splPath.path)
     {}
 
     virtual ~VSplinePathData();
@@ -59,10 +56,6 @@ public:
      * @brief path list spline point.
      */
     QVector<VSplinePoint> path;
-    /**
-     * @brief kCurve coefficient of curvature spline.
-     */
-    qreal         kCurve;
 
 private:
     VSplinePathData &operator=(const VSplinePathData &) Q_DECL_EQ_DELETE;

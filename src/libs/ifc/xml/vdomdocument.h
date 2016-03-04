@@ -80,7 +80,6 @@ public:
     virtual ~VDomDocument();
     QDomElement    elementById(const QString& id);
     QDomElement    elementById(quint32 id);
-    void           removeAllChilds(QDomElement &element);
 
     template <typename T>
     void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
@@ -106,7 +105,7 @@ public:
     QString        Major() const;
     QString        Minor() const;
     QString        Patch() const;
-    static void    RemoveAllChild(QDomElement &domElement);
+    static void    RemoveAllChildren(QDomElement &domElement);
 
     QDomNode       ParentNodeById(const quint32 &nodeId);
     QDomElement    CloneNodeById(const quint32 &nodeId);

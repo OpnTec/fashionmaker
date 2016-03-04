@@ -59,27 +59,27 @@ void TST_VDetail::ClearLoop()
     data->UpdateGObject(203, new VPointF(642.96276692900597, 581.21895343695326, "С1", 88.99993700787401,
                                          50.000125984251973));
 
-    VSplinePath *path = new VSplinePath();
+    QVector<VFSplinePoint> points;
 
     {
         const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(203);
-        VSplinePoint p(*point.data(), 0.79455646129695412, 449.62747641208136, 1.6867283804609809, 269.62747641208136);
-        path->append(p);
+        VFSplinePoint p(*point.data(), 0.79455646129695412, 449.62747641208136, 1.6867283804609809, 269.62747641208136);
+        points.append(p);
     }
 
     {
         const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(57);
-        VSplinePoint p(*point.data(), 0.4456850846354396, 120.24000000000034, 1.0255399999999999, 300.24000000000035);
-        path->append(p);
+        VFSplinePoint p(*point.data(), 0.4456850846354396, 120.24000000000034, 1.0255399999999999, 300.24000000000035);
+        points.append(p);
     }
 
     {
         const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(56);
-        VSplinePoint p(*point.data(), 1.0085299999999999, 184.58891, 1, 4.5889100000000003);
-        path->append(p);
+        VFSplinePoint p(*point.data(), 1.0085299999999999, 184.58891, 1, 4.5889100000000003);
+        points.append(p);
     }
 
-    data->UpdateGObject(308, path);
+    data->UpdateGObject(308, new VSplinePath(points));
 
     data->UpdateGObject(309, new VPointF(799.45989815267649, 850.6707401574804, "Г8", -30.431206299212597,
                                          29.487155905511813));

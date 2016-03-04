@@ -234,14 +234,14 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
 
         if (size == 1)
         {
-            path[size-1].SetAngle2(spline.GetStartAngle());
+            path[size-1].SetAngle2(spline.GetStartAngle(), spline.GetStartAngleFormula());
             if (ctrlPoint != pSpl)
             {
-                path[size-1].SetKAsm2(spline.GetKasm1());
+                path[size-1].SetLength2(spline.GetC1Length(), spline.GetC1LengthFormula());
             }
             else
             {
-                path[size-1].SetKAsm2(0);
+                path[size-1].SetLength2(0, "0");
             }
             emit PathChanged(path);
         }
@@ -250,16 +250,16 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
             const VSpline spl = path.GetSpline(size - 1);
             VSpline preSpl(spl.GetP1(), spl.GetP2(), ctrlLine.p2(), VPointF(pSpl));
 
-            path[size-1].SetAngle2(spline.GetStartAngle());
+            path[size-1].SetAngle2(spline.GetStartAngle(), spline.GetStartAngleFormula());
             if (ctrlPoint != pSpl)
             {
-                path[size-1].SetKAsm1(preSpl.GetKasm2());
-                path[size-1].SetKAsm2(spline.GetKasm1());
+                path[size-1].SetLength1(preSpl.GetC2Length(), preSpl.GetC2LengthFormula());
+                path[size-1].SetLength2(spline.GetC1Length(), spline.GetC1LengthFormula());
             }
             else
             {
-                path[size-1].SetKAsm1(0);
-                path[size-1].SetKAsm2(0);
+                path[size-1].SetLength1(0, "0");
+                path[size-1].SetLength2(0, "0");
             }
             emit PathChanged(path);
         }
@@ -270,15 +270,15 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, int size)
 
         VSpline spline(VPointF(pSpl), ctrlPoint, Visualization::scenePos, VPointF(Visualization::scenePos));
 
-        path[size-1].SetAngle2(spline.GetStartAngle());
+        path[size-1].SetAngle2(spline.GetStartAngle(), spline.GetStartAngleFormula());
 
         if (ctrlPoint != pSpl)
         {
-            path[size-1].SetKAsm2(spline.GetKasm1());
+            path[size-1].SetLength2(spline.GetC1Length(), spline.GetC1LengthFormula());
         }
         else
         {
-            path[size-1].SetKAsm2(0);
+            path[size-1].SetLength2(0, "0");
         }
         emit PathChanged(path);
 

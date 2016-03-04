@@ -1361,13 +1361,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSplinePath(VProperty *property)
         case 0: // AttrName
             Q_UNREACHABLE();//The attribute is read only
             break;
-        case 25: // AttrKCurve
-        {
-            VSplinePath splPath = i->getSplinePath();
-            splPath.SetKCurve(value.toDouble());
-            i->setSplinePath(splPath);
-            break;
-        }
         case 27: // AttrTypeColor
             i->SetLineColor(value.toString());
             break;
@@ -1777,15 +1770,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
     formView->setTitle(tr("Tool for path curve"));
 
     AddPropertyObjectName(i, tr("Name"), true);
-
-    VDoubleProperty* itemFactor = new VDoubleProperty(tr("Curve factor"));
-    VSplinePath splPath = i->getSplinePath();
-    itemFactor->setSetting("Min", 0.1);
-    itemFactor->setSetting("Max", 1000);
-    itemFactor->setSetting("Step", 0.01);
-    itemFactor->setSetting("Precision", 3);
-    itemFactor->setValue(splPath.GetKCurve());
-    AddProperty(itemFactor, AttrKCurve);
     AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
 
@@ -2212,7 +2196,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
     auto i = qgraphicsitem_cast<VToolSplinePath *>(currentItem);
 
     idToProperty[AttrName]->setValue(i->name());
-    idToProperty[AttrKCurve]->setValue(i->getSplinePath().GetKCurve());
     idToProperty[AttrColor]->setValue(VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
 }
 

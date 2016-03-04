@@ -79,11 +79,21 @@ void VisToolCutSplinePath::RefreshGeometry()
                 {
                     if (i == p1)
                     {
-                        spPath1.append(VSplinePoint(splP1.P(), splP1.KAsm1(), spl1.GetStartAngle()+180, spl1.GetKasm1(),
-                                                      spl1.GetStartAngle()));
-                        VSplinePoint cutPoint;
-                        cutPoint = VSplinePoint(p, spl1.GetKasm2(), spl1.GetEndAngle(), spl2.GetKasm1(),
-                                                spl1.GetEndAngle()+180);
+                        const qreal angle1 = spl1.GetStartAngle()+180;
+                        const QString angle1F = QString().number(angle1);
+
+                        spPath1.append(VSplinePoint(splP1.P(), angle1, angle1F, spl1.GetStartAngle(),
+                                                    spl1.GetStartAngleFormula(), splP1.Length1(),
+                                                    splP1.Length1Formula(), spl1.GetC1Length(),
+                                                    spl1.GetC1LengthFormula()));
+
+                        const qreal angle2 = spl1.GetEndAngle()+180;
+                        const QString angle2F = QString().number(angle2);
+
+                        const auto cutPoint = VSplinePoint(p, spl1.GetEndAngle(), spl1.GetEndAngleFormula(), angle2,
+                                                           angle2F, spl1.GetC2Length(), spl1.GetC2LengthFormula(),
+                                                           spl2.GetC1Length(), spl2.GetC1LengthFormula());
+
                         spPath1.append(cutPoint);
                         continue;
                     }
@@ -93,19 +103,28 @@ void VisToolCutSplinePath::RefreshGeometry()
                 {
                     if (i == p2)
                     {
-                        const VSplinePoint cutPoint = VSplinePoint(p, spl1.GetKasm2(), spl2.GetStartAngle()+180,
-                                                                   spl2.GetKasm1(), spl2.GetStartAngle());
+                        const qreal angle1 = spl2.GetStartAngle()+180;
+                        const QString angle1F = QString().number(angle1);
+
+                        const auto cutPoint = VSplinePoint(p, angle1, angle1F, spl2.GetStartAngle(),
+                                                           spl2.GetStartAngleFormula(), spl1.GetC2Length(),
+                                                           spl1.GetC2LengthFormula(), spl2.GetC1Length(),
+                                                           spl2.GetC1LengthFormula());
+
                         spPath2.append(cutPoint);
-                        spPath2.append(VSplinePoint(splP2.P(), spl2.GetKasm2(), spl2.GetEndAngle(), splP2.KAsm2(),
-                                                      spl2.GetEndAngle()+180));
+
+                        const qreal angle2 = spl2.GetEndAngle()+180;
+                        const QString angle2F = QString().number(angle2);
+
+                        spPath2.append(VSplinePoint(splP2.P(), spl2.GetEndAngle(), spl2.GetEndAngleFormula(), angle2,
+                                                    angle2F, spl2.GetC2Length(), spl2.GetC2LengthFormula(),
+                                                    splP2.Length2(), splP2.Length2Formula()));
+
                         continue;
                     }
                     spPath2.append(splPath->at(i));
                 }
             }
-
-            spPath1.SetKCurve(splPath->GetKCurve());
-            spPath2.SetKCurve(splPath->GetKCurve());
 
             DrawPoint(point, cutPoint, mainColor);
 

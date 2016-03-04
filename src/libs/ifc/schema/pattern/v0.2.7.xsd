@@ -180,6 +180,10 @@
                                                                                                    <xs:attribute name="kAsm2" type="xs:string"></xs:attribute>
                                                                                                    <xs:attribute name="pSpline" type="xs:unsignedInt"></xs:attribute>
                                                                                                    <xs:attribute name="angle" type="xs:string"></xs:attribute>
+                                                                                                   <xs:attribute name="angle1" type="xs:string"></xs:attribute>
+                                                                                                   <xs:attribute name="angle2" type="xs:string"></xs:attribute>
+                                                                                                   <xs:attribute name="length1" type="xs:string"></xs:attribute>
+                                                                                                   <xs:attribute name="length2" type="xs:string"></xs:attribute>
                                                                                                    <xs:attribute name="kAsm1" type="xs:string"></xs:attribute>
                                                                                              </xs:complexType>
                                                                                        </xs:element>

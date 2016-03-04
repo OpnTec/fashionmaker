@@ -1939,7 +1939,7 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr);
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -1953,11 +1953,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
         const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
 
-        auto path = new VSplinePath(kCurve);
-        if (duplicate > 0)
-        {
-            path->SetDuplicate(duplicate);
-        }
+        QVector<VFSplinePoint> points;
 
         const QDomNodeList nodeList = domElement.childNodes();
         const qint32 num = nodeList.size();
@@ -1977,8 +1973,8 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
                     QLineF line(0, 0, 100, 0);
                     line.setAngle(angle+180);
 
-                    VSplinePoint splPoint(p, kAsm1, line.angle(), kAsm2, angle);
-                    path->append(splPoint);
+                    VFSplinePoint splPoint(p, kAsm1, line.angle(), kAsm2, angle);
+                    points.append(splPoint);
                     if (parse == Document::FullParse)
                     {
                         IncrementReferens(p.getIdTool());
@@ -1987,12 +1983,107 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
             }
         }
 
+        auto path = new VSplinePath(points, kCurve);
+        if (duplicate > 0)
+        {
+            path->SetDuplicate(duplicate);
+        }
+
         VToolSplinePath::Create(id, path, color, scene, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {
         VExceptionObjectError excep(tr("Error creating or updating curve path"), domElement);
         excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        quint32 id = 0;
+
+        ToolsCommonAttributes(domElement, id);
+        const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
+
+        auto path = new VSplinePath();
+        if (duplicate > 0)
+        {
+            path->SetDuplicate(duplicate);
+        }
+
+        QVector<quint32> points;
+        QVector<QString> angle1, a1;
+        QVector<QString> angle2, a2;
+        QVector<QString> length1, l1;
+        QVector<QString> length2, l2;
+
+        const QDomNodeList nodeList = domElement.childNodes();
+        const qint32 num = nodeList.size();
+        for (qint32 i = 0; i < num; ++i)
+        {
+            const QDomElement element = nodeList.at(i).toElement();
+            if (not element.isNull() && element.tagName() == AttrPathPoint)
+            {
+                angle1.append(GetParametrString(element, AttrAngle1, "0"));
+                angle2.append(GetParametrString(element, AttrAngle2, "0"));
+                length1.append(GetParametrString(element, AttrLength1, "0"));
+                length2.append(GetParametrString(element, AttrLength2, "0"));
+                const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
+                points.append(pSpline);
+
+                if (parse == Document::FullParse)
+                {
+                    IncrementReferens(data->GeometricObject<VPointF>(pSpline)->getIdTool());
+                }
+            }
+        }
+
+        //need for saving fixed formula;
+        a1 = angle1;
+        a2 = angle2;
+        l1 = length1;
+        l2 = length2;
+
+        VToolSplinePath::Create(id, points, a1, a2, l1, l2, color, scene, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        int count = 0;
+        for (qint32 i = 0; i < num; ++i)
+        {
+            QDomElement element = nodeList.at(i).toElement();
+            if (not element.isNull() && element.tagName() == AttrPathPoint)
+            {
+                if (a1.at(count) != angle1.at(count) || a2.at(count) != angle2.at(count) ||
+                    l1.at(count) != length1.at(count) || l2.at(count) != length2.at(count))
+                {
+                    SetAttribute(element, AttrAngle1, a1.at(count));
+                    SetAttribute(element, AttrAngle2, a2.at(count));
+                    SetAttribute(element, AttrLength1, l1.at(count));
+                    SetAttribute(element, AttrLength2, l2.at(count));
+                    modified = true;
+                    haveLiteChange();
+                }
+                ++count;
+            }
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating curve path"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating interactive spline path"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
         throw excep;
     }
 }
@@ -2281,30 +2372,35 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList splines = QStringList() << VToolSpline::OldToolType   /*0*/
-                                        << VToolSpline::ToolType      /*1*/
-                                        << VToolSplinePath::ToolType  /*2*/
-                                        << VNodeSpline::ToolType      /*3*/
-                                        << VNodeSplinePath::ToolType; /*4*/
+    QStringList splines = QStringList() << VToolSpline::OldToolType     /*0*/
+                                        << VToolSpline::ToolType        /*1*/
+                                        << VToolSplinePath::OldToolType /*2*/
+                                        << VToolSplinePath::ToolType    /*3*/
+                                        << VNodeSpline::ToolType        /*4*/
+                                        << VNodeSplinePath::ToolType;   /*5*/
     switch (splines.indexOf(type))
     {
         case 0: //VToolSpline::OldToolType
-            qCDebug(vXML, "VToolSpline.");
+            qCDebug(vXML, "VOldToolSpline.");
             ParseOldToolSpline(scene, domElement, parse);// TODO. Delete if minimal supported version is 0.2.7
             break;
         case 1: //VToolSpline::ToolType
             qCDebug(vXML, "VToolSpline.");
             ParseToolSpline(scene, domElement, parse);
             break;
-        case 2: //VToolSplinePath::ToolType
+        case 2: //VToolSplinePath::OldToolType
+            qCDebug(vXML, "VOldToolSplinePath.");
+            ParseOldToolSplinePath(scene, domElement, parse);// TODO. Delete if minimal supported version is 0.2.7
+            break;
+        case 3: //VToolSplinePath::ToolType
             qCDebug(vXML, "VToolSplinePath.");
             ParseToolSplinePath(scene, domElement, parse);
             break;
-        case 3: //VNodeSpline::ToolType
+        case 4: //VNodeSpline::ToolType
             qCDebug(vXML, "VNodeSpline.");
             ParseNodeSpline(domElement, parse);
             break;
-        case 4: //VNodeSplinePath::ToolType
+        case 5: //VNodeSplinePath::ToolType
             qCDebug(vXML, "VNodeSplinePath.");
             ParseNodeSplinePath(domElement, parse);
             break;
