@@ -147,28 +147,6 @@ QDomElement VDomDocument::elementById(quint32 id)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Removes all children of a given element tag. RENAME: removeAllChildren
- * @param element tag
- */
-void VDomDocument::removeAllChilds(QDomElement &element)
-{
-    QDomNode domNode = element.firstChild();
-    while (domNode.isNull() == false)
-    {
-        if (domNode.isElement())
-        {
-            QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                element.removeChild(domElement);
-            }
-        }
-        domNode = element.firstChild();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Find element by id.
  * @param node node
  * @param id id value
@@ -740,10 +718,10 @@ bool VDomDocument::setTagText(const QString &tag, const QString &text)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RemoveAllChild remove all child from file.
+ * @brief RemoveAllChildren remove all children from file.
  * @param domElement tag in xml tree.
  */
-void VDomDocument::RemoveAllChild(QDomElement &domElement)
+void VDomDocument::RemoveAllChildren(QDomElement &domElement)
 {
     if ( domElement.hasChildNodes() )
     {

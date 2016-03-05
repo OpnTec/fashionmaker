@@ -150,8 +150,8 @@ void DialogPointOfIntersectionCircles::SetSecondCircleCenterId(const quint32 &va
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPointOfIntersectionCircles::GetFirstCircleRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(ui->plainTextEditCircle1Radius->toPlainText(),
-                                           qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditCircle1Radius->toPlainText(),
+                                              qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,8 +175,8 @@ void DialogPointOfIntersectionCircles::SetFirstCircleRadius(const QString &value
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPointOfIntersectionCircles::GetSecondCircleRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(ui->plainTextEditCircle2Radius->toPlainText(),
-                                           qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditCircle2Radius->toPlainText(),
+                                              qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -293,7 +293,8 @@ void DialogPointOfIntersectionCircles::Circle1RadiusChanged()
 {
     labelEditFormula = ui->labelEditCircle1Radius;
     labelResultCalculation = ui->labelResultCircle1Radius;
-    ValFormulaChanged(flagCircle1Radius, ui->plainTextEditCircle1Radius, timerCircle1Radius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagCircle1Radius, ui->plainTextEditCircle1Radius, timerCircle1Radius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,7 +302,8 @@ void DialogPointOfIntersectionCircles::Circle2RadiusChanged()
 {
     labelEditFormula = ui->labelEditCircle2Radius;
     labelResultCalculation = ui->labelResultCircle2Radius;
-    ValFormulaChanged(flagCircle2Radius, ui->plainTextEditCircle2Radius, timerCircle2Radius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagCircle2Radius, ui->plainTextEditCircle2Radius, timerCircle2Radius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

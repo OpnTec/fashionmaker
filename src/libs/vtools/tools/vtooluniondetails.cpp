@@ -220,9 +220,9 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 {
                     const VSplinePoint &point1 = splinePath->at(i-1);
                     const VSplinePoint &point2 = splinePath->at(i);
-                    VSpline spline(point1.P(), point2.P(),
-                            point1.Angle2(), point2.Angle1(), point1.KAsm2(),
-                            point2.KAsm1(), splinePath->GetKCurve());
+                    VSpline spline(point1.P(), point2.P(), point1.Angle2(), point1.Angle2Formula(), point2.Angle1(),
+                                   point2.Angle1Formula(), point1.Length2(), point1.Length2Formula(), point2.Length1(),
+                                   point2.Length1Formula());
 
                     const QPointF p = data->GeometricObject<VPointF>(pRotate)->toQPointF();
                     VPointF *p1 = new VPointF(spline.GetP1());
@@ -240,11 +240,21 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4);
                     if (i==1)
                     {
-                        path->append(VSplinePoint(*p1, point1.KAsm1(), spl.GetStartAngle()+180,
-                                                  point1.KAsm2(), spl.GetStartAngle()));
+                        const qreal angle1 = spl.GetStartAngle()+180;
+                        const QString angle1F = QString().number(angle1);
+
+                        path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
+                                                  point1.Length1(), point1.Length1Formula(), point1.Length2(),
+                                                  point1.Length2Formula()));
                     }
-                    path->append(VSplinePoint(*p4, point2.KAsm1(), spl.GetEndAngle(),
-                                              point2.KAsm2(), spl.GetEndAngle()+180));
+
+                    const qreal angle2 = spl.GetEndAngle()+180;
+                    const QString angle2F = QString().number(angle2);
+
+                    path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
+                                              point2.Length1(), point2.Length1Formula(), point2.Length2(),
+                                              point2.Length2Formula()));
+
                     delete p4;
                     delete p1;
                 }
@@ -360,9 +370,10 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                 {
                     const VSplinePoint &point1 = splinePath->at(i-1);
                     const VSplinePoint &point2 = splinePath->at(i);
-                    VSpline spline(point1.P(), point2.P(),
-                                   point1.Angle2(), point2.Angle1(), point1.KAsm2(),
-                                   point2.KAsm1(), splinePath->GetKCurve());
+
+                    VSpline spline(point1.P(), point2.P(), point1.Angle2(), point1.Angle2Formula(), point2.Angle1(),
+                                   point2.Angle1Formula(), point1.Length2(), point1.Length2Formula(), point2.Length1(),
+                                   point2.Length1Formula());
 
                     const QPointF p = data->GeometricObject<VPointF>(pRotate)->toQPointF();
                     VPointF *p1 = new VPointF(spline.GetP1());
@@ -380,11 +391,21 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                     VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4);
                     if (i==1)
                     {
-                        path->append(VSplinePoint(*p1, point1.KAsm1(), spl.GetStartAngle()+180,
-                                                  point1.KAsm2(), spl.GetStartAngle()));
+                        const qreal angle1 = spl.GetStartAngle()+180;
+                        const QString angle1F = QString().number(angle1);
+
+                        path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
+                                                  point1.Length1(), point1.Length1Formula(), point1.Length2(),
+                                                  point1.Length2Formula()));
                     }
-                    path->append(VSplinePoint(*p4, point2.KAsm1(), spl.GetEndAngle(),
-                                              point2.KAsm2(), spl.GetEndAngle()+180));
+
+                    const qreal angle2 = spl.GetEndAngle()+180;
+                    const QString angle2F = QString().number(angle2);
+
+                    path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
+                                              point2.Length1(), point2.Length1Formula(), point2.Length2(),
+                                              point2.Length2Formula()));
+
                     delete p1;
                     delete p4;
                 }
@@ -847,7 +868,7 @@ QDomNode VToolUnionDetails::UpdateDetail(const QDomNode &domNode, const VDetail 
             {
                 if (domElement.tagName() == VToolUnionDetails::TagDetail)
                 {
-                    doc->removeAllChilds(domElement);//delete all nodes in detail
+                    VDomDocument::RemoveAllChildren(domElement);//delete all nodes in detail
                     for (int i = 0; i < d.CountNode(); ++i)
                     {
                         AddNode(domElement, d.at(i));//rewrite nodes of detail

@@ -54,7 +54,7 @@ void SaveDetailOptions::undo()
     if (domElement.isElement())
     {
         SaveDet(domElement, oldDet);
-        doc->RemoveAllChild(domElement);
+        doc->RemoveAllChildren(domElement);
         for (int i = 0; i < oldDet.CountNode(); ++i)
         {
            VToolDetail::AddNode(doc, domElement, oldDet.at(i));
@@ -85,7 +85,7 @@ void SaveDetailOptions::redo()
     if (domElement.isElement())
     {
         SaveDet(domElement, newDet);
-        doc->RemoveAllChild(domElement);
+        doc->RemoveAllChildren(domElement);
         for (int i = 0; i < newDet.CountNode(); ++i)
         {
            VToolDetail::AddNode(doc, domElement, newDet.at(i));

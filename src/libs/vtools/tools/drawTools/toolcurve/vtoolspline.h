@@ -80,6 +80,7 @@ private:
     Q_DISABLE_COPY(VToolSpline)
     QPointF oldPosition;
 
+    bool IsMovable() const;
     void RefreshGeometry ();
     void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);
 };

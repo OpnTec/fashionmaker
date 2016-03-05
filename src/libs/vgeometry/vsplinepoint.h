@@ -32,20 +32,20 @@
 #include "vpointf.h"
 #include <QMetaType>
 
-class VSplinePointData;
+class VFSplinePointData;
 
 /**
- * @brief The VSplinePoint class keep information about point in spline path. Each point have two angles and two
- * coefficient. Point represent at the same time first and last point of spline.
+ * @brief The VFSplinePoint class keep information about point in spline path. Each point have two angles and two
+ * coefficient. Point represent at the same time first and last point of a spline.
  */
-class VSplinePoint
+class VFSplinePoint
 {
 public:
-    VSplinePoint();
-    VSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
-    VSplinePoint(const VSplinePoint &point);
-    VSplinePoint &operator=(const VSplinePoint &point);
-    ~VSplinePoint();
+    VFSplinePoint();
+    VFSplinePoint(VPointF pSpline, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
+    VFSplinePoint(const VFSplinePoint &point);
+    VFSplinePoint &operator=(const VFSplinePoint &point);
+    ~VFSplinePoint();
 
     VPointF P() const;
     void    SetP(const VPointF &value);
@@ -57,6 +57,49 @@ public:
     void    SetKAsm1(const qreal &value);
     qreal   KAsm2() const;
     void    SetKAsm2(const qreal &value);
+protected:
+    QSharedDataPointer<VFSplinePointData> d;
+};
+
+Q_DECLARE_METATYPE(VFSplinePoint)
+Q_DECLARE_TYPEINFO(VFSplinePoint, Q_MOVABLE_TYPE);
+
+class VSplinePointData;
+
+/**
+ * @brief The VSplinePoint class keep information about point in spline path. Each point have two angles and two
+ * lengths. Point represent at the same time first and last point of a spline.
+ */
+class VSplinePoint
+{
+public:
+    VSplinePoint();
+    VSplinePoint(VPointF pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
+                 qreal length1, const QString &length1F, qreal length2, const QString &length2F);
+    VSplinePoint(const VSplinePoint &point);
+    VSplinePoint &operator=(const VSplinePoint &point);
+    ~VSplinePoint();
+
+    VPointF P() const;
+    void    SetP(const VPointF &value);
+
+    qreal   Angle1() const;
+    QString Angle1Formula() const;
+    void    SetAngle1(const qreal &value, const QString &angle1F);
+
+    qreal   Angle2() const;
+    QString Angle2Formula() const;
+    void    SetAngle2(const qreal &value, const QString &angle2F);
+
+    qreal   Length1() const;
+    QString Length1Formula() const;
+    void    SetLength1(const qreal &value, const QString &length1F);
+
+    qreal   Length2() const;
+    QString Length2Formula() const;
+    void    SetLength2(const qreal &value, const QString &length2F);
+
+    bool    IsMovable() const;
 protected:
     QSharedDataPointer<VSplinePointData> d;
 };

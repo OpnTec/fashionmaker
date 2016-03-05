@@ -104,7 +104,7 @@ void DialogCurveIntersectAxis::SetTypeLine(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogCurveIntersectAxis::GetAngle() const
 {
-    return qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -248,7 +248,7 @@ void DialogCurveIntersectAxis::EvalAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::AngleTextChanged()
 {
-    ValFormulaChanged(flagError, ui->plainTextEditFormula, timerFormula);
+    ValFormulaChanged(flagError, ui->plainTextEditFormula, timerFormula, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

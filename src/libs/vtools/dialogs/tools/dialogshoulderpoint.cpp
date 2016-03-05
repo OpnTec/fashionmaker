@@ -348,7 +348,7 @@ QString DialogShoulderPoint::GetTypeLine() const
  */
 QString DialogShoulderPoint::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

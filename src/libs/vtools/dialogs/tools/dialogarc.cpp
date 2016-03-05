@@ -272,7 +272,8 @@ void DialogArc::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultRadius;
-    ValFormulaChanged(flagRadius, ui->plainTextEditFormula, timerRadius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagRadius, ui->plainTextEditFormula, timerRadius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -283,7 +284,7 @@ void DialogArc::F1Changed()
 {
     labelEditFormula = ui->labelEditF1;
     labelResultCalculation = ui->labelResultF1;
-    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1);
+    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -294,7 +295,7 @@ void DialogArc::F2Changed()
 {
     labelEditFormula = ui->labelEditF2;
     labelResultCalculation = ui->labelResultF2;
-    ValFormulaChanged(flagF2, ui->plainTextEditF2, timerF2);
+    ValFormulaChanged(flagF2, ui->plainTextEditF2, timerF2, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -428,7 +429,7 @@ quint32 DialogArc::GetCenter() const
  */
 QString DialogArc::GetRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(radius, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(radius, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -438,7 +439,7 @@ QString DialogArc::GetRadius() const
  */
 QString DialogArc::GetF1() const
 {
-    return qApp->TrVars()->FormulaFromUser(f1, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(f1, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -448,5 +449,5 @@ QString DialogArc::GetF1() const
  */
 QString DialogArc::GetF2() const
 {
-    return qApp->TrVars()->FormulaFromUser(f2, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(f2, qApp->Settings()->GetOsSeparator());
 }

@@ -233,7 +233,7 @@ void DialogSpline::Angle1Changed()
 {
     labelEditFormula = ui->labelEditAngle1;
     labelResultCalculation = ui->labelResultAngle1;
-    ValFormulaChanged(flagAngle1, ui->plainTextEditAngle1F, timerAngle1);
+    ValFormulaChanged(flagAngle1, ui->plainTextEditAngle1F, timerAngle1, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -241,7 +241,7 @@ void DialogSpline::Angle2Changed()
 {
     labelEditFormula = ui->labelEditAngle2;
     labelResultCalculation = ui->labelResultAngle2;
-    ValFormulaChanged(flagAngle2, ui->plainTextEditAngle2F, timerAngle2);
+    ValFormulaChanged(flagAngle2, ui->plainTextEditAngle2F, timerAngle2, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -249,7 +249,8 @@ void DialogSpline::Length1Changed()
 {
     labelEditFormula = ui->labelEditLength1;
     labelResultCalculation = ui->labelResultLength1;
-    ValFormulaChanged(flagLength1, ui->plainTextEditLength1F, timerLength1);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagLength1, ui->plainTextEditLength1F, timerLength1, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -257,7 +258,8 @@ void DialogSpline::Length2Changed()
 {
     labelEditFormula = ui->labelEditLength2;
     labelResultCalculation = ui->labelResultLength2;
-    ValFormulaChanged(flagLength2, ui->plainTextEditLength2F, timerLength2);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagLength2, ui->plainTextEditLength2F, timerLength2, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -265,8 +267,8 @@ void DialogSpline::FXAngle1()
 {
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first control point angle"));
-    QString angle1F = qApp->TrVars()->FormulaFromUser(ui->plainTextEditAngle1F->toPlainText(),
-                                                           qApp->Settings()->GetOsSeparator());
+    QString angle1F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditAngle1F->toPlainText(),
+                                                         qApp->Settings()->GetOsSeparator());
     dialog->SetFormula(angle1F);
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
@@ -288,8 +290,8 @@ void DialogSpline::FXAngle2()
 {
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second control point angle"));
-    QString angle2F = qApp->TrVars()->FormulaFromUser(ui->plainTextEditAngle2F->toPlainText(),
-                                                      qApp->Settings()->GetOsSeparator());
+    QString angle2F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditAngle2F->toPlainText(),
+                                                         qApp->Settings()->GetOsSeparator());
     dialog->SetFormula(angle2F);
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
@@ -311,8 +313,8 @@ void DialogSpline::FXLength1()
 {
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first control point length"));
-    QString length1F = qApp->TrVars()->FormulaFromUser(ui->plainTextEditLength1F->toPlainText(),
-                                                       qApp->Settings()->GetOsSeparator());
+    QString length1F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditLength1F->toPlainText(),
+                                                          qApp->Settings()->GetOsSeparator());
     dialog->SetFormula(length1F);
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
@@ -334,8 +336,8 @@ void DialogSpline::FXLength2()
 {
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second control point length"));
-    QString length2F = qApp->TrVars()->FormulaFromUser(ui->plainTextEditLength2F->toPlainText(),
-                                                       qApp->Settings()->GetOsSeparator());
+    QString length2F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditLength2F->toPlainText(),
+                                                          qApp->Settings()->GetOsSeparator());
     dialog->SetFormula(length2F);
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
@@ -438,10 +440,10 @@ VSpline DialogSpline::CurrentSpline() const
 
     const bool separator = qApp->Settings()->GetOsSeparator();
 
-    angle1F = qApp->TrVars()->FormulaFromUser(angle1F, separator);
-    angle2F = qApp->TrVars()->FormulaFromUser(angle2F, separator);
-    length1F = qApp->TrVars()->FormulaFromUser(length1F, separator);
-    length2F = qApp->TrVars()->FormulaFromUser(length2F, separator);
+    angle1F = qApp->TrVars()->TryFormulaFromUser(angle1F, separator);
+    angle2F = qApp->TrVars()->TryFormulaFromUser(angle2F, separator);
+    length1F = qApp->TrVars()->TryFormulaFromUser(length1F, separator);
+    length2F = qApp->TrVars()->TryFormulaFromUser(length2F, separator);
 
     VSpline spline(*GetP1(), *GetP4(), angle1, angle1F, angle2, angle2F, length1, length1F,  length2, length2F);
 

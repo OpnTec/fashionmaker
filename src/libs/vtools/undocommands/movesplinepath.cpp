@@ -89,8 +89,7 @@ void MoveSplinePath::Do(const VSplinePath &splPath)
     QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
-        doc->SetAttribute(domElement, AttrKCurve, QString().setNum(splPath.GetKCurve()));
-        VToolSplinePath::UpdatePathPoint(doc, domElement, splPath);
+        VToolSplinePath::UpdatePathPoints(doc, domElement, splPath);
 
         emit NeedLiteParsing(Document::LiteParse);
     }

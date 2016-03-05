@@ -200,11 +200,11 @@ VToolSpline *VToolSpline::Create(const quint32 _id, quint32 point1, quint32 poin
                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                  const Document &parse, const Source &typeCreation)
 {
-    qreal calcAngle1 = CheckFormula(_id, a1, data);
-    qreal calcAngle2 = CheckFormula(_id, a2, data);
+    const qreal calcAngle1 = CheckFormula(_id, a1, data);
+    const qreal calcAngle2 = CheckFormula(_id, a2, data);
 
-    qreal calcLength1 = qApp->toPixel(CheckFormula(_id, l1, data));
-    qreal calcLength2 = qApp->toPixel(CheckFormula(_id, l2, data));
+    const qreal calcLength1 = qApp->toPixel(CheckFormula(_id, l1, data));
+    const qreal calcLength2 = qApp->toPixel(CheckFormula(_id, l2, data));
 
     auto p1 = data->GeometricObject<VPointF>(point1);
     auto p4 = data->GeometricObject<VPointF>(point4);
@@ -252,58 +252,7 @@ void VToolSpline::ControlPointChangePosition(const qint32 &indexSpline, const Sp
 {
     Q_UNUSED(indexSpline);
     const QSharedPointer<VSpline> spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-    VSpline spl;
-    if (position == SplinePointPosition::FirstPoint)
-    {
-        QLineF line(spline->GetP1().toQPointF(), pos);
-
-        qreal newAngle1 = line.angle();
-        QString newAngle1F = QString().setNum(newAngle1);
-
-        qreal newLength1 = line.length();
-        QString newLength1F = QString().setNum(qApp->fromPixel(newLength1));
-
-        if (not qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()))
-        {
-            newAngle1 = spline->GetStartAngle();
-            newAngle1F = spline->GetStartAngleFormula();
-        }
-
-        if (not qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()))
-        {
-            newLength1 = spline->GetC1Length();
-            newLength1F = spline->GetC1LengthFormula();
-        }
-
-        spl = VSpline(spline->GetP1(), spline->GetP4(), newAngle1, newAngle1F, spline->GetEndAngle(),
-                      spline->GetEndAngleFormula(), newLength1, newLength1F, spline->GetC2Length(),
-                      spline->GetC2LengthFormula());
-    }
-    else
-    {
-        QLineF line(spline->GetP4().toQPointF(), pos);
-
-        qreal newAngle2 = line.angle();
-        QString newAngle2F = QString().setNum(newAngle2);
-
-        qreal newLength2 = line.length();
-        QString newLength2F = QString().setNum(qApp->fromPixel(newLength2));
-
-        if (not qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()))
-        {
-            newAngle2 = spline->GetEndAngle();
-            newAngle2F = spline->GetEndAngleFormula();
-        }
-
-        if (not qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
-        {
-            newLength2 = spline->GetC2Length();
-            newLength2F = spline->GetC2LengthFormula();
-        }
-        spl = VSpline(spline->GetP1(), spline->GetP4(), spline->GetStartAngle(), spline->GetStartAngleFormula(),
-                      newAngle2, newAngle2F, spline->GetC1Length(), spline->GetC1LengthFormula(),
-                      newLength2, newLength2F);
-    }
+    const VSpline spl = CorrectedSpline(*spline, position, pos);
 
     MoveSpline *moveSpl = new MoveSpline(doc, spline.data(), spl, id, this->scene());
     connect(moveSpl, &MoveSpline::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -387,12 +336,7 @@ void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-            if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+            if (IsMovable())
             {
                 SetOverrideCursor(cursorArrowCloseHand, 1, 1);
                 oldPosition = event->scenePos();
@@ -410,12 +354,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-            if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+            if (IsMovable())
             {
                 //Disable cursor-arrow-closehand
                 RestoreOverrideCursor(cursorArrowCloseHand);
@@ -428,12 +367,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-    if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
-        qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
-        qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
-        qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+    if (IsMovable())
     {
         // Don't need check if left mouse button was pressed. According to the Qt documentation "If you do receive this
         // event, you can be certain that this item also received a mouse press event, and that this item is the current
@@ -443,6 +377,7 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         // "weight" describes how the influence of the drag should be distributed
         // among the handles; 0 = front handle only, 1 = back handle only.
 
+        const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
         const qreal t = spline->ParamT(oldPosition);
 
         if (qFloor(t) == -1)
@@ -511,12 +446,7 @@ void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-        if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+        if (IsMovable())
         {
             SetOverrideCursor(cursorArrowOpenHand, 1, 1);
         }
@@ -530,12 +460,7 @@ void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-        if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+        if (IsMovable())
         {
             //Disable cursor-arrow-openhand
             RestoreOverrideCursor(cursorArrowOpenHand);
@@ -564,6 +489,17 @@ void VToolSpline::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VToolSpline::IsMovable() const
+{
+    const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+
+    return qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
+           qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
+           qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
+           qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

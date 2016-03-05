@@ -634,7 +634,7 @@ void DialogIncrements::SaveIncrFormula()
         const QString formula = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
         doc->SetIncrementFormula(nameField->text(), formula);
     }
-    catch (qmu::QmuParserError &e) // Just in case something bad happens
+    catch (qmu::QmuParserError &e) // Just in case something bad will happen
     {
         Q_UNUSED(e)
         return;
@@ -697,11 +697,8 @@ void DialogIncrements::Fx()
 
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(incr->GetData(), NULL_ID, this);
     dialog->setWindowTitle(tr("Edit increment"));
-
-    QString text = ui->plainTextEditFormula->toPlainText();
-    text.replace("\n", " ");
-    text = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
-    dialog->SetFormula(text);
+    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText().replace("\n", " "),
+                                                          qApp->Settings()->GetOsSeparator()));
     const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
     dialog->setPostfix(postfix);//Show unit in dialog lable (cm, mm or inch)
 

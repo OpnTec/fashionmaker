@@ -47,27 +47,38 @@ public:
     DialogSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
     virtual ~DialogSplinePath() Q_DECL_OVERRIDE;
 
-    VSplinePath        GetPath() const;
-    void               SetPath(const VSplinePath &value);
+    VSplinePath GetPath() const;
+    void        SetPath(const VSplinePath &value);
 
-    QString            GetColor() const;
-    void               SetColor(const QString &value);
+    QString GetColor() const;
+    void    SetColor(const QString &value);
 public slots:
-    virtual void       ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
-    void               PointChanged(int row);
-    void               currentPointChanged( int index );
-    void               Angle1Changed(qreal index );
-    void               Angle2Changed( qreal index );
-    void               KAsm1Changed(qreal d);
-    void               KAsm2Changed(qreal d);
-    virtual void       ShowDialog(bool click) Q_DECL_OVERRIDE;
-    void               PathUpdated(const VSplinePath &path);
+    virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
+    virtual void ShowDialog(bool click) Q_DECL_OVERRIDE;
+    void         PathUpdated(const VSplinePath &path);
 protected:
-    virtual void       ShowVisualization() Q_DECL_OVERRIDE;
-    /**
-     * @brief SaveData Put dialog data in local variables
-     */
-    virtual void       SaveData() Q_DECL_OVERRIDE;
+    virtual void ShowVisualization() Q_DECL_OVERRIDE;
+    virtual void SaveData() Q_DECL_OVERRIDE;
+    virtual void CheckState() Q_DECL_OVERRIDE;
+    virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
+private slots:
+    void PointChanged(int row);
+    void currentPointChanged(int index);
+
+    void DeployAngle1TextEdit();
+    void DeployAngle2TextEdit();
+    void DeployLength1TextEdit();
+    void DeployLength2TextEdit();
+
+    void Angle1Changed();
+    void Angle2Changed();
+    void Length1Changed();
+    void Length2Changed();
+
+    void FXAngle1();
+    void FXAngle2();
+    void FXLength1();
+    void FXLength2();
 private:
     Q_DISABLE_COPY(DialogSplinePath)
 
@@ -75,17 +86,34 @@ private:
     Ui::DialogSplinePath *ui;
 
     /** @brief path spline path */
-    VSplinePath        path;
+    VSplinePath path;
 
-    qint32             newDuplicate;
+    qint32 newDuplicate;
 
-    void               NewItem(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
-    void               DataPoint(quint32 id, qreal kAsm1, qreal angle1, qreal kAsm2, qreal angle2);
-    void               EnableFields();
-    void               SavePath();
-    QSet<quint32>      AllIds() const;
-    bool               IsPathValid() const;
-    VSplinePath        ExtractPath() const;
+    /** @brief formulaBaseHeight base height defined by dialogui */
+    int formulaBaseHeightAngle1;
+    int formulaBaseHeightAngle2;
+    int formulaBaseHeightLength1;
+    int formulaBaseHeightLength2;
+
+    /** @brief flagAngle1 true if value of first angle is correct */
+    QVector<bool> flagAngle1;
+    QVector<bool> flagAngle2;
+    QVector<bool> flagLength1;
+    QVector<bool> flagLength2;
+
+    void EvalAngle1();
+    void EvalAngle2();
+    void EvalLength1();
+    void EvalLength2();
+
+    void          NewItem(const VSplinePoint &point);
+    void          DataPoint(const VSplinePoint &p);
+    void          SavePath();
+    QSet<quint32> AllIds() const;
+    bool          IsPathValid() const;
+    VSplinePath   ExtractPath() const;
+    void          ShowPointIssue(const QString &pName);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

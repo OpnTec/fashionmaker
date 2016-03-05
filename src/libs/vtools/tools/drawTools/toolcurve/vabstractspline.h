@@ -34,6 +34,7 @@
 #include <QGraphicsPathItem>
 
 class VControlPointSpline;
+class VSpline;
 
 class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 {
@@ -86,6 +87,8 @@ protected:
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
     virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
+
+    VSpline CorrectedSpline(const VSpline &spline, const SplinePointPosition &position, const QPointF &pos) const;
 
     template <typename T>
     void ShowToolVisualization(bool show);

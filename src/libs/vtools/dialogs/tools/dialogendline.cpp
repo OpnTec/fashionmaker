@@ -108,7 +108,7 @@ void DialogEndLine::FormulaTextChanged()
 void DialogEndLine::AngleTextChanged()
 {
     labelEditFormula = ui->labelEditAngle;
-    ValFormulaChanged(flagError, ui->plainTextEditAngle, timerFormula);
+    ValFormulaChanged(flagError, ui->plainTextEditAngle, timerFormula, degreeSymbol);
     labelEditFormula = ui->labelEditFormula;
 }
 
@@ -363,7 +363,7 @@ QString DialogEndLine::GetTypeLine() const
  */
 QString DialogEndLine::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formulaLength, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(formulaLength, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -373,7 +373,7 @@ QString DialogEndLine::GetFormula() const
  */
 QString DialogEndLine::GetAngle() const
 {
-    return qApp->TrVars()->FormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(formulaAngle, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

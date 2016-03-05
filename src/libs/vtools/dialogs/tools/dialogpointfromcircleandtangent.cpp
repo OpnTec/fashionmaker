@@ -118,8 +118,8 @@ void DialogPointFromCircleAndTangent::SetCircleCenterId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPointFromCircleAndTangent::GetCircleRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(ui->plainTextEditRadius->toPlainText(),
-                                           qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditRadius->toPlainText(),
+                                              qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -246,7 +246,8 @@ void DialogPointFromCircleAndTangent::CircleRadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultCircleRadius;
-    ValFormulaChanged(flagCircleRadius, ui->plainTextEditRadius, timerCircleRadius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagCircleRadius, ui->plainTextEditRadius, timerCircleRadius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
