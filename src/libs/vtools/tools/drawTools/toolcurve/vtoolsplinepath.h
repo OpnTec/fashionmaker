@@ -101,7 +101,9 @@ protected:
     virtual void  SetVisualization() Q_DECL_OVERRIDE;
 private:
     QPointF oldPosition;
+    int     splIndex;
 
+    bool          IsMovable(int index) const;
     void          RefreshGeometry();
     static void   AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
     void          UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const;

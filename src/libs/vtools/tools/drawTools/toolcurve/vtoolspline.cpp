@@ -336,12 +336,7 @@ void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-            if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+            if (IsMovable())
             {
                 SetOverrideCursor(cursorArrowCloseHand, 1, 1);
                 oldPosition = event->scenePos();
@@ -359,12 +354,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-            if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
-                qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+            if (IsMovable())
             {
                 //Disable cursor-arrow-closehand
                 RestoreOverrideCursor(cursorArrowCloseHand);
@@ -377,12 +367,7 @@ void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-    if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
-        qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
-        qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
-        qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+    if (IsMovable())
     {
         // Don't need check if left mouse button was pressed. According to the Qt documentation "If you do receive this
         // event, you can be certain that this item also received a mouse press event, and that this item is the current
@@ -392,6 +377,7 @@ void VToolSpline::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         // "weight" describes how the influence of the drag should be distributed
         // among the handles; 0 = front handle only, 1 = back handle only.
 
+        const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
         const qreal t = spline->ParamT(oldPosition);
 
         if (qFloor(t) == -1)
@@ -460,12 +446,7 @@ void VToolSpline::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-        if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+        if (IsMovable())
         {
             SetOverrideCursor(cursorArrowOpenHand, 1, 1);
         }
@@ -479,12 +460,7 @@ void VToolSpline::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
-
-        if (qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
-            qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula()))
+        if (IsMovable())
         {
             //Disable cursor-arrow-openhand
             RestoreOverrideCursor(cursorArrowOpenHand);
@@ -513,6 +489,17 @@ void VToolSpline::SetVisualization()
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VToolSpline::IsMovable() const
+{
+    const auto spline = VAbstractTool::data.GeometricObject<VSpline>(id);
+
+    return qmu::QmuTokenParser::IsSingle(spline->GetStartAngleFormula()) &&
+           qmu::QmuTokenParser::IsSingle(spline->GetEndAngleFormula()) &&
+           qmu::QmuTokenParser::IsSingle(spline->GetC1LengthFormula()) &&
+           qmu::QmuTokenParser::IsSingle(spline->GetC2LengthFormula());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

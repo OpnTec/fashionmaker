@@ -98,6 +98,8 @@ public:
     qreal   Length2() const;
     QString Length2Formula() const;
     void    SetLength2(const qreal &value, const QString &length2F);
+
+    bool    IsMovable() const;
 protected:
     QSharedDataPointer<VSplinePointData> d;
 };

@@ -28,6 +28,8 @@
 
 #include "vsplinepoint.h"
 #include "vsplinepoint_p.h"
+#include "../qmuparser/qmutokenparser.h"
+
 #include <QDebug>
 #include <QLineF>
 
@@ -321,4 +323,11 @@ void VSplinePoint::SetLength2(const qreal &value, const QString &length2F)
 {
     d->length2 = value;
     d->length2F = length2F;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSplinePoint::IsMovable() const
+{
+    return qmu::QmuTokenParser::IsSingle(d->angle1F) && qmu::QmuTokenParser::IsSingle(d->angle2F) &&
+           qmu::QmuTokenParser::IsSingle(d->length1F) && qmu::QmuTokenParser::IsSingle(d->length2F);
 }
