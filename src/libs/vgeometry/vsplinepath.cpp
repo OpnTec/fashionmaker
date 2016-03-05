@@ -74,7 +74,7 @@ VSplinePath::VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve, qui
         newPoints[i-1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
 
         newPoints[i].SetP(p2.P());
-        newPoints[i].SetAngle2(p2.Angle1(), spl.GetEndAngleFormula());
+        newPoints[i].SetAngle1(p2.Angle1(), spl.GetEndAngleFormula());
         newPoints[i].SetLength1(spl.GetC2Length(), spl.GetC2LengthFormula());
     }
 
