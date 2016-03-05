@@ -59,7 +59,7 @@ public:
     {
         if (not qFuzzyCompare(qAbs(angle1-angle2), 180) || qFuzzyIsNull(qAbs(angle1-angle2)))
         {
-            qWarning()<<"angle1 and angle2 are not equal.";
+            qDebug()<<"angle1 and angle2 are not equal.";
             this->angle1 = angle1;
             this->angle2 = angle1 + 180;
         }
@@ -129,7 +129,7 @@ public:
     {
         if (not qFuzzyCompare(qAbs(angle1-angle2), 180) || qFuzzyIsNull(qAbs(angle1-angle2)))
         {
-            qWarning()<<"angle1 and angle2 are not equal.";
+            qDebug()<<"angle1 and angle2 are not equal.";
             this->angle2 = angle1 + 180;
             this->angle2F = QString().number(angle2);
         }
