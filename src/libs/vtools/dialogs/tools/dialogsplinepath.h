@@ -96,12 +96,6 @@ private:
     int formulaBaseHeightLength1;
     int formulaBaseHeightLength2;
 
-    /** @brief timerAngle1 timer of check first angle formula */
-    QTimer *timerAngle1;
-    QTimer *timerAngle2;
-    QTimer *timerLength1;
-    QTimer *timerLength2;
-
     /** @brief flagAngle1 true if value of first angle is correct */
     QVector<bool> flagAngle1;
     QVector<bool> flagAngle2;

@@ -51,10 +51,6 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
       formulaBaseHeightAngle2(0),
       formulaBaseHeightLength1(0),
       formulaBaseHeightLength2(0),
-      timerAngle1(new QTimer(this)),
-      timerAngle2(new QTimer(this)),
-      timerLength1(new QTimer(this)),
-      timerLength2(new QTimer(this)),
       flagAngle1(),
       flagAngle2(),
       flagLength1(),
@@ -73,11 +69,6 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
     ui->plainTextEditAngle2F->installEventFilter(this);
     ui->plainTextEditLength1F->installEventFilter(this);
     ui->plainTextEditLength2F->installEventFilter(this);
-
-    connect(timerAngle1, &QTimer::timeout, this, &DialogSplinePath::EvalAngle1);
-    connect(timerAngle2, &QTimer::timeout, this, &DialogSplinePath::EvalAngle2);
-    connect(timerLength1, &QTimer::timeout, this, &DialogSplinePath::EvalLength1);
-    connect(timerLength2, &QTimer::timeout, this, &DialogSplinePath::EvalLength2);
 
     InitOkCancelApply(ui);
     bOk->setEnabled(false);
@@ -286,10 +277,6 @@ void DialogSplinePath::Angle1Changed()
 
     if (row != 0)
     {
-        labelEditFormula = ui->labelEditAngle1;
-        labelResultCalculation = ui->labelResultAngle1;
-        ValFormulaChanged(flagAngle1[row], ui->plainTextEditAngle1F, timerAngle1, degreeSymbol);
-
         QListWidgetItem *item = ui->listWidget->item(row);
         SCASSERT(item != nullptr);
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
@@ -309,7 +296,7 @@ void DialogSplinePath::Angle1Changed()
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
-        ShowPointIssue(p.P().name());
+        EvalAngle1();
 
         if (row != ui->listWidget->count()-1)
         {
@@ -332,10 +319,6 @@ void DialogSplinePath::Angle2Changed()
 
     if (row != ui->listWidget->count()-1)
     {
-        labelEditFormula = ui->labelEditAngle2;
-        labelResultCalculation = ui->labelResultAngle2;
-        ValFormulaChanged(flagAngle2[row], ui->plainTextEditAngle2F, timerAngle2, degreeSymbol);
-
         QListWidgetItem *item = ui->listWidget->item(row);
         SCASSERT(item != nullptr);
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
@@ -355,7 +338,7 @@ void DialogSplinePath::Angle2Changed()
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
-        ShowPointIssue(p.P().name());
+        EvalAngle2();
 
         if (row != 0)
         {
@@ -378,11 +361,6 @@ void DialogSplinePath::Length1Changed()
 
     if (row != 0)
     {
-        labelEditFormula = ui->labelEditLength1;
-        labelResultCalculation = ui->labelResultLength1;
-        const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
-        ValFormulaChanged(flagLength1[row], ui->plainTextEditLength1F, timerLength1, postfix);
-
         QListWidgetItem *item = ui->listWidget->item(row);
         SCASSERT(item != nullptr);
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
@@ -402,7 +380,7 @@ void DialogSplinePath::Length1Changed()
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
-        ShowPointIssue(p.P().name());
+        EvalLength1();
     }
 }
 
@@ -417,11 +395,6 @@ void DialogSplinePath::Length2Changed()
 
     if (row != ui->listWidget->count()-1)
     {
-        labelEditFormula = ui->labelEditLength2;
-        labelResultCalculation = ui->labelResultLength2;
-        const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
-        ValFormulaChanged(flagLength2[row], ui->plainTextEditLength2F, timerLength2, postfix);
-
         QListWidgetItem *item = ui->listWidget->item(row);
         SCASSERT(item != nullptr);
         VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
@@ -441,7 +414,7 @@ void DialogSplinePath::Length2Changed()
 
         item->setData(Qt::UserRole, QVariant::fromValue(p));
 
-        ShowPointIssue(p.P().name());
+        EvalLength2();
     }
 }
 
@@ -802,10 +775,28 @@ void DialogSplinePath::NewItem(const VSplinePoint &point)
         bOk->setEnabled(true);
     }
 
-    flagAngle1.append(true);
-    flagLength1.append(true);
-    flagAngle2.append(true);
-    flagLength2.append(true);
+    const int row = ui->listWidget->currentRow();
+    if (row == 0)
+    {
+        flagAngle1.append(true);
+        flagLength1.append(true);
+        flagAngle2.append(false);
+        flagLength2.append(false);
+    }
+    else if (row == ui->listWidget->count()-1)
+    {
+        flagAngle1.append(false);
+        flagLength1.append(false);
+        flagAngle2.append(true);
+        flagLength2.append(true);
+    }
+    else
+    {
+        flagAngle1.append(false);
+        flagLength1.append(false);
+        flagAngle2.append(false);
+        flagLength2.append(false);
+    }
 
     DataPoint(point);
 }
