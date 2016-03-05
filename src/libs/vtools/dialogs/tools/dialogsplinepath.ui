@@ -787,8 +787,6 @@
            </layout>
           </item>
          </layout>
-         <zorder>layoutWidget_2</zorder>
-         <zorder>layoutWidget_2</zorder>
         </widget>
        </item>
       </layout>
