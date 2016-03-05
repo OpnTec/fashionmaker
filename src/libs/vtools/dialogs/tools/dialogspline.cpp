@@ -233,7 +233,7 @@ void DialogSpline::Angle1Changed()
 {
     labelEditFormula = ui->labelEditAngle1;
     labelResultCalculation = ui->labelResultAngle1;
-    ValFormulaChanged(flagAngle1, ui->plainTextEditAngle1F, timerAngle1);
+    ValFormulaChanged(flagAngle1, ui->plainTextEditAngle1F, timerAngle1, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -241,7 +241,7 @@ void DialogSpline::Angle2Changed()
 {
     labelEditFormula = ui->labelEditAngle2;
     labelResultCalculation = ui->labelResultAngle2;
-    ValFormulaChanged(flagAngle2, ui->plainTextEditAngle2F, timerAngle2);
+    ValFormulaChanged(flagAngle2, ui->plainTextEditAngle2F, timerAngle2, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -249,7 +249,8 @@ void DialogSpline::Length1Changed()
 {
     labelEditFormula = ui->labelEditLength1;
     labelResultCalculation = ui->labelResultLength1;
-    ValFormulaChanged(flagLength1, ui->plainTextEditLength1F, timerLength1);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagLength1, ui->plainTextEditLength1F, timerLength1, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -257,7 +258,8 @@ void DialogSpline::Length2Changed()
 {
     labelEditFormula = ui->labelEditLength2;
     labelResultCalculation = ui->labelResultLength2;
-    ValFormulaChanged(flagLength2, ui->plainTextEditLength2F, timerLength2);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagLength2, ui->plainTextEditLength2F, timerLength2, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

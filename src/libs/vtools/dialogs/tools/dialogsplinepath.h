@@ -115,7 +115,6 @@ private:
 
     void          NewItem(const VSplinePoint &point);
     void          DataPoint(const VSplinePoint &p);
-    void          EnableFields();
     void          SavePath();
     QSet<quint32> AllIds() const;
     bool          IsPathValid() const;

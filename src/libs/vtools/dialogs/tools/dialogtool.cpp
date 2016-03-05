@@ -332,7 +332,7 @@ quint32 DialogTool::DNumber(const QString &baseName) const
  * @param edit LineEdit
  * @param timer timer of formula
  */
-void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
+void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer, const QString& postfix)
 {
     SCASSERT(edit != nullptr);
     SCASSERT(timer != nullptr);
@@ -343,14 +343,21 @@ void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer)
         flag = false;
         CheckState();
         ChangeColor(labelEditFormula, Qt::red);
-        labelResultCalculation->setText(tr("Error"));
+        if (postfix.isEmpty())
+        {
+            labelResultCalculation->setText(tr("Error"));
+        }
+        else
+        {
+            labelResultCalculation->setText(tr("Error") + " (" + postfix + ")");
+        }
         labelResultCalculation->setToolTip(tr("Empty field"));
         return;
     }
     timer->start(1000);
 }
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *timer)
+void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *timer, const QString& postfix)
 {
     SCASSERT(edit != nullptr);
     SCASSERT(timer != nullptr);
@@ -361,7 +368,15 @@ void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *tim
         flag = false;
         CheckState();
         ChangeColor(labelEditFormula, Qt::red);
-        labelResultCalculation->setText(tr("Error"));
+        if (postfix.isEmpty())
+        {
+            labelResultCalculation->setText(tr("Error"));
+        }
+        else
+        {
+            labelResultCalculation->setText(tr("Error") + " (" + postfix + ")");
+        }
+
         labelResultCalculation->setToolTip(tr("Empty field"));
         return;
     }

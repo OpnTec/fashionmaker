@@ -291,7 +291,7 @@ void DialogLineIntersectAxis::EvalAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::AngleTextChanged()
 {
-    ValFormulaChanged(flagError, ui->plainTextEditFormula, timerFormula);
+    ValFormulaChanged(flagError, ui->plainTextEditFormula, timerFormula, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

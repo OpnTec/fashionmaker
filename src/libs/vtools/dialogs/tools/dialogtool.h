@@ -202,8 +202,9 @@ protected:
     virtual void     CheckState();
     QString          GetComboBoxCurrentData(const QComboBox *box)const;
     void             ChangeCurrentData(QComboBox *box, const QVariant &value) const;
-    void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer);
-    void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer);
+    void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer, const QString &postfix = QString());
+    void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer,
+                                       const QString &postfix = QString());
     qreal            Eval(const QString &text, bool &flag, QLabel *label, const QString &postfix,
                           bool checkZero = true);
 

@@ -246,7 +246,8 @@ void DialogPointFromCircleAndTangent::CircleRadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultCircleRadius;
-    ValFormulaChanged(flagCircleRadius, ui->plainTextEditRadius, timerCircleRadius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagCircleRadius, ui->plainTextEditRadius, timerCircleRadius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

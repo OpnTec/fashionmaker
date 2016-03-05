@@ -248,7 +248,7 @@ void DialogCurveIntersectAxis::EvalAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::AngleTextChanged()
 {
-    ValFormulaChanged(flagError, ui->plainTextEditFormula, timerFormula);
+    ValFormulaChanged(flagError, ui->plainTextEditFormula, timerFormula, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

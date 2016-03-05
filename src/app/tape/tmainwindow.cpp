@@ -1007,8 +1007,7 @@ void TMainWindow::Fx()
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(meash->GetData(), NULL_ID, this);
     dialog->setWindowTitle(tr("Edit measurement"));
 
-    QString text = ui->plainTextEditFormula->toPlainText();
-    text.replace("\n", " ");
+    QString text = ui->plainTextEditFormula->toPlainText().replace("\n", " ");
     try
     {
         text = qApp->TrVars()->FormulaFromUser(text, true);

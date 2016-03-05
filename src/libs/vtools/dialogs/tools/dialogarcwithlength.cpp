@@ -231,7 +231,8 @@ void DialogArcWithLength::RadiusChanged()
 {
     labelEditFormula = ui->labelEditRadius;
     labelResultCalculation = ui->labelResultRadius;
-    ValFormulaChanged(flagRadius, ui->plainTextEditRadius, timerRadius);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagRadius, ui->plainTextEditRadius, timerRadius, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -239,7 +240,7 @@ void DialogArcWithLength::F1Changed()
 {
     labelEditFormula = ui->labelEditF1;
     labelResultCalculation = ui->labelResultF1;
-    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1);
+    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1, degreeSymbol);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -247,7 +248,8 @@ void DialogArcWithLength::LengthChanged()
 {
     labelEditFormula = ui->labelEditLength;
     labelResultCalculation = ui->labelResultLength;
-    ValFormulaChanged(flagLength, ui->plainTextEditLength, timerLength);
+    const QString postfix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    ValFormulaChanged(flagLength, ui->plainTextEditLength, timerLength, postfix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
