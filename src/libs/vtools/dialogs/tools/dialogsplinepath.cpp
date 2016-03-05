@@ -424,17 +424,8 @@ void DialogSplinePath::FXAngle1()
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first control point angle"));
 
-    const QString formula = ui->plainTextEditAngle1F->toPlainText().replace("\n", " ");
-    QString angle1F;
-    try
-    {
-        angle1F = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-    }
-    catch (qmu::QmuParserError &e)
-    {
-        Q_UNUSED(e)
-        angle1F = formula;
-    }
+    QString angle1F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditAngle1F->toPlainText().replace("\n", " "),
+                                                         qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(angle1F);
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
@@ -458,17 +449,8 @@ void DialogSplinePath::FXAngle2()
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second control point angle"));
 
-    const QString formula = ui->plainTextEditAngle2F->toPlainText().replace("\n", " ");
-    QString angle2F;
-    try
-    {
-        angle2F = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-    }
-    catch (qmu::QmuParserError &e)
-    {
-        Q_UNUSED(e)
-        angle2F = formula;
-    }
+    QString angle2F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditAngle2F->toPlainText().replace("\n", " "),
+                                                         qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(angle2F);
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
@@ -492,17 +474,8 @@ void DialogSplinePath::FXLength1()
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit first control point length"));
 
-    const QString formula = ui->plainTextEditLength1F->toPlainText().replace("\n", " ");
-    QString length1F;
-    try
-    {
-        length1F = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-    }
-    catch (qmu::QmuParserError &e)
-    {
-        Q_UNUSED(e)
-        length1F = formula;
-    }
+    QString length1F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditLength1F->toPlainText().replace("\n", " "),
+                                                          qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length1F);
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
@@ -526,17 +499,8 @@ void DialogSplinePath::FXLength2()
     auto dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit second control point length"));
 
-    const QString formula = ui->plainTextEditLength2F->toPlainText().replace("\n", " ");
-    QString length2F;
-    try
-    {
-        length2F = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-    }
-    catch (qmu::QmuParserError &e)
-    {
-        Q_UNUSED(e)
-        length2F = formula;
-    }
+    QString length2F = qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditLength2F->toPlainText().replace("\n", " "),
+                                                          qApp->Settings()->GetOsSeparator());
 
     dialog->SetFormula(length2F);
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));

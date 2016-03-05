@@ -103,7 +103,7 @@ QString VFormula::GetFormula(FormulaType type) const
     }
     else
     {
-        return qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+        return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
     }
 }
 

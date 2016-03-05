@@ -29,6 +29,7 @@
 #include "vtranslatevars.h"
 #include "calculator.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../ifc/ifcdef.h"
@@ -779,6 +780,20 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
     }
 
     return newFormula;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSeparator) const
+{
+    try
+    {
+        return qApp->TrVars()->FormulaFromUser(formula, osSeparator);
+    }
+    catch (qmu::QmuParserError &e)// In case something bad will happen
+    {
+        Q_UNUSED(e)
+        return formula;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

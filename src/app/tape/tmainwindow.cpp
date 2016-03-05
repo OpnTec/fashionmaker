@@ -1006,18 +1006,8 @@ void TMainWindow::Fx()
 
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(meash->GetData(), NULL_ID, this);
     dialog->setWindowTitle(tr("Edit measurement"));
-
-    QString text = ui->plainTextEditFormula->toPlainText().replace("\n", " ");
-    try
-    {
-        text = qApp->TrVars()->FormulaFromUser(text, true);
-    }
-    catch (qmu::QmuParserError &e) // Just in case something bad will happen
-    {
-        Q_UNUSED(e)
-        text = ui->plainTextEditFormula->toPlainText();
-    }
-    dialog->SetFormula(text);
+    dialog->SetFormula(qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditFormula->toPlainText().replace("\n", " "),
+                                                          true));
     const QString postfix = VDomDocument::UnitsToStr(mUnit, true);//Show unit in dialog lable (cm, mm or inch)
     dialog->setPostfix(postfix);
 
