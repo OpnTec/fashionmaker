@@ -727,6 +727,11 @@ void DialogSplinePath::ShowVisualization()
  */
 void DialogSplinePath::NewItem(const VSplinePoint &point)
 {
+    flagAngle1.append(true);
+    flagLength1.append(true);
+    flagAngle2.append(true);
+    flagLength2.append(true);
+
     auto item = new QListWidgetItem(point.P().name());
     item->setFont(QFont("Times", 12, QFont::Bold));
     item->setData(Qt::UserRole, QVariant::fromValue(point));
@@ -737,29 +742,6 @@ void DialogSplinePath::NewItem(const VSplinePoint &point)
     {
         bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
         bOk->setEnabled(true);
-    }
-
-    const int row = ui->listWidget->currentRow();
-    if (row == 0)
-    {
-        flagAngle1.append(true);
-        flagLength1.append(true);
-        flagAngle2.append(false);
-        flagLength2.append(false);
-    }
-    else if (row == ui->listWidget->count()-1)
-    {
-        flagAngle1.append(false);
-        flagLength1.append(false);
-        flagAngle2.append(true);
-        flagLength2.append(true);
-    }
-    else
-    {
-        flagAngle1.append(false);
-        flagLength1.append(false);
-        flagAngle2.append(false);
-        flagLength2.append(false);
     }
 
     DataPoint(point);
