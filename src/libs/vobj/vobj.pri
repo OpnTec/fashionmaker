@@ -4,9 +4,10 @@
 SOURCES += \
     $$PWD/vobjengine.cpp \
     $$PWD/vobjpaintdevice.cpp \
-    $$PWD/stable.cpp \
     $$PWD/delaunay.cpp \
     $$PWD/predicates.cpp
+
+win32-msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/vobjengine.h \
