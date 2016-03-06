@@ -1,4 +1,5 @@
 # Version 0.4.3
+- [#456] Crash: broken formula + clicking on the f(x) symbol.
 - [#454] Crash: using CRTL+Z while using line tool
 - Fixed broken saving pattern description.
 - Fixed UI bug. Release a dialog size for deploying a formula field.
