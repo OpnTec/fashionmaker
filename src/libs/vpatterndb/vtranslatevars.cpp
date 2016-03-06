@@ -29,6 +29,7 @@
 #include "vtranslatevars.h"
 #include "calculator.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../ifc/ifcdef.h"
@@ -782,6 +783,20 @@ QString VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSeparator) const
+{
+    try
+    {
+        return qApp->TrVars()->FormulaFromUser(formula, osSeparator);
+    }
+    catch (qmu::QmuParserError &e)// In case something bad will happen
+    {
+        Q_UNUSED(e)
+        return formula;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FormulaToUser replace all known tokens in formula to user look. Also change decimal
  * separator in numbers.
@@ -889,7 +904,8 @@ QString VTranslateVars::FormulaToUser(const QString &formula) const
             }
 
             loc = QLocale::system();// To user locale
-            const QString dStr = loc.toString(d);// Number string in user locale
+            QString dStr = loc.toString(d);// Number string in user locale
+            dStr.replace(" ", ""); // Remove thousand separator
             newFormula.replace(nKeys.at(i), nValues.at(i).length(), dStr);
             const int bias = nValues.at(i).length() - dStr.length();
             if (bias != 0)

@@ -358,8 +358,9 @@ bool VApplication::notify(QObject *receiver, QEvent *event)
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return true;
     }
-    // These last two cases special. I found that we can't show here modal dialog with error message.
-    // Somehow program doesn't waite untile an error dialog will be closed. But if ignore this program will hang.
+    // These last two cases are special. I found that we can't show here a modal dialog with an error message.
+    // Somehow program doesn't wait until an error dialog will be closed. But if ignore the exception the program will
+    // hang.
     catch (const qmu::QmuParserError &e)
     {
         qCCritical(vApp, "%s", qUtf8Printable(tr("Parser error: %1. Program will be terminated.").arg(e.GetMsg())));

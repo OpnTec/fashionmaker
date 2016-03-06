@@ -150,8 +150,8 @@ void DialogPointOfIntersectionCircles::SetSecondCircleCenterId(const quint32 &va
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPointOfIntersectionCircles::GetFirstCircleRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(ui->plainTextEditCircle1Radius->toPlainText(),
-                                           qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditCircle1Radius->toPlainText(),
+                                              qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,8 +175,8 @@ void DialogPointOfIntersectionCircles::SetFirstCircleRadius(const QString &value
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPointOfIntersectionCircles::GetSecondCircleRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(ui->plainTextEditCircle2Radius->toPlainText(),
-                                           qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditCircle2Radius->toPlainText(),
+                                              qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

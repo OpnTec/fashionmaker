@@ -543,6 +543,12 @@ void DialogTool::DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowL
 
     const QTextCursor cursor = formula->textCursor();
 
+    //Before deploy ned to release dialog size
+    //I don't know why, but don't need to fixate again.
+    //A dialog will be lefted fixated. That's what we need.
+    setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
+    setMinimumSize(QSize(0, 0));
+
     if (formula->height() < DIALOG_MAX_FORMULA_HEIGHT)
     {
         formula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
