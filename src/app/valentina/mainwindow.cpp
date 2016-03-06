@@ -1674,6 +1674,12 @@ void MainWindow::CancelTool()
             ui->actionArrowTool->setChecked(false);
             helpLabel->setText("");
             ui->actionStopTool->setEnabled(true);
+
+            // Crash: using CRTL+Z while using line tool.
+            // related bug report:
+            // https://bitbucket.org/dismine/valentina/issues/454/crash-using-crtl-z-while-using-line-tool
+            undoAction->setEnabled(false);
+            redoAction->setEnabled(false);
             return;
         case Tool::BasePoint:
             Q_UNREACHABLE(); //-V501
@@ -1774,6 +1780,12 @@ void MainWindow::CancelTool()
     }
     currentScene->setFocus(Qt::OtherFocusReason);
     currentScene->clearSelection();
+
+    // Crash: using CRTL+Z while using line tool.
+    // related bug report:
+    // https://bitbucket.org/dismine/valentina/issues/454/crash-using-crtl-z-while-using-line-tool
+    undoAction->setEnabled(qApp->getUndoStack()->canUndo());
+    redoAction->setEnabled(qApp->getUndoStack()->canRedo());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
