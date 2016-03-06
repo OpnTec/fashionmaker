@@ -428,7 +428,7 @@ quint32 DialogArc::GetCenter() const
  */
 QString DialogArc::GetRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(radius, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(radius, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -438,7 +438,7 @@ QString DialogArc::GetRadius() const
  */
 QString DialogArc::GetF1() const
 {
-    return qApp->TrVars()->FormulaFromUser(f1, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(f1, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -448,5 +448,5 @@ QString DialogArc::GetF1() const
  */
 QString DialogArc::GetF2() const
 {
-    return qApp->TrVars()->FormulaFromUser(f2, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(f2, qApp->Settings()->GetOsSeparator());
 }

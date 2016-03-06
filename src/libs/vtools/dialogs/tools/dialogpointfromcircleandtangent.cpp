@@ -118,8 +118,8 @@ void DialogPointFromCircleAndTangent::SetCircleCenterId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogPointFromCircleAndTangent::GetCircleRadius() const
 {
-    return qApp->TrVars()->FormulaFromUser(ui->plainTextEditRadius->toPlainText(),
-                                           qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(ui->plainTextEditRadius->toPlainText(),
+                                              qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

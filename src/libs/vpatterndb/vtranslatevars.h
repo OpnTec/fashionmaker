@@ -54,6 +54,7 @@ public:
     QString PostfixOperator(const QString &name) const;
 
     QString FormulaFromUser(const QString &formula, bool osSeparator) const;
+    QString TryFormulaFromUser(const QString &formula, bool osSeparator) const;
     QString FormulaToUser(const QString &formula) const;
 
     virtual void Retranslate() Q_DECL_OVERRIDE;

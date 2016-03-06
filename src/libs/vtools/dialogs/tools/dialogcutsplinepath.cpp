@@ -225,7 +225,7 @@ void DialogCutSplinePath::ShowVisualization()
  */
 QString DialogCutSplinePath::GetFormula() const
 {
-    return qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+    return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
