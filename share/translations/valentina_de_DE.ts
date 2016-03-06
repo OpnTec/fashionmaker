@@ -2044,23 +2044,23 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation type="unfinished"></translation>
+        <translation>Das Erlauben von besonders hohen Seiten verschnellert das Erstellen.</translation>
     </message>
     <message>
         <source>Divide into strips</source>
-        <translation type="unfinished"></translation>
+        <translation>In Streifen aufteilen</translation>
     </message>
     <message>
         <source>Multiplier</source>
-        <translation type="unfinished"></translation>
+        <translation>Multiplikator</translation>
     </message>
     <message>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Multiplikator für die Länge des größten Schnittteils im Layout festlegen.</translation>
     </message>
     <message>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation>x</translation>
     </message>
 </context>
 <context>
@@ -3616,47 +3616,47 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Länge:</translation>
+        <translation>Länge:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formel-Assistent</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Wert</translation>
+        <translation>Wert</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Berechnung</translation>
+        <translation>Berechnung</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Winkel des ersten Kontrollpunktes bearbeiten</translation>
     </message>
     <message>
         <source>Edit second control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Winkel des zweiten Kontrollpunktes bearbeiten</translation>
     </message>
     <message>
         <source>Edit first control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Länge des ersten Kontrollpunktes bearbeiten</translation>
     </message>
     <message>
         <source>Edit second control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Länge des zweiten Kontrollpunktes bearbeiten</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>Länge kann nicht negativ sein</translation>
     </message>
 </context>
 <context>
@@ -3703,7 +3703,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Koeffizient für die Krümmung der Kurve:</translation>
+        <translation type="vanished">Koeffizient für die Krümmung der Kurve:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -3723,7 +3723,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Length ratio:</source>
-        <translation>Längenverhältnis:</translation>
+        <translation type="vanished">Längenverhältnis:</translation>
     </message>
     <message>
         <source>Second control point</source>
@@ -3736,6 +3736,54 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Invalid spline path</source>
         <translation>Ungültiger Spline-Pfad/glatte Kurve</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Länge:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Wert</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished">Berechnung</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first control point angle</source>
+        <translation type="unfinished">Winkel des ersten Kontrollpunktes bearbeiten</translation>
+    </message>
+    <message>
+        <source>Edit second control point angle</source>
+        <translation type="unfinished">Winkel des zweiten Kontrollpunktes bearbeiten</translation>
+    </message>
+    <message>
+        <source>Edit first control point length</source>
+        <translation type="unfinished">Länge des ersten Kontrollpunktes bearbeiten</translation>
+    </message>
+    <message>
+        <source>Edit second control point length</source>
+        <translation type="unfinished">Länge des zweiten Kontrollpunktes bearbeiten</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be negative</source>
+        <translation type="unfinished">Länge kann nicht negativ sein</translation>
+    </message>
+    <message>
+        <source>Not used</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7060,6 +7108,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating simple interactive spline</source>
+        <translation>Fehler beim Anlegen oder Aktualisieren der einfachen interaktiven Spline</translation>
+    </message>
+    <message>
+        <source>Error creating or updating interactive spline path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7204,7 +7256,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Curve factor</source>
-        <translation>Koeffizient für die Krümmung der Kurve</translation>
+        <translation type="vanished">Koeffizient für die Krümmung der Kurve</translation>
     </message>
     <message>
         <source>Tool for path curve</source>
@@ -7320,19 +7372,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>C1: angle</source>
-        <translation type="unfinished"></translation>
+        <translation>K1: Winkel</translation>
     </message>
     <message>
         <source>C1: length</source>
-        <translation type="unfinished"></translation>
+        <translation>K1: Länge</translation>
     </message>
     <message>
         <source>C2: angle</source>
-        <translation type="unfinished"></translation>
+        <translation>K2: Winkel</translation>
     </message>
     <message>
         <source>C2: length</source>
-        <translation type="unfinished"></translation>
+        <translation>K2: Länge</translation>
     </message>
 </context>
 <context>

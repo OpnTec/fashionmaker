@@ -3689,7 +3689,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Coefficient de courbure:</translation>
+        <translation type="vanished">Coefficient de courbure:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -3708,10 +3708,6 @@ Appliquer les réglages quand-même ?</translation>
         <translation type="unfinished">Angle:</translation>
     </message>
     <message>
-        <source>Length ratio:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Second control point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3721,6 +3717,54 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Longueur:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valeur</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit first control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit second control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be negative</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not used</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6966,6 +7010,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Error creating or updating simple interactive spline</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating interactive spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -7109,7 +7157,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Curve factor</source>
-        <translation>Facteur de courbe</translation>
+        <translation type="vanished">Facteur de courbe</translation>
     </message>
     <message>
         <source>Tool for path curve</source>

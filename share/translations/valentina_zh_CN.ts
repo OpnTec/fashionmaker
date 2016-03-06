@@ -376,22 +376,22 @@
 <context>
     <name>DialogAboutTape</name>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="20"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="26"/>
         <source>About Tape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="69"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="75"/>
         <source>Tape version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="85"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="91"/>
         <source>Build revision:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="92"/>
+        <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="98"/>
         <source>This program is part of Valentina project.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -574,35 +574,35 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="305"/>
         <source>Edit radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="318"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="319"/>
         <source>Edit first angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="333"/>
         <source>Edit second angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="368"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="402"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="408"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="370"/>
         <source>Radius can&apos;t be negative</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="403"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="409"/>
         <source>Angles equal</source>
         <translation type="unfinished"></translation>
     </message>
@@ -668,33 +668,33 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="259"/>
         <source>Edit radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="271"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="273"/>
         <source>Edit the first angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="287"/>
         <source>Edit the arc length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="355"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="373"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="357"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="375"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="356"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="358"/>
         <source>Radius can&apos;t be negative</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="376"/>
         <source>Length can&apos;t be equal 0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2939,17 +2939,17 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="257"/>
         <source>Edit radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="278"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="279"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="280"/>
         <source>Radius can&apos;t be negative</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3190,24 +3190,24 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="313"/>
         <source>Edit first circle radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="327"/>
         <source>Edit second circle radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="347"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="366"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="349"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="368"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="348"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="350"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="369"/>
         <source>Radius can&apos;t be negative</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3605,39 +3605,39 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="269"/>
         <source>Edit first control point angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="290"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="292"/>
         <source>Edit second control point angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="315"/>
         <source>Edit first control point length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="338"/>
         <source>Edit second control point length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="392"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="410"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="394"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="412"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="393"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="411"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="395"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="413"/>
         <source>Length can&apos;t be negative</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="466"/>
         <source>Invalid spline</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3660,50 +3660,118 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="54"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="98"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="473"/>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="118"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="493"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="674"/>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="160"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="535"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="769"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="778"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="804"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="813"/>
+        <source>Value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="186"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="561"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="742"/>
+        <source>Calulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="208"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="389"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="764"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="654"/>
         <source>Angle:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="81"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="100"/>
-        <source>Length ratio:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="420"/>
         <source>Second control point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="797"/>
         <source>List of points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="168"/>
-        <source>Coefficient of curvature of the curve:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="811"/>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="207"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="821"/>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="133"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="174"/>
         <source>Select point of curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="425"/>
+        <source>Edit first control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="450"/>
+        <source>Edit second control point angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="475"/>
+        <source>Edit first control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="500"/>
+        <source>Edit second control point length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="608"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="578"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="609"/>
+        <source>Length can&apos;t be negative</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="659"/>
         <source>Invalid spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="762"/>
+        <source>Not used</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3740,34 +3808,36 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="346"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="364"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="392"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="413"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="427"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="348"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="373"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="377"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="428"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="442"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="347"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="365"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="393"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="354"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="380"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="408"/>
         <source>Empty field</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="414"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="429"/>
         <source>Value can&apos;t be 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="421"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="436"/>
         <source>Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="430"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="431"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="446"/>
         <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4438,7 +4508,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1423"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3128"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3140"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4781,31 +4851,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="207"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2676"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2688"/>
         <source>Pattern piece %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="344"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3879"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3891"/>
         <source>Measurement file has unknown format.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="367"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3902"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3914"/>
         <source>Measurement file contains invalid known measurement(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="377"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3914"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3926"/>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="378"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3915"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3927"/>
         <source>Please, additionaly provide: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4823,8 +4893,8 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="399"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="436"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="480"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3536"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3628"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3640"/>
         <source>File error.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4961,13 +5031,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1141"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3184"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3196"/>
         <source>&amp;Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1142"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3190"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3202"/>
         <source>&amp;Redo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4979,17 +5049,17 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1212"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3860"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3872"/>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1215"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1244"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2248"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3849"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3856"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3863"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2260"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3861"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3868"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3875"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5046,268 +5116,268 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1948"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1960"/>
         <source>Detail mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1948"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1960"/>
         <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2036"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2048"/>
         <source>Layout mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2036"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2048"/>
         <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2112"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2234"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2124"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2246"/>
         <source>Pattern files (*.val)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2116"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2120"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2128"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2132"/>
         <source>pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2122"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2134"/>
         <source>Save as</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2142"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2154"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2158"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2217"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2170"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2229"/>
         <source>Could not save file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2185"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2197"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2397"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2441"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2409"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2453"/>
         <source>Error parsing file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2408"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2420"/>
         <source>Error can&apos;t convert value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2419"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2507"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2431"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2519"/>
         <source>Error empty parameter.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2430"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2442"/>
         <source>Error wrong id.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2464"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2496"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2508"/>
         <source>Bad id.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2737"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2765"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2749"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2777"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3006"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3018"/>
         <source>File saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3119"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3131"/>
         <source>Unsaved changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3120"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3132"/>
         <source>The pattern has been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3128"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3140"/>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3129"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3141"/>
         <source>Don&apos;t Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3460"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3472"/>
         <source>Pattern piece:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3462"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3474"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3592"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3603"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3604"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3615"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3648"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3660"/>
         <source>File loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3771"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3783"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3773"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3785"/>
         <source>Reopen files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3818"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3830"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3820"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3832"/>
         <source>Loading measurements file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3846"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3858"/>
         <source>Standard measurements (*.vst)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3853"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3865"/>
         <source>Individual measurements (*.vit)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4008"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4020"/>
         <source>You can&apos;t export empty scene.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4025"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4037"/>
         <source>Export error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4056"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4068"/>
         <source>Not supported size value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4063"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4075"/>
         <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4069"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4081"/>
         <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4075"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4118"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4087"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4130"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4099"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4111"/>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4106"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4118"/>
         <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4112"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4124"/>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4138"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4150"/>
         <source>Please, provide one input file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4196"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4208"/>
         <source>untitled.val</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4236"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4248"/>
         <source>(read only)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4274"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4280"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4287"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4286"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4292"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4299"/>
         <source>Locking file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4275"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4287"/>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4281"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4293"/>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4288"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4300"/>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4322"/>
         <source>This file already opened in another window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4314"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4326"/>
         <source>The lock file could not be created, for lack of permissions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4318"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4330"/>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5634,23 +5704,23 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="589"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="567"/>
         <source>mm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="599"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="629"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="577"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="607"/>
         <source>cm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="609"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="587"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="619"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="597"/>
         <source>px</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6267,7 +6337,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1065"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2125"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2114"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6339,7 +6409,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1232"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1142"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1131"/>
         <source>Import from a pattern</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6360,26 +6430,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="220"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2612"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2601"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="261"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2653"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2642"/>
         <source>File has unknown format.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="284"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2674"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2663"/>
         <source>File contains invalid known measurement(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="312"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1173"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2703"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1162"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2692"/>
         <source>File error.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6411,31 +6481,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="502"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1801"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1790"/>
         <source>Standard measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="508"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1847"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1836"/>
         <source>Height: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="509"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1853"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1842"/>
         <source>Size: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="513"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1873"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1862"/>
         <source>Individual measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="533"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2892"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2881"/>
         <source>Pattern unit:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6477,12 +6547,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1002"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1406"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1479"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1538"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1577"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1616"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1680"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1395"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1468"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1527"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1566"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1605"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1669"/>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6492,162 +6562,162 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1047"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1036"/>
         <source>M_%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1138"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1127"/>
         <source>Pattern files (*.val)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1151"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2842"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1140"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2831"/>
         <source>This file already opened in another window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1335"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1324"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1434"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1423"/>
         <source>The name of known measurement forbidden to change.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1466"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2409"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2438"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1455"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2398"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2427"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1466"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2409"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1455"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2398"/>
         <source>Empty field.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1699"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1688"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2043"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2032"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2045"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2034"/>
         <source>&lt;Empty&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2046"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2035"/>
         <source>File was not saved yet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2116"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2105"/>
         <source>Unsaved changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2117"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2106"/>
         <source>Measurements have been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2125"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2114"/>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2126"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2115"/>
         <source>Don&apos;t Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2410"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2399"/>
         <source>Empty field</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2433"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2422"/>
         <source>Value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2438"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2439"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2427"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2428"/>
         <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2448"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2437"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2659"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2648"/>
         <source>Export standard measurements not supported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2758"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2747"/>
         <source>&amp;New Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2807"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2813"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2820"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2796"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2802"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2809"/>
         <source>Locking file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2808"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2797"/>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2814"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2803"/>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2821"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2810"/>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2846"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2835"/>
         <source>The lock file could not be created, for lack of permissions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2850"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2839"/>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2924"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2913"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2925"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2914"/>
         <source>male</source>
         <comment>gender</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2926"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2915"/>
         <source>female</source>
         <comment>gender</comment>
         <translation type="unfinished"></translation>
@@ -6983,12 +7053,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="365"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="366"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="370"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="371"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7301,65 +7371,65 @@ Do you want to save your changes?</source>
 <context>
     <name>VDomDocument</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="219"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="197"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="248"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="226"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="322"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="300"/>
         <source>Got empty parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="347"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="325"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="378"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="356"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="445"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="423"/>
         <source>This id is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="472"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="529"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="450"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="507"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="480"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="458"/>
         <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="491"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="469"/>
         <source>Could not load schema file &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="515"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="493"/>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="540"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="518"/>
         <source>Parsing error file %3 in line %1 column %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="777"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="755"/>
         <source>Couldn&apos;t get node</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7644,50 +7714,56 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1994"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1996"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2079"/>
         <source>Error creating or updating curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2020"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2085"/>
+        <source>Error creating or updating interactive spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2111"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2046"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2137"/>
         <source>Error creating or updating modeling curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2085"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2091"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2157"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2163"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2176"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2182"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2248"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2254"/>
         <source>Error creating or updating simple arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2117"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2208"/>
         <source>Error creating or updating modeling arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2312"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2408"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2348"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2444"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2386"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2482"/>
         <source>Error creating or updating union details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2392"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2488"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7703,19 +7779,19 @@ Do you want to save your changes?</source>
 <context>
     <name>VSplinePath</name>
     <message>
-        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="83"/>
+        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="156"/>
         <source>Not enough points to create the spline.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="87"/>
-        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="143"/>
         <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="160"/>
+        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="237"/>
+        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="260"/>
         <source>This spline does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="202"/>
+        <location filename="../../src/libs/vgeometry/vsplinepath.cpp" line="338"/>
         <source>Can&apos;t cut spline path with one point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7766,321 +7842,316 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1464"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1457"/>
         <source>Base point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1466"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1480"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1494"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1533"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1557"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1569"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1581"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1593"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1618"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1629"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1648"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1659"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1669"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1680"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1693"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1705"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1717"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1728"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1799"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1809"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1822"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1459"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1473"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1487"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1526"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1550"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1562"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1574"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1586"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1611"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1622"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1641"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1652"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1662"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1673"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1686"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1698"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1710"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1721"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1783"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1793"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1806"/>
         <source>Point label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1468"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1461"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1478"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1471"/>
         <source>Point at distance and angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1481"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1495"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1534"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1594"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1607"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1630"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1729"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1810"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1823"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1474"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1488"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1527"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1587"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1600"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1623"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1722"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1794"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1807"/>
         <source>Line type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1482"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1496"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1535"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1595"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1608"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1631"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1730"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1811"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1824"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1475"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1489"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1528"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1588"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1601"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1624"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1723"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1795"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1808"/>
         <source>Line color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1483"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1497"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1522"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1536"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1558"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1570"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1582"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1628"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1731"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1476"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1490"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1515"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1529"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1551"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1563"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1575"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1621"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1724"/>
         <source>Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1484"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1812"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1825"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1477"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1796"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1809"/>
         <source>Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1492"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1485"/>
         <source>Point at distance along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1505"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1498"/>
         <source>Arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1507"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1520"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1649"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1500"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1513"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1642"/>
         <source>Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1508"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1521"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1501"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1514"/>
         <source>First angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1509"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1502"/>
         <source>Second angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1510"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1523"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1559"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1571"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1583"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1769"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1789"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1503"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1516"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1552"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1564"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1576"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1762"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1773"/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1518"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1511"/>
         <source>Arc with given length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1531"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1524"/>
         <source>Point along bisector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1544"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1537"/>
         <source>True darts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1546"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1539"/>
         <source>Point 1 label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1547"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1540"/>
         <source>Point 2 label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1555"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1548"/>
         <source>Cut arc tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1567"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1560"/>
         <source>Tool for segmenting a curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1579"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1572"/>
         <source>Tool segment a pathed curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1591"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1584"/>
         <source>Perpendicular point along line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1603"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1596"/>
         <source>Line between points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1616"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1609"/>
         <source>Point at line intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1626"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1619"/>
         <source>Point along perpendicular</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1633"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1626"/>
         <source>Additional angle degrees</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1646"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1639"/>
         <source>Point at intersection of arc and line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1657"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1650"/>
         <source>Tool to make point from x &amp; y of two other points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1667"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1660"/>
         <source>Tool to make point from intersection two arcs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1670"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1683"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1707"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1718"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1663"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1676"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1700"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1711"/>
         <source>Take</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1678"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1671"/>
         <source>Tool to make point from intersection two circles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1681"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1674"/>
         <source>First circle radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1682"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1675"/>
         <source>Second circle radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1691"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1684"/>
         <source>Tool to make point from intersection two curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1694"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1687"/>
         <source>Vertical correction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1695"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1688"/>
         <source>Horizontal correction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1703"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1696"/>
         <source>Tool to make point from circle and tangent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1706"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1699"/>
         <source>Circle radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1715"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1708"/>
         <source>Tool to make point from arc and tangent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1726"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1719"/>
         <source>Special point on shoulder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1739"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1732"/>
         <source>Curve tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1743"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1779"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1736"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1772"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1749"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1742"/>
         <source>C1: angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1755"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1748"/>
         <source>C1: length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1761"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1754"/>
         <source>C2: angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1767"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1760"/>
         <source>C2: length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1781"/>
-        <source>Curve factor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1777"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1770"/>
         <source>Tool for path curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1797"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1781"/>
         <source>Tool triangle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1807"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1791"/>
         <source>Point intersection line and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1820"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="1804"/>
         <source>Point intersection curve and axis</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8088,1230 +8159,1230 @@ Do you want to save your changes?</source>
 <context>
     <name>VTranslateVars</name>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="75"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="76"/>
         <source>Bunka</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="76"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="77"/>
         <source>Bunka Fashion College</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="77"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="78"/>
         <source>Fundamentals of Garment Design</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="80"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="81"/>
         <source>Barnfield and Richard</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="81"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="82"/>
         <source>Jo Barnfield and Andrew Richards</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="82"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="83"/>
         <source>Pattern Making Primer</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="85"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="86"/>
         <source>Friendship/Women</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="86"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="322"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="87"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="323"/>
         <source>Elizabeth Friendship</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="87"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="88"/>
         <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="91"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="92"/>
         <source>Morris, K.</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="92"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="93"/>
         <source>Karen Morris</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="93"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="94"/>
         <source>Sewing Lingerie that Fits</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="96"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="97"/>
         <source>Castro</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="97"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="98"/>
         <source>Lucia Mors de Castro</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="98"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="99"/>
         <source>Patternmaking in Practic</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="101"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="102"/>
         <source>Kim &amp; Uh</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="102"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="103"/>
         <source>Injoo Kim and Mykyung Uh</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="103"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="104"/>
         <source>Apparel Making in Fashion Design</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="106"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="107"/>
         <source>Waugh</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="107"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="108"/>
         <source>Norah Waugh</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="108"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="109"/>
         <source>Corsets and Crinolines</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="111"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="112"/>
         <source>Grimble</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="112"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="113"/>
         <source>Frances Grimble</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="113"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="114"/>
         <source>Fashions of the Gilded Age</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="116"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="117"/>
         <source>Thornton&apos;s International System</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="117"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="354"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="118"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="355"/>
         <source>ed. R. L. Shep</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="118"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="355"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="119"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="356"/>
         <source>The Great War: Styles and Patterns of the 1910s</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="121"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="122"/>
         <source>Hillhouse &amp; Mansfield</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="122"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="123"/>
         <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="123"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="124"/>
         <source>Dress Design: Draping and Flat Pattern Making</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="126"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="127"/>
         <source>Pivnick</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="127"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="128"/>
         <source>Esther Kaplan Pivnick</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="128"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="129"/>
         <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="131"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="132"/>
         <source>Minister &amp; Son</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="132"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="133"/>
         <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="133"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="134"/>
         <source>The Complete Guide to Practical Cutting (1853)</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="136"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="137"/>
         <source>Strickland</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="137"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="138"/>
         <source>Gertrude Strickland</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="138"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="139"/>
         <source>A Tailoring Manual</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="141"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="142"/>
         <source>Loh &amp; Lewis</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="142"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="143"/>
         <source>May Loh and Diehl Lewis</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="143"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="144"/>
         <source>Patternless Fashion Design</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="146"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="147"/>
         <source>Morris, F. R.</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="147"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="148"/>
         <source>F. R. Morris</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="148"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="149"/>
         <source>Ladies Garment Cutting and Making</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="151"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="152"/>
         <source>Mason</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="152"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="153"/>
         <source>Gertrude Mason</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="153"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="154"/>
         <source>Gertrude Mason&apos;s Patternmaking Book</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="156"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="157"/>
         <source>Kimata</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="157"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="158"/>
         <source>K. Kimata</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="158"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="159"/>
         <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="161"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="162"/>
         <source>Master Designer</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="162"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="163"/>
         <source>The Master Designer (Chicago, IL)</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="163"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="164"/>
         <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="166"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="167"/>
         <source>Kopp</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="167"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="168"/>
         <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="168"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="169"/>
         <source>How to Draft Basic Patterns</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="171"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="172"/>
         <source>Ekern</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="172"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="173"/>
         <source>Doris Ekern</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="173"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="174"/>
         <source>Slacks Cut-to-Fit for Your Figure</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="176"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="177"/>
         <source>Doyle</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="177"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="178"/>
         <source>Sarah J. Doyle</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="178"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="179"/>
         <source>Sarah&apos;s Key to Pattern Drafting</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="181"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="182"/>
         <source>Shelton</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="182"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="183"/>
         <source>Karla J. Shelton</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="183"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="184"/>
         <source>Design and Sew Jeans</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="186"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="187"/>
         <source>Lady Boutique</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="187"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="188"/>
         <source>Lady Boutique</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="188"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="189"/>
         <source>Lady Boutique magazine (Japan)</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="191"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="192"/>
         <source>Rohr</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="192"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="193"/>
         <source>M. Rohr</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="193"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="194"/>
         <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="196"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="197"/>
         <source>Moore</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="197"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="198"/>
         <source>Dorothy Moore</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="198"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="199"/>
         <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="201"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="202"/>
         <source>Abling</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="202"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="203"/>
         <source>Bina Abling</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="203"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="204"/>
         <source>Integrating Draping, Drafting and Drawing</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="206"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="207"/>
         <source>Fukomoto</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="207"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="208"/>
         <source>Sue S. Fukomoto</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="208"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="209"/>
         <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="212"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="213"/>
         <source>Dressmaking International</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="213"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="214"/>
         <source>Dressmaking International</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="214"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="215"/>
         <source>Dressmaking International magazine (Japan)</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="217"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="218"/>
         <source>Erwin</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="218"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="219"/>
         <source>Mabel D. Erwin</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="219"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="220"/>
         <source>Practical Dress Design</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="222"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="223"/>
         <source>Gough</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="223"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="224"/>
         <source>E. L. G. Gough</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="224"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="225"/>
         <source>Principles of Garment Cutting</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="227"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="228"/>
         <source>Allemong</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="228"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="229"/>
         <source>Elizabeth M. Allemong</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="229"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="230"/>
         <source>European Cut</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="232"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="233"/>
         <source>McCunn</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="233"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="234"/>
         <source>Donald H. McCunn</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="234"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="235"/>
         <source>How to Make Your Own Sewing Patterns</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="237"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="238"/>
         <source>Zarapkar</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="238"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="239"/>
         <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="239"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="240"/>
         <source>Zarapkar System of Cutting</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="242"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="243"/>
         <source>Kunick</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="243"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="244"/>
         <source>Philip Kunick</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="244"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="245"/>
         <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="248"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="249"/>
         <source>Handford</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="249"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="250"/>
         <source>Jack Handford</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="250"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="251"/>
         <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="254"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="255"/>
         <source>Davis</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="255"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="256"/>
         <source>R. I. Davis</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="256"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="257"/>
         <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="259"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="260"/>
         <source>MacLochlainn</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="260"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="261"/>
         <source>Jason MacLochlainn</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="261"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="262"/>
         <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="264"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="265"/>
         <source>Joseph-Armstrong</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="265"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="266"/>
         <source>Helen Joseph-Armstrong</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="266"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="267"/>
         <source>Patternmaking for Fashion Design</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="269"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="270"/>
         <source>Supreme System</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="270"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="271"/>
         <source>Frederick T. Croonberg</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="271"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="272"/>
         <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="275"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="276"/>
         <source>Sugino</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="276"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="277"/>
         <source>Dressmaking</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="277"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="278"/>
         <source>Pattern Drafting Vols. I, II, III (Japan)</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="280"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="281"/>
         <source>Centre Point System</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="281"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="282"/>
         <source>Louis Devere</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="282"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="283"/>
         <source>The Handbook of Practical Cutting on the Centre Point System</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="285"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="286"/>
         <source>Aldrich/Men</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="286"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="291"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="287"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="292"/>
         <source>Winifred Aldrich</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="287"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="288"/>
         <source>Metric Pattern Cutting for Menswear</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="290"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="291"/>
         <source>Aldrich/Women</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="292"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="293"/>
         <source>Metric Pattern Cutting for Women&apos;s Wear</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="295"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="296"/>
         <source>Kershaw</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="296"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="297"/>
         <source>Gareth Kershaw</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="297"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="298"/>
         <source>Patternmaking for Menswear</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="300"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="301"/>
         <source>Gilewska</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="301"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="302"/>
         <source>Teresa Gilewska</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="302"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="303"/>
         <source>Pattern-Drafting for Fashion: The Basics</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="305"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="306"/>
         <source>Lo</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="306"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="307"/>
         <source>Dennic Chunman Lo</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="307"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="308"/>
         <source>Pattern Cutting</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="310"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="311"/>
         <source>Bray</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="311"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="312"/>
         <source>Natalie Bray</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="312"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="313"/>
         <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="315"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="316"/>
         <source>Knowles/Men</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="316"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="348"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="317"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="349"/>
         <source>Lori A. Knowles</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="317"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="318"/>
         <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="321"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="322"/>
         <source>Friendship/Men</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="323"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="324"/>
         <source>Pattern Cutting for Men&apos;s Costume</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="326"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="327"/>
         <source>Brown</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="327"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="328"/>
         <source>P. Clement Brown</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="328"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="329"/>
         <source>Art in Dress</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="331"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="332"/>
         <source>Mitchell</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="332"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="333"/>
         <source>Jno. J. Mitchell</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="333"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="334"/>
         <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="337"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="338"/>
         <source>GOST 17917-86</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="338"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="339"/>
         <source>Ministry of consumer industry of the USSR</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="339"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="340"/>
         <source>Standard figure boys</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="342"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="343"/>
         <source>Eddy</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="343"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="344"/>
         <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="344"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="345"/>
         <source>Pattern and Dress Design</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="347"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="348"/>
         <source>Knowles/Women</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="349"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="350"/>
         <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="353"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="354"/>
         <source>American Garment Cutter</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="358"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="359"/>
         <source>None</source>
         <comment>System name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="359"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="360"/>
         <source>Valentina team</source>
         <comment>Author name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="360"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="361"/>
         <source>Valentina&apos;s internal standard</source>
         <comment>Book name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="368"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="369"/>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="369"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="370"/>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="370"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="371"/>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="371"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="372"/>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="372"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="373"/>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="373"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="374"/>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="374"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="375"/>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="375"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="376"/>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="376"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="377"/>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="377"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="378"/>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="378"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="379"/>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="380"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="381"/>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="387"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="388"/>
         <source>sin</source>
         <comment>sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="388"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="389"/>
         <source>cos</source>
         <comment>cosine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="389"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="390"/>
         <source>tan</source>
         <comment>tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="390"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="391"/>
         <source>asin</source>
         <comment>arcus sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="391"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="392"/>
         <source>acos</source>
         <comment>arcus cosine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="392"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="393"/>
         <source>atan</source>
         <comment>arcus tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="393"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="394"/>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="394"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="395"/>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="395"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="396"/>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="396"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="397"/>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="397"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="398"/>
         <source>acosh</source>
         <comment>hyperbolic arcus tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="398"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="399"/>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="399"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="400"/>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="400"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="401"/>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="401"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="402"/>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="402"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="403"/>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="403"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="404"/>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="404"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="405"/>
         <source>sqrt</source>
         <comment>square root of a value</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="405"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="406"/>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="406"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="407"/>
         <source>rint</source>
         <comment>round to nearest integer</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="407"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="408"/>
         <source>abs</source>
         <comment>absolute value</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="408"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="409"/>
         <source>min</source>
         <comment>min of all arguments</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="409"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="410"/>
         <source>max</source>
         <comment>max of all arguments</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="410"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="411"/>
         <source>sum</source>
         <comment>sum of all arguments</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="411"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="412"/>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="412"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="413"/>
         <source>fmod</source>
         <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="419"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="420"/>
         <source>cm</source>
         <comment>centimeter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="420"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="421"/>
         <source>mm</source>
         <comment>millimeter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="421"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="422"/>
         <source>in</source>
         <comment>inch</comment>
         <translation type="unfinished"></translation>

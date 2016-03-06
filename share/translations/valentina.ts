@@ -2044,23 +2044,23 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation type="unfinished"></translation>
+        <translation>Enabling for sheets that have big height will speed up creating. </translation>
     </message>
     <message>
         <source>Divide into strips</source>
-        <translation type="unfinished"></translation>
+        <translation>Divide into strips</translation>
     </message>
     <message>
         <source>Multiplier</source>
-        <translation type="unfinished"></translation>
+        <translation>Multiplier</translation>
     </message>
     <message>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Set multiplier for length of the biggest workpiece in layout.</translation>
     </message>
     <message>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation>x</translation>
     </message>
 </context>
 <context>
@@ -3616,47 +3616,47 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Length:</translation>
+        <translation>Length:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Formula wizard</translation>
+        <translation>Formula wizard</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Calulation</translation>
+        <translation>Calulation</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit first control point angle</translation>
     </message>
     <message>
         <source>Edit second control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit second control point angle</translation>
     </message>
     <message>
         <source>Edit first control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit first control point length</translation>
     </message>
     <message>
         <source>Edit second control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit second control point length</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>Length can&apos;t be negative</translation>
     </message>
 </context>
 <context>
@@ -3703,7 +3703,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
-        <translation>Coefficient of curvature of the curve:</translation>
+        <translation type="vanished">Coefficient of curvature of the curve:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -3723,7 +3723,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Length ratio:</source>
-        <translation>Length ratio:</translation>
+        <translation type="vanished">Length ratio:</translation>
     </message>
     <message>
         <source>Second control point</source>
@@ -3736,6 +3736,54 @@ Apply settings anyway?</translation>
     <message>
         <source>Invalid spline path</source>
         <translation>Invalid spline path</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Length:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Formula wizard</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Value</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished">Calulation</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Edit first control point angle</source>
+        <translation type="unfinished">Edit first control point angle</translation>
+    </message>
+    <message>
+        <source>Edit second control point angle</source>
+        <translation type="unfinished">Edit second control point angle</translation>
+    </message>
+    <message>
+        <source>Edit first control point length</source>
+        <translation type="unfinished">Edit first control point length</translation>
+    </message>
+    <message>
+        <source>Edit second control point length</source>
+        <translation type="unfinished">Edit second control point length</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Length can&apos;t be negative</source>
+        <translation type="unfinished">Length can&apos;t be negative</translation>
+    </message>
+    <message>
+        <source>Not used</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7062,6 +7110,10 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Error creating or updating simple interactive spline</source>
+        <translation>Error creating or updating simple interactive spline</translation>
+    </message>
+    <message>
+        <source>Error creating or updating interactive spline path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7206,7 +7258,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Curve factor</source>
-        <translation>Curve factor</translation>
+        <translation type="vanished">Curve factor</translation>
     </message>
     <message>
         <source>Tool for path curve</source>
@@ -7322,19 +7374,19 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>C1: angle</source>
-        <translation type="unfinished"></translation>
+        <translation>C1: angle</translation>
     </message>
     <message>
         <source>C1: length</source>
-        <translation type="unfinished"></translation>
+        <translation>C1: length</translation>
     </message>
     <message>
         <source>C2: angle</source>
-        <translation type="unfinished"></translation>
+        <translation>C2: angle</translation>
     </message>
     <message>
         <source>C2: length</source>
-        <translation type="unfinished"></translation>
+        <translation>C2: length</translation>
     </message>
 </context>
 <context>

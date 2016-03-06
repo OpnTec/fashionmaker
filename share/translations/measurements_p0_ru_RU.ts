@@ -325,7 +325,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="311"/>
         <source>Vertical distance from the Neck Back (cervicale vertebra) to the fold at the back of the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Определяют как разность размерных признаков №9 и №10.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="315"/>
@@ -505,7 +505,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="406"/>
         <source>Horizontal distance from Scapula (Blade point) to the Neck Back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Размерный признак в стандарте №74.Измеряют по горизонтали расстояние от шейной точки до вертикальной плоскости, касательной паиболее выступающих назад точек обеих лопаток.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="410"/>
@@ -991,7 +991,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="646"/>
         <source>From Neck Side to Neck Side through Neck Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ленту накладывают на основание шеи так, чтобы оба края ленты плотно прилегали к ее поверхности, и замыкают спереди над яремной вырезкой. Размер читают по нижнему краю ленты. Мерка записывается в половинном размере.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="650"/>
@@ -1009,7 +1009,8 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="653"/>
         <source>From Highbust Side (Armpit) to HIghbust Side (Armpit) across chest.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ленту накладывают на лопатки. По спине лента должна проходить горизонтально, касаясь верхним краем задних углов подмышечной впадин, затем по подмышечным впадинам. Спереди лента должна проходить на уровне передних углов подмышечных впадин и замыкаться на правой стороне груди. По верхнему краю ленты делают отметку спереди над правой сосковой точкой.
+Мерка записывается в половинном размере.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="657"/>
@@ -1027,7 +1028,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="660"/>
         <source>From Bust Side to Bust Side across chest.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ленту накладывают на лопатки. По спине лента должна проходить горизонтально, касаясь верхним краем задних углов подмышечных впадин, затем по подмышечным впадинам в плоскости косого сечения, спереди — через сосковые точки и замыкаться на правой стороне груди. Мерка записывается в половинном размере.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="664"/>
@@ -1045,7 +1046,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="667"/>
         <source>From Lowbust Side to Lowbust Side across front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ленту накладывают горизонтально вокруг туловища через сосковые точки и замыкают на правой стороне груди. Мерка записывается в половинном размере.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="671"/>
@@ -1081,7 +1082,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="681"/>
         <source>From Waist Side to Waist Side across front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ленту накладывают горизонтально вокруг туловища на уровне линии талии и замыкают спереди. Мерка записывается в половинном размере.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="685"/>
@@ -1117,7 +1118,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="695"/>
         <source>From Hip Side to Hip Side across Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Размерный признак №20. Ленту накладывают на ягодичные точки. Лента должна проходить горизонтально вокруг туловища и замыкаться на правой стороне туловища</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="699"/>
@@ -1567,7 +1568,8 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="880"/>
         <source>Curve stiff paper around front of abdomen, tape at sides. Measure from Hip Side to Hip Side over paper across front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ленту накладывают на ягодичные точки. Лента должна проходить горизонтально вокруг туловища, спереди - по гибкой пластине, приложенной вертикально к животу для учета выступа живота, и замыкаться на правой стороне туловища
+</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="885"/>
@@ -2179,7 +2181,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1132"/>
         <source>From Waist Front to Highhip Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Размерный признак в стандарте №78. Измеряют по горизонтали расстояние от вертикальной плоскости, касательной к выступающим точкам лопаток, до линейки, приложенной горизонтально к продольным мышцам спины на уровне линии талии.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1135"/>
@@ -2197,7 +2199,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1138"/>
         <source>From Waist Front to Hip Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Размерный признак в стандарте №79. Измеряют по горизонтали расстояние от вертикальной плоскости, касательной к ягодичным точкам, до линейки, приложенной горизонтально к продольным мышцам спины на уровне линии талии.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1141"/>
@@ -2683,7 +2685,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1352"/>
         <source>From Neck Side to Bustpoint.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измеряют от точки  основания шеи до выступающей точки грудной железы.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1355"/>
@@ -2827,7 +2829,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1421"/>
         <source>From Shoulder Tip diagonal to Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измеряют от выступающей точки грудной железы до плечевой точки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1425"/>
@@ -3133,7 +3135,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1554"/>
         <source>From Shoulder Tip to Wrist bone, arm straight.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измеряют расстояние от плечевой точки до линии обхвата запястья.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1558"/>
@@ -3151,7 +3153,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1561"/>
         <source>From Shoulder tip to Elbow Tip, arm straight.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измеряют расстояние от плечевой точки до лучевой точки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1565"/>
@@ -3421,7 +3423,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1667"/>
         <source>Horizontal distance between Armscye Front and Armscye Back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Измеряют горизонтально на уровне заднего угла подмышечной впадины.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1671"/>
