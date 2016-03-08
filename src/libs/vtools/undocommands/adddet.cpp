@@ -59,14 +59,7 @@ void AddDet::undo()
                 return;
             }
 
-            QVector<VNodeDetail> nodes = detail.getNodes();
-            if (nodes.size()>0)
-            {
-                for (qint32 i = 0; i < nodes.size(); ++i)
-                {
-                    doc->DecrementReferens(nodes.at(i).getId());
-                }
-            }
+            DecrementReferences(detail.getNodes());
         }
         else
         {

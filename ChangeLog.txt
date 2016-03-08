@@ -11,6 +11,9 @@
 - [#325] Check pattern for inverse compatibility.
 - [#385] Add 'Open Recent' option in Tape.exe, 'File' dropdown menu.
 
+# Version 0.4.4
+- Fixed wrong handling with true darts points inside tool detail.
+
 # Version 0.4.3 March 6, 2016
 - [#456] Crash: broken formula + clicking on the f(x) symbol.
 - [#454] Crash: using CRTL+Z while using line tool
