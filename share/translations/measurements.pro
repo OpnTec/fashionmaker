@@ -40,7 +40,8 @@ LANGUAGES += \
     en_CA \
     en_IN \
     ro_RO \
-    zh_CN
+    zh_CN \
+    pt_BR
 
 
 for(sys, PMSYSTEMS) {

@@ -27,7 +27,8 @@ isEmpty(LOCALES){
         en_CA \
         en_IN \
         ro_RO \
-        zh_CN
+        zh_CN \
+        pt_BR
 } else {
     LANGUAGES = $${LOCALES}
 }
@@ -220,7 +221,15 @@ macx{
                 $$files($${TRANSLATIONS_PATH}/*_zh_CN.qm) \
                 $$[QT_INSTALL_TRANSLATIONS]/qt_zh_CN.qm \
                 $${TRANSLATIONS_PATH}/Localizable.strings
-            TRANSLATION_ro_RO.path = "$$RESOURCES_DIR/translations/zh_CN.lproj"
+            TRANSLATION_zh_CN.path = "$$RESOURCES_DIR/translations/zh_CN.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_zh_CN
+        }
+
+        exists($${TRANSLATIONS_PATH}/valentina_pt_BR.qm){
+            TRANSLATION_pt_BR.files += \
+                $$files($${TRANSLATIONS_PATH}/*_pt_BR.qm) \
+                $${TRANSLATIONS_PATH}/Localizable.strings
+            TRANSLATION_pt_BR.path = "$$RESOURCES_DIR/translations/pt_BR.lproj"
+            QMAKE_BUNDLE_DATA += TRANSLATION_pt_BR
         }
 }

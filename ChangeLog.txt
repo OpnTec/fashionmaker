@@ -6,7 +6,7 @@
 - Improved exporting to dxf. QPainterPath export as Polyline.
 - Show additional message dialog if measurements was changed. Related to issue [#440].
 - [#132] Intersect Curves.
-- Added language Chinese (China).
+- Added language Chinese (China) and Portuguese (Brazil).
 - New icon for VAL file. Updated Tape logo. Updated ico for standard measurements.
 - [#325] Check pattern for inverse compatibility.
 - [#385] Add 'Open Recent' option in Tape.exe, 'File' dropdown menu.
