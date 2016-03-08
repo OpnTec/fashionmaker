@@ -439,15 +439,8 @@ void VToolUnionDetails::incrementReferens()
     ++_referens;
     if (_referens == 1)
     {
-        for (int i = 0; i < d1.CountNode(); ++i)
-        {
-            doc->IncrementReferens(d1.at(i).getId());
-        }
-
-        for (int i = 0; i < d2.CountNode(); ++i)
-        {
-            doc->IncrementReferens(d2.at(i).getId());
-        }
+        IncrementReferences(d1);
+        IncrementReferences(d2);
 
         QDomElement domElement = doc->elementById(id);
         if (domElement.isElement())
@@ -466,15 +459,8 @@ void VToolUnionDetails::decrementReferens()
     }
     if (_referens == 0)
     {
-        for (int i = 0; i < d1.CountNode(); ++i)
-        {
-            doc->DecrementReferens(d1.at(i).getId());
-        }
-
-        for (int i = 0; i < d2.CountNode(); ++i)
-        {
-            doc->DecrementReferens(d2.at(i).getId());
-        }
+        DecrementReferences(d1);
+        DecrementReferences(d2);
 
         QDomElement domElement = doc->elementById(id);
         if (domElement.isElement())
@@ -878,6 +864,56 @@ void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
     {
         qCDebug(vToolUnion, "Can't find tag %s.", qUtf8Printable(VAbstractPattern::TagModeling));
         return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolUnionDetails::IncrementReferences(const VDetail &d) const
+{
+    for (int i = 0; i < d.CountNode(); ++i)
+    {
+        switch (d.at(i).getTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                const auto point = VAbstractTool::data.GeometricObject<VPointF>(d.at(i).getId());
+                doc->IncrementReferens(point->getIdTool());
+                break;
+            }
+            case (Tool::NodeArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+                doc->IncrementReferens(d.at(i).getId());
+                break;
+            default:
+                qDebug()<<"Get wrong tool type. Ignore.";
+                break;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolUnionDetails::DecrementReferences(const VDetail &d) const
+{
+    for (int i = 0; i < d.CountNode(); ++i)
+    {
+        switch (d.at(i).getTypeTool())
+        {
+            case (Tool::NodePoint):
+            {
+                const auto point = VAbstractTool::data.GeometricObject<VPointF>(d.at(i).getId());
+                doc->DecrementReferens(point->getIdTool());
+                break;
+            }
+            case (Tool::NodeArc):
+            case (Tool::NodeSpline):
+            case (Tool::NodeSplinePath):
+                doc->DecrementReferens(d.at(i).getId());
+                break;
+            default:
+                qDebug()<<"Get wrong tool type. Ignore.";
+                break;
+        }
     }
 }
 

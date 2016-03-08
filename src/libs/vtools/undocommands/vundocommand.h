@@ -53,6 +53,7 @@ enum class UndoCommand: char { AddPatternPiece,
                              };
 
 class VPattern;
+class VNodeDetail;
 
 class VUndoCommand : public QObject, public QUndoCommand
 {
@@ -71,6 +72,9 @@ protected:
     bool         redoFlag;
     virtual void RedoFullParsing();
     void         UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const;
+
+    void         IncrementReferences(const QVector<VNodeDetail> &nodes) const;
+    void         DecrementReferences(const QVector<VNodeDetail> &nodes) const;
 private:
     Q_DISABLE_COPY(VUndoCommand)
 };

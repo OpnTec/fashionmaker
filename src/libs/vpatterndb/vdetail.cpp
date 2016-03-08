@@ -322,16 +322,16 @@ VDetail VDetail::RemoveEdge(const quint32 &index) const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Missing find missing ids in detail. When we deleted object in detail and return this detail need
+ * @brief Missing find missing nodes in detail. When we deleted object in detail and return this detail need
  * understand, what nodes need make invisible.
  * @param det changed detail.
- * @return  list with missing detail.
+ * @return  list with missing nodes.
  */
-QList<quint32> VDetail::Missing(const VDetail &det) const
+QVector<VNodeDetail> VDetail::Missing(const VDetail &det) const
 {
     if (d->nodes.size() == det.CountNode()) //-V807
     {
-        return QList<quint32>();
+        return QVector<VNodeDetail>();
     }
 
     QSet<quint32> set1;
@@ -346,9 +346,18 @@ QList<quint32> VDetail::Missing(const VDetail &det) const
         set2.insert(det.at(j).getId());
     }
 
-    QSet<quint32> set3 = set1.subtract(set2);
+    const QList<quint32> set3 = set1.subtract(set2).toList();
+    QVector<VNodeDetail> nodes;
+    for (qint32 i = 0; i < set3.size(); ++i)
+    {
+        const int index = indexOfNode(d->nodes, set3.at(i));
+        if (index != -1)
+        {
+            nodes.append(d->nodes.at(index));
+        }
+    }
 
-    return set3.toList();
+    return nodes;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
