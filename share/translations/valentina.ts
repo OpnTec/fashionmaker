@@ -3739,51 +3739,51 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Length:</translation>
+        <translation>Length:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Formula wizard</translation>
+        <translation>Formula wizard</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Calulation</translation>
+        <translation>Calulation</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
-        <translation type="unfinished">Edit first control point angle</translation>
+        <translation>Edit first control point angle</translation>
     </message>
     <message>
         <source>Edit second control point angle</source>
-        <translation type="unfinished">Edit second control point angle</translation>
+        <translation>Edit second control point angle</translation>
     </message>
     <message>
         <source>Edit first control point length</source>
-        <translation type="unfinished">Edit first control point length</translation>
+        <translation>Edit first control point length</translation>
     </message>
     <message>
         <source>Edit second control point length</source>
-        <translation type="unfinished">Edit second control point length</translation>
+        <translation>Edit second control point length</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation type="unfinished">Length can&apos;t be negative</translation>
+        <translation>Length can&apos;t be negative</translation>
     </message>
     <message>
         <source>Not used</source>
-        <translation type="unfinished"></translation>
+        <translation>Not used</translation>
     </message>
 </context>
 <context>
@@ -7114,7 +7114,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Error creating or updating interactive spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creating or updating interactive spline path</translation>
     </message>
 </context>
 <context>

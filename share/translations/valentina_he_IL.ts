@@ -26,7 +26,11 @@
     <name>CommunityPage</name>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>שרת</translation>
+    </message>
+    <message>
+        <source>Server name/IP</source>
+        <translation type="vanished">שם שרת/IP</translation>
     </message>
     <message>
         <source>Secure connection</source>
@@ -116,7 +120,7 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Save</source>
-        <translation type="unfinished">שמור</translation>
+        <translation>שמור</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
@@ -140,11 +144,11 @@
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>סנטימטרים</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>מילימטר</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -341,14 +345,6 @@
         <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
-        <source>Length of lines</source>
-        <translation type="vanished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">אורך העקומות</translation>
-    </message>
-    <message>
         <source>Select second point of line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -436,14 +432,6 @@
         <translation type="vanished">נקודת מרכז</translation>
     </message>
     <message>
-        <source>Length of lines</source>
-        <translation type="vanished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">אורך העקומות</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -516,11 +504,11 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation type="obsolete">רדיוס</translation>
+        <translation type="vanished">רדיוס</translation>
     </message>
     <message>
         <source>Value of radius</source>
-        <translation type="obsolete">ערך הרדיוס</translation>
+        <translation type="vanished">ערך הרדיוס</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -528,11 +516,11 @@
     </message>
     <message>
         <source>Length</source>
-        <translation type="obsolete">אורך</translation>
+        <translation type="vanished">אורך</translation>
     </message>
     <message>
         <source>Center point</source>
-        <translation type="obsolete">נקודת מרכז</translation>
+        <translation type="vanished">נקודת מרכז</translation>
     </message>
     <message>
         <source>Edit radius</source>
@@ -622,14 +610,6 @@
         <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
-        <source>Length of lines</source>
-        <translation type="vanished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">אורך העקומות</translation>
-    </message>
-    <message>
         <source>Select second point of angle</source>
         <translation type="unfinished"></translation>
     </message>
@@ -702,23 +682,15 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="obsolete">עקומה</translation>
+        <translation type="vanished">עקומה</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="obsolete">תווית הנקודה</translation>
+        <translation type="vanished">תווית הנקודה</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="obsolete">סוג הקו</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="obsolete">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="obsolete">אורך העקומות</translation>
+        <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
         <source>Select axis point</source>
@@ -788,24 +760,12 @@
         <translation type="vanished">ערך האורך</translation>
     </message>
     <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point label</source>
         <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -863,10 +823,6 @@
         <translation type="vanished">ערך האורך</translation>
     </message>
     <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -877,14 +833,6 @@
     <message>
         <source>Point label</source>
         <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -942,10 +890,6 @@
         <translation type="vanished">ערך האורך</translation>
     </message>
     <message>
-        <source>_</source>
-        <translation type="vanished">_</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -956,14 +900,6 @@
     <message>
         <source>Point label</source>
         <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Segment a curved path</source>
@@ -1022,7 +958,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">אפשרויות</translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <source>Seam allowance</source>
@@ -1059,6 +995,10 @@
     <message>
         <source>Scroll down the list</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <source>Scroll up the list</source>
@@ -1112,10 +1052,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>_</source>
-        <translation type="obsolete">_</translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1133,7 +1069,7 @@
     </message>
     <message>
         <source>Length of lines</source>
-        <translation type="unfinished">אורך הקווים</translation>
+        <translation>אורך הקווים</translation>
     </message>
     <message>
         <source>Length of arcs</source>
@@ -1141,7 +1077,7 @@
     </message>
     <message>
         <source>Length of curves</source>
-        <translation type="unfinished">אורך העקומות</translation>
+        <translation>אורך העקומות</translation>
     </message>
     <message>
         <source>Angle of lines</source>
@@ -1157,7 +1093,7 @@
     </message>
     <message>
         <source>Line length</source>
-        <translation type="unfinished">אורך הקו</translation>
+        <translation>אורך הקו</translation>
     </message>
     <message>
         <source>Arc length</source>
@@ -1165,7 +1101,7 @@
     </message>
     <message>
         <source>Curve length</source>
-        <translation type="unfinished">אורך העקומה</translation>
+        <translation>אורך העקומה</translation>
     </message>
     <message>
         <source>Line Angle</source>
@@ -1233,14 +1169,6 @@
     <message>
         <source>Type of line</source>
         <translation type="vanished">סוג הקו</translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">אורך העקומות</translation>
     </message>
     <message>
         <source>Point at distance and angle</source>
@@ -1505,11 +1433,7 @@
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
-    </message>
-    <message>
-        <source>Curves</source>
-        <translation type="vanished">עקומות</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Curve</source>
@@ -1549,7 +1473,7 @@
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">רדיוס</translation>
+        <translation>רדיוס</translation>
     </message>
     <message>
         <source>Angles arcs</source>
@@ -1695,11 +1619,11 @@
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>מילימטר</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>סנטימטרים</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -1851,7 +1775,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="obsolete">סוג הקו</translation>
+        <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
         <source>Select second point</source>
@@ -1945,27 +1869,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה ראשונה בשורה</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="obsolete">תווית הנקודה</translation>
+        <translation type="vanished">תווית הנקודה</translation>
     </message>
     <message>
         <source>Type of line</source>
-        <translation type="obsolete">סוג הקו</translation>
+        <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
         <source>Show line from first point to this point</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="obsolete">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="obsolete">אורך העקומות</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -1985,7 +1901,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="unfinished"></translation>
+        <translation>נקודה שנייה בשורה</translation>
     </message>
     <message>
         <source>Edit angle</source>
@@ -2184,11 +2100,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>סנטימטרים</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>מילימטר</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -2203,11 +2119,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished"></translation>
+        <translation>סנטימטרים</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished"></translation>
+        <translation>מילימטר</translation>
     </message>
     <message>
         <source>Inches</source>
@@ -2234,7 +2150,7 @@ Apply settings anyway?</source>
     <name>DialogNormal</name>
     <message>
         <source>Length</source>
-        <translation type="obsolete">אורך</translation>
+        <translation type="vanished">אורך</translation>
     </message>
     <message>
         <source>Value of length</source>
@@ -2261,20 +2177,20 @@ Apply settings anyway?</source>
         <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
-        <source>Length of lines</source>
-        <translation type="vanished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">אורך העקומות</translation>
-    </message>
-    <message>
         <source>Select second point of line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Point along perpendicular</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point of line</source>
+        <translation type="vanished">נקודה ראשונה בשורה</translation>
+    </message>
+    <message>
+        <source>Second point of line</source>
+        <translation type="vanished">נקודה שנייה בשורה</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -2535,7 +2451,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="obsolete">תווית הנקודה</translation>
+        <translation type="vanished">תווית הנקודה</translation>
     </message>
     <message>
         <source>Select an arc</source>
@@ -2574,7 +2490,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="obsolete">רדיוס</translation>
+        <translation type="vanished">רדיוס</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -2582,7 +2498,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="obsolete">תווית הנקודה</translation>
+        <translation type="vanished">תווית הנקודה</translation>
     </message>
     <message>
         <source>Select a circle center</source>
@@ -2662,14 +2578,6 @@ Apply settings anyway?</source>
     <message>
         <source>Select point of center of arc</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length of lines</source>
-        <translation type="vanished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="obsolete">אורך העקומות</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -2767,7 +2675,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="obsolete">תווית הנקודה</translation>
+        <translation type="vanished">תווית הנקודה</translation>
     </message>
     <message>
         <source>Select second an arc</source>
@@ -2810,7 +2718,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="obsolete">תווית הנקודה</translation>
+        <translation type="vanished">תווית הנקודה</translation>
     </message>
     <message>
         <source>Select second circle center</source>
@@ -3053,16 +2961,8 @@ Apply settings anyway?</source>
         <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
-        <source>Length of lines</source>
-        <translation type="vanished">אורך הקווים</translation>
-    </message>
-    <message>
-        <source>Length of curves</source>
-        <translation type="vanished">אורך העקומות</translation>
-    </message>
-    <message>
         <source>Select first point of line</source>
-        <translation type="unfinished">לבחור נקודה ראשונה</translation>
+        <translation>לבחור נקודה ראשונה</translation>
     </message>
     <message>
         <source>Select second point of line</source>
@@ -3361,24 +3261,16 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Line length</source>
-        <translation type="vanished">אורך הקו</translation>
-    </message>
-    <message>
-        <source>Curve length</source>
-        <translation type="vanished">אורך העקומה</translation>
-    </message>
-    <message>
         <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="unfinished">נקודה ראשונה</translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">נקודה שנייה</translation>
+        <translation>נקודה שנייה</translation>
     </message>
     <message>
         <source>Highest point</source>
@@ -3404,6 +3296,10 @@ Apply settings anyway?</source>
         <translation type="vanished">תווית הנקודה</translation>
     </message>
     <message>
+        <source>First point of line</source>
+        <translation type="vanished">נקודה ראשונה בשורה</translation>
+    </message>
+    <message>
         <source>First point</source>
         <translation type="vanished">נקודה ראשונה</translation>
     </message>
@@ -3426,6 +3322,10 @@ Apply settings anyway?</source>
     <message>
         <source>Triangle tool</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point of line</source>
+        <translation type="vanished">נקודה שנייה בשורה</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -3540,14 +3440,6 @@ Apply settings anyway?</source>
 </context>
 <context>
     <name>DialogUnionDetails</name>
-    <message>
-        <source>Select first point</source>
-        <translation type="vanished">לבחור נקודה ראשונה</translation>
-    </message>
-    <message>
-        <source>Select second point</source>
-        <translation type="vanished">לבחור נקודה שנייה</translation>
-    </message>
     <message>
         <source>Union tool</source>
         <translation type="unfinished"></translation>
@@ -3687,7 +3579,7 @@ Apply settings anyway?</source>
     <name>MainWindow</name>
     <message>
         <source>Valentina</source>
-        <translation type="unfinished"></translation>
+        <translation>ולנטינה</translation>
     </message>
     <message>
         <source>Tools for creating points.</source>
@@ -3811,7 +3703,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Create a new pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>יצירת תבנית חדשה</translation>
     </message>
     <message>
         <source>Open</source>
@@ -3827,7 +3719,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">שמור</translation>
+        <translation>שמור</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -3835,7 +3727,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירת תבנית</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
@@ -3971,7 +3863,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select first point of line</source>
-        <translation type="unfinished">לבחור נקודה ראשונה</translation>
+        <translation>לבחור נקודה ראשונה</translation>
     </message>
     <message>
         <source>Select first point of angle</source>
@@ -4051,7 +3943,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירה בשם</translation>
     </message>
     <message>
         <source>Could not save file</source>
@@ -4071,7 +3963,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה חסר פרמטר.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -5266,7 +5158,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>קובץ</translation>
     </message>
     <message>
         <source>Window</source>
@@ -5294,7 +5186,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">שמור</translation>
+        <translation>שמור</translation>
     </message>
     <message>
         <source>Save As ...</source>
@@ -5314,7 +5206,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">חדש</translation>
+        <translation>חדש</translation>
     </message>
     <message>
         <source>Add known</source>
@@ -5378,7 +5270,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירה בשם</translation>
     </message>
     <message>
         <source>&amp;New Window</source>
@@ -5663,13 +5555,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TableWindow</name>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">שמור</translation>
     </message>
 </context>
 <context>
@@ -6301,7 +6186,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה חסר פרמטר.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -6498,7 +6383,7 @@ Do you want to save your changes?</source>
     <name>VToolDetail</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished">אפשרויות</translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -6513,7 +6398,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="unfinished">תווית הנקודה</translation>
+        <translation>תווית הנקודה</translation>
     </message>
     <message>
         <source>Position</source>
@@ -6529,7 +6414,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length</source>
-        <translation type="unfinished">אורך</translation>
+        <translation>אורך</translation>
     </message>
     <message>
         <source>Angle</source>
@@ -6545,7 +6430,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Radius</source>
-        <translation type="unfinished">רדיוס</translation>
+        <translation>רדיוס</translation>
     </message>
     <message>
         <source>First angle</source>
@@ -6633,11 +6518,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation type="unfinished">נקודה ראשונה</translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="unfinished">נקודה שנייה</translation>
+        <translation>נקודה שנייה</translation>
     </message>
     <message>
         <source>Arc with given length</source>

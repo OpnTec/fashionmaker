@@ -3,8 +3,12 @@
 # lupdate doesn't work with recursive *.pro file and without direct pointing to correct *.pro file just update exists strings in code.
 # Please, run this script from folder <root_folder>/scripts.
 
+# Download all translations from transifex.com.
+# Use if have problems with default way. 
+#tx pull --mode=developer -f -s --skip
+
 # Download last translations from transifex.com. 
-tx pull --mode=developer -f -s --skip
+tx pull --mode=developer --skip
 
 # Update local strings
 lupdate -recursive ../share/translations/translations.pro
