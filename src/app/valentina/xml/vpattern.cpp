@@ -86,6 +86,7 @@ void VPattern::CreateEmptyFile()
     patternElement.appendChild(createElement(TagAuthor));
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));
+    patternElement.appendChild(createElement(TagImage));
 
     patternElement.appendChild(createElement(TagMeasurements));
     patternElement.appendChild(createElement(TagIncrements));
@@ -127,7 +128,7 @@ void VPattern::Parse(const Document &parse)
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
-                                        << TagMeasurements << TagVersion << TagGradation << TagUnit;
+                                     << TagImage << TagMeasurements << TagVersion << TagGradation << TagUnit;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -172,16 +173,19 @@ void VPattern::Parse(const Document &parse)
                     case 4: // TagNotes
                         qCDebug(vXML, "Tag notes.");
                         break;
-                    case 5: // TagMeasurements
+                    case 5: // TagImage
+                        qCDebug(vXML, "Tag image.");
+                        break;
+                    case 6: // TagMeasurements
                         qCDebug(vXML, "Tag measurements.");
                         break;
-                    case 6: // TagVersion
+                    case 7: // TagVersion
                         qCDebug(vXML, "Tag version.");
                         break;
-                    case 7: // TagGradation
+                    case 8: // TagGradation
                         qCDebug(vXML, "Tag gradation.");
                         break;
-                    case 8: // TagUnit
+                    case 9: // TagUnit
                         qCDebug(vXML, "Tag unit.");
                         break;
                     default:

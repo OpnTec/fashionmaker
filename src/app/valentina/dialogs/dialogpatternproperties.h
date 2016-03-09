@@ -57,6 +57,7 @@ public slots:
     void         CheckStateHeight(int state);
     void         CheckStateSize(int state);
     void         DescEdited();
+    void         SetNewImage();
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 private slots:
@@ -99,6 +100,7 @@ private:
 
     void         UpdateDefHeight();
     void         UpdateDefSize();
+    void         InitImage();
 };
 
 #endif // DIALOGPATTERNPROPERTIES_H

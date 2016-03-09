@@ -39,6 +39,7 @@ const QString VAbstractPattern::TagDetails      = QStringLiteral("details");
 const QString VAbstractPattern::TagAuthor       = QStringLiteral("author");
 const QString VAbstractPattern::TagDescription  = QStringLiteral("description");
 const QString VAbstractPattern::TagNotes        = QStringLiteral("notes");
+const QString VAbstractPattern::TagImage        = QStringLiteral("image");
 const QString VAbstractPattern::TagMeasurements = QStringLiteral("measurements");
 const QString VAbstractPattern::TagIncrements   = QStringLiteral("increments");
 const QString VAbstractPattern::TagIncrement    = QStringLiteral("increment");
@@ -917,6 +918,21 @@ void VAbstractPattern::SetNotes(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetImage() const
+{
+    return UniqueTagText(TagImage);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetImage(const QString &text)
+{
+    CheckTagExists(TagImage);
+    setTagText(TagImage, text);
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetVersion() const
 {
     return UniqueTagText(TagVersion, VPatternConverter::PatternMaxVerStr);
@@ -988,7 +1004,8 @@ void VAbstractPattern::CheckTagExists(const QString &tag)
     QDomNodeList list = elementsByTagName(tag);
     if (list.size() == 0)
     {
-        QStringList tags = QStringList() << TagVersion << TagAuthor << TagDescription << TagNotes << TagGradation;
+        QStringList tags = QStringList() << TagVersion << TagAuthor << TagDescription << TagNotes << TagImage
+                                         << TagGradation;
         QDomElement pattern = documentElement();
         switch (tags.indexOf(tag))
         {
@@ -1026,7 +1043,13 @@ void VAbstractPattern::CheckTagExists(const QString &tag)
                 SetVersion();
                 break;
             }
-            case 4: //TagGradation
+            case 4: //TagImage
+            {
+                pattern.insertAfter(createElement(TagImage), elementsByTagName(TagVersion).at(0));
+                SetVersion();
+                break;
+            }
+            case 5: //TagGradation
             {
                 QDomElement gradation = createElement(TagGradation);
 

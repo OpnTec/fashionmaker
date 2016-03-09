@@ -28,7 +28,9 @@
 
 #include "dialogpatternproperties.h"
 #include "ui_dialogpatternproperties.h"
+#include <QBuffer>
 #include <QPushButton>
+#include <QFileDialog>
 #include "../xml/vpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
@@ -61,6 +63,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 
     ui->plainTextEditTechNotes->setPlainText(doc->GetNotes());
     connect(ui->plainTextEditTechNotes, &QPlainTextEdit::textChanged, this, &DialogPatternProperties::DescEdited);
+
+    InitImage();
 
     connect(ui->buttonBox->button(QDialogButtonBox::Ok), &QPushButton::clicked, this, &DialogPatternProperties::Ok);
     connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this,
@@ -602,4 +606,48 @@ void DialogPatternProperties::InitComboBox(QComboBox *box, const QMap<GVal, bool
                                                                          *pattern->GetPatternUnit()))));
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::InitImage()
+{
+// we set an image from file.val
+    QImage image;
+    QByteArray byteArray;
+    byteArray.append(doc->GetImage().toUtf8());
+    QByteArray ba = QByteArray::fromBase64(byteArray);
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::ReadOnly);
+    image.load(&buffer, "PNG"); // writes image into ba in PNG format
+    ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+    connect(ui->changeImageButton, &QPushButton::clicked, this, &DialogPatternProperties::SetNewImage);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SetNewImage()
+{
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), tr("Images (*.png)"));
+    QImage image;
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        if (!image.load(fileName))
+        {
+            return;
+        }
+        ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        buffer.open(QIODevice::WriteOnly);
+        image.save(&buffer, "PNG"); // writes the image in PNG format inside the buffer
+        QString iconBase64 = QString::fromLatin1(byteArray.toBase64().data());
+
+        // save our image to file.val
+        doc->SetImage(iconBase64);
+    }
+
 }
