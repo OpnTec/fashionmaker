@@ -7973,7 +7973,7 @@ Do you want to save your changes?</source>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Úhel čáry_</translation>
+        <translation>Úhelčáry_</translation>
     </message>
     <message>
         <source>Arc_</source>
@@ -7988,7 +7988,7 @@ Do you want to save your changes?</source>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>Cesta křivky</translation>
+        <translation>CestaKřivky</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
@@ -8018,12 +8018,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Úhel1CestaKřivky</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Úhel2CestaKřivky</translation>
     </message>
     <message>
         <source>sin</source>

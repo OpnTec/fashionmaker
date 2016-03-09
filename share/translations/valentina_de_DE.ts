@@ -3739,51 +3739,51 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Länge:</translation>
+        <translation>Länge:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Formel-Assistent</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Wert</translation>
+        <translation>Wert</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Berechnung</translation>
+        <translation>Berechnung</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ganze Berechnungsformel anzeigen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
-        <translation type="unfinished">Winkel des ersten Kontrollpunktes bearbeiten</translation>
+        <translation>Winkel des ersten Kontrollpunktes bearbeiten</translation>
     </message>
     <message>
         <source>Edit second control point angle</source>
-        <translation type="unfinished">Winkel des zweiten Kontrollpunktes bearbeiten</translation>
+        <translation>Winkel des zweiten Kontrollpunktes bearbeiten</translation>
     </message>
     <message>
         <source>Edit first control point length</source>
-        <translation type="unfinished">Länge des ersten Kontrollpunktes bearbeiten</translation>
+        <translation>Länge des ersten Kontrollpunktes bearbeiten</translation>
     </message>
     <message>
         <source>Edit second control point length</source>
-        <translation type="unfinished">Länge des zweiten Kontrollpunktes bearbeiten</translation>
+        <translation>Länge des zweiten Kontrollpunktes bearbeiten</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation type="unfinished">Länge kann nicht negativ sein</translation>
+        <translation>Länge kann nicht negativ sein</translation>
     </message>
     <message>
         <source>Not used</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht verwendet</translation>
     </message>
 </context>
 <context>
@@ -7112,7 +7112,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating interactive spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Anlegen oder Aktualisieren des interaktiven Splinepfades</translation>
     </message>
 </context>
 <context>

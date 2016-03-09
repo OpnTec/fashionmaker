@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.1" language="cs">
 <context>
     <name>VTranslateMeasurements</name>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="189"/>
         <source>height</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>výška</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="191"/>
@@ -565,7 +565,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="443"/>
         <source>hand_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>délka_ruky</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="445"/>
@@ -637,7 +637,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="481"/>
         <source>foot_width</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>šířka_chodidla</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="483"/>
@@ -655,7 +655,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="487"/>
         <source>foot_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>délka_chodidla</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="489"/>
@@ -2401,7 +2401,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1232"/>
         <source>shoulder_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>délka_ramene</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1234"/>
@@ -2653,7 +2653,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1343"/>
         <source>bustpoint_to_bustpoint</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>od_bradavky_k_bradavce</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1345"/>
@@ -3721,7 +3721,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1801"/>
         <source>crotch_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>délka_rozkroku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1803"/>
@@ -3772,6 +3772,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1826"/>
+        <source>Rise length, side, sitting</source>
+        <comment>Full measurement name.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>
         <source>rise_length_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
@@ -3787,12 +3793,6 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1833"/>
         <source>rise_length_diag</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1826"/>
-        <source>Rise length, side, sitting</source>
-        <comment>Full measurement name.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>

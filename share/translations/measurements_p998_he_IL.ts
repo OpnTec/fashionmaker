@@ -3754,6 +3754,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1826"/>
+        <source>Rise length, side, sitting</source>
+        <comment>Full measurement name.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1828"/>
         <source>From Waist Side around hp curve down to surface, while seated on hard surface.</source>
         <comment>Full measurement description.</comment>
@@ -3775,12 +3781,6 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1833"/>
         <source>rise_length_diag</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1826"/>
-        <source>Rise length, side, sitting</source>
-        <comment>Full measurement name.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>

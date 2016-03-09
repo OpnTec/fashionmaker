@@ -7,7 +7,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="189"/>
         <source>height</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>高度</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="191"/>
@@ -934,12 +934,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="622"/>
-        <source>Circumference around Waist, following natural contours. Waists are  typically higher in back.</source>
-        <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="627"/>
         <source>highhip_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
@@ -949,6 +943,12 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="629"/>
         <source>Highhip circumference</source>
         <comment>Full measurement name.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="622"/>
+        <source>Circumference around Waist, following natural contours. Waists are  typically higher in back.</source>
+        <comment>Full measurement description.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2497,7 +2497,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1270"/>
         <source>Across Chest, half</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>1/2胸围</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1271"/>
@@ -3460,6 +3460,36 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1784"/>
+        <source>From Waist Side along curve to Hip level then straight down to  Knee level. (&apos;Leg: Waist Side to Floor&apos; - &apos;Height Knee&apos;).</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1824"/>
+        <source>rise_length_side_sitting</source>
+        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1828"/>
+        <source>From Waist Side around hp curve down to surface, while seated on hard surface.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1857"/>
+        <source>Vertical distance from Waist side down to Crotch level. Use formula (Height: Waist side - Leg: Crotch to floor).</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2110"/>
+        <source>This information is pulled from pattern charts in some  patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1698"/>
         <source>leg_waist_side_to_floor</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
@@ -3688,12 +3718,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1784"/>
-        <source>From Waist Side along curve to Hip level then straight down to  Knee level. (&apos;Leg: Waist Side to Floor&apos; - &apos;Height Knee&apos;).</source>
-        <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1801"/>
         <source>crotch_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
@@ -3748,21 +3772,21 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1824"/>
-        <source>rise_length_side_sitting</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1826"/>
         <source>Rise length, side, sitting</source>
         <comment>Full measurement name.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1828"/>
-        <source>From Waist Side around hp curve down to surface, while seated on hard surface.</source>
-        <comment>Full measurement description.</comment>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>
+        <source>rise_length_side</source>
+        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1856"/>
+        <source>Rise length, side</source>
+        <comment>Full measurement name.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3816,24 +3840,6 @@
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1850"/>
         <source>Vertical Distance from Waist Front to Crotch level.</source>
-        <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>
-        <source>rise_length_side</source>
-        <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1856"/>
-        <source>Rise length, side</source>
-        <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1857"/>
-        <source>Vertical distance from Waist side down to Crotch level. Use formula (Height: Waist side - Leg: Crotch to floor).</source>
         <comment>Full measurement description.</comment>
         <translation type="unfinished"></translation>
     </message>
@@ -4346,12 +4352,6 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2109"/>
         <source>Dart Width: Waist</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2110"/>
-        <source>This information is pulled from pattern charts in some  patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
-        <comment>Full measurement description.</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
