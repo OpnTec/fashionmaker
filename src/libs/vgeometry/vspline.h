@@ -29,7 +29,7 @@
 #ifndef VSPLINE_H
 #define VSPLINE_H
 
-#include "vabstractcurve.h"
+#include "vabstractcubicbezier.h"
 #include "vpointf.h"
 #include <QLineF>
 #include <QPointF>
@@ -37,12 +37,10 @@
 class QPainterPath;
 class VSplineData;
 
-#define M_2PI   6.28318530717958647692528676655900576
-
 /**
  * @brief VSpline class that implements the spline.
  */
-class VSpline :public VAbstractCurve
+class VSpline :public VAbstractCubicBezier
 {
 public:
     VSpline();
@@ -54,17 +52,17 @@ public:
     VSpline (VPointF p1, VPointF p4, qreal angle1, const QString &angle1Formula, qreal angle2,
              const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
              const QString &c2LengthFormula, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    virtual ~VSpline() Q_DECL_OVERRIDE;
+    virtual ~VSpline();
     VSpline &operator=(const VSpline &spl);
 
-    VPointF GetP1 () const;
-    void    SetP1 (const VPointF &p);
+    virtual VPointF GetP1 () const Q_DECL_OVERRIDE;
+    void            SetP1 (const VPointF &p);
 
     QPointF GetP2 () const;
     QPointF GetP3 () const;
 
-    VPointF GetP4 () const;
-    void    SetP4 (const VPointF &p);
+    virtual VPointF GetP4 () const Q_DECL_OVERRIDE;
+    void            SetP4 (const VPointF &p);
 
     virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
     virtual qreal GetEndAngle() const Q_DECL_OVERRIDE;
@@ -84,27 +82,25 @@ public:
     void    SetC1Length(qreal length, const QString &formula);
     void    SetC2Length(qreal length, const QString &formula);
 
-    qreal   GetLength () const;
+    virtual qreal   GetLength () const Q_DECL_OVERRIDE;
     qreal   GetKasm1() const;
     qreal   GetKasm2() const;
     qreal   GetKcurve() const;
-    qreal   LengthT(qreal t) const;
-    QPointF CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
+
+    using VAbstractCubicBezier::CutSpline;
     QPointF CutSpline ( qreal length, VSpline &spl1, VSpline &spl2) const;
-    QVector<QPointF> GetPoints () const;
+
+    virtual QVector<QPointF> GetPoints () const Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve);
     qreal   ParamT(const QPointF &pBt) const;
+
 protected:
-    static QVector<QPointF> GetPoints (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 );
-    virtual void CreateName() Q_DECL_OVERRIDE;
+    virtual QPointF GetControlPoint1() const Q_DECL_OVERRIDE;
+    virtual QPointF GetControlPoint2() const Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VSplineData> d;
-    static qreal   LengthBezier (const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4 );
-    static void    PointBezier_r ( qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4,
-                                  qint16 level, QVector<qreal> &px, QVector<qreal> &py);
-    static qreal   CalcSqDistance ( qreal x1, qreal y1, qreal x2, qreal y2);
     QVector<qreal> CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4,
                          qreal pointCoord) const;
     static qint32  Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c);

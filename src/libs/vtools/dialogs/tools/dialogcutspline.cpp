@@ -61,7 +61,7 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, 
     flagFormula = false;
     CheckState();
 
-    FillComboBoxSplines(ui->comboBoxSpline, FillComboBox::NoChildren, ch1, ch2);
+    FillComboBoxSimpleSplines(ui->comboBoxSpline, FillComboBox::NoChildren, ch1, ch2);
     FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSpline::FXLength);

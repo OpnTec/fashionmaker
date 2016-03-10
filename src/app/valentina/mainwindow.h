@@ -108,6 +108,7 @@ public slots:
     void               ToolBisector(bool checked);
     void               ToolLineIntersect(bool checked);
     void               ToolSpline(bool checked);
+    void               ToolCubicBezier(bool checked);
     void               ToolCutSpline(bool checked);
     void               ToolArc(bool checked);
     void               ToolSplinePath(bool checked);

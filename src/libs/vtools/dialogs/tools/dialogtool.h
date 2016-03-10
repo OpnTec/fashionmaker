@@ -192,6 +192,8 @@ protected:
                                          const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
     void             FillComboBoxSplinesPath(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
                                              const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
+    void             FillComboBoxSimpleSplines(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
+                                               const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
     void             FillComboBoxCurves(QComboBox *box)const;
     void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
     void             FillComboBoxLineColors(QComboBox *box)const;

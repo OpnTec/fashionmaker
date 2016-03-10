@@ -29,6 +29,7 @@
 #include "dialoghistory.h"
 #include "ui_dialoghistory.h"
 #include "../vgeometry/varc.h"
+#include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vpointf.h"
 #include "../vtools/tools/vabstracttool.h"
@@ -281,6 +282,13 @@ QString DialogHistory::Record(const VToolRecord &tool)
                 const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(tool.getId());
                 SCASSERT(spl != nullptr);
                 return QString(tr("Curve %1_%2")).arg(PointName(spl->GetP1().id())).arg(PointName(spl->GetP4().id()));
+            }
+            case Tool::CubicBezier:
+            {
+                const QSharedPointer<VCubicBezier> spl = data->GeometricObject<VCubicBezier>(tool.getId());
+                SCASSERT(spl != nullptr);
+                return QString(tr("Cubic bezier curve %1_%2")).arg(PointName(spl->GetP1().id()))
+                        .arg(PointName(spl->GetP4().id()));
             }
             case Tool::Arc:
             {

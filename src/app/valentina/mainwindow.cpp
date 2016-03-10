@@ -784,6 +784,15 @@ void MainWindow::ToolSpline(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolCubicBezier(bool checked)
+{
+    SetToolButtonWithApply<DialogCubicBezier>(checked, Tool::CubicBezier, ":/cursor/cubic_bezier_cursor.png",
+                                              tr("Select first curve point"),
+                                              &MainWindow::ClosedDialogWithApply<VToolCubicBezier>,
+                                              &MainWindow::ApplyDialog<VToolCubicBezier>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolCutSpline handler tool CutSpline.
  * @param checked true - button is checked
@@ -1603,6 +1612,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonBisector, &QToolButton::clicked, this, &MainWindow::ToolBisector);
     connect(ui->toolButtonLineIntersect, &QToolButton::clicked, this, &MainWindow::ToolLineIntersect);
     connect(ui->toolButtonSpline, &QToolButton::clicked, this, &MainWindow::ToolSpline);
+    connect(ui->toolButtonCubicBezier, &QToolButton::clicked, this, &MainWindow::ToolCubicBezier);
     connect(ui->toolButtonArc, &QToolButton::clicked, this, &MainWindow::ToolArc);
     connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
     connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
@@ -1708,6 +1718,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::Spline:
             ui->toolButtonSpline->setChecked(false);
+            break;
+        case Tool::CubicBezier:
+            ui->toolButtonCubicBezier->setChecked(false);
             break;
         case Tool::Arc:
             ui->toolButtonArc->setChecked(false);
@@ -2933,6 +2946,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonBisector->setEnabled(drawTools);
     ui->toolButtonLineIntersect->setEnabled(drawTools);
     ui->toolButtonSpline->setEnabled(drawTools);
+    ui->toolButtonCubicBezier->setEnabled(drawTools);
     ui->toolButtonArc->setEnabled(drawTools);
     ui->toolButtonSplinePath->setEnabled(drawTools);
     ui->toolButtonPointOfContact->setEnabled(drawTools);

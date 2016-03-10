@@ -100,6 +100,7 @@ const QString AttrP2Line2     = QStringLiteral("p2Line2");
 const QString AttrPShoulder   = QStringLiteral("pShoulder");
 const QString AttrPoint1      = QStringLiteral("point1");
 const QString AttrPoint2      = QStringLiteral("point2");
+const QString AttrPoint3      = QStringLiteral("point3");
 const QString AttrPoint4      = QStringLiteral("point4");
 const QString AttrKAsm1       = QStringLiteral("kAsm1");
 const QString AttrKAsm2       = QStringLiteral("kAsm2");

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vgeometrydef.h
+ **  @file   vistoolcubicbezier.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 5, 2015
+ **  @date   10 3, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,13 +26,37 @@
  **
  *************************************************************************/
 
-#ifndef VGEOMETRYDEF_H
-#define VGEOMETRYDEF_H
+#ifndef VISTOOLCUBICBEZIER_H
+#define VISTOOLCUBICBEZIER_H
 
-#include <QString>
+#include "vispath.h"
 
-enum class Draw : char { Calculation, Modeling, Layout };
-enum class GOType : char { Point, Arc, EllipticalArc, Spline, SplinePath, CubicBezier, Unknown };
-enum class SplinePointPosition : char { FirstPoint, LastPoint };
+class VisToolCubicBezier : public VisPath
+{
+    Q_OBJECT
+public:
+    explicit VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolCubicBezier();
 
-#endif // VGEOMETRYDEF_H
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+
+    void         setObject2Id(const quint32 &value);
+    void         setObject3Id(const quint32 &value);
+    void         setObject4Id(const quint32 &value);
+
+    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
+    enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezier)};
+
+protected:
+    Q_DISABLE_COPY(VisToolCubicBezier)
+    quint32              object2Id;
+    quint32              object3Id;
+    quint32              object4Id;
+    QGraphicsEllipseItem *point1;
+    QGraphicsEllipseItem *point2;
+    QGraphicsEllipseItem *point3;
+    QGraphicsEllipseItem *point4;
+    QGraphicsLineItem    *helpLine;
+};
+
+#endif // VISTOOLCUBICBEZIER_H

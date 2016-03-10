@@ -187,8 +187,8 @@ VToolSpline* VToolSpline::Create(const quint32 _id, VSpline *spline, const QStri
         connect(scene, &VMainGraphicsScene::EnableToolMove, _spl, &VToolSpline::EnableToolMove);
         connect(scene, &VMainGraphicsScene::CurveDetailsMode, _spl, &VToolSpline::DetailsMode);
         doc->AddTool(id, _spl);
-        doc->IncrementReferens(spline->GetP1().id());
-        doc->IncrementReferens(spline->GetP4().id());
+        doc->IncrementReferens(spline->GetP1().getIdTool());
+        doc->IncrementReferens(spline->GetP4().getIdTool());
         return _spl;
     }
     return nullptr;

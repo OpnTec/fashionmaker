@@ -34,7 +34,8 @@ HEADERS += \
     $$PWD/support/dialogeditwrongformula.h \
     $$PWD/support/dialogundo.h \
     $$PWD/tools/dialogtruedarts.h \
-    $$PWD/tools/dialogpointofintersectioncurves.h
+    $$PWD/tools/dialogpointofintersectioncurves.h \
+    $$PWD/tools/dialogcubicbezier.h
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -68,7 +69,8 @@ SOURCES += \
     $$PWD/support/dialogeditwrongformula.cpp \
     $$PWD/support/dialogundo.cpp \
     $$PWD/tools/dialogtruedarts.cpp \
-    $$PWD/tools/dialogpointofintersectioncurves.cpp
+    $$PWD/tools/dialogpointofintersectioncurves.cpp \
+    $$PWD/tools/dialogcubicbezier.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -101,4 +103,5 @@ FORMS += \
     $$PWD/support/dialogeditwrongformula.ui \
     $$PWD/support/dialogundo.ui \
     $$PWD/tools/dialogtruedarts.ui \
-    $$PWD/tools/dialogpointofintersectioncurves.ui
+    $$PWD/tools/dialogpointofintersectioncurves.ui \
+    $$PWD/tools/dialogcubicbezier.ui
