@@ -398,7 +398,7 @@ QVector<QPointF> VAbstractDetail::EkvPoint(const QLineF &line1, const QLineF &li
                 QLineF line( line1.p2(), CrosPoint );
                 const qreal length = line.length();
                 if (length > width*2.4)
-                { // Cutting too long an acute angle
+                { // Cutting too long a cut angle
                     line.setLength(width); // Not sure about width value here
                     QLineF cutLine(line.p2(), CrosPoint); // Cut line is a perpendicular
                     cutLine.setLength(length); // Decided take this length
@@ -470,9 +470,27 @@ QPointF VAbstractDetail::UnclosedEkvPoint(const QLineF &line, const QLineF &help
     switch (type)
     {
         case (QLineF::BoundedIntersection):
-        case (QLineF::UnboundedIntersection):
             return CrosPoint;
             break;
+        case (QLineF::UnboundedIntersection):
+        {
+            // This case is very tricky.
+            // User can create very wrong path that will create crospoint far from main path.
+            // Such an annomaly we try to catch and fix.
+            // If don't do this the program will crash.
+            QLineF test( line.p2(), CrosPoint );
+            const qreal length = test.length();
+            if (length > width*50) // Why 50? Try to avoid cutting correct cases.
+            {
+                test.setLength(width);
+                return test.p2();
+            }
+            else
+            {
+                return CrosPoint;
+            }
+            break;
+        }
         case (QLineF::NoIntersection):
             /*If we have correct lines this means lines lie on a line.*/
             return bigLine.p2();

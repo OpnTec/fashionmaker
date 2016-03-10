@@ -44,6 +44,7 @@ private slots:
     void SumTrapezoids() const;
     void PathRemoveLoop_data() const;
     void PathRemoveLoop() const;
+    void BrokenDetailEquidistant() const;
 
 private:
     void Case1() const;
