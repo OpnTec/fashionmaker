@@ -45,6 +45,7 @@ private slots:
     void GetSegmentPoints();
     void GetSegmentPoints_issue412();
     void GetSegmentPoints_TestPuzzle();
+    void GetSegmentPoints_NullSegment();
     void CompareThreeWays();
 
 private:
