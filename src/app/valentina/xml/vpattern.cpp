@@ -2141,10 +2141,22 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         quint32 idTool = 0;
 
         SplinesCommonAttributes(domElement, id, idObject, idTool);
-        VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
-        spl->setIdObject(idObject);
-        spl->setMode(Draw::Modeling);
-        data->UpdateGObject(id, spl);
+        const auto obj = data->GetGObject(idObject);
+        if (obj->getType() == GOType::Spline)
+        {
+            VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
+            spl->setIdObject(idObject);
+            spl->setMode(Draw::Modeling);
+            data->UpdateGObject(id, spl);
+        }
+        else
+        {
+            VCubicBezier *spl = new VCubicBezier(*data->GeometricObject<VCubicBezier>(idObject));
+            spl->setIdObject(idObject);
+            spl->setMode(Draw::Modeling);
+            data->UpdateGObject(id, spl);
+        }
+
         VNodeSpline::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)
