@@ -214,7 +214,7 @@ void TST_VAbstractDetail::PathRemoveLoop() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractDetail::BrokenDetailEquidistant() const
 {
-    // For more details see the file GAVAUDAN Laure - corsage - figure 4.val
+    // For more details see the file "collection/bugs/GAVAUDAN Laure - corsage - figure 4.val".
     // We will test only one detail. The second require too accurate data that we cannot get from debuger.
     // The test check an open equdistant of correct detail.
     QVector<QPointF> points;// Input points.
