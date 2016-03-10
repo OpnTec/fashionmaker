@@ -1,4 +1,5 @@
 # Version 0.4.4
+- Fixed disappearing curve if start and finish points of a segment are equal.
 - Fixed bug case where an open equidistant point is too far from a main path.
 - Fixed wrong handling with true darts points inside tool detail.
 

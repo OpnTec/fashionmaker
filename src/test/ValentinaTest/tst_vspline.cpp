@@ -179,3 +179,93 @@ void TST_VSpline::GetSegmentPoints_TestPuzzle()
     // Begin comparison
     Comparison(points, origPoints);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::GetSegmentPoints_NullSegment()
+{
+    // Test check case where a detail contains one spline and one point on a spline.
+
+    const VPointF p1(146.3718263928647, 6.4192815800656247, "A1", 5.0000125984251973, 9.9999874015748045);
+    const QPointF p2(-231.44352755905513, -3.7711067716535434);
+    const QPointF p3(-194.55587416421278, 355.17175586626462);
+    const VPointF p4(182.31062201967654, 383.80617135964712, "A2", 5.0000125984251973, 9.9999874015748045);
+
+    VSpline spl(p1, p2, p3, p4, 1);
+
+    const QPointF begin	(146.3718263928647, 6.419281580065625);
+    const QPointF end	(146.3718263928647, 6.419281580065625);
+
+    QVector<QPointF> points;
+    points << spl.GetSegmentPoints(begin, end, true);
+
+    QVector<QPointF> origPoints;
+    origPoints.append(QPointF(182.31062201967654, 383.8061713596471));
+    origPoints.append(QPointF(173.5193148389493, 383.09473139115664));
+    origPoints.append(QPointF(156.35256886351988, 381.27664737553243));
+    origPoints.append(QPointF(139.68640422167817, 378.9987265205365));
+    origPoints.append(QPointF(123.52253121382145, 376.2769777761686));
+    origPoints.append(QPointF(107.862660140347, 373.127410092429));
+    origPoints.append(QPointF(92.70850130165212, 369.5660324193175));
+    origPoints.append(QPointF(78.06176499813408, 365.6088537068342));
+    origPoints.append(QPointF(63.924161530190176, 361.2718829049793));
+    origPoints.append(QPointF(50.29740119821767, 356.5711289637526));
+    origPoints.append(QPointF(37.18319430261387, 351.5226008331541));
+    origPoints.append(QPointF(24.583251143776067, 346.142307463184));
+    origPoints.append(QPointF(12.499282022101543, 340.4462578038422));
+    origPoints.append(QPointF(0.9329972379875793, 334.4504608051287));
+    origPoints.append(QPointF(-10.113892908168534, 328.17092541704363));
+    origPoints.append(QPointF(-20.63967811596951, 321.6236605895869));
+    origPoints.append(QPointF(-30.64264808501806, 314.8246752727586));
+    origPoints.append(QPointF(-40.121092514916896, 307.78997841655865));
+    origPoints.append(QPointF(-49.07330110526874, 300.5355789709872));
+    origPoints.append(QPointF(-57.49756355567631, 293.0774858860442));
+    origPoints.append(QPointF(-65.39216956574231, 285.4317081117297));
+    origPoints.append(QPointF(-72.75540883506945, 277.61425459804366));
+    origPoints.append(QPointF(-79.58557106326043, 269.64113429498616));
+    origPoints.append(QPointF(-85.88094594991799, 261.5283561525572));
+    origPoints.append(QPointF(-91.63982319464486, 253.29192912075672));
+    origPoints.append(QPointF(-96.86049249704371, 244.94786214958486));
+    origPoints.append(QPointF(-101.54124355671726, 236.51216418904164));
+    origPoints.append(QPointF(-105.68036607326823, 228.000844189127));
+    origPoints.append(QPointF(-109.27614974629935, 219.42991109984098));
+    origPoints.append(QPointF(-112.32688427541332, 210.81537387118362));
+    origPoints.append(QPointF(-114.83085936021286, 202.1732414531549));
+    origPoints.append(QPointF(-116.78636470030067, 193.51952279575488));
+    origPoints.append(QPointF(-118.19168999527946, 184.8702268489836));
+    origPoints.append(QPointF(-119.04512494475199, 176.24136256284103));
+    origPoints.append(QPointF(-119.34495924832092, 167.64893888732718));
+    origPoints.append(QPointF(-119.08948260558898, 159.10896477244216));
+    origPoints.append(QPointF(-118.27698471615886, 150.63744916818587));
+    origPoints.append(QPointF(-116.90575527963333, 142.2504010245584));
+    origPoints.append(QPointF(-114.97408399561508, 133.96382929155976));
+    origPoints.append(QPointF(-112.48026056370679, 125.79374291918995));
+    origPoints.append(QPointF(-109.42257468351121, 117.756150857449));
+    origPoints.append(QPointF(-105.79931605463103, 109.86706205633692));
+    origPoints.append(QPointF(-101.608774376669, 102.14248546585374));
+    origPoints.append(QPointF(-96.8492393492278, 94.59843003599951));
+    origPoints.append(QPointF(-91.51900067191015, 87.25090471677419));
+    origPoints.append(QPointF(-85.61634804431877, 80.11591845817783));
+    origPoints.append(QPointF(-79.13957116605636, 73.20948021021047));
+    origPoints.append(QPointF(-72.08695973672565, 66.54759892287208));
+    origPoints.append(QPointF(-64.45680345592936, 60.14628354616272));
+    origPoints.append(QPointF(-56.247392023270166, 54.0215430300824));
+    origPoints.append(QPointF(-47.45701513835082, 48.189386324631116));
+    origPoints.append(QPointF(-38.083962500774014, 42.66582237980891));
+    origPoints.append(QPointF(-28.126523810142473, 37.4668601456158));
+    origPoints.append(QPointF(-17.582988766058897, 32.608508572051804));
+    origPoints.append(QPointF(-6.451647068126014, 28.106776609116928));
+    origPoints.append(QPointF(5.269211584053471, 23.97767320681121));
+    origPoints.append(QPointF(17.581297490876842, 20.23720731513466));
+    origPoints.append(QPointF(30.486320952741384, 16.9013878840873));
+    origPoints.append(QPointF(43.98599227004439, 13.986223863669146));
+    origPoints.append(QPointF(58.082021743183134, 11.507724203880219));
+    origPoints.append(QPointF(72.77611967255493, 9.481897854720536));
+    origPoints.append(QPointF(88.069996358557, 7.92475376619012));
+    origPoints.append(QPointF(103.96536210158672, 6.852300888288988));
+    origPoints.append(QPointF(120.4639272020413, 6.280548171017158));
+    origPoints.append(QPointF(137.5674019603181, 6.225504564374653));
+    origPoints.append(QPointF(146.3718263928647, 6.419281580065625));
+
+    // Begin comparison
+    Comparison(points, origPoints);
+}

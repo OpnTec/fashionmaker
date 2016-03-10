@@ -59,8 +59,18 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QP
     {
         points = GetReversePoints(points);
     }
-    points = FromBegin(points, begin);
-    points = ToEnd(points, end);
+
+    QPointF start = begin;
+    QPointF finish = end;
+
+    if (begin == end)
+    {
+        start = points.first();
+        finish = points.last();
+    }
+
+    points = FromBegin(points, start);
+    points = ToEnd(points, finish);
     return points;
 }
 
