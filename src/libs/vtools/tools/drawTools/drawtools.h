@@ -40,6 +40,7 @@
 #include "toolcurve/vtoolarc.h"
 #include "toolcurve/vtoolarcwithlength.h"
 #include "toolcurve/vtoolspline.h"
+#include "toolcurve/vtoolcubicbezier.h"
 #include "toolcurve/vtoolsplinepath.h"
 #include "vtoolline.h"
 #include "toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"

@@ -198,6 +198,8 @@
                                                                                  <xs:attribute name="length1" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="length2" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="point1" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="point2" type="xs:unsignedInt"></xs:attribute>
+                                                                                 <xs:attribute name="point3" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="point4" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="color" type="colors"></xs:attribute>
                                                                                  <xs:attribute name="duplicate" type="xs:unsignedInt"></xs:attribute>

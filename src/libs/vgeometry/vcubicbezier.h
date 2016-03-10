@@ -42,6 +42,7 @@ public:
     VCubicBezier(const VPointF &p1, const VPointF &p2, const VPointF &p3, const VPointF &p4, quint32 idObject = 0,
                  Draw mode = Draw::Calculation);
     VCubicBezier &operator=(const VCubicBezier &curve);
+    virtual ~VCubicBezier();
 
     virtual VPointF GetP1() const Q_DECL_OVERRIDE;
     void            SetP1(const VPointF &p);

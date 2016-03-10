@@ -60,5 +60,7 @@
         <file>cursor/true_darts_cursor@2x.png</file>
         <file>cursor/intersection_curves_cursor.png</file>
         <file>cursor/intersection_curves_cursor@2x.png</file>
+        <file>cursor/cubic_bezier_cursor.png</file>
+        <file>cursor/cubic_bezier_cursor@2x.png</file>
     </qresource>
 </RCC>

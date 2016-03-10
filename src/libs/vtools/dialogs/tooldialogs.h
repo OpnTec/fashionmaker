@@ -42,6 +42,7 @@
 #include "dialogs/tools/dialogshoulderpoint.h"
 #include "dialogs/tools/dialogsinglepoint.h"
 #include "dialogs/tools/dialogspline.h"
+#include "dialogs/tools/dialogcubicbezier.h"
 #include "dialogs/tools/dialogsplinepath.h"
 #include "dialogs/tools/dialogheight.h"
 #include "dialogs/tools/dialogcutarc.h"

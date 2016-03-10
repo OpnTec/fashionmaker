@@ -135,6 +135,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolSpline::Type:
             ShowOptionsToolSpline(item);
             break;
+        case VToolCubicBezier::Type:
+            ShowOptionsToolCubicBezier(item);
+            break;
         case VToolSplinePath::Type:
             ShowOptionsToolSplinePath(item);
             break;
@@ -242,6 +245,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
             break;
         case VToolSpline::Type:
             UpdateOptionsToolSpline();
+            break;
+        case VToolCubicBezier::Type:
+            UpdateOptionsToolCubicBezier();
             break;
         case VToolSplinePath::Type:
             UpdateOptionsToolSplinePath();
@@ -365,6 +371,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             break;
         case VToolSpline::Type:
             ChangeDataToolSpline(prop);
+            break;
+        case VToolCubicBezier::Type:
+            ChangeDataToolCubicBezier(prop);
             break;
         case VToolSplinePath::Type:
             ChangeDataToolSplinePath(prop);
@@ -1347,6 +1356,31 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VProperty *property)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolCubicBezier(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    const QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    auto i = qgraphicsitem_cast<VToolCubicBezier *>(currentItem);
+    SCASSERT(i != nullptr);
+
+    switch (PropertiesList().indexOf(id))
+    {
+        case 0: // AttrName
+            Q_UNREACHABLE();//The attribute is read only
+            break;
+        case 27: // AttrTypeColor
+            i->SetLineColor(value.toString());
+            break;
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ChangeDataToolSplinePath(VProperty *property)
 {
     SCASSERT(property != nullptr)
@@ -1759,6 +1793,17 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     length2.setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit()));
     AddPropertyFormula(tr("C2: length"), length2, AttrLength2);
 
+    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezier(QGraphicsItem *item)
+{
+    auto i = qgraphicsitem_cast<VToolCubicBezier *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Cubic bezier curve"));
+
+    AddPropertyObjectName(i, tr("Name"), true);
     AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
 
@@ -2187,6 +2232,15 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     length2.setValue(length2F);
     idToProperty[AttrLength2]->setValue(length2);
 
+    idToProperty[AttrColor]->setValue(VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezier()
+{
+    auto i = qgraphicsitem_cast<VToolCubicBezier *>(currentItem);
+
+    idToProperty[AttrName]->setValue(i->name());
     idToProperty[AttrColor]->setValue(VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
 }
 

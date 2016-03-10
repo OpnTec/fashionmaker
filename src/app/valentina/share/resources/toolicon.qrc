@@ -58,5 +58,7 @@
         <file>toolicon/32x32/true_darts@2x.png</file>
         <file>toolicon/32x32/intersection_curves.png</file>
         <file>toolicon/32x32/intersection_curves@2x.png</file>
+        <file>toolicon/32x32/cubic_bezier.png</file>
+        <file>toolicon/32x32/cubic_bezier@2x.png</file>
     </qresource>
 </RCC>

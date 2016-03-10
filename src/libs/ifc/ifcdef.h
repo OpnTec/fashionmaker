@@ -102,6 +102,7 @@ extern const QString AttrP2Line2;
 extern const QString AttrPShoulder;
 extern const QString AttrPoint1;
 extern const QString AttrPoint2;
+extern const QString AttrPoint3;
 extern const QString AttrPoint4;
 extern const QString AttrKAsm1;// TODO. Delete if minimal supported version is 0.2.7
 extern const QString AttrKAsm2;// TODO. Delete if minimal supported version is 0.2.7
