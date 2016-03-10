@@ -86,14 +86,19 @@ public:
     qreal   GetKasm1() const;
     qreal   GetKasm2() const;
     qreal   GetKcurve() const;
-    qreal   LengthT(qreal t) const;
-    QPointF CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
+
+    using VAbstractCubicBezier::CutSpline;
     QPointF CutSpline ( qreal length, VSpline &spl1, VSpline &spl2) const;
+
     virtual QVector<QPointF> GetPoints () const Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
     static QVector<QPointF> SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, qreal angle2, qreal kAsm1,
                                          qreal kAsm2, qreal kCurve);
     qreal   ParamT(const QPointF &pBt) const;
+
+protected:
+    virtual QPointF GetControlPoint1() const Q_DECL_OVERRIDE;
+    virtual QPointF GetControlPoint2() const Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VSplineData> d;
     QVector<qreal> CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qreal curveCoord4,

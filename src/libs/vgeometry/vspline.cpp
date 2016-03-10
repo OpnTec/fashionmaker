@@ -126,118 +126,13 @@ qreal VSpline::GetLength () const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSpline::LengthT(qreal t) const
-{
-    if (t < 0 || t > 1)
-    {
-        qDebug()<<"Wrong value t.";
-        return 0;
-    }
-    QLineF seg1_2 ( GetP1 ().toQPointF(), GetP2 () );
-    seg1_2.setLength(seg1_2.length () * t);
-    QPointF p12 = seg1_2.p2();
-
-    QLineF seg2_3 ( GetP2 (), GetP3 () );
-    seg2_3.setLength(seg2_3.length () * t);
-    QPointF p23 = seg2_3.p2();
-
-    QLineF seg12_23 ( p12, p23 );
-    seg12_23.setLength(seg12_23.length () * t);
-    QPointF p123 = seg12_23.p2();
-
-    QLineF seg3_4 ( GetP3 (), GetP4 ().toQPointF() );
-    seg3_4.setLength(seg3_4.length () * t);
-    QPointF p34 = seg3_4.p2();
-
-    QLineF seg23_34 ( p23, p34 );
-    seg23_34.setLength(seg23_34.length () * t);
-    QPointF p234 = seg23_34.p2();
-
-    QLineF seg123_234 ( p123, p234 );
-    seg123_234.setLength(seg123_234.length () * t);
-    QPointF p1234 = seg123_234.p2();
-
-    return LengthBezier ( GetP1().toQPointF(), p12, p123, p1234);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CutSpline cut spline. GetPointP1() of base spline will return first point for first spline, GetPointP4()
- * of base spline will return forth point of second spline.
- * @param length length first spline
- * @param spl1p2 second point of first spline
- * @param spl1p3 third point of first spline
- * @param spl2p2 second point of second spline
- * @param spl2p3 third point of second spline
- * @return point of cutting. This point is forth point of first spline and first point of second spline.
- */
-QPointF VSpline::CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3 ) const
-{
-    //Always need return two splines, so we must correct wrong length.
-    if (length < GetLength()*0.02)
-    {
-        length = GetLength()*0.02;
-    }
-    else if ( length > GetLength()*0.98)
-    {
-        length = GetLength()*0.98;
-    }
-
-    // Very stupid way find correct value of t.
-    // Better first compare with t = 0.5. Find length of spline.
-    // If length larger, take t = 0.75 and so on.
-    // If length less, take t = 0.25 and so on.
-    qreal parT = 0;
-    qreal step = 0.001;
-    while (1)
-    {
-        parT = parT + step;
-        qreal splLength = LengthT(parT);
-        if (splLength >= length || parT > 1)
-        {
-            break;
-        }
-    }
-
-    QLineF seg1_2 ( GetP1 ().toQPointF(), GetP2 () );
-    seg1_2.setLength(seg1_2.length () * parT);
-    QPointF p12 = seg1_2.p2();
-
-    QLineF seg2_3 ( GetP2 (), GetP3 () );
-    seg2_3.setLength(seg2_3.length () * parT);
-    QPointF p23 = seg2_3.p2();
-
-    QLineF seg12_23 ( p12, p23 );
-    seg12_23.setLength(seg12_23.length () * parT);
-    QPointF p123 = seg12_23.p2();
-
-    QLineF seg3_4 ( GetP3 (), GetP4 ().toQPointF() );
-    seg3_4.setLength(seg3_4.length () * parT);
-    QPointF p34 = seg3_4.p2();
-
-    QLineF seg23_34 ( p23, p34 );
-    seg23_34.setLength(seg23_34.length () * parT);
-    QPointF p234 = seg23_34.p2();
-
-    QLineF seg123_234 ( p123, p234 );
-    seg123_234.setLength(seg123_234.length () * parT);
-    QPointF p1234 = seg123_234.p2();
-
-    spl1p2 = p12;
-    spl1p3 = p123;
-    spl2p2 = p234;
-    spl2p3 = p34;
-    return p1234;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2) const
 {
     QPointF spl1p2;
     QPointF spl1p3;
     QPointF spl2p2;
     QPointF spl2p3;
-    QPointF cutPoint = CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
+    const QPointF cutPoint = CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
 
     spl1 = VSpline(GetP1(), spl1p2, spl1p3, cutPoint);
     spl2 = VSpline(cutPoint, spl2p2, spl2p3, GetP4());
@@ -597,4 +492,16 @@ qreal VSpline::ParamT (const QPointF &pBt) const
     }
 
     return tx;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VSpline::GetControlPoint1() const
+{
+    return GetP2 ();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VSpline::GetControlPoint2() const
+{
+    return GetP3 ();
 }

@@ -120,7 +120,7 @@ VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointNa
                                        VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                        const Document &parse, const Source &typeCreation)
 {
-    const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(splineId);
+    const auto spl = data->GeometricObject<VAbstractCubicBezier>(splineId);
 
     const qreal result = CheckFormula(_id, formula, data);
 

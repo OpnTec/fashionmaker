@@ -53,14 +53,20 @@ void VisToolCutSpline::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VSpline> spl = Visualization::data->GeometricObject<VSpline>(object1Id);
+        const auto spl = Visualization::data->GeometricObject<VAbstractCubicBezier>(object1Id);
         DrawPath(this, spl->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
 
         if (qFuzzyCompare(1 + length, 1 + 0) == false)
         {
-            VSpline sp1;
-            VSpline sp2;
-            QPointF p = spl->CutSpline(length, sp1, sp2);
+            QPointF spl1p2;
+            QPointF spl1p3;
+            QPointF spl2p2;
+            QPointF spl2p3;
+            const QPointF p = spl->CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
+
+            const VSpline sp1 = VSpline(spl->GetP1(), spl1p2, spl1p3, p);
+            const VSpline sp2 = VSpline(p, spl2p2, spl2p3, spl->GetP4());
+
             DrawPoint(point, p, mainColor);
 
             DrawPath(spl1, sp1.GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);

@@ -44,6 +44,8 @@ public:
     virtual VPointF GetP1 () const =0;
     virtual VPointF GetP4 () const =0;
 
+    QPointF CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
+
 protected:
     virtual void CreateName() Q_DECL_OVERRIDE;
 
@@ -53,6 +55,12 @@ protected:
     static QVector<QPointF> GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
                                                  const QPointF &p4);
     static qreal            LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4);
+
+    virtual QPointF GetControlPoint1() const =0;
+    virtual QPointF GetControlPoint2() const =0;
+
+private:
+    qreal LengthT(qreal t) const;
 };
 
 #endif // VABSTRACTCUBICBEZIER_H

@@ -145,3 +145,15 @@ QVector<QPointF> VCubicBezier::GetPoints() const
 {
     return GetCubicBezierPoints(GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VCubicBezier::GetControlPoint1() const
+{
+    return GetP2().toQPointF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VCubicBezier::GetControlPoint2() const
+{
+    return GetP3().toQPointF();
+}
