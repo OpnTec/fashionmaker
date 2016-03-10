@@ -212,6 +212,36 @@ void TST_VAbstractDetail::PathRemoveLoop() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractDetail::BrokenDetailEquidistant() const
+{
+    // For more details see the file GAVAUDAN Laure - corsage - figure 4.val
+    // We will test only one detail. The second require too accurate data that we cannot get from debuger.
+    // The test check an open equdistant of correct detail.
+    QVector<QPointF> points;// Input points.
+    points.append(QPointF(1062.36226525, 134.022845566));
+    points.append(QPointF(1375.53777429, 66.4182791729));
+    points.append(QPointF(1422.22769398, 510.762708661));
+    points.append(QPointF(1467.89850709, 945.408377953));
+    points.append(QPointF(1127.74102677, 510.762708661));
+
+    const EquidistantType eqv = EquidistantType::OpenEquidistant; // Open path
+    const qreal width = 37.795275590551185; // seam allowance width
+
+    const QVector<QPointF> ekv = VAbstractDetail::Equidistant(points, eqv, width);// Take result
+
+    QVector<QPointF> ekvOrig;
+    ekvOrig.append(QPointF(1055.89455044, 96.7531583682));
+    ekvOrig.append(QPointF(1408.72549102, 20.5882538362));
+    ekvOrig.append(QPointF(1459.81603355, 506.813077611));
+    ekvOrig.append(QPointF(1508.46179299, 969.771085841));
+    ekvOrig.append(QPointF(1455.67973006, 991.120774377));
+    ekvOrig.append(QPointF(1141.4155362, 589.560971108));
+
+    // Begin comparison
+    Comparison(ekv, ekvOrig);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractDetail::Case1() const
 {
     const QVector<QPointF> points = InputPointsCase1(); // Input points.
