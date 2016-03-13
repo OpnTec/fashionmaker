@@ -34,7 +34,7 @@ VShortcutEditWidget::VShortcutEditWidget(QWidget *parent)
     LineEdit->clear();
     LineEdit->installEventFilter(this);
     setFocusProxy(LineEdit);
-    connect(LineEdit, SIGNAL(textEdited(QString)), this, SLOT(onTextEdited(QString)));
+    connect(LineEdit, &QLineEdit::textEdited, this, &VShortcutEditWidget::onTextEdited);
 
     // The layout (a horizontal layout)
     QHBoxLayout* layout = new QHBoxLayout(this);

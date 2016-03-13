@@ -76,12 +76,10 @@ void VPropertyFormView::setModel(VPropertyModel *model)
         }
 
         // Connect signals // todo: more signals neccesary!!!
-        connect(model, SIGNAL(destroyed()), this, SLOT(modelDestroyed()));
-        connect(model, SIGNAL(rowsInserted(const QModelIndex&, int, int)), this,
-                SLOT(rowsInserted(QModelIndex, int, int)));
-        connect(model, SIGNAL(modelReset()), this, SLOT(modelReset()));
-        connect(model, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), this,
-                SLOT(rowsRemoved(QModelIndex, int, int)));
+        connect(model, &VPropertyModel::destroyed, this, &VPropertyFormView::modelDestroyed);
+        connect(model, &VPropertyModel::rowsInserted, this, &VPropertyFormView::rowsInserted);
+        connect(model, &VPropertyModel::modelReset, this, &VPropertyFormView::modelReset);
+        connect(model, &VPropertyModel::rowsRemoved, this, &VPropertyFormView::rowsRemoved);
     }
 
     // Build the widget

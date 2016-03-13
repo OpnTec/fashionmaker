@@ -55,7 +55,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
     ToolButton->installEventFilter(this);
     setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
     setFocusPolicy(ToolButton->focusPolicy());
-    connect(ToolButton, SIGNAL(clicked()), this, SLOT(onToolButtonClicked()));
+    connect(ToolButton, &QToolButton::clicked, this, &VFormulaPropertyEditor::onToolButtonClicked);
 
     // Create the text label
     TextLabel = new QLabel(this);

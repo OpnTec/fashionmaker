@@ -41,7 +41,7 @@ VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
     ToolButton->installEventFilter(this);
     setFocusProxy(ToolButton);  // Make the ToolButton the focus proxy
     setFocusPolicy(ToolButton->focusPolicy());
-    connect(ToolButton, SIGNAL(clicked()), this, SLOT(onToolButtonClicked()));
+    connect(ToolButton, &QToolButton::clicked, this, &VFileEditWidget::onToolButtonClicked);
 
     // Create the line edit widget
     FileLineEdit = new QLineEdit(this);
