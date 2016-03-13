@@ -68,7 +68,6 @@ private:
     void ToV0_2_5();
     void ToV0_2_6();
     void ToV0_2_7();
-    void ToV0_2_8();
 
     void          TagUnitToV0_2_0();
     void          TagIncrementToV0_2_0();

@@ -5,6 +5,7 @@
                <xs:complexType>
                      <xs:sequence minOccurs="1" maxOccurs="unbounded">
                             <xs:element name="version" type="formatVersion"></xs:element>
+                            <xs:element name="image" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="unit" type="units"></xs:element>
                             <xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>

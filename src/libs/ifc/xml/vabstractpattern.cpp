@@ -1004,18 +1004,24 @@ void VAbstractPattern::CheckTagExists(const QString &tag)
     QDomNodeList list = elementsByTagName(tag);
     if (list.size() == 0)
     {
-        QStringList tags = QStringList() << TagVersion << TagAuthor << TagDescription << TagNotes << TagImage
+        QStringList tags = QStringList() << TagVersion << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation;
         QDomElement pattern = documentElement();
         switch (tags.indexOf(tag))
         {
             case 0: //TagVersion
                 break;// Mandatory tag
-            case 1: //TagAuthor
+            case 1: //TagImage
+            {
+                pattern.insertAfter(createElement(TagImage), elementsByTagName(TagVersion).at(0));
+                SetVersion();
+                break;
+            }
+            case 2: //TagAuthor
                 pattern.insertAfter(createElement(TagAuthor), elementsByTagName(TagVersion).at(0));
                 SetVersion();
                 break;
-            case 2: //TagDescription
+            case 3: //TagDescription
             {
                 for (int i = tags.indexOf(tag)-1; i >= 0; --i)
                 {
@@ -1029,7 +1035,7 @@ void VAbstractPattern::CheckTagExists(const QString &tag)
                 SetVersion();
                 break;
             }
-            case 3: //TagNotes
+            case 4: //TagNotes
             {
                 for (int i = tags.indexOf(tag)-1; i >= 0; --i)
                 {
@@ -1040,12 +1046,6 @@ void VAbstractPattern::CheckTagExists(const QString &tag)
                     }
                     pattern.insertAfter(createElement(TagNotes), list.at(0));
                 }
-                SetVersion();
-                break;
-            }
-            case 4: //TagImage
-            {
-                pattern.insertAfter(createElement(TagImage), elementsByTagName(TagVersion).at(0));
                 SetVersion();
                 break;
             }
