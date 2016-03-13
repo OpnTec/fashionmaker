@@ -3028,6 +3028,11 @@ void VPattern::ToolsCommonAttributes(const QDomElement &domElement, quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
+
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
@@ -3138,25 +3143,21 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 //Because "history" not only show history of pattern, but help restore current data for each pattern's
                 //piece, we need add record about details and nodes, but don't show them.
                 case Tool::Detail:
-                    break;
                 case Tool::UnionDetails:
-                    break;
                 case Tool::NodeArc:
-                    break;
                 case Tool::NodePoint:
-                    break;
                 case Tool::NodeSpline:
-                    break;
                 case Tool::NodeSplinePath:
-                    break;
-                default:
-                    qDebug()<<"Got wrong tool type. Ignore.";
                     break;
             }
         }
     }
     return rec;
 }
+
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic pop
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
