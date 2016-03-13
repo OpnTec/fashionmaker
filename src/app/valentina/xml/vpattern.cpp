@@ -3030,6 +3030,9 @@ void VPattern::ToolsCommonAttributes(const QDomElement &domElement, quint32 &id)
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
+    // This check helps to find missed tools in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 40, "Not all tools was used.");
+
     QRectF rec;
 
     for (qint32 i = 0; i< history.size(); ++i)
@@ -3040,6 +3043,12 @@ QRectF VPattern::ActiveDrawBoundingRect() const
             switch ( tool.getTypeTool() )
             {
                 case Tool::Arrow:
+                case Tool::SinglePoint:
+                case Tool::DoublePoint:
+                case Tool::LinePoint:
+                case Tool::AbstractSpline:
+                case Tool::Cut:
+                case Tool::LAST_ONE_DO_NOT_USE:
                     Q_UNREACHABLE();
                     break;
                 case Tool::BasePoint:
@@ -3069,6 +3078,9 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::Spline:
                     rec = ToolBoundingRect<VToolSpline>(rec, tool.getId());
                     break;
+                case Tool::CubicBezier:
+                    rec = ToolBoundingRect<VToolCubicBezier>(rec, tool.getId());
+                    break;
                 case Tool::Arc:
                     rec = ToolBoundingRect<VToolArc>(rec, tool.getId());
                     break;
@@ -3095,6 +3107,33 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                     break;
                 case Tool::CutSplinePath:
                     rec = ToolBoundingRect<VToolCutSplinePath>(rec, tool.getId());
+                    break;
+                case Tool::ArcWithLength:
+                    rec = ToolBoundingRect<VToolArcWithLength>(rec, tool.getId());
+                    break;
+                case Tool::LineIntersectAxis:
+                    rec = ToolBoundingRect<VToolLineIntersectAxis>(rec, tool.getId());
+                    break;
+                case Tool::PointOfIntersectionArcs:
+                    rec = ToolBoundingRect<VToolPointOfIntersectionArcs>(rec, tool.getId());
+                    break;
+                case Tool::PointOfIntersectionCircles:
+                    rec = ToolBoundingRect<VToolPointOfIntersectionCircles>(rec, tool.getId());
+                    break;
+                case Tool::PointOfIntersectionCurves:
+                    rec = ToolBoundingRect<VToolPointOfIntersectionCurves>(rec, tool.getId());
+                    break;
+                case Tool::CurveIntersectAxis:
+                    rec = ToolBoundingRect<VToolCurveIntersectAxis>(rec, tool.getId());
+                    break;
+                case Tool::PointFromCircleAndTangent:
+                    rec = ToolBoundingRect<VToolPointFromCircleAndTangent>(rec, tool.getId());
+                    break;
+                case Tool::PointFromArcAndTangent:
+                    rec = ToolBoundingRect<VToolPointFromArcAndTangent>(rec, tool.getId());
+                    break;
+                case Tool::TrueDarts:
+                    rec = ToolBoundingRect<VToolTrueDarts>(rec, tool.getId());
                     break;
                 //Because "history" not only show history of pattern, but help restore current data for each pattern's
                 //piece, we need add record about details and nodes, but don't show them.
