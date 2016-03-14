@@ -73,25 +73,7 @@ void VUndoCommand::IncrementReferences(const QVector<VNodeDetail> &nodes) const
 {
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        switch (nodes.at(i).getTypeTool())
-        {
-            case (Tool::NodePoint):
-            {
-                auto tool = qobject_cast<VAbstractTool *>(doc->getTool(nodeId));
-                SCASSERT(tool != nullptr);
-                const auto point = tool->getData()->GeometricObject<VPointF>(nodes.at(i).getId());
-                doc->IncrementReferens(point->getIdTool());
-                break;
-            }
-            case (Tool::NodeArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
-                doc->IncrementReferens(nodes.at(i).getId());
-                break;
-            default:
-                qDebug()<<"Get wrong tool type. Ignore.";
-                break;
-        }
+        doc->IncrementReferens(nodes.at(i).getId());
     }
 }
 
@@ -100,24 +82,6 @@ void VUndoCommand::DecrementReferences(const QVector<VNodeDetail> &nodes) const
 {
     for (qint32 i = 0; i < nodes.size(); ++i)
     {
-        switch (nodes.at(i).getTypeTool())
-        {
-            case (Tool::NodePoint):
-            {
-                auto tool = qobject_cast<VAbstractTool *>(doc->getTool(nodeId));
-                SCASSERT(tool != nullptr);
-                const auto point = tool->getData()->GeometricObject<VPointF>(nodes.at(i).getId());
-                doc->DecrementReferens(point->getIdTool());
-                break;
-            }
-            case (Tool::NodeArc):
-            case (Tool::NodeSpline):
-            case (Tool::NodeSplinePath):
-                doc->DecrementReferens(nodes.at(i).getId());
-                break;
-            default:
-                qDebug()<<"Get wrong tool type. Ignore.";
-                break;
-        }
+        doc->DecrementReferens(nodes.at(i).getId());
     }
 }
