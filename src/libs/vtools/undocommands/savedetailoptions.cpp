@@ -59,7 +59,7 @@ void SaveDetailOptions::undo()
         {
            VToolDetail::AddNode(doc, domElement, oldDet.at(i));
         }
-        IncrementReferences(oldDet.getNodes());
+        IncrementReferences(oldDet.Missing(newDet));
         emit NeedLiteParsing(Document::LiteParse);
     }
     else
