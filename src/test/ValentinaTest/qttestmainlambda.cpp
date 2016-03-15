@@ -47,6 +47,7 @@
 #include "tst_tstranslation.h"
 #include "tst_vdetail.h"
 #include "tst_findpoint.h"
+#include "tst_vabstractcurve.h"
 
 int main(int argc, char** argv)
 {
@@ -80,6 +81,7 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_Misc());
     ASSERT_TEST(new TST_VCommandLine());
     ASSERT_TEST(new TST_TSTranslation());
+    ASSERT_TEST(new TST_VAbstractCurve());
 
     return status;
 }

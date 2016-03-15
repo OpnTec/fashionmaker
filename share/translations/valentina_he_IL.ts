@@ -675,6 +675,53 @@
     </message>
 </context>
 <context>
+    <name>DialogCubicBezier</name>
+    <message>
+        <source>Cubic bezier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fourth point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the second point of curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the third point of curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the fourth point of curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid spline</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogCurveIntersectAxis</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1406,6 +1453,10 @@
     </message>
     <message>
         <source>%1 - point of curves intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cubic bezier curve %1_%2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4503,6 +4554,14 @@ Do you want to save your changes?</source>
         <source>Measurements was changed. Do you want to sync measurements now?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Curve tool which uses point as control handle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select first curve point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6356,6 +6415,10 @@ Do you want to save your changes?</source>
         <source>Error creating or updating interactive spline path</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating cubic bezier curve</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -6618,6 +6681,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>C2: length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cubic bezier curve</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

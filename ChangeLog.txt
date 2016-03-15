@@ -12,6 +12,8 @@
 - [#385] Add 'Open Recent' option in Tape.exe, 'File' dropdown menu.
 
 # Version 0.4.4
+- Fixed issue with deleting detail nodes.
+- [#458] Issue with segment of curve.
 - Fixed disappearing curve if start and finish points of a segment are equal.
 - Fixed bug case where an open equidistant point is too far from a main path.
 - Fixed wrong handling with true darts points inside tool detail.

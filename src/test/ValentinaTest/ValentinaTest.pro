@@ -54,6 +54,7 @@ SOURCES += \
     tst_vcommandline.cpp \
     tst_tstranslation.cpp \
     tst_vdetail.cpp \
+    tst_vabstractcurve.cpp \
     tst_findpoint.cpp \
     tst_vellipticalarc.cpp
 
@@ -77,6 +78,7 @@ HEADERS += \
     tst_vcommandline.h \
     tst_tstranslation.h \
     tst_vdetail.h \
+    tst_vabstractcurve.h \
     tst_findpoint.h \
     tst_vellipticalarc.h
 

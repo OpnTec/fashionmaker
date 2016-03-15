@@ -83,45 +83,41 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
         length = GetLength()*0.98;
     }
 
-    // Very stupid way find correct value of t.
-    // Better first compare with t = 0.5. Find length of spline.
-    // If length larger, take t = 0.75 and so on.
-    // If length less, take t = 0.25 and so on.
-    qreal parT = 0;
-    qreal step = 0.001;
-    while (1)
+    const qreal eps = 0.001 * qAbs(length);
+    qreal parT = 0.5;
+    qreal step = parT;
+    qreal splLength = LengthT(parT);
+
+    while (qAbs(splLength - length) > eps)
     {
-        parT = parT + step;
-        qreal splLength = LengthT(parT);
-        if (splLength >= length || parT > 1)
-        {
-            break;
-        }
+        step = step/2.0;
+        splLength > length ? parT -= step : parT += step;
+        splLength = LengthT(parT);
     }
 
     QLineF seg1_2 ( GetP1 ().toQPointF(), GetControlPoint1 () );
     seg1_2.setLength(seg1_2.length () * parT);
-    QPointF p12 = seg1_2.p2();
+    const QPointF p12 = seg1_2.p2();
 
     QLineF seg2_3 ( GetControlPoint1(), GetControlPoint2 () );
     seg2_3.setLength(seg2_3.length () * parT);
-    QPointF p23 = seg2_3.p2();
+    const QPointF p23 = seg2_3.p2();
 
     QLineF seg12_23 ( p12, p23 );
     seg12_23.setLength(seg12_23.length () * parT);
-    QPointF p123 = seg12_23.p2();
+    const QPointF p123 = seg12_23.p2();
 
     QLineF seg3_4 ( GetControlPoint2 (), GetP4 ().toQPointF() );
     seg3_4.setLength(seg3_4.length () * parT);
-    QPointF p34 = seg3_4.p2();
+    const QPointF p34 = seg3_4.p2();
 
     QLineF seg23_34 ( p23, p34 );
     seg23_34.setLength(seg23_34.length () * parT);
-    QPointF p234 = seg23_34.p2();
+    const QPointF p234 = seg23_34.p2();
 
     QLineF seg123_234 ( p123, p234 );
     seg123_234.setLength(seg123_234.length () * parT);
-    QPointF p1234 = seg123_234.p2();
+    const QPointF p1234 = seg123_234.p2();
 
     spl1p2 = p12;
     spl1p3 = p123;
