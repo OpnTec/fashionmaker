@@ -86,7 +86,6 @@ void VPattern::CreateEmptyFile()
     patternElement.appendChild(createElement(TagAuthor));
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));
-    patternElement.appendChild(createElement(TagImage));
 
     patternElement.appendChild(createElement(TagMeasurements));
     patternElement.appendChild(createElement(TagIncrements));
@@ -128,7 +127,7 @@ void VPattern::Parse(const Document &parse)
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
-                                     << TagImage << TagMeasurements << TagVersion << TagGradation << TagUnit;
+                                     << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)

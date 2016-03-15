@@ -108,6 +108,7 @@ public:
 
     QString        GetImage() const;
     void           SetImage(const QString &text);
+    void           DeleteImage();
 
     QString        GetVersion() const;
     void           SetVersion();

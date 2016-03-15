@@ -64,6 +64,7 @@ private slots:
     void ToggleComboBox();
     void DefValueChanged();
     void SecurityValueChanged();
+    void DeleteImage();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;

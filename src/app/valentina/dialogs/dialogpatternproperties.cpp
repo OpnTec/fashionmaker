@@ -65,6 +65,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     connect(ui->plainTextEditTechNotes, &QPlainTextEdit::textChanged, this, &DialogPatternProperties::DescEdited);
 
     InitImage();
+    connect(ui->deleteImageButton, &QPushButton::clicked, this, &DialogPatternProperties::DeleteImage);
 
     connect(ui->buttonBox->button(QDialogButtonBox::Ok), &QPushButton::clicked, this, &DialogPatternProperties::Ok);
     connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this,
@@ -649,5 +650,11 @@ void DialogPatternProperties::SetNewImage()
         // save our image to file.val
         doc->SetImage(iconBase64);
     }
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::DeleteImage()
+{
+    doc->DeleteImage();
+    ui->imageLabel->setText("Change image");
 }

@@ -933,6 +933,20 @@ void VAbstractPattern::SetImage(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::DeleteImage()
+{
+    QDomElement pattern = documentElement();
+    QDomNodeList images = this->elementsByTagName(TagImage);
+    for (int i=0; i<images.count(); ++i)
+    {
+        QDomNode image = images.at(i);
+        pattern.removeChild(image);
+    }
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetVersion() const
 {
     return UniqueTagText(TagVersion, VPatternConverter::PatternMaxVerStr);
