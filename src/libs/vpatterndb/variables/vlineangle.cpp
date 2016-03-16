@@ -32,6 +32,12 @@
 
 #include <QLineF>
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
+#   include "../vmisc/vmath.h"
+#else
+#   include <QtMath>
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::VLineAngle()
     :VInternalVariable(), d(new VLineAngleData)
@@ -84,7 +90,9 @@ void VLineAngle::SetValue(const VPointF *p1, const VPointF *p2)
 {
     SCASSERT(p1 != nullptr);
     SCASSERT(p2 != nullptr);
-    VInternalVariable::SetValue(QLineF(p1->toQPointF(), p2->toQPointF()).angle());
+    //Correct angle. Try avoid results like 6,7563e-15.
+    const qreal angle = qFloor(QLineF(p1->toQPointF(), p2->toQPointF()).angle() * 100000.) / 100000.;
+    VInternalVariable::SetValue(angle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
