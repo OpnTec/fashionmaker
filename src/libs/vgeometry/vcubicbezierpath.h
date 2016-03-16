@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vsplinepath.h
+ **  @file   vcubicbezierpath.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   November 15, 2013
+ **  @date   16 3, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,59 +26,48 @@
  **
  *************************************************************************/
 
-#ifndef VSPLINEPATH_H
-#define VSPLINEPATH_H
+#ifndef VCUBICBEZIERPATH_H
+#define VCUBICBEZIERPATH_H
 
 #include "vabstractcubicbezierpath.h"
-#include "vspline.h"
-#include "vsplinepoint.h"
+#include "vpointf.h"
+
 #include <QCoreApplication>
-#include <QVector>
-#include <QPainterPath>
 
-class VSplinePathData;
+class VCubicBezierPathData;
+class VSpline;
 
-/**
- * @brief The VSplinePath class keep information about splinePath.
- */
-class VSplinePath :public VAbstractCubicBezierPath
+class VCubicBezierPath : public VAbstractCubicBezierPath
 {
-    Q_DECLARE_TR_FUNCTIONS(VSplinePath)
+    Q_DECLARE_TR_FUNCTIONS(VCubicBezierPath)
 public:
-    explicit VSplinePath(quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve = 1, quint32 idObject = 0,
-                Draw mode = Draw::Calculation);
-    VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
-    VSplinePath(const VSplinePath& splPath);
-    virtual ~VSplinePath() Q_DECL_OVERRIDE;
+    explicit VCubicBezierPath(quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VCubicBezierPath(const VCubicBezierPath &curve);
+    VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    VCubicBezierPath &operator=(const VCubicBezierPath &curve);
+    virtual ~VCubicBezierPath();
 
-    VSplinePath  &operator=(const VSplinePath &path);
-    VSplinePoint &operator[](int indx);
+    VPointF &operator[](int indx);
 
-    void   append(const VSplinePoint &point);
+    const VPointF &at(int indx) const;
+
+    void   append(const VPointF &point);
 
     virtual qint32  CountSubSpl() const Q_DECL_OVERRIDE;
     virtual qint32  CountPoints() const Q_DECL_OVERRIDE;
     virtual void    Clear() Q_DECL_OVERRIDE;
     virtual VSpline GetSpline(qint32 index) const Q_DECL_OVERRIDE;
+    virtual qreal   GetStartAngle () const Q_DECL_OVERRIDE;
+    virtual qreal   GetEndAngle () const Q_DECL_OVERRIDE;
 
-    QVector<VSplinePoint>  GetSplinePath() const;
-    QVector<VFSplinePoint> GetFSplinePath() const;
-
-    virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;
-    virtual qreal GetEndAngle () const Q_DECL_OVERRIDE;
-
-    void         UpdatePoint(qint32 indexSpline, const SplinePointPosition &pos, const VSplinePoint &point);
-    VSplinePoint GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const;
-
-    const VSplinePoint &at(int indx) const;
+    QVector<VPointF> GetSplinePath() const;
 protected:
     virtual VPointF FirstPoint() const  Q_DECL_OVERRIDE;
     virtual VPointF LastPoint() const  Q_DECL_OVERRIDE;
 private:
-    QSharedDataPointer<VSplinePathData> d;
+    QSharedDataPointer<VCubicBezierPathData> d;
 };
 
-Q_DECLARE_TYPEINFO(VSplinePath, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(VCubicBezierPath, Q_MOVABLE_TYPE);
 
-#endif // VSPLINEPATH_H
+#endif // VCUBICBEZIERPATH_H

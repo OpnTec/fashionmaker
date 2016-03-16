@@ -53,7 +53,7 @@ VisToolSplinePath::~VisToolSplinePath()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolSplinePath::RefreshGeometry()
 {
-    if (path.CountPoint() > 0)
+    if (path.CountPoints() > 0)
     {
         const QVector<VSplinePoint> pathPoints = path.GetSplinePath();
         const int size = pathPoints.size();
@@ -68,9 +68,9 @@ void VisToolSplinePath::RefreshGeometry()
         {
             if (size > 1)
             {
-                for (qint32 i = 1; i<=path.Count(); ++i)
+                for (qint32 i = 1; i<=path.CountSubSpl(); ++i)
                 {
-                    const int preLastPoint = (path.Count() - 1) * 2;
+                    const int preLastPoint = (path.CountSubSpl() - 1) * 2;
                     const int lastPoint = preLastPoint + 1;
 
                     VSpline spl = path.GetSpline(i);
@@ -90,7 +90,7 @@ void VisToolSplinePath::RefreshGeometry()
             DrawPath(this, path.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
         }
 
-        if (path.CountPoint() < 3)
+        if (path.CountPoints() < 3)
         {
             Visualization::toolTip = tr("<b>Curved path</b>: select three or more points");
         }

@@ -73,7 +73,7 @@ void VisToolCutSplinePath::RefreshGeometry()
             VSplinePath spPath1 = VSplinePath();
             VSplinePath spPath2 = VSplinePath();
 
-            for (qint32 i = 0; i < splPath->CountPoint(); i++)
+            for (qint32 i = 0; i < splPath->CountPoints(); i++)
             {
                 if (i <= p1 && i < p2)
                 {
