@@ -618,7 +618,33 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="3" column="0">
+         <widget class="QToolButton" name="toolButtonIntersectionCurves">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Point intersection curves</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/intersection_curves.png</normaloff>:/toolicon/32x32/intersection_curves.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
          <widget class="QToolButton" name="toolButtonCurveIntersectAxis">
           <property name="enabled">
            <bool>false</bool>
@@ -644,20 +670,17 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QToolButton" name="toolButtonIntersectionCurves">
+        <item row="2" column="1">
+         <widget class="QToolButton" name="toolButtonCubicBezierPath">
           <property name="enabled">
            <bool>false</bool>
-          </property>
-          <property name="toolTip">
-           <string>Point intersection curves</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/toolicon.qrc">
-            <normaloff>:/toolicon/32x32/intersection_curves.png</normaloff>:/toolicon/32x32/intersection_curves.png</iconset>
+            <normaloff>:/toolicon/32x32/cubic_bezier_path.png</normaloff>:/toolicon/32x32/cubic_bezier_path.png</iconset>
           </property>
           <property name="iconSize">
            <size>

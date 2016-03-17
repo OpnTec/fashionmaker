@@ -65,6 +65,8 @@ public:
     void                     SetDuplicate(quint32 number);
 
     static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
+
+    virtual QString          NameForHistory(const QString &toolName) const=0;
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
     virtual void             CreateName() =0;

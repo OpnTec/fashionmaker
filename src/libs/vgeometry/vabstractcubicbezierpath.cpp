@@ -182,6 +182,31 @@ QPointF VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief NameForHistory helps to create name for dialog History.
+ * @param toolName first part of name. Like 'Spline path' or 'Cubic Bezier path'.
+ * @return name of curve for history records.
+ */
+QString VAbstractCubicBezierPath::NameForHistory(const QString &toolName) const
+{
+    QString name = toolName;
+    if (CountPoints() > 0)
+    {
+        name += QString(" %1").arg(FirstPoint().name());
+        if (CountSubSpl() >= 1)
+        {
+            name += QString("_%1").arg(LastPoint().name());
+        }
+
+        if (GetDuplicate() > 0)
+        {
+            name += QString("_%1").arg(GetDuplicate());
+        }
+    }
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractCubicBezierPath::CreateName()
 {
     QString name;

@@ -376,6 +376,23 @@ void VEllipticalArc::setId(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VEllipticalArc::NameForHistory(const QString &toolName) const
+{
+    QString name = toolName + QString(" %1").arg(this->GetCenter().name());
+
+    if (VAbstractCurve::id() != NULL_ID)
+    {
+        name += QString("_%1").arg(VAbstractCurve::id());
+    }
+
+    if (GetDuplicate() > 0)
+    {
+        name += QString("_%1").arg(GetDuplicate());
+    }
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VEllipticalArc::CreateName()
 {
     QString name = EARC_ + QString("%1").arg(this->GetCenter().name());
