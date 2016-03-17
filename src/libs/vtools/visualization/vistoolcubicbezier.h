@@ -56,7 +56,8 @@ protected:
     QGraphicsEllipseItem *point2;
     QGraphicsEllipseItem *point3;
     QGraphicsEllipseItem *point4;
-    QGraphicsLineItem    *helpLine;
+    QGraphicsLineItem    *helpLine1;
+    QGraphicsLineItem    *helpLine2;
 };
 
 #endif // VISTOOLCUBICBEZIER_H
