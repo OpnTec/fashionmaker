@@ -58,6 +58,7 @@ public slots:
     void         CheckStateSize(int state);
     void         DescEdited();
     void         SetNewImage();
+    void         ShowContextMenu();
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 private slots:
@@ -80,6 +81,10 @@ private:
     bool                   defaultChanged;
     bool                   securityChanged;
     bool                   isInitialized;
+    QAction                *deleteAction;
+    QAction                *changeImageAction;
+    QAction                *saveImageAction;
+    QAction                *showImageAction;
 
     void         SetHeightsChecked(bool enabled);
     void         SetSizesChecked(bool enabled);

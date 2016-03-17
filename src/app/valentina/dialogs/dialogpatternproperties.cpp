@@ -31,6 +31,7 @@
 #include <QBuffer>
 #include <QPushButton>
 #include <QFileDialog>
+#include <QMenu>
 #include "../xml/vpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
@@ -65,7 +66,6 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     connect(ui->plainTextEditTechNotes, &QPlainTextEdit::textChanged, this, &DialogPatternProperties::DescEdited);
 
     InitImage();
-    connect(ui->deleteImageButton, &QPushButton::clicked, this, &DialogPatternProperties::DeleteImage);
 
     connect(ui->buttonBox->button(QDialogButtonBox::Ok), &QPushButton::clicked, this, &DialogPatternProperties::Ok);
     connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this,
@@ -620,8 +620,20 @@ void DialogPatternProperties::InitImage()
     QBuffer buffer(&ba);
     buffer.open(QIODevice::ReadOnly);
     image.load(&buffer, "PNG"); // writes image into ba in PNG format
+
     ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+    ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
+
     connect(ui->changeImageButton, &QPushButton::clicked, this, &DialogPatternProperties::SetNewImage);
+    connect(ui->deleteImageButton, &QPushButton::clicked, this, &DialogPatternProperties::DeleteImage);
+    connect(ui->imageLabel, &QWidget::customContextMenuRequested, this, &DialogPatternProperties::ShowContextMenu);
+
+    deleteAction      = new QAction("Delete image", this);
+    changeImageAction = new QAction("Change image", this);
+    saveImageAction   = new QAction("Save image to file", this);
+    showImageAction   = new QAction("Show image", this);
+    connect(deleteAction, &QAction::triggered, this, &DialogPatternProperties::DeleteImage);
+    connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::SetNewImage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -657,4 +669,16 @@ void DialogPatternProperties::DeleteImage()
 {
     doc->DeleteImage();
     ui->imageLabel->setText("Change image");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ShowContextMenu()
+{
+    QMenu menu(this);
+    menu.addAction(deleteAction);
+    menu.addAction(changeImageAction);
+    menu.addAction(saveImageAction);
+    menu.addAction(showImageAction);
+    menu.exec(QCursor::pos());
+    menu.show();
 }
