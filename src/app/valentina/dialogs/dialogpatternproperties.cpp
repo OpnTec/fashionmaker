@@ -623,6 +623,7 @@ void DialogPatternProperties::InitImage()
 
     ui->imageLabel->setPixmap(QPixmap::fromImage(image));
     ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->imageLabel->setScaledContents(true);
 
     connect(ui->changeImageButton, &QPushButton::clicked, this, &DialogPatternProperties::SetNewImage);
     connect(ui->deleteImageButton, &QPushButton::clicked, this, &DialogPatternProperties::DeleteImage);
