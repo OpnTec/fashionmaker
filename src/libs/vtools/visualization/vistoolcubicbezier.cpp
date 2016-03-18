@@ -62,12 +62,11 @@ void VisToolCubicBezier::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const auto first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(point1, first->toQPointF(), supportColor);
+        DrawPoint(point1, first->toQPointF(), Qt::DashLine);
 
         if (object2Id <= NULL_ID)
         {
-            const QLineF line = QLineF(first->toQPointF(), Visualization::scenePos);
-            DrawLine(helpLine1, line, mainColor, Qt::DashLine);
+            DrawLine(helpLine1, QLineF(first->toQPointF(), Visualization::scenePos), mainColor, Qt::DashLine);
         }
         else
         {
@@ -90,6 +89,7 @@ void VisToolCubicBezier::RefreshGeometry()
                 {
                     VCubicBezier spline(*first, *second, *third,  VPointF(Visualization::scenePos));
                     DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+                    DrawLine(helpLine2, QLineF(third->toQPointF(), Visualization::scenePos), mainColor, Qt::DashLine);
                 }
                 else
                 {
