@@ -163,7 +163,7 @@ void DialogHistory::FillTable()
     {
         const VToolRecord tool = history.at(i);
         const QString historyRecord = Record(tool);
-        if (historyRecord.isEmpty() ==false)
+        if (not historyRecord.isEmpty())
         {
             currentRow++;
 
@@ -383,7 +383,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::NodePoint:
             case Tool::NodeSpline:
             case Tool::NodeSplinePath:
-                break;
+                return QString();
         }
     }
     catch (const VExceptionBadId &e)
