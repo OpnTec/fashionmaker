@@ -44,6 +44,7 @@
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vcubicbezier.h"
+#include "../vgeometry/vcubicbezierpath.h"
 #include "../core/vapplication.h"
 #include "../vpatterndb/calculator.h"
 
@@ -2130,6 +2131,58 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        quint32 id = 0;
+
+        ToolsCommonAttributes(domElement, id);
+        const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
+        const quint32 duplicate = GetParametrUInt(domElement, AttrDuplicate, "0");
+
+        QVector<VPointF> points;
+
+        const QDomNodeList nodeList = domElement.childNodes();
+        const qint32 num = nodeList.size();
+        for (qint32 i = 0; i < num; ++i)
+        {
+            const QDomElement element = nodeList.at(i).toElement();
+            if (element.isNull() == false)
+            {
+                if (element.tagName() == AttrPathPoint)
+                {
+                    const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
+                    const VPointF p = *data->GeometricObject<VPointF>(pSpline);
+                    points.append(p);
+                    if (parse == Document::FullParse)
+                    {
+                        IncrementReferens(p.getIdTool());
+                    }
+                }
+            }
+        }
+
+        auto path = new VCubicBezierPath(points);
+        if (duplicate > 0)
+        {
+            path->SetDuplicate(duplicate);
+        }
+
+        VToolCubicBezierPath::Create(id, path, color, scene, this, data, parse, Source::FromFile);
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating cubic bezier path curve"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &parse)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -2425,13 +2478,14 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    QStringList splines = QStringList() << VToolSpline::OldToolType     /*0*/
-                                        << VToolSpline::ToolType        /*1*/
-                                        << VToolSplinePath::OldToolType /*2*/
-                                        << VToolSplinePath::ToolType    /*3*/
-                                        << VNodeSpline::ToolType        /*4*/
-                                        << VNodeSplinePath::ToolType    /*5*/
-                                        << VToolCubicBezier::ToolType;  /*6*/
+    QStringList splines = QStringList() << VToolSpline::OldToolType        /*0*/
+                                        << VToolSpline::ToolType           /*1*/
+                                        << VToolSplinePath::OldToolType    /*2*/
+                                        << VToolSplinePath::ToolType       /*3*/
+                                        << VNodeSpline::ToolType           /*4*/
+                                        << VNodeSplinePath::ToolType       /*5*/
+                                        << VToolCubicBezier::ToolType      /*6*/
+                                        << VToolCubicBezierPath::ToolType; /*7*/
     switch (splines.indexOf(type))
     {
         case 0: //VToolSpline::OldToolType
@@ -2461,6 +2515,10 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
         case 6: //VToolCubicBezier::ToolType
             qCDebug(vXML, "VToolCubicBezier.");
             ParseToolCubicBezier(scene, domElement, parse);
+            break;
+        case 7: //VToolCubicBezierPath::ToolType
+            qCDebug(vXML, "VToolCubicBezierPath.");
+            ParseToolCubicBezierPath(scene, domElement, parse);
             break;
         default:
             VException e(tr("Unknown spline type '%1'.").arg(type));

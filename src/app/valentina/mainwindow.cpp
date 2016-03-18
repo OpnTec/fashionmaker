@@ -833,7 +833,11 @@ void MainWindow::ToolSplinePath(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolCubicBezierPath(bool checked)
 {
-
+    SetToolButtonWithApply<DialogCubicBezierPath>(checked, Tool::CubicBezierPath,
+                                                  ":/cursor/cubic_bezier_path_cursor.png",
+                                                  tr("Select point of cubic bezier path"),
+                                                  &MainWindow::ClosedDialogWithApply<VToolCubicBezierPath>,
+                                                  &MainWindow::ApplyDialog<VToolCubicBezierPath>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

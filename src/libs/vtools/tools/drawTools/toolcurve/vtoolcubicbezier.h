@@ -63,7 +63,7 @@ protected:
 private:
     Q_DISABLE_COPY(VToolCubicBezier)
 
-    void RefreshGeometry ();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void SetSplineAttributes(QDomElement &domElement, const VCubicBezier &spl);
 };
 

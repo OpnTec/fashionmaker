@@ -389,10 +389,10 @@ void VToolSplinePath::AddPathPoint(VAbstractPattern *doc, QDomElement &domElemen
  */
 void VToolSplinePath::RemoveReferens()
 {
-    const VSplinePath splPath = *VAbstractTool::data.GeometricObject<VSplinePath>(id);
-    for (qint32 i = 0; i < splPath.CountSubSpl(); ++i)
+    const QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(id);
+    for (qint32 i = 0; i < splPath->CountSubSpl(); ++i)
     {
-        doc->DecrementReferens(splPath.at(i).P().getIdTool());
+        doc->DecrementReferens(splPath->at(i).P().getIdTool());
     }
 }
 

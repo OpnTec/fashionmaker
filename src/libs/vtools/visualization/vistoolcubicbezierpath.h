@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vistoolsplinepath.h
+ **  @file   vistoolcubicbezierpath.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 9, 2014
+ **  @date   18 3, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,50 +26,40 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLSPLINEPATH_H
-#define VISTOOLSPLINEPATH_H
+#ifndef VISTOOLCUBICBEZIERPATH_H
+#define VISTOOLCUBICBEZIERPATH_H
 
 #include "vispath.h"
-#include "../../vgeometry/vsplinepath.h"
+#include "../vgeometry/vcubicbezierpath.h"
 
-class VControlPointSpline;
-
-class VisToolSplinePath : public VisPath
+class VisToolCubicBezierPath : public VisPath
 {
     Q_OBJECT
 public:
-    explicit VisToolSplinePath(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolSplinePath() Q_DECL_OVERRIDE;
+    explicit VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolCubicBezierPath();
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
-    void         setPath(const VSplinePath &value);
-    VSplinePath  getPath();
+    void              setPath(const VCubicBezierPath &value);
+    VCubicBezierPath  getPath();
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
-
-signals:
-    void PathChanged(const VSplinePath &path);
-
-public slots:
-    void MouseLeftPressed();
-    void MouseLeftReleased();
+    enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezierPath)};
 
 protected:
-    Q_DISABLE_COPY(VisToolSplinePath)
-    QVector<QGraphicsEllipseItem *> points;
-    QVector<VControlPointSpline *>  ctrlPoints;
+    Q_DISABLE_COPY(VisToolCubicBezierPath)
+    QVector<QGraphicsEllipseItem *> mainPoints;
+    QVector<QGraphicsEllipseItem *> ctrlPoints;
+    QVector<QGraphicsLineItem *>    lines;
     QGraphicsPathItem               *newCurveSegment;
-    VSplinePath                     path;
+    VCubicBezierPath                path;
+    QGraphicsLineItem               *helpLine1;
+    QGraphicsLineItem               *helpLine2;
 
-    bool isLeftMousePressed;
-    bool pointSelected;
-
-    QPointF ctrlPoint;
-
-    QGraphicsEllipseItem * getPoint(quint32 i);
-    void Creating(const QPointF &pSpl, int size);
+    QGraphicsEllipseItem *getPoint(QVector<QGraphicsEllipseItem *> &points, quint32 i, qreal z = 0);
+    QGraphicsLineItem    *getLine(quint32 i);
+    void Creating(const QVector<VPointF> &pathPoints , int pointsLeft);
 };
 
-#endif // VISTOOLSPLINEPATH_H
+#endif // VISTOOLCUBICBEZIERPATH_H
