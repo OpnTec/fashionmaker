@@ -66,6 +66,7 @@ private slots:
     void DefValueChanged();
     void SecurityValueChanged();
     void DeleteImage();
+    void SaveImage();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;

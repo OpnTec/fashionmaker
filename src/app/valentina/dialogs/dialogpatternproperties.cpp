@@ -634,6 +634,7 @@ void DialogPatternProperties::InitImage()
     showImageAction   = new QAction("Show image", this);
     connect(deleteAction, &QAction::triggered, this, &DialogPatternProperties::DeleteImage);
     connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::SetNewImage);
+    connect(saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -669,6 +670,23 @@ void DialogPatternProperties::DeleteImage()
 {
     doc->DeleteImage();
     ui->imageLabel->setText("Change image");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveImage()
+{
+    QByteArray byteArray;
+    byteArray.append(doc->GetImage().toUtf8());
+    QByteArray ba = QByteArray::fromBase64(byteArray);
+
+    QString extension = ".PNG";
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"));
+    QFile file(filename + extension);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        file.write(ba);
+        file.close();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
