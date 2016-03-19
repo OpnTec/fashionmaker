@@ -629,10 +629,10 @@ void DialogPatternProperties::InitImage()
     connect(ui->deleteImageButton, &QPushButton::clicked, this, &DialogPatternProperties::DeleteImage);
     connect(ui->imageLabel, &QWidget::customContextMenuRequested, this, &DialogPatternProperties::ShowContextMenu);
 
-    deleteAction      = new QAction("Delete image", this);
-    changeImageAction = new QAction("Change image", this);
-    saveImageAction   = new QAction("Save image to file", this);
-    showImageAction   = new QAction("Show image", this);
+    deleteAction      = new QAction(tr("Delete image"), this);
+    changeImageAction = new QAction(tr("Change image"), this);
+    saveImageAction   = new QAction(tr("Save image to file"), this);
+    showImageAction   = new QAction(tr("Show image"), this);
     connect(deleteAction, &QAction::triggered, this, &DialogPatternProperties::DeleteImage);
     connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::SetNewImage);
     connect(saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
@@ -670,7 +670,7 @@ void DialogPatternProperties::SetNewImage()
 void DialogPatternProperties::DeleteImage()
 {
     doc->DeleteImage();
-    ui->imageLabel->setText("Change image");
+    ui->imageLabel->setText(tr("Change image"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
