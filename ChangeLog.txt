@@ -1,4 +1,5 @@
 # Version 0.5.0
+- [#366] Update 'Point from Distance and Angle' tool to read distance and angle between points.
 - [#395] Create Curve tool which uses point as control handle.
 - pdftops updated to version 3.04.
 - [#306] Layout generator optimization. Divide into strips.

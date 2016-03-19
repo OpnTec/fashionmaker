@@ -53,7 +53,15 @@ void VisToolEndLine::RefreshGeometry()
     QLineF line;
     if (qFuzzyIsNull(length))
     {
-        line = QLineF(first->toQPointF(), Ray(first->toQPointF()));
+        if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+        {
+            line = QLineF(first->toQPointF(), Visualization::scenePos);
+            line.setAngle(CorrectAngle(line.angle()));
+        }
+        else
+        {
+            line = QLineF(first->toQPointF(), Visualization::scenePos);
+        }
     }
     else
     {
@@ -61,8 +69,12 @@ void VisToolEndLine::RefreshGeometry()
         DrawPoint(point, line.p2(), mainColor);
     }
     DrawLine(this, line, mainColor, lineStyle);
-    Visualization::toolTip = QString(tr("<b>Point at distance and angle</b>: angle = %1°; <b>Shift</b> - "
-                                        "sticking angle, <b>Enter</b> - finish creation")).arg(this->line().angle());
+    static const QString prefix = VDomDocument::UnitsToStr(qApp->patternUnit(), true);
+    Visualization::toolTip = QString(tr("<b>Point at distance and angle</b>: angle = %1°, length = %2%3; "
+                                        "<b>Shift</b> - sticking angle, <b>Enter</b> - finish creation"))
+            .arg(this->line().angle())
+            .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(this->line().length()))))
+            .arg(prefix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -75,6 +87,12 @@ QString VisToolEndLine::Angle() const
 void VisToolEndLine::SetAngle(const QString &expression)
 {
     angle = FindVal(expression, Visualization::data->PlainVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VisToolEndLine::Length() const
+{
+    return QString::number(qApp->fromPixel(this->line().length()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

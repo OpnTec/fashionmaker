@@ -286,7 +286,7 @@ void DialogEndLine::ShowDialog(bool click)
             QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
-            qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
+            const qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;
             if (line.length() <= radius)
             {
                 return;
@@ -298,6 +298,7 @@ void DialogEndLine::ShowDialog(bool click)
         SCASSERT(line != nullptr);
 
         this->SetAngle(line->Angle());//Show in dialog angle what user choose
+        this->SetFormula(line->Length());
         emit ToolTip("");
         timerFormula->start();
         this->show();

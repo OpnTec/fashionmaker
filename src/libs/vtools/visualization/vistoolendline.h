@@ -41,9 +41,13 @@ public:
     virtual ~VisToolEndLine() Q_DECL_OVERRIDE;
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+
     QString      Angle() const;
     void         SetAngle(const QString &expression);
+
+    QString      Length() const;
     void         setLength(const QString &expression);
+
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ToolEndLine)};
 private:
