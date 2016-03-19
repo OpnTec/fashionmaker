@@ -46,7 +46,7 @@ public:
                     const Source &typeCreation,
                     QGraphicsItem * parent = nullptr);
     virtual ~VToolSplinePath() Q_DECL_OVERRIDE;
-    virtual void setDialog();
+    virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                    VContainer *data);
     static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, const QString &color,
@@ -100,11 +100,12 @@ protected:
     virtual void  hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void  SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolSplinePath)
     QPointF oldPosition;
     int     splIndex;
 
     bool          IsMovable(int index) const;
-    void          RefreshGeometry();
+    virtual void  RefreshGeometry() Q_DECL_OVERRIDE;
     static void   AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
     void          UpdateControlPoints(const VSpline &spl, VSplinePath &splPath, const qint32 &indexSpline) const;
     void          SetSplinePathAttributes(QDomElement &domElement, const VSplinePath &path);

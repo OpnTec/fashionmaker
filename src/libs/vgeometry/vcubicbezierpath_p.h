@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolcubicbezier.h
+ **  @file   vcubicbezierpath_p.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 3, 2016
+ **  @date   16 3, 2016
  **
  **  @brief
  **  @copyright
@@ -26,38 +26,45 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLCUBICBEZIER_H
-#define VISTOOLCUBICBEZIER_H
+#ifndef VCUBICBEZIERPATH_P_H
+#define VCUBICBEZIERPATH_P_H
 
-#include "vispath.h"
+#include <QSharedData>
 
-class VisToolCubicBezier : public VisPath
+#include "vpointf.h"
+
+#ifdef Q_CC_GNU
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Weffc++"
+#endif
+
+class VCubicBezierPathData : public QSharedData
 {
-    Q_OBJECT
 public:
-    explicit VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCubicBezier();
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+    VCubicBezierPathData()
+        : path()
+    {}
 
-    void         setObject2Id(const quint32 &value);
-    void         setObject3Id(const quint32 &value);
-    void         setObject4Id(const quint32 &value);
+    VCubicBezierPathData(const VCubicBezierPathData &splPath)
+        : QSharedData(splPath),
+          path(splPath.path)
+    {}
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezier)};
+    virtual ~VCubicBezierPathData();
 
-protected:
-    Q_DISABLE_COPY(VisToolCubicBezier)
-    quint32              object2Id;
-    quint32              object3Id;
-    quint32              object4Id;
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
-    QGraphicsEllipseItem *point3;
-    QGraphicsEllipseItem *point4;
-    QGraphicsLineItem    *helpLine1;
-    QGraphicsLineItem    *helpLine2;
+    /** @brief path list of points. */
+    QVector<VPointF> path;
+
+private:
+    VCubicBezierPathData &operator=(const VCubicBezierPathData &) Q_DECL_EQ_DELETE;
 };
 
-#endif // VISTOOLCUBICBEZIER_H
+VCubicBezierPathData::~VCubicBezierPathData()
+{}
+
+#ifdef Q_CC_GNU
+#pragma GCC diagnostic pop
+#endif
+
+#endif // VCUBICBEZIERPATH_P_H

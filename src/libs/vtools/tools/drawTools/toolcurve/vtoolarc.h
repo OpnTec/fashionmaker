@@ -73,7 +73,7 @@ protected:
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void     SetVisualization() Q_DECL_OVERRIDE;
 private:
-    void             RefreshGeometry();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 };
 
 #endif // VTOOLARC_H

@@ -154,7 +154,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
     VSplinePath *splPath1 = new VSplinePath();
     VSplinePath *splPath2 = new VSplinePath();
 
-    for (qint32 i = 0; i < splPath->CountPoint(); i++)
+    for (qint32 i = 0; i < splPath->CountPoints(); i++)
     {
         if (i <= p1 && i < p2)
         {

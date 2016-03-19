@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolcubicbezier.h
+ **  @file   tst_vcubicbezierpath.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 3, 2016
+ **  @date   19 3, 2016
  **
  **  @brief
  **  @copyright
@@ -26,38 +26,28 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLCUBICBEZIER_H
-#define VISTOOLCUBICBEZIER_H
+#ifndef TST_VCUBICBEZIERPATH_H
+#define TST_VCUBICBEZIERPATH_H
 
-#include "vispath.h"
+#include <QObject>
 
-class VisToolCubicBezier : public VisPath
+class TST_VCubicBezierPath : public QObject
 {
     Q_OBJECT
 public:
-    explicit VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCubicBezier();
+    explicit TST_VCubicBezierPath(QObject *parent = nullptr);
 
-    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
+private slots:
+    void TestCountSubSpl_data() const;
+    void TestCountSubSpl() const;
+    void TestSubSplOffset_data() const;
+    void TestSubSplOffset() const;
+    void TestSubSplPointsCount_data() const;
+    void TestSubSplPointsCount() const;
 
-    void         setObject2Id(const quint32 &value);
-    void         setObject3Id(const quint32 &value);
-    void         setObject4Id(const quint32 &value);
+private:
+    Q_DISABLE_COPY(TST_VCubicBezierPath)
 
-    virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezier)};
-
-protected:
-    Q_DISABLE_COPY(VisToolCubicBezier)
-    quint32              object2Id;
-    quint32              object3Id;
-    quint32              object4Id;
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
-    QGraphicsEllipseItem *point3;
-    QGraphicsEllipseItem *point4;
-    QGraphicsLineItem    *helpLine1;
-    QGraphicsLineItem    *helpLine2;
 };
 
-#endif // VISTOOLCUBICBEZIER_H
+#endif // TST_VCUBICBEZIERPATH_H

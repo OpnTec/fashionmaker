@@ -831,6 +831,16 @@ void MainWindow::ToolSplinePath(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolCubicBezierPath(bool checked)
+{
+    SetToolButtonWithApply<DialogCubicBezierPath>(checked, Tool::CubicBezierPath,
+                                                  ":/cursor/cubic_bezier_path_cursor.png",
+                                                  tr("Select point of cubic bezier path"),
+                                                  &MainWindow::ClosedDialogWithApply<VToolCubicBezierPath>,
+                                                  &MainWindow::ApplyDialog<VToolCubicBezierPath>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolCutSplinePath handler tool CutSplinePath.
  * @param checked true - button is checked
@@ -1615,6 +1625,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonCubicBezier, &QToolButton::clicked, this, &MainWindow::ToolCubicBezier);
     connect(ui->toolButtonArc, &QToolButton::clicked, this, &MainWindow::ToolArc);
     connect(ui->toolButtonSplinePath, &QToolButton::clicked, this, &MainWindow::ToolSplinePath);
+    connect(ui->toolButtonCubicBezierPath, &QToolButton::clicked, this, &MainWindow::ToolCubicBezierPath);
     connect(ui->toolButtonPointOfContact, &QToolButton::clicked, this, &MainWindow::ToolPointOfContact);
     connect(ui->toolButtonNewDetail, &QToolButton::clicked, this, &MainWindow::ToolDetail);
     connect(ui->toolButtonHeight, &QToolButton::clicked, this, &MainWindow::ToolHeight);
@@ -1669,11 +1680,18 @@ void MainWindow::mouseMove(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
 /**
  * @brief CancelTool cancel tool.
  */
 void MainWindow::CancelTool()
 {
+    // This check helps to find missed tools in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 41, "Not all tools was handled.");
+
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
     dialogTool = nullptr;
@@ -1692,6 +1710,16 @@ void MainWindow::CancelTool()
             redoAction->setEnabled(false);
             return;
         case Tool::BasePoint:
+        case Tool::SinglePoint:
+        case Tool::DoublePoint:
+        case Tool::LinePoint:
+        case Tool::AbstractSpline:
+        case Tool::Cut:
+        case Tool::LAST_ONE_DO_NOT_USE:
+        case Tool::NodePoint:
+        case Tool::NodeArc:
+        case Tool::NodeSpline:
+        case Tool::NodeSplinePath:
             Q_UNREACHABLE(); //-V501
             //Nothing to do here because we can't create this tool from main window.
             break;
@@ -1730,6 +1758,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::SplinePath:
             ui->toolButtonSplinePath->setChecked(false);
+            break;
+        case Tool::CubicBezierPath:
+            ui->toolButtonCubicBezierPath->setChecked(false);
             break;
         case Tool::PointOfContact:
             ui->toolButtonPointOfContact->setChecked(false);
@@ -1783,13 +1814,6 @@ void MainWindow::CancelTool()
         case Tool::TrueDarts:
             ui->toolButtonTrueDarts->setChecked(false);
             break;
-        case Tool::NodePoint:
-        case Tool::NodeArc:
-        case Tool::NodeSpline:
-        case Tool::NodeSplinePath:
-        default:
-            qDebug()<<"Got wrong tool type. Ignored.";
-            break;
     }
     currentScene->setFocus(Qt::OtherFocusReason);
     currentScene->clearSelection();
@@ -1800,6 +1824,10 @@ void MainWindow::CancelTool()
     undoAction->setEnabled(qApp->getUndoStack()->canUndo());
     redoAction->setEnabled(qApp->getUndoStack()->canRedo());
 }
+
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic pop
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -2949,6 +2977,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonCubicBezier->setEnabled(drawTools);
     ui->toolButtonArc->setEnabled(drawTools);
     ui->toolButtonSplinePath->setEnabled(drawTools);
+    ui->toolButtonCubicBezierPath->setEnabled(drawTools);
     ui->toolButtonPointOfContact->setEnabled(drawTools);
     ui->toolButtonNewDetail->setEnabled(drawTools);
     ui->toolButtonHeight->setEnabled(drawTools);
@@ -3233,8 +3262,16 @@ void MainWindow::CreateMenus()
     AddDocks();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
 void MainWindow::LastUsedTool()
 {
+    // This check helps to find missed tools in the switch
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 41, "Not all tools was handled.");
+
     if (currentTool == lastUsedTool)
     {
         return;
@@ -3247,6 +3284,16 @@ void MainWindow::LastUsedTool()
             ArrowTool();
             break;
         case Tool::BasePoint:
+        case Tool::SinglePoint:
+        case Tool::DoublePoint:
+        case Tool::LinePoint:
+        case Tool::AbstractSpline:
+        case Tool::Cut:
+        case Tool::LAST_ONE_DO_NOT_USE:
+        case Tool::NodePoint:
+        case Tool::NodeArc:
+        case Tool::NodeSpline:
+        case Tool::NodeSplinePath:
             Q_UNREACHABLE(); //-V501
             //Nothing to do here because we can't create this tool from main window.
             break;
@@ -3282,6 +3329,10 @@ void MainWindow::LastUsedTool()
             ui->toolButtonSpline->setChecked(true);
             ToolSpline(true);
             break;
+        case Tool::CubicBezier:
+            ui->toolButtonCubicBezier->setChecked(true);
+            ToolCubicBezier(true);
+            break;
         case Tool::Arc:
             ui->toolButtonArc->setChecked(true);
             ToolArc(true);
@@ -3289,6 +3340,10 @@ void MainWindow::LastUsedTool()
         case Tool::SplinePath:
             ui->toolButtonSplinePath->setChecked(true);
             ToolSplinePath(true);
+            break;
+        case Tool::CubicBezierPath:
+            ui->toolButtonCubicBezierPath->setChecked(true);
+            ToolCubicBezierPath(true);
             break;
         case Tool::PointOfContact:
             ui->toolButtonPointOfContact->setChecked(true);
@@ -3362,15 +3417,12 @@ void MainWindow::LastUsedTool()
             ui->toolButtonTrueDarts->setChecked(true);
             ToolTrueDarts(true);
             break;
-        case Tool::NodePoint:
-        case Tool::NodeArc:
-        case Tool::NodeSpline:
-        case Tool::NodeSplinePath:
-        default:
-            qDebug()<<"Got wrong tool type. Ignored.";
-            break;
     }
 }
+
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic pop
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AddDocks()

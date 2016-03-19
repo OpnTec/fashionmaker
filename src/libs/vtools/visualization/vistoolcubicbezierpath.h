@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolcubicbezier.h
+ **  @file   vistoolcubicbezierpath.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   10 3, 2016
+ **  @date   18 3, 2016
  **
  **  @brief
  **  @copyright
@@ -26,38 +26,42 @@
  **
  *************************************************************************/
 
-#ifndef VISTOOLCUBICBEZIER_H
-#define VISTOOLCUBICBEZIER_H
+#ifndef VISTOOLCUBICBEZIERPATH_H
+#define VISTOOLCUBICBEZIERPATH_H
 
 #include "vispath.h"
+#include "../vgeometry/vcubicbezierpath.h"
 
-class VisToolCubicBezier : public VisPath
+class VisToolCubicBezierPath : public VisPath
 {
     Q_OBJECT
 public:
-    explicit VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent = nullptr);
-    virtual ~VisToolCubicBezier();
+    explicit VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent = nullptr);
+    virtual ~VisToolCubicBezierPath();
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 
-    void         setObject2Id(const quint32 &value);
-    void         setObject3Id(const quint32 &value);
-    void         setObject4Id(const quint32 &value);
+    void              setPath(const VCubicBezierPath &value);
+    VCubicBezierPath  getPath();
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezier)};
+    enum { Type = UserType + static_cast<int>(Vis::ToolCubicBezierPath)};
 
 protected:
-    Q_DISABLE_COPY(VisToolCubicBezier)
-    quint32              object2Id;
-    quint32              object3Id;
-    quint32              object4Id;
-    QGraphicsEllipseItem *point1;
-    QGraphicsEllipseItem *point2;
-    QGraphicsEllipseItem *point3;
-    QGraphicsEllipseItem *point4;
-    QGraphicsLineItem    *helpLine1;
-    QGraphicsLineItem    *helpLine2;
+    Q_DISABLE_COPY(VisToolCubicBezierPath)
+    QVector<QGraphicsEllipseItem *> mainPoints;
+    QVector<QGraphicsEllipseItem *> ctrlPoints;
+    QVector<QGraphicsLineItem *>    lines;
+    QGraphicsPathItem               *newCurveSegment;
+    VCubicBezierPath                path;
+    QGraphicsLineItem               *helpLine1;
+    QGraphicsLineItem               *helpLine2;
+
+private:
+    QGraphicsEllipseItem *getPoint(QVector<QGraphicsEllipseItem *> &points, quint32 i, qreal z = 0);
+    QGraphicsLineItem    *getLine(quint32 i);
+    void Creating(const QVector<VPointF> &pathPoints , int pointsLeft);
+    void RefreshToolTip();
 };
 
-#endif // VISTOOLCUBICBEZIER_H
+#endif // VISTOOLCUBICBEZIERPATH_H

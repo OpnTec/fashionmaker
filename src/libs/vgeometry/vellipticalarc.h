@@ -92,6 +92,7 @@ public:
     QPointF            CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2) const;
     QPointF            CutArc (const qreal &length) const;
     virtual void       setId(const quint32 &id) Q_DECL_OVERRIDE;
+    virtual QString    NameForHistory(const QString &toolName) const Q_DECL_OVERRIDE;
 protected:
     virtual void CreateName() Q_DECL_OVERRIDE;
 private:

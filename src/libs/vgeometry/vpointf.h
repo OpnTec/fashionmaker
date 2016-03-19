@@ -31,6 +31,8 @@
 
 #include "vgobject.h"
 
+#include <QMetaType>
+
 class QPointF;
 class QString;
 class VPointFData;
@@ -69,6 +71,7 @@ private:
     QSharedDataPointer<VPointFData> d;
 };
 
+Q_DECLARE_METATYPE(VPointF)
 Q_DECLARE_TYPEINFO(VPointF, Q_MOVABLE_TYPE);
 
 #if defined(Q_CC_INTEL)

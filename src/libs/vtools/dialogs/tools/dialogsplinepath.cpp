@@ -127,7 +127,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     this->path = value;
     ui->listWidget->blockSignals(true);
     ui->listWidget->clear();
-    for (qint32 i = 0; i < path.CountPoint(); ++i)
+    for (qint32 i = 0; i < path.CountPoints(); ++i)
     {
         NewItem(path.at(i));
     }
@@ -179,7 +179,7 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
         SCASSERT(visPath != nullptr);
         visPath->setPath(path);
 
-        if (path.CountPoint() == 1)
+        if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
             connect(visPath, &VisToolSplinePath::ToolTip, this, &DialogTool::ShowVisToolTip);
@@ -666,7 +666,7 @@ void DialogSplinePath::currentPointChanged(int index)
         auto first = qvariant_cast<VSplinePoint>(ui->listWidget->item(0)->data(Qt::UserRole));
         auto last = qvariant_cast<VSplinePoint>(ui->listWidget->item(ui->listWidget->count()-1)->data(Qt::UserRole));
 
-        if (first.P().id() == path.at(0).P().id() && last.P().id() == path.at(path.CountPoint()-1).P().id())
+        if (first.P().id() == path.at(0).P().id() && last.P().id() == path.at(path.CountPoints()-1).P().id())
         {
             newDuplicate = -1;
             ui->lineEditSplPathName->setText(path.name());
@@ -694,7 +694,7 @@ void DialogSplinePath::ShowDialog(bool click)
 {
     if (click == false)
     {
-        if (path.CountPoint() >= 3)
+        if (path.CountPoints() >= 3)
         {
             emit ToolTip("");
 
@@ -888,12 +888,12 @@ QSet<quint32> DialogSplinePath::AllIds() const
 //---------------------------------------------------------------------------------------------------------------------
 bool DialogSplinePath::IsPathValid() const
 {
-    if (path.CountPoint() < 3)
+    if (path.CountPoints() < 3)
     {
         return false;
     }
 
-    return (AllIds().size() == path.CountPoint());
+    return (AllIds().size() == path.CountPoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -31,6 +31,7 @@
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vpointf.h"
 #include "../vtools/tools/vabstracttool.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
@@ -162,7 +163,7 @@ void DialogHistory::FillTable()
     {
         const VToolRecord tool = history.at(i);
         const QString historyRecord = Record(tool);
-        if (historyRecord.isEmpty() ==false)
+        if (not historyRecord.isEmpty())
         {
             currentRow++;
 
@@ -194,12 +195,11 @@ void DialogHistory::FillTable()
     ui->tableWidget->verticalHeader()->setDefaultSectionSize(20);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_CC_GNU)
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wswitch-default"
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Record return description for record
  * @param tool record data
@@ -208,7 +208,7 @@ void DialogHistory::FillTable()
 QString DialogHistory::Record(const VToolRecord &tool)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 40, "Not all tools was used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 41, "Not all tools was used in history.");
 
     const QDomElement domElem = doc->elementById(tool.getId());
     if (domElem.isElement() == false)
@@ -268,49 +268,39 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(tool.getId());
                 SCASSERT(spl != nullptr);
-                return QString(tr("Curve %1_%2")).arg(PointName(spl->GetP1().id())).arg(PointName(spl->GetP4().id()));
+                return spl->NameForHistory(tr("Curve"));
             }
             case Tool::CubicBezier:
             {
                 const QSharedPointer<VCubicBezier> spl = data->GeometricObject<VCubicBezier>(tool.getId());
                 SCASSERT(spl != nullptr);
-                return QString(tr("Cubic bezier curve %1_%2")).arg(PointName(spl->GetP1().id()))
-                        .arg(PointName(spl->GetP4().id()));
+                return spl->NameForHistory(tr("Cubic bezier curve"));
             }
             case Tool::Arc:
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
                 SCASSERT(arc != nullptr);
-                return QString(tr("Arc with center in point %1")).arg(PointName(arc->GetCenter().id()));
+                return arc->NameForHistory(tr("Arc"));
             }
             case Tool::ArcWithLength:
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
                 SCASSERT(arc != nullptr);
-                return QString(tr("Arc with center in point %1 and length %2")).arg(PointName(arc->GetCenter().id()))
+                return QString(tr("%1 with length %2"))
+                        .arg(arc->NameForHistory(tr("Arc")))
                         .arg(arc->GetLength());
             }
             case Tool::SplinePath:
             {
                 const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(tool.getId());
                 SCASSERT(splPath != nullptr);
-                const QVector<VSplinePoint> points = splPath->GetSplinePath();
-                QString record;
-                if (points.size() != 0 )
-                {
-                    // We use only first and last point name in curve
-                    record = QString(tr("Curve point %1")).arg(PointName(points.at(0).P().id()));
-                    if (points.size() > 1)
-                    {
-                        record.append(QString("_%1").arg(PointName(points.last().P().id())));
-                    }
-                }
-                else
-                {
-                    qDebug()<<"Not enough points in splinepath"<<Q_FUNC_INFO;
-                    return tr("Can't create record.");
-                }
-                return record;
+                return splPath->NameForHistory(tr("Spline path"));
+            }
+            case Tool::CubicBezierPath:
+            {
+                const QSharedPointer<VCubicBezierPath> splPath = data->GeometricObject<VCubicBezierPath>(tool.getId());
+                SCASSERT(splPath != nullptr);
+                return splPath->NameForHistory(tr("Cubic bezier curve path"));
             }
             case Tool::PointOfContact:
                 return QString(tr("%4 - point of contact of arc with the center in point %1 and line %2_%3"))
@@ -338,43 +328,27 @@ QString DialogHistory::Record(const VToolRecord &tool)
             {
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(AttrUInt(domElem, AttrArc));
                 SCASSERT(arc != nullptr);
-                return QString(tr("%1 - cut arc with center %2"))
+                return QString(tr("%1 - cut %2"))
                         .arg(PointName(tool.getId()))
-                        .arg(PointName(arc->GetCenter().id()));
+                        .arg(arc->NameForHistory(tr("arc")));
             }
             case Tool::CutSpline:
             {
                 const quint32 splineId = AttrUInt(domElem, VToolCutSpline::AttrSpline);
                 const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(splineId);
                 SCASSERT(spl != nullptr);
-                return QString(tr("%1 - cut curve %2_%3"))
+                return QString(tr("%1 - cut %2"))
                         .arg(PointName(tool.getId()))
-                        .arg(PointName(spl->GetP1().id()))
-                        .arg(PointName(spl->GetP4().id()));
+                        .arg(spl->NameForHistory(tr("curve")));
             }
             case Tool::CutSplinePath:
             {
                 const quint32 splinePathId = AttrUInt(domElem, VToolCutSplinePath::AttrSplinePath);
                 const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(splinePathId);
                 SCASSERT(splPath != nullptr);
-                const QVector<VSplinePoint> points = splPath->GetSplinePath();
-                QString record;
-                if (points.size() != 0 )
-                {
-                    record = QString(tr("%1 - cut curve path %2"))
-                            .arg(PointName(tool.getId()))
-                            .arg(PointName(points.at(0).P().id()));
-                    if (points.size() > 1)
-                    {
-                        record.append(QString("_%1").arg(PointName(points.last().P().id())));
-                    }
-                }
-                else
-                {
-                    qDebug()<<"Not enough points in splinepath"<<Q_FUNC_INFO;
-                    return QString(tr("Can't create record."));
-                }
-                return record;
+                return QString(tr("%1 - cut %2"))
+                        .arg(PointName(tool.getId()))
+                        .arg(splPath->NameForHistory(tr("curve path")));
             }
             case Tool::LineIntersectAxis:
                 return QString(tr("%1 - point of intersection line %2_%3 and axis through point %4"))
@@ -409,7 +383,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::NodePoint:
             case Tool::NodeSpline:
             case Tool::NodeSplinePath:
-                break;
+                return QString();
         }
     }
     catch (const VExceptionBadId &e)

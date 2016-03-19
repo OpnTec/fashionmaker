@@ -216,7 +216,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 VSplinePath *path = new VSplinePath();
                 path->setMode(Draw::Modeling);
                 const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(det.at(i).getId());
-                for (qint32 i = 1; i <= splinePath->Count(); ++i)
+                for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
                 {
                     const VSplinePoint &point1 = splinePath->at(i-1);
                     const VSplinePoint &point2 = splinePath->at(i);
@@ -366,7 +366,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                 path->setMode(Draw::Modeling);
                 const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(det.at(i).getId());
                 SCASSERT(splinePath != nullptr);
-                for (qint32 i = 1; i <= splinePath->Count(); ++i)
+                for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
                 {
                     const VSplinePoint &point1 = splinePath->at(i-1);
                     const VSplinePoint &point2 = splinePath->at(i);

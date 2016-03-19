@@ -46,6 +46,8 @@ public:
 
     QPointF CutSpline ( qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const;
 
+    virtual QString NameForHistory(const QString &toolName) const Q_DECL_OVERRIDE;
+
 protected:
     virtual void CreateName() Q_DECL_OVERRIDE;
 

@@ -316,6 +316,23 @@ void VArc::setId(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VArc::NameForHistory(const QString &toolName) const
+{
+    QString name = toolName + QString(" %1").arg(this->GetCenter().name());
+
+    if (VAbstractCurve::id() != NULL_ID)
+    {
+        name += QString("_%1").arg(VAbstractCurve::id());
+    }
+
+    if (GetDuplicate() > 0)
+    {
+        name += QString("_%1").arg(GetDuplicate());
+    }
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VArc::CreateName()
 {
     QString name = ARC_ + QString("%1").arg(this->GetCenter().name());

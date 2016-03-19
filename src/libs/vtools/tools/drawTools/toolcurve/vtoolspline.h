@@ -81,7 +81,7 @@ private:
     QPointF oldPosition;
 
     bool IsMovable() const;
-    void RefreshGeometry ();
+    virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);
 };
 

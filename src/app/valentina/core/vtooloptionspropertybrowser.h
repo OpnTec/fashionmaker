@@ -140,6 +140,7 @@ private:
     void ChangeDataToolSpline(VPE::VProperty *property);
     void ChangeDataToolCubicBezier(VPE::VProperty *property);
     void ChangeDataToolSplinePath(VPE::VProperty *property);
+    void ChangeDataToolCubicBezierPath(VPE::VProperty *property);
     void ChangeDataToolTriangle(VPE::VProperty *property);
     void ChangeDataToolLineIntersectAxis(VPE::VProperty *property);
     void ChangeDataToolCurveIntersectAxis(VPE::VProperty *property);
@@ -169,6 +170,7 @@ private:
     void ShowOptionsToolSpline(QGraphicsItem *item);
     void ShowOptionsToolCubicBezier(QGraphicsItem *item);
     void ShowOptionsToolSplinePath(QGraphicsItem *item);
+    void ShowOptionsToolCubicBezierPath(QGraphicsItem *item);
     void ShowOptionsToolTriangle(QGraphicsItem *item);
     void ShowOptionsToolLineIntersectAxis(QGraphicsItem *item);
     void ShowOptionsToolCurveIntersectAxis(QGraphicsItem *item);
@@ -198,6 +200,7 @@ private:
     void UpdateOptionsToolSpline();
     void UpdateOptionsToolCubicBezier();
     void UpdateOptionsToolSplinePath();
+    void UpdateOptionsToolCubicBezierPath();
     void UpdateOptionsToolTriangle();
     void UpdateOptionsToolLineIntersectAxis();
     void UpdateOptionsToolCurveIntersectAxis();

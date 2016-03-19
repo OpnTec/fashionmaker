@@ -113,7 +113,7 @@ void Visualization::MousePos(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent) const
+QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsItem *parent, qreal z) const
 {
     QGraphicsEllipseItem *point = new QGraphicsEllipseItem(parent);
     point->setZValue(1);
@@ -122,6 +122,7 @@ QGraphicsEllipseItem *Visualization::InitPoint(const QColor &color, QGraphicsIte
     point->setRect(PointRect(ToPixel(DefPointRadius/*mm*/, Unit::Mm)));
     point->setPos(QPointF());
     point->setFlags(QGraphicsItem::ItemStacksBehindParent);
+    point->setZValue(z);
     point->setVisible(false);
     return point;
 }

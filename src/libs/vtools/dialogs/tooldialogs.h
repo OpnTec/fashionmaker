@@ -44,6 +44,7 @@
 #include "dialogs/tools/dialogspline.h"
 #include "dialogs/tools/dialogcubicbezier.h"
 #include "dialogs/tools/dialogsplinepath.h"
+#include "dialogs/tools/dialogcubicbezierpath.h"
 #include "dialogs/tools/dialogheight.h"
 #include "dialogs/tools/dialogcutarc.h"
 #include "dialogs/tools/dialogcutspline.h"
