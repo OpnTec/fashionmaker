@@ -72,7 +72,7 @@ private:
     void             NewItem(const VPointF &point);
     void             DataPoint(const VPointF &p);
     void             SavePath();
-    QSet<quint32>    AllIds() const;
+    QSet<quint32>    AllPathBackboneIds() const;
     bool             IsPathValid() const;
     VCubicBezierPath ExtractPath() const;
 };

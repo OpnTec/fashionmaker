@@ -214,14 +214,14 @@ void VAbstractCubicBezierPath::CreateName()
     {
         name = splPath;
         name.append(QString("_%1").arg(FirstPoint().name()));
-        if (CountSubSpl() >= 1)
+        if (CountSubSpl() >= 2)
         {
             name.append(QString("_%1").arg(LastPoint().name()));
-        }
 
-        if (GetDuplicate() > 0)
-        {
-            name += QString("_%1").arg(GetDuplicate());
+            if (GetDuplicate() > 0)
+            {
+                name += QString("_%1").arg(GetDuplicate());
+            }
         }
     }
     setName(name);

@@ -107,7 +107,7 @@ void DialogCubicBezierPath::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (type == SceneObject::Point)
     {
-        if (AllIds().contains(id))
+        if (AllPathBackboneIds().contains(id))
         {
             return;
         }
@@ -138,9 +138,10 @@ void DialogCubicBezierPath::ShowDialog(bool click)
 {
     if (click == false)
     {
-        if (path.CountPoints() >= 7)
+        const int size = path.CountPoints();
+        if (size >= 7)
         {
-            if (path.CountPoints() - ((path.CountSubSpl() - 1) * 3 + 4) == 0)
+            if (size - VCubicBezierPath::SubSplPointsCount(path.CountSubSpl()) == 0)
             {// Accept only if all subpaths are completed
                 emit ToolTip("");
 
@@ -269,7 +270,7 @@ void DialogCubicBezierPath::SavePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSet<quint32> DialogCubicBezierPath::AllIds() const
+QSet<quint32> DialogCubicBezierPath::AllPathBackboneIds() const
 {
     QVector<quint32> points;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
@@ -278,10 +279,10 @@ QSet<quint32> DialogCubicBezierPath::AllIds() const
     }
 
     QSet<quint32> ids;
-    const qint32 count = qFloor(qAbs((points.size() - 4) / 3 + 1));// Count subpaths
-    for (qint32 i = 0; i < count; ++i)
+    const qint32 count = VCubicBezierPath::CountSubSpl(points.size());// Count subpaths
+    for (qint32 i = 1; i <= count; ++i)
     {
-        const qint32 base = (i - 1) * 3;
+        const qint32 base = VCubicBezierPath::SubSplOffset(i);
         ids.insert(points.at(base));// The first subpath's point
         ids.insert(points.at(base + 3));// The last subpath's point
     }
@@ -297,7 +298,7 @@ bool DialogCubicBezierPath::IsPathValid() const
         return false;
     }
 
-    return (AllIds().size() == path.CountSubSpl() + 1);
+    return (AllPathBackboneIds().size() == path.CountSubSpl() + 1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

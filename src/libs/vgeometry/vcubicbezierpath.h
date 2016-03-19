@@ -61,6 +61,10 @@ public:
     virtual qreal   GetEndAngle () const Q_DECL_OVERRIDE;
 
     QVector<VPointF> GetSplinePath() const;
+
+    static qint32 CountSubSpl(qint32 size);
+    static qint32 SubSplOffset(qint32 subSplIndex);
+    static qint32 SubSplPointsCount(qint32 countSubSpl);
 protected:
     virtual VPointF FirstPoint() const  Q_DECL_OVERRIDE;
     virtual VPointF LastPoint() const  Q_DECL_OVERRIDE;

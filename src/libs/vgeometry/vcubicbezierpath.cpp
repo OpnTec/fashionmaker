@@ -109,7 +109,7 @@ void VCubicBezierPath::append(const VPointF &point)
 //---------------------------------------------------------------------------------------------------------------------
 qint32 VCubicBezierPath::CountSubSpl() const
 {
-    return qFloor(qAbs((d->path.size() - 4) / 3 + 1));
+    return CountSubSpl(d->path.size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ VSpline VCubicBezierPath::GetSpline(qint32 index) const
         throw VException(tr("This spline does not exist."));
     }
 
-    const qint32 base = (index - 1) * 3;
+    const qint32 base = SubSplOffset(index);
 
     // Correction the first control point of each next spline curve except for the first.
     QPointF p2 = d->path.at(base + 1).toQPointF();
@@ -190,6 +190,38 @@ QVector<VPointF> VCubicBezierPath::GetSplinePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qint32 VCubicBezierPath::CountSubSpl(qint32 size)
+{
+    if (size <= 0)
+    {
+        return 0;
+    }
+    return qFloor(qAbs((size - 4) / 3.0 + 1));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qint32 VCubicBezierPath::SubSplOffset(qint32 subSplIndex)
+{
+    if (subSplIndex <= 0)
+    {
+        return -1;
+    }
+
+    return (subSplIndex - 1) * 3;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qint32 VCubicBezierPath::SubSplPointsCount(qint32 countSubSpl)
+{
+    if (countSubSpl <= 0)
+    {
+        return 0;
+    }
+
+    return ((countSubSpl - 1) * 3 + 4);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPointF VCubicBezierPath::FirstPoint() const
 {
     if (not d->path.isEmpty())
@@ -208,8 +240,7 @@ VPointF VCubicBezierPath::LastPoint() const
     const qint32 count = CountSubSpl();
     if (count >= 1)
     {
-        const qint32 base = (count - 1) * 3;
-        return d->path.at(base + 3);// Take last point of the last real spline
+        return d->path.at(SubSplOffset(count) + 3);// Take last point of the last real spline
     }
     else
     {

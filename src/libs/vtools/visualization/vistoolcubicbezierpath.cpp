@@ -56,11 +56,11 @@ VisToolCubicBezierPath::~VisToolCubicBezierPath()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCubicBezierPath::RefreshGeometry()
 {
-    if (path.CountPoints() > 0)
+    const QVector<VPointF> pathPoints = path.GetSplinePath();
+    const int size = pathPoints.size();
+    if (size > 0)
     {
-        const QVector<VPointF> pathPoints = path.GetSplinePath();
-        const int size = pathPoints.size();
-        const int countSubSpl = path.CountSubSpl();
+        const int countSubSpl = VCubicBezierPath::CountSubSpl(size);
 
         for (int i = 0; i < size; ++i)
         {
@@ -70,6 +70,21 @@ void VisToolCubicBezierPath::RefreshGeometry()
 
         if (mode == Mode::Creation)
         {
+            if (countSubSpl < 1)
+            {
+                Creating(pathPoints, size-1);
+            }
+            else
+            {
+                const qint32 last = VCubicBezierPath::SubSplOffset(countSubSpl) + 3;
+                Creating(pathPoints, size-1-last);
+            }
+        }
+
+        if (countSubSpl >= 1)
+        {
+            DrawPath(this, path.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
+
             for (qint32 i = 1; i<=countSubSpl; ++i)
             {
                 const int preLastPoint = (countSubSpl - 1) * 2;
@@ -89,29 +104,9 @@ void VisToolCubicBezierPath::RefreshGeometry()
                 QGraphicsEllipseItem *p3 = this->getPoint(ctrlPoints, static_cast<unsigned>(lastPoint));
                 DrawPoint(p3, spl.GetP3(), Qt::green);
             }
-
-            const qint32 last = (countSubSpl - 1) * 3 + 3;
-            Creating(pathPoints, size-1-last);
         }
 
-        if (countSubSpl >= 1)
-        {
-            DrawPath(this, path.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
-        }
-
-        if (countSubSpl < 7)
-        {
-            Visualization::toolTip = tr("<b>Curved path</b>: select seven or more points");
-        }
-        else if (countSubSpl >= 7 && size - ((countSubSpl - 1) * 3 + 4) == 0)
-        {
-            Visualization::toolTip = tr("<b>Curved path</b>: select seven or more points, "
-                                        "<b>Enter</b> - finish creation");
-        }
-        else
-        {
-            Visualization::toolTip = tr("<b>Curved path</b>: select more points for complete segment");
-        }
+        RefreshToolTip();
     }
 }
 
@@ -119,6 +114,8 @@ void VisToolCubicBezierPath::RefreshGeometry()
 void VisToolCubicBezierPath::setPath(const VCubicBezierPath &value)
 {
     path = value;
+
+    RefreshToolTip();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,44 +160,121 @@ QGraphicsLineItem *VisToolCubicBezierPath::getLine(quint32 i)
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int pointsLeft)
 {
-    if (pathPoints.isEmpty() || pathPoints.size()+1 < pointsLeft)
+    const int size = pathPoints.size();
+    if (pathPoints.isEmpty() || size+1 < pointsLeft)
     {
         return;
+    }
+
+    int subSplPoints = 0;
+    const int subSplCount = VCubicBezierPath::CountSubSpl(size);
+    if (subSplCount >= 1)
+    {
+        subSplPoints = VCubicBezierPath::SubSplPointsCount(subSplCount)-1;
     }
 
     switch(pointsLeft)
     {
         case 0:
         {
-            const QPointF p1 = pathPoints.last().toQPointF();
-            DrawLine(helpLine1, QLineF(p1, Visualization::scenePos), mainColor, Qt::DashLine);
+            const VPointF p1 = pathPoints.last();
+            if (pathPoints.size() >= 4)
+            {
+                QLineF p1p2(p1.toQPointF(), Visualization::scenePos);
+                QLineF prP3p1(pathPoints.at(size-2).toQPointF(), p1.toQPointF());
+                p1p2.setAngle(prP3p1.angle());
+
+                const QPointF p2 = p1p2.p2();
+
+                VSpline spline(p1, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
+                DrawPath(newCurveSegment, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+
+                DrawLine(helpLine1, p1p2, mainColor, Qt::DashLine);
+
+                const int preLastPoint = subSplCount * 2;
+                QGraphicsEllipseItem *p2Ctrl = this->getPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
+                DrawPoint(p2Ctrl, p2, Qt::green);
+            }
+            else
+            {
+                DrawLine(helpLine1, QLineF(p1.toQPointF(), Visualization::scenePos), mainColor, Qt::DashLine);
+            }
             break;
         }
         case 1:
         {
-            const VPointF p1 = pathPoints.at(pointsLeft-1);
-            const QPointF p2 = pathPoints.at(pointsLeft).toQPointF();
+            const VPointF p1 = pathPoints.at(subSplPoints + pointsLeft-1);
+            QPointF p2 = pathPoints.at(subSplPoints + pointsLeft).toQPointF();
+
+            if (subSplCount >= 1)
+            {
+                QLineF p1p2(p1.toQPointF(), p2);
+                QLineF prP3p1(pathPoints.at(subSplPoints + pointsLeft-2).toQPointF(), p1.toQPointF());
+                p1p2.setAngle(prP3p1.angle());
+                p2 = p1p2.p2();
+            }
 
             DrawLine(helpLine1, QLineF(p1.toQPointF(), p2), mainColor, Qt::DashLine);
 
             VSpline spline(p1, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
             DrawPath(newCurveSegment, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+
+            const int preLastPoint = subSplCount * 2;
+            QGraphicsEllipseItem *p2Ctrl = this->getPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
+            DrawPoint(p2Ctrl, p2, Qt::green);
             break;
         }
         case 2:
         {
-            const VPointF p1 = pathPoints.at(pointsLeft-2);
-            const QPointF p2 = pathPoints.at(pointsLeft-1).toQPointF();
-            const QPointF p3 = pathPoints.at(pointsLeft).toQPointF();
+            const VPointF p1 = pathPoints.at(subSplPoints + pointsLeft-2);
+            QPointF p2 = pathPoints.at(subSplPoints + pointsLeft-1).toQPointF();
+            const QPointF p3 = pathPoints.at(subSplPoints + pointsLeft).toQPointF();
+
+            if (subSplCount >= 1)
+            {
+                QLineF p1p2(p1.toQPointF(), p2);
+                QLineF prP3p1(pathPoints.at(subSplPoints + pointsLeft-3).toQPointF(), p1.toQPointF());
+                p1p2.setAngle(prP3p1.angle());
+                p2 = p1p2.p2();
+            }
 
             DrawLine(helpLine1, QLineF(p1.toQPointF(), p2), mainColor, Qt::DashLine);
             DrawLine(helpLine2, QLineF(p3, Visualization::scenePos), mainColor, Qt::DashLine);
 
             VSpline spline(p1, p2, p3, VPointF(Visualization::scenePos));
             DrawPath(newCurveSegment, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+
+            const int preLastPoint = subSplCount * 2;
+            QGraphicsEllipseItem *p2Ctrl = this->getPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
+            DrawPoint(p2Ctrl, p2, Qt::green);
             break;
         }
         default:
             break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolCubicBezierPath::RefreshToolTip()
+{
+    const int size = path.CountPoints();
+    if (size > 0)
+    {
+        const int countSubSpl = VCubicBezierPath::CountSubSpl(size);
+
+        if (size < 7)
+        {
+            Visualization::toolTip = tr("<b>Curved path</b>: select seven or more points");
+        }
+        else if (size >= 7 && size - VCubicBezierPath::SubSplPointsCount(countSubSpl) == 0)
+        {
+            Visualization::toolTip = tr("<b>Curved path</b>: select seven or more points, "
+                                        "<b>Enter</b> - finish creation");
+        }
+        else
+        {
+            Visualization::toolTip = tr("<b>Curved path</b>: select more points for complete segment");
+        }
+        emit ToolTip(Visualization::toolTip);
     }
 }

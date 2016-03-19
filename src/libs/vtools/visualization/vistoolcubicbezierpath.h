@@ -57,9 +57,11 @@ protected:
     QGraphicsLineItem               *helpLine1;
     QGraphicsLineItem               *helpLine2;
 
+private:
     QGraphicsEllipseItem *getPoint(QVector<QGraphicsEllipseItem *> &points, quint32 i, qreal z = 0);
     QGraphicsLineItem    *getLine(quint32 i);
     void Creating(const QVector<VPointF> &pathPoints , int pointsLeft);
+    void RefreshToolTip();
 };
 
 #endif // VISTOOLCUBICBEZIERPATH_H

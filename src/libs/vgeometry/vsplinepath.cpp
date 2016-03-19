@@ -133,7 +133,7 @@ void VSplinePath::append(const VSplinePoint &point)
  */
 qint32 VSplinePath::CountSubSpl() const
 {
-    if (d->path.size() == 0)
+    if (d->path.isEmpty())
     {
         return 0;
     }
