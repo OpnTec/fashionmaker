@@ -865,6 +865,33 @@
     </message>
 </context>
 <context>
+    <name>DialogCubicBezierPath</name>
+    <message>
+        <source>Dialog cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List of points</source>
+        <translation type="unfinished">Список точок</translation>
+    </message>
+    <message>
+        <source>Color:</source>
+        <translation type="unfinished">Цвет:</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogCurveIntersectAxis</name>
     <message>
         <source>Angle</source>
@@ -1648,15 +1675,15 @@
     </message>
     <message>
         <source>Curve %1_%2</source>
-        <translation>Кривая %1_%2</translation>
+        <translation type="vanished">Кривая %1_%2</translation>
     </message>
     <message>
         <source>Arc with center in point %1</source>
-        <translation>Дуга c центром в точке %1</translation>
+        <translation type="vanished">Дуга c центром в точке %1</translation>
     </message>
     <message>
         <source>Curve point %1</source>
-        <translation>Точка кривой %1</translation>
+        <translation type="vanished">Точка кривой %1</translation>
     </message>
     <message>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
@@ -1676,15 +1703,15 @@
     </message>
     <message>
         <source>%1 - cut arc with center %2</source>
-        <translation>%1 - разрезает дугу с центром в %2</translation>
+        <translation type="vanished">%1 - разрезает дугу с центром в %2</translation>
     </message>
     <message>
         <source>%1 - cut curve %2_%3</source>
-        <translation>%1 - разрезает кривую %2_%3</translation>
+        <translation type="vanished">%1 - разрезает кривую %2_%3</translation>
     </message>
     <message>
         <source>%1 - cut curve path %2</source>
-        <translation>%1 - разрезает сложную кривую %2</translation>
+        <translation type="vanished">%1 - разрезает сложную кривую %2</translation>
     </message>
     <message>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
@@ -1696,7 +1723,7 @@
     </message>
     <message>
         <source>Arc with center in point %1 and length %2</source>
-        <translation>Дуга с центром %1 и длиной %2</translation>
+        <translation type="vanished">Дуга с центром %1 и длиной %2</translation>
     </message>
     <message>
         <source>%1 - point of arcs intersection</source>
@@ -1723,7 +1750,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cubic bezier curve %1_%2</source>
+        <source>Curve</source>
+        <translation type="unfinished">Кривая</translation>
+    </message>
+    <message>
+        <source>Cubic bezier curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc</source>
+        <translation type="unfinished">Дуга</translation>
+    </message>
+    <message>
+        <source>%1 with length %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cubic bezier curve path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - cut %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>curve path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5175,6 +5238,10 @@ Do you want to save your changes?</source>
         <source>Select first curve point</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select point of cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6458,6 +6525,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractCubicBezierPath</name>
+    <message>
+        <source>Can&apos;t cut this spline</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
@@ -6849,6 +6923,17 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VCubicBezierPath</name>
+    <message>
+        <source>Not enough points to create the spline.</source>
+        <translation type="unfinished">Не достаточно точок для создания кривой.</translation>
+    </message>
+    <message>
+        <source>This spline does not exist.</source>
+        <translation type="unfinished">Этот сплайн не сувществует.</translation>
+    </message>
+</context>
+<context>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
@@ -7171,6 +7256,10 @@ Do you want to save your changes?</source>
         <source>Error creating or updating cubic bezier curve</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating cubic bezier path curve</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -7195,7 +7284,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
-        <translation>Невозможно разрезать сплайн из одной точки</translation>
+        <translation type="vanished">Невозможно разрезать сплайн из одной точки</translation>
     </message>
 </context>
 <context>
@@ -7445,6 +7534,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cubic bezier curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool cubic bezier curve</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8498,6 +8591,21 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation>Ошибка восстановления из резервного файла: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolCubicBezierPath</name>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -825,6 +825,61 @@
     </message>
     <message>
         <source>Color:</source>
+        <translation>Farbe:</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Name:</translation>
+    </message>
+    <message>
+        <source>First point:</source>
+        <translation>Erster Punkt:</translation>
+    </message>
+    <message>
+        <source>Second point:</source>
+        <translation>Zweiter Punkt:</translation>
+    </message>
+    <message>
+        <source>Third point:</source>
+        <translation>Dritter Punkt:</translation>
+    </message>
+    <message>
+        <source>Fourth point:</source>
+        <translation>Vierter Punkt:</translation>
+    </message>
+    <message>
+        <source>Select the second point of curve</source>
+        <translation>Zweiten Punkt auf der Kurve auswählen</translation>
+    </message>
+    <message>
+        <source>Select the third point of curve</source>
+        <translation>Dritten Punkt auf der Kurve auswählen</translation>
+    </message>
+    <message>
+        <source>Select the fourth point of curve</source>
+        <translation>Vierten Punkt auf der Kurve auswählen</translation>
+    </message>
+    <message>
+        <source>Invalid spline</source>
+        <translation type="unfinished">Ungültige Spline/glatte Kurve</translation>
+    </message>
+</context>
+<context>
+    <name>DialogCubicBezierPath</name>
+    <message>
+        <source>Dialog cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point:</source>
+        <translation type="unfinished">Punkt:</translation>
+    </message>
+    <message>
+        <source>List of points</source>
+        <translation type="unfinished">Liste von Punkten</translation>
+    </message>
+    <message>
+        <source>Color:</source>
         <translation type="unfinished">Farbe:</translation>
     </message>
     <message>
@@ -832,36 +887,8 @@
         <translation type="unfinished">Name:</translation>
     </message>
     <message>
-        <source>First point:</source>
-        <translation type="unfinished">Erster Punkt:</translation>
-    </message>
-    <message>
-        <source>Second point:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Third point:</source>
-        <translation type="unfinished">Dritter Punkt:</translation>
-    </message>
-    <message>
-        <source>Fourth point:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select the second point of curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select the third point of curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select the fourth point of curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid spline</source>
-        <translation type="unfinished">Ungültige Spline/glatte Kurve</translation>
+        <source>Invalid spline path</source>
+        <translation type="unfinished">Ungültiger Spline-Pfad/glatte Kurve</translation>
     </message>
 </context>
 <context>
@@ -1648,15 +1675,15 @@
     </message>
     <message>
         <source>Curve %1_%2</source>
-        <translation>Kurve %1_%2</translation>
+        <translation type="vanished">Kurve %1_%2</translation>
     </message>
     <message>
         <source>Arc with center in point %1</source>
-        <translation>Bogen mit dem Mittelpunkt %1</translation>
+        <translation type="vanished">Bogen mit dem Mittelpunkt %1</translation>
     </message>
     <message>
         <source>Curve point %1</source>
-        <translation>Kurvenpunkt %1</translation>
+        <translation type="vanished">Kurvenpunkt %1</translation>
     </message>
     <message>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
@@ -1676,15 +1703,15 @@
     </message>
     <message>
         <source>%1 - cut arc with center %2</source>
-        <translation>%1 - Kreisbogen mit Zentrum %2</translation>
+        <translation type="vanished">%1 - Kreisbogen mit Zentrum %2</translation>
     </message>
     <message>
         <source>%1 - cut curve %2_%3</source>
-        <translation>%1 - Kurvensegment %2_%3</translation>
+        <translation type="vanished">%1 - Kurvensegment %2_%3</translation>
     </message>
     <message>
         <source>%1 - cut curve path %2</source>
-        <translation>%1 - Kurvensegment %2</translation>
+        <translation type="vanished">%1 - Kurvensegment %2</translation>
     </message>
     <message>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
@@ -1696,7 +1723,7 @@
     </message>
     <message>
         <source>Arc with center in point %1 and length %2</source>
-        <translation>Bogen mit Zentrum in Punkt %1 und Länge %2</translation>
+        <translation type="vanished">Bogen mit Zentrum in Punkt %1 und Länge %2</translation>
     </message>
     <message>
         <source>%1 - point of arcs intersection</source>
@@ -1723,7 +1750,43 @@
         <translation>%1 - Schnittpunkt der Kurve</translation>
     </message>
     <message>
-        <source>Cubic bezier curve %1_%2</source>
+        <source>Curve</source>
+        <translation type="unfinished">Kurve</translation>
+    </message>
+    <message>
+        <source>Cubic bezier curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc</source>
+        <translation type="unfinished">Bogen</translation>
+    </message>
+    <message>
+        <source>%1 with length %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spline path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cubic bezier curve path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - cut %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>curve path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5183,6 +5246,10 @@ Sollen die Änderungen gespeichert werden?</translation>
         <source>Select first curve point</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select point of cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -6465,6 +6532,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractCubicBezierPath</name>
+    <message>
+        <source>Can&apos;t cut this spline</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractPattern</name>
     <message>
         <source>Can&apos;t find tool in table.</source>
@@ -6856,6 +6930,17 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VCubicBezierPath</name>
+    <message>
+        <source>Not enough points to create the spline.</source>
+        <translation type="unfinished">Nicht genügend Punkte vorhanden, um den Spline zu erstellen.</translation>
+    </message>
+    <message>
+        <source>This spline does not exist.</source>
+        <translation type="unfinished">Dieser Spline existiert nicht.</translation>
+    </message>
+</context>
+<context>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
@@ -7177,6 +7262,10 @@ Do you want to save your changes?</source>
         <source>Error creating or updating cubic bezier curve</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating cubic bezier path curve</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -7201,7 +7290,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
-        <translation>Splinepfad mit nur einem Punkt kann nicht zerschnitten werden</translation>
+        <translation type="vanished">Splinepfad mit nur einem Punkt kann nicht zerschnitten werden</translation>
     </message>
 </context>
 <context>
@@ -7451,6 +7540,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cubic bezier curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool cubic bezier curve</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8497,6 +8590,21 @@ Do you want to save your changes?</source>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation>Fehler beim Wiederherstellen aus Backupdatei %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VisToolCubicBezierPath</name>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
