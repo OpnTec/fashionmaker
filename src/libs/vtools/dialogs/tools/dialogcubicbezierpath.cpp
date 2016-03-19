@@ -88,6 +88,11 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     SCASSERT(visPath != nullptr);
     visPath->setPath(path);
     ui->listWidget->blockSignals(false);
+
+    if (ui->listWidget->count() > 0)
+    {
+        ui->listWidget->setCurrentRow(0);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
