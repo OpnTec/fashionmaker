@@ -619,7 +619,12 @@ void DialogPatternProperties::InitImage()
     QByteArray ba = QByteArray::fromBase64(byteArray);
     QBuffer buffer(&ba);
     buffer.open(QIODevice::ReadOnly);
-    image.load(&buffer, "PNG"); // writes image into ba in PNG format
+    QString extension = doc->GetImageExtension();
+    if (extension.isEmpty())
+    {
+        extension = "PNG";
+    }
+    image.load(&buffer, extension.toLatin1().data()); // writes image into ba in PNG format
 
     ui->imageLabel->setPixmap(QPixmap::fromImage(image));
     ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -641,7 +646,8 @@ void DialogPatternProperties::InitImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SetNewImage()
 {
-    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), tr("Images (*.png)"));
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(),
+                                                          tr("Images (*.png *.jpg *.jpeg *.bmp)"));
     QImage image;
     if (fileName.isEmpty())
     {
@@ -654,15 +660,24 @@ void DialogPatternProperties::SetNewImage()
             return;
         }
         ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+        QFileInfo f(fileName);
+        QString extension = f.suffix().toUpper();
 
-        QByteArray byteArray;
-        QBuffer buffer(&byteArray);
-        buffer.open(QIODevice::WriteOnly);
-        image.save(&buffer, "PNG"); // writes the image in PNG format inside the buffer
-        QString iconBase64 = QString::fromLatin1(byteArray.toBase64().data());
+        if (extension == "JPEG")
+        {
+            extension = "JPG";
+        }
+        if (extension == "PNG" || extension == "JPG" || extension == "BMP")
+        {
+            QByteArray byteArray;
+            QBuffer buffer(&byteArray);
+            buffer.open(QIODevice::WriteOnly);
+            image.save(&buffer, extension.toLatin1().data()); // writes the image in 'extension' format inside the buffer
+            QString iconBase64 = QString::fromLatin1(byteArray.toBase64().data());
 
-        // save our image to file.val
-        doc->SetImage(iconBase64);
+            // save our image to file.val
+            doc->SetImage(iconBase64, extension);
+        }
     }
 }
 
@@ -680,7 +695,7 @@ void DialogPatternProperties::SaveImage()
     byteArray.append(doc->GetImage().toUtf8());
     QByteArray ba = QByteArray::fromBase64(byteArray);
 
-    QString extension = ".PNG";
+    QString extension = "." + doc->GetImageExtension();
     QString filename = QFileDialog::getSaveFileName(this, tr("Save File"));
     QFile file(filename + extension);
     if (file.open(QIODevice::WriteOnly))

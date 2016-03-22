@@ -924,10 +924,48 @@ QString VAbstractPattern::GetImage() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetImage(const QString &text)
+QString VAbstractPattern::GetImageExtension() const
+{
+    const QString defExt = "PNG";
+    const QDomNodeList nodeList = this->elementsByTagName(TagImage);
+    if (nodeList.isEmpty())
+    {
+        return defExt;
+    }
+    else
+    {
+        const QDomNode domNode = nodeList.at(0);
+        if (domNode.isNull() == false && domNode.isElement())
+        {
+            const QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                const QString ext = domElement.attribute(QString("extension"), "");
+                if (ext.isEmpty())
+                {
+                    return defExt;
+                }
+                else
+                {
+                    return ext;
+                }
+            }
+        }
+    }
+    return defExt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetImage(const QString &text, const QString &extension)
 {
     CheckTagExists(TagImage);
     setTagText(TagImage, text);
+    QDomNodeList list = elementsByTagName(TagImage);
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement dom = list.at(i).toElement();
+        dom.setAttribute(QString("extension"), extension);
+    }
     modified = true;
     emit patternChanged(false);
 }

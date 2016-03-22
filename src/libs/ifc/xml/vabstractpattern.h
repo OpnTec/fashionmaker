@@ -107,7 +107,8 @@ public:
     void           SetNotes(const QString &text);
 
     QString        GetImage() const;
-    void           SetImage(const QString &text);
+    QString        GetImageExtension() const;
+    void           SetImage(const QString &text, const QString &extension);
     void           DeleteImage();
 
     QString        GetVersion() const;
