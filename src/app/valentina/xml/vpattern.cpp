@@ -2232,10 +2232,21 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         quint32 idTool = 0;
 
         SplinesCommonAttributes(domElement, id, idObject, idTool);
-        VSplinePath *path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
-        path->setIdObject(idObject);
-        path->setMode(Draw::Modeling);
-        data->UpdateGObject(id, path);
+        const auto obj = data->GetGObject(idObject);
+        if (obj->getType() == GOType::SplinePath)
+        {
+            VSplinePath *path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
+            path->setIdObject(idObject);
+            path->setMode(Draw::Modeling);
+            data->UpdateGObject(id, path);
+        }
+        else
+        {
+            VCubicBezierPath *spl = new VCubicBezierPath(*data->GeometricObject<VCubicBezierPath>(idObject));
+            spl->setIdObject(idObject);
+            spl->setMode(Draw::Modeling);
+            data->UpdateGObject(id, spl);
+        }
         VNodeSplinePath::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
     }
     catch (const VExceptionBadId &e)

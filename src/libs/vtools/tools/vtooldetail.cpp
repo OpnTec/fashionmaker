@@ -31,6 +31,7 @@
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/vcubicbezierpath.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../dialogs/tools/dialogtool.h"
@@ -193,7 +194,15 @@ void VToolDetail::Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstrac
             break;
             case (Tool::NodeSplinePath):
             {
-                id = CreateNode<VSplinePath>(data, nodeD.getId());
+                const auto obj = data->GetGObject(nodeD.getId());
+                if (obj->getType() == GOType::SplinePath)
+                {
+                    id = CreateNode<VSplinePath>(data, nodeD.getId());
+                }
+                else
+                {
+                    id = CreateNode<VCubicBezierPath>(data, nodeD.getId());
+                }
                 VNodeSplinePath::Create(doc, data, id, nodeD.getId(), Document::FullParse, Source::FromGui);
             }
             break;
