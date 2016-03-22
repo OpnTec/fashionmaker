@@ -61,7 +61,7 @@ void VisToolCutSplinePath::RefreshGeometry()
         {
             VSplinePath *spPath1 = nullptr;
             VSplinePath *spPath2 = nullptr;
-            VPointF *p = VToolCutSplinePath::CutSplinePath(length, splPath, &spPath1, &spPath2);
+            VPointF *p = VToolCutSplinePath::CutSplinePath(length, splPath, "X", &spPath1, &spPath2);
             SCASSERT(p != nullptr);
             SCASSERT(spPath1 != nullptr);
             SCASSERT(spPath2 != nullptr);

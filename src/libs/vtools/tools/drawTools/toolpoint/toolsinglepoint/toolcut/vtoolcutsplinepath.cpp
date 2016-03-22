@@ -131,13 +131,12 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
     quint32 id = _id;
     VSplinePath *splPath1 = nullptr;
     VSplinePath *splPath2 = nullptr;
-    VPointF *p = VToolCutSplinePath::CutSplinePath(qApp->toPixel(result), splPath, &splPath1, &splPath2);
+    VPointF *p = VToolCutSplinePath::CutSplinePath(qApp->toPixel(result), splPath, pointName, &splPath1, &splPath2);
 
     SCASSERT(splPath1 != nullptr);
     SCASSERT(splPath2 != nullptr);
     SCASSERT(p != nullptr);
 
-    p->setName(pointName);
     p->setMx(mx);
     p->setMy(my);
 
@@ -203,7 +202,7 @@ void VToolCutSplinePath::ShowVisualization(bool show)
 
 //---------------------------------------------------------------------------------------------------------------------
 VPointF *VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VAbstractCubicBezierPath> &splPath,
-                                           VSplinePath **splPath1, VSplinePath **splPath2)
+                                           const QString &pName, VSplinePath **splPath1, VSplinePath **splPath2)
 {
     SCASSERT(splPath != nullptr);
 
@@ -212,6 +211,7 @@ VPointF *VToolCutSplinePath::CutSplinePath(qreal length, const QSharedPointer<VA
 
     const QPointF point = splPath->CutSplinePath(length, p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
     VPointF *p = new VPointF(point);
+    p->setName(pName);
 
     const QVector<VSplinePoint> points = splPath->GetSplinePath();
 

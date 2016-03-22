@@ -214,7 +214,7 @@ void VAbstractCubicBezierPath::CreateName()
     {
         name = splPath;
         name.append(QString("_%1").arg(FirstPoint().name()));
-        if (CountSubSpl() >= 2)
+        if (CountSubSpl() >= 1)
         {
             name.append(QString("_%1").arg(LastPoint().name()));
 

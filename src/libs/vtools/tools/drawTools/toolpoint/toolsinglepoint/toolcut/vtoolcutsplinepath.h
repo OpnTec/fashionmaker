@@ -61,7 +61,7 @@ public:
     virtual void  ShowVisualization(bool show) Q_DECL_OVERRIDE;
 
     static VPointF *CutSplinePath(qreal length, const QSharedPointer<VAbstractCubicBezierPath> &splPath,
-                                  VSplinePath **splPath1, VSplinePath **splPath2);
+                                  const QString &pName, VSplinePath **splPath1, VSplinePath **splPath2);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void  SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;
