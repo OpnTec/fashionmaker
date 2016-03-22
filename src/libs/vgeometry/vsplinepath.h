@@ -62,7 +62,7 @@ public:
     virtual void    Clear() Q_DECL_OVERRIDE;
     virtual VSpline GetSpline(qint32 index) const Q_DECL_OVERRIDE;
 
-    QVector<VSplinePoint>  GetSplinePath() const;
+    virtual QVector<VSplinePoint> GetSplinePath() const Q_DECL_OVERRIDE;
     QVector<VFSplinePoint> GetFSplinePath() const;
 
     virtual qreal GetStartAngle () const Q_DECL_OVERRIDE;

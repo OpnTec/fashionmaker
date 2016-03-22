@@ -56,7 +56,7 @@ VisToolCubicBezierPath::~VisToolCubicBezierPath()
 //---------------------------------------------------------------------------------------------------------------------
 void VisToolCubicBezierPath::RefreshGeometry()
 {
-    const QVector<VPointF> pathPoints = path.GetSplinePath();
+    const QVector<VPointF> pathPoints = path.GetCubicPath();
     const int size = pathPoints.size();
     if (size > 0)
     {

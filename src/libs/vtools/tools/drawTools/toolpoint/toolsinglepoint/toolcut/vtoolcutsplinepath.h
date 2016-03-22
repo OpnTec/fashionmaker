@@ -31,6 +31,9 @@
 
 #include "vtoolcut.h"
 
+class VAbstractCubicBezierPath;
+class VSplinePath;
+
 /**
  * @brief The VToolCutSplinePath class for tool CutSplinePath. This tool find point on splinePath and cut splinePath on
  * two.
@@ -56,6 +59,9 @@ public:
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::CutSplinePath)};
     virtual void  ShowVisualization(bool show) Q_DECL_OVERRIDE;
+
+    static VPointF *CutSplinePath(qreal length, const QSharedPointer<VAbstractCubicBezierPath> &splPath,
+                                  VSplinePath **splPath1, VSplinePath **splPath2);
 protected:
     virtual void  contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void  SaveDialog(QDomElement &domElement) Q_DECL_OVERRIDE;

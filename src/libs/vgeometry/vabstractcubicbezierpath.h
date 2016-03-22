@@ -35,6 +35,7 @@
 
 class VPointF;
 class VSpline;
+class VSplinePoint;
 
 class VAbstractCubicBezierPath : public VAbstractCurve
 {
@@ -50,6 +51,7 @@ public:
     virtual qint32  CountPoints() const =0;
     virtual void    Clear() =0;
     virtual VSpline GetSpline(qint32 index) const =0;
+    virtual QVector<VSplinePoint> GetSplinePath() const =0;
 
     virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const Q_DECL_OVERRIDE;
     virtual QVector<QPointF> GetPoints() const Q_DECL_OVERRIDE;

@@ -192,8 +192,6 @@ protected:
                                          const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
     void             FillComboBoxSplinesPath(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
                                              const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
-    void             FillComboBoxSimpleSplines(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
-                                               const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
     void             FillComboBoxCurves(QComboBox *box)const;
     void             FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon> &stylesPics) const;
     void             FillComboBoxLineColors(QComboBox *box)const;
@@ -262,9 +260,17 @@ protected:
 private:
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 
+    template <typename T>
+    void PrepareList(QMap<QString, quint32> &list, quint32 id) const;
+
+    bool IsSpline(const QSharedPointer<VGObject> &obj) const;
+    bool IsSplinePath(const QSharedPointer<VGObject> &obj) const;
+
     template <typename GObject>
     void FillCombo(QComboBox *box, GOType gType, FillComboBox rule = FillComboBox::Whole,
                    const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
+
+
 };
 
 //---------------------------------------------------------------------------------------------------------------------

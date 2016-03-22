@@ -30,6 +30,8 @@
 #include "vcubicbezierpath_p.h"
 #include "vspline.h"
 #include "../ifc/exception/vexception.h"
+#include "vsplinepoint.h"
+#include "../vmisc/vabstractapplication.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -39,7 +41,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath::VCubicBezierPath(quint32 idObject, Draw mode)
-    : VAbstractCubicBezierPath(GOType::SplinePath, idObject, mode),
+    : VAbstractCubicBezierPath(GOType::CubicBezierPath, idObject, mode),
       d(new VCubicBezierPathData())
 {
 }
@@ -53,7 +55,7 @@ VCubicBezierPath::VCubicBezierPath(const VCubicBezierPath &curve)
 
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath::VCubicBezierPath(const QVector<VPointF> &points, quint32 idObject, Draw mode)
-    : VAbstractCubicBezierPath(GOType::SplinePath, idObject, mode),
+    : VAbstractCubicBezierPath(GOType::CubicBezierPath, idObject, mode),
       d(new VCubicBezierPathData())
 {
     if (points.isEmpty())
@@ -184,7 +186,36 @@ qreal VCubicBezierPath::GetEndAngle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<VPointF> VCubicBezierPath::GetSplinePath() const
+QVector<VSplinePoint> VCubicBezierPath::GetSplinePath() const
+{
+    const int size = CountSubSpl();
+    QVector<VSplinePoint> splPoints(size+1);
+
+    for (qint32 i = 1; i <= size; ++i)
+    {
+        const VSpline spl = GetSpline(i);
+
+        {
+            VSplinePoint p = splPoints.at(i-1);
+            p.SetP(spl.GetP1());
+            p.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+            p.SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
+            splPoints[i-1] = p;
+        }
+
+        {
+            VSplinePoint p = splPoints.at(i);
+            p.SetP(spl.GetP4());
+            p.SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
+            p.SetLength1(spl.GetC2Length(), spl.GetC2LengthFormula());
+            splPoints[i] = p;
+        }
+    }
+    return splPoints;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VPointF> VCubicBezierPath::GetCubicPath() const
 {
     return d->path;
 }

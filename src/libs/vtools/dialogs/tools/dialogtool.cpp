@@ -134,19 +134,43 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, FillComboBox rule, const quint
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxSplines(QComboBox *box, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
 {
-    FillCombo<VAbstractCurve>(box, GOType::Spline, rule, ch1, ch2);
+    SCASSERT(box != nullptr);
+    box->blockSignals(true);
+
+    const auto objs = data->DataGObjects();
+    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
+    QMap<QString, quint32> list;
+    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
+    {
+        if (rule == FillComboBox::NoChildren)
+        {
+            if (i.key() != toolId && i.key() != ch1 && i.key() != ch2)
+            {
+                if (IsSpline(i.value()))
+                {
+                    PrepareList<VAbstractCurve>(list, i.key());
+                }
+            }
+        }
+        else
+        {
+            if (i.key() != toolId)
+            {
+                if (IsSpline(i.value()))
+                {
+                    PrepareList<VAbstractCurve>(list, i.key());
+                }
+            }
+        }
+    }
+    FillList(box, list);
+
+    box->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::FillComboBoxSplinesPath(QComboBox *box, FillComboBox rule, const quint32 &ch1,
                                          const quint32 &ch2) const
-{
-    FillCombo<VAbstractCurve>(box, GOType::SplinePath, rule, ch1, ch2);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FillComboBoxSimpleSplines(QComboBox *box, FillComboBox rule, const quint32 &ch1,
-                                           const quint32 &ch2) const
 {
     SCASSERT(box != nullptr);
     box->blockSignals(true);
@@ -160,22 +184,9 @@ void DialogTool::FillComboBoxSimpleSplines(QComboBox *box, FillComboBox rule, co
         {
             if (i.key() != toolId && i.key() != ch1 && i.key() != ch2)
             {
-                QSharedPointer<VGObject> obj = i.value();
-                if ((obj->getType() == GOType::Spline || obj->getType() == GOType::CubicBezier) &&
-                        obj->getMode() == Draw::Calculation)
+                if (IsSplinePath(i.value()))
                 {
-                    const auto curve = data->GeometricObject<VAbstractCurve>(i.key());
-
-                    QString newName = curve->name();
-                    int bias = 0;
-                    if (qApp->TrVars()->VariablesToUser(newName, 0, curve->name(), bias))
-                    {
-                        list[newName] = i.key();
-                    }
-                    else
-                    {
-                        list[curve->name()] = i.key();
-                    }
+                    PrepareList<VAbstractCurve>(list, i.key());
                 }
             }
         }
@@ -183,22 +194,9 @@ void DialogTool::FillComboBoxSimpleSplines(QComboBox *box, FillComboBox rule, co
         {
             if (i.key() != toolId)
             {
-                QSharedPointer<VGObject> obj = i.value();
-                if ((obj->getType() == GOType::Spline || obj->getType() == GOType::CubicBezier) &&
-                        obj->getMode() == Draw::Calculation)
+                if (IsSplinePath(i.value()))
                 {
-                    const auto curve = data->GeometricObject<VAbstractCurve>(i.key());
-
-                    QString newName = curve->name();
-                    int bias = 0;
-                    if (qApp->TrVars()->VariablesToUser(newName, 0, curve->name(), bias))
-                    {
-                        list[newName] = i.key();
-                    }
-                    else
-                    {
-                        list[curve->name()] = i.key();
-                    }
+                    PrepareList<VAbstractCurve>(list, i.key());
                 }
             }
         }
@@ -221,21 +219,10 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
         {
             QSharedPointer<VGObject> obj = i.value();
             if ((obj->getType() == GOType::Arc || obj->getType() == GOType::Spline ||
-                 obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezier) &&
-                    obj->getMode() == Draw::Calculation)
+                 obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezier ||
+                 obj->getType() == GOType::CubicBezierPath) && obj->getMode() == Draw::Calculation)
             {
-                const auto curve = data->GeometricObject<VAbstractCurve>(i.key());
-
-                QString newName = curve->name();
-                int bias = 0;
-                if (qApp->TrVars()->VariablesToUser(newName, 0, curve->name(), bias))
-                {
-                    list[newName] = i.key();
-                }
-                else
-                {
-                    list[curve->name()] = i.key();
-                }
+                PrepareList<VAbstractCurve>(list, i.key());
             }
         }
     }
@@ -388,6 +375,13 @@ quint32 DialogTool::DNumber(const QString &baseName) const
     } while (not data->IsUnique(name));
 
     return num;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::IsSplinePath(const QSharedPointer<VGObject> &obj) const
+{
+    return (obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezierPath) &&
+            obj->getMode() == Draw::Calculation;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -677,6 +671,32 @@ void DialogTool::FillList(QComboBox *box, const QMap<QString, quint32> &list) co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void DialogTool::PrepareList(QMap<QString, quint32> &list, quint32 id) const
+{
+    const auto obj = data->GeometricObject<T>(id);
+    SCASSERT(obj != nullptr);
+
+    QString newName = obj->name();
+    int bias = 0;
+    if (qApp->TrVars()->VariablesToUser(newName, 0, obj->name(), bias))
+    {
+        list[newName] = id;
+    }
+    else
+    {
+        list[obj->name()] = id;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogTool::IsSpline(const QSharedPointer<VGObject> &obj) const
+{
+    return (obj->getType() == GOType::Spline || obj->getType() == GOType::CubicBezier) &&
+            obj->getMode() == Draw::Calculation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CheckState enable, when all is correct, or disable, when something wrong, button ok
  */
@@ -937,18 +957,7 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
                 QSharedPointer<VGObject> obj = i.value();
                 if (obj->getType() == gType && obj->getMode() == Draw::Calculation)
                 {
-                    const QSharedPointer<GObject> arc = data->GeometricObject<GObject>(i.key());
-
-                    QString newName = arc->name();
-                    int bias = 0;
-                    if (qApp->TrVars()->VariablesToUser(newName, 0, arc->name(), bias))
-                    {
-                        list[newName] = i.key();
-                    }
-                    else
-                    {
-                        list[arc->name()] = i.key();
-                    }
+                    PrepareList<GObject>(list, i.key());
                 }
             }
         }
@@ -959,18 +968,7 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
                 QSharedPointer<VGObject> obj = i.value();
                 if (obj->getType() == gType && obj->getMode() == Draw::Calculation)
                 {
-                    const QSharedPointer<GObject> arc = data->GeometricObject<GObject>(i.key());
-
-                    QString newName = arc->name();
-                    int bias = 0;
-                    if (qApp->TrVars()->VariablesToUser(newName, 0, arc->name(), bias))
-                    {
-                        list[newName] = i.key();
-                    }
-                    else
-                    {
-                        list[arc->name()] = i.key();
-                    }
+                    PrepareList<GObject>(list, i.key());
                 }
             }
         }

@@ -27,8 +27,9 @@
  *************************************************************************/
 
 #include "vistoolcutsplinepath.h"
-#include "../../vpatterndb/vcontainer.h"
-#include "../../vgeometry/vsplinepath.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCutSplinePath::VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent)
@@ -53,83 +54,26 @@ void VisToolCutSplinePath::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VSplinePath> splPath = Visualization::data->GeometricObject<VSplinePath>(object1Id);
+        const auto splPath = Visualization::data->GeometricObject<VAbstractCubicBezierPath>(object1Id);
         DrawPath(this, splPath->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
 
-        if (qFuzzyCompare(1 + length, 1 + 0) == false)
+        if (not qFuzzyIsNull(length))
         {
-            QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-            qint32 p1 = 0, p2 = 0;
+            VSplinePath *spPath1 = nullptr;
+            VSplinePath *spPath2 = nullptr;
+            VPointF *p = VToolCutSplinePath::CutSplinePath(length, splPath, &spPath1, &spPath2);
+            SCASSERT(p != nullptr);
+            SCASSERT(spPath1 != nullptr);
+            SCASSERT(spPath2 != nullptr);
 
-            // TODO make refactoring. CutSplPath repeat twice. Here and in VToolCutSpline.
-            const QPointF cutPoint = splPath->CutSplinePath(length, p1, p2, spl1p2, spl1p3, spl2p2, spl2p3);
-            VPointF p = VPointF(cutPoint);
+            DrawPoint(point, p->toQPointF(), mainColor);
+            delete p;
 
-            VSplinePoint splP1 = splPath->at(p1);
-            VSplinePoint splP2 = splPath->at(p2);
-            const VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, p);
-            const VSpline spl2 = VSpline(p, spl2p2, spl2p3, splP2.P());
+            DrawPath(splPath1, spPath1->GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(splPath2, spPath2->GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
 
-            VSplinePath spPath1 = VSplinePath();
-            VSplinePath spPath2 = VSplinePath();
-
-            for (qint32 i = 0; i < splPath->CountPoints(); i++)
-            {
-                if (i <= p1 && i < p2)
-                {
-                    if (i == p1)
-                    {
-                        const qreal angle1 = spl1.GetStartAngle()+180;
-                        const QString angle1F = QString().number(angle1);
-
-                        spPath1.append(VSplinePoint(splP1.P(), angle1, angle1F, spl1.GetStartAngle(),
-                                                    spl1.GetStartAngleFormula(), splP1.Length1(),
-                                                    splP1.Length1Formula(), spl1.GetC1Length(),
-                                                    spl1.GetC1LengthFormula()));
-
-                        const qreal angle2 = spl1.GetEndAngle()+180;
-                        const QString angle2F = QString().number(angle2);
-
-                        const auto cutPoint = VSplinePoint(p, spl1.GetEndAngle(), spl1.GetEndAngleFormula(), angle2,
-                                                           angle2F, spl1.GetC2Length(), spl1.GetC2LengthFormula(),
-                                                           spl2.GetC1Length(), spl2.GetC1LengthFormula());
-
-                        spPath1.append(cutPoint);
-                        continue;
-                    }
-                    spPath1.append(splPath->at(i));
-                }
-                else
-                {
-                    if (i == p2)
-                    {
-                        const qreal angle1 = spl2.GetStartAngle()+180;
-                        const QString angle1F = QString().number(angle1);
-
-                        const auto cutPoint = VSplinePoint(p, angle1, angle1F, spl2.GetStartAngle(),
-                                                           spl2.GetStartAngleFormula(), spl1.GetC2Length(),
-                                                           spl1.GetC2LengthFormula(), spl2.GetC1Length(),
-                                                           spl2.GetC1LengthFormula());
-
-                        spPath2.append(cutPoint);
-
-                        const qreal angle2 = spl2.GetEndAngle()+180;
-                        const QString angle2F = QString().number(angle2);
-
-                        spPath2.append(VSplinePoint(splP2.P(), spl2.GetEndAngle(), spl2.GetEndAngleFormula(), angle2,
-                                                    angle2F, spl2.GetC2Length(), spl2.GetC2LengthFormula(),
-                                                    splP2.Length2(), splP2.Length2Formula()));
-
-                        continue;
-                    }
-                    spPath2.append(splPath->at(i));
-                }
-            }
-
-            DrawPoint(point, cutPoint, mainColor);
-
-            DrawPath(splPath1, spPath1.GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
-            DrawPath(splPath2, spPath2.GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
+            delete spPath1;
+            delete spPath2;
         }
     }
 }

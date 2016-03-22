@@ -60,7 +60,8 @@ public:
     virtual qreal   GetStartAngle () const Q_DECL_OVERRIDE;
     virtual qreal   GetEndAngle () const Q_DECL_OVERRIDE;
 
-    QVector<VPointF> GetSplinePath() const;
+    virtual QVector<VSplinePoint> GetSplinePath() const Q_DECL_OVERRIDE;
+    QVector<VPointF> GetCubicPath() const;
 
     static qint32 CountSubSpl(qint32 size);
     static qint32 SubSplOffset(qint32 subSplIndex);
