@@ -663,16 +663,16 @@ void DialogPatternProperties::SetNewImage()
         QFileInfo f(fileName);
         QString extension = f.suffix().toUpper();
 
-        if (extension == "JPEG")
+        if (extension == QLatin1String("JPEG"))
         {
             extension = "JPG";
         }
-        if (extension == "PNG" || extension == "JPG" || extension == "BMP")
+        if (extension == QLatin1String("PNG") || extension == QLatin1String("JPG") || extension == QLatin1String("BMP"))
         {
             QByteArray byteArray;
             QBuffer buffer(&byteArray);
             buffer.open(QIODevice::WriteOnly);
-            image.save(&buffer, extension.toLatin1().data()); // writes the image in 'extension' format inside the buffer
+            image.save(&buffer, extension.toLatin1().data()); //writes the image in 'extension' format inside the buffer
             QString iconBase64 = QString::fromLatin1(byteArray.toBase64().data());
 
             // save our image to file.val
