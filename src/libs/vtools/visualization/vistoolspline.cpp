@@ -141,7 +141,7 @@ void VisToolSpline::RefreshGeometry()
                 }
             }
 
-            if (qFuzzyCompare(angle1, EMPTY_ANGLE) || qFuzzyCompare(angle2, EMPTY_ANGLE))
+            if (VFuzzyComparePossibleNulls(angle1, EMPTY_ANGLE) || VFuzzyComparePossibleNulls(angle2, EMPTY_ANGLE))
             {
                 VSpline spline(*first, p2, p3, *second);
                 DrawPath(this, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);

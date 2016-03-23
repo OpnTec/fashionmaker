@@ -20,6 +20,7 @@
  ******************************************************************************************************/
 
 #include "qmuparsertest.h"
+#include "qmudef.h"
 
 #include <QString>
 #include <QDebug>
@@ -1345,7 +1346,7 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
         // String parsing and bytecode parsing must yield the same result
         fVal[0] = p1->Eval(); // result from stringparsing
         fVal[1] = p1->Eval(); // result from bytecode
-        if ( qFuzzyCompare( fVal[0], fVal[1] ) == false )
+        if ( not QmuFuzzyComparePossibleNulls( fVal[0], fVal[1] ) )
         {
             throw QmuParserError ( "Bytecode / string parsing mismatch." );
         }
@@ -1400,7 +1401,8 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
 #pragma warning(pop)
 #endif
             {
-                bCloseEnough &= (qFuzzyCompare( fabs ( fVal[i] ), std::numeric_limits<qreal>::infinity())==false );
+                bCloseEnough &= (not QmuFuzzyComparePossibleNulls( fabs ( fVal[i] ),
+                                                                   std::numeric_limits<qreal>::infinity()) );
             }
         }
 
@@ -1422,8 +1424,9 @@ int QmuParserTester::EqnTest ( const QString &a_str, double a_fRes, bool a_fPass
     {
         if ( a_fPass )
         {
-            if ( (qFuzzyCompare(fVal[0], fVal[2])==false) && (qFuzzyCompare(fVal[0], -999)==false) &&
-                 (qFuzzyCompare(fVal[1], -998 )==false))
+            if ( not QmuFuzzyComparePossibleNulls(fVal[0], fVal[2]) &&
+                 not QmuFuzzyComparePossibleNulls(fVal[0], -999) &&
+                 not QmuFuzzyComparePossibleNulls(fVal[1], -998 ))
             {
                 qWarning() << "\n  fail: " << a_str << " (copy construction)";
             }

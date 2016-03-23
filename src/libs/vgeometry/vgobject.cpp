@@ -304,7 +304,8 @@ QPointF VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line)
 //---------------------------------------------------------------------------------------------------------------------
 int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c2, double r2, QPointF &p1, QPointF &p2)
 {
-    if (qFuzzyCompare(c1.x(), c2.x()) && qFuzzyCompare(c1.y(), c2.y()) && qFuzzyCompare(r1, r2))
+    if (VFuzzyComparePossibleNulls(c1.x(), c2.x()) && VFuzzyComparePossibleNulls(c1.y(), c2.y())
+            && VFuzzyComparePossibleNulls(r1, r2))
     {
         return 3;// Circles are equal
     }
@@ -319,7 +320,7 @@ int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c
     {
         return 0;
     }
-    else if (qFuzzyCompare(c*c, r1*r1*(a*a+b*b)))
+    else if (VFuzzyComparePossibleNulls(c*c, r1*r1*(a*a+b*b)))
     {
         p1 = QPointF(x0 + c1.x(), y0  + c1.y());
         return 1;
@@ -360,7 +361,7 @@ qint32 VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const 
     // how many solutions?
     qint32 flag = 0;
     const qreal d = QLineF (center, p).length();
-    if (qFuzzyCompare(d, radius))
+    if (VFuzzyComparePossibleNulls(d, radius))
     {
         flag = 1;
     }
@@ -507,7 +508,7 @@ double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2)
 int VGObject::PointInCircle(const QPointF &p, const QPointF &center, qreal radius)
 {
     const double d = QLineF (p, center).length();
-    if (qFuzzyCompare(radius, d))
+    if (VFuzzyComparePossibleNulls(radius, d))
     {
         return 1; // on circle
     }

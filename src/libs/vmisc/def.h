@@ -606,4 +606,20 @@ QSharedPointer<QPrinter> DefaultPrinter();
 
 QPixmap darkenPixmap(const QPixmap &pixmap);
 
+static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
+{
+    if(qFuzzyIsNull(p1))
+    {
+        return qFuzzyIsNull(p2);
+    }
+    else if(qFuzzyIsNull(p2))
+    {
+        return false;
+    }
+    else
+    {
+        return qFuzzyCompare(p1, p2);
+    }
+}
+
 #endif // DEF_H

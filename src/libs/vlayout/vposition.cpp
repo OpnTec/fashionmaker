@@ -501,7 +501,7 @@ VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, cons
             const qreal xj = gContour.at(j).x(); //-V807
             const qreal yi = gContour.at(i).y();
             const qreal yj = gContour.at(j).y();
-            if (qFuzzyCompare(yj, yi))
+            if (VFuzzyComparePossibleNulls(yj, yi))
             {
                 constant.insert(i, xi);
                 multiple.insert(i, 0);
@@ -539,7 +539,7 @@ VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, cons
                     const qreal yi = gContour.at(i).y();
                     const qreal yj = gContour.at(j).y();
 
-					const QPointF &pn = p.at(n);
+                    const QPointF &pn = p.at(n);
                     if (((yi < pn.y() && yj >= pn.y()) || (yj < pn.y() && yi >= pn.y())))
                     {
                         oddNodes ^= (pn.y() * multiple.at(i) + constant.at(i) < pn.x());
@@ -586,7 +586,7 @@ void VPosition::CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, co
 
     // Now we move detail to position near to global contour edge.
     detail.Translate(dx, dy);
-    if (not qFuzzyCompare(angle_between+360, 0+360))
+    if (not qFuzzyIsNull(angle_between) || not qFuzzyCompare(angle_between, 360))
     {
         detail.Rotate(detailEdge.p2(), -angle_between);
     }
@@ -675,7 +675,7 @@ QVector<QPointF> VPosition::CutEdge(const QLineF &edge, quint32 shift)
 void VPosition::Rotate(int increase)
 {
     int startAngle = 0;
-    if (qFuzzyCompare(angle_between+360, 0+360))
+    if (VFuzzyComparePossibleNulls(angle_between, 360))
     {
         startAngle = increase;
     }

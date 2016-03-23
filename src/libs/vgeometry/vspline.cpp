@@ -412,7 +412,7 @@ qint32 VSpline::Cubic(QVector<qreal> &x, qreal a, qreal b, qreal c)
         x.insert(0, aa+bb-a/3.); // Real root
         x.insert(1, (-0.5)*(aa+bb)-a/3.); //Complex root
         x.insert(2, (sqrt(3.)*0.5)*fabs(aa-bb)); // Complex root
-        if (qFuzzyCompare(x.at(2) + 1, 0. + 1))
+        if (qFuzzyIsNull(x.at(2)))
         {
             return(2);
         }

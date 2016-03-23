@@ -20,6 +20,7 @@
  ******************************************************************************************************/
 
 #include "qmuparserbase.h"
+#include "qmudef.h"
 
 #include <QDebug>
 #ifdef QMUP_USE_OPENMP
@@ -854,7 +855,7 @@ void QmuParserBase::ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> 
         token_type vVal1 = a_stVal.pop();
         token_type vExpr = a_stVal.pop();
 
-        a_stVal.push( (qFuzzyCompare(vExpr.GetVal()+1, 1+0)==false) ? vVal1 : vVal2);
+        a_stVal.push( not qFuzzyIsNull(vExpr.GetVal()) ? vVal1 : vVal2);
 
         token_type opIf = a_stOpt.pop();
         Q_ASSERT(opElse.GetCode()==cmELSE);
@@ -983,11 +984,11 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 continue;
             case cmNEQ:
                 --sidx;
-                Stack[sidx]  = (qFuzzyCompare(Stack[sidx], Stack[sidx+1])==false);
+                Stack[sidx]  = not QmuFuzzyComparePossibleNulls(Stack[sidx], Stack[sidx+1]);
                 continue;
             case cmEQ:
                 --sidx;
-                Stack[sidx]  = qFuzzyCompare(Stack[sidx], Stack[sidx+1]);
+                Stack[sidx]  = QmuFuzzyComparePossibleNulls(Stack[sidx], Stack[sidx+1]);
                 continue;
             case cmLT:
                 --sidx;
@@ -1059,7 +1060,7 @@ qreal QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const
                 //Stack[sidx] = *pTok->Oprt.ptr = Stack[sidx+1];
                 //continue;
             case cmIF:
-                if (qFuzzyCompare(Stack[sidx--]+1, 1+0))
+                if (qFuzzyIsNull(Stack[sidx--]))
                 {
                     pTok += pTok->Oprt.offset;
                 }

@@ -112,7 +112,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
     {
         case (Tool::NodePoint):
         {
-            if ( qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && (pRotate == 0))
+            if ( qFuzzyIsNull(dx) && qFuzzyIsNull(dy) && (pRotate == 0))
             {
                 id = det.at(i).getId();
             }
@@ -133,7 +133,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
         break;
         case (Tool::NodeArc):
         {
-            if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
+            if (qFuzzyIsNull(dx) && qFuzzyIsNull(dy) && pRotate == 0)
             {
                 id = det.at(i).getId();
             }
@@ -170,7 +170,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
         break;
         case (Tool::NodeSpline):
         {
-            if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
+            if (qFuzzyIsNull(dx) && qFuzzyIsNull(dy) && pRotate == 0)
             {
                 id = det.at(i).getId();
             }
@@ -207,7 +207,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
         break;
         case (Tool::NodeSplinePath):
         {
-            if (qFuzzyCompare(dx+1, 1) && qFuzzyCompare(dy+1, 1) && pRotate == 0)
+            if (qFuzzyIsNull(dx) && qFuzzyIsNull(dy) && pRotate == 0)
             {
                 id = det.at(i).getId();
             }
@@ -297,7 +297,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
     {
         case (Tool::NodePoint):
         {
-            if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
             {
                 VPointF *point = new VPointF(*data->GeometricObject<VPointF>(det.at(i).getId()));
                 point->setMode(Draw::Modeling);
@@ -308,7 +308,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
         break;
         case (Tool::NodeArc):
         {
-            if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
             {
                 const QPointF p = data->GeometricObject<VPointF>(pRotate)->toQPointF();
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
@@ -334,7 +334,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
         break;
         case (Tool::NodeSpline):
         {
-            if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
             {
                 const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(det.at(i).getId());
 
@@ -360,7 +360,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
         break;
         case (Tool::NodeSplinePath):
         {
-            if (qFuzzyCompare(dx+1, 1) == false || qFuzzyCompare(dy+1, 1) == false || pRotate != 0)
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
             {
                 VSplinePath *path = new VSplinePath();
                 path->setMode(Draw::Modeling);

@@ -56,7 +56,7 @@ void VisToolCutSpline::RefreshGeometry()
         const auto spl = Visualization::data->GeometricObject<VAbstractCubicBezier>(object1Id);
         DrawPath(this, spl->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
 
-        if (qFuzzyCompare(1 + length, 1 + 0) == false)
+        if (not qFuzzyIsNull(length))
         {
             QPointF spl1p2;
             QPointF spl1p3;

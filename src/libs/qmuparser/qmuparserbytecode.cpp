@@ -20,11 +20,12 @@
  ******************************************************************************************************/
 
 #include "qmuparserbytecode.h"
+#include "qmuparsertoken.h"
+#include "qmudef.h"
 
 #include <QStack>
 #include <QString>
 #include <QDebug>
-#include "qmuparsertoken.h"
 #include <QtCore/qmath.h>
 #include <QtGlobal>
 
@@ -165,11 +166,11 @@ void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
             m_vRPN.pop_back();
             break;
         case cmNEQ:
-            x = (qFuzzyCompare(x, y) == false);
+            x = not QmuFuzzyComparePossibleNulls(x, y);
             m_vRPN.pop_back();
             break;
         case cmEQ:
-            x = qFuzzyCompare(x, y);
+            x = QmuFuzzyComparePossibleNulls(x, y);
             m_vRPN.pop_back();
             break;
         case cmADD:
@@ -342,7 +343,7 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
                     break;
                 case cmDIV:
                     if (m_vRPN.at(sz-1).Cmd == cmVAL && m_vRPN.at(sz-2).Cmd == cmVARMUL &&
-                            (qFuzzyCompare(m_vRPN.at(sz-1).Val.data2+1, 1+0)==false))
+                            not qFuzzyIsNull(m_vRPN.at(sz-1).Val.data2))
                     {
                         // Optimization: 4*a/2 -> 2*a
                         m_vRPN[sz-2].Val.data  /= m_vRPN.at(sz-1).Val.data2;

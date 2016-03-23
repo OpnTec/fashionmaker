@@ -165,8 +165,8 @@ QPointF VArc::GetP2 () const
  */
 qreal VArc::AngleArc() const
 {
-    if ((qFuzzyCompare(d->f1+1, 0+1) && qFuzzyCompare(d->f2, 360)) ||
-        (qFuzzyCompare(d->f1, 360) && qFuzzyCompare(d->f2+1, 0+1)))
+    if ((qFuzzyIsNull(d->f1) && qFuzzyCompare(d->f2, 360)) ||
+        (qFuzzyCompare(d->f1, 360) && qFuzzyIsNull(d->f2)))
     {
         return 360;
     }

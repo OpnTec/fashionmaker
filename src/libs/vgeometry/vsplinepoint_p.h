@@ -30,8 +30,10 @@
 #define VSPLINEPOINT_P_H
 
 #include <QSharedData>
-#include "vpointf.h"
 #include <QDebug>
+
+#include "vpointf.h"
+#include "../vmisc/def.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -57,9 +59,9 @@ public:
           kAsm1(kAsm1),
           kAsm2(kAsm2)
     {
-        if (not qFuzzyCompare(qAbs(angle1-angle2), 180) || qFuzzyIsNull(qAbs(angle1-angle2)))
+        if (VFuzzyComparePossibleNulls(angle1, angle2) || not qFuzzyCompare(qAbs(angle1-angle2), 180) )
         {
-            qDebug()<<"angle1 and angle2 are not equal.";
+            qDebug()<<"Make angle1 and angle2 correct.";
             this->angle1 = angle1;
             this->angle2 = angle1 + 180;
         }
@@ -127,9 +129,9 @@ public:
           length2(length2),
           length2F(length2F)
     {
-        if (not qFuzzyCompare(qAbs(angle1-angle2), 180) || qFuzzyIsNull(qAbs(angle1-angle2)))
+        if (VFuzzyComparePossibleNulls(angle1, angle2) || not qFuzzyCompare(qAbs(angle1-angle2), 180))
         {
-            qDebug()<<"angle1 and angle2 are not equal.";
+            qDebug()<<"Make angle1 and angle2 correct.";
             this->angle2 = angle1 + 180;
             this->angle2F = QString().number(angle2);
         }

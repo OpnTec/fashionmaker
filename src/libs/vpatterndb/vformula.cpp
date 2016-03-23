@@ -82,7 +82,7 @@ bool VFormula::operator==(const VFormula &formula) const
     if (this->formula == formula.GetFormula() && this->value == formula.getStringValue() &&
         this->checkZero == formula.getCheckZero() && this->data == formula.getData() &&
         this->toolId == formula.getToolId() && this->postfix == formula.getPostfix() &&
-        this->_error == formula.error() && qFuzzyCompare(this->dValue, formula.getDoubleValue()))
+        this->_error == formula.error() && VFuzzyComparePossibleNulls(this->dValue, formula.getDoubleValue()))
     {
         isEqual = true;
     }
@@ -232,7 +232,7 @@ void VFormula::Eval()
             delete cal;
 
             //if result equal 0
-            if (checkZero && qFuzzyCompare(1 + result, 1 + 0))
+            if (checkZero && qFuzzyIsNull(result))
             {
                 value = QString("0");
                 _error = true;

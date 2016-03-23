@@ -80,7 +80,7 @@ void VisToolShoulderPoint::RefreshGeometry()
 
                 DrawLine(line2, QLineF(second->toQPointF(), third->toQPointF()), supportColor);
 
-                if (qFuzzyCompare(1 + length, 1 + 0) == false)
+                if (not qFuzzyIsNull(length))
                 {
                     QPointF fPoint = VToolShoulderPoint::FindPoint(second->toQPointF(), third->toQPointF(),
                                                                    first->toQPointF(), length);

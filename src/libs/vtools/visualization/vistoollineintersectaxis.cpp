@@ -75,7 +75,7 @@ void VisToolLineIntersectAxis::RefreshGeometry()
             {
                 QLineF axis;
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(axisPointId);
-                if (qFuzzyCompare(angle, -1))
+                if (VFuzzyComparePossibleNulls(angle, -1))
                 {
                     axis = Axis(third->toQPointF(), Visualization::scenePos);
                 }

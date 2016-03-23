@@ -74,7 +74,7 @@ void VisToolPointOfContact::RefreshGeometry()
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(radiusId);
                 DrawPoint(arc_point, third->toQPointF(), supportColor);
 
-                if (qFuzzyCompare(1 + radius, 1 + 0) == false)
+                if (not qFuzzyIsNull(radius))
                 {
                     QPointF fPoint = VToolPointOfContact::FindPoint(radius, third->toQPointF(), first->toQPointF(),
                                                                     second->toQPointF());

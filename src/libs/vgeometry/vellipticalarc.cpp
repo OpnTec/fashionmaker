@@ -198,12 +198,12 @@ QPointF VEllipticalArc::GetPoint (qreal angle) const
     {
         y = -y;
     }
-    else if (qFuzzyCompare(angle, 90))
+    else if (VFuzzyComparePossibleNulls(angle, 90))
     {
         x = 0;
         y = d->radius2;
     }
-    else if (qFuzzyCompare(angle, 270))
+    else if (VFuzzyComparePossibleNulls(angle, 270))
     {
         x = 0;
         y = -d->radius2;

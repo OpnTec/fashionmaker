@@ -389,9 +389,9 @@ qreal QmuParser::Diff(qreal *a_Var, qreal  a_fPos, qreal  a_fEpsilon) const
 
     // Backwards compatible calculation of epsilon inc case the user doesnt provide
     // his own epsilon
-    if (qFuzzyCompare(fEpsilon + 1, 1 + 0))
+    if (qFuzzyIsNull(fEpsilon))
     {
-        fEpsilon = (qFuzzyCompare(a_fPos + 1, 1 + 0)) ? static_cast<qreal>(1e-10) : static_cast<qreal>(1e-7) * a_fPos;
+        fEpsilon = qFuzzyIsNull(a_fPos) ? static_cast<qreal>(1e-10) : static_cast<qreal>(1e-7) * a_fPos;
     }
 
     *a_Var = a_fPos+2 * fEpsilon;  f[0] = Eval();

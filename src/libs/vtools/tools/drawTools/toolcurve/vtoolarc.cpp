@@ -244,7 +244,7 @@ void VToolArc::SetFormulaF1(const VFormula &value)
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
 
-        if (qFuzzyCompare(value.getDoubleValue() + 1, arc->GetEndAngle() + 1)==false)// Angles can't be equal
+        if (not VFuzzyComparePossibleNulls(value.getDoubleValue(), arc->GetEndAngle()))// Angles can't be equal
         {
             arc->SetFormulaF1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
             SaveOption(obj);
@@ -272,7 +272,7 @@ void VToolArc::SetFormulaF2(const VFormula &value)
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
         QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
-        if (qFuzzyCompare(value.getDoubleValue() + 1, arc->GetStartAngle() + 1)==false)// Angles can't be equal
+        if (not VFuzzyComparePossibleNulls(value.getDoubleValue(), arc->GetStartAngle()))// Angles can't be equal
         {
             arc->SetFormulaF2(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
             SaveOption(obj);

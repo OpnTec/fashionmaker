@@ -480,7 +480,7 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             delete cal;
 
             //if result equal 0
-            if (checkZero && qFuzzyCompare(1 + result, 1 + 0))
+            if (checkZero && qFuzzyIsNull(result))
             {
                 flag = false;
                 ChangeColor(labelEditFormula, Qt::red);

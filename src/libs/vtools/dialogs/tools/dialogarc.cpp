@@ -396,7 +396,7 @@ void DialogArc::CheckAngles()
         return;
     }
 
-    if (qFuzzyCompare(angleF1 + 1, angleF2 + 1))
+    if (VFuzzyComparePossibleNulls(angleF1, angleF2))
     {
         flagF1 = false;
         ChangeColor(ui->labelEditF1, Qt::red);

@@ -73,7 +73,7 @@ void VisToolNormal::RefreshGeometry()
             QLineF line_mouse(first->toQPointF(), second->toQPointF());
             DrawLine(line, line_mouse, supportColor);
 
-            if (qFuzzyCompare(1 + length, 1 + 0))
+            if (qFuzzyIsNull(length))
             {
                 QLineF normal = line_mouse.normalVector();
                 QPointF endRay = Ray(normal.p1(), normal.angle());

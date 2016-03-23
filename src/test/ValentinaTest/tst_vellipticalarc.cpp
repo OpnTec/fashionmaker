@@ -335,7 +335,7 @@ void TST_VEllipticalArc::TestGetPoints3()
     VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
     QVector<QPointF> points = arc.GetPoints();
 
-    if (qFuzzyCompare(arc.AngleArc(), 360.0))
+    if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
     {// calculated full ellipse square
         const qreal ellipseSquare = M_PI * radius1 * radius2;
         const qreal epsSquare = ellipseSquare * 0.5 / 100; // computing error 0.5 % from origin squere
@@ -361,7 +361,7 @@ void TST_VEllipticalArc::TestGetPoints4()
     const VPointF center;
     VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
 
-    if (qFuzzyCompare(arc.AngleArc(), 360.0))
+    if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
     {// calculated full ellipse length
         const qreal h = ((radius1-radius2)*(radius1-radius2))/((radius1+radius2)*(radius1+radius2));
         const qreal ellipseLength =  M_PI*(radius1+radius2)*(1+3*h/(10+qSqrt(4-3*h)));

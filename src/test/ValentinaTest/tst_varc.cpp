@@ -192,7 +192,7 @@ void TST_VArc::TestGetPoints()
     {
         qreal gSquere = 0.0;// geometry square
 
-        if (qFuzzyCompare(arc.AngleArc(), 360.0))
+        if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
         {// circle square
             gSquere = M_PI * radius * radius;
         }

@@ -98,7 +98,7 @@ void VisToolBisector::RefreshGeometry()
 
                 DrawLine(line2, QLineF(second->toQPointF(), third->toQPointF()), supportColor);
 
-                if (qFuzzyCompare(1 + length, 1 + 0) == false)
+                if (not qFuzzyIsNull(length))
                 {
                     qreal angle = VToolBisector::BisectorAngle(first->toQPointF(), second->toQPointF(),
                                                                third->toQPointF());
