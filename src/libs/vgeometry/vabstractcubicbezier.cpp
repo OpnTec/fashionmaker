@@ -346,7 +346,7 @@ void VAbstractCubicBezier::PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2,
                 double da1 = fabs(atan2(y4 - y3, x4 - x3) - atan2(y3 - y2, x3 - x2));
                 if (da1 >= M_PI)
                 {
-                    da1 = 2*M_PI - da1;
+                    da1 = M_2PI - da1;
                 }
 
                 if (da1 < m_angle_tolerance)
@@ -389,7 +389,7 @@ void VAbstractCubicBezier::PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2,
                 double da1 = fabs(atan2(y3 - y2, x3 - x2) - atan2(y2 - y1, x2 - x1));
                 if (da1 >= M_PI)
                 {
-                    da1 = 2*M_PI - da1;
+                    da1 = M_2PI - da1;
                 }
 
                 if (da1 < m_angle_tolerance)
@@ -437,11 +437,11 @@ void VAbstractCubicBezier::PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2,
                 double da2 = fabs(atan2(y4 - y3, x4 - x3) - k);
                 if (da1 >= M_PI)
                 {
-                    da1 = 2*M_PI - da1;
+                    da1 = M_2PI - da1;
                 }
                 if (da2 >= M_PI)
                 {
-                    da2 = 2*M_PI - da2;
+                    da2 = M_2PI - da2;
                 }
 
                 if (da1 + da2 < m_angle_tolerance)

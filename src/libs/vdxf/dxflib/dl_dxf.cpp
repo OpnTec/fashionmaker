@@ -200,7 +200,7 @@ bool DL_Dxf::readDxfGroups(std::stringstream& stream,
 
     // Read one group of the DXF file and chop the lines:
     if (DL_Dxf::getStrippedLine(groupCodeTmp, DL_DXF_MAXLINE, stream) &&
-        DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, stream, false) ) 
+        DL_Dxf::getStrippedLine(groupValue, DL_DXF_MAXLINE, stream, false) )
     {
 
         groupCode = static_cast<quint32>(toInt(groupCodeTmp));
@@ -230,7 +230,7 @@ bool DL_Dxf::readDxfGroups(std::stringstream& stream,
  * @todo Is it a problem if line is blank (i.e., newline only)?
  *      Then, when function returns, (s==NULL).
  */
-bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp, bool stripSpace) 
+bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp, bool stripSpace)
 {
     if (!feof(fp))
     {
@@ -270,7 +270,7 @@ bool DL_Dxf::getStrippedLine(std::string& s, quint32 size, FILE *fp, bool stripS
  * Same as above but for stringstreams.
  */
 bool DL_Dxf::getStrippedLine(std::string &s, quint32 size,
-                             std::stringstream& stream, bool stripSpace) 
+                             std::stringstream& stream, bool stripSpace)
 {
 
     if (!stream.eof())
@@ -312,21 +312,21 @@ bool DL_Dxf::stripWhiteSpace(char** s, bool stripSpace)
     // Is last character CR or LF?
     while ( (lastChar >= 0) &&
             (((*s)[lastChar] == 10) || ((*s)[lastChar] == 13) ||
-             (stripSpace && ((*s)[lastChar] == ' ' || ((*s)[lastChar] == '\t')))) ) 
+             (stripSpace && ((*s)[lastChar] == ' ' || ((*s)[lastChar] == '\t')))) )
     {
         (*s)[lastChar] = '\0';
         lastChar--;
     }
 
     // Skip whitespace, excluding \n, at beginning of line
-    if (stripSpace) 
+    if (stripSpace)
     {
-        while ((*s)[0]==' ' || (*s)[0]=='\t') 
+        while ((*s)[0]==' ' || (*s)[0]=='\t')
         {
             ++(*s);
         }
     }
-    
+
     return ((*s) ? true : false);
 }
 
@@ -1275,7 +1275,7 @@ void DL_Dxf::addEllipse(DL_CreationInterface* creationInterface)
                      getRealValue(31, 0.0),
                      getRealValue(40, 1.0),
                      getRealValue(41, 0.0),
-                     getRealValue(42, 2*M_PI));
+                     getRealValue(42, M_2PI));
 
     creationInterface->addEllipse(d);
 }
@@ -1395,7 +1395,7 @@ void DL_Dxf::addMText(DL_CreationInterface* creationInterface)
         }
         else
         {
-            angle = (getRealValue(50, 0.0)*2*M_PI)/360.0;
+            angle = (getRealValue(50, 0.0)*M_2PI)/360.0;
         }
     }
     else if (hasValue(11) && hasValue(21))
@@ -1407,11 +1407,11 @@ void DL_Dxf::addMText(DL_CreationInterface* creationInterface)
         {
             if (y>0.0)
             {
-                angle = M_PI/2.0;
+                angle = M_PI_2;
             }
             else
             {
-                angle = M_PI/2.0*3.0;
+                angle = M_PI_2*3.0;
             }
         }
         else
@@ -1481,7 +1481,7 @@ bool DL_Dxf::handleXRecordData(DL_CreationInterface* creationInterface)
     if (groupCode<=9 ||
         groupCode==100 || groupCode==102 || groupCode==105 ||
         (groupCode>=300 && groupCode<=369) ||
-        (groupCode>=1000 && groupCode<=1009)) 
+        (groupCode>=1000 && groupCode<=1009))
     {
 
         creationInterface->addXRecordString(static_cast<int>(groupCode), groupValue);
@@ -1853,7 +1853,7 @@ void DL_Dxf::addText(DL_CreationInterface* creationInterface)
         // style
         getStringValue(7, ""),
         // angle
-        (getRealValue(50, 0.0)*2*M_PI)/360.0);
+        (getRealValue(50, 0.0)*M_2PI)/360.0);
 
     creationInterface->addText(d);
 }
@@ -1892,7 +1892,7 @@ void DL_Dxf::addAttribute(DL_CreationInterface* creationInterface)
         // style
         getStringValue(7, ""),
         // angle
-        (getRealValue(50, 0.0)*2*M_PI)/360.0);
+        (getRealValue(50, 0.0)*M_2PI)/360.0);
 
     creationInterface->addAttribute(d);
 }
@@ -2272,7 +2272,7 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.defined = true;
                     return true;
                 default:
-					break;
+                    break;
             }
         }
 
@@ -2291,10 +2291,10 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.radius = toReal(groupValue);
                     return true;
                 case 50:
-                    hatchEdge.angle1 = toReal(groupValue)/360.0*2*M_PI;
+                    hatchEdge.angle1 = toReal(groupValue)/360.0*M_2PI;
                     return true;
                 case 51:
-                    hatchEdge.angle2 = toReal(groupValue)/360.0*2*M_PI;
+                    hatchEdge.angle2 = toReal(groupValue)/360.0*M_2PI;
                     return true;
                 case 73:
                     hatchEdge.ccw = static_cast<bool>(toInt(groupValue));
@@ -2326,10 +2326,10 @@ bool DL_Dxf::handleHatchData(DL_CreationInterface* creationInterface)
                     hatchEdge.ratio = toReal(groupValue);
                     return true;
                 case 50:
-                    hatchEdge.angle1 = toReal(groupValue)/360.0*2*M_PI;
+                    hatchEdge.angle1 = toReal(groupValue)/360.0*M_2PI;
                     return true;
                 case 51:
-                    hatchEdge.angle2 = toReal(groupValue)/360.0*2*M_PI;
+                    hatchEdge.angle2 = toReal(groupValue)/360.0*M_2PI;
                     return true;
                 case 73:
                     hatchEdge.ccw = static_cast<bool>(toInt(groupValue));
@@ -2581,7 +2581,7 @@ void DL_Dxf::writeHeader(DL_WriterA& dw) const
             break;
         case DL_Codes::AC1015:
             dw.dxfString(1, "AC1015");
-		    break;
+            break;
         case DL_Codes::AC1009_MIN:
             // minimalistic DXF version is unidentified in file:
             break;
@@ -3050,11 +3050,11 @@ void DL_Dxf::writeInsert(DL_WriterA& dw,
     if (version==DL_VERSION_2000)
     {
         dw.dxfString(100, "AcDbEntity");
-        if (data.cols!=1 || data.rows!=1) 
+        if (data.cols!=1 || data.rows!=1)
         {
             dw.dxfString(100, "AcDbMInsertBlock");
         }
-        else 
+        else
         {
             dw.dxfString(100, "AcDbBlockReference");
         }
@@ -3133,7 +3133,7 @@ void DL_Dxf::writeMText(DL_WriterA& dw,
     dw.dxfString(7, data.style);
 
     // since dxflib 2.0.2.1: degrees not rad (error in autodesk dxf doc)
-    dw.dxfReal(50, data.angle/(2.0*M_PI)*360.0);
+    dw.dxfReal(50, data.angle/(M_2PI)*360.0);
 
     dw.dxfInt(73, data.lineSpacingStyle);
     dw.dxfReal(44, data.lineSpacingFactor);
@@ -3165,7 +3165,7 @@ void DL_Dxf::writeText(DL_WriterA& dw,
     dw.dxfReal(30, data.ipz);
     dw.dxfReal(40, data.height);
     dw.dxfString(1, data.text);
-    dw.dxfReal(50, data.angle/(2*M_PI)*360.0);
+    dw.dxfReal(50, data.angle/(M_2PI)*360.0);
     dw.dxfReal(41, data.xScaleFactor);
     dw.dxfString(7, data.style);
 
@@ -3201,7 +3201,7 @@ void DL_Dxf::writeAttribute(DL_WriterA& dw,
     dw.dxfReal(30, data.ipz);
     dw.dxfReal(40, data.height);
     dw.dxfString(1, data.text);
-    dw.dxfReal(50, data.angle/(2*M_PI)*360.0);
+    dw.dxfReal(50, data.angle/(M_2PI)*360.0);
     dw.dxfReal(41, data.xScaleFactor);
     dw.dxfString(7, data.style);
 
@@ -3366,7 +3366,7 @@ void DL_Dxf::writeDimLinear(DL_WriterA& dw,
     dw.dxfReal(24, edata.dpy2);
     dw.dxfReal(34, 0.0);
 
-    dw.dxfReal(50, edata.angle/(2.0*M_PI)*360.0);
+    dw.dxfReal(50, edata.angle/(M_2PI)*360.0);
 
     if (version==DL_VERSION_2000)
     {
@@ -3917,8 +3917,8 @@ void DL_Dxf::writeHatchEdge(DL_WriterA& dw,
             dw.dxfReal(10, data.cx);
             dw.dxfReal(20, data.cy);
             dw.dxfReal(40, data.radius);
-            dw.dxfReal(50, data.angle1/(2*M_PI)*360.0);
-            dw.dxfReal(51, data.angle2/(2*M_PI)*360.0);
+            dw.dxfReal(50, data.angle1/(M_2PI)*360.0);
+            dw.dxfReal(51, data.angle2/(M_2PI)*360.0);
             dw.dxfInt(73, static_cast<int>((data.ccw)));
             break;
 
@@ -3929,8 +3929,8 @@ void DL_Dxf::writeHatchEdge(DL_WriterA& dw,
             dw.dxfReal(11, data.mx);
             dw.dxfReal(21, data.my);
             dw.dxfReal(40, data.ratio);
-            dw.dxfReal(50, data.angle1/(2*M_PI)*360.0);
-            dw.dxfReal(51, data.angle2/(2*M_PI)*360.0);
+            dw.dxfReal(50, data.angle1/(M_2PI)*360.0);
+            dw.dxfReal(51, data.angle2/(M_2PI)*360.0);
             dw.dxfInt(73, static_cast<int>((data.ccw)));
             break;
 
@@ -3992,7 +3992,7 @@ int DL_Dxf::writeImage(DL_WriterA& dw,
                        const DL_Attributes& attrib)
 {
 
-    /*if (data.file.empty()) 
+    /*if (data.file.empty())
     {
         std::cerr << "DL_Dxf::writeImage: "
                   << "Image file must not be empty\n";
@@ -4055,7 +4055,7 @@ void DL_Dxf::writeImageDef(DL_WriterA& dw,
                            const DL_ImageData& data) const
 {
 
-    /*if (data.file.empty()) 
+    /*if (data.file.empty())
     {
         std::cerr << "DL_Dxf::writeImage: "
                   << "Image file must not be empty\n";
@@ -4065,7 +4065,7 @@ void DL_Dxf::writeImageDef(DL_WriterA& dw,
     dw.dxfString(0, "IMAGEDEF");
     if (version==DL_VERSION_2000)
     {
-		dw.dxfHex(5, handle);    
+        dw.dxfHex(5, handle);
     }
 
     if (version==DL_VERSION_2000) //-V581
