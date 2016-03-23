@@ -47,6 +47,7 @@ private slots:
     void GetSegmentPoints_TestPuzzle();
     void GetSegmentPoints_NullSegment();
     void CompareThreeWays();
+    void TestParametrT();
 
 private:
     Q_DISABLE_COPY(TST_VSpline)

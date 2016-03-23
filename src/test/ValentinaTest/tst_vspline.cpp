@@ -294,6 +294,20 @@ void TST_VSpline::CompareThreeWays()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::TestParametrT()
+{
+    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+
+    VSpline spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
+
+    const qreal halfLength = spl.GetLength()/2.0;
+    const qreal resLength = spl.LengthT(spl.GetParmT(halfLength));
+
+    QVERIFY(qAbs(halfLength - resLength) < UnitConvertor(0.5, Unit::Mm, Unit::Px));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VSpline::CompareSplines(const VSpline &spl1, const VSpline &spl2) const
 {
     QCOMPARE(spl1.GetP1().toQPointF().toPoint(), spl2.GetP1().toQPointF().toPoint());

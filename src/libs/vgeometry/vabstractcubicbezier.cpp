@@ -83,17 +83,7 @@ QPointF VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &
         length = GetLength()*0.98;
     }
 
-    const qreal eps = 0.001 * qAbs(length);
-    qreal parT = 0.5;
-    qreal step = parT;
-    qreal splLength = LengthT(parT);
-
-    while (qAbs(splLength - length) > eps)
-    {
-        step = step/2.0;
-        splLength > length ? parT -= step : parT += step;
-        splLength = LengthT(parT);
-    }
+    const qreal parT = GetParmT(length);
 
     QLineF seg1_2 ( GetP1 ().toQPointF(), GetControlPoint1 () );
     seg1_2.setLength(seg1_2.length () * parT);
@@ -135,6 +125,32 @@ QString VAbstractCubicBezier::NameForHistory(const QString &toolName) const
         name += QString("_%1").arg(GetDuplicate());
     }
     return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractCubicBezier::GetParmT(qreal length) const
+{
+    if (length < 0)
+    {
+        return 0;
+    }
+    else if (length > GetLength())
+    {
+        length = GetLength();
+    }
+
+    const qreal eps = 0.001 * length;
+    qreal parT = 0.5;
+    qreal step = parT;
+    qreal splLength = LengthT(parT);
+
+    while (qAbs(splLength - length) > eps)
+    {
+        step /= 2.0;
+        splLength > length ? parT -= step : parT += step;
+        splLength = LengthT(parT);
+    }
+    return parT;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

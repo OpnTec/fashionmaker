@@ -48,6 +48,9 @@ public:
 
     virtual QString NameForHistory(const QString &toolName) const Q_DECL_OVERRIDE;
 
+    qreal GetParmT(qreal length) const;
+    qreal LengthT(qreal t) const;
+
 protected:
     virtual void CreateName() Q_DECL_OVERRIDE;
 
@@ -60,9 +63,6 @@ protected:
 
     virtual QPointF GetControlPoint1() const =0;
     virtual QPointF GetControlPoint2() const =0;
-
-private:
-    qreal LengthT(qreal t) const;
 };
 
 #endif // VABSTRACTCUBICBEZIER_H
