@@ -58,7 +58,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPropertyModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    explicit VPropertyModel(QObject * parent = 0);
+    explicit VPropertyModel(QObject * parent = nullptr);
     virtual ~VPropertyModel() Q_DECL_OVERRIDE;
 
     //! Adds the property to the model and attaches it to the parentid

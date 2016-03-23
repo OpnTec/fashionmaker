@@ -90,12 +90,12 @@ private:
     QGroupBox *drawGroup;
     QGroupBox *toolBarGroup;
 
-    QGroupBox *SaveGroup();
-    QGroupBox *LangGroup();
-    QGroupBox *PMSystemGroup();
-    QGroupBox *SendGroup();
-    QGroupBox *DrawGroup();
-    QGroupBox *ToolBarGroup();
+    QGroupBox *SaveGroup() Q_REQUIRED_RESULT;
+    QGroupBox *LangGroup() Q_REQUIRED_RESULT;
+    QGroupBox *PMSystemGroup() Q_REQUIRED_RESULT;
+    QGroupBox *SendGroup() Q_REQUIRED_RESULT;
+    QGroupBox *DrawGroup() Q_REQUIRED_RESULT;
+    QGroupBox *ToolBarGroup() Q_REQUIRED_RESULT;
     void      SetLabelComboBox(const QStringList &list);
 
     void      RetranslateUi();

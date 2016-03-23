@@ -50,7 +50,7 @@ class VLayoutGenerator :public QObject
 {
     Q_OBJECT
 public:
-    explicit VLayoutGenerator(QObject *parent = 0);
+    explicit VLayoutGenerator(QObject *parent = nullptr);
     virtual ~VLayoutGenerator() Q_DECL_OVERRIDE;
 
     void SetDetails(const QVector<VLayoutDetail> &details);
@@ -74,8 +74,8 @@ public:
 
     LayoutErrors State() const;
 
-    QList<QGraphicsItem *> GetPapersItems() const;
-    QList<QList<QGraphicsItem *>> GetAllDetails() const;
+    QList<QGraphicsItem *> GetPapersItems() const Q_REQUIRED_RESULT;
+    QList<QList<QGraphicsItem *>> GetAllDetails() const Q_REQUIRED_RESULT;
 
     bool GetRotate() const;
     void SetRotate(bool value);

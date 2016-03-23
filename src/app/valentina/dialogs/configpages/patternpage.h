@@ -56,9 +56,9 @@ private:
     QGroupBox *undoGroup;
     QSpinBox  *undoCount;
     QLabel    *countStepsLabel;
-    QGroupBox *UserGroup();
-    QGroupBox *GraphOutputGroup();
-    QGroupBox *UndoGroup();
+    QGroupBox *UserGroup() Q_REQUIRED_RESULT;
+    QGroupBox *GraphOutputGroup() Q_REQUIRED_RESULT;
+    QGroupBox *UndoGroup() Q_REQUIRED_RESULT;
 
     void      RetranslateUi();
 };

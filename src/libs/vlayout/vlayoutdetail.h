@@ -77,7 +77,7 @@ public:
     bool isNull() const;
     qint64 Square() const;
     QPainterPath ContourPath() const;
-    QGraphicsItem *GetItem() const;
+    QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
 
 private:
     QSharedDataPointer<VLayoutDetailData> d;

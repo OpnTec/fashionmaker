@@ -73,8 +73,8 @@ public:
 
     bool ArrangeDetail(const VLayoutDetail &detail, volatile bool &stop);
     int  Count() const;
-    QGraphicsRectItem *GetPaperItem(bool autoCrop) const;
-    QList<QGraphicsItem *> GetItemDetails() const;
+    QGraphicsRectItem *GetPaperItem(bool autoCrop) const Q_REQUIRED_RESULT;
+    QList<QGraphicsItem *> GetItemDetails() const Q_REQUIRED_RESULT;
 
     QVector<VLayoutDetail> GetDetails() const;
     void                   SetDetails(const QList<VLayoutDetail>& details);

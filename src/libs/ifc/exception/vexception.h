@@ -48,7 +48,7 @@ public:
 
     Q_NORETURN virtual void raise() const Q_DECL_OVERRIDE;
     // cppcheck-suppress unusedFunction
-    virtual VException *clone() const Q_DECL_OVERRIDE;
+    virtual VException *clone() const Q_DECL_OVERRIDE Q_REQUIRED_RESULT;
     virtual QString ErrorMessage() const;
     virtual QString DetailedInformation() const;
     QString         WhatUtf8() const V_NOEXCEPT_EXPR (true);

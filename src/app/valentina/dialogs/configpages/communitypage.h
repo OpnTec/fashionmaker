@@ -85,9 +85,9 @@ private:
     void ProxyCheckChanged();
     void PasswordCheckChanged();
 
-    QGroupBox *ServerGroup();
-    QGroupBox *ProxyGroup();
-    QGroupBox *UserGroup();
+    QGroupBox *ServerGroup() Q_REQUIRED_RESULT;
+    QGroupBox *ProxyGroup() Q_REQUIRED_RESULT;
+    QGroupBox *UserGroup() Q_REQUIRED_RESULT;
 
     void RetranslateUi();
 };

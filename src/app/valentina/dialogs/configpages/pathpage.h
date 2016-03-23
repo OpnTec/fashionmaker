@@ -55,7 +55,7 @@ private:
     QTableWidget *pathTable;
     QGroupBox    *pathGroup;
 
-    QGroupBox    *PathGroup();
+    QGroupBox    *PathGroup() Q_REQUIRED_RESULT;
     void         InitTable();
     void         RetranslateUi();
 };

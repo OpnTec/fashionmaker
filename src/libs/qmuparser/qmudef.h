@@ -42,6 +42,7 @@ inline QString NameRegExp()
     #pragma GCC diagnostic pop
 #endif
 
+static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2) Q_REQUIRED_RESULT;
 static inline bool QmuFuzzyComparePossibleNulls(double p1, double p2)
 {
     if(qFuzzyIsNull(p1))

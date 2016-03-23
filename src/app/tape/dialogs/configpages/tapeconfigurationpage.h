@@ -86,9 +86,9 @@ private:
     QComboBox *defHeightCombo;
     QComboBox *defSizeCombo;
 
-    QGroupBox *LangGroup();
-    QGroupBox *PMSystemGroup();
-    QGroupBox *GradationGroup();
+    QGroupBox *LangGroup() Q_REQUIRED_RESULT;
+    QGroupBox *PMSystemGroup() Q_REQUIRED_RESULT;
+    QGroupBox *GradationGroup() Q_REQUIRED_RESULT;
     void      SetLabelComboBox(const QStringList &list);
     void      RetranslateUi();
 };

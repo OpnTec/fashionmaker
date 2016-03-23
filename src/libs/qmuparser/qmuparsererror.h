@@ -150,7 +150,7 @@ public:
     const QString& GetToken() const;
     EErrorCodes    GetCode() const;
     Q_NORETURN virtual void   raise() const Q_DECL_OVERRIDE;
-    virtual QmuParserError *clone() const Q_DECL_OVERRIDE;
+    virtual QmuParserError *clone() const Q_DECL_OVERRIDE Q_REQUIRED_RESULT;
 private:
     QString m_sMsg;      ///< The message string
     QString m_sExpr;     ///< Formula string

@@ -46,7 +46,7 @@ public:
     //! Creates a new property of a certain type and assigns a name and description (otionally)
     //! \param type The type of the property as string
     //! \return Returns the created property or NULL if it couldn't be be created
-    virtual VProperty* createProperty(const QString& type, const QString &name) Q_DECL_OVERRIDE;
+    virtual VProperty* createProperty(const QString& type, const QString &name) Q_DECL_OVERRIDE Q_REQUIRED_RESULT;
 };
 
 }
