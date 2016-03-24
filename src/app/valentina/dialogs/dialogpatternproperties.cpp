@@ -694,10 +694,14 @@ void DialogPatternProperties::SaveImage()
     QByteArray byteArray;
     byteArray.append(doc->GetImage().toUtf8());
     QByteArray ba = QByteArray::fromBase64(byteArray);
-
     QString extension = "." + doc->GetImageExtension();
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"));
-    QFile file(filename + extension);
+    QString filter = "Images (*" + extension + ")";
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), "untitled", filter, &filter);
+    if (not filename.endsWith(extension.toUpper()))
+    {
+        filename.append(extension);
+    }
+    QFile file(filename);
     if (file.open(QIODevice::WriteOnly))
     {
         file.write(ba);
