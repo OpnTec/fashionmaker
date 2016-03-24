@@ -18,7 +18,7 @@
 - [#458] Issue with segment of curve.
 - Fixed disappearing curve if start and finish points of a segment are equal.
 - Fixed bug case where an open equidistant point is too far from a main path.
-- Fixed wrong handling with true darts points inside tool detail.
+- [#462] Error while creating Detail/Seam Allowance using points made with True Dart tool.
 
 # Version 0.4.3 March 6, 2016
 - [#456] Crash: broken formula + clicking on the f(x) symbol.
