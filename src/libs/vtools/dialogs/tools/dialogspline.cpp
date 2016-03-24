@@ -32,7 +32,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../../visualization/vistoolspline.h"
+#include "../../visualization/path/vistoolspline.h"
 #include "../support/dialogeditwrongformula.h"
 
 #include <QDebug>

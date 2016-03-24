@@ -30,7 +30,7 @@
 #include "ui_dialogsplinepath.h"
 #include "../vgeometry/vsplinepoint.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../../visualization/vistoolsplinepath.h"
+#include "../../visualization/path/vistoolsplinepath.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../qmuparser/qmuparsererror.h"
 

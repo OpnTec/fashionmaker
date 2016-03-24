@@ -28,7 +28,7 @@
 
 #include "dialogalongline.h"
 #include "ui_dialogalongline.h"
-#include "../../visualization/vistoolalongline.h"
+#include "../../visualization/line/vistoolalongline.h"
 #include "../../tools/vabstracttool.h"
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../../../vpatterndb/vtranslatevars.h"

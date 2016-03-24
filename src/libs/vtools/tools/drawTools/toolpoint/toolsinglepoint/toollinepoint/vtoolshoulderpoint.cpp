@@ -31,7 +31,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../../../../../dialogs/tools/dialogshoulderpoint.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../../visualization/vistoolshoulderpoint.h"
+#include "../../../../../visualization/line/vistoolshoulderpoint.h"
 
 const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
 

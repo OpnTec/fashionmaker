@@ -27,7 +27,7 @@
  *************************************************************************/
 
 #include "vistoolpointofintersectioncurves.h"
-#include "../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
+#include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionCurves::VisToolPointOfIntersectionCurves(const VContainer *data, QGraphicsItem *parent)

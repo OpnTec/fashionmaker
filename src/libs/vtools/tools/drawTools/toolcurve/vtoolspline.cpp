@@ -30,7 +30,7 @@
 #include "../vgeometry/vspline.h"
 #include "../../../dialogs/tools/dialogspline.h"
 #include "../../../undocommands/movespline.h"
-#include "../../../visualization/vistoolspline.h"
+#include "../../../visualization/path/vistoolspline.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../qmuparser/qmutokenparser.h"
 

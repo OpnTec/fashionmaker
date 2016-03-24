@@ -33,7 +33,7 @@
 #include "../../../../../dialogs/tools/dialogendline.h"
 #include "../../../../../dialogs/support/dialogeditwrongformula.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../../visualization/vistoolendline.h"
+#include "../../../../../visualization/line/vistoolendline.h"
 
 const QString VToolEndLine::ToolType = QStringLiteral("endLine");
 

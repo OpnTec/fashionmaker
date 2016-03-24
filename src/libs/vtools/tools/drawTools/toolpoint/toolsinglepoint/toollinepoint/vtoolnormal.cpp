@@ -31,7 +31,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../../../../../dialogs/tools/dialognormal.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../../visualization/vistoolnormal.h"
+#include "../../../../../visualization/line/vistoolnormal.h"
 
 const QString VToolNormal::ToolType = QStringLiteral("normal");
 

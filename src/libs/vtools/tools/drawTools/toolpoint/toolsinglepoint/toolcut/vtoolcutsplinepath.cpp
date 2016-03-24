@@ -31,7 +31,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../../../../../dialogs/tools/dialogcutsplinepath.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../../visualization/vistoolcutsplinepath.h"
+#include "../../../../../visualization/path/vistoolcutsplinepath.h"
 #include "../vgeometry/vsplinepath.h"
 
 const QString VToolCutSplinePath::ToolType       = QStringLiteral("cutSplinePath");

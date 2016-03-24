@@ -29,7 +29,7 @@
 #include "vtooltruedarts.h"
 #include "../../../../dialogs/tools/dialogtruedarts.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../visualization/vistooltruedarts.h"
+#include "../../../../visualization/line/vistooltruedarts.h"
 
 const QString VToolTrueDarts::ToolType = QStringLiteral("trueDarts");
 

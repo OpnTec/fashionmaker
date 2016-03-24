@@ -29,7 +29,7 @@
 #include "vistooltruedarts.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
+#include "../../tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolTrueDarts::VisToolTrueDarts(const VContainer *data, QGraphicsItem *parent)

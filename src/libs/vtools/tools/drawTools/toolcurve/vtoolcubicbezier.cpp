@@ -30,7 +30,7 @@
 #include "../vgeometry/vcubicbezier.h"
 #include "../../../dialogs/tools/dialogcubicbezier.h"
 #include "../../../undocommands/movespline.h"
-#include "../../../visualization/vistoolcubicbezier.h"
+#include "../../../visualization/path/vistoolcubicbezier.h"
 
 const QString VToolCubicBezier::ToolType = QStringLiteral("cubicBezier");
 

@@ -32,7 +32,7 @@
 #include "../../../vgeometry/varc.h"
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolcutarc.h"
+#include "../../visualization/path/vistoolcutarc.h"
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../support/dialogeditwrongformula.h"
 

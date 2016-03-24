@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vistoolcutspline.cpp
+ **  @file   vistoolcutsplinepath.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   6 9, 2014
+ **  @date   7 9, 2014
  **
  **  @brief
  **  @copyright
@@ -26,18 +26,19 @@
  **
  *************************************************************************/
 
-#include "vistoolcutspline.h"
-#include "../../vgeometry/vspline.h"
-#include "../../vpatterndb/vcontainer.h"
+#include "vistoolcutsplinepath.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../../tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCutSpline::VisToolCutSpline(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent), point(nullptr), spl1(nullptr), spl2(nullptr), length(0)
+VisToolCutSplinePath::VisToolCutSplinePath(const VContainer *data, QGraphicsItem *parent)
+    :VisPath(data, parent), point(nullptr), splPath1(nullptr), splPath2(nullptr), length(0)
 {
-    spl1 = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
-    spl1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    spl2 = InitItem<QGraphicsPathItem>(Qt::darkRed, this);
-    spl2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    splPath1 = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
+    splPath1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    splPath2 = InitItem<QGraphicsPathItem>(Qt::darkRed, this);
+    splPath2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
 
     point = InitPoint(mainColor, this);
     point->setZValue(2);
@@ -45,38 +46,40 @@ VisToolCutSpline::VisToolCutSpline(const VContainer *data, QGraphicsItem *parent
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCutSpline::~VisToolCutSpline()
+VisToolCutSplinePath::~VisToolCutSplinePath()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCutSpline::RefreshGeometry()
+void VisToolCutSplinePath::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
     {
-        const auto spl = Visualization::data->GeometricObject<VAbstractCubicBezier>(object1Id);
-        DrawPath(this, spl->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        const auto splPath = Visualization::data->GeometricObject<VAbstractCubicBezierPath>(object1Id);
+        DrawPath(this, splPath->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
 
         if (not qFuzzyIsNull(length))
         {
-            QPointF spl1p2;
-            QPointF spl1p3;
-            QPointF spl2p2;
-            QPointF spl2p3;
-            const QPointF p = spl->CutSpline (length, spl1p2, spl1p3, spl2p2, spl2p3 );
+            VSplinePath *spPath1 = nullptr;
+            VSplinePath *spPath2 = nullptr;
+            VPointF *p = VToolCutSplinePath::CutSplinePath(length, splPath, "X", &spPath1, &spPath2);
+            SCASSERT(p != nullptr);
+            SCASSERT(spPath1 != nullptr);
+            SCASSERT(spPath2 != nullptr);
 
-            const VSpline sp1 = VSpline(spl->GetP1(), spl1p2, spl1p3, p);
-            const VSpline sp2 = VSpline(p, spl2p2, spl2p3, spl->GetP4());
+            DrawPoint(point, p->toQPointF(), mainColor);
+            delete p;
 
-            DrawPoint(point, p, mainColor);
+            DrawPath(splPath1, spPath1->GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
+            DrawPath(splPath2, spPath2->GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
 
-            DrawPath(spl1, sp1.GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
-            DrawPath(spl2, sp2.GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
+            delete spPath1;
+            delete spPath2;
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCutSpline::setLength(const QString &expression)
+void VisToolCutSplinePath::setLength(const QString &expression)
 {
     length = FindLength(expression, Visualization::data->PlainVariables());
 }

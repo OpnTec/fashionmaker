@@ -28,7 +28,7 @@
 
 #include "dialogpointofintersectioncurves.h"
 #include "ui_dialogpointofintersectioncurves.h"
-#include "../../visualization/vistoolpointofintersectioncurves.h"
+#include "../../visualization/path/vistoolpointofintersectioncurves.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContainer *data, const quint32 &toolId,

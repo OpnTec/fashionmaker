@@ -31,7 +31,7 @@
 
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../../visualization/vistoolpointfromarcandtangent.h"
+#include "../../visualization/line/vistoolpointfromarcandtangent.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------

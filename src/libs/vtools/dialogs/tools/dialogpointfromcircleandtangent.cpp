@@ -32,7 +32,7 @@
 #include "../../../vgeometry/vpointf.h"
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolpointfromcircleandtangent.h"
+#include "../../visualization/line/vistoolpointfromcircleandtangent.h"
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../support/dialogeditwrongformula.h"
 

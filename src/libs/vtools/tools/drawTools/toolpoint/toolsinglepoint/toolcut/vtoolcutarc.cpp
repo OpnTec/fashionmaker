@@ -32,7 +32,7 @@
 #include "../../../../../dialogs/tools/dialogcutarc.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/varc.h"
-#include "../../../../../visualization/vistoolcutarc.h"
+#include "../../../../../visualization/path/vistoolcutarc.h"
 
 const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
 

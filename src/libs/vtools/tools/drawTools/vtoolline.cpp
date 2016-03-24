@@ -31,7 +31,7 @@
 #include <QKeyEvent>
 #include "../vgeometry/vpointf.h"
 #include "../../dialogs/tools/dialogline.h"
-#include "../../visualization/vistoolline.h"
+#include "../../visualization/line/vistoolline.h"
 
 const QString VToolLine::TagName = QStringLiteral("line");
 

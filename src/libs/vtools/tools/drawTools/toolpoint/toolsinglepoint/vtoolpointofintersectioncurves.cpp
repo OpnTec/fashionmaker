@@ -28,7 +28,7 @@
 
 #include "vtoolpointofintersectioncurves.h"
 #include "../../../../dialogs/tools/dialogpointofintersectioncurves.h"
-#include "../../../../visualization/vistoolpointofintersectioncurves.h"
+#include "../../../../visualization/path/vistoolpointofintersectioncurves.h"
 
 const QString VToolPointOfIntersectionCurves::ToolType = QStringLiteral("pointOfIntersectionCurves");
 

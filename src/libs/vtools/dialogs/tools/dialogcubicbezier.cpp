@@ -28,7 +28,7 @@
 
 #include "dialogcubicbezier.h"
 #include "ui_dialogcubicbezier.h"
-#include "../../visualization/vistoolcubicbezier.h"
+#include "../../visualization/path/vistoolcubicbezier.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezier::DialogCubicBezier(const VContainer *data, const quint32 &toolId, QWidget *parent)

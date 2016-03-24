@@ -32,7 +32,7 @@
 #include "../../../vgeometry/vspline.h"
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolcutspline.h"
+#include "../../visualization/path/vistoolcutspline.h"
 #include "../support/dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------

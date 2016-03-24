@@ -29,7 +29,7 @@
 #include "vtoolsplinepath.h"
 #include "../../../dialogs/tools/dialogsplinepath.h"
 #include "../../../undocommands/movesplinepath.h"
-#include "../../../visualization/vistoolsplinepath.h"
+#include "../../../visualization/path/vistoolsplinepath.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../qmuparser/qmutokenparser.h"
 

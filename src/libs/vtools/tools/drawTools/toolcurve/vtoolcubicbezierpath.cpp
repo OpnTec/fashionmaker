@@ -28,7 +28,7 @@
 
 #include "vtoolcubicbezierpath.h"
 #include "../../../dialogs/tools/dialogcubicbezierpath.h"
-#include "../../../visualization/vistoolcubicbezierpath.h"
+#include "../../../visualization/path/vistoolcubicbezierpath.h"
 
 const QString VToolCubicBezierPath::ToolType = QStringLiteral("cubicBezierPath");
 

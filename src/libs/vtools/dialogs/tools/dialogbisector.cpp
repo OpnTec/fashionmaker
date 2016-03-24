@@ -32,7 +32,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolbisector.h"
+#include "../../visualization/line/vistoolbisector.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
 #include "../support/dialogeditwrongformula.h"

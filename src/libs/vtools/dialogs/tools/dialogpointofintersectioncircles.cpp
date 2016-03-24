@@ -32,7 +32,7 @@
 #include "../../../vgeometry/vpointf.h"
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
-#include "../../visualization/vistoolpointofintersectioncircles.h"
+#include "../../visualization/line/vistoolpointofintersectioncircles.h"
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../support/dialogeditwrongformula.h"
 

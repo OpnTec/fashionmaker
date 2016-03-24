@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vistoolcutarc.cpp
+ **  @file   vistoolarc.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   15 8, 2014
  **
@@ -26,51 +26,52 @@
  **
  *************************************************************************/
 
-#include "vistoolcutarc.h"
-#include "../../vgeometry/varc.h"
-#include "../../vpatterndb/vcontainer.h"
+#include "vistoolarc.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/varc.h"
+#include "../vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCutArc::VisToolCutArc(const VContainer *data, QGraphicsItem *parent)
-    :VisPath(data, parent), point(nullptr), arc1(nullptr), arc2(nullptr), length(0)
+VisToolArc::VisToolArc(const VContainer *data, QGraphicsItem *parent)
+    :VisPath(data, parent), arcCenter(nullptr), radius(0), f1(0), f2(0)
 {
-    arc1 = InitItem<QGraphicsPathItem>(Qt::darkGreen, this);
-    arc1->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-    arc2 = InitItem<QGraphicsPathItem>(Qt::darkRed, this);
-    arc2->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
-
-    point = InitPoint(mainColor, this);
-    point->setZValue(2);
-    point->setFlag(QGraphicsItem::ItemStacksBehindParent, false);
+    arcCenter = InitPoint(mainColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VisToolCutArc::~VisToolCutArc()
+VisToolArc::~VisToolArc()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCutArc::RefreshGeometry()
+void VisToolArc::RefreshGeometry()
 {
     if (object1Id > NULL_ID)
     {
-        const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(object1Id);
-        DrawPath(this, arc->GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
+        const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
+        DrawPoint(arcCenter, first->toQPointF(), supportColor);
 
-        if (not qFuzzyIsNull(length))
+        if (not qFuzzyIsNull(radius) && f1 >= 0 && f2 >= 0 && not VFuzzyComparePossibleNulls(f1, f2))
         {
-            VArc ar1;
-            VArc ar2;
-            QPointF p = arc->CutArc(length, ar1, ar2);
-            DrawPoint(point, p, mainColor);
-
-            DrawPath(arc1, ar1.GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
-            DrawPath(arc2, ar2.GetPath(PathDirection::Show), Qt::darkRed, Qt::SolidLine, Qt::RoundCap);
+            VArc arc = VArc (*first, radius, f1, f2);
+            DrawPath(this, arc.GetPath(PathDirection::Show), mainColor, Qt::SolidLine, Qt::RoundCap);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VisToolCutArc::setLength(const QString &expression)
+void VisToolArc::setRadius(const QString &expression)
 {
-    length = FindLength(expression, Visualization::data->PlainVariables());
+    radius = FindLength(expression, Visualization::data->PlainVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolArc::setF1(const QString &expression)
+{
+    f1 = FindVal(expression, Visualization::data->PlainVariables());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VisToolArc::setF2(const QString &expression)
+{
+    f2 = FindVal(expression, Visualization::data->PlainVariables());
 }

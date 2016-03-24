@@ -33,7 +33,7 @@
 #include "../../../../../dialogs/tools/dialogcurveintersectaxis.h"
 #include "../../../../../dialogs/support/dialogeditwrongformula.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../../visualization/vistoolcurveintersectaxis.h"
+#include "../../../../../visualization/line/vistoolcurveintersectaxis.h"
 
 const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersectAxis");
 

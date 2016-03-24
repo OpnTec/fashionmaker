@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vispath.h
+ **  @file   visline.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 8, 2014
+ **  @date   21 7, 2014
  **
  **  @brief
  **  @copyright
@@ -26,26 +26,37 @@
  **
  *************************************************************************/
 
-#ifndef VISPATH_H
-#define VISPATH_H
+#ifndef VISLINE_H
+#define VISLINE_H
 
-#include "visualization.h"
-#include <QGraphicsPathItem>
+#include "../visualization.h"
+#include <QGraphicsLineItem>
+#include <QPointF>
 
-class VisPath : public Visualization, public QGraphicsPathItem
+class VContainer;
+
+class VisLine: public Visualization, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
-    explicit VisPath(const VContainer *data, QGraphicsItem *parent = 0);
-    virtual ~VisPath() Q_DECL_OVERRIDE;
+    explicit VisLine(const VContainer *data, QGraphicsItem *parent = 0);
+    virtual ~VisLine() Q_DECL_OVERRIDE;
 
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
-    enum { Type = UserType + static_cast<int>(Vis::Path)};
+    enum { Type = UserType + static_cast<int>(Vis::Line)};
 protected:
+    qreal        CorrectAngle(const qreal &angle) const;
+    QPointF      Ray(const QPointF &firstPoint, const qreal &angle) const;
+    QPointF      Ray(const QPointF &firstPoint) const;
+    QLineF       Axis(const QPointF &p, const qreal &angle) const;
+    QLineF       Axis(const QPointF &p1, const QPointF &p2) const;
     virtual void InitPen() Q_DECL_OVERRIDE;
     virtual void AddOnScene() Q_DECL_OVERRIDE;
+
+    void         DrawRay(QGraphicsLineItem *lineItem, const QPointF &p, const QPointF &pTangent,
+                         const QColor &color, Qt::PenStyle style);
 private:
-    Q_DISABLE_COPY(VisPath)
+    Q_DISABLE_COPY(VisLine)
 };
 
-#endif // VISPATH_H
+#endif // VISLINE_H

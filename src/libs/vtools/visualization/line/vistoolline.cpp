@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vistoolline.h"
-#include "../../vpatterndb/vcontainer.h"
-#include "../../vgeometry/vpointf.h"
-#include "../tools/drawTools/vdrawtool.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vgeometry/vpointf.h"
+#include "../../tools/drawTools/vdrawtool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLine::VisToolLine(const VContainer *data, QGraphicsItem *parent)

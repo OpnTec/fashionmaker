@@ -29,7 +29,7 @@
 #include "vistoollineintersectaxis.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vgeometry/vpointf.h"
-#include "../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
+#include "../../tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLineIntersectAxis::VisToolLineIntersectAxis(const VContainer *data, QGraphicsItem *parent)

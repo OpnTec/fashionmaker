@@ -30,7 +30,7 @@
 #include "ui_dialogtruedarts.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../../visualization/vistooltruedarts.h"
+#include "../../visualization/line/vistooltruedarts.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../qmuparser/qmudef.h"
 

@@ -30,7 +30,7 @@
 #include "../../../../dialogs/tools/dialogpointofintersectionarcs.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/varc.h"
-#include "../../../../visualization/vistoolpointofintersectionarcs.h"
+#include "../../../../visualization/line/vistoolpointofintersectionarcs.h"
 
 const QString VToolPointOfIntersectionArcs::ToolType = QStringLiteral("pointOfIntersectionArcs");
 

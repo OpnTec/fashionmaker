@@ -29,7 +29,7 @@
 #include "vistoolpointofintersectionarcs.h"
 #include "../vgeometry/varc.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.h"
+#include "../../tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersectionArcs::VisToolPointOfIntersectionArcs(const VContainer *data, QGraphicsItem *parent)

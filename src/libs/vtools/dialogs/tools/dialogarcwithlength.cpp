@@ -36,7 +36,7 @@
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
 #include "../../../ifc/xml/vdomdocument.h"
-#include "../../visualization/vistoolarcwithlength.h"
+#include "../../visualization/path/vistoolarcwithlength.h"
 #include "../support/dialogeditwrongformula.h"
 
 //---------------------------------------------------------------------------------------------------------------------

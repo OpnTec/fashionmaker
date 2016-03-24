@@ -32,7 +32,7 @@
 #include "../../../../dialogs/tools/dialogpointofcontact.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vformula.h"
-#include "../../../../visualization/vistoolpointofcontact.h"
+#include "../../../../visualization/line/vistoolpointofcontact.h"
 #include <QtCore/qmath.h>
 
 const QString VToolPointOfContact::ToolType = QStringLiteral("pointOfContact");

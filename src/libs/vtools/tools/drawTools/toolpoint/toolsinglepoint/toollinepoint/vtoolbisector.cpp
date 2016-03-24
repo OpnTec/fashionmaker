@@ -31,7 +31,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../../../../../dialogs/tools/dialogbisector.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../../visualization/vistoolbisector.h"
+#include "../../../../../visualization/line/vistoolbisector.h"
 
 const QString VToolBisector::ToolType = QStringLiteral("bisector");
 

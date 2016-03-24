@@ -31,7 +31,7 @@
 
 #include "../../../vgeometry/vpointf.h"
 #include "../../../vpatterndb/vcontainer.h"
-#include "../../visualization/vistoolpointofintersection.h"
+#include "../../visualization/line/vistoolpointofintersection.h"
 #include "../../../vwidgets/vmaingraphicsscene.h"
 
 //---------------------------------------------------------------------------------------------------------------------

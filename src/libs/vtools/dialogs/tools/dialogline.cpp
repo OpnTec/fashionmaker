@@ -31,7 +31,7 @@
 
 #include "../../../vgeometry/vpointf.h"
 #include "../../../vpatterndb/vcontainer.h"
-#include "../../visualization/vistoolline.h"
+#include "../../visualization/line/vistoolline.h"
 #include "../../../vwidgets/vmaingraphicsscene.h"
 #include "../../tools/vabstracttool.h"
 

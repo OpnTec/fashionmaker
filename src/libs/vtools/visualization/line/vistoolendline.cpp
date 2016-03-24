@@ -27,9 +27,9 @@
  *************************************************************************/
 
 #include "vistoolendline.h"
-#include "../../vgeometry/vpointf.h"
-#include "../../vpatterndb/vcontainer.h"
-#include "../tools/vabstracttool.h"
+#include "../vgeometry/vpointf.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../../tools/vabstracttool.h"
 
 #include <QGraphicsScene>
 

@@ -32,7 +32,7 @@
 #include "../../../dialogs/tools/dialogarcwithlength.h"
 #include "../vgeometry/varc.h"
 #include "../vpatterndb/vformula.h"
-#include "../../../visualization/vistoolarcwithlength.h"
+#include "../../../visualization/path/vistoolarcwithlength.h"
 
 #include <QKeyEvent>
 

@@ -30,7 +30,7 @@
 #define VISTOOLSPLINEPATH_H
 
 #include "vispath.h"
-#include "../../vgeometry/vsplinepath.h"
+#include "../vgeometry/vsplinepath.h"
 
 class VControlPointSpline;
 

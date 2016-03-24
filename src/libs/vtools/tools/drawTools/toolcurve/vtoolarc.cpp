@@ -32,7 +32,7 @@
 #include "../../../dialogs/tools/dialogarc.h"
 #include "../vgeometry/varc.h"
 #include "../vpatterndb/vformula.h"
-#include "../../../visualization/vistoolarc.h"
+#include "../../../visualization/path/vistoolarc.h"
 
 #include <QKeyEvent>
 
