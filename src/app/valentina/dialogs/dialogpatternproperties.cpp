@@ -703,15 +703,18 @@ void DialogPatternProperties::SaveImage()
     const QString extension = "." + doc->GetImageExtension();
     QString filter = tr("Images (*") + extension + ")";
     QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), tr("untitled"), filter, &filter);
-    if (not filename.endsWith(extension.toUpper()))
+    if (not filename.isEmpty())
     {
-        filename.append(extension);
-    }
-    QFile file(filename);
-    if (file.open(QIODevice::WriteOnly))
-    {
-        file.write(ba);
-        file.close();
+        if (not filename.endsWith(extension.toUpper()))
+        {
+            filename.append(extension);
+        }
+        QFile file(filename);
+        if (file.open(QIODevice::WriteOnly))
+        {
+            file.write(ba);
+            file.close();
+        }
     }
 }
 
