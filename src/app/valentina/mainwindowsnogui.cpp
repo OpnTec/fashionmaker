@@ -693,21 +693,48 @@ void MainWindowsNoGUI::ObjFile(const QString &name, int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
+
 void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
 {
     QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
     if (paper)
     {
-       VDxfPaintDevice generator;
+        VDxfPaintDevice generator;
         generator.setFileName(name);
         generator.setSize(paper->rect().size().toSize());
-        generator.setResolution(static_cast<int>(PrintDPI));
+        generator.setResolution(PrintDPI);
+
+        switch (*pattern->GetPatternUnit())
+        {
+            case Unit::Cm:
+                generator.setInsunits(VarInsunits::Centimeters);
+                break;
+            case Unit::Mm:
+                generator.setInsunits(VarInsunits::Millimeters);
+                break;
+            case Unit::Inch:
+                generator.setInsunits(VarInsunits::Inches);
+                break;
+            case Unit::Px:
+            case Unit::LAST_UNIT_DO_NOT_USE:
+                Q_UNREACHABLE();
+                break;
+        }
+
         QPainter painter;
         painter.begin(&generator);
         scenes.at(i)->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
         painter.end();
     }
 }
+
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic pop
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QImage> MainWindowsNoGUI::AllSheets() const

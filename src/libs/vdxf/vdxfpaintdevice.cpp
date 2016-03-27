@@ -88,13 +88,13 @@ void VDxfPaintDevice::setSize(const QSize &size)
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-int VDxfPaintDevice::getResolution() const
+double VDxfPaintDevice::getResolution() const
 {
     return engine->getResolution();
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-void VDxfPaintDevice::setResolution(int dpi)
+void VDxfPaintDevice::setResolution(double dpi)
 {
     engine->setResolution(dpi);
 }
@@ -123,9 +123,9 @@ int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
         case QPaintDevice::PdmHeight:
             return engine->getSize().height();
         case QPaintDevice::PdmDpiX:
-            return engine->getResolution();
+            return static_cast<int>(engine->getResolution());
         case QPaintDevice::PdmDpiY:
-            return engine->getResolution();
+            return static_cast<int>(engine->getResolution());
         case QPaintDevice::PdmHeightMM:
             return qRound(engine->getSize().height() * 25.4 / engine->getResolution());
         case QPaintDevice::PdmWidthMM:
@@ -133,9 +133,9 @@ int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
         case QPaintDevice::PdmNumColors:
             return static_cast<int>(0xffffffff);
         case QPaintDevice::PdmPhysicalDpiX:
-            return engine->getResolution();
+            return static_cast<int>(engine->getResolution());
         case QPaintDevice::PdmPhysicalDpiY:
-            return engine->getResolution();
+            return static_cast<int>(engine->getResolution());
 #if QT_VERSION > QT_VERSION_CHECK(5, 0, 2)
         case QPaintDevice::PdmDevicePixelRatio:
             return 1;

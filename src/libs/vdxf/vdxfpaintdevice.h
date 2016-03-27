@@ -48,8 +48,8 @@ public:
     QSize getSize();
     void setSize(const QSize &size);
 
-    int getResolution() const;
-    void setResolution(int dpi);
+    double getResolution() const;
+    void   setResolution(double dpi);
 
     void setMeasurement(const VarMeasurement &var);
     void setInsunits(const VarInsunits &var);
