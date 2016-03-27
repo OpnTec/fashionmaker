@@ -157,8 +157,6 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
 
                 if (not freeLength)
                 {
-                    qreal length = controlLine->line().length();
-                    qreal l2 = oldLine.length();
                     newLine.setLength(oldLine.length());
                 }
 

@@ -264,8 +264,8 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 
         for (int i=0; i < polygon.count(); ++i)
         {
-            dxf->writeVertex(*dw, 
-                             DL_VertexData(FromPixel(polygon.at(i).x(), varInsunits), 
+            dxf->writeVertex(*dw,
+                             DL_VertexData(FromPixel(polygon.at(i).x(), varInsunits),
                                            FromPixel(getSize().height() - polygon.at(i).y(), varInsunits), 0, 0));
         }
 
@@ -315,8 +315,8 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
     for (int i = 0; i < pointCount; ++i)
     {
         const QPointF p = matrix.map(points[i]);
-        dxf->writeVertex(*dw, 
-                         DL_VertexData(FromPixel(p.x(), varInsunits), 
+        dxf->writeVertex(*dw,
+                         DL_VertexData(FromPixel(p.x(), varInsunits),
                                        FromPixel(getSize().height() - p.y(), varInsunits), 0, 0));
     }
 
@@ -361,7 +361,7 @@ void VDxfEngine::drawEllipse(const QRectF & rect)
                                      FromPixel(majorX, varInsunits),
                                      FromPixel(majorY, varInsunits),
                                      FromPixel(0, varInsunits),
-                                     FromPixel(majorY, varInsunits),
+                                     FromPixel(ratio, varInsunits),
                                      0, 6.28 // startangle and endangle of ellipse in rad
                                      ),
                       DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
