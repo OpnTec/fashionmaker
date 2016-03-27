@@ -198,7 +198,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
     thread_pool->setExpiryTimeout(1000);
     QVector<VPosition *> threads;
 
-    for (int j=1; j <= d->globalContour.EdgesCount(); ++j)
+    for (int j=1; j <= d->globalContour.GlobalEdgesCount(); ++j)
     {
         for (int i=1; i<= detail.EdgesCount(); i++)
         {

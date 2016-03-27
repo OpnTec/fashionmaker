@@ -162,7 +162,7 @@ void VPosition::DrawDebug(const VContour &contour, const VLayoutDetail &detail, 
     QPainterPath p;
     if (contour.GetContour().isEmpty())
     {
-        p = DrawContour(contour.CutEdge(contour.EmptySheetEdge()));
+        p = DrawContour(contour.CutEmptySheetEdge());
         p.translate(biasWidth/2, biasHeight/2);
         paint.drawPath(p);
     }
@@ -410,7 +410,7 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail, const int &globalI, const int &detailI) const
 {
-    int globalEdgesCount = gContour.EdgesCount();
+    int globalEdgesCount = gContour.GlobalEdgesCount();
     if (globalEdgesCount == 0)
     {
         globalEdgesCount = 1;// For blank sheet
@@ -489,7 +489,7 @@ VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, cons
     }
     else
     {
-        const int polyCorners = gContour.EdgesCount();
+        const int polyCorners = gContour.GlobalEdgesCount();
         int j = polyCorners-1;
 
         QVector<qreal> constant;
