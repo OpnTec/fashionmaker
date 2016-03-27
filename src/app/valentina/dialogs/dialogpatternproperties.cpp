@@ -700,9 +700,9 @@ void DialogPatternProperties::SaveImage()
     QByteArray byteArray;
     byteArray.append(doc->GetImage().toUtf8());
     QByteArray ba = QByteArray::fromBase64(byteArray);
-    QString extension = "." + doc->GetImageExtension();
+    const QString extension = "." + doc->GetImageExtension();
     QString filter = tr("Images (*") + extension + ")";
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), "untitled", filter, &filter);
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), tr("untitled"), filter, &filter);
     if (not filename.endsWith(extension.toUpper()))
     {
         filename.append(extension);
@@ -719,7 +719,7 @@ void DialogPatternProperties::SaveImage()
 void DialogPatternProperties::ShowImage()
 {
     QLabel *label = new QLabel(this, Qt::Window);
-    QImage image = GetImage();
+    const QImage image = GetImage();
     label->setPixmap(QPixmap::fromImage(image));
     label->setGeometry(QRect(QCursor::pos(), image.size()));
     label->show();
