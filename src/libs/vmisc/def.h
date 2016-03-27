@@ -582,22 +582,22 @@ void RestoreOverrideCursor(const QString & pixmapPath);
 
 extern const qreal PrintDPI;
 
-double ToPixel(double val, const Unit &unit);
-double FromPixel(double pix, const Unit &unit);
+double ToPixel(double val, const Unit &unit) Q_REQUIRED_RESULT;
+double FromPixel(double pix, const Unit &unit) Q_REQUIRED_RESULT;
 
-qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
+qreal UnitConvertor(qreal value, const Unit &from, const Unit &to) Q_REQUIRED_RESULT;
 
 void CheckFactor(qreal &oldFactor, const qreal &Newfactor);
 
-QStringList SupportedLocales();
-QStringList AllGroupNames();
+QStringList SupportedLocales() Q_REQUIRED_RESULT;
+QStringList AllGroupNames() Q_REQUIRED_RESULT;
 
-QString StrippedName(const QString &fullFileName);
-QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath);
-QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath);
+QString StrippedName(const QString &fullFileName) Q_REQUIRED_RESULT;
+QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath) Q_REQUIRED_RESULT;
+QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) Q_REQUIRED_RESULT;
 
-QSharedPointer<QPrinter> DefaultPrinter();
+QSharedPointer<QPrinter> DefaultPrinter() Q_REQUIRED_RESULT;
 
-QPixmap darkenPixmap(const QPixmap &pixmap);
+QPixmap darkenPixmap(const QPixmap &pixmap) Q_REQUIRED_RESULT;
 
 #endif // DEF_H

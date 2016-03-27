@@ -1,4 +1,5 @@
 # Version 0.4.4
+- [#463] Wrong export to DXF format.
 - Fixed issue with deleting detail nodes.
 - [#458] Issue with segment of curve.
 - Fixed disappearing curve if start and finish points of a segment are equal.

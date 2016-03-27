@@ -59,8 +59,8 @@ public:
     QSize getSize() const;
     void setSize(const QSize &value);
 
-    int getResolution() const;
-    void setResolution(int value);
+    double getResolution() const;
+    void   setResolution(double value);
 
     QString getFileName() const;
     void setFileName(const QString &value);
@@ -74,7 +74,7 @@ public:
 private:
     Q_DISABLE_COPY(VDxfEngine)
     QSize            size;
-    int              resolution;
+    double           resolution;
     QString          fileName;
     QMatrix          matrix;
     DL_Dxf* dxf;
@@ -82,6 +82,7 @@ private:
     VarMeasurement varMeasurement;
     VarInsunits varInsunits;
 
+    double FromPixel(double pix, const VarInsunits &unit) const Q_REQUIRED_RESULT;
 };
 
 #endif // VDXFENGINE_H
