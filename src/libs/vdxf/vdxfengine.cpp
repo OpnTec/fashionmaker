@@ -356,7 +356,7 @@ void VDxfEngine::drawEllipse(const QRectF & rect)
                                      FromPixel(majorX, varInsunits),
                                      FromPixel(majorY, varInsunits),
                                      FromPixel(0, varInsunits),
-                                     FromPixel(majorY, varInsunits),
+                                     FromPixel(ratio, varInsunits),
                                      0, 6.28 // startangle and endangle of ellipse in rad
                                      ),
                       DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
