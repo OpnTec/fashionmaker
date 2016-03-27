@@ -610,7 +610,7 @@ void DialogPatternProperties::InitComboBox(QComboBox *box, const QMap<GVal, bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::InitImage()
+QImage DialogPatternProperties::GetImage()
 {
 // we set an image from file.val
     QImage image;
@@ -624,9 +624,14 @@ void DialogPatternProperties::InitImage()
     {
         extension = "PNG";
     }
-    image.load(&buffer, extension.toLatin1().data()); // writes image into ba in PNG format
+    image.load(&buffer, extension.toLatin1().data()); // writes image into ba in 'extension' format
+    return image;
+}
 
-    ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::InitImage()
+{
+    ui->imageLabel->setPixmap(QPixmap::fromImage(GetImage()));
     ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->imageLabel->setScaledContents(true);
 
@@ -641,6 +646,7 @@ void DialogPatternProperties::InitImage()
     connect(deleteAction, &QAction::triggered, this, &DialogPatternProperties::DeleteImage);
     connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::SetNewImage);
     connect(saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
+    connect(showImageAction, &QAction::triggered, this, &DialogPatternProperties::ShowImage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -695,7 +701,7 @@ void DialogPatternProperties::SaveImage()
     byteArray.append(doc->GetImage().toUtf8());
     QByteArray ba = QByteArray::fromBase64(byteArray);
     QString extension = "." + doc->GetImageExtension();
-    QString filter = "Images (*" + extension + ")";
+    QString filter = tr("Images (*") + extension + ")";
     QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), "untitled", filter, &filter);
     if (not filename.endsWith(extension.toUpper()))
     {
@@ -707,6 +713,16 @@ void DialogPatternProperties::SaveImage()
         file.write(ba);
         file.close();
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ShowImage()
+{
+    QLabel *label = new QLabel(this, Qt::Window);
+    QImage image = GetImage();
+    label->setPixmap(QPixmap::fromImage(image));
+    label->setGeometry(QRect(QCursor::pos(), image.size()));
+    label->show();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

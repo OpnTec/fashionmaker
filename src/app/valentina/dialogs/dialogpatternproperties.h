@@ -67,6 +67,7 @@ private slots:
     void SecurityValueChanged();
     void DeleteImage();
     void SaveImage();
+    void ShowImage();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
@@ -108,6 +109,7 @@ private:
     void         UpdateDefHeight();
     void         UpdateDefSize();
     void         InitImage();
+    QImage       GetImage();
 };
 
 #endif // DIALOGPATTERNPROPERTIES_H
