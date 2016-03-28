@@ -68,6 +68,7 @@ public slots:
     void         Point1Choosed();
     void         Point2Choosed();
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
+    virtual void DoChangePosition(quint32 id, qreal mx, qreal my) Q_DECL_OVERRIDE;
 
 protected:
     VSimplePoint *firstPoint;

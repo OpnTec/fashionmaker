@@ -40,17 +40,20 @@ class MoveDoubleLabel : public VUndoCommand
     Q_OBJECT
 public:
     MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
-                    const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent = 0);
+                    quint32 tooId, quint32 pointId, QGraphicsScene *scene, QUndoCommand *parent = 0);
     virtual ~MoveDoubleLabel() Q_DECL_OVERRIDE;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
     virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
     virtual int  id() const Q_DECL_OVERRIDE;
     quint32      getPointId() const;
+    quint32      getLabelId() const;
     double       getNewMx() const;
     double       getNewMy() const;
     DoublePoint  getPointType() const;
     void         Do(double mx, double my);
+signals:
+    void ChangePosition(quint32 id, qreal mx, qreal my);
 private:
     Q_DISABLE_COPY(MoveDoubleLabel)
     double oldMx;
@@ -59,6 +62,8 @@ private:
     double newMy;
     QGraphicsScene *scene;
     DoublePoint type;
+    quint32 pointId;
+    bool isRedo;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

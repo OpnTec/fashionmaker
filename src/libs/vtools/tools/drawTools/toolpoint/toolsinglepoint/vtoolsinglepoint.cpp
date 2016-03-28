@@ -129,6 +129,7 @@ void VToolSinglePoint::UpdateNamePosition(quint32 id)
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
     auto moveLabel = new MoveLabel(doc, point->mx(), point->my(), id, scene());
+    connect(moveLabel, &MoveLabel::ChangePosition, this, &VToolSinglePoint::DoChangePosition);
     qApp->getUndoStack()->push(moveLabel);
 }
 
@@ -320,4 +321,17 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
     doc->SetAttribute(tag, AttrName, point->name());
     doc->SetAttribute(tag, AttrMx, qApp->fromPixel(point->mx()));
     doc->SetAttribute(tag, AttrMy, qApp->fromPixel(point->my()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::DoChangePosition(quint32 id, qreal mx, qreal my)
+{
+    VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(id));
+    point->setMx(mx);
+    point->setMy(my);
+    VAbstractTool::data.UpdateGObject(id, point);
+    namePoint->blockSignals(true);
+    namePoint->setPos(QPointF(mx, my));
+    namePoint->blockSignals(false);
+    RefreshLine(id);
 }

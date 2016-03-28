@@ -35,11 +35,13 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
-                                 const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent)
+                                 quint32 tooId, quint32 pointId, QGraphicsScene *scene, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       oldMx(0.0), oldMy(0.0),
       newMx(x), newMy(y),
-      scene(scene), type(type)
+      scene(scene), type(type),
+      pointId(pointId),
+      isRedo(false)
 {
     if (type == DoublePoint::FirstPoint)
     {
@@ -49,7 +51,7 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const d
     {
         setText(tr("move the second dart label"));
     }
-    nodeId = id;
+    nodeId = tooId;
     qCDebug(vUndo, "Point id %u", nodeId);
 
     if (type == DoublePoint::FirstPoint)
@@ -64,7 +66,7 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const d
     }
 
     SCASSERT(scene != nullptr);
-    QDomElement domElement = doc->elementById(id);
+    QDomElement domElement = doc->elementById(tooId);
     if (domElement.isElement())
     {
         if (type == DoublePoint::FirstPoint)
@@ -106,6 +108,8 @@ void MoveDoubleLabel::undo()
     qCDebug(vUndo, "Undo.");
 
     Do(oldMx, oldMy);
+    isRedo = true;
+    emit ChangePosition(pointId, oldMx, oldMy);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -114,6 +118,10 @@ void MoveDoubleLabel::redo()
     qCDebug(vUndo, "Redo.");
 
     Do(newMx, newMy);
+    if (isRedo)
+    {
+        emit ChangePosition(pointId, newMx, newMy);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,7 +130,8 @@ bool MoveDoubleLabel::mergeWith(const QUndoCommand *command)
     const MoveDoubleLabel *moveCommand = static_cast<const MoveDoubleLabel *>(command);
     SCASSERT(moveCommand != nullptr);
 
-    if (moveCommand->getPointId() != nodeId || moveCommand->getPointType() != type)
+    if (moveCommand->getPointId() != nodeId || moveCommand->getPointType() != type ||
+        moveCommand->getLabelId() != pointId)
     {
         return false;
     }
@@ -147,6 +156,12 @@ bool MoveDoubleLabel::mergeWith(const QUndoCommand *command)
 int MoveDoubleLabel::id() const
 {
     return static_cast<int>(UndoCommand::MoveDoubleLabel);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 MoveDoubleLabel::getLabelId() const
+{
+    return pointId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

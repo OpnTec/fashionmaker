@@ -36,7 +36,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 MoveLabel::MoveLabel(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
                      QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldMx(0.0), oldMy(0.0), newMx(x), newMy(y), scene(scene)
+    : VUndoCommand(QDomElement(), doc, parent), oldMx(0.0), oldMy(0.0), newMx(x), newMy(y), isRedo(false), scene(scene)
 {
     setText(tr("move point label"));
     nodeId = id;
@@ -72,6 +72,8 @@ void MoveLabel::undo()
     qCDebug(vUndo, "Undo.");
 
     Do(oldMx, oldMy);
+    isRedo = true;
+    emit ChangePosition(nodeId, oldMx, oldMy);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -80,6 +82,10 @@ void MoveLabel::redo()
     qCDebug(vUndo, "Redo.");
 
     Do(newMx, newMy);
+    if (isRedo)
+    {
+        emit ChangePosition(nodeId, newMx, newMy);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

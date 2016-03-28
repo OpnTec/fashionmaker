@@ -48,12 +48,15 @@ public:
     double       getNewMx() const;
     double       getNewMy() const;
     void         Do(double mx, double my);
+signals:
+    void ChangePosition(quint32 id, qreal mx, qreal my);
 private:
     Q_DISABLE_COPY(MoveLabel)
     double   oldMx;
     double   oldMy;
     double   newMx;
     double   newMy;
+    bool     isRedo;
     QGraphicsScene *scene;
 };
 

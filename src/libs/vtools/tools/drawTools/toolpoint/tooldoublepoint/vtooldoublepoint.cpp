@@ -161,20 +161,50 @@ void VToolDoublePoint::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::DoChangePosition(quint32 id, qreal mx, qreal my)
+{
+    if (id == p1id)
+    {
+        VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(p1id));
+        point->setMx(mx);
+        point->setMy(my);
+        VAbstractTool::data.UpdateGObject(p1id, point);
+        firstPoint->blockSignals(true);
+        firstPoint->setPos(QPointF(mx, my));
+        firstPoint->blockSignals(false);
+        RefreshLine(p1id);
+    }
+    else if (id == p2id)
+    {
+        VPointF *point = new VPointF(*VAbstractTool::data.GeometricObject<VPointF>(p2id));
+        point->setMx(mx);
+        point->setMy(my);
+        VAbstractTool::data.UpdateGObject(p2id, point);
+        secondPoint->blockSignals(true);
+        secondPoint->setPos(QPointF(mx, my));
+        secondPoint->blockSignals(false);
+        RefreshLine(p2id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::UpdateNamePosition(quint32 id)
 {
     if (id == p1id)
     {
         const VPointF *p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
 
-        auto moveLabel = new MoveDoubleLabel(doc, p1->mx(), p1->my(), DoublePoint::FirstPoint, this->id, scene());
+        auto moveLabel = new MoveDoubleLabel(doc, p1->mx(), p1->my(), DoublePoint::FirstPoint, this->id, p1id, scene());
+        connect(moveLabel, &MoveDoubleLabel::ChangePosition, this, &VToolDoublePoint::DoChangePosition);
         qApp->getUndoStack()->push(moveLabel);
     }
     else if (id == p2id)
     {
         const VPointF *p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id).data();
 
-        auto moveLabel = new MoveDoubleLabel(doc, p2->mx(), p2->my(), DoublePoint::SecondPoint, this->id, scene());
+        auto moveLabel = new MoveDoubleLabel(doc, p2->mx(), p2->my(), DoublePoint::SecondPoint, this->id, p2id,
+                                             scene());
+        connect(moveLabel, &MoveDoubleLabel::ChangePosition, this, &VToolDoublePoint::DoChangePosition);
         qApp->getUndoStack()->push(moveLabel);
     }
 }

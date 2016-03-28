@@ -62,6 +62,7 @@ public slots:
     virtual void            EnableToolMove(bool move) Q_DECL_OVERRIDE;
     void                    PointChoosed();
     virtual void            FullUpdateFromFile() Q_DECL_OVERRIDE;
+    virtual void            DoChangePosition(quint32 id, qreal mx, qreal my) Q_DECL_OVERRIDE;
 protected:
     /** @brief radius radius circle. */
     qreal                   radius;
