@@ -701,7 +701,7 @@ void DialogPatternProperties::SaveImage()
     byteArray.append(doc->GetImage().toUtf8());
     QByteArray ba = QByteArray::fromBase64(byteArray);
     const QString extension = "." + doc->GetImageExtension();
-    QString filter = tr("Images") + " (*" + extension + ")";
+    QString filter = tr("Images") + QLatin1String(" (*") + extension + QLatin1String(")");
     QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), tr("untitled"), filter, &filter);
     if (not filename.isEmpty())
     {
