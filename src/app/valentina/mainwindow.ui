@@ -55,7 +55,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>318</height>
         </rect>
        </property>
@@ -375,7 +375,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -700,7 +700,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>196</height>
         </rect>
        </property>
@@ -942,7 +942,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
+         <width>100</width>
          <height>58</height>
         </rect>
        </property>
@@ -1028,8 +1028,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
-         <height>386</height>
+         <width>87</width>
+         <height>58</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1341,7 +1341,7 @@
     </font>
    </property>
    <property name="windowTitle">
-    <string>toolBar</string>
+    <string>Toolbar pointer</string>
    </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonTextUnderIcon</enum>
