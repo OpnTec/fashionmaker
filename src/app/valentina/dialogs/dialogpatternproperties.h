@@ -57,7 +57,7 @@ public slots:
     void         CheckStateHeight(int state);
     void         CheckStateSize(int state);
     void         DescEdited();
-    void         SetNewImage();
+    void         ChangeImage();
     void         ShowContextMenu();
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;

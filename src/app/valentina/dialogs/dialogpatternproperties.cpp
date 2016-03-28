@@ -635,7 +635,7 @@ void DialogPatternProperties::InitImage()
     ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->imageLabel->setScaledContents(true);
 
-    connect(ui->changeImageButton, &QPushButton::clicked, this, &DialogPatternProperties::SetNewImage);
+    connect(ui->changeImageButton, &QPushButton::clicked, this, &DialogPatternProperties::ChangeImage);
     connect(ui->deleteImageButton, &QPushButton::clicked, this, &DialogPatternProperties::DeleteImage);
     connect(ui->imageLabel, &QWidget::customContextMenuRequested, this, &DialogPatternProperties::ShowContextMenu);
 
@@ -644,13 +644,13 @@ void DialogPatternProperties::InitImage()
     saveImageAction   = new QAction(tr("Save image to file"), this);
     showImageAction   = new QAction(tr("Show image"), this);
     connect(deleteAction, &QAction::triggered, this, &DialogPatternProperties::DeleteImage);
-    connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::SetNewImage);
+    connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::ChangeImage);
     connect(saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
     connect(showImageAction, &QAction::triggered, this, &DialogPatternProperties::ShowImage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::SetNewImage()
+void DialogPatternProperties::ChangeImage()
 {
     const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(),
                                                           tr("Images (*.png *.jpg *.jpeg *.bmp)"));
@@ -701,7 +701,7 @@ void DialogPatternProperties::SaveImage()
     byteArray.append(doc->GetImage().toUtf8());
     QByteArray ba = QByteArray::fromBase64(byteArray);
     const QString extension = "." + doc->GetImageExtension();
-    QString filter = tr("Images (*") + extension + ")";
+    QString filter = tr("Images") + " (*" + extension + ")";
     QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), tr("untitled"), filter, &filter);
     if (not filename.isEmpty())
     {
