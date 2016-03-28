@@ -303,6 +303,14 @@ const QPointF &VContour::at(int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QRectF VContour::BoundingRect() const
+{
+    QVector<QPointF> points = GetContour();
+    points.append(points.first());
+    return QPolygonF(points).boundingRect();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutDetail &detail, int detJ) const
 {
     int processedEdges = 0;

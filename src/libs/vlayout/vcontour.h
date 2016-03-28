@@ -39,6 +39,7 @@ class VContourData;
 class QPointF;
 class VLayoutDetail;
 class QLineF;
+class QRectF;
 
 class VContour
 {
@@ -49,11 +50,11 @@ public:
     VContour &operator=(const VContour &contour);
     ~VContour();
 
-    void SetContour(const QVector<QPointF> &contour);
+    void             SetContour(const QVector<QPointF> &contour);
     QVector<QPointF> GetContour() const;
 
     quint32 GetShift() const;
-    void         SetShift(quint32 shift);
+    void    SetShift(quint32 shift);
 
     int  GetHeight() const;
     void SetHeight(int height);
@@ -72,6 +73,8 @@ public:
     QVector<QPointF> CutEmptySheetEdge() const;
 
     const QPointF &	at(int i) const;
+
+    QRectF BoundingRect() const;
 
 private:
     QSharedDataPointer<VContourData> d;

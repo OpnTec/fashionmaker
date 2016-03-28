@@ -410,6 +410,14 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail, const int &globalI, const int &detailI) const
 {
+    const QRectF dRect = detail.BoundingRect();
+    const QRectF gRect = gContour.BoundingRect();
+    if (not gRect.intersects(dRect))
+    {
+        // This we can determine efficiently.
+        return CrossingType::NoIntersection;
+    }
+
     int globalEdgesCount = gContour.GlobalEdgesCount();
     if (globalEdgesCount == 0)
     {
