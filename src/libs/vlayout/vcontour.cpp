@@ -307,6 +307,10 @@ const QPointF &VContour::at(int i) const
 QRectF VContour::BoundingRect() const
 {
     QVector<QPointF> points = GetContour();
+    if (points.isEmpty())
+    {
+        return QRectF();
+    }
     points.append(points.first());
     return QPolygonF(points).boundingRect();
 }
