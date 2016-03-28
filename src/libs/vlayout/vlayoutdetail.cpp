@@ -407,6 +407,23 @@ QPainterPath VLayoutDetail::ContourPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPainterPath VLayoutDetail::LayoutAllowencePath() const
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+
+    const QVector<QPointF> points = GetLayoutAllowencePoints();
+    path.moveTo(points.at(0));
+    for (qint32 i = 1; i < points.count(); ++i)
+    {
+        path.lineTo(points.at(i));
+    }
+    path.lineTo(points.at(0));
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QGraphicsItem *VLayoutDetail::GetItem() const
 {
     QGraphicsPathItem *item = new QGraphicsPathItem();

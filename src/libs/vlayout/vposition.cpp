@@ -268,7 +268,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
     {
         if (not gContour.GetContour().isEmpty())
         {
-            type = Crossing(detail, j, dEdge);
+            type = Crossing(detail);
         }
         else
         {
@@ -285,23 +285,8 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
             flagMirror = true;
             break;
         case CrossingType::NoIntersection:
-        {
-            switch (InsideContour(detail, dEdge))
-            {
-                case InsideType::EdgeError:
-                    return false;
-                case InsideType::Inside:
-                    detail.Mirror(globalEdge);
-                    flagMirror = true;
-                    break;
-                case InsideType::Outside:
-                    flagSquare = true;
-                    break;
-                default:
-                    break;
-            }
+            flagSquare = true;
             break;
-        }
         default:
             break;
     }
@@ -323,7 +308,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
         CrossingType type = CrossingType::Intersection;
         if (SheetContains(detail.BoundingRect()))
         {
-            type = Crossing(detail, j, dEdge);
+            type = Crossing(detail);
         }
 
         switch (type)
@@ -334,22 +319,8 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
                 flagSquare = false;
                 break;
             case CrossingType::NoIntersection:
-            {
-                switch (InsideContour(detail, dEdge))
-                {
-                    case InsideType::EdgeError:
-                        return false;
-                    case InsideType::Inside:
-                        flagSquare = false;
-                        break;
-                    case InsideType::Outside:
-                        flagSquare = true;
-                        break;
-                    default:
-                        break;
-                }
+                flagSquare = true;
                 break;
-            }
             default:
                 break;
         }
@@ -374,7 +345,7 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
     CrossingType type = CrossingType::Intersection;
     if (SheetContains(detail.BoundingRect()))
     {
-        type = Crossing(detail, j, dEdge);
+        type = Crossing(detail);
     }
 
     switch (type)
@@ -385,22 +356,8 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
             flagSquare = false;
             break;
         case CrossingType::NoIntersection:
-        {
-            switch (InsideContour(detail, dEdge))
-            {
-                case InsideType::EdgeError:
-                    return false;
-                case InsideType::Inside:
-                    flagSquare = false;
-                    break;
-                case InsideType::Outside:
-                    flagSquare = true;
-                    break;
-                default:
-                    break;
-            }
+            flagSquare = true;
             break;
-        }
         default:
             break;
     }
@@ -408,7 +365,7 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail, const int &globalI, const int &detailI) const
+VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail) const
 {
     const QRectF dRect = detail.BoundingRect();
     const QRectF gRect = gContour.BoundingRect();
@@ -418,158 +375,14 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail, const i
         return CrossingType::NoIntersection;
     }
 
-    int globalEdgesCount = gContour.GlobalEdgesCount();
-    if (globalEdgesCount == 0)
+    if (gContour.ContourPath().intersects(detail.LayoutAllowencePath()))
     {
-        globalEdgesCount = 1;// For blank sheet
-    }
-
-    const int detailEdgesCount = detail.EdgesCount();
-    if (detailEdgesCount < 3)
-    {
-        return CrossingType::EdgeError;
-    }
-
-    const QLineF gEdge = gContour.GlobalEdge(globalI);
-    const QLineF dEdge = detail.Edge(detailI);
-
-    for (int i = 1; i <= globalEdgesCount; i++)
-    {
-        const QLineF globalEdge = gContour.GlobalEdge(i);
-        if (globalEdge.isNull()) // Got null edge
-        {
-            return CrossingType::EdgeError;
-        }
-
-        for (int j = 1; j <= detailEdgesCount; j++)
-        {
-            if (i == globalI && j == detailI)
-            {
-                continue;
-            }
-
-            const QLineF detailEdge = detail.Edge(j);
-            if (detailEdge.isNull()) // Got null edge
-            {
-                return CrossingType::EdgeError;
-            }
-
-            QPointF xPoint;
-            if (globalEdge.intersect(detailEdge, &xPoint) == QLineF::BoundedIntersection)
-            {
-                if (TrueIntersection(gEdge, dEdge, xPoint))
-                {
-                    return CrossingType::Intersection;
-                }
-            }
-        }
-    }
-
-    return CrossingType::NoIntersection;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPosition::InsideType VPosition::InsideContour(const VLayoutDetail &detail, const int &detailI) const
-{
-    if (detail.EdgesCount() < 3)
-    {
-        return InsideType::EdgeError;
-    }
-
-    const QVector<QPointF> lPoints = detail.GetLayoutAllowencePoints();
-
-    const QLineF detailEdge = detail.Edge(detailI);
-    if (detailEdge.isNull()) // Got null edge
-    {
-        return InsideType::EdgeError;
-    }
-
-    if (gContour.GetContour().isEmpty())
-    {
-        const QLineF globalEdge = gContour.GlobalEdge(1);
-        for (int i = 0; i < lPoints.count(); i++)
-        {
-            if (CheckSide(globalEdge, lPoints.at(i)) < 0)
-            {
-                return InsideType::Inside;
-            }
-        }
+        return CrossingType::Intersection;
     }
     else
     {
-        const int polyCorners = gContour.GlobalEdgesCount();
-        int j = polyCorners-1;
-
-        QVector<qreal> constant;
-        QVector<qreal> multiple;
-
-        for (int i=0; i<polyCorners; i++)
-        {
-            const qreal xi = gContour.at(i).x(); //-V807
-            const qreal xj = gContour.at(j).x(); //-V807
-            const qreal yi = gContour.at(i).y();
-            const qreal yj = gContour.at(j).y();
-            if (VFuzzyComparePossibleNulls(yj, yi))
-            {
-                constant.insert(i, xi);
-                multiple.insert(i, 0);
-            }
-            else
-            {
-                constant.insert(i, xi - (yi*xj)/(yj-yi) + (yi*xi)/(yj-yi));
-                multiple.insert(i, (xj-xi)/(yj-yi));
-            }
-
-            j=i;
-        }
-
-        for (int m = 1; m <= detail.EdgesCount(); ++m)
-        {
-            if (m == detailI)
-            {
-                continue;
-            }
-
-            const QLineF detailEdge = detail.Edge(m);
-            if (detailEdge.isNull()) // Got null edge
-            {
-                return InsideType::EdgeError;
-            }
-
-            const QVector<QPointF> p = Triplet(detailEdge);
-            for (int n=0; n<p.size(); ++n )
-            {
-                int j = polyCorners-1;
-                bool oddNodes = false;
-
-                for (int i=0; i<polyCorners; i++)
-                {
-                    const qreal yi = gContour.at(i).y();
-                    const qreal yj = gContour.at(j).y();
-
-                    const QPointF &pn = p.at(n);
-                    if (((yi < pn.y() && yj >= pn.y()) || (yj < pn.y() && yi >= pn.y())))
-                    {
-                        oddNodes ^= (pn.y() * multiple.at(i) + constant.at(i) < pn.x());
-                    }
-
-                    j=i;
-                }
-
-                if (oddNodes)
-                {
-                    return InsideType::Inside;
-                }
-            }
-        }
+        return CrossingType::NoIntersection;
     }
-    return InsideType::Outside;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VPosition::CheckSide(const QLineF &edge, const QPointF &p) const
-{
-    return (edge.x2() - edge.x1()) * (p.y() - edge.y1()) - (edge.y2() - edge.y1()) * (p.x() - edge.x1());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -710,48 +523,6 @@ void VPosition::Rotate(int increase)
         }
         ++frame;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VPosition::TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, const QPointF &p) const
-{
-    const QPointF pX = RoundedPoint(p);
-
-    QPointF xPoint;
-    if (gEdge.intersect(dEdge, &xPoint) == QLineF::NoIntersection)
-    {
-        const QPointF gP1 = RoundedPoint(gEdge.p1());
-        const QPointF gP2 = RoundedPoint(gEdge.p2());
-        const QPointF dP1 = RoundedPoint(dEdge.p1());
-        const QPointF dP2 = RoundedPoint(dEdge.p2());
-
-        // If two edges are same line ignorring all intersection point that are equal to the start or the end point
-        return !(pX == gP1 || pX == gP2 || pX == dP1 || pX == dP2);
-    }
-    else
-    {
-        // Rotation case. Ignore intersection only in the point of edges intersection.
-        return pX != RoundedPoint(xPoint);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPointF VPosition::RoundedPoint(const QPointF &p) const
-{
-    return QPointF(qRound(p.x()), qRound(p.y()));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VPosition::Triplet(const QLineF &edge) const
-{
-    QVector<QPointF> p;
-    QLineF line = edge;
-    line.setLength(edge.length()/2);
-
-    p.append(edge.p1());
-    p.append(line.p2());
-    p.append(edge.p2());
-    return p;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

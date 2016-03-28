@@ -32,6 +32,7 @@
 
 #include <QPointF>
 #include <QLineF>
+#include <QPainterPath>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
 #   include "../vmisc/vmath.h"
@@ -308,6 +309,23 @@ QRectF VContour::BoundingRect() const
     QVector<QPointF> points = GetContour();
     points.append(points.first());
     return QPolygonF(points).boundingRect();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VContour::ContourPath() const
+{
+    QPainterPath path;
+    path.setFillRule(Qt::WindingFill);
+
+    const QVector<QPointF> points = GetContour();
+    path.moveTo(points.at(0));
+    for (qint32 i = 1; i < points.count(); ++i)
+    {
+        path.lineTo(points.at(i));
+    }
+    path.lineTo(points.at(0));
+
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

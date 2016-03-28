@@ -77,6 +77,7 @@ public:
     bool isNull() const;
     qint64 Square() const;
     QPainterPath ContourPath() const;
+    QPainterPath LayoutAllowencePath() const;
     QGraphicsItem *GetItem() const Q_REQUIRED_RESULT;
 
 private:

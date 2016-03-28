@@ -40,6 +40,7 @@ class QPointF;
 class VLayoutDetail;
 class QLineF;
 class QRectF;
+class QPainterPath;
 
 class VContour
 {
@@ -75,6 +76,8 @@ public:
     const QPointF &	at(int i) const;
 
     QRectF BoundingRect() const;
+
+    QPainterPath ContourPath() const;
 
 private:
     QSharedDataPointer<VContourData> d;

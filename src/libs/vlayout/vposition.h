@@ -108,19 +108,13 @@ private:
     bool CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge);
     bool CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int angle) const;
 
-    CrossingType Crossing(const VLayoutDetail &detail, const int &globalI, const int &detailI) const;
-    InsideType   InsideContour(const VLayoutDetail &detail, const int &detailI) const;
-    qreal        CheckSide(const QLineF &edge, const QPointF &p) const;
+    CrossingType Crossing(const VLayoutDetail &detail) const;
     bool         SheetContains(const QRectF &rect) const;
 
     void CombineEdges(VLayoutDetail &detail, const QLineF &globalEdge, const int &dEdge);
     void RotateEdges(VLayoutDetail &detail, const QLineF &globalEdge, int dEdge, int angle) const;
 
     QPolygonF GlobalPolygon() const;
-
-    bool TrueIntersection(const QLineF &gEdge, const QLineF &dEdge, const QPointF &p) const;
-    QPointF RoundedPoint(const QPointF &p) const;
-    QVector<QPointF> Triplet(const QLineF &edge) const;
 
     static QPainterPath ShowDirection(const QLineF &edge);
     static QPainterPath DrawContour(const QVector<QPointF> &points);
