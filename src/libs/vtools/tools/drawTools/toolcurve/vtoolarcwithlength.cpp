@@ -49,8 +49,6 @@ VToolArcWithLength::VToolArcWithLength(VAbstractPattern *doc, VContainer *data, 
 
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
 
     ToolCreation(typeCreation);

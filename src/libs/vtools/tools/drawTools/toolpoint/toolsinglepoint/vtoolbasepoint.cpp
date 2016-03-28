@@ -55,7 +55,6 @@ VToolBasePoint::VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32
     this->setPen(QPen(baseColor, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, false);
     SetColorLabel(Qt::black);
     ToolCreation(typeCreation);
 }

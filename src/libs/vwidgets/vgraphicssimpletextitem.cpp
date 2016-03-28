@@ -50,7 +50,6 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
     QFont font = this->font();
     font.setPointSize(font.pointSize()+20);
@@ -78,19 +77,6 @@ VGraphicsSimpleTextItem::~VGraphicsSimpleTextItem()
 {
     //Disable cursor-arrow-openhand
     RestoreOverrideCursor(cursorArrowOpenHand);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    /* From question on StackOverflow
-     * https://stackoverflow.com/questions/10985028/how-to-remove-border-around-qgraphicsitem-when-selected
-     *
-     * There's no interface to disable the drawing of the selection border for the build-in QGraphicsItems. The only way
-     * I can think of is derive your own items from the build-in ones and override the paint() function:*/
-    QStyleOptionGraphicsItem myOption(*option);
-    myOption.state &= ~QStyle::State_Selected;
-    QGraphicsSimpleTextItem::paint(painter, &myOption, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

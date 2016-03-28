@@ -69,8 +69,6 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolSinglePoint::NameChangePosition);
     lineName = new QGraphicsLineItem(this);
     this->setBrush(QBrush(Qt::NoBrush));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }

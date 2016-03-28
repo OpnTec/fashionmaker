@@ -43,8 +43,6 @@ VToolCubicBezier::VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quin
     lineColor = color;
 
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
     this->setPath(ToolPath());
 

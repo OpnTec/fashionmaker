@@ -74,7 +74,6 @@ VControlPointSpline::VControlPointSpline(const qint32 &indexSpline, SplinePointP
 {
     Init();
 
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setAcceptHoverEvents(true);

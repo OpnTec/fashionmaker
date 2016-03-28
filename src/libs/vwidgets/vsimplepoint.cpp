@@ -49,8 +49,6 @@ VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternU
     lineName = new QGraphicsLineItem(this);
     this->setBrush(QBrush(Qt::NoBrush));
     SetPen(this, currentColor, WidthHairLine(patternUnit));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setAcceptHoverEvents(true);
 }
 

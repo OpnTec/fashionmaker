@@ -61,8 +61,6 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
     lineColor = color;
 
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setAcceptHoverEvents(true);
     this->setPath(ToolPath());

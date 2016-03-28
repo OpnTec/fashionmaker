@@ -111,7 +111,6 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     seamAllowance->setBrush(QBrush(Qt::FDiagPattern));
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setFlag(QGraphicsItem::ItemIsFocusable, true);
 
     connect(scene, &VMainGraphicsScene::EnableToolMove, this, &VToolDetail::EnableToolMove);
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
