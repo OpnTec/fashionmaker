@@ -128,8 +128,7 @@ void VToolSinglePoint::NameChangePosition(const QPointF &pos)
 void VToolSinglePoint::UpdateNamePosition(quint32 id)
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    MoveLabel *moveLabel = new MoveLabel(doc, point->mx(), point->my(), id, this->scene());
-    connect(moveLabel, &MoveLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    auto moveLabel = new MoveLabel(doc, point->mx(), point->my(), id, scene());
     qApp->getUndoStack()->push(moveLabel);
 }
 
@@ -249,7 +248,8 @@ void VToolSinglePoint::RefreshLine(quint32 id)
 {
     Q_UNUSED(id)
     VAbstractTool::RefreshLine(this, namePoint, lineName, radius);
-    lineName->setPen(QPen(CorrectColor(Qt::black), qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+    lineName->setPen(QPen(CorrectColor(Qt::black),
+                          qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

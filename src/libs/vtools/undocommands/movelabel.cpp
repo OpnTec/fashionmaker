@@ -119,8 +119,6 @@ void MoveLabel::Do(double mx, double my)
     {
         doc->SetAttribute(domElement, AttrMx, QString().setNum(qApp->fromPixel(mx)));
         doc->SetAttribute(domElement, AttrMy, QString().setNum(qApp->fromPixel(my)));
-
-        emit NeedLiteParsing(Document::LitePPParse);
     }
     else
     {

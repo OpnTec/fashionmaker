@@ -323,8 +323,8 @@ void VAbstractTool::AddRecord(const quint32 id, const Tool &toolType, VAbstractP
 /**
  * @brief RefreshLine refresh line to label on scene.
  */
-void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint, QGraphicsLineItem *lineName,
-                                const qreal radius)
+void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleTextItem *namePoint,
+                                QGraphicsLineItem *lineName, const qreal radius)
 {
     SCASSERT(point != nullptr);
     SCASSERT(namePoint != nullptr);
@@ -336,7 +336,8 @@ void VAbstractTool::RefreshLine(QGraphicsEllipseItem *point, VGraphicsSimpleText
     {
         const QRectF nameRec = namePoint->sceneBoundingRect();
         QPointF p1, p2;
-        VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - point->scenePos()), p1, p2);
+        VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), nameRec.center() - point->scenePos()), p1,
+                                      p2);
         const QPointF pRec = VGObject::LineIntersectRect(nameRec, QLineF(point->scenePos(), nameRec.center()));
         lineName->setLine(QLineF(p1, pRec - point->scenePos()));
 

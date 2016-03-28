@@ -165,20 +165,16 @@ void VToolDoublePoint::UpdateNamePosition(quint32 id)
 {
     if (id == p1id)
     {
-        VPointF *p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
+        const VPointF *p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
 
-        MoveDoubleLabel *moveLabel = new MoveDoubleLabel(doc, p1->mx(), p1->my(), DoublePoint::FirstPoint, this->id,
-                                                         this->scene());
-        connect(moveLabel, &MoveDoubleLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        auto moveLabel = new MoveDoubleLabel(doc, p1->mx(), p1->my(), DoublePoint::FirstPoint, this->id, scene());
         qApp->getUndoStack()->push(moveLabel);
     }
     else if (id == p2id)
     {
-        VPointF *p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id).data();
+        const VPointF *p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id).data();
 
-        MoveDoubleLabel *moveLabel = new MoveDoubleLabel(doc, p2->mx(), p2->my(), DoublePoint::SecondPoint, this->id,
-                                                         this->scene());
-        connect(moveLabel, &MoveDoubleLabel::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        auto moveLabel = new MoveDoubleLabel(doc, p2->mx(), p2->my(), DoublePoint::SecondPoint, this->id, scene());
         qApp->getUndoStack()->push(moveLabel);
     }
 }
