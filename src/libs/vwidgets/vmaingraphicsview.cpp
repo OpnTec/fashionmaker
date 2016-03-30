@@ -382,43 +382,49 @@ void VMainGraphicsView::ZoomFitBest()
  */
 void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
 {
-    if (mousePress->button() & Qt::LeftButton)
+    switch (mousePress->button())
     {
-        switch (QGuiApplication::keyboardModifiers())
+        case Qt::LeftButton:
         {
-            case Qt::ControlModifier:
-                QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
-                break;
-            case Qt::NoModifier:
-                if (showToolOptions)
+            QGraphicsView::setDragMode(QGraphicsView::RubberBandDrag);
+            if (showToolOptions)
+            {
+                QList<QGraphicsItem *> list = items(mousePress->pos());
+                if (list.size() == 0)
                 {
-                    QList<QGraphicsItem *> list = items(mousePress->pos());
-                    if (list.size() == 0)
+                    emit itemClicked(nullptr);
+                    break;
+                }
+                for (int i = 0; i < list.size(); ++i)
+                {
+                    if (this->scene()->items().contains(list.at(i)))
                     {
-                        emit itemClicked(nullptr);
-                        break;
-                    }
-                    for (int i = 0; i < list.size(); ++i)
-                    {
-                        if (this->scene()->items().contains(list.at(i)))
+                        if (list.at(i)->type() <= VSimplePoint::Type &&
+                            list.at(i)->type() > QGraphicsItem::UserType)
                         {
-                            if (list.at(i)->type() <= VSimplePoint::Type &&
-                                list.at(i)->type() > QGraphicsItem::UserType)
-                            {
-                                emit itemClicked(list.at(i));
-                                break;
-                            }
-                            else
-                            {
-                                emit itemClicked(nullptr);
-                            }
+                            emit itemClicked(list.at(i));
+                            break;
+                        }
+                        else
+                        {
+                            emit itemClicked(nullptr);
                         }
                     }
                 }
-                break;
-            default:
-                break;
+            }
+            break;
         }
+        case Qt::MiddleButton:
+        {
+            QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);
+            // create a new mouse event that simulates a click of the left button instead of the middle button
+            QMouseEvent mouseEvent (mousePress->type(), mousePress->pos(), Qt::LeftButton, Qt::LeftButton,
+                                    mousePress->modifiers());
+            QGraphicsView::mousePressEvent(&mouseEvent);
+            return;
+        }
+        default:
+            break;
     }
     QGraphicsView::mousePressEvent(mousePress);
 }
@@ -431,7 +437,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
 void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
     QGraphicsView::mouseReleaseEvent ( event );
-    QGraphicsView::setDragMode( QGraphicsView::RubberBandDrag );
+    QGraphicsView::setDragMode( QGraphicsView::NoDrag );
     if (event->button() == Qt::LeftButton)
     {
         emit MouseRelease();

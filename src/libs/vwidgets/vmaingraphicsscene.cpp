@@ -80,14 +80,6 @@ void VMainGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
 
     QGraphicsScene::mousePressEvent(event);
-//    if (QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
-//    {
-//        QList<QGraphicsItem *> items = selectedItems();
-//        for (int i=0; i< items.size(); i++)
-//        {
-//            items[i]->setSelected(false);
-//        }
-//    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
