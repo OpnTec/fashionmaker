@@ -136,7 +136,17 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
     QGraphicsEllipseItem::mousePressEvent(event);
-    event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+    if (selectionType == SelectionType::ByMouseRelease)
+    {
+        event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+    }
+    else
+    {
+        if (event->button() == Qt::LeftButton)
+        {
+            PointChoosed();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -188,9 +198,12 @@ void VToolSinglePoint::FullUpdateFromFile()
  */
 void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (selectionType == SelectionType::ByMouseRelease)
     {
-        PointChoosed();
+        if (event->button() == Qt::LeftButton)
+        {
+            PointChoosed();
+        }
     }
     QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
@@ -364,4 +377,11 @@ void VToolSinglePoint::AllowLabelHover(bool enabled)
 void VToolSinglePoint::AllowLabelSelecting(bool enabled)
 {
     namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::ToolSelectionType(const SelectionType &type)
+{
+    VAbstractTool::ToolSelectionType(type);
+    namePoint->LabelSelectionType(type);
 }

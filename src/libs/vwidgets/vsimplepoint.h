@@ -57,6 +57,7 @@ public:
     void EnableToolMove(bool move);
     void AllowLabelHover(bool enabled);
     void AllowLabelSelecting(bool enabled);
+    void ToolSelectionType(const SelectionType &type);
 
     QColor GetCurrentColor() const;
     void   SetCurrentColor(const QColor &value);
@@ -93,6 +94,8 @@ private:
 
     /** @brief lineName line what we see if label moved too away from point. */
     QGraphicsLineItem       *lineName;
+
+    SelectionType selectionType;
 
 };
 

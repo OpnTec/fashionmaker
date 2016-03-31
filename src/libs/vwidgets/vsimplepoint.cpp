@@ -39,7 +39,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
     :VAbstractSimple(id, currentColor, patternUnit, factor, parent), QGraphicsEllipseItem(),
-      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)), namePoint(nullptr), lineName(nullptr)
+      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)), namePoint(nullptr), lineName(nullptr),
+      selectionType(SelectionType::ByMouseRelease)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);
@@ -159,6 +160,13 @@ void VSimplePoint::AllowLabelSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::ToolSelectionType(const SelectionType &type)
+{
+    selectionType = type;
+    namePoint->LabelSelectionType(type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::DeleteFromLabel()
 {
     emit Delete();
@@ -187,15 +195,28 @@ void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
     QGraphicsEllipseItem::mousePressEvent(event);
-    event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+    if (selectionType == SelectionType::ByMouseRelease)
+    {
+        event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+    }
+    else
+    {
+        if (event->button() == Qt::LeftButton)
+        {
+            emit Choosed(id);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (selectionType == SelectionType::ByMouseRelease)
     {
-        emit Choosed(id);
+        if (event->button() == Qt::LeftButton)
+        {
+            emit Choosed(id);
+        }
     }
     QGraphicsEllipseItem::mouseReleaseEvent(event);
 }

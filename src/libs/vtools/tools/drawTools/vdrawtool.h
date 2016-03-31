@@ -242,6 +242,7 @@ void VDrawTool::InitDrawToolConnections(VMainGraphicsScene *scene, T *tool)
     QObject::connect(scene, &VMainGraphicsScene::DisableItem, tool, &T::Disable);
     QObject::connect(scene, &VMainGraphicsScene::EnableToolMove, tool, &T::EnableToolMove);
     QObject::connect(scene, &VMainGraphicsScene::CurveDetailsMode, tool, &T::DetailsMode);
+    QObject::connect(scene, &VMainGraphicsScene::ItemSelection, tool, &T::ToolSelectionType);
 }
 
 #endif // VDRAWTOOL_H

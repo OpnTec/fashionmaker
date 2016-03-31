@@ -301,6 +301,7 @@ void MainWindow::InitScenes()
     currentScene = sceneDraw;
     qApp->setCurrentScene(currentScene);
     connect(this, &MainWindow::EnableItemMove, sceneDraw, &VMainGraphicsScene::EnableItemMove);
+    connect(this, &MainWindow::ItemsSelection, sceneDraw, &VMainGraphicsScene::ItemsSelection);
 
     connect(this, &MainWindow::EnableLabelSelection, sceneDraw, &VMainGraphicsScene::ToggleLabelSelection);
     connect(this, &MainWindow::EnablePointSelection, sceneDraw, &VMainGraphicsScene::TogglePointSelection);
@@ -706,7 +707,7 @@ void MainWindow::ApplyDialog()
  */
 void MainWindow::ToolEndLine(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogEndLine>(checked, Tool::EndLine, ":/cursor/endline_cursor.png", tr("Select point"),
                                           &MainWindow::ClosedDialogWithApply<VToolEndLine>,
                                           &MainWindow::ApplyDialog<VToolEndLine>);
@@ -719,7 +720,7 @@ void MainWindow::ToolEndLine(bool checked)
  */
 void MainWindow::ToolLine(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogLine>(checked, Tool::Line, ":/cursor/line_cursor.png", tr("Select first point"),
                                        &MainWindow::ClosedDialogWithApply<VToolLine>,
                                        &MainWindow::ApplyDialog<VToolLine>);
@@ -732,7 +733,7 @@ void MainWindow::ToolLine(bool checked)
  */
 void MainWindow::ToolAlongLine(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogAlongLine>(checked, Tool::AlongLine, ":/cursor/alongline_cursor.png",
                                             tr("Select point"), &MainWindow::ClosedDialogWithApply<VToolAlongLine>,
                                             &MainWindow::ApplyDialog<VToolAlongLine>);
@@ -745,7 +746,7 @@ void MainWindow::ToolAlongLine(bool checked)
  */
 void MainWindow::ToolShoulderPoint(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogShoulderPoint>(checked, Tool::ShoulderPoint, ":/cursor/shoulder_cursor.png",
                                                 tr("Select point"),
                                                 &MainWindow::ClosedDialogWithApply<VToolShoulderPoint>,
@@ -759,7 +760,7 @@ void MainWindow::ToolShoulderPoint(bool checked)
  */
 void MainWindow::ToolNormal(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogNormal>(checked, Tool::Normal, ":/cursor/normal_cursor.png",
                                          tr("Select first point of line"),
                                          &MainWindow::ClosedDialogWithApply<VToolNormal>,
@@ -773,7 +774,7 @@ void MainWindow::ToolNormal(bool checked)
  */
 void MainWindow::ToolBisector(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogBisector>(checked, Tool::Bisector, ":/cursor/bisector_cursor.png",
                                            tr("Select first point of angle"),
                                            &MainWindow::ClosedDialogWithApply<VToolBisector>,
@@ -787,7 +788,7 @@ void MainWindow::ToolBisector(bool checked)
  */
 void MainWindow::ToolLineIntersect(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogLineIntersect>(checked, Tool::LineIntersect, ":/cursor/intersect_cursor.png",
                                                 tr("Select first point of first line"),
                                                 &MainWindow::ClosedDialogWithApply<VToolLineIntersect>,
@@ -801,7 +802,7 @@ void MainWindow::ToolLineIntersect(bool checked)
  */
 void MainWindow::ToolSpline(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByPress();
     SetToolButtonWithApply<DialogSpline>(checked, Tool::Spline, ":/cursor/spline_cursor.png",
                                          tr("Select first point curve"),
                                          &MainWindow::ClosedDialogWithApply<VToolSpline>,
@@ -811,7 +812,7 @@ void MainWindow::ToolSpline(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolCubicBezier(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogCubicBezier>(checked, Tool::CubicBezier, ":/cursor/cubic_bezier_cursor.png",
                                               tr("Select first curve point"),
                                               &MainWindow::ClosedDialogWithApply<VToolCubicBezier>,
@@ -839,7 +840,7 @@ void MainWindow::ToolCutSpline(bool checked)
  */
 void MainWindow::ToolArc(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogArc>(checked, Tool::Arc, ":/cursor/arc_cursor.png",
                                       tr("Select point of center of arc"), &MainWindow::ClosedDialogWithApply<VToolArc>,
                                       &MainWindow::ApplyDialog<VToolArc>);
@@ -852,7 +853,7 @@ void MainWindow::ToolArc(bool checked)
  */
 void MainWindow::ToolSplinePath(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByPress();
     SetToolButtonWithApply<DialogSplinePath>(checked, Tool::SplinePath, ":/cursor/splinepath_cursor.png",
                                              tr("Select point of curve path"),
                                              &MainWindow::ClosedDialogWithApply<VToolSplinePath>,
@@ -862,7 +863,7 @@ void MainWindow::ToolSplinePath(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolCubicBezierPath(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogCubicBezierPath>(checked, Tool::CubicBezierPath,
                                                   ":/cursor/cubic_bezier_path_cursor.png",
                                                   tr("Select point of cubic bezier path"),
@@ -891,7 +892,7 @@ void MainWindow::ToolCutSplinePath(bool checked)
  */
 void MainWindow::ToolPointOfContact(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointOfContact>(checked, Tool::PointOfContact, ":/cursor/pointcontact_cursor.png",
                                                  tr("Select first point of line"),
                                                  &MainWindow::ClosedDialogWithApply<VToolPointOfContact>,
@@ -932,7 +933,7 @@ void MainWindow::ClosedDialogDetail(int result)
  */
 void MainWindow::ToolHeight(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogHeight>(checked, Tool::Height, ":/cursor/height_cursor.png", tr("Select base point"),
                                          &MainWindow::ClosedDialogWithApply<VToolHeight>,
                                          &MainWindow::ApplyDialog<VToolHeight>);
@@ -945,7 +946,7 @@ void MainWindow::ToolHeight(bool checked)
  */
 void MainWindow::ToolTriangle(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogTriangle>(checked, Tool::Triangle, ":/cursor/triangle_cursor.png",
                                            tr("Select first point of axis"),
                                            &MainWindow::ClosedDialogWithApply<VToolTriangle>,
@@ -959,7 +960,7 @@ void MainWindow::ToolTriangle(bool checked)
  */
 void MainWindow::ToolPointOfIntersection(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointOfIntersection>(checked, Tool::PointOfIntersection,
                                                       ":/cursor/pointofintersect_cursor.png",
                                                       tr("Select point for X value (vertical)"),
@@ -1006,7 +1007,7 @@ void MainWindow::ToolCutArc(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolLineIntersectAxis(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogLineIntersectAxis>(checked, Tool::LineIntersectAxis,
                                                     ":/cursor/line_intersect_axis_cursor.png",
                                                     tr("Select first point of line"),
@@ -1051,7 +1052,7 @@ void MainWindow::ToolPointOfIntersectionArcs(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolPointOfIntersectionCircles(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointOfIntersectionCircles>(checked, Tool::PointOfIntersectionCircles,
                                                              "://cursor/point_of_intersection_circles.png",
                                                              tr("Select first circle center "),
@@ -1073,7 +1074,7 @@ void MainWindow::ToolPointOfIntersectionCurves(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolPointFromCircleAndTangent(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointFromCircleAndTangent>(checked, Tool::PointFromCircleAndTangent,
                                                             "://cursor/point_from_circle_and_tangent_cursor.png",
                                                             tr("Select point on tangent "),
@@ -1095,7 +1096,7 @@ void MainWindow::ToolPointFromArcAndTangent(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolArcWithLength(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogArcWithLength>(checked, Tool::ArcWithLength,
                                                 "://cursor/arc_with_length_cursor.png",
                                                 tr("Select point of the center of the arc"),
@@ -1106,7 +1107,7 @@ void MainWindow::ToolArcWithLength(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolTrueDarts(bool checked)
 {
-    ToolSelectPoint();
+    ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogTrueDarts>(checked, Tool::TrueDarts,
                                                 "://cursor/true_darts_cursor.png",
                                                 tr("Select the first base line point"),
@@ -1889,6 +1890,7 @@ void  MainWindow::ArrowTool()
     ui->actionStopTool->setEnabled(false);
     currentTool = Tool::Arrow;
     emit EnableItemMove(true);
+    emit ItemsSelection(SelectionType::ByMouseRelease);
 
     // Only true for rubber band selection
     emit EnableLabelSelection(true);
@@ -4501,6 +4503,20 @@ void MainWindow::ToolSelectPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolSelectPointByRelease() const
+{
+    ToolSelectPoint();
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolSelectPointByPress() const
+{
+    ToolSelectPoint();
+    emit ItemsSelection(SelectionType::ByMousePress);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolSelectSpline() const
 {
     // Only true for rubber band selection
@@ -4517,6 +4533,8 @@ void MainWindow::ToolSelectSpline() const
     emit EnableArcHover(false);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(false);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
 }
@@ -4539,6 +4557,8 @@ void MainWindow::ToolSelectSplinePath() const
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(true);
 
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
     ui->view->AllowRubberBand(false);
 }
 
@@ -4559,6 +4579,8 @@ void MainWindow::ToolSelectArc() const
     emit EnableArcHover(true);
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
 }
@@ -4581,6 +4603,8 @@ void MainWindow::ToolSelectPointArc() const
     emit EnableSplineHover(false);
     emit EnableSplinePathHover(false);
 
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
     ui->view->AllowRubberBand(false);
 }
 
@@ -4601,6 +4625,8 @@ void MainWindow::ToolSelectCurve() const
     emit EnableArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
 }
@@ -4623,6 +4649,8 @@ void MainWindow::ToolSelectAllObjects() const
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
 
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
     ui->view->AllowRubberBand(false);
 }
 
@@ -4638,6 +4666,8 @@ void MainWindow::ToolSelectDetail() const
     emit EnableNodeLabelHover(true);
     emit EnableNodePointHover(true);
     emit EnableDetailHover(true);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
 }

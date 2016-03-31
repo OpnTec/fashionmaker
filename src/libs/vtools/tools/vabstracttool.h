@@ -79,6 +79,7 @@ public slots:
     virtual void            FullUpdateFromFile()=0;
     virtual void            AllowHover(bool enabled)=0;
     virtual void            AllowSelecting(bool enabled)=0;
+    virtual void            ToolSelectionType(const SelectionType &type);
 signals:
     /**
      * @brief toolhaveChange emit if tool create change that need save.
@@ -105,6 +106,7 @@ protected:
     Qt::GlobalColor         baseColor;
 
     Visualization           *vis;
+    SelectionType           selectionType;
 
     /**
      * @brief AddToFile add tag with informations about tool into file.

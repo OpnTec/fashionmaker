@@ -58,6 +58,7 @@ public slots:
     void          SetFactor(qreal factor);
     void          EnableItemMove(bool move);
     void          EnableDetailsMode(bool mode);
+    void          ItemsSelection(const SelectionType &type);
 
     void          ToggleLabelSelection(bool enabled);
     void          TogglePointSelection(bool enabled);
@@ -105,6 +106,7 @@ signals:
     void          DisableItem(bool disable, const QString &namePP);
     void          EnableToolMove(bool move);
     void          CurveDetailsMode(bool mode);
+    void          ItemSelection(const SelectionType &type);
 
     void          EnableLabelItemSelection(bool enable);
     void          EnablePointItemSelection(bool enable);

@@ -157,6 +157,7 @@ public slots:
 signals:
     void               RefreshHistory();
     void               EnableItemMove(bool move);
+    void               ItemsSelection(SelectionType type) const;
 
     void               EnableLabelSelection(bool enable) const;
     void               EnablePointSelection(bool enable) const;
@@ -352,6 +353,8 @@ private:
     bool               IgnoreLocking(int error, const QString &path);
 
     void ToolSelectPoint() const;
+    void ToolSelectPointByPress() const;
+    void ToolSelectPointByRelease() const;
     void ToolSelectSpline() const;
     void ToolSelectSplinePath() const;
     void ToolSelectArc() const;

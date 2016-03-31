@@ -49,6 +49,7 @@ public:
     enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
 
     void setEnabled(bool enabled);
+    void LabelSelectionType(const SelectionType &type);
 signals:
     /**
      * @brief NameChangePosition emit when label change position.
@@ -72,7 +73,8 @@ protected:
     virtual void keyReleaseEvent ( QKeyEvent * event ) Q_DECL_OVERRIDE;
 private:
     /** @brief fontSize label font size. */
-    qint32       fontSize;
+    qint32        fontSize;
+    SelectionType selectionType;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

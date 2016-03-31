@@ -67,6 +67,7 @@ public slots:
     virtual void            AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
     void                    AllowLabelHover(bool enabled);
     void                    AllowLabelSelecting(bool enabled);
+    virtual void            ToolSelectionType(const SelectionType &type) Q_DECL_OVERRIDE;
 protected:
     /** @brief radius radius circle. */
     qreal                   radius;

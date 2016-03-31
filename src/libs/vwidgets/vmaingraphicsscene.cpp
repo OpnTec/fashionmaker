@@ -282,6 +282,12 @@ void VMainGraphicsScene::EnableDetailsMode(bool mode)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ItemsSelection(const SelectionType &type)
+{
+    emit ItemSelection(type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::ToggleLabelSelection(bool enabled)
 {
     emit EnableLabelItemSelection(enabled);

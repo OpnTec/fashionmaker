@@ -216,6 +216,14 @@ void VToolDoublePoint::AllowLabelSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::ToolSelectionType(const SelectionType &type)
+{
+    VAbstractTool::ToolSelectionType(type);
+    firstPoint->ToolSelectionType(type);
+    secondPoint->ToolSelectionType(type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::UpdateNamePosition(quint32 id)
 {
     if (id == p1id)
