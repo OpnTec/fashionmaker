@@ -77,6 +77,8 @@ public slots:
      * @brief FullUpdateFromFile update tool data form file.
      */
     virtual void            FullUpdateFromFile()=0;
+    virtual void            AllowHover(bool enabled)=0;
+    virtual void            AllowSelecting(bool enabled)=0;
 signals:
     /**
      * @brief toolhaveChange emit if tool create change that need save.

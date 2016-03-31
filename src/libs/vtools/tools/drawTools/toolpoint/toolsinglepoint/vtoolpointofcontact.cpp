@@ -220,10 +220,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
         VToolPointOfContact *point = new VToolPointOfContact(doc, data, id, radius, center,
                                                              firstPointId, secondPointId, typeCreation);
         scene->addItem(point);
-        connect(point, &VToolPointOfContact::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfContact::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointOfContact::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointOfContact::EnableToolMove);
+        InitToolConnections(scene, point);
         doc->AddTool(id, point);
         doc->IncrementReferens(centerP->getIdTool());
         doc->IncrementReferens(firstP->getIdTool());

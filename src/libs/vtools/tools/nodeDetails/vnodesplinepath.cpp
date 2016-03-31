@@ -101,6 +101,20 @@ QString VNodeSplinePath::getTagName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VNodeSplinePath::AllowHover(bool enabled)
+{
+    Q_UNUSED(enabled)
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodeSplinePath::AllowSelecting(bool enabled)
+{
+    Q_UNUSED(enabled)
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToFile add tag with informations about tool into file.
  */

@@ -147,6 +147,18 @@ void VSimplePoint::EnableToolMove(bool move)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::AllowLabelHover(bool enabled)
+{
+    namePoint->setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::AllowLabelSelecting(bool enabled)
+{
+    namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::DeleteFromLabel()
 {
     emit Delete();
@@ -173,11 +185,19 @@ void VSimplePoint::ContextMenu(QGraphicsSceneContextMenuEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    // Special for not selectable item first need to call standard mousePressEvent then accept event
+    QGraphicsEllipseItem::mousePressEvent(event);
+    event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
     if (event->button() == Qt::LeftButton)
     {
         emit Choosed(id);
     }
-    QGraphicsEllipseItem::mousePressEvent(event);
+    QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

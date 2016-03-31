@@ -116,10 +116,7 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const qui
         auto point = new VToolPointOfIntersectionCurves(doc, data, id, firstCurveId, secondCurveId, vCrossPoint,
                                                         hCrossPoint, typeCreation);
         scene->addItem(point);
-        connect(point, &VToolPointOfIntersectionCurves::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfIntersectionCurves::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointOfIntersectionCurves::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointOfIntersectionCurves::EnableToolMove);
+        InitToolConnections(scene, point);
         doc->AddTool(id, point);
         doc->IncrementReferens(curve1->getIdTool());
         doc->IncrementReferens(curve2->getIdTool());

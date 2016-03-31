@@ -63,6 +63,10 @@ public slots:
     void                    PointChoosed();
     virtual void            FullUpdateFromFile() Q_DECL_OVERRIDE;
     virtual void            DoChangePosition(quint32 id, qreal mx, qreal my) Q_DECL_OVERRIDE;
+    virtual void            AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void            AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    void                    AllowLabelHover(bool enabled);
+    void                    AllowLabelSelecting(bool enabled);
 protected:
     /** @brief radius radius circle. */
     qreal                   radius;
@@ -74,7 +78,8 @@ protected:
     QGraphicsLineItem       *lineName;
 
     virtual void            UpdateNamePosition(quint32 id) Q_DECL_OVERRIDE;
-    virtual void            mousePressEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void            mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
+    virtual void            mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     virtual void            hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void            hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void            RefreshPointGeometry(const VPointF &point);

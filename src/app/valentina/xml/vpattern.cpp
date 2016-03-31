@@ -940,22 +940,8 @@ void VPattern::ParseToolBasePoint(VMainGraphicsScene *scene, const QDomElement &
         const qreal x = qApp->toPixel(GetParametrDouble(domElement, AttrX, "10.0"));
         const qreal y = qApp->toPixel(GetParametrDouble(domElement, AttrY, "10.0"));
 
-        data->UpdateGObject(id, new VPointF(x, y, name, mx, my));
-        VDrawTool::AddRecord(id, Tool::BasePoint, this);
-        if (parse != Document::FullParse)
-        {
-            UpdateToolData(id, data);
-        }
-        if (parse == Document::FullParse)
-        {
-            spoint = new VToolBasePoint(this, data, id, Source::FromFile, nameActivPP);
-            scene->addItem(spoint);
-            connect(spoint, &VToolBasePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, spoint, &VToolBasePoint::SetFactor);
-            connect(scene, &VMainGraphicsScene::DisableItem, spoint, &VToolBasePoint::Disable);
-            connect(scene, &VMainGraphicsScene::EnableToolMove, spoint, &VToolBasePoint::EnableToolMove);
-            tools[id] = spoint;
-        }
+        VPointF *point = new VPointF(x, y, name, mx, my);
+        VToolBasePoint::Create(id, nameActivPP, point, scene, this, data, parse, Source::FromFile);
     }
     catch (const VExceptionBadId &e)
     {

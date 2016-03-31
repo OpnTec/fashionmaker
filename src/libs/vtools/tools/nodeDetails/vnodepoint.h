@@ -64,6 +64,10 @@ public slots:
     void         NameChangePosition(const QPointF &pos);
     void         PointChoosed();
     void         EnableToolMove(bool move);
+    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    void         AllowLabelHover(bool enabled);
+    void         AllowLabelSelecting(bool enabled);
 protected:
     /** @brief radius radius circle. */
     qreal        radius;
@@ -76,6 +80,7 @@ protected:
 
     virtual void AddToFile() Q_DECL_OVERRIDE;
     virtual void RefreshDataInFile() Q_DECL_OVERRIDE;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     virtual void hoverMoveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;

@@ -157,6 +157,25 @@ public slots:
 signals:
     void               RefreshHistory();
     void               EnableItemMove(bool move);
+
+    void               EnableLabelSelection(bool enable) const;
+    void               EnablePointSelection(bool enable) const;
+    void               EnableArcSelection(bool enable) const;
+    void               EnableSplineSelection(bool enable) const;
+    void               EnableSplinePathSelection(bool enable) const;
+    void               EnableNodeLabelSelection(bool enable) const;
+    void               EnableNodePointSelection(bool enable) const;
+    void               EnableDetailSelection(bool enable) const;
+
+    void               EnableLabelHover(bool enable) const;
+    void               EnablePointHover(bool enable) const;
+    void               EnableLineHover(bool enable) const;
+    void               EnableArcHover(bool enable) const;
+    void               EnableSplineHover(bool enable) const;
+    void               EnableSplinePathHover(bool enable) const;
+    void               EnableNodeLabelHover(bool enable) const;
+    void               EnableNodePointHover(bool enable) const;
+    void               EnableDetailHover(bool enable) const;
 protected:
     virtual void       keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
     virtual void       showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
@@ -331,6 +350,15 @@ private:
     void               UpdateWindowTitle();
 
     bool               IgnoreLocking(int error, const QString &path);
+
+    void ToolSelectPoint() const;
+    void ToolSelectSpline() const;
+    void ToolSelectSplinePath() const;
+    void ToolSelectArc() const;
+    void ToolSelectPointArc() const;
+    void ToolSelectCurve() const;
+    void ToolSelectAllObjects() const;
+    void ToolSelectDetail() const;
 };
 
 #endif // MAINWINDOW_H

@@ -58,6 +58,25 @@ public slots:
     void          SetFactor(qreal factor);
     void          EnableItemMove(bool move);
     void          EnableDetailsMode(bool mode);
+
+    void          ToggleLabelSelection(bool enabled);
+    void          TogglePointSelection(bool enabled);
+    void          ToggleArcSelection(bool enabled);
+    void          ToggleSplineSelection(bool enabled);
+    void          ToggleSplinePathSelection(bool enabled);
+    void          ToggleNodeLabelSelection(bool enabled);
+    void          ToggleNodePointSelection(bool enabled);
+    void          ToggleDetailSelection(bool enabled);
+
+    void          ToggleLabelHover(bool enabled);
+    void          TogglePointHover(bool enabled);
+    void          ToggleLineHover(bool enabled);
+    void          ToggleArcHover(bool enabled);
+    void          ToggleSplineHover(bool enabled);
+    void          ToggleSplinePathHover(bool enabled);
+    void          ToggleNodeLabelHover(bool enabled);
+    void          ToggleNodePointHover(bool enabled);
+    void          ToggleDetailHover(bool enabled);
 protected:
     virtual void  mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
     virtual void  mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
@@ -86,6 +105,25 @@ signals:
     void          DisableItem(bool disable, const QString &namePP);
     void          EnableToolMove(bool move);
     void          CurveDetailsMode(bool mode);
+
+    void          EnableLabelItemSelection(bool enable);
+    void          EnablePointItemSelection(bool enable);
+    void          EnableArcItemSelection(bool enable);
+    void          EnableSplineItemSelection(bool enable);
+    void          EnableSplinePathItemSelection(bool enable);
+    void          EnableNodeLabelItemSelection(bool enabled);
+    void          EnableNodePointItemSelection(bool enabled);
+    void          EnableDetailItemSelection(bool enabled);
+
+    void          EnableLabelItemHover(bool enable);
+    void          EnablePointItemHover(bool enable);
+    void          EnableArcItemHover(bool enable);
+    void          EnableSplineItemHover(bool enable);
+    void          EnableSplinePathItemHover(bool enable);
+    void          EnableNodeLabelItemHover(bool enabled);
+    void          EnableNodePointItemHover(bool enabled);
+    void          EnableDetailItemHover(bool enabled);
+    void          EnableLineItemHover(bool enabled);
 private:
     /** @brief horScrollBar value horizontal scroll bar. */
     qint32        horScrollBar;

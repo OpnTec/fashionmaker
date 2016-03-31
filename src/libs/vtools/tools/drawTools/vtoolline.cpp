@@ -152,6 +152,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, line, &VToolLine::Disable);
+        connect(scene, &VMainGraphicsScene::EnableLineItemHover, line, &VToolLine::AllowHover);
         doc->AddTool(id, line);
 
         const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
@@ -224,6 +225,18 @@ void VToolLine::Disable(bool disable, const QString &namePP)
     this->setPen(QPen(CorrectColor(baseColor),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                       LineStyleToPenStyle(typeLine)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::AllowHover(bool enabled)
+{
+    setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::AllowSelecting(bool enabled)
+{
+    setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

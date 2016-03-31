@@ -164,10 +164,7 @@ VToolLineIntersect* VToolLineIntersect::Create(const quint32 _id, const quint32 
             VToolLineIntersect *point = new VToolLineIntersect(doc, data, id, p1Line1Id, p2Line1Id, p1Line2Id,
                                                                p2Line2Id, typeCreation);
             scene->addItem(point);
-            connect(point, &VToolLineIntersect::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-            connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolLineIntersect::SetFactor);
-            connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolLineIntersect::Disable);
-            connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolLineIntersect::EnableToolMove);
+            InitToolConnections(scene, point);
             doc->AddTool(id, point);
             doc->IncrementReferens(p1Line1->getIdTool());
             doc->IncrementReferens(p2Line1->getIdTool());

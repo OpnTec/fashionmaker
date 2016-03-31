@@ -200,10 +200,7 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
         VToolBisector *point = new VToolBisector(doc, data, id, typeLine, lineColor, formula, firstPointId,
                                                  secondPointId, thirdPointId, typeCreation);
         scene->addItem(point);
-        connect(point, &VToolSinglePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolBisector::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolBisector::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolBisector::EnableToolMove);
+        InitToolConnections(scene, point);
         doc->AddTool(id, point);
         doc->IncrementReferens(firstPoint->getIdTool());
         doc->IncrementReferens(secondPoint->getIdTool());

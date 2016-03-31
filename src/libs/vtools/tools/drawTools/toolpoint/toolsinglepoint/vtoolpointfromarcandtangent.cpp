@@ -108,10 +108,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const quint32 _
         VToolPointFromArcAndTangent *point = new VToolPointFromArcAndTangent(doc, data, id, arcId, tangentPointId,
                                                                              crossPoint, typeCreation);
         scene->addItem(point);
-        connect(point, &VToolPointFromArcAndTangent::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointFromArcAndTangent::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointFromArcAndTangent::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointFromArcAndTangent::EnableToolMove);
+        InitToolConnections(scene, point);
         doc->AddTool(id, point);
         doc->IncrementReferens(arc.getIdTool());
         doc->IncrementReferens(tPoint.getIdTool());

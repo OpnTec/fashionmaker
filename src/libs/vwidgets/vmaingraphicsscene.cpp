@@ -280,3 +280,105 @@ void VMainGraphicsScene::EnableDetailsMode(bool mode)
 {
     emit CurveDetailsMode(mode);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleLabelSelection(bool enabled)
+{
+    emit EnableLabelItemSelection(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::TogglePointSelection(bool enabled)
+{
+    emit EnablePointItemSelection(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleArcSelection(bool enabled)
+{
+    emit EnableArcItemSelection(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleSplineSelection(bool enabled)
+{
+    emit EnableSplineItemSelection(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleSplinePathSelection(bool enabled)
+{
+    emit EnableSplinePathItemSelection(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleNodeLabelSelection(bool enabled)
+{
+    emit EnableNodeLabelItemSelection(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleNodePointSelection(bool enabled)
+{
+    emit EnableNodePointItemSelection(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleDetailSelection(bool enabled)
+{
+    emit EnableDetailItemSelection(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleLabelHover(bool enabled)
+{
+    emit EnableLabelItemHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::TogglePointHover(bool enabled)
+{
+    emit EnablePointItemHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleLineHover(bool enabled)
+{
+    emit EnableLineItemHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleArcHover(bool enabled)
+{
+    emit EnableArcItemHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleSplineHover(bool enabled)
+{
+    emit EnableSplineItemHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleSplinePathHover(bool enabled)
+{
+    emit EnableSplinePathItemHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleNodeLabelHover(bool enabled)
+{
+    emit EnableNodeLabelItemHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleNodePointHover(bool enabled)
+{
+    emit EnableNodePointItemHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleDetailHover(bool enabled)
+{
+    emit EnableDetailItemHover(enabled);
+}

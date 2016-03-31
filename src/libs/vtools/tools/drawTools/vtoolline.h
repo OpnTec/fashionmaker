@@ -69,6 +69,8 @@ public slots:
     virtual void     ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
     virtual void     SetFactor(qreal factor) Q_DECL_OVERRIDE;
     virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
+    virtual void     AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void     AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void     AddToFile() Q_DECL_OVERRIDE;

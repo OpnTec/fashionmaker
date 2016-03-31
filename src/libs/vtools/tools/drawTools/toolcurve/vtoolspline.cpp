@@ -62,7 +62,6 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
 
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
-    this->setAcceptHoverEvents(true);
     this->setPath(ToolPath());
 
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);
@@ -179,11 +178,7 @@ VToolSpline* VToolSpline::Create(const quint32 _id, VSpline *spline, const QStri
     {
         auto _spl = new VToolSpline(doc, data, id, color, typeCreation);
         scene->addItem(_spl);
-        connect(_spl, &VToolSpline::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, _spl, &VToolSpline::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, _spl, &VToolSpline::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, _spl, &VToolSpline::EnableToolMove);
-        connect(scene, &VMainGraphicsScene::CurveDetailsMode, _spl, &VToolSpline::DetailsMode);
+        InitSplineToolConnections(scene, _spl);
         doc->AddTool(id, _spl);
         doc->IncrementReferens(spline->GetP1().getIdTool());
         doc->IncrementReferens(spline->GetP4().getIdTool());

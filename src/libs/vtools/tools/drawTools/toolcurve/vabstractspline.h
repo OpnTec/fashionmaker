@@ -58,7 +58,10 @@ public:
 public slots:
     virtual void     FullUpdateFromFile () Q_DECL_OVERRIDE;
     virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
-    void             DetailsMode(bool mode);
+    virtual void     DetailsMode(bool mode) Q_DECL_OVERRIDE;
+    virtual void     AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void     AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void     SetFactor(qreal factor) Q_DECL_OVERRIDE;
 signals:
     /**
      * @brief setEnabledPoint disable control points.
@@ -78,12 +81,12 @@ protected:
      */
     virtual void     RefreshGeometry ()=0;
     virtual void     ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
-    virtual void     SetFactor(qreal factor) Q_DECL_OVERRIDE;
     virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
     virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void     keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
-    virtual void     mousePressEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
+    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
     QPainterPath     ToolPath(PathDirection direction = PathDirection::Hide) const;
     virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
@@ -92,6 +95,15 @@ protected:
 
     template <typename T>
     void ShowToolVisualization(bool show);
+
+    template <typename T>
+    static void InitSplineToolConnections(VMainGraphicsScene *scene, T *tool);
+
+    template <typename T>
+    static void InitSplinePathToolConnections(VMainGraphicsScene *scene, T *tool);
+
+    template <typename T>
+    static void InitArcToolConnections(VMainGraphicsScene *scene, T *tool);
 
 private:
     Q_DISABLE_COPY(VAbstractSpline)
@@ -135,6 +147,42 @@ inline void VAbstractSpline::ShowToolVisualization(bool show)
     { // Showing/hiding control points require recalculation scene size.
         VMainGraphicsView::NewSceneRect(scene(), qApp->getSceneView());
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VAbstractSpline::InitSplineToolConnections(VMainGraphicsScene *scene, T *tool)
+{
+    SCASSERT(scene != nullptr);
+    SCASSERT(tool != nullptr);
+
+    InitDrawToolConnections(scene, tool);
+    QObject::connect(scene, &VMainGraphicsScene::EnableSplineItemHover, tool, &T::AllowHover);
+    QObject::connect(scene, &VMainGraphicsScene::EnableSplineItemSelection, tool, &T::AllowSelecting);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VAbstractSpline::InitSplinePathToolConnections(VMainGraphicsScene *scene, T *tool)
+{
+    SCASSERT(scene != nullptr);
+    SCASSERT(tool != nullptr);
+
+    InitDrawToolConnections(scene, tool);
+    QObject::connect(scene, &VMainGraphicsScene::EnableSplinePathItemHover, tool, &T::AllowHover);
+    QObject::connect(scene, &VMainGraphicsScene::EnableSplinePathItemSelection, tool, &T::AllowSelecting);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VAbstractSpline::InitArcToolConnections(VMainGraphicsScene *scene, T *tool)
+{
+    SCASSERT(scene != nullptr);
+    SCASSERT(tool != nullptr);
+
+    InitDrawToolConnections(scene, tool);
+    QObject::connect(scene, &VMainGraphicsScene::EnableArcItemHover, tool, &T::AllowHover);
+    QObject::connect(scene, &VMainGraphicsScene::EnableArcItemSelection, tool, &T::AllowSelecting);
 }
 
 #endif // VABSTRACTSPLINE_H

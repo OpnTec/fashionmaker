@@ -38,7 +38,9 @@ const QString VAbstractSpline::TagName = QStringLiteral("spline");
 VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>()),
       sceneType(SceneObject::Unknown), isHovered(false), detailsMode(false)
-{}
+{
+    setAcceptHoverEvents(true);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::~VAbstractSpline()
@@ -90,6 +92,18 @@ void VAbstractSpline::DetailsMode(bool mode)
     detailsMode = mode;
     RefreshGeometry();
     ShowHandles(detailsMode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::AllowHover(bool enabled)
+{
+    setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::AllowSelecting(bool enabled)
+{
+    setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -206,17 +220,25 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    // Special for not selectable item first need to call standard mousePressEvent then accept event
+    QGraphicsPathItem::mousePressEvent(event);
+    event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief mousePressEvent  handle mouse press events.
+ * @brief mouseReleaseEvent  handle mouse release events.
  * @param event mouse release event.
  */
-void VAbstractSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void VAbstractSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
         emit ChoosedTool(id, sceneType);
     }
-    QGraphicsPathItem::mousePressEvent(event);
+    QGraphicsPathItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -132,6 +132,14 @@ void VToolSinglePoint::UpdateNamePosition(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    // Special for not selectable item first need to call standard mousePressEvent then accept event
+    QGraphicsEllipseItem::mousePressEvent(event);
+    event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor.
@@ -175,16 +183,16 @@ void VToolSinglePoint::FullUpdateFromFile()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief mousePressEvent  handle mouse press events.
+ * @brief mouseReleaseEvent  handle mouse release events.
  * @param event mouse release event.
  */
-void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
         PointChoosed();
     }
-    QGraphicsEllipseItem::mousePressEvent(event);
+    QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,4 +340,28 @@ void VToolSinglePoint::DoChangePosition(quint32 id, qreal mx, qreal my)
     namePoint->setPos(QPointF(mx, my));
     namePoint->blockSignals(false);
     RefreshLine(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::AllowHover(bool enabled)
+{
+    setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::AllowSelecting(bool enabled)
+{
+    setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::AllowLabelHover(bool enabled)
+{
+    namePoint->setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::AllowLabelSelecting(bool enabled)
+{
+    namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }

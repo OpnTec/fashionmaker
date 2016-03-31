@@ -188,6 +188,34 @@ void VToolDoublePoint::DoChangePosition(quint32 id, qreal mx, qreal my)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::AllowHover(bool enabled)
+{
+    firstPoint->setAcceptHoverEvents(enabled);
+    secondPoint->setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::AllowSelecting(bool enabled)
+{
+    firstPoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+    secondPoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::AllowLabelHover(bool enabled)
+{
+    firstPoint->AllowLabelHover(enabled);
+    secondPoint->AllowLabelHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::AllowLabelSelecting(bool enabled)
+{
+    firstPoint->AllowLabelSelecting(enabled);
+    secondPoint->AllowLabelSelecting(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::UpdateNamePosition(quint32 id)
 {
     if (id == p1id)

@@ -49,7 +49,6 @@ VToolArcWithLength::VToolArcWithLength(VAbstractPattern *doc, VContainer *data, 
 
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    this->setAcceptHoverEvents(true);
 
     ToolCreation(typeCreation);
 }
@@ -123,9 +122,7 @@ VToolArcWithLength *VToolArcWithLength::Create(const quint32 _id, const quint32 
     {
         VToolArcWithLength *toolArc = new VToolArcWithLength(doc, data, id, color, typeCreation);
         scene->addItem(toolArc);
-        connect(toolArc, &VToolArcWithLength::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, toolArc, &VToolArcWithLength::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, toolArc, &VToolArcWithLength::Disable);
+        InitArcToolConnections(scene, toolArc);
         doc->AddTool(id, toolArc);
         doc->IncrementReferens(c.getIdTool());
         return toolArc;
