@@ -130,10 +130,7 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const q
                                                                                      secondCircleRadius, crossPoint,
                                                                                      typeCreation);
         scene->addItem(point);
-        connect(point, &VToolPointOfIntersectionCircles::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointOfIntersectionCircles::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointOfIntersectionCircles::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointOfIntersectionCircles::EnableToolMove);
+        InitToolConnections(scene, point);
         doc->AddTool(id, point);
         doc->IncrementReferens(c1Point.getIdTool());
         doc->IncrementReferens(c2Point.getIdTool());

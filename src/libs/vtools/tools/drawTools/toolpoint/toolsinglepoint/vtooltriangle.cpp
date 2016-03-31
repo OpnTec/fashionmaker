@@ -151,10 +151,7 @@ VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName
         VToolTriangle *point = new VToolTriangle(doc, data, id, axisP1Id, axisP2Id, firstPointId,
                                                  secondPointId, typeCreation);
         scene->addItem(point);
-        connect(point, &VToolTriangle::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolTriangle::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolTriangle::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolTriangle::EnableToolMove);
+        InitToolConnections(scene, point);
         doc->AddTool(id, point);
         doc->IncrementReferens(axisP1->getIdTool());
         doc->IncrementReferens(axisP2->getIdTool());

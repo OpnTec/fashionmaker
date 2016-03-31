@@ -48,9 +48,6 @@ public:
     virtual int   type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::DoublePoint)};
 
-    virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                       QWidget * widget = 0) Q_DECL_OVERRIDE;
-
     QString nameP1() const;
     void    setNameP1(const QString &name);
 
@@ -69,6 +66,11 @@ public slots:
     void         Point2Choosed();
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
     virtual void DoChangePosition(quint32 id, qreal mx, qreal my) Q_DECL_OVERRIDE;
+    virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    void         AllowLabelHover(bool enabled);
+    void         AllowLabelSelecting(bool enabled);
+    virtual void ToolSelectionType(const SelectionType &type) Q_DECL_OVERRIDE;
 
 protected:
     VSimplePoint *firstPoint;

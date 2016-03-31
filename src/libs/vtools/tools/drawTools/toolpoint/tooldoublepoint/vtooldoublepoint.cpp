@@ -61,19 +61,6 @@ VToolDoublePoint::~VToolDoublePoint()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDoublePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    /* From question on StackOverflow
-     * https://stackoverflow.com/questions/10985028/how-to-remove-border-around-qgraphicsitem-when-selected
-     *
-     * There's no interface to disable the drawing of the selection border for the build-in QGraphicsItems. The only way
-     * I can think of is derive your own items from the build-in ones and override the paint() function:*/
-    QStyleOptionGraphicsItem myOption(*option);
-    myOption.state &= ~QStyle::State_Selected;
-    QGraphicsPathItem::paint(painter, &myOption, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VToolDoublePoint::nameP1() const
 {
     return ObjectName<VPointF>(p1id);
@@ -185,6 +172,42 @@ void VToolDoublePoint::DoChangePosition(quint32 id, qreal mx, qreal my)
         secondPoint->blockSignals(false);
         RefreshLine(p2id);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::AllowHover(bool enabled)
+{
+    firstPoint->setAcceptHoverEvents(enabled);
+    secondPoint->setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::AllowSelecting(bool enabled)
+{
+    firstPoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+    secondPoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::AllowLabelHover(bool enabled)
+{
+    firstPoint->AllowLabelHover(enabled);
+    secondPoint->AllowLabelHover(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::AllowLabelSelecting(bool enabled)
+{
+    firstPoint->AllowLabelSelecting(enabled);
+    secondPoint->AllowLabelSelecting(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::ToolSelectionType(const SelectionType &type)
+{
+    VAbstractTool::ToolSelectionType(type);
+    firstPoint->ToolSelectionType(type);
+    secondPoint->ToolSelectionType(type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -43,6 +43,9 @@ public:
                       const QString &namePP, QGraphicsItem * parent = nullptr );
     virtual ~VToolBasePoint() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
+    static VToolBasePoint *Create(quint32 _id, const QString &nameActivPP, VPointF *point,
+                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                  const Document &parse, const Source &typeCreation);
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::BasePoint)};

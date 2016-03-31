@@ -172,10 +172,7 @@ VToolTrueDarts *VToolTrueDarts::Create(quint32 _id,
         VToolTrueDarts *points = new VToolTrueDarts(doc, data, id, p1id, p2id, baseLineP1Id, baseLineP2Id,
                                                     dartP1Id, dartP2Id, dartP3Id, typeCreation);
         scene->addItem(points);
-        connect(points, &VToolDoublePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, points, &VToolTrueDarts::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, points, &VToolTrueDarts::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, points, &VToolTrueDarts::EnableToolMove);
+        InitToolConnections(scene, points);
         doc->AddTool(id, points);
         doc->IncrementReferens(baseLineP1->getIdTool());
         doc->IncrementReferens(baseLineP2->getIdTool());

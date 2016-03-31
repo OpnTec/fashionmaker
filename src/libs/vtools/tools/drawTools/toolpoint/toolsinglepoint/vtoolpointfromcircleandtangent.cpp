@@ -118,10 +118,7 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const qui
                                                                                    circleRadius, tangentPointId,
                                                                                    crossPoint, typeCreation);
         scene->addItem(point);
-        connect(point, &VToolPointFromCircleAndTangent::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, point, &VToolPointFromCircleAndTangent::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, point, &VToolPointFromCircleAndTangent::Disable);
-        connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VToolPointFromCircleAndTangent::EnableToolMove);
+        InitToolConnections(scene, point);
         doc->AddTool(id, point);
         doc->IncrementReferens(cPoint.getIdTool());
         doc->IncrementReferens(tPoint.getIdTool());

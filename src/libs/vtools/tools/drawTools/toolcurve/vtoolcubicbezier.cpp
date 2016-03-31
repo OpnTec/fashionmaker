@@ -43,7 +43,6 @@ VToolCubicBezier::VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quin
     lineColor = color;
 
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
-    this->setAcceptHoverEvents(true);
     this->setPath(ToolPath());
 
     ToolCreation(typeCreation);
@@ -108,9 +107,7 @@ VToolCubicBezier *VToolCubicBezier::Create(const quint32 _id, VCubicBezier *spli
     {
         auto _spl = new VToolCubicBezier(doc, data, id, color, typeCreation);
         scene->addItem(_spl);
-        connect(_spl, &VToolCubicBezier::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, _spl, &VToolCubicBezier::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, _spl, &VToolCubicBezier::Disable);
+        InitSplineToolConnections(scene, _spl);
         doc->AddTool(id, _spl);
         doc->IncrementReferens(spline->GetP1().getIdTool());
         doc->IncrementReferens(spline->GetP1().getIdTool());

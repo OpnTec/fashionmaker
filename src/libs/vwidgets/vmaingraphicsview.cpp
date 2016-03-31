@@ -321,7 +321,7 @@ bool GraphicsViewZoom::StartHorizontalScrollings(QWheelEvent *wheel_event)
  * @param parent parent object.
  */
 VMainGraphicsView::VMainGraphicsView(QWidget *parent)
-    :QGraphicsView(parent), zoom(nullptr), showToolOptions(true)
+    :QGraphicsView(parent), zoom(nullptr), showToolOptions(true), isAllowRubberBand(true)
 {
     zoom = new GraphicsViewZoom(this);
     this->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
@@ -386,7 +386,10 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
     {
         case Qt::LeftButton:
         {
-            QGraphicsView::setDragMode(QGraphicsView::RubberBandDrag);
+            if (isAllowRubberBand)
+            {
+                QGraphicsView::setDragMode(QGraphicsView::RubberBandDrag);
+            }
             if (showToolOptions)
             {
                 QList<QGraphicsItem *> list = items(mousePress->pos());
@@ -436,7 +439,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
  */
 void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
-    QGraphicsView::mouseReleaseEvent ( event );
+    QGraphicsView::mouseReleaseEvent ( event ); // First because need to hide a rubber band
     QGraphicsView::setDragMode( QGraphicsView::NoDrag );
     if (event->button() == Qt::LeftButton)
     {
@@ -448,6 +451,12 @@ void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 void VMainGraphicsView::setShowToolOptions(bool value)
 {
     showToolOptions = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::AllowRubberBand(bool value)
+{
+    isAllowRubberBand = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

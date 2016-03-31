@@ -80,6 +80,38 @@ void VToolBasePoint::setDialog()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VToolBasePoint *VToolBasePoint::Create(quint32 _id, const QString &nameActivPP, VPointF *point,
+                                       VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                       const Document &parse, const Source &typeCreation)
+{
+    SCASSERT(point != nullptr);
+
+    quint32 id = _id;
+    if (typeCreation == Source::FromGui)
+    {
+        id = data->AddGObject(point);
+    }
+    else
+    {
+        data->UpdateGObject(id, point);
+        if (parse != Document::FullParse)
+        {
+            doc->UpdateToolData(id, data);
+        }
+    }
+    VDrawTool::AddRecord(id, Tool::BasePoint, doc);
+    if (parse == Document::FullParse)
+    {
+        VToolBasePoint *spoint = new VToolBasePoint(doc, data, id, typeCreation, nameActivPP);
+        scene->addItem(spoint);
+        InitToolConnections(scene, spoint);
+        doc->AddTool(id, spoint);
+        return spoint;
+    }
+    return nullptr;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::ShowVisualization(bool show)
 {
     Q_UNUSED(show); //don't have any visualization for base point yet

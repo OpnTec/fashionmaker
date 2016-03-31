@@ -91,6 +91,10 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
         VNodePoint *point = new VNodePoint(doc, data, id, idPoint, typeCreation, idTool, doc);
 
         connect(scene, &VMainGraphicsScene::EnableToolMove, point, &VNodePoint::EnableToolMove);
+        connect(scene, &VMainGraphicsScene::EnablePointItemHover, point, &VNodePoint::AllowHover);
+        connect(scene, &VMainGraphicsScene::EnablePointItemSelection, point, &VNodePoint::AllowSelecting);
+        connect(scene, &VMainGraphicsScene::EnableLabelItemHover, point, &VNodePoint::AllowLabelHover);
+        connect(scene, &VMainGraphicsScene::EnableLabelItemSelection, point, &VNodePoint::AllowLabelSelecting);
         doc->AddTool(id, point);
         if (idTool != NULL_ID)
         {
@@ -228,6 +232,14 @@ void VNodePoint::RefreshDataInFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    // Special for not selectable item first need to call standard mousePressEvent then accept event
+    QGraphicsEllipseItem::mousePressEvent(event);
+    event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief mouseReleaseEvent handle mouse release events.
  * @param event mouse release event.
@@ -238,7 +250,7 @@ void VNodePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     {
         emit ChoosedTool(id, SceneObject::Point);
     }
-    QGraphicsItem::mouseReleaseEvent(event);
+    QGraphicsEllipseItem::mouseReleaseEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -344,4 +356,28 @@ void VNodePoint::HideNode()
 void VNodePoint::EnableToolMove(bool move)
 {
     namePoint->setFlag(QGraphicsItem::ItemIsMovable, move);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::AllowHover(bool enabled)
+{
+    setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::AllowSelecting(bool enabled)
+{
+    setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::AllowLabelHover(bool enabled)
+{
+    namePoint->setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::AllowLabelSelecting(bool enabled)
+{
+    namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }

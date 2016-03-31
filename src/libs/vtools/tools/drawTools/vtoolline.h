@@ -49,8 +49,7 @@ public:
                              VAbstractPattern *doc, VContainer *data, const Document &parse,
                              const Source &typeCreation);
     static const QString TagName;
-    virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                           QWidget * widget = 0) Q_DECL_OVERRIDE;
+
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Line)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
@@ -69,6 +68,8 @@ public slots:
     virtual void     ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;
     virtual void     SetFactor(qreal factor) Q_DECL_OVERRIDE;
     virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
+    virtual void     AllowHover(bool enabled) Q_DECL_OVERRIDE;
+    virtual void     AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
 protected:
     virtual void     contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void     AddToFile() Q_DECL_OVERRIDE;

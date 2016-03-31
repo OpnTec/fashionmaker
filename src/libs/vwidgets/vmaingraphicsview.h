@@ -109,6 +109,7 @@ public:
 
     explicit VMainGraphicsView(QWidget *parent = nullptr);
     void setShowToolOptions(bool value);
+    void AllowRubberBand(bool value);
 
     static void NewSceneRect(QGraphicsScene *sc, QGraphicsView *view);
     static QRectF SceneVisibleArea(QGraphicsView *view);
@@ -138,6 +139,7 @@ private:
     Q_DISABLE_COPY(VMainGraphicsView)
     GraphicsViewZoom* zoom;
     bool     showToolOptions;
+    bool     isAllowRubberBand;
 };
 
 #endif // VMAINGRAPHICSVIEW_H

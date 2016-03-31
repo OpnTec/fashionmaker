@@ -47,8 +47,7 @@ public:
                         const QPointF &splinePoint, Unit patternUnit, bool freeAngle, bool freeLength,
                         QGraphicsItem * parent = nullptr);
     virtual ~VControlPointSpline() Q_DECL_OVERRIDE;
-    virtual void      paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                            QWidget * widget = 0) Q_DECL_OVERRIDE;
+
     virtual int       type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::ControlPointSpline)};
 signals:

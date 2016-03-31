@@ -100,6 +100,20 @@ QString VNodeArc::getTagName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VNodeArc::AllowHover(bool enabled)
+{
+    Q_UNUSED(enabled)
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodeArc::AllowSelecting(bool enabled)
+{
+    Q_UNUSED(enabled)
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToFile add tag with informations about tool into file.
  */

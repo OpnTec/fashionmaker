@@ -152,6 +152,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
         connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
         connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);
         connect(scene, &VMainGraphicsScene::DisableItem, line, &VToolLine::Disable);
+        connect(scene, &VMainGraphicsScene::EnableLineItemHover, line, &VToolLine::AllowHover);
         doc->AddTool(id, line);
 
         const QSharedPointer<VPointF> first = data->GeometricObject<VPointF>(firstPoint);
@@ -162,19 +163,6 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
         return line;
     }
     return nullptr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    /* From question on StackOverflow
-     * https://stackoverflow.com/questions/10985028/how-to-remove-border-around-qgraphicsitem-when-selected
-     *
-     * There's no interface to disable the drawing of the selection border for the build-in QGraphicsItems. The only way
-     * I can think of is derive your own items from the build-in ones and override the paint() function:*/
-    QStyleOptionGraphicsItem myOption(*option);
-    myOption.state &= ~QStyle::State_Selected;
-    QGraphicsLineItem::paint(painter, &myOption, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -224,6 +212,18 @@ void VToolLine::Disable(bool disable, const QString &namePP)
     this->setPen(QPen(CorrectColor(baseColor),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                       LineStyleToPenStyle(typeLine)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::AllowHover(bool enabled)
+{
+    setAcceptHoverEvents(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLine::AllowSelecting(bool enabled)
+{
+    setFlag(QGraphicsItem::ItemIsSelectable, enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

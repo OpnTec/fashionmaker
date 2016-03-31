@@ -45,7 +45,7 @@
  * @param parent parent object.
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
-    :QGraphicsSimpleTextItem(parent), fontSize(0)
+    :QGraphicsSimpleTextItem(parent), fontSize(0), selectionType(SelectionType::ByMouseRelease)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -64,7 +64,7 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
  * @param parent parent object.
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent )
-    :QGraphicsSimpleTextItem(text, parent), fontSize(0)
+    :QGraphicsSimpleTextItem(text, parent), fontSize(0), selectionType(SelectionType::ByMouseRelease)
 {
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -92,6 +92,12 @@ void VGraphicsSimpleTextItem::setEnabled(bool enabled)
     {
         setBrush(palet.brush(QPalette::Disabled, QPalette::Text));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::LabelSelectionType(const SelectionType &type)
+{
+    selectionType = type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -158,10 +164,9 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        this->setBrush(Qt::green);
-
         SetOverrideCursor(cursorArrowOpenHand, 1, 1);
     }
+    this->setBrush(Qt::green);
     QGraphicsSimpleTextItem::hoverEnterEvent(event);
 }
 
@@ -175,11 +180,10 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     Q_UNUSED(event);
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
-        this->setBrush(Qt::black);
-
         //Disable cursor-arrow-openhand
         RestoreOverrideCursor(cursorArrowOpenHand);
     }
+    this->setBrush(Qt::black);
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }
 
@@ -196,6 +200,8 @@ void VGraphicsSimpleTextItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *e
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    // Special for not selectable item first need to call standard mousePressEvent then accept event
+    QGraphicsSimpleTextItem::mousePressEvent(event);
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
@@ -203,10 +209,14 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
             SetOverrideCursor(cursorArrowCloseHand, 1, 1);
         }
     }
-
-    emit PointChoosed();
-
-    QGraphicsSimpleTextItem::mousePressEvent(event);
+    if (selectionType == SelectionType::ByMouseRelease)
+    {
+        event->accept(); // This help for not selectable items still receive mouseReleaseEvent events
+    }
+    else
+    {
+        emit PointChoosed();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -219,6 +229,11 @@ void VGraphicsSimpleTextItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             //Disable cursor-arrow-closehand
             RestoreOverrideCursor(cursorArrowCloseHand);
         }
+    }
+
+    if (selectionType == SelectionType::ByMouseRelease)
+    {
+        emit PointChoosed();
     }
 
     QGraphicsSimpleTextItem::mouseReleaseEvent(event);
