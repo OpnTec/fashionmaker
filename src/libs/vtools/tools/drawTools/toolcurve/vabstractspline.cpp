@@ -47,19 +47,6 @@ VAbstractSpline::~VAbstractSpline()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    /* From question on StackOverflow
-     * https://stackoverflow.com/questions/10985028/how-to-remove-border-around-qgraphicsitem-when-selected
-     *
-     * There's no interface to disable the drawing of the selection border for the build-in QGraphicsItems. The only way
-     * I can think of is derive your own items from the build-in ones and override the paint() function:*/
-    QStyleOptionGraphicsItem myOption(*option);
-    myOption.state &= ~QStyle::State_Selected;
-    QGraphicsPathItem::paint(painter, &myOption, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractSpline::getTagName() const
 {
     return VAbstractSpline::TagName;

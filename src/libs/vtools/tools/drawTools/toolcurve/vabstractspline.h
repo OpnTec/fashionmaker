@@ -44,8 +44,6 @@ public:
     virtual ~VAbstractSpline() Q_DECL_OVERRIDE;
     // cppcheck-suppress duplInheritedMember
     static const QString TagName;
-    virtual void     paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                           QWidget * widget = 0) Q_DECL_OVERRIDE;
     virtual int      type() const  Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;

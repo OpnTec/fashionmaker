@@ -48,9 +48,6 @@ public:
     virtual int   type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::DoublePoint)};
 
-    virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                       QWidget * widget = 0) Q_DECL_OVERRIDE;
-
     QString nameP1() const;
     void    setNameP1(const QString &name);
 
