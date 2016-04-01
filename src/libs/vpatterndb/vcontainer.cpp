@@ -265,13 +265,11 @@ void VContainer::ClearForFullParse()
 
     d->details.clear();
     ClearVariables(VarType::Increment);
-    ClearVariables(VarType::ArcLength);
     ClearVariables(VarType::LineAngle);
     ClearVariables(VarType::LineLength);
-    ClearVariables(VarType::SplineLength);
+    ClearVariables(VarType::CurveLength);
     ClearVariables(VarType::ArcRadius);
-    ClearVariables(VarType::ArcAngle);
-    ClearVariables(VarType::SplineAngle);
+    ClearVariables(VarType::CurveAngle);
     ClearGObjects();
     ClearUniqueNames();
 }
@@ -374,16 +372,30 @@ void VContainer::AddLine(const quint32 &firstPointId, const quint32 &secondPoint
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::AddArc(const QSharedPointer<VArc> &arc, const quint32 &id, const quint32 &parentId)
 {
-    VArcLength *length = new VArcLength(id, parentId, arc.data(), *GetPatternUnit());
-    AddVariable(length->GetName(), length);
+    AddCurve(arc, id, parentId);
 
     VArcRadius *radius = new VArcRadius(id, parentId, arc.data(), *GetPatternUnit());
     AddVariable(radius->GetName(), radius);
+}
 
-    VArcAngle *startAngle = new VArcAngle(id, parentId, arc.data(), CurveAngle::StartAngle);
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, const quint32 &parentId)
+{
+    const GOType curveType = curve->getType();
+    if (curveType != GOType::Spline      && curveType != GOType::SplinePath &&
+        curveType != GOType::CubicBezier && curveType != GOType::CubicBezierPath &&
+        curveType != GOType::Arc)
+    {
+        throw VException(tr("Can't create a curve with type '%1'").arg(static_cast<int>(curveType)));
+    }
+
+    VCurveLength *length = new VCurveLength(id, parentId, curve.data(), *GetPatternUnit());
+    AddVariable(length->GetName(), length);
+
+    VCurveAngle *startAngle = new VCurveAngle(id, parentId, curve.data(), CurveAngle::StartAngle);
     AddVariable(startAngle->GetName(), startAngle);
 
-    VArcAngle *endAngle = new VArcAngle(id, parentId, arc.data(), CurveAngle::EndAngle);
+    VCurveAngle *endAngle = new VCurveAngle(id, parentId, curve.data(), CurveAngle::EndAngle);
     AddVariable(endAngle->GetName(), endAngle);
 }
 
@@ -472,15 +484,9 @@ const QMap<QString, QSharedPointer<VLengthLine> > VContainer::DataLengthLines() 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, QSharedPointer<VSplineLength> > VContainer::DataLengthSplines() const
+const QMap<QString, QSharedPointer<VCurveLength> > VContainer::DataLengthCurves() const
 {
-    return DataVar<VSplineLength>(VarType::SplineLength);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, QSharedPointer<VArcLength> > VContainer::DataLengthArcs() const
-{
-    return DataVar<VArcLength>(VarType::ArcLength);
+    return DataVar<VCurveLength>(VarType::CurveLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -496,15 +502,9 @@ const QMap<QString, QSharedPointer<VArcRadius> > VContainer::DataRadiusesArcs() 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, QSharedPointer<VArcAngle> > VContainer::DataAnglesArcs() const
+const QMap<QString, QSharedPointer<VCurveAngle> > VContainer::DataAnglesCurves() const
 {
-    return DataVar<VArcAngle>(VarType::ArcAngle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const QMap<QString, QSharedPointer<VSplineAngle> > VContainer::DataAnglesCurves() const
-{
-    return DataVar<VSplineAngle>(VarType::SplineAngle);
+    return DataVar<VCurveAngle>(VarType::CurveAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -672,23 +672,3 @@ const QHash<QString, QSharedPointer<VInternalVariable> > *VContainer::DataVariab
 //---------------------------------------------------------------------------------------------------------------------
 VContainerData::~VContainerData()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VContainer::AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, const quint32 &parentId)
-{
-    const GOType curveType = curve->getType();
-    if (curveType != GOType::Spline      && curveType != GOType::SplinePath &&
-        curveType != GOType::CubicBezier && curveType != GOType::CubicBezierPath)
-    {
-        throw VException(tr("Can't create a curve with type %1").arg(static_cast<int>(curveType)));
-    }
-
-    VSplineLength *length = new VSplineLength(id, parentId, curve.data(), *GetPatternUnit());
-    AddVariable(length->GetName(), length);
-
-    VSplineAngle *startAngle = new VSplineAngle(id, parentId, curve.data(), CurveAngle::StartAngle);
-    AddVariable(startAngle->GetName(), startAngle);
-
-    VSplineAngle *endAngle = new VSplineAngle(id, parentId, curve.data(), CurveAngle::EndAngle);
-    AddVariable(endAngle->GetName(), endAngle);
-}

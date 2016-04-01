@@ -94,9 +94,7 @@ private:
     void                 FillLengthsLines();
     void                 FillLengthLinesAngles();
     void                 FillLengthsCurves();
-    void                 FillLengthArcs();
     void                 FillRadiusesArcs();
-    void                 FillAnglesArcs();
     void                 FillAnglesCurves();
 
     void                 ShowUnits();

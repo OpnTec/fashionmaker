@@ -76,9 +76,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     FillLengthsLines();
     FillLengthLinesAngles();
     FillLengthsCurves();
-    FillLengthArcs();
     FillRadiusesArcs();
-    FillAnglesArcs();
     FillAnglesCurves();
 
     connect(this, &DialogIncrements::FullUpdateTree, this->doc, &VPattern::LiteParseTree);
@@ -211,28 +209,13 @@ void DialogIncrements::FillLengthLinesAngles()
  */
 void DialogIncrements::FillLengthsCurves()
 {
-    FillTable(data->DataLengthSplines(), ui->tableWidgetSplines);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FillLengthArcs fill data for table of arcs lengths
- */
-void DialogIncrements::FillLengthArcs()
-{
-    FillTable(data->DataLengthArcs(), ui->tableWidgetArcs);
+    FillTable(data->DataLengthCurves(), ui->tableWidgetSplines);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillRadiusesArcs()
 {
     FillTable(data->DataRadiusesArcs(), ui->tableWidgetRadiusesArcs);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::FillAnglesArcs()
-{
-    FillTable(data->DataAnglesArcs(), ui->tableWidgetAnglesArcs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -251,11 +234,9 @@ void DialogIncrements::ShowUnits()
 
     ShowHeaderUnits(ui->tableWidgetLines, 1, unit);// lengths
     ShowHeaderUnits(ui->tableWidgetSplines, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetArcs, 1, unit);// lengths
-    ShowHeaderUnits(ui->tableWidgetLinesAngles, 1, "°");// angle
+    ShowHeaderUnits(ui->tableWidgetLinesAngles, 1, degreeSymbol);// angle
     ShowHeaderUnits(ui->tableWidgetRadiusesArcs, 1, unit);// radius
-    ShowHeaderUnits(ui->tableWidgetAnglesArcs, 1, "°");// angle
-    ShowHeaderUnits(ui->tableWidgetAnglesCurves, 1, "°");// angle
+    ShowHeaderUnits(ui->tableWidgetAnglesCurves, 1, degreeSymbol);// angle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -430,8 +411,6 @@ void DialogIncrements::FullUpdateFromFile()
 {
     ui->tableWidgetLines->clearContents();
     ui->tableWidgetSplines->clearContents();
-    ui->tableWidgetArcs->clearContents();
-    ui->tableWidgetAnglesArcs->clearContents();
     ui->tableWidgetAnglesCurves->clearContents();
     ui->tableWidgetLinesAngles->clearContents();
     ui->tableWidgetRadiusesArcs->clearContents();
@@ -440,9 +419,7 @@ void DialogIncrements::FullUpdateFromFile()
     FillLengthsLines();
     FillLengthLinesAngles();
     FillLengthsCurves();
-    FillLengthArcs();
     FillRadiusesArcs();
-    FillAnglesArcs();
     FillAnglesCurves();
 }
 

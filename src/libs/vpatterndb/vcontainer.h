@@ -153,15 +153,13 @@ public:
     const QHash<quint32, VDetail>                           *DataDetails() const;
     const QHash<QString, QSharedPointer<VInternalVariable>> *DataVariables() const;
 
-    const QMap<QString, QSharedPointer<VMeasurement> >  DataMeasurements() const;
-    const QMap<QString, QSharedPointer<VIncrement> >    DataIncrements() const;
-    const QMap<QString, QSharedPointer<VLengthLine> >   DataLengthLines() const;
-    const QMap<QString, QSharedPointer<VSplineLength> > DataLengthSplines() const;
-    const QMap<QString, QSharedPointer<VArcLength> >    DataLengthArcs() const;
-    const QMap<QString, QSharedPointer<VLineAngle> >    DataAngleLines() const;
-    const QMap<QString, QSharedPointer<VArcRadius> >    DataRadiusesArcs() const;
-    const QMap<QString, QSharedPointer<VArcAngle> >     DataAnglesArcs() const;
-    const QMap<QString, QSharedPointer<VSplineAngle> >  DataAnglesCurves() const;
+    const QMap<QString, QSharedPointer<VMeasurement> > DataMeasurements() const;
+    const QMap<QString, QSharedPointer<VIncrement> >   DataIncrements() const;
+    const QMap<QString, QSharedPointer<VLengthLine> >  DataLengthLines() const;
+    const QMap<QString, QSharedPointer<VCurveLength> > DataLengthCurves() const;
+    const QMap<QString, QSharedPointer<VLineAngle> >   DataAngleLines() const;
+    const QMap<QString, QSharedPointer<VArcRadius> >   DataRadiusesArcs() const;
+    const QMap<QString, QSharedPointer<VCurveAngle> >  DataAnglesCurves() const;
 
     const QHash<QString, qreal *> PlainVariables() const;
 

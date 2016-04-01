@@ -33,22 +33,24 @@
 VCurveAngle::VCurveAngle()
     :VCurveVariable()
 {
-    SetType(VarType::Unknown);
+    SetType(VarType::CurveAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle)
     :VCurveVariable(id, parentId)
 {
-    SetType(VarType::Unknown);
+    SetType(VarType::CurveAngle);
     SCASSERT(curve != nullptr);
     if (angle == CurveAngle::StartAngle)
     {
         SetValue(curve->GetStartAngle());
+        SetName(QString(angle1_V+"%1").arg(curve->name()));
     }
     else
     {
         SetValue(curve->GetEndAngle());
+        SetName(QString(angle2_V+"%1").arg(curve->name()));
     }
 }
 

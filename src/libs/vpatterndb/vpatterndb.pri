@@ -7,8 +7,6 @@ SOURCES += \
     $$PWD/vdetail.cpp \
     $$PWD/vnodedetail.cpp \
     $$PWD/vtranslatevars.cpp \
-    $$PWD/variables/varcangle.cpp \
-    $$PWD/variables/varclength.cpp \
     $$PWD/variables/varcradius.cpp \
     $$PWD/variables/vcurveangle.cpp \
     $$PWD/variables/vcurvelength.cpp \
@@ -18,8 +16,6 @@ SOURCES += \
     $$PWD/variables/vlineangle.cpp \
     $$PWD/variables/vlinelength.cpp \
     $$PWD/variables/vmeasurement.cpp \
-    $$PWD/variables/vsplineangle.cpp \
-    $$PWD/variables/vsplinelength.cpp \
     $$PWD/variables/vvariable.cpp \
     $$PWD/vformula.cpp
 
@@ -35,8 +31,6 @@ HEADERS += \
     $$PWD/vnodedetail.h \
     $$PWD/vnodedetail_p.h \
     $$PWD/vtranslatevars.h \
-    $$PWD/variables/varcangle.h \
-    $$PWD/variables/varclength.h \
     $$PWD/variables/varcradius.h \
     $$PWD/variables/varcradius_p.h \
     $$PWD/variables/vcurveangle.h \
@@ -53,8 +47,6 @@ HEADERS += \
     $$PWD/variables/vlinelength_p.h \
     $$PWD/variables/vmeasurement.h \
     $$PWD/variables/vmeasurement_p.h \
-    $$PWD/variables/vsplineangle.h \
-    $$PWD/variables/vsplinelength.h \
     $$PWD/variables/vvariable.h \
     $$PWD/variables/vvariable_p.h \
     $$PWD/vformula.h

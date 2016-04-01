@@ -33,14 +33,14 @@
 VCurveLength::VCurveLength()
     :VCurveVariable()
 {
-    SetType(VarType::Unknown);
+    SetType(VarType::CurveLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, Unit patternUnit)
     :VCurveVariable(id, parentId)
 {
-    SetType(VarType::Unknown);
+    SetType(VarType::CurveLength);
     SCASSERT(curve != nullptr);
     SetName(curve->name());
     SetValue(FromPixel(curve->GetLength(), patternUnit));

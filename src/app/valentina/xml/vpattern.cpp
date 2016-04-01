@@ -3066,13 +3066,11 @@ void VPattern::PrepareForParse(const Document &parse)
     {
         data->ClearUniqueNames();
         data->ClearVariables(VarType::Increment);
-        data->ClearVariables(VarType::ArcLength);
         data->ClearVariables(VarType::LineAngle);
         data->ClearVariables(VarType::LineLength);
-        data->ClearVariables(VarType::SplineLength);
+        data->ClearVariables(VarType::CurveLength);
         data->ClearVariables(VarType::ArcRadius);
-        data->ClearVariables(VarType::ArcAngle);
-        data->ClearVariables(VarType::SplineAngle);
+        data->ClearVariables(VarType::CurveAngle);
     }
 }
 

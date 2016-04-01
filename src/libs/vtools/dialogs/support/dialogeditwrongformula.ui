@@ -273,22 +273,6 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButtonLengthArc">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Length of arcs</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QRadioButton" name="radioButtonLengthSpline">
            <property name="enabled">
             <bool>true</bool>
@@ -330,19 +314,6 @@
            </property>
            <property name="text">
             <string>Radius of arcs</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="radioButtonAnglesArcs">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Angles of arcs</string>
            </property>
           </widget>
          </item>
@@ -415,7 +386,6 @@
   <tabstop>radioButtonStandardTable</tabstop>
   <tabstop>radioButtonIncrements</tabstop>
   <tabstop>radioButtonLengthLine</tabstop>
-  <tabstop>radioButtonLengthArc</tabstop>
   <tabstop>radioButtonLengthSpline</tabstop>
   <tabstop>radioButtonAngleLine</tabstop>
   <tabstop>checkBoxHideEmpty</tabstop>

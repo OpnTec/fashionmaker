@@ -142,17 +142,10 @@ void DialogEditWrongFormula::ValChenged(int row)
                        VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Line length"));
         return;
     }
-    if (ui->radioButtonLengthArc->isChecked())
-    {
-        SetDescription(item->text(),
-                       *data->GetVariable<VArcLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
-                       VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Arc length"));
-        return;
-    }
     if (ui->radioButtonLengthSpline->isChecked())
     {
         SetDescription(item->text(),
-                       *data->GetVariable<VSplineLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
+                       *data->GetVariable<VCurveLength>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
                        VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Curve length"));
         return;
     }
@@ -170,17 +163,10 @@ void DialogEditWrongFormula::ValChenged(int row)
                        VDomDocument::UnitsToStr(qApp->patternUnit(), true), tr("Arc radius"));
         return;
     }
-    if (ui->radioButtonAnglesArcs->isChecked())
-    {
-        SetDescription(item->text(),
-                       *data->GetVariable<VArcAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
-                       degreeSymbol, tr("Arc angle"));
-        return;
-    }
     if (ui->radioButtonAnglesCurves->isChecked())
     {
         SetDescription(item->text(),
-                       *data->GetVariable<VSplineAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
+                       *data->GetVariable<VCurveAngle>(qApp->TrVars()->VarFromUser(item->text()))->GetValue(),
                        degreeSymbol, tr("Curve angle"));
         return;
     }
@@ -243,27 +229,10 @@ void DialogEditWrongFormula::RadiusArcs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEditWrongFormula::AnglesArcs()
-{
-    ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(data->DataAnglesArcs());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::AnglesCurves()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
     ShowVariable(data->DataAnglesCurves());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief LengthArcs show in list lengths of arcs variables
- */
-void DialogEditWrongFormula::LengthArcs()
-{
-    ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(data->DataLengthArcs());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -273,7 +242,7 @@ void DialogEditWrongFormula::LengthArcs()
 void DialogEditWrongFormula::LengthCurves()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(data->DataLengthSplines());
+    ShowVariable(data->DataLengthCurves());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -363,12 +332,10 @@ void DialogEditWrongFormula::InitVariables()
     connect(ui->radioButtonStandardTable, &QRadioButton::clicked, this, &DialogEditWrongFormula::Measurements);
     connect(ui->radioButtonIncrements, &QRadioButton::clicked, this, &DialogEditWrongFormula::Increments);
     connect(ui->radioButtonLengthLine, &QRadioButton::clicked, this, &DialogEditWrongFormula::LengthLines);
-    connect(ui->radioButtonLengthArc, &QRadioButton::clicked, this, &DialogEditWrongFormula::LengthArcs);
     connect(ui->radioButtonLengthSpline, &QRadioButton::clicked, this, &DialogEditWrongFormula::LengthCurves);
     connect(ui->radioButtonAngleLine, &QRadioButton::clicked, this, &DialogEditWrongFormula::AngleLines);
     connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogEditWrongFormula::Measurements);
     connect(ui->radioButtonRadiusesArcs, &QRadioButton::clicked, this, &DialogEditWrongFormula::RadiusArcs);
-    connect(ui->radioButtonAnglesArcs, &QRadioButton::clicked, this, &DialogEditWrongFormula::AnglesArcs);
     connect(ui->radioButtonAnglesCurves, &QRadioButton::clicked, this, &DialogEditWrongFormula::AnglesCurves);
 }
 
