@@ -91,12 +91,12 @@ VToolCubicBezier *VToolCubicBezier::Create(const quint32 _id, VCubicBezier *spli
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(spline);
-        data->AddCurve<VCubicBezier>(id);
+        data->AddCurve(data->GeometricObject<VAbstractCurve>(id), id);
     }
     else
     {
         data->UpdateGObject(id, spline);
-        data->AddCurve<VCubicBezier>(id);
+        data->AddCurve(data->GeometricObject<VAbstractCurve>(id), id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

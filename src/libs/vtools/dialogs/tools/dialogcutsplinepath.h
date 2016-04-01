@@ -56,8 +56,6 @@ public:
 
     QString      GetColor() const;
     void         SetColor(const QString &value);
-
-    void         SetChildrenId(const quint32 &ch1, const quint32 &ch2);
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     /**
@@ -83,9 +81,6 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
-
-    quint32 ch1;
-    quint32 ch2;
 };
 
 #endif // DIALOGCUTSPLINEPATH_H

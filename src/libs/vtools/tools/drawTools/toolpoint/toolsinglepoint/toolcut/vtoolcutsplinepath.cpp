@@ -45,16 +45,14 @@ const QString VToolCutSplinePath::AttrSplinePath = QStringLiteral("splinePath");
  * @param id object id in container.
  * @param formula string with formula length first splinePath.
  * @param splinePathId id splinePath (we cut this splinePath) in data container.
- * @param splPath1id id first splinePath after cutting.
- * @param splPath2id id second splinePath after cutting.
+ * @param color spline path color.
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
 VToolCutSplinePath::VToolCutSplinePath(VAbstractPattern *doc, VContainer *data, const quint32 &id,
                                        const QString &formula, const quint32 &splinePathId,
-                                       const quint32 &splPath1id, const quint32 &splPath2id, const QString &color,
-                                       const Source &typeCreation, QGraphicsItem *parent)
-    :VToolCut(doc, data, id, formula, splinePathId, splPath1id, splPath2id, color, parent)
+                                       const QString &color, const Source &typeCreation, QGraphicsItem *parent)
+    :VToolCut(doc, data, id, formula, splinePathId, color, parent)
 {
     ToolCreation(typeCreation);
 }
@@ -69,7 +67,6 @@ void VToolCutSplinePath::setDialog()
     DialogCutSplinePath *dialogTool = qobject_cast<DialogCutSplinePath*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->SetChildrenId(curve1id, curve2id);
     dialogTool->SetFormula(formula);
     dialogTool->setSplinePathId(curveCutId);
     dialogTool->SetPointName(point->name());
@@ -143,30 +140,16 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(p);
+
+        data->AddCurve(QSharedPointer<VAbstractCurve>(splPath1), NULL_ID, id);
+        data->AddCurve(QSharedPointer<VAbstractCurve>(splPath2), NULL_ID, id);
     }
     else
     {
         data->UpdateGObject(id, p);
-    }
 
-    quint32 splPath1id = id + 1;
-    quint32 splPath2id = id + 2;
-
-    if (typeCreation == Source::FromGui)
-    {
-        splPath1id = data->AddGObject(splPath1);
-        data->AddCurve<VSplinePath>(splPath1id, id);
-
-        splPath2id = data->AddGObject(splPath2);
-        data->AddCurve<VSplinePath>(splPath2id, id);
-    }
-    else
-    {
-        data->UpdateGObject(splPath1id, splPath1);
-        data->AddCurve<VSplinePath>(splPath1id, id);
-
-        data->UpdateGObject(splPath2id, splPath2);
-        data->AddCurve<VSplinePath>(splPath2id, id);
+        data->AddCurve(QSharedPointer<VAbstractCurve>(splPath1), NULL_ID, id);
+        data->AddCurve(QSharedPointer<VAbstractCurve>(splPath2), NULL_ID, id);
 
         if (parse != Document::FullParse)
         {
@@ -177,13 +160,10 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const quint32 _id, const QString 
     VDrawTool::AddRecord(id, Tool::CutSplinePath, doc);
     if (parse == Document::FullParse)
     {
-        VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, splPath1id,
-                                                           splPath2id, color, typeCreation);
+        VToolCutSplinePath *point = new VToolCutSplinePath(doc, data, id, formula, splinePathId, color, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
         doc->AddTool(id, point);
-        doc->AddTool(splPath1id, point);
-        doc->AddTool(splPath2id, point);
         doc->IncrementReferens(splPath->getIdTool());
         return point;
     }

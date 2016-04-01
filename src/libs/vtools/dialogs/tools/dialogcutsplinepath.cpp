@@ -42,8 +42,7 @@
  * @param parent parent widget
  */
 DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSplinePath), formula(QString()), formulaBaseHeight(0),
-      ch1(NULL_ID), ch2(NULL_ID)
+    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSplinePath), formula(QString()), formulaBaseHeight(0)
 {
     ui->setupUi(this);
 
@@ -61,7 +60,7 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &
     flagFormula = false;
     CheckState();
 
-    FillComboBoxSplinesPath(ui->comboBoxSplinePath, FillComboBox::NoChildren, ch1, ch2);
+    FillComboBoxSplinesPath(ui->comboBoxSplinePath);
     FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSplinePath::FXLength);
@@ -120,7 +119,7 @@ void DialogCutSplinePath::SetFormula(const QString &value)
  */
 void DialogCutSplinePath::setSplinePathId(const quint32 &value)
 {
-    setCurrentSplinePathId(ui->comboBoxSplinePath, value, FillComboBox::NoChildren, ch1, ch2);
+    setCurrentSplinePathId(ui->comboBoxSplinePath, value);
 
     VisToolCutSplinePath *path = qobject_cast<VisToolCutSplinePath *>(vis);
     SCASSERT(path != nullptr);
@@ -137,14 +136,6 @@ QString DialogCutSplinePath::GetColor() const
 void DialogCutSplinePath::SetColor(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxColor, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCutSplinePath::SetChildrenId(const quint32 &ch1, const quint32 &ch2)
-{
-    this->ch1 = ch1;
-    this->ch2 = ch2;
-    FillComboBoxSplinesPath(ui->comboBoxSplinePath, FillComboBox::NoChildren, ch1, ch2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

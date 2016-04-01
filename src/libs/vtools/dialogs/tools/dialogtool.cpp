@@ -132,7 +132,7 @@ void DialogTool::FillComboBoxArcs(QComboBox *box, FillComboBox rule, const quint
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FillComboBoxSplines(QComboBox *box, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
+void DialogTool::FillComboBoxSplines(QComboBox *box) const
 {
     SCASSERT(box != nullptr);
     box->blockSignals(true);
@@ -142,24 +142,11 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, FillComboBox rule, const qu
     QMap<QString, quint32> list;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        if (rule == FillComboBox::NoChildren)
+        if (i.key() != toolId)
         {
-            if (i.key() != toolId && i.key() != ch1 && i.key() != ch2)
+            if (IsSpline(i.value()))
             {
-                if (IsSpline(i.value()))
-                {
-                    PrepareList<VAbstractCurve>(list, i.key());
-                }
-            }
-        }
-        else
-        {
-            if (i.key() != toolId)
-            {
-                if (IsSpline(i.value()))
-                {
-                    PrepareList<VAbstractCurve>(list, i.key());
-                }
+                PrepareList<VAbstractCurve>(list, i.key());
             }
         }
     }
@@ -169,8 +156,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box, FillComboBox rule, const qu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FillComboBoxSplinesPath(QComboBox *box, FillComboBox rule, const quint32 &ch1,
-                                         const quint32 &ch2) const
+void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
 {
     SCASSERT(box != nullptr);
     box->blockSignals(true);
@@ -180,24 +166,11 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box, FillComboBox rule, cons
     QMap<QString, quint32> list;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        if (rule == FillComboBox::NoChildren)
+        if (i.key() != toolId)
         {
-            if (i.key() != toolId && i.key() != ch1 && i.key() != ch2)
+            if (IsSplinePath(i.value()))
             {
-                if (IsSplinePath(i.value()))
-                {
-                    PrepareList<VAbstractCurve>(list, i.key());
-                }
-            }
-        }
-        else
-        {
-            if (i.key() != toolId)
-            {
-                if (IsSplinePath(i.value()))
-                {
-                    PrepareList<VAbstractCurve>(list, i.key());
-                }
+                PrepareList<VAbstractCurve>(list, i.key());
             }
         }
     }
@@ -532,11 +505,10 @@ void DialogTool::setCurrentPointId(QComboBox *box, const quint32 &value, FillCom
 /**
  * @brief setCurrentSplineId set current spline id in combobox
  */
-void DialogTool::setCurrentSplineId(QComboBox *box, const quint32 &value, FillComboBox rule,
-                                    const quint32 &ch1, const quint32 &ch2) const
+void DialogTool::setCurrentSplineId(QComboBox *box, const quint32 &value) const
 {
     SCASSERT(box != nullptr);
-    FillComboBoxSplines(box, rule, ch1, ch2);
+    FillComboBoxSplines(box);
     ChangeCurrentData(box, value);
 }
 
@@ -558,11 +530,10 @@ void DialogTool::setCurrentArcId(QComboBox *box, const quint32 &value, FillCombo
  * @param box combobox
  * @param value splinePath id
  */
-void DialogTool::setCurrentSplinePathId(QComboBox *box, const quint32 &value, FillComboBox rule,
-                                        const quint32 &ch1, const quint32 &ch2) const
+void DialogTool::setCurrentSplinePathId(QComboBox *box, const quint32 &value) const
 {
     SCASSERT(box != nullptr);
-    FillComboBoxSplinesPath(box, rule, ch1, ch2);
+    FillComboBoxSplinesPath(box);
     ChangeCurrentData(box, value);
 }
 

@@ -131,18 +131,18 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
     calcF1 = CheckFormula(_id, f1, data);
     calcF2 = CheckFormula(_id, f2, data);
 
-    VPointF c = *data->GeometricObject<VPointF>(center);
+    const VPointF c = *data->GeometricObject<VPointF>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(arc);
-        data->AddArc(id);
+        data->AddArc(data->GeometricObject<VArc>(id), id);
     }
     else
     {
         data->UpdateGObject(id, arc);
-        data->AddArc(id);
+        data->AddArc(data->GeometricObject<VArc>(id), id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

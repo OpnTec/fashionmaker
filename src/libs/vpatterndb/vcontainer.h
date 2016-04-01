@@ -120,10 +120,10 @@ public:
     quint32            AddGObject(VGObject *obj);
     quint32            AddDetail(const VDetail &detail);
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
-    void               AddArc(const quint32 &arcId, const quint32 &parentId = 0);
+    void               AddArc(const QSharedPointer<VArc> &arc, const quint32 &arcId, const quint32 &parentId = 0);
+    void               AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id,
+                                const quint32 &parentId = NULL_ID);
 
-    template <typename T>
-    void               AddCurve(const quint32 &id, const quint32 &parentId = 0);
     template <typename T>
     void               AddVariable(const QString& name, T *var);
 
@@ -257,21 +257,6 @@ QSharedPointer<T> VContainer::GetVariable(QString name) const
     {
         throw VExceptionBadId(tr("Can't find object"), name);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-void VContainer::AddCurve(const quint32 &id, const quint32 &parentId)
-{
-    const QSharedPointer<T> curve = GeometricObject<T>(id);
-    VSplineLength *length = new VSplineLength(id, parentId, curve.data(), *GetPatternUnit());
-    AddVariable(length->GetName(), length);
-
-    VSplineAngle *startAngle = new VSplineAngle(id, parentId, curve.data(), CurveAngle::StartAngle);
-    AddVariable(startAngle->GetName(), startAngle);
-
-    VSplineAngle *endAngle = new VSplineAngle(id, parentId, curve.data(), CurveAngle::EndAngle);
-    AddVariable(endAngle->GetName(), endAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

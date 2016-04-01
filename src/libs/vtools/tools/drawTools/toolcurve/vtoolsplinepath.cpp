@@ -166,12 +166,12 @@ VToolSplinePath* VToolSplinePath::Create(const quint32 _id, VSplinePath *path, c
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(path);
-        data->AddCurve<VSplinePath>(id);
+        data->AddCurve(data->GeometricObject<VAbstractCurve>(id), id);
     }
     else
     {
         data->UpdateGObject(id, path);
-        data->AddCurve<VSplinePath>(id);
+        data->AddCurve(data->GeometricObject<VAbstractCurve>(id), id);
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);

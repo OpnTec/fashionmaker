@@ -32,14 +32,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                   const quint32 &curveCutId, const quint32 &curve1id, const quint32 &curve2id, const QString &color,
-                   QGraphicsItem *parent)
-    :VToolSinglePoint(doc, data, id, parent), formula(formula),
-      curveCutId(curveCutId), curve1id(curve1id), curve2id(curve2id), detailsMode(false)
+                   const quint32 &curveCutId, const QString &color, QGraphicsItem *parent)
+    :VToolSinglePoint(doc, data, id, parent), formula(formula), curveCutId(curveCutId), detailsMode(false)
 {
     Q_ASSERT_X(curveCutId != 0, Q_FUNC_INFO, "curveCutId == 0"); //-V654 //-V712
-    Q_ASSERT_X(curve1id != 0, Q_FUNC_INFO, "curve1id == 0"); //-V654 //-V712
-    Q_ASSERT_X(curve2id != 0, Q_FUNC_INFO, "curve2id == 0"); //-V654 //-V712
 
     lineColor = color;
 }

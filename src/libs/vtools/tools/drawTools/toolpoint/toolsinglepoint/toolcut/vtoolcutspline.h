@@ -40,8 +40,8 @@ class VToolCutSpline : public VToolCut
 public:
 
     VToolCutSpline(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                   const quint32 &splineId, const quint32 &spl1id, const quint32 &spl2id, const QString &color,
-                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
+                   const quint32 &splineId, const QString &color, const Source &typeCreation,
+                   QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCutSpline *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                   VContainer *data);

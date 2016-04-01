@@ -39,8 +39,7 @@ class VToolCutArc : public VToolCut
     Q_OBJECT
 public:
     VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                const quint32 &arcId,
-                const quint32 &arc1id, const quint32 &arc2id, const QString &color, const Source &typeCreation,
+                const quint32 &arcId, const QString &color, const Source &typeCreation,
                 QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCutArc*  Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data);

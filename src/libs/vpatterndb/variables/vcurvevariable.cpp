@@ -68,7 +68,7 @@ VCurveVariable::~VCurveVariable()
 //---------------------------------------------------------------------------------------------------------------------
 bool VCurveVariable::Filter(quint32 id)
 {
-    if (d->parentId != 0)//Do not check if value zero
+    if (d->parentId != NULL_ID)//Do not check if value zero
     {// Not all curves have parents. Only those who was created after cutting the parent curve.
         return d->id == id || d->parentId == id;
     }

@@ -44,15 +44,14 @@ const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
  * @param id object id in container.
  * @param formula string with formula length first arc.
  * @param arcId id arc in data container.
- * @param arc1id id first cutting arc.
- * @param arc2id id second cutting arc.
+ * @param color arc color.
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
 VToolCutArc::VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                         const quint32 &arcId, const quint32 &arc1id, const quint32 &arc2id, const QString &color,
-                         const Source &typeCreation, QGraphicsItem * parent)
-    :VToolCut(doc, data, id, formula, arcId, arc1id, arc2id, color, parent)
+                         const quint32 &arcId, const QString &color, const Source &typeCreation,
+                         QGraphicsItem * parent)
+    :VToolCut(doc, data, id, formula, arcId, color, parent)
 {
     ToolCreation(typeCreation);
 }
@@ -67,7 +66,6 @@ void VToolCutArc::setDialog()
     DialogCutArc *dialogTool = qobject_cast<DialogCutArc*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->SetChildrenId(curve1id, curve2id);
     dialogTool->SetFormula(formula);
     dialogTool->setArcId(curveCutId);
     dialogTool->SetPointName(point->name());
@@ -129,28 +127,20 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     QPointF point = arc->CutArc(qApp->toPixel(result), arc1, arc2);
 
     quint32 id = _id;
-    quint32 arc1id = 0;
-    quint32 arc2id = 0;
+    VPointF *p = new VPointF(point, pointName, mx, my);
+    auto a1 = QSharedPointer<VArc>(new VArc(arc1));
+    auto a2 = QSharedPointer<VArc>(new VArc(arc2));
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(point, pointName, mx, my));
-        arc1id = data->AddGObject(new VArc(arc1));
-        arc2id = data->AddGObject(new VArc(arc2));
-
-        data->AddArc(arc1id, id);
-        data->AddArc(arc2id, id);
+        id = data->AddGObject(p);
+        data->AddArc(a1, NULL_ID, id);
+        data->AddArc(a2, NULL_ID, id);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(point, pointName, mx, my));
-        arc1id = id + 1;
-        arc2id = id + 2;
-
-        data->UpdateGObject(arc1id, new VArc(arc1));
-        data->UpdateGObject(arc2id, new VArc(arc2));
-
-        data->AddArc(arc1id, id);
-        data->AddArc(arc2id, id);
+        data->UpdateGObject(id, p);
+        data->AddArc(a1, NULL_ID, id);
+        data->AddArc(a2, NULL_ID, id);
 
         if (parse != Document::FullParse)
         {
@@ -161,12 +151,10 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     VDrawTool::AddRecord(id, Tool::CutArc, doc);
     if (parse == Document::FullParse)
     {
-        VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, arc1id, arc2id, color, typeCreation);
+        VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, color, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
         doc->AddTool(id, point);
-        doc->AddTool(arc1id, point);
-        doc->AddTool(arc2id, point);
         doc->IncrementReferens(arc->getIdTool());
         return point;
     }
