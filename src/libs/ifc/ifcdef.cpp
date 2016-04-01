@@ -160,6 +160,7 @@ const QString angle1Spl_    = angle1_V + spl_;
 const QString angle2Spl_    = angle2_V + spl_;
 const QString angle1SplPath = angle1_V + splPath;
 const QString angle2SplPath = angle2_V + splPath;
+const QString seg_          = QStringLiteral("Seg_");
 
 const QStringList builInVariables = QStringList() << line_
                                                   << angleLine_
@@ -175,4 +176,5 @@ const QStringList builInVariables = QStringList() << line_
                                                   << angle1Spl_
                                                   << angle2Spl_
                                                   << angle1SplPath
-                                                  << angle2SplPath;
+                                                  << angle2SplPath
+                                                  << seg_;

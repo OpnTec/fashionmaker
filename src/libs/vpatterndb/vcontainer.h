@@ -34,6 +34,7 @@
 #include "../vgeometry/vgobject.h"
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../vgeometry/vabstractcurve.h"
+#include "../vgeometry/vabstractcubicbezierpath.h"
 #include "vtranslatevars.h"
 
 #include <QCoreApplication>
@@ -122,7 +123,9 @@ public:
     void               AddLine(const quint32 &firstPointId, const quint32 &secondPointId);
     void               AddArc(const QSharedPointer<VArc> &arc, const quint32 &arcId, const quint32 &parentId = 0);
     void               AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id,
-                                const quint32 &parentId = NULL_ID);
+                                quint32 parentId = NULL_ID);
+    void               AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierPath> &curve, const quint32 &id,
+                                            quint32 parentId = NULL_ID);
 
     template <typename T>
     void               AddVariable(const QString& name, T *var);

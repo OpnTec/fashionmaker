@@ -379,7 +379,7 @@ void VContainer::AddArc(const QSharedPointer<VArc> &arc, const quint32 &id, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContainer::AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, const quint32 &parentId)
+void VContainer::AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId)
 {
     const GOType curveType = curve->getType();
     if (curveType != GOType::Spline      && curveType != GOType::SplinePath &&
@@ -397,6 +397,27 @@ void VContainer::AddCurve(const QSharedPointer<VAbstractCurve> &curve, const qui
 
     VCurveAngle *endAngle = new VCurveAngle(id, parentId, curve.data(), CurveAngle::EndAngle);
     AddVariable(endAngle->GetName(), endAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierPath> &curve, const quint32 &id,
+                                      quint32 parentId)
+{
+    AddCurve(curve, id, parentId);
+
+    for (qint32 i = 1; i <= curve->CountSubSpl(); ++i)
+    {
+        const VSpline spl = curve->GetSpline(i);
+
+        VCurveLength *length = new VCurveLength(id, parentId, curve->name(), spl, *GetPatternUnit(), i);
+        AddVariable(length->GetName(), length);
+
+        VCurveAngle *startAngle = new VCurveAngle(id, parentId, curve->name(), spl, CurveAngle::StartAngle, i);
+        AddVariable(startAngle->GetName(), startAngle);
+
+        VCurveAngle *endAngle = new VCurveAngle(id, parentId, curve->name(), spl, CurveAngle::EndAngle, i);
+        AddVariable(endAngle->GetName(), endAngle);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -32,6 +32,7 @@
 #include "../vpatterndb/variables/vcurvevariable.h"
 
 class VAbstractCurve;
+class VSpline;
 
 enum class CurveAngle : char { StartAngle, EndAngle };
 
@@ -40,6 +41,8 @@ class VCurveAngle : public VCurveVariable
 public:
     VCurveAngle();
     VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle);
+    VCurveAngle(const quint32 &id, const quint32 &parentId, const QString &baseCurveName, const VSpline &spl,
+                CurveAngle angle, qint32 segment);
     VCurveAngle(const VCurveAngle &var);
     VCurveAngle &operator=(const VCurveAngle &var);
     virtual ~VCurveAngle() Q_DECL_OVERRIDE;

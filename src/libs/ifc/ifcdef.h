@@ -167,6 +167,7 @@ extern const QString angle1Spl_;
 extern const QString angle2Spl_;
 extern const QString angle1SplPath;
 extern const QString angle2SplPath;
+extern const QString seg_;
 
 extern const QStringList builInVariables;
 
