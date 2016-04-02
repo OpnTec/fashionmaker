@@ -265,7 +265,7 @@ protected:
     void           SetActivPP(const QString& name);
 
     void           CheckTagExists(const QString &tag);
-    void           InsertTag(const QStringList tags, const QDomElement element);
+    void           InsertTag(const QStringList &tags, const QDomElement &element);
 
 private:
     Q_DISABLE_COPY(VAbstractPattern)
