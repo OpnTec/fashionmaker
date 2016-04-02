@@ -33,7 +33,13 @@
 #include "../../../../../dialogs/tools/dialogcurveintersectaxis.h"
 #include "../../../../../dialogs/support/dialogeditwrongformula.h"
 #include "../vgeometry/vpointf.h"
+#include "../vgeometry/varc.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/vabstractcubicbezier.h"
+#include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../../../../../visualization/line/vistoolcurveintersectaxis.h"
+#include "../toolcut/vtoolcutsplinepath.h"
 
 const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersectAxis");
 
@@ -104,20 +110,29 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const quint32 _id, cons
                                                          const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
-    qreal angle = CheckFormula(_id, formulaAngle, data);
+    const qreal angle = CheckFormula(_id, formulaAngle, data);
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(curveId);
 
-    QPointF fPoint = FindPoint(basePoint->toQPointF(), angle, curve);
+    const QPointF fPoint = FindPoint(basePoint->toQPointF(), angle, curve);
+    const qreal segLength = curve->GetLengthByPoint(fPoint);
     quint32 id = _id;
+    VPointF *p = new VPointF(fPoint, pointName, mx, my);
     if (typeCreation == Source::FromGui)
     {
-        id = data->AddGObject(new VPointF(fPoint, pointName, mx, my));
+        id = data->AddGObject(p);
         data->AddLine(basePointId, id);
+
+        data->getNextId();
+        data->getNextId();
+        InitSegments(curve->getType(), segLength, p, curveId, data);
     }
     else
     {
-        data->UpdateGObject(id, new VPointF(fPoint, pointName, mx, my));
+        data->UpdateGObject(id, p);
         data->AddLine(basePointId, id);
+
+        InitSegments(curve->getType(), segLength, p, curveId, data);
+
         if (parse != Document::FullParse)
         {
             doc->UpdateToolData(id, data);
@@ -282,3 +297,153 @@ void VToolCurveIntersectAxis::SetVisualization()
         visual->RefreshGeometry();
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
+void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLength, const VPointF *p, quint32 curveId,
+                                           VContainer *data)
+{
+    switch(curveType)
+    {
+        case GOType::Arc:
+        {
+            QSharedPointer<VArc> a1;
+            QSharedPointer<VArc> a2;
+
+            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(curveId);
+            VArc arc1;
+            VArc arc2;
+
+            if (not VFuzzyComparePossibleNulls(segLength, -1))
+            {
+                arc->CutArc(segLength, arc1, arc2);
+            }
+            else
+            {
+                arc->CutArc(0, arc1, arc2);
+            }
+
+            // Arc highly depend on id. Need for creating the name.
+            arc1.setId(p->id() + 1);
+            arc2.setId(p->id() + 2);
+
+            if (not VFuzzyComparePossibleNulls(segLength, -1))
+            {
+                a1 = QSharedPointer<VArc>(new VArc(arc1));
+                a2 = QSharedPointer<VArc>(new VArc(arc2));
+            }
+            else
+            {
+                a1 = QSharedPointer<VArc>(new VArc());
+                a2 = QSharedPointer<VArc>(new VArc());
+
+                // Take names for empty arcs from donors.
+                a1->setName(arc1.name());
+                a2->setName(arc2.name());
+            }
+
+            data->AddArc(a1, arc1.id(), p->id());
+            data->AddArc(a2, arc2.id(), p->id());
+            break;
+        }
+        case GOType::CubicBezier:
+        case GOType::Spline:
+        {
+            QSharedPointer<VAbstractCurve> spline1;
+            QSharedPointer<VAbstractCurve> spline2;
+
+            const auto spl = data->GeometricObject<VAbstractCubicBezier>(curveId);
+            QPointF spl1p2, spl1p3, spl2p2, spl2p3;
+            if (not VFuzzyComparePossibleNulls(segLength, -1))
+            {
+                spl->CutSpline(segLength, spl1p2, spl1p3, spl2p2, spl2p3);
+            }
+            else
+            {
+                spl->CutSpline(0, spl1p2, spl1p3, spl2p2, spl2p3);
+            }
+
+            VSpline *spl1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p);
+            VSpline *spl2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4());
+
+            if (not VFuzzyComparePossibleNulls(segLength, -1))
+            {
+                spline1 = QSharedPointer<VAbstractCurve>(spl1);
+                spline2 = QSharedPointer<VAbstractCurve>(spl2);
+            }
+            else
+            {
+                spline1 = QSharedPointer<VAbstractCurve>(new VSpline());
+                spline2 = QSharedPointer<VAbstractCurve>(new VSpline());
+
+                // Take names for empty splines from donors.
+                spline1->setName(spl1->name());
+                spline2->setName(spl2->name());
+
+                delete spl1;
+                delete spl2;
+            }
+
+            data->AddCurve(spline1, NULL_ID, p->id());
+            data->AddCurve(spline2, NULL_ID, p->id());
+            break;
+        }
+        case GOType::CubicBezierPath:
+        case GOType::SplinePath:
+        {
+            QSharedPointer<VAbstractCurve> splP1;
+            QSharedPointer<VAbstractCurve> splP2;
+
+            const auto splPath = data->GeometricObject<VAbstractCubicBezierPath>(curveId);
+            VSplinePath *splPath1 = nullptr;
+            VSplinePath *splPath2 = nullptr;
+            if (not VFuzzyComparePossibleNulls(segLength, -1))
+            {
+                VPointF *pC = VToolCutSplinePath::CutSplinePath(segLength, splPath, p->name(), &splPath1, &splPath2);
+                delete pC;
+            }
+            else
+            {
+                VPointF *pC = VToolCutSplinePath::CutSplinePath(0, splPath, p->name(), &splPath1, &splPath2);
+                delete pC;
+            }
+
+            SCASSERT(splPath1 != nullptr);
+            SCASSERT(splPath2 != nullptr);
+
+            if (not VFuzzyComparePossibleNulls(segLength, -1))
+            {
+                splP1 = QSharedPointer<VAbstractCurve>(splPath1);
+                splP2 = QSharedPointer<VAbstractCurve>(splPath2);
+            }
+            else
+            {
+                splP1 = QSharedPointer<VAbstractCurve>(new VSplinePath());
+                splP2 = QSharedPointer<VAbstractCurve>(new VSplinePath());
+
+                // Take names for empty spline paths from donors.
+                splP1->setName(splPath1->name());
+                splP2->setName(splPath2->name());
+
+                delete splPath1;
+                delete splPath2;
+            }
+
+            data->AddCurve(splP1, NULL_ID, p->id());
+            data->AddCurve(splP2, NULL_ID, p->id());
+            break;
+        }
+        case GOType::EllipticalArc:
+        case GOType::Point:
+        case GOType::Unknown:
+            Q_UNREACHABLE();
+            break;
+    }
+}
+
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic pop
+#endif

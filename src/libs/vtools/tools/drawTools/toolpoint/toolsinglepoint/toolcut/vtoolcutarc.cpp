@@ -133,14 +133,18 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     if (typeCreation == Source::FromGui)
     {
         id = data->AddGObject(p);
-        data->AddArc(a1, NULL_ID, id);
-        data->AddArc(a2, NULL_ID, id);
+        a1->setId(data->getNextId());
+        a2->setId(data->getNextId());
+        data->AddArc(a1, a1->id(), id);
+        data->AddArc(a2, a2->id(), id);
     }
     else
     {
         data->UpdateGObject(id, p);
-        data->AddArc(a1, NULL_ID, id);
-        data->AddArc(a2, NULL_ID, id);
+        a1->setId(id + 1);
+        a2->setId(id + 2);
+        data->AddArc(a1, a1->id(), id);
+        data->AddArc(a2, a2->id(), id);
 
         if (parse != Document::FullParse)
         {

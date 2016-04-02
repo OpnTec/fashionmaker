@@ -72,6 +72,9 @@ private:
     Q_DISABLE_COPY(VToolCurveIntersectAxis)
     QString formulaAngle;
     quint32 curveId;
+
+    static void InitSegments(const GOType &curveType, qreal segLength, const VPointF *p, quint32 curveId,
+                             VContainer *data);
 };
 
 #endif // VTOOLCURVEINTERSECTAXIS_H
