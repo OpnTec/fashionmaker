@@ -1,4 +1,5 @@
 # Version 0.5.0
+- [#444] Length along Path seems not valid.
 - Added new curve path segment variables. 
 - Toggle ScrollHandDrag mode by clicking a middle mouse button.
 - Added horizontal scrolling by pressiong Shift + mouse wheel.

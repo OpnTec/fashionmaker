@@ -322,13 +322,25 @@ QPointF VEllipticalArc::CutArc(const qreal &length, VEllipticalArc &arc1, VEllip
 {
     //Always need return two arcs, so we must correct wrong length.
     qreal len = 0;
-    if (length < this->GetLength()*0.02)
+    const qreal minLength = ToPixel(1, Unit::Mm);
+    const qreal fullLength = GetLength();
+
+    if (fullLength <= minLength)
     {
-        len = this->GetLength()*0.02;
+        arc1 = VEllipticalArc();
+        arc2 = VEllipticalArc();
+        return QPointF();
     }
-    else if ( length > this->GetLength()*0.98)
+
+    const qreal maxLength = fullLength - minLength;
+
+    if (length < minLength)
     {
-        len = this->GetLength()*0.98;
+        len = minLength;
+    }
+    else if (length > maxLength)
+    {
+        len = maxLength;
     }
     else
     {

@@ -156,28 +156,42 @@ QPointF VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32
     }
 
     //Always need return two spline paths, so we must correct wrong length.
+    const qreal minLength = ToPixel(1, Unit::Mm);
     qreal fullLength = GetLength();
-    if (length < fullLength * 0.02)
+
+    if (fullLength <= minLength)
     {
-        length = fullLength * 0.02;
+        p1 = p2 = -1;
+        spl1p2 = spl1p3 = spl2p2 = spl2p3 = QPointF();
+        return QPointF();
     }
-    else if ( length > fullLength * 0.98)
+
+    const qreal maxLength = fullLength - minLength;
+
+    if (length < minLength)
     {
-        length = fullLength * 0.98;
+        length = minLength;
+    }
+    else if (length > maxLength)
+    {
+        length = maxLength;
     }
 
     fullLength = 0;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
         const VSpline spl = GetSpline(i);
-        fullLength += spl.GetLength();
+        const qreal splLength = spl.GetLength();
+        fullLength += splLength;
         if (fullLength > length)
         {
             p1 = i-1;
             p2 = i;
-            return spl.CutSpline(length - (fullLength - spl.GetLength()), spl1p2, spl1p3, spl2p2, spl2p3);
+            return spl.CutSpline(length - (fullLength - splLength), spl1p2, spl1p3, spl2p2, spl2p3);
         }
     }
+    p1 = p2 = -1;
+    spl1p2 = spl1p3 = spl2p2 = spl2p3 = QPointF();
     return QPointF();
 }
 
