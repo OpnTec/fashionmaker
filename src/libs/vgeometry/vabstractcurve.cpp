@@ -89,10 +89,19 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QP
 
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin)
+QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok)
 {
     if (points.count() >= 2)
     {
+        if (points.first().toPoint() == begin.toPoint())
+        {
+            if (ok != nullptr)
+            {
+                *ok = true;
+            }
+            return points;
+        }
+
         QVector<QPointF> segment;
         bool theBegin = false;
         for (qint32 i = 0; i < points.count()-1; ++i)
@@ -122,25 +131,36 @@ QVector<QPointF> VAbstractCurve::FromBegin(const QVector<QPointF> &points, const
 
         if (segment.isEmpty())
         {
+            if (ok != nullptr)
+            {
+                *ok = false;
+            }
             return points;
         }
         else
         {
+            if (ok != nullptr)
+            {
+                *ok = true;
+            }
             return segment;
         }
     }
     else
     {
+        if (ok != nullptr)
+        {
+            *ok = false;
+        }
         return points;
     }
-    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end)
+QVector<QPointF> VAbstractCurve::ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok)
 {
     QVector<QPointF> reversed = GetReversePoints(points);
-    reversed = FromBegin(reversed, end);
+    reversed = FromBegin(reversed, end, ok);
     return GetReversePoints(reversed);
 }
 
@@ -168,6 +188,29 @@ QPainterPath VAbstractCurve::GetPath(PathDirection direction) const
         qDebug()<<"points.count() < 2"<<Q_FUNC_INFO;
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractCurve::GetLengthByPoint(const QPointF &point) const
+{
+    const QVector<QPointF> points = GetPoints();
+    if (points.size() < 2)
+    {
+        return -1;
+    }
+
+    if (points.first().toPoint() == point.toPoint())
+    {
+        return 0;
+    }
+
+    bool ok = false;
+    const QVector<QPointF> segment = ToEnd(points, point, &ok);
+    if (not ok)
+    {
+        return -1;
+    }
+    return PathLength(segment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -256,4 +299,16 @@ QPainterPath VAbstractCurve::ShowDirection(const QVector<QPointF> &points) const
         path.lineTo(arrow.p2());
     }
     return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractCurve::PathLength(const QVector<QPointF> &path)
+{
+    QPainterPath splinePath;
+    splinePath.moveTo(path.at(0));
+    for (qint32 i = 1; i < path.count(); ++i)
+    {
+        splinePath.lineTo(path.at(i));
+    }
+    return splinePath.length();
 }

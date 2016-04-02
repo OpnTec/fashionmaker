@@ -531,10 +531,12 @@ QVector<QPointF> VGObject::GetReversePoints(const QVector<QPointF> &points)
     {
         return points;
     }
-    QVector<QPointF> reversePoints;
+    QVector<QPointF> reversePoints(points.size());
+    qint32 j = 0;
     for (qint32 i = points.size() - 1; i >= 0; --i)
     {
-        reversePoints.append(points.at(i));
+        reversePoints.replace(j, points.at(i));
+        ++j;
     }
     return reversePoints;
 }

@@ -48,6 +48,8 @@ private slots:
     void GetSegmentPoints_NullSegment();
     void CompareThreeWays();
     void TestParametrT();
+    void TestLengthByPoint_data();
+    void TestLengthByPoint();
 
 private:
     Q_DISABLE_COPY(TST_VSpline)

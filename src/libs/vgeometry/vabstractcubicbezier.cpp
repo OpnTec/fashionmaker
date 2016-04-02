@@ -524,14 +524,7 @@ QVector<QPointF> VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, c
  */
 qreal VAbstractCubicBezier::LengthBezier(const QPointF &p1, const QPointF &p2, const QPointF &p3, const QPointF &p4)
 {
-    QPainterPath splinePath;
-    QVector<QPointF> points = GetCubicBezierPoints(p1, p2, p3, p4);
-    splinePath.moveTo(points.at(0));
-    for (qint32 i = 1; i < points.count(); ++i)
-    {
-        splinePath.lineTo(points.at(i));
-    }
-    return splinePath.length();
+    return PathLength(GetCubicBezierPoints(p1, p2, p3, p4));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -59,6 +59,7 @@ public:
 
     virtual QPainterPath     GetPath(PathDirection direction = PathDirection::Hide) const;
     virtual qreal            GetLength() const =0;
+    qreal                    GetLengthByPoint(const QPointF &point) const;
     virtual QVector<QPointF> IntersectLine(const QLineF &line) const;
     virtual bool             IsIntersectLine(const QLineF &line) const;
 
@@ -74,11 +75,12 @@ public:
 protected:
     QPainterPath             ShowDirection(const QVector<QPointF> &points) const;
     virtual void             CreateName() =0;
+    static qreal             PathLength(const QVector<QPointF> &path);
 private:
     QSharedDataPointer<VAbstractCurveData> d;
 
-    static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin);
-    static QVector<QPointF>  ToEnd(const QVector<QPointF> &points, const QPointF &end);
+    static QVector<QPointF>  FromBegin(const QVector<QPointF> &points, const QPointF &begin, bool *ok = nullptr);
+    static QVector<QPointF>  ToEnd(const QVector<QPointF> &points, const QPointF &end, bool *ok = nullptr);
 };
 
 Q_DECLARE_TYPEINFO(VAbstractCurve, Q_MOVABLE_TYPE);

@@ -128,15 +128,7 @@ VEllipticalArc::~VEllipticalArc()
  */
 qreal VEllipticalArc::GetLength() const
 {
-    qreal length = 0;
-    QPainterPath elArc;
-    QVector<QPointF> points = GetPoints();
-    elArc.moveTo(points.at(0));
-    for (qint32 i = 1; i < points.count(); ++i)
-    {
-        elArc.lineTo(points.at(i));
-    }
-    length = elArc.length();
+    qreal length = PathLength(GetPoints());
 
     if (d->isFlipped)
     {

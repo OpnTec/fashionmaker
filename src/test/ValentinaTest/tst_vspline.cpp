@@ -308,6 +308,41 @@ void TST_VSpline::TestParametrT()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::TestLengthByPoint_data()
+{
+    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+
+    VSpline spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
+
+    QTest::addColumn<VSpline>("spl");
+    QTest::addColumn<QPointF>("point");
+    QTest::addColumn<qreal>("length");
+
+    const qreal length = spl.GetLength();
+    const qreal testLength = length*(2.0/3.0);
+    VSpline spl1, spl2;
+    const QPointF p = spl.CutSpline(testLength, spl1, spl2);
+
+    QTest::newRow("Point on spline") << spl << p << testLength;
+    QTest::newRow("Wrong point") << spl << QPointF(-10000, -10000) << -1.0;
+    QTest::newRow("First point") << spl << p1.toQPointF() << 0.0;
+    QTest::newRow("Last point") << spl << p4.toQPointF() << length;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::TestLengthByPoint()
+{
+    QFETCH(VSpline, spl);
+    QFETCH(QPointF, point);
+    QFETCH(qreal, length);
+
+    const qreal resLength = spl.GetLengthByPoint(point);
+
+    QVERIFY(qAbs(resLength - length) < ToPixel(0.5, Unit::Mm));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VSpline::CompareSplines(const VSpline &spl1, const VSpline &spl2) const
 {
     QCOMPARE(spl1.GetP1().toQPointF().toPoint(), spl2.GetP1().toQPointF().toPoint());
