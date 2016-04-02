@@ -1277,9 +1277,19 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         qreal my = 0;
 
         PointsCommonAttributes(domElement, id, mx, my);
+
         const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-        const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idObject );
+        QSharedPointer<VPointF> point;
+        try
+        {
+            point = data->GeometricObject<VPointF>(idObject);
+        }
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            Q_UNUSED(e);
+            return;// Just ignore
+        }
         data->UpdateGObject(id, new VPointF(point->toQPointF(), point->name(), mx, my, idObject,
                                             Draw::Modeling));
         VNodePoint::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
@@ -1899,7 +1909,16 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         quint32 idTool = 0;
 
         SplinesCommonAttributes(domElement, id, idObject, idTool);
-        VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
+        VSpline *spl = nullptr;
+        try
+        {
+            spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
+        }
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            Q_UNUSED(e);
+            return;// Just ignore
+        }
         spl->setIdObject(idObject);
         spl->setMode(Draw::Modeling);
         data->UpdateGObject(id, spl);
@@ -1925,7 +1944,16 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         quint32 idTool = 0;
 
         SplinesCommonAttributes(domElement, id, idObject, idTool);
-        VSplinePath *path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
+        VSplinePath *path = nullptr;
+        try
+        {
+            path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
+        }
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            Q_UNUSED(e);
+            return;// Just ignore
+        }
         path->setIdObject(idObject);
         path->setMode(Draw::Modeling);
         data->UpdateGObject(id, path);
@@ -1996,7 +2024,16 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         ToolsCommonAttributes(domElement, id);
         const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-        VArc *arc = new VArc(*data->GeometricObject<VArc>(idObject));
+        VArc *arc = nullptr;
+        try
+        {
+            arc = new VArc(*data->GeometricObject<VArc>(idObject));
+        }
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            Q_UNUSED(e);
+            return;// Just ignore
+        }
         arc->setIdObject(idObject);
         arc->setMode(Draw::Modeling);
         data->UpdateGObject(id, arc);

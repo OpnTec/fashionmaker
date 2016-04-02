@@ -1,4 +1,5 @@
 # Version 0.4.4
+- [#464] Crash. Issue with modeling node objects.
 - [#463] Wrong export to DXF format.
 - Fixed issue with deleting detail nodes.
 - [#458] Issue with segment of curve.
