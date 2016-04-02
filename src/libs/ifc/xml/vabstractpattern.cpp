@@ -1098,18 +1098,17 @@ void VAbstractPattern::CheckTagExists(const QString &tag)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::InsertTag(QStringList tags, QDomElement element)
+void VAbstractPattern::InsertTag(const QStringList tags, const QDomElement element)
 {
     QDomElement pattern = documentElement();
     for (int i = tags.indexOf(element.tagName())-1; i >= 0; --i)
     {
-        QDomNodeList list = elementsByTagName(tags.at(i));
+        const QDomNodeList list = elementsByTagName(tags.at(i));
         if (list.isEmpty())
         {
             continue;
         }
         pattern.insertAfter(element, list.at(0));
-        return;
     }
     SetVersion();
 }
