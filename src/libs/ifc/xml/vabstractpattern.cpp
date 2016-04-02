@@ -100,6 +100,7 @@ const QString VAbstractPattern::AttrS56         = QStringLiteral("s56");
 const QString VAbstractPattern::AttrCustom      = QStringLiteral("custom");
 const QString VAbstractPattern::AttrDefHeight   = QStringLiteral("defHeight");
 const QString VAbstractPattern::AttrDefSize     = QStringLiteral("defSize");
+const QString VAbstractPattern::AttrExtension   = QStringLiteral("extension");
 
 const QString VAbstractPattern::IncrementName        = QStringLiteral("name");
 const QString VAbstractPattern::IncrementFormula     = QStringLiteral("formula");
@@ -926,7 +927,7 @@ QString VAbstractPattern::GetImage() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetImageExtension() const
 {
-    const QString defExt = "PNG";
+    const QString defExt =  QStringLiteral("PNG");
     const QDomNodeList nodeList = this->elementsByTagName(TagImage);
     if (nodeList.isEmpty())
     {
@@ -940,15 +941,8 @@ QString VAbstractPattern::GetImageExtension() const
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                const QString ext = domElement.attribute(QString("extension"), "");
-                if (ext.isEmpty())
-                {
-                    return defExt;
-                }
-                else
-                {
-                    return ext;
-                }
+                const QString ext = domElement.attribute(AttrExtension, defExt);
+                return ext;
             }
         }
     }
@@ -964,7 +958,7 @@ void VAbstractPattern::SetImage(const QString &text, const QString &extension)
     for (int i=0; i < list.size(); ++i)
     {
         QDomElement dom = list.at(i).toElement();
-        dom.setAttribute(QString("extension"), extension);
+        dom.setAttribute(AttrExtension, extension);
     }
     modified = true;
     emit patternChanged(false);
@@ -1056,49 +1050,30 @@ void VAbstractPattern::CheckTagExists(const QString &tag)
     QDomNodeList list = elementsByTagName(tag);
     if (list.size() == 0)
     {
-        QStringList tags = QStringList() << TagVersion << TagImage << TagAuthor << TagDescription << TagNotes
+        const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation;
-        QDomElement pattern = documentElement();
         switch (tags.indexOf(tag))
         {
-            case 0: //TagVersion
+            case 0: //TagUnit
                 break;// Mandatory tag
             case 1: //TagImage
             {
-                pattern.insertAfter(createElement(TagImage), elementsByTagName(TagVersion).at(0));
-                SetVersion();
+                InsertTag(tags, createElement(TagImage));
                 break;
             }
             case 2: //TagAuthor
-                pattern.insertAfter(createElement(TagAuthor), elementsByTagName(TagVersion).at(0));
-                SetVersion();
+            {
+                InsertTag(tags, createElement(TagAuthor));
                 break;
+            }
             case 3: //TagDescription
             {
-                for (int i = tags.indexOf(tag)-1; i >= 0; --i)
-                {
-                    QDomNodeList list = elementsByTagName(tags.at(i));
-                    if (list.isEmpty())
-                    {
-                        continue;
-                    }
-                    pattern.insertAfter(createElement(TagDescription), list.at(0));
-                }
-                SetVersion();
+                InsertTag(tags, createElement(TagDescription));
                 break;
             }
             case 4: //TagNotes
             {
-                for (int i = tags.indexOf(tag)-1; i >= 0; --i)
-                {
-                    QDomNodeList list = elementsByTagName(tags.at(i));
-                    if (list.isEmpty())
-                    {
-                        continue;
-                    }
-                    pattern.insertAfter(createElement(TagNotes), list.at(0));
-                }
-                SetVersion();
+                InsertTag(tags, createElement(TagNotes));
                 break;
             }
             case 5: //TagGradation
@@ -1113,23 +1088,30 @@ void VAbstractPattern::CheckTagExists(const QString &tag)
                 sizes.setAttribute(AttrAll, QLatin1Literal("true"));
                 gradation.appendChild(sizes);
 
-                for (int i = tags.indexOf(tag)-1; i >= 0; --i)
-                {
-                    QDomNodeList list = elementsByTagName(tags.at(i));
-                    if (list.isEmpty())
-                    {
-                        continue;
-                    }
-                    pattern.insertAfter(gradation, list.at(0));
-                    break;
-                }
-                SetVersion();
+                InsertTag(tags, gradation);
                 break;
             }
             default:
                 break;
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::InsertTag(QStringList tags, QDomElement element)
+{
+    QDomElement pattern = documentElement();
+    for (int i = tags.indexOf(element.tagName())-1; i >= 0; --i)
+    {
+        QDomNodeList list = elementsByTagName(tags.at(i));
+        if (list.isEmpty())
+        {
+            continue;
+        }
+        pattern.insertAfter(element, list.at(0));
+        return;
+    }
+    SetVersion();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

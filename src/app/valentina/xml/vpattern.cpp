@@ -172,17 +172,17 @@ void VPattern::Parse(const Document &parse)
                     case 4: // TagNotes
                         qCDebug(vXML, "Tag notes.");
                         break;
-                    case 5: // TagImage
-                        qCDebug(vXML, "Tag image.");
-                        break;
-                    case 6: // TagMeasurements
+                    case 5: // TagMeasurements
                         qCDebug(vXML, "Tag measurements.");
                         break;
-                    case 7: // TagVersion
+                    case 6: // TagVersion
                         qCDebug(vXML, "Tag version.");
                         break;
-                    case 8: // TagGradation
+                    case 7: // TagGradation
                         qCDebug(vXML, "Tag gradation.");
+                        break;
+                    case 8: // TagImage
+                        qCDebug(vXML, "Tag image.");
                         break;
                     case 9: // TagUnit
                         qCDebug(vXML, "Tag unit.");

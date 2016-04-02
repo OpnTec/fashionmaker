@@ -187,6 +187,7 @@ public:
     static const QString AttrCustom;
     static const QString AttrDefHeight;
     static const QString AttrDefSize;
+    static const QString AttrExtension;
 
     static const QString IncrementName;
     static const QString IncrementFormula;
@@ -264,6 +265,7 @@ protected:
     void           SetActivPP(const QString& name);
 
     void           CheckTagExists(const QString &tag);
+    void           InsertTag(QStringList tags, QDomElement element);
 
 private:
     Q_DISABLE_COPY(VAbstractPattern)
