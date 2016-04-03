@@ -1370,7 +1370,7 @@
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Lunghezza degli archi</translation>
+        <translation type="vanished">Lunghezza degli archi</translation>
     </message>
     <message>
         <source>Length of curves</source>
@@ -1402,7 +1402,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Lunghezza arco</translation>
+        <translation type="vanished">Lunghezza arco</translation>
     </message>
     <message>
         <source>Curve length</source>
@@ -1418,7 +1418,7 @@
     </message>
     <message>
         <source>Angles of arcs</source>
-        <translation>Angoli degli archi</translation>
+        <translation type="vanished">Angoli degli archi</translation>
     </message>
     <message>
         <source>Angles of curves</source>
@@ -1430,7 +1430,7 @@
     </message>
     <message>
         <source>Arc angle</source>
-        <translation>Arco di angolo</translation>
+        <translation type="vanished">Arco di angolo</translation>
     </message>
     <message>
         <source>Curve angle</source>
@@ -1846,7 +1846,7 @@
     </message>
     <message>
         <source>Lengths arcs</source>
-        <translation>Lunghezze archi</translation>
+        <translation type="vanished">Lunghezze archi</translation>
     </message>
     <message>
         <source>Radiuses arcs</source>
@@ -1858,7 +1858,7 @@
     </message>
     <message>
         <source>Angles arcs</source>
-        <translation>Angoli di archi</translation>
+        <translation type="vanished">Angoli di archi</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -4828,7 +4828,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>toolBar</translation>
+        <translation type="vanished">toolBar</translation>
     </message>
     <message>
         <source>Last Tool</source>
@@ -5241,6 +5241,10 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Select point of cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar pointer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6918,6 +6922,14 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Can&apos;t find object. Type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Number of free id exhausted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCubicBezierPath</name>
@@ -8340,62 +8352,17 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Linea_</translation>
-    </message>
-    <message>
-        <source>AngleLine_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Linea_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Arco_</translation>
-    </message>
-    <message>
-        <source>Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SplPath</source>
-        <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Arco_</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>RaggioArco_</translation>
-    </message>
-    <message>
-        <source>Angle1Arc_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle2Arc_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle1Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle2Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle1SplPath</source>
-        <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle2SplPath</source>
-        <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">RaggioArco_</translation>
     </message>
     <message>
         <source>sin</source>
@@ -8542,6 +8509,71 @@ Vuoi salvare le tue modifiche?</translation>
         <comment>inch</comment>
         <translation>in</translation>
     </message>
+    <message>
+        <source>Line_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Linea_</translation>
+    </message>
+    <message>
+        <source>AngleLine_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Arco_</translation>
+    </message>
+    <message>
+        <source>Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">RaggioArco_</translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seg_</source>
+        <comment>Segment. Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -8590,7 +8622,7 @@ Vuoi salvare le tue modifiche?</translation>
 <context>
     <name>VisToolEndLine</name>
     <message>
-        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1370,7 +1370,7 @@
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Длина дуг</translation>
+        <translation type="vanished">Длина дуг</translation>
     </message>
     <message>
         <source>Length of curves</source>
@@ -1402,7 +1402,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Длина дуги</translation>
+        <translation type="vanished">Длина дуги</translation>
     </message>
     <message>
         <source>Curve length</source>
@@ -1418,7 +1418,7 @@
     </message>
     <message>
         <source>Angles of arcs</source>
-        <translation>Углы дуг</translation>
+        <translation type="vanished">Углы дуг</translation>
     </message>
     <message>
         <source>Angles of curves</source>
@@ -1430,7 +1430,7 @@
     </message>
     <message>
         <source>Arc angle</source>
-        <translation>Угол дуги</translation>
+        <translation type="vanished">Угол дуги</translation>
     </message>
     <message>
         <source>Curve angle</source>
@@ -1846,7 +1846,7 @@
     </message>
     <message>
         <source>Lengths arcs</source>
-        <translation>Длины дуг</translation>
+        <translation type="vanished">Длины дуг</translation>
     </message>
     <message>
         <source>Radiuses arcs</source>
@@ -1858,7 +1858,7 @@
     </message>
     <message>
         <source>Angles arcs</source>
-        <translation>Углы дуг</translation>
+        <translation type="vanished">Углы дуг</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -4826,7 +4826,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>Панель инструментов</translation>
+        <translation type="vanished">Панель инструментов</translation>
     </message>
     <message>
         <source>Last Tool</source>
@@ -5240,6 +5240,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select point of cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar pointer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6921,6 +6925,14 @@ Do you want to save your changes?</source>
         <source>Can&apos;t find object. Type mismatch.</source>
         <translation>Невозможно найти объект. Несоответствие типа.</translation>
     </message>
+    <message>
+        <source>Number of free id exhausted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCubicBezierPath</name>
@@ -8368,62 +8380,62 @@ Do you want to save your changes?</source>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Линия_</translation>
+        <translation type="vanished">Линия_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>УголЛинии_</translation>
+        <translation type="vanished">УголЛинии_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Дуга_</translation>
+        <translation type="vanished">Дуга_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Спл_</translation>
+        <translation type="vanished">Спл_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>СлСпл</translation>
+        <translation type="vanished">СлСпл</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>РадиусДуги_</translation>
+        <translation type="vanished">РадиусДуги_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Улог1Дуги_</translation>
+        <translation type="vanished">Улог1Дуги_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Угол2Дуги_</translation>
+        <translation type="vanished">Угол2Дуги_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Угол1Спл_</translation>
+        <translation type="vanished">Угол1Спл_</translation>
     </message>
     <message>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Угол2Спл_</translation>
+        <translation type="vanished">Угол2Спл_</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>Угол1СлСпл</translation>
+        <translation type="vanished">Угол1СлСпл</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>Угол2СлСпл</translation>
+        <translation type="vanished">Угол2СлСпл</translation>
     </message>
     <message>
         <source>sin</source>
@@ -8570,6 +8582,71 @@ Do you want to save your changes?</source>
         <comment>inch</comment>
         <translation>дюйм</translation>
     </message>
+    <message>
+        <source>Line_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Линия_</translation>
+    </message>
+    <message>
+        <source>AngleLine_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">УголЛинии_</translation>
+    </message>
+    <message>
+        <source>Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Дуга_</translation>
+    </message>
+    <message>
+        <source>Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Спл_</translation>
+    </message>
+    <message>
+        <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished">СлСпл</translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">РадиусДуги_</translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Улог1Дуги_</translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Угол2Дуги_</translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Угол1Спл_</translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Угол2Спл_</translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished">Угол1СлСпл</translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished">Угол2СлСпл</translation>
+    </message>
+    <message>
+        <source>Seg_</source>
+        <comment>Segment. Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -8619,7 +8696,11 @@ Do you want to save your changes?</source>
     <name>VisToolEndLine</name>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Точка на конце отрезка&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+        <translation type="vanished">&lt;b&gt;Точка на конце отрезка&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

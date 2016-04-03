@@ -1359,7 +1359,7 @@
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Délka oblouků</translation>
+        <translation type="vanished">Délka oblouků</translation>
     </message>
     <message>
         <source>Length of curves</source>
@@ -1391,7 +1391,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Délka oblouku</translation>
+        <translation type="vanished">Délka oblouku</translation>
     </message>
     <message>
         <source>Curve length</source>
@@ -1406,19 +1406,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Angles of arcs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Angles of curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Arc radius</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arc angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1830,20 +1822,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Lengths arcs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Radiuses arcs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Radius</source>
         <translation>Poloměr</translation>
-    </message>
-    <message>
-        <source>Angles arcs</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Formula</source>
@@ -4695,7 +4679,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>Lišta nástrojů</translation>
+        <translation type="vanished">Lišta nástrojů</translation>
     </message>
     <message>
         <source>Last Tool</source>
@@ -5108,6 +5092,10 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Select point of cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar pointer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6684,6 +6672,14 @@ Do you want to save your changes?</source>
         <source>Can&apos;t find object. Type mismatch.</source>
         <translation>Nelze najít předmět. Neodpovídající typ.</translation>
     </message>
+    <message>
+        <source>Number of free id exhausted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCubicBezierPath</name>
@@ -8124,62 +8120,37 @@ Do you want to save your changes?</source>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Čára_</translation>
+        <translation type="vanished">Čára_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Úhelčáry_</translation>
+        <translation type="vanished">Úhelčáry_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Oblouk_</translation>
+        <translation type="vanished">Oblouk_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Křivka_</translation>
+        <translation type="vanished">Křivka_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>CestaKřivky</translation>
-    </message>
-    <message>
-        <source>RadiusArc_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle1Arc_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle2Arc_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle1Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle2Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">CestaKřivky</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>Úhel1CestaKřivky</translation>
+        <translation type="vanished">Úhel1CestaKřivky</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>Úhel2CestaKřivky</translation>
+        <translation type="vanished">Úhel2CestaKřivky</translation>
     </message>
     <message>
         <source>sin</source>
@@ -8326,6 +8297,71 @@ Do you want to save your changes?</source>
         <comment>inch</comment>
         <translation>palce</translation>
     </message>
+    <message>
+        <source>Line_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Čára_</translation>
+    </message>
+    <message>
+        <source>AngleLine_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Úhelčáry_</translation>
+    </message>
+    <message>
+        <source>Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Oblouk_</translation>
+    </message>
+    <message>
+        <source>Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Křivka_</translation>
+    </message>
+    <message>
+        <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished">CestaKřivky</translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished">Úhel1CestaKřivky</translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished">Úhel2CestaKřivky</translation>
+    </message>
+    <message>
+        <source>Seg_</source>
+        <comment>Segment. Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -8375,7 +8411,11 @@ Do you want to save your changes?</source>
     <name>VisToolEndLine</name>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Bod ve vzdálenosti a úhlu&lt;/b&gt;: úhel = %1°; &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
+        <translation type="vanished">&lt;b&gt;Bod ve vzdálenosti a úhlu&lt;/b&gt;: úhel = %1°; &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

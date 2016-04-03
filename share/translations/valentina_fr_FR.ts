@@ -1370,7 +1370,7 @@
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Longueur des arcs</translation>
+        <translation type="vanished">Longueur des arcs</translation>
     </message>
     <message>
         <source>Length of curves</source>
@@ -1402,7 +1402,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Longueur d&apos;arc</translation>
+        <translation type="vanished">Longueur d&apos;arc</translation>
     </message>
     <message>
         <source>Curve length</source>
@@ -1418,7 +1418,7 @@
     </message>
     <message>
         <source>Angles of arcs</source>
-        <translation>Angles des arcs</translation>
+        <translation type="vanished">Angles des arcs</translation>
     </message>
     <message>
         <source>Angles of curves</source>
@@ -1430,7 +1430,7 @@
     </message>
     <message>
         <source>Arc angle</source>
-        <translation>Angle de l&apos;arc</translation>
+        <translation type="vanished">Angle de l&apos;arc</translation>
     </message>
     <message>
         <source>Curve angle</source>
@@ -1846,7 +1846,7 @@
     </message>
     <message>
         <source>Lengths arcs</source>
-        <translation>Longueurs des arcs</translation>
+        <translation type="vanished">Longueurs des arcs</translation>
     </message>
     <message>
         <source>Radiuses arcs</source>
@@ -1858,7 +1858,7 @@
     </message>
     <message>
         <source>Angles arcs</source>
-        <translation>Angles des arcs</translation>
+        <translation type="vanished">Angles des arcs</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -4814,7 +4814,7 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>Barre d&apos;outils</translation>
+        <translation type="vanished">Barre d&apos;outils</translation>
     </message>
     <message>
         <source>Last Tool</source>
@@ -5227,6 +5227,10 @@ Voulez-vous sauvegarder les changements ? </translation>
     </message>
     <message>
         <source>Select point of cubic bezier path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toolbar pointer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6828,6 +6832,14 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Can&apos;t find object. Type mismatch.</source>
         <translation>impossible de trouver l&apos;objet. Le type ne correspond pas.</translation>
     </message>
+    <message>
+        <source>Number of free id exhausted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCubicBezierPath</name>
@@ -8268,62 +8280,42 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Ligne_</translation>
+        <translation type="vanished">Ligne_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Angleligne_</translation>
+        <translation type="vanished">Angleligne_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Arc_</translation>
+        <translation type="vanished">Arc_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Crb_</translation>
+        <translation type="vanished">Crb_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>CrbChemin</translation>
+        <translation type="vanished">CrbChemin</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>RayonArc_</translation>
+        <translation type="vanished">RayonArc_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Angle1Arc_</translation>
+        <translation type="vanished">Angle1Arc_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Angle2Arc_</translation>
-    </message>
-    <message>
-        <source>Angle1Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle2Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle1SplPath</source>
-        <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Angle2SplPath</source>
-        <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Angle2Arc_</translation>
     </message>
     <message>
         <source>sin</source>
@@ -8471,6 +8463,71 @@ Voulez-vous enregistrer les changements?</translation>
         <comment>inch</comment>
         <translation>in</translation>
     </message>
+    <message>
+        <source>Line_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Ligne_</translation>
+    </message>
+    <message>
+        <source>AngleLine_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Angleligne_</translation>
+    </message>
+    <message>
+        <source>Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Arc_</translation>
+    </message>
+    <message>
+        <source>Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Crb_</translation>
+    </message>
+    <message>
+        <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished">CrbChemin</translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">RayonArc_</translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Angle1Arc_</translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Angle2Arc_</translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seg_</source>
+        <comment>Segment. Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -8520,7 +8577,11 @@ Voulez-vous enregistrer les changements?</translation>
     <name>VisToolEndLine</name>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Point à distance et angle&lt;/b&gt; : angle = %1°; &lt;b&gt;Déplacer&lt;/b&gt; - Angle magnétique, &lt;b&gt;Entrée&lt;/b&gt; - valider la création</translation>
+        <translation type="vanished">&lt;b&gt;Point à distance et angle&lt;/b&gt; : angle = %1°; &lt;b&gt;Déplacer&lt;/b&gt; - Angle magnétique, &lt;b&gt;Entrée&lt;/b&gt; - valider la création</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

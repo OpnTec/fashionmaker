@@ -821,7 +821,7 @@
     <name>DialogCubicBezier</name>
     <message>
         <source>Cubic bezier</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubische Bezierkurve</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -861,34 +861,34 @@
     </message>
     <message>
         <source>Invalid spline</source>
-        <translation type="unfinished">Ungültige Spline/glatte Kurve</translation>
+        <translation>Ungültige Spline</translation>
     </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
     <message>
         <source>Dialog cubic bezier path</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubische Bezierkurve-Dialogfeld</translation>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished">Punkt:</translation>
+        <translation>Punkt:</translation>
     </message>
     <message>
         <source>List of points</source>
-        <translation type="unfinished">Liste von Punkten</translation>
+        <translation>Liste von Punkten</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Farbe:</translation>
+        <translation>Farbe:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
-        <translation type="unfinished">Ungültiger Spline-Pfad/glatte Kurve</translation>
+        <translation>Ungültiger Spline-Pfad/glatte Kurve</translation>
     </message>
 </context>
 <context>
@@ -1370,7 +1370,7 @@
     </message>
     <message>
         <source>Length of arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Length of curves</source>
@@ -1402,7 +1402,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation>Bogenlänge</translation>
+        <translation type="vanished">Bogenlänge</translation>
     </message>
     <message>
         <source>Curve length</source>
@@ -1418,7 +1418,7 @@
     </message>
     <message>
         <source>Angles of arcs</source>
-        <translation>Winkel der Bögen</translation>
+        <translation type="vanished">Winkel der Bögen</translation>
     </message>
     <message>
         <source>Angles of curves</source>
@@ -1430,7 +1430,7 @@
     </message>
     <message>
         <source>Arc angle</source>
-        <translation>Bogenwinkel</translation>
+        <translation type="vanished">Bogenwinkel</translation>
     </message>
     <message>
         <source>Curve angle</source>
@@ -1751,43 +1751,43 @@
     </message>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">Kurve</translation>
+        <translation>Kurve</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubische Bezierkurve</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation type="unfinished">Bogen</translation>
+        <translation>Bogen</translation>
     </message>
     <message>
         <source>%1 with length %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 mit Länge %2</translation>
     </message>
     <message>
         <source>Spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Spline-Pfad/glatte Kurve</translation>
     </message>
     <message>
         <source>Cubic bezier curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad der kubischen Bezierkurve</translation>
     </message>
     <message>
         <source>%1 - cut %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2 abschneiden</translation>
     </message>
     <message>
         <source>arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogen</translation>
     </message>
     <message>
         <source>curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurve</translation>
     </message>
     <message>
         <source>curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurvenpfad</translation>
     </message>
 </context>
 <context>
@@ -1846,7 +1846,7 @@
     </message>
     <message>
         <source>Lengths arcs</source>
-        <translation>Bogenlängen</translation>
+        <translation type="vanished">Bogenlängen</translation>
     </message>
     <message>
         <source>Radiuses arcs</source>
@@ -1858,7 +1858,7 @@
     </message>
     <message>
         <source>Angles arcs</source>
-        <translation>Winkel des Bogens</translation>
+        <translation type="vanished">Winkel des Bogens</translation>
     </message>
     <message>
         <source>Formula</source>
@@ -4835,7 +4835,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation>toolBar</translation>
+        <translation type="vanished">toolBar</translation>
     </message>
     <message>
         <source>Last Tool</source>
@@ -5240,14 +5240,18 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Curve tool which uses point as control handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurve, die einen Punkt als Kontrollmethode verwendet</translation>
     </message>
     <message>
         <source>Select first curve point</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersten Punkt der Kurve wählen</translation>
     </message>
     <message>
         <source>Select point of cubic bezier path</source>
+        <translation>Punkt des Pfades der kubischen Bezierkurve auswählen</translation>
+    </message>
+    <message>
+        <source>Toolbar pointer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6535,7 +6539,7 @@ Do you want to save your changes?</source>
     <name>VAbstractCubicBezierPath</name>
     <message>
         <source>Can&apos;t cut this spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Spline kann nicht unterteilt werden</translation>
     </message>
 </context>
 <context>
@@ -6928,16 +6932,24 @@ Do you want to save your changes?</source>
         <source>Can&apos;t find object. Type mismatch.</source>
         <translation>Objekt kann nicht gefunden werden. Falscher Typ.</translation>
     </message>
+    <message>
+        <source>Number of free id exhausted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCubicBezierPath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation type="unfinished">Nicht genügend Punkte vorhanden, um den Spline zu erstellen.</translation>
+        <translation>Nicht genügend Punkte vorhanden, um die Spline zu erstellen.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation type="unfinished">Dieser Spline existiert nicht.</translation>
+        <translation>Diese Spline existiert nicht.</translation>
     </message>
 </context>
 <context>
@@ -7232,7 +7244,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown spline type &apos;%1&apos;.</source>
-        <translation>Unbekannter Spline Type &apos;%1&apos;.</translation>
+        <translation>Unbekannte Spline Type &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown arc type &apos;%1&apos;.</source>
@@ -7260,11 +7272,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren der kubischen Bezierkurve</translation>
     </message>
     <message>
         <source>Error creating or updating cubic bezier path curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen oder Aktualisieren des Pfades der kubischen Bezierkurve</translation>
     </message>
 </context>
 <context>
@@ -7282,11 +7294,11 @@ Do you want to save your changes?</source>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation>Nicht genügend Punkte vorhanden, um den Spline zu erstellen.</translation>
+        <translation>Nicht genügend Punkte vorhanden, um die Spline zu erstellen.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation>Dieser Spline existiert nicht.</translation>
+        <translation>Diese Spline existiert nicht.</translation>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
@@ -7540,11 +7552,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubische Bezierkurve</translation>
     </message>
     <message>
         <source>Tool cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubische Bezierkurven-Werkzeug</translation>
     </message>
 </context>
 <context>
@@ -8367,62 +8379,62 @@ Do you want to save your changes?</source>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Linie_</translation>
+        <translation type="vanished">Linie_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>WinkelLinie_</translation>
+        <translation type="vanished">WinkelLinie_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Kreisbogen_</translation>
+        <translation type="vanished">Kreisbogen_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Spl_</translation>
+        <translation type="vanished">Spl_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>SplPath</translation>
+        <translation type="vanished">SplPath</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>RadiusBogen_</translation>
+        <translation type="vanished">RadiusBogen_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Winkel1Bogen_</translation>
+        <translation type="vanished">Winkel1Bogen_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Winkel2Bogen_</translation>
+        <translation type="vanished">Winkel2Bogen_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Angle1Spl_</translation>
+        <translation type="vanished">Angle1Spl_</translation>
     </message>
     <message>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation>Angle2Spl_</translation>
+        <translation type="vanished">Angle2Spl_</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>Angle1SplPath</translation>
+        <translation type="vanished">Angle1SplPath</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation>Angle2SplPath</translation>
+        <translation type="vanished">Angle2SplPath</translation>
     </message>
     <message>
         <source>sin</source>
@@ -8569,6 +8581,71 @@ Do you want to save your changes?</source>
         <comment>inch</comment>
         <translation>in</translation>
     </message>
+    <message>
+        <source>Line_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Linie_</translation>
+    </message>
+    <message>
+        <source>AngleLine_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">WinkelLinie_</translation>
+    </message>
+    <message>
+        <source>Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Kreisbogen_</translation>
+    </message>
+    <message>
+        <source>Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Spl_</translation>
+    </message>
+    <message>
+        <source>SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished">SplPath</translation>
+    </message>
+    <message>
+        <source>RadiusArc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">RadiusBogen_</translation>
+    </message>
+    <message>
+        <source>Angle1Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Winkel1Bogen_</translation>
+    </message>
+    <message>
+        <source>Angle2Arc_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Winkel2Bogen_</translation>
+    </message>
+    <message>
+        <source>Angle1Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Angle1Spl_</translation>
+    </message>
+    <message>
+        <source>Angle2Spl_</source>
+        <comment>Left symbol _ in the name</comment>
+        <translation type="unfinished">Angle2Spl_</translation>
+    </message>
+    <message>
+        <source>Angle1SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished">Angle1SplPath</translation>
+    </message>
+    <message>
+        <source>Angle2SplPath</source>
+        <comment>Do not add symbol _ to the end of the name</comment>
+        <translation type="unfinished">Angle2SplPath</translation>
+    </message>
+    <message>
+        <source>Seg_</source>
+        <comment>Segment. Left symbol _ in the name</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -8596,15 +8673,15 @@ Do you want to save your changes?</source>
     <name>VisToolCubicBezierPath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Gekrümmter Pfad&lt;/b&gt;: sieben oder mehr Punkte auswählen</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Gekrümmter Pfad&lt;/b&gt;: sieben oder mehr Punkte auswählen, &lt;b&gt;Enter&lt;/b&gt; - fertigstellen</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Gekrümmter Pfad&lt;/b&gt;: mehr Punkte für das gesamte Segment auswählen</translation>
     </message>
 </context>
 <context>
@@ -8618,7 +8695,11 @@ Do you want to save your changes?</source>
     <name>VisToolEndLine</name>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Punkt mit Abstand und Winkel&lt;/b&gt;: Winkel = %1°; &lt;b&gt;Shift&lt;/b&gt; - Winkel einrasten, &lt;b&gt;Enter&lt;/b&gt; - fertigstellen</translation>
+        <translation type="vanished">&lt;b&gt;Punkt mit Abstand und Winkel&lt;/b&gt;: Winkel = %1°; &lt;b&gt;Shift&lt;/b&gt; - Winkel einrasten, &lt;b&gt;Enter&lt;/b&gt; - fertigstellen</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
