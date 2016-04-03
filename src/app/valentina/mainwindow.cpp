@@ -2012,28 +2012,12 @@ void MainWindow::ActionDraw(bool checked)
         RestoreCurrentScene();
 
         mode = Draw::Calculation;
-        comboBoxDraws->setEnabled(true);
         comboBoxDraws->setCurrentIndex(currentDrawIndex);//restore current pattern peace
         drawMode = true;
 
         SetEnableTool(true);
+        SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(currentToolBoxIndex);
-
-        ui->actionHistory->setEnabled(true);
-        ui->actionOptionDraw->setEnabled(true);
-        ui->actionNewDraw->setEnabled(true);
-        ui->actionTable->setEnabled(true);
-        ui->actionArrowTool->setEnabled(true);
-        ui->actionShowCurveDetails->setEnabled(true);
-        actionDockWidgetToolOptions->setEnabled(true);
-        if (qApp->getUndoStack()->canUndo())
-        {
-            undoAction->setEnabled(true);
-        }
-        if (qApp->getUndoStack()->canRedo())
-        {
-            redoAction->setEnabled(true);
-        }
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
@@ -2066,7 +2050,6 @@ void MainWindow::ActionDetails(bool checked)
             drawMode = false;
         }
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);// Need to get data about all details
-        comboBoxDraws->setEnabled(false);
 
         if(not qApp->getOpeningPattern())
         {
@@ -2102,23 +2085,8 @@ void MainWindow::ActionDetails(bool checked)
         }
         mode = Draw::Modeling;
         SetEnableTool(true);
+        SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(4);
-
-        ui->actionHistory->setEnabled(false);
-        ui->actionOptionDraw->setEnabled(false);
-        ui->actionNewDraw->setEnabled(false);
-        ui->actionTable->setEnabled(false);
-        ui->actionArrowTool->setEnabled(true);
-        ui->actionShowCurveDetails->setEnabled(false);
-        actionDockWidgetToolOptions->setEnabled(true);
-        if (qApp->getUndoStack()->canUndo())
-        {
-            undoAction->setEnabled(true);
-        }
-        if (qApp->getUndoStack()->canRedo())
-        {
-            redoAction->setEnabled(true);
-        }
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
@@ -2153,7 +2121,6 @@ void MainWindow::ActionLayout(bool checked)
             drawMode = false;
         }
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);// Need to get data about all details
-        comboBoxDraws->setEnabled(false);
 
         const QHash<quint32, VDetail> *details = pattern->DataDetails();
         if(not qApp->getOpeningPattern())
@@ -2193,17 +2160,9 @@ void MainWindow::ActionLayout(bool checked)
         }
         mode = Draw::Layout;
         SetEnableTool(true);
+        SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(5);
 
-        ui->actionHistory->setEnabled(false);
-        ui->actionOptionDraw->setEnabled(false);
-        ui->actionNewDraw->setEnabled(false);
-        ui->actionArrowTool->setEnabled(false);
-        ui->actionTable->setEnabled(false);
-        ui->actionShowCurveDetails->setEnabled(false);
-        actionDockWidgetToolOptions->setEnabled(false);
-        undoAction->setEnabled(false);
-        redoAction->setEnabled(false);
         mouseCoordinate->setText("");
 
         if (qApp->patternType() == MeasurementsType::Standard)
@@ -2585,7 +2544,7 @@ void MainWindow::FullParseFile()
         return;
     }
 
-    QString patternPiece = QString();
+    QString patternPiece;
     if (comboBoxDraws->currentIndex() != -1)
     {
         patternPiece = comboBoxDraws->itemText(comboBoxDraws->currentIndex());
@@ -2593,6 +2552,18 @@ void MainWindow::FullParseFile()
     comboBoxDraws->blockSignals(true);
     comboBoxDraws->clear();
     comboBoxDraws->addItems(doc->getPatternPieces());
+    if (not drawMode)
+    {
+        comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);
+    }
+    else
+    {
+        const qint32 index = comboBoxDraws->findText(patternPiece);
+        if ( index != -1 )
+        {
+            comboBoxDraws->setCurrentIndex(index);
+        }
+    }
     comboBoxDraws->blockSignals(false);
     ui->actionPattern_properties->setEnabled(true);
 
@@ -2671,34 +2642,35 @@ void MainWindow::SetEnabledGUI(bool enabled)
  */
 void MainWindow::SetEnableWidgets(bool enable)
 {
-    comboBoxDraws->setEnabled(enable);
-    ui->actionOptionDraw->setEnabled(enable);
-    if (enable && not patternReadOnly)
-    {
-        ui->actionSave->setEnabled(enable);
-    }
-    else
-    {
-        ui->actionSave->setEnabled(false);
-    }
+    const bool drawStage = (mode == Draw::Calculation);
+    const bool designStage = (drawStage || mode == Draw::Modeling);
+
+    comboBoxDraws->setEnabled(enable && drawStage);
+    ui->actionOptionDraw->setEnabled(enable && drawStage);
+    ui->actionSave->setEnabled(enable && not patternReadOnly);
     ui->actionSaveAs->setEnabled(enable);
-    ui->actionPattern_properties->setEnabled(enable);
-    ui->actionEdit_pattern_code->setEnabled(enable);
+    ui->actionPattern_properties->setEnabled(enable && designStage);
+    ui->actionEdit_pattern_code->setEnabled(enable && designStage);
     ui->actionZoomIn->setEnabled(enable);
     ui->actionZoomOut->setEnabled(enable);
-    ui->actionArrowTool->setEnabled(enable);
-    ui->actionHistory->setEnabled(enable);
-    ui->actionNewDraw->setEnabled(enable);
+    ui->actionArrowTool->setEnabled(enable && designStage);
+    ui->actionHistory->setEnabled(enable && drawStage);
+    ui->actionNewDraw->setEnabled(enable && drawStage);
     ui->actionDraw->setEnabled(enable);
     ui->actionDetails->setEnabled(enable);
     ui->actionLayout->setEnabled(enable);
-    ui->actionTable->setEnabled(enable);
+    ui->actionTable->setEnabled(enable && drawStage);
     ui->actionZoomFitBest->setEnabled(enable);
     ui->actionZoomOriginal->setEnabled(enable);
-    ui->actionShowCurveDetails->setEnabled(enable);
-    ui->actionLoadIndividual->setEnabled(enable);
-    ui->actionLoadStandard->setEnabled(enable);
-    ui->actionUnloadMeasurements->setEnabled(enable);
+    ui->actionShowCurveDetails->setEnabled(enable && drawStage);
+    ui->actionLoadIndividual->setEnabled(enable && designStage);
+    ui->actionLoadStandard->setEnabled(enable && designStage);
+    ui->actionUnloadMeasurements->setEnabled(enable && designStage);
+
+    actionDockWidgetToolOptions->setEnabled(enable && designStage);
+
+    undoAction->setEnabled(enable && designStage && qApp->getUndoStack()->canUndo());
+    redoAction->setEnabled(enable && designStage && qApp->getUndoStack()->canRedo());
 
     //Now we don't want allow user call context menu
     sceneDraw->SetDisableTools(!enable, doc->GetNameActivPP());
