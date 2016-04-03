@@ -1274,7 +1274,16 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         PointsCommonAttributes(domElement, id, mx, my);
         const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-        const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(idObject );
+        QSharedPointer<VPointF> point;
+        try
+        {
+            point = data->GeometricObject<VPointF>(idObject);
+        }
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            Q_UNUSED(e);
+            return;// Just ignore
+        }
         data->UpdateGObject(id, new VPointF(point->toQPointF(), point->name(), mx, my, idObject,
                                             Draw::Modeling));
         VNodePoint::Create(this, data, sceneDetail, id, idObject, parse, Source::FromFile, idTool);
@@ -2180,20 +2189,28 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         quint32 idTool = 0;
 
         SplinesCommonAttributes(domElement, id, idObject, idTool);
-        const auto obj = data->GetGObject(idObject);
-        if (obj->getType() == GOType::Spline)
+        try
         {
-            VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
-            spl->setIdObject(idObject);
-            spl->setMode(Draw::Modeling);
-            data->UpdateGObject(id, spl);
+            const auto obj = data->GetGObject(idObject);
+            if (obj->getType() == GOType::Spline)
+            {
+                VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(idObject));
+                spl->setIdObject(idObject);
+                spl->setMode(Draw::Modeling);
+                data->UpdateGObject(id, spl);
+            }
+            else
+            {
+                VCubicBezier *spl = new VCubicBezier(*data->GeometricObject<VCubicBezier>(idObject));
+                spl->setIdObject(idObject);
+                spl->setMode(Draw::Modeling);
+                data->UpdateGObject(id, spl);
+            }
         }
-        else
-        {
-            VCubicBezier *spl = new VCubicBezier(*data->GeometricObject<VCubicBezier>(idObject));
-            spl->setIdObject(idObject);
-            spl->setMode(Draw::Modeling);
-            data->UpdateGObject(id, spl);
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            Q_UNUSED(e);
+            return;// Just ignore
         }
 
         VNodeSpline::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
@@ -2218,20 +2235,28 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         quint32 idTool = 0;
 
         SplinesCommonAttributes(domElement, id, idObject, idTool);
-        const auto obj = data->GetGObject(idObject);
-        if (obj->getType() == GOType::SplinePath)
+        try
         {
-            VSplinePath *path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
-            path->setIdObject(idObject);
-            path->setMode(Draw::Modeling);
-            data->UpdateGObject(id, path);
+            const auto obj = data->GetGObject(idObject);
+            if (obj->getType() == GOType::SplinePath)
+            {
+                VSplinePath *path = new VSplinePath(*data->GeometricObject<VSplinePath>(idObject));
+                path->setIdObject(idObject);
+                path->setMode(Draw::Modeling);
+                data->UpdateGObject(id, path);
+            }
+            else
+            {
+                VCubicBezierPath *spl = new VCubicBezierPath(*data->GeometricObject<VCubicBezierPath>(idObject));
+                spl->setIdObject(idObject);
+                spl->setMode(Draw::Modeling);
+                data->UpdateGObject(id, spl);
+            }
         }
-        else
-        {
-            VCubicBezierPath *spl = new VCubicBezierPath(*data->GeometricObject<VCubicBezierPath>(idObject));
-            spl->setIdObject(idObject);
-            spl->setMode(Draw::Modeling);
-            data->UpdateGObject(id, spl);
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            Q_UNUSED(e);
+            return;// Just ignore
         }
         VNodeSplinePath::Create(this, data, id, idObject, parse, Source::FromFile, idTool);
     }
@@ -2300,7 +2325,16 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         ToolsCommonAttributes(domElement, id);
         const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
-        VArc *arc = new VArc(*data->GeometricObject<VArc>(idObject));
+        VArc *arc = nullptr;
+        try
+        {
+            arc = new VArc(*data->GeometricObject<VArc>(idObject));
+        }
+        catch (const VExceptionBadId &e)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            Q_UNUSED(e);
+            return;// Just ignore
+        }
         arc->setIdObject(idObject);
         arc->setMode(Draw::Modeling);
         data->UpdateGObject(id, arc);
