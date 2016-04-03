@@ -1,4 +1,5 @@
 # Version 0.4.4
+- Fixed GUI issue. After full parse some widgets was incorrectly reseted.
 - [#464] Crash. Issue with modeling node objects.
 - [#463] Wrong export to DXF format.
 - Fixed issue with deleting detail nodes.
