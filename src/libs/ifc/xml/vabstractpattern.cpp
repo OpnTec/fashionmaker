@@ -968,7 +968,7 @@ void VAbstractPattern::SetImage(const QString &text, const QString &extension)
 void VAbstractPattern::DeleteImage()
 {
     QDomElement pattern = documentElement();
-    QDomNodeList images = this->elementsByTagName(TagImage);
+    const QDomNodeList images = this->elementsByTagName(TagImage);
     for (int i=0; i<images.count(); ++i)
     {
         QDomNode image = images.at(i);

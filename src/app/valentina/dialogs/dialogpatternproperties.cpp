@@ -620,10 +620,6 @@ QImage DialogPatternProperties::GetImage()
     QBuffer buffer(&ba);
     buffer.open(QIODevice::ReadOnly);
     QString extension = doc->GetImageExtension();
-    if (extension.isEmpty())
-    {
-        extension = "PNG";
-    }
     image.load(&buffer, extension.toLatin1().data()); // writes image into ba in 'extension' format
     return image;
 }
@@ -661,7 +657,7 @@ void DialogPatternProperties::ChangeImage()
     }
     else
     {
-        if (!image.load(fileName))
+        if (not image.load(fileName))
         {
             return;
         }
@@ -700,7 +696,7 @@ void DialogPatternProperties::SaveImage()
     QByteArray byteArray;
     byteArray.append(doc->GetImage().toUtf8());
     QByteArray ba = QByteArray::fromBase64(byteArray);
-    const QString extension = "." + doc->GetImageExtension();
+    const QString extension = QLatin1String(".") + doc->GetImageExtension();
     QString filter = tr("Images") + QLatin1String(" (*") + extension + QLatin1String(")");
     QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), tr("untitled"), filter, &filter);
     if (not filename.isEmpty())
