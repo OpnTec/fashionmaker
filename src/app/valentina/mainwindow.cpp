@@ -2086,7 +2086,7 @@ void MainWindow::ActionDetails(bool checked)
         mode = Draw::Modeling;
         SetEnableTool(true);
         SetEnableWidgets(true);
-        ui->toolBox->setCurrentIndex(4);
+        ui->toolBox->setCurrentIndex(5);
 
         if (qApp->patternType() == MeasurementsType::Standard)
         {
@@ -2161,7 +2161,7 @@ void MainWindow::ActionLayout(bool checked)
         mode = Draw::Layout;
         SetEnableTool(true);
         SetEnableWidgets(true);
-        ui->toolBox->setCurrentIndex(5);
+        ui->toolBox->setCurrentIndex(6);
 
         mouseCoordinate->setText("");
 
@@ -3042,6 +3042,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonPointFromArcAndTangent->setEnabled(drawTools);
     ui->toolButtonArcWithLength->setEnabled(drawTools);
     ui->toolButtonTrueDarts->setEnabled(drawTools);
+    ui->toolButtonGroup->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 

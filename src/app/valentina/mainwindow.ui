@@ -48,14 +48,14 @@
        <string>Tools</string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>318</height>
         </rect>
        </property>
@@ -375,7 +375,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>58</height>
         </rect>
        </property>
@@ -700,7 +700,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>196</height>
         </rect>
        </property>
@@ -937,12 +937,52 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="page_7">
+       <attribute name="icon">
+        <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+         <normaloff>:/icon/16x16/operations.png</normaloff>:/icon/16x16/operations.png</iconset>
+       </attribute>
+       <attribute name="label">
+        <string>Operations</string>
+       </attribute>
+       <attribute name="toolTip">
+        <string>Operations</string>
+       </attribute>
+       <layout class="QFormLayout" name="formLayout_7">
+        <item row="0" column="0">
+         <widget class="QToolButton" name="toolButtonGroup">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Create new group</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/group_plus.png</normaloff>:/toolicon/32x32/group_plus.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="page_5">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
+         <width>130</width>
          <height>58</height>
         </rect>
        </property>
@@ -1028,8 +1068,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>87</width>
-         <height>58</height>
+         <width>130</width>
+         <height>356</height>
         </rect>
        </property>
        <attribute name="icon">
