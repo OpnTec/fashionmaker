@@ -2882,7 +2882,7 @@ bool VPattern::IsDefCustom() const
     const QDomElement domElement = domNode.toElement();
     if (domElement.isNull() == false)
     {
-        return GetParametrBool(domElement, AttrCustom, QStringLiteral("false"));
+        return GetParametrBool(domElement, AttrCustom, falseStr);
     }
     else
     {
@@ -3051,7 +3051,7 @@ bool VPattern::IsReadOnly() const
         return false;
     }
 
-    return GetParametrBool(pattern, AttrReadOnly, QStringLiteral("false"));
+    return GetParametrBool(pattern, AttrReadOnly, falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

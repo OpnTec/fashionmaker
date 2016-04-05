@@ -584,6 +584,8 @@ extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;
 
 extern const QString degreeSymbol;
+extern const QString trueStr;
+extern const QString falseStr;
 
 void SetOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
 void RestoreOverrideCursor(const QString & pixmapPath);

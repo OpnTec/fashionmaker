@@ -43,6 +43,8 @@ const QString VAbstractPattern::TagMeasurements = QStringLiteral("measurements")
 const QString VAbstractPattern::TagIncrements   = QStringLiteral("increments");
 const QString VAbstractPattern::TagIncrement    = QStringLiteral("increment");
 const QString VAbstractPattern::TagDraw         = QStringLiteral("draw");
+const QString VAbstractPattern::TagGroups       = QStringLiteral("groups");
+const QString VAbstractPattern::TagItem         = QStringLiteral("item");
 const QString VAbstractPattern::TagPoint        = QStringLiteral("point");
 const QString VAbstractPattern::TagLine         = QStringLiteral("line");
 const QString VAbstractPattern::TagSpline       = QStringLiteral("spline");
@@ -54,6 +56,9 @@ const QString VAbstractPattern::TagSizes        = QStringLiteral("sizes");
 const QString VAbstractPattern::TagUnit         = QStringLiteral("unit");
 
 const QString VAbstractPattern::AttrName        = QStringLiteral("name");
+const QString VAbstractPattern::AttrVisible     = QStringLiteral("visible");
+const QString VAbstractPattern::AttrObject      = QStringLiteral("object");
+const QString VAbstractPattern::AttrTool        = QStringLiteral("tool");
 const QString VAbstractPattern::AttrType        = QStringLiteral("type");
 
 const QString VAbstractPattern::AttrAll         = QStringLiteral("all");
@@ -593,7 +598,7 @@ QMap<GHeights, bool> VAbstractPattern::GetGradationHeights() const
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                const QString defValue = QStringLiteral("true");
+                const QString defValue = trueStr;
                 switch (gTags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagHeights
@@ -759,7 +764,7 @@ QMap<GSizes, bool> VAbstractPattern::GetGradationSizes() const
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                const QString defValue = QStringLiteral("true");
+                const QString defValue = trueStr;
                 switch (gTags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagHeights
@@ -1357,7 +1362,50 @@ QDomElement VAbstractPattern::GetDraw(const QString &name) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QDomElement VAbstractPattern::CreateGroups()
+{
+    QDomElement draw;
+    if (GetActivDrawElement(draw))
+    {
+        QDomElement groups = draw.firstChildElement(TagGroups);
+
+        if (groups.isNull())
+        {
+            groups = createElement(TagGroups);
+            draw.appendChild(groups);
+        }
+
+        return groups;
+    }
+    return QDomElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::AddGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &group)
 {
+    if (id == NULL_ID || group.isEmpty())
+    {
+        return;
+    }
 
+    QDomElement groups = CreateGroups();
+
+    if (groups.isNull())
+    {
+        return;
+    }
+
+    groups.setAttribute(AttrId, id);
+    groups.setAttribute(AttrName, name);
+    groups.setAttribute(AttrVisible, trueStr);
+
+    auto i = group.constBegin();
+    while (i != group.constEnd())
+    {
+        QDomElement item = createElement(TagItem);
+        item.setAttribute(AttrObject, i.key());
+        item.setAttribute(AttrTool, i.value());
+        groups.appendChild(item);
+        ++i;
+    }
 }

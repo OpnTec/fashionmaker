@@ -1012,10 +1012,7 @@ void MainWindow::ClosedDialogGroup(int result)
 
         DialogGroup *dialog = qobject_cast<DialogGroup*>(dialogTool);
         SCASSERT(dialog != nullptr);
-        const QString name = dialog->GetName();
-        const QMap<quint32, quint32> group = dialog->GetGroup();
-        const quint32 id = pattern->getNextId();
-        doc->AddGroup(id, name, group);
+        doc->AddGroup(pattern->getNextId(), dialog->GetName(), dialog->GetGroup());
     }
     ArrowTool();
 }

@@ -114,6 +114,7 @@ public:
 
     QDomElement    GetDraw(const QString &name) const;
 
+    QDomElement    CreateGroups();
     void           AddGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &group);
 
     static const QString TagPattern;
@@ -127,6 +128,8 @@ public:
     static const QString TagIncrements;
     static const QString TagIncrement;
     static const QString TagDraw;
+    static const QString TagGroups;
+    static const QString TagItem;
     static const QString TagPoint;
     static const QString TagLine;
     static const QString TagSpline;
@@ -138,6 +141,9 @@ public:
     static const QString TagUnit;
 
     static const QString AttrName;
+    static const QString AttrVisible;
+    static const QString AttrObject;
+    static const QString AttrTool;
     static const QString AttrType;
 
     static const QString AttrAll;
