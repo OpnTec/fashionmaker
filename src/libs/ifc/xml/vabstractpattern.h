@@ -114,6 +114,8 @@ public:
 
     QDomElement    GetDraw(const QString &name) const;
 
+    void           AddGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &group);
+
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;

@@ -305,6 +305,7 @@ void MainWindow::InitScenes()
 
     connect(this, &MainWindow::EnableLabelSelection, sceneDraw, &VMainGraphicsScene::ToggleLabelSelection);
     connect(this, &MainWindow::EnablePointSelection, sceneDraw, &VMainGraphicsScene::TogglePointSelection);
+    connect(this, &MainWindow::EnableLineSelection, sceneDraw, &VMainGraphicsScene::ToggleLineSelection);
     connect(this, &MainWindow::EnableArcSelection, sceneDraw, &VMainGraphicsScene::ToggleArcSelection);
     connect(this, &MainWindow::EnableSplineSelection, sceneDraw, &VMainGraphicsScene::ToggleSplineSelection);
     connect(this, &MainWindow::EnableSplinePathSelection, sceneDraw, &VMainGraphicsScene::ToggleSplinePathSelection);
@@ -551,6 +552,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         SCASSERT(scene != nullptr);
 
         connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
+        connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool, &DialogTool::SelectedObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         ui->view->itemClicked(nullptr);
@@ -906,7 +908,7 @@ void MainWindow::ToolPointOfContact(bool checked)
  */
 void MainWindow::ToolDetail(bool checked)
 {
-    ToolSelectAllObjects();
+    ToolSelectAllDrawObjects();
     SetToolButton<DialogDetail>(checked, Tool::Detail, "://cursor/new_detail_cursor.png",
                                 tr("Select points, arcs, curves clockwise."), &MainWindow::ClosedDialogDetail);
 }
@@ -992,6 +994,33 @@ void MainWindow::ClosedDialogUnionDetails(int result)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolGroup(bool checked)
+{
+    ToolSelectGroupObjects();
+    SetToolButton<DialogGroup>(checked, Tool::Group, ":/cursor/group_plus_cursor.png",
+                               tr("Select objects, <b>Enter</b> - finish creation"), &MainWindow::ClosedDialogGroup);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ClosedDialogGroup(int result)
+{
+    SCASSERT(dialogTool != nullptr);
+    if (result == QDialog::Accepted)
+    {
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
+        SCASSERT(scene != nullptr);
+
+        DialogGroup *dialog = qobject_cast<DialogGroup*>(dialogTool);
+        SCASSERT(dialog != nullptr);
+        const QString name = dialog->GetName();
+        const QMap<quint32, quint32> group = dialog->GetGroup();
+        const quint32 id = pattern->getNextId();
+        doc->AddGroup(id, name, group);
+    }
+    ArrowTool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ToolCutArc handler tool cutArc.
  * @param checked true - button checked.
@@ -1018,7 +1047,7 @@ void MainWindow::ToolLineIntersectAxis(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolCurveIntersectAxis(bool checked)
 {
-    ToolSelectAllObjects();
+    ToolSelectAllDrawObjects();
     SetToolButtonWithApply<DialogCurveIntersectAxis>(checked, Tool::CurveIntersectAxis,
                                                      ":/cursor/curve_intersect_axis_cursor.png",
                                                      tr("Select curve"),
@@ -1029,7 +1058,7 @@ void MainWindow::ToolCurveIntersectAxis(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolArcIntersectAxis(bool checked)
 {
-    ToolSelectAllObjects();
+    ToolSelectAllDrawObjects();
     // Reuse ToolCurveIntersectAxis but with different cursor and tool tip
     SetToolButtonWithApply<DialogCurveIntersectAxis>(checked, Tool::CurveIntersectAxis,
                                                      ":/cursor/arc_intersect_axis_cursor.png",
@@ -1739,7 +1768,7 @@ void MainWindow::mouseMove(const QPointF &scenePos)
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 41, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1863,6 +1892,9 @@ void MainWindow::CancelTool()
         case Tool::TrueDarts:
             ui->toolButtonTrueDarts->setChecked(false);
             break;
+        case Tool::Group:
+            ui->toolButtonGroup->setChecked(false);
+            break;
     }
     currentScene->setFocus(Qt::OtherFocusReason);
     currentScene->clearSelection();
@@ -1895,6 +1927,7 @@ void  MainWindow::ArrowTool()
     // Only true for rubber band selection
     emit EnableLabelSelection(true);
     emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
     emit EnableArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
@@ -3317,7 +3350,7 @@ void MainWindow::CreateMenus()
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 41, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3463,6 +3496,10 @@ void MainWindow::LastUsedTool()
         case Tool::TrueDarts:
             ui->toolButtonTrueDarts->setChecked(true);
             ToolTrueDarts(true);
+            break;
+        case Tool::Group:
+            ui->toolButtonGroup->setChecked(true);
+            ToolGroup(true);
             break;
     }
 }
@@ -4460,6 +4497,7 @@ void MainWindow::ToolSelectPoint() const
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
     emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
     emit EnableArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
@@ -4495,6 +4533,7 @@ void MainWindow::ToolSelectSpline() const
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
     emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
     emit EnableArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
@@ -4518,6 +4557,7 @@ void MainWindow::ToolSelectSplinePath() const
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
     emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
     emit EnableArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
@@ -4541,6 +4581,7 @@ void MainWindow::ToolSelectArc() const
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
     emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
     emit EnableArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
@@ -4564,6 +4605,7 @@ void MainWindow::ToolSelectPointArc() const
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
     emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
     emit EnableArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
@@ -4587,6 +4629,7 @@ void MainWindow::ToolSelectCurve() const
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
     emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
     emit EnableArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
@@ -4605,11 +4648,12 @@ void MainWindow::ToolSelectCurve() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectAllObjects() const
+void MainWindow::ToolSelectAllDrawObjects() const
 {
     // Only true for rubber band selection
     emit EnableLabelSelection(false);
     emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
     emit EnableArcSelection(false);
     emit EnableSplineSelection(false);
     emit EnableSplinePathSelection(false);
@@ -4618,6 +4662,30 @@ void MainWindow::ToolSelectAllObjects() const
     emit EnableLabelHover(true);
     emit EnablePointHover(true);
     emit EnableLineHover(false);
+    emit EnableArcHover(true);
+    emit EnableSplineHover(true);
+    emit EnableSplinePathHover(true);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
+    ui->view->AllowRubberBand(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolSelectGroupObjects() const
+{
+    // Only true for rubber band selection
+    emit EnableLabelSelection(true);
+    emit EnablePointSelection(true);
+    emit EnableLineSelection(true);
+    emit EnableArcSelection(true);
+    emit EnableSplineSelection(true);
+    emit EnableSplinePathSelection(true);
+
+    // Hovering
+    emit EnableLabelHover(true);
+    emit EnablePointHover(true);
+    emit EnableLineHover(true);
     emit EnableArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);

@@ -42,6 +42,7 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
     firstPoint = new VSimplePoint(p1id, QColor(baseColor), *data->GetPatternUnit(), &factor);
     firstPoint->setParentItem(this);
     connect(firstPoint, &VSimplePoint::Choosed, this, &VToolDoublePoint::Point1Choosed);
+    connect(firstPoint, &VSimplePoint::Selected, this, &VToolDoublePoint::Point1Selected);
     connect(firstPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::contextMenuEvent);
     connect(firstPoint, &VSimplePoint::Delete, this, &VToolDoublePoint::DeleteFromLabel);
     connect(firstPoint, &VSimplePoint::NameChangedPosition, this, &VToolDoublePoint::Label1ChangePosition);
@@ -50,6 +51,7 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
     secondPoint = new VSimplePoint(p2id, QColor(baseColor), *data->GetPatternUnit(), &factor);
     secondPoint->setParentItem(this);
     connect(secondPoint, &VSimplePoint::Choosed, this, &VToolDoublePoint::Point2Choosed);
+    connect(secondPoint, &VSimplePoint::Selected, this, &VToolDoublePoint::Point2Selected);
     connect(secondPoint, &VSimplePoint::ShowContextMenu, this, &VToolDoublePoint::contextMenuEvent);
     connect(secondPoint, &VSimplePoint::Delete, this, &VToolDoublePoint::DeleteFromLabel);
     connect(secondPoint, &VSimplePoint::NameChangedPosition, this, &VToolDoublePoint::Label2ChangePosition);
@@ -136,6 +138,18 @@ void VToolDoublePoint::Point1Choosed()
 void VToolDoublePoint::Point2Choosed()
 {
     emit ChoosedTool(p2id, SceneObject::Point);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::Point1Selected(bool selected)
+{
+    emit ChangedToolSelection(selected, p1id, id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::Point2Selected(bool selected)
+{
+    emit ChangedToolSelection(selected, p2id, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -149,9 +149,8 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
     {
         VToolLine *line = new VToolLine(doc, data, id, firstPoint, secondPoint, typeLine, lineColor, typeCreation);
         scene->addItem(line);
-        connect(line, &VToolLine::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
-        connect(scene, &VMainGraphicsScene::NewFactor, line, &VToolLine::SetFactor);
-        connect(scene, &VMainGraphicsScene::DisableItem, line, &VToolLine::Disable);
+        InitDrawToolConnections(scene, line);
+        connect(scene, &VMainGraphicsScene::EnablePointItemSelection, line, &VToolLine::AllowSelecting);
         connect(scene, &VMainGraphicsScene::EnableLineItemHover, line, &VToolLine::AllowHover);
         doc->AddTool(id, line);
 
@@ -327,15 +326,7 @@ QVariant VToolLine::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
-        if (value == true)
-        {
-            // do stuff if selected
-            this->setFocus();
-        }
-        else
-        {
-            // do stuff if not selected
-        }
+        emit ChangedToolSelection(value.toBool(), id, id);
     }
 
     return QGraphicsItem::itemChange(change, value);

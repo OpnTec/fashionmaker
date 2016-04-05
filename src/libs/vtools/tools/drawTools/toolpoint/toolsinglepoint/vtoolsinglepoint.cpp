@@ -270,15 +270,10 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
-        if (value == true)
-        {
-            // do stuff if selected
-            this->setFocus();
-        }
-        else
-        {
-            // do stuff if not selected
-        }
+        namePoint->blockSignals(true);
+        namePoint->setSelected(value.toBool());
+        namePoint->blockSignals(false);
+        emit ChangedToolSelection(value.toBool(), id, id);
     }
 
     return QGraphicsEllipseItem::itemChange(change, value);

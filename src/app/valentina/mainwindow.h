@@ -120,6 +120,7 @@ public slots:
     void               ToolTriangle(bool checked);
     void               ToolPointOfIntersection(bool checked);
     void               ToolUnionDetails(bool checked);
+    void               ToolGroup(bool checked);
     void               ToolCutArc(bool checked);
     void               ToolLineIntersectAxis(bool checked);
     void               ToolCurveIntersectAxis(bool checked);
@@ -134,6 +135,7 @@ public slots:
 
     void               ClosedDialogDetail(int result);
     void               ClosedDialogUnionDetails(int result);
+    void               ClosedDialogGroup(int result);
 
 //tmp
     void               LastUsedTool();
@@ -161,6 +163,7 @@ signals:
 
     void               EnableLabelSelection(bool enable) const;
     void               EnablePointSelection(bool enable) const;
+    void               EnableLineSelection(bool enable) const;
     void               EnableArcSelection(bool enable) const;
     void               EnableSplineSelection(bool enable) const;
     void               EnableSplinePathSelection(bool enable) const;
@@ -360,7 +363,8 @@ private:
     void ToolSelectArc() const;
     void ToolSelectPointArc() const;
     void ToolSelectCurve() const;
-    void ToolSelectAllObjects() const;
+    void ToolSelectAllDrawObjects() const;
+    void ToolSelectGroupObjects() const;
     void ToolSelectDetail() const;
 };
 

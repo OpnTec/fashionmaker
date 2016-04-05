@@ -259,6 +259,12 @@ void VMainGraphicsScene::ChoosedItem(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::SelectedItem(bool selected, quint32 object, quint32 tool)
+{
+    emit SelectedObject(selected, object, tool);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFactor set current scale factor of scene.
  * @param factor scene scale factor. scene scale factor.
@@ -297,6 +303,12 @@ void VMainGraphicsScene::ToggleLabelSelection(bool enabled)
 void VMainGraphicsScene::TogglePointSelection(bool enabled)
 {
     emit EnablePointItemSelection(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::ToggleLineSelection(bool enabled)
+{
+    emit EnableLineItemSelection(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

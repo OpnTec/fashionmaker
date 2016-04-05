@@ -1355,3 +1355,9 @@ QDomElement VAbstractPattern::GetDraw(const QString &name) const
     }
     return QDomElement();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::AddGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &group)
+{
+
+}

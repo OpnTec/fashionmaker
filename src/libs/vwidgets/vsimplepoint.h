@@ -65,6 +65,7 @@ signals:
      * @param id point id.
      */
     void Choosed(quint32 id);
+    void Selected(bool selected, quint32 id);
     void ShowContextMenu(QGraphicsSceneContextMenuEvent * event);
     void Delete();
     void NameChangedPosition(const QPointF &pos);
@@ -72,14 +73,16 @@ signals:
 public slots:
     void DeleteFromLabel();
     void PointChoosed();
+    void PointSelected(bool selected);
     void ChangedPosition(const QPointF &pos);
     void ContextMenu(QGraphicsSceneContextMenuEvent * event);
 
 protected:
-    virtual void mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
-    virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual void     hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) Q_DECL_OVERRIDE;
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
 
 private:
     Q_DISABLE_COPY(VSimplePoint)

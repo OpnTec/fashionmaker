@@ -61,6 +61,9 @@ public:
     QString      GetLineColor() const;
     virtual void SetLineColor(const QString &value);
 
+signals:
+    void ChangedToolSelection(bool selected, quint32 object, quint32 tool);
+
 public slots:
     virtual void ShowTool(quint32 id, bool enable);
     virtual void ChangedActivDraw(const QString &newName);
@@ -238,6 +241,7 @@ void VDrawTool::InitDrawToolConnections(VMainGraphicsScene *scene, T *tool)
     SCASSERT(tool != nullptr);
 
     QObject::connect(tool, &T::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem);
+    QObject::connect(tool, &T::ChangedToolSelection, scene, &VMainGraphicsScene::SelectedItem);
     QObject::connect(scene, &VMainGraphicsScene::NewFactor, tool, &T::SetFactor);
     QObject::connect(scene, &VMainGraphicsScene::DisableItem, tool, &T::Disable);
     QObject::connect(scene, &VMainGraphicsScene::EnableToolMove, tool, &T::EnableToolMove);

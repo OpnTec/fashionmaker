@@ -46,6 +46,7 @@ VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternU
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);
     connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VSimplePoint::DeleteFromLabel);
     connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VSimplePoint::PointChoosed);
+    connect(namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VSimplePoint::PointSelected);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VSimplePoint::ChangedPosition);
     lineName = new QGraphicsLineItem(this);
     this->setBrush(QBrush(Qt::NoBrush));
@@ -166,6 +167,12 @@ void VSimplePoint::PointChoosed()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::PointSelected(bool selected)
+{
+    emit Selected(selected, id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::ChangedPosition(const QPointF &pos)
 {
     emit NameChangedPosition(pos);
@@ -220,6 +227,20 @@ void VSimplePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     SetPen(this, currentColor, WidthHairLine(patternUnit));
     QGraphicsEllipseItem::hoverLeaveEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVariant VSimplePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+{
+    if (change == QGraphicsItem::ItemSelectedChange)
+    {
+        namePoint->blockSignals(true);
+        namePoint->setSelected(value.toBool());
+        namePoint->blockSignals(false);
+        emit Selected(value.toBool(), id);
+    }
+
+    return QGraphicsEllipseItem::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

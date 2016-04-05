@@ -695,6 +695,14 @@ void DialogTool::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::SelectedObject(bool selected, quint32 object, quint32 tool)
+{
+    Q_UNUSED(selected);
+    Q_UNUSED(object);
+    Q_UNUSED(tool);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NamePointChanged check name of point
  */

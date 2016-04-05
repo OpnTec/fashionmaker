@@ -166,15 +166,7 @@ QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, c
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
-        if (value == true)
-        {
-            // do stuff if selected
-            this->setFocus();
-        }
-        else
-        {
-            // do stuff if not selected
-        }
+        emit ChangedToolSelection(value.toBool(), id, id);
     }
 
     return QGraphicsItem::itemChange(change, value);

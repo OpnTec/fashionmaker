@@ -152,6 +152,10 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
             changeFinished = true;
          }
      }
+     if (change == QGraphicsItem::ItemSelectedChange)
+     {
+         emit PointSelected(value.toBool());
+     }
      return QGraphicsItem::itemChange(change, value);
 }
 

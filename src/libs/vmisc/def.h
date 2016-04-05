@@ -101,6 +101,7 @@ enum class Tool : ToolVisHolderType
     PointFromArcAndTangent,
     TrueDarts,
     UnionDetails,
+    Group,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 

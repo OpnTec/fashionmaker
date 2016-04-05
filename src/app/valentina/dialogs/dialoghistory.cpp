@@ -208,7 +208,7 @@ void DialogHistory::FillTable()
 QString DialogHistory::Record(const VToolRecord &tool)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 41, "Not all tools was used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was used in history.");
 
     const QDomElement domElem = doc->elementById(tool.getId());
     if (domElem.isElement() == false)
@@ -383,6 +383,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::NodePoint:
             case Tool::NodeSpline:
             case Tool::NodeSplinePath:
+            case Tool::Group:
                 return QString();
         }
     }
