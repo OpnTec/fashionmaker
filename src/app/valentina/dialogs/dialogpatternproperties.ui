@@ -93,13 +93,6 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="deleteImageButton">
-             <property name="text">
-              <string>delete image</string>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QLabel" name="imageLabel">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
