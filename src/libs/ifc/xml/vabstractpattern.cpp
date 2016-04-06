@@ -1045,56 +1045,64 @@ void VAbstractPattern::SetActivPP(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::CheckTagExists(const QString &tag)
+QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
 {
-    QDomNodeList list = elementsByTagName(tag);
-    if (list.size() == 0)
+    const QDomNodeList list = elementsByTagName(tag);
+    QDomElement element;
+    if (list.isEmpty())
     {
         const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation;
         switch (tags.indexOf(tag))
         {
             case 0: //TagUnit
+            {
+                return QDomElement();
                 break;// Mandatory tag
+            }
             case 1: //TagImage
             {
-                InsertTag(tags, createElement(TagImage));
+                element = createElement(TagImage);
                 break;
             }
             case 2: //TagAuthor
             {
-                InsertTag(tags, createElement(TagAuthor));
+                element = createElement(TagAuthor);
                 break;
             }
             case 3: //TagDescription
             {
-                InsertTag(tags, createElement(TagDescription));
+                element = createElement(TagDescription);
                 break;
             }
             case 4: //TagNotes
             {
-                InsertTag(tags, createElement(TagNotes));
+                element = createElement(TagNotes);
                 break;
             }
             case 5: //TagGradation
             {
-                QDomElement gradation = createElement(TagGradation);
+                element = createElement(TagGradation);
 
                 QDomElement heights = createElement(TagHeights);
                 heights.setAttribute(AttrAll, QLatin1Literal("true"));
-                gradation.appendChild(heights);
+                element.appendChild(heights);
 
                 QDomElement sizes = createElement(TagSizes);
                 sizes.setAttribute(AttrAll, QLatin1Literal("true"));
-                gradation.appendChild(sizes);
-
-                InsertTag(tags, gradation);
+                element.appendChild(sizes);
                 break;
             }
             default:
+            {
+                return QDomElement();
                 break;
+            }
         }
+        InsertTag(tags, element);
+        return element;
     }
+    return list.at(0).toElement();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

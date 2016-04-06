@@ -264,7 +264,7 @@ protected:
 
     void           SetActivPP(const QString& name);
 
-    void           CheckTagExists(const QString &tag);
+    QDomElement    CheckTagExists(const QString &tag);
     void           InsertTag(const QStringList &tags, const QDomElement &element);
 
 private:
