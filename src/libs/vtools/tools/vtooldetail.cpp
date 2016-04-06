@@ -629,6 +629,13 @@ void VToolDetail::ShowVisualization(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::GroupVisibility(quint32 object, bool visible)
+{
+    Q_UNUSED(object);
+    Q_UNUSED(visible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief RefreshGeometry refresh item on scene.
  */

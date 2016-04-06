@@ -97,6 +97,13 @@ void VToolSinglePoint::SetEnabled(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::GroupVisibility(quint32 object, bool visible)
+{
+    Q_UNUSED(object);
+    setVisible(visible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief NameChangePosition handle change posion point label.
  * @param pos new position.

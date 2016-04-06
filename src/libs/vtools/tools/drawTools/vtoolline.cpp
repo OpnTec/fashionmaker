@@ -471,6 +471,13 @@ void VToolLine::SetLineColor(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolLine::GroupVisibility(quint32 object, bool visible)
+{
+    Q_UNUSED(object);
+    setVisible(visible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VToolLine::GetFirstPoint() const
 {
     return firstPoint;

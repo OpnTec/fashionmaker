@@ -84,6 +84,7 @@ public:
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
     virtual void incrementReferens() Q_DECL_OVERRIDE;
     virtual void decrementReferens() Q_DECL_OVERRIDE;
+    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     /**
      * @brief FullUpdateFromFile update tool data form file.

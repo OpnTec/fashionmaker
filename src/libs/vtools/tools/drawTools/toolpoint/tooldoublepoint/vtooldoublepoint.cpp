@@ -93,6 +93,19 @@ void VToolDoublePoint::SetEnabled(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolDoublePoint::GroupVisibility(quint32 object, bool visible)
+{
+    if (object == p1id)
+    {
+        firstPoint->setVisible(visible);
+    }
+    else if (object == p2id)
+    {
+        secondPoint->setVisible(visible);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::Label1ChangePosition(const QPointF &pos)
 {
     ChangePosition(firstPoint, p1id, pos);

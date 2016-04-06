@@ -112,9 +112,9 @@ private:
 
     void           ParseDrawElement(const QDomNode& node, const Document &parse);
     void           ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
-    void           ParseDetailElement(const QDomElement &domElement,
-                                      const Document &parse);
+    void           ParseDetailElement(const QDomElement &domElement, const Document &parse);
     void           ParseDetails(const QDomElement &domElement, const Document &parse);
+
     void           ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElement,
                                      const Document &parse, const QString &type);
     void           ParseLineElement(VMainGraphicsScene *scene, const QDomElement& domElement,

@@ -466,7 +466,7 @@ void VPattern::customEvent(QEvent *event)
  */
 void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
 {
-    QStringList tags = QStringList() << TagCalculation << TagModeling << TagDetails;
+    QStringList tags = QStringList() << TagCalculation << TagModeling << TagDetails << TagGroups;
     QDomNode domNode = node.firstChild();
     while (domNode.isNull() == false)
     {
@@ -489,6 +489,10 @@ void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
                     case 2: // TagDetails
                         qCDebug(vXML, "Tag details.");
                         ParseDetails(domElement, parse);
+                        break;
+                    case 3: // TagGroups
+                        qCDebug(vXML, "Tag groups.");
+                        ParseGroups(domElement);
                         break;
                     default:
                         VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));

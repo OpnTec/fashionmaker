@@ -53,6 +53,7 @@ public:
 
     QString name() const;
 
+    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     virtual void     FullUpdateFromFile () Q_DECL_OVERRIDE;
     virtual void     Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;

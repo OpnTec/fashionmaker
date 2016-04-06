@@ -109,6 +109,13 @@ void VAbstractNode::SetParentType(const ParentType &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractNode::GroupVisibility(quint32 object, bool visible)
+{
+    Q_UNUSED(object);
+    Q_UNUSED(visible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToModeling add tag to modeling tag current pattern peace.
  * @param domElement tag.

@@ -334,3 +334,10 @@ QString VAbstractSpline::name() const
 {
     return ObjectName<VAbstractCurve>(id);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSpline::GroupVisibility(quint32 object, bool visible)
+{
+    Q_UNUSED(object);
+    setVisible(visible);
+}

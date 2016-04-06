@@ -54,6 +54,7 @@
 #include "tools/vtooldetail.h"
 #include "tools/vtooluniondetails.h"
 #include "dialogs/dialogs.h"
+#include "../vtools/undocommands/addgroup.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -1012,7 +1013,12 @@ void MainWindow::ClosedDialogGroup(int result)
 
         DialogGroup *dialog = qobject_cast<DialogGroup*>(dialogTool);
         SCASSERT(dialog != nullptr);
-        doc->AddGroup(pattern->getNextId(), dialog->GetName(), dialog->GetGroup());
+        const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetGroup());
+        if (not group.isNull())
+        {
+            AddGroup *addGroup = new AddGroup(group, doc);
+            qApp->getUndoStack()->push(addGroup);
+        }
     }
     ArrowTool();
 }

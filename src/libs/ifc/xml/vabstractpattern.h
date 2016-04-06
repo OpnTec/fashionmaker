@@ -67,6 +67,8 @@ public:
     bool           GetActivDrawElement(QDomElement &element) const;
     bool           GetActivNodeElement(const QString& name, QDomElement& element) const;
 
+    void           ParseGroups(const QDomElement &domElement);
+
     quint32        getCursor() const;
     void           setCursor(const quint32 &value);
 
@@ -115,7 +117,7 @@ public:
     QDomElement    GetDraw(const QString &name) const;
 
     QDomElement    CreateGroups();
-    void           AddGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &group);
+    QDomElement    CreateGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &groupData);
 
     static const QString TagPattern;
     static const QString TagCalculation;
@@ -129,7 +131,8 @@ public:
     static const QString TagIncrement;
     static const QString TagDraw;
     static const QString TagGroups;
-    static const QString TagItem;
+    static const QString TagGroup;
+    static const QString TagGroupItem;
     static const QString TagPoint;
     static const QString TagLine;
     static const QString TagSpline;
@@ -281,6 +284,8 @@ private:
     bool IsVariable(const QString& token) const;
     bool IsPostfixOperator(const QString& token) const;
     bool IsFunction(const QString& token) const;
+
+    QPair<bool, QMap<quint32, quint32> > ParseItemElement(const QDomElement &domElement);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

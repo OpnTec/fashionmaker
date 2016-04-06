@@ -489,6 +489,13 @@ void VToolUnionDetails::decrementReferens()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolUnionDetails::GroupVisibility(quint32 object, bool visible)
+{
+    Q_UNUSED(object);
+    Q_UNUSED(visible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Create help create tool from GUI.
  * @param dialog dialog.

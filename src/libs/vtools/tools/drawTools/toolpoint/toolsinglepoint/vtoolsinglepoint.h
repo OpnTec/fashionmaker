@@ -53,6 +53,7 @@ public:
 
     void                    SetEnabled(bool enabled);
 
+    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     void                    NameChangePosition(const QPointF &pos);
     virtual void            SetFactor(qreal factor) Q_DECL_OVERRIDE;

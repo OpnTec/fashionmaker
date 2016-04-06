@@ -56,6 +56,7 @@ public:
 
     void SetEnabled(bool enabled);
 
+    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     void         Label1ChangePosition(const QPointF &pos);
     void         Label2ChangePosition(const QPointF &pos);
