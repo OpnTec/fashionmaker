@@ -645,7 +645,7 @@ void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
 {
     CheckTagExists(TagGradation);
     QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (tags.isEmpty())
     {
         qDebug()<<"Can't save tag "<<TagGradation<<Q_FUNC_INFO;
         return;
@@ -811,7 +811,7 @@ void VAbstractPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
 {
     CheckTagExists(TagGradation);
     QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (tags.isEmpty())
     {
         qDebug()<<"Can't save tag "<<TagGradation<<Q_FUNC_INFO;
         return;

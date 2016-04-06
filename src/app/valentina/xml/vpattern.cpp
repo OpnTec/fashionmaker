@@ -2751,7 +2751,7 @@ void VPattern::SetDefCustom(bool value)
 {
     CheckTagExists(TagGradation);
     QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (tags.isEmpty())
     {
         qDebug()<<"Can't save attribute "<<AttrCustom<<Q_FUNC_INFO;
         return;
@@ -2812,7 +2812,7 @@ void VPattern::SetDefCustomHeight(int value)
 {
     CheckTagExists(TagGradation);
     QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (tags.isEmpty())
     {
         qDebug()<<"Can't save attribute "<<AttrDefHeight<<Q_FUNC_INFO;
         return;
@@ -2871,7 +2871,7 @@ void VPattern::SetDefCustomSize(int value)
 {
     CheckTagExists(TagGradation);
     QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (tags.isEmpty())
     {
         qDebug()<<"Can't save attribute "<<AttrDefSize<<Q_FUNC_INFO;
         return;
