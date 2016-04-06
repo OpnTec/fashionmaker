@@ -204,6 +204,9 @@ private slots:
     void ChangedSize(const QString &text);
     void ChangedHeight(const QString & text);
 
+    void DockToolOptionsVisibilityChanged(bool visible);
+    void DockGropsVisibilityChanged(bool visible);
+
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */
@@ -254,6 +257,9 @@ private:
 
     /** @brief currentToolBoxIndex save current set of tools. */
     qint32             currentToolBoxIndex;
+
+    bool               isDockToolOptionsVisible;
+    bool               isDockGroupsVisible;
 
     /** @brief drawMode true if we current draw scene. */
     bool               drawMode;

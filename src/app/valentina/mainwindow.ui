@@ -938,6 +938,14 @@
        </layout>
       </widget>
       <widget class="QWidget" name="page_7">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>130</width>
+         <height>356</height>
+        </rect>
+       </property>
        <attribute name="icon">
         <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
          <normaloff>:/icon/16x16/operations.png</normaloff>:/icon/16x16/operations.png</iconset>
@@ -1454,6 +1462,18 @@
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetGroups">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="windowTitle">
+    <string>Groups</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2"/>
   </widget>
   <action name="actionNew">
    <property name="icon">

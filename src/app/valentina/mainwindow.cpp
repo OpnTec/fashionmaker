@@ -112,7 +112,10 @@ MainWindow::MainWindow(QWidget *parent)
       dialogTable(nullptr),
       dialogTool(nullptr),
       dialogHistory(nullptr), comboBoxDraws(nullptr), patternPieceLabel(nullptr), mode(Draw::Calculation),
-      currentDrawIndex(0), currentToolBoxIndex(0), drawMode(true), recentFileActs(),
+      currentDrawIndex(0), currentToolBoxIndex(0),
+      isDockToolOptionsVisible(true),
+      isDockGroupsVisible(true),
+      drawMode(true), recentFileActs(),
       separatorAct(nullptr),
       leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true),
       gradationHeights(nullptr), gradationSizes(nullptr), gradationHeightsLabel(nullptr), gradationSizesLabel(nullptr),
@@ -2061,7 +2064,8 @@ void MainWindow::ActionDraw(bool checked)
         }
 
         ui->dockWidgetLayoutPages->setVisible(false);
-        ui->dockWidgetToolOptions->setVisible(true);
+        ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
+        ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
     }
     else
     {
@@ -2130,7 +2134,8 @@ void MainWindow::ActionDetails(bool checked)
         }
 
         ui->dockWidgetLayoutPages->setVisible(false);
-        ui->dockWidgetToolOptions->setVisible(true);
+        ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
+        ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
 
         helpLabel->setText("");
     }
@@ -2207,7 +2212,14 @@ void MainWindow::ActionLayout(bool checked)
         }
 
         ui->dockWidgetLayoutPages->setVisible(true);
+
+        ui->dockWidgetToolOptions->blockSignals(true);
         ui->dockWidgetToolOptions->setVisible(false);
+        ui->dockWidgetToolOptions->blockSignals(false);
+
+        ui->dockWidgetGroups->blockSignals(true);
+        ui->dockWidgetGroups->setVisible(false);
+        ui->dockWidgetGroups->blockSignals(false);
 
         ShowPaper(ui->listWidget->currentRow());
 
@@ -2704,6 +2716,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionUnloadMeasurements->setEnabled(enable && designStage);
 
     actionDockWidgetToolOptions->setEnabled(enable && designStage);
+    actionDockWidgetGroups->setEnabled(enable && designStage);
 
     undoAction->setEnabled(enable && designStage && qApp->getUndoStack()->canUndo());
     redoAction->setEnabled(enable && designStage && qApp->getUndoStack()->canRedo());
@@ -2909,6 +2922,18 @@ void MainWindow::ChangedHeight(const QString &text)
             qCDebug(vMainWindow, "Couldn't restore height value.");
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::DockToolOptionsVisibilityChanged(bool visible)
+{
+    isDockToolOptionsVisible = visible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::DockGropsVisibilityChanged(bool visible)
+{
+    isDockGroupsVisible = visible;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3229,6 +3254,9 @@ void MainWindow::ReadSettings()
 
     // Text under tool buton icon
     ToolBarStyles();
+
+    isDockToolOptionsVisible = ui->dockWidgetToolOptions->isVisible();
+    isDockGroupsVisible = ui->dockWidgetGroups->isVisible();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3335,13 +3363,6 @@ void MainWindow::CreateMenus()
     separatorAct->setSeparator(true);
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
 
-    //Add dock
-    actionDockWidgetToolOptions = ui->dockWidgetToolOptions->toggleViewAction();
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetToolOptions);
-
-    separatorAct = new QAction(this);
-    separatorAct->setSeparator(true);
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
     AddDocks();
 }
 
@@ -3514,7 +3535,15 @@ void MainWindow::LastUsedTool()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AddDocks()
 {
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, ui->dockWidgetToolOptions->toggleViewAction());
+    //Add dock
+    actionDockWidgetToolOptions = ui->dockWidgetToolOptions->toggleViewAction();
+    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetToolOptions);
+    connect(ui->dockWidgetToolOptions, &QDockWidget::visibilityChanged, this,
+            &MainWindow::DockToolOptionsVisibilityChanged);
+
+    actionDockWidgetGroups = ui->dockWidgetGroups->toggleViewAction();
+    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetGroups);
+    connect(ui->dockWidgetGroups, &QDockWidget::visibilityChanged, this, &MainWindow::DockGropsVisibilityChanged);
 
     separatorAct = new QAction(this);
     separatorAct->setSeparator(true);

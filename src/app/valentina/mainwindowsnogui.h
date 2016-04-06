@@ -83,6 +83,7 @@ protected:
     QAction *undoAction;
     QAction *redoAction;
     QAction *actionDockWidgetToolOptions;
+    QAction *actionDockWidgetGroups;
 
     /** @brief fileName name current pattern file. */
     QString            curFile;
