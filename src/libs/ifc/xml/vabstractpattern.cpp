@@ -952,14 +952,9 @@ QString VAbstractPattern::GetImageExtension() const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetImage(const QString &text, const QString &extension)
 {
-    CheckTagExists(TagImage);
-    setTagText(TagImage, text);
-    QDomNodeList list = elementsByTagName(TagImage);
-    for (int i=0; i < list.size(); ++i)
-    {
-        QDomElement dom = list.at(i).toElement();
-        dom.setAttribute(AttrExtension, extension);
-    }
+    QDomElement imageElement = CheckTagExists(TagImage);
+    setTagText(imageElement, text);
+    CheckTagExists(TagImage).setAttribute(AttrExtension, extension);
     modified = true;
     emit patternChanged(false);
 }
@@ -968,12 +963,7 @@ void VAbstractPattern::SetImage(const QString &text, const QString &extension)
 void VAbstractPattern::DeleteImage()
 {
     QDomElement pattern = documentElement();
-    const QDomNodeList images = this->elementsByTagName(TagImage);
-    for (int i=0; i<images.count(); ++i)
-    {
-        QDomNode image = images.at(i);
-        pattern.removeChild(image);
-    }
+    pattern.removeChild(CheckTagExists(TagImage));
     modified = true;
     emit patternChanged(false);
 }

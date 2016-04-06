@@ -698,20 +698,26 @@ bool VDomDocument::setTagText(const QString &tag, const QString &text)
         if (domNode.isNull() == false && domNode.isElement())
         {
             const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                QDomElement parent = domElement.parentNode().toElement();
-                QDomElement newTag = createElement(tag);
-                if (not text.isEmpty())
-                {
-                    const QDomText newTagText = createTextNode(text);
-                    newTag.appendChild(newTagText);
-                }
-
-                parent.replaceChild(newTag, domElement);
-                return true;
-            }
+            setTagText(domElement, text);
         }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDomDocument::setTagText(const QDomElement &domElement, const QString &text)
+{
+    if (domElement.isNull() == false)
+    {
+        QDomElement parent = domElement.parentNode().toElement();
+        QDomElement newTag = createElement(domElement.tagName());
+        if (not text.isEmpty())
+        {
+            const QDomText newTagText = createTextNode(text);
+            newTag.appendChild(newTagText);
+        }
+        parent.replaceChild(newTag, domElement);
+        return true;
     }
     return false;
 }

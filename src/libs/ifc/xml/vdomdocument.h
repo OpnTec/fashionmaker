@@ -115,6 +115,7 @@ public:
 
 protected:
     bool           setTagText(const QString &tag, const QString &text);
+    bool           setTagText(const QDomElement &domElement, const QString &text);
     QString        UniqueTagText(const QString &tagName, const QString &defVal = QString()) const;
 
     void           TestUniqueId() const;
