@@ -67,6 +67,12 @@ void AddGroup::undo()
         }
         else
         {
+            if (groups.childNodes().isEmpty())
+            {
+                QDomNode parent = groups.parentNode();
+                parent.removeChild(groups);
+            }
+
             qCDebug(vUndo, "Can't get group by id = %u.", nodeId);
             return;
         }

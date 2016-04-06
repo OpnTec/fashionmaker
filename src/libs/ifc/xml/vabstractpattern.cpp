@@ -1494,3 +1494,35 @@ QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const
 
     return group;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetGroupName(quint32 id, const QString &name)
+{
+    QDomElement groups = CreateGroups();
+    if (not groups.isNull())
+    {
+        QDomElement group = elementById(id);
+        if (group.isElement())
+        {
+            group.setAttribute(AttrName, name);
+            modified = true;
+            emit patternChanged(false);
+        }
+        else
+        {
+            if (groups.childNodes().isEmpty())
+            {
+                QDomNode parent = groups.parentNode();
+                parent.removeChild(groups);
+            }
+
+            qDebug("Can't get group by id = %u.", id);
+            return;
+        }
+    }
+    else
+    {
+        qDebug("Can't get tag Groups.");
+        return;
+    }
+}

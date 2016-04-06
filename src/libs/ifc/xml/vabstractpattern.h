@@ -118,6 +118,7 @@ public:
 
     QDomElement    CreateGroups();
     QDomElement    CreateGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &groupData);
+    void           SetGroupName(quint32 id, const QString &name);
 
     static const QString TagPattern;
     static const QString TagCalculation;
