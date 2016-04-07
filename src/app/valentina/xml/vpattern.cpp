@@ -469,7 +469,7 @@ void VPattern::customEvent(QEvent *event)
  */
 void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
 {
-    QStringList tags = QStringList() << TagCalculation << TagModeling << TagDetails;
+    QStringList tags = QStringList() << TagCalculation << TagModeling << TagDetails << TagGroups;
     QDomNode domNode = node.firstChild();
     while (domNode.isNull() == false)
     {
@@ -492,6 +492,10 @@ void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
                     case 2: // TagDetails
                         qCDebug(vXML, "Tag details.");
                         ParseDetails(domElement, parse);
+                        break;
+                    case 3: // TagGroups
+                        qCDebug(vXML, "Tag groups.");
+                        ParseGroups(domElement);
                         break;
                     default:
                         VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
@@ -2885,7 +2889,7 @@ bool VPattern::IsDefCustom() const
     const QDomElement domElement = domNode.toElement();
     if (domElement.isNull() == false)
     {
-        return GetParametrBool(domElement, AttrCustom, QStringLiteral("false"));
+        return GetParametrBool(domElement, AttrCustom, falseStr);
     }
     else
     {
@@ -3054,7 +3058,7 @@ bool VPattern::IsReadOnly() const
         return false;
     }
 
-    return GetParametrBool(pattern, AttrReadOnly, QStringLiteral("false"));
+    return GetParametrBool(pattern, AttrReadOnly, falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3126,7 +3130,7 @@ void VPattern::ToolsCommonAttributes(const QDomElement &domElement, quint32 &id)
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 41, "Not all tools was used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was used.");
 
     QRectF rec;
 
@@ -3240,6 +3244,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::NodePoint:
                 case Tool::NodeSpline:
                 case Tool::NodeSplinePath:
+                case Tool::Group:
                     break;
             }
         }

@@ -255,7 +255,7 @@ bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 //---------------------------------------------------------------------------------------------------------------------
 NodeUsage VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name) const
 {
-    const bool value = GetParametrBool(domElement, name, QStringLiteral("true"));
+    const bool value = GetParametrBool(domElement, name, trueStr);
     if (value)
     {
         return NodeUsage::InUse;
@@ -271,11 +271,11 @@ void VDomDocument::SetParametrUsage(QDomElement &domElement, const QString &name
 {
     if (value == NodeUsage::InUse)
     {
-        domElement.setAttribute(name, QStringLiteral("true"));
+        domElement.setAttribute(name, trueStr);
     }
     else
     {
-        domElement.setAttribute(name, QStringLiteral("false"));
+        domElement.setAttribute(name, falseStr);
     }
 }
 

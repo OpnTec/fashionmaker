@@ -46,11 +46,12 @@ class VDataTool : public QObject
 public:
     explicit VDataTool(VContainer *data, QObject *parent = nullptr);
     virtual ~VDataTool() Q_DECL_OVERRIDE;
-    VContainer            getData() const;
-    void                  setData(const VContainer *value);
-    virtual quint32       referens() const;
-    virtual void          incrementReferens();
-    virtual void          decrementReferens();
+    VContainer      getData() const;
+    void            setData(const VContainer *value);
+    virtual quint32 referens() const;
+    virtual void    incrementReferens();
+    virtual void    decrementReferens();
+    virtual void    GroupVisibility(quint32 object, bool visible)=0;
 protected:
     /** @brief data container with data */
     VContainer            data;

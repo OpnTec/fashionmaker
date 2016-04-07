@@ -66,6 +66,7 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolSinglePoint::contextMenuEvent);
     connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolSinglePoint::DeleteFromLabel);
     connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VToolSinglePoint::PointChoosed);
+    connect(namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VToolSinglePoint::PointSelected);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolSinglePoint::NameChangePosition);
     lineName = new QGraphicsLineItem(this);
     this->setBrush(QBrush(Qt::NoBrush));
@@ -94,6 +95,13 @@ void VToolSinglePoint::SetEnabled(bool enabled)
 {
     SetToolEnabled(this, enabled);
     SetToolEnabled(lineName, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::GroupVisibility(quint32 object, bool visible)
+{
+    Q_UNUSED(object);
+    setVisible(visible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,6 +173,12 @@ void VToolSinglePoint::EnableToolMove(bool move)
 void VToolSinglePoint::PointChoosed()
 {
     emit ChoosedTool(id, SceneObject::Point);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::PointSelected(bool selected)
+{
+    setSelected(selected);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -270,15 +284,10 @@ QVariant VToolSinglePoint::itemChange(QGraphicsItem::GraphicsItemChange change, 
 {
     if (change == QGraphicsItem::ItemSelectedChange)
     {
-        if (value == true)
-        {
-            // do stuff if selected
-            this->setFocus();
-        }
-        else
-        {
-            // do stuff if not selected
-        }
+        namePoint->blockSignals(true);
+        namePoint->setSelected(value.toBool());
+        namePoint->blockSignals(false);
+        emit ChangedToolSelection(value.toBool(), id, id);
     }
 
     return QGraphicsEllipseItem::itemChange(change, value);

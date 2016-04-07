@@ -101,6 +101,7 @@ enum class Tool : ToolVisHolderType
     PointFromArcAndTangent,
     TrueDarts,
     UnionDetails,
+    Group,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
@@ -583,6 +584,8 @@ extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;
 
 extern const QString degreeSymbol;
+extern const QString trueStr;
+extern const QString falseStr;
 
 void SetOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
 void RestoreOverrideCursor(const QString & pixmapPath);

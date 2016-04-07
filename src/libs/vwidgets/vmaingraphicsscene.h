@@ -55,6 +55,7 @@ public:
     void          SetOriginsVisible(bool visible);
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
+    void          SelectedItem(bool selected, quint32 object, quint32 tool);
     void          SetFactor(qreal factor);
     void          EnableItemMove(bool move);
     void          EnableDetailsMode(bool mode);
@@ -62,6 +63,7 @@ public slots:
 
     void          ToggleLabelSelection(bool enabled);
     void          TogglePointSelection(bool enabled);
+    void          ToggleLineSelection(bool enabled);
     void          ToggleArcSelection(bool enabled);
     void          ToggleSplineSelection(bool enabled);
     void          ToggleSplinePathSelection(bool enabled);
@@ -98,6 +100,7 @@ signals:
      * @param type object scene type.
      */
     void          ChoosedObject(quint32 id, SceneObject type);
+    void          SelectedObject(bool selected, quint32 object, quint32 tool);
     /**
      * @brief NewFactor send new scale factor.
      * @param factor scene scale factor.
@@ -110,6 +113,7 @@ signals:
 
     void          EnableLabelItemSelection(bool enable);
     void          EnablePointItemSelection(bool enable);
+    void          EnableLineItemSelection(bool enable);
     void          EnableArcItemSelection(bool enable);
     void          EnableSplineItemSelection(bool enable);
     void          EnableSplinePathItemSelection(bool enable);

@@ -64,5 +64,7 @@
         <file>cursor/cubic_bezier_cursor@2x.png</file>
         <file>cursor/cubic_bezier_path_cursor.png</file>
         <file>cursor/cubic_bezier_path_cursor@2x.png</file>
+        <file>cursor/group_plus_cursor.png</file>
+        <file>cursor/group_plus_cursor@2x.png</file>
     </qresource>
 </RCC>

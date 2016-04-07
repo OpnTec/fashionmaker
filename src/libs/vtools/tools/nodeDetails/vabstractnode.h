@@ -54,6 +54,8 @@ public:
     ParentType GetParentType() const;
     void       SetParentType(const ParentType &value);
 
+    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
+
 protected:
     ParentType parentType;
 protected:

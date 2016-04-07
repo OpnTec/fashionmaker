@@ -53,12 +53,14 @@ public:
 
     void                    SetEnabled(bool enabled);
 
+    virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     void                    NameChangePosition(const QPointF &pos);
     virtual void            SetFactor(qreal factor) Q_DECL_OVERRIDE;
     virtual void            Disable(bool disable, const QString &namePP) Q_DECL_OVERRIDE;
     virtual void            EnableToolMove(bool move) Q_DECL_OVERRIDE;
     void                    PointChoosed();
+    void                    PointSelected(bool selected);
     virtual void            FullUpdateFromFile() Q_DECL_OVERRIDE;
     virtual void            DoChangePosition(quint32 id, qreal mx, qreal my) Q_DECL_OVERRIDE;
     virtual void            AllowHover(bool enabled) Q_DECL_OVERRIDE;

@@ -55,5 +55,11 @@
         <file>icon/16x16/toolsectioncurve@2x.png</file>
         <file>icon/16x16/toolsectionline@2x.png</file>
         <file>icon/16x16/toolsectionpoint@2x.png</file>
+        <file>icon/16x16/operations.png</file>
+        <file>icon/16x16/operations@2x.png</file>
+        <file>icon/16x16/closed_eye.png</file>
+        <file>icon/16x16/closed_eye@2x.png</file>
+        <file>icon/16x16/open_eye.png</file>
+        <file>icon/16x16/open_eye@2x.png</file>
     </qresource>
 </RCC>

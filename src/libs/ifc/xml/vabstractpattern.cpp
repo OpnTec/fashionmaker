@@ -31,6 +31,8 @@
 #include "exception/vexceptionemptyparameter.h"
 #include "vpatternconverter.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../exception/vexceptionobjecterror.h"
+#include "../vtools/tools/vdatatool.h"
 
 const QString VAbstractPattern::TagPattern      = QStringLiteral("pattern");
 const QString VAbstractPattern::TagCalculation  = QStringLiteral("calculation");
@@ -44,6 +46,9 @@ const QString VAbstractPattern::TagMeasurements = QStringLiteral("measurements")
 const QString VAbstractPattern::TagIncrements   = QStringLiteral("increments");
 const QString VAbstractPattern::TagIncrement    = QStringLiteral("increment");
 const QString VAbstractPattern::TagDraw         = QStringLiteral("draw");
+const QString VAbstractPattern::TagGroups       = QStringLiteral("groups");
+const QString VAbstractPattern::TagGroup        = QStringLiteral("group");
+const QString VAbstractPattern::TagGroupItem    = QStringLiteral("item");
 const QString VAbstractPattern::TagPoint        = QStringLiteral("point");
 const QString VAbstractPattern::TagLine         = QStringLiteral("line");
 const QString VAbstractPattern::TagSpline       = QStringLiteral("spline");
@@ -55,6 +60,9 @@ const QString VAbstractPattern::TagSizes        = QStringLiteral("sizes");
 const QString VAbstractPattern::TagUnit         = QStringLiteral("unit");
 
 const QString VAbstractPattern::AttrName        = QStringLiteral("name");
+const QString VAbstractPattern::AttrVisible     = QStringLiteral("visible");
+const QString VAbstractPattern::AttrObject      = QStringLiteral("object");
+const QString VAbstractPattern::AttrTool        = QStringLiteral("tool");
 const QString VAbstractPattern::AttrType        = QStringLiteral("type");
 
 const QString VAbstractPattern::AttrAll         = QStringLiteral("all");
@@ -287,6 +295,56 @@ bool VAbstractPattern::GetActivNodeElement(const QString &name, QDomElement &ele
         }
     }
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::ParseGroups(const QDomElement &domElement)
+{
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    QMap<quint32, quint32> itemTool;
+    QMap<quint32, bool> itemVisibility;
+
+    QDomNode domNode = domElement.firstChild();
+    while (domNode.isNull() == false)
+    {
+        if (domNode.isElement())
+        {
+            const QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                if (domElement.tagName() == TagGroup)
+                {
+                    const QPair<bool, QMap<quint32, quint32> > groupData = ParseItemElement(domElement);
+                    const QMap<quint32, quint32> group = groupData.second;
+                    auto i = group.constBegin();
+                    while (i != group.constEnd())
+                    {
+                        if (not itemTool.contains(i.key()))
+                        {
+                            itemTool.insert(i.key(), i.value());
+                        }
+
+                        const bool previous = itemVisibility.value(i.key(), false);
+                        itemVisibility.insert(i.key(), previous || groupData.first);
+                        ++i;
+                    }
+                }
+            }
+        }
+        domNode = domNode.nextSibling();
+    }
+
+    auto i = itemTool.constBegin();
+    while (i != itemTool.constEnd())
+    {
+        if (tools.contains(i.value()))
+        {
+            VDataTool* tool = tools.value(i.value());
+            tool->GroupVisibility(i.key(), itemVisibility.value(i.key(), true));
+        }
+        ++i;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -595,7 +653,7 @@ QMap<GHeights, bool> VAbstractPattern::GetGradationHeights() const
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                const QString defValue = QStringLiteral("true");
+                const QString defValue = trueStr;
                 switch (gTags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagHeights
@@ -761,7 +819,7 @@ QMap<GSizes, bool> VAbstractPattern::GetGradationSizes() const
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                const QString defValue = QStringLiteral("true");
+                const QString defValue = trueStr;
                 switch (gTags.indexOf(domElement.tagName()))
                 {
                     case 0: // TagHeights
@@ -1376,6 +1434,44 @@ bool VAbstractPattern::IsFunction(const QString &token) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPair<bool, QMap<quint32, quint32> > VAbstractPattern::ParseItemElement(const QDomElement &domElement)
+{
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        const bool visible = GetParametrBool(domElement, AttrVisible, trueStr);
+
+        QMap<quint32, quint32> items;
+
+        const QDomNodeList nodeList = domElement.childNodes();
+        const qint32 num = nodeList.size();
+        for (qint32 i = 0; i < num; ++i)
+        {
+            const QDomElement element = nodeList.at(i).toElement();
+            if (not element.isNull() && element.tagName() == TagGroupItem)
+            {
+                const quint32 object = GetParametrUInt(element, AttrObject, NULL_ID_STR);
+                const quint32 tool = GetParametrUInt(element, AttrTool, NULL_ID_STR);
+                items.insert(object, tool);
+            }
+        }
+
+        QPair<bool, QMap<quint32, quint32> > group;
+        group.first = visible;
+        group.second = items;
+
+        return group;
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating group"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief IsModified state of the document for cases that do not cover QUndoStack.
  * @return true if the document was modified without using QUndoStack.
@@ -1409,4 +1505,188 @@ QDomElement VAbstractPattern::GetDraw(const QString &name) const
         }
     }
     return QDomElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VAbstractPattern::CreateGroups()
+{
+    QDomElement draw;
+    if (GetActivDrawElement(draw))
+    {
+        QDomElement groups = draw.firstChildElement(TagGroups);
+
+        if (groups.isNull())
+        {
+            groups = createElement(TagGroups);
+            draw.appendChild(groups);
+        }
+
+        return groups;
+    }
+    return QDomElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &groupData)
+{
+    if (id == NULL_ID || groupData.isEmpty())
+    {
+        return QDomElement();
+    }
+
+    QDomElement group = createElement(TagGroup);
+    SetAttribute(group, AttrId, id);
+    SetAttribute(group, AttrName, name);
+    SetAttribute(group, AttrVisible, true);
+
+    auto i = groupData.constBegin();
+    while (i != groupData.constEnd())
+    {
+        QDomElement item = createElement(TagGroupItem);
+        item.setAttribute(AttrObject, i.key());
+        item.setAttribute(AttrTool, i.value());
+        group.appendChild(item);
+        ++i;
+    }
+
+    return group;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetGroupName(quint32 id)
+{
+    QString name = tr("New group");
+    QDomElement groups = CreateGroups();
+    if (not groups.isNull())
+    {
+        QDomElement group = elementById(id);
+        if (group.isElement())
+        {
+            name = GetParametrString(group, AttrName, name);
+            return name;
+        }
+        else
+        {
+            if (groups.childNodes().isEmpty())
+            {
+                QDomNode parent = groups.parentNode();
+                parent.removeChild(groups);
+            }
+
+            qDebug("Can't get group by id = %u.", id);
+            return name;
+        }
+    }
+    else
+    {
+        qDebug("Can't get tag Groups.");
+        return name;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetGroupName(quint32 id, const QString &name)
+{
+    QDomElement groups = CreateGroups();
+    if (not groups.isNull())
+    {
+        QDomElement group = elementById(id);
+        if (group.isElement())
+        {
+            group.setAttribute(AttrName, name);
+            modified = true;
+            emit patternChanged(false);
+        }
+        else
+        {
+            if (groups.childNodes().isEmpty())
+            {
+                QDomNode parent = groups.parentNode();
+                parent.removeChild(groups);
+            }
+
+            qDebug("Can't get group by id = %u.", id);
+            return;
+        }
+    }
+    else
+    {
+        qDebug("Can't get tag Groups.");
+        return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<quint32, QPair<QString, bool> > VAbstractPattern::GetGroups()
+{
+    QMap<quint32, QPair<QString, bool> > data;
+
+    QDomElement groups = CreateGroups();
+    if (not groups.isNull())
+    {
+        QDomNode domNode = groups.firstChild();
+        while (domNode.isNull() == false)
+        {
+            if (domNode.isElement())
+            {
+                const QDomElement group = domNode.toElement();
+                if (group.isNull() == false)
+                {
+                    if (group.tagName() == TagGroup)
+                    {
+                        const quint32 id = GetParametrUInt(group, AttrId, "0");
+                        const bool visible = GetParametrBool(group, AttrVisible, trueStr);
+                        const QString name = GetParametrString(group, AttrName, tr("New group"));
+
+                        data.insert(id, qMakePair(name, visible));
+                    }
+                }
+            }
+            domNode = domNode.nextSibling();
+        }
+    }
+    else
+    {
+        qDebug("Can't get tag Groups.");
+    }
+
+    return data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPattern::GetGroupVisivility(quint32 id)
+{
+    QDomElement group = elementById(id);
+    if (group.isElement())
+    {
+        return GetParametrBool(group, AttrVisible, trueStr);
+    }
+    else
+    {
+        qDebug("Can't get group by id = %u.", id);
+        return true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetGroupVisivility(quint32 id, bool visible)
+{
+    QDomElement group = elementById(id);
+    if (group.isElement())
+    {
+        SetAttribute(group, AttrVisible, visible);
+        modified = true;
+        emit patternChanged(false);
+
+        QDomElement groups = CreateGroups();
+        if (not groups.isNull())
+        {
+            ParseGroups(groups);
+        }
+    }
+    else
+    {
+        qDebug("Can't get group by id = %u.", id);
+        return;
+    }
 }

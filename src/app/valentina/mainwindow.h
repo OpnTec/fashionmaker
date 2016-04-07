@@ -48,6 +48,7 @@ class QLabel;
 class DialogIncrements;
 class DialogTool;
 class DialogHistory;
+class VWidgetGroups;
 
 /**
  * @brief The MainWindow class main windows.
@@ -120,6 +121,7 @@ public slots:
     void               ToolTriangle(bool checked);
     void               ToolPointOfIntersection(bool checked);
     void               ToolUnionDetails(bool checked);
+    void               ToolGroup(bool checked);
     void               ToolCutArc(bool checked);
     void               ToolLineIntersectAxis(bool checked);
     void               ToolCurveIntersectAxis(bool checked);
@@ -134,6 +136,7 @@ public slots:
 
     void               ClosedDialogDetail(int result);
     void               ClosedDialogUnionDetails(int result);
+    void               ClosedDialogGroup(int result);
 
 //tmp
     void               LastUsedTool();
@@ -161,6 +164,7 @@ signals:
 
     void               EnableLabelSelection(bool enable) const;
     void               EnablePointSelection(bool enable) const;
+    void               EnableLineSelection(bool enable) const;
     void               EnableArcSelection(bool enable) const;
     void               EnableSplineSelection(bool enable) const;
     void               EnableSplinePathSelection(bool enable) const;
@@ -200,6 +204,9 @@ private slots:
 
     void ChangedSize(const QString &text);
     void ChangedHeight(const QString & text);
+
+    void DockToolOptionsVisibilityChanged(bool visible);
+    void DockGropsVisibilityChanged(bool visible);
 
 private:
     Q_DISABLE_COPY(MainWindow)
@@ -252,6 +259,9 @@ private:
     /** @brief currentToolBoxIndex save current set of tools. */
     qint32             currentToolBoxIndex;
 
+    bool               isDockToolOptionsVisible;
+    bool               isDockGroupsVisible;
+
     /** @brief drawMode true if we current draw scene. */
     bool               drawMode;
 
@@ -267,6 +277,7 @@ private:
     QPointer<QLabel>   gradationHeightsLabel;
     QPointer<QLabel>   gradationSizesLabel;
     VToolOptionsPropertyBrowser *toolOptions;
+    VWidgetGroups *groupsWidget;
     std::shared_ptr<VLockGuard<char>> lock;
 
     void               SetDefaultHeight();
@@ -324,7 +335,7 @@ private:
     void               UpdateSizesList(const QStringList &list);
 
     void               AddDocks();
-    void               PropertyBrowser();
+    void               InitDocksContain();
     bool               OpenNewValentina(const QString &fileName = QString())const;
     void               FileClosedCorrect();
     QStringList        GetUnlokedRestoreFileList()const;
@@ -360,7 +371,8 @@ private:
     void ToolSelectArc() const;
     void ToolSelectPointArc() const;
     void ToolSelectCurve() const;
-    void ToolSelectAllObjects() const;
+    void ToolSelectAllDrawObjects() const;
+    void ToolSelectGroupObjects() const;
     void ToolSelectDetail() const;
 };
 

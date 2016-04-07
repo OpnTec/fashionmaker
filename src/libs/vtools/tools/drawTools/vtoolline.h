@@ -63,6 +63,7 @@ public:
 
     virtual void     SetTypeLine(const QString &value) Q_DECL_OVERRIDE;
     virtual void     SetLineColor(const QString &value) Q_DECL_OVERRIDE;
+    virtual void     GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     virtual void     FullUpdateFromFile() Q_DECL_OVERRIDE;
     virtual void     ShowTool(quint32 id, bool enable) Q_DECL_OVERRIDE;

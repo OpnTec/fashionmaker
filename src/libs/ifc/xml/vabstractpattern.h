@@ -119,6 +119,15 @@ public:
 
     QDomElement    GetDraw(const QString &name) const;
 
+    void           ParseGroups(const QDomElement &domElement);
+    QDomElement    CreateGroups();
+    QDomElement    CreateGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &groupData);
+    QString        GetGroupName(quint32 id);
+    void           SetGroupName(quint32 id, const QString &name);
+    QMap<quint32, QPair<QString, bool> > GetGroups();
+    bool           GetGroupVisivility(quint32 id);
+    void           SetGroupVisivility(quint32 id, bool visible);
+
     static const QString TagPattern;
     static const QString TagCalculation;
     static const QString TagModeling;
@@ -131,6 +140,9 @@ public:
     static const QString TagIncrements;
     static const QString TagIncrement;
     static const QString TagDraw;
+    static const QString TagGroups;
+    static const QString TagGroup;
+    static const QString TagGroupItem;
     static const QString TagPoint;
     static const QString TagLine;
     static const QString TagSpline;
@@ -142,6 +154,9 @@ public:
     static const QString TagUnit;
 
     static const QString AttrName;
+    static const QString AttrVisible;
+    static const QString AttrObject;
+    static const QString AttrTool;
     static const QString AttrType;
 
     static const QString AttrAll;
@@ -281,6 +296,8 @@ private:
     bool IsVariable(const QString& token) const;
     bool IsPostfixOperator(const QString& token) const;
     bool IsFunction(const QString& token) const;
+
+    QPair<bool, QMap<quint32, quint32> > ParseItemElement(const QDomElement &domElement);
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -18,7 +18,9 @@ HEADERS += \
     $$PWD/vundocommand.h \
     $$PWD/renamepp.h \
     $$PWD/movelabel.h \
-    $$PWD/movedoublelabel.h
+    $$PWD/movedoublelabel.h \
+    $$PWD/addgroup.h \
+    $$PWD/delgroup.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -37,4 +39,6 @@ SOURCES += \
     $$PWD/vundocommand.cpp \
     $$PWD/renamepp.cpp \
     $$PWD/movelabel.cpp \
-    $$PWD/movedoublelabel.cpp
+    $$PWD/movedoublelabel.cpp \
+    $$PWD/addgroup.cpp \
+    $$PWD/delgroup.cpp

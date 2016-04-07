@@ -63,6 +63,7 @@ signals:
     void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
     void         DeleteTool();
     void         PointChoosed();
+    void         PointSelected(bool selected);
 protected:
     QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event ) Q_DECL_OVERRIDE;

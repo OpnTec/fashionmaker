@@ -62,5 +62,7 @@
         <file>toolicon/32x32/cubic_bezier@2x.png</file>
         <file>toolicon/32x32/cubic_bezier_path.png</file>
         <file>toolicon/32x32/cubic_bezier_path@2x.png</file>
+        <file>toolicon/32x32/group_plus.png</file>
+        <file>toolicon/32x32/group_plus@2x.png</file>
     </qresource>
 </RCC>
