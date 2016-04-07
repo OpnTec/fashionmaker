@@ -1006,7 +1006,8 @@ void MainWindow::ToolGroup(bool checked)
     ToolSelectGroupObjects();
     currentScene->clearSelection();
     SetToolButton<DialogGroup>(checked, Tool::Group, ":/cursor/group_plus_cursor.png",
-                               tr("Select objects, <b>Enter</b> - finish creation"), &MainWindow::ClosedDialogGroup);
+                               tr("Select one or more objects, <b>Enter</b> - finish creation"),
+                               &MainWindow::ClosedDialogGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
