@@ -627,10 +627,8 @@ QImage DialogPatternProperties::GetImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::InitImage()
 {
-    ui->imageLabel->setPixmap(QPixmap::fromImage(GetImage()));
     ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->imageLabel->setScaledContents(true);
-
     connect(ui->changeImageButton, &QPushButton::clicked, this, &DialogPatternProperties::ChangeImage);
     connect(ui->imageLabel, &QWidget::customContextMenuRequested, this, &DialogPatternProperties::ShowContextMenu);
 
@@ -638,10 +636,23 @@ void DialogPatternProperties::InitImage()
     changeImageAction = new QAction(tr("Change image"), this);
     saveImageAction   = new QAction(tr("Save image to file"), this);
     showImageAction   = new QAction(tr("Show image"), this);
+
     connect(deleteAction, &QAction::triggered, this, &DialogPatternProperties::DeleteImage);
     connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::ChangeImage);
     connect(saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
     connect(showImageAction, &QAction::triggered, this, &DialogPatternProperties::ShowImage);
+
+    const QImage image = GetImage();
+    if (not image.isNull())
+    {
+        ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+    }
+    else
+    {
+        deleteAction->setEnabled(false);
+        saveImageAction->setEnabled(false);
+        showImageAction->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -679,6 +690,9 @@ void DialogPatternProperties::ChangeImage()
             // save our image to file.val
             doc->SetImage(iconBase64, extension);
         }
+        deleteAction->setEnabled(true);
+        saveImageAction->setEnabled(true);
+        showImageAction->setEnabled(true);
     }
 }
 
@@ -687,6 +701,9 @@ void DialogPatternProperties::DeleteImage()
 {
     doc->DeleteImage();
     ui->imageLabel->setText(tr("Change image"));
+    deleteAction->setEnabled(false);
+    saveImageAction->setEnabled(false);
+    showImageAction->setEnabled(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
