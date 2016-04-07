@@ -44,7 +44,11 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc), pattern(pattern), heightsChecked(MAX_HEIGHTS),
     sizesChecked(MAX_SIZES),  heights (QMap<GHeights, bool>()), sizes(QMap<GSizes, bool>()),
     data(QMap<QCheckBox *, int>()), descriptionChanged(false), gradationChanged(false), defaultChanged(false),
-    securityChanged(false), isInitialized(false)
+    securityChanged(false), isInitialized(false),
+    deleteAction(nullptr),
+    changeImageAction(nullptr),
+    saveImageAction(nullptr),
+    showImageAction(nullptr)
 {
     ui->setupUi(this);
 
