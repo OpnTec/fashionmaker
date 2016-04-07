@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   delgroup.h
+ **  @file   vwidgetgroups.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   6 4, 2016
  **
@@ -26,24 +26,37 @@
  **
  *************************************************************************/
 
-#ifndef DELGROUP_H
-#define DELGROUP_H
+#ifndef VWIDGETGROUPS_H
+#define VWIDGETGROUPS_H
 
-#include "vundocommand.h"
+#include <QWidget>
+#include "../ifc/xml/vabstractpattern.h"
 
-class DelGroup : public VUndoCommand
+namespace Ui
+{
+    class VWidgetGroups;
+}
+
+class VWidgetGroups : public QWidget
 {
     Q_OBJECT
+
 public:
-    DelGroup(VAbstractPattern *doc, quint32 id, QUndoCommand *parent = nullptr);
-    virtual ~DelGroup();
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
-signals:
+    explicit VWidgetGroups(VAbstractPattern *doc, QWidget *parent = nullptr);
+    virtual ~VWidgetGroups();
+
+public slots:
     void UpdateGroups();
+
+private slots:
+    void GroupVisibilityChanged(int row, int column);
+    void CtxMenu(const QPoint &pos);
 private:
-    Q_DISABLE_COPY(DelGroup)
-    const QString nameActivDraw;
+    Q_DISABLE_COPY(VWidgetGroups)
+    Ui::VWidgetGroups *ui;
+    VAbstractPattern *doc;
+
+    void FillTable(const QMap<quint32, QPair<QString, bool> > &groups);
 };
 
-#endif // DELGROUP_H
+#endif // VWIDGETGROUPS_H

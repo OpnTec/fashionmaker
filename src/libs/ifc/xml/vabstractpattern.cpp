@@ -323,8 +323,9 @@ void VAbstractPattern::ParseGroups(const QDomElement &domElement)
                             itemTool.insert(i.key(), i.value());
                         }
 
-                        const bool previous = itemVisibility.value(i.key(), true);
+                        const bool previous = itemVisibility.value(i.key(), false);
                         itemVisibility.insert(i.key(), previous || groupData.first);
+                        ++i;
                     }
                 }
             }
@@ -340,6 +341,7 @@ void VAbstractPattern::ParseGroups(const QDomElement &domElement)
             VDataTool* tool = tools.value(i.value());
             tool->GroupVisibility(i.key(), itemVisibility.value(i.key(), true));
         }
+        ++i;
     }
 }
 
@@ -1478,9 +1480,9 @@ QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const
     }
 
     QDomElement group = createElement(TagGroup);
-    group.setAttribute(AttrId, id);
-    group.setAttribute(AttrName, name);
-    group.setAttribute(AttrVisible, trueStr);
+    SetAttribute(group, AttrId, id);
+    SetAttribute(group, AttrName, name);
+    SetAttribute(group, AttrVisible, true);
 
     auto i = groupData.constBegin();
     while (i != groupData.constEnd())
@@ -1493,6 +1495,38 @@ QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const
     }
 
     return group;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetGroupName(quint32 id)
+{
+    QString name = tr("New group");
+    QDomElement groups = CreateGroups();
+    if (not groups.isNull())
+    {
+        QDomElement group = elementById(id);
+        if (group.isElement())
+        {
+            name = GetParametrString(group, AttrName, name);
+            return name;
+        }
+        else
+        {
+            if (groups.childNodes().isEmpty())
+            {
+                QDomNode parent = groups.parentNode();
+                parent.removeChild(groups);
+            }
+
+            qDebug("Can't get group by id = %u.", id);
+            return name;
+        }
+    }
+    else
+    {
+        qDebug("Can't get tag Groups.");
+        return name;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1523,6 +1557,81 @@ void VAbstractPattern::SetGroupName(quint32 id, const QString &name)
     else
     {
         qDebug("Can't get tag Groups.");
+        return;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<quint32, QPair<QString, bool> > VAbstractPattern::GetGroups()
+{
+    QMap<quint32, QPair<QString, bool> > data;
+
+    QDomElement groups = CreateGroups();
+    if (not groups.isNull())
+    {
+        QDomNode domNode = groups.firstChild();
+        while (domNode.isNull() == false)
+        {
+            if (domNode.isElement())
+            {
+                const QDomElement group = domNode.toElement();
+                if (group.isNull() == false)
+                {
+                    if (group.tagName() == TagGroup)
+                    {
+                        const quint32 id = GetParametrUInt(group, AttrId, "0");
+                        const bool visible = GetParametrBool(group, AttrVisible, trueStr);
+                        const QString name = GetParametrString(group, AttrName, tr("New group"));
+
+                        data.insert(id, qMakePair(name, visible));
+                    }
+                }
+            }
+            domNode = domNode.nextSibling();
+        }
+    }
+    else
+    {
+        qDebug("Can't get tag Groups.");
+    }
+
+    return data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPattern::GetGroupVisivility(quint32 id)
+{
+    QDomElement group = elementById(id);
+    if (group.isElement())
+    {
+        return GetParametrBool(group, AttrVisible, trueStr);
+    }
+    else
+    {
+        qDebug("Can't get group by id = %u.", id);
+        return true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetGroupVisivility(quint32 id, bool visible)
+{
+    QDomElement group = elementById(id);
+    if (group.isElement())
+    {
+        SetAttribute(group, AttrVisible, visible);
+        modified = true;
+        emit patternChanged(false);
+
+        QDomElement groups = CreateGroups();
+        if (not groups.isNull())
+        {
+            ParseGroups(groups);
+        }
+    }
+    else
+    {
+        qDebug("Can't get group by id = %u.", id);
         return;
     }
 }

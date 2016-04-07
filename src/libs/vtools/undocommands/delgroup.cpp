@@ -57,6 +57,7 @@ void DelGroup::undo()
     {
         groups.appendChild(xml);
         doc->ParseGroups(groups);
+        emit UpdateGroups();
     }
     else
     {
@@ -87,6 +88,7 @@ void DelGroup::redo()
                 qCDebug(vUndo, "Can't delete group.");
                 return;
             }
+            emit UpdateGroups();
 
             if (groups.childNodes().isEmpty())
             {

@@ -66,6 +66,7 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VToolSinglePoint::contextMenuEvent);
     connect(namePoint, &VGraphicsSimpleTextItem::DeleteTool, this, &VToolSinglePoint::DeleteFromLabel);
     connect(namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VToolSinglePoint::PointChoosed);
+    connect(namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VToolSinglePoint::PointSelected);
     connect(namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolSinglePoint::NameChangePosition);
     lineName = new QGraphicsLineItem(this);
     this->setBrush(QBrush(Qt::NoBrush));
@@ -172,6 +173,12 @@ void VToolSinglePoint::EnableToolMove(bool move)
 void VToolSinglePoint::PointChoosed()
 {
     emit ChoosedTool(id, SceneObject::Point);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSinglePoint::PointSelected(bool selected)
+{
+    setSelected(selected);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

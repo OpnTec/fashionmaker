@@ -48,6 +48,7 @@ class QLabel;
 class DialogIncrements;
 class DialogTool;
 class DialogHistory;
+class VWidgetGroups;
 
 /**
  * @brief The MainWindow class main windows.
@@ -276,6 +277,7 @@ private:
     QPointer<QLabel>   gradationHeightsLabel;
     QPointer<QLabel>   gradationSizesLabel;
     VToolOptionsPropertyBrowser *toolOptions;
+    VWidgetGroups *groupsWidget;
     std::shared_ptr<VLockGuard<char>> lock;
 
     void               SetDefaultHeight();
@@ -333,7 +335,7 @@ private:
     void               UpdateSizesList(const QStringList &list);
 
     void               AddDocks();
-    void               PropertyBrowser();
+    void               InitDocksContain();
     bool               OpenNewValentina(const QString &fileName = QString())const;
     void               FileClosedCorrect();
     QStringList        GetUnlokedRestoreFileList()const;

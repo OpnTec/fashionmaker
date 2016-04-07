@@ -17,7 +17,8 @@ HEADERS += \
     $$PWD/configpages/pathpage.h \
     $$PWD/dialoglayoutsettings.h \
     $$PWD/dialoglayoutprogress.h \
-    $$PWD/dialogsavelayout.h
+    $$PWD/dialogsavelayout.h \
+    $$PWD/vwidgetgroups.h
 
 SOURCES += \
     $$PWD/dialogincrements.cpp \
@@ -33,7 +34,8 @@ SOURCES += \
     $$PWD/configpages/pathpage.cpp \
     $$PWD/dialoglayoutsettings.cpp \
     $$PWD/dialoglayoutprogress.cpp \
-    $$PWD/dialogsavelayout.cpp
+    $$PWD/dialogsavelayout.cpp \
+    $$PWD/vwidgetgroups.cpp
 
 FORMS += \
     $$PWD/dialogincrements.ui \
@@ -44,4 +46,5 @@ FORMS += \
     $$PWD/dialogpatternxmledit.ui \
     $$PWD/dialoglayoutsettings.ui \
     $$PWD/dialoglayoutprogress.ui \
-    $$PWD/dialogsavelayout.ui
+    $$PWD/dialogsavelayout.ui \
+    $$PWD/vwidgetgroups.ui

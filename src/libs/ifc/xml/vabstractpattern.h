@@ -67,8 +67,6 @@ public:
     bool           GetActivDrawElement(QDomElement &element) const;
     bool           GetActivNodeElement(const QString& name, QDomElement& element) const;
 
-    void           ParseGroups(const QDomElement &domElement);
-
     quint32        getCursor() const;
     void           setCursor(const quint32 &value);
 
@@ -116,9 +114,14 @@ public:
 
     QDomElement    GetDraw(const QString &name) const;
 
+    void           ParseGroups(const QDomElement &domElement);
     QDomElement    CreateGroups();
     QDomElement    CreateGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &groupData);
+    QString        GetGroupName(quint32 id);
     void           SetGroupName(quint32 id, const QString &name);
+    QMap<quint32, QPair<QString, bool> > GetGroups();
+    bool           GetGroupVisivility(quint32 id);
+    void           SetGroupVisivility(quint32 id, bool visible);
 
     static const QString TagPattern;
     static const QString TagCalculation;

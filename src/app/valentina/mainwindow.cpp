@@ -54,6 +54,7 @@
 #include "tools/vtooldetail.h"
 #include "tools/vtooluniondetails.h"
 #include "dialogs/dialogs.h"
+#include "dialogs/vwidgetgroups.h"
 #include "../vtools/undocommands/addgroup.h"
 
 #include <QInputDialog>
@@ -119,7 +120,9 @@ MainWindow::MainWindow(QWidget *parent)
       separatorAct(nullptr),
       leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true),
       gradationHeights(nullptr), gradationSizes(nullptr), gradationHeightsLabel(nullptr), gradationSizesLabel(nullptr),
-      toolOptions(nullptr), lock(nullptr)
+      toolOptions(nullptr),
+      groupsWidget(nullptr),
+      lock(nullptr)
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -154,7 +157,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->toolBox->setCurrentIndex(0);
 
     ReadSettings();
-    PropertyBrowser();
+    InitDocksContain();
 
     setCurrentFile("");
     WindowsLocale();
@@ -1001,6 +1004,7 @@ void MainWindow::ClosedDialogUnionDetails(int result)
 void MainWindow::ToolGroup(bool checked)
 {
     ToolSelectGroupObjects();
+    currentScene->clearSelection();
     SetToolButton<DialogGroup>(checked, Tool::Group, ":/cursor/group_plus_cursor.png",
                                tr("Select objects, <b>Enter</b> - finish creation"), &MainWindow::ClosedDialogGroup);
 }
@@ -1020,6 +1024,7 @@ void MainWindow::ClosedDialogGroup(int result)
         if (not group.isNull())
         {
             AddGroup *addGroup = new AddGroup(group, doc);
+            connect(addGroup, &AddGroup::UpdateGroups, groupsWidget, &VWidgetGroups::UpdateGroups);
             qApp->getUndoStack()->push(addGroup);
         }
     }
@@ -1733,7 +1738,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonPointFromArcAndTangent, &QToolButton::clicked, this, &MainWindow::ToolPointFromArcAndTangent);
     connect(ui->toolButtonArcWithLength, &QToolButton::clicked, this, &MainWindow::ToolArcWithLength);
     connect(ui->toolButtonTrueDarts, &QToolButton::clicked, this, &MainWindow::ToolTrueDarts);
-
+    connect(ui->toolButtonGroup, &QToolButton::clicked, this, &MainWindow::ToolGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3551,13 +3556,17 @@ void MainWindow::AddDocks()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::PropertyBrowser()
+void MainWindow::InitDocksContain()
 {
     qCDebug(vMainWindow, "Initialization property browser.");
     toolOptions = new VToolOptionsPropertyBrowser(ui->dockWidgetToolOptions);
 
     connect(ui->view, &VMainGraphicsView::itemClicked, toolOptions, &VToolOptionsPropertyBrowser::itemClicked);
     connect(doc, &VPattern::FullUpdateFromFile, toolOptions, &VToolOptionsPropertyBrowser::UpdateOptions);
+
+    qCDebug(vMainWindow, "Initialization groups dock.");
+    groupsWidget = new VWidgetGroups(doc, this);
+    ui->dockWidgetGroups->setWidget(groupsWidget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4140,6 +4149,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
             }
         }
         toolOptions->itemClicked(nullptr);//hide options for tool in previous pattern piece
+        groupsWidget->UpdateGroups();
     }
 }
 
@@ -4724,7 +4734,7 @@ void MainWindow::ToolSelectGroupObjects() const
 
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
-    ui->view->AllowRubberBand(false);
+    ui->view->AllowRubberBand(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

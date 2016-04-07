@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 32 32"
+   version="1.1"
+   x="0px"
+   y="0px"
+   id="svg2"
+   inkscape:version="0.91 r"
+   sodipodi:docname="closed_eye.svg"
+   width="32"
+   height="32"
+   inkscape:export-filename="/home/dismine/CAD/Valentina_groups/Valentina/src/libs/vmisc/share/resources/icon/svg/closed_eye.png"
+   inkscape:export-xdpi="45"
+   inkscape:export-ydpi="45">
+  <metadata
+     id="metadata32">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Closed Eye</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs30" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1436"
+     inkscape:window-height="885"
+     id="namedview28"
+     showgrid="false"
+     inkscape:zoom="15.733333"
+     inkscape:cx="23.672261"
+     inkscape:cy="17.880242"
+     inkscape:window-x="75"
+     inkscape:window-y="34"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <title
+     id="title4">Closed Eye</title>
+  <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+  <g
+     id="g6"
+     style="fill:#000000;fill-rule:evenodd"
+     transform="matrix(1.9803301,0,0,2.3359228,0,3.0481403)">
+    <g
+       id="g8">
+      <g
+         id="g10"
+         style="fill:#000000">
+        <path
+           d="m 8.0719097,8.5 c 4.4579933,0 8.0719093,-4 8.0719093,-4 0,0 -3.613916,-4 -8.0719093,-4 C 3.6139169,0.5 0,4.5 0,4.5 c 0,0 3.6139169,4 8.0719097,4 z m 0,0"
+           id="path12"
+           inkscape:connector-curvature="0" />
+        <path
+           d="m 0.9330127,7.2059403 0,2 1,0 0,-2 -1,0 z m 0,0"
+           transform="matrix(0.81915204,0.57357644,-0.57357644,0.81915204,4.9658913,0.66208498)"
+           id="path14"
+           inkscape:connector-curvature="0" />
+        <path
+           d="m 13.933013,7.2059403 0,2 1,0 0,-2 -1,0 z m 0,0"
+           transform="matrix(0.81915204,-0.57357644,0.57357644,0.81915204,-2.0965529,9.7624636)"
+           id="path16"
+           inkscape:connector-curvature="0" />
+        <path
+           d="m 7.5,9.3 0,2 1,0 0,-2 -1,0 z m 0,0"
+           id="path18"
+           inkscape:connector-curvature="0" />
+        <path
+           d="m 10.998327,8.7083027 0,2.0000003 1,0 0,-2.0000003 -1,0 z m 0,0"
+           transform="matrix(0.94551858,-0.32556815,0.32556815,0.94551858,-2.5342691,4.2724113)"
+           id="path20"
+           inkscape:connector-curvature="0" />
+        <path
+           d="m 4.1436217,8.7146863 0,1.9999997 1,0 0,-1.9999997 -1,0 z m 0,0"
+           transform="matrix(0.94551858,0.32556815,-0.32556815,0.94551858,3.4157835,-0.98254551)"
+           id="path22"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+  </g>
+</svg>

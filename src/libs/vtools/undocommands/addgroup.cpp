@@ -64,6 +64,7 @@ void AddGroup::undo()
                 qCDebug(vUndo, "Can't delete group.");
                 return;
             }
+            emit UpdateGroups();
         }
         else
         {
@@ -99,6 +100,7 @@ void AddGroup::redo()
     {
         groups.appendChild(xml);
         doc->ParseGroups(groups);
+        emit UpdateGroups();
     }
     else
     {
