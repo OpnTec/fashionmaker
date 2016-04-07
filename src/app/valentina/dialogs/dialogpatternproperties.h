@@ -57,12 +57,17 @@ public slots:
     void         CheckStateHeight(int state);
     void         CheckStateSize(int state);
     void         DescEdited();
+    void         ChangeImage();
+    void         ShowContextMenu();
 protected:
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 private slots:
     void ToggleComboBox();
     void DefValueChanged();
     void SecurityValueChanged();
+    void DeleteImage();
+    void SaveImage();
+    void ShowImage();
 private:
     Q_DISABLE_COPY(DialogPatternProperties)
     Ui::DialogPatternProperties *ui;
@@ -78,6 +83,10 @@ private:
     bool                   defaultChanged;
     bool                   securityChanged;
     bool                   isInitialized;
+    QAction                *deleteAction;
+    QAction                *changeImageAction;
+    QAction                *saveImageAction;
+    QAction                *showImageAction;
 
     void         SetHeightsChecked(bool enabled);
     void         SetSizesChecked(bool enabled);
@@ -99,6 +108,8 @@ private:
 
     void         UpdateDefHeight();
     void         UpdateDefSize();
+    void         InitImage();
+    QImage       GetImage();
 };
 
 #endif // DIALOGPATTERNPROPERTIES_H

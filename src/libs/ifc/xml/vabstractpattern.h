@@ -106,6 +106,11 @@ public:
     QString        GetNotes() const;
     void           SetNotes(const QString &text);
 
+    QString        GetImage() const;
+    QString        GetImageExtension() const;
+    void           SetImage(const QString &text, const QString &extension);
+    void           DeleteImage();
+
     QString        GetVersion() const;
     void           SetVersion();
 
@@ -120,6 +125,7 @@ public:
     static const QString TagDetails;
     static const QString TagAuthor;
     static const QString TagDescription;
+    static const QString TagImage;
     static const QString TagNotes;
     static const QString TagMeasurements;
     static const QString TagIncrements;
@@ -181,6 +187,7 @@ public:
     static const QString AttrCustom;
     static const QString AttrDefHeight;
     static const QString AttrDefSize;
+    static const QString AttrExtension;
 
     static const QString IncrementName;
     static const QString IncrementFormula;
@@ -257,7 +264,8 @@ protected:
 
     void           SetActivPP(const QString& name);
 
-    void           CheckTagExists(const QString &tag);
+    QDomElement    CheckTagExists(const QString &tag);
+    void           InsertTag(const QStringList &tags, const QDomElement &element);
 
 private:
     Q_DISABLE_COPY(VAbstractPattern)

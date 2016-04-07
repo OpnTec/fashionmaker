@@ -129,7 +129,7 @@ void VPattern::Parse(const Document &parse)
     SCASSERT(sceneDraw != nullptr);
     SCASSERT(sceneDetail != nullptr);
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
-                                        << TagMeasurements << TagVersion << TagGradation << TagUnit;
+                                     << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -183,7 +183,10 @@ void VPattern::Parse(const Document &parse)
                     case 7: // TagGradation
                         qCDebug(vXML, "Tag gradation.");
                         break;
-                    case 8: // TagUnit
+                    case 8: // TagImage
+                        qCDebug(vXML, "Tag image.");
+                        break;
+                    case 9: // TagUnit
                         qCDebug(vXML, "Tag unit.");
                         break;
                     default:
@@ -2895,7 +2898,7 @@ void VPattern::SetDefCustom(bool value)
 {
     CheckTagExists(TagGradation);
     QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (tags.isEmpty())
     {
         qDebug()<<"Can't save attribute "<<AttrCustom<<Q_FUNC_INFO;
         return;
@@ -2956,7 +2959,7 @@ void VPattern::SetDefCustomHeight(int value)
 {
     CheckTagExists(TagGradation);
     QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (tags.isEmpty())
     {
         qDebug()<<"Can't save attribute "<<AttrDefHeight<<Q_FUNC_INFO;
         return;
@@ -3015,7 +3018,7 @@ void VPattern::SetDefCustomSize(int value)
 {
     CheckTagExists(TagGradation);
     QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (tags.isEmpty())
     {
         qDebug()<<"Can't save attribute "<<AttrDefSize<<Q_FUNC_INFO;
         return;

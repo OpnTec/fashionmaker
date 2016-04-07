@@ -39,6 +39,7 @@ const QString VAbstractPattern::TagDetails      = QStringLiteral("details");
 const QString VAbstractPattern::TagAuthor       = QStringLiteral("author");
 const QString VAbstractPattern::TagDescription  = QStringLiteral("description");
 const QString VAbstractPattern::TagNotes        = QStringLiteral("notes");
+const QString VAbstractPattern::TagImage        = QStringLiteral("image");
 const QString VAbstractPattern::TagMeasurements = QStringLiteral("measurements");
 const QString VAbstractPattern::TagIncrements   = QStringLiteral("increments");
 const QString VAbstractPattern::TagIncrement    = QStringLiteral("increment");
@@ -99,6 +100,7 @@ const QString VAbstractPattern::AttrS56         = QStringLiteral("s56");
 const QString VAbstractPattern::AttrCustom      = QStringLiteral("custom");
 const QString VAbstractPattern::AttrDefHeight   = QStringLiteral("defHeight");
 const QString VAbstractPattern::AttrDefSize     = QStringLiteral("defSize");
+const QString VAbstractPattern::AttrExtension   = QStringLiteral("extension");
 
 const QString VAbstractPattern::IncrementName        = QStringLiteral("name");
 const QString VAbstractPattern::IncrementFormula     = QStringLiteral("formula");
@@ -643,7 +645,7 @@ void VAbstractPattern::SetGradationHeights(const QMap<GHeights, bool> &options)
 {
     CheckTagExists(TagGradation);
     QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (tags.isEmpty())
     {
         qDebug()<<"Can't save tag "<<TagGradation<<Q_FUNC_INFO;
         return;
@@ -809,7 +811,7 @@ void VAbstractPattern::SetGradationSizes(const QMap<GSizes, bool> &options)
 {
     CheckTagExists(TagGradation);
     QDomNodeList tags = elementsByTagName(TagGradation);
-    if (tags.size() == 0)
+    if (tags.isEmpty())
     {
         qDebug()<<"Can't save tag "<<TagGradation<<Q_FUNC_INFO;
         return;
@@ -917,6 +919,56 @@ void VAbstractPattern::SetNotes(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetImage() const
+{
+    return UniqueTagText(TagImage);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetImageExtension() const
+{
+    const QString defExt =  QStringLiteral("PNG");
+    const QDomNodeList nodeList = this->elementsByTagName(TagImage);
+    if (nodeList.isEmpty())
+    {
+        return defExt;
+    }
+    else
+    {
+        const QDomNode domNode = nodeList.at(0);
+        if (domNode.isNull() == false && domNode.isElement())
+        {
+            const QDomElement domElement = domNode.toElement();
+            if (domElement.isNull() == false)
+            {
+                const QString ext = domElement.attribute(AttrExtension, defExt);
+                return ext;
+            }
+        }
+    }
+    return defExt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetImage(const QString &text, const QString &extension)
+{
+    QDomElement imageElement = CheckTagExists(TagImage);
+    setTagText(imageElement, text);
+    CheckTagExists(TagImage).setAttribute(AttrExtension, extension);
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::DeleteImage()
+{
+    QDomElement pattern = documentElement();
+    pattern.removeChild(CheckTagExists(TagImage));
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetVersion() const
 {
     return UniqueTagText(TagVersion, VPatternConverter::PatternMaxVerStr);
@@ -983,78 +1035,81 @@ void VAbstractPattern::SetActivPP(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::CheckTagExists(const QString &tag)
+QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
 {
-    QDomNodeList list = elementsByTagName(tag);
-    if (list.size() == 0)
+    const QDomNodeList list = elementsByTagName(tag);
+    QDomElement element;
+    if (list.isEmpty())
     {
-        QStringList tags = QStringList() << TagVersion << TagAuthor << TagDescription << TagNotes << TagGradation;
-        QDomElement pattern = documentElement();
+        const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
+                                         << TagGradation;
         switch (tags.indexOf(tag))
         {
-            case 0: //TagVersion
+            case 0: //TagUnit
+            {
+                return QDomElement();
                 break;// Mandatory tag
-            case 1: //TagAuthor
-                pattern.insertAfter(createElement(TagAuthor), elementsByTagName(TagVersion).at(0));
-                SetVersion();
-                break;
-            case 2: //TagDescription
+            }
+            case 1: //TagImage
             {
-                for (int i = tags.indexOf(tag)-1; i >= 0; --i)
-                {
-                    QDomNodeList list = elementsByTagName(tags.at(i));
-                    if (list.isEmpty())
-                    {
-                        continue;
-                    }
-                    pattern.insertAfter(createElement(TagDescription), list.at(0));
-                }
-                SetVersion();
+                element = createElement(TagImage);
                 break;
             }
-            case 3: //TagNotes
+            case 2: //TagAuthor
             {
-                for (int i = tags.indexOf(tag)-1; i >= 0; --i)
-                {
-                    QDomNodeList list = elementsByTagName(tags.at(i));
-                    if (list.isEmpty())
-                    {
-                        continue;
-                    }
-                    pattern.insertAfter(createElement(TagNotes), list.at(0));
-                }
-                SetVersion();
+                element = createElement(TagAuthor);
                 break;
             }
-            case 4: //TagGradation
+            case 3: //TagDescription
             {
-                QDomElement gradation = createElement(TagGradation);
+                element = createElement(TagDescription);
+                break;
+            }
+            case 4: //TagNotes
+            {
+                element = createElement(TagNotes);
+                break;
+            }
+            case 5: //TagGradation
+            {
+                element = createElement(TagGradation);
 
                 QDomElement heights = createElement(TagHeights);
                 heights.setAttribute(AttrAll, QLatin1Literal("true"));
-                gradation.appendChild(heights);
+                element.appendChild(heights);
 
                 QDomElement sizes = createElement(TagSizes);
                 sizes.setAttribute(AttrAll, QLatin1Literal("true"));
-                gradation.appendChild(sizes);
-
-                for (int i = tags.indexOf(tag)-1; i >= 0; --i)
-                {
-                    QDomNodeList list = elementsByTagName(tags.at(i));
-                    if (list.isEmpty())
-                    {
-                        continue;
-                    }
-                    pattern.insertAfter(gradation, list.at(0));
-                    break;
-                }
-                SetVersion();
+                element.appendChild(sizes);
                 break;
             }
             default:
+            {
+                return QDomElement();
                 break;
+            }
         }
+        InsertTag(tags, element);
+        return element;
     }
+    return list.at(0).toElement();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::InsertTag(const QStringList &tags, const QDomElement &element)
+{
+    QDomElement pattern = documentElement();
+    for (int i = tags.indexOf(element.tagName())-1; i >= 0; --i)
+    {
+        const QDomNodeList list = elementsByTagName(tags.at(i));
+        if (list.isEmpty())
+        {
+            continue;
+        }
+        pattern.insertAfter(element, list.at(0));
+        break;
+    }
+    SetVersion();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
