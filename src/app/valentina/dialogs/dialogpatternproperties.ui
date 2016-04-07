@@ -86,13 +86,6 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QPushButton" name="changeImageButton">
-             <property name="text">
-              <string>change image</string>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QLabel" name="imageLabel">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -112,6 +105,9 @@
                <height>200</height>
               </size>
              </property>
+             <property name="toolTip">
+              <string>Call context menu for edit</string>
+             </property>
              <property name="text">
               <string>No image</string>
              </property>
@@ -120,6 +116,9 @@
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
+             </property>
+             <property name="margin">
+              <number>1</number>
              </property>
             </widget>
            </item>
