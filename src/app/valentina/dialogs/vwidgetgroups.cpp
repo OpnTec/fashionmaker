@@ -150,7 +150,7 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
         ui->tableWidget->setItem(currentRow, 0, item);
 
         item = new QTableWidgetItem(data.first);
-        item->setTextAlignment(Qt::AlignLeft);
+        item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         ui->tableWidget->setItem(currentRow, 1, item);
         ++i;
     }
