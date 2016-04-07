@@ -28,7 +28,10 @@
 
 #include "dialogpatternproperties.h"
 #include "ui_dialogpatternproperties.h"
+#include <QBuffer>
 #include <QPushButton>
+#include <QFileDialog>
+#include <QMenu>
 #include "../xml/vpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../core/vapplication.h"
@@ -41,7 +44,11 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc), pattern(pattern), heightsChecked(MAX_HEIGHTS),
     sizesChecked(MAX_SIZES),  heights (QMap<GHeights, bool>()), sizes(QMap<GSizes, bool>()),
     data(QMap<QCheckBox *, int>()), descriptionChanged(false), gradationChanged(false), defaultChanged(false),
-    securityChanged(false), isInitialized(false)
+    securityChanged(false), isInitialized(false),
+    deleteAction(nullptr),
+    changeImageAction(nullptr),
+    saveImageAction(nullptr),
+    showImageAction(nullptr)
 {
     ui->setupUi(this);
 
@@ -61,6 +68,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
 
     ui->plainTextEditTechNotes->setPlainText(doc->GetNotes());
     connect(ui->plainTextEditTechNotes, &QPlainTextEdit::textChanged, this, &DialogPatternProperties::DescEdited);
+
+    InitImage();
 
     connect(ui->buttonBox->button(QDialogButtonBox::Ok), &QPushButton::clicked, this, &DialogPatternProperties::Ok);
     connect(ui->buttonBox->button(QDialogButtonBox::Apply), &QPushButton::clicked, this,
@@ -602,4 +611,146 @@ void DialogPatternProperties::InitComboBox(QComboBox *box, const QMap<GVal, bool
                                                                          *pattern->GetPatternUnit()))));
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QImage DialogPatternProperties::GetImage()
+{
+// we set an image from file.val
+    QImage image;
+    QByteArray byteArray;
+    byteArray.append(doc->GetImage().toUtf8());
+    QByteArray ba = QByteArray::fromBase64(byteArray);
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::ReadOnly);
+    QString extension = doc->GetImageExtension();
+    image.load(&buffer, extension.toLatin1().data()); // writes image into ba in 'extension' format
+    return image;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::InitImage()
+{
+    ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->imageLabel->setScaledContents(true);
+    connect(ui->imageLabel, &QWidget::customContextMenuRequested, this, &DialogPatternProperties::ShowContextMenu);
+
+    deleteAction      = new QAction(tr("Delete image"), this);
+    changeImageAction = new QAction(tr("Change image"), this);
+    saveImageAction   = new QAction(tr("Save image to file"), this);
+    showImageAction   = new QAction(tr("Show image"), this);
+
+    connect(deleteAction, &QAction::triggered, this, &DialogPatternProperties::DeleteImage);
+    connect(changeImageAction, &QAction::triggered, this, &DialogPatternProperties::ChangeImage);
+    connect(saveImageAction, &QAction::triggered, this, &DialogPatternProperties::SaveImage);
+    connect(showImageAction, &QAction::triggered, this, &DialogPatternProperties::ShowImage);
+
+    const QImage image = GetImage();
+    if (not image.isNull())
+    {
+        ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+    }
+    else
+    {
+        deleteAction->setEnabled(false);
+        saveImageAction->setEnabled(false);
+        showImageAction->setEnabled(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ChangeImage()
+{
+    const QString fileName = QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(),
+                                                          tr("Images (*.png *.jpg *.jpeg *.bmp)"));
+    QImage image;
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        if (not image.load(fileName))
+        {
+            return;
+        }
+        ui->imageLabel->setPixmap(QPixmap::fromImage(image));
+        QFileInfo f(fileName);
+        QString extension = f.suffix().toUpper();
+
+        if (extension == QLatin1String("JPEG"))
+        {
+            extension = "JPG";
+        }
+        if (extension == QLatin1String("PNG") || extension == QLatin1String("JPG") || extension == QLatin1String("BMP"))
+        {
+            QByteArray byteArray;
+            QBuffer buffer(&byteArray);
+            buffer.open(QIODevice::WriteOnly);
+            image.save(&buffer, extension.toLatin1().data()); //writes the image in 'extension' format inside the buffer
+            QString iconBase64 = QString::fromLatin1(byteArray.toBase64().data());
+
+            // save our image to file.val
+            doc->SetImage(iconBase64, extension);
+        }
+        deleteAction->setEnabled(true);
+        saveImageAction->setEnabled(true);
+        showImageAction->setEnabled(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::DeleteImage()
+{
+    doc->DeleteImage();
+    ui->imageLabel->setText(tr("Change image"));
+    deleteAction->setEnabled(false);
+    saveImageAction->setEnabled(false);
+    showImageAction->setEnabled(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveImage()
+{
+    QByteArray byteArray;
+    byteArray.append(doc->GetImage().toUtf8());
+    QByteArray ba = QByteArray::fromBase64(byteArray);
+    const QString extension = QLatin1String(".") + doc->GetImageExtension();
+    QString filter = tr("Images") + QLatin1String(" (*") + extension + QLatin1String(")");
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"), tr("untitled"), filter, &filter);
+    if (not filename.isEmpty())
+    {
+        if (not filename.endsWith(extension.toUpper()))
+        {
+            filename.append(extension);
+        }
+        QFile file(filename);
+        if (file.open(QIODevice::WriteOnly))
+        {
+            file.write(ba);
+            file.close();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ShowImage()
+{
+    QLabel *label = new QLabel(this, Qt::Window);
+    const QImage image = GetImage();
+    label->setPixmap(QPixmap::fromImage(image));
+    label->setGeometry(QRect(QCursor::pos(), image.size()));
+    label->show();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::ShowContextMenu()
+{
+    QMenu menu(this);
+    menu.addAction(deleteAction);
+    menu.addAction(changeImageAction);
+    menu.addAction(saveImageAction);
+    menu.addAction(showImageAction);
+    menu.exec(QCursor::pos());
+    menu.show();
 }

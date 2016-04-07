@@ -6,6 +6,15 @@
                      <xs:sequence minOccurs="1" maxOccurs="unbounded">
                             <xs:element name="version" type="formatVersion"></xs:element>
                             <xs:element name="unit" type="units"></xs:element>
+                            <xs:element name="image" minOccurs="0" maxOccurs="1">
+                                <xs:complexType>
+                                 <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                       <xs:attribute name="extension" type="imageExtension"></xs:attribute>
+                                    </xs:extension>
+                                 </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
                             <xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="notes" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
@@ -341,6 +350,13 @@
     <xs:simpleType name="formatVersion">
         <xs:restriction base="xs:string">
             <xs:pattern value="^(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))\.(0|([1-9][0-9]*))$"/>
+        </xs:restriction>
+    </xs:simpleType>
+     <xs:simpleType name="imageExtension">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PNG"/>
+            <xs:enumeration value="JPG"/>
+            <xs:enumeration value="BMP"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="colors">

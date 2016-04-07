@@ -32,7 +32,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/logging.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../visualization/visualization.h"
+#include "visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 
 #include <QDialog>
