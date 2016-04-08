@@ -224,6 +224,7 @@ extern const QString heightWaistSideToKnee_M;     // A19
 extern const QString heightWaistSideToHip_M;      // A20
 extern const QString heightKneeToAnkle_M;         // A21
 extern const QString heightNeckBackToWaistSide_M; // A22
+extern const QString heightWaistBack_M;           // A23
 // B
 extern const QString widthShoulder_M;     // B01
 extern const QString widthBust_M;         // B02
@@ -367,6 +368,7 @@ extern const QString bustpointNeckSideToWaist_M;   // J06
 extern const QString bustpointToShoulderTip_M;     // J07
 extern const QString bustpointToWaistFront_M;      // J08
 extern const QString bustpointToBustpointHalter_M; // J09
+extern const QString bustpointToShoulderCenter_M;  // J10
 // K
 extern const QString shoulderTipToWaistFront_M;       // K01
 extern const QString neckFrontToWaistSide_M;          // K02
