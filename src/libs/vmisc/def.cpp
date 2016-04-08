@@ -60,6 +60,7 @@ const QString heightWaistSideToKnee_M     = QStringLiteral("height_waist_side_to
 const QString heightWaistSideToHip_M      = QStringLiteral("height_waist_side_to_hip");       // A20
 const QString heightKneeToAnkle_M         = QStringLiteral("height_knee_to_ankle");           // A21
 const QString heightNeckBackToWaistSide_M = QStringLiteral("height_neck_back_to_waist_side"); // A22
+const QString heightWaistBack_M           = QStringLiteral("height_waist_back");              // A23
 // B
 const QString widthShoulder_M     = QStringLiteral("width_shoulder");       // B01
 const QString widthBust_M         = QStringLiteral("width_bust");           // B02
@@ -203,6 +204,7 @@ const QString bustpointNeckSideToWaist_M   = QStringLiteral("bustpoint_neck_side
 const QString bustpointToShoulderTip_M     = QStringLiteral("bustpoint_to_shoulder_tip");     // J07
 const QString bustpointToWaistFront_M      = QStringLiteral("bustpoint_to_waist_front");      // J08
 const QString bustpointToBustpointHalter_M = QStringLiteral("bustpoint_to_bustpoint_halter"); // J09
+const QString bustpointToShoulderCenter_M  = QStringLiteral("bustpoint_to_shoulder_center");  // J10
 // K
 const QString shoulderTipToWaistFront_M       = QStringLiteral("shoulder_tip_to_waist_front");        // K01
 const QString neckFrontToWaistSide_M          = QStringLiteral("neck_front_to_waist_side");           // K02
@@ -601,7 +603,8 @@ QStringList ListGroupA()
                                            << heightWaistSideToKnee_M      // A19
                                            << heightWaistSideToHip_M       // A20
                                            << heightKneeToAnkle_M          // A21
-                                           << heightNeckBackToWaistSide_M; // A22
+                                           << heightNeckBackToWaistSide_M  // A22
+                                           << heightWaistBack_M;           // A23
     return list;
 }
 
@@ -797,7 +800,8 @@ QStringList ListGroupJ()
                                            << bustpointNeckSideToWaist_M    // J06
                                            << bustpointToShoulderTip_M      // J07
                                            << bustpointToWaistFront_M       // J08
-                                           << bustpointToBustpointHalter_M; // J09
+                                           << bustpointToBustpointHalter_M  // J09
+                                           << bustpointToShoulderCenter_M;  // J10
 
     return list;
 }
@@ -1132,6 +1136,8 @@ QString MapDiagrams(const QString &number)
         case 20: // A21
             V_FALLTHROUGH
         case 21: // A22
+            V_FALLTHROUGH
+        case 22: // A23
             return QStringLiteral("Ap2");
         default:
             break;
@@ -1464,6 +1470,8 @@ QString MapDiagrams(const QString &number)
             return QStringLiteral("Jp4");
         case 8: // J09
             return QStringLiteral("Jp5");
+        case 9: // J10
+            return QStringLiteral("Jp6");
         default:
             break;
     }

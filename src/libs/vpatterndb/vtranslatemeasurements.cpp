@@ -341,6 +341,13 @@ void VTranslateMeasurements::InitGroupA()
                   "'Height: Waist Side').", "Full measurement description.");
     InitMeasurement(heightNeckBackToWaistSide_M, m, g, d, "A22", "(height_neck_back - height_waist_side)");
     //=================================================================================================================
+    m = translate("VTranslateMeasurements", "height_waist_back",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Height: Waist Back", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "Vertical height from Waist Back to floor. ('Height: Waist Front'' - "
+                  "'Leg: Crotch to floor'').", "Full measurement description.");
+    InitMeasurement(heightWaistBack_M, m, g, d, "A23", "(height_waist_front - leg_crotch_to_floor)");
+    //=================================================================================================================
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1403,6 +1410,12 @@ void VTranslateMeasurements::InitGroupJ()
                   "Full measurement description.");
     InitMeasurement(bustpointToBustpointHalter_M, m, g, d, "J09");
     //=================================================================================================================
+    m = translate("VTranslateMeasurements", "bustpoint_to_shoulder_center",
+                  "Name in a formula. Don't use math symbols and space in name!!!!");
+    g = translate("VTranslateMeasurements", "Bustpoint to Shoulder Center", "Full measurement name.");
+    d = translate("VTranslateMeasurements", "From center of Shoulder to Bustpoint.", "Full measurement description.");
+    InitMeasurement(bustpointToShoulderCenter_M, m, g, d, "J10");
+    //=================================================================================================================
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1840,16 +1853,16 @@ void VTranslateMeasurements::InitGroupN()
     m = translate("VTranslateMeasurements", "rise_length_b",
                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = translate("VTranslateMeasurements", "Rise length, back", "Full measurement name.");
-    d = translate("VTranslateMeasurements", "Vertical distance from Waist Back to Crotch level.",
-                  "Full measurement description.");
-    InitMeasurement(riseLengthB_M, m, g, d, "N06");
+    d = translate("VTranslateMeasurements", "Vertical distance from Waist Back to Crotch level. "
+                  "('Height: Waist Back' - 'Leg: Crotch to Floor')", "Full measurement description.");
+    InitMeasurement(riseLengthB_M, m, g, d, "N06", "(height_waist_back - leg_crotch_to_floor)");
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "rise_length_f",
                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = translate("VTranslateMeasurements", "Rise length, front", "Full measurement name.");
-    d = translate("VTranslateMeasurements", "Vertical Distance from Waist Front to Crotch level.",
-                  "Full measurement description.");
-    InitMeasurement(riseLengthF_M, m, g, d, "N07");
+    d = translate("VTranslateMeasurements", "Vertical Distance from Waist Front to Crotch level. "
+                  "('Height: Waist Front' - 'Leg: Crotch to Floor')", "Full measurement description.");
+    InitMeasurement(riseLengthF_M, m, g, d, "N07", "(height_waist_front - leg_crotch_to_floor)");
     //=================================================================================================================
     m = translate("VTranslateMeasurements", "rise_length_side",
                   "Name in a formula. Don't use math symbols and space in name!!!!");
