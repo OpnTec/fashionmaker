@@ -20,6 +20,7 @@
 - [#385] Add 'Open Recent' option in Tape.exe, 'File' dropdown menu.
 
 # Version 0.4.4
+- Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
 - Updated description measurements N06 and N07. Add new measurements A23 and J10.
 - Fixed GUI issue. After full parse some widgets was incorrectly reseted.
 - [#464] Crash. Issue with modeling node objects.
