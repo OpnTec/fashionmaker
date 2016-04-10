@@ -103,10 +103,24 @@ VSpline::VSpline(VPointF p1, VPointF p4, qreal angle1, const QString &angle1Form
                  const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
                  const QString &c2LengthFormula, quint32 idObject, Draw mode)
     : VAbstractCubicBezier(GOType::Spline, idObject, mode),
-      d(new VSplineData(p1, p4, angle1, angle1Formula, angle2,angle2Formula, c1Length, c1LengthFormula, c2Length,
+      d(new VSplineData(p1, p4, angle1, angle1Formula, angle2, angle2Formula, c1Length, c1LengthFormula, c2Length,
                         c2LengthFormula))
 {
     CreateName();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSpline VSpline::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+{
+    const VPointF p1 = GetP1().Rotate(originPoint, degrees);
+    const VPointF p4 = GetP4().Rotate(originPoint, degrees);
+
+    const QPointF p2 = VPointF::RotatePF(originPoint, GetP2(), degrees);
+    const QPointF p3 = VPointF::RotatePF(originPoint, GetP3(), degrees);
+
+    VSpline spl(p1, p2, p3, p4);
+    spl.setName(name() + prefix);
+    return spl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
