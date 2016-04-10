@@ -29,13 +29,13 @@
 #ifndef VELLIPTICALARC_H
 #define VELLIPTICALARC_H
 
-#include "vabstractcurve.h"
+#include "vabstractarc.h"
 #include "vpointf.h"
 #include <QCoreApplication>
 
 class VEllipticalArcData;
 
-class VEllipticalArc : public VAbstractCurve
+class VEllipticalArc : public VAbstractArc
 {
     Q_DECLARE_TR_FUNCTIONS(VEllipticalArc)
 public:
@@ -56,49 +56,35 @@ public:
 
     virtual ~VEllipticalArc() Q_DECL_OVERRIDE;
 
-    QString            GetFormulaF1 () const;
-    void               SetFormulaF1 (const QString &formula, qreal value);
-    virtual qreal      GetStartAngle () const Q_DECL_OVERRIDE;
+    qreal GetRotationAngle() const;
 
-    QString            GetFormulaF2 () const;
-    void               SetFormulaF2 (const QString &formula, qreal value);
-    virtual qreal      GetEndAngle () const Q_DECL_OVERRIDE;
+    QString GetFormulaRadius1 () const;
+    void    SetFormulaRadius1 (const QString &formula, qreal value);
+    qreal   GetRadius1 () const;
 
-    qreal              GetRotationAngle() const;
+    QString GetFormulaRadius2 () const;
+    void    SetFormulaRadius2 (const QString &formula, qreal value);
+    qreal   GetRadius2 () const;
 
-    QString            GetFormulaRadius1 () const;
-    void               SetFormulaRadius1 (const QString &formula, qreal value);
-    qreal              GetRadius1 () const;
+    qreal GetLength () const;
 
-    QString            GetFormulaRadius2 () const;
-    void               SetFormulaRadius2 (const QString &formula, qreal value);
-    qreal              GetRadius2 () const;
+    QPointF GetP1() const;
+    QPointF GetP2() const;
 
-    VPointF            GetCenter () const;
-    void               SetCenter (const VPointF &value);
+    QVector<QPointF> GetPoints () const;
 
-    QString            GetFormulaLength () const;
-    void               SetFormulaLength (const QString &formula, qreal value);
-    qreal              GetLength () const;
-
-    QPointF            GetP1() const;
-    QPointF            GetP2 () const;
-
-    qreal              AngleArc() const;
-    QVector<qreal>     GetAngles () const;
-    QVector<QPointF>   GetPoints () const;
-    QPointF            CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2) const;
-    QPointF            CutArc (const qreal &length) const;
-    virtual void       setId(const quint32 &id) Q_DECL_OVERRIDE;
-    virtual QString    NameForHistory(const QString &toolName) const Q_DECL_OVERRIDE;
+    QPointF CutArc (const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2) const;
+    QPointF CutArc (const qreal &length) const;
 protected:
     virtual void CreateName() Q_DECL_OVERRIDE;
+    virtual void FindF2(qreal length) Q_DECL_OVERRIDE;
 private:
     QSharedDataPointer<VEllipticalArcData> d;
-    void FindF2(qreal length);
 
-    qreal MaxLength() const;
-    QPointF GetPoint (qreal angle) const;
+    QVector<qreal> GetAngles () const;
+    qreal          MaxLength() const;
+    QPointF        GetPoint (qreal angle) const;
+
     static int GetQuadransRad(qreal &rad);
 };
 
