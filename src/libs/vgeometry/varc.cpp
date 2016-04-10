@@ -178,14 +178,16 @@ QPointF VArc::GetP2 () const
  */
 qreal VArc::AngleArc() const
 {
-    if ((qFuzzyIsNull(d->f1) && qFuzzyCompare(d->f2, 360)) ||
-        (qFuzzyCompare(d->f1, 360) && qFuzzyIsNull(d->f2)))
     {
-        return 360;
+        const qreal angleDiff = qAbs(d->f1 - d->f2);
+        if (VFuzzyComparePossibleNulls(angleDiff, 0) || VFuzzyComparePossibleNulls(angleDiff, 360))
+        {
+            return 360;
+        }
     }
-    QLineF l1(0, 0, 100, 100);
+    QLineF l1(0, 0, 100, 0);
     l1.setAngle(d->f1);
-    QLineF l2(0, 0, 100, 100);
+    QLineF l2(0, 0, 100, 0);
     l2.setAngle(d->f2);
 
     qreal ang = l1.angleTo(l2);
