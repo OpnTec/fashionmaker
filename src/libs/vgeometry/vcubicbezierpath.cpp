@@ -80,6 +80,19 @@ VCubicBezierPath &VCubicBezierPath::operator=(const VCubicBezierPath &curve)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VCubicBezierPath VCubicBezierPath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+{
+    const QVector<VPointF> points = GetCubicPath();
+    VCubicBezierPath curve;
+    for(int i=0; i < points.size(); ++i)
+    {
+        curve.append(points.at(i).Rotate(originPoint, degrees));
+    }
+    curve.setName(name() + prefix);
+    return curve;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath::~VCubicBezierPath()
 {
 }

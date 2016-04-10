@@ -28,6 +28,7 @@
 
 #include "vpointf.h"
 #include "vpointf_p.h"
+#include <QLineF>
 #include <QPointF>
 #include <QString>
 
@@ -97,6 +98,13 @@ VPointF &VPointF::operator =(const VPointF &point)
     VGObject::operator=(point);
     d = point.d;
     return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPointF VPointF::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+{
+    const QPointF p = RotatePF(originPoint, toQPointF(), degrees);
+    return VPointF(p, name() + prefix, mx(), my());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -187,4 +195,12 @@ qreal VPointF::y() const
 void VPointF::setY(const qreal &value)
 {
     d->_y = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPointF::RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees)
+{
+    QLineF axis(originPoint, point);
+    axis.setAngle(axis.angle() + degrees);
+    return axis.p2();
 }

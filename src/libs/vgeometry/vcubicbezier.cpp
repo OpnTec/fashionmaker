@@ -62,6 +62,18 @@ VCubicBezier &VCubicBezier::operator=(const VCubicBezier &curve)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VCubicBezier VCubicBezier::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+{
+    const VPointF p1 = GetP1().Rotate(originPoint, degrees);
+    const VPointF p2 = GetP2().Rotate(originPoint, degrees);
+    const VPointF p3 = GetP3().Rotate(originPoint, degrees);
+    const VPointF p4 = GetP4().Rotate(originPoint, degrees);
+    VCubicBezier curve(p1, p2, p3, p4);
+    curve.setName(name() + prefix);
+    return curve;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::~VCubicBezier()
 {
 }

@@ -113,6 +113,19 @@ VArc &VArc::operator =(const VArc &arc)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+{
+    const VPointF center = GetCenter().Rotate(originPoint, degrees);
+
+    const QPointF p1 = VPointF::RotatePF(originPoint, GetP1(), degrees);
+    const QPointF p2 = VPointF::RotatePF(originPoint, GetP2(), degrees);
+
+    VArc arc(center, GetRadius(), QLineF(center.toQPointF(), p1).angle(), QLineF(center.toQPointF(), p2).angle());
+    arc.setName(name() + prefix);
+    return arc;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VArc::~VArc()
 {}
 

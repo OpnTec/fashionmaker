@@ -63,27 +63,27 @@ int main(int argc, char** argv)
         delete obj;
     };
 
-    ASSERT_TEST(new TST_FindPoint());
-    ASSERT_TEST(new TST_VDetail());
-    ASSERT_TEST(new TST_VPoster());
-    ASSERT_TEST(new TST_VAbstractDetail());
-    ASSERT_TEST(new TST_VSpline());
-    ASSERT_TEST(new TST_NameRegExp());
-    ASSERT_TEST(new TST_VLayoutDetail());
-    ASSERT_TEST(new TST_VArc());
+//    ASSERT_TEST(new TST_FindPoint());
+//    ASSERT_TEST(new TST_VDetail());
+//    ASSERT_TEST(new TST_VPoster());
+//    ASSERT_TEST(new TST_VAbstractDetail());
+//    ASSERT_TEST(new TST_VSpline());
+//    ASSERT_TEST(new TST_NameRegExp());
+//    ASSERT_TEST(new TST_VLayoutDetail());
+//    ASSERT_TEST(new TST_VArc());
     ASSERT_TEST(new TST_VEllipticalArc());
-    ASSERT_TEST(new TST_MeasurementRegExp());
-    ASSERT_TEST(new TST_TapeCommandLine());
-    ASSERT_TEST(new TST_ValentinaCommandLine());
-    ASSERT_TEST(new TST_QmuTokenParser());
-    ASSERT_TEST(new TST_VMeasurements());
-    ASSERT_TEST(new TST_QmuParserErrorMsg());
-    ASSERT_TEST(new TST_VLockGuard());
-    ASSERT_TEST(new TST_Misc());
-    ASSERT_TEST(new TST_VCommandLine());
-    ASSERT_TEST(new TST_TSTranslation());
-    ASSERT_TEST(new TST_VAbstractCurve());
-    ASSERT_TEST(new TST_VCubicBezierPath());
+//    ASSERT_TEST(new TST_MeasurementRegExp());
+//    ASSERT_TEST(new TST_TapeCommandLine());
+//    ASSERT_TEST(new TST_ValentinaCommandLine());
+//    ASSERT_TEST(new TST_QmuTokenParser());
+//    ASSERT_TEST(new TST_VMeasurements());
+//    ASSERT_TEST(new TST_QmuParserErrorMsg());
+//    ASSERT_TEST(new TST_VLockGuard());
+//    ASSERT_TEST(new TST_Misc());
+//    ASSERT_TEST(new TST_VCommandLine());
+//    ASSERT_TEST(new TST_TSTranslation());
+//    ASSERT_TEST(new TST_VAbstractCurve());
+//    ASSERT_TEST(new TST_VCubicBezierPath());
 
     return status;
 }

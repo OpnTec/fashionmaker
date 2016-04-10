@@ -52,6 +52,7 @@ public:
     VArc (qreal length, VPointF center, qreal radius, qreal f1);
     VArc(const VArc &arc);
     VArc& operator= (const VArc &arc);
+    VArc Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     virtual ~VArc() Q_DECL_OVERRIDE;
 
     QString            GetFormulaF1 () const;
