@@ -52,16 +52,33 @@ VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse) const
+QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin,
+                                                  const QPointF &end, bool reverse)
 {
-    QVector<QPointF> points = GetPoints();
+    QVector<QPointF> segment = points;
     if (reverse)
     {
-        points = GetReversePoints(points);
+        segment = GetReversePoints(segment);
     }
-    points = FromBegin(points, begin);
-    points = ToEnd(points, end);
-    return points;
+
+    QPointF start = begin;
+    QPointF finish = end;
+
+    if (begin == end)
+    {
+        start = segment.first();
+        finish = segment.last();
+    }
+
+    segment = FromBegin(segment, start);
+    segment = ToEnd(segment, finish);
+    return segment;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse) const
+{
+    return GetSegmentPoints(GetPoints(), begin, end, reverse);
 }
 
 

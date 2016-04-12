@@ -2,10 +2,10 @@
 <vit>
     <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
     <version>0.3.3</version>
-    <read-only>false</read-only>
+    <read-only>true</read-only>
     <notes/>
     <unit>cm</unit>
-    <pm_system>41</pm_system>
+    <pm_system>998</pm_system>
     <personal>
         <family-name/>
         <given-name/>
@@ -36,6 +36,7 @@
         <m name="height_waist_side_to_hip" value="(height_waist_side - height_hip)"/>
         <m name="height_knee_to_ankle" value="(height_knee - height_ankle)"/>
         <m name="height_neck_back_to_waist_side" value="(height_neck_back - height_waist_side)"/>
+        <m name="height_waist_back" value="(height_waist_front - leg_crotch_to_floor)"/>
         <m name="width_shoulder" value="0"/>
         <m name="width_bust" value="0"/>
         <m name="width_waist" value="0"/>
@@ -170,6 +171,7 @@
         <m name="bustpoint_to_shoulder_tip" value="0"/>
         <m name="bustpoint_to_waist_front" value="0"/>
         <m name="bustpoint_to_bustpoint_halter" value="0"/>
+        <m name="bustpoint_to_shoulder_center" value="0"/>
         <m name="shoulder_tip_to_waist_front" value="0"/>
         <m name="neck_front_to_waist_side" value="0"/>
         <m name="neck_side_to_waist_side_f" value="0"/>
@@ -224,8 +226,8 @@
         <m name="crotch_length_f" value="(crotch_length - crotch_length_b)"/>
         <m name="rise_length_side_sitting" value="0"/>
         <m name="rise_length_diag" value="0"/>
-        <m name="rise_length_b" value="0"/>
-        <m name="rise_length_f" value="0"/>
+        <m name="rise_length_b" value="(height_waist_back - leg_crotch_to_floor)"/>
+        <m name="rise_length_f" value="(height_waist_front - leg_crotch_to_floor)"/>
         <m name="rise_length_side" value="0"/>
         <m name="neck_back_to_waist_front" value="0"/>
         <m name="waist_to_waist_halter" value="0"/>

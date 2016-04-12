@@ -216,6 +216,7 @@ extern const QString heightWaistSideToKnee_M;     // A19
 extern const QString heightWaistSideToHip_M;      // A20
 extern const QString heightKneeToAnkle_M;         // A21
 extern const QString heightNeckBackToWaistSide_M; // A22
+extern const QString heightWaistBack_M;           // A23
 // B
 extern const QString widthShoulder_M;     // B01
 extern const QString widthBust_M;         // B02
@@ -359,6 +360,7 @@ extern const QString bustpointNeckSideToWaist_M;   // J06
 extern const QString bustpointToShoulderTip_M;     // J07
 extern const QString bustpointToWaistFront_M;      // J08
 extern const QString bustpointToBustpointHalter_M; // J09
+extern const QString bustpointToShoulderCenter_M;  // J10
 // K
 extern const QString shoulderTipToWaistFront_M;       // K01
 extern const QString neckFrontToWaistSide_M;          // K02
@@ -582,22 +584,22 @@ void RestoreOverrideCursor(const QString & pixmapPath);
 
 extern const qreal PrintDPI;
 
-double ToPixel(double val, const Unit &unit);
-double FromPixel(double pix, const Unit &unit);
+double ToPixel(double val, const Unit &unit) Q_REQUIRED_RESULT;
+double FromPixel(double pix, const Unit &unit) Q_REQUIRED_RESULT;
 
-qreal UnitConvertor(qreal value, const Unit &from, const Unit &to);
+qreal UnitConvertor(qreal value, const Unit &from, const Unit &to) Q_REQUIRED_RESULT;
 
 void CheckFactor(qreal &oldFactor, const qreal &Newfactor);
 
-QStringList SupportedLocales();
-QStringList AllGroupNames();
+QStringList SupportedLocales() Q_REQUIRED_RESULT;
+QStringList AllGroupNames() Q_REQUIRED_RESULT;
 
-QString StrippedName(const QString &fullFileName);
-QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath);
-QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath);
+QString StrippedName(const QString &fullFileName) Q_REQUIRED_RESULT;
+QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath) Q_REQUIRED_RESULT;
+QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) Q_REQUIRED_RESULT;
 
-QSharedPointer<QPrinter> DefaultPrinter();
+QSharedPointer<QPrinter> DefaultPrinter() Q_REQUIRED_RESULT;
 
-QPixmap darkenPixmap(const QPixmap &pixmap);
+QPixmap darkenPixmap(const QPixmap &pixmap) Q_REQUIRED_RESULT;
 
 #endif // DEF_H

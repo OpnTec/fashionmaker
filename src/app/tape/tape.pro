@@ -99,6 +99,7 @@ DIAGRAMS += \
         $${PWD}/share/resources/diagrams/Jp3.svg \
         $${PWD}/share/resources/diagrams/Jp4.svg \
         $${PWD}/share/resources/diagrams/Jp5.svg \
+        $${PWD}/share/resources/diagrams/Jp6.svg \
         $${PWD}/share/resources/diagrams/Kp1.svg \
         $${PWD}/share/resources/diagrams/Kp2.svg \
         $${PWD}/share/resources/diagrams/Kp3.svg \

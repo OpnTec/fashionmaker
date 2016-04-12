@@ -140,6 +140,7 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("A20") << heightWaistSideToHip_M << "height_waist_side_to_hip";
     QTest::newRow("A21") << heightKneeToAnkle_M << "height_knee_to_ankle";
     QTest::newRow("A22") << heightNeckBackToWaistSide_M << "height_neck_back_to_waist_side";
+    QTest::newRow("A23") << heightWaistBack_M << "height_waist_back";
     QTest::newRow("B01") << widthShoulder_M << "width_shoulder";
     QTest::newRow("B02") << widthBust_M << "width_bust";
     QTest::newRow("B03") << widthWaist_M << "width_waist";
@@ -274,6 +275,7 @@ void TST_MeasurementRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("J07") << bustpointToShoulderTip_M << "bustpoint_to_shoulder_tip";
     QTest::newRow("J08") << bustpointToWaistFront_M << "bustpoint_to_waist_front";
     QTest::newRow("J09") << bustpointToBustpointHalter_M << "bustpoint_to_bustpoint_halter";
+    QTest::newRow("J10") << bustpointToShoulderCenter_M  << "bustpoint_to_shoulder_center";
     QTest::newRow("K01") << shoulderTipToWaistFront_M << "shoulder_tip_to_waist_front";
     QTest::newRow("K02") << neckFrontToWaistSide_M << "neck_front_to_waist_side";
     QTest::newRow("K03") << neckSideToWaistSideF_M << "neck_side_to_waist_side_f";

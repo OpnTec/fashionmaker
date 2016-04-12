@@ -59,14 +59,7 @@ void SaveDetailOptions::undo()
         {
            VToolDetail::AddNode(doc, domElement, oldDet.at(i));
         }
-        QVector<VNodeDetail> nodes = oldDet.getNodes();
-        if (nodes.size()>0)
-        {
-            for (qint32 i = 0; i < nodes.size(); ++i)
-            {
-                doc->IncrementReferens(nodes.at(i).getId());
-            }
-        }
+        IncrementReferences(oldDet.Missing(newDet));
         emit NeedLiteParsing(Document::LiteParse);
     }
     else
@@ -90,14 +83,8 @@ void SaveDetailOptions::redo()
         {
            VToolDetail::AddNode(doc, domElement, newDet.at(i));
         }
-        QList<quint32> list = oldDet.Missing(newDet);
-        if (list.size()>0)
-        {
-            for (qint32 i = 0; i < list.size(); ++i)
-            {
-                doc->DecrementReferens(list.at(i));
-            }
-        }
+
+        DecrementReferences(oldDet.Missing(newDet));
         emit NeedLiteParsing(Document::LiteParse);
     }
     else

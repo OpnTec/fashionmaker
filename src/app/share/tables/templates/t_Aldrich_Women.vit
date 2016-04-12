@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>true</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m name="height_knee" value="0"/>
+        <m name="neck_circ" value="0"/>
+        <m name="bust_circ" value="0"/>
+        <m name="waist_circ" value="0"/>
+        <m name="highhip_circ" value="0"/>
+        <m name="hip_circ" value="0"/>
+        <m name="neck_back_to_waist_b" value="0"/>
+        <m name="neck_back_to_highbust_b" value="0"/>
+        <m name="waist_to_hip_f" value="0"/>
+        <m name="shoulder_length" value="0"/>
+        <m name="across_chest_f" value="0"/>
+        <m name="across_back_b" value="0"/>
+        <m name="bustpoint_to_waist" value="0"/>
+        <m name="arm_shoulder_tip_to_wrist_bent" value="0"/>
+        <m name="arm_upper_circ" value="0"/>
+        <m name="arm_wrist_circ" value="0"/>
+        <m name="leg_knee_circ" value="0"/>
+        <m name="leg_ankle_high_circ" value="0"/>
+        <m name="leg_ankle_circ" value="0"/>
+        <m name="rise_length_side_sitting" value="0"/>
+        <m name="dart_width_shoulder" value="0"/>
+        <m name="height_waist_back" value="0"/>
+        <m name="bustpoint_to_shoulder_center" value="0"/>
+        <m name="@M_1" value="@M_J10 + bustpoint_to_waist" full_name="Front Shoulder to Waist"/>
+        <m name="@M_2" value="@M_A23 - height_knee" full_name="Waist to Knee"/>
+        <m name="@M_3" value="(0.91*leg_ankle_circ) " full_name="Trouser Bottom"/>
+        <m name="@M_4" value="(0.8*leg_ankle_circ) " full_name="Jeans Bottom"/>
+        <m name="@M_5" value="(1.41*arm_wrist_circ)" full_name="Cuff Size, Shirt"/>
+        <m name="@M_6" value="(0.9*arm_wrist_circ)" full_name="Cuff Size, Two Piece Sleeve"/>
+        <m name="@M_7" value="(0.93*arm_shoulder_tip_to_wrist_bent)" full_name="Sleeve Length, Jersey"/>
+    </body-measurements>
+</vit>

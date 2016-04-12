@@ -28,6 +28,8 @@
 
 #include "vundocommand.h"
 #include "../vmisc/def.h"
+#include "../vgeometry/vpointf.h"
+#include "../vtools/tools/vabstracttool.h"
 
 Q_LOGGING_CATEGORY(vUndo, "v.undo")
 
@@ -63,5 +65,23 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &s
     {
         const QDomElement refElement = doc->NodeById(siblingId);
         parentNode.insertAfter(xml, refElement);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::IncrementReferences(const QVector<VNodeDetail> &nodes) const
+{
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        doc->IncrementReferens(nodes.at(i).getId());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VUndoCommand::DecrementReferences(const QVector<VNodeDetail> &nodes) const
+{
+    for (qint32 i = 0; i < nodes.size(); ++i)
+    {
+        doc->DecrementReferens(nodes.at(i).getId());
     }
 }

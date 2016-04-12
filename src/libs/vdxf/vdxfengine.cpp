@@ -114,6 +114,14 @@ bool VDxfEngine::begin(QPaintDevice *pdev)
     dw->dxfString(9, "$INSUNITS");
     dw->dxfInt(70, static_cast<int>(varInsunits));
 
+    dw->dxfString(9, "$DIMSCALE");
+    dw->dxfReal(40, 1.0);
+
+    // Official documentation says that initial value is 1.0, however LibreCAD has trouble if not set this value
+    // explicitly.
+    dw->dxfString(9, "$DIMLFAC");
+    dw->dxfReal(40, 1.0);
+
     QString dateTime = QDateTime::currentDateTime().toString("yyyyMMdd.HHmmsszzz");
     dateTime.chop(1);// we need hundredths of a second
     dw->dxfString(9, "$TDCREATE");
@@ -252,15 +260,14 @@ void VDxfEngine::drawPath(const QPainterPath &path)
 
         for (int i=1; i < polygon.count(); i++)
         {
-            dxf->writeLine(
-            *dw,
-            DL_LineData(polygon.at(i-1).x(), // start point
-            getSize().height() - polygon.at(i-1).y(),
-            0.0,
-            polygon.at(i).x(), // end point
-            getSize().height() - polygon.at(i).y(),
-            0.0),
-            DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+            dxf->writeLine(*dw,
+                           DL_LineData(FromPixel(polygon.at(i-1).x(), varInsunits), // start point
+                                       FromPixel(getSize().height() - polygon.at(i-1).y(), varInsunits),
+                                       FromPixel(0.0, varInsunits),
+                                       FromPixel(polygon.at(i).x(), varInsunits), // end point
+                                       FromPixel(getSize().height() - polygon.at(i).y(), varInsunits),
+                                       FromPixel(0.0, varInsunits)),
+                           DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
         }
     }
 }
@@ -270,18 +277,17 @@ void VDxfEngine::drawLines(const QLineF * lines, int lineCount)
 {
     for (int i = 0; i < lineCount; i++)
     {
-            QPointF p1 = matrix.map(lines[i].p1());
-            QPointF p2 = matrix.map(lines[i].p2());
+        const QPointF p1 = matrix.map(lines[i].p1());
+        const QPointF p2 = matrix.map(lines[i].p2());
 
-            dxf->writeLine(
-            *dw,
-            DL_LineData(p1.x(), // start point
-            getSize().height() - p1.y(),
-            0.0,
-            p2.x(), // end point
-            getSize().height() - p2.y(),
-            0.0),
-            DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+        dxf->writeLine(*dw,
+                       DL_LineData(FromPixel(p1.x(), varInsunits), // start point
+                                   FromPixel(getSize().height() - p1.y(), varInsunits),
+                                   FromPixel(0.0, varInsunits),
+                                   FromPixel(p2.x(), varInsunits), // end point
+                                   FromPixel(getSize().height() - p2.y(), varInsunits),
+                                   FromPixel(0.0, varInsunits)),
+                       DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
     }
 }
 
@@ -298,18 +304,17 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
 
     for (int i = 1; i < pointCount; i++)
     {
-            QPointF p1 = matrix.map(points[i-1]);
-            QPointF p2 = matrix.map(points[i]);
+        const QPointF p1 = matrix.map(points[i-1]);
+        const QPointF p2 = matrix.map(points[i]);
 
-            dxf->writeLine(
-            *dw,
-            DL_LineData(p1.x(), // start point
-            getSize().height() - p1.y(),
-            0.0,
-            p2.x(), // end point
-            getSize().height() - p2.y(),
-            0.0),
-            DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+        dxf->writeLine(*dw,
+                       DL_LineData(FromPixel(p1.x(), varInsunits), // start point
+                                   FromPixel(getSize().height() - p1.y(), varInsunits),
+                                   FromPixel(0.0, varInsunits),
+                                   FromPixel(p2.x(), varInsunits), // end point
+                                   FromPixel(getSize().height() - p2.y(), varInsunits),
+                                   FromPixel(0.0, varInsunits)),
+                       DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
     }
 }
 
@@ -322,8 +327,8 @@ void VDxfEngine::drawPolygon(const QPoint *points, int pointCount, QPaintEngine:
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawEllipse(const QRectF & rect)
 {
-    QRectF newRect = matrix.mapRect(rect);
-    double rotationAngle = atan(matrix.m12()/matrix.m11());
+    const QRectF newRect = matrix.mapRect(rect);
+    const double rotationAngle = atan(matrix.m12()/matrix.m11());
 
     double majorX, majorY; // distanse between center and endpoint of the major axis
     double ratio; // ratio of minor axis to major axis
@@ -343,18 +348,18 @@ void VDxfEngine::drawEllipse(const QRectF & rect)
         // major axis * sin(rotation angle) * y-scale-factor
         ratio  = rect.height()/rect.width();
     }
-    dxf->writeEllipse(
-                *dw,
-                DL_EllipseData(newRect.center().x(),                       // center X
-                               getSize().height() - newRect.center().y(),  // center Y
-                               0,                                          // center Z
-                               majorX,
-                               majorY,
-                               0,
-                               ratio,
-                               0,6.28 // startangle and endangle of ellipse in rad
-                               ),
-                DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+
+    dxf->writeEllipse(*dw,
+                      DL_EllipseData(FromPixel(newRect.center().x(), varInsunits),                      // center X
+                                     FromPixel(getSize().height() - newRect.center().y(), varInsunits), // center Y
+                                     FromPixel(0, varInsunits),                                         // center Z
+                                     FromPixel(majorX, varInsunits),
+                                     FromPixel(majorY, varInsunits),
+                                     FromPixel(0, varInsunits),
+                                     FromPixel(ratio, varInsunits),
+                                     0, 6.28 // startangle and endangle of ellipse in rad
+                                     ),
+                      DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -366,29 +371,28 @@ void VDxfEngine::drawEllipse(const QRect & rect)
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawTextItem(const QPointF & p, const QTextItem & textItem)
 {
-    QPointF startPoint = matrix.map(p);
-    double rotationAngle = atan(matrix.m12()/matrix.m11());
+    const QPointF startPoint = matrix.map(p);
+    const double rotationAngle = atan(matrix.m12()/matrix.m11());
 
     const QFont f = textItem.font();
-    int textSize = f.pixelSize() == -1 ? f.pointSize() : f.pixelSize();
-    dxf->writeText(
-                *dw,
-                DL_TextData(startPoint.x(),
-                            getSize().height() - startPoint.y(),
-                            0,
-                            startPoint.x(),
-                            getSize().height() - startPoint.y(),
-                            0,
-                            textSize * matrix.m11(),
-                            1, // relative X scale factor
-                            0, // flag (0 = default, 2 = Backwards, 4 = Upside down)
-                            0, // Horizontal justification (0 = Left (default), 1 = Center, 2 = Right,)
-                            0, // Vertical justification (0 = Baseline (default), 1 = Bottom, 2 = Middle, 3= Top)
-                            textItem.text().toUtf8().constData(),  // text data
-                            f.family().toUtf8().constData(), // font
-                            -rotationAngle
-                            ),
-                DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
+    const int textSize = f.pixelSize() == -1 ? f.pointSize() : f.pixelSize();
+    dxf->writeText(*dw,
+                   DL_TextData(FromPixel(startPoint.x(), varInsunits),
+                               FromPixel(getSize().height() - startPoint.y(), varInsunits),
+                               FromPixel(0, varInsunits),
+                               FromPixel(startPoint.x(), varInsunits),
+                               FromPixel(getSize().height() - startPoint.y(), varInsunits),
+                               FromPixel(0, varInsunits),
+                               textSize * matrix.m11(),
+                               1, // relative X scale factor
+                               0, // flag (0 = default, 2 = Backwards, 4 = Upside down)
+                               0, // Horizontal justification (0 = Left (default), 1 = Center, 2 = Right,)
+                               0, // Vertical justification (0 = Baseline (default), 1 = Bottom, 2 = Middle, 3= Top)
+                               textItem.text().toUtf8().constData(),  // text data
+                               f.family().toUtf8().constData(), // font
+                               -rotationAngle
+                               ),
+                   DL_Attributes("0", getPenColor(), -1, getPenStyle(), 1.0));
 }
 
  //---------------------------------------------------------------------------------------------------------------------
@@ -420,13 +424,13 @@ void VDxfEngine::setSize(const QSize &value)
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-int VDxfEngine::getResolution() const
+double VDxfEngine::getResolution() const
 {
     return resolution;
 }
 
  //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::setResolution(int value)
+void VDxfEngine::setResolution(double value)
 {
     Q_ASSERT(not isActive());
     resolution = value;
@@ -555,3 +559,27 @@ void VDxfEngine::setInsunits(const VarInsunits &var)
     Q_ASSERT(not isActive());
     varInsunits = var;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
+
+double VDxfEngine::FromPixel(double pix, const VarInsunits &unit) const
+{
+    switch (unit)
+    {
+        case VarInsunits::Millimeters:
+            return pix / resolution * 25.4;
+        case VarInsunits::Centimeters:
+            return pix / resolution * 25.4 / 10.0;
+        case VarInsunits::Inches:
+            return pix / resolution;
+    }
+    return 0;
+}
+
+#if defined(Q_CC_GNU)
+    #pragma GCC diagnostic pop
+#endif

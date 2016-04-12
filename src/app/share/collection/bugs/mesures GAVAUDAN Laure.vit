@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name>Gavaudan</family-name>
+        <given-name>Laure</given-name>
+        <birth-date>2003-10-08</birth-date>
+        <gender>female</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m value="156" description="hauteur totale" name="@Stature"/>
+        <m value="88" name="@Tour_poitrine"/>
+        <m value="0" name="@Tour_petites_hanches"/>
+        <m value="95" name="@Tour_grandes_hanches"/>
+        <m value="24" name="@H_sommet_épaule_ligne_poitrine"/>
+        <m value="20" name="@H_pointpoitrine_taille"/>
+        <m value="100" name="@H_taille_sol_DVT"/>
+        <m value="16" name="@Ecart_poitrine"/>
+        <m value="32" name="@Encolure_taille_DVT"/>
+        <m value="32" name="@Tour_cou"/>
+        <m value="14" name="@Largeur_encolure"/>
+        <m value="12" name="@Epaule_sommet_extremite"/>
+        <m value="24" name="@point_poitrine_extremite_epaule"/>
+        <m value="33" name="@Largeur_carrure_DVT"/>
+        <m value="35" name="@Largeur_carrure_dos"/>
+        <m value="21" name="@H_sommet_epaule_point_carrure_DVT"/>
+        <m value="44" name="@H_sommet_epaule_taille_DOS"/>
+        <m value="33.5" name="@Encolure_taille_DOS"/>
+        <m value="30" name="@Extremite_epaul_taille_DOS"/>
+        <m value="19" name="@Entournure_taille_COTE"/>
+        <m value="55" name="@L_bras"/>
+        <m value="30" name="@L_epaule_coude"/>
+        <m value="26" name="@Tour_Bras"/>
+        <m value="15.5" name="@Tour_poignet"/>
+        <m value="99" name="@H_taille_sol_COTE"/>
+        <m value="99.5" name="@H_taille_sol_DOS"/>
+        <m value="72" name="@H_entrejambe_sol"/>
+        <m value="28" name="@H_taille_montant"/>
+        <m value="39" name="@H_genou_sol"/>
+        <m value="58" name="@Tour_cuisse"/>
+        <m value="35.5" name="@Tour_genou"/>
+        <m value="35" name="@Tour_mollet"/>
+        <m value="22.5" name="@Tour_cheville"/>
+        <m value="11.5" name="@H_ligne_poitrine_ligne_carrure"/>
+        <m value="0" name="@M_1"/>
+    </body-measurements>
+</vit>

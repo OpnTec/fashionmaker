@@ -76,7 +76,7 @@ public:
     void NodeOnEdge(const quint32 &index, VNodeDetail &p1, VNodeDetail &p2)const;
     VDetail RemoveEdge(const quint32 &index) const;
 
-    QList<quint32> Missing(const VDetail &det) const;
+    QVector<VNodeDetail> Missing(const VDetail &det) const;
 
     QVector<QPointF> ContourPoints(const VContainer *data) const;
     QVector<QPointF> SeamAllowancePoints(const VContainer *data) const;

@@ -113,6 +113,8 @@ private:
     void         AddNode(QDomElement &domElement, const VNodeDetail &node);
     QDomNode     UpdateDetail(const QDomNode &domNode, const VDetail &d);
     void         AddToModeling(const QDomElement &domElement);
+    void         IncrementReferences(const VDetail &d) const;
+    void         DecrementReferences(const VDetail &d) const;
 
     static void             SaveChildren(VAbstractPattern *doc, quint32 id, const QVector<quint32> &children);
     static QVector<quint32> AllChildren(VAbstractPattern *doc, quint32 id);
