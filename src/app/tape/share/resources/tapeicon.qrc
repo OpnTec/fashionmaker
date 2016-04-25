@@ -8,5 +8,6 @@
         <file>tapeicon/24x24/red_plus.png</file>
         <file>tapeicon/24x24/padlock_locked.png</file>
         <file>tapeicon/24x24/padlock_opened.png</file>
+        <file>tapeicon/24x24/mannequin.png</file>
     </qresource>
 </RCC>

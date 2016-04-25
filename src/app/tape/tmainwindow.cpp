@@ -97,7 +97,7 @@ TMainWindow::TMainWindow(QWidget *parent)
       labelGradationSizes(nullptr),
       labelPatternUnit(nullptr),
       actionDockDiagram(nullptr),
-      dockDiagramVisible(false),
+      dockDiagramVisible(true),
       isInitialized(false),
       recentFileActs(),
       separatorAct(nullptr)
@@ -1757,7 +1757,9 @@ void TMainWindow::SetupMenu()
     actionDockDiagram = ui->dockWidgetDiagram->toggleViewAction();
     actionDockDiagram->setMenuRole(QAction::NoRole);
     ui->menuMeasurements->addAction(actionDockDiagram);
+    ui->mainToolBar->addAction(actionDockDiagram);
     actionDockDiagram->setEnabled(false);
+    actionDockDiagram->setIcon(QIcon("://tapeicon/24x24/mannequin.png"));
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowWindowMenu);
