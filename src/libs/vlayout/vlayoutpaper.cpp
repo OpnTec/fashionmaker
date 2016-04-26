@@ -200,7 +200,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutDetail &detail, volatile bool &stop)
 
     for (int j=1; j <= d->globalContour.GlobalEdgesCount(); ++j)
     {
-        for (int i=1; i<= detail.EdgesCount(); i++)
+        for (int i=1; i<= detail.EdgesCount(); ++i)
         {
             VPosition *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->rotate, d->rotationIncrease,
                                               d->saveLength);
