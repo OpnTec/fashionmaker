@@ -4981,7 +4981,7 @@ Do you want to save your changes?</source>
         <translation>Print</translation>
     </message>
     <message>
-        <source>Print tiled</source>
+        <source>Print tiled PDF</source>
         <translation>Print A0 in A4 formaat</translation>
     </message>
     <message>
@@ -5190,7 +5190,7 @@ Do you want to save your changes?</source>
         <translation>Print een originele opmaak</translation>
     </message>
     <message>
-        <source>Print preview tiled</source>
+        <source>Preview tiled PDF</source>
         <translation>Print voorbeeldweergave papierformaatindeling</translation>
     </message>
     <message>
