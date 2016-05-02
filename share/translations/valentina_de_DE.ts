@@ -5007,7 +5007,7 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Drucken</translation>
     </message>
     <message>
-        <source>Print tiled</source>
+        <source>Print tiled PDF</source>
         <translation>Gekachelt drucken</translation>
     </message>
     <message>
@@ -5216,7 +5216,7 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Originales Layout drucken</translation>
     </message>
     <message>
-        <source>Print preview tiled</source>
+        <source>Preview tiled PDF</source>
         <translation>Druckvorschau gekachelt</translation>
     </message>
     <message>

@@ -4899,7 +4899,7 @@ Quiere guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Print tiled</source>
+        <source>Print tiled PDF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5108,7 +5108,7 @@ Quiere guardar los cambios?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Print preview tiled</source>
+        <source>Preview tiled PDF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

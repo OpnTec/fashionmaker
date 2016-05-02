@@ -2081,7 +2081,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Print tiled</string>
+    <string>Print tiled PDF</string>
    </property>
    <property name="toolTip">
     <string>Split and print a layout into smaller pages (for regular printers)</string>
@@ -2119,7 +2119,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Print preview tiled</string>
+    <string>Preview tiled PDF</string>
    </property>
    <property name="toolTip">
     <string>Print preview tiled layout</string>
