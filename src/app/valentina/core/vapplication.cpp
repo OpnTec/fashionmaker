@@ -87,6 +87,14 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         type = QtDebugMsg;
     }
+
+    // Hide Qt bug 'Assertion when reading an icns file'
+    // https://bugreports.qt.io/browse/QTBUG-45537
+    // Remove after Qt fix will be released
+    if ((type == QtWarningMsg) && msg.contains("QICNSHandler::read()"))
+    {
+        type = QtDebugMsg;
+    }
 #endif
 
     // this is another one that doesn't make sense as just a debug message.  pretty serious
