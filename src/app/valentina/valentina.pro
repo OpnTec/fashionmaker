@@ -252,7 +252,7 @@ unix{
         # Some macx stuff
         QMAKE_MAC_SDK = macosx
 
-        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+        QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
         # Path to resources in app bundle
         #RESOURCES_DIR = "Contents/Resources" defined in translation.pri
         FRAMEWORKS_DIR = "Contents/Frameworks"
