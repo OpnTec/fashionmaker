@@ -168,7 +168,6 @@ void TMainWindow::RetranslateTable()
     {
         const int row = ui->tableWidget->currentRow();
         RefreshTable();
-        ShowUnits();
         ui->tableWidget->selectRow(row);
     }
 }
@@ -2214,6 +2213,8 @@ void TMainWindow::RefreshTable()
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
 
+    ShowUnits();
+
     const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
     QMap<int, QSharedPointer<VMeasurement> > orderedTable;
     QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iterMap;
@@ -2585,7 +2586,6 @@ void TMainWindow::UpdatePatternUnit()
         return;
     }
 
-    ShowUnits();
     RefreshTable();
 
     search->RefreshList(ui->lineEditFind->text());
