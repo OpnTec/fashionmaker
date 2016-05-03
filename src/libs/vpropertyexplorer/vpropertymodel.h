@@ -75,7 +75,7 @@ public:
     virtual VProperty* getProperty(const QString& id);
 
     //! Returns the item flags for the given index
-    virtual Qt::ItemFlags flags (const QModelIndex& index) const;
+    virtual Qt::ItemFlags flags (const QModelIndex& index) const Q_DECL_OVERRIDE;
 
     //! Sets the role data for the item at index to value
     virtual bool setData (const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) Q_DECL_OVERRIDE;

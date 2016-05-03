@@ -289,7 +289,7 @@ void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSp
 /**
  * @brief UpdatePathPoints update spline path in pattern file.
  * @param doc dom document container.
- * @param node tag in file.
+ * @param element tag in file.
  * @param path spline path.
  */
 void VToolSplinePath::UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VSplinePath &path)

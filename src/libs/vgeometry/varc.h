@@ -71,12 +71,12 @@ public:
 
     QString            GetFormulaLength () const;
     void               SetFormulaLength (const QString &formula, qreal value);
-    qreal              GetLength () const;
+    virtual qreal      GetLength () const Q_DECL_OVERRIDE;
 
     QPointF            GetP1() const;
     QPointF            GetP2 () const;
     qreal              AngleArc() const;
-    QVector<QPointF>   GetPoints () const;
+    virtual QVector<QPointF> GetPoints () const Q_DECL_OVERRIDE;
     QPointF            CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
     QPointF            CutArc (const qreal &length) const;
     virtual void       setId(const quint32 &id) Q_DECL_OVERRIDE;

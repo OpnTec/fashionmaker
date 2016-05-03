@@ -69,7 +69,7 @@ protected:
     QColor        currentColor;
 
     void         AddToModeling(const QDomElement &domElement);
-    virtual void SetVisualization() {}
+    virtual void SetVisualization() Q_DECL_OVERRIDE {}
 
     virtual void ShowNode()=0;
     virtual void HideNode()=0;

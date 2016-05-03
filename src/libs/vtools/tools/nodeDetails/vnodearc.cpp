@@ -44,7 +44,6 @@ const QString VNodeArc::ToolType = QStringLiteral("modeling");
  * @param typeCreation way we create this tool.
  * @param idTool tool id.
  * @param qoParent QObject parent
- * @param parent parent object.
  */
 VNodeArc::VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
                    const quint32 &idTool, QObject *qoParent)
@@ -63,7 +62,6 @@ VNodeArc::VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  * @param idTool tool id.
- * @param parent QObject parent
  */
 void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc,
                       const Document &parse, const Source &typeCreation, const quint32 &idTool)

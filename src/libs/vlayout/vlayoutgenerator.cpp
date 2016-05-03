@@ -299,7 +299,7 @@ void VLayoutGenerator::GatherPages()
         VLayoutPaper paper(PageHeight(), PageWidth());
         paper.SetShift(shift);
         paper.SetLayoutWidth(bank->GetLayoutWidth());
-        paper.SetPaperIndex(i);
+        paper.SetPaperIndex(static_cast<quint32>(i));
         paper.SetRotate(rotate);
         paper.SetRotationIncrease(rotationIncrease);
         paper.SetSaveLength(saveLength);
@@ -361,7 +361,7 @@ void VLayoutGenerator::UnitePages()
         VLayoutPaper paper(qFloor(papersLength.at(i)), PageWidth());
         paper.SetShift(shift);
         paper.SetLayoutWidth(bank->GetLayoutWidth());
-        paper.SetPaperIndex(i);
+        paper.SetPaperIndex(static_cast<quint32>(i));
         paper.SetRotate(rotate);
         paper.SetRotationIncrease(rotationIncrease);
         paper.SetSaveLength(saveLength);

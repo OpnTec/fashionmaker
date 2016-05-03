@@ -48,7 +48,7 @@ protected:
     virtual QString MinVerStr() const Q_DECL_OVERRIDE;
     virtual QString MaxVerStr() const Q_DECL_OVERRIDE;
 
-    QString         XSDSchema(int ver) const;
+    virtual QString XSDSchema(int ver) const Q_DECL_OVERRIDE;
     virtual void    ApplyPatches() Q_DECL_OVERRIDE;
     virtual void    DowngradeToCurrentMaxVersion() Q_DECL_OVERRIDE;
 

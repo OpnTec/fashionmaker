@@ -77,7 +77,6 @@ VNodePoint::VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quin
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  * @param idTool tool id.
- * @param parent QObject parent
  */
 void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene,
                         quint32 id, quint32 idPoint, const Document &parse,

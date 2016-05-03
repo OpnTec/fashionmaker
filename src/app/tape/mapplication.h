@@ -57,7 +57,7 @@ public:
     virtual bool notify(QObject * receiver, QEvent * event) Q_DECL_OVERRIDE;
 
     bool IsTestMode() const;
-    virtual bool IsAppInGUIMode() const;
+    virtual bool IsAppInGUIMode() const Q_DECL_OVERRIDE;
     TMainWindow *MainWindow();
     QList<TMainWindow*> MainWindows();
 
