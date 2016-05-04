@@ -4998,8 +4998,8 @@ Do you want to save your changes?</source>
         <translation>Печать</translation>
     </message>
     <message>
-        <source>Print tiled</source>
-        <translation>Печать плиткой</translation>
+        <source>Print tiled PDF</source>
+        <translation>Печать плиткой PDF</translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -5208,8 +5208,8 @@ Do you want to save your changes?</source>
         <translation>Печать оригинальной расскладки</translation>
     </message>
     <message>
-        <source>Print preview tiled</source>
-        <translation>Предварительный просмотр плиткой</translation>
+        <source>Preview tiled PDF</source>
+        <translation>Предварительный просмотр плиткой PDF</translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>

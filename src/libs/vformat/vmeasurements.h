@@ -43,7 +43,7 @@ public:
     VMeasurements(Unit unit, int baseSize, int baseHeight, VContainer *data);
     virtual ~VMeasurements() Q_DECL_OVERRIDE;
 
-    void setXMLContent(const QString &fileName);
+    virtual void setXMLContent(const QString &fileName) Q_DECL_OVERRIDE;
 
     void AddEmpty(const QString &name, const QString &formula = QString());
     void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString());

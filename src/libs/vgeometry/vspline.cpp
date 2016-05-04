@@ -96,8 +96,6 @@ VSpline::VSpline (VPointF p1, QPointF p2, QPointF p3, VPointF p4, quint32 idObje
  * @param c1LengthFormula formula length from first point to first control point.
  * @param c2Length length from second point to first control point.
  * @param c2LengthFormula formula length from second point to first control point.
- * @param idObject
- * @param mode
  */
 VSpline::VSpline(VPointF p1, VPointF p4, qreal angle1, const QString &angle1Formula, qreal angle2,
                  const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,

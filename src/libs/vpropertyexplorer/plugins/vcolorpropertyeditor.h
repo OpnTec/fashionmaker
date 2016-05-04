@@ -59,7 +59,7 @@ public:
     static QString GetColorString(const QColor& color);
 
     //! Needed for proper event handling
-    bool eventFilter(QObject *obj, QEvent *ev);
+    virtual bool eventFilter(QObject *obj, QEvent *ev) Q_DECL_OVERRIDE;
 
 signals:
     //! This is emitted, when the user changes the color

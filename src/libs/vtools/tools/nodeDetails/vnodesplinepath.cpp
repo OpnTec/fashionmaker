@@ -45,7 +45,6 @@ const QString VNodeSplinePath::ToolType = QStringLiteral("modelingPath");
  * @param typeCreation way we create this tool.
  * @param idTool tool id.
  * @param qoParent QObject parent.
- * @param parent parent object.
  */
 VNodeSplinePath::VNodeSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
                                  const Source &typeCreation, const quint32 &idTool, QObject *qoParent)
@@ -64,7 +63,6 @@ VNodeSplinePath::VNodeSplinePath(VAbstractPattern *doc, VContainer *data, quint3
  * @param parse parser file mode.
  * @param typeCreation way we create this tool.
  * @param idTool tool id.
- * @param parent QObject parent.
  */
 void VNodeSplinePath::Create(VAbstractPattern *doc, VContainer *data, quint32 id,
                              quint32 idSpline, const Document &parse, const Source &typeCreation, const quint32 &idTool)

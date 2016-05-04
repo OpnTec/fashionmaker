@@ -5000,7 +5000,7 @@ Vuoi salvare i cambiamenti?</translation>
         <translation>Stampa</translation>
     </message>
     <message>
-        <source>Print tiled</source>
+        <source>Print tiled PDF</source>
         <translation>Stampa porzionato</translation>
     </message>
     <message>
@@ -5209,7 +5209,7 @@ Vuoi salvare i cambiamenti?</translation>
         <translation>Stampa un layout originale</translation>
     </message>
     <message>
-        <source>Print preview tiled</source>
+        <source>Preview tiled PDF</source>
         <translation>Anteprima di stampa piastrellata</translation>
     </message>
     <message>

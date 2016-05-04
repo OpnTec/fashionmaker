@@ -1016,9 +1016,6 @@ void MainWindow::ClosedDialogGroup(int result)
     SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-        SCASSERT(scene != nullptr);
-
         DialogGroup *dialog = qobject_cast<DialogGroup*>(dialogTool);
         SCASSERT(dialog != nullptr);
         const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetGroup());

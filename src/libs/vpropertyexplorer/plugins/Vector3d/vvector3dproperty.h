@@ -61,7 +61,7 @@ public:
     virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
     //! Returns item flags
-    Qt::ItemFlags flags(int column = DPC_Name) const;
+    virtual Qt::ItemFlags flags(int column = DPC_Name) const Q_DECL_OVERRIDE;
 
     //! Returns the Vector3d
     virtual Vector3D getVector() const;

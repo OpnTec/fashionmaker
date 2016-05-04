@@ -43,7 +43,7 @@ public:
     virtual QVariant data (int column = DPC_Name, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
     //! Returns item flags
-    Qt::ItemFlags flags(int column = DPC_Name) const;
+    virtual Qt::ItemFlags flags(int column = DPC_Name) const Q_DECL_OVERRIDE;
 
     //! Returns an editor widget, or NULL if it doesn't supply one
     //! \param parent The widget to which the editor will be added as a child

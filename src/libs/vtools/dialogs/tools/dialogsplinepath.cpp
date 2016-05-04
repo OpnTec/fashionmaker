@@ -677,8 +677,8 @@ void DialogSplinePath::currentPointChanged(int index)
 
             if (not data->IsUnique(newPath.name()))
             {
-                newDuplicate = DNumber(newPath.name());
-                newPath.SetDuplicate(newDuplicate);
+                newDuplicate = static_cast<qint32>(DNumber(newPath.name()));
+                newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
             }
 
             ui->lineEditSplPathName->setText(newPath.name());

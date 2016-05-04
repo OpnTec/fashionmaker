@@ -483,8 +483,8 @@ void DialogSpline::PointNameChanged()
 
             if (not data->IsUnique(spline.name()))
             {
-                newDuplicate = DNumber(spline.name());
-                spline.SetDuplicate(newDuplicate);
+                newDuplicate = static_cast<qint32>(DNumber(spline.name()));
+                spline.SetDuplicate(static_cast<quint32>(newDuplicate));
             }
             ui->lineEditSplineName->setText(spline.name());
         }

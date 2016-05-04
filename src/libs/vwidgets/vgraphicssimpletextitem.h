@@ -65,7 +65,7 @@ signals:
     void         PointChoosed();
     void         PointSelected(bool selected);
 protected:
-    QVariant     itemChange ( GraphicsItemChange change, const QVariant &value );
+    virtual QVariant itemChange ( GraphicsItemChange change, const QVariant &value ) Q_DECL_OVERRIDE;
     virtual void hoverEnterEvent ( QGraphicsSceneHoverEvent *event ) Q_DECL_OVERRIDE;
     virtual void hoverLeaveEvent ( QGraphicsSceneHoverEvent *event ) Q_DECL_OVERRIDE;
     virtual void contextMenuEvent ( QGraphicsSceneContextMenuEvent *event ) Q_DECL_OVERRIDE;

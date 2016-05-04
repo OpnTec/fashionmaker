@@ -44,7 +44,6 @@ const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
  * @param typeCreation way we create this tool.
  * @param idTool id node.
  * @param qoParent QObject parent.
- * @param parent QGraphicsItem parent.
  */
 VNodeSpline::VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
                          const Source &typeCreation, const quint32 &idTool, QObject *qoParent)
