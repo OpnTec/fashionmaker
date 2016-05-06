@@ -34,6 +34,7 @@
 #include <QApplication>
 #include <QPrinter>
 #include <QSharedPointer>
+#include <QDataStream>
 
 #include "../ifc/ifcdef.h"
 

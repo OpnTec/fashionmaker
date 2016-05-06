@@ -170,7 +170,7 @@ VExceptionToolWasDeleted &VExceptionToolWasDeleted::operator=(const VExceptionTo
  * @brief raise method raise for exception
  */
 // cppcheck-suppress unusedFunction
-Q_NORETURN void VExceptionToolWasDeleted::VExceptionToolWasDeleted::raise() const
+Q_NORETURN void VExceptionToolWasDeleted::raise() const
 {
     throw *this;
 }
