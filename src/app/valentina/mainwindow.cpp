@@ -1957,6 +1957,8 @@ void  MainWindow::ArrowTool()
 
     ui->view->AllowRubberBand(true);
 
+    RestoreOverrideCursor(cursorArrowCloseHand);
+    RestoreOverrideCursor(cursorArrowOpenHand);
     QCursor cur(Qt::ArrowCursor);
     ui->view->setCursor(cur);
     helpLabel->setText("");
