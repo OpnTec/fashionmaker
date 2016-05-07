@@ -1,3 +1,6 @@
+# Version 0.4.5
+- [#435] Valentina doesn't change the cursor.
+
 # Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
 - Updated description measurements N06 and N07. Add new measurements A23 and J10.

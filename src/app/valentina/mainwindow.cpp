@@ -1758,6 +1758,11 @@ void  MainWindow::ArrowTool()
     ui->actionStopTool->setEnabled(false);
     currentTool = Tool::Arrow;
     emit EnableItemMove(true);
+
+    // Fix issue #435. https://bitbucket.org/dismine/valentina/issues/435/error-valentina-doesnt-change-the-cursor
+    RestoreOverrideCursor(cursorArrowCloseHand);
+    RestoreOverrideCursor(cursorArrowOpenHand);
+
     QCursor cur(Qt::ArrowCursor);
     ui->view->setCursor(cur);
     helpLabel->setText("");
