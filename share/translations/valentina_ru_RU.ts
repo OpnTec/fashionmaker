@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation>Система создания выроек</translation>
+        <translation>Система создания выкроек</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
@@ -271,11 +271,11 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы измерения обновлены и будут применены при следующем создании лекала</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
     </message>
 </context>
 <context>
@@ -346,7 +346,7 @@
     </message>
     <message>
         <source>Build revision:</source>
-        <translation>Резвизия:</translation>
+        <translation>Ревизия:</translation>
     </message>
     <message>
         <source>This program is part of Valentina project.</source>
@@ -1229,7 +1229,7 @@
     </message>
     <message>
         <source>You have to choose points in a clockwise direction!</source>
-        <translation>Выберите точки за чесовой стрелкой!</translation>
+        <translation>Выберите точки по часовой стрелке!</translation>
     </message>
     <message>
         <source>Bias X:</source>
@@ -1312,7 +1312,7 @@
     </message>
     <message>
         <source>Double click for add to formula</source>
-        <translation>Двойной щелчок для добавления у формулу</translation>
+        <translation>Двойной щелчок для добавления в формулу</translation>
     </message>
     <message>
         <source>Height</source>
@@ -1427,7 +1427,7 @@
     </message>
     <message>
         <source>Edit angle</source>
-        <translation>Редактрировать угол</translation>
+        <translation>Редактировать угол</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -1684,7 +1684,7 @@
     </message>
     <message>
         <source>The calculated value</source>
-        <translation>Рассчитаное значение</translation>
+        <translation>Рассчитанное значение</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -1708,7 +1708,7 @@
     </message>
     <message>
         <source>Tables of Variables</source>
-        <translation>Таблици переменных</translation>
+        <translation>Таблицы переменных</translation>
     </message>
     <message>
         <source>Lines angles</source>
@@ -1827,7 +1827,7 @@
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation>Несколько деталей остались не уложеными, но никто из них не подходит для листа</translation>
+        <translation>Несколько деталей остались неуложенными, но никто из них не подходит для листа</translation>
     </message>
     <message>
         <source>Create a Layout</source>
@@ -1835,7 +1835,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лутшей позиции для детали. Пожалуйста подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лучшей позиции для детали. Пожалуйста, подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
@@ -1862,7 +1862,7 @@
     </message>
     <message>
         <source>Rotate workpiece</source>
-        <translation>Поворачивать детали</translation>
+        <translation>Поворачивать деталь</translation>
     </message>
     <message>
         <source>Rotate by</source>
@@ -1886,7 +1886,7 @@
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
-        <translation>Три групы: большие, средние, малые</translation>
+        <translation>Три группы: большие, средние, малые</translation>
     </message>
     <message>
         <source>Two groups: big, small</source>
@@ -2014,7 +2014,7 @@
 Apply settings anyway?</source>
         <translation>Поля выходят за границы печати.
 
-Всеравно применить настройки?</translation>
+Все равно применить настройки?</translation>
     </message>
     <message>
         <source>
@@ -2028,15 +2028,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Layout options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры раскладки</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина сдвига/смещения:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Правило выбора очередной детали</translation>
     </message>
 </context>
 <context>
@@ -2459,7 +2459,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">Новое лекало</translation>
+        <translation>Новое лекало</translation>
     </message>
 </context>
 <context>
@@ -2696,7 +2696,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>No changes</source>
-        <translation>Нету изменений</translation>
+        <translation>Нет изменений</translation>
     </message>
     <message>
         <source>Cannot delete previously created node</source>
@@ -2764,7 +2764,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Немедленно применить</translation>
     </message>
 </context>
 <context>
@@ -3517,15 +3517,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Контрольная точка</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Угол</translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>Length ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Коэффициент длины</translation>
     </message>
 </context>
 <context>
@@ -3556,7 +3556,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>List of points</source>
-        <translation>Список точок</translation>
+        <translation>Список точек</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve</source>
@@ -3580,23 +3580,23 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Point</source>
-        <translation type="unfinished">Точка</translation>
+        <translation>Точка</translation>
     </message>
     <message>
         <source>First control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Первая контрольная точка</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Угол</translation>
+        <translation>Угол</translation>
     </message>
     <message>
         <source>Length ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Коэффициент длины</translation>
     </message>
     <message>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Вторая контрольная точка</translation>
     </message>
 </context>
 <context>
@@ -3840,7 +3840,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при расчете формулы. Вы можете попробовать отменить последнюю операцию или исправить неисправную формулу.</translation>
     </message>
 </context>
 <context>
@@ -4903,7 +4903,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщить об ошибке...</translation>
     </message>
 </context>
 <context>
@@ -5110,11 +5110,11 @@ Do you want to save your changes?</source>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к меркам уже относительный.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к меркам уже абсолютный.</translation>
     </message>
 </context>
 <context>
@@ -6528,15 +6528,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
-        <translation>Сохранить длину листа, если установлен (режим экспорта). Эта опция указывает программе использовать как можно больше ширины листа. Качество роскладки может быть хуже вовремя исползования этой опции.</translation>
+        <translation>Сохранить длину листа, если установлен (режим экспорта). Эта опция указывает программе использовать как можно больше ширины листа. Качество раскладки может быть хуже при использовании этой опции.</translation>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="vanished">Смещение в единицах роскладки (режим экспорта). Указывает как много точек вдоль ребра будет создано при создании роскладки.</translation>
+        <translation type="vanished">Смещение в единицах раскладки (режим экспорта). Указывает, как много точек вдоль ребра будет создано при создании раскладки.</translation>
     </message>
     <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
-        <translation>Ширина зазора ×2 в единицах роскладки (режим экспорта). Устанавливает дистанцию между деталями и деталью и краем листа.</translation>
+        <translation>Ширина зазора ×2 в единицах раскладки (режим экспорта). Устанавливает дистанцию между деталями и деталью и краем листа.</translation>
     </message>
     <message>
         <source>Sets layout groupping cases (export mode): %1.</source>
@@ -6548,15 +6548,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение/сдвиг в единицах роскладки (режим экспорта). Указывает как много точек вдоль ребра будет создано при создании роскладки.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина сдвига/смещения</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина сдвига/смещения должна быть использована вместе с единицами измерения смещения</translation>
     </message>
 </context>
 <context>
@@ -6606,7 +6606,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not load schema file.</source>
-        <translation type="vanished">Неудалось открыть файл схемы.</translation>
+        <translation type="vanished">Не удалось открыть файл схемы.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
@@ -6711,7 +6711,7 @@ Do you want to save your changes?</source>
     <name>VPattern</name>
     <message>
         <source>Error no unique id.</source>
-        <translation type="vanished">Ошибка не уникальный id.</translation>
+        <translation type="vanished">Ошибка, неуникальный id.</translation>
     </message>
     <message>
         <source>Error parsing file.</source>
@@ -6723,7 +6723,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error empty parameter.</source>
-        <translation>Помилка, пустий параметр.</translation>
+        <translation>Ошибка, пустой параметр.</translation>
     </message>
     <message>
         <source>Error wrong id.</source>
@@ -6855,7 +6855,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating true darts</source>
-        <translation>Ошибка создания или обновления выточки</translation>
+        <translation>Ошибка создания или обновления вытачки</translation>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
@@ -6890,18 +6890,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Ошибка востановления с резервного файла: %1.</translation>
+        <translation>Ошибка восстановления из резервного файла: %1.</translation>
     </message>
 </context>
 <context>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation>Не достаточно точок для создания кривой.</translation>
+        <translation>Недостаточно точок для создания кривой.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation>Этот сплайн не сувществует.</translation>
+        <translation>Этот сплайн не существует.</translation>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
@@ -8144,7 +8144,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Ошибка востановления с резервного файла: %1.</translation>
+        <translation>Ошибка восстановления из резервного файла: %1.</translation>
     </message>
 </context>
 <context>
@@ -8155,7 +8155,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error restoring backup file: %1.</source>
-        <translation>Ошибка востановления с резервного файла: %1.</translation>
+        <translation>Ошибка восстановления из резервного файла: %1.</translation>
     </message>
 </context>
 <context>
