@@ -31,6 +31,9 @@
     #pragma GCC diagnostic ignored "-Wattributes"
 #endif
 
+#ifdef Q_CC_MSVC
+    #include <ciso646>
+#endif /* Q_CC_MSVC */
 //---------------------------------------------------------------------------------------------------------------------
 inline QString NameRegExp()
 {
