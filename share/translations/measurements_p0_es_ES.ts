@@ -355,7 +355,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="325"/>
         <source>Height: Waist Side to Hip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Altura: Lado de la cintura a la cadera</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="326"/>
@@ -403,13 +403,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="363"/>
         <source>width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ancho_hombro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="365"/>
         <source>Width: Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ancho: Hombro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="366"/>
@@ -421,13 +421,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="370"/>
         <source>width_bust</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ancho_busto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="372"/>
         <source>Width: Bust</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ancho: Busto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="373"/>
@@ -439,13 +439,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="377"/>
         <source>width_waist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ancho_cintura</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="379"/>
         <source>Width: Waist</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ancho: Cintura</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="380"/>
@@ -457,37 +457,37 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="384"/>
         <source>width_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ancho_caderas</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="386"/>
         <source>Width: Hip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ancho: Cadera</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="387"/>
         <source>Horizontal distance from Hip Side to Hip Side.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Distancia horizontal de un lado de la cadera al otro lado de la cadera</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="391"/>
         <source>width_abdomen_to_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ancho_abdomen_a_cadera</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="393"/>
         <source>Width: Abdomen to Hip</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ancho: Abdomen a cadera</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="394"/>
         <source>Horizontal distance from the greatest abdomen prominence to the greatest hip prominence.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Distancia horizontal de la mayor prominencia del abdomen a la mayor prominencia de la cadera.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="410"/>
@@ -571,7 +571,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="452"/>
         <source>Hand: Length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mano: Longitud</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="453"/>
@@ -3514,18 +3514,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1856"/>
-        <source>Vertical distance from Waist Back to Crotch level. (&apos;Height: Waist Back&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
-        <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1863"/>
-        <source>Vertical Distance from Waist Front to Crotch level. (&apos;Height: Waist Front&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
-        <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1870"/>
         <source>Vertical distance from Waist side down to Crotch level. Use formula (Height: Waist side - Leg: Crotch to floor).</source>
         <comment>Full measurement description.</comment>
@@ -3823,6 +3811,18 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1839"/>
         <source>Rise length, side, sitting</source>
         <comment>Full measurement name.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1856"/>
+        <source>Vertical distance from Waist Back to Crotch level. (&apos;Height: Waist Back&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1863"/>
+        <source>Vertical Distance from Waist Front to Crotch level. (&apos;Height: Waist Front&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
+        <comment>Full measurement description.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>

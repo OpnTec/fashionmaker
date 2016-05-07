@@ -5000,7 +5000,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Print tiled PDF</source>
-        <translation>Print tiled PDF</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -5209,7 +5209,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Preview tiled PDF</source>
-        <translation>Preview tiled PDF</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>

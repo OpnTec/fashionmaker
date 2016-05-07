@@ -12,7 +12,7 @@
     <name>AddGroup</name>
     <message>
         <source>add group</source>
-        <translation type="unfinished"></translation>
+        <translation>добавить группу</translation>
     </message>
 </context>
 <context>
@@ -278,11 +278,11 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
+        <translation>Единицы измерения обновлены и будут применены при следующем создании лекала</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>После каждого падения Valentina собирает информацию, которая может помочь нам в исправлении ошибки. Мы не собираем персональную информацию пользователей. Узнать больше о &lt;a href=https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&gt;информации&lt;/a&gt;, которую мы собираем.</translation>
     </message>
 </context>
 <context>
@@ -890,7 +890,7 @@
     </message>
     <message>
         <source>List of points</source>
-        <translation type="unfinished">Список точок</translation>
+        <translation>Список точек</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2183,15 +2183,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Layout options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры раскладки</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина сдвига/смещения:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Правило выбора очередной детали</translation>
     </message>
     <message>
         <source>Enabling for sheets that have big height will speed up creating. </source>
@@ -2634,7 +2634,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">Новое лекало</translation>
+        <translation>Новое лекало</translation>
     </message>
 </context>
 <context>
@@ -2991,7 +2991,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Немедленно применить</translation>
     </message>
 </context>
 <context>
@@ -3787,7 +3787,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Контрольная точка</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -3906,7 +3906,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>First control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Первая контрольная точка</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -3914,7 +3914,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Вторая контрольная точка</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -4230,7 +4230,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при расчете формулы. Вы можете попробовать отменить последнюю операцию или исправить неисправную формулу.</translation>
     </message>
 </context>
 <context>
@@ -4999,7 +4999,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Print tiled PDF</source>
-        <translation>Печать плиткой PDF</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -5209,7 +5209,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preview tiled PDF</source>
-        <translation>Предварительный просмотр плиткой PDF</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>
@@ -5293,7 +5293,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщить об ошибке...</translation>
     </message>
     <message>
         <source>Point intersection curves</source>
@@ -5548,11 +5548,11 @@ Do you want to save your changes?</source>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к меркам уже относительный.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к меркам уже абсолютный.</translation>
     </message>
 </context>
 <context>
@@ -7005,15 +7005,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение/сдвиг в единицах роскладки (режим экспорта). Указывает как много точек вдоль ребра будет создано при создании роскладки.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина сдвига/смещения</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина сдвига/смещения должна быть использована вместе с единицами измерения смещения</translation>
     </message>
 </context>
 <context>
@@ -7043,11 +7043,11 @@ Do you want to save your changes?</source>
     <name>VCubicBezierPath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation type="unfinished">Не достаточно точок для создания кривой.</translation>
+        <translation>Недостаточно точок для создания кривой.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation type="unfinished">Этот сплайн не сувществует.</translation>
+        <translation>Этот сплайн не существует.</translation>
     </message>
 </context>
 <context>
