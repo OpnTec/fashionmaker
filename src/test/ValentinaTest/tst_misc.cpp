@@ -28,6 +28,7 @@
 
 #include "tst_misc.h"
 #include "../vmisc/def.h"
+#include "../vgeometry/vgobject.h"
 
 #include <QtTest>
 
@@ -152,4 +153,16 @@ void TST_Misc::TestCLocale()
     const QString localized = QString().number(number);
 
     QCOMPARE(localized, expected);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_Misc::TestIssue485()
+{
+    const qreal radius = 5.6692913385826778;
+    const QPointF cPoint(407.9527559055118, 39.999874015748034);
+    const QPointF sPoint(407.9527559055118, 39.999874015748034);
+
+    QPointF p1, p2;
+    const int res = VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), sPoint-cPoint), p1, p2);
+    QCOMPARE(res, 0);
 }
