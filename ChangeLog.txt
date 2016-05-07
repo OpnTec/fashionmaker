@@ -1,5 +1,7 @@
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.
+- [#473] Tape 'Preferences' cause loss of focus.
+- [#485] Error when drawing a curved path.
 
 # Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
