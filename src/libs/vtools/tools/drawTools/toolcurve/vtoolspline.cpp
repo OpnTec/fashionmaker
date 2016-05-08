@@ -62,6 +62,7 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
 
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setPath(ToolPath());
 
     const auto spl = VAbstractTool::data.GeometricObject<VSpline>(id);

@@ -169,7 +169,7 @@ QVariant VAbstractSpline::itemChange(QGraphicsItem::GraphicsItemChange change, c
         emit ChangedToolSelection(value.toBool(), id, id);
     }
 
-    return QGraphicsItem::itemChange(change, value);
+    return QGraphicsPathItem::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -195,7 +195,7 @@ void VAbstractSpline::keyReleaseEvent(QKeyEvent *event)
         default:
             break;
     }
-    QGraphicsItem::keyReleaseEvent ( event );
+    QGraphicsPathItem::keyReleaseEvent ( event );
 }
 
 //---------------------------------------------------------------------------------------------------------------------

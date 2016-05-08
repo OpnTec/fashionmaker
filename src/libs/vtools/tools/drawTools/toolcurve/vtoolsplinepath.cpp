@@ -63,6 +63,7 @@ VToolSplinePath::VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint3
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(id);
     for (qint32 i = 1; i<=splPath->CountSubSpl(); ++i)

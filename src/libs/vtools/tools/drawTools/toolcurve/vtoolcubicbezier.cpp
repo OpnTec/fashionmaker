@@ -44,6 +44,7 @@ VToolCubicBezier::VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quin
 
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setPath(ToolPath());
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     ToolCreation(typeCreation);
 }

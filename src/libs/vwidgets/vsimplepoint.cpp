@@ -35,6 +35,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QStyleOptionGraphicsItem>
 #include <QPen>
+#include <QKeyEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
@@ -52,6 +53,7 @@ VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternU
     this->setBrush(QBrush(Qt::NoBrush));
     SetPen(this, currentColor, WidthHairLine(patternUnit));
     this->setAcceptHoverEvents(true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -227,6 +229,20 @@ void VSimplePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     SetPen(this, currentColor, WidthHairLine(patternUnit));
     QGraphicsEllipseItem::hoverLeaveEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            emit Delete();
+            return; //Leave this method immediately after call!!!
+        default:
+            break;
+    }
+    QGraphicsEllipseItem::keyReleaseEvent ( event );
 }
 
 //---------------------------------------------------------------------------------------------------------------------

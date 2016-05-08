@@ -111,6 +111,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     seamAllowance->setBrush(QBrush(Qt::FDiagPattern));
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     connect(scene, &VMainGraphicsScene::EnableToolMove, this, &VToolDetail::EnableToolMove);
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
@@ -428,7 +429,7 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
         }
     }
 
-    return QGraphicsItem::itemChange(change, value);
+    return VNoBrushScalePathItem::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -454,7 +455,7 @@ void VToolDetail::keyReleaseEvent(QKeyEvent *event)
         default:
             break;
     }
-    QGraphicsItem::keyReleaseEvent ( event );
+    VNoBrushScalePathItem::keyReleaseEvent ( event );
 }
 
 //---------------------------------------------------------------------------------------------------------------------
