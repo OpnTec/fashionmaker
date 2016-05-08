@@ -1531,6 +1531,7 @@ void MainWindow::OnWindowFocusChanged(QWidget *old, QWidget *now)
     {// focus IN
         if (mChanges && not mChangesAsked)
         {
+            mChangesAsked = true;
             const auto answer = QMessageBox::question(this, tr("Measurements"),
                                                   tr("Measurements was changed. Do you want to sync measurements now?"),
                                                       QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
@@ -1538,7 +1539,6 @@ void MainWindow::OnWindowFocusChanged(QWidget *old, QWidget *now)
             {
                 SyncMeasurements();
             }
-            mChangesAsked = true;
         }
     }
 
