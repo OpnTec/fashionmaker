@@ -61,6 +61,7 @@
 #include "dialogs/tools/dialogpointfromarcandtangent.h"
 #include "dialogs/tools/dialogtruedarts.h"
 #include "dialogs/tools/dialoggroup.h"
+#include "dialogs/tools/dialogrotation.h"
 
 #include "dialogs/support/dialogeditwrongformula.h"
 #include "dialogs/support/dialogundo.h"

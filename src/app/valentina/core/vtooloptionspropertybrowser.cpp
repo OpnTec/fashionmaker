@@ -74,7 +74,7 @@ void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
 void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was used in switch.");
 
     switch (item->type())
     {
@@ -177,6 +177,9 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VToolTrueDarts::Type:
             ShowOptionsToolTrueDarts(item);
             break;
+        case VToolRotation::Type:
+            ShowOptionsToolRotation(item);
+            break;
         default:
             break;
     }
@@ -191,7 +194,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was used in switch.");
 
     switch (currentItem->type())
     {
@@ -288,6 +291,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
         case VToolTrueDarts::Type:
             UpdateOptionsToolTrueDarts();
             break;
+        case VToolRotation::Type:
+            UpdateOptionsToolRotation();
+            break;
         default:
             break;
     }
@@ -323,7 +329,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was used in switch.");
 
     switch (currentItem->type())
     {
@@ -413,6 +419,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
             break;
         case VToolTrueDarts::Type:
             ChangeDataToolTrueDarts(prop);
+            break;
+        case VToolRotation::Type:
+            ChangeDataToolRotation(prop);
             break;
         default:
             break;
@@ -1526,6 +1535,12 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCurveIntersectAxis(VProperty *pr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolRotation(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
     VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(item);
@@ -1905,6 +1920,12 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
     AddPropertyLineType(i, tr("Line type"), VAbstractTool::LineStylesPics());
     AddPropertyLineColor(i, tr("Line color"), VAbstractTool::ColorsList(), AttrLineColor);
     AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolRotation(QGraphicsItem *item)
+{
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2363,6 +2384,12 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
     idToProperty[AttrAngle]->setValue(valueAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolRotation()
+{
+
 }
 
 //---------------------------------------------------------------------------------------------------------------------

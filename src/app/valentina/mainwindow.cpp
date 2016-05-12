@@ -613,6 +613,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         SCASSERT(scene != nullptr);
 
         connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
+        connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool, &DialogTool::SelectedObject);
         connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(dialogTool, &DialogTool::DialogApplied, this, applyDialogSlot);
         connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
@@ -1004,10 +1005,20 @@ void MainWindow::ClosedDialogUnionDetails(int result)
 void MainWindow::ToolGroup(bool checked)
 {
     ToolSelectGroupObjects();
-    currentScene->clearSelection();
     SetToolButton<DialogGroup>(checked, Tool::Group, ":/cursor/group_plus_cursor.png",
                                tr("Select one or more objects, <b>Enter</b> - finish creation"),
                                &MainWindow::ClosedDialogGroup);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolRotation(bool checked)
+{
+    ToolSelectGroupObjects();
+    SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation,
+                                           ":/cursor/rotation_cursor.png",
+                                           tr("Select one or more objects, <b>Enter</b> - confirm selection"),
+                                           &MainWindow::ClosedDialogWithApply<VToolRotation>,
+                                           &MainWindow::ApplyDialog<VToolRotation>);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1740,6 +1751,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonArcWithLength, &QToolButton::clicked, this, &MainWindow::ToolArcWithLength);
     connect(ui->toolButtonTrueDarts, &QToolButton::clicked, this, &MainWindow::ToolTrueDarts);
     connect(ui->toolButtonGroup, &QToolButton::clicked, this, &MainWindow::ToolGroup);
+    connect(ui->toolButtonRotation, &QToolButton::clicked, this, &MainWindow::ToolRotation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1780,12 +1792,16 @@ void MainWindow::mouseMove(const QPointF &scenePos)
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
     dialogTool = nullptr;
     qCDebug(vMainWindow, "Dialog closed.");
+
+    currentScene->setFocus(Qt::OtherFocusReason);
+    currentScene->clearSelection();
+
     switch ( currentTool )
     {
         case Tool::Arrow:
@@ -1907,9 +1923,10 @@ void MainWindow::CancelTool()
         case Tool::Group:
             ui->toolButtonGroup->setChecked(false);
             break;
+        case Tool::Rotation:
+            ui->toolButtonRotation->setChecked(false);
+            break;
     }
-    currentScene->setFocus(Qt::OtherFocusReason);
-    currentScene->clearSelection();
 
     // Crash: using CRTL+Z while using line tool.
     // related bug report:
@@ -3110,6 +3127,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonArcWithLength->setEnabled(drawTools);
     ui->toolButtonTrueDarts->setEnabled(drawTools);
     ui->toolButtonGroup->setEnabled(drawTools);
+    ui->toolButtonRotation->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -3380,7 +3398,7 @@ void MainWindow::CreateMenus()
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3530,6 +3548,10 @@ void MainWindow::LastUsedTool()
         case Tool::Group:
             ui->toolButtonGroup->setChecked(true);
             ToolGroup(true);
+            break;
+        case Tool::Rotation:
+            ui->toolButtonRotation->setChecked(true);
+            ToolRotation(true);
             break;
     }
 }
@@ -4715,12 +4737,12 @@ void MainWindow::ToolSelectAllDrawObjects() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ToolSelectGroupObjects() const
+void MainWindow::ToolSelectOperationObjects() const
 {
     // Only true for rubber band selection
     emit EnableLabelSelection(true);
     emit EnablePointSelection(true);
-    emit EnableLineSelection(true);
+    emit EnableLineSelection(false);
     emit EnableArcSelection(true);
     emit EnableSplineSelection(true);
     emit EnableSplinePathSelection(true);
@@ -4728,7 +4750,7 @@ void MainWindow::ToolSelectGroupObjects() const
     // Hovering
     emit EnableLabelHover(true);
     emit EnablePointHover(true);
-    emit EnableLineHover(true);
+    emit EnableLineHover(false);
     emit EnableArcHover(true);
     emit EnableSplineHover(true);
     emit EnableSplinePathHover(true);
@@ -4736,6 +4758,17 @@ void MainWindow::ToolSelectGroupObjects() const
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolSelectGroupObjects() const
+{
+    ToolSelectOperationObjects();
+    // Only true for rubber band selection
+    emit EnableLineSelection(true);
+
+    // Hovering
+    emit EnableLineHover(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -122,6 +122,7 @@ public slots:
     void               ToolPointOfIntersection(bool checked);
     void               ToolUnionDetails(bool checked);
     void               ToolGroup(bool checked);
+    void               ToolRotation(bool checked);
     void               ToolCutArc(bool checked);
     void               ToolLineIntersectAxis(bool checked);
     void               ToolCurveIntersectAxis(bool checked);
@@ -372,6 +373,7 @@ private:
     void ToolSelectPointArc() const;
     void ToolSelectCurve() const;
     void ToolSelectAllDrawObjects() const;
+    void ToolSelectOperationObjects() const;
     void ToolSelectGroupObjects() const;
     void ToolSelectDetail() const;
 };

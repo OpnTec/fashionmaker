@@ -144,6 +144,7 @@ private:
     void ChangeDataToolTriangle(VPE::VProperty *property);
     void ChangeDataToolLineIntersectAxis(VPE::VProperty *property);
     void ChangeDataToolCurveIntersectAxis(VPE::VProperty *property);
+    void ChangeDataToolRotation(VPE::VProperty *property);
 
     void ShowOptionsToolSinglePoint(QGraphicsItem *item);
     void ShowOptionsToolEndLine(QGraphicsItem *item);
@@ -174,6 +175,7 @@ private:
     void ShowOptionsToolTriangle(QGraphicsItem *item);
     void ShowOptionsToolLineIntersectAxis(QGraphicsItem *item);
     void ShowOptionsToolCurveIntersectAxis(QGraphicsItem *item);
+    void ShowOptionsToolRotation(QGraphicsItem *item);
 
     void UpdateOptionsToolSinglePoint();
     void UpdateOptionsToolEndLine();
@@ -204,6 +206,7 @@ private:
     void UpdateOptionsToolTriangle();
     void UpdateOptionsToolLineIntersectAxis();
     void UpdateOptionsToolCurveIntersectAxis();
+    void UpdateOptionsToolRotation();
 };
 
 #endif // VTOOLOPTIONSPROPERTYBROWSER_H

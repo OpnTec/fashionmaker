@@ -31,7 +31,6 @@
 
 #include <QDebug>
 
-const QString VAbstractNode::AttrIdObject = QStringLiteral("idObject");
 const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
 
 //---------------------------------------------------------------------------------------------------------------------

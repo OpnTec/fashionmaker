@@ -37,7 +37,8 @@ HEADERS += \
     $$PWD/tools/dialogpointofintersectioncurves.h \
     $$PWD/tools/dialogcubicbezier.h \
     $$PWD/tools/dialogcubicbezierpath.h \
-    $$PWD/tools/dialoggroup.h
+    $$PWD/tools/dialoggroup.h \
+    $$PWD/tools/dialogrotation.h
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -74,7 +75,8 @@ SOURCES += \
     $$PWD/tools/dialogpointofintersectioncurves.cpp \
     $$PWD/tools/dialogcubicbezier.cpp \
     $$PWD/tools/dialogcubicbezierpath.cpp \
-    $$PWD/tools/dialoggroup.cpp
+    $$PWD/tools/dialoggroup.cpp \
+    $$PWD/tools/dialogrotation.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \
@@ -110,4 +112,5 @@ FORMS += \
     $$PWD/tools/dialogpointofintersectioncurves.ui \
     $$PWD/tools/dialogcubicbezier.ui \
     $$PWD/tools/dialogcubicbezierpath.ui \
-    $$PWD/tools/dialoggroup.ui
+    $$PWD/tools/dialoggroup.ui \
+    $$PWD/tools/dialogrotation.ui

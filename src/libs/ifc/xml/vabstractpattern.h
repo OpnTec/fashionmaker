@@ -210,7 +210,7 @@ public:
 
 signals:
     /**
-     * @brief ChangedActivDraw change active pattern peace.
+     * @brief ChangedActivPP change active pattern peace.
      * @param newName new pattern peace name.
      */
     void           ChangedActivPP(const QString &newName);

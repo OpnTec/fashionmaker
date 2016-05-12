@@ -840,7 +840,7 @@ void VPattern::ParseLineElement(VMainGraphicsScene *scene, const QDomElement &do
 void VPattern::SplinesCommonAttributes(const QDomElement &domElement, quint32 &id, quint32 &idObject, quint32 &idTool)
 {
     ToolsCommonAttributes(domElement, id);
-    idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
+    idObject = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
     idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
 }
 
@@ -1279,7 +1279,7 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         qreal my = 0;
 
         PointsCommonAttributes(domElement, id, mx, my);
-        const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
+        const quint32 idObject = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
         QSharedPointer<VPointF> point;
         try
@@ -2330,7 +2330,7 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         quint32 id = 0;
 
         ToolsCommonAttributes(domElement, id);
-        const quint32 idObject = GetParametrUInt(domElement, VAbstractNode::AttrIdObject, NULL_ID_STR);
+        const quint32 idObject = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
         const quint32 idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
         VArc *arc = nullptr;
         try
@@ -3130,7 +3130,7 @@ void VPattern::ToolsCommonAttributes(const QDomElement &domElement, quint32 &id)
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was used.");
 
     QRectF rec;
 
@@ -3236,6 +3236,9 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                     break;
                 case Tool::TrueDarts:
                     rec = ToolBoundingRect<VToolTrueDarts>(rec, tool.getId());
+                    break;
+                case Tool::Rotation:
+                    rec = ToolBoundingRect<VToolRotation>(rec, tool.getId());
                     break;
                 //These tools are not accesseble in Draw mode, but still 'history' contains them.
                 case Tool::Detail:

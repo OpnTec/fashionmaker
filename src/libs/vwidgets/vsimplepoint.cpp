@@ -39,8 +39,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VSimplePoint::VSimplePoint(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
     :VAbstractSimple(id, currentColor, patternUnit, factor, parent), QGraphicsEllipseItem(),
-      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)), namePoint(nullptr), lineName(nullptr),
-      selectionType(SelectionType::ByMouseRelease)
+      radius(ToPixel(DefPointRadius/*mm*/, Unit::Mm)), namePoint(nullptr), lineName(nullptr)
 {
     namePoint = new VGraphicsSimpleTextItem(this);
     connect(namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this, &VSimplePoint::ContextMenu);
@@ -59,11 +58,15 @@ VSimplePoint::~VSimplePoint()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::ChangedActivDraw(const bool &flag)
+void VSimplePoint::SetCurrentColor(const QColor &value)
 {
-    enabled = flag;
-    setEnabled(enabled);
-    SetPen(this, currentColor, WidthHairLine(patternUnit));
+    SetSimpleCurrentColor(this, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::ChangedActivDraw(bool flag)
+{
+    SimpleChangedActivDraw(this, flag);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,7 +153,7 @@ void VSimplePoint::AllowLabelSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::ToolSelectionType(const SelectionType &type)
 {
-    selectionType = type;
+    VAbstractSimple::ToolSelectionType(type);
     namePoint->LabelSelectionType(type);
 }
 
@@ -175,13 +178,7 @@ void VSimplePoint::PointSelected(bool selected)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::ChangedPosition(const QPointF &pos)
 {
-    emit NameChangedPosition(pos);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::ContextMenu(QGraphicsSceneContextMenuEvent *event)
-{
-    emit ShowContextMenu(event);
+    emit NameChangedPosition(pos, id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -241,18 +238,4 @@ QVariant VSimplePoint::itemChange(QGraphicsItem::GraphicsItemChange change, cons
     }
 
     return QGraphicsEllipseItem::itemChange(change, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-QColor VSimplePoint::GetCurrentColor() const
-{
-    return currentColor;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSimplePoint::SetCurrentColor(const QColor &value)
-{
-    currentColor = value;
-    SetPen(this, CorrectColor(currentColor), pen().widthF());
 }

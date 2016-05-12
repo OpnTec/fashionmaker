@@ -102,6 +102,7 @@ enum class Tool : ToolVisHolderType
     TrueDarts,
     UnionDetails,
     Group,
+    Rotation,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
@@ -110,6 +111,7 @@ enum class Vis : ToolVisHolderType
     ControlPointSpline = static_cast<ToolVisHolderType>(Tool::LAST_ONE_DO_NOT_USE),
     GraphicsSimpleTextItem,
     SimplePoint,
+    SimpleCurve,
     Line,
     Path,
     ToolAlongLine,
@@ -139,7 +141,8 @@ enum class Vis : ToolVisHolderType
     ToolCutSplinePath,
     ToolLineIntersectAxis,
     ToolCurveIntersectAxis,
-    ToolTrueDarts
+    ToolTrueDarts,
+    ToolRotation
 };
 
 enum class VarType : char { Measurement, Increment, LineLength, CurveLength, LineAngle, CurveAngle, ArcRadius,
