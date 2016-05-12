@@ -33,7 +33,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../visualization/visualization.h"
+#include "visualization/visualization.h"
 
 class QDomElement;
 class QLineF;

@@ -5000,8 +5000,8 @@ Vuoi salvare i cambiamenti?</translation>
         <translation>Stampa</translation>
     </message>
     <message>
-        <source>Print tiled</source>
-        <translation>Stampa porzionato</translation>
+        <source>Print tiled PDF</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -5209,8 +5209,8 @@ Vuoi salvare i cambiamenti?</translation>
         <translation>Stampa un layout originale</translation>
     </message>
     <message>
-        <source>Print preview tiled</source>
-        <translation>Anteprima di stampa piastrellata</translation>
+        <source>Preview tiled PDF</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>

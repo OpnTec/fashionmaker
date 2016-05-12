@@ -139,7 +139,7 @@ VArc::~VArc()
  */
 qreal VArc::GetLength() const
 {
-    qreal length = (M_PI * d->radius)/180 * AngleArc();
+    qreal length = d->radius * qDegreesToRadians(AngleArc());
     if (IsFlipped())
     {
         length *= -1;
@@ -219,7 +219,7 @@ QVector<QPointF> VArc::GetPoints() const
 
     for (int i = 0; i < sectionAngle.size(); ++i)
     {
-        const qreal lDistance = GetRadius() * 4.0/3.0 * qTan(M_PI/180.0 * sectionAngle.at(i) * 0.25);
+        const qreal lDistance = GetRadius() * 4.0/3.0 * qTan(qDegreesToRadians(sectionAngle.at(i)) * 0.25);
 
         const QPointF center = GetCenter().toQPointF();
 
@@ -284,7 +284,8 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
         len = length;
     }
 
-    qreal n = (len*180)/(M_PI*d->radius); // n - is angle in degrees
+    qreal n = qRadiansToDegrees(len/d->radius); // n - is angle in degrees
+
     QLineF line(GetCenter().toQPointF(), GetP1());
     line.setAngle(line.angle()+n);
 
@@ -333,7 +334,7 @@ void VArc::FindF2(qreal length)
         length = MaxLength();
     }
 
-    qreal arcAngle = (qAbs(length)*180)/(M_PI*d->radius);
+    qreal arcAngle = qAbs(qRadiansToDegrees(length/d->radius));
 
     if (IsFlipped())
     {

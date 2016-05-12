@@ -19,8 +19,15 @@
 - New icon for VAL file. Updated Tape logo. Updated ico for standard measurements.
 - [#325] Check pattern for inverse compatibility.
 - [#385] Add 'Open Recent' option in Tape.exe, 'File' dropdown menu.
+- [#471] Add a 'Show/Hide' button for measurement diagram in Tape.
+- [#478] Rename 'Print preview tiled' to 'Preview Tiled PDF'.
 
-# Version 0.4.4
+# Version 0.4.5
+- [#435] Valentina doesn't change the cursor.
+- [#473] Tape 'Preferences' cause loss of focus.
+- [#485] Error when drawing a curved path.
+
+# Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
 - Updated description measurements N06 and N07. Add new measurements A23 and J10.
 - Fixed GUI issue. After full parse some widgets was incorrectly reseted.

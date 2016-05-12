@@ -31,6 +31,7 @@
 
 #include <QPainterPath>
 #include <QDebug>
+#include <QtCore/qmath.h>
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezier::VAbstractCubicBezier(const GOType &type, const quint32 &idObject, const Draw &mode)

@@ -84,7 +84,7 @@ private slots:
     void dataSubmitted(VProperty* property);
 
 protected:
-    void showEvent(QShowEvent* event);
+    virtual void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
 
     //! Rebuilds the widegt only if it is visible
     void updatePropertyList();

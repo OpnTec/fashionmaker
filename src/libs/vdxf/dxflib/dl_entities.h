@@ -844,6 +844,19 @@ struct DXFLIB_EXPORT DL_TextData
           angle(angle)
     {}
 
+    DL_TextData(const DL_TextData &d)
+        : ipx(d.ipx), ipy(d.ipy), ipz(d.ipz),
+          apx(d.apx), apy(d.apy), apz(d.apz),
+          height(d.height), xScaleFactor(d.xScaleFactor),
+          textGenerationFlags(d.textGenerationFlags),
+          hJustification(d.hJustification),
+          vJustification(d.vJustification),
+          text(d.text),
+          style(d.style),
+          angle(d.angle)
+    {
+    }
+
     virtual ~DL_TextData()
     {}
 

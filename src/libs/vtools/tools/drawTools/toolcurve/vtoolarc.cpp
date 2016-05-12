@@ -58,6 +58,7 @@ VToolArc::VToolArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QS
 
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     ToolCreation(typeCreation);
 }

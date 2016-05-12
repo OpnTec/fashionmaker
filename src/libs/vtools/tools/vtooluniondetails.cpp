@@ -90,7 +90,6 @@ VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, co
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddToNewDetail create united detail adding one node per time.
- * @param tool tool that make union.
  * @param doc dom document container.
  * @param data container with variables.
  * @param newDetail united detail.
@@ -278,7 +277,6 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief UpdatePoints update data for united details.
- * @param idDetail id united detail.
  * @param data container with variables.
  * @param det detail what we union.
  * @param i index node in detail.

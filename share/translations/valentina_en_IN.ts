@@ -4999,8 +4999,8 @@ Do you want to save your changes?</translation>
         <translation>Print</translation>
     </message>
     <message>
-        <source>Print tiled</source>
-        <translation>Print tiled</translation>
+        <source>Print tiled PDF</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -5208,8 +5208,8 @@ Do you want to save your changes?</translation>
         <translation>Print an original layout</translation>
     </message>
     <message>
-        <source>Print preview tiled</source>
-        <translation>Print preview tiled</translation>
+        <source>Preview tiled PDF</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>

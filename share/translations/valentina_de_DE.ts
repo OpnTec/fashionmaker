@@ -12,7 +12,7 @@
     <name>AddGroup</name>
     <message>
         <source>add group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppe hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -289,7 +289,7 @@
     <name>DelGroup</name>
     <message>
         <source>delete group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppe löschen</translation>
     </message>
 </context>
 <context>
@@ -1570,23 +1570,23 @@
     <name>DialogGroup</name>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppe</translation>
     </message>
     <message>
         <source>Group name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppenname:</translation>
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation type="unfinished">Eindeutiger Name des Schnittteils</translation>
+        <translation>Eindeutiger Name des Schnittteils</translation>
     </message>
     <message>
         <source>Choose group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppennamen auswählen</translation>
     </message>
     <message>
         <source>New group</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Gruppe</translation>
     </message>
 </context>
 <context>
@@ -2812,47 +2812,47 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Call context menu for edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontextmenü zum Bearbeiten aufrufen</translation>
     </message>
     <message>
         <source>No image</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Bild</translation>
     </message>
     <message>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild löschen</translation>
     </message>
     <message>
         <source>Change image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild ändern</translation>
     </message>
     <message>
         <source>Save image to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild als Datei speichern</translation>
     </message>
     <message>
         <source>Show image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild anzeigen</translation>
     </message>
     <message>
         <source>Image for pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild für Schnittmuster</translation>
     </message>
     <message>
         <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilder (*.png *.jpg *.jpeg *.bmp)</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilder</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei speichern</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished">ohne Titel</translation>
+        <translation>unbenannt</translation>
     </message>
 </context>
 <context>
@@ -4482,23 +4482,23 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Toolbar files</source>
-        <translation>Toolbar Datei</translation>
+        <translation>Symbolleiste Datei</translation>
     </message>
     <message>
         <source>ToolBar modes</source>
-        <translation>Toolbar Modus</translation>
+        <translation>Symbolleiste Modus</translation>
     </message>
     <message>
         <source>Toolbar pattern</source>
-        <translation>ToolbarSchnittmuster</translation>
+        <translation>Symbolleiste Schnittmuster</translation>
     </message>
     <message>
         <source>Toolbar options</source>
-        <translation>Toolbar Optionen</translation>
+        <translation>Symbolleiste Optionen</translation>
     </message>
     <message>
         <source>Toolbar tools</source>
-        <translation>Toolbar Werkzeuge</translation>
+        <translation>Symbolleiste Werkzeuge</translation>
     </message>
     <message>
         <source>Tool options</source>
@@ -4916,7 +4916,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>toolBar</source>
-        <translation type="vanished">toolBar</translation>
+        <translation type="vanished">Symbolleiste</translation>
     </message>
     <message>
         <source>Last Tool</source>
@@ -4960,11 +4960,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Point of intersection arcs</source>
-        <translation>Schnittpunkt Bögen </translation>
+        <translation>Schnittpunkt der Bögen </translation>
     </message>
     <message>
         <source>Point of intersection circles</source>
-        <translation>Schnittpunkt Kreise</translation>
+        <translation>Schnittpunkt der Kreise</translation>
     </message>
     <message>
         <source>Point from circle and tangent</source>
@@ -5007,8 +5007,8 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Drucken</translation>
     </message>
     <message>
-        <source>Print tiled</source>
-        <translation>Gekachelt drucken</translation>
+        <source>Print tiled PDF</source>
+        <translation>Kachelblätter als PDF drucken</translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -5216,8 +5216,8 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Originales Layout drucken</translation>
     </message>
     <message>
-        <source>Print preview tiled</source>
-        <translation>Druckvorschau gekachelt</translation>
+        <source>Preview tiled PDF</source>
+        <translation>Vorschau der PDF Kachelblätter</translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>
@@ -5333,23 +5333,23 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Toolbar pointer</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbolleisten-Zeiger</translation>
     </message>
     <message>
         <source>Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbeitsabläufe</translation>
     </message>
     <message>
         <source>Create new group</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Gruppe erstellen</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppen</translation>
     </message>
     <message>
         <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein oder mehr Objekte auswählen, &lt;b&gt;Enter&lt;/b&gt; - Erstellen abschließen</translation>
     </message>
 </context>
 <context>
@@ -6647,11 +6647,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating group</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Gruppe&quot;</translation>
     </message>
     <message>
         <source>New group</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Gruppe</translation>
     </message>
 </context>
 <context>
@@ -6780,7 +6780,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save length of the sheet if set. (export mode).</source>
-        <translation type="vanished">Speichern der Länge des Blattes, wenn gesetzt. (Export-Modus).</translation>
+        <translation type="vanished">Speichern der Länge des Blattes, falls diese festgelegt ist. (Export-Modus).</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
@@ -6792,7 +6792,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift layout length measured in layout units (export mode).</source>
-        <translation type="vanished">Verschieben der gemessenen Layout-Längen in Layout-Einheiten ( Export-Modus).</translation>
+        <translation type="vanished">Verschieben der gemessenen Layout-Längen in Layout-Einheiten (Export-Modus).</translation>
     </message>
     <message>
         <source>Shift length</source>
@@ -7039,11 +7039,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number of free id exhausted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der freien id&apos;s aufgebraucht.</translation>
     </message>
     <message>
         <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurve vom Typ &apos;%1&apos; kann nicht erstellt werden</translation>
     </message>
 </context>
 <context>
@@ -8689,67 +8689,67 @@ Do you want to save your changes?</source>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Linie_</translation>
+        <translation>Linie_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">WinkelLinie_</translation>
+        <translation>WinkelLinie_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Kreisbogen_</translation>
+        <translation>Kreisbogen_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Spl_</translation>
+        <translation>Spl_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished">SplPath</translation>
+        <translation>SplPath</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">RadiusBogen_</translation>
+        <translation>RadiusBogen_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Winkel1Bogen_</translation>
+        <translation>Winkel1Bogen_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Winkel2Bogen_</translation>
+        <translation>Winkel2Bogen_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Angle1Spl_</translation>
+        <translation>Angle1Spl_</translation>
     </message>
     <message>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Angle2Spl_</translation>
+        <translation>Angle2Spl_</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished">Angle1SplPath</translation>
+        <translation>Angle1SplPath</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished">Angle2SplPath</translation>
+        <translation>Angle2SplPath</translation>
     </message>
     <message>
         <source>Seg_</source>
         <comment>Segment. Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Seg_</translation>
     </message>
 </context>
 <context>
@@ -8778,15 +8778,15 @@ Do you want to save your changes?</source>
     <name>VWidgetGroups</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Umbenennen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
@@ -8819,7 +8819,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Punkt mit Abstand und Winkel&lt;/b&gt;: Winkel = %1°; Länge = %2%3; &lt;b&gt;Shift&lt;/b&gt; - Winkel einrasten, &lt;b&gt;Enter&lt;/b&gt; - fertigstellen</translation>
     </message>
 </context>
 <context>

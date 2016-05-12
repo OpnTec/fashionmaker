@@ -353,6 +353,12 @@ int VGObject::IntersectionCircles(const QPointF &c1, double r1, const QPointF &c
  */
 qint32 VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1, QPointF &p2)
 {
+    // Fix for issue #485. https://bitbucket.org/dismine/valentina/issues/485/error-when-drawing-a-curved-path
+    if (qFuzzyIsNull(line.length()))
+    {
+        return 0;
+    }
+
     //coefficient for equation of segment
     qreal a = 0, b = 0, c = 0;
     LineCoefficients(line, &a, &b, &c);

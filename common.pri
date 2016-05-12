@@ -301,6 +301,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wbad-array-new-length \
     -Wbad-function-cast \
     -Wbind-to-temporary-copy \
+        -Wno-c++98-compat-bind-to-temporary-copy \
     -Wbitfield-constant-conversion \
     -Wbitwise-op-parentheses \
     -Wbool-conversion \
@@ -446,6 +447,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wliteral-conversion \
     -Wliteral-range \
     -Wlocal-type-template-args \
+        -Wno-c++98-compat-local-type-template-args \
     -Wlogical-not-parentheses \
     -Wlogical-op-parentheses \
     -Wlong-long \

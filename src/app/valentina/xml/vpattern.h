@@ -93,7 +93,7 @@ public:
     static const QString AttrReadOnly;
 
 public slots:
-    void           LiteParseTree(const Document &parse);
+    virtual void LiteParseTree(const Document &parse) Q_DECL_OVERRIDE;
 
 protected:
     virtual void   customEvent(QEvent * event) Q_DECL_OVERRIDE;

@@ -1027,9 +1027,6 @@ void MainWindow::ClosedDialogGroup(int result)
     SCASSERT(dialogTool != nullptr);
     if (result == QDialog::Accepted)
     {
-        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
-        SCASSERT(scene != nullptr);
-
         DialogGroup *dialog = qobject_cast<DialogGroup*>(dialogTool);
         SCASSERT(dialog != nullptr);
         const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetGroup());
@@ -1545,6 +1542,7 @@ void MainWindow::OnWindowFocusChanged(QWidget *old, QWidget *now)
     {// focus IN
         if (mChanges && not mChangesAsked)
         {
+            mChangesAsked = true;
             const auto answer = QMessageBox::question(this, tr("Measurements"),
                                                   tr("Measurements was changed. Do you want to sync measurements now?"),
                                                       QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
@@ -1552,7 +1550,6 @@ void MainWindow::OnWindowFocusChanged(QWidget *old, QWidget *now)
             {
                 SyncMeasurements();
             }
-            mChangesAsked = true;
         }
     }
 
@@ -1977,6 +1974,8 @@ void  MainWindow::ArrowTool()
 
     ui->view->AllowRubberBand(true);
 
+    RestoreOverrideCursor(cursorArrowCloseHand);
+    RestoreOverrideCursor(cursorArrowOpenHand);
     QCursor cur(Qt::ArrowCursor);
     ui->view->setCursor(cur);
     helpLabel->setText("");

@@ -97,7 +97,7 @@ TMainWindow::TMainWindow(QWidget *parent)
       labelGradationSizes(nullptr),
       labelPatternUnit(nullptr),
       actionDockDiagram(nullptr),
-      dockDiagramVisible(false),
+      dockDiagramVisible(true),
       isInitialized(false),
       recentFileActs(),
       separatorAct(nullptr)
@@ -168,7 +168,6 @@ void TMainWindow::RetranslateTable()
     {
         const int row = ui->tableWidget->currentRow();
         RefreshTable();
-        ShowUnits();
         ui->tableWidget->selectRow(row);
     }
 }
@@ -1757,7 +1756,9 @@ void TMainWindow::SetupMenu()
     actionDockDiagram = ui->dockWidgetDiagram->toggleViewAction();
     actionDockDiagram->setMenuRole(QAction::NoRole);
     ui->menuMeasurements->addAction(actionDockDiagram);
+    ui->mainToolBar->addAction(actionDockDiagram);
     actionDockDiagram->setEnabled(false);
+    actionDockDiagram->setIcon(QIcon("://tapeicon/24x24/mannequin.png"));
 
     // Window
     connect(ui->menuWindow, &QMenu::aboutToShow, this, &TMainWindow::AboutToShowWindowMenu);
@@ -2212,6 +2213,8 @@ void TMainWindow::RefreshTable()
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
 
+    ShowUnits();
+
     const QMap<QString, QSharedPointer<VMeasurement> > table = data->DataMeasurements();
     QMap<int, QSharedPointer<VMeasurement> > orderedTable;
     QMap<QString, QSharedPointer<VMeasurement> >::const_iterator iterMap;
@@ -2583,7 +2586,6 @@ void TMainWindow::UpdatePatternUnit()
         return;
     }
 
-    ShowUnits();
     RefreshTable();
 
     search->RefreshList(ui->lineEditFind->text());

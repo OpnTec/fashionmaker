@@ -1,7 +1,8 @@
 Pattern making program
 Author Roman Telezhynskyi <dismine(at)gmail.com>
 Copyright (C) 2013-2015 Valentina project  
-Valentina Web page: http://www.valentina-project.org/    
+Valentina Web page: http://www.valentina-project.org/ 
+Wiki: https://wiki.valentinaproject.org   
 Valentina user manual https://bitbucket.org/dismine/valentina/wiki/manual/Content    
 Valentina main repository: https://bitbucket.org/dismine/valentina/overview    
 Valentina mail list (forum) https://groups.google.com/forum/#!forum/valentina-project-list    

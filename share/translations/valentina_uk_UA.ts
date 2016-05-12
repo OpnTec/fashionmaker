@@ -5000,8 +5000,8 @@ Do you want to save your changes?</source>
         <translation>Друк</translation>
     </message>
     <message>
-        <source>Print tiled</source>
-        <translation>Друк плиткою</translation>
+        <source>Print tiled PDF</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -5209,8 +5209,8 @@ Do you want to save your changes?</source>
         <translation>Друк оригінальної розкладки</translation>
     </message>
     <message>
-        <source>Print preview tiled</source>
-        <translation>Попередній перегляд плитки</translation>
+        <source>Preview tiled PDF</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>
