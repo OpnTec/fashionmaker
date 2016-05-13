@@ -130,103 +130,61 @@ void VPatternConverter::ApplyPatches()
         switch (ver)
         {
             case (0x000100):
-            {
                 ToV0_1_1();
-                const QString schema = XSDSchema(0x000101);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000101), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000101):
-            {
                 ToV0_1_2();
-                const QString schema = XSDSchema(0x000102);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000102), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000102):
-            {
                 ToV0_1_3();
-                const QString schema = XSDSchema(0x000103);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000103), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000103):
-            {
                 ToV0_1_4();
-                const QString schema = XSDSchema(0x000104);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000104), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000104):
-            {
                 ToV0_2_0();
-                const QString schema = XSDSchema(0x000200);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000200), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000200):
-            {
                 ToV0_2_1();
-                const QString schema = XSDSchema(0x000201);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000201), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000201):
-            {
                 ToV0_2_2();
-                const QString schema = XSDSchema(0x000202);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000202), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000202):
-            {
                 ToV0_2_3();
-                const QString schema = XSDSchema(0x000203);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000203), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000203):
-            {
                 ToV0_2_4();
-                const QString schema = XSDSchema(0x000204);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000204), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000204):
-            {
                 ToV0_2_5();
-                const QString schema = XSDSchema(0x000205);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000205), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000205):
-            {
                 ToV0_2_6();
-                const QString schema = XSDSchema(0x000206);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000206), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000206):
-            {
                 ToV0_2_7();
-                const QString schema = XSDSchema(0x000207);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000207), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000207):
-            {
                 ToV0_3_0();
-                const QString schema = XSDSchema(0x000300);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000300), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000300):
-            {
                 ToV0_3_1();
-                const QString schema = XSDSchema(0x000301);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000301), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000301):
                 break;
             default:

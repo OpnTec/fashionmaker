@@ -105,26 +105,17 @@ void VVSTConverter::ApplyPatches()
         switch (ver)
         {
             case (0x000300):
-            {
                 ToV0_4_0();
-                const QString schema = XSDSchema(0x000400);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000400), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000400):
-            {
                 ToV0_4_1();
-                const QString schema = XSDSchema(0x000401);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000401), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000401):
-            {
                 ToV0_4_2();
-                const QString schema = XSDSchema(0x000402);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000402), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000402):
                 break;
             default:
