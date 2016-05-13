@@ -38,6 +38,7 @@
 #include "../../../visualization/line/vistoolrotation.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "../vwidgets/vsimplecurve.h"
+#include "../../../undocommands/rotationmovelabel.h"
 
 const QString VToolRotation::TagName        = QStringLiteral("operation");
 const QString VToolRotation::TagItem        = QStringLiteral("item");
@@ -702,9 +703,9 @@ void VToolRotation::DoChangePosition(quint32 id, qreal mx, qreal my)
 void VToolRotation::UpdateNamePosition(quint32 id)
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-//    auto moveLabel = new MoveLabel(doc, point->mx(), point->my(), id, scene());
-//    connect(moveLabel, &MoveLabel::ChangePosition, this, &VToolSinglePoint::DoChangePosition);
-//    qApp->getUndoStack()->push(moveLabel);
+    auto moveLabel = new RotationMoveLabel(this->id, doc, point->mx(), point->my(), id, scene());
+    connect(moveLabel, &RotationMoveLabel::ChangePosition, this, &VToolRotation::DoChangePosition);
+    qApp->getUndoStack()->push(moveLabel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

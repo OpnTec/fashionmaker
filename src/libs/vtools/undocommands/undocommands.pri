@@ -20,7 +20,8 @@ HEADERS += \
     $$PWD/movelabel.h \
     $$PWD/movedoublelabel.h \
     $$PWD/addgroup.h \
-    $$PWD/delgroup.h
+    $$PWD/delgroup.h \
+    $$PWD/rotationmovelabel.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -41,4 +42,5 @@ SOURCES += \
     $$PWD/movelabel.cpp \
     $$PWD/movedoublelabel.cpp \
     $$PWD/addgroup.cpp \
-    $$PWD/delgroup.cpp
+    $$PWD/delgroup.cpp \
+    $$PWD/rotationmovelabel.cpp
