@@ -77,6 +77,7 @@ DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QW
 //---------------------------------------------------------------------------------------------------------------------
 DialogRotation::~DialogRotation()
 {
+    DeleteVisualization<VisToolRotation>();
     delete ui;
 }
 
