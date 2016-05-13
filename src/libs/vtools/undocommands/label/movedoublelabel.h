@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   movelabel.h
+ **  @file   movedoublelabel.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   25 12, 2014
+ **  @date   24 6, 2015
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2015 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,56 +26,44 @@
  **
  *************************************************************************/
 
-#ifndef MOVELABEL_H
-#define MOVELABEL_H
+#ifndef MOVEDOUBLELABEL_H
+#define MOVEDOUBLELABEL_H
 
-#include "vundocommand.h"
+#include "moveabstractlabel.h"
 
-class QGraphicsScene;
+enum class DoublePoint: char { FirstPoint, SecondPoint };
 
-class MoveLabel : public VUndoCommand
+class MoveDoubleLabel : public MoveAbstractLabel
 {
     Q_OBJECT
 public:
-    MoveLabel(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
-               QUndoCommand *parent = 0);
-    virtual ~MoveLabel() Q_DECL_OVERRIDE;
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+    MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
+                    quint32 toolId, quint32 pointId, QUndoCommand *parent = 0);
+    virtual ~MoveDoubleLabel() Q_DECL_OVERRIDE;
+
     virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
     virtual int  id() const Q_DECL_OVERRIDE;
-    quint32      getPointId() const;
-    double       getNewMx() const;
-    double       getNewMy() const;
-    void         Do(double mx, double my);
-signals:
-    void ChangePosition(quint32 id, qreal mx, qreal my);
+
+    quint32     GetToolId() const;
+    DoublePoint GetPointType() const;
+protected:
+    virtual void Do(double mx, double my) Q_DECL_OVERRIDE;
 private:
-    Q_DISABLE_COPY(MoveLabel)
-    double   oldMx;
-    double   oldMy;
-    double   newMx;
-    double   newMy;
-    bool     isRedo;
-    QGraphicsScene *scene;
+    Q_DISABLE_COPY(MoveDoubleLabel)
+    DoublePoint m_type;
+    quint32 m_idTool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveLabel::getPointId() const
+inline DoublePoint MoveDoubleLabel::GetPointType() const
 {
-    return nodeId;
+    return m_type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MoveLabel::getNewMx() const
+inline quint32 MoveDoubleLabel::GetToolId() const
 {
-    return newMx;
+    return m_idTool;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-inline double MoveLabel::getNewMy() const
-{
-    return newMy;
-}
-
-#endif // MOVELABEL_H
+#endif // MOVEDOUBLELABEL_H

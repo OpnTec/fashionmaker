@@ -29,58 +29,28 @@
 #ifndef ROTATIONMOVELABEL_H
 #define ROTATIONMOVELABEL_H
 
-#include "vundocommand.h"
+#include "moveabstractlabel.h"
 
-class QGraphicsScene;
-
-class RotationMoveLabel : public VUndoCommand
+class RotationMoveLabel : public MoveAbstractLabel
 {
     Q_OBJECT
 public:
-    RotationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint, QGraphicsScene *scene,
+    RotationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
                       QUndoCommand *parent = nullptr);
     virtual ~RotationMoveLabel();
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
+
     virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
     virtual int  id() const Q_DECL_OVERRIDE;
-    quint32      GetPointId() const;
-    quint32      GetToolId() const;
-    double       getNewMx() const;
-    double       getNewMy() const;
-signals:
-    void ChangePosition(quint32 id, qreal mx, qreal my);
+
+    quint32 GetToolId() const;
+protected:
+    virtual void Do(double mx, double my) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(RotationMoveLabel)
-    double m_oldMx;
-    double m_oldMy;
-    double m_newMx;
-    double m_newMy;
-    bool   m_isRedo;
-    QGraphicsScene *m_scene;
     quint32 m_idTool;
 
-    void        Do(double mx, double my);
     QDomElement GetDestinationObject(quint32 idTool, quint32 idPoint) const;
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-inline quint32 RotationMoveLabel::GetPointId() const
-{
-    return nodeId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline double RotationMoveLabel::getNewMx() const
-{
-    return m_newMx;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline double RotationMoveLabel::getNewMy() const
-{
-    return m_newMy;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 inline quint32 RotationMoveLabel::GetToolId() const

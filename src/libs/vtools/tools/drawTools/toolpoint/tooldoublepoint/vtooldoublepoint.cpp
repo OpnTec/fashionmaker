@@ -29,7 +29,7 @@
 #include "vtooldoublepoint.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "../vgeometry/vpointf.h"
-#include "../../../../undocommands/movedoublelabel.h"
+#include "../../../../undocommands/label/movedoublelabel.h"
 
 #include <QKeyEvent>
 
@@ -244,7 +244,7 @@ void VToolDoublePoint::UpdateNamePosition(quint32 id)
     {
         const VPointF *p1 = VAbstractTool::data.GeometricObject<VPointF>(p1id).data();
 
-        auto moveLabel = new MoveDoubleLabel(doc, p1->mx(), p1->my(), DoublePoint::FirstPoint, this->id, p1id, scene());
+        auto moveLabel = new MoveDoubleLabel(doc, p1->mx(), p1->my(), DoublePoint::FirstPoint, this->id, p1id);
         connect(moveLabel, &MoveDoubleLabel::ChangePosition, this, &VToolDoublePoint::DoChangePosition);
         qApp->getUndoStack()->push(moveLabel);
     }
@@ -252,8 +252,7 @@ void VToolDoublePoint::UpdateNamePosition(quint32 id)
     {
         const VPointF *p2 = VAbstractTool::data.GeometricObject<VPointF>(p2id).data();
 
-        auto moveLabel = new MoveDoubleLabel(doc, p2->mx(), p2->my(), DoublePoint::SecondPoint, this->id, p2id,
-                                             scene());
+        auto moveLabel = new MoveDoubleLabel(doc, p2->mx(), p2->my(), DoublePoint::SecondPoint, this->id, p2id);
         connect(moveLabel, &MoveDoubleLabel::ChangePosition, this, &VToolDoublePoint::DoChangePosition);
         qApp->getUndoStack()->push(moveLabel);
     }

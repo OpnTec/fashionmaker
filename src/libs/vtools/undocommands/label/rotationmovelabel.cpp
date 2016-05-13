@@ -27,30 +27,19 @@
  *************************************************************************/
 
 #include "rotationmovelabel.h"
-#include "../tools/drawTools/operation/vtoolrotation.h"
+#include "../../tools/drawTools/operation/vtoolrotation.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 RotationMoveLabel::RotationMoveLabel(quint32 idTool, VAbstractPattern *doc, double x, double y, quint32 idPoint,
-                                     QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_oldMx(0.0),
-      m_oldMy(0.0),
-      m_newMx(x),
-      m_newMy(y),
-      m_isRedo(false),
-      m_scene(scene),
+                                     QUndoCommand *parent)
+    : MoveAbstractLabel(doc, idPoint, x, y, parent),
       m_idTool(idTool)
 {
     setText(tr("move point label"));
-    nodeId = idPoint;
+
     qCDebug(vUndo, "Tool id %u", m_idTool);
-    qCDebug(vUndo, "Point id %u", nodeId);
 
-    qCDebug(vUndo, "Label new Mx %f", m_newMx);
-    qCDebug(vUndo, "Label new My %f", m_newMy);
-
-    SCASSERT(scene != nullptr);
-    QDomElement element = GetDestinationObject(m_idTool, nodeId);
+    const QDomElement element = GetDestinationObject(m_idTool, nodeId);
     if (element.isElement())
     {
         m_oldMx = qApp->toPixel(doc->GetParametrDouble(element, AttrMx, "0.0"));
@@ -72,28 +61,6 @@ RotationMoveLabel::~RotationMoveLabel()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void RotationMoveLabel::undo()
-{
-    qCDebug(vUndo, "Undo.");
-
-    Do(m_oldMx, m_oldMy);
-    m_isRedo = true;
-    emit ChangePosition(nodeId, m_oldMx, m_oldMy);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void RotationMoveLabel::redo()
-{
-    qCDebug(vUndo, "Redo.");
-
-    Do(m_newMx, m_newMy);
-    if (m_isRedo)
-    {
-        emit ChangePosition(nodeId, m_newMx, m_newMy);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool RotationMoveLabel::mergeWith(const QUndoCommand *command)
 {
     const RotationMoveLabel *moveCommand = static_cast<const RotationMoveLabel *>(command);
@@ -105,8 +72,8 @@ bool RotationMoveLabel::mergeWith(const QUndoCommand *command)
     }
 
     qCDebug(vUndo, "Mergin undo.");
-    m_newMx = moveCommand->getNewMx();
-    m_newMy = moveCommand->getNewMy();
+    m_newMx = moveCommand->GetNewMx();
+    m_newMy = moveCommand->GetNewMy();
     qCDebug(vUndo, "Label new Mx %f", m_newMx);
     qCDebug(vUndo, "Label new My %f", m_newMy);
     return true;
