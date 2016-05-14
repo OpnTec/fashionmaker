@@ -45,10 +45,6 @@ class VToolRotation : public VDrawTool, public QGraphicsItem
 {
     Q_OBJECT
 public:
-    VToolRotation(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 origPointId,
-                  const QString &angle, const QString &suffix, const QVector<quint32> &source,
-                  const QVector<DestinationItem> &destination, const Source &typeCreation,
-                  QGraphicsItem *parent = nullptr);
     virtual ~VToolRotation();
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolRotation* Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
@@ -124,6 +120,11 @@ private:
     QVector<DestinationItem> destination;
 
     QMap<quint32, VAbstractSimple *> rObjects;
+
+    VToolRotation(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 origPointId,
+                  const QString &angle, const QString &suffix, const QVector<quint32> &source,
+                  const QVector<DestinationItem> &destination, const Source &typeCreation,
+                  QGraphicsItem *parent = nullptr);
 
     void UpdateNamePosition(quint32 id);
 

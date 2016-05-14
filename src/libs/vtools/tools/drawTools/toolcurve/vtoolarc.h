@@ -40,8 +40,6 @@ class VToolArc :public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
-             QGraphicsItem * parent = nullptr);
     virtual void     setDialog() Q_DECL_OVERRIDE;
     static VToolArc* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
     static VToolArc* Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1, QString &f2,
@@ -73,6 +71,11 @@ protected:
     virtual void     SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
     virtual void     SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolArc)
+
+    VToolArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
+             QGraphicsItem * parent = nullptr);
+
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 };
 

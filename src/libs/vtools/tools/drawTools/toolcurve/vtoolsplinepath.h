@@ -42,9 +42,6 @@ class VToolSplinePath:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
-                    const Source &typeCreation,
-                    QGraphicsItem * parent = nullptr);
     virtual ~VToolSplinePath() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
@@ -103,6 +100,9 @@ private:
     Q_DISABLE_COPY(VToolSplinePath)
     QPointF oldPosition;
     int     splIndex;
+
+    VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
+                    const Source &typeCreation, QGraphicsItem * parent = nullptr);
 
     bool          IsMovable(int index) const;
     virtual void  RefreshGeometry() Q_DECL_OVERRIDE;

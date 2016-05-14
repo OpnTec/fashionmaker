@@ -39,8 +39,6 @@ class VToolBasePoint : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
-                      const QString &namePP, QGraphicsItem * parent = nullptr );
     virtual ~VToolBasePoint() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolBasePoint *Create(quint32 _id, const QString &nameActivPP, VPointF *point,
@@ -74,9 +72,14 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE {}
 private:
-    QString namePP;
-    void         SetColorLabel(const Qt::GlobalColor & color);
+    Q_DISABLE_COPY(VToolBasePoint)
 
+    QString namePP;
+
+    VToolBasePoint (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                      const QString &namePP, QGraphicsItem * parent = nullptr );
+
+    void         SetColorLabel(const Qt::GlobalColor & color);
 };
 
 #endif // VTOOLBASEPOINT_H

@@ -44,10 +44,6 @@ class VNodePoint: public VAbstractNode, public QGraphicsEllipseItem
 {
     Q_OBJECT
 public:
-
-    VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Source &typeCreation,
-               const quint32 &idTool = 0,  QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr );
-
     static void  Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene,
                         quint32 id, quint32 idPoint, const Document &parse,
                         const Source &typeCreation, const quint32 &idTool = 0);
@@ -91,6 +87,9 @@ protected:
     virtual void HideNode() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VNodePoint)
+
+    VNodePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idPoint,  const Source &typeCreation,
+               const quint32 &idTool = 0,  QObject *qoParent = nullptr, QGraphicsItem * parent = nullptr );
 };
 
 #endif // VNODEPOINT_H

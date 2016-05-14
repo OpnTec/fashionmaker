@@ -37,8 +37,6 @@ class VToolCubicBezier : public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
-                     const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual ~VToolCubicBezier();
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCubicBezier *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
@@ -62,6 +60,9 @@ protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolCubicBezier)
+
+    VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
+                     const Source &typeCreation, QGraphicsItem * parent = nullptr);
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void SetSplineAttributes(QDomElement &domElement, const VCubicBezier &spl);

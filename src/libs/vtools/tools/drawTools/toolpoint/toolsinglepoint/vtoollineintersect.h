@@ -38,9 +38,6 @@ class VToolLineIntersect:public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolLineIntersect(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
-                       const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
-                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolLineIntersect *Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                       VContainer *data);
@@ -76,6 +73,8 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolLineIntersect)
+
     /** @brief p1Line1 id first point first line. */
     quint32       p1Line1;
 
@@ -87,6 +86,10 @@ private:
 
     /** @brief p2Line2 id second point second line.*/
     quint32       p2Line2;
+
+    VToolLineIntersect(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &p1Line1,
+                       const quint32 &p2Line1, const quint32 &p1Line2, const quint32 &p2Line2,
+                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLLINEINTERSECT_H

@@ -38,11 +38,6 @@ class VToolHeight: public VToolLinePoint
 {
     Q_OBJECT
 public:
-
-    VToolHeight(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                const QString &lineColor,
-                const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
-                const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolHeight *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
     static VToolHeight *Create(const quint32 _id, const QString &pointName, const QString &typeLine,
@@ -69,11 +64,18 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolHeight)
+
     /** @brief p1LineId id first point of line. */
     quint32         p1LineId;
 
     /** @brief p2LineId id second point of line. */
     quint32         p2LineId;
+
+    VToolHeight(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                const QString &lineColor,
+                const quint32 &basePointId, const quint32 &p1LineId, const quint32 &p2LineId,
+                const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLHEIGHT_H

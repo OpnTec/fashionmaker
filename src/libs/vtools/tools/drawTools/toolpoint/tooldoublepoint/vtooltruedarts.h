@@ -35,19 +35,6 @@ class VToolTrueDarts : public VToolDoublePoint
 {
     Q_OBJECT
 public:
-    VToolTrueDarts(VAbstractPattern *doc,
-                   VContainer *data,
-                   const quint32 &id,
-                   const quint32 &p1id,
-                   const quint32 &p2id,
-                   const quint32 &baseLineP1Id,
-                   const quint32 &baseLineP2Id,
-                   const quint32 &dartP1Id,
-                   const quint32 &dartP2Id,
-                   const quint32 &dartP3Id,
-                   const Source &typeCreation,
-                   QGraphicsItem * parent = nullptr);
-
     static void    FindPoint(const QPointF &baseLineP1, const QPointF &baseLineP2, const QPointF &dartP1,
                              const QPointF &dartP2, const QPointF &dartP3, QPointF &p1, QPointF &p2);
     virtual void   setDialog() Q_DECL_OVERRIDE;
@@ -100,6 +87,19 @@ private:
     quint32 dartP1Id;
     quint32 dartP2Id;
     quint32 dartP3Id;
+
+    VToolTrueDarts(VAbstractPattern *doc,
+                   VContainer *data,
+                   const quint32 &id,
+                   const quint32 &p1id,
+                   const quint32 &p2id,
+                   const quint32 &baseLineP1Id,
+                   const quint32 &baseLineP2Id,
+                   const quint32 &dartP1Id,
+                   const quint32 &dartP2Id,
+                   const quint32 &dartP3Id,
+                   const Source &typeCreation,
+                   QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLTRUEDARTS_H

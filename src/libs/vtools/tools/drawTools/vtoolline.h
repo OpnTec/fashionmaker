@@ -39,9 +39,6 @@ class VToolLine: public VDrawTool, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
-    VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
-              const QString &typeLine, const QString &lineColor, const Source &typeCreation,
-              QGraphicsItem * parent = nullptr);
     virtual void     setDialog() Q_DECL_OVERRIDE;
     static VToolLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
     static VToolLine *Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
@@ -85,11 +82,17 @@ protected:
     virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolLine)
+
     /** @brief firstPoint id first line point. */
     quint32           firstPoint;
 
     /** @brief secondPoint id second line point. */
     quint32           secondPoint;
+
+    VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
+              const QString &typeLine, const QString &lineColor, const Source &typeCreation,
+              QGraphicsItem * parent = nullptr);
 
     void             RefreshGeometry();
 };

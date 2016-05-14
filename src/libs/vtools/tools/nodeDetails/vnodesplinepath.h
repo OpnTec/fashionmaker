@@ -39,8 +39,6 @@ class VNodeSplinePath : public VAbstractNode
 {
     Q_OBJECT
 public:
-    VNodeSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Source &typeCreation,
-                    const quint32 &idTool = 0, QObject *qoParent = nullptr);
     static void  Create(VAbstractPattern *doc, VContainer *data, quint32 id,
                         quint32 idSpline, const Document &parse,
                         const Source &typeCreation, const quint32 &idTool = 0);
@@ -58,6 +56,9 @@ protected:
     virtual void HideNode() Q_DECL_OVERRIDE {}
 private:
     Q_DISABLE_COPY(VNodeSplinePath)
+
+    VNodeSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Source &typeCreation,
+                    const quint32 &idTool = 0, QObject *qoParent = nullptr);
 };
 
 #endif // VNODESPLINEPATH_H

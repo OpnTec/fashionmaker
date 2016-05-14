@@ -38,10 +38,6 @@ class VToolCutSpline : public VToolCut
 {
     Q_OBJECT
 public:
-
-    VToolCutSpline(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                   const quint32 &splineId, const QString &color, const Source &typeCreation,
-                   QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCutSpline *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                   VContainer *data);
@@ -63,6 +59,10 @@ protected:
     virtual void  SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolCutSpline)
+
+    VToolCutSpline(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
+                   const quint32 &splineId, const QString &color, const Source &typeCreation,
+                   QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLCUTSPLINE_H

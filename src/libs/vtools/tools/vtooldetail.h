@@ -42,8 +42,6 @@ class VToolDetail: public VAbstractTool, public VNoBrushScalePathItem
 {
     Q_OBJECT
 public:
-    VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
-                VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);
     ~VToolDetail();
 
     virtual void       setDialog();
@@ -115,6 +113,9 @@ private:
     QString            drawName;
 
     VNoBrushScalePathItem *seamAllowance;
+
+    VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
+                VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);
 
     void               RefreshGeometry ();
     template <typename Tool>

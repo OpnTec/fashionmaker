@@ -38,11 +38,6 @@ class VToolEndLine : public VToolLinePoint
 {
     Q_OBJECT
 public:
-
-    VToolEndLine(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                 const QString &lineColor,
-                 const QString &formulaLength, const QString &formulaAngle, const quint32 &basePointId,
-                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual ~VToolEndLine() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolEndLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
@@ -67,7 +62,14 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolEndLine)
+
     QString formulaAngle;
+
+    VToolEndLine(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                 const QString &lineColor,
+                 const QString &formulaLength, const QString &formulaAngle, const quint32 &basePointId,
+                 const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLENDLINE_H

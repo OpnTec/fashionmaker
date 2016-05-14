@@ -38,9 +38,6 @@ class VToolPointOfIntersectionArcs : public VToolSinglePoint
     Q_OBJECT
 
 public:
-    VToolPointOfIntersectionArcs(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstArcId,
-                                 const quint32 &secondArcId, CrossCirclesPoint crossPoint, const Source &typeCreation,
-                                 QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointOfIntersectionArcs *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                                 VContainer *data);
@@ -81,6 +78,10 @@ private:
     quint32       secondArcId;
 
     CrossCirclesPoint crossPoint;
+
+    VToolPointOfIntersectionArcs(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstArcId,
+                                 const quint32 &secondArcId, CrossCirclesPoint crossPoint, const Source &typeCreation,
+                                 QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONARCS_H

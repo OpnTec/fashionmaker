@@ -42,9 +42,6 @@ class VToolUnionDetails : public VAbstractTool
 {
     Q_OBJECT
 public:
-    VToolUnionDetails(VAbstractPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1, const VDetail &d2,
-                      const quint32 &indexD1, const quint32 &indexD2, const Source &typeCreation,
-                      const QString &drawName, QObject *parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -111,6 +108,10 @@ private:
     quint32      indexD2;
 
     QString      drawName;
+
+    VToolUnionDetails(VAbstractPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1, const VDetail &d2,
+                      const quint32 &indexD1, const quint32 &indexD2, const Source &typeCreation,
+                      const QString &drawName, QObject *parent = nullptr);
 
     void         AddDetail(QDomElement &domElement, VDetail &d);
     void         AddNode(QDomElement &domElement, const VNodeDetail &node);
