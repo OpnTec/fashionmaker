@@ -44,6 +44,9 @@ class VSimpleCurve;
 class VToolRotation : public VDrawTool, public QGraphicsItem
 {
     Q_OBJECT
+    // Fix warning "Class implements the interface QGraphicsItem but does not list it
+    // in Q_INTERFACES. qobject_cast to QGraphicsItem will not work!"
+    Q_INTERFACES(QGraphicsItem)
 public:
     virtual ~VToolRotation();
     virtual void setDialog() Q_DECL_OVERRIDE;
