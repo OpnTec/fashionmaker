@@ -178,7 +178,7 @@ VToolRotation *VToolRotation::Create(const quint32 _id, const quint32 &origin, Q
     calcAngle = CheckFormula(_id, angle, data);
 
     const auto originPoint = *data->GeometricObject<VPointF>(origin);
-    const QPointF oPoint = originPoint.toQPointF();
+    const QPointF oPoint = originPoint;
 
     QVector<DestinationItem> dest = destination;
 

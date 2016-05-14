@@ -123,7 +123,7 @@ VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &pref
     const QPointF p1 = VPointF::RotatePF(originPoint, GetP1(), degrees);
     const QPointF p2 = VPointF::RotatePF(originPoint, GetP2(), degrees);
 
-    VArc arc(center, GetRadius(), QLineF(center.toQPointF(), p1).angle(), QLineF(center.toQPointF(), p2).angle());
+    VArc arc(center, GetRadius(), QLineF(center, p1).angle(), QLineF(center, p2).angle());
     arc.setName(name() + prefix);
     return arc;
 }
@@ -156,7 +156,7 @@ qreal VArc::GetLength() const
 QPointF VArc::GetP1() const
 {
     QPointF p1 ( GetCenter().x () + d->radius, GetCenter().y () );
-    QLineF centerP1(GetCenter().toQPointF(), p1);
+    QLineF centerP1(GetCenter(), p1);
     centerP1.setAngle(GetStartAngle());
     return centerP1.p2();
 }
@@ -169,7 +169,7 @@ QPointF VArc::GetP1() const
 QPointF VArc::GetP2 () const
 {
     QPointF p2 ( GetCenter().x () + d->radius, GetCenter().y () );
-    QLineF centerP2(GetCenter().toQPointF(), p2);
+    QLineF centerP2(GetCenter(), p2);
     centerP2.setAngle(GetEndAngle());
     return centerP2.p2();
 }
@@ -221,7 +221,7 @@ QVector<QPointF> VArc::GetPoints() const
     {
         const qreal lDistance = GetRadius() * 4.0/3.0 * qTan(qDegreesToRadians(sectionAngle.at(i)) * 0.25);
 
-        const QPointF center = GetCenter().toQPointF();
+        const QPointF center = GetCenter();
 
         QLineF lineP1P2(pStart, center);
         lineP1P2.setAngle(lineP1P2.angle() - 90.0);
@@ -286,7 +286,7 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
 
     qreal n = qRadiansToDegrees(len/d->radius); // n - is angle in degrees
 
-    QLineF line(GetCenter().toQPointF(), GetP1());
+    QLineF line(GetCenter(), GetP1());
     line.setAngle(line.angle()+n);
 
     arc1 = VArc (GetCenter(), d->radius, d->formulaRadius, GetStartAngle(), GetFormulaF1(), line.angle(),

@@ -75,7 +75,7 @@ void VisToolRotation::RefreshGeometry()
 
     if (object1Id != NULL_ID)
     {
-        const QPointF origin = Visualization::data->GeometricObject<VPointF>(object1Id)->toQPointF();
+        const QPointF origin = *Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(point, origin, supportColor2);
 
         QLineF rLine;
@@ -122,11 +122,11 @@ void VisToolRotation::RefreshGeometry()
 
                     ++iPoint;
                     QGraphicsEllipseItem *point = GetPoint(iPoint);
-                    DrawPoint(point, p->toQPointF(), supportColor);
+                    DrawPoint(point, *p, supportColor);
 
                     ++iPoint;
                     point = GetPoint(iPoint);
-                    DrawPoint(point, p->Rotate(origin, angle).toQPointF(), supportColor);
+                    DrawPoint(point, p->Rotate(origin, angle), supportColor);
                     break;
                 }
                 case GOType::Arc:

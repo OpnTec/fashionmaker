@@ -132,7 +132,7 @@ VSpline::~VSpline()
  */
 qreal VSpline::GetLength () const
 {
-    return LengthBezier ( GetP1().toQPointF(), GetP2(), GetP3(), GetP4().toQPointF());
+    return LengthBezier ( GetP1(), GetP2(), GetP3(), GetP4());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -156,7 +156,7 @@ QPointF VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2) const
  */
 QVector<QPointF> VSpline::GetPoints () const
 {
-    return GetCubicBezierPoints(GetP1().toQPointF(), GetP2(), GetP3(), GetP4().toQPointF());
+    return GetCubicBezierPoints(GetP1(), GetP2(), GetP3(), GetP4());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -348,7 +348,7 @@ void VSpline::SetC2Length(qreal length, const QString &formula)
  */
 qreal VSpline::GetKasm1() const
 {
-    return QLineF(d->p1.toQPointF(), GetP2()).length() / VSplineData::GetL(d->p1.toQPointF(), d->p4.toQPointF(),
+    return QLineF(d->p1, GetP2()).length() / VSplineData::GetL(d->p1, d->p4,
                                                                            d->kCurve);
 }
 
@@ -359,7 +359,7 @@ qreal VSpline::GetKasm1() const
  */
 qreal VSpline::GetKasm2() const
 {
-    return QLineF(d->p4.toQPointF(), GetP3()).length() / VSplineData::GetL(d->p1.toQPointF(), d->p4.toQPointF(),
+    return QLineF(d->p4, GetP3()).length() / VSplineData::GetL(d->p1, d->p4,
                                                                            d->kCurve);
 }
 
@@ -469,8 +469,8 @@ qreal VSpline::ParamT (const QPointF &pBt) const
 {
     QVector<qreal> ts;
     // Calculate t coefficient for each axis
-    ts += CalcT (GetP1().toQPointF().x(), GetP2().x(), GetP3().x(), GetP4().toQPointF().x(), pBt.x());
-    ts += CalcT (GetP1().toQPointF().y(), GetP2().y(), GetP3().y(), GetP4().toQPointF().y(), pBt.y());
+    ts += CalcT (GetP1().x(), GetP2().x(), GetP3().x(), GetP4().x(), pBt.x());
+    ts += CalcT (GetP1().y(), GetP2().y(), GetP3().y(), GetP4().y(), pBt.y());
 
     if (ts.isEmpty())
     {
@@ -485,10 +485,10 @@ qreal VSpline::ParamT (const QPointF &pBt) const
     for (int i=0; i< ts.size(); ++i)
     {
         const qreal t = ts.at(i);
-        const QPointF p0 = GetP1().toQPointF();
+        const QPointF p0 = GetP1();
         const QPointF p1 = GetP2();
         const QPointF p2 = GetP3();
-        const QPointF p3 = GetP4().toQPointF();
+        const QPointF p3 = GetP4();
         //The explicit form of the Cubic Bézier curve
         const qreal pointX = pow(1-t, 3)*p0.x() + 3*pow(1-t, 2)*t*p1.x() + 3*(1-t)*pow(t, 2)*p2.x() + pow(t, 3)*p3.x();
         const qreal pointY = pow(1-t, 3)*p0.y() + 3*pow(1-t, 2)*t*p1.y() + 3*(1-t)*pow(t, 2)*p2.y() + pow(t, 3)*p3.y();

@@ -181,7 +181,7 @@ void TST_VArc::TestGetPoints()
 
         for (int i=0; i < points.size(); ++i)
         {
-            QLineF rLine(center.toQPointF(), points.at(i));
+            QLineF rLine(center, points.at(i));
             const qreal value = qAbs(rLine.length() - radius);
             const QString errorMsg = QString("Broken the first rule. All points should be on the same distance from "
                                              "the center. Error ='%1'.").arg(value);
@@ -199,7 +199,7 @@ void TST_VArc::TestGetPoints()
         else
         {// sector square
             gSquere = (M_PI * radius * radius) / 360.0 * arc.AngleArc();
-            points.append(center.toQPointF());
+            points.append(center);
         }
 
         // calculated square

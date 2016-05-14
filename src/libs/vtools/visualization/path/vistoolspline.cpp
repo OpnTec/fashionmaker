@@ -77,24 +77,24 @@ void VisToolSpline::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const auto first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(point1, first->toQPointF(), supportColor);
+        DrawPoint(point1, *first, supportColor);
 
         if (mode == Mode::Creation)
         {
             if (isLeftMousePressed && not p2Selected)
             {
                 p2 = Visualization::scenePos;
-                controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, p2, first->toQPointF());
+                controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, p2, *first);
 
                 if (not controlPoints[0]->isVisible())
                 {
-                    if (QLineF(first->toQPointF(), p2).length() > radius)
+                    if (QLineF(*first, p2).length() > radius)
                     {
                         controlPoints[0]->show();
                     }
                     else
                     {
-                        p2 = first->toQPointF();
+                        p2 = *first;
                     }
                 }
             }
@@ -112,26 +112,26 @@ void VisToolSpline::RefreshGeometry()
         else
         {
             const auto second = Visualization::data->GeometricObject<VPointF>(object4Id);
-            DrawPoint(point4, second->toQPointF(), supportColor);
+            DrawPoint(point4, *second, supportColor);
 
             if (mode == Mode::Creation)
             {
                 if (isLeftMousePressed && not p3Selected)
                 {
-                    QLineF ctrlLine (second->toQPointF(), Visualization::scenePos);
+                    QLineF ctrlLine (*second, Visualization::scenePos);
                     ctrlLine.setAngle(ctrlLine.angle()+180);
                     p3 = ctrlLine.p2();
-                    controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, p3, second->toQPointF());
+                    controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, p3, *second);
 
                     if (not controlPoints[1]->isVisible())
                     {
-                        if (QLineF(second->toQPointF(), p3).length() > radius)
+                        if (QLineF(*second, p3).length() > radius)
                         {
                             controlPoints[1]->show();
                         }
                         else
                         {
-                            p3 = second->toQPointF();
+                            p3 = *second;
                         }
                     }
                 }

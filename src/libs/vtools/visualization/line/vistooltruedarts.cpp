@@ -75,55 +75,51 @@ void VisToolTrueDarts::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> blP1 = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(baseLineP1, blP1->toQPointF(), supportColor);
+        DrawPoint(baseLineP1, *blP1, supportColor);
 
         if (baseLineP2Id <= NULL_ID)
         {
-            DrawLine(this, QLineF(blP1->toQPointF(), Visualization::scenePos), supportColor, Qt::DashLine);
+            DrawLine(this, QLineF(*blP1, Visualization::scenePos), supportColor, Qt::DashLine);
         }
         else
         {
             const QSharedPointer<VPointF> blP2 = Visualization::data->GeometricObject<VPointF>(baseLineP2Id);
-            DrawPoint(baseLineP2, blP2->toQPointF(), supportColor);
-            DrawLine(this, QLineF(blP1->toQPointF(), blP2->toQPointF()), supportColor, Qt::DashLine);
+            DrawPoint(baseLineP2, *blP2, supportColor);
+            DrawLine(this, QLineF(*blP1, *blP2), supportColor, Qt::DashLine);
 
             if (dartP1Id > NULL_ID)
             {
                 const QSharedPointer<VPointF> d1 = Visualization::data->GeometricObject<VPointF>(dartP1Id);
-                DrawPoint(dartP1, d1->toQPointF(), supportColor);
+                DrawPoint(dartP1, *d1, supportColor);
 
                 if (dartP2Id <= NULL_ID)
                 {
-                    DrawLine(p1d2, QLineF(d1->toQPointF(), Visualization::scenePos), supportColor);
+                    DrawLine(p1d2, QLineF(*d1, Visualization::scenePos), supportColor);
                 }
                 else
                 {
                     const QSharedPointer<VPointF> d2 = Visualization::data->GeometricObject<VPointF>(dartP2Id);
-                    DrawPoint(dartP2, d2->toQPointF(), supportColor);
-                    DrawLine(p1d2, QLineF(d1->toQPointF(), d2->toQPointF()), supportColor);
+                    DrawPoint(dartP2, *d2, supportColor);
+                    DrawLine(p1d2, QLineF(*d1, *d2), supportColor);
 
                     if (dartP3Id <= NULL_ID)
                     {
-                        DrawLine(d2p2, QLineF(d2->toQPointF(), Visualization::scenePos), supportColor);
+                        DrawLine(d2p2, QLineF(*d2, Visualization::scenePos), supportColor);
                     }
                     else
                     {
                         const QSharedPointer<VPointF> d3 = Visualization::data->GeometricObject<VPointF>(dartP3Id);
-                        DrawPoint(dartP3, d3->toQPointF(), supportColor);
-                        DrawLine(d2p2, QLineF(d2->toQPointF(), d3->toQPointF()), supportColor);
+                        DrawPoint(dartP3, *d3, supportColor);
+                        DrawLine(d2p2, QLineF(*d2, *d3), supportColor);
 
                         QPointF p1;
                         QPointF p2;
-                        VToolTrueDarts::FindPoint(blP1->toQPointF(),
-                                                  blP2->toQPointF(),
-                                                  d1->toQPointF(),
-                                                  d2->toQPointF(),
-                                                  d3->toQPointF(), p1, p2);
+                        VToolTrueDarts::FindPoint(*blP1, *blP2, *d1, *d2, *d3, p1, p2);
 
-                        DrawLine(lineblP1P1, QLineF(blP1->toQPointF(), p1), supportColor);
-                        DrawLine(lineblP2P2, QLineF(blP2->toQPointF(), p2), supportColor);
-                        DrawLine(p1d2, QLineF(p1, d2->toQPointF()), supportColor);
-                        DrawLine(d2p2, QLineF(d2->toQPointF(), p2), supportColor);
+                        DrawLine(lineblP1P1, QLineF(*blP1, p1), supportColor);
+                        DrawLine(lineblP2P2, QLineF(*blP2, p2), supportColor);
+                        DrawLine(p1d2, QLineF(p1, *d2), supportColor);
+                        DrawLine(d2p2, QLineF(*d2, p2), supportColor);
 
                         DrawPoint(point1, p1, mainColor);
                         DrawPoint(point2, p2, mainColor);

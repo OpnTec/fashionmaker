@@ -299,13 +299,13 @@ void TST_VEllipticalArc::TestGetPoints2()
     const qreal c = qSqrt(qAbs(radius2*radius2 - radius1*radius1));
     // distance from the center to the focus
 
-    QPointF focus1 = center.toQPointF();
-    QPointF focus2 = center.toQPointF();
+    QPointF focus1 = center;
+    QPointF focus2 = center;
 
     if (radius1 < radius2)
     {
         focus1.setY(focus1.ry() + c);
-        QLineF line(center.toQPointF(), focus1);
+        QLineF line(center, focus1);
         line.setAngle(line.angle() + rotationAngle);
         focus1 = line.p2();
 
@@ -317,7 +317,7 @@ void TST_VEllipticalArc::TestGetPoints2()
     else
     {
         focus1.setX(focus1.rx() + c);
-        QLineF line(center.toQPointF(), focus1);
+        QLineF line(center, focus1);
         line.setAngle(line.angle() + rotationAngle);
         focus1 = line.p2();
 
@@ -328,7 +328,7 @@ void TST_VEllipticalArc::TestGetPoints2()
     }
 
     QPointF ellipsePoint(center.x() + radius1, center.y());
-    QLineF line(center.toQPointF(), ellipsePoint);
+    QLineF line(center, ellipsePoint);
     line.setAngle(line.angle() + rotationAngle);
     ellipsePoint = line.p2();
 

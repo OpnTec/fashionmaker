@@ -119,8 +119,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             {
                 VPointF *point = new VPointF(*data->GeometricObject<VPointF>(det.at(i).getId()));
                 point->setMode(Draw::Modeling);
-                BiasRotatePoint(point, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(),
-                                angle);
+                BiasRotatePoint(point, dx, dy, *data->GeometricObject<VPointF>(pRotate), angle);
                 idObject = data->AddGObject(point);
                 children.append(idObject);
                 VPointF *point1 = new VPointF(*point);
@@ -138,7 +137,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             }
             else
             {
-                const QPointF p = data->GeometricObject<VPointF>(pRotate)->toQPointF();
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
                 VPointF p1 = VPointF(arc->GetP1(), "A", 0, 0);
                 BiasRotatePoint(&p1, dx, dy, p, angle);
@@ -147,8 +146,8 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 VPointF *center = new VPointF(arc->GetCenter());
                 BiasRotatePoint(center, dx, dy, p, angle);
 
-                QLineF l1(center->toQPointF(), p1.toQPointF());
-                QLineF l2(center->toQPointF(), p2.toQPointF());
+                QLineF l1(*center, p1);
+                QLineF l2(*center, p2);
                 center->setMode(Draw::Modeling);
                 quint32 idCenter = data->AddGObject(center);
                 Q_UNUSED(idCenter);
@@ -177,7 +176,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             {
                 const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(det.at(i).getId());
 
-                const QPointF p = data->GeometricObject<VPointF>(pRotate)->toQPointF();
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                 VPointF *p1 = new VPointF(spline->GetP1());
                 BiasRotatePoint(p1, dx, dy, p, angle);
 
@@ -190,7 +189,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 VPointF *p4 = new VPointF(spline->GetP4());
                 BiasRotatePoint(p4, dx, dy, p, angle);
 
-                VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, 0, Draw::Modeling);
+                VSpline *spl = new VSpline(*p1, p2, p3, *p4, 0, Draw::Modeling);
                 idObject = data->AddGObject(spl);
                 children.append(idObject);
 
@@ -223,7 +222,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                                    point2.Angle1Formula(), point1.Length2(), point1.Length2Formula(), point2.Length1(),
                                    point2.Length1Formula());
 
-                    const QPointF p = data->GeometricObject<VPointF>(pRotate)->toQPointF();
+                    const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                     VPointF *p1 = new VPointF(spline.GetP1());
                     BiasRotatePoint(p1, dx, dy, p, angle);
 
@@ -236,7 +235,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                     VPointF *p4 = new VPointF(spline.GetP4());
                     BiasRotatePoint(p4, dx, dy, p, angle);
 
-                    VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4);
+                    VSpline spl = VSpline(*p1, p2, p3, *p4);
                     if (i==1)
                     {
                         const qreal angle1 = spl.GetStartAngle()+180;
@@ -299,7 +298,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             {
                 VPointF *point = new VPointF(*data->GeometricObject<VPointF>(det.at(i).getId()));
                 point->setMode(Draw::Modeling);
-                BiasRotatePoint(point, dx, dy, data->GeometricObject<VPointF>(pRotate)->toQPointF(), angle);
+                BiasRotatePoint(point, dx, dy, *data->GeometricObject<VPointF>(pRotate), angle);
                 data->UpdateGObject(TakeNextId(children), point);
             }
         }
@@ -308,7 +307,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
         {
             if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
             {
-                const QPointF p = data->GeometricObject<VPointF>(pRotate)->toQPointF();
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                 const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
                 VPointF p1 = VPointF(arc->GetP1());
                 BiasRotatePoint(&p1, dx, dy, p, angle);
@@ -319,8 +318,8 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                 VPointF *center = new VPointF(arc->GetCenter());
                 BiasRotatePoint(center, dx, dy, p, angle);
 
-                QLineF l1(center->toQPointF(), p1.toQPointF());
-                QLineF l2(center->toQPointF(), p2.toQPointF());
+                QLineF l1(*center, p1);
+                QLineF l2(*center, p2);
 
                 VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                      QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
@@ -336,7 +335,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             {
                 const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(det.at(i).getId());
 
-                const QPointF p = data->GeometricObject<VPointF>(pRotate)->toQPointF();
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                 VPointF *p1 = new VPointF(spline->GetP1());
                 BiasRotatePoint(p1, dx, dy, p, angle);
 
@@ -349,7 +348,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                 VPointF *p4 = new VPointF(spline->GetP4());
                 BiasRotatePoint(p4, dx, dy, p, angle);
 
-                VSpline *spl = new VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4, 0, Draw::Modeling);
+                VSpline *spl = new VSpline(*p1, p2, p3, *p4, 0, Draw::Modeling);
                 data->UpdateGObject(TakeNextId(children), spl);
                 delete p1;
                 delete p4;
@@ -373,7 +372,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                                    point2.Angle1Formula(), point1.Length2(), point1.Length2Formula(), point2.Length1(),
                                    point2.Length1Formula());
 
-                    const QPointF p = data->GeometricObject<VPointF>(pRotate)->toQPointF();
+                    const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                     VPointF *p1 = new VPointF(spline.GetP1());
                     BiasRotatePoint(p1, dx, dy, p, angle);
 
@@ -386,7 +385,7 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                     VPointF *p4 = new VPointF(spline.GetP4());
                     BiasRotatePoint(p4, dx, dy, p, angle);
 
-                    VSpline spl = VSpline(*p1, p2.toQPointF(), p3.toQPointF(), *p4);
+                    VSpline spl = VSpline(*p1, p2, p3, *p4);
                     if (i==1)
                     {
                         const qreal angle1 = spl.GetStartAngle()+180;
@@ -431,7 +430,7 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
 {
     point->setX(point->x()+dx);
     point->setY(point->y()+dy);
-    QLineF line(pRotate, point->toQPointF());
+    QLineF line(pRotate, *point);
     line.setAngle(line.angle()+angle);
     point->setX(line.p2().x());
     point->setY(line.p2().y());
@@ -587,8 +586,8 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
     point4.setX(point4.x()+dx);
     point4.setY(point4.y()+dy);
 
-    const QLineF p4p3 = QLineF(point4.toQPointF(), point3.toQPointF());
-    const QLineF p1p2 = QLineF(point1.toQPointF(), point2.toQPointF());
+    const QLineF p4p3 = QLineF(point4, point3);
+    const QLineF p1p2 = QLineF(point1, point2);
 
     const qreal angle = p4p3.angleTo(p1p2);
     qint32 pointsD2 = 0; //Keeps number points the second detail, what we have already added.

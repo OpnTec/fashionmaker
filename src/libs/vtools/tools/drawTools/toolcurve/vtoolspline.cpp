@@ -71,7 +71,7 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
     const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
 
     auto *controlPoint1 = new VControlPointSpline(1, SplinePointPosition::FirstPoint, spl->GetP2(),
-                                                  spl->GetP1().toQPointF(), *data->GetPatternUnit(), freeAngle1,
+                                                  spl->GetP1(), *data->GetPatternUnit(), freeAngle1,
                                                   freeLength1, this);
     connect(controlPoint1, &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
@@ -83,7 +83,7 @@ VToolSpline::VToolSpline(VAbstractPattern *doc, VContainer *data, quint32 id, co
     const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
 
     auto *controlPoint2 = new VControlPointSpline(1, SplinePointPosition::LastPoint, spl->GetP3(),
-                                                  spl->GetP4().toQPointF(), *data->GetPatternUnit(), freeAngle2,
+                                                  spl->GetP4(), *data->GetPatternUnit(), freeAngle2,
                                                   freeLength2, this);
     connect(controlPoint2, &VControlPointSpline::ControlPointChangePosition, this,
             &VToolSpline::ControlPointChangePosition);
@@ -528,7 +528,7 @@ void VToolSpline::RefreshGeometry()
         const bool freeAngle1 = qmu::QmuTokenParser::IsSingle(spl->GetStartAngleFormula());
         const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl->GetC1LengthFormula());
 
-        const QPointF splinePoint = VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id())->toQPointF();
+        const QPointF splinePoint = *VAbstractTool::data.GeometricObject<VPointF>(spl->GetP1().id());
         controlPoints[0]->RefreshCtrlPoint(1, SplinePointPosition::FirstPoint, spl->GetP2(), splinePoint, freeAngle1,
                                            freeLength1);
     }
@@ -537,7 +537,7 @@ void VToolSpline::RefreshGeometry()
         const bool freeAngle2 = qmu::QmuTokenParser::IsSingle(spl->GetEndAngleFormula());
         const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl->GetC2LengthFormula());
 
-        const QPointF splinePoint = VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id())->toQPointF();
+        const QPointF splinePoint = *VAbstractTool::data.GeometricObject<VPointF>(spl->GetP4().id());
         controlPoints[1]->RefreshCtrlPoint(1, SplinePointPosition::LastPoint, spl->GetP3(), splinePoint, freeAngle2,
                                            freeLength2);
     }

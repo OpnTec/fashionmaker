@@ -193,8 +193,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const quint32 _id, QString &rad
 
     const qreal result = CheckFormula(_id, radius, data);
 
-    QPointF fPoint = VToolPointOfContact::FindPoint(qApp->toPixel(result), centerP->toQPointF(),
-                                                     firstP->toQPointF(), secondP->toQPointF());
+    QPointF fPoint = VToolPointOfContact::FindPoint(qApp->toPixel(result), *centerP, *firstP, *secondP);
     quint32 id =  _id;
     if (typeCreation == Source::FromGui)
     {

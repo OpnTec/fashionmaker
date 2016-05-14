@@ -283,7 +283,7 @@ void DialogEndLine::ShowDialog(bool click)
             VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
             SCASSERT(scene != nullptr);
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
-            QLineF line = QLineF(point->toQPointF(), scene->getScenePos());
+            QLineF line = QLineF(*point, scene->getScenePos());
 
             //Radius of point circle, but little bigger. Need handle with hover sizes.
             const qreal radius = ToPixel(DefPointRadius/*mm*/, Unit::Mm)*1.5;

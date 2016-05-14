@@ -54,11 +54,11 @@ void VisToolNormal::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(lineP1, first->toQPointF(), supportColor);
+        DrawPoint(lineP1, *first, supportColor);
 
         if (object2Id <= NULL_ID)
         {
-            QLineF line_mouse(first->toQPointF(), Visualization::scenePos);
+            QLineF line_mouse(*first, Visualization::scenePos);
             DrawLine(line, line_mouse, supportColor);
 
             QLineF normal = line_mouse.normalVector();
@@ -68,9 +68,9 @@ void VisToolNormal::RefreshGeometry()
         else
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(lineP2, second->toQPointF(), supportColor);
+            DrawPoint(lineP2, *second, supportColor);
 
-            QLineF line_mouse(first->toQPointF(), second->toQPointF());
+            QLineF line_mouse(*first, *second);
             DrawLine(line, line_mouse, supportColor);
 
             if (qFuzzyIsNull(length))
@@ -81,8 +81,8 @@ void VisToolNormal::RefreshGeometry()
             }
             else
             {
-                QPointF fPoint = VToolNormal::FindPoint(first->toQPointF(), second->toQPointF(), length, angle);
-                QLineF mainLine = QLineF(first->toQPointF(), fPoint);
+                QPointF fPoint = VToolNormal::FindPoint(*first, *second, length, angle);
+                QLineF mainLine = QLineF(*first, fPoint);
                 DrawLine(this, mainLine, mainColor, lineStyle);
 
                 DrawPoint(point, mainLine.p2(), mainColor);

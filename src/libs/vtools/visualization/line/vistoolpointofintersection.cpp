@@ -57,9 +57,9 @@ void VisToolPointOfIntersection::RefreshGeometry()
     else
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(axisP1, first->toQPointF(), supportColor);
+        DrawPoint(axisP1, *first, supportColor);
 
-        axisL1 = Axis(first->toQPointF(), 90);
+        axisL1 = Axis(*first, 90);
         DrawLine(this, axisL1, supportColor, Qt::DashLine);
 
         QLineF axisL2;
@@ -71,8 +71,8 @@ void VisToolPointOfIntersection::RefreshGeometry()
         else
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(point2Id);
-            DrawPoint(axisP2, second->toQPointF(), supportColor);
-            axisL2 = Axis(second->toQPointF(), 180);
+            DrawPoint(axisP2, *second, supportColor);
+            axisL2 = Axis(*second, 180);
             ShowIntersection(axisL1, axisL2, mainColor);
         }
         DrawLine(axis2, axisL2, supportColor, Qt::DashLine);

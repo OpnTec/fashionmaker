@@ -101,20 +101,22 @@ VPointF &VPointF::operator =(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VPointF::operator const QPointF() const
+{
+    return toQPointF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPointF::operator QPointF()
+{
+    return toQPointF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPointF VPointF::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
 {
     const QPointF p = RotatePF(originPoint, toQPointF(), degrees);
     return VPointF(p, name() + prefix, mx(), my());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief toQPointF convert to QPointF
- * @return QPointF point
- */
-QPointF VPointF::toQPointF() const
-{
-    return QPointF(d->_x, d->_y);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -155,6 +157,12 @@ void VPointF::setMx(qreal mx)
 void VPointF::setMy(qreal my)
 {
     d->_my = my;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPointF::toQPointF() const
+{
+    return QPointF(d->_x, d->_y);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

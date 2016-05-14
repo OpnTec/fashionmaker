@@ -136,7 +136,7 @@ VSplinePath::~VSplinePath()
  */
 void VSplinePath::append(const VSplinePoint &point)
 {
-    if (d->path.size() > 0 && d->path.last().P().toQPointF() == point.P().toQPointF()) //-V807
+    if (d->path.size() > 0 && d->path.last().P() == point.P()) //-V807
     {
         return;
     }

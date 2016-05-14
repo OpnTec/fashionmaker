@@ -61,7 +61,7 @@ void VisToolSplinePath::RefreshGeometry()
         for (int i = 0; i < size; ++i)
         {
             QGraphicsEllipseItem *point = this->getPoint(static_cast<unsigned>(i));
-            DrawPoint(point, pathPoints.at(i).P().toQPointF(), supportColor);
+            DrawPoint(point, pathPoints.at(i).P(), supportColor);
         }
 
         if (mode == Mode::Creation)
@@ -76,13 +76,13 @@ void VisToolSplinePath::RefreshGeometry()
                     VSpline spl = path.GetSpline(i);
 
                     ctrlPoints[preLastPoint]->RefreshCtrlPoint(i, SplinePointPosition::FirstPoint, spl.GetP2(),
-                                                               spl.GetP1().toQPointF());
+                                                               spl.GetP1());
                     ctrlPoints[lastPoint]->RefreshCtrlPoint(i, SplinePointPosition::LastPoint, spl.GetP3(),
-                                                            spl.GetP4().toQPointF());
+                                                            spl.GetP4());
                 }
             }
 
-            Creating(pathPoints.at(size-1).P().toQPointF(), size);
+            Creating(pathPoints.at(size-1).P(), size);
         }
 
         if (size > 1)

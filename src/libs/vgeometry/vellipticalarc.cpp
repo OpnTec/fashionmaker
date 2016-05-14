@@ -122,8 +122,8 @@ VEllipticalArc VEllipticalArc::Rotate(const QPointF &originPoint, qreal degrees,
     const VPointF center = GetCenter().Rotate(originPoint, degrees);
     const QPointF p1 = VPointF::RotatePF(originPoint, GetP1(), degrees);
     const QPointF p2 = VPointF::RotatePF(originPoint, GetP2(), degrees);
-    const qreal f1 = QLineF(center.toQPointF(), p1).angle() - GetRotationAngle();
-    const qreal f2 = QLineF(center.toQPointF(), p2).angle() - GetRotationAngle();
+    const qreal f1 = QLineF(center, p1).angle() - GetRotationAngle();
+    const qreal f2 = QLineF(center, p2).angle() - GetRotationAngle();
     VEllipticalArc elArc(center, GetRadius1(), GetRadius2(), f1, f2, GetRotationAngle());
     elArc.setName(name() + prefix);
     return elArc;
@@ -246,7 +246,7 @@ QPointF VEllipticalArc::GetPoint (qreal angle) const
 
     QPointF p (GetCenter().x() + x, GetCenter().y() + y);
     // rotation of point
-    QLineF line(GetCenter().toQPointF(), p);
+    QLineF line(GetCenter(), p);
     line.setAngle(line.angle() + GetRotationAngle());
 
     return line.p2();

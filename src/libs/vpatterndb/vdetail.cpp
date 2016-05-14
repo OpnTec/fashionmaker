@@ -371,7 +371,7 @@ QVector<QPointF> VDetail::ContourPoints(const VContainer *data) const
             case (Tool::NodePoint):
             {
                 const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).getId());
-                points.append(point->toQPointF());
+                points.append(*point);
             }
             break;
             case (Tool::NodeArc):
@@ -412,7 +412,7 @@ QVector<QPointF> VDetail::SeamAllowancePoints(const VContainer *data) const
             case (Tool::NodePoint):
             {
                 const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(at(i).getId());
-                QPointF pEkv = point->toQPointF();
+                QPointF pEkv = *point;
                 pEkv.setX(pEkv.x()+at(i).getMx());
                 pEkv.setY(pEkv.y()+at(i).getMy());
                 pointsEkv.append(pEkv);
@@ -555,14 +555,14 @@ QPointF VDetail::StartSegment(const VContainer *data, const int &i, bool reverse
         {
             if (at(CountNode()-1).getTypeTool() == Tool::NodePoint)
             {
-                begin = data->GeometricObject<VPointF>(at(CountNode()-1).getId())->toQPointF();
+                begin = *data->GeometricObject<VPointF>(at(CountNode()-1).getId());
             }
         }
         else
         {
             if (at(i-1).getTypeTool() == Tool::NodePoint)
             {
-                begin = data->GeometricObject<VPointF>(at(i-1).getId())->toQPointF();
+                begin = *data->GeometricObject<VPointF>(at(i-1).getId());
             }
         }
     }
@@ -592,14 +592,14 @@ QPointF VDetail::EndSegment(const VContainer *data, const int &i, bool reverse) 
         {
             if (at(0).getTypeTool() == Tool::NodePoint)
             {
-                end = data->GeometricObject<VPointF>(at(0).getId())->toQPointF();
+                end = *data->GeometricObject<VPointF>(at(0).getId());
             }
         }
         else
         {
             if (at(i+1).getTypeTool() == Tool::NodePoint)
             {
-                end = data->GeometricObject<VPointF>(at(i+1).getId())->toQPointF();
+                end = *data->GeometricObject<VPointF>(at(i+1).getId());
             }
         }
     }

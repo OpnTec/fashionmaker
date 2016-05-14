@@ -326,8 +326,8 @@ void TST_VSpline::TestLengthByPoint_data()
 
     QTest::newRow("Point on spline") << spl << p << testLength;
     QTest::newRow("Wrong point") << spl << QPointF(-10000, -10000) << -1.0;
-    QTest::newRow("First point") << spl << p1.toQPointF() << 0.0;
-    QTest::newRow("Last point") << spl << p4.toQPointF() << length;
+    QTest::newRow("First point") << spl << p1 << 0.0;
+    QTest::newRow("Last point") << spl << p4 << length;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
