@@ -174,14 +174,26 @@
 																			     <xs:sequence>
                                                                                        <xs:element name="source" minOccurs="1" maxOccurs="1">
                                                                                              <xs:complexType>
-                                                                                                   <xs:attribute name="item" type="xs:unsignedInt" use="required"></xs:attribute>
+																								   <xs:sequence>
+																									   <xs:element name="item" minOccurs="1" maxOccurs="unbounded">
+																											 <xs:complexType>
+																												<xs:attribute name="idObject" type="xs:unsignedInt" use="required"></xs:attribute>
+																											 </xs:complexType>
+																									   </xs:element>
+																								   </xs:sequence>	   
                                                                                              </xs:complexType>
                                                                                        </xs:element>
                                                                                        <xs:element name="destination" minOccurs="1" maxOccurs="1">
                                                                                              <xs:complexType>
-                                                                                                   <xs:attribute name="item" type="xs:unsignedInt" use="required"></xs:attribute>
-                                                                                                   <xs:attribute name="mx" type="xs:double"></xs:attribute>
-																								   <xs:attribute name="my" type="xs:double"></xs:attribute>
+																								   <xs:sequence>
+																									   <xs:element name="item" minOccurs="1" maxOccurs="unbounded">
+																											 <xs:complexType>
+																												<xs:attribute name="idObject" type="xs:unsignedInt" use="required"></xs:attribute>
+                                                                                                                <xs:attribute name="mx" type="xs:double"></xs:attribute>
+																								                <xs:attribute name="my" type="xs:double"></xs:attribute>
+																											 </xs:complexType>
+																									   </xs:element>
+																								   </xs:sequence>
                                                                                              </xs:complexType>
                                                                                        </xs:element>
                                                                                  </xs:sequence>
