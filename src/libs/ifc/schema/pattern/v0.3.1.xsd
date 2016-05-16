@@ -201,6 +201,7 @@
                                                                                  <xs:attribute name="center" type="xs:unsignedInt"></xs:attribute>
                                                                                  <xs:attribute name="angle" type="xs:string"></xs:attribute>
                                                                                  <xs:attribute name="suffix" type="xs:string"></xs:attribute>
+                                                                                 <xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
                                                                            </xs:complexType>
                                                                      </xs:element> 
                                                                      <xs:element name="arc" minOccurs="0" maxOccurs="unbounded">

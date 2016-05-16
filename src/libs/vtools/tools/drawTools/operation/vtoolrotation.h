@@ -56,8 +56,9 @@ public:
                                  const QVector<quint32> &source, const QVector<DestinationItem> &destination,
                                  VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                  const Document &parse, const Source &typeCreation);
-    // cppcheck-suppress duplInheritedMember
-    static const QString TagName;
+    static void ExtractData(VAbstractPattern *doc, const QDomElement &domElement, QVector<quint32> &source,
+                            QVector<DestinationItem> &destination);
+    static const QString ToolType;
     static const QString TagItem;
     static const QString TagSource;
     static const QString TagDestination;
@@ -65,7 +66,7 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::Rotation)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 
-    void setEnabled(bool enabled);
+    void SetEnabled(bool enabled);
 
     QString Suffix() const;
 

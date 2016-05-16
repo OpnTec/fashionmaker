@@ -527,7 +527,7 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
     {
         scene = sceneDetail;
     }
-    QStringList tags = QStringList() << TagPoint << TagLine << TagSpline << TagArc << TagTools;
+    const QStringList tags = QStringList() << TagPoint << TagLine << TagSpline << TagArc << TagTools << TagOperation;
     const QDomNodeList nodeList = node.childNodes();
     const qint32 num = nodeList.size();
     for (qint32 i = 0; i < num; ++i)
@@ -556,6 +556,10 @@ void VPattern::ParseDrawMode(const QDomNode &node, const Document &parse, const 
                 case 4: // TagTools
                     qCDebug(vXML, "Tag tools.");
                     ParseToolsElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
+                    break;
+                case 5: // TagOperation
+                    qCDebug(vXML, "Tag operation.");
+                    ParseOperationElement(scene, domElement, parse, domElement.attribute(AttrType, ""));
                     break;
                 default:
                     VException e(tr("Wrong tag name '%1'.").arg(domElement.tagName()));
@@ -596,7 +600,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
             {
                 if (element.tagName() == VToolDetail::TagNode)
                 {
-                    const quint32 id = GetParametrUInt(element, VToolDetail::AttrIdObject, NULL_ID_STR);
+                    const quint32 id = GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
                     const qreal mx = qApp->toPixel(GetParametrDouble(element, AttrMx, "0.0"));
                     const qreal my = qApp->toPixel(GetParametrDouble(element, AttrMy, "0.0"));
                     const bool reverse = GetParametrUInt(element, VToolDetail::AttrReverse, "0");
@@ -2401,6 +2405,49 @@ void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &do
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
+
+    try
+    {
+        quint32 id = NULL_ID;
+
+        ToolsCommonAttributes(domElement, id);
+        const quint32 center = GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+        const QString angle = GetParametrString(domElement, AttrAngle, "10");
+        QString a = angle;//need for saving fixed formula;
+        const QString suffix = GetParametrString(domElement, AttrSuffix, "");
+
+        QVector<quint32> source;
+        QVector<DestinationItem> destination;
+        VToolRotation::ExtractData(this, domElement, source, destination);
+
+        VToolRotation::Create(id, center, a, suffix, source, destination, scene, this, data, parse, Source::FromFile);
+        //Rewrite attribute formula. Need for situation when we have wrong formula.
+        if (a != angle)
+        {
+            SetAttribute(domElement, AttrAngle, a);
+            modified = true;
+            haveLiteChange();
+        }
+    }
+    catch (const VExceptionBadId &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating operation of rotation"), domElement);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        VExceptionObjectError excep(tr("Error creating or updating operation of rotation"), domElement);
+        excep.AddMoreInformation(QString("Message:     " + e.GetMsg() + "\n"+ "Expression:  " + e.GetExpr()));
+        throw excep;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) const
 {
     if (formula.isEmpty())
@@ -2639,6 +2686,27 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
             break;
         default:
             VException e(tr("Unknown tools type '%1'.").arg(type));
+            throw e;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::ParseOperationElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                                     const QString &type)
+{
+    SCASSERT(scene != nullptr);
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
+    Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of operation is empty");
+
+    const QStringList opers = QStringList() << VToolRotation::ToolType; /*0*/
+
+    switch (opers.indexOf(type))
+    {
+        case 0: //VToolRotation::ToolType
+            ParseToolRotation(scene, domElement, parse);
+            break;
+        default:
+            VException e(tr("Unknown operation type '%1'.").arg(type));
             throw e;
     }
 }

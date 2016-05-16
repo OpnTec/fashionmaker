@@ -738,7 +738,7 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VAbstractPattern *doc, con
                     {
                         if (element.tagName() == VToolUnionDetails::TagNode)
                         {
-                            quint32 id = doc->GetParametrUInt(element, VToolDetail::AttrIdObject, NULL_ID_STR);
+                            quint32 id = doc->GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
                             qreal mx = qApp->toPixel(doc->GetParametrDouble(element, AttrMx, "0.0"));
                             qreal my = qApp->toPixel(doc->GetParametrDouble(element, AttrMy, "0.0"));
                             const bool reversed = doc->GetParametrUInt(element, VToolDetail::AttrReverse, "0");

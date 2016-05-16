@@ -54,7 +54,6 @@ const QString VToolDetail::TagNode          = QStringLiteral("node");
 const QString VToolDetail::AttrSupplement   = QStringLiteral("supplement");
 const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
 const QString VToolDetail::AttrWidth        = QStringLiteral("width");
-const QString VToolDetail::AttrIdObject     = QStringLiteral("idObject");
 const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolDetail::AttrReverse      = QStringLiteral("reverse");
 

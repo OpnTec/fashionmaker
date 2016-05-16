@@ -40,7 +40,7 @@
 #include "../vwidgets/vsimplecurve.h"
 #include "../../../undocommands/label/rotationmovelabel.h"
 
-const QString VToolRotation::TagName        = QStringLiteral("operation");
+const QString VToolRotation::ToolType       = QStringLiteral("rotation");
 const QString VToolRotation::TagItem        = QStringLiteral("item");
 const QString VToolRotation::TagSource      = QStringLiteral("source");
 const QString VToolRotation::TagDestination = QStringLiteral("destination");
@@ -308,13 +308,56 @@ VToolRotation *VToolRotation::Create(const quint32 _id, const quint32 &origin, Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VToolRotation::getTagName() const
+void VToolRotation::ExtractData(VAbstractPattern *doc, const QDomElement &domElement, QVector<quint32> &source,
+                                QVector<DestinationItem> &destination)
 {
-    return VToolRotation::TagName;
+    SCASSERT(doc != nullptr)
+    const QDomNodeList nodeList = domElement.childNodes();
+    for (qint32 i = 0; i < nodeList.size(); ++i)
+    {
+        const QDomElement dataElement = nodeList.at(i).toElement();
+        if (not dataElement.isNull() && dataElement.tagName() == TagSource)
+        {
+            source.clear();
+            const QDomNodeList srcList = dataElement.childNodes();
+            for (qint32 j = 0; j < srcList.size(); ++j)
+            {
+                const QDomElement element = srcList.at(j).toElement();
+                if (not element.isNull())
+                {
+                    source.append(doc->GetParametrUInt(element, AttrIdObject, NULL_ID_STR));
+                }
+            }
+        }
+
+        if (not dataElement.isNull() && dataElement.tagName() == TagDestination)
+        {
+            destination.clear();
+            const QDomNodeList srcList = dataElement.childNodes();
+            for (qint32 j = 0; j < srcList.size(); ++j)
+            {
+                const QDomElement element = srcList.at(j).toElement();
+                if (not element.isNull())
+                {
+                    DestinationItem d;
+                    d.id = doc->GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
+                    d.mx = qApp->toPixel(doc->GetParametrDouble(element, AttrMx, "0.0"));
+                    d.my = qApp->toPixel(doc->GetParametrDouble(element, AttrMy, "0.0"));
+                    destination.append(d);
+                }
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolRotation::setEnabled(bool enabled)
+QString VToolRotation::getTagName() const
+{
+    return VAbstractPattern::TagOperation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolRotation::SetEnabled(bool enabled)
 {
     this->setEnabled(enabled);
 }
@@ -585,7 +628,7 @@ void VToolRotation::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 void VToolRotation::Disable(bool disable, const QString &namePP)
 {
     enabled = !CorrectDisable(disable, namePP);
-    setEnabled(enabled);
+    SetEnabled(enabled);
 
     QMapIterator<quint32, VAbstractSimple *> i(rObjects);
     while (i.hasNext())
@@ -661,6 +704,7 @@ void VToolRotation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VDrawTool::SaveOptions(tag, obj);
 
+    doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrCenter, QString().setNum(origPointId));
     doc->SetAttribute(tag, AttrAngle, angle);
     doc->SetAttribute(tag, AttrSuffix, suffix);
