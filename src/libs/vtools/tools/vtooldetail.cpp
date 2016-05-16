@@ -47,8 +47,6 @@
 #include <QGraphicsView>
 #include <QMessageBox>
 
-
-const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
 
 const QString VToolDetail::AttrSupplement   = QStringLiteral("supplement");
@@ -315,7 +313,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 void VToolDetail::AddToFile()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement domElement = doc->createElement(getTagName());
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrName, detail.getName());
@@ -619,7 +617,7 @@ void VToolDetail::AddNode(VAbstractPattern *doc, QDomElement &domElement, const 
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolDetail::getTagName() const
 {
-    return VToolDetail::TagName;
+    return VAbstractPattern::TagDetail;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

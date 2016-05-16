@@ -36,7 +36,6 @@
 
 #include <QUndoStack>
 
-const QString VToolUnionDetails::TagName          = QStringLiteral("tools");
 const QString VToolUnionDetails::ToolType         = QStringLiteral("unionDetails");
 const QString VToolUnionDetails::TagDetail        = QStringLiteral("det");
 const QString VToolUnionDetails::TagNode          = QStringLiteral("node");
@@ -439,7 +438,7 @@ void VToolUnionDetails::BiasRotatePoint(VPointF *point, const qreal &dx, const q
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolUnionDetails::getTagName() const
 {
-    return VToolUnionDetails::TagName;
+    return VAbstractPattern::TagTools;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -778,7 +777,7 @@ QVector<VDetail> VToolUnionDetails::GetDetailFromFile(VAbstractPattern *doc, con
  */
 void VToolUnionDetails::AddToFile()
 {
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement domElement = doc->createElement(getTagName());
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);

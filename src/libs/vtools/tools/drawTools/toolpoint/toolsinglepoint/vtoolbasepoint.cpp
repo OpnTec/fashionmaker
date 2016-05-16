@@ -125,7 +125,7 @@ void VToolBasePoint::AddToFile()
 {
     Q_ASSERT_X(not namePP.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
 
-    QDomElement sPoint = doc->createElement(TagName);
+    QDomElement sPoint = doc->createElement(getTagName());
 
     // Create SPoint tag
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);

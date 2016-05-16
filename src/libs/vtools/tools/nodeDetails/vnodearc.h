@@ -41,7 +41,7 @@ class VNodeArc :public VAbstractNode
 public:
     static void  Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Document &parse,
                         const Source &typeCreation, const quint32 &idTool = 0);
-    static const QString TagName;
+
     static const QString ToolType;
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 public slots:

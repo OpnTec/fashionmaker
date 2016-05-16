@@ -32,8 +32,6 @@
 
 #include <QKeyEvent>
 
-const QString VAbstractSpline::TagName = QStringLiteral("spline");
-
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem *parent)
     :VDrawTool(doc, data, id), QGraphicsPathItem(parent), controlPoints(QVector<VControlPointSpline *>()),
@@ -49,7 +47,7 @@ VAbstractSpline::~VAbstractSpline()
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractSpline::getTagName() const
 {
-    return VAbstractSpline::TagName;
+    return VAbstractPattern::TagSpline;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

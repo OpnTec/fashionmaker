@@ -132,6 +132,7 @@ public:
     static const QString TagCalculation;
     static const QString TagModeling;
     static const QString TagDetails;
+    static const QString TagDetail;
     static const QString TagAuthor;
     static const QString TagDescription;
     static const QString TagImage;

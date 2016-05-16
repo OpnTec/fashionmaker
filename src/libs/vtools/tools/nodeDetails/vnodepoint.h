@@ -47,7 +47,7 @@ public:
     static void  Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsScene *scene,
                         quint32 id, quint32 idPoint, const Document &parse,
                         const Source &typeCreation, const quint32 &idTool = 0);
-    static const QString TagName;
+
     static const QString ToolType;
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::NodePoint)};

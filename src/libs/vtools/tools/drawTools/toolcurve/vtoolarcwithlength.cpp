@@ -36,7 +36,6 @@
 
 #include <QKeyEvent>
 
-const QString VToolArcWithLength::TagName = QStringLiteral("arc");
 const QString VToolArcWithLength::ToolType = QStringLiteral("arcWithLength");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,7 +133,7 @@ VToolArcWithLength *VToolArcWithLength::Create(const quint32 _id, const quint32 
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolArcWithLength::getTagName() const
 {
-    return VToolArcWithLength::TagName;
+    return VAbstractPattern::TagArc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

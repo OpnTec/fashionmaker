@@ -42,7 +42,7 @@ public:
     static VNodeSpline *Create(VAbstractPattern *doc, VContainer *data, quint32 id,
                                quint32 idSpline, const Document &parse,
                                const Source &typeCreation, const quint32 &idTool = 0);
-    static const QString TagName;
+
     static const QString ToolType;
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 public slots:

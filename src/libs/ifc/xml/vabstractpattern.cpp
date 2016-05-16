@@ -38,6 +38,7 @@ const QString VAbstractPattern::TagPattern      = QStringLiteral("pattern");
 const QString VAbstractPattern::TagCalculation  = QStringLiteral("calculation");
 const QString VAbstractPattern::TagModeling     = QStringLiteral("modeling");
 const QString VAbstractPattern::TagDetails      = QStringLiteral("details");
+const QString VAbstractPattern::TagDetail       = QStringLiteral("detail");
 const QString VAbstractPattern::TagAuthor       = QStringLiteral("author");
 const QString VAbstractPattern::TagDescription  = QStringLiteral("description");
 const QString VAbstractPattern::TagNotes        = QStringLiteral("notes");

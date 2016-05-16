@@ -305,8 +305,7 @@ quint32 VPattern::SPointActiveDraw()
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName() == VToolSinglePoint::TagName &&
-                        domElement.attribute(AttrType, "") == VToolBasePoint::ToolType)
+                if (domElement.tagName() == TagPoint && domElement.attribute(AttrType, "") == VToolBasePoint::ToolType)
                 {
                     return GetParametrId(domElement);
                 }
@@ -658,7 +657,7 @@ void VPattern::ParseDetails(const QDomElement &domElement, const Document &parse
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                if (domElement.tagName() == VToolDetail::TagName)
+                if (domElement.tagName() == TagDetail)
                 {
                     ParseDetailElement(domElement, parse);
                 }

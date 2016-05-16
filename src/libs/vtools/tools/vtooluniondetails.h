@@ -56,7 +56,7 @@ public:
     static void  PointsOnEdge(const VDetail &d, const quint32 &index, VPointF &p1, VPointF &p2, VContainer *data);
     static void  FindIndexJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j);
     static QVector<VDetail> GetDetailFromFile(VAbstractPattern *doc, const QDomElement &domElement);
-    static const QString TagName;
+
     static const QString ToolType;
     static const QString TagDetail;
     static const QString TagNode;

@@ -64,7 +64,6 @@ public:
     static void        Create(const quint32 &_id, const VDetail &newDetail, VMainGraphicsScene  *scene,
                               VAbstractPattern *doc, VContainer *data, const Document &parse,
                               const Source &typeCreation, const QString &drawName = QString());
-    static const QString TagName;
     static const QString TagNode;
     static const QString AttrSupplement;
     static const QString AttrClosed;

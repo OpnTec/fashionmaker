@@ -33,8 +33,6 @@
 #include "../../dialogs/tools/dialogline.h"
 #include "../../visualization/line/vistoolline.h"
 
-const QString VToolLine::TagName = QStringLiteral("line");
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VToolLine constructor.
@@ -167,7 +165,7 @@ VToolLine * VToolLine::Create(const quint32 &_id, const quint32 &firstPoint, con
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolLine::getTagName() const
 {
-    return VToolLine::TagName;
+    return VAbstractPattern::TagLine;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -249,7 +247,7 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
  */
 void VToolLine::AddToFile()
 {
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement domElement = doc->createElement(getTagName());
     QSharedPointer<VGObject> obj = QSharedPointer<VGObject> ();
     SaveOptions(domElement, obj);
     AddToCalculation(domElement);
