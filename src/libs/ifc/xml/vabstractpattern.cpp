@@ -1203,6 +1203,7 @@ QStringList VAbstractPattern::ListExpressions() const
     list << ListArcExpressions();
     list << ListSplineExpressions();
     list << ListIncrementExpressions();
+    list << ListOperationExpressions();
 
     return list;
 }
@@ -1383,6 +1384,29 @@ QStringList VAbstractPattern::ListIncrementExpressions() const
         try
         {
             expressions.append(GetParametrString(dom, IncrementFormula));
+        }
+        catch (VExceptionEmptyParameter &e)
+        {
+            Q_UNUSED(e)
+        }
+    }
+
+    return expressions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VAbstractPattern::ListOperationExpressions() const
+{
+    QStringList expressions;
+    const QDomNodeList list = elementsByTagName(TagOperation);
+    for (int i=0; i < list.size(); ++i)
+    {
+        const QDomElement dom = list.at(i).toElement();
+
+        // Each tag can contains several attributes.
+        try
+        {
+            expressions.append(GetParametrString(dom, AttrAngle));
         }
         catch (VExceptionEmptyParameter &e)
         {

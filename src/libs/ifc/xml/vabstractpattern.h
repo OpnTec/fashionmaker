@@ -294,6 +294,7 @@ private:
     QStringList ListSplineExpressions() const;
     QStringList ListPathPointExpressions() const;
     QStringList ListIncrementExpressions() const;
+    QStringList ListOperationExpressions() const;
 
     bool IsVariable(const QString& token) const;
     bool IsPostfixOperator(const QString& token) const;
