@@ -183,10 +183,7 @@ void VToolDoublePoint::DoChangePosition(quint32 id, qreal mx, qreal my)
         point->setMx(mx);
         point->setMy(my);
         VAbstractTool::data.UpdateGObject(p1id, point);
-        firstPoint->blockSignals(true);
-        firstPoint->setPos(QPointF(mx, my));
-        firstPoint->blockSignals(false);
-        RefreshLine(p1id);
+        firstPoint->RefreshGeometry(*point);
     }
     else if (id == p2id)
     {
@@ -194,10 +191,7 @@ void VToolDoublePoint::DoChangePosition(quint32 id, qreal mx, qreal my)
         point->setMx(mx);
         point->setMy(my);
         VAbstractTool::data.UpdateGObject(p2id, point);
-        secondPoint->blockSignals(true);
-        secondPoint->setPos(QPointF(mx, my));
-        secondPoint->blockSignals(false);
-        RefreshLine(p2id);
+        secondPoint->RefreshGeometry(*point);
     }
 }
 
