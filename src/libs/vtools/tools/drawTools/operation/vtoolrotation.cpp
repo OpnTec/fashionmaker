@@ -420,6 +420,29 @@ void VToolRotation::FullUpdateFromFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolRotation::SetFactor(qreal factor)
+{
+    VDrawTool::SetFactor(factor);
+    QMapIterator<quint32, VAbstractSimple *> i(rObjects);
+    while (i.hasNext())
+    {
+        i.next();
+        if (i.value()->GetType() == GOType::Point)
+        {
+            VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
+            SCASSERT(item != nullptr);
+            item->RefreshGeometry(*VAbstractTool::data.GeometricObject<VPointF>(i.key()));
+        }
+        else
+        {
+            VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
+            SCASSERT(item != nullptr);
+            item->RefreshGeometry(VAbstractTool::data.GeometricObject<VAbstractCurve>(i.key()));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolRotation::AllowHover(bool enabled)
 {
     QMapIterator<quint32, VAbstractSimple *> i(rObjects);

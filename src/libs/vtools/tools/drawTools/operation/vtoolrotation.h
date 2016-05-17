@@ -78,6 +78,7 @@ public:
 
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
+    virtual void SetFactor(qreal factor) Q_DECL_OVERRIDE;
 
     virtual void AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
