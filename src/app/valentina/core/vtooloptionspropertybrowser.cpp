@@ -1925,7 +1925,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolRotation(QGraphicsItem *item)
 {
-
+    VToolRotation *i = qgraphicsitem_cast<VToolRotation *>(item);
+    i->ShowVisualization(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
