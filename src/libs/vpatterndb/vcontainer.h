@@ -113,7 +113,7 @@ public:
     const VDetail      GetDetail(quint32 id) const;
     qreal              GetTableValue(const QString& name, MeasurementsType patternType) const;
     template <typename T>
-    QSharedPointer<T> GetVariable(QString name) const;
+    QSharedPointer<T>  GetVariable(QString name) const;
     static quint32     getId();
     static quint32     getNextId();
     static void        UpdateId(quint32 newId);
