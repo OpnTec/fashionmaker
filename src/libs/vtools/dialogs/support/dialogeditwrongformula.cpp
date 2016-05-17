@@ -31,6 +31,8 @@
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../vpatterndb/vtranslatevars.h"
 
+enum {ColumnName = 0, ColumnFullName};
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent)
     :DialogTool(data, toolId, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0),
@@ -47,7 +49,7 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
     CheckState();
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEditWrongFormula::PutHere);
-    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &DialogEditWrongFormula::PutVal);
+    connect(ui->tableWidget, &QTableWidget::itemDoubleClicked, this, &DialogEditWrongFormula::PutVal);
 
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEditWrongFormula::FormulaChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogEditWrongFormula::DeployFormulaTextEdit);
@@ -63,6 +65,10 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
         }
     }
 #endif
+    ui->tableWidget->setColumnCount(2);
+    ui->tableWidget->setEditTriggers(QTableWidget::NoEditTriggers);
+    ui->tableWidget->verticalHeader()->hide();
+    ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -109,17 +115,17 @@ void DialogEditWrongFormula::EvalFormula()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ValChenged show description when current variable changed
+ * @brief ValChanged show description when current variable changed
  * @param row number of row
  */
-void DialogEditWrongFormula::ValChenged(int row)
+void DialogEditWrongFormula::ValChanged(int row)
 {
-    if (ui->listWidget->count() == 0)
+    if (ui->tableWidget->rowCount() == 0)
     {
         ui->labelDescription->setText("");
         return;
     }
-    QListWidgetItem *item = ui->listWidget->item( row );
+    QTableWidgetItem *item = ui->tableWidget->item( row, ColumnName );
     if (ui->radioButtonStandardTable->isChecked())
     {
         const QString name = qApp->TrVars()->VarFromUser(item->text());
@@ -178,11 +184,11 @@ void DialogEditWrongFormula::ValChenged(int row)
  */
 void DialogEditWrongFormula::PutHere()
 {
-    const QListWidgetItem *item = ui->listWidget->currentItem();
+    const QTableWidgetItem *item = ui->tableWidget->currentItem();
     if (item != nullptr)
     {
         QTextCursor cursor = ui->plainTextEditFormula->textCursor();
-        cursor.insertText(item->text());
+        cursor.insertText(ui->tableWidget->item(item->row(), ColumnName)->text());
         ui->plainTextEditFormula->setTextCursor(cursor);
         ui->plainTextEditFormula->setFocus();
     }
@@ -191,13 +197,13 @@ void DialogEditWrongFormula::PutHere()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief PutVal put variable into edit
- * @param item chosen item of list widget
+ * @param item chosen item of table widget
  */
-void DialogEditWrongFormula::PutVal(QListWidgetItem *item)
+void DialogEditWrongFormula::PutVal(QTableWidgetItem *item)
 {
     SCASSERT(item != nullptr);
     QTextCursor cursor = ui->plainTextEditFormula->textCursor();
-    cursor.insertText(item->text());
+    cursor.insertText(ui->tableWidget->item(item->row(), ColumnName)->text());
     ui->plainTextEditFormula->setTextCursor(cursor);
 }
 
@@ -208,7 +214,7 @@ void DialogEditWrongFormula::PutVal(QListWidgetItem *item)
 void DialogEditWrongFormula::Measurements()
 {
     ui->checkBoxHideEmpty->setEnabled(true);
-    ShowVariable(data->DataMeasurements());
+    ShowMeasurements(data->DataMeasurements());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -324,7 +330,7 @@ QString DialogEditWrongFormula::GetFormula() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::InitVariables()
 {
-    connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogEditWrongFormula::ValChenged);
+    connect(ui->tableWidget, &QTableWidget::currentCellChanged, this, &DialogEditWrongFormula::ValChanged);
 
     ui->radioButtonStandardTable->setChecked(true);
     Measurements();
@@ -355,8 +361,10 @@ void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, co
 template <class key, class val>
 void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
 {
-    ui->listWidget->blockSignals(true);
-    ui->listWidget->clear();
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(0);
+    ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText("");
 
     QMapIterator<key, val> iMap(var);
@@ -369,11 +377,62 @@ void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
         }
         if (iMap.value()->Filter(toolId) == false)
         {// If we create this variable don't show
-            QListWidgetItem *item = new QListWidgetItem(iMap.key());
+            ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
+            QTableWidgetItem *item = new QTableWidgetItem(iMap.key());
             item->setFont(QFont("Times", 12, QFont::Bold));
-            ui->listWidget->addItem(item);
+            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
         }
     }
-    ui->listWidget->blockSignals(false);
-    ui->listWidget->setCurrentRow (0);
+    ui->tableWidget->blockSignals(false);
+    ui->tableWidget->selectRow(0);
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ShowMeasurements show measurements in table
+ * @param var container with measurements
+ */
+void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement> > &var)
+{
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(0);
+    ui->tableWidget->setColumnHidden(ColumnFullName, false);
+    ui->labelDescription->setText("");
+
+    QMapIterator<QString, QSharedPointer<VMeasurement>> iMap(var);
+    while (iMap.hasNext())
+    {
+        iMap.next();
+        if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && iMap.value()->IsNotUsed())
+        {
+            continue; //skip this measurement
+        }
+        if (iMap.value()->Filter(toolId) == false)
+        {// If we create this variable don't show
+            ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
+            QTableWidgetItem *itemName = new QTableWidgetItem(iMap.key());
+            itemName->setFont(QFont("Times", 12, QFont::Bold));
+            itemName->setToolTip(itemName->text());
+
+            QTableWidgetItem *itemFullName = new QTableWidgetItem();
+            itemFullName->setFont(QFont("Times", 12, QFont::Bold));
+            if (iMap.value()->IsCustom())
+            {
+                itemFullName->setText(iMap.value()->GetGuiText());
+            }
+            else
+            {
+                itemFullName->setText(qApp->TrVars()->GuiText(iMap.value()->GetName()));
+            }
+
+            itemFullName->setToolTip(itemFullName->text());
+            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, itemName);
+            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnFullName, itemFullName);
+        }
+    }
+    ui->tableWidget->blockSignals(false);
+    ui->tableWidget->selectRow(0);
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }

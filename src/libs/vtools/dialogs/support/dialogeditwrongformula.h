@@ -30,6 +30,7 @@
 #define DIALOGEDITWRONGFORMULA_H
 
 #include "../tools/dialogtool.h"
+#include <QTableWidgetItem>
 
 namespace Ui
 {
@@ -63,9 +64,9 @@ public slots:
      */
     void         DeployFormulaTextEdit();
     virtual void EvalFormula() Q_DECL_OVERRIDE;
-    void         ValChenged(int row);
+    void         ValChanged(int row);
     void         PutHere();
-    void         PutVal(QListWidgetItem * item);
+    void         PutVal(QTableWidgetItem * item);
 
     void         Measurements();
     void         LengthLines();
@@ -96,6 +97,7 @@ private:
 
     template <class key, class val>
     void ShowVariable(const QMap<key, val> &var);
+    void ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement> > &var);
 
     void SetDescription(const QString &name, qreal value, const QString &unit, const QString &description);
 };

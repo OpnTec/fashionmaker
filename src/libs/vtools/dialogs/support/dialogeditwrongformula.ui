@@ -192,8 +192,7 @@
        </property>
        <property name="icon">
         <iconset theme="go-down">
-         <normaloff/>
-        </iconset>
+         <normaloff>.</normaloff>.</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -347,10 +346,23 @@
         </widget>
        </item>
        <item>
-        <widget class="QListWidget" name="listWidget">
-         <property name="toolTip">
-          <string>Double click for add to formula</string>
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
          </property>
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Full name</string>
+          </property>
+         </column>
         </widget>
        </item>
       </layout>
@@ -389,7 +401,6 @@
   <tabstop>radioButtonLengthSpline</tabstop>
   <tabstop>radioButtonAngleLine</tabstop>
   <tabstop>checkBoxHideEmpty</tabstop>
-  <tabstop>listWidget</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
