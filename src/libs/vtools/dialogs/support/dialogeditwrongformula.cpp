@@ -414,6 +414,7 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
             QTableWidgetItem *itemName = new QTableWidgetItem(iMap.key());
             itemName->setFont(QFont("Times", 12, QFont::Bold));
+            itemName->setToolTip(itemName->text());
 
             QTableWidgetItem *itemFullName = new QTableWidgetItem();
             itemFullName->setFont(QFont("Times", 12, QFont::Bold));
@@ -426,6 +427,7 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
                 itemFullName->setText(qApp->TrVars()->GuiText(iMap.value()->GetName()));
             }
 
+            itemFullName->setToolTip(itemFullName->text());
             ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, itemName);
             ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnFullName, itemFullName);
         }
