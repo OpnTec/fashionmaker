@@ -75,9 +75,11 @@ void VisToolRotation::RefreshGeometry()
         return;
     }
 
+    QSharedPointer<VPointF> origin;
+
     if (object1Id != NULL_ID)
     {
-        const QSharedPointer<VPointF> origin = Visualization::data->GeometricObject<VPointF>(object1Id);
+        origin = Visualization::data->GeometricObject<VPointF>(object1Id);
         DrawPoint(point, *origin, supportColor2);
 
         QLineF rLine;
@@ -105,65 +107,69 @@ void VisToolRotation::RefreshGeometry()
 
         Visualization::toolTip = tr("Rotating angle = %1°, <b>Shift</b> - sticking angle, "
                                     "<b>Mouse click</b> - finish creation").arg(rLine.angle());
+    }
 
-        int iPoint = -1;
-        int iCurve = -1;
-        for (int i = 0; i < objects.size(); ++i)
+    int iPoint = -1;
+    int iCurve = -1;
+    for (int i = 0; i < objects.size(); ++i)
+    {
+        const quint32 id = objects.at(i);
+        const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
+
+        // This check helps to find missed objects in the switch
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects was handled.");
+
+        switch(static_cast<GOType>(obj->getType()))
         {
-            const quint32 id = objects.at(i);
-            const QSharedPointer<VGObject> obj = Visualization::data->GetGObject(id);
-
-            // This check helps to find missed objects in the switch
-            Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects was handled.");
-
-            switch(static_cast<GOType>(obj->getType()))
+            case GOType::Point:
             {
-                case GOType::Point:
+                const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
+
+                ++iPoint;
+                QGraphicsEllipseItem *point = GetPoint(iPoint);
+                DrawPoint(point, *p, supportColor);
+
+                ++iPoint;
+                point = GetPoint(iPoint);
+
+                if (object1Id != NULL_ID)
                 {
-                    const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
-
-                    ++iPoint;
-                    QGraphicsEllipseItem *point = GetPoint(iPoint);
-                    DrawPoint(point, *p, supportColor);
-
-                    ++iPoint;
-                    point = GetPoint(iPoint);
                     DrawPoint(point, p->Rotate(*origin, angle), supportColor);
-                    break;
                 }
-                case GOType::Arc:
-                {
-                    iCurve = AddCurve<VArc>(*origin, id, iCurve);
-                    break;
-                }
-                case GOType::EllipticalArc:
-                {
-                    iCurve = AddCurve<VEllipticalArc>(*origin, id, iCurve);
-                    break;
-                }
-                case GOType::Spline:
-                {
-                    iCurve = AddCurve<VSpline>(*origin, id, iCurve);
-                    break;
-                }
-                case GOType::SplinePath:
-                {
-                    iCurve = AddCurve<VSplinePath>(*origin, id, iCurve);
-                    break;
-                }
-                case GOType::CubicBezier:
-                {
-                    iCurve = AddCurve<VCubicBezier>(*origin, id, iCurve);
-                    break;
-                }
-                case GOType::CubicBezierPath:
-                {
-                    iCurve = AddCurve<VCubicBezierPath>(*origin, id, iCurve);
-                    break;
-                }
-                case GOType::Unknown:
-                    break;
+                break;
             }
+            case GOType::Arc:
+            {
+                iCurve = AddCurve<VArc>(*origin, id, iCurve);
+                break;
+            }
+            case GOType::EllipticalArc:
+            {
+                iCurve = AddCurve<VEllipticalArc>(*origin, id, iCurve);
+                break;
+            }
+            case GOType::Spline:
+            {
+                iCurve = AddCurve<VSpline>(*origin, id, iCurve);
+                break;
+            }
+            case GOType::SplinePath:
+            {
+                iCurve = AddCurve<VSplinePath>(*origin, id, iCurve);
+                break;
+            }
+            case GOType::CubicBezier:
+            {
+                iCurve = AddCurve<VCubicBezier>(*origin, id, iCurve);
+                break;
+            }
+            case GOType::CubicBezierPath:
+            {
+                iCurve = AddCurve<VCubicBezierPath>(*origin, id, iCurve);
+                break;
+            }
+            case GOType::Unknown:
+                break;
         }
     }
 }
@@ -253,8 +259,11 @@ int VisToolRotation::AddCurve(const QPointF &origin, quint32 id, int i)
 
     ++i;
     path = GetCurve(i);
-    const Item rotated = curve->Rotate(origin, angle);
-    DrawPath(path, rotated.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+    if (object1Id != NULL_ID)
+    {
+        const Item rotated = curve->Rotate(origin, angle);
+        DrawPath(path, rotated.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+    }
 
     return i;
 }
