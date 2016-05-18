@@ -44,12 +44,14 @@ VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)
       angle(INT_MIN),
       objects(),
       point(nullptr),
+      angleArc(nullptr),
       xAxis(nullptr),
       supportColor2(Qt::darkGreen),
       points(),
       curves()
 {
     point = InitPoint(supportColor2, this);
+    angleArc = InitItem<QGraphicsPathItem>(supportColor2, this);
     xAxis = InitItem<QGraphicsLineItem>(supportColor2, this);
 }
 
@@ -75,31 +77,31 @@ void VisToolRotation::RefreshGeometry()
 
     if (object1Id != NULL_ID)
     {
-        const QPointF origin = *Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(point, origin, supportColor2);
+        const QSharedPointer<VPointF> origin = Visualization::data->GeometricObject<VPointF>(object1Id);
+        DrawPoint(point, *origin, supportColor2);
 
         QLineF rLine;
         if (VFuzzyComparePossibleNulls(angle, INT_MIN))
         {
-            rLine = QLineF(origin, Visualization::scenePos);
+            rLine = QLineF(*origin, Visualization::scenePos);
 
             if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
             {
                 rLine.setAngle(CorrectAngle(rLine.angle()));
             }
 
-            rLine.setP2(Ray(origin, rLine.angle()));
+            rLine.setP2(Ray(*origin, rLine.angle()));
         }
         else
         {
-            rLine = QLineF(origin, Ray(origin, angle));
+            rLine = QLineF(*origin, Ray(*origin, angle));
         }
 
-        if (mode == Mode::Creation)
-        {
-            DrawLine(this, rLine, supportColor2, Qt::DashLine);
-            DrawLine(xAxis, QLineF(origin, Ray(origin, 0)), supportColor2, Qt::DashLine);
-        }
+        DrawLine(this, rLine, supportColor2, Qt::DashLine);
+        DrawLine(xAxis, QLineF(*origin, Ray(*origin, 0)), supportColor2, Qt::DashLine);
+
+        VArc arc(*origin, ToPixel(DefPointRadius/*mm*/*2, Unit::Mm), 0, rLine.angle());
+        DrawPath(angleArc, arc.GetPath(PathDirection::Hide), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
         Visualization::toolTip = tr("Rotating angle = %1°, <b>Shift</b> - sticking angle, "
                                     "<b>Mouse click</b> - finish creation").arg(rLine.angle());
@@ -126,37 +128,37 @@ void VisToolRotation::RefreshGeometry()
 
                     ++iPoint;
                     point = GetPoint(iPoint);
-                    DrawPoint(point, p->Rotate(origin, angle), supportColor);
+                    DrawPoint(point, p->Rotate(*origin, angle), supportColor);
                     break;
                 }
                 case GOType::Arc:
                 {
-                    iCurve = AddCurve<VArc>(origin, id, iCurve);
+                    iCurve = AddCurve<VArc>(*origin, id, iCurve);
                     break;
                 }
                 case GOType::EllipticalArc:
                 {
-                    iCurve = AddCurve<VEllipticalArc>(origin, id, iCurve);
+                    iCurve = AddCurve<VEllipticalArc>(*origin, id, iCurve);
                     break;
                 }
                 case GOType::Spline:
                 {
-                    iCurve = AddCurve<VSpline>(origin, id, iCurve);
+                    iCurve = AddCurve<VSpline>(*origin, id, iCurve);
                     break;
                 }
                 case GOType::SplinePath:
                 {
-                    iCurve = AddCurve<VSplinePath>(origin, id, iCurve);
+                    iCurve = AddCurve<VSplinePath>(*origin, id, iCurve);
                     break;
                 }
                 case GOType::CubicBezier:
                 {
-                    iCurve = AddCurve<VCubicBezier>(origin, id, iCurve);
+                    iCurve = AddCurve<VCubicBezier>(*origin, id, iCurve);
                     break;
                 }
                 case GOType::CubicBezierPath:
                 {
-                    iCurve = AddCurve<VCubicBezierPath>(origin, id, iCurve);
+                    iCurve = AddCurve<VCubicBezierPath>(*origin, id, iCurve);
                     break;
                 }
                 case GOType::Unknown:

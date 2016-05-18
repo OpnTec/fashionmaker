@@ -55,6 +55,7 @@ private:
     qreal                angle;
     QVector<quint32>     objects;
     QGraphicsEllipseItem *point;
+    QGraphicsPathItem    *angleArc;
     QGraphicsLineItem    *xAxis;
     QColor               supportColor2;
 
