@@ -59,7 +59,6 @@ public:
                                  const Document &parse, const Source &typeCreation);
     static void ExtractData(VAbstractPattern *doc, const QDomElement &domElement, QVector<quint32> &source,
                             QVector<DestinationItem> &destination);
-    QVector<QString> GetNames(const QString &suffix) const;
     static const QString ToolType;
     static const QString TagItem;
     static const QString TagSource;

@@ -682,18 +682,18 @@ void VToolOptionsPropertyBrowser::SetOperationSuffix(const QString &suffix)
         }
 
         QRegularExpression rx(NameRegExp());
-        const QVector<QString> names = item->GetNames(suffix);
-        for (int i=0; i < names.size(); ++i)
+        const QStringList uniqueNames = VContainer::AllUniqueNames();
+        for (int i=0; i < uniqueNames.size(); ++i)
         {
-            if (not rx.match(names.at(i)).hasMatch() || not VContainer::IsUnique(names.at(i)))
+            const QString name = uniqueNames.at(i) + suffix;
+            if (not rx.match(name).hasMatch() || not VContainer::IsUnique(name))
             {
                 idToProperty[AttrSuffix]->setValue(item->Suffix());
-            }
-            else
-            {
-                item->SetSuffix(suffix);
+                return;
             }
         }
+
+        item->SetSuffix(suffix);
     }
     else
     {

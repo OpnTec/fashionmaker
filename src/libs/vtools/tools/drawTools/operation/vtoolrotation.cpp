@@ -352,52 +352,6 @@ void VToolRotation::ExtractData(VAbstractPattern *doc, const QDomElement &domEle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QString> VToolRotation::GetNames(const QString &suffix) const
-{
-    QVector<QString> names;
-    for (int i = 0; i < source.size(); ++i)
-    {
-        const QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(source.at(i));
-
-        // This check helps to find missed objects in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
-
-#if defined(Q_CC_GNU)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wswitch-default"
-#endif
-        switch(static_cast<GOType>(obj->getType()))
-        {
-            case GOType::Point:
-            {
-                const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(source.at(i));
-                names.append(point->name() + suffix);
-                break;
-            }
-            case GOType::Arc:
-            case GOType::EllipticalArc:
-            case GOType::Spline:
-            case GOType::SplinePath:
-            case GOType::CubicBezier:
-            case GOType::CubicBezierPath:
-            {
-                const QSharedPointer<VAbstractCurve> curve =
-                        VAbstractTool::data.GeometricObject<VAbstractCurve>(source.at(i));
-                names.append(curve->name() + suffix);
-                break;
-            }
-            case GOType::Unknown:
-                break;
-        }
-#if defined(Q_CC_GNU)
-#pragma GCC diagnostic pop
-#endif
-    }
-
-    return names;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VToolRotation::getTagName() const
 {
     return VAbstractPattern::TagOperation;
