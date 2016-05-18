@@ -75,6 +75,9 @@ protected:
     virtual void SaveData() Q_DECL_OVERRIDE;
     virtual void closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
 
+private slots:
+    void PointChanged();
+
 private:
     Q_DISABLE_COPY(DialogRotation)
     Ui::DialogRotation *ui;

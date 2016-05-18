@@ -64,13 +64,15 @@ DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QW
 
     FillComboBoxPoints(ui->comboBoxOriginPoint);
 
-//    flagName = true;
+    flagName = true;
     CheckState();
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogRotation::SuffixChanged);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogRotation::FXAngle);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogRotation::AngleChanged);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogRotation::DeployAngleTextEdit);
+    connect(ui->comboBoxOriginPoint, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+            this, &DialogRotation::PointChanged);
 
     vis = new VisToolRotation(data);
 }
@@ -195,6 +197,11 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
+            if (objects.contains(id))
+            {
+                return;
+            }
+
             if (SetObject(id, ui->comboBoxOriginPoint, ""))
             {
                 VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
@@ -330,6 +337,24 @@ void DialogRotation::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditFormula->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogRotation::PointChanged()
+{
+    QColor color = okColor;
+    if (objects.contains(getCurrentObjectId(ui->comboBoxOriginPoint)))
+    {
+        flagError = false;
+        color = errorColor;
+    }
+    else
+    {
+        flagError = true;
+        color = okColor;
+    }
+    ChangeColor(ui->labelOriginPoint, color);
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
