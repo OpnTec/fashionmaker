@@ -37,6 +37,7 @@
 #include "../ifc/xml/vdomdocument.h"
 #include "../../visualization/line/vistoolrotation.h"
 #include "../support/dialogeditwrongformula.h"
+#include "../qmuparser/qmudef.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QWidget *parent)
@@ -263,18 +264,33 @@ void DialogRotation::SuffixChanged()
     QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
     if (edit)
     {
-        const QString name = edit->text();
-//        QRegularExpression rx(NameRegExp());
-        if (name.isEmpty()/* || (pointName != name && not data->IsUnique(name)) || not rx.match(name).hasMatch()*/)
+        const QString suffix = edit->text();
+        if (suffix.isEmpty())
         {
             flagName = false;
             ChangeColor(ui->labelSuffix, Qt::red);
+            CheckState();
+            return;
         }
         else
         {
-            flagName = true;
-            ChangeColor(ui->labelSuffix, okColor);
+            QRegularExpression rx(NameRegExp());
+            const QStringList uniqueNames = data->AllUniqueNames();
+            for (int i=0; i < uniqueNames.size(); ++i)
+            {
+                const QString name = uniqueNames.at(i) + suffix;
+                if (not rx.match(name).hasMatch() || not data->IsUnique(name))
+                {
+                    flagName = false;
+                    ChangeColor(ui->labelSuffix, Qt::red);
+                    CheckState();
+                    return;
+                }
+            }
         }
+
+        flagName = true;
+        ChangeColor(ui->labelSuffix, okColor);
     }
     CheckState();
 }
