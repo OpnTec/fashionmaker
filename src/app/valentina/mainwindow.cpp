@@ -130,16 +130,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     CreateActions();
-    CreateMenus();
-    ToolBarDraws();
-    ToolBarStages();
-    InitToolButtons();
     InitScenes();
-
-    helpLabel = new QLabel(QObject::tr("Create new pattern piece to start working."));
-    ui->statusBar->addWidget(helpLabel);
-
-    ToolBarTools();
 
     doc = new VPattern(pattern, &mode, sceneDraw, sceneDetails);
     connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
@@ -150,6 +141,17 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
     qApp->setCurrentDocument(doc);
 
+    InitDocksContain();
+    CreateMenus();
+    ToolBarDraws();
+    ToolBarStages();
+    InitToolButtons();
+
+    helpLabel = new QLabel(QObject::tr("Create new pattern piece to start working."));
+    ui->statusBar->addWidget(helpLabel);
+
+    ToolBarTools();
+
     connect(qApp->getUndoStack(), &QUndoStack::cleanChanged, this, &MainWindow::PatternWasModified);
 
     InitAutoSave();
@@ -157,7 +159,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->toolBox->setCurrentIndex(0);
 
     ReadSettings();
-    InitDocksContain();
 
     setCurrentFile("");
     WindowsLocale();
@@ -3371,12 +3372,14 @@ void MainWindow::CreateMenus()
 
     //Add Undo/Redo actions.
     undoAction = qApp->getUndoStack()->createUndoAction(this, tr("&Undo"));
+    connect(undoAction, &QAction::triggered, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     undoAction->setShortcuts(QKeySequence::Undo);
     undoAction->setIcon(QIcon::fromTheme("edit-undo"));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, undoAction);
     ui->toolBarTools->addAction(undoAction);
 
     redoAction = qApp->getUndoStack()->createRedoAction(this, tr("&Redo"));
+    connect(redoAction, &QAction::triggered, toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     redoAction->setShortcuts(QKeySequence::Redo);
     redoAction->setIcon(QIcon::fromTheme("edit-redo"));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, redoAction);
