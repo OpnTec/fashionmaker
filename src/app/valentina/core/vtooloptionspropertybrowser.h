@@ -74,6 +74,9 @@ private:
     template<class Tool>
     void SetPointName2(const QString &name);
 
+    template<class Tool>
+    void SetOperationSuffix(const QString &suffix);
+
     template<class Type>
     Type GetCrossPoint(const QVariant &value);
 
@@ -94,6 +97,9 @@ private:
 
     template<class Tool>
     void AddPropertyPointName2(Tool *i, const QString &propertyName);
+
+    template<class Tool>
+    void AddPropertyOperationSuffix(Tool *i, const QString &propertyName, bool readOnly = false);
 
     template<class Tool>
     void AddPropertyCrossPoint(Tool *i, const QString &propertyName);

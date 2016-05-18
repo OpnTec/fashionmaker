@@ -39,6 +39,7 @@
 #include "../vwidgets/vsimplepoint.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../../../undocommands/label/rotationmovelabel.h"
+#include "../vpatterndb/vformula.h"
 
 const QString VToolRotation::ToolType       = QStringLiteral("rotation");
 const QString VToolRotation::TagItem        = QStringLiteral("item");
@@ -53,7 +54,7 @@ VToolRotation::VToolRotation(VAbstractPattern *doc, VContainer *data, quint32 id
     : VDrawTool(doc, data, id),
       QGraphicsItem(parent),
       origPointId(origPointId),
-      angle(angle),
+      formulaAngle(angle),
       suffix(suffix),
       source(source),
       destination(destination),
@@ -142,7 +143,7 @@ void VToolRotation::setDialog()
     DialogRotation *dialogTool = qobject_cast<DialogRotation*>(dialog);
     SCASSERT(dialogTool != nullptr);
     dialogTool->SetOrigPointId(origPointId);
-    dialogTool->SetAngle(angle);
+    dialogTool->SetAngle(formulaAngle);
     dialogTool->SetSuffix(suffix);
 }
 
@@ -351,6 +352,52 @@ void VToolRotation::ExtractData(VAbstractPattern *doc, const QDomElement &domEle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QString> VToolRotation::GetNames(const QString &suffix) const
+{
+    QVector<QString> names;
+    for (int i = 0; i < source.size(); ++i)
+    {
+        const QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(source.at(i));
+
+        // This check helps to find missed objects in the switch
+        Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 7, "Not all objects were handled.");
+
+#if defined(Q_CC_GNU)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wswitch-default"
+#endif
+        switch(static_cast<GOType>(obj->getType()))
+        {
+            case GOType::Point:
+            {
+                const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(source.at(i));
+                names.append(point->name() + suffix);
+                break;
+            }
+            case GOType::Arc:
+            case GOType::EllipticalArc:
+            case GOType::Spline:
+            case GOType::SplinePath:
+            case GOType::CubicBezier:
+            case GOType::CubicBezierPath:
+            {
+                const QSharedPointer<VAbstractCurve> curve =
+                        VAbstractTool::data.GeometricObject<VAbstractCurve>(source.at(i));
+                names.append(curve->name() + suffix);
+                break;
+            }
+            case GOType::Unknown:
+                break;
+        }
+#if defined(Q_CC_GNU)
+#pragma GCC diagnostic pop
+#endif
+    }
+
+    return names;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VToolRotation::getTagName() const
 {
     return VAbstractPattern::TagOperation;
@@ -363,9 +410,40 @@ void VToolRotation::SetEnabled(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VFormula VToolRotation::GetFormulaAngle() const
+{
+    VFormula fAngle(formulaAngle, getData());
+    fAngle.setCheckZero(false);
+    fAngle.setToolId(id);
+    fAngle.setPostfix(degreeSymbol);
+    return fAngle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolRotation::SetFormulaAngle(const VFormula &value)
+{
+    if (value.error() == false)
+    {
+        formulaAngle = value.GetFormula(FormulaType::FromUser);
+
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+        SaveOption(obj);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VToolRotation::Suffix() const
 {
     return suffix;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolRotation::SetSuffix(const QString &suffix)
+{
+    // Don't know if need check name here.
+    this->suffix = suffix;
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetFakeGObject(id);
+    SaveOption(obj);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -620,7 +698,7 @@ void VToolRotation::SetVisualization()
 
         visual->SetObjects(source);
         visual->SetOriginPointId(origPointId);
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(angle));
+        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
         visual->RefreshGeometry();
     }
 }
@@ -718,7 +796,7 @@ void VToolRotation::SaveDialog(QDomElement &domElement)
 void VToolRotation::ReadToolAttributes(const QDomElement &domElement)
 {
     origPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-    angle = doc->GetParametrString(domElement, AttrAngle, "0");
+    formulaAngle = doc->GetParametrString(domElement, AttrAngle, "0");
     suffix = doc->GetParametrString(domElement, AttrSuffix);
 }
 
@@ -729,7 +807,7 @@ void VToolRotation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 
     doc->SetAttribute(tag, AttrType, ToolType);
     doc->SetAttribute(tag, AttrCenter, QString().setNum(origPointId));
-    doc->SetAttribute(tag, AttrAngle, angle);
+    doc->SetAttribute(tag, AttrAngle, formulaAngle);
     doc->SetAttribute(tag, AttrSuffix, suffix);
 
     QDomElement tagObjects = doc->createElement(TagSource);
