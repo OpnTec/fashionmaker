@@ -1013,7 +1013,7 @@ void MainWindow::ToolGroup(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolRotation(bool checked)
 {
-    ToolSelectGroupObjects();
+    ToolSelectOperationObjects();
     SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation,
                                            ":/cursor/rotation_cursor.png",
                                            tr("Select one or more objects, <b>Enter</b> - confirm selection"),

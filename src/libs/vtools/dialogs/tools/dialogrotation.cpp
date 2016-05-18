@@ -153,7 +153,7 @@ void DialogRotation::ShowDialog(bool click)
 
         stage1 = false;
 
-        auto scene = qApp->getCurrentScene();
+        VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(qApp->getCurrentScene());
         SCASSERT(scene != nullptr);
         scene->clearSelection();
 
@@ -161,6 +161,14 @@ void DialogRotation::ShowDialog(bool click)
         SCASSERT(operation != nullptr);
         operation->SetObjects(objects.toVector());
         operation->VisualMode();
+
+        scene->ToggleArcSelection(false);
+        scene->ToggleSplineSelection(false);
+        scene->ToggleSplinePathSelection(false);
+
+        scene->ToggleArcHover(false);
+        scene->ToggleSplineHover(false);
+        scene->ToggleSplinePathHover(false);
 
         emit ToolTip("Select origin point");
     }
