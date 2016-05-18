@@ -43,6 +43,7 @@ public:
     virtual void    DecrementReferens(quint32 id) const Q_DECL_OVERRIDE;
 
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
+    virtual QString GenerateSuffix() const Q_DECL_OVERRIDE;
 
     virtual void    UpdateToolData(const quint32 &id, VContainer *data) Q_DECL_OVERRIDE;
 

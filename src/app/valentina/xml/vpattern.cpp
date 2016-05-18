@@ -2880,10 +2880,9 @@ void VPattern::SetIncrementDescription(const QString &name, const QString &text)
  */
 QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedName) const
 {
-    QDomNodeList drawList = elementsByTagName(TagDraw);
-
     if (type == LabelType::NewPatternPiece)
     {
+        const QDomNodeList drawList = elementsByTagName(TagDraw);
         QString name;
         int i = 0;
         for (;;)
@@ -2904,25 +2903,7 @@ QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedNa
     }
     else if (type == LabelType::NewLabel)
     {
-        if (drawList.isEmpty())
-        {
-            const QString label = GetLabelBase(0);
-            qCDebug(vXML, "Point label: %s", qUtf8Printable(label));
-            return label;
-        }
-
-        int index = 0;
-        for (int i = 0; i < drawList.size(); ++i)
-        {
-            QDomElement node = drawList.at(i).toElement();
-            if (node.attribute(AttrName) == nameActivPP)
-            {
-                index = i;
-                break;
-            }
-        }
-
-        QString labelBase = GetLabelBase(static_cast<quint32>(index));
+        const QString labelBase = GetLabelBase(static_cast<quint32>(GetIndexActivPP()));
 
         qint32 num = 1;
         QString name;
@@ -2939,6 +2920,40 @@ QString VPattern::GenerateLabel(const LabelType &type, const QString &reservedNa
         return name;
     }
     qCDebug(vXML, "Got unknow type %d", static_cast<int>(type));
+    return QString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPattern::GenerateSuffix() const
+{
+    const QString suffixBase = GetLabelBase(static_cast<quint32>(GetIndexActivPP())).toLower();
+    const QStringList uniqueNames = data->AllUniqueNames();
+    qint32 num = 1;
+    QString suffix;
+    for (;;)
+    {
+        suffix = QString("%1%2").arg(suffixBase).arg(num);
+
+        for (int i=0; i < uniqueNames.size(); ++i)
+        {
+            if (not data->IsUnique(uniqueNames.at(i) + suffix))
+            {
+                break;
+            }
+
+            if (i == uniqueNames.size()-1)
+            {
+                qCDebug(vXML, "Suffix is: %s", qUtf8Printable(suffix));
+                return suffix;
+            }
+        }
+
+        if (num == INT_MAX)
+        {
+            break;
+        }
+        ++num;
+    }
     return QString();
 }
 

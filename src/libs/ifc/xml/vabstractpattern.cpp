@@ -1173,6 +1173,28 @@ void VAbstractPattern::InsertTag(const QStringList &tags, const QDomElement &ele
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VAbstractPattern::GetIndexActivPP() const
+{
+    const QDomNodeList drawList = elementsByTagName(TagDraw);
+
+    int index = 0;
+    if (not drawList.isEmpty())
+    {
+        for (int i = 0; i < drawList.size(); ++i)
+        {
+            QDomElement node = drawList.at(i).toElement();
+            if (node.attribute(AttrName) == nameActivPP)
+            {
+                index = i;
+                break;
+            }
+        }
+    }
+
+    return index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VAbstractPattern::ListIncrements() const
 {
     QStringList increments;

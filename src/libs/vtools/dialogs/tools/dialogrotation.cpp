@@ -54,7 +54,7 @@ DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QW
     this->formulaBaseHeightAngle = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
-//    ui->lineEditSuffix->setText(/*qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel)*/);
+    ui->lineEditSuffix->setText(qApp->getCurrentDocument()->GenerateSuffix());
 
     timerAngle = new QTimer(this);
     connect(timerAngle, &QTimer::timeout, this, &DialogRotation::EvalAngle);

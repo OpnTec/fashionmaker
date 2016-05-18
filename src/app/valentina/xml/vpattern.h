@@ -77,6 +77,7 @@ public:
     void SetIncrementDescription(const QString &name, const QString &text);
 
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
+    virtual QString GenerateSuffix() const Q_DECL_OVERRIDE;
 
     bool IsDefCustom() const;
     void SetDefCustom(bool value);

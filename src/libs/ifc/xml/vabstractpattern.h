@@ -74,6 +74,7 @@ public:
     virtual void   DecrementReferens(quint32 id) const=0;
 
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const=0;
+    virtual QString GenerateSuffix() const=0;
 
     virtual void   UpdateToolData(const quint32 &id, VContainer *data)=0;
 
@@ -284,6 +285,7 @@ protected:
     QDomElement    CheckTagExists(const QString &tag);
     void           InsertTag(const QStringList &tags, const QDomElement &element);
 
+    int GetIndexActivPP() const;
 private:
     Q_DISABLE_COPY(VAbstractPattern)
 
