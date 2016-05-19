@@ -63,7 +63,7 @@ protected:
 private:
     Q_DISABLE_COPY(VToolCubicBezierPath)
 
-    VToolCubicBezierPath(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
+    VToolCubicBezierPath(VAbstractPattern *doc, VContainer *data, quint32 id,
                          const Source &typeCreation, QGraphicsItem * parent = nullptr);
 
     virtual void  RefreshGeometry() Q_DECL_OVERRIDE;

@@ -73,7 +73,7 @@ protected:
 private:
     Q_DISABLE_COPY(VToolArc)
 
-    VToolArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
+    VToolArc(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
              QGraphicsItem * parent = nullptr);
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;

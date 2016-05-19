@@ -55,10 +55,12 @@ public:
     quint32 GetSecondPoint() const;
     void    SetSecondPoint(const quint32 &value);
 
+    QString GetLineColor() const;
+    void    SetLineColor(const QString &value);
+
     virtual void     ShowVisualization(bool show) Q_DECL_OVERRIDE;
 
     virtual void     SetTypeLine(const QString &value) Q_DECL_OVERRIDE;
-    virtual void     SetLineColor(const QString &value) Q_DECL_OVERRIDE;
     virtual void     GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     virtual void     FullUpdateFromFile() Q_DECL_OVERRIDE;
@@ -88,6 +90,9 @@ private:
 
     /** @brief secondPoint id second line point. */
     quint32           secondPoint;
+
+    /** @brief lineColor color of a line. */
+    QString           lineColor;
 
     VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
               const QString &typeLine, const QString &lineColor, const Source &typeCreation,

@@ -48,7 +48,8 @@
 VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
                      const QString &typeLine, const QString &lineColor, const Source &typeCreation,
                      QGraphicsItem *parent)
-    :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint)
+    :VDrawTool(doc, data, id), QGraphicsLineItem(parent), firstPoint(firstPoint), secondPoint(secondPoint),
+      lineColor(ColorBlack)
 {
     this->typeLine = typeLine;
     this->lineColor = lineColor;
@@ -457,6 +458,12 @@ void VToolLine::SetTypeLine(const QString &value)
 
     QSharedPointer<VGObject> obj;//We don't have object for line in data container. Just will send empty object.
     SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLine::GetLineColor() const
+{
+    return lineColor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

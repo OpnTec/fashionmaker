@@ -990,9 +990,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutArc(VProperty *property)
         case 4: // AttrLength
             i->SetFormula(value.value<VFormula>());
             break;
-        case 27: // AttrTypeColor
-            i->SetLineColor(value.toString());
-            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1017,9 +1014,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSpline(VProperty *property)
         case 4: // AttrLength
             i->SetFormula(value.value<VFormula>());
             break;
-        case 27: // AttrTypeColor
-            i->SetLineColor(value.toString());
-            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -1043,9 +1037,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSplinePath(VProperty *propert
             break;
         case 4: // AttrLength
             i->SetFormula(value.value<VFormula>());
-            break;
-        case 27: // AttrTypeColor
-            i->SetLineColor(value.toString());
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1705,7 +1696,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
 
     AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1717,7 +1707,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSpline(QGraphicsItem *item)
 
     AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1729,7 +1718,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *it
 
     AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2135,9 +2123,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutArc()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[AttrLength]->setValue(valueFormula);
-
-    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-    idToProperty[AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2150,9 +2135,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSpline()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[AttrLength]->setValue(valueFormula);
-
-    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-    idToProperty[AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2165,9 +2147,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSplinePath()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[AttrLength]->setValue(valueFormula);
-
-    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-    idToProperty[AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

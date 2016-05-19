@@ -39,12 +39,11 @@
 const QString VToolArcWithLength::ToolType = QStringLiteral("arcWithLength");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolArcWithLength::VToolArcWithLength(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
-                                       const Source &typeCreation, QGraphicsItem *parent)
+VToolArcWithLength::VToolArcWithLength(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                                       QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
     sceneType = SceneObject::Arc;
-    lineColor = color;
 
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
@@ -64,7 +63,7 @@ void VToolArcWithLength::setDialog()
     dialogTool->SetF1(arc->GetFormulaF1());
     dialogTool->SetLength(arc->GetFormulaLength());
     dialogTool->SetRadius(arc->GetFormulaRadius());
-    dialogTool->SetColor(lineColor);
+    dialogTool->SetColor(arc->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -102,6 +101,7 @@ VToolArcWithLength *VToolArcWithLength::Create(const quint32 _id, const quint32 
 
     const VPointF c = *data->GeometricObject<VPointF>(center);
     VArc *arc = new VArc(calcLength, length, c, calcRadius, radius, calcF1, f1);
+    arc->SetColor(color);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -120,7 +120,7 @@ VToolArcWithLength *VToolArcWithLength::Create(const quint32 _id, const quint32 
     VDrawTool::AddRecord(id, Tool::ArcWithLength, doc);
     if (parse == Document::FullParse)
     {
-        VToolArcWithLength *toolArc = new VToolArcWithLength(doc, data, id, color, typeCreation);
+        VToolArcWithLength *toolArc = new VToolArcWithLength(doc, data, id, typeCreation);
         scene->addItem(toolArc);
         InitArcToolConnections(scene, toolArc);
         doc->AddTool(id, toolArc);
@@ -317,7 +317,8 @@ void VToolArcWithLength::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolArcWithLength::RefreshGeometry()
 {
-    this->setPen(QPen(CorrectColor(lineColor),
+    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    this->setPen(QPen(CorrectColor(arc->GetColor()),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setPath(ToolPath());
 

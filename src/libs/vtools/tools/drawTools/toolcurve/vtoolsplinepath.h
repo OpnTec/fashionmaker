@@ -47,10 +47,8 @@ public:
     static VToolSplinePath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                    VContainer *data);
     static VToolSplinePath *Create(const quint32 _id, VSplinePath *path, const QString &color,
-                                   VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data,
-                                   const Document &parse,
-                                   const Source &typeCreation);
-
+                                   VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
+                                   const Document &parse, const Source &typeCreation);
     static VToolSplinePath *Create(const quint32 _id, const QVector<quint32> &points, QVector<QString> &a1,
                                    QVector<QString> &a2, QVector<QString> &l1, QVector<QString> &l2,
                                    const QString &color, VMainGraphicsScene *scene, VAbstractPattern *doc,
@@ -101,8 +99,8 @@ private:
     QPointF oldPosition;
     int     splIndex;
 
-    VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
-                    const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolSplinePath(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                    QGraphicsItem *parent = nullptr);
 
     bool          IsMovable(int index) const;
     virtual void  RefreshGeometry() Q_DECL_OVERRIDE;

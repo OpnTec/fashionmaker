@@ -41,9 +41,9 @@ public:
     static VToolArcWithLength* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                       VContainer *data);
     static VToolArcWithLength* Create(const quint32 _id, const quint32 &center, QString &radius, QString &f1,
-                                      QString &length, const QString &color, VMainGraphicsScene  *scene,
-                                      VAbstractPattern *doc,
-                                      VContainer *data, const Document &parse, const Source &typeCreation);
+                                      QString &length, const QString &color, VMainGraphicsScene *scene,
+                                      VAbstractPattern *doc, VContainer *data, const Document &parse,
+                                      const Source &typeCreation);
 
     static const QString ToolType;
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
@@ -72,8 +72,8 @@ protected:
 private:
     Q_DISABLE_COPY(VToolArcWithLength)
 
-    VToolArcWithLength(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
-                       const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolArcWithLength(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                       QGraphicsItem * parent = nullptr);
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
 

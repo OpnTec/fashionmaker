@@ -46,7 +46,7 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
                                const QString &lineColor, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
     :VToolSinglePoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
-      mainLine(nullptr)
+      mainLine(nullptr), lineColor(ColorBlack)
 {
     this->typeLine = typeLine;
     this->lineColor = lineColor;
@@ -141,6 +141,21 @@ qreal VToolLinePoint::GetAngle() const
 void VToolLinePoint::SetAngle(const qreal &value)
 {
     angle = value;
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLinePoint::GetLineColor() const
+{
+    return lineColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::SetLineColor(const QString &value)
+{
+    lineColor = value;
+
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
     SaveOption(obj);
 }

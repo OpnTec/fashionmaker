@@ -1412,11 +1412,8 @@ void VPattern::ParseToolCutSpline(VMainGraphicsScene *scene, QDomElement &domEle
         const QString formula = GetParametrString(domElement, AttrLength, "0");
         QString f = formula;//need for saving fixed formula;
         const quint32 splineId = GetParametrUInt(domElement, VToolCutSpline::AttrSpline, NULL_ID_STR);
-        const QString color = GetParametrString(domElement, AttrColor,
-                                                ColorBlack);
 
-        VToolCutSpline::Create(id, name, f, splineId, mx, my, color, scene, this, data, parse,
-                               Source::FromFile);
+        VToolCutSpline::Create(id, name, f, splineId, mx, my, scene, this, data, parse, Source::FromFile);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != formula)
         {
@@ -1457,11 +1454,8 @@ void VPattern::ParseToolCutSplinePath(VMainGraphicsScene *scene, QDomElement &do
         QString f = formula;//need for saving fixed formula;
         const quint32 splinePathId = GetParametrUInt(domElement, VToolCutSplinePath::AttrSplinePath,
                                                      NULL_ID_STR);
-        const QString color = GetParametrString(domElement, AttrColor,
-                                                ColorBlack);
 
-        VToolCutSplinePath::Create(id, name, f, splinePathId, mx, my, color, scene, this, data, parse,
-                                   Source::FromFile);
+        VToolCutSplinePath::Create(id, name, f, splinePathId, mx, my, scene, this, data, parse, Source::FromFile);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != formula)
         {
@@ -1501,9 +1495,8 @@ void VPattern::ParseToolCutArc(VMainGraphicsScene *scene, QDomElement &domElemen
         const QString formula = GetParametrString(domElement, AttrLength, "0");
         QString f = formula;//need for saving fixed formula;
         const quint32 arcId = GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
-        const QString color = GetParametrString(domElement, AttrColor, ColorBlack);
 
-        VToolCutArc::Create(id, name, f, arcId, mx, my, color, scene, this, data, parse, Source::FromFile);
+        VToolCutArc::Create(id, name, f, arcId, mx, my, scene, this, data, parse, Source::FromFile);
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (f != formula)
         {

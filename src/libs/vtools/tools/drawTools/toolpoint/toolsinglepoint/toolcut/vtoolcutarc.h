@@ -41,7 +41,7 @@ public:
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCutArc*  Create(DialogTool *dialog, VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data);
     static VToolCutArc*  Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
-                                const qreal &mx, const qreal &my, const QString &color, VMainGraphicsScene *scene,
+                                const qreal &mx, const qreal &my, VMainGraphicsScene *scene,
                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
                                 const Source &typeCreation);
     static const QString ToolType;
@@ -58,8 +58,7 @@ private:
     Q_DISABLE_COPY(VToolCutArc)
 
     VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                const quint32 &arcId, const QString &color, const Source &typeCreation,
-                QGraphicsItem * parent = nullptr);
+                const quint32 &arcId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLCUTARC_H

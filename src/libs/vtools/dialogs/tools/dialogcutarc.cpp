@@ -62,7 +62,6 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
     CheckState();
 
     FillComboBoxArcs(ui->comboBoxArc);
-    FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutArc::NamePointChanged);
@@ -168,18 +167,6 @@ void DialogCutArc::setArcId(const quint32 &value)
     VisToolCutArc *path = qobject_cast<VisToolCutArc *>(vis);
     SCASSERT(path != nullptr);
     path->setObject1Id(value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogCutArc::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCutArc::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

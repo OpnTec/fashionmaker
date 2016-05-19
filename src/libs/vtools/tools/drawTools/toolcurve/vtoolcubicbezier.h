@@ -61,8 +61,8 @@ protected:
 private:
     Q_DISABLE_COPY(VToolCubicBezier)
 
-    VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
-                     const Source &typeCreation, QGraphicsItem * parent = nullptr);
+    VToolCubicBezier(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
+                     QGraphicsItem * parent = nullptr);
 
     virtual void RefreshGeometry() Q_DECL_OVERRIDE;
     void SetSplineAttributes(QDomElement &domElement, const VCubicBezier &spl);

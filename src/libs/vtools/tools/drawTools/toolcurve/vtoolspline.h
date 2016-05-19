@@ -78,7 +78,7 @@ private:
     Q_DISABLE_COPY(VToolSpline)
     QPointF oldPosition;
 
-    VToolSpline (VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color, const Source &typeCreation,
+    VToolSpline (VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                  QGraphicsItem * parent = nullptr );
 
     bool IsMovable() const;

@@ -50,6 +50,9 @@ public:
 
     void setEnabled(bool enabled);
 
+    QString GetLineColor() const;
+    void    SetLineColor(const QString &value);
+
     QString name() const;
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;

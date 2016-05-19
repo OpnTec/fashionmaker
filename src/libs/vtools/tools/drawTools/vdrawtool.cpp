@@ -47,7 +47,7 @@ qreal VDrawTool::factor = 1;
  */
 VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
     :VAbstractTool(doc, data, id, parent), nameActivDraw(doc->GetNameActivPP()),
-      dialog(nullptr), typeLine(TypeLineLine), lineColor(ColorBlack), enabled(true)
+      dialog(nullptr), typeLine(TypeLineLine), enabled(true)
 {
     connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VAbstractPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
@@ -380,22 +380,6 @@ QString VDrawTool::getLineType() const
 void VDrawTool::SetTypeLine(const QString &value)
 {
     typeLine = value;
-
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-    SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VDrawTool::GetLineColor() const
-{
-    return lineColor;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::SetLineColor(const QString &value)
-{
-    lineColor = value;
 
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
     SaveOption(obj);
