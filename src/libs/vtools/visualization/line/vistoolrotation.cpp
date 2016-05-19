@@ -77,6 +77,8 @@ void VisToolRotation::RefreshGeometry()
 
     QSharedPointer<VPointF> origin = QSharedPointer<VPointF>(new VPointF());
 
+    qreal tempAngle = 0;
+
     if (object1Id != NULL_ID)
     {
         origin = Visualization::data->GeometricObject<VPointF>(object1Id);
@@ -93,20 +95,22 @@ void VisToolRotation::RefreshGeometry()
             }
 
             rLine.setP2(Ray(*origin, rLine.angle()));
+            tempAngle = rLine.angle();
         }
         else
         {
             rLine = QLineF(*origin, Ray(*origin, angle));
+            tempAngle = angle;
         }
 
         DrawLine(this, rLine, supportColor2, Qt::DashLine);
         DrawLine(xAxis, QLineF(*origin, Ray(*origin, 0)), supportColor2, Qt::DashLine);
 
-        VArc arc(*origin, ToPixel(DefPointRadius/*mm*/*2, Unit::Mm), 0, rLine.angle());
+        VArc arc(*origin, ToPixel(DefPointRadius/*mm*/*2, Unit::Mm), 0, tempAngle);
         DrawPath(angleArc, arc.GetPath(PathDirection::Hide), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
         Visualization::toolTip = tr("Rotating angle = %1°, <b>Shift</b> - sticking angle, "
-                                    "<b>Mouse click</b> - finish creation").arg(rLine.angle());
+                                    "<b>Mouse click</b> - finish creation").arg(tempAngle);
     }
 
     int iPoint = -1;
@@ -134,38 +138,38 @@ void VisToolRotation::RefreshGeometry()
 
                 if (object1Id != NULL_ID)
                 {
-                    DrawPoint(point, p->Rotate(*origin, angle), supportColor);
+                    DrawPoint(point, p->Rotate(*origin, tempAngle), supportColor);
                 }
                 break;
             }
             case GOType::Arc:
             {
-                iCurve = AddCurve<VArc>(*origin, id, iCurve);
+                iCurve = AddCurve<VArc>(tempAngle, *origin, id, iCurve);
                 break;
             }
             case GOType::EllipticalArc:
             {
-                iCurve = AddCurve<VEllipticalArc>(*origin, id, iCurve);
+                iCurve = AddCurve<VEllipticalArc>(tempAngle, *origin, id, iCurve);
                 break;
             }
             case GOType::Spline:
             {
-                iCurve = AddCurve<VSpline>(*origin, id, iCurve);
+                iCurve = AddCurve<VSpline>(tempAngle, *origin, id, iCurve);
                 break;
             }
             case GOType::SplinePath:
             {
-                iCurve = AddCurve<VSplinePath>(*origin, id, iCurve);
+                iCurve = AddCurve<VSplinePath>(tempAngle, *origin, id, iCurve);
                 break;
             }
             case GOType::CubicBezier:
             {
-                iCurve = AddCurve<VCubicBezier>(*origin, id, iCurve);
+                iCurve = AddCurve<VCubicBezier>(tempAngle, *origin, id, iCurve);
                 break;
             }
             case GOType::CubicBezierPath:
             {
-                iCurve = AddCurve<VCubicBezierPath>(*origin, id, iCurve);
+                iCurve = AddCurve<VCubicBezierPath>(tempAngle, *origin, id, iCurve);
                 break;
             }
             case GOType::Unknown:
@@ -249,7 +253,7 @@ QGraphicsPathItem *VisToolRotation::GetCurve(quint32 i, const QColor &color)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item>
-int VisToolRotation::AddCurve(const QPointF &origin, quint32 id, int i)
+int VisToolRotation::AddCurve(qreal angle, const QPointF &origin, quint32 id, int i)
 {
     const QSharedPointer<Item> curve = Visualization::data->GeometricObject<Item>(id);
 

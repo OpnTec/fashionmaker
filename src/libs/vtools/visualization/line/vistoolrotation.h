@@ -66,7 +66,7 @@ private:
     QGraphicsPathItem    * GetCurve(quint32 i, const QColor &color);
 
     template <class Item>
-    int AddCurve(const QPointF &origin, quint32 id, int i);
+    int AddCurve(qreal angle, const QPointF &origin, quint32 id, int i);
 };
 
 #endif // VISTOOLROTATION_H
