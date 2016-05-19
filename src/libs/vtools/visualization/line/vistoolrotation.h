@@ -62,8 +62,8 @@ private:
     QVector<QGraphicsEllipseItem *> points;
     QVector<QGraphicsPathItem *>    curves;
 
-    QGraphicsEllipseItem * GetPoint(quint32 i);
-    QGraphicsPathItem    * GetCurve(quint32 i);
+    QGraphicsEllipseItem * GetPoint(quint32 i, const QColor &color);
+    QGraphicsPathItem    * GetCurve(quint32 i, const QColor &color);
 
     template <class Item>
     int AddCurve(const QPointF &origin, quint32 id, int i);

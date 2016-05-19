@@ -126,11 +126,11 @@ void VisToolRotation::RefreshGeometry()
                 const QSharedPointer<VPointF> p = Visualization::data->GeometricObject<VPointF>(id);
 
                 ++iPoint;
-                QGraphicsEllipseItem *point = GetPoint(iPoint);
-                DrawPoint(point, *p, supportColor);
+                QGraphicsEllipseItem *point = GetPoint(iPoint, supportColor2);
+                DrawPoint(point, *p, supportColor2);
 
                 ++iPoint;
-                point = GetPoint(iPoint);
+                point = GetPoint(iPoint, supportColor);
 
                 if (object1Id != NULL_ID)
                 {
@@ -216,7 +216,7 @@ void VisToolRotation::VisualMode(const quint32 &pointId)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsEllipseItem *VisToolRotation::GetPoint(quint32 i)
+QGraphicsEllipseItem *VisToolRotation::GetPoint(quint32 i, const QColor &color)
 {
     if (not points.isEmpty() && static_cast<quint32>(points.size() - 1) >= i)
     {
@@ -224,7 +224,7 @@ QGraphicsEllipseItem *VisToolRotation::GetPoint(quint32 i)
     }
     else
     {
-        auto point = InitPoint(supportColor, this);
+        auto point = InitPoint(color, this);
         points.append(point);
         return point;
     }
@@ -232,7 +232,7 @@ QGraphicsEllipseItem *VisToolRotation::GetPoint(quint32 i)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsPathItem *VisToolRotation::GetCurve(quint32 i)
+QGraphicsPathItem *VisToolRotation::GetCurve(quint32 i, const QColor &color)
 {
     if (not curves.isEmpty() && static_cast<quint32>(curves.size() - 1) >= i)
     {
@@ -254,15 +254,15 @@ int VisToolRotation::AddCurve(const QPointF &origin, quint32 id, int i)
     const QSharedPointer<Item> curve = Visualization::data->GeometricObject<Item>(id);
 
     ++i;
-    QGraphicsPathItem *path = GetCurve(i);
-    DrawPath(path, curve->GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+    QGraphicsPathItem *path = GetCurve(i, supportColor2);
+    DrawPath(path, curve->GetPath(PathDirection::Hide), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     ++i;
-    path = GetCurve(i);
+    path = GetCurve(i, supportColor);
     if (object1Id != NULL_ID)
     {
         const Item rotated = curve->Rotate(origin, angle);
-        DrawPath(path, rotated.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(path, rotated.GetPath(PathDirection::Hide), supportColor, Qt::SolidLine, Qt::RoundCap);
     }
 
     return i;
