@@ -78,6 +78,8 @@ private:
 
     void          ConvertMeasurementsToV0_2_1();
 
+    void          RemoveColorToolCutV0_3_1();
+
     QSet<QString> FixIncrementsToV0_2_0();
     QString       FixIncrementInFormulaToV0_2_0(const QString &formula, const QSet<QString> &names);
     void          FixPointExpressionsToV0_2_0(const QSet<QString> &names);

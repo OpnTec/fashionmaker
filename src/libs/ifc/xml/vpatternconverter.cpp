@@ -318,6 +318,7 @@ void VPatternConverter::ToV0_3_0()
 void VPatternConverter::ToV0_3_1()
 {
     SetVersion(QStringLiteral("0.3.1"));
+    RemoveColorToolCutV0_3_1();
     Save();
 }
 
@@ -780,6 +781,26 @@ void VPatternConverter::ConvertMeasurementsToV0_2_1()
     ConvertPointExpressionsToV0_2_0(names);
     ConvertArcExpressionsToV0_2_0(names);
     ConvertPathPointExpressionsToV0_2_0(names);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::RemoveColorToolCutV0_3_1()
+{
+    const QDomNodeList list = elementsByTagName("point");
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement element = list.at(i).toElement();
+        if (not element.isNull())
+        {
+            const QString type = element.attribute(QStringLiteral("type"));
+            if (type == QStringLiteral("cutArc") ||
+                type == QStringLiteral("cutSpline") ||
+                type == QStringLiteral("cutSplinePath"))
+            {
+                element.removeAttribute(QStringLiteral("color"));
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
