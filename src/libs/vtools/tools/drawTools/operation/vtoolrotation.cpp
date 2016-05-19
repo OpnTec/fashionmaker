@@ -764,6 +764,8 @@ void VToolRotation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     doc->SetAttribute(tag, AttrAngle, formulaAngle);
     doc->SetAttribute(tag, AttrSuffix, suffix);
 
+    doc->RemoveAllChildren(tag);
+
     QDomElement tagObjects = doc->createElement(TagSource);
     for (int i = 0; i < source.size(); ++i)
     {
