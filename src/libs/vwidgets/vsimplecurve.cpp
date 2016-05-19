@@ -131,3 +131,14 @@ void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     SetPen(this, currentColor, WidthHairLine(patternUnit));
     QGraphicsPathItem::hoverLeaveEvent(event);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QVariant VSimpleCurve::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+{
+    if (change == QGraphicsItem::ItemSelectedChange)
+    {
+        emit Selected(value.toBool(), id);
+    }
+
+    return QGraphicsPathItem::itemChange(change, value);
+}
