@@ -298,11 +298,6 @@ VToolRotation *VToolRotation::Create(const quint32 _id, const quint32 &origin, Q
         {
             doc->IncrementReferens(data->GetGObject(source.at(i))->getIdTool());
         }
-
-        for (int i = 0; i < dest.size(); ++i)
-        {
-            doc->IncrementReferens(data->GetGObject(dest.at(i).id)->getIdTool());
-        }
         return tool;
     }
     return nullptr;
