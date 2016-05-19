@@ -107,33 +107,21 @@ void VVITConverter::ApplyPatches()
         switch (ver)
         {
             case (0x000200):
-            {
                 ToV0_3_0();
-                const QString schema = XSDSchema(0x000300);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000300), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000300):
-            {
                 ToV0_3_1();
-                const QString schema = XSDSchema(0x000301);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000301), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000301):
-            {
                 ToV0_3_2();
-                const QString schema = XSDSchema(0x000302);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000302), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000302):
-            {
                 ToV0_3_3();
-                const QString schema = XSDSchema(0x000303);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000303), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000303):
                 break;
             default:

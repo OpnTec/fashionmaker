@@ -35,9 +35,6 @@ class VToolPointFromArcAndTangent : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolPointFromArcAndTangent(VAbstractPattern *doc, VContainer *data, const quint32 &id, quint32 arcId,
-                                quint32 tangentPointId, CrossCirclesPoint crossPoint, const Source &typeCreation,
-                                QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointFromArcAndTangent *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                                VContainer *data);
@@ -73,6 +70,10 @@ private:
     quint32 arcId;
     quint32 tangentPointId;
     CrossCirclesPoint crossPoint;
+
+    VToolPointFromArcAndTangent(VAbstractPattern *doc, VContainer *data, const quint32 &id, quint32 arcId,
+                                quint32 tangentPointId, CrossCirclesPoint crossPoint, const Source &typeCreation,
+                                QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTFROMARCANDTANGENT_H

@@ -30,7 +30,7 @@
 #include "../vmisc/logging.h"
 #include "../vgeometry/vpointf.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
-#include "../../../../undocommands/movelabel.h"
+#include "../../../../undocommands/label/movelabel.h"
 
 #include <QKeyEvent>
 
@@ -122,7 +122,7 @@ void VToolSinglePoint::NameChangePosition(const QPointF &pos)
 void VToolSinglePoint::UpdateNamePosition(quint32 id)
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    auto moveLabel = new MoveLabel(doc, point->mx(), point->my(), id, scene());
+    auto moveLabel = new MoveLabel(doc, point->mx(), point->my(), id);
     connect(moveLabel, &MoveLabel::ChangePosition, this, &VToolSinglePoint::DoChangePosition);
     qApp->getUndoStack()->push(moveLabel);
 }
@@ -249,7 +249,7 @@ void VToolSinglePoint::RefreshPointGeometry(const VPointF &point)
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
-    this->setPos(point.toQPointF());
+    this->setPos(point);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     namePoint->blockSignals(true);
     QFont font = namePoint->font();

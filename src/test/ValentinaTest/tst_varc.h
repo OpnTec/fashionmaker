@@ -42,6 +42,8 @@ private slots:
     void NegativeArc();
     void TestGetPoints_data();
     void TestGetPoints();
+    void TestRotation_data();
+    void TestRotation();
 };
 
 #endif // TST_VARC_H

@@ -28,6 +28,7 @@
 
 #include "vpointf.h"
 #include "vpointf_p.h"
+#include <QLineF>
 #include <QPointF>
 #include <QString>
 
@@ -100,13 +101,22 @@ VPointF &VPointF::operator =(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief toQPointF convert to QPointF
- * @return QPointF point
- */
-QPointF VPointF::toQPointF() const
+VPointF::operator const QPointF() const
 {
-    return QPointF(d->_x, d->_y);
+    return toQPointF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPointF::operator QPointF()
+{
+    return toQPointF();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPointF VPointF::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+{
+    const QPointF p = RotatePF(originPoint, toQPointF(), degrees);
+    return VPointF(p, name() + prefix, mx(), my());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,6 +160,12 @@ void VPointF::setMy(qreal my)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPointF VPointF::toQPointF() const
+{
+    return QPointF(d->_x, d->_y);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief x return x coordinate
  * @return value
@@ -187,4 +203,12 @@ qreal VPointF::y() const
 void VPointF::setY(const qreal &value)
 {
     d->_y = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPointF::RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees)
+{
+    QLineF axis(originPoint, point);
+    axis.setAngle(axis.angle() + degrees);
+    return axis.p2();
 }

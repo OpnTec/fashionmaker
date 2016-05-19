@@ -33,7 +33,6 @@
 #include <QBrush>
 #include <QGraphicsSceneMouseEvent>
 
-const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,7 +118,7 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
 //---------------------------------------------------------------------------------------------------------------------
 QString VNodePoint::getTagName() const
 {
-    return VNodePoint::TagName;
+    return VAbstractPattern::TagPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -195,7 +194,7 @@ void VNodePoint::FullUpdateFromFile()
 void VNodePoint::AddToFile()
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement domElement = doc->createElement(getTagName());
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
@@ -317,7 +316,7 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
-    this->setPos(point.toQPointF());
+    this->setPos(point);
 
     namePoint->blockSignals(true);
     namePoint->setText(point.name());

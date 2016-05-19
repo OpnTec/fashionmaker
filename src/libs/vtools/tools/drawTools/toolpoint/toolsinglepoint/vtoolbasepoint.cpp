@@ -76,7 +76,7 @@ void VToolBasePoint::setDialog()
     DialogSinglePoint *dialogTool = qobject_cast<DialogSinglePoint*>(dialog);
     SCASSERT(dialogTool != nullptr);
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(id);
-    dialogTool->SetData(p->name(), p->toQPointF());
+    dialogTool->SetData(p->name(), *p);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ void VToolBasePoint::AddToFile()
 {
     Q_ASSERT_X(not namePP.isEmpty(), Q_FUNC_INFO, "name pattern piece is empty");
 
-    QDomElement sPoint = doc->createElement(TagName);
+    QDomElement sPoint = doc->createElement(getTagName());
 
     // Create SPoint tag
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);

@@ -74,6 +74,7 @@ public:
     virtual void   DecrementReferens(quint32 id) const=0;
 
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const=0;
+    virtual QString GenerateSuffix() const=0;
 
     virtual void   UpdateToolData(const quint32 &id, VContainer *data)=0;
 
@@ -132,6 +133,7 @@ public:
     static const QString TagCalculation;
     static const QString TagModeling;
     static const QString TagDetails;
+    static const QString TagDetail;
     static const QString TagAuthor;
     static const QString TagDescription;
     static const QString TagImage;
@@ -148,6 +150,7 @@ public:
     static const QString TagSpline;
     static const QString TagArc;
     static const QString TagTools;
+    static const QString TagOperation;
     static const QString TagGradation;
     static const QString TagHeights;
     static const QString TagSizes;
@@ -210,7 +213,7 @@ public:
 
 signals:
     /**
-     * @brief ChangedActivDraw change active pattern peace.
+     * @brief ChangedActivPP change active pattern peace.
      * @param newName new pattern peace name.
      */
     void           ChangedActivPP(const QString &newName);
@@ -282,6 +285,7 @@ protected:
     QDomElement    CheckTagExists(const QString &tag);
     void           InsertTag(const QStringList &tags, const QDomElement &element);
 
+    int GetIndexActivPP() const;
 private:
     Q_DISABLE_COPY(VAbstractPattern)
 
@@ -292,6 +296,7 @@ private:
     QStringList ListSplineExpressions() const;
     QStringList ListPathPointExpressions() const;
     QStringList ListIncrementExpressions() const;
+    QStringList ListOperationExpressions() const;
 
     bool IsVariable(const QString& token) const;
     bool IsPostfixOperator(const QString& token) const;

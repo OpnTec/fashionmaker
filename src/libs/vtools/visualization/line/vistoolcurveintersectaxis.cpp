@@ -63,17 +63,17 @@ void VisToolCurveIntersectAxis::RefreshGeometry()
             const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(axisPointId);
             if (VFuzzyComparePossibleNulls(angle, -1))
             {
-                axis = Axis(first->toQPointF(), Visualization::scenePos);
+                axis = Axis(*first, Visualization::scenePos);
             }
             else
             {
-                axis = Axis(first->toQPointF(), angle);
+                axis = Axis(*first, angle);
             }
-            DrawPoint(basePoint, first->toQPointF(), mainColor);
+            DrawPoint(basePoint, *first, mainColor);
             DrawLine(axisLine, axis, supportColor, Qt::DashLine);
 
-            QPointF p = VToolCurveIntersectAxis::FindPoint(first->toQPointF(), axis.angle(), curve);
-            QLineF axis_line(first->toQPointF(), p);
+            QPointF p = VToolCurveIntersectAxis::FindPoint(*first, axis.angle(), curve);
+            QLineF axis_line(*first, p);
             DrawLine(this, axis_line, mainColor, lineStyle);
 
             DrawPoint(point, p, mainColor);

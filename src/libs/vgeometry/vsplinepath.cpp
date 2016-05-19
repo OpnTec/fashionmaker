@@ -57,12 +57,7 @@ VSplinePath::VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve, qui
         return;
     }
 
-    QVector<VSplinePoint> newPoints;
-    for (int i=0; i < points.size(); ++i)
-    {
-        newPoints.append(VSplinePoint());
-    }
-
+    QVector<VSplinePoint> newPoints(points.size());
     for (qint32 i = 1; i <= points.size()-1; ++i)
     {
         const VFSplinePoint &p1 = points.at(i-1);
@@ -107,6 +102,30 @@ VSplinePath::VSplinePath(const VSplinePath &splPath)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VSplinePath VSplinePath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+{
+    QVector<VSplinePoint> newPoints(CountPoints());
+    for (qint32 i = 1; i <= CountSubSpl(); ++i)
+    {
+        const VSplinePoint &p1 = d->path.at(i-1);
+        const VSplinePoint &p2 = d->path.at(i);
+        VSpline spl = GetSpline(i).Rotate(originPoint, degrees);
+
+        newPoints[i-1].SetP(p1.P());
+        newPoints[i-1].SetAngle2(p1.Angle2(), spl.GetStartAngleFormula());
+        newPoints[i-1].SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
+
+        newPoints[i].SetP(p2.P());
+        newPoints[i].SetAngle1(p2.Angle1(), spl.GetEndAngleFormula());
+        newPoints[i].SetLength1(spl.GetC2Length(), spl.GetC2LengthFormula());
+    }
+
+    VSplinePath splPath(newPoints);
+    splPath.setName(name() + prefix);
+    return splPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePath::~VSplinePath()
 {}
 
@@ -117,7 +136,7 @@ VSplinePath::~VSplinePath()
  */
 void VSplinePath::append(const VSplinePoint &point)
 {
-    if (d->path.size() > 0 && d->path.last().P().toQPointF() == point.P().toQPointF()) //-V807
+    if (d->path.size() > 0 && d->path.last().P() == point.P()) //-V807
     {
         return;
     }

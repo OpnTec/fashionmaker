@@ -39,16 +39,12 @@ class VToolLine: public VDrawTool, public QGraphicsLineItem
 {
     Q_OBJECT
 public:
-    VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
-              const QString &typeLine, const QString &lineColor, const Source &typeCreation,
-              QGraphicsItem * parent = nullptr);
     virtual void     setDialog() Q_DECL_OVERRIDE;
     static VToolLine *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
     static VToolLine *Create(const quint32 &_id, const quint32 &firstPoint, const quint32 &secondPoint,
                              const QString &typeLine, const QString &lineColor, VMainGraphicsScene  *scene,
                              VAbstractPattern *doc, VContainer *data, const Document &parse,
                              const Source &typeCreation);
-    static const QString TagName;
 
     virtual int      type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Line)};
@@ -59,10 +55,12 @@ public:
     quint32 GetSecondPoint() const;
     void    SetSecondPoint(const quint32 &value);
 
+    QString GetLineColor() const;
+    void    SetLineColor(const QString &value);
+
     virtual void     ShowVisualization(bool show) Q_DECL_OVERRIDE;
 
     virtual void     SetTypeLine(const QString &value) Q_DECL_OVERRIDE;
-    virtual void     SetLineColor(const QString &value) Q_DECL_OVERRIDE;
     virtual void     GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
 public slots:
     virtual void     FullUpdateFromFile() Q_DECL_OVERRIDE;
@@ -85,11 +83,20 @@ protected:
     virtual void     ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void     SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolLine)
+
     /** @brief firstPoint id first line point. */
     quint32           firstPoint;
 
     /** @brief secondPoint id second line point. */
     quint32           secondPoint;
+
+    /** @brief lineColor color of a line. */
+    QString           lineColor;
+
+    VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 firstPoint, quint32 secondPoint,
+              const QString &typeLine, const QString &lineColor, const Source &typeCreation,
+              QGraphicsItem * parent = nullptr);
 
     void             RefreshGeometry();
 };

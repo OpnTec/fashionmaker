@@ -130,6 +130,8 @@ extern const QString AttrCCenter;
 extern const QString AttrTangent;
 extern const QString AttrCRadius;
 extern const QString AttrArc;
+extern const QString AttrSuffix;
+extern const QString AttrIdObject;
 
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;

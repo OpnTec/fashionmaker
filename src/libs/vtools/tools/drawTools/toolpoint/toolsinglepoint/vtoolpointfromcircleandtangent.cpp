@@ -96,7 +96,7 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const qui
     const VPointF cPoint = *data->GeometricObject<VPointF>(circleCenterId);
     const VPointF tPoint = *data->GeometricObject<VPointF>(tangentPointId);
 
-    const QPointF point = VToolPointFromCircleAndTangent::FindPoint(tPoint.toQPointF(), cPoint.toQPointF(), radius,
+    const QPointF point = VToolPointFromCircleAndTangent::FindPoint(tPoint, cPoint, radius,
                                                                     crossPoint);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)

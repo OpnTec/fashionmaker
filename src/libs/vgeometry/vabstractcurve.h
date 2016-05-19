@@ -69,6 +69,9 @@ public:
     quint32                  GetDuplicate() const;
     void                     SetDuplicate(quint32 number);
 
+    QString                  GetColor() const;
+    void                     SetColor(const QString &color);
+
     static QVector<QPointF>  CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line);
 
     virtual QString          NameForHistory(const QString &toolName) const=0;

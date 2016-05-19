@@ -56,7 +56,7 @@ Q_LOGGING_CATEGORY(vCon, "v.container")
 quint32 VContainer::_id = NULL_ID;
 qreal VContainer::_size = 50;
 qreal VContainer::_height = 176;
-QSet<const QString> VContainer::uniqueNames = QSet<const QString>();
+QSet<QString> VContainer::uniqueNames = QSet<QString>();
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -555,6 +555,14 @@ const QHash<QString, qreal *> VContainer::PlainVariables() const
 bool VContainer::IsUnique(const QString &name)
 {
     return (!uniqueNames.contains(name) && !builInFunctions.contains(name));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VContainer::AllUniqueNames()
+{
+    QStringList names = builInFunctions;
+    names.append(uniqueNames.toList());
+    return names;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

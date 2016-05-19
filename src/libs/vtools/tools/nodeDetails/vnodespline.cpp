@@ -31,7 +31,6 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
 
-const QString VNodeSpline::TagName = QStringLiteral("spline");
 const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,7 +97,7 @@ VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, quint3
 //---------------------------------------------------------------------------------------------------------------------
 QString VNodeSpline::getTagName() const
 {
-    return VNodeSpline::TagName;
+    return VAbstractPattern::TagSpline;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,7 +120,7 @@ void VNodeSpline::AllowSelecting(bool enabled)
  */
 void VNodeSpline::AddToFile()
 {
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement domElement = doc->createElement(getTagName());
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);

@@ -45,7 +45,6 @@ public:
     VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
                   const quint32 &idTool, QObject *parent = nullptr);
     virtual      ~VAbstractNode() Q_DECL_OVERRIDE {}
-    static const QString AttrIdObject;
     static const QString AttrIdTool;
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
     virtual void incrementReferens() Q_DECL_OVERRIDE;

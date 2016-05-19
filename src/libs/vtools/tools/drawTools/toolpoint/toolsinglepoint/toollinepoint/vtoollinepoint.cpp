@@ -46,13 +46,13 @@ VToolLinePoint::VToolLinePoint(VAbstractPattern *doc, VContainer *data, const qu
                                const QString &lineColor, const QString &formula, const quint32 &basePointId,
                                const qreal &angle, QGraphicsItem *parent)
     :VToolSinglePoint(doc, data, id, parent), formulaLength(formula), angle(angle), basePointId(basePointId),
-      mainLine(nullptr)
+      mainLine(nullptr), lineColor(ColorBlack)
 {
     this->typeLine = typeLine;
     this->lineColor = lineColor;
     Q_ASSERT_X(basePointId != 0, Q_FUNC_INFO, "basePointId == 0"); //-V654 //-V712
-    QPointF point1 = data->GeometricObject<VPointF>(basePointId)->toQPointF();
-    QPointF point2 = data->GeometricObject<VPointF>(id)->toQPointF();
+    QPointF point1 = *data->GeometricObject<VPointF>(basePointId);
+    QPointF point2 = *data->GeometricObject<VPointF>(id);
     mainLine = new QGraphicsLineItem(QLineF(point1 - point2, QPointF()), this);
     mainLine->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                           LineStyleToPenStyle(typeLine)));
@@ -75,8 +75,8 @@ void VToolLinePoint::RefreshGeometry()
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                           LineStyleToPenStyle(typeLine)));
     VToolSinglePoint::RefreshPointGeometry(*VDrawTool::data.GeometricObject<VPointF>(id));
-    QPointF point = VDrawTool::data.GeometricObject<VPointF>(id)->toQPointF();
-    QPointF basePoint = VDrawTool::data.GeometricObject<VPointF>(basePointId)->toQPointF();
+    QPointF point = *VDrawTool::data.GeometricObject<VPointF>(id);
+    QPointF basePoint = *VDrawTool::data.GeometricObject<VPointF>(basePointId);
     mainLine->setLine(QLineF(basePoint - point, QPointF()));
 }
 
@@ -141,6 +141,21 @@ qreal VToolLinePoint::GetAngle() const
 void VToolLinePoint::SetAngle(const qreal &value)
 {
     angle = value;
+    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
+    SaveOption(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VToolLinePoint::GetLineColor() const
+{
+    return lineColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolLinePoint::SetLineColor(const QString &value)
+{
+    lineColor = value;
+
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
     SaveOption(obj);
 }

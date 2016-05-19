@@ -38,10 +38,6 @@ class VToolNormal : public VToolLinePoint
 {
     Q_OBJECT
 public:
-    VToolNormal(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                const QString &lineColor,
-                const QString &formula, const qreal &angle, const quint32 &firstPointId, const quint32 &secondPointId,
-                const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolNormal* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc, VContainer *data);
     static VToolNormal* Create(const quint32 _id, QString &formula, const quint32 &firstPointId,
@@ -70,8 +66,15 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolNormal)
+
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;
+
+    VToolNormal(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                const QString &lineColor,
+                const QString &formula, const qreal &angle, const quint32 &firstPointId, const quint32 &secondPointId,
+                const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLNORMAL_H

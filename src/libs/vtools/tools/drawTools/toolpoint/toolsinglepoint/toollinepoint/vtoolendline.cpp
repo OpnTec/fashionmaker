@@ -140,7 +140,7 @@ VToolEndLine* VToolEndLine::Create(const quint32 _id, const QString &pointName, 
                                    const Source &typeCreation)
 {
     const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
-    QLineF line = QLineF(basePoint->toQPointF(), QPointF(basePoint->x()+100, basePoint->y()));
+    QLineF line = QLineF(*basePoint, QPointF(basePoint->x()+100, basePoint->y()));
 
     line.setAngle(CheckFormula(_id, formulaAngle, data)); //First set angle.
     line.setLength(qApp->toPixel(CheckFormula(_id, formulaLength, data)));

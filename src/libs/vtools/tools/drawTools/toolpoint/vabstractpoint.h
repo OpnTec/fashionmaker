@@ -40,7 +40,6 @@ public:
     virtual ~VAbstractPoint() Q_DECL_OVERRIDE;
 
     virtual QString      getTagName() const Q_DECL_OVERRIDE;
-    static const QString TagName;
 
     template <typename T>
     void ShowToolVisualization(bool show);

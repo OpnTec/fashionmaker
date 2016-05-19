@@ -56,46 +56,44 @@ void VisToolShoulderPoint::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(line1P1, first->toQPointF(), supportColor);
+        DrawPoint(line1P1, *first, supportColor);
 
         if (lineP1Id <= NULL_ID)
         {
-            DrawLine(line1, QLineF(first->toQPointF(), Visualization::scenePos), supportColor);
+            DrawLine(line1, QLineF(*first, Visualization::scenePos), supportColor);
         }
         else
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(lineP1Id);
-            DrawPoint(line1P2, second->toQPointF(), supportColor);
+            DrawPoint(line1P2, *second, supportColor);
 
-            DrawLine(line1, QLineF(first->toQPointF(), second->toQPointF()), supportColor);
+            DrawLine(line1, QLineF(*first, *second), supportColor);
 
             if (lineP2Id <= NULL_ID)
             {
-                DrawLine(line2, QLineF(second->toQPointF(), Visualization::scenePos), supportColor);
+                DrawLine(line2, QLineF(*second, Visualization::scenePos), supportColor);
             }
             else
             {
                 const QSharedPointer<VPointF> third = Visualization::data->GeometricObject<VPointF>(lineP2Id);
-                DrawPoint(line2P2, third->toQPointF(), supportColor);
+                DrawPoint(line2P2, *third, supportColor);
 
-                DrawLine(line2, QLineF(second->toQPointF(), third->toQPointF()), supportColor);
+                DrawLine(line2, QLineF(*second, *third), supportColor);
 
                 if (not qFuzzyIsNull(length))
                 {
-                    QPointF fPoint = VToolShoulderPoint::FindPoint(second->toQPointF(), third->toQPointF(),
-                                                                   first->toQPointF(), length);
-                    QLineF mainLine = QLineF(second->toQPointF(), fPoint);
+                    QPointF fPoint = VToolShoulderPoint::FindPoint(*second, *third, *first, length);
+                    QLineF mainLine = QLineF(*second, fPoint);
                     DrawLine(this, mainLine, mainColor, lineStyle);
 
                     DrawPoint(point, mainLine.p2(), mainColor);
-                    DrawLine(line3, QLineF(first->toQPointF(), mainLine.p2()), supportColor, Qt::DashLine);
+                    DrawLine(line3, QLineF(*first, mainLine.p2()), supportColor, Qt::DashLine);
                 }
                 else
                 {
-                    qreal angle = QLineF(second->toQPointF(), third->toQPointF()).angle();
-                    QPointF endRay = Ray(second->toQPointF(), angle);
-                    QLineF mainLine = VGObject::BuildLine(second->toQPointF(),
-                                                          QLineF(second->toQPointF(), endRay).length(), angle);
+                    qreal angle = QLineF(*second, *third).angle();
+                    QPointF endRay = Ray(*second, angle);
+                    QLineF mainLine = VGObject::BuildLine(*second, QLineF(*second, endRay).length(), angle);
                     DrawLine(this, mainLine, mainColor, lineStyle);
                 }
             }

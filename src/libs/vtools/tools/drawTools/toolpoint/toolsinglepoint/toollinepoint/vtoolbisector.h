@@ -38,11 +38,6 @@ class VToolBisector : public VToolLinePoint
 {
     Q_OBJECT
 public:
-
-    VToolBisector(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                  const QString &lineColor,
-                  const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
-                  const quint32 &thirdPointId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
     static qreal   BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint);
     static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint,
                              const qreal& length);
@@ -76,11 +71,18 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolBisector)
+
     /** @brief firstPointId id first point of angle. */
     quint32         firstPointId;
 
     /** @brief thirdPointId id third point of angle. */
     quint32         thirdPointId;
+
+    VToolBisector(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                  const QString &lineColor,
+                  const QString &formula, const quint32 &firstPointId, const quint32 &secondPointId,
+                  const quint32 &thirdPointId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLBISECTOR_H

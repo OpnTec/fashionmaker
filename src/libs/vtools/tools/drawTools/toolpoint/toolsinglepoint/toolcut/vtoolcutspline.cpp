@@ -45,14 +45,12 @@ const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");
  * @param id object id in container.
  * @param formula string with formula length first spline.
  * @param splineId id spline in data container.
- * @param color spline color.
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
 VToolCutSpline::VToolCutSpline(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                               const quint32 &splineId, const QString &color, const Source &typeCreation,
-                               QGraphicsItem *parent)
-    :VToolCut(doc, data, id, formula, splineId, color, parent)
+                               const quint32 &splineId, const Source &typeCreation, QGraphicsItem *parent)
+    :VToolCut(doc, data, id, formula, splineId, parent)
 {
     ToolCreation(typeCreation);
 }
@@ -70,7 +68,6 @@ void VToolCutSpline::setDialog()
     dialogTool->SetFormula(formula);
     dialogTool->setSplineId(curveCutId);
     dialogTool->SetPointName(point->name());
-    dialogTool->SetColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,8 +87,7 @@ VToolCutSpline* VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *s
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->GetFormula();
     const quint32 splineId = dialogTool->getSplineId();
-    const QString color = dialogTool->GetColor();
-    VToolCutSpline* point = Create(0, pointName, formula, splineId, 5, 10, color, scene, doc, data, Document::FullParse,
+    VToolCutSpline* point = Create(0, pointName, formula, splineId, 5, 10, scene, doc, data, Document::FullParse,
                                    Source::FromGui);
     if (point != nullptr)
     {
@@ -116,7 +112,7 @@ VToolCutSpline* VToolCutSpline::Create(DialogTool *dialog, VMainGraphicsScene *s
  * @param typeCreation way we create this tool.
  */
 VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointName, QString &formula,
-                                       const quint32 &splineId, const qreal &mx, const qreal &my, const QString &color,
+                                       const quint32 &splineId, const qreal &mx, const qreal &my,
                                        VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                        const Document &parse, const Source &typeCreation)
 {
@@ -152,7 +148,7 @@ VToolCutSpline* VToolCutSpline::Create(const quint32 _id, const QString &pointNa
     VDrawTool::AddRecord(id, Tool::CutSpline, doc);
     if (parse == Document::FullParse)
     {
-        VToolCutSpline *point = new VToolCutSpline(doc, data, id, formula, splineId, color, typeCreation);
+        VToolCutSpline *point = new VToolCutSpline(doc, data, id, formula, splineId, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
         doc->AddTool(id, point);
@@ -198,7 +194,6 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
-    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -216,7 +211,6 @@ void VToolCutSpline::ReadToolAttributes(const QDomElement &domElement)
 {
     formula = doc->GetParametrString(domElement, AttrLength, "");
     curveCutId = doc->GetParametrUInt(domElement, AttrSpline, NULL_ID_STR);
-    lineColor = doc->GetParametrString(domElement, AttrColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -39,12 +39,9 @@ class VNodeArc :public VAbstractNode
 {
     Q_OBJECT
 public:
-    VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
-             const quint32 &idTool = 0, QObject *qoParent = nullptr);
-
     static void  Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Document &parse,
                         const Source &typeCreation, const quint32 &idTool = 0);
-    static const QString TagName;
+
     static const QString ToolType;
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 public slots:
@@ -58,6 +55,9 @@ protected:
     virtual void HideNode() Q_DECL_OVERRIDE {}
 private:
     Q_DISABLE_COPY(VNodeArc)
+
+    VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
+             const quint32 &idTool = 0, QObject *qoParent = nullptr);
 };
 
 #endif // VNODEARC_H4

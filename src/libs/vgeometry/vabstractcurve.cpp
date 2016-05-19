@@ -245,6 +245,18 @@ void VAbstractCurve::SetDuplicate(quint32 number)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString VAbstractCurve::GetColor() const
+{
+    return d->color;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractCurve::SetColor(const QString &color)
+{
+    d->color = color;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &points, const QLineF &line)
 {
     QVector<QPointF> intersections;

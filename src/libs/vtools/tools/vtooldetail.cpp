@@ -47,14 +47,11 @@
 #include <QGraphicsView>
 #include <QMessageBox>
 
-
-const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
 
 const QString VToolDetail::AttrSupplement   = QStringLiteral("supplement");
 const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
 const QString VToolDetail::AttrWidth        = QStringLiteral("width");
-const QString VToolDetail::AttrIdObject     = QStringLiteral("idObject");
 const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolDetail::AttrReverse      = QStringLiteral("reverse");
 
@@ -316,7 +313,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 void VToolDetail::AddToFile()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement domElement = doc->createElement(getTagName());
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrName, detail.getName());
@@ -620,7 +617,7 @@ void VToolDetail::AddNode(VAbstractPattern *doc, QDomElement &domElement, const 
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolDetail::getTagName() const
 {
-    return VToolDetail::TagName;
+    return VAbstractPattern::TagDetail;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

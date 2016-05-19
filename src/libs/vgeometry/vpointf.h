@@ -58,6 +58,9 @@ public:
              const Draw &mode = Draw::Calculation);
     virtual ~VPointF() Q_DECL_OVERRIDE;
     VPointF &operator=(const VPointF &point);
+            operator QPointF();
+            operator const QPointF() const;
+    VPointF Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     qreal   mx() const;
     qreal   my() const;
     void    setMx(qreal mx);
@@ -67,6 +70,8 @@ public:
     void    setX(const qreal &value);
     qreal   y() const;
     void    setY(const qreal &value);
+
+    static QPointF RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees);
 private:
     QSharedDataPointer<VPointFData> d;
 };

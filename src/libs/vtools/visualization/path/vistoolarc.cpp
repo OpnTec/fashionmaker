@@ -48,7 +48,7 @@ void VisToolArc::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(arcCenter, first->toQPointF(), supportColor);
+        DrawPoint(arcCenter, *first, supportColor);
 
         if (not qFuzzyIsNull(radius) && f1 >= 0 && f2 >= 0 && not VFuzzyComparePossibleNulls(f1, f2))
         {

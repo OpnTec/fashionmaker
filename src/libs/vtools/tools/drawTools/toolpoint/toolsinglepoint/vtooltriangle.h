@@ -39,10 +39,6 @@ class VToolTriangle : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolTriangle(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
-                  const quint32 &axisP2Id,
-                  const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
-                  QGraphicsItem * parent = nullptr);
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static VToolTriangle *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                  VContainer *data);
@@ -89,6 +85,11 @@ private:
 
     /** @brief secondPointId id second triangle point, what lies on the hypotenuse. */
     quint32        secondPointId;
+
+    VToolTriangle(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &axisP1Id,
+                  const quint32 &axisP2Id,
+                  const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
+                  QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLTRIANGLE_H

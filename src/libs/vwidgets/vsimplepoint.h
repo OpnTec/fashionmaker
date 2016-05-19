@@ -44,21 +44,19 @@ public:
                  QObject *parent = nullptr);
     virtual ~VSimplePoint() Q_DECL_OVERRIDE;
 
-    virtual void ChangedActivDraw(const bool &flag) Q_DECL_OVERRIDE;
-
     virtual int  type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::SimplePoint)};
 
+    void ChangedActivDraw(bool flag);
     void RefreshLine();
     void RefreshGeometry(const VPointF &point);
-    void SetEnabled(bool enabled);
+    virtual void SetEnabled(bool enabled) Q_DECL_OVERRIDE;
     void EnableToolMove(bool move);
     void AllowLabelHover(bool enabled);
     void AllowLabelSelecting(bool enabled);
-    void ToolSelectionType(const SelectionType &type);
+    virtual void ToolSelectionType(const SelectionType &type) Q_DECL_OVERRIDE;
 
-    QColor GetCurrentColor() const;
-    void   SetCurrentColor(const QColor &value);
+    void SetCurrentColor(const QColor &value);
 signals:
     /**
      * @brief Choosed send id when clicked.
@@ -66,16 +64,14 @@ signals:
      */
     void Choosed(quint32 id);
     void Selected(bool selected, quint32 id);
-    void ShowContextMenu(QGraphicsSceneContextMenuEvent * event);
     void Delete();
-    void NameChangedPosition(const QPointF &pos);
+    void NameChangedPosition(const QPointF &pos, quint32 id);
 
 public slots:
     void DeleteFromLabel();
     void PointChoosed();
     void PointSelected(bool selected);
     void ChangedPosition(const QPointF &pos);
-    void ContextMenu(QGraphicsSceneContextMenuEvent * event);
 
 protected:
     virtual void     mousePressEvent( QGraphicsSceneMouseEvent * event ) Q_DECL_OVERRIDE;
@@ -96,9 +92,6 @@ private:
 
     /** @brief lineName line what we see if label moved too away from point. */
     QGraphicsLineItem       *lineName;
-
-    SelectionType selectionType;
-
 };
 
 #endif // VSIMPLEPOINT_H

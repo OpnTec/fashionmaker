@@ -40,9 +40,6 @@ class VToolPointOfContact : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolPointOfContact(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &arcRadius,
-                        const quint32 &center, const quint32 &firstPointId, const quint32 &secondPointId,
-                        const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static QPointF FindPoint(const qreal &arcRadius, const QPointF &center, const QPointF &firstPoint,
                              const QPointF &secondPoint);
@@ -81,6 +78,8 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolPointOfContact)
+
     /** @brief radius string with formula radius arc. */
     QString        arcRadius;
 
@@ -92,6 +91,10 @@ private:
 
     /** @brief secondPointId id second line point. */
     quint32        secondPointId;
+
+    VToolPointOfContact(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &arcRadius,
+                        const quint32 &center, const quint32 &firstPointId, const quint32 &secondPointId,
+                        const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFCONTACT_H

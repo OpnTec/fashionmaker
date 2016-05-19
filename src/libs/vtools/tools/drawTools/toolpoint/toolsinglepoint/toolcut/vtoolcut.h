@@ -39,7 +39,7 @@ class VToolCut : public VToolSinglePoint
     Q_OBJECT
 public:
     VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-             const quint32 &curveCutId, const QString &color, QGraphicsItem * parent = nullptr);
+             const quint32 &curveCutId, QGraphicsItem * parent = nullptr);
     virtual int   type() const Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Cut)};
 
@@ -63,7 +63,6 @@ protected:
     void          RefreshGeometry();
     virtual void  RemoveReferens() Q_DECL_OVERRIDE;
     void          FullUpdateCurveFromFile(const QString &attrCurve);
-    virtual void  SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) Q_DECL_OVERRIDE;
 
     template <typename T>
     void ShowToolVisualization(bool show);

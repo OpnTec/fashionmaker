@@ -32,12 +32,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                   const quint32 &curveCutId, const QString &color, QGraphicsItem *parent)
+                   const quint32 &curveCutId, QGraphicsItem *parent)
     :VToolSinglePoint(doc, data, id, parent), formula(formula), curveCutId(curveCutId), detailsMode(false)
 {
     Q_ASSERT_X(curveCutId != 0, Q_FUNC_INFO, "curveCutId == 0"); //-V654 //-V712
-
-    lineColor = color;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -136,12 +134,4 @@ void VToolCut::FullUpdateCurveFromFile(const QString &attrCurve)
         formula = domElement.attribute(AttrLength, "");
         curveCutId = domElement.attribute(attrCurve, "").toUInt();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VToolCut::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
-{
-    VToolSinglePoint::SaveOptions(tag, obj);
-
-    doc->SetAttribute(tag, AttrColor, lineColor);
 }

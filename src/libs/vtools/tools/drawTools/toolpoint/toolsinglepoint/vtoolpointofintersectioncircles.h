@@ -37,11 +37,6 @@ class VToolPointOfIntersectionCircles : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolPointOfIntersectionCircles(VAbstractPattern *doc, VContainer *data, const quint32 &id, const
-                                    quint32 firstCircleCenterId, quint32 secondCircleCenterId,
-                                    const QString &firstCircleRadius, const QString &secondCircleRadius,
-                                    CrossCirclesPoint crossPoint, const Source &typeCreation,
-                                    QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointOfIntersectionCircles *Create(DialogTool *dialog, VMainGraphicsScene  *scene,
                                                    VAbstractPattern *doc,
@@ -92,6 +87,12 @@ private:
     QString secondCircleRadius;
 
     CrossCirclesPoint crossPoint;
+
+    VToolPointOfIntersectionCircles(VAbstractPattern *doc, VContainer *data, const quint32 &id, const
+                                    quint32 firstCircleCenterId, quint32 secondCircleCenterId,
+                                    const QString &firstCircleRadius, const QString &secondCircleRadius,
+                                    CrossCirclesPoint crossPoint, const Source &typeCreation,
+                                    QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONCIRCLES_H

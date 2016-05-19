@@ -61,7 +61,6 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, 
     CheckState();
 
     FillComboBoxSplines(ui->comboBoxSpline);
-    FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSpline::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutSpline::NamePointChanged);
@@ -124,18 +123,6 @@ void DialogCutSpline::setSplineId(const quint32 &value)
     VisToolCutSpline *path = qobject_cast<VisToolCutSpline *>(vis);
     SCASSERT(path != nullptr);
     path->setObject1Id(value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogCutSpline::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCutSpline::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

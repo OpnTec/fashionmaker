@@ -37,8 +37,6 @@ class VToolCubicBezierPath:public VAbstractSpline
 {
     Q_OBJECT
 public:
-    VToolCubicBezierPath(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
-                         const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual ~VToolCubicBezierPath();
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolCubicBezierPath *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
@@ -64,6 +62,9 @@ protected:
     virtual void  SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolCubicBezierPath)
+
+    VToolCubicBezierPath(VAbstractPattern *doc, VContainer *data, quint32 id,
+                         const Source &typeCreation, QGraphicsItem * parent = nullptr);
 
     virtual void  RefreshGeometry() Q_DECL_OVERRIDE;
     static void   AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VPointF &splPoint);

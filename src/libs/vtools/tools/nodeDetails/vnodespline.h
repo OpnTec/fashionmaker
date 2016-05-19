@@ -39,13 +39,10 @@ class VNodeSpline:public VAbstractNode
 {
     Q_OBJECT
 public:
-    VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Source &typeCreation,
-                const quint32 &idTool = 0, QObject *qoParent = nullptr);
-
     static VNodeSpline *Create(VAbstractPattern *doc, VContainer *data, quint32 id,
                                quint32 idSpline, const Document &parse,
                                const Source &typeCreation, const quint32 &idTool = 0);
-    static const QString TagName;
+
     static const QString ToolType;
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 public slots:
@@ -59,6 +56,9 @@ protected:
     virtual void HideNode() Q_DECL_OVERRIDE {}
 private:
     Q_DISABLE_COPY(VNodeSpline)
+
+    VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline, const Source &typeCreation,
+                const quint32 &idTool = 0, QObject *qoParent = nullptr);
 };
 
 #endif // VNODESPLINE_H

@@ -146,8 +146,7 @@ VToolTrueDarts *VToolTrueDarts::Create(quint32 _id,
 
     QPointF fPoint1;
     QPointF fPoint2;
-    VToolTrueDarts::FindPoint(baseLineP1->toQPointF(), baseLineP2->toQPointF(),
-                              dartP1->toQPointF(), dartP2->toQPointF(), dartP3->toQPointF(), fPoint1, fPoint2);
+    VToolTrueDarts::FindPoint(*baseLineP1, *baseLineP2, *dartP1, *dartP2, *dartP3, fPoint1, fPoint2);
     quint32 id = _id;
     quint32 p1id = _p1id;
     quint32 p2id = _p2id;

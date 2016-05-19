@@ -130,8 +130,7 @@ VToolTriangle* VToolTriangle::Create(const quint32 _id, const QString &pointName
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
 
-    QPointF point = FindPoint(axisP1->toQPointF(), axisP2->toQPointF(), firstPoint->toQPointF(),
-                              secondPoint->toQPointF());
+    QPointF point = FindPoint(*axisP1, *axisP2, *firstPoint, *secondPoint);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {

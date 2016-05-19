@@ -42,14 +42,16 @@ class VAbstractSpline:public VDrawTool, public QGraphicsPathItem
 public:
     VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, QGraphicsItem * parent = nullptr);
     virtual ~VAbstractSpline() Q_DECL_OVERRIDE;
-    // cppcheck-suppress duplInheritedMember
-    static const QString TagName;
+
     virtual int      type() const  Q_DECL_OVERRIDE {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::AbstractSpline)};
     virtual QString  getTagName() const Q_DECL_OVERRIDE;
     void             ShowHandles(bool show);
 
     void setEnabled(bool enabled);
+
+    QString GetLineColor() const;
+    void    SetLineColor(const QString &value);
 
     QString name() const;
 

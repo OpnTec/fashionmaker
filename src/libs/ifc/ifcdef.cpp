@@ -128,6 +128,8 @@ const QString AttrCCenter     = QStringLiteral("cCenter");
 const QString AttrTangent     = QStringLiteral("tangent");
 const QString AttrCRadius     = QStringLiteral("cRadius");
 const QString AttrArc         = QStringLiteral("arc");
+const QString AttrSuffix      = QStringLiteral("suffix");
+const QString AttrIdObject    = QStringLiteral("idObject");
 
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");
