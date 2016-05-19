@@ -75,7 +75,7 @@ void VisToolRotation::RefreshGeometry()
         return;
     }
 
-    QSharedPointer<VPointF> origin;
+    QSharedPointer<VPointF> origin = QSharedPointer<VPointF>(new VPointF());
 
     if (object1Id != NULL_ID)
     {
