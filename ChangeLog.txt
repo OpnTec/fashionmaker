@@ -23,6 +23,7 @@
 - [#478] Rename 'Print preview tiled' to 'Preview Tiled PDF'.
 - [#472] Add 'Full Name' column to Formula dialog.
 - [#487] True dart point always goes to origin when the label is moved.
+- [#128] New Tool: Slash and Spread.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.
