@@ -258,6 +258,9 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     const QString keyTest = QStringLiteral("--test");
 
     QTest::newRow("bra")               << "bra.val"               << keyTest  << true << V_EX_OK;
+#ifdef Q_OS_WIN
+    Q_UNUSED(testGOST)
+#else
     QTest::newRow("jacketМ1_52-176")   << "jacketМ1_52-176.val"   << testGOST << true << V_EX_OK;
     QTest::newRow("jacketМ2_40-146")   << "jacketМ2_40-146.val"   << testGOST << true << V_EX_OK;
     QTest::newRow("jacketМ3_40-146")   << "jacketМ3_40-146.val"   << testGOST << true << V_EX_OK;
@@ -267,9 +270,13 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     QTest::newRow("pantsМ1_52-176")    << "pantsМ1_52-176.val"    << testGOST << true << V_EX_OK;
     QTest::newRow("pantsМ2_40-146")    << "pantsМ2_40-146.val"    << testGOST << true << V_EX_OK;
     QTest::newRow("pantsМ7")           << "pantsМ7.val"           << testGOST << true << V_EX_OK;
+#endif
     QTest::newRow("TShirt_test")       << "TShirt_test.val"       << keyTest  << true << V_EX_OK;
     QTest::newRow("TestDart")          << "TestDart.val"          << keyTest  << true << V_EX_OK;
+#ifdef Q_OS_WIN
+#else
     QTest::newRow("patrón_blusa")      << "patrón_blusa.val"      << keyTest  << true << V_EX_OK;
+#endif
     QTest::newRow("PajamaTopWrap2")    << "PajamaTopWrap2.val"    << keyTest  << true << V_EX_OK;
     QTest::newRow("Keiko_skirt")       << "Keiko_skirt.val"       << keyTest  << true << V_EX_OK;
     QTest::newRow("pantalon_base_Eli") << "pantalon_base_Eli.val" << keyTest  << true << V_EX_OK;
@@ -277,6 +284,8 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     QTest::newRow("IMK_Zhaketa")       << "IMK_Zhaketa_poluprilegayuschego_silueta.val" << keyTest << true << V_EX_OK;
     QTest::newRow("Moulage_0.5_armhole_neckline") << "Moulage_0.5_armhole_neckline.val" << keyTest << true << V_EX_OK;
     QTest::newRow("0.7_Armhole_adjustment_0.10")  << "0.7_Armhole_adjustment_0.10.val"  << keyTest << true << V_EX_OK;
+
+    // We have a problem with encoding in Windows when we try to open some files in terminal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
