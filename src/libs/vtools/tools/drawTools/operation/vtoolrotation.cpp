@@ -725,12 +725,6 @@ void VToolRotation::LabelChangePosition(const QPointF &pos, quint32 labelId)
             SCASSERT(item != nullptr);
             ChangePosition(item, labelId, pos);
         }
-        else
-        {
-            VSimpleCurve *item = qobject_cast<VSimpleCurve *>(obj);
-            SCASSERT(item != nullptr);
-            ChangePosition(item, labelId, pos);
-        }
     }
 }
 
@@ -814,10 +808,7 @@ void VToolRotation::DoChangePosition(quint32 id, qreal mx, qreal my)
         VSimplePoint *item = qobject_cast<VSimplePoint *>(rObjects.value(id));
         SCASSERT(item != nullptr);
 
-        item->blockSignals(true);
-        item->setPos(QPointF(mx, my));
-        item->blockSignals(false);
-        item->RefreshLine();
+        item->RefreshGeometry(*point);
     }
 }
 
