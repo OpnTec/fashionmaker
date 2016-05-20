@@ -58,8 +58,7 @@ public:
              const Draw &mode = Draw::Calculation);
     virtual ~VPointF() Q_DECL_OVERRIDE;
     VPointF &operator=(const VPointF &point);
-            operator QPointF();
-            operator const QPointF() const;
+            operator QPointF() const;
     VPointF Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;
     qreal   mx() const;
     qreal   my() const;

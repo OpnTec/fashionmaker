@@ -101,13 +101,7 @@ VPointF &VPointF::operator =(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPointF::operator const QPointF() const
-{
-    return toQPointF();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VPointF::operator QPointF()
+VPointF::operator QPointF() const
 {
     return toQPointF();
 }
