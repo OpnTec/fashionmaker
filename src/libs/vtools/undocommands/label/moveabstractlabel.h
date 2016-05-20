@@ -31,6 +31,9 @@
 
 #include "../vundocommand.h"
 
+class QGraphicsScene;
+class QGraphicsView;
+
 class MoveAbstractLabel : public VUndoCommand
 {
     Q_OBJECT
@@ -53,6 +56,8 @@ protected:
     double m_newMx;
     double m_newMy;
     bool   m_isRedo;
+    //Need for resizing scene rect
+    QGraphicsScene *m_scene;
 
     virtual void Do(double mx, double my)=0;
 private:

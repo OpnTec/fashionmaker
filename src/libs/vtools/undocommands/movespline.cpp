@@ -28,15 +28,18 @@
 
 #include "movespline.h"
 #include "../tools/vabstracttool.h"
-#include "../../vwidgets/vmaingraphicsview.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
 #include <QDomElement>
 #include <QGraphicsView>
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSpline::MoveSpline(VAbstractPattern *doc, const VSpline *oldSpl, const VSpline &newSpl, const quint32 &id,
-                       QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldSpline(*oldSpl), newSpline(newSpl), scene(scene)
+                       QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      oldSpline(*oldSpl),
+      newSpline(newSpl),
+      scene(qApp->getCurrentScene())
 {
     setText(tr("move spline"));
     nodeId = id;
@@ -54,6 +57,7 @@ void MoveSpline::undo()
     qCDebug(vUndo, "Undo.");
 
     Do(oldSpline);
+    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -62,6 +66,7 @@ void MoveSpline::redo()
     qCDebug(vUndo, "Redo.");
 
     Do(newSpline);
+    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

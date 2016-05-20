@@ -230,7 +230,7 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
     const VSpline spl = CorrectedSpline(newSplPath.GetSpline(indexSpline), position, pos);
     UpdateControlPoints(spl, newSplPath, indexSpline);
 
-    MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, id, this->scene());
+    MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, id);
     connect(moveSplPath, &VUndoCommand::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(moveSplPath);
 }
@@ -521,7 +521,7 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         UpdateControlPoints(spl, newSplPath, splIndex);
 
-        MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, id, this->scene());
+        MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldSplPath, newSplPath, id);
         connect(moveSplPath, &VUndoCommand::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(moveSplPath);
 

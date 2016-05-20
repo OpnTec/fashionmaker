@@ -32,8 +32,11 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveSplinePath::MoveSplinePath(VAbstractPattern *doc, const VSplinePath &oldSplPath, const VSplinePath &newSplPath,
-                               const quint32 &id, QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldSplinePath(oldSplPath), newSplinePath(newSplPath), scene(scene)
+                               const quint32 &id, QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      oldSplinePath(oldSplPath),
+      newSplinePath(newSplPath),
+      scene(qApp->getCurrentScene())
 {
     setText(tr("move spline path"));
     nodeId = id;
@@ -51,6 +54,7 @@ void MoveSplinePath::undo()
     qCDebug(vUndo, "Undo.");
 
     Do(oldSplinePath);
+    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -59,6 +63,7 @@ void MoveSplinePath::redo()
     qCDebug(vUndo, "Redo.");
 
     Do(newSplinePath);
+    VMainGraphicsView::NewSceneRect(scene, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -27,6 +27,8 @@
  *************************************************************************/
 
 #include "moveabstractlabel.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveAbstractLabel::MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, double x, double y,
@@ -36,7 +38,8 @@ MoveAbstractLabel::MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, dou
       m_oldMy(0.0),
       m_newMx(x),
       m_newMy(y),
-      m_isRedo(false)
+      m_isRedo(false),
+      m_scene(qApp->getCurrentScene())
 {
     nodeId = pointId;
     qCDebug(vUndo, "Point id %u", nodeId);
@@ -56,6 +59,7 @@ void MoveAbstractLabel::undo()
     qCDebug(vUndo, "Undo.");
 
     Do(m_oldMx, m_oldMy);
+    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     m_isRedo = true;
     emit ChangePosition(nodeId, m_oldMx, m_oldMy);
 }
@@ -66,6 +70,7 @@ void MoveAbstractLabel::redo()
     qCDebug(vUndo, "Redo.");
 
     Do(m_newMx, m_newMy);
+    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
     if (m_isRedo)
     {
         emit ChangePosition(nodeId, m_newMx, m_newMy);
