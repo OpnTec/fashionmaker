@@ -45,7 +45,7 @@ BuildRequires: libqt5-qtxmlpatterns-devel
 
 Requires:   poppler-utils
 
-Version:	0.4.3
+Version:	0.4.4
 Release:	0
 URL:		https://bitbucket.org/dismine/valentina
 License:	GPL-3.0+
@@ -161,6 +161,6 @@ rm -f dist/debian/%{name}.1.gz dist/debian/tape.1.gz dist/debian/%{name}.xml dis
 
 
 %changelog
-* Fri Nov 27 2015 Roman Telezhinskyi
+* Fri Nov 27 2015 Roman Telezhynskyi
  - Auto build
 
