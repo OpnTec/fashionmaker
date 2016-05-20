@@ -42,7 +42,10 @@ class VAbstractSimple;
 class VSimpleCurve;
 class VFormula;
 
-class VToolRotation : public VDrawTool, public QGraphicsItem
+// FIXME. I don't know how to use QGraphicsItem properly, so just took first available finished class.
+// QGraphicsItem itself produce case where clicking on empty space produce call to QGraphicsItem.
+// And i don't know how to fix it.
+class VToolRotation : public VDrawTool, public QGraphicsLineItem
 {
     Q_OBJECT
     // Fix warning "Class implements the interface QGraphicsItem but does not list it
@@ -77,8 +80,6 @@ public:
 
     virtual void GroupVisibility(quint32 object, bool visible) Q_DECL_OVERRIDE;
     virtual void ShowVisualization(bool show) Q_DECL_OVERRIDE;
-
-    virtual QRectF boundingRect() const Q_DECL_OVERRIDE;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE;
 
 public slots:

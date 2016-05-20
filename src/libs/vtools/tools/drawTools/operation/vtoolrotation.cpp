@@ -52,7 +52,7 @@ VToolRotation::VToolRotation(VAbstractPattern *doc, VContainer *data, quint32 id
                              const QVector<DestinationItem> &destination, const Source &typeCreation,
                              QGraphicsItem *parent)
     : VDrawTool(doc, data, id),
-      QGraphicsItem(parent),
+      QGraphicsLineItem(parent),
       origPointId(origPointId),
       formulaAngle(angle),
       suffix(suffix),
@@ -650,20 +650,6 @@ void VToolRotation::SetVisualization()
         visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
         visual->RefreshGeometry();
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VToolRotation::boundingRect() const
-{
-    QRectF recTool;
-    const QList<QGraphicsItem *> items = childItems();
-    foreach (QGraphicsItem *item, items)
-    {
-        recTool = recTool.united(item->boundingRect());
-        recTool = recTool.united(item->childrenBoundingRect());
-    }
-
-    return recTool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
