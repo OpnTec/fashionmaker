@@ -244,7 +244,7 @@ QGraphicsPathItem *VisToolRotation::GetCurve(quint32 i, const QColor &color)
     }
     else
     {
-        auto curve = InitItem<QGraphicsPathItem>(supportColor, this);
+        auto curve = InitItem<QGraphicsPathItem>(color, this);
         curves.append(curve);
         return curve;
     }

@@ -59,12 +59,12 @@ public:
     void    SetFormulaRadius (const QString &formula, qreal value);
     qreal   GetRadius () const;
 
-    qreal GetLength () const;
+    virtual qreal GetLength () const Q_DECL_OVERRIDE;
 
     QPointF GetP1() const;
     QPointF GetP2 () const;
 
-    QVector<QPointF> GetPoints () const;
+    virtual QVector<QPointF> GetPoints () const Q_DECL_OVERRIDE;
 
     QPointF CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
     QPointF CutArc (const qreal &length) const;
