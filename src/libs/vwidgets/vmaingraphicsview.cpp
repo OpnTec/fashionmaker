@@ -32,7 +32,7 @@
 #include <QWheelEvent>
 #include <QApplication>
 #include <QScrollBar>
-#include "vsimplepoint.h"
+#include "vsimplecurve.h"
 #include "vmaingraphicsscene.h"
 
 #include <QGraphicsItem>
@@ -402,7 +402,7 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *mousePress)
                 {
                     if (this->scene()->items().contains(list.at(i)))
                     {
-                        if (list.at(i)->type() <= VSimplePoint::Type &&
+                        if (list.at(i)->type() <= VSimpleCurve::Type &&
                             list.at(i)->type() > QGraphicsItem::UserType)
                         {
                             emit itemClicked(list.at(i));
