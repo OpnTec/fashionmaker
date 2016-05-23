@@ -613,7 +613,7 @@ void VApplication::InitTrVars()
 {
     if (trVars == nullptr)
     {
-        trVars = new VTranslateVars(ValentinaSettings()->GetOsSeparator());
+        trVars = new VTranslateVars();
     }
 }
 

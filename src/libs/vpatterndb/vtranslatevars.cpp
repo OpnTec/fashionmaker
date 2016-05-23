@@ -40,7 +40,7 @@
 using namespace qmu;
 
 //---------------------------------------------------------------------------------------------------------------------
-VTranslateVars::VTranslateVars(bool osSeparator)
+VTranslateVars::VTranslateVars()
     :VTranslateMeasurements(),
       PMSystemNames(QMap<QString, QmuTranslation>()),
       PMSystemAuthors(QMap<QString, QmuTranslation>()),
@@ -48,8 +48,7 @@ VTranslateVars::VTranslateVars(bool osSeparator)
       variables(QMap<QString, QmuTranslation>()),
       functions(QMap<QString, QmuTranslation>()),
       postfixOperators(QMap<QString, QmuTranslation>()),
-      stDescriptions(QMap<QString, QmuTranslation>()),
-      osSeparator(osSeparator)
+      stDescriptions(QMap<QString, QmuTranslation>())
 {
     InitPatternMakingSystems();
     InitVariables();
@@ -804,7 +803,7 @@ QString VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSepara
  * @param formula expression that need translate
  * @return translated expression
  */
-QString VTranslateVars::FormulaToUser(const QString &formula) const
+QString VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) const
 {
     if (formula.isEmpty())
     {

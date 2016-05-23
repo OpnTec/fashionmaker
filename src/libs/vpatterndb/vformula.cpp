@@ -43,8 +43,14 @@ VFormula::VFormula()
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
-    :formula(qApp->TrVars()->FormulaToUser(formula)), value(QString(tr("Error"))), checkZero(true), data(container),
-      toolId(NULL_ID), postfix(QString()), _error(true), dValue(0)
+    : formula(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator())),
+      value(QString(tr("Error"))),
+      checkZero(true),
+      data(container),
+      toolId(NULL_ID),
+      postfix(QString()),
+      _error(true),
+      dValue(0)
 {
     this->formula.replace("\n", " ");// Replace line return with spaces for calc if exist
     Eval();
@@ -114,7 +120,7 @@ void VFormula::SetFormula(const QString &value, FormulaType type)
     {
         if (type == FormulaType::ToUser)
         {
-            formula = qApp->TrVars()->FormulaToUser(value);
+            formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
         }
         else
         {

@@ -157,7 +157,7 @@ QString DialogPointOfIntersectionCircles::GetFirstCircleRadius() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::SetFirstCircleRadius(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value);
+    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -182,7 +182,7 @@ QString DialogPointOfIntersectionCircles::GetSecondCircleRadius() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::SetSecondCircleRadius(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value);
+    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {

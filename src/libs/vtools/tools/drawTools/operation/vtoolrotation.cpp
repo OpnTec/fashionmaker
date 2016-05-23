@@ -647,7 +647,7 @@ void VToolRotation::SetVisualization()
 
         visual->SetObjects(source);
         visual->SetOriginPointId(origPointId);
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
+        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
         visual->RefreshGeometry();
     }
 }

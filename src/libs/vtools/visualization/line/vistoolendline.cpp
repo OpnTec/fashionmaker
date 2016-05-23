@@ -73,7 +73,8 @@ void VisToolEndLine::RefreshGeometry()
     Visualization::toolTip = QString(tr("<b>Point at distance and angle</b>: angle = %1°, length = %2%3; "
                                         "<b>Shift</b> - sticking angle, <b>Enter</b> - finish creation"))
             .arg(this->line().angle())
-            .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(this->line().length()))))
+            .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(this->line().length())),
+                                               qApp->Settings()->GetOsSeparator()))
             .arg(prefix);
 }
 

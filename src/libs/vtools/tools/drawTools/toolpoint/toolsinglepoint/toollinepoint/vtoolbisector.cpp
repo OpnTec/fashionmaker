@@ -304,7 +304,7 @@ void VToolBisector::SetVisualization()
         visual->setObject1Id(firstPointId);
         visual->setObject2Id(basePointId);
         visual->setObject3Id(thirdPointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

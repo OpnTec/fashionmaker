@@ -146,7 +146,7 @@ void VToolAlongLine::SetVisualization()
         SCASSERT(visual != nullptr)
         visual->setObject1Id(basePointId);
         visual->setObject2Id(secondPointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

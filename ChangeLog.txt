@@ -29,6 +29,7 @@
 - [#435] Valentina doesn't change the cursor.
 - [#473] Tape 'Preferences' cause loss of focus.
 - [#485] Error when drawing a curved path.
+- [#491] Valentina doesn't update fractional separator.
 
 # Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
