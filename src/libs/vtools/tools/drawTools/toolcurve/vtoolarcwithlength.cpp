@@ -312,9 +312,9 @@ void VToolArcWithLength::SetVisualization()
 
         const VTranslateVars *trVars = qApp->TrVars();
         visual->setPoint1Id(arc->GetCenter().id());
-        visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius()));
-        visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1()));
-        visual->setLength(trVars->FormulaToUser(arc->GetFormulaLength()));
+        visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius(), qApp->Settings()->GetOsSeparator()));
+        visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1(), qApp->Settings()->GetOsSeparator()));
+        visual->setLength(trVars->FormulaToUser(arc->GetFormulaLength(), qApp->Settings()->GetOsSeparator()));
         visual->RefreshGeometry();
     }
 }

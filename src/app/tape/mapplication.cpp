@@ -410,7 +410,7 @@ void MApplication::InitTrVars()
     }
     else
     {
-        trVars = new VTranslateVars(TapeSettings()->GetOsSeparator());
+        trVars = new VTranslateVars();
     }
 }
 

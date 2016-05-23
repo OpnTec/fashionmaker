@@ -116,7 +116,7 @@ QString DialogArcWithLength::GetRadius() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::SetRadius(const QString &value)
 {
-    radius = qApp->TrVars()->FormulaToUser(value);
+    radius = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (radius.length() > 80)
     {
@@ -139,7 +139,7 @@ QString DialogArcWithLength::GetF1() const
 
 void DialogArcWithLength::SetF1(const QString &value)
 {
-    f1 = qApp->TrVars()->FormulaToUser(value);
+    f1 = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f1.length() > 80)
     {
@@ -163,7 +163,7 @@ QString DialogArcWithLength::GetLength() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::SetLength(const QString &value)
 {
-    length = qApp->TrVars()->FormulaToUser(value);
+    length = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (length.length() > 80)
     {

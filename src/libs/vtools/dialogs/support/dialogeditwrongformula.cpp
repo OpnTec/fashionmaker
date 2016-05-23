@@ -323,7 +323,7 @@ void DialogEditWrongFormula::showEvent(QShowEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::SetFormula(const QString &value)
 {
-    formula = qApp->TrVars()->FormulaToUser(value);
+    formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)

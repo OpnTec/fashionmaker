@@ -110,7 +110,7 @@ QString DialogCurveIntersectAxis::GetAngle() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::SetAngle(const QString &value)
 {
-    formulaAngle = qApp->TrVars()->FormulaToUser(value);
+    formulaAngle = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formulaAngle.length() > 80)

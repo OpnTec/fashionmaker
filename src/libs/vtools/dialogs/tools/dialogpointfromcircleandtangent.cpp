@@ -125,7 +125,7 @@ QString DialogPointFromCircleAndTangent::GetCircleRadius() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::SetCircleRadius(const QString &value)
 {
-    const QString formula = qApp->TrVars()->FormulaToUser(value);
+    const QString formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {

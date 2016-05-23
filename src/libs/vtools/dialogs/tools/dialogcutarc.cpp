@@ -198,7 +198,7 @@ void DialogCutArc::SetChildrenId(const quint32 &ch1, const quint32 &ch2)
  */
 void DialogCutArc::SetFormula(const QString &value)
 {
-    formula = qApp->TrVars()->FormulaToUser(value);
+    formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {

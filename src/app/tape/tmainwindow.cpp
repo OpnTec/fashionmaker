@@ -1284,7 +1284,7 @@ void TMainWindow::ShowMData()
             QString formula;
             try
             {
-                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula());
+                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
             }
             catch (qmu::QmuParserError &e)
             {
@@ -1470,7 +1470,7 @@ void TMainWindow::SaveMValue()
 
     try
     {
-        const QString formula = qApp->TrVars()->FormulaFromUser(text, true);
+        const QString formula = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
         m->SetMValue(nameField->data(Qt::UserRole).toString(), formula);
     }
     catch (qmu::QmuParserError &e) // Just in case something bad will happen
@@ -2216,7 +2216,7 @@ void TMainWindow::RefreshTable()
             QString formula;
             try
             {
-                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula());
+                formula = qApp->TrVars()->FormulaToUser(meash->GetFormula(), qApp->Settings()->GetOsSeparator());
             }
             catch (qmu::QmuParserError &e)
             {
@@ -2372,7 +2372,7 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
             QString f;
             if (fromUser)
             {
-                f = qApp->TrVars()->FormulaFromUser(formula, true);
+                f = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
             }
             else
             {

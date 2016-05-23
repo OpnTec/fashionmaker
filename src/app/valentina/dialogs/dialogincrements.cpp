@@ -145,7 +145,7 @@ void DialogIncrements::FillIncrements()
         QString formula;
         try
         {
-            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula());
+            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
         }
         catch (qmu::QmuParserError &e)
         {
@@ -771,7 +771,7 @@ void DialogIncrements::ShowIncrementDetails()
         QString formula;
         try
         {
-            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula());
+            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
         }
         catch (qmu::QmuParserError &e)
         {
