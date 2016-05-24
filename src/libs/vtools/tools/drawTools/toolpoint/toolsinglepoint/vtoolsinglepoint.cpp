@@ -132,6 +132,13 @@ void VToolSinglePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
     QGraphicsEllipseItem::mousePressEvent(event);
+
+    // Somehow clicking on notselectable object do not clean previous selections.
+    if (not (flags() & ItemIsSelectable) && scene())
+    {
+        scene()->clearSelection();
+    }
+
     if (selectionType == SelectionType::ByMouseRelease)
     {
         event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event

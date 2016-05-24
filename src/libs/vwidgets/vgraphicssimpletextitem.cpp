@@ -207,6 +207,13 @@ void VGraphicsSimpleTextItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
     QGraphicsSimpleTextItem::mousePressEvent(event);
+
+    // Somehow clicking on notselectable object do not clean previous selections.
+    if (not (flags() & ItemIsSelectable) && scene())
+    {
+        scene()->clearSelection();
+    }
+
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
