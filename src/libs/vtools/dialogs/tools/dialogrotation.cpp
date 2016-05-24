@@ -48,7 +48,8 @@ DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QW
       formulaAngle(),
       formulaBaseHeightAngle(0),
       objects(),
-      stage1(true)
+      stage1(true),
+      m_suffix()
 {
     ui->setupUi(this);
 
@@ -126,12 +127,13 @@ void DialogRotation::SetAngle(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogRotation::GetSuffix() const
 {
-    return ui->lineEditSuffix->text();
+    return m_suffix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::SetSuffix(const QString &value)
 {
+    m_suffix = value;
     ui->lineEditSuffix->setText(value);
 }
 
@@ -289,17 +291,20 @@ void DialogRotation::SuffixChanged()
         }
         else
         {
-            QRegularExpression rx(NameRegExp());
-            const QStringList uniqueNames = data->AllUniqueNames();
-            for (int i=0; i < uniqueNames.size(); ++i)
+            if (m_suffix != suffix)
             {
-                const QString name = uniqueNames.at(i) + suffix;
-                if (not rx.match(name).hasMatch() || not data->IsUnique(name))
+                QRegularExpression rx(NameRegExp());
+                const QStringList uniqueNames = data->AllUniqueNames();
+                for (int i=0; i < uniqueNames.size(); ++i)
                 {
-                    flagName = false;
-                    ChangeColor(ui->labelSuffix, Qt::red);
-                    CheckState();
-                    return;
+                    const QString name = uniqueNames.at(i) + suffix;
+                    if (not rx.match(name).hasMatch() || not data->IsUnique(name))
+                    {
+                        flagName = false;
+                        ChangeColor(ui->labelSuffix, Qt::red);
+                        CheckState();
+                        return;
+                    }
                 }
             }
         }
@@ -328,6 +333,8 @@ void DialogRotation::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::SaveData()
 {
+    m_suffix = ui->lineEditSuffix->text();
+
     formulaAngle = ui->plainTextEditFormula->toPlainText();
     formulaAngle.replace("\n", " ");
 

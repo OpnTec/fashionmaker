@@ -98,6 +98,8 @@ private:
 
     bool stage1;
 
+    QString m_suffix;
+
     void EvalAngle();
 };
 
