@@ -50,6 +50,7 @@
 #include <QMessageBox>
 #include <QComboBox>
 #include <QProcess>
+#include <QtNumeric>
 
 #if defined(Q_OS_MAC)
 #include <QMimeData>
@@ -2421,8 +2422,17 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
             }
             f.replace("\n", " ");
             Calculator *cal = new Calculator();
-            const qreal result = UnitConvertor(cal->EvalFormula(data->PlainVariables(), f), mUnit, pUnit);
+            qreal result = cal->EvalFormula(data->PlainVariables(), f);
             delete cal;
+
+            if (qIsInf(result) || qIsNaN(result))
+            {
+                label->setText(tr("Error") + " (" + postfix + ").");
+                label->setToolTip(tr("Invalid value"));
+                return false;
+            }
+
+            result = UnitConvertor(result, mUnit, pUnit);
 
             label->setText(qApp->LocaleToString(result) + " " +postfix);
             label->setToolTip(tr("Value"));

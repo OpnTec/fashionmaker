@@ -36,6 +36,8 @@
 #include "../../undocommands/savetooloptions.h"
 #include "../../../ifc/exception/vexceptionundo.h"
 
+#include <QtNumeric>
+
 qreal VDrawTool::factor = 1;
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -295,10 +297,15 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
         cal = new Calculator();
         result = cal->EvalFormula(data->PlainVariables(), formula);
         delete cal;
+
+        if (qIsInf(result) || qIsNaN(result))
+        {
+            qDebug() << "Invalid the formula value";
+            return 0;
+        }
     }
     catch (qmu::QmuParserError &e)
     {
-        //Q_UNUSED(e)
         qDebug() << "\nMath parser error:\n"
                  << "--------------------------------------\n"
                  << "Message:     " << e.GetMsg()  << "\n"
@@ -328,8 +335,15 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                             delete dialog;
                             Calculator *cal1 = new Calculator();
                             result = cal1->EvalFormula(data->PlainVariables(), formula);
-                            delete cal1; /* Here can be memory leak, but dialog already check this formula and
+                            delete cal1; /* Here can be memory leak, but dialog already checked this formula and
                                             probability very low. */
+
+                            if (qIsInf(result) || qIsNaN(result))
+                            {
+                                qDebug() << "Invalid the formula value";
+                                return 0;
+                            }
+
                             break;
                         }
                         else

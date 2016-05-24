@@ -32,6 +32,7 @@
 #include "../../vpatterndb/vtranslatevars.h"
 
 #include <QGraphicsEllipseItem>
+#include <QtNumeric>
 
 Q_LOGGING_CATEGORY(vVis, "v.visualization")
 
@@ -160,6 +161,11 @@ qreal Visualization::FindVal(const QString &expression, const QHash<QString, qre
             Calculator *cal = new Calculator();
             val = cal->EvalFormula(vars, formula);
             delete cal;
+
+            if (qIsInf(val) || qIsNaN(val))
+            {
+                val = 0;
+            }
         }
         catch (qmu::QmuParserError &e)
         {

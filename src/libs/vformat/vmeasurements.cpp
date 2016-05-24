@@ -34,6 +34,7 @@
 #include "../qmuparser/qmutokenparser.h"
 
 #include <QDate>
+#include <QtNumeric>
 
 const QString VMeasurements::TagVST              = QStringLiteral("vst");
 const QString VMeasurements::TagVIT              = QStringLiteral("vit");
@@ -882,7 +883,7 @@ qreal VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool 
             const qreal result = cal->EvalFormula(data->PlainVariables(), f);
             delete cal;
 
-            *ok = true;
+            (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
             return result;
         }
         catch (qmu::QmuParserError &e)

@@ -32,7 +32,9 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vsettings.h"
 #include "vtranslatevars.h"
+
 #include <QDebug>
+#include <QtNumeric>
 
 //VFormula
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,18 +239,27 @@ void VFormula::Eval()
             const qreal result = cal->EvalFormula(data->PlainVariables(), expression);
             delete cal;
 
-            //if result equal 0
-            if (checkZero && qFuzzyIsNull(result))
+            if (qIsInf(result) || qIsNaN(result))
             {
-                value = QString("0");
+                value = QString(tr("Error"));
                 _error = true;
                 dValue = 0;
             }
             else
             {
-                dValue = result;
-                value = QString(qApp->LocaleToString(result) + " " + postfix);
-                _error = false;
+                //if result equal 0
+                if (checkZero && qFuzzyIsNull(result))
+                {
+                    value = QString("0");
+                    _error = true;
+                    dValue = 0;
+                }
+                else
+                {
+                    dValue = result;
+                    value = QString(qApp->LocaleToString(result) + " " + postfix);
+                    _error = false;
+                }
             }
         }
         catch (qmu::QmuParserError &e)

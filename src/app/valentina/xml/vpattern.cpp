@@ -51,6 +51,7 @@
 #include <QMessageBox>
 #include <QUndoStack>
 #include <QtCore/qmath.h>
+#include <QtNumeric>
 
 const QString VPattern::AttrReadOnly = QStringLiteral("readOnly");
 
@@ -2458,7 +2459,7 @@ qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) 
             const qreal result = cal->EvalFormula(data->PlainVariables(), f);
             delete cal;
 
-            *ok = true;
+            (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
             return result;
         }
         catch (qmu::QmuParserError &e)

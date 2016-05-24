@@ -42,6 +42,7 @@
 #include <QTableWidget>
 #include <QSettings>
 #include <QTableWidgetItem>
+#include <QtNumeric>
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
@@ -312,6 +313,13 @@ bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
             Calculator *cal = new Calculator();
             const qreal result = cal->EvalFormula(data->PlainVariables(), f);
             delete cal;
+
+            if (qIsInf(result) || qIsNaN(result))
+            {
+                label->setText(tr("Error") + " (" + postfix + ").");
+                label->setToolTip(tr("Invalid value"));
+                return false;
+            }
 
             label->setText(qApp->LocaleToString(result) + " " + postfix);
             label->setToolTip(tr("Value"));
