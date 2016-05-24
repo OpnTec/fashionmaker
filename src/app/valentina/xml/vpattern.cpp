@@ -2455,9 +2455,8 @@ qreal VPattern::EvalFormula(VContainer *data, const QString &formula, bool *ok) 
             // Replace line return character with spaces for calc if exist
             QString f = formula;
             f.replace("\n", " ");
-            Calculator *cal = new Calculator();
+            QScopedPointer<Calculator> cal(new Calculator());
             const qreal result = cal->EvalFormula(data->PlainVariables(), f);
-            delete cal;
 
             (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
             return result;

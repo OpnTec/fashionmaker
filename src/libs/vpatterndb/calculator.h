@@ -48,9 +48,8 @@ class VContainer;
  *     //Need delete dialog here because parser in dialog don't allow use correct separator for parsing here.
  *     //Don't know why.
  *     delete dialog;
- *     Calculator *cal = new Calculator();
+ *     QScopedPointer<Calculator> cal(new Calculator());
  *     result = cal->EvalFormula(data->PlainVariables(), formula);
- *     delete cal;//Here can be memory leak, but dialog already check this formula and probability very low.
  * }
  */
 class Calculator:public qmu::QmuFormulaBase

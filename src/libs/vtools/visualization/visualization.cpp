@@ -158,9 +158,8 @@ qreal Visualization::FindVal(const QString &expression, const QHash<QString, qre
             QString formula = expression;
             formula.replace("\n", " ");
             formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-            Calculator *cal = new Calculator();
+            QScopedPointer<Calculator> cal(new Calculator());
             val = cal->EvalFormula(vars, formula);
-            delete cal;
 
             if (qIsInf(val) || qIsNaN(val))
             {

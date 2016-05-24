@@ -2421,9 +2421,8 @@ bool TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
                 f = formula;
             }
             f.replace("\n", " ");
-            Calculator *cal = new Calculator();
+            QScopedPointer<Calculator> cal(new Calculator());
             qreal result = cal->EvalFormula(data->PlainVariables(), f);
-            delete cal;
 
             if (qIsInf(result) || qIsNaN(result))
             {

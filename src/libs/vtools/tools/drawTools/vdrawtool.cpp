@@ -294,9 +294,8 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
     Calculator *cal = nullptr;
     try
     {
-        cal = new Calculator();
+        QScopedPointer<Calculator> cal(new Calculator());
         result = cal->EvalFormula(data->PlainVariables(), formula);
-        delete cal;
 
         if (qIsInf(result) || qIsNaN(result))
         {
@@ -311,11 +310,10 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                  << "Message:     " << e.GetMsg()  << "\n"
                  << "Expression:  " << e.GetExpr() << "\n"
                  << "--------------------------------------";
-        delete cal;
 
         if (qApp->IsAppInGUIMode())
         {
-            DialogUndo *dialogUndo = new DialogUndo(qApp->getMainWindow());
+            QScopedPointer<DialogUndo> dialogUndo(new DialogUndo(qApp->getMainWindow()));
             forever
             {
                 if (dialogUndo->exec() == QDialog::Accepted)
@@ -323,8 +321,7 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                     const UndoButton resultUndo = dialogUndo->Result();
                     if (resultUndo == UndoButton::Fix)
                     {
-                        DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId,
-                                                                                    qApp->getMainWindow());
+                        auto *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
                         dialog->setWindowTitle(tr("Edit wrong formula"));
                         dialog->SetFormula(formula);
                         if (dialog->exec() == QDialog::Accepted)
@@ -333,10 +330,8 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                             /* Need delete dialog here because parser in dialog don't allow use correct separator for
                              * parsing here. */
                             delete dialog;
-                            Calculator *cal1 = new Calculator();
+                            QScopedPointer<Calculator> cal1(new Calculator());
                             result = cal1->EvalFormula(data->PlainVariables(), formula);
-                            delete cal1; /* Here can be memory leak, but dialog already checked this formula and
-                                            probability very low. */
 
                             if (qIsInf(result) || qIsNaN(result))
                             {
@@ -358,11 +353,9 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                 }
                 else
                 {
-                    delete dialogUndo;
                     throw;
                 }
             }
-            delete dialogUndo;
         }
         else
         {
