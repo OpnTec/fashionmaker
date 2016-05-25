@@ -63,7 +63,15 @@ void VAbstractNode::incrementReferens()
     ++_referens;
     if (_referens == 1)
     {
-        idTool != NULL_ID ? doc->IncrementReferens(idTool) : doc->IncrementReferens(idNode);
+        if (idTool != NULL_ID)
+        {
+            doc->IncrementReferens(idTool);
+        }
+        else
+        {
+            const QSharedPointer<VGObject> node = VAbstractTool::data.GetGObject(idNode);
+            doc->IncrementReferens(node->getIdTool());
+        }
         ShowNode();
         QDomElement domElement = doc->elementById(id);
         if (domElement.isElement())
@@ -85,7 +93,15 @@ void VAbstractNode::decrementReferens()
     }
     if (_referens == 0)
     {
-        idTool != NULL_ID ? doc->DecrementReferens(idTool) : doc->DecrementReferens(idNode);
+        if (idTool != NULL_ID)
+        {
+            doc->DecrementReferens(idTool);
+        }
+        else
+        {
+            const QSharedPointer<VGObject> node = VAbstractTool::data.GetGObject(idNode);
+            doc->DecrementReferens(node->getIdTool());
+        }
         HideNode();
         QDomElement domElement = doc->elementById(id);
         if (domElement.isElement())

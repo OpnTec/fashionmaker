@@ -53,8 +53,6 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::NodePoint)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 
-    virtual void incrementReferens() Q_DECL_OVERRIDE;
-    virtual void decrementReferens() Q_DECL_OVERRIDE;
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
     void         NameChangePosition(const QPointF &pos);

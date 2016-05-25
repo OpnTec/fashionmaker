@@ -122,57 +122,6 @@ QString VNodePoint::getTagName() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNodePoint::incrementReferens()
-{
-    ++_referens;
-    if (_referens == 1)
-    {
-        if (idTool != NULL_ID)
-        {
-            doc->IncrementReferens(idTool);
-        }
-        else
-        {
-            const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(idNode);
-            doc->IncrementReferens(point->getIdTool());
-        }
-        ShowNode();
-        QDomElement domElement = doc->elementById(id);
-        if (domElement.isElement())
-        {
-            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodePoint::decrementReferens()
-{
-    if (_referens > 0)
-    {
-        --_referens;
-    }
-    if (_referens == 0)
-    {
-        if (idTool != NULL_ID)
-        {
-            doc->DecrementReferens(idTool);
-        }
-        else
-        {
-            const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(idNode);
-            doc->DecrementReferens(point->getIdTool());
-        }
-        HideNode();
-        QDomElement domElement = doc->elementById(id);
-        if (domElement.isElement())
-        {
-            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::PointChoosed()
 {
     emit ChoosedTool(id, SceneObject::Point);
