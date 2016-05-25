@@ -231,6 +231,7 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::SelectedObject(bool selected, quint32 object, quint32 tool)
 {
+    Q_UNUSED(tool)
     if (stage1)
     {
         if (selected)

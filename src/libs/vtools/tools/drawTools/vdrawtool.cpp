@@ -291,7 +291,6 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
 {
     SCASSERT(data != nullptr)
     qreal result = 0;
-    Calculator *cal = nullptr;
     try
     {
         QScopedPointer<Calculator> cal(new Calculator());
