@@ -506,7 +506,7 @@ double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2)
 {
     const double dx1 = p2.x() - p1.x();
     const double dy1 = p2.y() - p1.y();
-    const double epsilon = 0.03 * (dx1 * dx1 + dy1 * dy1); //-V636
+    const double epsilon = 0.06 * (dx1 * dx1 + dy1 * dy1); //-V636
     return epsilon;
 }
 
