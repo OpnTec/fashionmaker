@@ -337,8 +337,8 @@ void VToolRotation::ExtractData(VAbstractPattern *doc, const QDomElement &domEle
                 {
                     DestinationItem d;
                     d.id = doc->GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
-                    d.mx = qApp->toPixel(doc->GetParametrDouble(element, AttrMx, "0.0"));
-                    d.my = qApp->toPixel(doc->GetParametrDouble(element, AttrMy, "0.0"));
+                    d.mx = qApp->toPixel(doc->GetParametrDouble(element, AttrMx, QString::number(INT_MAX)));
+                    d.my = qApp->toPixel(doc->GetParametrDouble(element, AttrMy, QString::number(INT_MAX)));
                     destination.append(d);
                 }
             }
@@ -755,8 +755,14 @@ void VToolRotation::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     {
         QDomElement item = doc->createElement(TagItem);
         doc->SetAttribute(item, AttrIdObject, destination.at(i).id);
-        doc->SetAttribute(item, AttrMx, qApp->fromPixel(destination.at(i).mx));
-        doc->SetAttribute(item, AttrMy, qApp->fromPixel(destination.at(i).my));
+
+        if (not VFuzzyComparePossibleNulls(destination.at(i).mx, INT_MAX) &&
+            not VFuzzyComparePossibleNulls(destination.at(i).my, INT_MAX))
+        {
+            doc->SetAttribute(item, AttrMx, qApp->fromPixel(destination.at(i).mx));
+            doc->SetAttribute(item, AttrMy, qApp->fromPixel(destination.at(i).my));
+        }
+
         tagObjects.appendChild(item);
     }
     tag.appendChild(tagObjects);
