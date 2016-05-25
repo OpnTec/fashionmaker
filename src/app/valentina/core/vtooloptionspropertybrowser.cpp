@@ -33,6 +33,7 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vsimplepoint.h"
+#include "../vwidgets/vsimplecurve.h"
 #include "../vpropertyexplorer/vproperties.h"
 #include "vformulaproperty.h"
 #include "../vpatterndb/vformula.h"
@@ -171,6 +172,10 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             ShowOptionsToolPointFromArcAndTangent(item);
             break;
         case VSimplePoint::Type:
+            currentItem = item->parentItem();
+            ShowItemOptions(currentItem);
+            break;
+        case VSimpleCurve::Type:
             currentItem = item->parentItem();
             ShowItemOptions(currentItem);
             break;
