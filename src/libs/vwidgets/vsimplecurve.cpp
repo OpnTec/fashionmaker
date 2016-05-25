@@ -150,6 +150,12 @@ QVariant VSimpleCurve::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    emit ShowContextMenu(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::ShowPath()
 {
     if (not m_curve.isNull())

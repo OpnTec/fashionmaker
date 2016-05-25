@@ -263,3 +263,9 @@ QVariant VSimplePoint::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 
     return QGraphicsEllipseItem::itemChange(change, value);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    emit ShowContextMenu(event);
+}
