@@ -58,6 +58,7 @@ VToolLine::VToolLine(VAbstractPattern *doc, VContainer *data, quint32 id, quint3
     const QSharedPointer<VPointF> second = data->GeometricObject<VPointF>(secondPoint);
     this->setLine(QLineF(*first, *second));
     this->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setAcceptHoverEvents(true);
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor,
                       LineStyleToPenStyle(typeLine)));
