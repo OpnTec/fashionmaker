@@ -64,7 +64,6 @@ signals:
      */
     void Choosed(quint32 id);
     void Selected(bool selected, quint32 id);
-    void Delete();
     void NameChangedPosition(const QPointF &pos, quint32 id);
 
 public slots:

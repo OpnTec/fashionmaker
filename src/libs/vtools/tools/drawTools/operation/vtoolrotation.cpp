@@ -953,6 +953,7 @@ VSimpleCurve *VToolRotation::InitCurve(quint32 id, VContainer *data, GOType curv
     curve->SetType(curveType);
     connect(curve, &VSimpleCurve::Selected, this, &VToolRotation::ObjectSelected);
     connect(curve, &VSimpleCurve::ShowContextMenu, this, &VToolRotation::contextMenuEvent);
+    connect(curve, &VSimpleCurve::Delete, this, &VToolRotation::DeleteFromLabel);
     curve->RefreshGeometry(VAbstractTool::data.GeometricObject<VAbstractCurve>(id));
     rObjects.insert(id, curve);
     return curve;

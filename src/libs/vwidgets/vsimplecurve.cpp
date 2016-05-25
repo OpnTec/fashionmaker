@@ -33,6 +33,7 @@
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
+#include <QKeyEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 VSimpleCurve::VSimpleCurve(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
@@ -44,6 +45,7 @@ VSimpleCurve::VSimpleCurve(quint32 id, const QColor &currentColor, Unit patternU
     this->setBrush(QBrush(Qt::NoBrush));
     SetPen(this, currentColor, WidthHairLine(patternUnit));
     this->setAcceptHoverEvents(true);
+    this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,6 +155,20 @@ QVariant VSimpleCurve::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 void VSimpleCurve::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     emit ShowContextMenu(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::keyReleaseEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Delete:
+            emit Delete();
+            return; //Leave this method immediately after call!!!
+        default:
+            break;
+    }
+    QGraphicsPathItem::keyReleaseEvent ( event );
 }
 
 //---------------------------------------------------------------------------------------------------------------------

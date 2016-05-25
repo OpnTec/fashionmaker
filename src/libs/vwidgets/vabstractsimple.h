@@ -58,6 +58,7 @@ public:
 
 signals:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent * event);
+    void Delete();
 
 public slots:
     void ContextMenu(QGraphicsSceneContextMenuEvent * event);
