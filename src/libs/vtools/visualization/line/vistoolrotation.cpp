@@ -259,14 +259,14 @@ int VisToolRotation::AddCurve(qreal angle, const QPointF &origin, quint32 id, in
 
     ++i;
     QGraphicsPathItem *path = GetCurve(i, supportColor2);
-    DrawPath(path, curve->GetPath(PathDirection::Hide), supportColor2, Qt::SolidLine, Qt::RoundCap);
+    DrawPath(path, curve->GetPath(PathDirection::Show), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
     ++i;
     path = GetCurve(i, supportColor);
     if (object1Id != NULL_ID)
     {
         const Item rotated = curve->Rotate(origin, angle);
-        DrawPath(path, rotated.GetPath(PathDirection::Hide), supportColor, Qt::SolidLine, Qt::RoundCap);
+        DrawPath(path, rotated.GetPath(PathDirection::Show), supportColor, Qt::SolidLine, Qt::RoundCap);
     }
 
     return i;
