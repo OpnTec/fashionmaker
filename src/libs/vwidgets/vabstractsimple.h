@@ -101,11 +101,11 @@ void VAbstractSimple::SetPen(T *item, const QColor &color, qreal width)
 {
     if (factor == nullptr)
     {
-        item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)));
+        item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit), Qt::SolidLine, Qt::RoundCap));
     }
     else
     {
-        item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor));
+        item->setPen(QPen(CorrectColor(color), ToPixel(width, patternUnit)/ *factor, Qt::SolidLine, Qt::RoundCap));
     }
 }
 

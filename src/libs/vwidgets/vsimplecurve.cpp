@@ -38,7 +38,8 @@
 VSimpleCurve::VSimpleCurve(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor, QObject *parent)
     : VAbstractSimple(id, currentColor, patternUnit, factor, parent),
       QGraphicsPathItem(),
-      m_curve()
+      m_curve(),
+      m_isHovered(false)
 {
     this->setBrush(QBrush(Qt::NoBrush));
     SetPen(this, currentColor, WidthHairLine(patternUnit));
@@ -66,14 +67,7 @@ void VSimpleCurve::ChangedActivDraw(bool flag)
 void VSimpleCurve::RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve)
 {
     m_curve = curve;
-    if (not curve.isNull())
-    {
-        setPath(curve->GetPath(PathDirection::Hide));
-    }
-    else
-    {
-        qWarning() << tr("VSimpleCurve::RefreshGeometry: pointer to curve is null.");
-    }
+    ShowPath();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -129,14 +123,18 @@ void VSimpleCurve::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
+    m_isHovered = true;
     SetPen(this, currentColor, WidthMainLine(patternUnit));
+    ShowPath();
     QGraphicsPathItem::hoverEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
+    m_isHovered = false;
     SetPen(this, currentColor, WidthHairLine(patternUnit));
+    ShowPath();
     QGraphicsPathItem::hoverLeaveEvent(event);
 }
 
@@ -149,4 +147,20 @@ QVariant VSimpleCurve::itemChange(QGraphicsItem::GraphicsItemChange change, cons
     }
 
     return QGraphicsPathItem::itemChange(change, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::ShowPath()
+{
+    if (not m_curve.isNull())
+    {
+        QPainterPath path;
+        m_isHovered ? path = m_curve->GetPath(PathDirection::Show) : path = m_curve->GetPath(PathDirection::Hide);
+        path.setFillRule( Qt::WindingFill );
+        setPath(path);
+    }
+    else
+    {
+        qWarning() << tr("VSimpleCurve::RefreshGeometry: pointer to curve is null.");
+    }
 }
