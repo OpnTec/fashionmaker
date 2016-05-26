@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>mm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>female</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m full_name="Обхват груди" value="92" name="@М_1"/>
+        <m full_name="Обхват талии" value="70" name="@М_2"/>
+        <m full_name="Обхват бедер на уровне выпуклости живота" value="87" name="@М_3"/>
+        <m full_name="Обхват бедер" value="96" name="@М_4"/>
+        <m full_name="Длина_посередине_до_талии (Перед)" value="371" name="@М_5_f"/>
+        <m full_name="Длина_посередине_до_талии (Спина)" value="425" name="@М_5_b"/>
+        <m full_name="Длина_до_талии (перед)" value="448 " name="@М_6_f"/>
+        <m full_name="Длина_до_талии (спина)" value="444" name="@М_6_b"/>
+        <m full_name="Высота плеча косая " value="450" name="@М_7_f"/>
+        <m full_name="Высота плеча косая " value="431" name="@М_7_b"/>
+        <m full_name="Длина от точк и основания шеи до талии" value="451" name="@М_8"/>
+        <m full_name="Высота груди" value="241" name="@М_9"/>
+        <m full_name="Радиус грудной железы" value="76" description="Радиус грудной железы  B- 76" name="@М_9_R"/>
+        <m full_name="Расстояние между точками центра груди" value="98" name="@М_10"/>
+        <m full_name="Длина боковой линии до талии" value="213" name="@М_11"/>
+        <m full_name="Ширина шеи сзади" value="76" name="@М_12"/>
+        <m full_name="Ширина плечевого ската" value="134" name="@М_13"/>
+        <m full_name="Ширина плеча" value="197" name="@М_14_f"/>
+        <m full_name="Ширина плеча" value="203" name="@М_14_b"/>
+        <m full_name="Ширина груди" value="171" name="@М_15"/>
+        <m full_name="Ширина спины" value="177" name="@М_16"/>
+        <m full_name="Ширина груди с учетом выпуклости грудных желез" value="254" name="@М_17"/>
+        <m full_name="Ширина спины на уровне глубины проймы" value="219" name="@М_18"/>
+        <m full_name="Ширина талии" value="178" name="@М_19_f"/>
+        <m full_name="Ширина талии" value="169" name="@М_19_b"/>
+        <m full_name="Месторасположение вытачки " value="83" name="@М_20_f"/>
+        <m full_name="Месторасположение вытачки " value="83" name="@М_20_b"/>
+        <m full_name="номер не используется" value="0" name="@М_21"/>
+        <m full_name="Ширина бедер на уровне выпуклости живота" value="209" name="@М_22_f"/>
+        <m full_name="Ширина бедер на уровне выпуклости живота" value="216" name="@М_22_b"/>
+        <m full_name="Ширина бедер" value="232" name="@М_23_f"/>
+        <m full_name="Ширина бедер" value="245" name="@М_23_b"/>
+        <m full_name="Высота сидения" value="254" name="@М_24"/>
+        <m full_name="Высота бедер:&#xa;По средней линии переда" value="203" name="@М_25_f"/>
+        <m full_name="Высота бедер:&#xa;По средней линии спины" value="200" name="@М_25_b"/>
+        <m full_name="Высота бедер сбоку" value="206" name="@М_26"/>
+        <m full_name="Длина сбоку от линии талии до колена" value="584" name="@М_27"/>
+        <m full_name="Дуга через паховую область" value="660" name="@М_28"/>
+        <m full_name="Обхват верхней части бедра" value="546" name="@М_29"/>
+        <m full_name="Обхват колена" value="356" name="@М_30"/>
+        <m full_name="Обхват и кры" value="330" name="@М_31"/>
+        <m full_name="Обхват щи колотки" value="228" name="@М_32"/>
+        <m full_name="Прибавка  на свободное облегание по линии груди " value="6" description="Прибавка на свободное облегание по линии груди 0,6 см, для полных фигур - 1 ,3 см.&#xa;Можно сделать как функцию от полноты - ширины груди&#xa;Используется и на спине по линии талии... Может надо разделить" name="@P_1"/>
+        <m full_name="Прибавка (спины) на свободное облегание по линии проймы" value="19" name="@P_2"/>
+        <m full_name="Прибавка  (в юбке )на свободное облегание по линии бедер" value="13" name="@P_3"/>
+        <m full_name="Прибавка  (в юбке )на свободное облегание по линии талии" value="6" name="@P_4"/>
+        <m full_name="Неровность линии талии на юбке" value="5" description="превышение боковых точкек и занижение передней точки" name="@P_5"/>
+        <m full_name="Раствор вытачки по талии на спине" value="38" description="Раствор вытачки по талии на спине - 38 , для дестких размеров 25" name="@V_1"/>
+        <m full_name="Раствор вытачки плечевой" value="12" description="Раствор вытачки плечевой - видимо на выпуклость лопатки -12" name="@V_2"/>
+        <m full_name="Раствор одной вытачки (из двух) переда юбки (ПП) по талии " value="16" name="@V_3"/>
+        <m full_name="Раствор одной вытачки (из двух) зада юбки (ЗП) по талии " value="29" name="@V_4"/>
+        <m full_name="Расстояние между парой вытачек" value="32" name="@V_5"/>
+        <m full_name="Длина  вытачки  переда юбки (ПП) по талии" value="90" name="@V_6"/>
+        <m full_name="Длина  вытачки  зада  юбки (ЗП) по талии" value="140" name="@V_7"/>
+        <m full_name="Длина юбки" value="@М_27" description="Длина юбки   - наприимер до колена" name="@Длина_юбки"/>
+    </body-measurements>
+</vit>
