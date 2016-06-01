@@ -93,7 +93,13 @@ void VTapeSettings::SetCSVWithHeader(bool withHeader)
 //---------------------------------------------------------------------------------------------------------------------
 bool VTapeSettings::GetCSVWithHeader() const
 {
-    return value(SettingCSVWithHeader, false).toBool();
+    return value(SettingCSVWithHeader, GetDefCSVWithHeader()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VTapeSettings::GetDefCSVWithHeader() const
+{
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -105,7 +111,13 @@ void VTapeSettings::SetCSVCodec(int mib)
 //---------------------------------------------------------------------------------------------------------------------
 int VTapeSettings::GetCSVCodec() const
 {
-    return value(SettingCSVCodec, QTextCodec::codecForLocale()->mibEnum()).toInt();
+    return value(SettingCSVCodec, GetDefCSVCodec()).toInt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VTapeSettings::GetDefCSVCodec() const
+{
+    return QTextCodec::codecForLocale()->mibEnum();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -149,4 +161,10 @@ QChar VTapeSettings::GetCSVSeparator() const
             return QChar(',');
             break;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QChar VTapeSettings::GetDefCSVSeparator() const
+{
+    return QChar(',');
 }

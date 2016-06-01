@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>298</width>
+    <width>333</width>
     <height>292</height>
    </rect>
   </property>
@@ -17,7 +17,7 @@
    <string>Export options</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../share/resources/tapeicon.qrc">
     <normaloff>:/tapeicon/64x64/logo.png</normaloff>:/tapeicon/64x64/logo.png</iconset>
   </property>
   <property name="modal">
@@ -118,13 +118,15 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../share/resources/tapeicon.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

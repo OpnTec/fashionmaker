@@ -32,6 +32,7 @@
 #include "../vmisc/vtapesettings.h"
 #include "../mapplication.h"
 
+#include <QPushButton>
 #include <QShowEvent>
 #include <QTextCodec>
 
@@ -53,6 +54,10 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
     ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(qApp->TapeSettings()->GetCSVCodec()));
 
     SetSeparator(qApp->TapeSettings()->GetCSVSeparator());
+
+    QPushButton *bDefaults = ui->buttonBox->button(QDialogButtonBox::RestoreDefaults);
+    SCASSERT(bDefaults != nullptr);
+    connect(bDefaults, &QPushButton::clicked, this, &DialogExportToCSV::RestoreDefaults);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -130,6 +135,15 @@ void DialogExportToCSV::showEvent(QShowEvent *event)
     setMinimumSize(size());
 
     isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogExportToCSV::RestoreDefaults()
+{
+    ui->checkBoxWithHeader->setChecked(qApp->TapeSettings()->GetDefCSVWithHeader());
+    ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(qApp->TapeSettings()->GetDefCSVCodec()));
+
+    SetSeparator(qApp->TapeSettings()->GetDefCSVSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -51,6 +51,9 @@ protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 
+private slots:
+    void RestoreDefaults();
+
 private:
     Q_DISABLE_COPY(DialogExportToCSV)
     Ui::DialogExportToCSV *ui;
