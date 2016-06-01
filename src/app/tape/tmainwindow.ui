@@ -1257,6 +1257,9 @@
    <property name="text">
     <string>Export to CSV</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
