@@ -79,6 +79,7 @@ protected:
 private slots:
     void FileSave();
     void FileSaveAs();
+    void ExportToCSV();
     void AboutToShowWindowMenu();
     void ShowWindow();
     void AboutApplication();

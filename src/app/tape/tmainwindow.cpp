@@ -32,6 +32,7 @@
 #include "dialogs/dialognewmeasurements.h"
 #include "dialogs/dialogmdatabase.h"
 #include "dialogs/tapeconfigdialog.h"
+#include "dialogs/dialogexporttocsv.h"
 #include "../vpatterndb/calculator.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vvitconverter.h"
@@ -39,6 +40,7 @@
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vmisc/vlockguard.h"
 #include "../vmisc/vsysexits.h"
+#include "../vmisc/qxtcsvmodel.h"
 #include "vlitepattern.h"
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -51,6 +53,7 @@
 #include <QComboBox>
 #include <QProcess>
 #include <QtNumeric>
+#include <QTextCodec>
 
 #if defined(Q_OS_MAC)
 #include <QMimeData>
@@ -680,6 +683,80 @@ void TMainWindow::FileSaveAs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ExportToCSV()
+{
+    const QString filters = tr("Comma-Separated Values (*.cvs)");
+    const QString suffix("csv");
+    const QString path = QDir::homePath()  + "/" + tr("measurements"); + "." + suffix;
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to CSV"), path, filters);
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QFileInfo f( fileName );
+    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += "." + suffix;
+    }
+
+    DialogExportToCSV dialog(this);
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        QxtCsvModel csv;
+        const int columns = ui->tableWidget->columnCount();
+        {
+            int colCount = 0;
+            for (int column = 0; column < columns; ++column)
+            {
+                if (not ui->tableWidget->isColumnHidden(column))
+                {
+                    csv.insertColumn(colCount++);
+                }
+            }
+        }
+
+        if (dialog.WithHeader())
+        {
+            int colCount = 0;
+            for (int column = 0; column < columns; ++column)
+            {
+                if (not ui->tableWidget->isColumnHidden(column))
+                {
+                    QTableWidgetItem *header = ui->tableWidget->horizontalHeaderItem(colCount);
+                    csv.setHeaderText(colCount, header->text());
+                    ++colCount;
+                }
+            }
+        }
+
+        const int rows = ui->tableWidget->rowCount();
+        for (int row = 0; row < rows; ++row)
+        {
+            csv.insertRow(row);
+            int colCount = 0;
+            for (int column = 0; column < columns; ++column)
+            {
+                if (not ui->tableWidget->isColumnHidden(column))
+                {
+                    QTableWidgetItem *item = ui->tableWidget->item(row, column);
+                    csv.setText(row, colCount, item->text());
+                    ++colCount;
+                }
+            }
+        }
+
+        csv.toCSV(fileName, dialog.WithHeader(), dialog.Separator(), QTextCodec::codecForMib(dialog.SelectedMib()));
+
+        qApp->TapeSettings()->SetCSVSeparator(dialog.Separator());
+        qApp->TapeSettings()->SetCSVCodec(dialog.SelectedMib());
+        qApp->TapeSettings()->SetCSVWithHeader(dialog.WithHeader());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AboutToShowWindowMenu()
 {
     ui->menuWindow->clear();
@@ -862,6 +939,8 @@ void TMainWindow::Remove()
     else
     {
         MFields(false);
+
+        ui->actionExportToCSV->setEnabled(false);
 
         ui->lineEditName->blockSignals(true);
         ui->lineEditName->setText("");
@@ -1060,13 +1139,15 @@ void TMainWindow::AddCustom()
 
     ui->tableWidget->selectRow(currentRow);
 
+    ui->actionExportToCSV->setEnabled(true);
+
     MeasurementsWasSaved(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AddKnown()
 {
-    DialogMDataBase *dialog = new DialogMDataBase(m->ListKnown(), this);
+    QScopedPointer<DialogMDataBase> dialog (new DialogMDataBase(m->ListKnown(), this));
     if (dialog->exec() == QDialog::Accepted)
     {
         qint32 currentRow;
@@ -1114,9 +1195,10 @@ void TMainWindow::AddKnown()
 
         ui->tableWidget->selectRow(currentRow);
 
+        ui->actionExportToCSV->setEnabled(true);
+
         MeasurementsWasSaved(false);
     }
-    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1732,6 +1814,7 @@ void TMainWindow::SetupMenu()
     connect(ui->actionSaveAs, &QAction::triggered, this, &TMainWindow::FileSaveAs);
     ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
 
+    connect(ui->actionExportToCSV, &QAction::triggered, this, &TMainWindow::ExportToCSV);
     connect(ui->actionReadOnly, &QAction::triggered, this, &TMainWindow::ReadOnly);
     connect(ui->actionPreferences, &QAction::triggered, this, &TMainWindow::Preferences);
 
@@ -2302,6 +2385,11 @@ void TMainWindow::RefreshTable()
     ui->tableWidget->resizeRowsToContents();
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->tableWidget->blockSignals(false);
+
+    if (ui->tableWidget->rowCount() > 0)
+    {
+        ui->actionExportToCSV->setEnabled(true);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

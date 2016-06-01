@@ -24,6 +24,7 @@
 - [#472] Add 'Full Name' column to Formula dialog.
 - [#487] True dart point always goes to origin when the label is moved.
 - [#128] New Tool: Slash and Spread.
+- [#409] New feature: Export measurement file to Excel .csv.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.

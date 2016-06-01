@@ -47,12 +47,24 @@ public:
     void SetDefSize(int value);
     int  GetDefSize() const;
 
+    void SetCSVWithHeader(bool withHeader);
+    bool GetCSVWithHeader() const;
+
+    void SetCSVCodec(int mib);
+    int  GetCSVCodec() const;
+
+    void  SetCSVSeparator(const QChar &separator);
+    QChar GetCSVSeparator() const;
+
 private:
     Q_DISABLE_COPY(VTapeSettings)
 
     static const QString SettingDataBaseGeometry;
     static const QString SettingDefHeight;
     static const QString SettingDefSize;
+    static const QString SettingCSVWithHeader;
+    static const QString SettingCSVCodec;
+    static const QString SettingCSVSeparator;
 };
 
 #endif // VTAPESETTINGS_H

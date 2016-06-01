@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   dialogabouttape.h
+ **  @file   dialogexporttocsv.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 7, 2015
+ **  @date   1 6, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,38 +26,37 @@
  **
  *************************************************************************/
 
-#ifndef DIALOGABOUTTAPE_H
-#define DIALOGABOUTTAPE_H
+#ifndef DIALOGEXPORTTOCSV_H
+#define DIALOGEXPORTTOCSV_H
 
 #include <QDialog>
 
 namespace Ui {
-class DialogAboutTape;
+class DialogExportToCSV;
 }
 
-class DialogAboutTape : public QDialog
+class DialogExportToCSV : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit DialogAboutTape(QWidget *parent = 0);
-    virtual ~DialogAboutTape();
+    explicit DialogExportToCSV(QWidget *parent = nullptr);
+    virtual ~DialogExportToCSV();
+
+    bool  WithHeader() const;
+    int   SelectedMib() const;
+    QChar Separator() const;
 
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 
-private slots:
-    void WebButtonClicked();
-
 private:
-    Q_DISABLE_COPY(DialogAboutTape)
-    Ui::DialogAboutTape *ui;
+    Q_DISABLE_COPY(DialogExportToCSV)
+    Ui::DialogExportToCSV *ui;
     bool isInitialized;
 
-    void FontPointSize(QWidget *w, int pointSize);
-
-    void RetranslateUi();
+    void SetSeparator(const QChar &separator);
 };
 
-#endif // DIALOGABOUTTAPE_H
+#endif // DIALOGEXPORTTOCSV_H
