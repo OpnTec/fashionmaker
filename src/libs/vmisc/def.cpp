@@ -1750,7 +1750,7 @@ QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSharedPointer<QPrinter> DefaultPrinter()
+QSharedPointer<QPrinter> DefaultPrinter(QPrinter::PrinterMode mode)
 {
     QPrinterInfo def = QPrinterInfo::defaultPrinter();
 
@@ -1767,7 +1767,7 @@ QSharedPointer<QPrinter> DefaultPrinter()
         }
     }
 
-    QSharedPointer<QPrinter> printer = QSharedPointer<QPrinter>(new QPrinter(def, QPrinter::ScreenResolution));
+    QSharedPointer<QPrinter> printer = QSharedPointer<QPrinter>(new QPrinter(def, mode));
     printer->setResolution(static_cast<int>(PrintDPI));
     return printer;
 }

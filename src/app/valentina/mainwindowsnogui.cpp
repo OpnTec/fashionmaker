@@ -849,15 +849,22 @@ void MainWindowsNoGUI::LayoutPrint()
         }
     }
     // display print dialog and if accepted print
-    QPrinter printer(QPrinter::HighResolution);
-    SetPrinterSettings(&printer);
-    QPrintDialog dialog( &printer, this );
+    QSharedPointer<QPrinter> printer = DefaultPrinter(QPrinter::HighResolution);
+    if (printer.isNull())
+    {
+        qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
+                  qUtf8Printable(tr("Cannot proceed because there are no available printers in your system.")));
+        return;
+    }
+
+    SetPrinterSettings(printer.data());
+    QPrintDialog dialog(printer.data(), this );
     // If only user couldn't change page margins we could use method setMinMax();
     dialog.setOption(QPrintDialog::PrintCurrentPage, false);
     if ( dialog.exec() == QDialog::Accepted )
     {
-        printer.setResolution(static_cast<int>(PrintDPI));
-        PrintPages( &printer );
+        printer->setResolution(static_cast<int>(PrintDPI));
+        PrintPages(printer.data());
     }
 }
 

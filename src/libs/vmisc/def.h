@@ -33,6 +33,7 @@
 #include <QtGlobal>
 #include <QStringList>
 #include <QSharedPointer>
+#include <QPrinter>
 #ifdef Q_OS_WIN
     #include <windows.h>
 #endif /* Q_OS_WIN */
@@ -44,7 +45,6 @@
 #endif /* Q_CC_MSVC */
 
 class QComboBox;
-class QPrinter;
 
 #define SceneSize 50000
 #define DefPointRadius 1.5//mm
@@ -611,7 +611,7 @@ QString StrippedName(const QString &fullFileName) Q_REQUIRED_RESULT;
 QString RelativeMPath(const QString &patternPath, const QString &absoluteMPath) Q_REQUIRED_RESULT;
 QString AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) Q_REQUIRED_RESULT;
 
-QSharedPointer<QPrinter> DefaultPrinter() Q_REQUIRED_RESULT;
+QSharedPointer<QPrinter> DefaultPrinter(QPrinter::PrinterMode mode = QPrinter::ScreenResolution) Q_REQUIRED_RESULT;
 
 QPixmap darkenPixmap(const QPixmap &pixmap) Q_REQUIRED_RESULT;
 
