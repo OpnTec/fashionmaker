@@ -38,11 +38,6 @@ class VToolAlongLine : public VToolLinePoint
 {
     Q_OBJECT
 public:
-
-    VToolAlongLine(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &formula,
-                   const quint32 &firstPointId,
-                   const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
-                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolAlongLine* Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                   VContainer *data);
@@ -69,8 +64,15 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolAlongLine)
+
     /** @brief secondPointId id second point of line. */
     quint32       secondPointId;
+
+    VToolAlongLine(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &formula,
+                   const quint32 &firstPointId,
+                   const quint32 &secondPointId, const QString &typeLine, const QString &lineColor,
+                   const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLALONGLINE_H

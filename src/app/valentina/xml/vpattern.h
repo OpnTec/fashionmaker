@@ -77,6 +77,7 @@ public:
     void SetIncrementDescription(const QString &name, const QString &text);
 
     virtual QString GenerateLabel(const LabelType &type, const QString &reservedName = QString())const Q_DECL_OVERRIDE;
+    virtual QString GenerateSuffix() const Q_DECL_OVERRIDE;
 
     bool IsDefCustom() const;
     void SetDefCustom(bool value);
@@ -125,6 +126,8 @@ private:
                                    const Document &parse, const QString& type);
     void           ParseToolsElement(VMainGraphicsScene *scene, const QDomElement& domElement,
                                      const Document &parse, const QString& type);
+    void           ParseOperationElement(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse,
+                                         const QString& type);
     void           ParseIncrementsElement(const QDomNode& node);
     void           PrepareForParse(const Document &parse);
     void           ToolsCommonAttributes(const QDomElement &domElement, quint32 &id);
@@ -184,6 +187,8 @@ private:
     void ParseToolArc(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseNodeArc(const QDomElement &domElement, const Document &parse);
     void ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
+
+    void ParseToolRotation(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
     qreal EvalFormula(VContainer *data, const QString &formula, bool *ok) const;
 

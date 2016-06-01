@@ -31,7 +31,6 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPen>
 
-const QString VNodeArc::TagName = QStringLiteral("arc");
 const QString VNodeArc::ToolType = QStringLiteral("modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,7 +93,7 @@ void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint
 //---------------------------------------------------------------------------------------------------------------------
 QString VNodeArc::getTagName() const
 {
-    return VNodeArc::TagName;
+    return VAbstractPattern::TagArc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,7 +116,7 @@ void VNodeArc::AllowSelecting(bool enabled)
  */
 void VNodeArc::AddToFile()
 {
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement domElement = doc->createElement(getTagName());
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);

@@ -35,10 +35,6 @@ class VToolLineIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT
 public:
-    VToolLineIntersectAxis(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                           const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
-                           const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
-                           QGraphicsItem * parent = nullptr);
     virtual ~VToolLineIntersectAxis() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
 
@@ -75,9 +71,15 @@ protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolLineIntersectAxis)
+
     QString formulaAngle;
     quint32 firstPointId;
     quint32 secondPointId;
+
+    VToolLineIntersectAxis(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                           const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
+                           const quint32 &firstPointId, const quint32 &secondPointId, const Source &typeCreation,
+                           QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLLINEINTERSECTAXIS_H

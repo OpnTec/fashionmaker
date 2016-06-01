@@ -273,7 +273,7 @@ void DialogSpline::FXAngle1()
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
-        angle1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula());
+        angle1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (angle1F.length() > 80)
         {
@@ -296,7 +296,7 @@ void DialogSpline::FXAngle2()
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
-        angle2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula());
+        angle2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (angle2F.length() > 80)
         {
@@ -319,7 +319,7 @@ void DialogSpline::FXLength1()
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
-        length1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula());
+        length1F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (length1F.length() > 80)
         {
@@ -342,7 +342,7 @@ void DialogSpline::FXLength2()
     dialog->setPostfix(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
-        length2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula());
+        length2F = qApp->TrVars()->FormulaToUser(dialog->GetFormula(), qApp->Settings()->GetOsSeparator());
         // increase height if needed.
         if (length2F.length() > 80)
         {
@@ -505,13 +505,17 @@ void DialogSpline::ShowDialog(bool click)
 
         spl = VSpline(*GetP1(), path->GetP2(), path->GetP3(), *GetP4());
 
-        const QString angle1F = qApp->TrVars()->FormulaToUser(spl.GetStartAngleFormula());
-        const QString angle2F = qApp->TrVars()->FormulaToUser(spl.GetEndAngleFormula());
+        const QString angle1F = qApp->TrVars()->FormulaToUser(spl.GetStartAngleFormula(),
+                                                              qApp->Settings()->GetOsSeparator());
+        const QString angle2F = qApp->TrVars()->FormulaToUser(spl.GetEndAngleFormula(),
+                                                              qApp->Settings()->GetOsSeparator());
 
         ui->plainTextEditAngle1F->setPlainText(angle1F);
         ui->plainTextEditAngle2F->setPlainText(angle2F);
-        ui->plainTextEditLength1F->setPlainText(qApp->TrVars()->FormulaToUser(spl.GetC1LengthFormula()));
-        ui->plainTextEditLength2F->setPlainText(qApp->TrVars()->FormulaToUser(spl.GetC2LengthFormula()));
+        ui->plainTextEditLength1F->setPlainText(qApp->TrVars()->FormulaToUser(spl.GetC1LengthFormula(),
+                                                                              qApp->Settings()->GetOsSeparator()));
+        ui->plainTextEditLength2F->setPlainText(qApp->TrVars()->FormulaToUser(spl.GetC2LengthFormula(),
+                                                                              qApp->Settings()->GetOsSeparator()));
 
         if (not data->IsUnique(spl.name()))
         {
@@ -556,14 +560,18 @@ void DialogSpline::SetSpline(const VSpline &spline)
     setCurrentPointId(ui->comboBoxP1, spl.GetP1().id());
     setCurrentPointId(ui->comboBoxP4, spl.GetP4().id());
 
-    const QString angle1F = qApp->TrVars()->FormulaToUser(spl.GetStartAngleFormula());
-    const QString angle2F = qApp->TrVars()->FormulaToUser(spl.GetEndAngleFormula());
+    const QString angle1F = qApp->TrVars()->FormulaToUser(spl.GetStartAngleFormula(),
+                                                          qApp->Settings()->GetOsSeparator());
+    const QString angle2F = qApp->TrVars()->FormulaToUser(spl.GetEndAngleFormula(),
+                                                          qApp->Settings()->GetOsSeparator());
 
     ui->plainTextEditAngle1F->setPlainText(angle1F);
     ui->plainTextEditAngle2F->setPlainText(angle2F);
 
-    const QString length1F = qApp->TrVars()->FormulaToUser(spl.GetC1LengthFormula());
-    const QString length2F = qApp->TrVars()->FormulaToUser(spl.GetC2LengthFormula());
+    const QString length1F = qApp->TrVars()->FormulaToUser(spl.GetC1LengthFormula(),
+                                                           qApp->Settings()->GetOsSeparator());
+    const QString length2F = qApp->TrVars()->FormulaToUser(spl.GetC2LengthFormula(),
+                                                           qApp->Settings()->GetOsSeparator());
 
     ui->plainTextEditLength1F->setPlainText(length1F);
     ui->plainTextEditLength2F->setPlainText(length2F);

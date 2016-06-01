@@ -29,8 +29,6 @@
 #ifndef VGEOMETRYDEF_H
 #define VGEOMETRYDEF_H
 
-#include <QString>
-
 enum class Draw : char { Calculation, Modeling, Layout };
 enum class GOType : char { Point, Arc, EllipticalArc, Spline, SplinePath, CubicBezier, CubicBezierPath, Unknown };
 enum class SplinePointPosition : char { FirstPoint, LastPoint };

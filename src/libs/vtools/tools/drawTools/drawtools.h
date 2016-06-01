@@ -58,5 +58,6 @@
 #include "toolpoint/toolsinglepoint/vtoolpointfromcircleandtangent.h"
 #include "toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.h"
 #include "toolpoint/tooldoublepoint/vtooltruedarts.h"
+#include "operation/vtoolrotation.h"
 
 #endif // DRAWTOOLS_H

@@ -106,12 +106,12 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const quint32 _id, const 
                                                        const Source &typeCreation)
 {
     const QSharedPointer<VPointF> basePoint = data->GeometricObject<VPointF>(basePointId);
-    QLineF axis = QLineF(basePoint->toQPointF(), QPointF(basePoint->x()+100, basePoint->y()));
+    QLineF axis = QLineF(*basePoint, QPointF(basePoint->x()+100, basePoint->y()));
     axis.setAngle(CheckFormula(_id, formulaAngle, data));
 
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
-    QLineF line(firstPoint->toQPointF(), secondPoint->toQPointF());
+    QLineF line(*firstPoint, *secondPoint);
 
     QPointF fPoint = FindPoint(axis, line);
     quint32 id = _id;
@@ -292,7 +292,7 @@ void VToolLineIntersectAxis::SetVisualization()
         visual->setObject1Id(firstPointId);
         visual->setPoint2Id(secondPointId);
         visual->setAxisPointId(basePointId);
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
+        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

@@ -27,33 +27,22 @@
  *************************************************************************/
 
 #include "movelabel.h"
-#include "../tools/vabstracttool.h"
-#include "../../vwidgets/vmaingraphicsview.h"
-
-#include <QGraphicsScene>
-#include <QDomElement>
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MoveLabel::MoveLabel(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
-                     QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldMx(0.0), oldMy(0.0), newMx(x), newMy(y), isRedo(false), scene(scene)
+MoveLabel::MoveLabel(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QUndoCommand *parent)
+    : MoveAbstractLabel(doc, id, x, y, parent)
 {
     setText(tr("move point label"));
-    nodeId = id;
-    qCDebug(vUndo, "Point id %u", nodeId);
 
-    qCDebug(vUndo, "Label new Mx %f", newMx);
-    qCDebug(vUndo, "Label new My %f", newMy);
-
-    SCASSERT(scene != nullptr);
-    QDomElement domElement = doc->elementById(id);
+    QDomElement domElement = doc->elementById(nodeId);
     if (domElement.isElement())
     {
-        oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
-        oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
+        m_oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
+        m_oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
 
-        qCDebug(vUndo, "Label old Mx %f", oldMx);
-        qCDebug(vUndo, "Label old My %f", oldMy);
+        qCDebug(vUndo, "Label old Mx %f", m_oldMx);
+        qCDebug(vUndo, "Label old My %f", m_oldMy);
     }
     else
     {
@@ -67,44 +56,21 @@ MoveLabel::~MoveLabel()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveLabel::undo()
-{
-    qCDebug(vUndo, "Undo.");
-
-    Do(oldMx, oldMy);
-    isRedo = true;
-    emit ChangePosition(nodeId, oldMx, oldMy);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MoveLabel::redo()
-{
-    qCDebug(vUndo, "Redo.");
-
-    Do(newMx, newMy);
-    if (isRedo)
-    {
-        emit ChangePosition(nodeId, newMx, newMy);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool MoveLabel::mergeWith(const QUndoCommand *command)
 {
     const MoveLabel *moveCommand = static_cast<const MoveLabel *>(command);
     SCASSERT(moveCommand != nullptr);
-    const quint32 id = moveCommand->getPointId();
 
-    if (id != nodeId)
+    if (moveCommand->GetPointId() != nodeId)
     {
         return false;
     }
 
     qCDebug(vUndo, "Mergin undo.");
-    newMx = moveCommand->getNewMx();
-    newMy = moveCommand->getNewMy();
-    qCDebug(vUndo, "Label new Mx %f", newMx);
-    qCDebug(vUndo, "Label new My %f", newMy);
+    m_newMx = moveCommand->GetNewMx();
+    m_newMy = moveCommand->GetNewMy();
+    qCDebug(vUndo, "Label new Mx %f", m_newMx);
+    qCDebug(vUndo, "Label new My %f", m_newMy);
     return true;
 }
 

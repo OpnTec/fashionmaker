@@ -49,6 +49,7 @@
 #include <QSettings>
 #include <QPushButton>
 #include <QDoubleSpinBox>
+#include <QtNumeric>
 
 Q_LOGGING_CATEGORY(vDialog, "v.dialog")
 
@@ -448,25 +449,34 @@ qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QSt
             formula.replace("\n", " ");
             // Translate to internal look.
             formula = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-            Calculator *cal = new Calculator();
+            QScopedPointer<Calculator> cal(new Calculator());
             result = cal->EvalFormula(data->PlainVariables(), formula);
-            delete cal;
 
-            //if result equal 0
-            if (checkZero && qFuzzyIsNull(result))
+            if (qIsInf(result) || qIsNaN(result))
             {
                 flag = false;
                 ChangeColor(labelEditFormula, Qt::red);
                 label->setText(tr("Error") + " (" + postfix + ")");
-                label->setToolTip(tr("Value can't be 0"));
+                label->setToolTip(tr("Invalid value"));
             }
             else
             {
-                label->setText(qApp->LocaleToString(result) + " " +postfix);
-                flag = true;
-                ChangeColor(labelEditFormula, okColor);
-                label->setToolTip(tr("Value"));
-                emit ToolTip("");
+                //if result equal 0
+                if (checkZero && qFuzzyIsNull(result))
+                {
+                    flag = false;
+                    ChangeColor(labelEditFormula, Qt::red);
+                    label->setText(tr("Error") + " (" + postfix + ")");
+                    label->setToolTip(tr("Value can't be 0"));
+                }
+                else
+                {
+                    label->setText(qApp->LocaleToString(result) + " " +postfix);
+                    flag = true;
+                    ChangeColor(labelEditFormula, okColor);
+                    label->setToolTip(tr("Value"));
+                    emit ToolTip("");
+                }
             }
         }
         catch (qmu::QmuParserError &e)

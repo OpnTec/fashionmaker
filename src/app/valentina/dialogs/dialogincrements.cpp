@@ -42,6 +42,7 @@
 #include <QTableWidget>
 #include <QSettings>
 #include <QTableWidgetItem>
+#include <QtNumeric>
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
 
@@ -143,7 +144,7 @@ void DialogIncrements::FillIncrements()
         QString formula;
         try
         {
-            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula());
+            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
         }
         catch (qmu::QmuParserError &e)
         {
@@ -309,9 +310,15 @@ bool DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
                 f = formula;
             }
             f.replace("\n", " ");
-            Calculator *cal = new Calculator();
+            QScopedPointer<Calculator> cal(new Calculator());
             const qreal result = cal->EvalFormula(data->PlainVariables(), f);
-            delete cal;
+
+            if (qIsInf(result) || qIsNaN(result))
+            {
+                label->setText(tr("Error") + " (" + postfix + ").");
+                label->setToolTip(tr("Invalid value"));
+                return false;
+            }
 
             label->setText(qApp->LocaleToString(result) + " " + postfix);
             label->setToolTip(tr("Value"));
@@ -681,6 +688,9 @@ void DialogIncrements::Fx()
 
     if (dialog->exec() == QDialog::Accepted)
     {
+        // Fix the bug #492. https://bitbucket.org/dismine/valentina/issues/492/valentina-crashes-when-add-an-increment
+        // Because of the bug need to take QTableWidgetItem twice time. Previous update "killed" the pointer.
+        const QTableWidgetItem *nameField = ui->tableWidgetIncrement->item(row, 0);
         doc->SetIncrementFormula(nameField->text(), dialog->GetFormula());
         FullUpdateTree(Document::LiteParse);
         ui->tableWidgetIncrement->selectRow(row);
@@ -748,7 +758,7 @@ void DialogIncrements::ShowIncrementDetails()
         QString formula;
         try
         {
-            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula());
+            formula = qApp->TrVars()->FormulaToUser(incr->GetFormula(), qApp->Settings()->GetOsSeparator());
         }
         catch (qmu::QmuParserError &e)
         {

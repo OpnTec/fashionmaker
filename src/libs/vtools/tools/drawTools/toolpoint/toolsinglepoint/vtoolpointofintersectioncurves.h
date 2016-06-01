@@ -35,10 +35,6 @@ class VToolPointOfIntersectionCurves : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    explicit VToolPointOfIntersectionCurves(VAbstractPattern *doc, VContainer *data, const quint32 &id, const
-                                            quint32 firstCurveId, quint32 secondCurveId,
-                                            VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint,
-                                            const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointOfIntersectionCurves *Create(DialogTool *dialog, VMainGraphicsScene  *scene,
                                                   VAbstractPattern *doc, VContainer *data);
@@ -82,6 +78,11 @@ private:
 
     VCrossCurvesPoint vCrossPoint;
     HCrossCurvesPoint hCrossPoint;
+
+    explicit VToolPointOfIntersectionCurves(VAbstractPattern *doc, VContainer *data, const quint32 &id, const
+                                            quint32 firstCurveId, quint32 secondCurveId,
+                                            VCrossCurvesPoint vCrossPoint, HCrossCurvesPoint hCrossPoint,
+                                            const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTIONCURVES_H

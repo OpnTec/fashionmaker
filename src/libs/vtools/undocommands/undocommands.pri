@@ -17,10 +17,12 @@ HEADERS += \
     $$PWD/deletedetail.h \
     $$PWD/vundocommand.h \
     $$PWD/renamepp.h \
-    $$PWD/movelabel.h \
-    $$PWD/movedoublelabel.h \
+    $$PWD/label/movelabel.h \
+    $$PWD/label/movedoublelabel.h \
     $$PWD/addgroup.h \
-    $$PWD/delgroup.h
+    $$PWD/delgroup.h \
+    $$PWD/label/rotationmovelabel.h \
+    undocommands/label/moveabstractlabel.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -38,7 +40,9 @@ SOURCES += \
     $$PWD/deletedetail.cpp \
     $$PWD/vundocommand.cpp \
     $$PWD/renamepp.cpp \
-    $$PWD/movelabel.cpp \
-    $$PWD/movedoublelabel.cpp \
+    $$PWD/label/movelabel.cpp \
+    $$PWD/label/movedoublelabel.cpp \
     $$PWD/addgroup.cpp \
-    $$PWD/delgroup.cpp
+    $$PWD/delgroup.cpp \
+    $$PWD/label/rotationmovelabel.cpp \
+    undocommands/label/moveabstractlabel.cpp

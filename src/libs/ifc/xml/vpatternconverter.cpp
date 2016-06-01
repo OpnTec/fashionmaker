@@ -43,8 +43,8 @@
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.0");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.0.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.1");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.1.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -111,8 +111,10 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000206):
             return QStringLiteral("://schema/pattern/v0.2.6.xsd");
         case (0x000207):
-            return QStringLiteral("://schema/pattern/v0.3.0.xsd");
+            return QStringLiteral("://schema/pattern/v0.2.7.xsd");
         case (0x000300):
+            return QStringLiteral("://schema/pattern/v0.3.0.xsd");
+        case (0x000301):
             return CurrentSchema;
         default:
             InvalidVersion(ver);
@@ -128,97 +130,62 @@ void VPatternConverter::ApplyPatches()
         switch (ver)
         {
             case (0x000100):
-            {
                 ToV0_1_1();
-                const QString schema = XSDSchema(0x000101);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000101), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000101):
-            {
                 ToV0_1_2();
-                const QString schema = XSDSchema(0x000102);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000102), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000102):
-            {
                 ToV0_1_3();
-                const QString schema = XSDSchema(0x000103);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000103), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000103):
-            {
                 ToV0_1_4();
-                const QString schema = XSDSchema(0x000104);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000104), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000104):
-            {
                 ToV0_2_0();
-                const QString schema = XSDSchema(0x000200);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000200), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000200):
-            {
                 ToV0_2_1();
-                const QString schema = XSDSchema(0x000201);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000201), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000201):
-            {
                 ToV0_2_2();
-                const QString schema = XSDSchema(0x000202);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000202), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000202):
-            {
                 ToV0_2_3();
-                const QString schema = XSDSchema(0x000203);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000203), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000203):
-            {
                 ToV0_2_4();
-                const QString schema = XSDSchema(0x000204);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000204), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000204):
-            {
                 ToV0_2_5();
-                const QString schema = XSDSchema(0x000205);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000205), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000205):
-            {
                 ToV0_2_6();
-                const QString schema = XSDSchema(0x000206);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000206), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000206):
-            {
                 ToV0_2_7();
-                const QString schema = XSDSchema(0x000207);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000207), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000207):
-            {
                 ToV0_3_0();
-                const QString schema = XSDSchema(0x000300);
-                ValidateXML(schema, fileName);
+                ValidateXML(XSDSchema(0x000300), fileName);
                 V_FALLTHROUGH
-            }
             case (0x000300):
+                ToV0_3_1();
+                ValidateXML(XSDSchema(0x000301), fileName);
+                V_FALLTHROUGH
+            case (0x000301):
                 break;
             default:
                 break;
@@ -344,6 +311,14 @@ void VPatternConverter::ToV0_2_7()
 void VPatternConverter::ToV0_3_0()
 {
     SetVersion(QStringLiteral("0.3.0"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_3_1()
+{
+    SetVersion(QStringLiteral("0.3.1"));
+    RemoveColorToolCutV0_3_1();
     Save();
 }
 
@@ -806,6 +781,26 @@ void VPatternConverter::ConvertMeasurementsToV0_2_1()
     ConvertPointExpressionsToV0_2_0(names);
     ConvertArcExpressionsToV0_2_0(names);
     ConvertPathPointExpressionsToV0_2_0(names);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::RemoveColorToolCutV0_3_1()
+{
+    const QDomNodeList list = elementsByTagName("point");
+    for (int i=0; i < list.size(); ++i)
+    {
+        QDomElement element = list.at(i).toElement();
+        if (not element.isNull())
+        {
+            const QString type = element.attribute(QStringLiteral("type"));
+            if (type == QStringLiteral("cutArc") ||
+                type == QStringLiteral("cutSpline") ||
+                type == QStringLiteral("cutSplinePath"))
+            {
+                element.removeAttribute(QStringLiteral("color"));
+            }
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

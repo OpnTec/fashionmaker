@@ -137,8 +137,7 @@ VToolNormal* VToolNormal::Create(const quint32 _id, QString &formula, const quin
 
     const qreal result = CheckFormula(_id, formula, data);
 
-    QPointF fPoint = VToolNormal::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                            qApp->toPixel(result), angle);
+    QPointF fPoint = VToolNormal::FindPoint(*firstPoint, *secondPoint, qApp->toPixel(result), angle);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -279,7 +278,7 @@ void VToolNormal::SetVisualization()
 
         visual->setObject1Id(basePointId);
         visual->setObject2Id(secondPointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
         visual->SetAngle(angle);
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();

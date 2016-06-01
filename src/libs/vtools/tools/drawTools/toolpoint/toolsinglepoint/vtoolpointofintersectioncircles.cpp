@@ -107,7 +107,7 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const q
     const VPointF c1Point = *data->GeometricObject<VPointF>(firstCircleCenterId);
     const VPointF c2Point = *data->GeometricObject<VPointF>(secondCircleCenterId);
 
-    const QPointF point = FindPoint(c1Point.toQPointF(), c2Point.toQPointF(), calcC1Radius, calcC2Radius, crossPoint);
+    const QPointF point = FindPoint(c1Point, c2Point, calcC1Radius, calcC2Radius, crossPoint);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {

@@ -135,7 +135,7 @@ void DialogArc::SetCenter(const quint32 &value)
  */
 void DialogArc::SetF2(const QString &value)
 {
-    f2 = qApp->TrVars()->FormulaToUser(value);
+    f2 = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f2.length() > 80)
     {
@@ -169,7 +169,7 @@ void DialogArc::SetColor(const QString &value)
  */
 void DialogArc::SetF1(const QString &value)
 {
-    f1 = qApp->TrVars()->FormulaToUser(value);
+    f1 = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (f1.length() > 80)
     {
@@ -191,7 +191,7 @@ void DialogArc::SetF1(const QString &value)
  */
 void DialogArc::SetRadius(const QString &value)
 {
-    radius = qApp->TrVars()->FormulaToUser(value);
+    radius = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (radius.length() > 80)
     {

@@ -28,15 +28,31 @@
 
 #include "vabstractsimple.h"
 
+#include <QGraphicsItem>
+#include <QGraphicsSceneContextMenuEvent>
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSimple::VAbstractSimple(quint32 id, const QColor &currentColor, Unit patternUnit, qreal *factor,
                                  QObject *parent)
-    :QObject(parent), id (id), factor(factor), currentColor(currentColor), enabled(true), patternUnit(patternUnit)
+    : QObject(parent),
+      id (id),
+      factor(factor),
+      currentColor(currentColor),
+      enabled(true),
+      patternUnit(patternUnit),
+      selectionType(SelectionType::ByMouseRelease),
+      type(GOType::Unknown)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSimple::~VAbstractSimple()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSimple::ToolSelectionType(const SelectionType &type)
+{
+    selectionType = type;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QColor VAbstractSimple::CorrectColor(const QColor &color) const
@@ -49,4 +65,29 @@ QColor VAbstractSimple::CorrectColor(const QColor &color) const
     {
         return Qt::gray;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+QColor VAbstractSimple::GetCurrentColor() const
+{
+    return currentColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSimple::ContextMenu(QGraphicsSceneContextMenuEvent *event)
+{
+    emit ShowContextMenu(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+GOType VAbstractSimple::GetType() const
+{
+    return type;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractSimple::SetType(const GOType &value)
+{
+    type = value;
 }

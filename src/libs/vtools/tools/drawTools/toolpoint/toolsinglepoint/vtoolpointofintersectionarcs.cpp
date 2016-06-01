@@ -122,8 +122,8 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const quint32
 QPointF VToolPointOfIntersectionArcs::FindPoint(const VArc *arc1, const VArc *arc2, const CrossCirclesPoint pType)
 {
     QPointF p1, p2;
-    const QPointF centerArc1 = arc1->GetCenter().toQPointF();
-    const QPointF centerArc2 = arc2->GetCenter().toQPointF();
+    const QPointF centerArc1 = arc1->GetCenter();
+    const QPointF centerArc2 = arc2->GetCenter();
     const int res = VGObject::IntersectionCircles(centerArc1, arc1->GetRadius(), centerArc2, arc2->GetRadius(), p1, p2);
 
     QLineF r1Arc1(centerArc1, p1);

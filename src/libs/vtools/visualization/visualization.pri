@@ -32,7 +32,8 @@ HEADERS += \
     $$PWD/path/vistoolarcwithlength.h \
     $$PWD/path/vistoolpointofintersectioncurves.h \
     $$PWD/path/vistoolcubicbezier.h \
-    $$PWD/path/vistoolcubicbezierpath.h
+    $$PWD/path/vistoolcubicbezierpath.h \
+    visualization/line/vistoolrotation.h
 
 SOURCES += \
     $$PWD/visualization.cpp \
@@ -65,4 +66,5 @@ SOURCES += \
     $$PWD/path/vistoolarcwithlength.cpp \
     $$PWD/path/vistoolpointofintersectioncurves.cpp \
     $$PWD/path/vistoolcubicbezier.cpp \
-    $$PWD/path/vistoolcubicbezierpath.cpp
+    $$PWD/path/vistoolcubicbezierpath.cpp \
+    visualization/line/vistoolrotation.cpp

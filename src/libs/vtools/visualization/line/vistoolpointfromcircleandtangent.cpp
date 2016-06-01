@@ -53,22 +53,21 @@ void VisToolPointFromCircleAndTangent::RefreshGeometry()
     if (object1Id > NULL_ID)// tangent point
     {
         const QSharedPointer<VPointF> tan = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(tangent, tan->toQPointF(), supportColor);
+        DrawPoint(tangent, *tan, supportColor);
 
         if (object2Id > NULL_ID)// circle center
         {
             const QSharedPointer<VPointF> center = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(cCenter, center->toQPointF(), supportColor);
+            DrawPoint(cCenter, *center, supportColor);
 
             if (cRadius > 0)
             {
                 cPath->setRect(PointRect(cRadius));
-                DrawPoint(cPath, center->toQPointF(), Qt::darkGreen, Qt::DashLine);
+                DrawPoint(cPath, *center, Qt::darkGreen, Qt::DashLine);
 
-                FindRays(tan->toQPointF(), center->toQPointF(), cRadius);
+                FindRays(*tan, *center, cRadius);
 
-                const QPointF fPoint = VToolPointFromCircleAndTangent::FindPoint(tan->toQPointF(), center->toQPointF(),
-                                                                                 cRadius, crossPoint);
+                const QPointF fPoint = VToolPointFromCircleAndTangent::FindPoint(*tan, *center, cRadius, crossPoint);
                 DrawPoint(point, fPoint, mainColor);
             }
         }

@@ -62,7 +62,6 @@ DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidge
     CheckState();
 
     FillComboBoxArcs(ui->comboBoxArc);
-    FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutArc::NamePointChanged);
@@ -171,25 +170,13 @@ void DialogCutArc::setArcId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogCutArc::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCutArc::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetFormula set string with formula length
  * @param value string with formula
  */
 void DialogCutArc::SetFormula(const QString &value)
 {
-    formula = qApp->TrVars()->FormulaToUser(value);
+    formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {

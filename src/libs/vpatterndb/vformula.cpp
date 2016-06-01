@@ -32,7 +32,9 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vsettings.h"
 #include "vtranslatevars.h"
+
 #include <QDebug>
+#include <QtNumeric>
 
 //VFormula
 //---------------------------------------------------------------------------------------------------------------------
@@ -43,8 +45,14 @@ VFormula::VFormula()
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
-    :formula(qApp->TrVars()->FormulaToUser(formula)), value(QString(tr("Error"))), checkZero(true), data(container),
-      toolId(NULL_ID), postfix(QString()), _error(true), dValue(0)
+    : formula(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator())),
+      value(QString(tr("Error"))),
+      checkZero(true),
+      data(container),
+      toolId(NULL_ID),
+      postfix(QString()),
+      _error(true),
+      dValue(0)
 {
     this->formula.replace("\n", " ");// Replace line return with spaces for calc if exist
     Eval();
@@ -114,7 +122,7 @@ void VFormula::SetFormula(const QString &value, FormulaType type)
     {
         if (type == FormulaType::ToUser)
         {
-            formula = qApp->TrVars()->FormulaToUser(value);
+            formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
         }
         else
         {
@@ -226,23 +234,31 @@ void VFormula::Eval()
     {
         try
         {
-            Calculator *cal = new Calculator();
+            QScopedPointer<Calculator> cal(new Calculator());
             QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
             const qreal result = cal->EvalFormula(data->PlainVariables(), expression);
-            delete cal;
 
-            //if result equal 0
-            if (checkZero && qFuzzyIsNull(result))
+            if (qIsInf(result) || qIsNaN(result))
             {
-                value = QString("0");
+                value = QString(tr("Error"));
                 _error = true;
                 dValue = 0;
             }
             else
             {
-                dValue = result;
-                value = QString(qApp->LocaleToString(result) + " " + postfix);
-                _error = false;
+                //if result equal 0
+                if (checkZero && qFuzzyIsNull(result))
+                {
+                    value = QString("0");
+                    _error = true;
+                    dValue = 0;
+                }
+                else
+                {
+                    dValue = result;
+                    value = QString(qApp->LocaleToString(result) + " " + postfix);
+                    _error = false;
+                }
             }
         }
         catch (qmu::QmuParserError &e)

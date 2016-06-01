@@ -38,6 +38,7 @@ public:
     explicit TST_VEllipticalArc(QObject *parent = nullptr);
 
 private slots:
+    void CompareTwoWays_data();
     void CompareTwoWays();
     void NegativeArc();
     void TestGetPoints1_data();
@@ -48,6 +49,8 @@ private slots:
     void TestGetPoints2();
     void TestGetPoints3();
     void TestGetPoints4();
+    void TestRotation_data();
+    void TestRotation();
 
 private:
     Q_DISABLE_COPY(TST_VEllipticalArc)

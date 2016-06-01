@@ -208,7 +208,7 @@ void DialogHistory::FillTable()
 QString DialogHistory::Record(const VToolRecord &tool)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was used in history.");
 
     const QDomElement domElem = doc->elementById(tool.getId());
     if (domElem.isElement() == false)
@@ -335,7 +335,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::CutSpline:
             {
                 const quint32 splineId = AttrUInt(domElem, VToolCutSpline::AttrSpline);
-                const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(splineId);
+                const QSharedPointer<VAbstractCubicBezier> spl = data->GeometricObject<VAbstractCubicBezier>(splineId);
                 SCASSERT(spl != nullptr);
                 return QString(tr("%1 - cut %2"))
                         .arg(PointName(tool.getId()))
@@ -344,7 +344,8 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::CutSplinePath:
             {
                 const quint32 splinePathId = AttrUInt(domElem, VToolCutSplinePath::AttrSplinePath);
-                const QSharedPointer<VSplinePath> splPath = data->GeometricObject<VSplinePath>(splinePathId);
+                const QSharedPointer<VAbstractCubicBezierPath> splPath =
+                        data->GeometricObject<VAbstractCubicBezierPath>(splinePathId);
                 SCASSERT(splPath != nullptr);
                 return QString(tr("%1 - cut %2"))
                         .arg(PointName(tool.getId()))
@@ -384,6 +385,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::NodeSpline:
             case Tool::NodeSplinePath:
             case Tool::Group:
+            case Tool::Rotation:
                 return QString();
         }
     }

@@ -29,8 +29,6 @@
 #include "vabstractpoint.h"
 #include "../vgeometry/vpointf.h"
 
-const QString VAbstractPoint::TagName = QStringLiteral("point");
-
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPoint::VAbstractPoint(VAbstractPattern *doc, VContainer *data, quint32 id)
     :VDrawTool(doc, data, id)
@@ -43,7 +41,7 @@ VAbstractPoint::~VAbstractPoint()
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPoint::getTagName() const
 {
-    return VAbstractPoint::TagName;
+    return VAbstractPattern::TagPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

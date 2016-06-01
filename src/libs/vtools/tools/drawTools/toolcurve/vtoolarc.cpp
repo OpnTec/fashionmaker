@@ -36,7 +36,6 @@
 
 #include <QKeyEvent>
 
-const QString VToolArc::TagName = QStringLiteral("arc");
 const QString VToolArc::ToolType = QStringLiteral("simple");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,13 +47,11 @@ const QString VToolArc::ToolType = QStringLiteral("simple");
  * @param typeCreation way we create this tool.
  * @param parent parent object
  */
-VToolArc::VToolArc(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &color,
-                   const Source &typeCreation,
+VToolArc::VToolArc(VAbstractPattern *doc, VContainer *data, quint32 id, const Source &typeCreation,
                    QGraphicsItem *parent)
     :VAbstractSpline(doc, data, id, parent)
 {
     sceneType = SceneObject::Arc;
-    lineColor = color;
 
     this->setPath(ToolPath());
     this->setPen(QPen(Qt::black, qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
@@ -77,7 +74,7 @@ void VToolArc::setDialog()
     dialogTool->SetF1(arc->GetFormulaF1());
     dialogTool->SetF2(arc->GetFormulaF2());
     dialogTool->SetRadius(arc->GetFormulaRadius());
-    dialogTool->SetColor(lineColor);
+    dialogTool->SetColor(arc->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,6 +131,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
 
     const VPointF c = *data->GeometricObject<VPointF>(center);
     VArc *arc = new VArc(c, calcRadius, radius, calcF1, f1, calcF2, f2 );
+    arc->SetColor(color);
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -152,7 +150,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
     VDrawTool::AddRecord(id, Tool::Arc, doc);
     if (parse == Document::FullParse)
     {
-        VToolArc *toolArc = new VToolArc(doc, data, id, color, typeCreation);
+        VToolArc *toolArc = new VToolArc(doc, data, id, typeCreation);
         scene->addItem(toolArc);
         InitArcToolConnections(scene, toolArc);
         doc->AddTool(id, toolArc);
@@ -165,7 +163,7 @@ VToolArc* VToolArc::Create(const quint32 _id, const quint32 &center, QString &ra
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolArc::getTagName() const
 {
-    return VToolArc::TagName;
+    return VAbstractPattern::TagArc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -352,9 +350,9 @@ void VToolArc::SetVisualization()
 
         const VTranslateVars *trVars = qApp->TrVars();
         visual->setObject1Id(arc->GetCenter().id());
-        visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius()));
-        visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1()));
-        visual->setF2(trVars->FormulaToUser(arc->GetFormulaF2()));
+        visual->setRadius(trVars->FormulaToUser(arc->GetFormulaRadius(), qApp->Settings()->GetOsSeparator()));
+        visual->setF1(trVars->FormulaToUser(arc->GetFormulaF1(), qApp->Settings()->GetOsSeparator()));
+        visual->setF2(trVars->FormulaToUser(arc->GetFormulaF2(), qApp->Settings()->GetOsSeparator()));
         visual->RefreshGeometry();
     }
 }
@@ -365,7 +363,8 @@ void VToolArc::SetVisualization()
  */
 void VToolArc::RefreshGeometry()
 {
-    this->setPen(QPen(CorrectColor(lineColor),
+    const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(id);
+    this->setPen(QPen(CorrectColor(arc->GetColor()),
                       qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     this->setPath(ToolPath());
 

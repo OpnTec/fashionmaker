@@ -29,6 +29,8 @@
 #include "vabstractdetail.h"
 #include "vabstractdetail_p.h"
 
+#include "../vgeometry/vgobject.h"
+
 #include <QVector>
 #include <QPointF>
 #include <QLineF>
@@ -327,37 +329,83 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
             continue;
         }
 
+        enum LoopIntersectType { NoIntersection, BoundedIntersection, ParallelIntersection };
+
         QPointF crosPoint;
-        QLineF::IntersectType intersect = QLineF::NoIntersection;
+        LoopIntersectType status = NoIntersection;
         const QLineF line1(points.at(i), points.at(i+1));
         // Because a path can contains several loops we will seek the last and only then remove the loop(s)
         // That's why we parse from the end
         for (j = count-2; j >= i+2; --j)
         {
             const QLineF line2(points.at(j), points.at(j+1));
-            intersect = line1.intersect(line2, &crosPoint);
-            if (intersect == QLineF::BoundedIntersection && not (i == 0 && j+1 == count-1 && closed))
+            const QLineF::IntersectType intersect = line1.intersect(line2, &crosPoint);
+            if (intersect == QLineF::NoIntersection)
+            { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
+              // i.e. they are parallel. But parallel also mean they can be on the same line.
+              // Method IsPointOnLineviaPDP will check it.
+                if (VGObject::IsPointOnLineviaPDP(points.at(j), points.at(i), points.at(i+1))
+                        // Next cases are valid for us.
+                        && line1.p2() != line2.p2()
+                        && line1.p1() != line2.p1()
+                        && line1.p2() != line2.p1()
+                        && line1.p1() != line2.p2())
+                {
+                    // Left to catch case where segments are on the same line, but do not have real intersections.
+                    QLineF tmpLine1 = line1;
+                    QLineF tmpLine2 = line2;
+
+                    tmpLine1.setAngle(tmpLine1.angle()+90);
+
+                    QPointF tmpCrosPoint;
+                    const QLineF::IntersectType tmpIntrs1 = tmpLine1.intersect(tmpLine2, &tmpCrosPoint);
+
+                    tmpLine1 = line1;
+                    tmpLine2.setAngle(tmpLine2.angle()+90);
+
+                    const QLineF::IntersectType tmpIntrs2 = tmpLine1.intersect(tmpLine2, &tmpCrosPoint);
+
+                    if (tmpIntrs1 == QLineF::BoundedIntersection || tmpIntrs2 == QLineF::BoundedIntersection)
+                    { // Now we really sure that lines are on the same lines and have real intersections.
+                        status = ParallelIntersection;
+                        break;
+                    }
+                }
+            }
+            else if (intersect == QLineF::BoundedIntersection && not (i == 0 && j+1 == count-1 && closed))
             { // Break, but not if intersects the first edge and the last edge in closed path
                 if (line1.p1() != crosPoint && line1.p2() != crosPoint &&
                     line2.p1() != crosPoint && line2.p2() != crosPoint)
                 { // Break, but not if loop creates crosPoint when it is first or last point of lines
+                    status = BoundedIntersection;
                     break;
                 }
             }
-            intersect = QLineF::NoIntersection;
+            status = NoIntersection;
         }
 
-        if (intersect == QLineF::BoundedIntersection)
+        switch (status)
         {
-            /*We have found loop.*/
-            ekvPoints.append(points.at(i));
-            ekvPoints.append(crosPoint);
-            i = j;
-        }
-        else
-        {
-            /*We have not found loop.*/
-            ekvPoints.append(points.at(i));
+            case ParallelIntersection:
+                /*We have found a loop.*/
+                // Theoretically there is no big difference which point j or j+1 to select.
+                // In the end we will draw a line in any case.
+                ekvPoints.append(points.at(i));
+                ekvPoints.append(points.at(j+1));
+                i = j;
+                break;
+            case BoundedIntersection:
+                /*We have found a loop.*/
+                ekvPoints.append(points.at(i));
+                ekvPoints.append(crosPoint);
+                i = j;
+                break;
+            case NoIntersection:
+                /*We have not found loop.*/
+                ekvPoints.append(points.at(i));
+                break;
+            default:
+                break;
         }
     }
     return ekvPoints;

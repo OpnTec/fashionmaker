@@ -56,23 +56,22 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
     if (object1Id > NULL_ID)
     {
         const QSharedPointer<VPointF> first = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(c1Center, first->toQPointF(), supportColor);
+        DrawPoint(c1Center, *first, supportColor);
 
         if (object2Id > NULL_ID)
         {
             const QSharedPointer<VPointF> second = Visualization::data->GeometricObject<VPointF>(object2Id);
-            DrawPoint(c2Center, second->toQPointF(), supportColor);
+            DrawPoint(c2Center, *second, supportColor);
 
             if (c1Radius > 0 && c2Radius > 0)
             {
                 c1Path->setRect(PointRect(c1Radius));
-                DrawPoint(c1Path, first->toQPointF(), Qt::darkGreen, Qt::DashLine);
+                DrawPoint(c1Path, *first, Qt::darkGreen, Qt::DashLine);
 
                 c2Path->setRect(PointRect(c2Radius));
-                DrawPoint(c2Path, second->toQPointF(), Qt::darkRed, Qt::DashLine);
+                DrawPoint(c2Path, *second, Qt::darkRed, Qt::DashLine);
 
-                const QPointF fPoint = VToolPointOfIntersectionCircles::FindPoint(first->toQPointF(),
-                                                                                  second->toQPointF(), c1Radius,
+                const QPointF fPoint = VToolPointOfIntersectionCircles::FindPoint(*first, *second, c1Radius,
                                                                                   c2Radius, crossPoint);
                 DrawPoint(point, fPoint, mainColor);
             }

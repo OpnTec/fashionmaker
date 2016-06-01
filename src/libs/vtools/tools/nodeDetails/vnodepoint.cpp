@@ -33,7 +33,6 @@
 #include <QBrush>
 #include <QGraphicsSceneMouseEvent>
 
-const QString VNodePoint::TagName = QStringLiteral("point");
 const QString VNodePoint::ToolType = QStringLiteral("modeling");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -119,58 +118,7 @@ void VNodePoint::Create(VAbstractPattern *doc, VContainer *data, VMainGraphicsSc
 //---------------------------------------------------------------------------------------------------------------------
 QString VNodePoint::getTagName() const
 {
-    return VNodePoint::TagName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodePoint::incrementReferens()
-{
-    ++_referens;
-    if (_referens == 1)
-    {
-        if (idTool != NULL_ID)
-        {
-            doc->IncrementReferens(idTool);
-        }
-        else
-        {
-            const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(idNode);
-            doc->IncrementReferens(point->getIdTool());
-        }
-        ShowNode();
-        QDomElement domElement = doc->elementById(id);
-        if (domElement.isElement())
-        {
-            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodePoint::decrementReferens()
-{
-    if (_referens > 0)
-    {
-        --_referens;
-    }
-    if (_referens == 0)
-    {
-        if (idTool != NULL_ID)
-        {
-            doc->DecrementReferens(idTool);
-        }
-        else
-        {
-            const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(idNode);
-            doc->DecrementReferens(point->getIdTool());
-        }
-        HideNode();
-        QDomElement domElement = doc->elementById(id);
-        if (domElement.isElement())
-        {
-            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
-        }
-    }
+    return VAbstractPattern::TagPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -195,7 +143,7 @@ void VNodePoint::FullUpdateFromFile()
 void VNodePoint::AddToFile()
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement domElement = doc->createElement(getTagName());
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrType, ToolType);
@@ -235,6 +183,13 @@ void VNodePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
     QGraphicsEllipseItem::mousePressEvent(event);
+
+    // Somehow clicking on notselectable object do not clean previous selections.
+    if (not (flags() & ItemIsSelectable) && scene())
+    {
+        scene()->clearSelection();
+    }
+
     event->accept();// Special for not selectable item first need to call standard mousePressEvent then accept event
 }
 
@@ -317,7 +272,7 @@ void VNodePoint::RefreshPointGeometry(const VPointF &point)
     QRectF rec = QRectF(0, 0, radius*2, radius*2);
     rec.translate(-rec.center().x(), -rec.center().y());
     this->setRect(rec);
-    this->setPos(point.toQPointF());
+    this->setPos(point);
 
     namePoint->blockSignals(true);
     namePoint->setText(point.name());

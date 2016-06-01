@@ -181,7 +181,7 @@ void TST_VArc::TestGetPoints()
 
         for (int i=0; i < points.size(); ++i)
         {
-            QLineF rLine(center.toQPointF(), points.at(i));
+            QLineF rLine(center, points.at(i));
             const qreal value = qAbs(rLine.length() - radius);
             const QString errorMsg = QString("Broken the first rule. All points should be on the same distance from "
                                              "the center. Error ='%1'.").arg(value);
@@ -199,7 +199,7 @@ void TST_VArc::TestGetPoints()
         else
         {// sector square
             gSquere = (M_PI * radius * radius) / 360.0 * arc.AngleArc();
-            points.append(center.toQPointF());
+            points.append(center);
         }
 
         // calculated square
@@ -210,4 +210,39 @@ void TST_VArc::TestGetPoints()
         const qreal epsSquere = gSquere * 0.24 / 100; // computing error 0.24 % from origin squere
         QVERIFY2(value <= epsSquere, qUtf8Printable(errorMsg));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestRotation_data()
+{
+    QTest::addColumn<QPointF>("center");
+    QTest::addColumn<qreal>("radius");
+    QTest::addColumn<qreal>("startAngle");
+    QTest::addColumn<qreal>("endAngle");
+    QTest::addColumn<QPointF>("rotatePoint");
+    QTest::addColumn<qreal>("degrees");
+    QTest::addColumn<QString>("prefix");
+
+    QTest::newRow("Test arc 1") << QPointF(10, 10) << 10. << 0. << 90. << QPointF() << 90. << "_r";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestRotation()
+{
+    QFETCH(QPointF, center);
+    QFETCH(qreal, radius);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, endAngle);
+    QFETCH(QPointF, rotatePoint);
+    QFETCH(qreal, degrees);
+    QFETCH(QString, prefix);
+
+    const VArc arcOrigin(VPointF(center), radius, startAngle, endAngle);
+    const VArc rotatedArc = arcOrigin.Rotate(rotatePoint, degrees, prefix);
+
+    QCOMPARE(arcOrigin.GetLength(), rotatedArc.GetLength());
+    QCOMPARE(arcOrigin.AngleArc(), rotatedArc.AngleArc());
+    QCOMPARE(arcOrigin.GetRadius(), rotatedArc.GetRadius());
+    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
 }

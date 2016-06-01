@@ -32,7 +32,6 @@
 #include <QSharedData>
 #include "vgeometrydef.h"
 #include "../vmisc/vabstractapplication.h"
-#include "vpointf.h"
 
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
@@ -42,54 +41,11 @@
 class VArcData : public QSharedData
 {
 public:
-
-    VArcData ()
-        : f1(0), formulaF1(QString()), f2(0), formulaF2(QString()), radius(0), formulaRadius(QString()),
-          center(VPointF()), isFlipped(false), formulaLength()
-    {}
-
-    VArcData (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
-                QString formulaF2)
-        : f1(f1), formulaF1(formulaF1), f2(f2), formulaF2(formulaF2), radius(radius), formulaRadius(formulaRadius),
-          center(center), isFlipped(false), formulaLength()
-    {}
-
-    VArcData(VPointF center, qreal radius, qreal f1, qreal f2)
-        : f1(f1), formulaF1(QString().number(f1)),
-          f2(f2), formulaF2(QString().number(f2)),
-          radius(radius), formulaRadius(QString().number(qApp->fromPixel(radius))),
-          center(center), isFlipped(false), formulaLength()
-    {}
-
-    VArcData (QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1)
-        : f1(f1), formulaF1(formulaF1), f2(0), formulaF2("0"), radius(radius), formulaRadius(formulaRadius),
-          center(center), isFlipped(false), formulaLength(formulaLength)
-    {}
-
-    VArcData(VPointF center, qreal radius, qreal f1)
-        : f1(f1), formulaF1(QString().number(f1)), f2(0), formulaF2("0"), radius(radius),
-          formulaRadius(QString().number(qApp->fromPixel(radius))), center(center), isFlipped(false), formulaLength()
-    {}
-
-    VArcData(const VArcData &arc)
-        : QSharedData(arc), f1(arc.f1), formulaF1(arc.formulaF1), f2(arc.f2), formulaF2(arc.formulaF2),
-          radius(arc.radius), formulaRadius(arc.formulaRadius), center(arc.center), isFlipped(arc.isFlipped),
-          formulaLength(arc.formulaLength)
-    {}
-
+    VArcData();
+    VArcData(qreal radius, QString formulaRadius);
+    VArcData(qreal radius);
+    VArcData(const VArcData &arc);
     virtual ~VArcData();
-
-    /** @brief f1 start angle in degree. */
-    qreal              f1;
-
-    /** @brief formulaF1 formula for start angle. */
-    QString            formulaF1;
-
-    /** @brief f2 end angle in degree. */
-    qreal              f2;
-
-    /** @brief formulaF2 formula for end angle. */
-    QString            formulaF2;
 
     /** @brief radius arc radius. */
     qreal              radius;
@@ -97,17 +53,36 @@ public:
     /** @brief formulaRadius formula for arc radius. */
     QString            formulaRadius;
 
-    /** @brief center center point of arc. */
-    VPointF            center;
-
-    bool               isFlipped;
-
-    QString            formulaLength;
-
 private:
     VArcData &operator=(const VArcData &) Q_DECL_EQ_DELETE;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+VArcData::VArcData()
+    : radius(0),
+      formulaRadius(QString())
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VArcData::VArcData(qreal radius, QString formulaRadius)
+    : radius(radius),
+      formulaRadius(formulaRadius)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VArcData::VArcData(qreal radius)
+    : radius(radius),
+      formulaRadius(QString().number(qApp->fromPixel(radius)))
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VArcData::VArcData(const VArcData &arc)
+    : QSharedData(arc),
+      radius(arc.radius),
+      formulaRadius(arc.formulaRadius)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VArcData::~VArcData()
 {}
 

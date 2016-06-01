@@ -167,6 +167,7 @@ public:
     const QHash<QString, qreal *> PlainVariables() const;
 
     static bool        IsUnique(const QString &name);
+    static QStringList AllUniqueNames();
 
     const Unit *GetPatternUnit() const;
     const VTranslateVars *GetTrVars() const;
@@ -178,7 +179,7 @@ private:
     static quint32 _id;
     static qreal   _size;
     static qreal   _height;
-    static QSet<const QString> uniqueNames;
+    static QSet<QString> uniqueNames;
 
     QSharedDataPointer<VContainerData> d;
 

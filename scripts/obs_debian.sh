@@ -4,7 +4,7 @@
 # Please, run this script from folder <root_folder>/scripts.
 
 # usage:
-# $ ./generate_tool_cursor.sh
+# $ ./obs_debian.sh
 
 # Note. For stable version enough create an archive debian.tar.gz with folder debian inside and download it.
 

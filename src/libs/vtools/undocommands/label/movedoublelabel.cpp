@@ -27,21 +27,14 @@
  *************************************************************************/
 
 #include "movedoublelabel.h"
-#include "../tools/vabstracttool.h"
-#include "../../vwidgets/vmaingraphicsview.h"
-
-#include <QGraphicsScene>
-#include <QDomElement>
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
-                                 quint32 tooId, quint32 pointId, QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      oldMx(0.0), oldMy(0.0),
-      newMx(x), newMy(y),
-      scene(scene), type(type),
-      pointId(pointId),
-      isRedo(false)
+                                 quint32 toolId, quint32 pointId, QUndoCommand *parent)
+    : MoveAbstractLabel(doc, pointId, x, y, parent),
+      m_type(type),
+      m_idTool(toolId)
 {
     if (type == DoublePoint::FirstPoint)
     {
@@ -51,44 +44,25 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const double &x, const d
     {
         setText(tr("move the second dart label"));
     }
-    nodeId = tooId;
-    qCDebug(vUndo, "Point id %u", nodeId);
 
-    if (type == DoublePoint::FirstPoint)
-    {
-        qCDebug(vUndo, "Label new Mx1 %f", newMx);
-        qCDebug(vUndo, "Label new My1 %f", newMy);
-    }
-    else
-    {
-        qCDebug(vUndo, "Label new Mx2 %f", newMx);
-        qCDebug(vUndo, "Label new My2 %f", newMy);
-    }
-
-    SCASSERT(scene != nullptr);
-    QDomElement domElement = doc->elementById(tooId);
+    const QDomElement domElement = doc->elementById(m_idTool);
     if (domElement.isElement())
     {
         if (type == DoublePoint::FirstPoint)
         {
-            oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx1, "0.0"));
-            oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy1, "0.0"));
-        }
-        else
-        {
-            oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx2, "0.0"));
-            oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy2, "0.0"));
-        }
+            m_oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx1, "0.0"));
+            m_oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy1, "0.0"));
 
-        if (type == DoublePoint::FirstPoint)
-        {
-            qCDebug(vUndo, "Label old Mx1 %f", oldMx);
-            qCDebug(vUndo, "Label old My1 %f", oldMy);
+            qCDebug(vUndo, "Label old Mx1 %f", m_oldMx);
+            qCDebug(vUndo, "Label old My1 %f", m_oldMy);
         }
         else
         {
-            qCDebug(vUndo, "Label old Mx2 %f", oldMx);
-            qCDebug(vUndo, "Label old My2 %f", oldMy);
+            m_oldMx = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMx2, "0.0"));
+            m_oldMy = qApp->toPixel(doc->GetParametrDouble(domElement, AttrMy2, "0.0"));
+
+            qCDebug(vUndo, "Label old Mx2 %f", m_oldMx);
+            qCDebug(vUndo, "Label old My2 %f", m_oldMy);
         }
     }
     else
@@ -103,51 +77,30 @@ MoveDoubleLabel::~MoveDoubleLabel()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void MoveDoubleLabel::undo()
-{
-    qCDebug(vUndo, "Undo.");
-
-    Do(oldMx, oldMy);
-    isRedo = true;
-    emit ChangePosition(pointId, oldMx, oldMy);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MoveDoubleLabel::redo()
-{
-    qCDebug(vUndo, "Redo.");
-
-    Do(newMx, newMy);
-    if (isRedo)
-    {
-        emit ChangePosition(pointId, newMx, newMy);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool MoveDoubleLabel::mergeWith(const QUndoCommand *command)
 {
     const MoveDoubleLabel *moveCommand = static_cast<const MoveDoubleLabel *>(command);
     SCASSERT(moveCommand != nullptr);
 
-    if (moveCommand->getPointId() != nodeId || moveCommand->getPointType() != type ||
-        moveCommand->getLabelId() != pointId)
+    if (moveCommand->GetPointId() != nodeId ||
+        moveCommand->GetPointType() != m_type ||
+        moveCommand->GetToolId() != m_idTool)
     {
         return false;
     }
 
-    newMx = moveCommand->getNewMx();
-    newMy = moveCommand->getNewMy();
+    m_newMx = moveCommand->GetNewMx();
+    m_newMy = moveCommand->GetNewMy();
 
-    if (type == DoublePoint::FirstPoint)
+    if (m_type == DoublePoint::FirstPoint)
     {
-        qCDebug(vUndo, "Label new Mx1 %f", newMx);
-        qCDebug(vUndo, "Label new My1 %f", newMy);
+        qCDebug(vUndo, "Label new Mx1 %f", m_newMx);
+        qCDebug(vUndo, "Label new My1 %f", m_newMy);
     }
     else
     {
-        qCDebug(vUndo, "Label new Mx2 %f", newMx);
-        qCDebug(vUndo, "Label new My2 %f", newMy);
+        qCDebug(vUndo, "Label new Mx2 %f", m_newMx);
+        qCDebug(vUndo, "Label new My2 %f", m_newMy);
     }
     return true;
 }
@@ -159,15 +112,9 @@ int MoveDoubleLabel::id() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 MoveDoubleLabel::getLabelId() const
-{
-    return pointId;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MoveDoubleLabel::Do(double mx, double my)
 {
-    if (type == DoublePoint::FirstPoint)
+    if (m_type == DoublePoint::FirstPoint)
     {
         qCDebug(vUndo, "New mx1 %f", mx);
         qCDebug(vUndo, "New my1 %f", my);
@@ -178,10 +125,10 @@ void MoveDoubleLabel::Do(double mx, double my)
         qCDebug(vUndo, "New my2 %f", my);
     }
 
-    QDomElement domElement = doc->elementById(nodeId);
+    QDomElement domElement = doc->elementById(m_idTool);
     if (domElement.isElement())
     {
-        if (type == DoublePoint::FirstPoint)
+        if (m_type == DoublePoint::FirstPoint)
         {
             doc->SetAttribute(domElement, AttrMx1, QString().setNum(qApp->fromPixel(mx)));
             doc->SetAttribute(domElement, AttrMy1, QString().setNum(qApp->fromPixel(my)));

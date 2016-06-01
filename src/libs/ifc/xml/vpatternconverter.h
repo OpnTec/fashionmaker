@@ -69,6 +69,7 @@ private:
     void ToV0_2_6();
     void ToV0_2_7();
     void ToV0_3_0();
+    void ToV0_3_1();
 
     void          TagUnitToV0_2_0();
     void          TagIncrementToV0_2_0();
@@ -76,6 +77,8 @@ private:
     void          TagMeasurementsToV0_2_0();
 
     void          ConvertMeasurementsToV0_2_1();
+
+    void          RemoveColorToolCutV0_3_1();
 
     QSet<QString> FixIncrementsToV0_2_0();
     QString       FixIncrementInFormulaToV0_2_0(const QString &formula, const QSet<QString> &names);

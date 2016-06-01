@@ -34,7 +34,7 @@
 class VTranslateVars : public VTranslateMeasurements
 {
 public:
-    explicit VTranslateVars(bool osSeparator);
+    explicit VTranslateVars();
     virtual ~VTranslateVars() Q_DECL_OVERRIDE;
 
     bool VariablesFromUser(QString &newFormula, int position, const QString &token, int &bias) const;
@@ -55,7 +55,7 @@ public:
 
     QString FormulaFromUser(const QString &formula, bool osSeparator) const;
     QString TryFormulaFromUser(const QString &formula, bool osSeparator) const;
-    QString FormulaToUser(const QString &formula) const;
+    QString FormulaToUser(const QString &formula, bool osSeparator) const;
 
     virtual void Retranslate() Q_DECL_OVERRIDE;
 
@@ -68,7 +68,6 @@ private:
     QMap<QString, qmu::QmuTranslation> functions;
     QMap<QString, qmu::QmuTranslation> postfixOperators;
     QMap<QString, qmu::QmuTranslation> stDescriptions;
-    bool osSeparator;
 
     void InitPatternMakingSystems();
     void InitVariables();

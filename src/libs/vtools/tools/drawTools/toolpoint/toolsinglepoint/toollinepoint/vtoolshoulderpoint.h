@@ -39,9 +39,6 @@ class VToolShoulderPoint : public VToolLinePoint
 {
     Q_OBJECT
 public:
-    VToolShoulderPoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                       const QString &lineColor, const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
-                       const quint32 &pShoulder, const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual void   setDialog() Q_DECL_OVERRIDE;
     static QPointF FindPoint(const QPointF &p1Line, const QPointF &p2Line, const QPointF &pShoulder,
                              const qreal &length);
@@ -74,11 +71,17 @@ protected:
     virtual void   ReadToolAttributes(const QDomElement &domElement) Q_DECL_OVERRIDE;
     virtual void   SetVisualization() Q_DECL_OVERRIDE;
 private:
+    Q_DISABLE_COPY(VToolShoulderPoint)
+
     /** @brief p2Line id second line point. */
     quint32         p2Line;
 
     /** @brief pShoulder id shoulder line point. */
     quint32         pShoulder;
+
+    VToolShoulderPoint(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                       const QString &lineColor, const QString &formula, const quint32 &p1Line, const quint32 &p2Line,
+                       const quint32 &pShoulder, const Source &typeCreation, QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLSHOULDERPOINT_H

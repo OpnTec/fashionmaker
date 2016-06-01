@@ -80,6 +80,14 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         type = QtWarningMsg;
     }
 
+#if !defined(V_NO_DEBUG)
+    // I have decided to hide this annoing message for release builds.
+    if ((type == QtWarningMsg) && msg.contains("setGeometryDp: Unable to set geometry"))
+    {
+        type = QtDebugMsg;
+    }
+#endif //!defined(V_NO_DEBUG)
+
 #if defined(Q_OS_MAC)
 #   if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0) && QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
         // Try hide very annoying, Qt related, warnings in Mac OS X
@@ -613,7 +621,7 @@ void VApplication::InitTrVars()
 {
     if (trVars == nullptr)
     {
-        trVars = new VTranslateVars(ValentinaSettings()->GetOsSeparator());
+        trVars = new VTranslateVars();
     }
 }
 

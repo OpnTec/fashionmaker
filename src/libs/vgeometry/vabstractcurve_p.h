@@ -31,6 +31,8 @@
 
 #include <QSharedData>
 
+#include "../ifc/ifcdef.h"
+
 #ifdef Q_CC_GNU
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Weffc++"
@@ -41,17 +43,19 @@ class VAbstractCurveData : public QSharedData
 public:
 
     VAbstractCurveData ()
-        : duplicate(0)
+        : duplicate(0), color(ColorBlack)
     {}
 
     VAbstractCurveData(const VAbstractCurveData &curve)
-        : QSharedData(curve), duplicate(curve.duplicate)
+        : QSharedData(curve), duplicate(curve.duplicate), color(curve.color)
     {}
 
     virtual ~VAbstractCurveData();
 
     /** @brief duplicate helps create unique name for curves that connects the same start and finish points. */
     quint32 duplicate;
+
+    QString color;
 
 private:
     VAbstractCurveData &operator=(const VAbstractCurveData &) Q_DECL_EQ_DELETE;

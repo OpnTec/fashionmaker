@@ -271,6 +271,52 @@ void TST_VSpline::GetSegmentPoints_NullSegment()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VSpline::GetSegmentPoints_RotateTool()
+{
+    // Input data taken from real case
+    // See the file <root>/src/app/share/collection/bugs/IsPointOnLineSegment_RotateTool_issue.val
+    // Test issue with method IsPointOnLineSegment.
+
+    const VPointF p1(155.93961723681397, -42.472964170961042, "A", 5.0000125984251973, 9.9999874015748045);
+    const VPointF p4(237.32422843061005, 485.80074940371367, "A2", 5.0000125984251973, 9.9999874015748045);
+
+    VSpline spl(p1, p4, 231.11199999999994, "231.112", 145.33899999999997, "145.339", 207.44768503937021, "5.48872",
+                337.50916535433066, "8.92993");
+
+    const QPointF begin(237.32422843061005, 485.80074940371367);
+    const QPointF end  (46.623829088412336, 167.78988631718659);
+
+    QVector<QPointF> points;
+    points << spl.GetSegmentPoints(begin, end, true);
+
+    QVector<QPointF> origPoints;
+    origPoints.append(QPointF(237.32422843061005, 485.80074940371367));
+    origPoints.append(QPointF(224.47894722830574, 476.8115274500917));
+    origPoints.append(QPointF(200.4405599713662, 458.9162132315404));
+    origPoints.append(QPointF(178.3387458840754, 441.12004274890694));
+    origPoints.append(QPointF(158.12235273581754, 423.422336123843));
+    origPoints.append(QPointF(139.74022829597683, 405.8224134780004));
+    origPoints.append(QPointF(123.1412203339375, 388.3195949330309));
+    origPoints.append(QPointF(108.27417661908376, 370.91320061058616));
+    origPoints.append(QPointF(95.08794492079983, 353.60255063231807));
+    origPoints.append(QPointF(83.5313730084699, 336.38696511987837));
+    origPoints.append(QPointF(73.55330865147822, 319.2657641949186));
+    origPoints.append(QPointF(65.10259961920897, 302.2382679790908));
+    origPoints.append(QPointF(58.12809368104641, 285.3037965940465));
+    origPoints.append(QPointF(52.57863860637471, 268.4616701614375));
+    origPoints.append(QPointF(48.40308216457812, 251.71120880291573));
+    origPoints.append(QPointF(45.55027212504085, 235.05173264013274));
+    origPoints.append(QPointF(43.9690562571471, 218.48256179474038));
+    origPoints.append(QPointF(43.6082823302811, 202.00301638839034));
+    origPoints.append(QPointF(44.416798113827056, 185.61241654273442));
+    origPoints.append(QPointF(46.34345137716919, 169.31008237942433));
+    origPoints.append(QPointF(46.623829088412336, 167.78988631718659));
+
+    // Begin comparison
+    Comparison(points, origPoints);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VSpline::CompareThreeWays()
 {
     // Input data taken from real case

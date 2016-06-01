@@ -113,7 +113,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const quint32 _id, cons
     const qreal angle = CheckFormula(_id, formulaAngle, data);
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(curveId);
 
-    const QPointF fPoint = FindPoint(basePoint->toQPointF(), angle, curve);
+    const QPointF fPoint = FindPoint(*basePoint, angle, curve);
     const qreal segLength = curve->GetLengthByPoint(fPoint);
     quint32 id = _id;
     VPointF *p = new VPointF(fPoint, pointName, mx, my);
@@ -292,7 +292,7 @@ void VToolCurveIntersectAxis::SetVisualization()
 
         visual->setObject1Id(curveId);
         visual->setAxisPointId(basePointId);
-        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle));
+        visual->SetAngle(qApp->TrVars()->FormulaToUser(formulaAngle, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

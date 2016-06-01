@@ -65,7 +65,7 @@ void VisToolCubicBezierPath::RefreshGeometry()
         for (int i = 0; i < size; ++i)
         {
             QGraphicsEllipseItem *point = this->getPoint(mainPoints, static_cast<unsigned>(i), 1/*zValue*/);
-            DrawPoint(point, pathPoints.at(i).toQPointF(), supportColor);
+            DrawPoint(point, pathPoints.at(i), supportColor);
         }
 
         if (mode == Mode::Creation)
@@ -93,13 +93,13 @@ void VisToolCubicBezierPath::RefreshGeometry()
                 const VSpline spl = path.GetSpline(i);
 
                 QGraphicsLineItem *ctrlLine1 = this->getLine(static_cast<unsigned>(preLastPoint));
-                DrawLine(ctrlLine1, QLineF(spl.GetP1().toQPointF(), spl.GetP2()), mainColor, Qt::DashLine);
+                DrawLine(ctrlLine1, QLineF(spl.GetP1(), spl.GetP2()), mainColor, Qt::DashLine);
 
                 QGraphicsEllipseItem *p2 = this->getPoint(ctrlPoints, static_cast<unsigned>(preLastPoint));
                 DrawPoint(p2, spl.GetP2(), Qt::green);
 
                 QGraphicsLineItem *ctrlLine2 = this->getLine(static_cast<unsigned>(lastPoint));
-                DrawLine(ctrlLine2, QLineF(spl.GetP4().toQPointF(), spl.GetP3()), mainColor, Qt::DashLine);
+                DrawLine(ctrlLine2, QLineF(spl.GetP4(), spl.GetP3()), mainColor, Qt::DashLine);
 
                 QGraphicsEllipseItem *p3 = this->getPoint(ctrlPoints, static_cast<unsigned>(lastPoint));
                 DrawPoint(p3, spl.GetP3(), Qt::green);
@@ -180,8 +180,8 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
             const VPointF p1 = pathPoints.last();
             if (pathPoints.size() >= 4)
             {
-                QLineF p1p2(p1.toQPointF(), Visualization::scenePos);
-                QLineF prP3p1(pathPoints.at(size-2).toQPointF(), p1.toQPointF());
+                QLineF p1p2(p1, Visualization::scenePos);
+                QLineF prP3p1(pathPoints.at(size-2), p1);
                 p1p2.setAngle(prP3p1.angle());
 
                 const QPointF p2 = p1p2.p2();
@@ -197,24 +197,24 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
             }
             else
             {
-                DrawLine(helpLine1, QLineF(p1.toQPointF(), Visualization::scenePos), mainColor, Qt::DashLine);
+                DrawLine(helpLine1, QLineF(p1, Visualization::scenePos), mainColor, Qt::DashLine);
             }
             break;
         }
         case 1:
         {
             const VPointF p1 = pathPoints.at(subSplPoints + pointsLeft-1);
-            QPointF p2 = pathPoints.at(subSplPoints + pointsLeft).toQPointF();
+            QPointF p2 = pathPoints.at(subSplPoints + pointsLeft);
 
             if (subSplCount >= 1)
             {
-                QLineF p1p2(p1.toQPointF(), p2);
-                QLineF prP3p1(pathPoints.at(subSplPoints + pointsLeft-2).toQPointF(), p1.toQPointF());
+                QLineF p1p2(p1, p2);
+                QLineF prP3p1(pathPoints.at(subSplPoints + pointsLeft-2), p1);
                 p1p2.setAngle(prP3p1.angle());
                 p2 = p1p2.p2();
             }
 
-            DrawLine(helpLine1, QLineF(p1.toQPointF(), p2), mainColor, Qt::DashLine);
+            DrawLine(helpLine1, QLineF(p1, p2), mainColor, Qt::DashLine);
 
             VSpline spline(p1, p2, Visualization::scenePos, VPointF(Visualization::scenePos));
             DrawPath(newCurveSegment, spline.GetPath(PathDirection::Hide), mainColor, Qt::SolidLine, Qt::RoundCap);
@@ -227,18 +227,18 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, int po
         case 2:
         {
             const VPointF p1 = pathPoints.at(subSplPoints + pointsLeft-2);
-            QPointF p2 = pathPoints.at(subSplPoints + pointsLeft-1).toQPointF();
-            const QPointF p3 = pathPoints.at(subSplPoints + pointsLeft).toQPointF();
+            QPointF p2 = pathPoints.at(subSplPoints + pointsLeft-1);
+            const QPointF p3 = pathPoints.at(subSplPoints + pointsLeft);
 
             if (subSplCount >= 1)
             {
-                QLineF p1p2(p1.toQPointF(), p2);
-                QLineF prP3p1(pathPoints.at(subSplPoints + pointsLeft-3).toQPointF(), p1.toQPointF());
+                QLineF p1p2(p1, p2);
+                QLineF prP3p1(pathPoints.at(subSplPoints + pointsLeft-3), p1);
                 p1p2.setAngle(prP3p1.angle());
                 p2 = p1p2.p2();
             }
 
-            DrawLine(helpLine1, QLineF(p1.toQPointF(), p2), mainColor, Qt::DashLine);
+            DrawLine(helpLine1, QLineF(p1, p2), mainColor, Qt::DashLine);
             DrawLine(helpLine2, QLineF(p3, Visualization::scenePos), mainColor, Qt::DashLine);
 
             VSpline spline(p1, p2, p3, VPointF(Visualization::scenePos));

@@ -146,7 +146,7 @@ void VToolAlongLine::SetVisualization()
         SCASSERT(visual != nullptr)
         visual->setObject1Id(basePointId);
         visual->setObject2Id(secondPointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
@@ -248,7 +248,7 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
 {
     const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstPointId);
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
-    QLineF line = QLineF(firstPoint->toQPointF(), secondPoint->toQPointF());
+    QLineF line = QLineF(*firstPoint, *secondPoint);
 
     line.setLength(qApp->toPixel(CheckFormula(_id, formula, data)));
 

@@ -53,16 +53,16 @@ void VisToolPointFromArcAndTangent::RefreshGeometry()
     if (object1Id > NULL_ID)// tangent point
     {
         const QSharedPointer<VPointF> tan = Visualization::data->GeometricObject<VPointF>(object1Id);
-        DrawPoint(tangent, tan->toQPointF(), supportColor);
+        DrawPoint(tangent, *tan, supportColor);
 
         if (arcId > NULL_ID)// circle center
         {
             const QSharedPointer<VArc> arc = Visualization::data->GeometricObject<VArc>(arcId);
             DrawPath(arcPath, arc->GetPath(PathDirection::Show), Qt::darkGreen, Qt::SolidLine, Qt::RoundCap);
 
-            FindRays(tan->toQPointF(), arc.data());
+            FindRays(*tan, arc.data());
 
-            const QPointF fPoint = VToolPointFromArcAndTangent::FindPoint(tan->toQPointF(), arc.data(), crossPoint);
+            const QPointF fPoint = VToolPointFromArcAndTangent::FindPoint(*tan, arc.data(), crossPoint);
             DrawPoint(point, fPoint, mainColor);
         }
     }
@@ -84,7 +84,7 @@ void VisToolPointFromArcAndTangent::setCrossPoint(const CrossCirclesPoint &value
 void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
 {
     QPointF p1, p2;
-    const QPointF center = arc->GetCenter().toQPointF();
+    const QPointF center = arc->GetCenter();
     const qreal radius = arc->GetRadius();
     const int res = VGObject::ContactPoints (p, center, radius, p1, p2);
 

@@ -42,7 +42,8 @@
  * @brief VArc default constructor.
  */
 VArc::VArc ()
-    :VAbstractCurve(GOType::Arc), d (new VArcData)
+    : VAbstractArc(GOType::Arc),
+      d (new VArcData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -53,34 +54,36 @@ VArc::VArc ()
  * @param f1 start angle (degree).
  * @param f2 end angle (degree).
  */
-VArc::VArc (VPointF center, qreal radius, QString formulaRadius, qreal f1, QString formulaF1, qreal f2,
-            QString formulaF2, quint32 idObject, Draw mode)
-    : VAbstractCurve(GOType::Arc, idObject, mode),
-      d (new VArcData(center, radius, formulaRadius, f1, formulaF1, f2, formulaF2))
+VArc::VArc (const VPointF &center, qreal radius, const QString &formulaRadius, qreal f1, const QString &formulaF1,
+            qreal f2, const QString &formulaF2, quint32 idObject, Draw mode)
+    : VAbstractArc(GOType::Arc, center, f1, formulaF1, f2, formulaF2, idObject, mode),
+      d (new VArcData(radius, formulaRadius))
 {
     CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArc::VArc(VPointF center, qreal radius, qreal f1, qreal f2)
-    : VAbstractCurve(GOType::Arc, NULL_ID, Draw::Calculation), d (new VArcData(center, radius, f1, f2))
+VArc::VArc(const VPointF &center, qreal radius, qreal f1, qreal f2)
+    : VAbstractArc(GOType::Arc, center, f1, f2, NULL_ID, Draw::Calculation),
+      d (new VArcData(radius))
 {
     CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArc::VArc(qreal length, QString formulaLength, VPointF center, qreal radius, QString formulaRadius, qreal f1,
-           QString formulaF1, quint32 idObject, Draw mode)
-    : VAbstractCurve(GOType::Arc, idObject, mode),
-      d (new VArcData(formulaLength, center, radius, formulaRadius, f1, formulaF1))
+VArc::VArc(qreal length, const QString &formulaLength, const VPointF &center, qreal radius,
+           const QString &formulaRadius, qreal f1, const QString &formulaF1, quint32 idObject, Draw mode)
+    : VAbstractArc(GOType::Arc, formulaLength, center, f1, formulaF1, idObject, mode),
+      d (new VArcData(radius, formulaRadius))
 {
     CreateName();
     FindF2(length);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VArc::VArc(qreal length, VPointF center, qreal radius, qreal f1)
-    : VAbstractCurve(GOType::Arc, NULL_ID, Draw::Calculation), d (new VArcData(center, radius, f1))
+VArc::VArc(qreal length, const VPointF &center, qreal radius, qreal f1)
+    : VAbstractArc(GOType::Arc, center, f1, NULL_ID, Draw::Calculation),
+      d (new VArcData(radius))
 {
     CreateName();
     FindF2(length);
@@ -92,7 +95,7 @@ VArc::VArc(qreal length, VPointF center, qreal radius, qreal f1)
  * @param arc arc
  */
 VArc::VArc(const VArc &arc)
-    : VAbstractCurve(arc), d (arc.d)
+    : VAbstractArc(arc), d (arc.d)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -107,9 +110,22 @@ VArc &VArc::operator =(const VArc &arc)
     {
         return *this;
     }
-    VAbstractCurve::operator=(arc);
+    VAbstractArc::operator=(arc);
     d = arc.d;
     return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+{
+    const VPointF center = GetCenter().Rotate(originPoint, degrees);
+
+    const QPointF p1 = VPointF::RotatePF(originPoint, GetP1(), degrees);
+    const QPointF p2 = VPointF::RotatePF(originPoint, GetP2(), degrees);
+
+    VArc arc(center, GetRadius(), QLineF(center, p1).angle(), QLineF(center, p2).angle());
+    arc.setName(name() + prefix);
+    return arc;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -124,7 +140,7 @@ VArc::~VArc()
 qreal VArc::GetLength() const
 {
     qreal length = d->radius * qDegreesToRadians(AngleArc());
-    if (d->isFlipped)
+    if (IsFlipped())
     {
         length *= -1;
     }
@@ -140,8 +156,8 @@ qreal VArc::GetLength() const
 QPointF VArc::GetP1() const
 {
     QPointF p1 ( GetCenter().x () + d->radius, GetCenter().y () );
-    QLineF centerP1(GetCenter().toQPointF(), p1);
-    centerP1.setAngle(d->f1);
+    QLineF centerP1(GetCenter(), p1);
+    centerP1.setAngle(GetStartAngle());
     return centerP1.p2();
 }
 
@@ -153,38 +169,9 @@ QPointF VArc::GetP1() const
 QPointF VArc::GetP2 () const
 {
     QPointF p2 ( GetCenter().x () + d->radius, GetCenter().y () );
-    QLineF centerP2(GetCenter().toQPointF(), p2);
-    centerP2.setAngle(d->f2);
+    QLineF centerP2(GetCenter(), p2);
+    centerP2.setAngle(GetEndAngle());
     return centerP2.p2();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief AngleArc calculate arc angle.
- * @return angle in degree.
- */
-qreal VArc::AngleArc() const
-{
-    {
-        const qreal angleDiff = qAbs(d->f1 - d->f2);
-        if (VFuzzyComparePossibleNulls(angleDiff, 0) || VFuzzyComparePossibleNulls(angleDiff, 360))
-        {
-            return 360;
-        }
-    }
-    QLineF l1(0, 0, 100, 0);
-    l1.setAngle(d->f1);
-    QLineF l2(0, 0, 100, 0);
-    l2.setAngle(d->f2);
-
-    qreal ang = l1.angleTo(l2);
-
-    if (d->isFlipped)
-    {
-        ang = 360 - ang;
-    }
-
-    return ang;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -198,7 +185,7 @@ QVector<QPointF> VArc::GetPoints() const
     QVector<qreal> sectionAngle;
 
     QPointF pStart;
-    d->isFlipped ? pStart = GetP2() : pStart = GetP1();
+    IsFlipped() ? pStart = GetP2() : pStart = GetP1();
 
     {
         qreal angle = AngleArc();
@@ -234,7 +221,7 @@ QVector<QPointF> VArc::GetPoints() const
     {
         const qreal lDistance = GetRadius() * 4.0/3.0 * qTan(qDegreesToRadians(sectionAngle.at(i)) * 0.25);
 
-        const QPointF center = GetCenter().toQPointF();
+        const QPointF center = GetCenter();
 
         QLineF lineP1P2(pStart, center);
         lineP1P2.setAngle(lineP1P2.angle() - 90.0);
@@ -299,14 +286,14 @@ QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
 
     qreal n = qRadiansToDegrees(len/d->radius); // n - is angle in degrees
 
-    QLineF line(GetCenter().toQPointF(), GetP1());
+    QLineF line(GetCenter(), GetP1());
     line.setAngle(line.angle()+n);
 
-    arc1 = VArc (d->center, d->radius, d->formulaRadius, d->f1, d->formulaF1, line.angle(),
+    arc1 = VArc (GetCenter(), d->radius, d->formulaRadius, GetStartAngle(), GetFormulaF1(), line.angle(),
                  QString().setNum(line.angle()), getIdObject(), getMode());
 
-    arc2 = VArc (d->center, d->radius, d->formulaRadius, line.angle(), QString().setNum(line.angle()), d->f2,
-                 d->formulaF2, getIdObject(), getMode());
+    arc2 = VArc (GetCenter(), d->radius, d->formulaRadius, line.angle(), QString().setNum(line.angle()), GetEndAngle(),
+                 GetFormulaF2(), getIdObject(), getMode());
     return line.p2();
 }
 
@@ -317,34 +304,6 @@ QPointF VArc::CutArc(const qreal &length) const
     VArc arc1;
     VArc arc2;
     return this->CutArc(length, arc1, arc2);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief setId keep id arc in data.
- * @param id id arc in data.
- */
-void VArc::setId(const quint32 &id)
-{
-    VAbstractCurve::setId(id);
-    CreateName();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VArc::NameForHistory(const QString &toolName) const
-{
-    QString name = toolName + QString(" %1").arg(this->GetCenter().name());
-
-    if (VAbstractCurve::id() != NULL_ID)
-    {
-        name += QString("_%1").arg(VAbstractCurve::id());
-    }
-
-    if (GetDuplicate() > 0)
-    {
-        name += QString("_%1").arg(GetDuplicate());
-    }
-    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -368,7 +327,7 @@ void VArc::CreateName()
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::FindF2(qreal length)
 {
-    length < 0 ? d->isFlipped = true : d->isFlipped = false;
+    SetFlipped(length < 0);
 
     if (length >= MaxLength())
     {
@@ -377,76 +336,21 @@ void VArc::FindF2(qreal length)
 
     qreal arcAngle = qAbs(qRadiansToDegrees(length/d->radius));
 
-    if (d->isFlipped)
+    if (IsFlipped())
     {
         arcAngle = arcAngle * -1;
     }
 
     QLineF startAngle(0, 0, 100, 0);
-    startAngle.setAngle(d->f1 + arcAngle);// We use QLineF just because it is easy way correct angle value
+    startAngle.setAngle(GetStartAngle() + arcAngle);// We use QLineF just because it is easy way correct angle value
 
-    d->f2 = startAngle.angle();
-    d->formulaF2 = QString().number(d->f2);
+    SetFormulaF2(QString().number(startAngle.angle()), startAngle.angle());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VArc::MaxLength() const
 {
     return M_2PI*d->radius;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetF1 return start angle.
- * @return angle in degree.
- */
-QString VArc::GetFormulaF1() const
-{
-    return d->formulaF1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VArc::SetFormulaF1(const QString &formula, qreal value)
-{
-    d->formulaF1 = formula;
-    d->f1 = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetF1 return formula for start angle.
- * @return string with formula.
- */
-qreal VArc::GetStartAngle() const
-{
-    return d->f1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetF2 return end angle.
- * @return angle in degree.
- */
-QString VArc::GetFormulaF2() const
-{
-    return d->formulaF2;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VArc::SetFormulaF2(const QString &formula, qreal value)
-{
-    d->formulaF2 = formula;
-    d->f2 = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetF2 return formula for end angle.
- * @return string with formula.
- */
-qreal VArc::GetEndAngle() const
-{
-    return d->f2;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -474,33 +378,4 @@ void VArc::SetFormulaRadius(const QString &formula, qreal value)
 qreal VArc::GetRadius() const
 {
     return d->radius;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetCenter return center point.
- * @return center point.
- */
-VPointF VArc::GetCenter() const
-{
-    return d->center;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VArc::SetCenter(const VPointF &value)
-{
-    d->center = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VArc::GetFormulaLength() const
-{
-    return d->formulaLength;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VArc::SetFormulaLength(const QString &formula, qreal value)
-{
-    d->formulaLength = formula;
-    FindF2(value);
 }

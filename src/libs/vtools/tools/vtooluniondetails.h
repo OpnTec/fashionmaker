@@ -42,9 +42,6 @@ class VToolUnionDetails : public VAbstractTool
 {
     Q_OBJECT
 public:
-    VToolUnionDetails(VAbstractPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1, const VDetail &d2,
-                      const quint32 &indexD1, const quint32 &indexD2, const Source &typeCreation,
-                      const QString &drawName, QObject *parent = nullptr);
     /**
      * @brief setDialog set dialog when user want change tool option.
      */
@@ -59,7 +56,7 @@ public:
     static void  PointsOnEdge(const VDetail &d, const quint32 &index, VPointF &p1, VPointF &p2, VContainer *data);
     static void  FindIndexJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j);
     static QVector<VDetail> GetDetailFromFile(VAbstractPattern *doc, const QDomElement &domElement);
-    static const QString TagName;
+
     static const QString ToolType;
     static const QString TagDetail;
     static const QString TagNode;
@@ -111,6 +108,10 @@ private:
     quint32      indexD2;
 
     QString      drawName;
+
+    VToolUnionDetails(VAbstractPattern *doc, VContainer *data, const quint32 &id, const VDetail &d1, const VDetail &d2,
+                      const quint32 &indexD1, const quint32 &indexD2, const Source &typeCreation,
+                      const QString &drawName, QObject *parent = nullptr);
 
     void         AddDetail(QDomElement &domElement, VDetail &d);
     void         AddNode(QDomElement &domElement, const VNodeDetail &node);

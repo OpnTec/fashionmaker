@@ -61,7 +61,6 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, 
     CheckState();
 
     FillComboBoxSplines(ui->comboBoxSpline);
-    FillComboBoxLineColors(ui->comboBoxColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSpline::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutSpline::NamePointChanged);
@@ -96,7 +95,7 @@ void DialogCutSpline::SetPointName(const QString &value)
  */
 void DialogCutSpline::SetFormula(const QString &value)
 {
-    formula = qApp->TrVars()->FormulaToUser(value);
+    formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     // increase height if needed. TODO : see if I can get the max number of caracters in one line
     // of this PlainTextEdit to change 80 to this value
     if (formula.length() > 80)
@@ -124,18 +123,6 @@ void DialogCutSpline::setSplineId(const quint32 &value)
     VisToolCutSpline *path = qobject_cast<VisToolCutSpline *>(vis);
     SCASSERT(path != nullptr);
     path->setObject1Id(value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogCutSpline::GetColor() const
-{
-    return GetComboBoxCurrentData(ui->comboBoxColor);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCutSpline::SetColor(const QString &value)
-{
-    ChangeCurrentData(ui->comboBoxColor, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

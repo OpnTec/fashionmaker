@@ -58,9 +58,6 @@ public:
     QString      getLineType() const;
     virtual void SetTypeLine(const QString &value);
 
-    QString      GetLineColor() const;
-    virtual void SetLineColor(const QString &value);
-
 signals:
     void ChangedToolSelection(bool selected, quint32 object, quint32 tool);
 
@@ -87,9 +84,6 @@ protected:
 
     /** @brief typeLine line type. */
     QString      typeLine;
-
-    /** @brief lineColor color line or curve, but not a point. */
-    QString      lineColor;
 
     bool         enabled;
 

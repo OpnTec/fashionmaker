@@ -38,9 +38,6 @@ class VToolPointOfIntersection : public VToolSinglePoint
 {
     Q_OBJECT
 public:
-    VToolPointOfIntersection(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstPointId,
-                             const quint32 &secondPointId, const Source &typeCreation,
-                             QGraphicsItem * parent = nullptr);
     virtual void setDialog() Q_DECL_OVERRIDE;
     static VToolPointOfIntersection *Create(DialogTool *dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                             VContainer *data);
@@ -68,11 +65,16 @@ protected:
     virtual void SetVisualization() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(VToolPointOfIntersection)
+
     /** @brief firstPointId id first line point. */
     quint32       firstPointId;
 
     /** @brief secondPointId id second line point. */
     quint32       secondPointId;
+
+    VToolPointOfIntersection(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &firstPointId,
+                             const quint32 &secondPointId, const Source &typeCreation,
+                             QGraphicsItem * parent = nullptr);
 };
 
 #endif // VTOOLPOINTOFINTERSECTION_H

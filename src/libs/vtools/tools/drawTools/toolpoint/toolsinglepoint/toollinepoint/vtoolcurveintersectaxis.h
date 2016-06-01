@@ -35,9 +35,6 @@ class VToolCurveIntersectAxis : public VToolLinePoint
 {
     Q_OBJECT
 public:
-    VToolCurveIntersectAxis(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
-                            const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
-                            const quint32 &curveId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
     virtual ~VToolCurveIntersectAxis() Q_DECL_OVERRIDE;
     virtual void setDialog() Q_DECL_OVERRIDE;
 
@@ -72,6 +69,10 @@ private:
     Q_DISABLE_COPY(VToolCurveIntersectAxis)
     QString formulaAngle;
     quint32 curveId;
+
+    VToolCurveIntersectAxis(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &typeLine,
+                            const QString &lineColor, const QString &formulaAngle, const quint32 &basePointId,
+                            const quint32 &curveId, const Source &typeCreation, QGraphicsItem * parent = nullptr);
 
     static void InitSegments(const GOType &curveType, qreal segLength, const VPointF *p, quint32 curveId,
                              VContainer *data);

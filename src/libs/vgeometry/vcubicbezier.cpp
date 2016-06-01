@@ -62,6 +62,18 @@ VCubicBezier &VCubicBezier::operator=(const VCubicBezier &curve)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VCubicBezier VCubicBezier::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
+{
+    const VPointF p1 = GetP1().Rotate(originPoint, degrees);
+    const VPointF p2 = GetP2().Rotate(originPoint, degrees);
+    const VPointF p3 = GetP3().Rotate(originPoint, degrees);
+    const VPointF p4 = GetP4().Rotate(originPoint, degrees);
+    VCubicBezier curve(p1, p2, p3, p4);
+    curve.setName(name() + prefix);
+    return curve;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::~VCubicBezier()
 {
 }
@@ -117,13 +129,13 @@ void VCubicBezier::SetP4(const VPointF &p)
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCubicBezier::GetStartAngle() const
 {
-    return QLineF(GetP1().toQPointF(), GetP2().toQPointF()).angle();
+    return QLineF(GetP1(), GetP2()).angle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCubicBezier::GetEndAngle() const
 {
-    return QLineF(GetP4().toQPointF(), GetP3().toQPointF()).angle();
+    return QLineF(GetP4(), GetP3()).angle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -133,7 +145,7 @@ qreal VCubicBezier::GetEndAngle() const
  */
 qreal VCubicBezier::GetLength() const
 {
-    return LengthBezier (GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF());
+    return LengthBezier (GetP1(), GetP2(), GetP3(), GetP4());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,17 +155,17 @@ qreal VCubicBezier::GetLength() const
  */
 QVector<QPointF> VCubicBezier::GetPoints() const
 {
-    return GetCubicBezierPoints(GetP1().toQPointF(), GetP2().toQPointF(), GetP3().toQPointF(), GetP4().toQPointF());
+    return GetCubicBezierPoints(GetP1(), GetP2(), GetP3(), GetP4());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VCubicBezier::GetControlPoint1() const
 {
-    return GetP2().toQPointF();
+    return GetP2();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QPointF VCubicBezier::GetControlPoint2() const
 {
-    return GetP3().toQPointF();
+    return GetP3();
 }

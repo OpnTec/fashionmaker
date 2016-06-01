@@ -36,6 +36,8 @@
 #include "../../undocommands/savetooloptions.h"
 #include "../../../ifc/exception/vexceptionundo.h"
 
+#include <QtNumeric>
+
 qreal VDrawTool::factor = 1;
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -47,7 +49,7 @@ qreal VDrawTool::factor = 1;
  */
 VDrawTool::VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
     :VAbstractTool(doc, data, id, parent), nameActivDraw(doc->GetNameActivPP()),
-      dialog(nullptr), typeLine(TypeLineLine), lineColor(ColorBlack), enabled(true)
+      dialog(nullptr), typeLine(TypeLineLine), enabled(true)
 {
     connect(this->doc, &VAbstractPattern::ChangedActivPP, this, &VDrawTool::ChangedActivDraw);
     connect(this->doc, &VAbstractPattern::ChangedNameDraw, this, &VDrawTool::ChangedNameDraw);
@@ -289,26 +291,28 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
 {
     SCASSERT(data != nullptr)
     qreal result = 0;
-    Calculator *cal = nullptr;
     try
     {
-        cal = new Calculator();
+        QScopedPointer<Calculator> cal(new Calculator());
         result = cal->EvalFormula(data->PlainVariables(), formula);
-        delete cal;
+
+        if (qIsInf(result) || qIsNaN(result))
+        {
+            qDebug() << "Invalid the formula value";
+            return 0;
+        }
     }
     catch (qmu::QmuParserError &e)
     {
-        //Q_UNUSED(e)
         qDebug() << "\nMath parser error:\n"
                  << "--------------------------------------\n"
                  << "Message:     " << e.GetMsg()  << "\n"
                  << "Expression:  " << e.GetExpr() << "\n"
                  << "--------------------------------------";
-        delete cal;
 
         if (qApp->IsAppInGUIMode())
         {
-            DialogUndo *dialogUndo = new DialogUndo(qApp->getMainWindow());
+            QScopedPointer<DialogUndo> dialogUndo(new DialogUndo(qApp->getMainWindow()));
             forever
             {
                 if (dialogUndo->exec() == QDialog::Accepted)
@@ -316,8 +320,7 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                     const UndoButton resultUndo = dialogUndo->Result();
                     if (resultUndo == UndoButton::Fix)
                     {
-                        DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId,
-                                                                                    qApp->getMainWindow());
+                        auto *dialog = new DialogEditWrongFormula(data, toolId, qApp->getMainWindow());
                         dialog->setWindowTitle(tr("Edit wrong formula"));
                         dialog->SetFormula(formula);
                         if (dialog->exec() == QDialog::Accepted)
@@ -326,10 +329,15 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                             /* Need delete dialog here because parser in dialog don't allow use correct separator for
                              * parsing here. */
                             delete dialog;
-                            Calculator *cal1 = new Calculator();
+                            QScopedPointer<Calculator> cal1(new Calculator());
                             result = cal1->EvalFormula(data->PlainVariables(), formula);
-                            delete cal1; /* Here can be memory leak, but dialog already check this formula and
-                                            probability very low. */
+
+                            if (qIsInf(result) || qIsNaN(result))
+                            {
+                                qDebug() << "Invalid the formula value";
+                                return 0;
+                            }
+
                             break;
                         }
                         else
@@ -344,11 +352,9 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
                 }
                 else
                 {
-                    delete dialogUndo;
                     throw;
                 }
             }
-            delete dialogUndo;
         }
         else
         {
@@ -380,22 +386,6 @@ QString VDrawTool::getLineType() const
 void VDrawTool::SetTypeLine(const QString &value)
 {
     typeLine = value;
-
-    QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
-    SaveOption(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VDrawTool::GetLineColor() const
-{
-    return lineColor;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDrawTool::SetLineColor(const QString &value)
-{
-    lineColor = value;
 
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(id);
     SaveOption(obj);

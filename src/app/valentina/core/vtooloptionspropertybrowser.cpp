@@ -33,6 +33,7 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vcontrolpointspline.h"
 #include "../vwidgets/vsimplepoint.h"
+#include "../vwidgets/vsimplecurve.h"
 #include "../vpropertyexplorer/vproperties.h"
 #include "vformulaproperty.h"
 #include "../vpatterndb/vformula.h"
@@ -74,7 +75,7 @@ void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
 void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was used in switch.");
 
     switch (item->type())
     {
@@ -174,8 +175,15 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
             currentItem = item->parentItem();
             ShowItemOptions(currentItem);
             break;
+        case VSimpleCurve::Type:
+            currentItem = item->parentItem();
+            ShowItemOptions(currentItem);
+            break;
         case VToolTrueDarts::Type:
             ShowOptionsToolTrueDarts(item);
+            break;
+        case VToolRotation::Type:
+            ShowOptionsToolRotation(item);
             break;
         default:
             break;
@@ -191,7 +199,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was used in switch.");
 
     switch (currentItem->type())
     {
@@ -288,6 +296,9 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
         case VToolTrueDarts::Type:
             UpdateOptionsToolTrueDarts();
             break;
+        case VToolRotation::Type:
+            UpdateOptionsToolRotation();
+            break;
         default:
             break;
     }
@@ -323,7 +334,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 42, "Not all tools was used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was used in switch.");
 
     switch (currentItem->type())
     {
@@ -414,6 +425,9 @@ void VToolOptionsPropertyBrowser::userChangedData(VProperty *property)
         case VToolTrueDarts::Type:
             ChangeDataToolTrueDarts(prop);
             break;
+        case VToolRotation::Type:
+            ChangeDataToolRotation(prop);
+            break;
         default:
             break;
     }
@@ -481,7 +495,6 @@ void VToolOptionsPropertyBrowser::AddPropertyObjectName(Tool *i, const QString &
     AddProperty(itemName, AttrName);
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
 template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyPointName1(Tool *i, const QString &propertyName)
@@ -500,6 +513,17 @@ void VToolOptionsPropertyBrowser::AddPropertyPointName2(Tool *i, const QString &
     itemName->setClearButtonEnable(true);
     itemName->setValue(i->nameP2());
     AddProperty(itemName, AttrName2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::AddPropertyOperationSuffix(Tool *i, const QString &propertyName, bool readOnly)
+{
+    auto itemSuffix = new VStringProperty(propertyName);
+    itemSuffix->setClearButtonEnable(true);
+    itemSuffix->setValue(i->Suffix());
+    itemSuffix->setReadOnly(readOnly);
+    AddProperty(itemSuffix, AttrSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -638,6 +662,43 @@ void VToolOptionsPropertyBrowser::SetPointName2(const QString &name)
         {
             i->setNameP2(name);
         }
+    }
+    else
+    {
+        qWarning()<<"Can't cast item";
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<class Tool>
+void VToolOptionsPropertyBrowser::SetOperationSuffix(const QString &suffix)
+{
+    if (Tool *item = qgraphicsitem_cast<Tool *>(currentItem))
+    {
+        if (suffix == item->Suffix())
+        {
+            return;
+        }
+
+        if (suffix.isEmpty())
+        {
+            idToProperty[AttrSuffix]->setValue(item->Suffix());
+            return;
+        }
+
+        QRegularExpression rx(NameRegExp());
+        const QStringList uniqueNames = VContainer::AllUniqueNames();
+        for (int i=0; i < uniqueNames.size(); ++i)
+        {
+            const QString name = uniqueNames.at(i) + suffix;
+            if (not rx.match(name).hasMatch() || not VContainer::IsUnique(name))
+            {
+                idToProperty[AttrSuffix]->setValue(item->Suffix());
+                return;
+            }
+        }
+
+        item->SetSuffix(suffix);
     }
     else
     {
@@ -934,9 +995,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutArc(VProperty *property)
         case 4: // AttrLength
             i->SetFormula(value.value<VFormula>());
             break;
-        case 27: // AttrTypeColor
-            i->SetLineColor(value.toString());
-            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -961,9 +1019,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSpline(VProperty *property)
         case 4: // AttrLength
             i->SetFormula(value.value<VFormula>());
             break;
-        case 27: // AttrTypeColor
-            i->SetLineColor(value.toString());
-            break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
             break;
@@ -987,9 +1042,6 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCutSplinePath(VProperty *propert
             break;
         case 4: // AttrLength
             i->SetFormula(value.value<VFormula>());
-            break;
-        case 27: // AttrTypeColor
-            i->SetLineColor(value.toString());
             break;
         default:
             qWarning()<<"Unknown property type. id = "<<id;
@@ -1526,6 +1578,30 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCurveIntersectAxis(VProperty *pr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ChangeDataToolRotation(VProperty *property)
+{
+    SCASSERT(property != nullptr)
+
+    QVariant value = property->data(VProperty::DPC_Data, Qt::DisplayRole);
+    const QString id = propertyToId[property];
+
+    VToolRotation *i = qgraphicsitem_cast<VToolRotation *>(currentItem);
+    SCASSERT(i != nullptr);
+    switch (PropertiesList().indexOf(id))
+    {
+        case 38: // AttrSuffix
+            SetOperationSuffix<VToolRotation>(value.toString());
+            break;
+        case 5: // AttrAngle
+            i->SetFormulaAngle(value.value<VFormula>());
+            break;
+        default:
+            qWarning()<<"Unknown property type. id = "<<id;
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::ShowOptionsToolSinglePoint(QGraphicsItem *item)
 {
     VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(item);
@@ -1625,7 +1701,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutArc(QGraphicsItem *item)
 
     AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1637,7 +1712,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSpline(QGraphicsItem *item)
 
     AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1649,7 +1723,6 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCutSplinePath(QGraphicsItem *it
 
     AddPropertyObjectName(i, tr("Point label"));
     AddPropertyFormula(tr("Length"), i->GetFormula(), AttrLength);
-    AddPropertyLineColor(i, tr("Color"), VAbstractTool::ColorsList(), AttrColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1908,6 +1981,17 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::ShowOptionsToolRotation(QGraphicsItem *item)
+{
+    VToolRotation *i = qgraphicsitem_cast<VToolRotation *>(item);
+    i->ShowVisualization(true);
+    formView->setTitle(tr("Tool rotation"));
+
+    AddPropertyOperationSuffix(i, tr("Suffix"));
+    AddPropertyFormula(tr("Angle"), i->GetFormulaAngle(), AttrAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::UpdateOptionsToolSinglePoint()
 {
     VToolBasePoint *i = qgraphicsitem_cast<VToolBasePoint *>(currentItem);
@@ -2044,9 +2128,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutArc()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[AttrLength]->setValue(valueFormula);
-
-    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-    idToProperty[AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2059,9 +2140,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSpline()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[AttrLength]->setValue(valueFormula);
-
-    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-    idToProperty[AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2074,9 +2152,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCutSplinePath()
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormula());
     idToProperty[AttrLength]->setValue(valueFormula);
-
-    const qint32 index = VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-    idToProperty[AttrColor]->setValue(index);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2366,6 +2441,17 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolOptionsPropertyBrowser::UpdateOptionsToolRotation()
+{
+    VToolRotation *i = qgraphicsitem_cast<VToolRotation *>(currentItem);
+    idToProperty[AttrSuffix]->setValue(i->Suffix());
+
+    QVariant valueAngle;
+    valueAngle.setValue(i->GetFormulaAngle());
+    idToProperty[AttrAngle]->setValue(valueAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VToolOptionsPropertyBrowser::PropertiesList() const
 {
     QStringList attr = QStringList() << AttrName                           /* 0 */
@@ -2405,6 +2491,7 @@ QStringList VToolOptionsPropertyBrowser::PropertiesList() const
                                      << AttrVCrossPoint                    /* 34 */
                                      << AttrHCrossPoint                    /* 35 */
                                      << AttrLength1                        /* 36 */
-                                     << AttrLength2;                       /* 37 */
+                                     << AttrLength2                        /* 37 */
+                                     << AttrSuffix;                        /* 38 */
     return attr;
 }

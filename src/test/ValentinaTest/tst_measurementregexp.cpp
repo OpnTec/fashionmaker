@@ -568,7 +568,7 @@ void TST_MeasurementRegExp::InitTrMs()
     }
     else
     {
-        trMs = new VTranslateVars(true);
+        trMs = new VTranslateVars();
     }
 }
 

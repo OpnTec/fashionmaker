@@ -44,14 +44,12 @@ const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
  * @param id object id in container.
  * @param formula string with formula length first arc.
  * @param arcId id arc in data container.
- * @param color arc color.
  * @param typeCreation way we create this tool.
  * @param parent parent object.
  */
 VToolCutArc::VToolCutArc(VAbstractPattern *doc, VContainer *data, const quint32 &id, const QString &formula,
-                         const quint32 &arcId, const QString &color, const Source &typeCreation,
-                         QGraphicsItem * parent)
-    :VToolCut(doc, data, id, formula, arcId, color, parent)
+                         const quint32 &arcId, const Source &typeCreation, QGraphicsItem * parent)
+    :VToolCut(doc, data, id, formula, arcId, parent)
 {
     ToolCreation(typeCreation);
 }
@@ -69,7 +67,6 @@ void VToolCutArc::setDialog()
     dialogTool->SetFormula(formula);
     dialogTool->setArcId(curveCutId);
     dialogTool->SetPointName(point->name());
-    dialogTool->SetColor(lineColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,8 +85,7 @@ VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
     const QString pointName = dialogTool->getPointName();
     QString formula = dialogTool->GetFormula();
     const quint32 arcId = dialogTool->getArcId();
-    const QString color = dialogTool->GetColor();
-    VToolCutArc* point = Create(0, pointName, formula, arcId, 5, 10, color, scene, doc, data, Document::FullParse,
+    VToolCutArc* point = Create(0, pointName, formula, arcId, 5, 10, scene, doc, data, Document::FullParse,
                                 Source::FromGui);
     if (point != nullptr)
     {
@@ -114,9 +110,8 @@ VToolCutArc* VToolCutArc::Create(DialogTool *dialog, VMainGraphicsScene *scene, 
  * @param typeCreation way we create this tool.
  */
 VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QString &formula, const quint32 &arcId,
-                                 const qreal &mx, const qreal &my, const QString &color, VMainGraphicsScene *scene,
-                                 VAbstractPattern *doc, VContainer *data, const Document &parse,
-                                 const Source &typeCreation)
+                                 const qreal &mx, const qreal &my, VMainGraphicsScene *scene, VAbstractPattern *doc,
+                                 VContainer *data, const Document &parse, const Source &typeCreation)
 {
     const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(arcId);
 
@@ -155,7 +150,7 @@ VToolCutArc* VToolCutArc::Create(const quint32 _id, const QString &pointName, QS
     VDrawTool::AddRecord(id, Tool::CutArc, doc);
     if (parse == Document::FullParse)
     {
-        VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, color, typeCreation);
+        VToolCutArc *point = new VToolCutArc(doc, data, id, formula, arcId, typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
         doc->AddTool(id, point);
@@ -201,7 +196,6 @@ void VToolCutArc::SaveDialog(QDomElement &domElement)
     doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
-    doc->SetAttribute(domElement, AttrColor, dialogTool->GetColor());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -219,7 +213,6 @@ void VToolCutArc::ReadToolAttributes(const QDomElement &domElement)
 {
     formula = doc->GetParametrString(domElement, AttrLength, "");
     curveCutId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
-    lineColor = doc->GetParametrString(domElement, AttrColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -231,7 +224,7 @@ void VToolCutArc::SetVisualization()
         SCASSERT(visual != nullptr);
 
         visual->setObject1Id(curveCutId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formula));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator()));
         visual->RefreshGeometry();
     }
 }

@@ -177,8 +177,7 @@ VToolBisector* VToolBisector::Create(const quint32 _id, QString &formula, const 
 
     const qreal result = CheckFormula(_id, formula, data);
 
-    QPointF fPoint = VToolBisector::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                              thirdPoint->toQPointF(), qApp->toPixel(result));
+    QPointF fPoint = VToolBisector::FindPoint(*firstPoint, *secondPoint, *thirdPoint, qApp->toPixel(result));
     quint32 id = _id;
     if (typeCreation == Source::FromGui)
     {
@@ -305,7 +304,7 @@ void VToolBisector::SetVisualization()
         visual->setObject1Id(firstPointId);
         visual->setObject2Id(basePointId);
         visual->setObject3Id(thirdPointId);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }

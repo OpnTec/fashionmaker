@@ -47,14 +47,11 @@
 #include <QGraphicsView>
 #include <QMessageBox>
 
-
-const QString VToolDetail::TagName          = QStringLiteral("detail");
 const QString VToolDetail::TagNode          = QStringLiteral("node");
 
 const QString VToolDetail::AttrSupplement   = QStringLiteral("supplement");
 const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
 const QString VToolDetail::AttrWidth        = QStringLiteral("width");
-const QString VToolDetail::AttrIdObject     = QStringLiteral("idObject");
 const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolDetail::AttrReverse      = QStringLiteral("reverse");
 
@@ -316,7 +313,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 void VToolDetail::AddToFile()
 {
     VDetail detail = VAbstractTool::data.GetDetail(id);
-    QDomElement domElement = doc->createElement(TagName);
+    QDomElement domElement = doc->createElement(getTagName());
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
     doc->SetAttribute(domElement, AttrName, detail.getName());
@@ -379,7 +376,7 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
                // value - this is new position.
                const QPointF newPos = value.toPointF();
 
-               MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id, scene());
+               MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id);
                connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
                qApp->getUndoStack()->push(moveDet);
 
@@ -463,6 +460,13 @@ void VToolDetail::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Special for not selectable item first need to call standard mousePressEvent then accept event
     VNoBrushScalePathItem::mousePressEvent(event);
+
+    // Somehow clicking on notselectable object do not clean previous selections.
+    if (not (flags() & ItemIsSelectable) && scene())
+    {
+        scene()->clearSelection();
+    }
+
     if (flags() & QGraphicsItem::ItemIsMovable)
     {
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
@@ -620,7 +624,7 @@ void VToolDetail::AddNode(VAbstractPattern *doc, QDomElement &domElement, const 
 //---------------------------------------------------------------------------------------------------------------------
 QString VToolDetail::getTagName() const
 {
-    return VToolDetail::TagName;
+    return VAbstractPattern::TagDetail;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

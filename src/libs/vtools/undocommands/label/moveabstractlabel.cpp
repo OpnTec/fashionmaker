@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   movedoublelabel.h
+ **  @file   moveabstractlabel.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   24 6, 2015
+ **  @date   13 5, 2016
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentine project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2016 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,68 +26,53 @@
  **
  *************************************************************************/
 
-#ifndef MOVEDOUBLELABEL_H
-#define MOVEDOUBLELABEL_H
-
-#include "vundocommand.h"
-
-class QGraphicsScene;
-
-enum class DoublePoint: char { FirstPoint, SecondPoint };
-
-class MoveDoubleLabel : public VUndoCommand
-{
-    Q_OBJECT
-public:
-    MoveDoubleLabel(VAbstractPattern *doc, const double &x, const double &y, DoublePoint type,
-                    quint32 tooId, quint32 pointId, QGraphicsScene *scene, QUndoCommand *parent = 0);
-    virtual ~MoveDoubleLabel() Q_DECL_OVERRIDE;
-    virtual void undo() Q_DECL_OVERRIDE;
-    virtual void redo() Q_DECL_OVERRIDE;
-    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
-    virtual int  id() const Q_DECL_OVERRIDE;
-    quint32      getPointId() const;
-    quint32      getLabelId() const;
-    double       getNewMx() const;
-    double       getNewMy() const;
-    DoublePoint  getPointType() const;
-    void         Do(double mx, double my);
-signals:
-    void ChangePosition(quint32 id, qreal mx, qreal my);
-private:
-    Q_DISABLE_COPY(MoveDoubleLabel)
-    double oldMx;
-    double oldMy;
-    double newMx;
-    double newMy;
-    QGraphicsScene *scene;
-    DoublePoint type;
-    quint32 pointId;
-    bool isRedo;
-};
+#include "moveabstractlabel.h"
+#include "../vwidgets/vmaingraphicsview.h"
+#include "../vmisc/vabstractapplication.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-inline quint32 MoveDoubleLabel::getPointId() const
+MoveAbstractLabel::MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, double x, double y,
+                                     QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      m_oldMx(0.0),
+      m_oldMy(0.0),
+      m_newMx(x),
+      m_newMy(y),
+      m_isRedo(false),
+      m_scene(qApp->getCurrentScene())
 {
-    return nodeId;
+    nodeId = pointId;
+    qCDebug(vUndo, "Point id %u", nodeId);
+
+    qCDebug(vUndo, "Label new Mx %f", m_newMx);
+    qCDebug(vUndo, "Label new My %f", m_newMy);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline DoublePoint MoveDoubleLabel::getPointType() const
+MoveAbstractLabel::~MoveAbstractLabel()
 {
-    return type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MoveDoubleLabel::getNewMx() const
+void MoveAbstractLabel::undo()
 {
-    return newMx;
+    qCDebug(vUndo, "Undo.");
+
+    Do(m_oldMx, m_oldMy);
+    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
+    m_isRedo = true;
+    emit ChangePosition(nodeId, m_oldMx, m_oldMy);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline double MoveDoubleLabel::getNewMy() const
+void MoveAbstractLabel::redo()
 {
-    return newMy;
-}
+    qCDebug(vUndo, "Redo.");
 
-#endif // MOVEDOUBLELABEL_H
+    Do(m_newMx, m_newMy);
+    VMainGraphicsView::NewSceneRect(m_scene, qApp->getSceneView());
+    if (m_isRedo)
+    {
+        emit ChangePosition(nodeId, m_newMx, m_newMy);
+    }
+}

@@ -41,7 +41,7 @@ class DialogAboutTape : public QDialog
 
 public:
     explicit DialogAboutTape(QWidget *parent = 0);
-    ~DialogAboutTape();
+    virtual ~DialogAboutTape();
 
 protected:
     virtual void changeEvent(QEvent* event) Q_DECL_OVERRIDE;

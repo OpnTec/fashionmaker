@@ -178,8 +178,7 @@ VToolShoulderPoint* VToolShoulderPoint::Create(const quint32 _id, QString &formu
 
     const qreal result = CheckFormula(_id, formula, data);
 
-    QPointF fPoint = VToolShoulderPoint::FindPoint(firstPoint->toQPointF(), secondPoint->toQPointF(),
-                                                   shoulderPoint->toQPointF(), qApp->toPixel(result));
+    QPointF fPoint = VToolShoulderPoint::FindPoint(*firstPoint, *secondPoint, *shoulderPoint, qApp->toPixel(result));
     quint32 id =  _id;
     if (typeCreation == Source::FromGui)
     {
@@ -309,7 +308,7 @@ void VToolShoulderPoint::SetVisualization()
         visual->setObject1Id(pShoulder);
         visual->setLineP1Id(basePointId);
         visual->setLineP2Id(p2Line);
-        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength));
+        visual->setLength(qApp->TrVars()->FormulaToUser(formulaLength, qApp->Settings()->GetOsSeparator()));
         visual->setLineStyle(VAbstractTool::LineStyleToPenStyle(typeLine));
         visual->RefreshGeometry();
     }
