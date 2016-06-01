@@ -273,10 +273,8 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
 #endif
     QTest::newRow("TShirt_test")       << "TShirt_test.val"       << keyTest  << true << V_EX_OK;
     QTest::newRow("TestDart")          << "TestDart.val"          << keyTest  << true << V_EX_OK;
-#ifdef Q_OS_WIN
-#else
+#ifndef Q_OS_WIN
     QTest::newRow("patrón_blusa")      << "patrón_blusa.val"      << keyTest  << true << V_EX_OK;
-#endif
     QTest::newRow("PajamaTopWrap2")    << "PajamaTopWrap2.val"    << keyTest  << true << V_EX_OK;
     QTest::newRow("Keiko_skirt")       << "Keiko_skirt.val"       << keyTest  << true << V_EX_OK;
     QTest::newRow("pantalon_base_Eli") << "pantalon_base_Eli.val" << keyTest  << true << V_EX_OK;
@@ -284,7 +282,7 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     QTest::newRow("IMK_Zhaketa")       << "IMK_Zhaketa_poluprilegayuschego_silueta.val" << keyTest << true << V_EX_OK;
     QTest::newRow("Moulage_0.5_armhole_neckline") << "Moulage_0.5_armhole_neckline.val" << keyTest << true << V_EX_OK;
     QTest::newRow("0.7_Armhole_adjustment_0.10")  << "0.7_Armhole_adjustment_0.10.val"  << keyTest << true << V_EX_OK;
-
+#endif
     // We have a problem with encoding in Windows when we try to open some files in terminal
 }
 
