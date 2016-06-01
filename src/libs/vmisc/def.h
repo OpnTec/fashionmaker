@@ -33,7 +33,7 @@
 #include <QtGlobal>
 #include <QStringList>
 #include <QSharedPointer>
-#include <QPrinter>
+#include <QtPrintSupport/QPrinter>
 #ifdef Q_OS_WIN
     #include <windows.h>
 #endif /* Q_OS_WIN */
