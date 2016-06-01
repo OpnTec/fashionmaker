@@ -55,14 +55,14 @@ QVector<QImage> VPoster::Generate(const QImage &image, int page, int sheets) con
     }
 
     const int rows = CountRows(image.rect().height());
-    const int colomns = CountColomns(image.rect().width());
+    const int columns = CountColumns(image.rect().width());
 
     for (int i=0; i < rows; i++)
     {
-        for (int j=0; j< colomns; j++)
+        for (int j=0; j< columns; j++)
         {
             QImage img = Cut(i, j, image);
-            img = Borders(rows, colomns, i, j, img, page, sheets);
+            img = Borders(rows, columns, i, j, img, page, sheets);
             poster.append(img);
         }
     }
@@ -120,7 +120,7 @@ int VPoster::CountRows(int height) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPoster::CountColomns(int width) const
+int VPoster::CountColumns(int width) const
 {
     const qreal imgLength = width;
     const qreal pageLength = PageRect().width();
@@ -182,7 +182,7 @@ QImage VPoster::Cut(int i, int j, const QImage &image) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int page, int sheets) const
+QImage VPoster::Borders(int rows, int columns, int i, int j, QImage &image, int page, int sheets) const
 {
     QPainter painter(&image);
 
@@ -198,7 +198,7 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
                           QImage("://scissors_vertical.png"));
     }
 
-    if (j != colomns-1)
+    if (j != columns-1)
     {// Right border
         painter.drawLine(QLine(rec.width()-static_cast<int>(allowence), 0,
                                rec.width()-static_cast<int>(allowence), rec.height()));
@@ -211,7 +211,7 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
                           QImage("://scissors_horizontal.png"));
     }
 
-    if (rows*colomns > 1)
+    if (rows*columns > 1)
     { // Don't show bottom border if only one page need
         // Bottom border (mandatory)
         painter.drawLine(QLine(0, rec.height()-static_cast<int>(allowence),
@@ -230,7 +230,7 @@ QImage VPoster::Borders(int rows, int colomns, int i, int j, QImage &image, int 
     QRect labels(layoutX, rec.height()-static_cast<int>(allowence)+layoutY,
                  rec.width()-(static_cast<int>(allowence)+layoutX), static_cast<int>(allowence)-layoutY);
     painter.drawText(labels, Qt::AlignLeft, tr("Grid ( %1 , %2 )").arg(i+1).arg(j+1));
-    painter.drawText(labels, Qt::AlignHCenter, tr("Page %1 of %2").arg(i*(colomns)+j+1).arg(rows*colomns));
+    painter.drawText(labels, Qt::AlignHCenter, tr("Page %1 of %2").arg(i*(columns)+j+1).arg(rows*columns));
     if (sheets > 1)
     {
         painter.drawText(labels, Qt::AlignRight, tr("Sheet %1 of %2").arg(page).arg(sheets));

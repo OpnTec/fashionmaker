@@ -47,10 +47,10 @@ private:
     quint32 allowence;
 
     int CountRows(int height) const;
-    int CountColomns(int width) const;
+    int CountColumns(int width) const;
 
     QImage Cut(int i, int j, const QImage &image) const;
-    QImage Borders(int rows, int colomns, int i, int j, QImage &image, int page, int sheets) const;
+    QImage Borders(int rows, int columns, int i, int j, QImage &image, int page, int sheets) const;
 
     QRect PageRect() const;
 
