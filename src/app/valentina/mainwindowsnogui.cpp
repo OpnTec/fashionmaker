@@ -341,9 +341,6 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
         copyCount = printer->copyCount();
     }
 
-    qreal left, top, right, bottom;
-    printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
-
     for (int i = 0; i < copyCount; ++i)
     {
         for (int j = 0; j < numPages; ++j)
@@ -365,7 +362,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
             {
                 index = lastPage - j;
             }
-            painter.drawImage(QPointF(left, top), poster.at(index));
+            painter.drawImage(QPointF(), poster.at(index));
         }
     }
 
