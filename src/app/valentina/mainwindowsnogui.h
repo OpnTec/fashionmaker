@@ -130,6 +130,7 @@ private:
     QPrinter::PaperSize FindTemplate(const QSizeF &size) const;
 
     bool isPagesUniform() const;
+    bool IsPagesFit(const QSizeF &printPaper) const;
     QString FileName() const;
 
     int ContinueIfLayoutStale();

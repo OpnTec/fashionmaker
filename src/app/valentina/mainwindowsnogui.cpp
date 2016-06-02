@@ -341,6 +341,9 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
         copyCount = printer->copyCount();
     }
 
+    qreal left, top, right, bottom;
+    printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
+
     for (int i = 0; i < copyCount; ++i)
     {
         for (int j = 0; j < numPages; ++j)
@@ -362,7 +365,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
             {
                 index = lastPage - j;
             }
-            painter.drawImage(QPointF(margins.left(), margins.top()), poster.at(index));
+            painter.drawImage(QPointF(left, top), poster.at(index));
         }
     }
 
@@ -793,6 +796,12 @@ void MainWindowsNoGUI::SaveLayoutAs()
     QPrinter printer;
     SetPrinterSettings(&printer, PrintType::PrintPDF);
 
+    // Call IsPagesFit after setting a printer settings and check if pages is not bigger than printer's paper size
+    if (not isTiled && not IsPagesFit(printer.paperRect().size()))
+    {
+        qWarning()<<tr("Pages will be cropped because they do not fit printer paper size.");
+    }
+
     QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
                                                     qApp->ValentinaSettings()->GetPathLayout()+"/"+FileName()+".pdf",
                                                     tr("PDF file (*.pdf)"));
@@ -831,6 +840,7 @@ void MainWindowsNoGUI::PrintPreview()
     }
 
     SetPrinterSettings(printer.data(), PrintType::PrintPreview);
+    printer->setResolution(static_cast<int>(PrintDPI));
     // display print preview dialog
     QPrintPreviewDialog  preview(printer.data());
     connect(&preview, &QPrintPreviewDialog::paintRequested, this, &MainWindowsNoGUI::PrintPages);
@@ -1021,6 +1031,22 @@ bool MainWindowsNoGUI::isPagesUniform() const
         }
     }
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool MainWindowsNoGUI::IsPagesFit(const QSizeF &printPaper) const
+{
+    // On previous stage already was checked if pages have uniform size
+    // Enough will be to check only one page
+    QGraphicsRectItem *p = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
+    SCASSERT(p != nullptr);
+    const QSizeF pSize = p->rect().size();
+    if (pSize.height() <= printPaper.height() && pSize.width() <= printPaper.width())
+    {
+        return true;
+    }
+
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
