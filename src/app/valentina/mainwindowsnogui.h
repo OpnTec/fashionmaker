@@ -117,7 +117,7 @@ private:
     void ObjFile(const QString &name, int i)const;
     void DxfFile(const QString &name, int i)const;
 
-    QVector<QImage> AllSheets() const;
+    QVector<QImage> AllSheets(const QPrinter *printer = nullptr) const;
 
     void SaveLayoutAs();
     void PrintPreview();

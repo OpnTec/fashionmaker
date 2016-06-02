@@ -294,7 +294,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
         return;
     }
 
-    const QVector<QImage> images = AllSheets();
+    const QVector<QImage> images = AllSheets(printer);
 
     QVector<QImage> poster;
     if (isTiled)
@@ -738,7 +738,7 @@ void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QImage> MainWindowsNoGUI::AllSheets() const
+QVector<QImage> MainWindowsNoGUI::AllSheets(const QPrinter *printer) const
 {
     QVector<QImage> images;
     for (int i=0; i < scenes.size(); ++i)
@@ -754,9 +754,25 @@ QVector<QImage> MainWindowsNoGUI::AllSheets() const
             paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));// border
 
             // Render png
-            const QRectF r = paper->rect();
+            const QRectF source = paper->rect();
+            QRectF target = source;
+
+            if (printer)
+            {
+                // Here we try understand difference between printer's dpi and our.
+                // Get printer rect acording to our dpi.
+                const QRectF printerPageRect(0, 0, ToPixel(printer->pageSizeMM().width(), Unit::Mm),
+                                             ToPixel(printer->pageSizeMM().height(), Unit::Mm));
+                const double xscale = printer->pageRect().width() / printerPageRect.width();
+                const double yscale = printer->pageRect().height() / printerPageRect.height();
+                const double scale = qMin(xscale, yscale);
+                target.setWidth(target.width() * scale);
+                target.setHeight(target.height() * scale);
+            }
+
             // Create the image with the exact size of the shrunk scene
-            QImage image(QSize(static_cast<qint32>(r.width()), static_cast<qint32>(r.height())), QImage::Format_RGB32);
+            QImage image(QSize(static_cast<qint32>(target.width()), static_cast<qint32>(target.height())),
+                         QImage::Format_RGB32);
             image.fill(Qt::white);
             QPainter painter(&image);
             painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
@@ -764,11 +780,11 @@ QVector<QImage> MainWindowsNoGUI::AllSheets() const
             painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
                                 Qt::RoundCap, Qt::RoundJoin));
             painter.setBrush ( QBrush ( Qt::NoBrush ) );
-            scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
+            scenes.at(i)->render(&painter, target, source, Qt::IgnoreAspectRatio);
             painter.end();
             images.append(image);
 
-            // Resore
+            // Restore
             paper->setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit()))));
             brush->setColor( QColor( Qt::gray ) );
             brush->setStyle( Qt::SolidPattern );
