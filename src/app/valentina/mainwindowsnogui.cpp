@@ -791,8 +791,7 @@ void MainWindowsNoGUI::SaveLayoutAs()
         }
     }
     QPrinter printer;
-    SetPrinterSettings(&printer);
-    printer.setOutputFormat(QPrinter::PdfFormat);
+    SetPrinterSettings(&printer, PrintType::PrintPDF);
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Print to pdf"),
                                                     qApp->ValentinaSettings()->GetPathLayout()+"/"+FileName()+".pdf",
@@ -831,7 +830,7 @@ void MainWindowsNoGUI::PrintPreview()
         return;
     }
 
-    SetPrinterSettings(printer.data(), false);
+    SetPrinterSettings(printer.data(), PrintType::PrintPreview);
     // display print preview dialog
     QPrintPreviewDialog  preview(printer.data());
     connect(&preview, &QPrintPreviewDialog::paintRequested, this, &MainWindowsNoGUI::PrintPages);
@@ -857,7 +856,7 @@ void MainWindowsNoGUI::LayoutPrint()
         return;
     }
 
-    SetPrinterSettings(printer.data());
+    SetPrinterSettings(printer.data(), PrintType::PrintNative);
     QPrintDialog dialog(printer.data(), this );
     // If only user couldn't change page margins we could use method setMinMax();
     dialog.setOption(QPrintDialog::PrintCurrentPage, false);
@@ -869,7 +868,7 @@ void MainWindowsNoGUI::LayoutPrint()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, bool prepareForPrinting)
+void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &printType)
 {
     SCASSERT(printer != nullptr)
     printer->setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
@@ -911,14 +910,33 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, bool prepareForPrin
         printer->setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
     }
 
-    if (prepareForPrinting)
+    switch(printType)
     {
-        #ifdef Q_OS_WIN
-        printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName());
-        #else
-        printer->setOutputFileName(QDir::homePath() + QDir::separator() + FileName() + QLatin1Literal(".pdf"));
-        #endif
+        case PrintType::PrintPDF:
+        {
+            const QString outputFileName = QDir::homePath() + QDir::separator() + FileName();
+            #ifdef Q_OS_WIN
+            printer->setOutputFileName(outputFileName);
+            #else
+            printer->setOutputFileName(outputFileName + QLatin1Literal(".pdf"));
+            #endif
+
+            #ifdef Q_OS_MAC
+            printer->setOutputFormat(QPrinter::NativeFormat);
+            #else
+            printer->setOutputFormat(QPrinter::PdfFormat);
+            #endif
+            break;
+        }
+        case PrintType::PrintNative:
+            printer->setOutputFileName("");//Disable printing to file if was enabled.
+            printer->setOutputFormat(QPrinter::NativeFormat);
+            break;
+        case PrintType::PrintPreview: /*do nothing*/
+        default:
+            break;
     }
+
     printer->setDocName(FileName());
 
     IsLayoutGrayscale() ? printer->setColorMode(QPrinter::GrayScale) : printer->setColorMode(QPrinter::Color);

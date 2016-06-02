@@ -123,7 +123,9 @@ private:
     void PrintPreview();
     void LayoutPrint();
 
-    void SetPrinterSettings(QPrinter *printer, bool prepareForPrinting = true);
+    enum class PrintType : char {PrintPDF, PrintPreview, PrintNative};
+
+    void SetPrinterSettings(QPrinter *printer, const PrintType &printType);
     bool IsLayoutGrayscale() const;
     QPrinter::PaperSize FindTemplate(const QSizeF &size) const;
 
