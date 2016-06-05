@@ -673,6 +673,7 @@ void TMainWindow::FileSaveAs()
         return;
     }
 
+    ReadOnly(false);
     VlpCreateLock(lock, fileName);
     if (not lock->IsLocked())
     {
