@@ -305,7 +305,9 @@ COLLECTION_FILES += \
     $${PWD}/../../app/share/collection/Razmernye_priznaki_dlya_zhenskogo_zhaketa.vit \
     $${PWD}/../../app/share/collection/IMK_Zhaketa_poluprilegayuschego_silueta.val \
     $${PWD}/../../app/share/collection/Lara_Jil.vit \
-    $${PWD}/../../app/share/collection/modell_2.val
+    $${PWD}/../../app/share/collection/modell_2.val \
+    $${PWD}/../../app/share/collection/MaleShirt/MaleShirt.val \
+    $${PWD}/../../app/share/collection/MaleShirt/MaleShirt.vit
 
 
 # Compilation will fail without this files after we added them to this section.
