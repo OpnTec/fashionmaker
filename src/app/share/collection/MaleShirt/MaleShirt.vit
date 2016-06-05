@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m name="height" value="173"/>
+        <m name="hand_circ" value="24 "/>
+        <m name="neck_circ" value="41"/>
+        <m name="bust_circ" value="102"/>
+        <m name="waist_circ" value="92"/>
+        <m name="hip_circ" value="101"/>
+        <m name="neck_back_to_waist_b" value="50"/>
+        <m name="shoulder_length" value="13"/>
+        <m name="arm_shoulder_tip_to_wrist_bent" value="65"/>
+    </body-measurements>
+</vit>

@@ -1,0 +1,630 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pattern>
+    <!--Pattern created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.1</version>
+    <unit>cm</unit>
+    <author>Timo Virtaneva</author>
+    <description>This a male shirt pattern.
+
+All the values are increment values in the table of the variables.
+Look the values and adjust those for your own needs.
+
+The design is based on the measuring table. The table must be loaded, but the values in the table of variables can be changed.
+
+Adjust/verify curves after parameter modifications.
+
+Delete layouts which are not needed.</description>
+    <notes></notes>
+    <measurements>MaleShirt.vit</measurements>
+    <increments>
+        <increment name="#ToBeVerified" description="" formula="0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0"/>
+        <increment name="#BackHeight" description="Calculation&#xa;&#xa;(1/4 Height )+ Ease&#xa;&#xa;+3,0 cm Slim Fit Ease &#xa;+3,0 cm Normal Fit Ease&#xa;+3,0 cm Loose Fit Ease" formula="neck_back_to_waist_b"/>
+        <increment name="#ArmSkyeHeightBack" description="Calculate:&#xa;(1/10 BustGirth + 12cm) + ease&#xa;&#xa;+3,0 cm Slim Fit Ease &#xa;+4,0 cm Normal Fit Ease&#xa;+5,0 cm Loose Fit Ease" formula="(bust_circ/10+12)+5"/>
+        <increment name="#BustCircumfence" description="" formula="bust_circ+4"/>
+        <increment name="#FrontWidth" description="Calculation&#xa;&#xa;2/10 BustGirth - 1cm+Ease, when BustGirth &lt; 112 cm&#xa;1/2 BustGirth - (ArmSkyeWidth + BackWidth)+ Ease, when BustGirth > 112 cm&#xa;&#xa;+0,75 cm Slim Fit Ease &#xa;+1,0 cm   Normal Fit Ease&#xa;+1,5 cm   Loose Fit Ease&#xa;&#xa;&#xa;" formula="(#BustCircumfence &lt; 112 ? #BustCircumfence/5-1 : #BustCircumfence/2-(#BustCircumfence/10+2+#BustCircumfence/10+10.5))+1.5"/>
+        <increment name="#BackWidth" description="Calculation&#xa;&#xa;2/10 BustGirth - 1cm+Ease, when BustGirth &lt; 100 cm&#xa;1/10 BustGirth + 10.5+Ease, when BustGirth > 100 cm&#xa;&#xa;+1,25 cm Slim Fit Ease &#xa;+2,0 cm   Normal Fit Ease&#xa;+3.0 cm   Loose Fit Ease&#xa;&#xa;&#xa;" formula="(#BustCircumfence &lt; 100 ? #BustCircumfence/5-1: #BustCircumfence/10+10.5)+3"/>
+        <increment name="#ArmSkyeHeightFront" description="Calculation&#xa;&#xa;ArmSkyeWidth - 1 cm + Ease = (bust_circ/10+12-1) + Ease&#xa;&#xa;+3,0 cm Slim Fit Ease &#xa;+4,0 cm Normal Fit Ease&#xa;+5,0 cm Loose Fit Ease" formula="(#BustCircumfence/10+12-1)+5"/>
+        <increment name="#ArmSkyeWidth" description="Calculation:&#xa;(1/10 BustGirth + 2cm) + Ease&#xa;&#xa;+3,5 cm Slim Fit Ease &#xa;+4,5 cm Normal Fit Ease&#xa;+5,5 cm Loose Fit Ease" formula="(bust_circ/10+2)+5.5"/>
+        <increment name="#Hemline" description="Calculation&#xa;1/2 Height - 10 cm" formula="height/2-10"/>
+        <increment name="#Modications" description="" formula="0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0 "/>
+        <increment name="#ArmSkyeDrop" description="The amount of drop of the arm skye" formula="1"/>
+        <increment name="#NeckLineHeightFront" description="The height of the hght of the neckline" formula="neck_circ/6+1"/>
+        <increment name="#NeckLineDropBack" description="The drop of the back neckline" formula="1"/>
+        <increment name="#YokeHeight" description="Height of the yoke" formula="8 "/>
+        <increment name="#HemlineCurve" description="" formula="5"/>
+        <increment name="#SideIntake" description="The amout intake in the side.&#xa;Can be adjusted manually." formula="(bust_circ-waist_circ)/2/2/2&lt;0?0:(bust_circ-waist_circ)/2/2/2"/>
+        <increment name="#SideIntakeWaist" description="The amout intake in the side of the hemline.&#xa;Can be adjusted manually." formula="(bust_circ-hip_circ)/8"/>
+        <increment name="#BackIntake" description="The amout intake in the back.&#xa;Can be adjusted manually." formula="(bust_circ-waist_circ)/2/2/2&lt;0?0:(bust_circ-waist_circ)/2/2/2"/>
+        <increment name="#BackIntakeWaist" description="The amout intake in the back in the hemline.&#xa;Can be adjusted manually." formula="(bust_circ-hip_circ)/8"/>
+        <increment name="#BackPleat" description="Pleat on the  center of the back" formula="3"/>
+        <increment name="#YokeIntake" description="The side intake amount" formula="1.5"/>
+        <increment name="#ButtonPanelWidth" description="Amount fabric needed for  button panel. The seam allowance will be added." formula="5.5"/>
+        <increment name="#ShortSleeveLenght" description="Length of the sleeve" formula="32"/>
+        <increment name="#PocketHeight" description="Height of the pocket" formula="13"/>
+        <increment name="#PocketWidth" description="Width of the pocket" formula="9"/>
+        <increment name="#PocketBottomForm" description="How much the pocekt bottom is dopped in the center. Value 0 means flat bottom." formula="1"/>
+        <increment name="#PocketFold" description="Pocket upper part fold amount" formula="3"/>
+        <increment name="#PocketFoldCenter" description="Pocket center form; Value 0 is flat center" formula="1"/>
+        <increment name="#PocketFlap" description="Height of the pocket flap" formula="3"/>
+        <increment name="#PocketFlapCenter" description="Pocket flap center form; Value 0 is flat center" formula="1"/>
+        <increment name="#CuffWidth" description="" formula="6 "/>
+        <increment name="#PlacketWidth" description="" formula="3 "/>
+        <increment name="#CanBeAdjusted" description="" formula="0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0"/>
+        <increment name="#PlacketDepth" description="The placket depth" formula="15"/>
+        <increment name="#CollarHeight" description="Collar top height on the back" formula="3.8"/>
+        <increment name="#CollarAngle" description="The angle of the collar" formula="120"/>
+        <increment name="#CollarFrontHeight" description="Collar front height" formula="7"/>
+        <increment name="#CalculationsMeasurements" description="" formula="0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0"/>
+        <increment name="#NecWidth" description="Calculation&#xa;&#xa;1/6 Neck Girth" formula="neck_circ/6"/>
+        <increment name="#ShoulderWidth" description="Calculation:&#xa;Shoulder lenght + ease" formula="shoulder_length+5"/>
+        <increment name="#ShoulderDropBack" description="Shoulder point drop on back" formula="2"/>
+        <increment name="#ShoulderDropFront" description="Shoulder point drop on front&#xa;" formula="4"/>
+        <increment name="#ShoulderShilft" description="Amount of the shift of the shoulder seam from back to front" formula="1.5 "/>
+        <increment name="#SleeveCapHeightAdjust" description="Adjusting sleeve cap  heights" formula="6"/>
+        <increment name="#SleeveDart" description="The amount of the dart in the sleeve" formula="2"/>
+        <increment name="#SleeveWristGirth" description="Hand wristcircumfence + ease + darts" formula="hand_circ+3+2*#SleeveDart"/>
+        <increment name="#SleeveHemLineTurn" description="Short sleeve hemline turn amount" formula="2"/>
+        <increment name="#ArmLenght" description="Lenght of the arm" formula="arm_shoulder_tip_to_wrist_bent+3"/>
+        <increment name="#CuffGirth" description="Cuff circumfence" formula="#SleeveWristGirth-2*#SleeveDart"/>
+        <increment name="#PrintingFix" description="The is a value to control Valentina to print inside of the of the piece" formula="0.01"/>
+        <increment name="#CollarButton" description="The amount need to be added to the collar for the button panel" formula="1.5"/>
+        <increment name="#CollarFrontBaseHeight" description="Collabase height at the front" formula="2"/>
+        <increment name="#CollarUpperButtonLength" description="The  length of the Collar Top  from button" formula="#CollarButton+1"/>
+    </increments>
+    <draw name="Men shirt">
+        <calculation>
+            <point type="single" x="0.0130144" y="3.58763" id="1" name="ShoulderLine" mx="0.201702" my="-1.01083"/>
+            <point type="endLine" typeLine="none" id="2" name="Hemline" basePoint="1" mx="-2.54342" lineColor="black" my="0.539015" angle="270" length="#Hemline"/>
+            <point type="alongLine" typeLine="none" id="3" name="BustLine" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="#ArmSkyeHeightBack"/>
+            <point type="alongLine" typeLine="none" id="4" name="Waistline" firstPoint="1" secondPoint="2" mx="0.132292" lineColor="black" my="0.264583" length="#BackHeight"/>
+            <point type="normal" typeLine="dotLine" id="5" name="A1" firstPoint="3" secondPoint="1" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#FrontWidth+#ArmSkyeWidth+#BackWidth"/>
+            <point type="alongLine" typeLine="none" id="6" name="A2" firstPoint="3" secondPoint="5" mx="0.132292" lineColor="black" my="0.264583" length="#BackWidth"/>
+            <point type="alongLine" typeLine="none" id="7" name="A3" firstPoint="6" secondPoint="5" mx="0.132292" lineColor="black" my="0.264583" length="#ArmSkyeWidth"/>
+            <point type="alongLine" typeLine="none" id="8" name="A4" firstPoint="3" secondPoint="5" mx="-0.603039" lineColor="black" my="-1.31921" length="Line_BustLine_A1/2"/>
+            <point type="normal" typeLine="none" id="9" name="A5" firstPoint="6" secondPoint="3" mx="0.157301" lineColor="black" my="-1.43966" angle="0" length="#ArmSkyeHeightBack"/>
+            <point type="normal" typeLine="none" id="10" name="A6" firstPoint="7" secondPoint="8" mx="0.358548" lineColor="black" my="-0.414184" angle="0" length="#ArmSkyeHeightFront"/>
+            <point type="normal" typeLine="none" id="11" name="A7" firstPoint="5" secondPoint="7" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#ArmSkyeHeightFront"/>
+            <point type="normal" typeLine="dotLine" id="12" name="A8" firstPoint="2" secondPoint="4" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_BustLine_A1"/>
+            <point type="normal" typeLine="dotLine" id="13" name="A9" firstPoint="4" secondPoint="3" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_BustLine_A1"/>
+            <point type="alongLine" typeLine="none" id="14" name="A10" firstPoint="2" secondPoint="12" mx="-0.624595" lineColor="black" my="0.340275" length="Line_Hemline_A8/2"/>
+            <point type="alongLine" typeLine="none" id="15" name="A11" firstPoint="4" secondPoint="13" mx="-0.548906" lineColor="black" my="0.567338" length="Line_Waistline_A9/2"/>
+            <point type="alongLine" typeLine="none" id="16" name="A12" firstPoint="1" secondPoint="9" mx="-1.79088" lineColor="black" my="-0.527311" length="#NecWidth+1"/>
+            <point type="normal" typeLine="none" id="17" name="A13" firstPoint="16" secondPoint="1" mx="-1.73432" lineColor="black" my="-0.301056" angle="0" length="2"/>
+            <point type="normal" typeLine="none" id="18" name="A14" firstPoint="9" secondPoint="16" mx="-0.0397645" lineColor="black" my="0.195759" angle="180" length="#ShoulderDropBack"/>
+            <point type="normal" typeLine="none" id="19" name="A15" firstPoint="17" secondPoint="18" mx="-1.56462" lineColor="black" my="-1.03639" angle="180" length="#ShoulderShilft"/>
+            <point type="normal" typeLine="none" id="20" name="A16" firstPoint="18" secondPoint="17" mx="-1.78771" lineColor="black" my="-1.15544" angle="0" length="1.5"/>
+            <point type="alongLine" typeLine="none" id="21" name="A17" firstPoint="19" secondPoint="20" mx="-1.9139" lineColor="black" my="-0.420032" length="#ShoulderWidth"/>
+            <point type="alongLine" typeLine="none" id="22" name="A18" firstPoint="11" secondPoint="10" mx="-1.73432" lineColor="black" my="-0.583875" length="#NecWidth"/>
+            <point type="alongLine" typeLine="none" id="23" name="A19" firstPoint="10" secondPoint="7" mx="0.24542" lineColor="black" my="-0.470748" length="#ShoulderDropFront"/>
+            <point type="alongLine" typeLine="none" id="24" name="A20" firstPoint="11" secondPoint="5" mx="0.132292" lineColor="black" my="0.264583" length="#NeckLineHeightFront"/>
+            <point type="alongLine" typeLine="none" id="25" name="A21" firstPoint="23" secondPoint="7" mx="-2.16305" lineColor="black" my="-0.0211618" length="#ShoulderShilft"/>
+            <point type="normal" typeLine="none" id="26" name="A22" firstPoint="22" secondPoint="10" mx="-1.90401" lineColor="black" my="-0.35762" angle="180" length="#ShoulderShilft"/>
+            <point type="alongLine" typeLine="none" id="27" name="A23" firstPoint="26" secondPoint="25" mx="-3.35397" lineColor="black" my="0.800932" length="#ShoulderWidth"/>
+            <point type="alongLine" typeLine="none" id="28" name="A24" firstPoint="8" secondPoint="14" mx="-1.84745" lineColor="black" my="0.208019" length="#ArmSkyeDrop"/>
+            <spline type="pathInteractive" id="29" color="black">
+                <pathPoint angle1="82.679" pSpline="27" angle2="262.679" length1="0" length2="14.1361"/>
+                <pathPoint angle1="182.66" pSpline="28" angle2="2.66009" length1="10.8903" length2="15.8268"/>
+                <pathPoint angle1="281.751" pSpline="21" angle2="101.751" length1="15.8466" length2="0"/>
+            </spline>
+            <point type="alongLine" typeLine="none" id="30" name="A25" firstPoint="1" secondPoint="3" mx="-1.73432" lineColor="black" my="0.151455" length="#YokeHeight"/>
+            <point type="curveIntersectAxis" typeLine="hair" id="31" name="A26" curve="29" basePoint="30" mx="-1.95438" lineColor="black" my="-0.618638" angle="180"/>
+            <point type="curveIntersectAxis" typeLine="none" id="32" name="A27" curve="29" basePoint="30" mx="-1.883" lineColor="black" my="-0.409598" angle="180+180/3.14*atan(#YokeIntake/Line_A25_A26)"/>
+            <point type="alongLine" typeLine="none" id="33" name="A28" firstPoint="1" secondPoint="30" mx="-1.79088" lineColor="black" my="0.208019" length="#NeckLineDropBack"/>
+            <point type="alongLine" typeLine="none" id="34" name="A29" firstPoint="14" secondPoint="15" mx="-0.729616" lineColor="black" my="-2.88874" length="#HemlineCurve"/>
+            <point type="alongLine" typeLine="none" id="35" name="A30" firstPoint="15" secondPoint="13" mx="-1.83561" lineColor="black" my="0.41596" length="#SideIntake"/>
+            <point type="alongLine" typeLine="none" id="36" name="A31" firstPoint="15" secondPoint="4" mx="0.510735" lineColor="black" my="0.567338" length="#SideIntake"/>
+            <point type="normal" typeLine="hair" id="37" name="A32" firstPoint="24" secondPoint="5" mx="0.358548" lineColor="black" my="0.208019" angle="180" length="#ButtonPanelWidth"/>
+            <point type="normal" typeLine="hair" id="38" name="A33" firstPoint="12" secondPoint="13" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#ButtonPanelWidth"/>
+            <line typeLine="hair" id="41" firstPoint="38" secondPoint="37" lineColor="black"/>
+            <spline type="simpleInteractive" point4="26" angle1="2.71281" angle2="267.394" id="42" color="black" length1="5.61197" length2="4.27829" point1="24"/>
+            <line typeLine="hair" id="43" firstPoint="26" secondPoint="27" lineColor="black"/>
+            <line typeLine="hair" id="44" firstPoint="21" secondPoint="19" lineColor="black"/>
+            <spline type="simpleInteractive" point4="33" angle1="273.614" angle2="185.832" id="45" color="black" length1="1.64458" length2="5.54349" point1="19"/>
+            <spline type="simpleInteractive" point4="30" angle1="9.62256" angle2="180.368" id="47" color="black" length1="7.57655" length2="8.88116" point1="32"/>
+            <spline type="pathInteractive" id="50" color="black">
+                <pathPoint angle1="180.025" pSpline="12" angle2="0.0254212" length1="0" length2="35.7433"/>
+                <pathPoint angle1="179.092" pSpline="34" angle2="359.092" length1="10.5341" length2="11.1528"/>
+                <pathPoint angle1="180.026" pSpline="2" angle2="0.0258405" length1="36.0729" length2="0"/>
+            </spline>
+            <line typeLine="hair" id="51" firstPoint="28" secondPoint="35" lineColor="black"/>
+            <line typeLine="hair" id="53" firstPoint="28" secondPoint="36" lineColor="black"/>
+            <point type="normal" typeLine="hair" id="55" name="A34" firstPoint="30" secondPoint="33" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="#BackPleat"/>
+            <point type="normal" typeLine="hair" id="56" name="A35" firstPoint="2" secondPoint="4" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="#BackPleat"/>
+            <line typeLine="hair" id="57" firstPoint="33" secondPoint="30" lineColor="black"/>
+            <line typeLine="hair" id="58" firstPoint="55" secondPoint="56" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="333" name="A36" firstPoint="4" secondPoint="15" mx="-0.775972" lineColor="black" my="0.41596" length="Line_Waistline_A11/2"/>
+            <point type="normal" typeLine="dotLine" id="334" name="A37" firstPoint="333" secondPoint="4" mx="-0.851661" lineColor="black" my="-1.55195" angle="0" length="Line_ShoulderLine_Waistline-Line_ShoulderLine_BustLine"/>
+            <point type="normal" typeLine="dotLine" id="335" name="A38" firstPoint="333" secondPoint="4" mx="0.510735" lineColor="black" my="-0.56461" angle="180" length="(Line_ShoulderLine_Hemline-Line_ShoulderLine_Waistline)/2"/>
+            <point type="alongLine" typeLine="none" id="336" name="A39" firstPoint="333" secondPoint="4" mx="0.435047" lineColor="black" my="-1.24919" length="#BackIntake"/>
+            <point type="alongLine" typeLine="none" id="337" name="A40" firstPoint="333" secondPoint="15" mx="-1.83561" lineColor="black" my="-1.32488" length="#BackIntake"/>
+            <point type="alongLine" typeLine="none" id="341" name="A41" firstPoint="2" secondPoint="14" mx="-0.624596" lineColor="black" my="0.63288" length="Line_Hemline_A10/2"/>
+            <point type="alongLine" typeLine="none" id="342" name="A42" firstPoint="341" secondPoint="2" mx="0.882553" lineColor="black" my="0.00687605" length="#BackIntakeWaist"/>
+            <point type="alongLine" typeLine="none" id="343" name="A43" firstPoint="341" secondPoint="14" mx="-2.41664" lineColor="black" my="0.15149" length="#BackIntakeWaist"/>
+            <point type="alongLine" typeLine="none" id="344" name="A44" firstPoint="14" secondPoint="2" mx="1.58858" lineColor="black" my="-0.169259" length="#SideIntakeWaist"/>
+            <point type="alongLine" typeLine="none" id="345" name="A45" firstPoint="14" secondPoint="12" mx="-2.48637" lineColor="black" my="0.0510439" length="#SideIntakeWaist"/>
+            <point type="normal" typeLine="none" id="348" name="A46" firstPoint="335" secondPoint="333" mx="-2.04916" lineColor="black" my="-0.488922" angle="0" length="#PrintingFix"/>
+            <line typeLine="hair" id="349" firstPoint="343" secondPoint="348" lineColor="black"/>
+            <line typeLine="hair" id="350" firstPoint="348" secondPoint="337" lineColor="black"/>
+            <line typeLine="hair" id="351" firstPoint="337" secondPoint="334" lineColor="black"/>
+            <line typeLine="hair" id="352" firstPoint="334" secondPoint="336" lineColor="black"/>
+            <line typeLine="hair" id="353" firstPoint="336" secondPoint="335" lineColor="black"/>
+            <line typeLine="hair" id="354" firstPoint="335" secondPoint="342" lineColor="black"/>
+            <line typeLine="hair" id="383" firstPoint="35" secondPoint="345" lineColor="black"/>
+            <line typeLine="hair" id="384" firstPoint="344" secondPoint="36" lineColor="black"/>
+            <point type="curveIntersectAxis" typeLine="hair" id="385" name="A47" curve="50" basePoint="345" mx="-2.10923" lineColor="black" my="-1.25386" angle="AngleLine_A30_A45"/>
+            <point type="curveIntersectAxis" typeLine="hair" id="388" name="A48" curve="50" basePoint="344" mx="0.710748" lineColor="black" my="-1.25386" angle="AngleLine_A44_A31"/>
+            <point type="curveIntersectAxis" typeLine="hair" id="402" name="A49" curve="50" basePoint="343" mx="-3.64741" lineColor="black" my="-2.22658" angle="AngleLine_A43_A46"/>
+            <point type="curveIntersectAxis" typeLine="hair" id="405" name="A50" curve="50" basePoint="342" mx="1.76444" lineColor="black" my="-1.62527" angle="AngleLine_A38_A42"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="167" idObject="31" mx="-1.95438" my="-0.618638"/>
+            <spline type="modelingPath" inUse="true" id="168" idObject="29"/>
+            <point type="modeling" inUse="true" id="169" idObject="21" mx="-0.829294" my="-1.43233"/>
+            <point type="modeling" inUse="true" id="170" idObject="19" mx="-1.56462" my="-1.03639"/>
+            <spline type="modelingSpline" inUse="true" id="171" idObject="45"/>
+            <point type="modeling" inUse="true" id="172" idObject="33" mx="-1.79088" my="0.208019"/>
+            <point type="modeling" inUse="true" id="173" idObject="30" mx="-1.73432" my="0.151455"/>
+            <point type="modeling" inUse="true" id="389" idObject="38" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="390" idObject="37" mx="0.358548" my="0.208019"/>
+            <point type="modeling" inUse="true" id="391" idObject="24" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="392" idObject="42"/>
+            <point type="modeling" inUse="true" id="393" idObject="26" mx="-1.90401" my="-0.35762"/>
+            <point type="modeling" inUse="true" id="394" idObject="27" mx="-3.35397" my="0.800932"/>
+            <spline type="modelingPath" inUse="true" id="395" idObject="29"/>
+            <point type="modeling" inUse="true" id="396" idObject="28" mx="-1.84745" my="0.208019"/>
+            <point type="modeling" inUse="true" id="397" idObject="35" mx="-1.83561" my="0.41596"/>
+            <point type="modeling" inUse="true" id="398" idObject="385" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="399" idObject="50"/>
+            <point type="modeling" inUse="true" id="400" idObject="12" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="422" idObject="56" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="423" idObject="2" mx="-2.54342" my="0.539015"/>
+            <spline type="modelingPath" inUse="true" id="424" idObject="50"/>
+            <point type="modeling" inUse="true" id="425" idObject="405" mx="1.76444" my="-1.62527"/>
+            <point type="modeling" inUse="true" id="426" idObject="335" mx="0.510735" my="-0.492303"/>
+            <point type="modeling" inUse="true" id="427" idObject="336" mx="0.435047" my="-1.24919"/>
+            <point type="modeling" inUse="true" id="428" idObject="334" mx="-0.851661" my="-1.55195"/>
+            <point type="modeling" inUse="true" id="429" idObject="337" mx="-1.83561" my="-1.32488"/>
+            <point type="modeling" inUse="true" id="430" idObject="348" mx="-1.75993" my="-0.416615"/>
+            <point type="modeling" inUse="true" id="431" idObject="402" mx="-3.64741" my="-2.22658"/>
+            <spline type="modelingPath" inUse="true" id="432" idObject="50"/>
+            <point type="modeling" inUse="true" id="433" idObject="388" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="434" idObject="36" mx="0.510735" my="0.567338"/>
+            <point type="modeling" inUse="true" id="435" idObject="28" mx="-1.84745" my="0.208019"/>
+            <spline type="modelingPath" inUse="true" id="436" idObject="29"/>
+            <point type="modeling" inUse="true" id="437" idObject="32" mx="-1.883" my="-0.409598"/>
+            <spline type="modelingSpline" inUse="true" id="438" idObject="47"/>
+            <point type="modeling" inUse="true" id="439" idObject="30" mx="-1.73432" my="0.151455"/>
+            <point type="modeling" inUse="true" id="440" idObject="55" mx="0.132292" my="0.264583"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="174" name="Yoke" supplement="1" mx="-8.05221" width="1" my="3.27846">
+                <node type="NodePoint" nodeType="Contour" idObject="167" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="168" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="169" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="170" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="171" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="172" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="173" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="401" name="FrontPanel" supplement="1" mx="-11.0934" width="1" my="6.43098">
+                <node type="NodePoint" nodeType="Contour" idObject="389" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="390" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="391" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="392" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="393" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="394" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="395" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="396" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="397" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="398" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="399" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="400" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="441" name="BackPanel" supplement="1" mx="-7.55641" width="1" my="6.27021">
+                <node type="NodePoint" nodeType="Contour" idObject="422" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="423" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="424" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="425" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="426" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="427" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="428" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="429" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="430" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="431" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="432" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="433" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="434" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="435" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="436" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="437" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="438" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="439" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="440" mx="0" my="0"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+    <draw name="Pocket">
+        <calculation>
+            <point type="single" x="19.3222" y="6.36906" id="59" name="P" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="60" name="P1" basePoint="59" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#PocketWidth"/>
+            <point type="normal" typeLine="hair" id="61" name="P2" firstPoint="60" secondPoint="59" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#PocketHeight"/>
+            <point type="normal" typeLine="none" id="62" name="P3" firstPoint="61" secondPoint="60" mx="-0.369168" lineColor="black" my="-1.13951" angle="0" length="Line_P_P1/2"/>
+            <point type="normal" typeLine="none" id="63" name="P4" firstPoint="62" secondPoint="61" mx="-0.268876" lineColor="black" my="0.197722" angle="180" length="#PocketBottomForm"/>
+            <point type="normal" typeLine="none" id="64" name="P5" firstPoint="61" secondPoint="60" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_P_P1"/>
+            <line typeLine="hair" id="65" firstPoint="61" secondPoint="63" lineColor="black"/>
+            <line typeLine="hair" id="66" firstPoint="63" secondPoint="64" lineColor="black"/>
+            <line typeLine="hair" id="67" firstPoint="64" secondPoint="59" lineColor="black"/>
+            <point type="normal" typeLine="hair" id="69" name="P6" firstPoint="59" secondPoint="60" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#PocketFold"/>
+            <point type="normal" typeLine="hair" id="70" name="P7" firstPoint="60" secondPoint="59" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="#PocketFold"/>
+            <line typeLine="dotLine" id="71" firstPoint="69" secondPoint="70" lineColor="darkRed"/>
+            <point type="alongLine" typeLine="none" id="301" name="B1" firstPoint="69" secondPoint="70" mx="0.132292" lineColor="black" my="0.264583" length="Line_P6_P7/2"/>
+            <point type="normal" typeLine="hair" id="302" name="B2" firstPoint="301" secondPoint="70" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#PocketFoldCenter"/>
+            <line typeLine="hair" id="303" firstPoint="69" secondPoint="302" lineColor="black"/>
+            <line typeLine="hair" id="304" firstPoint="302" secondPoint="70" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="305" name="B3" firstPoint="59" secondPoint="64" mx="0.132292" lineColor="black" my="0.264583" length="#PocketFlap"/>
+            <point type="alongLine" typeLine="none" id="306" name="B4" firstPoint="60" secondPoint="61" mx="0.132292" lineColor="black" my="0.264583" length="#PocketFlap"/>
+            <point type="alongLine" typeLine="none" id="307" name="B5" firstPoint="305" secondPoint="306" mx="0.132292" lineColor="black" my="0.264583" length="Line_P6_P7/2"/>
+            <point type="normal" typeLine="none" id="308" name="B6" firstPoint="307" secondPoint="305" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#PocketFlapCenter"/>
+            <line typeLine="hair" id="309" firstPoint="305" secondPoint="308" lineColor="black"/>
+            <line typeLine="hair" id="310" firstPoint="308" secondPoint="306" lineColor="black"/>
+            <spline type="pathInteractive" id="311" color="black">
+                <pathPoint angle1="162.345" pSpline="64" angle2="342.345" length1="0" length2="1.62618"/>
+                <pathPoint angle1="178.208" pSpline="63" angle2="358.208" length1="0.784351" length2="0.759786"/>
+                <pathPoint angle1="200.538" pSpline="61" angle2="20.538" length1="1.97939" length2="0"/>
+            </spline>
+            <spline type="pathInteractive" id="312" color="black">
+                <pathPoint angle1="155.947" pSpline="305" angle2="335.947" length1="0" length2="1.60463"/>
+                <pathPoint angle1="180.976" pSpline="308" angle2="0.975753" length1="1.23522" length2="1.57482"/>
+                <pathPoint angle1="204.17" pSpline="306" angle2="24.1698" length1="1.41679" length2="0"/>
+            </spline>
+            <spline type="pathInteractive" id="313" color="black">
+                <pathPoint angle1="206.292" pSpline="69" angle2="26.2917" length1="0" length2="1.56068"/>
+                <pathPoint angle1="178.773" pSpline="302" angle2="358.773" length1="1.09824" length2="1.18106"/>
+                <pathPoint angle1="152.459" pSpline="70" angle2="332.459" length1="1.15293" length2="0"/>
+            </spline>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="175" idObject="59" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="176" idObject="69" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="177" idObject="70" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="178" idObject="60" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="179" idObject="61" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="180" idObject="63" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="181" idObject="64" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="314" idObject="64" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="315" idObject="69" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="316" idObject="313"/>
+            <point type="modeling" inUse="true" id="317" idObject="70" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="318" idObject="61" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="319" idObject="311"/>
+            <point type="modeling" inUse="true" id="321" idObject="305" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="322" idObject="59" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="323" idObject="60" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="324" idObject="306" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="325" idObject="307" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="327" idObject="305" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="328" idObject="59" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="329" idObject="60" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="330" idObject="306" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="331" idObject="312"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="182" name="Pocket" supplement="1" mx="68.0595" width="1" my="45.4124">
+                <node type="NodePoint" nodeType="Contour" idObject="175" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="176" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="177" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="178" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="179" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="180" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="181" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="320" name="PocketRound" supplement="1" mx="81.7244" width="1" my="45.8357">
+                <node type="NodePoint" nodeType="Contour" idObject="314" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="315" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="316" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="317" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="318" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="319" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="326" name="PocketFlap" supplement="1" mx="67.876" width="1" my="32.9628">
+                <node type="NodePoint" nodeType="Contour" idObject="321" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="322" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="323" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="324" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="325" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="332" name="PocketFlapRound" supplement="1" mx="81.7244" width="1" my="32.9627">
+                <node type="NodePoint" nodeType="Contour" idObject="327" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="328" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="329" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="330" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="331" mx="0" my="0"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+    <draw name="Sleeve">
+        <calculation>
+            <point type="single" x="49.9886" y="19.5508" id="72" name="C" mx="0.132292" my="0.264583"/>
+            <point type="endLine" typeLine="hair" id="73" name="C1" basePoint="72" mx="0.500641" lineColor="black" my="-0.472115" angle="270" length="#ArmLenght"/>
+            <point type="alongLine" typeLine="none" id="74" name="C2" firstPoint="72" secondPoint="73" mx="0.132292" lineColor="black" my="0.264583" length="(SplPath_A23_A27+SplPath_A26_A17)/3-#SleeveCapHeightAdjust"/>
+            <point type="normal" typeLine="none" id="75" name="C3" firstPoint="74" secondPoint="72" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="5"/>
+            <point type="shoulder" typeLine="hair" id="76" name="C4" p2Line="75" pShoulder="72" mx="0.132292" lineColor="black" my="0.264583" length="(SplPath_A23_A27+SplPath_A26_A17)/2-0.5" p1Line="74"/>
+            <point type="normal" typeLine="hair" id="77" name="C5" firstPoint="74" secondPoint="72" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="Line_C2_C4"/>
+            <line typeLine="dotLine" id="78" firstPoint="76" secondPoint="72" lineColor="green"/>
+            <line typeLine="dotLine" id="79" firstPoint="72" secondPoint="77" lineColor="green"/>
+            <point type="alongLine" typeLine="none" id="80" name="C6" firstPoint="76" secondPoint="72" mx="0.132292" lineColor="black" my="0.264583" length="Line_C4_C/2"/>
+            <point type="alongLine" typeLine="none" id="81" name="C7" firstPoint="76" secondPoint="72" mx="-1.30332" lineColor="black" my="-0.931763" length="Line_C4_C/4"/>
+            <point type="alongLine" typeLine="none" id="82" name="C8" firstPoint="76" secondPoint="72" mx="0.132292" lineColor="black" my="0.264583" length="Line_C4_C/4*3"/>
+            <point type="normal" typeLine="none" id="83" name="C9" firstPoint="81" secondPoint="80" mx="0.371565" lineColor="black" my="0.623487" angle="180" length="1"/>
+            <point type="normal" typeLine="none" id="84" name="C10" firstPoint="82" secondPoint="72" mx="-0.824785" lineColor="black" my="-1.4103" angle="0" length="1"/>
+            <point type="alongLine" typeLine="none" id="85" name="C11" firstPoint="72" secondPoint="77" mx="0.132292" lineColor="black" my="0.264583" length="Line_C_C5/3"/>
+            <point type="alongLine" typeLine="none" id="86" name="C12" firstPoint="72" secondPoint="77" mx="0.132292" lineColor="black" my="0.264583" length="Line_C_C5/3*2"/>
+            <point type="normal" typeLine="none" id="87" name="C13" firstPoint="85" secondPoint="72" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="2"/>
+            <spline type="pathInteractive" id="88" color="black">
+                <pathPoint angle1="133.043" pSpline="76" angle2="313.043" length1="0" length2="0.0815231"/>
+                <pathPoint angle1="211.702" pSpline="83" angle2="31.7019" length1="2.95142" length2="3.07339"/>
+                <pathPoint angle1="218.231" pSpline="80" angle2="38.2306" length1="1.59834" length2="1.82572"/>
+                <pathPoint angle1="215.201" pSpline="84" angle2="35.2008" length1="1.35994" length2="2.51616"/>
+                <pathPoint angle1="179.166" pSpline="72" angle2="359.166" length1="3.23621" length2="3.36832"/>
+                <pathPoint angle1="145.801" pSpline="87" angle2="325.801" length1="3.96393" length2="4.07466"/>
+                <pathPoint angle1="146.371" pSpline="86" angle2="326.371" length1="0.882877" length2="1.41727"/>
+                <pathPoint angle1="167.341" pSpline="77" angle2="347.341" length1="0.0924647" length2="0.567883"/>
+            </spline>
+            <point type="alongLine" typeLine="none" id="89" name="C14" firstPoint="73" secondPoint="72" mx="-1.72168" lineColor="black" my="0.903625" length="#CuffWidth"/>
+            <point type="normal" typeLine="none" id="90" name="C15" firstPoint="89" secondPoint="73" mx="0.807598" lineColor="black" my="-1.45438" angle="0" length="#SleeveWristGirth/2"/>
+            <point type="normal" typeLine="none" id="91" name="C16" firstPoint="89" secondPoint="73" mx="0.0095086" lineColor="black" my="-1.63855" angle="180" length="#SleeveWristGirth/2"/>
+            <point type="alongLine" typeLine="none" id="92" name="C17" firstPoint="90" secondPoint="89" mx="-0.198479" lineColor="black" my="0.350663" length="Line_C14_C15*0.4"/>
+            <point type="normal" typeLine="hair" id="93" name="C18" firstPoint="92" secondPoint="90" mx="-1.89363" lineColor="black" my="-0.472115" angle="0" length="#PlacketDepth"/>
+            <point type="alongLine" typeLine="none" id="94" name="C19" firstPoint="92" secondPoint="91" mx="0.132292" lineColor="black" my="0.264583" length="2"/>
+            <point type="alongLine" typeLine="none" id="95" name="C20" firstPoint="94" secondPoint="91" mx="0.132292" lineColor="black" my="0.264583" length="#SleeveDart"/>
+            <point type="alongLine" typeLine="none" id="96" name="C21" firstPoint="95" secondPoint="91" mx="0.132292" lineColor="black" my="0.264583" length="#SleeveDart+0.5"/>
+            <point type="alongLine" typeLine="none" id="97" name="C22" firstPoint="96" secondPoint="91" mx="-0.222289" lineColor="black" my="0.696084" length="#SleeveDart"/>
+            <point type="normal" typeLine="hair" id="98" name="C23" firstPoint="95" secondPoint="94" mx="-1.95502" lineColor="black" my="-0.410723" angle="0" length="4"/>
+            <point type="normal" typeLine="hair" id="99" name="C24" firstPoint="97" secondPoint="96" mx="-2.01641" lineColor="black" my="-0.594898" angle="0" length="4"/>
+            <point type="alongLine" typeLine="none" id="100" name="C25" firstPoint="92" secondPoint="90" mx="-1.95634" lineColor="black" my="-1.45592" length="#PrintingFix"/>
+            <line typeLine="hair" id="101" firstPoint="76" secondPoint="91" lineColor="black"/>
+            <line typeLine="hair" id="102" firstPoint="77" secondPoint="90" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="103" name="C26" firstPoint="91" secondPoint="89" mx="-0.236057" lineColor="black" my="-1.39299" length="Line_C14_C16/6"/>
+            <point type="height" typeLine="hair" id="104" name="C27" basePoint="103" p2Line="91" mx="-0.0518825" lineColor="black" my="0.57154" p1Line="76"/>
+            <point type="alongLine" typeLine="none" id="105" name="C28" firstPoint="90" secondPoint="89" mx="0.439249" lineColor="black" my="-1.45438" length="Line_C14_C15/6"/>
+            <point type="height" typeLine="hair" id="106" name="C29" basePoint="105" p2Line="90" mx="-2.0778" lineColor="black" my="0.0190171" p1Line="77"/>
+            <line typeLine="hair" id="107" firstPoint="99" secondPoint="96" lineColor="black"/>
+            <line typeLine="hair" id="108" firstPoint="98" secondPoint="94" lineColor="black"/>
+            <line typeLine="hair" id="109" firstPoint="100" secondPoint="93" lineColor="black"/>
+            <spline type="simpleInteractive" point4="89" angle1="12.2644" angle2="338.776" id="110" color="black" length1="4.83467" length2="0.851297" point1="104"/>
+            <spline type="simpleInteractive" point4="100" angle1="164.47" angle2="0" id="111" color="black" length1="2.91869" length2="0" point1="106"/>
+            <line typeLine="hair" id="112" firstPoint="96" secondPoint="95" lineColor="black"/>
+            <line typeLine="hair" id="113" firstPoint="94" secondPoint="92" lineColor="black"/>
+            <point type="normal" typeLine="hair" id="114" name="C30" firstPoint="89" secondPoint="73" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#CuffGirth+#PlacketWidth-1"/>
+            <point type="normal" typeLine="hair" id="115" name="C31" firstPoint="73" secondPoint="89" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="#CuffGirth+#PlacketWidth-1"/>
+            <line typeLine="hair" id="116" firstPoint="114" secondPoint="115" lineColor="black"/>
+            <point type="alongLine" typeLine="none" id="117" name="C32" firstPoint="72" secondPoint="89" mx="0.132292" lineColor="black" my="0.264583" length="#ShortSleeveLenght"/>
+            <point type="lineIntersectAxis" typeLine="hair" id="118" name="C33" basePoint="117" p2Line="90" mx="-1.83224" lineColor="black" my="-1.02464" angle="0" p1Line="77"/>
+            <point type="lineIntersectAxis" typeLine="hair" id="119" name="C34" basePoint="117" p2Line="91" mx="0.193683" lineColor="black" my="-1.14742" angle="180" p1Line="76"/>
+            <point type="alongLine" typeLine="none" id="120" name="C35" firstPoint="117" secondPoint="72" mx="0.132292" lineColor="black" my="0.264583" length="#SleeveHemLineTurn"/>
+            <point type="lineIntersectAxis" typeLine="none" id="121" name="C36" basePoint="120" p2Line="118" mx="0.132292" lineColor="black" my="0.264583" angle="0" p1Line="77"/>
+            <point type="lineIntersectAxis" typeLine="none" id="122" name="C37" basePoint="120" p2Line="119" mx="0.132292" lineColor="black" my="0.264583" angle="180" p1Line="76"/>
+            <point type="alongLine" typeLine="none" id="123" name="C38" firstPoint="117" secondPoint="89" mx="0.132292" lineColor="black" my="0.264583" length="#SleeveHemLineTurn"/>
+            <point type="normal" typeLine="hair" id="124" name="C39" firstPoint="123" secondPoint="117" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Line_C35_C37"/>
+            <point type="normal" typeLine="hair" id="125" name="C40" firstPoint="123" secondPoint="117" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="Line_C35_C36"/>
+            <line typeLine="hair" id="126" firstPoint="119" secondPoint="124" lineColor="black"/>
+            <line typeLine="hair" id="127" firstPoint="118" secondPoint="125" lineColor="black"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="200" idObject="73" mx="0.500641" my="-0.472115"/>
+            <point type="modeling" inUse="true" id="201" idObject="89" mx="-1.77084" my="0.264583"/>
+            <point type="modeling" inUse="true" id="202" idObject="114" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="203" idObject="115" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="205" idObject="73" mx="0.500641" my="-0.472115"/>
+            <point type="modeling" inUse="true" id="206" idObject="89" mx="-1.77084" my="0.264583"/>
+            <point type="modeling" inUse="true" id="207" idObject="114" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="208" idObject="115" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="210" idObject="124" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="211" idObject="119" mx="0.193683" my="-1.14742"/>
+            <point type="modeling" inUse="true" id="212" idObject="76" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="213" idObject="88"/>
+            <point type="modeling" inUse="true" id="214" idObject="77" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="215" idObject="118" mx="-1.83224" my="-1.02464"/>
+            <point type="modeling" inUse="true" id="216" idObject="125" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="283" idObject="89" mx="-1.72168" my="0.903625"/>
+            <spline type="modelingSpline" inUse="true" id="284" idObject="110"/>
+            <point type="modeling" inUse="true" id="285" idObject="104" mx="-0.0518825" my="0.57154"/>
+            <point type="modeling" inUse="true" id="286" idObject="76" mx="0.132292" my="0.264583"/>
+            <spline type="modelingPath" inUse="true" id="287" idObject="88"/>
+            <point type="modeling" inUse="true" id="288" idObject="77" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="289" idObject="106" mx="-2.0778" my="0.0190171"/>
+            <spline type="modelingSpline" inUse="true" id="290" idObject="111"/>
+            <point type="modeling" inUse="true" id="291" idObject="92" mx="-0.198479" my="0.350663"/>
+            <point type="modeling" inUse="true" id="292" idObject="93" mx="-1.89363" my="-0.472115"/>
+            <point type="modeling" inUse="true" id="293" idObject="100" mx="-1.95634" my="-1.45592"/>
+            <point type="modeling" inUse="true" id="294" idObject="94" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="295" idObject="98" mx="-1.95502" my="-0.410723"/>
+            <point type="modeling" inUse="true" id="296" idObject="95" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="297" idObject="96" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="298" idObject="99" mx="-2.01641" my="-0.594898"/>
+            <point type="modeling" inUse="true" id="299" idObject="97" mx="-0.222289" my="0.696084"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="204" name="Collar" supplement="1" mx="27.4551" width="1" my="0.587081">
+                <node type="NodePoint" nodeType="Contour" idObject="200" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="201" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="202" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="203" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="209" name="CuffInterface" supplement="0" mx="26.9909" width="1" my="-8.22145">
+                <node type="NodePoint" nodeType="Contour" idObject="205" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="206" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="207" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="208" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="217" name="ShortSleeve" supplement="1" mx="-16.9664" width="1" my="-23.4126">
+                <node type="NodePoint" nodeType="Contour" idObject="210" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="211" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="212" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="213" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="214" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="215" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="216" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="300" name="FullSleeve" supplement="1" mx="-16.0896" width="1" my="15.2013">
+                <node type="NodePoint" nodeType="Contour" idObject="283" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="284" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="285" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="286" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="0" nodeType="Contour" idObject="287" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="288" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="289" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="290" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="291" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="292" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="293" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="294" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="295" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="296" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="297" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="298" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="299" mx="0" my="0"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+    <draw name="Collar">
+        <calculation>
+            <point type="single" x="71.6812" y="8.99461" id="140" name="D" mx="0.492706" my="-0.381989"/>
+            <point type="endLine" typeLine="hair" id="141" name="D1" basePoint="140" mx="0.344194" lineColor="black" my="-0.441756" angle="90" length="#CollarHeight*2+1.5"/>
+            <point type="alongLine" typeLine="none" id="142" name="D2" firstPoint="140" secondPoint="141" mx="0.344194" lineColor="black" my="-0.794926" length="1"/>
+            <point type="alongLine" typeLine="none" id="143" name="D3" firstPoint="142" secondPoint="141" mx="0.344194" lineColor="black" my="-0.441756" length="#CollarHeight-0.5"/>
+            <point type="alongLine" typeLine="none" id="144" name="D4" firstPoint="141" secondPoint="140" mx="0.27356" lineColor="black" my="-0.583024" length="#CollarHeight"/>
+            <point type="normal" typeLine="dotLine" id="145" name="D5" firstPoint="140" secondPoint="141" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="Spl_A15_A28+Spl_A20_A22"/>
+            <point type="normal" typeLine="dotLine" id="146" name="D6" firstPoint="145" secondPoint="140" mx="0.132292" lineColor="black" my="0.264583" angle="90" length="#CollarButton"/>
+            <point type="alongLine" typeLine="none" id="147" name="D7" firstPoint="145" secondPoint="140" mx="0.132292" lineColor="black" my="0.264583" length="Line_D_D5/4"/>
+            <point type="normal" typeLine="none" id="148" name="D8" firstPoint="146" secondPoint="145" mx="-2.3399" lineColor="black" my="-1.00683" angle="0" length="0.7"/>
+            <point type="normal" typeLine="hair" id="149" name="D9" firstPoint="148" secondPoint="147" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#CollarFrontBaseHeight"/>
+            <spline type="pathInteractive" id="150" color="black">
+                <pathPoint angle1="351.569" pSpline="148" angle2="171.569" length1="0" length2="1.65293"/>
+                <pathPoint angle1="180.144" pSpline="147" angle2="0.144483" length1="2.38305" length2="3.25434"/>
+                <pathPoint angle1="179.147" pSpline="142" angle2="359.147" length1="6.56058" length2="0.513557"/>
+            </spline>
+            <spline type="simpleInteractive" point4="149" angle1="179.937" angle2="16.5873" id="151" color="black" length1="17.1667" length2="3.5551" point1="143"/>
+            <point type="cutSpline" id="152" name="D10" spline="151" mx="-2.0247" my="-1.19285" length="Spl_D3_D9-#CollarUpperButtonLength"/>
+            <point type="endLine" typeLine="hair" id="153" name="D11" basePoint="152" mx="0.132292" lineColor="black" my="0.264583" angle="120-#CollarAngle/4" length="#CollarFrontHeight"/>
+            <spline type="simpleInteractive" point4="152" angle1="179.851" angle2="23.7671" id="154" color="black" length1="4.50186" length2="4.34589" point1="144"/>
+            <spline type="simpleInteractive" point4="141" angle1="307.984" angle2="202.24" id="155" color="black" length1="0.892797" length2="0.50213" point1="153"/>
+            <point type="alongLine" typeLine="hair" id="246" name="D12" firstPoint="152" secondPoint="153" mx="0.132292" lineColor="black" my="0.264583" length="-1"/>
+            <point type="alongLine" typeLine="none" id="247" name="D13" firstPoint="144" secondPoint="141" mx="0.132292" lineColor="black" my="0.264583" length="-1"/>
+            <spline type="simpleInteractive" point4="246" angle1="179.804" angle2="14.73" id="248" color="black" length1="7.80754" length2="5.10539" point1="247"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="218" idObject="142" mx="0.344194" my="-0.794926"/>
+            <spline type="modelingPath" inUse="true" id="219" idObject="150"/>
+            <point type="modeling" inUse="true" id="220" idObject="148" mx="-2.3399" my="-1.00683"/>
+            <point type="modeling" inUse="true" id="221" idObject="149" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="222" idObject="151"/>
+            <point type="modeling" inUse="true" id="223" idObject="143" mx="0.344194" my="-0.441756"/>
+            <point type="modeling" inUse="true" id="225" idObject="142" mx="0.344194" my="-0.794926"/>
+            <spline type="modelingPath" inUse="true" id="226" idObject="150"/>
+            <point type="modeling" inUse="true" id="227" idObject="148" mx="-2.3399" my="-1.00683"/>
+            <point type="modeling" inUse="true" id="228" idObject="149" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="229" idObject="151"/>
+            <point type="modeling" inUse="true" id="230" idObject="143" mx="0.344194" my="-0.441756"/>
+            <point type="modeling" inUse="true" id="232" idObject="144" mx="0.27356" my="-0.583024"/>
+            <spline type="modelingSpline" inUse="true" id="233" idObject="154"/>
+            <point type="modeling" inUse="true" id="234" idObject="152" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="235" idObject="153" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="236" idObject="155"/>
+            <point type="modeling" inUse="true" id="237" idObject="141" mx="0.344194" my="-0.441756"/>
+            <point type="modeling" inUse="true" id="249" idObject="246" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="250" idObject="153" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="251" idObject="155"/>
+            <point type="modeling" inUse="true" id="252" idObject="141" mx="0.344194" my="-0.441756"/>
+            <point type="modeling" inUse="true" id="253" idObject="247" mx="0.132292" my="0.264583"/>
+            <spline type="modelingSpline" inUse="true" id="254" idObject="248"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="224" name="CollarBase" supplement="1" mx="28.4767" width="1" my="21.6501">
+                <node type="NodePoint" nodeType="Contour" idObject="218" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="219" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="220" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="221" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="222" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="223" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="231" name="CollarBaseInterface" supplement="0" mx="28.6569" width="1" my="15.2047">
+                <node type="NodePoint" nodeType="Contour" idObject="225" mx="0" my="0"/>
+                <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="226" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="227" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="228" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="229" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="230" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="238" name="CollarTop" supplement="1" mx="28.0866" width="1" my="9.53729">
+                <node type="NodePoint" nodeType="Contour" idObject="232" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="233" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="234" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="235" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="236" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="237" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="255" name="CollarTopInterface" supplement="0" mx="27.8619" width="1" my="-1.37137">
+                <node type="NodePoint" nodeType="Contour" idObject="249" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="250" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="251" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="252" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="253" mx="0" my="0"/>
+                <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="254" mx="0" my="0"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+    <draw name="Placket">
+        <calculation>
+            <point type="single" x="50.0742" y="99.1661" id="256" name="E" mx="0.132292" my="0.984589"/>
+            <point type="endLine" typeLine="hair" id="257" name="E1" basePoint="256" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="15.2064"/>
+            <point type="normal" typeLine="hair" id="258" name="E2" firstPoint="256" secondPoint="257" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#PlacketWidth"/>
+            <point type="normal" typeLine="hair" id="259" name="E3" firstPoint="257" secondPoint="256" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="#PlacketWidth"/>
+            <point type="normal" typeLine="hair" id="260" name="E4" firstPoint="256" secondPoint="257" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="#PlacketWidth*2"/>
+            <point type="normal" typeLine="hair" id="261" name="E5" firstPoint="257" secondPoint="256" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#PlacketWidth"/>
+            <point type="normal" typeLine="hair" id="262" name="E6" firstPoint="261" secondPoint="257" mx="0.132292" lineColor="black" my="0.264583" angle="180" length="#PlacketWidth"/>
+            <point type="normal" typeLine="none" id="263" name="E7" firstPoint="262" secondPoint="261" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#PlacketWidth"/>
+            <point type="alongLine" typeLine="none" id="264" name="E8" firstPoint="262" secondPoint="263" mx="0.132292" lineColor="black" my="0.264583" length="#PlacketWidth/2"/>
+            <point type="normal" typeLine="none" id="265" name="E9" firstPoint="264" secondPoint="263" mx="0.132292" lineColor="black" my="0.264583" angle="0" length="#PlacketWidth/2"/>
+            <line typeLine="hair" id="266" firstPoint="258" secondPoint="259" lineColor="black"/>
+            <line typeLine="hair" id="267" firstPoint="262" secondPoint="265" lineColor="black"/>
+            <line typeLine="hair" id="268" firstPoint="265" secondPoint="263" lineColor="black"/>
+            <line typeLine="hair" id="269" firstPoint="263" secondPoint="260" lineColor="black"/>
+        </calculation>
+        <modeling>
+            <point type="modeling" inUse="true" id="270" idObject="256" mx="0.132292" my="0.984589"/>
+            <point type="modeling" inUse="true" id="271" idObject="258" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="272" idObject="259" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="273" idObject="257" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="275" idObject="256" mx="0.132292" my="0.984589"/>
+            <point type="modeling" inUse="true" id="276" idObject="257" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="277" idObject="261" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="278" idObject="262" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="279" idObject="265" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="280" idObject="263" mx="0.132292" my="0.264583"/>
+            <point type="modeling" inUse="true" id="281" idObject="260" mx="0.132292" my="0.264583"/>
+        </modeling>
+        <details>
+            <detail closed="1" id="274" name="PlacketUnder" supplement="1" mx="27.725" width="1" my="-0.179464">
+                <node type="NodePoint" nodeType="Contour" idObject="270" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="271" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="272" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="273" mx="0" my="0"/>
+            </detail>
+            <detail closed="1" id="282" name="PlacketTop" supplement="1" mx="46.1968" width="1" my="-5.58778">
+                <node type="NodePoint" nodeType="Contour" idObject="275" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="276" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="277" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="278" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="279" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="280" mx="0" my="0"/>
+                <node type="NodePoint" nodeType="Contour" idObject="281" mx="0" my="0"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>
