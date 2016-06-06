@@ -658,6 +658,7 @@ void TMainWindow::FileSaveAs()
         }
     }
 
+    ReadOnly(false);
     QString error;
     bool result = SaveMeasurements(fileName, error);
     if (result == false)
@@ -673,7 +674,6 @@ void TMainWindow::FileSaveAs()
         return;
     }
 
-    ReadOnly(false);
     VlpCreateLock(lock, fileName);
     if (not lock->IsLocked())
     {
