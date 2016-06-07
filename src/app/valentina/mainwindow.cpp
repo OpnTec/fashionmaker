@@ -2453,7 +2453,7 @@ void MainWindow::Clear()
     qCDebug(vMainWindow, "Returned to Draw mode.");
     pattern->Clear();
     qCDebug(vMainWindow, "Clearing pattern.");
-    if (not curFile.isEmpty())
+    if (not curFile.isEmpty() && not doc->MPath().isEmpty())
     {
         watcher->removePath(AbsoluteMPath(curFile, doc->MPath()));
     }
@@ -2464,6 +2464,10 @@ void MainWindow::Clear()
     sceneDetails->clear();
     ArrowTool();
     comboBoxDraws->clear();
+    ui->actionDraw->setEnabled(false);
+    ui->actionDetails->setEnabled(false);
+    ui->actionLayout->setEnabled(false);
+    ui->actionNewDraw->setEnabled(false);
     ui->actionOptionDraw->setEnabled(false);
     ui->actionSave->setEnabled(false);
     ui->actionSaveAs->setEnabled(false);
@@ -3632,7 +3636,7 @@ void MainWindow::CreateActions()
     connect(ui->actionPattern_properties, &QAction::triggered, this, &MainWindow::PatternProperties);
     ui->actionPattern_properties->setEnabled(false);
     connect(ui->actionEdit_pattern_code, &QAction::triggered, this, &MainWindow::EditPatternCode);
-    connect(ui->actionCloseWindow, &QAction::triggered, this, &MainWindow::ResetWindow);
+    connect(ui->actionClosePattern, &QAction::triggered, this, &MainWindow::ResetWindow);
     connect(ui->actionShowCurveDetails, &QAction::triggered, this, &MainWindow::ActionCurveDetailsMode);
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
     connect(ui->actionLoadStandard, &QAction::triggered, this, &MainWindow::LoadStandard);

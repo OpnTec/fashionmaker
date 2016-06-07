@@ -1251,7 +1251,7 @@
     <property name="title">
      <string>Window</string>
     </property>
-    <addaction name="actionCloseWindow"/>
+    <addaction name="actionClosePattern"/>
    </widget>
    <widget class="QMenu" name="menuHistory">
     <property name="title">
@@ -1975,9 +1975,15 @@
     <enum>QAction::NoRole</enum>
    </property>
   </action>
-  <action name="actionCloseWindow">
+  <action name="actionClosePattern">
    <property name="text">
-    <string>Close window</string>
+    <string>Close pattern</string>
+   </property>
+   <property name="iconText">
+    <string>Close pattern</string>
+   </property>
+   <property name="toolTip">
+    <string>Close pattern</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
