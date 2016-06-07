@@ -1076,7 +1076,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation>Цвет:</translation>
+        <translation type="vanished">Цвет:</translation>
     </message>
 </context>
 <context>
@@ -1151,7 +1151,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation>Цвет:</translation>
+        <translation type="vanished">Цвет:</translation>
     </message>
 </context>
 <context>
@@ -1226,7 +1226,7 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation>Цвет:</translation>
+        <translation type="vanished">Цвет:</translation>
     </message>
 </context>
 <context>
@@ -1400,7 +1400,7 @@
     </message>
     <message>
         <source>Double click for add to formula</source>
-        <translation>Двойной щелчок для добавления у формулу</translation>
+        <translation type="vanished">Двойной щелчок для добавления у формулу</translation>
     </message>
     <message>
         <source>Height</source>
@@ -1461,6 +1461,14 @@
     <message>
         <source>Calculation</source>
         <translation>Расчёт</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full name</source>
+        <translation type="unfinished">Полное имя</translation>
     </message>
 </context>
 <context>
@@ -1564,6 +1572,45 @@
     <message>
         <source>Line color:</source>
         <translation>Цвет линии:</translation>
+    </message>
+</context>
+<context>
+    <name>DialogExportToCSV</name>
+    <message>
+        <source>Export options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>With header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Codec:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Semicolon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Space</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1972,6 +2019,10 @@
     <message>
         <source>Formula wizard</source>
         <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>Invalid value</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3476,6 +3527,45 @@ Apply settings anyway?</source>
     </message>
 </context>
 <context>
+    <name>DialogRotation</name>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angle:</source>
+        <translation type="unfinished">Угол:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Мастер формул</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calulation</source>
+        <translation type="unfinished">Расчёт</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Origin Point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suffix:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit angle</source>
+        <translation type="unfinished">Редактрировать угол</translation>
+    </message>
+</context>
+<context>
     <name>DialogSaveLAyout</name>
     <message>
         <source>Save Layout</source>
@@ -4017,6 +4107,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Rightmost point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid value</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4646,7 +4740,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Close window</source>
-        <translation>Закрыть окно</translation>
+        <translation type="vanished">Закрыть окно</translation>
     </message>
     <message>
         <source>Online help</source>
@@ -5343,6 +5437,18 @@ Do you want to save your changes?</source>
         <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Rotate objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -5421,6 +5527,10 @@ Do you want to save your changes?</source>
     <message>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>При печати многостраничного документа все страницы должны быть одного размера.</translation>
+    </message>
+    <message>
+        <source>Pages will be cropped because they do not fit printer paper size.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5866,6 +5976,13 @@ Do you want to save your changes?</source>
     <message>
         <source>rename pattern piece</source>
         <translation>переименовать чертёж</translation>
+    </message>
+</context>
+<context>
+    <name>RotationMoveLabel</name>
+    <message>
+        <source>move point label</source>
+        <translation type="unfinished">переместить метку точки</translation>
     </message>
 </context>
 <context>
@@ -6440,6 +6557,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
         <translation>Произошла неизвестная ошибка, например полностью заполненный раздел предотвращает запись lock файла.</translation>
+    </message>
+    <message>
+        <source>Export to CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-Separated Values (*.cvs)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid value</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7377,6 +7506,14 @@ Do you want to save your changes?</source>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error creating or updating operation of rotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown operation type &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPatternConverter</name>
@@ -7655,6 +7792,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool cubic bezier curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool rotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suffix</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
