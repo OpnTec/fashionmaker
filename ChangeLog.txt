@@ -6,6 +6,7 @@
 - [#492] Valentina crashes when add an increment.
 - [#493] Error in seam allowance drawing.
 - [#468] Error - Tape 'Save As' should set 'Read Only' to false.
+- [#501] Rename Window->Close Window to Window->Close pattern
 
 # Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
