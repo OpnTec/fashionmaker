@@ -5,6 +5,7 @@
 - [#491] Valentina doesn't update fractional separator.
 - [#492] Valentina crashes when add an increment.
 - [#493] Error in seam allowance drawing.
+- [#468] Error - Tape 'Save As' should set 'Read Only' to false.
 
 # Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.
