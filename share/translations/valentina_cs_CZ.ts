@@ -4136,7 +4136,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Close window</source>
-        <translation>Zavřít okno</translation>
+        <translation type="vanished">Zavřít okno</translation>
     </message>
     <message>
         <source>Online help</source>
@@ -4783,6 +4783,10 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Report Bug...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

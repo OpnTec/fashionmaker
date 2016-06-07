@@ -4324,10 +4324,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Online help</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4980,6 +4976,10 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Report Bug...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -4257,7 +4257,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Close window</source>
-        <translation>Fenster schließen</translation>
+        <translation type="vanished">Fenster schließen</translation>
     </message>
     <message>
         <source>Online help</source>
@@ -4905,6 +4905,10 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <source>Report Bug...</source>
         <translation>Programmfehler melden...</translation>
+    </message>
+    <message>
+        <source>Close pattern</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

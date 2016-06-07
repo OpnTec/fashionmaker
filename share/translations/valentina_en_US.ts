@@ -271,11 +271,11 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
+        <translation>The Default unit has been updated and will be used as the default for the next pattern you create.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</translation>
     </message>
 </context>
 <context>
@@ -2028,15 +2028,15 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Layout options</source>
-        <translation type="unfinished"></translation>
+        <translation>Layout options</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset length:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Rule for choosing the next workpiece</translation>
     </message>
 </context>
 <context>
@@ -2459,7 +2459,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">New pattern</translation>
+        <translation>New pattern</translation>
     </message>
 </context>
 <context>
@@ -2764,7 +2764,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Immediately apply</translation>
     </message>
 </context>
 <context>
@@ -3517,15 +3517,15 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Control point</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Length ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Length ratio</translation>
     </message>
 </context>
 <context>
@@ -3580,23 +3580,23 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Point</source>
-        <translation type="unfinished">Point</translation>
+        <translation>Point</translation>
     </message>
     <message>
         <source>First control point</source>
-        <translation type="unfinished"></translation>
+        <translation>First control point</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation type="unfinished">Angle</translation>
+        <translation>Angle</translation>
     </message>
     <message>
         <source>Length ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>Length ratio</translation>
     </message>
     <message>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Second control point</translation>
     </message>
 </context>
 <context>
@@ -3840,7 +3840,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error while calculation formula. You can try to undo last operation or fix broken formula.</translation>
     </message>
 </context>
 <context>
@@ -4256,7 +4256,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Close window</source>
-        <translation>Close window</translation>
+        <translation type="vanished">Close window</translation>
     </message>
     <message>
         <source>Online help</source>
@@ -4903,6 +4903,10 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Report Bug...</source>
+        <translation>Report Bug...</translation>
+    </message>
+    <message>
+        <source>Close pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5110,11 +5114,11 @@ Do you want to save your changes?</translation>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation type="unfinished"></translation>
+        <translation>The path to the measurments is already relative.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation type="unfinished"></translation>
+        <translation>The path to the measurments is already absolute.</translation>
     </message>
 </context>
 <context>
@@ -6548,15 +6552,15 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset length</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset length must be used together with shift units.</translation>
     </message>
 </context>
 <context>

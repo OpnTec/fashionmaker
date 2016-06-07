@@ -4256,7 +4256,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Close window</source>
-        <translation>Cerrar ventana</translation>
+        <translation type="vanished">Cerrar ventana</translation>
     </message>
     <message>
         <source>Online help</source>
@@ -4891,7 +4891,7 @@ Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocurrió un error desconocido, por ejemplo una partición llena evitando que se escriba el archivo de bloqueo. Ignorelo si desea continuar (no se recomienda, puede causar corrupción de datos)</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -4904,6 +4904,10 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Report Bug...</source>
         <translation>Informar de un error...</translation>
+    </message>
+    <message>
+        <source>Close pattern</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5375,12 +5379,12 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>Unterminated string starting at position $POS$.</source>
         <comment>Math parser error messages. Left untouched $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cadena de caracteres no terminada comenzando en la posición $POS$.</translation>
     </message>
     <message>
         <source>String function called with a non string type of argument.</source>
         <comment>Math parser error messages.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Función de cadena de caracteres llamada con un argumento que no se una cadena de caracteres.</translation>
     </message>
     <message>
         <source>String value used where a numerical argument is expected.</source>
@@ -5390,7 +5394,7 @@ Quiere guardar los cambios?</translation>
     <message>
         <source>No suitable overload for operator &quot;$TOK$&quot; at position $POS$.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot; and $POS$</comment>
-        <translation type="unfinished"></translation>
+        <translation>No hay una sobrecarga de operador adecuada para &quot;$TOK$&quot; en la posición $POS$.</translation>
     </message>
     <message>
         <source>Function result is a string.</source>
@@ -5448,7 +5452,7 @@ Quiere guardar los cambios?</translation>
     <name>TMainWindow</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Seleccione Nuevo para crear un archivo de medidas.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Name</source>
@@ -5809,7 +5813,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Medidas estándar (*.vst);;Medidas individuales (*.vit);;Todos los archivos (*.*)</translation>
     </message>
     <message>
         <source>Measurements (*.vst *.vit);;All files (*.*)</source>
@@ -5848,8 +5852,20 @@ Do you want to save your changes?</source>
         <translation>No se pudo encontrar la medida &apos;%1&apos;.</translation>
     </message>
     <message>
+        <source>The base value of known measurement forbidden to change.</source>
+        <translation type="vanished">Es prohibido cambiar el valor base de una medida conocida.</translation>
+    </message>
+    <message>
+        <source>The size increase value of known measurement forbidden to change.</source>
+        <translation type="vanished">Esta prohibido cambiar el valor de incremento de talle de una medida conocida.</translation>
+    </message>
+    <message>
+        <source>The height increase value of known measurement forbidden to change.</source>
+        <translation type="vanished">Esta prohibido cambiar el valor de incremento de altura de una medida conocida.</translation>
+    </message>
+    <message>
         <source>The full name of known measurement forbidden to change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta prohibido cambiar el nombre completo de las medidas conocidas.</translation>
     </message>
     <message>
         <source>Name in formula</source>
@@ -5980,7 +5996,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocurrió un error desconocido, por ejemplo una partición llena evitando que se escriba el archivo de bloqueo. Ignorelo si desea continuar (no se recomienda, puede causar corrupción de datos)</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
@@ -6167,7 +6183,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating a reserv copy: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear una copia de reserva: %1.</translation>
     </message>
 </context>
 <context>
@@ -6255,7 +6271,7 @@ Do you want to save your changes?</source>
     <name>VCommandLine</name>
     <message>
         <source>Path to custom measure file (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta al archivo de medidas personalizado (modo de exportación).</translation>
     </message>
     <message>
         <source>The measure file</source>
@@ -6263,7 +6279,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
+        <translation>Número correspondiente al formato de salida (predeterminado = 0, modo de exportación):</translation>
     </message>
     <message>
         <source>Format number</source>
@@ -6271,7 +6287,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation type="unfinished"></translation>
+        <translation>Número correspondiente a la plantilla de página (predeterminado = 0, modo de exportación):</translation>
     </message>
     <message>
         <source>Template number</source>
@@ -6286,36 +6302,64 @@ Do you want to save your changes?</source>
         <translation>La unidad de medida</translation>
     </message>
     <message>
+        <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
+        <translation type="vanished">Rotación en grados (uno de los predefinidos). Predeterminado (o 0) es sin rotación (modo de exportación).</translation>
+    </message>
+    <message>
         <source>Angle</source>
         <translation>Ángulo</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Recortar automáticamente largo sin uso (modo de exportación).</translation>
+    </message>
+    <message>
+        <source>Unite pages if possible (export mode).</source>
+        <translation type="vanished">Unir las páginas si es posible (modo de exportación).</translation>
+    </message>
+    <message>
+        <source>Save length of the sheet if set. (export mode).</source>
+        <translation type="vanished">Guardar longitud de la hoja si está configurado (modo de exportación).</translation>
     </message>
     <message>
         <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidades del diseño (como uno de papel, excepto px, modo de exportación).</translation>
     </message>
     <message>
         <source>The unit</source>
         <translation>La unidad </translation>
     </message>
     <message>
+        <source>Shift layout length measured in layout units (export mode).</source>
+        <translation type="vanished">Longitud del desplazamiento del diseño medido en unidades del diseño (modo de exportación)</translation>
+    </message>
+    <message>
+        <source>Shift length</source>
+        <translation type="vanished">Longitud del desplazamiento</translation>
+    </message>
+    <message>
+        <source>Gap width x2, measured in layout units. (export mode).</source>
+        <translation type="vanished">Ancho del salto x2, medido en las unidades del diseño. (modo de exportación).</translation>
+    </message>
+    <message>
         <source>The gap width</source>
         <translation>Ancho de abertura</translation>
     </message>
     <message>
+        <source>Sets layout groupping (export mode): </source>
+        <translation type="vanished">Establece agrupación de diseño (modo de exportación):</translation>
+    </message>
+    <message>
         <source>Grouping type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de agrupamiento</translation>
     </message>
     <message>
         <source>Cannot use pageformat and page explicit size/units together.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede usar pageformat y tamaño/unidades de pagina explícitos en conjunto.</translation>
     </message>
     <message>
         <source>Page height, width, units must be used all 3 at once.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidades de altura y anchura de página deben usarse en los 3 a la vez.</translation>
     </message>
     <message>
         <source>Invalid rotation value. That must be one of predefined values.</source>
@@ -6331,59 +6375,71 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Unsupported layout units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidades del diseño no soportadas</translation>
     </message>
     <message>
         <source>Export options can be used with single input file only.</source>
-        <translation type="unfinished"></translation>
+        <translation>Las opciones de exportación solo puede usarse con un solo archivo de entrada.</translation>
+    </message>
+    <message>
+        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
+        <translation type="vanished">Ejecuta el programa en modo de prueba. El programa en este modo carga un solo archivo de patrón y sale silenciosamente sin mostrar la ventana principal. La clave tiene prioridad antes que la clave &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Test option can be used with single input file only.</source>
-        <translation type="unfinished"></translation>
+        <translation>La opción de prueba solo puede usarse con un solo archivo de entrada.</translation>
     </message>
     <message>
         <source>The base filename of exported layout files. Use it to enable console export mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>El nombre base de los archivos de diseño exportados. Úselo para habilitar el modo de exportación de la consola.</translation>
     </message>
     <message>
         <source>The base filename of layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>El nombre de archivo base de los archivos de diseño</translation>
+    </message>
+    <message>
+        <source>The path to output destination folder.</source>
+        <translation type="vanished">La ruta a la carpeta de destino.</translation>
     </message>
     <message>
         <source>The destination folder</source>
-        <translation type="unfinished"></translation>
+        <translation>La carpeta de destino</translation>
     </message>
     <message>
         <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Establece el valor del talle de un archivo de patrón, que fue abierto con medidas estándar (modo de exportación). Valores validos: %1cm.</translation>
     </message>
     <message>
         <source>The size value</source>
-        <translation type="unfinished"></translation>
+        <translation>El valor del talle</translation>
     </message>
     <message>
         <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Establece el valor de la altura de un archivo de patrón, que fue abierto con medidas estándar (modo de exportación). Valores validos: %1cm.</translation>
     </message>
     <message>
         <source>The height value</source>
-        <translation type="unfinished"></translation>
+        <translation>El valor de la altura</translation>
     </message>
     <message>
         <source>Page width in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>El ancho de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;, modo de exportación)</translation>
     </message>
     <message>
         <source>Page height in current units like 12.0 (cannot be used with &quot;%1&quot;, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>El largo de página en las unidades actuales como 12.0 (no puede usarse con &quot;%1&quot;), modo de exportación)</translation>
+    </message>
+    <message>
+        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
+        <translation type="vanished">Las unidades de ancho/largo de página (no pueden usarse con &quot;%1&quot;, modo de exportación):</translation>
     </message>
     <message>
         <source>Invalid gradation size value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor del talle de la gradación invalido.</translation>
     </message>
     <message>
         <source>Invalid gradation height value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor del altura de la gradación invalido.</translation>
     </message>
     <message>
         <source>Pattern making program.</source>
@@ -6394,52 +6450,76 @@ Do you want to save your changes?</source>
         <translation>Archivo de patrón.</translation>
     </message>
     <message>
+        <source>Ignore margins printing (export mode). Set all margins to 0.</source>
+        <translation type="vanished">Ignorar margenes de impresión (modo de exportación) Establece todos los margenes a 0.</translation>
+    </message>
+    <message>
+        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Margen izquierdo de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora.</translation>
+    </message>
+    <message>
+        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Margen derecho de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora.</translation>
+    </message>
+    <message>
+        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Margen superior de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora.</translation>
+    </message>
+    <message>
+        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
+        <translation type="vanished">Margen inferior de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora.</translation>
+    </message>
+    <message>
+        <source>Shift length must be used together with shift units.</source>
+        <translation type="vanished">La longitud del desplazamiento deba usarse en conjunto con las unidades del desplazamiento.</translation>
+    </message>
+    <message>
         <source>Gap width must be used together with shift units.</source>
         <translation>El ancho del salto debe usarse en conjunto con las unidades de desplazamiento.</translation>
     </message>
     <message>
         <source>Left margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>El margen izquierdo debe usarse en conjunto con las unidades de página.</translation>
     </message>
     <message>
         <source>Right margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>El margen derecho debe usarse en conjunto con las unidades de página.</translation>
     </message>
     <message>
         <source>Top margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>El margen superior debe usarse en conjunto con las unidades de página.</translation>
     </message>
     <message>
         <source>Bottom margin must be used together with page units.</source>
-        <translation type="unfinished"></translation>
+        <translation>El margen inferior debe usarse en conjunto con las unidades de página.</translation>
     </message>
     <message>
         <source>The path to output destination folder. By default the directory at which the application was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>La ruta a la carpeta de destino de la salida. De forma predeterminada el directorio en donde se inició la aplicación.</translation>
     </message>
     <message>
         <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Las unidades de ancho/largo de página (no pueden usarse con &quot;%1&quot;, modo de exportación). Valores válidos: %2.</translation>
     </message>
     <message>
         <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar margenes de impresión (modo de exportación) . Deshabilita claves de valores: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Establece todos los margenes a 0.</translation>
     </message>
     <message>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Margen izquierdo de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora. El valor se ignorará si se usa la clave &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Margen derecho de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora. El valor se ignorará si se usa la clave &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Margen superior de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora. El valor se ignorará si se usa la clave &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Margen inferior de página en las unidades actuales como 3.0 (modo de exportación). Si no se establece se usara el valor de una impresora predeterminada. O 0 si no se encuentra ninguna impresora. El valor se ignorará si se usa la clave &quot;%1&quot;.</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
@@ -6454,12 +6534,16 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
+        <translation type="vanished">Longitud del desplazamiento del diseño medido en unidades del diseño (modo de exportación). La opción muestra cuentos puntos a lo largo del límite serán usados para crear un diseño.</translation>
+    </message>
+    <message>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sets layout groupping cases (export mode): %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Establece casos de agrupación de diseño (modo de exportación): %1.</translation>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
@@ -6471,11 +6555,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud de Cambio/Desplazamiento</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>La longitud de compensación/desplazamiento debe usarse en conjunto con las unidades del desplazamiento.</translation>
     </message>
 </context>
 <context>
@@ -6497,29 +6581,31 @@ Do you want to save your changes?</source>
     <name>VDomDocument</name>
     <message>
         <source>Can&apos;t convert toUInt parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede convertir el parámetro toUInt</translation>
     </message>
     <message>
         <source>Can&apos;t convert toBool parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede convertir el parámetro toBool</translation>
     </message>
     <message>
         <source>Got empty parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Se obtuvo un parámetro vacío</translation>
     </message>
     <message>
         <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede convertir el parámetro toDouble</translation>
     </message>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo abrir el archivo %1:
+%2</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo abrir el archivo de esquema %1:
+%2</translation>
     </message>
     <message>
         <source>Could not load schema file.</source>
@@ -6527,11 +6613,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de validación en el archivo %3 en la línea %1 columna %2</translation>
     </message>
     <message>
         <source>Parsing error file %3 in line %1 column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error analizando el archivo %3 en la línea %1 columna %2</translation>
     </message>
     <message>
         <source>Couldn&apos;t get node</source>
@@ -6539,15 +6625,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se obtuvo un identificador de parámetro incorrecto. Solo es necesario identificador &gt; 0.</translation>
     </message>
     <message>
         <source>This id is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este identificador no es único.</translation>
+    </message>
+    <message>
+        <source>Could not copy temp file to document file</source>
+        <translation type="vanished">No se pudo copiar el archivo temporal al archivo del documento.</translation>
+    </message>
+    <message>
+        <source>Could not remove document file</source>
+        <translation type="vanished">No se puede eliminar el archivo del documento</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede cargar el archivo de esquema &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -6587,11 +6681,11 @@ Do you want to save your changes?</source>
     <name>VMeasurements</name>
     <message>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo encontrar la medida &apos;%1&apos;</translation>
     </message>
     <message>
         <source>The measurement name is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡El nombre de la medida esta vacío!</translation>
     </message>
 </context>
 <context>
@@ -6656,23 +6750,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point along line</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar el punto largo de la línea</translation>
     </message>
     <message>
         <source>Error creating or updating point of shoulder</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar punto del hombro</translation>
     </message>
     <message>
         <source>Error creating or updating point of normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar punto de la normal</translation>
     </message>
     <message>
         <source>Error creating or updating point of bisector</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar punto del bisector</translation>
     </message>
     <message>
         <source>Error creating or updating point of lineintersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando punto de intersección de línea</translation>
     </message>
     <message>
         <source>Error creating or updating point of contact</source>
@@ -6680,11 +6774,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating modeling point</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando punto de modelado</translation>
     </message>
     <message>
         <source>Error creating or updating height</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando altura</translation>
     </message>
     <message>
         <source>Error creating or updating triangle</source>
@@ -6692,27 +6786,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating point of intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando punto de intersección</translation>
     </message>
     <message>
         <source>Error creating or updating cut spline point</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando punto de corte de spline</translation>
     </message>
     <message>
         <source>Error creating or updating cut spline path point</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando punto de corte de spline de corte</translation>
     </message>
     <message>
         <source>Error creating or updating cut arc point</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando punto de corte de arco</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando punto de intersección de línea y eje</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando punto de intersección de curva y eje</translation>
     </message>
     <message>
         <source>Error creating or updating line</source>
@@ -6728,11 +6822,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating modeling simple curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar el modelado de curva simple</translation>
     </message>
     <message>
         <source>Error creating or updating modeling curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando el modelado de trazado curvo</translation>
     </message>
     <message>
         <source>Error creating or updating simple arc</source>
@@ -6740,27 +6834,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error creating or updating modeling arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar arco de modelado</translation>
     </message>
     <message>
         <source>Error creating or updating union details</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando detalle de la unión</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection arcs</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando punto de intersección de arcos</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection circles</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creando o actualizando punto de intersección de círculos</translation>
     </message>
     <message>
         <source>Error creating or updating point from circle and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar punto desde un círculo y tangente</translation>
     </message>
     <message>
         <source>Error creating or updating point from arc and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear o actualizar punto desde un arco y tangente</translation>
     </message>
     <message>
         <source>Error creating or updating true darts</source>
@@ -6768,23 +6862,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Wrong tag name &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de etiqueta incorrecto &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown point type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de punto desconocido &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown spline type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de spline desconocido &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown arc type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de arco desconocido &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Unknown tools type &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de herramienta desconocido &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Error not unique id.</source>
@@ -6806,7 +6900,7 @@ Do you want to save your changes?</source>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay suficientes puntos para crear la spline.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
@@ -6814,7 +6908,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t cut spline path with one point</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede cortar ruta de spline con un punto</translation>
     </message>
 </context>
 <context>
@@ -6888,11 +6982,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool for segmenting a curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta para segmentar una curva</translation>
     </message>
     <message>
         <source>Tool segment a pathed curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta segmento de un trazado curvo</translation>
     </message>
     <message>
         <source>Perpendicular point along line</source>
@@ -6920,7 +7014,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool to make point from x &amp; y of two other points</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta para hacer un punto de X e Y de otros dos puntos</translation>
     </message>
     <message>
         <source>Special point on shoulder</source>
@@ -6944,7 +7038,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point intersection line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Punto de intersección de línea y eje</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -6956,7 +7050,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point intersection curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Punto de intersección de la curva y el eje</translation>
     </message>
     <message>
         <source>First point</source>
@@ -6976,15 +7070,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point 1 label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta del punto 1</translation>
     </message>
     <message>
         <source>Point 2 label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta del punto 2</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two arcs</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta para hacer un punto desde la intersección de dos arcos</translation>
     </message>
     <message>
         <source>Take</source>
@@ -6992,27 +7086,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool to make point from intersection two circles</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta para hacer un punto desde la intersección de dos círculos</translation>
     </message>
     <message>
         <source>First circle radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Radio del primer circulo</translation>
     </message>
     <message>
         <source>Second circle radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Radio del segundo circulo</translation>
     </message>
     <message>
         <source>Tool to make point from circle and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta para hacer un punto desde un círculo y tangente</translation>
     </message>
     <message>
         <source>Circle radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Radio del circulo</translation>
     </message>
     <message>
         <source>Tool to make point from arc and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta para hacer un punto desde un arco y tangente</translation>
     </message>
 </context>
 <context>
@@ -7840,57 +7934,57 @@ Do you want to save your changes?</source>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>AngleLine_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Arc_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Spl_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>SplPath</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>RadiusArc_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle1Arc_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle2Arc_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle1Spl_</translation>
     </message>
     <message>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle2Spl_</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle1SplPath</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Angle2SplPath</translation>
     </message>
     <message>
         <source>sin</source>
@@ -8064,32 +8158,32 @@ Do you want to save your changes?</source>
     <name>VisToolCurveIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Interseccion entre curva y eje&lt;/b&gt;: angulo= %1°; &lt;b&gt;Desplazamiento&lt;/b&gt; - ángulo de adherencia, &lt;b&gt;Enter&lt;/b&gt; - termina la creación</translation>
     </message>
 </context>
 <context>
     <name>VisToolEndLine</name>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Punto en distancia y ángulo&lt;/b&gt;: angulo= %1°; &lt;b&gt;Desplazamiento&lt;/b&gt; - ángulo de adherencia, &lt;b&gt;Enter&lt;/b&gt; - termina la creación</translation>
     </message>
 </context>
 <context>
     <name>VisToolLineIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Interseccion entre línea y eje&lt;/b&gt;: angulo= %1°; &lt;b&gt;Desplazamiento&lt;/b&gt; - ángulo de adherencia, &lt;b&gt;Enter&lt;/b&gt; - termina la creación</translation>
     </message>
 </context>
 <context>
     <name>VisToolSplinePath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ruta curvada&lt;/b&gt;: seleccione tres o mas puntos</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ruta curvada&lt;/b&gt;: seleccione tres o mas puntos, &lt;b&gt;Enter&lt;/b&gt; - termina la creación</translation>
     </message>
 </context>
 <context>

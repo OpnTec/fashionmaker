@@ -4256,7 +4256,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Close window</source>
-        <translation>Закрыть окно</translation>
+        <translation type="vanished">Закрыть окно</translation>
     </message>
     <message>
         <source>Online help</source>
@@ -4904,6 +4904,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Report Bug...</source>
         <translation>Сообщить об ошибке...</translation>
+    </message>
+    <message>
+        <source>Close pattern</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

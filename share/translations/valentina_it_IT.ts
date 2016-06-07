@@ -4257,7 +4257,7 @@ Applicare le impostazioni comunque?</translation>
     </message>
     <message>
         <source>Close window</source>
-        <translation>Chiudi finestra</translation>
+        <translation type="vanished">Chiudi finestra</translation>
     </message>
     <message>
         <source>Online help</source>
@@ -4904,6 +4904,10 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Report Bug...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close pattern</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
