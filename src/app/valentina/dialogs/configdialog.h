@@ -49,6 +49,7 @@ protected:
     virtual void      closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void      changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void      showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual void      resizeEvent(QResizeEvent *) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(ConfigDialog)
     QListWidget       *contentsWidget;
@@ -61,6 +62,13 @@ private:
     QPushButton       *cancelButton;
     QPushButton       *okButton;
     bool              isInitialized;
+    // the following static variables are used to preserve the dialog size when it
+    // is opened again and to hold the minimum size (which will be determined when
+    // the dialog is opened for the first time)
+    static int        s_iLastWidth;
+    static int        s_iLastHeight;
+    static int        s_iMinWidth;
+    static int        s_iMinHeight;
     void              createIcons();
     void              createIcon(const QString &icon, const QString &text);
     void              Apply();
