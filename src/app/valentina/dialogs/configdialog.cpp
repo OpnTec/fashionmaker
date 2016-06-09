@@ -45,9 +45,9 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     contentsWidget->setViewMode(QListView::IconMode);
     contentsWidget->setIconSize(QSize(96, 84));
     contentsWidget->setMovement(QListView::Static);
-    contentsWidget->setMaximumWidth(128);
-    contentsWidget->setMinimumWidth(128);
-    contentsWidget->setMinimumHeight(500);
+	 contentsWidget->setMaximumWidth(128);
+	 contentsWidget->setMinimumWidth(128);
+	 contentsWidget->setMinimumHeight(500);
     contentsWidget->setSpacing(12);
 
     pagesWidget = new QStackedWidget;
@@ -87,9 +87,10 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addLayout(horizontalLayout);
-    mainLayout->addStretch(1);
-    mainLayout->addSpacing(12);
+	 //mainLayout->addStretch(1);
+	 //mainLayout->addSpacing(12);
     mainLayout->addLayout(buttonsLayout);
+	 mainLayout->setStretch(0, 1);
     setLayout(mainLayout);
 
     setWindowTitle(tr("Config Dialog"));
@@ -145,8 +146,8 @@ void ConfigDialog::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    setMaximumSize(size());
-    setMinimumSize(size());
+	 //setMaximumSize(size());
+	 setMinimumSize(size());
 
     isInitialized = true;//first show windows are held
 }
