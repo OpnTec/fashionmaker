@@ -87,9 +87,9 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addLayout(horizontalLayout);
-    mainLayout->addStretch(1);
     mainLayout->addSpacing(12);
     mainLayout->addLayout(buttonsLayout);
+    mainLayout->setStretch(0, 1);
     setLayout(mainLayout);
 
     setWindowTitle(tr("Config Dialog"));
@@ -145,10 +145,28 @@ void ConfigDialog::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    setMaximumSize(size());
     setMinimumSize(size());
 
+    QSize sz = qApp->Settings()->GetPreferenceDialogSize();
+    if (sz.isEmpty() == false)
+    {
+        resize(sz);
+    }
+
     isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConfigDialog::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+    // remember the size for the next time this dialog is opened, but only
+    // if widget was already initialized, which rules out the resize at
+    // dialog creating, which would
+    if (isInitialized == true)
+    {
+        qApp->Settings()->SetPreferenceDialogSize(size());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

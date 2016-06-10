@@ -64,6 +64,7 @@ const QString VCommonSettings::SettingGeneralRestoreFileList           = QString
 const QString VCommonSettings::SettingGeneralGeometry                  = QStringLiteral("geometry");
 const QString VCommonSettings::SettingGeneralWindowState               = QStringLiteral("windowState");
 const QString VCommonSettings::SettingGeneralToolbarsState             = QStringLiteral("toolbarsState");
+const QString VCommonSettings::SettingPreferenceDialogSize             = QStringLiteral("preferenceDialogSize");
 
 static const QString commonIniFilename = QStringLiteral("common");
 
@@ -415,4 +416,16 @@ QByteArray VCommonSettings::GetToolbarsState() const
 void VCommonSettings::SetToolbarsState(const QByteArray &value)
 {
     setValue(SettingGeneralToolbarsState, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSize VCommonSettings::GetPreferenceDialogSize() const
+{
+    return value(SettingPreferenceDialogSize, QSize(0, 0)).toSize();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPreferenceDialogSize(const QSize& sz)
+{
+    setValue(SettingPreferenceDialogSize, sz);
 }

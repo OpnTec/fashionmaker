@@ -49,6 +49,7 @@ protected:
     virtual void      closeEvent(QCloseEvent *event) Q_DECL_OVERRIDE;
     virtual void      changeEvent(QEvent* event) Q_DECL_OVERRIDE;
     virtual void      showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
+    virtual void      resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(ConfigDialog)
     QListWidget       *contentsWidget;
