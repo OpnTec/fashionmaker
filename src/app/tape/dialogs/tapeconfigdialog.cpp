@@ -89,10 +89,11 @@ TapeConfigDialog::TapeConfigDialog(QWidget *parent)
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addLayout(horizontalLayout);
-    mainLayout->addStretch(1);
     mainLayout->addSpacing(12);
     mainLayout->addLayout(buttonsLayout);
     setLayout(mainLayout);
+
+    mainLayout->setStretch(0, 1);
 
     setWindowTitle(tr("Config Dialog"));
 
