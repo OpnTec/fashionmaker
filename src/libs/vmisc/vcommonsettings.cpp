@@ -66,6 +66,8 @@ const QString VCommonSettings::SettingGeneralWindowState               = QString
 const QString VCommonSettings::SettingGeneralToolbarsState             = QStringLiteral("toolbarsState");
 const QString VCommonSettings::SettingPreferenceDialogSize             = QStringLiteral("preferenceDialogSize");
 
+static const QString commonIniFilename = QStringLiteral("common");
+
 //---------------------------------------------------------------------------------------------------------------------
 VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &organization,
                             const QString &application, QObject *parent)
@@ -116,14 +118,14 @@ QString VCommonSettings::StandardTablesPath() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathIndividualMeasurements() const
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName());
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     return settings.value(SettingPathsIndividualMeasurements, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName());
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     settings.setValue(SettingPathsIndividualMeasurements, value);
     settings.sync();
 }
@@ -131,14 +133,14 @@ void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathStandardMeasurements() const
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName());
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     return settings.value(SettingPathsStandardMeasurements, StandardTablesPath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathStandardMeasurements(const QString &value)
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName());
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     settings.setValue(SettingPathsStandardMeasurements, value);
     settings.sync();
 }
@@ -147,14 +149,14 @@ void VCommonSettings::SetPathStandardMeasurements(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetPathTemplate() const
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName());
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     return settings.value(SettingPathsTemplates, TemplatesPath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathTemplate(const QString &value)
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName());
+    QSettings settings(this->format(), this->scope(), this->organizationName(), commonIniFilename);
     settings.setValue(SettingPathsTemplates, value);
     settings.sync();
 }
