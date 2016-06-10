@@ -87,8 +87,7 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addLayout(horizontalLayout);
-    //mainLayout->addStretch(1);
-    //mainLayout->addSpacing(12);
+    mainLayout->addSpacing(12);
     mainLayout->addLayout(buttonsLayout);
     mainLayout->setStretch(0, 1);
     setLayout(mainLayout);
@@ -96,11 +95,6 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     setWindowTitle(tr("Config Dialog"));
 
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
-
-    if (s_iLastWidth > 0 && s_iLastHeight > 0)
-    {
-        resize(s_iLastWidth, s_iLastHeight);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,27 +145,28 @@ void ConfigDialog::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    //setMaximumSize(size());
-    if (s_iMinWidth > 0 && s_iMinHeight > 0)
+    setMinimumSize(size());
+
+    QSize sz = qApp->Settings()->GetPreferenceDialogSize();
+    if (sz.isEmpty() == false)
     {
-        setMinimumSize(s_iMinWidth, s_iMinHeight);
-    }
-    else
-    {
-        setMinimumSize(size());
-        s_iMinWidth = width();
-        s_iMinHeight = height();
+        resize(sz);
     }
 
     isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ConfigDialog::resizeEvent(QResizeEvent *)
+void ConfigDialog::resizeEvent(QResizeEvent *event)
 {
-    // remember the size for the next time this dialog is opened
-    s_iLastWidth = width();
-    s_iLastHeight = height();
+    Q_UNUSED(event);
+    // remember the size for the next time this dialog is opened, but only
+    // if widget was already initialized, which rules out the resize at
+    // dialog creating, which would
+    if (isInitialized == true)
+    {
+        qApp->Settings()->SetPreferenceDialogSize(size());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,8 +235,3 @@ void ConfigDialog::RetranslateUi()
     contentsWidget->item(3)->setText(tr("Paths"));
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-int ConfigDialog::s_iLastWidth = 0;
-int ConfigDialog::s_iLastHeight = 0;
-int ConfigDialog::s_iMinWidth = 0;
-int ConfigDialog::s_iMinHeight = 0;

@@ -99,6 +99,9 @@ public:
     QByteArray GetToolbarsState() const;
     void SetToolbarsState(const QByteArray &value);
 
+     QSize GetPreferenceDialogSize() const;
+     void SetPreferenceDialogSize(const QSize& sz);
+
 private:
     Q_DISABLE_COPY(VCommonSettings)
 
@@ -124,6 +127,7 @@ private:
     static const QString SettingGeneralGeometry;
     static const QString SettingGeneralWindowState;
     static const QString SettingGeneralToolbarsState;
+    static const QString SettingPreferenceDialogSize;
 };
 
 #endif // VCOMMONSETTINGS_H

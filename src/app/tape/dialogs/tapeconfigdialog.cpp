@@ -147,10 +147,28 @@ void TapeConfigDialog::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    setMaximumSize(size());
     setMinimumSize(size());
 
+    QSize sz = qApp->Settings()->GetPreferenceDialogSize();
+    if (sz.isEmpty() == false)
+    {
+        resize(sz);
+    }
+
     isInitialized = true;//first show windows are held
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapeConfigDialog::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+    // remember the size for the next time this dialog is opened, but only
+    // if widget was already initialized, which rules out the resize at
+    // dialog creating, which would
+    if (isInitialized == true)
+    {
+        qApp->Settings()->SetPreferenceDialogSize(size());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
