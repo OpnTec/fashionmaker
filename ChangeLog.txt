@@ -1,5 +1,5 @@
 # Version 0.5.0
-- [#479] Preferences dialog size is now saved between the sessions in Valentina and Tape app
+- Size of preferences dialog in both Valentina and Tape app is now preserved between sessions
 - [#479] Preferences dialog is now extendable and when it is opened again, it will be resized to its previous size.
 - [#193] Undeletable zombie arc objects.
 - New feature. Groups.
