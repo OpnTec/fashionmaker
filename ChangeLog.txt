@@ -1,4 +1,5 @@
 # Version 0.5.0
+- [#508] Settings saved to INI files in different folders.
 - [#193] Undeletable zombie arc objects.
 - New feature. Groups.
 - Tool "Curve intersect axis" store data about subpaths. 
