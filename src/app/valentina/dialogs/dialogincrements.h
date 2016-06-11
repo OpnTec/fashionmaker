@@ -73,9 +73,6 @@ private slots:
     void DeployFormula();
     void Fx();
     void FullUpdateFromFile();
-    void Find(const QString &term);
-    void FindPrevious();
-    void FindNext();
 
 private:
     Q_DISABLE_COPY(DialogIncrements)

@@ -106,9 +106,9 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->lineEditName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveIncrName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrDescription);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
-    connect(ui->lineEditFind, &QLineEdit::textEdited, this, &DialogIncrements::Find);
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, &DialogIncrements::FindPrevious);
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, &DialogIncrements::FindNext);
+    connect(ui->lineEditFind, &QLineEdit::textEdited,  [=](const QString &term){search->Find(term);});
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [=](){search->FindPrevious();});
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, [=](){search->FindNext();});
 
     if (ui->tableWidgetIncrement->rowCount() > 0)
     {
@@ -782,24 +782,6 @@ void DialogIncrements::ShowIncrementDetails()
     {
         EnableDetails(false);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::Find(const QString &term)
-{
-    search->Find(term);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::FindPrevious()
-{
-    search->FindPrevious();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::FindNext()
-{
-    search->FindNext();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
