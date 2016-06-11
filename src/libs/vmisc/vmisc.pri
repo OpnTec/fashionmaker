@@ -10,7 +10,8 @@ SOURCES += \
     $$PWD/vcommonsettings.cpp \
     $$PWD/vtapesettings.cpp \
     $$PWD/commandoptions.cpp \
-    $$PWD/qxtcsvmodel.cpp
+    $$PWD/qxtcsvmodel.cpp \
+    $$PWD/vtablesearch.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -29,7 +30,8 @@ HEADERS += \
     $$PWD/vlockguard.h \
     $$PWD/vsysexits.h \
     $$PWD/commandoptions.h \
-    $$PWD/qxtcsvmodel.h
+    $$PWD/qxtcsvmodel.h \
+    $$PWD/vtablesearch.h
 
 # Qt's versions
 # 5.0.0, 5.0.1, 5.0.2

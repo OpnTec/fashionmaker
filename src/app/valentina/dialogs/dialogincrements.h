@@ -31,6 +31,7 @@
 
 #include "../vtools/dialogs/tools/dialogtool.h"
 #include "../xml/vpattern.h"
+#include "../vmisc/vtablesearch.h"
 
 class VIndividualMeasurements;
 class QTableWidget;
@@ -72,6 +73,9 @@ private slots:
     void DeployFormula();
     void Fx();
     void FullUpdateFromFile();
+    void Find(const QString &term);
+    void FindPrevious();
+    void FindNext();
 
 private:
     Q_DISABLE_COPY(DialogIncrements)
@@ -86,6 +90,8 @@ private:
     VPattern             *doc;
 
     int                  formulaBaseHeight;
+
+    QSharedPointer<VTableSearch> search;
 
     template <typename T>
     void                 FillTable(const QMap<QString, T> &varTable, QTableWidget *table);

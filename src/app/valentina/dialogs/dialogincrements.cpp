@@ -58,13 +58,17 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
       ui(new Ui::DialogIncrements),
       data(data),
       doc(doc),
-      formulaBaseHeight(0)
+      formulaBaseHeight(0),
+      search()
 {
     ui->setupUi(this);
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
     ui->lineEditName->setClearButtonEnabled(true);
+    ui->lineEditFind->setClearButtonEnabled(true);
 #endif
+
+    search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidgetIncrement));
 
     formulaBaseHeight = ui->plainTextEditFormula->height();
 
@@ -102,6 +106,9 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     connect(ui->lineEditName, &QLineEdit::editingFinished, this, &DialogIncrements::SaveIncrName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrDescription);
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogIncrements::SaveIncrFormula);
+    connect(ui->lineEditFind, &QLineEdit::textEdited, this, &DialogIncrements::Find);
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, &DialogIncrements::FindPrevious);
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, &DialogIncrements::FindNext);
 
     if (ui->tableWidgetIncrement->rowCount() > 0)
     {
@@ -428,6 +435,8 @@ void DialogIncrements::FullUpdateFromFile()
     FillLengthsCurves();
     FillRadiusesArcs();
     FillAnglesCurves();
+
+    search->RefreshList(ui->lineEditFind->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -773,6 +782,24 @@ void DialogIncrements::ShowIncrementDetails()
     {
         EnableDetails(false);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::Find(const QString &term)
+{
+    search->Find(term);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::FindPrevious()
+{
+    search->FindPrevious();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::FindNext()
+{
+    search->FindNext();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -12,8 +12,7 @@ SOURCES  += \
     $$PWD/dialogs/configpages/tapeconfigurationpage.cpp \
     $$PWD/dialogs/configpages/tapepathpage.cpp \
     $$PWD/dialogs/dialogexporttocsv.cpp \
-    $$PWD/vlitepattern.cpp \
-    $$PWD/vtablesearch.cpp
+    $$PWD/vlitepattern.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -29,8 +28,7 @@ HEADERS  += \
     $$PWD/dialogs/configpages/tapeconfigurationpage.h \
     $$PWD/dialogs/configpages/tapepathpage.h \
     $$PWD/dialogs/dialogexporttocsv.h \
-    $$PWD/vlitepattern.h \
-    $$PWD/vtablesearch.h
+    $$PWD/vlitepattern.h
 
 FORMS    += \
     $$PWD/tmainwindow.ui \
