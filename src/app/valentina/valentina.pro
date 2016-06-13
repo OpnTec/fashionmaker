@@ -309,7 +309,7 @@ unix{
 }
 
 # "make install" command for Windows.
-# Depend on nsis script and create installer in folder "package"
+# Depend on inno setup script and create installer in folder "package"
 win32:*-g++ {
     package.path = $${OUT_PWD}/../../../package/valentina
     package.files += \
@@ -435,13 +435,18 @@ win32:*-g++ {
     package_printsupport.files += $$[QT_INSTALL_PLUGINS]/printsupport/windowsprintersupport.dll
     INSTALLS += package_printsupport
 
-    contains(QT_ARCH, i386) {
-        INNO_ISCC = "C:/Program Files (x86)/Inno Setup 5/iscc.exe"
-    } else {
-        INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe"
+    SCP_FOUND = false
+    exists("C:/Program Files (x86)/Inno Setup 5/iscc.exe") {
+		INNO_ISCC = "C:/Program Files (x86)/Inno Setup 5/iscc.exe"
+		SCP_FOUND = true
+	} else {
+	    exists(INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe") {
+		INNO_ISCC = INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe"
+		SCP_FOUND = true
+	   }
     }
 
-    exists($$INNO_ISCC) {
+    if($$SCP_FOUND) {
         package_inno.path = $${OUT_PWD}/../../../package
         package_inno.files += \
             $$PWD/../../../dist/win/inno/LICENSE_VALENTINA \
