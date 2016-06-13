@@ -1,4 +1,5 @@
 # Version 0.5.0
+- [#505] New installer script based on Inno Setup 5.
 - Size of preferences dialog in both Valentina and Tape app is now preserved between sessions
 - [#479] Preferences dialog is now extendable and when it is opened again, it will be resized to its previous size.
 - [#508] Settings saved to INI files in different folders.

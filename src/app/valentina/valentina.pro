@@ -309,7 +309,7 @@ unix{
 }
 
 # "make install" command for Windows.
-# Depend on nsis script and create installer in folder "package"
+# Depend on inno setup script and create installer in folder "package"
 win32:*-g++ {
     package.path = $${OUT_PWD}/../../../package/valentina
     package.files += \
@@ -435,35 +435,34 @@ win32:*-g++ {
     package_printsupport.files += $$[QT_INSTALL_PLUGINS]/printsupport/windowsprintersupport.dll
     INSTALLS += package_printsupport
 
-    contains(QT_ARCH, i386) {
-        NSIS_MAKENSISW = "C:/Program Files/NSIS/makensisw.exe"
-    } else {
-        NSIS_MAKENSISW = "C:/Program Files (x86)/NSIS/makensisw.exe"
+    SCP_FOUND = false
+    exists("C:/Program Files (x86)/Inno Setup 5/iscc.exe") {
+		INNO_ISCC = "C:/Program Files (x86)/Inno Setup 5/iscc.exe"
+		SCP_FOUND = true
+	} else {
+	    exists(INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe") {
+		INNO_ISCC = INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe"
+		SCP_FOUND = true
+	   }
     }
 
-    exists($$NSIS_MAKENSISW) {
-        package_nsis.path = $${OUT_PWD}/../../../package
-        package_nsis.files += \
-            $$PWD/../../../dist/win/nsis/valentina.nsi \
-            $$PWD/../../../dist/win/nsis/unList.exe # copy exe instead of creating from nsi
-        INSTALLS += package_nsis
-
-        package_nsis_headers.path = $${OUT_PWD}/../../../package/headers
-        package_nsis_headers.files += \
-            $$PWD/../../../dist/win/nsis/headers/fileassoc.nsh \
-            $$PWD/../../../dist/win/nsis/headers/fileversion.nsh
-        INSTALLS += package_nsis_headers
+    if($$SCP_FOUND) {
+        package_inno.path = $${OUT_PWD}/../../../package
+        package_inno.files += \
+            $$PWD/../../../dist/win/inno/LICENSE_VALENTINA \
+            $$PWD/../../../dist/win/inno/valentina.iss 
+        INSTALLS += package_inno
 
         # Do the packaging
         # First, mangle all of INSTALLS values. We depend on them.
         unset(MANGLED_INSTALLS)
         for(x, INSTALLS):MANGLED_INSTALLS += install_$${x}
         build_package.path = $${OUT_PWD}/../../../package
-        build_package.commands = $$NSIS_MAKENSISW \"$${OUT_PWD}/../../../package/valentina.nsi\"
+        build_package.commands = $$INNO_ISCC \"$${OUT_PWD}/../../../package/valentina.iss\"
         build_package.depends = $${MANGLED_INSTALLS}
         INSTALLS += build_package
     } else {
-        message("NSIS was not found!")
+        message("Inno Setup was not found!")
     }
 }
 
