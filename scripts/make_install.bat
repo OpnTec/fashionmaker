@@ -3,12 +3,12 @@ rem script helps create installer
 rem find target architecture
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set ARCHITECTURE=32BIT || set ARCHITECTURE=64BIT
 
-rem Path to NSIS according to architecture
-if %ARCHITECTURE%==32BIT set nsis_path="C:\Program Files\NSIS\makensisw.exe"
-if %ARCHITECTURE%==64BIT set nsis_path="C:\Program Files (x86)\NSIS\makensisw.exe"
+rem Path to Inno Setup according to architecture
+if %ARCHITECTURE%==32BIT set nsis_path="C:/Program Files/Inno Setup 5/iscc.exe"
+if %ARCHITECTURE%==64BIT set nsis_path="C:/Program Files (x86)/Inno Setup 5/iscc.exe"
 
 if not exist %nsis_path% (
-	SET /P promt="Coudn't find NSIS. Do you want to continue?[Y\N]"
+	SET /P promt="Coudn't find Inno Setup. Do you want to continue?[Y\N]"
 	IF "%promt%" == "Y" GOTO PREPARE
 	IF "%promt%" == "y" GOTO PREPARE
 	ELSE GOTO ONEXIT
