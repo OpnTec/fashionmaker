@@ -38,7 +38,7 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vabstractcubicbezier.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
-#include "../../../../../visualization/line/vistoolcurveintersectaxis.h"
+#include "../vtools/visualization/line/vistoolcurveintersectaxis.h"
 #include "../toolcut/vtoolcutsplinepath.h"
 
 const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersectAxis");

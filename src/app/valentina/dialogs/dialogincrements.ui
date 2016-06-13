@@ -39,13 +39,56 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabIncrements">
       <attribute name="title">
        <string>Increments</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="labelFind">
+           <property name="text">
+            <string>Find:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditFind">
+           <property name="placeholderText">
+            <string>Search</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="toolButtonFindPrevious">
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="go-previous" resource="../../../libs/vmisc/share/resources/theme.qrc">
+             <normaloff>:/icons/win.icon.theme/16x16/actions/go-previous.png</normaloff>:/icons/win.icon.theme/16x16/actions/go-previous.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="toolButtonFindNext">
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset theme="go-next" resource="../../../libs/vmisc/share/resources/theme.qrc">
+             <normaloff>:/icons/win.icon.theme/16x16/actions/go-next.png</normaloff>:/icons/win.icon.theme/16x16/actions/go-next.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
        <item>
         <widget class="QSplitter" name="splitter">
          <property name="orientation">
@@ -230,8 +273,7 @@
                </property>
                <property name="icon">
                 <iconset theme="list-add">
-                 <normaloff/>
-                </iconset>
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -245,8 +287,7 @@
                </property>
                <property name="icon">
                 <iconset theme="list-remove">
-                 <normaloff/>
-                </iconset>
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -620,6 +661,7 @@
  </tabstops>
  <resources>
   <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
+  <include location="../../../libs/vmisc/share/resources/theme.qrc"/>
  </resources>
  <connections/>
 </ui>

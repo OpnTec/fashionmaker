@@ -460,24 +460,6 @@ void TMainWindow::CreateFromExisting()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::Find(const QString &term)
-{
-    search->Find(term);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::FindPrevious()
-{
-    search->FindPrevious();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::FindNext()
-{
-    search->FindNext();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::closeEvent(QCloseEvent *event)
 {
     if (MaybeSave())
@@ -2018,9 +2000,9 @@ void TMainWindow::InitWindow()
     connect(ui->comboBoxPMSystem, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
             &TMainWindow::SavePMSystem);
 
-    connect(ui->lineEditFind, &QLineEdit::textEdited, this, &TMainWindow::Find);
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, &TMainWindow::FindPrevious);
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, &TMainWindow::FindNext);
+    connect(ui->lineEditFind, &QLineEdit::textEdited, [=] (const QString &term){search->Find(term);});
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, [=] (){search->FindPrevious();});
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, [=] (){search->FindNext();});
 
     ui->plainTextEditNotes->setPlainText(m->Notes());
     connect(ui->plainTextEditNotes, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveNotes);

@@ -31,6 +31,7 @@
 
 #include "../vtools/dialogs/tools/dialogtool.h"
 #include "../xml/vpattern.h"
+#include "../vmisc/vtablesearch.h"
 
 class VIndividualMeasurements;
 class QTableWidget;
@@ -86,6 +87,8 @@ private:
     VPattern             *doc;
 
     int                  formulaBaseHeight;
+
+    QSharedPointer<VTableSearch> search;
 
     template <typename T>
     void                 FillTable(const QMap<QString, T> &varTable, QTableWidget *table);

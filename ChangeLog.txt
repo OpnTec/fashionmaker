@@ -1,5 +1,7 @@
 # Version 0.5.0
 - [#505] New installer script based on Inno Setup 5.
+- Size of preferences dialog in both Valentina and Tape app is now preserved between sessions
+- [#479] Preferences dialog is now extendable and when it is opened again, it will be resized to its previous size.
 - [#508] Settings saved to INI files in different folders.
 - [#193] Undeletable zombie arc objects.
 - New feature. Groups.
@@ -27,6 +29,7 @@
 - [#487] True dart point always goes to origin when the label is moved.
 - [#128] New Tool: Slash and Spread.
 - [#409] New feature: Export measurement file to Excel .csv.
+- [#180] New feature: Search field in tape app and dialog Increments.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.
