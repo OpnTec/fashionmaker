@@ -23,7 +23,7 @@ mkdir build
 cd build
 cd
 
-qmake -r ..\Valentina.pro
+qmake -r CONFIG+=noTests ..\Valentina.pro
 IF ERRORLEVEL 1 GOTO ERRORQMAKE1
 IF ERRORLEVEL 0 GOTO MAKE
 
