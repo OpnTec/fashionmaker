@@ -1767,7 +1767,7 @@ QSharedPointer<QPrinter> DefaultPrinter(QPrinter::PrinterMode mode)
         }
     }
 
-    QSharedPointer<QPrinter> printer = QSharedPointer<QPrinter>(new QPrinter(def, mode));
+    auto printer = QSharedPointer<QPrinter>(new QPrinter(def, mode));
     printer->setResolution(static_cast<int>(PrintDPI));
     return printer;
 }

@@ -267,19 +267,6 @@ void MainWindowsNoGUI::ExportLayout(const DialogSaveLayout &dialog)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::SaveAsPDF()
-{
-    if (not isPagesUniform())
-    {
-        qCritical()<<tr("For saving multipage document all sheet should have the same size. Use export "
-                        "function instead.");
-        return;
-    }
-    isTiled = false;
-    SaveLayoutAs();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::SaveAsTiledPDF()
 {
     isTiled = true;
@@ -289,26 +276,13 @@ void MainWindowsNoGUI::SaveAsTiledPDF()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::PrintPages(QPrinter *printer)
 {
-    if (printer == nullptr)
-    {
-        return;
-    }
-
-    const QVector<QImage> images = AllSheets(printer);
-
-    QVector<QImage> poster;
-    if (isTiled)
-    {
-        VPoster posterazor(printer);
-        for (int i=0; i < images.size(); i++)
-        {
-            poster += posterazor.Generate(images.at(i), i+1, images.size());
-        }
-    }
-    else
-    {
-        poster = images;
-    }
+    // Here we try understand difference between printer's dpi and our.
+    // Get printer rect acording to our dpi.
+    const QRectF printerPageRect(0, 0, ToPixel(printer->pageRect(QPrinter::Millimeter).width(), Unit::Mm),
+                                 ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm));
+    const double xscale = printer->pageRect().width() / printerPageRect.width();
+    const double yscale = printer->pageRect().height() / printerPageRect.height();
+    const double scale = qMin(xscale, yscale);
 
     QPainter painter;
     if (not painter.begin(printer))
@@ -317,9 +291,40 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
         return;
     }
 
+    painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
+                        Qt::RoundCap, Qt::RoundJoin));
+    painter.setBrush ( QBrush ( Qt::NoBrush ) );
+
+    int count = 0;
+    QSharedPointer<QVector<PosterData>> poster;
+    QSharedPointer<VPoster> posterazor;
+
+    if (isTiled)
+    {
+        poster = QSharedPointer<QVector<PosterData>>(new QVector<PosterData>());
+        posterazor = QSharedPointer<VPoster>(new VPoster(printer));
+
+        for (int i=0; i < scenes.size(); ++i)
+        {
+            auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+            if (paper)
+            {
+                *poster += posterazor->Calc(paper->rect().toRect(), i);
+            }
+        }
+
+        count = poster->size();
+    }
+    else
+    {
+        count = scenes.size();
+    }
+
     // Handle the fromPage(), toPage(), supportsMultipleCopies(), and numCopies() values from QPrinter.
     int firstPage = printer->fromPage() - 1;
-    if (firstPage >= poster.size())
+    if (firstPage >= count)
     {
         return;
     }
@@ -329,9 +334,9 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
     }
 
     int lastPage = printer->toPage() - 1;
-    if (lastPage == -1 || lastPage >= poster.size())
+    if (lastPage == -1 || lastPage >= count)
     {
-        lastPage = poster.size() - 1;
+        lastPage = count - 1;
     }
 
     const int numPages = lastPage - firstPage + 1;
@@ -362,7 +367,38 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
             {
                 index = lastPage - j;
             }
-            painter.drawImage(QPointF(), poster.at(index));
+
+            int paperIndex = -1;
+            isTiled ? paperIndex = poster->at(index).index : paperIndex = index;
+
+            auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(paperIndex));
+            if (paper)
+            {
+                QVector<QGraphicsItem *> posterData;
+                if (isTiled)
+                {
+                    // Draw borders
+                    posterData = posterazor->Borders(paper, poster->at(index), scenes.size());
+                }
+
+                PreparePaper(paperIndex);
+
+                // Render
+                QRectF source;
+                isTiled ? source = poster->at(index).rect : source = paper->rect();
+                QRectF target(0, 0, source.width() * scale, source.height() * scale);
+
+                scenes.at(paperIndex)->render(&painter, target, source, Qt::IgnoreAspectRatio);
+
+                if (isTiled)
+                {
+                    // Remove borders
+                    qDeleteAll(posterData);
+                }
+
+                // Restore
+                RestorePaper(paperIndex);
+            }
         }
     }
 
@@ -738,62 +774,31 @@ void MainWindowsNoGUI::DxfFile(const QString &name, int i) const
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QImage> MainWindowsNoGUI::AllSheets(const QPrinter *printer) const
+void MainWindowsNoGUI::PreparePaper(int index) const
 {
-    QVector<QImage> images;
-    for (int i=0; i < scenes.size(); ++i)
+    auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(index));
+    if (paper)
     {
-        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
-        if (paper)
-        {
-            // Hide shadow and paper border
-            QBrush *brush = new QBrush();
-            brush->setColor( QColor( Qt::white ) );
-            scenes[i]->setBackgroundBrush( *brush );
-            shadows[i]->setVisible(false);
-            paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));// border
-
-            // Render png
-            const QRectF source = paper->rect();
-            QRectF target = source;
-
-            if (printer)
-            {
-                // Here we try understand difference between printer's dpi and our.
-                // Get printer rect acording to our dpi.
-                const QRectF printerPageRect(0, 0, ToPixel(printer->pageSizeMM().width(), Unit::Mm),
-                                             ToPixel(printer->pageSizeMM().height(), Unit::Mm));
-                const double xscale = printer->pageRect().width() / printerPageRect.width();
-                const double yscale = printer->pageRect().height() / printerPageRect.height();
-                const double scale = qMin(xscale, yscale);
-                target.setWidth(target.width() * scale);
-                target.setHeight(target.height() * scale);
-            }
-
-            // Create the image with the exact size of the shrunk scene
-            QImage image(QSize(static_cast<qint32>(target.width()), static_cast<qint32>(target.height())),
-                         QImage::Format_RGB32);
-            image.fill(Qt::white);
-            QPainter painter(&image);
-            painter.setFont( QFont( "Arial", 8, QFont::Normal ) );
-            painter.setRenderHint(QPainter::Antialiasing, true);
-            painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
-                                Qt::RoundCap, Qt::RoundJoin));
-            painter.setBrush ( QBrush ( Qt::NoBrush ) );
-            scenes.at(i)->render(&painter, target, source, Qt::IgnoreAspectRatio);
-            painter.end();
-            images.append(image);
-
-            // Restore
-            paper->setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit()))));
-            brush->setColor( QColor( Qt::gray ) );
-            brush->setStyle( Qt::SolidPattern );
-            scenes[i]->setBackgroundBrush( *brush );
-            shadows[i]->setVisible(true);
-            delete brush;
-        }
+        QBrush brush(Qt::white);
+        scenes.at(index)->setBackgroundBrush(brush);
+        shadows.at(index)->setVisible(false);
+        paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));// border
     }
-    return images;
+
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::RestorePaper(int index) const
+{
+    auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(index));
+    if (paper)
+    {
+        // Restore
+        paper->setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit()))));
+        QBrush brush(Qt::gray);
+        scenes.at(index)->setBackgroundBrush(brush);
+        shadows.at(index)->setVisible(true);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -855,7 +860,7 @@ void MainWindowsNoGUI::PrintPreview()
     SetPrinterSettings(printer.data(), PrintType::PrintPreview);
     printer->setResolution(static_cast<int>(PrintDPI));
     // display print preview dialog
-    QPrintPreviewDialog  preview(printer.data());
+    QPrintPreviewDialog preview(printer.data());
     connect(&preview, &QPrintPreviewDialog::paintRequested, this, &MainWindowsNoGUI::PrintPages);
     preview.exec();
 }
@@ -897,21 +902,16 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
     printer->setCreator(qApp->applicationDisplayName()+" "+qApp->applicationVersion());
 
     // Set orientation
-    if (papers.size() > 0)
+    if (paperSize.height() >= paperSize.width())
     {
-        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
-        SCASSERT(paper != nullptr)
-        if (paper->rect().height()>= paper->rect().width())
-        {
-            printer->setOrientation(QPrinter::Portrait);
-        }
-        else
-        {
-            printer->setOrientation(QPrinter::Landscape);
-        }
+        printer->setOrientation(QPrinter::Portrait);
+    }
+    else
+    {
+        printer->setOrientation(QPrinter::Landscape);
     }
 
-    if (not isTiled && papers.size() > 0)
+    if (not isTiled)
     {
         const QSizeF size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paperSize.height(), Unit::Mm));
         const QPrinter::PageSize pSZ = FindTemplate(size);
@@ -968,13 +968,33 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
 //---------------------------------------------------------------------------------------------------------------------
 bool MainWindowsNoGUI::IsLayoutGrayscale() const
 {
-    const QVector<QImage> images = AllSheets();
+    const QRect target = QRect(0, 0, 100, 100);//Small image less memory need
 
-    for(int i=0; i < images.size(); ++i)
+    for (int i=0; i < scenes.size(); ++i)
     {
-        if (not images.at(i).isGrayscale())
+        auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+        if (paper)
         {
-            return false;
+            // Hide shadow and paper border
+            PreparePaper(i);
+
+            // Render png
+            QImage image(target.size(), QImage::Format_RGB32);
+            image.fill(Qt::white);
+            QPainter painter(&image);
+            painter.setPen(QPen(Qt::black, qApp->toPixel(WidthMainLine(*pattern->GetPatternUnit())), Qt::SolidLine,
+                                Qt::RoundCap, Qt::RoundJoin));
+            painter.setBrush ( QBrush ( Qt::NoBrush ) );
+            scenes.at(i)->render(&painter, target, paper->rect(), Qt::KeepAspectRatio);
+            painter.end();
+
+            // Restore
+            RestorePaper(i);
+
+            if (not image.isGrayscale())
+            {
+                return false;
+            }
         }
     }
 
@@ -1031,11 +1051,11 @@ bool MainWindowsNoGUI::isPagesUniform() const
     }
     else
     {
-        QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
+        auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
         SCASSERT(paper != nullptr)
         for (int i=1; i < papers.size(); ++i)
         {
-            QGraphicsRectItem *p = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
+            auto *p = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
             SCASSERT(p != nullptr)
             if (paper->rect() != p->rect())
             {
