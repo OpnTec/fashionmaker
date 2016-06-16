@@ -1699,11 +1699,11 @@
     </message>
     <message>
         <source>%1 - Base point</source>
-        <translation>% 1 -ponto base</translation>
+        <translation>%1 - ponto base</translation>
     </message>
     <message>
         <source>%1_%2 - Line from point %1 to point %2</source>
-        <translation>% 1_% 2 - Linha do ponto % 1 ao ponto % 2</translation>
+        <translation>%1_%2 - Linha do ponto %1 ao ponto %2</translation>
     </message>
     <message>
         <source>%3 - Point along line %1_%2</source>
@@ -1963,10 +1963,6 @@
     <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>
