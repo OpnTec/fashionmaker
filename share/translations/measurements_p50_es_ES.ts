@@ -277,13 +277,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="294"/>
         <source>height_neck_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura_cuello_frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="296"/>
         <source>Height: Neck Front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Altura: Cuello Frente</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="297"/>
@@ -295,13 +295,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="301"/>
         <source>height_neck_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altura_lado_cuello</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="303"/>
         <source>Height: Neck Side</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Altura: Lado del cuello</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="304"/>
@@ -547,19 +547,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="443"/>
         <source>hand_palm_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>longitud_palma_mano</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="445"/>
         <source>Hand: Palm length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mano: Longitud de la palma</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="446"/>
         <source>Length from Wrist line to base of middle finger.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Longitud de la línea de la muñeca hasta la base del dedo medio.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="450"/>
@@ -577,61 +577,61 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="453"/>
         <source>Length from Wrist line to end of middle finger.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Longitud de la línea de la muñeca hasta la punta del dedo medio.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="457"/>
         <source>hand_palm_width</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ancho_palma_mano</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="459"/>
         <source>Hand: Palm width</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mano: Ancho de la palma</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="460"/>
         <source>Measure where Palm is widest.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Medida donde la palma es mas ancha.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="463"/>
         <source>hand_palm_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>circ_palma_mano</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="465"/>
         <source>Hand: Palm circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mano: Circunferencia de la palma</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="466"/>
         <source>Circumference where Palm is widest.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Circunferencia donde la palma es mas ancha.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="469"/>
         <source>hand_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>circ_mano</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="471"/>
         <source>Hand: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mano: Circunferencia</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="472"/>
         <source>Tuck thumb toward smallest finger, bring fingers close together. Measure circumference around widest part of hand.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alforza con el pulgar hacia el dedo más pequeño, juntar los dedos. Medida de la circunferencia alrededor de la parte más ancha de la mano.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="488"/>
@@ -643,13 +643,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="490"/>
         <source>Foot: Width</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pie: Ancho</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="491"/>
         <source>Measure at widest part of foot.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Medida en la parte más ancha del pie.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="494"/>
@@ -661,31 +661,31 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="496"/>
         <source>Foot: Length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pie: Longitud</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="497"/>
         <source>Measure from back of heel to end of longest toe.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Medida desde la parte posterior del talón hasta el final del dedo más largo.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="501"/>
         <source>foot_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>circ_pie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="503"/>
         <source>Foot: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pie: Circunferencia</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="504"/>
         <source>Measure circumference around widest part of foot.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Medida de la circunferencia en la parte más ancha del pie.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="508"/>
