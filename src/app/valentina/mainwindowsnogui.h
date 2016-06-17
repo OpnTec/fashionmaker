@@ -41,7 +41,7 @@
 
 class QGraphicsScene;
 class QPrinter;
-
+class PosterData;
 
 class MainWindowsNoGUI : public QMainWindow
 {
@@ -53,7 +53,6 @@ public:
 public slots:
     void ToolLayoutSettings(bool checked);
     void ExportLayoutAs();
-    void SaveAsPDF();
     void SaveAsTiledPDF();
     void PrintPages (QPrinter *printer);
     void PrintPreviewOrigin();
@@ -116,17 +115,21 @@ private:
     void ObjFile(const QString &name, int i)const;
     void DxfFile(const QString &name, int i)const;
 
-    QVector<QImage> AllSheets() const;
+    void PreparePaper(int index) const;
+    void RestorePaper(int index) const;
 
     void SaveLayoutAs();
     void PrintPreview();
     void LayoutPrint();
 
-    void SetPrinterSettings(QPrinter *printer, bool prepareForPrinting = true);
+    enum class PrintType : char {PrintPDF, PrintPreview, PrintNative};
+
+    void SetPrinterSettings(QPrinter *printer, const PrintType &printType);
     bool IsLayoutGrayscale() const;
     QPrinter::PaperSize FindTemplate(const QSizeF &size) const;
 
     bool isPagesUniform() const;
+    bool IsPagesFit(const QSizeF &printPaper) const;
     QString FileName() const;
 
     int ContinueIfLayoutStale();

@@ -29,11 +29,29 @@
 #ifndef VPOSTER_H
 #define VPOSTER_H
 
-#include <QImage>
 #include <QRect>
 #include <QCoreApplication>
 
 class QPrinter;
+class QGraphicsItem;
+
+struct PosterData
+{
+    PosterData()
+        : index(0),
+          row(0),
+          column(0),
+          rows(0),
+          columns(0),
+          rect(){}
+
+    quint32 index; // paper index
+    quint32 row; // positions in the greed
+    quint32 column;
+    quint32 rows;
+    quint32 columns;
+    QRect rect; // rect section
+};
 
 class VPoster
 {
@@ -41,20 +59,21 @@ class VPoster
 public:
     explicit VPoster(const QPrinter *printer);
 
-    QVector<QImage> Generate(const QImage &image, int page, int sheets = 1) const;
+    QVector<PosterData> Calc(const QRect &imageRect, int page) const;
+
+    QVector<QGraphicsItem *> Borders(QGraphicsItem *parent, const PosterData &img, int sheets) const;
 private:
     const QPrinter *printer;
     quint32 allowence;
 
     int CountRows(int height) const;
-    int CountColomns(int width) const;
+    int CountColumns(int width) const;
 
-    QImage Cut(int i, int j, const QImage &image) const;
-    QImage Borders(int rows, int colomns, int i, int j, QImage &image, int page, int sheets) const;
+    PosterData Cut(int i, int j, const QRect &imageRect) const;
 
     QRect PageRect() const;
 
-    qreal ToPixel(qreal val) const;
+    static qreal ToPixel(qreal val);
 };
 
 #endif // VPOSTER_H

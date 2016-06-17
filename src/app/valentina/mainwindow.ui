@@ -1040,7 +1040,6 @@
      <property name="title">
       <string>Layout</string>
      </property>
-     <addaction name="actionSaveAsPDF"/>
      <addaction name="actionPrintPreview"/>
      <addaction name="actionPrint"/>
      <addaction name="separator"/>
@@ -1885,24 +1884,6 @@
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionSaveAsPDF">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
-     <normaloff>:/icon/32x32/pdf.png</normaloff>:/icon/32x32/pdf.png</iconset>
-   </property>
-   <property name="text">
-    <string>Save as PDF</string>
-   </property>
-   <property name="toolTip">
-    <string>Save original layout</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
    </property>
   </action>
   <action name="actionSaveAsTiledPDF">
