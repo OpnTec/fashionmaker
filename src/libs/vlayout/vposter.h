@@ -70,7 +70,6 @@ private:
     int CountColumns(int width) const;
 
     PosterData Cut(int i, int j, const QRect &imageRect) const;
-    QImage Borders(int rows, int columns, int i, int j, QImage &image, int page, int sheets) const;
 
     QRect PageRect() const;
 
