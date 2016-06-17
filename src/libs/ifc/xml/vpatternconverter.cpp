@@ -163,7 +163,8 @@ void VPatternConverter::ApplyPatches()
                 V_FALLTHROUGH
             case (0x000203):
                 ToV0_2_4();
-                ValidateXML(XSDSchema(0x000204), fileName);
+                //ValidateXML(XSDSchema(0x000204), fileName);
+                ValidateXML(XSDSchema(0x000302), fileName);
                 V_FALLTHROUGH
             case (0x000204):
                 ToV0_2_5();

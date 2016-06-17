@@ -31,6 +31,7 @@
 
 #include <QSharedData>
 #include "vnodedetail.h"
+#include "vpatternpiecedata.h"
 #include "../ifc/ifcdef.h"
 
 #ifdef Q_CC_GNU
@@ -66,6 +67,9 @@ public:
 
     /** @brief my bias y axis. */
     qreal          my;
+
+    /** @brief Pattern piece data */
+    VPatternPieceData m_ppData;
 
 private:
     VDetailData &operator=(const VDetailData &) Q_DECL_EQ_DELETE;

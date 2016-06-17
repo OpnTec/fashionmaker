@@ -60,12 +60,14 @@ const QString VAbstractPattern::TagGradation    = QStringLiteral("gradation");
 const QString VAbstractPattern::TagHeights      = QStringLiteral("heights");
 const QString VAbstractPattern::TagSizes        = QStringLiteral("sizes");
 const QString VAbstractPattern::TagUnit         = QStringLiteral("unit");
+const QString VAbstractPattern::TagData        = QStringLiteral("data");
 
 const QString VAbstractPattern::AttrName        = QStringLiteral("name");
 const QString VAbstractPattern::AttrVisible     = QStringLiteral("visible");
 const QString VAbstractPattern::AttrObject      = QStringLiteral("object");
 const QString VAbstractPattern::AttrTool        = QStringLiteral("tool");
 const QString VAbstractPattern::AttrType        = QStringLiteral("type");
+const QString VAbstractPattern::AttrLetter      = QStringLiteral("letter");
 
 const QString VAbstractPattern::AttrAll         = QStringLiteral("all");
 

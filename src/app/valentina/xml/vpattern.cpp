@@ -629,6 +629,20 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     }
                     detail.append(VNodeDetail(id, tool, nodeType, mx, my, reverse));
                 }
+                else if (element.tagName() == TagData)
+                {
+                    try
+                    {
+                        QString qsName = GetParametrString(element, AttrName);
+                        detail.GetPatternPieceData().SetName(qsName);
+                        QString qsLetter = GetParametrString(element, AttrLetter);
+                        detail.GetPatternPieceData().SetLetter(qsLetter);
+                        qDebug() << "Data" << qsName << qsLetter;
+                    }
+                    catch(const VException& e)
+                    {
+                    }
+                }
             }
         }
         VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);

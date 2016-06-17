@@ -332,7 +332,7 @@
                                                          <xs:sequence>
                                                                <xs:element name="detail" minOccurs="0" maxOccurs="unbounded">
                                                                      <xs:complexType>
-                                                                           <xs:sequence>
+								         <xs:sequence>
                                                                                  <xs:element name="node" maxOccurs="unbounded">
                                                                                        <xs:complexType>
                                                                                              <xs:attribute name="nodeType" type="xs:string"></xs:attribute>

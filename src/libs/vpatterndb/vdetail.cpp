@@ -514,6 +514,17 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief Returns the full access to the pattern piece data object
+ * @return pattern piece data object
+ */
+VPatternPieceData& VDetail::GetPatternPieceData()
+{
+    return d->m_ppData;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief indexOfNode return index in list node using id object.
  * @param list list nodes detail.
  * @param id object (arc, point, spline, splinePath) id.

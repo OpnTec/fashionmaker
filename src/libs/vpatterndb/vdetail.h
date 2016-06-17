@@ -33,6 +33,7 @@
 #include <QVector>
 
 #include "../vlayout/vabstractdetail.h"
+#include "vpatternpiecedata.h"
 
 class VDetailData;
 class VContainer;
@@ -84,6 +85,8 @@ public:
     QPainterPath ContourPath(const VContainer *data) const;
     QPainterPath SeamAllowancePath(const VContainer *data) const;
     QVector<VNodeDetail> listNodePoint()const;
+    VPatternPieceData& GetPatternPieceData();
+
 private:
     QSharedDataPointer<VDetailData> d;
 

@@ -155,12 +155,14 @@ public:
     static const QString TagHeights;
     static const QString TagSizes;
     static const QString TagUnit;
+    static const QString TagData;
 
     static const QString AttrName;
     static const QString AttrVisible;
     static const QString AttrObject;
     static const QString AttrTool;
     static const QString AttrType;
+    static const QString AttrLetter;
 
     static const QString AttrAll;
 
