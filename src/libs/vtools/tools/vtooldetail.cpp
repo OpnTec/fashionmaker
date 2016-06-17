@@ -84,8 +84,11 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
         switch (detail.at(i).getTypeTool())
         {
             case (Tool::NodePoint):
-                InitTool<VNodePoint>(scene, detail.at(i));
+            {
+                VNodePoint *tool = InitTool<VNodePoint>(scene, detail.at(i));
+                connect(tool, &VNodePoint::ShowContextMenu, this, &VToolDetail::contextMenuEvent);
                 break;
+            }
             case (Tool::NodeArc):
                 doc->IncrementReferens(detail.at(i).getId());
                 break;
@@ -690,7 +693,7 @@ void VToolDetail::DeleteTool(bool ask)
 //---------------------------------------------------------------------------------------------------------------------
 template <typename Tool>
 //cppcheck-suppress unusedFunction
-void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
+Tool* VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
 {
     QHash<quint32, VDataTool*>* tools = doc->getTools();
     SCASSERT(tools != nullptr);
@@ -700,6 +703,7 @@ void VToolDetail::InitTool(VMainGraphicsScene *scene, const VNodeDetail &node)
     tool->setParentItem(this);
     tool->SetParentType(ParentType::Item);
     doc->IncrementReferens(node.getId());
+    return tool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
