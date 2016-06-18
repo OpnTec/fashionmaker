@@ -139,6 +139,8 @@ TMainWindow::TMainWindow(QWidget *parent)
     // On Mac deafault icon size is 32x32.
     ui->toolBarGradation->setIconSize(QSize(24, 24));
 
+    ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
     // Mac OS Dock Menu
     QMenu *menu = new QMenu(this);
