@@ -1,6 +1,3 @@
-#ifndef VPATTERNPIECEDATA_H
-#define VPATTERNPIECEDATA_H
-
 /************************************************************************
  **
  **  @file   vpatternpiecedata.h
@@ -28,6 +25,9 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+
+#ifndef VPATTERNPIECEDATA_H
+#define VPATTERNPIECEDATA_H
 
 #include <QList>
 #include <QString>
@@ -69,14 +69,15 @@ public:
     // methods, which operate on MaterialCutPlacement container
     void                        Append(const MaterialCutPlacement& rMCP);
     void                        Insert(int i, const MaterialCutPlacement& rMCP);
+    void                        Set(int i, const MaterialCutPlacement& rMCP);
     int                         GetMCPCount() const;
     const MaterialCutPlacement& GetMCP(int i) const;
     void                        RemoveMCP(int i);
 
     // methods, which operate on other members
-    QString                     GetLetter() const;
+    const QString&              GetLetter() const;
     void                        SetLetter(QString qsLetter);
-    QString                     GetName() const;
+    const QString&              GetName() const;
     void                        SetName(QString qsName);
 
 private:

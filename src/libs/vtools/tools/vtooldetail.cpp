@@ -36,10 +36,12 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../dialogs/tools/dialogtool.h"
 #include "../dialogs/tools/dialogdetail.h"
+#include "../dialogs/tools/dialogpatternpiecedata.h"
 #include "../undocommands/savedetailoptions.h"
 #include "../undocommands/movedetail.h"
 #include "../undocommands/adddet.h"
 #include "../undocommands/deletedetail.h"
+#include "vpatternpiecedata.h"
 
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
@@ -293,10 +295,21 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
     if (result == QDialog::Accepted)
     {
         SCASSERT(dialog != nullptr);
-        DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
-        SCASSERT(dialogTool != nullptr);
-        VDetail newDet = dialogTool->getDetail();
+        VDetail newDet;
         VDetail oldDet = VAbstractTool::data.GetDetail(id);
+        DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
+        //SCASSERT(dialogTool != nullptr);
+
+        if (dialogTool != nullptr)
+        {
+            newDet = dialogTool->getDetail();
+        }
+        else
+        {
+            DialogPatternPieceData* dialogPPD = qobject_cast<DialogPatternPieceData*>(dialog);
+            SCASSERT(dialogPPD != nullptr);
+            newDet = dialogPPD->GetDetail();
+        }
 
         SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
         connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -518,7 +531,7 @@ void VToolDetail::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     }
 }
 
-////---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
 void VToolDetail::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     Q_UNUSED(event);
@@ -538,6 +551,7 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu menu;
     QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    QAction* actionData = menu.addAction(tr("Details info"));
     QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
     if (_referens > 1)
     {
@@ -558,7 +572,17 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         setDialog();
         dialog->show();
     }
-    if (selectedAction == actionRemove)
+    else if (selectedAction == actionData)
+    {
+        dialog = new DialogPatternPieceData(getData(), id, qApp->getMainWindow());
+        dialog->setModal(true);
+
+        connect(dialog, &DialogTool::DialogClosed, this, &VToolDetail::FullUpdateFromGuiOk);
+        VDetail detail = VAbstractTool::data.GetDetail(id);
+        qobject_cast<DialogPatternPieceData*>(dialog)->SetDetail(detail);
+        dialog->show();
+    }
+    else if (selectedAction == actionRemove)
     {
         try
         {

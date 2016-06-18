@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pattern>
     <!--Valentina pattern format.-->
-    <version>0.2.4</version>
+    <version>0.3.1</version>
     <unit>cm</unit>
     <author/>
     <description/>
@@ -26,14 +26,14 @@
             <point type="alongLine" typeLine="hair" name="M" id="15" firstPoint="6" secondPoint="11" mx="0.132292" lineColor="black" my="0.264583" length="1.15"/>
             <spline point4="12" type="simple" kAsm1="1" kAsm2="0.951923" angle1="180" angle2="352.272" id="19" kCurve="1" color="black" point1="14"/>
             <spline point4="13" type="simple" kAsm1="1.03" kAsm2="0.99" angle1="0" angle2="184" id="20" kCurve="1" color="black" point1="15"/>
-            <point type="cutSpline" name="N" id="21" spline="19" color="black" mx="0.132292" my="0.264583" length="Spl_L_J/3"/>
-            <point type="cutSpline" name="P" id="25" spline="19" color="black" mx="0.0124795" my="0.504208" length="Spl_L_J*0.66"/>
-            <point type="cutSpline" name="p1" id="28" spline="23" color="black" mx="-0.439814" my="-1.99663" length="(Spl_L_J - (waist_circ/4))/2"/>
-            <point type="cutSpline" name="p2" id="31" spline="27" color="black" mx="-0.762067" my="-2.16296" length="(Spl_L_J - (waist_circ/4))/2"/>
-            <point type="cutSpline" name="R" id="42" spline="20" color="black" mx="0.132292" my="0.264583" length="Spl_M_K/3"/>
-            <point type="cutSpline" name="T" id="45" spline="20" color="black" mx="-0.378769" my="0.328469" length="Spl_M_K*0.66"/>
-            <point type="cutSpline" name="p5" id="48" spline="44" color="black" mx="-0.37877" my="-2.40734" length="(Spl_M_K - waist_circ/4)/2"/>
-            <point type="cutSpline" name="p6" id="51" spline="47" color="black" mx="-0.442653" my="-2.22685" length="(Spl_M_K - waist_circ/4)/2"/>
+            <point type="cutSpline" name="N" id="21" spline="19" mx="0.132292" my="0.264583" length="Spl_L_J/3"/>
+            <point type="cutSpline" name="P" id="25" spline="19" mx="0.0124795" my="0.504208" length="Spl_L_J*0.66"/>
+            <point type="cutSpline" name="p1" id="28" spline="23" mx="-0.439814" my="-1.99663" length="(Spl_L_J - (waist_circ/4))/2"/>
+            <point type="cutSpline" name="p2" id="31" spline="27" mx="-0.762067" my="-2.16296" length="(Spl_L_J - (waist_circ/4))/2"/>
+            <point type="cutSpline" name="R" id="42" spline="20" mx="0.132292" my="0.264583" length="Spl_M_K/3"/>
+            <point type="cutSpline" name="T" id="45" spline="20" mx="-0.378769" my="0.328469" length="Spl_M_K*0.66"/>
+            <point type="cutSpline" name="p5" id="48" spline="44" mx="-0.37877" my="-2.40734" length="(Spl_M_K - waist_circ/4)/2"/>
+            <point type="cutSpline" name="p6" id="51" spline="47" mx="-0.442653" my="-2.22685" length="(Spl_M_K - waist_circ/4)/2"/>
             <point type="alongLine" typeLine="hair" name="p9" id="60" firstPoint="3" secondPoint="9" mx="0.132292" lineColor="black" my="0.264583" length="Line_C_G - 3"/>
             <spline point4="9" type="simple" kAsm1="1.36147" kAsm2="0.520526" angle1="291.592" angle2="91.5128" id="73" kCurve="1" color="black" point1="13"/>
             <point type="alongLine" typeLine="hair" name="A1" id="74" firstPoint="3" secondPoint="9" mx="0.132292" lineColor="black" my="0.264583" length="Line_C_G/2"/>

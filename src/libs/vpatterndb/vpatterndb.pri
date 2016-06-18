@@ -17,7 +17,8 @@ SOURCES += \
     $$PWD/variables/vlinelength.cpp \
     $$PWD/variables/vmeasurement.cpp \
     $$PWD/variables/vvariable.cpp \
-    $$PWD/vformula.cpp
+    $$PWD/vformula.cpp \
+    $$PWD/vpatternpiecedata.cpp
 
 win32-msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -49,4 +50,5 @@ HEADERS += \
     $$PWD/variables/vmeasurement_p.h \
     $$PWD/variables/vvariable.h \
     $$PWD/variables/vvariable_p.h \
-    $$PWD/vformula.h
+    $$PWD/vformula.h \
+    $$PWD/vpatternpiecedata.h

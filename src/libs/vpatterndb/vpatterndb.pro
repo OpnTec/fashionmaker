@@ -101,8 +101,3 @@ CONFIG(debug, debug|release){
     }
 }
 
-HEADERS += \
-    vpatternpiecedata.h
-
-SOURCES += \
-    vpatternpiecedata.cpp

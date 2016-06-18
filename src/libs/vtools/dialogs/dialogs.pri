@@ -38,7 +38,9 @@ HEADERS += \
     $$PWD/tools/dialogcubicbezier.h \
     $$PWD/tools/dialogcubicbezierpath.h \
     $$PWD/tools/dialoggroup.h \
-    $$PWD/tools/dialogrotation.h
+    $$PWD/tools/dialogrotation.h \
+    $$PWD/tools/dialogpatternpiecedata.h
+
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -76,7 +78,8 @@ SOURCES += \
     $$PWD/tools/dialogcubicbezier.cpp \
     $$PWD/tools/dialogcubicbezierpath.cpp \
     $$PWD/tools/dialoggroup.cpp \
-    $$PWD/tools/dialogrotation.cpp
+    $$PWD/tools/dialogrotation.cpp \
+    $$PWD/tools/dialogpatternpiecedata.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \

@@ -628,7 +628,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                             throw e;
                     }
                     detail.append(VNodeDetail(id, tool, nodeType, mx, my, reverse));
-                }
+                }/*
                 else if (element.tagName() == TagData)
                 {
                     try
@@ -642,7 +642,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     catch(const VException& e)
                     {
                     }
-                }
+                }*/
             }
         }
         VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);

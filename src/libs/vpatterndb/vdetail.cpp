@@ -522,6 +522,15 @@ VPatternPieceData& VDetail::GetPatternPieceData()
     return d->m_ppData;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the read only reference to the pattern piece data object
+ * @return pattern piece data object
+ */
+const VPatternPieceData& VDetail::GetPatternPieceData() const
+{
+    return d->m_ppData;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

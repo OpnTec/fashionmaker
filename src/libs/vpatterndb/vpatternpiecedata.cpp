@@ -29,24 +29,20 @@
 #include "vpatternpiecedata.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-
 VPatternPieceData::VPatternPieceData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-
 VPatternPieceData::~VPatternPieceData()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-
 void VPatternPieceData::Append(const MaterialCutPlacement& rMCP)
 {
     m_conMCP.append(rMCP);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
 void VPatternPieceData::Insert(int i, const MaterialCutPlacement& rMCP)
 {
     Q_ASSERT(i >= 0);
@@ -55,14 +51,20 @@ void VPatternPieceData::Insert(int i, const MaterialCutPlacement& rMCP)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPatternPieceData::Set(int i, const MaterialCutPlacement& rMCP)
+{
+    Q_ASSERT(i >= 0);
+    Q_ASSERT(i < GetMCPCount());
+    m_conMCP[i] = rMCP;
+}
 
+//---------------------------------------------------------------------------------------------------------------------
 int VPatternPieceData::GetMCPCount() const
 {
     return m_conMCP.count();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
 const MaterialCutPlacement& VPatternPieceData::GetMCP(int i) const
 {
     Q_ASSERT(i >= 0);
@@ -71,7 +73,6 @@ const MaterialCutPlacement& VPatternPieceData::GetMCP(int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
 void VPatternPieceData::RemoveMCP(int i)
 {
     Q_ASSERT(i >= 0);
@@ -80,28 +81,24 @@ void VPatternPieceData::RemoveMCP(int i)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-QString VPatternPieceData::GetLetter() const
+const QString& VPatternPieceData::GetLetter() const
 {
     return m_qsLetter;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
 void VPatternPieceData::SetLetter(QString qsLetter)
 {
     m_qsLetter = qsLetter.left(3);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
-QString VPatternPieceData::GetName() const
+const QString& VPatternPieceData::GetName() const
 {
     return m_qsName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
 void VPatternPieceData::SetName(QString qsName)
 {
     m_qsName = qsName;
