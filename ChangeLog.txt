@@ -30,6 +30,7 @@
 - [#128] New Tool: Slash and Spread.
 - [#409] New feature: Export measurement file to Excel .csv.
 - [#180] New feature: Search field in tape app and dialog Increments.
+- [#514] Read only setting not working properly.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.

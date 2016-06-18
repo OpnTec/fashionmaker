@@ -3327,7 +3327,14 @@ bool MainWindow::MaybeSave()
         switch (ret)
         {
             case QMessageBox::Yes:
-                return Save();
+                if (doc->IsReadOnly())
+                {
+                    return SaveAs();
+                }
+                else
+                {
+                    return Save();
+                }
             case QMessageBox::No:
                 return true;
             case QMessageBox::Cancel:
