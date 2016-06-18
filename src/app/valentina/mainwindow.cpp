@@ -3318,11 +3318,12 @@ bool MainWindow::MaybeSave()
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);
 
-        messageBox->setButtonText(QMessageBox::Yes, curFile.isEmpty() ? tr("Save...") : tr("Save"));
+        messageBox->setButtonText(QMessageBox::Yes,
+                                  curFile.isEmpty() || doc->IsReadOnly() ? tr("Save...") : tr("Save"));
         messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
 
         messageBox->setWindowModality(Qt::ApplicationModal);
-        const QMessageBox::StandardButton ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
+        const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
 
         switch (ret)
         {
