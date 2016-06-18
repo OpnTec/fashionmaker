@@ -615,6 +615,8 @@ QSharedPointer<QPrinter> DefaultPrinter(QPrinter::PrinterMode mode = QPrinter::S
 
 QPixmap darkenPixmap(const QPixmap &pixmap) Q_REQUIRED_RESULT;
 
+void ShowInGraphicalShell(const QString &filePath);
+
 static inline bool VFuzzyComparePossibleNulls(double p1, double p2) Q_REQUIRED_RESULT;
 static inline bool VFuzzyComparePossibleNulls(double p1, double p2)
 {

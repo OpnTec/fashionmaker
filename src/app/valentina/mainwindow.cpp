@@ -1212,7 +1212,7 @@ void MainWindow::OpenRecentFile()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::PatternProperties()
 {
-    DialogPatternProperties proper(doc, pattern, this);
+    DialogPatternProperties proper(curFile, doc, pattern, this);
     connect(&proper, &DialogPatternProperties::UpdateGradation, this, &MainWindow::UpdateGradation);
     proper.exec();
 }

@@ -2031,7 +2031,7 @@ void TMainWindow::InitWindow()
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
     connect(ui->lineEditFullName, &QLineEdit::textEdited, this, &TMainWindow::SaveMFullName);
 
-    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, &TMainWindow::ShowInGraphicalShell);
+    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, [this](){ShowInGraphicalShell(curFile);});
 
     InitUnits();
 
@@ -2106,12 +2106,14 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
         mType == MeasurementsType::Standard ? shownName += QLatin1Literal(".vst") : shownName += QLatin1Literal(".vit");
         ui->lineEditPathToFile->setText(tr("<Empty>"));
         ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
+        ui->lineEditPathToFile->setCursorPosition(0);
         ui->pushButtonShowInExplorer->setEnabled(false);
     }
     else
     {
         ui->lineEditPathToFile->setText(QDir::toNativeSeparators(curFile));
         ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(curFile));
+        ui->lineEditPathToFile->setCursorPosition(0);
         ui->pushButtonShowInExplorer->setEnabled(true);
         auto settings = qApp->TapeSettings();
         QStringList files = settings->GetRecentFileList();
@@ -3000,53 +3002,4 @@ void TMainWindow::InitGender(QComboBox *gender)
     gender->addItem(tr("unknown", "gender"), QVariant(static_cast<int>(GenderType::Unknown)));
     gender->addItem(tr("male", "gender"), QVariant(static_cast<int>(GenderType::Male)));
     gender->addItem(tr("female", "gender"), QVariant(static_cast<int>(GenderType::Female)));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ShowInGraphicalShell()
-{
-#ifdef Q_OS_MAC
-    QStringList args;
-    args << "-e";
-    args << "tell application \"Finder\"";
-    args << "-e";
-    args << "activate";
-    args << "-e";
-    args << "select POSIX file \""+curFile+"\"";
-    args << "-e";
-    args << "end tell";
-    QProcess::startDetached("osascript", args);
-#elif defined(Q_OS_WIN)
-    QProcess::startDetached(QString("explorer /select, \"%1\"").arg(QDir::toNativeSeparators(curFile)));
-#else
-    const QString app = "xdg-open %d";
-    QString cmd;
-    for (int i = 0; i < app.size(); ++i)
-    {
-        QChar c = app.at(i);
-        if (c == QLatin1Char('%') && i < app.size()-1)
-        {
-            c = app.at(++i);
-            QString s;
-            if (c == QLatin1Char('d'))
-            {
-                s = QLatin1Char('"') + QFileInfo(curFile).path() + QLatin1Char('"');
-            }
-            else if (c == QLatin1Char('%'))
-            {
-                s = c;
-            }
-            else
-            {
-                s = QLatin1Char('%');
-                s += c;
-            }
-            cmd += s;
-            continue;
-        }
-        cmd += c;
-    }
-    QProcess::startDetached(cmd);
-#endif
-
 }

@@ -46,7 +46,8 @@ class DialogPatternProperties : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent = nullptr);
+    explicit DialogPatternProperties(const QString &filePath, VPattern *doc, VContainer *pattern,
+                                     QWidget *parent = nullptr);
     virtual ~DialogPatternProperties() Q_DECL_OVERRIDE;
 signals:
     void         UpdateGradation();
@@ -59,8 +60,6 @@ public slots:
     void         DescEdited();
     void         ChangeImage();
     void         ShowContextMenu();
-protected:
-    virtual void showEvent(QShowEvent *event) Q_DECL_OVERRIDE;
 private slots:
     void ToggleComboBox();
     void DefValueChanged();
@@ -82,11 +81,11 @@ private:
     bool                   gradationChanged;
     bool                   defaultChanged;
     bool                   securityChanged;
-    bool                   isInitialized;
     QAction                *deleteAction;
     QAction                *changeImageAction;
     QAction                *saveImageAction;
     QAction                *showImageAction;
+    const QString          &m_filePath;
 
     void         SetHeightsChecked(bool enabled);
     void         SetSizesChecked(bool enabled);
