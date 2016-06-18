@@ -51,7 +51,8 @@ public:
     {}
 
     VDetailData(const VDetailData &detail)
-        :QSharedData(detail), _id(NULL_ID), nodes(detail.nodes), mx(detail.mx), my(detail.my)
+        :QSharedData(detail), _id(NULL_ID), nodes(detail.nodes), mx(detail.mx), my(detail.my),
+          m_ppData(detail.m_ppData)
     {}
 
     ~VDetailData() {}

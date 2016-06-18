@@ -36,6 +36,7 @@
 #include "../../../vgeometry/vsplinepath.h"
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../ifc/xml/vdomdocument.h"
+#include "vpatternpiecedata.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -90,6 +91,19 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
     connect(ui.toolButtonUp, &QToolButton::clicked, this, &DialogDetail::ScrollUp);
     connect(ui.toolButtonDown, &QToolButton::clicked, this, &DialogDetail::ScrollDown);
+
+    m_qslMaterials << tr("Fabric") << tr("Lining") << tr("Interfacing") << tr("Interlining");
+    ui.comboBoxMaterial->addItems(m_qslMaterials);
+    m_qslPlacements << tr("None") << tr("Cut on fold");
+    ui.comboBoxPlacement->addItems(m_qslPlacements);
+
+    connect(ui.pushButtonAdd, &QPushButton::clicked, this, &DialogDetail::AddUpdate);
+    connect(ui.pushButtonCancel, &QPushButton::clicked, this, &DialogDetail::Cancel);
+    connect(ui.pushButtonRemove, &QPushButton::clicked, this, &DialogDetail::Remove);
+    connect(ui.listWidgetMCP, &QListWidget::itemClicked, this, &DialogDetail::SetEditMode);
+    SetAddMode();
+
+    ui.tabWidget->setCurrentIndex(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -151,6 +165,74 @@ void DialogDetail::CheckState()
     {
         bApply->setEnabled(bOk->isEnabled());
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::UpdateList()
+{
+    ui.listWidgetMCP->clear();
+    for (int i = 0; i < detail.GetPatternPieceData().GetMCPCount(); ++i)
+    {
+        MaterialCutPlacement mcp = detail.GetPatternPieceData().GetMCP(i);
+        QString qsText = tr("Cut %1 of %2%3");
+        qsText = qsText.arg(mcp.m_iCutNumber);
+        if (mcp.m_eMaterial < MaterialType::mtUserDefined)
+            qsText = qsText.arg(m_qslMaterials[int(mcp.m_eMaterial)]);
+        else
+            qsText = qsText.arg(mcp.m_qsMaterialUserDef);
+        if (mcp.m_ePlacement == PlacementType::ptCutOnFold)
+            qsText = qsText.arg(tr(" on Fold"));
+        else
+            qsText = qsText.arg("");
+
+        ui.listWidgetMCP->addItem(qsText);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::AddUpdate()
+{
+    MaterialCutPlacement mcp;
+    mcp.m_qsMaterialUserDef = ui.comboBoxMaterial->currentText();
+    mcp.m_eMaterial = MaterialType::mtUserDefined;
+    for (int i = 0; i < m_qslMaterials.count(); ++i)
+        if (mcp.m_qsMaterialUserDef == m_qslMaterials[i])
+            mcp.m_eMaterial = MaterialType(i);
+
+    mcp.m_iCutNumber = ui.spinBoxCutNumber->value();
+    mcp.m_ePlacement = PlacementType(ui.comboBoxPlacement->currentIndex());
+
+    if (m_bAddMode == true)
+    {
+        detail.GetPatternPieceData().Append(mcp);
+    }
+    else
+    {
+        int iR = ui.listWidgetMCP->currentRow();
+        SCASSERT(iR >= 0);
+        detail.GetPatternPieceData().Set(iR, mcp);
+        SetAddMode();
+    }
+    UpdateList();
+    ClearFields();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::Cancel()
+{
+    ClearFields();
+    SetAddMode();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::Remove()
+{
+    int iR = ui.listWidgetMCP->currentRow();
+    SCASSERT(iR >= 0);
+    detail.GetPatternPieceData().RemoveMCP(iR);
+    UpdateList();
+    ClearFields();
+    SetAddMode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -245,6 +327,14 @@ VDetail DialogDetail::CreateDetail() const
     detail.setName(ui.lineEditNameDetail->text());
     detail.setSeamAllowance(supplement);
     detail.setClosed(closed);
+
+    detail.GetPatternPieceData().SetLetter(ui.lineEditLetter->text());
+    detail.GetPatternPieceData().SetName(ui.lineEditName->text());
+
+    qDebug() << "DD" << detail.GetPatternPieceData().GetLetter()
+                << detail.GetPatternPieceData().GetName()
+                   << detail.GetPatternPieceData().GetMCPCount();
+
     return detail;
 }
 
@@ -292,6 +382,11 @@ void DialogDetail::setDetail(const VDetail &value)
     ui.listWidget->setCurrentRow(0);
     ui.listWidget->setFocus(Qt::OtherFocusReason);
     ui.toolButtonDelete->setEnabled(true);
+
+    ui.lineEditLetter->setText(detail.GetPatternPieceData().GetLetter());
+    ui.lineEditName->setText(detail.GetPatternPieceData().GetName());
+    UpdateList();
+
     ValidObjects(DetailIsValid());
 }
 
@@ -554,4 +649,42 @@ bool DialogDetail::DetailIsClockwise() const
         return true;
     }
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::ClearFields()
+{
+    ui.comboBoxMaterial->setCurrentIndex(0);
+    ui.spinBoxCutNumber->setValue(0);
+    ui.comboBoxPlacement->setCurrentIndex(0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::SetAddMode()
+{
+    ui.pushButtonAdd->setText(tr("Add"));
+    ui.pushButtonCancel->hide();
+    ui.pushButtonRemove->hide();
+    ui.listWidgetMCP->setCurrentRow(-1);
+    m_bAddMode = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::SetEditMode()
+{
+    int iR = ui.listWidgetMCP->currentRow();
+    // this method can be called by clicking on item or by update. In the latter case there is nothing else to do!
+    if (iR < 0 || iR >= detail.GetPatternPieceData().GetMCPCount())
+        return;
+
+    ui.pushButtonAdd->setText(tr("Update"));
+    ui.pushButtonCancel->show();
+    ui.pushButtonRemove->show();
+
+    MaterialCutPlacement mcp = detail.GetPatternPieceData().GetMCP(iR);
+    ui.comboBoxMaterial->setCurrentText(mcp.m_qsMaterialUserDef);
+    ui.spinBoxCutNumber->setValue(mcp.m_iCutNumber);
+    ui.comboBoxPlacement->setCurrentIndex(int(mcp.m_ePlacement));
+
+    m_bAddMode = false;
 }

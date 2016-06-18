@@ -62,6 +62,13 @@ protected:
      */
     virtual void     SaveData() Q_DECL_OVERRIDE;
     virtual void     CheckState() Q_DECL_OVERRIDE;
+
+protected slots:
+    void             UpdateList();
+    void             AddUpdate();
+    void             Cancel();
+    void             Remove();
+
 private:
 
     /** @brief ui keeps information about user interface */
@@ -85,6 +92,18 @@ private:
     VDetail          CreateDetail() const;
     void             ValidObjects(bool value);
     void             EnableObjectGUI(bool value);
+
+    bool             m_bAddMode;
+
+    QStringList      m_qslMaterials;
+    QStringList      m_qslPlacements;
+
+    void             ClearFields();
+
+
+private slots:
+    void             SetAddMode();
+    void             SetEditMode();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
