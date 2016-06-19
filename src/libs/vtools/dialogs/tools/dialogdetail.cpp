@@ -174,16 +174,23 @@ void DialogDetail::UpdateList()
     for (int i = 0; i < detail.GetPatternPieceData().GetMCPCount(); ++i)
     {
         MaterialCutPlacement mcp = detail.GetPatternPieceData().GetMCP(i);
-        QString qsText = tr("Cut %1 of %2%3");
-        qsText = qsText.arg(mcp.m_iCutNumber);
+        QString qsText = tr("Cut %1 of %2%3").arg(mcp.m_iCutNumber);
         if (mcp.m_eMaterial < MaterialType::mtUserDefined)
+        {
             qsText = qsText.arg(m_qslMaterials[int(mcp.m_eMaterial)]);
+        }
         else
+        {
             qsText = qsText.arg(mcp.m_qsMaterialUserDef);
+        }
         if (mcp.m_ePlacement == PlacementType::ptCutOnFold)
+        {
             qsText = qsText.arg(tr(" on Fold"));
+        }
         else
+        {
             qsText = qsText.arg("");
+        }
 
         ui.listWidgetMCP->addItem(qsText);
     }
@@ -196,8 +203,12 @@ void DialogDetail::AddUpdate()
     mcp.m_qsMaterialUserDef = ui.comboBoxMaterial->currentText();
     mcp.m_eMaterial = MaterialType::mtUserDefined;
     for (int i = 0; i < m_qslMaterials.count(); ++i)
+    {
         if (mcp.m_qsMaterialUserDef == m_qslMaterials[i])
+        {
             mcp.m_eMaterial = MaterialType(i);
+        }
+    }
 
     mcp.m_iCutNumber = ui.spinBoxCutNumber->value();
     mcp.m_ePlacement = PlacementType(ui.comboBoxPlacement->currentIndex());
@@ -675,7 +686,9 @@ void DialogDetail::SetEditMode()
     int iR = ui.listWidgetMCP->currentRow();
     // this method can be called by clicking on item or by update. In the latter case there is nothing else to do!
     if (iR < 0 || iR >= detail.GetPatternPieceData().GetMCPCount())
+    {
         return;
+    }
 
     ui.pushButtonAdd->setText(tr("Update"));
     ui.pushButtonCancel->show();
