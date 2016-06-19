@@ -98,7 +98,8 @@ TMainWindow::TMainWindow(QWidget *parent)
       labelPatternUnit(nullptr),
       actionDockDiagram(nullptr),
       dockDiagramVisible(false),
-      isInitialized(false)
+      isInitialized(false),
+      hackedWidgets()
 {
     ui->setupUi(this);
 
@@ -1773,39 +1774,23 @@ void TMainWindow::InitWindow()
         // Because Qt Designer doesn't know about our deleting we will create empty objects for correct
         // working the retranslation UI
         // Tab Measurements
-        delete ui->horizontalLayoutValue;
-        delete ui->plainTextEditFormula;
-        delete ui->toolButtonExpr;
-
-        delete ui->labelFormula;
-        ui->labelFormula = new QLabel(this);
-
-        delete ui->pushButtonGrow;
-        ui->pushButtonGrow = new QPushButton(this);
+        HackWidget(&ui->horizontalLayoutValue);
+        HackWidget(&ui->plainTextEditFormula);
+        HackWidget(&ui->toolButtonExpr);
+        HackWidget(&ui->labelFormula);
+        HackWidget(&ui->pushButtonGrow);
 
         // Tab Information
-        delete ui->lineEditGivenName;
-        delete ui->lineEditFamilyName;
-        delete ui->comboBoxGender;
-        delete ui->lineEditEmail;
-
-        delete ui->labelGivenName;
-        ui->labelGivenName = new QLabel(this);
-
-        delete ui->labelFamilyName;
-        ui->labelFamilyName = new QLabel(this);
-
-        delete ui->labelBirthDate;
-        ui->labelBirthDate = new QLabel(this);
-
-        delete ui->dateEditBirthDate;
-        ui->dateEditBirthDate = new QDateEdit(this);
-
-        delete ui->labelGender;
-        ui->labelGender = new QLabel(this);
-
-        delete ui->labelEmail;
-        ui->labelEmail = new QLabel(this);
+        HackWidget(&ui->lineEditGivenName);
+        HackWidget(&ui->lineEditFamilyName);
+        HackWidget(&ui->comboBoxGender);
+        HackWidget(&ui->lineEditEmail);
+        HackWidget(&ui->labelGivenName);
+        HackWidget(&ui->labelFamilyName);
+        HackWidget(&ui->labelBirthDate);
+        HackWidget(&ui->dateEditBirthDate);
+        HackWidget(&ui->labelGender);
+        HackWidget(&ui->labelEmail);
 
         const QStringList listHeights = VMeasurement::WholeListHeights(mUnit);
         const QStringList listSizes = VMeasurement::WholeListSizes(mUnit);
@@ -1845,31 +1830,18 @@ void TMainWindow::InitWindow()
         ui->lineEditEmail->setEnabled(true);
 
         // Tab Measurements
-        delete ui->doubleSpinBoxBaseValue;
-        delete ui->doubleSpinBoxInSizes;
-        delete ui->doubleSpinBoxInHeights;
-
-        delete ui->labelBaseValue;
-        ui->labelBaseValue = new QLabel(this);
-
-        delete ui->labelInSizes;
-        ui->labelInSizes = new QLabel(this);
-
-        delete ui->labelInHeights;
-        ui->labelInHeights = new QLabel(this);
+        HackWidget(&ui->doubleSpinBoxBaseValue);
+        HackWidget(&ui->doubleSpinBoxInSizes);
+        HackWidget(&ui->doubleSpinBoxInHeights);
+        HackWidget(&ui->labelBaseValue);
+        HackWidget(&ui->labelInSizes);
+        HackWidget(&ui->labelInHeights);
 
         // Tab Information
-        delete ui->labelBaseSize;
-        ui->labelBaseSize = new QLabel(this);
-
-        delete ui->labelBaseSizeValue;
-        ui->labelBaseSizeValue = new QLabel(this);
-
-        delete ui->labelBaseHeight;
-        ui->labelBaseHeight = new QLabel(this);
-
-        delete ui->labelBaseHeightValue;
-        ui->labelBaseHeightValue = new QLabel(this);
+        HackWidget(&ui->labelBaseSize);
+        HackWidget(&ui->labelBaseSizeValue);
+        HackWidget(&ui->labelBaseHeight);
+        HackWidget(&ui->labelBaseHeightValue);
 
         ui->lineEditGivenName->setText(m->GivenName());
         ui->lineEditFamilyName->setText(m->FamilyName());
@@ -2893,4 +2865,13 @@ void TMainWindow::ShowInGraphicalShell()
     QProcess::startDetached(cmd);
 #endif
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+void TMainWindow::HackWidget(T **widget)
+{
+    delete *widget;
+    *widget = new T();
+    hackedWidgets.append(*widget);
 }
