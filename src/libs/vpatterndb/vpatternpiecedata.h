@@ -73,6 +73,7 @@ public:
     int                         GetMCPCount() const;
     const MaterialCutPlacement& GetMCP(int i) const;
     void                        RemoveMCP(int i);
+    void                        Clear();
 
     // methods, which operate on other members
     const QString&              GetLetter() const;

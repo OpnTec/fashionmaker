@@ -32,6 +32,7 @@
 #include "ui_dialogdetail.h"
 #include "dialogtool.h"
 #include "../vpatterndb/vdetail.h"
+#include "vpatternpiecedata.h"
 
 /**
  * @brief The DialogDetail class dialog for ToolDetai. Help create detail and edit option.
@@ -97,6 +98,8 @@ private:
 
     QStringList      m_qslMaterials;
     QStringList      m_qslPlacements;
+    // temporary container for Material/Cut/Placement 3-tuples
+    MCPContainer     m_conMCP;
 
     void             ClearFields();
 

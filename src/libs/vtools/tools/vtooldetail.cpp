@@ -331,6 +331,21 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domElement, AttrClosed, static_cast<quint8>(detail.getClosed()));
     doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
 
+    QDomElement domData = doc->createElement(VAbstractPattern::TagData);
+    doc->SetAttribute(domData, VAbstractPattern::AttrLetter, detail.GetPatternPieceData().GetLetter());
+    doc->SetAttribute(domData, VAbstractPattern::AttrName, detail.GetPatternPieceData().GetName());
+    for (int i = 0; i < detail.GetPatternPieceData().GetMCPCount(); ++i)
+    {
+        MaterialCutPlacement mcp = detail.GetPatternPieceData().GetMCP(i);
+        QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
+        domData.appendChild(domMCP);
+    }
+    domElement.appendChild(domData);
+
     for (int i = 0; i < detail.CountNode(); ++i)
     {
        AddNode(doc, domElement, detail.at(i));
@@ -356,6 +371,22 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domElement, AttrClosed, QString().setNum(static_cast<quint8>(det.getClosed())));
         doc->SetAttribute(domElement, AttrWidth, QString().setNum(det.getWidth()));
         doc->RemoveAllChildren(domElement);
+
+        QDomElement domData = doc->createElement(VAbstractPattern::TagData);
+        doc->SetAttribute(domData, VAbstractPattern::AttrLetter, det.GetPatternPieceData().GetLetter());
+        doc->SetAttribute(domData, VAbstractPattern::AttrName, det.GetPatternPieceData().GetName());
+        for (int i = 0; i < det.GetPatternPieceData().GetMCPCount(); ++i)
+        {
+            MaterialCutPlacement mcp = det.GetPatternPieceData().GetMCP(i);
+            QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
+            doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
+            doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+            doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
+            doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
+            domData.appendChild(domMCP);
+        }
+        domElement.appendChild(domData);
+
         for (int i = 0; i < det.CountNode(); ++i)
         {
            AddNode(doc, domElement, det.at(i));

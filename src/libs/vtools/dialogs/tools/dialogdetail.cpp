@@ -171,9 +171,9 @@ void DialogDetail::CheckState()
 void DialogDetail::UpdateList()
 {
     ui.listWidgetMCP->clear();
-    for (int i = 0; i < detail.GetPatternPieceData().GetMCPCount(); ++i)
+    for (int i = 0; i < m_conMCP.count(); ++i)
     {
-        MaterialCutPlacement mcp = detail.GetPatternPieceData().GetMCP(i);
+        MaterialCutPlacement mcp = m_conMCP[i];
         QString qsText = tr("Cut %1 of %2%3").arg(mcp.m_iCutNumber);
         if (mcp.m_eMaterial < MaterialType::mtUserDefined)
         {
@@ -215,13 +215,13 @@ void DialogDetail::AddUpdate()
 
     if (m_bAddMode == true)
     {
-        detail.GetPatternPieceData().Append(mcp);
+        m_conMCP << mcp;
     }
     else
     {
         int iR = ui.listWidgetMCP->currentRow();
         SCASSERT(iR >= 0);
-        detail.GetPatternPieceData().Set(iR, mcp);
+        m_conMCP[iR] = mcp;
         SetAddMode();
     }
     UpdateList();
@@ -240,7 +240,7 @@ void DialogDetail::Remove()
 {
     int iR = ui.listWidgetMCP->currentRow();
     SCASSERT(iR >= 0);
-    detail.GetPatternPieceData().RemoveMCP(iR);
+    m_conMCP.removeAt(iR);
     UpdateList();
     ClearFields();
     SetAddMode();
@@ -342,9 +342,10 @@ VDetail DialogDetail::CreateDetail() const
     detail.GetPatternPieceData().SetLetter(ui.lineEditLetter->text());
     detail.GetPatternPieceData().SetName(ui.lineEditName->text());
 
-    qDebug() << "DD" << detail.GetPatternPieceData().GetLetter()
-                << detail.GetPatternPieceData().GetName()
-                   << detail.GetPatternPieceData().GetMCPCount();
+    for (int i = 0; i < m_conMCP.count(); ++i)
+    {
+        detail.GetPatternPieceData().Append(m_conMCP[i]);
+    }
 
     return detail;
 }
@@ -396,6 +397,13 @@ void DialogDetail::setDetail(const VDetail &value)
 
     ui.lineEditLetter->setText(detail.GetPatternPieceData().GetLetter());
     ui.lineEditName->setText(detail.GetPatternPieceData().GetName());
+
+    m_conMCP.clear();
+    for (int i = 0; i < detail.GetPatternPieceData().GetMCPCount(); ++i)
+    {
+        m_conMCP << detail.GetPatternPieceData().GetMCP(i);
+    }
+
     UpdateList();
 
     ValidObjects(DetailIsValid());

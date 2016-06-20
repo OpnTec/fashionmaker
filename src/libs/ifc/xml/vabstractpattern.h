@@ -156,6 +156,7 @@ public:
     static const QString TagSizes;
     static const QString TagUnit;
     static const QString TagData;
+    static const QString TagMCP;
 
     static const QString AttrName;
     static const QString AttrVisible;
@@ -163,6 +164,10 @@ public:
     static const QString AttrTool;
     static const QString AttrType;
     static const QString AttrLetter;
+    static const QString AttrMaterial;
+    static const QString AttrUserDefined;
+    static const QString AttrCutNumber;
+    static const QString AttrPlacement;
 
     static const QString AttrAll;
 

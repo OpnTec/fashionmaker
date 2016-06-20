@@ -81,6 +81,14 @@ void VPatternPieceData::RemoveMCP(int i)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPatternPieceData::Clear()
+{
+    m_qsLetter = "";
+    m_qsName = "";
+    m_conMCP.clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 const QString& VPatternPieceData::GetLetter() const
 {
     return m_qsLetter;

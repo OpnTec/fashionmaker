@@ -47,6 +47,7 @@
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../core/vapplication.h"
 #include "../vpatterndb/calculator.h"
+#include "vpatternpiecedata.h"
 
 #include <QMessageBox>
 #include <QUndoStack>
@@ -580,6 +581,11 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     try
     {
+        QString qs;
+        QTextStream ts(&qs, QIODevice::WriteOnly);
+        domElement.save(ts, 2);
+        qDebug() << "Parse detail" << qs;
+
         VDetail detail;
         const quint32 id = GetParametrId(domElement);
         detail.setName(GetParametrString(domElement, AttrName, ""));
@@ -628,21 +634,26 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                             throw e;
                     }
                     detail.append(VNodeDetail(id, tool, nodeType, mx, my, reverse));
-                }/*
+                }
                 else if (element.tagName() == TagData)
                 {
-                    try
+                    QString qsName = element.attribute(AttrName, "");
+                    detail.GetPatternPieceData().SetName(qsName);
+                    QString qsLetter = element.attribute(AttrLetter, "");
+                    detail.GetPatternPieceData().SetLetter(qsLetter);
+
+                    QDomNodeList nodeListMCP = element.childNodes();
+                    for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
                     {
-                        QString qsName = GetParametrString(element, AttrName);
-                        detail.GetPatternPieceData().SetName(qsName);
-                        QString qsLetter = GetParametrString(element, AttrLetter);
-                        detail.GetPatternPieceData().SetLetter(qsLetter);
-                        qDebug() << "Data" << qsName << qsLetter;
+                        MaterialCutPlacement mcp;
+                        QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
+                        mcp.m_eMaterial = MaterialType(GetParametrUInt(domMCP, AttrMaterial, 0));
+                        mcp.m_qsMaterialUserDef = GetParametrString(domMCP, AttrUserDefined, "");
+                        mcp.m_iCutNumber = GetParametrUInt(domMCP, AttrCutNumber, 0);
+                        mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
+                        detail.GetPatternPieceData().Append(mcp);
                     }
-                    catch(const VException& e)
-                    {
-                    }
-                }*/
+                }
             }
         }
         VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);
