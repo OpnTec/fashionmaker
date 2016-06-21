@@ -2114,6 +2114,13 @@ void MainWindow::ActionDetails(bool checked)
         }
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);// Need to get data about all details
 
+        leftGoToStage->setPixmap(QPixmap("://icon/24x24/right_to_left_arrow.png"));
+        rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
+
+        ui->actionDraw->setChecked(false);
+        ui->actionDetails->setChecked(true);
+        ui->actionLayout->setChecked(false);
+
         if(not qApp->getOpeningPattern())
         {
             if (pattern->DataDetails()->count() == 0)
@@ -2127,13 +2134,6 @@ void MainWindow::ActionDetails(bool checked)
         }
 
         qCDebug(vMainWindow, "Show details scene");
-
-        leftGoToStage->setPixmap(QPixmap("://icon/24x24/right_to_left_arrow.png"));
-        rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
-
-        ui->actionDraw->setChecked(false);
-        ui->actionDetails->setChecked(true);
-        ui->actionLayout->setChecked(false);
         SaveCurrentScene();
 
         currentScene = sceneDetails;
@@ -2186,6 +2186,13 @@ void MainWindow::ActionLayout(bool checked)
         }
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);// Need to get data about all details
 
+        leftGoToStage->setPixmap(QPixmap("://icon/24x24/right_to_left_arrow.png"));
+        rightGoToStage->setPixmap(QPixmap("://icon/24x24/fast_forward_right_to_left_arrow.png"));
+
+        ui->actionDraw->setChecked(false);
+        ui->actionDetails->setChecked(false);
+        ui->actionLayout->setChecked(true);
+
         const QHash<quint32, VDetail> *details = pattern->DataDetails();
         if(not qApp->getOpeningPattern())
         {
@@ -2203,12 +2210,6 @@ void MainWindow::ActionLayout(bool checked)
 
         qCDebug(vMainWindow, "Show layout scene");
 
-        leftGoToStage->setPixmap(QPixmap("://icon/24x24/right_to_left_arrow.png"));
-        rightGoToStage->setPixmap(QPixmap("://icon/24x24/fast_forward_right_to_left_arrow.png"));
-
-        ui->actionDraw->setChecked(false);
-        ui->actionDetails->setChecked(false);
-        ui->actionLayout->setChecked(true);
         SaveCurrentScene();
 
         PrepareDetailsForLayout(details);
