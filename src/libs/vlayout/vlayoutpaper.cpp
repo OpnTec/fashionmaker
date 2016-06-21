@@ -335,7 +335,7 @@ QRectF VLayoutPaper::BoundingRect() const
     QRectF rec;
     for (int i=0; i < d->details.count(); ++i)
     {
-        rec = rec.united(d->details.at(i).BoundingRect());
+        rec = rec.united(d->details.at(i).LayoutBoundingRect());
     }
 
     return rec;

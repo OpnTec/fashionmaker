@@ -53,6 +53,13 @@ public:
     enum { Type = UserType + static_cast<int>(Tool::NodePoint)};
     virtual QString getTagName() const Q_DECL_OVERRIDE;
 
+signals:
+    /**
+     * @brief ShowContextMenu emit when need show tool context menu.
+     * @param event context menu event.
+     */
+    void         ShowContextMenu(QGraphicsSceneContextMenuEvent *event);
+
 public slots:
     virtual void FullUpdateFromFile() Q_DECL_OVERRIDE;
     void         NameChangePosition(const QPointF &pos);

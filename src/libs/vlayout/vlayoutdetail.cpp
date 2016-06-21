@@ -252,7 +252,24 @@ int VLayoutDetail::EdgeByPoint(const QPointF &p1) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VLayoutDetail::BoundingRect() const
+QRectF VLayoutDetail::DetailBoundingRect() const
+{
+    QVector<QPointF> points;
+    if (getSeamAllowance())
+    {
+        points = GetSeamAllowencePoints();
+    }
+    else
+    {
+        points = GetContourPoints();
+    }
+
+    points.append(points.first());
+    return QPolygonF(points).boundingRect();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VLayoutDetail::LayoutBoundingRect() const
 {
     QVector<QPointF> points = GetLayoutAllowencePoints();
     points.append(points.first());
@@ -262,7 +279,7 @@ QRectF VLayoutDetail::BoundingRect() const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VLayoutDetail::Diagonal() const
 {
-    const QRectF rec = BoundingRect();
+    const QRectF rec = LayoutBoundingRect();
     return qSqrt(pow(rec.height(), 2) + pow(rec.width(), 2));
 }
 

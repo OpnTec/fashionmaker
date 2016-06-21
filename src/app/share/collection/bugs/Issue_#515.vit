@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina (http://www.valentina-project.org/).-->
+    <version>0.3.3</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <family-name/>
+        <given-name/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m name="height_waist_side" value="107"/>
+        <m name="height_knee" value="50"/>
+        <m name="waist_circ" value="84"/>
+        <m name="hip_circ" value="100"/>
+        <m name="leg_crotch_to_floor" value="83"/>
+        <m name="leg_knee_circ" value="50"/>
+        <m name="leg_ankle_high_circ" value="28"/>
+        <m name="leg_ankle_circ" value="28"/>
+    </body-measurements>
+</vit>

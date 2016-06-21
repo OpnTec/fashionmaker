@@ -28,6 +28,7 @@
 
 #include "tst_vposter.h"
 #include "../vlayout/vposter.h"
+#include "../vmisc/def.h"
 
 #include <QImage>
 #include <QPrinter>
@@ -49,15 +50,15 @@ void TST_VPoster::BigPoster()
     printer.setFullPage(true);
     // We need to set full page because otherwise QPrinter->pageRect returns different values in Windows and Linux
 
-    const QImage image(2622, 3178, QImage::Format_RGB32); // Little bit bigger than A1
+    const QRect image(0, 0, 2622, 3178); // Little bit bigger than A1
     VPoster posterazor(&printer);
-    const QVector<QImage> poster = posterazor.Generate(image, 1, 1);
+    const QVector<PosterData> poster = posterazor.Calc(image, 0);
 
     QCOMPARE(poster.size(), 12);
 
     for (int i=0; i < poster.size(); i++)
     {
-        QCOMPARE(poster.at(i).rect().size(), PageRect(printer).size());
+        QCOMPARE(poster.at(i).rect.size(), PageRect(printer).size());
     }
 }
 
@@ -69,13 +70,13 @@ void TST_VPoster::SmallPoster()
     printer.setResolution(96);// By default
     printer.setPaperSize(QPrinter::A4);
 
-    const QImage image(700, 1000, QImage::Format_RGB32); // Little bit less than A4
+    const QRect image(0, 0, 700, 1000); // Little bit less than A4
     VPoster posterazor(&printer);
-    const QVector<QImage> poster = posterazor.Generate(image, 1, 1);
+    const QVector<PosterData> poster = posterazor.Calc(image, 0);
 
     QCOMPARE(poster.size(), 1);
 
-    QCOMPARE(poster.at(0).rect().size(), PageRect(printer).size());
+    QCOMPARE(poster.at(0).rect.size(), PageRect(printer).size());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -85,13 +86,13 @@ QRect TST_VPoster::PageRect(const QPrinter &printer) const
     // we can't use method pageRect(QPrinter::Point). Our dpi different can be different.
     // We convert value yourself to pixels.
     const QRectF rect = printer.pageRect(QPrinter::Millimeter);
-    QRect pageRect(qFloor(ToPixel(rect.x(), printer)), qFloor(ToPixel(rect.y(), printer)),
-                   qFloor(ToPixel(rect.width(), printer)), qFloor(ToPixel(rect.height(), printer)));
+    QRect pageRect(qFloor(ToPixel(rect.x())), qFloor(ToPixel(rect.y())),
+                   qFloor(ToPixel(rect.width())), qFloor(ToPixel(rect.height())));
     return pageRect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal TST_VPoster::ToPixel(qreal val, const QPrinter &printer) const
+qreal TST_VPoster::ToPixel(qreal val) const
 {
-    return val / 25.4 * printer.resolution(); // Mm to pixels with current dpi.
+    return val / 25.4 * PrintDPI; // Mm to pixels with current dpi.
 }

@@ -12,7 +12,7 @@
     <name>AddGroup</name>
     <message>
         <source>add group</source>
-        <translation type="unfinished"></translation>
+        <translation>add group</translation>
     </message>
 </context>
 <context>
@@ -278,18 +278,18 @@
     </message>
     <message>
         <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="unfinished"></translation>
+        <translation>The Default unit has been updated and will be used as the default for the next pattern you create.</translation>
     </message>
     <message>
         <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="unfinished"></translation>
+        <translation>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</translation>
     </message>
 </context>
 <context>
     <name>DelGroup</name>
     <message>
         <source>delete group</source>
-        <translation type="unfinished"></translation>
+        <translation>delete group</translation>
     </message>
 </context>
 <context>
@@ -835,74 +835,74 @@
     <name>DialogCubicBezier</name>
     <message>
         <source>Cubic bezier</source>
-        <translation type="unfinished"></translation>
+        <translation>Cubic bezier</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Color:</translation>
+        <translation>Color:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished">First point:</translation>
+        <translation>First point:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished">Second point:</translation>
+        <translation>Second point:</translation>
     </message>
     <message>
         <source>Third point:</source>
-        <translation type="unfinished">Third point:</translation>
+        <translation>Third point:</translation>
     </message>
     <message>
         <source>Fourth point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fourth point:</translation>
     </message>
     <message>
         <source>Select the second point of curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Select the second point of curve</translation>
     </message>
     <message>
         <source>Select the third point of curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Select the third point of curve</translation>
     </message>
     <message>
         <source>Select the fourth point of curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Select the fourth point of curve</translation>
     </message>
     <message>
         <source>Invalid spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Invalid spline</translation>
     </message>
 </context>
 <context>
     <name>DialogCubicBezierPath</name>
     <message>
         <source>Dialog cubic bezier path</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialog cubic bezier path</translation>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Point:</translation>
     </message>
     <message>
         <source>List of points</source>
-        <translation type="unfinished">List of points</translation>
+        <translation>List of points</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Color:</translation>
+        <translation>Color:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Invalid spline path</translation>
     </message>
 </context>
 <context>
@@ -1617,23 +1617,23 @@
     <name>DialogGroup</name>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Group</translation>
     </message>
     <message>
         <source>Group name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Group name:</translation>
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation type="unfinished">Unique pattern piece name</translation>
+        <translation>Unique pattern piece name</translation>
     </message>
     <message>
         <source>Choose group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Choose group name</translation>
     </message>
     <message>
         <source>New group</source>
-        <translation type="unfinished"></translation>
+        <translation>New group</translation>
     </message>
 </context>
 <context>
@@ -1831,47 +1831,47 @@
     </message>
     <message>
         <source>%1 - point of curves intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - point of curves intersection</translation>
     </message>
     <message>
         <source>Curve</source>
-        <translation type="unfinished">Curve</translation>
+        <translation>Curve</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Cubic bezier curve</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation type="unfinished">Arc</translation>
+        <translation>Arc</translation>
     </message>
     <message>
         <source>%1 with length %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 with length %2</translation>
     </message>
     <message>
         <source>Spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Spline path</translation>
     </message>
     <message>
         <source>Cubic bezier curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>Cubic bezier curve path</translation>
     </message>
     <message>
         <source>%1 - cut %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - cut %2</translation>
     </message>
     <message>
         <source>arc</source>
-        <translation type="unfinished"></translation>
+        <translation>arc</translation>
     </message>
     <message>
         <source>curve</source>
-        <translation type="unfinished"></translation>
+        <translation>curve</translation>
     </message>
     <message>
         <source>curve path</source>
-        <translation type="unfinished"></translation>
+        <translation>curve path</translation>
     </message>
 </context>
 <context>
@@ -2023,6 +2023,14 @@
     <message>
         <source>Invalid value</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished">Find:</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Search</translation>
     </message>
 </context>
 <context>
@@ -2234,35 +2242,35 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Layout options</source>
-        <translation type="unfinished"></translation>
+        <translation>Layout options</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset length:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
-        <translation type="unfinished"></translation>
+        <translation>Rule for choosing the next workpiece</translation>
     </message>
     <message>
         <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation type="unfinished"></translation>
+        <translation>Enabling for sheets that have big height will speed up creating. </translation>
     </message>
     <message>
         <source>Divide into strips</source>
-        <translation type="unfinished"></translation>
+        <translation>Divide into strips</translation>
     </message>
     <message>
         <source>Multiplier</source>
-        <translation type="unfinished"></translation>
+        <translation>Multiplier</translation>
     </message>
     <message>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Set multiplier for length of the biggest workpiece in layout.</translation>
     </message>
     <message>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation>x</translation>
     </message>
 </context>
 <context>
@@ -2685,7 +2693,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>New pattern</source>
-        <translation type="unfinished">New pattern</translation>
+        <translation>New pattern</translation>
     </message>
 </context>
 <context>
@@ -2855,55 +2863,55 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Security</source>
-        <translation type="unfinished"></translation>
+        <translation>Security</translation>
     </message>
     <message>
         <source>Open only for read</source>
-        <translation type="unfinished"></translation>
+        <translation>Open only for read</translation>
     </message>
     <message>
         <source>Call context menu for edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Call context menu for edit</translation>
     </message>
     <message>
         <source>No image</source>
-        <translation type="unfinished"></translation>
+        <translation>No image</translation>
     </message>
     <message>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>Delete image</translation>
     </message>
     <message>
         <source>Change image</source>
-        <translation type="unfinished"></translation>
+        <translation>Change image</translation>
     </message>
     <message>
         <source>Save image to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Save image to file</translation>
     </message>
     <message>
         <source>Show image</source>
-        <translation type="unfinished"></translation>
+        <translation>Show image</translation>
     </message>
     <message>
         <source>Image for pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Image for pattern</translation>
     </message>
     <message>
         <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
-        <translation type="unfinished"></translation>
+        <translation>Images (*.png *.jpg *.jpeg *.bmp)</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Images</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Save File</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="unfinished">untitled</translation>
+        <translation>untitled</translation>
     </message>
 </context>
 <context>
@@ -3042,7 +3050,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Immediately apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Immediately apply</translation>
     </message>
 </context>
 <context>
@@ -3491,39 +3499,39 @@ Apply settings anyway?</translation>
     <name>DialogPointOfIntersectionCurves</name>
     <message>
         <source>Tool point of intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool point of intersection curves</translation>
     </message>
     <message>
         <source>First curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>First curve:</translation>
     </message>
     <message>
         <source>Second curve:</source>
-        <translation type="unfinished"></translation>
+        <translation>Second curve:</translation>
     </message>
     <message>
         <source>Point label:</source>
-        <translation type="unfinished">Point label:</translation>
+        <translation>Point label:</translation>
     </message>
     <message>
         <source>Unique label</source>
-        <translation type="unfinished">Unique label</translation>
+        <translation>Unique label</translation>
     </message>
     <message>
         <source>Choose unique label.</source>
-        <translation type="unfinished">Choose unique label.</translation>
+        <translation>Choose unique label.</translation>
     </message>
     <message>
         <source>Vertical correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertical correction:</translation>
     </message>
     <message>
         <source>Horizontal correction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal correction:</translation>
     </message>
     <message>
         <source>Select second curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Select second curve</translation>
     </message>
 </context>
 <context>
@@ -3873,71 +3881,75 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>First point:</source>
-        <translation type="unfinished">First point:</translation>
+        <translation>First point:</translation>
     </message>
     <message>
         <source>Control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Control point</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
+    </message>
+    <message>
+        <source>Length ratio:</source>
+        <translation type="vanished">Length ratio:</translation>
     </message>
     <message>
         <source>Second point:</source>
-        <translation type="unfinished">Second point:</translation>
+        <translation>Second point:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Invalid spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Invalid spline</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Length:</translation>
+        <translation>Length:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Formula wizard</translation>
+        <translation>Formula wizard</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Calulation</translation>
+        <translation>Calulation</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit first control point angle</translation>
     </message>
     <message>
         <source>Edit second control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit second control point angle</translation>
     </message>
     <message>
         <source>Edit first control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit first control point length</translation>
     </message>
     <message>
         <source>Edit second control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit second control point length</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>Length can&apos;t be negative</translation>
     </message>
 </context>
 <context>
@@ -3992,75 +4004,79 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Point:</translation>
     </message>
     <message>
         <source>First control point</source>
-        <translation type="unfinished"></translation>
+        <translation>First control point</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angle:</translation>
+        <translation>Angle:</translation>
+    </message>
+    <message>
+        <source>Length ratio:</source>
+        <translation type="vanished">Length ratio:</translation>
     </message>
     <message>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Second control point</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Invalid spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Invalid spline path</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Length:</translation>
+        <translation>Length:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="unfinished">Formula wizard</translation>
+        <translation>Formula wizard</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Calulation</translation>
+        <translation>Calulation</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Edit first control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit first control point angle</translation>
     </message>
     <message>
         <source>Edit second control point angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit second control point angle</translation>
     </message>
     <message>
         <source>Edit first control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit first control point length</translation>
     </message>
     <message>
         <source>Edit second control point length</source>
-        <translation type="unfinished"></translation>
+        <translation>Edit second control point length</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
+        <translation>Length can&apos;t be negative</translation>
     </message>
     <message>
         <source>Not used</source>
-        <translation type="unfinished"></translation>
+        <translation>Not used</translation>
     </message>
 </context>
 <context>
@@ -4095,19 +4111,19 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Highest point</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Lowest point</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Leftmost point</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Rightmost point</translation>
     </message>
     <message>
         <source>Invalid value</source>
@@ -4324,7 +4340,7 @@ Apply settings anyway?</translation>
     </message>
     <message>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error while calculation formula. You can try to undo last operation or fix broken formula.</translation>
     </message>
 </context>
 <context>
@@ -5074,11 +5090,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Save as PDF</translation>
+        <translation type="vanished">Save as PDF</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Save original layout</translation>
+        <translation type="vanished">Save original layout</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -5094,7 +5110,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Print tiled PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Print tiled PDF</translation>
     </message>
     <message>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
@@ -5303,7 +5319,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Preview tiled PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Preview tiled PDF</translation>
     </message>
     <message>
         <source>Print preview tiled layout</source>
@@ -5387,55 +5403,55 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Report Bug...</source>
-        <translation type="unfinished"></translation>
+        <translation>Report Bug...</translation>
     </message>
     <message>
         <source>Point intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Point intersection curves</translation>
     </message>
     <message>
         <source>Select first curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Select first curve</translation>
     </message>
     <message>
         <source>(read only)</source>
-        <translation type="unfinished"></translation>
+        <translation>(read only)</translation>
     </message>
     <message>
         <source>Measurements was changed. Do you want to sync measurements now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Measurements was changed. Do you want to sync measurements now?</translation>
     </message>
     <message>
         <source>Curve tool which uses point as control handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve tool which uses point as control handle</translation>
     </message>
     <message>
         <source>Select first curve point</source>
-        <translation type="unfinished"></translation>
+        <translation>Select first curve point</translation>
     </message>
     <message>
         <source>Select point of cubic bezier path</source>
-        <translation type="unfinished"></translation>
+        <translation>Select point of cubic bezier path</translation>
     </message>
     <message>
         <source>Toolbar pointer</source>
-        <translation type="unfinished"></translation>
+        <translation>Toolbar pointer</translation>
     </message>
     <message>
         <source>Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Operations</translation>
     </message>
     <message>
         <source>Create new group</source>
-        <translation type="unfinished"></translation>
+        <translation>Create new group</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Groups</translation>
     </message>
     <message>
         <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</translation>
     </message>
     <message>
         <source>Rotate objects</source>
@@ -5443,7 +5459,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Close pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Close pattern</translation>
     </message>
     <message>
         <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
@@ -5518,7 +5534,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation>For saving multipage document all sheet should have the same size. Use export function instead.</translation>
+        <translation type="vanished">For saving multipage document all sheet should have the same size. Use export function instead.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>
@@ -5658,11 +5674,11 @@ Do you want to save your changes?</translation>
     <name>QApplication</name>
     <message>
         <source>The path to the measurments is already relative.</source>
-        <translation type="unfinished"></translation>
+        <translation>The path to the measurments is already relative.</translation>
     </message>
     <message>
         <source>The path to the measurments is already absolute.</source>
-        <translation type="unfinished"></translation>
+        <translation>The path to the measurments is already absolute.</translation>
     </message>
 </context>
 <context>
@@ -6751,14 +6767,14 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="unfinished">Unexpected version &quot;%1&quot;.</translation>
+        <translation>Unexpected version &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
     <name>VAbstractCubicBezierPath</name>
     <message>
         <source>Can&apos;t cut this spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Can&apos;t cut this spline</translation>
     </message>
 </context>
 <context>
@@ -6769,11 +6785,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Error creating or updating group</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creating or updating group</translation>
     </message>
     <message>
         <source>New group</source>
-        <translation type="unfinished"></translation>
+        <translation>New group</translation>
     </message>
 </context>
 <context>
@@ -7134,15 +7150,15 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset length</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift/Offset length must be used together with shift units.</translation>
     </message>
 </context>
 <context>
@@ -7161,22 +7177,22 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Number of free id exhausted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Number of free id exhausted.</translation>
     </message>
     <message>
         <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Can&apos;t create a curve with type &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
     <name>VCubicBezierPath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation type="unfinished">Not enough points to create the spline.</translation>
+        <translation>Not enough points to create the spline.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation type="unfinished">This spline does not exist.</translation>
+        <translation>This spline does not exist.</translation>
     </message>
 </context>
 <context>
@@ -7488,23 +7504,23 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Error creating or updating point of intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creating or updating point of intersection curves</translation>
     </message>
     <message>
         <source>Error creating or updating simple interactive spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creating or updating simple interactive spline</translation>
     </message>
     <message>
         <source>Error creating or updating interactive spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creating or updating interactive spline path</translation>
     </message>
     <message>
         <source>Error creating or updating cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creating or updating cubic bezier curve</translation>
     </message>
     <message>
         <source>Error creating or updating cubic bezier path curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Error creating or updating cubic bezier path curve</translation>
     </message>
     <message>
         <source>Error creating or updating operation of rotation</source>
@@ -7740,59 +7756,59 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Highest point</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="unfinished"></translation>
+        <translation>Lowest point</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Leftmost point</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="unfinished"></translation>
+        <translation>Rightmost point</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool to make point from intersection two curves</translation>
     </message>
     <message>
         <source>Vertical correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertical correction</translation>
     </message>
     <message>
         <source>Horizontal correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal correction</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>C1: angle</source>
-        <translation type="unfinished"></translation>
+        <translation>C1: angle</translation>
     </message>
     <message>
         <source>C1: length</source>
-        <translation type="unfinished"></translation>
+        <translation>C1: length</translation>
     </message>
     <message>
         <source>C2: angle</source>
-        <translation type="unfinished"></translation>
+        <translation>C2: angle</translation>
     </message>
     <message>
         <source>C2: length</source>
-        <translation type="unfinished"></translation>
+        <translation>C2: length</translation>
     </message>
     <message>
         <source>Cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Cubic bezier curve</translation>
     </message>
     <message>
         <source>Tool cubic bezier curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Tool cubic bezier curve</translation>
     </message>
     <message>
         <source>Tool rotation</source>
@@ -8828,67 +8844,67 @@ Do you want to save your changes?</translation>
     <message>
         <source>Line_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Line_</translation>
+        <translation>Line_</translation>
     </message>
     <message>
         <source>AngleLine_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">AngleLine_</translation>
+        <translation>AngleLine_</translation>
     </message>
     <message>
         <source>Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Arc_</translation>
+        <translation>Arc_</translation>
     </message>
     <message>
         <source>Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Spl_</translation>
+        <translation>Spl_</translation>
     </message>
     <message>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished">SplPath</translation>
+        <translation>SplPath</translation>
     </message>
     <message>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">RadiusArc_</translation>
+        <translation>RadiusArc_</translation>
     </message>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Angle1Arc_</translation>
+        <translation>Angle1Arc_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Angle2Arc_</translation>
+        <translation>Angle2Arc_</translation>
     </message>
     <message>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Angle1Spl_</translation>
+        <translation>Angle1Spl_</translation>
     </message>
     <message>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished">Angle2Spl_</translation>
+        <translation>Angle2Spl_</translation>
     </message>
     <message>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished">Angle1SplPath</translation>
+        <translation>Angle1SplPath</translation>
     </message>
     <message>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished">Angle2SplPath</translation>
+        <translation>Angle2SplPath</translation>
     </message>
     <message>
         <source>Seg_</source>
         <comment>Segment. Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Seg_</translation>
     </message>
 </context>
 <context>
@@ -8917,30 +8933,30 @@ Do you want to save your changes?</translation>
     <name>VWidgetGroups</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Rename</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Delete</translation>
+        <translation>Delete</translation>
     </message>
 </context>
 <context>
     <name>VisToolCubicBezierPath</name>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</translation>
     </message>
 </context>
 <context>
@@ -8958,7 +8974,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</translation>
     </message>
 </context>
 <context>

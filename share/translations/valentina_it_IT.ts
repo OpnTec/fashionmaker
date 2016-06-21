@@ -2024,6 +2024,14 @@
         <source>Invalid value</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished">Trova:</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Cerca</translation>
+    </message>
 </context>
 <context>
     <name>DialogLayoutProgress</name>
@@ -5075,11 +5083,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Salva come PDF</translation>
+        <translation type="vanished">Salva come PDF</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Salva layout originale</translation>
+        <translation type="vanished">Salva layout originale</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -5519,7 +5527,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation>Per salvare documenti con più pagine tutti i fogli dovrebbero avere la stessa dimensione. Se non l&apos;avessero, usa la funzione esporta.</translation>
+        <translation type="vanished">Per salvare documenti con più pagine tutti i fogli dovrebbero avere la stessa dimensione. Se non l&apos;avessero, usa la funzione esporta.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>

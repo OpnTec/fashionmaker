@@ -34,6 +34,7 @@
 #include <QDir>
 #include <QPrinterInfo>
 #include <QDebug>
+#include <QProcess>
 
 // Keep synchronize all names with initialization in VTranslateVars class!!!!!
 //measurements
@@ -998,7 +999,7 @@ void InitPMSystems(QComboBox *systemCombo)
     QMap<QString, QString> systems;
     for (int i = 0; i < listSystems.size()-1; ++i)
     {
-        systems.insert(qApp->TrVars()->PMSystemName(listSystems.at(i)), listSystems.at(i));
+        systems.insert(qApp->TrVars()->PMSystemName(listSystems.at(i)) + " ("+listSystems.at(i)+")", listSystems.at(i));
     }
 
 // * The default option (blank field or 'None') should appear at the top of the list.
@@ -1767,7 +1768,7 @@ QSharedPointer<QPrinter> DefaultPrinter(QPrinter::PrinterMode mode)
         }
     }
 
-    QSharedPointer<QPrinter> printer = QSharedPointer<QPrinter>(new QPrinter(def, mode));
+    auto printer = QSharedPointer<QPrinter>(new QPrinter(def, mode));
     printer->setResolution(static_cast<int>(PrintDPI));
     return printer;
 }
@@ -1795,4 +1796,54 @@ QPixmap darkenPixmap(const QPixmap &pixmap)
         }
     }
     return QPixmap::fromImage(img);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void ShowInGraphicalShell(const QString &filePath)
+{
+#ifdef Q_OS_MAC
+    QStringList args;
+    args << "-e";
+    args << "tell application \"Finder\"";
+    args << "-e";
+    args << "activate";
+    args << "-e";
+    args << "select POSIX file \""+filePath+"\"";
+    args << "-e";
+    args << "end tell";
+    QProcess::startDetached("osascript", args);
+#elif defined(Q_OS_WIN)
+    QProcess::startDetached(QString("explorer /select, \"%1\"").arg(QDir::toNativeSeparators(filePath)));
+#else
+    const QString app = "xdg-open %d";
+    QString cmd;
+    for (int i = 0; i < app.size(); ++i)
+    {
+        QChar c = app.at(i);
+        if (c == QLatin1Char('%') && i < app.size()-1)
+        {
+            c = app.at(++i);
+            QString s;
+            if (c == QLatin1Char('d'))
+            {
+                s = QLatin1Char('"') + QFileInfo(filePath).path() + QLatin1Char('"');
+            }
+            else if (c == QLatin1Char('%'))
+            {
+                s = c;
+            }
+            else
+            {
+                s = QLatin1Char('%');
+                s += c;
+            }
+            cmd += s;
+            continue;
+        }
+        cmd += c;
+    }
+    QProcess::startDetached(cmd);
+#endif
+
 }

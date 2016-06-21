@@ -40,15 +40,26 @@
 #define MAX_SIZES 18
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pattern, QWidget *parent) :
-    QDialog(parent), ui(new Ui::DialogPatternProperties), doc(doc), pattern(pattern), heightsChecked(MAX_HEIGHTS),
-    sizesChecked(MAX_SIZES),  heights (QMap<GHeights, bool>()), sizes(QMap<GSizes, bool>()),
-    data(QMap<QCheckBox *, int>()), descriptionChanged(false), gradationChanged(false), defaultChanged(false),
-    securityChanged(false), isInitialized(false),
-    deleteAction(nullptr),
-    changeImageAction(nullptr),
-    saveImageAction(nullptr),
-    showImageAction(nullptr)
+DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPattern *doc,  VContainer *pattern,
+                                                 QWidget *parent)
+    : QDialog(parent),
+      ui(new Ui::DialogPatternProperties),
+      doc(doc),
+      pattern(pattern),
+      heightsChecked(MAX_HEIGHTS),
+      sizesChecked(MAX_SIZES),
+      heights (QMap<GHeights, bool>()),
+      sizes(QMap<GSizes, bool>()),
+      data(QMap<QCheckBox *, int>()),
+      descriptionChanged(false),
+      gradationChanged(false),
+      defaultChanged(false),
+      securityChanged(false),
+      deleteAction(nullptr),
+      changeImageAction(nullptr),
+      saveImageAction(nullptr),
+      showImageAction(nullptr),
+      m_filePath(filePath)
 {
     ui->setupUi(this);
 
@@ -59,6 +70,25 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc,  VContainer *pat
     SCASSERT(doc != nullptr);
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale::system()) : setLocale(QLocale(QLocale::C));
+
+    if (m_filePath.isEmpty())
+    {
+        ui->lineEditPathToFile->setText(tr("<Empty>"));
+        ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
+        ui->pushButtonShowInExplorer->setEnabled(false);
+    }
+    else
+    {
+        ui->lineEditPathToFile->setText(QDir::toNativeSeparators(m_filePath));
+        ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(m_filePath));
+        ui->pushButtonShowInExplorer->setEnabled(true);
+    }
+    ui->lineEditPathToFile->setCursorPosition(0);
+
+    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, [this](){ShowInGraphicalShell(m_filePath);});
+#if defined(Q_OS_MAC)
+    ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
+#endif //defined(Q_OS_MAC)
 
     ui->lineEditAuthor->setText(doc->GetAuthor());
     connect(ui->lineEditAuthor, &QLineEdit::editingFinished, this, &DialogPatternProperties::DescEdited);
@@ -327,27 +357,6 @@ void DialogPatternProperties::CheckStateSize(int state)
 void DialogPatternProperties::DescEdited()
 {
     descriptionChanged = true;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPatternProperties::showEvent(QShowEvent *event)
-{
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
-    {
-        return;
-    }
-
-    if (isInitialized)
-    {
-        return;
-    }
-    // do your init stuff here
-
-    setMaximumSize(size());
-    setMinimumSize(size());
-
-    isInitialized = true;//first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------

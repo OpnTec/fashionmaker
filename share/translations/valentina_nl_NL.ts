@@ -2008,6 +2008,14 @@
         <source>Invalid value</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished">Vind:</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLayoutProgress</name>
@@ -5044,11 +5052,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Opslaan als PDF</translation>
+        <translation type="vanished">Opslaan als PDF</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Sla originele opmaak op</translation>
+        <translation type="vanished">Sla originele opmaak op</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -5485,10 +5493,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Export error.</source>
         <translation>Export fout.</translation>
-    </message>
-    <message>
-        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>

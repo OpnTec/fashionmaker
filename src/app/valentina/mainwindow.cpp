@@ -1212,7 +1212,7 @@ void MainWindow::OpenRecentFile()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::PatternProperties()
 {
-    DialogPatternProperties proper(doc, pattern, this);
+    DialogPatternProperties proper(curFile, doc, pattern, this);
     connect(&proper, &DialogPatternProperties::UpdateGradation, this, &MainWindow::UpdateGradation);
     proper.exec();
 }
@@ -2109,10 +2109,17 @@ void MainWindow::ActionDetails(bool checked)
 
         if(drawMode)
         {
-            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern piece
             drawMode = false;
         }
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);// Need to get data about all details
+
+        leftGoToStage->setPixmap(QPixmap("://icon/24x24/right_to_left_arrow.png"));
+        rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
+
+        ui->actionDraw->setChecked(false);
+        ui->actionDetails->setChecked(true);
+        ui->actionLayout->setChecked(false);
 
         if(not qApp->getOpeningPattern())
         {
@@ -2127,13 +2134,6 @@ void MainWindow::ActionDetails(bool checked)
         }
 
         qCDebug(vMainWindow, "Show details scene");
-
-        leftGoToStage->setPixmap(QPixmap("://icon/24x24/right_to_left_arrow.png"));
-        rightGoToStage->setPixmap(QPixmap("://icon/24x24/left_to_right_arrow.png"));
-
-        ui->actionDraw->setChecked(false);
-        ui->actionDetails->setChecked(true);
-        ui->actionLayout->setChecked(false);
         SaveCurrentScene();
 
         currentScene = sceneDetails;
@@ -2181,10 +2181,17 @@ void MainWindow::ActionLayout(bool checked)
 
         if(drawMode)
         {
-            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern piece
             drawMode = false;
         }
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);// Need to get data about all details
+
+        leftGoToStage->setPixmap(QPixmap("://icon/24x24/right_to_left_arrow.png"));
+        rightGoToStage->setPixmap(QPixmap("://icon/24x24/fast_forward_right_to_left_arrow.png"));
+
+        ui->actionDraw->setChecked(false);
+        ui->actionDetails->setChecked(false);
+        ui->actionLayout->setChecked(true);
 
         const QHash<quint32, VDetail> *details = pattern->DataDetails();
         if(not qApp->getOpeningPattern())
@@ -2203,12 +2210,6 @@ void MainWindow::ActionLayout(bool checked)
 
         qCDebug(vMainWindow, "Show layout scene");
 
-        leftGoToStage->setPixmap(QPixmap("://icon/24x24/right_to_left_arrow.png"));
-        rightGoToStage->setPixmap(QPixmap("://icon/24x24/fast_forward_right_to_left_arrow.png"));
-
-        ui->actionDraw->setChecked(false);
-        ui->actionDetails->setChecked(false);
-        ui->actionLayout->setChecked(true);
         SaveCurrentScene();
 
         PrepareDetailsForLayout(details);
@@ -3153,7 +3154,6 @@ void MainWindow::SetLayoutModeActions(bool enable)
     ui->actionExportAs->setEnabled(value);
     ui->actionPrintPreview->setEnabled(value);
     ui->actionPrintPreviewTiled->setEnabled(value);
-    ui->actionSaveAsPDF->setEnabled(value);
     ui->actionSaveAsTiledPDF->setEnabled(value);
     ui->actionPrint->setEnabled(value);
     ui->actionPrintTiled->setEnabled(value);
@@ -3319,16 +3319,24 @@ bool MainWindow::MaybeSave()
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);
 
-        messageBox->setButtonText(QMessageBox::Yes, curFile.isEmpty() ? tr("Save...") : tr("Save"));
+        messageBox->setButtonText(QMessageBox::Yes,
+                                  curFile.isEmpty() || doc->IsReadOnly() ? tr("Save...") : tr("Save"));
         messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
 
         messageBox->setWindowModality(Qt::ApplicationModal);
-        const QMessageBox::StandardButton ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
+        const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
 
         switch (ret)
         {
             case QMessageBox::Yes:
-                return Save();
+                if (doc->IsReadOnly())
+                {
+                    return SaveAs();
+                }
+                else
+                {
+                    return Save();
+                }
             case QMessageBox::No:
                 return true;
             case QMessageBox::Cancel:
@@ -3645,7 +3653,6 @@ void MainWindow::CreateActions()
     connect(ui->actionExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
     connect(ui->actionPrintPreview, &QAction::triggered, this, &MainWindow::PrintPreviewOrigin);
     connect(ui->actionPrintPreviewTiled, &QAction::triggered, this, &MainWindow::PrintPreviewTiled);
-    connect(ui->actionSaveAsPDF, &QAction::triggered, this, &MainWindow::SaveAsPDF);
     connect(ui->actionSaveAsTiledPDF, &QAction::triggered, this, &MainWindow::SaveAsTiledPDF);
     connect(ui->actionPrint, &QAction::triggered, this, &MainWindow::PrintOrigin);
     connect(ui->actionPrintTiled, &QAction::triggered, this, &MainWindow::PrintTiled);

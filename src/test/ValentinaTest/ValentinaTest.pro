@@ -307,8 +307,9 @@ COLLECTION_FILES += \
     $${PWD}/../../app/share/collection/Lara_Jil.vit \
     $${PWD}/../../app/share/collection/modell_2.val \
     $${PWD}/../../app/share/collection/MaleShirt/MaleShirt.val \
-    $${PWD}/../../app/share/collection/MaleShirt/MaleShirt.vit
-
+    $${PWD}/../../app/share/collection/MaleShirt/MaleShirt.vit \
+    $${PWD}/../../app/share/collection/Trousers/Trousers.val \
+    $${PWD}/../../app/share/collection/Trousers/trousers.vit
 
 # Compilation will fail without this files after we added them to this section.
 OTHER_FILES += \

@@ -2024,6 +2024,14 @@
         <source>Invalid value</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished">Знайти:</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Пошук</translation>
+    </message>
 </context>
 <context>
     <name>DialogLayoutProgress</name>
@@ -5075,11 +5083,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Зберегти як PDF</translation>
+        <translation type="vanished">Зберегти як PDF</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Зберегти оригінальну розкладку</translation>
+        <translation type="vanished">Зберегти оригінальну розкладку</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -5519,7 +5527,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation>Для збереження багатосторінкового документу всі листи повинні мати той самий розмір. Натомість використовуйте функцію експорту.</translation>
+        <translation type="vanished">Для збереження багатосторінкового документу всі листи повинні мати той самий розмір. Натомість використовуйте функцію експорту.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>

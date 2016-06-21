@@ -104,7 +104,8 @@ TMainWindow::TMainWindow(QWidget *parent)
       dockDiagramVisible(true),
       isInitialized(false),
       recentFileActs(),
-      separatorAct(nullptr)
+      separatorAct(nullptr),
+      hackedWidgets()
 {
     ui->setupUi(this);
 
@@ -138,6 +139,8 @@ TMainWindow::TMainWindow(QWidget *parent)
 #if defined(Q_OS_MAC)
     // On Mac deafault icon size is 32x32.
     ui->toolBarGradation->setIconSize(QSize(24, 24));
+
+    ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 2)
     // Mac OS Dock Menu
@@ -1682,7 +1685,9 @@ void TMainWindow::SaveMHeightIncrease(double value)
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
 
+    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1867,39 +1872,23 @@ void TMainWindow::InitWindow()
         // Because Qt Designer doesn't know about our deleting we will create empty objects for correct
         // working the retranslation UI
         // Tab Measurements
-        delete ui->horizontalLayoutValue;
-        delete ui->plainTextEditFormula;
-        delete ui->toolButtonExpr;
-
-        delete ui->labelFormula;
-        ui->labelFormula = new QLabel(this);
-
-        delete ui->pushButtonGrow;
-        ui->pushButtonGrow = new QPushButton(this);
+        HackWidget(&ui->horizontalLayoutValue);
+        HackWidget(&ui->plainTextEditFormula);
+        HackWidget(&ui->toolButtonExpr);
+        HackWidget(&ui->labelFormula);
+        HackWidget(&ui->pushButtonGrow);
 
         // Tab Information
-        delete ui->lineEditGivenName;
-        delete ui->lineEditFamilyName;
-        delete ui->comboBoxGender;
-        delete ui->lineEditEmail;
-
-        delete ui->labelGivenName;
-        ui->labelGivenName = new QLabel(this);
-
-        delete ui->labelFamilyName;
-        ui->labelFamilyName = new QLabel(this);
-
-        delete ui->labelBirthDate;
-        ui->labelBirthDate = new QLabel(this);
-
-        delete ui->dateEditBirthDate;
-        ui->dateEditBirthDate = new QDateEdit(this);
-
-        delete ui->labelGender;
-        ui->labelGender = new QLabel(this);
-
-        delete ui->labelEmail;
-        ui->labelEmail = new QLabel(this);
+        HackWidget(&ui->lineEditGivenName);
+        HackWidget(&ui->lineEditFamilyName);
+        HackWidget(&ui->comboBoxGender);
+        HackWidget(&ui->lineEditEmail);
+        HackWidget(&ui->labelGivenName);
+        HackWidget(&ui->labelFamilyName);
+        HackWidget(&ui->labelBirthDate);
+        HackWidget(&ui->dateEditBirthDate);
+        HackWidget(&ui->labelGender);
+        HackWidget(&ui->labelEmail);
 
         const QStringList listHeights = VMeasurement::WholeListHeights(mUnit);
         const QStringList listSizes = VMeasurement::WholeListSizes(mUnit);
@@ -1939,31 +1928,18 @@ void TMainWindow::InitWindow()
         ui->lineEditEmail->setEnabled(true);
 
         // Tab Measurements
-        delete ui->doubleSpinBoxBaseValue;
-        delete ui->doubleSpinBoxInSizes;
-        delete ui->doubleSpinBoxInHeights;
-
-        delete ui->labelBaseValue;
-        ui->labelBaseValue = new QLabel(this);
-
-        delete ui->labelInSizes;
-        ui->labelInSizes = new QLabel(this);
-
-        delete ui->labelInHeights;
-        ui->labelInHeights = new QLabel(this);
+        HackWidget(&ui->doubleSpinBoxBaseValue);
+        HackWidget(&ui->doubleSpinBoxInSizes);
+        HackWidget(&ui->doubleSpinBoxInHeights);
+        HackWidget(&ui->labelBaseValue);
+        HackWidget(&ui->labelInSizes);
+        HackWidget(&ui->labelInHeights);
 
         // Tab Information
-        delete ui->labelBaseSize;
-        ui->labelBaseSize = new QLabel(this);
-
-        delete ui->labelBaseSizeValue;
-        ui->labelBaseSizeValue = new QLabel(this);
-
-        delete ui->labelBaseHeight;
-        ui->labelBaseHeight = new QLabel(this);
-
-        delete ui->labelBaseHeightValue;
-        ui->labelBaseHeightValue = new QLabel(this);
+        HackWidget(&ui->labelBaseSize);
+        HackWidget(&ui->labelBaseSizeValue);
+        HackWidget(&ui->labelBaseHeight);
+        HackWidget(&ui->labelBaseHeightValue);
 
         ui->lineEditGivenName->setText(m->GivenName());
         ui->lineEditFamilyName->setText(m->FamilyName());
@@ -2029,7 +2005,7 @@ void TMainWindow::InitWindow()
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
     connect(ui->lineEditFullName, &QLineEdit::textEdited, this, &TMainWindow::SaveMFullName);
 
-    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, this, &TMainWindow::ShowInGraphicalShell);
+    connect(ui->pushButtonShowInExplorer, &QPushButton::clicked, [this](){ShowInGraphicalShell(curFile);});
 
     InitUnits();
 
@@ -2104,12 +2080,14 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
         mType == MeasurementsType::Standard ? shownName += QLatin1Literal(".vst") : shownName += QLatin1Literal(".vit");
         ui->lineEditPathToFile->setText(tr("<Empty>"));
         ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
+        ui->lineEditPathToFile->setCursorPosition(0);
         ui->pushButtonShowInExplorer->setEnabled(false);
     }
     else
     {
         ui->lineEditPathToFile->setText(QDir::toNativeSeparators(curFile));
         ui->lineEditPathToFile->setToolTip(QDir::toNativeSeparators(curFile));
+        ui->lineEditPathToFile->setCursorPosition(0);
         ui->pushButtonShowInExplorer->setEnabled(true);
         auto settings = qApp->TapeSettings();
         QStringList files = settings->GetRecentFileList();
@@ -2942,18 +2920,33 @@ void TMainWindow::SetDecimals()
     {
         case Unit::Cm:
             ui->doubleSpinBoxBaseValue->setDecimals(1);
+            ui->doubleSpinBoxBaseValue->setSingleStep(0.1);
+
             ui->doubleSpinBoxInSizes->setDecimals(1);
+            ui->doubleSpinBoxInSizes->setSingleStep(0.1);
+
             ui->doubleSpinBoxInHeights->setDecimals(1);
+            ui->doubleSpinBoxInHeights->setSingleStep(0.1);
             break;
         case Unit::Mm:
             ui->doubleSpinBoxBaseValue->setDecimals(0);
+            ui->doubleSpinBoxBaseValue->setSingleStep(1);
+
             ui->doubleSpinBoxInSizes->setDecimals(0);
+            ui->doubleSpinBoxInSizes->setSingleStep(1);
+
             ui->doubleSpinBoxInHeights->setDecimals(0);
+            ui->doubleSpinBoxInHeights->setSingleStep(1);
             break;
         case Unit::Inch:
             ui->doubleSpinBoxBaseValue->setDecimals(5);
+            ui->doubleSpinBoxBaseValue->setSingleStep(0.00001);
+
             ui->doubleSpinBoxInSizes->setDecimals(5);
+            ui->doubleSpinBoxInSizes->setSingleStep(0.00001);
+
             ui->doubleSpinBoxInHeights->setDecimals(5);
+            ui->doubleSpinBoxInHeights->setSingleStep(0.00001);
             break;
         default:
             break;
@@ -3001,50 +2994,10 @@ void TMainWindow::InitGender(QComboBox *gender)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ShowInGraphicalShell()
+template <class T>
+void TMainWindow::HackWidget(T **widget)
 {
-#ifdef Q_OS_MAC
-    QStringList args;
-    args << "-e";
-    args << "tell application \"Finder\"";
-    args << "-e";
-    args << "activate";
-    args << "-e";
-    args << "select POSIX file \""+curFile+"\"";
-    args << "-e";
-    args << "end tell";
-    QProcess::startDetached("osascript", args);
-#elif defined(Q_OS_WIN)
-    QProcess::startDetached(QString("explorer /select, \"%1\"").arg(QDir::toNativeSeparators(curFile)));
-#else
-    const QString app = "xdg-open %d";
-    QString cmd;
-    for (int i = 0; i < app.size(); ++i)
-    {
-        QChar c = app.at(i);
-        if (c == QLatin1Char('%') && i < app.size()-1)
-        {
-            c = app.at(++i);
-            QString s;
-            if (c == QLatin1Char('d'))
-            {
-                s = QLatin1Char('"') + QFileInfo(curFile).path() + QLatin1Char('"');
-            }
-            else if (c == QLatin1Char('%'))
-            {
-                s = c;
-            }
-            else
-            {
-                s = QLatin1Char('%');
-                s += c;
-            }
-            cmd += s;
-            continue;
-        }
-        cmd += c;
-    }
-    QProcess::startDetached(cmd);
-#endif
-
+    delete *widget;
+    *widget = new T();
+    hackedWidgets.append(*widget);
 }

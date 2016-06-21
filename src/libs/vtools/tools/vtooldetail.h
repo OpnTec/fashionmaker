@@ -122,7 +122,7 @@ private:
      * @param scene pointer to scene.
      * @param node node of detail.
      */
-    void               InitTool(VMainGraphicsScene *scene, const VNodeDetail &node);
+    Tool*              InitTool(VMainGraphicsScene *scene, const VNodeDetail &node);
     virtual void       DeleteTool(bool ask = true) Q_DECL_OVERRIDE;
 };
 

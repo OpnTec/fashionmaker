@@ -310,12 +310,6 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
         return points;
     }
 
-    bool closed = false;
-    if (points.first() == points.last())
-    {
-        closed = true;
-    }
-
     QVector<QPointF> ekvPoints;
 
     qint32 i, j;
@@ -323,7 +317,7 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
     {
         /*Last three points no need check.*/
         /*Triangle has not contain loops*/
-        if (i >= count-3)
+        if (i > count-3)
         {
             ekvPoints.append(points.at(i));
             continue;
@@ -336,9 +330,11 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
         const QLineF line1(points.at(i), points.at(i+1));
         // Because a path can contains several loops we will seek the last and only then remove the loop(s)
         // That's why we parse from the end
-        for (j = count-2; j >= i+2; --j)
+        for (j = count-1; j >= i+2; --j)
         {
-            const QLineF line2(points.at(j), points.at(j+1));
+            QLineF line2;
+            j == count-1 ? line2 = QLineF(points.at(j), points.at(0)) : line2 = QLineF(points.at(j), points.at(j+1));
+
             const QLineF::IntersectType intersect = line1.intersect(line2, &crosPoint);
             if (intersect == QLineF::NoIntersection)
             { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
@@ -372,7 +368,7 @@ QVector<QPointF> VAbstractDetail::CheckLoops(const QVector<QPointF> &points)
                     }
                 }
             }
-            else if (intersect == QLineF::BoundedIntersection && not (i == 0 && j+1 == count-1 && closed))
+            else if (intersect == QLineF::BoundedIntersection && not (i == 0 && j == count-1))
             { // Break, but not if intersects the first edge and the last edge in closed path
                 if (line1.p1() != crosPoint && line1.p2() != crosPoint &&
                     line2.p1() != crosPoint && line2.p2() != crosPoint)

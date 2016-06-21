@@ -2024,6 +2024,14 @@
         <source>Invalid value</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished">Finden:</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Suche</translation>
+    </message>
 </context>
 <context>
     <name>DialogLayoutProgress</name>
@@ -5082,11 +5090,11 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Save as PDF</source>
-        <translation>Als PDF speichern</translation>
+        <translation type="vanished">Als PDF speichern</translation>
     </message>
     <message>
         <source>Save original layout</source>
-        <translation>Originales Layout speichern</translation>
+        <translation type="vanished">Originales Layout speichern</translation>
     </message>
     <message>
         <source>Save as tiled PDF</source>
@@ -5526,7 +5534,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation>Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
+        <translation type="vanished">Zum Speichern eines mehrseitigen Dokuments müssen alle Blätter die gleiche Größe haben. Verwenden Sie stattdessen die Exportfunktion.</translation>
     </message>
     <message>
         <source>For previewing multipage document all sheet should have the same size.</source>

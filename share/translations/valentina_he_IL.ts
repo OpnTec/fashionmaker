@@ -1689,6 +1689,14 @@
         <source>Invalid value</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Find:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogLayoutProgress</name>
@@ -4384,14 +4392,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save as PDF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save original layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save as tiled PDF</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4813,10 +4813,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Export error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
