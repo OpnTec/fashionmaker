@@ -2109,7 +2109,7 @@ void MainWindow::ActionDetails(bool checked)
 
         if(drawMode)
         {
-            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern piece
             drawMode = false;
         }
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);// Need to get data about all details
@@ -2181,7 +2181,7 @@ void MainWindow::ActionLayout(bool checked)
 
         if(drawMode)
         {
-            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern peace
+            currentDrawIndex = comboBoxDraws->currentIndex();//save current pattern piece
             drawMode = false;
         }
         comboBoxDraws->setCurrentIndex(comboBoxDraws->count()-1);// Need to get data about all details
