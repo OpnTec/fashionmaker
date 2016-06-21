@@ -1610,7 +1610,9 @@ void TMainWindow::SaveMHeightIncrease(double value)
     RefreshData();
     search->RefreshList(ui->lineEditFind->text());
 
+    ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
