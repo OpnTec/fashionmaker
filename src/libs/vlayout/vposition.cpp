@@ -264,7 +264,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
 #endif
 
     CrossingType type = CrossingType::Intersection;
-    if (SheetContains(detail.BoundingRect()))
+    if (SheetContains(detail.LayoutBoundingRect()))
     {
         if (not gContour.GetContour().isEmpty())
         {
@@ -306,7 +306,7 @@ bool VPosition::CheckCombineEdges(VLayoutDetail &detail, int j, int &dEdge)
         }
 
         CrossingType type = CrossingType::Intersection;
-        if (SheetContains(detail.BoundingRect()))
+        if (SheetContains(detail.LayoutBoundingRect()))
         {
             type = Crossing(detail);
         }
@@ -343,7 +343,7 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
 #endif
 
     CrossingType type = CrossingType::Intersection;
-    if (SheetContains(detail.BoundingRect()))
+    if (SheetContains(detail.LayoutBoundingRect()))
     {
         type = Crossing(detail);
     }
@@ -367,21 +367,21 @@ bool VPosition::CheckRotationEdges(VLayoutDetail &detail, int j, int dEdge, int 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::CrossingType VPosition::Crossing(const VLayoutDetail &detail) const
 {
-    const QRectF dRect = detail.BoundingRect();
     const QRectF gRect = gContour.BoundingRect();
-    if (not gRect.intersects(dRect))
+    if (not gRect.intersects(detail.LayoutBoundingRect()) && not gRect.contains(detail.DetailBoundingRect()))
     {
         // This we can determine efficiently.
         return CrossingType::NoIntersection;
     }
 
-    if (gContour.ContourPath().intersects(detail.LayoutAllowencePath()))
+    const QPainterPath gPath = gContour.ContourPath();
+    if (not gPath.intersects(detail.LayoutAllowencePath()) && not gPath.contains(detail.ContourPath()))
     {
-        return CrossingType::Intersection;
+        return CrossingType::NoIntersection;
     }
     else
     {
-        return CrossingType::NoIntersection;
+        return CrossingType::Intersection;
     }
 }
 

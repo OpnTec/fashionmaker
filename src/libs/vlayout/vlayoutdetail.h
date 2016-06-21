@@ -71,7 +71,8 @@ public:
     QLineF Edge(int i) const;
     int    EdgeByPoint(const QPointF &p1) const;
 
-    QRectF BoundingRect() const;
+    QRectF DetailBoundingRect() const;
+    QRectF LayoutBoundingRect() const;
     qreal  Diagonal() const;
 
     bool isNull() const;
