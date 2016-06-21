@@ -69,7 +69,7 @@ const MaterialCutPlacement& VPatternPieceData::GetMCP(int i) const
 {
     Q_ASSERT(i >= 0);
     Q_ASSERT(i < GetMCPCount());
-    return m_conMCP[i];
+    return m_conMCP.at(i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -83,8 +83,8 @@ void VPatternPieceData::RemoveMCP(int i)
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternPieceData::Clear()
 {
-    m_qsLetter = "";
-    m_qsName = "";
+    m_qsLetter.clear();
+    m_qsName.clear();
     m_conMCP.clear();
 }
 

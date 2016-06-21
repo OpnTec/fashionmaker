@@ -47,7 +47,7 @@
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../core/vapplication.h"
 #include "../vpatterndb/calculator.h"
-#include "vpatternpiecedata.h"
+#include "../vpatterndb/vpatternpiecedata.h"
 
 #include <QMessageBox>
 #include <QUndoStack>

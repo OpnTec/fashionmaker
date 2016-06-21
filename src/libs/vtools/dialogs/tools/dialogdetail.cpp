@@ -36,7 +36,6 @@
 #include "../../../vgeometry/vsplinepath.h"
 #include "../../../vpatterndb/vcontainer.h"
 #include "../../../ifc/xml/vdomdocument.h"
-#include "vpatternpiecedata.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -173,7 +172,7 @@ void DialogDetail::UpdateList()
     ui.listWidgetMCP->clear();
     for (int i = 0; i < m_conMCP.count(); ++i)
     {
-        MaterialCutPlacement mcp = m_conMCP[i];
+        MaterialCutPlacement mcp = m_conMCP.at(i);
         QString qsText = tr("Cut %1 of %2%3").arg(mcp.m_iCutNumber);
         if (mcp.m_eMaterial < MaterialType::mtUserDefined)
         {

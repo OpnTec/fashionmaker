@@ -27,10 +27,10 @@
  *************************************************************************/
 
 #include "savedetailoptions.h"
-#include "vpatternpiecedata.h"
 #include "../tools/nodeDetails/vabstractnode.h"
 #include "../../vwidgets/vmaingraphicsview.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vpatterndb/vpatternpiecedata.h"
 
 #include <QGraphicsView>
 
@@ -57,6 +57,7 @@ void SaveDetailOptions::undo()
     {
         SaveDet(domElement, oldDet);
         doc->RemoveAllChildren(domElement);
+        SavePatternPieceData(domElement, oldDet);
         for (int i = 0; i < oldDet.CountNode(); ++i)
         {
            VToolDetail::AddNode(doc, domElement, oldDet.at(i));
@@ -81,21 +82,7 @@ void SaveDetailOptions::redo()
     {
         SaveDet(domElement, newDet);
         doc->RemoveAllChildren(domElement);
-
-        QDomElement domData = doc->createElement(VAbstractPattern::TagData);
-        doc->SetAttribute(domData, VAbstractPattern::AttrLetter, newDet.GetPatternPieceData().GetLetter());
-        doc->SetAttribute(domData, VAbstractPattern::AttrName, newDet.GetPatternPieceData().GetName());
-        for (int i = 0; i < newDet.GetPatternPieceData().GetMCPCount(); ++i)
-        {
-            MaterialCutPlacement mcp = newDet.GetPatternPieceData().GetMCP(i);
-            QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
-            doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
-            doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
-            doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
-            doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
-            domData.appendChild(domMCP);
-        }
-        domElement.appendChild(domData);
+        SavePatternPieceData(domElement, newDet);
 
         for (int i = 0; i < newDet.CountNode(); ++i)
         {
@@ -141,4 +128,23 @@ void SaveDetailOptions::SaveDet(QDomElement &domElement, const VDetail &det)
     doc->SetAttribute(domElement, VToolDetail::AttrSupplement, QString().setNum(det.getSeamAllowance()));
     doc->SetAttribute(domElement, VToolDetail::AttrClosed, QString().setNum(det.getClosed()));
     doc->SetAttribute(domElement, VToolDetail::AttrWidth, QString().setNum(det.getWidth()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SaveDetailOptions::SavePatternPieceData(QDomElement &domElement, const VDetail &det)
+{
+    QDomElement domData = doc->createElement(VAbstractPattern::TagData);
+    doc->SetAttribute(domData, VAbstractPattern::AttrLetter, det.GetPatternPieceData().GetLetter());
+    doc->SetAttribute(domData, VAbstractPattern::AttrName, det.GetPatternPieceData().GetName());
+    for (int i = 0; i < det.GetPatternPieceData().GetMCPCount(); ++i)
+    {
+        MaterialCutPlacement mcp = det.GetPatternPieceData().GetMCP(i);
+        QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrCutNumber, mcp.m_iCutNumber);
+        doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
+        domData.appendChild(domMCP);
+    }
+    domElement.appendChild(domData);
 }

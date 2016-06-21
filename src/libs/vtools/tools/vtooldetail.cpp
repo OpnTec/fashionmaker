@@ -40,7 +40,7 @@
 #include "../undocommands/movedetail.h"
 #include "../undocommands/adddet.h"
 #include "../undocommands/deletedetail.h"
-#include "vpatternpiecedata.h"
+#include "../vpatterndb/vpatternpiecedata.h"
 
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
