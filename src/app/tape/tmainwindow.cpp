@@ -2760,18 +2760,33 @@ void TMainWindow::SetDecimals()
     {
         case Unit::Cm:
             ui->doubleSpinBoxBaseValue->setDecimals(1);
+            ui->doubleSpinBoxBaseValue->setSingleStep(0.1);
+
             ui->doubleSpinBoxInSizes->setDecimals(1);
+            ui->doubleSpinBoxInSizes->setSingleStep(0.1);
+
             ui->doubleSpinBoxInHeights->setDecimals(1);
+            ui->doubleSpinBoxInHeights->setSingleStep(0.1);
             break;
         case Unit::Mm:
             ui->doubleSpinBoxBaseValue->setDecimals(0);
+            ui->doubleSpinBoxBaseValue->setSingleStep(1);
+
             ui->doubleSpinBoxInSizes->setDecimals(0);
+            ui->doubleSpinBoxInSizes->setSingleStep(1);
+
             ui->doubleSpinBoxInHeights->setDecimals(0);
+            ui->doubleSpinBoxInHeights->setSingleStep(1);
             break;
         case Unit::Inch:
             ui->doubleSpinBoxBaseValue->setDecimals(5);
+            ui->doubleSpinBoxBaseValue->setSingleStep(0.00001);
+
             ui->doubleSpinBoxInSizes->setDecimals(5);
+            ui->doubleSpinBoxInSizes->setSingleStep(0.00001);
+
             ui->doubleSpinBoxInHeights->setDecimals(5);
+            ui->doubleSpinBoxInHeights->setSingleStep(0.00001);
             break;
         default:
             break;
