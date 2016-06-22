@@ -1271,9 +1271,9 @@ void TMainWindow::ShowMData()
             const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
             ui->labelCalculatedValue->setText(qApp->LocaleToString(value) + " " +postfix);
 
-            ui->doubleSpinBoxBaseValue->setValue(static_cast<int>(meash->GetBase()));
-            ui->doubleSpinBoxInSizes->setValue(static_cast<int>(meash->GetKsize()));
-            ui->doubleSpinBoxInHeights->setValue(static_cast<int>(meash->GetKheight()));
+            ui->doubleSpinBoxBaseValue->setValue(meash->GetBase());
+            ui->doubleSpinBoxInSizes->setValue(meash->GetKsize());
+            ui->doubleSpinBoxInHeights->setValue(meash->GetKheight());
 
             ui->labelCalculatedValue->blockSignals(false);
             ui->doubleSpinBoxBaseValue->blockSignals(false);
@@ -1535,6 +1535,8 @@ void TMainWindow::SaveMBaseValue(double value)
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->blockSignals(false);
+
+    ShowMData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1574,6 +1576,8 @@ void TMainWindow::SaveMSizeIncrease(double value)
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->blockSignals(false);
+
+    ShowMData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1613,6 +1617,8 @@ void TMainWindow::SaveMHeightIncrease(double value)
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->blockSignals(false);
+
+    ShowMData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
