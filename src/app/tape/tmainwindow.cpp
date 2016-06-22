@@ -1584,22 +1584,6 @@ void TMainWindow::SaveMBaseValue(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-
-    QSharedPointer<VMeasurement> meash;
-
-    try
-    {
-        // Translate to internal look.
-        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
-    }
-    catch(const VExceptionBadId &e)
-    {
-        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
-                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return;
-    }
-
     m->SetMBaseValue(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1625,22 +1609,6 @@ void TMainWindow::SaveMSizeIncrease(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-
-    QSharedPointer<VMeasurement> meash;
-
-    try
-    {
-        // Translate to internal look.
-        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
-    }
-    catch(const VExceptionBadId &e)
-    {
-        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
-                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return;
-    }
-
     m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1666,22 +1634,6 @@ void TMainWindow::SaveMHeightIncrease(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-
-    QSharedPointer<VMeasurement> meash;
-
-    try
-    {
-        // Translate to internal look.
-        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
-    }
-    catch(const VExceptionBadId &e)
-    {
-        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
-                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return;
-    }
-
     m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
