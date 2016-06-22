@@ -31,6 +31,7 @@
 
 #include "vabstracttool.h"
 #include "../vwidgets/vnobrushscalepathitem.h"
+#include "vtextgraphicsitem.h"
 
 class VMainGraphicsScene;
 class DialogTool;
@@ -89,6 +90,7 @@ public slots:
     void               EnableToolMove(bool move);
     virtual void       AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void       AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
+    virtual void       ResetChild();
 protected:
     virtual void       AddToFile () Q_DECL_OVERRIDE;
     virtual void       RefreshDataInFile() Q_DECL_OVERRIDE;
@@ -111,6 +113,7 @@ private:
     QString            drawName;
 
     VNoBrushScalePathItem *seamAllowance;
+    VTextGraphicsItem* dataLabel;
 
     VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                 VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);

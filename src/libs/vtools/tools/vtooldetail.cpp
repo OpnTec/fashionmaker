@@ -77,7 +77,8 @@ const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
 VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                          VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), VNoBrushScalePathItem(parent), dialog(nullptr), sceneDetails(scene),
-      drawName(drawName), seamAllowance(new VNoBrushScalePathItem(this))
+      drawName(drawName), seamAllowance(new VNoBrushScalePathItem(this)),
+      dataLabel(new VTextGraphicsItem(this))
 {
     VDetail detail = data->GetDetail(id);
     for (int i = 0; i< detail.CountNode(); ++i)
@@ -115,6 +116,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     connect(scene, &VMainGraphicsScene::EnableToolMove, this, &VToolDetail::EnableToolMove);
+    connect(scene, &VMainGraphicsScene::MouseLeftPressed, this, &VToolDetail::ResetChild);
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
         AddToFile();
@@ -707,6 +709,37 @@ void VToolDetail::RefreshGeometry()
     }
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+
+    const VPatternPieceData& data = detail.GetPatternPieceData();
+    if (data.GetLetter().isEmpty() == false || data.GetName().isEmpty() == false || data.GetMCPCount() > 0)
+    {
+        QString qsText = "Cut %1 on %2%3";
+        QStringList qslPlace;
+        qslPlace << "" << " on Fold";
+        QFont fnt = qApp->font();
+        fnt.setPixelSize(24);
+        QFontMetrics fm(fnt);
+        dataLabel->setFont(fnt);
+        int iMinW = 200;
+        QString qsHTML = "<b><font size=\"+4\">" + data.GetLetter() + "</font></b><br/>";
+        qsHTML += "<font size=\"+2\">" + data.GetName() + "</font><br/>";
+        for (int i = 0; i < data.GetMCPCount(); ++i)
+        {
+            MaterialCutPlacement mcp = data.GetMCP(i);
+            QString qsLine = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).arg(qslPlace[int(mcp.m_ePlacement)]);
+            if (fm.width(qsLine) > iMinW)
+                iMinW = fm.width(qsLine);
+            qsHTML += qsLine + "<br/>";
+        }
+        // also add some offset
+        dataLabel->SetMinimalWidth(iMinW + 10);
+        dataLabel->SetHTML(qsHTML);
+        dataLabel->show();
+    }
+    else
+    {
+        dataLabel->hide();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -761,4 +794,10 @@ void VToolDetail::AllowHover(bool enabled)
 void VToolDetail::AllowSelecting(bool enabled)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::ResetChild()
+{
+    dataLabel->Reset();
 }
