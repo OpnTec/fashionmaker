@@ -62,7 +62,13 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       shadows(QList<QGraphicsItem *>()), scenes(QList<QGraphicsScene *>()), details(QList<QList<QGraphicsItem *> >()),
       undoAction(nullptr), redoAction(nullptr), actionDockWidgetToolOptions(nullptr), actionDockWidgetGroups(nullptr),
       curFile(QString()),
-      isLayoutStale(true), margins(), paperSize(), isTiled(false)
+      isLayoutStale(true),
+      margins(),
+      paperSize(),
+      isTiled(false),
+      isAutoCrop(false),
+      isUnitePages(false)
+
 {
     InitTempLayoutScene();
 }
@@ -130,6 +136,8 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             PrepareSceneList();
             margins = lGenerator.GetFields();
             paperSize = QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight());
+            isAutoCrop = lGenerator.GetAutoCrop();
+            isUnitePages = lGenerator.IsUnitePages();
             isLayoutStale = false;
             if (VApplication::IsGUIMode())
             {
@@ -913,7 +921,16 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
 
     if (not isTiled)
     {
-        const QSizeF size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paperSize.height(), Unit::Mm));
+        QSizeF size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paperSize.height(), Unit::Mm));
+        if (isAutoCrop || isUnitePages)
+        {
+            auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
+            if (paper)
+            {
+                size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paper->rect().height(), Unit::Mm));
+            }
+        }
+
         const QPrinter::PageSize pSZ = FindTemplate(size);
         if (pSZ == QPrinter::Custom)
         {

@@ -1346,9 +1346,9 @@ void TMainWindow::ShowMData()
             const qreal value = UnitConvertor(data->GetTableValue(meash->GetName(), mType), mUnit, pUnit);
             ui->labelCalculatedValue->setText(qApp->LocaleToString(value) + " " +postfix);
 
-            ui->doubleSpinBoxBaseValue->setValue(static_cast<int>(meash->GetBase()));
-            ui->doubleSpinBoxInSizes->setValue(static_cast<int>(meash->GetKsize()));
-            ui->doubleSpinBoxInHeights->setValue(static_cast<int>(meash->GetKheight()));
+            ui->doubleSpinBoxBaseValue->setValue(meash->GetBase());
+            ui->doubleSpinBoxInSizes->setValue(meash->GetKsize());
+            ui->doubleSpinBoxInHeights->setValue(meash->GetKheight());
 
             ui->labelCalculatedValue->blockSignals(false);
             ui->doubleSpinBoxBaseValue->blockSignals(false);
@@ -1584,22 +1584,6 @@ void TMainWindow::SaveMBaseValue(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-
-    QSharedPointer<VMeasurement> meash;
-
-    try
-    {
-        // Translate to internal look.
-        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
-    }
-    catch(const VExceptionBadId &e)
-    {
-        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
-                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return;
-    }
-
     m->SetMBaseValue(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1610,6 +1594,8 @@ void TMainWindow::SaveMBaseValue(double value)
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->blockSignals(false);
+
+    ShowMData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1623,22 +1609,6 @@ void TMainWindow::SaveMSizeIncrease(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-
-    QSharedPointer<VMeasurement> meash;
-
-    try
-    {
-        // Translate to internal look.
-        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
-    }
-    catch(const VExceptionBadId &e)
-    {
-        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
-                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return;
-    }
-
     m->SetMSizeIncrease(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1649,6 +1619,8 @@ void TMainWindow::SaveMSizeIncrease(double value)
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->blockSignals(false);
+
+    ShowMData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1662,22 +1634,6 @@ void TMainWindow::SaveMHeightIncrease(double value)
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-
-    QSharedPointer<VMeasurement> meash;
-
-    try
-    {
-        // Translate to internal look.
-        meash = data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
-    }
-    catch(const VExceptionBadId &e)
-    {
-        qCWarning(tMainWindow, "%s\n\n%s\n\n%s",
-                  qUtf8Printable(tr("Can't find measurement '%1'.").arg(nameField->text())),
-                  qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        return;
-    }
-
     m->SetMHeightIncrease(nameField->data(Qt::UserRole).toString(), value);
 
     MeasurementsWasSaved(false);
@@ -1688,6 +1644,8 @@ void TMainWindow::SaveMHeightIncrease(double value)
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
     ui->tableWidget->blockSignals(false);
+
+    ShowMData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2919,6 +2877,16 @@ void TMainWindow::SetDecimals()
     switch (mUnit)
     {
         case Unit::Cm:
+            ui->doubleSpinBoxBaseValue->setDecimals(2);
+            ui->doubleSpinBoxBaseValue->setSingleStep(0.01);
+
+            ui->doubleSpinBoxInSizes->setDecimals(2);
+            ui->doubleSpinBoxInSizes->setSingleStep(0.01);
+
+            ui->doubleSpinBoxInHeights->setDecimals(2);
+            ui->doubleSpinBoxInHeights->setSingleStep(0.01);
+            break;
+        case Unit::Mm:
             ui->doubleSpinBoxBaseValue->setDecimals(1);
             ui->doubleSpinBoxBaseValue->setSingleStep(0.1);
 
@@ -2927,16 +2895,6 @@ void TMainWindow::SetDecimals()
 
             ui->doubleSpinBoxInHeights->setDecimals(1);
             ui->doubleSpinBoxInHeights->setSingleStep(0.1);
-            break;
-        case Unit::Mm:
-            ui->doubleSpinBoxBaseValue->setDecimals(0);
-            ui->doubleSpinBoxBaseValue->setSingleStep(1);
-
-            ui->doubleSpinBoxInSizes->setDecimals(0);
-            ui->doubleSpinBoxInSizes->setSingleStep(1);
-
-            ui->doubleSpinBoxInHeights->setDecimals(0);
-            ui->doubleSpinBoxInHeights->setSingleStep(1);
             break;
         case Unit::Inch:
             ui->doubleSpinBoxBaseValue->setDecimals(5);

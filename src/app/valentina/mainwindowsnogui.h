@@ -103,6 +103,8 @@ private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 
     bool isTiled;
+    bool isAutoCrop;
+    bool isUnitePages;
 
     void CreateShadows();
     void CreateScenes();

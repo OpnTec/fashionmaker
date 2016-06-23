@@ -437,20 +437,20 @@ win32:*-g++ {
 
     SCP_FOUND = false
     exists("C:/Program Files (x86)/Inno Setup 5/iscc.exe") {
-		INNO_ISCC = "C:/Program Files (x86)/Inno Setup 5/iscc.exe"
-		SCP_FOUND = true
-	} else {
-	    exists(INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe") {
-		INNO_ISCC = INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe"
-		SCP_FOUND = true
-	   }
+                INNO_ISCC = "C:/Program Files (x86)/Inno Setup 5/iscc.exe"
+                SCP_FOUND = true
+        } else {
+            exists("C:/Program Files/Inno Setup 5/iscc.exe") {
+                INNO_ISCC = "C:/Program Files/Inno Setup 5/iscc.exe"
+                SCP_FOUND = true
+           }
     }
 
     if($$SCP_FOUND) {
         package_inno.path = $${OUT_PWD}/../../../package
         package_inno.files += \
             $$PWD/../../../dist/win/inno/LICENSE_VALENTINA \
-            $$PWD/../../../dist/win/inno/valentina.iss 
+            $$PWD/../../../dist/win/inno/valentina.iss
         INSTALLS += package_inno
 
         # Do the packaging
