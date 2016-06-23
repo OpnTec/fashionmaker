@@ -96,6 +96,7 @@ enum class Tool : ToolVisHolderType
     PointOfIntersectionCircles,
     PointOfIntersectionCurves,
     CurveIntersectAxis,
+    ArcIntersectAxis,
     PointOfIntersection,
     PointFromCircleAndTangent,
     PointFromArcAndTangent,

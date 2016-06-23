@@ -1096,7 +1096,7 @@ void MainWindow::ToolArcIntersectAxis(bool checked)
 {
     ToolSelectAllDrawObjects();
     // Reuse ToolCurveIntersectAxis but with different cursor and tool tip
-    SetToolButtonWithApply<DialogCurveIntersectAxis>(checked, Tool::CurveIntersectAxis,
+    SetToolButtonWithApply<DialogCurveIntersectAxis>(checked, Tool::ArcIntersectAxis,
                                                      ":/cursor/arc_intersect_axis_cursor.png",
                                                      tr("Select arc"),
                                                      &MainWindow::ClosedDialogWithApply<VToolCurveIntersectAxis>,
@@ -1806,7 +1806,7 @@ void MainWindow::mouseMove(const QPointF &scenePos)
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 44, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 45, "Not all tools was handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1917,6 +1917,8 @@ void MainWindow::CancelTool()
             break;
         case Tool::CurveIntersectAxis:
             ui->toolButtonCurveIntersectAxis->setChecked(false);
+            break;
+        case Tool::ArcIntersectAxis:
             ui->toolButtonArcIntersectAxis->setChecked(false);
             break;
         case Tool::PointOfIntersectionArcs:
@@ -3432,7 +3434,7 @@ void MainWindow::CreateMenus()
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 44, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 45, "Not all tools was handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3558,6 +3560,10 @@ void MainWindow::LastUsedTool()
         case Tool::CurveIntersectAxis:
             ui->toolButtonCurveIntersectAxis->setChecked(true);
             ToolCurveIntersectAxis(true);
+            break;
+        case Tool::ArcIntersectAxis:
+            ui->toolButtonArcIntersectAxis->setChecked(true);
+            ToolArcIntersectAxis(true);
             break;
         case Tool::PointOfIntersectionCircles:
             ui->toolButtonPointOfIntersectionCircles->setChecked(true);
