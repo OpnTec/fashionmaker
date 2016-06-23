@@ -55,6 +55,7 @@ const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
 const QString VToolDetail::AttrWidth        = QStringLiteral("width");
 const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolDetail::AttrReverse      = QStringLiteral("reverse");
+const QString VToolDetail::AttrFont         = QStringLiteral("fontSize");
 
 const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
@@ -126,6 +127,9 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
         }
     }
     setAcceptHoverEvents(true);
+
+    connect(dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMove);
+    connect(dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResize);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -298,6 +302,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
+        qDebug() << "FullUpdate" << qApp->getUndoStack()->count();
         SCASSERT(dialog != nullptr);
         DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
         SCASSERT(dialogTool != nullptr);
@@ -305,15 +310,10 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
         VDetail newDet = dialogTool->getDetail();
         VDetail oldDet = VAbstractTool::data.GetDetail(id);
 
-        qDebug() << "VTOOL" << newDet.GetPatternPieceData().GetLetter()
-                    << newDet.GetPatternPieceData().GetName()
-                       << newDet.GetPatternPieceData().GetMCPCount()
-                          << dialogTool->getDetail().GetPatternPieceData().GetName();
-
-
         SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
         connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(saveCommand);
+        qDebug() << "FullUpdate finished" << qApp->getUndoStack()->count();
     }
     delete dialog;
     dialog = nullptr;
@@ -337,11 +337,17 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domElement, AttrWidth, detail.getWidth());
 
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
-    doc->SetAttribute(domData, VAbstractPattern::AttrLetter, detail.GetPatternPieceData().GetLetter());
-    doc->SetAttribute(domData, VAbstractPattern::AttrName, detail.GetPatternPieceData().GetName());
-    for (int i = 0; i < detail.GetPatternPieceData().GetMCPCount(); ++i)
+    const VPatternPieceData& data = detail.GetPatternPieceData();
+    doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
+    doc->SetAttribute(domData, VAbstractPattern::AttrName, data.GetName());
+    doc->SetAttribute(domData, AttrMx, data.GetPos().x());
+    doc->SetAttribute(domData, AttrMy, data.GetPos().y());
+    doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
+    doc->SetAttribute(domData, AttrFont, data.GetFontSize());
+
+    for (int i = 0; i < data.GetMCPCount(); ++i)
     {
-        MaterialCutPlacement mcp = detail.GetPatternPieceData().GetMCP(i);
+        MaterialCutPlacement mcp = data.GetMCP(i);
         QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
         doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
         doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
@@ -378,11 +384,17 @@ void VToolDetail::RefreshDataInFile()
         doc->RemoveAllChildren(domElement);
 
         QDomElement domData = doc->createElement(VAbstractPattern::TagData);
-        doc->SetAttribute(domData, VAbstractPattern::AttrLetter, det.GetPatternPieceData().GetLetter());
-        doc->SetAttribute(domData, VAbstractPattern::AttrName, det.GetPatternPieceData().GetName());
-        for (int i = 0; i < det.GetPatternPieceData().GetMCPCount(); ++i)
+        const VPatternPieceData& data = det.GetPatternPieceData();
+        doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
+        doc->SetAttribute(domData, VAbstractPattern::AttrName, data.GetName());
+        doc->SetAttribute(domData, AttrMx, data.GetPos().x());
+        doc->SetAttribute(domData, AttrMy, data.GetPos().y());
+        doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
+        doc->SetAttribute(domData, AttrFont, data.GetFontSize());
+
+        for (int i = 0; i < data.GetMCPCount(); ++i)
         {
-            MaterialCutPlacement mcp = det.GetPatternPieceData().GetMCP(i);
+            MaterialCutPlacement mcp = data.GetMCP(i);
             QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
             doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
             doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);
@@ -619,6 +631,37 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief SaveMove saves the move operation to the undo stack
+ */
+void VToolDetail::SaveMove(QPointF ptPos)
+{
+    VDetail oldDet = VAbstractTool::data.GetDetail(id);
+    VDetail newDet = oldDet;
+    newDet.GetPatternPieceData().SetPos(ptPos);
+    SaveDetailOptions* moveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+    moveCommand->setText(tr("move pattern piece label"));
+    connect(moveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(moveCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief: SaveResize save the resize label operation to the undo stack
+ */
+void VToolDetail::SaveResize(qreal dLabelW, int iFontSize)
+{
+    VDetail oldDet = VAbstractTool::data.GetDetail(id);
+    VDetail newDet = oldDet;
+    newDet.GetPatternPieceData().SetLabelWidth(dLabelW);
+    newDet.GetPatternPieceData().SetFontSize(iFontSize);
+    SaveDetailOptions* resizeCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+    resizeCommand->setText(tr("resize pattern piece label"));
+    connect(resizeCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(resizeCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief AddNode add node to the file.
  * @param domElement tag in xml tree.
  * @param node node of detail.
@@ -717,7 +760,7 @@ void VToolDetail::RefreshGeometry()
         QStringList qslPlace;
         qslPlace << "" << " on Fold";
         QFont fnt = qApp->font();
-        fnt.setPixelSize(24);
+        fnt.setPixelSize(data.GetFontSize());
         QFontMetrics fm(fnt);
         dataLabel->setFont(fnt);
         int iMinW = 200;
@@ -733,7 +776,12 @@ void VToolDetail::RefreshGeometry()
         }
         // also add some offset
         dataLabel->SetMinimalWidth(iMinW + 10);
+        if (data.GetLabelWidth() > iMinW)
+        {
+            dataLabel->setTextWidth(data.GetLabelWidth());
+        }
         dataLabel->SetHTML(qsHTML);
+        dataLabel->setPos(data.GetPos());
         dataLabel->show();
     }
     else

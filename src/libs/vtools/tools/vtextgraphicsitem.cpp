@@ -156,6 +156,12 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *pME)
         if (m_eMode == mMove)
         {
             m_eMode = mActivated;
+            emit SignalMoved(pos());
+        }
+        else if (m_eMode == mResize)
+        {
+            m_eMode = mActivated;
+            emit SignalResized(textWidth(), font().pixelSize());
         }
         Update();
     }

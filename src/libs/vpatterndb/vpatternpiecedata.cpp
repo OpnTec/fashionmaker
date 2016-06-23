@@ -29,8 +29,13 @@
 #include "vpatternpiecedata.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternPieceData::VPatternPieceData()
-{}
+VPatternPieceData::VPatternPieceData() :
+    m_ptPos(0, 0)
+{
+    m_iFontSize = MIN_FONT_SIZE;
+    // 0 means unknown width
+    m_dLabelWidth = 0;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternPieceData::~VPatternPieceData()
@@ -110,6 +115,45 @@ const QString& VPatternPieceData::GetName() const
 void VPatternPieceData::SetName(QString qsName)
 {
     m_qsName = qsName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPointF VPatternPieceData::GetPos() const
+{
+    return m_ptPos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternPieceData::SetPos(const QPointF& ptPos)
+{
+    m_ptPos = ptPos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPatternPieceData::GetLabelWidth() const
+{
+    return m_dLabelWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternPieceData::SetLabelWidth(qreal dLabelW)
+{
+    m_dLabelWidth = dLabelW;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VPatternPieceData::GetFontSize() const
+{
+    return m_iFontSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternPieceData::SetFontSize(int iSize)
+{
+    if (iSize >= MIN_FONT_SIZE)
+        m_iFontSize = iSize;
+    else
+        m_iFontSize = MIN_FONT_SIZE;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

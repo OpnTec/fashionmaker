@@ -33,6 +33,8 @@
 
 class VTextGraphicsItem : public QGraphicsTextItem
 {
+    Q_OBJECT
+
     enum Mode {
         mNormal,
         mActivated,
@@ -50,6 +52,10 @@ public:
 
     void                Reset();
     void                SetHTML(const QString& qsHTML);
+
+signals:
+    void                SignalMoved(QPointF ptPos);
+    void                SignalResized(qreal dTW, int iFontSize);
 
 protected:
     void                mousePressEvent(QGraphicsSceneMouseEvent* pME);

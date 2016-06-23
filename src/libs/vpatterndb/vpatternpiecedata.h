@@ -29,8 +29,11 @@
 #ifndef VPATTERNPIECEDATA_H
 #define VPATTERNPIECEDATA_H
 
+#define MIN_FONT_SIZE           24
+
 #include <QList>
 #include <QString>
+#include <QPointF>
 
 enum class MaterialType : char
 {
@@ -81,6 +84,14 @@ public:
     const QString&              GetName() const;
     void                        SetName(QString qsName);
 
+    // methods, which set up label parameters
+    QPointF                     GetPos() const;
+    void                        SetPos(const QPointF& ptPos);
+    qreal                       GetLabelWidth() const;
+    void                        SetLabelWidth(qreal dLabelW);
+    int                         GetFontSize() const;
+    void                        SetFontSize(int iSize);
+
 private:
     /** @brief Pattern piece name
      */
@@ -91,6 +102,15 @@ private:
     /** @brief List of material, cut number and placement 3-tuples
      */
     MCPContainer        m_conMCP;
+    /** @brief Location of the label
+     */
+    QPointF             m_ptPos;
+    /** @brief Label width
+     */
+    qreal               m_dLabelWidth;
+    /** @brief Label font size
+     */
+    int                 m_iFontSize;
 };
 
 #endif // VPATTERNPIECEDATA_H

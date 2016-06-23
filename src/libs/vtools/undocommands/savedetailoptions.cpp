@@ -106,7 +106,7 @@ bool SaveDetailOptions::mergeWith(const QUndoCommand *command)
     SCASSERT(saveCommand != nullptr);
     const quint32 id = saveCommand->getDetId();
 
-    if (id != nodeId)
+    if (id != nodeId || text() != command->text())
     {
         return false;
     }
@@ -134,11 +134,16 @@ void SaveDetailOptions::SaveDet(QDomElement &domElement, const VDetail &det)
 void SaveDetailOptions::SavePatternPieceData(QDomElement &domElement, const VDetail &det)
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
-    doc->SetAttribute(domData, VAbstractPattern::AttrLetter, det.GetPatternPieceData().GetLetter());
-    doc->SetAttribute(domData, VAbstractPattern::AttrName, det.GetPatternPieceData().GetName());
-    for (int i = 0; i < det.GetPatternPieceData().GetMCPCount(); ++i)
+    const VPatternPieceData& data = det.GetPatternPieceData();
+    doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
+    doc->SetAttribute(domData, VAbstractPattern::AttrName, data.GetName());
+    doc->SetAttribute(domData, AttrMx, data.GetPos().x());
+    doc->SetAttribute(domData, AttrMy, data.GetPos().y());
+    doc->SetAttribute(domData, VToolDetail::AttrWidth, data.GetLabelWidth());
+    doc->SetAttribute(domData, VToolDetail::AttrFont, data.GetFontSize());
+    for (int i = 0; i < data.GetMCPCount(); ++i)
     {
-        MaterialCutPlacement mcp = det.GetPatternPieceData().GetMCP(i);
+        MaterialCutPlacement mcp = data.GetMCP(i);
         QDomElement domMCP = doc->createElement(VAbstractPattern::TagMCP);
         doc->SetAttribute(domMCP, VAbstractPattern::AttrMaterial, int(mcp.m_eMaterial));
         doc->SetAttribute(domMCP, VAbstractPattern::AttrUserDefined, mcp.m_qsMaterialUserDef);

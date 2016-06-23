@@ -71,6 +71,7 @@ public:
     static const QString AttrWidth;
     static const QString AttrNodeType;
     static const QString AttrReverse;
+    static const QString AttrFont;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
     static const QString NodeArc;
@@ -103,6 +104,11 @@ protected:
     virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void       keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void       SetVisualization() Q_DECL_OVERRIDE {}
+
+protected slots:
+    virtual void       SaveMove(QPointF ptPos);
+    virtual void       SaveResize(qreal dLabelW, int iFontSize);
+
 private:
     Q_DISABLE_COPY(VToolDetail)
     /** @brief dialog dialog options. */

@@ -641,6 +641,14 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     detail.GetPatternPieceData().SetName(qsName);
                     QString qsLetter = element.attribute(AttrLetter, "");
                     detail.GetPatternPieceData().SetLetter(qsLetter);
+                    QPointF ptPos;
+                    ptPos.setX(element.attribute(AttrMx, "0").toDouble());
+                    ptPos.setY(element.attribute(AttrMy, "0").toDouble());
+                    detail.GetPatternPieceData().SetPos(ptPos);
+                    qreal dLW = element.attribute(VToolDetail::AttrWidth, "0").toDouble();
+                    detail.GetPatternPieceData().SetLabelWidth(dLW);
+                    int iFS = element.attribute(VToolDetail::AttrFont, "0").toInt();
+                    detail.GetPatternPieceData().SetFontSize(iFS);
 
                     QDomNodeList nodeListMCP = element.childNodes();
                     for (int iMCP = 0; iMCP < nodeListMCP.count(); ++iMCP)
