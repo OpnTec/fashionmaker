@@ -421,6 +421,12 @@ void VContainer::AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::RemoveVariable(const QString &name)
+{
+    d->variables.remove(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AddObject add object to container
  * @param obj container

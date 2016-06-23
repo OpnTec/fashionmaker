@@ -610,6 +610,11 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         helpLabel->setText(toolTip);
         dialogTool = new Dialog(pattern, NULL_ID, this);
 
+        if (t == Tool::Midpoint)
+        {
+            dialogTool->Build(t);
+        }
+
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr);
 
@@ -746,6 +751,16 @@ void MainWindow::ToolAlongLine(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogAlongLine>(checked, Tool::AlongLine, ":/cursor/alongline_cursor.png",
+                                            tr("Select point"), &MainWindow::ClosedDialogWithApply<VToolAlongLine>,
+                                            &MainWindow::ApplyDialog<VToolAlongLine>);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolMidpoint(bool checked)
+{
+    ToolSelectPointByRelease();
+    // Reuse DialogAlongLine and VToolAlongLine but with different cursor
+    SetToolButtonWithApply<DialogAlongLine>(checked, Tool::Midpoint, ":/cursor/midpoint_cursor.png",
                                             tr("Select point"), &MainWindow::ClosedDialogWithApply<VToolAlongLine>,
                                             &MainWindow::ApplyDialog<VToolAlongLine>);
 }
@@ -1750,6 +1765,7 @@ void MainWindow::InitToolButtons()
     connect(ui->toolButtonTrueDarts, &QToolButton::clicked, this, &MainWindow::ToolTrueDarts);
     connect(ui->toolButtonGroup, &QToolButton::clicked, this, &MainWindow::ToolGroup);
     connect(ui->toolButtonRotation, &QToolButton::clicked, this, &MainWindow::ToolRotation);
+    connect(ui->toolButtonMidpoint, &QToolButton::clicked, this, &MainWindow::ToolMidpoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1790,7 +1806,7 @@ void MainWindow::mouseMove(const QPointF &scenePos)
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 44, "Not all tools was handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
@@ -1835,6 +1851,9 @@ void MainWindow::CancelTool()
             break;
         case Tool::AlongLine:
             ui->toolButtonAlongLine->setChecked(false);
+            break;
+        case Tool::Midpoint:
+            ui->toolButtonMidpoint->setChecked(false);
             break;
         case Tool::ShoulderPoint:
             ui->toolButtonShoulderPoint->setChecked(false);
@@ -3133,6 +3152,7 @@ void MainWindow::SetEnableTool(bool enable)
     ui->toolButtonTrueDarts->setEnabled(drawTools);
     ui->toolButtonGroup->setEnabled(drawTools);
     ui->toolButtonRotation->setEnabled(drawTools);
+    ui->toolButtonMidpoint->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -3412,7 +3432,7 @@ void MainWindow::CreateMenus()
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 44, "Not all tools was handled.");
 
     if (currentTool == lastUsedTool)
     {
@@ -3450,6 +3470,10 @@ void MainWindow::LastUsedTool()
         case Tool::AlongLine:
             ui->toolButtonAlongLine->setChecked(true);
             ToolAlongLine(true);
+            break;
+        case Tool::Midpoint:
+            ui->toolButtonMidpoint->setChecked(true);
+            ToolMidpoint(true);
             break;
         case Tool::ShoulderPoint:
             ui->toolButtonShoulderPoint->setChecked(true);

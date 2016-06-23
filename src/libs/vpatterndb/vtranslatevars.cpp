@@ -380,6 +380,7 @@ void VTranslateVars::InitVariables()
     variables.insert(angle2SplPath, translate("VTranslateVars", "Angle2SplPath",
                                               "Do not add symbol _ to the end of the name"));
     variables.insert(seg_, translate("VTranslateVars", "Seg_", "Segment. Left symbol _ in the name"));
+    variables.insert(currentLength, translate("VTranslateVars", "CurrentLength", "Do not add space between words"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

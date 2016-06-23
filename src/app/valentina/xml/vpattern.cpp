@@ -263,6 +263,8 @@ void VPattern::setCurrentData()
 
                 const VDataTool *vTool = tools.value(id);
                 *data = vTool->getData();
+                //Delete special variable if exist
+                data->RemoveVariable(currentLength);
                 qCDebug(vXML, "Data successfully updated.");
             }
             else
@@ -3204,7 +3206,7 @@ void VPattern::ToolsCommonAttributes(const QDomElement &domElement, quint32 &id)
 QRectF VPattern::ActiveDrawBoundingRect() const
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 43, "Not all tools was used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 44, "Not all tools was used.");
 
     QRectF rec;
 
@@ -3221,6 +3223,7 @@ QRectF VPattern::ActiveDrawBoundingRect() const
                 case Tool::LinePoint:
                 case Tool::AbstractSpline:
                 case Tool::Cut:
+                case Tool::Midpoint:// Same as Tool::AlongLine, but tool will never has such type
                 case Tool::LAST_ONE_DO_NOT_USE:
                     Q_UNREACHABLE();
                     break;

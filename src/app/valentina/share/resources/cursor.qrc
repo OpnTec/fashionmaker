@@ -68,5 +68,7 @@
         <file>cursor/group_plus_cursor@2x.png</file>
         <file>cursor/rotation_cursor.png</file>
         <file>cursor/rotation_cursor@2x.png</file>
+        <file>cursor/midpoint_cursor.png</file>
+        <file>cursor/midpoint_cursor@2x.png</file>
     </qresource>
 </RCC>

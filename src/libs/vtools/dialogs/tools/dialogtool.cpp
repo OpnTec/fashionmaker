@@ -920,6 +920,12 @@ void DialogTool::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::Build(const Tool &type)
+{
+    Q_UNUSED(type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::SetAssociatedTool(VAbstractTool *tool)
 {
     this->associatedTool=tool;

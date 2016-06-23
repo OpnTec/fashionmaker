@@ -104,6 +104,7 @@ public slots:
     void               ToolEndLine(bool checked);
     void               ToolLine(bool checked);
     void               ToolAlongLine(bool checked);
+    void               ToolMidpoint(bool checked);
     void               ToolShoulderPoint(bool checked);
     void               ToolNormal(bool checked);
     void               ToolBisector(bool checked);

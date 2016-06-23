@@ -250,6 +250,12 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
     const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondPointId);
     QLineF line = QLineF(*firstPoint, *secondPoint);
 
+    //Declare special variable "CurrentLength"
+    VLengthLine *length = new VLengthLine(firstPoint.data(), firstPointId, secondPoint.data(),
+                                          secondPointId, *data->GetPatternUnit());
+    length->SetName(currentLength);
+    data->AddVariable(currentLength, length);
+
     line.setLength(qApp->toPixel(CheckFormula(_id, formula, data)));
 
     quint32 id = _id;
@@ -270,16 +276,18 @@ VToolAlongLine* VToolAlongLine::Create(const quint32 _id, const QString &pointNa
         }
     }
     VDrawTool::AddRecord(id, Tool::AlongLine, doc);
+    VToolAlongLine *point = nullptr;
     if (parse == Document::FullParse)
     {
-        VToolAlongLine *point = new VToolAlongLine(doc, data, id, formula, firstPointId, secondPointId, typeLine,
-                                                   lineColor, typeCreation);
+        point = new VToolAlongLine(doc, data, id, formula, firstPointId, secondPointId, typeLine, lineColor,
+                                   typeCreation);
         scene->addItem(point);
         InitToolConnections(scene, point);
         doc->AddTool(id, point);
         doc->IncrementReferens(firstPoint->getIdTool());
         doc->IncrementReferens(secondPoint->getIdTool());
-        return point;
     }
-    return nullptr;
+    //Very important to delete it. Only this tool need this special variable.
+    data->RemoveVariable(currentLength);
+    return point;
 }

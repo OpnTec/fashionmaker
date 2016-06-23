@@ -31,6 +31,7 @@
 - [#409] New feature: Export measurement file to Excel .csv.
 - [#180] New feature: Search field in tape app and dialog Increments.
 - [#514] Read only setting not working properly.
+- [#480] New tool: Midpoint between two points.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.
