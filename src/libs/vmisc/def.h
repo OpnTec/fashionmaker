@@ -96,6 +96,7 @@ enum class Tool : ToolVisHolderType
     PointOfIntersectionCircles,
     PointOfIntersectionCurves,
     CurveIntersectAxis,
+    ArcIntersectAxis,
     PointOfIntersection,
     PointFromCircleAndTangent,
     PointFromArcAndTangent,
@@ -103,6 +104,7 @@ enum class Tool : ToolVisHolderType
     UnionDetails,
     Group,
     Rotation,
+    Midpoint,
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 

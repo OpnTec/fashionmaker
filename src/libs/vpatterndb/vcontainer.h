@@ -129,6 +129,7 @@ public:
 
     template <typename T>
     void               AddVariable(const QString& name, T *var);
+    void               RemoveVariable(const QString& name);
 
     void               UpdateGObject(quint32 id, VGObject* obj);
     void               UpdateDetail(quint32 id, const VDetail &detail);

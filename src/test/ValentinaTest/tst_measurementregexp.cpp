@@ -651,6 +651,7 @@ void TST_MeasurementRegExp::CheckUnderlineExists() const
     data.insert(angle1SplPath, false);
     data.insert(angle2SplPath, false);
     data.insert(seg_, true);
+    data.insert(currentLength, false);
 
     //Catch case when new internal variable appears.
     QCOMPARE(data.size(), builInVariables.size());

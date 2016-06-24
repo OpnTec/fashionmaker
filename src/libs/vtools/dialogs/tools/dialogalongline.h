@@ -62,6 +62,8 @@ public:
 
     quint32             GetSecondPointId() const;
     void                SetSecondPointId(const quint32 &value);
+
+    virtual void        Build(const Tool &type) Q_DECL_OVERRIDE;
 public slots:
     virtual void        ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
     /**
@@ -93,6 +95,10 @@ private:
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
+
+    bool buildMidpoint;
+
+    void SetCurrentLength();
 };
 
 #endif // DIALOGALONGLINE_H

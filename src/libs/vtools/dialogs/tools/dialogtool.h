@@ -69,6 +69,7 @@ public:
     void             SetAssociatedTool(VAbstractTool* tool);
 
     virtual void     ShowDialog(bool click);
+    virtual void     Build(const Tool &type);
 
     quint32          GetToolId() const;
     void             SetToolId(const quint32 &value);
