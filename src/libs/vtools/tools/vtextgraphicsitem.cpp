@@ -29,11 +29,16 @@
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QTextDocument>
 #include <QDebug>
 
 #include "vtextgraphicsitem.h"
 
 #define RESIZE_SQUARE               30
+#define MIN_W                       120
+#define MIN_H                       60
+#define MIN_FONT_SIZE               12
+#define MAX_FONT_SIZE               36
 
 //---------------------------------------------------------------------------------------------------------------------
 VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
@@ -42,7 +47,12 @@ VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     m_eMode = mNormal;
-    m_iMinW = 100;
+    m_rectBoundingBox.setTopLeft(QPointF(0, 0));
+    setTextWidth(MIN_W);
+    m_rectBoundingBox.setWidth(MIN_W);
+    m_iMinH = MIN_H;
+    m_rectBoundingBox.setHeight(m_iMinH);
+    setZValue(2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -68,13 +78,6 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::SetMinimalWidth(int iW)
-{
-    m_iMinW = iW;
-    setTextWidth(m_iMinW);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::Reset()
 {
     m_eMode = mNormal;
@@ -82,11 +85,21 @@ void VTextGraphicsItem::Reset()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::SetHTML(const QString& qsHTML)
+QRectF VTextGraphicsItem::boundingRect() const
+{   return m_rectBoundingBox; }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::SetHTML(const QString& qsHtml)
 {
-    QGraphicsTextItem::setHtml(qsHTML);
-    m_iMinFontSize = font().pixelSize();
-    m_iMinH = boundingRect().height();
+    QGraphicsTextItem::setHtml(qsHtml);
+    m_rectBoundingBox.setHeight(document()->size().height());
+
+    // calculate the minimal height
+    QScopedPointer<QTextDocument> pDoc(document()->clone());
+    QFont fnt = font();
+    fnt.setPixelSize(MIN_FONT_SIZE);
+    pDoc->setDefaultFont(fnt);
+    m_iMinH = pDoc->size().height();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -98,13 +111,11 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         if (m_rectResize.contains(pME->pos()) == true)
         {
             m_eMode = mResize;
-            m_iCurrentH = boundingRect().height();
         }
         else
         {
             m_eMode = mMove;
         }
-        qDebug() << "MOUSEPRESS" << m_rectResize << pME->pos() << int(m_eMode);
         Update();
         m_ptStart = pME->pos();
     }
@@ -122,29 +133,21 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *pME)
     else if (m_eMode == mResize)
     {
         prepareGeometryChange();
-        int iNewW = textWidth() + pME->pos().x() - m_ptStart.x();
-        m_iCurrentH += pME->pos().y() - m_ptStart.y();
-        if (iNewW >= m_iMinW)
-        {
-            setTextWidth(iNewW);
-            m_ptStart.setX(pME->pos().x());
-            Update();
-        }
+        qreal fW = m_rectBoundingBox.width() + pME->pos().x() - m_ptStart.x();
+        qreal fH = m_rectBoundingBox.height() + pME->pos().y() - m_ptStart.y();
 
-        if (m_iCurrentH >= m_iMinH)
+        if (fW >= MIN_W)
         {
-            int iFontSize = m_iMinFontSize*m_iCurrentH/m_iMinH;
-            if (iFontSize > m_iMinFontSize*2)
-            {
-                // prevent too big letters
-                return;
-            }
-            QFont fnt = font();
-            fnt.setPixelSize(iFontSize);
-            setFont(fnt);
-            m_ptStart.setY(pME->pos().y());
-            Update();
+            m_rectBoundingBox.setWidth(fW);
+            setTextWidth(fW);
         }
+        if (fH >= m_iMinH)
+        {
+            m_rectBoundingBox.setHeight(fH);
+        }
+        m_ptStart = pME->pos();
+
+        UpdateFont();
     }
 }
 
@@ -183,10 +186,34 @@ void VTextGraphicsItem::SetResizeArea()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::setHtml(const QString &qsHtml)
+void VTextGraphicsItem::UpdateFont()
 {
-    Q_UNUSED(qsHtml);
-    // prevent using this method! Use SetHTML instead!
+    QScopedPointer<QTextDocument> pDoc(document()->clone());
+    pDoc->setTextWidth(m_rectBoundingBox.width());
+
+    QFont fnt = font();
+    int iFS = fnt.pixelSize();
+    QSizeF sz = pDoc->size();
+    while (sz.width() < m_rectBoundingBox.width() && sz.height() < m_rectBoundingBox.height() && iFS < MAX_FONT_SIZE)
+    {
+        ++iFS;
+        fnt.setPixelSize(iFS);
+        pDoc->setDefaultFont(fnt);
+        sz = pDoc->size();
+    }
+
+    while ((sz.width() >= m_rectBoundingBox.width() || sz.height() >= m_rectBoundingBox.height()) && iFS > MIN_FONT_SIZE)
+    {
+        --iFS;
+        fnt.setPixelSize(iFS);
+        pDoc->setDefaultFont(fnt);
+        sz = pDoc->size();
+
+    }
+
+    fnt.setPixelSize(iFS);
+    setFont(fnt);
+    Update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

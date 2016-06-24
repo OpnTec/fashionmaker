@@ -48,10 +48,10 @@ public:
 
     void                paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void                SetMinimalWidth(int iW);
-
     void                Reset();
-    void                SetHTML(const QString& qsHTML);
+
+    QRectF              boundingRect() const;
+    void                SetHTML(const QString& qsHtml);
 
 signals:
     void                SignalMoved(QPointF ptPos);
@@ -64,16 +64,15 @@ protected:
 
     void                Update();
     void                SetResizeArea();
-    void                setHtml(const QString& qsHtml);
+
+    void                UpdateFont();
 
 private:
-    int                 m_iMinW;
     Mode                m_eMode;
     QPointF             m_ptStart;
     QRectF              m_rectResize;
-    int                 m_iMinFontSize;
     int                 m_iMinH;
-    int                 m_iCurrentH;
+    QRectF              m_rectBoundingBox;
 };
 
 #endif // VTEXTGRAPHICSITEM_H
