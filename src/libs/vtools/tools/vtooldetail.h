@@ -104,6 +104,7 @@ protected:
     virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void       keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void       SetVisualization() Q_DECL_OVERRIDE {}
+    virtual void       UpdateLabel();
 
 protected slots:
     virtual void       SaveMove(QPointF ptPos);

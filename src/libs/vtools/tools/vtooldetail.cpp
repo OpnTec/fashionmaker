@@ -130,6 +130,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
 
     connect(dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMove);
     connect(dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResize);
+    UpdateLabel();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -302,7 +303,6 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
 {
     if (result == QDialog::Accepted)
     {
-        qDebug() << "FullUpdate" << qApp->getUndoStack()->count();
         SCASSERT(dialog != nullptr);
         DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
         SCASSERT(dialogTool != nullptr);
@@ -313,7 +313,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
         SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
         connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(saveCommand);
-        qDebug() << "FullUpdate finished" << qApp->getUndoStack()->count();
+        UpdateLabel();
     }
     delete dialog;
     dialog = nullptr;
@@ -631,6 +631,41 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief UpdateLabel updates the text label, making it just big enough for the text to fit it
+ */
+void VToolDetail::UpdateLabel()
+{
+    const VDetail detail = VAbstractTool::data.GetDetail(id);
+
+    const VPatternPieceData& data = detail.GetPatternPieceData();
+    if (data.GetLetter().isEmpty() == false || data.GetName().isEmpty() == false || data.GetMCPCount() > 0)
+    {
+        QString qsText = "Cut %1 on %2%3";
+        QStringList qslPlace;
+        qslPlace << "" << " on Fold";
+        QFont fnt = qApp->font();
+        fnt.setPixelSize(data.GetFontSize());
+        dataLabel->setFont(fnt);
+        QString qsHTML = "<b><font size=\"+4\"><center>" + data.GetLetter() + "</center></font></b><br/>";
+        qsHTML += "<font size=\"+2\" align=\"center\">" + data.GetName() + "</font><br/>";
+        for (int i = 0; i < data.GetMCPCount(); ++i)
+        {
+            MaterialCutPlacement mcp = data.GetMCP(i);
+            QString qsLine = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).arg(qslPlace[int(mcp.m_ePlacement)]);
+            qsHTML += qsLine + "<br/>";
+        }
+        dataLabel->SetHTML(qsHTML);
+        dataLabel->setPos(data.GetPos());
+        dataLabel->show();
+    }
+    else
+    {
+        dataLabel->hide();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief SaveMove saves the move operation to the undo stack
  */
 void VToolDetail::SaveMove(QPointF ptPos)
@@ -752,42 +787,6 @@ void VToolDetail::RefreshGeometry()
     }
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-
-    const VPatternPieceData& data = detail.GetPatternPieceData();
-    if (data.GetLetter().isEmpty() == false || data.GetName().isEmpty() == false || data.GetMCPCount() > 0)
-    {
-        QString qsText = "Cut %1 on %2%3";
-        QStringList qslPlace;
-        qslPlace << "" << " on Fold";
-        QFont fnt = qApp->font();
-        fnt.setPixelSize(data.GetFontSize());
-        QFontMetrics fm(fnt);
-        dataLabel->setFont(fnt);
-        int iMinW = 200;
-        QString qsHTML = "<b><font size=\"+4\">" + data.GetLetter() + "</font></b><br/>";
-        qsHTML += "<font size=\"+2\">" + data.GetName() + "</font><br/>";
-        for (int i = 0; i < data.GetMCPCount(); ++i)
-        {
-            MaterialCutPlacement mcp = data.GetMCP(i);
-            QString qsLine = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).arg(qslPlace[int(mcp.m_ePlacement)]);
-            if (fm.width(qsLine) > iMinW)
-                iMinW = fm.width(qsLine);
-            qsHTML += qsLine + "<br/>";
-        }
-        // also add some offset
-        dataLabel->SetMinimalWidth(iMinW + 10);
-        if (data.GetLabelWidth() > iMinW)
-        {
-            dataLabel->setTextWidth(data.GetLabelWidth());
-        }
-        dataLabel->SetHTML(qsHTML);
-        dataLabel->setPos(data.GetPos());
-        dataLabel->show();
-    }
-    else
-    {
-        dataLabel->hide();
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
