@@ -457,7 +457,7 @@ void MainWindowsNoGUI::PrintTiled()
 void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *details)
 {
     SCASSERT(details != nullptr)
-            if (details->count() == 0)
+    if (details->count() == 0)
     {
         listDetails.clear();
         return;
