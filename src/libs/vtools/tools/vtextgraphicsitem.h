@@ -29,9 +29,20 @@
 #ifndef VTEXTGRAPHICSITEM_H
 #define VTEXTGRAPHICSITEM_H
 
-#include <QGraphicsTextItem>
+#include <QGraphicsObject>
+#include <QFont>
+#include <QList>
 
-class VTextGraphicsItem : public QGraphicsTextItem
+struct TextLine
+{
+    QString             m_qsText;
+    int                 m_iFontSize;  // 0 means default
+    QFont::Weight       m_eFontWeight;
+    Qt::Alignment       m_eAlign;
+    int                 m_iHeight;
+};
+
+class VTextGraphicsItem : public QGraphicsObject
 {
     Q_OBJECT
 
@@ -46,33 +57,40 @@ public:
     VTextGraphicsItem(QGraphicsItem* pParent = 0);
     ~VTextGraphicsItem();
 
+    void                SetFont(const QFont& fnt);
     void                paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void                Reset();
 
     QRectF              boundingRect() const;
-    void                SetHTML(const QString& qsHtml);
-
-signals:
-    void                SignalMoved(QPointF ptPos);
-    void                SignalResized(qreal dTW, int iFontSize);
+    void                AddLine(const TextLine& tl);
+    void                Clear();
 
 protected:
+    void                Resize(qreal fW, qreal fH);
     void                mousePressEvent(QGraphicsSceneMouseEvent* pME);
     void                mouseMoveEvent(QGraphicsSceneMouseEvent* pME);
     void                mouseReleaseEvent(QGraphicsSceneMouseEvent* pME);
-
     void                Update();
-    void                SetResizeArea();
-
     void                UpdateFont();
+    bool                IsBigEnough(qreal fW, qreal fH, int iFontSize);
+    QStringList         SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);
+
+signals:
+    void               SignalMoved(QPointF ptPos);
+    void               SignalResized(qreal iTW, int iFontSize);
+    void               SignalShrink();
 
 private:
     Mode                m_eMode;
     QPointF             m_ptStart;
+    QSizeF              m_szStart;
     QRectF              m_rectResize;
     int                 m_iMinH;
     QRectF              m_rectBoundingBox;
+    QFont               m_font;
+    QList<TextLine>     m_liLines;
+    QList<TextLine>     m_liOutput;
 };
 
 #endif // VTEXTGRAPHICSITEM_H

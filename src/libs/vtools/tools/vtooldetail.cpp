@@ -130,6 +130,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
 
     connect(dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMove);
     connect(dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResize);
+    connect(dataLabel, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
     UpdateLabel();
 }
 
@@ -640,22 +641,38 @@ void VToolDetail::UpdateLabel()
     const VPatternPieceData& data = detail.GetPatternPieceData();
     if (data.GetLetter().isEmpty() == false || data.GetName().isEmpty() == false || data.GetMCPCount() > 0)
     {
-        QString qsText = "Cut %1 on %2%3";
+        QString qsText = "Cut %1 of %2%3";
         QStringList qslPlace;
         qslPlace << "" << " on Fold";
         QFont fnt = qApp->font();
         fnt.setPixelSize(data.GetFontSize());
-        dataLabel->setFont(fnt);
-        QString qsHTML = "<b><font size=\"+4\"><center>" + data.GetLetter() + "</center></font></b><br/>";
-        qsHTML += "<font size=\"+2\" align=\"center\">" + data.GetName() + "</font><br/>";
-        for (int i = 0; i < data.GetMCPCount(); ++i)
-        {
+        dataLabel->SetFont(fnt);
+        dataLabel->Clear();
+        TextLine tl;
+        // letter
+        tl.m_qsText = data.GetLetter();
+        tl.m_eAlign = Qt::AlignCenter;
+        tl.m_eFontWeight = QFont::Bold;
+        tl.m_iFontSize = 4;
+        dataLabel->AddLine(tl);
+        tl.m_qsText = data.GetName();
+        tl.m_eAlign = Qt::AlignCenter;
+        tl.m_eFontWeight = QFont::DemiBold;
+        tl.m_iFontSize = 2;
+        dataLabel->AddLine(tl);
+
+        // MCP
+        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_iFontSize = 0;
+        for (int i = 0; i < data.GetMCPCount(); ++i) {
             MaterialCutPlacement mcp = data.GetMCP(i);
-            QString qsLine = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).arg(qslPlace[int(mcp.m_ePlacement)]);
-            qsHTML += qsLine + "<br/>";
+            tl.m_qsText = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).arg(qslPlace[int(mcp.m_ePlacement)]);
+            dataLabel->AddLine(tl);
         }
-        dataLabel->SetHTML(qsHTML);
+
         dataLabel->setPos(data.GetPos());
+        dataLabel->Reset();
         dataLabel->show();
     }
     else
@@ -847,4 +864,11 @@ void VToolDetail::AllowSelecting(bool enabled)
 void VToolDetail::ResetChild()
 {
     dataLabel->Reset();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::UpdateAll()
+{
+    sceneDetails->update();
+    update();
 }

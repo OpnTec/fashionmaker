@@ -92,6 +92,7 @@ public slots:
     virtual void       AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void       AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
     virtual void       ResetChild();
+    virtual void       UpdateAll();
 protected:
     virtual void       AddToFile () Q_DECL_OVERRIDE;
     virtual void       RefreshDataInFile() Q_DECL_OVERRIDE;

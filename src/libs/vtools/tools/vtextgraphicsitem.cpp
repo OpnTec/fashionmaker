@@ -38,20 +38,19 @@
 #define MIN_W                       120
 #define MIN_H                       60
 #define MIN_FONT_SIZE               12
-#define MAX_FONT_SIZE               36
+#define MAX_FONT_SIZE               48
+#define SPACING                     2
 
 //---------------------------------------------------------------------------------------------------------------------
 VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
-    : QGraphicsTextItem(pParent)
+    : QGraphicsObject(pParent)
 {
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     m_eMode = mNormal;
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
-    setTextWidth(MIN_W);
-    m_rectBoundingBox.setWidth(MIN_W);
     m_iMinH = MIN_H;
-    m_rectBoundingBox.setHeight(m_iMinH);
+    Resize(MIN_W, m_iMinH);
     setZValue(2);
 }
 
@@ -60,10 +59,32 @@ VTextGraphicsItem::~VTextGraphicsItem()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::SetFont(const QFont& fnt)
+{
+    m_font = fnt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->fillRect(option->rect, QColor(251, 251, 175));
-    QGraphicsTextItem::paint(painter, option, widget);
+
+    // draw text lines
+    int iY = 0;
+    int iH;
+    painter->setPen(Qt::black);
+    QFont fnt = m_font;
+    for (int i = 0; i < m_liOutput.count(); ++i)
+    {
+        const TextLine& tl = m_liOutput.at(i);
+        iH = tl.m_iHeight;
+        fnt.setPixelSize(m_font.pixelSize() + tl.m_iFontSize);
+        fnt.setWeight(tl.m_eFontWeight);
+        painter->setFont(fnt);
+        painter->drawText(0, iY, boundingRect().width(), iH, tl.m_eAlign, tl.m_qsText);
+        iY += iH + SPACING;
+    }
+
 
     if (m_eMode != mNormal)
     {
@@ -72,149 +93,175 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
         painter->setPen(Qt::black);
         painter->setBrush(Qt::black);
-        SetResizeArea();
         painter->drawRect(m_rectResize);
+
+        if (m_eMode == mResize)
+        {
+            painter->drawLine(0, 0, m_rectBoundingBox.width(), m_rectBoundingBox.height());
+            painter->drawLine(0, m_rectBoundingBox.height(), m_rectBoundingBox.width(), 0);
+        }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::AddLine(const TextLine& tl)
+{
+    m_liLines << tl;
+    while (IsBigEnough(MIN_W, m_iMinH, MIN_FONT_SIZE) == false)
+    {
+        m_iMinH += 5;
+    }
+    if (m_rectBoundingBox.height() < m_iMinH)
+    {
+        Resize(m_rectBoundingBox.width(), m_iMinH);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::Clear()
+{
+    m_liLines.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::Reset()
 {
     m_eMode = mNormal;
-    Update();
+    UpdateFont();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VTextGraphicsItem::boundingRect() const
-{   return m_rectBoundingBox; }
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::SetHTML(const QString& qsHtml)
 {
-    QGraphicsTextItem::setHtml(qsHtml);
-    m_rectBoundingBox.setHeight(document()->size().height());
-
-    // calculate the minimal height
-    QScopedPointer<QTextDocument> pDoc(document()->clone());
-    QFont fnt = font();
-    fnt.setPixelSize(MIN_FONT_SIZE);
-    pDoc->setDefaultFont(fnt);
-    m_iMinH = pDoc->size().height();
+    return m_rectBoundingBox;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
+void VTextGraphicsItem::Resize(qreal fW, qreal fH)
 {
-    if ((pME->button() & Qt::LeftButton) > 0)
-    {
-        SetResizeArea();
-        if (m_rectResize.contains(pME->pos()) == true)
-        {
-            m_eMode = mResize;
-        }
-        else
-        {
-            m_eMode = mMove;
-        }
-        Update();
-        m_ptStart = pME->pos();
-    }
-}
+    // don't allow resize under specific size
+    if (fW < MIN_W || fH < m_iMinH)
+        return;
 
-//---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *pME)
-{
-    if (m_eMode == mMove)
-    {
-        m_eMode = mMove;
-        QPointF ptRel = pME->pos() - m_ptStart;
-        moveBy(ptRel.x(), ptRel.y());
-    }
-    else if (m_eMode == mResize)
-    {
-        prepareGeometryChange();
-        qreal fW = m_rectBoundingBox.width() + pME->pos().x() - m_ptStart.x();
-        qreal fH = m_rectBoundingBox.height() + pME->pos().y() - m_ptStart.y();
-
-        if (fW >= MIN_W)
-        {
-            m_rectBoundingBox.setWidth(fW);
-            setTextWidth(fW);
-        }
-        if (fH >= m_iMinH)
-        {
-            m_rectBoundingBox.setHeight(fH);
-        }
-        m_ptStart = pME->pos();
-
-        UpdateFont();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *pME)
-{
-    if ((pME->button() & Qt::LeftButton) > 0)
-    {
-        if (m_eMode == mMove)
-        {
-            m_eMode = mActivated;
-            emit SignalMoved(pos());
-        }
-        else if (m_eMode == mResize)
-        {
-            m_eMode = mActivated;
-            emit SignalResized(textWidth(), font().pixelSize());
-        }
-        Update();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::Update()
-{
-    update(boundingRect());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::SetResizeArea()
-{
-    m_rectResize.setLeft(boundingRect().right() - RESIZE_SQUARE);
-    m_rectResize.setTop(boundingRect().bottom() - RESIZE_SQUARE);
+    m_rectBoundingBox.setWidth(fW);
+    m_rectBoundingBox.setHeight(fH);
+    m_rectResize.setTopLeft(QPointF(fW - RESIZE_SQUARE, fH - RESIZE_SQUARE));
     m_rectResize.setWidth(RESIZE_SQUARE);
     m_rectResize.setHeight(RESIZE_SQUARE);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::UpdateFont()
+void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 {
-    QScopedPointer<QTextDocument> pDoc(document()->clone());
-    pDoc->setTextWidth(m_rectBoundingBox.width());
-
-    QFont fnt = font();
-    int iFS = fnt.pixelSize();
-    QSizeF sz = pDoc->size();
-    while (sz.width() < m_rectBoundingBox.width() && sz.height() < m_rectBoundingBox.height() && iFS < MAX_FONT_SIZE)
+    m_ptStart = pME->pos();
+    m_szStart = m_rectBoundingBox.size();
+    if (m_rectResize.contains(m_ptStart) == true)
     {
-        ++iFS;
-        fnt.setPixelSize(iFS);
-        pDoc->setDefaultFont(fnt);
-        sz = pDoc->size();
+        m_eMode = mResize;
     }
-
-    while ((sz.width() >= m_rectBoundingBox.width() || sz.height() >= m_rectBoundingBox.height()) && iFS > MIN_FONT_SIZE)
+    else
     {
-        --iFS;
-        fnt.setPixelSize(iFS);
-        pDoc->setDefaultFont(fnt);
-        sz = pDoc->size();
-
+        m_eMode = mMove;
     }
-
-    fnt.setPixelSize(iFS);
-    setFont(fnt);
     Update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
+{
+    QPointF ptDiff = pME->pos() - m_ptStart;
+    if (m_eMode == mMove)
+    {
+        moveBy(ptDiff.x(), ptDiff.y());
+        Update();
+    }
+    else if (m_eMode == mResize)
+    {
+        Resize(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
+        UpdateFont();
+        emit SignalShrink();
+    }
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
+{
+    m_eMode = mActivated;
+    Update();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::Update()
+{
+    update(m_rectBoundingBox);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::UpdateFont()
+{
+    int iFS = m_font.pixelSize();
+
+    // increase the font size until the bounding rect is not big enough
+    while (iFS < MAX_FONT_SIZE && IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS) == true)
+    {
+        ++iFS;
+    }
+    // decrease the font size until the bounding rect is big enough
+    while (iFS >= MIN_FONT_SIZE && IsBigEnough(m_rectBoundingBox.width(), m_rectBoundingBox.height(), iFS) == false)
+    {
+        --iFS;
+    }
+    m_font.setPixelSize(iFS);
+    Update();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VTextGraphicsItem::IsBigEnough(qreal fW, qreal fH, int iFontSize)
+{
+    m_liOutput.clear();
+    QFont fnt = m_font;
+    int iY = 0;
+    for (int i = 0; i < m_liLines.count(); ++i)
+    {
+        const TextLine& tl = m_liLines.at(i);
+        TextLine tlOut = tl;
+        fnt.setPixelSize(iFontSize + tl.m_iFontSize);
+        QFontMetrics fm(fnt);
+        tlOut.m_iHeight = fm.height();
+        QStringList qslLines = SplitString(tlOut.m_qsText, fW, fm);
+        for (int i = 0; i < qslLines.count(); ++i)
+        {
+            tlOut.m_qsText = qslLines[i];
+            m_liOutput << tlOut;
+            iY += tlOut.m_iHeight + SPACING;
+        }
+    }
+    return iY < fH;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList VTextGraphicsItem::SplitString(const QString &qs, qreal fW, const QFontMetrics &fm)
+{
+    QRegExp reg("\\s+");
+    QStringList qslWords = qs.split(reg);
+    QStringList qslLines;
+    QString qsCurrent;
+    for (int i = 0; i < qslWords.count(); ++i)
+    {
+        if (qsCurrent.length() > 0)
+        {
+            qsCurrent += " ";
+        }
+        if (fm.width(qsCurrent + qslWords[i]) > fW)
+        {
+            qslLines << qsCurrent;
+            qsCurrent = qslWords[i];
+        }
+        else
+        {
+            qsCurrent += qslWords[i];
+        }
+    }
+    qslLines << qsCurrent;
+    return qslLines;
+}
