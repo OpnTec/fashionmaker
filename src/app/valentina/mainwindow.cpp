@@ -2974,18 +2974,6 @@ void MainWindow::ChangedHeight(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::DockToolOptionsVisibilityChanged(bool visible)
-{
-    isDockToolOptionsVisible = visible;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::DockGropsVisibilityChanged(bool visible)
-{
-    isDockGroupsVisible = visible;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetDefaultHeight()
 {
     const QString defHeight = QString().setNum(doc->GetDefCustomHeight());
@@ -3610,12 +3598,15 @@ void MainWindow::AddDocks()
     //Add dock
     actionDockWidgetToolOptions = ui->dockWidgetToolOptions->toggleViewAction();
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetToolOptions);
-    connect(ui->dockWidgetToolOptions, &QDockWidget::visibilityChanged, this,
-            &MainWindow::DockToolOptionsVisibilityChanged);
+    connect(ui->dockWidgetToolOptions, &QDockWidget::visibilityChanged, [this](bool visible){
+        isDockToolOptionsVisible = visible;
+    });
 
     actionDockWidgetGroups = ui->dockWidgetGroups->toggleViewAction();
     ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetGroups);
-    connect(ui->dockWidgetGroups, &QDockWidget::visibilityChanged, this, &MainWindow::DockGropsVisibilityChanged);
+    connect(ui->dockWidgetGroups, &QDockWidget::visibilityChanged, [this](bool visible){
+        isDockGroupsVisible = visible;
+    });
 
     separatorAct = new QAction(this);
     separatorAct->setSeparator(true);

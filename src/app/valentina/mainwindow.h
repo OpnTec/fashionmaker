@@ -207,9 +207,6 @@ private slots:
     void ChangedSize(const QString &text);
     void ChangedHeight(const QString & text);
 
-    void DockToolOptionsVisibilityChanged(bool visible);
-    void DockGropsVisibilityChanged(bool visible);
-
 private:
     Q_DISABLE_COPY(MainWindow)
     /** @brief ui keeps information about user interface */
