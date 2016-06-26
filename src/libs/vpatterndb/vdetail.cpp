@@ -177,6 +177,18 @@ void VDetail::setId(const quint32 &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VDetail::IsInLayout() const
+{
+    return d->inLayout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDetail::SetInLayout(bool inLayout)
+{
+    d->inLayout = inLayout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief OnEdge checks if two poins located on the edge. Edge is line between two points. If between two points
  * located arcs or splines ignore this.

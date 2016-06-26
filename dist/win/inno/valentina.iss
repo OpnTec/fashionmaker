@@ -101,7 +101,7 @@ Root: "HKCR"; Subkey: ".vit"; ValueType: string; ValueName: ""; ValueData: "Vale
 Root: "HKCR"; Subkey: ".vst"; ValueType: string; ValueName: ""; ValueData: "Valentina.StandardMeasurements"; Flags: uninsdeletevalue; Tasks: fileassoc3
 
 Root: "HKCR"; Subkey: "Valentina.Pattern"; ValueType: string; ValueData: "Valentina pattern file"; Flags: uninsdeletekey; Tasks: fileassoc1
-Root: "HKCR"; Subkey: "Valentina.Pattern\DefaultIcon"; ValueType: string; ValueData: "{app}\valentina.ico,0"; Tasks: fileassoc1
+Root: "HKCR"; Subkey: "Valentina.Pattern\DefaultIcon"; ValueType: string; ValueData: "{app}\pattern.ico,0"; Tasks: fileassoc1
 Root: "HKCR"; Subkey: "Valentina.Pattern\shell\open\command"; ValueType: string; ValueData: """{app}\valentina.exe"" ""%1"""; Tasks: fileassoc1
 
 Root: "HKCR"; Subkey: "Valentina.IndividualMeasurements"; ValueType: string; ValueData: "Valentina individual measurement file"; Flags: uninsdeletekey; Tasks: fileassoc2

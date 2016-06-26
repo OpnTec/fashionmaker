@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vwidgetgroups.h
+ **  @file   vwidgetdetails.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   6 4, 2016
+ **  @date   25 6, 2016
  **
  **  @brief
  **  @copyright
@@ -26,38 +26,41 @@
  **
  *************************************************************************/
 
-#ifndef VWIDGETGROUPS_H
-#define VWIDGETGROUPS_H
+#ifndef VWIDGETDETAILS_H
+#define VWIDGETDETAILS_H
 
 #include <QWidget>
-#include "../ifc/xml/vabstractpattern.h"
+
+class VAbstractPattern;
+class VContainer;
+class VDetail;
 
 namespace Ui
 {
-    class VWidgetGroups;
+    class VWidgetDetails;
 }
 
-class VWidgetGroups : public QWidget
+class VWidgetDetails : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit VWidgetGroups(VAbstractPattern *doc, QWidget *parent = nullptr);
-    virtual ~VWidgetGroups();
+    explicit VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget *parent = nullptr);
+    virtual ~VWidgetDetails();
 
 public slots:
-    void UpdateGroups();
+    void UpdateList();
 
 private slots:
-    void GroupVisibilityChanged(int row, int column);
-    void RenameGroup(int row, int column);
-    void CtxMenu(const QPoint &pos);
-private:
-    Q_DISABLE_COPY(VWidgetGroups)
-    Ui::VWidgetGroups *ui;
-    VAbstractPattern *doc;
+    void InLayoutStateChanged(int row, int column);
 
-    void FillTable(const QMap<quint32, QPair<QString, bool> > &groups);
+private:
+    Q_DISABLE_COPY(VWidgetDetails)
+    Ui::VWidgetDetails *ui;
+    VAbstractPattern   *m_doc;
+    VContainer         *m_data;
+
+    void FillTable(const QHash<quint32, VDetail> *details);
 };
 
-#endif // VWIDGETGROUPS_H
+#endif // VWIDGETDETAILS_H

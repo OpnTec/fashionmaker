@@ -32,6 +32,7 @@
 - [#180] New feature: Search field in tape app and dialog Increments.
 - [#514] Read only setting not working properly.
 - [#480] New tool: Midpoint between two points.
+- [#496] Selector for selecting which pieces to print.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.

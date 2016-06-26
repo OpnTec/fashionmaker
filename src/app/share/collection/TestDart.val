@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pattern>
     <!--Valentina pattern format.-->
-    <version>0.3.1</version>
+    <version>0.3.2</version>
     <unit>cm</unit>
     <author/>
     <description/>

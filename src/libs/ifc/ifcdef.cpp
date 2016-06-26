@@ -130,6 +130,7 @@ const QString AttrCRadius     = QStringLiteral("cRadius");
 const QString AttrArc         = QStringLiteral("arc");
 const QString AttrSuffix      = QStringLiteral("suffix");
 const QString AttrIdObject    = QStringLiteral("idObject");
+const QString AttrInLayout    = QStringLiteral("inLayout");
 
 const QString TypeLineNone           = QStringLiteral("none");
 const QString TypeLineLine           = QStringLiteral("hair");

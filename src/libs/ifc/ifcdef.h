@@ -132,6 +132,7 @@ extern const QString AttrCRadius;
 extern const QString AttrArc;
 extern const QString AttrSuffix;
 extern const QString AttrIdObject;
+extern const QString AttrInLayout;
 
 extern const QString TypeLineNone;
 extern const QString TypeLineLine;

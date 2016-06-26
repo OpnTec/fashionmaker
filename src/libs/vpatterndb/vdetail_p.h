@@ -43,16 +43,16 @@ class VDetailData : public QSharedData
 {
 public:
     VDetailData()
-        :_id(NULL_ID), nodes(QVector<VNodeDetail>()), mx(0), my(0)
+        :_id(NULL_ID), nodes(QVector<VNodeDetail>()), mx(0), my(0), inLayout(true)
     {}
 
     explicit VDetailData(const QVector<VNodeDetail> &nodes)
-        :_id(NULL_ID), nodes(nodes), mx(0), my(0)
+        :_id(NULL_ID), nodes(nodes), mx(0), my(0), inLayout(true)
     {}
 
     VDetailData(const VDetailData &detail)
         :QSharedData(detail), _id(NULL_ID), nodes(detail.nodes), mx(detail.mx), my(detail.my),
-          m_ppData(detail.m_ppData)
+          m_ppData(detail.m_ppData), inLayout(detail.inLayout)
     {}
 
     ~VDetailData() {}
@@ -71,6 +71,8 @@ public:
 
     /** @brief Pattern piece data */
     VPatternPieceData m_ppData;
+
+    bool           inLayout;
 
 private:
     VDetailData &operator=(const VDetailData &) Q_DECL_EQ_DELETE;

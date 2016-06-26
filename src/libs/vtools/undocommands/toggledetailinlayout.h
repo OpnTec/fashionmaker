@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   vwidgetgroups.h
+ **  @file   toggledetailinlayout.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   6 4, 2016
+ **  @date   25 6, 2016
  **
  **  @brief
  **  @copyright
@@ -26,38 +26,32 @@
  **
  *************************************************************************/
 
-#ifndef VWIDGETGROUPS_H
-#define VWIDGETGROUPS_H
+#ifndef TOGGLEDETAILINLAYOUT_H
+#define TOGGLEDETAILINLAYOUT_H
 
-#include <QWidget>
-#include "../ifc/xml/vabstractpattern.h"
+#include "vundocommand.h"
 
-namespace Ui
-{
-    class VWidgetGroups;
-}
-
-class VWidgetGroups : public QWidget
+class ToggleDetailInLayout : public VUndoCommand
 {
     Q_OBJECT
-
 public:
-    explicit VWidgetGroups(VAbstractPattern *doc, QWidget *parent = nullptr);
-    virtual ~VWidgetGroups();
-
-public slots:
-    void UpdateGroups();
-
-private slots:
-    void GroupVisibilityChanged(int row, int column);
-    void RenameGroup(int row, int column);
-    void CtxMenu(const QPoint &pos);
+    ToggleDetailInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+                         QUndoCommand *parent = nullptr);
+    virtual ~ToggleDetailInLayout();
+    virtual void undo() Q_DECL_OVERRIDE;
+    virtual void redo() Q_DECL_OVERRIDE;
+    virtual bool mergeWith(const QUndoCommand *command) Q_DECL_OVERRIDE;
+    virtual int  id() const Q_DECL_OVERRIDE;
+    quint32      getDetId() const;
+    bool         getNewState() const;
 private:
-    Q_DISABLE_COPY(VWidgetGroups)
-    Ui::VWidgetGroups *ui;
-    VAbstractPattern *doc;
+    Q_DISABLE_COPY(ToggleDetailInLayout)
+    quint32           m_id;
+    VContainer       *m_data;
+    bool              m_oldState;
+    bool              m_newState;
 
-    void FillTable(const QMap<quint32, QPair<QString, bool> > &groups);
+    void Do(bool state);
 };
 
-#endif // VWIDGETGROUPS_H
+#endif // TOGGLEDETAILINLAYOUT_H
