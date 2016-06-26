@@ -115,6 +115,12 @@ void VWidgetDetails::FillTable(const QHash<quint32, VDetail> *details)
 
         item = new QTableWidgetItem(name);
         item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+        // set the item non-editable (view only), and non-selectable
+        Qt::ItemFlags flags = item->flags();
+        flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
+        item->setFlags(flags);
+
         ui->tableWidget->setItem(currentRow, 1, item);
         ++i;
     }
