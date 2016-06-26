@@ -50,6 +50,7 @@ public slots:
 
 private slots:
     void GroupVisibilityChanged(int row, int column);
+    void RenameGroup(int row, int column);
     void CtxMenu(const QPoint &pos);
 private:
     Q_DISABLE_COPY(VWidgetGroups)

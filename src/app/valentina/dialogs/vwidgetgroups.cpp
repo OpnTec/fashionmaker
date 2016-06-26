@@ -46,6 +46,7 @@ VWidgetGroups::VWidgetGroups(VAbstractPattern *doc, QWidget *parent)
     ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &VWidgetGroups::GroupVisibilityChanged);
+    connect(ui->tableWidget, &QTableWidget::cellChanged, this, &VWidgetGroups::RenameGroup);
     connect(ui->tableWidget, &QTableWidget::customContextMenuRequested, this, &VWidgetGroups::CtxMenu);
 }
 
@@ -75,6 +76,18 @@ void VWidgetGroups::GroupVisibilityChanged(int row, int column)
     {
         item->setIcon(QIcon("://icon/16x16/closed_eye.png"));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetGroups::RenameGroup(int row, int column)
+{
+    if (column != 1)
+    {
+        return;
+    }
+
+    const quint32 id = ui->tableWidget->item(row, 0)->data(Qt::UserRole).toUInt();
+    doc->SetGroupName(id, ui->tableWidget->item(row, column)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -125,6 +138,7 @@ void VWidgetGroups::UpdateGroups()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups)
 {
+    ui->tableWidget->blockSignals(true);
     ui->tableWidget->clear();
 
     ui->tableWidget->setColumnCount(2);
@@ -147,6 +161,12 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
             item->setIcon(QIcon("://icon/16x16/closed_eye.png"));
         }
         item->setData(Qt::UserRole, i.key());
+
+        // set the item non-editable (view only), and non-selectable
+        Qt::ItemFlags flags = item->flags();
+        flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
+        item->setFlags(flags);
+
         ui->tableWidget->setItem(currentRow, 0, item);
 
         item = new QTableWidgetItem(data.first);
@@ -156,4 +176,5 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
     }
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
+    ui->tableWidget->blockSignals(false);
 }
