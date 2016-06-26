@@ -79,7 +79,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
                          VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), VNoBrushScalePathItem(parent), dialog(nullptr), sceneDetails(scene),
       drawName(drawName), seamAllowance(new VNoBrushScalePathItem(this)),
-      dataLabel(new VTextGraphicsItem(this))
+      dataLabel(new VTextGraphicsItem(this)), patternInfo(new VTextGraphicsItem(this))
 {
     VDetail detail = data->GetDetail(id);
     for (int i = 0; i< detail.CountNode(); ++i)
@@ -128,10 +128,16 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     }
     setAcceptHoverEvents(true);
 
-    connect(dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMove);
-    connect(dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResize);
+    connect(dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMoveDetail);
+    connect(dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizeDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
+
+    connect(patternInfo, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMovePattern);
+    connect(patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizePattern);
+    connect(patternInfo, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
+    connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
     UpdateLabel();
+    UpdatePatternInfo();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -684,9 +690,63 @@ void VToolDetail::UpdateLabel()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief SaveMove saves the move operation to the undo stack
+ * @brief UpdatePatternInfo updates the pattern info label
  */
-void VToolDetail::SaveMove(QPointF ptPos)
+void VToolDetail::UpdatePatternInfo()
+{
+    QFont fnt = qApp->font();
+    int iFS = doc->GetFontSize();
+    if (iFS < MIN_FONT_SIZE)
+    {
+        iFS = MIN_FONT_SIZE;
+    }
+    fnt.setPixelSize(iFS);
+    patternInfo->SetFont(fnt);
+    patternInfo->SetWidth(doc->GetLabelWidth());
+    patternInfo->Clear();
+    TextLine tl;
+
+    // Company name
+    tl.m_qsText = doc->GetCompanyName();
+    tl.m_eAlign = Qt::AlignCenter;
+    tl.m_eFontWeight = QFont::DemiBold;
+    tl.m_eStyle = QFont::StyleNormal;
+    tl.m_iFontSize = 4;
+    patternInfo->AddLine(tl);
+
+    // Pattern name
+    tl.m_qsText = doc->GetPatternName();
+    tl.m_eFontWeight = QFont::Normal;
+    tl.m_iFontSize = 2;
+    patternInfo->AddLine(tl);
+
+    // Pattern number
+    tl.m_qsText = doc->GetPatternNumber();
+    tl.m_iFontSize = 0;
+    tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+    patternInfo->AddLine(tl);
+
+    // Customer name
+    tl.m_qsText = doc->GetCustomerName();
+    tl.m_eStyle = QFont::StyleItalic;
+    patternInfo->AddLine(tl);
+
+    // Creation date
+    QStringList qslDate = doc->GetCreationDate().toString(Qt::SystemLocaleLongDate).split(", ");
+    tl.m_qsText = qslDate.last();
+    patternInfo->AddLine(tl);
+
+    qDebug() << "UpdatePatternInfo" << doc->GetLabelPosition() << sender();
+    patternInfo->setPos(doc->GetLabelPosition());
+    patternInfo->Reset();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @brief SaveMoveDetail saves the move detail operation to the undo stack
+ */
+void VToolDetail::SaveMoveDetail(QPointF ptPos)
 {
     VDetail oldDet = VAbstractTool::data.GetDetail(id);
     VDetail newDet = oldDet;
@@ -699,9 +759,9 @@ void VToolDetail::SaveMove(QPointF ptPos)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief: SaveResize save the resize label operation to the undo stack
+ * @brief SaveResizeDetail saves the resize detail label operation to the undo stack
  */
-void VToolDetail::SaveResize(qreal dLabelW, int iFontSize)
+void VToolDetail::SaveResizeDetail(qreal dLabelW, int iFontSize)
 {
     VDetail oldDet = VAbstractTool::data.GetDetail(id);
     VDetail newDet = oldDet;
@@ -711,6 +771,26 @@ void VToolDetail::SaveResize(qreal dLabelW, int iFontSize)
     resizeCommand->setText(tr("resize pattern piece label"));
     connect(resizeCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(resizeCommand);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveMovePattern saves the pattern label position
+ */
+void VToolDetail::SaveMovePattern(QPointF ptPos)
+{
+    qDebug() << "Pattern moved to" << ptPos;
+    doc->SetLabelPosition(ptPos);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief: SaveResizePattern saves the pattern label width and font size
+ */
+void VToolDetail::SaveResizePattern(qreal dLabelW, int iFontSize)
+{
+    doc->SetLabelWidth(dLabelW);
+    doc->SetFontSize(iFontSize);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

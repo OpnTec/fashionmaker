@@ -66,6 +66,7 @@ public:
     QRectF              boundingRect() const;
     void                AddLine(const TextLine& tl);
     void                Clear();
+    void                SetWidth(qreal fW);
 
 protected:
     void                Resize(qreal fW, qreal fH);
@@ -78,9 +79,9 @@ protected:
     QStringList         SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);
 
 signals:
-    void               SignalMoved(QPointF ptPos);
-    void               SignalResized(qreal iTW, int iFontSize);
-    void               SignalShrink();
+    void                SignalMoved(QPointF ptPos);
+    void                SignalResized(qreal iTW, int iFontSize);
+    void                SignalShrink();
 
 private:
     Mode                m_eMode;

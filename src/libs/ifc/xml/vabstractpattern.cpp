@@ -67,6 +67,7 @@ const QString VAbstractPattern::TagPatternNum   = QStringLiteral("patternNumber"
 const QString VAbstractPattern::TagCustomerName = QStringLiteral("customer");
 const QString VAbstractPattern::TagCompanyName  = QStringLiteral("company");
 const QString VAbstractPattern::TagCreationDate = QStringLiteral("created");
+const QString VAbstractPattern::TagPatternLabel  = QStringLiteral("patternLabel");
 
 const QString VAbstractPattern::AttrName        = QStringLiteral("name");
 const QString VAbstractPattern::AttrVisible     = QStringLiteral("visible");
@@ -78,6 +79,8 @@ const QString VAbstractPattern::AttrMaterial    = QStringLiteral("material");
 const QString VAbstractPattern::AttrUserDefined = QStringLiteral("userDef");
 const QString VAbstractPattern::AttrCutNumber   = QStringLiteral("cutNumber");
 const QString VAbstractPattern::AttrPlacement   = QStringLiteral("placement");
+const QString VAbstractPattern::AttrWidth       = QStringLiteral("width");
+const QString VAbstractPattern::AttrFont        = QStringLiteral("font");
 
 const QString VAbstractPattern::AttrAll         = QStringLiteral("all");
 
@@ -1076,6 +1079,92 @@ QDate VAbstractPattern::GetCreationDate() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QPointF VAbstractPattern::GetLabelPosition() const
+{
+    QPointF ptPos(0.0, 0.0);
+    QDomNodeList li = elementsByTagName(TagPatternLabel);
+    if (li.count() == 0)
+    {
+        return ptPos;
+    }
+
+    QDomNamedNodeMap attr = li.at(0).attributes();
+    if (attr.contains(AttrMx) == true)
+    {
+        ptPos.setX(attr.namedItem(AttrMx).nodeValue().toDouble());
+    }
+    if (attr.contains(AttrMy) == true)
+    {
+        ptPos.setY(attr.namedItem(AttrMy).nodeValue().toDouble());
+    }
+    return ptPos;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetLabelPosition(const QPointF& ptPos)
+{
+    CheckTagExists(TagPatternLabel);
+    QDomNode node = elementsByTagName(TagPatternLabel).at(0);
+    node.toElement().setAttribute(AttrMx, ptPos.x());
+    node.toElement().setAttribute(AttrMy, ptPos.y());
+    emit patternChanged(false);
+
+    qDebug() << "LABEL POSITION" << GetLabelPosition();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractPattern::GetLabelWidth() const
+{
+    qreal fW = 0.0;
+    QDomNodeList li = elementsByTagName(TagPatternLabel);
+    if (li.count() == 0)
+    {
+        return fW;
+    }
+    QDomNamedNodeMap attr = li.at(0).attributes();
+    if (attr.contains(AttrWidth) == true)
+    {
+        fW = attr.namedItem(AttrWidth).nodeName().toDouble();
+    }
+    return fW;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetLabelWidth(qreal fW)
+{
+    CheckTagExists(TagPatternLabel);
+    QDomNode node = elementsByTagName(TagPatternLabel).at(0);
+    node.toElement().setAttribute(AttrWidth, fW);
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VAbstractPattern::GetFontSize() const
+{
+    int iFS = 0;
+    QDomNodeList li = elementsByTagName(TagPatternLabel);
+    if (li.count() == 0)
+    {
+        return iFS;
+    }
+    QDomNamedNodeMap attr = li.at(0).attributes();
+    if (attr.contains(AttrFont) == true)
+    {
+        iFS = attr.namedItem(AttrFont).nodeName().toInt();
+    }
+    return iFS;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetFontSize(int iFS)
+{
+    CheckTagExists(TagPatternLabel);
+    QDomNode node = elementsByTagName(TagPatternLabel).at(0);
+    node.toElement().setAttribute(AttrWidth, iFS);
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetImage() const
 {
     return UniqueTagText(TagImage);
@@ -1200,7 +1289,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     {
         const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-                                            << TagCustomerName << TagCreationDate;
+                                            << TagCustomerName << TagCreationDate << TagPatternLabel;
         switch (tags.indexOf(tag))
         {
             case 0: //TagUnit
@@ -1264,6 +1353,11 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             case 10: // TagPatternName
             {
                 element = createElement(TagCreationDate);
+                break;
+            }
+            case 11:
+            {
+                element = createElement(TagPatternLabel);
                 break;
             }
 

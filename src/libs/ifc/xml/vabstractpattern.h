@@ -117,6 +117,12 @@ public:
     QString        GetCustomerName() const;
     void           SetCustomerName(QString qsName);
     QDate          GetCreationDate() const;
+    QPointF        GetLabelPosition() const;
+    void           SetLabelPosition(const QPointF& ptPos);
+    qreal          GetLabelWidth() const;
+    void           SetLabelWidth(qreal fW);
+    int            GetFontSize() const;
+    void           SetFontSize(int iFS);
 
     QString        GetImage() const;
     QString        GetImageExtension() const;
@@ -173,6 +179,7 @@ public:
     static const QString TagCompanyName;
     static const QString TagCustomerName;
     static const QString TagCreationDate;
+    static const QString TagPatternLabel;
 
     static const QString AttrName;
     static const QString AttrVisible;
@@ -184,6 +191,8 @@ public:
     static const QString AttrUserDefined;
     static const QString AttrCutNumber;
     static const QString AttrPlacement;
+    static const QString AttrWidth;
+    static const QString AttrFont;
 
     static const QString AttrAll;
 
@@ -307,6 +316,8 @@ protected:
 
     QDomElement    CheckTagExists(const QString &tag);
     void           InsertTag(const QStringList &tags, const QDomElement &element);
+
+    void           SetChildTag(const QString& qsParent, const QString& qsChild, const QString& qsValue);
 
     int GetIndexActivPP() const;
 private:

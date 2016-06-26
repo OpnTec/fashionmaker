@@ -106,10 +106,13 @@ protected:
     virtual void       keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void       SetVisualization() Q_DECL_OVERRIDE {}
     virtual void       UpdateLabel();
+    virtual void       UpdatePatternInfo();
 
 protected slots:
-    virtual void       SaveMove(QPointF ptPos);
-    virtual void       SaveResize(qreal dLabelW, int iFontSize);
+    virtual void       SaveMoveDetail(QPointF ptPos);
+    virtual void       SaveResizeDetail(qreal dLabelW, int iFontSize);
+    virtual void       SaveMovePattern(QPointF ptPos);
+    virtual void       SaveResizePattern(qreal dLabelW, int iFontSize);
 
 private:
     Q_DISABLE_COPY(VToolDetail)
@@ -122,6 +125,7 @@ private:
 
     VNoBrushScalePathItem *seamAllowance;
     VTextGraphicsItem* dataLabel;
+    VTextGraphicsItem* patternInfo;
 
     VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                 VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);

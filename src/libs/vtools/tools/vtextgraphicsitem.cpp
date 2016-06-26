@@ -125,6 +125,16 @@ void VTextGraphicsItem::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::SetWidth(qreal fW)
+{
+    if (fW < MIN_W)
+    {
+        fW = MIN_W;
+    }
+    m_rectBoundingBox.setWidth(fW);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::Reset()
 {
     m_eMode = mNormal;
