@@ -457,25 +457,25 @@ void MainWindowsNoGUI::PrintTiled()
 void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *details)
 {
     SCASSERT(details != nullptr)
-            if (details->count() == 0)
+    if (details->count() == 0)
     {
         listDetails.clear();
         return;
     }
 
     listDetails.clear();
-    QHashIterator<quint32, VDetail> idetail(*details);
-    while (idetail.hasNext())
+    QHash<quint32, VDetail>::const_iterator i = details->constBegin();
+    while (i != details->constEnd())
     {
-        idetail.next();
         VLayoutDetail det = VLayoutDetail();
-        const VDetail &d = idetail.value();
+        const VDetail d = i.value();
         det.SetCountourPoints(d.ContourPoints(pattern));
         det.SetSeamAllowencePoints(d.SeamAllowancePoints(pattern), d.getSeamAllowance(), d.getClosed());
         det.setName(d.getName());
         det.setWidth(qApp->toPixel(d.getWidth()));
 
         listDetails.append(det);
+        ++i;
     }
 }
 

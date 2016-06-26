@@ -42,15 +42,15 @@ class VDetailData : public QSharedData
 {
 public:
     VDetailData()
-        :_id(NULL_ID), nodes(QVector<VNodeDetail>()), mx(0), my(0)
+        :_id(NULL_ID), nodes(QVector<VNodeDetail>()), mx(0), my(0), inLayout(true)
     {}
 
     explicit VDetailData(const QVector<VNodeDetail> &nodes)
-        :_id(NULL_ID), nodes(nodes), mx(0), my(0)
+        :_id(NULL_ID), nodes(nodes), mx(0), my(0), inLayout(true)
     {}
 
     VDetailData(const VDetailData &detail)
-        :QSharedData(detail), _id(NULL_ID), nodes(detail.nodes), mx(detail.mx), my(detail.my)
+        :QSharedData(detail), _id(NULL_ID), nodes(detail.nodes), mx(detail.mx), my(detail.my), inLayout(detail.inLayout)
     {}
 
     ~VDetailData() {}
@@ -66,6 +66,8 @@ public:
 
     /** @brief my bias y axis. */
     qreal          my;
+
+    bool           inLayout;
 
 private:
     VDetailData &operator=(const VDetailData &) Q_DECL_EQ_DELETE;

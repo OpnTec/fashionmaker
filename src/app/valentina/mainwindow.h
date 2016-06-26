@@ -49,6 +49,7 @@ class DialogIncrements;
 class DialogTool;
 class DialogHistory;
 class VWidgetGroups;
+class VWidgetDetails;
 
 /**
  * @brief The MainWindow class main windows.
@@ -152,7 +153,6 @@ public slots:
     void               SetEnabledGUI(bool enabled);
 
     void               ClickEndVisualization();
-    void               Layout();
     void               UpdateGradation();
     void               GlobalChangePP(const QString &patternPiece);
     void               WindowsLocale();
@@ -206,9 +206,6 @@ private slots:
 
     void ChangedSize(const QString &text);
     void ChangedHeight(const QString & text);
-
-    void DockToolOptionsVisibilityChanged(bool visible);
-    void DockGropsVisibilityChanged(bool visible);
 
 private:
     Q_DISABLE_COPY(MainWindow)
@@ -280,6 +277,7 @@ private:
     QPointer<QLabel>   gradationSizesLabel;
     VToolOptionsPropertyBrowser *toolOptions;
     VWidgetGroups *groupsWidget;
+    VWidgetDetails *detailsWidget;
     std::shared_ptr<VLockGuard<char>> lock;
 
     void               SetDefaultHeight();
@@ -294,7 +292,7 @@ private:
 
     void               SetEnableWidgets(bool enable);
     void               SetEnableTool(bool enable);
-    void               SetLayoutModeActions(bool enable);
+    void               SetLayoutModeActions();
 
     void               SaveCurrentScene();
     void               RestoreCurrentScene();
