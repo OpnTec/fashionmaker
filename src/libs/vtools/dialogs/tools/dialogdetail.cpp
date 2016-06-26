@@ -346,6 +346,8 @@ VDetail DialogDetail::CreateDetail() const
         detail.GetPatternPieceData().Append(m_conMCP[i]);
     }
 
+    detail.GetPatternPieceData().SetPos(m_ptPos);
+
     return detail;
 }
 
@@ -404,6 +406,7 @@ void DialogDetail::setDetail(const VDetail &value)
     }
 
     UpdateList();
+    m_ptPos = detail.GetPatternPieceData().GetPos();
 
     ValidObjects(DetailIsValid());
 }
@@ -692,7 +695,7 @@ void DialogDetail::SetEditMode()
 {
     int iR = ui.listWidgetMCP->currentRow();
     // this method can be called by clicking on item or by update. In the latter case there is nothing else to do!
-    if (iR < 0 || iR >= detail.GetPatternPieceData().GetMCPCount())
+    if (iR < 0 || iR >= m_conMCP.count())
     {
         return;
     }
@@ -701,7 +704,7 @@ void DialogDetail::SetEditMode()
     ui.pushButtonCancel->show();
     ui.pushButtonRemove->show();
 
-    MaterialCutPlacement mcp = detail.GetPatternPieceData().GetMCP(iR);
+    MaterialCutPlacement mcp = m_conMCP.at(iR);
     ui.comboBoxMaterial->setCurrentText(mcp.m_qsMaterialUserDef);
     ui.spinBoxCutNumber->setValue(mcp.m_iCutNumber);
     ui.comboBoxPlacement->setCurrentIndex(int(mcp.m_ePlacement));

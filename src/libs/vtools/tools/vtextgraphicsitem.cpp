@@ -80,6 +80,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         iH = tl.m_iHeight;
         fnt.setPixelSize(m_font.pixelSize() + tl.m_iFontSize);
         fnt.setWeight(tl.m_eFontWeight);
+        fnt.setStyle(tl.m_eStyle);
         painter->setFont(fnt);
         painter->drawText(0, iY, boundingRect().width(), iH, tl.m_eAlign, tl.m_qsText);
         iY += iH + SPACING;
@@ -186,6 +187,14 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 {
+    if (m_eMode == mMove)
+    {
+        emit SignalMoved(pos());
+    }
+    else
+    {
+        emit SignalResized(m_rectBoundingBox.width(), m_font.pixelSize());
+    }
     m_eMode = mActivated;
     Update();
 }
@@ -229,9 +238,9 @@ bool VTextGraphicsItem::IsBigEnough(qreal fW, qreal fH, int iFontSize)
         QFontMetrics fm(fnt);
         tlOut.m_iHeight = fm.height();
         QStringList qslLines = SplitString(tlOut.m_qsText, fW, fm);
-        for (int i = 0; i < qslLines.count(); ++i)
+        for (int iL = 0; iL < qslLines.count(); ++iL)
         {
-            tlOut.m_qsText = qslLines[i];
+            tlOut.m_qsText = qslLines[iL];
             m_liOutput << tlOut;
             iY += tlOut.m_iHeight + SPACING;
         }

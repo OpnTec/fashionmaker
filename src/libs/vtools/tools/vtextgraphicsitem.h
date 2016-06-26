@@ -38,6 +38,7 @@ struct TextLine
     QString             m_qsText;
     int                 m_iFontSize;  // 0 means default
     QFont::Weight       m_eFontWeight;
+    QFont::Style        m_eStyle;
     Qt::Alignment       m_eAlign;
     int                 m_iHeight;
 };

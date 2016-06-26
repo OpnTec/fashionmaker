@@ -311,6 +311,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
         VDetail newDet = dialogTool->getDetail();
         VDetail oldDet = VAbstractTool::data.GetDetail(id);
 
+        qDebug() << "VToolDetail Position" << newDet.GetPatternPieceData().GetPos();
         SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
         connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         qApp->getUndoStack()->push(saveCommand);
@@ -653,14 +654,14 @@ void VToolDetail::UpdateLabel()
         tl.m_qsText = data.GetLetter();
         tl.m_eAlign = Qt::AlignCenter;
         tl.m_eFontWeight = QFont::Bold;
-        tl.m_iFontSize = 4;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 6;
         dataLabel->AddLine(tl);
         tl.m_qsText = data.GetName();
         tl.m_eAlign = Qt::AlignCenter;
         tl.m_eFontWeight = QFont::DemiBold;
         tl.m_iFontSize = 2;
         dataLabel->AddLine(tl);
-
         // MCP
         tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
         tl.m_eFontWeight = QFont::Normal;

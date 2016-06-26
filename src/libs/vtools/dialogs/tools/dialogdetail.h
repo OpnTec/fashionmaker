@@ -100,6 +100,7 @@ private:
     QStringList      m_qslPlacements;
     // temporary container for Material/Cut/Placement 3-tuples
     MCPContainer     m_conMCP;
+    QPointF          m_ptPos;
 
     void             ClearFields();
 
