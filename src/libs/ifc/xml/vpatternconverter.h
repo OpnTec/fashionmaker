@@ -70,6 +70,7 @@ private:
     void ToV0_2_7();
     void ToV0_3_0();
     void ToV0_3_1();
+    void ToV0_3_2();
 
     void          TagUnitToV0_2_0();
     void          TagIncrementToV0_2_0();
