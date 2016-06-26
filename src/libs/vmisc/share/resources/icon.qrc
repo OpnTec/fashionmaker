@@ -61,5 +61,9 @@
         <file>icon/16x16/closed_eye@2x.png</file>
         <file>icon/16x16/open_eye.png</file>
         <file>icon/16x16/open_eye@2x.png</file>
+        <file>icon/16x16/allow_detail.png</file>
+        <file>icon/16x16/allow_detail@2x.png</file>
+        <file>icon/16x16/forbid_detail.png</file>
+        <file>icon/16x16/forbid_detail@2x.png</file>
     </qresource>
 </RCC>

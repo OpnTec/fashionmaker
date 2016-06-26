@@ -67,6 +67,9 @@ public:
     quint32 id() const;
     void    setId(const quint32 &id);
 
+    bool IsInLayout() const;
+    void SetInLayout(bool inLayout);
+
     QVector<VNodeDetail> getNodes() const;
     void setNodes(const QVector<VNodeDetail> &value);
 

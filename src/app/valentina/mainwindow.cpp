@@ -56,6 +56,7 @@
 #include "dialogs/dialogs.h"
 #include "dialogs/vwidgetgroups.h"
 #include "../vtools/undocommands/addgroup.h"
+#include "dialogs/vwidgetdetails.h"
 
 #include <QInputDialog>
 #include <QDebug>
@@ -122,6 +123,7 @@ MainWindow::MainWindow(QWidget *parent)
       gradationHeights(nullptr), gradationSizes(nullptr), gradationHeightsLabel(nullptr), gradationSizesLabel(nullptr),
       toolOptions(nullptr),
       groupsWidget(nullptr),
+      detailsWidget(nullptr),
       lock(nullptr)
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
@@ -137,7 +139,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternWasModified);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile);
     connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
-    connect(doc, &VPattern::CheckLayout, this, &MainWindow::Layout);
+    connect(doc, &VPattern::CheckLayout, [this](){
+        if (pattern->DataDetails()->count() == 0)
+        {
+            ActionDraw(true);
+        }
+    });
     connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
     qApp->setCurrentDocument(doc);
 
@@ -1320,7 +1327,8 @@ void MainWindow::CleanLayout()
     shadows.clear();
     papers.clear();
     ui->listWidget->clear();
-    SetLayoutModeActions(false);
+    listDetails.clear();
+    SetLayoutModeActions();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1335,7 +1343,7 @@ void MainWindow::PrepareSceneList()
     if (not scenes.isEmpty())
     {
         ui->listWidget->setCurrentRow(0);
-        SetLayoutModeActions(true);
+        SetLayoutModeActions();
     }
 }
 
@@ -2109,7 +2117,10 @@ void MainWindow::ActionDraw(bool checked)
 
         ui->dockWidgetLayoutPages->setVisible(false);
         ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
+
+        ui->dockWidgetGroups->setWidget(groupsWidget);
         ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
+        ui->dockWidgetGroups->setToolTip(tr("Contains all visibility groups"));
     }
     else
     {
@@ -2149,10 +2160,12 @@ void MainWindow::ActionDetails(bool checked)
                 QMessageBox::information(this, tr("Detail mode"), tr("You can't use now the Detail mode. "
                                                                      "Please, create at least one workpiece."),
                                          QMessageBox::Ok, QMessageBox::Ok);
-                Layout();
+                ActionDraw(true);
                 return;
             }
         }
+
+        detailsWidget->UpdateList();
 
         qCDebug(vMainWindow, "Show details scene");
         SaveCurrentScene();
@@ -2179,7 +2192,10 @@ void MainWindow::ActionDetails(bool checked)
 
         ui->dockWidgetLayoutPages->setVisible(false);
         ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
+
+        ui->dockWidgetGroups->setWidget(detailsWidget);
         ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
+        ui->dockWidgetGroups->setToolTip(tr("Show which details will go in layout"));
 
         helpLabel->setText("");
     }
@@ -2214,16 +2230,38 @@ void MainWindow::ActionLayout(bool checked)
         ui->actionDetails->setChecked(false);
         ui->actionLayout->setChecked(true);
 
-        const QHash<quint32, VDetail> *details = pattern->DataDetails();
+        QHash<quint32, VDetail> details;
         if(not qApp->getOpeningPattern())
         {
-            if (details->count() == 0)
+            const QHash<quint32, VDetail> *allDetails = pattern->DataDetails();
+            if (allDetails->count() == 0)
             {
                 QMessageBox::information(this, tr("Layout mode"), tr("You can't use now the Layout mode. "
                                                                      "Please, create at least one workpiece."),
                                          QMessageBox::Ok, QMessageBox::Ok);
-                Layout();
+                ActionDraw(true);
                 return;
+            }
+            else
+            {
+                QHash<quint32, VDetail>::const_iterator i = allDetails->constBegin();
+                while (i != allDetails->constEnd())
+                {
+                    if (i.value().IsInLayout())
+                    {
+                        details.insert(i.key(), i.value());
+                    }
+                    ++i;
+                }
+
+                if (details.count() == 0)
+                {
+                    QMessageBox::information(this, tr("Layout mode"),  tr("You can't use now the Layout mode. Please, "
+                                                                          "include at least one detail in layout."),
+                                             QMessageBox::Ok, QMessageBox::Ok);
+                    mode == Draw::Calculation ? ActionDraw(true) : ActionDetails(true);
+                    return;
+                }
             }
         }
 
@@ -2233,7 +2271,7 @@ void MainWindow::ActionLayout(bool checked)
 
         SaveCurrentScene();
 
-        PrepareDetailsForLayout(details);
+        PrepareDetailsForLayout(&details);
 
         currentScene = tempSceneLayout;
         ui->view->itemClicked(nullptr);
@@ -2514,7 +2552,7 @@ void MainWindow::Clear()
 #ifndef QT_NO_CURSOR
     QApplication::restoreOverrideCursor();
 #endif
-    Layout();
+    CleanLayout();
 
 #ifdef Q_OS_WIN32
     qt_ntfs_permission_lookup--; // turn it off again
@@ -2779,29 +2817,6 @@ void MainWindow::SetEnableWidgets(bool enable)
 void MainWindow::ClickEndVisualization()
 {
     EndVisualization(true);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindow::Layout()
-{
-    if (pattern->DataDetails()->size() > 0)
-    {
-        SetLayoutModeActions(true);
-    }
-    else
-    {
-        listDetails.clear();
-        if (not ui->actionDraw->isChecked())
-        {
-            ActionDraw(true);
-        }
-        else
-        {
-            ui->actionDetails->setChecked(false);
-            ui->actionLayout->setChecked(false);
-        }
-        SetLayoutModeActions(false);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3154,19 +3169,16 @@ void MainWindow::SetEnableTool(bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::SetLayoutModeActions(bool enable)
+void MainWindow::SetLayoutModeActions()
 {
-    bool value = enable;
-    if (scenes.isEmpty())
-    {
-        value = false;
-    }
-    ui->actionExportAs->setEnabled(value);
-    ui->actionPrintPreview->setEnabled(value);
-    ui->actionPrintPreviewTiled->setEnabled(value);
-    ui->actionSaveAsTiledPDF->setEnabled(value);
-    ui->actionPrint->setEnabled(value);
-    ui->actionPrintTiled->setEnabled(value);
+    const bool enabled = not scenes.isEmpty();
+
+    ui->actionExportAs->setEnabled(enabled);
+    ui->actionPrintPreview->setEnabled(enabled);
+    ui->actionPrintPreviewTiled->setEnabled(enabled);
+    ui->actionSaveAsTiledPDF->setEnabled(enabled);
+    ui->actionPrint->setEnabled(enabled);
+    ui->actionPrintTiled->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3625,6 +3637,10 @@ void MainWindow::InitDocksContain()
     qCDebug(vMainWindow, "Initialization groups dock.");
     groupsWidget = new VWidgetGroups(doc, this);
     ui->dockWidgetGroups->setWidget(groupsWidget);
+
+    detailsWidget = new VWidgetDetails(pattern, doc, this);
+    connect(doc, &VPattern::FullUpdateFromFile, detailsWidget, &VWidgetDetails::UpdateList);
+    detailsWidget->setVisible(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3983,12 +3999,10 @@ void MainWindow::ShowPaper(int index)
     if (index < 0 || index >= scenes.size())
     {
         ui->view->setScene(tempSceneLayout);
-        SetLayoutModeActions(false);
     }
     else
     {
         ui->view->setScene(scenes.at(index));
-        SetLayoutModeActions(true);
     }
 
     ui->view->fitInView(ui->view->scene()->sceneRect(), Qt::KeepAspectRatio);

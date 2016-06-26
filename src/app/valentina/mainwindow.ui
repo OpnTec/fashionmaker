@@ -1518,8 +1518,11 @@
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <property name="toolTip">
+    <string/>
+   </property>
    <property name="windowTitle">
-    <string>Groups</string>
+    <string>Group</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>2</number>

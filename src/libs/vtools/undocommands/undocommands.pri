@@ -22,7 +22,8 @@ HEADERS += \
     $$PWD/addgroup.h \
     $$PWD/delgroup.h \
     $$PWD/label/rotationmovelabel.h \
-    undocommands/label/moveabstractlabel.h
+    $$PWD/label/moveabstractlabel.h \
+    $$PWD/toggledetailinlayout.h
 
 SOURCES += \
     $$PWD/addtocalc.cpp \
@@ -45,4 +46,5 @@ SOURCES += \
     $$PWD/addgroup.cpp \
     $$PWD/delgroup.cpp \
     $$PWD/label/rotationmovelabel.cpp \
-    undocommands/label/moveabstractlabel.cpp
+    $$PWD/label/moveabstractlabel.cpp \
+    $$PWD/toggledetailinlayout.cpp
