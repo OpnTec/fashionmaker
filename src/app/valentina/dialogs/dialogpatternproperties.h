@@ -64,6 +64,7 @@ private slots:
     void ToggleComboBox();
     void DefValueChanged();
     void SecurityValueChanged();
+    void GeneralInfoChanged();
     void DeleteImage();
     void SaveImage();
     void ShowImage();
@@ -81,6 +82,7 @@ private:
     bool                   gradationChanged;
     bool                   defaultChanged;
     bool                   securityChanged;
+    bool                   generalInfoChanged;
     QAction                *deleteAction;
     QAction                *changeImageAction;
     QAction                *saveImageAction;
@@ -101,6 +103,7 @@ private:
     void         SaveDescription();
     void         SaveGradation();
     void         SaveDefValues();
+    void         SaveGeneralInfo();
 
     void         SetDefaultHeight(const QString &def);
     void         SetDefaultSize(const QString &def);

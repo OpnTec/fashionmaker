@@ -33,6 +33,7 @@
 #include "vtoolrecord.h"
 
 #include <QObject>
+#include <QDate>
 
 enum class Document : char { LiteParse, LitePPParse, FullParse };
 enum class LabelType : char {NewPatternPiece, NewLabel};
@@ -107,6 +108,16 @@ public:
     QString        GetNotes() const;
     void           SetNotes(const QString &text);
 
+    QString        GetPatternName() const;
+    void           SetPatternName(QString qsName);
+    QString        GetCompanyName() const;
+    void           SetCompanyName(QString qsName);
+    QString        GetPatternNumber() const;
+    void           SetPatternNumber(QString qsNum);
+    QString        GetCustomerName() const;
+    void           SetCustomerName(QString qsName);
+    QDate          GetCreationDate() const;
+
     QString        GetImage() const;
     QString        GetImageExtension() const;
     void           SetImage(const QString &text, const QString &extension);
@@ -157,6 +168,11 @@ public:
     static const QString TagUnit;
     static const QString TagData;
     static const QString TagMCP;
+    static const QString TagPatternName;
+    static const QString TagPatternNum;
+    static const QString TagCompanyName;
+    static const QString TagCustomerName;
+    static const QString TagCreationDate;
 
     static const QString AttrName;
     static const QString AttrVisible;

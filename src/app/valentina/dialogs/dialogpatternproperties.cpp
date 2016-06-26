@@ -55,6 +55,7 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
       gradationChanged(false),
       defaultChanged(false),
       securityChanged(false),
+      generalInfoChanged(false),
       deleteAction(nullptr),
       changeImageAction(nullptr),
       saveImageAction(nullptr),
@@ -159,6 +160,17 @@ DialogPatternProperties::DialogPatternProperties(const QString &filePath, VPatte
     gradationChanged = false;
     defaultChanged = false;
     securityChanged = false;
+
+    ui->lineEditPatternName->setText(doc->GetPatternName());
+    ui->lineEditPatternNumber->setText(doc->GetPatternNumber());
+    ui->lineEditCompanyName->setText(doc->GetCompanyName());
+    ui->lineEditCustomerName->setText(doc->GetCustomerName());
+    ui->labelCreationDate->setText(doc->GetCreationDate().toString(Qt::SystemLocaleLongDate));
+
+    connect(ui->lineEditPatternName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->lineEditPatternNumber, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->lineEditCompanyName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
+    connect(ui->lineEditCustomerName, &QLineEdit::editingFinished, this, &DialogPatternProperties::GeneralInfoChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -189,6 +201,12 @@ void DialogPatternProperties::Apply()
             securityChanged = false;
             emit doc->patternChanged(false);
             break;
+        case 3:
+            SaveGeneralInfo();
+            generalInfoChanged = false;
+            emit doc->patternChanged(false);
+            break;
+
         default:
             break;
     }
@@ -222,6 +240,13 @@ void DialogPatternProperties::Ok()
     {
         doc->SetReadOnly(ui->checkBoxPatternReadOnly->isChecked());
         securityChanged = false;
+        emit doc->patternChanged(false);
+    }
+
+    if (generalInfoChanged == true)
+    {
+        SaveGeneralInfo();
+        generalInfoChanged = false;
         emit doc->patternChanged(false);
     }
 
@@ -379,6 +404,12 @@ void DialogPatternProperties::SecurityValueChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::GeneralInfoChanged()
+{
+    generalInfoChanged = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::SetHeightsChecked(bool enabled)
 {
     ui->checkBoxH92->setChecked(enabled);
@@ -512,6 +543,15 @@ void DialogPatternProperties::SaveDefValues()
         doc->SetDefCustomSize(ui->comboBoxSize->currentText().toInt());
     }
     defaultChanged = false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPatternProperties::SaveGeneralInfo()
+{
+    doc->SetPatternName(ui->lineEditPatternName->text());
+    doc->SetPatternNumber(ui->lineEditPatternNumber->text());
+    doc->SetCompanyName(ui->lineEditCompanyName->text());
+    doc->SetCustomerName(ui->lineEditCustomerName->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
