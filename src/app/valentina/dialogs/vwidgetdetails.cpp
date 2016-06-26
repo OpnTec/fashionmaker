@@ -105,6 +105,11 @@ void VWidgetDetails::FillTable(const QHash<quint32, VDetail> *details)
             item->setIcon(QIcon("://icon/16x16/forbid_detail.png"));
         }
         item->setData(Qt::UserRole, i.key());
+        // set the item non-editable (view only), and non-selectable
+        Qt::ItemFlags flags = item->flags();
+        flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
+        item->setFlags(flags);
+
         ui->tableWidget->setItem(currentRow, 0, item);
 
         QString name = det.getName();
@@ -115,9 +120,7 @@ void VWidgetDetails::FillTable(const QHash<quint32, VDetail> *details)
 
         item = new QTableWidgetItem(name);
         item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-
-        // set the item non-editable (view only), and non-selectable
-        Qt::ItemFlags flags = item->flags();
+        flags = item->flags();
         flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
         item->setFlags(flags);
 
