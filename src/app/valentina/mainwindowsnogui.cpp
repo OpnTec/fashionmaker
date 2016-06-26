@@ -464,18 +464,18 @@ void MainWindowsNoGUI::PrepareDetailsForLayout(const QHash<quint32, VDetail> *de
     }
 
     listDetails.clear();
-    QHashIterator<quint32, VDetail> idetail(*details);
-    while (idetail.hasNext())
+    QHash<quint32, VDetail>::const_iterator i = details->constBegin();
+    while (i != details->constEnd())
     {
-        idetail.next();
         VLayoutDetail det = VLayoutDetail();
-        const VDetail &d = idetail.value();
+        const VDetail d = i.value();
         det.SetCountourPoints(d.ContourPoints(pattern));
         det.SetSeamAllowencePoints(d.SeamAllowancePoints(pattern), d.getSeamAllowance(), d.getClosed());
         det.setName(d.getName());
         det.setWidth(qApp->toPixel(d.getWidth()));
 
         listDetails.append(det);
+        ++i;
     }
 }
 
