@@ -317,6 +317,8 @@ void VAbstractPattern::ParseGroups(const QDomElement &domElement)
             {
                 if (domElement.tagName() == TagGroup)
                 {
+                    VContainer::UpdateId(GetParametrUInt(domElement, AttrId, NULL_ID_STR));
+
                     const QPair<bool, QMap<quint32, quint32> > groupData = ParseItemElement(domElement);
                     const QMap<quint32, quint32> group = groupData.second;
                     auto i = group.constBegin();
