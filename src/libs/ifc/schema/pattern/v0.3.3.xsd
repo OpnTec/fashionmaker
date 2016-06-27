@@ -341,10 +341,10 @@
                                                                <xs:element name="detail" minOccurs="0" maxOccurs="unbounded">
                                                                      <xs:complexType>
                                                                            <xs:sequence>
-                                                                               <xs:element name="data" maxOccurs="1">
+                                                                               <xs:element name="data" minOccurs="0" maxOccurs="1">
                                                                                    <xs:complexType>
                                                                                        <xs:sequence>
-                                                                                           <xs:element name="mcp" maxOccurs="1">
+                                                                                           <xs:element name="mcp" minOccurs="0" maxOccurs="unbounded">
                                                                                                <xs:complexType>
                                                                                                    <xs:attribute name="cutNumber" type="xs:unsignedInt"/>
                                                                                                    <xs:attribute name="userDef" type="xs:string"/>
