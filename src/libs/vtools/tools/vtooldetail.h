@@ -91,7 +91,7 @@ public slots:
     void               EnableToolMove(bool move);
     virtual void       AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void       AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
-    virtual void       ResetChild();
+    virtual void       ResetChildren();
     virtual void       UpdateAll();
 protected:
     virtual void       AddToFile () Q_DECL_OVERRIDE;

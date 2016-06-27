@@ -139,6 +139,7 @@ void VTextGraphicsItem::Reset()
 {
     m_eMode = mNormal;
     UpdateFont();
+    setZValue(2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -174,6 +175,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
     {
         m_eMode = mMove;
     }
+    setZValue(3);
     Update();
 }
 

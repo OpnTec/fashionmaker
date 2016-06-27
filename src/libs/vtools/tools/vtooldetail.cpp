@@ -117,7 +117,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     connect(scene, &VMainGraphicsScene::EnableToolMove, this, &VToolDetail::EnableToolMove);
-    connect(scene, &VMainGraphicsScene::MouseLeftPressed, this, &VToolDetail::ResetChild);
+    connect(scene, &VMainGraphicsScene::MouseLeftPressed, this, &VToolDetail::ResetChildren);
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
         AddToFile();
@@ -942,9 +942,10 @@ void VToolDetail::AllowSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDetail::ResetChild()
+void VToolDetail::ResetChildren()
 {
     dataLabel->Reset();
+    patternInfo->Reset();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

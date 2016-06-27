@@ -179,7 +179,9 @@ public:
     static const QString TagCompanyName;
     static const QString TagCustomerName;
     static const QString TagCreationDate;
-    static const QString TagPatternLabel;
+    static const QString TagLabelPos;
+    static const QString TagLabelWidth;
+    static const QString TagLabelFont;
 
     static const QString AttrName;
     static const QString AttrVisible;
@@ -191,8 +193,6 @@ public:
     static const QString AttrUserDefined;
     static const QString AttrCutNumber;
     static const QString AttrPlacement;
-    static const QString AttrWidth;
-    static const QString AttrFont;
 
     static const QString AttrAll;
 
