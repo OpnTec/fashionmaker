@@ -137,6 +137,8 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     connect(patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
+
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateLabel);
     UpdateLabel();
     UpdatePatternInfo();
 }
@@ -648,6 +650,7 @@ void VToolDetail::UpdateLabel()
 {
     const VDetail detail = VAbstractTool::data.GetDetail(id);
 
+    qDebug() << "Update label";
     const VPatternPieceData& data = detail.GetPatternPieceData();
     if (data.GetLetter().isEmpty() == false || data.GetName().isEmpty() == false || data.GetMCPCount() > 0)
     {

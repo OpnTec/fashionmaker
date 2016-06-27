@@ -106,10 +106,10 @@ protected:
     virtual void       contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) Q_DECL_OVERRIDE;
     virtual void       keyReleaseEvent(QKeyEvent * event) Q_DECL_OVERRIDE;
     virtual void       SetVisualization() Q_DECL_OVERRIDE {}
-    virtual void       UpdateLabel();
-    virtual void       UpdatePatternInfo();
 
 protected slots:
+    virtual void       UpdateLabel();
+    virtual void       UpdatePatternInfo();
     virtual void       SaveMoveDetail(QPointF ptPos);
     virtual void       SaveResizeDetail(qreal dLabelW, int iFontSize);
     virtual void       SaveMovePattern(QPointF ptPos);
