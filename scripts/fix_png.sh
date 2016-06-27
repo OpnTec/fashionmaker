@@ -20,7 +20,7 @@
 # usage:
 # $ ./fix_png.sh
 
-# IMPORTANT!!! Use version 1.7.85 or higher.
+# IMPORTANT!!! Use version 1.8.1 or higher.
 
 find .. -type f -iname '*.png' -exec pngcrush -ow -rem allb -brute -reduce {} \;
 
