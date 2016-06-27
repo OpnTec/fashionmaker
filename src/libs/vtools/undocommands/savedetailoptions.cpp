@@ -140,6 +140,7 @@ void SaveDetailOptions::SavePatternPieceData(QDomElement &domElement, const VDet
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, VToolDetail::AttrWidth, data.GetLabelWidth());
+    doc->SetAttribute(domData, VToolDetail::AttrHeight, data.GetLabelHeight());
     doc->SetAttribute(domData, VToolDetail::AttrFont, data.GetFontSize());
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {

@@ -53,6 +53,7 @@ const QString VToolDetail::TagNode          = QStringLiteral("node");
 const QString VToolDetail::AttrSupplement   = QStringLiteral("supplement");
 const QString VToolDetail::AttrClosed       = QStringLiteral("closed");
 const QString VToolDetail::AttrWidth        = QStringLiteral("width");
+const QString VToolDetail::AttrHeight       = QStringLiteral("height");
 const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolDetail::AttrReverse      = QStringLiteral("reverse");
 const QString VToolDetail::AttrFont         = QStringLiteral("fontSize");
@@ -351,6 +352,7 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
+    doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, data.GetFontSize());
 
     for (int i = 0; i < data.GetMCPCount(); ++i)
@@ -398,6 +400,7 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domData, AttrMx, data.GetPos().x());
         doc->SetAttribute(domData, AttrMy, data.GetPos().y());
         doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
+        doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
         doc->SetAttribute(domData, AttrFont, data.GetFontSize());
 
         for (int i = 0; i < data.GetMCPCount(); ++i)
@@ -648,12 +651,15 @@ void VToolDetail::UpdateLabel()
     const VPatternPieceData& data = detail.GetPatternPieceData();
     if (data.GetLetter().isEmpty() == false || data.GetName().isEmpty() == false || data.GetMCPCount() > 0)
     {
+        dataLabel->Reset();
+
         QString qsText = "Cut %1 of %2%3";
         QStringList qslPlace;
         qslPlace << "" << " on Fold";
         QFont fnt = qApp->font();
         fnt.setPixelSize(data.GetFontSize());
         dataLabel->SetFont(fnt);
+        dataLabel->SetSize(data.GetLabelWidth(), data.GetLabelHeight());
         dataLabel->Clear();
         TextLine tl;
         // letter
@@ -679,7 +685,7 @@ void VToolDetail::UpdateLabel()
         }
 
         dataLabel->setPos(data.GetPos());
-        dataLabel->Reset();
+        dataLabel->Update();
         dataLabel->show();
     }
     else
@@ -694,6 +700,7 @@ void VToolDetail::UpdateLabel()
  */
 void VToolDetail::UpdatePatternInfo()
 {
+    patternInfo->Reset();
     QFont fnt = qApp->font();
     int iFS = doc->GetFontSize();
     if (iFS < MIN_FONT_SIZE)
@@ -702,7 +709,8 @@ void VToolDetail::UpdatePatternInfo()
     }
     fnt.setPixelSize(iFS);
     patternInfo->SetFont(fnt);
-    patternInfo->SetWidth(doc->GetLabelWidth());
+    QSizeF sz = doc->GetLabelSize();
+    patternInfo->SetSize(sz.width(), sz.height());
     patternInfo->Clear();
     TextLine tl;
 
@@ -736,9 +744,8 @@ void VToolDetail::UpdatePatternInfo()
     tl.m_qsText = qslDate.last();
     patternInfo->AddLine(tl);
 
-    qDebug() << "UpdatePatternInfo" << doc->GetLabelPosition() << sender();
     patternInfo->setPos(doc->GetLabelPosition());
-    patternInfo->Reset();
+    patternInfo->Update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -766,6 +773,7 @@ void VToolDetail::SaveResizeDetail(qreal dLabelW, int iFontSize)
     VDetail oldDet = VAbstractTool::data.GetDetail(id);
     VDetail newDet = oldDet;
     newDet.GetPatternPieceData().SetLabelWidth(dLabelW);
+    newDet.GetPatternPieceData().SetLabelHeight(dataLabel->boundingRect().height());
     newDet.GetPatternPieceData().SetFontSize(iFontSize);
     SaveDetailOptions* resizeCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
     resizeCommand->setText(tr("resize pattern piece label"));
@@ -789,7 +797,7 @@ void VToolDetail::SaveMovePattern(QPointF ptPos)
  */
 void VToolDetail::SaveResizePattern(qreal dLabelW, int iFontSize)
 {
-    doc->SetLabelWidth(dLabelW);
+    doc->SetLabelSize(QSizeF(dLabelW, patternInfo->boundingRect().height()));
     doc->SetFontSize(iFontSize);
 }
 

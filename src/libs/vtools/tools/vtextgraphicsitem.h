@@ -66,14 +66,14 @@ public:
     QRectF              boundingRect() const;
     void                AddLine(const TextLine& tl);
     void                Clear();
-    void                SetWidth(qreal fW);
+    void                SetSize(qreal fW, qreal fH);
+    void                Update();
 
 protected:
-    void                Resize(qreal fW, qreal fH);
     void                mousePressEvent(QGraphicsSceneMouseEvent* pME);
     void                mouseMoveEvent(QGraphicsSceneMouseEvent* pME);
     void                mouseReleaseEvent(QGraphicsSceneMouseEvent* pME);
-    void                Update();
+    void                UpdateBox();
     void                UpdateFont();
     bool                IsBigEnough(qreal fW, qreal fH, int iFontSize);
     QStringList         SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);

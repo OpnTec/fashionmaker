@@ -68,7 +68,7 @@ const QString VAbstractPattern::TagCustomerName = QStringLiteral("customer");
 const QString VAbstractPattern::TagCompanyName  = QStringLiteral("company");
 const QString VAbstractPattern::TagCreationDate = QStringLiteral("created");
 const QString VAbstractPattern::TagLabelPos     = QStringLiteral("labelPosition");
-const QString VAbstractPattern::TagLabelWidth   = QStringLiteral("labelWidth");
+const QString VAbstractPattern::TagLabelSize   = QStringLiteral("labelSize");
 const QString VAbstractPattern::TagLabelFont    = QStringLiteral("fontSize");
 
 const QString VAbstractPattern::AttrName        = QStringLiteral("name");
@@ -1108,22 +1108,30 @@ void VAbstractPattern::SetLabelPosition(const QPointF& ptPos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractPattern::GetLabelWidth() const
+QSizeF VAbstractPattern::GetLabelSize() const
 {
-    bool bOK;
-    qreal fW = UniqueTagText(TagLabelWidth).toDouble(&bOK);
-    if (bOK == false)
+    QStringList qsl = UniqueTagText(TagLabelSize).split(",");
+    QSizeF sz(0, 0);
+    if (qsl.count() == 2)
     {
-        fW = 0;
+        bool bOKW;
+        bool bOKH;
+        double fW = qsl[0].toDouble(&bOKW);
+        double fH = qsl[1].toDouble(&bOKH);
+        if (bOKW == true && bOKH == true)
+        {
+            sz.setWidth(fW);
+            sz.setHeight(fH);
+        }
     }
-    return fW;
+    return sz;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetLabelWidth(qreal fW)
+void VAbstractPattern::SetLabelSize(QSizeF sz)
 {
-    CheckTagExists(TagLabelWidth);
-    setTagText(TagLabelWidth, QString::number(fW, 'f', 3));
+    CheckTagExists(TagLabelSize);
+    setTagText(TagLabelSize, QString::number(sz.width(), 'f', 3) + "," + QString::number(sz.height(), 'f', 3));
     modified = true;
     emit patternChanged(false);
 }
@@ -1274,7 +1282,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     {
         const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-                                            << TagCustomerName << TagCreationDate << TagLabelPos << TagLabelWidth
+                                            << TagCustomerName << TagCreationDate << TagLabelPos << TagLabelSize
                                                << TagLabelFont;
         switch (tags.indexOf(tag))
         {
@@ -1348,7 +1356,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             }
             case 12:
             {
-                element = createElement(TagLabelWidth);
+                element = createElement(TagLabelSize);
                 break;
             }
             case 13:

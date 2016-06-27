@@ -138,7 +138,7 @@ void VPattern::Parse(const Document &parse)
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
                                      << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit
                                      << TagPatternName << TagPatternNum << TagCompanyName << TagCustomerName
-                                     << TagCreationDate << TagLabelPos << TagLabelWidth << TagLabelFont;
+                                     << TagCreationDate << TagLabelPos << TagLabelSize << TagLabelFont;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -216,8 +216,8 @@ void VPattern::Parse(const Document &parse)
                     case 15: // TagLabelPos
                         qCDebug(vXML, "Label position.");
                         break;
-                    case 16: // TagLabelWidth
-                        qCDebug(vXML, "Label width.");
+                    case 16: // TagLabelSize
+                        qCDebug(vXML, "Label size.");
                         break;
                     case 17: // TagLabelFont
                         qCDebug(vXML, "Label font size.");
@@ -614,11 +614,6 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     try
     {
-        QString qs;
-        QTextStream ts(&qs, QIODevice::WriteOnly);
-        domElement.save(ts, 2);
-        qDebug() << "Parse detail" << qs;
-
         VDetail detail;
         const quint32 id = GetParametrId(domElement);
         detail.setName(GetParametrString(domElement, AttrName, ""));
@@ -681,6 +676,11 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                     detail.GetPatternPieceData().SetPos(ptPos);
                     qreal dLW = element.attribute(VToolDetail::AttrWidth, "0").toDouble();
                     detail.GetPatternPieceData().SetLabelWidth(dLW);
+                    qreal dLH = element.attribute(VToolDetail::AttrHeight, "0").toDouble();
+                    detail.GetPatternPieceData().SetLabelHeight(dLH);
+                    qDebug() << "HEIGHT" <<
+                                detail.GetPatternPieceData().GetPos() <<
+                                detail.GetPatternPieceData().GetLabelHeight();
                     int iFS = element.attribute(VToolDetail::AttrFont, "0").toInt();
                     detail.GetPatternPieceData().SetFontSize(iFS);
 

@@ -69,6 +69,7 @@ public:
     static const QString AttrSupplement;
     static const QString AttrClosed;
     static const QString AttrWidth;
+    static const QString AttrHeight;
     static const QString AttrNodeType;
     static const QString AttrReverse;
     static const QString AttrFont;

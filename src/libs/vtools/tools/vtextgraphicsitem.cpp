@@ -50,7 +50,7 @@ VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
     m_eMode = mNormal;
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_iMinH = MIN_H;
-    Resize(MIN_W, m_iMinH);
+    SetSize(MIN_W, m_iMinH);
     setZValue(2);
 }
 
@@ -71,7 +71,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
     // draw text lines
     int iY = 0;
-    int iH;
+    int iH = 0;
     painter->setPen(Qt::black);
     QFont fnt = m_font;
     for (int i = 0; i < m_liOutput.count(); ++i)
@@ -105,6 +105,14 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::Reset()
+{
+    m_eMode = mNormal;
+    Update();
+    setZValue(2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::AddLine(const TextLine& tl)
 {
     m_liLines << tl;
@@ -114,7 +122,7 @@ void VTextGraphicsItem::AddLine(const TextLine& tl)
     }
     if (m_rectBoundingBox.height() < m_iMinH)
     {
-        Resize(m_rectBoundingBox.width(), m_iMinH);
+        SetSize(m_rectBoundingBox.width(), m_iMinH);
     }
 }
 
@@ -125,31 +133,7 @@ void VTextGraphicsItem::Clear()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::SetWidth(qreal fW)
-{
-    if (fW < MIN_W)
-    {
-        fW = MIN_W;
-    }
-    m_rectBoundingBox.setWidth(fW);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::Reset()
-{
-    m_eMode = mNormal;
-    UpdateFont();
-    setZValue(2);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QRectF VTextGraphicsItem::boundingRect() const
-{
-    return m_rectBoundingBox;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::Resize(qreal fW, qreal fH)
+void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
 {
     // don't allow resize under specific size
     if (fW < MIN_W || fH < m_iMinH)
@@ -160,6 +144,19 @@ void VTextGraphicsItem::Resize(qreal fW, qreal fH)
     m_rectResize.setTopLeft(QPointF(fW - RESIZE_SQUARE, fH - RESIZE_SQUARE));
     m_rectResize.setWidth(RESIZE_SQUARE);
     m_rectResize.setHeight(RESIZE_SQUARE);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::Update()
+{
+    UpdateFont();
+    UpdateBox();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VTextGraphicsItem::boundingRect() const
+{
+    return m_rectBoundingBox;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -176,7 +173,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         m_eMode = mMove;
     }
     setZValue(3);
-    Update();
+    UpdateBox();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -186,12 +183,12 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     if (m_eMode == mMove)
     {
         moveBy(ptDiff.x(), ptDiff.y());
-        Update();
+        UpdateBox();
     }
     else if (m_eMode == mResize)
     {
-        Resize(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
-        UpdateFont();
+        SetSize(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
+        Update();
         emit SignalShrink();
     }
 }
@@ -202,17 +199,18 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
     if (m_eMode == mMove)
     {
         emit SignalMoved(pos());
+        UpdateBox();
     }
     else
     {
         emit SignalResized(m_rectBoundingBox.width(), m_font.pixelSize());
+        Update();
     }
     m_eMode = mActivated;
-    Update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::Update()
+void VTextGraphicsItem::UpdateBox()
 {
     update(m_rectBoundingBox);
 }
@@ -233,7 +231,7 @@ void VTextGraphicsItem::UpdateFont()
         --iFS;
     }
     m_font.setPixelSize(iFS);
-    Update();
+    UpdateBox();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

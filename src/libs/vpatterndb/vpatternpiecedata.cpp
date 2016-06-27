@@ -142,6 +142,18 @@ void VPatternPieceData::SetLabelWidth(qreal dLabelW)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VPatternPieceData::GetLabelHeight() const
+{
+    return m_dLabelHeight;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternPieceData::SetLabelHeight(qreal dLabelH)
+{
+    m_dLabelHeight = dLabelH;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VPatternPieceData::GetFontSize() const
 {
     return m_iFontSize;

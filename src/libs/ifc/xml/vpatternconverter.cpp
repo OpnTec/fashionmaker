@@ -43,8 +43,8 @@
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.2");
-const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.2.xsd");
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.3");
+const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.3.xsd");
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
@@ -117,6 +117,8 @@ QString VPatternConverter::XSDSchema(int ver) const
         case (0x000301):
             return QStringLiteral("://schema/pattern/v0.3.1.xsd");
         case (0x000302):
+            return QStringLiteral("://schema/pattern/v0.3.2.xsd");
+        case (0x000303):
             return CurrentSchema;
         default:
             InvalidVersion(ver);

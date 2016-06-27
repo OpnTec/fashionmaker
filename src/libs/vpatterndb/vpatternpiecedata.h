@@ -89,6 +89,8 @@ public:
     void                        SetPos(const QPointF& ptPos);
     qreal                       GetLabelWidth() const;
     void                        SetLabelWidth(qreal dLabelW);
+    qreal                       GetLabelHeight() const;
+    void                        SetLabelHeight(qreal dLabelH);
     int                         GetFontSize() const;
     void                        SetFontSize(int iSize);
 
@@ -108,6 +110,9 @@ private:
     /** @brief Label width
      */
     qreal               m_dLabelWidth;
+    /** @brief Label height
+     */
+    qreal               m_dLabelHeight;
     /** @brief Label font size
      */
     int                 m_iFontSize;

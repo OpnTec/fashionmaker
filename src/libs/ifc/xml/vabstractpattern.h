@@ -119,8 +119,8 @@ public:
     QDate          GetCreationDate() const;
     QPointF        GetLabelPosition() const;
     void           SetLabelPosition(const QPointF& ptPos);
-    qreal          GetLabelWidth() const;
-    void           SetLabelWidth(qreal fW);
+    QSizeF         GetLabelSize() const;
+    void           SetLabelSize(QSizeF sz);
     int            GetFontSize() const;
     void           SetFontSize(int iFS);
 
@@ -180,7 +180,7 @@ public:
     static const QString TagCustomerName;
     static const QString TagCreationDate;
     static const QString TagLabelPos;
-    static const QString TagLabelWidth;
+    static const QString TagLabelSize;
     static const QString TagLabelFont;
 
     static const QString AttrName;
