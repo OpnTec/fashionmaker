@@ -29,6 +29,8 @@
 #include "tst_findpoint.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
 #include "../vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooltruedarts.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
 
 #include <QtTest>
 
@@ -207,4 +209,60 @@ void TST_FindPoint::TestTrueDarts()
 
     QCOMPARE(p1.toPoint(), expectP1.toPoint());
     QCOMPARE(p2.toPoint(), expectP2.toPoint());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_FindPoint::TestLineIntersectAxis_data()
+{
+    QTest::addColumn<QLineF>("axis");
+    QTest::addColumn<QLineF>("line");
+    QTest::addColumn<QPointF>("point");
+
+    const QLineF axis(0, 0, 1, 0);
+    const QLineF line(0, 1, 1, 1);
+    const QPointF point(0, 0);
+
+    QTest::newRow("Parallel lines") << axis << line << point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_FindPoint::TestLineIntersectAxis()
+{
+    QFETCH(QLineF, axis);
+    QFETCH(QLineF, line);
+    QFETCH(QPointF, point);
+
+    QPointF resultPoint = VToolLineIntersectAxis::FindPoint(axis, line);
+    QCOMPARE(point, resultPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_FindPoint::TestTriangle_data()
+{
+    QTest::addColumn<QPointF>("axisP1");
+    QTest::addColumn<QPointF>("axisP2");
+    QTest::addColumn<QPointF>("firstPoint");
+    QTest::addColumn<QPointF>("secondPoint");
+    QTest::addColumn<QPointF>("point");
+
+    const QPointF axisP1(0, 0);
+    const QPointF axisP2(0, 1);
+    const QPointF firstPoint(1, 0);
+    const QPointF secondPoint(1, 1);
+    const QPointF point(0, 0);
+
+    QTest::newRow("Parallel lines") << axisP1 << axisP2 << firstPoint << secondPoint << point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_FindPoint::TestTriangle()
+{
+    QFETCH(QPointF, axisP1);
+    QFETCH(QPointF, axisP2);
+    QFETCH(QPointF, firstPoint);
+    QFETCH(QPointF, secondPoint);
+    QFETCH(QPointF, point);
+
+    QPointF resultPoint = VToolTriangle::FindPoint(axisP1, axisP2, firstPoint, secondPoint);
+    QCOMPARE(point, resultPoint);
 }

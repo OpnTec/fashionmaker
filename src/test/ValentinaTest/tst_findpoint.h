@@ -44,6 +44,12 @@ private slots:
     void TestTrueDarts_data();
     void TestTrueDarts();
 
+    void TestLineIntersectAxis_data();
+    void TestLineIntersectAxis();
+
+    void TestTriangle_data();
+    void TestTriangle();
+
 };
 
 #endif // TST_FINDPOINT_H
