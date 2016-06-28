@@ -186,6 +186,10 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
     {
         return QPointF();
     }
+    if (axis.angle() == hypotenuse.angle() || qAbs(axis.angle() - hypotenuse.angle()) == 180)
+    {
+        return QPointF();
+    }
 
     qreal step = 1;
 
