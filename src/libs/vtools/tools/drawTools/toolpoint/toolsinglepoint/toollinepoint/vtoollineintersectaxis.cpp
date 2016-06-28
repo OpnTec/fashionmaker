@@ -160,7 +160,8 @@ QPointF VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line
     QLineF::IntersectType intersect = axis.intersect(line, &fPoint);
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
-        if(axis.angle() == line.angle() || qAbs(axis.angle() - line.angle()) == 180)
+        if(VFuzzyComparePossibleNulls(axis.angle(), line.angle())
+           || VFuzzyComparePossibleNulls(qAbs(axis.angle() - line.angle()), 180))
         {
             return QPointF();
         }

@@ -186,7 +186,8 @@ QPointF VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, c
     {
         return QPointF();
     }
-    if (axis.angle() == hypotenuse.angle() || qAbs(axis.angle() - hypotenuse.angle()) == 180)
+    if (VFuzzyComparePossibleNulls(axis.angle(), hypotenuse.angle())
+        || VFuzzyComparePossibleNulls(qAbs(axis.angle() - hypotenuse.angle()), 180))
     {
         return QPointF();
     }
