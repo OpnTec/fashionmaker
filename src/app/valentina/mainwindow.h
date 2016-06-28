@@ -50,6 +50,7 @@ class DialogTool;
 class DialogHistory;
 class VWidgetGroups;
 class VWidgetDetails;
+class QToolButton;
 
 /**
  * @brief The MainWindow class main windows.
@@ -279,6 +280,8 @@ private:
     VWidgetGroups *groupsWidget;
     VWidgetDetails *detailsWidget;
     std::shared_ptr<VLockGuard<char>> lock;
+
+    QList<QToolButton*> toolButtonPointerList;
 
     void               SetDefaultHeight();
     void               SetDefaultSize();
