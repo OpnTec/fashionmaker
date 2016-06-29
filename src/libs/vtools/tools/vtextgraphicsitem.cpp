@@ -67,6 +67,7 @@ void VTextGraphicsItem::SetFont(const QFont& fnt)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(widget);
     painter->fillRect(option->rect, QColor(251, 251, 175));
 
     // draw text lines
@@ -162,18 +163,21 @@ QRectF VTextGraphicsItem::boundingRect() const
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 {
-    m_ptStart = pME->pos();
-    m_szStart = m_rectBoundingBox.size();
-    if (m_rectResize.contains(m_ptStart) == true)
+    if ((pME->buttons() & Qt::LeftButton) > 0)
     {
-        m_eMode = mResize;
+        m_ptStart = pME->pos();
+        m_szStart = m_rectBoundingBox.size();
+        if (m_rectResize.contains(m_ptStart) == true)
+        {
+            m_eMode = mResize;
+        }
+        else
+        {
+            m_eMode = mMove;
+        }
+        setZValue(3);
+        UpdateBox();
     }
-    else
-    {
-        m_eMode = mMove;
-    }
-    setZValue(3);
-    UpdateBox();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -196,17 +200,20 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 {
-    if (m_eMode == mMove)
+    if ((pME->buttons() & Qt::LeftButton) > 0)
     {
-        emit SignalMoved(pos());
-        UpdateBox();
+        if (m_eMode == mMove)
+        {
+            emit SignalMoved(pos());
+            UpdateBox();
+        }
+        else
+        {
+            emit SignalResized(m_rectBoundingBox.width(), m_font.pixelSize());
+            Update();
+        }
+        m_eMode = mActivated;
     }
-    else
-    {
-        emit SignalResized(m_rectBoundingBox.width(), m_font.pixelSize());
-        Update();
-    }
-    m_eMode = mActivated;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
