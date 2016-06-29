@@ -45,6 +45,7 @@
 - [#501] Rename Window->Close Window to Window->Close pattern.
 - [#515] Seam allowance wrong way.
 - [#494] Printing is not working.
+- [#516] Valentina crashes when use "Point intersect line and axis" instrument.
 
 # Version 0.4.4 April 12, 2016
 - Updated measurement templates with all measurements. Added new template Aldrich/Women measurements.

@@ -9,6 +9,7 @@
 # -ow will overwrite the input file
 # -rem allb will remove all ancillary chunks except tRNS and gAMA
 # -reduce does lossless color-type or bit-depth reduction
+# -brute — attempt all optimization methods 
 
 #In the console output you should see "Removed the sRGB chunk.", and possibly more messages about chunk removals. 
 #You will end up with a smaller, optimized png file. As the command will overwrite the original file, make 
@@ -19,4 +20,7 @@
 # usage:
 # $ ./fix_png.sh
 
-find .. -type f -iname '*.png' -exec pngcrush -ow -rem allb -reduce {} \;
+# IMPORTANT!!! Use version 1.8.1 or higher.
+
+find .. -type f -iname '*.png' -exec pngcrush -ow -rem allb -brute -reduce {} \;
+

@@ -48,15 +48,15 @@
        <string>Tools</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>130</width>
-         <height>318</height>
+         <width>117</width>
+         <height>358</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -82,32 +82,6 @@
         <property name="fieldGrowthPolicy">
          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
         </property>
-        <item row="2" column="0">
-         <widget class="QToolButton" name="toolButtonEndLine">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="toolTip">
-           <string>Point at distance and angle</string>
-          </property>
-          <property name="text">
-           <string notr="true">...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="share/resources/toolicon.qrc">
-            <normaloff>:/toolicon/32x32/segment.png</normaloff>:/toolicon/32x32/segment.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="1">
          <widget class="QToolButton" name="toolButtonAlongLine">
           <property name="enabled">
@@ -368,6 +342,32 @@
           </property>
          </widget>
         </item>
+        <item row="0" column="0">
+         <widget class="QToolButton" name="toolButtonPointerPoint">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool pointer</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
         <item row="10" column="1">
          <widget class="QToolButton" name="toolButtonMidpoint">
           <property name="enabled">
@@ -394,6 +394,32 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="0">
+         <widget class="QToolButton" name="toolButtonEndLine">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Point at distance and angle</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/segment.png</normaloff>:/toolicon/32x32/segment.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="page_2">
@@ -402,7 +428,7 @@
          <x>0</x>
          <y>0</y>
          <width>130</width>
-         <height>58</height>
+         <height>110</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -425,10 +451,33 @@
         <string>Line</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout_2">
-        <property name="fieldGrowthPolicy">
-         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-        </property>
         <item row="0" column="0">
+         <widget class="QToolButton" name="toolButtonPointerLine">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool pointer</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
          <widget class="QToolButton" name="toolButtonLine">
           <property name="enabled">
            <bool>false</bool>
@@ -454,7 +503,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="2" column="1">
          <widget class="QToolButton" name="toolButtonLineIntersect">
           <property name="enabled">
            <bool>false</bool>
@@ -488,7 +537,7 @@
          <x>0</x>
          <y>0</y>
          <width>130</width>
-         <height>196</height>
+         <height>248</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -511,36 +560,7 @@
         <string>Curve</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout_3">
-        <property name="fieldGrowthPolicy">
-         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-        </property>
-        <item row="0" column="0">
-         <widget class="QToolButton" name="toolButtonSpline">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="toolTip">
-           <string>Simple curve</string>
-          </property>
-          <property name="text">
-           <string notr="true">...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="share/resources/toolicon.qrc">
-            <normaloff>:/toolicon/32x32/spline.png</normaloff>:/toolicon/32x32/spline.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
+        <item row="1" column="1">
          <widget class="QToolButton" name="toolButtonSplineCutPoint">
           <property name="enabled">
            <bool>false</bool>
@@ -566,7 +586,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="3" column="0">
          <widget class="QToolButton" name="toolButtonCubicBezier">
           <property name="enabled">
            <bool>false</bool>
@@ -592,7 +612,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item row="3" column="1">
          <widget class="QToolButton" name="toolButtonSplinePath">
           <property name="enabled">
            <bool>false</bool>
@@ -618,7 +638,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="4" column="0">
          <widget class="QToolButton" name="toolButtonSplinePathCutPoint">
           <property name="enabled">
            <bool>false</bool>
@@ -644,7 +664,30 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="4" column="1">
+         <widget class="QToolButton" name="toolButtonCubicBezierPath">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="share/resources/toolicon.qrc">
+            <normaloff>:/toolicon/32x32/cubic_bezier_path.png</normaloff>:/toolicon/32x32/cubic_bezier_path.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
          <widget class="QToolButton" name="toolButtonIntersectionCurves">
           <property name="enabled">
            <bool>false</bool>
@@ -670,7 +713,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="5" column="1">
          <widget class="QToolButton" name="toolButtonCurveIntersectAxis">
           <property name="enabled">
            <bool>false</bool>
@@ -696,17 +739,46 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QToolButton" name="toolButtonCubicBezierPath">
+        <item row="0" column="0">
+         <widget class="QToolButton" name="toolButtonPointerCurve">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool pointer</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QToolButton" name="toolButtonSpline">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Simple curve</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
           </property>
           <property name="icon">
            <iconset resource="share/resources/toolicon.qrc">
-            <normaloff>:/toolicon/32x32/cubic_bezier_path.png</normaloff>:/toolicon/32x32/cubic_bezier_path.png</iconset>
+            <normaloff>:/toolicon/32x32/spline.png</normaloff>:/toolicon/32x32/spline.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -727,7 +799,7 @@
          <x>0</x>
          <y>0</y>
          <width>130</width>
-         <height>196</height>
+         <height>248</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -750,10 +822,7 @@
         <string>Arc</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout_4">
-        <property name="fieldGrowthPolicy">
-         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-        </property>
-        <item row="0" column="0">
+        <item row="2" column="0">
          <widget class="QToolButton" name="toolButtonArc">
           <property name="enabled">
            <bool>false</bool>
@@ -779,7 +848,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="2" column="1">
          <widget class="QToolButton" name="toolButtonArcCutPoint">
           <property name="enabled">
            <bool>false</bool>
@@ -805,7 +874,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="3" column="0">
          <widget class="QToolButton" name="toolButtonArcIntersectAxis">
           <property name="enabled">
            <bool>false</bool>
@@ -831,7 +900,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item row="3" column="1">
          <widget class="QToolButton" name="toolButtonPointOfIntersectionArcs">
           <property name="enabled">
            <bool>false</bool>
@@ -857,7 +926,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="4" column="0">
          <widget class="QToolButton" name="toolButtonPointOfIntersectionCircles">
           <property name="enabled">
            <bool>false</bool>
@@ -883,7 +952,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="4" column="1">
          <widget class="QToolButton" name="toolButtonPointFromCircleAndTangent">
           <property name="enabled">
            <bool>false</bool>
@@ -909,7 +978,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="5" column="0">
          <widget class="QToolButton" name="toolButtonPointFromArcAndTangent">
           <property name="enabled">
            <bool>false</bool>
@@ -935,7 +1004,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="5" column="1">
          <widget class="QToolButton" name="toolButtonArcWithLength">
           <property name="enabled">
            <bool>false</bool>
@@ -949,6 +1018,32 @@
           <property name="icon">
            <iconset resource="share/resources/toolicon.qrc">
             <normaloff>:/toolicon/32x32/arc_with_length.png</normaloff>:/toolicon/32x32/arc_with_length.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QToolButton" name="toolButtonPointerArc">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool pointer</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -984,6 +1079,32 @@
        </attribute>
        <layout class="QFormLayout" name="formLayout_7">
         <item row="0" column="0">
+         <widget class="QToolButton" name="toolButtonPointerOperations">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool pointer</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
          <widget class="QToolButton" name="toolButtonGroup">
           <property name="enabled">
            <bool>false</bool>
@@ -1009,7 +1130,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="1" column="1">
          <widget class="QToolButton" name="toolButtonRotation">
           <property name="enabled">
            <bool>false</bool>
@@ -1043,7 +1164,7 @@
          <x>0</x>
          <y>0</y>
          <width>130</width>
-         <height>58</height>
+         <height>104</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -1066,10 +1187,33 @@
         <string>Detail</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout_5">
-        <property name="fieldGrowthPolicy">
-         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-        </property>
         <item row="0" column="0">
+         <widget class="QToolButton" name="toolButtonPointerDetail">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Tool pointer</string>
+          </property>
+          <property name="text">
+           <string notr="true">...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+            <normaloff>:/icon/32x32/arrow_cursor.png</normaloff>:/icon/32x32/arrow_cursor.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
          <widget class="QToolButton" name="toolButtonNewDetail">
           <property name="enabled">
            <bool>false</bool>
@@ -1095,7 +1239,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="1" column="1">
          <widget class="QToolButton" name="toolButtonUnionDetails">
           <property name="enabled">
            <bool>false</bool>
@@ -1432,26 +1576,6 @@
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_10"/>
-  </widget>
-  <widget class="QToolBar" name="toolBarArrows">
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="windowTitle">
-    <string>Toolbar pointer</string>
-   </property>
-   <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextUnderIcon</enum>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionArrowTool"/>
   </widget>
   <widget class="QDockWidget" name="dockWidgetLayoutPages">
    <property name="features">

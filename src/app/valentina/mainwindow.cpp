@@ -124,7 +124,8 @@ MainWindow::MainWindow(QWidget *parent)
       toolOptions(nullptr),
       groupsWidget(nullptr),
       detailsWidget(nullptr),
-      lock(nullptr)
+      lock(nullptr),
+      toolButtonPointerList()
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -1736,6 +1737,18 @@ void MainWindow::ToolBarTools()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitToolButtons()
 {
+    toolButtonPointerList.append(ui->toolButtonPointerPoint);
+    toolButtonPointerList.append(ui->toolButtonPointerLine);
+    toolButtonPointerList.append(ui->toolButtonPointerCurve);
+    toolButtonPointerList.append(ui->toolButtonPointerArc);
+    toolButtonPointerList.append(ui->toolButtonPointerDetail);
+    toolButtonPointerList.append(ui->toolButtonPointerOperations);
+
+    for (auto pointer : toolButtonPointerList)
+    {
+        connect(pointer, &QToolButton::clicked, this, &MainWindow::ArrowTool);
+    }
+
     connect(ui->toolButtonEndLine, &QToolButton::clicked, this, &MainWindow::ToolEndLine);
     connect(ui->toolButtonLine, &QToolButton::clicked, this, &MainWindow::ToolLine);
     connect(ui->toolButtonAlongLine, &QToolButton::clicked, this, &MainWindow::ToolAlongLine);
@@ -1827,7 +1840,10 @@ void MainWindow::CancelTool()
     switch ( currentTool )
     {
         case Tool::Arrow:
-            ui->actionArrowTool->setChecked(false);
+            for (auto pointer : toolButtonPointerList)
+            {
+                pointer->setChecked(false);
+            }
             helpLabel->setText("");
             ui->actionStopTool->setEnabled(true);
 
@@ -1974,7 +1990,10 @@ void  MainWindow::ArrowTool()
 {
     qCDebug(vMainWindow, "Arrow tool.");
     CancelTool();
-    ui->actionArrowTool->setChecked(true);
+    for (auto pointer : toolButtonPointerList)
+    {
+        pointer->setChecked(true);
+    }
     ui->actionStopTool->setEnabled(false);
     currentTool = Tool::Arrow;
     emit EnableItemMove(true);
@@ -3161,6 +3180,12 @@ void MainWindow::SetEnableTool(bool enable)
 
     ui->actionLast_tool->setEnabled(drawTools);
 
+    for (auto pointer : toolButtonPointerList)
+    {
+        pointer->setEnabled(drawTools || modelingTools);
+        pointer->setChecked(drawTools || modelingTools);
+    }
+
     //Modeling Tools
     ui->toolButtonUnionDetails->setEnabled(modelingTools);
 
@@ -3444,7 +3469,10 @@ void MainWindow::LastUsedTool()
     switch ( lastUsedTool )
     {
         case Tool::Arrow:
-            ui->actionArrowTool->setChecked(true);
+            for (auto pointer : toolButtonPointerList)
+            {
+                pointer->setChecked(true);
+            }
             ArrowTool();
             break;
         case Tool::BasePoint:
@@ -3985,7 +4013,6 @@ void MainWindow::WindowsLocale()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarStyles()
 {
-    ToolBarStyle(ui->toolBarArrows);
     ToolBarStyle(ui->toolBarDraws);
     ToolBarStyle(ui->toolBarOption);
     ToolBarStyle(ui->toolBarStages);
