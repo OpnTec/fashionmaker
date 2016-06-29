@@ -163,7 +163,7 @@ QRectF VTextGraphicsItem::boundingRect() const
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 {
-    if ((pME->buttons() & Qt::LeftButton) > 0)
+    if (pME->button() == Qt::LeftButton)
     {
         m_ptStart = pME->pos();
         m_szStart = m_rectBoundingBox.size();
@@ -200,7 +200,7 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 {
-    if ((pME->buttons() & Qt::LeftButton) > 0)
+    if (pME->button() == Qt::LeftButton)
     {
         if (m_eMode == mMove)
         {
