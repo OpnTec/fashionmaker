@@ -637,6 +637,8 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
 
         newDetail.setName(tr("United detail"));
         newDetail.setWidth(d1.getWidth());
+        newDetail.setMx(d1.getMx());
+        newDetail.setMy(d1.getMy());
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Source::FromTool, drawName);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         SCASSERT(tools != nullptr);
