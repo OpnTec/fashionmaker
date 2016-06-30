@@ -520,7 +520,7 @@ VToolUnionDetails* VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsSc
     VDetail d2 = data->GetDetail(dialogTool->getD2());
     quint32 indexD1 = static_cast<quint32>(dialogTool->getIndexD1());
     quint32 indexD2 = static_cast<quint32>(dialogTool->getIndexD2());
-    qApp->getUndoStack()->beginMacro("union details");
+    qApp->getUndoStack()->beginMacro(tr("union details"));
     VToolUnionDetails* tool = Create(0, d1, d2, dialogTool->getD1(), dialogTool->getD2(), indexD1, indexD2, scene,
                                      doc, data, Document::FullParse, Source::FromGui);
     qApp->getUndoStack()->endMacro();
@@ -633,7 +633,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
             }
         } while (i < countNodeD1);
 
-        newDetail.setName("Detail");
+        newDetail.setName(tr("United detail"));
         newDetail.setWidth(d1.getWidth());
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Source::FromTool, drawName);
         QHash<quint32, VDataTool*>* tools = doc->getTools();
