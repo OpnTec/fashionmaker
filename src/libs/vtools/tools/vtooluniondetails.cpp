@@ -95,6 +95,8 @@ VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, co
  * @param det detail what we union.
  * @param i index node in detail.
  * @param idTool id tool union details.
+ * @param children
+ * @param drawName
  * @param dx bias node x axis.
  * @param dy bias node y axis.
  * @param pRotate point rotation.
@@ -102,8 +104,8 @@ VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, co
  */
 void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPattern *doc,
                                        VContainer *data, VDetail &newDetail, const VDetail &det, const int &i,
-                                       const quint32 &idTool, QVector<quint32> &children, const qreal &dx,
-                                       const qreal &dy, const quint32 &pRotate, const qreal &angle)
+                                       const quint32 &idTool, QVector<quint32> &children, const QString &drawName,
+                                       const qreal &dx, const qreal &dy, const quint32 &pRotate, const qreal &angle)
 {
     quint32 id = 0, idObject = 0;
     switch (det.at(i).getTypeTool())
@@ -124,7 +126,8 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 VPointF *point1 = new VPointF(*point);
                 point1->setMode(Draw::Modeling);
                 id = data->AddGObject(point1);
-                VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool);
+                VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, drawName,
+                                   idTool);
             }
         }
         break;
@@ -161,7 +164,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 arc2->setMode(Draw::Modeling);
                 id = data->AddGObject(arc2);
 
-                VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool);
+                VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
             }
         }
         break;
@@ -196,7 +199,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 VSpline *spl1 = new VSpline(*spl);
                 spl1->setMode(Draw::Modeling);
                 id = data->AddGObject(spl1);
-                VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool);
+                VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
 
                 delete p4;
                 delete p1;
@@ -265,7 +268,8 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 VSplinePath *path1 = new VSplinePath(*path);
                 path1->setMode(Draw::Modeling);
                 id = data->AddGObject(path1);
-                VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool);
+                VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName,
+                                        idTool);
             }
         }
         break;
@@ -609,7 +613,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         QVector<quint32> children;
         do
         {
-            AddToNewDetail(scene, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id, children);
+            AddToNewDetail(scene, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id, children, drawName);
             ++i;
             if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-1)
             {
@@ -621,7 +625,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                     {
                         j=0;
                     }
-                    AddToNewDetail(scene, doc, data, newDetail, d2.RemoveEdge(indexD2), j, id, children,
+                    AddToNewDetail(scene, doc, data, newDetail, d2.RemoveEdge(indexD2), j, id, children, drawName,
                                    dx, dy, det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;

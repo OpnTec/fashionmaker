@@ -35,12 +35,16 @@ class AddDetNode : public VUndoCommand
 {
     Q_OBJECT
 public:
-    AddDetNode(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *parent = 0);
+    AddDetNode(const QDomElement &xml, VAbstractPattern *doc, const QString &drawName, QUndoCommand *parent = 0);
     virtual ~AddDetNode() Q_DECL_OVERRIDE;
     virtual void undo() Q_DECL_OVERRIDE;
     virtual void redo() Q_DECL_OVERRIDE;
 private:
     Q_DISABLE_COPY(AddDetNode)
+
+    QString m_drawName;
+
+    QDomElement GetModelingSection() const;
 };
 
 #endif // ADDDETNODE_H
