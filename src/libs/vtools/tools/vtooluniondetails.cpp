@@ -95,6 +95,8 @@ VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, co
  * @param det detail what we union.
  * @param i index node in detail.
  * @param idTool id tool union details.
+ * @param children
+ * @param drawName
  * @param dx bias node x axis.
  * @param dy bias node y axis.
  * @param pRotate point rotation.
@@ -102,8 +104,8 @@ VToolUnionDetails::VToolUnionDetails(VAbstractPattern *doc, VContainer *data, co
  */
 void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPattern *doc,
                                        VContainer *data, VDetail &newDetail, const VDetail &det, const int &i,
-                                       const quint32 &idTool, QVector<quint32> &children, const qreal &dx,
-                                       const qreal &dy, const quint32 &pRotate, const qreal &angle)
+                                       const quint32 &idTool, QVector<quint32> &children, const QString &drawName,
+                                       const qreal &dx, const qreal &dy, const quint32 &pRotate, const qreal &angle)
 {
     quint32 id = 0, idObject = 0;
     switch (det.at(i).getTypeTool())
@@ -124,7 +126,8 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 VPointF *point1 = new VPointF(*point);
                 point1->setMode(Draw::Modeling);
                 id = data->AddGObject(point1);
-                VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, idTool);
+                VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, drawName,
+                                   idTool);
             }
         }
         break;
@@ -161,7 +164,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 arc2->setMode(Draw::Modeling);
                 id = data->AddGObject(arc2);
 
-                VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool);
+                VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
             }
         }
         break;
@@ -173,7 +176,8 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             }
             else
             {
-                const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(det.at(i).getId());
+                const QSharedPointer<VAbstractCubicBezier> spline =
+                        data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
 
                 const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                 VPointF *p1 = new VPointF(spline->GetP1());
@@ -195,7 +199,7 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 VSpline *spl1 = new VSpline(*spl);
                 spl1->setMode(Draw::Modeling);
                 id = data->AddGObject(spl1);
-                VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool);
+                VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
 
                 delete p4;
                 delete p1;
@@ -212,14 +216,11 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             {
                 VSplinePath *path = new VSplinePath();
                 path->setMode(Draw::Modeling);
-                const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(det.at(i).getId());
+                const QSharedPointer<VAbstractCubicBezierPath> splinePath =
+                        data->GeometricObject<VAbstractCubicBezierPath>(det.at(i).getId());
                 for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
                 {
-                    const VSplinePoint &point1 = splinePath->at(i-1);
-                    const VSplinePoint &point2 = splinePath->at(i);
-                    VSpline spline(point1.P(), point2.P(), point1.Angle2(), point1.Angle2Formula(), point2.Angle1(),
-                                   point2.Angle1Formula(), point1.Length2(), point1.Length2Formula(), point2.Length1(),
-                                   point2.Length1Formula());
+                    const VSpline spline = splinePath->GetSpline(i);
 
                     const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                     VPointF *p1 = new VPointF(spline.GetP1());
@@ -241,16 +242,22 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                         const QString angle1F = QString().number(angle1);
 
                         path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
-                                                  point1.Length1(), point1.Length1Formula(), point1.Length2(),
-                                                  point1.Length2Formula()));
+                                                  0, "0", spline.GetC1Length(), spline.GetC1LengthFormula()));
                     }
 
                     const qreal angle2 = spl.GetEndAngle()+180;
                     const QString angle2F = QString().number(angle2);
+                    qreal pL2 = 0;
+                    QString pL2F("0");
+                    if (i+1 <= splinePath->CountSubSpl())
+                    {
+                        const VSpline nextSpline = splinePath->GetSpline(i+1);
+                        pL2 = nextSpline.GetC1Length();
+                        pL2F = nextSpline.GetC1LengthFormula();
+                    }
 
                     path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
-                                              point2.Length1(), point2.Length1Formula(), point2.Length2(),
-                                              point2.Length2Formula()));
+                                              spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
 
                     delete p4;
                     delete p1;
@@ -261,7 +268,8 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                 VSplinePath *path1 = new VSplinePath(*path);
                 path1->setMode(Draw::Modeling);
                 id = data->AddGObject(path1);
-                VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, idTool);
+                VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName,
+                                        idTool);
             }
         }
         break;
@@ -332,7 +340,8 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
         {
             if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
             {
-                const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(det.at(i).getId());
+                const QSharedPointer<VAbstractCubicBezier> spline =
+                        data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
 
                 const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                 VPointF *p1 = new VPointF(spline->GetP1());
@@ -360,16 +369,12 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             {
                 VSplinePath *path = new VSplinePath();
                 path->setMode(Draw::Modeling);
-                const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(det.at(i).getId());
+                const QSharedPointer<VAbstractCubicBezierPath> splinePath =
+                        data->GeometricObject<VAbstractCubicBezierPath>(det.at(i).getId());
                 SCASSERT(splinePath != nullptr);
                 for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
                 {
-                    const VSplinePoint &point1 = splinePath->at(i-1);
-                    const VSplinePoint &point2 = splinePath->at(i);
-
-                    VSpline spline(point1.P(), point2.P(), point1.Angle2(), point1.Angle2Formula(), point2.Angle1(),
-                                   point2.Angle1Formula(), point1.Length2(), point1.Length2Formula(), point2.Length1(),
-                                   point2.Length1Formula());
+                    const VSpline spline = splinePath->GetSpline(i);
 
                     const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                     VPointF *p1 = new VPointF(spline.GetP1());
@@ -391,16 +396,23 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                         const QString angle1F = QString().number(angle1);
 
                         path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
-                                                  point1.Length1(), point1.Length1Formula(), point1.Length2(),
-                                                  point1.Length2Formula()));
+                                                  0, "0", spline.GetC1Length(), spline.GetC1LengthFormula()));
                     }
 
                     const qreal angle2 = spl.GetEndAngle()+180;
                     const QString angle2F = QString().number(angle2);
 
+                    qreal pL2 = 0;
+                    QString pL2F("0");
+                    if (i+1 <= splinePath->CountSubSpl())
+                    {
+                        const VSpline nextSpline = splinePath->GetSpline(i+1);
+                        pL2 = nextSpline.GetC1Length();
+                        pL2F = nextSpline.GetC1LengthFormula();
+                    }
+
                     path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
-                                              point2.Length1(), point2.Length1Formula(), point2.Length2(),
-                                              point2.Length2Formula()));
+                                              spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
 
                     delete p1;
                     delete p4;
@@ -508,7 +520,7 @@ VToolUnionDetails* VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsSc
     VDetail d2 = data->GetDetail(dialogTool->getD2());
     quint32 indexD1 = static_cast<quint32>(dialogTool->getIndexD1());
     quint32 indexD2 = static_cast<quint32>(dialogTool->getIndexD2());
-    qApp->getUndoStack()->beginMacro("union details");
+    qApp->getUndoStack()->beginMacro(tr("union details"));
     VToolUnionDetails* tool = Create(0, d1, d2, dialogTool->getD1(), dialogTool->getD2(), indexD1, indexD2, scene,
                                      doc, data, Document::FullParse, Source::FromGui);
     qApp->getUndoStack()->endMacro();
@@ -601,7 +613,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         QVector<quint32> children;
         do
         {
-            AddToNewDetail(scene, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id, children);
+            AddToNewDetail(scene, doc, data, newDetail, d1.RemoveEdge(indexD1), i, id, children, drawName);
             ++i;
             if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-1)
             {
@@ -613,7 +625,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                     {
                         j=0;
                     }
-                    AddToNewDetail(scene, doc, data, newDetail, d2.RemoveEdge(indexD2), j, id, children,
+                    AddToNewDetail(scene, doc, data, newDetail, d2.RemoveEdge(indexD2), j, id, children, drawName,
                                    dx, dy, det1p1.getId(), angle);
                     ++pointsD2;
                     ++j;
@@ -621,7 +633,7 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
             }
         } while (i < countNodeD1);
 
-        newDetail.setName("Detail");
+        newDetail.setName(tr("United detail"));
         newDetail.setWidth(d1.getWidth());
         VToolDetail::Create(0, newDetail, scene, doc, data, parse, Source::FromTool, drawName);
         QHash<quint32, VDataTool*>* tools = doc->getTools();

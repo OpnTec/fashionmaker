@@ -45,8 +45,8 @@ const QString VNodeArc::ToolType = QStringLiteral("modeling");
  * @param qoParent QObject parent
  */
 VNodeArc::VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc, const Source &typeCreation,
-                   const quint32 &idTool, QObject *qoParent)
-    :VAbstractNode(doc, data, id, idArc, idTool, qoParent)
+                   const QString &drawName, const quint32 &idTool, QObject *qoParent)
+    :VAbstractNode(doc, data, id, idArc, drawName, idTool, qoParent)
 {
     ToolCreation(typeCreation);
 }
@@ -63,12 +63,12 @@ VNodeArc::VNodeArc(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 
  * @param idTool tool id.
  */
 void VNodeArc::Create(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idArc,
-                      const Document &parse, const Source &typeCreation, const quint32 &idTool)
+                      const Document &parse, const Source &typeCreation, const QString &drawName, const quint32 &idTool)
 {
     VAbstractTool::AddRecord(id, Tool::NodeArc, doc);
     if (parse == Document::FullParse)
     {
-        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, idTool, doc);
+        VNodeArc *arc = new VNodeArc(doc, data, id, idArc, typeCreation, drawName, idTool, doc);
 
         doc->AddTool(id, arc);
         if (idTool != NULL_ID)

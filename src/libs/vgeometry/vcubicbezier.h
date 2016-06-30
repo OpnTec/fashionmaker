@@ -48,10 +48,10 @@ public:
     virtual VPointF GetP1() const Q_DECL_OVERRIDE;
     void            SetP1(const VPointF &p);
 
-    VPointF GetP2() const;
+    virtual VPointF GetP2() const Q_DECL_OVERRIDE;
     void    SetP2(const VPointF &p);
 
-    VPointF GetP3() const;
+    virtual VPointF GetP3() const Q_DECL_OVERRIDE;
     void    SetP3(const VPointF &p);
 
     virtual VPointF GetP4() const Q_DECL_OVERRIDE;

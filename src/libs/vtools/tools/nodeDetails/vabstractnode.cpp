@@ -44,9 +44,9 @@ const QString VAbstractNode::AttrIdTool = QStringLiteral("idTool");
  * @param parent parent object.
  */
 VAbstractNode::VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
-                             const quint32 &idTool, QObject *parent)
+                             const QString &drawName, const quint32 &idTool, QObject *parent)
     : VAbstractTool(doc, data, id, parent), parentType(ParentType::Item), idNode(idNode), idTool(idTool),
-      currentColor(Qt::black)
+      currentColor(Qt::black), m_drawName(drawName)
 {
     _referens = 0;
 }
@@ -137,6 +137,6 @@ void VAbstractNode::GroupVisibility(quint32 object, bool visible)
  */
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
-    AddDetNode *addNode = new AddDetNode(domElement, doc);
+    AddDetNode *addNode = new AddDetNode(domElement, doc, m_drawName);
     qApp->getUndoStack()->push(addNode);
 }

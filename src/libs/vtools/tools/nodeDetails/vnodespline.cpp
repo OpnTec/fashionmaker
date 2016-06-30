@@ -45,8 +45,8 @@ const QString VNodeSpline::ToolType = QStringLiteral("modelingSpline");
  * @param qoParent QObject parent.
  */
 VNodeSpline::VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 idSpline,
-                         const Source &typeCreation, const quint32 &idTool, QObject *qoParent)
-    :VAbstractNode(doc, data, id, idSpline, idTool, qoParent)
+                         const Source &typeCreation, const QString &drawName, const quint32 &idTool, QObject *qoParent)
+    :VAbstractNode(doc, data, id, idSpline, drawName, idTool, qoParent)
 {
     ToolCreation(typeCreation);
 }
@@ -65,13 +65,13 @@ VNodeSpline::VNodeSpline(VAbstractPattern *doc, VContainer *data, quint32 id, qu
  */
 VNodeSpline *VNodeSpline::Create(VAbstractPattern *doc, VContainer *data, quint32 id,
                                  quint32 idSpline, const Document &parse,
-                                 const Source &typeCreation, const quint32 &idTool)
+                                 const Source &typeCreation, const QString &drawName, const quint32 &idTool)
 {
     VAbstractTool::AddRecord(id, Tool::NodeSpline, doc);
     VNodeSpline *spl = nullptr;
     if (parse == Document::FullParse)
     {
-        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, idTool, doc);
+        spl = new VNodeSpline(doc, data, id, idSpline, typeCreation, drawName, idTool, doc);
 
         doc->AddTool(id, spl);
         if (idTool != NULL_ID)
