@@ -52,6 +52,12 @@ DialogUnionDetails::~DialogUnionDetails()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogUnionDetails::RetainPieces() const
+{
+    return ui->checkBox->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ChoosedObject gets id and type of selected object. Save correct data and ignore wrong.
  * @param id id of point or detail

@@ -520,9 +520,10 @@ VToolUnionDetails* VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsSc
     VDetail d2 = data->GetDetail(dialogTool->getD2());
     quint32 indexD1 = static_cast<quint32>(dialogTool->getIndexD1());
     quint32 indexD2 = static_cast<quint32>(dialogTool->getIndexD2());
+    const bool retainPieces = dialogTool->RetainPieces();
     qApp->getUndoStack()->beginMacro(tr("union details"));
     VToolUnionDetails* tool = Create(0, d1, d2, dialogTool->getD1(), dialogTool->getD2(), indexD1, indexD2, scene,
-                                     doc, data, Document::FullParse, Source::FromGui);
+                                     doc, data, Document::FullParse, Source::FromGui, retainPieces);
     qApp->getUndoStack()->endMacro();
     return tool;
 }
@@ -546,7 +547,8 @@ VToolUnionDetails* VToolUnionDetails::Create(DialogTool *dialog, VMainGraphicsSc
 VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d1, const VDetail &d2,
                                              const quint32 &d1id, const quint32 &d2id, const quint32 &indexD1,
                                              const quint32 &indexD2, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                                             VContainer *data, const Document &parse, const Source &typeCreation)
+                                             VContainer *data, const Document &parse, const Source &typeCreation,
+                                             bool retainPieces)
 {
     VToolUnionDetails *unionDetails = 0;
     quint32 id = _id;
@@ -639,17 +641,22 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
         QHash<quint32, VDataTool*>* tools = doc->getTools();
         SCASSERT(tools != nullptr);
 
+        if (not retainPieces)
         {
-            VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d1id));
-            SCASSERT(toolDet != nullptr);
-            bool ask = false;
-            toolDet->Remove(ask);
-        }
+            {
+                VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d1id));
+                SCASSERT(toolDet != nullptr);
+                bool ask = false;
+                toolDet->Remove(ask);
+            }
 
-        VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d2id));
-        SCASSERT(toolDet != nullptr);
-        bool ask = false;
-        toolDet->Remove(ask);
+            {
+                VToolDetail *toolDet = qobject_cast<VToolDetail*>(tools->value(d2id));
+                SCASSERT(toolDet != nullptr);
+                const bool ask = false;
+                toolDet->Remove(ask);
+            }
+        }
 
         SCASSERT(not children.isEmpty())
         SaveChildren(doc, id, children);

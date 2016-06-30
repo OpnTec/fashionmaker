@@ -52,7 +52,8 @@ public:
                                      const quint32 &d2id, const quint32 &indexD1, const quint32 &indexD2,
                                      VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                      const Document &parse,
-                                     const Source &typeCreation);
+                                     const Source &typeCreation,
+                                     bool retainPieces = false);
     static void  PointsOnEdge(const VDetail &d, const quint32 &index, VPointF &p1, VPointF &p2, VContainer *data);
     static void  FindIndexJ(const qint32 &pointsD2, const VDetail &d2, const quint32 &indexD2, qint32 &j);
     static QVector<VDetail> GetDetailFromFile(VAbstractPattern *doc, const QDomElement &domElement);

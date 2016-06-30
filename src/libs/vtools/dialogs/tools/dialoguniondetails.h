@@ -50,6 +50,8 @@ public:
     quint32          getD2() const;
     int        getIndexD1() const;
     int        getIndexD2() const;
+
+    bool RetainPieces() const;
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) Q_DECL_OVERRIDE;
 private:

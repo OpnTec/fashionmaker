@@ -33,6 +33,7 @@
 - [#514] Read only setting not working properly.
 - [#480] New tool: Midpoint between two points.
 - [#496] Selector for selecting which pieces to print.
+- [#520] Improve Union tool. An option to select about original pieces.
 
 # Version 0.4.5
 - [#435] Valentina doesn't change the cursor.
