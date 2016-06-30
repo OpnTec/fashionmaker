@@ -49,9 +49,9 @@ class VTextGraphicsItem : public QGraphicsObject
 
     enum Mode {
         mNormal,
-        mActivated,
         mMove,
-        mResize
+        mResize,
+        mRotate
     };
 
 public:
@@ -78,15 +78,22 @@ protected:
     bool                IsBigEnough(qreal fW, qreal fH, int iFontSize);
     QStringList         SplitString(const QString& qs, qreal fW, const QFontMetrics& fm);
 
+    double              GetAngle(QPointF pt) const;
+
 signals:
     void                SignalMoved(QPointF ptPos);
     void                SignalResized(qreal iTW, int iFontSize);
+    void                SignalRotated(qreal dAng);
     void                SignalShrink();
 
 private:
     Mode                m_eMode;
+    bool                m_bReleased;
+    QPointF             m_ptStartPos;
     QPointF             m_ptStart;
     QSizeF              m_szStart;
+    double              m_dRotation;
+    double              m_dAngle;
     QRectF              m_rectResize;
     int                 m_iMinH;
     QRectF              m_rectBoundingBox;
