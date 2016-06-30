@@ -173,7 +173,8 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             }
             else
             {
-                const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(det.at(i).getId());
+                const QSharedPointer<VAbstractCubicBezier> spline =
+                        data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
 
                 const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                 VPointF *p1 = new VPointF(spline->GetP1());
@@ -212,14 +213,11 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
             {
                 VSplinePath *path = new VSplinePath();
                 path->setMode(Draw::Modeling);
-                const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(det.at(i).getId());
+                const QSharedPointer<VAbstractCubicBezierPath> splinePath =
+                        data->GeometricObject<VAbstractCubicBezierPath>(det.at(i).getId());
                 for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
                 {
-                    const VSplinePoint &point1 = splinePath->at(i-1);
-                    const VSplinePoint &point2 = splinePath->at(i);
-                    VSpline spline(point1.P(), point2.P(), point1.Angle2(), point1.Angle2Formula(), point2.Angle1(),
-                                   point2.Angle1Formula(), point1.Length2(), point1.Length2Formula(), point2.Length1(),
-                                   point2.Length1Formula());
+                    const VSpline spline = splinePath->GetSpline(i);
 
                     const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                     VPointF *p1 = new VPointF(spline.GetP1());
@@ -241,16 +239,22 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
                         const QString angle1F = QString().number(angle1);
 
                         path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
-                                                  point1.Length1(), point1.Length1Formula(), point1.Length2(),
-                                                  point1.Length2Formula()));
+                                                  0, "0", spline.GetC1Length(), spline.GetC1LengthFormula()));
                     }
 
                     const qreal angle2 = spl.GetEndAngle()+180;
                     const QString angle2F = QString().number(angle2);
+                    qreal pL2 = 0;
+                    QString pL2F("0");
+                    if (i+1 <= splinePath->CountSubSpl())
+                    {
+                        const VSpline nextSpline = splinePath->GetSpline(i+1);
+                        pL2 = nextSpline.GetC1Length();
+                        pL2F = nextSpline.GetC1LengthFormula();
+                    }
 
                     path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
-                                              point2.Length1(), point2.Length1Formula(), point2.Length2(),
-                                              point2.Length2Formula()));
+                                              spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
 
                     delete p4;
                     delete p1;
@@ -332,7 +336,8 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
         {
             if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
             {
-                const QSharedPointer<VSpline> spline = data->GeometricObject<VSpline>(det.at(i).getId());
+                const QSharedPointer<VAbstractCubicBezier> spline =
+                        data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
 
                 const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                 VPointF *p1 = new VPointF(spline->GetP1());
@@ -360,16 +365,12 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
             {
                 VSplinePath *path = new VSplinePath();
                 path->setMode(Draw::Modeling);
-                const QSharedPointer<VSplinePath> splinePath = data->GeometricObject<VSplinePath>(det.at(i).getId());
+                const QSharedPointer<VAbstractCubicBezierPath> splinePath =
+                        data->GeometricObject<VAbstractCubicBezierPath>(det.at(i).getId());
                 SCASSERT(splinePath != nullptr);
                 for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
                 {
-                    const VSplinePoint &point1 = splinePath->at(i-1);
-                    const VSplinePoint &point2 = splinePath->at(i);
-
-                    VSpline spline(point1.P(), point2.P(), point1.Angle2(), point1.Angle2Formula(), point2.Angle1(),
-                                   point2.Angle1Formula(), point1.Length2(), point1.Length2Formula(), point2.Length1(),
-                                   point2.Length1Formula());
+                    const VSpline spline = splinePath->GetSpline(i);
 
                     const QPointF p = *data->GeometricObject<VPointF>(pRotate);
                     VPointF *p1 = new VPointF(spline.GetP1());
@@ -391,16 +392,23 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
                         const QString angle1F = QString().number(angle1);
 
                         path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
-                                                  point1.Length1(), point1.Length1Formula(), point1.Length2(),
-                                                  point1.Length2Formula()));
+                                                  0, "0", spline.GetC1Length(), spline.GetC1LengthFormula()));
                     }
 
                     const qreal angle2 = spl.GetEndAngle()+180;
                     const QString angle2F = QString().number(angle2);
 
+                    qreal pL2 = 0;
+                    QString pL2F("0");
+                    if (i+1 <= splinePath->CountSubSpl())
+                    {
+                        const VSpline nextSpline = splinePath->GetSpline(i+1);
+                        pL2 = nextSpline.GetC1Length();
+                        pL2F = nextSpline.GetC1LengthFormula();
+                    }
+
                     path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
-                                              point2.Length1(), point2.Length1Formula(), point2.Length2(),
-                                              point2.Length2Formula()));
+                                              spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
 
                     delete p1;
                     delete p4;

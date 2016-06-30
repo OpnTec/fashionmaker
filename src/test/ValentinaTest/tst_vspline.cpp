@@ -392,8 +392,8 @@ void TST_VSpline::TestLengthByPoint()
 void TST_VSpline::CompareSplines(const VSpline &spl1, const VSpline &spl2) const
 {
     QCOMPARE(spl1.GetP1().toQPointF().toPoint(), spl2.GetP1().toQPointF().toPoint());
-    QCOMPARE(spl1.GetP2().toPoint(), spl2.GetP2().toPoint());
-    QCOMPARE(spl1.GetP3().toPoint(), spl2.GetP3().toPoint());
+    QCOMPARE(spl1.GetP2().toQPointF().toPoint(), spl2.GetP2().toQPointF().toPoint());
+    QCOMPARE(spl1.GetP3().toQPointF().toPoint(), spl2.GetP3().toQPointF().toPoint());
     QCOMPARE(spl1.GetP4().toQPointF().toPoint(), spl2.GetP4().toQPointF().toPoint());
 
     QCOMPARE(spl1.GetStartAngle(), spl2.GetStartAngle());

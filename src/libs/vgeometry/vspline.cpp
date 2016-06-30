@@ -222,11 +222,11 @@ void VSpline::SetP1(const VPointF &p)
  * @brief GetP2 return first control point.
  * @return first control point.
  */
-QPointF VSpline::GetP2() const
+VPointF VSpline::GetP2() const
 {
     QLineF p1p2(d->p1.x(), d->p1.y(), d->p1.x() + d->c1Length, d->p1.y());
     p1p2.setAngle(d->angle1);
-    return p1p2.p2();
+    return VPointF(p1p2.p2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -234,11 +234,11 @@ QPointF VSpline::GetP2() const
  * @brief GetP3 return second control point.
  * @return second control point.
  */
-QPointF VSpline::GetP3() const
+VPointF VSpline::GetP3() const
 {
     QLineF p4p3(d->p4.x(), d->p4.y(), d->p4.x() + d->c2Length, d->p4.y());
     p4p3.setAngle(d->angle2);
-    return p4p3.p2();
+    return VPointF(p4p3.p2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
