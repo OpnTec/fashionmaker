@@ -142,6 +142,8 @@ void SaveDetailOptions::SavePatternPieceData(QDomElement &domElement, const VDet
     doc->SetAttribute(domData, VToolDetail::AttrWidth, data.GetLabelWidth());
     doc->SetAttribute(domData, VToolDetail::AttrHeight, data.GetLabelHeight());
     doc->SetAttribute(domData, VToolDetail::AttrFont, data.GetFontSize());
+    doc->SetAttribute(domData, VToolDetail::AttrRotation, data.GetRotation());
+
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {
         MaterialCutPlacement mcp = data.GetMCP(i);

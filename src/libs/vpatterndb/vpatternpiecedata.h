@@ -93,6 +93,8 @@ public:
     void                        SetLabelHeight(qreal dLabelH);
     int                         GetFontSize() const;
     void                        SetFontSize(int iSize);
+    qreal                       GetRotation() const;
+    void                        SetRotation(qreal dRot);
 
 private:
     /** @brief Pattern piece name
@@ -116,6 +118,9 @@ private:
     /** @brief Label font size
      */
     int                 m_iFontSize;
+    /** @brief Label rotation
+     */
+    qreal               m_dRotation;
 };
 
 #endif // VPATTERNPIECEDATA_H

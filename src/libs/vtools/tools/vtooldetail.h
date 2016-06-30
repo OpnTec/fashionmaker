@@ -73,6 +73,7 @@ public:
     static const QString AttrNodeType;
     static const QString AttrReverse;
     static const QString AttrFont;
+    static const QString AttrRotation;
     static const QString NodeTypeContour;
     static const QString NodeTypeModeling;
     static const QString NodeArc;
@@ -92,7 +93,7 @@ public slots:
     void               EnableToolMove(bool move);
     virtual void       AllowHover(bool enabled) Q_DECL_OVERRIDE;
     virtual void       AllowSelecting(bool enabled) Q_DECL_OVERRIDE;
-    virtual void       ResetChildren();
+    virtual void       ResetChildren(QGraphicsItem* pItem);
     virtual void       UpdateAll();
 protected:
     virtual void       AddToFile () Q_DECL_OVERRIDE;
@@ -112,8 +113,10 @@ protected slots:
     virtual void       UpdatePatternInfo();
     virtual void       SaveMoveDetail(QPointF ptPos);
     virtual void       SaveResizeDetail(qreal dLabelW, int iFontSize);
+    virtual void       SaveRotationDetail(qreal dRot);
     virtual void       SaveMovePattern(QPointF ptPos);
     virtual void       SaveResizePattern(qreal dLabelW, int iFontSize);
+    virtual void       SaveRotationPattern(qreal dRot);
 
 private:
     Q_DISABLE_COPY(VToolDetail)

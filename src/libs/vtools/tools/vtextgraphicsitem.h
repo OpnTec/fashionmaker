@@ -63,6 +63,7 @@ public:
 
     void                Reset();
 
+    int                 GetFontSize() const;
     QRectF              boundingRect() const;
     void                AddLine(const TextLine& tl);
     void                Clear();

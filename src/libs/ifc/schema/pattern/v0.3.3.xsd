@@ -26,6 +26,7 @@
                             <xs:element name="labelPosition" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="labelSize" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="fontSize" type="xs:unsignedInt" minOccurs="0" maxOccurs="1"></xs:element>
+                            <xs:element name="rotation" type="xs:double" minOccurs="0" maxOccurs="1"></xs:element>
                             <xs:element name="gradation" minOccurs="0" maxOccurs="1">
                                 <xs:complexType>
                                        <xs:sequence>
@@ -360,6 +361,7 @@
                                                                                        <xs:attribute name="my" type="xs:double"></xs:attribute>
                                                                                        <xs:attribute name="width" type="xs:double"></xs:attribute>
                                                                                        <xs:attribute name="height" type="xs:double"></xs:attribute>
+                                                                                       <xs:attribute name="rotation" type="xs:double"></xs:attribute>
                                                                                    </xs:complexType>
                                                                                </xs:element>
                                                                                  <xs:element name="node" maxOccurs="unbounded">

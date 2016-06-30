@@ -123,6 +123,8 @@ public:
     void           SetLabelSize(QSizeF sz);
     int            GetFontSize() const;
     void           SetFontSize(int iFS);
+    qreal          GetRotation() const;
+    void           SetRotation(qreal dRot);
 
     QString        GetImage() const;
     QString        GetImageExtension() const;
@@ -182,6 +184,7 @@ public:
     static const QString TagLabelPos;
     static const QString TagLabelSize;
     static const QString TagLabelFont;
+    static const QString TagLabelRot;
 
     static const QString AttrName;
     static const QString AttrVisible;

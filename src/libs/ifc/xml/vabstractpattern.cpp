@@ -68,8 +68,9 @@ const QString VAbstractPattern::TagCustomerName = QStringLiteral("customer");
 const QString VAbstractPattern::TagCompanyName  = QStringLiteral("company");
 const QString VAbstractPattern::TagCreationDate = QStringLiteral("created");
 const QString VAbstractPattern::TagLabelPos     = QStringLiteral("labelPosition");
-const QString VAbstractPattern::TagLabelSize   = QStringLiteral("labelSize");
+const QString VAbstractPattern::TagLabelSize    = QStringLiteral("labelSize");
 const QString VAbstractPattern::TagLabelFont    = QStringLiteral("fontSize");
+const QString VAbstractPattern::TagLabelRot     = QStringLiteral("rotation");
 
 const QString VAbstractPattern::AttrName        = QStringLiteral("name");
 const QString VAbstractPattern::AttrVisible     = QStringLiteral("visible");
@@ -1158,6 +1159,27 @@ void VAbstractPattern::SetFontSize(int iFS)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractPattern::GetRotation() const
+{
+    bool bOK;
+    qreal dRot = UniqueTagText(TagLabelRot).toDouble(&bOK);
+    if (bOK == false)
+    {
+        dRot = 0;
+    }
+    return dRot;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::SetRotation(qreal dRot)
+{
+    CheckTagExists(TagLabelRot);
+    setTagText(TagLabelRot, QString::number(dRot, 'f', 3));
+    modified = true;
+    emit patternChanged(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetImage() const
 {
     return UniqueTagText(TagImage);
@@ -1283,7 +1305,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
         const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
                                             << TagCustomerName << TagCreationDate << TagLabelPos << TagLabelSize
-                                               << TagLabelFont;
+                                               << TagLabelFont << TagLabelRot;
         switch (tags.indexOf(tag))
         {
             case 0: //TagUnit
@@ -1362,6 +1384,12 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             case 13:
             {
                 element = createElement(TagLabelFont);
+                break;
+            }
+
+            case 14:
+            {
+                element = createElement(TagLabelRot);
                 break;
             }
 

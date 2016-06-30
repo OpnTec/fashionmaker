@@ -36,6 +36,8 @@
 
 #define RESIZE_SQUARE               30
 #define ROTATE_CIRCLE               20
+#define ROTATE_RECT                 60
+#define ROTATE_ARC                  50
 #define MIN_W                       120
 #define MIN_H                       60
 #define MIN_FONT_SIZE               12
@@ -71,6 +73,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 {
     Q_UNUSED(widget);
     painter->fillRect(option->rect, QColor(251, 251, 175));
+    painter->setRenderHints(QPainter::Antialiasing);
 
     // draw text lines
     int iY = 0;
@@ -117,6 +120,16 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
                         ROTATE_CIRCLE,
                         ROTATE_CIRCLE
                         );
+            painter->setPen(QPen(Qt::black, 3));
+            painter->setBrush(Qt::NoBrush);
+            int iTop = ROTATE_RECT - ROTATE_ARC;
+            int iLeft = ROTATE_RECT - ROTATE_ARC;
+            int iRight = m_rectBoundingBox.width() - ROTATE_RECT;
+            int iBottom = m_rectBoundingBox.height() - ROTATE_RECT;
+            painter->drawArc(iLeft, iTop, ROTATE_ARC, ROTATE_ARC, 180*16, -90*16);
+            painter->drawArc(iRight, iTop, ROTATE_ARC, ROTATE_ARC, 90*16, -90*16);
+            painter->drawArc(iLeft, iBottom, ROTATE_ARC, ROTATE_ARC, 270*16, -90*16);
+            painter->drawArc(iRight, iBottom, ROTATE_ARC, ROTATE_ARC, 0*16, -90*16);
         }
     }
 }
@@ -124,7 +137,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::Reset()
 {
-    return;
+    qDebug() << "RESET" << m_eMode << m_liLines.count();
     m_eMode = mNormal;
     m_bReleased = false;
     Update();
@@ -163,6 +176,7 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
     m_rectResize.setTopLeft(QPointF(fW - RESIZE_SQUARE, fH - RESIZE_SQUARE));
     m_rectResize.setWidth(RESIZE_SQUARE);
     m_rectResize.setHeight(RESIZE_SQUARE);
+    setTransformOriginPoint(m_rectBoundingBox.center());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -170,6 +184,12 @@ void VTextGraphicsItem::Update()
 {
     UpdateFont();
     UpdateBox();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VTextGraphicsItem::GetFontSize() const
+{
+    return m_font.pixelSize();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -183,7 +203,6 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 {
     if (pME->button() == Qt::LeftButton)
     {
-        qDebug() << "PRESS" << m_eMode;
         m_ptStartPos = pos();
         m_ptStart = pME->scenePos();
         m_szStart = m_rectBoundingBox.size();
@@ -202,7 +221,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         }
         setZValue(3);
         UpdateBox();
-        qDebug() << "PRESS finished" << m_eMode;
+        qDebug() << "PRESS" << m_eMode << m_liLines.count();
     }
 }
 
@@ -212,7 +231,6 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     QPointF ptDiff = pME->scenePos() - m_ptStart;
     if (m_eMode == mMove)
     {
-        //moveBy(ptDiff.x(), ptDiff.y());
         setPos(m_ptStartPos + ptDiff);
         UpdateBox();
     }
@@ -231,6 +249,7 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         }
         double dAng = 180*(GetAngle(pME->scenePos()) - m_dAngle)/M_PI;
         setRotation(m_dRotation + dAng);
+        emit SignalRotated(rotation());
         Update();
     }
 }
@@ -243,7 +262,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
         double dDist = fabs(pME->scenePos().x() - m_ptStart.x()) + fabs(pME->scenePos().y() - m_ptStart.y());
         bool bShort = (dDist < 2);
 
-        qDebug() << "RELEASE" << m_eMode << dDist;
+        qDebug() << "RELEASE" << m_eMode << dDist << m_liLines.count();
 
         if (m_eMode == mMove || m_eMode == mResize)
         {   // when released in mMove or mResize mode
@@ -280,6 +299,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             }
         }
         m_bReleased = true;
+        qDebug() << "RELEASE finished" << m_eMode << m_liLines.count();
     }
 }
 

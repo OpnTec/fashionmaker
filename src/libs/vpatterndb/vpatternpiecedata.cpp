@@ -35,6 +35,7 @@ VPatternPieceData::VPatternPieceData() :
     m_iFontSize = MIN_FONT_SIZE;
     // 0 means unknown width
     m_dLabelWidth = 0;
+    m_dRotation = 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -166,6 +167,18 @@ void VPatternPieceData::SetFontSize(int iSize)
         m_iFontSize = iSize;
     else
         m_iFontSize = MIN_FONT_SIZE;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPatternPieceData::GetRotation() const
+{
+    return m_dRotation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternPieceData::SetRotation(qreal dRot)
+{
+    m_dRotation = dRot;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

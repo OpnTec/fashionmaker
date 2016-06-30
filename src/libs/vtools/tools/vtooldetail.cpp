@@ -57,6 +57,7 @@ const QString VToolDetail::AttrHeight       = QStringLiteral("height");
 const QString VToolDetail::AttrNodeType     = QStringLiteral("nodeType");
 const QString VToolDetail::AttrReverse      = QStringLiteral("reverse");
 const QString VToolDetail::AttrFont         = QStringLiteral("fontSize");
+const QString VToolDetail::AttrRotation     = QStringLiteral("rotation");
 
 const QString VToolDetail::NodeTypeContour  = QStringLiteral("Contour");
 const QString VToolDetail::NodeTypeModeling = QStringLiteral("Modeling");
@@ -118,7 +119,7 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
     connect(scene, &VMainGraphicsScene::EnableToolMove, this, &VToolDetail::EnableToolMove);
-    connect(scene, &VMainGraphicsScene::MouseLeftPressed, this, &VToolDetail::ResetChildren);
+    connect(scene, &VMainGraphicsScene::ItemClicked, this, &VToolDetail::ResetChildren);
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
         AddToFile();
@@ -131,10 +132,12 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
 
     connect(dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMoveDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizeDetail);
+    connect(dataLabel, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
 
     connect(patternInfo, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMovePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizePattern);
+    connect(patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationPattern);
     connect(patternInfo, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
 
@@ -356,6 +359,7 @@ void VToolDetail::AddToFile()
     doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
     doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, data.GetFontSize());
+    doc->SetAttribute(domData, AttrRotation, data.GetRotation());
 
     for (int i = 0; i < data.GetMCPCount(); ++i)
     {
@@ -404,6 +408,7 @@ void VToolDetail::RefreshDataInFile()
         doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
         doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
         doc->SetAttribute(domData, AttrFont, data.GetFontSize());
+        doc->SetAttribute(domData, AttrRotation, data.GetRotation());
 
         for (int i = 0; i < data.GetMCPCount(); ++i)
         {
@@ -650,11 +655,10 @@ void VToolDetail::UpdateLabel()
 {
     const VDetail detail = VAbstractTool::data.GetDetail(id);
 
-    qDebug() << "Update label";
     const VPatternPieceData& data = detail.GetPatternPieceData();
     if (data.GetLetter().isEmpty() == false || data.GetName().isEmpty() == false || data.GetMCPCount() > 0)
     {
-        dataLabel->Reset();
+        //dataLabel->Reset();
 
         QString qsText = "Cut %1 of %2%3";
         QStringList qslPlace;
@@ -688,6 +692,7 @@ void VToolDetail::UpdateLabel()
         }
 
         dataLabel->setPos(data.GetPos());
+        dataLabel->setRotation(data.GetRotation());
         dataLabel->Update();
         dataLabel->show();
     }
@@ -703,7 +708,7 @@ void VToolDetail::UpdateLabel()
  */
 void VToolDetail::UpdatePatternInfo()
 {
-    patternInfo->Reset();
+    //patternInfo->Reset();
     QFont fnt = qApp->font();
     int iFS = doc->GetFontSize();
     if (iFS < MIN_FONT_SIZE)
@@ -748,6 +753,7 @@ void VToolDetail::UpdatePatternInfo()
     patternInfo->AddLine(tl);
 
     patternInfo->setPos(doc->GetLabelPosition());
+    patternInfo->setRotation(doc->GetRotation());
     patternInfo->Update();
 }
 
@@ -761,6 +767,11 @@ void VToolDetail::SaveMoveDetail(QPointF ptPos)
     VDetail oldDet = VAbstractTool::data.GetDetail(id);
     VDetail newDet = oldDet;
     newDet.GetPatternPieceData().SetPos(ptPos);
+    newDet.GetPatternPieceData().SetLabelWidth(dataLabel->boundingRect().width());
+    newDet.GetPatternPieceData().SetLabelHeight(dataLabel->boundingRect().height());
+    newDet.GetPatternPieceData().SetFontSize(dataLabel->GetFontSize());
+    newDet.GetPatternPieceData().SetRotation(dataLabel->rotation());
+
     SaveDetailOptions* moveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
     moveCommand->setText(tr("move pattern piece label"));
     connect(moveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -778,11 +789,34 @@ void VToolDetail::SaveResizeDetail(qreal dLabelW, int iFontSize)
     newDet.GetPatternPieceData().SetLabelWidth(dLabelW);
     newDet.GetPatternPieceData().SetLabelHeight(dataLabel->boundingRect().height());
     newDet.GetPatternPieceData().SetFontSize(iFontSize);
+    newDet.GetPatternPieceData().SetRotation(dataLabel->rotation());
     SaveDetailOptions* resizeCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
     resizeCommand->setText(tr("resize pattern piece label"));
     connect(resizeCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     qApp->getUndoStack()->push(resizeCommand);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief SaveRotationDetail saves the rotation detail label operation to the undo stack
+ */
+void VToolDetail::SaveRotationDetail(qreal dRot)
+{
+    qDebug() << "SAVEROTATION" << dRot;
+    VDetail oldDet = VAbstractTool::data.GetDetail(id);
+    VDetail newDet = oldDet;
+    newDet.GetPatternPieceData().SetPos(dataLabel->pos());
+    newDet.GetPatternPieceData().SetLabelWidth(dataLabel->boundingRect().width());
+    newDet.GetPatternPieceData().SetLabelHeight(dataLabel->boundingRect().height());
+    newDet.GetPatternPieceData().SetFontSize(dataLabel->GetFontSize());
+    newDet.GetPatternPieceData().SetRotation(dRot);
+
+    SaveDetailOptions* rotateCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
+    rotateCommand->setText(tr("rotate pattern piece label"));
+    connect(rotateCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+    qApp->getUndoStack()->push(rotateCommand);
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -803,6 +837,13 @@ void VToolDetail::SaveResizePattern(qreal dLabelW, int iFontSize)
     doc->SetLabelSize(QSizeF(dLabelW, patternInfo->boundingRect().height()));
     doc->SetFontSize(iFontSize);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolDetail::SaveRotationPattern(qreal dRot)
+{
+    doc->SetRotation(dRot);
+}
+
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -953,10 +994,17 @@ void VToolDetail::AllowSelecting(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolDetail::ResetChildren()
+void VToolDetail::ResetChildren(QGraphicsItem *pItem)
 {
-    dataLabel->Reset();
-    patternInfo->Reset();
+    VTextGraphicsItem* pVGI = dynamic_cast<VTextGraphicsItem*>(pItem);
+    if (pVGI != dataLabel)
+    {
+        dataLabel->Reset();
+    }
+    if (pVGI != patternInfo)
+    {
+        patternInfo->Reset();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
