@@ -43,7 +43,7 @@ class VAbstractNode : public VAbstractTool
     Q_OBJECT
 public:
     VAbstractNode(VAbstractPattern *doc, VContainer *data, const quint32 &id, const quint32 &idNode,
-                  const quint32 &idTool, QObject *parent = nullptr);
+                  const QString &drawName = QString(), const quint32 &idTool = 0, QObject *parent = nullptr);
     virtual      ~VAbstractNode() Q_DECL_OVERRIDE {}
     static const QString AttrIdObject;
     static const QString AttrIdTool;
@@ -65,6 +65,8 @@ protected:
 
     /** @brief currentColor current tool color. */
     QColor        currentColor;
+
+    QString       m_drawName;
 
     void         AddToModeling(const QDomElement &domElement);
     virtual void SetVisualization() {}
