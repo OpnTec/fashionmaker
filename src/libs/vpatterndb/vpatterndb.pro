@@ -101,3 +101,9 @@ CONFIG(debug, debug|release){
     }
 }
 
+HEADERS += \
+    vpatterninfogeometry.h
+
+SOURCES += \
+    vpatterninfogeometry.cpp
+

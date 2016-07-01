@@ -38,6 +38,7 @@ class VDetailData;
 class VContainer;
 class QPainterPath;
 class VPatternPieceData;
+class VPatternInfoGeometry;
 
 /**
  * @brief The VDetail class for path of object (points, arcs, splines).
@@ -90,6 +91,8 @@ public:
     QVector<VNodeDetail> listNodePoint()const;
     VPatternPieceData& GetPatternPieceData();
     const VPatternPieceData& GetPatternPieceData() const;
+    VPatternInfoGeometry& GetPatternInfo();
+    const VPatternInfoGeometry& GetPatternInfo() const;
 
 private:
     QSharedDataPointer<VDetailData> d;

@@ -117,14 +117,6 @@ public:
     QString        GetCustomerName() const;
     void           SetCustomerName(QString qsName);
     QDate          GetCreationDate() const;
-    QPointF        GetLabelPosition() const;
-    void           SetLabelPosition(const QPointF& ptPos);
-    QSizeF         GetLabelSize() const;
-    void           SetLabelSize(QSizeF sz);
-    int            GetFontSize() const;
-    void           SetFontSize(int iFS);
-    qreal          GetRotation() const;
-    void           SetRotation(qreal dRot);
 
     QString        GetImage() const;
     QString        GetImageExtension() const;
@@ -175,16 +167,13 @@ public:
     static const QString TagSizes;
     static const QString TagUnit;
     static const QString TagData;
+    static const QString TagPatternInfo;
     static const QString TagMCP;
     static const QString TagPatternName;
     static const QString TagPatternNum;
     static const QString TagCompanyName;
     static const QString TagCustomerName;
     static const QString TagCreationDate;
-    static const QString TagLabelPos;
-    static const QString TagLabelSize;
-    static const QString TagLabelFont;
-    static const QString TagLabelRot;
 
     static const QString AttrName;
     static const QString AttrVisible;

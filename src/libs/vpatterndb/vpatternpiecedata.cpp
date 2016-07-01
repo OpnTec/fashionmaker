@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpatternpiecedata.h
+ **  @file   vpatternpiecedata.cpp
  **  @author Bojan Kverh
  **  @date   June 16, 2016
  **
@@ -35,6 +35,7 @@ VPatternPieceData::VPatternPieceData() :
     m_iFontSize = MIN_FONT_SIZE;
     // 0 means unknown width
     m_dLabelWidth = 0;
+    m_dLabelHeight = 0;
     m_dRotation = 0;
 }
 

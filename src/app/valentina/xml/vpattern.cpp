@@ -48,6 +48,7 @@
 #include "../core/vapplication.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
 
 #include <QMessageBox>
 #include <QUndoStack>
@@ -138,7 +139,7 @@ void VPattern::Parse(const Document &parse)
     QStringList tags = QStringList() << TagDraw << TagIncrements << TagAuthor << TagDescription << TagNotes
                                      << TagMeasurements << TagVersion << TagGradation << TagImage << TagUnit
                                      << TagPatternName << TagPatternNum << TagCompanyName << TagCustomerName
-                                     << TagCreationDate << TagLabelPos << TagLabelSize << TagLabelFont;
+                                     << TagCreationDate;
     PrepareForParse(parse);
     QDomNode domNode = documentElement().firstChild();
     while (domNode.isNull() == false)
@@ -212,15 +213,6 @@ void VPattern::Parse(const Document &parse)
                         break;
                     case 14: // TagCreationDate
                         qCDebug(vXML, "Creation date.");
-                        break;
-                    case 15: // TagLabelPos
-                        qCDebug(vXML, "Label position.");
-                        break;
-                    case 16: // TagLabelSize
-                        qCDebug(vXML, "Label size.");
-                        break;
-                    case 17: // TagLabelFont
-                        qCDebug(vXML, "Label font size.");
                         break;
                     default:
                         qCDebug(vXML, "Wrong tag name %s", qUtf8Printable(domElement.tagName()));
@@ -694,6 +686,21 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                         mcp.m_ePlacement = PlacementType(GetParametrUInt(domMCP, AttrPlacement, 0));
                         detail.GetPatternPieceData().Append(mcp);
                     }
+                }
+                else if (element.tagName() == TagPatternInfo)
+                {
+                    QPointF ptPos;
+                    ptPos.setX(element.attribute(AttrMx, "0").toDouble());
+                    ptPos.setY(element.attribute(AttrMy, "0").toDouble());
+                    detail.GetPatternInfo().SetPos(ptPos);
+                    qreal dLW = element.attribute(VToolDetail::AttrWidth, "0").toDouble();
+                    detail.GetPatternInfo().SetLabelWidth(dLW);
+                    qreal dLH = element.attribute(VToolDetail::AttrHeight, "0").toDouble();
+                    detail.GetPatternInfo().SetLabelHeight(dLH);
+                    int iFS = element.attribute(VToolDetail::AttrFont, "0").toInt();
+                    detail.GetPatternInfo().SetFontSize(iFS);
+                    qreal dRot = element.attribute(VToolDetail::AttrRotation, "0").toDouble();
+                    detail.GetPatternInfo().SetRotation(dRot);
                 }
             }
         }

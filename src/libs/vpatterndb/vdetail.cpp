@@ -527,7 +527,7 @@ QVector<VNodeDetail> VDetail::listNodePoint() const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief Returns the full access to the pattern piece data object
+ * @brief Returns full access to the pattern piece data object
  * @return pattern piece data object
  */
 VPatternPieceData& VDetail::GetPatternPieceData()
@@ -543,6 +543,26 @@ VPatternPieceData& VDetail::GetPatternPieceData()
 const VPatternPieceData& VDetail::GetPatternPieceData() const
 {
     return d->m_ppData;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns full access to the pattern info geometry object
+ * @return pattern info geometry object
+ */
+VPatternInfoGeometry& VDetail::GetPatternInfo()
+{
+    return d->m_piPatternInfo;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Returns the read only reference to the pattern info geometry object
+ * @return pattern info geometry object
+ */
+const VPatternInfoGeometry& VDetail::GetPatternInfo() const
+{
+    return d->m_piPatternInfo;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

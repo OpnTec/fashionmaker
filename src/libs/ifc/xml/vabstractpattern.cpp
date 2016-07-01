@@ -61,16 +61,13 @@ const QString VAbstractPattern::TagHeights      = QStringLiteral("heights");
 const QString VAbstractPattern::TagSizes        = QStringLiteral("sizes");
 const QString VAbstractPattern::TagUnit         = QStringLiteral("unit");
 const QString VAbstractPattern::TagData         = QStringLiteral("data");
+const QString VAbstractPattern::TagPatternInfo  = QStringLiteral("patternInfo");
 const QString VAbstractPattern::TagMCP          = QStringLiteral("mcp");
 const QString VAbstractPattern::TagPatternName  = QStringLiteral("patternName");
 const QString VAbstractPattern::TagPatternNum   = QStringLiteral("patternNumber");
 const QString VAbstractPattern::TagCustomerName = QStringLiteral("customer");
 const QString VAbstractPattern::TagCompanyName  = QStringLiteral("company");
 const QString VAbstractPattern::TagCreationDate = QStringLiteral("created");
-const QString VAbstractPattern::TagLabelPos     = QStringLiteral("labelPosition");
-const QString VAbstractPattern::TagLabelSize    = QStringLiteral("labelSize");
-const QString VAbstractPattern::TagLabelFont    = QStringLiteral("fontSize");
-const QString VAbstractPattern::TagLabelRot     = QStringLiteral("rotation");
 
 const QString VAbstractPattern::AttrName        = QStringLiteral("name");
 const QString VAbstractPattern::AttrVisible     = QStringLiteral("visible");
@@ -1080,106 +1077,6 @@ QDate VAbstractPattern::GetCreationDate() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VAbstractPattern::GetLabelPosition() const
-{
-    QStringList qsl = UniqueTagText(TagLabelPos).split(",");
-    QPointF ptPos(0, 0);
-    if (qsl.count() == 2)
-    {
-        bool bOKX;
-        bool bOKY;
-        double fX = qsl[0].toDouble(&bOKX);
-        double fY = qsl[1].toDouble(&bOKY);
-        if (bOKX == true && bOKY == true)
-        {
-            ptPos.setX(fX);
-            ptPos.setY(fY);
-        }
-    }
-    return ptPos;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetLabelPosition(const QPointF& ptPos)
-{
-    CheckTagExists(TagLabelPos);
-    setTagText(TagLabelPos, QString::number(ptPos.x(), 'f', 3) + "," + QString::number(ptPos.y(), 'f', 3));
-    modified = true;
-    emit patternChanged(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QSizeF VAbstractPattern::GetLabelSize() const
-{
-    QStringList qsl = UniqueTagText(TagLabelSize).split(",");
-    QSizeF sz(0, 0);
-    if (qsl.count() == 2)
-    {
-        bool bOKW;
-        bool bOKH;
-        double fW = qsl[0].toDouble(&bOKW);
-        double fH = qsl[1].toDouble(&bOKH);
-        if (bOKW == true && bOKH == true)
-        {
-            sz.setWidth(fW);
-            sz.setHeight(fH);
-        }
-    }
-    return sz;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetLabelSize(QSizeF sz)
-{
-    CheckTagExists(TagLabelSize);
-    setTagText(TagLabelSize, QString::number(sz.width(), 'f', 3) + "," + QString::number(sz.height(), 'f', 3));
-    modified = true;
-    emit patternChanged(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VAbstractPattern::GetFontSize() const
-{
-    bool bOK;
-    int iFS = UniqueTagText(TagLabelFont).toInt(&bOK);
-    if (bOK == false)
-    {
-        iFS = 0;
-    }
-    return iFS;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetFontSize(int iFS)
-{
-    CheckTagExists(TagLabelFont);
-    setTagText(TagLabelFont, QString::number(iFS));
-    modified = true;
-    emit patternChanged(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VAbstractPattern::GetRotation() const
-{
-    bool bOK;
-    qreal dRot = UniqueTagText(TagLabelRot).toDouble(&bOK);
-    if (bOK == false)
-    {
-        dRot = 0;
-    }
-    return dRot;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetRotation(qreal dRot)
-{
-    CheckTagExists(TagLabelRot);
-    setTagText(TagLabelRot, QString::number(dRot, 'f', 3));
-    modified = true;
-    emit patternChanged(false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetImage() const
 {
     return UniqueTagText(TagImage);
@@ -1304,8 +1201,7 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     {
         const QStringList tags = QStringList() << TagUnit << TagImage << TagAuthor << TagDescription << TagNotes
                                          << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-                                            << TagCustomerName << TagCreationDate << TagLabelPos << TagLabelSize
-                                               << TagLabelFont << TagLabelRot;
+                                            << TagCustomerName << TagCreationDate;
         switch (tags.indexOf(tag))
         {
             case 0: //TagUnit
@@ -1369,27 +1265,6 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             case 10: // TagPatternName
             {
                 element = createElement(TagCreationDate);
-                break;
-            }
-            case 11:
-            {
-                element = createElement(TagLabelPos);
-                break;
-            }
-            case 12:
-            {
-                element = createElement(TagLabelSize);
-                break;
-            }
-            case 13:
-            {
-                element = createElement(TagLabelFont);
-                break;
-            }
-
-            case 14:
-            {
-                element = createElement(TagLabelRot);
                 break;
             }
 

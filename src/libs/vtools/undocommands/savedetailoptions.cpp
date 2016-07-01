@@ -31,6 +31,7 @@
 #include "../../vwidgets/vmaingraphicsview.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
 
 #include <QGraphicsView>
 
@@ -58,6 +59,7 @@ void SaveDetailOptions::undo()
         SaveDet(domElement, oldDet);
         doc->RemoveAllChildren(domElement);
         SavePatternPieceData(domElement, oldDet);
+        SavePatternInfo(domElement, oldDet);
         for (int i = 0; i < oldDet.CountNode(); ++i)
         {
            VToolDetail::AddNode(doc, domElement, oldDet.at(i));
@@ -83,6 +85,7 @@ void SaveDetailOptions::redo()
         SaveDet(domElement, newDet);
         doc->RemoveAllChildren(domElement);
         SavePatternPieceData(domElement, newDet);
+        SavePatternInfo(domElement, newDet);
 
         for (int i = 0; i < newDet.CountNode(); ++i)
         {
@@ -154,5 +157,20 @@ void SaveDetailOptions::SavePatternPieceData(QDomElement &domElement, const VDet
         doc->SetAttribute(domMCP, VAbstractPattern::AttrPlacement, int(mcp.m_ePlacement));
         domData.appendChild(domMCP);
     }
+    domElement.appendChild(domData);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void SaveDetailOptions::SavePatternInfo(QDomElement &domElement, const VDetail &det)
+{
+    QDomElement domData = doc->createElement(VAbstractPattern::TagPatternInfo);
+    const VPatternInfoGeometry& data = det.GetPatternInfo();
+    doc->SetAttribute(domData, AttrMx, data.GetPos().x());
+    doc->SetAttribute(domData, AttrMy, data.GetPos().y());
+    doc->SetAttribute(domData, VToolDetail::AttrWidth, data.GetLabelWidth());
+    doc->SetAttribute(domData, VToolDetail::AttrHeight, data.GetLabelHeight());
+    doc->SetAttribute(domData, VToolDetail::AttrFont, data.GetFontSize());
+    doc->SetAttribute(domData, VToolDetail::AttrRotation, data.GetRotation());
+
     domElement.appendChild(domData);
 }

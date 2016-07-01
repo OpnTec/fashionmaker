@@ -249,7 +249,7 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         }
         double dAng = 180*(GetAngle(pME->scenePos()) - m_dAngle)/M_PI;
         setRotation(m_dRotation + dAng);
-        emit SignalRotated(rotation());
+        //emit SignalRotated(rotation());
         Update();
     }
 }
