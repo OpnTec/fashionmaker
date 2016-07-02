@@ -62,6 +62,8 @@ protected:
      */
     virtual void     SaveData() Q_DECL_OVERRIDE;
     virtual void     CheckState() Q_DECL_OVERRIDE;
+private slots:
+    void             NameDetailChanged();
 private:
 
     /** @brief ui keeps information about user interface */

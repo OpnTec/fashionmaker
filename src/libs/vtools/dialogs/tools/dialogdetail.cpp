@@ -85,7 +85,7 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.checkBoxSeams, &QCheckBox::clicked, this, &DialogDetail::ClickedSeams);
     connect(ui.checkBoxClosed, &QCheckBox::clicked, this, &DialogDetail::ClickedClosed);
     connect(ui.checkBoxReverse, &QCheckBox::clicked, this, &DialogDetail::ClickedReverse);
-    connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NamePointChanged);
+    connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NameDetailChanged);
 
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
     connect(ui.toolButtonUp, &QToolButton::clicked, this, &DialogDetail::ScrollUp);
@@ -151,6 +151,27 @@ void DialogDetail::CheckState()
     {
         bApply->setEnabled(bOk->isEnabled());
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogDetail::NameDetailChanged()
+{
+    SCASSERT(labelEditNamePoint != nullptr);
+    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    if (edit)
+    {
+        if (edit->text().isEmpty())
+        {
+            flagName = false;
+            ChangeColor(labelEditNamePoint, Qt::red);
+        }
+        else
+        {
+            flagName = true;
+            ChangeColor(labelEditNamePoint, okColor);
+        }
+    }
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
