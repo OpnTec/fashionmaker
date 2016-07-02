@@ -81,8 +81,7 @@ const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
 VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                          VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), VNoBrushScalePathItem(parent), dialog(nullptr), sceneDetails(scene),
-      drawName(drawName), seamAllowance(new VNoBrushScalePathItem(this)),
-      dataLabel(new VTextGraphicsItem(this)), patternInfo(new VTextGraphicsItem(this))
+      drawName(drawName), seamAllowance(new VNoBrushScalePathItem(this))
 {
     VDetail detail = data->GetDetail(id);
     for (int i = 0; i< detail.CountNode(); ++i)
@@ -119,8 +118,6 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
 
-    qDebug() << "VToolDetail" << patternInfo;
-
     connect(scene, &VMainGraphicsScene::EnableToolMove, this, &VToolDetail::EnableToolMove);
     connect(scene, &VMainGraphicsScene::ItemClicked, this, &VToolDetail::ResetChildren);
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
@@ -133,11 +130,13 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     }
     setAcceptHoverEvents(true);
 
+    dataLabel = new VTextGraphicsItem(this);
     connect(dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMoveDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizeDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
 
+    patternInfo = new VTextGraphicsItem(this);
     connect(patternInfo, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMovePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationPattern);

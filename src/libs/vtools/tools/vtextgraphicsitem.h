@@ -92,6 +92,7 @@ private:
     bool                m_bReleased;
     QPointF             m_ptStartPos;
     QPointF             m_ptStart;
+    QPointF             m_ptRotCenter;
     QSizeF              m_szStart;
     double              m_dRotation;
     double              m_dAngle;

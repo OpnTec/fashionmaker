@@ -29,6 +29,7 @@
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QGraphicsView>
 #include <QTransform>
 #include <QDebug>
 
@@ -43,6 +44,7 @@
 #define MIN_FONT_SIZE               12
 #define MAX_FONT_SIZE               48
 #define SPACING                     2
+#define TOP_Z                       2
 
 //---------------------------------------------------------------------------------------------------------------------
 VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
@@ -55,7 +57,7 @@ VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_iMinH = MIN_H;
     SetSize(MIN_W, m_iMinH);
-    setZValue(2);
+    setZValue(TOP_Z);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -137,11 +139,10 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::Reset()
 {
-    qDebug() << "RESET" << m_eMode << m_liLines.count();
     m_eMode = mNormal;
     m_bReleased = false;
     Update();
-    setZValue(2);
+    setZValue(TOP_Z);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -206,6 +207,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
         m_ptStartPos = pos();
         m_ptStart = pME->scenePos();
         m_szStart = m_rectBoundingBox.size();
+        m_ptRotCenter = mapToScene(m_rectBoundingBox.center());
         m_dAngle = GetAngle(pME->scenePos());
         m_dRotation = rotation();
         if (m_eMode != mRotate)
@@ -219,9 +221,8 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
                 m_eMode = mMove;
             }
         }
-        setZValue(3);
+        setZValue(TOP_Z + 1);
         UpdateBox();
-        qDebug() << "PRESS" << m_eMode << m_liLines.count();
     }
 }
 
@@ -262,8 +263,6 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
         double dDist = fabs(pME->scenePos().x() - m_ptStart.x()) + fabs(pME->scenePos().y() - m_ptStart.y());
         bool bShort = (dDist < 2);
 
-        qDebug() << "RELEASE" << m_eMode << dDist << m_liLines.count();
-
         if (m_eMode == mMove || m_eMode == mResize)
         {   // when released in mMove or mResize mode
             if (bShort == true)
@@ -299,7 +298,6 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             }
         }
         m_bReleased = true;
-        qDebug() << "RELEASE finished" << m_eMode << m_liLines.count();
     }
 }
 
@@ -382,8 +380,8 @@ QStringList VTextGraphicsItem::SplitString(const QString &qs, qreal fW, const QF
 //---------------------------------------------------------------------------------------------------------------------
 double VTextGraphicsItem::GetAngle(QPointF pt) const
 {
-    double dX = pt.x() - m_ptStart.x();
-    double dY = pt.y() - m_ptStart.y();
+    double dX = pt.x() - m_ptRotCenter.x();
+    double dY = pt.y() - m_ptRotCenter.y();
 
     if (fabs(dX) < 1 && fabs(dY) < 1)
         return 0;
