@@ -143,7 +143,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::CheckLayout, [this](){
         if (pattern->DataDetails()->count() == 0)
         {
-            ActionDraw(true);
+            if(not ui->actionDraw->isChecked())
+            {
+                ActionDraw(true);
+            }
         }
     });
     connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
@@ -688,6 +691,7 @@ void MainWindow::ClosedDialogWithApply(int result)
             vtool->FullUpdateFromGuiApply();
         }
     }
+    SCASSERT(dialogTool != nullptr);
     QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(dialogTool->GetAssociatedTool());
     ui->view->itemClicked(tool);
     if (dialogTool->GetAssociatedTool() != nullptr)

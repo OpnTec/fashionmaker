@@ -928,8 +928,16 @@ void DialogTool::Build(const Tool &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTool::SetAssociatedTool(VAbstractTool *tool)
 {
-    this->associatedTool=tool;
-    SetToolId(tool->getId());
+    if (tool != nullptr)
+    {
+        associatedTool = tool;
+        SetToolId(tool->getId());
+    }
+    else
+    {
+        associatedTool = nullptr;
+        SetToolId(NULL_ID);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

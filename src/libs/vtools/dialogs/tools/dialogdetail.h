@@ -70,6 +70,8 @@ protected slots:
     void             Cancel();
     void             Remove();
 
+private slots:
+    void             NameDetailChanged();
 private:
 
     /** @brief ui keeps information about user interface */
