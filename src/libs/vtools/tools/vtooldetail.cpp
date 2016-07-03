@@ -134,15 +134,15 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     connect(dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMoveDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizeDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationDetail);
-    connect(dataLabel, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
+    //connect(dataLabel, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
 
     patternInfo = new VTextGraphicsItem(this);
     connect(patternInfo, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMovePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationPattern);
-    connect(patternInfo, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
-    connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
+    //connect(patternInfo, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
 
+    connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateLabel);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdatePatternInfo);
     UpdateLabel();
@@ -712,7 +712,17 @@ void VToolDetail::UpdateLabel()
             dataLabel->AddLine(tl);
         }
 
-        dataLabel->setPos(data.GetPos());
+        QPointF pt;
+        // check if center is inside
+        if (boundingRect().contains(data.GetPos() + QPointF(data.GetLabelWidth()/2, data.GetLabelHeight()/2)) == false)
+        {
+            pt = boundingRect().topLeft();
+        }
+        else
+        {
+            pt = data.GetPos();
+        }
+        dataLabel->setPos(pt);
         dataLabel->setRotation(data.GetRotation());
         dataLabel->Update();
         dataLabel->show();
@@ -775,7 +785,17 @@ void VToolDetail::UpdatePatternInfo()
     tl.m_qsText = qslDate.last();
     patternInfo->AddLine(tl);
 
-    patternInfo->setPos(geom.GetPos());
+    // check if center is inside
+    QPointF pt;
+    if (boundingRect().contains(geom.GetPos() + QPointF(geom.GetLabelWidth()/2, geom.GetLabelHeight()/2)) == false)
+    {
+        pt = boundingRect().topLeft();
+    }
+    else
+    {
+        pt = geom.GetPos();
+    }
+    patternInfo->setPos(pt);
     patternInfo->setRotation(geom.GetRotation());
     patternInfo->Update();
 }

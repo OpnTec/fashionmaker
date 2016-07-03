@@ -42,7 +42,7 @@
 #define MIN_W                       120
 #define MIN_H                       60
 #define MIN_FONT_SIZE               12
-#define MAX_FONT_SIZE               48
+#define MAX_FONT_SIZE               128
 #define SPACING                     2
 #define TOP_Z                       2
 
@@ -50,8 +50,6 @@
 VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
     : QGraphicsObject(pParent)
 {
-    setFlag(QGraphicsItem::ItemIsMovable, true);
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
     m_eMode = mNormal;
     m_bReleased = false;
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
@@ -172,12 +170,14 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
     if (fW < MIN_W || fH < m_iMinH)
         return;
 
+    m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_rectBoundingBox.setWidth(fW);
     m_rectBoundingBox.setHeight(fH);
     m_rectResize.setTopLeft(QPointF(fW - RESIZE_SQUARE, fH - RESIZE_SQUARE));
     m_rectResize.setWidth(RESIZE_SQUARE);
     m_rectResize.setHeight(RESIZE_SQUARE);
     setTransformOriginPoint(m_rectBoundingBox.center());
+    prepareGeometryChange();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
