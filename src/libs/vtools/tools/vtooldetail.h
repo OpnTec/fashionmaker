@@ -121,15 +121,15 @@ protected slots:
 private:
     Q_DISABLE_COPY(VToolDetail)
     /** @brief dialog dialog options. */
-    DialogTool         *dialog;
+    DialogTool                  *dialog;
 
     /** @brief sceneDetails pointer to the scene. */
-    VMainGraphicsScene *sceneDetails;
-    QString            drawName;
+    VMainGraphicsScene          *sceneDetails;
+    QString                      drawName;
 
-    VNoBrushScalePathItem *seamAllowance;
-    VTextGraphicsItem* dataLabel;
-    VTextGraphicsItem* patternInfo;
+    VNoBrushScalePathItem       *seamAllowance;
+    VTextGraphicsItem           *dataLabel;
+    VTextGraphicsItem           *patternInfo;
 
     VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                 VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem * parent = nullptr);
