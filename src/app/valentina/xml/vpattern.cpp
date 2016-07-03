@@ -705,6 +705,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
             }
         }
         VToolDetail::Create(id, detail, sceneDetail, this, data, parse, Source::FromFile);
+        SetVersion();
     }
     catch (const VExceptionBadId &e)
     {
