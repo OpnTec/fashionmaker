@@ -1849,7 +1849,6 @@ void MainWindow::CancelTool()
                 pointer->setChecked(false);
             }
             helpLabel->setText("");
-            ui->actionStopTool->setEnabled(true);
 
             // Crash: using CRTL+Z while using line tool.
             // related bug report:
@@ -1998,7 +1997,6 @@ void  MainWindow::ArrowTool()
     {
         pointer->setChecked(true);
     }
-    ui->actionStopTool->setEnabled(false);
     currentTool = Tool::Arrow;
     emit EnableItemMove(true);
     emit ItemsSelection(SelectionType::ByMouseRelease);
@@ -3691,7 +3689,6 @@ void MainWindow::CreateActions()
 {
     ui->setupUi(this);
 
-    connect(ui->actionStopTool, &QAction::triggered, this, &MainWindow::ArrowTool);
     connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ArrowTool);
     connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);
     connect(ui->actionDetails, &QAction::triggered, this, &MainWindow::ActionDetails);
