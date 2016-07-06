@@ -390,32 +390,6 @@
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
         <widget class="QWidget" name="widget" native="true">
-         <widget class="QLabel" name="labelEditName">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>40</y>
-            <width>101</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Name of detail:</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="lineEditName">
-          <property name="geometry">
-           <rect>
-            <x>110</x>
-            <y>40</y>
-            <width>151</width>
-            <height>23</height>
-           </rect>
-          </property>
-          <property name="maxLength">
-           <number>15</number>
-          </property>
-         </widget>
          <widget class="QListWidget" name="listWidgetMCP">
           <property name="geometry">
            <rect>
@@ -503,57 +477,71 @@
            </item>
           </layout>
          </widget>
-         <widget class="QLabel" name="label_5">
+         <widget class="QWidget" name="formLayoutWidget">
           <property name="geometry">
            <rect>
-            <x>9</x>
-            <y>9</y>
-            <width>40</width>
-            <height>16</height>
+            <x>0</x>
+            <y>0</y>
+            <width>271</width>
+            <height>61</height>
            </rect>
           </property>
-          <property name="text">
-           <string>Letter:</string>
-          </property>
+          <layout class="QFormLayout" name="formLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Letter:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEditLetter">
+             <property name="maxLength">
+              <number>3</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelEditName">
+             <property name="text">
+              <string>Name of detail:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="lineEditName">
+             <property name="maxLength">
+              <number>15</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-         <widget class="QLineEdit" name="lineEditLetter">
+         <widget class="QWidget" name="formLayoutWidget_2">
           <property name="geometry">
            <rect>
-            <x>110</x>
-            <y>10</y>
-            <width>151</width>
-            <height>23</height>
-           </rect>
-          </property>
-          <property name="maxLength">
-           <number>3</number>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBoxDetail">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
+            <x>0</x>
             <y>230</y>
-            <width>141</width>
-            <height>21</height>
+            <width>261</width>
+            <height>80</height>
            </rect>
           </property>
-          <property name="text">
-           <string>Detail label visible</string>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBoxPattern">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>260</y>
-            <width>141</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Pattern label visible</string>
-          </property>
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="checkBoxDetail">
+             <property name="text">
+              <string>Detail label visible</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="checkBoxPattern">
+             <property name="text">
+              <string>Pattern label visible</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </widget>
        </item>

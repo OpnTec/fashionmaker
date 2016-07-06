@@ -122,8 +122,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
             painter->setPen(Qt::black);
             painter->setBrush(Qt::black);
             painter->drawEllipse(
-                        m_rectBoundingBox.width()/2,
-                        m_rectBoundingBox.height()/2,
+                        QPointF(m_rectBoundingBox.width()/2, m_rectBoundingBox.height()/2),
                         ROTATE_CIRCLE,
                         ROTATE_CIRCLE
                         );
