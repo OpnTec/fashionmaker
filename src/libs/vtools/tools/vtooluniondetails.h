@@ -72,10 +72,10 @@ public:
     static void  AddToNewDetail(VMainGraphicsScene *scene, VAbstractPattern *doc, VContainer *data,
                                 VDetail &newDetail, const VDetail &det, const int &i, const quint32 &idTool,
                                 QVector<quint32> &children, const QString &drawName, const qreal &dx = 0,
-                                const qreal &dy = 0, const quint32 &pRotate = 0, const qreal &angle = 0);
+                                const qreal &dy = 0, const quint32 &pRotate = NULL_ID, const qreal &angle = 0);
     static void  UpdatePoints(VContainer *data, const VDetail &det, const int &i,
                               QVector<quint32> &children, const qreal &dx = 0, const qreal &dy = 0,
-                              const quint32 &pRotate = 0, const qreal &angle = 0);
+                              const quint32 &pRotate = NULL_ID, const qreal &angle = 0);
     static void  BiasRotatePoint(VPointF *point, const qreal &dx, const qreal &dy, const QPointF &pRotate,
                                  const qreal &angle);
     virtual QString getTagName() const Q_DECL_OVERRIDE;

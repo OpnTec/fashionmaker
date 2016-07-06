@@ -87,6 +87,7 @@ private:
     VDetail          CreateDetail() const;
     void             ValidObjects(bool value);
     void             EnableObjectGUI(bool value);
+    quint32          RowId(int i) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
