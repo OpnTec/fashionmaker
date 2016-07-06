@@ -658,6 +658,8 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                 }
                 else if (element.tagName() == TagData)
                 {
+                    QString qsVisible = element.attribute(AttrVisible, "1");
+                    detail.GetPatternPieceData().SetVisible(qsVisible.toInt() != 0);
                     QString qsLetter = element.attribute(AttrLetter, "");
                     detail.GetPatternPieceData().SetLetter(qsLetter);
                     QPointF ptPos;
@@ -687,6 +689,7 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                 }
                 else if (element.tagName() == TagPatternInfo)
                 {
+                    detail.GetPatternInfo().SetVisible(element.attribute(AttrVisible, "1").toInt() != 0);
                     QPointF ptPos;
                     ptPos.setX(element.attribute(AttrMx, "0").toDouble());
                     ptPos.setY(element.attribute(AttrMy, "0").toDouble());

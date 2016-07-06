@@ -353,6 +353,7 @@ void VToolDetail::AddToFile()
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPatternPieceData& data = detail.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? 1:0);
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
@@ -374,6 +375,7 @@ void VToolDetail::AddToFile()
 
     domData = doc->createElement(VAbstractPattern::TagPatternInfo);
     const VPatternInfoGeometry& geom = detail.GetPatternInfo();
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true? 1:0);
     doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, geom.GetLabelWidth());
@@ -409,6 +411,8 @@ void VToolDetail::RefreshDataInFile()
 
         QDomElement domData = doc->createElement(VAbstractPattern::TagData);
         const VPatternPieceData& data = det.GetPatternPieceData();
+        doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
+        doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible() == true? 1:0);
         doc->SetAttribute(domData, AttrMx, data.GetPos().x());
         doc->SetAttribute(domData, AttrMy, data.GetPos().y());
         doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
@@ -430,6 +434,7 @@ void VToolDetail::RefreshDataInFile()
 
         domData = doc->createElement(VAbstractPattern::TagPatternInfo);
         const VPatternInfoGeometry& geom = det.GetPatternInfo();
+        doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible() == true? 1:0);
         doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
         doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
         doc->SetAttribute(domData, AttrWidth, geom.GetLabelWidth());
@@ -669,9 +674,9 @@ void VToolDetail::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void VToolDetail::UpdateLabel()
 {
     const VDetail detail = VAbstractTool::data.GetDetail(id);
-
     const VPatternPieceData& data = detail.GetPatternPieceData();
-    if (data.GetLetter().isEmpty() == false || detail.getName().isEmpty() == false || data.GetMCPCount() > 0)
+
+    if (data.IsVisible() == true)
     {
         //dataLabel->Reset();
 
@@ -736,62 +741,69 @@ void VToolDetail::UpdatePatternInfo()
     const VDetail detail = VAbstractTool::data.GetDetail(id);
     const VPatternInfoGeometry& geom = detail.GetPatternInfo();
 
-    //patternInfo->Reset();
-    QFont fnt = qApp->font();
-    int iFS = geom.GetFontSize();
-    if (iFS < MIN_FONT_SIZE)
+    if (geom.IsVisible() == true)
     {
-        iFS = MIN_FONT_SIZE;
-    }
-    fnt.setPixelSize(iFS);
-    patternInfo->SetFont(fnt);
-    patternInfo->SetSize(geom.GetLabelWidth(), geom.GetLabelHeight());
-    patternInfo->Clear();
-    TextLine tl;
+        QFont fnt = qApp->font();
+        int iFS = geom.GetFontSize();
+        if (iFS < MIN_FONT_SIZE)
+        {
+            iFS = MIN_FONT_SIZE;
+        }
+        fnt.setPixelSize(iFS);
+        patternInfo->SetFont(fnt);
+        patternInfo->SetSize(geom.GetLabelWidth(), geom.GetLabelHeight());
+        patternInfo->Clear();
+        TextLine tl;
 
-    // Company name
-    tl.m_qsText = doc->GetCompanyName();
-    tl.m_eAlign = Qt::AlignCenter;
-    tl.m_eFontWeight = QFont::DemiBold;
-    tl.m_eStyle = QFont::StyleNormal;
-    tl.m_iFontSize = 4;
-    patternInfo->AddLine(tl);
+        // Company name
+        tl.m_qsText = doc->GetCompanyName();
+        tl.m_eAlign = Qt::AlignCenter;
+        tl.m_eFontWeight = QFont::DemiBold;
+        tl.m_eStyle = QFont::StyleNormal;
+        tl.m_iFontSize = 4;
+        patternInfo->AddLine(tl);
 
-    // Pattern name
-    tl.m_qsText = doc->GetPatternName();
-    tl.m_eFontWeight = QFont::Normal;
-    tl.m_iFontSize = 2;
-    patternInfo->AddLine(tl);
+        // Pattern name
+        tl.m_qsText = doc->GetPatternName();
+        tl.m_eFontWeight = QFont::Normal;
+        tl.m_iFontSize = 2;
+        patternInfo->AddLine(tl);
 
-    // Pattern number
-    tl.m_qsText = doc->GetPatternNumber();
-    tl.m_iFontSize = 0;
-    tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
-    patternInfo->AddLine(tl);
+        // Pattern number
+        tl.m_qsText = doc->GetPatternNumber();
+        tl.m_iFontSize = 0;
+        tl.m_eAlign = Qt::AlignLeft | Qt::AlignVCenter;
+        patternInfo->AddLine(tl);
 
-    // Customer name
-    tl.m_qsText = doc->GetCustomerName();
-    tl.m_eStyle = QFont::StyleItalic;
-    patternInfo->AddLine(tl);
+        // Customer name
+        tl.m_qsText = doc->GetCustomerName();
+        tl.m_eStyle = QFont::StyleItalic;
+        patternInfo->AddLine(tl);
 
-    // Creation date
-    QStringList qslDate = doc->GetCreationDate().toString(Qt::SystemLocaleLongDate).split(", ");
-    tl.m_qsText = qslDate.last();
-    patternInfo->AddLine(tl);
+        // Creation date
+        QStringList qslDate = doc->GetCreationDate().toString(Qt::SystemLocaleLongDate).split(", ");
+        tl.m_qsText = qslDate.last();
+        patternInfo->AddLine(tl);
 
-    // check if center is inside
-    QPointF pt;
-    if (boundingRect().contains(geom.GetPos() + QPointF(geom.GetLabelWidth()/2, geom.GetLabelHeight()/2)) == false)
-    {
-        pt = boundingRect().topLeft();
+        // check if center is inside
+        QPointF pt;
+        if (boundingRect().contains(geom.GetPos() + QPointF(geom.GetLabelWidth()/2, geom.GetLabelHeight()/2)) == false)
+        {
+            pt = boundingRect().topLeft();
+        }
+        else
+        {
+            pt = geom.GetPos();
+        }
+        patternInfo->setPos(pt);
+        patternInfo->setRotation(geom.GetRotation());
+        patternInfo->Update();
+        patternInfo->show();
     }
     else
     {
-        pt = geom.GetPos();
+        patternInfo->hide();
     }
-    patternInfo->setPos(pt);
-    patternInfo->setRotation(geom.GetRotation());
-    patternInfo->Update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

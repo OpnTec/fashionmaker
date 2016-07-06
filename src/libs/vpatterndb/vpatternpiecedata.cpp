@@ -36,7 +36,7 @@ MaterialCutPlacement::MaterialCutPlacement()
 //---------------------------------------------------------------------------------------------------------------------
 VPatternPieceData::VPatternPieceData()
     :m_qsLetter(), m_conMCP(), m_ptPos(0, 0), m_dLabelWidth(0), m_dLabelHeight(0),
-    m_iFontSize(MIN_FONT_SIZE), m_dRotation(0)
+    m_iFontSize(MIN_FONT_SIZE), m_dRotation(0), m_bVisible(true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -167,6 +167,18 @@ qreal VPatternPieceData::GetRotation() const
 void VPatternPieceData::SetRotation(qreal dRot)
 {
     m_dRotation = dRot;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPatternPieceData::IsVisible() const
+{
+    return m_bVisible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternPieceData::SetVisible(bool bVal)
+{
+    m_bVisible = bVal;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

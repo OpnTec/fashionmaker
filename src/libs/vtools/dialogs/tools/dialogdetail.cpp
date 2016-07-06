@@ -372,8 +372,12 @@ VDetail DialogDetail::CreateDetail() const
     detail.GetPatternPieceData().SetLabelHeight(m_oldData.GetLabelHeight());
     detail.GetPatternPieceData().SetFontSize(m_oldData.GetFontSize());
     detail.GetPatternPieceData().SetRotation(m_oldData.GetRotation());
+    detail.GetPatternPieceData().SetVisible(ui.checkBoxDetail->isChecked());
+
+    qDebug() << "DD VISIBLE" << detail.GetPatternPieceData().IsVisible();
 
     detail.GetPatternInfo() = m_oldGeom;
+    detail.GetPatternInfo().SetVisible(ui.checkBoxPattern->isChecked());
 
     return detail;
 }
@@ -433,6 +437,8 @@ void DialogDetail::setDetail(const VDetail &value)
     ui.toolButtonDelete->setEnabled(true);
 
     ui.lineEditLetter->setText(detail.GetPatternPieceData().GetLetter());
+    ui.checkBoxDetail->setChecked(detail.GetPatternPieceData().IsVisible());
+    ui.checkBoxPattern->setChecked(detail.GetPatternInfo().IsVisible());
 
     m_conMCP.clear();
     for (int i = 0; i < detail.GetPatternPieceData().GetMCPCount(); ++i)

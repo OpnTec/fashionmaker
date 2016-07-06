@@ -529,6 +529,32 @@
            <number>3</number>
           </property>
          </widget>
+         <widget class="QCheckBox" name="checkBoxDetail">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>230</y>
+            <width>141</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Detail label visible</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBoxPattern">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>260</y>
+            <width>141</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Pattern label visible</string>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>

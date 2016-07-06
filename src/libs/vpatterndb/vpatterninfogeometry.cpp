@@ -29,8 +29,9 @@
 #include "vpatterninfogeometry.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternInfoGeometry::VPatternInfoGeometry() :
-    m_ptPos(0, 0)
+VPatternInfoGeometry::VPatternInfoGeometry()
+    :m_ptPos(0, 0), m_dLabelWidth(0), m_dLabelHeight(0), m_iFontSize(MIN_FONT_SIZE),
+      m_dRotation(0), m_bVisible(true)
 {
     m_iFontSize = MIN_FONT_SIZE;
     // 0 means unknown width
@@ -106,3 +107,16 @@ void VPatternInfoGeometry::SetRotation(qreal dRot)
     m_dRotation = dRot;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+bool VPatternInfoGeometry::IsVisible() const
+{
+    return m_bVisible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternInfoGeometry::SetVisible(bool bVal)
+{
+    m_bVisible = bVal;
+}
+
+//---------------------------------------------------------------------------------------------------------------------

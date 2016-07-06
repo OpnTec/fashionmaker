@@ -95,6 +95,8 @@ public:
     void                        SetFontSize(int iSize);
     qreal                       GetRotation() const;
     void                        SetRotation(qreal dRot);
+    bool                        IsVisible() const;
+    void                        SetVisible(bool bVal);
 
 private:
     /** @brief Pattern piece letter (should be no more than 3 letters)
@@ -118,6 +120,10 @@ private:
     /** @brief Label rotation
      */
     qreal               m_dRotation;
+    /** @brief Visibility flag
+     */
+    bool                m_bVisible;
+
 };
 
 #endif // VPATTERNPIECEDATA_H

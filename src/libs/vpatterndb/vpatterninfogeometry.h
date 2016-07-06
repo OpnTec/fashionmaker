@@ -50,6 +50,8 @@ public:
     void                        SetFontSize(int iSize);
     qreal                       GetRotation() const;
     void                        SetRotation(qreal dRot);
+    bool                        IsVisible() const;
+    void                        SetVisible(bool bVal);
 
 private:
     QPointF             m_ptPos;
@@ -65,6 +67,10 @@ private:
     /** @brief Label rotation
      */
     qreal               m_dRotation;
+    /** @brief Visibility flag
+     */
+    bool                m_bVisible;
+
 };
 
 #endif // VPATTERNINFOGEOMETRY_H
