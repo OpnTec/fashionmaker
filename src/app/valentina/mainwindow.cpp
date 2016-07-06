@@ -1703,7 +1703,6 @@ void MainWindow::ToolBarDraws()
     connect(comboBoxDraws,  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             this, &MainWindow::currentPPChanged);
 
-    ui->toolBarDraws->addAction(ui->actionOptionDraw);
     connect(ui->actionOptionDraw, &QAction::triggered, this, &MainWindow::DrawOption);
 }
 
