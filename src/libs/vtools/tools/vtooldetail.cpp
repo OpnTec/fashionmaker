@@ -140,8 +140,7 @@ void VToolDetail::setDialog()
     SCASSERT(dialog != nullptr);
     DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
     SCASSERT(dialogTool != nullptr);
-    VDetail detail = VAbstractTool::data.GetDetail(id);
-    dialogTool->setDetail(detail);
+    dialogTool->setDetail(VAbstractTool::data.GetDetail(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -298,8 +297,8 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
         SCASSERT(dialog != nullptr);
         DialogDetail *dialogTool = qobject_cast<DialogDetail*>(dialog);
         SCASSERT(dialogTool != nullptr);
-        VDetail newDet = dialogTool->getDetail();
-        VDetail oldDet = VAbstractTool::data.GetDetail(id);
+        const VDetail newDet = dialogTool->getDetail();
+        const VDetail oldDet = VAbstractTool::data.GetDetail(id);
 
         SaveDetailOptions *saveCommand = new SaveDetailOptions(oldDet, newDet, doc, id, this->scene());
         connect(saveCommand, &SaveDetailOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -315,7 +314,7 @@ void VToolDetail::FullUpdateFromGuiOk(int result)
  */
 void VToolDetail::AddToFile()
 {
-    VDetail detail = VAbstractTool::data.GetDetail(id);
+    const VDetail detail = VAbstractTool::data.GetDetail(id);
     QDomElement domElement = doc->createElement(getTagName());
 
     doc->SetAttribute(domElement, VDomDocument::AttrId, id);
