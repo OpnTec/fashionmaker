@@ -112,165 +112,144 @@ void VToolUnionDetails::AddToNewDetail(VMainGraphicsScene *scene, VAbstractPatte
     {
         case (Tool::NodePoint):
         {
-            if ( qFuzzyIsNull(dx) && qFuzzyIsNull(dy) && (pRotate == 0))
+            VPointF *point = new VPointF(*data->GeometricObject<VPointF>(det.at(i).getId()));
+            point->setMode(Draw::Modeling);
+
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
-                id = det.at(i).getId();
-            }
-            else
-            {
-                VPointF *point = new VPointF(*data->GeometricObject<VPointF>(det.at(i).getId()));
-                point->setMode(Draw::Modeling);
                 BiasRotatePoint(point, dx, dy, *data->GeometricObject<VPointF>(pRotate), angle);
-                idObject = data->AddGObject(point);
-                children.append(idObject);
-                VPointF *point1 = new VPointF(*point);
-                point1->setMode(Draw::Modeling);
-                id = data->AddGObject(point1);
-                VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, drawName,
-                                   idTool);
             }
+
+            idObject = data->AddGObject(point);
+            children.append(idObject);
+            VPointF *point1 = new VPointF(*point);
+            point1->setMode(Draw::Modeling);
+            id = data->AddGObject(point1);
+            VNodePoint::Create(doc, data, scene, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
         }
         break;
         case (Tool::NodeArc):
         {
-            if (qFuzzyIsNull(dx) && qFuzzyIsNull(dy) && pRotate == 0)
+            const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
+            VPointF p1 = VPointF(arc->GetP1(), "A", 0, 0);
+            VPointF p2 = VPointF(arc->GetP2(), "A", 0, 0);
+            VPointF *center = new VPointF(arc->GetCenter());
+
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
-                id = det.at(i).getId();
-            }
-            else
-            {
-                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
-                const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
-                VPointF p1 = VPointF(arc->GetP1(), "A", 0, 0);
                 BiasRotatePoint(&p1, dx, dy, p, angle);
-                VPointF p2 = VPointF(arc->GetP2(), "A", 0, 0);
                 BiasRotatePoint(&p2, dx, dy, p, angle);
-                VPointF *center = new VPointF(arc->GetCenter());
                 BiasRotatePoint(center, dx, dy, p, angle);
-
-                QLineF l1(*center, p1);
-                QLineF l2(*center, p2);
-                center->setMode(Draw::Modeling);
-                quint32 idCenter = data->AddGObject(center);
-                Q_UNUSED(idCenter);
-                VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(),
-                                 l1.angle(), QString().setNum(l1.angle()), l2.angle(),
-                                 QString().setNum(l2.angle()));
-                arc1->setMode(Draw::Modeling);
-                idObject = data->AddGObject(arc1);
-                children.append(idObject);
-
-                VArc *arc2 = new VArc(*arc1);
-                arc2->setMode(Draw::Modeling);
-                id = data->AddGObject(arc2);
-
-                VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
             }
+
+            QLineF l1(*center, p1);
+            QLineF l2(*center, p2);
+            center->setMode(Draw::Modeling);
+            quint32 idCenter = data->AddGObject(center);
+            Q_UNUSED(idCenter);
+            VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
+                                  QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
+            arc1->setMode(Draw::Modeling);
+            idObject = data->AddGObject(arc1);
+            children.append(idObject);
+
+            VArc *arc2 = new VArc(*arc1);
+            arc2->setMode(Draw::Modeling);
+            id = data->AddGObject(arc2);
+
+            VNodeArc::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
         }
         break;
         case (Tool::NodeSpline):
         {
-            if (qFuzzyIsNull(dx) && qFuzzyIsNull(dy) && pRotate == 0)
-            {
-                id = det.at(i).getId();
-            }
-            else
-            {
-                const QSharedPointer<VAbstractCubicBezier> spline =
-                        data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
+            const QSharedPointer<VAbstractCubicBezier> spline =
+                    data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
 
-                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
-                VPointF *p1 = new VPointF(spline->GetP1());
+            const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+            VPointF *p1 = new VPointF(spline->GetP1());
+            VPointF p2 = VPointF(spline->GetP2());
+            VPointF p3 = VPointF(spline->GetP3());
+            VPointF *p4 = new VPointF(spline->GetP4());
+
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
+            {
                 BiasRotatePoint(p1, dx, dy, p, angle);
-
-                VPointF p2 = VPointF(spline->GetP2());
                 BiasRotatePoint(&p2, dx, dy, p, angle);
-
-                VPointF p3 = VPointF(spline->GetP3());
                 BiasRotatePoint(&p3, dx, dy, p, angle);
-
-                VPointF *p4 = new VPointF(spline->GetP4());
                 BiasRotatePoint(p4, dx, dy, p, angle);
-
-                VSpline *spl = new VSpline(*p1, p2, p3, *p4, 0, Draw::Modeling);
-                idObject = data->AddGObject(spl);
-                children.append(idObject);
-
-                VSpline *spl1 = new VSpline(*spl);
-                spl1->setMode(Draw::Modeling);
-                id = data->AddGObject(spl1);
-                VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
-
-                delete p4;
-                delete p1;
             }
+
+            VSpline *spl = new VSpline(*p1, p2, p3, *p4, 0, Draw::Modeling);
+            idObject = data->AddGObject(spl);
+            children.append(idObject);
+
+            VSpline *spl1 = new VSpline(*spl);
+            spl1->setMode(Draw::Modeling);
+            id = data->AddGObject(spl1);
+            VNodeSpline::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
+
+            delete p4;
+            delete p1;
         }
         break;
         case (Tool::NodeSplinePath):
         {
-            if (qFuzzyIsNull(dx) && qFuzzyIsNull(dy) && pRotate == 0)
+            VSplinePath *path = new VSplinePath();
+            path->setMode(Draw::Modeling);
+            const QSharedPointer<VAbstractCubicBezierPath> splinePath =
+                    data->GeometricObject<VAbstractCubicBezierPath>(det.at(i).getId());
+            for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
             {
-                id = det.at(i).getId();
-            }
-            else
-            {
-                VSplinePath *path = new VSplinePath();
-                path->setMode(Draw::Modeling);
-                const QSharedPointer<VAbstractCubicBezierPath> splinePath =
-                        data->GeometricObject<VAbstractCubicBezierPath>(det.at(i).getId());
-                for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
+                const VSpline spline = splinePath->GetSpline(i);
+
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+                VPointF *p1 = new VPointF(spline.GetP1());
+                VPointF p2 = VPointF(spline.GetP2());
+                VPointF p3 = VPointF(spline.GetP3());
+                VPointF *p4 = new VPointF(spline.GetP4());
+                if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
                 {
-                    const VSpline spline = splinePath->GetSpline(i);
-
-                    const QPointF p = *data->GeometricObject<VPointF>(pRotate);
-                    VPointF *p1 = new VPointF(spline.GetP1());
                     BiasRotatePoint(p1, dx, dy, p, angle);
-
-                    VPointF p2 = VPointF(spline.GetP2());
                     BiasRotatePoint(&p2, dx, dy, p, angle);
-
-                    VPointF p3 = VPointF(spline.GetP3());
                     BiasRotatePoint(&p3, dx, dy, p, angle);
-
-                    VPointF *p4 = new VPointF(spline.GetP4());
                     BiasRotatePoint(p4, dx, dy, p, angle);
-
-                    VSpline spl = VSpline(*p1, p2, p3, *p4);
-                    if (i==1)
-                    {
-                        const qreal angle1 = spl.GetStartAngle()+180;
-                        const QString angle1F = QString().number(angle1);
-
-                        path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
-                                                  0, "0", spline.GetC1Length(), spline.GetC1LengthFormula()));
-                    }
-
-                    const qreal angle2 = spl.GetEndAngle()+180;
-                    const QString angle2F = QString().number(angle2);
-                    qreal pL2 = 0;
-                    QString pL2F("0");
-                    if (i+1 <= splinePath->CountSubSpl())
-                    {
-                        const VSpline nextSpline = splinePath->GetSpline(i+1);
-                        pL2 = nextSpline.GetC1Length();
-                        pL2F = nextSpline.GetC1LengthFormula();
-                    }
-
-                    path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
-                                              spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
-
-                    delete p4;
-                    delete p1;
                 }
-                idObject = data->AddGObject(path);
-                children.append(idObject);
 
-                VSplinePath *path1 = new VSplinePath(*path);
-                path1->setMode(Draw::Modeling);
-                id = data->AddGObject(path1);
-                VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName,
-                                        idTool);
+                VSpline spl = VSpline(*p1, p2, p3, *p4);
+                if (i==1)
+                {
+                    const qreal angle1 = spl.GetStartAngle()+180;
+                    const QString angle1F = QString().number(angle1);
+
+                    path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
+                                              0, "0", spline.GetC1Length(), spline.GetC1LengthFormula()));
+                }
+
+                const qreal angle2 = spl.GetEndAngle()+180;
+                const QString angle2F = QString().number(angle2);
+                qreal pL2 = 0;
+                QString pL2F("0");
+                if (i+1 <= splinePath->CountSubSpl())
+                {
+                    const VSpline nextSpline = splinePath->GetSpline(i+1);
+                    pL2 = nextSpline.GetC1Length();
+                    pL2F = nextSpline.GetC1LengthFormula();
+                }
+
+                path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
+                                          spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
+
+                delete p4;
+                delete p1;
             }
+            idObject = data->AddGObject(path);
+            children.append(idObject);
+
+            VSplinePath *path1 = new VSplinePath(*path);
+            path1->setMode(Draw::Modeling);
+            id = data->AddGObject(path1);
+            VNodeSplinePath::Create(doc, data, id, idObject, Document::FullParse, Source::FromGui, drawName, idTool);
         }
         break;
         default:
@@ -301,124 +280,119 @@ void VToolUnionDetails::UpdatePoints(VContainer *data, const VDetail &det, const
     {
         case (Tool::NodePoint):
         {
-            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
+            VPointF *point = new VPointF(*data->GeometricObject<VPointF>(det.at(i).getId()));
+            point->setMode(Draw::Modeling);
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
-                VPointF *point = new VPointF(*data->GeometricObject<VPointF>(det.at(i).getId()));
-                point->setMode(Draw::Modeling);
                 BiasRotatePoint(point, dx, dy, *data->GeometricObject<VPointF>(pRotate), angle);
-                data->UpdateGObject(TakeNextId(children), point);
             }
+            data->UpdateGObject(TakeNextId(children), point);
         }
         break;
         case (Tool::NodeArc):
         {
-            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
+            const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+            const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
+            VPointF p1 = VPointF(arc->GetP1());
+            VPointF p2 = VPointF(arc->GetP2());
+            VPointF *center = new VPointF(arc->GetCenter());
+
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
-                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
-                const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(det.at(i).getId());
-                VPointF p1 = VPointF(arc->GetP1());
                 BiasRotatePoint(&p1, dx, dy, p, angle);
-
-                VPointF p2 = VPointF(arc->GetP2());
                 BiasRotatePoint(&p2, dx, dy, p, angle);
-
-                VPointF *center = new VPointF(arc->GetCenter());
                 BiasRotatePoint(center, dx, dy, p, angle);
-
-                QLineF l1(*center, p1);
-                QLineF l2(*center, p2);
-
-                VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
-                                     QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
-                arc1->setMode(Draw::Modeling);
-                data->UpdateGObject(TakeNextId(children), arc1);
-                delete center;
             }
+
+            QLineF l1(*center, p1);
+            QLineF l2(*center, p2);
+
+            VArc *arc1 = new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
+                                  QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
+            arc1->setMode(Draw::Modeling);
+            data->UpdateGObject(TakeNextId(children), arc1);
+            delete center;
         }
         break;
         case (Tool::NodeSpline):
         {
-            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
+            const QSharedPointer<VAbstractCubicBezier> spline =
+                    data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
+
+            const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+            VPointF *p1 = new VPointF(spline->GetP1());
+            VPointF p2 = VPointF(spline->GetP2());
+            VPointF p3 = VPointF(spline->GetP3());
+            VPointF *p4 = new VPointF(spline->GetP4());
+
+            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
             {
-                const QSharedPointer<VAbstractCubicBezier> spline =
-                        data->GeometricObject<VAbstractCubicBezier>(det.at(i).getId());
-
-                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
-                VPointF *p1 = new VPointF(spline->GetP1());
                 BiasRotatePoint(p1, dx, dy, p, angle);
-
-                VPointF p2 = VPointF(spline->GetP2());
                 BiasRotatePoint(&p2, dx, dy, p, angle);
-
-                VPointF p3 = VPointF(spline->GetP3());
                 BiasRotatePoint(&p3, dx, dy, p, angle);
-
-                VPointF *p4 = new VPointF(spline->GetP4());
                 BiasRotatePoint(p4, dx, dy, p, angle);
-
-                VSpline *spl = new VSpline(*p1, p2, p3, *p4, 0, Draw::Modeling);
-                data->UpdateGObject(TakeNextId(children), spl);
-                delete p1;
-                delete p4;
             }
+
+            VSpline *spl = new VSpline(*p1, p2, p3, *p4, 0, Draw::Modeling);
+            data->UpdateGObject(TakeNextId(children), spl);
+            delete p1;
+            delete p4;
         }
         break;
         case (Tool::NodeSplinePath):
         {
-            if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != 0)
+            VSplinePath *path = new VSplinePath();
+            path->setMode(Draw::Modeling);
+            const QSharedPointer<VAbstractCubicBezierPath> splinePath =
+                    data->GeometricObject<VAbstractCubicBezierPath>(det.at(i).getId());
+            SCASSERT(splinePath != nullptr);
+            for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
             {
-                VSplinePath *path = new VSplinePath();
-                path->setMode(Draw::Modeling);
-                const QSharedPointer<VAbstractCubicBezierPath> splinePath =
-                        data->GeometricObject<VAbstractCubicBezierPath>(det.at(i).getId());
-                SCASSERT(splinePath != nullptr);
-                for (qint32 i = 1; i <= splinePath->CountSubSpl(); ++i)
+                const VSpline spline = splinePath->GetSpline(i);
+
+                const QPointF p = *data->GeometricObject<VPointF>(pRotate);
+                VPointF *p1 = new VPointF(spline.GetP1());
+                VPointF p2 = VPointF(spline.GetP2());
+                VPointF p3 = VPointF(spline.GetP3());
+                VPointF *p4 = new VPointF(spline.GetP4());
+
+                if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
                 {
-                    const VSpline spline = splinePath->GetSpline(i);
-
-                    const QPointF p = *data->GeometricObject<VPointF>(pRotate);
-                    VPointF *p1 = new VPointF(spline.GetP1());
                     BiasRotatePoint(p1, dx, dy, p, angle);
-
-                    VPointF p2 = VPointF(spline.GetP2());
                     BiasRotatePoint(&p2, dx, dy, p, angle);
-
-                    VPointF p3 = VPointF(spline.GetP3());
                     BiasRotatePoint(&p3, dx, dy, p, angle);
-
-                    VPointF *p4 = new VPointF(spline.GetP4());
                     BiasRotatePoint(p4, dx, dy, p, angle);
-
-                    VSpline spl = VSpline(*p1, p2, p3, *p4);
-                    if (i==1)
-                    {
-                        const qreal angle1 = spl.GetStartAngle()+180;
-                        const QString angle1F = QString().number(angle1);
-
-                        path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
-                                                  0, "0", spline.GetC1Length(), spline.GetC1LengthFormula()));
-                    }
-
-                    const qreal angle2 = spl.GetEndAngle()+180;
-                    const QString angle2F = QString().number(angle2);
-
-                    qreal pL2 = 0;
-                    QString pL2F("0");
-                    if (i+1 <= splinePath->CountSubSpl())
-                    {
-                        const VSpline nextSpline = splinePath->GetSpline(i+1);
-                        pL2 = nextSpline.GetC1Length();
-                        pL2F = nextSpline.GetC1LengthFormula();
-                    }
-
-                    path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
-                                              spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
-
-                    delete p1;
-                    delete p4;
                 }
-                data->UpdateGObject(TakeNextId(children), path);
+
+                VSpline spl = VSpline(*p1, p2, p3, *p4);
+                if (i==1)
+                {
+                    const qreal angle1 = spl.GetStartAngle()+180;
+                    const QString angle1F = QString().number(angle1);
+
+                    path->append(VSplinePoint(*p1, angle1, angle1F, spl.GetStartAngle(), spl.GetStartAngleFormula(),
+                                              0, "0", spline.GetC1Length(), spline.GetC1LengthFormula()));
+                }
+
+                const qreal angle2 = spl.GetEndAngle()+180;
+                const QString angle2F = QString().number(angle2);
+
+                qreal pL2 = 0;
+                QString pL2F("0");
+                if (i+1 <= splinePath->CountSubSpl())
+                {
+                    const VSpline nextSpline = splinePath->GetSpline(i+1);
+                    pL2 = nextSpline.GetC1Length();
+                    pL2F = nextSpline.GetC1LengthFormula();
+                }
+
+                path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
+                                          spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
+
+                delete p1;
+                delete p4;
             }
+            data->UpdateGObject(TakeNextId(children), path);
         }
         break;
         default:
@@ -671,11 +645,17 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
             qint32 i = 0;
             do
             {
-                //UpdatePoints(data, d1.RemoveEdge(indexD1), i, children);
-                ++i;
-                if (i > d1.indexOfNode(det1p1.getId()))
+                // This check need for backward compatibility
+                // Remove it if min version is 0.3.2
+                // Instead:
+                // UpdatePoints(data, d1.RemoveEdge(indexD1), i, children);
+                if (children.size() != countNodeD2)
                 {
-                    const int childrenCount = children.size();
+                    UpdatePoints(data, d1.RemoveEdge(indexD1), i, children);
+                }
+                ++i;
+                if (i > d1.indexOfNode(det1p1.getId()) && pointsD2 < countNodeD2-1)
+                {
                     VDetail d2REdge = d2.RemoveEdge(indexD2);
                     qint32 j = 0;
                     FindIndexJ(pointsD2, d2, indexD2, j);
@@ -688,8 +668,13 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                         UpdatePoints(data, d2REdge, j, children, dx, dy, det1p1.getId(), angle);
                         ++pointsD2;
                         ++j;
-                    } while (pointsD2 < childrenCount);
-                    break;
+                    } while (pointsD2 < countNodeD2-1);
+                    // This check need for backward compatibility
+                    // Remove it if min version is 0.3.2
+                    if (children.size() == countNodeD2)
+                    {
+                        break;
+                    }
                 }
             } while (i<countNodeD1);
         }

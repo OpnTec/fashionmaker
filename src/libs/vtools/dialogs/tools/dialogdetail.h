@@ -86,6 +86,15 @@ private:
     /** @brief closed keep option about equdistant (closed or not) */
     bool             closed;
     bool             flagWidth;
+    bool             m_bAddMode;
+
+    QStringList      m_qslMaterials;
+    QStringList      m_qslPlacements;
+    // temporary container for Material/Cut/Placement 3-tuples
+    MCPContainer     m_conMCP;
+    QPointF          m_ptPos;
+
+
     bool             DetailIsValid() const;
     bool             FirstPointEqualLast() const;
     bool             DetailIsClockwise() const;
@@ -96,16 +105,9 @@ private:
     void             ValidObjects(bool value);
     void             EnableObjectGUI(bool value);
 
-    bool             m_bAddMode;
-
-    QStringList      m_qslMaterials;
-    QStringList      m_qslPlacements;
-    // temporary container for Material/Cut/Placement 3-tuples
-    MCPContainer     m_conMCP;
-    QPointF          m_ptPos;
-
     void             ClearFields();
 
+    quint32          RowId(int i) const;
 
 private slots:
     void             SetAddMode();
