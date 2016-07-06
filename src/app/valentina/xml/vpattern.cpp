@@ -658,8 +658,6 @@ void VPattern::ParseDetailElement(const QDomElement &domElement, const Document 
                 }
                 else if (element.tagName() == TagData)
                 {
-                    QString qsName = element.attribute(AttrName, "");
-                    detail.GetPatternPieceData().SetName(qsName);
                     QString qsLetter = element.attribute(AttrLetter, "");
                     detail.GetPatternPieceData().SetLetter(qsLetter);
                     QPointF ptPos;

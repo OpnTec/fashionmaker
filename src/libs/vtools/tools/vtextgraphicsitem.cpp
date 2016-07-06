@@ -33,6 +33,7 @@
 #include <QTransform>
 #include <QDebug>
 
+#include "../vmisc/def.h"
 #include "vtextgraphicsitem.h"
 
 #define RESIZE_SQUARE               30
@@ -47,13 +48,19 @@
 #define TOP_Z                       2
 
 //---------------------------------------------------------------------------------------------------------------------
+TextLine::TextLine()
+    :m_qsText(), m_iFontSize(MIN_FONT_SIZE), m_eFontWeight(QFont::Normal), m_eStyle(QFont::StyleNormal),
+      m_eAlign(Qt::AlignCenter), m_iHeight(0)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VTextGraphicsItem::VTextGraphicsItem(QGraphicsItem* pParent)
-    : QGraphicsObject(pParent)
+    :QGraphicsObject(pParent), m_eMode(VTextGraphicsItem::mNormal), m_bReleased(false),
+      m_ptStartPos(), m_ptStart(), m_ptRotCenter(), m_szStart(), m_dRotation(0), m_dAngle(0),
+      m_rectResize(), m_iMinH(MIN_H), m_rectBoundingBox(), m_font(), m_liLines(), m_liOutput()
+
 {
-    m_eMode = mNormal;
-    m_bReleased = false;
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
-    m_iMinH = MIN_H;
     SetSize(MIN_W, m_iMinH);
     setZValue(TOP_Z);
 }
@@ -219,6 +226,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             else
             {
                 m_eMode = mMove;
+                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
             }
         }
         setZValue(TOP_Z + 1);
@@ -232,14 +240,25 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     QPointF ptDiff = pME->scenePos() - m_ptStart;
     if (m_eMode == mMove)
     {
-        setPos(m_ptStartPos + ptDiff);
-        UpdateBox();
+        QPointF pt = m_ptStartPos + ptDiff;
+        pt.setX(pt.x() + m_rectBoundingBox.width()/2);
+        pt.setY(pt.y() + m_rectBoundingBox.height()/2);
+        if (parentItem()->boundingRect().contains(pt) == true)
+        {
+            setPos(m_ptStartPos + ptDiff);
+            UpdateBox();
+        }
     }
     else if (m_eMode == mResize)
     {
-        SetSize(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
-        Update();
-        emit SignalShrink();
+        QPointF pt = m_ptStartPos;
+        pt.setX(pt.x() + (m_szStart.width() + ptDiff.x())/2);
+        pt.setY(pt.y() + (m_szStart.height() + ptDiff.y())/2);
+        if (parentItem()->boundingRect().contains(pt) == true) {
+            SetSize(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
+            Update();
+            emit SignalShrink();
+        }
     }
     else if (m_eMode == mRotate)
     {
@@ -260,6 +279,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 {
     if (pME->button() == Qt::LeftButton)
     {
+        RestoreOverrideCursor(cursorArrowCloseHand);
         double dDist = fabs(pME->scenePos().x() - m_ptStart.x()) + fabs(pME->scenePos().y() - m_ptStart.y());
         bool bShort = (dDist < 2);
 
@@ -289,6 +309,7 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             if (bShort == true)
             {
                 m_eMode = mMove;
+                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
                 UpdateBox();
             }
             else

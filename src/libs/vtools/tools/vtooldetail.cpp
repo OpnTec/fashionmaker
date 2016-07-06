@@ -81,7 +81,8 @@ const QString VToolDetail::NodeSplinePath   = QStringLiteral("NodeSplinePath");
 VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 &id, const Source &typeCreation,
                          VMainGraphicsScene *scene, const QString &drawName, QGraphicsItem *parent)
     :VAbstractTool(doc, data, id), VNoBrushScalePathItem(parent), dialog(nullptr), sceneDetails(scene),
-      drawName(drawName), seamAllowance(new VNoBrushScalePathItem(this))
+      drawName(drawName), seamAllowance(new VNoBrushScalePathItem(this)), dataLabel(new VTextGraphicsItem(this)),
+      patternInfo(new VTextGraphicsItem(this))
 {
     VDetail detail = data->GetDetail(id);
     for (int i = 0; i< detail.CountNode(); ++i)
@@ -130,13 +131,11 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     }
     setAcceptHoverEvents(true);
 
-    dataLabel = new VTextGraphicsItem(this);
     connect(dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMoveDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizeDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationDetail);
     //connect(dataLabel, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
 
-    patternInfo = new VTextGraphicsItem(this);
     connect(patternInfo, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMovePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationPattern);
@@ -354,7 +353,6 @@ void VToolDetail::AddToFile()
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPatternPieceData& data = detail.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
-    doc->SetAttribute(domData, VAbstractPattern::AttrName, data.GetName());
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
@@ -411,8 +409,6 @@ void VToolDetail::RefreshDataInFile()
 
         QDomElement domData = doc->createElement(VAbstractPattern::TagData);
         const VPatternPieceData& data = det.GetPatternPieceData();
-        doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
-        doc->SetAttribute(domData, VAbstractPattern::AttrName, data.GetName());
         doc->SetAttribute(domData, AttrMx, data.GetPos().x());
         doc->SetAttribute(domData, AttrMy, data.GetPos().y());
         doc->SetAttribute(domData, AttrWidth, data.GetLabelWidth());
@@ -675,7 +671,7 @@ void VToolDetail::UpdateLabel()
     const VDetail detail = VAbstractTool::data.GetDetail(id);
 
     const VPatternPieceData& data = detail.GetPatternPieceData();
-    if (data.GetLetter().isEmpty() == false || data.GetName().isEmpty() == false || data.GetMCPCount() > 0)
+    if (data.GetLetter().isEmpty() == false || detail.getName().isEmpty() == false || data.GetMCPCount() > 0)
     {
         //dataLabel->Reset();
 
@@ -695,7 +691,7 @@ void VToolDetail::UpdateLabel()
         tl.m_eStyle = QFont::StyleNormal;
         tl.m_iFontSize = 6;
         dataLabel->AddLine(tl);
-        tl.m_qsText = data.GetName();
+        tl.m_qsText = detail.getName();
         tl.m_eAlign = Qt::AlignCenter;
         tl.m_eFontWeight = QFont::DemiBold;
         tl.m_iFontSize = 2;

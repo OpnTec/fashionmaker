@@ -33,6 +33,7 @@
 #include "dialogtool.h"
 #include "../vpatterndb/vdetail.h"
 #include "../vpatterndb/vpatternpiecedata.h"
+#include "../vpatterndb/vpatterninfogeometry.h"
 
 /**
  * @brief The DialogDetail class dialog for ToolDetai. Help create detail and edit option.
@@ -92,7 +93,8 @@ private:
     QStringList      m_qslPlacements;
     // temporary container for Material/Cut/Placement 3-tuples
     MCPContainer     m_conMCP;
-    QPointF          m_ptPos;
+    VPatternPieceData       m_oldData;
+    VPatternInfoGeometry    m_oldGeom;
 
 
     bool             DetailIsValid() const;

@@ -29,15 +29,15 @@
 #include "vpatternpiecedata.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VPatternPieceData::VPatternPieceData() :
-    m_ptPos(0, 0)
-{
-    m_iFontSize = MIN_FONT_SIZE;
-    // 0 means unknown width
-    m_dLabelWidth = 0;
-    m_dLabelHeight = 0;
-    m_dRotation = 0;
-}
+MaterialCutPlacement::MaterialCutPlacement()
+    :m_eMaterial(MaterialType::mtFabric), m_qsMaterialUserDef(), m_iCutNumber(0), m_ePlacement(PlacementType::ptNone)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPatternPieceData::VPatternPieceData()
+    :m_qsLetter(), m_conMCP(), m_ptPos(0, 0), m_dLabelWidth(0), m_dLabelHeight(0),
+    m_iFontSize(MIN_FONT_SIZE), m_dRotation(0)
+{}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternPieceData::~VPatternPieceData()
@@ -91,7 +91,6 @@ void VPatternPieceData::RemoveMCP(int i)
 void VPatternPieceData::Clear()
 {
     m_qsLetter.clear();
-    m_qsName.clear();
     m_conMCP.clear();
 }
 
@@ -105,18 +104,6 @@ const QString& VPatternPieceData::GetLetter() const
 void VPatternPieceData::SetLetter(QString qsLetter)
 {
     m_qsLetter = qsLetter.left(3);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-const QString& VPatternPieceData::GetName() const
-{
-    return m_qsName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPatternPieceData::SetName(QString qsName)
-{
-    m_qsName = qsName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

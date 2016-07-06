@@ -41,6 +41,8 @@ struct TextLine
     QFont::Style        m_eStyle;
     Qt::Alignment       m_eAlign;
     int                 m_iHeight;
+
+    TextLine();
 };
 
 class VTextGraphicsItem : public QGraphicsObject

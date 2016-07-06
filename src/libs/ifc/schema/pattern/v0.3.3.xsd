@@ -350,7 +350,6 @@
                                                                                                </xs:complexType>
                                                                                            </xs:element>
                                                                                        </xs:sequence>
-                                                                                       <xs:attribute name="name" type="xs:string"></xs:attribute>
                                                                                        <xs:attribute name="letter" type="xs:string"></xs:attribute>
                                                                                        <xs:attribute name="fontSize" type="xs:unsignedInt"></xs:attribute>
                                                                                        <xs:attribute name="mx" type="xs:double"></xs:attribute>

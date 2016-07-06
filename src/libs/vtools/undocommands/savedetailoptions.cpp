@@ -139,7 +139,6 @@ void SaveDetailOptions::SavePatternPieceData(QDomElement &domElement, const VDet
     QDomElement domData = doc->createElement(VAbstractPattern::TagData);
     const VPatternPieceData& data = det.GetPatternPieceData();
     doc->SetAttribute(domData, VAbstractPattern::AttrLetter, data.GetLetter());
-    doc->SetAttribute(domData, VAbstractPattern::AttrName, data.GetName());
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
     doc->SetAttribute(domData, VToolDetail::AttrWidth, data.GetLabelWidth());

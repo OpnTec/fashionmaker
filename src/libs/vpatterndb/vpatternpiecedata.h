@@ -55,6 +55,8 @@ struct MaterialCutPlacement
     QString                     m_qsMaterialUserDef;
     int                         m_iCutNumber;
     PlacementType               m_ePlacement;
+
+    MaterialCutPlacement();
 };
 
 typedef QList<MaterialCutPlacement> MCPContainer;
@@ -81,8 +83,6 @@ public:
     // methods, which operate on other members
     const QString&              GetLetter() const;
     void                        SetLetter(QString qsLetter);
-    const QString&              GetName() const;
-    void                        SetName(QString qsName);
 
     // methods, which set up label parameters
     QPointF                     GetPos() const;
@@ -97,9 +97,6 @@ public:
     void                        SetRotation(qreal dRot);
 
 private:
-    /** @brief Pattern piece name
-     */
-    QString             m_qsName;
     /** @brief Pattern piece letter (should be no more than 3 letters)
      */
     QString             m_qsLetter;

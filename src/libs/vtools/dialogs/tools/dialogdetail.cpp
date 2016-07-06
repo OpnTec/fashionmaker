@@ -44,15 +44,16 @@
  * @param parent parent widget
  */
 DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(), detail(VDetail()), supplement(true), closed(true), flagWidth(true)
+    :DialogTool(data, toolId, parent), ui(), detail(VDetail()), supplement(true), closed(true), flagWidth(true),
+      m_bAddMode(true), m_qslMaterials(), m_qslPlacements(), m_conMCP(), m_oldData(), m_oldGeom()
 {
     ui.setupUi(this);
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 2, 0)
-    ui.lineEditNameDetail->setClearButtonEnabled(true);
+    ui.lineEditName->setClearButtonEnabled(true);
 #endif
 
-    labelEditNamePoint = ui.labelEditNameDetail;
+    labelEditNamePoint = ui.labelEditName;
     ui.labelUnit->setText( VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     ui.labelUnitX->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
     ui.labelUnitY->setText(VDomDocument::UnitsToStr(qApp->patternUnit(), true));
@@ -85,7 +86,7 @@ DialogDetail::DialogDetail(const VContainer *data, const quint32 &toolId, QWidge
     connect(ui.checkBoxSeams, &QCheckBox::clicked, this, &DialogDetail::ClickedSeams);
     connect(ui.checkBoxClosed, &QCheckBox::clicked, this, &DialogDetail::ClickedClosed);
     connect(ui.checkBoxReverse, &QCheckBox::clicked, this, &DialogDetail::ClickedReverse);
-    connect(ui.lineEditNameDetail, &QLineEdit::textChanged, this, &DialogDetail::NameDetailChanged);
+    connect(ui.lineEditName, &QLineEdit::textChanged, this, &DialogDetail::NameDetailChanged);
 
     connect(ui.toolButtonDelete, &QToolButton::clicked, this, &DialogDetail::DeleteItem);
     connect(ui.toolButtonUp, &QToolButton::clicked, this, &DialogDetail::ScrollUp);
@@ -355,19 +356,24 @@ VDetail DialogDetail::CreateDetail() const
         detail.append( qvariant_cast<VNodeDetail>(item->data(Qt::UserRole)));
     }
     detail.setWidth(ui.doubleSpinBoxSeams->value());
-    detail.setName(ui.lineEditNameDetail->text());
+    detail.setName(ui.lineEditName->text());
     detail.setSeamAllowance(supplement);
     detail.setClosed(closed);
 
     detail.GetPatternPieceData().SetLetter(ui.lineEditLetter->text());
-    detail.GetPatternPieceData().SetName(ui.lineEditName->text());
 
     for (int i = 0; i < m_conMCP.count(); ++i)
     {
         detail.GetPatternPieceData().Append(m_conMCP[i]);
     }
 
-    detail.GetPatternPieceData().SetPos(m_ptPos);
+    detail.GetPatternPieceData().SetPos(m_oldData.GetPos());
+    detail.GetPatternPieceData().SetLabelWidth(m_oldData.GetLabelWidth());
+    detail.GetPatternPieceData().SetLabelHeight(m_oldData.GetLabelHeight());
+    detail.GetPatternPieceData().SetFontSize(m_oldData.GetFontSize());
+    detail.GetPatternPieceData().SetRotation(m_oldData.GetRotation());
+
+    detail.GetPatternInfo() = m_oldGeom;
 
     return detail;
 }
@@ -416,7 +422,7 @@ void DialogDetail::setDetail(const VDetail &value)
         NewItem(node.getId(), node.getTypeTool(), node.getTypeNode(), node.getMx(),
                 node.getMy(), node.getReverse());
     }
-    ui.lineEditNameDetail->setText(detail.getName());
+    ui.lineEditName->setText(detail.getName());
     ui.checkBoxSeams->setChecked(detail.getSeamAllowance());
     ui.checkBoxClosed->setChecked(detail.getClosed());
     ClickedClosed(detail.getClosed());
@@ -427,7 +433,6 @@ void DialogDetail::setDetail(const VDetail &value)
     ui.toolButtonDelete->setEnabled(true);
 
     ui.lineEditLetter->setText(detail.GetPatternPieceData().GetLetter());
-    ui.lineEditName->setText(detail.GetPatternPieceData().GetName());
 
     m_conMCP.clear();
     for (int i = 0; i < detail.GetPatternPieceData().GetMCPCount(); ++i)
@@ -436,7 +441,8 @@ void DialogDetail::setDetail(const VDetail &value)
     }
 
     UpdateList();
-    m_ptPos = detail.GetPatternPieceData().GetPos();
+    m_oldData = detail.GetPatternPieceData();
+    m_oldGeom = detail.GetPatternInfo();
 
     ValidObjects(DetailIsValid());
 }
