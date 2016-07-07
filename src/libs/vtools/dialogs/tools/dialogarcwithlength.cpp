@@ -90,7 +90,6 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &
 //---------------------------------------------------------------------------------------------------------------------
 DialogArcWithLength::~DialogArcWithLength()
 {
-    DeleteVisualization<VisToolArcWithLength>();
     delete ui;
 }
 

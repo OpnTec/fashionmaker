@@ -142,7 +142,6 @@ void DialogBisector::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogBisector::~DialogBisector()
 {
-    DeleteVisualization<VisToolBisector>();
     delete ui;
 }
 

@@ -470,7 +470,7 @@ QVariant VToolDetail::itemChange(QGraphicsItem::GraphicsItemChange change, const
                // value - this is new position.
                const QPointF newPos = value.toPointF();
 
-               MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id);
+               MoveDetail *moveDet = new MoveDetail(doc, newPos.x(), newPos.y(), id, scene());
                connect(moveDet, &MoveDetail::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
                qApp->getUndoStack()->push(moveDet);
 

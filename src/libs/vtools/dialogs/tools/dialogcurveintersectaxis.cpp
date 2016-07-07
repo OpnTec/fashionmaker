@@ -77,7 +77,6 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
 //---------------------------------------------------------------------------------------------------------------------
 DialogCurveIntersectAxis::~DialogCurveIntersectAxis()
 {
-    DeleteVisualization<VisToolCurveIntersectAxis>();
     delete ui;
 }
 

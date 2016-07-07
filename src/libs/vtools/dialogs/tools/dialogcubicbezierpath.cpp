@@ -61,7 +61,6 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, const quint
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezierPath::~DialogCubicBezierPath()
 {
-    DeleteVisualization<VisToolCubicBezierPath>();
     delete ui;
 }
 

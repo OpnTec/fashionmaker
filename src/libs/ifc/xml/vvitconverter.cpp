@@ -43,6 +43,9 @@ const QString VVITConverter::MeasurementMinVerStr = QStringLiteral("0.2.0");
 const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.3.3");
 const QString VVITConverter::CurrentSchema        = QStringLiteral("://schema/individual_measurements/v0.3.3.xsd");
 
+constexpr int VVITConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+constexpr int VVITConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+
 //---------------------------------------------------------------------------------------------------------------------
 VVITConverter::VVITConverter(const QString &fileName)
     :VAbstractMConverter(fileName)
@@ -53,30 +56,6 @@ VVITConverter::VVITConverter(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 VVITConverter::~VVITConverter()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VVITConverter::MinVer() const
-{
-    return GetVersion(MeasurementMinVerStr);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VVITConverter::MaxVer() const
-{
-    return GetVersion(MeasurementMaxVerStr);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VVITConverter::MinVerStr() const
-{
-    return MeasurementMinVerStr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VVITConverter::MaxVerStr() const
-{
-    return MeasurementMaxVerStr;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VVITConverter::XSDSchema(int ver) const

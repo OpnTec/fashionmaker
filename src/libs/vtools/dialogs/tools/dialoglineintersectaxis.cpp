@@ -86,7 +86,6 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
 //---------------------------------------------------------------------------------------------------------------------
 DialogLineIntersectAxis::~DialogLineIntersectAxis()
 {
-    DeleteVisualization<VisToolLineIntersectAxis>();
     delete ui;
 }
 

@@ -46,6 +46,9 @@ const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.0");
 const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.3.3");
 const QString VPatternConverter::CurrentSchema    = QStringLiteral("://schema/pattern/v0.3.3.xsd");
 
+constexpr int VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+constexpr int VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
+
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::VPatternConverter(const QString &fileName)
     :VAbstractConverter(fileName)
@@ -56,30 +59,6 @@ VPatternConverter::VPatternConverter(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 VPatternConverter::~VPatternConverter()
 {}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VPatternConverter::MinVer() const
-{
-    return GetVersion(PatternMinVerStr);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VPatternConverter::MaxVer() const
-{
-    return GetVersion(PatternMaxVerStr);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VPatternConverter::MinVerStr() const
-{
-    return PatternMinVerStr;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString VPatternConverter::MaxVerStr() const
-{
-    return PatternMaxVerStr;
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VPatternConverter::XSDSchema(int ver) const

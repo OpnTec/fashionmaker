@@ -75,7 +75,6 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
 //---------------------------------------------------------------------------------------------------------------------
 DialogHeight::~DialogHeight()
 {
-    DeleteVisualization<VisToolHeight>();
     delete ui;
 }
 

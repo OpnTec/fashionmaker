@@ -63,7 +63,6 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, const quint32 &tool
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezier::~DialogCubicBezier()
 {
-    DeleteVisualization<VisToolCubicBezier>();
     delete ui;
 }
 

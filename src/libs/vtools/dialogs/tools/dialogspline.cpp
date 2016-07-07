@@ -122,7 +122,6 @@ DialogSpline::DialogSpline(const VContainer *data, const quint32 &toolId, QWidge
 //---------------------------------------------------------------------------------------------------------------------
 DialogSpline::~DialogSpline()
 {
-    DeleteVisualization<VisToolSpline>();
     delete ui;
 }
 

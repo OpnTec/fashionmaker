@@ -113,7 +113,6 @@ void DialogArc::DeployF2TextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogArc::~DialogArc()
 {
-    DeleteVisualization<VisToolArc>();
     delete ui;
 }
 

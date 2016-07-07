@@ -132,7 +132,6 @@ void DialogNormal::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogNormal::~DialogNormal()
 {
-    DeleteVisualization<VisToolNormal>();
     delete ui;
 }
 

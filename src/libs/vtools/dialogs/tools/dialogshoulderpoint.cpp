@@ -143,7 +143,6 @@ void DialogShoulderPoint::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogShoulderPoint::~DialogShoulderPoint()
 {
-    DeleteVisualization<VisToolShoulderPoint>();
     delete ui;
 }
 

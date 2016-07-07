@@ -80,7 +80,6 @@ DialogTrueDarts::DialogTrueDarts(const VContainer *data, const quint32 &toolId, 
 //---------------------------------------------------------------------------------------------------------------------
 DialogTrueDarts::~DialogTrueDarts()
 {
-    DeleteVisualization<VisToolTrueDarts>();
     delete ui;
 }
 

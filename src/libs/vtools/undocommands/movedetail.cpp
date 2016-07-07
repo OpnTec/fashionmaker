@@ -35,8 +35,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveDetail::MoveDetail(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
-                       QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent), oldX(0.0), oldY(0.0), newX(x), newY(y), scene(qApp->getCurrentScene())
+                       QGraphicsScene *scene, QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent), oldX(0.0), oldY(0.0), newX(x), newY(y), scene(scene)
 {
     setText(QObject::tr("move detail"));
     nodeId = id;
