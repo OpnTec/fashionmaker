@@ -1558,7 +1558,6 @@
    </attribute>
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
-   <addaction name="actionZoomOriginal"/>
    <addaction name="actionZoomFitBest"/>
   </widget>
   <widget class="QDockWidget" name="dockWidgetToolOptions">
