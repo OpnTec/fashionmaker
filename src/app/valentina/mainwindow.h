@@ -242,9 +242,9 @@ private:
 
     bool               patternReadOnly;
 
-    DialogIncrements   *dialogTable;
-    DialogTool         *dialogTool;
-    DialogHistory      *dialogHistory;
+    DialogIncrements       *dialogTable;
+    QPointer<DialogTool>    dialogTool;
+    QPointer<DialogHistory> dialogHistory;
 
     /** @brief comboBoxDraws comboc who show name of pattern peaces. */
     QComboBox          *comboBoxDraws;

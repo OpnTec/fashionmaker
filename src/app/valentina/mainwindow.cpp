@@ -570,10 +570,10 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr);
 
-        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
-        connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool, &DialogTool::SelectedObject);
-        connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
-        connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool.data(), &DialogTool::ChosenObject);
+        connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool.data(), &DialogTool::SelectedObject);
+        connect(dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
+        connect(dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         ui->view->itemClicked(nullptr);
     }
     else
@@ -629,11 +629,11 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr);
 
-        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool, &DialogTool::ChosenObject);
-        connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool, &DialogTool::SelectedObject);
-        connect(dialogTool, &DialogTool::DialogClosed, this, closeDialogSlot);
-        connect(dialogTool, &DialogTool::DialogApplied, this, applyDialogSlot);
-        connect(dialogTool, &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, dialogTool.data(), &DialogTool::ChosenObject);
+        connect(scene, &VMainGraphicsScene::SelectedObject, dialogTool.data(), &DialogTool::SelectedObject);
+        connect(dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
+        connect(dialogTool.data(), &DialogTool::DialogApplied, this, applyDialogSlot);
+        connect(dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
         connect(ui->view, &VMainGraphicsView::MouseRelease, this, &MainWindow::ClickEndVisualization);
         ui->view->itemClicked(nullptr);
     }
@@ -653,7 +653,7 @@ void MainWindow::SetToolButtonWithApply(bool checked, Tool t, const QString &cur
 template <typename DrawTool>
 void MainWindow::ClosedDialog(int result)
 {
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialogTool.isNull());
     if (result == QDialog::Accepted)
     {
         VMainGraphicsScene *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
@@ -673,7 +673,7 @@ void MainWindow::ClosedDialog(int result)
 template <typename DrawTool>
 void MainWindow::ClosedDialogWithApply(int result)
 {
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialogTool.isNull());
     if (result == QDialog::Accepted)
     {
         // Only create tool if not already created with apply
@@ -691,7 +691,7 @@ void MainWindow::ClosedDialogWithApply(int result)
             vtool->FullUpdateFromGuiApply();
         }
     }
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialogTool.isNull());
     QGraphicsItem *tool = dynamic_cast<QGraphicsItem *>(dialogTool->GetAssociatedTool());
     ui->view->itemClicked(tool);
     if (dialogTool->GetAssociatedTool() != nullptr)
@@ -700,6 +700,15 @@ void MainWindow::ClosedDialogWithApply(int result)
         vtool->DialogLinkDestroy();
     }
     ArrowTool();
+    // If insert not to the end of file call lite parse
+    if (doc->getCursor() > 0)
+    {
+        doc->LiteParseTree(Document::LiteParse);
+        if (dialogHistory)
+        {
+            dialogHistory->UpdateHistory();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -709,7 +718,7 @@ void MainWindow::ClosedDialogWithApply(int result)
 template <typename DrawTool>
 void MainWindow::ApplyDialog()
 {
-    SCASSERT(dialogTool != nullptr);
+    SCASSERT(not dialogTool.isNull());
 
     // Only create tool if not already created with apply
     if (dialogTool->GetAssociatedTool() == nullptr)
@@ -1834,7 +1843,6 @@ void MainWindow::CancelTool()
 
     qCDebug(vMainWindow, "Canceling tool.");
     delete dialogTool;
-    dialogTool = nullptr;
     qCDebug(vMainWindow, "Dialog closed.");
 
     currentScene->setFocus(Qt::OtherFocusReason);
@@ -3090,8 +3098,8 @@ void MainWindow::ActionHistory(bool checked)
     {
         dialogHistory = new DialogHistory(pattern, doc, this);
         dialogHistory->setWindowFlags(Qt::Window);
-        connect(this, &MainWindow::RefreshHistory, dialogHistory, &DialogHistory::UpdateHistory);
-        connect(dialogHistory, &DialogHistory::DialogClosed, this, &MainWindow::ClosedActionHistory);
+        connect(this, &MainWindow::RefreshHistory, dialogHistory.data(), &DialogHistory::UpdateHistory);
+        connect(dialogHistory.data(), &DialogHistory::DialogClosed, this, &MainWindow::ClosedActionHistory);
         dialogHistory->show();
     }
     else
@@ -4254,7 +4262,7 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::EndVisualization(bool click)
 {
-    if (dialogTool != nullptr)
+    if (not dialogTool.isNull())
     {
         dialogTool->ShowDialog(click);
     }

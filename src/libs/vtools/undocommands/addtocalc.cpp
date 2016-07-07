@@ -49,7 +49,6 @@ void AddToCalc::undo()
     qCDebug(vUndo, "Undo.");
 
     doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
-    doc->setCursor(cursor);
 
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
@@ -73,10 +72,6 @@ void AddToCalc::undo()
     {
         qCDebug(vUndo, "Can't find tag Calculation.");
         return;
-    }
-    if (cursor > 0)
-    {
-        doc->setCursor(0);
     }
     emit NeedFullParsing();
     VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
@@ -104,7 +99,6 @@ void AddToCalc::redo()
             if (refElement.isElement())
             {
                 calcElement.insertAfter(xml, refElement);
-                doc->setCursor(0);
             }
             else
             {

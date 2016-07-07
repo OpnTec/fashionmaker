@@ -99,9 +99,9 @@ void DialogHistory::cellClicked(int row, int column)
         item = ui->tableWidget->item(row, 0);
         cursorRow = row;
         item->setIcon(QIcon("://icon/32x32/put_after.png"));
-        quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
+        const quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
         doc->blockSignals(true);
-        doc->setCursor(id);
+        row == ui->tableWidget->rowCount()-1 ? doc->setCursor(0) : doc->setCursor(id);
         doc->blockSignals(false);
     }
     else
@@ -185,7 +185,7 @@ void DialogHistory::FillTable()
     ui->tableWidget->setRowCount(count);//Real row count
     if (count>0)
     {
-        cursorRow = currentRow;
+        cursorRow = CursorRow();
         QTableWidgetItem *item = ui->tableWidget->item(cursorRow, 0);
         SCASSERT(item != nullptr);
         item->setIcon(QIcon("://icon/32x32/put_after.png"));
@@ -491,4 +491,25 @@ void DialogHistory::RetranslateUi()
 
     cursorRow = currentRow;
     cellClicked(cursorRow, 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int DialogHistory::CursorRow() const
+{
+    const quint32 cursor = doc->getCursor();
+    if (cursor == 0)
+    {
+        return ui->tableWidget->rowCount()-1;
+    }
+
+    for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
+    {
+        QTableWidgetItem *item = ui->tableWidget->item(i, 0);
+        const quint32 id = qvariant_cast<quint32>(item->data(Qt::UserRole));
+        if (cursor == id)
+        {
+            return i;
+        }
+    }
+    return ui->tableWidget->rowCount()-1;
 }
