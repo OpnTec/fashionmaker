@@ -33,6 +33,7 @@
 #include "../../vgeometry/varc.h"
 #include "../../vgeometry/vsplinepath.h"
 #include "../dialogs/tools/dialoguniondetails.h"
+#include "../ifc/xml/vpatternconverter.h"
 
 #include <QUndoStack>
 
@@ -649,6 +650,8 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                 // Remove it if min version is 0.3.2
                 // Instead:
                 // UpdatePoints(data, d1.RemoveEdge(indexD1), i, children);
+                Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 2),
+                                  "Time to refactor the code.");
                 if (children.size() != countNodeD2)
                 {
                     UpdatePoints(data, d1.RemoveEdge(indexD1), i, children);
@@ -671,6 +674,8 @@ VToolUnionDetails* VToolUnionDetails::Create(const quint32 _id, const VDetail &d
                     } while (pointsD2 < countNodeD2-1);
                     // This check need for backward compatibility
                     // Remove it if min version is 0.3.2
+                    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < CONVERTER_VERSION_CHECK(0, 3, 2),
+                                      "Time to refactor the code.");
                     if (children.size() == countNodeD2)
                     {
                         break;
