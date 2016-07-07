@@ -242,11 +242,16 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
         QPointF pt = m_ptStartPos + ptDiff;
         pt.setX(pt.x() + m_rectBoundingBox.width()/2);
         pt.setY(pt.y() + m_rectBoundingBox.height()/2);
-        if (parentItem()->boundingRect().contains(pt) == true)
+        QRectF rectBB = parentItem()->boundingRect();
+        if (rectBB.contains(pt) == false)
         {
-            setPos(m_ptStartPos + ptDiff);
-            UpdateBox();
+            pt.setX(qMin(rectBB.right(), qMax(pt.x(), rectBB.left())));
+            pt.setY(qMin(rectBB.bottom(), qMax(pt.y(), rectBB.top())));
         }
+        pt.setX(pt.x() - m_rectBoundingBox.width()/2);
+        pt.setY(pt.y() - m_rectBoundingBox.height()/2);
+        setPos(pt);
+        UpdateBox();
     }
     else if (m_eMode == mResize)
     {

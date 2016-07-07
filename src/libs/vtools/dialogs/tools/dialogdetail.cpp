@@ -257,11 +257,15 @@ void DialogDetail::NameDetailChanged()
         {
             flagName = false;
             ChangeColor(labelEditNamePoint, Qt::red);
+            QIcon icon(":/icons/win.icon.theme/16x16/status/dialog-warning.png");
+            ui.tabWidget->setTabIcon(1, icon);
         }
         else
         {
             flagName = true;
             ChangeColor(labelEditNamePoint, okColor);
+            QIcon icon;
+            ui.tabWidget->setTabIcon(1, icon);
         }
     }
     CheckState();
