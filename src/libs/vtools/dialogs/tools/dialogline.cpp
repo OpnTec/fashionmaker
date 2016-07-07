@@ -68,7 +68,6 @@ DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *p
 //---------------------------------------------------------------------------------------------------------------------
 DialogLine::~DialogLine()
 {
-    DeleteVisualization<VisToolLine>();
     delete ui;
 }
 

@@ -108,7 +108,6 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, const quint32 &toolId
 //---------------------------------------------------------------------------------------------------------------------
 DialogSplinePath::~DialogSplinePath()
 {
-    DeleteVisualization<VisToolSplinePath>();
     delete ui;
 }
 

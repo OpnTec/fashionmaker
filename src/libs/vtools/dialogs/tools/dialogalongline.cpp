@@ -142,7 +142,6 @@ DialogAlongLine::~DialogAlongLine()
     VContainer *locData = const_cast<VContainer *> (data);
     locData->RemoveVariable(currentLength);
 
-    DeleteVisualization<VisToolAlongLine>();
     delete ui;
 }
 

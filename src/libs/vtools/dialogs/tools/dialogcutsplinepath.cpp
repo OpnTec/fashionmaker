@@ -73,7 +73,6 @@ DialogCutSplinePath::DialogCutSplinePath(const VContainer *data, const quint32 &
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutSplinePath::~DialogCutSplinePath()
 {
-    DeleteVisualization<VisToolCutSplinePath>();
     delete ui;
 }
 

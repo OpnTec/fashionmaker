@@ -71,7 +71,6 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, con
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersection::~DialogPointOfIntersection()
 {
-    DeleteVisualization<VisToolPointOfIntersection>();
     delete ui;
 }
 

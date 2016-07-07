@@ -67,7 +67,6 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointOfIntersectionArcs::~DialogPointOfIntersectionArcs()
 {
-    DeleteVisualization<VisToolPointOfIntersectionArcs>();
     delete ui;
 }
 

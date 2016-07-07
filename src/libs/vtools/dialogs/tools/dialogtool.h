@@ -181,7 +181,7 @@ protected:
     /** @brief number number of handled objects */
     qint32           number;
 
-    Visualization   *vis;
+    QPointer<Visualization> vis;
 
     virtual void     closeEvent ( QCloseEvent * event ) Q_DECL_OVERRIDE;
     virtual void     showEvent( QShowEvent *event ) Q_DECL_OVERRIDE;
@@ -240,9 +240,6 @@ protected:
 
     template <typename T>
     void             AddVisualization();
-
-    template <typename T>
-    void             DeleteVisualization();
 
     void             ChangeColor(QWidget *widget, const QColor &color);
     virtual void     ShowVisualization() {}
@@ -357,19 +354,6 @@ inline void DialogTool::AddVisualization()
 
         toolVis->SetMode(Mode::Show);
         toolVis->RefreshGeometry();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline void DialogTool::DeleteVisualization()
-{
-    T *toolVis = qobject_cast<T *>(vis);
-    SCASSERT(toolVis != nullptr);
-
-    if (qApp->getCurrentScene()->items().contains(toolVis))
-    { // In some cases scene delete object yourself. If not make check program will crash.
-        delete vis;
     }
 }
 

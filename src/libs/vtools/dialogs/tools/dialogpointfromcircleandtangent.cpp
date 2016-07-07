@@ -88,7 +88,6 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointFromCircleAndTangent::~DialogPointFromCircleAndTangent()
 {
-    DeleteVisualization<VisToolPointFromCircleAndTangent>();
     delete ui;
 }
 

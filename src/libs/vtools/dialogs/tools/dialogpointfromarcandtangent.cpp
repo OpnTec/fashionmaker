@@ -63,7 +63,6 @@ DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *dat
 //---------------------------------------------------------------------------------------------------------------------
 DialogPointFromArcAndTangent::~DialogPointFromArcAndTangent()
 {
-    DeleteVisualization<VisToolPointFromArcAndTangent>();
     delete ui;
 }
 

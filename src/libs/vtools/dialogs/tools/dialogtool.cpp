@@ -78,6 +78,11 @@ DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *p
 DialogTool::~DialogTool()
 {
     emit ToolTip("");
+
+    if (not vis.isNull())
+    {
+        delete vis;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

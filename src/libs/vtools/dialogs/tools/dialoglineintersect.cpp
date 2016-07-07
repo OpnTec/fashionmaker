@@ -75,7 +75,6 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &
 //---------------------------------------------------------------------------------------------------------------------
 DialogLineIntersect::~DialogLineIntersect()
 {
-    DeleteVisualization<VisToolLineIntersect>();
     delete ui;
 }
 

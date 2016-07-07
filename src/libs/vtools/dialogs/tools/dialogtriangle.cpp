@@ -75,7 +75,6 @@ DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QW
 //---------------------------------------------------------------------------------------------------------------------
 DialogTriangle::~DialogTriangle()
 {
-    DeleteVisualization<VisToolTriangle>();
     delete ui;
 }
 
