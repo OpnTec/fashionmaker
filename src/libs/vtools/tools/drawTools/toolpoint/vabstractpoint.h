@@ -60,7 +60,7 @@ protected:
     virtual void RefreshLine(quint32 id)=0;
 
     template <typename T>
-    void SetToolEnabled(T *item, bool enabled);
+    void SetToolEnabled(T *item, const QColor &color, bool enabled);
 
     template <typename T>
     static void InitToolConnections(VMainGraphicsScene *scene, T *tool);
@@ -97,12 +97,12 @@ void VAbstractPoint::ShowToolVisualization(bool show)
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-void VAbstractPoint::SetToolEnabled(T *item, bool enabled)
+void VAbstractPoint::SetToolEnabled(T *item, const QColor &color, bool enabled)
 {
     item->setEnabled(enabled);
     if (enabled)
     {
-        item->setPen(QPen(QColor(baseColor),
+        item->setPen(QPen(color,
                           qApp->toPixel(WidthHairLine(*VAbstractTool::data.GetPatternUnit()))/factor));
     }
     else

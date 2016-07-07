@@ -89,7 +89,7 @@ void VToolDoublePoint::setNameP2(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolDoublePoint::SetEnabled(bool enabled)
 {
-    SetToolEnabled(this, enabled);
+    SetToolEnabled(this, baseColor, enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
