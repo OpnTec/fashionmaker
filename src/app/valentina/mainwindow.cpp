@@ -3099,6 +3099,8 @@ void MainWindow::ActionHistory(bool checked)
         dialogHistory->setWindowFlags(Qt::Window);
         connect(this, &MainWindow::RefreshHistory, dialogHistory.data(), &DialogHistory::UpdateHistory);
         connect(dialogHistory.data(), &DialogHistory::DialogClosed, this, &MainWindow::ClosedActionHistory);
+        // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
+        dialogHistory->setWindowFlags(dialogHistory->windowFlags() | Qt::WindowStaysOnTopHint);
         dialogHistory->show();
     }
     else

@@ -130,6 +130,8 @@ void DialogDetail::ChosenObject(quint32 id, const SceneObject &type)
         }
 
         ValidObjects(DetailIsValid());
+        // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
+        setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
         this->show();
     }
 }
