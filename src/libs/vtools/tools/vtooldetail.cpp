@@ -711,11 +711,15 @@ void VToolDetail::UpdateLabel()
             dataLabel->AddLine(tl);
         }
 
-        QPointF pt;
+        QPointF pt = data.GetPos() + QPointF(data.GetLabelWidth()/2, data.GetLabelHeight()/2);
         // check if center is inside
-        if (boundingRect().contains(data.GetPos() + QPointF(data.GetLabelWidth()/2, data.GetLabelHeight()/2)) == false)
+        if (boundingRect().contains(pt) == false)
         {
-            pt = boundingRect().topLeft();
+            QRectF rect = boundingRect();
+            pt.setX(qMin(rect.right(), qMax(pt.x(), rect.left())));
+            pt.setY(qMin(rect.bottom(), qMax(pt.y(), rect.top())));
+            pt.setX(pt.x() - data.GetLabelWidth()/2);
+            pt.setY(pt.y() - data.GetLabelHeight()/2);
         }
         else
         {
@@ -786,10 +790,15 @@ void VToolDetail::UpdatePatternInfo()
         patternInfo->AddLine(tl);
 
         // check if center is inside
-        QPointF pt;
-        if (boundingRect().contains(geom.GetPos() + QPointF(geom.GetLabelWidth()/2, geom.GetLabelHeight()/2)) == false)
+        QPointF pt = geom.GetPos() + QPointF(geom.GetLabelWidth()/2, geom.GetLabelHeight()/2);
+        if (boundingRect().contains(pt) == false)
         {
-            pt = boundingRect().topLeft();
+            QRectF rect = boundingRect();
+            qDebug() << "FALSE" << rect << pt << pt.x() - rect.left();
+            pt.setX(qMin(rect.right(), qMax(pt.x(), rect.left())));
+            pt.setY(qMin(rect.bottom(), qMax(pt.y(), rect.top())));
+            pt.setX(pt.x() - geom.GetLabelWidth()/2);
+            pt.setY(pt.y() - geom.GetLabelHeight()/2);
         }
         else
         {
