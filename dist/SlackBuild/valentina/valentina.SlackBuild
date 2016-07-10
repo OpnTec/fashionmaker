@@ -68,7 +68,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf dismine-$PRGNAM-$COMMIT
-tar xvf $CWD/dismine-$PRGNAM-$COMMIT.tar.gz
+tar xvf $CWD/v$VERSION.tar.gz
 cd dismine-$PRGNAM-$COMMIT
 chown -R root:root .
 find -L . \
