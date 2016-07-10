@@ -797,7 +797,6 @@ void VToolDetail::UpdatePatternInfo()
         if (boundingRect().contains(pt) == false)
         {
             QRectF rect = boundingRect();
-            qDebug() << "FALSE" << rect << pt << pt.x() - rect.left();
             pt.setX(qMin(rect.right(), qMax(pt.x(), rect.left())));
             pt.setY(qMin(rect.bottom(), qMax(pt.y(), rect.top())));
             pt.setX(pt.x() - geom.GetLabelWidth()/2);

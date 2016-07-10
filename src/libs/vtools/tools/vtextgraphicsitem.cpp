@@ -31,6 +31,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 #include <QTransform>
+#include <QCursor>
 #include <QDebug>
 
 #include "../vmisc/def.h"
@@ -95,7 +96,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         fnt.setWeight(tl.m_eFontWeight);
         fnt.setStyle(tl.m_eStyle);
         painter->setFont(fnt);
-        painter->drawText(0, iY, boundingRect().width(), iH, tl.m_eAlign, tl.m_qsText);
+        painter->drawText(0, iY, qRound(boundingRect().width()), iH, tl.m_eAlign, tl.m_qsText);
         iY += iH + SPACING;
     }
 
@@ -113,8 +114,8 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
             if (m_eMode == mResize)
             {
-                painter->drawLine(0, 0, m_rectBoundingBox.width(), m_rectBoundingBox.height());
-                painter->drawLine(0, m_rectBoundingBox.height(), m_rectBoundingBox.width(), 0);
+                painter->drawLine(0, 0, qRound(m_rectBoundingBox.width()), qRound(m_rectBoundingBox.height()));
+                painter->drawLine(0, qRound(m_rectBoundingBox.height()), qRound(m_rectBoundingBox.width()), 0);
             }
         }
         else
@@ -130,8 +131,8 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
             painter->setBrush(Qt::NoBrush);
             int iTop = ROTATE_RECT - ROTATE_ARC;
             int iLeft = ROTATE_RECT - ROTATE_ARC;
-            int iRight = m_rectBoundingBox.width() - ROTATE_RECT;
-            int iBottom = m_rectBoundingBox.height() - ROTATE_RECT;
+            int iRight = qRound(m_rectBoundingBox.width()) - ROTATE_RECT;
+            int iBottom = qRound(m_rectBoundingBox.height()) - ROTATE_RECT;
             painter->drawArc(iLeft, iTop, ROTATE_ARC, ROTATE_ARC, 180*16, -90*16);
             painter->drawArc(iRight, iTop, ROTATE_ARC, ROTATE_ARC, 90*16, -90*16);
             painter->drawArc(iLeft, iBottom, ROTATE_ARC, ROTATE_ARC, 270*16, -90*16);
@@ -221,6 +222,7 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
             if (m_rectResize.contains(pME->pos()) == true)
             {
                 m_eMode = mResize;
+                SetOverrideCursor(Qt::SizeFDiagCursor);
             }
             else
             {
@@ -236,6 +238,14 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 {
+    if (m_rectResize.contains(pME->pos()) == true)
+    {
+        SetOverrideCursor(Qt::SizeFDiagCursor);
+    }
+    else
+    {
+        RestoreOverrideCursor(cursorArrowOpenHand);
+    }
     QPointF ptDiff = pME->scenePos() - m_ptStart;
     if (m_eMode == mMove)
     {
