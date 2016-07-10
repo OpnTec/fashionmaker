@@ -707,8 +707,11 @@ void VToolDetail::UpdateLabel()
         tl.m_iFontSize = 0;
         for (int i = 0; i < data.GetMCPCount(); ++i) {
             MaterialCutPlacement mcp = data.GetMCP(i);
-            tl.m_qsText = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).arg(qslPlace[int(mcp.m_ePlacement)]);
-            dataLabel->AddLine(tl);
+            if (mcp.m_iCutNumber > 0)
+            {
+                tl.m_qsText = qsText.arg(mcp.m_iCutNumber).arg(mcp.m_qsMaterialUserDef).arg(qslPlace[int(mcp.m_ePlacement)]);
+                dataLabel->AddLine(tl);
+            }
         }
 
         QPointF pt = data.GetPos() + QPointF(data.GetLabelWidth()/2, data.GetLabelHeight()/2);
