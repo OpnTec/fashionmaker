@@ -597,7 +597,7 @@ extern const QString falseStr;
 void SetOverrideCursor(const QString & pixmapPath, int hotX = -1, int hotY = -1);
 void SetOverrideCursor(Qt::CursorShape shape);
 void RestoreOverrideCursor(const QString & pixmapPath);
-
+void RestoreOverrideCursor(Qt::CursorShape shape);
 
 extern const qreal PrintDPI;
 

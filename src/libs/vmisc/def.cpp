@@ -484,6 +484,28 @@ void RestoreOverrideCursor(const QString &pixmapPath)
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void RestoreOverrideCursor(Qt::CursorShape shape)
+{
+#ifndef QT_NO_CURSOR
+    QPixmap oldPixmap;
+    QCursor* pOldCursor = QGuiApplication::overrideCursor();
+    if (pOldCursor != 0)
+    {
+        oldPixmap = pOldCursor->pixmap();
+    }
+    QCursor cursor(shape);
+    QPixmap newPixmap = cursor.pixmap();
+    if (oldPixmap.toImage() == newPixmap.toImage())
+    {
+        QApplication::restoreOverrideCursor();
+    }
+
+#else
+    Q_UNUSED(shape);
+#endif
+}
+
 const qreal PrintDPI = 96.0;
 
 //---------------------------------------------------------------------------------------------------------------------

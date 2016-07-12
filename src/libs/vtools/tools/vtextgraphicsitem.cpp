@@ -238,14 +238,6 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 {
-    if (m_rectResize.contains(pME->pos()) == true)
-    {
-        SetOverrideCursor(Qt::SizeFDiagCursor);
-    }
-    else
-    {
-        RestoreOverrideCursor(cursorArrowOpenHand);
-    }
     QPointF ptDiff = pME->scenePos() - m_ptStart;
     if (m_eMode == mMove)
     {
@@ -293,7 +285,14 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
 {
     if (pME->button() == Qt::LeftButton)
     {
-        RestoreOverrideCursor(cursorArrowCloseHand);
+        if (m_eMode == mMove)
+        {
+            RestoreOverrideCursor(cursorArrowCloseHand);
+        }
+        else if (m_eMode == mResize)
+        {
+            RestoreOverrideCursor(Qt::SizeFDiagCursor);
+        }
         double dDist = fabs(pME->scenePos().x() - m_ptStart.x()) + fabs(pME->scenePos().y() - m_ptStart.y());
         bool bShort = (dDist < 2);
 
@@ -323,7 +322,6 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* pME)
             if (bShort == true)
             {
                 m_eMode = mMove;
-                SetOverrideCursor(cursorArrowCloseHand, 1, 1);
                 UpdateBox();
             }
             else
