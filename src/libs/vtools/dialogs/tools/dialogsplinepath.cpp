@@ -181,7 +181,7 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
         if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
-            connect(visPath, &VisToolSplinePath::ToolTip, this, &DialogTool::ShowVisToolTip);
+            connect(visPath, &VisToolSplinePath::ToolTip, [this](const QString &toolTip){emit ToolTip(toolTip);});
             connect(visPath, &VisToolSplinePath::PathChanged, this, &DialogSplinePath::PathUpdated);
         }
         else

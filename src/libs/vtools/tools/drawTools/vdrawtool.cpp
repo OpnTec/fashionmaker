@@ -372,7 +372,7 @@ qreal VDrawTool::CheckFormula(const quint32 &toolId, QString &formula, VContaine
 void VDrawTool::AddToCalculation(const QDomElement &domElement)
 {
     AddToCalc *addToCal = new AddToCalc(domElement, doc);
-    connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+    connect(addToCal, &AddToCalc::NeedFullParsing, [this](){emit doc->UndoCommand();});
     qApp->getUndoStack()->push(addToCal);
 }
 

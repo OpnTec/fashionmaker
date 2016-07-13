@@ -167,7 +167,7 @@ void DialogEndLine::ChosenObject(quint32 id, const SceneObject &type)
             if (SetObject(id, ui->comboBoxBasePoint, ""))
             {
                 vis->VisualMode(id);
-                connect(vis.data(), &Visualization::ToolTip, this, &DialogTool::ShowVisToolTip);
+                connect(vis.data(), &Visualization::ToolTip, [this](const QString &toolTip){emit ToolTip(toolTip);});
                 prepare = true;
             }
         }
