@@ -216,7 +216,7 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
                 VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
                 SCASSERT(operation != nullptr);
 
-                connect(operation, &Visualization::ToolTip, this, &DialogTool::ShowVisToolTip);
+                connect(operation, &Visualization::ToolTip, [this](const QString &toolTip){emit ToolTip(toolTip);});
 
                 operation->SetOriginPointId(id);
                 operation->RefreshGeometry();

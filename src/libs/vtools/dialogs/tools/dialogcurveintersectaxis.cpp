@@ -217,7 +217,8 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         number++;
                         line->VisualMode(id);
-                        connect(line, &VisToolCurveIntersectAxis::ToolTip, this, &DialogTool::ShowVisToolTip);
+                        connect(line, &VisToolCurveIntersectAxis::ToolTip,
+                                [this](const QString &toolTip){emit ToolTip(toolTip);});
                     }
                 }
                 break;

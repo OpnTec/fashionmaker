@@ -1053,29 +1053,6 @@ void VAbstractPattern::haveLiteChange()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ShowHistoryTool hightlight tool.
- * @param id tool id.
- * @param enable enable or diasable hightlight.
- */
-void VAbstractPattern::ShowHistoryTool(quint32 id, bool enable)
-{
-    emit ShowTool(id, enable);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::NeedFullParsing()
-{
-    emit UndoCommand();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::ClearScene()
-{
-    emit ClearMainWindow();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::ToolExists(const quint32 &id) const
 {
     if (tools.contains(id) == false)

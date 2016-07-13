@@ -128,7 +128,7 @@ void DialogCubicBezierPath::ChosenObject(quint32 id, const SceneObject &type)
         if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
-            connect(visPath, &VisToolCubicBezierPath::ToolTip, this, &DialogTool::ShowVisToolTip);
+            connect(visPath, &VisToolCubicBezierPath::ToolTip, [this](const QString &toolTip){emit ToolTip(toolTip);});
         }
         else
         {

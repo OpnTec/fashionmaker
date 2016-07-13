@@ -143,8 +143,8 @@ void VToolBasePoint::AddToFile()
     patternPiece.appendChild(doc->createElement(VAbstractPattern::TagDetails));
 
     AddPatternPiece *addPP = new AddPatternPiece(patternPiece, doc, namePP);
-    connect(addPP, &AddPatternPiece::ClearScene, doc, &VAbstractPattern::ClearScene);
-    connect(addPP, &AddPatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+    connect(addPP, &AddPatternPiece::ClearScene, [this](){emit doc->ClearMainWindow();});
+    connect(addPP, &AddPatternPiece::NeedFullParsing, [this](){emit doc->UndoCommand();});
     qApp->getUndoStack()->push(addPP);
 }
 
@@ -233,7 +233,7 @@ void VToolBasePoint::DeleteTool(bool ask)
 
     qCDebug(vTool, "Begin deleting.");
     DeletePatternPiece *deletePP = new DeletePatternPiece(doc, nameActivDraw);
-    connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+    connect(deletePP, &DeletePatternPiece::NeedFullParsing, [this](){emit doc->UndoCommand();});
     qApp->getUndoStack()->push(deletePP);
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
