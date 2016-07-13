@@ -698,6 +698,7 @@ void MainWindow::ClosedDialogWithApply(int result)
     {
         VDrawTool *vtool= static_cast<VDrawTool *>(dialogTool->GetAssociatedTool());
         vtool->DialogLinkDestroy();
+        connect(vtool, &VDrawTool::ToolTip, this, &MainWindow::ShowToolTip);
     }
     ArrowTool();
 }
