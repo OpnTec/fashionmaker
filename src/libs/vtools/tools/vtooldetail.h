@@ -111,10 +111,10 @@ protected:
 protected slots:
     virtual void       UpdateLabel();
     virtual void       UpdatePatternInfo();
-    virtual void       SaveMoveDetail(QPointF ptPos);
+    virtual void       SaveMoveDetail(const QPointF &ptPos);
     virtual void       SaveResizeDetail(qreal dLabelW, int iFontSize);
     virtual void       SaveRotationDetail(qreal dRot);
-    virtual void       SaveMovePattern(QPointF ptPos);
+    virtual void       SaveMovePattern(const QPointF& ptPos);
     virtual void       SaveResizePattern(qreal dLabelW, int iFontSize);
     virtual void       SaveRotationPattern(qreal dRot);
 

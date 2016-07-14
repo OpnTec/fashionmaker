@@ -85,7 +85,7 @@ protected:
     double              GetAngle(QPointF pt) const;
 
 signals:
-    void                SignalMoved(QPointF ptPos);
+    void                SignalMoved(const QPointF& ptPos);
     void                SignalResized(qreal iTW, int iFontSize);
     void                SignalRotated(qreal dAng);
     void                SignalShrink();

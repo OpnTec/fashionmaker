@@ -134,12 +134,10 @@ VToolDetail::VToolDetail(VAbstractPattern *doc, VContainer *data, const quint32 
     connect(dataLabel, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMoveDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizeDetail);
     connect(dataLabel, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationDetail);
-    //connect(dataLabel, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
 
     connect(patternInfo, &VTextGraphicsItem::SignalMoved, this, &VToolDetail::SaveMovePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalResized, this, &VToolDetail::SaveResizePattern);
     connect(patternInfo, &VTextGraphicsItem::SignalRotated, this, &VToolDetail::SaveRotationPattern);
-    //connect(patternInfo, &VTextGraphicsItem::SignalShrink, this, &VToolDetail::UpdateAll);
 
     connect(doc, &VAbstractPattern::patternChanged, this, &VToolDetail::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolDetail::UpdateLabel);
@@ -820,7 +818,7 @@ void VToolDetail::UpdatePatternInfo()
 /**
  * @brief SaveMoveDetail saves the move detail operation to the undo stack
  */
-void VToolDetail::SaveMoveDetail(QPointF ptPos)
+void VToolDetail::SaveMoveDetail(const QPointF& ptPos)
 {
     VDetail oldDet = VAbstractTool::data.GetDetail(id);
     VDetail newDet = oldDet;
@@ -879,7 +877,7 @@ void VToolDetail::SaveRotationDetail(qreal dRot)
 /**
  * @brief SaveMovePattern saves the pattern label position
  */
-void VToolDetail::SaveMovePattern(QPointF ptPos)
+void VToolDetail::SaveMovePattern(const QPointF &ptPos)
 {
     VDetail oldDet = VAbstractTool::data.GetDetail(id);
     VDetail newDet = oldDet;

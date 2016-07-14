@@ -175,7 +175,9 @@ void VTextGraphicsItem::SetSize(qreal fW, qreal fH)
 {
     // don't allow resize under specific size
     if (fW < MIN_W || fH < m_iMinH)
+    {
         return;
+    }
 
     m_rectBoundingBox.setTopLeft(QPointF(0, 0));
     m_rectBoundingBox.setWidth(fW);
@@ -293,16 +295,14 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
     {
         QPointF pt = m_ptStartPos;
         rectBB.setTopLeft(pt);
-        QSize sz(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
+        QSizeF sz(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
         rectBB.setSize(sz);
-        if (IsContained(rectBB, rotation(), dX, dY) == false) {
-            sz.setWidth(sz.width() + dX);
-            sz.setHeight(sz.height() + dY);
+        if (IsContained(rectBB, rotation(), dX, dY) == true)
+        {
+            SetSize(sz.width(), sz.height());
+            Update();
+            emit SignalShrink();
         }
-
-        SetSize(sz.width(), sz.height());
-        Update();
-        emit SignalShrink();
     }
     else if (m_eMode == mRotate)
     {
@@ -429,7 +429,7 @@ bool VTextGraphicsItem::IsBigEnough(qreal fW, qreal fH, int iFontSize)
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VTextGraphicsItem::SplitString(const QString &qs, qreal fW, const QFontMetrics &fm)
 {
-    QRegExp reg("\\s+");
+    QRegularExpression reg("\\s+");
     QStringList qslWords = qs.split(reg);
     QStringList qslLines;
     QString qsCurrent;
@@ -437,7 +437,7 @@ QStringList VTextGraphicsItem::SplitString(const QString &qs, qreal fW, const QF
     {
         if (qsCurrent.length() > 0)
         {
-            qsCurrent += " ";
+            qsCurrent += QLatin1Literal(" ");
         }
         if (fm.width(qsCurrent + qslWords[i]) > fW)
         {
@@ -460,9 +460,13 @@ double VTextGraphicsItem::GetAngle(QPointF pt) const
     double dY = pt.y() - m_ptRotCenter.y();
 
     if (fabs(dX) < 1 && fabs(dY) < 1)
+    {
         return 0;
+    }
     else
+    {
         return atan2(dY, dX);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

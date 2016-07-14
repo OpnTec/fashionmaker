@@ -152,9 +152,13 @@ int VPatternPieceData::GetFontSize() const
 void VPatternPieceData::SetFontSize(int iSize)
 {
     if (iSize >= MIN_FONT_SIZE)
+    {
         m_iFontSize = iSize;
+    }
     else
+    {
         m_iFontSize = MIN_FONT_SIZE;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
