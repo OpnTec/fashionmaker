@@ -714,20 +714,19 @@ void VToolDetail::UpdateLabel()
             }
         }
 
-        QPointF pt = data.GetPos() + QPointF(data.GetLabelWidth()/2, data.GetLabelHeight()/2);
-        // check if center is inside
-        if (boundingRect().contains(pt) == false)
+        QPointF pt = data.GetPos();
+        QRectF rectBB;
+        rectBB.setTopLeft(pt);
+        rectBB.setWidth(data.GetLabelWidth());
+        rectBB.setHeight(data.GetLabelHeight());
+        qreal dX;
+        qreal dY;
+        if (dataLabel->IsContained(rectBB, data.GetRotation(), dX, dY) == false)
         {
-            QRectF rect = boundingRect();
-            pt.setX(qMin(rect.right(), qMax(pt.x(), rect.left())));
-            pt.setY(qMin(rect.bottom(), qMax(pt.y(), rect.top())));
-            pt.setX(pt.x() - data.GetLabelWidth()/2);
-            pt.setY(pt.y() - data.GetLabelHeight()/2);
+            pt.setX(pt.x() + dX);
+            pt.setY(pt.y() + dY);
         }
-        else
-        {
-            pt = data.GetPos();
-        }
+
         dataLabel->setPos(pt);
         dataLabel->setRotation(data.GetRotation());
         dataLabel->Update();
@@ -792,20 +791,19 @@ void VToolDetail::UpdatePatternInfo()
         tl.m_qsText = qslDate.last();
         patternInfo->AddLine(tl);
 
-        // check if center is inside
-        QPointF pt = geom.GetPos() + QPointF(geom.GetLabelWidth()/2, geom.GetLabelHeight()/2);
-        if (boundingRect().contains(pt) == false)
+        QPointF pt = geom.GetPos();
+        QRectF rectBB;
+        rectBB.setTopLeft(pt);
+        rectBB.setWidth(geom.GetLabelWidth());
+        rectBB.setHeight(geom.GetLabelHeight());
+        qreal dX;
+        qreal dY;
+        if (patternInfo->IsContained(rectBB, geom.GetRotation(), dX, dY) == false)
         {
-            QRectF rect = boundingRect();
-            pt.setX(qMin(rect.right(), qMax(pt.x(), rect.left())));
-            pt.setY(qMin(rect.bottom(), qMax(pt.y(), rect.top())));
-            pt.setX(pt.x() - geom.GetLabelWidth()/2);
-            pt.setY(pt.y() - geom.GetLabelHeight()/2);
+            pt.setX(pt.x() + dX);
+            pt.setY(pt.y() + dY);
         }
-        else
-        {
-            pt = geom.GetPos();
-        }
+
         patternInfo->setPos(pt);
         patternInfo->setRotation(geom.GetRotation());
         patternInfo->Update();

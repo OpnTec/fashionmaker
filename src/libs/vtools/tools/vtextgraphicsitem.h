@@ -71,6 +71,7 @@ public:
     void                Clear();
     void                SetSize(qreal fW, qreal fH);
     void                Update();
+    bool                IsContained(QRectF rectBB, qreal dRot, qreal& dX, qreal& dY) const;
 
 protected:
     void                mousePressEvent(QGraphicsSceneMouseEvent* pME);
@@ -104,6 +105,8 @@ private:
     QFont               m_font;
     QList<TextLine>     m_liLines;
     QList<TextLine>     m_liOutput;
+
+    QRectF              GetBoundingRect(QRectF rectBB, qreal dRot) const;
 };
 
 #endif // VTEXTGRAPHICSITEM_H

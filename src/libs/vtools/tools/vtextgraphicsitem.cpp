@@ -195,6 +195,39 @@ void VTextGraphicsItem::Update()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal &dY) const
+{
+    QRectF rectParent = parentItem()->boundingRect();
+    rectBB = GetBoundingRect(rectBB, dRot);
+    dX = 0;
+    dY = 0;
+
+    if (rectParent.contains(rectBB) == false)
+    {
+        if (rectParent.left() - rectBB.left() > fabs(dX))
+        {
+            dX = rectParent.left() - rectBB.left();
+        }
+        else if (rectBB.right() - rectParent.right() > fabs(dX))
+        {
+            dX = rectParent.right() - rectBB.right();
+        }
+
+        if (rectParent.top() - rectBB.top() > fabs(dY))
+        {
+            dY = rectParent.top() - rectBB.top();
+        }
+        else if (rectBB.bottom() - rectParent.bottom() > fabs(dY))
+        {
+            dY = rectParent.bottom() - rectBB.bottom();
+        }
+
+        return false;
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VTextGraphicsItem::GetFontSize() const
 {
     return m_font.pixelSize();
@@ -238,33 +271,38 @@ void VTextGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *pME)
 //---------------------------------------------------------------------------------------------------------------------
 void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
 {
+    qreal dX;
+    qreal dY;
+    QRectF rectBB;
     QPointF ptDiff = pME->scenePos() - m_ptStart;
     if (m_eMode == mMove)
     {
         QPointF pt = m_ptStartPos + ptDiff;
-        pt.setX(pt.x() + m_rectBoundingBox.width()/2);
-        pt.setY(pt.y() + m_rectBoundingBox.height()/2);
-        QRectF rectBB = parentItem()->boundingRect();
-        if (rectBB.contains(pt) == false)
+        rectBB.setTopLeft(pt);
+        rectBB.setWidth(m_rectBoundingBox.width());
+        rectBB.setHeight(m_rectBoundingBox.height());
+        if (IsContained(rectBB, rotation(), dX, dY) == false)
         {
-            pt.setX(qMin(rectBB.right(), qMax(pt.x(), rectBB.left())));
-            pt.setY(qMin(rectBB.bottom(), qMax(pt.y(), rectBB.top())));
+            pt.setX(pt.x() + dX);
+            pt.setY(pt.y() + dY);
         }
-        pt.setX(pt.x() - m_rectBoundingBox.width()/2);
-        pt.setY(pt.y() - m_rectBoundingBox.height()/2);
         setPos(pt);
         UpdateBox();
     }
     else if (m_eMode == mResize)
     {
         QPointF pt = m_ptStartPos;
-        pt.setX(pt.x() + (m_szStart.width() + ptDiff.x())/2);
-        pt.setY(pt.y() + (m_szStart.height() + ptDiff.y())/2);
-        if (parentItem()->boundingRect().contains(pt) == true) {
-            SetSize(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
-            Update();
-            emit SignalShrink();
+        rectBB.setTopLeft(pt);
+        QSize sz(m_szStart.width() + ptDiff.x(), m_szStart.height() + ptDiff.y());
+        rectBB.setSize(sz);
+        if (IsContained(rectBB, rotation(), dX, dY) == false) {
+            sz.setWidth(sz.width() + dX);
+            sz.setHeight(sz.height() + dY);
         }
+
+        SetSize(sz.width(), sz.height());
+        Update();
+        emit SignalShrink();
     }
     else if (m_eMode == mRotate)
     {
@@ -274,9 +312,14 @@ void VTextGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent* pME)
             return;
         }
         double dAng = 180*(GetAngle(pME->scenePos()) - m_dAngle)/M_PI;
-        setRotation(m_dRotation + dAng);
-        //emit SignalRotated(rotation());
-        Update();
+        rectBB.setTopLeft(m_ptStartPos);
+        rectBB.setWidth(m_rectBoundingBox.width());
+        rectBB.setHeight(m_rectBoundingBox.height());
+        if (IsContained(rectBB, m_dRotation + dAng, dX, dY) == true)
+        {
+            setRotation(m_dRotation + dAng);
+            Update();
+        }
     }
 }
 
@@ -420,4 +463,54 @@ double VTextGraphicsItem::GetAngle(QPointF pt) const
         return 0;
     else
         return atan2(dY, dX);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VTextGraphicsItem::GetBoundingRect(QRectF rectBB, qreal dRot) const
+{
+    QPointF apt[4] = { rectBB.topLeft(), rectBB.topRight(), rectBB.bottomLeft(), rectBB.bottomRight() };
+    QPointF ptCenter = rectBB.center();
+
+    qreal dX1 = 0;
+    qreal dX2 = 0;
+    qreal dY1 = 0;
+    qreal dY2 = 0;
+
+    double dAng = M_PI*dRot/180;
+    for (int i = 0; i < 4; ++i)
+    {
+        QPointF pt = apt[i] - ptCenter;
+        qreal dX = pt.x()*cos(dAng) + pt.y()*sin(dAng);
+        qreal dY = -pt.x()*sin(dAng) + pt.y()*cos(dAng);
+
+        if (i == 0)
+        {
+            dX1 = dX2 = dX;
+            dY1 = dY2 = dY;
+        }
+        else
+        {
+            if (dX < dX1)
+            {
+                dX1 = dX;
+            }
+            else if (dX > dX2)
+            {
+                dX2 = dX;
+            }
+            if (dY < dY1)
+            {
+                dY1 = dY;
+            }
+            else if (dY > dY2)
+            {
+                dY2 = dY;
+            }
+        }
+    }
+    QRectF rect;
+    rect.setTopLeft(ptCenter + QPointF(dX1, dY1));
+    rect.setWidth(dX2 - dX1);
+    rect.setHeight(dY2 - dY1);
+    return rect;
 }
